@@ -14,7 +14,7 @@ import { NbDialogRef } from '@nebular/theme';
         in aliquet massa aliquet et.
       </nb-card-body>
       <nb-card-footer>
-        <button nbButton hero status="primary" (click)="dismiss()">Dismiss Dialog</button>
+        <button nbButton status="primary" (click)="dismiss()">Dismiss Dialog</button>
       </nb-card-footer>
     </nb-card>
   `,

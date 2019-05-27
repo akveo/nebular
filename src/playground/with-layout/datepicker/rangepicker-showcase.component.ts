@@ -12,7 +12,7 @@ import { Component } from '@angular/core';
   template: `
     <nb-card size="large">
       <nb-card-body>
-        <input nbInput placeholder="Form Picker" [nbDatepicker]="formpicker">
+        <input nbInput placeholder="Pick Date Range" [nbDatepicker]="formpicker">
         <nb-rangepicker #formpicker></nb-rangepicker>
       </nb-card-body>
     </nb-card>

@@ -33,8 +33,10 @@ import { convertToBoolProperty } from '../helpers';
  *
  * @stacked-example(Colored Checkboxes, checkbox/checkbox-status.component)
  *
+ * Indeterminate state is also supported:
+ * @stacked-example(Indeterminate Checkbox, checkbox/checkbox-indeterminate.component)
+ *
  * @additional-example(Disabled Checkbox, checkbox/checkbox-disabled.component)
- * @additional-example(Indeterminate Checkbox, checkbox/checkbox-indeterminate.component)
  *
  * @styles
  *
@@ -160,7 +162,7 @@ export class NbCheckboxComponent implements ControlValueAccessor {
   }
   set value(value: boolean) {
     this._value = value;
-    this.change.emit(value);
+    this.valueChange.emit(value);
     this.onChange(value);
   }
   private _value: boolean = false;
@@ -197,7 +199,7 @@ export class NbCheckboxComponent implements ControlValueAccessor {
   }
   private _indeterminate: boolean = false;
 
-  @Output() change = new EventEmitter();
+  @Output() valueChange = new EventEmitter();
 
   @HostBinding('class.status-primary')
   get primary() {

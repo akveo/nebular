@@ -17,7 +17,7 @@ describe('nb-user', () => {
     const elementsOffset = 10;
     const badgeText = '29';
     const badgesConf = {
-      selector: (i) => `.test-row:nth-child(${elementsOffset + i + 1}) nb-badge > span`,
+      selector: (i) => `.test-row:nth-child(${elementsOffset + i + 1}) nb-badge`,
       badges: [
         { position: 'top right', status: 'primary', text: badgeText },
       ],

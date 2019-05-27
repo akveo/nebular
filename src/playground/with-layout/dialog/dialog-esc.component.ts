@@ -5,10 +5,8 @@ import { EscDialogComponent } from './components/esc-dialog.component';
 @Component({
   selector: 'nb-dialog-esc',
   template: `
-    <div class="btn-group btn-divided-group btn-outline-divided-group">
-      <button nbButton hero (click)="openWithEscClose()">Open with escape close</button>
-      <button nbButton hero (click)="openWithoutEscClose()">Open without escape close</button>
-    </div>
+    <button nbButton (click)="openWithEscClose()">Open with escape close</button>
+    <button nbButton (click)="openWithoutEscClose()">Open without escape close</button>
   `,
   styleUrls: ['./dialog-common.scss'],
 })
