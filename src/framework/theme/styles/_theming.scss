@@ -11,8 +11,8 @@ $nb-enabled-themes: () !global;
 $nb-themes: () !global;
 
 // private variables
-$nb-theme-process-mode: null !global;
-$nb-theme-name: 'default' !global;
+$nb-theme-process-mode: 'lazy-process' !global;
+$nb-theme-name: null !global;
 $nb-theme: () !global;
 $nb-processed-theme: () !global;
 $nb-theme-export-mode: false !global !default;
