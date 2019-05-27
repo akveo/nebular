@@ -84,7 +84,7 @@ describe('Component: NbCheckbox', () => {
   });
 
   it('should emit change event when changed', fakeAsync(() => {
-    checkbox.change
+    checkbox.valueChange
       .pipe(take(1))
       .subscribe((value: boolean) => expect(value).toEqual(true));
 
