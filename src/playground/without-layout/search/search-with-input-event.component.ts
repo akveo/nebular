@@ -12,7 +12,7 @@ import {debounceTime, distinctUntilChanged} from 'rxjs/operators';
       <nb-sidebar>
       </nb-sidebar>
 
-      <nb-layout-column>
+      <nb-layout-column class="colored-column-basic">
         <nb-card accent="info">
           <nb-card-header>You searched for:</nb-card-header>
           <nb-card-body>

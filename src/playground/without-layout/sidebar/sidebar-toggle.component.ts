@@ -8,10 +8,6 @@ import { NbSidebarService } from '@nebular/theme';
     :host nb-layout-header button:last-child {
       margin-left: auto;
     }
-    :host nb-layout-column {
-      height: 50vw;
-      background: #f4f4f7;
-    }
   `],
 })
 

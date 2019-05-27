@@ -13,7 +13,7 @@ import { NbDateService } from '@nebular/theme';
   template: `
     <nb-card size="large">
       <nb-card-body>
-        <input nbInput placeholder="Form Picker" [nbDatepicker]="picker">
+        <input nbInput placeholder="Pick Date" [nbDatepicker]="picker">
         <nb-datepicker #picker [min]="min" [max]="max"></nb-datepicker>
       </nb-card-body>
     </nb-card>
