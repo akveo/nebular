@@ -4,6 +4,19 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
+/*
+  Declare variables before making them global.
+  dart-sass doesn't allow to declare variable with !global.
+ */
+$nb-enable-css-custom-properties: false !default;
+$nb-enabled-themes: ();
+$nb-themes: ();
+$nb-theme-process-mode: null;
+$nb-theme-name: 'default';
+$nb-theme: ();
+$nb-processed-theme: ();
+$nb-theme-export-mode: false !default;
+$nb-themes-export: ();
 
 // public variables
 $nb-enable-css-custom-properties: false !global !default;
