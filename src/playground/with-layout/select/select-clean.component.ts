@@ -9,6 +9,5 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'nb-select-clean',
   templateUrl: './select-clean.component.html',
-  styleUrls: ['./select-example.scss'],
 })
 export class SelectCleanComponent {}

@@ -23,15 +23,11 @@ import { fruits } from '../list/fruits-list';
     </nb-card>
   `,
   styles: [`
-    :host {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-around;
-    }
     nb-card {
       min-width: 18rem;
     }
   `],
+  host: { class: 'example-height-60 example-horizontal-spread' },
 })
 export class CardWithoutBodyComponent {
   fruits = fruits;

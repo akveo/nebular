@@ -10,12 +10,6 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   selector: 'nb-button-sizes',
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './button-sizes.component.html',
-  styles: [`
-    [nbButton] {
-      margin-right: 0.75rem;
-      margin-bottom: 1rem;
-    }
-  `],
 })
 export class ButtonSizesComponent {
 }

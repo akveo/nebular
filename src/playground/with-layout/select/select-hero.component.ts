@@ -9,7 +9,6 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'nb-select-hero',
   templateUrl: './select-hero.component.html',
-  styleUrls: ['./select-example.scss'],
 })
 export class SelectHeroComponent {
 }

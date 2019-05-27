@@ -4,6 +4,7 @@ import { Component, ChangeDetectionStrategy, ViewChild } from '@angular/core';
   selector: 'nb-accordion-toggle',
   templateUrl: './accordion-toggle.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  host: { class: 'example-height-60' },
 })
 export class AccordionToggleComponent {
 
