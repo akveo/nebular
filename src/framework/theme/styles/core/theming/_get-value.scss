@@ -22,6 +22,14 @@
   @return $processed-theme;
 }
 
+@function get-current-theme-name() {
+  @if ($nb-theme-name != null) {
+    @return $nb-theme-name;
+  }
+
+  @return get-last-enabled-theme();
+}
+
 @function nb-theme($key) {
 
   $value: ();
@@ -39,6 +47,9 @@
 
     // otherwise lazily search for variable value
     @if ($nb-theme-process-mode == 'lazy-process') {
+
+      $nb-theme-name: get-current-theme-name();
+
       $theme: nb-get-registered-theme($nb-theme-name);
       $value: nb-deep-find-value($theme, $key, map-get($theme, $key));
     }
