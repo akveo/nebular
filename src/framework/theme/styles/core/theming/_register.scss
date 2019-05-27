@@ -16,6 +16,11 @@
   @return $nb-enabled-themes;
 }
 
+@function get-last-enabled-theme() {
+  $themes: nb-get-enabled-themes();
+  @return nth($themes, length($themes));
+}
+
 @function nb-set-for-export($theme, $name, $parent-name: null) {
 
   $parent-theme: map-get($nb-themes-export, $parent-name);
