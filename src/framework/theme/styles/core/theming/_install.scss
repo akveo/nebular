@@ -49,21 +49,18 @@
   $nb-theme-process-mode: 'pre-process' !global;
 
   $nb-theme-name: $theme-name !global;
-  $nb-theme: nb-get-registered-theme($theme-name) !global;
-  $nb-processed-theme: nb-process-theme($nb-theme) !global;
+  $nb-processed-theme: nb-process-theme(nb-get-registered-theme($theme-name)) !global;
 }
 
 @mixin nb-lazy-process-context($theme-name) {
   $nb-theme-process-mode: 'lazy-process' !global;
 
   $nb-theme-name: $theme-name !global;
-  $nb-theme: nb-get-registered-theme($theme-name) !global;
   $nb-processed-theme: () !global;
 }
 
 @mixin nb-install-component-with-css-props() {
   // @breaking-change 5.0.0
-  @warn '`nb-install-component` is unnecessary with css properties. Deprecated and will be removed as of 5.0.0';
   :host {
     @content;
   }
