@@ -4,12 +4,6 @@ import { NbSearchService } from '@nebular/theme';
 @Component({
   selector: 'nb-search-event',
   templateUrl: './search-event.component.html',
-  styles: [`
-    :host ::ng-deep nb-layout-column {
-      height: 50vw;
-      background: #f4f4f7;
-    }
-  `],
 })
 export class SearchEventComponent {
 
