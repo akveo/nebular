@@ -10,7 +10,7 @@ import { FormControl } from '@angular/forms';
 @Component({
   template: `
     <nb-card>
-      <nb-card-body>
+      <nb-card-body class="example-items-col">
         <input type="text" nbInput fullWidth fieldSize="small" placeholder="Input" [(ngModel)]="inputItemNgModel">
         <textarea nbInput fullWidth placeholder="Textarea" [(ngModel)]="textareaItemNgModel"></textarea>
         <input type="text" nbInput fullWidth fieldSize="small" placeholder="Input" [formControl]="inputItemFormControl">
@@ -19,7 +19,6 @@ import { FormControl } from '@angular/forms';
       </nb-card-body>
     </nb-card>
   `,
-  styleUrls: ['./input-component.scss'],
 })
 
 export class InputFormComponent {

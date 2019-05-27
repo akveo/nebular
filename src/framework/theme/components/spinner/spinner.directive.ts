@@ -134,7 +134,7 @@ export class NbSpinnerDirective implements OnInit {
   }
 
   setInstanceInputs(instance: NbSpinnerComponent) {
-    typeof this.spinnerMessage !== 'undefined' && (instance.message = this.spinnerMessage);
+    instance.message = this.spinnerMessage
     typeof this.spinnerStatus !== 'undefined' && (instance.status = this.spinnerStatus);
     typeof this.spinnerSize !== 'undefined' && (instance.size = this.spinnerSize);
   }

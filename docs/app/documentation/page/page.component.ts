@@ -66,7 +66,12 @@ export class NgdPageComponent implements OnInit, AfterContentChecked, OnDestroy 
         }),
         filter(item => item),
         tap((item: any) => {
-          this.titleService.setTitle(`Nebular - ${item.name}`);
+          let title = `Nebular - ${item.name}`;
+
+          if (item.type === 'tabs') {
+            title += ' Angular UI Component';
+          }
+          this.titleService.setTitle(title);
         }),
         publishReplay(),
         refCount(),

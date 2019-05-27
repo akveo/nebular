@@ -1,0 +1,60 @@
+@mixin nb-example-helpers() {
+
+  nb-layout-column {
+    min-height: 40vw;
+  }
+
+  @each $size in (5, 6, 7, 8, 9, 10) {
+    .example-height-#{$size * 10} {
+      min-height: #{$size * 10}vw;
+      display: block;
+    }
+  }
+
+  .example-horizontal-spread {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+
+  .example-items-row {
+    margin-top: -1rem;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+
+    > * {
+      margin-top: 1rem;
+      margin-right: 1rem;
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+
+  .example-items-col {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    & > * {
+      margin-bottom: 1rem;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  @each $status in nb-get-statuses() {
+    .colored-column-#{$status} {
+      background: nb-theme(color-#{$status}-300);
+      color: nb-theme(color-basic-800);
+    }
+  }
+
+  .colored-column-basic {
+    background: nb-theme(background-basic-color-4);
+    color: nb-theme(color-basic-800);
+  }
+}

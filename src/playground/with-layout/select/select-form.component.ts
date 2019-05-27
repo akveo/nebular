@@ -10,7 +10,6 @@ import { FormControl } from '@angular/forms';
 @Component({
   selector: 'nb-select-form',
   templateUrl: './select-form.component.html',
-  styleUrls: ['./select-example.scss'],
 })
 export class SelectFormComponent {
   selectedItemNgModel;

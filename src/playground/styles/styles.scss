@@ -1,12 +1,15 @@
 @import 'themes';
 @import '../../framework/theme/styles/globals';
 @import '../../framework/auth/styles/globals';
+@import 'example-helpers';
 
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700|Raleway:400,600,800&display=swap');
 
 @include nb-install() {
   @include nb-theme-global();
   @include nb-auth-global();
+
+  @include nb-example-helpers();
 };
 
 body {

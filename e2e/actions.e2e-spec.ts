@@ -16,7 +16,7 @@ describe('nb-action', () => {
   describe('badge', () => {
     const badgeText = '29';
     const badgesConf = {
-      selector: (i) => `nb-card:nth-child(4) nb-actions nb-action:nth-child(${i + 1}) nb-badge > span`,
+      selector: (i) => `nb-card:nth-child(4) nb-actions nb-action:nth-child(${i + 1}) nb-badge`,
       badges: [
         { position: 'bottom left', status: 'success', text: badgeText },
       ],
