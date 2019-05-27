@@ -20,12 +20,13 @@ export class NbStepComponent {
 
   protected stepper: NbStepperComponent;
 
+  // TODO static must be false as of Angular 9.0.0
   /**
    * Step content
    *
    * @type {TemplateRef}
    */
-  @ViewChild(TemplateRef) content: TemplateRef<any>;
+  @ViewChild(TemplateRef, { static: true }) content: TemplateRef<any>;
 
   /**
    * Top level abstract control of the step

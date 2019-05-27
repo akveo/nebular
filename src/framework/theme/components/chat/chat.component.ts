@@ -190,9 +190,9 @@ export class NbChatComponent implements OnChanges, AfterContentInit, AfterViewIn
   }
   protected _scrollBottom: boolean = true;
 
-  @ViewChild('scrollable') scrollable: ElementRef;
+  @ViewChild('scrollable', { static: false }) scrollable: ElementRef;
   @ContentChildren(NbChatMessageComponent) messages: QueryList<NbChatMessageComponent>;
-  @ContentChild(NbChatFormComponent) chatForm: NbChatFormComponent;
+  @ContentChild(NbChatFormComponent, { static: false }) chatForm: NbChatFormComponent;
 
   ngOnChanges(changes: SimpleChanges) {
     if ('status' in changes) {

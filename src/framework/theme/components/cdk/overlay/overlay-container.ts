@@ -58,7 +58,9 @@ export abstract class NbPositionedContainer {
   `,
 })
 export class NbOverlayContainerComponent {
-  @ViewChild(NbPortalOutletDirective) portalOutlet: NbPortalOutletDirective;
+
+  // TODO static must be false as of Angular 9.0.0
+  @ViewChild(NbPortalOutletDirective, { static: true }) portalOutlet: NbPortalOutletDirective;
 
   isAttached: boolean = false;
 
