@@ -5,6 +5,7 @@
  */
 
 import { NgModule } from '@angular/core';
+
 import { WithoutStylesRoutingModule } from './without-styles-routing.module';
 import { WithoutStylesComponent } from './without-styles.component';
 
@@ -12,6 +13,9 @@ import { WithoutStylesComponent } from './without-styles.component';
   declarations: [
     WithoutStylesComponent,
   ],
-  imports: [ WithoutStylesRoutingModule ],
+  imports: [
+    WithoutStylesRoutingModule,
+  ],
 })
-export class WithoutStylesModule {}
+export class WithoutStylesModule {
+}

@@ -4,28 +4,20 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-@mixin btn-shape() {
+@mixin b-btn-shape($shape) {
+  border-radius: nb-theme(button-#{$shape}-border-radius);
+}
+
+@mixin b-btn-shapes() {
   .btn.btn-rectangle {
-    @include btn-rectangle();
+    @include b-btn-shape(rectangle);
   }
 
   .btn.btn-semi-round {
-    @include btn-semi-round();
+    @include b-btn-shape(semi-round);
   }
 
   .btn.btn-round {
-    @include btn-round();
+    @include b-btn-shape(round);
   }
-}
-
-@mixin btn-rectangle() {
-  border-radius: nb-theme(btn-rectangle-border-radius);
-}
-
-@mixin btn-semi-round() {
-  border-radius: nb-theme(btn-semi-round-border-radius);
-}
-
-@mixin btn-round() {
-  border-radius: nb-theme(btn-round-border-radius);
 }

@@ -121,6 +121,7 @@
     "@angular/cli": "8.0.0-rc.2",
     "@angular/compiler-cli": "8.0.0-rc.2",
     "@angular/language-service": "8.0.0-rc.2",
+    "@ng-bootstrap/ng-bootstrap": "^4.1.3",
     "@schematics/angular": "^8.0.0-rc.2",
     "@types/gulp": "3.8.36",
     "@types/highlight.js": "9.12.2",

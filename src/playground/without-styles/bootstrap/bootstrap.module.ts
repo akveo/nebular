@@ -6,6 +6,8 @@
 
 import { NgModule } from '@angular/core';
 import { NbCardModule, NbLayoutModule } from '@nebular/theme';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 import { BootstrapRoutingModule } from './bootstrap-routing.module';
 import { BootstrapTestComponent } from './bootstrap-test.component';
 
@@ -13,6 +15,12 @@ import { BootstrapTestComponent } from './bootstrap-test.component';
   declarations: [
     BootstrapTestComponent,
   ],
-  imports: [ NbLayoutModule, NbCardModule, BootstrapRoutingModule ],
+  imports: [
+    NbLayoutModule,
+    NbCardModule,
+    BootstrapRoutingModule,
+    NgbModule,
+  ],
 })
-export class BootstrapModule {}
+export class BootstrapModule {
+}
