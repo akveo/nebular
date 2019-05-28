@@ -1,3 +1,81 @@
+<a name="4.0.0-rc.6"></a>
+# [4.0.0-rc.6](https://github.com/akveo/nebular/compare/v4.0.0-rc.5...v4.0.0-rc.6) (2019-05-28)
+
+
+### Bug Fixes
+
+* add missing components exports to public api ([#1487](https://github.com/akveo/nebular/issues/1487)) ([2f551aa](https://github.com/akveo/nebular/commit/2f551aa))
+* move auth examples to base component without layout ([#1479](https://github.com/akveo/nebular/issues/1479)) ([30e6942](https://github.com/akveo/nebular/commit/30e6942))
+* **checkbox:** fix inactive background color ([#1502](https://github.com/akveo/nebular/issues/1502)) ([48966b8](https://github.com/akveo/nebular/commit/48966b8))
+* **checkbox:** fix value output ([#1505](https://github.com/akveo/nebular/issues/1505)) ([0ea3167](https://github.com/akveo/nebular/commit/0ea3167))
+* **docs:** docs fixes, minimize icons, remove unused fonts ([#1491](https://github.com/akveo/nebular/issues/1491)) ([9334d3e](https://github.com/akveo/nebular/commit/9334d3e))
+* **spinner:** ability to set spinner message ([#1508](https://github.com/akveo/nebular/issues/1508)) ([64f94c1](https://github.com/akveo/nebular/commit/64f94c1))
+* **theme:** finalize themes with design system ([#1481](https://github.com/akveo/nebular/issues/1481)) ([5673e98](https://github.com/akveo/nebular/commit/5673e98)), closes [#40dc7](https://github.com/akveo/nebular/issues/40dc7) [#ebeef2](https://github.com/akveo/nebular/issues/ebeef2) [#3b5998](https://github.com/akveo/nebular/issues/3b5998) [#55](https://github.com/akveo/nebular/issues/55) [#dd4b39](https://github.com/akveo/nebular/issues/dd4b39) [#0177b5](https://github.com/akveo/nebular/issues/0177b5) [#6b6b6](https://github.com/akveo/nebular/issues/6b6b6) [#2f96e8](https://github.com/akveo/nebular/issues/2f96e8) [#f26798](https://github.com/akveo/nebular/issues/f26798) [#0093](https://github.com/akveo/nebular/issues/0093)
+* **themes:** fix get-value not working in component context ([#1493](https://github.com/akveo/nebular/issues/1493)) ([30bc29f](https://github.com/akveo/nebular/commit/30bc29f))
+* **theming:** fix nb-theme not working in component mode without nb-i… ([#1503](https://github.com/akveo/nebular/issues/1503)) ([0bc9f07](https://github.com/akveo/nebular/commit/0bc9f07))
+
+
+### Features
+
+* **bootstrap:** update nebular/bootstrap to Eva ([#1507](https://github.com/akveo/nebular/issues/1507)) ([2ff1171](https://github.com/akveo/nebular/commit/2ff1171))
+* **select, input:** add max width theme property ([#1480](https://github.com/akveo/nebular/issues/1480)) ([5a6d506](https://github.com/akveo/nebular/commit/5a6d506))
+
+
+### BREAKING CHANGES
+
+* **bootstrap:** Bootstrap checkbox and radio are removed now, use Nebular Checkbox and Nebular Radio with better theming support.
+* **theme:** The following sass mixins are removed: `nb-radial-gradient`, `nb-right-gradient`.
+
+Theme variables changes:
+
+**renamed:**
+- font-main -> font-family-primary
+- font-secondary -> font-family-secondary
+- radius -> border-radius
+- color-bg -> background-basic-color-1,
+- color-bg-active -> background-basic-color-2,
+- color-fg -> text-basic-color,
+- color-fg-heading -> text-basic-color,
+- color-fg-text -> text-hint-color,
+- separator -> divider-color
+- scrollbar-fg -> scrollbar-color,
+- scrollbar-bg -> scrollbar-background-color,
+- scrollbar-thumb-radius -> scrollbar-width
+
+**removed:**
+- color-fg-highlight
+
+- font-weight-thin
+- font-weight-light
+- font-weight-normal
+- font-weight-bolder
+- font-weight-bold
+- font-weight-ultra-bold
+
+- base-font-size
+
+- font-size-xlg
+- font-size-lg
+- font-size
+- font-size-sm
+- font-size-xs
+
+- padding
+- margin
+- line-height
+
+- social-color-facebook
+- social-color-twitter
+- social-color-google
+- social-color-linkedin
+- social-color-github
+- social-color-stackoverflow
+- social-color-dribble
+- social-color-behance
+
+- radial-gradient
+- linear-gradient
+
 <a name="4.0.0-rc.5"></a>
 # [4.0.0-rc.5](https://github.com/akveo/nebular/compare/v4.0.0-rc.4...v4.0.0-rc.5) (2019-05-22)
 
