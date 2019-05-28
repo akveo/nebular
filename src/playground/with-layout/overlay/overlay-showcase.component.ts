@@ -16,7 +16,7 @@ import { NbOverlayRef, NbOverlayService, NbPositionBuilderService, NbTemplatePor
   `,
 })
 export class OverlayShowcaseComponent implements OnInit {
-  @ViewChild('overlay') overlayTemplate: TemplateRef<any>;
+  @ViewChild('overlay', { static: false }) overlayTemplate: TemplateRef<any>;
   protected ref: NbOverlayRef;
 
   constructor(protected overlay: NbOverlayService,

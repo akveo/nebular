@@ -4,9 +4,10 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { Component, ViewChild, ElementRef, Input } from '@angular/core'
+import { Component, Input } from '@angular/core'
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NbInputDirective } from '@nebular/theme';
+import { By } from '@angular/platform-browser';
 import { NbComponentStatus } from '../component-status';
 import { NbComponentSize } from '../component-size';
 import { NbComponentShape } from '../component-shape';
@@ -20,22 +21,6 @@ import { NbInputModule } from './input.module';
   `,
 })
 class InputTestComponent {
-  @ViewChild('inputEl', { read: NbInputDirective }) inputDirective: NbInputDirective;
-
-  @ViewChild('inputEl', { read: ElementRef })
-  inputElementRef: ElementRef;
-
-  @ViewChild('textareaEl', { read: ElementRef })
-  textareaElementRef: ElementRef;
-
-  get inputElement() {
-    return this.inputElementRef.nativeElement;
-  }
-
-  get textareaElement() {
-    return this.textareaElementRef.nativeElement;
-  }
-
   @Input() size: NbComponentSize;
   @Input() status: NbComponentStatus;
   @Input() shape: NbComponentShape;
@@ -59,9 +44,10 @@ describe('Directive: NbInput', () => {
       .createComponent(InputTestComponent);
 
     inputTestComponent = fixture.componentInstance;
-    inputDirective = inputTestComponent.inputDirective;
-    inputElement = inputTestComponent.inputElement;
-    textareaElement = inputTestComponent.textareaElement;
+
+    inputDirective = fixture.debugElement.query(By.directive(NbInputDirective)).componentInstance;
+    inputElement = fixture.debugElement.query(By.css('textarea')).nativeElement;
+    textareaElement = fixture.debugElement.query(By.css('input')).nativeElement;
   });
 
   it('should set status', () => {

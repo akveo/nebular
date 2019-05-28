@@ -20,7 +20,12 @@ import {
 } from './url-matching-helpers';
 import { pairwise, take } from 'rxjs/operators';
 import { NbMenuComponent } from './menu.component';
-import { NbIconComponent, NbIconLibraries, NbLayoutDirection, NbLayoutDirectionService } from '@nebular/theme';
+import {
+  NbIconComponent,
+  NbIconLibraries,
+  NbLayoutDirection,
+  NbLayoutDirectionService,
+} from '@nebular/theme';
 
 @Component({ template: '' })
 export class NoopComponent {}
@@ -32,7 +37,7 @@ export class SingleMenuTestComponent {
   constructor (public menuPublicService: NbMenuService) {}
   @Input() items: NbMenuItem[];
   @Input() menuTag: string;
-  @ViewChild(NbMenuComponent) menuComponent: NbMenuComponent;
+  @ViewChild(NbMenuComponent, { static: false }) menuComponent: NbMenuComponent;
 }
 
 @Component({

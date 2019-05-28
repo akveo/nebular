@@ -526,14 +526,14 @@ export class NbSelectComponent<T> implements AfterViewInit, AfterContentInit, On
   /**
    * Custom select label, will be rendered instead of default enumeration with coma.
    * */
-  @ContentChild(NbSelectLabelComponent) customLabel;
+  @ContentChild(NbSelectLabelComponent, { static: false }) customLabel;
 
   /**
    * NbCard with options content.
    * */
-  @ViewChild(NbPortalDirective) portal: NbPortalDirective;
+  @ViewChild(NbPortalDirective, { static: false }) portal: NbPortalDirective;
 
-  @ViewChild('selectButton', { read: ElementRef }) button: ElementRef<HTMLButtonElement>;
+  @ViewChild('selectButton', { read: ElementRef, static: false }) button: ElementRef<HTMLButtonElement>;
 
   /**
    * Determines is select opened.
