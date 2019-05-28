@@ -3,6 +3,7 @@
   "version": "3.5.0",
   "license": "MIT",
   "author": "akveo <contact@akveo.com>",
+  "private": true,
   "browserslist": [
     "> 1%",
     "last 2 versions",
