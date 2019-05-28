@@ -25,7 +25,7 @@ import { NbContextMenuDirective } from '@nebular/theme';
   `],
 })
 export class ContextMenuRightClickComponent {
-  @ViewChild(NbContextMenuDirective) contextMenu: NbContextMenuDirective;
+  @ViewChild(NbContextMenuDirective, { static: false }) contextMenu: NbContextMenuDirective;
 
   items = [
     { title: 'Profile' },

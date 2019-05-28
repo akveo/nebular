@@ -42,7 +42,8 @@ export class NbCalendarPickerRowComponent<D, T> implements OnChanges {
   @Input() filter: (D) => boolean;
   @Output() select: EventEmitter<D> = new EventEmitter();
 
-  @ViewChild(TemplateRef, { read: ViewContainerRef }) containerRef: ViewContainerRef;
+  // TODO static must be false as of Angular 9.0.0, issues/1514
+  @ViewChild(TemplateRef, { read: ViewContainerRef, static: true }) containerRef: ViewContainerRef;
 
   constructor(private cfr: ComponentFactoryResolver) {
   }

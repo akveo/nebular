@@ -30,7 +30,7 @@ export class SingleMenuTestComponent {
   constructor (public menuPublicService: NbMenuService) {}
   @Input() items: NbMenuItem[];
   @Input() menuTag: string;
-  @ViewChild(NbMenuComponent) menuComponent: NbMenuComponent;
+  @ViewChild(NbMenuComponent, { static: false }) menuComponent: NbMenuComponent;
 }
 
 @Component({

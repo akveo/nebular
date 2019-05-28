@@ -11,7 +11,8 @@ import {
   ViewChild,
   ElementRef,
   ContentChildren,
-  QueryList, AfterViewInit,
+  QueryList,
+  AfterViewInit,
 } from '@angular/core';
 import { convertToBoolProperty } from '../helpers';
 import { NbChatMessageComponent } from './chat-message.component';
@@ -74,6 +75,7 @@ import { NbChatMessageComponent } from './chat-message.component';
  *   ],
  * })
  * export class AppModule { }
+ * ```
  *
  * ### Usage
  *
@@ -272,7 +274,7 @@ export class NbChatComponent implements AfterViewInit {
     this.scrollBottom = convertToBoolProperty(val);
   }
 
-  @ViewChild('scrollable') scrollable: ElementRef;
+  @ViewChild('scrollable', { static: false }) scrollable: ElementRef;
   @ContentChildren(NbChatMessageComponent) messages: QueryList<NbChatMessageComponent>;
 
   ngAfterViewInit() {

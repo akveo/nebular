@@ -6,5 +6,7 @@ import { Component, ViewContainerRef, ViewChild } from '@angular/core';
   styleUrls: ['./windows-container.component.scss'],
 })
 export class NbWindowsContainerComponent {
-  @ViewChild('viewContainerRef', { read: ViewContainerRef }) viewContainerRef: ViewContainerRef;
+
+  // TODO static must be false as of Angular 9.0.0, issues/1514
+  @ViewChild('viewContainerRef', { read: ViewContainerRef, static: true }) viewContainerRef: ViewContainerRef;
 }

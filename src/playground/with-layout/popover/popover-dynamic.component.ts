@@ -37,9 +37,9 @@ import { PopoverListComponent, PopoverTabsComponent } from './components/dynamic
 })
 export class PopoverDynamicComponent implements OnDestroy, AfterViewInit {
 
-  @ViewChild(NbPopoverDirective) popover: NbPopoverDirective;
-  @ViewChild('tabs', { read: TemplateRef }) templateTabs: TemplateRef<any>;
-  @ViewChild('list', { read: TemplateRef }) templateList: TemplateRef<any>;
+  @ViewChild(NbPopoverDirective, { static: false }) popover: NbPopoverDirective;
+  @ViewChild('tabs', { read: TemplateRef, static: false }) templateTabs: TemplateRef<any>;
+  @ViewChild('list', { read: TemplateRef, static: false }) templateList: TemplateRef<any>;
 
   componentList = PopoverListComponent;
   componentTabs = PopoverTabsComponent;

@@ -32,8 +32,8 @@ export class NbPopoverComponentContentTestComponent {
   `,
 })
 export class NbPopoverDefaultTestComponent {
-  @ViewChild('button') button: ElementRef;
-  @ViewChild(NbPopoverDirective) popover: NbPopoverDirective;
+  @ViewChild('button', { static: false }) button: ElementRef;
+  @ViewChild(NbPopoverDirective, { static: false }) popover: NbPopoverDirective;
 }
 
 @Component({
@@ -54,9 +54,9 @@ export class NbPopoverDefaultTestComponent {
   `,
 })
 export class NbPopoverBindingsTestComponent {
-  @ViewChild(NbPopoverDirective) popover: NbPopoverDirective;
-  @ViewChild('button') button: ElementRef;
-  @ViewChild(TemplateRef) template: TemplateRef<any>;
+  @ViewChild(NbPopoverDirective, { static: false }) popover: NbPopoverDirective;
+  @ViewChild('button', { static: false }) button: ElementRef;
+  @ViewChild(TemplateRef, { static: false }) template: TemplateRef<any>;
   @Input() content: any = '';
   @Input() context: any = { text: 'hello world' };
   @Input() trigger = NbTrigger.CLICK;
@@ -77,9 +77,9 @@ export class NbPopoverBindingsTestComponent {
   `,
 })
 export class NbPopoverInstanceTestComponent {
-  @ViewChild(NbPopoverDirective) popover: NbPopoverDirective;
-  @ViewChild('button') button: ElementRef;
-  @ViewChild(TemplateRef) template: TemplateRef<any>;
+  @ViewChild(NbPopoverDirective, { static: false }) popover: NbPopoverDirective;
+  @ViewChild('button', { static: false }) button: ElementRef;
+  @ViewChild(TemplateRef, { static: false }) template: TemplateRef<any>;
 }
 
 const dynamicOverlay = {

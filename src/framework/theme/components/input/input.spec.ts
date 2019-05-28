@@ -6,6 +6,7 @@
 
 import { Component, ViewChild, ElementRef, Input } from '@angular/core'
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 import { NbInputDirective } from './input.directive';
 import { NbInputModule } from './input.module';
 
@@ -17,20 +18,6 @@ import { NbInputModule } from './input.module';
   `,
 })
 class InputTestComponent {
-  @ViewChild('inputEl', { read: ElementRef })
-  inputElementRef: ElementRef;
-
-  @ViewChild('textareaEl', { read: ElementRef })
-  textareaElementRef: ElementRef;
-
-  get inputElement() {
-    return this.inputElementRef.nativeElement;
-  }
-
-  get textareaElement() {
-    return this.textareaElementRef.nativeElement;
-  }
-
   @Input() size = NbInputDirective.SIZE_MEDIUM;
   @Input() status;
   @Input() shape = NbInputDirective.SHAPE_RECTANGLE;
@@ -44,7 +31,7 @@ describe('Directive: NbInput', () => {
   let inputElement: Element;
   let textareaElement: Element;
 
-  beforeEach(() => {;
+  beforeEach(() => {
 
     fixture = TestBed.configureTestingModule({
         imports: [ NbInputModule ],
@@ -53,8 +40,8 @@ describe('Directive: NbInput', () => {
       .createComponent(InputTestComponent);
 
     inputTestComponent = fixture.componentInstance;
-    inputElement = inputTestComponent.inputElement;
-    textareaElement = inputTestComponent.textareaElement;
+    inputElement = fixture.debugElement.query(By.css('textarea')).nativeElement;
+    textareaElement = fixture.debugElement.query(By.css('input')).nativeElement;
   });
 
   it('should set status', () => {
