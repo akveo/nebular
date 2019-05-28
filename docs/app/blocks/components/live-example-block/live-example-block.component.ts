@@ -25,7 +25,7 @@ import { NgdExampleView } from '../../enum.example-view';
 })
 export class NgdLiveExampleBlockComponent implements OnInit, AfterViewInit, OnDestroy {
 
-  @ViewChild('iframe') iframe: ElementRef;
+  @ViewChild('iframe', { static: false }) iframe: ElementRef;
   @Input() content: any;
   @Input() hasViewSwitch: boolean = false;
   @Output() changeView = new EventEmitter<NgdExampleView>();

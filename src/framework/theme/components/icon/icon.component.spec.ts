@@ -4,11 +4,13 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { Component, ElementRef, Input, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 
 import { NbIconModule } from './icon.module';
 import { NbIconLibraries } from './icon-libraries';
+import { NbIconComponent } from './icon.component';
 
 
 @Component({
@@ -17,8 +19,6 @@ import { NbIconLibraries } from './icon-libraries';
   `,
 })
 class IconTestComponent {
-  @ViewChild('iconEl', { read: ElementRef }) iconElement;
-
   @Input() icon;
 }
 
@@ -45,12 +45,13 @@ describe('Component: NbIcon', () => {
     iconsLibrary.setDefaultPack('svg-pack');
 
     iconTestComponent = fixture.componentInstance;
-    iconElement = iconTestComponent.iconElement;
+    iconElement = fixture.debugElement.query(By.directive(NbIconComponent));
   });
 
   it('should render icon', () => {
     iconTestComponent.icon = 'home';
     fixture.detectChanges();
+
     const svg = iconElement.nativeElement.querySelector('svg');
 
     expect(iconElement.nativeElement.classList.contains('custom-pack')).toBeTruthy();

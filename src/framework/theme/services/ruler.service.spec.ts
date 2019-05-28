@@ -24,8 +24,8 @@ let rulerService: NbLayoutRulerService;
 })
 class RulerTestComponent {
 
-  @ViewChild('resize', { read: ElementRef }) private resizeElement: ElementRef;
-  @ViewChild('layout', { read: ElementRef }) private layout: ElementRef;
+  @ViewChild('resize', { read: ElementRef, static: false }) private resizeElement: ElementRef;
+  @ViewChild('layout', { read: ElementRef, static: false }) private layout: ElementRef;
   localScroll = false;
 
   setSize(width: string, height: string) {

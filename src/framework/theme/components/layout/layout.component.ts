@@ -205,8 +205,9 @@ export class NbLayoutComponent implements AfterViewInit, OnDestroy {
     this.restoreScrollTopValue = convertToBoolProperty(val);
   }
 
-  @ViewChild('layoutTopDynamicArea', { read: ViewContainerRef }) veryTopRef: ViewContainerRef;
-  @ViewChild('scrollableContainer', { read: ElementRef }) scrollableContainerRef: ElementRef;
+  // TODO remove as of 5.0.0
+  @ViewChild('layoutTopDynamicArea', { read: ViewContainerRef, static: false }) veryTopRef: ViewContainerRef;
+  @ViewChild('scrollableContainer', { read: ElementRef, static: false }) scrollableContainerRef: ElementRef;
 
   protected afterViewInit$ = new BehaviorSubject(null);
 
