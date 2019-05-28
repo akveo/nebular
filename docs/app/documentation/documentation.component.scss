@@ -43,7 +43,7 @@
     border: none;
   }
 
-  /deep/ nb-layout .main-container {
+  ::ng-deep nb-layout .main-container {
     padding-top: 3rem;
 
     .scrollable {
@@ -51,14 +51,14 @@
     }
   }
 
-  /deep/ nb-layout .layout-container {
+  ::ng-deep nb-layout .layout-container {
     max-width: $content-width;
     width: 100%;
     margin-left: auto;
     margin-right: auto;
   }
 
-  /deep/ nb-sidebar nb-menu {
+  ::ng-deep nb-sidebar nb-menu {
     > .menu-items > .menu-item {
       margin-bottom: 0.5rem;
       font-weight: bold;
@@ -85,7 +85,7 @@
     }
   }
 
-  /deep/ nb-layout-footer ngd-footer .contact {
+  ::ng-deep nb-layout-footer ngd-footer .contact {
     display: none;
   }
 
@@ -96,7 +96,7 @@
   }
 
   @include media-breakpoint-up(macpro) {
-    /deep/ nb-layout-footer {
+    ::ng-deep nb-layout-footer {
       margin-right: $settings-width + $settings-margin;
     }
   }

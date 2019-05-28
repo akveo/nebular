@@ -13,7 +13,7 @@
     height: 0;
   }
 
-  /deep/ nb-menu {
+  ::ng-deep nb-menu {
     display: inline;
     font-size: 0.875rem;
     line-height: 1.5rem;

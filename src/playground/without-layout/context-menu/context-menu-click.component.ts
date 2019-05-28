@@ -14,7 +14,7 @@ import { filter, map } from 'rxjs/operators';
       background: #f4f4f7;
     }
 
-    :host nb-layout-header /deep/ nav {
+    :host nb-layout-header ::ng-deep nav {
       justify-content: flex-end;
     }
   `],

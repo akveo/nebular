@@ -14,8 +14,8 @@
 }
 
 
-/deep/ .nb-tree-grid-cell,
-/deep/ .nb-tree-grid-header-cell,
-/deep/ .nb-tree-grid-footer-cell {
+::ng-deep .nb-tree-grid-cell,
+::ng-deep .nb-tree-grid-header-cell,
+::ng-deep .nb-tree-grid-footer-cell {
   overflow: hidden;
 }

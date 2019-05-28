@@ -10,7 +10,7 @@ import { Component } from '@angular/core';
     :host nb-layout-column:first-child {
       background: #f4f4f7;
     }
-    :host nb-layout-header /deep/ nav {
+    :host nb-layout-header ::ng-deep nav {
       justify-content: flex-end;
     }
   `],

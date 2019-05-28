@@ -32,7 +32,7 @@
     }
   }
 
-  /deep/ {
+  ::ng-deep {
     nb-layout .layout .layout-container .content .columns nb-layout-column {
       padding: $auth-layout-padding;
 

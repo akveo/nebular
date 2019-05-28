@@ -17,7 +17,7 @@ import { NbDialogService } from '@nebular/theme';
     <button nbButton (click)="open(dialog)">Open Dialog</button>
   `,
   styles: [`
-    /deep/ nb-layout-column {
+    ::ng-deep nb-layout-column {
       height: 80vw;
     }
   `],

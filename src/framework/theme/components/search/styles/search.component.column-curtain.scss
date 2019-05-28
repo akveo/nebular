@@ -6,7 +6,7 @@
 
 @import '../../../styles/core/mixins';
 
-/deep/ nb-layout.column-curtain.with-search .layout {
+::ng-deep nb-layout.column-curtain.with-search .layout {
   pointer-events: none;
 }
 

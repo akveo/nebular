@@ -16,7 +16,7 @@
     pointer-events: none;
   }
 
-  /deep/ nb-option {
+  ::ng-deep nb-option {
     padding: 0.75rem 0.75rem 0.75rem 2.5rem;
   }
 }

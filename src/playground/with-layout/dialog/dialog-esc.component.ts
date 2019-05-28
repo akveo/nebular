@@ -11,7 +11,7 @@ import { EscDialogComponent } from './components/esc-dialog.component';
     </div>
   `,
   styles: [`
-    /deep/ nb-layout-column {
+    ::ng-deep nb-layout-column {
       height: 80vw;
     }
 

@@ -5,7 +5,7 @@ import { ShowcaseDialogComponent } from './components/showcase-dialog.component'
 @Component({
   selector: 'nb-dialog-showcase',
   template: '<button nbButton (click)="open()">Open Dialog</button>',
-  styles: [` /deep/ nb-layout-column {
+  styles: [` ::ng-deep nb-layout-column {
     height: 80vw;
   } `],
 })

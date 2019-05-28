@@ -9,7 +9,7 @@
   display: flex;
   align-items: center;
 
-  /deep/ nb-action {
+  ::ng-deep nb-action {
     display: flex;
     flex-wrap: wrap;
     align-items: center;

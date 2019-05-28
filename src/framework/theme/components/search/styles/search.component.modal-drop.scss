@@ -6,13 +6,13 @@
 
 @import '../../../styles/core/mixins';
 
-/deep/ nb-layout.modal-drop .layout {
+::ng-deep nb-layout.modal-drop .layout {
   position: relative;
   transition: transform 0.4s, opacity 0.4s;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/deep/ nb-layout.modal-drop.with-search .layout {
+::ng-deep nb-layout.modal-drop.with-search .layout {
   opacity: 0;
   transform: scale3d(0.9, 0.9, 1);
   pointer-events: none;

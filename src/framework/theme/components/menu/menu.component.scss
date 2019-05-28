@@ -6,7 +6,7 @@
 
 @import '../../styles/core/mixins';
 
-:host /deep/ {
+:host ::ng-deep {
   display: block;
 
   .menu-items,

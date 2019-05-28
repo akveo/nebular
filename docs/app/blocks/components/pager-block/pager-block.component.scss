@@ -10,7 +10,7 @@
   display: flex;
   flex-direction: column;
 
-  /deep/ nb-card {
+  ::ng-deep nb-card {
     font-weight: 300;
     flex: 1;
 
@@ -54,7 +54,7 @@
     flex-direction: row;
     flex-wrap: wrap;
 
-    /deep/ nb-card {
+    ::ng-deep nb-card {
       margin-left: 1rem;
 
       &:first-child {

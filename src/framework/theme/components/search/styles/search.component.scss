@@ -22,7 +22,7 @@
   }
 }
 
-/deep/ nb-layout.with-search .scrollable-container {
+::ng-deep nb-layout.with-search .scrollable-container {
   position: relative;
   z-index: 0;
 }

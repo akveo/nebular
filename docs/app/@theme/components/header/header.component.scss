@@ -40,7 +40,7 @@
     }
   }
 
-  /deep/ nb-menu {
+  ::ng-deep nb-menu {
     flex: 1;
     .menu-items {
       display: flex;
@@ -128,13 +128,13 @@
         margin-left: 0;
       }
     }
-    /deep/ nb-menu .menu-items li:nth-child(2) {
+    ::ng-deep nb-menu .menu-items li:nth-child(2) {
       display: list-item;
     }
   }
 
   @include media-breakpoint-up(lg) {
-    /deep/ nb-menu .menu-items {
+    ::ng-deep nb-menu .menu-items {
       justify-content: flex-start;
 
       li:not(:first-child) {
@@ -165,7 +165,7 @@
         width: auto;
       }
     }
-    /deep/ nb-menu {
+    ::ng-deep nb-menu {
       flex-grow: 0;
       flex-shrink: 1;
       flex-basis: auto;
@@ -182,7 +182,7 @@
     }
 
     @include media-breakpoint-up(is) {
-      /deep/ nb-menu .menu-items li:first-child {
+      ::ng-deep nb-menu .menu-items li:first-child {
         display: list-item;
       }
     }
@@ -209,7 +209,7 @@
       .section.middle {
         justify-content: space-around;
       }
-      /deep/ nb-menu {
+      ::ng-deep nb-menu {
         min-width: 28rem;
 
         .menu-items li {
@@ -223,7 +223,7 @@
         padding-left: 1.125rem;
         width: nb-theme(sidebar-width);
       }
-      /deep/ nb-menu {
+      ::ng-deep nb-menu {
         flex: 1;
       }
     }

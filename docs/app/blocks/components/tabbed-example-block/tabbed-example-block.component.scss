@@ -37,7 +37,7 @@
     }
   }
 
-  /deep/ nb-tabset.tabs-container {
+  ::ng-deep nb-tabset.tabs-container {
     border-radius: 0.5rem 0.5rem 0 0;
 
     > ul {
