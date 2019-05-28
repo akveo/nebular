@@ -20,6 +20,14 @@
       color: nb-theme(select-filled-disabled-text-color);
       background-color: nb-theme(select-filled-disabled-background-color);
       border-color: nb-theme(select-filled-disabled-border-color);
+
+      nb-icon {
+        color: nb-theme(select-filled-disabled-icon-color);
+      }
+    }
+
+    nb-icon {
+      color: nb-theme(select-filled-icon-color);
     }
   }
 
@@ -64,6 +72,14 @@
         background-color: nb-theme(select-filled-#{$status}-disabled-background-color);
         border-color: nb-theme(select-filled-#{$status}-disabled-border-color);
         color: nb-theme(select-filled-#{$status}-disabled-text-color);
+
+        nb-icon {
+          color: nb-theme(select-filled-#{$status}-disabled-icon-color);
+        }
+      }
+
+      nb-icon {
+        color: nb-theme(select-filled-#{$status}-icon-color);
       }
     }
 

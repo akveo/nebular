@@ -20,6 +20,14 @@
       color: nb-theme(select-hero-disabled-text-color);
       background-color: nb-theme(select-hero-disabled-background-color);
       background-image: none;
+
+      nb-icon {
+        color: nb-theme(select-hero-disabled-icon-color);
+      }
+    }
+
+    nb-icon {
+      color: nb-theme(select-hero-icon-color);
     }
   }
 
@@ -67,6 +75,14 @@
         color: nb-theme(select-hero-#{$status}-disabled-text-color);
         background-color: nb-theme(select-hero-#{$status}-disabled-background-color);
         background-image: none;
+
+        nb-icon {
+          color: nb-theme(select-hero-#{$status}-disabled-icon-color);
+        }
+      }
+
+      nb-icon {
+        color: nb-theme(select-hero-#{$status}-icon-color);
       }
     }
 

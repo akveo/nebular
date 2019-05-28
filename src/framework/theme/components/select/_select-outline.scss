@@ -31,6 +31,14 @@
       color: nb-theme(select-outline-disabled-text-color);
       background-color: nb-theme(select-outline-disabled-background-color);
       border-color: nb-theme(select-outline-disabled-border-color);
+
+      nb-icon {
+        color: nb-theme(select-outline-disabled-icon-color);
+      }
+    }
+
+    nb-icon {
+      color: nb-theme(select-outline-icon-color);
     }
   }
 
