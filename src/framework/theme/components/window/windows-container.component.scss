@@ -3,7 +3,7 @@
   align-items: flex-end;
   overflow-x: auto;
 
-  /deep/ nb-window:not(.full-screen) {
+  ::ng-deep nb-window:not(.full-screen) {
     margin: 0 2rem;
   }
 }

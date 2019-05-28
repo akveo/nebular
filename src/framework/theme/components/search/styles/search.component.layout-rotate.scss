@@ -6,7 +6,7 @@
 
 @import '../../../styles/core/mixins';
 
-/deep/ nb-layout.rotate-layout {
+::ng-deep nb-layout.rotate-layout {
   position: fixed;
   overflow: hidden;
   width: 100%;

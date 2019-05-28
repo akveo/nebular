@@ -2,7 +2,7 @@
   display: flex;
 }
 
-/deep/ {
+::ng-deep {
   .options-bar {
     display: flex;
     align-items: center;
