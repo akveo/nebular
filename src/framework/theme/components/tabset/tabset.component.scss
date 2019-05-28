@@ -14,7 +14,7 @@
     justify-content: space-around;
   }
 
-  /deep/ nb-tab {
+  ::ng-deep nb-tab {
     flex: 1;
     -ms-flex: 1 1 auto;
     overflow: auto;

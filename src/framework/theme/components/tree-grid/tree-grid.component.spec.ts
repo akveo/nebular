@@ -33,7 +33,7 @@ class BaseTreeGridTestComponent {
   columns: string[];
   dataSource: NbTreeGridDataSource<any>;
 
-  @ViewChild(NbTreeGridComponent) treeGridComponent: NbTreeGridComponent<any>;
+  @ViewChild(NbTreeGridComponent, { static: false }) treeGridComponent: NbTreeGridComponent<any>;
   @ViewChildren(NbTreeGridRowComponent) rowComponents: QueryList<NbTreeGridRowComponent>;
 }
 

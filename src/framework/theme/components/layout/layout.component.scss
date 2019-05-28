@@ -18,7 +18,7 @@
     flex-direction: column;
   }
 
-  /deep/ nb-layout-header {
+  ::ng-deep nb-layout-header {
     display: block;
 
     nav {
@@ -41,7 +41,7 @@
     -ms-flex: 1 1 auto;
     flex-direction: row;
 
-    /deep/ nb-sidebar {
+    ::ng-deep nb-sidebar {
       &.left {
         @include nb-ltr(order, 0);
         @include nb-rtl(order, 2);
@@ -83,7 +83,7 @@
         flex-direction: row;
         width: 100%;
 
-        /deep/ nb-layout-column {
+        ::ng-deep nb-layout-column {
           order: 1;
           flex: 1 0;
           min-width: 0; // fix for flexbug https://github.com/philipwalton/flexbugs#flexbug-1
@@ -97,7 +97,7 @@
         }
       }
 
-      /deep/ nb-layout-footer {
+      ::ng-deep nb-layout-footer {
         display: block;
         margin-top: auto;
 

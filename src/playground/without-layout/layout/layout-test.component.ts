@@ -10,13 +10,13 @@ import { Component } from '@angular/core';
   selector: 'nb-layout-test',
   styles: [
     `
-      :host /deep/ nb-layout-column {
+      :host ::ng-deep nb-layout-column {
         background-color: #fb75ff;
       }
-      :host /deep/ nb-layout-column.right {
+      :host ::ng-deep nb-layout-column.right {
         background-color: #aeff34;
       }
-      :host /deep/ nb-layout-column.left {
+      :host ::ng-deep nb-layout-column.left {
         background-color: #76ecff;
       }
 

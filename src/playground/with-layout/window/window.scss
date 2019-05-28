@@ -1,8 +1,8 @@
-/deep/ nb-layout-column {
+::ng-deep nb-layout-column {
   height: 400px;
 }
 
-/deep/ .form {
+::ng-deep .form {
   display: flex;
   flex-direction: column;
 

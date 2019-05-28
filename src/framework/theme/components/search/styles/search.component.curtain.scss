@@ -92,7 +92,7 @@
   }
 }
 
-/deep/ nb-layout.curtain .scrollable-container {
+::ng-deep nb-layout.curtain .scrollable-container {
   position: relative;
   z-index: 0;
 }
