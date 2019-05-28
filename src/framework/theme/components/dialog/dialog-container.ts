@@ -22,7 +22,7 @@ import { NbDialogConfig } from './dialog-config';
 })
 export class NbDialogContainerComponent implements OnInit, OnDestroy {
 
-  // TODO static must be false as of Angular 9.0.0
+  // TODO static must be false as of Angular 9.0.0, issues/1514
   @ViewChild(NbPortalOutletDirective, { static: true }) portalOutlet: NbPortalOutletDirective;
 
   protected focusTrap: NbFocusTrap;

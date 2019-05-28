@@ -20,7 +20,7 @@ import { NbOverlayContainerComponent, NbPositionedContainer } from '../cdk/overl
 })
 export class NbDatepickerContainerComponent extends NbPositionedContainer {
 
-  // TODO static must be false as of Angular 9.0.0
+  // TODO static must be false as of Angular 9.0.0, issues/1514
   @ViewChild(NbOverlayContainerComponent, { static: true }) overlayContainer: NbOverlayContainerComponent;
 
   attach<T>(portal: NbComponentPortal<T>): ComponentRef<T> {
