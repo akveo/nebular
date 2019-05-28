@@ -73,12 +73,12 @@
     @include nb-rtl(left, 0);
   }
 
-  /deep/ nb-sidebar-footer {
+  ::ng-deep nb-sidebar-footer {
     margin-top: auto;
     display: block;
   }
 
-  /deep/ nb-sidebar-header {
+  ::ng-deep nb-sidebar-header {
     display: block;
   }
 }

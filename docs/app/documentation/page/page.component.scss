@@ -95,7 +95,7 @@
         font-size: 0.875rem;
       }
 
-      /deep/ {
+      ::ng-deep {
         .widget-block {
           display: block;
           margin-bottom: 2rem;
@@ -226,7 +226,7 @@
   }
 
   @include media-breakpoint-up(md) {
-    .middle-column /deep/ nb-card nb-card-body {
+    .middle-column ::ng-deep nb-card nb-card-body {
       padding: 2rem 3rem 2rem 2rem;
     }
   }

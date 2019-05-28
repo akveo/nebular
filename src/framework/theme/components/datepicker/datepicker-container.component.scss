@@ -11,7 +11,7 @@
     height: 0;
   }
 
-  /deep/ nb-overlay-container .primitive-overlay {
+  ::ng-deep nb-overlay-container .primitive-overlay {
     padding: 0.75rem 1rem;
   }
 }
