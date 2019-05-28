@@ -1379,6 +1379,13 @@ $eva-mapping: (
   select-group-option-outline-large-start-padding: 2.25rem,
   select-group-option-outline-giant-start-padding: 2.75rem,
 
+  select-options-list-outline-border-color: border-primary-color-2,
+  select-options-list-outline-primary-border-color: color-primary-500,
+  select-options-list-outline-success-border-color: color-success-500,
+  select-options-list-outline-info-border-color: color-info-500,
+  select-options-list-outline-warning-border-color: color-warning-500,
+  select-options-list-outline-danger-border-color: color-danger-500,
+
   select-filled-background-color: background-basic-color-2,
   select-filled-border-color: border-basic-color-3,
   select-filled-border-style: solid,
@@ -1474,6 +1481,13 @@ $eva-mapping: (
   select-option-filled-giant-padding: select-filled-giant-padding,
   select-group-option-filled-giant-padding-start: 2.75rem,
 
+  select-options-list-filled-border-color: border-primary-color-2,
+  select-options-list-filled-primary-border-color: color-primary-500,
+  select-options-list-filled-success-border-color: color-success-500,
+  select-options-list-filled-info-border-color: color-info-500,
+  select-options-list-filled-warning-border-color: color-warning-500,
+  select-options-list-filled-danger-border-color: color-danger-500,
+
   select-hero-background-color: background-basic-color-2,
   select-hero-border-color: border-basic-color-3,
   select-hero-border-style: solid,
@@ -1562,6 +1576,13 @@ $eva-mapping: (
   select-group-option-hero-large-padding-start: 2.25rem,
   select-option-hero-giant-padding: select-hero-giant-padding,
   select-group-option-hero-giant-padding-start: 2.75rem,
+
+  select-options-list-hero-border-color: border-primary-color-2,
+  select-options-list-hero-primary-border-color: color-primary-500,
+  select-options-list-hero-success-border-color: color-success-500,
+  select-options-list-hero-info-border-color: color-info-500,
+  select-options-list-hero-warning-border-color: color-warning-500,
+  select-options-list-hero-danger-border-color: color-danger-500,
 
   datepicker-text-color: text-basic-color,
   datepicker-background-color: background-basic-color-1,

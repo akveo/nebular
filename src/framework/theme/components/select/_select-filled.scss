@@ -23,6 +23,10 @@
     }
   }
 
+  .options-list-container.appearance-filled {
+    border-color: nb-theme(select-options-list-filled-border-color);
+  }
+
   @each $size in nb-get-sizes() {
     nb-select.appearance-filled.size-#{$size} .select-button {
       padding: nb-theme(select-filled-#{$size}-padding);
@@ -61,6 +65,10 @@
         border-color: nb-theme(select-filled-#{$status}-disabled-border-color);
         color: nb-theme(select-filled-#{$status}-disabled-text-color);
       }
+    }
+
+    .options-list-container.appearance-filled.status-#{$status} {
+      border-color: nb-theme(select-options-list-filled-#{$status}-border-color);
     }
   }
 }

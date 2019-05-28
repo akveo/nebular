@@ -23,6 +23,10 @@
     }
   }
 
+  .options-list-container.appearance-hero {
+    border-color: nb-theme(select-options-list-hero-border-color);
+  }
+
   @each $size in nb-get-sizes() {
     nb-select.appearance-hero.size-#{$size} .select-button {
       padding: nb-theme(select-hero-#{$size}-padding);
@@ -64,6 +68,10 @@
         background-color: nb-theme(select-hero-#{$status}-disabled-background-color);
         background-image: none;
       }
+    }
+
+    .options-list-container.appearance-hero.status-#{$status} {
+      border-color: nb-theme(select-options-list-hero-#{$status}-border-color);
     }
   }
 }

@@ -23,6 +23,10 @@
     }
   }
 
+  .options-list-container.appearance-outline {
+    border-color: nb-theme(select-options-list-outline-border-color);
+  }
+
   @each $status in nb-get-statuses() {
     nb-select.appearance-outline.status-#{$status} .select-button {
       border-color: nb-theme(select-outline-#{$status}-border-color);
@@ -35,6 +39,10 @@
       &[disabled] {
         border-color: nb-theme(select-outline-#{$status}-disabled-border-color);
       }
+    }
+
+    .options-list-container.appearance-outline.status-#{$status} {
+      border-color: nb-theme(select-options-list-outline-#{$status}-border-color);
     }
   }
 

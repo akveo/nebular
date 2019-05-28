@@ -34,6 +34,14 @@
     border-width: nb-theme(select-options-list-border-width);
     overflow: hidden;
 
+    &.top {
+      border-bottom: none;
+    }
+
+    &.bottom {
+      border-top: none;
+    }
+
     & > .options-list {
       margin: 0;
       padding: 0;
