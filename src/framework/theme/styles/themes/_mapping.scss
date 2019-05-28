@@ -1373,6 +1373,15 @@ $eva-mapping: (
   select-option-outline-large-padding: select-outline-large-padding,
   select-option-outline-giant-padding: select-outline-giant-padding,
 
+  select-outline-adjacent-border-color: select-outline-border-color,
+  select-outline-adjacent-border-style: select-outline-border-style,
+  select-outline-adjacent-border-width: select-outline-border-width,
+  select-outline-primary-adjacent-border-color: select-outline-primary-border-color,
+  select-outline-success-adjacent-border-color: select-outline-success-border-color,
+  select-outline-info-adjacent-border-color: select-outline-info-border-color,
+  select-outline-warning-adjacent-border-color: select-outline-warning-border-color,
+  select-outline-danger-adjacent-border-color: select-outline-danger-border-color,
+
   select-group-option-outline-tiny-start-padding: 1.25rem,
   select-group-option-outline-small-start-padding: 1.75rem,
   select-group-option-outline-medium-start-padding: 2.25rem,
