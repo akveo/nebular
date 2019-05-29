@@ -105,6 +105,11 @@ border-basic-color-4: color-basic-400,
 border-basic-color-5: color-basic-500,
 ```
 
+the most used of these are:
+ 
+- `background-basic-color-1` - the lightest one, usually used for top sitting elements - cards, headers, etc. 
+- `background-basic-color-2` - for background of the layout and input controls (inputs, checkboxes, etc)
+
 And vice-versa for dark themes:
 
 ```scss
@@ -119,10 +124,7 @@ border-basic-color-3: color-basic-1000,
 border-basic-color-4: color-basic-1100,
 border-basic-color-5: color-basic-1100,
 ```
-<hr>
-
-- `color-1` - the lightest one, usually used for top sitting elements - cards, headers, etc. 
-- `color-2` - for background of the layout and input controls (inputs, checkboxes, etc)  
+<hr>  
 
 ## Text Colors
 
