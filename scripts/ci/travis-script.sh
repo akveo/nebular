@@ -24,6 +24,14 @@ if [[ -z "$TRAVIS" ]]; then
   exit 1
 fi
 
+if [[ "${MODE}" = docs ]]; then
+  npm run ci:docs
+elif [[ "${MODE}" = deploy_dev ]]; then
+  deploy_dev
+elif [[ "${MODE}" = publish_dev ]]; then
+  publish_dev
+fi
+
 CURRENT_BRANCH=$(if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then echo $TRAVIS_BRANCH; else echo $TRAVIS_PULL_REQUEST_BRANCH; fi)
 
 # Get commit diff
@@ -52,12 +60,6 @@ elif [[ "${MODE}" =~ ^.*_(unit_test)$ ]]; then
   npm run ci:test
   npm install codecov -g && codecov
   npm run test:schematics
-elif [[ "${MODE}" = docs ]]; then
-  npm run ci:docs
-elif [[ "${MODE}" = deploy_dev ]]; then
-  deploy_dev
-elif [[ "${MODE}" = publish_dev ]]; then
-  publish_dev
 elif [[ "${MODE}" = packages_smoke ]]; then
   packages_smoke
 fi
