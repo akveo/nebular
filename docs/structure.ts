@@ -243,6 +243,45 @@ export const structure = [
   },
   {
     type: 'section',
+    name: 'Migration',
+    children: [
+      {
+        type: 'page',
+        name: 'General Instructions',
+        children: [
+          {
+            type: 'block',
+            block: 'markdown',
+            source: 'migration/instructions.md',
+          },
+        ],
+      },
+      {
+        type: 'page',
+        name: '3.5.0-4.0.0 Migration',
+        children: [
+          {
+            type: 'block',
+            block: 'markdown',
+            source: 'migration/350-400.md',
+          },
+        ],
+      },
+      {
+        type: 'page',
+        name: '2.0.0-rc.8-2.0.0-rc.9 Auth Migration',
+        children: [
+          {
+            type: 'block',
+            block: 'markdown',
+            source: 'migration/200rc8-200rc9-auth.md',
+          },
+        ],
+      },
+    ],
+  },
+  {
+    type: 'section',
     name: 'Usability',
     children: [
       {
