@@ -6,16 +6,16 @@ import { MENU_ITEMS } from './menu-service-items';
 @Component({
   selector: 'nb-menu-services',
   template: `
-    <nb-card size="xxlarge">
-      <nb-card-body>
-        <nb-menu tag="menu" [items]="menuItems"></nb-menu>
+    <nb-card size="giant">
+      <nb-menu tag="menu" [items]="menuItems"></nb-menu>
+      <div class="control-panel">
         <router-outlet></router-outlet>
         <h3 class="h4">Selected item: {{ selectedItem }}</h3>
         <button nbButton (click)="addMenuItem()">Add Menu Item</button>
         <button nbButton (click)="collapseAll()">Collapse all menu items</button>
         <button nbButton (click)="navigateHome()">Home</button>
         <button nbButton (click)="getSelectedItem()">Get Selected Item</button>
-      </nb-card-body>
+      </div>
     </nb-card>
   `,
   styleUrls: ['./menu-service.component.scss'],

@@ -128,20 +128,12 @@ const routes: Route[] = [
         loadChildren: './window/window.module#WindowModule',
       },
       {
-        path: 'auth',
-        loadChildren: './auth/auth.module#AuthPlaygroundModule',
-      },
-      {
         path: 'oauth2',
         loadChildren: './oauth2/oauth2.module#OAuth2PlaygroundModule',
       },
       {
         path: 'oauth2-password',
         loadChildren: './oauth2-password/oauth2-password.module#OAuth2PasswordPlaygroundModule',
-      },
-      {
-        path: 'smart-home',
-        loadChildren: './smart-home/app.module#AppModule',
       },
       {
         path: 'tree-grid',

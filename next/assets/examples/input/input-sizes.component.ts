@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 @Component({
   template: `
     <nb-card>
-      <nb-card-body>
+      <nb-card-body class="example-items-col">
         <input type="text" nbInput fullWidth fieldSize="tiny" placeholder="Tiny">
         <input type="text" nbInput fullWidth fieldSize="small" placeholder="Small">
         <input type="text" nbInput fullWidth fieldSize="medium" placeholder="Medium">
@@ -12,6 +12,5 @@ import { Component } from '@angular/core';
       </nb-card-body>
     </nb-card>
   `,
-  styleUrls: ['./input-component.scss'],
 })
 export class InputSizesComponent {}

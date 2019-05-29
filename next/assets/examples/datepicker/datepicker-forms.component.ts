@@ -13,7 +13,7 @@ import { FormControl } from '@angular/forms';
   template: `
     <nb-card size="large">
       <nb-card-body class="two-inputs">
-        <input nbInput placeholder="Form Picker" [nbDatepicker]="formcontrol" [formControl]="formControl">
+        <input nbInput placeholder="Pick Date" [nbDatepicker]="formcontrol" [formControl]="formControl">
         <nb-datepicker #formcontrol></nb-datepicker>
 
         <input nbInput placeholder="Form Picker" [nbDatepicker]="ngmodel" [(ngModel)]="ngModelDate">

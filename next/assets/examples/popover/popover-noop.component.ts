@@ -13,7 +13,7 @@ import { NbPopoverDirective } from '@nebular/theme';
 })
 export class PopoverNoopComponent {
 
-  @ViewChild(NbPopoverDirective) popover: NbPopoverDirective;
+  @ViewChild(NbPopoverDirective, { static: false }) popover: NbPopoverDirective;
 
   open() {
     this.popover.show();

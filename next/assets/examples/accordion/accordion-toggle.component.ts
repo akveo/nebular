@@ -4,10 +4,11 @@ import { Component, ChangeDetectionStrategy, ViewChild } from '@angular/core';
   selector: 'nb-accordion-toggle',
   templateUrl: './accordion-toggle.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  host: { class: 'example-height-60' },
 })
 export class AccordionToggleComponent {
 
-  @ViewChild('item') accordion;
+  @ViewChild('item', { static: false }) accordion;
 
   toggle() {
     this.accordion.toggle();
