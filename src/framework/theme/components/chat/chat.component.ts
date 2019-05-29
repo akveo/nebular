@@ -117,6 +117,9 @@ import { NbChatMessageComponent } from './chat-message.component';
  * chat-border-radius:
  * chat-shadow:
  * chat-padding:
+ * chart-scrollbar-color:
+ * chart-scrollbar-background-color:
+ * chart-scrollbar-width:
  * chat-text-color:
  * chat-text-font-family:
  * chat-text-font-size:

@@ -103,27 +103,27 @@ import { NbColumnsService } from './tree-grid-columns.service';
  * tree-grid-cell-border-color:
  * tree-grid-row-min-height:
  * tree-grid-cell-padding:
- * tree-grid-header-background:
+ * tree-grid-header-background-color:
  * tree-grid-header-text-color:
  * tree-grid-header-text-font-family:
  * tree-grid-header-text-font-size:
  * tree-grid-header-text-font-weight:
  * tree-grid-header-text-line-height:
- * tree-grid-footer-background:
+ * tree-grid-footer-background-color:
  * tree-grid-footer-text-color:
  * tree-grid-footer-text-font-family:
  * tree-grid-footer-text-font-size:
  * tree-grid-footer-text-font-weight:
  * tree-grid-footer-text-line-height:
- * tree-grid-row-background:
- * tree-grid-row-even-background:
- * tree-grid-row-hover-background:
+ * tree-grid-row-background-color:
+ * tree-grid-row-even-background-color:
+ * tree-grid-row-hover-background-color:
  * tree-grid-row-text-color:
  * tree-grid-row-text-font-family:
  * tree-grid-row-text-font-size:
  * tree-grid-row-text-font-weight:
  * tree-grid-row-text-line-height:
- * tree-grid-sort-header-button-background:
+ * tree-grid-sort-header-button-background-color:
  * tree-grid-sort-header-button-border:
  * tree-grid-sort-header-button-padding:
  */

@@ -199,14 +199,22 @@ export type NbSearchType = 'modal-zoomin' | 'rotate-layout' | 'modal-move' |
  *
  * @styles
  *
- * search-btn-open-fg:
- * search-btn-close-fg:
- * search-bg:
- * search-bg-secondary:
- * search-text:
- * search-info:
- * search-dash:
- * search-placeholder:
+ * search-background-color:
+ * search-divider-color:
+ * search-divider-style:
+ * search-divider-width:
+ * search-extra-background-color:
+ * search-text-color:
+ * search-text-font-family:
+ * search-text-font-size:
+ * search-text-font-weight:
+ * search-text-line-height:
+ * search-placeholder-text-color:
+ * search-info-text-color:
+ * search-info-text-font-family:
+ * search-info-text-font-size:
+ * search-info-text-font-weight:
+ * search-info-text-line-height:
  */
 @Component({
   selector: 'nb-search',

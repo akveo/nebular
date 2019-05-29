@@ -219,6 +219,7 @@ export class NbTabComponent {
  * tabset-tab-disabled-text-color:
  * tabset-tab-disabled-underline-color:
  * tabset-divider-color:
+ * tabset-divider-style:
  * tabset-divider-width:
  * tabset-content-background-color:
  * tabset-content-padding:

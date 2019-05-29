@@ -123,6 +123,7 @@ export class NbCardFooterComponent {
  * card-border-color:
  * card-border-radius:
  * card-padding:
+ * card-shadow:
  * card-divider-color:
  * card-divider-style:
  * card-divider-width:
@@ -131,7 +132,6 @@ export class NbCardFooterComponent {
  * card-height-medium:
  * card-height-large:
  * card-height-giant:
- * card-shadow:
  * card-margin-bottom:
  * card-scrollbar-color:
  * card-scrollbar-background-color:

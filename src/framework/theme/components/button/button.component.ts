@@ -115,6 +115,7 @@ export type NbButtonAppearance = 'filled' | 'outline' | 'ghost' | 'hero';
  * button-filled-primary-active-border-color:
  * button-filled-primary-disabled-background-color:
  * button-filled-primary-disabled-border-color:
+ * button-filled-primary-disabled-text-color:
  * button-filled-success-background-color:
  * button-filled-success-border-color:
  * button-filled-success-text-color:
@@ -125,6 +126,7 @@ export type NbButtonAppearance = 'filled' | 'outline' | 'ghost' | 'hero';
  * button-filled-success-active-border-color:
  * button-filled-success-disabled-background-color:
  * button-filled-success-disabled-border-color:
+ * button-filled-success-disabled-text-color:
  * button-filled-info-background-color:
  * button-filled-info-border-color:
  * button-filled-info-text-color:
@@ -135,6 +137,7 @@ export type NbButtonAppearance = 'filled' | 'outline' | 'ghost' | 'hero';
  * button-filled-info-active-border-color:
  * button-filled-info-disabled-background-color:
  * button-filled-info-disabled-border-color:
+ * button-filled-info-disabled-text-color:
  * button-filled-warning-background-color:
  * button-filled-warning-border-color:
  * button-filled-warning-text-color:
@@ -145,6 +148,7 @@ export type NbButtonAppearance = 'filled' | 'outline' | 'ghost' | 'hero';
  * button-filled-warning-active-border-color:
  * button-filled-warning-disabled-background-color:
  * button-filled-warning-disabled-border-color:
+ * button-filled-warning-disabled-text-color:
  * button-filled-danger-background-color:
  * button-filled-danger-border-color:
  * button-filled-danger-text-color:
@@ -155,8 +159,10 @@ export type NbButtonAppearance = 'filled' | 'outline' | 'ghost' | 'hero';
  * button-filled-danger-active-border-color:
  * button-filled-danger-disabled-background-color:
  * button-filled-danger-disabled-border-color:
+ * button-filled-danger-disabled-text-color:
  * button-outline-border-style:
  * button-outline-border-width:
+ * button-outline-background-color:
  * button-outline-text-transform:
  * button-outline-tiny-padding:
  * button-outline-small-padding:
@@ -274,8 +280,8 @@ export type NbButtonAppearance = 'filled' | 'outline' | 'ghost' | 'hero';
  * button-hero-primary-hover-right-background-color:
  * button-hero-primary-active-left-background-color:
  * button-hero-primary-active-right-background-color:
- * button-hero-primary-disabled-left-background-color:
- * button-hero-primary-disabled-right-background-color:
+ * button-hero-primary-disabled-background-color:
+ * button-hero-primary-disabled-text-color:
  * button-hero-success-text-color:
  * button-hero-success-bevel-color:
  * button-hero-success-glow-color:
@@ -287,8 +293,8 @@ export type NbButtonAppearance = 'filled' | 'outline' | 'ghost' | 'hero';
  * button-hero-success-hover-right-background-color:
  * button-hero-success-active-left-background-color:
  * button-hero-success-active-right-background-color:
- * button-hero-success-disabled-left-background-color:
- * button-hero-success-disabled-right-background-color:
+ * button-hero-success-disabled-background-color:
+ * button-hero-success-disabled-text-color:
  * button-hero-info-text-color:
  * button-hero-info-bevel-color:
  * button-hero-info-glow-color:
@@ -300,8 +306,8 @@ export type NbButtonAppearance = 'filled' | 'outline' | 'ghost' | 'hero';
  * button-hero-info-hover-right-background-color:
  * button-hero-info-active-left-background-color:
  * button-hero-info-active-right-background-color:
- * button-hero-info-disabled-left-background-color:
- * button-hero-info-disabled-right-background-color:
+ * button-hero-info-disabled-background-color:
+ * button-hero-info-disabled-text-color:
  * button-hero-warning-text-color:
  * button-hero-warning-bevel-color:
  * button-hero-warning-glow-color:
@@ -313,8 +319,8 @@ export type NbButtonAppearance = 'filled' | 'outline' | 'ghost' | 'hero';
  * button-hero-warning-hover-right-background-color:
  * button-hero-warning-active-left-background-color:
  * button-hero-warning-active-right-background-color:
- * button-hero-warning-disabled-left-background-color:
- * button-hero-warning-disabled-right-background-color:
+ * button-hero-warning-disabled-background-color:
+ * button-hero-warning-disabled-text-color:
  * button-hero-danger-text-color:
  * button-hero-danger-bevel-color:
  * button-hero-danger-glow-color:
@@ -326,8 +332,8 @@ export type NbButtonAppearance = 'filled' | 'outline' | 'ghost' | 'hero';
  * button-hero-danger-hover-right-background-color:
  * button-hero-danger-active-left-background-color:
  * button-hero-danger-active-right-background-color:
- * button-hero-danger-disabled-left-background-color:
- * button-hero-danger-disabled-right-background-color:
+ * button-hero-danger-disabled-background-color:
+ * button-hero-danger-disabled-text-color:
  */
 @Component({
   selector: 'button[nbButton],a[nbButton],input[type="button"][nbButton],input[type="submit"][nbButton]',
