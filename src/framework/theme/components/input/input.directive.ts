@@ -59,6 +59,8 @@ import { NbComponentStatus } from '../component-status';
  * input-background-color:
  * input-border-style:
  * input-border-width:
+ * input-outline-color:
+ * input-outline-width:
  * input-placeholder-text-color:
  * input-placeholder-text-font-family:
  * input-text-color:

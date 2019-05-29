@@ -27,7 +27,9 @@ import { Component, Input, HostBinding } from '@angular/core';
  *
  * @styles
  *
- * list-item-border-color:
+ * list-item-divider-color:
+ * list-item-divider-style:
+ * list-item-divider-width:
  * list-item-padding:
  */
 @Component({

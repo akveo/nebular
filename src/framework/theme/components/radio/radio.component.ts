@@ -56,9 +56,10 @@ import { NbComponentStatus } from '../component-status';
  *
  * @styles
  *
- * radio-width
+ * radio-width:
  * radio-height:
  * radio-background-color:
+ * radio-border-color:
  * radio-border-style:
  * radio-border-width:
  * radio-text-color:

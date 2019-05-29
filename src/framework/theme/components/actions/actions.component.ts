@@ -158,23 +158,31 @@ export class NbActionComponent {
  * actions-divider-color:
  * actions-divider-style:
  * actions-divider-width:
+ * actions-icon-color:
  * actions-text-color:
  * actions-text-font-family:
  * actions-text-font-weight:
  * actions-text-line-height:
+ * actions-disabled-icon-color:
+ * actions-disabled-text-color:
  * actions-tiny-height:
+ * actions-tiny-icon-height:
  * actions-tiny-padding:
  * actions-tiny-text-font-size:
  * actions-small-height:
+ * actions-small-icon-height:
  * actions-small-padding:
  * actions-small-text-font-size:
  * actions-medium-height:
+ * actions-medium-icon-height:
  * actions-medium-padding:
  * actions-medium-text-font-size:
  * actions-large-height:
+ * actions-large-icon-height:
  * actions-large-padding:
  * actions-large-text-font-size:
  * actions-giant-height:
+ * actions-giant-icon-height:
  * actions-giant-padding:
  * actions-giant-text-font-size:
  */
