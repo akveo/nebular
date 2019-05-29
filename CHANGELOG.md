@@ -1,3 +1,13 @@
+<a name="4.0.0-rc.7"></a>
+# [4.0.0-rc.7](https://github.com/akveo/nebular/compare/v4.0.0-rc.6...v4.0.0-rc.7) (2019-05-29)
+
+
+### Features
+
+* **select:** more border and icon theme properties ([#1468](https://github.com/akveo/nebular/issues/1468)) ([9e1c604](https://github.com/akveo/nebular/commit/9e1c604))
+
+
+
 <a name="4.0.0-rc.6"></a>
 # [4.0.0-rc.6](https://github.com/akveo/nebular/compare/v4.0.0-rc.5...v4.0.0-rc.6) (2019-05-28)
 
