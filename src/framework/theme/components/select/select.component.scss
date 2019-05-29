@@ -58,6 +58,6 @@ nb-icon {
   @include nb-component-animation(transform);
 }
 
-.select-button.open nb-icon {
+:host(.open) nb-icon {
   transform: translateY(-50%) rotate(180deg);
 }
