@@ -47,16 +47,11 @@
 
     .close {
       text-shadow: none;
-      color: nb-theme(modal-fg-heading);
+      color: nb-theme(card-header-text-color);
 
       @include nb-rtl {
         margin-left: -1rem;
         margin-right: auto;
-      }
-
-
-      &:hover {
-        color: nb-theme(modal-fg-heading);
       }
     }
   }
