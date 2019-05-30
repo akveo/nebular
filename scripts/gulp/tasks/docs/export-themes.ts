@@ -76,9 +76,8 @@ const exporter = {
         result = exporter.getParent(prop, themeName, themeName, prop, result, THEMES);
       });
     });
-    const output = {};
-    output['themes'] = result;
-    return output;
+
+    return result;
   },
 
   getParent(prop, scopedThemeName, resultThemeName, resultProp, resultObj, THEMES) {
@@ -120,19 +119,35 @@ const exporter = {
 
 
   function(path) {
-    return function (file, value, options) {
-      const opt = _.defaults(exporter.get_value(options), { prefix: '', suffix: '', extend: false });
-      let output = exporter.get_value(value);
-      output = exporter.parseThemes(output);
+    return function (file, themes, mapping) {
+      const themesValue = exporter.get_value(themes);
+      const mappingValue = exporter.get_value(mapping);
+
+      const completeThemes = {};
+      Object.keys(themesValue).forEach((themeName) => {
+        const theme = themesValue[themeName];
+        completeThemes[themeName] = {
+          ...theme,
+          data: _.defaults(mappingValue, theme.data),
+        };
+      });
+
+
+      let output = {
+        themes: exporter.parseThemes(themesValue),
+        // TODO: we need to change internal function interface as it very hard to re-use them
+        completeThemes: exporter.parseThemes(completeThemes),
+      };
+
       output = _.defaults(JSON.parse(fs.readFileSync(path + '/' + file.getValue())), output);
-      fs.writeFileSync(path + '/' + file.getValue(), opt.prefix + JSON.stringify(output, null, '  ') + opt.suffix);
-      return value;
+      fs.writeFileSync(path + '/' + file.getValue(), JSON.stringify(output, null, '  '));
+      return themes;
     }
   },
 
   interface(name) {
     name = name || 'export';
-    return name + '($file, $value, $options:())';
+    return name + '($file, $themes, $mapping)';
   },
 };
 
