@@ -32,7 +32,9 @@
     "docs:prod": "npm run build -- docs --prod --aot --base-href '/nebular/'",
     "docs:dirs": "gulp create-docs-dirs",
     "docs:gh-pages": "npm run docs:build && npm run ngh -- --dir ./docs/dist",
-    "build": "ng build",
+    "docs:build:stats": "npm run docs:prod -- --stats-json",
+    "docs:analyze": "webpack-bundle-analyzer docs/dist/stats.json",
+    "build": "node --max_old_space_size=8048 ./node_modules/@angular/cli/bin/ng build",
     "build:prod": "npm run build -- --prod",
     "build:wp": "npm run build -- playground-wp --prod --aot",
     "build:package": "npm-run-all -s clean:all \"gulp prepare-packages\" clean:tmp",
@@ -174,7 +176,8 @@
     "typedoc": "^0.12.0",
     "typescript": "3.4.5",
     "uglify-es": "3.3.9",
-    "uglifyjs-webpack-plugin": "2.1.2"
+    "uglifyjs-webpack-plugin": "2.1.2",
+    "webpack-bundle-analyzer": "^3.3.2"
   },
   "schematics": "./schematics/dist/collection.json"
 }
