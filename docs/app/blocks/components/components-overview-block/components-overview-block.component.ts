@@ -4,6 +4,7 @@ import { NgdMenuService } from '../../../@theme/services/menu.service';
 
 @Component({
   selector: 'ngd-components-overview-block',
+  styles: [`:host {display: block;}`],
   styleUrls: ['./components-overview-block.component.scss'],
   templateUrl: './components-overview-block.component.html',
 })

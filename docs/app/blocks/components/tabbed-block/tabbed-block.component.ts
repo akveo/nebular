@@ -13,6 +13,7 @@ import { NgdTabbedService } from '../../../@theme/services';
 
 @Component({
   selector: 'ngd-tabbed-block',
+  styles: [`:host {display: block;}`],
   templateUrl: './tabbed-block.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

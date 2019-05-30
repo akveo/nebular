@@ -5,19 +5,69 @@
  */
 
 import { Component, OnDestroy } from '@angular/core';
-import { Router } from '@angular/router';
-import { takeWhile, withLatestFrom, map } from 'rxjs/operators';
-import { NbThemeService, NbMenuItem, NbSidebarService, NbMenuService } from '@nebular/theme';
+import { Router, RouterOutlet } from '@angular/router';
+import { map, takeWhile, withLatestFrom } from 'rxjs/operators';
+import { NbMediaBreakpoint, NbMenuItem, NbMenuService, NbSidebarService, NbThemeService } from '@nebular/theme';
 
 import { NgdMenuService } from '../@theme/services/menu.service';
 import { NgdPaginationService } from '../@theme/services';
+import { animate, animation, query, sequence, style, transition, trigger, useAnimation } from '@angular/animations';
 
-import { NbMediaBreakpoint } from '@nebular/theme';
+const animationDuration = 150;
+
+
+const formBounce = animation([
+  sequence([
+
+    query(':enter', [
+      style({
+        position: 'absolute',
+        left: 0,
+        right: 0,
+        top: 0,
+        bottom: 0,
+      }),
+    ], { optional: true }),
+
+    query(':enter', [
+      style({
+        opacity: 0,
+      }),
+    ], { optional: true }),
+
+    // Animate previous component
+    query(':leave', [
+      style({
+        opacity: 1,
+      }),
+      animate(animationDuration, style({
+        opacity: 0,
+      })),
+    ], { optional: true }),
+
+
+    // // Animate next component
+    query(':enter', [
+      style({
+        opacity: 0,
+      }),
+      animate(animationDuration, style({
+        opacity: 1,
+      })),
+    ], { optional: true }),
+
+  ]),
+]);
+
+export const routeAnimation = trigger('routeAnimation', [
+  transition('* <=> *', [useAnimation(formBounce)]),
+]);
 
 @Component({
   selector: 'ngd-documentation',
   templateUrl: './documentation.component.html',
   styleUrls: ['./documentation.component.scss'],
+  animations: [routeAnimation],
 })
 export class NgdDocumentationComponent implements OnDestroy {
   menuItems: NbMenuItem[] = [];
@@ -63,5 +113,9 @@ export class NgdDocumentationComponent implements OnDestroy {
 
   ngOnDestroy() {
     this.alive = false;
+  }
+
+  prepareRoute(outlet: RouterOutlet) {
+    return outlet && outlet.activatedRoute && outlet.activatedRoute.snapshot.url;
   }
 }
