@@ -12,8 +12,8 @@
       }
     },
     "theme": {
-      "enum": ["default", "cosmic", "corporate"],
-      "description": "The theme which will be installed.",
+      "enum": ["default", "dark", "cosmic", "corporate"],
+      "description": "Visual theme to installed.",
       "default": "default",
       "x-prompt": "Which Nebular theme do you want to use:"
     },
