@@ -279,6 +279,30 @@
           </nb-card-body>
         </nb-card>
       </div>
+
+      <div class="col-lg-12">
+        <nb-card>
+          <nb-card-header>Modal</nb-card-header>
+          <nb-card-body>
+            <button class="btn btn-primary" (click)="openModal(modalContent)">Open modal</button>
+
+            <ng-template #modalContent let-modal>
+              <div class="modal-header">
+                <h4 class="modal-title" id="modal-basic-title">Title</h4>
+                <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                Modal body
+              </div>
+              <div class="modal-footer">
+                Footer
+              </div>
+            </ng-template>
+          </nb-card-body>
+        </nb-card>
+      </div>
     </div>
 
   </nb-layout-column>

@@ -5,6 +5,7 @@
  */
 
 import { Component, OnInit } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap'
 import { NbThemeService } from '@nebular/theme';
 
 import 'style-loader!./styles.scss';
@@ -26,10 +27,16 @@ import 'style-loader!./styles.scss';
 })
 export class BootstrapTestComponent implements OnInit {
 
-  constructor(private themeService: NbThemeService) {
-  }
+  constructor(
+    private themeService: NbThemeService,
+    private modalService: NgbModal,
+  ) {}
 
   ngOnInit() {
     this.themeService.changeTheme('default');
+  }
+
+  openModal(content) {
+    this.modalService.open(content);
   }
 }
