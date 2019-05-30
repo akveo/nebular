@@ -41,7 +41,7 @@ const EXPECTED_STYLES_SCSS = `@import 'themes';
 `;
 
 const EXPECTED_THEME_SCSS = `@import '~@nebular/theme/styles/theming';
-@import '~@nebular/theme/styles/themes/${themeName}';
+@import '~@nebular/theme/styles/themes/default';
 
 $nb-themes: nb-register-theme((
 
@@ -57,7 +57,7 @@ $nb-themes: nb-register-theme((
   // color-primary-800: #102694,
   // color-primary-900: #091c7a,
 
-), ${themeName}, ${themeName});
+), default, default);
 `;
 
 function createTestWorkspace(runner: SchematicTestRunner, appOptions: Partial<ApplicationOptions> = {}) {
