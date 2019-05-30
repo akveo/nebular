@@ -1,6 +1,8 @@
 @import 'themes';
 @import 'common';
 
+@import 'pace.theme';
+
 @import '../../../../src/framework/theme/styles/global/normalize';
 @import '../../../../src/framework/theme/styles/global/components';
 @import '../../../../src/framework/theme/styles/global/typography/typography';
@@ -19,6 +21,9 @@
   @include nb-typography();
 
   @include nbd-common();
+
+  // loading progress bar
+  @include ngd-pace-theme();
 };
 
 body {
