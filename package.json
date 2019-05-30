@@ -109,6 +109,7 @@
     "marked": "0.3.9",
     "moment": "^2.22.2",
     "normalize.css": "8.0.0",
+    "pace-js": "^1.0.2",
     "rxjs": "6.5.2",
     "socicon": "3.0.5",
     "tslib": "^1.9.0",
