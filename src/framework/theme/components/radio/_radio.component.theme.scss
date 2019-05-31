@@ -46,6 +46,7 @@
     }
 
     .native-input:disabled + .radio-circle {
+      background-color: nb-theme(radio-disabled-background-color);
       border-color: nb-theme(radio-disabled-border-color);
     }
     .native-input:disabled:checked + .radio-circle::before {
