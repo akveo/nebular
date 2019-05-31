@@ -7,15 +7,12 @@
 @mixin nb-b-icon-buttons-theme() {
 
   .btn-icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
     font-size: 1.75rem;
     padding: 0.5rem 1rem;
 
-    &:focus,
-    &.focus {
-      box-shadow: none;
+    nb-icon,
+    .icon {
+      vertical-align: middle;
     }
   }
 
@@ -29,9 +26,11 @@
       text-align: right;
     };
 
+    nb-icon,
     .icon {
       @include nb-ltr(margin-right, 1rem);
       @include nb-rtl(margin-left, 1rem);
+      vertical-align: middle;
     }
   }
 }
