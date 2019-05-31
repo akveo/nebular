@@ -5,6 +5,11 @@
       nb-theme(list-item-divider-style)
       nb-theme(list-item-divider-color);
 
+    color: nb-theme(list-item-text-color);
+    font-family: nb-theme(list-item-font-family);
+    font-size: nb-theme(list-item-font-size);
+    font-weight: nb-theme(list-item-font-weight);
+    line-height: nb-theme(list-item-line-height);
     padding: nb-theme(list-item-padding);
 
     &:first-child {
