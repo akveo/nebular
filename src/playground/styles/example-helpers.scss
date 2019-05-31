@@ -28,6 +28,10 @@
     }
   }
 
+  .example-last-child-no-b-margin > :last-child {
+    margin-bottom: 0;
+  }
+
   .example-items-col {
     display: flex;
     flex-direction: column;
