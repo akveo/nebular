@@ -21,6 +21,7 @@
   &:active {
     background-color: nb-theme(button-filled-#{$status}-active-background-color);
     border-color: nb-theme(button-filled-#{$status}-active-border-color);
+    color: nb-theme(button-filled-#{$status}-text-color);
   }
 
   &[disabled] {
