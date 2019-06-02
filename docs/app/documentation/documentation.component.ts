@@ -5,21 +5,31 @@
  */
 
 import { Component, OnDestroy } from '@angular/core';
-import { Router, RouterOutlet } from '@angular/router';
+import { Router, RouterOutlet, UrlSegment } from '@angular/router';
 import { map, takeWhile, withLatestFrom } from 'rxjs/operators';
 import { NbMediaBreakpoint, NbMenuItem, NbMenuService, NbSidebarService, NbThemeService } from '@nebular/theme';
 
 import { NgdMenuService } from '../@theme/services/menu.service';
 import { NgdPaginationService } from '../@theme/services';
-import { animate, animation, query, sequence, style, transition, trigger, useAnimation } from '@angular/animations';
+import {
+  animate,
+  animation,
+  group,
+  query,
+  sequence,
+  style,
+  transition,
+  trigger,
+  useAnimation,
+} from '@angular/animations';
 
-const animationDuration = 150;
+const animationDuration = 1000;
 
 
 const formBounce = animation([
   sequence([
 
-    query(':enter', [
+    query(':leave', [
       style({
         position: 'absolute',
         left: 0,
@@ -36,25 +46,47 @@ const formBounce = animation([
     ], { optional: true }),
 
     // Animate previous component
-    query(':leave', [
-      style({
-        opacity: 1,
-      }),
-      animate(animationDuration, style({
-        opacity: 0,
-      })),
-    ], { optional: true }),
+    group([
 
+      query(':leave', [
+        style({
+          opacity: 1,
+        }),
+        animate(animationDuration, style({
+          opacity: 0,
+        })),
+      ], { optional: true }),
 
-    // // Animate next component
-    query(':enter', [
-      style({
-        opacity: 0,
-      }),
-      animate(animationDuration, style({
-        opacity: 1,
-      })),
-    ], { optional: true }),
+      query('.settings-column', [
+        animate(animationDuration, style({
+          transform: 'translateX(36px)',
+        })),
+      ], { optional: true }),
+
+    ]),
+
+    // Animate next component
+    group([
+
+      query(':enter', [
+        style({
+          opacity: 0,
+        }),
+        animate(animationDuration, style({
+          opacity: 1,
+        })),
+      ], { optional: true }),
+
+      query('.settings-column', [
+        style({
+          transform: 'translateX(36px)',
+        }),
+        animate(animationDuration, style({
+          transform: 'translateX(0)',
+        })),
+      ], { optional: true }),
+
+    ]),
 
   ]),
 ]);
@@ -116,6 +148,13 @@ export class NgdDocumentationComponent implements OnDestroy {
   }
 
   prepareRoute(outlet: RouterOutlet) {
-    return outlet && outlet.activatedRoute && outlet.activatedRoute.snapshot.url;
+    console.log(outlet && outlet.activatedRoute && this.buildUrlString(outlet.activatedRoute.snapshot.url));
+    return outlet && outlet.activatedRoute && this.buildUrlString(outlet.activatedRoute.snapshot.url);
+  }
+
+  private buildUrlString(segments: UrlSegment[]): string {
+    return segments
+      .map(url => url.path)
+      .join('/');
   }
 }

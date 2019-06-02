@@ -7,6 +7,10 @@
   $settings-margin: nb-theme(settings-col-margin);
   $layout-background-color: nb-theme(layout-background-color);
 
+  nb-layout-column {
+    position: relative;
+  }
+
   .menu-sidebar {
     background-color: $layout-background-color;
 
