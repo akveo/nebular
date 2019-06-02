@@ -1,7 +1,7 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 
 
-const animationDuration = 200;
+const animationDuration = 300;
 
 export const enterLeaveAnimations = [
 
