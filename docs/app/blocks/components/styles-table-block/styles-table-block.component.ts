@@ -22,7 +22,7 @@ import { NgdStylesService } from '../../../@theme/services';
       <tbody>
       <tr *ngFor="let item of style">
         <td>{{ item.name }}</td>
-        <td>{{ item.parent || 'unknown' }}</td>
+        <td>{{ item.parent || '' }}</td>
         <td ngdColorSwatch>{{ item.value || 'unknown' }}</td>
         <td>
           <p *ngIf="item.shortDescription" ngdDescription>{{ item.shortDescription}}</p>

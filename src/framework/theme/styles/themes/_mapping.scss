@@ -859,7 +859,7 @@ $eva-mapping: (
 
   checkbox-height: 1.125rem,
   checkbox-width: 1.125rem,
-  checkbox-background-color: background-basic-color-2,
+  checkbox-background-color: background-basic-color-3,
   checkbox-border-color: border-basic-color-4,
   checkbox-border-style: solid,
   checkbox-border-width: 1px,
@@ -872,8 +872,8 @@ $eva-mapping: (
   checkbox-text-font-weight: text-subtitle-2-font-weight,
   checkbox-text-line-height: text-subtitle-2-line-height,
 
-  checkbox-disabled-background-color: background-basic-color-3,
-  checkbox-disabled-border-color: border-basic-color-4,
+  checkbox-disabled-background-color: background-basic-color-2,
+  checkbox-disabled-border-color: border-basic-color-3,
   checkbox-disabled-checkmark-color: background-basic-color-1,
   checkbox-disabled-text-color: text-disabled-color,
 
@@ -1171,15 +1171,20 @@ $eva-mapping: (
   accordion-header-border-width: 1px,
   accordion-item-background-color: background-basic-color-1,
   accordion-item-text-color: text-basic-color,
-  accordion-item-text-font-family: text-paragraph-font-weight,
-  accordion-item-text-font-size: text-paragraph-font-family,
-  accordion-item-text-font-weight: text-paragraph-font-size,
+  accordion-item-text-font-family: text-paragraph-font-family,
+  accordion-item-text-font-size: text-paragraph-font-size,
+  accordion-item-text-font-weight: text-paragraph-font-weight,
   accordion-item-text-line-height: text-paragraph-line-height,
 
   list-item-divider-color: divider-color,
   list-item-divider-style: divider-style,
   list-item-divider-width: divider-width,
   list-item-padding: 1rem,
+  list-item-text-color: text-basic-color,
+  list-item-font-family: text-paragraph-font-family,
+  list-item-font-size: text-paragraph-font-size,
+  list-item-font-weight: text-paragraph-font-weight,
+  list-item-line-height: text-paragraph-line-height,
 
   calendar-width: 21.875rem,
   calendar-body-height: 25.625rem,
@@ -1630,7 +1635,7 @@ $eva-mapping: (
 
   radio-width: 1.125rem,
   radio-height: 1.125rem,
-  radio-background-color: background-basic-color-2,
+  radio-background-color: background-basic-color-3,
   radio-border-color: border-basic-color-4,
   radio-border-style: solid,
   radio-border-width: 1px,
@@ -1642,7 +1647,8 @@ $eva-mapping: (
   radio-outline-color: outline-color,
   radio-outline-width: outline-width,
 
-  radio-disabled-border-color: border-basic-color-4,
+  radio-disabled-background-color: background-basic-color-2,
+  radio-disabled-border-color: border-basic-color-3,
   radio-disabled-text-color: text-disabled-color,
   radio-disabled-inner-circle-color: background-basic-color-4,
 
