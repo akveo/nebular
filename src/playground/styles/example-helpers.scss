@@ -17,26 +17,26 @@
     justify-content: space-around;
   }
 
-  .example-items-row {
-    margin-top: -1rem;
+  .example-items-rows {
     display: flex;
-    flex-direction: row;
+    flex-wrap: wrap;
     align-items: flex-start;
+    margin: -0.5rem;
 
     > * {
-      margin-top: 1rem;
-      margin-right: 1rem;
-
-      &:last-child {
-        margin-right: 0;
-      }
+      margin: 0.5rem;
     }
+  }
+
+  .example-last-child-no-b-margin > :last-child {
+    margin-bottom: 0;
   }
 
   .example-items-col {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+
     & > * {
       margin-bottom: 1rem;
 
