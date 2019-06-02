@@ -11,21 +11,22 @@ import { filter, map, publishReplay, refCount, takeWhile, tap } from 'rxjs/opera
 import { NB_WINDOW } from '@nebular/theme';
 import { NgdTabbedBlockComponent } from '../../blocks/components/tabbed-block/tabbed-block.component';
 import { NgdStructureService } from '../../@theme/services';
+import { enterLeaveAnimations } from './enter-leave-animation';
 
 
 @Component({
   selector: 'ngd-page',
   templateUrl: './page.component.html',
   styleUrls: ['./page.component.scss'],
+  host: { '[@hostEnterLeave]': '' },
+  animations: [...enterLeaveAnimations],
 })
 export class NgdPageComponent implements OnInit, AfterContentChecked, OnDestroy {
 
   currentItem;
-  private alive = true;
-
   currentTabName: string = '';
-
   @ViewChild(NgdTabbedBlockComponent, { static: false }) tabbedBlock: NgdTabbedBlockComponent;
+  private alive = true;
 
   constructor(@Inject(NB_WINDOW) private window,
               private ngZone: NgZone,

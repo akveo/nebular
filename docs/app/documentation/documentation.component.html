@@ -8,7 +8,7 @@
     <button (click)="collapseMenu()" class="collapse-all">Collapse all</button>
     <nb-menu [items]="menuItems" tag="leftMenu"></nb-menu>
   </nb-sidebar>
-  <nb-layout-column [@routeAnimation]="prepareRoute(outlet)">
+  <nb-layout-column>
     <router-outlet #outlet=outlet></router-outlet>
 
     <div class="contact-us">

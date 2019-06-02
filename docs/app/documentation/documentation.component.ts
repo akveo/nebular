@@ -11,95 +11,11 @@ import { NbMediaBreakpoint, NbMenuItem, NbMenuService, NbSidebarService, NbTheme
 
 import { NgdMenuService } from '../@theme/services/menu.service';
 import { NgdPaginationService } from '../@theme/services';
-import {
-  animate,
-  animation,
-  group,
-  query,
-  sequence,
-  style,
-  transition,
-  trigger,
-  useAnimation,
-} from '@angular/animations';
-
-const animationDuration = 1000;
-
-
-const formBounce = animation([
-  sequence([
-
-    query(':leave', [
-      style({
-        position: 'absolute',
-        left: 0,
-        right: 0,
-        top: 0,
-        bottom: 0,
-      }),
-    ], { optional: true }),
-
-    query(':enter', [
-      style({
-        opacity: 0,
-      }),
-    ], { optional: true }),
-
-    // Animate previous component
-    group([
-
-      query(':leave', [
-        style({
-          opacity: 1,
-        }),
-        animate(animationDuration, style({
-          opacity: 0,
-        })),
-      ], { optional: true }),
-
-      query('.settings-column', [
-        animate(animationDuration, style({
-          transform: 'translateX(36px)',
-        })),
-      ], { optional: true }),
-
-    ]),
-
-    // Animate next component
-    group([
-
-      query(':enter', [
-        style({
-          opacity: 0,
-        }),
-        animate(animationDuration, style({
-          opacity: 1,
-        })),
-      ], { optional: true }),
-
-      query('.settings-column', [
-        style({
-          transform: 'translateX(36px)',
-        }),
-        animate(animationDuration, style({
-          transform: 'translateX(0)',
-        })),
-      ], { optional: true }),
-
-    ]),
-
-  ]),
-]);
-
-export const routeAnimation = trigger('routeAnimation', [
-  transition('* <=> *', [useAnimation(formBounce)]),
-]);
 
 @Component({
   selector: 'ngd-documentation',
   templateUrl: './documentation.component.html',
   styleUrls: ['./documentation.component.scss'],
-  animations: [routeAnimation],
 })
 export class NgdDocumentationComponent implements OnDestroy {
   menuItems: NbMenuItem[] = [];
