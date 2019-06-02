@@ -4,7 +4,6 @@ import { NgdPaginationService } from '../../../@theme/services';
 
 @Component({
   selector: 'ngd-pager-block',
-  styles: [`:host {display: block;}`],
   styleUrls: ['./pager-block.component.scss'],
   template: `
     <ng-container *ngIf="paginationItem">

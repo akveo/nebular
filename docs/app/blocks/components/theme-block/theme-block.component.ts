@@ -12,7 +12,6 @@ import { takeWhile, skip, distinctUntilChanged, debounceTime } from 'rxjs/operat
 @Component({
   selector: 'ngd-theme-block',
   styleUrls: ['./theme-block.component.scss'],
-  styles: [`:host {display: block;}`],
   templateUrl: './theme-block.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

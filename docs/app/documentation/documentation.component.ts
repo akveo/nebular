@@ -5,7 +5,7 @@
  */
 
 import { Component, OnDestroy } from '@angular/core';
-import { Router, RouterOutlet, UrlSegment } from '@angular/router';
+import { Router } from '@angular/router';
 import { map, takeWhile, withLatestFrom } from 'rxjs/operators';
 import { NbMediaBreakpoint, NbMenuItem, NbMenuService, NbSidebarService, NbThemeService } from '@nebular/theme';
 
@@ -61,16 +61,5 @@ export class NgdDocumentationComponent implements OnDestroy {
 
   ngOnDestroy() {
     this.alive = false;
-  }
-
-  prepareRoute(outlet: RouterOutlet) {
-    console.log(outlet && outlet.activatedRoute && this.buildUrlString(outlet.activatedRoute.snapshot.url));
-    return outlet && outlet.activatedRoute && this.buildUrlString(outlet.activatedRoute.snapshot.url);
-  }
-
-  private buildUrlString(segments: UrlSegment[]): string {
-    return segments
-      .map(url => url.path)
-      .join('/');
   }
 }

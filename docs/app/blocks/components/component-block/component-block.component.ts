@@ -3,7 +3,6 @@ import { NgdTabbedService } from '../../../@theme/services';
 
 @Component({
   selector: 'ngd-component-block',
-  styles: [`:host {display: block;}`],
   template: `
     <nb-card [ngdFragment]="source.slag">
       <nb-card-body>

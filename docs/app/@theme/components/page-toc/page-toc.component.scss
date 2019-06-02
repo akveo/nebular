@@ -1,9 +1,5 @@
 @import '../../../@theme/styles/themes';
 
-:host {
-  display: block;
-}
-
 @include nb-install-component() {
 
   $title-fg: nb-theme(color-fg-heading-light);
