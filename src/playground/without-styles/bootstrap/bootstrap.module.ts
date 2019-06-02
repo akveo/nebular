@@ -5,7 +5,7 @@
  */
 
 import { NgModule } from '@angular/core';
-import { NbCardModule, NbLayoutModule } from '@nebular/theme';
+import { NbCardModule, NbLayoutModule, NbIconModule } from '@nebular/theme';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { BootstrapRoutingModule } from './bootstrap-routing.module';
@@ -18,6 +18,7 @@ import { BootstrapTestComponent } from './bootstrap-test.component';
   imports: [
     NbLayoutModule,
     NbCardModule,
+    NbIconModule,
     BootstrapRoutingModule,
     NgbModule,
   ],

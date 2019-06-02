@@ -31,6 +31,11 @@ import { Component, Input, HostBinding } from '@angular/core';
  * list-item-divider-style:
  * list-item-divider-width:
  * list-item-padding:
+ * list-item-text-color:
+ * list-item-font-family:
+ * list-item-font-size:
+ * list-item-font-weight:
+ * list-item-line-height:
  */
 @Component({
   selector: 'nb-list',

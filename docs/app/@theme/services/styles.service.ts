@@ -16,7 +16,7 @@ export class NgdStylesService {
   }
 
   mapThemedValues(classStyles: any): any {
-    const defaultTheme = this.docs.themes[DEFAULT_THEME_NAME].data;
+    const defaultTheme = this.docs.completeThemes[DEFAULT_THEME_NAME].data;
 
     return classStyles.map(item => {
       return item.styles.map(prop => {

@@ -7,5 +7,6 @@ $nb-theme-export-mode: true;
 
 @import '../src/framework/theme/styles/theming';
 @import '../src/framework/theme/styles/themes';
+@import '../src/framework/theme/styles/themes/mapping';
 
-$v: export('output.json', $nb-themes-export, (prefix:'', suffix:''));
+$v: export('output.json', $nb-themes-export, $eva-mapping);
