@@ -9,6 +9,7 @@ import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { filter, map, publishReplay, refCount, takeWhile, tap } from 'rxjs/operators';
 import { NB_WINDOW } from '@nebular/theme';
+
 import { NgdTabbedBlockComponent } from '../../blocks/components/tabbed-block/tabbed-block.component';
 import { NgdStructureService } from '../../@theme/services';
 import { enterLeaveAnimations } from './enter-leave-animation';
