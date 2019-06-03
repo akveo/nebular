@@ -1,8 +1,8 @@
-# Nebular [![npm](https://img.shields.io/npm/l/@nebular/theme.svg)]() [![Build Status](https://travis-ci.org/akveo/nebular.svg?branch=master)](https://travis-ci.org/akveo/nebular) [![npm](https://img.shields.io/npm/dt/@nebular/theme.svg)](https://www.npmjs.com/package/@nebular/theme) [![Codecov](https://img.shields.io/codecov/c/github/akveo/nebular/master.svg?style=flat-square)](https://codecov.io/gh/akveo/nebular/branch/master) [![Dependency Status](https://david-dm.org/akveo/ngx-admin/status.svg)](https://david-dm.org/akveo/ng2-admin)
-
-<a href="https://akveo.github.io/nebular/?utm_source=github&utm_medium=nebular_cover"><img src="https://i.imgur.com/C8ZN4SA.jpg"></a>
+# Nebular [<img src="https://i.imgur.com/TJYAq56.png" alt="Eva Design System" height="20px" />](https://eva.design) [![npm](https://img.shields.io/npm/l/@nebular/theme.svg)]() [![Build Status](https://travis-ci.org/akveo/nebular.svg?branch=master)](https://travis-ci.org/akveo/nebular) [![npm](https://img.shields.io/npm/dt/@nebular/theme.svg)](https://www.npmjs.com/package/@nebular/theme) [![Codecov](https://img.shields.io/codecov/c/github/akveo/nebular/master.svg?style=flat-square)](https://codecov.io/gh/akveo/nebular/branch/master) [![Dependency Status](https://david-dm.org/akveo/ngx-admin/status.svg)](https://david-dm.org/akveo/ng2-admin)
 
 Nebular is an Angular 8 UI Library with a focus on beautiful design and ability to adapt it to your brand easily. It comes with 4 stunning visual themes, a powerful theming engine with runtime theme switching and support of custom css properties mode. Nebular is based on Eva Design System specifications.
+
+<a href="https://akveo.github.io/nebular/?utm_source=github&utm_medium=nebular_cover"><img src="https://i.imgur.com/C8ZN4SA.jpg"></a>
 
 ## What's included
 
@@ -26,9 +26,6 @@ ng add @nebular/theme
 Configuration will be done automatically.
 
 If you want to have more control over setup process you can [use manual setup guide](https://akveo.github.io/nebular/docs/guides/install-nebular#manually).
-
-## [<img src="https://i.imgur.com/TJYAq56.png" alt="Eva Design System" height="36px" />](https://eva.design)
-Construct stunning & consistent interfaces using atomic components by following Eva Design System specifications.
 
 ## Browser Support
 
