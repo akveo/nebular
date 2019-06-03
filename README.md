@@ -9,7 +9,7 @@ Nebular is an Angular 8 UI Library with a focus on beautiful design and ability 
 ## What's included
 
 - **4 Visual Themes, including new Dark** easily customizable to your brand
-- **35+ Angular UI components** with a bunch handy settings and configurations
+- **35+ Angular UI components** with a bunch of handy settings and configurations
 - **3 Auth strategies and Security** - authentication and security layer easily configurable for your API
 - **Powerful theming engine** with custom CSS properties mode
 - **SVG Eva Icons support**  - 480+ general purpose icons
