@@ -20,10 +20,12 @@
 
 ;(function(l, projectPages) {
 
+  const versions = ['3.5.0'];
+
   var paths = l.pathname.split('/');
   var repo = projectPages ? '/' + paths[1] : '';
-  if (paths[2] === '3.5.0') {
-    repo += '/3.5.0';
+  if (versions.includes(paths[2])) {
+    repo += '/' + paths[2];
   }
 
   /* redirect all 404 trafic to index.html */
