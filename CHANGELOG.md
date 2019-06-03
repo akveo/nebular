@@ -1,5 +1,24 @@
-<a name="4.0.0-rc.8"></a>
-# [4.0.0-rc.8](https://github.com/akveo/nebular/compare/v4.0.0-rc.7...v4.0.0-rc.8) (2019-06-03)
+<a name="4.0.0"></a>
+# [4.0.0](https://github.com/akveo/nebular/compare/v4.0.0-rc.8...v4.0.0) (2019-06-03)
+
+### Highlights
+
+Nebular 4.0 is a significant improvement and rework of the previous versions. We believe these changes bring Nebular to the new level of quality and feature-richness with:
+
+- Updated look&feel with Eva Design System;
+- New convenient and flexible Theming system;
+- Custom CSS properties support in theming;
+- Unified component interfaces (`@Input`'s and `@Output`'s);
+- New Dark theme;
+- Support of SVG Eva Icons.
+
+## Steps To Update
+
+To achieve all of this and allow Nebular to grow faster and better, we had to refactor a lot of internal implementations, as well as *public APIs*.
+We hope that next Nebular versions won't receive such significant upgrades and the amount of breaking changes will be kept as low as possible.
+
+[Migration Guide](https://akveo.github.io/nebular/docs/migration/350400-migration#350--400-nebular-migration) is available.
+We would appreciate hearing your feedback on the update steps, quality of the guide and if you have any questions or complications - please post a comment here https://github.com/akveo/nebular/issues/1524.
 
 
 ### Bug Fixes
@@ -14,33 +33,6 @@
 * **docs:** fix transparent background color ([#1536](https://github.com/akveo/nebular/issues/1536)) ([0aed7b6](https://github.com/akveo/nebular/commit/0aed7b6))
 * **docs:** update changed component theme vars link ([#1550](https://github.com/akveo/nebular/issues/1550)) ([ae73257](https://github.com/akveo/nebular/commit/ae73257))
 * **radio:** prevent circles distraction ([#1549](https://github.com/akveo/nebular/issues/1549)) ([abb50df](https://github.com/akveo/nebular/commit/abb50df))
-
-
-### Features
-
-* **docs:** add Eva section ([#1552](https://github.com/akveo/nebular/issues/1552)) ([1209d65](https://github.com/akveo/nebular/commit/1209d65))
-* **docs:** add routing loader ([#1533](https://github.com/akveo/nebular/issues/1533)) ([dd33a22](https://github.com/akveo/nebular/commit/dd33a22))
-* **schematics:** add dark theme ([#1534](https://github.com/akveo/nebular/issues/1534)) ([c5d15c6](https://github.com/akveo/nebular/commit/c5d15c6))
-* **typography:** specify body, paragraph and list styles ([#1546](https://github.com/akveo/nebular/issues/1546)) ([310127b](https://github.com/akveo/nebular/commit/310127b))
-
-
-
-<a name="4.0.0-rc.7"></a>
-# [4.0.0-rc.7](https://github.com/akveo/nebular/compare/v4.0.0-rc.6...v4.0.0-rc.7) (2019-05-29)
-
-
-### Features
-
-* **select:** more border and icon theme properties ([#1468](https://github.com/akveo/nebular/issues/1468)) ([9e1c604](https://github.com/akveo/nebular/commit/9e1c604))
-
-
-
-<a name="4.0.0-rc.6"></a>
-# [4.0.0-rc.6](https://github.com/akveo/nebular/compare/v4.0.0-rc.5...v4.0.0-rc.6) (2019-05-28)
-
-
-### Bug Fixes
-
 * add missing components exports to public api ([#1487](https://github.com/akveo/nebular/issues/1487)) ([2f551aa](https://github.com/akveo/nebular/commit/2f551aa))
 * move auth examples to base component without layout ([#1479](https://github.com/akveo/nebular/issues/1479)) ([30e6942](https://github.com/akveo/nebular/commit/30e6942))
 * **checkbox:** fix inactive background color ([#1502](https://github.com/akveo/nebular/issues/1502)) ([48966b8](https://github.com/akveo/nebular/commit/48966b8))
@@ -50,154 +42,14 @@
 * **theme:** finalize themes with design system ([#1481](https://github.com/akveo/nebular/issues/1481)) ([5673e98](https://github.com/akveo/nebular/commit/5673e98)), closes [#40dc7](https://github.com/akveo/nebular/issues/40dc7) [#ebeef2](https://github.com/akveo/nebular/issues/ebeef2) [#3b5998](https://github.com/akveo/nebular/issues/3b5998) [#55](https://github.com/akveo/nebular/issues/55) [#dd4b39](https://github.com/akveo/nebular/issues/dd4b39) [#0177b5](https://github.com/akveo/nebular/issues/0177b5) [#6b6b6](https://github.com/akveo/nebular/issues/6b6b6) [#2f96e8](https://github.com/akveo/nebular/issues/2f96e8) [#f26798](https://github.com/akveo/nebular/issues/f26798) [#0093](https://github.com/akveo/nebular/issues/0093)
 * **themes:** fix get-value not working in component context ([#1493](https://github.com/akveo/nebular/issues/1493)) ([30bc29f](https://github.com/akveo/nebular/commit/30bc29f))
 * **theming:** fix nb-theme not working in component mode without nb-i… ([#1503](https://github.com/akveo/nebular/issues/1503)) ([0bc9f07](https://github.com/akveo/nebular/commit/0bc9f07))
-
-
-### Features
-
-* **bootstrap:** update nebular/bootstrap to Eva ([#1507](https://github.com/akveo/nebular/issues/1507)) ([2ff1171](https://github.com/akveo/nebular/commit/2ff1171))
-* **select, input:** add max width theme property ([#1480](https://github.com/akveo/nebular/issues/1480)) ([5a6d506](https://github.com/akveo/nebular/commit/5a6d506))
-
-
-### BREAKING CHANGES
-
-* **bootstrap:** Bootstrap checkbox and radio are removed now, use Nebular Checkbox and Nebular Radio with better theming support.
-* **theme:** The following sass mixins are removed: `nb-radial-gradient`, `nb-right-gradient`.
-
-Theme variables changes:
-
-**renamed:**
-- font-main -> font-family-primary
-- font-secondary -> font-family-secondary
-- radius -> border-radius
-- color-bg -> background-basic-color-1,
-- color-bg-active -> background-basic-color-2,
-- color-fg -> text-basic-color,
-- color-fg-heading -> text-basic-color,
-- color-fg-text -> text-hint-color,
-- separator -> divider-color
-- scrollbar-fg -> scrollbar-color,
-- scrollbar-bg -> scrollbar-background-color,
-- scrollbar-thumb-radius -> scrollbar-width
-
-**removed:**
-- color-fg-highlight
-
-- font-weight-thin
-- font-weight-light
-- font-weight-normal
-- font-weight-bolder
-- font-weight-bold
-- font-weight-ultra-bold
-
-- base-font-size
-
-- font-size-xlg
-- font-size-lg
-- font-size
-- font-size-sm
-- font-size-xs
-
-- padding
-- margin
-- line-height
-
-- social-color-facebook
-- social-color-twitter
-- social-color-google
-- social-color-linkedin
-- social-color-github
-- social-color-stackoverflow
-- social-color-dribble
-- social-color-behance
-
-- radial-gradient
-- linear-gradient
-
-<a name="4.0.0-rc.5"></a>
-# [4.0.0-rc.5](https://github.com/akveo/nebular/compare/v4.0.0-rc.4...v4.0.0-rc.5) (2019-05-22)
-
-
-### Code Refactoring
-
-* **themes:** make map processing lazy, add variable existence check ([#1471](https://github.com/akveo/nebular/issues/1471)) ([48d8f03](https://github.com/akveo/nebular/commit/48d8f03))
-
-
-### Features
-
-* angular package format ([#1474](https://github.com/akveo/nebular/issues/1474)) ([bbed8c1](https://github.com/akveo/nebular/commit/bbed8c1))
-* **themes:** add new Dark theme! ([#1472](https://github.com/akveo/nebular/issues/1472)) ([3b5ad6c](https://github.com/akveo/nebular/commit/3b5ad6c))
-
-
-### BREAKING CHANGES
-
-* **themes:** - remove `disabled` status for card
-- auth now uses `giant` size buttons and inputs
-* **themes:** - `nb-theme` function now throws an error if an unused variable is accessed
-- custom auth variables are removed and replaced with @nebular/theme variables
-- `nb-install` function moved into `@nebular/theme/styles/theming`
-- auth components now use `nb-icon` instead of icon css class
-- everything not mentioned in packages `public_api.ts` now private so direct imports from `@nebular/theme/*` will stop working.
-
-
-<a name="4.0.0-rc.4"></a>
-# [4.0.0-rc.4](https://github.com/akveo/nebular/compare/v4.0.0-rc.2...v4.0.0-rc.4) (2019-05-14)
-
-### Bug Fixes
-
 * **docs:** 4.0 fixes ([#1465](https://github.com/akveo/nebular/issues/1465)) ([46a022c](https://github.com/akveo/nebular/commit/46a022c))
 * **docs:** use new popover trigger input name ([#1462](https://github.com/akveo/nebular/issues/1462)) ([8cf7edb](https://github.com/akveo/nebular/commit/8cf7edb))
-
-
-### Code Refactoring
-
-* **tabset:** remove shadow ([#1461](https://github.com/akveo/nebular/issues/1461)) ([2c11768](https://github.com/akveo/nebular/commit/2c11768))
-* **datepicker:** remove primary border ([#1466](https://github.com/akveo/nebular/issues/1466)) ([f722a48](https://github.com/akveo/nebular/commit/f722a48))
-
-
-### Chores
-
-* **release:** add step to update releases issue ([#1442](https://github.com/akveo/nebular/issues/1442)) ([284c031](https://github.com/akveo/nebular/commit/284c031))
-
-
-<a name="4.0.0-rc.2"></a>
-# [4.0.0-rc.2](https://github.com/akveo/nebular/compare/v4.0.0-rc.1...v4.0.0-rc.2) (2019-05-01)
-
-
-### Bug Fixes
-
 * **docs:** prefix root css urls with base path ([#1453](https://github.com/akveo/nebular/issues/1453)) ([d42c896](https://github.com/akveo/nebular/commit/d42c896))
 * **docs:** trigger change detection if tab updated ([#1445](https://github.com/akveo/nebular/issues/1445)) ([9679e3a](https://github.com/akveo/nebular/commit/9679e3a))
 * **docs:** update examples after Eva migration ([#1448](https://github.com/akveo/nebular/issues/1448)) ([bc2ee49](https://github.com/akveo/nebular/commit/bc2ee49))
 * **docs:** use current tab component property ([#1447](https://github.com/akveo/nebular/issues/1447)) ([122585a](https://github.com/akveo/nebular/commit/122585a))
 * **schematics:** fix eva-icons schematic ([#1380](https://github.com/akveo/nebular/issues/1380)) ([0c809da](https://github.com/akveo/nebular/commit/0c809da))
 * **tabset:** prevent select call if no active tab found ([#1444](https://github.com/akveo/nebular/issues/1444)) ([f738f9d](https://github.com/akveo/nebular/commit/f738f9d))
-
-
-### Chores
-
-* update angular to 8.0.0-rc.2 ([#1449](https://github.com/akveo/nebular/issues/1449)) ([3000e3b](https://github.com/akveo/nebular/commit/3000e3b))
-
-
-### Features
-
-* **docs:** add redirect to 'next' subdirectory ([#1446](https://github.com/akveo/nebular/issues/1446)) ([a3c838f](https://github.com/akveo/nebular/commit/a3c838f))
-
-
-### BREAKING CHANGES
-
-* Angular 8+ now required
-
-**Limitation:**
-For the time being Nebular doesn't have `ES2015` bundle and therefore can't be used in applications with target `ES2015`. You have to manually change target `ES5`.
-
-
-
-<a name="4.0.0-rc.1"></a>
-# [4.0.0-rc.1](https://github.com/akveo/nebular/compare/v3.5.0...v4.0.0-rc.1) (2019-05-27)
-
-
-### Bug Fixes
-
 * **checkbox:** rename variables according to property where it used ([#1372](https://github.com/akveo/nebular/issues/1372)) ([2c02daf](https://github.com/akveo/nebular/commit/2c02daf))
 * **menu:** add RTL chevron menu icon ([#1042](https://github.com/akveo/nebular/issues/1042)) ([3f6ca4f](https://github.com/akveo/nebular/commit/3f6ca4f))
 * **option group:** propagate disabled state to child options ([#1416](https://github.com/akveo/nebular/issues/1416)) ([54da610](https://github.com/akveo/nebular/commit/54da610))
@@ -209,14 +61,10 @@ For the time being Nebular doesn't have `ES2015` bundle and therefore can't be u
 * **select:** prevent navigation to disabled option from keyboard ([#1427](https://github.com/akveo/nebular/issues/1427)) ([657d8ae](https://github.com/akveo/nebular/commit/657d8ae))
 
 
-### Code Refactoring
-
-* **overlay:** use full css property name ([#1403](https://github.com/akveo/nebular/issues/1403)) ([4133058](https://github.com/akveo/nebular/commit/4133058))
-* **theme:** remove use of scss functions ([#1256](https://github.com/akveo/nebular/issues/1256)) ([fa8d87f](https://github.com/akveo/nebular/commit/fa8d87f)), closes [#1228](https://github.com/akveo/nebular/issues/1228)
-
-
 ### Features
 
+* **icons:** new `nb-icon` component, icons library, and [@nebular](https://github.com/nebular)/eva-icons package ([#1319](https://github.com/akveo/nebular/issues/1319)) ([621f461](https://github.com/akveo/nebular/commit/621f461))
+* **theme:** css variables support ([#1257](https://github.com/akveo/nebular/issues/1257)) ([da136da](https://github.com/akveo/nebular/commit/da136da)), closes [#46](https://github.com/akveo/nebular/issues/46)
 * **accordion:** Eva styles ([#1362](https://github.com/akveo/nebular/issues/1362)) ([98a159c](https://github.com/akveo/nebular/commit/98a159c))
 * **actions:** Eva style ([#1397](https://github.com/akveo/nebular/issues/1397)) ([6399fab](https://github.com/akveo/nebular/commit/6399fab))
 * **alert:** Eva theme ([#1406](https://github.com/akveo/nebular/issues/1406)) ([8c6c677](https://github.com/akveo/nebular/commit/8c6c677))
@@ -258,10 +106,29 @@ For the time being Nebular doesn't have `ES2015` bundle and therefore can't be u
 * **user:** Eva style ([#1354](https://github.com/akveo/nebular/issues/1354)) ([2d05714](https://github.com/akveo/nebular/commit/2d05714))
 * specify next version in install instructions ([#1435](https://github.com/akveo/nebular/issues/1435)) ([99ca0c9](https://github.com/akveo/nebular/commit/99ca0c9))
 * update corporate theme ([#1434](https://github.com/akveo/nebular/issues/1434)) ([d564454](https://github.com/akveo/nebular/commit/d564454))
-
+* **docs:** add Eva section ([#1552](https://github.com/akveo/nebular/issues/1552)) ([1209d65](https://github.com/akveo/nebular/commit/1209d65))
+* **docs:** add routing loader ([#1533](https://github.com/akveo/nebular/issues/1533)) ([dd33a22](https://github.com/akveo/nebular/commit/dd33a22))
+* **schematics:** add dark theme ([#1534](https://github.com/akveo/nebular/issues/1534)) ([c5d15c6](https://github.com/akveo/nebular/commit/c5d15c6))
+* **typography:** specify body, paragraph and list styles ([#1546](https://github.com/akveo/nebular/issues/1546)) ([310127b](https://github.com/akveo/nebular/commit/310127b))
+* **select:** more border and icon theme properties ([#1468](https://github.com/akveo/nebular/issues/1468)) ([9e1c604](https://github.com/akveo/nebular/commit/9e1c604))
+* **bootstrap:** update nebular/bootstrap to Eva ([#1507](https://github.com/akveo/nebular/issues/1507)) ([2ff1171](https://github.com/akveo/nebular/commit/2ff1171))
+* **select, input:** add max width theme property ([#1480](https://github.com/akveo/nebular/issues/1480)) ([5a6d506](https://github.com/akveo/nebular/commit/5a6d506))
+* angular package format ([#1474](https://github.com/akveo/nebular/issues/1474)) ([bbed8c1](https://github.com/akveo/nebular/commit/bbed8c1))
+* **themes:** add new Dark theme! ([#1472](https://github.com/akveo/nebular/issues/1472)) ([3b5ad6c](https://github.com/akveo/nebular/commit/3b5ad6c))
 
 ### BREAKING CHANGES
 
+* Angular 8+ now required
+* **bootstrap:** Bootstrap checkbox and radio are removed now, use Nebular Checkbox and Nebular Radio with better theming support.
+* **theme:** The following sass mixins are removed: `nb-radial-gradient`, `nb-right-gradient`.
+* **theme:** Theme variables are refactored
+* **themes:** - remove `disabled` status for card
+- auth now uses `giant` size buttons and inputs
+* **themes:** - `nb-theme` function now throws an error if an unused variable is accessed
+- custom auth variables are removed and replaced with @nebular/theme variables
+- `nb-install` function moved into `@nebular/theme/styles/theming`
+- auth components now use `nb-icon` instead of icon css class
+- everything not mentioned in packages `public_api.ts` now private so direct imports from `@nebular/theme/*` will stop working.
 * **Popover:**
 'nbPopoverMode' input removed. Use 'nbPopoverTrigger' instead.
 NbPopoverDirective 'mode' property removed. Use 'trigger' instead.
@@ -1001,26 +868,6 @@ Renamed:
 - `popover-bg` -> `popover-background-color`
 - `popover-border` -> `popover-border-color`
 </details>
-
-
-
-<a name="4.0.0-beta.0"></a>
-# [4.0.0-beta.0](https://github.com/akveo/nebular/compare/v3.4.2...v4.0.0-beta.0) (2019-04-01)
-
-
-### Code Refactoring
-
-* **theme:** remove use of scss functions ([#1256](https://github.com/akveo/nebular/issues/1256)) ([fa8d87f](https://github.com/akveo/nebular/commit/fa8d87f)), closes [#1228](https://github.com/akveo/nebular/issues/1228)
-
-
-### Features
-
-* **icons:** new `nb-icon` component, icons library, and [@nebular](https://github.com/nebular)/eva-icons package ([#1319](https://github.com/akveo/nebular/issues/1319)) ([621f461](https://github.com/akveo/nebular/commit/621f461))
-* **theme:** css variables support ([#1257](https://github.com/akveo/nebular/issues/1257)) ([da136da](https://github.com/akveo/nebular/commit/da136da)), closes [#46](https://github.com/akveo/nebular/issues/46)
-
-
-### BREAKING CHANGES
-
 * **icons:** Starting from version 4.0, Nebular introduces new `nb-icon` component and `NbIconLibraries` service to host SVG and Font icon packs. As a breaking change, Nebular moves from `nebular-icons` package to much more popular [Eva Icons pack](https://akveo.github.io/eva-icons/) consisting of 480+ beautiful SVG icons. We believe this will bring more quality and variety to interfaces based on Nebular.
 
 Now all Nebular components internally use `<nb-icon></nb-icon>` component utilizing Eva Icons SVG icons. More details on [nb-icon](https://akveo.github.io/nebular/docs/components/icon) component.
@@ -1074,14 +921,15 @@ Please open an issue if you have any questions or having difficulties to migrate
 - tabs - remove gradient for tab bottom separator in cosmic theme
 - toastr - use `background-color` instead of the gradient in cosmic theme
 - text colors are now used from success/primary/warning/etc colors
-- add color palette instead of generating colors using scss-functions, an example for `primary`
-`color-primary-200`
-`color-primary-300`
-`color-primary-400`
-`color-primary-600`
-`color-primary-700`
 
-`create-colors-palette()` scss function that can be used during the theme installation process to generate palette automatically
+### Code Refactoring
+
+* **themes:** make map processing lazy, add variable existence check ([#1471](https://github.com/akveo/nebular/issues/1471)) ([48d8f03](https://github.com/akveo/nebular/commit/48d8f03))
+* **tabset:** remove shadow ([#1461](https://github.com/akveo/nebular/issues/1461)) ([2c11768](https://github.com/akveo/nebular/commit/2c11768))
+* **datepicker:** remove primary border ([#1466](https://github.com/akveo/nebular/issues/1466)) ([f722a48](https://github.com/akveo/nebular/commit/f722a48))
+* **overlay:** use full css property name ([#1403](https://github.com/akveo/nebular/issues/1403)) ([4133058](https://github.com/akveo/nebular/commit/4133058))
+* **theme:** remove use of scss functions ([#1256](https://github.com/akveo/nebular/issues/1256)) ([fa8d87f](https://github.com/akveo/nebular/commit/fa8d87f)), closes [#1228](https://github.com/akveo/nebular/issues/1228)
+* **theme:** remove use of scss functions ([#1256](https://github.com/akveo/nebular/issues/1256)) ([fa8d87f](https://github.com/akveo/nebular/commit/fa8d87f)), closes [#1228](https://github.com/akveo/nebular/issues/1228)
 
 
 
