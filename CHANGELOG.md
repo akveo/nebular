@@ -1,3 +1,30 @@
+<a name="4.0.0-rc.8"></a>
+# [4.0.0-rc.8](https://github.com/akveo/nebular/compare/v4.0.0-rc.7...v4.0.0-rc.8) (2019-06-03)
+
+
+### Bug Fixes
+
+* **accordion:** fix incorrect accordion mapping ([#1535](https://github.com/akveo/nebular/issues/1535)) ([3a0382c](https://github.com/akveo/nebular/commit/3a0382c))
+* **bootstrap:** button group, modal and input ([#1540](https://github.com/akveo/nebular/issues/1540)) ([2a177c0](https://github.com/akveo/nebular/commit/2a177c0))
+* add missing public api entries ([#1545](https://github.com/akveo/nebular/issues/1545)) ([fe56655](https://github.com/akveo/nebular/commit/fe56655))
+* **docs:** change features section background ([#1556](https://github.com/akveo/nebular/issues/1556)) ([c33442b](https://github.com/akveo/nebular/commit/c33442b))
+* **docs:** disable custom outline as it breaks Eva components ([#1537](https://github.com/akveo/nebular/issues/1537)) ([c48caaf](https://github.com/akveo/nebular/commit/c48caaf))
+* **docs:** example row helper ([#1548](https://github.com/akveo/nebular/issues/1548)) ([c0d404f](https://github.com/akveo/nebular/commit/c0d404f))
+* **docs:** fix component styles table ([#1543](https://github.com/akveo/nebular/issues/1543)) ([ab166fd](https://github.com/akveo/nebular/commit/ab166fd))
+* **docs:** fix transparent background color ([#1536](https://github.com/akveo/nebular/issues/1536)) ([0aed7b6](https://github.com/akveo/nebular/commit/0aed7b6))
+* **docs:** update changed component theme vars link ([#1550](https://github.com/akveo/nebular/issues/1550)) ([ae73257](https://github.com/akveo/nebular/commit/ae73257))
+* **radio:** prevent circles distraction ([#1549](https://github.com/akveo/nebular/issues/1549)) ([abb50df](https://github.com/akveo/nebular/commit/abb50df))
+
+
+### Features
+
+* **docs:** add Eva section ([#1552](https://github.com/akveo/nebular/issues/1552)) ([1209d65](https://github.com/akveo/nebular/commit/1209d65))
+* **docs:** add routing loader ([#1533](https://github.com/akveo/nebular/issues/1533)) ([dd33a22](https://github.com/akveo/nebular/commit/dd33a22))
+* **schematics:** add dark theme ([#1534](https://github.com/akveo/nebular/issues/1534)) ([c5d15c6](https://github.com/akveo/nebular/commit/c5d15c6))
+* **typography:** specify body, paragraph and list styles ([#1546](https://github.com/akveo/nebular/issues/1546)) ([310127b](https://github.com/akveo/nebular/commit/310127b))
+
+
+
 <a name="4.0.0-rc.7"></a>
 # [4.0.0-rc.7](https://github.com/akveo/nebular/compare/v4.0.0-rc.6...v4.0.0-rc.7) (2019-05-29)
 
