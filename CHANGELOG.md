@@ -194,7 +194,6 @@ Please open an issue if you have any questions or having difficulties to migrate
 * **datepicker:** remove primary border ([#1466](https://github.com/akveo/nebular/issues/1466)) ([f722a48](https://github.com/akveo/nebular/commit/f722a48))
 * **overlay:** use full css property name ([#1403](https://github.com/akveo/nebular/issues/1403)) ([4133058](https://github.com/akveo/nebular/commit/4133058))
 * **theme:** remove use of scss functions ([#1256](https://github.com/akveo/nebular/issues/1256)) ([fa8d87f](https://github.com/akveo/nebular/commit/fa8d87f)), closes [#1228](https://github.com/akveo/nebular/issues/1228)
-* **theme:** remove use of scss functions ([#1256](https://github.com/akveo/nebular/issues/1256)) ([fa8d87f](https://github.com/akveo/nebular/commit/fa8d87f)), closes [#1228](https://github.com/akveo/nebular/issues/1228)
 
 
 
