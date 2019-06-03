@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { NbTooltipModule } from '@nebular/theme';
+import { NbButtonModule, NbTooltipModule } from '@nebular/theme';
 import { TooltipRoutingModule } from './tooltip-routing.module';
 import { TooltipColorsComponent } from './tooltip-colors.component';
 import { TooltipPlacementsComponent } from './tooltip-placements.component';
@@ -13,6 +13,6 @@ import { TooltipWithIconComponent } from './tooltip-with-icon.component';
     TooltipShowcaseComponent,
     TooltipWithIconComponent,
   ],
-  imports: [ NbTooltipModule, TooltipRoutingModule ],
+  imports: [ NbButtonModule, NbTooltipModule, TooltipRoutingModule ],
 })
 export class TooltipModule {}

@@ -39,7 +39,7 @@ export class ChatSizesComponent {
           reply: true,
           user: {
             name: 'Bot',
-            avatar: 'https://i.ytimg.com/vi/Erqi5ckVoEo/hqdefault.jpg',
+            avatar: 'https://s3.amazonaws.com/pix.iemoji.com/images/emoji/apple/ios-12/256/robot-face.png',
           },
         },
       ],

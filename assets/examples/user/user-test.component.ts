@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { NbBadgeComponent } from '@nebular/theme';
 
 @Component({
   selector: 'nb-user-test',
@@ -58,8 +57,8 @@ import { NbBadgeComponent } from '@nebular/theme';
             name="Dmitry Nehaychik"
             title="Worker"
             badgeText="29"
-            [badgeStatus]="badge.STATUS_INFO"
-            [badgePosition]="badge.TOP_LEFT">
+            badgeStatus="info"
+            badgePosition="top left">
           </nb-user>
         </div>
         <div class="test-row">
@@ -69,8 +68,8 @@ import { NbBadgeComponent } from '@nebular/theme';
             title="Worker"
             showTitle="false"
             badgeText="29"
-            [badgeStatus]="badge.STATUS_SUCCESS"
-            [badgePosition]="badge.BOTTOM_RIGHT">
+            badgeStatus="success"
+            badgePosition="bottom right">
           </nb-user>
         </div>
         <div class="test-row">
@@ -80,8 +79,8 @@ import { NbBadgeComponent } from '@nebular/theme';
             name="Dmitry Nehaychik"
             title="Worker"
             badgeText="29"
-            [badgeStatus]="badge.STATUS_WARNING"
-            [badgePosition]="badge.BOTTOM_LEFT">
+            badgeStatus="warning"
+            badgePosition="bottom left">
           </nb-user>
         </div>
         <div class="test-row">
@@ -91,8 +90,8 @@ import { NbBadgeComponent } from '@nebular/theme';
             name="Dmitry Nehaychik"
             title="Worker"
             badgeText="29"
-            [badgeStatus]="badge.STATUS_DANGER"
-            [badgePosition]="badge.TOP_LEFT">
+            badgeStatus="danger"
+            badgePosition="top left">
           </nb-user>
         </div>
         <div class="test-row" id="base64-image">
@@ -100,14 +99,14 @@ import { NbBadgeComponent } from '@nebular/theme';
             [picture]="'data:image/png;base64,aaa'"></nb-user>
         </div>
         <div class="test-row">
-          <nb-user inverse
+          <nb-user
             size="large"
             picture="http://lorempixel.com/400/200/animals/"
             name="Dmitry Nehaychik"
             title="Worker"
             badgeText="29"
-            [badgeStatus]="badge.STATUS_DANGER"
-            [badgePosition]="badge.TOP_START">
+            badgeStatus="danger"
+            badgePosition="top start">
           </nb-user>
         </div>
       </nb-layout-column>
@@ -115,6 +114,4 @@ import { NbBadgeComponent } from '@nebular/theme';
   `,
 })
 export class UserTestComponent {
-
-  badge = NbBadgeComponent;
 }

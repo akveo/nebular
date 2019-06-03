@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostBinding } from '@angular/core';
 import { NbToastrService } from '@nebular/theme';
 
 @Component({
@@ -9,23 +9,21 @@ import { NbToastrService } from '@nebular/theme';
     <button nbButton status="warning" (click)="showToast('warning')">Warning</button>
     <button nbButton status="primary" (click)="showToast('primary')">Primary</button>
     <button nbButton status="danger" (click)="showToast('danger')">Danger</button>
-    <button nbButton status="default" (click)="showToast('default')">Default</button>
+    <button nbButton (click)="showToast('default')">Default</button>
   `,
   styles: [
       `
-      /deep/ nb-layout-column {
+      ::ng-deep nb-layout-column {
         height: 80vw;
-      }
-
-      button {
-        margin: 1rem;
       }
     `,
   ],
 })
-
 export class ToastrStatusesComponent {
   private index: number = 0;
+
+  @HostBinding('class')
+  classes = 'example-items-rows';
 
   constructor(private toastrService: NbToastrService) {
   }

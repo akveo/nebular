@@ -7,12 +7,13 @@ import { SelectGroupsComponent } from './select-groups.component';
 import { SelectHeroComponent } from './select-hero.component';
 import { SelectLabelShowcaseComponent } from './select-label.component';
 import { SelectMultipleComponent } from './select-multiple.component';
-import { SelectOutlineComponent } from './select-outline.component';
+import { SelectFilledComponent } from './select-filled.component';
 import { SelectPlaceholderComponent } from './select-placeholder.component';
 import { SelectShapeComponent } from './select-shapes.component';
 import { SelectShowcaseComponent } from './select-showcase.component';
 import { SelectSizesComponent } from './select-sizes.component';
 import { SelectStatusComponent } from './select-status.component';
+import { SelectInteractiveComponent } from './select-interactive.component';
 
 const routes: Route[] = [
   {
@@ -44,8 +45,8 @@ const routes: Route[] = [
     component: SelectMultipleComponent,
   },
   {
-    path: 'select-outline.component',
-    component: SelectOutlineComponent,
+    path: 'select-filled.component',
+    component: SelectFilledComponent,
   },
   {
     path: 'select-placeholder.component',
@@ -66,6 +67,10 @@ const routes: Route[] = [
   {
     path: 'select-status.component',
     component: SelectStatusComponent,
+  },
+  {
+    path: 'select-interactive.component',
+    component: SelectInteractiveComponent,
   },
 ];
 

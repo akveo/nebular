@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { NbInputModule, NbWindowModule } from '@nebular/theme';
+import { NbButtonModule, NbInputModule, NbWindowModule } from '@nebular/theme';
 import { WindowRoutingModule } from './window-routing.module';
 import { TemplateWindowComponent } from './template-window.component';
 import { WindowShowcaseComponent } from './window-showcase.component';
@@ -15,8 +15,9 @@ import { FormComponent } from './components/form.component';
   ],
   imports: [
     NbWindowModule.forRoot(),
-    WindowRoutingModule,
+    NbButtonModule,
     NbInputModule,
+    WindowRoutingModule,
   ],
   entryComponents: [ FormComponent ],
 })

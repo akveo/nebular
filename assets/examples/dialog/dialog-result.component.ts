@@ -5,18 +5,14 @@ import { DialogNamePromptComponent } from './components/name-prompt-dialog.compo
 @Component({
   selector: 'nb-dialog-result',
   template: `
-    <button nbButton hero status="primary" (click)="open()">Enter Name</button>
+    <button nbButton status="primary" (click)="open()">Enter Name</button>
     <br>
-    <h3>Names:</h3>
+    <h3 class="h5">Names:</h3>
     <ul>
       <li *ngFor="let name of names">{{ name }}</li>
     </ul>
   `,
-  styles: [`
-    /deep/ nb-layout-column {
-      height: 80vw;
-    }
-  `],
+  styleUrls: ['./dialog-common.scss'],
 })
 export class DialogResultComponent {
   names: string[] = [];

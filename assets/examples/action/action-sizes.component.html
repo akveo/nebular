@@ -1,37 +1,12 @@
-<nb-card>
+<nb-card *ngFor="let size of sizes">
   <nb-card-body>
 
-    <nb-actions size="small">
-      <nb-action icon="nb-search"></nb-action>
-      <nb-action icon="nb-power-circled"></nb-action>
-      <nb-action icon="nb-person"></nb-action>
-      <nb-action icon="nb-home"></nb-action>
-    </nb-actions>
-
-  </nb-card-body>
-</nb-card>
-
-<nb-card>
-  <nb-card-body>
-
-    <nb-actions size="medium">
-      <nb-action icon="nb-search"></nb-action>
-      <nb-action icon="nb-power-circled"></nb-action>
-      <nb-action icon="nb-person"></nb-action>
-      <nb-action icon="nb-home"></nb-action>
-    </nb-actions>
-
-  </nb-card-body>
-</nb-card>
-
-<nb-card>
-  <nb-card-body>
-
-    <nb-actions size="large">
-      <nb-action icon="nb-search"></nb-action>
-      <nb-action icon="nb-power-circled"></nb-action>
-      <nb-action icon="nb-person"></nb-action>
-      <nb-action icon="nb-home"></nb-action>
+    <nb-actions [size]="size">
+      <nb-action icon="search-outline"></nb-action>
+      <nb-action icon="power-outline"></nb-action>
+      <nb-action icon="person-outline"></nb-action>
+      <nb-action icon="home-outline"></nb-action>
+      <nb-action>Some Action</nb-action>
     </nb-actions>
 
   </nb-card-body>

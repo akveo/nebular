@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { NbActionsModule, NbCardModule, NbLayoutModule, NbUserModule } from '@nebular/theme';
 import { ActionRoutingModule } from './action-routing.module';
@@ -21,6 +22,7 @@ import { ActionWidthComponent } from './action-width.component';
     NbCardModule,
     NbUserModule,
     ActionRoutingModule,
+    CommonModule,
   ],
 })
 export class ActionModule {}

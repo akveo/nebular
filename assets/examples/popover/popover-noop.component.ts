@@ -1,15 +1,10 @@
 import { Component, ViewChild } from '@angular/core';
 import { NbPopoverDirective } from '@nebular/theme';
 
-
 @Component({
   selector: 'nb-popover-noop',
   templateUrl: './popover-noop.component.html',
   styles: [`
-    :host {
-      display: block;
-      margin: 5rem;
-    }
     button {
       margin-right: 1rem;
       margin-top: 1rem;
@@ -18,7 +13,7 @@ import { NbPopoverDirective } from '@nebular/theme';
 })
 export class PopoverNoopComponent {
 
-  @ViewChild(NbPopoverDirective) popover: NbPopoverDirective;
+  @ViewChild(NbPopoverDirective, { static: false }) popover: NbPopoverDirective;
 
   open() {
     this.popover.show();
@@ -27,5 +22,4 @@ export class PopoverNoopComponent {
   close() {
     this.popover.hide();
   }
-
 }

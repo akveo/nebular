@@ -7,33 +7,13 @@ import { PopoverListComponent, PopoverTabsComponent } from './components/dynamic
 @Component({
   selector: 'nb-popover-dynamic',
   templateUrl: './popover-dynamic.component.html',
-  styles: [`
-    :host {
-      display: flex;
-      flex-direction: column;
-    }
-    .margin-bottom-0 {
-      margin-bottom: 0;
-    }
-    .section {
-      margin-bottom: 2rem;
-    }
-    .popover-container {
-      display: flex;
-      justify-content: center;
-      padding: 12rem;
-    }
-    button {
-      margin-right: 1rem;
-      margin-top: 1rem;
-    }
-  `],
+  styleUrls: ['./popover-dynamic.scss'],
 })
 export class PopoverDynamicComponent implements OnDestroy, AfterViewInit {
 
-  @ViewChild(NbPopoverDirective) popover: NbPopoverDirective;
-  @ViewChild('tabs', { read: TemplateRef }) templateTabs: TemplateRef<any>;
-  @ViewChild('list', { read: TemplateRef }) templateList: TemplateRef<any>;
+  @ViewChild(NbPopoverDirective, { static: false }) popover: NbPopoverDirective;
+  @ViewChild('tabs', { read: TemplateRef, static: false }) templateTabs: TemplateRef<any>;
+  @ViewChild('list', { read: TemplateRef, static: false }) templateList: TemplateRef<any>;
 
   componentList = PopoverListComponent;
   componentTabs = PopoverTabsComponent;

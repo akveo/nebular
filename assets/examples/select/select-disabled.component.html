@@ -1,38 +1,31 @@
-<nb-select disabled placeholder="Disabled">
-  <nb-option value="1">Option 1</nb-option>
-  <nb-option value="2">Option 2</nb-option>
-  <nb-option value="3">Option 3</nb-option>
-  <nb-option value="4">Option 4</nb-option>
-</nb-select>
+<nb-card size="medium">
+  <nb-card-body class="example-items-col">
+    <nb-select disabled placeholder="Disabled">
+      <nb-option value="1">Option 1</nb-option>
+      <nb-option value="2">Option 2</nb-option>
+      <nb-option value="3">Option 3</nb-option>
+      <nb-option value="4">Option 4</nb-option>
+    </nb-select>
 
-<nb-select placeholder="Disabled Items">
-  <nb-option value="1">Option 1</nb-option>
-  <nb-option value="2" disabled>Option 2</nb-option>
-  <nb-option value="3">Option 3</nb-option>
-  <nb-option value="4" disabled>Option 4</nb-option>
-</nb-select>
+    <nb-select placeholder="Disabled option">
+      <nb-option value="1">Option 1</nb-option>
+      <nb-option value="2" disabled>Option 2</nb-option>
+      <nb-option value="3">Option 3</nb-option>
+      <nb-option value="4" disabled>Option 4</nb-option>
+    </nb-select>
 
-<nb-select placeholder="Disabled Groups">
+    <nb-select placeholder="Disabled Groups">
 
-  <nb-option-group title="Group 1">
-    <nb-option value="1">Option 1</nb-option>
-    <nb-option value="2" disabled>Option 2</nb-option>
-    <nb-option value="3">Option 3</nb-option>
-    <nb-option value="4">Option 4</nb-option>
-  </nb-option-group>
+      <nb-option-group title="Group 1">
+        <nb-option value="1">Option 1</nb-option>
+        <nb-option value="2" disabled>Option 2</nb-option>
+      </nb-option-group>
 
-  <nb-option-group title="Group 2" disabled>
-    <nb-option value="21">Option 21</nb-option>
-    <nb-option value="22">Option 22</nb-option>
-    <nb-option value="23">Option 23</nb-option>
-    <nb-option value="24">Option 24</nb-option>
-  </nb-option-group>
+      <nb-option-group title="Disabled group" disabled>
+        <nb-option value="21">Option 21</nb-option>
+        <nb-option value="22">Option 22</nb-option>
+      </nb-option-group>
 
-  <nb-option-group title="Group 3">
-    <nb-option value="31">Option 31</nb-option>
-    <nb-option value="32">Option 32</nb-option>
-    <nb-option value="33">Option 33</nb-option>
-    <nb-option value="34">Option 34</nb-option>
-  </nb-option-group>
-
-</nb-select>
+    </nb-select>
+  </nb-card-body>
+</nb-card>

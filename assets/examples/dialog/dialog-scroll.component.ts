@@ -5,20 +5,10 @@ import { ScrollDialogComponent } from './components/scroll-dialog.component';
 @Component({
   selector: 'nb-dialog-scroll',
   template: `
-    <div class="btn-group btn-divided-group btn-outline-divided-group">
-      <button nbButton hero (click)="openWithScroll()">Open with scroll</button>
-      <button nbButton hero (click)="openWithoutScroll()">Open without scroll</button>
-    </div>
+    <button nbButton (click)="openWithScroll()">With scroll</button>
+    <button nbButton (click)="openWithoutScroll()">Without scroll</button>
   `,
-  styles: [`
-    /deep/ nb-layout-column {
-      height: 80vw;
-    }
-
-    button {
-      margin: 1rem;
-    }
-  `],
+  styleUrls: ['./dialog-common.scss'],
 })
 export class DialogScrollComponent {
   constructor(private dialogService: NbDialogService) {

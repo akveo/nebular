@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostBinding } from '@angular/core';
 import { NbToastrService } from '@nebular/theme';
 
 @Component({
@@ -6,23 +6,21 @@ import { NbToastrService } from '@nebular/theme';
   template: `
     <button nbButton (click)="showDefaultIcon()">With icon</button>
     <button nbButton (click)="showToast('')">Without icon</button>
-    <button nbButton (click)="showToast('nb-audio')">Custom icon</button>
+    <button nbButton (click)="showToast('headphones-outline')">Custom icon</button>
   `,
   styles: [
       `
-      /deep/ nb-layout-column {
+      ::ng-deep nb-layout-column {
         height: 80vw;
-      }
-
-      button {
-        margin: 1rem;
       }
     `,
   ],
 })
-
 export class ToastrIconComponent {
   private index: number = 0;
+
+  @HostBinding('class')
+  className = 'example-items-rows';
 
   constructor(private toastrService: NbToastrService) {
   }
@@ -32,6 +30,6 @@ export class ToastrIconComponent {
   }
 
   showToast(icon) {
-    this.toastrService.show('Message', `Toast: ${++this.index}`, { icon });
+    this.toastrService.show('Message', `Toast: ${++this.index}`, { icon, iconPack: 'eva' });
   }
 }

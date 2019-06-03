@@ -40,23 +40,23 @@ export class MenuTestComponent implements OnInit, OnDestroy {
     {
       title: 'Menu Items',
       group: true,
-      icon: 'nb-keypad',
+      icon: 'home-outline',
     },
     {
       title: 'Menu #1',
       link: '/menu/menu-test.component/1',
-      icon: 'nb-keypad',
+      icon: 'home-outline',
       queryParams: { param: 1 },
       fragment: '#fragment',
     },
     {
       title: 'Menu #2',
       link: '/menu/menu-test.component/2',
-      icon: 'nb-keypad',
+      icon: 'home-outline',
     },
     {
       title: 'Menu #3',
-      icon: 'nb-keypad',
+      icon: 'home-outline',
       children: [
         {
           title: 'Menu #3.1',
@@ -94,19 +94,19 @@ export class MenuTestComponent implements OnInit, OnDestroy {
     {
       title: 'Menu Items',
       group: true,
-      icon: 'nb-keypad',
+      icon: 'home-outline',
     },
     {
       title: 'Menu #1',
       link: '/menu/menu-test.component/1',
-      icon: 'nb-keypad',
+      icon: 'home-outline',
       queryParams: { param: 1 },
       fragment: '#fragment',
     },
     {
       title: 'Menu #2',
       link: '/menu/menu-test.component/2',
-      icon: 'nb-keypad',
+      icon: 'home-outline',
     },
   ];
   secondMenuItems = [
@@ -117,19 +117,19 @@ export class MenuTestComponent implements OnInit, OnDestroy {
     {
       title: 'Menu #1',
       link: '/menu/menu-test.component/1',
-      icon: 'nb-keypad',
+      icon: 'home-outline',
       pathMatch: 'partial',
     },
     {
       title: 'Menu #12 + fragment',
       link: '/menu/menu-test.component/12',
       fragment: 'fragment',
-      icon: 'nb-keypad',
+      icon: 'home-outline',
     },
     {
       title: 'Menu #3',
       link: '/menu/menu-test.component/3',
-      icon: 'nb-keypad',
+      icon: 'home-outline',
     },
   ];
   thirdMenuItems = [
@@ -181,7 +181,7 @@ export class MenuTestComponent implements OnInit, OnDestroy {
       [
         {
           title: 'Menu #3',
-          icon: 'nb-keypad',
+          icon: 'home-outline',
           children: [
             {
               title: 'Menu #3.1',

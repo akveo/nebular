@@ -11,26 +11,17 @@ import { FormControl } from '@angular/forms';
 @Component({
   selector: 'nb-datepicker-forms',
   template: `
-    <div>
-      <input nbInput placeholder="Form Picker" [nbDatepicker]="formcontrol" [formControl]="formControl">
-      <nb-datepicker #formcontrol></nb-datepicker>
+    <nb-card size="large">
+      <nb-card-body class="two-inputs">
+        <input nbInput placeholder="Pick Date" [nbDatepicker]="formcontrol" [formControl]="formControl">
+        <nb-datepicker #formcontrol></nb-datepicker>
 
-      <input nbInput placeholder="Form Picker" [nbDatepicker]="ngmodel" [(ngModel)]="ngModelDate">
-      <nb-datepicker #ngmodel></nb-datepicker>
-    </div>
+        <input nbInput placeholder="Form Picker" [nbDatepicker]="ngmodel" [(ngModel)]="ngModelDate">
+        <nb-datepicker #ngmodel></nb-datepicker>
+      </nb-card-body>
+    </nb-card>
   `,
-  styles: [`
-    :host {
-      display: flex;
-      justify-content: center;
-      align-content: center;
-      height: 40rem;
-    }
-
-    :host input {
-      width: 21.875rem;
-    }
-  `],
+  styleUrls: ['./datepicker-example.scss'],
 })
 export class DatepickerFormsComponent {
   formControl = new FormControl(new Date());

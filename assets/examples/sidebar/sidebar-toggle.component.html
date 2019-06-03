@@ -1,11 +1,11 @@
 <nb-layout>
   <nb-layout-header fixed>
-    <button nbButton status="success" size="xsmall" (click)="toggle()">Toggle</button>
-    <button nbButton status="info" size="xsmall" (click)="toggleCompact()">Toggle Compact</button>
+    <button nbButton status="success" size="tiny" (click)="toggle()">Toggle</button>
+    <button nbButton status="info" size="tiny" (click)="toggleCompact()">Toggle Compact</button>
   </nb-layout-header>
 
   <nb-sidebar tag="left"></nb-sidebar>
   <nb-sidebar right tag="right"></nb-sidebar>
 
-  <nb-layout-column>Layout Content</nb-layout-column>
+  <nb-layout-column class="colored-column-warning">Layout Content</nb-layout-column>
 </nb-layout>

@@ -5,7 +5,7 @@ import { NewsPost } from '../news.service';
   selector: 'nb-news-post',
   template: `
     <article>
-      <h2>{{post.title}}</h2>
+      <h2 class="h5">{{post.title}}</h2>
       <p>{{post.text}}</p>
       <a [attr.href]="post.link">Read full article</a>
     </article>
