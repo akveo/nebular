@@ -42,6 +42,8 @@ import { convertToBoolProperty } from '../helpers';
  *
  * checkbox-height:
  * checkbox-width:
+ * checkbox-background-color:
+ * checkbox-border-color:
  * checkbox-border-style:
  * checkbox-border-width:
  * checkbox-border-radius:
@@ -64,7 +66,7 @@ import { convertToBoolProperty } from '../helpers';
  * checkbox-primary-indeterminate-background-color:
  * checkbox-primary-indeterminate-border-color:
  * checkbox-primary-indeterminate-checkmark-color:
- * checkbox-primary-focus-background-color:
+ * checkbox-primary-focus-border-color:
  * checkbox-primary-hover-background-color:
  * checkbox-primary-hover-border-color:
  * checkbox-primary-active-background-color:
@@ -77,7 +79,7 @@ import { convertToBoolProperty } from '../helpers';
  * checkbox-success-indeterminate-background-color:
  * checkbox-success-indeterminate-border-color:
  * checkbox-success-indeterminate-checkmark-color:
- * checkbox-success-focus-background-color:
+ * checkbox-success-focus-border-color:
  * checkbox-success-hover-background-color:
  * checkbox-success-hover-border-color:
  * checkbox-success-active-background-color:
@@ -90,7 +92,7 @@ import { convertToBoolProperty } from '../helpers';
  * checkbox-warning-indeterminate-background-color:
  * checkbox-warning-indeterminate-border-color:
  * checkbox-warning-indeterminate-checkmark-color:
- * checkbox-warning-focus-background-color:
+ * checkbox-warning-focus-border-color:
  * checkbox-warning-hover-background-color:
  * checkbox-warning-hover-border-color:
  * checkbox-warning-active-background-color:
@@ -103,7 +105,7 @@ import { convertToBoolProperty } from '../helpers';
  * checkbox-danger-indeterminate-background-color:
  * checkbox-danger-indeterminate-border-color:
  * checkbox-danger-indeterminate-checkmark-color:
- * checkbox-danger-focus-background-color:
+ * checkbox-danger-focus-border-color:
  * checkbox-danger-hover-background-color:
  * checkbox-danger-hover-border-color:
  * checkbox-danger-active-background-color:
@@ -116,7 +118,7 @@ import { convertToBoolProperty } from '../helpers';
  * checkbox-info-indeterminate-background-color:
  * checkbox-info-indeterminate-border-color:
  * checkbox-info-indeterminate-checkmark-color:
- * checkbox-info-focus-background-color:
+ * checkbox-info-focus-border-color:
  * checkbox-info-hover-background-color:
  * checkbox-info-hover-border-color:
  * checkbox-info-active-background-color:

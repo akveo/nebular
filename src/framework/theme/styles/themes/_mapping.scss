@@ -859,7 +859,7 @@ $eva-mapping: (
 
   checkbox-height: 1.125rem,
   checkbox-width: 1.125rem,
-  checkbox-background-color: background-basic-color-2,
+  checkbox-background-color: background-basic-color-3,
   checkbox-border-color: border-basic-color-4,
   checkbox-border-style: solid,
   checkbox-border-width: 1px,
@@ -872,8 +872,8 @@ $eva-mapping: (
   checkbox-text-font-weight: text-subtitle-2-font-weight,
   checkbox-text-line-height: text-subtitle-2-line-height,
 
-  checkbox-disabled-background-color: background-basic-color-3,
-  checkbox-disabled-border-color: border-basic-color-4,
+  checkbox-disabled-background-color: background-basic-color-2,
+  checkbox-disabled-border-color: border-basic-color-3,
   checkbox-disabled-checkmark-color: background-basic-color-1,
   checkbox-disabled-text-color: text-disabled-color,
 
@@ -1171,15 +1171,20 @@ $eva-mapping: (
   accordion-header-border-width: 1px,
   accordion-item-background-color: background-basic-color-1,
   accordion-item-text-color: text-basic-color,
-  accordion-item-text-font-family: text-paragraph-font-weight,
-  accordion-item-text-font-size: text-paragraph-font-family,
-  accordion-item-text-font-weight: text-paragraph-font-size,
+  accordion-item-text-font-family: text-paragraph-font-family,
+  accordion-item-text-font-size: text-paragraph-font-size,
+  accordion-item-text-font-weight: text-paragraph-font-weight,
   accordion-item-text-line-height: text-paragraph-line-height,
 
   list-item-divider-color: divider-color,
   list-item-divider-style: divider-style,
   list-item-divider-width: divider-width,
   list-item-padding: 1rem,
+  list-item-text-color: text-basic-color,
+  list-item-font-family: text-paragraph-font-family,
+  list-item-font-size: text-paragraph-font-size,
+  list-item-font-weight: text-paragraph-font-weight,
+  list-item-line-height: text-paragraph-line-height,
 
   calendar-width: 21.875rem,
   calendar-body-height: 25.625rem,
@@ -1327,6 +1332,7 @@ $eva-mapping: (
   select-outline-border-color: border-basic-color-3,
   select-outline-border-style: solid,
   select-outline-border-width: 1px,
+  select-outline-icon-color: text-basic-color,
   select-outline-text-color: text-basic-color,
   select-outline-placeholder-text-color: text-hint-color,
 
@@ -1334,6 +1340,7 @@ $eva-mapping: (
   select-outline-hover-border-color: color-primary-hover,
   select-outline-disabled-background-color: background-basic-color-2,
   select-outline-disabled-border-color: border-basic-color-2,
+  select-outline-disabled-icon-color: text-disabled-color,
   select-outline-disabled-text-color: text-disabled-color,
 
   select-outline-tiny-padding: 0.1875rem 1.125rem,
@@ -1373,16 +1380,33 @@ $eva-mapping: (
   select-option-outline-large-padding: select-outline-large-padding,
   select-option-outline-giant-padding: select-outline-giant-padding,
 
+  select-outline-adjacent-border-color: select-outline-border-color,
+  select-outline-adjacent-border-style: select-outline-border-style,
+  select-outline-adjacent-border-width: select-outline-border-width,
+  select-outline-primary-adjacent-border-color: select-outline-primary-border-color,
+  select-outline-success-adjacent-border-color: select-outline-success-border-color,
+  select-outline-info-adjacent-border-color: select-outline-info-border-color,
+  select-outline-warning-adjacent-border-color: select-outline-warning-border-color,
+  select-outline-danger-adjacent-border-color: select-outline-danger-border-color,
+
   select-group-option-outline-tiny-start-padding: 1.25rem,
   select-group-option-outline-small-start-padding: 1.75rem,
   select-group-option-outline-medium-start-padding: 2.25rem,
   select-group-option-outline-large-start-padding: 2.25rem,
   select-group-option-outline-giant-start-padding: 2.75rem,
 
+  select-options-list-outline-border-color: border-primary-color-2,
+  select-options-list-outline-primary-border-color: color-primary-500,
+  select-options-list-outline-success-border-color: color-success-500,
+  select-options-list-outline-info-border-color: color-info-500,
+  select-options-list-outline-warning-border-color: color-warning-500,
+  select-options-list-outline-danger-border-color: color-danger-500,
+
   select-filled-background-color: background-basic-color-2,
   select-filled-border-color: border-basic-color-3,
   select-filled-border-style: solid,
   select-filled-border-width: 1px,
+  select-filled-icon-color: text-basic-color,
   select-filled-text-color: text-basic-color,
   select-filled-placeholder-text-color: text-basic-color,
 
@@ -1390,6 +1414,7 @@ $eva-mapping: (
   select-filled-hover-border-color: color-primary-hover,
   select-filled-disabled-background-color: background-basic-color-2,
   select-filled-disabled-border-color: border-basic-color-2,
+  select-filled-disabled-icon-color: text-disabled-color,
   select-filled-disabled-text-color: text-disabled-color,
 
   select-filled-tiny-padding: 0.1875rem 1.125rem,
@@ -1400,6 +1425,7 @@ $eva-mapping: (
 
   select-filled-primary-background-color: color-primary-default,
   select-filled-primary-border-color: color-primary-default,
+  select-filled-primary-icon-color: text-control-color,
   select-filled-primary-text-color: text-control-color,
   select-filled-primary-placeholder-text-color: text-control-color,
 
@@ -1409,10 +1435,12 @@ $eva-mapping: (
   select-filled-primary-hover-border-color: color-primary-hover,
   select-filled-primary-disabled-background-color: background-basic-color-2,
   select-filled-primary-disabled-border-color: color-primary-disabled,
+  select-filled-primary-disabled-icon-color: text-primary-disabled-color,
   select-filled-primary-disabled-text-color: text-primary-disabled-color,
 
   select-filled-success-background-color: color-success-default,
   select-filled-success-border-color: color-success-default,
+  select-filled-success-icon-color: text-control-color,
   select-filled-success-text-color: text-control-color,
   select-filled-success-placeholder-text-color: text-control-color,
 
@@ -1422,10 +1450,12 @@ $eva-mapping: (
   select-filled-success-hover-border-color: color-success-hover,
   select-filled-success-disabled-background-color: background-basic-color-2,
   select-filled-success-disabled-border-color: color-success-disabled,
+  select-filled-success-disabled-icon-color: text-success-disabled-color,
   select-filled-success-disabled-text-color: text-success-disabled-color,
 
   select-filled-info-background-color: color-info-default,
   select-filled-info-border-color: color-info-default,
+  select-filled-info-icon-color: text-control-color,
   select-filled-info-text-color: text-control-color,
   select-filled-info-placeholder-text-color: text-control-color,
 
@@ -1435,10 +1465,12 @@ $eva-mapping: (
   select-filled-info-hover-border-color: color-info-hover,
   select-filled-info-disabled-background-color: background-basic-color-2,
   select-filled-info-disabled-border-color: color-info-disabled,
+  select-filled-info-disabled-icon-color: text-info-disabled-color,
   select-filled-info-disabled-text-color: text-info-disabled-color,
 
   select-filled-warning-background-color: color-warning-default,
   select-filled-warning-border-color: color-warning-default,
+  select-filled-warning-icon-color: text-control-color,
   select-filled-warning-text-color: text-control-color,
   select-filled-warning-placeholder-text-color: text-control-color,
 
@@ -1448,10 +1480,12 @@ $eva-mapping: (
   select-filled-warning-hover-border-color: color-warning-hover,
   select-filled-warning-disabled-background-color: background-basic-color-2,
   select-filled-warning-disabled-border-color: color-warning-disabled,
+  select-filled-warning-disabled-icon-color: text-warning-disabled-color,
   select-filled-warning-disabled-text-color: text-warning-disabled-color,
 
   select-filled-danger-background-color: color-danger-default,
   select-filled-danger-border-color: color-danger-default,
+  select-filled-danger-icon-color: text-control-color,
   select-filled-danger-text-color: text-control-color,
   select-filled-danger-placeholder-text-color: text-control-color,
 
@@ -1461,6 +1495,7 @@ $eva-mapping: (
   select-filled-danger-hover-border-color: color-danger-hover,
   select-filled-danger-disabled-background-color: background-basic-color-2,
   select-filled-danger-disabled-border-color: color-danger-disabled,
+  select-filled-danger-disabled-icon-color: text-danger-disabled-color,
   select-filled-danger-disabled-text-color: text-danger-disabled-color,
 
   select-option-filled-tiny-padding: select-filled-tiny-padding,
@@ -1474,16 +1509,25 @@ $eva-mapping: (
   select-option-filled-giant-padding: select-filled-giant-padding,
   select-group-option-filled-giant-padding-start: 2.75rem,
 
+  select-options-list-filled-border-color: border-primary-color-2,
+  select-options-list-filled-primary-border-color: color-primary-500,
+  select-options-list-filled-success-border-color: color-success-500,
+  select-options-list-filled-info-border-color: color-info-500,
+  select-options-list-filled-warning-border-color: color-warning-500,
+  select-options-list-filled-danger-border-color: color-danger-500,
+
   select-hero-background-color: background-basic-color-2,
   select-hero-border-color: border-basic-color-3,
   select-hero-border-style: solid,
   select-hero-border-width: 0,
+  select-hero-icon-color: text-basic-color,
   select-hero-text-color: text-basic-color,
   select-hero-placeholder-text-color: text-basic-color,
 
   select-hero-focus-border-color: color-primary-focus,
   select-hero-hover-border-color: color-primary-hover,
   select-hero-disabled-background-color: background-basic-color-2,
+  select-hero-disabled-icon-color: text-disabled-color,
   select-hero-disabled-text-color: text-disabled-color,
 
   select-hero-tiny-padding: 0.1875rem 1.125rem,
@@ -1494,6 +1538,7 @@ $eva-mapping: (
 
   select-hero-primary-left-background-color: color-primary-400,
   select-hero-primary-right-background-color: color-primary-default,
+  select-hero-primary-icon-color: text-control-color,
   select-hero-primary-text-color: text-control-color,
   select-hero-primary-placeholder-text-color: text-control-color,
 
@@ -1502,10 +1547,12 @@ $eva-mapping: (
   select-hero-primary-hover-left-background-color: color-primary-300,
   select-hero-primary-hover-right-background-color: color-primary-400,
   select-hero-primary-disabled-background-color: background-basic-color-2,
+  select-hero-primary-disabled-icon-color: text-primary-disabled-color,
   select-hero-primary-disabled-text-color: text-primary-disabled-color,
 
   select-hero-success-left-background-color: color-success-400,
   select-hero-success-right-background-color: color-success-default,
+  select-hero-success-icon-color: text-control-color,
   select-hero-success-text-color: text-control-color,
   select-hero-success-placeholder-text-color: text-control-color,
 
@@ -1514,10 +1561,12 @@ $eva-mapping: (
   select-hero-success-hover-left-background-color: color-success-300,
   select-hero-success-hover-right-background-color: color-success-400,
   select-hero-success-disabled-background-color: background-basic-color-2,
+  select-hero-success-disabled-icon-color: text-success-disabled-color,
   select-hero-success-disabled-text-color: text-success-disabled-color,
 
   select-hero-info-left-background-color: color-info-400,
   select-hero-info-right-background-color: color-info-default,
+  select-hero-info-icon-color: text-control-color,
   select-hero-info-text-color: text-control-color,
   select-hero-info-placeholder-text-color: text-control-color,
 
@@ -1526,10 +1575,12 @@ $eva-mapping: (
   select-hero-info-hover-left-background-color: color-info-300,
   select-hero-info-hover-right-background-color: color-info-400,
   select-hero-info-disabled-background-color: background-basic-color-2,
+  select-hero-info-disabled-icon-color: text-info-disabled-color,
   select-hero-info-disabled-text-color: text-info-disabled-color,
 
   select-hero-warning-left-background-color: color-warning-400,
   select-hero-warning-right-background-color: color-warning-default,
+  select-hero-warning-icon-color: text-control-color,
   select-hero-warning-text-color: text-control-color,
   select-hero-warning-placeholder-text-color: text-control-color,
 
@@ -1538,10 +1589,12 @@ $eva-mapping: (
   select-hero-warning-hover-left-background-color: color-warning-300,
   select-hero-warning-hover-right-background-color: color-warning-400,
   select-hero-warning-disabled-background-color: background-basic-color-2,
+  select-hero-warning-disabled-icon-color: text-warning-disabled-color,
   select-hero-warning-disabled-text-color: text-warning-disabled-color,
 
   select-hero-danger-left-background-color: color-danger-400,
   select-hero-danger-right-background-color: color-danger-default,
+  select-hero-danger-icon-color: text-control-color,
   select-hero-danger-text-color: text-control-color,
   select-hero-danger-placeholder-text-color: text-control-color,
 
@@ -1550,6 +1603,7 @@ $eva-mapping: (
   select-hero-danger-hover-left-background-color: color-danger-300,
   select-hero-danger-hover-right-background-color: color-danger-400,
   select-hero-danger-disabled-background-color: background-basic-color-2,
+  select-hero-danger-disabled-icon-color: text-danger-disabled-color,
   select-hero-danger-disabled-text-color: text-danger-disabled-color,
 
   select-option-hero-tiny-padding: select-hero-tiny-padding,
@@ -1563,6 +1617,13 @@ $eva-mapping: (
   select-option-hero-giant-padding: select-hero-giant-padding,
   select-group-option-hero-giant-padding-start: 2.75rem,
 
+  select-options-list-hero-border-color: border-primary-color-2,
+  select-options-list-hero-primary-border-color: color-primary-500,
+  select-options-list-hero-success-border-color: color-success-500,
+  select-options-list-hero-info-border-color: color-info-500,
+  select-options-list-hero-warning-border-color: color-warning-500,
+  select-options-list-hero-danger-border-color: color-danger-500,
+
   datepicker-text-color: text-basic-color,
   datepicker-background-color: background-basic-color-1,
   datepicker-border-color: background-basic-color-1,
@@ -1574,7 +1635,7 @@ $eva-mapping: (
 
   radio-width: 1.125rem,
   radio-height: 1.125rem,
-  radio-background-color: background-basic-color-2,
+  radio-background-color: background-basic-color-3,
   radio-border-color: border-basic-color-4,
   radio-border-style: solid,
   radio-border-width: 1px,
@@ -1586,7 +1647,8 @@ $eva-mapping: (
   radio-outline-color: outline-color,
   radio-outline-width: outline-width,
 
-  radio-disabled-border-color: border-basic-color-4,
+  radio-disabled-background-color: background-basic-color-2,
+  radio-disabled-border-color: border-basic-color-3,
   radio-disabled-text-color: text-disabled-color,
   radio-disabled-inner-circle-color: background-basic-color-4,
 

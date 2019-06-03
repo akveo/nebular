@@ -94,6 +94,7 @@ import { convertToBoolProperty } from '../helpers';
  * alert-accent-success-color:
  * alert-accent-warning-color:
  * alert-accent-danger-color:
+ * alert-outline-width:
  * alert-outline-primary-color:
  * alert-outline-info-color:
  * alert-outline-success-color:

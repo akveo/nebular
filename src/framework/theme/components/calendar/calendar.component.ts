@@ -94,6 +94,7 @@ import { NbCalendarCell, NbCalendarSize, NbCalendarViewMode } from '../calendar-
  * calendar-header-sub-title-text-line-height:
  * calendar-navigation-button-width:
  * calendar-cell-inactive-text-color:
+ * calendar-cell-in-range-background-color:
  * calendar-cell-disabled-background-color:
  * calendar-cell-disabled-text-color:
  * calendar-cell-selected-background-color:
@@ -129,7 +130,6 @@ import { NbCalendarCell, NbCalendarSize, NbCalendarViewMode } from '../calendar-
  * calendar-weekday-text-font-weight:
  * calendar-weekday-text-line-height:
  * calendar-weekday-holiday-text-color:
- * calendar-cell-in-range-background-color:
  * calendar-large-width:
  * calendar-large-body-height:
  * calendar-day-cell-large-width:

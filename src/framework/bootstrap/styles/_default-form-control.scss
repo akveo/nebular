@@ -23,25 +23,57 @@
 }
 
 @mixin form-control-success() {
-  &, &:focus {
-    border-color: nb-theme(form-control-success-border-color);
+  & {
+    border-color: nb-theme(input-success-border-color);
+  }
+
+  &:focus {
+    border-color: nb-theme(input-success-focus-border-color);
+  }
+
+  &:hover {
+    border-color: nb-theme(input-success-hover-border-color);
   }
 }
 
 @mixin form-control-info() {
-  &, &:focus {
-    border-color: nb-theme(form-control-info-border-color);
+  & {
+    border-color: nb-theme(input-info-border-color);
+  }
+
+  &:focus {
+    border-color: nb-theme(input-info-focus-border-color);
+  }
+
+  &:hover {
+    border-color: nb-theme(input-info-hover-border-color);
   }
 }
 
 @mixin form-control-danger() {
-  &, &:focus {
-    border-color: nb-theme(form-control-danger-border-color);
+  & {
+    border-color: nb-theme(input-danger-border-color);
+  }
+
+  &:focus {
+    border-color: nb-theme(input-danger-focus-border-color);
+  }
+
+  &:hover {
+    border-color: nb-theme(input-danger-hover-border-color);
   }
 }
 
 @mixin form-control-warning() {
-  &, &:focus {
-    border-color: nb-theme(form-control-warning-border-color);
+  & {
+    border-color: nb-theme(input-warning-border-color);
+  }
+
+  &:focus {
+    border-color: nb-theme(input-warning-focus-border-color);
+  }
+
+  &:hover {
+    border-color: nb-theme(input-warning-hover-border-color);
   }
 }

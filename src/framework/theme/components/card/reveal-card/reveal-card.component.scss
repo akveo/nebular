@@ -7,7 +7,7 @@
       top: 0;
       transition: none;
 
-      /deep/ nb-card-back {
+      ::ng-deep nb-card-back {
         top: 0;
       }
     }
@@ -16,7 +16,7 @@
     }
   }
 
-  /deep/ nb-card-front {
+  ::ng-deep nb-card-front {
     display: block;
     height: 100%;
   }
@@ -29,7 +29,7 @@
     overflow: hidden;
     transition: top 0s 0.5s;
 
-    /deep/ nb-card-back {
+    ::ng-deep nb-card-back {
       position: absolute;
       left: 0;
       top: 100%;

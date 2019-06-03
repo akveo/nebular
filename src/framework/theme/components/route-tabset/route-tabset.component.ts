@@ -44,18 +44,38 @@ import { convertToBoolProperty } from '../helpers';
  *
  * @styles
  *
- * route-tabs-font-family:
- * route-tabs-font-size:
- * route-tabs-active-bg:
- * route-tabs-active-font-weight:
- * route-tabs-padding:
- * route-tabs-header-bg:
- * route-tabs-separator:
- * route-tabs-fg:
- * route-tabs-fg-heading:
- * route-tabs-bg:
- * route-tabs-selected:
- * route-tabs-icon-only-max-width:
+ * route-tabset-background-color:
+ * route-tabset-border-radius:
+ * route-tabset-shadow:
+ * route-tabset-tab-background-color:
+ * route-tabset-tab-padding:
+ * route-tabset-tab-text-color:
+ * route-tabset-tab-text-font-family:
+ * route-tabset-tab-text-font-size:
+ * route-tabset-tab-text-font-weight:
+ * route-tabset-tab-text-line-height:
+ * route-tabset-tab-text-transform:
+ * route-tabset-tab-underline-width:
+ * route-tabset-tab-underline-color:
+ * route-tabset-tab-active-background-color:
+ * route-tabset-tab-active-text-color:
+ * route-tabset-tab-active-underline-color:
+ * route-tabset-tab-focus-background-color:
+ * route-tabset-tab-focus-text-color:
+ * route-tabset-tab-focus-underline-color:
+ * route-tabset-tab-hover-background-color:
+ * route-tabset-tab-hover-text-color:
+ * route-tabset-tab-hover-underline-color:
+ * route-tabset-tab-disabled-background-color:
+ * route-tabset-tab-disabled-text-color:
+ * route-tabset-tab-disabled-underline-color:
+ * route-tabset-divider-color:
+ * route-tabset-divider-style:
+ * route-tabset-divider-width:
+ * route-tabset-scrollbar-color:
+ * route-tabset-scrollbar-background-color:
+ * route-tabset-scrollbar-width:
+ * route-tabset-tab-text-hide-breakpoint:
  */
 @Component({
   selector: 'nb-route-tabset',

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostBinding } from '@angular/core';
 import { NbToastrService } from '@nebular/theme';
 
 @Component({
@@ -9,17 +9,17 @@ import { NbToastrService } from '@nebular/theme';
   `,
   styles: [
       `
-      /deep/ nb-layout-column {
+      ::ng-deep nb-layout-column {
         height: 80vw;
-      }
-
-      button {
-        margin: 1rem;
       }
     `,
   ],
 })
 export class ToastrPreventDuplicatesComponent {
+
+  @HostBinding('class')
+  classes = 'example-items-rows';
+
   constructor(private toastrService: NbToastrService) {
   }
 

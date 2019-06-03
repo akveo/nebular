@@ -8,6 +8,7 @@
 
 :host {
   display: block;
+  position: relative;
 
   label {
     display: inline-flex;
@@ -17,20 +18,17 @@
     align-items: center;
   }
 
-  .radio-circle {
+  .outer-circle,
+  .inner-circle {
     border-radius: 50%;
-    border-style: solid;
-    flex-shrink: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
   }
 
-  .radio-circle::before {
-    content: '';
-    border-radius: 50%;
-    height: 75%;
-    width: 75%;
+  .inner-circle {
+    transform: translateY(-50%) scale(0.65);
   }
 
   .text {

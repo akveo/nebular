@@ -6,13 +6,13 @@
 
 @import '../../../styles/core/mixins';
 
-/deep/ nb-layout.modal-move {
+::ng-deep nb-layout.modal-move {
   .layout {
     transition: transform 0.5s;
   }
 }
 
-/deep/ nb-layout.modal-move.with-search {
+::ng-deep nb-layout.modal-move.with-search {
   .layout {
     transform: scale3d(0.8, 0.8, 1);
     pointer-events: none;

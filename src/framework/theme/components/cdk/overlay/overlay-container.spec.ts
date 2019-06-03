@@ -8,7 +8,7 @@ import { NbComponentPortal, NbOverlayContainerComponent, NbOverlayModule } from 
   `,
 })
 export class NbOverlayContainerTestComponent {
-  @ViewChild(NbOverlayContainerComponent) overlayContainer: NbOverlayContainerComponent;
+  @ViewChild(NbOverlayContainerComponent, { static: false }) overlayContainer: NbOverlayContainerComponent;
 }
 
 @Component({

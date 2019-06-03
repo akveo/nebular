@@ -12,7 +12,7 @@ import { NbSidebarService } from '@nebular/theme';
   selector: 'nb-sidebar-test',
   styles: [
     `
-    :host /deep/ nb-layout-column {
+    :host ::ng-deep nb-layout-column {
       background-color: #76ecff;
     }
     `,

@@ -6,7 +6,7 @@ import { filter, map } from 'rxjs/operators';
   selector: 'nb-context-menu-click',
   templateUrl: './context-menu-click.component.html',
   styles: [`
-    :host nb-layout-header /deep/ nav {
+    :host nb-layout-header ::ng-deep nav {
       justify-content: flex-end;
     }
   `],

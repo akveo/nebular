@@ -3,67 +3,79 @@
  * Copyright Akveo. All Rights Reserved.
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
-
 @import '../../theme/styles/core/mixins';
 
 @mixin nb-b-modals-theme() {
 
   .modal-content {
-    font-size: nb-theme(modal-font-size);
-    line-height: nb-theme(modal-line-height);
-    font-weight: nb-theme(modal-font-weight);
+    display: flex;
+    flex-direction: column;
+    background-color: nb-theme(card-background-color);
+    border: nb-theme(card-border-width) nb-theme(card-border-style) nb-theme(card-border-color);
+    border-radius: nb-theme(card-border-radius);
+    box-shadow: nb-theme(card-shadow);
 
-    color: nb-theme(modal-fg);
-    background: nb-theme(modal-bg);
-    border-color: nb-theme(modal-border);
-    border-radius: nb-theme(modal-border-radius);
+    color: nb-theme(card-text-color);
+    font-family: nb-theme(card-text-font-family);
+    font-size: nb-theme(card-text-font-size);
+    font-weight: nb-theme(card-text-font-weight);
+    line-height: nb-theme(card-text-line-height);
+
+    // TODO: move card margin style to layout
+    margin-bottom: nb-theme(card-margin-bottom);
+
+    @include nb-scrollbars(
+        nb-theme(card-scrollbar-color),
+        nb-theme(card-scrollbar-background-color),
+        nb-theme(card-scrollbar-width));
   }
 
   .modal-header {
-    padding: nb-theme(modal-padding);
-    border-bottom: 1px solid nb-theme(modal-separator);
-    border-top-left-radius: nb-theme(modal-border-radius);
-    border-top-right-radius: nb-theme(modal-border-radius);
-    color: nb-theme(modal-fg-heading);
+    border-bottom-width: 0;
+    padding: nb-theme(card-padding);
+    border-bottom: nb-theme(card-divider-width) nb-theme(card-divider-style) nb-theme(card-divider-color);
+    border-top-left-radius: nb-theme(card-border-radius);
+    border-top-right-radius: nb-theme(card-border-radius);
 
-    font-family: nb-theme(modal-header-font-family);
-    font-weight: nb-theme(modal-header-font-weight);
-    font-size: nb-theme(modal-header-font-size);
+    color: nb-theme(card-header-text-color);
+    font-family: nb-theme(card-header-text-font-family);
+    font-size: nb-theme(card-header-text-font-size);
+    font-weight: nb-theme(card-header-text-font-weight);
+    line-height: nb-theme(card-header-text-line-height);
 
     @include nb-headings();
 
     .close {
       text-shadow: none;
-      color: nb-theme(modal-fg-heading);
+      color: nb-theme(card-header-text-color);
 
       @include nb-rtl {
         margin-left: -1rem;
         margin-right: auto;
-      };
-
-      &:hover {
-        color: nb-theme(modal-fg-heading);
       }
     }
   }
 
   .modal-body {
-    font-family: nb-theme(modal-body-font-family);
-    font-weight: nb-theme(modal-body-font-weight);
-    font-size: nb-theme(modal-body-font-size);
-
-    padding: nb-theme(modal-padding);
-
+    flex: 1;
+    -ms-flex: 1 1 auto;
+    overflow: auto;
+    padding: nb-theme(card-padding);
+    position: relative;
     @include nb-scrollbars(
-        nb-theme(scrollbar-fg),
-        nb-theme(scrollbar-bg),
-        nb-theme(scrollbar-width));
+        nb-theme(card-scrollbar-color),
+        nb-theme(card-scrollbar-background-color),
+        nb-theme(card-scrollbar-width));
   }
 
   .modal-footer {
-    padding: nb-theme(modal-padding);
-    border-top: 1px solid nb-theme(modal-separator);
-    border-bottom-left-radius: nb-theme(modal-border-radius);
-    border-bottom-right-radius: nb-theme(modal-border-radius);
+    padding: nb-theme(card-padding);
+    border-top: nb-theme(card-divider-width) nb-theme(card-divider-style) nb-theme(card-divider-color);
+    border-bottom-left-radius: nb-theme(card-border-radius);
+    border-bottom-right-radius: nb-theme(card-border-radius);
+  }
+
+  nb-card-header {
+    @include nb-card-header();
   }
 }

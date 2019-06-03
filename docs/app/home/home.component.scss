@@ -6,6 +6,10 @@
   $content-width: nb-theme(content-width);
   $max-width: 960px;
 
+  ::ng-deep nb-layout-column {
+    overflow-x: hidden;
+  }
+
   .content-center {
     max-width: $content-width;
     width: 100%;
@@ -33,7 +37,7 @@
     margin-top: -5rem;
     margin-left: -20%;
     margin-right: -20%;
-    fill: nb-theme(layout-background-color);
+    fill: nb-theme(background-basic-color-2);
 
     @include media-breakpoint-up(md) {
       margin-top: -7rem;
@@ -49,22 +53,48 @@
   }
 
   .features {
-    margin-top: 5rem;
-    justify-content: center;
-    max-width: $max-width;
-  }
+    background-color: nb-theme(background-basic-color-2);
+    padding-top: 5rem;
+    padding-bottom: 4rem;
 
-  .features, .advantages {
-    margin-bottom: 5rem;
+    .content-center {
+      max-width: $max-width;
+      justify-content: center;
+    }
   }
 
   .advantages {
-    position: relative;
     overflow: hidden;
+    margin-bottom: 5rem;
 
     > .content-center {
       max-width: $max-width;
     }
+  }
+
+  .eva {
+    background: radial-gradient(circle, #ffffff 0%, #ffffff 15.38%, #d7dfeb 100%);
+    margin-bottom: 10rem;
+    padding-top: 5rem;
+    position: relative;
+  }
+
+  .eva-concave {
+    position: absolute;
+    top: -4px;
+    left: 0;
+    right: 0;
+    width: 100%;
+    transform: rotateX(180deg);
+
+    svg path {
+      fill: nb-theme(background-basic-color-2);
+    }
+  }
+
+  ngd-eva.content-center {
+    padding-bottom: 5rem;
+    flex-wrap: nowrap;
   }
 
   ngd-footer {
@@ -84,21 +114,21 @@
     }
 
     .advantages {
-      padding-top: 5.5rem;
       padding-bottom: 5.5rem;
+    }
 
-      &::after {
-        content: '';
-        position: absolute;
-        top: 0;
-        height: 24rem;
-        right: -20%;
-        left: -20%;
-        background: $convex-bg;
-        z-index: -1;
-        border-radius: 50%;
-      }
+    .eva {
+      padding-top: 10rem;
+    }
+
+    ngd-eva.content-center {
+      padding-bottom: 10rem;
+    }
+  }
+
+  @include media-breakpoint-up(xl) {
+    .eva {
+      padding-top: 15rem;
     }
   }
 }
-

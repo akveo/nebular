@@ -2,9 +2,9 @@
   <nb-layout-column>
     <div class="row">
 
-      <div class="col-lg-6">
+      <div class="col-lg-12">
         <nb-card>
-          <nb-card-header>Buttons</nb-card-header>
+          <nb-card-header>Filled Buttons</nb-card-header>
           <nb-card-body>
             <button class="btn btn-primary">Primary</button>
             <button class="btn btn-success">Success</button>
@@ -15,7 +15,7 @@
         </nb-card>
       </div>
 
-      <div class="col-lg-6">
+      <div class="col-lg-12">
         <nb-card>
           <nb-card-header>Hero Buttons</nb-card-header>
           <nb-card-body>
@@ -28,7 +28,131 @@
         </nb-card>
       </div>
 
-      <div class="col-lg-6">
+      <div class="col-lg-12">
+        <nb-card>
+          <nb-card-header>Outline Buttons</nb-card-header>
+          <nb-card-body>
+            <button class="btn btn-outline-primary">Primary</button>
+            <button class="btn btn-outline-success">Success</button>
+            <button class="btn btn-outline-info">Info</button>
+            <button class="btn btn-outline-warning">Warning</button>
+            <button class="btn btn-outline-danger">Danger</button>
+          </nb-card-body>
+        </nb-card>
+      </div>
+
+      <div class="col-lg-12">
+        <nb-card>
+          <nb-card-header>Icon buttons</nb-card-header>
+          <nb-card-body>
+            <button class="btn btn-primary btn-icon">
+              <nb-icon icon="heart-outline"></nb-icon>
+            </button>
+            <button class="btn btn-success btn-icon">
+              <nb-icon icon="heart-outline"></nb-icon>
+            </button>
+            <button class="btn btn-info btn-icon">
+              <nb-icon icon="heart-outline"></nb-icon>
+            </button>
+            <button class="btn btn-warning btn-icon">
+              <nb-icon icon="heart-outline"></nb-icon>
+            </button>
+            <button class="btn btn-danger btn-icon">
+              <nb-icon icon="heart-outline"></nb-icon>
+            </button>
+          </nb-card-body>
+        </nb-card>
+      </div>
+
+      <div class="col-lg-12">
+        <nb-card>
+          <nb-card-header>Icon buttons</nb-card-header>
+          <nb-card-body>
+            <button class="btn btn-primary btn-with-icon">
+              <nb-icon icon="heart-outline"></nb-icon> Primary
+            </button>
+            <button class="btn btn-success btn-with-icon">
+              <nb-icon icon="heart-outline"></nb-icon> Success
+            </button>
+            <button class="btn btn-info btn-with-icon">
+              <nb-icon icon="heart-outline"></nb-icon> Info
+            </button>
+            <button class="btn btn-warning btn-with-icon">
+              <nb-icon icon="heart-outline"></nb-icon> Warning
+            </button>
+            <button class="btn btn-danger btn-with-icon">
+              <nb-icon icon="heart-outline"></nb-icon> Danger
+            </button>
+          </nb-card-body>
+        </nb-card>
+      </div>
+
+      <div class="col-lg-12">
+        <nb-card>
+          <nb-card-header>Button Group</nb-card-header>
+          <nb-card-body>
+            <div
+              class="btn-group btn-group-toggle btn-outline-toggle-group btn-group-full-width btn-toggle-radio-group">
+              <label class="btn btn-outline-primary active">
+                <input type="radio" value="left"> Left
+              </label>
+              <label class="btn btn-outline-primary">
+                <input type="radio" value="middle"> Middle
+              </label>
+              <label class="btn btn-outline-primary">
+                <input type="radio" value="right"> Right
+              </label>
+            </div>
+          </nb-card-body>
+          <nb-card-body>
+            <div class="btn-group btn-group-toggle btn-group-full-width" data-toggle="buttons">
+              <label class="btn btn-primary active">
+                <input type="checkbox"> Left
+              </label>
+              <label class="btn btn-primary">
+                <input type="checkbox"> Middle
+              </label>
+              <label class="btn btn-primary">
+                <input type="checkbox"> Right
+              </label>
+            </div>
+          </nb-card-body>
+          <nb-card-body>
+            <div class="btn-group btn-group-toggle btn-outline-toggle-group" data-toggle="buttons">
+              <label class="btn btn-outline-success active">
+                <input type="radio" [value]="1"> 1
+              </label>
+              <label class="btn btn-outline-success">
+                <input type="radio" [value]="2"> 2
+              </label>
+              <label class="btn btn-outline-success">
+                <input type="radio" [value]="3"> 3
+              </label>
+              <label class="btn btn-outline-success">
+                <input type="radio" [value]="4"> 4
+              </label>
+              <label class="btn btn-outline-success">
+                <input type="radio" [value]="5"> 5
+              </label>
+            </div>
+          </nb-card-body>
+          <nb-card-body>
+            <div class="btn-group btn-group-toggle btn-divided-group btn-outline-divided-group">
+              <label class="btn btn-outline-success active">
+                <input type="radio" [value]="1"> 1
+              </label>
+              <label class="btn btn-outline-success">
+                <input type="radio" [value]="2"> 2
+              </label>
+              <label class="btn btn-outline-success">
+                <input type="radio" [value]="3"> 3
+              </label>
+            </div>
+          </nb-card-body>
+        </nb-card>
+      </div>
+
+      <div class="col-lg-12">
         <nb-card>
           <nb-card-header>Default Inputs</nb-card-header>
           <nb-card-body>
@@ -99,7 +223,7 @@
         </nb-card>
       </div>
 
-      <div class="col-lg-6">
+      <div class="col-lg-12">
         <nb-card>
           <nb-card-header>Input Styles</nb-card-header>
           <nb-card-body>
@@ -138,42 +262,44 @@
             </div>
           </nb-card-body>
         </nb-card>
+      </div>
 
-        <nb-card>
-          <nb-card-header>Checkboxes & Radios</nb-card-header>
+      <div class="col-lg-12">
+        <nb-card style="height: 15rem;">
+          <nb-card-header>Dropdowns</nb-card-header>
           <nb-card-body>
-            <div class="row demo-checkboxes-radio">
-              <div class="demo-checkboxes col-sm-4">
-                <div class="custom-control custom-checkbox">
-                  <input type="checkbox" class="custom-control-input" id="b-checkbox">
-                  <label class="custom-control-label" for="b-checkbox">Bootstrap Checkbox</label>
-                </div>
-              </div>
-              <div class="demo-radio col-sm-4">
-                <label class="custom-control custom-radio">
-                  <input type="radio" class="custom-control-input" name="customRadio">
-                  <span class="custom-control-indicator"></span>
-                  <span class="custom-control-description">Radio 1</span>
-                </label>
-                <label class="custom-control custom-radio">
-                  <input type="radio" class="custom-control-input" name="customRadio" checked>
-                  <span class="custom-control-indicator"></span>
-                  <span class="custom-control-description">Radio 2</span>
-                </label>
-                <label class="custom-control custom-radio">
-                  <input type="radio" class="custom-control-input" name="customRadio">
-                  <span class="custom-control-indicator"></span>
-                  <span class="custom-control-description">Radio 3</span>
-                </label>
-              </div>
-              <div class="demo-disabled-checkbox-radio col-sm-4">
-                <label class="custom-control custom-radio">
-                  <input type="radio" class="custom-control-input" disabled>
-                  <span class="custom-control-indicator"></span>
-                  <span class="custom-control-description">Disabled Radio</span>
-                </label>
+            <div ngbDropdown class="d-inline-block">
+              <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Toggle dropdown</button>
+              <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                <button ngbDropdownItem>Action - 1</button>
+                <button ngbDropdownItem>Another Action</button>
+                <button ngbDropdownItem>Something else is here</button>
               </div>
             </div>
+          </nb-card-body>
+        </nb-card>
+      </div>
+
+      <div class="col-lg-12">
+        <nb-card>
+          <nb-card-header>Modal</nb-card-header>
+          <nb-card-body>
+            <button class="btn btn-primary" (click)="openModal(modalContent)">Open modal</button>
+
+            <ng-template #modalContent let-modal>
+              <div class="modal-header">
+                <h4 class="modal-title" id="modal-basic-title">Title</h4>
+                <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                Modal body
+              </div>
+              <div class="modal-footer">
+                Footer
+              </div>
+            </ng-template>
           </nb-card-body>
         </nb-card>
       </div>

@@ -56,9 +56,10 @@ import { NbComponentStatus } from '../component-status';
  *
  * @styles
  *
- * radio-width
+ * radio-width:
  * radio-height:
  * radio-background-color:
+ * radio-border-color:
  * radio-border-style:
  * radio-border-width:
  * radio-text-color:
@@ -125,7 +126,8 @@ import { NbComponentStatus } from '../component-status';
         [disabled]="disabled"
         (change)="onChange($event)"
         (click)="onClick($event)">
-      <span class="radio-circle"></span>
+      <span class="outer-circle"></span>
+      <span class="inner-circle"></span>
       <span class="text">
         <ng-content></ng-content>
       </span>

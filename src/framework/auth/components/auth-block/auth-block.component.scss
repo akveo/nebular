@@ -9,7 +9,7 @@
   width: 100%;
   max-width: 35rem;
 
-  /deep/ {
+  ::ng-deep {
     form {
       width: 100%;
     }

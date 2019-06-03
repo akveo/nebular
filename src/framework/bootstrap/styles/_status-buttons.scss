@@ -1,0 +1,55 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
+@mixin b-btn-status($status) {
+  background-color: nb-theme(button-filled-#{$status}-background-color);
+  border-color: nb-theme(button-filled-#{$status}-border-color);
+  color: nb-theme(button-filled-#{$status}-text-color);
+
+  &:focus {
+    border-color: nb-theme(button-filled-#{$status}-focus-border-color);
+  }
+
+  &:hover {
+    background-color: nb-theme(button-filled-#{$status}-hover-background-color);
+    border-color: nb-theme(button-filled-#{$status}-hover-border-color);
+  }
+
+  &:active {
+    background-color: nb-theme(button-filled-#{$status}-active-background-color);
+    border-color: nb-theme(button-filled-#{$status}-active-border-color);
+    color: nb-theme(button-filled-#{$status}-text-color);
+  }
+
+  &[disabled] {
+    background-color: nb-theme(button-filled-#{$status}-disabled-background-color);
+    border-color: nb-theme(button-filled-#{$status}-disabled-border-color);
+    color: nb-theme(button-filled-#{$status}-disabled-text-color);
+  }
+}
+
+@mixin b-btn-statuses() {
+
+  .btn.btn-primary {
+    @include b-btn-status(primary);
+  }
+
+  .btn.btn-success {
+    @include b-btn-status(success);
+  }
+
+  .btn.btn-warning {
+    @include b-btn-status(warning );
+  }
+
+  .btn.btn-info {
+    @include b-btn-status(info);
+  }
+
+  .btn.btn-danger {
+    @include b-btn-status(danger);
+  }
+}

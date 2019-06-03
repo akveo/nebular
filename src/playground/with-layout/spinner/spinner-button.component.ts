@@ -10,7 +10,7 @@ import { Component } from '@angular/core';
   selector: 'nb-app-spinner-button',
   template: `
      <nb-card accent="primary">
-      <nb-card-body class="example-items-row">
+      <nb-card-body class="example-items-rows">
           <button nbButton status="success" (click)="toggleLoadingAnimation()"
                   [nbSpinner]="loading" nbSpinnerStatus="success" nbSpinnerSize="large" nbSpinnerMessage="">
             Download

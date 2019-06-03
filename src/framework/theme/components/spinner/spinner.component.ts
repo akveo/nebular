@@ -32,8 +32,6 @@ import { NbComponentStatus } from '../component-status';
  * spinner-warning-circle-empty-color:
  * spinner-danger-circle-filled-color:
  * spinner-danger-circle-empty-color:
- * spinner-white-circle-filled-color:
- * spinner-white-circle-empty-color:
  * spinner-height-tiny:
  * spinner-height-small:
  * spinner-height-medium:
