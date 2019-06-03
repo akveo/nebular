@@ -12,13 +12,15 @@
       </svg>
     </section>
 
-    <section class="features content-center">
-      <ngd-icon-card *ngFor="let feature of features"
-                     [routerLink]="feature.link"
-                     [title]="feature.title"
-                     [icon]="feature.icon"
-                     [description]="feature.description">
-      </ngd-icon-card>
+    <section class="features">
+      <div class="content-center">
+        <ngd-icon-card *ngFor="let feature of features"
+                       [routerLink]="feature.link"
+                       [title]="feature.title"
+                       [icon]="feature.icon"
+                       [description]="feature.description">
+        </ngd-icon-card>
+      </div>
     </section>
 
     <section class="eva">
