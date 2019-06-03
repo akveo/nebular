@@ -6,8 +6,6 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   templateUrl: './button-types.component.html',
 })
 export class ButtonTypesComponent {
-
-
   onClick() {
     return false;
   }
