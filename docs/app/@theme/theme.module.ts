@@ -17,6 +17,7 @@ import {
   NbCardModule,
   NbCheckboxModule,
   NbIconModule,
+  NbButtonModule,
 } from '@nebular/theme';
 
 import { NbEvaIconsModule } from '@nebular/eva-icons';
@@ -33,7 +34,8 @@ import {
   NgdColorSwatchDirective,
   NgdDescriptionDirective,
   NgdSearchComponent,
-} from './components/';
+  NgdEvaComponent,
+} from './components';
 
 import {
   NgdHighlightService,
@@ -60,6 +62,7 @@ import {
     NbMenuModule,
     NbTabsetModule,
     NbIconModule,
+    NbButtonModule,
     NbEvaIconsModule,
     RouterModule,
   ],
@@ -75,6 +78,7 @@ import {
     NgdColorSwatchDirective,
     NgdDescriptionDirective,
     NgdSearchComponent,
+    NgdEvaComponent,
   ],
   exports: [
     CommonModule,
@@ -98,6 +102,7 @@ import {
     NgdPageTabsComponent,
     NgdColorSwatchDirective,
     NgdDescriptionDirective,
+    NgdEvaComponent,
   ],
 })
 export class NgdThemeModule {
