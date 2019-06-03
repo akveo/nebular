@@ -20,7 +20,13 @@
 
 ;(function(l, projectPages) {
 
-  var repo = projectPages ? '/' + l.pathname.split('/')[1] : '';
+  const versions = ['3.5.0'];
+
+  var paths = l.pathname.split('/');
+  var repo = projectPages ? '/' + paths[1] : '';
+  if (versions.includes(paths[2])) {
+    repo += '/' + paths[2];
+  }
 
   /* redirect all 404 trafic to index.html */
   function redirect() {
