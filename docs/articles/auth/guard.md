@@ -40,7 +40,7 @@ export class AuthGuard implements CanActivate {
   }
 
   canActivate() {
-    return this.authService.isAuthenticated(); // canActive can return Observable<boolean>, which is exactly what isAuhenticated returns
+    return this.authService.isAuthenticated(); // canActive can return Observable<boolean>, which is exactly what isAuthenticated returns
   }
 }
 ```
@@ -125,7 +125,7 @@ export class AuthGuard implements CanActivate {
   }
 }
 ```
-*So we just check the the value returened by isAuthenticated and simply redirect to the login page.*
+*So we just check the the value returned by isAuthenticated and simply redirect to the login page.*
 
 Easy as that! Hope you found it useful.
 <hr>
