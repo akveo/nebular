@@ -20,7 +20,7 @@ Nebular modules are distributed as separated `npm` packages:
   - roles and permissions management.
 - Nebular Moment `@nebular/moment`
 - Nebular date-fns `@nebular/moment`
-  - modules allowing Nebular components to work with dates with help most popular date librariws. 
+  - modules allowing Nebular components to work with dates with help most popular date libraries. 
 - Admin dashboard starter kit <a href="https://github.com/akveo/ngx-admin" target="_blank">ngx-admin</a> - Angular application based on Nebular modules with beautiful IOT and E-commerce components.
 - <a href="https://store.akveo.com?utm_source=nebular_docs&utm_medium=nebular-intro">Backend Bundles</a> - backend starter kits connected to ngx-admin UI.
 
