@@ -1,6 +1,6 @@
 # Nebular [<img src="https://i.imgur.com/oMcxwZ0.png" alt="Eva Design System" height="20px" />](https://eva.design) [![npm](https://img.shields.io/npm/l/@nebular/theme.svg)]() [![Build Status](https://travis-ci.org/akveo/nebular.svg?branch=master)](https://travis-ci.org/akveo/nebular) [![npm](https://img.shields.io/npm/dt/@nebular/theme.svg)](https://www.npmjs.com/package/@nebular/theme) [![Codecov](https://img.shields.io/codecov/c/github/akveo/nebular/master.svg?style=flat-square)](https://codecov.io/gh/akveo/nebular/branch/master)
 
-[Documentation](https://akveo.github.io/nebular/docs/getting-started/what-is-nebular?utm_source=github&utm_medium=nebular_readme) | [ngx-admin demo](http://github.com/akveo/ngx-admin) | [StackBlitz seed](https://stackblitz.com/github/akveo/nebular-seed)
+[Documentation](https://akveo.github.io/nebular/docs/getting-started/what-is-nebular?utm_source=github&utm_medium=nebular_readme)
 
 Nebular is an Angular 8 UI Library with a focus on beautiful design and ability to adapt it to your brand easily. It comes with 4 stunning visual themes, a powerful theming engine with runtime theme switching and support of custom css properties mode. Nebular is based on Eva Design System specifications.
 
@@ -47,7 +47,6 @@ If you want to have more control over setup process you can [use manual setup gu
 
 ## More from Akveo
 - [Eva Icons](https://github.com/akveo/eva-icons) - 480+ beautiful Open Source icons
-- [ngx-admin](https://github.com/akveo/ngx-admin) - the best Angular admin template
 
 ## How can I support the developers?
 - Star our GitHub repo :star:
