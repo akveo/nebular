@@ -30,7 +30,9 @@ CURRENT_BRANCH=$(if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then echo $TRAVIS_BRA
 if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
   fileDiff=$(git diff --name-only $TRAVIS_COMMIT_RANGE)
 else
-  fileDiff=$(git diff --name-only $TRAVIS_BRANCH...HEAD)
+  git remote set-branches --add origin $TRAVIS_BRANCH
+  git fetch origin $TRAVIS_BRANCH
+  fileDiff=$(git diff --name-only HEAD origin/${TRAVIS_BRANCH})
 fi
 
 # Check if tests can be skipped
