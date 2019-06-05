@@ -5,6 +5,8 @@ import { By } from '@angular/platform-browser';
 import { ReactiveFormsModule, FormControl } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NbLayoutDirectionService } from '../../services/direction.service';
+import { NbIconModule } from '@nebular/theme';
+
 
 describe('Component: NbToggle', () => {
   let toggle: NbToggleComponent;
@@ -14,7 +16,7 @@ describe('Component: NbToggle', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [BrowserAnimationsModule],
+      imports: [BrowserAnimationsModule, NbIconModule],
       providers: [NbLayoutDirectionService],
       declarations: [NbToggleComponent],
     });
@@ -104,7 +106,7 @@ describe('Component: NbToggle with form control', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ReactiveFormsModule, BrowserAnimationsModule],
+      imports: [ReactiveFormsModule, BrowserAnimationsModule, NbIconModule],
       providers: [NbLayoutDirectionService],
       declarations: [NbToggleComponent, ToggleWithFormControlComponent],
     });
