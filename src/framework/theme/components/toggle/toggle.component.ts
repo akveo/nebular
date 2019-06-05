@@ -42,24 +42,29 @@ const defaultState = { params: { direction: '' } };
  *
  * @styles
  *
- * toggle-background-color:
  * toggle-size:
  * toggle-border-width:
- * toggle-off-opacity:
+ * toggle-background-color:
  * toggle-outline-width:
- * toggle-outline-opacity:
- * toggle-disabled-opacity:
+ * toggle-outline-color:
  * toggle-switcher-background-color:
+ * toggle-switcher-border-color:
+ * toggle-disabled-opacity:
  * toggle-primary-background-color:
  * toggle-primary-off-background-color:
+ * toggle-primary-switcher-border-color:
  * toggle-success-background-color:
  * toggle-success-off-background-color:
+ * toggle-success-switcher-border-color:
  * toggle-info-background-color:
  * toggle-info-off-background-color:
+ * toggle-info-switcher-border-color:
  * toggle-warning-background-color:
  * toggle-warning-off-background-color:
+ * toggle-warning-switcher-border-color:
  * toggle-danger-background-color:
  * toggle-danger-off-background-color:
+ * toggle-danger-switcher-border-color:
  */
 @Component({
   selector: 'nb-toggle',
@@ -79,7 +84,7 @@ const defaultState = { params: { direction: '' } };
              (blur)="setTouched()"
       >
       <div class="toggle">
-        <span [@onOff]="checkState()" class="toggle-switcher">           
+        <span [@onOff]="checkState()" class="toggle-switcher">
           <nb-icon *ngIf="value" icon="checkmark-outline" pack="nebular-essentials"></nb-icon>
         </span>
       </div>
