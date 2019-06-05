@@ -42,14 +42,14 @@ const defaultState = { params: { direction: '' } };
  *
  * @styles
  *
- * toggle-bg:
+ * toggle-background-color:
  * toggle-size:
- * toggle-borders-size:
+ * toggle-border-width:
  * toggle-off-opacity:
- * toggle-outline-size:
+ * toggle-outline-width:
  * toggle-outline-opacity:
  * toggle-disabled-opacity:
- * toggle-switcher-bg:
+ * toggle-switcher-background-color:
  */
 @Component({
   selector: 'nb-toggle',

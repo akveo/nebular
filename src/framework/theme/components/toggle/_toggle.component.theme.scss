@@ -11,25 +11,23 @@
   }
 }
 
-@mixin toggle-outline($size, $color) {
+@mixin toggle-outline($size) {
   &:not(.disabled):focus .toggle, &:not(.disabled):hover .toggle {
-    // TODO: rid of SASS color functions
-    box-shadow: 0 0 0 $size rgba($color, nb-theme(toggle-outline-opacity));
+    box-shadow: 0 0 0 $size nb-theme(toggle-outline-color);
   }
 }
 
 @mixin toggle-off-styles($color) {
   input {
     &:not(:checked) + .toggle {
-      // TODO: rid of SASS color functions
-      background-color: rgba($color, nb-theme(toggle-off-opacity));
+      background-color: $color;
     }
   }
 }
 
 @mixin toggle-switcher-styles($color) {
   .toggle-switcher {
-    background-color: nb-theme(toggle-switcher-bg);
+    background-color: nb-theme(toggle-switcher-background-color);
 
     &::after {
       border-color: $color;
@@ -39,15 +37,14 @@
 
 @mixin nb-toggle-theme() {
   nb-toggle {
-    margin: nb-theme(toggle-outline-size) 0;
+    margin: nb-theme(toggle-outline-width) 0;
     border-radius: nb-theme(toggle-size);
 
-    @include toggle-outline(nb-theme(toggle-outline-size), nb-theme(color-primary));
+    @include toggle-outline(nb-theme(toggle-outline-width));
 
     input {
       &:not(:checked) + .toggle {
-        // TODO: rid of SASS color functions
-        background-color: rgba(nb-theme(color-primary), nb-theme(toggle-off-opacity));
+        background-color: nb-theme(toggle-primary-off-background-color);
       }
     }
 
@@ -58,8 +55,8 @@
     .toggle {
       height: nb-theme(toggle-size);
       width: calc(#{nb-theme(toggle-size)} * 2);
-      background-color: nb-theme(toggle-bg);
-      border: nb-theme(toggle-borders-size) solid nb-theme(toggle-bg);
+      background-color: nb-theme(toggle-background-color);
+      border: nb-theme(toggle-border-width) solid nb-theme(toggle-background-color);
 
       @include toggle-switcher-styles(nb-theme(color-primary));
     }
@@ -80,38 +77,38 @@
     }
 
     &.primary {
-      @include toggle-styles(nb-theme(toggle-borders-size), nb-theme(color-primary));
-      @include toggle-outline(nb-theme(toggle-outline-size), nb-theme(color-primary));
-      @include toggle-off-styles(nb-theme(color-primary));
-      @include toggle-switcher-styles(nb-theme(color-primary));
+      @include toggle-styles(nb-theme(toggle-border-width), nb-theme(toggle-primary-background-color));
+      @include toggle-outline(nb-theme(toggle-outline-width));
+      @include toggle-off-styles(nb-theme(toggle-primary-off-background-color));
+      @include toggle-switcher-styles(nb-theme(color-primary-default));
     }
 
     &.success {
-      @include toggle-styles(nb-theme(toggle-borders-size), nb-theme(color-success));
-      @include toggle-outline(nb-theme(toggle-outline-size), nb-theme(color-success));
-      @include toggle-off-styles(nb-theme(color-success));
-      @include toggle-switcher-styles(nb-theme(color-success));
+      @include toggle-styles(nb-theme(toggle-border-width), nb-theme(toggle-success-background-color));
+      @include toggle-outline(nb-theme(toggle-outline-width));
+      @include toggle-off-styles(nb-theme(toggle-success-off-background-color));
+      @include toggle-switcher-styles(nb-theme(color-success-default));
     }
 
     &.warning {
-      @include toggle-styles(nb-theme(toggle-borders-size), nb-theme(color-warning));
-      @include toggle-outline(nb-theme(toggle-outline-size), nb-theme(color-warning));
-      @include toggle-off-styles(nb-theme(color-warning));
-      @include toggle-switcher-styles(nb-theme(color-warning));
+      @include toggle-styles(nb-theme(toggle-border-width), nb-theme(toggle-warning-background-color));
+      @include toggle-outline(nb-theme(toggle-outline-width));
+      @include toggle-off-styles(nb-theme(toggle-warning-off-background-color));
+      @include toggle-switcher-styles(nb-theme(color-warning-default));
     }
 
     &.danger {
-      @include toggle-styles(nb-theme(toggle-borders-size), nb-theme(color-danger));
-      @include toggle-outline(nb-theme(toggle-outline-size), nb-theme(color-danger));
-      @include toggle-off-styles(nb-theme(color-danger));
-      @include toggle-switcher-styles(nb-theme(color-danger));
+      @include toggle-styles(nb-theme(toggle-border-width), nb-theme(toggle-danger-background-color));
+      @include toggle-outline(nb-theme(toggle-outline-width));
+      @include toggle-off-styles(nb-theme(toggle-danger-off-background-color));
+      @include toggle-switcher-styles(nb-theme(color-danger-default));
     }
 
     &.info {
-      @include toggle-styles(nb-theme(toggle-borders-size), nb-theme(color-info));
-      @include toggle-outline(nb-theme(toggle-outline-size), nb-theme(color-info));
-      @include toggle-off-styles(nb-theme(color-info));
-      @include toggle-switcher-styles(nb-theme(color-info));
+      @include toggle-styles(nb-theme(toggle-border-width), nb-theme(toggle-info-background-color));
+      @include toggle-outline(nb-theme(toggle-outline-width));
+      @include toggle-off-styles(nb-theme(toggle-info-off-background-color));
+      @include toggle-switcher-styles(nb-theme(color-info-default));
     }
   }
 }
