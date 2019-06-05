@@ -34,6 +34,7 @@ branches:
   only:
   - master
   - next
+  - 3.6.0
 
 matrix:
   fast_finish: true
