@@ -58,57 +58,47 @@
       background-color: nb-theme(toggle-background-color);
       border: nb-theme(toggle-border-width) solid nb-theme(toggle-background-color);
 
-      @include toggle-switcher-styles(nb-theme(color-primary));
+      @include toggle-switcher-styles(nb-theme(toggle-switcher-border-color));
     }
 
     .toggle-switcher {
       width: nb-theme(toggle-size);
       height: nb-theme(toggle-size);
-
-      // TODO: use svg icon instead
-      &::after {
-        height: calc(#{nb-theme(toggle-size)} / 4);
-        width: calc(#{nb-theme(toggle-size)} / 2 - 1px);
-        top: calc(#{nb-theme(toggle-size)} / 4);
-        left: calc(#{nb-theme(toggle-size)} / 4);
-        border-width: calc(#{nb-theme(toggle-size)} / 10);
-        border-style: solid;
-      }
     }
 
     &.primary {
       @include toggle-styles(nb-theme(toggle-border-width), nb-theme(toggle-primary-background-color));
       @include toggle-outline(nb-theme(toggle-outline-width));
       @include toggle-off-styles(nb-theme(toggle-primary-off-background-color));
-      @include toggle-switcher-styles(nb-theme(color-primary-default));
+      @include toggle-switcher-styles(nb-theme(toggle-primary-switcher-border-color));
     }
 
     &.success {
       @include toggle-styles(nb-theme(toggle-border-width), nb-theme(toggle-success-background-color));
       @include toggle-outline(nb-theme(toggle-outline-width));
       @include toggle-off-styles(nb-theme(toggle-success-off-background-color));
-      @include toggle-switcher-styles(nb-theme(color-success-default));
+      @include toggle-switcher-styles(nb-theme(toggle-success-switcher-border-color));
     }
 
     &.warning {
       @include toggle-styles(nb-theme(toggle-border-width), nb-theme(toggle-warning-background-color));
       @include toggle-outline(nb-theme(toggle-outline-width));
       @include toggle-off-styles(nb-theme(toggle-warning-off-background-color));
-      @include toggle-switcher-styles(nb-theme(color-warning-default));
+      @include toggle-switcher-styles(nb-theme(toggle-warning-switcher-border-color));
     }
 
     &.danger {
       @include toggle-styles(nb-theme(toggle-border-width), nb-theme(toggle-danger-background-color));
       @include toggle-outline(nb-theme(toggle-outline-width));
       @include toggle-off-styles(nb-theme(toggle-danger-off-background-color));
-      @include toggle-switcher-styles(nb-theme(color-danger-default));
+      @include toggle-switcher-styles(nb-theme(toggle-danger-switcher-border-color));
     }
 
     &.info {
       @include toggle-styles(nb-theme(toggle-border-width), nb-theme(toggle-info-background-color));
       @include toggle-outline(nb-theme(toggle-outline-width));
       @include toggle-off-styles(nb-theme(toggle-info-off-background-color));
-      @include toggle-switcher-styles(nb-theme(color-info-default));
+      @include toggle-switcher-styles(nb-theme(toggle-info-switcher-border-color));
     }
   }
 }

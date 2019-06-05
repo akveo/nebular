@@ -1768,21 +1768,27 @@ $eva-mapping: (
   toggle-outline-width: outline-width,
   toggle-outline-color: outline-color,
   toggle-switcher-background-color: background-basic-color-1,
+  toggle-switcher-border-color: color-primary-default,
   toggle-disabled-opacity: 0.5,
 
   toggle-primary-background-color: color-primary-default,
   toggle-primary-off-background-color: color-primary-200,
+  toggle-primary-switcher-border-color: color-primary-default,
 
   toggle-success-background-color: color-success-default,
   toggle-success-off-background-color: color-success-200,
+  toggle-success-switcher-border-color: color-success-default,
 
   toggle-info-background-color: color-info-default,
   toggle-info-off-background-color: color-info-200,
+  toggle-info-switcher-border-color: color-info-default,
 
   toggle-warning-background-color: color-warning-default,
   toggle-warning-off-background-color: color-warning-200,
+  toggle-warning-switcher-border-color: color-warning-default,
 
   toggle-danger-background-color: color-danger-default,
   toggle-danger-off-background-color: color-danger-200,
+  toggle-danger-switcher-border-color: color-danger-default,
 
 );

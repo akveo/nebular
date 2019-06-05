@@ -5,6 +5,7 @@
  */
 
 import { NgModule } from '@angular/core';
+import { NbIconModule } from '../icon/icon.module';
 
 import { NbSharedModule } from '../shared/shared.module';
 import { NbToggleComponent } from './toggle.component';
@@ -12,6 +13,7 @@ import { NbToggleComponent } from './toggle.component';
 @NgModule({
   imports: [
     NbSharedModule,
+    NbIconModule,
   ],
   declarations: [NbToggleComponent],
   exports: [NbToggleComponent],

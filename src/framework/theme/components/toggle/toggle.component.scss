@@ -28,15 +28,6 @@
       .toggle-switcher {
         position: absolute;
         border-radius: 50%;
-
-        // TODO: use svg icon instead
-        &::after {
-          content: '';
-          border-top: none;
-          border-right: none;
-          position: absolute;
-          transform: rotate(-45deg);
-        }
       }
     }
   }
