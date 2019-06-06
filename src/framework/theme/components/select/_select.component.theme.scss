@@ -49,6 +49,7 @@
   }
 
   .options-list {
+    background-color: nb-theme(select-option-background-color);
     max-height: nb-theme(select-options-list-max-height);
     height: 100%;
     overflow: auto;
