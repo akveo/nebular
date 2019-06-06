@@ -179,7 +179,6 @@ export class NbCheckboxComponent implements ControlValueAccessor {
   }
   set checked(value: boolean) {
     this._checked = value;
-    this.onChange(value);
   }
   private _checked: boolean = false;
 
@@ -271,8 +270,9 @@ export class NbCheckboxComponent implements ControlValueAccessor {
 
   updateValueAndIndeterminate(event: Event): void {
     const input = (event.target as HTMLInputElement);
-    this.value = input.checked;
-    this.valueChange.emit(this.value);
+    this.checked = input.checked;
+    this.valueChange.emit(this.checked);
+    this.onChange(this.checked);
     this.indeterminate = input.indeterminate;
   }
 }
