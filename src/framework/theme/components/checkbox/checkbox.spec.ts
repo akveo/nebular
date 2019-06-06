@@ -94,7 +94,7 @@ describe('Component: NbCheckbox', () => {
     expect(testContainerEl.classList.contains('status-info')).toBeTruthy();
   });
 
-  it('should not emit change event when input changed', () => {
+  it('deprecated should not emit change event when input changed', () => {
 
     const spy = jasmine.createSpy('valueChange subscriber');
 
@@ -106,11 +106,36 @@ describe('Component: NbCheckbox', () => {
     expect(spy).toHaveBeenCalledTimes(0);
   });
 
-  it('should emit change event when clicked', () => {
+  it('deprecated  should emit change event when clicked', () => {
 
     const spy = jasmine.createSpy('valueChange subscriber');
 
     checkbox.valueChange
+      .subscribe(spy);
+
+    label.nativeElement.click();
+
+    fixture.detectChanges();
+    expect(spy).toHaveBeenCalledTimes(1);
+  });
+
+  it('should not emit change event when input changed', () => {
+
+    const spy = jasmine.createSpy('checkedChange subscriber');
+
+    checkbox.checkedChange
+      .subscribe(spy);
+
+    checkbox.checked = true;
+    fixture.detectChanges();
+    expect(spy).toHaveBeenCalledTimes(0);
+  });
+
+  it('should emit change event when clicked', () => {
+
+    const spy = jasmine.createSpy('checkedChange subscriber');
+
+    checkbox.checkedChange
       .subscribe(spy);
 
     label.nativeElement.click();

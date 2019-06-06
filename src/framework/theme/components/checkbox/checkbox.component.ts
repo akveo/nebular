@@ -167,6 +167,7 @@ export class NbCheckboxComponent implements ControlValueAccessor {
 
   /**
    * @deprecated
+   * @breaking-change Remove @5.0.0
    */
   set value(value: boolean) {
     console.warn('NbCheckbox: `value` is deprecated and will be removed in 5.0.0. Use `checked` instead.');
@@ -215,10 +216,25 @@ export class NbCheckboxComponent implements ControlValueAccessor {
   private _indeterminate: boolean = false;
 
   /**
-   * Output when value is changed by a user
+   * Output when checked state is changed by a user
+   * @deprecated
+   * @breaking-change Remove @5.0.0
    * @type EventEmitter<boolean>
    */
-  @Output() valueChange = new EventEmitter<boolean>();
+  @Output()
+  get valueChange(): EventEmitter<boolean> {
+    console.warn('NbCheckbox: `valueChange` is deprecated and will be removed in 5.0.0. Use `checkedChange` instead.');
+    return this.checkedChange;
+  }
+  set valueChange(valueChange: EventEmitter<boolean>) {
+    this.checkedChange = valueChange;
+  }
+
+  /**
+   * Output when checked state is changed by a user
+   * @type EventEmitter<boolean>
+   */
+  @Output() checkedChange = new EventEmitter<boolean>();
 
   @HostBinding('class.status-primary')
   get primary() {
@@ -271,7 +287,7 @@ export class NbCheckboxComponent implements ControlValueAccessor {
   updateValueAndIndeterminate(event: Event): void {
     const input = (event.target as HTMLInputElement);
     this.checked = input.checked;
-    this.valueChange.emit(this.checked);
+    this.checkedChange.emit(this.checked);
     this.onChange(this.checked);
     this.indeterminate = input.indeterminate;
   }
