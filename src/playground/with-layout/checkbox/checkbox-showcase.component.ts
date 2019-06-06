@@ -6,4 +6,10 @@ import { Component } from '@angular/core';
 })
 
 export class CheckboxShowcaseComponent {
+
+  checked = false;
+
+  toggle(checked: boolean) {
+    this.checked = checked;
+  }
 }

@@ -1,5 +1,8 @@
 <nb-card>
   <nb-card-body>
-    <nb-checkbox>Toggle me</nb-checkbox>
+    <nb-checkbox (valueChange)="toggle($event)">Toggle me</nb-checkbox>
+  </nb-card-body>
+  <nb-card-body>
+    <label>Checked:</label> {{ checked }}
   </nb-card-body>
 </nb-card>
