@@ -233,6 +233,7 @@ Please open an issue if you have any questions or having difficulties to migrate
 
 
 
+<a name="3.5.0"></a>
 # [3.5.0](https://github.com/akveo/nebular/compare/v3.4.2...v3.5.0) (2019-04-12)
 
 
