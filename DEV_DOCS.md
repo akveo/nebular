@@ -1,3 +1,17 @@
+- [Before contributing](#things-you-must-follow-before-contributing)
+- [New Feature Checklist](#new-feature-checklist)
+- [New Package Checklist](#new-package-checklist)
+- [New Package Dependency Checklist](#new-package-dependency-checklist)
+- [Objectives](#objectives)
+- [Framework Structure](#framework-structure)
+- [Docs](#docs)
+- [Theme](#theme)
+- [Documentation](#documentation)
+- [Release](#release)
+- [create a new component guide](#create-a-new-component-guide)
+- [Playground](#playground)
+- [TODO](#todo)
+
 # Things you must follow before contributing
 - Don’t overcomplicate
 - Don’t make things too abstract
