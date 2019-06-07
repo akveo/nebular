@@ -365,7 +365,7 @@ To start a new release (publish the framework packages on NPM) you need:
   * `npm run version:changelog`
   * fix/expand changelog manually
 6. push the branch, create PR, approve - merge
-7. pull the upstream (master)   
+7. pull the upstream (master or other version branch (e.g. 3.6.0, next))   
 8. If publishing LTS release add `--tag=lts` to publish command in `scripts/publish.sh:7`
 9. In case of beta, rc or any other unstable release add `--tag=next` to publish command in `scripts/publish.sh:7`
 10. `npm run release` - run prepare & validate and finally publish the packages to NPM
