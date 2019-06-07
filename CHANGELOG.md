@@ -1,3 +1,39 @@
+<a name="3.6.0"></a>
+# [3.6.0](https://github.com/akveo/nebular/compare/v3.5.0...v3.6.0) (2019-06-07)
+
+
+### Bug Fixes
+
+* **overlay:** set context on component portals before first cd run ([#1395](https://github.com/akveo/nebular/issues/1395)) ([36aa416](https://github.com/akveo/nebular/commit/36aa416))
+* **select:** allow select to work with empty values in nb-option ([#1282](https://github.com/akveo/nebular/issues/1282)) ([059af4b](https://github.com/akveo/nebular/commit/059af4b))
+* **select:** emit array when resetting multiple select ([#1399](https://github.com/akveo/nebular/issues/1399)) ([fbda1d2](https://github.com/akveo/nebular/commit/fbda1d2))
+* **tabset:** prevent select call if no active tab found ([#1444](https://github.com/akveo/nebular/issues/1444)) ([c0d27ad](https://github.com/akveo/nebular/commit/c0d27ad))
+* **docs:** prefix root css urls with base path ([#1453](https://github.com/akveo/nebular/issues/1453)) ([a9120cf](https://github.com/akveo/nebular/commit/a9120cf))
+* add missing components exports to public api ([#1487](https://github.com/akveo/nebular/issues/1487)) ([256e21e](https://github.com/akveo/nebular/commit/256e21e))
+* add missing public api entries ([#1545](https://github.com/akveo/nebular/issues/1545)) ([b9f7b86](https://github.com/akveo/nebular/commit/b9f7b86))
+
+
+### Chores
+
+* update angular ([#1449](https://github.com/akveo/nebular/issues/1449)) ([9b5d221](https://github.com/akveo/nebular/commit/9b5d221))
+
+
+### Features
+
+* angular package format ([#1474](https://github.com/akveo/nebular/issues/1474)) ([647089e](https://github.com/akveo/nebular/commit/647089e))
+* enable ci for 3.6.0 branch ([#1580](https://github.com/akveo/nebular/issues/1580)) ([d77254c](https://github.com/akveo/nebular/commit/d77254c))
+* remove Nebular 4 theme breaking notice ([#1426](https://github.com/akveo/nebular/issues/1426)) ([37808be](https://github.com/akveo/nebular/commit/37808be))
+
+
+### BREAKING CHANGES
+
+* Angular 8+ now required
+* **select:** Only `null` and `undefined` option values now considered as reset.
+`false` and falsy values such as `0`, `''`, `NaN` don't reset select
+value anymore.
+
+
+
 <a name="3.5.0"></a>
 # [3.5.0](https://github.com/akveo/nebular/compare/v3.4.2...v3.5.0) (2019-04-12)
 
