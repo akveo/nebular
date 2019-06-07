@@ -366,11 +366,13 @@ To start a new release (publish the framework packages on NPM) you need:
   * fix/expand changelog manually
 6. push the branch, create PR, approve - merge
 7. pull the upstream (master)   
-8. `npm run release` - run prepare & validate and finally publish the packages to NPM (use `--tag=next` for upcoming release)
-9. create and push git tag
-10. create release on github
-11. publish docs
-12. add relese notes to [Nebular Releases](https://github.com/akveo/nebular/issues/1204)
+8. If publishing LTS release add `--tag=lts` to publish command in `scripts/publish.sh:7`
+9. In case of beta, rc or any other unstable release add `--tag=next` to publish command in `scripts/publish.sh:7`
+10. `npm run release` - run prepare & validate and finally publish the packages to NPM
+11. create and push git tag
+12. create release on github
+13. publish docs
+14. add relese notes to [Nebular Releases](https://github.com/akveo/nebular/issues/1204)
 
 #ngx-admin development on the latest Nebular sources
 
