@@ -355,23 +355,22 @@ To give the user capability switch between live and inline representation of the
 To start a new release (publish the framework packages on NPM) you need:
 
 1. create a new release branch called `release:v1.0.2`
-2. `npm run release:prepare` - this will create ready for publishing packages in src/.lib
-3. `npm run release:validate` - this will build prod & AOT builds of the playground app using prepared packages in src/.lib and run e2e tests again it.
-4. MANUALLY update a version in main ./package.json to a new one
-5. 
+2. `npm run release:validate` - this will create ready for publishing packages in src/.lib then build prod & AOT builds of the playground app using prepared packages and then run e2e tests again it.
+3. MANUALLY update a version in main ./package.json to a new one
+4. 
   * `npm run update-packages-smoke-lock` to update `packages-smoke/package-lock.json` 
   * `npm run version:bump`
   * update version in `package-lock.json` and `packages-smoke/package-lock.json`
-6. 
+5. 
   * `npm run version:changelog`
   * fix/expand changelog manually
-7. push the branch, create PR, approve - merge
-8. pull the upstream (master)   
-9. `npm run release` - run prepare & validate and finally publish the packages to NPM (use `--tag=next` for upcoming release)
-10. create and push git tag
-11. create release on github
-12. publish docs
-13. add relese notes to [Nebular Releases](https://github.com/akveo/nebular/issues/1204)
+6. push the branch, create PR, approve - merge
+7. pull the upstream (master)   
+8. `npm run release` - run prepare & validate and finally publish the packages to NPM (use `--tag=next` for upcoming release)
+9. create and push git tag
+10. create release on github
+11. publish docs
+12. add relese notes to [Nebular Releases](https://github.com/akveo/nebular/issues/1204)
 
 #ngx-admin development on the latest Nebular sources
 
