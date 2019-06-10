@@ -20,6 +20,9 @@
   @include nb-input-theme();
   @include nb-typography();
   @include nb-buttons-theme();
+  @include nb-select-theme();
+  @include nb-input-theme();
+  @include nb-overlay-theme();
 
   @include nbd-common();
 
