@@ -11,8 +11,8 @@ import { NbLayoutDirectionService, NbLayoutDirection } from '../../services/dire
 
 import { convertToBoolProperty } from '../helpers';
 
-const ltrState = style({ transform: 'translateX(100%)' });
-const rtlState = style({ transform: 'translateX(-100%)' });
+const ltrState = style({ right: 0 });
+const rtlState = style({ left: 0 });
 const defaultState = { params: { direction: '' } };
 
 /**
@@ -85,7 +85,7 @@ const defaultState = { params: { direction: '' } };
       >
       <div class="toggle">
         <span [@onOff]="checkState()" class="toggle-switcher">
-          <nb-icon *ngIf="checked" icon="checkmark-outline" pack="nebular-essentials"></nb-icon>
+          <nb-icon *ngIf="checked" icon="checkmark-bold-outline" pack="nebular-essentials"></nb-icon>
         </span>
       </div>
     </label>
