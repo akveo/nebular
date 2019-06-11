@@ -11,12 +11,6 @@
   }
 }
 
-@mixin toggle-outline($size) {
-  &:not(.disabled):focus .toggle, &:not(.disabled):hover .toggle {
-    box-shadow: 0 0 0 $size nb-theme(toggle-outline-color);
-  }
-}
-
 @mixin toggle-off-styles($color) {
   input {
     &:not(:checked) + .toggle {
@@ -40,7 +34,9 @@
     margin: nb-theme(toggle-outline-width) 0;
     border-radius: nb-theme(toggle-border-radius);
 
-    @include toggle-outline(nb-theme(toggle-outline-width));
+    &:not(.disabled):focus .toggle {
+      box-shadow: 0 0 0 nb-theme(checkbox-outline-width) nb-theme(checkbox-outline-color);
+    }
 
     input {
       &:not(:checked) + .toggle {
@@ -68,35 +64,30 @@
 
     &.primary {
       @include toggle-styles(nb-theme(toggle-border-width), nb-theme(toggle-primary-background-color));
-      @include toggle-outline(nb-theme(toggle-outline-width));
       @include toggle-off-styles(nb-theme(toggle-primary-off-background-color));
       @include toggle-switcher-styles(nb-theme(toggle-primary-switcher-border-color));
     }
 
     &.success {
       @include toggle-styles(nb-theme(toggle-border-width), nb-theme(toggle-success-background-color));
-      @include toggle-outline(nb-theme(toggle-outline-width));
       @include toggle-off-styles(nb-theme(toggle-success-off-background-color));
       @include toggle-switcher-styles(nb-theme(toggle-success-switcher-border-color));
     }
 
     &.warning {
       @include toggle-styles(nb-theme(toggle-border-width), nb-theme(toggle-warning-background-color));
-      @include toggle-outline(nb-theme(toggle-outline-width));
       @include toggle-off-styles(nb-theme(toggle-warning-off-background-color));
       @include toggle-switcher-styles(nb-theme(toggle-warning-switcher-border-color));
     }
 
     &.danger {
       @include toggle-styles(nb-theme(toggle-border-width), nb-theme(toggle-danger-background-color));
-      @include toggle-outline(nb-theme(toggle-outline-width));
       @include toggle-off-styles(nb-theme(toggle-danger-off-background-color));
       @include toggle-switcher-styles(nb-theme(toggle-danger-switcher-border-color));
     }
 
     &.info {
       @include toggle-styles(nb-theme(toggle-border-width), nb-theme(toggle-info-background-color));
-      @include toggle-outline(nb-theme(toggle-outline-width));
       @include toggle-off-styles(nb-theme(toggle-info-off-background-color));
       @include toggle-switcher-styles(nb-theme(toggle-info-switcher-border-color));
     }
