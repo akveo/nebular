@@ -10,7 +10,9 @@
  */
 $nb-enable-css-custom-properties: false !default;
 $nb-enabled-themes: ();
+$nb-enable-css-variables: false;
 $nb-themes: ();
+$nb-themes-non-processed: ();
 $nb-theme-process-mode: null;
 $nb-theme-name: 'default';
 $nb-theme: ();
