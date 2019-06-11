@@ -8,7 +8,7 @@ import { NbLayoutDirectionService } from '../../services/direction.service';
 import { NbIconModule } from '@nebular/theme';
 
 
-describe('Component: NbToggle', () => {
+fdescribe('Component: NbToggle', () => {
   let toggle: NbToggleComponent;
   let fixture: ComponentFixture<NbToggleComponent>;
   let toggleInput: DebugElement;
@@ -46,14 +46,14 @@ describe('Component: NbToggle', () => {
     expect(toggleInput.nativeElement.disabled).toBeFalsy();
   });
 
-  it('Setting `value` to `true` makes toggle input on', () => {
-    toggle.value = true;
+  it('Setting `checked` to `true` makes toggle input on', () => {
+    toggle.checked = true;
     fixture.detectChanges();
     expect(toggleInput.nativeElement.checked).toBeTruthy();
   });
 
-  it('Setting `value` to `false` makes toggle input off', () => {
-    toggle.value = false;
+  it('Setting `checked` to `false` makes toggle input off', () => {
+    toggle.checked = false;
     fixture.detectChanges();
     expect(toggleInput.nativeElement.checked).toBeFalsy();
   });

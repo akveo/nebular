@@ -79,13 +79,13 @@ const defaultState = { params: { direction: '' } };
     <label class="toggle-label">
       <input type="checkbox"
              [disabled]="disabled"
-             [checked]="value"
-             (change)="value = !value"
+             [checked]="checked"
+             (change)="checked = !checked"
              (blur)="setTouched()"
       >
       <div class="toggle">
         <span [@onOff]="checkState()" class="toggle-switcher">
-          <nb-icon *ngIf="value" icon="checkmark-outline" pack="nebular-essentials"></nb-icon>
+          <nb-icon *ngIf="checked" icon="checkmark-outline" pack="nebular-essentials"></nb-icon>
         </span>
       </div>
     </label>
@@ -103,11 +103,11 @@ export class NbToggleComponent implements OnInit, ControlValueAccessor {
   disabled: boolean = false;
 
   /**
-   * Toggle value
+   * Toggle checked
    * @type {boolean}
    * @private
    */
-  @Input('value') _value: boolean = false;
+  @Input('checked') _checked: boolean = false;
 
   /**
    * Toggle state
@@ -165,12 +165,12 @@ export class NbToggleComponent implements OnInit, ControlValueAccessor {
   onChange: any = () => { };
   onTouched: any = () => { };
 
-  get value() {
-    return this._value;
+  get checked() {
+    return this._checked;
   }
 
-  set value(val) {
-    this._value = val;
+  set checked(val) {
+    this._checked = val;
     this.onChange(val);
   }
 
@@ -186,7 +186,7 @@ export class NbToggleComponent implements OnInit, ControlValueAccessor {
   }
 
   checkState(): string {
-    if (this.value) {
+    if (this.checked) {
       if (this.direction === NbLayoutDirection.LTR) {
         return 'ltrOn';
       } else {
@@ -204,7 +204,7 @@ export class NbToggleComponent implements OnInit, ControlValueAccessor {
   }
 
   writeValue(val: any) {
-    this._value = val;
+    this._checked = val;
     this.changeDetector.detectChanges();
   }
 

@@ -9,7 +9,7 @@ import { Component } from '@angular/core';
           <nb-toggle disabled></nb-toggle>
         </div>
         <div>
-          <nb-toggle [value]="true" disabled></nb-toggle>
+          <nb-toggle [checked]="true" disabled></nb-toggle>
         </div>
       </nb-card-body>
     </nb-card>

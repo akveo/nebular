@@ -9,13 +9,13 @@ import { Component } from '@angular/core';
           <nb-toggle id="first"></nb-toggle>
         </div>
         <div>
-          <nb-toggle id="second" [value]="true"></nb-toggle>
+          <nb-toggle id="second" [checked]="true"></nb-toggle>
         </div>
         <div>
           <nb-toggle id="disabled" [disabled]="true"></nb-toggle>
         </div>
         <div>
-          <nb-toggle [value]="true" [disabled]="true"></nb-toggle>
+          <nb-toggle [checked]="true" [disabled]="true"></nb-toggle>
         </div>
         <div>
           <nb-toggle id="primary" status="primary"></nb-toggle>
