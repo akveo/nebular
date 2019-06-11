@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class NgdVersionService {
 
-  versionsExceptCurrent = [ '3.5.0', '3.6.0' ];
+  versionsExceptCurrent = [ '3.6.0' ];
 
   getNebularVersion() {
     return require('../../../../package.json').version;
