@@ -8,7 +8,7 @@ import { NbLayoutDirectionService } from '../../services/direction.service';
 import { NbIconModule } from '@nebular/theme';
 
 
-fdescribe('Component: NbToggle', () => {
+describe('Component: NbToggle', () => {
   let toggle: NbToggleComponent;
   let fixture: ComponentFixture<NbToggleComponent>;
   let toggleInput: DebugElement;
@@ -61,31 +61,31 @@ fdescribe('Component: NbToggle', () => {
   it('Setting `status` to `primary` apply corresponding class to host element', () => {
     toggle.status = 'primary';
     fixture.detectChanges();
-    expect(testContainerEl.classList.contains('primary')).toBeTruthy();
+    expect(testContainerEl.classList.contains('status-primary')).toBeTruthy();
   });
 
   it('Setting `status` to `success` apply corresponding class to host element', () => {
     toggle.status = 'success';
     fixture.detectChanges();
-    expect(testContainerEl.classList.contains('success')).toBeTruthy();
+    expect(testContainerEl.classList.contains('status-success')).toBeTruthy();
   });
 
   it('Setting `status` to `warning` apply corresponding class to host element', () => {
     toggle.status = 'warning';
     fixture.detectChanges();
-    expect(testContainerEl.classList.contains('warning')).toBeTruthy();
+    expect(testContainerEl.classList.contains('status-warning')).toBeTruthy();
   });
 
   it('Setting `status` to `danger` apply corresponding class to host element', () => {
     toggle.status = 'danger';
     fixture.detectChanges();
-    expect(testContainerEl.classList.contains('danger')).toBeTruthy();
+    expect(testContainerEl.classList.contains('status-danger')).toBeTruthy();
   });
 
   it('Setting `status` to `info` apply corresponding class to host element', () => {
     toggle.status = 'info';
     fixture.detectChanges();
-    expect(testContainerEl.classList.contains('info')).toBeTruthy();
+    expect(testContainerEl.classList.contains('status-info')).toBeTruthy();
   });
 });
 
