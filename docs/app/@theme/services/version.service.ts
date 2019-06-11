@@ -15,9 +15,9 @@ export class NgdVersionService {
 
   getVersionPath(version: string): string {
     if (version === this.getNebularVersion()) {
-      return '/';
+      return '/nebular';
     }
 
-    return '/' + version;
+    return `/nebular/${version}`;
   }
 }
