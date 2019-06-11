@@ -15,12 +15,25 @@
 
     input {
       &:not(:checked) + .toggle {
-        background-color: nb-theme(toggle-primary-off-background-color);
+        background-color: nb-theme(toggle-off-background-color);
       }
     }
 
-    &.disabled .toggle {
-      opacity: nb-theme(toggle-disabled-opacity);
+    &.disabled {
+      .toggle {
+        background-color: nb-theme(toggle-disabled-background-color);
+        border-color: nb-theme(toggle-disabled-border-color);
+
+        .toggle-switcher nb-icon {
+          color: nb-theme(toggle-disabled-checkmark-color);
+        }
+      }
+
+      input {
+        &:not(:checked) + .toggle {
+          background-color: nb-theme(toggle-off-disabled-background-color);
+        }
+      }
     }
 
     .toggle {
@@ -36,7 +49,7 @@
       background-color: nb-theme(toggle-switcher-background-color);
 
       nb-icon {
-        color: nb-theme(toggle-switcher-icon-color);
+        color: nb-theme(toggle-switcher-checkmark-color);
       }
     }
   }
@@ -62,7 +75,7 @@
 
     .toggle-switcher {
       nb-icon {
-        color: nb-theme(toggle-#{$status}-switcher-icon-color);
+        color: nb-theme(toggle-#{$status}-switcher-checkmark-color);
       }
     }
   }

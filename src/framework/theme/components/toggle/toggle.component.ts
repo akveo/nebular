@@ -43,29 +43,36 @@ const defaultState = { params: { direction: '' } };
  *
  * @styles
  *
- * toggle-size:
+ * toggle-height:
+ * toggle-width:
  * toggle-border-width:
+ * toggle-border-radius:
  * toggle-background-color:
  * toggle-outline-width:
  * toggle-outline-color:
+ * toggle-switcher-size:
  * toggle-switcher-background-color:
- * toggle-switcher-border-color:
- * toggle-disabled-opacity:
+ * toggle-switcher-checkmark-color:
+ * toggle-off-background-color:
+ * toggle-disabled-background-color:
+ * toggle-disabled-border-color:
+ * toggle-disabled-checkmark-color:
+ * toggle-off-disabled-background-color:
  * toggle-primary-background-color:
  * toggle-primary-off-background-color:
- * toggle-primary-switcher-border-color:
+ * toggle-primary-switcher-checkmark-color:
  * toggle-success-background-color:
  * toggle-success-off-background-color:
- * toggle-success-switcher-border-color:
+ * toggle-success-switcher-checkmark-color:
  * toggle-info-background-color:
  * toggle-info-off-background-color:
- * toggle-info-switcher-border-color:
+ * toggle-info-switcher-checkmark-color:
  * toggle-warning-background-color:
  * toggle-warning-off-background-color:
- * toggle-warning-switcher-border-color:
+ * toggle-warning-switcher-checkmark-color:
  * toggle-danger-background-color:
  * toggle-danger-off-background-color:
- * toggle-danger-switcher-border-color:
+ * toggle-danger-switcher-checkmark-color:
  */
 @Component({
   selector: 'nb-toggle',
