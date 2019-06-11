@@ -8,6 +8,7 @@ import { Component, Input, HostBinding, forwardRef, ChangeDetectorRef, OnInit } 
 import { trigger, state, style, animate, transition } from '@angular/animations';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { NbLayoutDirectionService, NbLayoutDirection } from '../../services/direction.service';
+import { NbComponentStatus } from '../component-status';
 
 import { convertToBoolProperty } from '../helpers';
 
@@ -99,7 +100,6 @@ const defaultState = { params: { direction: '' } };
 })
 export class NbToggleComponent implements OnInit, ControlValueAccessor {
   private direction: NbLayoutDirection;
-  status: string;
   disabled: boolean = false;
 
   /**
@@ -119,13 +119,11 @@ export class NbToggleComponent implements OnInit, ControlValueAccessor {
   }
 
   /**
-   * Toggle status (primary, success, warning, danger, info)
-   * @param {string} val
+   * Toggle status.
+   * Possible values are: `primary` (default), `success`, `warning`, `danger`, `info`
    */
-  @Input('status')
-  set setStatus(val: string) {
-    this.status = val;
-  }
+  @Input()
+  status: '' | NbComponentStatus = '';
 
   @HostBinding('attr.tabindex')
   get tabbable(): string {
@@ -137,27 +135,27 @@ export class NbToggleComponent implements OnInit, ControlValueAccessor {
     return this.disabled === true;
   }
 
-  @HostBinding('class.primary')
+  @HostBinding('class.status-primary')
   get primary() {
     return this.status === 'primary';
   }
 
-  @HostBinding('class.success')
+  @HostBinding('class.status-success')
   get success() {
     return this.status === 'success';
   }
 
-  @HostBinding('class.warning')
+  @HostBinding('class.status-warning')
   get warning() {
     return this.status === 'warning';
   }
 
-  @HostBinding('class.danger')
+  @HostBinding('class.status-danger')
   get danger() {
     return this.status === 'danger';
   }
 
-  @HostBinding('class.info')
+  @HostBinding('class.status-info')
   get info() {
     return this.status === 'info';
   }

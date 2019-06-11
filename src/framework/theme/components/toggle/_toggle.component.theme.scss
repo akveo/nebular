@@ -4,31 +4,6 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-@mixin toggle-styles($border-size, $color) {
-  .toggle {
-    background-color: $color;
-    border: $border-size solid $color;
-  }
-}
-
-@mixin toggle-off-styles($color) {
-  input {
-    &:not(:checked) + .toggle {
-      background-color: $color;
-    }
-  }
-}
-
-@mixin toggle-switcher-styles($color) {
-  .toggle-switcher {
-    background-color: nb-theme(toggle-switcher-background-color);
-
-    nb-icon {
-      color: $color;
-    }
-  }
-}
-
 @mixin nb-toggle-theme() {
   nb-toggle {
     margin: nb-theme(toggle-outline-width) 0;
@@ -53,43 +28,42 @@
       width: nb-theme(toggle-width);
       background-color: nb-theme(toggle-background-color);
       border: nb-theme(toggle-border-width) solid nb-theme(toggle-background-color);
-
-      @include toggle-switcher-styles(nb-theme(toggle-switcher-border-color));
     }
 
     .toggle-switcher {
       width: nb-theme(toggle-switcher-size);
       height: nb-theme(toggle-switcher-size);
+      background-color: nb-theme(toggle-switcher-background-color);
+
+      nb-icon {
+        color: nb-theme(toggle-switcher-icon-color);
+      }
+    }
+  }
+
+  @each $status in nb-get-statuses() {
+    @include nb-toggle-status($status);
+  }
+}
+
+@mixin nb-toggle-status($status: '') {
+  nb-toggle.status-#{$status} {
+
+    .toggle {
+      background-color: nb-theme(toggle-#{$status}-background-color);
+      border-color: nb-theme(toggle-#{$status}-background-color);
     }
 
-    &.primary {
-      @include toggle-styles(nb-theme(toggle-border-width), nb-theme(toggle-primary-background-color));
-      @include toggle-off-styles(nb-theme(toggle-primary-off-background-color));
-      @include toggle-switcher-styles(nb-theme(toggle-primary-switcher-border-color));
+    input {
+      &:not(:checked) + .toggle {
+        background-color: nb-theme(toggle-#{$status}-off-background-color);
+      }
     }
 
-    &.success {
-      @include toggle-styles(nb-theme(toggle-border-width), nb-theme(toggle-success-background-color));
-      @include toggle-off-styles(nb-theme(toggle-success-off-background-color));
-      @include toggle-switcher-styles(nb-theme(toggle-success-switcher-border-color));
-    }
-
-    &.warning {
-      @include toggle-styles(nb-theme(toggle-border-width), nb-theme(toggle-warning-background-color));
-      @include toggle-off-styles(nb-theme(toggle-warning-off-background-color));
-      @include toggle-switcher-styles(nb-theme(toggle-warning-switcher-border-color));
-    }
-
-    &.danger {
-      @include toggle-styles(nb-theme(toggle-border-width), nb-theme(toggle-danger-background-color));
-      @include toggle-off-styles(nb-theme(toggle-danger-off-background-color));
-      @include toggle-switcher-styles(nb-theme(toggle-danger-switcher-border-color));
-    }
-
-    &.info {
-      @include toggle-styles(nb-theme(toggle-border-width), nb-theme(toggle-info-background-color));
-      @include toggle-off-styles(nb-theme(toggle-info-off-background-color));
-      @include toggle-switcher-styles(nb-theme(toggle-info-switcher-border-color));
+    .toggle-switcher {
+      nb-icon {
+        color: nb-theme(toggle-#{$status}-switcher-icon-color);
+      }
     }
   }
 }
