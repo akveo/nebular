@@ -383,11 +383,13 @@ To start a new release (publish the framework packages on NPM) you need:
         4. Run `npm run build -- docs --prod --base-href '/nebular/<version>/'` (for example `--base-href '/nebular/3.6.1/'`)
         5. Run `npm run docs:dirs`.
         6. Rename `docs/dist` to `docs/<version>`.
-        7. Copy renamed foder to the directory from step `13.2`.
-    4. Remove `docs/dist`
-    5. Move resulting directory from step `13.2` to 'docs/dist'.
-    6. Run `npm run ngh -- --dir ./docs/dist`
-14. add relese notes to [Nebular Releases](https://github.com/akveo/nebular/issues/1204)
+        7. Copy renamed folder to the directory from step `13.2`.
+    4. Checkout current version
+    5. Run `npm install`
+    6. Remove `docs/dist`
+    7. Move resulting directory from step `13.2` to 'docs/dist'.
+    8. Run `npm run ngh -- --dir ./docs/dist`
+14. add release notes to [Nebular Releases](https://github.com/akveo/nebular/issues/1204)
 
 #ngx-admin development on the latest Nebular sources
 
