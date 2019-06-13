@@ -361,6 +361,8 @@ To start a new release (publish the framework packages on NPM) you need:
   * `npm run update-packages-smoke-lock` to update `packages-smoke/package-lock.json` 
   * `npm run version:bump`
   * update version in `package-lock.json` and `packages-smoke/package-lock.json`
+  * update `docs/versions.json`
+  * update `versions` array in `docs/assets/ghspa.js`. It should include all versions from `docs/versions.json` except currently released (latest).
 5. 
   * `npm run version:changelog`
   * fix/expand changelog manually
@@ -372,6 +374,19 @@ To start a new release (publish the framework packages on NPM) you need:
 11. create and push git tag
 12. create release on github
 13. publish docs
+    1. Build docs for currently released version
+    2. Copy `docs/dist` outside of `nebular/docs` directory
+    3. Loop over other versions mentioned in `docs/versions.json`:
+        1. Run `git checkout <version tag>`
+        2. Run `npm ci`
+        3. Run `npm run docs:prepare`
+        4. Run `npm run build -- docs --prod --base-href '/nebular/<version>/'` (for example `--base-href '/nebular/3.6.1'`)
+        5. Run `npm run docs:dirs`.
+        6. Rename `docs/dist` to `docs/<version>`.
+        7. Copy renamed foder to the directory from step `13.2`.
+    4. Remove `docs/dist`
+    5. Move resulting directory from step `13.2` to 'docs/dist'.
+    6. Run `npm run ngh -- --dir ./docs/dist`
 14. add relese notes to [Nebular Releases](https://github.com/akveo/nebular/issues/1204)
 
 #ngx-admin development on the latest Nebular sources
