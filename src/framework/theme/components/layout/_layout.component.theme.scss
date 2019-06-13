@@ -157,8 +157,11 @@
 
     .layout-container {
 
-      nb-sidebar.fixed {
-        top: nb-theme(header-height);
+      nb-sidebar {
+        &.fixed,
+        .main-container-fixed {
+          top: nb-theme(header-height);
+        }
       }
 
       .content {
