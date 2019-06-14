@@ -57,7 +57,6 @@ const defaultState = { params: { direction: '' } };
  * toggle-disabled-background-color:
  * toggle-disabled-border-color:
  * toggle-disabled-checkmark-color:
- * toggle-off-disabled-background-color:
  * toggle-primary-background-color:
  * toggle-primary-border-color:
  * toggle-primary-checked-background-color:

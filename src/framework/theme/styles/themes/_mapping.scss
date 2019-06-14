@@ -1776,10 +1776,9 @@ $eva-mapping: (
 
   toggle-disabled-background-color: background-basic-color-2,
   toggle-disabled-border-color: border-basic-color-3,
-  toggle-disabled-checkmark-color: background-basic-color-2,
-  toggle-off-disabled-background-color: background-basic-color-2,
+  toggle-disabled-checkmark-color: background-basic-color-1,
 
-  toggle-primary-background-color: background-basic-color-3,
+  toggle-primary-background-color: background-basic-color-2,
   toggle-primary-border-color: color-primary-default,
   toggle-primary-checked-background-color: color-primary-default,
   toggle-primary-checked-border-color: color-primary-default,
@@ -1790,7 +1789,7 @@ $eva-mapping: (
   toggle-primary-active-background-color: color-primary-600,
   toggle-primary-active-border-color: color-primary-600,
 
-  toggle-success-background-color: background-basic-color-3,
+  toggle-success-background-color: background-basic-color-2,
   toggle-success-border-color: color-success-default,
   toggle-success-checked-background-color: color-success-default,
   toggle-success-checked-border-color: color-success-default,
@@ -1801,7 +1800,7 @@ $eva-mapping: (
   toggle-success-active-background-color: color-success-600,
   toggle-success-active-border-color: color-success-600,
 
-  toggle-info-background-color: background-basic-color-3,
+  toggle-info-background-color: background-basic-color-2,
   toggle-info-border-color: color-info-default,
   toggle-info-checked-background-color: color-info-default,
   toggle-info-checked-border-color: color-info-default,
@@ -1812,7 +1811,7 @@ $eva-mapping: (
   toggle-info-active-background-color: color-info-600,
   toggle-info-active-border-color: color-info-600,
 
-  toggle-warning-background-color: background-basic-color-3,
+  toggle-warning-background-color: background-basic-color-2,
   toggle-warning-border-color: color-warning-default,
   toggle-warning-checked-background-color: color-warning-default,
   toggle-warning-checked-border-color: color-warning-default,
@@ -1823,7 +1822,7 @@ $eva-mapping: (
   toggle-warning-active-background-color: color-warning-600,
   toggle-warning-active-border-color: color-warning-600,
 
-  toggle-danger-background-color: background-basic-color-3,
+  toggle-danger-background-color: background-basic-color-2,
   toggle-danger-border-color: color-danger-default,
   toggle-danger-checked-background-color: color-danger-default,
   toggle-danger-checked-border-color: color-danger-default,
