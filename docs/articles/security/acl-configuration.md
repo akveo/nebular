@@ -41,7 +41,7 @@ Now, let's convert this into an ACL configuration object which Nebular can under
 ``` 
 
 As you can see the configuration is pretty much straightforward, each role can have a list of permissions (view, create, remove) and resources that are allowed for those permissions. We can also specify a `*` resource,
-which means that we have a permission againts any resource (like moderators can remove both news and comments).    
+which means that we have a permission against any resource (like moderators can remove both news and comments).    
 <hr>
 
 ## Role Configuration
@@ -141,7 +141,7 @@ export class RoleProvider implements NbRoleProvider {
 }
 ``` 
 
-So we subscribe to the `tokenChange` observable, which will produce a new token each time authentication change occurres. 
+So we subscribe to the `tokenChange` observable, which will produce a new token each time authentication change occurs. 
 Then we simply get a role from a token (for example simplicity, we assume that token payload always has a role value) or return default `guest` value.
 
 Don't worry if your setup does not use Nebular Auth. You can adjust this code to retrieve a user role from any service of your own. 

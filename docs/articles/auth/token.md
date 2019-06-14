@@ -124,7 +124,7 @@ export class HeaderComponent {
       .subscribe((token: NbAuthJWTToken) => {
       
         if (token.isValid()) {
-          this.user = token.getPayload(); // here we receive a payload from the token and assigne it to our `user` variable 
+          this.user = token.getPayload(); // here we receive a payload from the token and assigns it to our `user` variable 
         }
         
       });

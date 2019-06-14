@@ -14,12 +14,14 @@ First, let's install the module as it's distributed as an npm package. Security 
 npm i @nebular/security@next
 ```
 <hr>   
+
 ## Import the module:
 
 ```ts
 import { NbSecurityModule } from '@nebular/security';
 ```
 <hr>
+
 ## Register it
 
 Now, let's register the module in the root module:
