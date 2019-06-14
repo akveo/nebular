@@ -1,3 +1,20 @@
+<a name="3.6.1"></a>
+## [3.6.1](https://github.com/akveo/nebular/compare/v3.6.0...v3.6.1) (2019-06-14)
+
+
+### Bug Fixes
+
+* **layout:** set top position on fixed header ([#1605](https://github.com/akveo/nebular/issues/1605)) ([ed780dd](https://github.com/akveo/nebular/commit/ed780dd))
+* **sidebar:** prevent translation to the top when overlay opened ([#1608](https://github.com/akveo/nebular/issues/1608)) ([993c325](https://github.com/akveo/nebular/commit/993c325))
+* **theme:** deprecation warning of dart sass 2.0.0 ([#1603](https://github.com/akveo/nebular/issues/1603)) ([46ed014](https://github.com/akveo/nebular/commit/46ed014))
+
+
+### Features
+
+* **docs:** add version switcher ([#1617](https://github.com/akveo/nebular/issues/1617)) ([7d67ee5](https://github.com/akveo/nebular/commit/7d67ee5))
+
+
+
 <a name="3.6.0"></a>
 # [3.6.0](https://github.com/akveo/nebular/compare/v3.5.0...v3.6.0) (2019-06-07)
 
