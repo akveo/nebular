@@ -47,32 +47,67 @@ const defaultState = { params: { direction: '' } };
  * toggle-width:
  * toggle-border-width:
  * toggle-border-radius:
+ * toggle-border-color:
  * toggle-background-color:
  * toggle-outline-width:
  * toggle-outline-color:
  * toggle-switcher-size:
  * toggle-switcher-background-color:
  * toggle-switcher-checkmark-color:
- * toggle-off-background-color:
  * toggle-disabled-background-color:
  * toggle-disabled-border-color:
  * toggle-disabled-checkmark-color:
  * toggle-off-disabled-background-color:
  * toggle-primary-background-color:
- * toggle-primary-off-background-color:
+ * toggle-primary-border-color:
+ * toggle-primary-checked-background-color:
+ * toggle-primary-checked-border-color:
  * toggle-primary-switcher-checkmark-color:
+ * toggle-primary-focus-border-color:
+ * toggle-primary-hover-background-color:
+ * toggle-primary-hover-border-color:
+ * toggle-primary-active-background-color:
+ * toggle-primary-active-border-color:
  * toggle-success-background-color:
- * toggle-success-off-background-color:
+ * toggle-success-border-color:
+ * toggle-success-checked-background-color:
+ * toggle-success-checked-border-color:
  * toggle-success-switcher-checkmark-color:
+ * toggle-success-focus-border-color:
+ * toggle-success-hover-background-color:
+ * toggle-success-hover-border-color:
+ * toggle-success-active-background-color:
+ * toggle-success-active-border-color:
  * toggle-info-background-color:
- * toggle-info-off-background-color:
+ * toggle-info-border-color:
+ * toggle-info-checked-background-color:
+ * toggle-info-checked-border-color:
  * toggle-info-switcher-checkmark-color:
+ * toggle-info-focus-border-color:
+ * toggle-info-hover-background-color:
+ * toggle-info-hover-border-color:
+ * toggle-info-active-background-color
+ * toggle-info-active-border-color:
  * toggle-warning-background-color:
- * toggle-warning-off-background-color:
+ * toggle-warning-border-color:
+ * toggle-warning-checked-background-color:
+ * toggle-warning-checked-border-color:
  * toggle-warning-switcher-checkmark-color:
+ * toggle-warning-focus-border-color:
+ * toggle-warning-hover-background-color:
+ * toggle-warning-hover-border-color:
+ * toggle-warning-active-background-color:
+ * toggle-warning-active-border-color:
  * toggle-danger-background-color:
- * toggle-danger-off-background-color:
+ * toggle-danger-border-color:
+ * toggle-danger-checked-background-color:
+ * toggle-danger-checked-border-color:
  * toggle-danger-switcher-checkmark-color:
+ * toggle-danger-focus-border-color:
+ * toggle-danger-hover-background-color:
+ * toggle-danger-hover-border-color:
+ * toggle-danger-active-background-color:
+ * toggle-danger-active-border-color:
  */
 @Component({
   selector: 'nb-toggle',
@@ -85,13 +120,13 @@ const defaultState = { params: { direction: '' } };
   ],
   template: `
     <label class="toggle-label">
-      <input type="checkbox"
+      <input type="checkbox" class="native-input visually-hidden"
              [disabled]="disabled"
              [checked]="checked"
              (change)="checked = !checked"
              (blur)="setTouched()"
       >
-      <div class="toggle">
+      <div class="toggle" [class.checked]="checked">
         <span [@onOff]="checkState()" class="toggle-switcher">
           <nb-icon *ngIf="checked" icon="checkmark-bold-outline" pack="nebular-essentials"></nb-icon>
         </span>
