@@ -53,6 +53,8 @@ $nb-themes: nb-register-theme((
   menu-font-size: 0.95rem,
   menu-font-weight: font-weight-normal,
   footer-fg: color-fg-text,
+
+  version-select-highlight: #4479e7,
 ), docs-home, default);
 /* stylelint-enable foo */
 $nb-themes: nb-register-theme((
@@ -80,6 +82,7 @@ $nb-themes: nb-register-theme((
   sidebar-padding: 2rem,
   sidebar-shadow: none,
   color-fg-highlight: #4479e7,
+  version-select-highlight: color-fg-highlight,
   link-color:	color-fg-highlight,
   link-color-hover: color-fg-highlight,
   link-color-visited: color-fg-highlight,

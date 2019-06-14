@@ -16,6 +16,7 @@ import {
   NbSidebarModule,
   NbCardModule,
   NbCheckboxModule,
+  NbSelectModule,
 } from '@nebular/theme';
 
 import {
@@ -30,7 +31,7 @@ import {
   NgdColorSwatchDirective,
   NgdDescriptionDirective,
   NgdSearchComponent,
-} from './components/';
+} from './components';
 
 import {
   NgdHighlightService,
@@ -57,6 +58,7 @@ import {
     NbCardModule,
     NbMenuModule,
     NbTabsetModule,
+    NbSelectModule,
     RouterModule,
   ],
   declarations: [
