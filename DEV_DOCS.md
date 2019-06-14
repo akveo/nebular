@@ -361,6 +361,14 @@ To start a new release (publish the framework packages on NPM) you need:
   * `npm run update-packages-smoke-lock` to update `packages-smoke/package-lock.json` 
   * `npm run version:bump`
   * update version in `package-lock.json` and `packages-smoke/package-lock.json`
+  * update `docs/versions.json`:
+    - When releasing minor/patch update (both LTS and current):
+      - Replace latest current or LTS version in `version.json` with currently released
+    - When releasing major update:
+      - Replace LTS version with latest mentioned in version.json
+      - Add currently released version
+    - `path` of the current version should be set to `/nebular`, others to `/nebular/<version-name>`
+  * update `versions` array in `docs/assets/ghspa.js`. It should include all versions from `docs/versions.json` except currently released (latest).
 5. 
   * `npm run version:changelog`
   * fix/expand changelog manually
@@ -372,7 +380,22 @@ To start a new release (publish the framework packages on NPM) you need:
 11. create and push git tag
 12. create release on github
 13. publish docs
-14. add relese notes to [Nebular Releases](https://github.com/akveo/nebular/issues/1204)
+    1. Build docs for currently released version
+    2. Copy `docs/dist` outside of `nebular/docs` directory
+    3. Loop over other versions mentioned in `docs/versions.json`:
+        1. Run `git checkout <version tag>`
+        2. Run `npm ci`
+        3. Run `npm run docs:prepare`
+        4. Run `npm run build -- docs --prod --base-href '/nebular/<version>/'` (for example `--base-href '/nebular/3.6.1/'`)
+        5. Run `npm run docs:dirs`.
+        6. Rename `docs/dist` to `docs/<version>`.
+        7. Copy renamed folder to the directory from step `13.2`.
+    4. Checkout current version
+    5. Run `npm install`
+    6. Remove `docs/dist`
+    7. Move resulting directory from step `13.2` to 'docs/dist'.
+    8. Run `npm run ngh -- --dir ./docs/dist`
+14. add release notes to [Nebular Releases](https://github.com/akveo/nebular/issues/1204)
 
 #ngx-admin development on the latest Nebular sources
 
