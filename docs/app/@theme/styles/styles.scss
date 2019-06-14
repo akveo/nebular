@@ -16,8 +16,14 @@
   @include nb-actions-theme();
   @include nb-search-theme();
   @include nb-bootstrap-global();
+  @include nb-buttons-theme();
+  @include nb-select-theme();
+  @include nb-overlay-theme();
 
   @include nb-typography();
+  @include nb-select-theme();
+  @include nb-overlay-theme();
+  @include nb-buttons-theme();
 
   @include nbd-common();
 };

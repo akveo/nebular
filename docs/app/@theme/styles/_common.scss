@@ -30,4 +30,17 @@
   .algolia-docsearch-suggestion--category-header {
     background-color: transparent;
   }
+
+  nb-card.select {
+    border-color: nb-theme(version-select-highlight) !important;
+  }
+
+  nb-option {
+    background-color: #fff;
+
+    &.selected,
+    &:hover {
+      background-color: nb-theme(version-select-highlight) !important;
+    }
+  }
 }

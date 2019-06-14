@@ -37,21 +37,19 @@
 
     &.middle {
       flex: 1;
+      align-items: center;
+      margin: 0 -0.5rem;
     }
   }
 
   ::ng-deep nb-menu {
-    flex: 1;
+    flex: 1 0 auto;
     .menu-items {
       display: flex;
       justify-content: flex-end;
 
       .menu-item {
         border: none;
-
-        &:first-child a {
-          padding-left: 0;
-        }
 
         a {
           color: $menu-item-fg;
@@ -98,6 +96,10 @@
     margin-left: auto;
   }
 
+  .version-select {
+    display: none;
+  }
+
   @include media-breakpoint-up(is) {
     .section {
       padding: 0.875rem 1.125rem;
@@ -114,6 +116,24 @@
       }
       .version {
         display: inline;
+      }
+    }
+
+    .version-select {
+      display: block;
+
+      ::ng-deep button {
+        background-color: nb-theme(version-select-highlight);
+        padding: 0.65rem 1.7rem 0.65rem 1.5rem;
+
+        &:active {
+          background-color: nb-theme(version-select-highlight);
+        }
+
+        &::after {
+          top: 47%;
+          right: 0.55rem;
+        }
       }
     }
   }
@@ -180,6 +200,9 @@
     ngd-search {
       display: none;
     }
+    .version-select {
+      margin-left: 1rem;
+    }
 
     @include media-breakpoint-up(is) {
       ::ng-deep nb-menu .menu-items li:first-child {
@@ -191,6 +214,7 @@
       ngd-search {
         display: flex;
         align-items: center;
+        margin-left: auto;
       }
     }
 

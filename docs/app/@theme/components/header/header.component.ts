@@ -1,6 +1,9 @@
-import { ChangeDetectionStrategy, Component, HostBinding, Input, OnInit } from '@angular/core';
-import { NbMenuItem, NbSidebarService } from '@nebular/theme';
-import { NgdVersionService } from '../../services';
+import { ChangeDetectionStrategy, Component, HostBinding, Inject, Input, OnInit } from '@angular/core';
+import { NB_WINDOW, NbMenuItem, NbSidebarService } from '@nebular/theme';
+import { Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
+
+import { NgdVersionService, VersionInfo } from '../../services';
 
 @Component({
   selector: 'ngd-header',
@@ -12,12 +15,22 @@ import { NgdVersionService } from '../../services';
       </button>
       <div class="logo">
         <a routerLink="/">Nebular</a>
-        <span class="version">v{{ currentVersion }}</span>
+        <span class="version" *ngIf="currentVersionName$ | async">
+          v{{ currentVersionName$ | async }}
+        </span>
       </div>
     </div>
     <div class="section middle">
       <nb-menu [items]="mainMenu"></nb-menu>
       <ngd-search *ngIf="showSearch"></ngd-search>
+      <nb-select class="version-select"
+                 *ngIf="(showVersionSelect$ | async)"
+                 [selected]="currentVersion$ | async"
+                 (selectedChange)="redirectToVersion($event)">
+        <nb-option *ngFor="let version of supportedVersions$ | async" [value]="version">
+          {{ version.name }}
+        </nb-option>
+      </nb-select>
     </div>
     <div class="section right">
       <iframe class="stars"
@@ -34,7 +47,11 @@ export class NgdHeaderComponent implements OnInit {
   @Input() showSearch = true;
   @HostBinding('class.docs-page') @Input() isDocs = false;
 
-  currentVersion: string;
+  private window: Window;
+  supportedVersions$: Observable<VersionInfo[]>;
+  currentVersion$: Observable<VersionInfo>;
+  currentVersionName$: Observable<string>;
+  showVersionSelect$: Observable<boolean>;
 
   mainMenu: NbMenuItem[] = [
     {
@@ -62,13 +79,24 @@ export class NgdHeaderComponent implements OnInit {
   @Input() sidebarTag: string;
 
   constructor(
-    versionService: NgdVersionService,
+    @Inject(NB_WINDOW) window,
+    private versionService: NgdVersionService,
     private sidebarService: NbSidebarService,
   ) {
-    this.currentVersion = versionService.getNebularVersion();
+    this.window = window;
   }
 
   ngOnInit() {
+    this.currentVersion$ = this.versionService.getCurrentVersion();
+    this.currentVersionName$ = this.currentVersion$.pipe(map((version: VersionInfo) => version.name));
+    this.supportedVersions$ = this.versionService.getSupportedVersions();
+
+    this.showVersionSelect$ = this.supportedVersions$
+      .pipe(
+        map((versions: VersionInfo[]) => versions.length > 0),
+        startWith(false),
+      );
+
     if (!this.isDocs) {
       this.mainMenu.push({
         title: 'Professional Services',
@@ -79,5 +107,9 @@ export class NgdHeaderComponent implements OnInit {
 
   toggleSidebar() {
     this.sidebarService.toggle(false, this.sidebarTag);
+  }
+
+  redirectToVersion(version: VersionInfo): void {
+    this.window.location.href = version.path;
   }
 }
