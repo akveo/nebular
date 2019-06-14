@@ -361,7 +361,13 @@ To start a new release (publish the framework packages on NPM) you need:
   * `npm run update-packages-smoke-lock` to update `packages-smoke/package-lock.json` 
   * `npm run version:bump`
   * update version in `package-lock.json` and `packages-smoke/package-lock.json`
-  * update `docs/versions.json`
+  * update `docs/versions.json`:
+    - When releasing minor/patch update (both LTS and current):
+      - Replace latest current or LTS version in `version.json` with currently released
+    - When releasing major update:
+      - Replace LTS version with latest mentioned in version.json
+      - Add currently released version
+    - `path` of the current version should be set to `/nebular`, others to `/nebular/<version-name>`
   * update `versions` array in `docs/assets/ghspa.js`. It should include all versions from `docs/versions.json` except currently released (latest).
 5. 
   * `npm run version:changelog`
