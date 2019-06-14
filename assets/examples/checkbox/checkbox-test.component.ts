@@ -7,13 +7,13 @@ import { Component } from '@angular/core';
       <nb-checkbox id="first"></nb-checkbox>
     </div>
     <div>
-      <nb-checkbox id="second" [value]="true">Checked</nb-checkbox>
+      <nb-checkbox id="second" [checked]="true">Checked</nb-checkbox>
     </div>
     <div>
       <nb-checkbox id="disabled" [disabled]="true">Disabled</nb-checkbox>
     </div>
     <div>
-      <nb-checkbox [value]="true" [disabled]="true">Disabled, checked</nb-checkbox>
+      <nb-checkbox [checked]="true" [disabled]="true">Disabled, checked</nb-checkbox>
     </div>
     <div>
       <nb-checkbox id="success" status="success">Success</nb-checkbox>
