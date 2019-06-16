@@ -219,7 +219,7 @@ There are two ways to upgrade:
 1) install Eva Icons Nebular package `npm i @nebular/eva-icons`
 2) register `NbEvaIconsModule` in the `app.module.ts`
 ```
-import { NbEvaIconsModule } form '@nebular/eva-icons';
+import { NbEvaIconsModule } from '@nebular/eva-icons';
 
 @NgModule({
   imports: [
