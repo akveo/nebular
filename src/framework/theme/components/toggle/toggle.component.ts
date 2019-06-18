@@ -114,6 +114,7 @@ const defaultState = { params: { direction: '' } };
     trigger('onOff', [
       state('ltrOn', ltrState, defaultState),
       state('rtlOn', rtlState, defaultState),
+      transition(':enter', [animate(0)]),
       transition('* <=> *', [animate('0.25s')]),
     ]),
   ],
@@ -165,11 +166,6 @@ export class NbToggleComponent implements OnInit, ControlValueAccessor {
    */
   @Input()
   status: '' | NbComponentStatus = '';
-
-  @HostBinding('attr.tabindex')
-  get tabbable(): string {
-    return this.disabled ? '-1' : '0';
-  }
 
   @HostBinding('class.disabled')
   get state() {
