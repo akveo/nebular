@@ -14,6 +14,7 @@
       display: inline-flex;
       border-radius: inherit;
       box-sizing: content-box;
+      @include nb-component-animation(background-color, border, box-shadow);
 
       .toggle-switcher {
         position: absolute;
