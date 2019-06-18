@@ -1,12 +1,11 @@
 import { NbJSThemeOptions } from './theme.options';
-import { NbColorHelper } from '../color.helper';
 
 const palette = {
-  primary: '#8a7fff',
-  success: '#40dc7e',
-  info: '#4ca6ff',
-  warning: '#ffa100',
-  danger: '#ff4c6a',
+  primary: '#3366ff',
+  success: '#00d68f',
+  info: '#0095ff',
+  warning: '#ffaa00',
+  danger: '#ff3d71',
 };
 
 export const DEFAULT_THEME: NbJSThemeOptions = {
@@ -16,12 +15,12 @@ export const DEFAULT_THEME: NbJSThemeOptions = {
     fontSecondary: '"Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
 
     bg: '#ffffff',
-    fg: '#a4abb3',
-    fgHeading: '#2a2a2a',
-    fgText: '#3b3b3b',
-    fgHighlight: '#41d974',
-    layoutBg: '#ebeff5',
-    separator: '#ebeef2',
+    fg: '#8f9bb3',
+    fgHeading: '#1a2138',
+    fgText: '#1a2138',
+    fgHighlight: '#3366ff',
+    layoutBg: '#f7f9fc',
+    separator: '#edf1f7',
 
     primary: palette.primary,
     success: palette.success,
@@ -29,10 +28,10 @@ export const DEFAULT_THEME: NbJSThemeOptions = {
     warning: palette.warning,
     danger: palette.danger,
 
-    primaryLight: NbColorHelper.tint(palette.primary, 15),
-    successLight: NbColorHelper.tint(palette.success, 15),
-    infoLight: NbColorHelper.tint(palette.info, 15),
-    warningLight: NbColorHelper.tint(palette.warning, 15),
-    dangerLight: NbColorHelper.tint(palette.danger, 15),
+    primaryLight: '#598bff',
+    successLight: '#2ce69b',
+    infoLight: '#42aaff',
+    warningLight: '#ffc94d',
+    dangerLight: '#ff708d',
   },
 };
