@@ -77,7 +77,7 @@ export class NbMenuItem {
    * Item is selected when partly or fully equal to the current url
    * @type {string}
    */
-  pathMatch?: string = 'full';
+  pathMatch?: 'full' | 'prefix' = 'full';
   /**
    * Where this is a home item
    * @type {boolean}
