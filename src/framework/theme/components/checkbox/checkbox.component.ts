@@ -157,17 +157,31 @@ export class NbCheckboxComponent implements ControlValueAccessor {
 
   /**
    * Checkbox value
+   * @deprecated
+   * @breaking-change Remove @5.0.0
    */
   @Input()
   get value(): boolean {
-    return this._value;
+    return this.checked;
   }
+
+  /**
+   * @deprecated
+   * @breaking-change Remove @5.0.0
+   */
   set value(value: boolean) {
-    this._value = value;
-    this.valueChange.emit(value);
-    this.onChange(value);
+    console.warn('NbCheckbox: `value` is deprecated and will be removed in 5.0.0. Use `checked` instead.');
+    this.checked = value;
   }
-  private _value: boolean = false;
+
+  @Input()
+  get checked(): boolean {
+    return this._checked;
+  }
+  set checked(value: boolean) {
+    this._checked = value;
+  }
+  private _checked: boolean = false;
 
   /**
    * Controls input disabled state
@@ -201,7 +215,26 @@ export class NbCheckboxComponent implements ControlValueAccessor {
   }
   private _indeterminate: boolean = false;
 
-  @Output() valueChange = new EventEmitter();
+  /**
+   * Output when checked state is changed by a user
+   * @deprecated
+   * @breaking-change Remove @5.0.0
+   * @type EventEmitter<boolean>
+   */
+  @Output()
+  get valueChange(): EventEmitter<boolean> {
+    console.warn('NbCheckbox: `valueChange` is deprecated and will be removed in 5.0.0. Use `checkedChange` instead.');
+    return this.checkedChange;
+  }
+  set valueChange(valueChange: EventEmitter<boolean>) {
+    this.checkedChange = valueChange;
+  }
+
+  /**
+   * Output when checked state is changed by a user
+   * @type EventEmitter<boolean>
+   */
+  @Output() checkedChange = new EventEmitter<boolean>();
 
   @HostBinding('class.status-primary')
   get primary() {
@@ -239,7 +272,7 @@ export class NbCheckboxComponent implements ControlValueAccessor {
   }
 
   writeValue(val: any) {
-    this._value = val;
+    this._checked = val;
     this.changeDetector.detectChanges();
   }
 
@@ -253,7 +286,9 @@ export class NbCheckboxComponent implements ControlValueAccessor {
 
   updateValueAndIndeterminate(event: Event): void {
     const input = (event.target as HTMLInputElement);
-    this.value = input.checked;
+    this.checked = input.checked;
+    this.checkedChange.emit(this.checked);
+    this.onChange(this.checked);
     this.indeterminate = input.indeterminate;
   }
 }

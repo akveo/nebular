@@ -43,7 +43,7 @@ import { NbIconLibraries } from './icon-libraries';
  * This command will install Nebular Eva Icons pack. Then register `NbEvaIconsModule` into your app module or any child
  * module you need to have the icons in:
  * ```ts
- * import { NbEvaIconsModule } form '@nebular/eva-icons';
+ * import { NbEvaIconsModule } from '@nebular/eva-icons';
  *
  * @NgModule({
  *   imports: [

@@ -1,3 +1,44 @@
+<a name="4.1.0"></a>
+# [4.1.0](https://github.com/akveo/nebular/compare/v4.0.0...v4.1.0) (2019-06-14)
+
+
+### Bug Fixes
+
+* **layout:** set top position on fixed header ([#1604](https://github.com/akveo/nebular/issues/1604)) ([6b89f73](https://github.com/akveo/nebular/commit/6b89f73))
+* **select:** transparent gap between options ([#1563](https://github.com/akveo/nebular/issues/1563)) ([714c45e](https://github.com/akveo/nebular/commit/714c45e))
+* **sidebar:** prevent translation to the top when overlay opened ([#1607](https://github.com/akveo/nebular/issues/1607)) ([c2a11fb](https://github.com/akveo/nebular/commit/c2a11fb))
+* **checkbox:** don't emit on `value` input change, deprecate `value`, add `checked` ([#1585](https://github.com/akveo/nebular/issues/1585)) ([72cc999](https://github.com/akveo/nebular/commit/72cc999))
+* **dev docs:** specify correct lts tag ([#1593](https://github.com/akveo/nebular/issues/1593)) ([f7a8be4](https://github.com/akveo/nebular/commit/f7a8be4))
+* **docs:** correct mention of date-fns ([#1572](https://github.com/akveo/nebular/issues/1572)) ([bad91ec](https://github.com/akveo/nebular/commit/bad91ec))
+* **docs:** fix incorrect eva-icons/bootstrap readme ([#1611](https://github.com/akveo/nebular/issues/1611)) ([73c5d36](https://github.com/akveo/nebular/commit/73c5d36))
+* **docs:** fixed small errors ([#1574](https://github.com/akveo/nebular/issues/1574)) ([03a8085](https://github.com/akveo/nebular/commit/03a8085))
+* **docs:** remove concave line and update dark example background ([#1562](https://github.com/akveo/nebular/issues/1562)) ([21a40ee](https://github.com/akveo/nebular/commit/21a40ee))
+* **docs:** use primary color for highlight ([#1583](https://github.com/akveo/nebular/issues/1583)) ([e9381c2](https://github.com/akveo/nebular/commit/e9381c2))
+
+
+### Features
+
+* **docs:** add version select ([#1599](https://github.com/akveo/nebular/issues/1599)) ([3987d76](https://github.com/akveo/nebular/commit/3987d76))
+
+
+
+<a name="3.6.1"></a>
+## [3.6.1](https://github.com/akveo/nebular/compare/v3.6.0...v3.6.1) (2019-06-14)
+
+
+### Bug Fixes
+
+* **layout:** set top position on fixed header ([#1605](https://github.com/akveo/nebular/issues/1605)) ([ed780dd](https://github.com/akveo/nebular/commit/ed780dd))
+* **sidebar:** prevent translation to the top when overlay opened ([#1608](https://github.com/akveo/nebular/issues/1608)) ([993c325](https://github.com/akveo/nebular/commit/993c325))
+* **theme:** deprecation warning of dart sass 2.0.0 ([#1603](https://github.com/akveo/nebular/issues/1603)) ([46ed014](https://github.com/akveo/nebular/commit/46ed014))
+
+
+### Features
+
+* **docs:** add version switcher ([#1617](https://github.com/akveo/nebular/issues/1617)) ([7d67ee5](https://github.com/akveo/nebular/commit/7d67ee5))
+
+
+
 <a name="3.6.0"></a>
 # [3.6.0 LTS](https://github.com/akveo/nebular/compare/v3.5.0...v3.6.0) (2019-06-07)
 
@@ -178,7 +219,7 @@ There are two ways to upgrade:
 1) install Eva Icons Nebular package `npm i @nebular/eva-icons`
 2) register `NbEvaIconsModule` in the `app.module.ts`
 ```
-import { NbEvaIconsModule } form '@nebular/eva-icons';
+import { NbEvaIconsModule } from '@nebular/eva-icons';
 
 @NgModule({
   imports: [

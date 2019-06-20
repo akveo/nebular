@@ -1,5 +1,4 @@
-import { take } from 'rxjs/operators';
-import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Component, DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { ReactiveFormsModule, FormControl } from '@angular/forms';
@@ -41,14 +40,26 @@ describe('Component: NbCheckbox', () => {
     expect(checkboxInput.nativeElement.disabled).toBeFalsy();
   });
 
-  it('Setting value to true makes checkbox input checked', () => {
+  it('Setting deprecated value to true makes checkbox input checked', () => {
     checkbox.value = true;
     fixture.detectChanges();
     expect(checkboxInput.nativeElement.checked).toBeTruthy();
   });
 
-  it('Setting value to false makes checkbox input unchecked', () => {
+  it('Setting deprecated value to false makes checkbox input unchecked', () => {
     checkbox.value = false;
+    fixture.detectChanges();
+    expect(checkboxInput.nativeElement.checked).toBeFalsy();
+  });
+
+  it('Setting checked to true makes checkbox input checked', () => {
+    checkbox.checked = true;
+    fixture.detectChanges();
+    expect(checkboxInput.nativeElement.checked).toBeTruthy();
+  });
+
+  it('Setting checked to false makes checkbox input unchecked', () => {
+    checkbox.checked = false;
     fixture.detectChanges();
     expect(checkboxInput.nativeElement.checked).toBeFalsy();
   });
@@ -83,26 +94,66 @@ describe('Component: NbCheckbox', () => {
     expect(testContainerEl.classList.contains('status-info')).toBeTruthy();
   });
 
-  it('should emit change event when changed', fakeAsync(() => {
-    checkbox.valueChange
-      .pipe(take(1))
-      .subscribe((value: boolean) => expect(value).toEqual(true));
+  it('deprecated should not emit change event when input changed', () => {
 
-    checkbox.value = true;
+    const spy = jasmine.createSpy('valueChange subscriber');
+
+    checkbox.valueChange
+      .subscribe(spy);
+
+    checkbox.checked = true;
     fixture.detectChanges();
-    tick();
-  }));
+    expect(spy).toHaveBeenCalledTimes(0);
+  });
+
+  it('deprecated  should emit change event when clicked', () => {
+
+    const spy = jasmine.createSpy('valueChange subscriber');
+
+    checkbox.valueChange
+      .subscribe(spy);
+
+    label.nativeElement.click();
+
+    fixture.detectChanges();
+    expect(spy).toHaveBeenCalledTimes(1);
+  });
+
+  it('should not emit change event when input changed', () => {
+
+    const spy = jasmine.createSpy('checkedChange subscriber');
+
+    checkbox.checkedChange
+      .subscribe(spy);
+
+    checkbox.checked = true;
+    fixture.detectChanges();
+    expect(spy).toHaveBeenCalledTimes(0);
+  });
+
+  it('should emit change event when clicked', () => {
+
+    const spy = jasmine.createSpy('checkedChange subscriber');
+
+    checkbox.checkedChange
+      .subscribe(spy);
+
+    label.nativeElement.click();
+
+    fixture.detectChanges();
+    expect(spy).toHaveBeenCalledTimes(1);
+  });
 
   it('should change value to opposite when clicked', () => {
     label.nativeElement.click();
     fixture.detectChanges();
 
-    expect(checkbox.value).toEqual(true);
+    expect(checkbox.checked).toEqual(true);
 
     label.nativeElement.click();
     fixture.detectChanges();
 
-    expect(checkbox.value).toEqual(false);
+    expect(checkbox.checked).toEqual(false);
   });
 
   it('should reset indeterminate state when clicked on unchecked checkbox', () => {
@@ -117,7 +168,7 @@ describe('Component: NbCheckbox', () => {
   });
 
   it('should reset indeterminate state when clicked on unchecked checkbox', () => {
-    checkbox.value = false;
+    checkbox.checked = false;
     checkbox.indeterminate = true;
     fixture.detectChanges();
 
