@@ -27,9 +27,21 @@ export const COSMIC_THEME: NbJSThemeOptions = {
 
     fg: '#b4b4db',
     fgHeading: '#ffffff',
-    fgText: '#d1d1ff',
-    fgHighlight: '#00f9a6',
-    layoutBg: '#2f296b',
-    separator: '#342e73',
+    fgText: '#ffffff',
+    fgHighlight: palette.primary,
+    layoutBg: '#151a30',
+    separator: '#151a30',
+
+    primary: palette.primary,
+    success: palette.success,
+    info: palette.info,
+    warning: palette.warning,
+    danger: palette.danger,
+
+    primaryLight: '#b18aff',
+    successLight: '#2ce69b',
+    infoLight: '#42aaff',
+    warningLight: '#ffc94d',
+    dangerLight: '#ff708d',
   },
 };

@@ -39,10 +39,10 @@ export const CORPORATE_THEME: NbJSThemeOptions = {
     warning: palette.warning,
     danger: palette.danger,
 
-    primaryLight: NbColorHelper.tint(palette.primary, 15),
-    successLight: NbColorHelper.tint(palette.success, 15),
-    infoLight: NbColorHelper.tint(palette.info, 15),
-    warningLight: NbColorHelper.tint(palette.warning, 15),
-    dangerLight: NbColorHelper.tint(palette.danger, 15),
+    primaryLight: '#598bff',
+    successLight: '#2ce69b',
+    infoLight: '#42aaff',
+    warningLight: '#ffc94d',
+    dangerLight: '#ff708d',
   },
 };
