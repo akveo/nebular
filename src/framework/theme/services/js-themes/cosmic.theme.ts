@@ -10,8 +10,10 @@ const palette = {
 
 export const COSMIC_THEME: NbJSThemeOptions = {
   name: 'cosmic',
-  base: 'default',
   variables: {
+    fontMain: 'Open Sans, sans-serif',
+    fontSecondary: 'Raleway, sans-serif',
+
     bg: '#323259',
     bg2: '#252547',
     bg3: '#1b1b38',

@@ -11,8 +11,8 @@ const palette = {
 export const DEFAULT_THEME: NbJSThemeOptions = {
   name: 'default',
   variables: {
-    fontMain: '"Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
-    fontSecondary: '"Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
+    fontMain: 'Open Sans, sans-serif',
+    fontSecondary: 'Raleway, sans-serif',
 
     bg: '#ffffff',
     bg2: '#f7f9fc',
