@@ -15,6 +15,16 @@ export const DEFAULT_THEME: NbJSThemeOptions = {
     fontSecondary: '"Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
 
     bg: '#ffffff',
+    bg2: '#f7f9fc',
+    bg3: '#edf1f7',
+    bg4: '#e4e9f2',
+
+    border: '#ffffff',
+    border2: '#f7f9fc',
+    border3: '#edf1f7',
+    border4: '#e4e9f2',
+    border5: '#c5cee0',
+
     fg: '#8f9bb3',
     fgHeading: '#1a2138',
     fgText: '#1a2138',
