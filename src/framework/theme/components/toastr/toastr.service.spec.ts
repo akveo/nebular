@@ -226,7 +226,6 @@ describe('toastr-container-registry', () => {
 
 describe('toastr-container', () => {
   let toastrContainer: NbToastContainer;
-  let positionStub: any;
   let containerRefStub: any;
   let positionHelperStub: any;
 
@@ -248,7 +247,7 @@ describe('toastr-container', () => {
   });
 
   beforeEach(() => {
-    toastrContainer = new NbToastContainer(positionStub, containerRefStub, positionHelperStub);
+    toastrContainer = new NbToastContainer(<any> {}, containerRefStub, positionHelperStub);
   });
 
   it('should prevent duplicates if previous toast is the same', () => {
