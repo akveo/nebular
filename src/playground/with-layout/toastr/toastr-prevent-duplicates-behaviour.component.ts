@@ -33,11 +33,11 @@ export class ToastrPreventDuplicatesBehaviourComponent {
   }
 
   options = [
-    { value: NbDuplicateToastBehaviour.PREVIOUS , label: 'Duplicate previous', checked: true },
-    { value: NbDuplicateToastBehaviour.ALL , label: 'Duplicate all' },
+    { value: 'previous' , label: 'Duplicate previous', checked: true },
+    { value: 'all' , label: 'Duplicate all' },
   ];
 
-  option = NbDuplicateToastBehaviour.PREVIOUS;
+  option: NbDuplicateToastBehaviour = 'previous';
 
   showToast(message, status) {
     this.toastrService.show(

@@ -3,7 +3,6 @@ import { NbGlobalLogicalPosition, NbGlobalPhysicalPosition } from '../cdk/overla
 import { TestBed } from '@angular/core/testing';
 import { ComponentFactoryResolver } from '@angular/core';
 import { NbToast, NbToastrModule } from '@nebular/theme';
-import { NbDuplicateToastBehaviour } from '@nebular/theme/components/toastr/toastr-config';
 
 
 describe('toastr-service', () => {
@@ -254,7 +253,7 @@ describe('toastr-container', () => {
     const toast1 = {
       title: 'toast1',
       message: 'message',
-      config: { status: 'dander', preventDuplicates: true, duplicatesBehaviour: NbDuplicateToastBehaviour.PREVIOUS },
+      config: { status: 'dander', preventDuplicates: true, duplicatesBehaviour: 'previous' },
     };
 
     const toast2 = Object.assign({title: 'toast2'}, toast1);
@@ -270,7 +269,7 @@ describe('toastr-container', () => {
     const toast1 = {
       title: 'toast1',
       message: 'message',
-      config: { status: 'dander', preventDuplicates: true, duplicatesBehaviour: NbDuplicateToastBehaviour.ALL },
+      config: { status: 'dander', preventDuplicates: true, duplicatesBehaviour: 'all' },
     };
 
     const toast2 = Object.assign({title: 'toast2'}, toast1);

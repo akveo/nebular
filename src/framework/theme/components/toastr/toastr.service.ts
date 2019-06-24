@@ -11,7 +11,7 @@ import { NbOverlayService, patch } from '../cdk/overlay/overlay-service';
 import { NbPositionBuilderService } from '../cdk/overlay/overlay-position';
 import { NbGlobalLogicalPosition, NbGlobalPosition, NbPositionHelper } from '../cdk/overlay/position-helper';
 import { NbToastrContainerComponent } from './toastr-container.component';
-import { NB_TOASTR_CONFIG, NbDuplicateToastBehaviour, NbToastrConfig } from './toastr-config';
+import { NB_TOASTR_CONFIG, NbToastrConfig } from './toastr-config';
 import { NbToast } from './model';
 import { NbToastComponent } from './toast.component';
 import { NB_DOCUMENT } from '../../theme.options';
@@ -69,7 +69,7 @@ export class NbToastContainer {
   }
 
   protected isDuplicate(toast: NbToast): boolean {
-    return toast.config.duplicatesBehaviour === NbDuplicateToastBehaviour.PREVIOUS
+    return toast.config.duplicatesBehaviour === 'previous'
       ? this.isDuplicatePrevious(toast)
       : this.isDuplicateAmongAll(toast);
   }
