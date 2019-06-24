@@ -38,7 +38,8 @@ $nb-themes: nb-register-theme((
 ), default, default);
 ```
 
-We can also modify a primary color, for example make it violet:
+We can also modify a primary color, for example make it violet.
+If you need to generate shades from your color you may use a 3rd party service (for example https://maketintsandshades.com/).
 
 ```scss
 @import '~@nebular/theme/styles/theming';

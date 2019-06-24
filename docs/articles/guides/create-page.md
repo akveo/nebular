@@ -61,5 +61,7 @@ As a result, you should have a page with a simple layout on it looking similar t
 ## Related Articles
 
 - [NbLayout, NbLayoutColumn, NbLayoutHeader, NbLayoutFooter](docs/components/layout)
-- [Enabling Theme System](docs/design-system/enable-customizable-themes)
+- [Design System Intro](/docs/design-system/eva-design-system-intro)
+- [Design System Rules](docs/design-system/design-system-theme)
+- [Enabling Customizable Themes](docs/design-system/enable-customizable-theme)
 - [Deploying to production server](docs/guides/server-deployment)
