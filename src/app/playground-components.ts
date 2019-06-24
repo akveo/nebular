@@ -1132,6 +1132,12 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         component: 'ToastrStatusesComponent',
         name: 'Toastr Statuses',
       },
+      {
+        path: 'toastr-limit.component',
+        link: '/toastr/toastr-limit.component',
+        component: 'ToastrLimitComponent',
+        name: 'Toastr Limit',
+      },
     ],
   },
   {

@@ -44,6 +44,7 @@ export class NbToastContainer {
       return;
     }
 
+    this.removeToastIfLimitReached(toast);
     const toastComponent: NbToastComponent = this.attachToast(toast);
 
     if (toast.config.destroyByClick) {
@@ -87,6 +88,17 @@ export class NbToastContainer {
       && t1.title === t2.title
       && t1.config.status === t2.config.status;
   };
+
+  protected removeToastIfLimitReached(toast: NbToast) {
+    if (toast.config.limit === null || this.toasts.length < toast.config.limit) {
+      return;
+    }
+    if (this.positionHelper.isTopPosition(toast.config.position)) {
+      this.toasts.pop();
+    } else {
+      this.toasts.shift();
+    }
+  }
 
   protected attachToast(toast: NbToast): NbToastComponent {
     if (this.positionHelper.isTopPosition(toast.config.position)) {

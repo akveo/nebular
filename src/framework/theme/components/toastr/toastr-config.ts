@@ -43,6 +43,10 @@ export class NbToastrConfig {
    * The default `previous` duplicate behaviour is used.
    * */
   preventDuplicates: boolean = false;
+  /*
+  * The number of visible toasts. If the limit exceeded the oldest toast will be removed.
+  * */
+  limit?: number = null;
   /**
    * Determines the how to threat duplicates.
    * */

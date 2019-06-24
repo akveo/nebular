@@ -14,6 +14,7 @@ import { ToastrPositionsComponent } from './toastr-positions.component';
 import { ToastrPreventDuplicatesComponent } from './toastr-prevent-duplicates.component';
 import { ToastrShowcaseComponent } from './toastr-showcase.component';
 import { ToastrStatusesComponent } from './toastr-statuses.component';
+import { ToastrLimitComponent } from './toastr-limit.component';
 import { ToastrPreventDuplicatesBehaviourComponent } from './toastr-prevent-duplicates-behaviour.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -28,6 +29,7 @@ import { FormsModule } from '@angular/forms';
     ToastrPreventDuplicatesBehaviourComponent,
     ToastrShowcaseComponent,
     ToastrStatusesComponent,
+    ToastrLimitComponent,
   ],
   imports: [
     CommonModule,
