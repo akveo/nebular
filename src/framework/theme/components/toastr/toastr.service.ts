@@ -7,10 +7,9 @@
 import { ComponentFactoryResolver, ComponentRef, Inject, Injectable } from '@angular/core';
 
 import { NbComponentPortal } from '../cdk/overlay/mapping';
-import { NbOverlayService } from '../cdk/overlay/overlay-service';
+import { NbOverlayService, patch } from '../cdk/overlay/overlay-service';
 import { NbPositionBuilderService } from '../cdk/overlay/overlay-position';
 import { NbGlobalLogicalPosition, NbGlobalPosition, NbPositionHelper } from '../cdk/overlay/position-helper';
-import { patch } from '../cdk/overlay/overlay-service';
 import { NbToastrContainerComponent } from './toastr-container.component';
 import { NB_TOASTR_CONFIG, NbToastrConfig } from './toastr-config';
 import { NbToast } from './model';
@@ -61,15 +60,33 @@ export class NbToastContainer {
   }
 
   destroy(toast: NbToast) {
+    if (this.prevToast === toast) {
+      this.prevToast = null;
+    }
+
     this.toasts = this.toasts.filter(t => t !== toast);
     this.updateContainer();
   }
 
   protected isDuplicate(toast: NbToast): boolean {
-    return this.prevToast
-      && this.prevToast.message === toast.message
-      && this.prevToast.title === toast.title;
+    return toast.config.duplicatesBehaviour === 'previous'
+      ? this.isDuplicatePrevious(toast)
+      : this.isDuplicateAmongAll(toast);
   }
+
+  protected isDuplicatePrevious(toast: NbToast): boolean {
+    return this.prevToast && this.toastDuplicateCompareFunc(this.prevToast, toast);
+  }
+
+  protected isDuplicateAmongAll(toast: NbToast): boolean {
+    return this.toasts.some(t => this.toastDuplicateCompareFunc(t, toast));
+  }
+
+  protected toastDuplicateCompareFunc = (t1: NbToast, t2: NbToast): boolean => {
+    return t1.message === t2.message
+      && t1.title === t2.title
+      && t1.config.status === t2.config.status;
+  };
 
   protected attachToast(toast: NbToast): NbToastComponent {
     if (this.positionHelper.isTopPosition(toast.config.position)) {
@@ -197,10 +214,16 @@ export class NbToastrContainerRegistry {
  *
  * @stacked-example(Destroy by click, toastr/toastr-destroy-by-click.component)
  *
- * `preventDuplicates` - don't create new toast if it has the same title and the same message with previous one.
+ * `preventDuplicates` - don't create new toast if it has the same title, message and status.
  * Default is false.
  *
  * @stacked-example(Prevent duplicates, toastr/toastr-prevent-duplicates.component)
+ *
+ * `duplicatesBehaviour` - determines how to threat the toasts duplication.
+ * Compare with the previous message (`NbDuplicateToastBehaviour.PREVIOUS`)
+ * or with all visible messages (`NbDuplicateToastBehaviour.ALL`).
+ *
+ * @stacked-example(Prevent duplicates behaviour , toastr/toastr-prevent-duplicates-behaviour.component)
  *
  * `hasIcon` - if true then render toast icon.
  * `icon` - you can pass icon class that will be applied into the toast.
