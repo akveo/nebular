@@ -21,7 +21,7 @@ export class ToastrLimitComponent {
 
   i: number = 1;
 
-  showToast(preventDuplicates) {
+  showToast() {
     this.toastrService.show(
       `Toast number ${this.i}`,
       `Toast with the limit`,
