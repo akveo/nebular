@@ -90,7 +90,7 @@ export class NbToastContainer {
   };
 
   protected removeToastIfLimitReached(toast: NbToast) {
-    if (toast.config.limit === null || this.toasts.length < toast.config.limit) {
+    if (!toast.config.limit || this.toasts.length < toast.config.limit) {
       return;
     }
     if (this.positionHelper.isTopPosition(toast.config.position)) {
@@ -232,10 +232,14 @@ export class NbToastrContainerRegistry {
  * @stacked-example(Prevent duplicates, toastr/toastr-prevent-duplicates.component)
  *
  * `duplicatesBehaviour` - determines how to threat the toasts duplication.
- * Compare with the previous message (`NbDuplicateToastBehaviour.PREVIOUS`)
- * or with all visible messages (`NbDuplicateToastBehaviour.ALL`).
+ * Compare with the previous message `previous`
+ * or with all visible messages `all`.
  *
  * @stacked-example(Prevent duplicates behaviour , toastr/toastr-prevent-duplicates-behaviour.component)
+ *
+ * `limit` - the number of visible toasts in the toast container. The number of toasts is unlimited by default.
+ *
+ * @stacked-example(Prevent duplicates behaviour , toastr/toastr-limit.component)
  *
  * `hasIcon` - if true then render toast icon.
  * `icon` - you can pass icon class that will be applied into the toast.
