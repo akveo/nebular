@@ -1,8 +1,8 @@
-import { NbToastrContainerRegistry, NbToastrService } from './toastr.service';
+import { NbToastContainer, NbToastrContainerRegistry, NbToastrService } from './toastr.service';
 import { NbGlobalLogicalPosition, NbGlobalPhysicalPosition } from '../cdk/overlay/position-helper';
 import { TestBed } from '@angular/core/testing';
 import { ComponentFactoryResolver } from '@angular/core';
-import { NbToastrModule } from '@nebular/theme';
+import { NbToast, NbToastrModule } from '@nebular/theme';
 
 
 describe('toastr-service', () => {
@@ -220,5 +220,64 @@ describe('toastr-container-registry', () => {
     const topRight = toastrContainerRegistry.get(NbGlobalPhysicalPosition.TOP_RIGHT);
 
     expect(topEnd).toBe(topRight);
+  });
+});
+
+describe('toastr-container', () => {
+  let toastrContainer: NbToastContainer;
+  let containerRefStub: any;
+  let positionHelperStub: any;
+
+  beforeEach(() => {
+    positionHelperStub = {
+      isTopPosition() {
+        return true;
+      },
+    };
+
+    containerRefStub = {
+      instance: {
+        toasts: [],
+      },
+      changeDetectorRef: {
+        detectChanges() {},
+      },
+    };
+  });
+
+  beforeEach(() => {
+    toastrContainer = new NbToastContainer(<any> {}, containerRefStub, positionHelperStub);
+  });
+
+  it('should prevent duplicates if previous toast is the same', () => {
+    const toast1 = {
+      title: 'toast1',
+      message: 'message',
+      config: { status: 'dander', preventDuplicates: true, duplicatesBehaviour: 'previous' },
+    };
+
+    const toast2 = Object.assign({title: 'toast2'}, toast1);
+
+    toastrContainer.attach(<NbToast> toast1);
+    toastrContainer.attach(<NbToast> toast2);
+    const duplicateToast = toastrContainer.attach(<NbToast> toast2);
+
+    expect(duplicateToast).toBeUndefined();
+  });
+
+  it('should prevent duplicates if existing toast is the same', () => {
+    const toast1 = {
+      title: 'toast1',
+      message: 'message',
+      config: { status: 'dander', preventDuplicates: true, duplicatesBehaviour: 'all' },
+    };
+
+    const toast2 = Object.assign({title: 'toast2'}, toast1);
+
+    toastrContainer.attach(<NbToast> toast1);
+    toastrContainer.attach(<NbToast> toast2);
+    const duplicateToast = toastrContainer.attach(<NbToast> toast1);
+
+    expect(duplicateToast).toBeUndefined();
   });
 });

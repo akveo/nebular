@@ -59,6 +59,10 @@
         width: 1em;
         text-align: center;
       }
+
+      .expand-state {
+        color: nb-theme(menu-item-icon-color);
+      }
     }
 
     $divider: nb-theme(menu-item-divider-width) nb-theme(menu-item-divider-style) nb-theme(menu-item-divider-color);
