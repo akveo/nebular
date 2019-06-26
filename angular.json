@@ -73,7 +73,7 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "src/tsconfig.spec.json",
             "scripts": [],
-            "styles": [],
+            "styles": ["src/playground/styles/styles.scss"],
             "assets": [
               "src/assets",
               "src/favicon.ico"
