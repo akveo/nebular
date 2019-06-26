@@ -4,7 +4,17 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { Component, ElementRef, EventEmitter, Input, Output, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import {
+  Component,
+  DebugElement,
+  ElementRef,
+  EventEmitter,
+  Input,
+  Output,
+  QueryList,
+  ViewChild,
+  ViewChildren,
+} from '@angular/core';
 import { ComponentFixture, fakeAsync, flush, TestBed } from '@angular/core/testing';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
@@ -12,6 +22,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { from, zip } from 'rxjs';
 import createSpy = jasmine.createSpy;
 
+import { NbComponentSize } from '../component-size';
 import { NbSelectModule } from './select.module';
 import { NbThemeModule } from '../../theme.module';
 import { NbOverlayContainerAdapter } from '../cdk/adapter/overlay-container-adapter';
@@ -270,6 +281,11 @@ export class NbOptionDisabledTestComponent {
   @ViewChild(NbOptionComponent, { static: false }) optionComponent: NbOptionComponent<number>;
 }
 
+@Component({
+  template: `<nb-select></nb-select>`,
+})
+export class NbEmptySelectComponent {}
+
 describe('Component: NbSelectComponent', () => {
   let fixture: ComponentFixture<NbSelectTestComponent>;
   let overlayContainerService: NbOverlayContainerAdapter;
@@ -298,6 +314,7 @@ describe('Component: NbSelectComponent', () => {
         NbSelectWithInitiallySelectedOptionComponent,
         NbReactiveFormSelectComponent,
         NbNgModelSelectComponent,
+        NbEmptySelectComponent,
       ],
     });
 
@@ -574,6 +591,23 @@ describe('Component: NbSelectComponent', () => {
   it(`should not call dispose on uninitialized resources`, () => {
     const selectFixture = new NbSelectComponent(null, null, null, null, null, null);
     expect(() => selectFixture.ngOnDestroy()).not.toThrow();
+  });
+
+  it(`should not shrink when has no placeholder and text`, () => {
+    const heightBySize = new Map([ ['tiny', 24], ['small', 32], ['medium', 40], ['large', 48], ['giant', 56] ]);
+    const selectFixture = TestBed.createComponent(NbEmptySelectComponent);
+    selectFixture.detectChanges();
+    const selectDebugEl: DebugElement = selectFixture.debugElement.query(By.directive(NbSelectComponent));
+    const selectComponent: NbSelectComponent<any> = selectDebugEl.componentInstance;
+
+    for (const size of Array.from(heightBySize.keys()) as NbComponentSize[]) {
+      selectComponent.size = size;
+      selectFixture.detectChanges();
+
+      const expectedSize = heightBySize.get(size);
+      const failMessage = `Expected ${size} select to has ${expectedSize}px height`;
+      expect(selectDebugEl.nativeElement.offsetHeight).toEqual(expectedSize, failMessage);
+    }
   });
 });
 
