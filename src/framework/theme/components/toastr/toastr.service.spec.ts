@@ -1,8 +1,8 @@
-import { NbToastrContainerRegistry, NbToastrService } from './toastr.service';
+import { NbToastContainer, NbToastrContainerRegistry, NbToastrService } from './toastr.service';
 import { NbGlobalLogicalPosition, NbGlobalPhysicalPosition } from '../cdk/overlay/position-helper';
 import { TestBed } from '@angular/core/testing';
 import { ComponentFactoryResolver } from '@angular/core';
-import { NbToastrModule } from '@nebular/theme';
+import { NbToast, NbToastrModule } from '@nebular/theme';
 
 
 describe('toastr-service', () => {
@@ -220,5 +220,106 @@ describe('toastr-container-registry', () => {
     const topRight = toastrContainerRegistry.get(NbGlobalPhysicalPosition.TOP_RIGHT);
 
     expect(topEnd).toBe(topRight);
+  });
+});
+
+describe('toastr-container', () => {
+  let toastrContainer: NbToastContainer;
+  let containerRefStub: any;
+  let positionHelperStub: any;
+
+  beforeEach(() => {
+    positionHelperStub = {
+      isTopPosition() {
+        return true;
+      },
+    };
+
+    containerRefStub = {
+      instance: {
+        toasts: [],
+      },
+      changeDetectorRef: {
+        detectChanges() {},
+      },
+    };
+  });
+
+  beforeEach(() => {
+    toastrContainer = new NbToastContainer(<any> {}, containerRefStub, positionHelperStub);
+  });
+
+  it('should prevent duplicates if previous toast is the same', () => {
+    const toast1 = {
+      title: 'toast1',
+      message: 'message',
+      config: { status: 'dander', preventDuplicates: true, duplicatesBehaviour: 'previous' },
+    };
+
+    const toast2 = Object.assign({}, toast1, {title: 'toast2'});
+
+    toastrContainer.attach(<NbToast> toast1);
+    toastrContainer.attach(<NbToast> toast2);
+    const duplicateToast = toastrContainer.attach(<NbToast> toast2);
+
+    expect(duplicateToast).toBeUndefined();
+  });
+
+  it('should prevent duplicates if existing toast is the same', () => {
+    const toast1 = {
+      title: 'toast1',
+      message: 'message',
+      config: { status: 'dander', preventDuplicates: true, duplicatesBehaviour: 'all' },
+    };
+
+    const toast2 = Object.assign({}, toast1, {title: 'toast2'});
+
+    toastrContainer.attach(<NbToast> toast1);
+    toastrContainer.attach(<NbToast> toast2);
+    const duplicateToast = toastrContainer.attach(<NbToast> toast1);
+
+    expect(duplicateToast).toBeUndefined();
+  });
+
+  describe('if limit set', () => {
+
+    const toast1 = {
+      title: 'toast1',
+      config: { limit: 3 },
+    };
+
+    const toast2 = Object.assign({}, toast1, {title: 'toast2'});
+    const toast3 = Object.assign({}, toast1, {title: 'toast3'});
+    const toast4 = Object.assign({}, toast1, {title: 'toast4'});
+
+    function attachToasts() {
+      toastrContainer.attach(<NbToast> toast1);
+      toastrContainer.attach(<NbToast> toast2);
+      toastrContainer.attach(<NbToast> toast3);
+      toastrContainer.attach(<NbToast> toast4);
+    }
+
+    it('should remove the first toast in container in top position', () => {
+      attachToasts();
+      expect(containerRefStub.instance.content.length).toEqual(3);
+      expect(containerRefStub.instance.content[0]).toEqual(toast4);
+      expect(containerRefStub.instance.content[1]).toEqual(toast3);
+      expect(containerRefStub.instance.content[2]).toEqual(toast2);
+    });
+    it('should remove the last toast in container in bottom position', () => {
+      positionHelperStub = {
+        isTopPosition() {
+          return false;
+        },
+      };
+
+      toastrContainer = new NbToastContainer(<any> {}, containerRefStub, positionHelperStub);
+
+      attachToasts();
+      expect(containerRefStub.instance.content.length).toEqual(3);
+      expect(containerRefStub.instance.content[0]).toEqual(toast2);
+      expect(containerRefStub.instance.content[1]).toEqual(toast3);
+      expect(containerRefStub.instance.content[2]).toEqual(toast4);
+    });
   });
 });
