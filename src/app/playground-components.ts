@@ -1115,6 +1115,12 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         name: 'Toastr Prevent Duplicates',
       },
       {
+        path: 'toastr-prevent-duplicates-behaviour.component',
+        link: '/toastr/toastr-prevent-duplicates-behaviour.component',
+        component: 'ToastrPreventDuplicatesBehaviourComponent',
+        name: 'Toastr Prevent Duplicates Behaviour',
+      },
+      {
         path: 'toastr-showcase.component',
         link: '/toastr/toastr-showcase.component',
         component: 'ToastrShowcaseComponent',
@@ -1125,6 +1131,12 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         link: '/toastr/toastr-statuses.component',
         component: 'ToastrStatusesComponent',
         name: 'Toastr Statuses',
+      },
+      {
+        path: 'toastr-limit.component',
+        link: '/toastr/toastr-limit.component',
+        component: 'ToastrLimitComponent',
+        name: 'Toastr Limit',
       },
     ],
   },

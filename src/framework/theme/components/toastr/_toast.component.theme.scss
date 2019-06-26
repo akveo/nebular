@@ -39,8 +39,8 @@
       @include nb-ltr(margin-right, 1.25rem);
       @include nb-rtl(margin-left, 1.25rem);
       border-radius: nb-theme(toastr-border-radius);
-      width: 2.5rem;
-      height: 2.5rem;
+      min-width: 2.5rem;
+      min-height: 2.5rem;
       display: flex;
       justify-content: center;
       align-items: center;
