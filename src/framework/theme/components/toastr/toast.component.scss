@@ -11,16 +11,7 @@
   margin: 0.5rem;
 
   .title {
-    font-weight: 800;
     margin-right: 0.25rem;
-  }
-
-  > .content-container {
-    line-height: 1.25;
-
-    > .message {
-      font-weight: 300;
-    }
   }
 
   &.default, &:not(.has-icon) {
