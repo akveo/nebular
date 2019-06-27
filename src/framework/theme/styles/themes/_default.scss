@@ -195,7 +195,7 @@ $theme: (
   /* Fonts and text styles - headings, subtitles, paragraphs, captions, button */
 
   font-family-primary: unquote('Open Sans, sans-serif'),
-  font-family-secondary: unquote('Raleway, sans-serif'),
+  font-family-secondary: font-family-primary,
 
   text-heading-1-font-family: font-family-secondary,
   text-heading-1-font-size: 2.25rem,
