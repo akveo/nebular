@@ -22,12 +22,23 @@
     }
   }
 
-  p {
+  .subtitle,
+  .subtitle-2 {
     color: nb-theme(text-basic-color);
-    font-family: nb-theme(text-paragraph-font-family);
-    font-size: nb-theme(text-paragraph-font-size);
-    font-weight: nb-theme(text-paragraph-font-weight);
-    line-height: nb-theme(text-paragraph-line-height);
+  }
+
+  .subtitle {
+    font-family: nb-theme(text-subtitle-font-family);
+    font-size: nb-theme(text-subtitle-font-size);
+    font-weight: nb-theme(text-subtitle-font-weight);
+    line-height: nb-theme(text-subtitle-line-height);
+  }
+
+  .subtitle-2 {
+    font-family: nb-theme(text-subtitle-2-font-family);
+    font-size: nb-theme(text-subtitle-2-font-size);
+    font-weight: nb-theme(text-subtitle-2-font-weight);
+    line-height: nb-theme(text-subtitle-2-line-height);
   }
 
   a {
