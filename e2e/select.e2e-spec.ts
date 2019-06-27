@@ -1,4 +1,4 @@
-import { browser, by, element } from 'protractor';
+import { browser, by, element, ElementArrayFinder } from 'protractor';
 
 describe('nb-select', () => {
 
@@ -7,15 +7,20 @@ describe('nb-select', () => {
   });
 
   it('should not shrink when has no placeholder and text', (done) => {
+    const checks: Promise<void>[] = [];
     const selectHeights = [ 24, 32, 40, 48, 56 ];
+    const selectElements: ElementArrayFinder = element.all(by.tagName('nb-select'));
 
-    element.all(by.tagName('nb-select')).then((selectElements: HTMLElement[]) => {
-      for (let i = 0; i < selectElements.length; i++) {
-        expect(selectElements[i].textContent).toEqual('');
-        expect(selectElements[i].offsetHeight).toEqual(selectHeights[i]);
-      }
+    for (let i = 0; i < selectElements.length; i++) {
+      const check = Promise.all([selectElements[i].getText(), selectElements[i].getSize()])
+        .then(([text, { height }]) => {
+          expect(text).toEqual('');
+          expect(height).toEqual(selectHeights[i]);
+        });
 
-      done();
-    });
+      checks.push(check);
+    }
+
+    Promise.all(checks).then(done);
   });
 });
