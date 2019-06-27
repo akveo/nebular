@@ -53,6 +53,11 @@
           border-bottom-width: 0;
           border-bottom-color: nb-theme(card-header-#{$status}-background-color);
           color: nb-theme(card-header-#{$status}-text-color);
+
+          a:not([class]),
+          a:not([class]):hover {
+            color: nb-theme(card-header-#{$status}-text-color);
+          }
         }
       }
 
