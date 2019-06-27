@@ -44,6 +44,16 @@
     &:hover {
       color: nb-theme(link-text-hover-color);
     }
+
+    .link-control,
+    .link-control:hover {
+      color: nb-theme(text-control-color);
+    }
+
+    .link-alternate,
+    .link-alternate:hover {
+      color: nb-theme(text-alternate-color);
+    }
   }
 
   .label {
