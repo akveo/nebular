@@ -10,6 +10,11 @@
       color: nb-theme(select-outline-placeholder-text-color);
     }
 
+    &.bottom,
+    &.top {
+      border-color: nb-theme(select-open-outline-border-color);
+    }
+
     &.top {
       border-top-color: nb-theme(select-outline-adjacent-border-color);
       border-top-style: nb-theme(select-outline-adjacent-border-style);
