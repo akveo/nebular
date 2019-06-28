@@ -658,7 +658,10 @@ export class NbSelectComponent<T> implements AfterViewInit, AfterContentInit, On
     const classes = [];
 
     if (!this.selectionModel.length) {
-      classes.push('placeholder')
+      classes.push('placeholder');
+    }
+    if (!this.selectionModel.length && !this.placeholder) {
+      classes.push('empty');
     }
     if (this.isOpen) {
       classes.push(this.overlayPosition);
