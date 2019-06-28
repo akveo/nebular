@@ -651,7 +651,7 @@ export class NbSelectComponent<T> implements AfterViewInit, AfterContentInit, On
    * Returns width of the select button.
    * */
   get hostWidth(): number {
-    return this.hostRef.nativeElement.getBoundingClientRect().width;
+    return this.button.nativeElement.getBoundingClientRect().width;
   }
 
   get selectButtonClasses(): string[] {
@@ -864,7 +864,7 @@ export class NbSelectComponent<T> implements AfterViewInit, AfterContentInit, On
 
   protected createPositionStrategy(): NbAdjustableConnectedPositionStrategy {
     return this.positionBuilder
-      .connectedTo(this.hostRef)
+      .connectedTo(this.button)
       .position(NbPosition.BOTTOM)
       .offset(0)
       .adjustment(NbAdjustment.VERTICAL);
