@@ -592,6 +592,20 @@ describe('Component: NbSelectComponent', () => {
 
     expect(button.classes['empty']).toEqual(true);
   });
+
+  it(`should set overlay width same as button inside select`, () => {
+    const selectFixture = TestBed.createComponent(NbSelectComponent);
+    const selectComponent = selectFixture.componentInstance;
+    selectFixture.detectChanges();
+
+    const selectElement: HTMLElement = selectFixture.nativeElement;
+    const buttonElement: HTMLElement = selectElement.querySelector('button');
+
+    selectElement.style.padding = '1px';
+
+    expect(selectComponent.hostWidth).not.toEqual(selectElement.offsetWidth);
+    expect(selectComponent.hostWidth).toEqual(buttonElement.offsetWidth);
+  });
 });
 
 describe('NbSelectComponent - falsy values', () => {
