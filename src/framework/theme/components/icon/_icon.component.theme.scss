@@ -12,6 +12,10 @@
     height: nb-theme(icon-height);
   }
 
+  nb-icon svg {
+    vertical-align: nb-theme(icon-svg-vertical-align);
+  }
+
   @each $status in nb-get-statuses() {
     nb-icon.status-#{$status} {
       color: nb-theme(icon-#{$status}-color);
