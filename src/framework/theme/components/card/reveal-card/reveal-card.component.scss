@@ -2,6 +2,7 @@
   display: block;
   position: relative;
   overflow: hidden;
+
   &.revealed {
     .second-card-container {
       top: 0;
@@ -16,11 +17,6 @@
     }
   }
 
-  ::ng-deep nb-card-front {
-    display: block;
-    height: 100%;
-  }
-
   .second-card-container {
     position: absolute;
     top: 100%;
@@ -28,14 +24,6 @@
     left: 0;
     overflow: hidden;
     transition: top 0s 0.5s;
-
-    ::ng-deep nb-card-back {
-      position: absolute;
-      left: 0;
-      top: 100%;
-      width: 100%;
-      transition: top 0.5s;
-    }
   }
 
   ::ng-deep {
@@ -43,6 +31,19 @@
     nb-card-back nb-card {
       box-shadow: none;
       margin: 0;
+    }
+
+    nb-card-front {
+      display: block;
+      height: 100%;
+    }
+
+    nb-card-back {
+      position: absolute;
+      left: 0;
+      top: 100%;
+      width: 100%;
+      transition: top 0.5s;
     }
   }
 
