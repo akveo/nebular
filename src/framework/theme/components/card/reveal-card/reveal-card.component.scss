@@ -38,6 +38,14 @@
     }
   }
 
+  ::ng-deep {
+    nb-card-front nb-card,
+    nb-card-back nb-card {
+      box-shadow: none;
+      margin: 0;
+    }
+  }
+
   .reveal-button {
     cursor: pointer;
     position: absolute;
