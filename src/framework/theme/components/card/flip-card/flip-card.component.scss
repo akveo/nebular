@@ -18,6 +18,9 @@
       opacity: 0;
       transition: opacity 0s 0.25s;
       backface-visibility: hidden;
+      // Don't remove prefixed property as it's wouldn't be added during the build.
+      // Fixes back card visibility in Safari.
+      -webkit-backface-visibility: hidden;
 
       .flip-button {
         opacity: 0;
@@ -27,6 +30,9 @@
 
     .back-container {
       backface-visibility: visible;
+      // Don't remove prefixed property as it's wouldn't be added during the build.
+      // Fixes back card visibility in Safari.
+      -webkit-backface-visibility: visible;
     }
   }
 }
@@ -52,11 +58,17 @@
 
   .front-container {
     backface-visibility: visible;
+    // Don't remove prefixed property as it's wouldn't be added during the build.
+    // Fixes back card visibility in Safari.
+    -webkit-backface-visibility: visible;
     transition: opacity 0s 0.2s;
   }
 
   .back-container {
     backface-visibility: hidden;
+    // Don't remove prefixed property as it's wouldn't be added during the build.
+    // Fixes back card visibility in Safari.
+    -webkit-backface-visibility: hidden;
     transform: rotateY(180deg);
   }
 }
