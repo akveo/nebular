@@ -3,20 +3,6 @@
   position: relative;
   overflow: hidden;
 
-  &.revealed {
-    .second-card-container {
-      top: 0;
-      transition: none;
-
-      ::ng-deep nb-card-back {
-        top: 0;
-      }
-    }
-    .reveal-button {
-      transform: none;
-    }
-  }
-
   .second-card-container {
     position: absolute;
     top: 100%;
@@ -54,5 +40,20 @@
     bottom: 0;
     transform: rotate(180deg);
     transition: transform 0.3s;
+  }
+}
+
+:host(.revealed) {
+  .second-card-container {
+    top: 0;
+    transition: none;
+
+    ::ng-deep nb-card-back {
+      top: 0;
+    }
+  }
+
+  .reveal-button {
+    transform: none;
   }
 }
