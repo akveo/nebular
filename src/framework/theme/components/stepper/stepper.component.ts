@@ -7,8 +7,10 @@
 import {
   Component,
   ContentChildren,
+  EventEmitter,
   HostBinding,
   Input,
+  Output,
   QueryList,
   TemplateRef,
 } from '@angular/core';
@@ -180,6 +182,15 @@ export class NbStepperComponent {
   protected _linear = true;
   static ngAcceptInputType_linear: NbBooleanInput;
 
+  /**
+   * Emits when step changed
+   * @type {EventEmitter<number>}
+   */
+  @Output() stepChanged = new EventEmitter<number>();
+  stepChange() {
+    this.stepChanged.emit(this.selectedIndex);
+  }
+
   @HostBinding('class.vertical')
   get vertical() {
     return this.orientation === 'vertical';
@@ -196,6 +207,7 @@ export class NbStepperComponent {
    * */
   next() {
     this.selectedIndex = Math.min(this.selectedIndex + 1, this.steps.length - 1);
+    this.stepChanged.emit(this.selectedIndex);
   }
 
   /**
@@ -203,6 +215,7 @@ export class NbStepperComponent {
    * */
   previous() {
     this.selectedIndex = Math.max(this.selectedIndex - 1, 0);
+    this.stepChanged.emit(this.selectedIndex);
   }
 
   /**
@@ -211,6 +224,7 @@ export class NbStepperComponent {
   reset() {
     this._selectedIndex = 0;
     this.steps.forEach(step => step.reset());
+    this.stepChanged.emit(this.selectedIndex);
   }
 
   isStepSelected(step: NbStepComponent) {
