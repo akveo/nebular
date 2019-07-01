@@ -141,7 +141,6 @@ export class NbSelectLabelComponent {
  * select-min-width:
  * select-options-list-max-height:
  * select-options-list-shadow:
- * select-options-list-border-color:
  * select-options-list-border-style:
  * select-options-list-border-width:
  * select-outline-width:
@@ -220,6 +219,7 @@ export class NbSelectLabelComponent {
  * select-option-outline-medium-padding:
  * select-option-outline-large-padding:
  * select-option-outline-giant-padding:
+ * select-open-outline-border-color:
  * select-outline-adjacent-border-color:
  * select-outline-adjacent-border-style:
  * select-outline-adjacent-border-width:
@@ -651,14 +651,17 @@ export class NbSelectComponent<T> implements AfterViewInit, AfterContentInit, On
    * Returns width of the select button.
    * */
   get hostWidth(): number {
-    return this.hostRef.nativeElement.getBoundingClientRect().width;
+    return this.button.nativeElement.getBoundingClientRect().width;
   }
 
   get selectButtonClasses(): string[] {
     const classes = [];
 
     if (!this.selectionModel.length) {
-      classes.push('placeholder')
+      classes.push('placeholder');
+    }
+    if (!this.selectionModel.length && !this.placeholder) {
+      classes.push('empty');
     }
     if (this.isOpen) {
       classes.push(this.overlayPosition);
@@ -864,7 +867,7 @@ export class NbSelectComponent<T> implements AfterViewInit, AfterContentInit, On
 
   protected createPositionStrategy(): NbAdjustableConnectedPositionStrategy {
     return this.positionBuilder
-      .connectedTo(this.hostRef)
+      .connectedTo(this.button)
       .position(NbPosition.BOTTOM)
       .offset(0)
       .adjustment(NbAdjustment.VERTICAL);

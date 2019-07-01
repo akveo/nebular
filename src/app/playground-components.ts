@@ -936,6 +936,12 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         component: 'SelectInteractiveComponent',
         name: 'Select Interactive',
       },
+      {
+        path: 'select-test.component',
+        link: '/select/select-test.component',
+        component: 'SelectTestComponent',
+        name: 'Select Test',
+      },
     ],
   },
   {
