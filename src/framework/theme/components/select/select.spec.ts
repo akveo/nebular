@@ -4,7 +4,16 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { Component, ElementRef, EventEmitter, Input, Output, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  Output,
+  QueryList,
+  ViewChild,
+  ViewChildren,
+} from '@angular/core';
 import { ComponentFixture, fakeAsync, flush, TestBed } from '@angular/core/testing';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
@@ -574,6 +583,28 @@ describe('Component: NbSelectComponent', () => {
   it(`should not call dispose on uninitialized resources`, () => {
     const selectFixture = new NbSelectComponent(null, null, null, null, null, null);
     expect(() => selectFixture.ngOnDestroy()).not.toThrow();
+  });
+
+  it(`should has 'empty' class when has no placeholder and text`, () => {
+    const selectFixture = TestBed.createComponent(NbSelectComponent);
+    selectFixture.detectChanges();
+    const button = selectFixture.debugElement.query(By.css('button'));
+
+    expect(button.classes['empty']).toEqual(true);
+  });
+
+  it(`should set overlay width same as button inside select`, () => {
+    const selectFixture = TestBed.createComponent(NbSelectComponent);
+    const selectComponent = selectFixture.componentInstance;
+    selectFixture.detectChanges();
+
+    const selectElement: HTMLElement = selectFixture.nativeElement;
+    const buttonElement: HTMLElement = selectElement.querySelector('button');
+
+    selectElement.style.padding = '1px';
+
+    expect(selectComponent.hostWidth).not.toEqual(selectElement.offsetWidth);
+    expect(selectComponent.hostWidth).toEqual(buttonElement.offsetWidth);
   });
 });
 

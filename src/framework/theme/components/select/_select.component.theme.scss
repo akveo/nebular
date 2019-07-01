@@ -77,6 +77,12 @@
       line-height: nb-theme(select-#{$size}-text-line-height);
     }
 
+    nb-select.size-#{$size} .select-button.empty::before {
+      content: ' ';
+      display: block;
+      height: nb-theme(select-#{$size}-text-line-height);
+    }
+
     nb-select.size-#{$size}:not(.full-width),
     .options-list:not(.full-width) {
       max-width: nb-theme(select-#{$size}-max-width);
