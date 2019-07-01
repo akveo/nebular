@@ -1,5 +1,5 @@
 <h1 id="title" class="title">Login</h1>
-<p class="sub-title">Hello! Log in with your email.</p>
+<p class="sub-title">Welcome back! Please login with your email.</p>
 
 <nb-alert *ngIf="showMessages.error && errors?.length && !submitted" outline="danger" role="alert">
   <p class="alert-title"><b>Oh snap!</b></p>
@@ -34,10 +34,10 @@
            [attr.aria-invalid]="email.invalid && email.touched ? true : null">
     <ng-container *ngIf="email.invalid && email.touched">
       <p class="caption status-danger" *ngIf="email.errors?.required">
-        Email is required!
+        Missing email address. Please enter an email address and try again.
       </p>
       <p class="caption status-danger" *ngIf="email.errors?.pattern">
-        Email should be the real one!
+        Invalid email address. Please enter a valid email address and try again.
       </p>
     </ng-container>
   </div>
@@ -63,13 +63,12 @@
            [attr.aria-invalid]="password.invalid && password.touched ? true : null">
     <ng-container *ngIf="password.invalid && password.touched ">
       <p class="caption status-danger" *ngIf="password.errors?.required">
-        Password is required!
+        Missing password. Please enter a password and try again.
       </p>
       <p class="caption status-danger" *ngIf="password.errors?.minlength || password.errors?.maxlength">
-        Password should contains
-        from {{ getConfigValue('forms.validation.password.minLength') }}
+        Passwords should be at least {{ getConfigValue('forms.validation.password.minLength') }}
         to {{ getConfigValue('forms.validation.password.maxLength') }}
-        characters
+        characters in length.
       </p>
     </ng-container>
   </div>
