@@ -54,8 +54,8 @@
           border-bottom-color: nb-theme(card-header-#{$status}-background-color);
           color: nb-theme(card-header-#{$status}-text-color);
 
-          a:not([class]),
-          a:not([class]):hover {
+          a,
+          a:hover {
             color: nb-theme(card-header-#{$status}-text-color);
           }
         }
