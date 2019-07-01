@@ -141,7 +141,6 @@ export class NbSelectLabelComponent {
  * select-min-width:
  * select-options-list-max-height:
  * select-options-list-shadow:
- * select-options-list-border-color:
  * select-options-list-border-style:
  * select-options-list-border-width:
  * select-outline-width:
@@ -220,6 +219,7 @@ export class NbSelectLabelComponent {
  * select-option-outline-medium-padding:
  * select-option-outline-large-padding:
  * select-option-outline-giant-padding:
+ * select-open-outline-border-color:
  * select-outline-adjacent-border-color:
  * select-outline-adjacent-border-style:
  * select-outline-adjacent-border-width:
