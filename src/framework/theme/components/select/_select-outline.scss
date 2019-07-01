@@ -10,6 +10,11 @@
       color: nb-theme(select-outline-placeholder-text-color);
     }
 
+    &.bottom,
+    &.top {
+      border-color: nb-theme(select-open-outline-border-color);
+    }
+
     &.top {
       border-top-color: nb-theme(select-outline-adjacent-border-color);
       border-top-style: nb-theme(select-outline-adjacent-border-style);
@@ -57,6 +62,17 @@
       }
       &[disabled] {
         border-color: nb-theme(select-outline-#{$status}-disabled-border-color);
+      }
+
+      &.top {
+        border-top-color: nb-theme(select-outline-#{$status}-adjacent-border-color);
+        border-top-style: nb-theme(select-outline-#{$status}-adjacent-border-style);
+        border-top-width: nb-theme(select-outline-#{$status}-adjacent-border-width);
+      }
+      &.bottom {
+        border-bottom-color: nb-theme(select-outline-#{$status}-adjacent-border-color);
+        border-bottom-style: nb-theme(select-outline-#{$status}-adjacent-border-style);
+        border-bottom-width: nb-theme(select-outline-#{$status}-adjacent-border-width);
       }
     }
 

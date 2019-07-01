@@ -8,29 +8,29 @@ const palette = {
   danger: '#ff3d71',
 };
 
-export const DEFAULT_THEME: NbJSThemeOptions = {
-  name: 'default',
+export const DARK_THEME: NbJSThemeOptions = {
+  name: 'dark',
   variables: {
     fontMain: 'Open Sans, sans-serif',
     fontSecondary: 'Raleway, sans-serif',
 
-    bg: '#ffffff',
-    bg2: '#f7f9fc',
-    bg3: '#edf1f7',
-    bg4: '#e4e9f2',
+    bg: '#222b45',
+    bg2: '#1a2138',
+    bg3: '#151a30',
+    bg4: '#101426',
 
-    border: '#ffffff',
-    border2: '#f7f9fc',
-    border3: '#edf1f7',
-    border4: '#e4e9f2',
-    border5: '#c5cee0',
+    border: '#222b45',
+    border2: '#1a2138',
+    border3: '#151a30',
+    border4: '#101426',
+    border5: '#101426',
 
     fg: '#8f9bb3',
-    fgHeading: '#1a2138',
-    fgText: '#1a2138',
+    fgHeading: '#ffffff',
+    fgText: '#ffffff',
     fgHighlight: palette.primary,
-    layoutBg: '#f7f9fc',
-    separator: '#edf1f7',
+    layoutBg: '#1b1b38',
+    separator: '#1b1b38',
 
     primary: palette.primary,
     success: palette.success,

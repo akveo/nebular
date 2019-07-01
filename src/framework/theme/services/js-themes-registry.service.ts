@@ -11,12 +11,14 @@ import { NbJSThemeOptions } from './js-themes/theme.options';
 import { DEFAULT_THEME } from './js-themes/default.theme';
 import { COSMIC_THEME } from './js-themes/cosmic.theme';
 import { CORPORATE_THEME } from './js-themes/corporate.theme';
+import { DARK_THEME } from './js-themes/dark.theme';
 import { NB_BUILT_IN_JS_THEMES, NB_JS_THEMES } from '../theme.options';
 
 export const BUILT_IN_THEMES: NbJSThemeOptions[] = [
   DEFAULT_THEME,
   COSMIC_THEME,
   CORPORATE_THEME,
+  DARK_THEME,
 ];
 
 /**
