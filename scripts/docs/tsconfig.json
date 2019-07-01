@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "rootDir": ".",
+    "module": "commonjs",
+    "target": "es2018",
+    "resolveJsonModule": true
+  },
+  "include": [
+    "deploy-docs.ts"
+  ]
+}
