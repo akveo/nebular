@@ -12,7 +12,7 @@ import {
   ChangeDetectorRef,
   OnInit,
   Output,
-  EventEmitter
+  EventEmitter,
 } from '@angular/core';
 import { trigger, state, style, animate, transition } from '@angular/animations';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
