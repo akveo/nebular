@@ -34,12 +34,6 @@ describe('Component: NbToggle', () => {
     expect(toggleInput.nativeElement.disabled).toBeTruthy();
   });
 
-  it('Setting `disabled` to `true` apply corresponding class to host element', () => {
-    toggle.disabled = true;
-    fixture.detectChanges();
-    expect(testContainerEl.classList.contains('disabled')).toBeTruthy();
-  });
-
   it('Setting `disabled` to `false` enables toggle input', () => {
     toggle.disabled = false;
     fixture.detectChanges();

@@ -4,7 +4,16 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { Component, Input, HostBinding, forwardRef, ChangeDetectorRef, OnInit } from '@angular/core';
+import {
+  Component,
+  Input,
+  HostBinding,
+  forwardRef,
+  ChangeDetectorRef,
+  OnInit,
+  Output,
+  EventEmitter
+} from '@angular/core';
 import { trigger, state, style, animate, transition } from '@angular/animations';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { NbLayoutDirectionService, NbLayoutDirection } from '../../services/direction.service';
@@ -123,7 +132,7 @@ const defaultState = { params: { direction: '' } };
       <input type="checkbox" class="native-input visually-hidden"
              [disabled]="disabled"
              [checked]="checked"
-             (change)="checked = !checked"
+             (change)="updateValue($event)"
              (blur)="setTouched()"
       >
       <div class="toggle" [class.checked]="checked">
@@ -141,24 +150,37 @@ const defaultState = { params: { direction: '' } };
   }],
 })
 export class NbToggleComponent implements OnInit, ControlValueAccessor {
+
+  onChange: any = () => { };
+  onTouched: any = () => { };
+
   private direction: NbLayoutDirection;
-  disabled: boolean = false;
 
   /**
    * Toggle checked
    * @type {boolean}
    * @private
    */
-  @Input('checked') _checked: boolean = false;
+  @Input()
+  get checked(): boolean {
+    return this._checked;
+  }
+  set checked(value: boolean) {
+    this._checked = value;
+  }
+  private _checked: boolean = false;
 
   /**
-   * Toggle state
-   * @param {string} val
+   * Controls input disabled state
    */
-  @Input('disabled')
-  set setDisabled(val: boolean) {
-    this.disabled = convertToBoolProperty(val);
+  @Input()
+  get disabled(): boolean {
+    return this._disabled;
   }
+  set disabled(value: boolean) {
+    this._disabled = convertToBoolProperty(value);
+  }
+  private _disabled: boolean = false;
 
   /**
    * Toggle status.
@@ -167,10 +189,11 @@ export class NbToggleComponent implements OnInit, ControlValueAccessor {
   @Input()
   status: '' | NbComponentStatus = '';
 
-  @HostBinding('class.disabled')
-  get state() {
-    return this.disabled === true;
-  }
+  /**
+   * Output when checked state is changed by a user
+   * @type EventEmitter<boolean>
+   */
+  @Output() checkedChange = new EventEmitter<boolean>();
 
   @HostBinding('class.status-primary')
   get primary() {
@@ -195,18 +218,6 @@ export class NbToggleComponent implements OnInit, ControlValueAccessor {
   @HostBinding('class.status-info')
   get info() {
     return this.status === 'info';
-  }
-
-  onChange: any = () => { };
-  onTouched: any = () => { };
-
-  get checked() {
-    return this._checked;
-  }
-
-  set checked(val) {
-    this._checked = val;
-    this.onChange(val);
   }
 
   constructor(
@@ -249,5 +260,12 @@ export class NbToggleComponent implements OnInit, ControlValueAccessor {
 
   setTouched() {
     this.onTouched();
+  }
+
+  updateValue(event: Event): void {
+    const input = (event.target as HTMLInputElement);
+    this.checked = input.checked;
+    this.checkedChange.emit(this.checked);
+    this.onChange(this.checked);
   }
 }
