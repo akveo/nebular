@@ -1,5 +1,4 @@
 import { NbJSThemeOptions } from './theme.options';
-import { NbColorHelper } from '../color.helper';
 
 const palette = {
   primary: '#73a1ff',
@@ -13,13 +12,26 @@ export const CORPORATE_THEME: NbJSThemeOptions = {
   name: 'corporate',
   base: 'default',
   variables: {
-    fg: '#f1f5f8',
+    fontMain: 'Open Sans, sans-serif',
+    fontSecondary: 'Raleway, sans-serif',
+
     bg: '#ffffff',
-    fgHeading: '#181818',
-    fgText: '#4b4b4b',
-    fgHighlight: '#a4abb3',
-    layoutBg: '#f1f5f8',
-    separator: '#cdd5dc',
+    bg2: '#f7f9fc',
+    bg3: '#edf1f7',
+    bg4: '#e4e9f2',
+
+    border: '#ffffff',
+    border2: '#f7f9fc',
+    border3: '#edf1f7',
+    border4: '#e4e9f2',
+    border5: '#c5cee0',
+
+    fg: '#8f9bb3',
+    fgHeading: '#1a2138',
+    fgText: '#1a2138',
+    fgHighlight: palette.primary,
+    layoutBg: '#f7f9fc',
+    separator: '#edf1f7',
 
     primary: palette.primary,
     success: palette.success,
@@ -27,10 +39,10 @@ export const CORPORATE_THEME: NbJSThemeOptions = {
     warning: palette.warning,
     danger: palette.danger,
 
-    primaryLight: NbColorHelper.tint(palette.primary, 15),
-    successLight: NbColorHelper.tint(palette.success, 15),
-    infoLight: NbColorHelper.tint(palette.info, 15),
-    warningLight: NbColorHelper.tint(palette.warning, 15),
-    dangerLight: NbColorHelper.tint(palette.danger, 15),
+    primaryLight: '#598bff',
+    successLight: '#2ce69b',
+    infoLight: '#42aaff',
+    warningLight: '#ffc94d',
+    dangerLight: '#ff708d',
   },
 };

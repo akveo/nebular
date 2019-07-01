@@ -32,11 +32,10 @@ describe('nb-reveal-card', () => {
         protractor.promise.all([
           backCardContainer.getCssValue('top'),
           revealCard.getCssValue('height'),
-          revealCard.getCssValue('margin-bottom'),
-        ]).then(([ backCardTop, cardHeight, cardMargin ]) => {
+        ]).then(([ backCardTop, cardHeight ]) => {
           expect(revealCard.getAttribute('class')).not.toContain('revealed', `card shouldn't has 'revealed' class`);
           expect(frontCard.isDisplayed()).toBe(true, 'front card should be visible');
-          expect(toInt(backCardTop)).toEqual(toInt(cardHeight) - toInt(cardMargin), 'back card should be hidden');
+          expect(toInt(backCardTop)).toEqual(toInt(cardHeight), 'back card should be hidden');
         });
       }
 

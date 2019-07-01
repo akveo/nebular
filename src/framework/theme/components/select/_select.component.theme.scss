@@ -29,7 +29,6 @@
 
   .options-list-container {
     box-shadow: nb-theme(select-options-list-shadow);
-    border-color: nb-theme(select-options-list-border-color);
     border-style: nb-theme(select-options-list-border-style);
     border-width: nb-theme(select-options-list-border-width);
     overflow: hidden;
@@ -75,6 +74,12 @@
     .size-#{$size} nb-option {
       font-size: nb-theme(select-#{$size}-text-font-size);
       line-height: nb-theme(select-#{$size}-text-line-height);
+    }
+
+    nb-select.size-#{$size} .select-button.empty::before {
+      content: ' ';
+      display: block;
+      height: nb-theme(select-#{$size}-text-line-height);
     }
 
     nb-select.size-#{$size}:not(.full-width),
