@@ -39,7 +39,7 @@ $nb-themes: nb-register-theme((
 ```
 
 We can also modify a primary color, for example make it violet.
-If you need to generate shades from your color you may use a 3rd party service (for example https://maketintsandshades.com/).
+[Eva Colors](https://colors.eva.design) is a great tool to generate colors pallet from a given brand color.
 
 ```scss
 @import '~@nebular/theme/styles/theming';

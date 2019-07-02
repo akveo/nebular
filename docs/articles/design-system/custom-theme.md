@@ -196,7 +196,7 @@ $nb-themes: nb-register-theme((
 ## Primary Color
 
 Lastly, let's make the final change and replace the primary blue color with desired violet one:
-If you need to generate shades from your color you may use a 3rd party service (for example https://maketintsandshades.com/).
+[Eva Colors](https://colors.eva.design) is a great tool to generate colors pallet from a given brand color.
 
 ```scss
 $nb-themes: nb-register-theme((
