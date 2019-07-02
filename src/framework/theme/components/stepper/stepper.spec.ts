@@ -17,7 +17,7 @@ import { By } from '@angular/platform-browser';
 @Component({
   selector: 'nb-step-changed-test',
   template: `
-    <nb-stepper>
+    <nb-stepper [selectedIndex]="1">
       <nb-step [label]="labelOne">
         <ng-template #labelOne>First step</ng-template>
       </nb-step>
@@ -59,12 +59,7 @@ describe('Stepper: Step Change', () => {
     stepper.next();
     fixture.detectChanges();
 
-    expect(stepper.stepChanged.emit).toHaveBeenCalledWith( 1);
-
-    stepper.next();
-    fixture.detectChanges();
-
-    expect(stepper.stepChanged.emit).toHaveBeenCalledWith(2)
+    expect(stepper.stepChanged.emit).toHaveBeenCalledWith( 2);
   });
 
   it('Should emit previous selectId on previous method', () => {
@@ -73,17 +68,43 @@ describe('Stepper: Step Change', () => {
     stepper.previous();
     fixture.detectChanges();
 
-    expect(stepper.stepChanged.emit).toHaveBeenCalledWith(0);
+    expect(stepper.stepChanged.emit).toHaveBeenCalledWith(1);
   });
 
-  it('should emit step change by clicking on step', () => {
+  it('Should emit step change by clicking on step', () => {
     spyOn(stepper.stepChanged, 'emit');
     const step = fixture.debugElement.query(By.css('.step'));
     step.triggerEventHandler('click', null);
     fixture.detectChanges();
 
     expect(stepper.stepChanged.emit).toHaveBeenCalledWith(0);
-  })
+  });
+
+  it('Step change should not emit if navigation is disabled', () => {
+    spyOn(stepper.stepChanged, 'emit');
+    stepper.disableStepNavigation = true;
+    const step = fixture.debugElement.query(By.css('.step'));
+    step.triggerEventHandler('click', null);
+
+    fixture.detectChanges();
+    expect(stepper.stepChanged.emit).not.toHaveBeenCalled();
+  });
+
+  it('Step change should not emit in last step', () => {
+    spyOn(stepper.stepChanged, 'emit');
+    stepper.selectedIndex = 2;
+    stepper.next();
+
+    expect(stepper.stepChanged.emit).not.toHaveBeenCalled();
+  });
+
+  it('Step change should not emit in first step', () => {
+    spyOn(stepper.stepChanged, 'emit');
+    stepper.selectedIndex = 0;
+    stepper.previous();
+
+    expect(stepper.stepChanged.emit).not.toHaveBeenCalled();
+  });
 });
 
 // TODO: this definitely requires more testing!
@@ -102,7 +123,7 @@ describe('Component: NbStepper', () => {
     stepper = fixture.componentInstance;
   });
 
-  it('should set class horizontal', () => {
+  it('Should set class horizontal', () => {
     stepper.orientation = 'horizontal';
     fixture.detectChanges();
     expect(
