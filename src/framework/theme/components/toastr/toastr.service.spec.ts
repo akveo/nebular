@@ -256,7 +256,7 @@ describe('toastr-container', () => {
       config: { status: 'dander', preventDuplicates: true, duplicatesBehaviour: 'previous' },
     };
 
-    const toast2 = Object.assign({title: 'toast2'}, toast1);
+    const toast2 = Object.assign({}, toast1, {title: 'toast2'});
 
     toastrContainer.attach(<NbToast> toast1);
     toastrContainer.attach(<NbToast> toast2);
@@ -272,12 +272,54 @@ describe('toastr-container', () => {
       config: { status: 'dander', preventDuplicates: true, duplicatesBehaviour: 'all' },
     };
 
-    const toast2 = Object.assign({title: 'toast2'}, toast1);
+    const toast2 = Object.assign({}, toast1, {title: 'toast2'});
 
     toastrContainer.attach(<NbToast> toast1);
     toastrContainer.attach(<NbToast> toast2);
     const duplicateToast = toastrContainer.attach(<NbToast> toast1);
 
     expect(duplicateToast).toBeUndefined();
+  });
+
+  describe('if limit set', () => {
+
+    const toast1 = {
+      title: 'toast1',
+      config: { limit: 3 },
+    };
+
+    const toast2 = Object.assign({}, toast1, {title: 'toast2'});
+    const toast3 = Object.assign({}, toast1, {title: 'toast3'});
+    const toast4 = Object.assign({}, toast1, {title: 'toast4'});
+
+    function attachToasts() {
+      toastrContainer.attach(<NbToast> toast1);
+      toastrContainer.attach(<NbToast> toast2);
+      toastrContainer.attach(<NbToast> toast3);
+      toastrContainer.attach(<NbToast> toast4);
+    }
+
+    it('should remove the first toast in container in top position', () => {
+      attachToasts();
+      expect(containerRefStub.instance.content.length).toEqual(3);
+      expect(containerRefStub.instance.content[0]).toEqual(toast4);
+      expect(containerRefStub.instance.content[1]).toEqual(toast3);
+      expect(containerRefStub.instance.content[2]).toEqual(toast2);
+    });
+    it('should remove the last toast in container in bottom position', () => {
+      positionHelperStub = {
+        isTopPosition() {
+          return false;
+        },
+      };
+
+      toastrContainer = new NbToastContainer(<any> {}, containerRefStub, positionHelperStub);
+
+      attachToasts();
+      expect(containerRefStub.instance.content.length).toEqual(3);
+      expect(containerRefStub.instance.content[0]).toEqual(toast2);
+      expect(containerRefStub.instance.content[1]).toEqual(toast3);
+      expect(containerRefStub.instance.content[2]).toEqual(toast4);
+    });
   });
 });

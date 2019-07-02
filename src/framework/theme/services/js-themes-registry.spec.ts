@@ -73,11 +73,11 @@ describe('js-themes-registry-service', () => {
 
   it('has built in themes with inherited font', () => {
     expect(jsThemesRegistry.get('default').variables.fontMain)
-      .toEqual('"Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif');
+      .toEqual('Open Sans, sans-serif');
     expect(jsThemesRegistry.get('cosmic').variables.fontMain)
-      .toEqual('"Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif');
+      .toEqual('Open Sans, sans-serif');
     expect(jsThemesRegistry.get('corporate').variables.fontMain)
-      .toEqual('"Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif');
+      .toEqual('Open Sans, sans-serif');
   });
 
   it('has also new themes', () => {
