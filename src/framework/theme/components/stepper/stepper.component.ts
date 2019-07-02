@@ -187,8 +187,11 @@ export class NbStepperComponent {
    * @type {EventEmitter<number>}
    */
   @Output() stepChanged = new EventEmitter<number>();
-  stepChange() {
-    this.stepChanged.emit(this.selectedIndex);
+  changeStep(step: NbStepComponent) {
+    if (!this.disableStepNavigation) {
+      step.select();
+      this.stepChanged.emit(this.selectedIndex);
+    }
   }
 
   @HostBinding('class.vertical')
@@ -206,16 +209,20 @@ export class NbStepperComponent {
    * Navigate to next step
    * */
   next() {
-    this.selectedIndex = Math.min(this.selectedIndex + 1, this.steps.length - 1);
-    this.stepChanged.emit(this.selectedIndex);
+    if (this.selectedIndex !== this.steps.length - 1) {
+      this.selectedIndex = Math.min(this.selectedIndex + 1, this.steps.length - 1);
+      this.stepChanged.emit(this.selectedIndex);
+    }
   }
 
   /**
    * Navigate to previous step
    * */
   previous() {
-    this.selectedIndex = Math.max(this.selectedIndex - 1, 0);
-    this.stepChanged.emit(this.selectedIndex);
+    if (this.selectedIndex !== 0) {
+      this.selectedIndex = Math.max(this.selectedIndex - 1, 0);
+      this.stepChanged.emit(this.selectedIndex);
+    }
   }
 
   /**
