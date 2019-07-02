@@ -20,6 +20,7 @@ import { SelectShowcaseComponent } from './select-showcase.component';
 import { SelectSizesComponent } from './select-sizes.component';
 import { SelectStatusComponent } from './select-status.component';
 import { SelectInteractiveComponent } from './select-interactive.component';
+import { SelectTestComponent } from './select-test.component';
 
 const routes: Route[] = [
   {
@@ -77,6 +78,10 @@ const routes: Route[] = [
   {
     path: 'select-interactive.component',
     component: SelectInteractiveComponent,
+  },
+  {
+    path: 'select-test.component',
+    component: SelectTestComponent,
   },
 ];
 

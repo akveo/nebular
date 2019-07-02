@@ -936,6 +936,12 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         component: 'SelectInteractiveComponent',
         name: 'Select Interactive',
       },
+      {
+        path: 'select-test.component',
+        link: '/select/select-test.component',
+        component: 'SelectTestComponent',
+        name: 'Select Test',
+      },
     ],
   },
   {
@@ -1131,6 +1137,12 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         link: '/toastr/toastr-statuses.component',
         component: 'ToastrStatusesComponent',
         name: 'Toastr Statuses',
+      },
+      {
+        path: 'toastr-limit.component',
+        link: '/toastr/toastr-limit.component',
+        component: 'ToastrLimitComponent',
+        name: 'Toastr Limit',
       },
     ],
   },
