@@ -26,7 +26,7 @@ import { convertToBoolProperty } from '../helpers';
  * ```
  * ### Installation
  *
- * Import `NbButtonModule` to your feature module.
+ * Import `NbAlertModule` to your feature module.
  * ```ts
  * @NgModule({
  *   imports: [
