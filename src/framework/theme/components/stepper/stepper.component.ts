@@ -210,7 +210,7 @@ export class NbStepperComponent {
    * */
   next() {
     if (this.selectedIndex !== this.steps.length - 1) {
-      this.selectedIndex = Math.min(this.selectedIndex + 1, this.steps.length - 1);
+      this.selectedIndex++;
       this.stepChanged.emit(this.selectedIndex);
     }
   }
@@ -220,7 +220,7 @@ export class NbStepperComponent {
    * */
   previous() {
     if (this.selectedIndex !== 0) {
-      this.selectedIndex = Math.max(this.selectedIndex - 1, 0);
+      this.selectedIndex--;
       this.stepChanged.emit(this.selectedIndex);
     }
   }
