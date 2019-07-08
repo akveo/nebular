@@ -59,7 +59,7 @@ describe('Stepper: Step Change', () => {
     stepper.next();
     fixture.detectChanges();
 
-    expect(stepper.stepChanged.emit).toHaveBeenCalledWith( 2);
+    expect(stepper.stepChanged.emit).toHaveBeenCalledWith(2);
   });
 
   it('Should emit previous selectId on previous method', () => {
