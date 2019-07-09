@@ -83,6 +83,22 @@ export type NbStepperOrientation = 'vertical' | 'horizontal';
  * 'nbStepperPrevious' and 'nbStepperNext' buttons.
  * @stacked-example(Disabled steps navigation, stepper/stepper-disabled-step-nav.component)
  *
+ * `stepChanged` output for listening step change. This event emit selectedIndex when you manually change step by
+ * using 'nbStepperPrevious' and 'nbStepperNext' buttons or clicking on the step element.
+ *
+ * ```html
+ * // ...
+ * <nb-stepper (stepChanged)="handleChange($event)"> // $event will be equal to selected index
+ *   <nb-step label="step number one">
+ *   </nb-step>
+ *    // ...
+ * </nb-stepper>
+ * // ...
+ * <button nbButton nbStepperPrevious>prev</button>
+ * // after clicking on the button the stepChanged will emit the previous step index
+ * <button nbButton disabled nbStepperNext>next</button>
+ * // after clicking on the button the stepChanged will emit the next step index
+ * ```
  * @styles
  *
  * stepper-step-text-color:
@@ -108,10 +124,10 @@ export type NbStepperOrientation = 'vertical' | 'horizontal';
  * stepper-step-content-padding:
  */
 @Component({
-  selector: 'nb-stepper',
-  styleUrls: ['./stepper.component.scss'],
+  selector   : 'nb-stepper',
+  styleUrls  : ['./stepper.component.scss'],
   templateUrl: './stepper.component.html',
-  providers: [{ provide: NB_STEPPER, useExisting: NbStepperComponent }],
+  providers  : [{ provide: NB_STEPPER, useExisting: NbStepperComponent }],
 })
 export class NbStepperComponent {
 
@@ -122,6 +138,7 @@ export class NbStepperComponent {
   get selectedIndex() {
     return this._selectedIndex;
   }
+
   set selectedIndex(index: number) {
     if (!this.steps) {
       this._selectedIndex = index;
@@ -133,6 +150,7 @@ export class NbStepperComponent {
       this._selectedIndex = index;
     }
   }
+
   protected _selectedIndex: number = 0;
 
   /**
@@ -143,9 +161,11 @@ export class NbStepperComponent {
   set disableStepNavigation(value: boolean) {
     this._disableStepNavigation = convertToBoolProperty(value);
   }
+
   get disableStepNavigation(): boolean {
     return this._disableStepNavigation;
   }
+
   protected _disableStepNavigation: boolean = false;
   static ngAcceptInputType_disableStepNavigation: NbBooleanInput;
 
@@ -156,6 +176,7 @@ export class NbStepperComponent {
   get selected(): NbStepComponent {
     return this.steps ? this.steps.toArray()[this.selectedIndex] : undefined;
   }
+
   set selected(step: NbStepComponent) {
     if (!this.steps) {
       return;
@@ -176,9 +197,11 @@ export class NbStepperComponent {
   set linear(value: boolean) {
     this._linear = convertToBoolProperty(value);
   }
+
   get linear(): boolean {
     return this._linear;
   }
+
   protected _linear = true;
   static ngAcceptInputType_linear: NbBooleanInput;
 
@@ -187,6 +210,7 @@ export class NbStepperComponent {
    * @type {EventEmitter<number>}
    */
   @Output() stepChanged = new EventEmitter<number>();
+
   changeStep(step: NbStepComponent) {
     if (!this.disableStepNavigation) {
       step.select();
@@ -198,6 +222,7 @@ export class NbStepperComponent {
   get vertical() {
     return this.orientation === 'vertical';
   }
+
   @HostBinding('class.horizontal')
   get horizontal() {
     return this.orientation === 'horizontal';
