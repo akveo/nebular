@@ -124,7 +124,7 @@ export type NbStepperOrientation = 'vertical' | 'horizontal';
  */
 @Component({
   selector: 'nb-stepper',
-  styleUrls : ['./stepper.component.scss'],
+  styleUrls: ['./stepper.component.scss'],
   templateUrl: './stepper.component.html',
   providers: [{ provide: NB_STEPPER, useExisting: NbStepperComponent }],
 })
