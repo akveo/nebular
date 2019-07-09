@@ -13,6 +13,8 @@ import { ToastrPositionsComponent } from './toastr-positions.component';
 import { ToastrPreventDuplicatesComponent } from './toastr-prevent-duplicates.component';
 import { ToastrShowcaseComponent } from './toastr-showcase.component';
 import { ToastrStatusesComponent } from './toastr-statuses.component';
+import { ToastrPreventDuplicatesBehaviourComponent } from './toastr-prevent-duplicates-behaviour.component';
+import { ToastrLimitComponent } from './toastr-limit.component';
 
 const routes: Route[] = [
   {
@@ -36,12 +38,20 @@ const routes: Route[] = [
     component: ToastrPreventDuplicatesComponent,
   },
   {
+    path: 'toastr-prevent-duplicates-behaviour.component',
+    component: ToastrPreventDuplicatesBehaviourComponent,
+  },
+  {
     path: 'toastr-showcase.component',
     component: ToastrShowcaseComponent,
   },
   {
     path: 'toastr-statuses.component',
     component: ToastrStatusesComponent,
+  },
+  {
+    path: 'toastr-limit.component',
+    component: ToastrLimitComponent,
   },
 ];
 

@@ -15,6 +15,8 @@ type IconToClassMap = {
 
 export const NB_TOASTR_CONFIG = new InjectionToken<NbToastrConfig>('Default toastr options');
 
+export type NbDuplicateToastBehaviour = 'previous' | 'all';
+
 /**
  * The `NbToastrConfig` class describes configuration of the `NbToastrService.show` and global toastr configuration.
  * */
@@ -36,9 +38,19 @@ export class NbToastrConfig {
    * */
   destroyByClick: boolean = true;
   /**
-   * If preventDuplicates is true then the next toast with the same title and message will not be rendered.
+   * If preventDuplicates is true then the toast with the same title, message and status will not be rendered.
+   * Find duplicates behaviour determined by `preventDuplicates`.
+   * The default `previous` duplicate behaviour is used.
    * */
   preventDuplicates: boolean = false;
+  /**
+   * Determines the how to threat duplicates.
+   * */
+  duplicatesBehaviour: NbDuplicateToastBehaviour = 'previous';
+  /*
+  * The number of visible toasts. If the limit exceeded the oldest toast will be removed.
+  * */
+  limit?: number = null;
   /**
    * Determines render icon or not.
    * */
