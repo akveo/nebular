@@ -338,15 +338,8 @@ export class NbSidebarComponent implements OnChanges, OnInit, OnDestroy {
     const menu = this.element.nativeElement.querySelector('nb-menu');
 
     if (menu && menu.contains(event.target)) {
-      let link = event.target;
-      const linkChildren = ['span', 'i'];
+      const link = this.getMenuLink(event.target);
 
-      // if we clicked on span - get the link
-      if (linkChildren.includes(link.tagName.toLowerCase()) && link.parentNode) {
-        link = event.target.parentNode;
-      }
-
-      // we only expand if an item has children
       if (link && link.nextElementSibling && link.nextElementSibling.classList.contains('menu-items')) {
         this.expand();
       }
@@ -429,5 +422,17 @@ export class NbSidebarComponent implements OnChanges, OnInit, OnDestroy {
 
   protected responsiveEnabled(): boolean {
     return this.responsiveValue;
+  }
+
+  protected getMenuLink(element: HTMLElement): HTMLElement | undefined {
+    if (!element || element.tagName.toLowerCase() === 'nb-menu') {
+      return;
+    }
+
+    if (element.tagName.toLowerCase() === 'a') {
+      return element;
+    }
+
+    return this.getMenuLink(element.parentElement);
   }
 }
