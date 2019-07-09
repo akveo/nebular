@@ -6,6 +6,15 @@
 @import '../../styles/core/mixins';
 
 @mixin nb-context-menu-theme() {
+
+  .context-menu-host {
+    /*
+      Fixes click not being bubbled to the body in Safari.
+      https://www.quirksmode.org/blog/archives/2014/02/mouse_event_bub.html
+    */
+    cursor: pointer;
+  }
+
   nb-context-menu {
     background-color: nb-theme(context-menu-background-color);
     border-color: nb-theme(context-menu-border-color);
