@@ -195,36 +195,36 @@ $theme: (
   /* Fonts and text styles - headings, subtitles, paragraphs, captions, button */
 
   font-family-primary: unquote('Open Sans, sans-serif'),
-  font-family-secondary: unquote('Raleway, sans-serif'),
+  font-family-secondary: font-family-primary,
 
   text-heading-1-font-family: font-family-secondary,
   text-heading-1-font-size: 2.25rem,
-  text-heading-1-font-weight: 800,
+  text-heading-1-font-weight: 700,
   text-heading-1-line-height: 3rem,
 
   text-heading-2-font-family: font-family-secondary,
   text-heading-2-font-size: 2rem,
-  text-heading-2-font-weight: 800,
+  text-heading-2-font-weight: 700,
   text-heading-2-line-height: 2.5rem,
 
   text-heading-3-font-family: font-family-secondary,
   text-heading-3-font-size: 1.875rem,
-  text-heading-3-font-weight: 800,
+  text-heading-3-font-weight: 700,
   text-heading-3-line-height: 2.5rem,
 
   text-heading-4-font-family: font-family-secondary,
   text-heading-4-font-size: 1.625rem,
-  text-heading-4-font-weight: 800,
+  text-heading-4-font-weight: 700,
   text-heading-4-line-height: 2rem,
 
   text-heading-5-font-family: font-family-secondary,
   text-heading-5-font-size: 1.375rem,
-  text-heading-5-font-weight: 800,
+  text-heading-5-font-weight: 700,
   text-heading-5-line-height: 2rem,
 
   text-heading-6-font-family: font-family-secondary,
   text-heading-6-font-size: 1.125rem,
-  text-heading-6-font-weight: 800,
+  text-heading-6-font-weight: 700,
   text-heading-6-line-height: 1.5rem,
 
   text-subtitle-font-family: font-family-primary,
@@ -245,11 +245,11 @@ $theme: (
   text-paragraph-2-font-family: font-family-primary,
   text-paragraph-2-font-size: 0.8125rem,
   text-paragraph-2-font-weight: 400,
-  text-paragraph-2-line-height: 1rem,
+  text-paragraph-2-line-height: 1.125rem,
 
   text-label-font-family: font-family-primary,
   text-label-font-size: 0.75rem,
-  text-label-font-weight: 800,
+  text-label-font-weight: 700,
   text-label-line-height: 1rem,
 
   text-caption-font-family: font-family-primary,
@@ -263,7 +263,7 @@ $theme: (
   text-caption-2-line-height: 1rem,
 
   text-button-font-family: font-family-primary,
-  text-button-font-weight: 800,
+  text-button-font-weight: 700,
   text-button-tiny-font-size: 0.625rem,
   text-button-tiny-line-height: 0.75rem,
   text-button-small-font-size: 0.75rem,
