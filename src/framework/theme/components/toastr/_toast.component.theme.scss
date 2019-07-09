@@ -57,6 +57,10 @@
       border-color: nb-theme(toastr-#{$status}-border-color);
       color: nb-theme(toastr-#{$status}-text-color);
 
+      .title {
+        color: nb-theme(toastr-#{$status}-text-color);
+      }
+
       &.destroy-by-click:hover {
         background: nb-theme(toastr-destroyable-hover-#{$status}-background-color);
         border-color: nb-theme(toastr-destroyable-hover-#{$status}-border-color);

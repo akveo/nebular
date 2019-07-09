@@ -71,7 +71,6 @@ We have to:
     - framework - Framework itself, divided into npm packages
         - theme - `@nebular/theme` npm package, main framework package
         - auth - `@nebular/auth` npm package, auth package (login, register, etc)       
-        - icons - `nebular-icons` npm package, cool icons font
         - security - `@nebular/security` npm package, security framework package
         
 
@@ -484,4 +483,3 @@ Then schematic will collect all component routes and write list into `./src/app/
  - describe framework and demo dependencies
  - create a new component guide
  - usage guide
- - move nebular-icons in separate repository
