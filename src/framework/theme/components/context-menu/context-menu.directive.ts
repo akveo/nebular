@@ -48,6 +48,17 @@ import { NbMenuItem, NbMenuService } from '../menu/menu.service';
  * })
  * export class PageModule { }
  * ```
+ * Also make sure `NbMenuModule` is imported to your `app.module`.
+ *  * ```ts
+ * @NgModule({
+ *   imports: [
+ *     // ...
+ *     NbMenuModule.forRoot(),
+ *   ],
+ * })
+ * export class AppModule { }
+ * ```
+ *
  * ### Usage
  *
  * If you want to handle context menu clicks you have to pass `nbContextMenuTag`
