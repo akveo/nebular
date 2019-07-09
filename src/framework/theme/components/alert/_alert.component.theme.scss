@@ -59,6 +59,11 @@
       &.status-#{$status} {
         color: nb-theme(alert-#{$status}-text-color);
         background-color: nb-theme(alert-#{$status}-background-color);
+
+        a,
+        a:hover {
+          color: nb-theme(alert-#{$status}-text-color);
+        }
       }
 
       &.accent-#{$status} {

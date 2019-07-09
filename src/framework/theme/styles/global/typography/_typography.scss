@@ -22,12 +22,62 @@
     }
   }
 
-  p {
+  .subtitle,
+  .subtitle-2 {
+    color: nb-theme(text-basic-color);
+  }
+
+  .subtitle {
+    font-family: nb-theme(text-subtitle-font-family);
+    font-size: nb-theme(text-subtitle-font-size);
+    font-weight: nb-theme(text-subtitle-font-weight);
+    line-height: nb-theme(text-subtitle-line-height);
+  }
+
+  .subtitle-2 {
+    font-family: nb-theme(text-subtitle-2-font-family);
+    font-size: nb-theme(text-subtitle-2-font-size);
+    font-weight: nb-theme(text-subtitle-2-font-weight);
+    line-height: nb-theme(text-subtitle-2-line-height);
+  }
+
+  p,
+  .paragraph {
     color: nb-theme(text-basic-color);
     font-family: nb-theme(text-paragraph-font-family);
     font-size: nb-theme(text-paragraph-font-size);
     font-weight: nb-theme(text-paragraph-font-weight);
     line-height: nb-theme(text-paragraph-line-height);
+  }
+
+  .paragraph-2 {
+    color: nb-theme(text-basic-color);
+    font-family: nb-theme(text-paragraph-2-font-family);
+    font-size: nb-theme(text-paragraph-2-font-size);
+    font-weight: nb-theme(text-paragraph-2-font-weight);
+    line-height: nb-theme(text-paragraph-2-line-height);
+  }
+
+  @each $status in nb-get-statuses() {
+    .text-#{$status} {
+      color: nb-theme(color-#{$status}-default);
+    }
+  }
+
+  .text-basic {
+    color: nb-theme(text-basic-color);
+  }
+  .text-alternate {
+    color: nb-theme(text-alternate-color);
+  }
+  .text-control {
+    color: nb-theme(text-control-color);
+  }
+  .text-disabled {
+    color: nb-theme(text-disabled-color);
+  }
+  .text-hint {
+    color: nb-theme(text-hint-color);
   }
 
   a {
@@ -43,6 +93,16 @@
 
     &:hover {
       color: nb-theme(link-text-hover-color);
+    }
+
+    .link-control,
+    .link-control:hover {
+      color: nb-theme(text-control-color);
+    }
+
+    .link-alternate,
+    .link-alternate:hover {
+      color: nb-theme(text-alternate-color);
     }
   }
 
