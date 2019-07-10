@@ -1,25 +1,36 @@
 import { NbJSThemeOptions } from './theme.options';
-import { NbColorHelper } from '../color.helper';
 
 const palette = {
-  primary: '#7659ff',
-  success: '#00d977',
-  info: '#0088ff',
-  warning: '#ffa100',
-  danger: '#ff386a',
+  primary: '#a16eff',
+  success: '#00d68f',
+  info: '#0095ff',
+  warning: '#ffaa00',
+  danger: '#ff3d71',
 };
 
 export const COSMIC_THEME: NbJSThemeOptions = {
   name: 'cosmic',
-  base: 'default',
   variables: {
-    bg: '#3d3780',
-    fg: '#a1a1e5',
+    fontMain: 'Open Sans, sans-serif',
+    fontSecondary: 'Raleway, sans-serif',
+
+    bg: '#323259',
+    bg2: '#252547',
+    bg3: '#1b1b38',
+    bg4: '#13132b',
+
+    border: '#323259',
+    border2: '#252547',
+    border3: '#1b1b38',
+    border4: '#13132b',
+    border5: '#13132b',
+
+    fg: '#b4b4db',
     fgHeading: '#ffffff',
-    fgText: '#d1d1ff',
-    fgHighlight: '#00f9a6',
-    layoutBg: '#2f296b',
-    separator: '#342e73',
+    fgText: '#ffffff',
+    fgHighlight: palette.primary,
+    layoutBg: '#151a30',
+    separator: '#151a30',
 
     primary: palette.primary,
     success: palette.success,
@@ -27,10 +38,10 @@ export const COSMIC_THEME: NbJSThemeOptions = {
     warning: palette.warning,
     danger: palette.danger,
 
-    primaryLight: NbColorHelper.tint(palette.primary, 20),
-    successLight: NbColorHelper.tint(palette.success, 20),
-    infoLight: NbColorHelper.tint(palette.info, 20),
-    warningLight: NbColorHelper.tint(palette.warning, 20),
-    dangerLight: NbColorHelper.tint(palette.danger, 20),
+    primaryLight: '#b18aff',
+    successLight: '#2ce69b',
+    infoLight: '#42aaff',
+    warningLight: '#ffc94d',
+    dangerLight: '#ff708d',
   },
 };

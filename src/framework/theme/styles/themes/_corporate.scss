@@ -39,7 +39,7 @@ $theme: (
   accordion-shadow: none,
 
   select-options-list-border-width: 0.0625rem,
-  select-options-list-border-color: border-basic-color-3,
+  select-open-outline-border-color: select-options-list-outline-border-color,
 );
 
 $nb-themes: nb-register-theme($theme, corporate, default);

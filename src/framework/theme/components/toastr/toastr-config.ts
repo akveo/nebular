@@ -47,6 +47,10 @@ export class NbToastrConfig {
    * Determines the how to threat duplicates.
    * */
   duplicatesBehaviour: NbDuplicateToastBehaviour = 'previous';
+  /*
+  * The number of visible toasts. If the limit exceeded the oldest toast will be removed.
+  * */
+  limit?: number = null;
   /**
    * Determines render icon or not.
    * */

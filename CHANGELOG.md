@@ -1,3 +1,38 @@
+<a name="4.1.1"></a>
+## [4.1.1](https://github.com/akveo/nebular/compare/v4.1.0...v4.1.1) (2019-07-09)
+
+
+### Bug Fixes
+
+* **auth:** make social icons bigger ([#1659](https://github.com/akveo/nebular/issues/1659)) ([d596e31](https://github.com/akveo/nebular/commit/d596e31))
+* **auth:** two minor typos in auth components ([#1682](https://github.com/akveo/nebular/issues/1682)) ([44225d4](https://github.com/akveo/nebular/commit/44225d4))
+* **calendar:** prevent selected day text color override ([#1655](https://github.com/akveo/nebular/issues/1655)) ([e8834d7](https://github.com/akveo/nebular/commit/e8834d7))
+* **context menu:** add cursor pointer to menu host ([#1662](https://github.com/akveo/nebular/issues/1662)) ([337cacf](https://github.com/akveo/nebular/commit/337cacf))
+* **docs:** wrong NbEvaIconsModule import ([#1623](https://github.com/akveo/nebular/issues/1623)) ([a1c5e0c](https://github.com/akveo/nebular/commit/a1c5e0c))
+* **flip card:** add prefixed backface-visibility property ([#1658](https://github.com/akveo/nebular/issues/1658)) ([6373117](https://github.com/akveo/nebular/commit/6373117))
+* **icon:** specify vertical align ([#1657](https://github.com/akveo/nebular/issues/1657)) ([8ceb343](https://github.com/akveo/nebular/commit/8ceb343))
+* **menu:** icon color should use `text-hint-color` ([#1614](https://github.com/akveo/nebular/issues/1614)) ([dad01b2](https://github.com/akveo/nebular/commit/dad01b2))
+* **reveal card:** card shadow being cut off ([#1656](https://github.com/akveo/nebular/issues/1656)) ([6001564](https://github.com/akveo/nebular/commit/6001564))
+* **select:** add theme property for open select border ([#1653](https://github.com/akveo/nebular/issues/1653)) ([d16dcba](https://github.com/akveo/nebular/commit/d16dcba))
+* **select:** make options list same width as button ([#1650](https://github.com/akveo/nebular/issues/1650)) ([1658ccf](https://github.com/akveo/nebular/commit/1658ccf))
+* **select:** prevent empty select height collapsing ([#1643](https://github.com/akveo/nebular/issues/1643)) ([43655c7](https://github.com/akveo/nebular/commit/43655c7))
+* update protractor ([#1647](https://github.com/akveo/nebular/issues/1647)) ([8c2046e](https://github.com/akveo/nebular/commit/8c2046e))
+* **select:** remove usage of deleted variables ([#1670](https://github.com/akveo/nebular/issues/1670)) ([ff4dc8b](https://github.com/akveo/nebular/commit/ff4dc8b))
+* **select:** use new 'checked' input ([#1747](https://github.com/akveo/nebular/issues/1747)) ([4bfd22d](https://github.com/akveo/nebular/commit/4bfd22d))
+* **sidebar:** expand when menu with children clicked ([#1750](https://github.com/akveo/nebular/issues/1750)) ([7ad7005](https://github.com/akveo/nebular/commit/7ad7005))
+* **smart table:** use primary colors ([#1746](https://github.com/akveo/nebular/issues/1746)) ([82ad5c4](https://github.com/akveo/nebular/commit/82ad5c4))
+* **toastr:** icon size shrink ([#1638](https://github.com/akveo/nebular/issues/1638)) ([838d974](https://github.com/akveo/nebular/commit/838d974))
+
+
+### Features
+
+* **toastr:** add duplicates behavior ([#1628](https://github.com/akveo/nebular/issues/1628)) ([4ab5037](https://github.com/akveo/nebular/commit/4ab5037))
+* **toastr:** add toasts limit ([#1637](https://github.com/akveo/nebular/issues/1637)) ([56cac51](https://github.com/akveo/nebular/commit/56cac51))
+* update js themes ([#1631](https://github.com/akveo/nebular/issues/1631)) ([4d66419](https://github.com/akveo/nebular/commit/4d66419))
+* **typography:** sync with Eva 1 ([#1648](https://github.com/akveo/nebular/issues/1648)) ([a2e20a0](https://github.com/akveo/nebular/commit/a2e20a0))
+
+
+
 <a name="4.1.0"></a>
 # [4.1.0](https://github.com/akveo/nebular/compare/v4.0.0...v4.1.0) (2019-06-14)
 
