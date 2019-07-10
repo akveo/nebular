@@ -1,6 +1,6 @@
 {
   "name": "nebular",
-  "version": "4.1.0",
+  "version": "4.1.1",
   "license": "MIT",
   "author": "akveo <contact@akveo.com>",
   "private": true,
@@ -163,7 +163,7 @@
     "minimist": "^1.2.0",
     "npm-run-all": "4.1.5",
     "parse5": "^5.0.0",
-    "protractor": "^5.3.2",
+    "protractor": "^5.4.2",
     "pump": "1.0.2",
     "rimraf": "2.6.1",
     "rollup-plugin-node-resolve": "3.0.0",

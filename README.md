@@ -2,7 +2,7 @@
 
 [Documentation](https://akveo.github.io/nebular/docs/getting-started/what-is-nebular?utm_source=github&utm_medium=nebular_readme)
 
-Nebular is an Angular 8 UI Library with a focus on beautiful design and ability to adapt it to your brand easily. It comes with 4 stunning visual themes, a powerful theming engine with runtime theme switching and support of custom css properties mode. Nebular is based on Eva Design System specifications.
+Nebular is a customizable Angular 8 UI Library with a focus on beautiful design and ability to adapt it to your brand easily. It comes with 4 stunning visual themes, a powerful theming engine with runtime theme switching and support of custom css properties mode. Nebular is based on Eva Design System specifications.
 
 <a href="https://akveo.github.io/nebular/?utm_source=github&utm_medium=nebular_cover"><img src="https://i.imgur.com/C8ZN4SA.jpg"></a>
 
@@ -10,6 +10,7 @@ Nebular is an Angular 8 UI Library with a focus on beautiful design and ability 
 
 - **4 Visual Themes, including new Dark** easily customizable to your brand
 - **35+ Angular UI components** with a bunch of handy settings and configurations
+- **Configurable options** - colors, sizes, appearances, shapes, and other useful settings
 - **3 Auth strategies and Security** - authentication and security layer easily configurable for your API
 - **Powerful theming engine** with custom CSS properties mode
 - **SVG Eva Icons support**  - 480+ general purpose icons

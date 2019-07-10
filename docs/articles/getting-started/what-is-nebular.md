@@ -1,6 +1,6 @@
 # What is Nebular?
 
-Nebular is an Angular UI Library based on [Eva Design System](https://eva.design) specifications, with 40+ UI components, 4 visual themes, Auth and Security modules. 
+Nebular is a customizable Angular UI Library based on [Eva Design System](https://eva.design) specifications, with 40+ UI components, 4 visual themes, Auth and Security modules. 
 <hr>
 
 ## What's included

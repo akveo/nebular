@@ -116,11 +116,11 @@ describe('theme-service', () => {
     try {
       // TODO could be rewrite with usage of done()
       expect(current).not.toBeUndefined();
-      expect(current.fontMain).toEqual('"Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif');
+      expect(current.fontMain).toEqual('Open Sans, sans-serif');
       expect(current.bg).toEqual('#ffffff');
 
       themeService.changeTheme('cosmic');
-      expect(current.bg).toEqual('#3d3780');
+      expect(current.bg).toEqual('#323259');
 
       themeService.changeTheme('corporate');
       expect(current.bg).toEqual('#ffffff');

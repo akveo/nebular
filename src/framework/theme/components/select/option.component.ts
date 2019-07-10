@@ -30,7 +30,7 @@ import { NB_SELECT_INJECTION_TOKEN } from './select-injection-tokens';
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <nb-checkbox *ngIf="withCheckbox"
-                 [value]="selected"
+                 [checked]="selected"
                  [disabled]="disabled"
                  aria-hidden="true">
     </nb-checkbox>
