@@ -118,43 +118,6 @@
     line-height: nb-theme(layout-text-line-height);
     min-height: nb-theme(layout-min-height);
 
-    nb-layout-header {
-      color: nb-theme(header-text-color);
-      font-family: nb-theme(header-text-font-family);
-      font-size: nb-theme(header-text-font-size);
-      font-weight: nb-theme(header-text-font-weight);
-      line-height: nb-theme(header-text-line-height);
-
-      nav {
-        background: nb-theme(header-background-color);
-        color: nb-theme(header-text-color);
-        box-shadow: nb-theme(header-shadow);
-        height: nb-theme(header-height);
-        padding: nb-theme(header-padding);
-
-        a {
-          color: nb-theme(header-text-color);
-
-          @include hover-focus-active {
-            color: nb-theme(header-text-color);
-          }
-        }
-      }
-
-      & ~ .layout-container {
-        min-height: calc(#{nb-theme(layout-min-height)} - #{nb-theme(header-height)});
-      }
-
-      &.fixed ~ .layout-container {
-        padding-top: nb-theme(header-height);
-        min-height: nb-theme(layout-min-height);
-      }
-
-      &.fixed ~ .layout-container > nb-sidebar > .main-container {
-        height: calc(#{nb-theme(sidebar-height)} - #{nb-theme(header-height)});
-      }
-    }
-
     .layout-container {
 
       nb-sidebar {
@@ -206,6 +169,43 @@
           }
         }
       }
+    }
+  }
+
+  nb-layout-header {
+    color: nb-theme(header-text-color);
+    font-family: nb-theme(header-text-font-family);
+    font-size: nb-theme(header-text-font-size);
+    font-weight: nb-theme(header-text-font-weight);
+    line-height: nb-theme(header-text-line-height);
+
+    nav {
+      background: nb-theme(header-background-color);
+      color: nb-theme(header-text-color);
+      box-shadow: nb-theme(header-shadow);
+      height: nb-theme(header-height);
+      padding: nb-theme(header-padding);
+
+      a {
+        color: nb-theme(header-text-color);
+
+        @include hover-focus-active {
+          color: nb-theme(header-text-color);
+        }
+      }
+    }
+
+    & ~ .layout-container {
+      min-height: calc(#{nb-theme(layout-min-height)} - #{nb-theme(header-height)});
+    }
+
+    &.fixed ~ .layout-container {
+      padding-top: nb-theme(header-height);
+      min-height: nb-theme(layout-min-height);
+    }
+
+    &.fixed ~ .layout-container nb-sidebar .main-container {
+      height: calc(#{nb-theme(sidebar-height)} - #{nb-theme(header-height)});
     }
   }
 
