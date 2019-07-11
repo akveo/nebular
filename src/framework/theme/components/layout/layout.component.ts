@@ -448,6 +448,7 @@ export class NbLayoutComponent implements AfterViewInit, OnDestroy {
     }
   }
 
+  // TODO: Extract into block scroll strategy
   protected blockScroll() {
     if (this.isScrollBlocked) {
       return;
