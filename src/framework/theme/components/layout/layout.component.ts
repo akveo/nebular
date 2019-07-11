@@ -457,10 +457,13 @@ export class NbLayoutComponent implements AfterViewInit, OnDestroy {
 
     this.renderer.addClass(this.document.documentElement, this.scrollBlockClass);
 
-    const layoutWithScrollWidth = this.layoutContainerRef.nativeElement.clientWidth;
-    this.scrollableContainerOverflowOldValue = this.scrollableContainerRef.nativeElement.style.overflow;
-    this.scrollableContainerRef.nativeElement.style.overflow = 'hidden';
-    const layoutWithoutScrollWidth = this.layoutContainerRef.nativeElement.clientWidth;
+    const scrollableContainerElement = this.scrollableContainerRef.nativeElement;
+    const layoutElement = this.layoutContainerRef.nativeElement;
+
+    const layoutWithScrollWidth = layoutElement.clientWidth;
+    this.scrollableContainerOverflowOldValue = scrollableContainerElement.style.overflow;
+    scrollableContainerElement.style.overflow = 'hidden';
+    const layoutWithoutScrollWidth = layoutElement.clientWidth;
     const scrollWidth = layoutWithoutScrollWidth - layoutWithScrollWidth;
 
     if (!scrollWidth) {
@@ -468,14 +471,14 @@ export class NbLayoutComponent implements AfterViewInit, OnDestroy {
     }
 
     this.layoutPaddingOldValue = {
-      left: this.layoutContainerRef.nativeElement.style.paddingLeft,
-      right: this.layoutContainerRef.nativeElement.style.paddingRight,
+      left: layoutElement.style.paddingLeft,
+      right: layoutElement.style.paddingRight,
     };
 
     if (this.layoutDirectionService.isLtr()) {
-      this.layoutContainerRef.nativeElement.style.paddingRight = `${scrollWidth}px`;
+      layoutElement.style.paddingRight = `${scrollWidth}px`;
     } else {
-      this.layoutContainerRef.nativeElement.style.paddingLeft = `${scrollWidth}px`;
+      layoutElement.style.paddingLeft = `${scrollWidth}px`;
     }
   }
 
@@ -487,8 +490,9 @@ export class NbLayoutComponent implements AfterViewInit, OnDestroy {
       this.scrollableContainerRef.nativeElement.style.overflow = this.scrollableContainerOverflowOldValue;
 
       if (this.layoutPaddingOldValue) {
-        this.layoutContainerRef.nativeElement.style.paddingLeft = this.layoutPaddingOldValue.left;
-        this.layoutContainerRef.nativeElement.style.paddingRight = this.layoutPaddingOldValue.right;
+        const layoutElement = this.layoutContainerRef.nativeElement;
+        layoutElement.style.paddingLeft = this.layoutPaddingOldValue.left;
+        layoutElement.style.paddingRight = this.layoutPaddingOldValue.right;
         this.layoutPaddingOldValue = null;
       }
     }
