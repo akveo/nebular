@@ -7,6 +7,15 @@
 @mixin window-mode($padding-top) {
   padding-top: $padding-top;
 
+  nb-layout-header.fixed {
+    top: $padding-top;
+  }
+
+  nb-layout-header.fixed ~ .layout-container nb-sidebar .main-container-fixed {
+    height: calc(100vh - #{$padding-top} - #{nb-theme(header-height)});
+    top: calc(#{$padding-top} + #{nb-theme(header-height)});
+  }
+
   nb-sidebar.fixed {
     left: calc((100vw - #{nb-theme(layout-window-mode-max-width)}) / 2);
   }
@@ -48,12 +57,7 @@
     }
   }
 
-  nb-layout.overlay-scroll-block .scrollable-container {
-    overflow: hidden;
-  }
-
   .layout {
-    // TODO: check this prop name
     min-width: nb-theme(layout-window-mode-min-width);
   }
 
