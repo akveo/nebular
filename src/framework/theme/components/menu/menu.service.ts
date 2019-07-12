@@ -384,8 +384,8 @@ export class NbMenuInternalService {
 
     if (isSelectedInPath && item.fragment != null) {
       return exact
-        ? isFragmentEqual(this.location.path(), item.fragment)
-        : isFragmentContain(this.location.path(), item.fragment);
+        ? isFragmentEqual(this.location.path(true), item.fragment)
+        : isFragmentContain(this.location.path(true), item.fragment);
     }
 
     return isSelectedInPath;

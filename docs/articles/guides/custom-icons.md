@@ -1,6 +1,7 @@
 # Register Icon pack
 
 Nebular comes with an `<nb-icon></nb-icon>` component that accepts an `icon="icon-name"` and `pack="icon-pack"` parameters.
+
 By default, Nebular includes only a small and limited pack called `nebular-essentials`. This pack consists of essential icons, such as `close-outline`, `checkmark-outline`, etc that are required by the Nebular components (modals, accordions, etc).
 
 ## Eva Icons
@@ -62,6 +63,7 @@ Then simply register the pack using `NbIconLibraries` service in you `app.compon
 ```html
 <nb-icon icon="star" pack="font-awesome"></nb-icon>
 ```
+
 
 Lastly, we can set this pack as the default and not specify it implicitly while using `<nb-icon>`:
 ```ts
