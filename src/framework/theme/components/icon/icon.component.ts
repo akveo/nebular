@@ -40,8 +40,7 @@ import { NbIconLibraries } from './icon-libraries';
  * ```sh
  * npm i @nebular/eva-icons@next
  * ```
- * This command will install Nebular Eva Icons pack. Then register `NbEvaIconsModule` into your app module or any child
- * module you need to have the icons in:
+ * This command will install Eva Icons pack. Then register `NbEvaIconsModule` into your app module:
  * ```ts
  * import { NbEvaIconsModule } from '@nebular/eva-icons';
  *
@@ -51,7 +50,7 @@ import { NbIconLibraries } from './icon-libraries';
  *     NbEvaIconsModule,
  *   ],
  * })
- * export class PageModule { }
+ * export class AppModule { }
  * ```
  * Last thing, import `NbIconModule` to your feature module where you need to show an icon:
  * ```ts

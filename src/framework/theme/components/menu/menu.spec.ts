@@ -3,7 +3,16 @@
  * Copyright Akveo. All Rights Reserved.
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
-import { Component, DebugElement, Input, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import {
+  Component,
+  DebugElement,
+  Input,
+  QueryList,
+  ViewChild,
+  ViewChildren,
+  Injectable,
+} from '@angular/core';
+import { Location } from '@angular/common';
 import { Router, Routes } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { By } from '@angular/platform-browser';
@@ -13,10 +22,12 @@ import { NbMenuModule } from './menu.module';
 import { NbMenuBag, NbMenuInternalService, NbMenuItem, NbMenuService } from './menu.service';
 import { NbThemeModule } from '../../theme.module';
 import {
-  getFragmentPartOfUrl, isFragmentContain,
+  getFragmentPartOfUrl,
+  isFragmentContain,
   isFragmentEqual,
   isUrlPathContain,
   isUrlPathEqual,
+  getPathPartOfUrl,
 } from './url-matching-helpers';
 import { pairwise, take } from 'rxjs/operators';
 import { NbMenuComponent } from './menu.component';
@@ -26,6 +37,7 @@ import {
   NbLayoutDirection,
   NbLayoutDirectionService,
 } from '@nebular/theme';
+import { SpyLocation } from '@angular/common/testing';
 
 @Component({ template: '' })
 export class NoopComponent {}
@@ -55,6 +67,23 @@ export class DoubleMenusTestComponent {
   @ViewChildren(NbMenuComponent) menuComponent: QueryList<NbMenuComponent>;
 }
 
+
+// Overrides SpyLocation path method to take into account `includeHash` parameter.
+// Original SpyLocation ignores parameters and always returns path with hash which is different
+// from Location.
+@Injectable()
+export class SpyLocationPathParameter extends SpyLocation {
+  path(includeHash: boolean = false): string {
+    const path = super.path();
+
+    if (includeHash) {
+      return path;
+    }
+
+    return getPathPartOfUrl(path);
+  }
+}
+
 function createTestBed(routes: Routes = []) {
   TestBed.configureTestingModule({
     imports: [
@@ -66,6 +95,8 @@ function createTestBed(routes: Routes = []) {
     declarations: [SingleMenuTestComponent, DoubleMenusTestComponent, NoopComponent],
     providers: [NbMenuService],
   });
+
+  TestBed.overrideProvider(Location, { useValue: new SpyLocationPathParameter() });
 
   const iconLibs: NbIconLibraries = TestBed.get(NbIconLibraries);
   iconLibs.registerSvgPack('test', { 'some-icon': '<svg>some-icon</svg>' });

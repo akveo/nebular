@@ -9,6 +9,7 @@ import {
   ComponentRef,
   Directive,
   ElementRef,
+  HostBinding,
   Input,
   OnChanges,
   OnDestroy,
@@ -115,6 +116,9 @@ import { NbMenuItem, NbMenuService } from '../menu/menu.service';
   providers: [NbDynamicOverlayHandler, NbDynamicOverlay],
 })
 export class NbContextMenuDirective implements NbDynamicOverlayController, OnChanges, AfterViewInit, OnDestroy, OnInit {
+
+  @HostBinding('class.context-menu-host')
+  contextMenuHost = true;
 
   /**
    * Position will be calculated relatively host element based on the position.
