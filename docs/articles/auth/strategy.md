@@ -4,7 +4,7 @@ In Nebular terms `Auth Strategy` is a class containing authentication logic spec
 It accepts user input (login/email/password/token/etc), communicates the input to the backend API and finally provides the resulting output back to the Auth UI layer.
 Currently, there are two Auth Strategies available out of the box:
 
-  - `NbDummyAuthStrategy` - simple strategy for testing purposes, could be used to simulate backend responses while API is in the development;
+  - `NbDummyAuthStrategy` - a simple strategy for testing purposes, could be used to simulate backend responses while API is in the development;
   - `NbPasswordAuthStrategy` - the most common email/password authentication strategy.
   
 Each Strategy has a list of configurations available with the default values set. But you can adjust the settings based on your requirements.
@@ -12,7 +12,7 @@ Each Strategy has a list of configurations available with the default values set
   
 ## Configure a strategy
 
-As an example, let's configure API endpoints for the `NbPasswordAuthStrategy`. The strategy is configured by default, please take a look at the [default configuration values](docs/auth/nbpasswordauthstrategy) if you need any custom behaviour.
+As an example, let's configure API endpoints for the `NbPasswordAuthStrategy`. The strategy is configured by default, please take a look at the [default configuration values](docs/auth/nbpasswordauthstrategy) if you need any custom behavior.
 We assume you already have the Auth module installed inside of your `*.module.ts`:
 
 
@@ -34,7 +34,7 @@ We assume you already have the Auth module installed inside of your `*.module.ts
 });
 
 ```
-`email` here is an alias we've assigned to the strategy, so that we can dynamically mention it later. This also allows us to configure multiple strategies with various configurations in one app.
+`email` here is an alias we've assigned to the strategy so that we can dynamically mention it later. This also allows us to configure multiple strategies with various configurations in one app.
 <hr>
 
 ## Setup API configuration

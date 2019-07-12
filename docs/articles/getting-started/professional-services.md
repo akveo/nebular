@@ -1,6 +1,6 @@
 # Professional Services
 Evolve your products and apps to expand your markets. Nebular Services are set to help speed up the evolution of your business. 
-The Nebular team is ready to bring you their expertise with following services.
+The Nebular team is ready to bring you their expertise with the following services.
 
 ### Theme customization
 Let Akveo’s experts help you get more out of your Nebular experience. Modify, extend, and tailor Nebular components and controls to fit your needs. Our developers know the products inside and out, so there's no need to spend hours searching for a solution. We create themes, modules, and components to match your company branding.

@@ -47,7 +47,7 @@ import { NbPasswordAuthStrategy, NbAuthModule } from '@nebular/auth';
 
 ## Configure a strategy
 
-Now, let's configure the module by specifying available strategies, in our case we add `NbPasswordAuthStrategy`.
+Now, let's configure the module by specifying available strategies, in our case, we add `NbPasswordAuthStrategy`.
 To add a strategy we need to call static `setup` method to pass a list of options:
 
 ```ts

@@ -8,8 +8,8 @@ Nebular is a customizable Angular UI Library based on [Eva Design System](https:
 Nebular modules are distributed as separated `npm` packages:
 
 - Nebular Theme `@nebular/theme`
-  - Theme - 4 visual themes, customizable theming engine with custom css properties support.
-  - UI Components - high quality Angular components no 3rd party dependencies.
+  - Theme - 4 visual themes, a customizable theming engine with custom css properties support.
+  - UI Components - high-quality Angular components no 3rd party dependencies.
   - Server-side rendering compatibility.
   - Right-to-left writing system support for all components.
 - Nebular Auth `@nebular/auth`
