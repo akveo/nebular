@@ -54,7 +54,6 @@ Then simply register the pack using `NbIconLibraries` service in you `app.compon
 
   constructor(private iconLibraries: NbIconLibraries) {
     this.iconLibraries.registerFontPack('font-awesome', { iconClassPrefix: 'fa' });
-    this.iconLibraries.setDefaultPack('nebular');
   }
 ```
 
@@ -74,6 +73,12 @@ Lastly we can set this pack as the default and not specify it implicitly while u
   }
 ```
 
+Now we can use `font-awesome` icons without specifying the pack:
+
+```html
+<nb-icon icon="star"></nb-icon>
+```
+
 ## 3rd-party/Custom SVG Pack
 
 If the icons are provided as SVG elements, you can register the pack as follows:
@@ -84,11 +89,13 @@ If the icons are provided as SVG elements, you can register the pack as follows:
   constructor(private iconLibraries: NbIconLibraries) {
     this.iconsLibrary.registerSvgPack('social-networks', {
           'facebook': '<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24"> ... </svg>',
+          'twitter': '<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24"> ... </svg>',
+          // ...
     });
   }
 ```
 
-Where you can provide a map of icons, specifying a name and SVG icon string.
+Where you can provide a map of icons, specifying the name and SVG icon string.
 And then use it as any other icon:
 
 ```html
