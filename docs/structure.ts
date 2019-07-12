@@ -88,6 +88,17 @@ export const structure = [
       },
       {
         type: 'page',
+        name: 'Register Icon Pack',
+        children: [
+          {
+            type: 'block',
+            block: 'markdown',
+            source: 'guides/custom-icons.md',
+          },
+        ],
+      },
+      {
+        type: 'page',
         name: 'Server deployment',
         children: [
           {
@@ -803,6 +814,17 @@ export const structure = [
             type: 'block',
             block: 'markdown',
             source: 'auth/custom-ui.md',
+          },
+        ],
+      },
+      {
+        type: 'page',
+        name: 'Redirect after Login',
+        children: [
+          {
+            type: 'block',
+            block: 'markdown',
+            source: 'auth/redirect.md',
           },
         ],
       },
