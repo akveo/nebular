@@ -1,3 +1,16 @@
+<a name="4.1.2"></a>
+## [4.1.2](https://github.com/akveo/nebular/compare/v4.1.1...v4.1.2) (2019-07-12)
+
+
+### Bug Fixes
+
+* **auth:** include helpers into public api ([#1754](https://github.com/akveo/nebular/issues/1754)) ([f6f301b](https://github.com/akveo/nebular/commit/f6f301b))
+* **docs:** articles grammar ([#1810](https://github.com/akveo/nebular/issues/1810)) ([a0efb6b](https://github.com/akveo/nebular/commit/a0efb6b))
+* **layout:** scroll block in with scroll mode ([#1805](https://github.com/akveo/nebular/issues/1805)) ([8958fc9](https://github.com/akveo/nebular/commit/8958fc9))
+* **menu:** path fragment comparison ([#1809](https://github.com/akveo/nebular/issues/1809)) ([abbd659](https://github.com/akveo/nebular/commit/abbd659))
+
+
+
 <a name="4.1.1"></a>
 ## [4.1.1](https://github.com/akveo/nebular/compare/v4.1.0...v4.1.1) (2019-07-09)
 
