@@ -7,7 +7,7 @@ it is highly recommended to go through the Angular tutorial beforehand and be fa
 
 ## Quickstart tutorials
 
-Based on current setup of your project and your goals, there are two starting points:
+Based on the current setup of your project and your goals, there are two starting points:
 
 - [Install Nebular](docs/guides/install-nebular) This tutorial explains how to use Nebular from scratch or if you already have some Angular code.
 - [Starting based on our Nebular Admin starter kit](docs/guides/install-based-on-starter-kit) Consider this tutorial if you are building admin or any other back-office application and you need a template as a good starting kit.

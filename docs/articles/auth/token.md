@@ -2,17 +2,17 @@
 
 ## Receiving user token after login/registration
 
-At this step, we assume that Nebular Auth module is up and running, 
+At this step, we assume that the Nebular Auth module is up and running, 
 you have successfully configured an auth strategy and adjusted auth look & fell accordingly with your requirements.
 
-It's time to get a user token after successful authentication to be able to communicate with the server and, for instance, show a username in the header of the application.
-Let's assume that your backend returns a JWT token so that we can use the token payload to extract a user info out of it.
+It's time to get a user token after a successful authentication to be able to communicate with the server and, for instance, show username in the header of the application.
+Let's assume that your backend returns a JWT token so that we can use the token payload to extract user info out of it.
 
 Each `Strategy` specifies which token class is going to be used by default. For example, `NbPasswordAuthStrategy` uses `NbAuthSimpleToken`,
 and `NbOAuth2AuthProvider` uses `NbAuthOAuth2Token`. It is also possible to specify another token class if it is required, like in the example below.
 <hr>
 
-## Configure token type
+## Configure the token type
 
 Let's tell Nebular that we are waiting for a JWT token instead of a simple string token.
 We just need to provide a respective class to do that. Open your `app.module.ts` and adjust your `Strategy` configuration:
@@ -85,13 +85,13 @@ We'll assume that our API returns a token as just `{ token: 'some-jwt-token' }` 
 
 ## Use token
 
-Okay, let's use the token to extract a payload and show a username in the header. Open your `header.component.ts` and import the following services:
+Okay, let's use the token to extract a payload and show username in the header. Open your `header.component.ts` and import the following services:
 
 ```typescript
 import { NbAuthJWTToken, NbAuthService } from '@nebular/auth';
 ```
 
-Then, let's create `user` variable, which will store the token payload inside of the component: 
+Then, let's create a `user` variable, which will store the token payload inside of the component: 
 
 ```typescript
 

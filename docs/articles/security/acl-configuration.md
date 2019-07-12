@@ -1,10 +1,10 @@
 # ACL
 
-Permissions control is a general task when it comes to development of more or less complex web application. Your application may have various roles and resources you need to protect.
+Permissions control is a general task when it comes to the development of more or less complex web application. Your application may have various roles and resources you need to protect.
 ACL (access control list) provides a flexible way of configuring "who can do what against what resource".
 
 In this article we configure a common setup when the app has three roles (`guest`, `user` and `moderator`), the roles have different permissions (`view`, `create`, `remove`) 
-and the application contains two type of resources that needs to be protected (`news`, `comments`).
+and the application contains two types of resources that needs to be protected (`news`, `comments`).
 <hr>
 
 ## ACL Configuration
@@ -41,14 +41,14 @@ Now, let's convert this into an ACL configuration object which Nebular can under
 ``` 
 
 As you can see the configuration is pretty much straightforward, each role can have a list of permissions (view, create, remove) and resources that are allowed for those permissions. We can also specify a `*` resource,
-which means that we have a permission against any resource (like moderators can remove both news and comments).    
+which means that we have permission against any resource (like moderators can remove both news and comments).    
 <hr>
 
 ## Role Configuration
 
-So far we told Nebular Security what roles-permissions-resources our application has. Now we need to specify how Nebular can determine a role of currently authenticated user.
+So far we told Nebular Security what roles-permissions-resources our application has. Now we need to specify how Nebular can determine the role of the currently authenticated user.
 To do so we need to create a `RoleProvider` with one simple method `getRole`, which returns an `Observable<string>` of a role.
-In a simplest form we can provide this service directly in the main module:
+In the simplest form we can provide this service directly in the main module:
 
 
 ```ts
@@ -86,7 +86,7 @@ The good thing about this configuration is that it's not tightly coupled with th
 
 ## Role Provider
 
-But, in our example the role is "hardcoded", which in the real world app would be dynamic and depend on the current user. 
+But, in our example, the role is "hardcoded", which in the real world app would be dynamic and depend on the current user. 
 
 Assuming that you already have `Nebular Auth` module fully configured and functioning based on `JWT` we will adjust the example to retrieve a role from the user token.
 
@@ -192,7 +192,7 @@ export class CommentFormComponent {
 ```
 We just need to pass a `permission` and some `resource` in order to control the button visibility.
 
-For more advanced use cases, we can directly use the `NbAccessChecker` service. It provides you with `isGranted` method , which returns an `Observable<boolean>` of the ACL check result.
+For more advanced use cases, we can directly use the `NbAccessChecker` service. It provides you with `isGranted` method, which returns an `Observable<boolean>` of the ACL check result.
 We can adjust our example to utilize it. In your `comment-form.component.ts`, import the `NbAccessChecker` service. 
 
 ```typescript
@@ -208,7 +208,7 @@ export class CommentFormComponent {
 }
 ``` 
 
-And let's add an `if` statement to the `Post Comment` button, so that it is only shown when permitted:
+And let's add an `if` statement to the `Post Comment` button so that it is only shown when permitted:
 
 ```typescript
 @Component({
@@ -223,4 +223,4 @@ export class CommentFormComponent {
 We call `isGranted` method, which listens to the currently provided role and checks it permissions against specified in the ACL configuration. 
 Moreover, as it listens to the *role change*, it hides the button if authentication gets changed during the app usage.
 
-Same way we can call the `isGranted` method from any part of the app, including router guards and services, which gives us a transparent and flexibly configurable way to manage user access to various resources.   
+The same way we can call the `isGranted` method from any part of the app, including router guards and services, which gives us a transparent and flexibly configurable way to manage user access to various resources.   
