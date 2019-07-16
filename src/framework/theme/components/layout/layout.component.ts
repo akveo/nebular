@@ -129,7 +129,7 @@ import { NbOverlayContainerAdapter } from '../cdk/adapter/overlay-container-adap
   styleUrls: ['./layout.component.scss'],
   template: `
     <div class="scrollable-container" #scrollableContainer (scroll)="onScroll($event)">
-      <div class="layout">
+      <div class="layout" #layoutContainer>
         <ng-content select="nb-layout-header:not([subheader])"></ng-content>
         <div class="layout-container">
           <ng-content select="nb-sidebar"></ng-content>
@@ -147,13 +147,17 @@ import { NbOverlayContainerAdapter } from '../cdk/adapter/overlay-container-adap
 })
 export class NbLayoutComponent implements AfterViewInit, OnDestroy {
 
+  protected scrollBlockClass = 'nb-global-scrollblock';
+  protected isScrollBlocked = false;
+  protected scrollableContainerOverflowOldValue: string;
+  protected layoutPaddingOldValue: { left: string; right: string };
+
   centerValue: boolean = false;
   restoreScrollTopValue: boolean = true;
 
   @HostBinding('class.window-mode') windowModeValue: boolean = false;
   @HostBinding('class.with-scroll') withScrollValue: boolean = false;
   @HostBinding('class.with-subheader') withSubheader: boolean = false;
-  @HostBinding('class.overlay-scroll-block') overlayScrollBlock: boolean = false;
 
   /**
    * Defines whether the layout columns will be centered after some width
@@ -207,7 +211,12 @@ export class NbLayoutComponent implements AfterViewInit, OnDestroy {
 
   // TODO remove as of 5.0.0
   @ViewChild('layoutTopDynamicArea', { read: ViewContainerRef, static: false }) veryTopRef: ViewContainerRef;
-  @ViewChild('scrollableContainer', { read: ElementRef, static: false }) scrollableContainerRef: ElementRef;
+
+  @ViewChild('scrollableContainer', { read: ElementRef, static: false })
+  scrollableContainerRef: ElementRef<HTMLElement>;
+
+  @ViewChild('layoutContainer', { read: ElementRef, static: false })
+  layoutContainerRef: ElementRef<HTMLElement>;
 
   protected afterViewInit$ = new BehaviorSubject(null);
 
@@ -300,20 +309,15 @@ export class NbLayoutComponent implements AfterViewInit, OnDestroy {
         filter(() => this.withScrollValue),
       )
       .subscribe((scrollable: boolean) => {
-        const root = this.document.documentElement;
-        const scrollBlockClass = 'nb-global-scrollblock';
-
-        this.overlayScrollBlock = !scrollable;
-
         /**
          * In case when Nebular Layout custom scroll `withScroll` mode is enabled
          * we need to disable default CDK scroll blocker (@link NbBlockScrollStrategyAdapter) on HTML element
          * so that it won't add additional positioning.
          */
-        if (!scrollable) {
-          this.renderer.addClass(root, scrollBlockClass);
+        if (scrollable) {
+          this.enableScroll();
         } else {
-          this.renderer.removeClass(root, scrollBlockClass);
+          this.blockScroll();
         }
       });
 
@@ -443,6 +447,57 @@ export class NbLayoutComponent implements AfterViewInit, OnDestroy {
       this.window.scrollTo(x, y);
     }
   }
+
+  // TODO: Extract into block scroll strategy
+  protected blockScroll() {
+    if (this.isScrollBlocked) {
+      return;
+    }
+
+    this.isScrollBlocked = true;
+
+    this.renderer.addClass(this.document.documentElement, this.scrollBlockClass);
+
+    const scrollableContainerElement = this.scrollableContainerRef.nativeElement;
+    const layoutElement = this.layoutContainerRef.nativeElement;
+
+    const layoutWithScrollWidth = layoutElement.clientWidth;
+    this.scrollableContainerOverflowOldValue = scrollableContainerElement.style.overflow;
+    scrollableContainerElement.style.overflow = 'hidden';
+    const layoutWithoutScrollWidth = layoutElement.clientWidth;
+    const scrollWidth = layoutWithoutScrollWidth - layoutWithScrollWidth;
+
+    if (!scrollWidth) {
+      return;
+    }
+
+    this.layoutPaddingOldValue = {
+      left: layoutElement.style.paddingLeft,
+      right: layoutElement.style.paddingRight,
+    };
+
+    if (this.layoutDirectionService.isLtr()) {
+      layoutElement.style.paddingRight = `${scrollWidth}px`;
+    } else {
+      layoutElement.style.paddingLeft = `${scrollWidth}px`;
+    }
+  }
+
+  private enableScroll() {
+    if (this.isScrollBlocked) {
+      this.isScrollBlocked = false;
+
+      this.renderer.removeClass(this.document.documentElement, this.scrollBlockClass);
+      this.scrollableContainerRef.nativeElement.style.overflow = this.scrollableContainerOverflowOldValue;
+
+      if (this.layoutPaddingOldValue) {
+        const layoutElement = this.layoutContainerRef.nativeElement;
+        layoutElement.style.paddingLeft = this.layoutPaddingOldValue.left;
+        layoutElement.style.paddingRight = this.layoutPaddingOldValue.right;
+        this.layoutPaddingOldValue = null;
+      }
+    }
+  }
 }
 
 /**
@@ -477,7 +532,7 @@ export class NbLayoutColumnComponent {
   }
 
   /**
-   * Make columnt first in the layout.
+   * Make column first in the layout.
    * @param {boolean} val
    */
   @Input()

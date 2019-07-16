@@ -8,7 +8,7 @@ and avoid repeated code.
   <div class="note-title">Setup Required</div>
   <div class="note-body">
     This guide assumes you already enabled [Theme Customization](docs/design-system/enable-customizable-theme)
-    and reviewed [Eva Design System Theme](docs/design-system/eva-design-syste-theme) rules.
+    and reviewed [Eva Design System Theme](docs/design-system/eva-design-system-theme) rules.
   </div>
 </div>
 
@@ -28,7 +28,7 @@ Now, let's register the new theme in `themes.scss`:
 
 ```scss
 @import '~@nebular/theme/styles/theming';
-@import '~@nebular/theme/styles/themes/default';
+@import '~@nebular/theme/styles/themes/dark';
 
 
 $nb-themes: nb-register-theme((
@@ -62,7 +62,7 @@ for `color-basic-1100`:
 
 ```scss
 @import '~@nebular/theme/styles/theming';
-@import '~@nebular/theme/styles/themes/default';
+@import '~@nebular/theme/styles/themes/dark';
 
 $nb-themes: nb-register-theme((
   color-basic-100: white,
@@ -87,7 +87,7 @@ For example, we can make the theme backgrounds and borders lighter, by using bas
 
 ```scss
 @import '~@nebular/theme/styles/theming';
-@import '~@nebular/theme/styles/themes/default';
+@import '~@nebular/theme/styles/themes/dark';
 
 $nb-themes: nb-register-theme((
   color-basic-100: white,
@@ -122,7 +122,7 @@ Since we changed backgrounds to a lighter ones, we might need to change elements
 
 ```scss
 @import '~@nebular/theme/styles/theming';
-@import '~@nebular/theme/styles/themes/default';
+@import '~@nebular/theme/styles/themes/dark';
 
 $nb-themes: nb-register-theme((
   color-basic-100: white,
@@ -160,7 +160,7 @@ color as a background. Let's make it one shade lighter:
 
 ```scss
 @import '~@nebular/theme/styles/theming';
-@import '~@nebular/theme/styles/themes/default';
+@import '~@nebular/theme/styles/themes/dark';
 
 $nb-themes: nb-register-theme((
   color-basic-100: white,
@@ -196,6 +196,7 @@ $nb-themes: nb-register-theme((
 ## Primary Color
 
 Lastly, let's make the final change and replace the primary blue color with desired violet one:
+[Eva Colors](https://colors.eva.design) is a great tool to generate colors pallet from a given brand color.
 
 ```scss
 $nb-themes: nb-register-theme((
@@ -243,6 +244,7 @@ Simple as that, here's our result:
 ![image](assets/images/articles/design-system/aquamarine-theme.png)
 
 That's it. In a similar way, the rest of the available theme variables could be changed to achieve the desired result.
+Complete list of variables could be found under [Default Theme Variables](docs/design-system/default-theme) table.
 <hr>
 
 ## Related Articles

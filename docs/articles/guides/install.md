@@ -61,7 +61,7 @@ npm install --save @nebular/eva-icons@next
 ```
 More details on [how to use Nebular Eva Icons are here](docs/components/icon/overview#nbiconcomponent). 
 
-Additionally you can install Auth and Security `npm install --save @nebular/auth @nebular/security`
+Additionally, you can install Auth and Security `npm install --save @nebular/auth @nebular/security`
 
 ### Configure Nebular
 

@@ -26,6 +26,7 @@ Now we can simply call `nb-theme(variable-name)` to access a variable:
   background: nb-theme(background-basic-color-1);
 }
 ```
+Complete list of variables could be found under [Default Theme Variables](docs/design-system/default-theme) table.
 <hr>
 
 ## Access with Multiples Theme Mode

@@ -16,7 +16,7 @@ Most importantly, Eva is built to be customizable, meaning architectural support
 Eva Design System is implemented for two platforms:
 
 - Web - Nebular
-- Mobile - [React Kitten](https://github.com/akveo/react-native-ui-kitten?utm_source=nebular_docs&utm_medium=intro)
+- Mobile - [UI Kitten](https://github.com/akveo/react-native-ui-kitten?utm_source=nebular_docs&utm_medium=intro)
 
 Both implementations have a single source of truth for styles and unified theming system.
 <hr>

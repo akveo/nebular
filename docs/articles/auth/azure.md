@@ -1,6 +1,6 @@
 # Configuring Azure OAuth2 with Nebular Auth
 
-Using `NbOAuth2AuthStrategy` gives possibility to configure authentication with a lot of 3rd party authentication providers, such as Azure in our example.
+Using `NbOAuth2AuthStrategy` gives the possibility to configure authentication with a lot of 3rd party authentication providers, such as Azure in our example.
 There is no need in any backend implementation, as [OAuth2](https://tools.ietf.org/html/rfc6749) protocol enables completely server-less authentication flow as one of the options.
 
 ## Complete example
