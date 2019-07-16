@@ -28,7 +28,7 @@ Now, let's register the new theme in `themes.scss`:
 
 ```scss
 @import '~@nebular/theme/styles/theming';
-@import '~@nebular/theme/styles/themes/default';
+@import '~@nebular/theme/styles/themes/dark';
 
 
 $nb-themes: nb-register-theme((
@@ -62,7 +62,7 @@ for `color-basic-1100`:
 
 ```scss
 @import '~@nebular/theme/styles/theming';
-@import '~@nebular/theme/styles/themes/default';
+@import '~@nebular/theme/styles/themes/dark';
 
 $nb-themes: nb-register-theme((
   color-basic-100: white,
@@ -87,7 +87,7 @@ For example, we can make the theme backgrounds and borders lighter, by using bas
 
 ```scss
 @import '~@nebular/theme/styles/theming';
-@import '~@nebular/theme/styles/themes/default';
+@import '~@nebular/theme/styles/themes/dark';
 
 $nb-themes: nb-register-theme((
   color-basic-100: white,
@@ -122,7 +122,7 @@ Since we changed backgrounds to a lighter ones, we might need to change elements
 
 ```scss
 @import '~@nebular/theme/styles/theming';
-@import '~@nebular/theme/styles/themes/default';
+@import '~@nebular/theme/styles/themes/dark';
 
 $nb-themes: nb-register-theme((
   color-basic-100: white,
@@ -160,7 +160,7 @@ color as a background. Let's make it one shade lighter:
 
 ```scss
 @import '~@nebular/theme/styles/theming';
-@import '~@nebular/theme/styles/themes/default';
+@import '~@nebular/theme/styles/themes/dark';
 
 $nb-themes: nb-register-theme((
   color-basic-100: white,

@@ -1,6 +1,6 @@
 # Auth Module
 
-The main goal of the Auth module is to provide a pluggable set of components and services for an easier setup of the authentication layer for Angular applications.
+The main goal of the Auth module is to provide a pluggable set of components and services for easier setup of the authentication layer for Angular applications.
 The module separates the UI part (login/register/etc components) from the business logic with the help of the authentication `Strategies` layer. 
 
 <div class="note note-info">
@@ -22,7 +22,7 @@ You can use the built-in components or create your custom ones.
 <hr>
   
 ## Auth Strategies
-  - `NbDummyAuthStrategy` - simple strategy for testing purposes, could be used for simulating backend responses while API is in the development;
+  - `NbDummyAuthStrategy` - a simple strategy for testing purposes, could be used for simulating backend responses while API is in the development;
   - `NbPasswordAuthStrategy` - the most common email/login/password authentication strategy.
   - `NbOAuth2AuthStrategy` - the most popular authentication framework that enables applications to obtain limited access to user accounts on HTTP service.
 <hr>

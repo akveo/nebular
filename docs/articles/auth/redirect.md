@@ -2,7 +2,7 @@
 
 ## Redirecting user after login/registration
 
-At this step, we assume that Nebular Auth module is up and running, 
+At this step, we assume that the Nebular Auth module is up and running, 
 you have successfully configured an auth strategy and adjusted auth look & fell accordingly with your requirements.
 
 By default, Nebular redirects to the `/` page on success, and stays on the same page on error.

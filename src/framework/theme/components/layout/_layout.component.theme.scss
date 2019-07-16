@@ -7,6 +7,15 @@
 @mixin window-mode($padding-top) {
   padding-top: $padding-top;
 
+  nb-layout-header.fixed {
+    top: $padding-top;
+  }
+
+  nb-layout-header.fixed ~ .layout-container nb-sidebar .main-container-fixed {
+    height: calc(100vh - #{$padding-top} - #{nb-theme(header-height)});
+    top: calc(#{$padding-top} + #{nb-theme(header-height)});
+  }
+
   nb-sidebar.fixed {
     left: calc((100vw - #{nb-theme(layout-window-mode-max-width)}) / 2);
   }
@@ -48,12 +57,7 @@
     }
   }
 
-  nb-layout.overlay-scroll-block .scrollable-container {
-    overflow: hidden;
-  }
-
   .layout {
-    // TODO: check this prop name
     min-width: nb-theme(layout-window-mode-min-width);
   }
 
@@ -118,43 +122,6 @@
     line-height: nb-theme(layout-text-line-height);
     min-height: nb-theme(layout-min-height);
 
-    nb-layout-header {
-      color: nb-theme(header-text-color);
-      font-family: nb-theme(header-text-font-family);
-      font-size: nb-theme(header-text-font-size);
-      font-weight: nb-theme(header-text-font-weight);
-      line-height: nb-theme(header-text-line-height);
-
-      nav {
-        background: nb-theme(header-background-color);
-        color: nb-theme(header-text-color);
-        box-shadow: nb-theme(header-shadow);
-        height: nb-theme(header-height);
-        padding: nb-theme(header-padding);
-
-        a {
-          color: nb-theme(header-text-color);
-
-          @include hover-focus-active {
-            color: nb-theme(header-text-color);
-          }
-        }
-      }
-
-      & ~ .layout-container {
-        min-height: calc(#{nb-theme(layout-min-height)} - #{nb-theme(header-height)});
-      }
-
-      &.fixed ~ .layout-container {
-        padding-top: nb-theme(header-height);
-        min-height: nb-theme(layout-min-height);
-      }
-
-      &.fixed ~ .layout-container > nb-sidebar > .main-container {
-        height: calc(#{nb-theme(sidebar-height)} - #{nb-theme(header-height)});
-      }
-    }
-
     .layout-container {
 
       nb-sidebar {
@@ -206,6 +173,43 @@
           }
         }
       }
+    }
+  }
+
+  nb-layout-header {
+    color: nb-theme(header-text-color);
+    font-family: nb-theme(header-text-font-family);
+    font-size: nb-theme(header-text-font-size);
+    font-weight: nb-theme(header-text-font-weight);
+    line-height: nb-theme(header-text-line-height);
+
+    nav {
+      background: nb-theme(header-background-color);
+      color: nb-theme(header-text-color);
+      box-shadow: nb-theme(header-shadow);
+      height: nb-theme(header-height);
+      padding: nb-theme(header-padding);
+
+      a {
+        color: nb-theme(header-text-color);
+
+        @include hover-focus-active {
+          color: nb-theme(header-text-color);
+        }
+      }
+    }
+
+    & ~ .layout-container {
+      min-height: calc(#{nb-theme(layout-min-height)} - #{nb-theme(header-height)});
+    }
+
+    &.fixed ~ .layout-container {
+      padding-top: nb-theme(header-height);
+      min-height: nb-theme(layout-min-height);
+    }
+
+    &.fixed ~ .layout-container nb-sidebar .main-container {
+      height: calc(#{nb-theme(sidebar-height)} - #{nb-theme(header-height)});
     }
   }
 
