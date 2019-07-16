@@ -28,6 +28,8 @@ export class AppModule { }
 ```
 Import `NbIconModule` into your feature module where you need to show the icon:
 ```ts
+import { NbIconModule } from '@nebular/theme';
+
 @NgModule({
   imports: [
     // ...
