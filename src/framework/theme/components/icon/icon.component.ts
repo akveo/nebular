@@ -54,6 +54,8 @@ import { NbIconLibraries } from './icon-libraries';
  * ```
  * Last thing, import `NbIconModule` to your feature module where you need to show an icon:
  * ```ts
+ * import { NbIconModule } from '@nebular/theme';
+ *
  * @NgModule({
  *   imports: [
  *     // ...
