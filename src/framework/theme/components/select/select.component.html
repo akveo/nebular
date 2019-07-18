@@ -21,7 +21,7 @@
 </button>
 
 <div *nbPortal [ngClass]="optionsListClasses" [style.width.px]="hostWidth" class="options-list-container">
-  <ul class="options-list">
+  <ul class="options-list" [class.full-width]="fullWidth">
     <ng-content select="nb-option, nb-option-group"></ng-content>
   </ul>
 </div>
