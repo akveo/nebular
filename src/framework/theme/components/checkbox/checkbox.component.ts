@@ -133,6 +133,7 @@ import { convertToBoolProperty } from '../helpers';
              [checked]="checked"
              (change)="updateValueAndIndeterminate($event)"
              (blur)="setTouched()"
+             (click)="$event.stopPropagation()"
              [indeterminate]="indeterminate">
       <span [class.indeterminate]="indeterminate" [class.checked]="checked" class="custom-checkbox">
         <nb-icon *ngIf="indeterminate" icon="minus-bold-outline" pack="nebular-essentials"></nb-icon>
