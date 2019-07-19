@@ -20,7 +20,7 @@
 
 ;(function(l, projectPages) {
 
-  const versions = ['3.6.1'];
+  const versions = ['3.6.2'];
 
   var paths = l.pathname.split('/');
   var repo = projectPages ? '/' + paths[1] : '';
