@@ -97,7 +97,6 @@ import {
     NbMenuModule,
     NbTabsetModule,
     NbCheckboxModule,
-    NbToggleModule,
     NgdHeaderComponent,
     NgdHeroComponent,
     NgdIconCardComponent,

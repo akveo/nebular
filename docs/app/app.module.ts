@@ -39,7 +39,6 @@ const docs = require('../output.json');
     NbLayoutModule,
     NbTabsetModule,
     NbCheckboxModule,
-    NbToggleModule,
     NbProgressBarModule,
     NbMenuModule.forRoot(),
     NbThemeModule.forRoot(),
