@@ -8,7 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NbLayoutDirectionService } from '../../services/direction.service';
 
 
-fdescribe('Component: NbToggle', () => {
+describe('Component: NbToggle', () => {
   let toggle: NbToggleComponent;
   let fixture: ComponentFixture<NbToggleComponent>;
   let toggleInput: DebugElement;
@@ -28,7 +28,6 @@ fdescribe('Component: NbToggle', () => {
   });
 
   it('Setting `disabled` to `true` disables toggle input', () => {
-    console.log(toggle)
     toggle.disabled = true;
     fixture.detectChanges();
     expect(toggleInput.nativeElement.disabled).toBeTruthy();

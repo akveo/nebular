@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
   selector: 'nb-toggle-showcase',
   template: `
     <nb-card>
-      <nb-card-body>         
+      <nb-card-body>
         <nb-toggle></nb-toggle>
       </nb-card-body>
     </nb-card>

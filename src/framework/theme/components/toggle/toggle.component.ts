@@ -131,7 +131,7 @@ const defaultState = { params: { direction: '' } };
   ],
   template: `
     <label class="toggle-label">
-      <input type="checkbox" 
+      <input type="checkbox"
              class="native-input visually-hidden"
              role="switcher"
              [attr.aria-checked]="ariaChecked"
