@@ -1,3 +1,4 @@
+import { NbToggleModule } from '@nebular/theme/components/toggle/toggle.module';
 import { NbToggleComponent } from './toggle.component';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Component, DebugElement } from '@angular/core';
@@ -5,10 +6,9 @@ import { By } from '@angular/platform-browser';
 import { ReactiveFormsModule, FormControl } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NbLayoutDirectionService } from '../../services/direction.service';
-import { NbIconModule } from '@nebular/theme';
 
 
-describe('Component: NbToggle', () => {
+fdescribe('Component: NbToggle', () => {
   let toggle: NbToggleComponent;
   let fixture: ComponentFixture<NbToggleComponent>;
   let toggleInput: DebugElement;
@@ -16,9 +16,8 @@ describe('Component: NbToggle', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [BrowserAnimationsModule, NbIconModule],
+      imports: [BrowserAnimationsModule, NbToggleModule],
       providers: [NbLayoutDirectionService],
-      declarations: [NbToggleComponent],
     });
 
     fixture = TestBed.createComponent(NbToggleComponent);
@@ -29,6 +28,7 @@ describe('Component: NbToggle', () => {
   });
 
   it('Setting `disabled` to `true` disables toggle input', () => {
+    console.log(toggle)
     toggle.disabled = true;
     fixture.detectChanges();
     expect(toggleInput.nativeElement.disabled).toBeTruthy();
@@ -100,9 +100,9 @@ describe('Component: NbToggle with form control', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ReactiveFormsModule, BrowserAnimationsModule, NbIconModule],
+      imports: [ReactiveFormsModule, BrowserAnimationsModule, NbToggleModule],
       providers: [NbLayoutDirectionService],
-      declarations: [NbToggleComponent, ToggleWithFormControlComponent],
+      declarations: [ToggleWithFormControlComponent],
     });
 
     fixture = TestBed.createComponent(ToggleWithFormControlComponent);

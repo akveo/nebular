@@ -12,10 +12,12 @@ import {
   ChangeDetectorRef,
   OnInit,
   Output,
-  EventEmitter,
+  EventEmitter, OnDestroy,
 } from '@angular/core';
 import { trigger, state, style, animate, transition } from '@angular/animations';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { NbLayoutDirectionService, NbLayoutDirection } from '../../services/direction.service';
 import { NbComponentStatus } from '../component-status';
 
@@ -129,12 +131,15 @@ const defaultState = { params: { direction: '' } };
   ],
   template: `
     <label class="toggle-label">
-      <input type="checkbox" class="native-input visually-hidden"
+      <input type="checkbox" 
+             class="native-input visually-hidden"
+             role="switcher"
+             [attr.aria-checked]="ariaChecked"
              [disabled]="disabled"
              [checked]="checked"
              (change)="updateValue($event)"
              (blur)="setTouched()"
-      >
+             (click)="onClick($event)">
       <div class="toggle" [class.checked]="checked">
         <span [@onOff]="checkState()" class="toggle-switcher">
           <nb-icon *ngIf="checked" icon="checkmark-bold-outline" pack="nebular-essentials"></nb-icon>
@@ -149,12 +154,13 @@ const defaultState = { params: { direction: '' } };
     multi: true,
   }],
 })
-export class NbToggleComponent implements OnInit, ControlValueAccessor {
+export class NbToggleComponent implements OnInit, OnDestroy, ControlValueAccessor {
 
   onChange: any = () => { };
   onTouched: any = () => { };
 
   private direction: NbLayoutDirection;
+  private destroy$: Subject<void> = new Subject<void>();
 
   /**
    * Toggle checked
@@ -188,6 +194,18 @@ export class NbToggleComponent implements OnInit, ControlValueAccessor {
    */
   @Input()
   status: '' | NbComponentStatus = '';
+
+  /**
+   * Controls toggle aria checked
+   */
+  @Input()
+  get ariaChecked(): boolean {
+    return this._ariaChecked;
+  }
+  set ariaChecked(value: boolean) {
+    this._ariaChecked = convertToBoolProperty(value);
+  }
+  private _ariaChecked: boolean = false;
 
   /**
    * Output when checked state is changed by a user
@@ -225,10 +243,17 @@ export class NbToggleComponent implements OnInit, ControlValueAccessor {
     private layoutDirection: NbLayoutDirectionService,
   ) {}
 
-  ngOnInit() {
-    this.layoutDirection.onDirectionChange().subscribe(() => {
+  ngOnInit(): void {
+    this.layoutDirection.onDirectionChange()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(() => {
       this.direction = this.layoutDirection.getDirection();
     });
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   checkState(): string {
@@ -250,7 +275,8 @@ export class NbToggleComponent implements OnInit, ControlValueAccessor {
   }
 
   writeValue(val: any) {
-    this._checked = val;
+    this.checked = val;
+    this.ariaChecked = val;
     this.changeDetector.detectChanges();
   }
 
@@ -265,7 +291,12 @@ export class NbToggleComponent implements OnInit, ControlValueAccessor {
   updateValue(event: Event): void {
     const input = (event.target as HTMLInputElement);
     this.checked = input.checked;
+    this.ariaChecked = input.checked;
     this.checkedChange.emit(this.checked);
     this.onChange(this.checked);
+  }
+
+  onClick(event: Event) {
+    event.stopPropagation();
   }
 }
