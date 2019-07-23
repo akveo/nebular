@@ -70,6 +70,16 @@
 
 
 
+<a name="3.6.2"></a>
+## [3.6.2](https://github.com/akveo/nebular/compare/v3.6.1...v3.6.2) (2019-07-19)
+
+
+### Bug Fixes
+
+* **stepper:** add missing stepper provider ([#1831](https://github.com/akveo/nebular/issues/1831)) ([f3f66b0](https://github.com/akveo/nebular/commit/f3f66b0))
+
+
+
 <a name="3.6.1"></a>
 ## [3.6.1](https://github.com/akveo/nebular/compare/v3.6.0...v3.6.1) (2019-06-14)
 
