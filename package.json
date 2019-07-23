@@ -54,7 +54,7 @@
     "clean:lib": "rimraf src/.lib",
     "clean:all": "npm-run-all -p clean:tmp clean:lib",
     "ci:lint": "npm run lint && npm run lint:styles",
-    "ci:docs": "npm-run-all docs:prepare docs:build",
+    "ci:docs": "npm run docs:build",
     "ci:dev-deploy": "npm run firebase use dev && npm run firebase deploy",
     "ci:build": "npm-run-all -s build:prod build:package build:wp",
     "ci:test": "rimraf coverage && npm run build:package && npm run test:wp -- --code-coverage --watch=false && npm run test:schematics",
