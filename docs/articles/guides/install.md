@@ -100,7 +100,7 @@ Include default Nebular theme CSS file into your `angular.json` file:
   <div class="note-title">Customizable Theme Configuration</div>
   <div class="note-body">
     In this article we describe the basic styles installation. If you need more advanced features, like customizable theme variables, 
-    or even multiple themes switching - check out [Enabling Customizable Theme](docs/design-system/enable-customizable-themes) and then [Multiple Runtime Themes](docs/design-system/enable-multiple-runtime-themes) articles.
+    or even multiple themes switching - check out [Enabling Customizable Theme](docs/design-system/enable-customizable-theme) and then [Multiple Runtime Themes](docs/design-system/enable-multiple-runtime-themes) articles.
   </div>
 </div>
 
