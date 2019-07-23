@@ -4,6 +4,7 @@ import { Clone, Checkout, Repository } from 'nodegit';
 
 import { generateGithubSpaScript } from './ghspa-template';
 import { runCommand } from './run-command';
+import { log } from './log';
 
 import { repository as REPO_URL, outDir as OUT_DIR } from './config.json';
 const WORK_DIR = join(process.cwd(), '../_DOCS_BUILD_WORK_DIR_');
@@ -23,40 +24,40 @@ interface Version {
 }
 
 (async function () {
-  console.log(`Cleaning work dir "${WORK_DIR}"`);
+  log(`Cleaning work dir "${WORK_DIR}"`);
   await remove(WORK_DIR);
-  console.log(`Cleaning output dir "${OUT_DIR}"`);
+  log(`Cleaning output dir "${OUT_DIR}"`);
   await remove(OUT_DIR);
 
-  console.log(`Creating work dir "${WORK_DIR}"`);
+  log(`Creating work dir "${WORK_DIR}"`);
   await mkdirp(WORK_DIR);
 
-  console.log(`Cloning ${REPO_URL} into ${MASTER_BRANCH_DIR}`);
+  log(`Cloning ${REPO_URL} into ${MASTER_BRANCH_DIR}`);
   await Clone.clone(REPO_URL, MASTER_BRANCH_DIR);
 
-  console.log('Reading versions configuration');
+  log('Reading versions configuration');
   const config: VersionsConfig = await import(DOCS_VERSIONS_PATH);
-  console.log(`Versions configuration:`);
+  log(`Versions configuration:`);
   const jsonConfig = JSON.stringify(config, null, '  ');
-  console.log(jsonConfig);
+  log(jsonConfig);
 
-  console.log(`Building docs`);
+  log(`Building docs`);
   await buildDocs(config);
 
-  console.log(`Adding versions.json to ${DIST_DIR}`);
+  log(`Adding versions.json to ${DIST_DIR}`);
   await outputFile(join(DIST_DIR, 'versions.json'), jsonConfig);
 
   const ghspaPath = join(DIST_DIR, 'ghspa.js');
   const specialRedirectVersions = config.versions
     .filter((v: Version) => v.name !== config.currentVersionName)
     .map((v: Version) => v.name);
-  console.log(`Generating ghspa.js script. Versions to redirect: ${specialRedirectVersions}`);
+  log(`Generating ghspa.js script. Versions to redirect: ${specialRedirectVersions}`);
   await addGithubSpaScript(specialRedirectVersions, ghspaPath);
 
-  console.log(`Moving into output dir: ${OUT_DIR}`);
+  log(`Moving into output dir: ${OUT_DIR}`);
   await move(DIST_DIR, OUT_DIR);
 
-  console.log(`Cleaning up working directory (${WORK_DIR})`);
+  log(`Cleaning up working directory (${WORK_DIR})`);
   await remove(WORK_DIR);
 }());
 
