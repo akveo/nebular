@@ -15,6 +15,7 @@ import { CardShowcaseComponent } from './card-showcase.component';
 import { CardSizesComponent } from './card-sizes.component';
 import { CardTestComponent } from './card-test.component';
 import { CardWithoutBodyComponent } from './card-without-body.component';
+import { CardSizesCombinationsComponent } from './card-sizes-combinations.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { CardWithoutBodyComponent } from './card-without-body.component';
     CardSizesComponent,
     CardTestComponent,
     CardWithoutBodyComponent,
+    CardSizesCombinationsComponent,
   ],
   imports: [
     CommonModule,
