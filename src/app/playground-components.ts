@@ -1345,16 +1345,16 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         name: 'Toggle Status',
       },
       {
-        path: 'toggle-label-position.component',
-        link: '/toggle/toggle-label-position.component',
-        component: 'ToggleLabelPositionComponent',
-        name: 'Toggle Label Position',
-      },
-      {
         path: 'toggle-test.component',
         link: '/toggle/toggle-test.component',
         component: 'ToggleTestComponent',
         name: 'Toggle Test',
+      },
+      {
+        path: 'toggle-label-position.component',
+        link: '/toggle/toggle-label-position.component',
+        component: 'ToggleLabelPositionComponent',
+        name: 'Toggle Label Position',
       },
     ],
   },

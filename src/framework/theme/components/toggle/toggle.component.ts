@@ -52,7 +52,7 @@ const defaultState = { params: { direction: '' } };
  *
  * @additional-example(Disabled Toggles, toggle/toggle-disabled.component)
  *
- * @additional-example(Toggles With Labels, toggle/toggle-disabled.component)
+ * @additional-example(Toggles With Labels, toggle/toggle-label-position.component.ts)
  *
  * @styles
  *
