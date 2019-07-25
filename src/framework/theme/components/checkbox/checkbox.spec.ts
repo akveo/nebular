@@ -178,6 +178,15 @@ describe('Component: NbCheckbox', () => {
     fixture.detectChanges();
     expect(checkbox.indeterminate).toEqual(false);
   });
+
+  it('should emit click event once', () => {
+    const clickSpy = jasmine.createSpy('checkbox click spy');
+    (fixture.nativeElement as HTMLElement).addEventListener('click', clickSpy);
+
+    label.nativeElement.click();
+
+    expect(clickSpy).toHaveBeenCalledTimes(1);
+  });
 });
 
 /** Test component with reactive forms */

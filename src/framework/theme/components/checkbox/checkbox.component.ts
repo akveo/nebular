@@ -130,13 +130,14 @@ import { convertToBoolProperty } from '../helpers';
     <label class="label">
       <input type="checkbox" class="native-input visually-hidden"
              [disabled]="disabled"
-             [checked]="value"
+             [checked]="checked"
              (change)="updateValueAndIndeterminate($event)"
              (blur)="setTouched()"
+             (click)="$event.stopPropagation()"
              [indeterminate]="indeterminate">
-      <span [class.indeterminate]="indeterminate" [class.checked]="value" class="custom-checkbox">
+      <span [class.indeterminate]="indeterminate" [class.checked]="checked" class="custom-checkbox">
         <nb-icon *ngIf="indeterminate" icon="minus-bold-outline" pack="nebular-essentials"></nb-icon>
-        <nb-icon *ngIf="value && !indeterminate" icon="checkmark-bold-outline" pack="nebular-essentials"></nb-icon>
+        <nb-icon *ngIf="checked && !indeterminate" icon="checkmark-bold-outline" pack="nebular-essentials"></nb-icon>
       </span>
       <span class="text">
         <ng-content></ng-content>
