@@ -6,6 +6,7 @@
 
 import { NgModule } from '@angular/core';
 import { NbToggleModule, NbCardModule } from '@nebular/theme';
+import { ToggleLabelPositionComponent } from './toggle-label-position.component';
 import { ToggleRoutingModule } from './toggle-routing.module';
 import { ToggleDisabledComponent } from './toggle-disabled.component';
 import { ToggleShowcaseComponent } from './toggle-showcase.component';
@@ -18,6 +19,7 @@ import { ToggleTestComponent } from './toggle-test.component';
     ToggleShowcaseComponent,
     ToggleStatusComponent,
     ToggleTestComponent,
+    ToggleLabelPositionComponent,
   ],
   imports: [ NbCardModule, NbToggleModule, ToggleRoutingModule ],
 })

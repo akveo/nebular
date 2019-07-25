@@ -7,6 +7,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Route} from '@angular/router';
 import { ToggleDisabledComponent } from './toggle-disabled.component';
+import { ToggleLabelPositionComponent } from './toggle-label-position.component';
 import { ToggleShowcaseComponent } from './toggle-showcase.component';
 import { ToggleStatusComponent } from './toggle-status.component';
 import { ToggleTestComponent } from './toggle-test.component';
@@ -27,6 +28,10 @@ const routes: Route[] = [
   {
     path: 'toggle-test.component',
     component: ToggleTestComponent,
+  },
+  {
+    path: 'toggle-label-position.component',
+    component: ToggleLabelPositionComponent,
   },
 ];
 

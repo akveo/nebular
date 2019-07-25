@@ -52,6 +52,8 @@ const defaultState = { params: { direction: '' } };
  *
  * @additional-example(Disabled Toggles, toggle/toggle-disabled.component)
  *
+ * @additional-example(Toggles With Labels, toggle/toggle-disabled.component)
+ *
  * @styles
  *
  * toggle-height:
@@ -145,6 +147,9 @@ const defaultState = { params: { direction: '' } };
           <nb-icon *ngIf="checked" icon="checkmark-bold-outline" pack="nebular-essentials"></nb-icon>
         </span>
       </div>
+      <span class="text">
+        <ng-content></ng-content>
+      </span>
     </label>
   `,
   styleUrls: [ `./toggle.component.scss` ],
@@ -208,6 +213,12 @@ export class NbToggleComponent implements OnInit, OnDestroy, ControlValueAccesso
   private _ariaChecked: boolean = false;
 
   /**
+   * Toggle label position.
+   * Possible values are: `left`, `right`, `start`, `end` (default)
+   */
+  @Input() labelPosition: 'left' | 'right' | 'start' | 'end' = 'end';
+
+  /**
    * Output when checked state is changed by a user
    * @type EventEmitter<boolean>
    */
@@ -236,6 +247,26 @@ export class NbToggleComponent implements OnInit, OnDestroy, ControlValueAccesso
   @HostBinding('class.status-info')
   get info() {
     return this.status === 'info';
+  }
+
+  @HostBinding('class.toggle-label-left')
+  get labelLeft() {
+    return this.labelPosition === 'left';
+  }
+
+  @HostBinding('class.toggle-label-right')
+  get labelRight() {
+    return this.labelPosition === 'right';
+  }
+
+  @HostBinding('class.toggle-label-start')
+  get labelStart() {
+    return this.labelPosition === 'start';
+  }
+
+  @HostBinding('class.toggle-label-end')
+  get labelEnd() {
+    return this.labelPosition === 'end';
   }
 
   constructor(

@@ -1773,10 +1773,16 @@ $eva-mapping: (
   toggle-switcher-size: 1.75rem,
   toggle-switcher-background-color: background-basic-color-1,
   toggle-switcher-checkmark-color: color-primary-default,
+  toggle-text-color: text-basic-color,
+  toggle-text-font-family: text-subtitle-2-font-family,
+  toggle-text-font-size: text-subtitle-2-font-size,
+  toggle-text-font-weight: text-subtitle-2-font-weight,
+  toggle-text-line-height: text-subtitle-2-line-height,
 
   toggle-disabled-background-color: background-basic-color-2,
   toggle-disabled-border-color: border-basic-color-3,
   toggle-disabled-checkmark-color: background-basic-color-1,
+  toggle-disabled-text-color: text-disabled-color,
 
   toggle-primary-background-color: background-basic-color-2,
   toggle-primary-border-color: color-primary-default,

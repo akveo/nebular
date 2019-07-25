@@ -46,6 +46,10 @@
           color: nb-theme(toggle-disabled-checkmark-color);
         }
       }
+
+      & ~ .text {
+        color: nb-theme(checkbox-disabled-text-color);
+      }
     }
 
     .toggle-switcher {
@@ -56,6 +60,14 @@
       nb-icon {
         color: nb-theme(toggle-switcher-checkmark-color);
       }
+    }
+
+    .text {
+      color: nb-theme(toggle-text-color);
+      font-family: nb-theme(toggle-text-font-family);
+      font-size: nb-theme(toggle-text-font-size);
+      font-weight: nb-theme(toggle-text-font-weight);
+      line-height: nb-theme(toggle-text-line-height);
     }
   }
 

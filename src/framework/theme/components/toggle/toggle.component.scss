@@ -3,12 +3,58 @@
 :host {
   display: inline-flex;
   outline: none;
+
+  &.toggle-label-left {
+    .toggle {
+      order: 2;
+    }
+
+    .text {
+      order: 1;
+      @include nb-rtl(padding-left, 0.6875rem);
+      @include nb-ltr(padding-right, 0.6875rem);
+    }
+  }
+
+  &.toggle-label-right {
+    .text {
+      padding-left: 0.6875rem;
+      @include nb-ltr(padding-left, 0.6875rem);
+      @include nb-rtl(padding-right, 0.6875rem);
+    }
+  }
+
+  &.toggle-label-start {
+    .toggle-label {
+      flex-direction: column;
+    }
+
+    .toggle {
+      order: 2;
+    }
+
+    .text {
+      order: 1;
+      padding-bottom: 0.6875rem;
+    }
+  }
+
+  &.toggle-label-end {
+    .toggle-label {
+      flex-direction: column;
+    }
+
+    .text {
+      padding-top: 0.6875rem;
+    }
+  }
 }
 
 .toggle-label {
   position: relative;
   display: inline-flex;
   border-radius: inherit;
+  align-items: center;
 }
 
 .toggle {
