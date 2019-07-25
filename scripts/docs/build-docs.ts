@@ -6,7 +6,7 @@ import { generateGithubSpaScript } from './ghspa-template';
 import { runCommand } from './run-command';
 import { log } from './log';
 
-import { repository as REPO_URL, outDir as OUT_DIR } from './config.json';
+import { REPO_URL, OUT_DIR } from './config';
 const WORK_DIR = join(process.cwd(), '../_DOCS_BUILD_WORK_DIR_');
 const DIST_DIR = join(WORK_DIR, 'dist');
 const MASTER_BRANCH_DIR = join(WORK_DIR, 'MASTER');
