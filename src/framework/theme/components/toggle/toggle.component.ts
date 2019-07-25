@@ -67,9 +67,15 @@ const defaultState = { params: { direction: '' } };
  * toggle-switcher-size:
  * toggle-switcher-background-color:
  * toggle-switcher-checkmark-color:
+ * toggle-text-color:
+ * toggle-text-font-family:
+ * toggle-text-font-size:
+ * toggle-text-font-weight:
+ * toggle-text-line-height:
  * toggle-disabled-background-color:
  * toggle-disabled-border-color:
- * toggle-disabled-checkmark-color:
+ * toggle-disabled-switcher-checkmark-color:
+ * toggle-disabled-text-color:
  * toggle-primary-background-color:
  * toggle-primary-border-color:
  * toggle-primary-checked-background-color:
@@ -98,7 +104,7 @@ const defaultState = { params: { direction: '' } };
  * toggle-info-focus-border-color:
  * toggle-info-hover-background-color:
  * toggle-info-hover-border-color:
- * toggle-info-active-background-color
+ * toggle-info-active-background-color:
  * toggle-info-active-border-color:
  * toggle-warning-background-color:
  * toggle-warning-border-color:
