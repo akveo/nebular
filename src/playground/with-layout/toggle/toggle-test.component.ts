@@ -4,34 +4,16 @@ import { Component } from '@angular/core';
   selector: 'nb-app-toggle-test',
   template: `
     <nb-card>
-      <nb-card-body>
-        <div>
-          <nb-toggle id="first"></nb-toggle>
-        </div>
-        <div>
-          <nb-toggle id="second" [checked]="true"></nb-toggle>
-        </div>
-        <div>
-          <nb-toggle id="disabled" [disabled]="true"></nb-toggle>
-        </div>
-        <div>
-          <nb-toggle [checked]="true" [disabled]="true"></nb-toggle>
-        </div>
-        <div>
-          <nb-toggle id="primary" status="primary"></nb-toggle>
-        </div>
-        <div>
-          <nb-toggle id="success" status="success"></nb-toggle>
-        </div>
-        <div>
-          <nb-toggle id="warning" status="warning"></nb-toggle>
-        </div>
-        <div>
-          <nb-toggle id="danger" status="danger"></nb-toggle>
-        </div>
-        <div>
-          <nb-toggle id="info" status="info"></nb-toggle>
-        </div>
+      <nb-card-body class="example-items-col">
+        <nb-toggle id="first"></nb-toggle>
+        <nb-toggle id="second" [checked]="true"></nb-toggle>
+        <nb-toggle id="disabled" [disabled]="true"></nb-toggle>
+        <nb-toggle [checked]="true" [disabled]="true"></nb-toggle>
+        <nb-toggle id="primary" status="primary"></nb-toggle>
+        <nb-toggle id="success" status="success"></nb-toggle>
+        <nb-toggle id="warning" status="warning"></nb-toggle>
+        <nb-toggle id="danger" status="danger"></nb-toggle>
+        <nb-toggle id="info" status="info"></nb-toggle>
       </nb-card-body>
     </nb-card>
   `,

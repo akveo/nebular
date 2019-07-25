@@ -6,7 +6,6 @@
 
 @mixin nb-toggle-theme() {
   nb-toggle {
-    margin: nb-theme(toggle-outline-width) 0;
     border-radius: nb-theme(toggle-border-radius);
 
     .toggle {

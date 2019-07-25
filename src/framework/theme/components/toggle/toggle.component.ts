@@ -126,7 +126,7 @@ const defaultState = { params: { direction: '' } };
       state('ltrOn', ltrState, defaultState),
       state('rtlOn', rtlState, defaultState),
       transition(':enter', [animate(0)]),
-      transition('* <=> *', [animate('0.25s')]),
+      transition('* <=> *', [animate('0.15s')]),
     ]),
   ],
   template: `

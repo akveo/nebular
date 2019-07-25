@@ -18,7 +18,6 @@ import {
   NbCheckboxModule,
   NbIconModule,
   NbButtonModule,
-  NbToggleModule,
   NbSelectModule,
   NbInputModule,
 } from '@nebular/theme';
