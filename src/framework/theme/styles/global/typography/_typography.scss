@@ -58,28 +58,6 @@
     line-height: nb-theme(text-paragraph-2-line-height);
   }
 
-  @each $status in nb-get-statuses() {
-    .text-#{$status} {
-      color: nb-theme(color-#{$status}-default);
-    }
-  }
-
-  .text-basic {
-    color: nb-theme(text-basic-color);
-  }
-  .text-alternate {
-    color: nb-theme(text-alternate-color);
-  }
-  .text-control {
-    color: nb-theme(text-control-color);
-  }
-  .text-disabled {
-    color: nb-theme(text-disabled-color);
-  }
-  .text-hint {
-    color: nb-theme(text-hint-color);
-  }
-
   a {
     color: nb-theme(link-text-color);
     font-size: inherit;
@@ -145,5 +123,27 @@
     font-size: nb-theme(list-item-font-size);
     font-weight: nb-theme(list-item-font-weight);
     line-height: nb-theme(list-item-line-height);
+  }
+
+  .text-basic {
+    color: nb-theme(text-basic-color);
+  }
+  .text-alternate {
+    color: nb-theme(text-alternate-color);
+  }
+  .text-control {
+    color: nb-theme(text-control-color);
+  }
+  .text-disabled {
+    color: nb-theme(text-disabled-color);
+  }
+  .text-hint {
+    color: nb-theme(text-hint-color);
+  }
+
+  @each $status in nb-get-statuses() {
+    .text-#{$status} {
+      color: nb-theme(color-#{$status}-default);
+    }
   }
 }
