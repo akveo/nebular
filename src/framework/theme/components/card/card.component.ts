@@ -108,6 +108,9 @@ export class NbCardFooterComponent {
  * as well as combine it with `status`:
  * @stacked-example(Accent Card, card/card-accents.component)
  *
+ * Cards of smaller sizes could be combined and put on the same row with a bigger card so they have the same heights.
+ * @stacked-example(Card sizes combinations, card/card-sizes-combinations.component)
+ *
  * @additional-example(Multiple Sizes, card/card-sizes.component)
  *
  * @styles
