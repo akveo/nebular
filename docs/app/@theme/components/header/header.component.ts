@@ -3,7 +3,7 @@ import { NB_WINDOW, NbMenuItem, NbSidebarService } from '@nebular/theme';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 
-import { NgdVersionService, VersionInfo } from '../../services';
+import { NgdVersionService, Version } from '../../services';
 
 @Component({
   selector: 'ngd-header',
@@ -48,8 +48,8 @@ export class NgdHeaderComponent implements OnInit {
   @HostBinding('class.docs-page') @Input() isDocs = false;
 
   private window: Window;
-  supportedVersions$: Observable<VersionInfo[]>;
-  currentVersion$: Observable<VersionInfo>;
+  supportedVersions$: Observable<Version[]>;
+  currentVersion$: Observable<Version>;
   currentVersionName$: Observable<string>;
   showVersionSelect$: Observable<boolean>;
 
@@ -88,12 +88,12 @@ export class NgdHeaderComponent implements OnInit {
 
   ngOnInit() {
     this.currentVersion$ = this.versionService.getCurrentVersion();
-    this.currentVersionName$ = this.currentVersion$.pipe(map((version: VersionInfo) => version.name));
+    this.currentVersionName$ = this.currentVersion$.pipe(map((version: Version) => version.name));
     this.supportedVersions$ = this.versionService.getSupportedVersions();
 
     this.showVersionSelect$ = this.supportedVersions$
       .pipe(
-        map((versions: VersionInfo[]) => versions.length > 0),
+        map((versions: Version[]) => versions.length > 0),
         startWith(false),
       );
 
@@ -109,7 +109,7 @@ export class NgdHeaderComponent implements OnInit {
     this.sidebarService.toggle(false, this.sidebarTag);
   }
 
-  redirectToVersion(version: VersionInfo): void {
+  redirectToVersion(version: Version): void {
     this.window.location.href = version.path;
   }
 }
