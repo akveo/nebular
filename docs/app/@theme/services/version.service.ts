@@ -7,8 +7,13 @@ import { environment } from '../../../environments/environment';
 
 const PACKAGE_JSON_VERSION = require('../../../../package.json').version;
 
-export interface VersionInfo {
-  version: string;
+export interface VersionsConfig {
+  currentVersionName: string;
+  versions: Version[];
+}
+
+export interface Version {
+  checkoutTarget: string;
   name: string;
   path: string;
 }
@@ -16,21 +21,24 @@ export interface VersionInfo {
 @Injectable()
 export class NgdVersionService {
 
-  supportedVersions$: Observable<VersionInfo[]>;
+  supportedVersions$: Observable<Version[]>;
 
   constructor(private http: HttpClient) {
-    this.supportedVersions$ = this.http.get<VersionInfo[]>(environment.versionsUrl)
-      .pipe(shareReplay(1));
-  }
-
-  getCurrentVersion(): Observable<VersionInfo> {
-    return this.supportedVersions$
+    this.supportedVersions$ = this.http.get<VersionsConfig>(environment.versionsUrl)
       .pipe(
-        map((versions: VersionInfo[]) => versions.find(info => info.version === PACKAGE_JSON_VERSION)),
+        map((config: VersionsConfig) => config.versions),
+        shareReplay(1),
       );
   }
 
-  getSupportedVersions(): Observable<VersionInfo[]> {
+  getCurrentVersion(): Observable<Version> {
+    return this.supportedVersions$
+      .pipe(
+        map((versions: Version[]) => versions.find(v => v.name === PACKAGE_JSON_VERSION)),
+      );
+  }
+
+  getSupportedVersions(): Observable<Version[]> {
     return this.supportedVersions$;
   }
 }
