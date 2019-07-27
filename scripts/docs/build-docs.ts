@@ -1,14 +1,13 @@
 import { join } from 'path';
-import { copy, mkdirp, remove, outputFile, move } from 'fs-extra';
+import { copy, mkdirp, remove, outputFile } from 'fs-extra';
 import { Clone, Checkout, Repository } from 'nodegit';
 
 import { generateGithubSpaScript } from './ghspa-template';
 import { runCommand } from './run-command';
 import { log } from './log';
 
-import { REPO_URL, OUT_DIR } from './config';
+import { REPO_URL, OUT_DIR, REPO_OWNER, REPO_NAME } from './config';
 const WORK_DIR = join(process.cwd(), '../_DOCS_BUILD_WORK_DIR_');
-const DIST_DIR = join(WORK_DIR, 'dist');
 const MASTER_BRANCH_DIR = join(WORK_DIR, 'MASTER');
 const DOCS_VERSIONS_PATH = join(MASTER_BRANCH_DIR, 'docs/versions.json');
 
@@ -44,18 +43,18 @@ interface Version {
   log(`Building docs`);
   await buildDocs(config);
 
-  log(`Adding versions.json to ${DIST_DIR}`);
-  await outputFile(join(DIST_DIR, 'versions.json'), jsonConfig);
+  log(`Adding versions.json to ${OUT_DIR}`);
+  await outputFile(join(OUT_DIR, 'versions.json'), jsonConfig);
 
-  const ghspaPath = join(DIST_DIR, 'ghspa.js');
+  const ghspaPath = join(OUT_DIR, 'ghspa.js');
   const specialRedirectVersions = config.versions
     .filter((v: Version) => v.name !== config.currentVersionName)
     .map((v: Version) => v.name);
   log(`Generating ghspa.js script. Versions to redirect: ${specialRedirectVersions}`);
   await addGithubSpaScript(specialRedirectVersions, ghspaPath);
 
-  log(`Moving into output dir: ${OUT_DIR}`);
-  await move(DIST_DIR, OUT_DIR);
+  log(`Deploying to ghpages`);
+  await deploy(OUT_DIR);
 
   log(`Cleaning up working directory (${WORK_DIR})`);
   await remove(WORK_DIR);
@@ -64,8 +63,8 @@ interface Version {
 async function buildDocs(config: VersionsConfig) {
   return Promise.all(config.versions.map((version: Version) => {
     const versionDist = config.currentVersionName === version.name
-      ? DIST_DIR
-      : join(DIST_DIR, version.name);
+      ? OUT_DIR
+      : join(OUT_DIR, version.name);
 
     return prepareVersion(version, versionDist);
   }))
@@ -115,4 +114,11 @@ async function addGithubSpaScript(specialRedirectVersions: string[], filePath: s
   } catch (e) {
     throw new Error(`Error creating ghspa.js file in ${filePath}: ${e.message}`);
   }
+}
+
+async function deploy(distDir: string) {
+  await runCommand(
+    `npx angular-cli-ghpages --dir . --repo=https://GH_TOKEN@github.com/${REPO_OWNER}/${REPO_NAME}.git`,
+    { cwd: distDir, showLog: true },
+  );
 }
