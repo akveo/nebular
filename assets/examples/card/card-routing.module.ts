@@ -7,6 +7,7 @@ import { CardShowcaseComponent } from './card-showcase.component';
 import { CardSizesComponent } from './card-sizes.component';
 import { CardTestComponent } from './card-test.component';
 import { CardWithoutBodyComponent } from './card-without-body.component';
+import { CardSizesCombinationsComponent } from './card-sizes-combinations.component';
 
 const routes: Route[] = [
   {
@@ -36,6 +37,10 @@ const routes: Route[] = [
   {
     path: 'card-without-body.component',
     component: CardWithoutBodyComponent,
+  },
+  {
+    path: 'card-sizes-combinations.component',
+    component: CardSizesCombinationsComponent,
   },
 ];
 
