@@ -1,3 +1,22 @@
+<a name="4.1.3"></a>
+## [4.1.3](https://github.com/akveo/nebular/compare/v4.1.2...v4.1.3) (2019-07-29)
+
+
+### Bug Fixes
+
+* **accordion:** prevent styling of projected icons ([#1836](https://github.com/akveo/nebular/issues/1836)) ([a7b55da](https://github.com/akveo/nebular/commit/a7b55da))
+* **card:** make two smaller cards same height as one large ([#1821](https://github.com/akveo/nebular/issues/1821)) ([88eb8f7](https://github.com/akveo/nebular/commit/88eb8f7))
+* **checkbox:** prevent second click event from input ([#1835](https://github.com/akveo/nebular/issues/1835)) ([115ce08](https://github.com/akveo/nebular/commit/115ce08))
+* **dialog:** stop listening for close events when dialog closes ([#1860](https://github.com/akveo/nebular/issues/1860)) ([7ddbfbd](https://github.com/akveo/nebular/commit/7ddbfbd))
+* **docs:** custom theme link ([#1832](https://github.com/akveo/nebular/issues/1832)) ([b17f6b4](https://github.com/akveo/nebular/commit/b17f6b4))
+* **layout:** set header background color on host element ([#1823](https://github.com/akveo/nebular/issues/1823)) ([34cb370](https://github.com/akveo/nebular/commit/34cb370))
+* **menu:** clear typing for NbMenuItem pathMatch property ([#1627](https://github.com/akveo/nebular/issues/1627)) ([49bea48](https://github.com/akveo/nebular/commit/49bea48))
+* **select:** prevent opening of disabled select when clicking on toggle ([#1865](https://github.com/akveo/nebular/issues/1865)) ([0542371](https://github.com/akveo/nebular/commit/0542371))
+* **select:** remove max width from options list in full width s… ([#1837](https://github.com/akveo/nebular/issues/1837)) ([272cbd3](https://github.com/akveo/nebular/commit/272cbd3))
+* **typography:** declare text color classes at the bottom ([#1862](https://github.com/akveo/nebular/issues/1862)) ([1072754](https://github.com/akveo/nebular/commit/1072754))
+
+
+
 <a name="4.1.2"></a>
 ## [4.1.2](https://github.com/akveo/nebular/compare/v4.1.1...v4.1.2) (2019-07-12)
 
