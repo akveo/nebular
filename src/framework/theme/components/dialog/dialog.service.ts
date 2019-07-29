@@ -6,7 +6,7 @@
 
 import { ComponentFactoryResolver, Inject, Injectable, Injector, TemplateRef, Type } from '@angular/core';
 import { fromEvent as observableFromEvent } from 'rxjs';
-import { filter } from 'rxjs/operators';
+import { filter, takeUntil } from 'rxjs/operators';
 
 import {
   NbComponentPortal,
@@ -242,7 +242,10 @@ export class NbDialogService {
 
     if (config.closeOnEsc) {
       observableFromEvent(this.document, 'keyup')
-        .pipe(filter((event: KeyboardEvent) => event.keyCode === 27))
+        .pipe(
+          filter((event: KeyboardEvent) => event.keyCode === 27),
+          takeUntil(dialogRef.onClose),
+        )
         .subscribe(() => dialogRef.close());
     }
   }
