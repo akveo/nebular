@@ -303,6 +303,12 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         component: 'CardWithoutBodyComponent',
         name: 'Card Without Body',
       },
+      {
+        path: 'card-sizes-combinations.component',
+        link: '/card/card-sizes-combinations.component',
+        component: 'CardSizesCombinationsComponent',
+        name: 'Card Sizes Combinations',
+      },
     ],
   },
   {

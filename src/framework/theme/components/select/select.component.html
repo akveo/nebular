@@ -17,7 +17,8 @@
 
     <ng-template #placeholderTemplate>{{ placeholder }}</ng-template>
 
-    <nb-icon aria-hidden="true" icon="chevron-down-outline" pack="nebular-essentials"></nb-icon>
+    <nb-icon icon="chevron-down-outline" pack="nebular-essentials" (click)="disabled && $event.stopPropagation()" aria-hidden="true">
+    </nb-icon>
 </button>
 
 <div *nbPortal [ngClass]="optionsListClasses" [style.width.px]="hostWidth" class="options-list-container">
