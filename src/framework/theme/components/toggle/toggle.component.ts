@@ -167,10 +167,12 @@ const rtlState = style({ left: 0 });
   }],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NbToggleComponent implements ControlValueAccessor {
+export class NbToggleComponent implements OnInit, OnDestroy, ControlValueAccessor {
 
   onChange: any = () => { };
   onTouched: any = () => { };
+
+  private destroy$: Subject<void> = new Subject<void>();
 
   /**
    * Toggle checked
@@ -267,6 +269,19 @@ export class NbToggleComponent implements ControlValueAccessor {
     private layoutDirection: NbLayoutDirectionService,
   ) {}
 
+  ngOnInit(): void {
+    this.layoutDirection.onDirectionChange()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(() => {
+        this.changeDetector.detectChanges();
+      });
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
   checkState(): string {
     if (this.checked) {
       if (this.layoutDirection.getDirection() === NbLayoutDirection.LTR) {
@@ -292,6 +307,7 @@ export class NbToggleComponent implements ControlValueAccessor {
 
   setDisabledState(val: boolean) {
     this.disabled = convertToBoolProperty(val);
+    this.changeDetector.detectChanges();
   }
 
   setTouched() {
