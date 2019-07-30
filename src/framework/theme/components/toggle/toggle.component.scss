@@ -53,14 +53,12 @@
 .toggle-label {
   position: relative;
   display: inline-flex;
-  border-radius: inherit;
   align-items: center;
 }
 
 .toggle {
   position: relative;
   display: inline-flex;
-  border-radius: inherit;
   box-sizing: content-box;
   @include nb-component-animation(background-color, border, box-shadow);
 }

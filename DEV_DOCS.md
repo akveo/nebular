@@ -429,6 +429,7 @@ _your-component.component.theme.scss (optional, styles that depends on theme var
 
 - register your component in framework
 ````
+src/framework/theme/public_api.ts (add exports of your component and module)
 src/framework/theme/styles/global/_components.scss (if you create _your-component.component.theme.scss you have to register mixin) 
 
 ````

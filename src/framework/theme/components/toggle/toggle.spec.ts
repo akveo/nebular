@@ -119,7 +119,7 @@ describe('Component: NbToggle with form control', () => {
     );
   });
 
-  it('Toggling form control `disabled` state properly aplied', () => {
+  it('Toggling form control `disabled` state properly applied', () => {
     expect(toggleInstance.disabled).toBeFalsy();
 
     testComponent.formControl.disable();

@@ -12,7 +12,7 @@ import {
   ChangeDetectorRef,
   OnInit,
   Output,
-  EventEmitter, OnDestroy,
+  EventEmitter, OnDestroy, ChangeDetectionStrategy,
 } from '@angular/core';
 import { trigger, state, style, animate, transition } from '@angular/animations';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
@@ -25,7 +25,6 @@ import { convertToBoolProperty } from '../helpers';
 
 const ltrState = style({ right: 0 });
 const rtlState = style({ left: 0 });
-const defaultState = { params: { direction: '' } };
 
 /**
  * Styled toggle component
@@ -72,15 +71,17 @@ const defaultState = { params: { direction: '' } };
  * toggle-text-font-size:
  * toggle-text-font-weight:
  * toggle-text-line-height:
+ * toggle-cursor:
  * toggle-disabled-background-color:
  * toggle-disabled-border-color:
  * toggle-disabled-switcher-checkmark-color:
  * toggle-disabled-text-color:
+ * toggle-disabled-cursor:
  * toggle-primary-background-color:
  * toggle-primary-border-color:
  * toggle-primary-checked-background-color:
  * toggle-primary-checked-border-color:
- * toggle-primary-switcher-checkmark-color:
+ * toggle-primary-checked-switcher-checkmark-color:
  * toggle-primary-focus-border-color:
  * toggle-primary-hover-background-color:
  * toggle-primary-hover-border-color:
@@ -90,7 +91,7 @@ const defaultState = { params: { direction: '' } };
  * toggle-success-border-color:
  * toggle-success-checked-background-color:
  * toggle-success-checked-border-color:
- * toggle-success-switcher-checkmark-color:
+ * toggle-success-checked-switcher-checkmark-color:
  * toggle-success-focus-border-color:
  * toggle-success-hover-background-color:
  * toggle-success-hover-border-color:
@@ -100,7 +101,7 @@ const defaultState = { params: { direction: '' } };
  * toggle-info-border-color:
  * toggle-info-checked-background-color:
  * toggle-info-checked-border-color:
- * toggle-info-switcher-checkmark-color:
+ * toggle-info-checked-switcher-checkmark-color:
  * toggle-info-focus-border-color:
  * toggle-info-hover-background-color:
  * toggle-info-hover-border-color:
@@ -110,7 +111,7 @@ const defaultState = { params: { direction: '' } };
  * toggle-warning-border-color:
  * toggle-warning-checked-background-color:
  * toggle-warning-checked-border-color:
- * toggle-warning-switcher-checkmark-color:
+ * toggle-warning-checked-switcher-checkmark-color:
  * toggle-warning-focus-border-color:
  * toggle-warning-hover-background-color:
  * toggle-warning-hover-border-color:
@@ -120,7 +121,7 @@ const defaultState = { params: { direction: '' } };
  * toggle-danger-border-color:
  * toggle-danger-checked-background-color:
  * toggle-danger-checked-border-color:
- * toggle-danger-switcher-checkmark-color:
+ * toggle-danger-checked-switcher-checkmark-color:
  * toggle-danger-focus-border-color:
  * toggle-danger-hover-background-color:
  * toggle-danger-hover-border-color:
@@ -131,8 +132,8 @@ const defaultState = { params: { direction: '' } };
   selector: 'nb-toggle',
   animations: [
     trigger('onOff', [
-      state('ltrOn', ltrState, defaultState),
-      state('rtlOn', rtlState, defaultState),
+      state('ltrOn', ltrState),
+      state('rtlOn', rtlState),
       transition(':enter', [animate(0)]),
       transition('* <=> *', [animate('0.15s')]),
     ]),
@@ -142,12 +143,12 @@ const defaultState = { params: { direction: '' } };
       <input type="checkbox"
              class="native-input visually-hidden"
              role="switcher"
-             [attr.aria-checked]="ariaChecked"
+             [attr.aria-checked]="checked"
              [disabled]="disabled"
              [checked]="checked"
              (change)="updateValue($event)"
              (blur)="setTouched()"
-             (click)="onClick($event)">
+             (click)="onInputClick($event)">
       <div class="toggle" [class.checked]="checked">
         <span [@onOff]="checkState()" class="toggle-switcher">
           <nb-icon *ngIf="checked" icon="checkmark-bold-outline" pack="nebular-essentials"></nb-icon>
@@ -164,14 +165,12 @@ const defaultState = { params: { direction: '' } };
     useExisting: forwardRef(() => NbToggleComponent),
     multi: true,
   }],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NbToggleComponent implements OnInit, OnDestroy, ControlValueAccessor {
+export class NbToggleComponent implements ControlValueAccessor {
 
   onChange: any = () => { };
   onTouched: any = () => { };
-
-  private direction: NbLayoutDirection;
-  private destroy$: Subject<void> = new Subject<void>();
 
   /**
    * Toggle checked
@@ -201,22 +200,10 @@ export class NbToggleComponent implements OnInit, OnDestroy, ControlValueAccesso
 
   /**
    * Toggle status.
-   * Possible values are: `primary` (default), `success`, `warning`, `danger`, `info`
+   * Possible values are: `primary`, `success`, `warning`, `danger`, `info`
    */
   @Input()
   status: '' | NbComponentStatus = '';
-
-  /**
-   * Controls toggle aria checked
-   */
-  @Input()
-  get ariaChecked(): boolean {
-    return this._ariaChecked;
-  }
-  set ariaChecked(value: boolean) {
-    this._ariaChecked = convertToBoolProperty(value);
-  }
-  private _ariaChecked: boolean = false;
 
   /**
    * Toggle label position.
@@ -280,22 +267,9 @@ export class NbToggleComponent implements OnInit, OnDestroy, ControlValueAccesso
     private layoutDirection: NbLayoutDirectionService,
   ) {}
 
-  ngOnInit(): void {
-    this.layoutDirection.onDirectionChange()
-      .pipe(takeUntil(this.destroy$))
-      .subscribe(() => {
-      this.direction = this.layoutDirection.getDirection();
-    });
-  }
-
-  ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.complete();
-  }
-
   checkState(): string {
     if (this.checked) {
-      if (this.direction === NbLayoutDirection.LTR) {
+      if (this.layoutDirection.getDirection() === NbLayoutDirection.LTR) {
         return 'ltrOn';
       } else {
         return 'rtlOn';
@@ -313,7 +287,6 @@ export class NbToggleComponent implements OnInit, OnDestroy, ControlValueAccesso
 
   writeValue(val: any) {
     this.checked = val;
-    this.ariaChecked = val;
     this.changeDetector.detectChanges();
   }
 
@@ -328,12 +301,11 @@ export class NbToggleComponent implements OnInit, OnDestroy, ControlValueAccesso
   updateValue(event: Event): void {
     const input = (event.target as HTMLInputElement);
     this.checked = input.checked;
-    this.ariaChecked = input.checked;
     this.checkedChange.emit(this.checked);
     this.onChange(this.checked);
   }
 
-  onClick(event: Event) {
+  onInputClick(event: Event) {
     event.stopPropagation();
   }
 }
