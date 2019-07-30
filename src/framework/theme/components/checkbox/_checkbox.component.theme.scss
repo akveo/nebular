@@ -6,6 +6,10 @@
 
 @mixin nb-checkbox-theme() {
   nb-checkbox {
+    .label {
+      padding: nb-theme(checkbox-padding);
+    }
+
     .custom-checkbox {
       width: nb-theme(checkbox-width);
       height: nb-theme(checkbox-height);
