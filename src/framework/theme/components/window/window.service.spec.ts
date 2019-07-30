@@ -1,6 +1,6 @@
 import createSpy = jasmine.createSpy;
 import { Component, ElementRef, NgModule, ViewChild, TemplateRef } from '@angular/core';
-import { TestBed } from '@angular/core/testing';
+import { TestBed, fakeAsync, flush } from '@angular/core/testing';
 import {
   NbWindowService,
   NbWindowModule,
@@ -262,19 +262,31 @@ describe('window-service', () => {
     expect(windowElement.nativeElement.innerText).toEqual('window content hello world');
   });
 
-  it('should create new window container when overlay container changed', () => {
+  it('should create new window container when overlay container changed', fakeAsync(() => {
+    const fixture = TestBed.createComponent(NbTestWindowWithTemplateComponent);
+    fixture.detectChanges();
+
     // Show window to force windows container creation
-    const windowRef = windowService.open(TestWindowComponent);
-    windowRef.componentRef.changeDetectorRef.detectChanges();
+    const windowRef = fixture.componentInstance.openWindow();
+    fixture.detectChanges();
+    flush();
+
     windowRef.close();
+    fixture.detectChanges();
+    flush();
 
     // Change overlay container
+    overlayContainerService.ngOnDestroy();
+    overlayContainerService.clearContainer();
     overlayContainer = document.createElement('div');
     overlayContainerService.setContainer(overlayContainer);
     document.body.appendChild(overlayContainer);
 
     windowService.open(TestWindowComponent);
+    fixture.detectChanges();
+    flush();
+
     const windowContent = document.getElementById('window-content');
     expect(document.body.contains(windowContent)).toEqual(true);
-  });
+  }));
 });
