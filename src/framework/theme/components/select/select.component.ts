@@ -887,12 +887,14 @@ export class NbSelectComponent<T> implements AfterViewInit, AfterContentInit, On
 
   protected subscribeOnTriggers() {
     this.triggerStrategy.show$.subscribe(() => this.show());
-    this.triggerStrategy.hide$.subscribe(($event: Event) => {
-      this.hide();
-      if (!this.isClickedWithinComponent($event)) {
-        this.onTouched();
-      }
-    });
+    this.triggerStrategy.hide$
+      .pipe(filter(() => this.isOpen))
+      .subscribe(($event: Event) => {
+        this.hide();
+        if (!this.isClickedWithinComponent($event)) {
+          this.onTouched();
+        }
+      });
   }
 
   protected subscribeOnPositionChange() {
