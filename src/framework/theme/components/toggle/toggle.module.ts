@@ -4,15 +4,15 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { NbIconModule } from '../icon/icon.module';
 
-import { NbSharedModule } from '../shared/shared.module';
 import { NbToggleComponent } from './toggle.component';
 
 @NgModule({
   imports: [
-    NbSharedModule,
+    CommonModule,
     NbIconModule,
   ],
   declarations: [NbToggleComponent],

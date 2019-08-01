@@ -23,9 +23,6 @@ import { NbComponentStatus } from '../component-status';
 
 import { convertToBoolProperty } from '../helpers';
 
-const ltrState = style({ right: 0 });
-const rtlState = style({ left: 0 });
-
 /**
  * Styled toggle component
  *
@@ -45,13 +42,27 @@ const rtlState = style({ left: 0 });
  * ```
  * ### Usage
  *
- * Can have one of the following statuses: primary, success, warning, danger, info
+ * Toggle may have one of the following statuses: `primary`, `success`, `warning`, `danger`, `info`
  *
  * @stacked-example(Colored Toggles, toggle/toggle-status.component)
  *
- * @additional-example(Disabled Toggles, toggle/toggle-disabled.component)
+ * You can disable toggle
  *
- * @additional-example(Toggles With Labels, toggle/toggle-label-position.component.ts)
+ * @stacked-example(Disabled Toggles, toggle/toggle-disabled.component)
+ *
+ * Toggle may have a label with following positions: `left`, `right`, `start`, `end` (default)
+ *
+ * @stacked-example(Toggles With Labels, toggle/toggle-label-position.component.ts)
+ *
+ * Toggle may be bounded using `checked` input:
+ *
+ * ```html
+ * <nb-toggle [(checked)]="checked"></nb-toggle>
+ * ```
+ *
+ * Or you can bind control with form controls or ngModel:
+ *
+ * @stacked-example(Toggle form binding, toggle/toggle-form.component)
  *
  * @styles
  *
@@ -132,8 +143,8 @@ const rtlState = style({ left: 0 });
   selector: 'nb-toggle',
   animations: [
     trigger('onOff', [
-      state('ltrOn', ltrState),
-      state('rtlOn', rtlState),
+      state('ltrOn', style({ right: 0 })),
+      state('rtlOn', style({ left: 0 })),
       transition(':enter', [animate(0)]),
       transition('* <=> *', [animate('0.15s')]),
     ]),
@@ -177,7 +188,6 @@ export class NbToggleComponent implements OnInit, OnDestroy, ControlValueAccesso
   /**
    * Toggle checked
    * @type {boolean}
-   * @private
    */
   @Input()
   get checked(): boolean {
@@ -302,12 +312,12 @@ export class NbToggleComponent implements OnInit, OnDestroy, ControlValueAccesso
 
   writeValue(val: any) {
     this.checked = val;
-    this.changeDetector.detectChanges();
+    this.changeDetector.markForCheck();
   }
 
   setDisabledState(val: boolean) {
     this.disabled = convertToBoolProperty(val);
-    this.changeDetector.detectChanges();
+    this.changeDetector.markForCheck();
   }
 
   setTouched() {

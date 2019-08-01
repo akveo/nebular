@@ -1356,6 +1356,12 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         component: 'ToggleLabelPositionComponent',
         name: 'Toggle Label Position',
       },
+      {
+        path: 'toggle-form.component',
+        link: '/toggle/toggle-form.component',
+        component: 'ToggleFormComponent',
+        name: 'Toggle Form',
+      },
     ],
   },
   {
