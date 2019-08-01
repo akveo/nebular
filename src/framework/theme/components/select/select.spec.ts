@@ -18,17 +18,20 @@ import { ComponentFixture, fakeAsync, flush, TestBed } from '@angular/core/testi
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
-import { from, zip } from 'rxjs';
+import { from, zip, Subject } from 'rxjs';
 import createSpy = jasmine.createSpy;
 
-import { NbSelectModule } from './select.module';
-import { NbThemeModule } from '../../theme.module';
-import { NbOverlayContainerAdapter } from '../cdk/adapter/overlay-container-adapter';
-import { NB_DOCUMENT } from '../../theme.options';
-import { NbSelectComponent } from './select.component';
-import { NbLayoutModule } from '../layout/layout.module';
-import { NbOptionComponent } from './option.component';
-import { NbOptionGroupComponent } from './option-group.component';
+import {
+  NbSelectModule,
+  NbThemeModule,
+  NbOverlayContainerAdapter,
+  NB_DOCUMENT,
+  NbSelectComponent,
+  NbLayoutModule,
+  NbOptionComponent,
+  NbOptionGroupComponent,
+  NbTriggerStrategyBuilderService,
+} from '@nebular/theme';
 
 const eventMock = { preventDefault() {} } as Event;
 
@@ -98,6 +101,23 @@ export class NbSelectTestComponent {
   @ViewChildren(NbOptionComponent) options: QueryList<NbOptionComponent<any>>;
   groups = TEST_GROUPS;
 }
+
+@Component({
+  template: `
+    <nb-layout>
+      <nb-layout-column>
+
+        <nb-select>
+          <nb-option value="a">a</nb-option>
+          <nb-option value="b">b</nb-option>
+          <nb-option value="c">c</nb-option>
+        </nb-select>
+
+      </nb-layout-column>
+    </nb-layout>
+  `,
+})
+export class BasicSelectTestComponent {}
 
 @Component({
   template: `
@@ -544,6 +564,33 @@ describe('Component: NbSelectComponent', () => {
     expect(optionSelectSpy).toHaveBeenCalledTimes(1);
   }));
 
+  it('should mark touched when select button loose focus and select closed', fakeAsync(() => {
+    const touchedSpy = jasmine.createSpy('touched spy');
+
+    const selectFixture = TestBed.createComponent(NbSelectComponent);
+    const selectComponent: NbSelectComponent<any> = selectFixture.componentInstance;
+    selectFixture.detectChanges();
+    flush();
+
+    selectComponent.registerOnTouched(touchedSpy);
+    selectFixture.debugElement.query(By.css('.select-button')).triggerEventHandler('blur', {});
+    expect(touchedSpy).toHaveBeenCalledTimes(1);
+  }));
+
+  it('should not mark touched when select button loose focus and select open', fakeAsync(() => {
+    const touchedSpy = jasmine.createSpy('touched spy');
+
+    const selectFixture = TestBed.createComponent(NbSelectComponent);
+    const selectComponent: NbSelectComponent<any> = selectFixture.componentInstance;
+    selectFixture.detectChanges();
+    flush();
+
+    selectComponent.registerOnTouched(touchedSpy);
+    selectComponent.show();
+    selectFixture.debugElement.query(By.css('.select-button')).triggerEventHandler('blur', {});
+    expect(touchedSpy).not.toHaveBeenCalled();
+  }));
+
   it('should unselect previously selected option', fakeAsync(() => {
     const selectFixture = TestBed.createComponent(NbSelectTestComponent);
     const testSelectComponent = selectFixture.componentInstance;
@@ -765,6 +812,66 @@ describe('NbSelectComponent - falsy values', () => {
       expect(testComponent.truthyOptionElement.nativeElement.querySelector('nb-checkbox')).not.toEqual(null);
     });
   });
+});
+
+describe('NbSelectComponent - Triggers', () => {
+  let fixture: ComponentFixture<BasicSelectTestComponent>;
+  let selectComponent: NbSelectComponent<any>;
+  let triggerBuilderStub;
+  let showTriggerStub: Subject<Event>;
+  let hideTriggerStub: Subject<Event>;
+
+  beforeEach(fakeAsync(() => {
+    showTriggerStub = new Subject<Event>();
+    hideTriggerStub = new Subject<Event>();
+    triggerBuilderStub = {
+      trigger() { return this },
+      host() { return this },
+      container() { return this },
+      destroy() {},
+      build() {
+        return { show$: showTriggerStub, hide$: hideTriggerStub };
+      },
+    };
+
+    TestBed.configureTestingModule({
+      imports: [ RouterTestingModule.withRoutes([]), NbThemeModule.forRoot(), NbLayoutModule, NbSelectModule ],
+      declarations: [ BasicSelectTestComponent ],
+    });
+    TestBed.overrideProvider(NbTriggerStrategyBuilderService, { useValue: triggerBuilderStub });
+
+    fixture = TestBed.createComponent(BasicSelectTestComponent);
+    fixture.detectChanges();
+    flush();
+
+    selectComponent = fixture.debugElement.query(By.directive(NbSelectComponent)).componentInstance;
+  }));
+
+  it('should mark touched if clicked outside of overlay and select', fakeAsync(() => {
+    const touchedSpy = jasmine.createSpy('touched spy');
+    selectComponent.registerOnTouched(touchedSpy);
+
+    const elementOutsideSelect = fixture.debugElement.query(By.css('nb-layout')).nativeElement;
+    selectComponent.show();
+    fixture.detectChanges();
+
+    hideTriggerStub.next({ target: elementOutsideSelect } as unknown as Event);
+
+    expect(touchedSpy).toHaveBeenCalledTimes(1);
+  }));
+
+  it('should not mark touched if clicked on the select button', fakeAsync(() => {
+    const touchedSpy = jasmine.createSpy('touched spy');
+    selectComponent.registerOnTouched(touchedSpy);
+
+    const selectButton = fixture.debugElement.query(By.css('.select-button')).nativeElement;
+    selectComponent.show();
+    fixture.detectChanges();
+
+    hideTriggerStub.next({ target: selectButton } as unknown as Event);
+
+    expect(touchedSpy).not.toHaveBeenCalled();
+  }));
 });
 
 describe('NbOptionComponent', () => {
