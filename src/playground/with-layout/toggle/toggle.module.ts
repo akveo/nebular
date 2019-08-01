@@ -29,7 +29,7 @@ import { ToggleTestComponent } from './toggle-test.component';
     ReactiveFormsModule,
     NbCardModule,
     NbToggleModule,
-    ToggleRoutingModule
+    ToggleRoutingModule,
   ],
 })
 export class ToggleModule {}
