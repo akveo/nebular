@@ -940,7 +940,10 @@ export class NbSelectComponent<T> implements AfterViewInit, AfterContentInit, On
 
     this.keyManager.tabOut
       .pipe(takeWhile(() => this.alive))
-      .subscribe(() => this.hide());
+      .subscribe(() => {
+        this.hide();
+        this.onTouched();
+      });
   }
 
   protected getContainer() {
