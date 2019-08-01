@@ -37,7 +37,7 @@ import {
 import { NbOverlayRef, NbPortalDirective, NbScrollStrategy } from '../cdk/overlay/mapping';
 import { NbOverlayService } from '../cdk/overlay/overlay-service';
 import { NbTrigger, NbTriggerStrategy, NbTriggerStrategyBuilderService } from '../cdk/overlay/overlay-trigger';
-import { NbFocusKeyManager } from '../cdk/a11y/focus-key-manager';
+import { NbFocusKeyManager, NbFocusKeyManagerFactoryService } from '../cdk/a11y/focus-key-manager';
 import { ESCAPE } from '../cdk/keycodes/keycodes';
 import { NbComponentSize } from '../component-size';
 import { NbComponentShape } from '../component-shape';
@@ -637,7 +637,8 @@ export class NbSelectComponent<T> implements AfterViewInit, AfterContentInit, On
               protected hostRef: ElementRef<HTMLElement>,
               protected positionBuilder: NbPositionBuilderService,
               protected triggerStrategyBuilder: NbTriggerStrategyBuilderService,
-              protected cd: ChangeDetectorRef) {
+              protected cd: ChangeDetectorRef,
+              protected focusKeyManagerFactoryService: NbFocusKeyManagerFactoryService<NbOptionComponent<T>>) {
   }
 
   /**
@@ -862,7 +863,7 @@ export class NbSelectComponent<T> implements AfterViewInit, AfterContentInit, On
   }
 
   protected createKeyManager(): void {
-    this.keyManager = new NbFocusKeyManager<NbOptionComponent<T>>(this.options).withTypeAhead(200);
+    this.keyManager = this.focusKeyManagerFactoryService.create(this.options).withTypeAhead(200);
   }
 
   protected createPositionStrategy(): NbAdjustableConnectedPositionStrategy {
