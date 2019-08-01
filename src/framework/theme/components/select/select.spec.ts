@@ -32,6 +32,7 @@ import {
   NbOptionGroupComponent,
   NbTriggerStrategyBuilderService,
 } from '@nebular/theme';
+import { NbFocusKeyManagerFactoryService } from '@nebular/theme/components/cdk/a11y/focus-key-manager';
 
 const eventMock = { preventDefault() {} } as Event;
 
@@ -628,7 +629,7 @@ describe('Component: NbSelectComponent', () => {
   }));
 
   it(`should not call dispose on uninitialized resources`, () => {
-    const selectFixture = new NbSelectComponent(null, null, null, null, null, null);
+    const selectFixture = new NbSelectComponent(null, null, null, null, null, null, null);
     expect(() => selectFixture.ngOnDestroy()).not.toThrow();
   });
 
@@ -871,6 +872,49 @@ describe('NbSelectComponent - Triggers', () => {
     hideTriggerStub.next({ target: selectButton } as unknown as Event);
 
     expect(touchedSpy).not.toHaveBeenCalled();
+  }));
+});
+
+describe('NbSelectComponent - Key manager', () => {
+  let fixture: ComponentFixture<BasicSelectTestComponent>;
+  let selectComponent: NbSelectComponent<any>;
+  let tabOutStub: Subject<void>;
+  let keyManagerFactoryStub;
+  let keyManagerStub;
+
+  beforeEach(fakeAsync(() => {
+    tabOutStub = new Subject<void>();
+    keyManagerStub = {
+      withTypeAhead() { return this; },
+      setActiveItem() {},
+      setFirstItemActive() {},
+      onKeydown() {},
+      tabOut: tabOutStub,
+    };
+    keyManagerFactoryStub = { create() { return keyManagerStub; } };
+
+    TestBed.configureTestingModule({
+      imports: [ RouterTestingModule.withRoutes([]), NbThemeModule.forRoot(), NbLayoutModule, NbSelectModule ],
+      declarations: [ BasicSelectTestComponent ],
+    });
+    TestBed.overrideProvider(NbFocusKeyManagerFactoryService, { useValue: keyManagerFactoryStub });
+
+    fixture = TestBed.createComponent(BasicSelectTestComponent);
+    fixture.detectChanges();
+    flush();
+
+    selectComponent = fixture.debugElement.query(By.directive(NbSelectComponent)).componentInstance;
+  }));
+
+  it('should mark touched when tabbing out from options list', fakeAsync(() => {
+    selectComponent.show();
+    fixture.detectChanges();
+
+    const touchedSpy = jasmine.createSpy('touched spy');
+    selectComponent.registerOnTouched(touchedSpy);
+    tabOutStub.next();
+    flush();
+    expect(touchedSpy).toHaveBeenCalledTimes(1);
   }));
 });
 
