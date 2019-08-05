@@ -83,22 +83,8 @@ export type NbStepperOrientation = 'vertical' | 'horizontal';
  * 'nbStepperPrevious' and 'nbStepperNext' buttons.
  * @stacked-example(Disabled steps navigation, stepper/stepper-disabled-step-nav.component)
  *
- * `stepChanged` output for listening step change. This event emit selectedIndex when you manually change step by
- * using 'nbStepperPrevious' and 'nbStepperNext' buttons or clicking on the step element.
- *
- * ```html
- * // ...
- * <nb-stepper (stepChanged)="handleChange($event)"> // $event will be equal to selected index
- *   <nb-step label="step number one">
- *   </nb-step>
- *    // ...
- * </nb-stepper>
- * // ...
- * <button nbButton nbStepperPrevious>prev</button>
- * // after clicking on the button the stepChanged will emit the previous step index
- * <button nbButton disabled nbStepperNext>next</button>
- * // after clicking on the button the stepChanged will emit the next step index
- * ```
+ * `stepChanged` output for listening step change. This event emits current step index.
+ * @stacked-example(Step change event, stepper/stepper-step-change-event.component)
  * @styles
  *
  * stepper-step-text-color:
@@ -141,12 +127,14 @@ export class NbStepperComponent {
   set selectedIndex(index: number) {
     if (!this.steps) {
       this._selectedIndex = index;
+      this.stepChanged.next(this._selectedIndex);
       return;
     }
 
     this.markCurrentStepInteracted();
     if (this.canBeSelected(index)) {
       this._selectedIndex = index;
+      this.stepChanged.next(this._selectedIndex);
     }
   }
   protected _selectedIndex: number = 0;
@@ -203,12 +191,6 @@ export class NbStepperComponent {
    * @type {EventEmitter<number>}
    */
   @Output() stepChanged = new EventEmitter<number>();
-  changeStep(step: NbStepComponent) {
-    if (!this.disableStepNavigation) {
-      step.select();
-      this.stepChanged.emit(this.selectedIndex);
-    }
-  }
 
   @HostBinding('class.vertical')
   get vertical() {
@@ -225,19 +207,23 @@ export class NbStepperComponent {
    * Navigate to next step
    * */
   next() {
-    if (this.selectedIndex !== this.steps.length - 1) {
-      this.selectedIndex++;
-      this.stepChanged.emit(this.selectedIndex);
-    }
+    this.selectedIndex = Math.min(this.selectedIndex + 1, this.steps.length - 1);
   }
 
   /**
    * Navigate to previous step
    * */
   previous() {
-    if (this.selectedIndex !== 0) {
-      this.selectedIndex--;
-      this.stepChanged.emit(this.selectedIndex);
+    this.selectedIndex = Math.max(this.selectedIndex - 1, 0);
+  }
+
+  /**
+   * Select step if navigation is not disabled
+   * @param { NbStepComponent } step
+   */
+  changeStep(step: NbStepComponent) {
+    if (!this.disableStepNavigation) {
+      step.select();
     }
   }
 

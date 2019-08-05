@@ -40,26 +40,24 @@ describe('Stepper: Step Change', () => {
   let fixture: ComponentFixture<NbStepChangeTestComponent>;
   let stepperEl: DebugElement;
 
-  beforeEach(fakeAsync (() => {
+  beforeEach((() => {
     TestBed.configureTestingModule({
       schemas: [NO_ERRORS_SCHEMA],
       declarations: [NbStepChangeTestComponent, NbStepComponent, NbStepperComponent],
     }).compileComponents();
-  }));
 
-  beforeEach(() => {
     fixture = TestBed.createComponent(NbStepChangeTestComponent);
     stepper = fixture.debugElement.children[0].componentInstance;
     stepperEl = fixture.debugElement.nativeElement;
     fixture.detectChanges();
-  });
+  }));
 
   it('Should emit next selectId on next method', () => {
     spyOn(stepper.stepChanged, 'emit');
     stepper.next();
     fixture.detectChanges();
 
-    expect(stepper.stepChanged.emit).toHaveBeenCalledWith(2);
+    expect(stepper.stepChanged.emit).toHaveBeenCalled();
   });
 
   it('Should emit previous selectId on previous method', () => {
