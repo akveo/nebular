@@ -140,7 +140,6 @@ export class NbSidebarComponent implements OnChanges, OnInit, OnDestroy {
   static readonly RESPONSIVE_STATE_TABLET: string = 'tablet';
   static readonly RESPONSIVE_STATE_PC: string = 'pc';
 
-  protected stateValue: string;
   protected responsiveValue: boolean = false;
 
   private alive = true;
@@ -153,18 +152,17 @@ export class NbSidebarComponent implements OnChanges, OnInit, OnDestroy {
   @HostBinding('class.start') startValue: boolean = false;
   @HostBinding('class.end') endValue: boolean = false;
 
-  // TODO: rename stateValue to state (take a look to the card component)
   @HostBinding('class.expanded')
   get expanded() {
-    return this.stateValue === NbSidebarComponent.STATE_EXPANDED;
+    return this.state === NbSidebarComponent.STATE_EXPANDED;
   }
   @HostBinding('class.collapsed')
   get collapsed() {
-    return this.stateValue === NbSidebarComponent.STATE_COLLAPSED;
+    return this.state === NbSidebarComponent.STATE_COLLAPSED;
   }
   @HostBinding('class.compacted')
   get compacted() {
-    return this.stateValue === NbSidebarComponent.STATE_COMPACTED;
+    return this.state === NbSidebarComponent.STATE_COMPACTED;
   }
 
   /**
@@ -238,9 +236,13 @@ export class NbSidebarComponent implements OnChanges, OnInit, OnDestroy {
    * @type {string}
    */
   @Input()
-  set state(val: string) {
-    this.stateValue = val;
+  get state(): string {
+    return this._state;
   }
+  set state(value: string) {
+    this._state = value;
+  }
+  protected _state: string;
 
   /**
    * Makes sidebar listen to media query events and change its behaviour
@@ -387,10 +389,10 @@ export class NbSidebarComponent implements OnChanges, OnInit, OnDestroy {
 
     const closedStates = [NbSidebarComponent.STATE_COMPACTED, NbSidebarComponent.STATE_COLLAPSED];
     if (compact) {
-      this.state = closedStates.includes(this.stateValue) ?
+      this.state = closedStates.includes(this.state) ?
         NbSidebarComponent.STATE_EXPANDED : NbSidebarComponent.STATE_COMPACTED;
     } else {
-      this.state = closedStates.includes(this.stateValue) ?
+      this.state = closedStates.includes(this.state) ?
         NbSidebarComponent.STATE_EXPANDED : NbSidebarComponent.STATE_COLLAPSED;
     }
   }
