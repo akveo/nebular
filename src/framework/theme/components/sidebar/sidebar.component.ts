@@ -299,28 +299,25 @@ export class NbSidebarComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.sidebarService.onToggle()
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((data: { compact: boolean, tag: string }) => {
-        if (!this.tag || this.tag === data.tag) {
-          this.toggle(data.compact);
-        }
-      });
+      .pipe(
+        filter(({ tag }) => !this.tag || this.tag === tag),
+        takeUntil(this.destroy$),
+      )
+      .subscribe(({ compact }) => this.toggle(compact));
 
     this.sidebarService.onExpand()
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((data: { tag: string }) => {
-        if (!this.tag || this.tag === data.tag) {
-          this.expand();
-        }
-      });
+      .pipe(
+        filter(({ tag }) => !this.tag || this.tag === tag),
+        takeUntil(this.destroy$),
+      )
+      .subscribe(() => this.expand());
 
     this.sidebarService.onCollapse()
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((data: { tag: string }) => {
-        if (!this.tag || this.tag === data.tag) {
-          this.collapse();
-        }
-      });
+      .pipe(
+        filter(({ tag }) => !this.tag || this.tag === tag),
+        takeUntil(this.destroy$),
+      )
+      .subscribe(() => this.collapse());
 
     this.subscribeToMediaQueryChange();
   }
