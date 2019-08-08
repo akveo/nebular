@@ -14,6 +14,7 @@ import { NbMediaBreakpoint } from '../../services/breakpoints.service';
 import { NbSidebarService } from './sidebar.service';
 
 export type NbSidebarState = 'expanded' | 'collapsed' | 'compacted';
+export type NbSidebarResponsiveState = 'mobile' | 'tablet' | 'pc';
 
 /**
  * Sidebar header container.
@@ -149,11 +150,24 @@ export class NbSidebarComponent implements OnInit, OnDestroy {
    */
   static readonly STATE_COMPACTED: string = 'compacted';
 
+  /**
+   * @deprecated Use NbSidebarResponsiveState type instead
+   * @breaking-change Remove @5.0.0
+   */
   static readonly RESPONSIVE_STATE_MOBILE: string = 'mobile';
+  /**
+   * @deprecated Use NbSidebarResponsiveState type instead
+   * @breaking-change Remove @5.0.0
+   */
   static readonly RESPONSIVE_STATE_TABLET: string = 'tablet';
+  /**
+   * @deprecated Use NbSidebarResponsiveState type instead
+   * @breaking-change Remove @5.0.0
+   */
   static readonly RESPONSIVE_STATE_PC: string = 'pc';
 
   protected destroy$ = new Subject<void>();
+  protected responsiveState: NbSidebarResponsiveState = 'pc';
 
   containerFixedValue: boolean = true;
 
@@ -295,8 +309,6 @@ export class NbSidebarComponent implements OnInit, OnDestroy {
    */
   @Input() collapsedBreakpoints: string[] = ['xs', 'is'];
 
-  private responsiveState = NbSidebarComponent.RESPONSIVE_STATE_PC;
-
   constructor(private sidebarService: NbSidebarService,
     private themeService: NbThemeService,
     private element: ElementRef) {
@@ -387,7 +399,7 @@ export class NbSidebarComponent implements OnInit, OnDestroy {
    */
   toggle(compact: boolean = false) {
     if (this.responsive) {
-      if (this.responsiveState === NbSidebarComponent.RESPONSIVE_STATE_MOBILE) {
+      if (this.responsiveState === 'mobile') {
         compact = false;
       }
     }
@@ -413,17 +425,17 @@ export class NbSidebarComponent implements OnInit, OnDestroy {
         if (isCompacted) {
           this.fixed = this.containerFixedValue;
           this.compact();
-          this.responsiveState = NbSidebarComponent.RESPONSIVE_STATE_TABLET;
+          this.responsiveState = 'tablet';
         }
         if (isCollapsed) {
           this.fixed = true;
           this.collapse();
-          this.responsiveState = NbSidebarComponent.RESPONSIVE_STATE_MOBILE;
+          this.responsiveState = 'mobile';
         }
         if (!isCollapsed && !isCompacted && prev.width < current.width) {
           this.expand();
           this.fixed = false;
-          this.responsiveState = NbSidebarComponent.RESPONSIVE_STATE_PC;
+          this.responsiveState = 'pc';
         }
       });
   }
