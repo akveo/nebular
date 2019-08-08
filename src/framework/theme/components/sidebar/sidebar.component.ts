@@ -13,6 +13,7 @@ import { NbThemeService } from '../../services/theme.service';
 import { NbMediaBreakpoint } from '../../services/breakpoints.service';
 import { NbSidebarService } from './sidebar.service';
 
+export type NbSidebarState = 'expanded' | 'collapsed' | 'compacted';
 
 /**
  * Sidebar header container.
@@ -132,8 +133,20 @@ export class NbSidebarFooterComponent {
 })
 export class NbSidebarComponent implements OnInit, OnDestroy {
 
+  /**
+   * @deprecated Use NbSidebarState type instead
+   * @breaking-change Remove @5.0.0
+   */
   static readonly STATE_EXPANDED: string = 'expanded';
+  /**
+   * @deprecated Use NbSidebarState type instead
+   * @breaking-change Remove @5.0.0
+   */
   static readonly STATE_COLLAPSED: string = 'collapsed';
+  /**
+   * @deprecated Use NbSidebarState type instead
+   * @breaking-change Remove @5.0.0
+   */
   static readonly STATE_COMPACTED: string = 'compacted';
 
   static readonly RESPONSIVE_STATE_MOBILE: string = 'mobile';
@@ -152,15 +165,15 @@ export class NbSidebarComponent implements OnInit, OnDestroy {
 
   @HostBinding('class.expanded')
   get expanded() {
-    return this.state === NbSidebarComponent.STATE_EXPANDED;
+    return this.state === 'expanded';
   }
   @HostBinding('class.collapsed')
   get collapsed() {
-    return this.state === NbSidebarComponent.STATE_COLLAPSED;
+    return this.state === 'collapsed';
   }
   @HostBinding('class.compacted')
   get compacted() {
-    return this.state === NbSidebarComponent.STATE_COMPACTED;
+    return this.state === 'compacted';
   }
 
   /**
@@ -234,13 +247,13 @@ export class NbSidebarComponent implements OnInit, OnDestroy {
    * @type {string}
    */
   @Input()
-  get state(): string {
+  get state(): NbSidebarState {
     return this._state;
   }
-  set state(value: string) {
+  set state(value: NbSidebarState) {
     this._state = value;
   }
-  protected _state: string;
+  protected _state: NbSidebarState;
 
   /**
    * Makes sidebar listen to media query events and change its behaviour
@@ -344,21 +357,21 @@ export class NbSidebarComponent implements OnInit, OnDestroy {
    * Collapses the sidebar
    */
   collapse() {
-    this.state = NbSidebarComponent.STATE_COLLAPSED;
+    this.state = 'collapsed';
   }
 
   /**
    * Expands the sidebar
    */
   expand() {
-    this.state = NbSidebarComponent.STATE_EXPANDED;
+    this.state = 'expanded';
   }
 
   /**
    * Compacts the sidebar (minimizes)
    */
   compact() {
-    this.state = NbSidebarComponent.STATE_COMPACTED;
+    this.state = 'compacted';
   }
 
   /**
@@ -379,13 +392,10 @@ export class NbSidebarComponent implements OnInit, OnDestroy {
       }
     }
 
-    const closedStates = [NbSidebarComponent.STATE_COMPACTED, NbSidebarComponent.STATE_COLLAPSED];
-    if (compact) {
-      this.state = closedStates.includes(this.state) ?
-        NbSidebarComponent.STATE_EXPANDED : NbSidebarComponent.STATE_COMPACTED;
+    if (this.state === 'compacted' || this.state === 'collapsed') {
+      this.state = 'expanded';
     } else {
-      this.state = closedStates.includes(this.state) ?
-        NbSidebarComponent.STATE_EXPANDED : NbSidebarComponent.STATE_COLLAPSED;
+      this.state = compact ? 'compacted' : 'collapsed';
     }
   }
 
