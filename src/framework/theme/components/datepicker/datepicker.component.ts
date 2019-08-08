@@ -117,6 +117,12 @@ export abstract class NbBasePicker<D, T, P>
   @Input() hideOnSelect: boolean = true;
 
   /**
+   * Determines should we show calendars header or not.
+   * @type {boolean}
+   */
+  @Input() showHeader: boolean = true;
+
+  /**
    * Calendar component class that has to be instantiated inside overlay.
    * */
   protected abstract pickerClass: Type<P>;
@@ -348,6 +354,7 @@ export abstract class NbBasePicker<D, T, P>
     this.picker.monthCellComponent = this.monthCellComponent;
     this.picker._yearCellComponent = this.yearCellComponent;
     this.picker.size = this.size;
+    this.picker.showHeader = this.showHeader;
     this.picker.visibleDate = this.visibleDate;
   }
 
