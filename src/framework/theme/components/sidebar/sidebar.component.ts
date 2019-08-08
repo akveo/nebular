@@ -4,9 +4,9 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { Component, HostBinding, Input, OnInit, OnDestroy, ElementRef, OnChanges } from '@angular/core';
-import { Subscription } from 'rxjs';
-import { takeWhile } from 'rxjs/operators';
+import { Component, HostBinding, Input, OnInit, OnDestroy, ElementRef } from '@angular/core';
+import { Subscription, Subject } from 'rxjs';
+import { takeUntil, filter } from 'rxjs/operators';
 
 import { convertToBoolProperty } from '../helpers';
 import { NbThemeService } from '../../services/theme.service';
@@ -130,7 +130,7 @@ export class NbSidebarFooterComponent {
     </div>
   `,
 })
-export class NbSidebarComponent implements OnChanges, OnInit, OnDestroy {
+export class NbSidebarComponent implements OnInit, OnDestroy {
 
   static readonly STATE_EXPANDED: string = 'expanded';
   static readonly STATE_COLLAPSED: string = 'collapsed';
@@ -140,9 +140,7 @@ export class NbSidebarComponent implements OnChanges, OnInit, OnDestroy {
   static readonly RESPONSIVE_STATE_TABLET: string = 'tablet';
   static readonly RESPONSIVE_STATE_PC: string = 'pc';
 
-  protected responsiveValue: boolean = false;
-
-  private alive = true;
+  protected destroy$ = new Subject<void>();
 
   containerFixedValue: boolean = true;
 
@@ -249,9 +247,13 @@ export class NbSidebarComponent implements OnChanges, OnInit, OnDestroy {
    * @type {boolean}
    */
   @Input()
-  set responsive(val: boolean) {
-    this.responsiveValue = convertToBoolProperty(val);
+  get responsive(): boolean {
+    return this._responsive;
   }
+  set responsive(value: boolean) {
+    this._responsive = convertToBoolProperty(value);
+  }
+  protected _responsive: boolean = false;
 
   /**
    * Tags a sidebar with some ID, can be later used in the sidebar service
@@ -280,7 +282,6 @@ export class NbSidebarComponent implements OnChanges, OnInit, OnDestroy {
    */
   @Input() collapsedBreakpoints: string[] = ['xs', 'is'];
 
-  private mediaQuerySubscription: Subscription;
   private responsiveState = NbSidebarComponent.RESPONSIVE_STATE_PC;
 
   constructor(private sidebarService: NbSidebarService,
@@ -288,23 +289,17 @@ export class NbSidebarComponent implements OnChanges, OnInit, OnDestroy {
     private element: ElementRef) {
   }
 
+  /**
+   * @deprecated Use `responsive` property instead
+   * @breaking-change Remove @5.0.0
+   */
   toggleResponsive(enabled: boolean) {
-    if (enabled) {
-      this.mediaQuerySubscription = this.onMediaQueryChanges();
-    } else if (this.mediaQuerySubscription) {
-      this.mediaQuerySubscription.unsubscribe();
-    }
-  }
-
-  ngOnChanges(changes) {
-    if (changes.responsive) {
-      this.toggleResponsive(this.responsiveValue);
-    }
+    this.responsive = enabled;
   }
 
   ngOnInit() {
     this.sidebarService.onToggle()
-      .pipe(takeWhile(() => this.alive))
+      .pipe(takeUntil(this.destroy$))
       .subscribe((data: { compact: boolean, tag: string }) => {
         if (!this.tag || this.tag === data.tag) {
           this.toggle(data.compact);
@@ -312,7 +307,7 @@ export class NbSidebarComponent implements OnChanges, OnInit, OnDestroy {
       });
 
     this.sidebarService.onExpand()
-      .pipe(takeWhile(() => this.alive))
+      .pipe(takeUntil(this.destroy$))
       .subscribe((data: { tag: string }) => {
         if (!this.tag || this.tag === data.tag) {
           this.expand();
@@ -320,19 +315,19 @@ export class NbSidebarComponent implements OnChanges, OnInit, OnDestroy {
       });
 
     this.sidebarService.onCollapse()
-      .pipe(takeWhile(() => this.alive))
+      .pipe(takeUntil(this.destroy$))
       .subscribe((data: { tag: string }) => {
         if (!this.tag || this.tag === data.tag) {
           this.collapse();
         }
       });
+
+    this.subscribeToMediaQueryChange();
   }
 
   ngOnDestroy() {
-    this.alive = false;
-    if (this.mediaQuerySubscription) {
-      this.mediaQuerySubscription.unsubscribe();
-    }
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   // TODO: this is more of a workaround, should be a better way to make components communicate to each other
@@ -381,7 +376,7 @@ export class NbSidebarComponent implements OnChanges, OnInit, OnDestroy {
    * ```
    */
   toggle(compact: boolean = false) {
-    if (this.responsiveEnabled()) {
+    if (this.responsive) {
       if (this.responsiveState === NbSidebarComponent.RESPONSIVE_STATE_MOBILE) {
         compact = false;
       }
@@ -397,8 +392,12 @@ export class NbSidebarComponent implements OnChanges, OnInit, OnDestroy {
     }
   }
 
-  protected onMediaQueryChanges(): Subscription {
-    return this.themeService.onMediaQueryChange()
+  protected subscribeToMediaQueryChange() {
+    this.themeService.onMediaQueryChange()
+      .pipe(
+        filter(() => this.responsive),
+        takeUntil(this.destroy$),
+      )
       .subscribe(([prev, current]: [NbMediaBreakpoint, NbMediaBreakpoint]) => {
 
         const isCollapsed = this.collapsedBreakpoints.includes(current.name);
@@ -420,10 +419,6 @@ export class NbSidebarComponent implements OnChanges, OnInit, OnDestroy {
           this.responsiveState = NbSidebarComponent.RESPONSIVE_STATE_PC;
         }
       });
-  }
-
-  protected responsiveEnabled(): boolean {
-    return this.responsiveValue;
   }
 
   protected getMenuLink(element: HTMLElement): HTMLElement | undefined {
