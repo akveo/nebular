@@ -38,7 +38,7 @@
 
 @mixin nb-layout-theme() {
 
-  nb-layout {
+  nb-layout .scrollable-container {
     @include nb-scrollbars(
         nb-theme(layout-scrollbar-color),
         nb-theme(layout-scrollbar-background-color),
