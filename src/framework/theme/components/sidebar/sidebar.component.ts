@@ -5,13 +5,13 @@
  */
 
 import { Component, HostBinding, Input, OnInit, OnDestroy, ElementRef } from '@angular/core';
-import { Subscription, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 import { takeUntil, filter } from 'rxjs/operators';
 
 import { convertToBoolProperty } from '../helpers';
 import { NbThemeService } from '../../services/theme.service';
 import { NbMediaBreakpoint } from '../../services/breakpoints.service';
-import { NbSidebarService } from './sidebar.service';
+import { NbSidebarService, getSidebarState$ } from './sidebar.service';
 
 export type NbSidebarState = 'expanded' | 'collapsed' | 'compacted';
 export type NbSidebarResponsiveState = 'mobile' | 'tablet' | 'pc';
@@ -343,6 +343,12 @@ export class NbSidebarComponent implements OnInit, OnDestroy {
         takeUntil(this.destroy$),
       )
       .subscribe(() => this.collapse());
+
+    getSidebarState$
+      .pipe(
+        filter(({ tag }) => !this.tag || this.tag === tag),
+      )
+      .subscribe(({ observer }) => observer.next(this.state));
 
     this.subscribeToMediaQueryChange();
   }

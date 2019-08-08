@@ -5,8 +5,11 @@
  */
 
 import { Injectable } from '@angular/core';
-import { Subject, Observable } from 'rxjs';
-import { share } from 'rxjs/operators';
+import { Subject, Observable, Observer } from 'rxjs';
+import { share, refCount } from 'rxjs/operators';
+import { NbSidebarState } from './sidebar.component';
+
+export const getSidebarState$ = new Subject<{ tag: string, observer: Observer<NbSidebarState> }>();
 
 /**
  * Sidebar service.
@@ -76,4 +79,14 @@ export class NbSidebarService {
     this.collapse$.next({ tag });
   }
 
+  /**
+   * Returns sidebar state
+   * @param {string} tag If you have multiple sidebars on the page, mark them with `tag` input property and pass it here
+   * to specify which sidebar you want to control
+   */
+  getSidebarState(tag?: string): Observable<NbSidebarState> {
+    const observer = new Subject<NbSidebarState>();
+    getSidebarState$.next({ observer, tag });
+    return observer.pipe(refCount());
+  }
 }
