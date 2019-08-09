@@ -477,6 +477,14 @@ export const structure = [
       },
       {
         type: 'tabs',
+        name: 'Toggle',
+        icon: 'toggle.svg',
+        source: [
+          'NbToggleComponent',
+        ],
+      },
+      {
+        type: 'tabs',
         name: 'Radio',
         icon: 'radio.svg',
         source: [
