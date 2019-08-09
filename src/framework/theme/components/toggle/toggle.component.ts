@@ -185,7 +185,7 @@ export class NbToggleComponent implements OnInit, OnDestroy, ControlValueAccesso
   onChange: any = () => { };
   onTouched: any = () => { };
 
-  private destroy$: Subject<void> = new Subject<void>();
+  private destroy$ = new Subject<void>();
 
   /**
    * Toggle checked
@@ -287,7 +287,7 @@ export class NbToggleComponent implements OnInit, OnDestroy, ControlValueAccesso
       .subscribe(() => this.changeDetector.detectChanges());
   }
 
-  ngOnDestroy(): void {
+  ngOnDestroy() {
     this.destroy$.next();
     this.destroy$.complete();
   }
