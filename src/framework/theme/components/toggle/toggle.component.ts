@@ -160,7 +160,7 @@ import { convertToBoolProperty } from '../helpers';
              [disabled]="disabled"
              [checked]="checked"
              (change)="updateValue($event)"
-             (blur)="setTouched()"
+             (blur)="onTouched()"
              (click)="onInputClick($event)">
       <div class="toggle" [class.checked]="checked">
         <span [@onOff]="checkState()" class="toggle-switcher">
@@ -318,10 +318,6 @@ export class NbToggleComponent implements OnInit, OnDestroy, ControlValueAccesso
   setDisabledState(val: boolean) {
     this.disabled = convertToBoolProperty(val);
     this.changeDetector.markForCheck();
-  }
-
-  setTouched() {
-    this.onTouched();
   }
 
   updateValue(event: Event): void {
