@@ -56,13 +56,13 @@ import { convertToBoolProperty } from '../helpers';
  *
  * @stacked-example(Toggles With Labels, toggle/toggle-label-position.component.ts)
  *
- * Toggle may be bounded using `checked` input:
+ * You can set checked state via `checked` binding:
  *
  * ```html
  * <nb-toggle [(checked)]="checked"></nb-toggle>
  * ```
  *
- * Or you can bind control with form controls or ngModel:
+ * Or you can set control value via reactive forms or ngModel bindings:
  *
  * @stacked-example(Toggle form binding, toggle/toggle-form.component)
  *
