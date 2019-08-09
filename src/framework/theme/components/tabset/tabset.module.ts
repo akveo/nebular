@@ -8,13 +8,14 @@ import { NgModule } from '@angular/core';
 
 import { NbSharedModule } from '../shared/shared.module';
 
-import { NbTabsetComponent, NbTabComponent } from './tabset.component';
+import { NbTabsetComponent, NbTabComponent, NbTabLazyContentDirective } from './tabset.component';
 import { NbBadgeModule } from '../badge/badge.module';
 import { NbIconModule } from '../icon/icon.module';
 
 const NB_TABSET_COMPONENTS = [
   NbTabsetComponent,
   NbTabComponent,
+  NbTabLazyContentDirective,
 ];
 
 @NgModule({

@@ -15,12 +15,22 @@ import {
   AfterContentInit,
   HostBinding,
   ChangeDetectorRef,
+  ContentChild,
+  TemplateRef,
+  Directive,
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { convertToBoolProperty } from '../helpers';
 import { NbComponentStatus } from '../component-status';
 import { NbBadgePosition } from '../badge/badge.component';
+
+@Directive({
+  selector: '[nbTabLazyContent]',
+})
+export class NbTabLazyContentDirective {
+  constructor(public templateRef: TemplateRef<any>) {}
+}
 
 /**
  * Specific tab container.
@@ -36,8 +46,9 @@ import { NbBadgePosition } from '../badge/badge.component';
 @Component({
   selector: 'nb-tab',
   template: `
-    <ng-container *ngIf="init">
+    <ng-container *ngIf="active">
       <ng-content></ng-content>
+      <ng-container *ngTemplateOutlet="lazyContent?.templateRef"></ng-container>
     </ng-container>
   `,
 })
@@ -76,7 +87,6 @@ export class NbTabComponent {
   set responsive(val: boolean) {
     this.responsiveValue = convertToBoolProperty(val);
   }
-
   get responsive() {
     return this.responsiveValue;
   }
@@ -99,19 +109,6 @@ export class NbTabComponent {
   }
   set active(val: boolean) {
     this.activeValue = convertToBoolProperty(val);
-    if (this.activeValue) {
-      this.init = true;
-    }
-  }
-
-  /**
-   * Lazy load content before tab selection
-   * TODO: rename, as lazy is by default, and this is more `instant load`
-   * @param {boolean} val
-   */
-  @Input()
-  set lazyLoad(val: boolean) {
-    this.init = convertToBoolProperty(val);
   }
 
   /**
@@ -136,7 +133,7 @@ export class NbTabComponent {
    */
   @Input() badgePosition: NbBadgePosition;
 
-  init: boolean = false;
+  @ContentChild(NbTabLazyContentDirective, { static: false }) lazyContent: NbTabLazyContentDirective;
 }
 
 // TODO: Combine tabset with route-tabset, so that we can:
