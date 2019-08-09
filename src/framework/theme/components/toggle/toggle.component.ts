@@ -12,7 +12,9 @@ import {
   ChangeDetectorRef,
   OnInit,
   Output,
-  EventEmitter, OnDestroy, ChangeDetectionStrategy,
+  EventEmitter,
+  OnDestroy,
+  ChangeDetectionStrategy,
 } from '@angular/core';
 import { trigger, state, style, animate, transition } from '@angular/animations';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
@@ -34,7 +36,7 @@ import { convertToBoolProperty } from '../helpers';
  * ```ts
  * @NgModule({
  *   imports: [
- *   	 // ...
+ *     // ...
  *     NbToggleModule,
  *   ],
  * })
@@ -282,9 +284,7 @@ export class NbToggleComponent implements OnInit, OnDestroy, ControlValueAccesso
   ngOnInit(): void {
     this.layoutDirection.onDirectionChange()
       .pipe(takeUntil(this.destroy$))
-      .subscribe(() => {
-        this.changeDetector.detectChanges();
-      });
+      .subscribe(() => this.changeDetector.detectChanges());
   }
 
   ngOnDestroy(): void {
