@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { NbCardModule } from '@nebular/theme';
+import { NbButtonModule, NbCardModule } from '@nebular/theme';
 import { OverlayRoutingModule } from './overlay-routing.module';
 import { OverlayShowcaseComponent } from './overlay-showcase.component';
 
@@ -9,6 +9,7 @@ import { OverlayShowcaseComponent } from './overlay-showcase.component';
   ],
   imports: [
     NbCardModule,
+    NbButtonModule,
     OverlayRoutingModule,
   ],
 })

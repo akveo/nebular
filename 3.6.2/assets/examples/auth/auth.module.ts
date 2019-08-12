@@ -60,7 +60,7 @@ export function filterInterceptorRequest(req: HttpRequest<any>) {
             {
               url: 'https://www.facebook.com/akveo',
               target: '_blank',
-              icon: 'nb-home',
+              icon: 'home-outline',
             },
             {
               url: 'https://www.facebook.com/akveo',

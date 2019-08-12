@@ -6,14 +6,6 @@ import { filter, map } from 'rxjs/operators';
   selector: 'nb-context-menu-click',
   templateUrl: './context-menu-click.component.html',
   styles: [`
-    :host nb-layout-column {
-      height: 50vw;
-    }
-
-    :host nb-layout-column:first-child {
-      background: #f4f4f7;
-    }
-
     :host nb-layout-header ::ng-deep nav {
       justify-content: flex-end;
     }

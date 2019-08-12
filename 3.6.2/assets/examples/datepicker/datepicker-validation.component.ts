@@ -11,23 +11,14 @@ import { NbDateService } from '@nebular/theme';
 @Component({
   selector: 'nb-datepicker-validation',
   template: `
-    <div>
-      <input nbInput placeholder="Form Picker" [nbDatepicker]="picker">
-      <nb-datepicker #picker [min]="min" [max]="max"></nb-datepicker>
-    </div>
+    <nb-card size="large">
+      <nb-card-body>
+        <input nbInput placeholder="Pick Date" [nbDatepicker]="picker">
+        <nb-datepicker #picker [min]="min" [max]="max"></nb-datepicker>
+      </nb-card-body>
+    </nb-card>
   `,
-  styles: [`
-    :host {
-      display: flex;
-      justify-content: center;
-      align-content: center;
-      height: 40rem;
-    }
-
-    :host input {
-      width: 21.875rem;
-    }
-  `],
+  styleUrls: ['./datepicker-example.scss'],
 })
 export class DatepickerValidationComponent {
   min: Date;

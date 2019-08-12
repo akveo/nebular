@@ -4,6 +4,7 @@ import { CheckboxDisabledComponent } from './checkbox-disabled.component';
 import { CheckboxShowcaseComponent } from './checkbox-showcase.component';
 import { CheckboxStatusComponent } from './checkbox-status.component';
 import { CheckboxTestComponent } from './checkbox-test.component';
+import { CheckboxIndeterminateComponent } from './checkbox-indeterminate.component';
 
 const routes: Route[] = [
   {
@@ -21,6 +22,10 @@ const routes: Route[] = [
   {
     path: 'checkbox-test.component',
     component: CheckboxTestComponent,
+  },
+  {
+    path: 'checkbox-indeterminate.component',
+    component: CheckboxIndeterminateComponent,
   },
 ];
 

@@ -26,7 +26,7 @@ export class ChatColorsComponent {
           reply: false,
           user: {
             name: 'Bot',
-            avatar: 'https://i.ytimg.com/vi/Erqi5ckVoEo/hqdefault.jpg',
+            avatar: 'https://s3.amazonaws.com/pix.iemoji.com/images/emoji/apple/ios-12/256/robot-face.png',
           },
         },
       ],
@@ -41,7 +41,7 @@ export class ChatColorsComponent {
           reply: false,
           user: {
             name: 'Bot',
-            avatar: 'https://i.ytimg.com/vi/Erqi5ckVoEo/hqdefault.jpg',
+            avatar: 'https://s3.amazonaws.com/pix.iemoji.com/images/emoji/apple/ios-12/256/robot-face.png',
           },
         },
       ],
@@ -56,7 +56,7 @@ export class ChatColorsComponent {
           reply: false,
           user: {
             name: 'Bot',
-            avatar: 'https://i.ytimg.com/vi/Erqi5ckVoEo/hqdefault.jpg',
+            avatar: 'https://s3.amazonaws.com/pix.iemoji.com/images/emoji/apple/ios-12/256/robot-face.png',
           },
         },
       ],
@@ -71,7 +71,7 @@ export class ChatColorsComponent {
           reply: false,
           user: {
             name: 'Bot',
-            avatar: 'https://i.ytimg.com/vi/Erqi5ckVoEo/hqdefault.jpg',
+            avatar: 'https://s3.amazonaws.com/pix.iemoji.com/images/emoji/apple/ios-12/256/robot-face.png',
           },
         },
       ],
@@ -86,37 +86,7 @@ export class ChatColorsComponent {
           reply: false,
           user: {
             name: 'Bot',
-            avatar: 'https://i.ytimg.com/vi/Erqi5ckVoEo/hqdefault.jpg',
-          },
-        },
-      ],
-    },
-    {
-      status: 'active',
-      title: 'Nebular Conversational UI Active',
-      messages: [
-        {
-          text: 'Active!',
-          date: new Date(),
-          reply: false,
-          user: {
-            name: 'Bot',
-            avatar: 'https://i.ytimg.com/vi/Erqi5ckVoEo/hqdefault.jpg',
-          },
-        },
-      ],
-    },
-    {
-      status: 'disabled',
-      title: 'Nebular Conversational UI Disabled',
-      messages: [
-        {
-          text: 'Disabled!',
-          date: new Date(),
-          reply: false,
-          user: {
-            name: 'Bot',
-            avatar: 'https://i.ytimg.com/vi/Erqi5ckVoEo/hqdefault.jpg',
+            avatar: 'https://s3.amazonaws.com/pix.iemoji.com/images/emoji/apple/ios-12/256/robot-face.png',
           },
         },
       ],

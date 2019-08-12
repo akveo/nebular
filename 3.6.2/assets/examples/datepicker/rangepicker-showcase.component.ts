@@ -10,23 +10,14 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'nb-rangepicker-showcase',
   template: `
-    <div>
-      <input nbInput placeholder="Form Picker" [nbDatepicker]="formpicker">
-      <nb-rangepicker #formpicker></nb-rangepicker>
-    </div>
+    <nb-card size="large">
+      <nb-card-body>
+        <input nbInput placeholder="Pick Date Range" [nbDatepicker]="formpicker">
+        <nb-rangepicker #formpicker></nb-rangepicker>
+      </nb-card-body>
+    </nb-card>
   `,
-  styles: [`
-    :host {
-      display: flex;
-      justify-content: center;
-      align-content: center;
-      height: 40rem;
-    }
-
-    :host input {
-      width: 21.875rem;
-    }
-  `],
+  styleUrls: ['./datepicker-example.scss'],
 })
 export class RangepickerShowcaseComponent {
 }

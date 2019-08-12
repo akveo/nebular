@@ -6,27 +6,7 @@ import { NbPopoverDirective } from '@nebular/theme';
 @Component({
   selector: 'nb-popover-dynamic-code',
   templateUrl: './popover-dynamic-code.component.html',
-  styles: [`
-    :host {
-      display: flex;
-      flex-direction: column;
-    }
-    .margin-bottom-0 {
-      margin-bottom: 0;
-    }
-    .section {
-      margin-bottom: 2rem;
-    }
-    .popover-container {
-      display: flex;
-      justify-content: center;
-      padding: 12rem;
-    }
-    button {
-      margin-right: 1rem;
-      margin-top: 1rem;
-    }
-  `],
+  styleUrls: ['./popover-dynamic.scss'],
 })
 export class PopoverDynamicCodeComponent implements OnDestroy, AfterViewInit {
 
