@@ -46,13 +46,6 @@ interface Version {
   log(`Adding versions.json to ${OUT_DIR}`);
   await outputFile(join(OUT_DIR, 'versions.json'), jsonConfig);
 
-  const ghspaPath = join(OUT_DIR, 'ghspa.js');
-  const specialRedirectVersions = config.versions
-    .filter((v: Version) => v.name !== config.currentVersionName)
-    .map((v: Version) => v.name);
-  log(`Generating ghspa.js script. Versions to redirect: ${specialRedirectVersions}`);
-  await addGithubSpaScript(specialRedirectVersions, ghspaPath);
-
   log(`Deploying to ghpages`);
   await deploy(OUT_DIR);
 
@@ -61,16 +54,22 @@ interface Version {
 }());
 
 async function buildDocs(config: VersionsConfig) {
+  const currentVersion = config.versions.find((v: Version) => v.name === config.currentVersionName);
+  const redirectVersions = config.versions
+    .filter((v: Version) => v !== currentVersion)
+    .map((v: Version) => v.name);
+  const ghspaScript = generateGithubSpaScript(redirectVersions);
+
   return Promise.all(config.versions.map((version: Version) => {
-    const versionDist = config.currentVersionName === version.name
+    const versionDistDir = version === currentVersion
       ? OUT_DIR
       : join(OUT_DIR, version.name);
 
-    return prepareVersion(version, versionDist);
+    return prepareVersion(version, versionDistDir, ghspaScript);
   }))
 }
 
-async function prepareVersion(version: Version, distDir: string) {
+async function prepareVersion(version: Version, distDir: string, ghspaScript: string) {
   const projectDir = join(WORK_DIR, `${version.name}`);
 
   await copyToBuildDir(MASTER_BRANCH_DIR, projectDir);
@@ -78,6 +77,7 @@ async function prepareVersion(version: Version, distDir: string) {
   await runCommand('npm install', { cwd: projectDir });
   await buildDocsApp(projectDir, version.path);
   await copy(join(projectDir, 'docs/dist'), distDir);
+  await outputFile(join(distDir, 'ghspa.js'), ghspaScript);
 
   await remove(projectDir);
 }
@@ -104,16 +104,6 @@ async function buildDocsApp(projectDir: string, baseHref: string) {
   await runCommand('npm run docs:prepare', { cwd: projectDir });
   await runCommand(`npm run build -- docs --prod --base-href '${baseHref}'`, { cwd: projectDir });
   await runCommand('npm run docs:dirs', { cwd: projectDir });
-}
-
-async function addGithubSpaScript(specialRedirectVersions: string[], filePath: string) {
-  const script = generateGithubSpaScript(specialRedirectVersions);
-
-  try {
-    await outputFile(filePath, script);
-  } catch (e) {
-    throw new Error(`Error creating ghspa.js file in ${filePath}: ${e.message}`);
-  }
 }
 
 async function deploy(distDir: string) {
