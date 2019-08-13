@@ -29,6 +29,7 @@ env:
     - MODE=deploy_dev
     - MODE=publish_dev
     - MODE=packages_smoke
+    - MODE=deploy_docs
 branches:
   only:
   - master

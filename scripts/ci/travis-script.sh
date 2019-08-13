@@ -30,6 +30,9 @@ elif [[ "${MODE}" = deploy_dev ]]; then
   deploy_dev
 elif [[ "${MODE}" = publish_dev ]]; then
   publish_dev
+elif [[ "${MODE}" = deploy_docs && "$TRAVIS_PULL_REQUEST" = "false" ]]; then
+  npm run docs:gh-pages
+  exit 0
 fi
 
 CURRENT_BRANCH=$(if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then echo $TRAVIS_BRANCH; else echo $TRAVIS_PULL_REQUEST_BRANCH; fi)
