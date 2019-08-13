@@ -22,11 +22,13 @@
     "@angular/router": "8.0.0",
     "@nebular/auth": "4.1.3",
     "@nebular/date-fns": "4.1.3",
+    "@nebular/eva-icons": "4.1.3",
     "@nebular/moment": "4.1.3",
     "@nebular/security": "4.1.3",
     "@nebular/theme": "4.1.3",
     "core-js": "^2.5.7",
     "date-fns": "^1.29.0",
+    "eva-icons": "1.1.1",
     "moment": "^2.22.2",
     "rxjs": "6.5.2",
     "zone.js": "~0.9.1"
