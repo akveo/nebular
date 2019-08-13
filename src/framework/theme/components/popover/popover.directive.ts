@@ -4,14 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import {
-  AfterViewInit,
-  Directive,
-  ElementRef,
-  Input,
-  OnChanges,
-  OnDestroy, OnInit,
-} from '@angular/core';
+import { AfterViewInit, Directive, ElementRef, Input, OnChanges, OnDestroy, OnInit } from '@angular/core';
 
 import { NbDynamicOverlay, NbDynamicOverlayController } from '../cdk/overlay/dynamic/dynamic-overlay';
 import { NbDynamicOverlayHandler } from '../cdk/overlay/dynamic/dynamic-overlay-handler';
@@ -71,10 +64,10 @@ import { NbPopoverComponent } from './popover.component';
  *
  * By default popover will try to adjust itself to maximally fit viewport
  * and provide the best user experience. It will try to change position of the popover container.
- * If you wanna disable this behaviour just set it falsy value.
+ * If you want to disable this behaviour set it `noop`.
  *
  * ```html
- * <button nbPopover="Hello, Popover!" [nbPopoverAdjustment]="false"></button>
+ * <button nbPopover="Hello, Popover!" nbPopoverAdjustment="noop"></button>
  * ```
  *
  * Popover has a number of triggers which provides an ability to show and hide the component in different ways:
@@ -133,11 +126,23 @@ export class NbPopoverDirective implements NbDynamicOverlayController, OnChanges
 
   /**
    * Container position will be changes automatically based on this strategy if container can't fit view port.
-   * Set this property to any falsy value if you want to disable automatically adjustment.
-   * Available values: clockwise, counterclockwise.
+   * Set this property to `noop` value if you want to disable automatically adjustment.
+   * Available values: `clockwise` (default), `counterclockwise`, `vertical`, `horizontal`, `noop`.
    * */
   @Input('nbPopoverAdjustment')
-  adjustment: NbAdjustment = NbAdjustment.CLOCKWISE;
+  get adjustment(): NbAdjustment {
+    return this._adjustment;
+  }
+  set adjustment(value: NbAdjustment) {
+    if (!value) {
+      // @breaking-change Remove @5.0.0
+      console.warn(`Falsy values for 'nbPopoverAdjustment' are deprecated and will be removed in Nebular 5.
+ Use 'noop' instead.`);
+      value = NbAdjustment.NOOP;
+    }
+    this._adjustment = value;
+  }
+  protected _adjustment: NbAdjustment = NbAdjustment.CLOCKWISE;
 
   /**
    * Describes when the container will be shown.
