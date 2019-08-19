@@ -9,8 +9,7 @@ import {
 
 import { NbRenderableContainer } from '../overlay-container';
 import { createContainer, NbOverlayContent, NbOverlayService, patch } from '../overlay-service';
-import { NbOverlayRef } from '../mapping';
-import { NbOverlayContainerAdapter } from '../../adapter/overlay-container-adapter';
+import { NbOverlayRef, NbOverlayContainer } from '../mapping';
 
 export interface NbDynamicOverlayController {
   show();
@@ -40,7 +39,7 @@ export class NbDynamicOverlay {
     protected overlay: NbOverlayService,
     protected componentFactoryResolver: ComponentFactoryResolver,
     protected zone: NgZone,
-    protected overlayContainer: NbOverlayContainerAdapter) {
+    protected overlayContainer: NbOverlayContainer) {
   }
 
   create(componentType: Type<NbRenderableContainer>,
