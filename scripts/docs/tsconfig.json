@@ -7,6 +7,6 @@
     "resolveJsonModule": true
   },
   "include": [
-    "deploy-docs.ts"
+    "build-docs.ts"
   ]
 }
