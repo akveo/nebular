@@ -50,10 +50,15 @@ const POSITIONS = {
   [NbPosition.TOP](offset) {
     return { originX: 'center', originY: 'top', overlayX: 'center', overlayY: 'bottom', offsetY: -offset };
   },
+  [NbPosition.START](offset) {
+    return this[NbPosition.LEFT](offset);
+  },
+  [NbPosition.END](offset) {
+    return this[NbPosition.RIGHT](offset);
+  },
 };
 
 const COUNTER_CLOCKWISE_POSITIONS = [NbPosition.TOP, NbPosition.LEFT, NbPosition.BOTTOM, NbPosition.RIGHT];
-const NOOP_POSITIONS = [NbPosition.TOP, NbPosition.BOTTOM, NbPosition.LEFT, NbPosition.RIGHT];
 const CLOCKWISE_POSITIONS = [NbPosition.TOP, NbPosition.RIGHT, NbPosition.BOTTOM, NbPosition.LEFT];
 const VERTICAL_POSITIONS = [NbPosition.BOTTOM, NbPosition.TOP];
 const HORIZONTAL_POSITIONS = [NbPosition.START, NbPosition.END];
@@ -126,7 +131,7 @@ export class NbAdjustableConnectedPositionStrategy
   protected createPositions(): NbPosition[] {
     switch (this._adjustment) {
       case NbAdjustment.NOOP:
-        return NOOP_POSITIONS.filter(position => this._position === position);
+        return [ this._position ];
       case NbAdjustment.CLOCKWISE:
         return this.reorderPreferredPositions(CLOCKWISE_POSITIONS);
       case NbAdjustment.COUNTERCLOCKWISE:
