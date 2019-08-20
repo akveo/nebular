@@ -73,4 +73,23 @@ describe('NbAdjustableConnectedPositionStrategy', () => {
       offsetX: -15,
     }]));
   });
+
+  it('should create strategy with position end and adjustment noop', () => {
+    const withPositionsSpy = spyOn(strategy, 'withPositions').and.callThrough();
+
+    strategy.position(NbPosition.END).adjustment(NbAdjustment.NOOP);
+
+    const overlayService: NbOverlayService = TestBed.get(NbOverlayService);
+    const overlayRef = overlayService.create({ positionStrategy: strategy });
+    overlayRef.attach(new NbComponentPortal(PortalComponent));
+
+    expect(withPositionsSpy).toHaveBeenCalledTimes(1);
+    expect(withPositionsSpy).toHaveBeenCalledWith(jasmine.objectContaining([{
+      originX: 'end',
+      originY: 'center',
+      overlayX: 'start',
+      overlayY: 'center',
+      offsetX: 15,
+    }]));
+  });
 });
