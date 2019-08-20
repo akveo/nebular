@@ -117,9 +117,7 @@ export class NbDynamicOverlay {
 
     if (!this.hasOverlayInContainer()) {
       // Dispose overlay ref as it refers to the old overlay container and create new by calling `show`
-      this.ref.dispose();
-      this.ref = null;
-      this.container = null;
+      this.disposeOverlayRef();
       return this.show();
     }
   }
@@ -144,10 +142,7 @@ export class NbDynamicOverlay {
   dispose() {
     this.alive = false;
     this.hide();
-    if (this.ref) {
-      this.ref.dispose();
-      this.ref = null;
-    }
+    this.disposeOverlayRef();
   }
 
   getContainer() {
@@ -199,5 +194,13 @@ export class NbDynamicOverlay {
 
   protected hasOverlayInContainer(): boolean {
     return this.overlayContainer.getContainerElement().contains(this.ref.hostElement);
+  }
+
+  protected disposeOverlayRef() {
+    if (this.ref) {
+      this.ref.dispose();
+      this.ref = null;
+      this.container = null;
+    }
   }
 }
