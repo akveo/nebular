@@ -8,12 +8,10 @@ export interface RunCommandOptions {
 
 const DEFAULT_OPTIONS: RunCommandOptions = { cwd: process.cwd(), showLog: false };
 
-export async function runCommand(command: string, { cwd, showLog }: RunCommandOptions = DEFAULT_OPTIONS) {
-  try {
-    if (!cwd) {
-      cwd = DEFAULT_OPTIONS.cwd;
-    }
+export async function runCommand(command: string, options?: RunCommandOptions) {
+  let { cwd, showLog } = Object.assign({}, DEFAULT_OPTIONS, options);
 
+  try {
     console.log(`Running "${command}" in "${cwd}"`);
     const { stdout, stderr } = await promisify(exec)(command, { cwd });
 
