@@ -366,35 +366,18 @@ To start a new release (publish the framework packages on NPM) you need:
     - When releasing major update:
       - Replace LTS version with latest mentioned in version.json
       - Add currently released version
-    - `path` of the current version should be set to `/nebular`, others to `/nebular/<version-name>`
-  * update `versions` array in `docs/assets/ghspa.js`. It should include all versions from `docs/versions.json` except currently released (latest).
+    - `path` of the current version should be set to `/nebular/`, others to `/nebular/<version-name>/`
 5. 
   * `npm run version:changelog`
   * fix/expand changelog manually
 6. push the branch, create PR, approve - merge
-7. pull the upstream (master or other version branch (e.g. 3.6.0, next))   
-8. If publishing LTS release add `--tag=v<version>-lts` (for example `v3-lts`) to publish command in `scripts/publish.sh:7`
-9. In case of beta, rc or any other unstable release add `--tag=next` to publish command in `scripts/publish.sh:7`
-10. `npm run release` - run prepare & validate and finally publish the packages to NPM
-11. create and push git tag
+7. right after merging PR, create and push version git tag, so docs build script on CI can checkout it
+8. pull the upstream (master or other version branch (e.g. 3.6.x, next))   
+9. If publishing LTS release add `--tag=v<version>-lts` (for example `v3-lts`) to publish command in `scripts/publish.sh:7`
+10. In case of beta, rc or any other unstable release add `--tag=next` to publish command in `scripts/publish.sh:7`
+11. `npm run release` - run prepare & validate and finally publish the packages to NPM
 12. create release on github
-13. publish docs
-    1. Build docs for currently released version
-    2. Copy `docs/dist` outside of `nebular/docs` directory
-    3. Loop over other versions mentioned in `docs/versions.json`:
-        1. Run `git checkout <version tag>`
-        2. Run `npm ci`
-        3. Run `npm run docs:prepare`
-        4. Run `npm run build -- docs --prod --base-href '/nebular/<version>/'` (for example `--base-href '/nebular/3.6.1/'`)
-        5. Run `npm run docs:dirs`.
-        6. Rename `docs/dist` to `docs/<version>`.
-        7. Copy renamed folder to the directory from step `13.2`.
-    4. Checkout current version
-    5. Run `npm install`
-    6. Remove `docs/dist`
-    7. Move resulting directory from step `13.2` to 'docs/dist'.
-    8. Run `npm run ngh -- --dir ./docs/dist`
-14. add release notes to [Nebular Releases](https://github.com/akveo/nebular/issues/1204)
+13. add release notes to [Nebular Releases](https://github.com/akveo/nebular/issues/1204)
 
 #ngx-admin development on the latest Nebular sources
 
