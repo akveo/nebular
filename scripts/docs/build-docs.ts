@@ -1,6 +1,5 @@
 import { join } from 'path';
 import { copy, mkdirp, remove, outputFile } from 'fs-extra';
-import { Clone, Checkout, Repository } from 'nodegit';
 
 import { generateGithubSpaScript } from './ghspa-template';
 import { runCommand } from './run-command';
@@ -32,7 +31,7 @@ interface Version {
   await mkdirp(WORK_DIR);
 
   log(`Cloning ${REPO_URL} into ${MASTER_BRANCH_DIR}`);
-  await Clone.clone(REPO_URL, MASTER_BRANCH_DIR);
+  await runCommand(`git clone ${REPO_URL} ${MASTER_BRANCH_DIR}`, { cwd: WORK_DIR });
 
   log('Reading versions configuration');
   const config: VersionsConfig = await import(DOCS_VERSIONS_PATH);
@@ -66,7 +65,7 @@ async function buildDocs(config: VersionsConfig) {
       : join(OUT_DIR, version.name);
 
     return prepareVersion(version, versionDistDir, ghspaScript);
-  }))
+  }));
 }
 
 async function prepareVersion(version: Version, distDir: string, ghspaScript: string) {
@@ -93,8 +92,7 @@ async function copyToBuildDir(from: string, to: string) {
 
 async function checkoutVersion(checkoutTarget: string, repoDirectory: string) {
   try {
-    const repo = await Repository.open(repoDirectory);
-    await Checkout.tree(repo, checkoutTarget);
+    await runCommand(`git checkout ${checkoutTarget}`, { cwd: repoDirectory, showLog: false });
   } catch (e) {
     throw new Error(`Error checking out ${checkoutTarget}: ${e.message}`);
   }
