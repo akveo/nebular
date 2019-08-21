@@ -14,7 +14,7 @@ By default both font-family-primary and font-family-secondary use `'Open Sans, s
 
 ## Colors
 
-There are 5 text colors available withing the Design System: 
+There are 5 text colors available within the Design System: 
 
 - **text-basic-color** - main text color, should be used on top of basic backgrounds, usually cards, sidebars, headers, available as `.text-basic` CSS class
 - **text-alternate-color** - alternative color used on top of alternate backgrounds - colored headers, sidebars, available as `.text-alternate` CSS class
