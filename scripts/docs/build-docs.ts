@@ -1,5 +1,5 @@
 import { join } from 'path';
-import { copy, mkdirp, remove, outputFile } from 'fs-extra';
+import { copy, mkdirp, remove, outputFile, writeJson, readJson } from 'fs-extra';
 
 import { generateGithubSpaScript } from './ghspa-template';
 import { runCommand } from './run-command';
@@ -75,6 +75,7 @@ async function prepareVersion(version: Version, distDir: string, ghspaScript: st
   await copyToBuildDir(MASTER_BRANCH_DIR, projectDir);
   await checkoutVersion(version.checkoutTarget, projectDir);
   await runCommand('npm install', { cwd: projectDir });
+  await addVersionNameToPackageJson(version.name, join(projectDir, 'package.json'));
   await buildDocsApp(projectDir, version.path);
   await copy(join(projectDir, 'docs/dist'), distDir);
   await outputFile(join(distDir, 'assets/ghspa.js'), ghspaScript);
@@ -97,6 +98,12 @@ async function checkoutVersion(checkoutTarget: string, repoDirectory: string) {
   } catch (e) {
     throw new Error(`Error checking out ${checkoutTarget}: ${e.message}`);
   }
+}
+
+async function addVersionNameToPackageJson(versionName: string, packageJsonPath: string) {
+  const packageJsonObject = await readJson(packageJsonPath);
+  packageJsonObject.versionName = versionName;
+  await writeJson(packageJsonPath, packageJsonObject);
 }
 
 async function buildDocsApp(projectDir: string, baseHref: string) {
