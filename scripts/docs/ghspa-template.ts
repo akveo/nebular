@@ -1,4 +1,15 @@
-export function generateGithubSpaScript(versions: string[]): string {
+import { Version } from './build-docs';
+
+function removeTrailingSlash(path: string): string {
+  if (path.endsWith('/')) {
+    return path.slice(0, -1);
+  }
+  return path;
+}
+
+export function generateGithubSpaScript(versionsToRedirect: Version[]): string {
+  const paths: string[] = versionsToRedirect.map(v => v.path).map(removeTrailingSlash);
+
   return `
 /**
  *
@@ -20,20 +31,23 @@ export function generateGithubSpaScript(versions: string[]): string {
  *
  */
 
-;(function(l, projectPages) {
+;(function(l) {
 
-  const versions = ${JSON.stringify(versions)};
+  var redirectPath;
+  ${JSON.stringify(paths)}.forEach(function (path) {
+    if (l.pathname.indexOf(path) === 0) {
+      redirectPath = path;
+    }
+  });
 
-  var paths = l.pathname.split('/');
-  var repo = projectPages ? '/' + paths[1] : '';
-  if (versions.includes(paths[2])) {
-    repo += '/' + paths[2];
+  if (!redirectPath) {
+    return;
   }
 
-  /* redirect all 404 trafic to index.html */
+  /* redirect all 404 traffic to index.html */
   function redirect() {
-    l.replace(l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') + repo + '/?' +
-      (l.pathname ? 'p=' + l.pathname.replace(/&/g, '~and~').replace(repo, '') : '') +
+    l.replace(l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') + redirectPath + '/?' +
+      (l.pathname ? 'p=' + l.pathname.replace(/&/g, '~and~').replace(redirectPath, '') : '') +
       (l.search ? '&q=' + l.search.slice(1).replace(/&/g, '~and~') : '') +
       (l.hash))
   }
@@ -48,7 +62,7 @@ export function generateGithubSpaScript(versions: string[]): string {
       });
       if (q.p !== undefined) {
         window.history.replaceState(null, null,
-          repo + (q.p || '') +
+          redirectPath + (q.p || '') +
           (q.q ? ('?' + q.q) : '') +
           l.hash
         )
@@ -59,6 +73,6 @@ export function generateGithubSpaScript(versions: string[]): string {
   /* if current document is 404 page page, redirect to index.html otherwise resolve */
   document.title === '404' ? redirect() : resolve()
 
-}(window.location, window.projectPages || true ));
-  `;
+}(window.location));
+`;
 }

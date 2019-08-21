@@ -10,7 +10,7 @@ const WORK_DIR = join(process.cwd(), '../_DOCS_BUILD_WORK_DIR_');
 const MASTER_BRANCH_DIR = join(WORK_DIR, 'MASTER');
 const DOCS_VERSIONS_PATH = join(MASTER_BRANCH_DIR, 'docs/versions.json');
 
-interface Version {
+export interface Version {
   checkoutTarget: string;
   name: string;
   path: string;
@@ -58,10 +58,7 @@ function ensureSingleCurrentVersion(versions: Version[]) {
 }
 
 async function buildDocs(versions: Version[]) {
-  const redirectVersions = versions
-    .filter((v: Version) => !v.isCurrent)
-    .map((v: Version) => v.name);
-  const ghspaScript = generateGithubSpaScript(redirectVersions);
+  const ghspaScript = generateGithubSpaScript(versions);
 
   return Promise.all(versions.map((version: Version) => {
     const versionDistDir = version.isCurrent
