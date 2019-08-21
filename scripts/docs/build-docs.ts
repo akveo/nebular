@@ -10,15 +10,11 @@ const WORK_DIR = join(process.cwd(), '../_DOCS_BUILD_WORK_DIR_');
 const MASTER_BRANCH_DIR = join(WORK_DIR, 'MASTER');
 const DOCS_VERSIONS_PATH = join(MASTER_BRANCH_DIR, 'docs/versions.json');
 
-interface VersionsConfig {
-  currentVersionName: string;
-  versions: Version[];
-}
-
 interface Version {
   checkoutTarget: string;
   name: string;
   path: string;
+  isCurrent?: boolean;
 }
 
 (async function () {
@@ -34,7 +30,7 @@ interface Version {
   await runCommand(`git clone ${REPO_URL} ${MASTER_BRANCH_DIR}`, { cwd: WORK_DIR });
 
   log('Reading versions configuration');
-  const config: VersionsConfig = await import(DOCS_VERSIONS_PATH);
+  const config: Version[] = await import(DOCS_VERSIONS_PATH);
   log(`Versions configuration:`);
   const jsonConfig = JSON.stringify(config, null, '  ');
   log(jsonConfig);
@@ -52,15 +48,14 @@ interface Version {
   await remove(WORK_DIR);
 }());
 
-async function buildDocs(config: VersionsConfig) {
-  const currentVersion = config.versions.find((v: Version) => v.name === config.currentVersionName);
-  const redirectVersions = config.versions
-    .filter((v: Version) => v !== currentVersion)
+async function buildDocs(versions: Version[]) {
+  const redirectVersions = versions
+    .filter((v: Version) => !v.isCurrent)
     .map((v: Version) => v.name);
   const ghspaScript = generateGithubSpaScript(redirectVersions);
 
-  return Promise.all(config.versions.map((version: Version) => {
-    const versionDistDir = version === currentVersion
+  return Promise.all(versions.map((version: Version) => {
+    const versionDistDir = version.isCurrent
       ? OUT_DIR
       : join(OUT_DIR, version.name);
 
