@@ -1,22 +1,20 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { map, shareReplay } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { map, shareReplay, catchError } from 'rxjs/operators';
 
 import { environment } from '../../../environments/environment';
-
-const PACKAGE_JSON_VERSION = require('../../../../package.json').version;
-
-export interface VersionsConfig {
-  currentVersionName: string;
-  versions: Version[];
-}
 
 export interface Version {
   checkoutTarget: string;
   name: string;
   path: string;
+  isCurrent?: boolean;
 }
+
+const currentVersionPredicate = environment.production
+  ? (version: Version) => version.name === require('../../../../package.json').versionName
+  : (version: Version) => version.isCurrent;
 
 @Injectable()
 export class NgdVersionService {
@@ -24,9 +22,9 @@ export class NgdVersionService {
   supportedVersions$: Observable<Version[]>;
 
   constructor(private http: HttpClient) {
-    this.supportedVersions$ = this.http.get<VersionsConfig>(environment.versionsUrl)
+    this.supportedVersions$ = this.http.get<Version[]>(environment.versionsUrl)
       .pipe(
-        map((config: VersionsConfig) => config.versions),
+        catchError(() => of([])),
         shareReplay(1),
       );
   }
@@ -34,7 +32,7 @@ export class NgdVersionService {
   getCurrentVersion(): Observable<Version> {
     return this.supportedVersions$
       .pipe(
-        map((versions: Version[]) => versions.find(v => v.name === PACKAGE_JSON_VERSION)),
+        map((versions: Version[]) => versions.find(currentVersionPredicate)),
       );
   }
 
