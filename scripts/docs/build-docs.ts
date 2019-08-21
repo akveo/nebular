@@ -65,9 +65,7 @@ async function buildDocs(config: VersionsConfig) {
       : join(OUT_DIR, version.name);
 
     return prepareVersion(version, versionDistDir, ghspaScript);
-  }))
-    // rethrow error so it becomes the last log entry
-    .catch(e => { throw e; });
+  }));
 }
 
 async function prepareVersion(version: Version, distDir: string, ghspaScript: string) {
