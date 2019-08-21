@@ -84,7 +84,29 @@ In the build mode documentation and runnable examples are built in TWO separate 
 and `docs/dist/run` for the examples. This is done so that we can reference an example in an iframe avoiding "same page iframe policy" which won't allow
 us to load the same page in the iframe on that page (and different pages starting only differentiated by `#something` are considered as one page in some
 browsers. 
-      
+
+## Docs deploy
+Each PR merge to the master branch triggers docs apps rebuild and deploy (deploy_docs mode in Travis).
+You can find the script at `scripts/docs/build-docs.ts`. There is also `scripts/docs/config.ts` with configuration options for repository settings.
+Script uses `docs/versions.json` file to determine versions to build.
+To add new version add an entry with following fields to the array:
+```json
+{
+  "checkoutTarget": "<commit | tag | branch>",
+  "name": "<version name>",
+  "path": "/path/to/the/version/directory/",
+  "isCurrent": "boolean | undefined"
+}
+```
+
+`checkoutTarget` passed directly to the `git checkout` command, so it could be anything `checkout` command supports.
+
+`name` will be shown in the versions select of the docs app.
+
+`path` used as a base href when building the docs app and as a redirect URL when selecting the version from version select.
+
+`isCurrent` version you see by default when navigating to the Nebular docs. Must be set for the single version only.
+
       
 ## Auth // TODO      
 
