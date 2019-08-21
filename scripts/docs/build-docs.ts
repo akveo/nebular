@@ -31,6 +31,8 @@ interface Version {
 
   log('Reading versions configuration');
   const config: Version[] = await import(DOCS_VERSIONS_PATH);
+  ensureSingleCurrentVersion(config);
+
   log(`Versions configuration:`);
   const jsonConfig = JSON.stringify(config, null, '  ');
   log(jsonConfig);
@@ -47,6 +49,13 @@ interface Version {
   log(`Cleaning up working directory (${WORK_DIR})`);
   await remove(WORK_DIR);
 }());
+
+function ensureSingleCurrentVersion(versions: Version[]) {
+  const currentVersion = versions.filter(v => v.isCurrent);
+  if (currentVersion.length !== 1) {
+    throw new Error(`Versions config error: Only one current version allowed.`)
+  }
+}
 
 async function buildDocs(versions: Version[]) {
   const redirectVersions = versions
