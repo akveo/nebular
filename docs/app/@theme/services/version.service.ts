@@ -12,6 +12,13 @@ export interface Version {
   isCurrent?: boolean;
 }
 
+/*
+  In production we run multiple versions of docs apps and all of them load single versions.json config.
+  To help determine which version entry from the config is associated with a currently running app, docs build script
+  adds `versionName` to the package.json and sets it to name of version associated with this app.
+  When running docs locally we could just find version with `isCurrent` flag as it would always refer to the
+  version associated with a current revision.
+*/
 const currentVersionPredicate = environment.production
   ? (version: Version) => version.name === require('../../../../package.json').versionName
   : (version: Version) => version.isCurrent;
