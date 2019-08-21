@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { map, shareReplay } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { map, shareReplay, catchError } from 'rxjs/operators';
 
 import { environment } from '../../../environments/environment';
 
@@ -27,6 +27,7 @@ export class NgdVersionService {
     this.supportedVersions$ = this.http.get<VersionsConfig>(environment.versionsUrl)
       .pipe(
         map((config: VersionsConfig) => config.versions),
+        catchError(() => of([])),
         shareReplay(1),
       );
   }
