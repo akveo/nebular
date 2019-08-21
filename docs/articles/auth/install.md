@@ -127,10 +127,10 @@ export const routes: Routes = [
 
 ## Enable Styles
 
-Last but not least - install the component styles into your styles.scss ([more details](docs/design-system/enable-customizable-themes)):
+Last but not least - install the component styles into your styles.scss ([more details](docs/design-system/enable-customizable-theme)):
 
 ```scss
-@import '~@nebular/auth/styles/all'; // or @import '~@nebular/auth/styles/theme/{theme-name}';
+@import '~@nebular/auth/styles/globals';
 
 // ... 
 
@@ -139,13 +139,6 @@ Last but not least - install the component styles into your styles.scss ([more d
   @include nb-auth-global(); // append the install mixin inside of the nb-install
 };
 
-```
-
-`@import '~@nebular/auth/styles/all'` means import auth styles for all themes (default, dark, corporate, cosmic). If you have only one or portion of themes enabled, then you need to import auth styles only for enabled themes. For example, when only default and corporate themes enabled, auth imports should look like this:
-```scss
-@import '~@nebular/auth/styles/themes/default';
-@import '~@nebular/auth/styles/themes/corporate';
-@import '~@nebular/auth/styles/globals';
 ```
 
 At this point, if you navigate to http://localhost:4200/#/auth/login the login form is shown.
