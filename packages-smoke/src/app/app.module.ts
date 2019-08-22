@@ -8,6 +8,7 @@ import { NbAuthModule } from '@nebular/auth';
 import { NbSecurityModule } from '@nebular/security';
 import { NbMomentDateModule } from '@nebular/moment';
 import { NbDateFnsDateModule } from '@nebular/date-fns';
+import { NbEvaIconsModule } from '@nebular/eva-icons';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { NbDateFnsDateModule } from '@nebular/date-fns';
     NbSecurityModule.forRoot(),
     NbMomentDateModule,
     NbDateFnsDateModule,
+    NbEvaIconsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

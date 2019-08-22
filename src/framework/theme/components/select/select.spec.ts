@@ -606,6 +606,32 @@ describe('Component: NbSelectComponent', () => {
     expect(selectComponent.hostWidth).not.toEqual(selectElement.offsetWidth);
     expect(selectComponent.hostWidth).toEqual(buttonElement.offsetWidth);
   });
+
+  it('should not open when disabled and button clicked', fakeAsync(() => {
+    const selectFixture = TestBed.createComponent(NbSelectComponent);
+    selectFixture.componentInstance.disabled = true;
+    selectFixture.detectChanges();
+    const selectButton: HTMLElement = selectFixture.debugElement.query(By.css('button')).nativeElement;
+
+    selectButton.click();
+    flush();
+    fixture.detectChanges();
+
+    expect(selectFixture.componentInstance.isOpen).toBeFalsy();
+  }));
+
+  it('should not open when disabled and toggle icon clicked', fakeAsync(() => {
+    const selectFixture = TestBed.createComponent(NbSelectComponent);
+    selectFixture.componentInstance.disabled = true;
+    selectFixture.detectChanges();
+    const selectToggleIcon: HTMLElement = selectFixture.debugElement.query(By.css('nb-icon')).nativeElement;
+
+    selectToggleIcon.click();
+    flush();
+    fixture.detectChanges();
+
+    expect(selectFixture.componentInstance.isOpen).toBeFalsy();
+  }));
 });
 
 describe('NbSelectComponent - falsy values', () => {
