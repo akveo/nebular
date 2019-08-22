@@ -138,6 +138,17 @@ export const structure = [
       },
       {
         type: 'page',
+        name: 'Typography',
+        children: [
+          {
+            type: 'block',
+            block: 'markdown',
+            source: 'design-system/typography.md',
+          },
+        ],
+      },
+      {
+        type: 'page',
         name: 'Enable Customizable Theme',
         children: [
           {
