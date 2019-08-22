@@ -1,9 +1,0 @@
-@mixin <%= selector %>-theme() {
-  <%= selector %> {
-    font-family: nb-theme(<%= dasherize(name) %>-font-family);
-    font-size: nb-theme(<%= dasherize(name) %>-font-size);
-    font-weight: nb-theme(<%= dasherize(name) %>-font-weight);
-    background: nb-theme(<%= dasherize(name) %>-bg);
-    color: nb-theme(<%= dasherize(name) %>-fg);
-  }
-}
