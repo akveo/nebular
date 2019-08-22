@@ -18,6 +18,7 @@ source ./scripts/ci/tunnel.sh
 source ./scripts/ci/publish.sh
 source ./scripts/ci/deploy.sh
 source ./scripts/ci/packages-smoke.sh
+source ./scripts/ci/deploy-docs.sh
 
 if [[ -z "$TRAVIS" ]]; then
   echo "This script can only run inside of Travis build jobs."
@@ -31,9 +32,7 @@ elif [[ "${MODE}" = deploy_dev ]]; then
 elif [[ "${MODE}" = publish_dev ]]; then
   publish_dev
 elif [[ "${MODE}" = deploy_docs ]]; then
-  if [[ "$TRAVIS_PULL_REQUEST" = "false" ]]; then
-    npm run docs:gh-pages
-  fi
+  deploy_docs
   exit 0
 fi
 
