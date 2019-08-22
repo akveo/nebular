@@ -84,7 +84,29 @@ In the build mode documentation and runnable examples are built in TWO separate 
 and `docs/dist/run` for the examples. This is done so that we can reference an example in an iframe avoiding "same page iframe policy" which won't allow
 us to load the same page in the iframe on that page (and different pages starting only differentiated by `#something` are considered as one page in some
 browsers. 
-      
+
+## Docs deploy
+Each PR merge to the master branch triggers docs apps rebuild and deploy (deploy_docs mode in Travis).
+You can find the script at `scripts/docs/build-docs.ts`. There is also `scripts/docs/config.ts` with configuration options for repository settings.
+Script uses `docs/versions.json` file to determine versions to build.
+To add new version add an entry with following fields to the array:
+```json
+{
+  "checkoutTarget": "<commit | tag | branch>",
+  "name": "<version name>",
+  "path": "/path/to/the/version/directory/",
+  "isCurrent": "boolean | undefined"
+}
+```
+
+`checkoutTarget` passed directly to the `git checkout` command, so it could be anything `checkout` command supports.
+
+`name` will be shown in the versions select of the docs app.
+
+`path` used as a base href when building the docs app and as a redirect URL when selecting the version from version select.
+
+`isCurrent` version you see by default when navigating to the Nebular docs. Must be set for the single version only.
+
       
 ## Auth // TODO      
 
@@ -349,10 +371,24 @@ To give the user capability switch between live and inline representation of the
 
 # Release
 
-0. For major version, search for `@breaking-change` to make sure all breaking changes are covered.
-
 To start a new release (publish the framework packages on NPM) you need:
 
+0. For major version release:
+    - search for `@breaking-change` to make sure all breaking changes are covered.
+    - create and push new LTS branch:
+        ```
+          git checkout master
+          git pull upstream master
+          git checkout -b <branch-name>
+          git push -u upstream <branch-name>
+        ```
+      `<branch-name>` should be named according to `<major>.<minor>.x` pattern. For example, if 4.6.3 becomes LTS, branch name should be `4.6.x`
+
+    - add LTS tag to packages version which becomes LTS.
+        ```
+          npm dist-tag add @nebular/theme@<version> <tag>
+        ```
+      Where `<version>` is version of package becoming LTS and `<tag>` is `v<major-version>-lts`. For example, when 4.6.3 becomes LTS, command would be: `npm dist-tag add @nebular/theme@4.6.3 v4-lts`
 1. create a new release branch called `release:v1.0.2`
 2. `npm run release:validate` - this will create ready for publishing packages in src/.lib then build prod & AOT builds of the playground app using prepared packages and then run e2e tests again it.
 3. MANUALLY update a version in main ./package.json to a new one
@@ -360,41 +396,23 @@ To start a new release (publish the framework packages on NPM) you need:
   * `npm run update-packages-smoke-lock` to update `packages-smoke/package-lock.json` 
   * `npm run version:bump`
   * update version in `package-lock.json` and `packages-smoke/package-lock.json`
-  * update `docs/versions.json`:
-    - When releasing minor/patch update (both LTS and current):
-      - Replace latest current or LTS version in `version.json` with currently released
-    - When releasing major update:
-      - Replace LTS version with latest mentioned in version.json
-      - Add currently released version
-    - `path` of the current version should be set to `/nebular`, others to `/nebular/<version-name>`
-  * update `versions` array in `docs/assets/ghspa.js`. It should include all versions from `docs/versions.json` except currently released (latest).
+  * when releasing current version (PR to master) also update [docs/versions.json](#docs-deploy):
+    - Update current version to version above to release
+    - For major update:
+      - Update LTS version entry to version became LTS
 5. 
   * `npm run version:changelog`
   * fix/expand changelog manually
 6. push the branch, create PR, approve - merge
-7. pull the upstream (master or other version branch (e.g. 3.6.0, next))   
-8. If publishing LTS release add `--tag=v<version>-lts` (for example `v3-lts`) to publish command in `scripts/publish.sh:7`
-9. In case of beta, rc or any other unstable release add `--tag=next` to publish command in `scripts/publish.sh:7`
-10. `npm run release` - run prepare & validate and finally publish the packages to NPM
-11. create and push git tag
+7. pull the upstream (master or other version branch (e.g. 3.6.x))
+8. Create and push version git tag (`v<version>`, e.g. `v4.1.2`). When PR was made to the master branch, you need to create it right off, before the docs build script on CI clone the repo.
+9. If publishing LTS release add `--tag=v<major-version>-lts` (for example `v3-lts`) to publish command in `scripts/publish.sh:7`
+10. In case of beta, rc or any other unstable release add `--tag=next` to publish command in `scripts/publish.sh:7`
+11. `npm run release` - run prepare & validate and finally publish the packages to NPM
 12. create release on github
-13. publish docs
-    1. Build docs for currently released version
-    2. Copy `docs/dist` outside of `nebular/docs` directory
-    3. Loop over other versions mentioned in `docs/versions.json`:
-        1. Run `git checkout <version tag>`
-        2. Run `npm ci`
-        3. Run `npm run docs:prepare`
-        4. Run `npm run build -- docs --prod --base-href '/nebular/<version>/'` (for example `--base-href '/nebular/3.6.1/'`)
-        5. Run `npm run docs:dirs`.
-        6. Rename `docs/dist` to `docs/<version>`.
-        7. Copy renamed folder to the directory from step `13.2`.
-    4. Checkout current version
-    5. Run `npm install`
-    6. Remove `docs/dist`
-    7. Move resulting directory from step `13.2` to 'docs/dist'.
-    8. Run `npm run ngh -- --dir ./docs/dist`
-14. add release notes to [Nebular Releases](https://github.com/akveo/nebular/issues/1204)
+13. add release notes to [Nebular Releases](https://github.com/akveo/nebular/issues/1204)
+14. For LTS release:
+    - create PR to master to update LTS entry in [docs/versions.json](#docs-deploy) to deploy LTS docs.
 
 #ngx-admin development on the latest Nebular sources
 
