@@ -26,7 +26,7 @@ import { NbComponentStatus } from '../component-status';
 import { convertToBoolProperty } from '../helpers';
 
 /**
- * Styled toggle component
+ * Toggle is a control representing `on` and `off` states.
  *
  * @stacked-example(Showcase, toggle/toggle-showcase.component)
  *
@@ -48,7 +48,7 @@ import { convertToBoolProperty } from '../helpers';
  *
  * @stacked-example(Colored Toggles, toggle/toggle-status.component)
  *
- * You can disable toggle
+ * Toggle can be disabled via `disabled` input.
  *
  * @stacked-example(Disabled Toggles, toggle/toggle-disabled.component)
  *
@@ -56,13 +56,13 @@ import { convertToBoolProperty } from '../helpers';
  *
  * @stacked-example(Toggles With Labels, toggle/toggle-label-position.component.ts)
  *
- * You can set checked state via `checked` binding:
+ * You can set control state via `checked` binding:
  *
  * ```html
  * <nb-toggle [(checked)]="checked"></nb-toggle>
  * ```
  *
- * Or you can set control value via reactive forms or ngModel bindings:
+ * Or it could be set via reactive forms or ngModel bindings:
  *
  * @stacked-example(Toggle form binding, toggle/toggle-form.component)
  *
