@@ -9,7 +9,7 @@ import {
 
 import { NbRenderableContainer } from '../overlay-container';
 import { createContainer, NbOverlayContent, NbOverlayService, patch } from '../overlay-service';
-import { NbOverlayRef } from '../mapping';
+import { NbOverlayRef, NbOverlayContainer } from '../mapping';
 
 export interface NbDynamicOverlayController {
   show();
@@ -36,9 +36,10 @@ export class NbDynamicOverlay {
   }
 
   constructor(
-    private overlay: NbOverlayService,
-    private componentFactoryResolver: ComponentFactoryResolver,
-    private zone: NgZone) {
+    protected overlay: NbOverlayService,
+    protected componentFactoryResolver: ComponentFactoryResolver,
+    protected zone: NgZone,
+    protected overlayContainer: NbOverlayContainer) {
   }
 
   create(componentType: Type<NbRenderableContainer>,
@@ -113,6 +114,12 @@ export class NbDynamicOverlay {
     }
 
     this.renderContainer();
+
+    if (!this.hasOverlayInContainer()) {
+      // Dispose overlay ref as it refers to the old overlay container and create new by calling `show`
+      this.disposeOverlayRef();
+      return this.show();
+    }
   }
 
   hide() {
@@ -135,10 +142,7 @@ export class NbDynamicOverlay {
   dispose() {
     this.alive = false;
     this.hide();
-    if (this.ref) {
-      this.ref.dispose();
-      this.ref = null;
-    }
+    this.disposeOverlayRef();
   }
 
   getContainer() {
@@ -186,5 +190,17 @@ export class NbDynamicOverlay {
       .subscribe(() => {
         this.ref && this.ref.updatePosition();
       });
+  }
+
+  protected hasOverlayInContainer(): boolean {
+    return this.overlayContainer.getContainerElement().contains(this.ref.hostElement);
+  }
+
+  protected disposeOverlayRef() {
+    if (this.ref) {
+      this.ref.dispose();
+      this.ref = null;
+      this.container = null;
+    }
   }
 }
