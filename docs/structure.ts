@@ -893,6 +893,17 @@ export const structure = [
       },
       {
         type: 'page',
+        name: 'Backend API endpoints',
+        children: [
+          {
+            type: 'block',
+            block: 'markdown',
+            source: 'auth/backend-api.md',
+          },
+        ],
+      },
+      {
+        type: 'page',
         name: 'NbAuthService',
         children: [
           {
