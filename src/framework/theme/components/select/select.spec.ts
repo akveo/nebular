@@ -565,33 +565,6 @@ describe('Component: NbSelectComponent', () => {
     expect(optionSelectSpy).toHaveBeenCalledTimes(1);
   }));
 
-  it('should mark touched when select button loose focus and select closed', fakeAsync(() => {
-    const touchedSpy = jasmine.createSpy('touched spy');
-
-    const selectFixture = TestBed.createComponent(NbSelectComponent);
-    const selectComponent: NbSelectComponent<any> = selectFixture.componentInstance;
-    selectFixture.detectChanges();
-    flush();
-
-    selectComponent.registerOnTouched(touchedSpy);
-    selectFixture.debugElement.query(By.css('.select-button')).triggerEventHandler('blur', {});
-    expect(touchedSpy).toHaveBeenCalledTimes(1);
-  }));
-
-  it('should not mark touched when select button loose focus and select open', fakeAsync(() => {
-    const touchedSpy = jasmine.createSpy('touched spy');
-
-    const selectFixture = TestBed.createComponent(NbSelectComponent);
-    const selectComponent: NbSelectComponent<any> = selectFixture.componentInstance;
-    selectFixture.detectChanges();
-    flush();
-
-    selectComponent.registerOnTouched(touchedSpy);
-    selectComponent.show();
-    selectFixture.debugElement.query(By.css('.select-button')).triggerEventHandler('blur', {});
-    expect(touchedSpy).not.toHaveBeenCalled();
-  }));
-
   it('should unselect previously selected option', fakeAsync(() => {
     const selectFixture = TestBed.createComponent(NbSelectTestComponent);
     const testSelectComponent = selectFixture.componentInstance;
@@ -679,6 +652,33 @@ describe('Component: NbSelectComponent', () => {
     fixture.detectChanges();
 
     expect(selectFixture.componentInstance.isOpen).toBeFalsy();
+  }));
+
+  it('should mark touched when select button loose focus and select closed', fakeAsync(() => {
+    const touchedSpy = jasmine.createSpy('touched spy');
+
+    const selectFixture = TestBed.createComponent(NbSelectComponent);
+    const selectComponent: NbSelectComponent<any> = selectFixture.componentInstance;
+    selectFixture.detectChanges();
+    flush();
+
+    selectComponent.registerOnTouched(touchedSpy);
+    selectFixture.debugElement.query(By.css('.select-button')).triggerEventHandler('blur', {});
+    expect(touchedSpy).toHaveBeenCalledTimes(1);
+  }));
+
+  it('should not mark touched when select button loose focus and select open', fakeAsync(() => {
+    const touchedSpy = jasmine.createSpy('touched spy');
+
+    const selectFixture = TestBed.createComponent(NbSelectComponent);
+    const selectComponent: NbSelectComponent<any> = selectFixture.componentInstance;
+    selectFixture.detectChanges();
+    flush();
+
+    selectComponent.registerOnTouched(touchedSpy);
+    selectComponent.show();
+    selectFixture.debugElement.query(By.css('.select-button')).triggerEventHandler('blur', {});
+    expect(touchedSpy).not.toHaveBeenCalled();
   }));
 });
 
