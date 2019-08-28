@@ -129,4 +129,13 @@ describe('NbIconComponent', () => {
 
     expect(iconComponent.options).toEqual(iconConfig.options);
   });
+
+  it('should do nothing when falsy value passed as a config', () => {
+    const iconComponent: NbIconComponent = TestBed.createComponent(NbIconComponent).componentInstance;
+    const config: NbIconConfig = { icon: 'icon', pack: 'pack', status: 'danger', options: { opt: 'opt' } };
+    iconComponent.config = config;
+
+    iconComponent.config = null;
+    expect(iconComponent.config).toEqual(config);
+  });
 });
