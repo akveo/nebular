@@ -54,6 +54,11 @@ export class NbMenuItem {
    */
   icon?: string;
   /**
+   * Icon pack name
+   * @type {string}
+   */
+  iconPack?: string;
+  /**
    * Expanded by default
    * @type {boolean}
    */
