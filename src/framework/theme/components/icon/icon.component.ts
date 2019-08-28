@@ -19,6 +19,13 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { NbComponentStatus } from '../component-status';
 import { NbIconLibraries } from './icon-libraries';
 
+export interface NbIconConfig {
+  icon: string;
+  pack?: string;
+  status?: NbComponentStatus;
+  options?: { [name: string]: any };
+}
+
 /**
  * Icon component. Allows to render both `svg` and `font` icons.
  * Starting from Nebular 4.0 uses [Eva Icons](https://akveo.github.io/eva-icons/) pack by default.
@@ -102,7 +109,7 @@ import { NbIconLibraries } from './icon-libraries';
   template: '',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NbIconComponent implements OnChanges, OnInit {
+export class NbIconComponent implements NbIconConfig, OnChanges, OnInit {
 
   protected iconDef;
   protected prevClasses = [];
@@ -158,6 +165,33 @@ export class NbIconComponent implements OnChanges, OnInit {
    * `primary`, `info`, `success`, `warning`, `danger`
    */
   @Input() status: NbComponentStatus;
+
+  /**
+   * Sets all icon configurable properties via config object.
+   * If passed value is a string set icon name.
+   * @docs-private
+   */
+  @Input()
+  get config(): string | NbIconConfig {
+    return this._config;
+  }
+  set config(value: string | NbIconConfig) {
+    this._config = value;
+
+    if (!value) {
+      return;
+    }
+
+    if (typeof value === 'string') {
+      this.icon = value;
+    } else {
+      this.icon = value.icon;
+      this.pack = value.pack;
+      this.status = value.status;
+      this.options = value.options;
+    }
+  }
+  protected _config: string | NbIconConfig;
 
   constructor(
     protected sanitizer: DomSanitizer,
