@@ -176,11 +176,11 @@ export class NbIconComponent implements NbIconConfig, OnChanges, OnInit {
     return this._config;
   }
   set config(value: string | NbIconConfig) {
-    this._config = value;
-
     if (!value) {
       return;
     }
+
+    this._config = value;
 
     if (typeof value === 'string') {
       this.icon = value;
