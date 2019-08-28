@@ -5,7 +5,7 @@
  */
 
 import { NbFontIcon, NbSvgIcon } from './icon';
-import { TestBed, ComponentFixture } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import { NbIconModule, NbIconComponent, NbIconConfig } from '@nebular/theme';
 
 
