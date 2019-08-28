@@ -100,6 +100,7 @@ function createTestBed(routes: Routes = []) {
 
   const iconLibs: NbIconLibraries = TestBed.get(NbIconLibraries);
   iconLibs.registerSvgPack('test', { 'some-icon': '<svg>some-icon</svg>' });
+  iconLibs.registerSvgPack('other', { 'some-icon': '<svg>other-icon</svg>' });
   iconLibs.setDefaultPack('test')
 }
 
@@ -142,6 +143,12 @@ describe('NbMenuItem', () => {
     const { fixture } = createSingleMenuComponent([{ title: 'Home', icon: 'some-icon' }]);
     const iconWrapper = fixture.nativeElement.querySelector('.menu-icon');
     expect(iconWrapper.textContent).toContain('some-icon');
+  });
+
+  it('should set icon with specified pack to menu item', () => {
+    const { fixture } = createSingleMenuComponent([{ title: 'Home', icon: 'some-icon', iconPack: 'other' }]);
+    const iconWrapper = fixture.nativeElement.querySelector('.menu-icon');
+    expect(iconWrapper.textContent).toContain('other-icon');
   });
 
   it('should set title to menu item', () => {
