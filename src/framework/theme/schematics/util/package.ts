@@ -83,6 +83,23 @@ export function addDependencyToPackageJson(tree: Tree, packageName: string, pack
   writeJSON(tree, packageJsonName, packageJson);
 }
 
+/**
+ * Gets the version of the specified dev dependency by looking at the package.json in the specified tree
+ * */
+export function getDevDependencyVersionFromPackageJson(tree: Tree, packageName: string): string {
+  if (!tree.exists(packageJsonName)) {
+    throwNoPackageJsonError();
+  }
+
+  const packageJson: PackageJson = readJSON(tree, packageJsonName);
+
+  if (noInfoAboutDependency(packageJson, packageName)) {
+    throwNoPackageInfoInPackageJson(packageName);
+  }
+
+  return packageJson.devDependencies[packageName];
+}
+
 export function addDevDependencyToPackageJson(tree: Tree, packageName: string, packageVersion: string) {
   if (!tree.exists(packageJsonName)) {
     throwNoPackageJsonError();
