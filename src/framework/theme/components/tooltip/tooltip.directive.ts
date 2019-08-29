@@ -12,6 +12,7 @@ import { NbTrigger } from '../cdk/overlay/overlay-trigger';
 import { NbDynamicOverlay } from '../cdk/overlay/dynamic/dynamic-overlay';
 import { NbDynamicOverlayHandler } from '../cdk/overlay/dynamic/dynamic-overlay-handler';
 import { NbTooltipComponent } from './tooltip.component';
+import { NbIconConfig } from '../icon/icon.component';
 
 /**
  *
@@ -81,11 +82,11 @@ export class NbTooltipDirective implements OnInit, OnChanges, AfterViewInit, OnD
   adjustment: NbAdjustment = NbAdjustment.CLOCKWISE;
 
   /**
-   *
-   * @param {string} icon
+   * Accepts icon name or icon config object
+   * @param {string | NbIconConfig} icon name or config object
    */
   @Input('nbTooltipIcon')
-  set icon(icon: string) {
+  set icon(icon: string | NbIconConfig) {
     this.context = Object.assign(this.context, {icon});
   }
 
