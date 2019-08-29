@@ -1,3 +1,21 @@
+<a name="4.2.0"></a>
+# [4.2.0](https://github.com/akveo/nebular/compare/v4.1.3...v4.2.0) (2019-08-22)
+
+
+### Bug Fixes
+
+* **dynamic overlay:** recreate overlay when overlay container change ([#1913](https://github.com/akveo/nebular/issues/1913)) ([258b75b](https://github.com/akveo/nebular/commit/258b75b))
+* **packages smoke:** update webdriver-manager ([#1881](https://github.com/akveo/nebular/issues/1881)) ([e6c4966](https://github.com/akveo/nebular/commit/e6c4966))
+* **popover:** add missing start and end positions to positions mapping ([#1904](https://github.com/akveo/nebular/issues/1904)) ([64777a4](https://github.com/akveo/nebular/commit/64777a4))
+
+
+### Features
+
+* **packages smoke:** add Eva icons package ([#1903](https://github.com/akveo/nebular/issues/1903)) ([8c0683b](https://github.com/akveo/nebular/commit/8c0683b))
+* **toggle:** add toggle component ([#1304](https://github.com/akveo/nebular/issues/1304)) ([d86edce](https://github.com/akveo/nebular/commit/d86edce))
+
+
+
 <a name="4.1.3"></a>
 ## [4.1.3](https://github.com/akveo/nebular/compare/v4.1.2...v4.1.3) (2019-07-29)
 
