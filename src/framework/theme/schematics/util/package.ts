@@ -93,7 +93,7 @@ export function getDevDependencyVersionFromPackageJson(tree: Tree, packageName: 
 
   const packageJson: PackageJson = readJSON(tree, packageJsonName);
 
-  if (noInfoAboutDependency(packageJson, packageName)) {
+  if (noInfoAboutDevDependency(packageJson, packageName)) {
     throwNoPackageInfoInPackageJson(packageName);
   }
 
@@ -135,6 +135,13 @@ function noInfoAboutDependency(packageJson: PackageJson, packageName: string): b
 }
 
 /**
+ * Validates packageJson has devDependencies, also as specified devDependency not exists.
+ * */
+function noInfoAboutDevDependency(packageJson: PackageJson, packageName: string): boolean {
+  return !devDependencyAlreadyExists(packageJson, packageName);
+}
+
+/**
  * Validates packageJson has peerDependencies, also as specified peerDependency not exists.
  * */
 function noInfoAboutPeerDependency(packageJson: PackageJson, packageName: string): boolean {
@@ -146,6 +153,13 @@ function noInfoAboutPeerDependency(packageJson: PackageJson, packageName: string
  * */
 function dependencyAlreadyExists(packageJson: PackageJson, packageName: string): boolean {
   return !!(packageJson.dependencies && packageJson.dependencies[packageName]);
+}
+
+/**
+ * Validates packageJson has devDependencies, also as specified devDependency exists.
+ * */
+function devDependencyAlreadyExists(packageJson: PackageJson, packageName: string): boolean {
+  return !!(packageJson.devDependencies && packageJson.devDependencies[packageName]);
 }
 
 /**
