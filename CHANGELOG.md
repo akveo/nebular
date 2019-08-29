@@ -1,3 +1,26 @@
+<a name="4.2.1"></a>
+## [4.2.1](https://github.com/akveo/nebular/compare/v4.2.0...v4.2.1) (2019-08-29)
+
+
+### Bug Fixes
+
+* **ci:** prevent travis from killing deploy docs job ([#1928](https://github.com/akveo/nebular/issues/1928)) ([0b969cb](https://github.com/akveo/nebular/commit/0b969cb))
+* **datepicker:** add missing show header input ([#1889](https://github.com/akveo/nebular/issues/1889)) ([d265991](https://github.com/akveo/nebular/commit/d265991))
+* **schematics:** use cli version for schematics/angular package ([#1937](https://github.com/akveo/nebular/issues/1937)) ([4589726](https://github.com/akveo/nebular/commit/4589726))
+* **select:** allow initial falsy values ([#1936](https://github.com/akveo/nebular/issues/1936)) ([02080fb](https://github.com/akveo/nebular/commit/02080fb))
+* **select:** mark touched on hide trigger only when select is open ([#1878](https://github.com/akveo/nebular/issues/1878)) ([8295c32](https://github.com/akveo/nebular/commit/8295c32))
+* **toastr:** call contains on body ([#1872](https://github.com/akveo/nebular/issues/1872)) ([a01ec7a](https://github.com/akveo/nebular/commit/a01ec7a))
+* **tree grid:** assert node children is defined before spreading ([#1898](https://github.com/akveo/nebular/issues/1898)) ([26ad5d2](https://github.com/akveo/nebular/commit/26ad5d2))
+* **window:** create new window container when overlay container change ([#1867](https://github.com/akveo/nebular/issues/1867)) ([edb6b16](https://github.com/akveo/nebular/commit/edb6b16))
+
+
+### Features
+
+* accept icon config in components which use nb-icon ([#1935](https://github.com/akveo/nebular/issues/1935)) ([c9b9d32](https://github.com/akveo/nebular/commit/c9b9d32))
+* **auth**: add backend api endpoints article ([#1931](https://github.com/akveo/nebular/issues/1931)) ([905029f](https://github.com/akveo/nebular/commit/905029f))
+
+
+
 <a name="4.2.0"></a>
 # [4.2.0](https://github.com/akveo/nebular/compare/v4.1.3...v4.2.0) (2019-08-22)
 
