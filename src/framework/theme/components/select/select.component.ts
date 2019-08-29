@@ -699,7 +699,7 @@ export class NbSelectComponent<T> implements AfterViewInit, AfterContentInit, On
   }
 
   ngAfterContentInit() {
-    if (this.queue) {
+    if (this.queue != null) {
       // Call 'writeValue' when current change detection run is finished.
       // When writing is finished, change detection starts again, since
       // microtasks queue is empty.

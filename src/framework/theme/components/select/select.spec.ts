@@ -813,6 +813,19 @@ describe('NbSelectComponent - falsy values', () => {
       expect(testComponent.truthyOptionElement.nativeElement.querySelector('nb-checkbox')).not.toEqual(null);
     });
   });
+
+  it('should select initial falsy value', fakeAsync(() => {
+    fixture = TestBed.createComponent(NbSelectWithFalsyOptionValuesComponent);
+    testComponent = fixture.componentInstance;
+    select = fixture.debugElement.query(By.directive(NbSelectComponent)).componentInstance;
+
+    select.selected = '';
+    fixture.detectChanges();
+    flush();
+
+    expect(select.selectionModel[0]).toEqual(testComponent.emptyStringOption);
+    expect(testComponent.emptyStringOption.selected).toEqual(true);
+  }));
 });
 
 describe('NbSelectComponent - Triggers', () => {
