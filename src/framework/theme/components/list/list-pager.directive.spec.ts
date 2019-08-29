@@ -3,7 +3,7 @@ import { TestBed, ComponentFixture, fakeAsync, tick, ComponentFixtureAutoDetect 
 import { NbListModule } from './list.module';
 import { NbListComponent } from './list.component';
 
-function waitForSpyCall(spy: jasmine.Spy, checkInterval: number = 40, timeout: number = 500): Promise<any> {
+function waitForSpyCall(spy: jasmine.Spy, checkInterval: number = 40, timeout: number = 1000): Promise<any> {
   const initialCallsCount = spy.calls.count();
 
   return new Promise((resolve, reject) => {

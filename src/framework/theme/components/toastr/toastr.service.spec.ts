@@ -164,8 +164,10 @@ describe('toastr-container-registry', () => {
     documentStub = {
       _contains: true,
 
-      contains: () => {
-        return documentStub._contains;
+      body: {
+        contains: () => {
+          return documentStub._contains;
+        },
       },
     }
   });
