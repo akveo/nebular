@@ -10,6 +10,7 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 import { NbComponentStatus } from '../component-status';
 import { NbRenderableContainer } from '../cdk/overlay/overlay-container';
 import { NbPosition } from '../cdk/overlay/overlay-position';
+import { NbIconConfig } from '../icon/icon.component';
 
 
 /**
@@ -48,7 +49,7 @@ import { NbPosition } from '../cdk/overlay/overlay-position';
   template: `
     <span class="arrow"></span>
     <div class="content">
-      <nb-icon *ngIf="context?.icon" [icon]="context.icon"></nb-icon>
+      <nb-icon *ngIf="context?.icon" [config]="context.icon"></nb-icon>
       <span *ngIf="content">{{ content }}</span>
     </div>
   `,
@@ -87,7 +88,7 @@ export class NbTooltipComponent implements NbRenderableContainer {
   }
 
   @Input()
-  context: { icon?: string, status?: '' | NbComponentStatus } = {};
+  context: { icon?: string | NbIconConfig, status?: '' | NbComponentStatus } = {};
 
   get statusClass() {
     return this.context.status ? `status-${this.context.status}` : '';
