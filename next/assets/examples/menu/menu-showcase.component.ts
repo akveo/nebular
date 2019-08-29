@@ -20,7 +20,7 @@ export class MenuShowcaseComponent {
     },
     {
       title: 'Privacy Policy',
-      icon: 'checkmark-outline',
+      icon: { icon: 'checkmark-outline', pack: 'eva' },
       link: [],
     },
     {
