@@ -26,6 +26,10 @@ const routes: Route[] = [
         loadChildren: () => import('./alert/alert.module').then(m => m.AlertModule),
       },
       {
+        path: 'autocomplete',
+        loadChildren: './autocomplete/autocomplete.module#AutocompleteModule',
+      },
+      {
         path: 'badge',
         loadChildren: () => import('./badge/badge.module').then(m => m.BadgeModule),
       },

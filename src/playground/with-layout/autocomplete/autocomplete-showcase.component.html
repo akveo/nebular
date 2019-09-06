@@ -1,0 +1,22 @@
+
+<nb-card size="small">
+  <nb-card-body>
+
+    <input #autoInput
+      nbInput
+      type="text"
+      (input)="onChange($event)"
+      placeholder="Enter value"
+      size="tiny"
+      [nbAutocomplete]="auto" />
+
+    <nb-autocomplete #auto>
+
+      <nb-option *ngFor="let option of filteredOptions$ | async" [value]="option">
+        {{ option }}
+      </nb-option>
+
+    </nb-autocomplete>
+
+  </nb-card-body>
+</nb-card>
