@@ -14,7 +14,7 @@ import {
   HostListener,
   Inject,
   Input,
-  OnDestroy,
+  OnDestroy, Optional,
   Output,
 } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
@@ -72,7 +72,7 @@ export class NbOptionComponent<T> implements OnDestroy, NbFocusableOption {
   protected parent: NbSelectComponent<T>;
   protected alive: boolean = true;
 
-  constructor(@Inject(NB_SELECT_INJECTION_TOKEN) parent,
+  constructor(@Optional() @Inject(NB_SELECT_INJECTION_TOKEN) parent,
               protected elementRef: ElementRef,
               protected cd: ChangeDetectorRef) {
     this.parent = parent;
@@ -95,7 +95,9 @@ export class NbOptionComponent<T> implements OnDestroy, NbFocusableOption {
 
   @HostBinding('class.multiple')
   get multiple() {
-    return this.parent.multiple;
+    // We check parent existing because parent can be NbSelectComponent or
+    // NbAutocomplete and `miltiple` property exists only in NbSelectComponent
+    return this.parent ? (<NbSelectComponent<T>>this.parent).multiple : false;
   }
 
   @HostBinding('class.selected')
