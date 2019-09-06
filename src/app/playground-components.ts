@@ -113,6 +113,29 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
     ],
   },
   {
+    path: 'autocomplete',
+    children: [
+      {
+        path: 'autocomplete.component',
+        link: '/autocomplete/autocomplete.component',
+        component: 'AutocompleteShowcaseComponent',
+        name: 'Autocomplete Showcase',
+      },
+      {
+        path: 'autocomplete-datasource.component',
+        link: '/autocomplete/autocomplete-datasource.component',
+        component: 'AutocompleteDataSourceComponent',
+        name: 'Autocomplete Data Source',
+      },
+      {
+        path: 'autocomplete-form.component',
+        link: '/autocomplete/autocomplete-form.component',
+        component: 'AutocompleteFormComponent',
+        name: 'Autocomplete Form',
+      },
+    ],
+  },
+  {
     path: 'badge',
     children: [
       {
