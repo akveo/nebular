@@ -167,6 +167,8 @@ export * from './components/select/select.component';
 export * from './components/select/option.component';
 export * from './components/select/option-group.component';
 export * from './components/select/select-injection-tokens';
+export * from './components/autocomplete/autocomplete.module';
+export * from './components/autocomplete/autocomplete.component';
 export * from './components/window/window.module';
 export * from './components/window/window.service';
 export * from './components/window/window-ref';

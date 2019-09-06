@@ -2207,6 +2207,28 @@ $eva-mapping: (
   select-options-list-hero-danger-border-color: border-basic-color-4,
   select-options-list-hero-control-border-color: border-basic-color-4,
 
+  autocomplete-options-list-shadow: shadow,
+  autocomplete-options-list-border-style: solid,
+  autocomplete-options-list-border-width: 0,
+  autocomplete-option-background-color: background-basic-color-1,
+  autocomplete-options-list-max-height: 20rem,
+
+  autocomplete-text-font-family: text-subtitle-font-family,
+  autocomplete-text-font-weight: text-subtitle-font-weight,
+
+  autocomplete-option-text-color: text-basic-color,
+  autocomplete-option-selected-background-color: background-basic-color-1,
+  autocomplete-option-selected-text-color: text-primary-color,
+  autocomplete-option-focus-background-color: background-basic-color-1,
+  autocomplete-option-focus-text-color: text-primary-focus-color,
+  autocomplete-option-hover-background-color: background-basic-color-1,
+  autocomplete-option-hover-text-color: text-primary-hover-color,
+  autocomplete-option-disabled-background-color: background-basic-color-1,
+  autocomplete-option-disabled-text-color: text-disabled-color,
+
+  autocomplete-option-padding: 0.4375rem 1.125rem,
+  autocomplete-option-line-height: 1.5rem,
+
   datepicker-text-color: text-basic-color,
   datepicker-background-color: background-basic-color-1,
   datepicker-border-color: background-basic-color-1,
