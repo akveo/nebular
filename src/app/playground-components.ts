@@ -122,12 +122,6 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         name: 'Autocomplete Showcase',
       },
       {
-        path: 'autocomplete-datasource.component',
-        link: '/autocomplete/autocomplete-datasource.component',
-        component: 'AutocompleteDataSourceComponent',
-        name: 'Autocomplete Data Source',
-      },
-      {
         path: 'autocomplete-form.component',
         link: '/autocomplete/autocomplete-form.component',
         component: 'AutocompleteFormComponent',

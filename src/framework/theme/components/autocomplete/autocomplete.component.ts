@@ -14,7 +14,6 @@ import {
   ContentChildren,
   ElementRef,
   EventEmitter,
-  Input,
   OnDestroy,
   Output,
   QueryList,
@@ -44,22 +43,6 @@ import { ESCAPE } from '../cdk/keycodes/keycodes';
 export class NbAutocompleteComponent<T> implements OnDestroy, AfterViewInit {
 
   @ViewChild(NbPortalDirective, { static: false }) portal: NbPortalDirective;
-
-  protected dataSource: string[];
-
-  /**
-   * Data source passed as input property.
-   * */
-  @Input('data')
-  set setDataSource(value: string[]) {
-    this.dataSource = value;
-    this.filteredDataSource = value;
-  }
-
-  /**
-   * Filtered data source shown as options list.
-   * */
-  protected filteredDataSource: string[];
 
   protected alive: boolean = true;
 
@@ -107,17 +90,7 @@ export class NbAutocompleteComponent<T> implements OnDestroy, AfterViewInit {
   /**
     * List of `NbOptionComponent`'s components passed as content.
   * */
-  @ContentChildren(NbOptionComponent, { descendants: true }) contentOptions: QueryList<NbOptionComponent<T>>;
-
-  /**
-   * List of `NbOptionComponent`'s components passed as input property.
-   * */
-  @ViewChildren(NbOptionComponent) sourceOptions: QueryList<NbOptionComponent<T>>;
-
-  /**
-   * Result list of `NbOptionComponent`'s.
-   * */
-  options: QueryList<NbOptionComponent<T>>;
+  @ContentChildren(NbOptionComponent, { descendants: true }) options: QueryList<NbOptionComponent<T>>;
 
   constructor(
       protected cd: ChangeDetectorRef,
@@ -127,12 +100,6 @@ export class NbAutocompleteComponent<T> implements OnDestroy, AfterViewInit {
       protected focusKeyManagerFactoryService: NbFocusKeyManagerFactoryService<NbOptionComponent<T>>) {}
 
   ngAfterViewInit() {
-
-    if (this.dataSource) {
-      this.options = this.sourceOptions;
-    } else {
-      this.options = this.contentOptions;
-    }
 
     this.triggerStrategy = this.createTriggerStrategy();
     this.subscribeOnTriggers();
@@ -177,22 +144,7 @@ export class NbAutocompleteComponent<T> implements OnDestroy, AfterViewInit {
     this.hostRef = hostRef;
 
     fromEvent<Event>(hostRef.nativeElement, 'input').subscribe(res => {
-
       this.show();
-
-      /**
-       * Check and filter dataSource values if it's dataSource mode.
-       * */
-      if (this.dataSource) {
-        const currentValue = this.hostRef.nativeElement.value;
-        this.filteredDataSource = this.dataSource.filter(item =>
-          item
-            .toLowerCase()
-            .includes(currentValue.toLowerCase()) === true
-        );
-
-        this.cd.markForCheck();
-      }
     });
   }
 

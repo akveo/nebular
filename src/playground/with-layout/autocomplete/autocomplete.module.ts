@@ -11,18 +11,15 @@ import { NbSelectModule, NbInputModule } from '../../../framework/theme/public_a
 import { AutocompleteRoutingModule } from './autocomplete-routing.module';
 import { NbSharedModule } from '../../../framework/theme/components/shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
-import { AutocompleteDataSourceComponent } from './autocomplete-datasource.component';
 import { AutocompleteFormComponent } from './autocomplete-form.component';
 
 @NgModule({
   declarations: [
     AutocompleteShowcaseComponent,
-    AutocompleteDataSourceComponent,
     AutocompleteFormComponent,
   ],
   exports: [
     AutocompleteShowcaseComponent,
-    AutocompleteDataSourceComponent,
     AutocompleteFormComponent,
   ],
   imports: [

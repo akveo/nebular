@@ -7,17 +7,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Route} from '@angular/router';
 import { AutocompleteShowcaseComponent } from './autocomplete-showcase.component';
-import { AutocompleteDataSourceComponent } from './autocomplete-datasource.component';
 import { AutocompleteFormComponent } from './autocomplete-form.component';
 
 const routes: Route[] = [
   {
     path: 'autocomplete.component',
     component: AutocompleteShowcaseComponent,
-  },
-  {
-    path: 'autocomplete-datasource.component',
-    component: AutocompleteDataSourceComponent,
   },
   {
     path: 'autocomplete-form.component',
