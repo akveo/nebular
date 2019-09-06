@@ -18,7 +18,6 @@ import {
   Output,
   QueryList,
   ViewChild,
-  ViewChildren,
 } from '@angular/core';
 import {
   NbAdjustableConnectedPositionStrategy,
