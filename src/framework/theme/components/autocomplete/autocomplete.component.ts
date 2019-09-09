@@ -13,7 +13,7 @@ import {
   ComponentRef,
   ContentChildren,
   ElementRef,
-  EventEmitter, Input,
+  EventEmitter,
   OnDestroy,
   Output,
   QueryList,
