@@ -13,7 +13,7 @@ import {
   ComponentRef,
   ContentChildren,
   ElementRef,
-  EventEmitter,
+  EventEmitter, Input,
   OnDestroy,
   Output,
   QueryList,
@@ -30,8 +30,9 @@ import { NbOverlayService } from '../cdk/overlay/overlay-service';
 import { NbTrigger, NbTriggerStrategy, NbTriggerStrategyBuilderService } from '../cdk/overlay/overlay-trigger';
 import { NbOptionComponent } from '../select/option.component';
 import { startWith, switchMap, takeWhile, filter } from 'rxjs/operators';
-import { NbFocusKeyManagerFactoryService, NbFocusKeyManager } from '../cdk/a11y/focus-key-manager';
-import { ESCAPE } from '../cdk/keycodes/keycodes';
+import { ESCAPE, ENTER } from '../cdk/keycodes/keycodes';
+import { FormControl } from '@angular/forms';
+import { NbActiveDescendantKeyManager } from '../cdk/a11y/descendant-key-manager';
 
 @Component({
   selector: 'nb-autocomplete',
@@ -63,7 +64,7 @@ export class NbAutocompleteComponent<T> implements OnDestroy, AfterViewInit {
 
   protected positionStrategy: NbAdjustableConnectedPositionStrategy;
 
-  protected keyManager: NbFocusKeyManager<NbOptionComponent<T>>;
+  protected keyManager: NbActiveDescendantKeyManager<NbOptionComponent<T>>;
 
   /**
    * Current overlay position because of we have to toggle overlayPosition
@@ -75,6 +76,11 @@ export class NbAutocompleteComponent<T> implements OnDestroy, AfterViewInit {
    * Will be emitted when selected value changes.
    * */
   @Output() selectedChange: EventEmitter<T> = new EventEmitter();
+
+  /**
+   * Host input control (if it exists)
+   * */
+  protected inputControl: FormControl;
 
   /**
    * Trigger strategy used by overlay.
@@ -95,8 +101,7 @@ export class NbAutocompleteComponent<T> implements OnDestroy, AfterViewInit {
       protected cd: ChangeDetectorRef,
       protected overlay: NbOverlayService,
       protected triggerStrategyBuilder: NbTriggerStrategyBuilderService,
-      protected positionBuilder: NbPositionBuilderService,
-      protected focusKeyManagerFactoryService: NbFocusKeyManagerFactoryService<NbOptionComponent<T>>) {}
+      protected positionBuilder: NbPositionBuilderService) {}
 
   ngAfterViewInit() {
 
@@ -131,20 +136,30 @@ export class NbAutocompleteComponent<T> implements OnDestroy, AfterViewInit {
   }
 
   protected createKeyManager(): void {
-    this.keyManager = this.focusKeyManagerFactoryService.create(this.options);
+    this.keyManager = new NbActiveDescendantKeyManager<NbOptionComponent<T>>(this.options).withWrap();
   }
 
   /**
    * Autocomplete knows nothing about host html input element.
-   * So, attach method attaches autocomplete to the host input element.
+   * So, attach method attaches autocomplete to the host input element and
+   * sets input control to satisfy valueChanges.
    * */
-  attach(hostRef: ElementRef) {
+  attach(hostRef: ElementRef, control: FormControl) {
+
+    // If host html input has formControl instance, autocomplete needs it to
+    // call setValue(..) to satisfy valueChanges.
+    if (control) {
+      this.inputControl = control;
+    }
 
     this.hostRef = hostRef;
 
-    fromEvent<Event>(hostRef.nativeElement, 'input').subscribe(res => {
-      this.show();
-    });
+    fromEvent<Event>(hostRef.nativeElement, 'input')
+      .pipe(
+        takeWhile(() => this.alive))
+      .subscribe(() => {
+        this.show();
+      });
   }
 
   /**
@@ -160,10 +175,11 @@ export class NbAutocompleteComponent<T> implements OnDestroy, AfterViewInit {
   protected handleOptionClick(option: NbOptionComponent<T>) {
 
     option.select();
-    this.hide();
+    this.setHostInputValue(option.value);
+
     this.hostRef.nativeElement.focus();
-    this.hostRef.nativeElement.value = option.value;
     this.emitSelected(option.value);
+    this.hide();
   }
 
   protected getContainer() {
@@ -211,6 +227,17 @@ export class NbAutocompleteComponent<T> implements OnDestroy, AfterViewInit {
     }
   }
 
+  protected setHostInputValue(value) {
+
+    // If host input has formControl instance, use setValue(.., { emitEvent: true })
+    // to emit new change by valueChanges.
+    if (this.inputControl) {
+      this.inputControl.setValue(value, { emitEvent: true });
+    }
+    this.hostRef.nativeElement.value = value;
+
+  }
+
   protected subscribeOnOverlayKeys(): void {
     this.ref.keydownEvents()
       .pipe(
@@ -221,8 +248,18 @@ export class NbAutocompleteComponent<T> implements OnDestroy, AfterViewInit {
         if (event.keyCode === ESCAPE) {
           this.hostRef.nativeElement.focus();
           this.hide();
+
+        } else if (event.keyCode === ENTER) {
+          const activeItem = this.keyManager.activeItem;
+          activeItem.select();
+
+          this.setHostInputValue(activeItem.value);
+          this.emitSelected(activeItem.value);
+          this.hide();
+
         } else {
           this.keyManager.onKeydown(event);
+          this.cd.markForCheck();
         }
       });
 

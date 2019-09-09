@@ -48,6 +48,11 @@
   nb-option {
     user-select: none;
 
+    &.active {
+      background-color: nb-theme(autocomplete-option-active-background-color);
+      color: nb-theme(autocomplete-option-active-text-color);
+    }
+
     &:focus {
       outline: none;
     }

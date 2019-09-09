@@ -23,6 +23,7 @@ import { convertToBoolProperty } from '../helpers';
 import { NbFocusableOption } from '../cdk/a11y/focus-key-manager';
 import { NbSelectComponent } from './select.component';
 import { NB_SELECT_INJECTION_TOKEN } from './select-injection-tokens';
+import { NbHighlightableOption } from '../cdk/a11y/descendant-key-manager';
 
 @Component({
   selector: 'nb-option',
@@ -37,7 +38,7 @@ import { NB_SELECT_INJECTION_TOKEN } from './select-injection-tokens';
     <ng-content></ng-content>
   `,
 })
-export class NbOptionComponent<T> implements OnDestroy, NbFocusableOption {
+export class NbOptionComponent<T> implements OnDestroy, NbFocusableOption, NbHighlightableOption {
 
   protected disabledByGroup = false;
 
@@ -115,6 +116,12 @@ export class NbOptionComponent<T> implements OnDestroy, NbFocusableOption {
     return '-1';
   }
 
+  @HostBinding('class.active')
+  get activeClass() {
+    return this._active;
+  };
+  protected _active: boolean = false;
+
   @HostListener('click', ['$event'])
   @HostListener('keydown.space', ['$event'])
   @HostListener('keydown.enter', ['$event'])
@@ -165,4 +172,13 @@ export class NbOptionComponent<T> implements OnDestroy, NbFocusableOption {
   getLabel(): string {
     return this.content;
   }
+
+  setActiveStyles(): void {
+    this._active = true;
+  }
+
+  setInactiveStyles(): void {
+    this._active = false;
+  }
+
 }
