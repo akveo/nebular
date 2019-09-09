@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { ChangeDetectionStrategy, Component, ViewChild, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
 import { FormControl } from '@angular/forms';
@@ -19,10 +19,7 @@ export class AutocompleteFormComponent implements OnInit {
 
   options: string[];
   filteredOptions$: Observable<string[]>;
-
   inputFormControl: FormControl;
-
-  @ViewChild('autoInput', {static: false}) input;
 
   ngOnInit() {
 

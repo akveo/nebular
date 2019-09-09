@@ -10,7 +10,7 @@
       size="tiny"
       [nbAutocomplete]="auto" />
 
-    <nb-autocomplete #auto>
+    <nb-autocomplete #auto (selectedChange)="onSelectionChange($event)">
 
       <nb-option *ngFor="let option of filteredOptions$ | async" [value]="option">
         {{ option }}

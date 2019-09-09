@@ -30,12 +30,19 @@ export class AutocompleteShowcaseComponent implements OnInit {
     return this.options.filter(option => option.toLowerCase().indexOf(filterValue) === 0);
   }
 
+  getFilteredOptions (value: string): Observable<string[]> {
+    return of(value).pipe(
+      startWith(''),
+      map(item => this.filter(item)),
+    );
+  }
+
   onChange($event) {
-    this.filteredOptions$ = of(this.input.nativeElement.value)
-      .pipe(
-        startWith(''),
-        map(item => this.filter(item)),
-      )
+    this.filteredOptions$ = this.getFilteredOptions(this.input.nativeElement.value);
+  }
+
+  onSelectionChange($event) {
+    this.filteredOptions$ = this.getFilteredOptions($event);
   }
 
 }
