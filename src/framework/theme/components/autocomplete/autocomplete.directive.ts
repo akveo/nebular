@@ -19,7 +19,7 @@ import { NbScrollStrategy } from '../cdk/overlay/mapping';
 import {
   NbAdjustableConnectedPositionStrategy, NbAdjustment,
   NbPosition,
-  NbPositionBuilderService
+  NbPositionBuilderService,
 } from '../cdk/overlay/overlay-position';
 import { NbTrigger, NbTriggerStrategy, NbTriggerStrategyBuilderService } from '../cdk/overlay/overlay-trigger';
 import { NbOverlayService } from '../cdk/overlay/overlay-service';
@@ -28,18 +28,16 @@ import { NbOptionComponent } from '../select/option.component';
 import { merge } from 'rxjs';
 import { ENTER, ESCAPE } from '@angular/cdk/keycodes';
 
-export const NB_AUTOCOMPLETE_VALUE_ACCESSOR: any = {
-  provide: NG_VALUE_ACCESSOR,
-  useExisting: forwardRef(() => NbAutocompleteDirective),
-  multi: true,
-};
-
 @Directive({
   selector: 'input[nbAutocomplete]',
   host: {
     '(input)': '_handleInput($event)',
   },
-  providers: [NB_AUTOCOMPLETE_VALUE_ACCESSOR],
+  providers: [{
+    provide: NG_VALUE_ACCESSOR,
+    useExisting: forwardRef(() => NbAutocompleteDirective),
+    multi: true,
+  }],
 
 })
 export class NbAutocompleteDirective<T> implements AfterViewInit, OnDestroy, ControlValueAccessor {
