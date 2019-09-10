@@ -101,11 +101,18 @@ export class NbAutocompleteDirective<T> implements AfterViewInit, OnDestroy, Con
   }
 
   protected _handleInput($event: any) {
-    this._onChange(this.hostRef.nativeElement.value);
+    const currentValue = this.hostRef.nativeElement.value;
+    this._onChange(currentValue);
+    this.hostRef.nativeElement.value = this.getDisplayValue(currentValue);
     this.show();
   }
 
-   handleOptionClick(option: NbOptionComponent<T>) {
+  protected getDisplayValue(value: string) {
+    const displayFn = this.autocomplete.handleDisplayFn;
+    return displayFn ? displayFn(value) : value;
+  }
+
+  protected handleOptionClick(option: NbOptionComponent<T>) {
 
     option.select();
     this.setHostInputValue(option.value);
@@ -153,7 +160,7 @@ export class NbAutocompleteDirective<T> implements AfterViewInit, OnDestroy, Con
   }
 
   protected setHostInputValue(value) {
-    this.hostRef.nativeElement.value = value;
+    this.hostRef.nativeElement.value = this.getDisplayValue(value);
   }
 
   protected subscribeOnOverlayKeys(): void {
@@ -233,7 +240,7 @@ export class NbAutocompleteDirective<T> implements AfterViewInit, OnDestroy, Con
 
   // Part of ControlValueAccessor.
   writeValue(value: any): void {
-    this._onChange((value));
+    this._onChange(value);
   }
 
   // Part of ControlValueAccessor.

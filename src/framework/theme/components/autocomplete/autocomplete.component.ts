@@ -10,7 +10,7 @@ import {
   ComponentRef,
   ContentChildren,
   ElementRef,
-  EventEmitter,
+  EventEmitter, Input,
   OnDestroy,
   Output,
   QueryList,
@@ -29,6 +29,8 @@ import { NbActiveDescendantKeyManager } from '../cdk/a11y/descendant-key-manager
 export class NbAutocompleteComponent<T> implements OnDestroy {
 
   @ViewChild(NbPortalDirective, { static: false }) portal: NbPortalDirective;
+
+  @Input() handleDisplayFn: ((value: any) => string);
 
   alive: boolean = true;
 
