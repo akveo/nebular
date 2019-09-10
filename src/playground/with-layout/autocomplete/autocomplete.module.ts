@@ -13,17 +13,20 @@ import { NbSharedModule } from '../../../framework/theme/components/shared/share
 import { ReactiveFormsModule } from '@angular/forms';
 import { AutocompleteFormComponent } from './autocomplete-form.component';
 import { AutocompleteGroupComponent } from './autocomplete-group.component';
+import { AutocompleteCustomDisplayComponent } from './autocomplete-custom-display.component';
 
 @NgModule({
   declarations: [
     AutocompleteShowcaseComponent,
     AutocompleteFormComponent,
     AutocompleteGroupComponent,
+    AutocompleteCustomDisplayComponent,
   ],
   exports: [
     AutocompleteShowcaseComponent,
     AutocompleteFormComponent,
     AutocompleteGroupComponent,
+    AutocompleteCustomDisplayComponent,
   ],
   imports: [
     NbSharedModule,

@@ -133,6 +133,12 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         component: 'AutocompleteGroupComponent',
         name: 'Autocomplete Group',
       },
+      {
+        path: 'autocomplete-custom-display.component',
+        link: '/autocomplete/autocomplete-custom-display.component',
+        component: 'AutocompleteCustomDisplayComponent',
+        name: 'Autocomplete Custom Display',
+      },
     ],
   },
   {

@@ -9,6 +9,7 @@ import { RouterModule, Route} from '@angular/router';
 import { AutocompleteShowcaseComponent } from './autocomplete-showcase.component';
 import { AutocompleteFormComponent } from './autocomplete-form.component';
 import { AutocompleteGroupComponent } from './autocomplete-group.component';
+import { AutocompleteCustomDisplayComponent } from './autocomplete-custom-display.component';
 
 const routes: Route[] = [
   {
@@ -22,6 +23,10 @@ const routes: Route[] = [
   {
     path: 'autocomplete-group.component',
     component: AutocompleteGroupComponent,
+  },
+  {
+    path: 'autocomplete-custom-display.component',
+    component: AutocompleteCustomDisplayComponent,
   },
 ];
 
