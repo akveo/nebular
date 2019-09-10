@@ -60,6 +60,20 @@
     }
   }
 
+  nb-option-group {
+    padding: nb-theme(autocomplete-option-group-padding);
+    font-size: nb-theme(autocomplete-option-group-text-font-size);
+
+    nb-option {
+      padding-left: nb-theme(autocomplete-option-group-option-start-padding);
+      font-size: nb-theme(autocomplete-option-text-font-size)
+    }
+
+    .option-group-title {
+      padding: nb-theme(autocomplete-option-group-padding);
+    }
+  }
+
   nb-option {
     &.selected {
       background-color: nb-theme(autocomplete-option-selected-background-color);

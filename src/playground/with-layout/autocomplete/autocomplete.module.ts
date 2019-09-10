@@ -12,15 +12,18 @@ import { AutocompleteRoutingModule } from './autocomplete-routing.module';
 import { NbSharedModule } from '../../../framework/theme/components/shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AutocompleteFormComponent } from './autocomplete-form.component';
+import { AutocompleteGroupComponent } from './autocomplete-group.component';
 
 @NgModule({
   declarations: [
     AutocompleteShowcaseComponent,
     AutocompleteFormComponent,
+    AutocompleteGroupComponent,
   ],
   exports: [
     AutocompleteShowcaseComponent,
     AutocompleteFormComponent,
+    AutocompleteGroupComponent,
   ],
   imports: [
     NbSharedModule,

@@ -2228,8 +2228,15 @@ $eva-mapping: (
   autocomplete-option-active-background-color: background-basic-color-1,
   autocomplete-option-active-text-color: color-primary-active,
 
+  autocomplete-option-text-font-size: text-subtitle-font-size,
+  autocomplete-option-text-line-height: text-subtitle-line-height,
+  autocomplete-option-group-text-font-size: text-subtitle-2-font-size,
+  autocomplete-option-group-line-height: text-subtitle-2-line-height,
+
   autocomplete-option-padding: 0.4375rem 1.125rem,
   autocomplete-option-line-height: 1.5rem,
+  autocomplete-option-group-padding: 0.4375rem 1.125rem,
+  autocomplete-option-group-option-start-padding: 2.25rem,
 
   datepicker-text-color: text-basic-color,
   datepicker-background-color: background-basic-color-1,

@@ -127,6 +127,12 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         component: 'AutocompleteFormComponent',
         name: 'Autocomplete Form',
       },
+      {
+        path: 'autocomplete-group.component',
+        link: '/autocomplete/autocomplete-group.component',
+        component: 'AutocompleteGroupComponent',
+        name: 'Autocomplete Group',
+      },
     ],
   },
   {
