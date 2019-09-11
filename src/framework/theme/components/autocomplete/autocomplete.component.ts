@@ -30,8 +30,14 @@ export class NbAutocompleteComponent<T> implements OnDestroy {
 
   @ViewChild(NbPortalDirective, { static: false }) portal: NbPortalDirective;
 
+  /**
+   * Function passed as input to process each string option value before render.
+   * */
   @Input() handleDisplayFn: ((value: any) => string);
 
+  /**
+   * Flag passed as input to always make first option active.
+   * */
   @Input() activeFirst: boolean = false;
 
   alive: boolean = true;

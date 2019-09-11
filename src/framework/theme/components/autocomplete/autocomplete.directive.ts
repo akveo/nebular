@@ -27,12 +27,13 @@ import { NbOverlayService } from '../cdk/overlay/overlay-service';
 import { filter, startWith, switchMap, takeWhile, tap } from 'rxjs/operators';
 import { NbOptionComponent } from '../select/option.component';
 import { merge } from 'rxjs';
-import { ENTER, ESCAPE } from '@angular/cdk/keycodes';
+import { DOWN_ARROW, ENTER, ESCAPE } from '@angular/cdk/keycodes';
 
 @Directive({
   selector: 'input[nbAutocomplete]',
   host: {
-    '(input)': '_handleInput($event)',
+    '(input)': 'handleInput($event)',
+    '(keydown)': 'handleKeydown($event)',
   },
   providers: [{
     provide: NG_VALUE_ACCESSOR,
@@ -105,11 +106,17 @@ export class NbAutocompleteDirective<T> implements AfterViewInit, OnDestroy, Con
     this.autocomplete.attach(this.hostRef);
   }
 
-  protected _handleInput($event: any) {
+  protected handleInput($event: any) {
     const currentValue = this.hostRef.nativeElement.value;
     this._onChange(currentValue);
     this.hostRef.nativeElement.value = this.getDisplayValue(currentValue);
     this.show();
+  }
+
+  handleKeydown($event: any) {
+    if ($event.keyCode === DOWN_ARROW) {
+      this.autocomplete.isHidden && this.show();
+    }
   }
 
   protected getDisplayValue(value: string) {
@@ -172,10 +179,9 @@ export class NbAutocompleteDirective<T> implements AfterViewInit, OnDestroy, Con
     this.autocomplete.ref.keydownEvents()
       .pipe(
         takeWhile(() => this.autocomplete.alive),
-        filter(() => this.autocomplete.isOpen),
       )
       .subscribe((event: KeyboardEvent) => {
-        if (event.keyCode === ESCAPE) {
+        if (event.keyCode === ESCAPE && this.autocomplete.isOpen) {
           this.hostRef.nativeElement.focus();
           this.hide();
 
@@ -202,9 +208,8 @@ export class NbAutocompleteDirective<T> implements AfterViewInit, OnDestroy, Con
   }
 
   protected setActiveItem() {
-    const keyManager = this.autocomplete.keyManager;
-    this.autocomplete.activeFirst ? keyManager.setActiveItem(0) : keyManager.setActiveItem(-1);
-    this.cd.detectChanges()
+    this.autocomplete.keyManager.setActiveItem(this.autocomplete.activeFirst ? 0 : -1);
+    this.cd.detectChanges();
   }
 
   protected attachToOverlay() {
