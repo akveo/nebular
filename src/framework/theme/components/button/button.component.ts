@@ -19,7 +19,7 @@ import {
 import { NbComponentStatus } from '../component-status';
 import { NbComponentShape } from '../component-shape';
 import { NbComponentSize } from '../component-size';
-import { convertToBoolProperty } from '../helpers';
+import { convertToBoolProperty, firstChildNotComment, lastChildNotComment } from '../helpers';
 
 export type NbButtonAppearance = 'filled' | 'outline' | 'ghost' | 'hero';
 
@@ -528,14 +528,14 @@ export class NbButtonComponent implements AfterViewInit {
   get iconLeft(): boolean {
     const el = this.hostElement.nativeElement;
     const icon = this.iconElement;
-    return !!(icon && el.firstChild === icon);
+    return !!(icon && firstChildNotComment(el) === icon);
   }
 
   @HostBinding('class.icon-end')
   get iconRight(): boolean {
     const el = this.hostElement.nativeElement;
     const icon = this.iconElement;
-    return !!(icon && el.lastChild === icon);
+    return !!(icon && lastChildNotComment(el) === icon);
   }
 
   @HostBinding('class.transitions')
