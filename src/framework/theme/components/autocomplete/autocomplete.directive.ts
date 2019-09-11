@@ -86,21 +86,12 @@ export class NbAutocompleteDirective<T> implements AfterViewInit, OnDestroy, Con
     this.autocomplete.options.changes
       .pipe(
         startWith(this.autocomplete.options),
-        tap(options => this.getActiveItem() && this.checkActiveOption(options)),
         switchMap((options: QueryList<NbOptionComponent<T>>) => {
           return merge(...options.map(option => option.click));
         }),
         takeWhile(() => this.autocomplete.alive),
       )
       .subscribe((clickedOption: NbOptionComponent<T>) => this.handleOptionClick(clickedOption));
-  }
-
-  protected checkActiveOption(options: QueryList<NbOptionComponent<T>>) {
-    const activeItem = this.getActiveItem();
-    const isFound = options.find((item) => {
-      return item === activeItem;
-    });
-    !isFound && this.autocomplete.keyManager.setActiveItem(-1)
   }
 
   protected getActiveItem(): NbOptionComponent<T> {
@@ -125,8 +116,7 @@ export class NbAutocompleteDirective<T> implements AfterViewInit, OnDestroy, Con
 
   protected handleOptionClick(option: NbOptionComponent<T>) {
 
-    option.setActiveStyles();
-    this.autocomplete.keyManager.updateActiveItem(option);
+    this.setActiveItem();
     this.setHostInputValue(option.value);
 
     this._onChange(option.value);
@@ -167,7 +157,7 @@ export class NbAutocompleteDirective<T> implements AfterViewInit, OnDestroy, Con
   hide() {
     if (this.autocomplete.isOpen) {
       this.autocomplete.ref.detach();
-      !this.hostRef.nativeElement.value && this.autocomplete.keyManager.setActiveItem(-1)
+      this.setActiveItem();
     }
   }
 
@@ -191,10 +181,10 @@ export class NbAutocompleteDirective<T> implements AfterViewInit, OnDestroy, Con
           if (!activeItem) {
             return;
           }
-          activeItem.setActiveStyles();
           this._onChange(activeItem.value);
           this.setHostInputValue(activeItem.value);
           this.autocomplete.emitSelected(activeItem.value);
+          this.setActiveItem();
           this.hide();
 
         } else {
@@ -207,6 +197,10 @@ export class NbAutocompleteDirective<T> implements AfterViewInit, OnDestroy, Con
       .subscribe(() => {
         this.hide();
       });
+  }
+
+  protected setActiveItem() {
+    this.autocomplete.keyManager.setActiveItem(-1);
   }
 
   protected attachToOverlay() {
