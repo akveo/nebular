@@ -50,7 +50,7 @@ export class AutocompleteGroupComponent implements OnInit {
   }
 
   private filterChildren(children: string[], value: string) {
-    return children.filter(item => item.toLowerCase().startsWith(value));
+    return children.filter(item => item.toLowerCase().includes(value));
   }
 
   private filter(value: string): Group[] {

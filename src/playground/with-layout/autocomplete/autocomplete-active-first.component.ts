@@ -11,11 +11,11 @@ import { FormControl } from '@angular/forms';
 import { map, startWith } from 'rxjs/operators';
 
 @Component({
-  selector: 'nb-autocomplete-showcase',
+  selector: 'nb-autocomplete-active-first',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: './autocomplete-form.component.html',
+  templateUrl: './autocomplete-active-first.component.html',
 })
-export class AutocompleteFormComponent implements OnInit {
+export class AutocompleteActiveFirstComponent implements OnInit {
 
   options: string[];
   filteredOptions$: Observable<string[]>;

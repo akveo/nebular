@@ -139,6 +139,12 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         component: 'AutocompleteCustomDisplayComponent',
         name: 'Autocomplete Custom Display',
       },
+      {
+        path: 'autocomplete-active-first.component',
+        link: '/autocomplete/autocomplete-active-first.component',
+        component: 'AutocompleteActiveFirstComponent',
+        name: 'Autocomplete Active First',
+      },
     ],
   },
   {

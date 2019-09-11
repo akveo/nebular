@@ -38,7 +38,7 @@ export class AutocompleteCustomDisplayComponent implements OnInit {
 
   private filter(name: string): string[] {
     const filterValue = name.toLowerCase();
-    return this.options.filter(option => option.toLowerCase().indexOf(filterValue) === 0);
+    return this.options.filter(option => option.toLowerCase().includes(filterValue));
   }
 
   viewHandle(value: string) {

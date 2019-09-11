@@ -27,7 +27,7 @@ export class AutocompleteShowcaseComponent implements OnInit {
 
   private filter(name: string): string[] {
     const filterValue = name.toLowerCase();
-    return this.options.filter(option => option.toLowerCase().indexOf(filterValue) === 0);
+    return this.options.filter(option => option.toLowerCase().includes(filterValue));
   }
 
   getFilteredOptions (value: string): Observable<string[]> {
