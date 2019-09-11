@@ -1,3 +1,13 @@
+<a name="4.2.2"></a>
+## [4.2.2](https://github.com/akveo/nebular/compare/v4.2.1...v4.2.2) (2019-09-11)
+
+
+### Bug Fixes
+
+* **button:** make sure icon has margins when button has html co… ([#1953](https://github.com/akveo/nebular/issues/1953)) ([a17accb](https://github.com/akveo/nebular/commit/a17accb))
+
+
+
 <a name="4.2.1"></a>
 ## [4.2.1](https://github.com/akveo/nebular/compare/v4.2.0...v4.2.1) (2019-08-29)
 
