@@ -27,13 +27,14 @@ import { NbOverlayService } from '../cdk/overlay/overlay-service';
 import { filter, startWith, switchMap, takeWhile, tap } from 'rxjs/operators';
 import { NbOptionComponent } from '../select/option.component';
 import { merge } from 'rxjs';
-import { DOWN_ARROW, ENTER, ESCAPE } from '@angular/cdk/keycodes';
+import { DOWN_ARROW, ENTER, ESCAPE, UP_ARROW } from '@angular/cdk/keycodes';
 
 @Directive({
   selector: 'input[nbAutocomplete]',
   host: {
     '(input)': 'handleInput($event)',
     '(keydown)': 'handleKeydown($event)',
+    '(focus)': 'handleFocus($event)',
   },
   providers: [{
     provide: NG_VALUE_ACCESSOR,
@@ -80,6 +81,23 @@ export class NbAutocompleteDirective<T> implements AfterViewInit, OnDestroy, Con
     this.subscribeOnTriggers();
   }
 
+  protected handleInput($event: any) {
+    const currentValue = this.hostRef.nativeElement.value;
+    this._onChange(currentValue);
+    this.hostRef.nativeElement.value = this.getDisplayValue(currentValue);
+    this.show();
+  }
+
+  protected handleKeydown($event: any) {
+    if ($event.keyCode === DOWN_ARROW || $event.keyCode === UP_ARROW) {
+      this.autocomplete.isHidden && this.show();
+    }
+  }
+
+  protected handleFocus($event: any) {
+    this.autocomplete.isHidden && this.show();
+  }
+
   protected subscribeOnOptionClick() {
     /**
      * If the user changes provided options list in the runtime we have to handle this
@@ -104,19 +122,6 @@ export class NbAutocompleteDirective<T> implements AfterViewInit, OnDestroy, Con
 
   protected setupAutocomplete() {
     this.autocomplete.attach(this.hostRef);
-  }
-
-  protected handleInput($event: any) {
-    const currentValue = this.hostRef.nativeElement.value;
-    this._onChange(currentValue);
-    this.hostRef.nativeElement.value = this.getDisplayValue(currentValue);
-    this.show();
-  }
-
-  handleKeydown($event: any) {
-    if ($event.keyCode === DOWN_ARROW) {
-      this.autocomplete.isHidden && this.show();
-    }
   }
 
   protected getDisplayValue(value: string) {
