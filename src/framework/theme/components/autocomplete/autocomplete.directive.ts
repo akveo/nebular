@@ -23,7 +23,7 @@ import {
 } from '../cdk/overlay/overlay-position';
 import { NbTrigger, NbTriggerStrategy, NbTriggerStrategyBuilderService } from '../cdk/overlay/overlay-trigger';
 import { NbOverlayService } from '../cdk/overlay/overlay-service';
-import { filter, startWith, switchMap, takeWhile } from 'rxjs/operators';
+import { filter, startWith, switchMap, takeWhile, tap } from 'rxjs/operators';
 import { NbOptionComponent } from '../select/option.component';
 import { merge } from 'rxjs';
 import { ENTER, ESCAPE } from '@angular/cdk/keycodes';
@@ -66,10 +66,15 @@ export class NbAutocompleteDirective<T> implements AfterViewInit, OnDestroy, Con
     this.setupAutocomplete();
   }
 
+  constructor(
+    protected hostRef: ElementRef,
+    protected overlay: NbOverlayService,
+    protected triggerStrategyBuilder: NbTriggerStrategyBuilderService,
+    protected positionBuilder: NbPositionBuilderService) {}
+
   ngAfterViewInit() {
     this.triggerStrategy = this.createTriggerStrategy();
     this.subscribeOnTriggers();
-    this.subscribeOnOptionClick();
   }
 
   protected subscribeOnOptionClick() {
@@ -81,6 +86,7 @@ export class NbAutocompleteDirective<T> implements AfterViewInit, OnDestroy, Con
     this.autocomplete.options.changes
       .pipe(
         startWith(this.autocomplete.options),
+        tap(options => this.getActiveItem() && this.checkActiveOption(options)),
         switchMap((options: QueryList<NbOptionComponent<T>>) => {
           return merge(...options.map(option => option.click));
         }),
@@ -89,12 +95,17 @@ export class NbAutocompleteDirective<T> implements AfterViewInit, OnDestroy, Con
       .subscribe((clickedOption: NbOptionComponent<T>) => this.handleOptionClick(clickedOption));
   }
 
-  constructor(
-      protected hostRef: ElementRef,
+  protected checkActiveOption(options: QueryList<NbOptionComponent<T>>) {
+    const activeItem = this.getActiveItem();
+    const isFound = options.find((item) => {
+      return item === activeItem;
+    });
+    !isFound && this.autocomplete.keyManager.setActiveItem(-1)
+  }
 
-      protected overlay: NbOverlayService,
-      protected triggerStrategyBuilder: NbTriggerStrategyBuilderService,
-      protected positionBuilder: NbPositionBuilderService) {}
+  protected getActiveItem(): NbOptionComponent<T> {
+    return this.autocomplete.keyManager.activeItem;
+  }
 
   protected setupAutocomplete() {
     this.autocomplete.attach(this.hostRef);
@@ -114,11 +125,11 @@ export class NbAutocompleteDirective<T> implements AfterViewInit, OnDestroy, Con
 
   protected handleOptionClick(option: NbOptionComponent<T>) {
 
-    option.select();
+    option.setActiveStyles();
+    this.autocomplete.keyManager.updateActiveItem(option);
     this.setHostInputValue(option.value);
 
     this._onChange(option.value);
-
     this.hostRef.nativeElement.focus();
     this.autocomplete.emitSelected(option.value);
     this.hide();
@@ -156,6 +167,7 @@ export class NbAutocompleteDirective<T> implements AfterViewInit, OnDestroy, Con
   hide() {
     if (this.autocomplete.isOpen) {
       this.autocomplete.ref.detach();
+      !this.hostRef.nativeElement.value && this.autocomplete.keyManager.setActiveItem(-1)
     }
   }
 
@@ -175,9 +187,11 @@ export class NbAutocompleteDirective<T> implements AfterViewInit, OnDestroy, Con
           this.hide();
 
         } else if (event.keyCode === ENTER) {
-          const activeItem = this.autocomplete.keyManager.activeItem;
-          activeItem.select();
-
+          const activeItem = this.getActiveItem();
+          if (!activeItem) {
+            return;
+          }
+          activeItem.setActiveStyles();
           this._onChange(activeItem.value);
           this.setHostInputValue(activeItem.value);
           this.autocomplete.emitSelected(activeItem.value);
@@ -197,9 +211,10 @@ export class NbAutocompleteDirective<T> implements AfterViewInit, OnDestroy, Con
 
   protected attachToOverlay() {
     if (!this.autocomplete.ref) {
+      this.autocomplete.createKeyManager();
+      this.subscribeOnOptionClick();
       this.createOverlay();
       this.subscribeOnPositionChange();
-      this.autocomplete.createKeyManager();
       this.subscribeOnOverlayKeys();
     }
 
@@ -258,7 +273,5 @@ export class NbAutocompleteDirective<T> implements AfterViewInit, OnDestroy, Con
       this.triggerStrategy.destroy();
     }
   }
-
-
 
 }
