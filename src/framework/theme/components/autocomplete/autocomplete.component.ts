@@ -32,6 +32,8 @@ export class NbAutocompleteComponent<T> implements OnDestroy {
 
   @Input() handleDisplayFn: ((value: any) => string);
 
+  @Input() activeFirst: boolean = false;
+
   alive: boolean = true;
 
   /**

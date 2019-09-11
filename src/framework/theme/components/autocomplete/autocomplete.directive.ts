@@ -6,6 +6,7 @@
 
 import {
   AfterViewInit,
+  ChangeDetectorRef,
   Directive,
   ElementRef,
   forwardRef,
@@ -69,6 +70,7 @@ export class NbAutocompleteDirective<T> implements AfterViewInit, OnDestroy, Con
   constructor(
     protected hostRef: ElementRef,
     protected overlay: NbOverlayService,
+    protected cd: ChangeDetectorRef,
     protected triggerStrategyBuilder: NbTriggerStrategyBuilderService,
     protected positionBuilder: NbPositionBuilderService) {}
 
@@ -85,6 +87,7 @@ export class NbAutocompleteDirective<T> implements AfterViewInit, OnDestroy, Con
      * */
     this.autocomplete.options.changes
       .pipe(
+        tap(() => this.setActiveItem()),
         startWith(this.autocomplete.options),
         switchMap((options: QueryList<NbOptionComponent<T>>) => {
           return merge(...options.map(option => option.click));
@@ -116,10 +119,9 @@ export class NbAutocompleteDirective<T> implements AfterViewInit, OnDestroy, Con
 
   protected handleOptionClick(option: NbOptionComponent<T>) {
 
-    this.setActiveItem();
     this.setHostInputValue(option.value);
-
     this._onChange(option.value);
+
     this.hostRef.nativeElement.focus();
     this.autocomplete.emitSelected(option.value);
     this.hide();
@@ -151,6 +153,7 @@ export class NbAutocompleteDirective<T> implements AfterViewInit, OnDestroy, Con
   show() {
     if (this.autocomplete.isHidden) {
       this.attachToOverlay();
+      this.setActiveItem();
     }
   }
 
@@ -184,7 +187,6 @@ export class NbAutocompleteDirective<T> implements AfterViewInit, OnDestroy, Con
           this._onChange(activeItem.value);
           this.setHostInputValue(activeItem.value);
           this.autocomplete.emitSelected(activeItem.value);
-          this.setActiveItem();
           this.hide();
 
         } else {
@@ -200,7 +202,9 @@ export class NbAutocompleteDirective<T> implements AfterViewInit, OnDestroy, Con
   }
 
   protected setActiveItem() {
-    this.autocomplete.keyManager.setActiveItem(-1);
+    const keyManager = this.autocomplete.keyManager;
+    this.autocomplete.activeFirst ? keyManager.setActiveItem(0) : keyManager.setActiveItem(-1);
+    this.cd.detectChanges()
   }
 
   protected attachToOverlay() {
