@@ -10,7 +10,7 @@ import {
   ComponentRef,
   ContentChildren,
   ElementRef,
-  EventEmitter, Input,
+  EventEmitter, HostBinding, Input,
   OnDestroy,
   Output,
   QueryList,
@@ -19,6 +19,14 @@ import {
 import { NbOverlayRef, NbPortalDirective } from '../cdk/overlay/mapping';
 import { NbOptionComponent } from '../select/option.component';
 import { NbActiveDescendantKeyManager } from '../cdk/a11y/descendant-key-manager';
+import { NbComponentSize } from '../component-size';
+import { takeWhile } from 'rxjs/operators';
+import {
+  NbAdjustableConnectedPositionStrategy,
+  NbAdjustment,
+  NbPosition,
+  NbPositionBuilderService,
+} from '../cdk/overlay/overlay-position';
 
 @Component({
   selector: 'nb-autocomplete',
@@ -34,6 +42,12 @@ export class NbAutocompleteComponent<T> implements OnDestroy {
    * Function passed as input to process each string option value before render.
    * */
   @Input() handleDisplayFn: ((value: any) => string);
+
+  /**
+   * Autocomplete size, available sizes:
+   * `tiny`, `small`, `medium` (default), `large`, `giant`
+   */
+  @Input() size: NbComponentSize = 'medium';
 
   /**
    * Flag passed as input to always make first option active.
@@ -58,6 +72,14 @@ export class NbAutocompleteComponent<T> implements OnDestroy {
 
   ref: NbOverlayRef;
 
+  positionStrategy: NbAdjustableConnectedPositionStrategy;
+
+  /**
+   * Current overlay position because of we have to toggle overlayPosition
+   * in [ngClass] direction and this directive can use only string.
+   */
+  protected overlayPosition: NbPosition = '' as NbPosition;
+
   keyManager: NbActiveDescendantKeyManager<NbOptionComponent<T>>;
 
   /**
@@ -75,7 +97,8 @@ export class NbAutocompleteComponent<T> implements OnDestroy {
   * */
   @ContentChildren(NbOptionComponent, { descendants: true }) options: QueryList<NbOptionComponent<T>>;
 
-  constructor() {}
+  constructor(
+    protected positionBuilder: NbPositionBuilderService) {}
 
   /**
    * Returns width of the input.
@@ -94,6 +117,16 @@ export class NbAutocompleteComponent<T> implements OnDestroy {
    * */
   attach(hostRef: ElementRef) {
     this.hostRef = hostRef;
+    this.positionStrategy = this.createPositionStrategy();
+    this.subscribeOnPositionChange();
+  }
+
+  protected createPositionStrategy(): NbAdjustableConnectedPositionStrategy {
+    return this.positionBuilder
+      .connectedTo(this.hostRef)
+      .position(NbPosition.BOTTOM)
+      .offset(0)
+      .adjustment(NbAdjustment.VERTICAL);
   }
 
   /**
@@ -111,6 +144,14 @@ export class NbAutocompleteComponent<T> implements OnDestroy {
     };
   }
 
+  protected subscribeOnPositionChange() {
+    this.positionStrategy.positionChange
+      .pipe(takeWhile(() => this.alive))
+      .subscribe((position: NbPosition) => {
+        this.overlayPosition = position;
+      });
+  }
+
   ngOnDestroy() {
     this.alive = false;
 
@@ -118,4 +159,35 @@ export class NbAutocompleteComponent<T> implements OnDestroy {
       this.ref.dispose();
     }
   }
+
+  get optionsListClasses(): string[] {
+    const classes = [
+      `size-${this.size}`,
+      this.overlayPosition,
+    ];
+
+    return classes;
+  }
+
+  @HostBinding('class.size-tiny')
+  get tiny(): boolean {
+    return this.size === 'tiny';
+  }
+  @HostBinding('class.size-small')
+  get small(): boolean {
+    return this.size === 'small';
+  }
+  @HostBinding('class.size-medium')
+  get medium(): boolean {
+    return this.size === 'medium';
+  }
+  @HostBinding('class.size-large')
+  get large(): boolean {
+    return this.size === 'large';
+  }
+  @HostBinding('class.size-giant')
+  get giant(): boolean {
+    return this.size === 'giant';
+  }
+
 }

@@ -17,11 +17,6 @@ import {
 import { NbAutocompleteComponent } from './autocomplete.component';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { NbScrollStrategy } from '../cdk/overlay/mapping';
-import {
-  NbAdjustableConnectedPositionStrategy, NbAdjustment,
-  NbPosition,
-  NbPositionBuilderService,
-} from '../cdk/overlay/overlay-position';
 import { NbTrigger, NbTriggerStrategy, NbTriggerStrategyBuilderService } from '../cdk/overlay/overlay-trigger';
 import { NbOverlayService } from '../cdk/overlay/overlay-service';
 import { filter, startWith, switchMap, takeWhile, tap } from 'rxjs/operators';
@@ -48,15 +43,7 @@ export class NbAutocompleteDirective<T> implements AfterViewInit, OnDestroy, Con
 
   protected autocomplete: NbAutocompleteComponent<T>;
 
-  protected positionStrategy: NbAdjustableConnectedPositionStrategy;
-
   protected isOpenedAfterFocus: boolean = false;
-
-  /**
-   * Current overlay position because of we have to toggle overlayPosition
-   * in [ngClass] direction and this directive can use only string.
-   */
-  protected overlayPosition: NbPosition = '' as NbPosition;
 
   /**
    * Trigger strategy used by overlay.
@@ -76,8 +63,7 @@ export class NbAutocompleteDirective<T> implements AfterViewInit, OnDestroy, Con
     protected hostRef: ElementRef,
     protected overlay: NbOverlayService,
     protected cd: ChangeDetectorRef,
-    protected triggerStrategyBuilder: NbTriggerStrategyBuilderService,
-    protected positionBuilder: NbPositionBuilderService) {}
+    protected triggerStrategyBuilder: NbTriggerStrategyBuilderService) {}
 
   ngAfterViewInit() {
     this.triggerStrategy = this.createTriggerStrategy();
@@ -97,7 +83,7 @@ export class NbAutocompleteDirective<T> implements AfterViewInit, OnDestroy, Con
     }
   }
 
-  handleBlur($event: Event) {
+  protected handleBlur($event: Event) {
     this.isOpenedAfterFocus = false;
   }
 
@@ -232,37 +218,20 @@ export class NbAutocompleteDirective<T> implements AfterViewInit, OnDestroy, Con
       this.autocomplete.createKeyManager();
       this.subscribeOnOptionClick();
       this.createOverlay();
-      this.subscribeOnPositionChange();
       this.subscribeOnOverlayKeys();
     }
 
     this.autocomplete.ref.attach(this.autocomplete.portal);
   }
 
-  protected subscribeOnPositionChange() {
-    this.positionStrategy.positionChange
-      .pipe(takeWhile(() => this.autocomplete.alive))
-      .subscribe((position: NbPosition) => {
-        this.overlayPosition = position;
-      });
-  }
-
   protected createOverlay() {
     const scrollStrategy = this.createScrollStrategy();
-    this.positionStrategy = this.createPositionStrategy();
-    this.autocomplete.ref = this.overlay.create({ positionStrategy: this.positionStrategy, scrollStrategy });
+    this.autocomplete.ref = this.overlay.create(
+      { positionStrategy: this.autocomplete.positionStrategy, scrollStrategy });
   }
 
   protected createScrollStrategy(): NbScrollStrategy {
     return this.overlay.scrollStrategies.block();
-  }
-
-  protected createPositionStrategy(): NbAdjustableConnectedPositionStrategy {
-    return this.positionBuilder
-      .connectedTo(this.hostRef)
-      .position(NbPosition.BOTTOM)
-      .offset(0)
-      .adjustment(NbAdjustment.VERTICAL);
   }
 
   // Part of ControlValueAccessor.

@@ -49,6 +49,29 @@
     font-weight: nb-theme(autocomplete-text-font-weight);
   }
 
+  @each $size in nb-get-sizes() {
+    .options-list-container.size-#{$size} nb-option {
+      font-size: nb-theme(autocomplete-#{$size}-text-font-size);
+      line-height: nb-theme(autocomplete-#{$size}-text-line-height);
+    }
+
+    .options-list-container.size-#{$size}
+    nb-option-group .option-group-title {
+      font-size: nb-theme(autocomplete-option-group-#{$size}-text-font-size);
+      line-height: nb-theme(autocomplete-option-group-#{$size}-text-line-height);
+    }
+
+    .size-#{$size} {
+      nb-option-group .option-group-title,
+      nb-option {
+        padding: nb-theme(autocomplete-option-#{$size}-padding);
+      }
+      nb-option-group nb-option {
+        padding-left: nb-theme(autocomplete-group-option-#{$size}-start-padding);
+      }
+    }
+  }
+
   nb-option-group,
   nb-option {
     background-color: nb-theme(autocomplete-option-background-color);
@@ -57,20 +80,6 @@
     &[disabled] {
       background-color: nb-theme(autocomplete-option-disabled-background-color);
       color: nb-theme(autocomplete-option-disabled-text-color);
-    }
-  }
-
-  nb-option-group {
-    padding: nb-theme(autocomplete-option-group-padding);
-    font-size: nb-theme(autocomplete-option-group-text-font-size);
-
-    nb-option {
-      padding-left: nb-theme(autocomplete-option-group-option-start-padding);
-      font-size: nb-theme(autocomplete-option-text-font-size);
-    }
-
-    .option-group-title {
-      padding: nb-theme(autocomplete-option-group-padding);
     }
   }
 

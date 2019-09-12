@@ -1,5 +1,5 @@
 
-<div *nbPortal class="options-list-container" [style.width.px]="hostWidth">
+<div *nbPortal [ngClass]="optionsListClasses" class="options-list-container" [style.width.px]="hostWidth">
   <ul class="options-list">
     <ng-content select="nb-option, nb-option-group"></ng-content>
   </ul>
