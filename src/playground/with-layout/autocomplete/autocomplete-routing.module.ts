@@ -10,7 +10,8 @@ import { AutocompleteShowcaseComponent } from './autocomplete-showcase.component
 import { AutocompleteFormComponent } from './autocomplete-form.component';
 import { AutocompleteGroupComponent } from './autocomplete-group.component';
 import { AutocompleteCustomDisplayComponent } from './autocomplete-custom-display.component';
-import {AutocompleteActiveFirstComponent} from './autocomplete-active-first.component';
+import { AutocompleteActiveFirstComponent } from './autocomplete-active-first.component';
+import { AutocompleteSizesComponent } from './autocomplete-sizes.component';
 
 const routes: Route[] = [
   {
@@ -32,6 +33,10 @@ const routes: Route[] = [
   {
     path: 'autocomplete-active-first.component',
     component: AutocompleteActiveFirstComponent,
+  },
+  {
+    path: 'autocomplete-sizes.component',
+    component: AutocompleteSizesComponent,
   },
 ];
 

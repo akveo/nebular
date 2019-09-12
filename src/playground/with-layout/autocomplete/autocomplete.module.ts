@@ -14,7 +14,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AutocompleteFormComponent } from './autocomplete-form.component';
 import { AutocompleteGroupComponent } from './autocomplete-group.component';
 import { AutocompleteCustomDisplayComponent } from './autocomplete-custom-display.component';
-import {AutocompleteActiveFirstComponent} from './autocomplete-active-first.component';
+import { AutocompleteActiveFirstComponent } from './autocomplete-active-first.component';
+import { AutocompleteSizesComponent } from './autocomplete-sizes.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import {AutocompleteActiveFirstComponent} from './autocomplete-active-first.comp
     AutocompleteGroupComponent,
     AutocompleteCustomDisplayComponent,
     AutocompleteActiveFirstComponent,
+    AutocompleteSizesComponent,
   ],
   exports: [
     AutocompleteShowcaseComponent,
@@ -30,6 +32,7 @@ import {AutocompleteActiveFirstComponent} from './autocomplete-active-first.comp
     AutocompleteGroupComponent,
     AutocompleteCustomDisplayComponent,
     AutocompleteActiveFirstComponent,
+    AutocompleteSizesComponent,
   ],
   imports: [
     NbSharedModule,

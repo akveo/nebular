@@ -1,0 +1,25 @@
+<nb-card size="medium">
+  <nb-card-body class="example-items-col">
+
+    <ng-container *ngFor="let size of sizes">
+
+      <input
+        [formControl]="inputFormControl"
+        nbInput
+        type="text"
+        [placeholder]="size"
+        [nbAutocomplete]="auto"
+        [fieldSize]="size"/>
+
+      <nb-autocomplete #auto [size]="size">
+
+        <nb-option *ngFor="let option of filteredOptions$ | async" [value]="option">
+          {{ option }}
+        </nb-option>
+
+      </nb-autocomplete>
+
+    </ng-container>
+
+  </nb-card-body>
+</nb-card>
