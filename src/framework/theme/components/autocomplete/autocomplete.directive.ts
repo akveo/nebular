@@ -35,6 +35,7 @@ import { DOWN_ARROW, ENTER, ESCAPE, UP_ARROW } from '@angular/cdk/keycodes';
     '(input)': 'handleInput($event)',
     '(keydown)': 'handleKeydown($event)',
     '(focus)': 'handleFocus($event)',
+    '(blur)': 'handleBlur($event)',
   },
   providers: [{
     provide: NG_VALUE_ACCESSOR,
@@ -48,6 +49,8 @@ export class NbAutocompleteDirective<T> implements AfterViewInit, OnDestroy, Con
   protected autocomplete: NbAutocompleteComponent<T>;
 
   protected positionStrategy: NbAdjustableConnectedPositionStrategy;
+
+  protected isOpenedAfterFocus: boolean = false;
 
   /**
    * Current overlay position because of we have to toggle overlayPosition
@@ -94,8 +97,13 @@ export class NbAutocompleteDirective<T> implements AfterViewInit, OnDestroy, Con
     }
   }
 
+  handleBlur($event: Event) {
+    this.isOpenedAfterFocus = false;
+  }
+
   protected handleFocus($event: any) {
     this.autocomplete.isHidden && this.show();
+    this.isOpenedAfterFocus = true;
   }
 
   protected subscribeOnOptionClick() {
@@ -142,15 +150,17 @@ export class NbAutocompleteDirective<T> implements AfterViewInit, OnDestroy, Con
   protected subscribeOnTriggers() {
 
     this.triggerStrategy.show$
-      .pipe(filter(() => this.autocomplete.isHidden))
+      .pipe(filter(() => this.autocomplete.isHidden && !this.isOpenedAfterFocus))
       .subscribe(($event: Event) => {
         this.show();
+        this.isOpenedAfterFocus = false;
       });
 
     this.triggerStrategy.hide$
-      .pipe(filter(() => this.autocomplete.isOpen))
+      .pipe(filter(() => this.autocomplete.isOpen && !this.isOpenedAfterFocus))
       .subscribe(($event: Event) => {
         this.hide();
+        this.isOpenedAfterFocus = false;
       });
   }
 

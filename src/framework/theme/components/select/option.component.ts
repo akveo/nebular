@@ -175,12 +175,10 @@ export class NbOptionComponent<T> implements OnDestroy, NbFocusableOption, NbHig
 
   setActiveStyles(): void {
     this._active = true;
-    this.cd.markForCheck();
   }
 
   setInactiveStyles(): void {
     this._active = false;
-    this.cd.markForCheck();
   }
 
 }
