@@ -22,7 +22,7 @@ import { NbOverlayService } from '../cdk/overlay/overlay-service';
 import { filter, startWith, switchMap, takeWhile, tap } from 'rxjs/operators';
 import { NbOptionComponent } from '../select/option.component';
 import { merge } from 'rxjs';
-import { DOWN_ARROW, ENTER, ESCAPE, UP_ARROW } from '@angular/cdk/keycodes';
+import { DOWN_ARROW, ENTER, ESCAPE, UP_ARROW  } from '../cdk/keycodes/keycodes';
 
 @Directive({
   selector: 'input[nbAutocomplete]',
