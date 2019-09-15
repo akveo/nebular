@@ -81,7 +81,7 @@ export class NbAutocompleteDirective<T> implements AfterViewInit, OnDestroy, Con
   }
 
   @HostListener('blur')
-  protected handleBlur($event: Event) {
+  protected handleBlur() {
     this.isOpenedAfterFocus = false;
   }
 
