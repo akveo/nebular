@@ -10,6 +10,7 @@ import {
   Directive,
   ElementRef,
   forwardRef,
+  HostListener,
   Input,
   OnDestroy,
   QueryList,
@@ -26,12 +27,6 @@ import { DOWN_ARROW, ENTER, ESCAPE, UP_ARROW  } from '../cdk/keycodes/keycodes';
 
 @Directive({
   selector: 'input[nbAutocomplete]',
-  host: {
-    '(input)': 'handleInput($event)',
-    '(keydown)': 'handleKeydown($event)',
-    '(focus)': 'handleFocus($event)',
-    '(blur)': 'handleBlur($event)',
-  },
   providers: [{
     provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => NbAutocompleteDirective),
@@ -70,24 +65,28 @@ export class NbAutocompleteDirective<T> implements AfterViewInit, OnDestroy, Con
     this.subscribeOnTriggers();
   }
 
-  protected handleInput($event: any) {
+  @HostListener('input')
+  protected handleInput() {
     const currentValue = this.hostRef.nativeElement.value;
     this._onChange(currentValue);
     this.hostRef.nativeElement.value = this.getDisplayValue(currentValue);
     this.show();
   }
 
+  @HostListener('keydown', ['$event'])
   protected handleKeydown($event: any) {
     if ($event.keyCode === DOWN_ARROW || $event.keyCode === UP_ARROW) {
       this.autocomplete.isClosed && this.show();
     }
   }
 
+  @HostListener('blur')
   protected handleBlur($event: Event) {
     this.isOpenedAfterFocus = false;
   }
 
-  protected handleFocus($event: any) {
+  @HostListener('focus')
+  protected handleFocus() {
     this.autocomplete.isClosed && this.show();
     this.isOpenedAfterFocus = true;
   }
