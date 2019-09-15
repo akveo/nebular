@@ -58,7 +58,7 @@
     .options-list-container.size-#{$size}
     nb-option-group .option-group-title {
       font-size: nb-theme(autocomplete-option-group-#{$size}-text-font-size);
-      line-height: nb-theme(autocomplete-option-group-#{$size}-text-line-height);
+      line-height: nb-theme(autocomplete-option-group-#{$size}-line-height);
     }
 
     .size-#{$size} {
