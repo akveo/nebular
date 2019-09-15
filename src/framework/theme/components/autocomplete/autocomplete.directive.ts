@@ -75,8 +75,9 @@ export class NbAutocompleteDirective<T> implements AfterViewInit, OnDestroy, Con
 
   @HostListener('keydown', ['$event'])
   protected handleKeydown($event: any) {
-    if ($event.keyCode === DOWN_ARROW || $event.keyCode === UP_ARROW) {
-      this.autocomplete.isClosed && this.show();
+    const isVerticalArrow = $event.keyCode === DOWN_ARROW || $event.keyCode === UP_ARROW;
+    if (isVerticalArrow && this.autocomplete.isClosed) {
+      this.show();
     }
   }
 
@@ -87,7 +88,9 @@ export class NbAutocompleteDirective<T> implements AfterViewInit, OnDestroy, Con
 
   @HostListener('focus')
   protected handleFocus() {
-    this.autocomplete.isClosed && this.show();
+    if (this.autocomplete.isClosed) {
+      this.show();
+    }
     this.isOpenedAfterFocus = true;
   }
 
