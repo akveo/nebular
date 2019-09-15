@@ -59,7 +59,7 @@ export class NbAutocompleteComponent<T> implements OnDestroy {
   /**
    * Determines is autocomplete overlay list hidden.
    * */
-  get isHidden(): boolean {
+  get isClosed(): boolean {
     return !this.isOpen;
   }
 

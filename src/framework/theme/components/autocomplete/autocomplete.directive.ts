@@ -79,7 +79,7 @@ export class NbAutocompleteDirective<T> implements AfterViewInit, OnDestroy, Con
 
   protected handleKeydown($event: any) {
     if ($event.keyCode === DOWN_ARROW || $event.keyCode === UP_ARROW) {
-      this.autocomplete.isHidden && this.show();
+      this.autocomplete.isClosed && this.show();
     }
   }
 
@@ -88,7 +88,7 @@ export class NbAutocompleteDirective<T> implements AfterViewInit, OnDestroy, Con
   }
 
   protected handleFocus($event: any) {
-    this.autocomplete.isHidden && this.show();
+    this.autocomplete.isClosed && this.show();
     this.isOpenedAfterFocus = true;
   }
 
@@ -136,7 +136,7 @@ export class NbAutocompleteDirective<T> implements AfterViewInit, OnDestroy, Con
   protected subscribeOnTriggers() {
 
     this.triggerStrategy.show$
-      .pipe(filter(() => this.autocomplete.isHidden && !this.isOpenedAfterFocus))
+      .pipe(filter(() => this.autocomplete.isClosed && !this.isOpenedAfterFocus))
       .subscribe(($event: Event) => {
         this.show();
         this.isOpenedAfterFocus = false;
@@ -159,7 +159,7 @@ export class NbAutocompleteDirective<T> implements AfterViewInit, OnDestroy, Con
   }
 
   show() {
-    if (this.autocomplete.isHidden) {
+    if (this.autocomplete.isClosed) {
       this.attachToOverlay();
       this.setActiveItem();
     }
