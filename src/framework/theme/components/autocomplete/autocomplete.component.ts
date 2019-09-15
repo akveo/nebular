@@ -22,13 +22,14 @@ import { NbOverlayRef, NbPortalDirective } from '../cdk/overlay/mapping';
 import { NbOptionComponent } from '../select/option.component';
 import { NbActiveDescendantKeyManager } from '../cdk/a11y/descendant-key-manager';
 import { NbComponentSize } from '../component-size';
-import { takeWhile } from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
 import {
   NbAdjustableConnectedPositionStrategy,
   NbAdjustment,
   NbPosition,
   NbPositionBuilderService,
 } from '../cdk/overlay/overlay-position';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'nb-autocomplete',
@@ -56,7 +57,7 @@ export class NbAutocompleteComponent<T> implements OnDestroy {
    * */
   @Input() activeFirst: boolean = false;
 
-  alive: boolean = true;
+  destroy$: Subject<boolean> = new Subject<boolean>();
 
   /**
    * Determines is autocomplete overlay list hidden.
@@ -148,18 +149,19 @@ export class NbAutocompleteComponent<T> implements OnDestroy {
 
   protected subscribeOnPositionChange() {
     this.positionStrategy.positionChange
-      .pipe(takeWhile(() => this.alive))
+      .pipe(takeUntil(this.destroy$))
       .subscribe((position: NbPosition) => {
         this.overlayPosition = position;
       });
   }
 
   ngOnDestroy() {
-    this.alive = false;
-
     if (this.ref) {
       this.ref.dispose();
     }
+
+    this.destroy$.next(true);
+    this.destroy$.unsubscribe();
   }
 
   get optionsListClasses(): string[] {

@@ -20,7 +20,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { NbScrollStrategy } from '../cdk/overlay/mapping';
 import { NbTrigger, NbTriggerStrategy, NbTriggerStrategyBuilderService } from '../cdk/overlay/overlay-trigger';
 import { NbOverlayService } from '../cdk/overlay/overlay-service';
-import { filter, startWith, switchMap, takeWhile, tap } from 'rxjs/operators';
+import { filter, startWith, switchMap, takeUntil, tap } from 'rxjs/operators';
 import { NbOptionComponent } from '../select/option.component';
 import { merge } from 'rxjs';
 import { DOWN_ARROW, ENTER, ESCAPE, UP_ARROW  } from '../cdk/keycodes/keycodes';
@@ -107,7 +107,7 @@ export class NbAutocompleteDirective<T> implements AfterViewInit, OnDestroy, Con
         switchMap((options: QueryList<NbOptionComponent<T>>) => {
           return merge(...options.map(option => option.click));
         }),
-        takeWhile(() => this.autocomplete.alive),
+        takeUntil(this.autocomplete.destroy$),
       )
       .subscribe((clickedOption: NbOptionComponent<T>) => this.handleOptionClick(clickedOption));
   }
@@ -181,7 +181,7 @@ export class NbAutocompleteDirective<T> implements AfterViewInit, OnDestroy, Con
   protected subscribeOnOverlayKeys(): void {
     this.autocomplete.ref.keydownEvents()
       .pipe(
-        takeWhile(() => this.autocomplete.alive),
+        takeUntil(this.autocomplete.destroy$),
       )
       .subscribe((event: KeyboardEvent) => {
         if (event.keyCode === ESCAPE && this.autocomplete.isOpen) {
@@ -204,7 +204,7 @@ export class NbAutocompleteDirective<T> implements AfterViewInit, OnDestroy, Con
       });
 
     this.autocomplete.keyManager.tabOut
-      .pipe(takeWhile(() => this.autocomplete.alive))
+      .pipe(takeUntil(this.autocomplete.destroy$))
       .subscribe(() => {
         this.hide();
       });
