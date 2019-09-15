@@ -69,7 +69,7 @@ export class NbAutocompleteDirective<T> implements AfterViewInit, OnDestroy, Con
   protected handleInput() {
     const currentValue = this.hostRef.nativeElement.value;
     this._onChange(currentValue);
-    this.hostRef.nativeElement.value = this.getDisplayValue(currentValue);
+    this.setHostInputValue(this.getDisplayValue(currentValue));
     this.show();
   }
 
