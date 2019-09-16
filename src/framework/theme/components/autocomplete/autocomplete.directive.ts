@@ -5,7 +5,6 @@
  */
 
 import {
-  AfterViewInit,
   ChangeDetectorRef,
   ComponentRef,
   Directive,
@@ -31,7 +30,7 @@ import {
   NbPosition,
   NbPositionBuilderService,
 } from '../cdk/overlay/overlay-position';
-import {NbActiveDescendantKeyManager} from '../cdk/a11y/descendant-key-manager';
+import { NbActiveDescendantKeyManager } from '../cdk/a11y/descendant-key-manager';
 
 @Directive({
   selector: 'input[nbAutocomplete]',
@@ -42,7 +41,7 @@ import {NbActiveDescendantKeyManager} from '../cdk/a11y/descendant-key-manager';
   }],
 
 })
-export class NbAutocompleteDirective<T> implements AfterViewInit, OnDestroy, ControlValueAccessor {
+export class NbAutocompleteDirective<T> implements OnDestroy, ControlValueAccessor {
 
   protected autocomplete: NbAutocompleteComponent<T>;
 
@@ -79,7 +78,6 @@ export class NbAutocompleteDirective<T> implements AfterViewInit, OnDestroy, Con
   @Input('nbAutocomplete')
   set setAutocomplete(autocomplete: NbAutocompleteComponent<T>) {
     this.autocomplete = autocomplete;
-    this.setupAutocomplete();
   }
 
   constructor(
@@ -88,13 +86,6 @@ export class NbAutocompleteDirective<T> implements AfterViewInit, OnDestroy, Con
     protected cd: ChangeDetectorRef,
     protected triggerStrategyBuilder: NbTriggerStrategyBuilderService,
     protected positionBuilder: NbPositionBuilderService) {}
-
-  ngAfterViewInit() {
-    this.triggerStrategy = this.createTriggerStrategy();
-    this.positionStrategy = this.createPositionStrategy();
-    this.subscribeOnTriggers();
-    this.subscribeOnPositionChange();
-  }
 
   @HostListener('input')
   protected handleInput() {
@@ -276,12 +267,9 @@ export class NbAutocompleteDirective<T> implements AfterViewInit, OnDestroy, Con
 
   protected attachToOverlay() {
     if (!this.overlayRef) {
-      this.createKeyManager();
-      this.subscribeOnOptionClick();
-      this.createOverlay();
-      this.subscribeOnOverlayKeys();
+      this.setupAutocomplete();
+      this.initOverlay();
     }
-
     this.overlayRef.attach(this.autocomplete.portal);
   }
 
@@ -289,6 +277,19 @@ export class NbAutocompleteDirective<T> implements AfterViewInit, OnDestroy, Con
     const scrollStrategy = this.createScrollStrategy();
     this.overlayRef = this.overlay.create(
       { positionStrategy: this.positionStrategy, scrollStrategy });
+  }
+
+  protected initOverlay() {
+    this.triggerStrategy = this.createTriggerStrategy();
+    this.positionStrategy = this.createPositionStrategy();
+
+    this.createKeyManager();
+    this.subscribeOnTriggers();
+    this.subscribeOnPositionChange();
+    this.subscribeOnOptionClick();
+
+    this.createOverlay();
+    this.subscribeOnOverlayKeys();
   }
 
   protected createScrollStrategy(): NbScrollStrategy {
