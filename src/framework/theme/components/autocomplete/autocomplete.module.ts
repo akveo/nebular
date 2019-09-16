@@ -7,11 +7,12 @@
 import { NgModule } from '@angular/core';
 
 import { NbOverlayModule } from '../cdk/overlay/overlay.module';
-import { NbSharedModule } from '../shared/shared.module';
 import { NbCardModule } from '../card/card.module';
 import { NbAutocompleteComponent } from './autocomplete.component';
 import { NbAutocompleteDirective } from './autocomplete.directive';
 import { NbSelectModule } from '../select/select.module';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 const NB_AUTOCOMPLETE_COMPONENTS = [
    NbAutocompleteComponent,
@@ -20,7 +21,8 @@ const NB_AUTOCOMPLETE_COMPONENTS = [
 
 @NgModule({
   imports: [
-    NbSharedModule,
+    CommonModule,
+    FormsModule,
     NbOverlayModule,
     NbCardModule,
     NbSelectModule,
