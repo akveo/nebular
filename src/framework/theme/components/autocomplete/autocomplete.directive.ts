@@ -45,8 +45,6 @@ export class NbAutocompleteDirective<T> implements OnDestroy, ControlValueAccess
 
   protected autocomplete: NbAutocompleteComponent<T>;
 
-  protected isOpenedAfterFocus: boolean = false;
-
   /**
    * Trigger strategy used by overlay.
    * */
@@ -103,17 +101,11 @@ export class NbAutocompleteDirective<T> implements OnDestroy, ControlValueAccess
     }
   }
 
-  @HostListener('blur')
-  protected handleBlur() {
-    this.isOpenedAfterFocus = false;
-  }
-
   @HostListener('focus')
   protected handleFocus() {
     if (this.isClosed) {
       this.show();
     }
-    this.isOpenedAfterFocus = true;
   }
 
   protected subscribeOnOptionClick() {
@@ -176,23 +168,21 @@ export class NbAutocompleteDirective<T> implements OnDestroy, ControlValueAccess
   protected subscribeOnTriggers() {
 
     this.triggerStrategy.show$
-      .pipe(filter(() => this.isClosed && !this.isOpenedAfterFocus))
+      .pipe(filter(() => this.isClosed))
       .subscribe(($event: Event) => {
         this.show();
-        this.isOpenedAfterFocus = false;
       });
 
     this.triggerStrategy.hide$
-      .pipe(filter(() => this.isOpen && !this.isOpenedAfterFocus))
+      .pipe(filter(() => this.isOpen))
       .subscribe(($event: Event) => {
         this.hide();
-        this.isOpenedAfterFocus = false;
       });
   }
 
   protected createTriggerStrategy(): NbTriggerStrategy {
     return this.triggerStrategyBuilder
-      .trigger(NbTrigger.CLICK)
+      .trigger(NbTrigger.FOCUS)
       .host(this.hostRef.nativeElement)
       .container(() => this.getContainer())
       .build();
