@@ -7,7 +7,6 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  ComponentRef,
   ContentChildren,
   ElementRef,
   EventEmitter,
@@ -18,17 +17,10 @@ import {
   QueryList,
   ViewChild,
 } from '@angular/core';
-import { NbOverlayRef, NbPortalDirective } from '../cdk/overlay/mapping';
+import { NbPortalDirective } from '../cdk/overlay/mapping';
 import { NbOptionComponent } from '../select/option.component';
-import { NbActiveDescendantKeyManager } from '../cdk/a11y/descendant-key-manager';
 import { NbComponentSize } from '../component-size';
-import { takeUntil } from 'rxjs/operators';
-import {
-  NbAdjustableConnectedPositionStrategy,
-  NbAdjustment,
-  NbPosition,
-  NbPositionBuilderService,
-} from '../cdk/overlay/overlay-position';
+import { NbPosition } from '../cdk/overlay/overlay-position';
 import { Subject } from 'rxjs';
 
 @Component({
@@ -57,38 +49,12 @@ export class NbAutocompleteComponent<T> implements OnDestroy {
    * */
   @Input() activeFirst: boolean = false;
 
-  destroy$: Subject<boolean> = new Subject<boolean>();
-
-  /**
-   * Determines is autocomplete overlay list hidden.
-   * */
-  get isClosed(): boolean {
-    return !this.isOpen;
-  }
-
-  /**
-   * Determines is select opened.
-   * */
-  get isOpen(): boolean {
-    return this.ref && this.ref.hasAttached();
-  }
-
-  ref: NbOverlayRef;
-
-  positionStrategy: NbAdjustableConnectedPositionStrategy;
-
-  /**
-   * Current overlay position because of we have to toggle overlayPosition
-   * in [ngClass] direction and this directive can use only string.
-   */
-  protected overlayPosition: NbPosition = '' as NbPosition;
-
-  keyManager: NbActiveDescendantKeyManager<NbOptionComponent<T>>;
-
   /**
    * Will be emitted when selected value changes.
    * */
   @Output() selectedChange: EventEmitter<T> = new EventEmitter();
+
+  destroy$: Subject<boolean> = new Subject<boolean>();
 
   /**
    * HTML input reference to which autocomplete connected.
@@ -96,12 +62,17 @@ export class NbAutocompleteComponent<T> implements OnDestroy {
   hostRef: ElementRef;
 
   /**
+   * Current overlay position because of we have to toggle overlayPosition
+   * in [ngClass] direction and this directive can use only string.
+   */
+  overlayPosition: NbPosition = '' as NbPosition;
+
+  /**
     * List of `NbOptionComponent`'s components passed as content.
   * */
   @ContentChildren(NbOptionComponent, { descendants: true }) options: QueryList<NbOptionComponent<T>>;
 
-  constructor(
-    protected positionBuilder: NbPositionBuilderService) {}
+  constructor() {}
 
   /**
    * Returns width of the input.
@@ -110,26 +81,12 @@ export class NbAutocompleteComponent<T> implements OnDestroy {
     return this.hostRef.nativeElement.getBoundingClientRect().width;
   }
 
-  createKeyManager(): void {
-    this.keyManager = new NbActiveDescendantKeyManager<NbOptionComponent<T>>(this.options).withWrap();
-  }
-
   /**
    * Autocomplete knows nothing about host html input element.
-   * So, attach method attaches autocomplete to the host input element.
+   * So, attach method set input hostRef for styling.
    * */
-  attach(hostRef: ElementRef) {
+  setHost(hostRef: ElementRef) {
     this.hostRef = hostRef;
-    this.positionStrategy = this.createPositionStrategy();
-    this.subscribeOnPositionChange();
-  }
-
-  protected createPositionStrategy(): NbAdjustableConnectedPositionStrategy {
-    return this.positionBuilder
-      .connectedTo(this.hostRef)
-      .position(NbPosition.BOTTOM)
-      .offset(0)
-      .adjustment(NbAdjustment.VERTICAL);
   }
 
   /**
@@ -139,27 +96,7 @@ export class NbAutocompleteComponent<T> implements OnDestroy {
     this.selectedChange.emit(selected);
   }
 
-  getContainer() {
-    return this.ref && this.ref.hasAttached() && <ComponentRef<any>> {
-      location: {
-        nativeElement: this.ref.overlayElement,
-      },
-    };
-  }
-
-  protected subscribeOnPositionChange() {
-    this.positionStrategy.positionChange
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((position: NbPosition) => {
-        this.overlayPosition = position;
-      });
-  }
-
   ngOnDestroy() {
-    if (this.ref) {
-      this.ref.dispose();
-    }
-
     this.destroy$.next(true);
     this.destroy$.unsubscribe();
   }

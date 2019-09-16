@@ -7,6 +7,7 @@
 import {
   AfterViewInit,
   ChangeDetectorRef,
+  ComponentRef,
   Directive,
   ElementRef,
   forwardRef,
@@ -17,13 +18,20 @@ import {
 } from '@angular/core';
 import { NbAutocompleteComponent } from './autocomplete.component';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { NbScrollStrategy } from '../cdk/overlay/mapping';
+import { NbOverlayRef, NbScrollStrategy } from '../cdk/overlay/mapping';
 import { NbTrigger, NbTriggerStrategy, NbTriggerStrategyBuilderService } from '../cdk/overlay/overlay-trigger';
 import { NbOverlayService } from '../cdk/overlay/overlay-service';
 import { filter, startWith, switchMap, takeUntil, tap } from 'rxjs/operators';
 import { NbOptionComponent } from '../select/option.component';
 import { merge } from 'rxjs';
 import { DOWN_ARROW, ENTER, ESCAPE, UP_ARROW  } from '../cdk/keycodes/keycodes';
+import {
+  NbAdjustableConnectedPositionStrategy,
+  NbAdjustment,
+  NbPosition,
+  NbPositionBuilderService,
+} from '../cdk/overlay/overlay-position';
+import {NbActiveDescendantKeyManager} from '../cdk/a11y/descendant-key-manager';
 
 @Directive({
   selector: 'input[nbAutocomplete]',
@@ -45,6 +53,26 @@ export class NbAutocompleteDirective<T> implements AfterViewInit, OnDestroy, Con
    * */
   protected triggerStrategy: NbTriggerStrategy;
 
+  protected positionStrategy: NbAdjustableConnectedPositionStrategy;
+
+  protected overlayRef: NbOverlayRef;
+
+  protected keyManager: NbActiveDescendantKeyManager<NbOptionComponent<T>>;
+
+  /**
+   * Determines is autocomplete opened.
+   * */
+  get isOpen(): boolean {
+    return this.overlayRef && this.overlayRef.hasAttached();
+  }
+
+  /**
+   * Determines is autocomplete overlay closed.
+   * */
+  get isClosed(): boolean {
+    return !this.isOpen;
+  }
+
   /**
    * Provides autocomplete component.
    * */
@@ -58,11 +86,14 @@ export class NbAutocompleteDirective<T> implements AfterViewInit, OnDestroy, Con
     protected hostRef: ElementRef,
     protected overlay: NbOverlayService,
     protected cd: ChangeDetectorRef,
-    protected triggerStrategyBuilder: NbTriggerStrategyBuilderService) {}
+    protected triggerStrategyBuilder: NbTriggerStrategyBuilderService,
+    protected positionBuilder: NbPositionBuilderService) {}
 
   ngAfterViewInit() {
     this.triggerStrategy = this.createTriggerStrategy();
+    this.positionStrategy = this.createPositionStrategy();
     this.subscribeOnTriggers();
+    this.subscribeOnPositionChange();
   }
 
   @HostListener('input')
@@ -76,7 +107,7 @@ export class NbAutocompleteDirective<T> implements AfterViewInit, OnDestroy, Con
   @HostListener('keydown', ['$event'])
   protected handleKeydown($event: any) {
     const isVerticalArrow = $event.keyCode === DOWN_ARROW || $event.keyCode === UP_ARROW;
-    if (isVerticalArrow && this.autocomplete.isClosed) {
+    if (isVerticalArrow && this.isClosed) {
       this.show();
     }
   }
@@ -88,7 +119,7 @@ export class NbAutocompleteDirective<T> implements AfterViewInit, OnDestroy, Con
 
   @HostListener('focus')
   protected handleFocus() {
-    if (this.autocomplete.isClosed) {
+    if (this.isClosed) {
       this.show();
     }
     this.isOpenedAfterFocus = true;
@@ -112,17 +143,33 @@ export class NbAutocompleteDirective<T> implements AfterViewInit, OnDestroy, Con
       .subscribe((clickedOption: NbOptionComponent<T>) => this.handleOptionClick(clickedOption));
   }
 
+  protected subscribeOnPositionChange() {
+    this.positionStrategy.positionChange
+      .pipe(takeUntil(this.autocomplete.destroy$))
+      .subscribe((position: NbPosition) => {
+        this.autocomplete.overlayPosition = position;
+      });
+  }
+
   protected getActiveItem(): NbOptionComponent<T> {
-    return this.autocomplete.keyManager.activeItem;
+    return this.keyManager.activeItem;
   }
 
   protected setupAutocomplete() {
-    this.autocomplete.attach(this.hostRef);
+    this.autocomplete.setHost(this.hostRef);
   }
 
   protected getDisplayValue(value: string) {
     const displayFn = this.autocomplete.handleDisplayFn;
     return displayFn ? displayFn(value) : value;
+  }
+
+  protected getContainer() {
+    return this.overlayRef && this.isOpen && <ComponentRef<any>> {
+      location: {
+        nativeElement: this.overlayRef.overlayElement,
+      },
+    };
   }
 
   protected handleOptionClick(option: NbOptionComponent<T>) {
@@ -138,14 +185,14 @@ export class NbAutocompleteDirective<T> implements AfterViewInit, OnDestroy, Con
   protected subscribeOnTriggers() {
 
     this.triggerStrategy.show$
-      .pipe(filter(() => this.autocomplete.isClosed && !this.isOpenedAfterFocus))
+      .pipe(filter(() => this.isClosed && !this.isOpenedAfterFocus))
       .subscribe(($event: Event) => {
         this.show();
         this.isOpenedAfterFocus = false;
       });
 
     this.triggerStrategy.hide$
-      .pipe(filter(() => this.autocomplete.isOpen && !this.isOpenedAfterFocus))
+      .pipe(filter(() => this.isOpen && !this.isOpenedAfterFocus))
       .subscribe(($event: Event) => {
         this.hide();
         this.isOpenedAfterFocus = false;
@@ -156,20 +203,24 @@ export class NbAutocompleteDirective<T> implements AfterViewInit, OnDestroy, Con
     return this.triggerStrategyBuilder
       .trigger(NbTrigger.CLICK)
       .host(this.hostRef.nativeElement)
-      .container(() => this.autocomplete.getContainer())
+      .container(() => this.getContainer())
       .build();
   }
 
+  protected createKeyManager(): void {
+    this.keyManager = new NbActiveDescendantKeyManager<NbOptionComponent<T>>(this.autocomplete.options).withWrap();
+  }
+
   show() {
-    if (this.autocomplete.isClosed) {
+    if (this.isClosed) {
       this.attachToOverlay();
       this.setActiveItem();
     }
   }
 
   hide() {
-    if (this.autocomplete.isOpen) {
-      this.autocomplete.ref.detach();
+    if (this.isOpen) {
+      this.overlayRef.detach();
       this.setActiveItem();
     }
   }
@@ -178,13 +229,21 @@ export class NbAutocompleteDirective<T> implements AfterViewInit, OnDestroy, Con
     this.hostRef.nativeElement.value = this.getDisplayValue(value);
   }
 
+  protected createPositionStrategy(): NbAdjustableConnectedPositionStrategy {
+    return this.positionBuilder
+      .connectedTo(this.hostRef)
+      .position(NbPosition.BOTTOM)
+      .offset(0)
+      .adjustment(NbAdjustment.VERTICAL);
+  }
+
   protected subscribeOnOverlayKeys(): void {
-    this.autocomplete.ref.keydownEvents()
+    this.overlayRef.keydownEvents()
       .pipe(
         takeUntil(this.autocomplete.destroy$),
       )
       .subscribe((event: KeyboardEvent) => {
-        if (event.keyCode === ESCAPE && this.autocomplete.isOpen) {
+        if (event.keyCode === ESCAPE && this.isOpen) {
           this.hostRef.nativeElement.focus();
           this.hide();
 
@@ -199,11 +258,11 @@ export class NbAutocompleteDirective<T> implements AfterViewInit, OnDestroy, Con
           this.hide();
 
         } else {
-          this.autocomplete.keyManager.onKeydown(event);
+          this.keyManager.onKeydown(event);
         }
       });
 
-    this.autocomplete.keyManager.tabOut
+    this.keyManager.tabOut
       .pipe(takeUntil(this.autocomplete.destroy$))
       .subscribe(() => {
         this.hide();
@@ -211,25 +270,25 @@ export class NbAutocompleteDirective<T> implements AfterViewInit, OnDestroy, Con
   }
 
   protected setActiveItem() {
-    this.autocomplete.keyManager.setActiveItem(this.autocomplete.activeFirst ? 0 : -1);
+    this.keyManager.setActiveItem(this.autocomplete.activeFirst ? 0 : -1);
     this.cd.detectChanges();
   }
 
   protected attachToOverlay() {
-    if (!this.autocomplete.ref) {
-      this.autocomplete.createKeyManager();
+    if (!this.overlayRef) {
+      this.createKeyManager();
       this.subscribeOnOptionClick();
       this.createOverlay();
       this.subscribeOnOverlayKeys();
     }
 
-    this.autocomplete.ref.attach(this.autocomplete.portal);
+    this.overlayRef.attach(this.autocomplete.portal);
   }
 
   protected createOverlay() {
     const scrollStrategy = this.createScrollStrategy();
-    this.autocomplete.ref = this.overlay.create(
-      { positionStrategy: this.autocomplete.positionStrategy, scrollStrategy });
+    this.overlayRef = this.overlay.create(
+      { positionStrategy: this.positionStrategy, scrollStrategy });
   }
 
   protected createScrollStrategy(): NbScrollStrategy {
@@ -258,8 +317,17 @@ export class NbAutocompleteDirective<T> implements AfterViewInit, OnDestroy, Con
   }
 
   ngOnDestroy() {
+
     if (this.triggerStrategy) {
       this.triggerStrategy.destroy();
+    }
+
+    if (this.positionStrategy) {
+      this.positionStrategy.dispose();
+    }
+
+    if (this.overlayRef) {
+      this.overlayRef.dispose();
     }
   }
 
