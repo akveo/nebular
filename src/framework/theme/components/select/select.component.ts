@@ -43,7 +43,7 @@ import { NbComponentSize } from '../component-size';
 import { NbComponentShape } from '../component-shape';
 import { NbComponentStatus } from '../component-status';
 import { NB_DOCUMENT } from '../../theme.options';
-import { NbOptionComponent } from './option.component';
+import { NbOptionComponent } from '../option-list/option.component';
 import { convertToBoolProperty } from '../helpers';
 import { NB_SELECT_INJECTION_TOKEN } from './select-injection-tokens';
 
