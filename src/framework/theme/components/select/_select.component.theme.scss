@@ -26,7 +26,7 @@
     }
   }
 
-  .options-list-container {
+  nb-option-list {
     box-shadow: nb-theme(select-options-list-shadow);
     border-style: nb-theme(select-options-list-border-style);
     border-width: nb-theme(select-options-list-border-width);
@@ -96,7 +96,7 @@
     }
   }
 
-  .options-list-container {
+  nb-option-list {
     border-radius: nb-theme(select-rectangle-border-radius);
   }
 

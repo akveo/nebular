@@ -56,7 +56,7 @@
       }
     }
 
-    .options-list-container.appearance-hero.status-#{$status} {
+    nb-option-list.appearance-hero.status-#{$status} {
       border-color: nb-theme(select-options-list-hero-#{$status}-border-color);
     }
   }

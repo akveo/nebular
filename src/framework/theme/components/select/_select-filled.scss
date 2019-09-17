@@ -55,7 +55,7 @@
       }
     }
 
-    .options-list-container.appearance-filled.status-#{$status} {
+    nb-option-list.appearance-filled.status-#{$status} {
       border-color: nb-theme(select-options-list-filled-#{$status}-border-color);
     }
   }
