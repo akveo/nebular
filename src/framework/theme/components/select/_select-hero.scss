@@ -9,15 +9,6 @@
       @include nb-ltr(padding-right, nb-theme(select-icon-offset));
       @include nb-rtl(padding-left, nb-theme(select-icon-offset));
     }
-    .appearance-hero.size-#{$size} {
-      nb-option-group .option-group-title,
-      nb-option {
-        padding: nb-theme(select-option-hero-#{$size}-padding);
-      }
-      nb-option-group nb-option {
-        padding-left: nb-theme(select-group-option-outline-#{$size}-start-padding);
-      }
-    }
   }
 
   @each $status in nb-get-statuses() {
@@ -54,10 +45,6 @@
       nb-icon {
         color: nb-theme(select-hero-#{$status}-icon-color);
       }
-    }
-
-    nb-option-list.appearance-hero.status-#{$status} {
-      border-color: nb-theme(select-options-list-hero-#{$status}-border-color);
     }
   }
 }
