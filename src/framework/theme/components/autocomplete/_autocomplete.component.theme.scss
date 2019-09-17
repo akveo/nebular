@@ -6,7 +6,7 @@
 
 @mixin nb-autocomplete-theme() {
 
-  .options-list-container {
+  nb-option-list {
     box-shadow: nb-theme(autocomplete-options-list-shadow);
     border-style: nb-theme(autocomplete-options-list-border-style);
     border-width: nb-theme(autocomplete-options-list-border-width);
@@ -50,12 +50,12 @@
   }
 
   @each $size in nb-get-sizes() {
-    .options-list-container.size-#{$size} nb-option {
+    nb-option-list.size-#{$size} nb-option {
       font-size: nb-theme(autocomplete-#{$size}-text-font-size);
       line-height: nb-theme(autocomplete-#{$size}-text-line-height);
     }
 
-    .options-list-container.size-#{$size}
+    nb-option-list.size-#{$size}
     nb-option-group .option-group-title {
       font-size: nb-theme(autocomplete-option-group-#{$size}-text-font-size);
       line-height: nb-theme(autocomplete-option-group-#{$size}-line-height);

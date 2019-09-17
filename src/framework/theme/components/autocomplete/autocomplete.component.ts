@@ -17,11 +17,11 @@ import {
   QueryList,
   ViewChild,
 } from '@angular/core';
-import { NbPortalDirective } from '../cdk/overlay/mapping';
-import { NbOptionComponent } from '../select/option.component';
 import { NbComponentSize } from '../component-size';
 import { NbPosition } from '../cdk/overlay/overlay-position';
 import { Subject } from 'rxjs';
+import { NbOptionComponent } from '../option-list/option.component';
+import { NbPortalDirective } from '../cdk/overlay/mapping';
 
 @Component({
   selector: 'nb-autocomplete',
@@ -30,8 +30,6 @@ import { Subject } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NbAutocompleteComponent<T> implements OnDestroy {
-
-  @ViewChild(NbPortalDirective, { static: false }) portal: NbPortalDirective;
 
   /**
    * Function passed as input to process each string option value before render.
@@ -72,7 +70,10 @@ export class NbAutocompleteComponent<T> implements OnDestroy {
   * */
   @ContentChildren(NbOptionComponent, { descendants: true }) options: QueryList<NbOptionComponent<T>>;
 
-  constructor() {}
+  /**
+   * NbCard with options content.
+   * */
+  @ViewChild(NbPortalDirective, { static: false }) portal: NbPortalDirective;
 
   /**
    * Returns width of the input.

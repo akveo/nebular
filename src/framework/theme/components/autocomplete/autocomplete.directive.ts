@@ -21,7 +21,6 @@ import { NbOverlayRef, NbScrollStrategy } from '../cdk/overlay/mapping';
 import { NbTrigger, NbTriggerStrategy, NbTriggerStrategyBuilderService } from '../cdk/overlay/overlay-trigger';
 import { NbOverlayService } from '../cdk/overlay/overlay-service';
 import { filter, startWith, switchMap, takeUntil, tap } from 'rxjs/operators';
-import { NbOptionComponent } from '../select/option.component';
 import { merge } from 'rxjs';
 import { DOWN_ARROW, ENTER, ESCAPE, UP_ARROW  } from '../cdk/keycodes/keycodes';
 import {
@@ -31,6 +30,7 @@ import {
   NbPositionBuilderService,
 } from '../cdk/overlay/overlay-position';
 import { NbActiveDescendantKeyManager } from '../cdk/a11y/descendant-key-manager';
+import { NbOptionComponent } from '../option-list/option.component';
 
 @Directive({
   selector: 'input[nbAutocomplete]',
