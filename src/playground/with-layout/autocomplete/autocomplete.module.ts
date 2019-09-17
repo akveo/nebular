@@ -7,7 +7,7 @@
 import { NgModule } from '@angular/core';
 import { NbAutocompleteModule, NbCardModule } from '@nebular/theme';
 import { AutocompleteShowcaseComponent } from './autocomplete-showcase.component';
-import { NbSelectModule, NbInputModule } from '../../../framework/theme/public_api';
+import { NbInputModule } from '../../../framework/theme/public_api';
 import { AutocompleteRoutingModule } from './autocomplete-routing.module';
 import { NbSharedModule } from '../../../framework/theme/components/shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -16,6 +16,7 @@ import { AutocompleteGroupComponent } from './autocomplete-group.component';
 import { AutocompleteCustomDisplayComponent } from './autocomplete-custom-display.component';
 import { AutocompleteActiveFirstComponent } from './autocomplete-active-first.component';
 import { AutocompleteSizesComponent } from './autocomplete-sizes.component';
+import { NbOptionListModule } from '../../../framework/theme/components/option-list/option-list.module';
 
 @NgModule({
   declarations: [
@@ -37,8 +38,8 @@ import { AutocompleteSizesComponent } from './autocomplete-sizes.component';
   imports: [
     NbSharedModule,
     ReactiveFormsModule,
+    NbOptionListModule,
     NbAutocompleteModule,
-    NbSelectModule,
     NbInputModule,
     AutocompleteRoutingModule,
     NbCardModule,
