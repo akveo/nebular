@@ -6,7 +6,7 @@
 
 import { ChangeDetectionStrategy, Component, ViewChild, OnInit } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'nb-autocomplete-showcase',
@@ -32,12 +32,11 @@ export class AutocompleteShowcaseComponent implements OnInit {
 
   getFilteredOptions (value: string): Observable<string[]> {
     return of(value).pipe(
-      startWith(''),
       map(item => this.filter(item)),
     );
   }
 
-  onChange($event) {
+  onChange() {
     this.filteredOptions$ = this.getFilteredOptions(this.input.nativeElement.value);
   }
 

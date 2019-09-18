@@ -71,7 +71,7 @@ export class NbAutocompleteComponent<T> implements OnDestroy {
   @ContentChildren(NbOptionComponent, { descendants: true }) options: QueryList<NbOptionComponent<T>>;
 
   /**
-   * NbCard with options content.
+   * NbOptionList with options content.
    * */
   @ViewChild(NbPortalDirective, { static: false }) portal: NbPortalDirective;
 
@@ -95,11 +95,6 @@ export class NbAutocompleteComponent<T> implements OnDestroy {
    * */
   emitSelected(selected: T) {
     this.selectedChange.emit(selected);
-  }
-
-  ngOnDestroy() {
-    this.destroy$.next(true);
-    this.destroy$.unsubscribe();
   }
 
   get optionsListClasses(): string[] {
@@ -130,6 +125,11 @@ export class NbAutocompleteComponent<T> implements OnDestroy {
   @HostBinding('class.size-giant')
   get giant(): boolean {
     return this.size === 'giant';
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    this.destroy$.unsubscribe();
   }
 
 }

@@ -43,6 +43,9 @@ import { NbOptionComponent } from '../option-list/option.component';
 })
 export class NbAutocompleteDirective<T> implements OnDestroy, ControlValueAccessor {
 
+  /**
+   * NbAutocompleteComponent instance passed via input.
+   * */
   protected autocomplete: NbAutocompleteComponent<T>;
 
   /**
@@ -202,7 +205,6 @@ export class NbAutocompleteDirective<T> implements OnDestroy, ControlValueAccess
   hide() {
     if (this.isOpen) {
       this.overlayRef.detach();
-      this.setActiveItem();
     }
   }
 
@@ -252,7 +254,7 @@ export class NbAutocompleteDirective<T> implements OnDestroy, ControlValueAccess
 
   protected setActiveItem() {
     this.keyManager.setActiveItem(this.autocomplete.activeFirst ? 0 : -1);
-    this.cd.detectChanges();
+    Promise.resolve().then(() => this.cd.detectChanges());
   }
 
   protected attachToOverlay() {
