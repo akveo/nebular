@@ -7,6 +7,7 @@
 import { Component, EventEmitter, Input, Output, Type } from '@angular/core';
 
 import { NbCalendarCell, NbCalendarSize, NbCalendarViewMode } from '../calendar-kit/model';
+import { convertToBoolProperty } from '../helpers';
 
 
 /**
@@ -155,6 +156,7 @@ import { NbCalendarCell, NbCalendarSize, NbCalendarViewMode } from '../calendar-
       [size]="size"
       [visibleDate]="visibleDate"
       [showHeader]="showHeader"
+      [showWeekNumber]="showWeekNumber"
       (dateChange)="dateChange.emit($event)"
     ></nb-base-calendar>
   `,
@@ -219,6 +221,15 @@ export class NbCalendarComponent<D> {
    * Date which will be rendered as selected.
    * */
   @Input() date: D;
+
+  @Input()
+  get showWeekNumber(): boolean {
+    return this._showWeekNumber;
+  }
+  set showWeekNumber(value: boolean) {
+    this._showWeekNumber = convertToBoolProperty(value);
+  }
+  protected _showWeekNumber: boolean = false;
 
   /**
    * Emits date when selected.

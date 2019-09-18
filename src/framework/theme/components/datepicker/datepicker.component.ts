@@ -44,6 +44,7 @@ import {
 } from '../calendar-kit/model';
 import { NbDateService } from '../calendar-kit/services/date.service';
 import { NB_DATE_SERVICE_OPTIONS, NbDatepicker, NbPickerValidatorConfig } from './datepicker.directive';
+import { convertToBoolProperty } from '../helpers';
 
 
 /**
@@ -121,6 +122,15 @@ export abstract class NbBasePicker<D, T, P>
    * @type {boolean}
    */
   @Input() showHeader: boolean = true;
+
+  @Input()
+  get showWeekNumber(): boolean {
+    return this._showWeekNumber;
+  }
+  set showWeekNumber(value: boolean) {
+    this._showWeekNumber = convertToBoolProperty(value);
+  }
+  protected _showWeekNumber: boolean = false;
 
   /**
    * Calendar component class that has to be instantiated inside overlay.
@@ -356,6 +366,7 @@ export abstract class NbBasePicker<D, T, P>
     this.picker.size = this.size;
     this.picker.showHeader = this.showHeader;
     this.picker.visibleDate = this.visibleDate;
+    this.picker.showWeekNumber = this.showWeekNumber;
   }
 
   protected checkFormat() {

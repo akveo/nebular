@@ -19,6 +19,7 @@ import {
 import { NbCalendarMonthModelService } from '../../services/calendar-month-model.service';
 import { NbCalendarDayCellComponent } from './calendar-day-cell.component';
 import { NbCalendarCell, NbCalendarSize } from '../../model';
+import { convertToBoolProperty } from '../../../helpers';
 
 
 /**
@@ -26,19 +27,22 @@ import { NbCalendarCell, NbCalendarSize } from '../../model';
  * */
 @Component({
   selector: 'nb-calendar-day-picker',
-  styles: [` :host { display: block; } `],
+  styles: [` :host { display: flex; } `],
   template: `
-    <nb-calendar-days-names></nb-calendar-days-names>
-    <nb-calendar-picker
-      [data]="weeks"
-      [visibleDate]="visibleDate"
-      [selectedValue]="date"
-      [cellComponent]="cellComponent"
-      [min]="min"
-      [max]="max"
-      [filter]="filter"
-      (select)="onSelect($event)">
-    </nb-calendar-picker>
+    <nb-calendar-week-numbers *ngIf="showWeekNumber" [weeks]="weeks" [size]="size"></nb-calendar-week-numbers>
+    <div>
+      <nb-calendar-days-names></nb-calendar-days-names>
+      <nb-calendar-picker
+          [data]="weeks"
+          [visibleDate]="visibleDate"
+          [selectedValue]="date"
+          [cellComponent]="cellComponent"
+          [min]="min"
+          [max]="max"
+          [filter]="filter"
+          (select)="onSelect($event)">
+      </nb-calendar-picker>
+    </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -91,6 +95,15 @@ export class NbCalendarDayPickerComponent<D, T> implements OnChanges {
    * Already selected date.
    * */
   @Input() date: T;
+
+  @Input()
+  get showWeekNumber(): boolean {
+    return this._showWeekNumber;
+  }
+  set showWeekNumber(value: boolean) {
+    this._showWeekNumber = convertToBoolProperty(value);
+  }
+  protected _showWeekNumber: boolean = false;
 
   /**
    * Fires newly selected date.

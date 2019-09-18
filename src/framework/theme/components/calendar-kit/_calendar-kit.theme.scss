@@ -114,20 +114,26 @@
     }
   }
 
+  nb-calendar-week-numbers .week-cell,
   nb-calendar-day-picker .day-cell,
   nb-calendar-month-picker .month-cell,
   nb-calendar-year-picker .year-cell {
-    border-radius: nb-theme(calendar-border-radius);
-    color: nb-theme(calendar-text-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 1px;
+  }
+
+  nb-calendar-day-picker .day-cell,
+  nb-calendar-month-picker .month-cell,
+  nb-calendar-year-picker .year-cell {
     font-family: nb-theme(calendar-text-font-family);
     font-size: nb-theme(calendar-text-font-size);
     font-weight: nb-theme(calendar-text-font-weight);
     line-height: nb-theme(calendar-text-line-height);
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 1px;
+    border-radius: nb-theme(calendar-border-radius);
+    color: nb-theme(calendar-text-color);
 
     &:not(.empty):not(.disabled) {
       cursor: pointer;

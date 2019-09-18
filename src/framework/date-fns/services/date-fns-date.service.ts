@@ -14,14 +14,19 @@ import { default as rollupParse } from 'date-fns/parse';
 import * as dateFnsFormat from 'date-fns/format';
 // @ts-ignore
 import { default as rollupFormat } from 'date-fns/format';
+import * as dateFnsGetWeek from 'date-fns/getWeek';
+// @ts-ignore
+import { default as rollupGetWeek } from 'date-fns/getWeek';
 
 const parse = rollupParse || dateFnsParse;
 const formatDate = rollupFormat || dateFnsFormat;
+const getWeek = rollupGetWeek || dateFnsGetWeek;
 
 export interface NbDateFnsOptions {
   format: string;
   parseOptions: {},
   formatOptions: {},
+  getWeekOptions: {},
 }
 
 @Injectable()
@@ -51,5 +56,9 @@ export class NbDateFnsDateService extends NbNativeDateService {
 
   getId(): string {
     return 'date-fns';
+  }
+
+  getWeekNumber(date: Date): number {
+    return getWeek(date, this.options.getWeekOptions);
   }
 }
