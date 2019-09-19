@@ -96,6 +96,10 @@ export class NbCalendarDayPickerComponent<D, T> implements OnChanges {
    * */
   @Input() date: T;
 
+  /**
+   * Determines should we show week numbers column.
+   * False by default.
+   * */
   @Input()
   get showWeekNumber(): boolean {
     return this._showWeekNumber;

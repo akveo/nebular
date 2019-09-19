@@ -123,6 +123,10 @@ export abstract class NbBasePicker<D, T, P>
    */
   @Input() showHeader: boolean = true;
 
+  /**
+   * Determines should we show week numbers column.
+   * False by default.
+   * */
   @Input()
   get showWeekNumber(): boolean {
     return this._showWeekNumber;

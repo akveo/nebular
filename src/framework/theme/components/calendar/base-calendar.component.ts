@@ -81,6 +81,10 @@ export class NbBaseCalendarComponent<D, T> implements OnInit {
    * */
   @Input() date: T;
 
+  /**
+   * Determines should we show week numbers column.
+   * False by default.
+   * */
   @Input()
   @HostBinding('class.has-week-number')
   get showWeekNumber(): boolean {

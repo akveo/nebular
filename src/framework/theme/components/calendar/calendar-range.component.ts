@@ -217,6 +217,10 @@ export class NbCalendarRangeComponent<D> {
    * */
   @Input() range: NbCalendarRange<D>;
 
+  /**
+   * Determines should we show week numbers column.
+   * False by default.
+   * */
   @Input()
   get showWeekNumber(): boolean {
     return this._showWeekNumber;
