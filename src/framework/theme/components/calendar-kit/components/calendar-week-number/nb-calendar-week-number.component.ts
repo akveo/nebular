@@ -38,9 +38,10 @@ export class NbCalendarWeekNumberComponent<D> {
   constructor(private dateService: NbDateService<D>) {}
 
   getWeeks(): number[] {
-    return this.weeks.reduce((weeks: number[], week: D[]) => {
-      weeks.push(this.dateService.getWeekNumber(week[0]));
-      return weeks;
-    }, []);
+    return this.weeks.map((week: D[]) => {
+      // Use last day of the week to determine week number.
+      // This way weeks which span between sibling years is marked first
+      return this.dateService.getWeekNumber(week[6]);
+    });
   }
 }
