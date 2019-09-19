@@ -69,6 +69,9 @@ import { convertToBoolProperty } from '../helpers';
  * which disables weekdays.
  * @stacked-example(Filter, calendar/calendar-filter.component)
  *
+ * Week numbers column could be enabled via `showWeekNumber` binding:
+ * @stacked-example(Week number, calendar/calendar-week-number.component)
+ *
  * If you need create custom cells you can easily provide custom components for
  * calendar. For examples if you want to show any average price under each date you can
  * just provide custom `dayCellComponent`. Custom cells for month and year can be provided
