@@ -6,6 +6,7 @@
 
 import {
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   ContentChildren,
   ElementRef,
@@ -18,7 +19,7 @@ import {
 } from '@angular/core';
 import { NbComponentSize } from '../component-size';
 import { NbPosition } from '../cdk/overlay/overlay-position';
-import { NbOptionComponent } from '../option-list/option.component';
+import { NbOptionComponent } from '@nebular/theme';
 import { NbPortalDirective } from '../cdk/overlay/mapping';
 
 @Component({
@@ -38,7 +39,33 @@ export class NbAutocompleteComponent<T> {
    * Current overlay position because of we have to toggle overlayPosition
    * in [ngClass] direction and this directive can use only string.
    */
-  overlayPosition: NbPosition = '' as NbPosition;
+  _overlayPosition: NbPosition = '' as NbPosition;
+
+  set overlayPosition(value: NbPosition) {
+    this._overlayPosition = value;
+    // Need run change detection after first set from NbAutocompleteDirective
+    this.cd.detectChanges();
+  }
+
+  get overlayPosition(): NbPosition {
+    return this._overlayPosition;
+  }
+
+  get optionsListClasses(): string[] {
+    const classes = [
+      `size-${this.size}`,
+      this.overlayPosition,
+    ];
+
+    return classes;
+  }
+
+  /**
+   * Returns width of the input.
+   * */
+  get hostWidth(): number {
+    return this.hostRef.nativeElement.getBoundingClientRect().width;
+  }
 
   /**
    * Function passed as input to process each string option value before render.
@@ -71,21 +98,7 @@ export class NbAutocompleteComponent<T> {
    * */
   @ViewChild(NbPortalDirective, { static: false }) portal: NbPortalDirective;
 
-  /**
-   * Returns width of the input.
-   * */
-  get hostWidth(): number {
-    return this.hostRef.nativeElement.getBoundingClientRect().width;
-  }
-
-  get optionsListClasses(): string[] {
-    const classes = [
-      `size-${this.size}`,
-      this.overlayPosition,
-    ];
-
-    return classes;
-  }
+  constructor(protected cd: ChangeDetectorRef) {}
 
   /**
    * Autocomplete knows nothing about host html input element.

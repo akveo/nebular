@@ -11,19 +11,19 @@ import {
   Directive,
   ElementRef,
   forwardRef,
+  HostBinding,
   HostListener,
   Input,
   OnDestroy,
   QueryList,
 } from '@angular/core';
-import { NbAutocompleteComponent } from './autocomplete.component';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { NbOverlayRef, NbScrollStrategy } from '../cdk/overlay/mapping';
 import { NbTrigger, NbTriggerStrategy, NbTriggerStrategyBuilderService } from '../cdk/overlay/overlay-trigger';
 import { NbOverlayService } from '../cdk/overlay/overlay-service';
 import { filter, startWith, switchMap, takeUntil, tap } from 'rxjs/operators';
 import { merge, Subject } from 'rxjs';
-import { ENTER, ESCAPE  } from '../cdk/keycodes/keycodes';
+import { ENTER, ESCAPE } from '../cdk/keycodes/keycodes';
 import {
   NbAdjustableConnectedPositionStrategy,
   NbAdjustment,
@@ -34,10 +34,10 @@ import {
   NbActiveDescendantKeyManager,
   NbActiveDescendantKeyManagerFactoryService,
 } from '../cdk/a11y/descendant-key-manager';
-import { NbOptionComponent } from '../option-list/option.component';
+import { NbOptionComponent, NbAutocompleteComponent } from '@nebular/theme';
 
 @Directive({
-  selector: 'input[nbAutocomplete]',
+  selector: 'input[nbAutocomplete], textarea[nbAutocomplete]',
   providers: [{
     provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => NbAutocompleteDirective),
@@ -85,6 +85,16 @@ export class NbAutocompleteDirective<T> implements OnDestroy, AfterViewInit, Con
   @Input('nbAutocomplete')
   set setAutocomplete(autocomplete: NbAutocompleteComponent<T>) {
     this.autocomplete = autocomplete;
+  }
+
+  @HostBinding('class.nb-autocomplete-position-top')
+  get top(): boolean {
+    return this.isOpen && this.autocomplete.overlayPosition === NbPosition.TOP;
+  }
+
+  @HostBinding('class.nb-autocomplete-position-bottom')
+  get bottom(): boolean {
+    return this.isOpen && this.autocomplete.overlayPosition === NbPosition.BOTTOM;
   }
 
   constructor(
@@ -156,6 +166,7 @@ export class NbAutocompleteDirective<T> implements OnDestroy, AfterViewInit, Con
       .pipe(takeUntil(this.destroy$))
       .subscribe((position: NbPosition) => {
         this.autocomplete.overlayPosition = position;
+        this.cd.detectChanges();
       });
   }
 
@@ -307,6 +318,8 @@ export class NbAutocompleteDirective<T> implements OnDestroy, AfterViewInit, Con
   hide() {
     if (this.isOpen) {
       this.overlayRef.detach();
+      // Need to update class via @HostBinding
+      this.cd.detectChanges();
     }
   }
 

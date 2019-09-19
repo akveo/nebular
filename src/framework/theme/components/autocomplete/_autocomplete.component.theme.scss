@@ -1,0 +1,18 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
+@mixin nb-autocomplete-theme() {
+
+  [nbInput].nb-autocomplete-position-bottom {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+  [nbInput].nb-autocomplete-position-top {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
+
+}
