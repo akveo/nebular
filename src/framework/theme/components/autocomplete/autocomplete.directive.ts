@@ -22,7 +22,7 @@ import { NbTrigger, NbTriggerStrategy, NbTriggerStrategyBuilderService } from '.
 import { NbOverlayService } from '../cdk/overlay/overlay-service';
 import { filter, startWith, switchMap, takeUntil, tap } from 'rxjs/operators';
 import { merge } from 'rxjs';
-import { DOWN_ARROW, ENTER, ESCAPE, UP_ARROW  } from '../cdk/keycodes/keycodes';
+import { ENTER, ESCAPE  } from '../cdk/keycodes/keycodes';
 import {
   NbAdjustableConnectedPositionStrategy,
   NbAdjustment,
@@ -96,12 +96,10 @@ export class NbAutocompleteDirective<T> implements OnDestroy, ControlValueAccess
     this.show();
   }
 
-  @HostListener('keydown', ['$event'])
-  protected handleKeydown($event: any) {
-    const isVerticalArrow = $event.keyCode === DOWN_ARROW || $event.keyCode === UP_ARROW;
-    if (isVerticalArrow && this.isClosed) {
-      this.show();
-    }
+  @HostListener('keydown.arrowDown', ['$event'])
+  @HostListener('keydown.arrowUp', ['$event'])
+  protected handleKeydown() {
+    this.show();
   }
 
   @HostListener('focus')
