@@ -29,7 +29,10 @@ import {
   NbPosition,
   NbPositionBuilderService,
 } from '../cdk/overlay/overlay-position';
-import { NbActiveDescendantKeyManager } from '../cdk/a11y/descendant-key-manager';
+import {
+  NbActiveDescendantKeyManager,
+  NbActiveDescendantKeyManagerFactoryService,
+} from '../cdk/a11y/descendant-key-manager';
 import { NbOptionComponent } from '../option-list/option.component';
 
 @Directive({
@@ -86,7 +89,9 @@ export class NbAutocompleteDirective<T> implements OnDestroy, ControlValueAccess
     protected overlay: NbOverlayService,
     protected cd: ChangeDetectorRef,
     protected triggerStrategyBuilder: NbTriggerStrategyBuilderService,
-    protected positionBuilder: NbPositionBuilderService) {}
+    protected positionBuilder: NbPositionBuilderService,
+    protected activeDescendantKeyManagerFactoryService:
+      NbActiveDescendantKeyManagerFactoryService<NbOptionComponent<T>>) {}
 
   @HostListener('input')
   protected handleInput() {
@@ -190,7 +195,9 @@ export class NbAutocompleteDirective<T> implements OnDestroy, ControlValueAccess
   }
 
   protected createKeyManager(): void {
-    this.keyManager = new NbActiveDescendantKeyManager<NbOptionComponent<T>>(this.autocomplete.options).withWrap();
+    this.keyManager = this.activeDescendantKeyManagerFactoryService
+                        .create(this.autocomplete.options)
+                        .withTypeAhead(200);
   }
 
   show() {
