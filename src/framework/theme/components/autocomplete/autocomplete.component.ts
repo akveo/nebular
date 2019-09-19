@@ -4,6 +4,9 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
+// Component class scoped counter for aria attributes.
+let lastAutocompleteId: number = 0;
+
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -34,6 +37,11 @@ export class NbAutocompleteComponent<T> {
    * HTML input reference to which autocomplete connected.
    * */
   hostRef: ElementRef;
+
+  /**
+   * Component scoped id for aria attributes.
+   * */
+  id: string = `nb-autocomplete-${lastAutocompleteId++}`;
 
   /**
    * Current overlay position because of we have to toggle overlayPosition

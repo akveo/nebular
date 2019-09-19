@@ -97,6 +97,30 @@ export class NbAutocompleteDirective<T> implements OnDestroy, AfterViewInit, Con
     return this.isOpen && this.autocomplete.overlayPosition === NbPosition.BOTTOM;
   }
 
+  @HostBinding('attr.role')
+  role: string = 'combobox';
+
+  @HostBinding('attr.aria-autocomplete')
+  ariaAutocomplete: string = 'list';
+
+  @HostBinding('attr.haspopup')
+  hasPopup: string = 'true';
+
+  @HostBinding('attr.aria-expanded')
+  get ariaExpanded(): string {
+    return this.isOpen && this.isOpen.toString();
+  }
+
+  @HostBinding('attr.aria-owns')
+  get ariaOwns() {
+    return this.isOpen ? this.autocomplete.id : null;
+  }
+
+  @HostBinding('attr.aria-activedescendant')
+  get ariaActiveDescendant() {
+    return (this.isOpen && this.keyManager.activeItem) ? this.keyManager.activeItem.id : null;
+  }
+
   constructor(
     protected hostRef: ElementRef,
     protected overlay: NbOverlayService,

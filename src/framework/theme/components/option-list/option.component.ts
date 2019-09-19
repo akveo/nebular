@@ -4,6 +4,10 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
+
+// Component class scoped counter for aria attributes.
+let lastOptionId: number = 0;
+
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -72,6 +76,12 @@ export class NbOptionComponent<T> implements OnDestroy, NbFocusableOption, NbHig
   selected: boolean = false;
   protected parent: NbSelectComponent<T>;
   protected alive: boolean = true;
+
+  /**
+   * Component scoped id for aria attributes.
+   * */
+  @HostBinding('attr.id')
+  id: string = `nb-option-${lastOptionId++}`;
 
   constructor(@Optional() @Inject(NB_SELECT_INJECTION_TOKEN) parent,
               protected elementRef: ElementRef,
