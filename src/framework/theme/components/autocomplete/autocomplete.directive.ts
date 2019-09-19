@@ -21,7 +21,7 @@ import { NbOverlayRef, NbScrollStrategy } from '../cdk/overlay/mapping';
 import { NbTrigger, NbTriggerStrategy, NbTriggerStrategyBuilderService } from '../cdk/overlay/overlay-trigger';
 import { NbOverlayService } from '../cdk/overlay/overlay-service';
 import { filter, startWith, switchMap, takeUntil, tap } from 'rxjs/operators';
-import { merge } from 'rxjs';
+import { merge, Subject } from 'rxjs';
 import { ENTER, ESCAPE  } from '../cdk/keycodes/keycodes';
 import {
   NbAdjustableConnectedPositionStrategy,
@@ -62,6 +62,8 @@ export class NbAutocompleteDirective<T> implements OnDestroy, ControlValueAccess
 
   protected keyManager: NbActiveDescendantKeyManager<NbOptionComponent<T>>;
 
+  protected destroy$: Subject<boolean> = new Subject<boolean>();
+
   /**
    * Determines is autocomplete opened.
    * */
@@ -93,6 +95,24 @@ export class NbAutocompleteDirective<T> implements OnDestroy, ControlValueAccess
     protected activeDescendantKeyManagerFactoryService:
       NbActiveDescendantKeyManagerFactoryService<NbOptionComponent<T>>) {}
 
+  ngOnDestroy() {
+
+    if (this.triggerStrategy) {
+      this.triggerStrategy.destroy();
+    }
+
+    if (this.positionStrategy) {
+      this.positionStrategy.dispose();
+    }
+
+    if (this.overlayRef) {
+      this.overlayRef.dispose();
+    }
+
+    this.destroy$.next(true);
+    this.destroy$.complete();
+  }
+
   @HostListener('input')
   protected handleInput() {
     const currentValue = this.hostRef.nativeElement.value;
@@ -100,6 +120,7 @@ export class NbAutocompleteDirective<T> implements OnDestroy, ControlValueAccess
     this.setHostInputValue(this.getDisplayValue(currentValue));
     this.show();
   }
+
 
   @HostListener('keydown.arrowDown', ['$event'])
   @HostListener('keydown.arrowUp', ['$event'])
@@ -127,14 +148,14 @@ export class NbAutocompleteDirective<T> implements OnDestroy, ControlValueAccess
         switchMap((options: QueryList<NbOptionComponent<T>>) => {
           return merge(...options.map(option => option.click));
         }),
-        takeUntil(this.autocomplete.destroy$),
+        takeUntil(this.destroy$),
       )
       .subscribe((clickedOption: NbOptionComponent<T>) => this.handleOptionClick(clickedOption));
   }
 
   protected subscribeOnPositionChange() {
     this.positionStrategy.positionChange
-      .pipe(takeUntil(this.autocomplete.destroy$))
+      .pipe(takeUntil(this.destroy$))
       .subscribe((position: NbPosition) => {
         this.autocomplete.overlayPosition = position;
       });
@@ -200,19 +221,6 @@ export class NbAutocompleteDirective<T> implements OnDestroy, ControlValueAccess
                         .withTypeAhead(200);
   }
 
-  show() {
-    if (this.isClosed) {
-      this.attachToOverlay();
-      this.setActiveItem();
-    }
-  }
-
-  hide() {
-    if (this.isOpen) {
-      this.overlayRef.detach();
-    }
-  }
-
   protected setHostInputValue(value) {
     this.hostRef.nativeElement.value = this.getDisplayValue(value);
   }
@@ -228,7 +236,7 @@ export class NbAutocompleteDirective<T> implements OnDestroy, ControlValueAccess
   protected subscribeOnOverlayKeys(): void {
     this.overlayRef.keydownEvents()
       .pipe(
-        takeUntil(this.autocomplete.destroy$),
+        takeUntil(this.destroy$),
       )
       .subscribe((event: KeyboardEvent) => {
         if (event.keyCode === ESCAPE && this.isOpen) {
@@ -251,7 +259,7 @@ export class NbAutocompleteDirective<T> implements OnDestroy, ControlValueAccess
       });
 
     this.keyManager.tabOut
-      .pipe(takeUntil(this.autocomplete.destroy$))
+      .pipe(takeUntil(this.destroy$))
       .subscribe(() => {
         this.hide();
       });
@@ -293,6 +301,19 @@ export class NbAutocompleteDirective<T> implements OnDestroy, ControlValueAccess
     return this.overlay.scrollStrategies.block();
   }
 
+  show() {
+    if (this.isClosed) {
+      this.attachToOverlay();
+      this.setActiveItem();
+    }
+  }
+
+  hide() {
+    if (this.isOpen) {
+      this.overlayRef.detach();
+    }
+  }
+
   // Part of ControlValueAccessor.
   _onChange: (value: any) => void = () => {};
 
@@ -312,21 +333,6 @@ export class NbAutocompleteDirective<T> implements OnDestroy, ControlValueAccess
   // Part of ControlValueAccessor.
   registerOnTouched(fn: () => {}) {
     this._onTouched = fn;
-  }
-
-  ngOnDestroy() {
-
-    if (this.triggerStrategy) {
-      this.triggerStrategy.destroy();
-    }
-
-    if (this.positionStrategy) {
-      this.positionStrategy.dispose();
-    }
-
-    if (this.overlayRef) {
-      this.overlayRef.dispose();
-    }
   }
 
 }

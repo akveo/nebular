@@ -12,14 +12,12 @@ import {
   EventEmitter,
   HostBinding,
   Input,
-  OnDestroy,
   Output,
   QueryList,
   ViewChild,
 } from '@angular/core';
 import { NbComponentSize } from '../component-size';
 import { NbPosition } from '../cdk/overlay/overlay-position';
-import { Subject } from 'rxjs';
 import { NbOptionComponent } from '../option-list/option.component';
 import { NbPortalDirective } from '../cdk/overlay/mapping';
 
@@ -29,7 +27,18 @@ import { NbPortalDirective } from '../cdk/overlay/mapping';
   styleUrls: ['./autocomplete.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NbAutocompleteComponent<T> implements OnDestroy {
+export class NbAutocompleteComponent<T> {
+
+  /**
+   * HTML input reference to which autocomplete connected.
+   * */
+  hostRef: ElementRef;
+
+  /**
+   * Current overlay position because of we have to toggle overlayPosition
+   * in [ngClass] direction and this directive can use only string.
+   */
+  overlayPosition: NbPosition = '' as NbPosition;
 
   /**
    * Function passed as input to process each string option value before render.
@@ -52,19 +61,6 @@ export class NbAutocompleteComponent<T> implements OnDestroy {
    * */
   @Output() selectedChange: EventEmitter<T> = new EventEmitter();
 
-  destroy$: Subject<boolean> = new Subject<boolean>();
-
-  /**
-   * HTML input reference to which autocomplete connected.
-   * */
-  hostRef: ElementRef;
-
-  /**
-   * Current overlay position because of we have to toggle overlayPosition
-   * in [ngClass] direction and this directive can use only string.
-   */
-  overlayPosition: NbPosition = '' as NbPosition;
-
   /**
     * List of `NbOptionComponent`'s components passed as content.
   * */
@@ -82,6 +78,15 @@ export class NbAutocompleteComponent<T> implements OnDestroy {
     return this.hostRef.nativeElement.getBoundingClientRect().width;
   }
 
+  get optionsListClasses(): string[] {
+    const classes = [
+      `size-${this.size}`,
+      this.overlayPosition,
+    ];
+
+    return classes;
+  }
+
   /**
    * Autocomplete knows nothing about host html input element.
    * So, attach method set input hostRef for styling.
@@ -95,15 +100,6 @@ export class NbAutocompleteComponent<T> implements OnDestroy {
    * */
   emitSelected(selected: T) {
     this.selectedChange.emit(selected);
-  }
-
-  get optionsListClasses(): string[] {
-    const classes = [
-      `size-${this.size}`,
-      this.overlayPosition,
-    ];
-
-    return classes;
   }
 
   @HostBinding('class.size-tiny')
@@ -125,11 +121,6 @@ export class NbAutocompleteComponent<T> implements OnDestroy {
   @HostBinding('class.size-giant')
   get giant(): boolean {
     return this.size === 'giant';
-  }
-
-  ngOnDestroy() {
-    this.destroy$.next(true);
-    this.destroy$.unsubscribe();
   }
 
 }
