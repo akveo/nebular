@@ -51,16 +51,59 @@
     width: nb-theme(calendar-navigation-button-width);
   }
 
-  nb-calendar-days-names .day {
-    width: nb-theme(calendar-weekday-width);
-    height: nb-theme(calendar-weekday-height);
-    color: nb-theme(calendar-weekday-text-color);
-    font-size: nb-theme(calendar-weekday-text-font-size);
-    font-weight: nb-theme(calendar-weekday-text-font-weight);
-    line-height: nb-theme(calendar-weekday-text-line-height);
+  nb-calendar-week-numbers {
+    background: nb-theme(calendar-weeknumber-background);
+    font-size: nb-theme(calendar-weeknumber-text-font-size);
+    font-weight: nb-theme(calendar-weeknumber-text-font-weight);
+    line-height: nb-theme(calendar-weeknumber-text-line-height);
+    border-right: nb-theme(calendar-weeknumber-divider-width) solid nb-theme(calendar-weeknumber-divider-color);
+    border-top: nb-theme(calendar-weeknumber-divider-width) solid nb-theme(calendar-weeknumber-divider-color);
 
-    &.holiday {
-      color: nb-theme(calendar-weekday-holiday-text-color);
+    .sign {
+      border-bottom: nb-theme(calendar-weeknumber-divider-width) solid nb-theme(calendar-weeknumber-divider-color);
+      margin-left: 0;
+      margin-right: 0;
+    }
+
+    &.size-medium {
+      .sign,
+      .week-cell {
+        height: nb-theme(calendar-day-cell-height);
+      }
+    }
+
+    &.size-large {
+      .sign,
+      .week-cell {
+        height: nb-theme(calendar-day-cell-large-height);
+      }
+    }
+
+    .sign,
+    .week-cell {
+      height: nb-theme(calendar-weeknumber-height);
+      width: nb-theme(calendar-weeknumber-width);
+    }
+
+
+  }
+
+  nb-calendar-days-names {
+    background: nb-theme(calendar-weekday-background);
+    border-top: nb-theme(calendar-weeknumber-divider-width) solid nb-theme(calendar-weeknumber-divider-color);
+    border-bottom: nb-theme(calendar-weeknumber-divider-width) solid nb-theme(calendar-weeknumber-divider-color);
+
+    .day {
+      width: nb-theme(calendar-weekday-width);
+      height: nb-theme(calendar-weekday-height);
+      color: nb-theme(calendar-weekday-text-color);
+      font-size: nb-theme(calendar-weekday-text-font-size);
+      font-weight: nb-theme(calendar-weekday-text-font-weight);
+      line-height: nb-theme(calendar-weekday-text-line-height);
+
+      &.holiday {
+        color: nb-theme(calendar-weekday-holiday-text-color);
+      }
     }
   }
 
@@ -70,9 +113,15 @@
       height: nb-theme(calendar-day-cell-height);
     }
 
-    &.large .day-cell {
-      width: nb-theme(calendar-day-cell-large-width);
-      height: nb-theme(calendar-day-cell-large-height);
+    &.large {
+      .day-cell {
+        width: nb-theme(calendar-day-cell-large-width);
+        height: nb-theme(calendar-day-cell-large-height);
+      }
+      .day {
+        height: nb-theme(calendar-weekday-large-height);
+        width: nb-theme(calendar-weekday-large-width);
+      }
     }
   }
 
@@ -115,6 +164,7 @@
   }
 
   nb-calendar-week-numbers .week-cell,
+  nb-calendar-week-numbers .sign,
   nb-calendar-day-picker .day-cell,
   nb-calendar-month-picker .month-cell,
   nb-calendar-year-picker .year-cell {

@@ -29,8 +29,10 @@
     }
 
     nb-card-body {
+      padding: 0;
+
       & > nb-calendar-pageable-navigation, & > nb-calendar-navigation {
-        padding: 0 1rem 1.5rem;
+        padding: 1rem;
       }
     }
   }

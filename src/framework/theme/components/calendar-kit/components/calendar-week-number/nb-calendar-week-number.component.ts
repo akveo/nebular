@@ -11,6 +11,7 @@ import { NbCalendarSize } from '../../model';
 @Component({
   selector: 'nb-calendar-week-numbers',
   template: `
+    <div class="sign">#</div>
     <div class="week-cell" *ngFor="let week of getWeeks()">{{ week }}</div>
   `,
   styleUrls: ['./nb-calendar-week-number.component.scss'],
