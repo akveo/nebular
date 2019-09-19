@@ -89,12 +89,12 @@ export class NbAutocompleteDirective<T> implements OnDestroy, AfterViewInit, Con
 
   @HostBinding('class.nb-autocomplete-position-top')
   get top(): boolean {
-    return this.isOpen && this.autocomplete.overlayPosition === NbPosition.TOP;
+    return this.isOpen && this.autocomplete.options.length && this.autocomplete.overlayPosition === NbPosition.TOP;
   }
 
   @HostBinding('class.nb-autocomplete-position-bottom')
   get bottom(): boolean {
-    return this.isOpen && this.autocomplete.overlayPosition === NbPosition.BOTTOM;
+    return this.isOpen && this.autocomplete.options.length && this.autocomplete.overlayPosition === NbPosition.BOTTOM;
   }
 
   @HostBinding('attr.role')
@@ -250,8 +250,7 @@ export class NbAutocompleteDirective<T> implements OnDestroy, AfterViewInit, Con
 
   protected createKeyManager(): void {
     this.keyManager = this.activeDescendantKeyManagerFactoryService
-                        .create(this.autocomplete.options)
-                        .withTypeAhead(200);
+                        .create(this.autocomplete.options);
   }
 
   protected setHostInputValue(value) {
