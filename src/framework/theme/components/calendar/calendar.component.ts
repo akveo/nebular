@@ -124,17 +124,30 @@ import { convertToBoolProperty } from '../helpers';
  * calendar-month-cell-height:
  * calendar-year-cell-width:
  * calendar-year-cell-height:
- * calendar-weekday-width:
- * calendar-weekday-height:
+ * calendar-weekday-background:
+ * calendar-weekday-divider-color:
  * calendar-weekday-text-color:
  * calendar-weekday-text-font-size:
  * calendar-weekday-text-font-weight:
  * calendar-weekday-text-line-height:
  * calendar-weekday-holiday-text-color:
+ * calendar-weekday-height:
+ * calendar-weekday-width:
+ * calendar-weeknumber-background:
+ * calendar-weeknumber-divider-color:
+ * calendar-weeknumber-divider-width:
+ * calendar-weeknumber-text-color:
+ * calendar-weeknumber-text-font-size:
+ * calendar-weeknumber-text-font-weight:
+ * calendar-weeknumber-text-line-height:
+ * calendar-weeknumber-height:
+ * calendar-weeknumber-width:
  * calendar-large-width:
  * calendar-large-body-height:
  * calendar-day-cell-large-width:
  * calendar-day-cell-large-height:
+ * calendar-weekday-large-height:
+ * calendar-weekday-large-width:
  * calendar-month-cell-large-width:
  * calendar-month-cell-large-height:
  * calendar-year-cell-large-width:
