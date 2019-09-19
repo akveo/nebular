@@ -5,6 +5,7 @@
  */
 
 import {
+  AfterViewInit,
   ChangeDetectorRef,
   ComponentRef,
   Directive,
@@ -44,7 +45,7 @@ import { NbOptionComponent } from '../option-list/option.component';
   }],
 
 })
-export class NbAutocompleteDirective<T> implements OnDestroy, ControlValueAccessor {
+export class NbAutocompleteDirective<T> implements OnDestroy, AfterViewInit, ControlValueAccessor {
 
   /**
    * NbAutocompleteComponent instance passed via input.
@@ -95,6 +96,11 @@ export class NbAutocompleteDirective<T> implements OnDestroy, ControlValueAccess
     protected activeDescendantKeyManagerFactoryService:
       NbActiveDescendantKeyManagerFactoryService<NbOptionComponent<T>>) {}
 
+  ngAfterViewInit() {
+    this.triggerStrategy = this.createTriggerStrategy();
+    this.subscribeOnTriggers();
+  }
+
   ngOnDestroy() {
 
     if (this.triggerStrategy) {
@@ -121,18 +127,10 @@ export class NbAutocompleteDirective<T> implements OnDestroy, ControlValueAccess
     this.show();
   }
 
-
   @HostListener('keydown.arrowDown', ['$event'])
   @HostListener('keydown.arrowUp', ['$event'])
   protected handleKeydown() {
     this.show();
-  }
-
-  @HostListener('focus')
-  protected handleFocus() {
-    if (this.isClosed) {
-      this.show();
-    }
   }
 
   protected subscribeOnOptionClick() {
@@ -285,11 +283,9 @@ export class NbAutocompleteDirective<T> implements OnDestroy, ControlValueAccess
   }
 
   protected initOverlay() {
-    this.triggerStrategy = this.createTriggerStrategy();
     this.positionStrategy = this.createPositionStrategy();
 
     this.createKeyManager();
-    this.subscribeOnTriggers();
     this.subscribeOnPositionChange();
     this.subscribeOnOptionClick();
 
