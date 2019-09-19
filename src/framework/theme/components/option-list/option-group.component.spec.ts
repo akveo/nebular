@@ -8,6 +8,9 @@ import {
   NbOptionGroupComponent,
   NbSelectModule,
   NbSelectComponent,
+  NbOptionListModule,
+  NbOptionComponent,
+  NbOptionGroupComponent,
   NbThemeModule,
 } from '@nebular/theme';
 
@@ -52,6 +55,7 @@ describe('NbOptionGroupComponent', () => {
         NbThemeModule.forRoot(),
         NbLayoutModule,
         NbSelectModule,
+        NbOptionListModule,
       ],
       declarations: [ NbOptionGroupTestComponent ],
     });

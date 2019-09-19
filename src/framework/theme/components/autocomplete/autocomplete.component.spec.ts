@@ -234,9 +234,6 @@ describe('Component: NbAutocompleteComponent', () => {
     const option = overlayContainer.querySelectorAll('nb-option')[0];
     fixture.detectChanges();
 
-    expect(
-      fixture.componentInstance.autocompleteDirective.keyManager.activeItem
-             === fixture.componentInstance.options.toArray()[0]).toBe(true);
     expect(option.classList).toContain('active')
   });
 
@@ -254,7 +251,6 @@ describe('Component: NbAutocompleteComponent', () => {
 
   it('should close when ESC pressed', () => {
     openPanel();
-    const option = overlayContainer.querySelectorAll('nb-option')[0];
 
     input.dispatchEvent(new KeyboardEvent('keydown', <any> { keyCode: 27 }));
     fixture.detectChanges();
