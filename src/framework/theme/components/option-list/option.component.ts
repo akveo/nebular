@@ -94,6 +94,7 @@ export class NbOptionComponent<T> implements OnDestroy, NbFocusableOption, NbHig
     return this.elementRef.nativeElement.textContent;
   }
 
+  // TODO: replace with isShowCheckbox property to control this behaviour outside, issues/1965
   @HostBinding('class.multiple')
   get multiple() {
     // We check parent existing because parent can be NbSelectComponent or
