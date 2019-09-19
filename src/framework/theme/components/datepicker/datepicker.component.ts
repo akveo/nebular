@@ -124,6 +124,11 @@ export abstract class NbBasePicker<D, T, P>
   @Input() showHeader: boolean = true;
 
   /**
+   * Sets symbol used as a header for week numbers column
+   * */
+  @Input() weekNumberSymbol: string = '#';
+
+  /**
    * Determines should we show week numbers column.
    * False by default.
    * */
@@ -371,6 +376,7 @@ export abstract class NbBasePicker<D, T, P>
     this.picker.showHeader = this.showHeader;
     this.picker.visibleDate = this.visibleDate;
     this.picker.showWeekNumber = this.showWeekNumber;
+    this.picker.weekNumberSymbol = this.weekNumberSymbol;
   }
 
   protected checkFormat() {

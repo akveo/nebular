@@ -96,6 +96,11 @@ export class NbBaseCalendarComponent<D, T> implements OnInit {
   protected _showWeekNumber = false;
 
   /**
+   * Sets symbol used as a header for week numbers column
+   * */
+  @Input() weekNumberSymbol: string;
+
+  /**
    * Emits date when selected.
    * */
   @Output() dateChange: EventEmitter<T> = new EventEmitter();

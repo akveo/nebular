@@ -173,6 +173,7 @@ import { convertToBoolProperty } from '../helpers';
       [visibleDate]="visibleDate"
       [showHeader]="showHeader"
       [showWeekNumber]="showWeekNumber"
+      [weekNumberSymbol]="weekNumberSymbol"
       (dateChange)="dateChange.emit($event)"
     ></nb-base-calendar>
   `,
@@ -250,6 +251,11 @@ export class NbCalendarComponent<D> {
     this._showWeekNumber = convertToBoolProperty(value);
   }
   protected _showWeekNumber: boolean = false;
+
+  /**
+   * Sets symbol used as a header for week numbers column
+   * */
+  @Input() weekNumberSymbol: string = '#';
 
   /**
    * Emits date when selected.

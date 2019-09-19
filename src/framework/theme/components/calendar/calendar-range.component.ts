@@ -142,6 +142,7 @@ export interface NbCalendarRange<D> {
       [showHeader]="showHeader"
       [size]="size"
       [showWeekNumber]="showWeekNumber"
+      [weekNumberSymbol]="weekNumberSymbol"
     ></nb-base-calendar>
   `,
 })
@@ -229,6 +230,11 @@ export class NbCalendarRangeComponent<D> {
     this._showWeekNumber = convertToBoolProperty(value);
   }
   protected _showWeekNumber: boolean = false;
+
+  /**
+   * Sets symbol used as a header for week numbers column
+   * */
+  @Input() weekNumberSymbol: string = '#';
 
   /**
    * Emits range when start selected and emits again when end selected.

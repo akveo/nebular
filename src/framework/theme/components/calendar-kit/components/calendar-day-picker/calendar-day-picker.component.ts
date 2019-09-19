@@ -29,7 +29,11 @@ import { convertToBoolProperty } from '../../../helpers';
   selector: 'nb-calendar-day-picker',
   styles: [` :host { display: flex; } `],
   template: `
-    <nb-calendar-week-numbers *ngIf="showWeekNumber" [weeks]="weeks" [size]="size"></nb-calendar-week-numbers>
+    <nb-calendar-week-numbers *ngIf="showWeekNumber"
+                              [weeks]="weeks"
+                              [size]="size"
+                              [weekNumberSymbol]="weekNumberSymbol">
+    </nb-calendar-week-numbers>
     <div>
       <nb-calendar-days-names></nb-calendar-days-names>
       <nb-calendar-picker
@@ -108,6 +112,11 @@ export class NbCalendarDayPickerComponent<D, T> implements OnChanges {
     this._showWeekNumber = convertToBoolProperty(value);
   }
   protected _showWeekNumber: boolean = false;
+
+  /**
+   * Sets symbol used as a header for week numbers column
+   * */
+  @Input() weekNumberSymbol: string;
 
   /**
    * Fires newly selected date.

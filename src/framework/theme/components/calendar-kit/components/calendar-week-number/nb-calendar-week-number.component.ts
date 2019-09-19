@@ -11,7 +11,7 @@ import { NbCalendarSize } from '../../model';
 @Component({
   selector: 'nb-calendar-week-numbers',
   template: `
-    <div class="sign">#</div>
+    <div class="sign">{{ weekNumberSymbol }}</div>
     <div class="week-cell" *ngFor="let week of getWeeks()">{{ week }}</div>
   `,
   styleUrls: ['./nb-calendar-week-number.component.scss'],
@@ -24,6 +24,11 @@ export class NbCalendarWeekNumberComponent<D> {
 
   @Input()
   size: NbCalendarSize;
+
+  /**
+   * Sets symbol used as a header for week numbers column
+   * */
+  @Input() weekNumberSymbol: string;
 
   @HostBinding('class.size-medium')
   get isMedium() {
