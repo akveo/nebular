@@ -82,6 +82,7 @@ export class NbBaseCalendarComponent<D, T> implements OnInit {
   @Input() date: T;
 
   @Input()
+  @HostBinding('class.has-week-number')
   get showWeekNumber(): boolean {
     return this._showWeekNumber;
   }
