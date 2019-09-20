@@ -27,14 +27,13 @@ import { convertToBoolProperty } from '../../../helpers';
  * */
 @Component({
   selector: 'nb-calendar-day-picker',
-  styles: [` :host { display: flex; } `],
   template: `
     <nb-calendar-week-numbers *ngIf="showWeekNumber"
                               [weeks]="weeks"
                               [size]="size"
                               [weekNumberSymbol]="weekNumberSymbol">
     </nb-calendar-week-numbers>
-    <div>
+    <div class="days-container">
       <nb-calendar-days-names></nb-calendar-days-names>
       <nb-calendar-picker
           [data]="weeks"
@@ -48,6 +47,7 @@ import { convertToBoolProperty } from '../../../helpers';
       </nb-calendar-picker>
     </div>
   `,
+  styleUrls: ['./calendar-day-picker.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NbCalendarDayPickerComponent<D, T> implements OnChanges {
