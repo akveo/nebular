@@ -44,9 +44,12 @@ export class NbCalendarWeekNumberComponent<D> {
 
   getWeeks(): number[] {
     return this.weeks.map((week: D[]) => {
+      // Find last defined day as week could contain null days in case
+      // boundingMonth set to false
+      const lastDay = [ ...week ].reverse().find((day: D) => !!day);
       // Use last day of the week to determine week number.
       // This way weeks which span between sibling years is marked first
-      return this.dateService.getWeekNumber(week[6]);
+      return this.dateService.getWeekNumber(lastDay);
     });
   }
 }
