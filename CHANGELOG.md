@@ -1,3 +1,13 @@
+<a name="4.3.1"></a>
+## [4.3.1](https://github.com/akveo/nebular/compare/v4.3.0...v4.3.1) (2019-09-20)
+
+
+### Bug Fixes
+
+* **calendar:** use last defined week day to determine week numb… ([#1969](https://github.com/akveo/nebular/issues/1969)) ([ba78d94](https://github.com/akveo/nebular/commit/ba78d94))
+
+
+
 <a name="4.3.0"></a>
 # [4.3.0](https://github.com/akveo/nebular/compare/v4.2.2...v4.3.0) (2019-09-20)
 
