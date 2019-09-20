@@ -21,6 +21,7 @@ import { ActivatedRoute } from '@angular/router';
 import { convertToBoolProperty } from '../helpers';
 import { NbComponentStatus } from '../component-status';
 import { NbBadgePosition } from '../badge/badge.component';
+import { NbIconConfig } from '../icon/icon.component';
 
 /**
  * Specific tab container.
@@ -56,10 +57,10 @@ export class NbTabComponent {
   @Input() tabId: string;
 
   /**
-   * Tab icon
-   * @type {string}
+   * Tab icon name or icon config object
+   * @type {string | NbIconConfig}
    */
-  @Input() tabIcon: string;
+  @Input() tabIcon: string | NbIconConfig;
 
   /**
    * Item is disabled and cannot be opened.
@@ -254,7 +255,7 @@ export class NbTabComponent {
           [attr.tabindex]="tab.disabled ? -1 : 0"
           class="tab">
         <a href (click)="$event.preventDefault()" tabindex="-1" class="tab-link">
-          <nb-icon *ngIf="tab.tabIcon" [icon]="tab.tabIcon"></nb-icon>
+          <nb-icon *ngIf="tab.tabIcon" [config]="tab.tabIcon"></nb-icon>
           <span *ngIf="tab.tabTitle" class="tab-text">{{ tab.tabTitle }}</span>
         </a>
         <nb-badge *ngIf="tab.badgeText"

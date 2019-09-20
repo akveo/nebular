@@ -1,5 +1,5 @@
 import { Component, HostBinding } from '@angular/core';
-import { NbToastrService } from '@nebular/theme';
+import { NbToastrService, NbIconConfig } from '@nebular/theme';
 
 @Component({
   selector: 'nb-toastr-icon',
@@ -29,7 +29,8 @@ export class ToastrIconComponent {
     this.toastrService.show('Message', `Toast: ${++this.index}`);
   }
 
-  showToast(icon) {
-    this.toastrService.show('Message', `Toast: ${++this.index}`, { icon, iconPack: 'eva' });
+  showToast(iconName) {
+    const iconConfig: NbIconConfig = { icon: iconName, pack: 'eva' };
+    this.toastrService.show('Message', `Toast: ${++this.index}`, iconConfig);
   }
 }

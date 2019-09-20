@@ -50,7 +50,9 @@ export class NbTreeGridService<T> {
         return node;
       }
 
-      toCheck.push(...node.children);
+      if (node.hasChildren()) {
+        toCheck.push(...node.children);
+      }
     }
   }
 }

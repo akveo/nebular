@@ -10,6 +10,7 @@ import { Params } from '@angular/router';
 import { Observable, BehaviorSubject, ReplaySubject, Subject } from 'rxjs';
 import { share } from 'rxjs/operators';
 import { isFragmentContain, isFragmentEqual, isUrlPathContain, isUrlPathEqual } from './url-matching-helpers';
+import { NbIconConfig } from '../icon/icon.component';
 
 export interface NbMenuBag { tag: string; item: NbMenuItem }
 
@@ -49,10 +50,10 @@ export class NbMenuItem {
    */
   url?: string;
   /**
-   * Icon class name
-   * @type {string}
+   * Icon class name or icon config object
+   * @type {string | NbIconConfig}
    */
-  icon?: string;
+  icon?: string | NbIconConfig;
   /**
    * Expanded by default
    * @type {boolean}

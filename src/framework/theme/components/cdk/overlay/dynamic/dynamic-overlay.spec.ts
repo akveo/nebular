@@ -6,7 +6,7 @@ import { ScrollStrategy } from '@angular/cdk/overlay';
 import { NbDynamicOverlay } from './dynamic-overlay';
 import { NbOverlayService } from '../overlay-service';
 import { NbRenderableContainer } from '../overlay-container';
-import { NbComponentPortal, NbOverlayConfig } from '../mapping';
+import { NbComponentPortal, NbOverlayConfig, NbOverlayContainer } from '../mapping';
 
 @Component({ template: '' })
 export class NbDynamicOverlayMockComponent implements NbRenderableContainer {
@@ -75,6 +75,12 @@ const scrollStrategies = {
   reposition: () => (<unknown> repositionRes) as ScrollStrategy,
 };
 
+export class NbOverlayContainerMock {
+  getContainerElement() {
+    return { contains() { return true; } };
+  }
+}
+
 export class NbOverlayServiceMock {
   _config: NbOverlayConfig;
 
@@ -114,6 +120,7 @@ describe('dynamic-overlay', () => {
         NbDynamicOverlay,
         { provide: NbOverlayService, useClass: NbOverlayServiceMock },
         { provide: NgZone, useClass: MockNgZone },
+        { provide: NbOverlayContainer, useClass: NbOverlayContainerMock },
       ],
     });
     overlayService = bed.get(NbOverlayService);
@@ -199,7 +206,7 @@ describe('dynamic-overlay', () => {
     expect(createOverlaySpy).toHaveBeenCalledTimes(1);
   });
 
-  it('should not attache to ref if already shown', () => {
+  it('should not attach to ref if already shown', () => {
     const attachSpy = spyOn(ref, 'attach').and.callThrough();
     const hasAttacheSpy = spyOn(ref, 'hasAttached');
 
@@ -375,4 +382,36 @@ describe('dynamic-overlay', () => {
     expect(updatePositionSpy).toHaveBeenCalledTimes(1);
   });
 
+  it(`should recreate overlay if it's host isn't child of overlay container`, () => {
+    dynamicOverlay.show();
+    dynamicOverlay.hide();
+
+    const overlayContainer = TestBed.get(NbOverlayContainer);
+    const getContainerElementSpy = spyOn(overlayContainer, 'getContainerElement').and.returnValues(
+      { contains() { return false; } },
+      { contains() { return true; } },
+    );
+
+    dynamicOverlay.show();
+
+    expect(getContainerElementSpy).toHaveBeenCalledTimes(2);
+  });
+
+  it(`should dispose overlay ref when recreating overlay`, () => {
+    const disposeSpy = spyOn(ref, 'dispose').and.callThrough();
+
+    dynamicOverlay.show();
+    dynamicOverlay.hide();
+
+    const overlayContainer = TestBed.get(NbOverlayContainer);
+    // return false once to force overlay ref recreation and then always return true
+    overlayContainer.getContainerElement = () => {
+      overlayContainer.getContainerElement = () => ({ contains: () => true });
+      return { contains: () => false };
+    };
+
+    dynamicOverlay.show();
+
+    expect(disposeSpy).toHaveBeenCalledTimes(1);
+  });
 });

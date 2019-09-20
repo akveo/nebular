@@ -138,6 +138,17 @@ export const structure = [
       },
       {
         type: 'page',
+        name: 'Typography',
+        children: [
+          {
+            type: 'block',
+            block: 'markdown',
+            source: 'design-system/typography.md',
+          },
+        ],
+      },
+      {
+        type: 'page',
         name: 'Enable Customizable Theme',
         children: [
           {
@@ -877,6 +888,17 @@ export const structure = [
             type: 'block',
             block: 'markdown',
             source: 'auth/azure.md',
+          },
+        ],
+      },
+      {
+        type: 'page',
+        name: 'Backend API endpoints',
+        children: [
+          {
+            type: 'block',
+            block: 'markdown',
+            source: 'auth/backend-api.md',
           },
         ],
       },
