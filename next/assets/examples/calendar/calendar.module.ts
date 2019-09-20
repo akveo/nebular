@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NbCalendarModule, NbCalendarRangeModule } from '@nebular/theme';
+import { NbCalendarModule, NbCalendarRangeModule, NbButtonModule } from '@nebular/theme';
 import { CalendarRoutingModule } from './calendar-routing.module';
 import { CalendarBoundingMonthComponent } from './calendar-bounding-month.component';
 import { CalendarCustomDayCellShowcaseComponent } from './calendar-custom-day-cell-showcase.component';
@@ -12,6 +12,7 @@ import { CalendarSizeComponent } from './calendar-size.component';
 import { CalendarStartViewComponent } from './calendar-start-view.component';
 import { CalendarWithoutHeaderComponent } from './calendar-without-header.component';
 import { CalendarCustomDayCellComponent } from './components/calendar-custom-day-cell.component';
+import { CalendarWeekNumberComponent } from './calendar-week-number.component';
 
 @NgModule({
   declarations: [
@@ -25,9 +26,11 @@ import { CalendarCustomDayCellComponent } from './components/calendar-custom-day
     CalendarStartViewComponent,
     CalendarWithoutHeaderComponent,
     CalendarCustomDayCellComponent,
+    CalendarWeekNumberComponent,
   ],
   imports: [
     CommonModule,
+    NbButtonModule,
     NbCalendarModule,
     NbCalendarRangeModule,
     CalendarRoutingModule,
