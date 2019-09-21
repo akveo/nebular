@@ -509,6 +509,17 @@ export const structure = [
         icon: 'select.svg',
         source: [
           'NbSelectComponent',
+          'NbOptionListComponent',
+        ],
+      },
+      {
+        type: 'tabs',
+        name: 'Autocomplete',
+        icon: 'select.svg',
+        source: [
+          'NbAutocompleteDirective',
+          'NbAutocompleteComponent',
+          'NbOptionListComponent',
         ],
       },
       {

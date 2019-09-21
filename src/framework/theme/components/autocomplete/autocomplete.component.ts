@@ -22,9 +22,14 @@ import {
 } from '@angular/core';
 import { NbComponentSize } from '../component-size';
 import { NbPosition } from '../cdk/overlay/overlay-position';
-import { NbOptionComponent } from '@nebular/theme';
+import { NbOptionComponent } from '../option-list/option.component';
 import { NbPortalDirective } from '../cdk/overlay/mapping';
 
+
+/**
+ * The `NbAutocompleteComponent` overlay component.
+ * Provides an `NbOptionList` overlay component.
+ * */
 @Component({
   selector: 'nb-autocomplete',
   templateUrl: './autocomplete.component.html',
@@ -43,20 +48,22 @@ export class NbAutocompleteComponent<T> {
    * */
   id: string = `nb-autocomplete-${lastAutocompleteId++}`;
 
+
   /**
+   * @docs-private
    * Current overlay position because of we have to toggle overlayPosition
-   * in [ngClass] direction and this directive can use only string.
+   * in [ngClass] direction.
    */
   _overlayPosition: NbPosition = '' as NbPosition;
+
+  get overlayPosition(): NbPosition {
+    return this._overlayPosition;
+  }
 
   set overlayPosition(value: NbPosition) {
     this._overlayPosition = value;
     // Need run change detection after first set from NbAutocompleteDirective
     this.cd.detectChanges();
-  }
-
-  get overlayPosition(): NbPosition {
-    return this._overlayPosition;
   }
 
   get optionsListClasses(): string[] {

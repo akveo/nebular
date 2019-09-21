@@ -34,8 +34,50 @@ import {
   NbActiveDescendantKeyManager,
   NbActiveDescendantKeyManagerFactoryService,
 } from '../cdk/a11y/descendant-key-manager';
-import { NbOptionComponent, NbAutocompleteComponent } from '@nebular/theme';
+import { NbOptionComponent } from '@nebular/theme';
+import { NbAutocompleteComponent } from './autocomplete.component';
 
+/**
+ * The `NbAutocompleteDirective` provides a capability to expand input opportunities
+ * with `NbAutocompleteComponent` overlay containing options to select and fill input with.
+ *
+ * @stacked-example(Showcase, autocomplete/autocomplete-showcase.component)
+ *
+ * ### Installation
+ *
+ * Import `NbAutocompleteModule` to your feature module.
+ * ```ts
+ * @NgModule({
+ *   imports: [
+ *     // ...
+ *     NbAutocompleteModule,
+ *   ],
+ * })
+ * export class PageModule { }
+ * ```
+ * ### Usage
+ *
+ * Autocomplete may be used as form control element.
+ *
+ * @stacked-example(Autocomplete form binding, autocomplete/autocomplete-form.component)
+ *
+ * Options in the autocomplete may be grouped using `nb-option-group` component.
+ *
+ * @stacked-example(Grouping, autocomplete/autocomplete-group.component)
+ *
+ * Autocomplete may change selected option value via provided function.
+ *
+ * @stacked-example(Custom display, autocomplete/autocomplete-custom-display.component)
+ *
+ * Also, autocomplete may make first option in option list active automatically.
+ *
+ * @stacked-example(Active first, autocomplete/autocomplete-active-first.component)
+ *
+ * There are five autocomplete sizes:
+ *
+ * @stacked-example(Autocomplete sizes, autocomplete/autocomplete-sizes.component)
+ *
+ * */
 @Directive({
   selector: 'input[nbAutocomplete], textarea[nbAutocomplete]',
   providers: [{
@@ -54,6 +96,7 @@ export class NbAutocompleteDirective<T> implements OnDestroy, AfterViewInit, Con
 
   /**
    * Trigger strategy used by overlay.
+   * @docs-private
    * */
   protected triggerStrategy: NbTriggerStrategy;
 

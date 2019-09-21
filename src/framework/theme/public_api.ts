@@ -171,6 +171,7 @@ export * from './components/option-list/option-list.component';
 export * from './components/select/select-injection-tokens';
 export * from './components/autocomplete/autocomplete.module';
 export * from './components/autocomplete/autocomplete.component';
+export * from './components/autocomplete/autocomplete.directive';
 export * from './components/window/window.module';
 export * from './components/window/window.service';
 export * from './components/window/window-ref';

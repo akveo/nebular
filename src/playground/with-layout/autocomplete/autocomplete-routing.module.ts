@@ -15,7 +15,7 @@ import { AutocompleteSizesComponent } from './autocomplete-sizes.component';
 
 const routes: Route[] = [
   {
-    path: 'autocomplete.component',
+    path: 'autocomplete-showcase.component',
     component: AutocompleteShowcaseComponent,
   },
   {

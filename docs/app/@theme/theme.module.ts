@@ -20,6 +20,8 @@ import {
   NbButtonModule,
   NbSelectModule,
   NbInputModule,
+  NbOptionListModule,
+  NbAutocompleteModule,
 } from '@nebular/theme';
 
 import { NbEvaIconsModule } from '@nebular/eva-icons';
@@ -66,8 +68,10 @@ import {
     NbIconModule,
     NbButtonModule,
     NbSelectModule,
+    NbAutocompleteModule,
     NbInputModule,
     NbEvaIconsModule,
+    NbOptionListModule,
     RouterModule,
   ],
   declarations: [

@@ -9,7 +9,7 @@ import { Observable, of } from 'rxjs';
 
 import { FormControl } from '@angular/forms';
 import { map, startWith } from 'rxjs/operators';
-import { NbComponentSize } from '../../../framework/theme/components/component-size';
+import { NbComponentSize } from '@nebular/theme';
 
 @Component({
   selector: 'nb-autocomplete-sizes',

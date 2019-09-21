@@ -116,8 +116,8 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
     path: 'autocomplete',
     children: [
       {
-        path: 'autocomplete.component',
-        link: '/autocomplete/autocomplete.component',
+        path: 'autocomplete-showcase.component',
+        link: '/autocomplete/autocomplete-showcase.component',
         component: 'AutocompleteShowcaseComponent',
         name: 'Autocomplete Showcase',
       },

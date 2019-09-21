@@ -1,17 +1,19 @@
-import {Component, EventEmitter, Output, QueryList, ViewChild, ViewChildren} from '@angular/core';
-import {ComponentFixture, TestBed} from '@angular/core/testing';
-import {NbOverlayContainerAdapter} from '@nebular/theme/components/cdk/adapter/overlay-container-adapter';
-import {RouterTestingModule} from '@angular/router/testing';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {NbThemeModule} from '@nebular/theme/theme.module';
-import {NbLayoutModule} from '@nebular/theme/components/layout/layout.module';
-import {NB_DOCUMENT} from '@nebular/theme/theme.options';
-import {By} from '@angular/platform-browser';
-import {NbAutocompleteDirective} from '@nebular/theme/components/autocomplete/autocomplete.directive';
-import {NbAutocompleteModule} from '@nebular/theme/components/autocomplete/autocomplete.module';
-import {NbOptionComponent} from '@nebular/theme/components/option-list/option.component';
-import {NbOptionListModule} from '@nebular/theme/components/option-list/option-list.module';
-import {NbAutocompleteComponent} from '@nebular/theme/components/autocomplete/autocomplete.component';
+import { Component, EventEmitter, Output, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NB_DOCUMENT } from '@nebular/theme/theme.options';
+import { By } from '@angular/platform-browser';
+import {
+  NbOptionComponent,
+  NbAutocompleteModule,
+  NbOptionListModule,
+  NbThemeModule,
+  NbLayoutModule,
+  NbOverlayContainerAdapter,
+} from '@nebular/theme';
+import { NbAutocompleteComponent } from './autocomplete.component';
+import { NbAutocompleteDirective } from './autocomplete.directive';
 
 const TEST_GROUPS = [
   {

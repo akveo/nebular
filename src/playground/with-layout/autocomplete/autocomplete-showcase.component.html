@@ -1,11 +1,10 @@
-
-<nb-card size="small">
+<nb-card>
   <nb-card-body>
 
     <input #autoInput
       nbInput
       type="text"
-      (input)="onChange($event)"
+      (input)="onChange()"
       placeholder="Enter value"
       size="tiny"
       [nbAutocomplete]="auto" />
