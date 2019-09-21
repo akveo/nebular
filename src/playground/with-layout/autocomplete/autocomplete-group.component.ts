@@ -30,15 +30,19 @@ export class AutocompleteGroupComponent implements OnInit {
 
     this.groups = [
       {
-        name: 'Akveo',
-        children: ['Akveo Inc.', 'Akveo Data'],
+        name: 'Group 1',
+        children: ['Option 11', 'Option 12', 'Option 13'],
       },
       {
-        name: 'Nebular',
-        children: ['Autocomplete', 'Select'],
-      }];
-    this.filteredGroups$ = of(this.groups);
+        name: 'Group 2',
+        children: ['Option 21', 'Option 22', 'Option 23'],
+      },
+      {
+        name: 'Group 3',
+        children: ['Option 31', 'Option 32', 'Option 33'],
+    }];
 
+    this.filteredGroups$ = of(this.groups);
     this.inputFormControl = new FormControl();
 
     this.filteredGroups$ = this.inputFormControl.valueChanges

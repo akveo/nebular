@@ -38,8 +38,8 @@ import { NbOptionComponent } from '@nebular/theme';
 import { NbAutocompleteComponent } from './autocomplete.component';
 
 /**
- * The `NbAutocompleteDirective` provides a capability to expand input opportunities
- * with `NbAutocompleteComponent` overlay containing options to select and fill input with.
+ * The `NbAutocompleteDirective` provides a capability to expand input with
+ * `NbAutocompleteComponent` overlay containing options to select and fill input with.
  *
  * @stacked-example(Showcase, autocomplete/autocomplete-showcase.component)
  *

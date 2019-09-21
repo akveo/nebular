@@ -23,7 +23,7 @@ export class AutocompleteCustomDisplayComponent implements OnInit {
 
   ngOnInit() {
 
-    this.options = ['Akveo', 'Nebular', 'Eva'];
+    this.options = ['Option 1', 'Option 2', 'Option 3'];
     this.filteredOptions$ = of(this.options);
 
     this.inputFormControl = new FormControl();

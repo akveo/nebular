@@ -25,8 +25,8 @@ export class AutocompleteSizesComponent implements OnInit {
 
   ngOnInit() {
 
-    this.sizes = [ 'tiny', 'small', 'medium', 'large', 'giant' ];
-    this.options = ['Akveo', 'Nebular', 'Eva'];
+    this.sizes = ['tiny', 'small', 'medium', 'large', 'giant'];
+    this.options = ['Option 1', 'Option 2', 'Option 3'];
     this.filteredOptions$ = of(this.options);
 
     this.inputFormControl = new FormControl();
