@@ -201,7 +201,11 @@ export class NbAutocompleteDirective<T> implements OnDestroy, AfterViewInit, Con
     const currentValue = this.hostRef.nativeElement.value;
     this._onChange(currentValue);
     this.setHostInputValue(this.getDisplayValue(currentValue));
-    this.show();
+
+    // Detach overlay after content updated if there is no options.
+    setTimeout(() => {
+      this.autocomplete.options.length ? this.show() : this.hide();
+    });
   }
 
   @HostListener('keydown.arrowDown', ['$event'])
