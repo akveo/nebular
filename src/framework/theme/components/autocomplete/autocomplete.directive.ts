@@ -225,7 +225,7 @@ export class NbAutocompleteDirective<T> implements OnDestroy, AfterViewInit, Con
         }),
         takeUntil(this.destroy$),
       )
-      .subscribe((clickedOption: NbOptionComponent<T>) => this.handleOptionClick(clickedOption));
+      .subscribe((clickedOption: NbOptionComponent<T>) => this.handleOptionSelection(clickedOption));
   }
 
   protected subscribeOnPositionChange() {
@@ -258,11 +258,9 @@ export class NbAutocompleteDirective<T> implements OnDestroy, AfterViewInit, Con
     };
   }
 
-  protected handleOptionClick(option: NbOptionComponent<T>) {
-
+  protected handleOptionSelection(option: NbOptionComponent<T>) {
     this.setHostInputValue(option.value);
     this._onChange(option.value);
-
     this.hostRef.nativeElement.focus();
     this.autocomplete.emitSelected(option.value);
     this.hide();
@@ -319,10 +317,7 @@ export class NbAutocompleteDirective<T> implements OnDestroy, AfterViewInit, Con
           if (!activeItem) {
             return;
           }
-          this._onChange(activeItem.value);
-          this.setHostInputValue(activeItem.value);
-          this.autocomplete.emitSelected(activeItem.value);
-          this.hide();
+          this.handleOptionSelection(activeItem);
 
         } else {
           this.keyManager.onKeydown(event);
