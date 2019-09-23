@@ -106,7 +106,7 @@ export class NbAutocompleteDirective<T> implements OnDestroy, AfterViewInit, Con
 
   protected keyManager: NbActiveDescendantKeyManager<NbOptionComponent<T>>;
 
-  protected destroy$: Subject<boolean> = new Subject<boolean>();
+  protected destroy$: Subject<void> = new Subject<void>();
 
   /**
    * Determines is autocomplete opened.
@@ -192,7 +192,7 @@ export class NbAutocompleteDirective<T> implements OnDestroy, AfterViewInit, Con
       this.overlayRef.dispose();
     }
 
-    this.destroy$.next(true);
+    this.destroy$.next();
     this.destroy$.complete();
   }
 
