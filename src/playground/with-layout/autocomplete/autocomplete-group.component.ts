@@ -48,13 +48,13 @@ export class AutocompleteGroupComponent implements OnInit {
     this.filteredGroups$ = this.inputFormControl.valueChanges
       .pipe(
         startWith(''),
-        map(item => this.filter(item)),
+        map(filterString => this.filter(filterString)),
       );
 
   }
 
-  private filterChildren(children: string[], value: string) {
-    return children.filter(item => item.toLowerCase().includes(value));
+  private filterChildren(children: string[], filterValue: string) {
+    return children.filter(optionValue => optionValue.toLowerCase().includes(filterValue));
   }
 
   private filter(value: string): Group[] {

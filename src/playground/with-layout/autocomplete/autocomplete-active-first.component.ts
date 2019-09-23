@@ -31,14 +31,14 @@ export class AutocompleteActiveFirstComponent implements OnInit {
     this.filteredOptions$ = this.inputFormControl.valueChanges
       .pipe(
         startWith(''),
-        map(item => this.filter(item)),
+        map(filterString => this.filter(filterString)),
       );
 
   }
 
-  private filter(name: string): string[] {
-    const filterValue = name.toLowerCase();
-    return this.options.filter(option => option.toLowerCase().includes(filterValue));
+  private filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+    return this.options.filter(optionValue => optionValue.toLowerCase().includes(filterValue));
   }
 
 }
