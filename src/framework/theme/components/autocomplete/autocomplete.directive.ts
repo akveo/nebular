@@ -208,8 +208,8 @@ export class NbAutocompleteDirective<T> implements OnDestroy, AfterViewInit, Con
     });
   }
 
-  @HostListener('keydown.arrowDown', ['$event'])
-  @HostListener('keydown.arrowUp', ['$event'])
+  @HostListener('keydown.arrowDown')
+  @HostListener('keydown.arrowUp')
   protected handleKeydown() {
     this.show();
   }
@@ -276,15 +276,11 @@ export class NbAutocompleteDirective<T> implements OnDestroy, AfterViewInit, Con
 
     this.triggerStrategy.show$
       .pipe(filter(() => this.isClosed))
-      .subscribe(($event: Event) => {
-        this.show();
-      });
+      .subscribe(() => this.show());
 
     this.triggerStrategy.hide$
       .pipe(filter(() => this.isOpen))
-      .subscribe(($event: Event) => {
-        this.hide();
-      });
+      .subscribe(() => this.hide());
   }
 
   protected createTriggerStrategy(): NbTriggerStrategy {
