@@ -72,11 +72,11 @@ const TEST_GROUPS = [
 export class NbAutocompleteTestComponent {
 
   @Output() selectedChange: EventEmitter<any> = new EventEmitter();
-  @ViewChild(NbAutocompleteDirective, { static: true }) autocompleteDirective: NbAutocompleteDirective<string>;
+  @ViewChild(NbAutocompleteDirective, { static: false }) autocompleteDirective: NbAutocompleteDirective<string>;
   @ViewChild(NbAutocompleteComponent, { static: false }) autocompletePanel: NbAutocompleteComponent<string>
   @ViewChildren(NbOptionComponent) options: QueryList<NbOptionComponent<any>>;
 
-  @ViewChild('autoInput', { static: true }) input: HTMLInputElement;
+  @ViewChild('autoInput', { static: false }) input: HTMLInputElement;
 
   groups = TEST_GROUPS;
   filteredGroups;
