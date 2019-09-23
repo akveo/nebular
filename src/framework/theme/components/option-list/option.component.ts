@@ -4,10 +4,6 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-
-// Component class scoped counter for aria attributes.
-let lastOptionId: number = 0;
-
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -22,6 +18,9 @@ import {
   Output,
 } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
+
+// Component class scoped counter for aria attributes.
+let lastOptionId: number = 0
 
 import { convertToBoolProperty } from '../helpers';
 import { NbFocusableOption } from '../cdk/a11y/focus-key-manager';

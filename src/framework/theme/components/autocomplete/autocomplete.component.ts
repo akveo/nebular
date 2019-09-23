@@ -4,9 +4,6 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-// Component class scoped counter for aria attributes.
-let lastAutocompleteId: number = 0;
-
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -25,6 +22,8 @@ import { NbPosition } from '../cdk/overlay/overlay-position';
 import { NbOptionComponent } from '../option-list/option.component';
 import { NbPortalDirective } from '../cdk/overlay/mapping';
 
+// Component class scoped counter for aria attributes.
+let lastAutocompleteId: number = 0;
 
 /**
  * The `NbAutocompleteComponent` overlay component.
