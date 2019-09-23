@@ -34,8 +34,8 @@ import {
   NbActiveDescendantKeyManager,
   NbActiveDescendantKeyManagerFactoryService,
 } from '../cdk/a11y/descendant-key-manager';
-import { NbOptionComponent } from '@nebular/theme';
 import { NbAutocompleteComponent } from './autocomplete.component';
+import { NbOptionComponent } from '../option-list/option.component';
 
 /**
  * The `NbAutocompleteDirective` provides a capability to expand input with
