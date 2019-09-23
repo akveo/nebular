@@ -11,9 +11,9 @@ import {
   NbThemeModule,
   NbLayoutModule,
   NbOverlayContainerAdapter,
+  NbAutocompleteComponent,
+  NbAutocompleteDirective,
 } from '@nebular/theme';
-import { NbAutocompleteComponent } from './autocomplete.component';
-import { NbAutocompleteDirective } from './autocomplete.directive';
 
 const TEST_GROUPS = [
   {
