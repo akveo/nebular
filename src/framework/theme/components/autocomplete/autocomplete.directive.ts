@@ -201,11 +201,7 @@ export class NbAutocompleteDirective<T> implements OnDestroy, AfterViewInit, Con
     const currentValue = this.hostRef.nativeElement.value;
     this._onChange(currentValue);
     this.setHostInputValue(this.getDisplayValue(currentValue));
-
-    // Detach overlay after content updated if there is no options.
-    setTimeout(() => {
-      this.autocomplete.options.length ? this.show() : this.hide();
-    });
+    this.show();
   }
 
   @HostListener('keydown.arrowDown')
@@ -333,16 +329,11 @@ export class NbAutocompleteDirective<T> implements OnDestroy, AfterViewInit, Con
         }
       });
 
-    this.keyManager.tabOut
-      .pipe(takeUntil(this.destroy$))
-      .subscribe(() => {
-        this.hide();
-      });
   }
 
   protected setActiveItem() {
     this.keyManager.setActiveItem(this.autocomplete.activeFirst ? 0 : -1);
-    Promise.resolve().then(() => this.cd.detectChanges());
+    this.cd.detectChanges();
   }
 
   protected attachToOverlay() {
@@ -365,9 +356,20 @@ export class NbAutocompleteDirective<T> implements OnDestroy, AfterViewInit, Con
     this.createKeyManager();
     this.subscribeOnPositionChange();
     this.subscribeOnOptionClick();
-
+    this.checkOverlayVisibility();
     this.createOverlay();
     this.subscribeOnOverlayKeys();
+  }
+
+  protected checkOverlayVisibility() {
+    this.autocomplete.options.changes
+      .pipe(
+        takeUntil(this.destroy$),
+      ).subscribe(() => {
+        if (!this.autocomplete.options.length) {
+          this.hide();
+        }
+    });
   }
 
   protected createScrollStrategy(): NbScrollStrategy {
@@ -393,9 +395,6 @@ export class NbAutocompleteDirective<T> implements OnDestroy, AfterViewInit, Con
   _onChange: (value: any) => void = () => {};
 
   // Part of ControlValueAccessor.
-  _onTouched = () => {};
-
-  // Part of ControlValueAccessor.
   writeValue(value: any): void {
     this._onChange(value);
   }
@@ -406,8 +405,7 @@ export class NbAutocompleteDirective<T> implements OnDestroy, AfterViewInit, Con
   }
 
   // Part of ControlValueAccessor.
-  registerOnTouched(fn: () => {}) {
-    this._onTouched = fn;
+  registerOnTouched(fn: any): void {
   }
 
 }
