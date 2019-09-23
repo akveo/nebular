@@ -120,9 +120,10 @@ describe('Component: NbAutocompleteComponent', () => {
   let overlayContainer: HTMLElement;
   let document: Document;
   let input: HTMLInputElement;
+  let autocompleteDirective: NbAutocompleteDirective<string>;
 
   const openPanel = () => {
-    fixture.componentInstance.autocompleteDirective.show();
+    autocompleteDirective.show();
     fixture.detectChanges();
   };
 
@@ -145,6 +146,7 @@ describe('Component: NbAutocompleteComponent', () => {
     fixture = TestBed.createComponent(NbAutocompleteTestComponent);
     fixture.detectChanges();
     input = fixture.debugElement.query(By.css('input')).nativeElement;
+    autocompleteDirective = fixture.componentInstance.autocompleteDirective;
     document = TestBed.get(NB_DOCUMENT);
 
     overlayContainerService = TestBed.get(NbOverlayContainerAdapter);
@@ -155,7 +157,7 @@ describe('Component: NbAutocompleteComponent', () => {
   });
 
   afterEach(() => {
-    fixture.componentInstance.autocompleteDirective.hide();
+    autocompleteDirective.hide();
     overlayContainerService.clearContainer();
   });
 
@@ -174,14 +176,14 @@ describe('Component: NbAutocompleteComponent', () => {
 
   it('should open overlay with options when input is focused', () => {
     input.dispatchEvent(new Event('focus'));
-    expect(fixture.componentInstance.autocompleteDirective.isOpen).toBe(true);
+    expect(autocompleteDirective.isOpen).toBe(true);
     expect(overlayContainer.querySelector('nb-option-list')).toBeTruthy();
   });
 
   it('should close overlay when focusout input', () => {
     openPanel();
     document.dispatchEvent(new Event('click'));
-    expect(fixture.componentInstance.autocompleteDirective.isClosed).toBe(true);
+    expect(autocompleteDirective.isClosed).toBe(true);
     expect(overlayContainer.querySelector('nb-option-list')).toBeFalsy();
   });
 
@@ -189,28 +191,28 @@ describe('Component: NbAutocompleteComponent', () => {
     openPanel();
     const option = overlayContainer.querySelectorAll('nb-option')[0];
     option.dispatchEvent(new Event('click'));
-    expect(fixture.componentInstance.autocompleteDirective.isClosed).toBe(true);
+    expect(autocompleteDirective.isClosed).toBe(true);
     expect(overlayContainer.querySelector('nb-option-list')).toBeFalsy();
   });
 
   it('should open overlay programmatically', () => {
     openPanel();
-    fixture.componentInstance.autocompleteDirective.show();
-    expect(fixture.componentInstance.autocompleteDirective.isOpen).toBe(true);
+    autocompleteDirective.show();
+    expect(autocompleteDirective.isOpen).toBe(true);
     expect(overlayContainer.querySelector('nb-option-list')).toBeTruthy();
   });
 
   it('should close overlay programmatically', () => {
     openPanel();
-    fixture.componentInstance.autocompleteDirective.hide();
-    expect(fixture.componentInstance.autocompleteDirective.isClosed).toBe(true);
+    autocompleteDirective.hide();
+    expect(autocompleteDirective.isClosed).toBe(true);
     expect(overlayContainer.querySelector('nb-option-list')).toBeFalsy();
   });
 
   it('should not close overlay when click input', () => {
     openPanel();
     input.dispatchEvent(new Event('click'));
-    expect(fixture.componentInstance.autocompleteDirective.isOpen).toBe(true);
+    expect(autocompleteDirective.isOpen).toBe(true);
     expect(overlayContainer.querySelector('nb-option-list')).toBeTruthy();
   });
 
@@ -246,7 +248,7 @@ describe('Component: NbAutocompleteComponent', () => {
     input.dispatchEvent(new KeyboardEvent('keydown', <any> { keyCode: 40 }));
     input.dispatchEvent(new KeyboardEvent('keydown', <any> { keyCode: 13 }));
 
-    expect(fixture.componentInstance.autocompleteDirective.isClosed).toBe(true);
+    expect(autocompleteDirective.isClosed).toBe(true);
     expect(option.textContent).toContain(input.textContent);
   });
 
@@ -256,7 +258,7 @@ describe('Component: NbAutocompleteComponent', () => {
 
     input.dispatchEvent(new KeyboardEvent('keydown', <any> { keyCode: 27 }));
     fixture.detectChanges();
-    expect(fixture.componentInstance.autocompleteDirective.isClosed).toBe(true);
+    expect(autocompleteDirective.isClosed).toBe(true);
   });
 
   it('should close overlay on input when TAB pressed', () => {
@@ -266,7 +268,7 @@ describe('Component: NbAutocompleteComponent', () => {
     expect(overlayContainer.querySelector('nb-option-list')).toBeTruthy();
     input.dispatchEvent(new KeyboardEvent('keydown', <any> { keyCode: 9 }));
 
-    expect(fixture.componentInstance.autocompleteDirective.isClosed).toBe(true);
+    expect(autocompleteDirective.isClosed).toBe(true);
     expect(overlayContainer.querySelector('nb-option-list')).toBeFalsy();
   });
 
