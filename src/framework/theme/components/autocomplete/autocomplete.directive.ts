@@ -210,6 +210,11 @@ export class NbAutocompleteDirective<T> implements OnDestroy, AfterViewInit, Con
     this.show();
   }
 
+  @HostListener('blur')
+  protected handleBlur() {
+    this._onTouched();
+  }
+
   protected subscribeOnOptionClick() {
     /**
      * If the user changes provided options list in the runtime we have to handle this
@@ -393,6 +398,9 @@ export class NbAutocompleteDirective<T> implements OnDestroy, AfterViewInit, Con
   _onChange: (value: T) => void = () => {};
 
   // Part of ControlValueAccessor.
+  _onTouched = () => {};
+
+  // Part of ControlValueAccessor.
   writeValue(value: T): void {
     this.handleInputValueUpdate(value);
   }
@@ -404,6 +412,7 @@ export class NbAutocompleteDirective<T> implements OnDestroy, AfterViewInit, Con
 
   // Part of ControlValueAccessor.
   registerOnTouched(fn: any): void {
+    this._onTouched = fn;
   }
 
 }
