@@ -73,10 +73,6 @@ import { NbOptionComponent } from '../option-list/option.component';
  *
  * @stacked-example(Active first, autocomplete/autocomplete-active-first.component)
  *
- * There are five autocomplete sizes:
- *
- * @stacked-example(Autocomplete sizes, autocomplete/autocomplete-sizes.component)
- *
  * */
 @Directive({
   selector: 'input[nbAutocomplete]',
