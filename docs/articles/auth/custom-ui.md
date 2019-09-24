@@ -268,7 +268,7 @@ That's it! You can check your page at http://localhost:4200/#/auth.
 
 ## Complete example
 
-A complete code example could be found on [GitHub](https://github.com/akveo/nebular/tree/master/src/playground/with-layout/smart-home).
+A complete code example could be found on [GitHub](https://github.com/akveo/nebular/tree/master/src/playground/without-layout/smart-home).
 And here the playground example available to play around with [OAuth2 Nebular Example](/example/smart-home).
 
 <hr>
