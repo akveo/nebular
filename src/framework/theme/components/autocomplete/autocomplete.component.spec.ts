@@ -7,7 +7,6 @@ import { By } from '@angular/platform-browser';
 import {
   NbOptionComponent,
   NbAutocompleteModule,
-  NbOptionListModule,
   NbThemeModule,
   NbLayoutModule,
   NbOverlayContainerAdapter,
@@ -136,7 +135,6 @@ describe('Component: NbAutocompleteComponent', () => {
         NbThemeModule.forRoot(),
         NbLayoutModule,
         NbAutocompleteModule,
-        NbOptionListModule,
       ],
       declarations: [
         NbAutocompleteTestComponent,

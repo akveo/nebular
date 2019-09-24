@@ -8,7 +8,6 @@ import {
   NbOptionGroupComponent,
   NbSelectModule,
   NbSelectComponent,
-  NbOptionListModule,
   NbOptionComponent,
   NbOptionGroupComponent,
   NbThemeModule,
@@ -55,7 +54,6 @@ describe('NbOptionGroupComponent', () => {
         NbThemeModule.forRoot(),
         NbLayoutModule,
         NbSelectModule,
-        NbOptionListModule,
       ],
       declarations: [ NbOptionGroupTestComponent ],
     });

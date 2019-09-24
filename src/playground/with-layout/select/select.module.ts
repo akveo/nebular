@@ -24,7 +24,6 @@ import { SelectSizesComponent } from './select-sizes.component';
 import { SelectStatusComponent } from './select-status.component';
 import { SelectInteractiveComponent } from './select-interactive.component';
 import { SelectTestComponent } from './select-test.component';
-import { NbOptionListModule } from '../../../framework/theme/components/option-list/option-list.module';
 
 @NgModule({
   declarations: [
@@ -53,7 +52,6 @@ import { NbOptionListModule } from '../../../framework/theme/components/option-l
     CommonModule,
     NbRadioModule,
     NbButtonModule,
-    NbOptionListModule,
   ],
 })
 export class SelectModule {}

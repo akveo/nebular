@@ -5,18 +5,16 @@
  */
 
 import { NgModule } from '@angular/core';
-import { NbAutocompleteModule, NbCardModule } from '@nebular/theme';
+import { NbAutocompleteModule, NbCardModule, NbInputModule } from '@nebular/theme';
 import { AutocompleteShowcaseComponent } from './autocomplete-showcase.component';
-import { NbInputModule } from '../../../framework/theme/public_api';
 import { AutocompleteRoutingModule } from './autocomplete-routing.module';
-import { NbSharedModule } from '../../../framework/theme/components/shared/shared.module';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AutocompleteFormComponent } from './autocomplete-form.component';
 import { AutocompleteGroupComponent } from './autocomplete-group.component';
 import { AutocompleteCustomDisplayComponent } from './autocomplete-custom-display.component';
 import { AutocompleteActiveFirstComponent } from './autocomplete-active-first.component';
 import { AutocompleteSizesComponent } from './autocomplete-sizes.component';
-import { NbOptionListModule } from '../../../framework/theme/components/option-list/option-list.module';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -36,9 +34,9 @@ import { NbOptionListModule } from '../../../framework/theme/components/option-l
     AutocompleteSizesComponent,
   ],
   imports: [
-    NbSharedModule,
+    CommonModule,
+    FormsModule,
     ReactiveFormsModule,
-    NbOptionListModule,
     NbAutocompleteModule,
     NbInputModule,
     AutocompleteRoutingModule,

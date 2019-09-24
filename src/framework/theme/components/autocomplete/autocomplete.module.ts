@@ -13,10 +13,12 @@ import { NbAutocompleteDirective } from './autocomplete.directive';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { NbOptionListModule } from '../option-list/option-list.module';
+import { NbOptionComponent } from '../option-list/option.component';
+import { NbOptionGroupComponent } from '../option-list/option-group.component';
 
 const NB_AUTOCOMPLETE_COMPONENTS = [
-   NbAutocompleteComponent,
-   NbAutocompleteDirective,
+  NbAutocompleteComponent,
+  NbAutocompleteDirective,
 ];
 
 @NgModule({
@@ -27,7 +29,11 @@ const NB_AUTOCOMPLETE_COMPONENTS = [
     NbCardModule,
     NbOptionListModule,
   ],
-   exports: [...NB_AUTOCOMPLETE_COMPONENTS],
+   exports: [
+     ...NB_AUTOCOMPLETE_COMPONENTS,
+     NbOptionComponent,
+     NbOptionGroupComponent,
+   ],
    declarations: [...NB_AUTOCOMPLETE_COMPONENTS],
 })
 export class NbAutocompleteModule {

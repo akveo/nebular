@@ -20,7 +20,6 @@ import {
   NbButtonModule,
   NbSelectModule,
   NbInputModule,
-  NbOptionListModule,
   NbAutocompleteModule,
 } from '@nebular/theme';
 
@@ -71,7 +70,6 @@ import {
     NbAutocompleteModule,
     NbInputModule,
     NbEvaIconsModule,
-    NbOptionListModule,
     RouterModule,
   ],
   declarations: [
