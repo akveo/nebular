@@ -79,7 +79,7 @@ import { NbOptionComponent } from '../option-list/option.component';
  *
  * */
 @Directive({
-  selector: 'input[nbAutocomplete], textarea[nbAutocomplete]',
+  selector: 'input[nbAutocomplete]',
   providers: [{
     provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => NbAutocompleteDirective),
@@ -317,10 +317,12 @@ export class NbAutocompleteDirective<T> implements OnDestroy, AfterViewInit, Con
       )
       .subscribe((event: KeyboardEvent) => {
         if (event.keyCode === ESCAPE && this.isOpen) {
+          event.preventDefault();
           this.hostRef.nativeElement.focus();
           this.hide();
 
         } else if (event.keyCode === ENTER) {
+          event.preventDefault();
           const activeItem = this.getActiveItem();
           if (!activeItem) {
             return;

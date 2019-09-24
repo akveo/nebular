@@ -145,12 +145,6 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         component: 'AutocompleteActiveFirstComponent',
         name: 'Autocomplete Active First',
       },
-      {
-        path: 'autocomplete-sizes.component',
-        link: '/autocomplete/autocomplete-sizes.component',
-        component: 'AutocompleteSizesComponent',
-        name: 'Autocomplete Sizes',
-      },
     ],
   },
   {

@@ -13,7 +13,6 @@ import { AutocompleteFormComponent } from './autocomplete-form.component';
 import { AutocompleteGroupComponent } from './autocomplete-group.component';
 import { AutocompleteCustomDisplayComponent } from './autocomplete-custom-display.component';
 import { AutocompleteActiveFirstComponent } from './autocomplete-active-first.component';
-import { AutocompleteSizesComponent } from './autocomplete-sizes.component';
 import { CommonModule } from '@angular/common';
 
 @NgModule({
@@ -23,7 +22,6 @@ import { CommonModule } from '@angular/common';
     AutocompleteGroupComponent,
     AutocompleteCustomDisplayComponent,
     AutocompleteActiveFirstComponent,
-    AutocompleteSizesComponent,
   ],
   exports: [
     AutocompleteShowcaseComponent,
@@ -31,7 +29,6 @@ import { CommonModule } from '@angular/common';
     AutocompleteGroupComponent,
     AutocompleteCustomDisplayComponent,
     AutocompleteActiveFirstComponent,
-    AutocompleteSizesComponent,
   ],
   imports: [
     CommonModule,

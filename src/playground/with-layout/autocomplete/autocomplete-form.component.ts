@@ -18,22 +18,23 @@ import { map, startWith } from 'rxjs/operators';
 export class AutocompleteFormComponent implements OnInit {
 
   options: string[];
-  filteredOptions$: Observable<string[]>;
+  filteredControlOptions$: Observable<string[]>;
+  filteredNgModelOptions$: Observable<string[]>;
   inputFormControl: FormControl;
+  value: string;
 
   ngOnInit() {
 
     this.options = ['Option 1', 'Option 2', 'Option 3'];
-    this.filteredOptions$ = of(this.options);
+    this.filteredControlOptions$ = of(this.options);
+    this.filteredNgModelOptions$ = of(this.options);
 
     this.inputFormControl = new FormControl();
-
-    this.filteredOptions$ = this.inputFormControl.valueChanges
+    this.filteredControlOptions$ = this.inputFormControl.valueChanges
       .pipe(
         startWith(''),
         map(filterString => this.filter(filterString)),
       );
-
   }
 
   private filter(value: string): string[] {
@@ -41,5 +42,8 @@ export class AutocompleteFormComponent implements OnInit {
     return this.options.filter(optionValue => optionValue.toLowerCase().includes(filterValue));
   }
 
+  onModelChange(value: string) {
+    this.filteredNgModelOptions$ = of(this.filter(value));
+  }
 }
 
