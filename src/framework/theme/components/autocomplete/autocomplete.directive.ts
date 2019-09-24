@@ -225,7 +225,7 @@ export class NbAutocompleteDirective<T> implements OnDestroy, AfterViewInit, Con
         }),
         takeUntil(this.destroy$),
       )
-      .subscribe((clickedOption: NbOptionComponent<T>) => this.handleOptionSelection(clickedOption));
+      .subscribe((clickedOption: NbOptionComponent<T>) => this.handleInputValueUpdate(clickedOption.value));
   }
 
   protected subscribeOnPositionChange() {
@@ -258,11 +258,14 @@ export class NbAutocompleteDirective<T> implements OnDestroy, AfterViewInit, Con
     };
   }
 
-  protected handleOptionSelection(option: NbOptionComponent<T>) {
-    this.setHostInputValue(option.value);
-    this._onChange(option.value);
+  protected handleInputValueUpdate(value: T) {
+    if (value === undefined || value === null) {
+      return;
+    }
+    this.setHostInputValue(value);
+    this._onChange(value);
     this.hostRef.nativeElement.focus();
-    this.autocomplete.emitSelected(option.value);
+    this.autocomplete.emitSelected(value);
     this.hide();
   }
 
@@ -317,7 +320,7 @@ export class NbAutocompleteDirective<T> implements OnDestroy, AfterViewInit, Con
           if (!activeItem) {
             return;
           }
-          this.handleOptionSelection(activeItem);
+          this.handleInputValueUpdate(activeItem.value);
 
         } else {
           this.keyManager.onKeydown(event);
@@ -387,11 +390,11 @@ export class NbAutocompleteDirective<T> implements OnDestroy, AfterViewInit, Con
   }
 
   // Part of ControlValueAccessor.
-  _onChange: (value: any) => void = () => {};
+  _onChange: (value: T) => void = () => {};
 
   // Part of ControlValueAccessor.
-  writeValue(value: any): void {
-    this._onChange(value);
+  writeValue(value: T): void {
+    this.handleInputValueUpdate(value);
   }
 
   // Part of ControlValueAccessor.
