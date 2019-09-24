@@ -12,7 +12,9 @@ import {
   NbOverlayContainerAdapter,
   NbAutocompleteComponent,
   NbAutocompleteDirective,
+  NbTriggerStrategyBuilderService,
 } from '@nebular/theme';
+import { Subject } from 'rxjs';
 
 const TEST_GROUPS = [
   {
@@ -121,12 +123,29 @@ describe('Component: NbAutocompleteComponent', () => {
   let input: HTMLInputElement;
   let autocompleteDirective: NbAutocompleteDirective<string>;
 
+  let triggerBuilderStub;
+  let showTriggerStub: Subject<Event>;
+  let hideTriggerStub: Subject<Event>;
+
   const openPanel = () => {
     autocompleteDirective.show();
     fixture.detectChanges();
   };
 
   beforeEach(() => {
+
+    showTriggerStub = new Subject<Event>();
+    hideTriggerStub = new Subject<Event>();
+    triggerBuilderStub = {
+      trigger() { return this },
+      host() { return this },
+      container() { return this },
+      destroy() {},
+      build() {
+        return { show$: showTriggerStub, hide$: hideTriggerStub };
+      },
+    };
+
     TestBed.configureTestingModule({
       imports: [
         RouterTestingModule.withRoutes([]),
@@ -139,6 +158,9 @@ describe('Component: NbAutocompleteComponent', () => {
       declarations: [
         NbAutocompleteTestComponent,
       ],
+      providers: [{
+        provide: NbTriggerStrategyBuilderService, useValue: triggerBuilderStub,
+      }],
     });
 
     fixture = TestBed.createComponent(NbAutocompleteTestComponent);
@@ -172,15 +194,24 @@ describe('Component: NbAutocompleteComponent', () => {
     option.dispatchEvent(new Event('click'));
   });
 
-  it('should open overlay with options when input is focused', () => {
-    input.dispatchEvent(new Event('focus'));
+  it('should open overlay with options when show is triggered', () => {
+    expect(autocompleteDirective.isClosed).toBe(true);
+    expect(overlayContainer.querySelector('nb-option-list')).toBeFalsy();
+
+    showTriggerStub.next({ target: input } as unknown as Event);
+
     expect(autocompleteDirective.isOpen).toBe(true);
     expect(overlayContainer.querySelector('nb-option-list')).toBeTruthy();
   });
 
-  it('should close overlay when focusout input', () => {
+  it('should close overlay with options when hide is triggered', () => {
     openPanel();
-    document.dispatchEvent(new Event('click'));
+
+    expect(autocompleteDirective.isOpen).toBe(true);
+    expect(overlayContainer.querySelector('nb-option-list')).toBeTruthy();
+
+    hideTriggerStub.next({ target: input } as unknown as Event);
+
     expect(autocompleteDirective.isClosed).toBe(true);
     expect(overlayContainer.querySelector('nb-option-list')).toBeFalsy();
   });
@@ -257,17 +288,6 @@ describe('Component: NbAutocompleteComponent', () => {
     input.dispatchEvent(new KeyboardEvent('keydown', <any> { keyCode: 27 }));
     fixture.detectChanges();
     expect(autocompleteDirective.isClosed).toBe(true);
-  });
-
-  it('should close overlay on input when TAB pressed', () => {
-    openPanel();
-
-    input.focus();
-    expect(overlayContainer.querySelector('nb-option-list')).toBeTruthy();
-    input.dispatchEvent(new KeyboardEvent('keydown', <any> { keyCode: 9 }));
-
-    expect(autocompleteDirective.isClosed).toBe(true);
-    expect(overlayContainer.querySelector('nb-option-list')).toBeFalsy();
   });
 
 });
