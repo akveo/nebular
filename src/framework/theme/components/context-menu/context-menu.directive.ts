@@ -50,7 +50,7 @@ import { NbMenuItem, NbMenuService } from '../menu/menu.service';
  * export class PageModule { }
  * ```
  * Also make sure `NbMenuModule` is imported to your `app.module`.
- *  * ```ts
+ * ```ts
  * @NgModule({
  *   imports: [
  *     // ...
