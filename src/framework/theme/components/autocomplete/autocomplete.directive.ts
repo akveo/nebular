@@ -390,7 +390,7 @@ export class NbAutocompleteDirective<T> implements OnDestroy, AfterViewInit, Con
     if (this.isOpen) {
       this.overlayRef.detach();
       // Need to update class via @HostBinding
-      this.cd.detectChanges();
+      this.cd.markForCheck();
     }
   }
 
