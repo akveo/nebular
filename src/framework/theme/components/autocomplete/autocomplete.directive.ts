@@ -37,6 +37,11 @@ import {
 import { NbAutocompleteComponent } from './autocomplete.component';
 import { NbOptionComponent } from '../option-list/option.component';
 
+export const KeyManagerItemStatus = {
+  RESET_ACTIVE: -1,
+  FIRST_ACTIVE: 0,
+}
+
 /**
  * The `NbAutocompleteDirective` provides a capability to expand input with
  * `NbAutocompleteComponent` overlay containing options to select and fill input with.
@@ -105,7 +110,7 @@ export class NbAutocompleteDirective<T> implements OnDestroy, AfterViewInit, Con
   protected destroy$: Subject<void> = new Subject<void>();
 
   /**
-   * Determines is autocomplete opened.
+   * Determines is autocomplete overlay opened.
    * */
   get isOpen(): boolean {
     return this.overlayRef && this.overlayRef.hasAttached();
@@ -333,7 +338,10 @@ export class NbAutocompleteDirective<T> implements OnDestroy, AfterViewInit, Con
   }
 
   protected setActiveItem() {
-    this.keyManager.setActiveItem(this.autocomplete.activeFirst ? 0 : -1);
+    // If autocomplete has activeFirst input set to true,
+    // keyManager set first option active, otherwise - reset active option.
+    this.keyManager.setActiveItem(
+      this.autocomplete.activeFirst ? KeyManagerItemStatus.FIRST_ACTIVE : KeyManagerItemStatus.RESET_ACTIVE);
     this.cd.detectChanges();
   }
 
