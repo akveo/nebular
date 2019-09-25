@@ -62,7 +62,7 @@ export const KeyManagerItemStatus = {
  * ```
  * ### Usage
  *
- * Autocomplete may be used as form control element.
+ * You can bind control with form controls or ngModel.
  *
  * @stacked-example(Autocomplete form binding, autocomplete/autocomplete-form.component)
  *
