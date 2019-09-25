@@ -71,9 +71,15 @@
       margin: 0 auto;
     }
 
-    .layout nb-layout-header nav {
+    .layout nb-layout-header {
       max-width: nb-theme(layout-window-mode-max-width);
-      margin: 0 auto;
+      margin-left: auto;
+      margin-right: auto;
+
+      nav {
+        max-width: nb-theme(layout-window-mode-max-width);
+        margin: 0 auto;
+      }
     }
 
     @media screen and (min-width: nb-theme(layout-window-mode-max-width) + 20px) {
