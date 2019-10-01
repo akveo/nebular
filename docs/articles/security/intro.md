@@ -1,6 +1,6 @@
 # Security 
 
-Security is an important part of any adult web application. It is a common task to manage user access to particular resources.
+Security is an important part of any web application. It is a common task to manage user access to particular resources.
 Unlike the `Nebular Auth`, which provides a way to `authenticate` a user, `Nebular Security` helps you to `authorize` a user to access some of the application resources.
 
 <div class="note note-warning">
