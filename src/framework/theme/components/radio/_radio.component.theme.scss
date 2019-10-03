@@ -69,7 +69,6 @@
       &:checked {
         & + .outer-circle {
           background-color: nb-theme(radio-disabled-checked-background-color);
-          border-color: nb-theme(radio-disabled-checked-border-color);
         }
         ~ .inner-circle {
           background-color: nb-theme(radio-disabled-checked-inner-circle-color);
