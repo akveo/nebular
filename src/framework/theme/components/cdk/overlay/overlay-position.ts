@@ -92,31 +92,31 @@ const POSITIONS = {
 
 const COUNTER_CLOCKWISE_POSITIONS = [
   NbPosition.TOP,
+  NbPosition.START,
+  NbPosition.BOTTOM,
+  NbPosition.END,
+  NbPosition.TOP_END,
   NbPosition.TOP_START,
   NbPosition.START_TOP,
-  NbPosition.START,
   NbPosition.START_BOTTOM,
   NbPosition.BOTTOM_START,
-  NbPosition.BOTTOM,
   NbPosition.BOTTOM_END,
   NbPosition.END_BOTTOM,
-  NbPosition.END,
   NbPosition.END_TOP,
-  NbPosition.TOP_END,
 ];
 const CLOCKWISE_POSITIONS = [
   NbPosition.TOP,
+  NbPosition.END,
+  NbPosition.BOTTOM,
+  NbPosition.START,
+  NbPosition.TOP_START,
   NbPosition.TOP_END,
   NbPosition.END_TOP,
-  NbPosition.END,
   NbPosition.END_BOTTOM,
   NbPosition.BOTTOM_END,
-  NbPosition.BOTTOM,
   NbPosition.BOTTOM_START,
   NbPosition.START_BOTTOM,
-  NbPosition.START,
   NbPosition.START_TOP,
-  NbPosition.TOP_START,
 ];
 const VERTICAL_POSITIONS = [NbPosition.BOTTOM, NbPosition.TOP];
 const HORIZONTAL_POSITIONS = [NbPosition.START, NbPosition.END];
