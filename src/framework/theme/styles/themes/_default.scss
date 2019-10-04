@@ -27,6 +27,13 @@ $theme: (
   color-primary-800: #102694,
   color-primary-900: #091c7a,
 
+  color-primary-transparent-100: rgba(51, 102, 255, 0.08),
+  color-primary-transparent-200: rgba(51, 102, 255, 0.16),
+  color-primary-transparent-300: rgba(51, 102, 255, 0.24),
+  color-primary-transparent-400: rgba(51, 102, 255, 0.32),
+  color-primary-transparent-500: rgba(51, 102, 255, 0.4),
+  color-primary-transparent-600: rgba(51, 102, 255, 0.48),
+
   color-success-100: #f0fff5,
   color-success-200: #ccfce3,
   color-success-300: #8cfac7,
@@ -35,7 +42,14 @@ $theme: (
   color-success-600: #00b887,
   color-success-700: #00997a,
   color-success-800: #007d6c,
-  color-success-900: #004a42,
+  color-success-900: #004a45,
+
+  color-success-transparent-100: rgba(0, 214, 143, 0.08),
+  color-success-transparent-200: rgba(0, 214, 143, 0.16),
+  color-success-transparent-300: rgba(0, 214, 143, 0.24),
+  color-success-transparent-400: rgba(0, 214, 143, 0.32),
+  color-success-transparent-500: rgba(0, 214, 143, 0.4),
+  color-success-transparent-600: rgba(0, 214, 143, 0.48),
 
   color-info-100: #f2f8ff,
   color-info-200: #c7e2ff,
@@ -47,6 +61,13 @@ $theme: (
   color-info-800: #0041a8,
   color-info-900: #002885,
 
+  color-info-transparent-100: rgba(0, 149, 255, 0.08),
+  color-info-transparent-200: rgba(0, 149, 255, 0.16),
+  color-info-transparent-300: rgba(0, 149, 255, 0.24),
+  color-info-transparent-400: rgba(0, 149, 255, 0.32),
+  color-info-transparent-500: rgba(0, 149, 255, 0.4),
+  color-info-transparent-600: rgba(0, 149, 255, 0.48),
+
   color-warning-100: #fffdf2,
   color-warning-200: #fff1c2,
   color-warning-300: #ffe59e,
@@ -56,6 +77,13 @@ $theme: (
   color-warning-700: #b86e00,
   color-warning-800: #945400,
   color-warning-900: #703c00,
+
+  color-warning-transparent-100: rgba(255, 170, 0, 0.08),
+  color-warning-transparent-200: rgba(255, 170, 0, 0.16),
+  color-warning-transparent-300: rgba(255, 170, 0, 0.24),
+  color-warning-transparent-400: rgba(255, 170, 0, 0.32),
+  color-warning-transparent-500: rgba(255, 170, 0, 0.4),
+  color-warning-transparent-600: rgba(255, 170, 0, 0.48),
 
   color-danger-100: #fff2f2,
   color-danger-200: #ffd6d9,
@@ -67,6 +95,13 @@ $theme: (
   color-danger-800: #94124e,
   color-danger-900: #700940,
 
+  color-danger-transparent-100: rgba(255, 61, 113, 0.08),
+  color-danger-transparent-200: rgba(255, 61, 113, 0.16),
+  color-danger-transparent-300: rgba(255, 61, 113, 0.24),
+  color-danger-transparent-400: rgba(255, 61, 113, 0.32),
+  color-danger-transparent-500: rgba(255, 61, 113, 0.4),
+  color-danger-transparent-600: rgba(255, 61, 113, 0.48),
+
   /* Basic colors - for backgrounds and borders and texts */
 
   color-basic-100: #ffffff,
@@ -77,43 +112,57 @@ $theme: (
   color-basic-600: #8f9bb3,
   color-basic-700: #2e3a59,
   color-basic-800: #222b45,
-  color-basic-900: #1a2138,
+  color-basic-900: #192038,
   color-basic-1000: #151a30,
   color-basic-1100: #101426,
 
+  color-basic-transparent-100: rgba(143, 155, 179, 0.08),
+  color-basic-transparent-200: rgba(143, 155, 179, 0.16),
+  color-basic-transparent-300: rgba(143, 155, 179, 0.24),
+  color-basic-transparent-400: rgba(143, 155, 179, 0.32),
+  color-basic-transparent-500: rgba(143, 155, 179, 0.4),
+  color-basic-transparent-600: rgba(143, 155, 179, 0.48),
+
+  color-basic-control-transparent-100: rgba(0, 0, 0, 0.08),
+  color-basic-control-transparent-200: rgba(0, 0, 0, 0.16),
+  color-basic-control-transparent-300: rgba(0, 0, 0, 0.24),
+  color-basic-control-transparent-400: rgba(0, 0, 0, 0.32),
+  color-basic-control-transparent-500: rgba(0, 0, 0, 0.4),
+  color-basic-control-transparent-600: rgba(0, 0, 0, 0.48),
+
   /* Status colors states - focus, hover, default, active, disabled  */
 
-  color-primary-focus: color-primary-700,
+  color-primary-focus: color-primary-600,
   color-primary-hover: color-primary-400,
   color-primary-default: color-primary-500,
   color-primary-active: color-primary-600,
   color-primary-disabled: color-primary-300,
 
-  color-success-focus: color-success-700,
+  color-success-focus: color-success-600,
   color-success-hover: color-success-400,
   color-success-default: color-success-500,
   color-success-active: color-success-600,
   color-success-disabled: color-success-200,
 
-  color-info-focus: color-info-700,
+  color-info-focus: color-info-600,
   color-info-hover: color-info-400,
   color-info-default: color-info-500,
   color-info-active: color-info-600,
   color-info-disabled: color-info-300,
 
-  color-warning-focus: color-warning-700,
+  color-warning-focus: color-warning-600,
   color-warning-hover: color-warning-400,
   color-warning-default: color-warning-500,
   color-warning-active: color-warning-600,
   color-warning-disabled: color-warning-300,
 
-  color-danger-focus: color-danger-700,
+  color-danger-focus: color-danger-600,
   color-danger-hover: color-danger-400,
   color-danger-default: color-danger-500,
   color-danger-active: color-danger-600,
   color-danger-disabled: color-danger-300,
 
-  color-basic-focus: color-basic-700,
+  color-basic-focus: color-basic-600,
   color-basic-hover: color-basic-400,
   color-basic-default: color-basic-500,
   color-basic-active: color-basic-600,
@@ -159,7 +208,7 @@ $theme: (
   text-basic-color: color-basic-900,
   text-alternate-color: color-basic-100,
   text-control-color: color-basic-100,
-  text-disabled-color: color-basic-500,
+  text-disabled-color: color-basic-transparent-600,
   text-hint-color: color-basic-600,
 
   text-primary-color: color-primary-default,
@@ -280,7 +329,7 @@ $theme: (
   border-radius: 0.25rem,
 
   outline-width: 0.375rem,
-  outline-color: color-basic-400,
+  outline-color: color-basic-transparent-200,
 
   scrollbar-color: background-basic-color-4,
   scrollbar-background-color: background-basic-color-2,
