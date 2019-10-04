@@ -10,7 +10,10 @@ import {
   ElementRef,
   Input,
   OnChanges,
-  OnDestroy, OnInit,
+  OnDestroy,
+  OnInit,
+  Output,
+  EventEmitter,
 } from '@angular/core';
 
 import { NbDynamicOverlay, NbDynamicOverlayController } from '../cdk/overlay/dynamic/dynamic-overlay';
@@ -19,6 +22,8 @@ import { NbAdjustment, NbPosition } from '../cdk/overlay/overlay-position';
 import { NbOverlayContent } from '../cdk/overlay/overlay-service';
 import { NbTrigger } from '../cdk/overlay/overlay-trigger';
 import { NbPopoverComponent } from './popover.component';
+import { takeUntil, skip } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 
 /**
@@ -107,6 +112,7 @@ import { NbPopoverComponent } from './popover.component';
  * */
 @Directive({
   selector: '[nbPopover]',
+  exportAs: 'nbPopover',
   providers: [NbDynamicOverlayHandler, NbDynamicOverlay],
 })
 export class NbPopoverDirective implements NbDynamicOverlayController, OnChanges, AfterViewInit, OnDestroy, OnInit {
@@ -152,7 +158,15 @@ export class NbPopoverDirective implements NbDynamicOverlayController, OnChanges
   @Input('nbPopoverOffset')
   offset = 15;
 
+  @Output()
+  nbPopoverShowStateChange = new EventEmitter<{ isShown: boolean }>();
+
+  get isShown(): boolean {
+    return !!(this.dynamicOverlay && this.dynamicOverlay.isAttached);
+  }
+
   protected dynamicOverlay: NbDynamicOverlay;
+  protected destroy$ = new Subject<void>();
 
   constructor(protected hostRef: ElementRef,
               protected dynamicOverlayHandler: NbDynamicOverlayHandler) {
@@ -171,6 +185,13 @@ export class NbPopoverDirective implements NbDynamicOverlayController, OnChanges
   ngAfterViewInit() {
     this.dynamicOverlay = this.configureDynamicOverlay()
       .build();
+
+    this.dynamicOverlay.isShown
+      .pipe(
+        skip(1),
+        takeUntil(this.destroy$),
+      )
+      .subscribe((isShown: boolean) => this.nbPopoverShowStateChange.emit({ isShown }));
   }
 
   rebuild() {
@@ -192,6 +213,8 @@ export class NbPopoverDirective implements NbDynamicOverlayController, OnChanges
 
   ngOnDestroy() {
     this.dynamicOverlayHandler.destroy();
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   protected configureDynamicOverlay() {

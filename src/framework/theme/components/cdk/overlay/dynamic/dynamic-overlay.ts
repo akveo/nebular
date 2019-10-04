@@ -1,6 +1,6 @@
 import { ComponentFactoryResolver, ComponentRef, Injectable, NgZone, Type } from '@angular/core';
-import { filter, takeUntil, takeWhile } from 'rxjs/operators';
-import { Subject } from 'rxjs';
+import { filter, takeUntil, takeWhile, distinctUntilChanged } from 'rxjs/operators';
+import { Subject, BehaviorSubject, Observable } from 'rxjs';
 
 import {
   NbAdjustableConnectedPositionStrategy,
@@ -29,10 +29,15 @@ export class NbDynamicOverlay {
   protected positionStrategy: NbAdjustableConnectedPositionStrategy;
 
   protected positionStrategyChange$ = new Subject();
+  protected isShown$ = new BehaviorSubject<boolean>(false);
   protected alive = true;
 
   get isAttached(): boolean {
     return this.ref && this.ref.hasAttached();
+  }
+
+  get isShown(): Observable<boolean> {
+    return this.isShown$.pipe(distinctUntilChanged());
   }
 
   constructor(
@@ -120,6 +125,8 @@ export class NbDynamicOverlay {
       this.disposeOverlayRef();
       return this.show();
     }
+
+    this.isShown$.next(true);
   }
 
   hide() {
@@ -129,6 +136,8 @@ export class NbDynamicOverlay {
 
     this.ref.detach();
     this.container = null;
+
+    this.isShown$.next(false);
   }
 
   toggle() {
@@ -143,6 +152,8 @@ export class NbDynamicOverlay {
     this.alive = false;
     this.hide();
     this.disposeOverlayRef();
+    this.isShown$.complete();
+    this.positionStrategyChange$.complete();
   }
 
   getContainer() {
