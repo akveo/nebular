@@ -92,4 +92,29 @@ describe('NbAdjustableConnectedPositionStrategy', () => {
       offsetX: 15,
     }]));
   });
+
+  it('should apply center positions first', () => {
+    const withPositionsSpy = spyOn(strategy, 'withPositions').and.callThrough();
+
+    strategy.position(NbPosition.START).adjustment(NbAdjustment.CLOCKWISE);
+
+    const overlayService: NbOverlayService = TestBed.get(NbOverlayService);
+    const overlayRef = overlayService.create({ positionStrategy: strategy });
+    overlayRef.attach(new NbComponentPortal(PortalComponent));
+
+    expect(withPositionsSpy).toHaveBeenCalledWith(jasmine.objectContaining([
+      { originX: 'start', originY: 'center', overlayX: 'end', overlayY: 'center', offsetX: -15 },
+      { originX: 'start', originY: 'top', overlayX: 'end', overlayY: 'top', offsetX: -15 },
+      { originX: 'start', originY: 'bottom', overlayX: 'end', overlayY: 'bottom', offsetX: -15 },
+      { originX: 'center', originY: 'top', overlayX: 'center', overlayY: 'bottom', offsetY: -15 },
+      { originX: 'end', originY: 'top', overlayX: 'end', overlayY: 'bottom', offsetY: -15 },
+      { originX: 'start', originY: 'top', overlayX: 'start', overlayY: 'bottom', offsetY: -15 },
+      { originX: 'end', originY: 'center', overlayX: 'start', overlayY: 'center', offsetX: 15 },
+      { originX: 'end', originY: 'bottom', overlayX: 'start', overlayY: 'bottom', offsetX: 15 },
+      { originX: 'end', originY: 'top', overlayX: 'start', overlayY: 'top', offsetX: 15 },
+      { originX: 'center', originY: 'bottom', overlayX: 'center', overlayY: 'top', offsetY: 15 },
+      { originX: 'start', originY: 'bottom', overlayX: 'start', overlayY: 'top', offsetY: 15 },
+      { originX: 'end', originY: 'bottom', overlayX: 'end', overlayY: 'top', offsetY: 15 },
+    ]));
+  });
 });
