@@ -12,6 +12,7 @@ import { NbTrigger } from '../cdk/overlay/overlay-trigger';
 import { NbPopoverDirective } from './popover.directive';
 import { NbPopoverComponent } from './popover.component';
 import { NbPopoverModule } from './popover.module';
+import createSpy = jasmine.createSpy;
 
 @Component({
   selector: 'nb-popover-component-content-test',
@@ -244,6 +245,56 @@ describe('Directive: NbPopoverDirective', () => {
       fixture.detectChanges();
       const templatePopover = fixture.nativeElement.querySelector('nb-popover');
       expect(templatePopover.textContent).toContain('hello world');
+    });
+
+    it('should emit show state change event when shows up', () => {
+      fixture = TestBed.createComponent(NbPopoverDefaultTestComponent);
+      fixture.detectChanges();
+      const popover: NbPopoverDirective = fixture.componentInstance.popover;
+
+      const stateChangeSpy = createSpy('stateChangeSpy');
+      popover.nbPopoverShowStateChange.subscribe(stateChangeSpy);
+
+      popover.show();
+      fixture.detectChanges();
+
+      expect(stateChangeSpy).toHaveBeenCalledTimes(1);
+      expect(stateChangeSpy).toHaveBeenCalledWith(jasmine.objectContaining({ isShown: true }));
+    });
+
+    it('should emit show state change event when hides', () => {
+      fixture = TestBed.createComponent(NbPopoverDefaultTestComponent);
+      fixture.detectChanges();
+      const popover: NbPopoverDirective = fixture.componentInstance.popover;
+      popover.show();
+      fixture.detectChanges();
+
+      const stateChangeSpy = createSpy('stateChangeSpy');
+      popover.nbPopoverShowStateChange.subscribe(stateChangeSpy);
+
+      popover.hide();
+      fixture.detectChanges();
+
+      expect(stateChangeSpy).toHaveBeenCalledTimes(1);
+      expect(stateChangeSpy).toHaveBeenCalledWith(jasmine.objectContaining({ isShown: false }));
+    });
+
+    it('should set isShown to false when hidden', () => {
+      fixture = TestBed.createComponent(NbPopoverDefaultTestComponent);
+      fixture.detectChanges();
+      const popover: NbPopoverDirective = fixture.componentInstance.popover;
+
+      expect(popover.isShown).toEqual(false);
+    });
+
+    it('should set isShown to true when shown', () => {
+      fixture = TestBed.createComponent(NbPopoverDefaultTestComponent);
+      fixture.detectChanges();
+      const popover: NbPopoverDirective = fixture.componentInstance.popover;
+      popover.show();
+      fixture.detectChanges();
+
+      expect(popover.isShown).toEqual(true);;
     });
 
   });
