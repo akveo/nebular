@@ -294,7 +294,7 @@ describe('Directive: NbPopoverDirective', () => {
       popover.show();
       fixture.detectChanges();
 
-      expect(popover.isShown).toEqual(true);;
+      expect(popover.isShown).toEqual(true);
     });
 
   });
