@@ -92,29 +92,29 @@ const POSITIONS = {
 
 const COUNTER_CLOCKWISE_POSITIONS = [
   NbPosition.TOP,
-  NbPosition.START,
-  NbPosition.BOTTOM,
-  NbPosition.END,
   NbPosition.TOP_END,
   NbPosition.TOP_START,
+  NbPosition.START,
   NbPosition.START_TOP,
   NbPosition.START_BOTTOM,
+  NbPosition.BOTTOM,
   NbPosition.BOTTOM_START,
   NbPosition.BOTTOM_END,
+  NbPosition.END,
   NbPosition.END_BOTTOM,
   NbPosition.END_TOP,
 ];
 const CLOCKWISE_POSITIONS = [
   NbPosition.TOP,
-  NbPosition.END,
-  NbPosition.BOTTOM,
-  NbPosition.START,
   NbPosition.TOP_START,
   NbPosition.TOP_END,
+  NbPosition.END,
   NbPosition.END_TOP,
   NbPosition.END_BOTTOM,
+  NbPosition.BOTTOM,
   NbPosition.BOTTOM_END,
   NbPosition.BOTTOM_START,
+  NbPosition.START,
   NbPosition.START_BOTTOM,
   NbPosition.START_TOP,
 ];
@@ -208,11 +208,11 @@ export class NbAdjustableConnectedPositionStrategy
     }));
   }
 
-  protected reorderPreferredPositions(positions: NbPosition[]): NbPosition[] {
-    const cpy = positions.slice();
-    const startIndex = positions.indexOf(this._position);
-    const start = cpy.splice(startIndex);
-    return start.concat(...cpy);
+  protected reorderPreferredPositions(centerPositions: NbPosition[]): NbPosition[] {
+    const startPositionIndex = centerPositions.indexOf(this._position);
+    const firstPart = centerPositions.slice(startPositionIndex);
+    const secondPart = centerPositions.slice(0, startPositionIndex);
+    return firstPart.concat(secondPart);
   }
 }
 
