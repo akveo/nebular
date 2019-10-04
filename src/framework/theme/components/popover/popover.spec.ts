@@ -13,6 +13,7 @@ import { NbPopoverDirective } from './popover.directive';
 import { NbPopoverComponent } from './popover.component';
 import { NbPopoverModule } from './popover.module';
 import createSpy = jasmine.createSpy;
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'nb-popover-component-content-test',
@@ -83,11 +84,13 @@ export class NbPopoverInstanceTestComponent {
   @ViewChild(TemplateRef, { static: false }) template: TemplateRef<any>;
 }
 
+const dynamicOverlayIsShow$ = new Subject();
 const dynamicOverlay = {
   show() {},
   hide() {},
   toggle() {},
   destroy() {},
+  isShown: dynamicOverlayIsShow$,
 };
 
 export class NbDynamicOverlayHandlerMock {
@@ -98,6 +101,7 @@ export class NbDynamicOverlayHandlerMock {
   _trigger: NbTrigger = NbTrigger.NOOP;
   _position: NbPosition = NbPosition.TOP;
   _adjustment: NbAdjustment = NbAdjustment.NOOP;
+  _offset = 15;
 
   constructor() {
   }
@@ -114,6 +118,11 @@ export class NbDynamicOverlayHandlerMock {
 
   position(position: NbPosition) {
     this._position = position;
+    return this;
+  }
+
+  offset(offset: number) {
+    this._offset = offset;
     return this;
   }
 
