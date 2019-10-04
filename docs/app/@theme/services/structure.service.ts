@@ -93,9 +93,13 @@ export class NgdStructureService {
   }
 
   protected prepareComponent(component: any) {
-    const textNodes = component.overview.filter(node => node.type === 'text');
-    if (textNodes && textNodes.length) {
-      textNodes[0].content = `## ${component.name}\n\n${textNodes[0].content}`; // TODO: this is bad
+    if (!component.isPrepared) {
+      const textNodes = component.overview.filter(node => node.type === 'text');
+      if (textNodes && textNodes.length) {
+        textNodes[0].content = `## ${component.name}\n\n${textNodes[0].content}`; // TODO: this is bad
+      }
+      // Set isPrepared property to skip repeatin sources in structure.ts
+      component.isPrepared = true;
     }
     return {
       ... component,

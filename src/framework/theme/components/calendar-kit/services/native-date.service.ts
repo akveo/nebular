@@ -163,4 +163,8 @@ export class NbNativeDateService extends NbDateService<Date> {
   getId(): string {
     return 'native';
   }
+
+  getWeekNumber(date: Date): number {
+    return parseInt(this.datePipe.transform(date, 'w'), 10);
+  }
 }

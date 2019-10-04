@@ -51,6 +51,12 @@ export class NbTabComponent {
   @Input() tabTitle: string;
 
   /**
+   * Tab id
+   * @type {string}
+   */
+  @Input() tabId: string;
+
+  /**
    * Tab icon name or icon config object
    * @type {string | NbIconConfig}
    */

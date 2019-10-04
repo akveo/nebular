@@ -24,7 +24,9 @@
         [visibleDate]="visibleDate"
         [size]="size"
         [date]="date"
-        (dateChange)="dateChange.emit($event)">
+        [showWeekNumber]="showWeekNumber"
+        (dateChange)="dateChange.emit($event)"
+        [weekNumberSymbol]="weekNumberSymbol">
       </nb-calendar-day-picker>
 
     </ng-container>

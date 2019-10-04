@@ -1,3 +1,24 @@
+<a name="4.3.1"></a>
+## [4.3.1](https://github.com/akveo/nebular/compare/v4.3.0...v4.3.1) (2019-09-20)
+
+
+### Bug Fixes
+
+* **calendar:** use last defined week day to determine week numb… ([#1969](https://github.com/akveo/nebular/issues/1969)) ([ba78d94](https://github.com/akveo/nebular/commit/ba78d94))
+
+
+
+<a name="4.3.0"></a>
+# [4.3.0](https://github.com/akveo/nebular/compare/v4.2.2...v4.3.0) (2019-09-20)
+
+
+### Features
+
+* **calendar:** add week number column ([#1963](https://github.com/akveo/nebular/issues/1963)) ([28e7468](https://github.com/akveo/nebular/commit/28e7468))
+* **tabset:** add tabid property ([#1919](https://github.com/akveo/nebular/issues/1919)) ([d5bf53a](https://github.com/akveo/nebular/commit/d5bf53a))
+
+
+
 <a name="4.2.2"></a>
 ## [4.2.2](https://github.com/akveo/nebular/compare/v4.2.1...v4.2.2) (2019-09-11)
 
