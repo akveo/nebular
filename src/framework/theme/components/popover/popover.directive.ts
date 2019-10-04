@@ -118,6 +118,8 @@ import { Subject } from 'rxjs';
 export class NbPopoverDirective implements NbDynamicOverlayController, OnChanges, AfterViewInit, OnDestroy, OnInit {
 
   protected popoverComponent = NbPopoverComponent;
+  protected dynamicOverlay: NbDynamicOverlay;
+  protected destroy$ = new Subject<void>();
 
   /**
    * Popover content which will be rendered in NbArrowedOverlayContainerComponent.
@@ -166,9 +168,6 @@ export class NbPopoverDirective implements NbDynamicOverlayController, OnChanges
   get isShown(): boolean {
     return !!(this.dynamicOverlay && this.dynamicOverlay.isAttached);
   }
-
-  protected dynamicOverlay: NbDynamicOverlay;
-  protected destroy$ = new Subject<void>();
 
   constructor(protected hostRef: ElementRef,
               protected dynamicOverlayHandler: NbDynamicOverlayHandler) {
