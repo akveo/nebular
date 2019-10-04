@@ -208,10 +208,10 @@ export class NbAdjustableConnectedPositionStrategy
     }));
   }
 
-  protected reorderPreferredPositions(centerPositions: NbPosition[]): NbPosition[] {
-    const startPositionIndex = centerPositions.indexOf(this._position);
-    const firstPart = centerPositions.slice(startPositionIndex);
-    const secondPart = centerPositions.slice(0, startPositionIndex);
+  protected reorderPreferredPositions(positions: NbPosition[]): NbPosition[] {
+    const startPositionIndex = positions.indexOf(this._position);
+    const firstPart = positions.slice(startPositionIndex);
+    const secondPart = positions.slice(0, startPositionIndex);
     return firstPart.concat(secondPart);
   }
 }
