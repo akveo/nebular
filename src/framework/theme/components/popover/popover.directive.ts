@@ -146,10 +146,10 @@ export class NbPopoverDirective implements NbDynamicOverlayController, OnChanges
   @Input('nbPopoverTrigger')
   trigger: NbTrigger = NbTrigger.CLICK;
 
-  private dynamicOverlay: NbDynamicOverlay;
+  protected dynamicOverlay: NbDynamicOverlay;
 
-  constructor(private hostRef: ElementRef,
-              private dynamicOverlayHandler: NbDynamicOverlayHandler) {
+  constructor(protected hostRef: ElementRef,
+              protected dynamicOverlayHandler: NbDynamicOverlayHandler) {
   }
 
   ngOnInit() {
