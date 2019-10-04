@@ -324,6 +324,14 @@ export class NbSidebarComponent implements OnChanges, OnInit, OnDestroy {
           this.collapse();
         }
       });
+
+    this.sidebarService.onCompact()
+      .pipe(takeWhile(() => this.alive))
+      .subscribe((data: { tag: string }) => {
+        if (!this.tag || this.tag === data.tag) {
+          this.compact();
+        }
+      });
   }
 
   ngOnDestroy() {
