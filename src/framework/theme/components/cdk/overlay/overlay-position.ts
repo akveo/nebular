@@ -35,6 +35,14 @@ export enum NbPosition {
   RIGHT = 'right',
   START = 'start',
   END = 'end',
+  TOP_END = 'top-end',
+  TOP_START = 'top-start',
+  BOTTOM_END = 'bottom-end',
+  BOTTOM_START = 'bottom-start',
+  END_TOP = 'end-top',
+  END_BOTTOM = 'end-bottom',
+  START_TOP = 'start-top',
+  START_BOTTOM = 'start-bottom',
 }
 
 const POSITIONS = {
@@ -56,10 +64,60 @@ const POSITIONS = {
   [NbPosition.END](offset) {
     return this[NbPosition.RIGHT](offset);
   },
+  [NbPosition.END_TOP](offset) {
+    return { originX: 'end', originY: 'bottom', overlayX: 'start', overlayY: 'bottom', offsetX: offset };
+  },
+  [NbPosition.END_BOTTOM](offset) {
+    return { originX: 'end', originY: 'top', overlayX: 'start', overlayY: 'top', offsetX: offset };
+  },
+  [NbPosition.BOTTOM_START](offset) {
+    return { originX: 'end', originY: 'bottom', overlayX: 'end', overlayY: 'top', offsetY: offset };
+  },
+  [NbPosition.BOTTOM_END](offset) {
+    return { originX: 'start', originY: 'bottom', overlayX: 'start', overlayY: 'top', offsetY: offset };
+  },
+  [NbPosition.START_TOP](offset) {
+    return { originX: 'start', originY: 'bottom', overlayX: 'end', overlayY: 'bottom', offsetX: -offset };
+  },
+  [NbPosition.START_BOTTOM](offset) {
+    return { originX: 'start', originY: 'top', overlayX: 'end', overlayY: 'top', offsetX: -offset };
+  },
+  [NbPosition.TOP_START](offset) {
+    return { originX: 'end', originY: 'top', overlayX: 'end', overlayY: 'bottom', offsetY: -offset };
+  },
+  [NbPosition.TOP_END](offset) {
+    return { originX: 'start', originY: 'top', overlayX: 'start', overlayY: 'bottom', offsetY: -offset };
+  },
 };
 
-const COUNTER_CLOCKWISE_POSITIONS = [NbPosition.TOP, NbPosition.LEFT, NbPosition.BOTTOM, NbPosition.RIGHT];
-const CLOCKWISE_POSITIONS = [NbPosition.TOP, NbPosition.RIGHT, NbPosition.BOTTOM, NbPosition.LEFT];
+const COUNTER_CLOCKWISE_POSITIONS = [
+  NbPosition.TOP,
+  NbPosition.TOP_END,
+  NbPosition.TOP_START,
+  NbPosition.START,
+  NbPosition.START_TOP,
+  NbPosition.START_BOTTOM,
+  NbPosition.BOTTOM,
+  NbPosition.BOTTOM_START,
+  NbPosition.BOTTOM_END,
+  NbPosition.END,
+  NbPosition.END_BOTTOM,
+  NbPosition.END_TOP,
+];
+const CLOCKWISE_POSITIONS = [
+  NbPosition.TOP,
+  NbPosition.TOP_START,
+  NbPosition.TOP_END,
+  NbPosition.END,
+  NbPosition.END_TOP,
+  NbPosition.END_BOTTOM,
+  NbPosition.BOTTOM,
+  NbPosition.BOTTOM_END,
+  NbPosition.BOTTOM_START,
+  NbPosition.START,
+  NbPosition.START_BOTTOM,
+  NbPosition.START_TOP,
+];
 const VERTICAL_POSITIONS = [NbPosition.BOTTOM, NbPosition.TOP];
 const HORIZONTAL_POSITIONS = [NbPosition.START, NbPosition.END];
 
@@ -151,10 +209,10 @@ export class NbAdjustableConnectedPositionStrategy
   }
 
   protected reorderPreferredPositions(positions: NbPosition[]): NbPosition[] {
-    const cpy = positions.slice();
-    const startIndex = positions.indexOf(this._position);
-    const start = cpy.splice(startIndex);
-    return start.concat(...cpy);
+    const startPositionIndex = positions.indexOf(this._position);
+    const firstPart = positions.slice(startPositionIndex);
+    const secondPart = positions.slice(0, startPositionIndex);
+    return firstPart.concat(secondPart);
   }
 }
 
