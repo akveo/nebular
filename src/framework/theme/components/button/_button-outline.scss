@@ -23,21 +23,25 @@
         color: nb-theme(button-outline-#{$status}-text-color);
 
         &:focus {
+          background-color: nb-theme(button-outline-#{$status}-focus-background-color);
           border-color: nb-theme(button-outline-#{$status}-focus-border-color);
           color: nb-theme(button-outline-#{$status}-focus-text-color);
         }
 
         &:hover {
+          background-color: nb-theme(button-outline-#{$status}-hover-background-color);
           border-color: nb-theme(button-outline-#{$status}-hover-border-color);
           color: nb-theme(button-outline-#{$status}-hover-text-color);
         }
 
         &:active {
+          background-color: nb-theme(button-outline-#{$status}-active-background-color);
           border-color: nb-theme(button-outline-#{$status}-active-border-color);
           color: nb-theme(button-outline-#{$status}-active-text-color);
         }
 
         &[disabled] {
+          background-color: nb-theme(button-outline-#{$status}-disabled-background-color);
           border-color: nb-theme(button-outline-#{$status}-disabled-border-color);
           color: nb-theme(button-outline-#{$status}-disabled-text-color);
         }
