@@ -117,6 +117,8 @@ import { Subject } from 'rxjs';
 })
 export class NbPopoverDirective implements NbDynamicOverlayController, OnChanges, AfterViewInit, OnDestroy, OnInit {
 
+  protected popoverComponent = NbPopoverComponent;
+
   /**
    * Popover content which will be rendered in NbArrowedOverlayContainerComponent.
    * Available content: template ref, component and any primitive.
@@ -175,7 +177,7 @@ export class NbPopoverDirective implements NbDynamicOverlayController, OnChanges
   ngOnInit() {
     this.dynamicOverlayHandler
       .host(this.hostRef)
-      .componentType(NbPopoverComponent);
+      .componentType(this.popoverComponent);
   }
 
   ngOnChanges() {
