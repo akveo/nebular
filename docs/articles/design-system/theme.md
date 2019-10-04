@@ -53,7 +53,7 @@ Each theme is divided into the following semantic groups:
 
 ## Colors
 
-All available color within the theme. 5 semantic colors (`primary`, `success`, `info`, `warning`, `danger`) and `basic` color (backgrounds and texts).
+All available color within the theme. 5 semantic colors (`primary`, `success`, `info`, `warning`, `danger`), 6 transparency levels for every default semantic color (8%, 16%, 24%, 32%, 40%, 48%) and `basic` color (backgrounds and texts).
 Each color has a pallet of 9 shades, except for `basic`, which has 11 shades. These colors mostly used by `status` variants of the components.
 
 Primary color shades:
@@ -67,6 +67,13 @@ color-primary-600: #284de0,
 color-primary-700: #2541cc,
 color-primary-800: #192f9e,
 color-primary-900: #14236e,
+
+color-primary-transparent-100: rgba(51, 102, 255, 0.08),
+color-primary-transparent-200: rgba(51, 102, 255, 0.16),
+color-primary-transparent-300: rgba(51, 102, 255, 0.24),
+color-primary-transparent-400: rgba(51, 102, 255, 0.32),
+color-primary-transparent-500: rgba(51, 102, 255, 0.40),
+color-primary-transparent-600: rgba(51, 102, 255, 0.48),
 ```
 
 You can also tune colors used for element states:
