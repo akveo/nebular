@@ -146,6 +146,12 @@ export class NbPopoverDirective implements NbDynamicOverlayController, OnChanges
   @Input('nbPopoverTrigger')
   trigger: NbTrigger = NbTrigger.CLICK;
 
+  /**
+   * Sets popover offset
+   * */
+  @Input('nbPopoverOffset')
+  offset = 15;
+
   protected dynamicOverlay: NbDynamicOverlay;
 
   constructor(protected hostRef: ElementRef,
@@ -192,6 +198,7 @@ export class NbPopoverDirective implements NbDynamicOverlayController, OnChanges
     return this.dynamicOverlayHandler
       .position(this.position)
       .trigger(this.trigger)
+      .offset(this.offset)
       .adjustment(this.adjustment)
       .content(this.content)
       .context(this.context);
