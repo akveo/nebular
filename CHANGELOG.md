@@ -1,3 +1,21 @@
+<a name="4.4.0"></a>
+# [4.4.0](https://github.com/akveo/nebular/compare/v4.3.1...v4.4.0) (2019-10-07)
+
+
+### Bug Fixes
+
+* **layout header:** prevent stretching wider than window max width ([#1980](https://github.com/akveo/nebular/issues/1980)) ([c42c880](https://github.com/akveo/nebular/commit/c42c880))
+
+
+### Features
+
+* add angular adjustments ([#1996](https://github.com/akveo/nebular/issues/1996)) ([d8689c1](https://github.com/akveo/nebular/commit/d8689c1))
+* sync with Eva 1.1 ([#1995](https://github.com/akveo/nebular/issues/1995)) ([67d5689](https://github.com/akveo/nebular/commit/67d5689))
+* **popover, tooltip:** add shown state api ([#1998](https://github.com/akveo/nebular/issues/1998)) ([6dbce1d](https://github.com/akveo/nebular/commit/6dbce1d))
+* **sidebar service:** add compact method ([#1997](https://github.com/akveo/nebular/issues/1997)) ([3c34805](https://github.com/akveo/nebular/commit/3c34805))
+
+
+
 <a name="4.3.1"></a>
 ## [4.3.1](https://github.com/akveo/nebular/compare/v4.3.0...v4.3.1) (2019-09-20)
 
