@@ -51,12 +51,14 @@ export class NbMockDynamicOverlay {
   create(componentType: Type<NbRenderableContainer>,
          content: NbOverlayContent,
          context: Object,
-         positionStrategy: NbAdjustableConnectedPositionStrategy) {
+         positionStrategy: NbAdjustableConnectedPositionStrategy,
+         overlayConfig: NbOverlayConfig) {
 
     this.setContext(context);
     this.setContent(content);
     this.setComponent(componentType);
     this.setPositionStrategy(positionStrategy);
+    this.setOverlayConfig(overlayConfig);
 
     return this;
   }
@@ -527,10 +529,10 @@ describe('dynamic-overlay-handler', () => {
     let overlayConfig: NbOverlayConfig = { panelClass: 'custom-class' };
 
     let dynamic = configure().overlayConfig(overlayConfig).build();
-    expect(dynamic._overlayConfig).toBe(jasmine.objectContaining(overlayConfig));
+    expect(dynamic._overlayConfig).toEqual(jasmine.objectContaining(overlayConfig));
 
     overlayConfig = { panelClass: 'other-custom-class' };
     dynamic = configure().overlayConfig(overlayConfig).rebuild();
-    expect(dynamic._overlayConfig).toBe(jasmine.objectContaining(overlayConfig));
+    expect(dynamic._overlayConfig).toEqual(jasmine.objectContaining(overlayConfig));
   });
 });
