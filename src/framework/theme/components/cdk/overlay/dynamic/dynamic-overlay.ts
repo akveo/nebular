@@ -1,6 +1,6 @@
 import { ComponentFactoryResolver, ComponentRef, Injectable, NgZone, Type } from '@angular/core';
-import { filter, takeUntil, takeWhile } from 'rxjs/operators';
-import { Subject } from 'rxjs';
+import { filter, takeUntil, takeWhile, distinctUntilChanged } from 'rxjs/operators';
+import { Subject, BehaviorSubject, Observable } from 'rxjs';
 
 import {
   NbAdjustableConnectedPositionStrategy,
@@ -9,7 +9,7 @@ import {
 
 import { NbRenderableContainer } from '../overlay-container';
 import { createContainer, NbOverlayContent, NbOverlayService, patch } from '../overlay-service';
-import { NbOverlayRef, NbOverlayContainer } from '../mapping';
+import { NbOverlayRef, NbOverlayContainer, NbOverlayConfig } from '../mapping';
 
 export interface NbDynamicOverlayController {
   show();
@@ -27,12 +27,18 @@ export class NbDynamicOverlay {
   protected context: Object = {};
   protected content: NbOverlayContent;
   protected positionStrategy: NbAdjustableConnectedPositionStrategy;
+  protected overlayConfig: NbOverlayConfig = {};
 
   protected positionStrategyChange$ = new Subject();
+  protected isShown$ = new BehaviorSubject<boolean>(false);
   protected alive = true;
 
   get isAttached(): boolean {
     return this.ref && this.ref.hasAttached();
+  }
+
+  get isShown(): Observable<boolean> {
+    return this.isShown$.pipe(distinctUntilChanged());
   }
 
   constructor(
@@ -45,11 +51,13 @@ export class NbDynamicOverlay {
   create(componentType: Type<NbRenderableContainer>,
          content: NbOverlayContent,
          context: Object,
-         positionStrategy: NbAdjustableConnectedPositionStrategy) {
+         positionStrategy: NbAdjustableConnectedPositionStrategy,
+         overlayConfig: NbOverlayConfig = {}) {
 
     this.setContentAndContext(content, context);
     this.setComponent(componentType);
     this.setPositionStrategy(positionStrategy);
+    this.setOverlayConfig(overlayConfig);
 
     return this;
   }
@@ -82,11 +90,10 @@ export class NbDynamicOverlay {
     this.componentType = componentType;
 
     // in case the component is shown we recreate it and show it back
-    if (this.ref && this.isAttached) {
-      this.dispose();
+    const wasAttached = this.isAttached;
+    this.disposeOverlayRef();
+    if (wasAttached) {
       this.show();
-    } else if (this.ref && !this.isAttached) {
-      this.dispose();
     }
   }
 
@@ -108,6 +115,16 @@ export class NbDynamicOverlay {
     }
   }
 
+  setOverlayConfig(overlayConfig: NbOverlayConfig) {
+    this.overlayConfig = overlayConfig;
+
+    const wasAttached = this.isAttached;
+    this.disposeOverlayRef();
+    if (wasAttached) {
+      this.show();
+    }
+  }
+
   show() {
     if (!this.ref) {
       this.createOverlay();
@@ -120,6 +137,8 @@ export class NbDynamicOverlay {
       this.disposeOverlayRef();
       return this.show();
     }
+
+    this.isShown$.next(true);
   }
 
   hide() {
@@ -129,6 +148,8 @@ export class NbDynamicOverlay {
 
     this.ref.detach();
     this.container = null;
+
+    this.isShown$.next(false);
   }
 
   toggle() {
@@ -143,6 +164,8 @@ export class NbDynamicOverlay {
     this.alive = false;
     this.hide();
     this.disposeOverlayRef();
+    this.isShown$.complete();
+    this.positionStrategyChange$.complete();
   }
 
   getContainer() {
@@ -153,6 +176,7 @@ export class NbDynamicOverlay {
     this.ref = this.overlay.create({
       positionStrategy: this.positionStrategy,
       scrollStrategy: this.overlay.scrollStrategies.reposition(),
+      ...this.overlayConfig,
     });
     this.updatePositionWhenStable();
   }
