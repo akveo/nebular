@@ -98,6 +98,9 @@ export class NbTooltipDirective implements OnInit, OnChanges, AfterViewInit, OnD
   @Input('nbTooltipAdjustment')
   adjustment: NbAdjustment = NbAdjustment.CLOCKWISE;
 
+  @Input('nbTooltipClass')
+  tooltipClass: string = '';
+
   /**
    * Accepts icon name or icon config object
    * @param {string | NbIconConfig} icon name or config object
@@ -186,6 +189,7 @@ export class NbTooltipDirective implements OnInit, OnChanges, AfterViewInit, OnD
       .trigger(this.trigger)
       .adjustment(this.adjustment)
       .content(this.content)
-      .context(this.context);
+      .context(this.context)
+      .overlayConfig({ panelClass: this.tooltipClass });
   }
 }
