@@ -319,14 +319,12 @@ describe('dynamic-overlay', () => {
   });
 
   it('should set component', () => {
-    const detachSpy = spyOn(ref, 'detach').and.callThrough();
     const disposeSpy = spyOn(ref, 'dispose').and.callThrough();
     const attachSpy = spyOn(ref, 'attach').and.callThrough();
     const hasAttacheSpy = spyOn(ref, 'hasAttached');
 
     dynamicOverlay.setComponent(NbDynamicOverlayMock2Component);
 
-    expect(detachSpy).toHaveBeenCalledTimes(0);
     expect(disposeSpy).toHaveBeenCalledTimes(0);
     expect(attachSpy).toHaveBeenCalledTimes(0);
 
@@ -334,14 +332,12 @@ describe('dynamic-overlay', () => {
     hasAttacheSpy.and.returnValue(true);
 
     expect(ref.portal.component).toBe(NbDynamicOverlayMock2Component);
-    expect(detachSpy).toHaveBeenCalledTimes(0);
     expect(disposeSpy).toHaveBeenCalledTimes(0);
     expect(attachSpy).toHaveBeenCalledTimes(1);
 
     dynamicOverlay.setComponent(NbDynamicOverlayMockComponent);
 
     expect(ref.portal.component).toBe(NbDynamicOverlayMockComponent);
-    expect(detachSpy).toHaveBeenCalledTimes(1);
     expect(disposeSpy).toHaveBeenCalledTimes(1);
     expect(attachSpy).toHaveBeenCalledTimes(2);
 
@@ -350,7 +346,6 @@ describe('dynamic-overlay', () => {
 
     dynamicOverlay.setComponent(NbDynamicOverlayMock2Component);
 
-    expect(detachSpy).toHaveBeenCalledTimes(3);
     expect(disposeSpy).toHaveBeenCalledTimes(2);
     expect(attachSpy).toHaveBeenCalledTimes(2);
   });

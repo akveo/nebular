@@ -87,11 +87,10 @@ export class NbDynamicOverlay {
     this.componentType = componentType;
 
     // in case the component is shown we recreate it and show it back
-    if (this.ref && this.isAttached) {
-      this.dispose();
+    const wasAttached = this.isAttached;
+    this.disposeOverlayRef();
+    if (wasAttached) {
       this.show();
-    } else if (this.ref && !this.isAttached) {
-      this.dispose();
     }
   }
 
