@@ -9,7 +9,7 @@ import {
 
 import { NbRenderableContainer } from '../overlay-container';
 import { createContainer, NbOverlayContent, NbOverlayService, patch } from '../overlay-service';
-import { NbOverlayRef, NbOverlayContainer } from '../mapping';
+import { NbOverlayRef, NbOverlayContainer, NbOverlayConfig } from '../mapping';
 
 export interface NbDynamicOverlayController {
   show();
@@ -27,6 +27,7 @@ export class NbDynamicOverlay {
   protected context: Object = {};
   protected content: NbOverlayContent;
   protected positionStrategy: NbAdjustableConnectedPositionStrategy;
+  protected overlayConfig: NbOverlayConfig = {};
 
   protected positionStrategyChange$ = new Subject();
   protected isShown$ = new BehaviorSubject<boolean>(false);
@@ -50,11 +51,13 @@ export class NbDynamicOverlay {
   create(componentType: Type<NbRenderableContainer>,
          content: NbOverlayContent,
          context: Object,
-         positionStrategy: NbAdjustableConnectedPositionStrategy) {
+         positionStrategy: NbAdjustableConnectedPositionStrategy,
+         overlayConfig: NbOverlayConfig = {}) {
 
     this.setContentAndContext(content, context);
     this.setComponent(componentType);
     this.setPositionStrategy(positionStrategy);
+    this.setOverlayConfig(overlayConfig);
 
     return this;
   }
@@ -112,6 +115,16 @@ export class NbDynamicOverlay {
     }
   }
 
+  setOverlayConfig(overlayConfig: NbOverlayConfig) {
+    this.overlayConfig = overlayConfig;
+
+    const wasAttached = this.isAttached;
+    this.disposeOverlayRef();
+    if (wasAttached) {
+      this.show();
+    }
+  }
+
   show() {
     if (!this.ref) {
       this.createOverlay();
@@ -163,6 +176,7 @@ export class NbDynamicOverlay {
     this.ref = this.overlay.create({
       positionStrategy: this.positionStrategy,
       scrollStrategy: this.overlay.scrollStrategies.reposition(),
+      ...this.overlayConfig,
     });
     this.updatePositionWhenStable();
   }

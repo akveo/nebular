@@ -267,6 +267,16 @@ describe('dynamic-overlay', () => {
     expect(instance.content).toBe(newContent);
   });
 
+  it('should set overlay config', () => {
+    const overlayConfig: NbOverlayConfig = { panelClass: 'additional-overlay-class' };
+    const createOverlaySpy = spyOn(overlayService, 'create').and.callThrough();
+
+    dynamicOverlay.setOverlayConfig(overlayConfig);
+    dynamicOverlay.show();
+
+    expect(createOverlaySpy).toHaveBeenCalledWith(jasmine.objectContaining(overlayConfig));
+  });
+
   it('should return container', () => {
     dynamicOverlay.show();
     expect(dynamicOverlay.getContainer()).toBe(container as any);

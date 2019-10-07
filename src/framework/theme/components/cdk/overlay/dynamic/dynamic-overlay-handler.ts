@@ -10,6 +10,7 @@ import {
 import { NbRenderableContainer } from '../overlay-container';
 import { NbOverlayContent } from '../overlay-service';
 import { NbDynamicOverlay } from './dynamic-overlay';
+import { NbOverlayConfig } from '../mapping';
 
 export class NbDynamicOverlayChange extends SimpleChange {
 
@@ -33,6 +34,7 @@ export class NbDynamicOverlayHandler {
   protected _position: NbPosition = NbPosition.TOP;
   protected _adjustment: NbAdjustment = NbAdjustment.NOOP;
   protected _offset: number = 15;
+  protected _overlayConfig: NbOverlayConfig = {};
 
   protected dynamicOverlay: NbDynamicOverlay;
   protected triggerStrategy: NbTriggerStrategy;
@@ -94,6 +96,12 @@ export class NbDynamicOverlayHandler {
     return this;
   }
 
+  overlayConfig(overlayConfig: NbOverlayConfig) {
+    this.changes.offset = new NbDynamicOverlayChange(this._overlayConfig, overlayConfig);
+    this._overlayConfig = overlayConfig;
+    return this;
+  }
+
   build() {
     if (!this._componentType || !this._host) {
       throw Error(`NbDynamicOverlayHandler: at least 'componentType' and 'host' should be
@@ -104,6 +112,7 @@ export class NbDynamicOverlayHandler {
       this._content,
       this._context,
       this.createPositionStrategy(),
+      this._overlayConfig,
     );
 
     this.connect();
@@ -137,6 +146,10 @@ export class NbDynamicOverlayHandler {
 
     if (this.isComponentTypeUpdateRequired()) {
       this.dynamicOverlay.setComponent(this._componentType);
+    }
+
+    if (this.isOverlayConfigUpdateRequired()) {
+      this.dynamicOverlay.setOverlayConfig(this._overlayConfig);
     }
 
     this.clearChanges();
@@ -203,6 +216,10 @@ export class NbDynamicOverlayHandler {
     return this.isComponentTypeUpdated();
   }
 
+  private isOverlayConfigUpdateRequired(): boolean {
+    return this.isOverlayConfigUpdated();
+  }
+
   protected isComponentTypeUpdated(): boolean {
     return this.changes.componentType && this.changes.componentType.isChanged();
   }
@@ -233,6 +250,10 @@ export class NbDynamicOverlayHandler {
 
   protected isOffsetUpdated(): boolean {
     return this.changes.offset && this.changes.offset.isChanged();
+  }
+
+  protected isOverlayConfigUpdated(): boolean {
+    return this.changes.overlayConfig && this.changes.overlayConfig.isChanged();
   }
 
   protected clearChanges() {
