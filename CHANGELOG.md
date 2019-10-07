@@ -1,6 +1,9 @@
 <a name="4.4.0"></a>
 # [4.4.0](https://github.com/akveo/nebular/compare/v4.3.1...v4.4.0) (2019-10-07)
 
+### Highlights
+
+Nebular 4.4.0 features synchronization with Eva 1.1 adding transparent colors.
 
 ### Bug Fixes
 
