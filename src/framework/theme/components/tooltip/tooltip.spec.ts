@@ -279,7 +279,7 @@ describe('Directive: NbTooltipDirective', () => {
       const tooltip: NbTooltipDirective = fixture.componentInstance.tooltip;
 
       const stateChangeSpy = createSpy('stateChangeSpy');
-      tooltip.nbPopoverShowStateChange.subscribe(stateChangeSpy);
+      tooltip.nbTooltipShowStateChange.subscribe(stateChangeSpy);
 
       tooltip.show();
       fixture.detectChanges();
@@ -296,7 +296,7 @@ describe('Directive: NbTooltipDirective', () => {
       fixture.detectChanges();
 
       const stateChangeSpy = createSpy('stateChangeSpy');
-      tooltip.nbPopoverShowStateChange.subscribe(stateChangeSpy);
+      tooltip.nbTooltipShowStateChange.subscribe(stateChangeSpy);
 
       tooltip.hide();
       fixture.detectChanges();

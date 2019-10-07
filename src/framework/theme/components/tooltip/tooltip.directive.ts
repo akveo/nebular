@@ -127,7 +127,7 @@ export class NbTooltipDirective implements OnInit, OnChanges, AfterViewInit, OnD
   trigger: NbTrigger = NbTrigger.HINT;
 
   @Output()
-  nbPopoverShowStateChange = new EventEmitter<{ isShown: boolean }>();
+  nbTooltipShowStateChange = new EventEmitter<{ isShown: boolean }>();
 
   get isShown(): boolean {
     return !!(this.dynamicOverlay && this.dynamicOverlay.isAttached);
@@ -157,7 +157,7 @@ export class NbTooltipDirective implements OnInit, OnChanges, AfterViewInit, OnD
         skip(1),
         takeUntil(this.destroy$),
       )
-      .subscribe((isShown: boolean) => this.nbPopoverShowStateChange.emit({ isShown }));
+      .subscribe((isShown: boolean) => this.nbTooltipShowStateChange.emit({ isShown }));
   }
 
   rebuild() {
