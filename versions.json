@@ -1,7 +1,7 @@
 [
   {
-    "checkoutTarget": "v4.3.1",
-    "name": "4.3.1",
+    "checkoutTarget": "v4.4.0",
+    "name": "4.4.0",
     "path": "/nebular/",
     "isCurrent": true
   },
