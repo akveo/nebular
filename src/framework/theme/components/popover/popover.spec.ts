@@ -14,6 +14,7 @@ import { NbPopoverComponent } from './popover.component';
 import { NbPopoverModule } from './popover.module';
 import createSpy = jasmine.createSpy;
 import { Subject } from 'rxjs';
+import { NbOverlayConfig } from '@nebular/theme/components/cdk/overlay/mapping';
 
 @Component({
   selector: 'nb-popover-component-content-test',
@@ -28,7 +29,7 @@ export class NbPopoverComponentContentTestComponent {
   template: `
     <nb-layout>
       <nb-layout-column>
-        <button #button nbPopover="test">show popover</button>
+        <button #button nbPopover="test" [nbPopoverClass]="popoverClass">show popover</button>
       </nb-layout-column>
     </nb-layout>
   `,
@@ -36,6 +37,8 @@ export class NbPopoverComponentContentTestComponent {
 export class NbPopoverDefaultTestComponent {
   @ViewChild('button', { static: false }) button: ElementRef;
   @ViewChild(NbPopoverDirective, { static: false }) popover: NbPopoverDirective;
+
+  popoverClass = '';
 }
 
 @Component({
@@ -102,6 +105,7 @@ export class NbDynamicOverlayHandlerMock {
   _position: NbPosition = NbPosition.TOP;
   _adjustment: NbAdjustment = NbAdjustment.NOOP;
   _offset = 15;
+  _overlayConfig: NbOverlayConfig = {};
 
   constructor() {
   }
@@ -143,6 +147,11 @@ export class NbDynamicOverlayHandlerMock {
 
   context(context: {}) {
     this._context = context;
+    return this;
+  }
+
+  overlayConfig(overlayConfig: NbOverlayConfig) {
+    this._overlayConfig = overlayConfig;
     return this;
   }
 
@@ -395,6 +404,17 @@ describe('Directive: NbPopoverDirective', () => {
         expect(showSpy).toHaveBeenCalledTimes(1);
         expect(hideSpy).toHaveBeenCalledTimes(1);
         expect(toggleSpy).toHaveBeenCalledTimes(1);
+      });
+
+      it('should set overlay config', () => {
+        const popoverClass = 'custom-popover-class';
+        const overlayConfigSpy = spyOn(overlayHandler, 'overlayConfig').and.callThrough();
+
+        fixture = TestBed.createComponent(NbPopoverDefaultTestComponent);
+        fixture.componentInstance.popoverClass = popoverClass;
+        fixture.detectChanges();
+
+        expect(overlayConfigSpy).toHaveBeenCalledWith(jasmine.objectContaining({ panelClass: popoverClass }));
       });
     });
 

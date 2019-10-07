@@ -162,6 +162,9 @@ export class NbPopoverDirective implements NbDynamicOverlayController, OnChanges
   @Input('nbPopoverOffset')
   offset = 15;
 
+  @Input('nbPopoverClass')
+  popoverClass: string = '';
+
   @Output()
   nbPopoverShowStateChange = new EventEmitter<{ isShown: boolean }>();
 
@@ -225,6 +228,7 @@ export class NbPopoverDirective implements NbDynamicOverlayController, OnChanges
       .offset(this.offset)
       .adjustment(this.adjustment)
       .content(this.content)
-      .context(this.context);
+      .context(this.context)
+      .overlayConfig({ panelClass: this.popoverClass });
   }
 }
