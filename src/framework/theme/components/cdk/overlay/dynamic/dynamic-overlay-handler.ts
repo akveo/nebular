@@ -97,7 +97,7 @@ export class NbDynamicOverlayHandler {
   }
 
   overlayConfig(overlayConfig: NbOverlayConfig) {
-    this.changes.offset = new NbDynamicOverlayChange(this._overlayConfig, overlayConfig);
+    this.changes.overlayConfig = new NbDynamicOverlayChange(this._overlayConfig, overlayConfig);
     this._overlayConfig = overlayConfig;
     return this;
   }
