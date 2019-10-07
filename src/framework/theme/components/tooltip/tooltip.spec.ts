@@ -14,6 +14,8 @@ import { NbTooltipDirective } from './tooltip.directive';
 import { NbTooltipModule } from './tooltip.module';
 import { NbTooltipComponent } from './tooltip.component';
 import { NbIconLibraries } from '../icon/icon-libraries';
+import { Subject } from 'rxjs';
+import createSpy = jasmine.createSpy;
 
 @Component({
   selector: 'nb-tooltip-default-test',
@@ -74,11 +76,13 @@ export class NbTooltipInstanceTestComponent {
   @ViewChild('button', { static: false }) button: ElementRef;
 }
 
+const dynamicOverlayIsShow$ = new Subject();
 const dynamicOverlay = {
   show() {},
   hide() {},
   toggle() {},
   destroy() {},
+  isShown: dynamicOverlayIsShow$,
 };
 
 export class NbDynamicOverlayHandlerMock {
@@ -258,6 +262,56 @@ describe('Directive: NbTooltipDirective', () => {
 
       const iconContainer = fixture.nativeElement.querySelector('nb-tooltip');
       expect(iconContainer.className).toContain('status-danger');
+    });
+
+    it('should emit show state change event when shows up', () => {
+      fixture = TestBed.createComponent(NbTooltipDefaultTestComponent);
+      fixture.detectChanges();
+      const tooltip: NbTooltipDirective = fixture.componentInstance.tooltip;
+
+      const stateChangeSpy = createSpy('stateChangeSpy');
+      tooltip.nbPopoverShowStateChange.subscribe(stateChangeSpy);
+
+      tooltip.show();
+      fixture.detectChanges();
+
+      expect(stateChangeSpy).toHaveBeenCalledTimes(1);
+      expect(stateChangeSpy).toHaveBeenCalledWith(jasmine.objectContaining({ isShown: true }));
+    });
+
+    it('should emit show state change event when hides', () => {
+      fixture = TestBed.createComponent(NbTooltipDefaultTestComponent);
+      fixture.detectChanges();
+      const tooltip: NbTooltipDirective = fixture.componentInstance.tooltip;
+      tooltip.show();
+      fixture.detectChanges();
+
+      const stateChangeSpy = createSpy('stateChangeSpy');
+      tooltip.nbPopoverShowStateChange.subscribe(stateChangeSpy);
+
+      tooltip.hide();
+      fixture.detectChanges();
+
+      expect(stateChangeSpy).toHaveBeenCalledTimes(1);
+      expect(stateChangeSpy).toHaveBeenCalledWith(jasmine.objectContaining({ isShown: false }));
+    });
+
+    it('should set isShown to false when hidden', () => {
+      fixture = TestBed.createComponent(NbTooltipDefaultTestComponent);
+      fixture.detectChanges();
+      const tooltip: NbTooltipDirective = fixture.componentInstance.tooltip;
+
+      expect(tooltip.isShown).toEqual(false);
+    });
+
+    it('should set isShown to true when shown', () => {
+      fixture = TestBed.createComponent(NbTooltipDefaultTestComponent);
+      fixture.detectChanges();
+      const tooltip: NbTooltipDirective = fixture.componentInstance.tooltip;
+      tooltip.show();
+      fixture.detectChanges();
+
+      expect(tooltip.isShown).toEqual(true);
     });
 
   });
