@@ -4,7 +4,15 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { AfterViewInit, Directive, ElementRef, Input, OnChanges, OnDestroy, OnInit } from '@angular/core';
+import {
+  AfterViewInit,
+  Directive,
+  ElementRef,
+  Input,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
 
 import { NbComponentStatus } from '../component-status';
 import { NbAdjustment, NbPosition } from '../cdk/overlay/overlay-position';
@@ -60,8 +68,11 @@ import { NbIconConfig } from '../icon/icon.component';
 })
 export class NbTooltipDirective implements OnInit, OnChanges, AfterViewInit, OnDestroy {
 
-  context: Object = {};
+  protected tooltipComponent = NbTooltipComponent;
+  protected dynamicOverlay: NbDynamicOverlay;
+  protected offset = 8;
 
+  context: Object = {};
   /**
    * Tooltip message
    */
@@ -106,17 +117,15 @@ export class NbTooltipDirective implements OnInit, OnChanges, AfterViewInit, OnD
   @Input('nbTooltipTrigger')
   trigger: NbTrigger = NbTrigger.HINT;
 
-  private dynamicOverlay: NbDynamicOverlay;
-
-  constructor(private hostRef: ElementRef,
-              private dynamicOverlayHandler: NbDynamicOverlayHandler) {
+  constructor(protected hostRef: ElementRef,
+              protected dynamicOverlayHandler: NbDynamicOverlayHandler) {
   }
 
   ngOnInit() {
     this.dynamicOverlayHandler
       .host(this.hostRef)
-      .componentType(NbTooltipComponent)
-      .offset(8);
+      .componentType(this.tooltipComponent)
+      .offset(this.offset);
   }
 
   ngOnChanges() {
