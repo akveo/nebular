@@ -88,7 +88,7 @@ import { convertToBoolProperty } from '../helpers';
             class="route-tab disabled"
             tabindex="-1">
           <a tabindex="-1" class="tab-link">
-            <nb-icon *ngIf="tab.icon" [icon]="tab.icon"></nb-icon>
+            <nb-icon *ngIf="tab.icon" [config]="tab.icon"></nb-icon>
             <span *ngIf="tab.title" class="tab-text">{{ tab.title }}</span>
           </a>
         </li>

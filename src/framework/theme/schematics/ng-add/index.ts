@@ -17,6 +17,7 @@ import {
   addDependencyToPackageJson,
   addDevDependencyToPackageJson,
   getDependencyVersionFromPackageJson,
+  getDevDependencyVersionFromPackageJson,
   getNebularPeerDependencyVersionFromPackageJson,
   getNebularVersion,
 } from '../util/package';
@@ -31,8 +32,9 @@ export default function (options: Schema): Rule {
 /**
  * Add required peer dependencies in package.json
  * */
-function installMainPeerDependencies(tree) {
+function installMainPeerDependencies(tree: Tree) {
   const angularCoreVersion = getDependencyVersionFromPackageJson(tree, '@angular/core');
+  const angularCliVersion = getDevDependencyVersionFromPackageJson(tree, '@angular/cli');
   const nebularThemeVersion = getNebularVersion();
   const angularCdkVersion = getNebularPeerDependencyVersionFromPackageJson('@angular/cdk');
 
@@ -41,7 +43,7 @@ function installMainPeerDependencies(tree) {
   addDependencyToPackageJson(tree, '@nebular/theme', nebularThemeVersion);
   addDependencyToPackageJson(tree, '@nebular/eva-icons', nebularThemeVersion);
 
-  addDevDependencyToPackageJson(tree, '@schematics/angular', angularCoreVersion);
+  addDevDependencyToPackageJson(tree, '@schematics/angular', angularCliVersion);
 }
 
 /**
