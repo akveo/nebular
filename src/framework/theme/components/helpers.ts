@@ -26,3 +26,16 @@ export function getElementHeight(el) {
   return el.offsetHeight + marginTop + marginBottom;
 }
 
+export function firstChildNotComment(node: Node) {
+  const children = Array
+    .from(node.childNodes)
+    .filter((child: Node) => child.nodeType !== Node.COMMENT_NODE);
+  return children[0];
+}
+
+export function lastChildNotComment(node: Node) {
+  const children = Array
+    .from(node.childNodes)
+    .filter((child: Node) => child.nodeType !== Node.COMMENT_NODE);
+  return children[children.length - 1];
+}

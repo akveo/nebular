@@ -205,3 +205,5 @@ export * from './components/icon/icon.component';
 export * from './components/icon/icon';
 export * from './components/icon/icon-pack';
 export * from './components/icon/icon-libraries';
+export * from './components/toggle/toggle.module';
+export * from './components/toggle/toggle.component';

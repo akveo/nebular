@@ -7,6 +7,7 @@
 import { Component, EventEmitter, Input, Output, Type } from '@angular/core';
 
 import { NbCalendarCell, NbCalendarSize, NbCalendarViewMode } from '../calendar-kit/model';
+import { convertToBoolProperty } from '../helpers';
 
 
 /**
@@ -68,6 +69,9 @@ import { NbCalendarCell, NbCalendarSize, NbCalendarViewMode } from '../calendar-
  * which disables weekdays.
  * @stacked-example(Filter, calendar/calendar-filter.component)
  *
+ * Week numbers column could be enabled via `showWeekNumber` binding:
+ * @stacked-example(Week number, calendar/calendar-week-number.component)
+ *
  * If you need create custom cells you can easily provide custom components for
  * calendar. For examples if you want to show any average price under each date you can
  * just provide custom `dayCellComponent`. Custom cells for month and year can be provided
@@ -123,17 +127,30 @@ import { NbCalendarCell, NbCalendarSize, NbCalendarViewMode } from '../calendar-
  * calendar-month-cell-height:
  * calendar-year-cell-width:
  * calendar-year-cell-height:
- * calendar-weekday-width:
- * calendar-weekday-height:
+ * calendar-weekday-background:
+ * calendar-weekday-divider-color:
  * calendar-weekday-text-color:
  * calendar-weekday-text-font-size:
  * calendar-weekday-text-font-weight:
  * calendar-weekday-text-line-height:
  * calendar-weekday-holiday-text-color:
+ * calendar-weekday-height:
+ * calendar-weekday-width:
+ * calendar-weeknumber-background:
+ * calendar-weeknumber-divider-color:
+ * calendar-weeknumber-divider-width:
+ * calendar-weeknumber-text-color:
+ * calendar-weeknumber-text-font-size:
+ * calendar-weeknumber-text-font-weight:
+ * calendar-weeknumber-text-line-height:
+ * calendar-weeknumber-height:
+ * calendar-weeknumber-width:
  * calendar-large-width:
  * calendar-large-body-height:
  * calendar-day-cell-large-width:
  * calendar-day-cell-large-height:
+ * calendar-weekday-large-height:
+ * calendar-weekday-large-width:
  * calendar-month-cell-large-width:
  * calendar-month-cell-large-height:
  * calendar-year-cell-large-width:
@@ -155,6 +172,8 @@ import { NbCalendarCell, NbCalendarSize, NbCalendarViewMode } from '../calendar-
       [size]="size"
       [visibleDate]="visibleDate"
       [showHeader]="showHeader"
+      [showWeekNumber]="showWeekNumber"
+      [weekNumberSymbol]="weekNumberSymbol"
       (dateChange)="dateChange.emit($event)"
     ></nb-base-calendar>
   `,
@@ -219,6 +238,24 @@ export class NbCalendarComponent<D> {
    * Date which will be rendered as selected.
    * */
   @Input() date: D;
+
+  /**
+   * Determines should we show week numbers column.
+   * False by default.
+   * */
+  @Input()
+  get showWeekNumber(): boolean {
+    return this._showWeekNumber;
+  }
+  set showWeekNumber(value: boolean) {
+    this._showWeekNumber = convertToBoolProperty(value);
+  }
+  protected _showWeekNumber: boolean = false;
+
+  /**
+   * Sets symbol used as a header for week numbers column
+   * */
+  @Input() weekNumberSymbol: string = '#';
 
   /**
    * Emits date when selected.

@@ -179,7 +179,7 @@ export class NbToastrContainerRegistry {
   }
 
   protected existsInDom(toastContainer: NbToastContainer): boolean {
-    return this.document.contains(toastContainer.nativeElement);
+    return this.document.body.contains(toastContainer.nativeElement);
   }
 }
 
