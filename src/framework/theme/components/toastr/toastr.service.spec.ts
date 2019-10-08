@@ -232,7 +232,7 @@ describe('toastr-container-registry', () => {
     documentStub._contains = false;
     toastrContainerRegistry.get(NbGlobalLogicalPosition.TOP_END);
 
-    expect(overlayDisposeSpy).toHaveBeenCalledTimes(2);
+    expect(overlayDisposeSpy).toHaveBeenCalledTimes(1);
   });
 });
 
