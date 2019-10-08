@@ -1,3 +1,96 @@
+<a name="4.4.0"></a>
+# [4.4.0](https://github.com/akveo/nebular/compare/v4.3.1...v4.4.0) (2019-10-07)
+
+### Highlights
+
+Nebular 4.4.0 features synchronization with Eva 1.1 adding transparent colors.
+
+### Bug Fixes
+
+* **layout header:** prevent stretching wider than window max width ([#1980](https://github.com/akveo/nebular/issues/1980)) ([c42c880](https://github.com/akveo/nebular/commit/c42c880))
+
+
+### Features
+
+* add angular adjustments ([#1996](https://github.com/akveo/nebular/issues/1996)) ([d8689c1](https://github.com/akveo/nebular/commit/d8689c1))
+* sync with Eva 1.1 ([#1995](https://github.com/akveo/nebular/issues/1995)) ([67d5689](https://github.com/akveo/nebular/commit/67d5689))
+* **popover, tooltip:** add shown state api ([#1998](https://github.com/akveo/nebular/issues/1998)) ([6dbce1d](https://github.com/akveo/nebular/commit/6dbce1d))
+* **sidebar service:** add compact method ([#1997](https://github.com/akveo/nebular/issues/1997)) ([3c34805](https://github.com/akveo/nebular/commit/3c34805))
+
+
+
+<a name="4.3.1"></a>
+## [4.3.1](https://github.com/akveo/nebular/compare/v4.3.0...v4.3.1) (2019-09-20)
+
+
+### Bug Fixes
+
+* **calendar:** use last defined week day to determine week numb… ([#1969](https://github.com/akveo/nebular/issues/1969)) ([ba78d94](https://github.com/akveo/nebular/commit/ba78d94))
+
+
+
+<a name="4.3.0"></a>
+# [4.3.0](https://github.com/akveo/nebular/compare/v4.2.2...v4.3.0) (2019-09-20)
+
+
+### Features
+
+* **calendar:** add week number column ([#1963](https://github.com/akveo/nebular/issues/1963)) ([28e7468](https://github.com/akveo/nebular/commit/28e7468))
+* **tabset:** add tabid property ([#1919](https://github.com/akveo/nebular/issues/1919)) ([d5bf53a](https://github.com/akveo/nebular/commit/d5bf53a))
+
+
+
+<a name="4.2.2"></a>
+## [4.2.2](https://github.com/akveo/nebular/compare/v4.2.1...v4.2.2) (2019-09-11)
+
+
+### Bug Fixes
+
+* **button:** make sure icon has margins when button has html co… ([#1953](https://github.com/akveo/nebular/issues/1953)) ([a17accb](https://github.com/akveo/nebular/commit/a17accb))
+
+
+
+<a name="4.2.1"></a>
+## [4.2.1](https://github.com/akveo/nebular/compare/v4.2.0...v4.2.1) (2019-08-29)
+
+
+### Bug Fixes
+
+* **ci:** prevent travis from killing deploy docs job ([#1928](https://github.com/akveo/nebular/issues/1928)) ([0b969cb](https://github.com/akveo/nebular/commit/0b969cb))
+* **datepicker:** add missing show header input ([#1889](https://github.com/akveo/nebular/issues/1889)) ([d265991](https://github.com/akveo/nebular/commit/d265991))
+* **schematics:** use cli version for schematics/angular package ([#1937](https://github.com/akveo/nebular/issues/1937)) ([4589726](https://github.com/akveo/nebular/commit/4589726))
+* **select:** allow initial falsy values ([#1936](https://github.com/akveo/nebular/issues/1936)) ([02080fb](https://github.com/akveo/nebular/commit/02080fb))
+* **select:** mark touched on hide trigger only when select is open ([#1878](https://github.com/akveo/nebular/issues/1878)) ([8295c32](https://github.com/akveo/nebular/commit/8295c32))
+* **toastr:** call contains on body ([#1872](https://github.com/akveo/nebular/issues/1872)) ([a01ec7a](https://github.com/akveo/nebular/commit/a01ec7a))
+* **tree grid:** assert node children is defined before spreading ([#1898](https://github.com/akveo/nebular/issues/1898)) ([26ad5d2](https://github.com/akveo/nebular/commit/26ad5d2))
+* **window:** create new window container when overlay container change ([#1867](https://github.com/akveo/nebular/issues/1867)) ([edb6b16](https://github.com/akveo/nebular/commit/edb6b16))
+
+
+### Features
+
+* accept icon config in components which use nb-icon ([#1935](https://github.com/akveo/nebular/issues/1935)) ([c9b9d32](https://github.com/akveo/nebular/commit/c9b9d32))
+* **auth**: add backend api endpoints article ([#1931](https://github.com/akveo/nebular/issues/1931)) ([905029f](https://github.com/akveo/nebular/commit/905029f))
+
+
+
+<a name="4.2.0"></a>
+# [4.2.0](https://github.com/akveo/nebular/compare/v4.1.3...v4.2.0) (2019-08-22)
+
+
+### Bug Fixes
+
+* **dynamic overlay:** recreate overlay when overlay container change ([#1913](https://github.com/akveo/nebular/issues/1913)) ([258b75b](https://github.com/akveo/nebular/commit/258b75b))
+* **packages smoke:** update webdriver-manager ([#1881](https://github.com/akveo/nebular/issues/1881)) ([e6c4966](https://github.com/akveo/nebular/commit/e6c4966))
+* **popover:** add missing start and end positions to positions mapping ([#1904](https://github.com/akveo/nebular/issues/1904)) ([64777a4](https://github.com/akveo/nebular/commit/64777a4))
+
+
+### Features
+
+* **packages smoke:** add Eva icons package ([#1903](https://github.com/akveo/nebular/issues/1903)) ([8c0683b](https://github.com/akveo/nebular/commit/8c0683b))
+* **toggle:** add toggle component ([#1304](https://github.com/akveo/nebular/issues/1304)) ([d86edce](https://github.com/akveo/nebular/commit/d86edce))
+
+
+
 <a name="4.1.3"></a>
 ## [4.1.3](https://github.com/akveo/nebular/compare/v4.1.2...v4.1.3) (2019-07-29)
 

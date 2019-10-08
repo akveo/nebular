@@ -10,6 +10,7 @@ import { convertToBoolProperty } from '../helpers';
 import { NbComponentSize } from '../component-size';
 import { NbComponentStatus } from '../component-status';
 import { NbBadgePosition } from '../badge/badge.component';
+import { NbIconConfig } from '../icon/icon.component';
 
 /**
  * Action item, display a link with an icon, or any other content provided instead.
@@ -23,20 +24,20 @@ import { NbBadgePosition } from '../badge/badge.component';
          [routerLink]="link"
          [title]="title"
          *ngIf="link">
-        <nb-icon [icon]="icon"></nb-icon>
+        <nb-icon [config]="icon"></nb-icon>
       </a>
       <a class="icon-container"
          [href]="href"
          [title]="title"
          *ngIf="href && !link">
-        <nb-icon [icon]="icon"></nb-icon>
+        <nb-icon [config]="icon"></nb-icon>
       </a>
       <a class="icon-container"
          href="#"
          [title]="title"
          *ngIf="!href && !link"
          (click)="$event.preventDefault()">
-        <nb-icon [icon]="icon"></nb-icon>
+        <nb-icon [config]="icon"></nb-icon>
       </a>
     </ng-container>
 
@@ -72,10 +73,10 @@ export class NbActionComponent {
   @Input() title: string = '';
 
   /**
-   * Icon name
-   * @type string
+   * Icon name or config object
+   * @type {string | NbIconConfig}
    */
-  @Input() icon: string;
+  @Input() icon: string | NbIconConfig;
 
   /**
    * Visually disables the item

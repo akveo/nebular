@@ -245,6 +245,12 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         component: 'CalendarWithoutHeaderComponent',
         name: 'Calendar Without Header',
       },
+      {
+        path: 'calendar-week-number.component',
+        link: '/calendar/calendar-week-number.component',
+        component: 'CalendarWeekNumberComponent',
+        name: 'Calendar Week Number',
+      },
     ],
   },
   {

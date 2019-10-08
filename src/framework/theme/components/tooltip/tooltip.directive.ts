@@ -4,7 +4,19 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { AfterViewInit, Directive, ElementRef, Input, OnChanges, OnDestroy, OnInit } from '@angular/core';
+import {
+  AfterViewInit,
+  Directive,
+  ElementRef,
+  Input,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  Output,
+  EventEmitter,
+} from '@angular/core';
+import { skip, takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 import { NbComponentStatus } from '../component-status';
 import { NbAdjustment, NbPosition } from '../cdk/overlay/overlay-position';
@@ -12,6 +24,7 @@ import { NbTrigger } from '../cdk/overlay/overlay-trigger';
 import { NbDynamicOverlay } from '../cdk/overlay/dynamic/dynamic-overlay';
 import { NbDynamicOverlayHandler } from '../cdk/overlay/dynamic/dynamic-overlay-handler';
 import { NbTooltipComponent } from './tooltip.component';
+import { NbIconConfig } from '../icon/icon.component';
 
 /**
  *
@@ -55,12 +68,17 @@ import { NbTooltipComponent } from './tooltip.component';
  */
 @Directive({
   selector: '[nbTooltip]',
+  exportAs: 'nbTooltip',
   providers: [NbDynamicOverlayHandler, NbDynamicOverlay],
 })
 export class NbTooltipDirective implements OnInit, OnChanges, AfterViewInit, OnDestroy {
 
-  context: Object = {};
+  protected destroy$ = new Subject<void>();
+  protected tooltipComponent = NbTooltipComponent;
+  protected dynamicOverlay: NbDynamicOverlay;
+  protected offset = 8;
 
+  context: Object = {};
   /**
    * Tooltip message
    */
@@ -92,12 +110,15 @@ export class NbTooltipDirective implements OnInit, OnChanges, AfterViewInit, OnD
   }
   protected _adjustment: NbAdjustment = NbAdjustment.CLOCKWISE;
 
+  @Input('nbTooltipClass')
+  tooltipClass: string = '';
+
   /**
-   *
-   * @param {string} icon
+   * Accepts icon name or icon config object
+   * @param {string | NbIconConfig} icon name or config object
    */
   @Input('nbTooltipIcon')
-  set icon(icon: string) {
+  set icon(icon: string | NbIconConfig) {
     this.context = Object.assign(this.context, {icon});
   }
 
@@ -117,17 +138,22 @@ export class NbTooltipDirective implements OnInit, OnChanges, AfterViewInit, OnD
   @Input('nbTooltipTrigger')
   trigger: NbTrigger = NbTrigger.HINT;
 
-  private dynamicOverlay: NbDynamicOverlay;
+  @Output()
+  nbTooltipShowStateChange = new EventEmitter<{ isShown: boolean }>();
 
-  constructor(private hostRef: ElementRef,
-              private dynamicOverlayHandler: NbDynamicOverlayHandler) {
+  get isShown(): boolean {
+    return !!(this.dynamicOverlay && this.dynamicOverlay.isAttached);
+  }
+
+  constructor(protected hostRef: ElementRef,
+              protected dynamicOverlayHandler: NbDynamicOverlayHandler) {
   }
 
   ngOnInit() {
     this.dynamicOverlayHandler
       .host(this.hostRef)
-      .componentType(NbTooltipComponent)
-      .offset(8);
+      .componentType(this.tooltipComponent)
+      .offset(this.offset);
   }
 
   ngOnChanges() {
@@ -137,6 +163,13 @@ export class NbTooltipDirective implements OnInit, OnChanges, AfterViewInit, OnD
   ngAfterViewInit() {
     this.dynamicOverlay = this.configureDynamicOverlay()
       .build();
+
+    this.dynamicOverlay.isShown
+      .pipe(
+        skip(1),
+        takeUntil(this.destroy$),
+      )
+      .subscribe((isShown: boolean) => this.nbTooltipShowStateChange.emit({ isShown }));
   }
 
   rebuild() {
@@ -158,6 +191,8 @@ export class NbTooltipDirective implements OnInit, OnChanges, AfterViewInit, OnD
 
   ngOnDestroy() {
     this.dynamicOverlayHandler.destroy();
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   protected configureDynamicOverlay() {
@@ -166,6 +201,7 @@ export class NbTooltipDirective implements OnInit, OnChanges, AfterViewInit, OnD
       .trigger(this.trigger)
       .adjustment(this.adjustment)
       .content(this.content)
-      .context(this.context);
+      .context(this.context)
+      .overlayConfig({ panelClass: this.tooltipClass });
   }
 }

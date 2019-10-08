@@ -38,6 +38,7 @@ const ROLLUP_GLOBALS = {
   'moment': 'moment',
   'date-fns/parse': 'date-fns.parse',
   'date-fns/format': 'date-fns.format',
+  'date-fns/getWeek': 'date-fns.getWeek',
 
   // @nebular dependencies
   '@nebular/theme': 'nb.theme',

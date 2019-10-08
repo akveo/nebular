@@ -1,6 +1,7 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { OverlayContainer, ScrollDispatcher, ScrollStrategyOptions } from '@angular/cdk/overlay';
 
+import { NbOverlayContainer } from '../overlay/mapping';
 import { NbOverlayContainerAdapter } from './overlay-container-adapter';
 import { NbScrollDispatcherAdapter } from './scroll-dispatcher-adapter';
 import { NbViewportRulerAdapter } from './viewport-ruler-adapter';
@@ -17,6 +18,7 @@ export class NbCdkAdapterModule {
         NbOverlayContainerAdapter,
         NbBlockScrollStrategyAdapter,
         { provide: OverlayContainer, useExisting: NbOverlayContainerAdapter },
+        { provide: NbOverlayContainer, useExisting: NbOverlayContainerAdapter },
         { provide: ScrollDispatcher, useClass: NbScrollDispatcherAdapter },
         { provide: ScrollStrategyOptions, useClass: NbScrollStrategyOptions },
       ],

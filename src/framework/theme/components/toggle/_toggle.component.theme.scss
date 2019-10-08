@@ -20,21 +20,37 @@
       border-color: nb-theme(toggle-primary-checked-border-color);
     }
 
-    .native-input {
+    .native-input:enabled {
       &:focus + .toggle {
-        border-color: nb-theme(toggle-primary-focus-border-color);
+        background-color: nb-theme(toggle-focus-background-color);
+        border-color: nb-theme(toggle-focus-border-color);
         box-shadow: 0 0 0 nb-theme(toggle-outline-width) nb-theme(toggle-outline-color);
+
+        &.checked {
+          background-color: nb-theme(toggle-primary-focus-checked-background-color);
+          border-color: nb-theme(toggle-primary-focus-checked-border-color);
+        }
       }
 
       &:active + .toggle {
-        background-color: nb-theme(toggle-primary-active-background-color);
-        border-color: nb-theme(toggle-primary-active-border-color);
+        background-color: nb-theme(toggle-active-background-color);
+        border-color: nb-theme(toggle-active-border-color);
+
+        &.checked {
+          background-color: nb-theme(toggle-primary-active-background-color);
+          border-color: nb-theme(toggle-primary-active-border-color);
+        }
       }
     }
 
-    .toggle:hover {
-      background-color: nb-theme(toggle-primary-hover-background-color);
-      border-color: nb-theme(toggle-primary-hover-border-color);
+    .native-input:enabled + .toggle:hover {
+      background-color: nb-theme(toggle-hover-background-color);
+      border-color: nb-theme(toggle-hover-border-color);
+
+      &.checked {
+        background-color: nb-theme(toggle-primary-hover-checked-background-color);
+        border-color: nb-theme(toggle-primary-hover-checked-border-color);
+      }
     }
 
     .native-input:disabled {
@@ -43,8 +59,12 @@
         border-color: nb-theme(toggle-disabled-border-color);
         cursor: nb-theme(toggle-disabled-cursor);
 
-        nb-icon {
-          color: nb-theme(toggle-disabled-switcher-checkmark-color);
+        .toggle-switcher {
+          background-color: nb-theme(toggle-disabled-switcher-background-color);
+
+          nb-icon {
+            color: nb-theme(toggle-disabled-checked-switcher-checkmark-color);
+          }
         }
       }
 
@@ -90,20 +110,36 @@
       border-color: nb-theme(toggle-#{$status}-checked-border-color);
     }
 
-    .native-input {
+    .native-input:enabled {
       &:focus + .toggle {
+        background-color: nb-theme(toggle-#{$status}-focus-background-color);
         border-color: nb-theme(toggle-#{$status}-focus-border-color);
+
+        &.checked {
+          background-color: nb-theme(toggle-#{$status}-focus-checked-background-color);
+          border-color: nb-theme(toggle-#{$status}-focus-checked-border-color);
+        }
       }
 
       &:active + .toggle {
         background-color: nb-theme(toggle-#{$status}-active-background-color);
         border-color: nb-theme(toggle-#{$status}-active-border-color);
+
+        &.checked {
+          background-color: nb-theme(toggle-#{$status}-active-background-color);
+          border-color: nb-theme(toggle-#{$status}-active-border-color);
+        }
       }
     }
 
-    .toggle:hover {
+    .native-input:enabled + .toggle:hover {
       background-color: nb-theme(toggle-#{$status}-hover-background-color);
       border-color: nb-theme(toggle-#{$status}-hover-border-color);
+
+      &.checked {
+        background-color: nb-theme(toggle-#{$status}-hover-checked-background-color);
+        border-color: nb-theme(toggle-#{$status}-hover-checked-border-color);
+      }
     }
 
     .toggle-switcher {
@@ -116,9 +152,14 @@
       & + .toggle {
         background-color: nb-theme(toggle-disabled-background-color);
         border-color: nb-theme(toggle-disabled-border-color);
+        cursor: nb-theme(toggle-disabled-cursor);
 
-        nb-icon {
-          color: nb-theme(toggle-disabled-switcher-checkmark-color);
+        .toggle-switcher {
+          background-color: nb-theme(toggle-disabled-switcher-background-color);
+
+          nb-icon {
+            color: nb-theme(toggle-disabled-checked-switcher-checkmark-color);
+          }
         }
       }
 
