@@ -8,6 +8,7 @@ import { InjectionToken } from '@angular/core';
 
 import { NbGlobalLogicalPosition, NbGlobalPosition } from '../cdk/overlay/position-helper';
 import { NbComponentStatus } from '../component-status';
+import { NbIconConfig } from '../icon/icon.component';
 
 type IconToClassMap = {
   [status in NbComponentStatus]: string;
@@ -56,11 +57,13 @@ export class NbToastrConfig {
    * */
   hasIcon: boolean = true;
   /**
-   * Icon name that can be provided to render custom icon.
+   * Icon name or icon config object that can be provided to render custom icon.
    * */
-  icon: string = 'email';
+  icon: string | NbIconConfig = 'email';
   /**
    * Icon pack to look for the icon in.
+   * @deprecated Set pack via icon config object passed to icon property
+   * @breaking-change 5.0.0
    * */
   iconPack: string;
   /**
@@ -81,8 +84,10 @@ export class NbToastrConfig {
 
   protected patchIcon(config: Partial<NbToastrConfig>) {
     if (!('icon' in config)) {
-      config.icon = this.icons[config.status || 'primary'];
-      config.iconPack = 'nebular-essentials';
+      config.icon = {
+        icon: this.icons[config.status || 'primary'],
+        pack: 'nebular-essentials',
+      };
     }
   }
 }

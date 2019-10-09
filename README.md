@@ -1,6 +1,6 @@
 # Nebular [<img src="https://i.imgur.com/oMcxwZ0.png" alt="Eva Design System" height="20px" />](https://eva.design) [![npm](https://img.shields.io/npm/l/@nebular/theme.svg)]() [![Build Status](https://travis-ci.org/akveo/nebular.svg?branch=master)](https://travis-ci.org/akveo/nebular) [![npm](https://img.shields.io/npm/dt/@nebular/theme.svg)](https://www.npmjs.com/package/@nebular/theme) [![Codecov](https://img.shields.io/codecov/c/github/akveo/nebular/master.svg?style=flat-square)](https://codecov.io/gh/akveo/nebular/branch/master)
 
-[Documentation](https://akveo.github.io/nebular/docs/getting-started/what-is-nebular?utm_source=github&utm_medium=nebular_readme) | [Stackblitz Template](https://github.com/akveo/nebular-seed)
+[Documentation](https://akveo.github.io/nebular/docs/getting-started/what-is-nebular?utm_source=github&utm_medium=nebular_readme) | [Stackblitz Template](https://stackblitz.com/github/akveo/nebular-seed) | [UI Bakery](https://uibakery.io?utm_source=github&utm_medium=nebular_readme) - Angular UI Builder
 
 Nebular is a customizable Angular 8 UI Library with a focus on beautiful design and ability to adapt it to your brand easily. It comes with 4 stunning visual themes, a powerful theming engine with runtime theme switching and support of custom css properties mode. Nebular is based on Eva Design System specifications.
 
