@@ -19,6 +19,7 @@ import {
 import { NbCalendarMonthModelService } from '../../services/calendar-month-model.service';
 import { NbCalendarDayCellComponent } from './calendar-day-cell.component';
 import { NbCalendarCell, NbCalendarSize } from '../../model';
+import { convertToBoolProperty } from '../../../helpers';
 
 
 /**
@@ -26,20 +27,27 @@ import { NbCalendarCell, NbCalendarSize } from '../../model';
  * */
 @Component({
   selector: 'nb-calendar-day-picker',
-  styles: [` :host { display: block; } `],
   template: `
-    <nb-calendar-days-names></nb-calendar-days-names>
-    <nb-calendar-picker
-      [data]="weeks"
-      [visibleDate]="visibleDate"
-      [selectedValue]="date"
-      [cellComponent]="cellComponent"
-      [min]="min"
-      [max]="max"
-      [filter]="filter"
-      (select)="onSelect($event)">
-    </nb-calendar-picker>
+    <nb-calendar-week-numbers *ngIf="showWeekNumber"
+                              [weeks]="weeks"
+                              [size]="size"
+                              [weekNumberSymbol]="weekNumberSymbol">
+    </nb-calendar-week-numbers>
+    <div class="days-container">
+      <nb-calendar-days-names></nb-calendar-days-names>
+      <nb-calendar-picker
+          [data]="weeks"
+          [visibleDate]="visibleDate"
+          [selectedValue]="date"
+          [cellComponent]="cellComponent"
+          [min]="min"
+          [max]="max"
+          [filter]="filter"
+          (select)="onSelect($event)">
+      </nb-calendar-picker>
+    </div>
   `,
+  styleUrls: ['./calendar-day-picker.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NbCalendarDayPickerComponent<D, T> implements OnChanges {
@@ -91,6 +99,24 @@ export class NbCalendarDayPickerComponent<D, T> implements OnChanges {
    * Already selected date.
    * */
   @Input() date: T;
+
+  /**
+   * Determines should we show week numbers column.
+   * False by default.
+   * */
+  @Input()
+  get showWeekNumber(): boolean {
+    return this._showWeekNumber;
+  }
+  set showWeekNumber(value: boolean) {
+    this._showWeekNumber = convertToBoolProperty(value);
+  }
+  protected _showWeekNumber: boolean = false;
+
+  /**
+   * Sets symbol used as a header for week numbers column
+   * */
+  @Input() weekNumberSymbol: string;
 
   /**
    * Fires newly selected date.

@@ -83,6 +83,23 @@ export function addDependencyToPackageJson(tree: Tree, packageName: string, pack
   writeJSON(tree, packageJsonName, packageJson);
 }
 
+/**
+ * Gets the version of the specified dev dependency by looking at the package.json in the specified tree
+ * */
+export function getDevDependencyVersionFromPackageJson(tree: Tree, packageName: string): string {
+  if (!tree.exists(packageJsonName)) {
+    throwNoPackageJsonError();
+  }
+
+  const packageJson: PackageJson = readJSON(tree, packageJsonName);
+
+  if (noInfoAboutDevDependency(packageJson, packageName)) {
+    throwNoPackageInfoInPackageJson(packageName);
+  }
+
+  return packageJson.devDependencies[packageName];
+}
+
 export function addDevDependencyToPackageJson(tree: Tree, packageName: string, packageVersion: string) {
   if (!tree.exists(packageJsonName)) {
     throwNoPackageJsonError();
@@ -118,6 +135,13 @@ function noInfoAboutDependency(packageJson: PackageJson, packageName: string): b
 }
 
 /**
+ * Validates packageJson has devDependencies, also as specified devDependency not exists.
+ * */
+function noInfoAboutDevDependency(packageJson: PackageJson, packageName: string): boolean {
+  return !devDependencyAlreadyExists(packageJson, packageName);
+}
+
+/**
  * Validates packageJson has peerDependencies, also as specified peerDependency not exists.
  * */
 function noInfoAboutPeerDependency(packageJson: PackageJson, packageName: string): boolean {
@@ -129,6 +153,13 @@ function noInfoAboutPeerDependency(packageJson: PackageJson, packageName: string
  * */
 function dependencyAlreadyExists(packageJson: PackageJson, packageName: string): boolean {
   return !!(packageJson.dependencies && packageJson.dependencies[packageName]);
+}
+
+/**
+ * Validates packageJson has devDependencies, also as specified devDependency exists.
+ * */
+function devDependencyAlreadyExists(packageJson: PackageJson, packageName: string): boolean {
+  return !!(packageJson.devDependencies && packageJson.devDependencies[packageName]);
 }
 
 /**

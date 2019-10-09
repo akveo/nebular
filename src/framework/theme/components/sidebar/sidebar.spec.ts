@@ -10,7 +10,8 @@ import {
   NbSidebarModule,
   NbMenuComponent,
   NbThemeModule,
-  NbMenuItemComponent, NbIconComponent,
+  NbMenuItemComponent,
+  NbIconComponent, NbSidebarService,
 } from '@nebular/theme';
 
 @Component({
@@ -129,6 +130,17 @@ describe('NbSidebarComponent', () => {
       fixture.detectChanges();
 
       expect(sidebarComponent.expanded).toEqual(true);
+    });
+
+    it('should compact when sidebar service compact method called', () => {
+      const sidebarService: NbSidebarService = TestBed.get(NbSidebarService);
+
+      expect(sidebarComponent.compacted).toEqual(false);
+
+      sidebarService.compact();
+      fixture.detectChanges();
+
+      expect(sidebarComponent.compacted).toEqual(true);
     });
   });
 });

@@ -41,18 +41,37 @@
       }
     }
 
-    .native-input:focus + .custom-checkbox {
-      border-color: nb-theme(checkbox-primary-focus-border-color);
+    .native-input:enabled:focus + .custom-checkbox {
+      background-color: nb-theme(checkbox-focus-background-color);
+      border-color: nb-theme(checkbox-focus-border-color);
+
+      &.indeterminate,
+      &.checked {
+        background-color: nb-theme(checkbox-primary-focus-checked-background-color);
+        border-color: nb-theme(checkbox-primary-focus-checked-border-color);
+      }
     }
 
     .custom-checkbox:hover {
-      background-color: nb-theme(checkbox-primary-hover-background-color);
-      border-color: nb-theme(checkbox-primary-hover-border-color);
+      background-color: nb-theme(checkbox-hover-background-color);
+      border-color: nb-theme(checkbox-hover-border-color);
+
+      &.indeterminate,
+      &.checked {
+        background-color: nb-theme(checkbox-primary-hover-checked-background-color);
+        border-color: nb-theme(checkbox-primary-hover-checked-border-color);
+      }
     }
 
-    .native-input:active + .custom-checkbox {
-      background-color: nb-theme(checkbox-primary-active-background-color);
-      border-color: nb-theme(checkbox-primary-active-border-color);
+    .native-input:enabled:active + .custom-checkbox {
+      background-color: nb-theme(checkbox-active-background-color);
+      border-color: nb-theme(checkbox-active-border-color);
+
+      &.indeterminate,
+      &.checked {
+        background-color: nb-theme(checkbox-primary-active-checked-background-color);
+        border-color: nb-theme(checkbox-primary-active-checked-border-color);
+      }
     }
 
     .native-input:focus + .custom-checkbox {
@@ -70,6 +89,10 @@
       }
       & ~ .text {
         color: nb-theme(checkbox-disabled-text-color);
+      }
+      &:indeterminate + .custom-checkbox,
+      &:checked + .custom-checkbox {
+        background-color: nb-theme(checkbox-disabled-checked-background-color);
       }
     }
 
@@ -125,18 +148,37 @@
       }
     }
 
-    .native-input:focus + .custom-checkbox {
+    .native-input:enabled:focus + .custom-checkbox {
+      background-color: nb-theme(checkbox-#{$status}-focus-background-color);
       border-color: nb-theme(checkbox-#{$status}-focus-border-color);
+
+      &.indeterminate,
+      &.checked {
+        background-color: nb-theme(checkbox-#{$status}-focus-checked-background-color);
+        border-color: nb-theme(checkbox-#{$status}-focus-checked-border-color);
+      }
     }
 
     .custom-checkbox:hover {
       background-color: nb-theme(checkbox-#{$status}-hover-background-color);
       border-color: nb-theme(checkbox-#{$status}-hover-border-color);
+
+      &.indeterminate,
+      &.checked {
+        background-color: nb-theme(checkbox-#{$status}-hover-checked-background-color);
+        border-color: nb-theme(checkbox-#{$status}-hover-checked-border-color);
+      }
     }
 
-    .native-input:active + .custom-checkbox {
+    .native-input:enabled:active + .custom-checkbox {
       background-color: nb-theme(checkbox-#{$status}-active-background-color);
       border-color: nb-theme(checkbox-#{$status}-active-border-color);
+
+      &.indeterminate,
+      &.checked {
+        background-color: nb-theme(checkbox-#{$status}-active-checked-background-color);
+        border-color: nb-theme(checkbox-#{$status}-active-checked-border-color);
+      }
     }
 
     .native-input:disabled {
@@ -150,6 +192,10 @@
       }
       & ~ .text {
         color: nb-theme(checkbox-disabled-text-color);
+      }
+      &:indeterminate + .custom-checkbox,
+      &:checked + .custom-checkbox {
+        background-color: nb-theme(checkbox-disabled-checked-background-color);
       }
     }
   }

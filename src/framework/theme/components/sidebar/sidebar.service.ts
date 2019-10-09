@@ -22,6 +22,7 @@ export class NbSidebarService {
   private toggle$ = new Subject<{ compact: boolean, tag: string }>();
   private expand$ = new Subject<{ tag: string }>();
   private collapse$ = new Subject<{ tag: string }>();
+  private compact$ = new Subject<{ tag: string }>();
 
   /**
    * Subscribe to toggle events
@@ -46,6 +47,14 @@ export class NbSidebarService {
    */
   onCollapse(): Observable<{ tag: string }> {
     return this.collapse$.pipe(share());
+  }
+
+  /**
+   * Subscribe to compact evens
+   * @returns Observable<{ tag: string }>
+   */
+  onCompact(): Observable<{ tag: string }> {
+    return this.compact$.pipe(share());
   }
 
   /**
@@ -76,4 +85,12 @@ export class NbSidebarService {
     this.collapse$.next({ tag });
   }
 
+  /**
+   * Makes sidebar compact
+   * @param {string} tag If you have multiple sidebars on the page, mark them with `tag` input property and pass it here
+   * to specify which sidebar you want to control
+   */
+  compact(tag?: string) {
+    this.compact$.next({ tag });
+  }
 }

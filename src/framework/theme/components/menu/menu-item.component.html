@@ -1,5 +1,5 @@
 <span *ngIf="menuItem.group">
-  <nb-icon class="menu-icon" [icon]="menuItem.icon" *ngIf="menuItem.icon"></nb-icon>
+  <nb-icon class="menu-icon" [config]="menuItem.icon" *ngIf="menuItem.icon"></nb-icon>
   {{ menuItem.title }}
 </span>
 <a *ngIf="menuItem.link && !menuItem.url && !menuItem.children && !menuItem.group"
@@ -12,7 +12,7 @@
    [class.active]="menuItem.selected"
    (mouseenter)="onHoverItem(menuItem)"
    (click)="onItemClick(menuItem);">
-  <nb-icon class="menu-icon" [icon]="menuItem.icon" *ngIf="menuItem.icon"></nb-icon>
+  <nb-icon class="menu-icon" [config]="menuItem.icon" *ngIf="menuItem.icon"></nb-icon>
   <span class="menu-title">{{ menuItem.title }}</span>
 </a>
 <a *ngIf="menuItem.url && !menuItem.children && !menuItem.link && !menuItem.group"
@@ -22,7 +22,7 @@
    [class.active]="menuItem.selected"
    (mouseenter)="onHoverItem(menuItem)"
    (click)="onSelectItem(menuItem)">
-  <nb-icon class="menu-icon" [icon]="menuItem.icon" *ngIf="menuItem.icon"></nb-icon>
+  <nb-icon class="menu-icon" [config]="menuItem.icon" *ngIf="menuItem.icon"></nb-icon>
   <span class="menu-title">{{ menuItem.title }}</span>
 </a>
 <a *ngIf="!menuItem.children && !menuItem.link && !menuItem.url && !menuItem.group"
@@ -31,7 +31,7 @@
    [class.active]="menuItem.selected"
    (mouseenter)="onHoverItem(menuItem)"
    (click)="$event.preventDefault(); onItemClick(menuItem);">
-  <nb-icon class="menu-icon" [icon]="menuItem.icon" *ngIf="menuItem.icon"></nb-icon>
+  <nb-icon class="menu-icon" [config]="menuItem.icon" *ngIf="menuItem.icon"></nb-icon>
   <span class="menu-title">{{ menuItem.title }}</span>
 </a>
 <a *ngIf="menuItem.children"
@@ -41,7 +41,7 @@
    [class.active]="menuItem.selected"
    (mouseenter)="onHoverItem(menuItem)"
    href="#">
-  <nb-icon class="menu-icon" [icon]="menuItem.icon" *ngIf="menuItem.icon"></nb-icon>
+  <nb-icon class="menu-icon" [config]="menuItem.icon" *ngIf="menuItem.icon"></nb-icon>
   <span class="menu-title">{{ menuItem.title }}</span>
   <nb-icon class="expand-state" [icon]="getExpandStateIcon()" pack="nebular-essentials"></nb-icon>
 </a>

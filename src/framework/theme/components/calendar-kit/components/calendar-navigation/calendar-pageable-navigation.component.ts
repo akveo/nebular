@@ -13,11 +13,11 @@ import { NbLayoutDirectionService } from '../../../../services/direction.service
   selector: 'nb-calendar-pageable-navigation',
   styleUrls: ['./calendar-pageable-navigation.component.scss'],
   template: `
-    <button nbButton (click)="prev.emit()" ghost>
+    <button nbButton (click)="prev.emit()" ghost size="small" class="prev-month">
       <nb-icon [icon]="isLtr ? 'chevron-left-outline' : 'chevron-right-outline'" pack="nebular-essentials"></nb-icon>
     </button>
     <nb-calendar-navigation [date]="date" (changeMode)="changeMode.emit()"></nb-calendar-navigation>
-    <button nbButton (click)="next.emit()" ghost>
+    <button nbButton (click)="next.emit()" ghost size="small" class="next-month">
       <nb-icon [icon]="isLtr ? 'chevron-right-outline' : 'chevron-left-outline'" pack="nebular-essentials"></nb-icon>
     </button>
   `,
