@@ -4,8 +4,14 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
+@import '../../styles/core/mixins';
+
 @mixin nb-checkbox-theme() {
   nb-checkbox {
+    .label {
+      padding: nb-theme(checkbox-padding);
+    }
+
     .custom-checkbox {
       width: nb-theme(checkbox-width);
       height: nb-theme(checkbox-height);
@@ -104,6 +110,11 @@
       font-size: nb-theme(checkbox-text-font-size);
       font-weight: nb-theme(checkbox-text-font-weight);
       line-height: nb-theme(checkbox-text-line-height);
+
+      &:not(:empty) {
+        @include nb-ltr(padding-left, nb-theme(checkbox-text-space));
+        @include nb-rtl(padding-right, nb-theme(checkbox-text-space));
+      }
     }
   }
 
