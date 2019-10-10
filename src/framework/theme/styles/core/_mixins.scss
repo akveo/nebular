@@ -5,18 +5,18 @@
  */
 
 @mixin nb-scrollbars($fg, $bg, $size, $border-radius: $size / 2) {
-  ::-webkit-scrollbar {
+  &::-webkit-scrollbar {
     width: $size;
     height: $size;
   }
 
-  ::-webkit-scrollbar-thumb {
+  &::-webkit-scrollbar-thumb {
     background: $fg;
     cursor: pointer;
     border-radius: $border-radius;
   }
 
-  ::-webkit-scrollbar-track {
+  &::-webkit-scrollbar-track {
     background: $bg;
   }
 

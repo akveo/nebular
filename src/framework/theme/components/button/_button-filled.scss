@@ -23,6 +23,7 @@
         color: nb-theme(button-filled-#{$status}-text-color);
 
         &:focus {
+          background-color: nb-theme(button-filled-#{$status}-focus-background-color);
           border-color: nb-theme(button-filled-#{$status}-focus-border-color);
         }
 

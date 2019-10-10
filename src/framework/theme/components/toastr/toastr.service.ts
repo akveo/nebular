@@ -6,7 +6,7 @@
 
 import { ComponentFactoryResolver, ComponentRef, Inject, Injectable } from '@angular/core';
 
-import { NbComponentPortal } from '../cdk/overlay/mapping';
+import { NbComponentPortal, NbOverlayRef } from '../cdk/overlay/mapping';
 import { NbOverlayService, patch } from '../cdk/overlay/overlay-service';
 import { NbPositionBuilderService } from '../cdk/overlay/overlay-position';
 import { NbGlobalLogicalPosition, NbGlobalPosition, NbPositionHelper } from '../cdk/overlay/position-helper';
@@ -133,10 +133,14 @@ export class NbToastContainer {
   }
 }
 
+interface NbToastrOverlayWithContainer {
+  overlayRef: NbOverlayRef;
+  toastrContainer: NbToastContainer;
+}
 
 @Injectable()
 export class NbToastrContainerRegistry {
-  protected overlays: Map<NbGlobalPosition, NbToastContainer> = new Map();
+  protected overlays: Map<NbGlobalPosition, NbToastrOverlayWithContainer> = new Map();
 
   constructor(protected overlay: NbOverlayService,
               protected positionBuilder: NbPositionBuilderService,
@@ -148,28 +152,34 @@ export class NbToastrContainerRegistry {
   get(position: NbGlobalPosition): NbToastContainer {
     const logicalPosition: NbGlobalLogicalPosition = this.positionHelper.toLogicalPosition(position);
 
-    const container = this.overlays.get(logicalPosition);
-    if (!container || !this.existsInDom(container)) {
+    const overlayWithContainer = this.overlays.get(logicalPosition);
+    if (!overlayWithContainer || !this.existsInDom(overlayWithContainer.toastrContainer)) {
+      if (overlayWithContainer) {
+        overlayWithContainer.overlayRef.dispose();
+      }
       this.instantiateContainer(logicalPosition);
     }
 
-    return this.overlays.get(logicalPosition);
+    return this.overlays.get(logicalPosition).toastrContainer;
   }
 
   protected instantiateContainer(position: NbGlobalLogicalPosition) {
-    const container = this.createContainer(position);
-    this.overlays.set(position, container);
+    const toastrOverlayWithContainer = this.createContainer(position);
+    this.overlays.set(position, toastrOverlayWithContainer);
   }
 
-  protected createContainer(position: NbGlobalLogicalPosition): NbToastContainer {
+  protected createContainer(position: NbGlobalLogicalPosition): NbToastrOverlayWithContainer {
     const positionStrategy = this.positionBuilder.global().position(position);
     const ref = this.overlay.create({ positionStrategy });
     const containerRef = ref.attach(new NbComponentPortal(NbToastrContainerComponent, null, null, this.cfr));
-    return new NbToastContainer(position, containerRef, this.positionHelper);
+    return {
+      overlayRef: ref,
+      toastrContainer: new NbToastContainer(position, containerRef, this.positionHelper),
+    };
   }
 
   protected existsInDom(toastContainer: NbToastContainer): boolean {
-    return this.document.contains(toastContainer.nativeElement);
+    return this.document.body.contains(toastContainer.nativeElement);
   }
 }
 

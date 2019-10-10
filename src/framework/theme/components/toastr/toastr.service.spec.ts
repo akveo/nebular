@@ -138,6 +138,7 @@ describe('toastr-container-registry', () => {
           },
         }
       },
+      dispose() {},
     };
 
     overlayStub = {
@@ -164,8 +165,10 @@ describe('toastr-container-registry', () => {
     documentStub = {
       _contains: true,
 
-      contains: () => {
-        return documentStub._contains;
+      body: {
+        contains: () => {
+          return documentStub._contains;
+        },
       },
     }
   });
@@ -220,6 +223,16 @@ describe('toastr-container-registry', () => {
     const topRight = toastrContainerRegistry.get(NbGlobalPhysicalPosition.TOP_RIGHT);
 
     expect(topEnd).toBe(topRight);
+  });
+
+  it('should dispose overlay before replacing with new one', () => {
+    toastrContainerRegistry.get(NbGlobalLogicalPosition.TOP_END);
+
+    const overlayDisposeSpy = spyOn(containerStub, 'dispose');
+    documentStub._contains = false;
+    toastrContainerRegistry.get(NbGlobalLogicalPosition.TOP_END);
+
+    expect(overlayDisposeSpy).toHaveBeenCalledTimes(1);
   });
 });
 

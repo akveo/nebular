@@ -245,6 +245,12 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         component: 'CalendarWithoutHeaderComponent',
         name: 'Calendar Without Header',
       },
+      {
+        path: 'calendar-week-number.component',
+        link: '/calendar/calendar-week-number.component',
+        component: 'CalendarWeekNumberComponent',
+        name: 'Calendar Week Number',
+      },
     ],
   },
   {
@@ -1320,6 +1326,47 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         link: '/icon/icon-colors.component',
         component: 'IconColorsComponent',
         name: 'Icon Colors',
+      },
+    ],
+  },
+  {
+    path: 'toggle',
+    children: [
+      {
+        path: 'toggle-disabled.component',
+        link: '/toggle/toggle-disabled.component',
+        component: 'ToggleDisabledComponent',
+        name: 'Toggle Disabled',
+      },
+      {
+        path: 'toggle-showcase.component',
+        link: '/toggle/toggle-showcase.component',
+        component: 'ToggleShowcaseComponent',
+        name: 'Toggle Showcase',
+      },
+      {
+        path: 'toggle-status.component',
+        link: '/toggle/toggle-status.component',
+        component: 'ToggleStatusComponent',
+        name: 'Toggle Status',
+      },
+      {
+        path: 'toggle-test.component',
+        link: '/toggle/toggle-test.component',
+        component: 'ToggleTestComponent',
+        name: 'Toggle Test',
+      },
+      {
+        path: 'toggle-label-position.component',
+        link: '/toggle/toggle-label-position.component',
+        component: 'ToggleLabelPositionComponent',
+        name: 'Toggle Label Position',
+      },
+      {
+        path: 'toggle-form.component',
+        link: '/toggle/toggle-form.component',
+        component: 'ToggleFormComponent',
+        name: 'Toggle Form',
       },
     ],
   },

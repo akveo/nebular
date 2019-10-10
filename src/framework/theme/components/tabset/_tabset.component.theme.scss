@@ -7,11 +7,6 @@
 @mixin nb-tabset-theme() {
 
   nb-tabset {
-    @include nb-scrollbars(
-        nb-theme(tabset-scrollbar-color),
-        nb-theme(tabset-scrollbar-background-color),
-        nb-theme(tabset-scrollbar-width));
-
     background-color: nb-theme(tabset-background-color);
     border-radius: nb-theme(tabset-border-radius);
     box-shadow: nb-theme(tabset-shadow);
@@ -98,6 +93,11 @@
       font-weight: nb-theme(tabset-content-text-font-weight);
       line-height: nb-theme(tabset-content-text-line-height);
       padding: nb-theme(tabset-content-padding);
+
+      @include nb-scrollbars(
+          nb-theme(tabset-scrollbar-color),
+          nb-theme(tabset-scrollbar-background-color),
+          nb-theme(tabset-scrollbar-width));
     }
   }
 }

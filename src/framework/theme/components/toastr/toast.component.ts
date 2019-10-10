@@ -7,6 +7,7 @@
 import { Component, EventEmitter, HostBinding, HostListener, Input, Output } from '@angular/core';
 
 import { NbToast } from './model';
+import { NbIconConfig } from '../icon/icon.component';
 
 /**
  * The `NbToastComponent` is responsible for rendering each toast with appropriate styles.
@@ -118,12 +119,33 @@ export class NbToastComponent {
     return !!this.icon;
   }
 
-  get icon(): string {
+  get icon(): string | NbIconConfig {
     return this.toast.config.icon;
   }
 
+  /* @deprecated Use pack property of icon config */
   get iconPack(): string {
     return this.toast.config.iconPack;
+  }
+
+  /*
+    @breaking-change 5 remove
+    @deprecated
+  */
+  get iconConfig(): NbIconConfig {
+    const toastConfig = this.toast.config;
+    const isIconName = typeof this.icon === 'string';
+
+    if (!isIconName) {
+      return toastConfig.icon as NbIconConfig;
+    }
+
+    const iconConfig: NbIconConfig = { icon: toastConfig.icon as string };
+    if (toastConfig.iconPack) {
+      iconConfig.pack = toastConfig.iconPack;
+    }
+
+    return iconConfig;
   }
 
   @HostListener('click')

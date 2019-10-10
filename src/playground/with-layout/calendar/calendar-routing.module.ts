@@ -15,6 +15,7 @@ import { CalendarShowcaseComponent } from './calendar-showcase.component';
 import { CalendarSizeComponent } from './calendar-size.component';
 import { CalendarStartViewComponent } from './calendar-start-view.component';
 import { CalendarWithoutHeaderComponent } from './calendar-without-header.component';
+import { CalendarWeekNumberComponent } from './calendar-week-number.component';
 
 const routes: Route[] = [
   {
@@ -52,6 +53,10 @@ const routes: Route[] = [
   {
     path: 'calendar-without-header.component',
     component: CalendarWithoutHeaderComponent,
+  },
+  {
+    path: 'calendar-week-number.component',
+    component: CalendarWeekNumberComponent,
   },
 ];
 

@@ -22,6 +22,7 @@ import { NbDynamicOverlay } from './dynamic-overlay';
 import { NbOverlayContent } from '../overlay-service';
 import { NbDynamicOverlayChange, NbDynamicOverlayHandler } from './dynamic-overlay-handler';
 import { NbTrigger, NbTriggerStrategy, NbTriggerStrategyBuilderService } from '../overlay-trigger';
+import { NbOverlayConfig } from '@nebular/theme/components/cdk/overlay/mapping';
 
 @Component({ template: '' })
 export class NbDynamicOverlayMockComponent implements NbRenderableContainer {
@@ -43,18 +44,21 @@ export class NbMockDynamicOverlay {
   _context: Object = {};
   _content: NbOverlayContent;
   _positionStrategy: NbAdjustableConnectedPositionStrategy;
+  _overlayConfig: NbOverlayConfig;
 
   constructor() {}
 
   create(componentType: Type<NbRenderableContainer>,
          content: NbOverlayContent,
          context: Object,
-         positionStrategy: NbAdjustableConnectedPositionStrategy) {
+         positionStrategy: NbAdjustableConnectedPositionStrategy,
+         overlayConfig: NbOverlayConfig) {
 
     this.setContext(context);
     this.setContent(content);
     this.setComponent(componentType);
     this.setPositionStrategy(positionStrategy);
+    this.setOverlayConfig(overlayConfig);
 
     return this;
   }
@@ -69,6 +73,10 @@ export class NbMockDynamicOverlay {
 
   setComponent(componentType: Type<NbRenderableContainer>) {
     this._componentType = componentType;
+  }
+
+  setOverlayConfig(overlayConfig: NbOverlayConfig) {
+    this._overlayConfig = overlayConfig;
   }
 
   setContentAndContext(content: NbOverlayContent, context: Object) {
@@ -515,5 +523,16 @@ describe('dynamic-overlay-handler', () => {
     expect(positionBuilder._connectedTo).toBe(host2);
     expect(positionBuilder._position).toBe(NbPosition.LEFT);
     expect(positionBuilder._adjustment).toBe(NbAdjustment.HORIZONTAL);
+  });
+
+  it('should set and update overlay config', () => {
+    let overlayConfig: NbOverlayConfig = { panelClass: 'custom-class' };
+
+    let dynamic = configure().overlayConfig(overlayConfig).build();
+    expect(dynamic._overlayConfig).toEqual(jasmine.objectContaining(overlayConfig));
+
+    overlayConfig = { panelClass: 'other-custom-class' };
+    dynamic = configure().overlayConfig(overlayConfig).rebuild();
+    expect(dynamic._overlayConfig).toEqual(jasmine.objectContaining(overlayConfig));
   });
 });
