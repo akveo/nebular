@@ -84,6 +84,11 @@ describe('nb-datepicker', () => {
     input = fixture.nativeElement.querySelector('input');
   });
 
+  it('should not throw when destroyed right after creation', () => {
+    const picker = TestBed.createComponent(NbDatepickerComponent).componentInstance;
+    expect(picker.ngOnDestroy.bind(picker)).not.toThrow();
+  });
+
   it('should render calendar', () => {
     showDatepicker();
     const calendar = overlay.querySelector('nb-calendar');
