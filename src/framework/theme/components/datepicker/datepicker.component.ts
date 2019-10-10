@@ -259,7 +259,9 @@ export abstract class NbBasePicker<D, T, P>
       this.ref.dispose();
     }
 
-    this.triggerStrategy.destroy();
+    if (this.triggerStrategy) {
+      this.triggerStrategy.destroy();
+    }
   }
 
   /**
