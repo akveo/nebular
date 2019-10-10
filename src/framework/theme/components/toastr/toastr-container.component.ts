@@ -6,13 +6,13 @@
 
 import { Component, Input, OnDestroy, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { animate, style, transition, trigger } from '@angular/animations';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 import { NbToastComponent } from './toast.component';
 import { NbToast } from './model';
 import { NbLayoutDirectionService } from '../../services/direction.service';
 import { NbGlobalPosition, NbPositionHelper } from '../cdk/overlay/position-helper';
-import { takeWhile } from 'rxjs/operators';
-
 
 const voidState = style({
   transform: 'translateX({{ direction }}110%)',
@@ -37,6 +37,9 @@ const defaultOptions = { params: { direction: '' } };
   ],
 })
 export class NbToastrContainerComponent implements OnInit, OnDestroy {
+
+  protected destroy$ = new Subject<void>();
+
   @Input()
   content: NbToast[] = [];
 
@@ -51,20 +54,19 @@ export class NbToastrContainerComponent implements OnInit, OnDestroy {
 
   fadeIn;
 
-  protected alive: boolean = true;
-
   constructor(protected layoutDirection: NbLayoutDirectionService,
               protected positionHelper: NbPositionHelper) {
   }
 
   ngOnInit() {
     this.layoutDirection.onDirectionChange()
-      .pipe(takeWhile(() => this.alive))
+      .pipe(takeUntil(this.destroy$))
       .subscribe(() => this.onDirectionChange());
   }
 
   ngOnDestroy() {
-    this.alive = false;
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   protected onDirectionChange() {
