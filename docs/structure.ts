@@ -515,7 +515,7 @@ export const structure = [
       {
         type: 'tabs',
         name: 'Autocomplete',
-        icon: 'select.svg',
+        icon: 'autocomplete.svg',
         source: [
           'NbAutocompleteDirective',
           'NbAutocompleteComponent',
