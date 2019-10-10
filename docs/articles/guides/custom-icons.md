@@ -11,7 +11,7 @@ In case you need to have more icons available, Nebular provides a `@nebular/eva-
 Install the pack:
 
  ```sh
- npm i @nebular/eva-icons@next
+ npm i eva-icons @nebular/eva-icons
  ```
 
 This command will install Eva Icons pack. Then register `NbEvaIconsModule` into your app module:

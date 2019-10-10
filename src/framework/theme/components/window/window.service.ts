@@ -26,6 +26,7 @@ import {
 import { NbWindowRef } from './window-ref';
 import { NbWindowsContainerComponent } from './windows-container.component';
 import { NbWindowComponent } from './window.component';
+import { NB_DOCUMENT } from '../../theme.options';
 
 /**
  * The `NbWindowService` can be used to open windows.
@@ -38,7 +39,7 @@ import { NbWindowComponent } from './window.component';
  * ```ts
  * @NgModule({
  *   imports: [
- *   	// ...
+ *     // ...
  *     NbWindowModule.forRoot(config),
  *   ],
  * })
@@ -49,7 +50,7 @@ import { NbWindowComponent } from './window.component';
  * ```ts
  * @NgModule({
  *   imports: [
- *   	// ...
+ *     // ...
  *     NbWindowModule.forChild(config),
  *   ],
  * })
@@ -101,6 +102,7 @@ import { NbWindowComponent } from './window.component';
 @Injectable()
 export class NbWindowService {
 
+  protected document: Document;
   protected overlayRef: NbOverlayRef;
   protected windowsContainerViewRef: ViewContainerRef;
   protected openWindows: NbWindowRef[] = [];
@@ -112,7 +114,9 @@ export class NbWindowService {
     protected blockScrollStrategy: NbBlockScrollStrategyAdapter,
     @Inject(NB_WINDOW_CONFIG) protected readonly defaultWindowsConfig: NbWindowConfig,
     protected cfr: ComponentFactoryResolver,
+    @Inject(NB_DOCUMENT) document,
   ) {
+    this.document = document;
   }
 
   /**
@@ -124,7 +128,7 @@ export class NbWindowService {
     windowContent: TemplateRef<any> | NbComponentType,
     windowConfig: Partial<NbWindowConfig> = {},
   ): NbWindowRef {
-    if (this.windowsContainerViewRef == null) {
+    if (this.shouldCreateWindowsContainer()) {
       this.createWindowsContainer();
     }
 
@@ -138,7 +142,20 @@ export class NbWindowService {
     return windowRef;
   }
 
+  protected shouldCreateWindowsContainer(): boolean {
+    if (this.windowsContainerViewRef) {
+      const containerEl = this.windowsContainerViewRef.element.nativeElement;
+      return !this.document.body.contains(containerEl);
+    }
+
+    return true;
+  }
+
   protected createWindowsContainer() {
+    if (this.overlayRef) {
+      this.overlayRef.dispose();
+    }
+
     this.overlayRef = this.overlayService.create({
       scrollStrategy: this.overlayService.scrollStrategies.noop(),
       positionStrategy: this.overlayPositionBuilder.global().bottom().right(),

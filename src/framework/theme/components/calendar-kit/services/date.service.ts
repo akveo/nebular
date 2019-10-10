@@ -179,4 +179,6 @@ export abstract class NbDateService<D> {
   abstract addYear(date: D, years: number): D;
 
   abstract getId(): string;
+
+  abstract getWeekNumber(date: D): number;
 }

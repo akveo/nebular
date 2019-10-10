@@ -5,6 +5,7 @@
  */
 
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { NbIconConfig } from '@nebular/theme';
 
 @Component({
   selector: 'nb-tabset-icon',
@@ -17,4 +18,5 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   `],
 })
 export class TabsetIconComponent {
+  bellIconConfig: NbIconConfig = { icon: 'bell-outline', pack: 'eva' };
 }
