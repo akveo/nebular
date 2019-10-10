@@ -91,12 +91,24 @@ export class NbTooltipDirective implements OnInit, OnChanges, AfterViewInit, OnD
   @Input('nbTooltipPlacement')
   position: NbPosition = NbPosition.TOP;
   /**
-   * Container position will be changes automatically based on this strategy if container can't fit view port.
-   * Set this property to any falsy value if you want to disable automatically adjustment.
-   * Available values: clockwise, counterclockwise.
+   * Container position will change automatically based on this strategy if container can't fit view port.
+   * Set this property to `noop` value if you want to disable automatic adjustment.
+   * Available values: `clockwise` (default), `counterclockwise`, `vertical`, `horizontal`, `noop`.
    */
   @Input('nbTooltipAdjustment')
-  adjustment: NbAdjustment = NbAdjustment.CLOCKWISE;
+  get adjustment(): NbAdjustment {
+    return this._adjustment;
+  }
+  set adjustment(value: NbAdjustment) {
+    if (!value) {
+      // @breaking-change Remove @5.0.0
+      console.warn(`Falsy values for 'nbPopoverAdjustment' are deprecated and will be removed in Nebular 5.
+ Use 'noop' instead.`);
+      value = NbAdjustment.NOOP;
+    }
+    this._adjustment = value;
+  }
+  protected _adjustment: NbAdjustment = NbAdjustment.CLOCKWISE;
 
   @Input('nbTooltipClass')
   tooltipClass: string = '';
