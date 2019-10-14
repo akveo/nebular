@@ -349,7 +349,7 @@ export class NbSidebarComponent implements OnChanges, OnInit, OnDestroy {
       const link = this.getMenuLink(event.target);
 
       if (link && link.nextElementSibling && link.nextElementSibling.classList.contains('menu-items')) {
-        this.expand();
+        this.sidebarService.expand(this.tag);
       }
     }
   }
