@@ -33,7 +33,7 @@ describe('theme-service', () => {
     });
   });
 
-// Single async inject to save references; which are used in all tests below
+  // Single async inject to save references; which are used in all tests below
   beforeEach(async(inject(
     [NbMediaBreakpointsService, NbThemeService],
     (_breakpointService, _themeService) => {
@@ -80,25 +80,30 @@ describe('theme-service', () => {
     }
   });
 
-  it('listens to window media query change', () => {
+  it('listens to window media query change', async () => {
     let current: any;
+    const debounceTimeout = () => new Promise(resolve => setTimeout(() => resolve(), 150));
 
     const subscription = themeService.onMediaQueryChange()
       .subscribe((change: any) => {
         current = change;
       });
     try {
+      await debounceTimeout();
       expect(current).toBeUndefined();
 
       themeService.changeWindowWidth(1920);
+      await debounceTimeout();
       expect(current[0].name).toEqual(breakpointService.getByWidth(undefined).name);
 
       const xs = 200;
       themeService.changeWindowWidth(xs);
+      await debounceTimeout();
       expect(current[1].name).toEqual(breakpointService.getByWidth(xs).name);
 
       const sm = 576;
       themeService.changeWindowWidth(sm);
+      await debounceTimeout();
       expect(current[0].name).toEqual(breakpointService.getByWidth(xs).name);
       expect(current[1].name).toEqual(breakpointService.getByWidth(sm).name);
     } finally {
