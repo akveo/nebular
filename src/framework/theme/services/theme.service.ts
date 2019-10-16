@@ -7,7 +7,7 @@
 import { Inject, Injectable } from '@angular/core';
 
 import { Observable, ReplaySubject, Subject } from 'rxjs';
-import { map, filter, pairwise, distinctUntilChanged, startWith, share } from 'rxjs/operators';
+import { map, filter, pairwise, distinctUntilChanged, startWith, share, debounceTime } from 'rxjs/operators';
 
 import { NB_THEME_OPTIONS } from '../theme.options';
 import { NbJSThemeOptions } from './js-themes/theme.options';
@@ -28,8 +28,8 @@ export class NbThemeService {
   private changeWindowWidth$ = new ReplaySubject<number>(2);
 
   constructor(@Inject(NB_THEME_OPTIONS) protected options: any,
-              private breakpointService: NbMediaBreakpointsService,
-              private jsThemesRegistry: NbJSThemesRegistry) {
+    private breakpointService: NbMediaBreakpointsService,
+    private jsThemesRegistry: NbJSThemesRegistry) {
     if (options && options.name) {
       this.changeTheme(options.name);
     }
@@ -74,6 +74,7 @@ export class NbThemeService {
     return this.changeWindowWidth$
       .pipe(
         startWith(undefined),
+        debounceTime(150),
         pairwise(),
         map(([prevWidth, width]: [number, number]) => {
           return [
