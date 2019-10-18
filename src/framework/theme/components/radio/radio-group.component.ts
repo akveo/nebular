@@ -22,7 +22,7 @@ import {
 import { isPlatformBrowser } from '@angular/common';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { fromEvent, merge } from 'rxjs';
-import { filter, switchMap, take, takeUntil, takeWhile } from 'rxjs/operators';
+import { filter, switchMap, takeUntil, takeWhile } from 'rxjs/operators';
 import { convertToBoolProperty } from '../helpers';
 import { NB_DOCUMENT } from '../../theme.options';
 import { NbRadioComponent } from './radio.component';
@@ -81,7 +81,6 @@ import { NbComponentStatus } from '../component-status';
 export class NbRadioGroupComponent implements AfterContentInit, OnDestroy, ControlValueAccessor {
 
   protected alive: boolean = true;
-  protected isTouched: boolean = false;
   protected onChange = (value: any) => {};
   protected onTouched = () => {};
 
@@ -232,7 +231,7 @@ export class NbRadioGroupComponent implements AfterContentInit, OnDestroy, Contr
 
   protected subscribeOnRadiosBlur() {
     const hasNoRadios = !this.radios || !this.radios.length;
-    if (!isPlatformBrowser(this.platformId) || this.isTouched || hasNoRadios) {
+    if (!isPlatformBrowser(this.platformId) || hasNoRadios) {
       return;
     }
 
@@ -246,15 +245,9 @@ export class NbRadioGroupComponent implements AfterContentInit, OnDestroy, Contr
           fromEvent<Event>(this.document, 'click'),
         )),
         filter(event => !hostElement.contains(event.target as Node)),
-        take(1),
         takeUntil(this.radios.changes),
       )
-      .subscribe(() => this.markTouched());
-  }
-
-  protected markTouched() {
-    this.isTouched = true;
-    this.onTouched();
+      .subscribe(() => this.onTouched());
   }
 
   protected updateStatus() {
