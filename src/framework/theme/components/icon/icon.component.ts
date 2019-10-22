@@ -216,6 +216,8 @@ export class NbIconComponent implements NbIconConfig, OnChanges, OnInit {
     const content = iconDefinition.icon.getContent(options);
     if (content) {
       this.html = this.sanitizer.bypassSecurityTrustHtml(content);
+    } else {
+      this.html = '';
     }
 
     this.assignClasses(iconDefinition.icon.getClasses(options));
