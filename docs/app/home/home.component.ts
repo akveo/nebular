@@ -73,7 +73,7 @@ export class NgdHomeComponent {
     },
     {
       title: 'Customizable',
-      description: `Straightforward way to integrate you brand`,
+      description: `Straightforward way to integrate your brand`,
       icon: 'assets/img/extendable.svg',
     },
   ];
