@@ -462,10 +462,8 @@ export class NbDatepickerDirective<D> implements OnDestroy, ControlValueAccessor
       fromEvent(this.input, 'blur').pipe(
         filter(() => !this.picker.isShown && this.document.activeElement !== this.input),
       ),
-    ).pipe(
-      takeWhile(() => this.alive),
-      take(1),
-    ).subscribe(() => this.onTouched());
+    ).pipe(takeWhile(() => this.alive))
+     .subscribe(() => this.onTouched());
   }
 
   protected writePicker(value: D) {
