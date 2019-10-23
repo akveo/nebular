@@ -42,17 +42,7 @@ import { NbOverlayContainerAdapter } from '../cdk/adapter/overlay-container-adap
  * ```
  * ### Installation
  *
- * Import `NbLayoutModule.forRoot()` to your app module.
- * ```ts
- * @NgModule({
- *   imports: [
- *     // ...
- *     NbLayoutModule.forRoot(),
- *   ],
- * })
- * export class AppModule { }
- * ```
- * and `NbLayoutModule` to your feature module where the component should be shown:
+ * Import `NbLayoutModule` to your app module.
  * ```ts
  * @NgModule({
  *   imports: [
@@ -60,7 +50,7 @@ import { NbOverlayContainerAdapter } from '../cdk/adapter/overlay-container-adap
  *     NbLayoutModule,
  *   ],
  * })
- * export class PageModule { }
+ * export class AppModule { }
  * ```
  * ### Usage
  * By default the layout fills up the whole view-port.
