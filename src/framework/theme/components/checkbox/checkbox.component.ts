@@ -8,7 +8,7 @@ import { Component, Input, HostBinding, forwardRef, ChangeDetectorRef, Output, E
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import { NbComponentStatus } from '../component-status';
-import { convertToBoolProperty } from '../helpers';
+import { convertToBoolProperty, emptyStatusWarning } from '../helpers';
 
 /**
  * Styled checkbox component
@@ -29,35 +29,57 @@ import { convertToBoolProperty } from '../helpers';
  * ```
  * ### Usage
  *
- * Can have one of the following statuses: danger, success or warning
- *
+ * Checkbox is available in multiple colors using `status` property:
  * @stacked-example(Colored Checkboxes, checkbox/checkbox-status.component)
  *
  * Indeterminate state is also supported:
  * @stacked-example(Indeterminate Checkbox, checkbox/checkbox-indeterminate.component)
  *
- * @additional-example(Disabled Checkbox, checkbox/checkbox-disabled.component)
+ * Checkbox can be disabled via `disabled` attribute.
+ * @stacked-example(Disabled Checkbox, checkbox/checkbox-disabled.component)
  *
  * @styles
  *
  * checkbox-height:
  * checkbox-width:
- * checkbox-background-color:
- * checkbox-border-color:
  * checkbox-border-style:
  * checkbox-border-width:
  * checkbox-border-radius:
  * checkbox-outline-width:
  * checkbox-outline-color:
- * checkbox-text-color:
  * checkbox-text-font-family:
  * checkbox-text-font-size:
  * checkbox-text-font-weight:
  * checkbox-text-line-height:
+ * checkbox-text-space:
+ * checkbox-padding:
  * checkbox-disabled-background-color:
  * checkbox-disabled-border-color:
  * checkbox-disabled-checkmark-color:
  * checkbox-disabled-text-color:
+ * checkbox-disabled-checked-background-color:
+ * checkbox-basic-text-color:
+ * checkbox-basic-background-color:
+ * checkbox-basic-border-color:
+ * checkbox-basic-checked-background-color:
+ * checkbox-basic-checked-border-color:
+ * checkbox-basic-checked-checkmark-color:
+ * checkbox-basic-indeterminate-background-color:
+ * checkbox-basic-indeterminate-border-color:
+ * checkbox-basic-indeterminate-checkmark-color:
+ * checkbox-basic-focus-background-color:
+ * checkbox-basic-focus-border-color:
+ * checkbox-basic-focus-checked-background-color:
+ * checkbox-basic-focus-checked-border-color:
+ * checkbox-basic-hover-background-color:
+ * checkbox-basic-hover-border-color:
+ * checkbox-basic-hover-checked-background-color:
+ * checkbox-basic-hover-checked-border-color:
+ * checkbox-basic-active-background-color:
+ * checkbox-basic-active-border-color:
+ * checkbox-basic-active-checked-background-color:
+ * checkbox-basic-active-checked-border-color:
+ * checkbox-primary-text-color:
  * checkbox-primary-background-color:
  * checkbox-primary-border-color:
  * checkbox-primary-checked-background-color:
@@ -66,11 +88,19 @@ import { convertToBoolProperty } from '../helpers';
  * checkbox-primary-indeterminate-background-color:
  * checkbox-primary-indeterminate-border-color:
  * checkbox-primary-indeterminate-checkmark-color:
+ * checkbox-primary-focus-background-color:
  * checkbox-primary-focus-border-color:
+ * checkbox-primary-focus-checked-background-color:
+ * checkbox-primary-focus-checked-border-color:
  * checkbox-primary-hover-background-color:
  * checkbox-primary-hover-border-color:
+ * checkbox-primary-hover-checked-background-color:
+ * checkbox-primary-hover-checked-border-color:
  * checkbox-primary-active-background-color:
  * checkbox-primary-active-border-color:
+ * checkbox-primary-active-checked-background-color:
+ * checkbox-primary-active-checked-border-color:
+ * checkbox-success-text-color:
  * checkbox-success-background-color:
  * checkbox-success-border-color:
  * checkbox-success-checked-background-color:
@@ -79,37 +109,19 @@ import { convertToBoolProperty } from '../helpers';
  * checkbox-success-indeterminate-background-color:
  * checkbox-success-indeterminate-border-color:
  * checkbox-success-indeterminate-checkmark-color:
+ * checkbox-success-focus-background-color:
  * checkbox-success-focus-border-color:
+ * checkbox-success-focus-checked-background-color:
+ * checkbox-success-focus-checked-border-color:
  * checkbox-success-hover-background-color:
  * checkbox-success-hover-border-color:
+ * checkbox-success-hover-checked-background-color:
+ * checkbox-success-hover-checked-border-color:
  * checkbox-success-active-background-color:
  * checkbox-success-active-border-color:
- * checkbox-warning-background-color:
- * checkbox-warning-border-color:
- * checkbox-warning-checked-background-color:
- * checkbox-warning-checked-border-color:
- * checkbox-warning-checked-checkmark-color:
- * checkbox-warning-indeterminate-background-color:
- * checkbox-warning-indeterminate-border-color:
- * checkbox-warning-indeterminate-checkmark-color:
- * checkbox-warning-focus-border-color:
- * checkbox-warning-hover-background-color:
- * checkbox-warning-hover-border-color:
- * checkbox-warning-active-background-color:
- * checkbox-warning-active-border-color:
- * checkbox-danger-background-color:
- * checkbox-danger-border-color:
- * checkbox-danger-checked-background-color:
- * checkbox-danger-checked-border-color:
- * checkbox-danger-checked-checkmark-color:
- * checkbox-danger-indeterminate-background-color:
- * checkbox-danger-indeterminate-border-color:
- * checkbox-danger-indeterminate-checkmark-color:
- * checkbox-danger-focus-border-color:
- * checkbox-danger-hover-background-color:
- * checkbox-danger-hover-border-color:
- * checkbox-danger-active-background-color:
- * checkbox-danger-active-border-color:
+ * checkbox-success-active-checked-background-color:
+ * checkbox-success-active-checked-border-color:
+ * checkbox-info-text-color:
  * checkbox-info-background-color:
  * checkbox-info-border-color:
  * checkbox-info-checked-background-color:
@@ -118,11 +130,81 @@ import { convertToBoolProperty } from '../helpers';
  * checkbox-info-indeterminate-background-color:
  * checkbox-info-indeterminate-border-color:
  * checkbox-info-indeterminate-checkmark-color:
+ * checkbox-info-focus-background-color:
  * checkbox-info-focus-border-color:
+ * checkbox-info-focus-checked-background-color:
+ * checkbox-info-focus-checked-border-color:
  * checkbox-info-hover-background-color:
  * checkbox-info-hover-border-color:
+ * checkbox-info-hover-checked-background-color:
+ * checkbox-info-hover-checked-border-color:
  * checkbox-info-active-background-color:
  * checkbox-info-active-border-color:
+ * checkbox-info-active-checked-background-color:
+ * checkbox-info-active-checked-border-color:
+ * checkbox-warning-text-color:
+ * checkbox-warning-background-color:
+ * checkbox-warning-border-color:
+ * checkbox-warning-checked-background-color:
+ * checkbox-warning-checked-border-color:
+ * checkbox-warning-checked-checkmark-color:
+ * checkbox-warning-indeterminate-background-color:
+ * checkbox-warning-indeterminate-border-color:
+ * checkbox-warning-indeterminate-checkmark-color:
+ * checkbox-warning-focus-background-color:
+ * checkbox-warning-focus-border-color:
+ * checkbox-warning-focus-checked-background-color:
+ * checkbox-warning-focus-checked-border-color:
+ * checkbox-warning-hover-background-color:
+ * checkbox-warning-hover-border-color:
+ * checkbox-warning-hover-checked-background-color:
+ * checkbox-warning-hover-checked-border-color:
+ * checkbox-warning-active-background-color:
+ * checkbox-warning-active-border-color:
+ * checkbox-warning-active-checked-background-color:
+ * checkbox-warning-active-checked-border-color:
+ * checkbox-danger-text-color:
+ * checkbox-danger-background-color:
+ * checkbox-danger-border-color:
+ * checkbox-danger-checked-background-color:
+ * checkbox-danger-checked-border-color:
+ * checkbox-danger-checked-checkmark-color:
+ * checkbox-danger-indeterminate-background-color:
+ * checkbox-danger-indeterminate-border-color:
+ * checkbox-danger-indeterminate-checkmark-color:
+ * checkbox-danger-focus-background-color:
+ * checkbox-danger-focus-border-color:
+ * checkbox-danger-focus-checked-background-color:
+ * checkbox-danger-focus-checked-border-color:
+ * checkbox-danger-hover-background-color:
+ * checkbox-danger-hover-border-color:
+ * checkbox-danger-hover-checked-background-color:
+ * checkbox-danger-hover-checked-border-color:
+ * checkbox-danger-active-background-color:
+ * checkbox-danger-active-border-color:
+ * checkbox-danger-active-checked-background-color:
+ * checkbox-danger-active-checked-border-color:
+ * checkbox-control-text-color:
+ * checkbox-control-background-color:
+ * checkbox-control-border-color:
+ * checkbox-control-checked-background-color:
+ * checkbox-control-checked-border-color:
+ * checkbox-control-checked-checkmark-color:
+ * checkbox-control-indeterminate-background-color:
+ * checkbox-control-indeterminate-border-color:
+ * checkbox-control-indeterminate-checkmark-color:
+ * checkbox-control-focus-background-color:
+ * checkbox-control-focus-border-color:
+ * checkbox-control-focus-checked-background-color:
+ * checkbox-control-focus-checked-border-color:
+ * checkbox-control-hover-background-color:
+ * checkbox-control-hover-border-color:
+ * checkbox-control-hover-checked-background-color:
+ * checkbox-control-hover-checked-border-color:
+ * checkbox-control-active-background-color:
+ * checkbox-control-active-border-color:
+ * checkbox-control-active-checked-background-color:
+ * checkbox-control-active-checked-border-color:
  */
 @Component({
   selector: 'nb-checkbox',
@@ -198,11 +280,21 @@ export class NbCheckboxComponent implements ControlValueAccessor {
 
   /**
    * Checkbox status.
-   * Possible values are: `primary`, `success`, `warning`, `danger`, `info`
+   * Possible values are: `basic`, `primary`, `success`, `warning`, `danger`, `info`, `control`.
    */
   @Input()
-  status: '' | NbComponentStatus = '';
-
+  get status(): NbComponentStatus {
+    return this._status;
+  }
+  set status(value: NbComponentStatus) {
+    if ((value as string) === '') {
+      emptyStatusWarning('NbCheckbox');
+      this._status = 'basic';
+    } else {
+      this._status = value;
+    }
+  }
+  protected _status: NbComponentStatus = 'basic';
 
   /**
    * Controls checkbox indeterminate state
@@ -260,6 +352,16 @@ export class NbCheckboxComponent implements ControlValueAccessor {
   @HostBinding('class.status-info')
   get info() {
     return this.status === 'info';
+  }
+
+  @HostBinding('class.status-basic')
+  get basic() {
+    return this.status === 'basic';
+  }
+
+  @HostBinding('class.status-control')
+  get control() {
+    return this.status === 'control';
   }
 
   constructor(private changeDetector: ChangeDetectorRef) {}

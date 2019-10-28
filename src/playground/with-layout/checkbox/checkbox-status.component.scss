@@ -1,0 +1,9 @@
+@import '../../styles/themes';
+
+nb-card-body.example-items-rows {
+  align-items: center;
+}
+
+nb-checkbox:not(:only-child) {
+  margin-right: 1.5rem;
+}
