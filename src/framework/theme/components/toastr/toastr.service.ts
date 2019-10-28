@@ -221,7 +221,7 @@ export class NbToastrContainerRegistry {
  * @stacked-example(Position, toastr/toastr-positions.component)
  *
  * `status` - coloring and icon of the toast.
- * Default is `primary`
+ * Default is `basic`.
  *
  * @stacked-example(Status, toastr/toastr-statuses.component)
  *
