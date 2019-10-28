@@ -111,7 +111,7 @@ export class NbSelectLabelComponent {
  *
  * @stacked-example(Custom label, select/select-label.component)
  *
- * Default `nb-select` size is `medium` and status color is `primary`.
+ * Default `nb-select` size is `medium` and status color is `basic`.
  * Select is available in multiple colors using `status` property:
  *
  * @stacked-example(Select statuses, select/select-status.component)
@@ -176,15 +176,8 @@ export class NbSelectLabelComponent {
  * select-rectangle-border-radius:
  * select-semi-round-border-radius:
  * select-round-border-radius:
- * select-outline-background-color:
- * select-outline-border-color:
  * select-outline-border-style:
  * select-outline-border-width:
- * select-outline-icon-color:
- * select-outline-text-color:
- * select-outline-placeholder-text-color:
- * select-outline-focus-border-color:
- * select-outline-hover-border-color:
  * select-outline-disabled-background-color:
  * select-outline-disabled-border-color:
  * select-outline-disabled-icon-color:
@@ -194,69 +187,115 @@ export class NbSelectLabelComponent {
  * select-outline-medium-padding:
  * select-outline-large-padding:
  * select-outline-giant-padding:
+ * select-outline-basic-icon-color:
+ * select-outline-basic-text-color:
+ * select-outline-basic-placeholder-text-color:
+ * select-outline-basic-background-color:
+ * select-outline-basic-border-color:
+ * select-outline-basic-focus-border-color:
+ * select-outline-basic-hover-border-color:
+ * select-outline-basic-disabled-border-color:
+ * select-outline-primary-icon-color:
+ * select-outline-primary-text-color:
+ * select-outline-primary-placeholder-text-color:
+ * select-outline-primary-background-color:
  * select-outline-primary-border-color:
  * select-outline-primary-focus-border-color:
  * select-outline-primary-hover-border-color:
  * select-outline-primary-disabled-border-color:
+ * select-outline-success-icon-color:
+ * select-outline-success-text-color:
+ * select-outline-success-placeholder-text-color:
+ * select-outline-success-background-color:
  * select-outline-success-border-color:
  * select-outline-success-focus-border-color:
  * select-outline-success-hover-border-color:
  * select-outline-success-disabled-border-color:
+ * select-outline-info-icon-color:
+ * select-outline-info-text-color:
+ * select-outline-info-placeholder-text-color:
+ * select-outline-info-background-color:
  * select-outline-info-border-color:
  * select-outline-info-focus-border-color:
  * select-outline-info-hover-border-color:
  * select-outline-info-disabled-border-color:
+ * select-outline-warning-icon-color:
+ * select-outline-warning-text-color:
+ * select-outline-warning-placeholder-text-color:
+ * select-outline-warning-background-color:
  * select-outline-warning-border-color:
  * select-outline-warning-focus-border-color:
  * select-outline-warning-hover-border-color:
  * select-outline-warning-disabled-border-color:
+ * select-outline-danger-icon-color:
+ * select-outline-danger-text-color:
+ * select-outline-danger-placeholder-text-color:
+ * select-outline-danger-background-color:
  * select-outline-danger-border-color:
  * select-outline-danger-focus-border-color:
  * select-outline-danger-hover-border-color:
  * select-outline-danger-disabled-border-color:
+ * select-outline-control-icon-color:
+ * select-outline-control-text-color:
+ * select-outline-control-placeholder-text-color:
+ * select-outline-control-background-color:
+ * select-outline-control-border-color:
+ * select-outline-control-focus-border-color:
+ * select-outline-control-hover-border-color:
+ * select-outline-control-disabled-border-color:
  * select-option-outline-tiny-padding:
  * select-option-outline-small-padding:
  * select-option-outline-medium-padding:
  * select-option-outline-large-padding:
  * select-option-outline-giant-padding:
- * select-open-outline-border-color:
- * select-outline-adjacent-border-color:
  * select-outline-adjacent-border-style:
  * select-outline-adjacent-border-width:
+ * select-outline-basic-open-border-color:
+ * select-outline-basic-adjacent-border-color:
+ * select-outline-primary-open-border-color:
  * select-outline-primary-adjacent-border-color:
+ * select-outline-success-open-border-color:
  * select-outline-success-adjacent-border-color:
+ * select-outline-info-open-border-color:
  * select-outline-info-adjacent-border-color:
+ * select-outline-warning-open-border-color:
  * select-outline-warning-adjacent-border-color:
+ * select-outline-danger-open-border-color:
  * select-outline-danger-adjacent-border-color:
+ * select-outline-control-open-border-color:
+ * select-outline-control-adjacent-border-color:
  * select-group-option-outline-tiny-start-padding:
  * select-group-option-outline-small-start-padding:
  * select-group-option-outline-medium-start-padding:
  * select-group-option-outline-large-start-padding:
  * select-group-option-outline-giant-start-padding:
- * select-options-list-outline-border-color:
+ * select-options-list-outline-basic-border-color:
  * select-options-list-outline-primary-border-color:
  * select-options-list-outline-success-border-color:
  * select-options-list-outline-info-border-color:
  * select-options-list-outline-warning-border-color:
  * select-options-list-outline-danger-border-color:
- * select-filled-background-color:
- * select-filled-border-color:
+ * select-options-list-outline-control-border-color:
  * select-filled-border-style:
  * select-filled-border-width:
- * select-filled-icon-color:
- * select-filled-text-color:
- * select-filled-placeholder-text-color:
- * select-filled-focus-border-color:
- * select-filled-hover-border-color:
- * select-filled-disabled-background-color:
- * select-filled-disabled-border-color:
- * select-filled-disabled-icon-color:
- * select-filled-disabled-text-color:
  * select-filled-tiny-padding:
  * select-filled-small-padding:
  * select-filled-medium-padding:
  * select-filled-large-padding:
  * select-filled-giant-padding:
+ * select-filled-basic-background-color:
+ * select-filled-basic-border-color:
+ * select-filled-basic-icon-color:
+ * select-filled-basic-text-color:
+ * select-filled-basic-placeholder-text-color:
+ * select-filled-basic-focus-background-color:
+ * select-filled-basic-focus-border-color:
+ * select-filled-basic-hover-background-color:
+ * select-filled-basic-hover-border-color:
+ * select-filled-basic-disabled-background-color:
+ * select-filled-basic-disabled-border-color:
+ * select-filled-basic-disabled-icon-color:
+ * select-filled-basic-disabled-text-color:
  * select-filled-primary-background-color:
  * select-filled-primary-border-color:
  * select-filled-primary-icon-color:
@@ -322,6 +361,19 @@ export class NbSelectLabelComponent {
  * select-filled-danger-disabled-border-color:
  * select-filled-danger-disabled-icon-color:
  * select-filled-danger-disabled-text-color:
+ * select-filled-control-background-color:
+ * select-filled-control-border-color:
+ * select-filled-control-icon-color:
+ * select-filled-control-text-color:
+ * select-filled-control-placeholder-text-color:
+ * select-filled-control-focus-background-color:
+ * select-filled-control-focus-border-color:
+ * select-filled-control-hover-background-color:
+ * select-filled-control-hover-border-color:
+ * select-filled-control-disabled-background-color:
+ * select-filled-control-disabled-border-color:
+ * select-filled-control-disabled-icon-color:
+ * select-filled-control-disabled-text-color:
  * select-option-filled-tiny-padding:
  * select-group-option-filled-tiny-padding-start:
  * select-option-filled-small-padding:
@@ -332,29 +384,30 @@ export class NbSelectLabelComponent {
  * select-group-option-filled-large-padding-start:
  * select-option-filled-giant-padding:
  * select-group-option-filled-giant-padding-start:
- * select-options-list-filled-border-color:
+ * select-options-list-filled-basic-border-color:
  * select-options-list-filled-primary-border-color:
  * select-options-list-filled-success-border-color:
  * select-options-list-filled-info-border-color:
  * select-options-list-filled-warning-border-color:
  * select-options-list-filled-danger-border-color:
- * select-hero-background-color:
- * select-hero-border-color:
- * select-hero-border-style:
- * select-hero-border-width:
- * select-hero-icon-color:
- * select-hero-text-color:
- * select-hero-placeholder-text-color:
- * select-hero-focus-border-color:
- * select-hero-hover-border-color:
- * select-hero-disabled-background-color:
- * select-hero-disabled-icon-color:
- * select-hero-disabled-text-color:
+ * select-options-list-filled-control-border-color:
  * select-hero-tiny-padding:
  * select-hero-small-padding:
  * select-hero-medium-padding:
  * select-hero-large-padding:
  * select-hero-giant-padding:
+ * select-hero-basic-left-background-color:
+ * select-hero-basic-right-background-color:
+ * select-hero-basic-icon-color:
+ * select-hero-basic-text-color:
+ * select-hero-basic-placeholder-text-color:
+ * select-hero-basic-focus-left-background-color:
+ * select-hero-basic-focus-right-background-color:
+ * select-hero-basic-hover-left-background-color:
+ * select-hero-basic-hover-right-background-color:
+ * select-hero-basic-disabled-background-color:
+ * select-hero-basic-disabled-icon-color:
+ * select-hero-basic-disabled-text-color:
  * select-hero-primary-left-background-color:
  * select-hero-primary-right-background-color:
  * select-hero-primary-icon-color:
@@ -415,6 +468,18 @@ export class NbSelectLabelComponent {
  * select-hero-danger-disabled-background-color:
  * select-hero-danger-disabled-icon-color:
  * select-hero-danger-disabled-text-color:
+ * select-hero-control-left-background-color:
+ * select-hero-control-right-background-color:
+ * select-hero-control-icon-color:
+ * select-hero-control-text-color:
+ * select-hero-control-placeholder-text-color:
+ * select-hero-control-focus-left-background-color:
+ * select-hero-control-focus-right-background-color:
+ * select-hero-control-hover-left-background-color:
+ * select-hero-control-hover-right-background-color:
+ * select-hero-control-disabled-background-color:
+ * select-hero-control-disabled-icon-color:
+ * select-hero-control-disabled-text-color:
  * select-option-hero-tiny-padding:
  * select-group-option-hero-tiny-padding-start:
  * select-option-hero-small-padding:
@@ -425,12 +490,13 @@ export class NbSelectLabelComponent {
  * select-group-option-hero-large-padding-start:
  * select-option-hero-giant-padding:
  * select-group-option-hero-giant-padding-start:
- * select-options-list-hero-border-color:
+ * select-options-list-hero-basic-border-color:
  * select-options-list-hero-primary-border-color:
  * select-options-list-hero-success-border-color:
  * select-options-list-hero-info-border-color:
  * select-options-list-hero-warning-border-color:
  * select-options-list-hero-danger-border-color:
+ * select-options-list-hero-control-border-color:
  * */
 @Component({
   selector: 'nb-select',
@@ -456,9 +522,9 @@ export class NbSelectComponent<T> implements AfterViewInit, AfterContentInit, On
 
   /**
    * Select status (adds specific styles):
-   * `primary`, `info`, `success`, `warning`, `danger`
+   * `basic`, `primary`, `info`, `success`, `warning`, `danger`, `control`
    */
-  @Input() status: '' | NbComponentStatus = '';
+  @Input() status: NbComponentStatus = 'basic';
 
   /**
    * Select shapes: `rectangle` (default), `round`, `semi-round`
@@ -1059,6 +1125,14 @@ export class NbSelectComponent<T> implements AfterViewInit, AfterContentInit, On
   @HostBinding('class.status-danger')
   get danger(): boolean {
     return this.status === 'danger';
+  }
+  @HostBinding('class.status-basic')
+  get basic(): boolean {
+    return this.status === 'basic';
+  }
+  @HostBinding('class.status-control')
+  get control(): boolean {
+    return this.status === 'control';
   }
   @HostBinding('class.shape-rectangle')
   get rectangle(): boolean {

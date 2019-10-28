@@ -1,38 +1,7 @@
 @mixin select-filled {
   nb-select.appearance-filled .select-button {
-    background-color: nb-theme(select-filled-background-color);
-    border-color: nb-theme(select-filled-border-color);
     border-style: nb-theme(select-filled-border-style);
     border-width: nb-theme(select-filled-border-width);
-    color: nb-theme(select-filled-text-color);
-
-    &.placeholder {
-      color: nb-theme(select-filled-placeholder-text-color);
-    }
-
-    &:focus {
-      border-color: nb-theme(select-filled-focus-border-color);
-    }
-    &:hover {
-      border-color: nb-theme(select-filled-hover-border-color);
-    }
-    &[disabled] {
-      color: nb-theme(select-filled-disabled-text-color);
-      background-color: nb-theme(select-filled-disabled-background-color);
-      border-color: nb-theme(select-filled-disabled-border-color);
-
-      nb-icon {
-        color: nb-theme(select-filled-disabled-icon-color);
-      }
-    }
-
-    nb-icon {
-      color: nb-theme(select-filled-icon-color);
-    }
-  }
-
-  .options-list-container.appearance-filled {
-    border-color: nb-theme(select-options-list-filled-border-color);
   }
 
   @each $size in nb-get-sizes() {
@@ -68,6 +37,7 @@
         background-color: nb-theme(select-filled-#{$status}-hover-background-color);
         border-color: nb-theme(select-filled-#{$status}-hover-border-color);
       }
+
       &[disabled] {
         background-color: nb-theme(select-filled-#{$status}-disabled-background-color);
         border-color: nb-theme(select-filled-#{$status}-disabled-border-color);
