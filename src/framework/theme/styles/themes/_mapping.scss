@@ -1328,23 +1328,34 @@ $eva-mapping: (
   progress-bar-giant-text-font-weight: text-subtitle-font-weight,
   progress-bar-giant-text-line-height: text-subtitle-line-height,
 
+  progress-bar-basic-background-color: background-basic-color-2,
+  progress-bar-basic-filled-background-color: background-basic-color-4,
+  progress-bar-basic-text-color: text-basic-color,
+
   progress-bar-primary-background-color: background-basic-color-3,
   progress-bar-primary-filled-background-color: color-primary-default,
   progress-bar-primary-text-color: text-control-color,
+
   progress-bar-success-background-color: background-basic-color-3,
   progress-bar-success-filled-background-color: color-success-default,
   progress-bar-success-text-color: text-control-color,
+
   progress-bar-info-background-color: background-basic-color-3,
   progress-bar-info-filled-background-color: color-info-default,
   progress-bar-info-text-color: text-control-color,
+
   progress-bar-warning-background-color: background-basic-color-3,
   progress-bar-warning-filled-background-color: color-warning-default,
   progress-bar-warning-text-color: text-control-color,
+
   progress-bar-danger-background-color: background-basic-color-3,
   progress-bar-danger-filled-background-color: color-danger-default,
   progress-bar-danger-text-color: text-control-color,
 
-  alert-background-color: background-basic-color-2,
+  progress-bar-control-background-color: background-basic-color-3,
+  progress-bar-control-filled-background-color: color-control-default,
+  progress-bar-control-text-color: color-basic-800,
+
   alert-border-radius: border-radius,
   alert-bottom-margin: 1.5rem,
   alert-padding: 1rem 1.125rem,
