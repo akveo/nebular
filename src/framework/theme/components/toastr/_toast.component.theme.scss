@@ -6,20 +6,11 @@
 
 @mixin nb-toast-theme() {
   nb-toast {
-    background-color: nb-theme(toastr-background-color);
-    border-color: nb-theme(toastr-border-color);
     border-style: nb-theme(toastr-border-style);
     border-width: nb-theme(toastr-border-width);
     border-radius: nb-theme(toastr-border-radius);
     padding: nb-theme(toastr-padding);
     box-shadow: nb-theme(toastr-shadow);
-
-    color: nb-theme(toastr-text-color);
-
-    &.destroy-by-click:hover {
-      background: nb-theme(toastr-destroyable-hover-background-color);
-      border-color: nb-theme(toastr-destroyable-hover-border-color);
-    }
 
     .title {
       font-family: nb-theme(toastr-title-text-font-family);

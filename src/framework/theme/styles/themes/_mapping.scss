@@ -441,15 +441,12 @@ $eva-mapping: (
   smart-table-paging-page-focus-border-color: button-outline-primary-focus-border-color,
   smart-table-paging-page-focus-text-color: button-outline-primary-focus-text-color,
 
-  toastr-background-color: background-basic-color-1,
-  toastr-border-color: border-basic-color-3,
   toastr-border-style: solid,
   toastr-border-width: 1px,
   toastr-border-radius: border-radius,
   toastr-padding: 1rem,
   toastr-shadow: shadow,
 
-  toastr-text-color: text-basic-color,
   toastr-text-font-family: text-paragraph-2-font-family,
   toastr-text-font-size: text-paragraph-2-font-size,
   toastr-text-font-weight: text-paragraph-2-font-weight,
@@ -459,8 +456,13 @@ $eva-mapping: (
   toastr-title-text-font-weight: text-subtitle-font-weight,
   toastr-title-text-line-height: text-subtitle-line-height,
 
-  toastr-destroyable-hover-background-color: background-basic-color-1,
-  toastr-destroyable-hover-border-color: border-basic-color-3,
+  toastr-basic-background-color: background-basic-color-1,
+  toastr-basic-border-color: border-basic-color-3,
+  toastr-basic-text-color: text-basic-color,
+  toastr-icon-basic-background-color: background-basic-color-1,
+  toastr-icon-basic-color: text-basic-color,
+  toastr-destroyable-hover-basic-background-color: background-basic-color-1,
+  toastr-destroyable-hover-basic-border-color: border-basic-color-3,
 
   toastr-primary-background-color: color-primary-default,
   toastr-primary-border-color: color-primary-default,
@@ -501,6 +503,14 @@ $eva-mapping: (
   toastr-icon-danger-color: color-danger-default,
   toastr-destroyable-hover-danger-background-color: color-danger-hover,
   toastr-destroyable-hover-danger-border-color: color-danger-hover,
+
+  toastr-control-background-color: color-control-default,
+  toastr-control-border-color: color-control-default,
+  toastr-control-text-color: color-basic-800,
+  toastr-icon-control-background-color: color-control-default,
+  toastr-icon-control-color: color-basic-800,
+  toastr-destroyable-hover-control-background-color: color-control-hover,
+  toastr-destroyable-hover-control-border-color: color-control-hover,
 
   button-cursor: pointer,
   button-outline-width: outline-width,

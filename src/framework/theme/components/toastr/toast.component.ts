@@ -14,14 +14,11 @@ import { NbIconConfig } from '../icon/icon.component';
  *
  * @styles
  *
- * toastr-background-color:
- * toastr-border-color:
  * toastr-border-style:
  * toastr-border-width:
  * toastr-border-radius:
  * toastr-padding:
  * toastr-shadow:
- * toastr-text-color:
  * toastr-text-font-family:
  * toastr-text-font-size:
  * toastr-text-font-weight:
@@ -30,8 +27,13 @@ import { NbIconConfig } from '../icon/icon.component';
  * toastr-title-text-font-size:
  * toastr-title-text-font-weight:
  * toastr-title-text-line-height:
- * toastr-destroyable-hover-background-color:
- * toastr-destroyable-hover-border-color:
+ * toastr-basic-background-color:
+ * toastr-basic-border-color:
+ * toastr-basic-text-color:
+ * toastr-icon-basic-background-color:
+ * toastr-icon-basic-color:
+ * toastr-destroyable-hover-basic-background-color:
+ * toastr-destroyable-hover-basic-border-color:
  * toastr-primary-background-color:
  * toastr-primary-border-color:
  * toastr-primary-text-color:
@@ -67,6 +69,13 @@ import { NbIconConfig } from '../icon/icon.component';
  * toastr-icon-danger-color:
  * toastr-destroyable-hover-danger-background-color:
  * toastr-destroyable-hover-danger-border-color:
+ * toastr-control-background-color:
+ * toastr-control-border-color:
+ * toastr-control-text-color:
+ * toastr-icon-control-background-color:
+ * toastr-icon-control-color:
+ * toastr-destroyable-hover-control-background-color:
+ * toastr-destroyable-hover-control-border-color:
  * */
 @Component({
   selector: 'nb-toast',
@@ -104,6 +113,16 @@ export class NbToastComponent {
     return this.toast.config.status === 'danger';
   }
 
+  @HostBinding('class.status-basic')
+  get basic(): boolean {
+    return this.toast.config.status === 'basic';
+  }
+
+  @HostBinding('class.status-control')
+  get control(): boolean {
+    return this.toast.config.status === 'control';
+  }
+
   @HostBinding('class.destroy-by-click')
   get destroyByClick(): boolean {
     return this.toast.config.destroyByClick;
@@ -111,7 +130,12 @@ export class NbToastComponent {
 
   @HostBinding('class.has-icon')
   get hasIcon(): boolean {
-    return this.toast.config.hasIcon && !!this.toast.config.status;
+    const { icon } = this.toast.config;
+    if (typeof icon === 'string') {
+      return true;
+    }
+
+    return !!(icon && (icon as NbIconConfig).icon);
   }
 
   @HostBinding('class.custom-icon')
