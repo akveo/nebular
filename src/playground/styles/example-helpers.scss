@@ -59,4 +59,10 @@
     background: nb-theme(background-basic-color-4);
     color: nb-theme(color-basic-800);
   }
+
+  .control-status-example {
+    background-color: nb-theme(color-basic-800);
+    border-radius: nb-theme(card-border-radius);
+    padding: 1rem;
+  }
 }

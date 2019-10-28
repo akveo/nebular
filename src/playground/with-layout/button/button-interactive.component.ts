@@ -8,10 +8,10 @@ import { NbButtonAppearance, NbComponentStatus, NbComponentShape, NbComponentSiz
 export class ButtonInteractiveComponent {
   appearances: NbButtonAppearance[] = [ 'filled', 'outline', 'ghost', 'hero' ];
   shapes: NbComponentShape[] = [ 'rectangle', 'semi-round', 'round' ];
-  statuses: NbComponentStatus[] = [ 'primary', 'success', 'info', 'warning', 'danger' ];
+  statuses: NbComponentStatus[] = [ 'basic', 'primary', 'success', 'info', 'warning', 'danger', 'control' ];
   sizes: NbComponentSize[] = [ 'tiny', 'small', 'medium', 'large', 'giant' ];
 
   selectedShape: NbComponentShape = 'rectangle';
   selectedSize: NbComponentSize = 'medium';
-  enableAll: boolean = false;
+  showDisabledRow = true;
 }

@@ -251,7 +251,7 @@
         color: nb-theme(button-filled-#{$status}-text-color);
       }
       .btn-outline-#{$status} {
-        background-color: nb-theme(button-outline-background-color);
+        background-color: nb-theme(button-outline-#{$status}-background-color);
         border-color: nb-theme(button-outline-#{$status}-border-color);
         color: nb-theme(button-outline-#{$status}-text-color);
       }
