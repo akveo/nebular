@@ -115,7 +115,7 @@ export class NbIconComponent implements NbIconConfig, OnChanges, OnInit {
   protected prevClasses = [];
 
   @HostBinding('innerHtml')
-  html: SafeHtml;
+  html: SafeHtml = '';
 
   @HostBinding('class.status-primary')
   get primary() {
