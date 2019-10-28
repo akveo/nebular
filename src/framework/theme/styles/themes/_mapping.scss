@@ -1462,25 +1462,39 @@ $eva-mapping: (
   chat-message-file-text-color: text-hint-color,
   chat-message-file-background-color: transparent,
 
-  spinner-background-color: rgba(237, 240, 245, 0.5), // color-basic-200 with 0.5 opacity
-  spinner-circle-filled-color: background-basic-color-1,
-  spinner-circle-empty-color: transparent,
   spinner-text-color: text-basic-color,
-  spinner-text-font-family: text-paragraph-font-family,
-  spinner-text-font-size: text-paragraph-font-size,
-  spinner-text-font-weight: text-paragraph-font-weight,
-  spinner-text-line-height: text-paragraph-line-height,
+  spinner-text-font-family: text-button-font-family,
+  spinner-text-font-size: text-button-medium-font-size,
+  spinner-text-font-weight: text-button-font-weight,
+  spinner-text-line-height: text-button-medium-line-height,
 
+  spinner-basic-background-color: color-basic-transparent-200,
+  spinner-basic-circle-filled-color: text-hint-color,
+  spinner-basic-circle-empty-color: transparent,
+
+  spinner-primary-background-color: color-basic-transparent-200,
   spinner-primary-circle-filled-color: color-primary-default,
   spinner-primary-circle-empty-color: transparent,
+
+  spinner-info-background-color: color-basic-transparent-200,
   spinner-info-circle-filled-color: color-info-default,
   spinner-info-circle-empty-color: transparent,
+
+  spinner-success-background-color: color-basic-transparent-200,
   spinner-success-circle-filled-color: color-success-default,
   spinner-success-circle-empty-color: transparent,
+
+  spinner-warning-background-color: color-basic-transparent-200,
   spinner-warning-circle-filled-color: color-warning-default,
   spinner-warning-circle-empty-color: transparent,
+
+  spinner-danger-background-color: color-basic-transparent-200,
   spinner-danger-circle-filled-color: color-danger-default,
   spinner-danger-circle-empty-color: transparent,
+
+  spinner-control-background-color: color-basic-control-transparent-200,
+  spinner-control-circle-filled-color: color-control-default,
+  spinner-control-circle-empty-color: transparent,
 
   spinner-height-tiny: 1.5rem,
   spinner-height-small: 1.75rem,

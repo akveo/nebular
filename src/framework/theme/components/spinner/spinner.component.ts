@@ -14,24 +14,32 @@ import { NbComponentStatus } from '../component-status';
  *
  * @styles
  *
- * spinner-background-color:
- * spinner-circle-filled-color:
- * spinner-circle-empty-color:
  * spinner-text-color:
  * spinner-text-font-family:
  * spinner-text-font-size:
  * spinner-text-font-weight:
  * spinner-text-line-height:
+ * spinner-basic-background-color:
+ * spinner-basic-circle-filled-color:
+ * spinner-basic-circle-empty-color:
+ * spinner-primary-background-color:
  * spinner-primary-circle-filled-color:
  * spinner-primary-circle-empty-color:
+ * spinner-info-background-color:
  * spinner-info-circle-filled-color:
  * spinner-info-circle-empty-color:
+ * spinner-success-background-color:
  * spinner-success-circle-filled-color:
  * spinner-success-circle-empty-color:
+ * spinner-warning-background-color:
  * spinner-warning-circle-filled-color:
  * spinner-warning-circle-empty-color:
+ * spinner-danger-background-color:
  * spinner-danger-circle-filled-color:
  * spinner-danger-circle-empty-color:
+ * spinner-control-background-color:
+ * spinner-control-circle-filled-color:
+ * spinner-control-circle-empty-color:
  * spinner-height-tiny:
  * spinner-height-small:
  * spinner-height-medium:
@@ -65,10 +73,10 @@ export class NbSpinnerComponent {
 
   /**
    * Spinner status (adds specific styles):
-   * primary, info, success, warning, danger
+   * `basic`, `primary`, `info`, `success`, `warning`, `danger`, `control`.
    */
   @Input()
-  status: '' | NbComponentStatus;
+  status: NbComponentStatus = 'basic';
 
   @HostBinding('class.size-tiny')
   get tiny() {
@@ -118,5 +126,15 @@ export class NbSpinnerComponent {
   @HostBinding('class.status-danger')
   get danger() {
     return this.status === 'danger';
+  }
+
+  @HostBinding('class.status-basic')
+  get basic() {
+    return this.status === 'basic';
+  }
+
+  @HostBinding('class.status-control')
+  get control() {
+    return this.status === 'control';
   }
 }

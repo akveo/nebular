@@ -75,9 +75,10 @@ export class NbSpinnerDirective implements OnInit {
   @Input('nbSpinnerMessage') spinnerMessage: string;
 
   /**
-   * Spinner status color primary, info, success, warning, danger
+   * Spinner status color
+   * `basic`, `primary`, `info`, `success`, `warning`, `danger`, `control`.
    */
-  @Input('nbSpinnerStatus') spinnerStatus: '' | NbComponentStatus;
+  @Input('nbSpinnerStatus') spinnerStatus: NbComponentStatus = 'basic';
 
   /**
    * Spinner size. Possible values: `tiny`, `small`, `medium` (default), `large`, `giant`
