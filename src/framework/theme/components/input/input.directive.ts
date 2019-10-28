@@ -6,7 +6,7 @@
 
 import { Directive, Input, HostBinding } from '@angular/core';
 
-import { convertToBoolProperty } from '../helpers';
+import { convertToBoolProperty, emptyStatusWarning } from '../helpers';
 import { NbComponentSize } from '../component-size';
 import { NbComponentShape } from '../component-shape';
 import { NbComponentStatus } from '../component-status';
@@ -56,37 +56,72 @@ import { NbComponentStatus } from '../component-status';
  *
  * @styles
  *
- * input-background-color:
  * input-border-style:
  * input-border-width:
  * input-outline-color:
  * input-outline-width:
- * input-placeholder-text-color:
  * input-placeholder-text-font-family:
- * input-text-color:
  * input-text-font-family:
- * input-border-color:
- * input-focus-border-color:
- * input-hover-border-color:
  * input-disabled-border-color:
  * input-disabled-background-color:
  * input-disabled-text-color:
  * input-disabled-placeholder-text-color:
+ * input-basic-text-color:
+ * input-basic-placeholder-text-color:
+ * input-basic-background-color:
+ * input-basic-border-color:
+ * input-basic-focus-background-color:
+ * input-basic-focus-border-color:
+ * input-basic-hover-background-color:
+ * input-basic-hover-border-color:
+ * input-primary-text-color:
+ * input-primary-placeholder-text-color:
+ * input-primary-background-color:
  * input-primary-border-color:
+ * input-primary-focus-background-color:
  * input-primary-focus-border-color:
+ * input-primary-hover-background-color:
  * input-primary-hover-border-color:
+ * input-success-text-color:
+ * input-success-placeholder-text-color:
+ * input-success-background-color:
  * input-success-border-color:
+ * input-success-focus-background-color:
  * input-success-focus-border-color:
+ * input-success-hover-background-color:
  * input-success-hover-border-color:
+ * input-info-text-color:
+ * input-info-placeholder-text-color:
+ * input-info-background-color:
  * input-info-border-color:
+ * input-info-focus-background-color:
  * input-info-focus-border-color:
+ * input-info-hover-background-color:
  * input-info-hover-border-color:
+ * input-warning-text-color:
+ * input-warning-placeholder-text-color:
+ * input-warning-background-color:
  * input-warning-border-color:
+ * input-warning-focus-background-color:
  * input-warning-focus-border-color:
+ * input-warning-hover-background-color:
  * input-warning-hover-border-color:
+ * input-danger-text-color:
+ * input-danger-placeholder-text-color:
+ * input-danger-background-color:
  * input-danger-border-color:
+ * input-danger-focus-background-color:
  * input-danger-focus-border-color:
+ * input-danger-hover-background-color:
  * input-danger-hover-border-color:
+ * input-control-text-color:
+ * input-control-placeholder-text-color:
+ * input-control-background-color:
+ * input-control-border-color:
+ * input-control-focus-background-color:
+ * input-control-focus-border-color:
+ * input-control-hover-background-color:
+ * input-control-hover-border-color:
  * input-rectangle-border-radius:
  * input-semi-round-border-radius:
  * input-round-border-radius:
@@ -144,10 +179,21 @@ export class NbInputDirective {
 
   /**
    * Field status (adds specific styles):
-   * `primary`, `info`, `success`, `warning`, `danger`
+   * `basic`, `primary`, `info`, `success`, `warning`, `danger`, `control`
    */
   @Input()
-  status: '' | NbComponentStatus = '';
+  get status(): NbComponentStatus {
+    return this._status;
+  }
+  set status(value: NbComponentStatus) {
+    if ((value as string) === '') {
+      emptyStatusWarning('NbInput');
+      this._status = 'basic';
+    } else {
+      this._status = value;
+    }
+  }
+  protected _status: NbComponentStatus = 'basic';
 
   /**
    * Field shapes modifications. Possible values: `rectangle` (default), `round`, `semi-round`.
@@ -216,6 +262,16 @@ export class NbInputDirective {
   @HostBinding('class.status-danger')
   get danger() {
     return this.status === 'danger';
+  }
+
+  @HostBinding('class.status-basic')
+  get basic() {
+    return this.status === 'basic';
+  }
+
+  @HostBinding('class.status-control')
+  get control() {
+    return this.status === 'control';
   }
 
   @HostBinding('class.shape-rectangle')

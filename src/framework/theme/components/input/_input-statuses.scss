@@ -7,12 +7,21 @@
 @mixin input-statuses() {
   @each $status in nb-get-statuses() {
     &:enabled.status-#{$status} {
+      background-color: nb-theme(input-#{$status}-background-color);
       border-color: nb-theme(input-#{$status}-border-color);
+      color: nb-theme(input-#{$status}-text-color);
+
+      &::placeholder {
+        color: nb-theme(input-#{$status}-placeholder-text-color);
+      }
+
       &:focus {
-        border-color: nb-theme(input-#{$status}-hover-border-color);
+        background-color: nb-theme(input-#{$status}-focus-background-color);
+        border-color: nb-theme(input-#{$status}-focus-border-color);
       }
       &:hover {
-        border-color: nb-theme(input-#{$status}-focus-border-color);
+        background-color: nb-theme(input-#{$status}-hover-background-color);
+        border-color: nb-theme(input-#{$status}-hover-border-color);
       }
     }
   }

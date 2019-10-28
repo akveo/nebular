@@ -16,8 +16,12 @@ import { Component } from '@angular/core';
         <input type="text" nbInput fullWidth status="success" placeholder="Success">
         <input type="text" nbInput fullWidth status="warning" placeholder="Warning">
         <input type="text" nbInput fullWidth status="danger" placeholder="Danger">
+        <div class="control-status-example">
+          <input type="text" nbInput fullWidth status="control" placeholder="Control">
+        </div>
       </nb-card-body>
     </nb-card>
   `,
+  styleUrls: [`./input-colors.component.scss`],
 })
 export class InputColorsComponent {}
