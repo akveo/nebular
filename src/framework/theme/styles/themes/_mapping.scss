@@ -1288,6 +1288,8 @@ $eva-mapping: (
   badge-text-line-height: text-button-tiny-line-height,
   badge-padding: 0.25rem 0.4rem,
 
+  badge-basic-background-color: background-basic-color-2,
+  badge-basic-text-color: text-basic-color,
   badge-primary-background-color: color-primary-default,
   badge-primary-text-color: text-control-color,
   badge-success-background-color: color-success-default,
@@ -1298,6 +1300,8 @@ $eva-mapping: (
   badge-warning-text-color: text-control-color,
   badge-danger-background-color: color-danger-default,
   badge-danger-text-color: text-control-color,
+  badge-control-background-color: color-control-default,
+  badge-control-text-color: color-basic-800,
 
   progress-bar-animation-duration: 400ms,
   progress-bar-border-radius: border-radius,
