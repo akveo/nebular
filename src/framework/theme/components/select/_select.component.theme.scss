@@ -15,7 +15,7 @@
       cursor: nb-theme(select-cursor);
 
       &.placeholder {
-        font-weight: nb-theme(select-placeholder-text-font-weight);
+        font-family: nb-theme(select-placeholder-text-font-family);
       }
       &:focus {
         @include nb-outline(nb-theme(select-outline-width), nb-theme(select-outline-color));
@@ -66,14 +66,19 @@
   nb-option,
   nb-option-group {
     font-family: nb-theme(select-text-font-family);
-    font-weight: nb-theme(select-text-font-weight);
   }
 
   @each $size in nb-get-sizes() {
     nb-select.size-#{$size} .select-button,
     .size-#{$size} nb-option {
       font-size: nb-theme(select-#{$size}-text-font-size);
+      font-weight: nb-theme(select-#{$size}-text-font-weight);
       line-height: nb-theme(select-#{$size}-text-line-height);
+    }
+
+    nb-select.size-#{$size} .select-button.placeholder {
+      font-size: nb-theme(select-#{$size}-placeholder-text-font-size);
+      font-weight: nb-theme(select-#{$size}-placeholder-text-font-weight);
     }
 
     nb-select.size-#{$size} .select-button.empty::before {

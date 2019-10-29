@@ -1716,8 +1716,7 @@ $eva-mapping: (
   select-outline-color: outline-color,
 
   select-text-font-family: text-subtitle-font-family,
-  select-text-font-weight: text-subtitle-font-weight,
-  select-placeholder-text-font-weight: text-paragraph-font-weight,
+  select-placeholder-text-font-family: text-paragraph-font-family,
 
   select-option-background-color: background-basic-color-1,
   select-option-text-color: text-basic-color,
@@ -1731,19 +1730,38 @@ $eva-mapping: (
   select-option-disabled-text-color: text-disabled-color,
 
   select-tiny-text-font-size: text-caption-2-font-size,
+  select-tiny-text-font-weight: text-caption-2-font-weight,
   select-tiny-text-line-height: text-caption-2-line-height,
+  select-tiny-placeholder-text-font-size: text-paragraph-font-size,
+  select-tiny-placeholder-text-font-weight: text-paragraph-font-weight,
   select-tiny-max-width: 20rem,
+
   select-small-text-font-size: text-subtitle-2-font-size,
+  select-small-text-font-weight: text-subtitle-2-font-weight,
   select-small-text-line-height: text-subtitle-2-line-height,
+  select-small-placeholder-text-font-size: text-paragraph-font-size,
+  select-small-placeholder-text-font-weight: text-paragraph-font-weight,
   select-small-max-width: 20rem,
-  select-medium-text-font-size: text-subtitle-2-font-size,
-  select-medium-text-line-height: text-subtitle-2-line-height,
+
+  select-medium-text-font-size: text-subtitle-font-size,
+  select-medium-text-font-weight: text-subtitle-font-weight,
+  select-medium-text-line-height: text-subtitle-line-height,
+  select-medium-placeholder-text-font-size: text-paragraph-font-size,
+  select-medium-placeholder-text-font-weight: text-paragraph-font-weight,
   select-medium-max-width: 20rem,
+
   select-large-text-font-size: text-subtitle-font-size,
+  select-large-text-font-weight: text-subtitle-font-weight,
   select-large-text-line-height: text-subtitle-line-height,
+  select-large-placeholder-text-font-size: text-paragraph-font-size,
+  select-large-placeholder-text-font-weight: text-paragraph-font-weight,
   select-large-max-width: 30rem,
+
   select-giant-text-font-size: text-heading-6-font-size,
+  select-giant-text-font-weight: text-heading-6-font-weight,
   select-giant-text-line-height: text-heading-6-line-height,
+  select-giant-placeholder-text-font-size: text-paragraph-font-size,
+  select-giant-placeholder-text-font-weight: text-paragraph-font-weight,
   select-giant-max-width: 30rem,
 
   select-rectangle-border-radius: border-radius,
