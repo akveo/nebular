@@ -178,10 +178,6 @@ export class NbSelectLabelComponent {
  * select-round-border-radius:
  * select-outline-border-style:
  * select-outline-border-width:
- * select-outline-disabled-background-color:
- * select-outline-disabled-border-color:
- * select-outline-disabled-icon-color:
- * select-outline-disabled-text-color:
  * select-outline-tiny-padding:
  * select-outline-small-padding:
  * select-outline-medium-padding:
@@ -192,57 +188,92 @@ export class NbSelectLabelComponent {
  * select-outline-basic-placeholder-text-color:
  * select-outline-basic-background-color:
  * select-outline-basic-border-color:
+ * select-outline-basic-focus-background-color:
  * select-outline-basic-focus-border-color:
+ * select-outline-basic-hover-background-color:
  * select-outline-basic-hover-border-color:
+ * select-outline-basic-disabled-background-color:
  * select-outline-basic-disabled-border-color:
+ * select-outline-basic-disabled-icon-color:
+ * select-outline-basic-disabled-text-color:
  * select-outline-primary-icon-color:
  * select-outline-primary-text-color:
  * select-outline-primary-placeholder-text-color:
  * select-outline-primary-background-color:
  * select-outline-primary-border-color:
+ * select-outline-primary-focus-background-color:
  * select-outline-primary-focus-border-color:
+ * select-outline-primary-hover-background-color:
  * select-outline-primary-hover-border-color:
+ * select-outline-primary-disabled-background-color:
  * select-outline-primary-disabled-border-color:
+ * select-outline-primary-disabled-icon-color:
+ * select-outline-primary-disabled-text-color:
  * select-outline-success-icon-color:
  * select-outline-success-text-color:
  * select-outline-success-placeholder-text-color:
  * select-outline-success-background-color:
  * select-outline-success-border-color:
+ * select-outline-success-focus-background-color:
  * select-outline-success-focus-border-color:
+ * select-outline-success-hover-background-color:
  * select-outline-success-hover-border-color:
+ * select-outline-success-disabled-background-color:
  * select-outline-success-disabled-border-color:
+ * select-outline-success-disabled-icon-color:
+ * select-outline-success-disabled-text-color:
  * select-outline-info-icon-color:
  * select-outline-info-text-color:
  * select-outline-info-placeholder-text-color:
  * select-outline-info-background-color:
  * select-outline-info-border-color:
+ * select-outline-info-focus-background-color:
  * select-outline-info-focus-border-color:
+ * select-outline-info-hover-background-color:
  * select-outline-info-hover-border-color:
+ * select-outline-info-disabled-background-color:
  * select-outline-info-disabled-border-color:
+ * select-outline-info-disabled-icon-color:
+ * select-outline-info-disabled-text-color:
  * select-outline-warning-icon-color:
  * select-outline-warning-text-color:
  * select-outline-warning-placeholder-text-color:
  * select-outline-warning-background-color:
  * select-outline-warning-border-color:
+ * select-outline-warning-focus-background-color:
  * select-outline-warning-focus-border-color:
+ * select-outline-warning-hover-background-color:
  * select-outline-warning-hover-border-color:
+ * select-outline-warning-disabled-background-color:
  * select-outline-warning-disabled-border-color:
+ * select-outline-warning-disabled-icon-color:
+ * select-outline-warning-disabled-text-color:
  * select-outline-danger-icon-color:
  * select-outline-danger-text-color:
  * select-outline-danger-placeholder-text-color:
  * select-outline-danger-background-color:
  * select-outline-danger-border-color:
+ * select-outline-danger-focus-background-color:
  * select-outline-danger-focus-border-color:
+ * select-outline-danger-hover-background-color:
  * select-outline-danger-hover-border-color:
+ * select-outline-danger-disabled-background-color:
  * select-outline-danger-disabled-border-color:
+ * select-outline-danger-disabled-icon-color:
+ * select-outline-danger-disabled-text-color:
  * select-outline-control-icon-color:
  * select-outline-control-text-color:
  * select-outline-control-placeholder-text-color:
  * select-outline-control-background-color:
  * select-outline-control-border-color:
+ * select-outline-control-focus-background-color:
  * select-outline-control-focus-border-color:
+ * select-outline-control-hover-background-color:
  * select-outline-control-hover-border-color:
+ * select-outline-control-disabled-background-color:
  * select-outline-control-disabled-border-color:
+ * select-outline-control-disabled-icon-color:
+ * select-outline-control-disabled-text-color:
  * select-option-outline-tiny-padding:
  * select-option-outline-small-padding:
  * select-option-outline-medium-padding:

@@ -11,20 +11,10 @@
       border-bottom-style: nb-theme(select-outline-adjacent-border-style);
       border-bottom-width: nb-theme(select-outline-adjacent-border-width);
     }
-
-    &[disabled] {
-      color: nb-theme(select-outline-disabled-text-color);
-      background-color: nb-theme(select-outline-disabled-background-color);
-      border-color: nb-theme(select-outline-disabled-border-color);
-
-      nb-icon {
-        color: nb-theme(select-outline-disabled-icon-color);
-      }
-    }
   }
 
   @each $status in nb-get-statuses() {
-    nb-select.appearance-outline.status-#{$status} .select-button:not([disabled]) {
+    nb-select.appearance-outline.status-#{$status} .select-button {
       background-color: nb-theme(select-outline-#{$status}-background-color);
       border-color: nb-theme(select-outline-#{$status}-border-color);
       color: nb-theme(select-outline-#{$status}-text-color);
@@ -37,13 +27,22 @@
       }
 
       &:focus {
+        background-color: nb-theme(select-outline-#{$status}-focus-background-color);
         border-color: nb-theme(select-outline-#{$status}-focus-border-color);
       }
       &:hover {
+        background-color: nb-theme(select-outline-#{$status}-hover-background-color);
         border-color: nb-theme(select-outline-#{$status}-hover-border-color);
       }
+
       &[disabled] {
+        color: nb-theme(select-outline-#{$status}-disabled-text-color);
+        background-color: nb-theme(select-outline-#{$status}-disabled-background-color);
         border-color: nb-theme(select-outline-#{$status}-disabled-border-color);
+
+        nb-icon {
+          color: nb-theme(select-outline-#{$status}-disabled-icon-color);
+        }
       }
 
       &.bottom,
