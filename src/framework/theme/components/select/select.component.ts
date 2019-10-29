@@ -111,7 +111,7 @@ export class NbSelectLabelComponent {
  *
  * @stacked-example(Custom label, select/select-label.component)
  *
- * Default `nb-select` size is `medium` and status color is `basic`.
+ * Default `nb-select` size is `medium` and status is `basic`.
  * Select is available in multiple colors using `status` property:
  *
  * @stacked-example(Select statuses, select/select-status.component)

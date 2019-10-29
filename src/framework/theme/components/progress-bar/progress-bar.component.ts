@@ -113,9 +113,9 @@ export class NbProgressBarComponent {
   @Input() value: number = 0;
 
   /**
-   * Progress bar background (`basic` (default), `primary`, `info`, `success`, `warning`, `danger`, `control`)
+   * Progress bar background (`basic`, `primary` (default), `info`, `success`, `warning`, `danger`, `control`)
    */
-  @Input() status: NbComponentStatus = 'basic';
+  @Input() status: NbComponentStatus = 'primary';
 
   /**
    * Progress bar size (`tiny`, `small`, `medium` (default), `large`, `giant`)

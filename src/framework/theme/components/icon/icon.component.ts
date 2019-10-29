@@ -174,7 +174,7 @@ export class NbIconComponent implements NbIconConfig, OnChanges, OnInit {
    * Icon status (adds specific styles):
    * `basic`, `primary`, `info`, `success`, `warning`, `danger`, `control`
    */
-  @Input() status: NbComponentStatus;
+  @Input() status: NbComponentStatus = 'basic';
 
   /**
    * Sets all icon configurable properties via config object.

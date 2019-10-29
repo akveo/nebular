@@ -30,7 +30,7 @@ export class NbToastrConfig {
   /**
    * Status chooses color scheme for the toast.
    * */
-  status: NbComponentStatus = 'basic';
+  status: NbComponentStatus = 'primary';
   /**
    * Duration is timeout between toast appears and disappears.
    * */
@@ -83,7 +83,7 @@ export class NbToastrConfig {
   constructor(config: Partial<NbToastrConfig>) {
     if ((config.status as string) === '') {
       emptyStatusWarning('NbToastr');
-      config.status = 'basic';
+      config.status = 'primary';
     }
 
     this.patchIcon(config);
@@ -93,7 +93,7 @@ export class NbToastrConfig {
   protected patchIcon(config: Partial<NbToastrConfig>) {
     if (!('icon' in config)) {
       config.icon = {
-        icon: this.icons[config.status || 'basic'],
+        icon: this.icons[config.status || 'primary'],
         pack: 'nebular-essentials',
       };
     }
