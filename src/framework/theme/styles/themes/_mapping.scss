@@ -34,6 +34,8 @@ $eva-mapping: (
   card-header-text-font-weight: text-subtitle-font-weight,
   card-header-text-line-height: text-subtitle-line-height,
 
+  card-header-basic-background-color: background-basic-color-2,
+  card-header-basic-text-color: text-basic-color,
   card-header-primary-background-color: color-primary-default,
   card-header-primary-text-color: text-control-color,
   card-header-info-background-color: color-info-default,
@@ -44,6 +46,8 @@ $eva-mapping: (
   card-header-warning-text-color: text-control-color,
   card-header-danger-background-color: color-danger-default,
   card-header-danger-text-color: text-control-color,
+  card-header-control-background-color: color-control-default,
+  card-header-control-text-color: color-basic-800,
 
   card-height-tiny: 13.5rem,
   card-height-small: 21.1875rem,

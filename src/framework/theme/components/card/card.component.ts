@@ -20,6 +20,8 @@ import { NbComponentStatus } from '../component-status';
  * card-header-text-font-size:
  * card-header-text-font-weight:
  * card-header-text-line-height:
+ * card-header-basic-background-color:
+ * card-header-basic-text-color:
  * card-header-primary-background-color:
  * card-header-primary-text-color:
  * card-header-info-background-color:
@@ -30,6 +32,8 @@ import { NbComponentStatus } from '../component-status';
  * card-header-warning-text-color:
  * card-header-danger-background-color:
  * card-header-danger-text-color:
+ * card-header-control-background-color:
+ * card-header-control-text-color:
  */
 @Component({
   selector: 'nb-card-header',
@@ -167,29 +171,17 @@ export class NbCardComponent {
 
   /**
    * Card status:
-   * primary, info, success, warning, danger
+   * `basic`, `primary`, `info`, `success`, `warning`, `danger`, `control`
    */
   @Input()
-  get status(): '' | NbComponentStatus {
-    return this._status;
-  }
-  set status(value: '' | NbComponentStatus) {
-    this._status = value;
-  }
-  _status: '' | NbComponentStatus = '';
+  status: '' | NbComponentStatus = '';
 
   /**
    * Card accent (color of the top border):
-   * primary, info, success, warning, danger
+   * `basic`, `primary`, `info`, `success`, `warning`, `danger`, `control`
    */
   @Input()
-  get accent(): '' | NbComponentStatus {
-    return this._accent;
-  }
-  set accent(value: '' | NbComponentStatus) {
-    this._accent = value;
-  }
-  _accent: '' | NbComponentStatus;
+  accent: '' | NbComponentStatus = '';
 
   @HostBinding('class.size-tiny')
   get tiny() {
@@ -241,6 +233,16 @@ export class NbCardComponent {
     return this.status === 'danger';
   }
 
+  @HostBinding('class.status-basic')
+  get basic() {
+    return this.status === 'basic';
+  }
+
+  @HostBinding('class.status-control')
+  get control() {
+    return this.status === 'control';
+  }
+
   @HostBinding('class.accent')
   get hasAccent() {
     return this.accent;
@@ -269,5 +271,15 @@ export class NbCardComponent {
   @HostBinding('class.accent-danger')
   get dangerAccent() {
     return this.accent === 'danger';
+  }
+
+  @HostBinding('class.accent-basic')
+  get basicAccent() {
+    return this.accent === 'basic';
+  }
+
+  @HostBinding('class.accent-control')
+  get controlAccent() {
+    return this.accent === 'control';
   }
 }
