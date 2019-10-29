@@ -146,8 +146,7 @@ export class NbSelectLabelComponent {
  * select-outline-width:
  * select-outline-color:
  * select-text-font-family:
- * select-text-font-weight:
- * select-placeholder-text-font-weight:
+ * select-placeholder-text-font-family:
  * select-option-background-color:
  * select-option-text-color:
  * select-option-selected-background-color:
@@ -159,19 +158,34 @@ export class NbSelectLabelComponent {
  * select-option-disabled-background-color:
  * select-option-disabled-text-color:
  * select-tiny-text-font-size:
+ * select-tiny-text-font-weight:
  * select-tiny-text-line-height:
+ * select-tiny-placeholder-text-font-size:
+ * select-tiny-placeholder-text-font-weight:
  * select-tiny-max-width:
  * select-small-text-font-size:
+ * select-small-text-font-weight:
  * select-small-text-line-height:
+ * select-small-placeholder-text-font-size:
+ * select-small-placeholder-text-font-weight:
  * select-small-max-width:
  * select-medium-text-font-size:
+ * select-medium-text-font-weight:
  * select-medium-text-line-height:
+ * select-medium-placeholder-text-font-size:
+ * select-medium-placeholder-text-font-weight:
  * select-medium-max-width:
  * select-large-text-font-size:
+ * select-large-text-font-weight:
  * select-large-text-line-height:
+ * select-large-placeholder-text-font-size:
+ * select-large-placeholder-text-font-weight:
  * select-large-max-width:
  * select-giant-text-font-size:
+ * select-giant-text-font-weight:
  * select-giant-text-line-height:
+ * select-giant-placeholder-text-font-size:
+ * select-giant-placeholder-text-font-weight:
  * select-giant-max-width:
  * select-rectangle-border-radius:
  * select-semi-round-border-radius:
