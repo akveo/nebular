@@ -97,7 +97,7 @@
     "bootstrap": "4.0.0",
     "colors.js": "1.2.4",
     "core-js": "2.5.7",
-    "date-fns": ">=2.0.0-alpha.16 <=2.0.0-alpha.27",
+    "date-fns": "2.6.0",
     "docsearch.js": "^2.5.2",
     "eva-icons": "^1.1.1",
     "gulp-bump": "2.7.0",

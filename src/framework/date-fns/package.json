@@ -22,7 +22,7 @@
   ],
   "peerDependencies": {
     "@nebular/theme": "4.4.0",
-    "date-fns": ">=2.0.0-alpha.16 <=2.0.0-alpha.27"
+    "date-fns": "2.6.0"
   },
   "sideEffects": false
 }
