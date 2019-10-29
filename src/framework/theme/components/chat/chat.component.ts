@@ -282,4 +282,14 @@ export class NbChatComponent implements OnChanges, AfterContentInit, AfterViewIn
   get danger(): boolean {
     return this.status === 'danger';
   }
+
+  @HostBinding('class.status-basic')
+  get basic(): boolean {
+    return this.status === 'basic';
+  }
+
+  @HostBinding('class.status-control')
+  get control(): boolean {
+    return this.status === 'control';
+  }
 }

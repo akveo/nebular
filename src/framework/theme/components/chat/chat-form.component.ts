@@ -65,17 +65,13 @@ import { NbComponentStatus } from '../component-status';
       <input nbInput
              fullWidth
              [status]="getInputStatus()"
-             (focus)="inputFocus = true"
-             (blur)="inputFocus = false"
-             (mouseenter)="inputHover = true"
-             (mouseleave)="inputHover = false"
              [(ngModel)]="message"
              [class.with-button]="showButton"
              type="text"
              placeholder="{{ fileOver ? 'Drop file to send' : 'Type a message' }}"
              (keyup.enter)="sendMessage()">
       <button nbButton
-              [status]="status || 'primary'"
+              [status]="getButtonStatus()"
               *ngIf="showButton"
               [class.with-icon]="!buttonTitle"
               (click)="sendMessage()"
@@ -89,9 +85,7 @@ import { NbComponentStatus } from '../component-status';
 })
 export class NbChatFormComponent {
 
-  status: NbComponentStatus | '' = '';
-  inputFocus: boolean = false;
-  inputHover: boolean = false;
+  status: NbComponentStatus = 'basic';
 
   droppedFiles: any[] = [];
   imgDropTypes = ['image/png', 'image/jpeg', 'image/gif'];
@@ -201,15 +195,23 @@ export class NbChatFormComponent {
     }
   }
 
-  getInputStatus(): NbComponentStatus | '' {
+  getInputStatus(): NbComponentStatus {
     if (this.fileOver) {
-      return this.status || 'primary';
+      return this.getHighlightStatus();
     }
 
-    if (this.inputFocus || this.inputHover) {
-      return this.status;
+    return 'basic';
+  }
+
+  getButtonStatus(): NbComponentStatus {
+    return this.getHighlightStatus();
+  }
+
+  protected getHighlightStatus(): NbComponentStatus {
+    if (this.status === 'basic' || this.status === 'control') {
+      return 'primary';
     }
 
-    return '';
+    return this.status;
   }
 }

@@ -1463,6 +1463,8 @@ $eva-mapping: (
   chat-large-height: 36rem,
   chat-giant-height: 43.5rem,
 
+  chat-basic-background-color: background-basic-color-2,
+  chat-basic-text-color: text-basic-color,
   chat-primary-background-color: color-primary-default,
   chat-primary-text-color: text-control-color,
   chat-success-background-color: color-success-default,
@@ -1473,6 +1475,8 @@ $eva-mapping: (
   chat-warning-text-color: text-control-color,
   chat-danger-background-color: color-danger-default,
   chat-danger-text-color: text-control-color,
+  chat-control-background-color: color-control-default,
+  chat-control-text-color: color-basic-800,
 
   chat-divider-color: divider-color,
   chat-divider-style: divider-style,
