@@ -18,7 +18,7 @@
     }
 
     .native-input:enabled:focus + .outer-circle {
-      box-shadow: 0 0 0 nb-theme(radio-outline-width) nb-theme(radio-outline-color);
+      @include nb-outline(nb-theme(radio-outline-width), nb-theme(radio-outline-color));
     }
 
     .native-input:disabled {

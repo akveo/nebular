@@ -16,7 +16,7 @@
     }
 
     .native-input:enabled:focus + .toggle {
-      box-shadow: 0 0 0 nb-theme(toggle-outline-width) nb-theme(toggle-outline-color);
+      @include nb-outline(nb-theme(toggle-outline-width), nb-theme(toggle-outline-color));
     }
 
     .native-input:disabled {

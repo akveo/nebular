@@ -18,7 +18,7 @@
         font-weight: nb-theme(select-placeholder-text-font-weight);
       }
       &:focus {
-        box-shadow: 0 0 0 nb-theme(select-outline-width) nb-theme(select-outline-color);
+        @include nb-outline(nb-theme(select-outline-width), nb-theme(select-outline-color));
         outline: none;
       }
       &[disabled] {
