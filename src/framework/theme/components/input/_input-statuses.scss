@@ -6,7 +6,7 @@
 
 @mixin input-statuses() {
   @each $status in nb-get-statuses() {
-    &:enabled.status-#{$status} {
+    &.status-#{$status} {
       background-color: nb-theme(input-#{$status}-background-color);
       border-color: nb-theme(input-#{$status}-border-color);
       color: nb-theme(input-#{$status}-text-color);
@@ -22,6 +22,16 @@
       &:hover {
         background-color: nb-theme(input-#{$status}-hover-background-color);
         border-color: nb-theme(input-#{$status}-hover-border-color);
+      }
+
+      &:disabled {
+        background-color: nb-theme(input-#{$status}-disabled-background-color);
+        border-color: nb-theme(input-#{$status}-disabled-border-color);
+        color: nb-theme(input-#{$status}-disabled-text-color);
+
+        &::placeholder {
+          color: nb-theme(input-#{$status}-disabled-placeholder-text-color);
+        }
       }
     }
   }

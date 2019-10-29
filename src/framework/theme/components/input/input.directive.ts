@@ -62,10 +62,6 @@ import { NbComponentStatus } from '../component-status';
  * input-outline-width:
  * input-placeholder-text-font-family:
  * input-text-font-family:
- * input-disabled-border-color:
- * input-disabled-background-color:
- * input-disabled-text-color:
- * input-disabled-placeholder-text-color:
  * input-basic-text-color:
  * input-basic-placeholder-text-color:
  * input-basic-background-color:
@@ -74,6 +70,10 @@ import { NbComponentStatus } from '../component-status';
  * input-basic-focus-border-color:
  * input-basic-hover-background-color:
  * input-basic-hover-border-color:
+ * input-basic-disabled-background-color:
+ * input-basic-disabled-border-color:
+ * input-basic-disabled-text-color:
+ * input-basic-disabled-placeholder-text-color:
  * input-primary-text-color:
  * input-primary-placeholder-text-color:
  * input-primary-background-color:
@@ -82,6 +82,10 @@ import { NbComponentStatus } from '../component-status';
  * input-primary-focus-border-color:
  * input-primary-hover-background-color:
  * input-primary-hover-border-color:
+ * input-primary-disabled-background-color:
+ * input-primary-disabled-border-color:
+ * input-primary-disabled-text-color:
+ * input-primary-disabled-placeholder-text-color:
  * input-success-text-color:
  * input-success-placeholder-text-color:
  * input-success-background-color:
@@ -90,6 +94,10 @@ import { NbComponentStatus } from '../component-status';
  * input-success-focus-border-color:
  * input-success-hover-background-color:
  * input-success-hover-border-color:
+ * input-success-disabled-background-color:
+ * input-success-disabled-border-color:
+ * input-success-disabled-text-color:
+ * input-success-disabled-placeholder-text-color:
  * input-info-text-color:
  * input-info-placeholder-text-color:
  * input-info-background-color:
@@ -98,6 +106,10 @@ import { NbComponentStatus } from '../component-status';
  * input-info-focus-border-color:
  * input-info-hover-background-color:
  * input-info-hover-border-color:
+ * input-info-disabled-background-color:
+ * input-info-disabled-border-color:
+ * input-info-disabled-text-color:
+ * input-info-disabled-placeholder-text-color:
  * input-warning-text-color:
  * input-warning-placeholder-text-color:
  * input-warning-background-color:
@@ -106,6 +118,10 @@ import { NbComponentStatus } from '../component-status';
  * input-warning-focus-border-color:
  * input-warning-hover-background-color:
  * input-warning-hover-border-color:
+ * input-warning-disabled-background-color:
+ * input-warning-disabled-border-color:
+ * input-warning-disabled-text-color:
+ * input-warning-disabled-placeholder-text-color:
  * input-danger-text-color:
  * input-danger-placeholder-text-color:
  * input-danger-background-color:
@@ -114,6 +130,10 @@ import { NbComponentStatus } from '../component-status';
  * input-danger-focus-border-color:
  * input-danger-hover-background-color:
  * input-danger-hover-border-color:
+ * input-danger-disabled-background-color:
+ * input-danger-disabled-border-color:
+ * input-danger-disabled-text-color:
+ * input-danger-disabled-placeholder-text-color:
  * input-control-text-color:
  * input-control-placeholder-text-color:
  * input-control-background-color:
@@ -122,6 +142,10 @@ import { NbComponentStatus } from '../component-status';
  * input-control-focus-border-color:
  * input-control-hover-background-color:
  * input-control-hover-border-color:
+ * input-control-disabled-background-color:
+ * input-control-disabled-border-color:
+ * input-control-disabled-text-color:
+ * input-control-disabled-placeholder-text-color:
  * input-rectangle-border-radius:
  * input-semi-round-border-radius:
  * input-round-border-radius:

@@ -34,12 +34,12 @@
     }
 
     &:disabled {
-      background-color: nb-theme(input-disabled-background-color);
-      border-color: nb-theme(input-disabled-border-color);
-      color: nb-theme(input-disabled-text-color);
+      background-color: nb-theme(input-basic-disabled-background-color);
+      border-color: nb-theme(input-basic-disabled-border-color);
+      color: nb-theme(input-basic-disabled-text-color);
 
       &::placeholder {
-        color: nb-theme(input-disabled-placeholder-text-color);
+        color: nb-theme(input-basic-disabled-placeholder-text-color);
       }
     }
 
