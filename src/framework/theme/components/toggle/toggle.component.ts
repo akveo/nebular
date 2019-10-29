@@ -80,11 +80,6 @@ import { convertToBoolProperty, emptyStatusWarning } from '../helpers';
  * toggle-text-font-weight:
  * toggle-text-line-height:
  * toggle-cursor:
- * toggle-disabled-background-color:
- * toggle-disabled-border-color:
- * toggle-disabled-switcher-background-color:
- * toggle-disabled-checked-switcher-checkmark-color:
- * toggle-disabled-text-color:
  * toggle-disabled-cursor:
  * toggle-basic-text-color:
  * toggle-basic-background-color:
@@ -105,6 +100,11 @@ import { convertToBoolProperty, emptyStatusWarning } from '../helpers';
  * toggle-basic-active-border-color:
  * toggle-basic-active-checked-background-color:
  * toggle-basic-active-checked-border-color:
+ * toggle-basic-disabled-background-color:
+ * toggle-basic-disabled-border-color:
+ * toggle-basic-disabled-switcher-background-color:
+ * toggle-basic-disabled-checked-switcher-checkmark-color:
+ * toggle-basic-disabled-text-color:
  * toggle-primary-text-color:
  * toggle-primary-background-color:
  * toggle-primary-border-color:
@@ -124,6 +124,11 @@ import { convertToBoolProperty, emptyStatusWarning } from '../helpers';
  * toggle-primary-active-border-color:
  * toggle-primary-active-checked-background-color:
  * toggle-primary-active-checked-border-color:
+ * toggle-primary-disabled-background-color:
+ * toggle-primary-disabled-border-color:
+ * toggle-primary-disabled-switcher-background-color:
+ * toggle-primary-disabled-checked-switcher-checkmark-color:
+ * toggle-primary-disabled-text-color:
  * toggle-success-text-color:
  * toggle-success-background-color:
  * toggle-success-border-color:
@@ -143,6 +148,11 @@ import { convertToBoolProperty, emptyStatusWarning } from '../helpers';
  * toggle-success-active-border-color:
  * toggle-success-active-checked-background-color:
  * toggle-success-active-checked-border-color:
+ * toggle-success-disabled-background-color:
+ * toggle-success-disabled-border-color:
+ * toggle-success-disabled-switcher-background-color:
+ * toggle-success-disabled-checked-switcher-checkmark-color:
+ * toggle-success-disabled-text-color:
  * toggle-info-text-color:
  * toggle-info-background-color:
  * toggle-info-border-color:
@@ -162,6 +172,11 @@ import { convertToBoolProperty, emptyStatusWarning } from '../helpers';
  * toggle-info-active-border-color:
  * toggle-info-active-checked-background-color:
  * toggle-info-active-checked-border-color:
+ * toggle-info-disabled-background-color:
+ * toggle-info-disabled-border-color:
+ * toggle-info-disabled-switcher-background-color:
+ * toggle-info-disabled-checked-switcher-checkmark-color:
+ * toggle-info-disabled-text-color:
  * toggle-warning-text-color:
  * toggle-warning-background-color:
  * toggle-warning-border-color:
@@ -181,6 +196,11 @@ import { convertToBoolProperty, emptyStatusWarning } from '../helpers';
  * toggle-warning-active-border-color:
  * toggle-warning-active-checked-background-color:
  * toggle-warning-active-checked-border-color:
+ * toggle-warning-disabled-background-color:
+ * toggle-warning-disabled-border-color:
+ * toggle-warning-disabled-switcher-background-color:
+ * toggle-warning-disabled-checked-switcher-checkmark-color:
+ * toggle-warning-disabled-text-color:
  * toggle-danger-text-color:
  * toggle-danger-background-color:
  * toggle-danger-border-color:
@@ -200,6 +220,11 @@ import { convertToBoolProperty, emptyStatusWarning } from '../helpers';
  * toggle-danger-active-border-color:
  * toggle-danger-active-checked-background-color:
  * toggle-danger-active-checked-border-color:
+ * toggle-danger-disabled-background-color:
+ * toggle-danger-disabled-border-color:
+ * toggle-danger-disabled-switcher-background-color:
+ * toggle-danger-disabled-checked-switcher-checkmark-color:
+ * toggle-danger-disabled-text-color:
  * toggle-control-text-color:
  * toggle-control-background-color:
  * toggle-control-border-color:
@@ -219,6 +244,11 @@ import { convertToBoolProperty, emptyStatusWarning } from '../helpers';
  * toggle-control-active-border-color:
  * toggle-control-active-checked-background-color:
  * toggle-control-active-checked-border-color:
+ * toggle-control-disabled-background-color:
+ * toggle-control-disabled-border-color:
+ * toggle-control-disabled-switcher-background-color:
+ * toggle-control-disabled-checked-switcher-checkmark-color:
+ * toggle-control-disabled-text-color:
  */
 @Component({
   selector: 'nb-toggle',
