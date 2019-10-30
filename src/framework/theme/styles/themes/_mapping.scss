@@ -1095,7 +1095,7 @@ $eva-mapping: (
   input-tiny-placeholder-text-font-size: text-paragraph-font-size,
   input-tiny-placeholder-text-font-weight: text-paragraph-font-weight,
   input-tiny-placeholder-text-line-height: text-paragraph-line-height,
-  input-tiny-padding: 0.1875rem 1rem,
+  input-tiny-padding: 0.1875rem 1.125rem,
   input-tiny-max-width: 20rem,
 
   input-small-text-font-size: text-subtitle-2-font-size,
@@ -1104,7 +1104,7 @@ $eva-mapping: (
   input-small-placeholder-text-font-size: text-paragraph-font-size,
   input-small-placeholder-text-font-weight: text-paragraph-font-weight,
   input-small-placeholder-text-line-height: text-paragraph-line-height,
-  input-small-padding: 0.4375rem 1rem,
+  input-small-padding: 0.1875rem 1.125rem,
   input-small-max-width: 20rem,
 
   input-medium-text-font-size: text-subtitle-font-size,
@@ -1113,7 +1113,7 @@ $eva-mapping: (
   input-medium-placeholder-text-font-size: text-paragraph-font-size,
   input-medium-placeholder-text-font-weight: text-paragraph-font-weight,
   input-medium-placeholder-text-line-height: text-paragraph-line-height,
-  input-medium-padding: 0.6875rem 1rem,
+  input-medium-padding: 0.4375rem 1.125rem,
   input-medium-max-width: 20rem,
 
   input-large-text-font-size: text-subtitle-font-size,
@@ -1122,7 +1122,7 @@ $eva-mapping: (
   input-large-placeholder-text-font-size: text-paragraph-font-size,
   input-large-placeholder-text-font-weight: text-paragraph-font-weight,
   input-large-placeholder-text-line-height: text-paragraph-line-height,
-  input-large-padding: 0.9375rem 1rem,
+  input-large-padding: 0.6875rem 1.125rem,
   input-large-max-width: 30rem,
 
   input-giant-text-font-size: text-heading-6-font-size,
@@ -1131,7 +1131,7 @@ $eva-mapping: (
   input-giant-placeholder-text-font-size: text-paragraph-font-size,
   input-giant-placeholder-text-font-weight: text-paragraph-font-weight,
   input-giant-placeholder-text-line-height: text-paragraph-line-height,
-  input-giant-padding: 1.1875rem 1rem,
+  input-giant-padding: 0.9375rem 1.125rem,
   input-giant-max-width: 30rem,
 
   checkbox-height: 1.125rem,
@@ -1802,11 +1802,11 @@ $eva-mapping: (
   select-outline-border-style: solid,
   select-outline-border-width: 1px,
 
-  select-outline-tiny-padding: 0.1875rem 1rem,
-  select-outline-small-padding: 0.4375rem 1rem,
-  select-outline-medium-padding: 0.6875rem 1rem,
-  select-outline-large-padding: 0.9375rem 1rem,
-  select-outline-giant-padding: 1.1875rem 1rem,
+  select-outline-tiny-padding: 0.1875rem 1.125rem,
+  select-outline-small-padding: 0.1875rem 1.125rem,
+  select-outline-medium-padding: 0.4375rem 1.125rem,
+  select-outline-large-padding: 0.6875rem 1.125rem,
+  select-outline-giant-padding: 0.9375rem 1.125rem,
 
   select-outline-basic-icon-color: text-basic-color,
   select-outline-basic-text-color: text-basic-color,
@@ -1946,11 +1946,11 @@ $eva-mapping: (
   select-filled-border-style: solid,
   select-filled-border-width: 1px,
 
-  select-filled-tiny-padding: 0.1875rem 1rem,
-  select-filled-small-padding: 0.4375rem 1rem,
-  select-filled-medium-padding: 0.6875rem 1rem,
-  select-filled-large-padding: 0.9375rem 1rem,
-  select-filled-giant-padding: 1.1875rem 1rem,
+  select-filled-tiny-padding: 0.1875rem 1.125rem,
+  select-filled-small-padding: 0.1875rem 1.125rem,
+  select-filled-medium-padding: 0.4375rem 1.125rem,
+  select-filled-large-padding: 0.6875rem 1.125rem,
+  select-filled-giant-padding: 0.9375rem 1.125rem,
 
   select-filled-basic-background-color: color-basic-default,
   select-filled-basic-border-color: color-basic-default-border,
@@ -2076,11 +2076,11 @@ $eva-mapping: (
   select-options-list-filled-danger-border-color: color-danger-default,
   select-options-list-filled-control-border-color: color-basic-default,
 
-  select-hero-tiny-padding: 0.25rem 1rem,
-  select-hero-small-padding: 0.5rem 1rem,
-  select-hero-medium-padding: 0.75rem 1rem,
-  select-hero-large-padding: 1rem 1rem,
-  select-hero-giant-padding: 1.25rem  1rem,
+  select-hero-tiny-padding: 0.25rem 1.125rem,
+  select-hero-small-padding: 0.25rem 1.125rem,
+  select-hero-medium-padding: 0.5rem 1.125rem,
+  select-hero-large-padding: 0.75rem 1.125rem,
+  select-hero-giant-padding: 1rem 1.125rem,
 
   select-hero-basic-left-background-color: color-basic-200,
   select-hero-basic-right-background-color: color-basic-default,
