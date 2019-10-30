@@ -117,4 +117,34 @@ describe('NbAdjustableConnectedPositionStrategy', () => {
       { originX: 'end', originY: 'bottom', overlayX: 'end', overlayY: 'top', offsetY: 15 },
     ]));
   });
+
+  it('should map left position to start', () => {
+    const withPositionsSpy = spyOn(strategy, 'withPositions').and.callThrough();
+
+    strategy.position(NbPosition.LEFT).adjustment(NbAdjustment.HORIZONTAL);
+
+    const overlayService: NbOverlayService = TestBed.get(NbOverlayService);
+    const overlayRef = overlayService.create({ positionStrategy: strategy });
+    overlayRef.attach(new NbComponentPortal(PortalComponent));
+
+    expect(withPositionsSpy).toHaveBeenCalledWith(jasmine.objectContaining([
+      { originX: 'start', originY: 'center', overlayX: 'end', overlayY: 'center', offsetX: -15 },
+      { originX: 'end', originY: 'center', overlayX: 'start', overlayY: 'center', offsetX: 15 },
+    ]));
+  });
+
+  it('should map right position to end', () => {
+    const withPositionsSpy = spyOn(strategy, 'withPositions').and.callThrough();
+
+    strategy.position(NbPosition.RIGHT).adjustment(NbAdjustment.HORIZONTAL);
+
+    const overlayService: NbOverlayService = TestBed.get(NbOverlayService);
+    const overlayRef = overlayService.create({ positionStrategy: strategy });
+    overlayRef.attach(new NbComponentPortal(PortalComponent));
+
+    expect(withPositionsSpy).toHaveBeenCalledWith(jasmine.objectContaining([
+      { originX: 'end', originY: 'center', overlayX: 'start', overlayY: 'center', offsetX: 15 },
+      { originX: 'start', originY: 'center', overlayX: 'end', overlayY: 'center', offsetX: -15 },
+    ]));
+  });
 });
