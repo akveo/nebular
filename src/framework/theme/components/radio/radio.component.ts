@@ -66,12 +66,6 @@ import { NbComponentStatus } from '../component-status';
  * radio-text-line-height:
  * radio-outline-color:
  * radio-outline-width:
- * radio-disabled-background-color:
- * radio-disabled-border-color:
- * radio-disabled-text-color:
- * radio-disabled-checked-background-color:
- * radio-disabled-checked-border-color:
- * radio-disabled-checked-inner-circle-color:
  * radio-basic-text-color:
  * radio-basic-border-color:
  * radio-basic-background-color:
@@ -86,6 +80,12 @@ import { NbComponentStatus } from '../component-status';
  * radio-basic-hover-checked-background-color:
  * radio-basic-active-border-color:
  * radio-basic-active-inner-circle-color:
+ * radio-basic-disabled-background-color:
+ * radio-basic-disabled-border-color:
+ * radio-basic-disabled-text-color:
+ * radio-basic-disabled-checked-background-color:
+ * radio-basic-disabled-checked-border-color:
+ * radio-basic-disabled-checked-inner-circle-color:
  * radio-primary-text-color:
  * radio-primary-border-color:
  * radio-primary-background-color:
@@ -100,6 +100,12 @@ import { NbComponentStatus } from '../component-status';
  * radio-primary-hover-checked-background-color:
  * radio-primary-active-border-color:
  * radio-primary-active-inner-circle-color:
+ * radio-primary-disabled-background-color:
+ * radio-primary-disabled-border-color:
+ * radio-primary-disabled-text-color:
+ * radio-primary-disabled-checked-background-color:
+ * radio-primary-disabled-checked-border-color:
+ * radio-primary-disabled-checked-inner-circle-color:
  * radio-success-text-color:
  * radio-success-border-color:
  * radio-success-background-color:
@@ -114,6 +120,12 @@ import { NbComponentStatus } from '../component-status';
  * radio-success-hover-checked-background-color:
  * radio-success-active-border-color:
  * radio-success-active-inner-circle-color:
+ * radio-success-disabled-background-color:
+ * radio-success-disabled-border-color:
+ * radio-success-disabled-text-color:
+ * radio-success-disabled-checked-background-color:
+ * radio-success-disabled-checked-border-color:
+ * radio-success-disabled-checked-inner-circle-color:
  * radio-info-text-color:
  * radio-info-border-color:
  * radio-info-background-color:
@@ -128,6 +140,12 @@ import { NbComponentStatus } from '../component-status';
  * radio-info-hover-checked-background-color:
  * radio-info-active-border-color:
  * radio-info-active-inner-circle-color:
+ * radio-info-disabled-background-color:
+ * radio-info-disabled-border-color:
+ * radio-info-disabled-text-color:
+ * radio-info-disabled-checked-background-color:
+ * radio-info-disabled-checked-border-color:
+ * radio-info-disabled-checked-inner-circle-color:
  * radio-warning-text-color:
  * radio-warning-border-color:
  * radio-warning-background-color:
@@ -142,6 +160,12 @@ import { NbComponentStatus } from '../component-status';
  * radio-warning-hover-checked-background-color:
  * radio-warning-active-border-color:
  * radio-warning-active-inner-circle-color:
+ * radio-warning-disabled-background-color:
+ * radio-warning-disabled-border-color:
+ * radio-warning-disabled-text-color:
+ * radio-warning-disabled-checked-background-color:
+ * radio-warning-disabled-checked-border-color:
+ * radio-warning-disabled-checked-inner-circle-color:
  * radio-danger-text-color:
  * radio-danger-border-color:
  * radio-danger-background-color:
@@ -156,6 +180,12 @@ import { NbComponentStatus } from '../component-status';
  * radio-danger-hover-checked-background-color:
  * radio-danger-active-border-color:
  * radio-danger-active-inner-circle-color:
+ * radio-danger-disabled-background-color:
+ * radio-danger-disabled-border-color:
+ * radio-danger-disabled-text-color:
+ * radio-danger-disabled-checked-background-color:
+ * radio-danger-disabled-checked-border-color:
+ * radio-danger-disabled-checked-inner-circle-color:
  * radio-control-text-color:
  * radio-control-background-color:
  * radio-control-border-color:
@@ -170,6 +200,12 @@ import { NbComponentStatus } from '../component-status';
  * radio-control-hover-checked-background-color:
  * radio-control-active-border-color:
  * radio-control-active-inner-circle-color:
+ * radio-control-disabled-background-color:
+ * radio-control-disabled-border-color:
+ * radio-control-disabled-text-color:
+ * radio-control-disabled-checked-background-color:
+ * radio-control-disabled-checked-border-color:
+ * radio-control-disabled-checked-inner-circle-color:
  * */
 @Component({
   selector: 'nb-radio',

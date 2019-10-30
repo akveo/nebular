@@ -21,26 +21,6 @@
       @include nb-outline(nb-theme(radio-outline-width), nb-theme(radio-outline-color));
     }
 
-    .native-input:disabled {
-      & + .outer-circle {
-        background-color: nb-theme(radio-disabled-background-color);
-        border-color: nb-theme(radio-disabled-border-color);
-      }
-      & ~ .text {
-        color: nb-theme(radio-disabled-text-color);
-      }
-
-      &:checked {
-        & + .outer-circle {
-          background-color: nb-theme(radio-disabled-checked-background-color);
-          border-color: nb-theme(radio-disabled-checked-border-color);
-        }
-        ~ .inner-circle {
-          background-color: nb-theme(radio-disabled-checked-inner-circle-color);
-        }
-      }
-    }
-
     @each $status in nb-get-statuses() {
       &.status-#{$status} .native-input:enabled + .outer-circle {
         background-color: nb-theme(radio-#{$status}-background-color);
@@ -86,6 +66,26 @@
 
       &.status-#{$status} .text {
         color: nb-theme(radio-#{$status}-text-color);
+      }
+
+      &.status-#{$status} .native-input:disabled {
+        & + .outer-circle {
+          background-color: nb-theme(radio-#{$status}-disabled-background-color);
+          border-color: nb-theme(radio-#{$status}-disabled-border-color);
+        }
+        & ~ .text {
+          color: nb-theme(radio-#{$status}-disabled-text-color);
+        }
+
+        &:checked {
+          & + .outer-circle {
+            background-color: nb-theme(radio-#{$status}-disabled-checked-background-color);
+            border-color: nb-theme(radio-#{$status}-disabled-checked-border-color);
+          }
+          ~ .inner-circle {
+            background-color: nb-theme(radio-#{$status}-disabled-checked-inner-circle-color);
+          }
+        }
       }
     }
 
