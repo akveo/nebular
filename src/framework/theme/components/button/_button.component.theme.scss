@@ -28,6 +28,12 @@
       &.size-#{$size} {
         font-size: nb-theme(button-#{$size}-text-font-size);
         line-height: nb-theme(button-#{$size}-text-line-height);
+
+        nb-icon {
+          font-size: nb-theme(button-#{$size}-text-font-size);
+          height: nb-theme(button-#{$size}-text-line-height);
+          width: nb-theme(button-#{$size}-text-line-height);
+        }
       }
     }
 
