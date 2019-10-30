@@ -1081,9 +1081,9 @@ $eva-mapping: (
   input-control-hover-background-color: color-basic-control-transparent-400,
   input-control-hover-border-color: color-control-transparent-hover-border,
   input-control-disabled-background-color: color-control-transparent-disabled,
-  input-control-disabled-border-color: color-basic-control-transparent-500,
-  input-control-disabled-text-color: text-disabled-color,
-  input-control-disabled-placeholder-text-color: text-disabled-color,
+  input-control-disabled-border-color: color-control-transparent-disabled-border,
+  input-control-disabled-text-color: color-basic-100,
+  input-control-disabled-placeholder-text-color: color-basic-100,
 
   input-rectangle-border-radius: border-radius,
   input-semi-round-border-radius: 0.75rem,
