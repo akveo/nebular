@@ -18,7 +18,6 @@
         font-family: nb-theme(select-placeholder-text-font-family);
       }
       &:focus {
-        @include nb-outline(nb-theme(select-outline-width), nb-theme(select-outline-color));
         outline: none;
       }
       &[disabled] {

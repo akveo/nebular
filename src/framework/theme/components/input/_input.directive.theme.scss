@@ -25,7 +25,6 @@
 
     &:focus {
       outline: none;
-      @include nb-outline(nb-theme(input-outline-width), nb-theme(input-outline-color));
     }
 
     &.input-full-width {
