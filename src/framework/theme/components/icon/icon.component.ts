@@ -197,7 +197,7 @@ export class NbIconComponent implements NbIconConfig, OnChanges, OnInit {
     } else {
       this.icon = value.icon;
       this.pack = value.pack;
-      this.status = value.status;
+      this.status = value.status || 'basic';
       this.options = value.options;
     }
   }
