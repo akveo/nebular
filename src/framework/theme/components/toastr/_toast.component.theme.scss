@@ -53,8 +53,8 @@
       }
 
       &.destroy-by-click:hover {
-        background: nb-theme(toastr-destroyable-hover-#{$status}-background-color);
-        border-color: nb-theme(toastr-destroyable-hover-#{$status}-border-color);
+        background: nb-theme(toastr-destroyable-#{$status}-hover-background-color);
+        border-color: nb-theme(toastr-destroyable-#{$status}-hover-border-color);
       }
 
       .icon-container {
