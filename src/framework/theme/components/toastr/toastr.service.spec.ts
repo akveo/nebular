@@ -116,7 +116,7 @@ describe('toastr-service', () => {
 
     expect(toastrSpy).toHaveBeenCalled();
     const [, , { status }] = toastrSpy.calls.allArgs()[0];
-    expect(status).toBe('');
+    expect(status).toBe('basic');
   });
 });
 
