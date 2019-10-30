@@ -292,7 +292,7 @@ export class NbCheckboxComponent implements ControlValueAccessor {
     return this._checked;
   }
   set checked(value: boolean) {
-    this._checked = value;
+    this._checked = convertToBoolProperty(value);
   }
   private _checked: boolean = false;
 
