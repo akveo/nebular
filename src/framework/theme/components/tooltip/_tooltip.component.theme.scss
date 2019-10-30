@@ -27,8 +27,8 @@
     $arrow-size: 6px;
     box-shadow: nb-theme(tooltip-shadow);
 
-    border-style: nb-theme(tooltip-border-style);
-    border-width: nb-theme(tooltip-border-width);
+    background: nb-theme(tooltip-background-color);
+    border: nb-theme(tooltip-border-width) nb-theme(tooltip-border-style) nb-theme(tooltip-border-color);
     border-radius: nb-theme(tooltip-border-radius);
     padding: nb-theme(tooltip-padding);
     max-width: nb-theme(tooltip-max-width);
@@ -43,6 +43,7 @@
     }
 
     .content {
+      color: nb-theme(tooltip-text-color);
       font-family: nb-theme(tooltip-text-font-family);
       font-size: nb-theme(tooltip-text-font-size);
       font-weight: nb-theme(tooltip-text-font-weight);
@@ -50,8 +51,7 @@
     }
 
     .arrow {
-      border-bottom-style: nb-theme(tooltip-border-style);
-      border-bottom-width: $arrow-size;
+      border-bottom: $arrow-size nb-theme(tooltip-border-style) nb-theme(tooltip-background-color);
     }
 
     @each $status in nb-get-statuses() {

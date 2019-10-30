@@ -101,7 +101,11 @@ export class NbTooltipComponent implements NbRenderableContainer {
   context: { icon?: string | NbIconConfig, status?: NbComponentStatus } = {};
 
   get statusClass() {
-    return `status-${this.context.status || 'basic'}`;
+    if (this.context.status) {
+      return `status-${this.context.status}`;
+    }
+
+    return '';
   }
 
   /**

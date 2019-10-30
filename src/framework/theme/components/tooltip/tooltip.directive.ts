@@ -25,7 +25,6 @@ import { NbDynamicOverlay } from '../cdk/overlay/dynamic/dynamic-overlay';
 import { NbDynamicOverlayHandler } from '../cdk/overlay/dynamic/dynamic-overlay-handler';
 import { NbTooltipComponent } from './tooltip.component';
 import { NbIconConfig } from '../icon/icon.component';
-import { emptyStatusWarning } from '../helpers';
 
 /**
  *
@@ -129,10 +128,6 @@ export class NbTooltipDirective implements OnInit, OnChanges, AfterViewInit, OnD
    */
   @Input('nbTooltipStatus')
   set status(status: NbComponentStatus) {
-    if ((status as string) === '') {
-      emptyStatusWarning('NbTooltip');
-      status = 'basic';
-    }
     this.context = Object.assign(this.context, {status});
   }
 

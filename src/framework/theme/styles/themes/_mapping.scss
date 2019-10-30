@@ -1701,10 +1701,13 @@ $eva-mapping: (
 
   overlay-backdrop-background-color: rgba(0, 0, 0, 0.288),
 
+  tooltip-background-color: background-alternative-color-3,
+  tooltip-border-color: transparent,
   tooltip-border-style: dashed,
   tooltip-border-width: 0,
   tooltip-border-radius: border-radius,
   tooltip-padding: 0.5rem 1rem,
+  tooltip-text-color: text-alternate-color,
   tooltip-text-font-family: text-caption-font-family,
   tooltip-text-font-size: text-caption-font-size,
   tooltip-text-font-weight: text-caption-font-weight,
@@ -1713,9 +1716,9 @@ $eva-mapping: (
   tooltip-icon-width: 1rem,
   tooltip-max-width: 16rem,
 
-  tooltip-basic-background-color: background-alternative-color-3,
+  tooltip-basic-background-color: background-basic-color-3,
   tooltip-basic-border-color: transparent,
-  tooltip-basic-text-color: text-alternate-color,
+  tooltip-basic-text-color: text-basic-color,
   tooltip-primary-background-color: color-primary-default,
   tooltip-primary-border-color: transparent,
   tooltip-primary-text-color: text-control-color,
