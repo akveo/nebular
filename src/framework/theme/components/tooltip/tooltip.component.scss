@@ -4,9 +4,11 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-:host {
-  $arrow-size: 6px;
+@import '../../styles/core/mixins';
 
+$arrow-size: 6px;
+
+:host {
   z-index: 10000;
 
   .content {
@@ -36,27 +38,117 @@
     border-left: $arrow-size solid transparent;
     border-right: $arrow-size solid transparent;
   }
+}
 
-  &.bottom .arrow {
-    top: -#{$arrow-size};
+:host(.bottom) {
+  .arrow {
+    top: -$arrow-size;
     left: calc(50% - #{$arrow-size});
   }
+}
 
-  &.left .arrow {
-    right: round(-$arrow-size - $arrow-size / 2.5);
+:host(.bottom-start) {
+  .arrow {
+    top: -$arrow-size;
+    @include nb-ltr(right, $arrow-size);
+    @include nb-rtl(left, $arrow-size);
+  }
+}
+
+:host(.bottom-end) {
+  .arrow {
+    top: -$arrow-size;
+    @include nb-ltr(left, $arrow-size);
+    @include nb-rtl(right, $arrow-size);
+  }
+}
+
+:host(.left),
+:host(.start) {
+  .arrow {
+    $inline-offset: round(-$arrow-size - $arrow-size / 2.5);
+    @include nb-ltr() {
+      right: $inline-offset;
+      transform: rotate(90deg);
+    };
+    @include nb-rtl() {
+      left: $inline-offset;
+      transform: rotate(270deg);
+    };
     top: calc(50% - #{$arrow-size / 2.5});
+  }
+}
+
+:host(.start-top) {
+  .arrow {
+    right: round(-$arrow-size - $arrow-size / 2.5);
+    bottom: $arrow-size;
     transform: rotate(90deg);
   }
+}
 
-  &.top .arrow {
-    bottom: -#{$arrow-size};
+:host(.start-bottom) {
+  .arrow {
+    right: round(-$arrow-size - $arrow-size / 2.5);
+    top: $arrow-size;
+    transform: rotate(90deg);
+  }
+}
+
+:host(.top) {
+  .arrow {
+    bottom: -$arrow-size;
     left: calc(50% - #{$arrow-size});
     transform: rotate(180deg);
   }
+}
 
-  &.right .arrow {
-    left: round(-$arrow-size - $arrow-size / 2.5);
+:host(.top-start) {
+  .arrow {
+    bottom: calc(-1 * #{$arrow-size} + 1px);
+    @include nb-ltr(right, $arrow-size);
+    @include nb-rtl(left, $arrow-size);
+    transform: rotate(180deg);
+  }
+}
+
+:host(.top-end) {
+  .arrow {
+    bottom: calc(-#{$arrow-size} + 1px);
+    @include nb-ltr(left, $arrow-size);
+    @include nb-rtl(right, $arrow-size);
+    transform: rotate(180deg);
+  }
+}
+
+:host(.right),
+:host(.end) {
+  .arrow {
+    $inline-offset: round(-$arrow-size - $arrow-size / 2.5);
+    @include nb-ltr() {
+      left: $inline-offset;
+      transform: rotate(270deg);
+    };
+    @include nb-rtl() {
+      right: $inline-offset;
+      transform: rotate(90deg);
+    };
     top: calc(50% - #{$arrow-size / 2.5});
+  }
+}
+
+:host(.end-top) {
+  .arrow {
+    left: calc(-#{$arrow-size} - #{$arrow-size} / 2.5);
+    bottom: $arrow-size;
+    transform: rotate(270deg);
+  }
+}
+
+:host(.end-bottom) {
+  .arrow {
+    left: calc(-#{$arrow-size} - #{$arrow-size} / 2.5);
+    top: $arrow-size;
     transform: rotate(270deg);
   }
 }
