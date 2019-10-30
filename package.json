@@ -53,7 +53,7 @@
     "clean:tmp": "rimraf .ng_build .ng_compiled tsconfig-custom.publish.json tsconfig.build*",
     "clean:lib": "rimraf src/.lib",
     "clean:all": "npm-run-all -p clean:tmp clean:lib",
-    "ci:lint": "npm run lint && npm run lint:styles",
+    "ci:lint": "npm-run-all -p lint lint:styles",
     "ci:docs": "npm run docs:build",
     "ci:dev-deploy": "npm run firebase use dev && npm run firebase deploy",
     "ci:build": "npm-run-all -s build:prod build:package build:wp",
