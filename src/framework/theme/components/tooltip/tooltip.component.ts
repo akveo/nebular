@@ -19,17 +19,20 @@ import { NbIconConfig } from '../icon/icon.component';
  *
  * @styles
  *
+ * tooltip-background-color:
+ * tooltip-border-color:
  * tooltip-border-style:
  * tooltip-border-width:
  * tooltip-border-radius:
  * tooltip-padding:
+ * tooltip-text-color:
  * tooltip-text-font-family:
  * tooltip-text-font-size:
  * tooltip-text-font-weight:
  * tooltip-text-line-height:
- * tooltip-max-width:
  * tooltip-icon-height:
  * tooltip-icon-width:
+ * tooltip-max-width:
  * tooltip-basic-background-color:
  * tooltip-basic-border-color:
  * tooltip-basic-text-color:
