@@ -117,9 +117,9 @@ import { NbChatMessageComponent } from './chat-message.component';
  * chat-border-radius:
  * chat-shadow:
  * chat-padding:
- * chart-scrollbar-color:
- * chart-scrollbar-background-color:
- * chart-scrollbar-width:
+ * chat-scrollbar-color:
+ * chat-scrollbar-background-color:
+ * chat-scrollbar-width:
  * chat-text-color:
  * chat-text-font-family:
  * chat-text-font-size:
@@ -135,6 +135,8 @@ import { NbChatMessageComponent } from './chat-message.component';
  * chat-medium-height:
  * chat-large-height:
  * chat-giant-height:
+ * chat-basic-background-color:
+ * chat-basic-text-color:
  * chat-primary-background-color:
  * chat-primary-text-color:
  * chat-success-background-color:
@@ -145,9 +147,21 @@ import { NbChatMessageComponent } from './chat-message.component';
  * chat-warning-text-color:
  * chat-danger-background-color:
  * chat-danger-text-color:
+ * chat-control-background-color:
+ * chat-control-text-color:
  * chat-divider-color:
  * chat-divider-style:
  * chat-divider-width:
+ * chat-message-background:
+ * chat-message-text-color:
+ * chat-message-reply-background-color:
+ * chat-message-reply-text-color:
+ * chat-message-avatar-background-color:
+ * chat-message-sender-text-color:
+ * chat-message-quote-background-color:
+ * chat-message-quote-text-color:
+ * chat-message-file-text-color:
+ * chat-message-file-background-color:
  */
 @Component({
   selector: 'nb-chat',

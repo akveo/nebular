@@ -39,9 +39,9 @@
       overflow: auto;
       flex: 1;
       @include nb-scrollbars(
-          nb-theme(chart-scrollbar-color),
-          nb-theme(chart-scrollbar-background-color),
-          nb-theme(chart-scrollbar-width));
+          nb-theme(chat-scrollbar-color),
+          nb-theme(chat-scrollbar-background-color),
+          nb-theme(chat-scrollbar-width));
     }
 
     .messages {
