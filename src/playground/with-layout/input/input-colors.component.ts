@@ -10,7 +10,7 @@ import { Component } from '@angular/core';
   template: `
     <nb-card>
       <nb-card-body class="example-items-col">
-        <input type="text" nbInput fullWidth placeholder="Default">
+        <input type="text" nbInput fullWidth status="basic" placeholder="Default">
         <input type="text" nbInput fullWidth status="primary" placeholder="Primary">
         <input type="text" nbInput fullWidth status="info" placeholder="Info">
         <input type="text" nbInput fullWidth status="success" placeholder="Success">
