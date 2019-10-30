@@ -57,7 +57,7 @@ describe('nb-layout theme', () => {
       expect(value).toEqual(themeDefault);
     });
     cardHeader.getCssValue('color').then(value => {
-      expect(value).toEqual('rgba(25, 32, 56, 1)');
+      expect(value).toEqual('rgba(34, 43, 69, 1)');
     });
     cardHeader.getCssValue('text-decoration').then(value => {
       expect(value).toMatch('none');
