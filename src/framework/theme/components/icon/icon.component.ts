@@ -97,11 +97,14 @@ export interface NbIconConfig {
  * icon-line-height:
  * icon-width:
  * icon-height:
+ * icon-svg-vertical-align:
+ * icon-basic-color:
  * icon-primary-color:
  * icon-info-color:
  * icon-success-color:
  * icon-warning-color:
  * icon-danger-color:
+ * icon-control-color:
  */
 @Component({
   selector: 'nb-icon',
