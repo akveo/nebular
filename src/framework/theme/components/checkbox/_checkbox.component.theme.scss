@@ -28,24 +28,6 @@
       @include nb-outline(nb-theme(checkbox-outline-width), nb-theme(checkbox-outline-color));
     }
 
-    .native-input:disabled {
-      & + .custom-checkbox {
-        background-color: nb-theme(checkbox-disabled-background-color);
-        border-color: nb-theme(checkbox-disabled-border-color);
-
-        nb-icon {
-          color: nb-theme(checkbox-disabled-checkmark-color);
-        }
-      }
-      & ~ .text {
-        color: nb-theme(checkbox-disabled-text-color);
-      }
-      &:indeterminate + .custom-checkbox,
-      &:checked + .custom-checkbox {
-        background-color: nb-theme(checkbox-disabled-checked-background-color);
-      }
-    }
-
     nb-icon {
       position: absolute;
       top: 50%;
@@ -136,19 +118,19 @@
 
     .native-input:disabled {
       & + .custom-checkbox {
-        background-color: nb-theme(checkbox-disabled-background-color);
-        border-color: nb-theme(checkbox-disabled-border-color);
+        background-color: nb-theme(checkbox-#{$status}-disabled-background-color);
+        border-color: nb-theme(checkbox-#{$status}-disabled-border-color);
 
         nb-icon {
-          color: nb-theme(checkbox-disabled-checkmark-color);
+          color: nb-theme(checkbox-#{$status}-disabled-checkmark-color);
         }
       }
       & ~ .text {
-        color: nb-theme(checkbox-disabled-text-color);
+        color: nb-theme(checkbox-#{$status}-disabled-text-color);
       }
       &:indeterminate + .custom-checkbox,
       &:checked + .custom-checkbox {
-        background-color: nb-theme(checkbox-disabled-checked-background-color);
+        background-color: nb-theme(checkbox-#{$status}-disabled-checked-background-color);
       }
     }
   }

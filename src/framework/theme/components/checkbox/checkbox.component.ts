@@ -53,11 +53,6 @@ import { convertToBoolProperty, emptyStatusWarning } from '../helpers';
  * checkbox-text-line-height:
  * checkbox-text-space:
  * checkbox-padding:
- * checkbox-disabled-background-color:
- * checkbox-disabled-border-color:
- * checkbox-disabled-checkmark-color:
- * checkbox-disabled-text-color:
- * checkbox-disabled-checked-background-color:
  * checkbox-basic-text-color:
  * checkbox-basic-background-color:
  * checkbox-basic-border-color:
@@ -79,6 +74,11 @@ import { convertToBoolProperty, emptyStatusWarning } from '../helpers';
  * checkbox-basic-active-border-color:
  * checkbox-basic-active-checked-background-color:
  * checkbox-basic-active-checked-border-color:
+ * checkbox-basic-disabled-background-color:
+ * checkbox-basic-disabled-border-color:
+ * checkbox-basic-disabled-checkmark-color:
+ * checkbox-basic-disabled-text-color:
+ * checkbox-basic-disabled-checked-background-color:
  * checkbox-primary-text-color:
  * checkbox-primary-background-color:
  * checkbox-primary-border-color:
@@ -100,6 +100,11 @@ import { convertToBoolProperty, emptyStatusWarning } from '../helpers';
  * checkbox-primary-active-border-color:
  * checkbox-primary-active-checked-background-color:
  * checkbox-primary-active-checked-border-color:
+ * checkbox-primary-disabled-background-color:
+ * checkbox-primary-disabled-border-color:
+ * checkbox-primary-disabled-checkmark-color:
+ * checkbox-primary-disabled-text-color:
+ * checkbox-primary-disabled-checked-background-color:
  * checkbox-success-text-color:
  * checkbox-success-background-color:
  * checkbox-success-border-color:
@@ -121,6 +126,11 @@ import { convertToBoolProperty, emptyStatusWarning } from '../helpers';
  * checkbox-success-active-border-color:
  * checkbox-success-active-checked-background-color:
  * checkbox-success-active-checked-border-color:
+ * checkbox-success-disabled-background-color:
+ * checkbox-success-disabled-border-color:
+ * checkbox-success-disabled-checkmark-color:
+ * checkbox-success-disabled-text-color:
+ * checkbox-success-disabled-checked-background-color:
  * checkbox-info-text-color:
  * checkbox-info-background-color:
  * checkbox-info-border-color:
@@ -142,6 +152,11 @@ import { convertToBoolProperty, emptyStatusWarning } from '../helpers';
  * checkbox-info-active-border-color:
  * checkbox-info-active-checked-background-color:
  * checkbox-info-active-checked-border-color:
+ * checkbox-info-disabled-background-color:
+ * checkbox-info-disabled-border-color:
+ * checkbox-info-disabled-checkmark-color:
+ * checkbox-info-disabled-text-color:
+ * checkbox-info-disabled-checked-background-color:
  * checkbox-warning-text-color:
  * checkbox-warning-background-color:
  * checkbox-warning-border-color:
@@ -163,6 +178,11 @@ import { convertToBoolProperty, emptyStatusWarning } from '../helpers';
  * checkbox-warning-active-border-color:
  * checkbox-warning-active-checked-background-color:
  * checkbox-warning-active-checked-border-color:
+ * checkbox-warning-disabled-background-color:
+ * checkbox-warning-disabled-border-color:
+ * checkbox-warning-disabled-checkmark-color:
+ * checkbox-warning-disabled-text-color:
+ * checkbox-warning-disabled-checked-background-color:
  * checkbox-danger-text-color:
  * checkbox-danger-background-color:
  * checkbox-danger-border-color:
@@ -184,6 +204,11 @@ import { convertToBoolProperty, emptyStatusWarning } from '../helpers';
  * checkbox-danger-active-border-color:
  * checkbox-danger-active-checked-background-color:
  * checkbox-danger-active-checked-border-color:
+ * checkbox-danger-disabled-background-color:
+ * checkbox-danger-disabled-border-color:
+ * checkbox-danger-disabled-checkmark-color:
+ * checkbox-danger-disabled-text-color:
+ * checkbox-danger-disabled-checked-background-color:
  * checkbox-control-text-color:
  * checkbox-control-background-color:
  * checkbox-control-border-color:
@@ -205,6 +230,11 @@ import { convertToBoolProperty, emptyStatusWarning } from '../helpers';
  * checkbox-control-active-border-color:
  * checkbox-control-active-checked-background-color:
  * checkbox-control-active-checked-border-color:
+ * checkbox-control-disabled-background-color:
+ * checkbox-control-disabled-border-color:
+ * checkbox-control-disabled-checkmark-color:
+ * checkbox-control-disabled-text-color:
+ * checkbox-control-disabled-checked-background-color:
  */
 @Component({
   selector: 'nb-checkbox',
