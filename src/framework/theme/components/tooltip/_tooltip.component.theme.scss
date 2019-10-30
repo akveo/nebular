@@ -33,6 +33,15 @@
     padding: nb-theme(tooltip-padding);
     max-width: nb-theme(tooltip-max-width);
 
+    nb-icon:only-child {
+      height: nb-theme(tooltip-icon-height);
+      width: nb-theme(tooltip-icon-width);
+    }
+    nb-icon:not(:only-child) {
+      height: nb-theme(tooltip-text-font-size);
+      width: nb-theme(tooltip-text-font-size);
+    }
+
     .content {
       font-family: nb-theme(tooltip-text-font-family);
       font-size: nb-theme(tooltip-text-font-size);

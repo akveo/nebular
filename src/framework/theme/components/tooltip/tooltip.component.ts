@@ -28,6 +28,8 @@ import { NbIconConfig } from '../icon/icon.component';
  * tooltip-text-font-weight:
  * tooltip-text-line-height:
  * tooltip-max-width:
+ * tooltip-icon-height:
+ * tooltip-icon-width:
  * tooltip-basic-background-color:
  * tooltip-basic-border-color:
  * tooltip-basic-text-color:
