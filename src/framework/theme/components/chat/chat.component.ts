@@ -125,7 +125,6 @@ import { NbChatMessageComponent } from './chat-message.component';
  * chat-text-font-size:
  * chat-text-font-weight:
  * chat-text-line-height:
- * chat-header-text-color:
  * chat-header-text-font-family:
  * chat-header-text-font-size:
  * chat-header-text-font-weight:
@@ -191,9 +190,9 @@ export class NbChatComponent implements OnChanges, AfterContentInit, AfterViewIn
 
   /**
    * Chat status color (adds specific styles):
-   * `primary`, `success`, `info`, `warning`, `danger`
+   * `basic` (default), `primary`, `success`, `info`, `warning`, `danger`, `control`.
    */
-  @Input() status: NbComponentStatus;
+  @Input() status: NbComponentStatus = 'basic';
 
   /**
    * Scroll chat to the bottom of the list when a new message arrives
