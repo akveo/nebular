@@ -1,6 +1,6 @@
 {
   "name": "@nebular/date-fns",
-  "version": "4.4.0",
+  "version": "4.5.0",
   "description": "@nebular/date-fns",
   "author": "akveo",
   "license": "MIT",
@@ -21,7 +21,7 @@
     "nebular"
   ],
   "peerDependencies": {
-    "@nebular/theme": "4.4.0",
+    "@nebular/theme": "4.5.0",
     "date-fns": ">=2.0.0-alpha.16 <=2.0.0-alpha.27"
   },
   "sideEffects": false

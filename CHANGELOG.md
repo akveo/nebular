@@ -1,3 +1,33 @@
+<a name="4.5.0"></a>
+# [4.5.0](https://github.com/akveo/nebular/compare/v4.4.0...v4.5.0) (2019-10-31)
+
+Highlights
+
+Nebular 4.5 introduces a new basic and control component statuses.
+Please note, some theme properties were changed. If you use Nebular Theming or have custom themes, check out [updated variables list](https://github.com/akveo/nebular/pull/2047).
+
+
+
+### Bug Fixes
+
+* **actions:** icon button alignment ([#1895](https://github.com/akveo/nebular/issues/1895)) ([04d7e33](https://github.com/akveo/nebular/commit/04d7e33))
+* **datepicker:** check trigger strategy is defined before destroying ([#2011](https://github.com/akveo/nebular/issues/2011)) ([a678e60](https://github.com/akveo/nebular/commit/a678e60))
+* scroll bar theming ([#1890](https://github.com/akveo/nebular/issues/1890)) ([e6b19a5](https://github.com/akveo/nebular/commit/e6b19a5))
+* **datepicker, radio:** always call touched callback ([#2026](https://github.com/akveo/nebular/issues/2026)) ([d3a8e44](https://github.com/akveo/nebular/commit/d3a8e44))
+* **icon:** fix NULL content render in MS Edge ([#2043](https://github.com/akveo/nebular/issues/2043)) ([f37223a](https://github.com/akveo/nebular/commit/f37223a))
+* **list:** vertically center list item content ([#1894](https://github.com/akveo/nebular/issues/1894)) ([7a179bc](https://github.com/akveo/nebular/commit/7a179bc))
+* **popover, tooltip:** convert falsy values for adjustments to noop ([#1905](https://github.com/akveo/nebular/issues/1905)) ([3ec69e7](https://github.com/akveo/nebular/commit/3ec69e7))
+* **sidebar:** emit expand event when expanded because of menu c… ([#1897](https://github.com/akveo/nebular/issues/1897)) ([a07487d](https://github.com/akveo/nebular/commit/a07487d))
+* **toastr:** dispose no longer used overlay container ([#1873](https://github.com/akveo/nebular/issues/1873)) ([4114ad1](https://github.com/akveo/nebular/commit/4114ad1))
+* **tooltip:** add angular positions classes ([#2048](https://github.com/akveo/nebular/issues/2048)) ([a15c81d](https://github.com/akveo/nebular/commit/a15c81d))
+
+
+### Features
+
+* add basic and control statuses ([#2047](https://github.com/akveo/nebular/issues/2047)) ([884dd66](https://github.com/akveo/nebular/commit/884dd66))
+
+
+
 <a name="4.4.0"></a>
 # [4.4.0](https://github.com/akveo/nebular/compare/v4.3.1...v4.4.0) (2019-10-07)
 
