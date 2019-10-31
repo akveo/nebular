@@ -138,4 +138,12 @@ describe('NbIconComponent', () => {
     iconComponent.config = null;
     expect(iconComponent.config).toEqual(config);
   });
+
+  it('icon inner html not to be null or undefined', () => {
+    const iconComponent: NbIconComponent = TestBed.createComponent(NbIconComponent).componentInstance;
+    iconComponent.config = { icon: 'test-not-existing-icon' };
+
+    expect(iconComponent.html).not.toBeNull();
+    expect(iconComponent.html).not.toBeUndefined();
+  });
 });
