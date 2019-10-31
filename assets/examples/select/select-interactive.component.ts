@@ -26,7 +26,7 @@ export class SelectInteractiveComponent {
   appearances: NbSelectAppearance[] = [ 'outline', 'filled', 'hero' ];
   sizes: NbComponentSize[] = [ 'tiny', 'small', 'medium', 'large', 'giant' ];
   shapes: NbComponentShape[] = [ 'rectangle', 'semi-round', 'round' ];
-  statuses: ('' | NbComponentStatus)[] = [ '', 'primary', 'success', 'info', 'warning', 'danger' ];
+  statuses: NbComponentStatus[] = [ 'basic', 'primary', 'success', 'info', 'warning', 'danger', 'control' ];
 
   selectDisabledOption(): void {
     this.singleSelectValue = this.disabledOptionValue;
