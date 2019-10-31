@@ -65,6 +65,10 @@ import { NbComponentStatus } from '../component-status';
       <input nbInput
              fullWidth
              [status]="getInputStatus()"
+             (focus)="inputFocus = true"
+             (blur)="inputFocus = false"
+             (mouseenter)="inputHover = true"
+             (mouseleave)="inputHover = false"
              [(ngModel)]="message"
              [class.with-button]="showButton"
              type="text"
@@ -86,6 +90,8 @@ import { NbComponentStatus } from '../component-status';
 export class NbChatFormComponent {
 
   status: NbComponentStatus = 'basic';
+  inputFocus: boolean = false;
+  inputHover: boolean = false;
 
   droppedFiles: any[] = [];
   imgDropTypes = ['image/png', 'image/jpeg', 'image/gif'];
@@ -198,6 +204,10 @@ export class NbChatFormComponent {
   getInputStatus(): NbComponentStatus {
     if (this.fileOver) {
       return this.getHighlightStatus();
+    }
+
+    if (this.inputFocus || this.inputHover) {
+      return this.status;
     }
 
     return 'basic';

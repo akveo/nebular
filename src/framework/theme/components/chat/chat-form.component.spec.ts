@@ -22,6 +22,20 @@ describe('NbChatFormComponent', () => {
       expect(chatFormComponent.getInputStatus()).toEqual('basic');
     });
 
+    it('should return component status if input focused', () => {
+      chatFormComponent.status = 'info';
+      chatFormComponent.inputFocus = true;
+
+      expect(chatFormComponent.getInputStatus()).toEqual('info');
+    });
+
+    it('should return component status if input hovered', () => {
+      chatFormComponent.status = 'info';
+      chatFormComponent.inputHover = true;
+
+      expect(chatFormComponent.getInputStatus()).toEqual('info');
+    });
+
     it('should return primary if file over and status is basic or control', () => {
       chatFormComponent.fileOver = true;
 
