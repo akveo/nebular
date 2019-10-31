@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { NbButtonModule, NbRadioModule, NbToastrModule } from '@nebular/theme';
+import { NbButtonModule, NbRadioModule, NbToastrModule, NbCardModule } from '@nebular/theme';
 import { ToastrRoutingModule } from './toastr-routing.module';
 import { ToastrDestroyByClickComponent } from './toastr-destroy-by-click.component';
 import { ToastrDurationComponent } from './toastr-duration.component';
@@ -31,6 +31,7 @@ import { FormsModule } from '@angular/forms';
     NbToastrModule.forRoot(),
     NbButtonModule,
     NbRadioModule,
+    NbCardModule,
     ToastrRoutingModule,
   ],
 })

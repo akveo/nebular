@@ -1,15 +1,20 @@
 import { Component, HostBinding } from '@angular/core';
-import { NbToastrService } from '@nebular/theme';
+import { NbToastrService, NbComponentStatus } from '@nebular/theme';
 
 @Component({
   selector: 'nb-toastr-statuses',
   template: `
-    <button nbButton status="success" (click)="showToast('success')">Success</button>
-    <button nbButton status="info" (click)="showToast('info')">Info</button>
-    <button nbButton status="warning" (click)="showToast('warning')">Warning</button>
-    <button nbButton status="primary" (click)="showToast('primary')">Primary</button>
-    <button nbButton status="danger" (click)="showToast('danger')">Danger</button>
-    <button nbButton (click)="showToast('default')">Default</button>
+    <nb-card>
+      <nb-card-body class="example-items-rows">
+        <button nbButton status="basic" (click)="showToast('basic')">Basic</button>
+        <button nbButton status="primary" (click)="showToast('primary')">Primary</button>
+        <button nbButton status="success" (click)="showToast('success')">Success</button>
+        <button nbButton status="info" (click)="showToast('info')">Info</button>
+        <button nbButton status="warning" (click)="showToast('warning')">Warning</button>
+        <button nbButton status="danger" (click)="showToast('danger')">Danger</button>
+        <button nbButton status="control" (click)="showToast('control')">Control</button>
+      </nb-card-body>
+    </nb-card>
   `,
   styles: [
       `
@@ -28,7 +33,7 @@ export class ToastrStatusesComponent {
   constructor(private toastrService: NbToastrService) {
   }
 
-  showToast(status) {
+  showToast(status: NbComponentStatus) {
     this.toastrService.show(status, `Toast: ${++this.index}`, { status });
   }
 }
