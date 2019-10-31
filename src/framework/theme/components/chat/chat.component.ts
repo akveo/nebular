@@ -21,7 +21,7 @@ import {
 
 import { NbComponentSize } from '../component-size';
 import { NbComponentStatus } from '../component-status';
-import { convertToBoolProperty } from '../helpers';
+import { convertToBoolProperty, emptyStatusWarning } from '../helpers';
 import { NbChatFormComponent } from './chat-form.component';
 import { NbChatMessageComponent } from './chat-message.component';
 
@@ -192,7 +192,18 @@ export class NbChatComponent implements OnChanges, AfterContentInit, AfterViewIn
    * Chat status color (adds specific styles):
    * `basic` (default), `primary`, `success`, `info`, `warning`, `danger`, `control`.
    */
-  @Input() status: NbComponentStatus = 'basic';
+  @Input()
+  get status(): NbComponentStatus {
+    return this._status;
+  }
+  set status(value: NbComponentStatus) {
+    if (!value) {
+      emptyStatusWarning('NbChat');
+      value = 'basic';
+    }
+    this._status = value;
+  }
+  protected _status: NbComponentStatus = 'basic';
 
   /**
    * Scroll chat to the bottom of the list when a new message arrives
