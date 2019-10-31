@@ -97,11 +97,14 @@ export interface NbIconConfig {
  * icon-line-height:
  * icon-width:
  * icon-height:
+ * icon-svg-vertical-align:
+ * icon-basic-color:
  * icon-primary-color:
  * icon-info-color:
  * icon-success-color:
  * icon-warning-color:
  * icon-danger-color:
+ * icon-control-color:
  */
 @Component({
   selector: 'nb-icon',
@@ -142,6 +145,16 @@ export class NbIconComponent implements NbIconConfig, OnChanges, OnInit {
     return this.status === 'danger';
   }
 
+  @HostBinding('class.status-basic')
+  get basic() {
+    return this.status === 'basic';
+  }
+
+  @HostBinding('class.status-control')
+  get control() {
+    return this.status === 'control';
+  }
+
   /**
    * Icon name
    * @param {string} status
@@ -162,9 +175,9 @@ export class NbIconComponent implements NbIconConfig, OnChanges, OnInit {
 
   /**
    * Icon status (adds specific styles):
-   * `primary`, `info`, `success`, `warning`, `danger`
+   * `basic`, `primary`, `info`, `success`, `warning`, `danger`, `control`
    */
-  @Input() status: NbComponentStatus;
+  @Input() status?: NbComponentStatus;
 
   /**
    * Sets all icon configurable properties via config object.

@@ -60,6 +60,8 @@ export type NbBadgePosition = NbBadgePhysicalPosition | NbBadgeLogicalPosition;
  * badge-text-font-weight:
  * badge-text-line-height:
  * badge-padding:
+ * badge-basic-background-color:
+ * badge-basic-text-color:
  * badge-primary-background-color:
  * badge-primary-text-color:
  * badge-success-background-color:
@@ -70,6 +72,8 @@ export type NbBadgePosition = NbBadgePhysicalPosition | NbBadgeLogicalPosition;
  * badge-warning-text-color:
  * badge-danger-background-color:
  * badge-danger-text-color:
+ * badge-control-background-color:
+ * badge-control-text-color:
  */
 @Component({
   selector: 'nb-badge',
@@ -104,7 +108,7 @@ export class NbBadgeComponent {
 
   /**
    * Badge status (adds specific styles):
-   * 'primary', 'info', 'success', 'warning', 'danger'
+   * 'basic', 'primary', 'info', 'success', 'warning', 'danger', 'control'
    */
   @Input() status: NbComponentStatus = 'primary';
 
@@ -131,6 +135,16 @@ export class NbBadgeComponent {
   @HostBinding('class.status-danger')
   get danger(): boolean {
     return this.status === 'danger';
+  }
+
+  @HostBinding('class.status-basic')
+  get basic(): boolean {
+    return this.status === 'basic';
+  }
+
+  @HostBinding('class.status-control')
+  get control(): boolean {
+    return this.status === 'control';
   }
 
   @HostBinding('class.position-top')

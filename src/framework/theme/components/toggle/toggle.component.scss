@@ -5,13 +5,13 @@
   outline: none;
 }
 
-:host(.toggle-label-left) .text {
+:host(.toggle-label-left) .text:not(:empty) {
   padding-right: 0.6875rem;
   @include nb-ltr(order, -1);
   @include nb-rtl(order, 1);
 }
 
-:host(.toggle-label-right) .text {
+:host(.toggle-label-right) .text:not(:empty) {
   padding-left: 0.6875rem;
   @include nb-ltr(order, 1);
   @include nb-rtl(order, -1);
@@ -20,13 +20,13 @@
 :host(.toggle-label-start) .toggle-label {
   flex-direction: row-reverse;
 
-  .text {
+  .text:not(:empty) {
     @include nb-ltr(padding-right, 0.6875rem);
     @include nb-rtl(padding-left, 0.6875rem);
   }
 }
 
-:host(.toggle-label-end) .text {
+:host(.toggle-label-end) .text:not(:empty) {
   @include nb-ltr(padding-left, 0.6875rem);
   @include nb-rtl(padding-right, 0.6875rem);
 }

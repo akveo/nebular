@@ -2,11 +2,21 @@ import { Component } from '@angular/core';
 
 @Component({
   template: `
-    <nb-checkbox indeterminate #checkbox>Indeterminate</nb-checkbox>
+    <nb-card>
+      <nb-card-body>
+        <nb-checkbox indeterminate #checkbox>Indeterminate</nb-checkbox>
 
-    <div *ngIf="!checkbox.indeterminate">
-      <button nbButton size="small" (click)="checkbox.indeterminate = true">Set indeterminate</button>
-    </div>
+        <button *ngIf="!checkbox.indeterminate" nbButton size="small" (click)="checkbox.indeterminate = true">
+          Set indeterminate
+        </button>
+      </nb-card-body>
+    </nb-card>
   `,
+  styles: [`
+    button {
+      display: block;
+      margin-top: 1rem;
+    }
+  `],
 })
 export class CheckboxIndeterminateComponent {}

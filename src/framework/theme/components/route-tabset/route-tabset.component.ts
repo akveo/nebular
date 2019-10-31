@@ -33,7 +33,7 @@ import { convertToBoolProperty } from '../helpers';
  * ```ts
  * @NgModule({
  *   imports: [
- *   	// ...
+ *     // ...
  *     NbRouteTabsetModule,
  *   ],
  * })

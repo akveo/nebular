@@ -34,7 +34,7 @@ export interface NbCalendarRange<D> {
  * ```ts
  * @NgModule({
  *   imports: [
- *   	// ...
+ *     // ...
  *     NbCalendarRangeModule,
  *   ],
  * })

@@ -10,31 +10,24 @@
     position: relative;
   }
 
-  nb-spinner {
-    background-color: nb-theme(spinner-background-color);
-
-    .spin-circle {
-      border-right-color: nb-theme(spinner-circle-filled-color);
-      border-left-color: nb-theme(spinner-circle-empty-color);
-      border-top-color: nb-theme(spinner-circle-empty-color);
-      border-bottom-color: nb-theme(spinner-circle-empty-color);
-    }
-
-    .message {
-      color: nb-theme(spinner-text-color);
-      font-family: nb-theme(spinner-text-font-family);
-      font-size: nb-theme(spinner-text-font-size);
-      font-weight: nb-theme(spinner-text-font-weight);
-      line-height: nb-theme(spinner-text-line-height);
-    }
+  nb-spinner .message {
+    color: nb-theme(spinner-text-color);
+    font-family: nb-theme(spinner-text-font-family);
+    font-size: nb-theme(spinner-text-font-size);
+    font-weight: nb-theme(spinner-text-font-weight);
+    line-height: nb-theme(spinner-text-line-height);
   }
 
   @each $status in nb-get-statuses() {
-    nb-spinner.status-#{$status} .spin-circle {
-      border-top-color: nb-theme(spinner-#{$status}-circle-filled-color);
-      border-right-color: nb-theme(spinner-#{$status}-circle-empty-color);
-      border-bottom-color: nb-theme(spinner-#{$status}-circle-filled-color);
-      border-left-color: nb-theme(spinner-#{$status}-circle-filled-color);
+    nb-spinner.status-#{$status} {
+      background-color: nb-theme(spinner-#{$status}-background-color);
+
+      .spin-circle {
+        border-top-color: nb-theme(spinner-#{$status}-circle-filled-color);
+        border-right-color: nb-theme(spinner-#{$status}-circle-empty-color);
+        border-bottom-color: nb-theme(spinner-#{$status}-circle-filled-color);
+        border-left-color: nb-theme(spinner-#{$status}-circle-filled-color);
+      }
     }
   }
 

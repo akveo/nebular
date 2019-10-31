@@ -6,10 +6,13 @@
 
 @mixin button-outline() {
   [nbButton].appearance-outline {
-    background-color: nb-theme(button-outline-background-color);
     border-style: nb-theme(button-outline-border-style);
     border-width: nb-theme(button-outline-border-width);
     text-transform: nb-theme(button-outline-text-transform);
+
+    &:focus {
+      @include nb-outline(nb-theme(button-outline-width), nb-theme(button-outline-color), (inset-shadow: true));
+    }
 
     @each $size in nb-get-sizes() {
       &.size-#{$size} {
@@ -19,6 +22,7 @@
 
     @each $status in nb-get-statuses() {
       &.status-#{$status} {
+        background-color: nb-theme(button-outline-#{$status}-background-color);
         border-color: nb-theme(button-outline-#{$status}-border-color);
         color: nb-theme(button-outline-#{$status}-text-color);
 

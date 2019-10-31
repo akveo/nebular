@@ -137,7 +137,7 @@ export const NB_DATE_SERVICE_OPTIONS = new InjectionToken('Date service options'
  * ```ts
  * @NgModule({
  *   imports: [
- *   	// ...
+ *     // ...
  *     NbDatepickerModule.forRoot(),
  *   ],
  * })
@@ -147,7 +147,7 @@ export const NB_DATE_SERVICE_OPTIONS = new InjectionToken('Date service options'
  * ```ts
  * @NgModule({
  *   imports: [
- *   	// ...
+ *     // ...
  *     NbDatepickerModule,
  *   ],
  * })

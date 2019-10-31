@@ -8,6 +8,7 @@ import { InjectionToken } from '@angular/core';
 
 import { NbGlobalLogicalPosition, NbGlobalPosition } from '../cdk/overlay/position-helper';
 import { NbComponentStatus } from '../component-status';
+import { emptyStatusWarning } from '../helpers';
 import { NbIconConfig } from '../icon/icon.component';
 
 type IconToClassMap = {
@@ -29,7 +30,7 @@ export class NbToastrConfig {
   /**
    * Status chooses color scheme for the toast.
    * */
-  status: '' | NbComponentStatus = 'primary';
+  status: NbComponentStatus = 'primary';
   /**
    * Duration is timeout between toast appears and disappears.
    * */
@@ -75,9 +76,16 @@ export class NbToastrConfig {
     info: 'question-mark-outline',
     warning: 'alert-triangle-outline',
     primary: 'email-outline',
+    control: 'email-outline',
+    basic: 'email-outline',
   };
 
   constructor(config: Partial<NbToastrConfig>) {
+    if ((config.status as string) === '') {
+      emptyStatusWarning('NbToastr');
+      config.status = 'primary';
+    }
+
     this.patchIcon(config);
     Object.assign(this, config);
   }

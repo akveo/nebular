@@ -17,6 +17,8 @@
   nb-checkbox {
     display: flex;
     pointer-events: none;
+    @include nb-ltr(margin-right, 0.5rem);
+    @include nb-rtl(margin-left, 0.5rem);
 
     ::ng-deep .label {
       padding: 0;

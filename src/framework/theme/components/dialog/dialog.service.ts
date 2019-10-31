@@ -37,7 +37,7 @@ import { NbDialogContainerComponent } from './dialog-container';
  * ```ts
  * @NgModule({
  *   imports: [
- *   	// ...
+ *     // ...
  *     NbDialogModule.forRoot(config),
  *   ],
  * })
@@ -48,7 +48,7 @@ import { NbDialogContainerComponent } from './dialog-container';
  * ```ts
  * @NgModule({
  *   imports: [
- *   	// ...
+ *     // ...
  *     NbDialogModule.forChild(config),
  *   ],
  * })
