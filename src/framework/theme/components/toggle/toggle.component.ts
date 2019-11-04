@@ -254,10 +254,10 @@ import { convertToBoolProperty, emptyStatusWarning } from '../helpers';
   selector: 'nb-toggle',
   animations: [
     trigger('onOff', [
-      state('ltrOn', style({ right: 0 })),
-      state('rtlOn', style({ left: 0 })),
+      state('ltrOn', style({ right: 0, left: '*' })),
+      state('rtlOn', style({ left: 0, right: '*' })),
       transition(':enter', [animate(0)]),
-      transition('* <=> *', [animate('0.15s')]),
+      transition('ltrOn <=> rtlOn', [animate('0.15s')]),
     ]),
   ],
   template: `
@@ -422,13 +422,13 @@ export class NbToggleComponent implements OnInit, OnDestroy, ControlValueAccesso
   }
 
   checkState(): string {
+    const isLeftToRightDirection = this.layoutDirection.getDirection() === NbLayoutDirection.LTR;
+
     if (this.checked) {
-      if (this.layoutDirection.getDirection() === NbLayoutDirection.LTR) {
-        return 'ltrOn';
-      } else {
-        return 'rtlOn';
-      }
+      return isLeftToRightDirection ? 'ltrOn' : 'rtlOn';
     }
+
+    return isLeftToRightDirection ? 'rtlOn' : 'ltrOn';
   }
 
   registerOnChange(fn: any) {
