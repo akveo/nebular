@@ -29,7 +29,7 @@
            placeholder="Email address"
            fieldSize="large"
            autofocus
-           [status]="email.dirty ? (email.invalid  ? 'danger' : 'success') : ''"
+           [status]="email.dirty ? (email.invalid  ? 'danger' : 'success') : 'basic'"
            [required]="getConfigValue('forms.validation.email.required')"
            [attr.aria-invalid]="email.invalid && email.touched ? true : null">
     <ng-container *ngIf="email.invalid && email.touched">
@@ -56,7 +56,7 @@
            id="input-password"
            placeholder="Password"
            fieldSize="large"
-           [status]="password.dirty ? (password.invalid  ? 'danger' : 'success') : ''"
+           [status]="password.dirty ? (password.invalid  ? 'danger' : 'success') : 'basic'"
            [required]="getConfigValue('forms.validation.password.required')"
            [minlength]="getConfigValue('forms.validation.password.minLength')"
            [maxlength]="getConfigValue('forms.validation.password.maxLength')"
