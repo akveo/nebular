@@ -1,9 +1,8 @@
 import { spawn } from 'child_process';
 import { resolve as resolvePath } from 'path';
-import { dest, src, task } from 'gulp';
+import { dest, series, src, task } from 'gulp';
 import * as replace from 'gulp-replace';
 import * as log from 'fancy-log';
-import * as runSequence from 'run-sequence';
 
 import { createTsConfigEsm2015, createTsConfigEsm5 } from './ts-configs';
 import { BUILD_DIR, DEV_SCHEMATICS_PATH, JS_PACKAGES } from '../../config';
@@ -20,16 +19,10 @@ task('compile-development-schematics', () => {
   return tsCompile('tsc', ['-p', `${DEV_SCHEMATICS_PATH}/tsconfig.json`]);
 });
 
-task('compile-packages', ['replace-scss-with-css'], (done) => {
-  runSequence(
-    // theme package should be built first so then we can direct other dependant packages
-    // to the theme typings
-    'compile-theme',
-    JS_PACKAGES.filter(p => p !== 'theme')
-      .map(p => `compile-${p}`),
-
-    done,
-  );
+task('replace-scss-with-css', () => {
+  return src(`${BUILD_DIR}/**/*.ts`)
+    .pipe(replace('.scss', '.css'))
+    .pipe(dest(BUILD_DIR));
 });
 
 for (const packageName of JS_PACKAGES) {
@@ -44,11 +37,20 @@ for (const packageName of JS_PACKAGES) {
   });
 }
 
-task('replace-scss-with-css', () => {
-  return src(`${BUILD_DIR}/**/*.ts`)
-    .pipe(replace('.scss', '.css'))
-    .pipe(dest(BUILD_DIR));
-});
+task(
+  'compile-packages',
+  series(
+    'replace-scss-with-css',
+    // theme package should be built first so then we can direct other dependant packages
+    // to the theme typings
+    'compile-theme',
+    ...JS_PACKAGES.filter(p => p !== 'theme')
+      .map(p => `compile-${p}`),
+    (done) => {
+      done();
+    },
+  ),
+);
 
 // github.com/angular/components/blob/3a237bd254cd3c02a913e3cd2faef8546203c252/tools/package-tools/ts-compile.ts#L11
 function tsCompile(binary: 'ngc' | 'tsc', flags: string[]): Promise<void> {

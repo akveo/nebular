@@ -1,48 +1,24 @@
-import { src, task } from 'gulp';
-import { exportThemes } from './export-themes';
-import './example';
-import { structure as DOCS } from '../../../../docs/structure';
+import { task, series } from 'gulp';
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'fs';
 import { isAbsolute, join, resolve, sep } from 'path';
+
+import './example';
+import { structure as DOCS } from '../../../../docs/structure';
 import { DOCS_DIST } from '../config';
 
-const typedoc = require('gulp-typedoc');
-const sass = require('gulp-sass');
-const exec = require('child_process').execSync;
-
-task('docs', ['generate-doc-json', 'find-full-examples']);
-task('generate-doc-json', generateDocJson);
-task('parse-themes', ['generate-doc-json'], parseThemes);
-task('create-docs-dirs', () => {
+task(
+  'docs',
+  series(
+    'generate-doc-json-and-parse-themes',
+    'find-full-examples',
+  ),
+);
+task('create-docs-dirs', (done) => {
   const docsStructure = flatten('docs', routesTree(DOCS));
   createDirsStructure(docsStructure);
+
+  done();
 });
-
-function generateDocJson() {
-  return src(['src/framework/**/*.ts', '!src/**/*.spec.ts', '!src/framework/theme/**/node_modules{,/**}'])
-    .pipe(typedoc({
-      module: 'commonjs',
-      target: 'ES6',
-      // TODO: ignoreCompilerErrors, huh?
-      ignoreCompilerErrors: true,
-      includeDeclarations: true,
-      emitDecoratorMetadata: true,
-      experimentalDecorators: true,
-      excludeExternals: true,
-      exclude: 'node_modules/**/*',
-      json: 'docs/docs.json',
-      version: true,
-      noLib: true,
-    }));
-}
-
-function parseThemes() {
-  exec('prsr -g typedoc -f angular -i docs/docs.json -o docs/output.json');
-  return src('docs/themes.scss')
-    .pipe(sass({
-      functions: exportThemes('docs/', ''),
-    }));
-}
 
 function routesTree(structure) {
   return structure
