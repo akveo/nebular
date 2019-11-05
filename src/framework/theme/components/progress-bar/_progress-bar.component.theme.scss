@@ -8,6 +8,7 @@
   nb-progress-bar {
     .progress-container {
       border-radius: nb-theme(progress-bar-border-radius);
+      direction: ltr;
     }
 
     .progress-value {
