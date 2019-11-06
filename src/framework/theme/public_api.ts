@@ -144,7 +144,6 @@ export * from './components/cdk/adapter/scroll-dispatcher-adapter';
 export * from './components/cdk/adapter/viewport-ruler-adapter';
 export * from './components/cdk/bidi/bidi-service';
 export * from './components/cdk/bidi/bidi.module';
-export * from './components/cdk/platform/platform.module';
 export * from './components/cdk/table/cell';
 export * from './components/cdk/table/data-source';
 export * from './components/cdk/table/row';

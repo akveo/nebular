@@ -2,9 +2,9 @@ import { Injectable, NgZone } from '@angular/core';
 import { ViewportRuler } from '@angular/cdk/overlay';
 import { map } from 'rxjs/operators';
 
-import { NbPlatform } from '../overlay/mapping';
 import { NbLayoutRulerService } from '../../../services/ruler.service';
 import { NbLayoutScrollService, NbScrollPosition } from '../../../services/scroll.service';
+import { NbPlatform } from '../platform/platform-service';
 
 
 @Injectable()
