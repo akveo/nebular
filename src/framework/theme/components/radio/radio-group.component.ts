@@ -15,11 +15,9 @@ import {
   OnDestroy,
   Output,
   QueryList,
-  PLATFORM_ID,
   Inject,
   ElementRef,
 } from '@angular/core';
-import { isPlatformBrowser } from '@angular/common';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { fromEvent, merge } from 'rxjs';
 import { filter, switchMap, takeUntil, takeWhile } from 'rxjs/operators';
@@ -27,6 +25,7 @@ import { convertToBoolProperty, emptyStatusWarning } from '../helpers';
 import { NB_DOCUMENT } from '../../theme.options';
 import { NbRadioComponent } from './radio.component';
 import { NbComponentStatus } from '../component-status';
+import { NbPlatform } from '../cdk/platform/platform-service';
 
 /**
  * The `NbRadioGroupComponent` is the wrapper for `nb-radio` button.
@@ -141,7 +140,7 @@ export class NbRadioGroupComponent implements AfterContentInit, OnDestroy, Contr
 
   constructor(
     protected hostElement: ElementRef<HTMLElement>,
-    @Inject(PLATFORM_ID) protected platformId,
+    protected platform: NbPlatform,
     @Inject(NB_DOCUMENT) protected document,
   ) {}
 
@@ -236,7 +235,7 @@ export class NbRadioGroupComponent implements AfterContentInit, OnDestroy, Contr
 
   protected subscribeOnRadiosBlur() {
     const hasNoRadios = !this.radios || !this.radios.length;
-    if (!isPlatformBrowser(this.platformId) || hasNoRadios) {
+    if (!this.platform.isBrowser || hasNoRadios) {
       return;
     }
 

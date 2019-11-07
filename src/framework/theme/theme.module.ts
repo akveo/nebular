@@ -14,7 +14,6 @@ import {
   NB_THEME_OPTIONS,
   NB_JS_THEMES,
   NB_DOCUMENT,
-  NB_WINDOW,
 } from './theme.options';
 import { NbThemeService } from './services/theme.service';
 import { NbSpinnerService } from './services/spinner.service';
@@ -29,10 +28,7 @@ import { NbLayoutDirectionService, NbLayoutDirection, NB_LAYOUT_DIRECTION } from
 import { NbLayoutScrollService } from './services/scroll.service';
 import { NbLayoutRulerService } from './services/ruler.service';
 import { NbOverlayModule } from './components/cdk/overlay/overlay.module';
-
-export function nbWindowFactory() {
-  return window;
-}
+import { WINDOW_PROVIDERS } from './services/native-window.service';
 
 @NgModule({
   imports: [
@@ -66,8 +62,8 @@ export class NbThemeModule {
         { provide: NB_BUILT_IN_JS_THEMES, useValue: BUILT_IN_THEMES },
         { provide: NB_JS_THEMES, useValue: nbJSThemes || [] },
         { provide: NB_MEDIA_BREAKPOINTS, useValue: nbMediaBreakpoints || DEFAULT_MEDIA_BREAKPOINTS },
-        { provide: NB_WINDOW, useFactory: nbWindowFactory },
         { provide: NB_DOCUMENT, useExisting: DOCUMENT },
+        ...WINDOW_PROVIDERS,
         NbJSThemesRegistry,
         NbThemeService,
         NbMediaBreakpointsService,

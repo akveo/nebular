@@ -2,8 +2,8 @@ import { Injectable, NgZone } from '@angular/core';
 import { CdkScrollable, ScrollDispatcher } from '@angular/cdk/overlay';
 import { Observable } from 'rxjs';
 
-import { NbPlatform } from '../overlay/mapping';
 import { NbLayoutScrollService } from '../../../services/scroll.service';
+import { NbPlatform } from '../platform/platform-service';
 
 @Injectable()
 export class NbScrollDispatcherAdapter extends ScrollDispatcher {
