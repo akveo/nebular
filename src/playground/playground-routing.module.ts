@@ -10,15 +10,15 @@ import { RouterModule, Routes } from '@angular/router';
 export const routes: Routes = [
   {
     path: '',
-    loadChildren: './with-layout/with-layout.module#WithLayoutModule',
+    loadChildren: () => import('./with-layout/with-layout.module').then(m => m.WithLayoutModule),
   },
   {
     path: '',
-    loadChildren: './without-layout/without-layout.module#WithoutLayoutModule',
+    loadChildren: () => import('./without-layout/without-layout.module').then(m => m.WithoutLayoutModule),
   },
   {
     path: '',
-    loadChildren: './without-styles/without-styles.module#WithoutStylesModule',
+    loadChildren: () => import('./without-styles/without-styles.module').then(m => m.WithoutStylesModule),
   },
 ];
 
