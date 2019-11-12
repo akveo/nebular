@@ -103,13 +103,9 @@ export class NbHoverTriggerStrategy extends NbTriggerStrategyBase {
     .pipe(
       filter(() => !this.container()),
       delay(100),
-      takeUntil(
-        observableMerge(
-          observableFromEvent(this.host, 'mouseleave'),
-          this.destroyed$,
-        ),
-      ),
+      takeUntil(observableFromEvent(this.host, 'mouseleave')),
       repeat(),
+      takeUntil(this.destroyed$),
     );
 
   hide$: Observable<Event> = observableFromEvent<Event>(this.host, 'mouseleave')
