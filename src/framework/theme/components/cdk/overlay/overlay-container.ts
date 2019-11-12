@@ -30,7 +30,7 @@ export interface NbRenderableContainer {
 })
 // @breaking-change @5.0.0 Rename to NbPositionedContainerComponent and enable ts lint
 // tslint:disable-next-line
-export abstract class NbPositionedContainer {
+export class NbPositionedContainer {
   @Input() position: NbPosition;
 
   @HostBinding('class.nb-overlay-top')
