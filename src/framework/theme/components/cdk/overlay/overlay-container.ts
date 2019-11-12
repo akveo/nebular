@@ -25,6 +25,11 @@ export interface NbRenderableContainer {
   renderContent();
 }
 
+@Component({
+  template: '',
+})
+// @breaking-change @5.0.0 Rename to NbPositionedContainerComponent and enable ts lint
+// tslint:disable-next-line
 export abstract class NbPositionedContainer {
   @Input() position: NbPosition;
 

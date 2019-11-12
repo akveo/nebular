@@ -50,6 +50,11 @@ import { convertToBoolProperty } from '../helpers';
 /**
  * The `NbBasePicker` component concentrates overlay manipulation logic.
  * */
+@Component({
+  template: '',
+})
+// @breaking-change @5.0.0 Rename to NbBasePickerComponent and enable ts lint
+// tslint:disable-next-line
 export abstract class NbBasePicker<D, T, P>
                 extends NbDatepicker<T>
                 implements OnInit, OnChanges, AfterViewInit, OnDestroy {
