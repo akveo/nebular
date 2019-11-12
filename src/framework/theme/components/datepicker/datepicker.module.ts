@@ -25,7 +25,7 @@ import { NbDateAdapterService, NbRangeAdapterService } from './datepicker-adapte
   entryComponents: [NbCalendarComponent, NbCalendarRangeComponent, NbDatepickerContainerComponent],
 })
 export class NbDatepickerModule {
-  static forRoot(): ModuleWithProviders {
+  static forRoot(): ModuleWithProviders<NbDatepickerModule> {
     return {
       ngModule: NbDatepickerModule,
       providers: [

@@ -19,7 +19,7 @@ import { NB_DIALOG_CONFIG, NbDialogConfig } from './dialog-config';
   entryComponents: [NbDialogContainerComponent],
 })
 export class NbDialogModule {
-  static forRoot(dialogConfig: Partial<NbDialogConfig> = {}): ModuleWithProviders {
+  static forRoot(dialogConfig: Partial<NbDialogConfig> = {}): ModuleWithProviders<NbDialogModule> {
     return {
       ngModule: NbDialogModule,
       providers: [
@@ -29,7 +29,7 @@ export class NbDialogModule {
     }
   }
 
-  static forChild(dialogConfig: Partial<NbDialogConfig> = {}): ModuleWithProviders {
+  static forChild(dialogConfig: Partial<NbDialogConfig> = {}): ModuleWithProviders<NbDialogModule> {
     return {
       ngModule: NbDialogModule,
       providers: [
