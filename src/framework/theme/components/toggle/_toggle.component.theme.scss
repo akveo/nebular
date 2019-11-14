@@ -15,30 +15,22 @@
       cursor: nb-theme(toggle-cursor);
 
       @include nb-ltr() {
-        &.checked {
-          .toggle-switcher {
-            left: calc(100% - #{nb-theme(toggle-switcher-size)} - #{nb-theme(toggle-border-width)});
-          }
+        &.checked .toggle-switcher {
+          left: calc(100% - #{nb-theme(toggle-switcher-size)} - #{nb-theme(toggle-border-width)});
         }
 
-        &:not(.checked) {
-          .toggle-switcher {
-            right: 0;
-          }
+        &:not(.checked) .toggle-switcher {
+          right: 0;
         }
       }
 
       @include nb-rtl() {
-        &.checked {
-          .toggle-switcher {
-            right: calc(100% - #{nb-theme(toggle-switcher-size)} - #{nb-theme(toggle-border-width)});
-          }
+        &.checked .toggle-switcher {
+          right: calc(100% - #{nb-theme(toggle-switcher-size)} - #{nb-theme(toggle-border-width)});
         }
 
-        &:not(.checked) {
-          .toggle-switcher {
-            left: 0;
-          }
+        &:not(.checked) .toggle-switcher {
+          left: 0;
         }
       }
     }
