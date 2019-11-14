@@ -20,7 +20,7 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { NbLayoutDirectionService, NbLayoutDirection } from '../../services/direction.service';
+import { NbLayoutDirectionService } from '../../services/direction.service';
 import { NbComponentStatus } from '../component-status';
 
 import { convertToBoolProperty, emptyStatusWarning } from '../helpers';
@@ -253,11 +253,11 @@ import { convertToBoolProperty, emptyStatusWarning } from '../helpers';
 @Component({
   selector: 'nb-toggle',
   animations: [
-    trigger('onOff', [
-      state('ltrOn', style({ right: 0 })),
-      state('rtlOn', style({ left: 0 })),
+    trigger('position', [
+      state('right', style({ right: 0, left: '*' })),
+      state('left', style({ left: 0, right: '*' })),
       transition(':enter', [animate(0)]),
-      transition('* <=> *', [animate('0.15s')]),
+      transition('right <=> left', [animate('0.15s')]),
     ]),
   ],
   template: `
@@ -272,7 +272,7 @@ import { convertToBoolProperty, emptyStatusWarning } from '../helpers';
              (blur)="onTouched()"
              (click)="onInputClick($event)">
       <div class="toggle" [class.checked]="checked">
-        <span [@onOff]="checkState()" class="toggle-switcher">
+        <span [@position]="checkState()" class="toggle-switcher">
           <nb-icon *ngIf="checked" icon="checkmark-bold-outline" pack="nebular-essentials"></nb-icon>
         </span>
       </div>
@@ -423,12 +423,10 @@ export class NbToggleComponent implements OnInit, OnDestroy, ControlValueAccesso
 
   checkState(): string {
     if (this.checked) {
-      if (this.layoutDirection.getDirection() === NbLayoutDirection.LTR) {
-        return 'ltrOn';
-      } else {
-        return 'rtlOn';
-      }
+      return this.layoutDirection.isLtr() ? 'right' : 'left';
     }
+
+    return this.layoutDirection.isLtr() ? 'left' : 'right';
   }
 
   registerOnChange(fn: any) {
