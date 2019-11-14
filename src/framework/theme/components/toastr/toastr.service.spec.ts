@@ -45,11 +45,18 @@ describe('toastr-component', () => {
     fixture = TestBed.createComponent(NbToastrTestComponent);
   }));
 
+  it('should add \'toastr-overlay-container\' class to overlay', () => {
+    fixture.debugElement.componentInstance.showToast('toast-test-class');
+    fixture.detectChanges();
+    expect(fixture.nativeElement.querySelector('.cdk-global-overlay-wrapper').classList)
+      .toContain('toastr-overlay-container');
+  });
+
   it('should set class if provided', () => {
     fixture.debugElement.componentInstance.showToast('toast-test-class');
     fixture.detectChanges();
     expect(fixture.nativeElement.querySelector('.toast-test-class')).toBeTruthy();
-  })
+  });
 });
 
 describe('toastr-service', () => {
@@ -188,6 +195,11 @@ describe('toastr-container-registry', () => {
         }
       },
       dispose() {},
+      hostElement: {
+        classList: {
+          add() {},
+        },
+      },
     };
 
     overlayStub = {
