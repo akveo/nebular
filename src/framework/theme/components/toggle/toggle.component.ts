@@ -20,7 +20,7 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { NbLayoutDirectionService, NbLayoutDirection } from '../../services/direction.service';
+import { NbLayoutDirectionService } from '../../services/direction.service';
 import { NbComponentStatus } from '../component-status';
 
 import { convertToBoolProperty, emptyStatusWarning } from '../helpers';
@@ -422,13 +422,11 @@ export class NbToggleComponent implements OnInit, OnDestroy, ControlValueAccesso
   }
 
   checkState(): string {
-    const isLeftToRightDirection = this.layoutDirection.getDirection() === NbLayoutDirection.LTR;
-
     if (this.checked) {
-      return isLeftToRightDirection ? 'right' : 'left';
+      return this.layoutDirection.isLtr() ? 'right' : 'left';
     }
 
-    return isLeftToRightDirection ? 'left' : 'right';
+    return this.layoutDirection.isLtr() ? 'left' : 'right';
   }
 
   registerOnChange(fn: any) {
