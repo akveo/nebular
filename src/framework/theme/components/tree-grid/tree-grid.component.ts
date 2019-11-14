@@ -23,6 +23,7 @@ import { fromEvent, merge } from 'rxjs';
 import { debounceTime, takeWhile } from 'rxjs/operators';
 
 import { NB_DOCUMENT, NB_WINDOW } from '../../theme.options';
+import { NbPlatform } from '../cdk/platform/platform-service';
 import { NbDirectionality } from '../cdk/bidi/bidi-service';
 import { NB_TABLE_TEMPLATE, NbTable } from '../cdk/table/table.module';
 import { NbTreeGridDataSource, NbTreeGridDataSourceBuilder } from './data-source/tree-grid-data-source';
@@ -39,7 +40,6 @@ import {
   NbTreeGridRowDefDirective,
 } from './tree-grid-def.component';
 import { NbColumnsService } from './tree-grid-columns.service';
-import { NbPlatform } from '../cdk/platform/platform-service';
 
 /**
  * Tree grid component that can be used to display nested rows of data.

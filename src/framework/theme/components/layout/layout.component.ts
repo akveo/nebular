@@ -6,8 +6,9 @@
 
 import {
   AfterViewInit, Component, ElementRef, HostBinding, HostListener, Input, OnDestroy,
-  Renderer2, ViewChild, ViewContainerRef, Inject,
+  Renderer2, ViewChild, ViewContainerRef, Inject, PLATFORM_ID,
 } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { BehaviorSubject } from 'rxjs';
 import { filter, takeWhile } from 'rxjs/operators';
 
@@ -20,7 +21,6 @@ import { NbScrollPosition, NbLayoutScrollService } from '../../services/scroll.s
 import { NbLayoutDimensions, NbLayoutRulerService } from '../../services/ruler.service';
 import { NB_WINDOW, NB_DOCUMENT } from '../../theme.options';
 import { NbOverlayContainerAdapter } from '../cdk/adapter/overlay-container-adapter';
-import { NbPlatform } from '../cdk/platform/platform-service';
 
 /**
  * Layout container component.
@@ -219,7 +219,7 @@ export class NbLayoutComponent implements AfterViewInit, OnDestroy {
     protected renderer: Renderer2,
     @Inject(NB_WINDOW) protected window,
     @Inject(NB_DOCUMENT) protected document,
-    protected platform: NbPlatform,
+    @Inject(PLATFORM_ID) protected platformId: Object,
     protected layoutDirectionService: NbLayoutDirectionService,
     protected scrollService: NbLayoutScrollService,
     protected rulerService: NbLayoutRulerService,
@@ -311,7 +311,7 @@ export class NbLayoutComponent implements AfterViewInit, OnDestroy {
         }
       });
 
-    if (this.platform.isBrowser) {
+    if (isPlatformBrowser(this.platformId)) {
       // trigger first time so that after the change we have the initial value
       this.themeService.changeWindowWidth(this.window.innerWidth);
     }
@@ -384,7 +384,7 @@ export class NbLayoutComponent implements AfterViewInit, OnDestroy {
    * @returns {NbScrollPosition}
    */
   getScrollPosition(): NbScrollPosition {
-    if (!this.platform.isBrowser) {
+    if (!isPlatformBrowser(this.platformId)) {
       return { x: 0, y: 0 };
     }
 
@@ -422,7 +422,7 @@ export class NbLayoutComponent implements AfterViewInit, OnDestroy {
     x = x == null ? currentX : x;
     y = y == null ? currentY : y;
 
-    if (!this.platform.isBrowser) {
+    if (!isPlatformBrowser(this.platformId)) {
       return;
     }
     if (this.withScrollValue) {

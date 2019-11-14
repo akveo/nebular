@@ -12,7 +12,9 @@ import {
   Inject,
   OnInit,
   OnDestroy,
+  PLATFORM_ID,
 } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
 import { filter, takeWhile } from 'rxjs/operators';
 
@@ -25,7 +27,6 @@ import { NbTreeGridComponent } from './tree-grid.component';
 import { NbTreeGridColumnDefDirective } from './tree-grid-column-def.directive';
 import { NB_DEFAULT_ROW_LEVEL } from './data-source/tree-grid.model';
 import { NbColumnsService } from './tree-grid-columns.service';
-import { NbPlatform } from '../cdk/platform/platform-service';
 
 @Directive({
   selector: 'td[nbTreeGridCell]',
@@ -70,8 +71,8 @@ export class NbTreeGridCellDirective extends NbCellDirective implements OnInit, 
     columnDef: NbTreeGridColumnDefDirective,
     elementRef: ElementRef<HTMLElement>,
     @Inject(NB_TREE_GRID) tree,
+    @Inject(PLATFORM_ID) private platformId,
     @Inject(NB_WINDOW) private window,
-    private platform: NbPlatform,
     private sanitizer: DomSanitizer,
     private directionService: NbLayoutDirectionService,
     private columnService: NbColumnsService,
@@ -84,7 +85,7 @@ export class NbTreeGridCellDirective extends NbCellDirective implements OnInit, 
   }
 
   ngOnInit() {
-    if (this.platform.isBrowser) {
+    if (isPlatformBrowser(this.platformId)) {
       const style = this.window.getComputedStyle(this.elementRef.nativeElement);
       this.initialLeftPadding = style.paddingLeft;
       this.initialRightPadding = style.paddingRight;

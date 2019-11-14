@@ -31,6 +31,7 @@ import {
   ScrollStrategy,
   ScrollStrategyOptions,
 } from '@angular/cdk/overlay';
+import { Platform } from '@angular/cdk/platform';
 
 
 @Directive({ selector: '[nbPortal]' })
@@ -46,6 +47,10 @@ export class NbComponentPortal<T = any> extends ComponentPortal<T> {
 
 @Injectable()
 export class NbOverlay extends Overlay {
+}
+
+@Injectable()
+export class NbPlatform extends Platform {
 }
 
 @Injectable()
@@ -99,6 +104,7 @@ export class NbCdkMappingModule {
       ngModule: NbCdkMappingModule,
       providers: [
         NbOverlay,
+        NbPlatform,
         NbOverlayPositionBuilder,
       ],
     };
