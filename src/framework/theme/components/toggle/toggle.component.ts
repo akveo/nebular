@@ -253,11 +253,11 @@ import { convertToBoolProperty, emptyStatusWarning } from '../helpers';
 @Component({
   selector: 'nb-toggle',
   animations: [
-    trigger('onOff', [
-      state('ltrOn', style({ right: 0, left: '*' })),
-      state('rtlOn', style({ left: 0, right: '*' })),
+    trigger('position', [
+      state('right', style({ right: 0, left: '*' })),
+      state('left', style({ left: 0, right: '*' })),
       transition(':enter', [animate(0)]),
-      transition('ltrOn <=> rtlOn', [animate('0.15s')]),
+      transition('right <=> left', [animate('0.15s')]),
     ]),
   ],
   template: `
@@ -272,7 +272,7 @@ import { convertToBoolProperty, emptyStatusWarning } from '../helpers';
              (blur)="onTouched()"
              (click)="onInputClick($event)">
       <div class="toggle" [class.checked]="checked">
-        <span [@onOff]="checkState()" class="toggle-switcher">
+        <span [@position]="checkState()" class="toggle-switcher">
           <nb-icon *ngIf="checked" icon="checkmark-bold-outline" pack="nebular-essentials"></nb-icon>
         </span>
       </div>
@@ -425,10 +425,10 @@ export class NbToggleComponent implements OnInit, OnDestroy, ControlValueAccesso
     const isLeftToRightDirection = this.layoutDirection.getDirection() === NbLayoutDirection.LTR;
 
     if (this.checked) {
-      return isLeftToRightDirection ? 'ltrOn' : 'rtlOn';
+      return isLeftToRightDirection ? 'right' : 'left';
     }
 
-    return isLeftToRightDirection ? 'rtlOn' : 'ltrOn';
+    return isLeftToRightDirection ? 'left' : 'right';
   }
 
   registerOnChange(fn: any) {
