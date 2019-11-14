@@ -5,7 +5,7 @@ import { Component, DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { ReactiveFormsModule, FormControl } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NbLayoutDirectionService } from '../../services/direction.service';
+import { NbLayoutDirectionService, NbLayoutDirection } from '../../services/direction.service';
 
 
 describe('Component: NbToggle', () => {
@@ -79,6 +79,39 @@ describe('Component: NbToggle', () => {
     toggle.status = 'info';
     fixture.detectChanges();
     expect(testContainerEl.classList.contains('status-info')).toBeTruthy();
+  });
+
+  describe('state animation', () => {
+
+    beforeEach(() => {
+      TestBed.get(NbLayoutDirectionService).setDirection(NbLayoutDirection.LTR);
+    });
+
+    afterAll(() => {
+      TestBed.get(NbLayoutDirectionService).setDirection(NbLayoutDirection.LTR);
+    });
+
+    it(`should has 'left' position when unchecked in LTR`, () => {
+      expect(toggle.checkState()).toEqual('left');
+    });
+
+    it(`should has 'right' position when checked in LTR`, () => {
+      toggle.checked = true;
+      expect(toggle.checkState()).toEqual('right');
+    });
+
+    it(`should has 'right' position when unchecked in RTL`, () => {
+      const directionService: NbLayoutDirectionService = TestBed.get(NbLayoutDirectionService);
+      directionService.setDirection(NbLayoutDirection.RTL);
+      expect(toggle.checkState()).toEqual('right');
+    });
+
+    it(`should has 'left' position when checked in RTL`, () => {
+      const directionService: NbLayoutDirectionService = TestBed.get(NbLayoutDirectionService);
+      directionService.setDirection(NbLayoutDirection.RTL);
+      toggle.checked = true;
+      expect(toggle.checkState()).toEqual('left');
+    });
   });
 });
 

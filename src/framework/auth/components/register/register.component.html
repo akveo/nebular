@@ -27,7 +27,7 @@
            autofocus
            fullWidth
            fieldSize="large"
-           [status]="fullName.dirty ? (fullName.invalid  ? 'danger' : 'success') : ''"
+           [status]="fullName.dirty ? (fullName.invalid  ? 'danger' : 'success') : 'basic'"
            [required]="getConfigValue('forms.validation.fullName.required')"
            [minlength]="getConfigValue('forms.validation.fullName.minLength')"
            [maxlength]="getConfigValue('forms.validation.fullName.maxLength')"
@@ -56,7 +56,7 @@
            placeholder="Email address"
            fullWidth
            fieldSize="large"
-           [status]="email.dirty ? (email.invalid  ? 'danger' : 'success') : ''"
+           [status]="email.dirty ? (email.invalid  ? 'danger' : 'success') : 'basic'"
            [required]="getConfigValue('forms.validation.email.required')"
            [attr.aria-invalid]="email.invalid && email.touched ? true : null">
     <ng-container *ngIf="email.invalid && email.touched">
@@ -80,7 +80,7 @@
            placeholder="Password"
            fullWidth
            fieldSize="large"
-           [status]="password.dirty ? (password.invalid  ? 'danger' : 'success') : ''"
+           [status]="password.dirty ? (password.invalid  ? 'danger' : 'success') : 'basic'"
            [required]="getConfigValue('forms.validation.password.required')"
            [minlength]="getConfigValue('forms.validation.password.minLength')"
            [maxlength]="getConfigValue('forms.validation.password.maxLength')"
@@ -109,7 +109,7 @@
            placeholder="Confirm Password"
            fullWidth
            fieldSize="large"
-           [status]="rePass.dirty ? (rePass.invalid || password.value != rePass.value  ? 'danger' : 'success') : ''"
+           [status]="rePass.dirty ? (rePass.invalid || password.value != rePass.value  ? 'danger' : 'success') : 'basic'"
            [required]="getConfigValue('forms.validation.password.required')"
            [attr.aria-invalid]="rePass.invalid && rePass.touched ? true : null">
     <ng-container *ngIf="rePass.invalid && rePass.touched">
