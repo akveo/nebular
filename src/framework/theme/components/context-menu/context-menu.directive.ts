@@ -157,6 +157,9 @@ export class NbContextMenuDirective implements NbDynamicOverlayController, OnCha
   @Input('nbContextMenuTrigger')
   trigger: NbTrigger = NbTrigger.CLICK;
 
+  @Input('nbContextMenuClass')
+  contextMenuClass: string = '';
+
   protected ref: NbOverlayRef;
   protected container: ComponentRef<any>;
   protected positionStrategy: NbAdjustableConnectedPositionStrategy;
@@ -216,7 +219,8 @@ export class NbContextMenuDirective implements NbDynamicOverlayController, OnCha
         position: this.position,
         items: this._items,
         tag: this.tag,
-      });
+      })
+      .overlayConfig({panelClass: this.contextMenuClass});
   }
 
   /*

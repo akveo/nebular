@@ -171,11 +171,16 @@ export class NbToastrContainerRegistry {
   protected createContainer(position: NbGlobalLogicalPosition): NbToastrOverlayWithContainer {
     const positionStrategy = this.positionBuilder.global().position(position);
     const ref = this.overlay.create({ positionStrategy });
+    this.addClassToOverlayHost(ref);
     const containerRef = ref.attach(new NbComponentPortal(NbToastrContainerComponent, null, null, this.cfr));
     return {
       overlayRef: ref,
       toastrContainer: new NbToastContainer(position, containerRef, this.positionHelper),
     };
+  }
+
+  protected addClassToOverlayHost(overlayRef: NbOverlayRef) {
+    overlayRef.hostElement.classList.add('toastr-overlay-container');
   }
 
   protected existsInDom(toastContainer: NbToastContainer): boolean {
