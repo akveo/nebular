@@ -98,6 +98,10 @@ export class NbOverlayServiceMock {
 class PositionStrategy {
   constructor(public position: string) {}
   positionChange = new Subject<any>();
+
+  getPosition() {
+    return this.position;
+  }
 }
 
 const bottomPositionStrategy: any = new PositionStrategy('bottom');

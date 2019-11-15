@@ -201,6 +201,7 @@ export class NbDynamicOverlay {
       content: this.content,
       context: this.context,
       cfr: this.componentFactoryResolver,
+      position: this.positionStrategy.getPosition(),
     };
   }
 
