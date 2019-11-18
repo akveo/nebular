@@ -810,16 +810,21 @@ export class NbSelectComponent<T> implements AfterViewInit, AfterContentInit, On
   }
 
   ngAfterContentInit() {
-    if (this.queue != null) {
-      // Call 'writeValue' when current change detection run is finished.
-      // When writing is finished, change detection starts again, since
-      // microtasks queue is empty.
-      // Prevents ExpressionChangedAfterItHasBeenCheckedError.
-      Promise.resolve().then(() => {
-        this.writeValue(this.queue);
-        this.queue = null;
+    this.options.changes
+      .pipe(
+        takeWhile(() => this.alive),
+        startWith(this.options),
+        filter(() => this.queue != null),
+      )
+      .subscribe(() => {
+        // Call 'writeValue' when current change detection run is finished.
+        // When writing is finished, change detection starts again, since
+        // microtasks queue is empty.
+        // Prevents ExpressionChangedAfterItHasBeenCheckedError.
+        Promise.resolve().then(() => {
+          this.writeValue(this.queue);
+        });
       });
-    }
   }
 
   ngAfterViewInit() {
@@ -873,8 +878,11 @@ export class NbSelectComponent<T> implements AfterViewInit, AfterContentInit, On
       return;
     }
 
-    if (this.options) {
+    if (this.options && this.options.length) {
       this.setSelection(value);
+      if (this.selectionModel.length) {
+        this.queue = null;
+      }
     } else {
       this.queue = value;
     }
@@ -884,6 +892,7 @@ export class NbSelectComponent<T> implements AfterViewInit, AfterContentInit, On
    * Selects option or clear all selected options if value is null.
    * */
   protected handleOptionClick(option: NbOptionComponent<T>) {
+    this.queue = null;
     if (option.value == null) {
       this.reset();
     } else {
