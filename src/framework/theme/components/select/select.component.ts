@@ -814,7 +814,7 @@ export class NbSelectComponent<T> implements AfterViewInit, AfterContentInit, On
       .pipe(
         takeWhile(() => this.alive),
         startWith(this.options),
-        filter(() => this.queue != null),
+        filter(() => this.queue != null && this.canSelectValue()),
       )
       .subscribe(() => {
         // Call 'writeValue' when current change detection run is finished.
@@ -878,7 +878,7 @@ export class NbSelectComponent<T> implements AfterViewInit, AfterContentInit, On
       return;
     }
 
-    if (this.options && this.options.length) {
+    if (this.canSelectValue()) {
       this.setSelection(value);
       if (this.selectionModel.length) {
         this.queue = null;
@@ -1138,6 +1138,10 @@ export class NbSelectComponent<T> implements AfterViewInit, AfterContentInit, On
 
   protected isClickedWithinComponent($event: Event) {
     return this.hostRef.nativeElement === $event.target || this.hostRef.nativeElement.contains($event.target as Node);
+  }
+
+  protected canSelectValue(): boolean {
+    return !!(this.options && this.options.length);
   }
 
   @HostBinding('class.size-tiny')
