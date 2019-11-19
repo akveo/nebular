@@ -6,11 +6,8 @@ import {
 import { NbStepperComponent } from './stepper.component';
 import { NbStepComponent } from './step.component';
 import { NbIconModule } from '../icon/icon.module';
-import {
-  Component,
-  DebugElement,
-  NO_ERRORS_SCHEMA,
-} from '@angular/core';
+import { NbStepperModule } from './stepper.module';
+import { Component } from '@angular/core';
 import { By } from '@angular/platform-browser';
 
 @Component({
@@ -37,70 +34,77 @@ export class NbStepChangeTestComponent {}
 describe('Stepper: Step Change', () => {
   let stepper: NbStepperComponent;
   let fixture: ComponentFixture<NbStepChangeTestComponent>;
-  let stepperEl: DebugElement;
+  let stepChangeSpy;
 
   beforeEach((() => {
     TestBed.configureTestingModule({
-      schemas: [NO_ERRORS_SCHEMA],
-      declarations: [NbStepChangeTestComponent, NbStepComponent, NbStepperComponent],
-    }).compileComponents();
+      imports: [NbStepperModule, NbIconModule],
+      declarations: [NbStepChangeTestComponent],
+    });
 
     fixture = TestBed.createComponent(NbStepChangeTestComponent);
-    stepper = fixture.debugElement.children[0].componentInstance;
-    stepperEl = fixture.debugElement.nativeElement;
+    stepper = fixture.debugElement.query(By.directive(NbStepperComponent)).componentInstance;
     fixture.detectChanges();
+    stepChangeSpy = jasmine.createSpy('step change spy');
   }));
 
-  it('Should emit next selectId on next method', () => {
-    spyOn(stepper.stepChanged, 'emit');
+  it('Should emit step change on next method', () => {
+    stepper.stepChanged.subscribe(stepChangeSpy);
     stepper.next();
     fixture.detectChanges();
 
-    expect(stepper.stepChanged.emit).toHaveBeenCalled();
-  });
-
-  it('Should emit previous selectId on previous method', () => {
-    spyOn(stepper.stepChanged, 'emit');
-    stepper.next();
-    stepper.previous();
-    fixture.detectChanges();
-
-    expect(stepper.stepChanged.emit).toHaveBeenCalledWith(1);
+    expect(stepChangeSpy).toHaveBeenCalled();
   });
 
   it('Should emit step change by clicking on step', () => {
-    spyOn(stepper.stepChanged, 'emit');
+    stepper.stepChanged.subscribe(stepChangeSpy);
     const step = fixture.debugElement.query(By.css('.step'));
     step.triggerEventHandler('click', null);
     fixture.detectChanges();
 
-    expect(stepper.stepChanged.emit).toHaveBeenCalledWith(0);
+    expect(stepChangeSpy).toHaveBeenCalled();
   });
 
   it('Step change should not emit if navigation is disabled', () => {
-    spyOn(stepper.stepChanged, 'emit');
+    stepper.stepChanged.subscribe(stepChangeSpy);
     stepper.disableStepNavigation = true;
     const step = fixture.debugElement.query(By.css('.step'));
     step.triggerEventHandler('click', null);
 
     fixture.detectChanges();
-    expect(stepper.stepChanged.emit).not.toHaveBeenCalled();
+    expect(stepChangeSpy).not.toHaveBeenCalled();
   });
 
   it('Step change should not emit in last step', () => {
-    spyOn(stepper.stepChanged, 'emit');
     stepper.selectedIndex = 2;
+    stepper.stepChanged.subscribe(stepChangeSpy);
     stepper.next();
 
-    expect(stepper.stepChanged.emit).not.toHaveBeenCalled();
+    expect(stepChangeSpy).not.toHaveBeenCalled();
   });
 
   it('Step change should not emit in first step', () => {
-    spyOn(stepper.stepChanged, 'emit');
     stepper.selectedIndex = 0;
+    stepper.stepChanged.subscribe(stepChangeSpy);
     stepper.previous();
 
-    expect(stepper.stepChanged.emit).not.toHaveBeenCalled();
+    expect(stepChangeSpy).not.toHaveBeenCalled();
+  });
+
+  it('Step change should emit via selected input', () => {
+    stepper.stepChanged.subscribe(stepChangeSpy);
+    const step = fixture.debugElement.query(By.css('.step')).componentInstance;
+    stepper.selected = step;
+
+    fixture.detectChanges();
+    expect(stepChangeSpy).not.toHaveBeenCalled();
+  });
+
+  it('Step change should emit via selectedIndex input', () => {
+    stepper.stepChanged.subscribe(stepChangeSpy);
+    stepper.selectedIndex = 2;
+    fixture.detectChanges();
+    expect(stepChangeSpy).toHaveBeenCalled();
   });
 });
 
