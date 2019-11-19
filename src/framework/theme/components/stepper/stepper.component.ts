@@ -19,6 +19,13 @@ import { NbStepComponent } from './step.component';
 
 export type NbStepperOrientation = 'vertical' | 'horizontal';
 
+export interface NbStepChangedEvent {
+  index: number;
+  step: NbStepComponent;
+  previouslySelectedIndex: number;
+  previouslySelectedStep: NbStepComponent;
+}
+
 /**
  * Stepper component
  *
@@ -82,7 +89,7 @@ export type NbStepperOrientation = 'vertical' | 'horizontal';
  * 'nbStepperPrevious' and 'nbStepperNext' buttons.
  * @stacked-example(Disabled steps navigation, stepper/stepper-disabled-step-nav.component)
  *
- * `stepChanged` output for listening step change. This event emits current step index.
+ * `stepChanged` output for listening step change. This event emits `NbStepChangedEvent` object.
  * @stacked-example(Step change event, stepper/stepper-step-change-event.component)
  * @styles
  *
@@ -110,9 +117,9 @@ export type NbStepperOrientation = 'vertical' | 'horizontal';
  */
 @Component({
   selector: 'nb-stepper',
-  styleUrls: ['./stepper.component.scss'],
+  styleUrls: [ './stepper.component.scss' ],
   templateUrl: './stepper.component.html',
-  providers: [{ provide: NB_STEPPER, useExisting: NbStepperComponent }],
+  providers: [ { provide: NB_STEPPER, useExisting: NbStepperComponent } ],
 })
 export class NbStepperComponent {
 
@@ -126,16 +133,24 @@ export class NbStepperComponent {
   set selectedIndex(index: number) {
     if (!this.steps) {
       this._selectedIndex = index;
-      this.stepChanged.next(this._selectedIndex);
       return;
     }
 
     this.markCurrentStepInteracted();
     if (this.canBeSelected(index)) {
+      const previouslySelectedIndex = this._selectedIndex;
+      const previouslySelectedStep = this.selected;
       this._selectedIndex = index;
-      this.stepChanged.next(this._selectedIndex);
+
+      this.stepChanged.emit({
+        index: this.selectedIndex,
+        step: this.selected,
+        previouslySelectedIndex,
+        previouslySelectedStep,
+      })
     }
   }
+
   protected _selectedIndex: number = 0;
 
   /**
@@ -185,9 +200,9 @@ export class NbStepperComponent {
 
   /**
    * Emits when step changed
-   * @type {EventEmitter<number>}
+   * @type {EventEmitter<NbStepChangedEvent>}
    */
-  @Output() stepChanged = new EventEmitter<number>();
+  @Output() stepChanged = new EventEmitter<NbStepChangedEvent>();
 
   @HostBinding('class.vertical')
   get vertical() {
@@ -230,7 +245,12 @@ export class NbStepperComponent {
   reset() {
     this._selectedIndex = 0;
     this.steps.forEach(step => step.reset());
-    this.stepChanged.emit(this.selectedIndex);
+    this.stepChanged.emit({
+      index: this.selectedIndex,
+      step: this.selected,
+      previouslySelectedIndex: undefined,
+      previouslySelectedStep: undefined,
+    });
   }
 
   isStepSelected(step: NbStepComponent) {
@@ -242,8 +262,11 @@ export class NbStepperComponent {
   }
 
   protected canBeSelected(indexToCheck: number): boolean {
+    if (indexToCheck === this.selectedIndex) {
+      return false;
+    }
     const noSteps = !this.steps || this.steps.length === 0;
-    if (noSteps || indexToCheck < 0 || indexToCheck >= this.steps.length) {
+    if (noSteps || indexToCheck < 0 || indexToCheck >= this.steps.length || indexToCheck === this.selectedIndex) {
       return false;
     }
 

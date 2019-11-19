@@ -2,7 +2,7 @@
   <nb-card-body>
     <nb-stepper
       orientation="horizontal"
-      [selectedIndex]="customIndex"
+      [selectedIndex]="randomIndex"
       (stepChanged)="handleStepChange($event)">
       <nb-step [label]="labelOne">
         <ng-template #labelOne>First step</ng-template>
@@ -49,15 +49,13 @@
       </nb-step>
     </nb-stepper>
 
-    <div
-      class="custom-index"
-      (click)="onClick()">
-      <button nbButton>
-        Set custom index
+    <div class="random-index">
+      <button nbButton (click)="onClick()">
+        Set random index
       </button>
 
-      <span class="selected-index">
-        Current step - {{ currentStep }}
+      <span class="h4">
+        Current step - {{ currentStepIndex }}, previous step - {{ previousStepIndex }}
       </span>
     </div>
   </nb-card-body>

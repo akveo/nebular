@@ -1,17 +1,14 @@
 import { Component } from '@angular/core';
+import { NbStepChangedEvent } from '../../../framework/theme/components/stepper/stepper.component';
 
 @Component({
   templateUrl: './stepper-step-change-event.component.html',
-  styles     : [`.selected-index {
-      font-size: 24px;
-      font-weight: bold;
-  }
-
+  styles     : [`
   button {
       margin: 0.5rem;
   }
 
-  .custom-index {
+  random-index {
       display: flex;
       align-items: center;
   }
@@ -19,14 +16,16 @@ import { Component } from '@angular/core';
 })
 
 export class StepperStepChangeEventComponent {
-  currentStep = 0;
-  customIndex = 0;
+  currentStepIndex = 0;
+  previousStepIndex = 0;
+  randomIndex = 0;
 
-  handleStepChange(index: number): void {
-    this.currentStep = index;
+  handleStepChange(stepperInfo: NbStepChangedEvent): void {
+    this.currentStepIndex = stepperInfo.index;
+    this.previousStepIndex = stepperInfo.previouslySelectedIndex;
   }
 
   onClick() {
-    this.customIndex = Math.floor(Math.random() * 4);
+    this.randomIndex = Math.floor(Math.random() * 4);
   }
 }
