@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { browser, element, by } from 'protractor';
+import { browser, element, by, Key } from 'protractor';
 
 import { hasClass } from './e2e-helper';
 
@@ -42,4 +42,25 @@ describe('accordion', () => {
       hasClass(element(by.css('nb-accordion > nb-accordion-item:nth-child(3)')), 'expanded'),
     ).toBeTruthy('second is expanded');
   });
+
+  describe('a11y', () => {
+
+    it('should be interactable through keyboard', () => {
+      expect(
+        hasClass(
+          element(by.css('nb-accordion > nb-accordion-item:nth-child(3)')) , 'expanded',
+        ),
+      ).toBeTruthy();
+
+      return element(by.css('nb-accordion > nb-accordion-item:nth-child(3) > nb-accordion-item-header'))
+        .sendKeys(Key.ENTER)
+        .then(() => {
+            expect(
+              hasClass(
+                element(by.css('nb-accordion > nb-accordion-item:nth-child(3)')), 'collapsed',
+              ),
+            ).toBeTruthy('nb-accordion-item is collapsed');
+        })
+    })
+  })
 });
