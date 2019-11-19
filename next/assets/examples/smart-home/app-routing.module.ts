@@ -10,7 +10,7 @@ export const routes: Routes = [
   },
   {
     path: 'auth',
-    loadChildren: './auth/smart-home-auth.module#AuthModule',
+    loadChildren: () => import('./auth/smart-home-auth.module').then(m => m.AuthModule),
   },
 ];
 
