@@ -24,7 +24,7 @@ export class MenuChildrenComponent {
         },
         {
           title: 'Privacy Policy',
-          ulr: '#', // goes directly into `href` attribute
+          url: '#', // goes directly into `href` attribute
         },
         {
           title: 'Logout',
