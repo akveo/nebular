@@ -155,7 +155,7 @@ export class NbReactiveFormSelectComponent {
   formControl: FormControl = new FormControl();
 
   @ViewChild(NbSelectComponent, { static: false }) selectComponent: NbSelectComponent<number>;
-  @ViewChild(NbOptionComponent, { static: false }) optionComponent: NbOptionComponent<number>;
+  @ViewChildren(NbOptionComponent) optionComponents: QueryList<NbOptionComponent<number>>;
 }
 
 @Component({
@@ -515,14 +515,14 @@ describe('Component: NbSelectComponent', () => {
     selectFixture.detectChanges();
     flush();
 
-    const optionSelectSpy = spyOn(testComponent.optionComponent, 'select').and.callThrough();
+    const optionSelectSpy = spyOn(testComponent.optionComponents.first, 'select').and.callThrough();
 
-    expect(testComponent.optionComponent.selected).toEqual(false);
+    expect(testComponent.optionComponents.first.selected).toEqual(false);
 
     testComponent.formControl.setValue(1);
     selectFixture.detectChanges();
 
-    expect(testComponent.optionComponent.selected).toEqual(true);
+    expect(testComponent.optionComponents.first.selected).toEqual(true);
     expect(optionSelectSpy).toHaveBeenCalledTimes(1);
   }));
 
@@ -956,7 +956,7 @@ describe('NbOptionComponent', () => {
     fixture = TestBed.createComponent(NbReactiveFormSelectComponent);
     testSelectComponent = fixture.componentInstance;
     fixture.detectChanges();
-    option = testSelectComponent.optionComponent;
+    option = testSelectComponent.optionComponents.first;
   });
 
   it('should ignore selection change if destroyed', fakeAsync(() => {
@@ -1049,4 +1049,164 @@ describe('NbOptionComponent disabled', () => {
     const option = fixture.debugElement.query(By.directive(NbOptionComponent));
     expect(option.attributes.disabled).toEqual('');
   }));
+});
+
+describe('NbSelect - dynamic options', () => {
+  let fixture: ComponentFixture<NbReactiveFormSelectComponent>;
+  let testComponent: NbReactiveFormSelectComponent;
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [
+        RouterTestingModule.withRoutes([]),
+        FormsModule,
+        ReactiveFormsModule,
+        NbThemeModule.forRoot(),
+        NbLayoutModule,
+        NbSelectModule,
+      ],
+      declarations: [ NbReactiveFormSelectComponent ],
+    });
+
+    fixture = TestBed.createComponent(NbReactiveFormSelectComponent);
+    testComponent = fixture.componentInstance;
+  });
+
+  describe('Set value from queue', () => {
+    let selectComponent: NbSelectComponent<number>;
+
+    beforeEach(() => {
+      // Force select to cache the value as there is no options to select.
+      testComponent.options = [];
+      testComponent.formControl = new FormControl(1);
+      fixture.detectChanges();
+
+      selectComponent = fixture.debugElement
+        .query(By.directive(NbSelectComponent)).componentInstance;
+    });
+
+    it('should set value from queue when options added dynamically (after change detection run)', fakeAsync(() => {
+      expect(selectComponent.selectionModel.length).toEqual(0);
+
+      testComponent.options = [1];
+      fixture.detectChanges();
+      flush();
+      fixture.detectChanges();
+
+      expect(selectComponent.selectionModel[0]).toEqual(testComponent.optionComponents.first);
+    }));
+
+    it('should set value from queue when options change', fakeAsync(() => {
+      testComponent.options = [0];
+      fixture.detectChanges();
+      flush();
+      fixture.detectChanges();
+
+      expect(selectComponent.selectionModel.length).toEqual(0);
+
+      testComponent.options.push(1);
+      fixture.detectChanges();
+      flush();
+      fixture.detectChanges();
+
+      expect(selectComponent.selectionModel[0]).toEqual(testComponent.optionComponents.last);
+    }));
+  });
+
+  describe('Clear queue after value set', () => {
+    /*
+      We can ensure queue is clean by spying on `writeValue` calls on select. It will be called only if options
+      change and queue has a value.
+    */
+
+    it('should clear queue after option selected by click', fakeAsync(() => {
+      testComponent.options = [];
+      testComponent.formControl = new FormControl(1);
+      fixture.detectChanges();
+
+      const selectComponent: NbSelectComponent<number> = fixture.debugElement
+        .query(By.directive(NbSelectComponent)).componentInstance;
+      testComponent.options = [0];
+      fixture.detectChanges();
+      flush();
+      fixture.detectChanges();
+
+      testComponent.optionComponents.first.onClick({ preventDefault() {} } as Event);
+      fixture.detectChanges();
+
+      const writeValueSpy = spyOn(selectComponent, 'writeValue').and.callThrough();
+      testComponent.options.push(1);
+      fixture.detectChanges();
+      flush();
+      expect(writeValueSpy).not.toHaveBeenCalled();
+    }));
+
+    it(`should clear queue after option selected via 'selected' input`, fakeAsync(() => {
+      testComponent.options = [];
+      testComponent.formControl = new FormControl(1);
+      fixture.detectChanges();
+
+      const selectComponent: NbSelectComponent<number> = fixture.debugElement
+        .query(By.directive(NbSelectComponent)).componentInstance;
+      testComponent.options = [0];
+      fixture.detectChanges();
+      flush();
+      fixture.detectChanges();
+
+      selectComponent.selected = 0;
+      fixture.detectChanges();
+
+      const writeValueSpy = spyOn(selectComponent, 'writeValue').and.callThrough();
+      testComponent.options.push(1);
+      fixture.detectChanges();
+      flush();
+      expect(writeValueSpy).not.toHaveBeenCalled();
+    }));
+
+    it('should clear queue after options change and selection model change', fakeAsync(() => {
+      testComponent.options = [];
+      testComponent.formControl = new FormControl(1);
+      fixture.detectChanges();
+
+      const selectComponent: NbSelectComponent<number> = fixture.debugElement
+        .query(By.directive(NbSelectComponent)).componentInstance;
+      const writeValueSpy = spyOn(selectComponent, 'writeValue').and.callThrough();
+
+      testComponent.options = [1];
+      fixture.detectChanges();
+      flush();
+      fixture.detectChanges();
+
+      expect(writeValueSpy).toHaveBeenCalledTimes(1);
+
+      testComponent.options.push(2);
+      fixture.detectChanges();
+      flush();
+      fixture.detectChanges();
+
+      expect(writeValueSpy).toHaveBeenCalledTimes(1);
+    }));
+
+    it('should not clear queue after options change and selection model is empty', fakeAsync(() => {
+      testComponent.options = [];
+      testComponent.formControl = new FormControl(2);
+      fixture.detectChanges();
+
+      const selectComponent: NbSelectComponent<number> = fixture.debugElement
+        .query(By.directive(NbSelectComponent)).componentInstance;
+      const writeValueSpy = spyOn(selectComponent, 'writeValue').and.callThrough();
+
+      testComponent.options = [0];
+      fixture.detectChanges();
+      flush();
+      fixture.detectChanges();
+      expect(writeValueSpy).toHaveBeenCalledTimes(1);
+
+      testComponent.options.push(1);
+      fixture.detectChanges();
+      flush();
+      fixture.detectChanges();
+      expect(writeValueSpy).toHaveBeenCalledTimes(2);
+    }));
+  });
 });

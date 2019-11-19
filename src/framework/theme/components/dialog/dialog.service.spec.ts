@@ -78,6 +78,11 @@ describe('dialog-service', () => {
     expect(overlayContainer.querySelector('.nb-overlay-test-backdrop-class')).toBeTruthy();
   });
 
+  it('should assign dialogClass if provided', () => {
+    dialog.open(NbTestDialogComponent, { dialogClass: 'nb-overlay-test-dialog-class' });
+    expect(overlayContainer.querySelector('.nb-overlay-test-dialog-class')).toBeTruthy();
+  });
+
 
   it('should render with backdrop if hasBackdrop is true', () => {
     dialog.open(NbTestDialogComponent, { hasBackdrop: true });
