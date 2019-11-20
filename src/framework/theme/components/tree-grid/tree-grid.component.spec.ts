@@ -29,6 +29,9 @@ interface CustomStructure {
   expanded?: boolean;
 }
 
+Component({
+  template: '',
+})
 class BaseTreeGridTestComponent {
   columns: string[];
   dataSource: NbTreeGridDataSource<any>;

@@ -37,6 +37,7 @@ testem.log
 /docs/output.json
 /docs/assets/examples
 /docs/dist
+/packages-smoke/dist
 
 # e2e
 /e2e/*.js

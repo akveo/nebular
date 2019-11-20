@@ -16,7 +16,7 @@ const routes: Route[] = [
     children: [
       {
         path: 'bootstrap',
-        loadChildren: './bootstrap/bootstrap.module#BootstrapModule',
+        loadChildren: () => import('./bootstrap/bootstrap.module').then(m => m.BootstrapModule),
       },
     ],
   },

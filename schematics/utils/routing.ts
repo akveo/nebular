@@ -116,9 +116,9 @@ export function generateRoute(...routeFields: string[]) {
 
 export type RoutePredicate = (route: ts.ObjectLiteralExpression) => boolean;
 
-export function generateLazyModulePath(from: Path, to: Path, moduleClassName: string): string {
+export function generateLazyModuleImport(from: Path, to: Path, moduleClassName: string): string {
   const path = normalize(importPath(from, to));
-  return `./${dirname(path)}/${basename(path)}#${moduleClassName}`;
+  return `() => import('./${dirname(path)}/${basename(path)}').then(m => m.${moduleClassName})`;
 }
 
 /**
@@ -190,8 +190,8 @@ export function addRootRoute(tree: Tree, targetFile: Path): void {
   const isLayout = isLayoutPath(targetFile);
   const baseModulePath = isLayout ? LAYOUT_MODULE_PATH : NO_LAYOUT_MODULE_PATH ;
   const baseModuleClass = isLayout ? LAYOUT_MODULE_CLASS : NO_LAYOUT_MODULE_CLASS  ;
-  const lazyModulePath = generateLazyModulePath(PLAYGROUND_ROUTING_MODULE_PATH, baseModulePath, baseModuleClass);
-  const routeString = generatePathRoute('', `loadChildren: '${lazyModulePath}'`);
+  const lazyModuleImport = generateLazyModuleImport(PLAYGROUND_ROUTING_MODULE_PATH, baseModulePath, baseModuleClass);
+  const routeString = generatePathRoute('', `loadChildren: ${lazyModuleImport}`);
   addRoute(tree, PLAYGROUND_ROUTING_MODULE_PATH, routesArray, routeString);
 }
 
@@ -365,9 +365,9 @@ export function componentRoutePredicate(componentClass: string, route: ts.Object
   return !!component && component.initializer.getText() === componentClass;
 }
 
-export function lazyModulePredicate(lazyModulePath: string, route: ts.ObjectLiteralExpression): boolean {
+export function lazyModulePredicate(lazyModuleImport: string, route: ts.ObjectLiteralExpression): boolean {
   const loadChildren = getRouteLazyModule(route);
-  return !!loadChildren && loadChildren.initializer.getText() === `'${lazyModulePath}'`;
+  return !!loadChildren && loadChildren.initializer.getText() === lazyModuleImport;
 }
 
 export function baseComponentPredicate(modulePath: Path): RoutePredicate {
@@ -379,9 +379,9 @@ export function rootRoutePredicate(modulePath: Path): RoutePredicate {
   const isLayout = isLayoutPath(modulePath);
   const baseModulePath = isLayout ? LAYOUT_MODULE_PATH : NO_LAYOUT_MODULE_PATH;
   const baseModuleClass = isLayout ? LAYOUT_MODULE_CLASS : NO_LAYOUT_MODULE_CLASS;
-  const lazyModulePath = generateLazyModulePath(PLAYGROUND_ROUTING_MODULE_PATH, baseModulePath, baseModuleClass);
+  const lazyModuleImport = generateLazyModuleImport(PLAYGROUND_ROUTING_MODULE_PATH, baseModulePath, baseModuleClass);
 
-  return (route: ts.ObjectLiteralExpression) => lazyModulePredicate(lazyModulePath, route);
+  return (route: ts.ObjectLiteralExpression) => lazyModulePredicate(lazyModuleImport, route);
 }
 
 export function isLazyRoute(route: ts.ObjectLiteralExpression): boolean {
