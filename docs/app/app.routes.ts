@@ -9,15 +9,15 @@ import { Routes } from '@angular/router';
 export const routes: Routes = [
   {
     path: '',
-    loadChildren: './home/home.module#NgdHomeModule',
+    loadChildren: () => import('./home/home.module').then(m => m.NgdHomeModule),
   },
   {
     path: 'docs',
-    loadChildren: './documentation/documentation.module#NgdDocumentationModule',
+    loadChildren: () => import('./documentation/documentation.module').then(m => m.NgdDocumentationModule),
   },
   {
     path: 'example',
-    loadChildren: './example/example.module#NgdExampleModule',
+    loadChildren: () => import('./example/example.module').then(m => m.NgdExampleModule),
   },
   {
     path: '**',

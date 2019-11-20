@@ -28,7 +28,7 @@ import { NbEvaIconsModule } from '@nebular/eva-icons';
     RouterModule.forRoot([
       {
         path: '',
-        loadChildren: '../playground/playground.module#PlaygroundModule',
+        loadChildren: () => import('../playground/playground.module').then(m => m.PlaygroundModule),
       },
     ], { useHash: true }),
     NbThemeModule.forRoot(),

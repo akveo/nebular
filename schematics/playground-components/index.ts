@@ -22,7 +22,7 @@ import {
   isComponentRoute,
   isLazyRoute,
   isRoutingModule,
-  lazyRoutePathToFilePath,
+  lazyModuleImportToFilePath,
   removePropsQuotes,
   singleQuotes,
   splitClassName,
@@ -119,8 +119,8 @@ function getLazyModuleRoutes(
 ): ComponentLink[] {
   const lazyModule = getRouteLazyModule(route);
   if (lazyModule) {
-    const lazyModulePath = lazyModule && trimQuotes(lazyModule.initializer.getText());
-    const moduleDirPath = dirname(lazyRoutePathToFilePath(lazyModulePath) as Path) as PathFragment;
+    const lazyModuleImport = lazyModule.initializer.getText();
+    const moduleDirPath = dirname(lazyModuleImportToFilePath(lazyModuleImport) as Path) as PathFragment;
     return findRoutesInDir(tree, routingModuleDir.dir(moduleDirPath));
   }
   return [];

@@ -6,6 +6,7 @@
 
 import { parse } from 'path';
 import { NormalizedSep, Path, relative, dirname, join, normalize, basename, PathFragment } from '@angular-devkit/core';
+import { SchematicsException } from '@angular-devkit/schematics';
 
 export function removeExtension(filePath: Path): string {
   return parse(filePath).name;
@@ -40,8 +41,12 @@ export function importPath(from: Path, to: Path): string {
   return generateCurrentDirImport(join(relativePath, basename(to)));
 }
 
-export function lazyRoutePathToFilePath(lazyRoutePath: string): string {
-  const path = lazyRoutePath.slice(0, lazyRoutePath.indexOf('#'));
+export function lazyModuleImportToFilePath(lazyRoutePath: string): string {
+  const matches = /import\('(.+)'\)/m.exec(lazyRoutePath);
+  if (matches) {
+    const path = matches[1];
+    return path + '.ts' as PathFragment;
+  }
 
-  return path + '.ts' as PathFragment;
+  throw new SchematicsException(`Can't find lazy module import in ${lazyRoutePath}`);
 }
