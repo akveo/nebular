@@ -45,9 +45,6 @@
 - add the package into packages-smoke application dependencies to verify it works properly in isolation.
 - add the package into change-prefix.ts which builds our packages with custom prefix.
 
-# New Package Dependency Checklist
-- run `npm run update-packages-smoke-lock` to update packages-smoke/package-lock.json and commit updated package lock
-
 # Objectives
 The aim of the project is to create a set of useful Angular modules which help to bootstrap the development.
 
@@ -393,7 +390,6 @@ To start a new release (publish the framework packages on NPM) you need:
 2. `npm run release:validate` - this will create ready for publishing packages in src/.lib then build prod & AOT builds of the playground app using prepared packages and then run e2e tests again it.
 3. MANUALLY update a version in main ./package.json to a new one
 4. 
-  * `npm run update-packages-smoke-lock` to update `packages-smoke/package-lock.json` 
   * `npm run version:bump`
   * update version in `package-lock.json` and `packages-smoke/package-lock.json`
   * when releasing current version (PR to master) also update [docs/versions.json](#docs-deploy):

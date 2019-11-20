@@ -14,13 +14,14 @@ import { NbMenuModule } from '../menu/menu.module';
 import { NbContextMenuDirective } from './context-menu.directive';
 import { NbContextMenuComponent } from './context-menu.component';
 import { NbContextMenuModule } from './context-menu.module';
+import { NbOverlayConfig } from '@nebular/theme/components/cdk/overlay/mapping';
 
 @Component({
   selector: 'nb-context-menu-default-test',
   template: `
     <nb-layout>
       <nb-layout-column>
-        <button #button [nbContextMenu]="items">show context menu</button>
+        <button #button [nbContextMenu]="items" [nbContextMenuClass]="contextMenuClass">show context menu</button>
       </nb-layout-column>
     </nb-layout>
   `,
@@ -30,6 +31,7 @@ export class NbContextMenuDefaultTestComponent {
   @ViewChild(NbContextMenuDirective, { static: false }) contextMenu: NbContextMenuDirective;
 
   items = [{ title: 'User' }, { title: 'Log Out' }];
+  contextMenuClass = '';
 }
 
 @Component({
@@ -92,6 +94,7 @@ export class NbDynamicOverlayHandlerMock {
   _position: NbPosition = NbPosition.TOP;
   _adjustment: NbAdjustment = NbAdjustment.NOOP;
   _offset: number;
+  _overlayConfig: NbOverlayConfig = {};
 
   constructor() {
   }
@@ -133,6 +136,11 @@ export class NbDynamicOverlayHandlerMock {
 
   offset(offset: number) {
     this._offset = offset;
+    return this;
+  }
+
+  overlayConfig(overlayConfig: NbOverlayConfig) {
+    this._overlayConfig = overlayConfig;
     return this;
   }
 
@@ -328,6 +336,17 @@ describe('Directive: NbContextMenuDirective', () => {
         expect(showSpy).toHaveBeenCalledTimes(1);
         expect(hideSpy).toHaveBeenCalledTimes(1);
         expect(toggleSpy).toHaveBeenCalledTimes(1);
+      });
+
+      it('should set overlay config', () => {
+        const contextMenuClass = 'custom-context-menu-class';
+        const overlayConfigSpy = spyOn(overlayHandler, 'overlayConfig').and.callThrough();
+
+        fixture = TestBed.createComponent(NbContextMenuDefaultTestComponent);
+        fixture.componentInstance.contextMenuClass = contextMenuClass;
+        fixture.detectChanges();
+
+        expect(overlayConfigSpy).toHaveBeenCalledWith(jasmine.objectContaining({panelClass: contextMenuClass}));
       });
     });
 
