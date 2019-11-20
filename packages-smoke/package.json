@@ -7,7 +7,11 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "compile:server": "webpack --config webpack.server.config.js --progress --colors",
+    "serve:ssr": "node dist/server",
+    "build:ssr": "npm run build:client-and-server-bundles && npm run compile:server",
+    "build:client-and-server-bundles": "ng build --prod && ng run packages-smoke:server:production --bundleDependencies all"
   },
   "private": true,
   "dependencies": {
@@ -19,16 +23,20 @@
     "@angular/forms": "8.0.0",
     "@angular/platform-browser": "8.0.0",
     "@angular/platform-browser-dynamic": "8.0.0",
+    "@angular/platform-server": "8.0.0",
     "@angular/router": "8.0.0",
-    "@nebular/auth": "4.1.3",
-    "@nebular/date-fns": "4.1.3",
-    "@nebular/eva-icons": "4.1.3",
-    "@nebular/moment": "4.1.3",
-    "@nebular/security": "4.1.3",
-    "@nebular/theme": "4.1.3",
+    "@nebular/auth": "file:.lib/auth",
+    "@nebular/date-fns": "file:.lib/date-fns",
+    "@nebular/eva-icons": "file:.lib/eva-icons",
+    "@nebular/moment": "file:.lib/moment",
+    "@nebular/security": "file:.lib/security",
+    "@nebular/theme": "file:.lib/theme",
+    "@nguniversal/express-engine": "^8.1.1",
+    "@nguniversal/module-map-ngfactory-loader": "8.1.1",
     "core-js": "^2.5.7",
     "date-fns": "^2.0.0-alpha.27",
-    "eva-icons": "1.1.1",
+    "eva-icons": "1.1.2",
+    "express": "^4.15.2",
     "moment": "^2.22.2",
     "rxjs": "6.5.2",
     "zone.js": "~0.9.1"
@@ -52,8 +60,10 @@
     "karma-jasmine": "~1.1.2",
     "karma-jasmine-html-reporter": "^0.2.2",
     "protractor": "^5.4.2",
+    "ts-loader": "^5.2.0",
     "ts-node": "8.1.0",
     "tslint": "5.8.0",
-    "typescript": "3.4.5"
+    "typescript": "3.4.5",
+    "webpack-cli": "^3.1.0"
   }
 }

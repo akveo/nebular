@@ -115,7 +115,7 @@ export class NbOptionComponent<T> implements OnDestroy, NbFocusableOption {
   @HostListener('click', ['$event'])
   @HostListener('keydown.space', ['$event'])
   @HostListener('keydown.enter', ['$event'])
-  onClick(event: Event) {
+  onClick(event) {
     this.click$.next(this);
 
     // Prevent scroll on space click, etc.
