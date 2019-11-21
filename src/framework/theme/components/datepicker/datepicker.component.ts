@@ -21,7 +21,7 @@ import {
   SimpleChanges,
   Optional,
 } from '@angular/core';
-import { takeWhile } from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
 import { Observable, ReplaySubject, Subject } from 'rxjs';
 
 import { NbComponentPortal, NbOverlayRef } from '../cdk/overlay/mapping';
@@ -177,7 +177,7 @@ export abstract class NbBasePicker<D, T, P>
    * */
   protected pickerRef: ComponentRef<any>;
 
-  protected alive: boolean = true;
+  protected destroy$ = new Subject<void>();
 
   /**
    * Queue contains the last value that was applied to the picker when it was hidden.
@@ -243,7 +243,8 @@ export abstract class NbBasePicker<D, T, P>
   }
 
   ngOnDestroy() {
-    this.alive = false;
+    this.destroy$.next();
+    this.destroy$.complete();
     this.hide();
     this.init$.complete();
 
@@ -323,7 +324,7 @@ export abstract class NbBasePicker<D, T, P>
 
   protected subscribeOnPositionChange() {
     this.positionStrategy.positionChange
-      .pipe(takeWhile(() => this.alive))
+      .pipe(takeUntil(this.destroy$))
       .subscribe((position: NbPosition) => patch(this.container, { position }));
   }
 

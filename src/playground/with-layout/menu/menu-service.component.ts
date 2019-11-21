@@ -6,7 +6,8 @@
 
 import { Component, OnDestroy } from '@angular/core';
 import { NbMenuService } from '@nebular/theme';
-import { takeWhile } from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 import { MENU_ITEMS } from './menu-service-items';
 
 @Component({
@@ -30,13 +31,14 @@ export class MenuServiceComponent implements OnDestroy {
 
   menuItems = MENU_ITEMS;
 
-  private alive: boolean = true;
+  private destroy$ = new Subject<void>();
   selectedItem: string;
 
   constructor(private menuService: NbMenuService) { }
 
   ngOnDestroy() {
-    this.alive = false;
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   addMenuItem() {
@@ -58,7 +60,7 @@ export class MenuServiceComponent implements OnDestroy {
 
   getSelectedItem() {
     this.menuService.getSelectedItem('menu')
-      .pipe(takeWhile(() => this.alive))
+      .pipe(takeUntil(this.destroy$))
       .subscribe( (menuBag) => {
         this.selectedItem = menuBag.item.title;
       });
