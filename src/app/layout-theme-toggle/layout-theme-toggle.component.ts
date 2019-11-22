@@ -10,6 +10,8 @@ import { NbThemeService } from '@nebular/theme';
       <button (click)="enable('dark')">Dark</button>
       <button (click)="enable('cosmic')">Cosmic</button>
       <button (click)="enable('corporate')">Corporate</button>
+      <button (click)="enable('material-light')">Mat light</button>
+      <button (click)="enable('material-dark')">Mat dark</button>
     </div>
   `,
 })
