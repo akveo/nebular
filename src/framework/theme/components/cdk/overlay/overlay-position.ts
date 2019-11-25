@@ -180,10 +180,6 @@ export class NbAdjustableConnectedPositionStrategy
     return this;
   }
 
-  getPosition() {
-    return this._position;
-  }
-
   protected applyPositions() {
     const positions: NbPosition[] = this.createPositions();
     this.persistChosenPositions(positions);
