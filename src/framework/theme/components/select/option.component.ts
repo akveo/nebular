@@ -63,7 +63,7 @@ export class NbOptionComponent<T> implements OnDestroy, NbFocusableOption {
   /**
    * Fires when option clicked
    */
-  private click$: Subject<NbOptionComponent<T>> = new Subject<NbOptionComponent<T>>();
+  protected click$: Subject<NbOptionComponent<T>> = new Subject<NbOptionComponent<T>>();
   get click(): Observable<NbOptionComponent<T>> {
     return this.click$.asObservable();
   }
@@ -115,7 +115,7 @@ export class NbOptionComponent<T> implements OnDestroy, NbFocusableOption {
   @HostListener('click', ['$event'])
   @HostListener('keydown.space', ['$event'])
   @HostListener('keydown.enter', ['$event'])
-  onClick(event: Event) {
+  onClick(event) {
     this.click$.next(this);
 
     // Prevent scroll on space click, etc.

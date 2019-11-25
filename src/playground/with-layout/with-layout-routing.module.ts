@@ -15,143 +15,144 @@ const routes: Route[] = [
     children: [
       {
         path: 'accordion',
-        loadChildren: './accordion/accordion.module#AccordionModule',
+        loadChildren: () => import('./accordion/accordion.module').then(m => m.AccordionModule),
       },
       {
         path: 'action',
-        loadChildren: './action/action.module#ActionModule',
+        loadChildren: () => import('./action/action.module').then(m => m.ActionModule),
       },
       {
         path: 'alert',
-        loadChildren: './alert/alert.module#AlertModule',
+        loadChildren: () => import('./alert/alert.module').then(m => m.AlertModule),
       },
       {
         path: 'badge',
-        loadChildren: './badge/badge.module#BadgeModule',
+        loadChildren: () => import('./badge/badge.module').then(m => m.BadgeModule),
       },
       {
         path: 'button',
-        loadChildren: './button/button.module#ButtonModule',
+        loadChildren: () => import('./button/button.module').then(m => m.ButtonModule),
       },
       {
         path: 'calendar',
-        loadChildren: './calendar/calendar.module#CalendarModule',
+        loadChildren: () => import('./calendar/calendar.module').then(m => m.CalendarModule),
       },
       {
         path: 'calendar-kit',
-        loadChildren: './calendar-kit/calendar-kit.module#CalendarKitModule',
+        loadChildren: () => import('./calendar-kit/calendar-kit.module').then(m => m.CalendarKitModule),
       },
       {
         path: 'card',
-        loadChildren: './card/card.module#CardModule',
+        loadChildren: () => import('./card/card.module').then(m => m.CardModule),
       },
       {
         path: 'chat',
-        loadChildren: './chat/chat.module#ChatModule',
+        loadChildren: () => import('./chat/chat.module').then(m => m.ChatModule),
       },
       {
         path: 'checkbox',
-        loadChildren: './checkbox/checkbox.module#CheckboxModule',
+        loadChildren: () => import('./checkbox/checkbox.module').then(m => m.CheckboxModule),
       },
       {
         path: 'datepicker',
-        loadChildren: './datepicker/datepicker.module#DatepickerModule',
+        loadChildren: () => import('./datepicker/datepicker.module').then(m => m.DatepickerModule),
       },
       {
         path: 'dialog',
-        loadChildren: './dialog/dialog.module#DialogModule',
+        loadChildren: () => import('./dialog/dialog.module').then(m => m.DialogModule),
       },
       {
         path: 'flip-card',
-        loadChildren: './flip-card/flip-card.module#FlipCardModule',
+        loadChildren: () => import('./flip-card/flip-card.module').then(m => m.FlipCardModule),
       },
       {
         path: 'infinite-list',
-        loadChildren: './infinite-list/infinite-list.module#InfiniteListModule',
+        loadChildren: () => import('./infinite-list/infinite-list.module').then(m => m.InfiniteListModule),
       },
       {
         path: 'input',
-        loadChildren: './input/input.module#InputModule',
+        loadChildren: () => import('./input/input.module').then(m => m.InputModule),
       },
       {
         path: 'list',
-        loadChildren: './list/list.module#ListModule',
+        loadChildren: () => import('./list/list.module').then(m => m.ListModule),
       },
       {
         path: 'menu',
-        loadChildren: './menu/menu.module#MenuModule',
+        loadChildren: () => import('./menu/menu.module').then(m => m.MenuModule),
       },
       {
         path: 'overlay',
-        loadChildren: './overlay/overlay.module#OverlayModule',
+        loadChildren: () => import('./overlay/overlay.module').then(m => m.OverlayModule),
       },
       {
         path: 'popover',
-        loadChildren: './popover/popover.module#PopoverModule',
+        loadChildren: () => import('./popover/popover.module').then(m => m.PopoverModule),
       },
       {
         path: 'progress-bar',
-        loadChildren: './progress-bar/progress-bar.module#ProgressBarModule',
+        loadChildren: () => import('./progress-bar/progress-bar.module').then(m => m.ProgressBarModule),
       },
       {
         path: 'radio',
-        loadChildren: './radio/radio.module#RadioModule',
+        loadChildren: () => import('./radio/radio.module').then(m => m.RadioModule),
       },
       {
         path: 'reveal-card',
-        loadChildren: './reveal-card/reveal-card.module#RevealCardModule',
+        loadChildren: () => import('./reveal-card/reveal-card.module').then(m => m.RevealCardModule),
       },
       {
         path: 'select',
-        loadChildren: './select/select.module#SelectModule',
+        loadChildren: () => import('./select/select.module').then(m => m.SelectModule),
       },
       {
         path: 'spinner',
-        loadChildren: './spinner/spinner.module#SpinnerModule',
+        loadChildren: () => import('./spinner/spinner.module').then(m => m.SpinnerModule),
       },
       {
         path: 'stepper',
-        loadChildren: './stepper/stepper.module#StepperModule',
+        loadChildren: () => import('./stepper/stepper.module').then(m => m.StepperModule),
       },
       {
         path: 'tabset',
-        loadChildren: './tabset/tabset.module#TabsetModule',
+        loadChildren: () => import('./tabset/tabset.module').then(m => m.TabsetModule),
       },
       {
         path: 'toastr',
-        loadChildren: './toastr/toastr.module#ToastrModule',
+        loadChildren: () => import('./toastr/toastr.module').then(m => m.ToastrModule),
       },
       {
         path: 'tooltip',
-        loadChildren: './tooltip/tooltip.module#TooltipModule',
+        loadChildren: () => import('./tooltip/tooltip.module').then(m => m.TooltipModule),
       },
       {
         path: 'user',
-        loadChildren: './user/user.module#UserModule',
+        loadChildren: () => import('./user/user.module').then(m => m.UserModule),
       },
       {
         path: 'window',
-        loadChildren: './window/window.module#WindowModule',
+        loadChildren: () => import('./window/window.module').then(m => m.WindowModule),
       },
       {
         path: 'oauth2',
-        loadChildren: './oauth2/oauth2.module#OAuth2PlaygroundModule',
+        loadChildren: () => import('./oauth2/oauth2.module').then(m => m.OAuth2PlaygroundModule),
       },
       {
         path: 'oauth2-password',
-        loadChildren: './oauth2-password/oauth2-password.module#OAuth2PasswordPlaygroundModule',
+        loadChildren: () => import('./oauth2-password/oauth2-password.module')
+          .then(m => m.OAuth2PasswordPlaygroundModule),
       },
       {
         path: 'tree-grid',
-        loadChildren: './tree-grid/tree-grid.module#TreeGridModule',
+        loadChildren: () => import('./tree-grid/tree-grid.module').then(m => m.TreeGridModule),
       },
       {
         path: 'icon',
-        loadChildren: './icon/icon.module#IconModule',
+        loadChildren: () => import('./icon/icon.module').then(m => m.IconModule),
       },
       {
         path: 'toggle',
-        loadChildren: './toggle/toggle.module#ToggleModule',
+        loadChildren: () => import('./toggle/toggle.module').then(m => m.ToggleModule),
       },
     ],
   },
