@@ -4,7 +4,17 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { Component, EventEmitter, HostBinding, HostListener, Input, Output } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  HostBinding,
+  HostListener,
+  Input,
+  OnInit,
+  Output,
+  Renderer2,
+} from '@angular/core';
 
 import { NbToast } from './model';
 import { NbIconConfig } from '../icon/icon.component';
@@ -82,7 +92,7 @@ import { NbIconConfig } from '../icon/icon.component';
   styleUrls: ['./toast.component.scss'],
   templateUrl: './toast.component.html',
 })
-export class NbToastComponent {
+export class NbToastComponent implements OnInit {
   @Input()
   toast: NbToast;
 
@@ -175,5 +185,13 @@ export class NbToastComponent {
   @HostListener('click')
   onClick() {
     this.destroy.emit();
+  }
+
+  constructor(protected renderer: Renderer2, protected elementRef: ElementRef) {}
+
+  ngOnInit() {
+    if (this.toast.config.toastClass) {
+      this.renderer.addClass(this.elementRef.nativeElement, this.toast.config.toastClass);
+    }
   }
 }

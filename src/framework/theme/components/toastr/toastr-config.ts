@@ -54,6 +54,10 @@ export class NbToastrConfig {
   * */
   limit?: number = null;
   /**
+   * Class to be applied to the toast.
+   */
+  toastClass: string = '';
+  /**
    * Determines render icon or not.
    * */
   hasIcon: boolean = true;

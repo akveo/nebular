@@ -739,7 +739,7 @@ export class NbButtonComponent implements AfterViewInit {
    * such handlers call.
    */
   @HostListener('click', ['$event'])
-  onClick(event: Event) {
+  onClick(event) {
     if (this.disabled) {
       event.preventDefault();
       event.stopImmediatePropagation();

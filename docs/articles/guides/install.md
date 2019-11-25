@@ -83,7 +83,7 @@ import { NbThemeModule } from '@nebular/theme';
 export class AppModule {
 
 ```
-Same way you can enable Auth Module (more details under [Auth Module Concepts & Install](docs/auth/conceptsinstall) article).
+Same way you can enable Auth Module (more details under [Auth Module Concepts](docs/auth/introduction) & [Install](docs/auth/installation) articles).
 
 ### Install Styles
 Now, let's import Nebular styles

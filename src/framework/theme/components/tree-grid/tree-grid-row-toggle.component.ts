@@ -39,7 +39,7 @@ export class NbTreeGridRowToggleComponent {
   }
 
   @HostListener('click', ['$event'])
-  toggleRow($event: Event) {
+  toggleRow($event) {
     this.cell.toggleRow();
     $event.stopPropagation();
   }

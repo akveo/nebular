@@ -57,89 +57,82 @@ export abstract class NbBasePicker<D, T, P>
    * Datepicker date format. Can be used only with date adapters (moment, date-fns) since native date
    * object doesn't support formatting.
    * */
-  @Input() format: string;
+  abstract format: string;
 
   /**
    * Defines if we should render previous and next months
    * in the current month view.
    * */
-  @Input() boundingMonth: boolean = true;
+  abstract boundingMonth: boolean;
 
   /**
    * Defines starting view for calendar.
    * */
-  @Input() startView: NbCalendarViewMode = NbCalendarViewMode.DATE;
+  abstract startView: NbCalendarViewMode;
 
   /**
    * Minimum available date for selection.
    * */
-  @Input() min: T;
+  abstract min: T;
 
   /**
    * Maximum available date for selection.
    * */
-  @Input() max: T;
+  abstract max: T;
 
   /**
    * Predicate that decides which cells will be disabled.
    * */
-  @Input() filter: (T) => boolean;
+  abstract filter: (T) => boolean;
 
   /**
    * Custom day cell component. Have to implement `NbCalendarCell` interface.
    * */
-  @Input() dayCellComponent: Type<NbCalendarCell<D, T>>;
+  abstract dayCellComponent: Type<NbCalendarCell<D, T>>;
 
   /**
    * Custom month cell component. Have to implement `NbCalendarCell` interface.
    * */
-  @Input() monthCellComponent: Type<NbCalendarCell<D, T>>;
+  abstract monthCellComponent: Type<NbCalendarCell<D, T>>;
 
   /**
    * Custom year cell component. Have to implement `NbCalendarCell` interface.
    * */
-  @Input() yearCellComponent: Type<NbCalendarCell<D, T>>;
+  abstract yearCellComponent: Type<NbCalendarCell<D, T>>;
 
   /**
    * Size of the calendar and entire components.
    * Can be 'medium' which is default or 'large'.
    * */
-  @Input() size: NbCalendarSize = NbCalendarSize.MEDIUM;
+  abstract size: NbCalendarSize = NbCalendarSize.MEDIUM;
 
   /**
    * Depending on this date a particular month is selected in the calendar
    */
-  @Input() visibleDate: D;
+  abstract visibleDate: D;
 
   /**
    * Hide picker when a date or a range is selected, `true` by default
    * @type {boolean}
    */
-  @Input() hideOnSelect: boolean = true;
+  abstract hideOnSelect: boolean;
 
   /**
    * Determines should we show calendars header or not.
    * @type {boolean}
    */
-  @Input() showHeader: boolean = true;
+  abstract showHeader: boolean;
 
   /**
    * Sets symbol used as a header for week numbers column
    * */
-  @Input() weekNumberSymbol: string = '#';
+  abstract weekNumberSymbol: string;
 
   /**
    * Determines should we show week numbers column.
    * False by default.
    * */
-  @Input()
-  get showWeekNumber(): boolean {
-    return this._showWeekNumber;
-  }
-  set showWeekNumber(value: boolean) {
-    this._showWeekNumber = convertToBoolProperty(value);
-  }
-  protected _showWeekNumber: boolean = false;
+  abstract showWeekNumber: boolean;
 
   /**
    * Calendar component class that has to be instantiated inside overlay.
@@ -194,13 +187,12 @@ export abstract class NbBasePicker<D, T, P>
 
   protected blur$: Subject<void> = new Subject<void>();
 
-  constructor(@Inject(NB_DOCUMENT) protected document,
-              protected positionBuilder: NbPositionBuilderService,
-              protected triggerStrategyBuilder: NbTriggerStrategyBuilderService,
-              protected overlay: NbOverlayService,
-              protected cfr: ComponentFactoryResolver,
-              protected dateService: NbDateService<D>,
-              @Optional() @Inject(NB_DATE_SERVICE_OPTIONS) protected dateServiceOptions,
+  protected constructor(protected overlay: NbOverlayService,
+                        protected positionBuilder: NbPositionBuilderService,
+                        protected triggerStrategyBuilder: NbTriggerStrategyBuilderService,
+                        protected cfr: ComponentFactoryResolver,
+                        protected dateService: NbDateService<D>,
+                        protected dateServiceOptions,
   ) {
     super();
   }
@@ -396,6 +388,125 @@ export abstract class NbBasePicker<D, T, P>
   }
 }
 
+@Component({
+  template: '',
+})
+export class NbBasePickerComponent<D, T, P> extends NbBasePicker<D, T, P> {
+
+  /**
+   * Datepicker date format. Can be used only with date adapters (moment, date-fns) since native date
+   * object doesn't support formatting.
+   * */
+  @Input() format: string;
+
+  /**
+   * Defines if we should render previous and next months
+   * in the current month view.
+   * */
+  @Input() boundingMonth: boolean = true;
+
+  /**
+   * Defines starting view for calendar.
+   * */
+  @Input() startView: NbCalendarViewMode = NbCalendarViewMode.DATE;
+
+  /**
+   * Minimum available date for selection.
+   * */
+  @Input() min: T;
+
+  /**
+   * Maximum available date for selection.
+   * */
+  @Input() max: T;
+
+  /**
+   * Predicate that decides which cells will be disabled.
+   * */
+  @Input() filter: (T) => boolean;
+
+  /**
+   * Custom day cell component. Have to implement `NbCalendarCell` interface.
+   * */
+  @Input() dayCellComponent: Type<NbCalendarCell<D, T>>;
+
+  /**
+   * Custom month cell component. Have to implement `NbCalendarCell` interface.
+   * */
+  @Input() monthCellComponent: Type<NbCalendarCell<D, T>>;
+
+  /**
+   * Custom year cell component. Have to implement `NbCalendarCell` interface.
+   * */
+  @Input() yearCellComponent: Type<NbCalendarCell<D, T>>;
+
+  /**
+   * Size of the calendar and entire components.
+   * Can be 'medium' which is default or 'large'.
+   * */
+  @Input() size: NbCalendarSize = NbCalendarSize.MEDIUM;
+
+  /**
+   * Depending on this date a particular month is selected in the calendar
+   */
+  @Input() visibleDate: D;
+
+  /**
+   * Hide picker when a date or a range is selected, `true` by default
+   * @type {boolean}
+   */
+  @Input() hideOnSelect: boolean = true;
+
+  /**
+   * Determines should we show calendars header or not.
+   * @type {boolean}
+   */
+  @Input() showHeader: boolean = true;
+
+  /**
+   * Sets symbol used as a header for week numbers column
+   * */
+  @Input() weekNumberSymbol: string = '#';
+
+  /**
+   * Determines should we show week numbers column.
+   * False by default.
+   * */
+  @Input()
+  get showWeekNumber(): boolean {
+    return this._showWeekNumber;
+  }
+  set showWeekNumber(value: boolean) {
+    this._showWeekNumber = convertToBoolProperty(value);
+  }
+  protected _showWeekNumber: boolean = false;
+
+  constructor(@Inject(NB_DOCUMENT) document,
+              positionBuilder: NbPositionBuilderService,
+              triggerStrategyBuilder: NbTriggerStrategyBuilderService,
+              overlay: NbOverlayService,
+              cfr: ComponentFactoryResolver,
+              dateService: NbDateService<D>,
+              @Optional() @Inject(NB_DATE_SERVICE_OPTIONS) dateServiceOptions,
+  ) {
+    super(overlay, positionBuilder, triggerStrategyBuilder, cfr, dateService, dateServiceOptions);
+  }
+
+  protected pickerClass: Type<P>;
+
+  protected get pickerValueChange(): Observable<T> {
+    return
+  }
+
+  get value(): T | undefined {
+    return undefined;
+  }
+  set value(value: T) {}
+
+  protected writeQueue() {
+  }
+}
+
 /**
  * The DatePicker components itself.
  * Provides a proxy to `NbCalendar` options as well as custom picker options.
@@ -404,7 +515,7 @@ export abstract class NbBasePicker<D, T, P>
   selector: 'nb-datepicker',
   template: '',
 })
-export class NbDatepickerComponent<D> extends NbBasePicker<D, D, NbCalendarComponent<D>> {
+export class NbDatepickerComponent<D> extends NbBasePickerComponent<D, D, NbCalendarComponent<D>> {
   protected pickerClass: Type<NbCalendarComponent<D>> = NbCalendarComponent;
 
   /**
@@ -459,7 +570,8 @@ export class NbDatepickerComponent<D> extends NbBasePicker<D, D, NbCalendarCompo
   selector: 'nb-rangepicker',
   template: '',
 })
-export class NbRangepickerComponent<D> extends NbBasePicker<D, NbCalendarRange<D>, NbCalendarRangeComponent<D>> {
+export class NbRangepickerComponent<D>
+       extends NbBasePickerComponent<D, NbCalendarRange<D>, NbCalendarRangeComponent<D>> {
   protected pickerClass: Type<NbCalendarRangeComponent<D>> = NbCalendarRangeComponent;
 
   /**

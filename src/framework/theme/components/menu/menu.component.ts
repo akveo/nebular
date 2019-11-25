@@ -14,7 +14,9 @@ import {
   AfterViewInit,
   Inject,
   DoCheck,
+  PLATFORM_ID,
 } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { Router, NavigationEnd } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { takeWhile, filter, map } from 'rxjs/operators';
@@ -252,6 +254,7 @@ export class NbMenuComponent implements OnInit, AfterViewInit, OnDestroy {
   protected alive: boolean = true;
 
   constructor(@Inject(NB_WINDOW) protected window,
+              @Inject(PLATFORM_ID) protected platformId,
               protected menuInternalService: NbMenuInternalService,
               protected router: Router) {
   }
@@ -347,7 +350,7 @@ export class NbMenuComponent implements OnInit, AfterViewInit, OnDestroy {
         this.router.navigate([homeItem.link], { queryParams: homeItem.queryParams, fragment: homeItem.fragment });
       }
 
-      if (homeItem.url) {
+      if (homeItem.url && isPlatformBrowser(this.platformId)) {
         this.window.location.href = homeItem.url;
       }
     }

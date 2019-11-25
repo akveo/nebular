@@ -171,6 +171,7 @@ export class NbDialogService {
       scrollStrategy,
       hasBackdrop: config.hasBackdrop,
       backdropClass: config.backdropClass,
+      panelClass: config.dialogClass,
     });
   }
 

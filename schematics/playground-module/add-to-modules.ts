@@ -24,7 +24,7 @@ import {
   getDirectivesFromDir,
   getFeatureModuleFromDir,
   getRoutingModuleFromDir,
-  generateLazyModulePath,
+  generateLazyModuleImport,
   routePredicatesFromPath,
   applyReplaceChange,
   findRoutingModule,
@@ -209,8 +209,8 @@ function addModuleRoute(
   }
 
   const moduleClassName = (moduleDeclaration.name as ts.Identifier).getText();
-  const lazyModulePath = generateLazyModulePath(routingModulePath, modulePath, moduleClassName);
-  const loadChildren = `loadChildren: '${lazyModulePath}'`;
+  const lazyModuleImport = generateLazyModuleImport(routingModulePath, modulePath, moduleClassName);
+  const loadChildren = `loadChildren: ${lazyModuleImport}`;
   addObjectProperty(tree, getSourceFile(tree, routingModulePath), route, loadChildren);
 }
 
