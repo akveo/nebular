@@ -2,7 +2,7 @@ import { NbJSThemeOptions } from './theme.options';
 
 const palette = {
   primary: '#6200ee',
-  success: '#00dbc4',
+  success: '#60af20',
   info: '#0495ee',
   warning: '#ff9f05',
   danger: '#b00020',
@@ -39,10 +39,10 @@ export const MATERIAL_LIGHT_THEME: NbJSThemeOptions = {
     warning: palette.warning,
     danger: palette.danger,
 
-    primaryLight: '#7f39fb',
-    successLight: '#3ae9c6',
-    infoLight: '#40baf5',
-    warningLight: '#ffbd43',
+    primaryLight: '#903df4',
+    successLight: '#8fcf50',
+    infoLight: '#40bbf4',
+    warningLight: '#ffbe43',
     dangerLight: '#cf3341',
   },
 };
