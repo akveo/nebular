@@ -46,9 +46,7 @@ task(
     'compile-theme',
     ...JS_PACKAGES.filter(p => p !== 'theme')
       .map(p => `compile-${p}`),
-    (done) => {
-      done();
-    },
+    done => done(),
   ),
 );
 

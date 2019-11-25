@@ -14,20 +14,15 @@ task(
     'copy-packages-resources',
     'bundle',
     'set-bundles-paths',
-    (done) => {
-      done();
-    },
+    done => done(),
   ),
 );
 
-task(
-  'build-packages-schematics',
+task('build-packages-schematics',
   series(
     'compile-packages-schematics',
     'copy-packages-schematics-resources',
-    (done) => {
-      done();
-    },
+    done => done(),
   ),
 );
 
@@ -38,18 +33,15 @@ task(
     'build-js-packages',
     // copy non js packages
     'build-packages-schematics',
-    (done) => {
-      done();
-    }));
+    done => done()),
+);
 
 task(
   'build-packages-schematics-for-test',
   series(
     'compile-packages-schematics-for-test',
     'copy-packages-schematics-resources-for-test',
-    (done) => {
-      done();
-    },
+    done => done(),
   ),
 );
 
@@ -58,8 +50,6 @@ task(
   series(
     'compile-development-schematics',
     'copy-development-schematics-resources',
-    (done) => {
-      done();
-    },
+    done => done(),
   ),
 );
