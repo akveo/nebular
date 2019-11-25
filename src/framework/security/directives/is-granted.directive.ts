@@ -1,12 +1,14 @@
 import { Directive, Input, OnDestroy, TemplateRef, ViewContainerRef } from '@angular/core';
-import { takeWhile } from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 import { NbAccessChecker } from '../services/access-checker.service';
 
 @Directive({ selector: '[nbIsGranted]'})
 export class NbIsGrantedDirective implements OnDestroy {
 
-  private alive = true;
+  private destroy$ = new Subject<void>();
+
   private hasView = false;
 
   constructor(private templateRef: TemplateRef<any>,
@@ -18,7 +20,7 @@ export class NbIsGrantedDirective implements OnDestroy {
 
     this.accessChecker.isGranted(permission, resource)
       .pipe(
-        takeWhile(() => this.alive),
+        takeUntil(this.destroy$),
       )
       .subscribe((can: boolean) => {
         if (can && !this.hasView) {
@@ -32,6 +34,7 @@ export class NbIsGrantedDirective implements OnDestroy {
   }
 
   ngOnDestroy() {
-    this.alive = false;
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

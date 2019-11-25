@@ -75,6 +75,8 @@ export class NbAccordionItemHeaderComponent implements OnInit, OnDestroy {
   }
 
   @HostListener('click')
+  @HostListener('keydown.space')
+  @HostListener('keydown.enter')
   toggle() {
     this.accordionItem.toggle();
   }
