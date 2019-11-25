@@ -28,6 +28,7 @@ export class NbDynamicOverlay {
   protected content: NbOverlayContent;
   protected positionStrategy: NbAdjustableConnectedPositionStrategy;
   protected overlayConfig: NbOverlayConfig = {};
+  protected lastAppliedPosition: NbPosition;
 
   protected positionStrategyChange$ = new Subject();
   protected isShown$ = new BehaviorSubject<boolean>(false);
@@ -108,7 +109,10 @@ export class NbDynamicOverlay {
         takeUntil(this.positionStrategyChange$),
         filter(() => !!this.container),
       )
-      .subscribe((position: NbPosition) => patch(this.container, { position }));
+      .subscribe((position: NbPosition) => {
+        this.lastAppliedPosition = position;
+        patch(this.container, { position });
+      });
 
     if (this.ref) {
       this.ref.updatePositionStrategy(this.positionStrategy);
@@ -201,6 +205,7 @@ export class NbDynamicOverlay {
       content: this.content,
       context: this.context,
       cfr: this.componentFactoryResolver,
+      position: this.lastAppliedPosition,
     };
   }
 
