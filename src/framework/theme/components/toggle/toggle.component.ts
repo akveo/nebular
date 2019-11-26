@@ -264,7 +264,7 @@ import { convertToBoolProperty, emptyStatusWarning } from '../helpers';
     <label class="toggle-label">
       <input type="checkbox"
              class="native-input visually-hidden"
-             role="switcher"
+             role="switch"
              [attr.aria-checked]="checked"
              [disabled]="disabled"
              [checked]="checked"
