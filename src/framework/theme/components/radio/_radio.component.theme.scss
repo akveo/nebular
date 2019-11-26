@@ -94,7 +94,8 @@
       font-size: nb-theme(radio-text-font-size);
       font-weight: nb-theme(radio-text-font-weight);
       line-height: nb-theme(radio-text-line-height);
-      margin-left: nb-theme(radio-width);
+      @include nb-ltr(margin-left, nb-theme(radio-width));
+      @include nb-rtl(margin-right, nb-theme(radio-width));
     }
   }
 }
