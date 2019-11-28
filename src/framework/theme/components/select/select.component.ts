@@ -787,7 +787,6 @@ export class NbSelectComponent<T> implements AfterViewInit, AfterContentInit, On
     const classes = [
       `appearance-${this.appearance}`,
       `size-${this.size}`,
-      `shape-${this.shape}`,
       `status-${this.status}`,
       this.overlayPosition,
     ];

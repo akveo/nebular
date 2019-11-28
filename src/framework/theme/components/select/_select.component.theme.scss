@@ -86,10 +86,13 @@
   }
 
   @each $shape in nb-get-shapes() {
-    nb-select.shape-#{$shape} .select-button,
-    .options-list-container.shape-#{$shape} {
+    nb-select.shape-#{$shape} .select-button {
       border-radius: nb-theme(select-#{$shape}-border-radius);
     }
+  }
+
+  .options-list-container {
+    border-radius: nb-theme(select-rectangle-border-radius);
   }
 
   nb-option-group,
