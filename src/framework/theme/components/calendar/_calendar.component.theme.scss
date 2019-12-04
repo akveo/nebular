@@ -39,10 +39,6 @@
       }
     }
 
-    .years-range {
-      padding: nb-theme(calendar-navigation-year-range-padding);
-    }
-
     &.has-week-number nb-card {
       $week-column-width: #{nb-theme(calendar-weeknumber-width)} +
                           #{nb-theme(calendar-weeknumber-divider-width)};

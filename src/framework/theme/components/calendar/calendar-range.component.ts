@@ -73,7 +73,6 @@ export interface NbCalendarRange<D> {
  * calendar-navigation-title-text-font-weight:
  * calendar-navigation-title-text-line-height:
  * calendar-navigation-padding:
- * calendar-navigation-year-range-padding:
  * calendar-cell-inactive-text-color:
  * calendar-cell-disabled-text-color:
  * calendar-cell-hover-background-color:
