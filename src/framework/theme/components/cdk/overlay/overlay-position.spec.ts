@@ -29,6 +29,7 @@ export class PortalModule {}
 
 describe('NbAdjustableConnectedPositionStrategy', () => {
   let strategy: NbAdjustableConnectedPositionStrategy;
+  let overlayHostElement: HTMLDivElement;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -45,14 +46,18 @@ describe('NbAdjustableConnectedPositionStrategy', () => {
     // Also it registers overlay container so we don't have to create it manually.
     TestBed.createComponent(NbLayoutComponent);
 
-    const hostElement = document.createElement('div');
-    hostElement.style.width = '10px';
-    hostElement.style.height = '10px';
-    hostElement.style.backgroundColor = 'red';
-    document.body.appendChild(hostElement);
+    overlayHostElement = document.createElement('div');
+    overlayHostElement.style.width = '10px';
+    overlayHostElement.style.height = '10px';
+    overlayHostElement.style.backgroundColor = 'red';
+    document.body.appendChild(overlayHostElement);
 
     const positionBuilderService: NbPositionBuilderService = TestBed.get(NbPositionBuilderService);
-    strategy = positionBuilderService.connectedTo({ nativeElement: hostElement });
+    strategy = positionBuilderService.connectedTo({ nativeElement: overlayHostElement });
+  });
+
+  afterEach(() => {
+    overlayHostElement.parentElement.removeChild(overlayHostElement);
   });
 
   it('should create strategy with position start and adjustment noop', () => {
