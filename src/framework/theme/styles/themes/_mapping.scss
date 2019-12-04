@@ -2246,14 +2246,12 @@ $eva-mapping: (
   select-options-list-hero-danger-border-color: border-basic-color-4,
   select-options-list-hero-control-border-color: border-basic-color-4,
 
-  datepicker-text-color: text-basic-color,
   datepicker-background-color: background-basic-color-1,
-  datepicker-border-color: background-basic-color-1,
+  datepicker-border-color: border-basic-color-3,
   datepicker-border-style: solid,
   datepicker-border-width: 0,
   datepicker-border-radius: border-radius,
-  datepicker-shadow: shadow,
-  datepicker-arrow-size: 0.6875rem,
+  datepicker-shadow: none,
 
   radio-width: 1.125rem,
   radio-height: 1.125rem,

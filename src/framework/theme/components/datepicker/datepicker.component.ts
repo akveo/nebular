@@ -118,10 +118,10 @@ export abstract class NbBasePicker<D, T, P>
   abstract hideOnSelect: boolean;
 
   /**
-   * Determines should we show calendars header or not.
+   * Determines should we show calendar navigation or not.
    * @type {boolean}
    */
-  abstract showHeader: boolean;
+  abstract showNavigation: boolean;
 
   /**
    * Sets symbol used as a header for week numbers column
@@ -176,6 +176,8 @@ export abstract class NbBasePicker<D, T, P>
    * Reference to the picker instance itself.
    * */
   protected pickerRef: ComponentRef<any>;
+
+  protected overlayOffset = 8;
 
   protected alive: boolean = true;
 
@@ -318,6 +320,7 @@ export abstract class NbBasePicker<D, T, P>
     return this.positionBuilder
       .connectedTo(this.hostRef)
       .position(NbPosition.BOTTOM)
+      .offset(this.overlayOffset)
       .adjustment(NbAdjustment.COUNTERCLOCKWISE);
   }
 
@@ -367,7 +370,7 @@ export abstract class NbBasePicker<D, T, P>
     this.picker.monthCellComponent = this.monthCellComponent;
     this.picker._yearCellComponent = this.yearCellComponent;
     this.picker.size = this.size;
-    this.picker.showHeader = this.showHeader;
+    this.picker.showNavigation = this.showNavigation;
     this.picker.visibleDate = this.visibleDate;
     this.picker.showWeekNumber = this.showWeekNumber;
     this.picker.weekNumberSymbol = this.weekNumberSymbol;
@@ -458,10 +461,10 @@ export class NbBasePickerComponent<D, T, P> extends NbBasePicker<D, T, P> {
   @Input() hideOnSelect: boolean = true;
 
   /**
-   * Determines should we show calendars header or not.
+   * Determines should we show calendars navigation or not.
    * @type {boolean}
    */
-  @Input() showHeader: boolean = true;
+  @Input() showNavigation: boolean = true;
 
   /**
    * Sets symbol used as a header for week numbers column

@@ -12,9 +12,7 @@ import { NbOverlayContainerComponent, NbPositionedContainer } from '../cdk/overl
 
 @Component({
   selector: 'nb-datepicker-container',
-  styleUrls: ['./datepicker-container.component.scss'],
   template: `
-    <span class="arrow"></span>
     <nb-overlay-container></nb-overlay-container>
   `,
 })
