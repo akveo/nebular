@@ -45,9 +45,9 @@ import { convertToBoolProperty } from '../helpers';
  * In order to use it, you have to import `NbCalendarRangeModule`.
  * @stacked-example(Range, calendar/calendar-range-showcase.component)
  *
- * The calendar component is supplied with a calendar header that contains navigate today button.
- * If you do not want to use it you can hide calendar header using `showHeader` property.
- * @stacked-example(Header, calendar/calendar-without-header.component)
+ * The calendar component is supplied with a calendar navigation that contains navigate buttons.
+ * If you do not want to use it you can hide calendar navigation using `showNavigation` property.
+ * @stacked-example(Without navigation, calendar/calendar-without-navigation.component)
  *
  * As you can see in the basic usage example calendar contains previous and next month days
  * which can be disabled using `boundingMonth` property.
@@ -81,46 +81,76 @@ import { convertToBoolProperty } from '../helpers';
  * @styles
  *
  * calendar-width:
- * calendar-body-height:
+ * calendar-background-color:
+ * calendar-border-color:
+ * calendar-border-style:
+ * calendar-border-width:
  * calendar-border-radius:
  * calendar-text-color:
  * calendar-text-font-family:
  * calendar-text-font-size:
  * calendar-text-font-weight:
  * calendar-text-line-height:
- * calendar-header-text-color:
- * calendar-header-text-font-family:
- * calendar-header-title-text-font-size:
- * calendar-header-title-text-font-weight:
- * calendar-header-title-text-line-height:
- * calendar-header-sub-title-text-font-size:
- * calendar-header-sub-title-text-font-weight:
- * calendar-header-sub-title-text-line-height:
- * calendar-navigation-button-width:
+ * calendar-picker-padding-top:
+ * calendar-picker-padding-bottom:
+ * calendar-picker-padding-start:
+ * calendar-picker-padding-end:
+ * calendar-navigation-text-color:
+ * calendar-navigation-text-font-family:
+ * calendar-navigation-title-text-font-size:
+ * calendar-navigation-title-text-font-weight:
+ * calendar-navigation-title-text-line-height:
+ * calendar-navigation-padding:
+ * calendar-navigation-year-range-padding:
  * calendar-cell-inactive-text-color:
- * calendar-cell-in-range-background-color:
- * calendar-cell-disabled-background-color:
  * calendar-cell-disabled-text-color:
- * calendar-cell-selected-background-color:
- * calendar-cell-selected-text-color:
- * calendar-cell-selected-text-font-size:
- * calendar-cell-selected-text-font-weight:
- * calendar-cell-selected-text-line-height:
  * calendar-cell-hover-background-color:
+ * calendar-cell-hover-border-color:
  * calendar-cell-hover-text-color:
  * calendar-cell-hover-text-font-size:
  * calendar-cell-hover-text-font-weight:
  * calendar-cell-hover-text-line-height:
  * calendar-cell-active-background-color:
+ * calendar-cell-active-border-color:
  * calendar-cell-active-text-color:
  * calendar-cell-active-text-font-size:
  * calendar-cell-active-text-font-weight:
  * calendar-cell-active-text-line-height:
  * calendar-cell-today-background-color:
+ * calendar-cell-today-border-color:
  * calendar-cell-today-text-color:
  * calendar-cell-today-text-font-size:
  * calendar-cell-today-text-font-weight:
  * calendar-cell-today-text-line-height:
+ * calendar-cell-today-hover-background-color:
+ * calendar-cell-today-hover-border-color:
+ * calendar-cell-today-active-background-color:
+ * calendar-cell-today-active-border-color:
+ * calendar-cell-today-disabled-border-color:
+ * calendar-cell-today-selected-background-color:
+ * calendar-cell-today-selected-border-color:
+ * calendar-cell-today-selected-text-color:
+ * calendar-cell-today-selected-hover-background-color:
+ * calendar-cell-today-selected-hover-border-color:
+ * calendar-cell-today-selected-active-background-color:
+ * calendar-cell-today-selected-active-border-color:
+ * calendar-cell-today-in-range-background-color:
+ * calendar-cell-today-in-range-border-color:
+ * calendar-cell-today-in-range-text-color:
+ * calendar-cell-today-in-range-hover-background-color:
+ * calendar-cell-today-in-range-hover-border-color:
+ * calendar-cell-today-in-range-active-background-color:
+ * calendar-cell-today-in-range-active-border-color:
+ * calendar-cell-selected-background-color:
+ * calendar-cell-selected-border-color:
+ * calendar-cell-selected-text-color:
+ * calendar-cell-selected-text-font-size:
+ * calendar-cell-selected-text-font-weight:
+ * calendar-cell-selected-text-line-height:
+ * calendar-cell-selected-hover-background-color:
+ * calendar-cell-selected-hover-border-color:
+ * calendar-cell-selected-active-background-color:
+ * calendar-cell-selected-active-border-color:
  * calendar-day-cell-width:
  * calendar-day-cell-height:
  * calendar-month-cell-width:
@@ -129,6 +159,7 @@ import { convertToBoolProperty } from '../helpers';
  * calendar-year-cell-height:
  * calendar-weekday-background:
  * calendar-weekday-divider-color:
+ * calendar-weekday-divider-width:
  * calendar-weekday-text-color:
  * calendar-weekday-text-font-size:
  * calendar-weekday-text-font-weight:
@@ -146,11 +177,12 @@ import { convertToBoolProperty } from '../helpers';
  * calendar-weeknumber-height:
  * calendar-weeknumber-width:
  * calendar-large-width:
- * calendar-large-body-height:
  * calendar-day-cell-large-width:
  * calendar-day-cell-large-height:
  * calendar-weekday-large-height:
  * calendar-weekday-large-width:
+ * calendar-weeknumber-large-height:
+ * calendar-weeknumber-large-width:
  * calendar-month-cell-large-width:
  * calendar-month-cell-large-height:
  * calendar-year-cell-large-width:
@@ -171,7 +203,7 @@ import { convertToBoolProperty } from '../helpers';
       [yearCellComponent]="yearCellComponent"
       [size]="size"
       [visibleDate]="visibleDate"
-      [showHeader]="showHeader"
+      [showNavigation]="showNavigation"
       [showWeekNumber]="showWeekNumber"
       [weekNumberSymbol]="weekNumberSymbol"
       (dateChange)="dateChange.emit($event)"
@@ -230,9 +262,9 @@ export class NbCalendarComponent<D> {
   @Input() visibleDate: D;
 
   /**
-   * Determines should we show calendars header or not.
+   * Determines should we show calendars navigation or not.
    * */
-  @Input() showHeader: boolean = true;
+  @Input() showNavigation: boolean = true;
 
   /**
    * Date which will be rendered as selected.

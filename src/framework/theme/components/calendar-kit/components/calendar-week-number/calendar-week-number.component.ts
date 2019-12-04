@@ -11,10 +11,12 @@ import { NbCalendarSize } from '../../model';
 @Component({
   selector: 'nb-calendar-week-numbers',
   template: `
-    <div class="sign">{{ weekNumberSymbol }}</div>
-    <div class="week-cell" *ngFor="let week of getWeeks()">{{ week }}</div>
+    <div class="sign-container">
+      <div class="sign">{{ weekNumberSymbol }}</div>
+    </div>
+    <div class="week-number" *ngFor="let week of getWeeks()">{{ week }}</div>
   `,
-  styleUrls: ['./nb-calendar-week-number.component.scss'],
+  styleUrls: ['./calendar-week-number.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NbCalendarWeekNumberComponent<D> {
@@ -29,11 +31,6 @@ export class NbCalendarWeekNumberComponent<D> {
    * Sets symbol used as a header for week numbers column
    * */
   @Input() weekNumberSymbol: string;
-
-  @HostBinding('class.size-medium')
-  get isMedium() {
-    return this.size === NbCalendarSize.MEDIUM;
-  }
 
   @HostBinding('class.size-large')
   get isLarge() {

@@ -33,22 +33,18 @@ export * from './components/calendar/calendar.component';
 export * from './components/calendar/calendar-range.module';
 export * from './components/calendar/calendar-range.component';
 // tslint:disable:max-line-length
-export { NbCalendarHeaderComponent } from './components/calendar-kit/components/calendar-header/calendar-header.component';
 export { NbCalendarDayCellComponent } from './components/calendar-kit/components/calendar-day-picker/calendar-day-cell.component';
-export {
-  NbCalendarYearPickerComponent,
-  YEARS_IN_VIEW,
-  YEARS_IN_COLUMN,
-} from './components/calendar-kit/components/calendar-year-picker/calendar-year-picker.component';
+export { NbCalendarYearPickerComponent } from './components/calendar-kit/components/calendar-year-picker/calendar-year-picker.component';
 export {
   NbCalendarMonthPickerComponent,
   MONTHS_IN_VIEW,
   MONTHS_IN_COLUMN,
 } from './components/calendar-kit/components/calendar-month-picker/calendar-month-picker.component';
 export { NbCalendarDayPickerComponent } from './components/calendar-kit/components/calendar-day-picker/calendar-day-picker.component';
-export { NbCalendarNavigationComponent } from './components/calendar-kit/components/calendar-navigation/calendar-navigation.component';
+export { NbCalendarViewModeComponent } from './components/calendar-kit/components/calendar-navigation/calendar-view-mode.component';
 export { NbCalendarPageableNavigationComponent } from './components/calendar-kit/components/calendar-navigation/calendar-pageable-navigation.component';
 export { NbCalendarDaysNamesComponent } from './components/calendar-kit/components/calendar-days-names/calendar-days-names.component';
+export { NbCalendarWeekNumberComponent } from './components/calendar-kit/components/calendar-week-number/calendar-week-number.component';
 export { NbCalendarMonthCellComponent } from './components/calendar-kit/components/calendar-month-picker/calendar-month-cell.component';
 export { NbCalendarYearCellComponent } from './components/calendar-kit/components/calendar-year-picker/calendar-year-cell.component';
 export { NbCalendarPickerRowComponent } from './components/calendar-kit/components/calendar-picker/calendar-picker-row.component';
@@ -58,6 +54,7 @@ export * from './components/calendar/base-calendar.component';
 export * from './components/calendar/base-calendar.module';
 export * from './components/calendar/calendar-range-cells';
 export { NbCalendarMonthModelService } from './components/calendar-kit/services/calendar-month-model.service';
+export * from './components/calendar-kit/services/calendar-year-model.service';
 export { NbNativeDateService } from './components/calendar-kit/services/native-date.service';
 export { NbDateService } from './components/calendar-kit/services/date.service';
 export * from './components/calendar-kit/model';

@@ -6,23 +6,20 @@
 
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { NbCalendarNavigationComponent } from './calendar-navigation.component';
-import { NbDateService } from '../../services/date.service';
-import { NbNativeDateService } from '../../services/native-date.service';
-import { DatePipe } from '@angular/common';
+import { NbCalendarViewModeComponent } from './calendar-view-mode.component';
+import { NbCalendarKitModule } from '../../calendar-kit.module';
 
 
-describe('Component: NbCalendarNavigation', () => {
-  let fixture: ComponentFixture<NbCalendarNavigationComponent<Date>>;
-  let component: NbCalendarNavigationComponent<Date>;
+describe('Component: NbCalendarViewModeComponent', () => {
+  let fixture: ComponentFixture<NbCalendarViewModeComponent<Date>>;
+  let component: NbCalendarViewModeComponent<Date>;
   let componentEl: HTMLElement;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [NbCalendarNavigationComponent],
-      providers: [{ provide: NbDateService, useClass: NbNativeDateService }, DatePipe],
+      imports: [NbCalendarKitModule],
     });
-    fixture = TestBed.createComponent<NbCalendarNavigationComponent<Date>>(NbCalendarNavigationComponent);
+    fixture = TestBed.createComponent<NbCalendarViewModeComponent<Date>>(NbCalendarViewModeComponent);
     component = fixture.componentInstance;
     componentEl = fixture.debugElement.nativeElement;
   });
@@ -30,7 +27,7 @@ describe('Component: NbCalendarNavigation', () => {
   it('should render date', () => {
     component.date = new Date(2018, 6, 23);
     fixture.detectChanges();
-    expect(componentEl.querySelector('button').textContent).toContain('Jul 2018');
+    expect(componentEl.querySelector('button').textContent).toContain('July 2018');
   });
 
   it('should render empty button with when null date', () => {

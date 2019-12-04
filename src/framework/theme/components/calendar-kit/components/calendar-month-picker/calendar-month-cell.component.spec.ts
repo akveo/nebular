@@ -42,6 +42,8 @@ describe('Component: NbCalendarMonthCell', () => {
   });
 
   it('should contain cell class', () => {
+    component.date = new Date();
+    fixture.detectChanges();
     expect(componentEl.classList).toContain('month-cell');
   });
 

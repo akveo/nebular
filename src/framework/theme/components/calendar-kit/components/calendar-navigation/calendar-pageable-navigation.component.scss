@@ -9,31 +9,11 @@
 :host {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
 
-  .prev-month {
-    @include nb-ltr() {
-      margin-left: auto;
-      margin-right: 0.4rem;
-    }
-    @include nb-rtl() {
-      margin-left: 0.4rem;
-      margin-right: auto;
-    }
+  nb-calendar-view-mode {
+    margin: 0 0.5rem;
+    @include nb-ltr(margin-right, auto);
+    @include nb-rtl(margin-left, auto);
   }
-
-  .next-month {
-    @include nb-ltr() {
-      margin-left: 0.4rem;
-      margin-right: auto;
-    }
-    @include nb-rtl() {
-      margin-left: auto;
-      margin-right: 0.4rem;
-    }
-  }
-}
-
-nb-calendar-navigation {
-  margin: 0 0.5rem;
 }

@@ -1,0 +1,30 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
+@mixin nb-calendar-navigation-theme() {
+  nb-calendar-view-mode,
+  nb-calendar-pageable-navigation {
+    [nbButton].appearance-ghost.status-basic {
+      &,
+      &:hover,
+      &:focus,
+      &:active {
+        color: nb-theme(calendar-navigation-text-color);
+      }
+      &:focus {
+        &,
+        &:not(:hover):not(:active) {
+          box-shadow: none;
+        }
+      }
+    }
+  }
+
+  nb-calendar-pageable-navigation {
+    @include nb-ltr(margin-left, auto);
+    @include nb-rtl(margin-right, auto);
+  }
+}

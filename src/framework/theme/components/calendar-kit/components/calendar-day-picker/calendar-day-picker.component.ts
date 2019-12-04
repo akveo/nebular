@@ -34,7 +34,7 @@ import { convertToBoolProperty } from '../../../helpers';
                               [weekNumberSymbol]="weekNumberSymbol">
     </nb-calendar-week-numbers>
     <div class="days-container">
-      <nb-calendar-days-names></nb-calendar-days-names>
+      <nb-calendar-days-names [size]="size"></nb-calendar-days-names>
       <nb-calendar-picker
           [data]="weeks"
           [visibleDate]="visibleDate"
@@ -43,6 +43,7 @@ import { convertToBoolProperty } from '../../../helpers';
           [min]="min"
           [max]="max"
           [filter]="filter"
+          [size]="size"
           (select)="onSelect($event)">
       </nb-calendar-picker>
     </div>
@@ -123,12 +124,7 @@ export class NbCalendarDayPickerComponent<D, T> implements OnChanges {
    * */
   @Output() dateChange = new EventEmitter<D>();
 
-  @HostBinding('class.medium')
-  get medium() {
-    return this.size === NbCalendarSize.MEDIUM;
-  }
-
-  @HostBinding('class.large')
+  @HostBinding('class.size-large')
   get large() {
     return this.size === NbCalendarSize.LARGE;
   }

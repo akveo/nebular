@@ -7,7 +7,11 @@
 import { NgModule } from '@angular/core';
 
 import { NbCalendarRangeComponent } from './calendar-range.component';
-import { NbCalendarRangeDayCellComponent, NbCalendarRangeYearCellComponent } from './calendar-range-cells';
+import {
+  NbCalendarRangeDayCellComponent,
+  NbCalendarRangeYearCellComponent,
+  NbCalendarRangeMonthCellComponent,
+} from './calendar-range-cells';
 import { NbBaseCalendarModule } from './base-calendar.module';
 
 
@@ -18,8 +22,13 @@ import { NbBaseCalendarModule } from './base-calendar.module';
     NbCalendarRangeComponent,
     NbCalendarRangeDayCellComponent,
     NbCalendarRangeYearCellComponent,
+    NbCalendarRangeMonthCellComponent,
   ],
-  entryComponents: [NbCalendarRangeDayCellComponent, NbCalendarRangeYearCellComponent],
+  entryComponents: [
+    NbCalendarRangeDayCellComponent,
+    NbCalendarRangeMonthCellComponent,
+    NbCalendarRangeYearCellComponent,
+  ],
 })
 export class NbCalendarRangeModule {
 }
