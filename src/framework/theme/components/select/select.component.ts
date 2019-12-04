@@ -723,6 +723,7 @@ export class NbSelectComponent<T> implements AfterViewInit, AfterContentInit, On
   overlayPosition: NbPosition = '' as NbPosition;
 
   protected ref: NbOverlayRef;
+  protected optionsOverlayOffset = 8;
 
   protected triggerStrategy: NbTriggerStrategy;
 
@@ -788,7 +789,6 @@ export class NbSelectComponent<T> implements AfterViewInit, AfterContentInit, On
     const classes = [
       `appearance-${this.appearance}`,
       `size-${this.size}`,
-      `shape-${this.shape}`,
       `status-${this.status}`,
       this.overlayPosition,
     ];
@@ -995,7 +995,7 @@ export class NbSelectComponent<T> implements AfterViewInit, AfterContentInit, On
     return this.positionBuilder
       .connectedTo(this.button)
       .position(NbPosition.BOTTOM)
-      .offset(0)
+      .offset(this.optionsOverlayOffset)
       .adjustment(NbAdjustment.VERTICAL);
   }
 

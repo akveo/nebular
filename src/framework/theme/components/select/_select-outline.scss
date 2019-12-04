@@ -66,6 +66,8 @@
   @each $size in nb-get-sizes() {
     nb-select.appearance-outline.size-#{$size} .select-button {
       padding: nb-theme(select-outline-#{$size}-padding);
+      @include nb-ltr(padding-right, nb-theme(select-icon-offset));
+      @include nb-rtl(padding-left, nb-theme(select-icon-offset));
     }
     .appearance-outline.size-#{$size} {
       nb-option-group .option-group-title,

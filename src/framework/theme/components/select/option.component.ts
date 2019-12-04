@@ -93,6 +93,7 @@ export class NbOptionComponent<T> implements OnDestroy, NbFocusableOption {
     return this.elementRef.nativeElement.textContent;
   }
 
+  @HostBinding('class.multiple')
   get multiple() {
     return this.parent.multiple;
   }
