@@ -27,12 +27,9 @@ export class NbCalendarYearModelService<D> {
   }
 
   getViewYears(viewYear: D): D[][] {
-    const yearsInView = this.getYearsInView();
-
     const year = this.dateService.getYear(viewYear);
-    const yearView = Math.floor(year / yearsInView);
-    const viewStartYear = yearView * yearsInView;
-    const years = range(yearsInView).map(i => this.copyWithYear(viewStartYear + i, viewYear));
+    const viewStartYear = year - (year % this.yearsInView);
+    const years = range(this.yearsInView).map(i => this.copyWithYear(viewStartYear + i, viewYear));
 
     return batch(years, this.getRowInView());
   }
