@@ -27,7 +27,7 @@ const routes: Route[] = [
       },
       {
         path: 'autocomplete',
-        loadChildren: './autocomplete/autocomplete.module#AutocompleteModule',
+        loadChildren: () => import('./autocomplete/autocomplete.module').then(m => m.AutocompleteModule),
       },
       {
         path: 'badge',
