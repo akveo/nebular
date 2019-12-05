@@ -510,6 +510,7 @@ export const structure = [
         source: [
           'NbSelectComponent',
           'NbOptionListComponent',
+          'NbOptionGroupComponent',
         ],
       },
       {
@@ -520,6 +521,7 @@ export const structure = [
           'NbAutocompleteDirective',
           'NbAutocompleteComponent',
           'NbOptionListComponent',
+          'NbOptionGroupComponent',
         ],
       },
       {
