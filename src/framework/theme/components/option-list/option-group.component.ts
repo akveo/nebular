@@ -19,6 +19,18 @@ import { takeWhile } from 'rxjs/operators';
 import { convertToBoolProperty } from '../helpers';
 import { NbOptionComponent } from './option.component';
 
+/**
+ * NbOptionGroupComponent
+ *
+ * @styles
+ *
+ * option-group-text-color:
+ * option-group-tiny-start-padding:
+ * option-group-small-start-padding:
+ * option-group-medium-start-padding:
+ * option-group-large-start-padding:
+ * option-group-giant-start-padding:
+ **/
 @Component({
   selector: 'nb-option-group',
   styleUrls: ['./option-group.component.scss'],

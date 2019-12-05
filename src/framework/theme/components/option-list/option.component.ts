@@ -29,6 +29,51 @@ import { NbHighlightableOption } from '../cdk/a11y/descendant-key-manager';
 import { NB_SELECT_INJECTION_TOKEN } from '../select/select-injection-tokens';
 import { NbSelectComponent } from '../select/select.component';
 
+/**
+ * NbOptionComponent
+ *
+ * @styles
+ *
+ * option-background-color:
+ * option-text-color:
+ * option-text-font-family:
+ * option-hover-background-color:
+ * option-hover-text-color:
+ * option-active-background-color:
+ * option-active-text-color:
+ * option-focus-background-color:
+ * option-focus-text-color:
+ * option-selected-background-color:
+ * option-selected-text-color:
+ * option-selected-hover-background-color:
+ * option-selected-hover-text-color:
+ * option-selected-active-background-color:
+ * option-selected-active-text-color:
+ * option-selected-focus-background-color:
+ * option-selected-focus-text-color:
+ * option-disabled-background-color:
+ * option-disabled-text-color:
+ * option-tiny-text-font-size:
+ * option-tiny-text-font-weight:
+ * option-tiny-text-line-height:
+ * option-tiny-padding:
+ * option-small-text-font-size:
+ * option-small-text-font-weight:
+ * option-small-text-line-height:
+ * option-small-padding:
+ * option-medium-text-font-size:
+ * option-medium-text-font-weight:
+ * option-medium-text-line-height:
+ * option-medium-padding:
+ * option-large-text-font-size:
+ * option-large-text-font-weight:
+ * option-large-text-line-height:
+ * option-large-padding:
+ * option-giant-text-font-size:
+ * option-giant-text-font-weight:
+ * option-giant-text-line-height:
+ * option-giant-padding:
+ **/
 @Component({
   selector: 'nb-option',
   styleUrls: ['./option.component.scss'],
