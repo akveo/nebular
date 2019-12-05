@@ -24,8 +24,8 @@ import {
   ValidatorFn,
   Validators,
 } from '@angular/forms';
-import { fromEvent, Observable, merge } from 'rxjs';
-import { map, takeWhile, filter, take, tap } from 'rxjs/operators';
+import { fromEvent, Observable, merge, Subject } from 'rxjs';
+import { map, takeUntil, filter, take, tap } from 'rxjs/operators';
 
 import { NB_DOCUMENT } from '../../theme.options';
 import { NbDateService } from '../calendar-kit/services/date.service';
@@ -275,7 +275,7 @@ export class NbDatepickerDirective<D> implements OnDestroy, ControlValueAccessor
    * Datepicker instance.
    * */
   protected picker: NbDatepicker<D>;
-  protected alive: boolean = true;
+  protected destroy$ = new Subject<void>();
   protected isDatepickerReady: boolean = false;
   protected queue: D | undefined;
   protected onChange: (D) => void = () => {};
@@ -314,7 +314,8 @@ export class NbDatepickerDirective<D> implements OnDestroy, ControlValueAccessor
   }
 
   ngOnDestroy() {
-    this.alive = false;
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   /**
@@ -430,10 +431,10 @@ export class NbDatepickerDirective<D> implements OnDestroy, ControlValueAccessor
     if (!this.isDatepickerReady) {
       this.picker.init
         .pipe(
-          takeWhile(() => this.alive),
           take(1),
           tap(() => this.isDatepickerReady = true),
           filter(() => !!this.queue),
+          takeUntil(this.destroy$),
         )
         .subscribe(() => {
           this.writeValue(this.queue);
@@ -444,7 +445,7 @@ export class NbDatepickerDirective<D> implements OnDestroy, ControlValueAccessor
     }
 
     this.picker.valueChange
-      .pipe(takeWhile(() => this.alive))
+      .pipe(takeUntil(this.destroy$))
       .subscribe((value: D) => {
         this.writePicker(value);
         this.writeInput(value);
@@ -460,7 +461,7 @@ export class NbDatepickerDirective<D> implements OnDestroy, ControlValueAccessor
       fromEvent(this.input, 'blur').pipe(
         filter(() => !this.picker.isShown && this.document.activeElement !== this.input),
       ),
-    ).pipe(takeWhile(() => this.alive))
+    ).pipe(takeUntil(this.destroy$))
      .subscribe(() => this.onTouched());
   }
 
@@ -484,7 +485,7 @@ export class NbDatepickerDirective<D> implements OnDestroy, ControlValueAccessor
     fromEvent(this.input, 'input')
       .pipe(
         map(() => this.inputValue),
-        takeWhile(() => this.alive),
+        takeUntil(this.destroy$),
       )
       .subscribe((value: string) => this.handleInputChange(value));
   }

@@ -5,7 +5,8 @@
  */
 
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { takeWhile } from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 import { NbMenuService, NbMenuItem } from '@nebular/theme';
 
 @Component({
@@ -160,19 +161,19 @@ export class MenuTestComponent implements OnInit, OnDestroy {
     },
   ];
 
-  private alive: boolean = true;
+  private destroy$ = new Subject<void>();
 
   constructor(private menuService: NbMenuService) { }
 
   ngOnInit() {
     this.menuService
       .onItemClick()
-      .pipe(takeWhile(() => this.alive))
+      .pipe(takeUntil(this.destroy$))
       .subscribe((data: { tag: string; item: NbMenuItem }) => console.info(data));
 
     this.menuService
       .onItemSelect()
-      .pipe(takeWhile(() => this.alive))
+      .pipe(takeUntil(this.destroy$))
       .subscribe((data: { tag: string; item: NbMenuItem }) => console.info(data));
 
     // this.itemHoverSubscription = this.menuService.onItemHover()
@@ -180,7 +181,7 @@ export class MenuTestComponent implements OnInit, OnDestroy {
 
     this.menuService
       .onSubmenuToggle()
-      .pipe(takeWhile(() => this.alive))
+      .pipe(takeUntil(this.destroy$))
       .subscribe((data: { tag: string; item: NbMenuItem }) => console.info(data));
 
     this.menuService.addItems(
@@ -226,7 +227,8 @@ export class MenuTestComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.alive = false;
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   addMenuItem() {

@@ -7,7 +7,8 @@
 import { Component, OnDestroy } from '@angular/core';
 import { NbAuthResult, NbAuthService } from '@nebular/auth';
 import { Router } from '@angular/router';
-import { takeWhile } from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'nb-playground-oauth2-callback',
@@ -19,11 +20,11 @@ import { takeWhile } from 'rxjs/operators';
 })
 export class OAuth2CallbackComponent implements OnDestroy {
 
-  alive = true;
+  private destroy$ = new Subject<void>();
 
   constructor(private authService: NbAuthService, private router: Router) {
     this.authService.authenticate('google')
-      .pipe(takeWhile(() => this.alive))
+      .pipe(takeUntil(this.destroy$))
       .subscribe((authResult: NbAuthResult) => {
         if (authResult.isSuccess() && authResult.getRedirect()) {
           this.router.navigateByUrl(authResult.getRedirect());
@@ -32,6 +33,7 @@ export class OAuth2CallbackComponent implements OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.alive = false;
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

@@ -103,9 +103,13 @@ export class NbHoverTriggerStrategy extends NbTriggerStrategyBase {
     .pipe(
       filter(() => !this.container()),
       delay(100),
-      takeUntil(observableFromEvent(this.host, 'mouseleave')),
       repeat(),
-      takeUntil(this.destroyed$),
+      takeUntil(
+        observableMerge(
+          observableFromEvent(this.host, 'mouseleave'),
+          this.destroyed$,
+        ),
+      ),
     );
 
   hide$: Observable<Event> = observableFromEvent<Event>(this.host, 'mouseleave')
@@ -130,15 +134,15 @@ export class NbHintTriggerStrategy extends NbTriggerStrategyBase {
   show$: Observable<Event> = observableFromEvent<Event>(this.host, 'mouseenter')
     .pipe(
       delay(100),
+      // this `delay & takeUntil & repeat` operators combination is a synonym for `conditional debounce`
+      // meaning that if one event occurs in some time after the initial one we won't react to it
+      repeat(),
       takeUntil(
         observableMerge(
           observableFromEvent(this.host, 'mouseleave'),
           this.destroyed$,
         ),
       ),
-      // this `delay & takeUntil & repeat` operators combination is a synonym for `conditional debounce`
-      // meaning that if one event occurs in some time after the initial one we won't react to it
-      repeat(),
     );
 
   hide$: Observable<Event> = observableFromEvent(this.host, 'mouseleave')
@@ -188,13 +192,13 @@ export class NbFocusTriggerStrategy extends NbTriggerStrategyBase {
     .pipe(
       filter(() => !this.container()),
       debounceTime(100),
+      repeat(),
       takeUntil(
         observableMerge(
           observableFromEvent(this.host, 'focusout'),
           this.destroyed$,
         ),
       ),
-      repeat(),
     );
 
   hide$ = observableMerge(this.focusOut$, this.tabKeyPress$, this.clickOut$)

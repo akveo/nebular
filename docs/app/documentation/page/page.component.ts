@@ -7,7 +7,8 @@
 import { Component, Inject, NgZone, OnDestroy, OnInit, ViewChild, AfterContentChecked } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
-import { filter, map, publishReplay, refCount, tap, takeWhile } from 'rxjs/operators';
+import { filter, map, publishReplay, refCount, tap, takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 import { NB_WINDOW } from '@nebular/theme';
 import { NgdTabbedBlockComponent } from '../../blocks/components/tabbed-block/tabbed-block.component';
 import { NgdStructureService } from '../../@theme/services';
@@ -20,7 +21,7 @@ import { NgdStructureService } from '../../@theme/services';
 export class NgdPageComponent implements OnInit, AfterContentChecked, OnDestroy {
 
   currentItem;
-  private alive = true;
+  private destroy$ = new Subject<void>();
 
   currentTabName: string = '';
 
@@ -52,13 +53,13 @@ export class NgdPageComponent implements OnInit, AfterContentChecked, OnDestroy 
   }
 
   ngOnDestroy() {
-    this.alive = false;
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   handlePageNavigation() {
     this.activatedRoute.params
       .pipe(
-        takeWhile(() => this.alive),
         filter((params: any) => params.subPage),
         map((params: any) => {
           const slag = `${params.page}_${params.subPage}`;
@@ -75,6 +76,7 @@ export class NgdPageComponent implements OnInit, AfterContentChecked, OnDestroy 
         }),
         publishReplay(),
         refCount(),
+        takeUntil(this.destroy$),
       )
       .subscribe((item) => {
         this.currentItem = item;

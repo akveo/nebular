@@ -10,8 +10,8 @@ import {
   ContentChildren,
   QueryList,
 } from '@angular/core';
-import { Observable, forkJoin, of as observableOf, interval, timer } from 'rxjs';
-import { takeWhile, filter, switchMap, map, takeUntil, take } from 'rxjs/operators';
+import { Observable, forkJoin, of as observableOf, interval, timer, Subject } from 'rxjs';
+import { filter, switchMap, map, takeUntil, take } from 'rxjs/operators';
 import { convertToBoolProperty } from '../helpers';
 import { NbLayoutScrollService } from '../../services/scroll.service';
 import { NbLayoutRulerService } from '../../services/ruler.service';
@@ -56,7 +56,7 @@ export class NbScrollableContainerDimentions {
 })
 export class NbInfiniteListDirective implements AfterViewInit, OnDestroy {
 
-  private alive = true;
+  private destroy$ = new Subject<void>();
   private lastScrollPosition;
   windowScroll = false;
   private get elementScroll() {
@@ -109,25 +109,25 @@ export class NbInfiniteListDirective implements AfterViewInit, OnDestroy {
   ngAfterViewInit() {
     this.scrollService.onScroll()
       .pipe(
-        takeWhile(() => this.alive),
         filter(() => this.windowScroll),
         switchMap(() => this.getContainerDimensions()),
+        takeUntil(this.destroy$),
       )
       .subscribe(dimentions => this.checkPosition(dimentions));
 
     this.listItems.changes
       .pipe(
-        takeWhile(() => this.alive),
         // For some reason, changes are emitted before list item removed from dom,
         // so dimensions will be incorrect.
         // Check every 50ms for a second if dom and query are in sync.
         // Once they synchronized, we can get proper dimensions.
         switchMap(() => interval(50).pipe(
-          takeUntil(timer(1000)),
           filter(() => this.inSyncWithDom()),
           take(1),
+          takeUntil(timer(1000)),
         )),
         switchMap(() => this.getContainerDimensions()),
+        takeUntil(this.destroy$),
       )
       .subscribe(dimentions => this.checkPosition(dimentions));
 
@@ -135,7 +135,8 @@ export class NbInfiniteListDirective implements AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.alive = false;
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   checkPosition({ scrollHeight, scrollTop, clientHeight }: NbScrollableContainerDimentions) {
