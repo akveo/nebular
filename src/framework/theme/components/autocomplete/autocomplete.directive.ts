@@ -173,8 +173,8 @@ export class NbAutocompleteDirective<T> implements OnDestroy, AfterViewInit, Con
     protected cd: ChangeDetectorRef,
     protected triggerStrategyBuilder: NbTriggerStrategyBuilderService,
     protected positionBuilder: NbPositionBuilderService,
-    protected activeDescendantKeyManagerFactoryService:
-      NbActiveDescendantKeyManagerFactoryService<NbOptionComponent<T>>) {}
+    protected activeDescendantKeyManagerFactory: NbActiveDescendantKeyManagerFactoryService<NbOptionComponent<T>>,
+  ) {}
 
   ngAfterViewInit() {
     this.triggerStrategy = this.createTriggerStrategy();
@@ -297,7 +297,7 @@ export class NbAutocompleteDirective<T> implements OnDestroy, AfterViewInit, Con
   }
 
   protected createKeyManager(): void {
-    this.keyManager = this.activeDescendantKeyManagerFactoryService
+    this.keyManager = this.activeDescendantKeyManagerFactory
                         .create(this.autocomplete.options);
   }
 
