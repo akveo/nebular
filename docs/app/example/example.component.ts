@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { of as observableOf } from 'rxjs';
-import { takeWhile, delay } from 'rxjs/operators';
+import { of as observableOf, Subject } from 'rxjs';
+import { takeUntil, delay } from 'rxjs/operators';
 import { NB_DOCUMENT, NbThemeService } from '@nebular/theme';
 import { NgdAnalytics, NgdIframeCommunicatorService } from '../@theme/services';
 
@@ -12,7 +12,7 @@ import { NgdAnalytics, NgdIframeCommunicatorService } from '../@theme/services';
 })
 export class NgdExampleComponent implements OnInit, AfterViewInit, OnDestroy {
   private id: string;
-  private alive: boolean = true;
+  private destroy$ = new Subject<void>();
 
   constructor(private communicator: NgdIframeCommunicatorService,
               private themeService: NbThemeService,
@@ -34,7 +34,8 @@ export class NgdExampleComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.alive = false;
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   private setupId() {
@@ -43,7 +44,7 @@ export class NgdExampleComponent implements OnInit, AfterViewInit, OnDestroy {
 
   private subscribeOnThemeSwitch() {
     this.communicator.receive(this.id)
-      .pipe(takeWhile(() => this.alive))
+      .pipe(takeUntil(this.destroy$))
       .subscribe(payload => this.changeTheme(payload))
   }
 

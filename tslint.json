@@ -1,4 +1,7 @@
 {
+  "extends": [
+    "rxjs-tslint-rules"
+  ],
   "rulesDirectory": [
     "node_modules/codelyzer"
   ],
@@ -131,7 +134,13 @@
     "use-pipe-transform-interface": true,
     "component-class-suffix": true,
     "directive-class-suffix": true,
-    "no-unused-variable": [true, {"ignore-pattern": "^set"}]
+    "no-unused-variable": [true, {"ignore-pattern": "^set"}],
+    "rxjs-no-unsafe-takeuntil": {
+      "options": [{
+        "allow": ["count", "defaultIfEmpty", "endWith", "every", "finalize", "finally", "isEmpty", "last", "max", "min", "publish", "publishBehavior", "publishLast", "publishReplay", "reduce", "share", "shareReplay", "skipLast", "takeLast", "throwIfEmpty", "toArray"]
+      }],
+      "severity": "error"
+    }
   },
   "linterOptions": {
     "exclude": [

@@ -15,7 +15,8 @@ import {
   OnDestroy,
   OnInit,
 } from '@angular/core';
-import { filter, takeWhile } from 'rxjs/operators';
+import { filter, takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 import { NbDynamicOverlay, NbDynamicOverlayController } from '../cdk/overlay/dynamic/dynamic-overlay';
 import { NbDynamicOverlayHandler } from '../cdk/overlay/dynamic/dynamic-overlay-handler';
@@ -163,7 +164,7 @@ export class NbContextMenuDirective implements NbDynamicOverlayController, OnCha
   protected ref: NbOverlayRef;
   protected container: ComponentRef<any>;
   protected positionStrategy: NbAdjustableConnectedPositionStrategy;
-  protected alive: boolean = true;
+  protected destroy$ = new Subject<void>();
   private _items: NbMenuItem[] = [];
 
   private dynamicOverlay: NbDynamicOverlay;
@@ -236,8 +237,8 @@ export class NbContextMenuDirective implements NbDynamicOverlayController, OnCha
   private subscribeOnItemClick() {
     this.menuService.onItemClick()
       .pipe(
-        takeWhile(() => this.alive),
         filter(({ tag }) => tag === this.tag),
+        takeUntil(this.destroy$),
       )
       .subscribe(() => this.hide());
   }

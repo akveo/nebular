@@ -19,8 +19,8 @@ import {
   OnDestroy,
   QueryList,
 } from '@angular/core';
-import { fromEvent, merge } from 'rxjs';
-import { debounceTime, takeWhile } from 'rxjs/operators';
+import { fromEvent, merge, Subject } from 'rxjs';
+import { debounceTime, takeUntil } from 'rxjs/operators';
 
 import { NB_DOCUMENT, NB_WINDOW } from '../../theme.options';
 import { NbPlatform } from '../cdk/platform/platform-service';
@@ -154,7 +154,7 @@ export class NbTreeGridComponent<T> extends NbTable<NbTreeGridPresentationNode<T
     this.platform = platform;
   }
 
-  private alive: boolean = true;
+  private destroy$ = new Subject<void>();
   private _source: NbTreeGridDataSource<T>;
   private platform: NbPlatform;
 
@@ -201,7 +201,7 @@ export class NbTreeGridComponent<T> extends NbTable<NbTreeGridPresentationNode<T
       this._contentHeaderRowDefs.changes,
       this._contentFooterRowDefs.changes,
     );
-    rowsChange$.pipe(takeWhile(() => this.alive))
+    rowsChange$.pipe(takeUntil(this.destroy$))
       .subscribe(() => this.checkDefsCount());
 
     if (this.platform.isBrowser) {
@@ -209,14 +209,15 @@ export class NbTreeGridComponent<T> extends NbTable<NbTreeGridPresentationNode<T
 
       const windowResize$ = fromEvent(this.window, 'resize').pipe(debounceTime(50));
       merge(rowsChange$, this._contentColumnDefs.changes, windowResize$)
-        .pipe(takeWhile(() => this.alive))
+        .pipe(takeUntil(this.destroy$))
         .subscribe(() => this.updateVisibleColumns());
     }
   }
 
   ngOnDestroy() {
     super.ngOnDestroy();
-    this.alive = false;
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   toggleRow(row: NbTreeGridRowComponent, options?: NbToggleOptions): void {
