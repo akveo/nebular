@@ -8,8 +8,6 @@ import {
   NbOptionGroupComponent,
   NbSelectModule,
   NbSelectComponent,
-  NbOptionComponent,
-  NbOptionGroupComponent,
   NbThemeModule,
 } from '@nebular/theme';
 
