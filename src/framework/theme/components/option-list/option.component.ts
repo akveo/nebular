@@ -14,19 +14,20 @@ import {
   HostListener,
   Inject,
   Input,
-  OnDestroy, Optional,
+  OnDestroy,
+  Optional,
   Output,
 } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 
 // Component class scoped counter for aria attributes.
-let lastOptionId: number = 0
+let lastOptionId: number = 0;
 
 import { convertToBoolProperty } from '../helpers';
 import { NbFocusableOption } from '../cdk/a11y/focus-key-manager';
-import { NbSelectComponent } from './select.component';
-import { NB_SELECT_INJECTION_TOKEN } from './select-injection-tokens';
 import { NbHighlightableOption } from '../cdk/a11y/descendant-key-manager';
+import { NB_SELECT_INJECTION_TOKEN } from '../select/select-injection-tokens';
+import { NbSelectComponent } from '../select/select.component';
 
 @Component({
   selector: 'nb-option',
