@@ -1,6 +1,6 @@
 [
   {
-    "checkoutTarget": "chore/cyber-monday-deal-2019",
+    "checkoutTarget": "v4.6.0",
     "name": "4.6.0",
     "path": "/nebular/",
     "isCurrent": true
