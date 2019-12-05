@@ -33,7 +33,6 @@
 @import '../../components/popover/popover.component.theme';
 @import '../../components/context-menu/context-menu.component.theme';
 @import '../../components/select/select.component.theme';
-@import '../../components/autocomplete/autocomplete.component.theme';
 @import '../../components/option-list/option-list.component.theme';
 @import '../../components/toastr/toast.component.theme';
 @import '../../components/tooltip/tooltip.component.theme';
@@ -73,7 +72,6 @@
   @include nb-popover-theme();
   @include nb-context-menu-theme();
   @include nb-select-theme();
-  @include nb-autocomplete-theme();
   @include nb-option-list-theme();
   @include nb-toast-theme();
   @include nb-tooltip-theme();
