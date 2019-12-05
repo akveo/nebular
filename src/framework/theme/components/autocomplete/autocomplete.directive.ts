@@ -33,14 +33,10 @@ import {
 import {
   NbActiveDescendantKeyManager,
   NbActiveDescendantKeyManagerFactoryService,
+  NbKeyManagerActiveItemMode,
 } from '../cdk/a11y/descendant-key-manager';
 import { NbAutocompleteComponent } from './autocomplete.component';
 import { NbOptionComponent } from '../option-list/option.component';
-
-export const KeyManagerItemStatus = {
-  RESET_ACTIVE: -1,
-  FIRST_ACTIVE: 0,
-}
 
 /**
  * The `NbAutocompleteDirective` provides a capability to expand input with
@@ -342,8 +338,10 @@ export class NbAutocompleteDirective<T> implements OnDestroy, AfterViewInit, Con
   protected setActiveItem() {
     // If autocomplete has activeFirst input set to true,
     // keyManager set first option active, otherwise - reset active option.
-    this.keyManager.setActiveItem(
-      this.autocomplete.activeFirst ? KeyManagerItemStatus.FIRST_ACTIVE : KeyManagerItemStatus.RESET_ACTIVE);
+    const mode = this.autocomplete.activeFirst
+      ? NbKeyManagerActiveItemMode.FIRST_ACTIVE
+      : NbKeyManagerActiveItemMode.RESET_ACTIVE;
+    this.keyManager.setActiveItem(mode);
     this.cd.detectChanges();
   }
 

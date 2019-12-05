@@ -9,3 +9,8 @@ export class NbActiveDescendantKeyManagerFactoryService<T extends NbHighlightabl
     return new NbActiveDescendantKeyManager<T>(items);
   }
 }
+
+export enum NbKeyManagerActiveItemMode {
+  RESET_ACTIVE = -1,
+  FIRST_ACTIVE = 0,
+}
