@@ -17,11 +17,9 @@
     &.placeholder {
       font-family: nb-theme(select-placeholder-text-font-family);
     }
-
     &:focus {
       outline: none;
     }
-
     &[disabled] {
       cursor: nb-theme(select-disabled-cursor);
     }
