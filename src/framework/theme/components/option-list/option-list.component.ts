@@ -22,7 +22,11 @@ import {
  * */
 @Component({
   selector: 'nb-option-list',
-  templateUrl: './option-list.component.html',
+  template: `
+    <ul class="option-list">
+      <ng-content></ng-content>
+    </ul>
+  `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NbOptionListComponent<T> {
