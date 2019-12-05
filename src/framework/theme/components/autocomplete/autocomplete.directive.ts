@@ -105,6 +105,8 @@ export class NbAutocompleteDirective<T> implements OnDestroy, AfterViewInit, Con
 
   protected overlayRef: NbOverlayRef;
 
+  protected overlayOffset = 8;
+
   protected keyManager: NbActiveDescendantKeyManager<NbOptionComponent<T>>;
 
   protected destroy$: Subject<void> = new Subject<void>();
@@ -307,7 +309,7 @@ export class NbAutocompleteDirective<T> implements OnDestroy, AfterViewInit, Con
     return this.positionBuilder
       .connectedTo(this.hostRef)
       .position(NbPosition.BOTTOM)
-      .offset(0)
+      .offset(this.overlayOffset)
       .adjustment(NbAdjustment.VERTICAL);
   }
 
