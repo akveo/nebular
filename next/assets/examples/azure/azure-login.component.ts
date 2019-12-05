@@ -1,6 +1,7 @@
 import { Component, OnDestroy } from '@angular/core';
 import { NbAuthResult, NbAuthService } from '@nebular/auth';
-import { takeWhile } from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 import { AuthAzureToken } from './azure-adb2c-auth-strategy';
 
 @Component({
@@ -25,11 +26,11 @@ export class AzureLoginComponent implements OnDestroy {
 
   token: AuthAzureToken;
 
-  alive = true;
+  private destroy$ = new Subject<void>();
 
   constructor(private authService: NbAuthService) {
     this.authService.onTokenChange()
-      .pipe(takeWhile(() => this.alive))
+      .pipe(takeUntil(this.destroy$))
       .subscribe((token: AuthAzureToken) => {
         this.token = null;
         if (token && token.isValid()) {
@@ -40,19 +41,20 @@ export class AzureLoginComponent implements OnDestroy {
 
   login() {
     this.authService.authenticate('azure')
-      .pipe(takeWhile(() => this.alive))
+      .pipe(takeUntil(this.destroy$))
       .subscribe((authResult: NbAuthResult) => {
       });
   }
 
   logout() {
     this.authService.logout('azure')
-      .pipe(takeWhile(() => this.alive))
+      .pipe(takeUntil(this.destroy$))
       .subscribe((authResult: NbAuthResult) => {
       });
   }
 
   ngOnDestroy(): void {
-    this.alive = false;
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }
