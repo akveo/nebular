@@ -1,7 +1,7 @@
 import { Directive, ElementRef, Inject, Input, OnDestroy, OnInit, PLATFORM_ID, Renderer2 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { timer } from 'rxjs';
-import { takeWhile, publish, refCount, filter, tap, debounce } from 'rxjs/operators';
+import { timer, Subject } from 'rxjs';
+import { takeUntil, publish, refCount, filter, tap, debounce } from 'rxjs/operators';
 import { NB_WINDOW, NbLayoutScrollService } from '@nebular/theme';
 import { NgdVisibilityService } from '../../../@theme/services';
 
@@ -15,7 +15,7 @@ export class NgdFragmentTargetDirective implements OnInit, OnDestroy {
   private readonly marginFromTop = 120;
   private isCurrentlyViewed: boolean = false;
   private isScrolling: boolean = false;
-  private alive = true;
+  private destroy$ = new Subject<void>();
 
   @Input() ngdFragment: string;
   @Input() ngdFragmentClass: string;
@@ -37,7 +37,7 @@ export class NgdFragmentTargetDirective implements OnInit, OnDestroy {
       .pipe(
         publish(null),
         refCount(),
-        takeWhile(() => this.alive),
+        takeUntil(this.destroy$),
         filter(() => this.ngdFragmentSync),
       )
       .subscribe((fragment: string) => {
@@ -49,7 +49,7 @@ export class NgdFragmentTargetDirective implements OnInit, OnDestroy {
       });
 
     this.visibilityService.isTopmostVisible(this.el.nativeElement, OBSERVER_OPTIONS)
-      .pipe(takeWhile(() => this.alive))
+      .pipe(takeUntil(this.destroy$))
       .subscribe((isTopmost: boolean) => {
         this.isCurrentlyViewed = isTopmost;
         if (isTopmost) {
@@ -59,9 +59,9 @@ export class NgdFragmentTargetDirective implements OnInit, OnDestroy {
 
     this.scrollService.onScroll()
       .pipe(
-        takeWhile(() => this.alive),
         tap(() => this.isScrolling = true),
         debounce(() => timer(100)),
+        takeUntil(this.destroy$),
       )
       .subscribe(() => this.isScrolling = false);
   }
@@ -88,7 +88,8 @@ export class NgdFragmentTargetDirective implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.alive = false;
+    this.destroy$.next();
+    this.destroy$.complete();
     this.visibilityService.unobserve(this.el.nativeElement, OBSERVER_OPTIONS);
   }
 }

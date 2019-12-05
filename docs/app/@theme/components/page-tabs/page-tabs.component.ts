@@ -5,9 +5,9 @@
  */
 
 import { ChangeDetectionStrategy, Component, Input, OnDestroy, HostBinding } from '@angular/core';
-import { takeWhile, map, publishReplay, refCount } from 'rxjs/operators';
+import { takeUntil, map, publishReplay, refCount } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
-import { Observable, of as observableOf, combineLatest } from 'rxjs';
+import { Observable, of as observableOf, combineLatest, Subject } from 'rxjs';
 
 @Component({
   selector: 'ngd-page-tabs',
@@ -25,6 +25,8 @@ import { Observable, of as observableOf, combineLatest } from 'rxjs';
 })
 export class NgdPageTabsComponent implements OnDestroy {
 
+  private destroy$ = new Subject<void>();
+
   items$: Observable<any[]> = observableOf([]);
 
   @Input()
@@ -36,8 +38,8 @@ export class NgdPageTabsComponent implements OnDestroy {
       this.activatedRoute.params.pipe(publishReplay(), refCount()),
     )
     .pipe(
-      takeWhile(() => this.alive),
       map(([tabs, params]) => (tabs.map((item: any) => ({ ...item, selected: item.tab === params.tab })))),
+      takeUntil(this.destroy$),
     );
   }
 
@@ -76,12 +78,12 @@ export class NgdPageTabsComponent implements OnDestroy {
         icon: 'image-outline',
       },
     ];
-  private alive = true;
 
   constructor(private activatedRoute: ActivatedRoute) {
   }
 
   ngOnDestroy() {
-    this.alive = false;
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

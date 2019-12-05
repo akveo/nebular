@@ -6,7 +6,8 @@
 
 import { Component, OnDestroy } from '@angular/core';
 import { NbAuthOAuth2Token, NbAuthResult, NbAuthService } from '@nebular/auth';
-import { takeWhile } from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'nb-playground-auth',
@@ -30,11 +31,11 @@ export class OAuth2LoginComponent implements OnDestroy {
 
   token: NbAuthOAuth2Token;
 
-  alive = true;
+  private destroy$ = new Subject<void>();
 
   constructor(private authService: NbAuthService) {
     this.authService.onTokenChange()
-      .pipe(takeWhile(() => this.alive))
+      .pipe(takeUntil(this.destroy$))
       .subscribe((token: NbAuthOAuth2Token) => {
         this.token = null;
         if (token && token.isValid()) {
@@ -45,19 +46,20 @@ export class OAuth2LoginComponent implements OnDestroy {
 
   login() {
     this.authService.authenticate('google')
-      .pipe(takeWhile(() => this.alive))
+      .pipe(takeUntil(this.destroy$))
       .subscribe((authResult: NbAuthResult) => {
       });
   }
 
   logout() {
     this.authService.logout('google')
-      .pipe(takeWhile(() => this.alive))
+      .pipe(takeUntil(this.destroy$))
       .subscribe((authResult: NbAuthResult) => {
       });
   }
 
   ngOnDestroy(): void {
-    this.alive = false;
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

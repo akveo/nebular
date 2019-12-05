@@ -6,8 +6,8 @@
 
 import {Component, Input, OnInit, OnDestroy, ChangeDetectionStrategy, ChangeDetectorRef} from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { takeWhile, skip, distinctUntilChanged, debounceTime } from 'rxjs/operators';
-
+import { takeUntil, skip, distinctUntilChanged, debounceTime } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'ngd-theme-block',
@@ -18,7 +18,7 @@ import { takeWhile, skip, distinctUntilChanged, debounceTime } from 'rxjs/operat
 export class NgdThemeComponent implements OnInit, OnDestroy {
   searchControl = new FormControl();
 
-  private alive: boolean = true;
+  private destroy$ = new Subject<void>();
 
   properties = [];
   filtered = [];
@@ -47,7 +47,7 @@ export class NgdThemeComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.searchControl.valueChanges
-      .pipe(skip(1), distinctUntilChanged(), debounceTime(300), takeWhile(() => this.alive))
+      .pipe(skip(1), distinctUntilChanged(), debounceTime(300), takeUntil(this.destroy$))
       .subscribe((value: string) => {
         this.filtered = this.properties
           .filter(({ name }) => name.toLowerCase().includes(value.toLowerCase()));
@@ -60,6 +60,7 @@ export class NgdThemeComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.alive = false;
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

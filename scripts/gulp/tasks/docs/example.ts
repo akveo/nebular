@@ -1,10 +1,14 @@
-import { dest, src, task } from 'gulp';
+import { dest, src, task, series } from 'gulp';
 import { accessSync, readFileSync, writeFileSync } from 'fs';
 import { DOCS_OUTPUT, EXTENSIONS } from '../config';
 import { join } from 'path';
+import { exportThemes } from './export-themes';
 
 const del = require('del');
 const replace = require('gulp-replace');
+const typedoc = require('gulp-typedoc');
+const sass = require('gulp-sass');
+const exec = require('child_process').execSync;
 
 /**
  * Copy everything from with-layout and without-layout dirs
@@ -27,19 +31,77 @@ task('copy-examples', () => {
     .pipe(dest(EXAMPLES_DEST));
 });
 
-task('find-full-examples', ['parse-themes', 'validate-examples'], () => {
-  const docs = JSON.parse(readFileSync(DOCS_OUTPUT, 'utf8'));
-  docs.classes.forEach(cls => {
-    cls.overview = cls.overview.map(unfold);
-    cls.liveExamples = cls.liveExamples.map(unfold);
-  });
-  writeFileSync(DOCS_OUTPUT, JSON.stringify(docs));
-});
+task('generate-doc-json', generateDocJson);
+function generateDocJson() {
+  return src(['src/framework/**/*.ts', '!src/**/*.spec.ts', '!src/framework/theme/**/node_modules{,/**}'])
+    .pipe(typedoc({
+      module: 'commonjs',
+      target: 'ES6',
+      // TODO: ignoreCompilerErrors, huh?
+      ignoreCompilerErrors: true,
+      includeDeclarations: true,
+      emitDecoratorMetadata: true,
+      experimentalDecorators: true,
+      excludeExternals: true,
+      exclude: 'node_modules/**/*',
+      json: 'docs/docs.json',
+      version: true,
+      noLib: true,
+    }));
+}
 
-task('validate-examples', ['parse-themes', 'copy-examples'], () => {
-  const docs = JSON.parse(readFileSync(DOCS_OUTPUT, 'utf8'));
-  docs.classes.forEach(cls => validate(cls));
-});
+task(
+  'parse-themes',
+  parseThemes,
+);
+function parseThemes() {
+  exec('prsr -g typedoc -f angular -i docs/docs.json -o docs/output.json');
+
+  return src('docs/themes.scss')
+    .pipe(sass({
+      functions: exportThemes('docs/', ''),
+    }));
+
+}
+
+task(
+  'generate-doc-json-and-parse-themes',
+  series(
+    'generate-doc-json',
+    'parse-themes',
+  ),
+);
+
+task(
+  'validate-examples',
+  series(
+    'copy-examples',
+    (done) => {
+      const docs = JSON.parse(readFileSync(DOCS_OUTPUT, 'utf8'));
+
+      docs.classes.forEach(cls => validate(cls));
+
+      done();
+    },
+  ),
+);
+
+task(
+  'find-full-examples',
+  series(
+    'validate-examples',
+    (done) => {
+      const docs = JSON.parse(readFileSync(DOCS_OUTPUT, 'utf8'));
+      docs.classes.forEach(cls => {
+        cls.overview = cls.overview.map(unfold);
+        cls.liveExamples = cls.liveExamples.map(unfold);
+      });
+      writeFileSync(DOCS_OUTPUT, JSON.stringify(docs));
+
+      done();
+    },
+  ),
+);
 
 function unfold(tag) {
   if (tag.type === 'text') {
