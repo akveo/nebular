@@ -25,10 +25,10 @@
     $adjacent-border: nb-theme(option-list-adjacent-border-width)
                       nb-theme(option-list-adjacent-border-style)
                       nb-theme(option-list-adjacent-border-color);
-    &.top {
+    &.position-top {
       border-bottom: $adjacent-border;
     }
-    &.bottom {
+    &.position-bottom {
       border-top: $adjacent-border;
     }
   }

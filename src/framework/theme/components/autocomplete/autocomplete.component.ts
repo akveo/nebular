@@ -65,15 +65,6 @@ export class NbAutocompleteComponent<T> {
     this.cd.detectChanges();
   }
 
-  get optionsListClasses(): string[] {
-    const classes = [
-      `size-${this.size}`,
-      this.overlayPosition,
-    ];
-
-    return classes;
-  }
-
   /**
    * Returns width of the input.
    * */

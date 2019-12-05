@@ -719,21 +719,6 @@ export class NbSelectComponent<T> implements AfterViewInit, AfterContentInit, On
     return classes;
   }
 
-  get optionsListClasses(): string[] {
-    const classes = [
-      `appearance-${this.appearance}`,
-      `size-${this.size}`,
-      `status-${this.status}`,
-      this.overlayPosition,
-    ];
-
-    if (this.fullWidth) {
-      classes.push('full-width');
-    }
-
-    return classes;
-  }
-
   /**
    * Content rendered in the label.
    * */
