@@ -31,7 +31,7 @@ export class NbCalendarYearModelService<D> {
     const viewStartYear = year - (year % this.yearsInView);
     const years = range(this.yearsInView).map(i => this.copyWithYear(viewStartYear + i, viewYear));
 
-    return batch(years, this.getRowInView());
+    return batch(years, this.yearsInRow);
   }
 
   protected copyWithYear(year: number, date: D): D {
