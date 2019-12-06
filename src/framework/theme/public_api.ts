@@ -135,6 +135,7 @@ export * from './components/cdk/overlay/mapping';
 export * from './components/cdk/overlay/position-helper';
 export * from './components/cdk/overlay/dynamic/dynamic-overlay';
 export * from './components/cdk/overlay/dynamic/dynamic-overlay-handler';
+export * from './components/cdk/platform/platform-service';
 export * from './components/cdk/a11y/a11y.module';
 export * from './components/cdk/a11y/focus-trap';
 export * from './components/cdk/adapter/adapter.module';
