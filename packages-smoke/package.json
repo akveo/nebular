@@ -34,7 +34,7 @@
     "@nguniversal/express-engine": "^8.1.1",
     "@nguniversal/module-map-ngfactory-loader": "8.1.1",
     "core-js": "^2.5.7",
-    "date-fns": "2.6.0",
+    "date-fns": "2",
     "eva-icons": "1.1.2",
     "express": "^4.15.2",
     "moment": "^2.22.2",

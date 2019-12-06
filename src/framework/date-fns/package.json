@@ -22,7 +22,7 @@
   ],
   "peerDependencies": {
     "@nebular/theme": "4.6.0",
-    "date-fns": "2.6.0"
+    "date-fns": "2"
   },
   "sideEffects": false
 }
