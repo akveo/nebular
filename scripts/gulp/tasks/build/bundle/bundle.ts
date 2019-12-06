@@ -1,4 +1,4 @@
-import { dest, src, task } from 'gulp';
+import { dest, src, task, parallel } from 'gulp';
 import * as rollup from 'gulp-rollup';
 import * as rename from 'gulp-rename';
 import * as replace from 'gulp-replace';
@@ -6,17 +6,20 @@ import * as replace from 'gulp-replace';
 import { JS_PACKAGES, LIB_DIR } from '../../config';
 import { ROLLUP_COMMON_CONFIG } from './rollup-config';
 
-task('bundle', [
-  ...JS_PACKAGES.map(packageName => `bundle:fesm2015:${packageName}`),
-  ...JS_PACKAGES.map(packageName => `bundle:fesm5:${packageName}`),
-  ...JS_PACKAGES.map(packageName => `bundle:umd:${packageName}`),
-]);
-
 for (const packageName of JS_PACKAGES) {
   task(`bundle:fesm2015:${packageName}`, () => bundleFesm2015Module(packageName));
   task(`bundle:fesm5:${packageName}`, () => bundleFesm5Module(packageName));
   task(`bundle:umd:${packageName}`, () => bundleUmdModule(packageName));
 }
+
+task(
+  'bundle',
+  parallel(
+    ...JS_PACKAGES.map(packageName => `bundle:fesm2015:${packageName}`),
+    ...JS_PACKAGES.map(packageName => `bundle:fesm5:${packageName}`),
+    ...JS_PACKAGES.map(packageName => `bundle:umd:${packageName}`),
+  ),
+);
 
 task('bundle:rename-dev', bundleRenameDev);
 

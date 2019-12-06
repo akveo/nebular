@@ -25,8 +25,8 @@ import {
   ViewChild,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { merge } from 'rxjs';
-import { startWith, switchMap, takeWhile, filter } from 'rxjs/operators';
+import { merge, Subject } from 'rxjs';
+import { startWith, switchMap, takeUntil, filter } from 'rxjs/operators';
 
 import {
   NbAdjustableConnectedPositionStrategy,
@@ -723,10 +723,13 @@ export class NbSelectComponent<T> implements AfterViewInit, AfterContentInit, On
   overlayPosition: NbPosition = '' as NbPosition;
 
   protected ref: NbOverlayRef;
+  protected optionsOverlayOffset = 8;
 
   protected triggerStrategy: NbTriggerStrategy;
 
   protected alive: boolean = true;
+
+  protected destroy$ = new Subject<void>();
 
   protected keyManager: NbFocusKeyManager<NbOptionComponent<T>>;
 
@@ -786,7 +789,6 @@ export class NbSelectComponent<T> implements AfterViewInit, AfterContentInit, On
     const classes = [
       `appearance-${this.appearance}`,
       `size-${this.size}`,
-      `shape-${this.shape}`,
       `status-${this.status}`,
       this.overlayPosition,
     ];
@@ -810,16 +812,21 @@ export class NbSelectComponent<T> implements AfterViewInit, AfterContentInit, On
   }
 
   ngAfterContentInit() {
-    if (this.queue != null) {
-      // Call 'writeValue' when current change detection run is finished.
-      // When writing is finished, change detection starts again, since
-      // microtasks queue is empty.
-      // Prevents ExpressionChangedAfterItHasBeenCheckedError.
-      Promise.resolve().then(() => {
-        this.writeValue(this.queue);
-        this.queue = null;
+    this.options.changes
+      .pipe(
+        startWith(this.options),
+        filter(() => this.queue != null && this.canSelectValue()),
+        takeUntil(this.destroy$),
+      )
+      .subscribe(() => {
+        // Call 'writeValue' when current change detection run is finished.
+        // When writing is finished, change detection starts again, since
+        // microtasks queue is empty.
+        // Prevents ExpressionChangedAfterItHasBeenCheckedError.
+        Promise.resolve().then(() => {
+          this.writeValue(this.queue);
+        });
       });
-    }
   }
 
   ngAfterViewInit() {
@@ -831,6 +838,9 @@ export class NbSelectComponent<T> implements AfterViewInit, AfterContentInit, On
 
   ngOnDestroy() {
     this.alive = false;
+
+    this.destroy$.next();
+    this.destroy$.complete();
 
     if (this.ref) {
       this.ref.dispose();
@@ -873,8 +883,11 @@ export class NbSelectComponent<T> implements AfterViewInit, AfterContentInit, On
       return;
     }
 
-    if (this.options) {
+    if (this.canSelectValue()) {
       this.setSelection(value);
+      if (this.selectionModel.length) {
+        this.queue = null;
+      }
     } else {
       this.queue = value;
     }
@@ -884,6 +897,7 @@ export class NbSelectComponent<T> implements AfterViewInit, AfterContentInit, On
    * Selects option or clear all selected options if value is null.
    * */
   protected handleOptionClick(option: NbOptionComponent<T>) {
+    this.queue = null;
     if (option.value == null) {
       this.reset();
     } else {
@@ -981,7 +995,7 @@ export class NbSelectComponent<T> implements AfterViewInit, AfterContentInit, On
     return this.positionBuilder
       .connectedTo(this.button)
       .position(NbPosition.BOTTOM)
-      .offset(0)
+      .offset(this.optionsOverlayOffset)
       .adjustment(NbAdjustment.VERTICAL);
   }
 
@@ -1011,7 +1025,7 @@ export class NbSelectComponent<T> implements AfterViewInit, AfterContentInit, On
 
   protected subscribeOnPositionChange() {
     this.positionStrategy.positionChange
-      .pipe(takeWhile(() => this.alive))
+      .pipe(takeUntil(this.destroy$))
       .subscribe((position: NbPosition) => {
         this.overlayPosition = position;
         this.cd.detectChanges();
@@ -1030,7 +1044,7 @@ export class NbSelectComponent<T> implements AfterViewInit, AfterContentInit, On
         switchMap((options: QueryList<NbOptionComponent<T>>) => {
           return merge(...options.map(option => option.click));
         }),
-        takeWhile(() => this.alive),
+        takeUntil(this.destroy$),
       )
       .subscribe((clickedOption: NbOptionComponent<T>) => this.handleOptionClick(clickedOption));
   }
@@ -1038,8 +1052,8 @@ export class NbSelectComponent<T> implements AfterViewInit, AfterContentInit, On
   protected subscribeOnOverlayKeys(): void {
     this.ref.keydownEvents()
       .pipe(
-        takeWhile(() => this.alive),
         filter(() => this.isOpen),
+        takeUntil(this.destroy$),
       )
       .subscribe((event: KeyboardEvent) => {
         if (event.keyCode === ESCAPE) {
@@ -1051,7 +1065,7 @@ export class NbSelectComponent<T> implements AfterViewInit, AfterContentInit, On
       });
 
     this.keyManager.tabOut
-      .pipe(takeWhile(() => this.alive))
+      .pipe(takeUntil(this.destroy$))
       .subscribe(() => {
         this.hide();
         this.onTouched();
@@ -1129,6 +1143,10 @@ export class NbSelectComponent<T> implements AfterViewInit, AfterContentInit, On
 
   protected isClickedWithinComponent($event: Event) {
     return this.hostRef.nativeElement === $event.target || this.hostRef.nativeElement.contains($event.target as Node);
+  }
+
+  protected canSelectValue(): boolean {
+    return !!(this.options && this.options.length);
   }
 
   @HostBinding('class.size-tiny')

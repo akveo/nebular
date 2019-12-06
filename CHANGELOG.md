@@ -1,3 +1,30 @@
+<a name="4.6.0"></a>
+# [4.6.0](https://github.com/akveo/nebular/compare/v4.5.0...v4.6.0) (2019-11-26)
+
+
+### Bug Fixes
+
+* **auth:** use basic status instead deprecated empty string ([#2063](https://github.com/akveo/nebular/issues/2063)) ([a202468](https://github.com/akveo/nebular/commit/a202468))
+* **docs:** update links inside install guide page ([#2079](https://github.com/akveo/nebular/issues/2079)) ([cd8cd9d](https://github.com/akveo/nebular/commit/cd8cd9d))
+* **hover trigger strategy:** prevent resubscription after destroy ([#2058](https://github.com/akveo/nebular/issues/2058)) ([1e1a293](https://github.com/akveo/nebular/commit/1e1a293))
+* **nbIsGranted:** prevent subscription memory leak ([#2087](https://github.com/akveo/nebular/issues/2087)) ([2084356](https://github.com/akveo/nebular/commit/2084356))
+* **overlay:** set position when content or context update ([#2081](https://github.com/akveo/nebular/issues/2081)) ([e85830f](https://github.com/akveo/nebular/commit/e85830f))
+* **radio:** reverse order of elements in RTL ([#2093](https://github.com/akveo/nebular/issues/2093)) ([2e61d8d](https://github.com/akveo/nebular/commit/2e61d8d))
+* **select:** set value from queue when options change ([#2082](https://github.com/akveo/nebular/issues/2082)) ([c934329](https://github.com/akveo/nebular/commit/c934329))
+* **toastr:** move toastr overlay in front of other overlays ([#2078](https://github.com/akveo/nebular/issues/2078)) ([906d3c0](https://github.com/akveo/nebular/commit/906d3c0))
+* **toggle:** animation in IE11 ([#2062](https://github.com/akveo/nebular/issues/2062)) ([1d52a20](https://github.com/akveo/nebular/commit/1d52a20))
+* **toggle:** set correct ARIA role ([#2097](https://github.com/akveo/nebular/issues/2097)) ([dd5f2b6](https://github.com/akveo/nebular/commit/dd5f2b6))
+* **universal:** update dependencies to support universal enviro… ([#2057](https://github.com/akveo/nebular/issues/2057)) ([0b22c40](https://github.com/akveo/nebular/commit/0b22c40))
+
+
+### Features
+
+* **accordion:** toggle via keyboard ([#2085](https://github.com/akveo/nebular/issues/2085)) ([f8a1b32](https://github.com/akveo/nebular/commit/f8a1b32))
+* add custom css class on overlays ([#2067](https://github.com/akveo/nebular/issues/2067)) ([147ec2e](https://github.com/akveo/nebular/commit/147ec2e))
+* Ivy compatibility ([#2074](https://github.com/akveo/nebular/issues/2074)) ([d84e76b](https://github.com/akveo/nebular/commit/d84e76b))
+
+
+
 <a name="4.5.0"></a>
 # [4.5.0](https://github.com/akveo/nebular/compare/v4.4.0...v4.5.0) (2019-10-31)
 

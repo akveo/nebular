@@ -7,6 +7,8 @@
   @each $size in nb-get-sizes() {
     nb-select.appearance-filled.size-#{$size} .select-button {
       padding: nb-theme(select-filled-#{$size}-padding);
+      @include nb-ltr(padding-right, nb-theme(select-icon-offset));
+      @include nb-rtl(padding-left, nb-theme(select-icon-offset));
     }
     .appearance-filled.size-#{$size} {
       nb-option-group .option-group-title,
