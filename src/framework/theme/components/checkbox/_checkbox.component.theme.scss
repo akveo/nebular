@@ -131,6 +131,7 @@
       &:indeterminate + .custom-checkbox,
       &:checked + .custom-checkbox {
         background-color: nb-theme(checkbox-#{$status}-disabled-checked-background-color);
+        border-color: nb-theme(checkbox-#{$status}-disabled-checked-border-color);
       }
     }
   }
