@@ -4,22 +4,10 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-@mixin nb-alert-header() {
-  padding: nb-theme(alert-padding);
-  border-bottom: 1px solid nb-theme(alert-separator);
-  border-top-left-radius: nb-theme(alert-border-radius);
-  border-top-right-radius: nb-theme(alert-border-radius);
-  color: nb-theme(alert-fg-heading);
-
-  @include nb-headings();
-}
-
 @mixin nb-alert-theme() {
   nb-alert {
-    background-color: nb-theme(alert-background-color);
     border-radius: nb-theme(alert-border-radius);
     box-shadow: nb-theme(alert-shadow);
-    color: nb-theme(alert-text-color);
     font-family: nb-theme(alert-text-font-family);
     font-size: nb-theme(alert-text-font-size);
     font-weight: nb-theme(alert-text-font-weight);

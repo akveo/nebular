@@ -10,6 +10,8 @@
 
   &.status-#{$status} {
     background: $background-color;
+    border-color: nb-theme(tooltip-#{$status}-border-color);
+
     .arrow {
       border-bottom-color: $background-color;
     }
@@ -30,6 +32,15 @@
     border-radius: nb-theme(tooltip-border-radius);
     padding: nb-theme(tooltip-padding);
     max-width: nb-theme(tooltip-max-width);
+
+    nb-icon:only-child {
+      height: nb-theme(tooltip-icon-height);
+      width: nb-theme(tooltip-icon-width);
+    }
+    nb-icon:not(:only-child) {
+      height: nb-theme(tooltip-text-font-size);
+      width: nb-theme(tooltip-text-font-size);
+    }
 
     .content {
       color: nb-theme(tooltip-text-color);

@@ -12,9 +12,9 @@
     border-radius: nb-theme(popover-border-radius);
     background: nb-theme(popover-background-color);
     box-shadow: nb-theme(popover-shadow);
+    color: nb-theme(popover-text-color);
 
     .primitive-overlay {
-      color: nb-theme(popover-text-color);
       font-family: nb-theme(popover-text-font-family);
       font-size: nb-theme(popover-text-font-size);
       font-weight: nb-theme(popover-text-font-weight);

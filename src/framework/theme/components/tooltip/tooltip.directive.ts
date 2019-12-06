@@ -127,7 +127,7 @@ export class NbTooltipDirective implements OnInit, OnChanges, AfterViewInit, OnD
    * @param {string} status
    */
   @Input('nbTooltipStatus')
-  set status(status: '' | NbComponentStatus) {
+  set status(status: NbComponentStatus) {
     this.context = Object.assign(this.context, {status});
   }
 

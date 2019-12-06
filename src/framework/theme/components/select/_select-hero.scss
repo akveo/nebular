@@ -1,43 +1,13 @@
 @mixin select-hero {
   nb-select.appearance-hero .select-button {
-    background-color: nb-theme(select-hero-background-color);
-    border-color: nb-theme(select-hero-border-color);
-    border-style: nb-theme(select-hero-border-style);
-    border-width: nb-theme(select-hero-border-width);
-    color: nb-theme(select-hero-text-color);
-
-    &.placeholder {
-      color: nb-theme(select-hero-placeholder-text-color);
-    }
-
-    &:focus {
-      border-color: nb-theme(select-hero-focus-border-color);
-    }
-    &:hover {
-      border-color: nb-theme(select-hero-hover-border-color);
-    }
-    &[disabled] {
-      color: nb-theme(select-hero-disabled-text-color);
-      background-color: nb-theme(select-hero-disabled-background-color);
-      background-image: none;
-
-      nb-icon {
-        color: nb-theme(select-hero-disabled-icon-color);
-      }
-    }
-
-    nb-icon {
-      color: nb-theme(select-hero-icon-color);
-    }
-  }
-
-  .options-list-container.appearance-hero {
-    border-color: nb-theme(select-options-list-hero-border-color);
+    border: none;
   }
 
   @each $size in nb-get-sizes() {
     nb-select.appearance-hero.size-#{$size} .select-button {
       padding: nb-theme(select-hero-#{$size}-padding);
+      @include nb-ltr(padding-right, nb-theme(select-icon-offset));
+      @include nb-rtl(padding-left, nb-theme(select-icon-offset));
     }
     .appearance-hero.size-#{$size} {
       nb-option-group .option-group-title,

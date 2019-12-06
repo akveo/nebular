@@ -209,10 +209,22 @@ export class NbAdjustableConnectedPositionStrategy
   }
 
   protected reorderPreferredPositions(positions: NbPosition[]): NbPosition[] {
-    const startPositionIndex = positions.indexOf(this._position);
+    // Physical positions should be mapped to logical as adjustments use logical positions.
+    const startPositionIndex = positions.indexOf(this.mapToLogicalPosition(this._position));
     const firstPart = positions.slice(startPositionIndex);
     const secondPart = positions.slice(0, startPositionIndex);
     return firstPart.concat(secondPart);
+  }
+
+  protected mapToLogicalPosition(position: NbPosition): NbPosition {
+    if (position === NbPosition.LEFT) {
+      return NbPosition.START;
+    }
+    if (position === NbPosition.RIGHT) {
+      return NbPosition.END;
+    }
+
+    return position;
   }
 }
 

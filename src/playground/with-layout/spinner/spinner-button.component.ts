@@ -9,25 +9,21 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'nb-app-spinner-button',
   template: `
-     <nb-card accent="primary">
+     <nb-card>
       <nb-card-body class="example-items-rows">
-          <button nbButton status="success" (click)="toggleLoadingAnimation()"
-                  [nbSpinner]="loading" nbSpinnerStatus="success" nbSpinnerSize="large" nbSpinnerMessage="">
+          <button [nbSpinner]="loading" nbSpinnerStatus="success" nbButton (click)="toggleLoadingAnimation()">
             Download
           </button>
 
-          <button nbButton status="warning" (click)="toggleLoadingAnimation()"
-                  [nbSpinner]="loading" nbSpinnerStatus="warning" nbSpinnerSize="large" nbSpinnerMessage="">
+          <button [nbSpinner]="loading" nbSpinnerStatus="warning" nbButton (click)="toggleLoadingAnimation()">
             Download
           </button>
 
-          <button nbButton status="danger" (click)="toggleLoadingAnimation()"
-                  [nbSpinner]="loading" nbSpinnerStatus="danger" nbSpinnerSize="large" nbSpinnerMessage="">
+          <button [nbSpinner]="loading" nbSpinnerStatus="danger" nbButton (click)="toggleLoadingAnimation()">
             Download
           </button>
 
-          <button nbButton status="info" (click)="toggleLoadingAnimation()"
-                  [nbSpinner]="loading" nbSpinnerStatus="info" nbSpinnerSize="large" nbSpinnerMessage="">
+          <button [nbSpinner]="loading" nbSpinnerStatus="info" nbButton (click)="toggleLoadingAnimation()">
             Download
           </button>
       </nb-card-body>

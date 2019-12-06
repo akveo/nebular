@@ -6,7 +6,7 @@
 
 import { Directive, HostListener, Input, OnDestroy, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
-import { debounceTime, takeWhile } from 'rxjs/operators';
+import { debounceTime, takeUntil } from 'rxjs/operators';
 
 import { NbFilterable } from './data-source/tree-grid-data-source';
 
@@ -28,7 +28,7 @@ export class NbFilterDirective {
 })
 export class NbFilterInputDirective extends NbFilterDirective implements OnInit, OnDestroy {
   private search$: Subject<string> = new Subject<string>();
-  private alive: boolean = true;
+  private destroy$ = new Subject<void>();
 
   @Input('nbFilterInput') filterable: NbFilterable;
 
@@ -41,8 +41,8 @@ export class NbFilterInputDirective extends NbFilterDirective implements OnInit,
   ngOnInit() {
     this.search$
       .pipe(
-        takeWhile(() => this.alive),
         debounceTime(this.debounceTime),
+        takeUntil(this.destroy$),
       )
       .subscribe((query: string) => {
         super.filter(query)
@@ -50,7 +50,8 @@ export class NbFilterInputDirective extends NbFilterDirective implements OnInit,
   }
 
   ngOnDestroy() {
-    this.alive = false;
+    this.destroy$.next();
+    this.destroy$.complete();
     this.search$.complete();
   }
 

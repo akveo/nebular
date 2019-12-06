@@ -1,1 +1,1 @@
-export type NbComponentStatus = 'primary' | 'success' | 'warning' | 'danger' | 'info';
+export type NbComponentStatus = 'basic' | 'primary' | 'success' | 'warning' | 'danger' | 'info' | 'control';

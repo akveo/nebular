@@ -1,9 +1,63 @@
 import { NbToastContainer, NbToastrContainerRegistry, NbToastrService } from './toastr.service';
 import { NbGlobalLogicalPosition, NbGlobalPhysicalPosition } from '../cdk/overlay/position-helper';
-import { TestBed } from '@angular/core/testing';
-import { ComponentFactoryResolver } from '@angular/core';
+import {ComponentFixture, TestBed, async} from '@angular/core/testing';
+import {Component, ComponentFactoryResolver} from '@angular/core';
 import { NbToast, NbToastrModule } from '@nebular/theme';
+import { NbThemeModule, NbLayoutModule } from '@nebular/theme';
+import {RouterTestingModule} from '@angular/router/testing';
+import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 
+@Component({
+  selector: 'nb-toastr-test',
+  template: `
+      <nb-layout>
+          <nb-layout-column>
+              <div class="test-div"></div>
+          </nb-layout-column>
+      </nb-layout>
+  `,
+})
+export class  NbToastrTestComponent {
+  constructor(private toastrService: NbToastrService) {}
+
+  showToast(className: string) {
+    this.toastrService.show('testing toastr', '', { toastClass: className });
+  }
+}
+
+describe('toastr-component', () => {
+  let fixture: ComponentFixture<NbToastrTestComponent>;
+
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      imports: [
+        RouterTestingModule.withRoutes([]),
+        NoopAnimationsModule,
+        NbThemeModule.forRoot(),
+        NbLayoutModule,
+        NbToastrModule.forRoot(),
+      ],
+      declarations: [
+        NbToastrTestComponent,
+      ],
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(NbToastrTestComponent);
+  }));
+
+  it('should add \'toastr-overlay-container\' class to overlay', () => {
+    fixture.debugElement.componentInstance.showToast('toast-test-class');
+    fixture.detectChanges();
+    expect(fixture.nativeElement.querySelector('.cdk-global-overlay-wrapper').classList)
+      .toContain('toastr-overlay-container');
+  });
+
+  it('should set class if provided', () => {
+    fixture.debugElement.componentInstance.showToast('toast-test-class');
+    fixture.detectChanges();
+    expect(fixture.nativeElement.querySelector('.toast-test-class')).toBeTruthy();
+  });
+});
 
 describe('toastr-service', () => {
   let toastr: NbToastrService;
@@ -47,6 +101,7 @@ describe('toastr-service', () => {
       position: NbGlobalLogicalPosition.BOTTOM_START,
       duration: 1234,
       preventDuplicates: true,
+      toastClass: 'my-toast-class',
     });
 
     expect(attachSpy).toHaveBeenCalled();
@@ -57,6 +112,7 @@ describe('toastr-service', () => {
     expect(config.destroyByClick).toBe(true, 'incorrect destroyByClick');
     expect(config.preventDuplicates).toBe(true, 'incorrect preventDuplicates');
     expect(config.hasIcon).toBe(true, 'incorrect hasIcon');
+    expect(config.toastClass).toBe('my-toast-class', 'incorrect toastClass');
   });
 
   it('should call show with success status when success called', () => {
@@ -116,7 +172,7 @@ describe('toastr-service', () => {
 
     expect(toastrSpy).toHaveBeenCalled();
     const [, , { status }] = toastrSpy.calls.allArgs()[0];
-    expect(status).toBe('');
+    expect(status).toBe('basic');
   });
 });
 
@@ -139,6 +195,11 @@ describe('toastr-container-registry', () => {
         }
       },
       dispose() {},
+      hostElement: {
+        classList: {
+          add() {},
+        },
+      },
     };
 
     overlayStub = {

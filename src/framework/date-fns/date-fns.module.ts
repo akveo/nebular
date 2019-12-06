@@ -15,7 +15,7 @@ const dateFnsServiceProvider = { provide: NbDateService, useClass: NbDateFnsDate
   providers: [ dateFnsServiceProvider ],
 })
 export class NbDateFnsDateModule {
-  static forRoot(options: Partial<NbDateFnsOptions>): ModuleWithProviders {
+  static forRoot(options: Partial<NbDateFnsOptions>): ModuleWithProviders<NbDateFnsDateModule> {
     return {
       ngModule: NbDateFnsDateModule,
       providers: [
@@ -25,7 +25,7 @@ export class NbDateFnsDateModule {
     };
   }
 
-  static forChild(options: Partial<NbDateFnsOptions>): ModuleWithProviders {
+  static forChild(options: Partial<NbDateFnsOptions>): ModuleWithProviders<NbDateFnsDateModule> {
     return {
       ngModule: NbDateFnsDateModule,
       providers: [

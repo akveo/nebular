@@ -9,82 +9,50 @@
     .toggle {
       height: nb-theme(toggle-height);
       width: nb-theme(toggle-width);
-      background-color: nb-theme(toggle-background-color);
-      border: nb-theme(toggle-border-width) solid nb-theme(toggle-border-color);
+      border-width: nb-theme(toggle-border-width);
+      border-style: solid;
       border-radius: nb-theme(toggle-border-radius);
       cursor: nb-theme(toggle-cursor);
-    }
 
-    .toggle.checked {
-      background-color: nb-theme(toggle-primary-checked-background-color);
-      border-color: nb-theme(toggle-primary-checked-border-color);
-    }
+      /*
+        We need to set initial positions as Angular animations won't work in IE11 if positions have no initial value.
+        Setting it in SCSS as we don't have access to theme variables from TS.
+      */
+      @include nb-ltr() {
+        &.checked .toggle-switcher {
+          left: calc(100% - #{nb-theme(toggle-switcher-size)} - #{nb-theme(toggle-border-width)});
+        }
 
-    .native-input:enabled {
-      &:focus + .toggle {
-        background-color: nb-theme(toggle-focus-background-color);
-        border-color: nb-theme(toggle-focus-border-color);
-        box-shadow: 0 0 0 nb-theme(toggle-outline-width) nb-theme(toggle-outline-color);
-
-        &.checked {
-          background-color: nb-theme(toggle-primary-focus-checked-background-color);
-          border-color: nb-theme(toggle-primary-focus-checked-border-color);
+        &:not(.checked) .toggle-switcher {
+          right: 0;
         }
       }
 
-      &:active + .toggle {
-        background-color: nb-theme(toggle-active-background-color);
-        border-color: nb-theme(toggle-active-border-color);
+      @include nb-rtl() {
+        &.checked .toggle-switcher {
+          right: calc(100% - #{nb-theme(toggle-switcher-size)} - #{nb-theme(toggle-border-width)});
+        }
 
-        &.checked {
-          background-color: nb-theme(toggle-primary-active-background-color);
-          border-color: nb-theme(toggle-primary-active-border-color);
+        &:not(.checked) .toggle-switcher {
+          left: 0;
         }
       }
     }
 
-    .native-input:enabled + .toggle:hover {
-      background-color: nb-theme(toggle-hover-background-color);
-      border-color: nb-theme(toggle-hover-border-color);
-
-      &.checked {
-        background-color: nb-theme(toggle-primary-hover-checked-background-color);
-        border-color: nb-theme(toggle-primary-hover-checked-border-color);
-      }
+    .native-input:enabled:focus + .toggle {
+      @include nb-outline(nb-theme(toggle-outline-width), nb-theme(toggle-outline-color));
     }
 
-    .native-input:disabled {
-      & + .toggle {
-        background-color: nb-theme(toggle-disabled-background-color);
-        border-color: nb-theme(toggle-disabled-border-color);
-        cursor: nb-theme(toggle-disabled-cursor);
-
-        .toggle-switcher {
-          background-color: nb-theme(toggle-disabled-switcher-background-color);
-
-          nb-icon {
-            color: nb-theme(toggle-disabled-checked-switcher-checkmark-color);
-          }
-        }
-      }
-
-      & ~ .text {
-        color: nb-theme(toggle-disabled-text-color);
-      }
+    .native-input:disabled + .toggle {
+      cursor: nb-theme(toggle-disabled-cursor);
     }
 
     .toggle-switcher {
       width: nb-theme(toggle-switcher-size);
       height: nb-theme(toggle-switcher-size);
-      background-color: nb-theme(toggle-switcher-background-color);
-
-      nb-icon {
-        color: nb-theme(toggle-switcher-checkmark-color);
-      }
     }
 
     .text {
-      color: nb-theme(toggle-text-color);
       font-family: nb-theme(toggle-text-font-family);
       font-size: nb-theme(toggle-text-font-size);
       font-weight: nb-theme(toggle-text-font-weight);
@@ -97,8 +65,12 @@
   }
 }
 
-@mixin nb-toggle-status($status: '') {
+@mixin nb-toggle-status($status) {
   nb-toggle.status-#{$status} {
+
+    .text {
+      color: nb-theme(toggle-#{$status}-text-color);
+    }
 
     .toggle {
       background-color: nb-theme(toggle-#{$status}-background-color);
@@ -126,8 +98,8 @@
         border-color: nb-theme(toggle-#{$status}-active-border-color);
 
         &.checked {
-          background-color: nb-theme(toggle-#{$status}-active-background-color);
-          border-color: nb-theme(toggle-#{$status}-active-border-color);
+          background-color: nb-theme(toggle-#{$status}-active-checked-background-color);
+          border-color: nb-theme(toggle-#{$status}-active-checked-border-color);
         }
       }
     }
@@ -143,6 +115,8 @@
     }
 
     .toggle-switcher {
+      background-color: nb-theme(toggle-#{$status}-checked-switcher-background-color);
+
       nb-icon {
         color: nb-theme(toggle-#{$status}-checked-switcher-checkmark-color);
       }
@@ -150,21 +124,20 @@
 
     .native-input:disabled {
       & + .toggle {
-        background-color: nb-theme(toggle-disabled-background-color);
-        border-color: nb-theme(toggle-disabled-border-color);
-        cursor: nb-theme(toggle-disabled-cursor);
+        background-color: nb-theme(toggle-#{$status}-disabled-background-color);
+        border-color: nb-theme(toggle-#{$status}-disabled-border-color);
 
         .toggle-switcher {
-          background-color: nb-theme(toggle-disabled-switcher-background-color);
+          background-color: nb-theme(toggle-#{$status}-disabled-switcher-background-color);
 
           nb-icon {
-            color: nb-theme(toggle-disabled-checked-switcher-checkmark-color);
+            color: nb-theme(toggle-#{$status}-disabled-checked-switcher-checkmark-color);
           }
         }
       }
 
       & ~ .text {
-        color: nb-theme(toggle-disabled-text-color);
+        color: nb-theme(toggle-#{$status}-disabled-text-color);
       }
     }
   }

@@ -8,7 +8,7 @@ import { Component, Input, HostBinding, Output, EventEmitter } from '@angular/co
 
 import { NbComponentSize } from '../component-size';
 import { NbComponentStatus } from '../component-status';
-import { convertToBoolProperty } from '../helpers';
+import { convertToBoolProperty, emptyStatusWarning } from '../helpers';
 
 
 /**
@@ -46,11 +46,11 @@ import { convertToBoolProperty } from '../helpers';
  * ```
  *
  * Colored alerts could be simply configured by providing a `status` property:
- * @stacked-example(Colored Alert, alert/alert-colors.component)
+ * @stacked-example(Alert status, alert/alert-colors.component)
  *
  * It is also possible to assign an `accent` property for a slight alert highlight
  * as well as combine it with `status`:
- * @stacked-example(Accent Alert, alert/alert-accents.component)
+ * @stacked-example(Alert accent, alert/alert-accents.component)
  *
  * And `outline` property:
  * @stacked-example(Outline Alert, alert/alert-outline.component)
@@ -59,7 +59,6 @@ import { convertToBoolProperty } from '../helpers';
  *
  * @styles
  *
- * alert-background-color:
  * alert-border-radius:
  * alert-bottom-margin:
  * alert-padding:
@@ -67,7 +66,6 @@ import { convertToBoolProperty } from '../helpers';
  * alert-scrollbar-background-color:
  * alert-scrollbar-width:
  * alert-shadow:
- * alert-text-color:
  * alert-text-font-family:
  * alert-text-font-size:
  * alert-text-font-weight:
@@ -79,6 +77,8 @@ import { convertToBoolProperty } from '../helpers';
  * alert-medium-padding:
  * alert-large-height:
  * alert-giant-height:
+ * alert-basic-background-color:
+ * alert-basic-text-color:
  * alert-primary-background-color:
  * alert-primary-text-color:
  * alert-success-background-color:
@@ -89,17 +89,23 @@ import { convertToBoolProperty } from '../helpers';
  * alert-warning-text-color:
  * alert-danger-background-color:
  * alert-danger-text-color:
+ * alert-control-background-color:
+ * alert-control-text-color:
+ * alert-accent-basic-color:
  * alert-accent-primary-color:
  * alert-accent-info-color:
  * alert-accent-success-color:
  * alert-accent-warning-color:
  * alert-accent-danger-color:
+ * alert-accent-control-color:
  * alert-outline-width:
+ * alert-outline-basic-color:
  * alert-outline-primary-color:
  * alert-outline-info-color:
  * alert-outline-success-color:
  * alert-outline-warning-color:
  * alert-outline-danger-color:
+ * alert-outline-control-color:
  */
 @Component({
   selector: 'nb-alert',
@@ -122,21 +128,31 @@ export class NbAlertComponent {
 
   /**
    * Alert status (adds specific styles):
-   * `primary`, `success`, `info`, `warning`, `danger`.
-   * Unset by default.
+   * `basic` (default), `primary`, `success`, `info`, `warning`, `danger`, `control`.
    */
-  @Input() status: '' | NbComponentStatus = '';
+  @Input()
+  get status(): NbComponentStatus {
+    return this._status;
+  }
+  set status(value: NbComponentStatus) {
+    if ((value as string) === '') {
+      emptyStatusWarning('NbAlert');
+      value = 'basic';
+    }
+    this._status = value;
+  }
+  protected _status: NbComponentStatus = 'basic';
 
   /**
    * Alert accent (color of the top border):
-   * `primary`, `success`, `info`, `warning`, `danger`.
+   * `basic`, `primary`, `success`, `info`, `warning`, `danger`, `control`.
    * Unset by default.
    */
   @Input() accent: '' | NbComponentStatus = '';
 
   /**
    * Alert outline (color of the border):
-   * `primary`, `success`, `info`, `warning`, `danger`.
+   * `basic`, `primary`, `success`, `info`, `warning`, `danger`, `control`.
    * Unset by default.
    */
   @Input() outline: '' | NbComponentStatus = '';
@@ -217,6 +233,16 @@ export class NbAlertComponent {
     return this.status === 'danger';
   }
 
+  @HostBinding('class.status-basic')
+  get basic() {
+    return this.status === 'basic';
+  }
+
+  @HostBinding('class.status-control')
+  get control() {
+    return this.status === 'control';
+  }
+
   @HostBinding('class.accent-primary')
   get primaryAccent() {
     return this.accent === 'primary';
@@ -242,6 +268,16 @@ export class NbAlertComponent {
     return this.accent === 'danger';
   }
 
+  @HostBinding('class.accent-basic')
+  get basicAccent() {
+    return this.accent === 'basic';
+  }
+
+  @HostBinding('class.accent-control')
+  get controlAccent() {
+    return this.accent === 'control';
+  }
+
   @HostBinding('class.outline-primary')
   get primaryOutline() {
     return this.outline === 'primary';
@@ -265,5 +301,15 @@ export class NbAlertComponent {
   @HostBinding('class.outline-danger')
   get dangerOutline() {
     return this.outline === 'danger';
+  }
+
+  @HostBinding('class.outline-basic')
+  get basicOutline() {
+    return this.outline === 'basic';
+  }
+
+  @HostBinding('class.outline-control')
+  get controlOutline() {
+    return this.outline === 'control';
   }
 }

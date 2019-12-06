@@ -18,7 +18,7 @@
     font-weight: nb-theme(button-text-font-weight);
 
     &:focus {
-      box-shadow: 0 0 0 nb-theme(button-outline-width) nb-theme(button-outline-color);
+      @include nb-outline(nb-theme(button-outline-width), nb-theme(button-outline-color));
       outline: none;
     }
 

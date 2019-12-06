@@ -75,7 +75,7 @@ import { NbComponentStatus } from '../component-status';
              placeholder="{{ fileOver ? 'Drop file to send' : 'Type a message' }}"
              (keyup.enter)="sendMessage()">
       <button nbButton
-              [status]="status || 'primary'"
+              [status]="getButtonStatus()"
               *ngIf="showButton"
               [class.with-icon]="!buttonTitle"
               (click)="sendMessage()"
@@ -89,7 +89,7 @@ import { NbComponentStatus } from '../component-status';
 })
 export class NbChatFormComponent {
 
-  status: NbComponentStatus | '' = '';
+  status: NbComponentStatus = 'basic';
   inputFocus: boolean = false;
   inputHover: boolean = false;
 
@@ -201,15 +201,27 @@ export class NbChatFormComponent {
     }
   }
 
-  getInputStatus(): NbComponentStatus | '' {
+  getInputStatus(): NbComponentStatus {
     if (this.fileOver) {
-      return this.status || 'primary';
+      return this.getHighlightStatus();
     }
 
     if (this.inputFocus || this.inputHover) {
       return this.status;
     }
 
-    return '';
+    return 'basic';
+  }
+
+  getButtonStatus(): NbComponentStatus {
+    return this.getHighlightStatus();
+  }
+
+  protected getHighlightStatus(): NbComponentStatus {
+    if (this.status === 'basic' || this.status === 'control') {
+      return 'primary';
+    }
+
+    return this.status;
   }
 }

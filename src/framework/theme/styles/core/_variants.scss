@@ -5,7 +5,7 @@
  */
 
 @function nb-get-statuses() {
-  @return 'primary', 'success', 'warning', 'danger', 'info';
+  @return 'basic', 'primary', 'success', 'warning', 'danger', 'info', 'control';
 }
 
 @function nb-get-sizes() {

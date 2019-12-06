@@ -1,10 +1,14 @@
 import { Component } from '@angular/core';
+import { NbComponentStatus } from '../../../framework/theme/components/component-status';
 
 @Component({
   template: `
     <nb-card>
       <nb-card-body class="example-items-rows">
-        <nb-radio-group *ngFor="let status of statuses" [name]="status || 'default'" [status]="status">
+        <nb-radio-group *ngFor="let status of statuses"
+                        [name]="status"
+                        [status]="status"
+                        [class.control-status-example]="status === 'control'">
           <nb-radio *ngFor="let option of options"
                     [checked]="option.checked"
                     [disabled]="option.disabled"
@@ -25,5 +29,5 @@ export class RadioStatusesComponent {
     { value: 'This is value 4', label: 'Option 4', disabled: true },
   ];
 
-  statuses = ['', 'primary', 'success', 'warning', 'danger', 'info'];
+  statuses: NbComponentStatus[] = ['basic', 'primary', 'success', 'warning', 'danger', 'info', 'control'];
 }

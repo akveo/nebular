@@ -1,6 +1,6 @@
 {
   "name": "@nebular/bootstrap",
-  "version": "4.4.0",
+  "version": "4.6.0",
   "description": "@nebular/bootstrap",
   "author": "akveo",
   "license": "MIT",
@@ -22,6 +22,6 @@
   ],
   "peerDependencies": {
     "bootstrap": "^4.0.0",
-    "@nebular/theme": "4.4.0"
+    "@nebular/theme": "4.6.0"
   }
 }

@@ -9,7 +9,8 @@ import {
   Output,
   EventEmitter,
 } from '@angular/core';
-import { takeWhile } from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 import 'intersection-observer';
 import { NbListItemComponent } from './list.component';
 
@@ -24,7 +25,7 @@ import { NbListItemComponent } from './list.component';
 })
 export class NbListPageTrackerDirective implements AfterViewInit, OnDestroy {
 
-  private alive = true;
+  private destroy$ = new Subject<void>();
 
   private observer: IntersectionObserver;
   private currentPage: number;
@@ -63,7 +64,7 @@ export class NbListPageTrackerDirective implements AfterViewInit, OnDestroy {
     }
 
     this.listItems.changes
-      .pipe(takeWhile(() => this.alive))
+      .pipe(takeUntil(this.destroy$))
       .subscribe(() => this.observeItems());
   }
 
