@@ -2,7 +2,6 @@ import { Attribute, ChangeDetectorRef, ElementRef, Inject, IterableDiffers, NgMo
 import { CdkTable, CdkTableModule } from '@angular/cdk/table';
 import { NbBidiModule } from '../bidi/bidi.module';
 import { NbDirectionality } from '../bidi/bidi-service';
-import { NbPlatformModule } from '../platform/platform.module';
 import { NbPlatform } from '../platform/platform-service';
 import { NB_DOCUMENT } from '../../../theme.options';
 import {
@@ -76,7 +75,7 @@ const COMPONENTS = [
 ];
 
 @NgModule({
-  imports: [ NbBidiModule, NbPlatformModule ],
+  imports: [ NbBidiModule ],
   declarations: [ ...COMPONENTS ],
   exports: [ ...COMPONENTS ],
 })
