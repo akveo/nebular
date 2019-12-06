@@ -22,7 +22,7 @@ export class NbCalendarYearModelService<D> {
     return this.yearsInView;
   }
 
-  getRowInView(): number {
+  getYearsInRow(): number {
     return this.yearsInRow;
   }
 
