@@ -7,8 +7,8 @@ import {
   NbOverlayConfig,
   NbOverlayRef,
 } from './mapping';
-import { NbLayoutDirectionService } from '../../../services/direction.service';
 import { NbScrollStrategyOptions } from '../adapter/block-scroll-strategy-adapter';
+import { NbLayoutDirectionService } from '../../../services/direction.service';
 
 
 export type NbOverlayContent = Type<any> | TemplateRef<any> | string;
