@@ -12,6 +12,14 @@ import { NbCalendarCell } from '../calendar-kit/model';
 import { NbDateService } from '../calendar-kit/services/date.service';
 import { NbCalendarRange } from './calendar-range.component';
 
+abstract class NbBaseCalendarRangeCell<D> {
+  abstract selectedValue: NbCalendarRange<D>;
+
+  get hasRange(): boolean {
+    return !!(this.selectedValue && this.selectedValue.start && this.selectedValue.end);
+  }
+}
+
 @Component({
   selector: 'nb-calendar-range-day-cell',
   template: `
@@ -19,7 +27,8 @@ import { NbCalendarRange } from './calendar-range.component';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NbCalendarRangeDayCellComponent<D> implements NbCalendarCell<D, NbCalendarRange<D>> {
+export class NbCalendarRangeDayCellComponent<D> extends NbBaseCalendarRangeCell<D>
+                                                implements NbCalendarCell<D, NbCalendarRange<D>> {
   @Input() date: D;
 
   @Input() selectedValue: NbCalendarRange<D>;
@@ -35,16 +44,13 @@ export class NbCalendarRangeDayCellComponent<D> implements NbCalendarCell<D, NbC
   @Output() select: EventEmitter<D> = new EventEmitter(true);
 
   constructor(protected dateService: NbDateService<D>) {
+    super();
   }
 
   @HostBinding('class.in-range')
   get inRange(): boolean {
-    if (this.date && this.selectedValue && this.selectedValue.start && this.selectedValue.end) {
-      const { start, end } = this.selectedValue;
-      const isGreaterThanStart = this.dateService.compareDates(this.date, start) >= 0;
-      const isLessThanEnd = this.dateService.compareDates(this.date, end) <= 0;
-
-      return isGreaterThanStart && isLessThanEnd;
+    if (this.date && this.hasRange) {
+      return this.isInRange(this.date, this.selectedValue);
     }
 
     return false;
@@ -52,14 +58,12 @@ export class NbCalendarRangeDayCellComponent<D> implements NbCalendarCell<D, NbC
 
   @HostBinding('class.start')
   get start(): boolean {
-    return this.date && this.selectedValue && this.selectedValue.end
-      && (this.selectedValue.start && this.dateService.isSameDay(this.date, this.selectedValue.start));
+    return this.date && this.hasRange && this.dateService.isSameDay(this.date, this.selectedValue.start);
   }
 
   @HostBinding('class.end')
   get end(): boolean {
-    return this.date && this.selectedValue &&
-      (this.selectedValue.end && this.dateService.isSameDay(this.date, this.selectedValue.end));
+    return this.date && this.hasRange && this.dateService.isSameDay(this.date, this.selectedValue.end);
   }
 
   @HostBinding('class.range-cell')
@@ -80,8 +84,13 @@ export class NbCalendarRangeDayCellComponent<D> implements NbCalendarCell<D, NbC
 
   @HostBinding('class.selected')
   get selected(): boolean {
-    return this.inRange || (this.date && this.selectedValue
-      && (this.selectedValue.start && this.dateService.isSameDay(this.date, this.selectedValue.start)) || this.end);
+    if (this.inRange) {
+      return true;
+    }
+
+    if (this.selectedValue) {
+      return this.dateService.isSameDay(this.date, this.selectedValue.start);
+    }
   }
 
   @HostBinding('class.empty')
@@ -118,6 +127,13 @@ export class NbCalendarRangeDayCellComponent<D> implements NbCalendarCell<D, NbC
   protected dontFitFilter(): boolean {
     return this.date && this.filter && !this.filter(this.date);
   }
+
+  protected isInRange(date: D, { start, end }: NbCalendarRange<D>): boolean {
+    const isGreaterThanStart = this.dateService.compareDates(this.date, start) >= 0;
+    const isLessThanEnd = this.dateService.compareDates(this.date, end) <= 0;
+
+    return isGreaterThanStart && isLessThanEnd;
+  }
 }
 
 @Component({
@@ -129,7 +145,8 @@ export class NbCalendarRangeDayCellComponent<D> implements NbCalendarCell<D, NbC
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NbCalendarRangeYearCellComponent<D> implements NbCalendarCell<D, NbCalendarRange<D>> {
+export class NbCalendarRangeYearCellComponent<D> extends NbBaseCalendarRangeCell<D>
+                                                 implements NbCalendarCell<D, NbCalendarRange<D>> {
   @Input() date: D;
 
   @Input() min: D;
@@ -141,22 +158,50 @@ export class NbCalendarRangeYearCellComponent<D> implements NbCalendarCell<D, Nb
   @Output() select: EventEmitter<D> = new EventEmitter(true);
 
   constructor(protected dateService: NbDateService<D>) {
+    super();
   }
 
-  @HostBinding('class.selected') get selected(): boolean {
-    return this.selectedValue && this.dateService.isSameYear(this.date, this.selectedValue.start);
+  @HostBinding('class.in-range')
+  get inRange(): boolean {
+    return this.hasRange && this.isInRange(this.date, this.selectedValue);
   }
 
-  @HostBinding('class.today') get today(): boolean {
-    return this.date && this.dateService.isSameYear(this.date, this.dateService.today());
+  @HostBinding('class.start')
+  get rangeStart(): boolean {
+    return this.hasRange && this.dateService.isSameYear(this.date, this.selectedValue.start);
   }
 
-  @HostBinding('class.disabled') get disabled(): boolean {
+  @HostBinding('class.end')
+  get rangeEnd(): boolean {
+    return this.hasRange && this.dateService.isSameYear(this.date, this.selectedValue.end);
+  }
+
+  @HostBinding('class.selected')
+  get selected(): boolean {
+    if (this.inRange) {
+      return true;
+    }
+
+    if (this.selectedValue) {
+      return this.dateService.isSameYear(this.date, this.selectedValue.start);
+    }
+  }
+
+  @HostBinding('class.today')
+  get today(): boolean {
+    return this.dateService.isSameYear(this.date, this.dateService.today());
+  }
+
+  @HostBinding('class.disabled')
+  get disabled(): boolean {
     return this.smallerThanMin() || this.greaterThanMax();
   }
 
   @HostBinding('class.year-cell')
   yearCellClass = true;
+
+  @HostBinding('class.range-cell')
+  rangeCellClass = true;
 
   get year(): number {
     return this.dateService.getYear(this.date);
@@ -186,6 +231,18 @@ export class NbCalendarRangeYearCellComponent<D> implements NbCalendarCell<D, Nb
   protected yearEnd(): D {
     return this.dateService.getYearEnd(this.date);
   }
+
+  protected isInRange(date: D, { start, end }: NbCalendarRange<D>): boolean {
+    if (start && end) {
+      const cellYear = this.dateService.getYear(date);
+      const startYear = this.dateService.getYear(start);
+      const endYear = this.dateService.getYear(end);
+
+      return cellYear >= startYear && cellYear <= endYear;
+    }
+
+    return this.dateService.isSameYear(date, start);
+  }
 }
 
 @Component({
@@ -197,7 +254,8 @@ export class NbCalendarRangeYearCellComponent<D> implements NbCalendarCell<D, Nb
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NbCalendarRangeMonthCellComponent<D> implements NbCalendarCell<D, NbCalendarRange<D>> {
+export class NbCalendarRangeMonthCellComponent<D> extends NbBaseCalendarRangeCell<D>
+                                                  implements NbCalendarCell<D, NbCalendarRange<D>> {
 
   get month(): string {
     return this.dateService.getMonthName(this.date);
@@ -215,14 +273,44 @@ export class NbCalendarRangeMonthCellComponent<D> implements NbCalendarCell<D, N
   @HostBinding('class.month-cell')
   monthCellClass = true;
 
+  @HostBinding('class.range-cell')
+  rangeCellClass = true;
+
   @HostBinding('class.selected')
   get selected(): boolean {
-    return this.isInRage(this.date, this.selectedValue);
+    if (this.inRange) {
+      return true;
+    }
+
+    if (this.selectedValue) {
+      return this.dateService.isSameMonth(this.date, this.selectedValue.start);
+    }
+  }
+
+  @HostBinding('class.in-range')
+  get inRange(): boolean {
+    if (this.hasRange) {
+      return this.isInRage(this.date, this.selectedValue);
+    }
+  }
+
+  @HostBinding('class.start')
+  get rangeStart(): boolean {
+    if (this.hasRange) {
+      return this.dateService.isSameMonth(this.date, this.selectedValue.start);
+    }
+  }
+
+  @HostBinding('class.end')
+  get rangeEnd(): boolean {
+    if (this.hasRange) {
+      return this.dateService.isSameMonth(this.date, this.selectedValue.end);
+    }
   }
 
   @HostBinding('class.today')
   get today(): boolean {
-    return this.isSameYearAndMonth(this.date, this.dateService.today());
+    return this.dateService.isSameMonthSafe(this.date, this.dateService.today());
   }
 
   @HostBinding('class.disabled')
@@ -239,7 +327,9 @@ export class NbCalendarRangeMonthCellComponent<D> implements NbCalendarCell<D, N
     this.select.emit(this.date);
   }
 
-  constructor(protected dateService: NbDateService<D>) {}
+  constructor(protected dateService: NbDateService<D>) {
+    super();
+  }
 
   protected smallerThanMin(): boolean {
     return this.date && this.min && this.dateService.compareDates(this.monthEnd(), this.min) < 0;
@@ -257,22 +347,18 @@ export class NbCalendarRangeMonthCellComponent<D> implements NbCalendarCell<D, N
     return this.dateService.getMonthEnd(this.date);
   }
 
-  protected isSameYearAndMonth(date: D, dateToCompare: D): boolean {
-    const isSameYear = this.dateService.isSameYearSafe(date, dateToCompare);
-    const isSameMonth = this.dateService.isSameMonthSafe(date, dateToCompare);
+  protected isInRage(date: D, range: NbCalendarRange<D>): boolean {
+    if (range.start && range.end) {
+      const cellDate = this.dateService.getMonthStart(date);
+      const start = this.dateService.getMonthStart(range.start);
+      const end = this.dateService.getMonthStart(range.end);
 
-    return isSameYear && isSameMonth;
-  }
-
-  protected isInRage(date: D, selectedValue: NbCalendarRange<D>): boolean {
-    if (date && selectedValue && selectedValue.start && selectedValue.end) {
-      const { start, end } = selectedValue;
-      const isGreaterThanStart = this.dateService.compareDates(date, start) >= 0;
-      const isLessThanEnd = this.dateService.compareDates(date, end) <= 0;
+      const isGreaterThanStart = this.dateService.compareDates(cellDate, start) >= 0;
+      const isLessThanEnd = this.dateService.compareDates(cellDate, end) <= 0;
 
       return isGreaterThanStart && isLessThanEnd;
     }
 
-    return false;
+    return this.dateService.isSameMonth(date, range.start);
   }
 }
