@@ -39,10 +39,17 @@
       }
     }
 
-    &.has-week-number nb-card {
-      $week-column-width: #{nb-theme(calendar-weeknumber-width)} +
+    &.has-week-number {
+      nb-card {
+        $week-column-width: #{nb-theme(calendar-weeknumber-width)} +
                           #{nb-theme(calendar-weeknumber-divider-width)};
-      width: calc(#{nb-theme(calendar-width)} + #{$week-column-width});
+        width: calc(#{nb-theme(calendar-width)} + #{$week-column-width});
+      }
+
+      .month-cell,
+      .year-cell {
+        flex: 1 0 auto;
+      }
     }
 
     &.size-large {
