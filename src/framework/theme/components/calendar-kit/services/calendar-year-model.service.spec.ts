@@ -16,8 +16,8 @@ describe('NbCalendarYearModelService', () => {
     const viewYears: Date[][] = yearModelService.getViewYears(date);
 
     const firstYear = viewYears[0][0];
-    const lastRow = viewYears[viewYears.length];
-    const lastYear = lastRow[lastRow.length];
+    const lastRow = viewYears[viewYears.length - 1];
+    const lastYear = lastRow[lastRow.length - 1];
 
     expect(firstYear.getFullYear()).toBe(2016);
     expect(lastYear.getFullYear()).toBe(2027);
