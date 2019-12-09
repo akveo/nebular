@@ -34,10 +34,8 @@ export class NbCalendarPickerComponent<D, T> {
   @Input() min: D;
   @Input() max: D;
   @Input() filter: (D) => boolean;
+  @Input() size: NbCalendarSize = NbCalendarSize.MEDIUM;
   @Output() select: EventEmitter<D> = new EventEmitter();
-
-  @Input()
-  size: NbCalendarSize = NbCalendarSize.MEDIUM;
 
   @HostBinding('class.size-large')
   get isLarge(): boolean {
