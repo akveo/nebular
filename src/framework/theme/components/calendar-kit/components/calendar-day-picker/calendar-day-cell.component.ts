@@ -14,7 +14,7 @@ import {
   Output,
 } from '@angular/core';
 
-import { NbCalendarCell } from '../../model';
+import { NbCalendarCell, NbCalendarSize } from '../../model';
 import { NbDateService } from '../../services/date.service';
 
 
@@ -41,6 +41,8 @@ export class NbCalendarDayCellComponent<D> implements NbCalendarCell<D, D> {
 
   @Input() filter: (D) => boolean;
 
+  @Input() size: NbCalendarSize = NbCalendarSize.MEDIUM;
+
   @Output() select: EventEmitter<D> = new EventEmitter(true);
 
   constructor(protected dateService: NbDateService<D>) {
@@ -64,6 +66,11 @@ export class NbCalendarDayCellComponent<D> implements NbCalendarCell<D, D> {
 
   @HostBinding('class.disabled') get disabled(): boolean {
     return this.smallerThanMin() || this.greaterThanMax() || this.dontFitFilter();
+  }
+
+  @HostBinding('class.size-large')
+  get isLarge(): boolean {
+    return this.size === NbCalendarSize.LARGE;
   }
 
   @HostBinding('class.day-cell')

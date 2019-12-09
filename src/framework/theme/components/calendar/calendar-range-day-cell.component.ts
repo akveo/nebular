@@ -10,10 +10,11 @@ import {
   Input,
   Output,
   EventEmitter,
-  HostBinding, HostListener,
+  HostBinding,
+  HostListener,
 } from '@angular/core';
 
-import { NbCalendarCell } from '../calendar-kit/model';
+import { NbCalendarCell, NbCalendarSize } from '../calendar-kit/model';
 import { NbCalendarRange } from './calendar-range.component';
 import { NbDateService } from '../calendar-kit/services/date.service';
 import { NbBaseCalendarRangeCell } from './base-calendar-range-cell';
@@ -38,6 +39,8 @@ export class NbCalendarRangeDayCellComponent<D> extends NbBaseCalendarRangeCell<
   @Input() max: D;
 
   @Input() filter: (D) => boolean;
+
+  @Input() size: NbCalendarSize = NbCalendarSize.MEDIUM;
 
   @Output() select: EventEmitter<D> = new EventEmitter(true);
 
@@ -99,6 +102,11 @@ export class NbCalendarRangeDayCellComponent<D> extends NbBaseCalendarRangeCell<
   @HostBinding('class.disabled')
   get disabled(): boolean {
     return this.smallerThanMin() || this.greaterThanMax() || this.dontFitFilter();
+  }
+
+  @HostBinding('class.size-large')
+  get isLarge(): boolean {
+    return this.size === NbCalendarSize.LARGE;
   }
 
   get day(): number {

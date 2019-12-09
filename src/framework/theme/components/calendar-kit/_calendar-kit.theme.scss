@@ -9,6 +9,7 @@
 @import './components/calendar-days-names/calendar-days-names.component.theme';
 @import './components/calendar-week-number/calendar-week-number.component.theme';
 @import './components/calendar-day-picker/calendar-day-picker.component.theme';
+@import './components/calendar-cell.theme';
 
 @mixin nb-calendar-kit-theme() {
   @include nb-calendar-navigation-theme();
@@ -16,4 +17,5 @@
   @include nb-calendar-days-names-theme();
   @include nb-calendar-week-numbers-theme();
   @include nb-calendar-day-picker-theme();
+  @include nb-calendar-cell-theme();
 }

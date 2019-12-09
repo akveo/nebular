@@ -14,7 +14,7 @@ import {
   Output,
 } from '@angular/core';
 
-import { NbCalendarCell } from '../calendar-kit/model';
+import { NbCalendarCell, NbCalendarSize } from '../calendar-kit/model';
 import { NbDateService } from '../calendar-kit/services/date.service';
 import { NbCalendarRange } from './calendar-range.component';
 import { NbBaseCalendarRangeCell } from './base-calendar-range-cell';
@@ -41,6 +41,8 @@ export class NbCalendarRangeMonthCellComponent<D> extends NbBaseCalendarRangeCel
   @Input() selectedValue: NbCalendarRange<D>;
   @Input() min: D;
   @Input() max: D;
+
+  @Input() size: NbCalendarSize = NbCalendarSize.MEDIUM;
 
   @Output() select: EventEmitter<D> = new EventEmitter(true);
 
@@ -90,6 +92,11 @@ export class NbCalendarRangeMonthCellComponent<D> extends NbBaseCalendarRangeCel
   @HostBinding('class.disabled')
   get disabled(): boolean {
     return this.smallerThanMin() || this.greaterThanMax();
+  }
+
+  @HostBinding('class.size-large')
+  get isLarge(): boolean {
+    return this.size === NbCalendarSize.LARGE;
   }
 
   @HostListener('click')

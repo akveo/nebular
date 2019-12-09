@@ -30,4 +30,5 @@ export interface NbCalendarCell<D, T> {
   min?: D;
   max?: D;
   filter?: (D) => boolean;
+  size?: NbCalendarSize;
 }

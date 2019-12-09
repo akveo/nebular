@@ -21,6 +21,7 @@ import { NbCalendarCell, NbCalendarSize } from '../../model';
       [min]="min"
       [max]="max"
       [filter]="filter"
+      [size]="size"
       (select)="select.emit($event)">
     </nb-calendar-picker-row>
   `,

@@ -13,7 +13,7 @@ import {
   Input,
   Output,
 } from '@angular/core';
-import { NbCalendarCell } from '../../model';
+import { NbCalendarCell, NbCalendarSize } from '../../model';
 import { NbDateService } from '../../services/date.service';
 
 
@@ -35,6 +35,8 @@ export class NbCalendarMonthCellComponent<D> implements NbCalendarCell<D, D> {
 
   @Input() max: D;
 
+  @Input() size: NbCalendarSize = NbCalendarSize.MEDIUM;
+
   @Output() select: EventEmitter<D> = new EventEmitter(true);
 
   constructor(private dateService: NbDateService<D>) {
@@ -50,6 +52,11 @@ export class NbCalendarMonthCellComponent<D> implements NbCalendarCell<D, D> {
 
   @HostBinding('class.disabled') get disabled(): boolean {
     return this.smallerThanMin() || this.greaterThanMax();
+  }
+
+  @HostBinding('class.size-large')
+  get isLarge(): boolean {
+    return this.size === NbCalendarSize.LARGE;
   }
 
   @HostBinding('class.month-cell')
