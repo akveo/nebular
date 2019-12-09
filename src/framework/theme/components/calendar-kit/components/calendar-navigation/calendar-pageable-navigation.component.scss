@@ -10,10 +10,4 @@
   display: flex;
   align-items: center;
   justify-content: flex-start;
-
-  nb-calendar-view-mode {
-    margin: 0 0.5rem;
-    @include nb-ltr(margin-right, auto);
-    @include nb-rtl(margin-left, auto);
-  }
 }
