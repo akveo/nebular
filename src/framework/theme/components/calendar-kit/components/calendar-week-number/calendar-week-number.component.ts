@@ -4,7 +4,8 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { Component, Input, HostBinding, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, HostBinding, ChangeDetectionStrategy, OnChanges, SimpleChanges } from '@angular/core';
+
 import { NbDateService } from '../../services/date.service';
 import { NbCalendarSize } from '../../model';
 
@@ -14,12 +15,14 @@ import { NbCalendarSize } from '../../model';
     <div class="sign-container">
       <div class="sign">{{ weekNumberSymbol }}</div>
     </div>
-    <div class="week-number" *ngFor="let week of getWeeks()">{{ week }}</div>
+    <div class="week-number" *ngFor="let weekNumber of weekNumbers">{{ weekNumber }}</div>
   `,
   styleUrls: ['./calendar-week-number.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NbCalendarWeekNumberComponent<D> {
+export class NbCalendarWeekNumberComponent<D> implements OnChanges {
+
+  weekNumbers: number[];
 
   @Input()
   weeks: D[][];
@@ -38,6 +41,12 @@ export class NbCalendarWeekNumberComponent<D> {
   }
 
   constructor(private dateService: NbDateService<D>) {}
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.weeks) {
+      this.weekNumbers = this.getWeeks();
+    }
+  }
 
   getWeeks(): number[] {
     return this.weeks.map((week: D[]) => {
