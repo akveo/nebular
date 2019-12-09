@@ -72,7 +72,7 @@ export class NbBaseCalendarComponent<D, T> implements OnInit {
   @Input() visibleDate: D;
 
   /**
-   * Determines should we show calendars navigation or not.
+   * Determines whether we should show calendar navigation or not.
    * */
   @Input()
   @HostBinding('class.has-navigation')
