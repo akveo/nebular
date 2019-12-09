@@ -41,11 +41,11 @@ export class NbCalendarMonthCellComponent<D> implements NbCalendarCell<D, D> {
   }
 
   @HostBinding('class.selected') get selected(): boolean {
-    return this.isSameYearAndMonth(this.date, this.selectedValue);
+    return this.dateService.isSameMonthSafe(this.date, this.selectedValue);
   }
 
   @HostBinding('class.today') get today(): boolean {
-    return this.isSameYearAndMonth(this.date, this.dateService.today());
+    return this.dateService.isSameMonthSafe(this.date, this.dateService.today());
   }
 
   @HostBinding('class.disabled') get disabled(): boolean {
@@ -82,12 +82,5 @@ export class NbCalendarMonthCellComponent<D> implements NbCalendarCell<D, D> {
 
   protected monthEnd(): D {
     return this.dateService.getMonthEnd(this.date);
-  }
-
-  protected isSameYearAndMonth(date: D, dateToCompare: D): boolean {
-    const isSameYear = this.dateService.isSameYearSafe(date, dateToCompare);
-    const isSameMonth = this.dateService.isSameMonthSafe(date, dateToCompare);
-
-    return isSameYear && isSameMonth;
   }
 }
