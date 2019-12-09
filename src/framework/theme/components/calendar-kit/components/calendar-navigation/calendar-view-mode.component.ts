@@ -4,11 +4,12 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
+import { TranslationWidth } from '@angular/common';
+
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { NbCalendarViewMode } from '../../model';
 import { NbCalendarYearModelService } from '../../services/calendar-year-model.service';
 import { NbDateService } from '../../services/date.service';
-import { TranslationWidth } from '@angular/common';
 
 
 @Component({
