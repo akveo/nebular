@@ -5,6 +5,7 @@
  */
 
 import { ChangeDetectionStrategy, Component, OnInit, Input, HostBinding } from '@angular/core';
+
 import { NbCalendarDay, NbCalendarSize } from '../../model';
 import { NbDateService } from '../../services/date.service';
 
