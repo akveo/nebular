@@ -8,11 +8,9 @@ import { Component, EventEmitter, Input, Output, Type } from '@angular/core';
 
 import { NbCalendarCell, NbCalendarSize, NbCalendarViewMode } from '../calendar-kit/model';
 import { NbDateService } from '../calendar-kit/services/date.service';
-import {
-  NbCalendarRangeDayCellComponent,
-  NbCalendarRangeYearCellComponent,
-  NbCalendarRangeMonthCellComponent,
-} from './calendar-range-cells';
+import { NbCalendarRangeDayCellComponent } from './calendar-range-day-cell.component';
+import { NbCalendarRangeYearCellComponent } from './calendar-range-year-cell.component';
+import { NbCalendarRangeMonthCellComponent } from './calendar-range-month-cell.component';
 import { convertToBoolProperty } from '../helpers';
 
 

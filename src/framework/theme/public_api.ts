@@ -52,7 +52,10 @@ export { NbCalendarPickerComponent }from './components/calendar-kit/components/c
 // tslint:enable:max-line-length
 export * from './components/calendar/base-calendar.component';
 export * from './components/calendar/base-calendar.module';
-export * from './components/calendar/calendar-range-cells';
+export * from './components/calendar/base-calendar-range-cell';
+export * from './components/calendar/calendar-range-day-cell.component';
+export * from './components/calendar/calendar-range-month-cell.component';
+export * from './components/calendar/calendar-range-year-cell.component';
 export { NbCalendarMonthModelService } from './components/calendar-kit/services/calendar-month-model.service';
 export * from './components/calendar-kit/services/calendar-year-model.service';
 export { NbNativeDateService } from './components/calendar-kit/services/native-date.service';
