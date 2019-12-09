@@ -33,7 +33,7 @@
     }
 
     &:not(.has-navigation) {
-      nb-calendar-week-numbers,
+      nb-calendar-week-numbers .sign-container,
       nb-calendar-days-names {
         border-top: 0;
       }
