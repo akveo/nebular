@@ -106,6 +106,10 @@ export class NbAutocompleteDirective<T> implements OnDestroy, AfterViewInit, Con
 
   protected destroy$: Subject<void> = new Subject<void>();
 
+  protected _onChange: (value: T) => void = () => {};
+
+  protected _onTouched = () => {};
+
   /**
    * Determines is autocomplete overlay opened.
    * */
@@ -230,10 +234,6 @@ export class NbAutocompleteDirective<T> implements OnDestroy, AfterViewInit, Con
       this.cd.markForCheck();
     }
   }
-
-  _onChange: (value: T) => void = () => {};
-
-  _onTouched = () => {};
 
   writeValue(value: T): void {
     this.handleInputValueUpdate(value);
