@@ -86,14 +86,24 @@ export type NbButtonAppearance = 'filled' | 'outline' | 'ghost' | 'hero';
  * button-disabled-cursor:
  * button-tiny-text-font-size:
  * button-tiny-text-line-height:
+ * button-tiny-icon-size:
+ * button-tiny-icon-offset:
  * button-small-text-font-size:
  * button-small-text-line-height:
+ * button-small-icon-size:
+ * button-small-icon-offset:
  * button-medium-text-font-size:
  * button-medium-text-line-height:
+ * button-medium-icon-size:
+ * button-medium-icon-offset:
  * button-large-text-font-size:
  * button-large-text-line-height:
+ * button-large-icon-size:
+ * button-large-icon-offset:
  * button-giant-text-font-size:
  * button-giant-text-line-height:
+ * button-giant-icon-size:
+ * button-giant-icon-offset:
  * button-rectangle-border-radius:
  * button-semi-round-border-radius:
  * button-round-border-radius:

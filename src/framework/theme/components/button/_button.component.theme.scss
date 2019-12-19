@@ -31,8 +31,18 @@
 
         nb-icon {
           font-size: nb-theme(button-#{$size}-text-font-size);
-          height: nb-theme(button-#{$size}-text-line-height);
-          width: nb-theme(button-#{$size}-text-line-height);
+          height: nb-theme(button-#{$size}-icon-size);
+          width: nb-theme(button-#{$size}-icon-size);
+        }
+
+        $icon-offset: nb-theme(button-#{$size}-icon-offset);
+        &.icon-start:not(.icon-end) nb-icon {
+          @include nb-ltr(margin-right, $icon-offset);
+          @include nb-rtl(margin-left, $icon-offset);
+        }
+        &.icon-end:not(.icon-start) nb-icon {
+          @include nb-ltr(margin-left, $icon-offset);
+          @include nb-rtl(margin-right, $icon-offset);
         }
       }
     }
