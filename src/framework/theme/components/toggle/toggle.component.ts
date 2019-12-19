@@ -75,6 +75,7 @@ import { convertToBoolProperty, emptyStatusWarning } from '../helpers';
  * toggle-outline-width:
  * toggle-outline-color:
  * toggle-switcher-size:
+ * toggle-switcher-icon-size:
  * toggle-text-font-family:
  * toggle-text-font-size:
  * toggle-text-font-weight:
