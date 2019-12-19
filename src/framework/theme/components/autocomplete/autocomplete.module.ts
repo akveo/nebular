@@ -12,7 +12,7 @@ import { NbAutocompleteComponent } from './autocomplete.component';
 import { NbAutocompleteDirective } from './autocomplete.directive';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { NbOptionListModule } from '../option-list/option-list.module';
+import { NbOptionModule } from '../option/option-list.module';
 
 const NB_AUTOCOMPLETE_COMPONENTS = [
   NbAutocompleteComponent,
@@ -25,11 +25,11 @@ const NB_AUTOCOMPLETE_COMPONENTS = [
     FormsModule,
     NbOverlayModule,
     NbCardModule,
-    NbOptionListModule,
+    NbOptionModule,
   ],
    exports: [
      ...NB_AUTOCOMPLETE_COMPONENTS,
-     NbOptionListModule,
+     NbOptionModule,
    ],
    declarations: [...NB_AUTOCOMPLETE_COMPONENTS],
 })

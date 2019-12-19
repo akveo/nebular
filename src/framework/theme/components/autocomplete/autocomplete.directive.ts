@@ -36,7 +36,7 @@ import {
   NbKeyManagerActiveItemMode,
 } from '../cdk/a11y/descendant-key-manager';
 import { NbAutocompleteComponent } from './autocomplete.component';
-import { NbOptionComponent } from '../option-list/option.component';
+import { NbOptionComponent } from '../option/option.component';
 
 /**
  * The `NbAutocompleteDirective` provides a capability to expand input with

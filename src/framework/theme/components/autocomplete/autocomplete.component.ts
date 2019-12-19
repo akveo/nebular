@@ -24,7 +24,7 @@ import { takeUntil } from 'rxjs/operators';
 
 import { NbComponentSize } from '../component-size';
 import { NbPosition } from '../cdk/overlay/overlay-position';
-import { NbOptionComponent } from '../option-list/option.component';
+import { NbOptionComponent } from '../option/option.component';
 import { NbPortalDirective } from '../cdk/overlay/mapping';
 
 // Component class scoped counter for aria attributes.

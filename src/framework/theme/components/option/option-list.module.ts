@@ -23,4 +23,4 @@ const NB_OPTION_LIST_COMPONENTS = [
     ...NB_OPTION_LIST_COMPONENTS,
   ],
 })
-export class NbOptionListModule { }
+export class NbOptionModule { }

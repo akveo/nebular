@@ -6,7 +6,7 @@ import { NbInputModule } from '../input/input.module';
 import { NbCardModule } from '../card/card.module';
 import { NbButtonModule } from '../button/button.module';
 import { NbSelectComponent, NbSelectLabelComponent } from './select.component';
-import { NbOptionListModule } from '../option-list/option-list.module';
+import { NbOptionModule } from '../option/option-list.module';
 import { NbIconModule } from '../icon/icon.module';
 
 const NB_SELECT_COMPONENTS = [
@@ -22,11 +22,11 @@ const NB_SELECT_COMPONENTS = [
     NbInputModule,
     NbCardModule,
     NbIconModule,
-    NbOptionListModule,
+    NbOptionModule,
   ],
   exports: [
     ...NB_SELECT_COMPONENTS,
-    NbOptionListModule,
+    NbOptionModule,
   ],
   declarations: [...NB_SELECT_COMPONENTS],
 })
