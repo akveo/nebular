@@ -14,5 +14,10 @@
     "checkoutTarget": "master",
     "name": "next",
     "path": "/nebular/next/"
+  },
+  {
+    "checkoutTarget": "release/5.0.0-beta.1",
+    "name": "5.0.0-beta.1",
+    "path": "/nebular/5.0.0-beta.1/"
   }
 ]
