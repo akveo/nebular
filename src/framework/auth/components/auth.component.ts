@@ -7,7 +7,8 @@ import { Component, OnDestroy } from '@angular/core';
 import { Location } from '@angular/common';
 
 import { NbAuthService } from '../services/auth.service';
-import { takeWhile } from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'nb-auth',
@@ -35,7 +36,7 @@ import { takeWhile } from 'rxjs/operators';
 })
 export class NbAuthComponent implements OnDestroy {
 
-  private alive = true;
+  private destroy$ = new Subject<void>();
 
   subscription: any;
 
@@ -46,7 +47,7 @@ export class NbAuthComponent implements OnDestroy {
   constructor(protected auth: NbAuthService, protected location: Location) {
 
     this.subscription = auth.onAuthenticationChange()
-      .pipe(takeWhile(() => this.alive))
+      .pipe(takeUntil(this.destroy$))
       .subscribe((authenticated: boolean) => {
         this.authenticated = authenticated;
       });
@@ -58,6 +59,7 @@ export class NbAuthComponent implements OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.alive = false;
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

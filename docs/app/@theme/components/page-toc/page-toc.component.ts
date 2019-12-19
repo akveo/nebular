@@ -5,9 +5,9 @@
  */
 
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnDestroy } from '@angular/core';
-import { takeWhile, map } from 'rxjs/operators';
+import { takeUntil, map } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
-import { of as observableOf,  combineLatest } from 'rxjs';
+import { of as observableOf,  combineLatest, Subject } from 'rxjs';
 
 @Component({
   selector: 'ngd-page-toc',
@@ -26,6 +26,8 @@ import { of as observableOf,  combineLatest } from 'rxjs';
 })
 export class NgdPageTocComponent implements OnDestroy {
 
+  private destroy$ = new Subject<void>();
+
   items: any[];
 
   @Input()
@@ -35,7 +37,6 @@ export class NgdPageTocComponent implements OnDestroy {
       this.activatedRoute.fragment,
     )
       .pipe(
-        takeWhile(() => this.alive),
         map(([toc, fragment]) => {
           toc = toc.map((item: any) => ({ ...item, selected: fragment === item.fragment }));
           if (toc.length && !toc.find(item => item.selected)) {
@@ -43,6 +44,7 @@ export class NgdPageTocComponent implements OnDestroy {
           }
           return toc;
         }),
+        takeUntil(this.destroy$),
       )
       .subscribe((toc) => {
         this.items = toc;
@@ -50,12 +52,11 @@ export class NgdPageTocComponent implements OnDestroy {
       })
   }
 
-  private alive = true;
-
   constructor(private activatedRoute: ActivatedRoute, private cd: ChangeDetectorRef) {
   }
 
   ngOnDestroy() {
-    this.alive = false;
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

@@ -14,7 +14,8 @@ import {
   OnDestroy,
   QueryList,
 } from '@angular/core';
-import { takeWhile } from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 import { convertToBoolProperty } from '../helpers';
 import { NbOptionComponent } from './option.component';
@@ -42,7 +43,7 @@ import { NbOptionComponent } from './option.component';
 })
 export class NbOptionGroupComponent implements AfterContentInit, OnDestroy {
 
-  protected alive = true;
+  protected destroy$ = new Subject<void>();
 
   @Input() title: string;
 
@@ -72,12 +73,13 @@ export class NbOptionGroupComponent implements AfterContentInit, OnDestroy {
     }
 
     this.options.changes
-      .pipe(takeWhile(() => this.alive))
+      .pipe(takeUntil(this.destroy$))
       .subscribe(() => this.asyncUpdateOptionsDisabledState());
   }
 
   ngOnDestroy() {
-    this.alive = false;
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   /**

@@ -1,0 +1,13 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
+@mixin nb-calendar-day-picker-theme {
+  nb-calendar-day-picker nb-calendar-week-numbers {
+    $border: nb-theme(calendar-weeknumber-divider-width) solid nb-theme(calendar-weeknumber-divider-color);
+    @include nb-ltr(border-right, $border);
+    @include nb-rtl(border-left, $border);
+  }
+}

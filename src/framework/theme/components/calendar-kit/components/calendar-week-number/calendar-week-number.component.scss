@@ -5,13 +5,6 @@
  */
 
 :host {
-  .arrow {
-    position: absolute;
-    width: 0;
-    height: 0;
-  }
-
-  ::ng-deep nb-overlay-container .primitive-overlay {
-    padding: 0.75rem 1rem;
-  }
+  display: flex; // prevents margin collapsing
+  flex-direction: column;
 }

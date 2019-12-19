@@ -25,8 +25,8 @@ import {
   ViewChild,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { merge } from 'rxjs';
-import { startWith, switchMap, takeWhile, filter } from 'rxjs/operators';
+import { merge, Subject } from 'rxjs';
+import { startWith, switchMap, takeUntil, filter } from 'rxjs/operators';
 
 import {
   NbAdjustableConnectedPositionStrategy,
@@ -665,6 +665,8 @@ export class NbSelectComponent<T> implements AfterViewInit, AfterContentInit, On
 
   protected alive: boolean = true;
 
+  protected destroy$ = new Subject<void>();
+
   protected keyManager: NbFocusKeyManager<NbOptionComponent<T>>;
 
   /**
@@ -733,9 +735,9 @@ export class NbSelectComponent<T> implements AfterViewInit, AfterContentInit, On
   ngAfterContentInit() {
     this.options.changes
       .pipe(
-        takeWhile(() => this.alive),
         startWith(this.options),
         filter(() => this.queue != null && this.canSelectValue()),
+        takeUntil(this.destroy$),
       )
       .subscribe(() => {
         // Call 'writeValue' when current change detection run is finished.
@@ -757,6 +759,9 @@ export class NbSelectComponent<T> implements AfterViewInit, AfterContentInit, On
 
   ngOnDestroy() {
     this.alive = false;
+
+    this.destroy$.next();
+    this.destroy$.complete();
 
     if (this.ref) {
       this.ref.dispose();
@@ -941,7 +946,7 @@ export class NbSelectComponent<T> implements AfterViewInit, AfterContentInit, On
 
   protected subscribeOnPositionChange() {
     this.positionStrategy.positionChange
-      .pipe(takeWhile(() => this.alive))
+      .pipe(takeUntil(this.destroy$))
       .subscribe((position: NbPosition) => {
         this.overlayPosition = position;
         this.cd.detectChanges();
@@ -960,7 +965,7 @@ export class NbSelectComponent<T> implements AfterViewInit, AfterContentInit, On
         switchMap((options: QueryList<NbOptionComponent<T>>) => {
           return merge(...options.map(option => option.click));
         }),
-        takeWhile(() => this.alive),
+        takeUntil(this.destroy$),
       )
       .subscribe((clickedOption: NbOptionComponent<T>) => this.handleOptionClick(clickedOption));
   }
@@ -968,8 +973,8 @@ export class NbSelectComponent<T> implements AfterViewInit, AfterContentInit, On
   protected subscribeOnOverlayKeys(): void {
     this.ref.keydownEvents()
       .pipe(
-        takeWhile(() => this.alive),
         filter(() => this.isOpen),
+        takeUntil(this.destroy$),
       )
       .subscribe((event: KeyboardEvent) => {
         if (event.keyCode === ESCAPE) {
@@ -981,7 +986,7 @@ export class NbSelectComponent<T> implements AfterViewInit, AfterContentInit, On
       });
 
     this.keyManager.tabOut
-      .pipe(takeWhile(() => this.alive))
+      .pipe(takeUntil(this.destroy$))
       .subscribe(() => {
         this.hide();
         this.onTouched();

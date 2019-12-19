@@ -8,7 +8,9 @@ import { Component, EventEmitter, Input, Output, Type } from '@angular/core';
 
 import { NbCalendarCell, NbCalendarSize, NbCalendarViewMode } from '../calendar-kit/model';
 import { NbDateService } from '../calendar-kit/services/date.service';
-import { NbCalendarRangeDayCellComponent, NbCalendarRangeYearCellComponent } from './calendar-range-cells';
+import { NbCalendarRangeDayCellComponent } from './calendar-range-day-cell.component';
+import { NbCalendarRangeYearCellComponent } from './calendar-range-year-cell.component';
+import { NbCalendarRangeMonthCellComponent } from './calendar-range-month-cell.component';
 import { convertToBoolProperty } from '../helpers';
 
 
@@ -49,46 +51,75 @@ export interface NbCalendarRange<D> {
  * @styles
  *
  * calendar-width:
- * calendar-body-height:
+ * calendar-background-color:
+ * calendar-border-color:
+ * calendar-border-style:
+ * calendar-border-width:
  * calendar-border-radius:
  * calendar-text-color:
  * calendar-text-font-family:
  * calendar-text-font-size:
  * calendar-text-font-weight:
  * calendar-text-line-height:
- * calendar-header-text-color:
- * calendar-header-text-font-family:
- * calendar-header-title-text-font-size:
- * calendar-header-title-text-font-weight:
- * calendar-header-title-text-line-height:
- * calendar-header-sub-title-text-font-size:
- * calendar-header-sub-title-text-font-weight:
- * calendar-header-sub-title-text-line-height:
- * calendar-navigation-button-width:
+ * calendar-picker-padding-top:
+ * calendar-picker-padding-bottom:
+ * calendar-picker-padding-start:
+ * calendar-picker-padding-end:
+ * calendar-navigation-text-color:
+ * calendar-navigation-text-font-family:
+ * calendar-navigation-title-text-font-size:
+ * calendar-navigation-title-text-font-weight:
+ * calendar-navigation-title-text-line-height:
+ * calendar-navigation-padding:
  * calendar-cell-inactive-text-color:
- * calendar-cell-in-range-background-color:
- * calendar-cell-disabled-background-color:
  * calendar-cell-disabled-text-color:
- * calendar-cell-selected-background-color:
- * calendar-cell-selected-text-color:
- * calendar-cell-selected-text-font-size:
- * calendar-cell-selected-text-font-weight:
- * calendar-cell-selected-text-line-height:
  * calendar-cell-hover-background-color:
+ * calendar-cell-hover-border-color:
  * calendar-cell-hover-text-color:
  * calendar-cell-hover-text-font-size:
  * calendar-cell-hover-text-font-weight:
  * calendar-cell-hover-text-line-height:
  * calendar-cell-active-background-color:
+ * calendar-cell-active-border-color:
  * calendar-cell-active-text-color:
  * calendar-cell-active-text-font-size:
  * calendar-cell-active-text-font-weight:
  * calendar-cell-active-text-line-height:
  * calendar-cell-today-background-color:
+ * calendar-cell-today-border-color:
  * calendar-cell-today-text-color:
  * calendar-cell-today-text-font-size:
  * calendar-cell-today-text-font-weight:
  * calendar-cell-today-text-line-height:
+ * calendar-cell-today-hover-background-color:
+ * calendar-cell-today-hover-border-color:
+ * calendar-cell-today-active-background-color:
+ * calendar-cell-today-active-border-color:
+ * calendar-cell-today-disabled-border-color:
+ * calendar-cell-today-selected-background-color:
+ * calendar-cell-today-selected-border-color:
+ * calendar-cell-today-selected-text-color:
+ * calendar-cell-today-selected-hover-background-color:
+ * calendar-cell-today-selected-hover-border-color:
+ * calendar-cell-today-selected-active-background-color:
+ * calendar-cell-today-selected-active-border-color:
+ * calendar-cell-today-in-range-background-color:
+ * calendar-cell-today-in-range-border-color:
+ * calendar-cell-today-in-range-text-color:
+ * calendar-cell-today-in-range-hover-background-color:
+ * calendar-cell-today-in-range-hover-border-color:
+ * calendar-cell-today-in-range-active-background-color:
+ * calendar-cell-today-in-range-active-border-color:
+ * calendar-cell-selected-background-color:
+ * calendar-cell-selected-border-color:
+ * calendar-cell-selected-text-color:
+ * calendar-cell-selected-text-font-size:
+ * calendar-cell-selected-text-font-weight:
+ * calendar-cell-selected-text-line-height:
+ * calendar-cell-selected-hover-background-color:
+ * calendar-cell-selected-hover-border-color:
+ * calendar-cell-selected-active-background-color:
+ * calendar-cell-selected-active-border-color:
  * calendar-day-cell-width:
  * calendar-day-cell-height:
  * calendar-month-cell-width:
@@ -97,6 +128,7 @@ export interface NbCalendarRange<D> {
  * calendar-year-cell-height:
  * calendar-weekday-background:
  * calendar-weekday-divider-color:
+ * calendar-weekday-divider-width:
  * calendar-weekday-text-color:
  * calendar-weekday-text-font-size:
  * calendar-weekday-text-font-weight:
@@ -114,11 +146,12 @@ export interface NbCalendarRange<D> {
  * calendar-weeknumber-height:
  * calendar-weeknumber-width:
  * calendar-large-width:
- * calendar-large-body-height:
  * calendar-day-cell-large-width:
  * calendar-day-cell-large-height:
  * calendar-weekday-large-height:
  * calendar-weekday-large-width:
+ * calendar-weeknumber-large-height:
+ * calendar-weeknumber-large-width:
  * calendar-month-cell-large-width:
  * calendar-month-cell-large-height:
  * calendar-year-cell-large-width:
@@ -139,7 +172,7 @@ export interface NbCalendarRange<D> {
       [monthCellComponent]="monthCellComponent"
       [yearCellComponent]="yearCellComponent"
       [visibleDate]="visibleDate"
-      [showHeader]="showHeader"
+      [showNavigation]="showNavigation"
       [size]="size"
       [showWeekNumber]="showWeekNumber"
       [weekNumberSymbol]="weekNumberSymbol"
@@ -187,7 +220,7 @@ export class NbCalendarRangeComponent<D> {
   /**
    * Custom month cell component. Have to implement `NbCalendarCell` interface.
    * */
-  @Input() monthCellComponent: Type<NbCalendarCell<D, NbCalendarRange<D>>>;
+  @Input() monthCellComponent: Type<NbCalendarCell<D, NbCalendarRange<D>>> = NbCalendarRangeMonthCellComponent;
 
   /**
    * Custom year cell component. Have to implement `NbCalendarCell` interface.
@@ -209,9 +242,9 @@ export class NbCalendarRangeComponent<D> {
   @Input() visibleDate: D;
 
   /**
-   * Determines should we show calendars header or not.
+   * Determines should we show calendars navigation or not.
    * */
-  @Input() showHeader: boolean = true;
+  @Input() showNavigation: boolean = true;
 
   /**
    * Range which will be rendered as selected.
