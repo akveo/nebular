@@ -1,3 +1,35 @@
+<a name="5.0.0-beta.1"></a>
+## 5.0.0-beta.1 (2019-12-19)
+
+* refactor: sync sizes with Eva 1.3 (#2135) ([9c1bcfe](https://github.com/akveo/nebular/commit/9c1bcfe)), closes [#2135](https://github.com/akveo/nebular/issues/2135)
+* refactor: unsubscribe on destroy (#2112) ([0cab4fc](https://github.com/akveo/nebular/commit/0cab4fc)), closes [#2112](https://github.com/akveo/nebular/issues/2112)
+* refactor: use basic as default status (#2136) ([cc9b47e](https://github.com/akveo/nebular/commit/cc9b47e)), closes [#2136](https://github.com/akveo/nebular/issues/2136)
+* refactor(card): Eva 1.3 (#2137) ([c36c4b8](https://github.com/akveo/nebular/commit/c36c4b8)), closes [#2137](https://github.com/akveo/nebular/issues/2137)
+* refactor(mapping): unify state color mapping (#2075) ([028883a](https://github.com/akveo/nebular/commit/028883a)), closes [#2075](https://github.com/akveo/nebular/issues/2075)
+* refactor(select): update option state colors (#2110) ([1dbddd5](https://github.com/akveo/nebular/commit/1dbddd5)), closes [#2110](https://github.com/akveo/nebular/issues/2110)
+* feat(calendar): Eva 1.3 (#2120) ([0f03fb5](https://github.com/akveo/nebular/commit/0f03fb5)), closes [#2120](https://github.com/akveo/nebular/issues/2120)
+* feat(select): Eva style (#2106) ([7355d65](https://github.com/akveo/nebular/commit/7355d65)), closes [#2106](https://github.com/akveo/nebular/issues/2106)
+* feat(theme): autocomplete component (#1947) ([d67dd6b](https://github.com/akveo/nebular/commit/d67dd6b)), closes [#1947](https://github.com/akveo/nebular/issues/1947)
+* fix: add scroll strategy options to public api (#2129) ([79ab083](https://github.com/akveo/nebular/commit/79ab083)), closes [#2129](https://github.com/akveo/nebular/issues/2129)
+* fix(cdk): fix cdk mappings duplicates (#2068) ([8179a02](https://github.com/akveo/nebular/commit/8179a02)), closes [#2068](https://github.com/akveo/nebular/issues/2068)
+* chore: remove deals text from docs (#2123) ([4783259](https://github.com/akveo/nebular/commit/4783259)), closes [#2123](https://github.com/akveo/nebular/issues/2123)
+* chore(date-fns): update date-fns to latest version (#2045) ([1c5323d](https://github.com/akveo/nebular/commit/1c5323d)), closes [#2045](https://github.com/akveo/nebular/issues/2045)
+* chore(docs): add Eva black friday deal (#2100) ([729e8ce](https://github.com/akveo/nebular/commit/729e8ce)), closes [#2100](https://github.com/akveo/nebular/issues/2100)
+* chore(docs): change Eva deal to Cyber Monday (#2114) ([fbe2ca2](https://github.com/akveo/nebular/commit/fbe2ca2)), closes [#2114](https://github.com/akveo/nebular/issues/2114)
+* chore(docs): set Eva deal commit as current docs version (#2101) ([16ae5b2](https://github.com/akveo/nebular/commit/16ae5b2)), closes [#2101](https://github.com/akveo/nebular/issues/2101)
+* chore(docs): update docs checkout target (#2115) ([2d48ac5](https://github.com/akveo/nebular/commit/2d48ac5)), closes [#2115](https://github.com/akveo/nebular/issues/2115)
+
+
+### BREAKING CHANGE
+
+* Badge, button, progress bar, toastr components now use basic status as a default.
+* NbPlatform and NbScrollStrategyOptions from theme/components/cdk/overlay/mapping.ts removed. Use NbPlatform from theme/components/cdk/platform/platform-service.ts and NbScrollStrategyOptions from theme/components/cdk/adapter/block-scroll-strategy-adapter.ts.
+NbPlatformModule removed.
+* `date-fns` updated to 2 version.
+* Options components extracted to own module.
+
+
+
 <a name="4.6.0"></a>
 # [4.6.0](https://github.com/akveo/nebular/compare/v4.5.0...v4.6.0) (2019-11-26)
 
