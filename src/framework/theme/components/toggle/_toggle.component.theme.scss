@@ -58,6 +58,11 @@
     .toggle-switcher {
       width: nb-theme(toggle-switcher-size);
       height: nb-theme(toggle-switcher-size);
+
+      nb-icon {
+        height: nb-theme(toggle-switcher-icon-size);
+        width: nb-theme(toggle-switcher-icon-size);
+      }
     }
 
     .text {
