@@ -1,0 +1,36 @@
+<nb-card size="small">
+  <nb-card-body class="example-items-rows">
+
+    <input
+      [formControl]="inputFormControl"
+      nbInput
+      type="text"
+      placeholder="Form control"
+      [nbAutocomplete]="autoControl" />
+
+    <nb-autocomplete #autoControl>
+
+      <nb-option *ngFor="let option of filteredControlOptions$ | async" [value]="option">
+        {{ option }}
+      </nb-option>
+
+    </nb-autocomplete>
+
+    <input
+      [ngModel]="value"
+      (ngModelChange)="onModelChange($event)"
+      nbInput
+      type="text"
+      placeholder="ngModel"
+      [nbAutocomplete]="autoNgModel" />
+
+    <nb-autocomplete #autoNgModel>
+
+      <nb-option *ngFor="let option of filteredNgModelOptions$ | async" [value]="option">
+        {{ option }}
+      </nb-option>
+
+    </nb-autocomplete>
+
+  </nb-card-body>
+</nb-card>

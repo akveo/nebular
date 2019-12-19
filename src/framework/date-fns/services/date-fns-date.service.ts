@@ -8,19 +8,9 @@ import { Inject, Injectable, LOCALE_ID, Optional } from '@angular/core';
 
 import { NB_DATE_SERVICE_OPTIONS, NbNativeDateService } from '@nebular/theme';
 
-import * as dateFnsParse from 'date-fns/parse';
-// @ts-ignore
-import { default as rollupParse } from 'date-fns/parse';
-import * as dateFnsFormat from 'date-fns/format';
-// @ts-ignore
-import { default as rollupFormat } from 'date-fns/format';
-import * as dateFnsGetWeek from 'date-fns/getWeek';
-// @ts-ignore
-import { default as rollupGetWeek } from 'date-fns/getWeek';
-
-const parse = rollupParse || dateFnsParse;
-const formatDate = rollupFormat || dateFnsFormat;
-const getWeek = rollupGetWeek || dateFnsGetWeek;
+import { default as parse } from 'date-fns/parse';
+import { default as formatDate } from 'date-fns/format';
+import { default as getWeek } from 'date-fns/getWeek';
 
 export interface NbDateFnsOptions {
   format: string;

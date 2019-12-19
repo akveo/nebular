@@ -1,0 +1,124 @@
+/*
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
+@mixin nb-option-list-theme() {
+  nb-option-list {
+    background-color: nb-theme(option-list-background-color);
+    border-color: nb-theme(option-list-border-color);
+    border-style: nb-theme(option-list-border-style);
+    border-width: nb-theme(option-list-border-width);
+    border-radius: nb-theme(option-list-border-radius);
+    box-shadow: nb-theme(option-list-shadow);
+    overflow: hidden;
+
+    .option-list {
+      height: 100%;
+      max-height: nb-theme(option-list-max-height);
+      margin: 0;
+      padding: 0;
+      overflow: auto;
+    }
+
+    $adjacent-border: nb-theme(option-list-adjacent-border-width)
+                      nb-theme(option-list-adjacent-border-style)
+                      nb-theme(option-list-adjacent-border-color);
+    &.position-top {
+      border-bottom: $adjacent-border;
+    }
+    &.position-bottom {
+      border-top: $adjacent-border;
+    }
+  }
+
+  nb-option-group {
+    color: nb-theme(option-group-text-color);
+    font-family: nb-theme(option-text-font-family);
+  }
+
+  @each $size in nb-get-sizes() {
+    nb-option-list.size-#{$size} nb-option-group {
+      font-size: nb-theme(option-#{$size}-text-font-size);
+      font-weight: nb-theme(option-#{$size}-text-font-weight);
+      line-height: nb-theme(option-#{$size}-text-line-height);
+
+      .option-group-title {
+        padding: nb-theme(option-#{$size}-padding);
+      }
+
+      nb-option {
+        padding-left: nb-theme(option-group-#{$size}-start-padding);
+      }
+    }
+  }
+
+  nb-option {
+    background-color: nb-theme(option-background-color);
+    color: nb-theme(option-text-color);
+    font-family: nb-theme(option-text-font-family);
+
+    &.active {
+      background-color: nb-theme(option-active-background-color);
+      color: nb-theme(option-active-text-color);
+    }
+
+    &.selected {
+      background-color: nb-theme(option-selected-background-color);
+      color: nb-theme(option-selected-text-color);
+    }
+
+    &:focus {
+      background-color: nb-theme(option-focus-background-color);
+      color: nb-theme(option-focus-text-color);
+      outline: none;
+
+      &.selected {
+        background-color: nb-theme(option-selected-focus-background-color);
+        color: nb-theme(option-selected-focus-text-color);
+      }
+    }
+
+    &:hover {
+      background-color: nb-theme(option-hover-background-color);
+      color: nb-theme(option-hover-text-color);
+
+      &.selected {
+        background-color: nb-theme(option-selected-hover-background-color);
+        color: nb-theme(option-selected-hover-text-color);
+      }
+    }
+
+    &.multiple {
+      &.selected {
+        background-color: nb-theme(option-background-color);
+        color: nb-theme(option-text-color);
+      }
+
+      &:focus {
+        background-color: nb-theme(option-focus-background-color);
+        color: nb-theme(option-focus-text-color);
+      }
+    }
+  }
+
+  @each $size in nb-get-sizes() {
+    nb-option-list.size-#{$size} nb-option {
+      font-size: nb-theme(option-#{$size}-text-font-size);
+      font-weight: nb-theme(option-#{$size}-text-font-weight);
+      line-height: nb-theme(option-#{$size}-text-line-height);
+      padding: nb-theme(option-#{$size}-padding);
+    }
+  }
+
+  nb-option,
+  nb-option-group {
+    user-select: none;
+
+    &[disabled] {
+      background-color: nb-theme(option-disabled-background-color);
+      color: nb-theme(option-disabled-text-color);
+    }
+  }
+}

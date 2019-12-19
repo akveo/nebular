@@ -57,10 +57,6 @@
         border-bottom-color: nb-theme(select-outline-#{$status}-adjacent-border-color);
       }
     }
-
-    .options-list-container.appearance-outline.status-#{$status} {
-      border-color: nb-theme(select-options-list-outline-#{$status}-border-color);
-    }
   }
 
   @each $size in nb-get-sizes() {
@@ -68,15 +64,6 @@
       padding: nb-theme(select-outline-#{$size}-padding);
       @include nb-ltr(padding-right, nb-theme(select-icon-offset));
       @include nb-rtl(padding-left, nb-theme(select-icon-offset));
-    }
-    .appearance-outline.size-#{$size} {
-      nb-option-group .option-group-title,
-      nb-option {
-        padding: nb-theme(select-option-outline-#{$size}-padding);
-      }
-      nb-option-group nb-option {
-        padding-left: nb-theme(select-group-option-outline-#{$size}-start-padding);
-      }
     }
   }
 }

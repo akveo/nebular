@@ -206,13 +206,14 @@ export const NB_DATE_SERVICE_OPTIONS = new InjectionToken('Date service options'
  * Also format can be set globally with `NbDateFnsDateModule.forRoot({ format: 'dd.MM.yyyy' })` and
  * `NbDateFnsDateModule.forChild({ format: 'dd.MM.yyyy' })` methods.
  *
- * Please note to use some of the formatting tokens you also need to pass `{ awareOfUnicodeTokens: true }` to date-fns
- * parse and format functions. You can configure options passed this functions by setting `formatOptions` and
+ * Please note to use some of the formatting tokens you also need to pass
+ * `{ useAdditionalWeekYearTokens: true, useAdditionalDayOfYearTokens: true }` to date-fns parse and format functions.
+ * You can configure options passed this functions by setting `formatOptions` and
  * `parseOptions` of options object passed to `NbDateFnsDateModule.forRoot` and `NbDateFnsDateModule.forChild` methods.
  * ```ts
  * NbDateFnsDateModule.forRoot({
- *   parseOptions: { awareOfUnicodeTokens: true },
- *   formatOptions: { awareOfUnicodeTokens: true },
+ *   parseOptions: { useAdditionalWeekYearTokens: true, useAdditionalDayOfYearTokens: true },
+ *   formatOptions: { useAdditionalWeekYearTokens: true, useAdditionalDayOfYearTokens: true },
  * })
  * ```
  * Further info on `date-fns` formatting tokens could be found at
@@ -234,14 +235,12 @@ export const NB_DATE_SERVICE_OPTIONS = new InjectionToken('Date service options'
  *
  * @styles
  *
- * datepicker-text-color:
  * datepicker-background-color:
  * datepicker-border-color:
  * datepicker-border-style:
  * datepicker-border-width:
  * datepicker-border-radius:
  * datepicker-shadow:
- * datepicker-arrow-size:
  * */
 @Directive({
   selector: 'input[nbDatepicker]',

@@ -30,6 +30,7 @@ describe('Component: NbCalendarDayCell', () => {
   });
 
   it('should contain cell class', () => {
+    fixture.detectChanges();
     expect(componentEl.classList).toContain('day-cell');
   });
 

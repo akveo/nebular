@@ -1,0 +1,195 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
+@mixin nb-calendar-cell-theme() {
+  nb-calendar-picker {
+    .day-cell {
+      width: nb-theme(calendar-day-cell-width);
+      height: nb-theme(calendar-day-cell-height);
+
+      &.size-large {
+        width: nb-theme(calendar-day-cell-large-width);
+        height: nb-theme(calendar-day-cell-large-height);
+      }
+    }
+
+    .month-cell {
+      width: nb-theme(calendar-month-cell-width);
+      height: nb-theme(calendar-month-cell-height);
+
+      &.size-large {
+        width: nb-theme(calendar-month-cell-large-width);
+        height: nb-theme(calendar-month-cell-large-height);
+      }
+    }
+
+    .year-cell {
+      width: nb-theme(calendar-year-cell-width);
+      height: nb-theme(calendar-year-cell-height);
+
+      &.size-large {
+        width: nb-theme(calendar-year-cell-large-width);
+        height: nb-theme(calendar-year-cell-large-height);
+      }
+    }
+
+    .cell-content {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      width: 100%;
+
+      border-radius: nb-theme(calendar-border-radius);
+    }
+
+    .day-cell,
+    .month-cell,
+    .year-cell {
+      display: flex;
+
+      align-items: center;
+      justify-content: center;
+
+      font-family: nb-theme(calendar-text-font-family);
+      font-size: nb-theme(calendar-text-font-size);
+      font-weight: nb-theme(calendar-text-font-weight);
+      line-height: nb-theme(calendar-text-line-height);
+      color: nb-theme(calendar-text-color);
+      text-transform: uppercase;
+
+      cursor: pointer;
+
+      &,
+      & .cell-content {
+        @include nb-component-animation(background-color, border-color, color);
+      }
+
+      &.empty,
+      &.disabled {
+        cursor: default;
+      }
+
+      &.bounding-month {
+        color: nb-theme(calendar-cell-inactive-text-color);
+      }
+
+      &:not(.disabled):not(.empty) {
+        &:hover .cell-content {
+          background-color: nb-theme(calendar-cell-hover-background-color);
+          border-color: nb-theme(calendar-cell-hover-border-color);
+          color: nb-theme(calendar-cell-hover-text-color);
+          font-size: nb-theme(calendar-cell-hover-text-font-size);
+          font-weight: nb-theme(calendar-cell-hover-text-font-weight);
+          line-height: nb-theme(calendar-cell-hover-text-line-height);
+        }
+
+        &:active .cell-content {
+          background-color: nb-theme(calendar-cell-active-background-color);
+          border-color: nb-theme(calendar-cell-active-border-color);
+          color: nb-theme(calendar-cell-active-text-color);
+          font-size: nb-theme(calendar-cell-active-text-font-size);
+          font-weight: nb-theme(calendar-cell-active-text-font-weight);
+          line-height: nb-theme(calendar-cell-active-text-line-height);
+        }
+
+        &.today .cell-content {
+          background-color: nb-theme(calendar-cell-today-background-color);
+          border: 1px solid nb-theme(calendar-cell-today-border-color);
+          color: nb-theme(calendar-cell-today-text-color);
+          font-size: nb-theme(calendar-cell-today-text-font-size);
+          font-weight: nb-theme(calendar-cell-today-text-font-weight);
+          line-height: nb-theme(calendar-cell-today-text-line-height);
+
+          &:hover {
+            background-color: nb-theme(calendar-cell-today-hover-background-color);
+            border-color: nb-theme(calendar-cell-today-hover-border-color);
+          }
+
+          &:active {
+            background-color: nb-theme(calendar-cell-today-active-background-color);
+            border-color: nb-theme(calendar-cell-today-active-border-color);
+          }
+        }
+
+        &.selected .cell-content {
+          background-color: nb-theme(calendar-cell-selected-background-color);
+          border-color: nb-theme(calendar-cell-selected-border-color);
+          color: nb-theme(calendar-cell-selected-text-color);
+          font-size: nb-theme(calendar-cell-selected-text-font-size);
+          font-weight: nb-theme(calendar-cell-selected-text-font-weight);
+          line-height: nb-theme(calendar-cell-selected-text-line-height);
+
+          &:hover {
+            background-color: nb-theme(calendar-cell-selected-hover-background-color);
+            border-color: nb-theme(calendar-cell-selected-hover-border-color);
+          }
+
+          &:active {
+            background-color: nb-theme(calendar-cell-selected-active-background-color);
+            border-color: nb-theme(calendar-cell-selected-active-border-color);
+          }
+        }
+
+        &.today.selected {
+          background-color: nb-theme(calendar-cell-selected-background-color);
+          border-radius: nb-theme(calendar-border-radius);
+
+          .cell-content {
+            background-color: nb-theme(calendar-cell-today-selected-background-color);
+            border-color: nb-theme(calendar-cell-today-selected-border-color);
+            color: nb-theme(calendar-cell-today-selected-text-color);
+
+            &:hover {
+              background-color: nb-theme(calendar-cell-today-selected-hover-background-color);
+              border-color: nb-theme(calendar-cell-today-selected-hover-border-color);
+            }
+
+            &:focus {
+              background-color: nb-theme(calendar-cell-today-selected-active-background-color);
+              border-color: nb-theme(calendar-cell-today-selected-active-border-color);
+            }
+          }
+        }
+      }
+
+      &.disabled {
+        color: nb-theme(calendar-cell-disabled-text-color);
+
+        &.today .cell-content {
+          border: 1px solid nb-theme(calendar-cell-today-disabled-border-color);
+        }
+      }
+    }
+
+    .range-cell.in-range.selected:not(.disabled):not(.empty) {
+      background-color: nb-theme(calendar-cell-selected-background-color);
+      border-radius: 0;
+
+      &.start {
+        @include nb-ltr() {
+          border-top-left-radius: nb-theme(calendar-border-radius);
+          border-bottom-left-radius: nb-theme(calendar-border-radius);
+        }
+        @include nb-rtl() {
+          border-top-right-radius: nb-theme(calendar-border-radius);
+          border-bottom-right-radius: nb-theme(calendar-border-radius);
+        }
+      }
+
+      &.end {
+        @include nb-ltr() {
+          border-top-right-radius: nb-theme(calendar-border-radius);
+          border-bottom-right-radius: nb-theme(calendar-border-radius);
+        }
+        @include nb-rtl() {
+          border-top-left-radius: nb-theme(calendar-border-radius);
+          border-bottom-left-radius: nb-theme(calendar-border-radius);
+        }
+      }
+    }
+  }
+}

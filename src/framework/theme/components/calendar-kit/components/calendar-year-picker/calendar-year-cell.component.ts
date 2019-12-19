@@ -14,14 +14,17 @@ import {
   Output,
 } from '@angular/core';
 import { NbDateService } from '../../services/date.service';
-import { NbCalendarCell } from '../../model';
+import { NbCalendarCell, NbCalendarSize } from '../../model';
 
 
 @Component({
   selector: 'nb-calendar-year-cell',
-  template: `{{ year }}`,
+  template: `
+    <div class="cell-content">
+      {{ year }}
+    </div>
+  `,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  host: { 'class': 'year-cell' },
 })
 export class NbCalendarYearCellComponent<D> implements NbCalendarCell<D, D> {
   @Input() date: D;
@@ -31,6 +34,8 @@ export class NbCalendarYearCellComponent<D> implements NbCalendarCell<D, D> {
   @Input() max: D;
 
   @Input() selectedValue: D;
+
+  @Input() size: NbCalendarSize = NbCalendarSize.MEDIUM;
 
   @Output() select: EventEmitter<D> = new EventEmitter(true);
 
@@ -48,6 +53,14 @@ export class NbCalendarYearCellComponent<D> implements NbCalendarCell<D, D> {
   @HostBinding('class.disabled') get disabled(): boolean {
     return this.smallerThanMin() || this.greaterThanMax();
   }
+
+  @HostBinding('class.size-large')
+  get isLarge(): boolean {
+    return this.size === NbCalendarSize.LARGE;
+  }
+
+  @HostBinding('class.year-cell')
+  yearCellClass = true;
 
   get year(): number {
     return this.dateService.getYear(this.date);

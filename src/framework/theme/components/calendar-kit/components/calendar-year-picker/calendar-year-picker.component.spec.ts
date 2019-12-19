@@ -4,13 +4,10 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { DatePipe } from '@angular/common';
 
 import { NbCalendarYearPickerComponent } from './calendar-year-picker.component';
-import { NbDateService } from '../../services/date.service';
-import { NbNativeDateService } from '../../services/native-date.service';
+import { NbCalendarKitModule } from '../../calendar-kit.module';
 
 
 describe('Component: NbCalendarYearPicker', () => {
@@ -20,9 +17,7 @@ describe('Component: NbCalendarYearPicker', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [DatePipe, { provide: NbDateService, useClass: NbNativeDateService }],
-      declarations: [NbCalendarYearPickerComponent],
-      schemas: [NO_ERRORS_SCHEMA],
+      imports: [ NbCalendarKitModule ],
     });
     fixture = TestBed.createComponent<NbCalendarYearPickerComponent<Date>>(NbCalendarYearPickerComponent);
     component = fixture.componentInstance;
