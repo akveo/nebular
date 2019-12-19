@@ -240,10 +240,10 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         name: 'Calendar Start View',
       },
       {
-        path: 'calendar-without-header.component',
-        link: '/calendar/calendar-without-header.component',
-        component: 'CalendarWithoutHeaderComponent',
-        name: 'Calendar Without Header',
+        path: 'calendar-without-navigation.component',
+        link: '/calendar/calendar-without-navigation.component',
+        component: 'CalendarWithoutNavigationComponent',
+        name: 'Calendar Without Navigation',
       },
       {
         path: 'calendar-week-number.component',

@@ -4,20 +4,25 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { Component, Input, HostBinding, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, HostBinding, ChangeDetectionStrategy, OnChanges, SimpleChanges } from '@angular/core';
+
 import { NbDateService } from '../../services/date.service';
 import { NbCalendarSize } from '../../model';
 
 @Component({
   selector: 'nb-calendar-week-numbers',
   template: `
-    <div class="sign">{{ weekNumberSymbol }}</div>
-    <div class="week-cell" *ngFor="let week of getWeeks()">{{ week }}</div>
+    <div class="sign-container">
+      <div class="sign">{{ weekNumberSymbol }}</div>
+    </div>
+    <div class="week-number" *ngFor="let weekNumber of weekNumbers">{{ weekNumber }}</div>
   `,
-  styleUrls: ['./nb-calendar-week-number.component.scss'],
+  styleUrls: ['./calendar-week-number.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NbCalendarWeekNumberComponent<D> {
+export class NbCalendarWeekNumberComponent<D> implements OnChanges {
+
+  weekNumbers: number[];
 
   @Input()
   weeks: D[][];
@@ -30,17 +35,18 @@ export class NbCalendarWeekNumberComponent<D> {
    * */
   @Input() weekNumberSymbol: string;
 
-  @HostBinding('class.size-medium')
-  get isMedium() {
-    return this.size === NbCalendarSize.MEDIUM;
-  }
-
   @HostBinding('class.size-large')
   get isLarge() {
     return this.size === NbCalendarSize.LARGE;
   }
 
   constructor(private dateService: NbDateService<D>) {}
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.weeks) {
+      this.weekNumbers = this.getWeeks();
+    }
+  }
 
   getWeeks(): number[] {
     return this.weeks.map((week: D[]) => {

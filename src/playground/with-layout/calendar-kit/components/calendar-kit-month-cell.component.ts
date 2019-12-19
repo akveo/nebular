@@ -9,16 +9,20 @@ import {
 
 @Component({
   selector: 'nb-calendar-kit-month-cell',
-  styles: [` :host { padding: 1rem; } `],
   template: `
     <h4>{{ title }}</h4>
-    <nb-calendar-day-picker
-      [boundingMonths]="false"
-      [visibleDate]="date"
-      [date]="selectedValue"
-      (dateChange)="select.emit($event)">
+    <nb-calendar-day-picker [boundingMonths]="false"
+                            [visibleDate]="date"
+                            [date]="selectedValue"
+                            (dateChange)="select.emit($event)">
     </nb-calendar-day-picker>
   `,
+  styles: [`
+    :host {
+      flex: 1 0 auto;
+      padding: 1rem;
+    }
+  `],
 })
 export class CalendarKitMonthCellComponent extends NbCalendarDayPickerComponent<Date, Date>
   implements NbCalendarCell<Date, Date> {

@@ -18,7 +18,7 @@ import {
   ViewContainerRef,
 } from '@angular/core';
 
-import { NbCalendarCell } from '../../model';
+import { NbCalendarCell, NbCalendarSize } from '../../model';
 
 
 @Component({
@@ -40,6 +40,7 @@ export class NbCalendarPickerRowComponent<D, T> implements OnChanges {
   @Input() min: D;
   @Input() max: D;
   @Input() filter: (D) => boolean;
+  @Input() size: NbCalendarSize = NbCalendarSize.MEDIUM;
   @Output() select: EventEmitter<D> = new EventEmitter();
 
   // TODO static must be false as of Angular 9.0.0, issues/1514
@@ -67,6 +68,7 @@ export class NbCalendarPickerRowComponent<D, T> implements OnChanges {
     component.min = this.min;
     component.max = this.max;
     component.filter = this.filter;
+    component.size = this.size;
     component.select.subscribe(this.select.emit.bind(this.select));
   }
 }
