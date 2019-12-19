@@ -82,14 +82,13 @@ import { NbOptionComponent } from '../option-list/option.component';
     useExisting: forwardRef(() => NbAutocompleteDirective),
     multi: true,
   }],
-
 })
 export class NbAutocompleteDirective<T> implements OnDestroy, AfterViewInit, ControlValueAccessor {
 
   /**
    * NbAutocompleteComponent instance passed via input.
    * */
-  protected autocomplete: NbAutocompleteComponent<T>;
+  protected _autocomplete: NbAutocompleteComponent<T>;
 
   /**
    * Trigger strategy used by overlay.
@@ -125,8 +124,11 @@ export class NbAutocompleteDirective<T> implements OnDestroy, AfterViewInit, Con
    * Provides autocomplete component.
    * */
   @Input('nbAutocomplete')
-  set setAutocomplete(autocomplete: NbAutocompleteComponent<T>) {
-    this.autocomplete = autocomplete;
+  get autocomplete(): NbAutocompleteComponent<T> {
+    return this._autocomplete;
+  }
+  set autocomplete(autocomplete: NbAutocompleteComponent<T>) {
+    this._autocomplete = autocomplete;
   }
 
   @HostBinding('class.nb-autocomplete-position-top')
