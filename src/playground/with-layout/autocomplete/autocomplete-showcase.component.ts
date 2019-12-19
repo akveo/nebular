@@ -30,7 +30,7 @@ export class AutocompleteShowcaseComponent implements OnInit {
     return this.options.filter(optionValue => optionValue.toLowerCase().includes(filterValue));
   }
 
-  getFilteredOptions (value: string): Observable<string[]> {
+  getFilteredOptions(value: string): Observable<string[]> {
     return of(value).pipe(
       map(filterString => this.filter(filterString)),
     );
