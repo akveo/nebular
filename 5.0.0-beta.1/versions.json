@@ -1,0 +1,18 @@
+[
+  {
+    "checkoutTarget": "v4.6.0",
+    "name": "4.6.0",
+    "path": "/nebular/",
+    "isCurrent": true
+  },
+  {
+    "checkoutTarget": "bfaca3e9f50bcf05af6f8c98102691947cf95c02",
+    "name": "3.6.2",
+    "path": "/nebular/3.6.2/"
+  },
+  {
+    "checkoutTarget": "master",
+    "name": "next",
+    "path": "/nebular/next/"
+  }
+]

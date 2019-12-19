@@ -1,0 +1,38 @@
+@import '../../styles/themes';
+
+fieldset {
+  border: 0;
+  padding: 0;
+}
+
+nb-radio-group {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.appearance-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.appearance-row {
+  display: flex;
+  flex: 1 0 100%;
+
+  &:not(:last-child) {
+    padding-bottom: 1rem;
+  }
+}
+
+.appearance-name {
+  margin-top: 1.5rem;
+  margin-bottom: 0;
+  text-transform: capitalize;
+  flex: 1 0 100%;
+}
+
+.status-container {
+  padding: 1rem;
+  border-radius: 0.25rem;
+}

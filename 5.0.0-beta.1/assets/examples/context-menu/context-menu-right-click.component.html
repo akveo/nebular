@@ -1,0 +1,11 @@
+<nb-layout>
+  <nb-layout-column class="colored-column-basic">
+    <button class="menu-target"
+            nbButton
+            [nbContextMenu]="items"
+            nbContextMenuTrigger="noop"
+            (contextmenu)="open()">
+      Right Click
+    </button>
+  </nb-layout-column>
+</nb-layout>

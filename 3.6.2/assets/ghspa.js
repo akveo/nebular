@@ -22,7 +22,7 @@
 ;(function(l) {
 
   var redirectPath;
-  ["/nebular","/nebular/3.6.2","/nebular/next"].forEach(function (path) {
+  ["/nebular","/nebular/3.6.2","/nebular/next","/nebular/5.0.0-beta.1"].forEach(function (path) {
     if (l.pathname.indexOf(path) === 0) {
       redirectPath = path;
     }
