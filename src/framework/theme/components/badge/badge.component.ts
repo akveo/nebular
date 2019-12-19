@@ -110,7 +110,7 @@ export class NbBadgeComponent {
    * Badge status (adds specific styles):
    * 'basic', 'primary', 'info', 'success', 'warning', 'danger', 'control'
    */
-  @Input() status: NbComponentStatus = 'primary';
+  @Input() status: NbComponentStatus = 'basic';
 
   @HostBinding('class.status-primary')
   get primary(): boolean {

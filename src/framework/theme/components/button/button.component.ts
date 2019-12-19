@@ -26,7 +26,7 @@ export type NbButtonAppearance = 'filled' | 'outline' | 'ghost' | 'hero';
 /**
  * Basic button component.
  *
- * Default button size is `medium` and status color is `primary`:
+ * Default button size is `medium` and status color is `basic`:
  * @stacked-example(Button Showcase, button/button-showcase.component)
  *
  * ```html
@@ -530,9 +530,9 @@ export class NbButtonComponent implements AfterViewInit {
 
   /**
    * Button status (adds specific styles):
-   * `basic`, `primary`, `info`, `success`, `warning`, `danger`, `control`.
+   * `primary`, `info`, `success`, `warning`, `danger`
    */
-  @Input() status: NbComponentStatus = 'primary';
+  @Input() status: NbComponentStatus = 'basic';
 
   /**
    * Button shapes: `rectangle`, `round`, `semi-round`
