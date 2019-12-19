@@ -16,7 +16,12 @@ import {
   Output,
   QueryList,
   ViewChild,
+  AfterContentInit,
+  OnDestroy,
 } from '@angular/core';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+
 import { NbComponentSize } from '../component-size';
 import { NbPosition } from '../cdk/overlay/overlay-position';
 import { NbOptionComponent } from '../option-list/option.component';
@@ -35,7 +40,9 @@ let lastAutocompleteId: number = 0;
   styleUrls: ['./autocomplete.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NbAutocompleteComponent<T> {
+export class NbAutocompleteComponent<T> implements AfterContentInit, OnDestroy {
+
+  protected destroy$: Subject<void> = new Subject<void>();
 
   /**
    * HTML input reference to which autocomplete connected.
@@ -104,6 +111,17 @@ export class NbAutocompleteComponent<T> {
   @ViewChild(NbPortalDirective, { static: false }) portal: NbPortalDirective;
 
   constructor(protected cd: ChangeDetectorRef) {}
+
+  ngAfterContentInit() {
+    this.options.changes
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(() => this.cd.detectChanges());
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
 
   /**
    * Autocomplete knows nothing about host html input element.

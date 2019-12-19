@@ -5,8 +5,9 @@
  */
 
 :host(:hover) {
-
   cursor: pointer;
-
 }
 
+nb-option-list.empty {
+  border: none;
+}
