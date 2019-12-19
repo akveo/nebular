@@ -216,6 +216,37 @@ export class NbAutocompleteDirective<T> implements OnDestroy, AfterViewInit, Con
     this._onTouched();
   }
 
+  show() {
+    if (this.isClosed) {
+      this.attachToOverlay();
+      this.setActiveItem();
+    }
+  }
+
+  hide() {
+    if (this.isOpen) {
+      this.overlayRef.detach();
+      // Need to update class via @HostBinding
+      this.cd.markForCheck();
+    }
+  }
+
+  _onChange: (value: T) => void = () => {};
+
+  _onTouched = () => {};
+
+  writeValue(value: T): void {
+    this.handleInputValueUpdate(value);
+  }
+
+  registerOnChange(fn: (value: any) => {}): void {
+    this._onChange = fn;
+  }
+
+  registerOnTouched(fn: any): void {
+    this._onTouched = fn;
+  }
+
   protected subscribeOnOptionClick() {
     /**
      * If the user changes provided options list in the runtime we have to handle this
@@ -386,41 +417,4 @@ export class NbAutocompleteDirective<T> implements OnDestroy, AfterViewInit, Con
   protected createScrollStrategy(): NbScrollStrategy {
     return this.overlay.scrollStrategies.block();
   }
-
-  show() {
-    if (this.isClosed) {
-      this.attachToOverlay();
-      this.setActiveItem();
-    }
-  }
-
-  hide() {
-    if (this.isOpen) {
-      this.overlayRef.detach();
-      // Need to update class via @HostBinding
-      this.cd.markForCheck();
-    }
-  }
-
-  // Part of ControlValueAccessor.
-  _onChange: (value: T) => void = () => {};
-
-  // Part of ControlValueAccessor.
-  _onTouched = () => {};
-
-  // Part of ControlValueAccessor.
-  writeValue(value: T): void {
-    this.handleInputValueUpdate(value);
-  }
-
-  // Part of ControlValueAccessor.
-  registerOnChange(fn: (value: any) => {}): void {
-    this._onChange = fn;
-  }
-
-  // Part of ControlValueAccessor.
-  registerOnTouched(fn: any): void {
-    this._onTouched = fn;
-  }
-
 }
