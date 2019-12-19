@@ -37,15 +37,6 @@ $theme: (
   button-hero-shadow: none,
   alert-shadow: none,
   accordion-shadow: none,
-
-  select-options-list-border-width: 0.0625rem,
-  select-outline-basic-open-border-color: select-options-list-outline-basic-border-color,
-  select-outline-primary-open-border-color: select-options-list-outline-primary-border-color,
-  select-outline-success-open-border-color: select-options-list-outline-success-border-color,
-  select-outline-info-open-border-color: select-options-list-outline-info-border-color,
-  select-outline-warning-open-border-color: select-options-list-outline-warning-border-color,
-  select-outline-danger-open-border-color: select-options-list-outline-danger-border-color,
-  select-outline-control-open-border-color: select-options-list-outline-control-border-color,
 );
 
 $nb-themes: nb-register-theme($theme, corporate, default);

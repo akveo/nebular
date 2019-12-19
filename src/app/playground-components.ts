@@ -113,6 +113,41 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
     ],
   },
   {
+    path: 'autocomplete',
+    children: [
+      {
+        path: 'autocomplete-showcase.component',
+        link: '/autocomplete/autocomplete-showcase.component',
+        component: 'AutocompleteShowcaseComponent',
+        name: 'Autocomplete Showcase',
+      },
+      {
+        path: 'autocomplete-form.component',
+        link: '/autocomplete/autocomplete-form.component',
+        component: 'AutocompleteFormComponent',
+        name: 'Autocomplete Form',
+      },
+      {
+        path: 'autocomplete-group.component',
+        link: '/autocomplete/autocomplete-group.component',
+        component: 'AutocompleteGroupComponent',
+        name: 'Autocomplete Group',
+      },
+      {
+        path: 'autocomplete-custom-display.component',
+        link: '/autocomplete/autocomplete-custom-display.component',
+        component: 'AutocompleteCustomDisplayComponent',
+        name: 'Autocomplete Custom Display',
+      },
+      {
+        path: 'autocomplete-active-first.component',
+        link: '/autocomplete/autocomplete-active-first.component',
+        component: 'AutocompleteActiveFirstComponent',
+        name: 'Autocomplete Active First',
+      },
+    ],
+  },
+  {
     path: 'badge',
     children: [
       {
