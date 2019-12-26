@@ -656,6 +656,7 @@ $eva-mapping: (
   button-outline-border-style: solid,
   button-outline-border-width: 0.0625rem,
   button-outline-text-transform: uppercase,
+  button-outline-focus-inset-shadow-length: 0 0 0 100vmax,
 
   button-outline-tiny-padding: 0.3125rem 0.625rem,
   button-outline-small-padding: 0.4375rem 0.875rem,
@@ -780,6 +781,7 @@ $eva-mapping: (
   button-ghost-border-style: solid,
   button-ghost-border-width: 0.0625rem,
   button-ghost-text-transform: uppercase,
+  button-ghost-focus-inset-shadow-length: 0 0 0 100vmax,
 
   button-ghost-tiny-padding: 0.3125rem 0.625rem,
   button-ghost-small-padding: 0.4375rem 0.875rem,
@@ -1161,6 +1163,7 @@ $eva-mapping: (
   checkbox-text-line-height: text-subtitle-2-line-height,
   checkbox-text-space: 0.6875rem,
   checkbox-padding: 0,
+  checkbox-focus-inset-shadow-length: 0 0 0 100vmax,
 
   checkbox-basic-text-color: text-basic-color,
   checkbox-basic-background-color: color-basic-transparent-default,

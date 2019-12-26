@@ -53,6 +53,7 @@ import { convertToBoolProperty, emptyStatusWarning } from '../helpers';
  * checkbox-text-line-height:
  * checkbox-text-space:
  * checkbox-padding:
+ * checkbox-focus-inset-shadow-length:
  * checkbox-basic-text-color:
  * checkbox-basic-background-color:
  * checkbox-basic-border-color:

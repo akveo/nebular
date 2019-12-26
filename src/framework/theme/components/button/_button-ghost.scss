@@ -13,7 +13,8 @@
     text-transform: nb-theme(button-ghost-text-transform);
 
     &:focus {
-      @include nb-outline(nb-theme(button-outline-width), nb-theme(button-outline-color), (inset-shadow: true));
+      $inset-shadow: nb-theme(button-ghost-focus-inset-shadow-length);
+      @include nb-outline(nb-theme(button-outline-width), nb-theme(button-outline-color), $inset-shadow);
     }
 
     @each $size in nb-get-sizes() {

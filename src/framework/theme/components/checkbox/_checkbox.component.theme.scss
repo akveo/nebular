@@ -22,7 +22,8 @@
     }
 
     .native-input:focus:not(:checked) + .custom-checkbox {
-      @include nb-outline(nb-theme(checkbox-outline-width), nb-theme(checkbox-outline-color), (inset-shadow: true));
+      $inset-shadow: nb-theme(checkbox-focus-inset-shadow-length);
+      @include nb-outline(nb-theme(checkbox-outline-width), nb-theme(checkbox-outline-color), $inset-shadow);
     }
     .native-input:focus:checked + .custom-checkbox {
       @include nb-outline(nb-theme(checkbox-outline-width), nb-theme(checkbox-outline-color));
