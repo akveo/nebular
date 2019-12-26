@@ -102,14 +102,13 @@ export class NbHoverTriggerStrategy extends NbTriggerStrategyBase {
   show$: Observable<Event> = observableFromEvent<Event>(this.host, 'mouseenter')
     .pipe(
       filter(() => !this.container()),
+      // this `delay & takeUntil & repeat` operators combination is a synonym for `conditional debounce`
+      // meaning that if one event occurs in some time after the initial one we won't react to it
       delay(100),
+      // tslint:disable-next-line:rxjs-no-unsafe-takeuntil
+      takeUntil(observableFromEvent(this.host, 'mouseleave')),
       repeat(),
-      takeUntil(
-        observableMerge(
-          observableFromEvent(this.host, 'mouseleave'),
-          this.destroyed$,
-        ),
-      ),
+      takeUntil(this.destroyed$),
     );
 
   hide$: Observable<Event> = observableFromEvent<Event>(this.host, 'mouseleave')
@@ -133,16 +132,13 @@ export class NbHoverTriggerStrategy extends NbTriggerStrategyBase {
 export class NbHintTriggerStrategy extends NbTriggerStrategyBase {
   show$: Observable<Event> = observableFromEvent<Event>(this.host, 'mouseenter')
     .pipe(
-      delay(100),
       // this `delay & takeUntil & repeat` operators combination is a synonym for `conditional debounce`
       // meaning that if one event occurs in some time after the initial one we won't react to it
+      delay(100),
+      // tslint:disable-next-line:rxjs-no-unsafe-takeuntil
+      takeUntil(observableFromEvent(this.host, 'mouseleave')),
       repeat(),
-      takeUntil(
-        observableMerge(
-          observableFromEvent(this.host, 'mouseleave'),
-          this.destroyed$,
-        ),
-      ),
+      takeUntil(this.destroyed$),
     );
 
   hide$: Observable<Event> = observableFromEvent(this.host, 'mouseleave')
