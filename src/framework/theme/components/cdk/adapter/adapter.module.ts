@@ -17,10 +17,12 @@ export class NbCdkAdapterModule {
         NbViewportRulerAdapter,
         NbOverlayContainerAdapter,
         NbBlockScrollStrategyAdapter,
+        NbScrollDispatcherAdapter,
+        NbScrollStrategyOptions,
         { provide: OverlayContainer, useExisting: NbOverlayContainerAdapter },
         { provide: NbOverlayContainer, useExisting: NbOverlayContainerAdapter },
-        { provide: ScrollDispatcher, useClass: NbScrollDispatcherAdapter },
-        { provide: ScrollStrategyOptions, useClass: NbScrollStrategyOptions },
+        { provide: ScrollDispatcher, useExisting: NbScrollDispatcherAdapter },
+        { provide: ScrollStrategyOptions, useExisting: NbScrollStrategyOptions },
       ],
     };
   }
