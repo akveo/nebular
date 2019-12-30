@@ -11,7 +11,8 @@
     text-transform: nb-theme(button-outline-text-transform);
 
     &:focus {
-      @include nb-outline(nb-theme(button-outline-width), nb-theme(button-outline-color), (inset-shadow: true));
+      $inset-shadow: nb-theme(button-outline-focus-inset-shadow-length);
+      @include nb-outline(nb-theme(button-outline-width), nb-theme(button-outline-color), $inset-shadow);
     }
 
     @each $size in nb-get-sizes() {
