@@ -34,14 +34,14 @@
   }
 }
 
-@mixin nb-outline($outline-width, $outline-color, $options: (inset-shadow: false)) {
+@mixin nb-outline($outline-width, $outline-color, $inset-shadow-length: 0) {
   $outset-shadow: 0 0 0 $outline-width $outline-color;
   box-shadow: $outset-shadow;
 
-  @if (map-get($options, 'inset-shadow')) {
+  @if ($inset-shadow-length != 0) {
     &:not(:hover):not(:active) {
-      box-shadow: $outset-shadow,
-                  inset 0 0 0 100vmax nb-theme(button-outline-color);
+      $inset-shadow: inset $inset-shadow-length $outline-color;
+      box-shadow: $outset-shadow, $inset-shadow;
     }
   }
 }

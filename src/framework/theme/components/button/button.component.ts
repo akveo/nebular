@@ -202,6 +202,7 @@ export type NbButtonAppearance = 'filled' | 'outline' | 'ghost' | 'hero';
  * button-outline-border-style:
  * button-outline-border-width:
  * button-outline-text-transform:
+ * button-outline-focus-inset-shadow-length:
  * button-outline-tiny-padding:
  * button-outline-small-padding:
  * button-outline-medium-padding:
@@ -317,6 +318,7 @@ export type NbButtonAppearance = 'filled' | 'outline' | 'ghost' | 'hero';
  * button-ghost-border-style:
  * button-ghost-border-width:
  * button-ghost-text-transform:
+ * button-ghost-focus-inset-shadow-length:
  * button-ghost-tiny-padding:
  * button-ghost-small-padding:
  * button-ghost-medium-padding:
