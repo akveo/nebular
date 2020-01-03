@@ -50,6 +50,8 @@
   }
 }
 
-:host.full-width .route-tabset {
-  justify-content: space-around;
+:host(.full-width) {
+  .route-tabset {
+    justify-content: space-around;
+  }
 }
