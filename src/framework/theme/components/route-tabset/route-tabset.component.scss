@@ -38,12 +38,14 @@
       nb-icon {
         vertical-align: middle;
       }
-
-      nb-icon + span {
-        @include nb-ltr(margin-left, 0.5rem);
-        @include nb-rtl(margin-right, 0.5rem);
-      }
     }
+  }
+}
+
+:host {
+  .tab-link nb-icon + span {
+    @include nb-ltr(margin-left, 0.5rem);
+    @include nb-rtl(margin-right, 0.5rem);
   }
 }
 
