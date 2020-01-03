@@ -99,6 +99,13 @@ export class NbTooltipComponent implements NbRenderableContainer {
   get show() {
     return true;
   }
+  
+  @HostBinding('style.display')
+  get display() {
+    if (!this.content) {
+      return 'none';
+    }
+  }  
 
   @Input()
   context: { icon?: string | NbIconConfig, status?: NbComponentStatus } = {};
