@@ -1,3 +1,27 @@
+<a name="5.0.0-beta.2"></a>
+# [5.0.0-beta.2](https://github.com/akveo/nebular/compare/v4.6.0...v5.0.0-beta.2) (2020-01-16)
+
+
+### Bug Fixes
+
+* **route tabset:** tab icon margin ([#2154](https://github.com/akveo/nebular/issues/2154)) ([b958a6c](https://github.com/akveo/nebular/commit/b958a6c))
+* **trigger:** prevent stream destroy on mouse leave ([#2141](https://github.com/akveo/nebular/issues/2141)) ([ac073af](https://github.com/akveo/nebular/commit/ac073af))
+* **typography:** concat anchor selector with color class ([#2161](https://github.com/akveo/nebular/issues/2161)) ([38b7302](https://github.com/akveo/nebular/commit/38b7302))
+* provide Nebular scroll services adapters ([#2140](https://github.com/akveo/nebular/issues/2140)) ([ddf1042](https://github.com/akveo/nebular/commit/ddf1042))
+
+
+### Features
+
+* **typography:** add anchor text decoration theme property ([#2169](https://github.com/akveo/nebular/issues/2169)) ([e2bd84a](https://github.com/akveo/nebular/commit/e2bd84a))
+
+
+### Code Refactoring
+
+* **context menu:** extract text alignment to theme property ([#2148](https://github.com/akveo/nebular/issues/2148)) ([011edd1](https://github.com/akveo/nebular/commit/011edd1))
+* move focus inset shadow to theme ([#2143](https://github.com/akveo/nebular/issues/2143)) ([ecafd16](https://github.com/akveo/nebular/commit/ecafd16))
+
+
+
 <a name="5.0.0-beta.1"></a>
 ## 5.0.0-beta.1 (2019-12-19)
 
