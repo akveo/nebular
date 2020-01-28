@@ -188,13 +188,10 @@ export class NbFocusTriggerStrategy extends NbTriggerStrategyBase {
     .pipe(
       filter(() => !this.container()),
       debounceTime(100),
+      // tslint:disable-next-line:rxjs-no-unsafe-takeuntil
+      takeUntil(observableFromEvent(this.host, 'focusout')),
       repeat(),
-      takeUntil(
-        observableMerge(
-          observableFromEvent(this.host, 'focusout'),
-          this.destroyed$,
-        ),
-      ),
+      takeUntil(this.destroyed$),
     );
 
   hide$ = observableMerge(this.focusOut$, this.tabKeyPress$, this.clickOut$)
