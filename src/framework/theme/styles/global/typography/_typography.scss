@@ -126,14 +126,8 @@
     line-height: nb-theme(list-item-line-height);
   }
 
-  .text-basic {
-    color: nb-theme(text-basic-color);
-  }
   .text-alternate {
     color: nb-theme(text-alternate-color);
-  }
-  .text-control {
-    color: nb-theme(text-control-color);
   }
   .text-disabled {
     color: nb-theme(text-disabled-color);
@@ -144,7 +138,7 @@
 
   @each $status in nb-get-statuses() {
     .text-#{$status} {
-      color: nb-theme(color-#{$status}-default);
+      color: nb-theme(text-#{$status}-color);
     }
   }
 }
