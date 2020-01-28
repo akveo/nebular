@@ -54,6 +54,10 @@
     }
   }
 
+  a[nbButton] {
+    text-decoration: none;
+  }
+
   @include button-filled;
   @include button-outline;
   @include button-ghost;
