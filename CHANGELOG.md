@@ -1,3 +1,13 @@
+<a name="5.0.0-beta.4"></a>
+# [5.0.0-beta.4](https://github.com/akveo/nebular/compare/v4.6.0...v5.0.0-beta.4) (2020-01-28)
+
+
+### Bug Fixes
+
+* **typography:** use text theme vars for text color classes ([#2192](https://github.com/akveo/nebular/issues/2192)) ([e4a97cf](https://github.com/akveo/nebular/commit/e4a97cf))
+
+
+
 <a name="5.0.0-beta.3"></a>
 # [5.0.0-beta.3](https://github.com/akveo/nebular/compare/v4.6.0...v5.0.0-beta.3) (2020-01-28)
 
