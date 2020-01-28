@@ -1,3 +1,14 @@
+<a name="5.0.0-beta.3"></a>
+# [5.0.0-beta.3](https://github.com/akveo/nebular/compare/v4.6.0...v5.0.0-beta.3) (2020-01-28)
+
+
+### Bug Fixes
+
+* **button link:** remove text decoration ([#2190](https://github.com/akveo/nebular/issues/2190)) ([576eb7d](https://github.com/akveo/nebular/commit/576eb7d))
+* **focus trigger:** prevent stream destroy on focus out ([#2189](https://github.com/akveo/nebular/issues/2189)) ([953c60f](https://github.com/akveo/nebular/commit/953c60f))
+
+
+
 <a name="5.0.0-beta.2"></a>
 # [5.0.0-beta.2](https://github.com/akveo/nebular/compare/v4.6.0...v5.0.0-beta.2) (2020-01-16)
 
