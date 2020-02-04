@@ -1,3 +1,13 @@
+<a name="5.0.0-beta.5"></a>
+# [5.0.0-beta.5](https://github.com/akveo/nebular/compare/v4.6.0...v5.0.0-beta.5) (2020-02-04)
+
+
+### Bug Fixes
+
+* **menu:** prevent color override in css vars mode ([#2201](https://github.com/akveo/nebular/issues/2201)) ([ee780cf](https://github.com/akveo/nebular/commit/ee780cf))
+
+
+
 <a name="5.0.0-beta.4"></a>
 # [5.0.0-beta.4](https://github.com/akveo/nebular/compare/v4.6.0...v5.0.0-beta.4) (2020-01-28)
 
