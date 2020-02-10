@@ -96,7 +96,7 @@ describe('NbOptionGroupComponent', () => {
     fixture.detectChanges();
 
     const optionGroup = fixture.debugElement.query(By.directive(NbOptionGroupComponent));
-    expect(optionGroup.attributes.disabled).toEqual(null);
+    expect(optionGroup.attributes.disabled).not.toBeDefined();
   });
 
   it('should disable group options if group disabled', () => {
