@@ -200,12 +200,12 @@ export class NbLayoutComponent implements AfterViewInit, OnDestroy {
   }
 
   // TODO remove as of 5.0.0
-  @ViewChild('layoutTopDynamicArea', { read: ViewContainerRef, static: false }) veryTopRef: ViewContainerRef;
+  @ViewChild('layoutTopDynamicArea', { read: ViewContainerRef }) veryTopRef: ViewContainerRef;
 
-  @ViewChild('scrollableContainer', { read: ElementRef, static: false })
+  @ViewChild('scrollableContainer', { read: ElementRef })
   scrollableContainerRef: ElementRef<HTMLElement>;
 
-  @ViewChild('layoutContainer', { read: ElementRef, static: false })
+  @ViewChild('layoutContainer', { read: ElementRef })
   layoutContainerRef: ElementRef<HTMLElement>;
 
   protected afterViewInit$ = new BehaviorSubject(null);

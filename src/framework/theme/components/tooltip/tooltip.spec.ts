@@ -29,8 +29,8 @@ import { NbOverlayConfig } from '../cdk/overlay/mapping';
   `,
 })
 export class NbTooltipDefaultTestComponent {
-  @ViewChild('button', { static: false }) button: ElementRef;
-  @ViewChild(NbTooltipDirective, { static: false }) tooltip: NbTooltipDirective;
+  @ViewChild('button') button: ElementRef;
+  @ViewChild(NbTooltipDirective) tooltip: NbTooltipDirective;
 }
 
 @Component({
@@ -51,8 +51,8 @@ export class NbTooltipDefaultTestComponent {
   `,
 })
 export class NbTooltipBindingsTestComponent {
-  @ViewChild(NbTooltipDirective, { static: false }) tooltip: NbTooltipDirective;
-  @ViewChild('button', { static: false }) button: ElementRef;
+  @ViewChild(NbTooltipDirective) tooltip: NbTooltipDirective;
+  @ViewChild('button') button: ElementRef;
   @Input() content: any = '';
   @Input() status = 'primary';
   @Input() icon = '';
@@ -75,8 +75,8 @@ export class NbTooltipBindingsTestComponent {
   `,
 })
 export class NbTooltipInstanceTestComponent {
-  @ViewChild(NbTooltipDirective, { static: false }) tooltip: NbTooltipDirective;
-  @ViewChild('button', { static: false }) button: ElementRef;
+  @ViewChild(NbTooltipDirective) tooltip: NbTooltipDirective;
+  @ViewChild('button') button: ElementRef;
 }
 
 const dynamicOverlayIsShow$ = new Subject();

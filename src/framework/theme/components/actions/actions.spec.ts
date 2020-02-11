@@ -33,8 +33,8 @@ export class NbActionsTestComponent {
   icon: string;
   link: string;
 
-  @ViewChild(NbActionsComponent, { static: false }) actionsComponent: NbActionsComponent;
-  @ViewChild(NbActionComponent, { static: false }) actionComponent: NbActionComponent;
+  @ViewChild(NbActionsComponent) actionsComponent: NbActionsComponent;
+  @ViewChild(NbActionComponent) actionComponent: NbActionComponent;
 }
 
 describe('NbActionComponent link with icon', () => {

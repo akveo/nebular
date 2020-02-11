@@ -14,7 +14,7 @@ import { NbWindowService } from '@nebular/theme';
 export class TemplateWindowComponent {
 
   // TODO static must be false as of Angular 9.0.0
-  @ViewChild('contentTemplate', { static: false }) contentTemplate: TemplateRef<any>;
+  @ViewChild('contentTemplate') contentTemplate: TemplateRef<any>;
 
   constructor(private windowService: NbWindowService) {}
 
