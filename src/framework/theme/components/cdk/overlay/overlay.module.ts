@@ -27,8 +27,8 @@ import { NbTriggerStrategyBuilderService } from './overlay-trigger';
   ],
 })
 export class NbOverlayModule {
-  static forRoot(): ModuleWithProviders {
-    return <ModuleWithProviders> {
+  static forRoot(): ModuleWithProviders<NbOverlayModule> {
+    return {
       ngModule: NbOverlayModule,
       providers: [
         NbPositionBuilderService,

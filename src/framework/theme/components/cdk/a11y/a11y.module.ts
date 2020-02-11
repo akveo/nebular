@@ -6,8 +6,8 @@ import { NbActiveDescendantKeyManagerFactoryService } from './descendant-key-man
 
 @NgModule({})
 export class NbA11yModule {
-  static forRoot() {
-    return <ModuleWithProviders>{
+  static forRoot(): ModuleWithProviders<NbA11yModule> {
+    return {
       ngModule: NbA11yModule,
       providers: [
         NbFocusTrapFactoryService,

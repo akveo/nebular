@@ -22,8 +22,8 @@ import { NB_TOASTR_CONFIG, NbToastrConfig } from './toastr-config';
   entryComponents: [NbToastrContainerComponent, NbToastComponent],
 })
 export class NbToastrModule {
-  static forRoot(toastrConfig: Partial<NbToastrConfig> = {}): ModuleWithProviders {
-    return <ModuleWithProviders> {
+  static forRoot(toastrConfig: Partial<NbToastrConfig> = {}): ModuleWithProviders<NbToastrModule> {
+    return {
       ngModule: NbToastrModule,
       providers: [
         NbToastrService,
