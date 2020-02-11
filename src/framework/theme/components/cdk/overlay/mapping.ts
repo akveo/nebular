@@ -59,6 +59,7 @@ export class NbTemplatePortal<T = any> extends TemplatePortal<T> {
   }
 }
 
+@Injectable()
 export class NbOverlayContainer extends OverlayContainer {
 }
 
