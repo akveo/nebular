@@ -1,4 +1,4 @@
-import { Component, NgModule } from '@angular/core';
+import { Component, NgModule, Injectable } from '@angular/core';
 import { fakeAsync, TestBed, tick } from '@angular/core/testing';
 
 import { NbOverlayContainerAdapter } from '../cdk/adapter/overlay-container-adapter';
@@ -9,7 +9,7 @@ import { NbDialogModule } from './dialog.module';
 import { NbThemeModule } from '../../theme.module';
 import { NB_DOCUMENT } from '../../theme.options';
 
-
+@Injectable()
 export class NbViewportRulerMockAdapter extends NbViewportRulerAdapter {
   getViewportSize(): Readonly<{ width: number; height: number; }> {
     return { width: 1600, height: 900 };
