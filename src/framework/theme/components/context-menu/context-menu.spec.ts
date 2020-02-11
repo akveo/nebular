@@ -14,7 +14,7 @@ import { NbMenuModule } from '../menu/menu.module';
 import { NbContextMenuDirective } from './context-menu.directive';
 import { NbContextMenuComponent } from './context-menu.component';
 import { NbContextMenuModule } from './context-menu.module';
-import { NbOverlayConfig } from '@nebular/theme/components/cdk/overlay/mapping';
+import { NbOverlayConfig } from '../cdk/overlay/mapping';
 
 @Component({
   selector: 'nb-context-menu-default-test',

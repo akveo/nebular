@@ -2,6 +2,8 @@ import { Component, ElementRef, Input, NgModule, Type, ViewChild } from '@angula
 import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
+import { Subject } from 'rxjs';
+import createSpy = jasmine.createSpy;
 
 import { NbThemeModule } from '../../theme.module';
 import { NbLayoutModule } from '../layout/layout.module';
@@ -14,9 +16,7 @@ import { NbTooltipDirective } from './tooltip.directive';
 import { NbTooltipModule } from './tooltip.module';
 import { NbTooltipComponent } from './tooltip.component';
 import { NbIconLibraries } from '../icon/icon-libraries';
-import { Subject } from 'rxjs';
-import createSpy = jasmine.createSpy;
-import { NbOverlayConfig } from '@nebular/theme/components/cdk/overlay/mapping';
+import { NbOverlayConfig } from '../cdk/overlay/mapping';
 
 @Component({
   selector: 'nb-tooltip-default-test',
