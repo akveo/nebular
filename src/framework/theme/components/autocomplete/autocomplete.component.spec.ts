@@ -140,9 +140,8 @@ describe('Component: NbAutocompleteComponent', () => {
       trigger() { return this },
       host() { return this },
       container() { return this },
-      destroy() {},
       build() {
-        return { show$: showTriggerStub, hide$: hideTriggerStub };
+        return { show$: showTriggerStub, hide$: hideTriggerStub, destroy() {} };
       },
     };
 
