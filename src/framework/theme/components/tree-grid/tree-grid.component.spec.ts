@@ -29,7 +29,7 @@ interface CustomStructure {
   expanded?: boolean;
 }
 
-Component({
+@Component({
   template: '',
 })
 class BaseTreeGridTestComponent {
