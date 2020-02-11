@@ -36,6 +36,7 @@
     "strictInjectionParameters": true,
     "enableResourceInlining": true,
     "skipMetadataEmit": false,
-    "strictTypeChecks": true
+    "strictTypeChecks": true,
+    "enableIvy": false
   }
 }
