@@ -336,7 +336,7 @@ describe('Directive: NbTooltipDirective', () => {
           PopoverTestModule,
         ],
       })
-        .overrideComponent(NbTooltipDirective, {
+        .overrideDirective(NbTooltipDirective, {
           set: {
             providers: [
               { provide: NbDynamicOverlayHandler, useValue: overlayHandler },

@@ -255,7 +255,7 @@ describe('Directive: NbContextMenuDirective', () => {
           ContextMenuTestModule,
         ],
       })
-        .overrideComponent(NbContextMenuDirective, {
+        .overrideDirective(NbContextMenuDirective, {
           set: {
             providers: [
               { provide: NbDynamicOverlayHandler, useValue: overlayHandler },

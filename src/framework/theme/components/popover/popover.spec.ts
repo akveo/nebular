@@ -328,7 +328,7 @@ describe('Directive: NbPopoverDirective', () => {
           PopoverTestModule,
         ],
       })
-        .overrideComponent(NbPopoverDirective, {
+        .overrideDirective(NbPopoverDirective, {
           set: {
             providers: [
               { provide: NbDynamicOverlayHandler, useValue: overlayHandler },
