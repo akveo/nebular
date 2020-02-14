@@ -10,8 +10,9 @@
       ]
     }
   },
-  "include": [
-    "../src/**/*.ts"
+  "files": [
+    "main.ts",
+    "polyfills.ts"
   ],
   "exclude": [
     "test.ts",
