@@ -198,20 +198,16 @@ export class NbRadioGroupComponent implements AfterContentInit, OnDestroy, Contr
 
   protected updateNames() {
     if (this.radios) {
-      this.radios.forEach((radio: NbRadioComponent) => radio.name = this.name);
+      this.radios.forEach((radio: NbRadioComponent) => radio._setName(this.name));
     }
   }
 
   protected updateValues() {
-    if (this.radios && typeof this.value !== 'undefined') {
-      this.radios.forEach((radio: NbRadioComponent) => radio.checked = radio.value === this.value);
-    }
+    this.updateAndMarkForCheckRadios((radio: NbRadioComponent) => radio.checked = radio.value === this.value);
   }
 
   protected updateDisabled() {
-    if (this.radios && typeof this.disabled !== 'undefined') {
-      this.radios.forEach((radio: NbRadioComponent) => radio.disabled = this.disabled);
-    }
+    this.updateAndMarkForCheckRadios((radio: NbRadioComponent) => radio.disabled = this.disabled);
   }
 
   protected subscribeOnRadiosValueChange() {
@@ -265,8 +261,15 @@ export class NbRadioGroupComponent implements AfterContentInit, OnDestroy, Contr
   }
 
   protected updateStatus() {
+    this.updateAndMarkForCheckRadios((radio: NbRadioComponent) => radio.status = this.status);
+  }
+
+  protected updateAndMarkForCheckRadios(updateFn: (NbRadioComponent) => void) {
     if (this.radios) {
-      this.radios.forEach((radio: NbRadioComponent) => radio.status = this.status);
+      this.radios.forEach((radio) => {
+        updateFn(radio);
+        radio._markForCheck();
+      });
     }
   }
 }

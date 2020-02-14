@@ -12,6 +12,9 @@ import {
   HostBinding,
   Input,
   Output,
+  ViewChild,
+  ElementRef,
+  Renderer2,
 } from '@angular/core';
 
 import { convertToBoolProperty, emptyStatusWarning } from '../helpers';
@@ -212,6 +215,7 @@ import { NbComponentStatus } from '../component-status';
   template: `
     <label>
       <input
+        #input
         type="radio"
         class="native-input visually-hidden"
         [name]="name"
@@ -239,7 +243,6 @@ export class NbRadioComponent {
   set name(value: string) {
     if (this._name !== value) {
       this._name = value;
-      this.cd.detectChanges();
     }
   }
   private _name: string;
@@ -252,7 +255,6 @@ export class NbRadioComponent {
     const boolValue = convertToBoolProperty(value);
     if (this._checked !== boolValue) {
       this._checked = boolValue;
-      this.cd.markForCheck();
     }
   }
   private _checked: boolean = false;
@@ -264,7 +266,6 @@ export class NbRadioComponent {
   set value(value: any) {
     if (this._value !== value) {
       this._value = value;
-      this.cd.markForCheck();
     }
   }
   private _value: any;
@@ -277,7 +278,6 @@ export class NbRadioComponent {
     const boolValue = convertToBoolProperty(disabled);
     if (this._disabled !== boolValue) {
       this._disabled = boolValue;
-      this.cd.markForCheck();
     }
   }
   private _disabled: boolean = false;
@@ -294,7 +294,6 @@ export class NbRadioComponent {
 
     if (this._status !== value) {
       this._status = value;
-      this.cd.markForCheck();
     }
   }
   private _status: NbComponentStatus = 'basic';
@@ -303,7 +302,12 @@ export class NbRadioComponent {
 
   @Output() blur: EventEmitter<void> = new EventEmitter();
 
-  constructor(protected cd: ChangeDetectorRef) {}
+  @ViewChild('input', { read: ElementRef }) input: ElementRef<HTMLInputElement>;
+
+  constructor(
+    protected cd: ChangeDetectorRef,
+    protected renderer: Renderer2,
+  ) {}
 
   @HostBinding('class.status-primary')
   get isPrimary(): boolean {
@@ -348,5 +352,32 @@ export class NbRadioComponent {
 
   onClick(event: Event) {
     event.stopPropagation();
+  }
+
+  /*
+   * @docs-private
+   * We use this method when setting radio inputs from radio group component.
+   * Otherwise Angular won't detect changes in radio template as cached last rendered
+   * value didn't updated.
+   **/
+  _markForCheck() {
+    this.cd.markForCheck();
+  }
+
+  /*
+   * @docs-private
+   * Use this method when setting radio name from radio group component.
+   * Using renderer to update input name right off as if
+   * In case option 'name' isn't set on nb-radio component we need to set name
+   * right away, so it won't overlap with options without names from other radio
+   * groups. Otherwise they all would have same name and will be considered as
+   * options from one group so only the last option will stay selected.
+   **/
+  _setName(name: string) {
+    this.name = name;
+
+    if (this.input) {
+      this.renderer.setProperty(this.input.nativeElement, 'name', name);
+    }
   }
 }
