@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { Component, EventEmitter, Output, QueryList, ViewChild, ViewChildren, Injectable } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -13,8 +13,11 @@ import {
   NbAutocompleteComponent,
   NbAutocompleteDirective,
   NbTriggerStrategyBuilderService,
+  NbOverlayService,
+  NbOverlayConfig,
+  NbOverlayRef,
 } from '@nebular/theme';
-import { Subject } from 'rxjs';
+import { Subject, merge } from 'rxjs';
 
 const TEST_GROUPS = [
   {
@@ -42,6 +45,23 @@ const TEST_GROUPS = [
     ],
   },
 ];
+
+@Injectable()
+class OverlayServiceWithManualKeyDownTrigger extends NbOverlayService {
+  private manualKeyDown = new Subject<KeyboardEvent>();
+
+  triggerKeydown(event: KeyboardEvent) {
+    this.manualKeyDown.next(event);
+  }
+
+  create(config?: NbOverlayConfig): NbOverlayRef {
+    const overlayRef = super.create(config);
+    const originalObservable = overlayRef.keydownEvents();
+    overlayRef.keydownEvents = () => merge(originalObservable, this.manualKeyDown);
+
+    return overlayRef;
+  }
+}
 
 @Component({
   selector: 'nb-autocomplete-test',
@@ -157,9 +177,10 @@ describe('Component: NbAutocompleteComponent', () => {
       declarations: [
         NbAutocompleteTestComponent,
       ],
-      providers: [{
-        provide: NbTriggerStrategyBuilderService, useValue: triggerBuilderStub,
-      }],
+      providers: [
+        { provide: NbTriggerStrategyBuilderService, useValue: triggerBuilderStub },
+        { provide: NbOverlayService, useClass: OverlayServiceWithManualKeyDownTrigger },
+      ],
     });
 
     fixture = TestBed.createComponent(NbAutocompleteTestComponent);
@@ -262,10 +283,11 @@ describe('Component: NbAutocompleteComponent', () => {
   it('should make option active when DOWN_ARROW pressed', () => {
     openPanel();
 
-    input.dispatchEvent(new KeyboardEvent('keydown', <any> { keyCode: 40 }));
-    const option = overlayContainer.querySelectorAll('nb-option')[0];
+    const overlayService = TestBed.inject(NbOverlayService) as OverlayServiceWithManualKeyDownTrigger;
+    overlayService.triggerKeydown(new KeyboardEvent('keydown', <any> { keyCode: 40 }))
     fixture.detectChanges();
 
+    const option = overlayContainer.querySelectorAll('nb-option')[0];
     expect(option.classList).toContain('active')
   });
 
@@ -273,8 +295,9 @@ describe('Component: NbAutocompleteComponent', () => {
     openPanel();
     const option = overlayContainer.querySelectorAll('nb-option')[0];
 
-    input.dispatchEvent(new KeyboardEvent('keydown', <any> { keyCode: 40 }));
-    input.dispatchEvent(new KeyboardEvent('keydown', <any> { keyCode: 13 }));
+    const overlayService = TestBed.inject(NbOverlayService) as OverlayServiceWithManualKeyDownTrigger;
+    overlayService.triggerKeydown(new KeyboardEvent('keydown', <any> { keyCode: 40 }));
+    overlayService.triggerKeydown(new KeyboardEvent('keydown', <any> { keyCode: 13 }));
 
     expect(autocompleteDirective.isClosed).toBe(true);
     expect(option.textContent).toContain(input.textContent);
@@ -284,8 +307,10 @@ describe('Component: NbAutocompleteComponent', () => {
   it('should close when ESC pressed', () => {
     openPanel();
 
-    input.dispatchEvent(new KeyboardEvent('keydown', <any> { keyCode: 27 }));
+    const overlayService = TestBed.inject(NbOverlayService) as OverlayServiceWithManualKeyDownTrigger;
+    overlayService.triggerKeydown(new KeyboardEvent('keydown', <any> { keyCode: 27 }));
     fixture.detectChanges();
+
     expect(autocompleteDirective.isClosed).toBe(true);
   });
 
