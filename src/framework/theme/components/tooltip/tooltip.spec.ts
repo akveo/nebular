@@ -193,7 +193,7 @@ describe('Directive: NbTooltipDirective', () => {
       ],
     });
 
-    const iconLibs: NbIconLibraries = TestBed.get(NbIconLibraries);
+    const iconLibs: NbIconLibraries = TestBed.inject(NbIconLibraries);
     iconLibs.registerSvgPack('test', { 'some-icon': '<svg>some-icon</svg>' });
     iconLibs.setDefaultPack('test')
   }));

@@ -52,7 +52,7 @@ describe('NbAdjustableConnectedPositionStrategy', () => {
     overlayHostElement.style.backgroundColor = 'red';
     document.body.appendChild(overlayHostElement);
 
-    const positionBuilderService: NbPositionBuilderService = TestBed.get(NbPositionBuilderService);
+    const positionBuilderService: NbPositionBuilderService = TestBed.inject(NbPositionBuilderService);
     strategy = positionBuilderService.connectedTo({ nativeElement: overlayHostElement });
   });
 
@@ -65,7 +65,7 @@ describe('NbAdjustableConnectedPositionStrategy', () => {
 
     strategy.position(NbPosition.START).adjustment(NbAdjustment.NOOP);
 
-    const overlayService: NbOverlayService = TestBed.get(NbOverlayService);
+    const overlayService: NbOverlayService = TestBed.inject(NbOverlayService);
     const overlayRef = overlayService.create({ positionStrategy: strategy });
     overlayRef.attach(new NbComponentPortal(PortalComponent));
 
@@ -84,7 +84,7 @@ describe('NbAdjustableConnectedPositionStrategy', () => {
 
     strategy.position(NbPosition.END).adjustment(NbAdjustment.NOOP);
 
-    const overlayService: NbOverlayService = TestBed.get(NbOverlayService);
+    const overlayService: NbOverlayService = TestBed.inject(NbOverlayService);
     const overlayRef = overlayService.create({ positionStrategy: strategy });
     overlayRef.attach(new NbComponentPortal(PortalComponent));
 
@@ -103,7 +103,7 @@ describe('NbAdjustableConnectedPositionStrategy', () => {
 
     strategy.position(NbPosition.START).adjustment(NbAdjustment.CLOCKWISE);
 
-    const overlayService: NbOverlayService = TestBed.get(NbOverlayService);
+    const overlayService: NbOverlayService = TestBed.inject(NbOverlayService);
     const overlayRef = overlayService.create({ positionStrategy: strategy });
     overlayRef.attach(new NbComponentPortal(PortalComponent));
 
@@ -128,7 +128,7 @@ describe('NbAdjustableConnectedPositionStrategy', () => {
 
     strategy.position(NbPosition.LEFT).adjustment(NbAdjustment.HORIZONTAL);
 
-    const overlayService: NbOverlayService = TestBed.get(NbOverlayService);
+    const overlayService: NbOverlayService = TestBed.inject(NbOverlayService);
     const overlayRef = overlayService.create({ positionStrategy: strategy });
     overlayRef.attach(new NbComponentPortal(PortalComponent));
 
@@ -143,7 +143,7 @@ describe('NbAdjustableConnectedPositionStrategy', () => {
 
     strategy.position(NbPosition.RIGHT).adjustment(NbAdjustment.HORIZONTAL);
 
-    const overlayService: NbOverlayService = TestBed.get(NbOverlayService);
+    const overlayService: NbOverlayService = TestBed.inject(NbOverlayService);
     const overlayRef = overlayService.create({ positionStrategy: strategy });
     overlayRef.attach(new NbComponentPortal(PortalComponent));
 

@@ -332,8 +332,8 @@ describe('Component: NbSelectComponent', () => {
     });
 
     fixture = TestBed.createComponent(NbSelectTestComponent);
-    overlayContainerService = TestBed.get(NbOverlayContainerAdapter);
-    document = TestBed.get(NB_DOCUMENT);
+    overlayContainerService = TestBed.inject(NbOverlayContainerAdapter);
+    document = TestBed.inject(NB_DOCUMENT);
     select = fixture.debugElement.query(By.directive(NbSelectComponent)).componentInstance;
 
     overlayContainer = document.createElement('div');

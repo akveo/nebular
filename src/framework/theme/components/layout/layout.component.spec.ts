@@ -43,7 +43,7 @@ describe('NbLayoutComponent', () => {
       fixture.detectChanges();
 
       layoutComponent = fixture.debugElement.query(By.directive(NbLayoutComponent)).componentInstance;
-      scrollService = TestBed.get(NbLayoutScrollService);
+      scrollService = TestBed.inject(NbLayoutScrollService);
     });
 
     it('should hide overflow when scroll blocked', fakeAsync(() => {
@@ -66,7 +66,7 @@ describe('NbLayoutComponent', () => {
     // }));
     //
     // it('should add left padding to layout container in RTL mode when blocking scroll', fakeAsync(() => {
-    //   const layoutDirectionService: NbLayoutDirectionService = TestBed.get(NbLayoutDirectionService);
+    //   const layoutDirectionService: NbLayoutDirectionService = TestBed.inject(NbLayoutDirectionService);
     //   layoutDirectionService.setDirection(NbLayoutDirection.RTL);
     //   flush();
     //   fixture.detectChanges();
@@ -117,7 +117,7 @@ describe('NbLayoutComponent', () => {
     }));
 
     it('should restore previous padding right value when enabling scroll in RTL mode', fakeAsync(() => {
-      const layoutDirectionService: NbLayoutDirectionService = TestBed.get(NbLayoutDirectionService);
+      const layoutDirectionService: NbLayoutDirectionService = TestBed.inject(NbLayoutDirectionService);
       layoutDirectionService.setDirection(NbLayoutDirection.RTL);
       flush();
       fixture.detectChanges();

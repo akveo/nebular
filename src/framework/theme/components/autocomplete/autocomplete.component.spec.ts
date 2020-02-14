@@ -166,9 +166,9 @@ describe('Component: NbAutocompleteComponent', () => {
     fixture.detectChanges();
     input = fixture.debugElement.query(By.css('input')).nativeElement;
     autocompleteDirective = fixture.componentInstance.autocompleteDirective;
-    document = TestBed.get(NB_DOCUMENT);
+    document = TestBed.inject(NB_DOCUMENT);
 
-    overlayContainerService = TestBed.get(NbOverlayContainerAdapter);
+    overlayContainerService = TestBed.inject(NbOverlayContainerAdapter);
     overlayContainer = document.createElement('div');
     overlayContainerService.setContainer(overlayContainer);
 

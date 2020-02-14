@@ -72,7 +72,7 @@ describe('nb-datepicker', () => {
     });
 
     fixture = TestBed.createComponent(NbDatepickerTestComponent);
-    appRef = TestBed.get(ApplicationRef);
+    appRef = TestBed.inject(ApplicationRef);
 
     fixture.detectChanges();
   });
@@ -202,7 +202,7 @@ describe('nb-rangepicker', () => {
     });
 
     fixture = TestBed.createComponent(NbRangepickerTestComponent);
-    appRef = TestBed.get(ApplicationRef);
+    appRef = TestBed.inject(ApplicationRef);
 
     fixture.detectChanges();
   });

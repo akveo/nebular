@@ -26,7 +26,7 @@ describe('Component: NbCalendarDayCell', () => {
     fixture = TestBed.createComponent<NbCalendarDayCellComponent<Date>>(NbCalendarDayCellComponent);
     component = fixture.componentInstance;
     componentEl = fixture.nativeElement;
-    dateService = TestBed.get(NbNativeDateService);
+    dateService = TestBed.inject(NbNativeDateService);
   });
 
   it('should contain cell class', () => {

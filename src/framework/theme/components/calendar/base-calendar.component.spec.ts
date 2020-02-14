@@ -48,7 +48,7 @@ describe('NbBaseCalendarComponent', () => {
 
     it('should navigate to previous years range in year view mode', () => {
       const initialDate = new Date(2018, 0, 1);
-      const yearModelService: NbCalendarYearModelService<Date> = TestBed.get(NbCalendarYearModelService);
+      const yearModelService: NbCalendarYearModelService<Date> = TestBed.inject(NbCalendarYearModelService);
       const expectedDate = initialDate.getFullYear() - yearModelService.getYearsInView();
 
       calendarComponent.activeViewMode = NbCalendarViewMode.YEAR;
@@ -81,7 +81,7 @@ describe('NbBaseCalendarComponent', () => {
 
     it('should navigate to next years range in year view mode', () => {
       const initialDate = new Date(2018, 0, 1);
-      const yearModelService: NbCalendarYearModelService<Date> = TestBed.get(NbCalendarYearModelService);
+      const yearModelService: NbCalendarYearModelService<Date> = TestBed.inject(NbCalendarYearModelService);
       const expectedDate = initialDate.getFullYear() + yearModelService.getYearsInView();
 
       calendarComponent.activeViewMode = NbCalendarViewMode.YEAR;

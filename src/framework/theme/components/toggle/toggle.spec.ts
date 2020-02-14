@@ -84,11 +84,11 @@ describe('Component: NbToggle', () => {
   describe('state animation', () => {
 
     beforeEach(() => {
-      TestBed.get(NbLayoutDirectionService).setDirection(NbLayoutDirection.LTR);
+      TestBed.inject(NbLayoutDirectionService).setDirection(NbLayoutDirection.LTR);
     });
 
     afterAll(() => {
-      TestBed.get(NbLayoutDirectionService).setDirection(NbLayoutDirection.LTR);
+      TestBed.inject(NbLayoutDirectionService).setDirection(NbLayoutDirection.LTR);
     });
 
     it(`should has 'left' position when unchecked in LTR`, () => {
@@ -101,13 +101,13 @@ describe('Component: NbToggle', () => {
     });
 
     it(`should has 'right' position when unchecked in RTL`, () => {
-      const directionService: NbLayoutDirectionService = TestBed.get(NbLayoutDirectionService);
+      const directionService: NbLayoutDirectionService = TestBed.inject(NbLayoutDirectionService);
       directionService.setDirection(NbLayoutDirection.RTL);
       expect(toggle.checkState()).toEqual('right');
     });
 
     it(`should has 'left' position when checked in RTL`, () => {
-      const directionService: NbLayoutDirectionService = TestBed.get(NbLayoutDirectionService);
+      const directionService: NbLayoutDirectionService = TestBed.inject(NbLayoutDirectionService);
       directionService.setDirection(NbLayoutDirection.RTL);
       toggle.checked = true;
       expect(toggle.checkState()).toEqual('left');

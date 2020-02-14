@@ -47,10 +47,10 @@ describe('dialog-service', () => {
       providers: [{ provide: NbViewportRulerAdapter, useClass: NbViewportRulerMockAdapter }],
     });
 
-    dialog = TestBed.get(NbDialogService);
-    overlayContainerService = TestBed.get(NbOverlayContainerAdapter);
-    document = TestBed.get(NB_DOCUMENT);
-    overlayService = TestBed.get(NbOverlayService);
+    dialog = TestBed.inject(NbDialogService);
+    overlayContainerService = TestBed.inject(NbOverlayContainerAdapter);
+    document = TestBed.inject(NB_DOCUMENT);
+    overlayService = TestBed.inject(NbOverlayService);
   });
 
   beforeEach(() => {
