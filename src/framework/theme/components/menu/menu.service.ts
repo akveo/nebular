@@ -102,6 +102,9 @@ export class NbMenuItem {
   data?: any;
   fragment?: string;
 
+  /**Menu Item Click Handler */
+  onMenuItemClicked?:Function;
+
   /**
    * @returns item parents in top-down order
    */
