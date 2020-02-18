@@ -212,3 +212,5 @@ export * from './components/icon/icon-pack';
 export * from './components/icon/icon-libraries';
 export * from './components/toggle/toggle.module';
 export * from './components/toggle/toggle.component';
+export * from './components/form-field/form-field.module';
+export * from './components/form-field/form-field.component';

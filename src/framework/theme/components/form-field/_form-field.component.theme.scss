@@ -1,0 +1,56 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
+@mixin nb-form-field-theme() {
+  .nb-form-field-action {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+    @include nb-component-animation(color);
+  }
+
+  @each $status in nb-get-statuses() {
+    .nb-form-field-action-#{$status} {
+      color: nb-theme(form-field-action-#{$status}-text-color);
+
+      &-focus {
+        color: nb-theme(form-field-action-focus-#{$status}-text-color);
+      }
+    }
+  }
+
+  @each $size in nb-get-sizes() {
+    $action-height: nb-theme(form-field-action-#{$size}-height);
+    $action-width: nb-theme(form-field-action-#{$size}-width);
+
+    .nb-form-field-action-#{$size} {
+      &-start {
+        height: $action-height;
+        width: $action-width;
+        @include nb-ltr(margin-right, calc(#{$action-width} * -1));
+        @include nb-rtl(margin-left, calc(#{$action-width} * -1));
+      }
+      &-end {
+        height: $action-height;
+        width: $action-width;
+        @include nb-ltr(margin-left, calc(#{$action-width} * -1));
+        @include nb-rtl(margin-right, calc(#{$action-width} * -1));
+      }
+    }
+
+    .nb-form-field-control-action-start-#{$size} {
+      @include nb-ltr(padding-left, $action-width);
+      @include nb-rtl(padding-right, $action-width);
+    }
+
+    .nb-form-field-control-action-end-#{$size} {
+      @include nb-ltr(padding-right, $action-width);
+      @include nb-rtl(padding-left, $action-width);
+
+    }
+  }
+}

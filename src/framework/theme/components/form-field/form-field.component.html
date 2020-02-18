@@ -1,0 +1,13 @@
+<div *ngIf="startAction.length"
+     class="nb-form-field-action nb-form-field-action-{{getFormControlSize()}}-start"
+     [ngClass]="getFormControlStatusClass()">
+  <ng-content select="[nbStartAction]"></ng-content>
+</div>
+
+<ng-content></ng-content>
+
+<div *ngIf="endAction.length"
+     class="nb-form-field-action nb-form-field-action-{{getFormControlSize()}}-end"
+     [ngClass]="getFormControlStatusClass()">
+  <ng-content select="[nbEndAction]"></ng-content>
+</div>

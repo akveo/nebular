@@ -1406,6 +1406,17 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
     ],
   },
   {
+    path: 'form-field',
+    children: [
+      {
+        path: 'form-field-showcase.component',
+        link: '/form-field/form-field-showcase.component',
+        component: 'FormFieldShowcaseComponent',
+        name: 'Form Field Showcase',
+      },
+    ],
+  },
+  {
     path: 'context-menu',
     children: [
       {
