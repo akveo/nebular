@@ -37,6 +37,10 @@ export class NbChatMessageTextComponent {
    */
   @Input() date: Date;
 
+  /**
+   * Message send date format, default 'shortTime'
+   * @type {string}
+   */
   @Input() dateFormat: string = 'shortTime';
 
 }
