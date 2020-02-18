@@ -56,7 +56,8 @@ export class NgdStructureService {
       }
 
       if (item.block === 'markdown') {
-        item.children = this.textService.mdToSectionsHTML(require(`raw-loader!../../../articles/${item.source}`));
+        const article = require(`raw-loader!../../../articles/${item.source}`).default;
+        item.children = this.textService.mdToSectionsHTML(article);
       }
 
       if (item.children) {
