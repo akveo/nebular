@@ -8,7 +8,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
       <h1>Nebular: Customizable UI Kit, Auth&nbsp;&&nbsp;Security</h1>
       <div class="btns-wrapper">
         <a class="btn get-started" routerLink="docs">Get Started</a>
-        <a class="btn" href="http://akveo.com/ngx-admin?utm_source=nebular_documentation&utm_medium=demo_button"
+        <a class="btn" href="https://hubs.ly/H0n4Dr00"
            target="_blank">Demo</a>
       </div>
       <div class="hero-features">
