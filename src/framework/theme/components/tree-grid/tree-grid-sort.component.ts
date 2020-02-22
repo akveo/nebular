@@ -119,7 +119,6 @@ export class NbSortIconComponent {
     <nb-sort-icon *ngIf="!sortIcon; else customIcon" [direction]="direction"></nb-sort-icon>
     <ng-template #customIcon [ngTemplateOutlet]="sortIcon" [ngTemplateOutletContext]="getIconContext()"></ng-template>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NbSortHeaderComponent {
 

@@ -131,7 +131,6 @@ import { NbColumnsService } from './tree-grid-columns.service';
   selector: 'table[nbTreeGrid]',
   template: NB_TABLE_TEMPLATE,
   styleUrls: ['./tree-grid.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
     { provide: NB_TREE_GRID, useExisting: NbTreeGridComponent },
     NbColumnsService,
