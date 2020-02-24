@@ -1,6 +1,6 @@
 {
   "name": "@nebular/security",
-  "version": "4.6.0",
+  "version": "5.0.0-beta.5",
   "description": "@nebular/security",
   "author": "akveo",
   "license": "MIT",
@@ -26,10 +26,10 @@
     "nebular"
   ],
   "peerDependencies": {
-    "@angular/common": "^8.0.0",
-    "@angular/core": "^8.0.0",
-    "@angular/router": "^8.0.0",
-    "rxjs": "^6.5.1"
+    "@angular/common": "^9.0.0",
+    "@angular/core": "^9.0.0",
+    "@angular/router": "^9.0.0",
+    "rxjs": "^6.5.4"
   },
   "sideEffects": false
 }
