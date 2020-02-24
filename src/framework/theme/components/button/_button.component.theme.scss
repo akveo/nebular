@@ -46,6 +46,12 @@
           @include nb-ltr(margin-left, $icon-offset);
           @include nb-rtl(margin-right, $icon-offset);
         }
+
+        @each $appearance in ('filled', 'outline', 'ghost', 'hero') {
+          &.icon-start.icon-end.appearance-#{$appearance} {
+            padding: nb-theme(icon-button-#{$appearance}-#{$size}-padding);
+          }
+        }
       }
     }
 
