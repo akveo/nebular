@@ -367,7 +367,6 @@ export class NbRadioComponent {
   /*
    * @docs-private
    * Use this method when setting radio name from radio group component.
-   * Using renderer to update input name right off as if
    * In case option 'name' isn't set on nb-radio component we need to set name
    * right away, so it won't overlap with options without names from other radio
    * groups. Otherwise they all would have same name and will be considered as
