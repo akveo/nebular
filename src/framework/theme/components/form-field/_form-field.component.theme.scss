@@ -5,52 +5,58 @@
  */
 
 @mixin nb-form-field-theme() {
-  .nb-form-field-action {
+  .nb-form-field-addon {
     display: flex;
     justify-content: center;
     align-items: center;
     z-index: 1;
     @include nb-component-animation(color);
+
+    &-disabled {
+      color: nb-theme(form-field-addon-disabled-text-color);
+    }
   }
 
   @each $status in nb-get-statuses() {
-    .nb-form-field-action-#{$status} {
-      color: nb-theme(form-field-action-#{$status}-text-color);
+    .nb-form-field-addon-#{$status} {
+      color: nb-theme(form-field-addon-#{$status}-text-color);
 
-      &-focus {
-        color: nb-theme(form-field-action-focus-#{$status}-text-color);
+      &-highlight {
+        color: nb-theme(form-field-addon-#{$status}-highlight-text-color);
       }
     }
   }
 
   @each $size in nb-get-sizes() {
-    $action-height: nb-theme(form-field-action-#{$size}-height);
-    $action-width: nb-theme(form-field-action-#{$size}-width);
+    $addon-height: nb-theme(form-field-addon-#{$size}-height);
+    $addon-width: nb-theme(form-field-addon-#{$size}-width);
 
-    .nb-form-field-action-#{$size} {
-      &-start {
-        height: $action-height;
-        width: $action-width;
-        @include nb-ltr(margin-right, calc(#{$action-width} * -1));
-        @include nb-rtl(margin-left, calc(#{$action-width} * -1));
-      }
-      &-end {
-        height: $action-height;
-        width: $action-width;
-        @include nb-ltr(margin-left, calc(#{$action-width} * -1));
-        @include nb-rtl(margin-right, calc(#{$action-width} * -1));
-      }
+    .nb-form-field-prefix-#{$size},
+    .nb-form-field-suffix-#{$size} {
+      height: $addon-height;
+      width: $addon-width;
+      font-size: nb-theme(form-field-addon-#{$size}-font-size);
+      line-height: nb-theme(form-field-addon-#{$size}-line-height);
     }
 
-    .nb-form-field-control-action-start-#{$size} {
-      @include nb-ltr(padding-left, $action-width);
-      @include nb-rtl(padding-right, $action-width);
+    .nb-form-field-prefix-#{$size} {
+      @include nb-ltr(margin-right, calc(#{$addon-width} * -1));
+      @include nb-rtl(margin-left, calc(#{$addon-width} * -1));
     }
 
-    .nb-form-field-control-action-end-#{$size} {
-      @include nb-ltr(padding-right, $action-width);
-      @include nb-rtl(padding-left, $action-width);
+    .nb-form-field-suffix-#{$size} {
+      @include nb-ltr(margin-left, calc(#{$addon-width} * -1));
+      @include nb-rtl(margin-right, calc(#{$addon-width} * -1));
+    }
 
+    .nb-form-field-control-prefix-#{$size} {
+      @include nb-ltr(padding-left, $addon-width);
+      @include nb-rtl(padding-right, $addon-width);
+    }
+
+    .nb-form-field-control-suffix-#{$size} {
+      @include nb-ltr(padding-right, $addon-width);
+      @include nb-rtl(padding-left, $addon-width);
     }
   }
 }

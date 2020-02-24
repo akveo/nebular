@@ -214,3 +214,5 @@ export * from './components/toggle/toggle.module';
 export * from './components/toggle/toggle.component';
 export * from './components/form-field/form-field.module';
 export * from './components/form-field/form-field.component';
+export * from './components/form-field/prefix.directive';
+export * from './components/form-field/suffix.directive';

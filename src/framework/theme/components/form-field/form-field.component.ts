@@ -15,17 +15,25 @@ import {
   ContentChildren,
   QueryList,
   AfterContentInit,
+  OnDestroy,
 } from '@angular/core';
+import { merge, Subject, fromEvent, Observable, BehaviorSubject } from 'rxjs';
+import { takeUntil, switchMap, tap, distinctUntilChanged, map } from 'rxjs/operators';
 
-import { NbStartActionDirective } from './start-action.directive';
-import { NbEndActionDirective } from './end-action.directive';
+import { NbPrefixDirective } from './prefix.directive';
+import { NbSuffixDirective } from './suffix.directive';
 import { NbInputDirective } from '../input/input.directive';
 import { NbComponentSize } from '../component-size';
-import { merge, Subject, fromEvent } from 'rxjs';
-import { takeUntil, switchMap, tap } from 'rxjs/operators';
 import { NbComponentStatus } from '../component-status';
 
-export type NbFormControlActionPosition = 'start' | 'end';
+export type NbFormControlAddon = 'prefix' | 'suffix';
+
+export interface NbFormControlState {
+  status: NbComponentStatus;
+  size: NbComponentSize;
+  focused: boolean;
+  disabled: boolean;
+}
 
 function throwFormControlElementNotFound() {
   throw new Error(`NbFormFieldComponent must contain [nbInput]`)
@@ -36,30 +44,31 @@ function throwFormControlElementNotFound() {
  *
  * @styles
  *
- * form-field-basic-icon-color:
- * form-field-basic-disabled-icon-color:
- * form-field-primary-icon-color:
- * form-field-primary-disabled-icon-color:
- * form-field-success-icon-color:
- * form-field-success-disabled-icon-color:
- * form-field-info-icon-color:
- * form-field-info-disabled-icon-color:
- * form-field-warning-icon-color:
- * form-field-warning-disabled-icon-color:
- * form-field-danger-icon-color:
- * form-field-danger-disabled-icon-color:
- * form-field-control-icon-color:
- * form-field-control-disabled-icon-color:
- * form-field-tiny-icon-size:
- * form-field-tiny-icon-margin:
- * form-field-small-icon-size:
- * form-field-small-icon-margin:
- * form-field-medium-icon-size:
- * form-field-medium-icon-margin:
- * form-field-large-icon-size:
- * form-field-large-icon-margin:
- * form-field-giant-icon-size:
- * form-field-giant-icon-margin:
+ * form-field-addon-basic-text-color:
+ * form-field-addon-basic-highlight-text-color:
+ * form-field-addon-primary-text-color:
+ * form-field-addon-primary-highlight-text-color:
+ * form-field-addon-success-text-color:
+ * form-field-addon-success-highlight-text-color:
+ * form-field-addon-info-text-color:
+ * form-field-addon-info-highlight-text-color:
+ * form-field-addon-warning-text-color:
+ * form-field-addon-warning-highlight-text-color:
+ * form-field-addon-danger-text-color:
+ * form-field-addon-danger-highlight-text-color:
+ * form-field-addon-control-text-color:
+ * form-field-addon-control-highlight-text-color:
+ * form-field-addon-disabled-text-color:
+ * form-field-addon-tiny-height:
+ * form-field-addon-tiny-width:
+ * form-field-addon-small-height:
+ * form-field-addon-small-width:
+ * form-field-addon-medium-height:
+ * form-field-addon-medium-width:
+ * form-field-addon-large-height:
+ * form-field-addon-large-width:
+ * form-field-addon-giant-height:
+ * form-field-addon-giant-width:
  **/
 @Component({
   selector: 'nb-form-field',
@@ -67,17 +76,24 @@ function throwFormControlElementNotFound() {
   templateUrl: './form-field.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NbFormFieldComponent implements AfterContentChecked, AfterContentInit {
+export class NbFormFieldComponent implements AfterContentChecked, AfterContentInit, OnDestroy {
 
   protected readonly destroy$ = new Subject<void>();
-  protected previousSize: NbComponentSize | undefined;
-  protected formControlFocused = false;
 
-  @ContentChildren(NbStartActionDirective, { descendants: true }) startAction: QueryList<NbStartActionDirective>;
-  @ContentChildren(NbEndActionDirective, { descendants: true }) endAction: QueryList<NbEndActionDirective>;
+  protected formControlState$ = new BehaviorSubject<NbFormControlState>({
+    status: 'basic',
+    size: 'medium',
+    focused: false,
+    disabled: false,
+  });
+  prefixClasses$: Observable<string[]> = this.getAddonClassesObservable('prefix');
+  suffixClasses$: Observable<string[]> = this.getAddonClassesObservable('suffix');
 
-  @ContentChild(NbInputDirective, { static: false }) formControl;
-  @ContentChild(NbInputDirective, { static: false, read: ElementRef }) formControlElement: ElementRef<HTMLElement>;
+  @ContentChildren(NbPrefixDirective, { descendants: true }) prefix: QueryList<NbPrefixDirective>;
+  @ContentChildren(NbSuffixDirective, { descendants: true }) suffix: QueryList<NbSuffixDirective>;
+
+  @ContentChild(NbInputDirective, { static: false }) formControl: NbInputDirective;
+  @ContentChild(NbInputDirective, { static: false, read: ElementRef }) formControlElement: ElementRef<HTMLInputElement>;
 
   constructor(
     protected cd: ChangeDetectorRef,
@@ -90,73 +106,87 @@ export class NbFormFieldComponent implements AfterContentChecked, AfterContentIn
       throwFormControlElementNotFound();
     }
 
-    this.updateActionClasses();
+    this.checkFormControlState();
   }
 
   ngAfterContentInit() {
-    const controlEl = this.formControlElement.nativeElement;
-    fromEvent(controlEl, 'focusin')
+    this.subscribeToFormControlFocusChange();
+    this.subscribeToAddonChange();
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next();
+  }
+
+  protected subscribeToFormControlFocusChange() {
+    const formControlEl = this.formControlElement.nativeElement;
+    fromEvent(formControlEl, 'focusin')
       .pipe(
-        tap(() => {
-          this.formControlFocused = true;
-          this.cd.markForCheck();
-        }),
-        switchMap(() => fromEvent(controlEl, 'focusout')),
-        tap(() => this.cd.markForCheck()),
+        tap(() => this.updateFormControlState({ focused: true })),
+        switchMap(() => fromEvent(formControlEl, 'focusout')),
         takeUntil(this.destroy$),
       )
-      .subscribe(() => {
-        this.formControlFocused = false;
-        this.cd.markForCheck();
-      });
+      .subscribe(() => this.updateFormControlState({ focused: false }));
+  }
 
-    merge(this.startAction.changes, this.endAction.changes)
+  protected subscribeToAddonChange() {
+    merge(this.prefix.changes, this.suffix.changes)
       .pipe(takeUntil(this.destroy$))
       .subscribe(() => this.cd.markForCheck());
   }
 
-  getFormControlSize(): NbComponentSize | undefined {
-    if (this.formControl.fieldSize) {
-      return this.formControl.fieldSize;
-    }
-  }
-
-  getFormControlStatusClass(): string {
-    if (this.formControlFocused) {
-      return this.getFormFieldActionStatusClass(this.formControl.status, this.formControlFocused);
-    }
-    return this.getFormFieldActionStatusClass(this.formControl.status, this.formControlFocused);
-  }
-
-  protected updateActionClasses() {
+  protected checkFormControlState() {
     const formControlEl: HTMLElement = this.formControlElement.nativeElement;
+    const prevSize = this.formControlState$.value.size;
+    const size = this.formControl.fieldSize;
 
-    this.renderer.removeClass(formControlEl, this.getFormFieldControlActionClass('start', this.previousSize));
-    this.renderer.removeClass(formControlEl, this.getFormFieldControlActionClass('end', this.previousSize));
+    this.renderer.removeClass(formControlEl, this.getAddonSizeClass('prefix', prevSize));
+    this.renderer.removeClass(formControlEl, this.getAddonSizeClass('suffix', prevSize));
 
-    const currentSize = this.getFormControlSize();
-    if (!currentSize) {
-      return;
+    if (this.prefix.length) {
+      this.renderer.addClass(formControlEl, this.getAddonSizeClass('prefix', size));
+    }
+    if (this.suffix.length) {
+      this.renderer.addClass(formControlEl, this.getAddonSizeClass('suffix', size));
     }
 
-    this.previousSize = currentSize;
-
-    if (this.startAction.length) {
-      this.renderer.addClass(formControlEl, this.getFormFieldControlActionClass('start', currentSize));
-    }
-    if (this.endAction.length) {
-      this.renderer.addClass(formControlEl, this.getFormFieldControlActionClass('end', currentSize));
-    }
+    this.updateFormControlState({
+      size: this.formControl.fieldSize,
+      status: this.formControl.status,
+      disabled: this.formControlElement.nativeElement.disabled,
+    });
   }
 
-  protected getFormFieldControlActionClass(actionPosition: NbFormControlActionPosition, size: NbComponentSize): string {
-    return `nb-form-field-control-action-${actionPosition}-${size}`;
+  protected updateFormControlState(updatedState: Partial<NbFormControlState>) {
+    this.formControlState$.next({ ...this.formControlState$.value, ...updatedState });
   }
 
-  protected getFormFieldActionStatusClass(status: NbComponentStatus, focused: boolean): string {
-    if (focused) {
-      return `nb-form-field-action-${status}-focus`;
+  protected getAddonSizeClass(addon: NbFormControlAddon, size: NbComponentSize): string {
+    return `nb-form-field-control-${addon}-${size}`;
+  }
+
+  protected getAddonClassesObservable(addon: NbFormControlAddon): Observable<string[]> {
+    return this.formControlState$
+      .pipe(
+        distinctUntilChanged((x, y) => x.status === y.status && x.disabled === y.disabled && x.focused === y.focused),
+        map((state: NbFormControlState) => this.getAddonClasses(addon, state)),
+      );
+  }
+
+  protected getAddonClasses(addon: NbFormControlAddon, state: NbFormControlState): string[] {
+    const classes = [
+      'nb-form-field-addon',
+      `nb-form-field-${addon}-${state.size}`,
+    ];
+
+    if (state.disabled) {
+      classes.push(`nb-form-field-addon-disabled`);
+    } else if (state.focused) {
+      classes.push(`nb-form-field-addon-${state.status}-highlight`);
+    } else {
+      classes.push(`nb-form-field-addon-${state.status}`);
     }
-    return `nb-form-field-action-${status}`;
+
+    return classes;
   }
 }

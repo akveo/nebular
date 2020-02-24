@@ -1,13 +1,9 @@
-<div *ngIf="startAction.length"
-     class="nb-form-field-action nb-form-field-action-{{getFormControlSize()}}-start"
-     [ngClass]="getFormControlStatusClass()">
-  <ng-content select="[nbStartAction]"></ng-content>
+<div *ngIf="prefix.length" [ngClass]="prefixClasses$ | async">
+  <ng-content select="[nbPrefix]"></ng-content>
 </div>
 
-<ng-content></ng-content>
+<ng-content select="[nbInput]"></ng-content>
 
-<div *ngIf="endAction.length"
-     class="nb-form-field-action nb-form-field-action-{{getFormControlSize()}}-end"
-     [ngClass]="getFormControlStatusClass()">
-  <ng-content select="[nbEndAction]"></ng-content>
+<div *ngIf="suffix.length" [ngClass]="suffixClasses$ | async">
+  <ng-content select="[nbSuffix]"></ng-content>
 </div>

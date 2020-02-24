@@ -8,13 +8,13 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { NbFormFieldComponent } from './form-field.component';
-import { NbStartActionDirective } from './start-action.directive';
-import { NbEndActionDirective } from './end-action.directive';
+import { NbPrefixDirective } from './prefix.directive';
+import { NbSuffixDirective } from './suffix.directive';
 
 const COMPONENTS = [
   NbFormFieldComponent,
-  NbStartActionDirective,
-  NbEndActionDirective,
+  NbPrefixDirective,
+  NbSuffixDirective,
 ];
 
 @NgModule({
