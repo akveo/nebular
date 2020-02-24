@@ -90,6 +90,7 @@
     "@angular/compiler": "^9.0.2",
     "@angular/core": "^9.0.2",
     "@angular/forms": "^9.0.2",
+    "@angular/localize": "^9.0.2",
     "@angular/platform-browser": "^9.0.2",
     "@angular/platform-browser-dynamic": "^9.0.2",
     "@angular/router": "^9.0.2",
