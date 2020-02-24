@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Directive, Input } from '@angular/core';
+import { Component, Directive, Input } from '@angular/core';
 import {
   CdkFooterRow,
   CdkFooterRowDef,
