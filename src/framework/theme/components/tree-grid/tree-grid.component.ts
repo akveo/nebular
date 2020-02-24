@@ -236,9 +236,7 @@ export class NbTreeGridComponent<T> extends NbTable<NbTreeGridPresentationNode<T
   }
 
   getCellLevel(cell: NbTreeGridCellDirective, columnName: string): number {
-    const isFirstColumn = this.isFirstColumn(columnName);
-
-    if (isFirstColumn) {
+    if (this.isFirstColumn(columnName)) {
       return this.getCellContext(cell).$implicit.level;
     }
     return NB_DEFAULT_ROW_LEVEL;
