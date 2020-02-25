@@ -188,7 +188,7 @@ export class NbFormFieldComponent implements AfterContentChecked, AfterContentIn
   protected getAddonClassesObservable(addon: NbFormControlAddon): Observable<string[]> {
     return this.formControlState$
       .pipe(
-        distinctUntilChanged((x, y) => x.status === y.status && x.disabled === y.disabled && x.focused === y.focused),
+        distinctUntilChanged((oldState, state) => this.isStatesEqual(oldState, state)),
         map((state: NbFormControlState) => this.getAddonClasses(addon, state)),
       );
   }
@@ -208,5 +208,12 @@ export class NbFormFieldComponent implements AfterContentChecked, AfterContentIn
     }
 
     return classes;
+  }
+
+  protected isStatesEqual(oldState: NbFormControlState, state: NbFormControlState): boolean {
+    return oldState.status === state.status &&
+           oldState.disabled === state.disabled &&
+           oldState.focused === state.focused &&
+           oldState.size === state.size;
   }
 }
