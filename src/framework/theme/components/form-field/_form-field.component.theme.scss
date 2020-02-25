@@ -37,6 +37,7 @@
       width: $addon-width;
       font-size: nb-theme(form-field-addon-#{$size}-font-size);
       line-height: nb-theme(form-field-addon-#{$size}-line-height);
+      font-weight: nb-theme(form-field-addon-#{$size}-font-weight);
 
       nb-icon {
         font-size: nb-theme(form-field-addon-#{$size}-icon-size);
