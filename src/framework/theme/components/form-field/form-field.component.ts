@@ -61,14 +61,34 @@ function throwFormControlElementNotFound() {
  * form-field-addon-disabled-text-color:
  * form-field-addon-tiny-height:
  * form-field-addon-tiny-width:
+ * form-field-addon-tiny-icon-size:
+ * form-field-addon-tiny-font-size:
+ * form-field-addon-tiny-line-height:
+ * form-field-addon-tiny-font-weight:
  * form-field-addon-small-height:
  * form-field-addon-small-width:
+ * form-field-addon-small-icon-size:
+ * form-field-addon-small-font-size:
+ * form-field-addon-small-line-height:
+ * form-field-addon-small-font-weight:
  * form-field-addon-medium-height:
  * form-field-addon-medium-width:
+ * form-field-addon-medium-icon-size:
+ * form-field-addon-medium-font-size:
+ * form-field-addon-medium-line-height:
+ * form-field-addon-medium-font-weight:
  * form-field-addon-large-height:
  * form-field-addon-large-width:
+ * form-field-addon-large-icon-size:
+ * form-field-addon-large-font-size:
+ * form-field-addon-large-line-height:
+ * form-field-addon-large-font-weight:
  * form-field-addon-giant-height:
  * form-field-addon-giant-width:
+ * form-field-addon-giant-icon-size:
+ * form-field-addon-giant-font-size:
+ * form-field-addon-giant-line-height:
+ * form-field-addon-giant-font-weight:
  **/
 @Component({
   selector: 'nb-form-field',
