@@ -16,6 +16,7 @@
   "repository": "git+https://github.com/akveo/nebular.git",
   "scripts": {
     "ng": "ng",
+    "ngcc-compile": "ngcc --properties es2015 browser module main --first-only --create-ivy-entry-points",
     "ngh": "ngh",
     "gulp": "gulp",
     "firebase": "firebase",
@@ -68,7 +69,7 @@
     "release": "npm-run-all release:validate publish",
     "publish": "./scripts/publish.sh",
     "cli:firefox-fix": "rimraf node_modules/@angular-devkit/build-angular/node_modules/uglify-es && rimraf node_modules/@angular-devkit/build-angular/node_modules/uglifyjs-webpack-plugin",
-    "postinstall": "npm-run-all -p cli:firefox-fix build:dev-schematics",
+    "postinstall": "npm-run-all -p cli:firefox-fix build:dev-schematics ngcc-compile",
     "gen:playground": "ng g .:playground",
     "gen:playground-module": "ng g .:playground-module",
     "gen:playground-components": "ng g .:playground-components",
