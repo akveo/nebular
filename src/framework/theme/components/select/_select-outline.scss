@@ -69,6 +69,5 @@
     }
 
     @include nb-form-field-with-prefix('nb-select.appearance-outline.size-#{$size} .select-button', $size);
-    @include nb-form-field-with-suffix('nb-select.appearance-outline.size-#{$size} .select-button', $size);
   }
 }

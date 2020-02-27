@@ -12,7 +12,6 @@
       @include nb-rtl(padding-left, nb-theme(select-icon-offset));
     }
     @include nb-form-field-with-prefix('nb-select.appearance-hero.size-#{$size} .select-button', $size);
-    @include nb-form-field-with-suffix('nb-select.appearance-hero.size-#{$size} .select-button', $size);
   }
 
   @each $status in nb-get-statuses() {
