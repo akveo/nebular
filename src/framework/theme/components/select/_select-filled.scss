@@ -1,3 +1,5 @@
+@import '../form-field/form-field.component.theme';
+
 @mixin select-filled {
   nb-select.appearance-filled .select-button {
     border-style: nb-theme(select-filled-border-style);
@@ -10,6 +12,8 @@
       @include nb-ltr(padding-right, nb-theme(select-icon-offset));
       @include nb-rtl(padding-left, nb-theme(select-icon-offset));
     }
+
+    @include nb-form-field-with-prefix('nb-select.appearance-filled.size-#{$size} .select-button', $size);
   }
 
   @each $status in nb-get-statuses() {

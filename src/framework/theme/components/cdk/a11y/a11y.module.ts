@@ -1,8 +1,12 @@
-import { ModuleWithProviders, NgModule } from '@angular/core';
+import { ModuleWithProviders, NgModule, Injectable } from '@angular/core';
 
 import { NbFocusTrapFactoryService } from './focus-trap';
 import { NbFocusKeyManagerFactoryService } from './focus-key-manager';
 import { NbActiveDescendantKeyManagerFactoryService } from './descendant-key-manager';
+import { FocusMonitor } from '@angular/cdk/a11y';
+
+@Injectable()
+export class NbFocusMonitor extends FocusMonitor {}
 
 @NgModule({})
 export class NbA11yModule {
@@ -13,6 +17,7 @@ export class NbA11yModule {
         NbFocusTrapFactoryService,
         NbFocusKeyManagerFactoryService,
         NbActiveDescendantKeyManagerFactoryService,
+        { provide: NbFocusMonitor, useClass: FocusMonitor },
       ],
     };
   }

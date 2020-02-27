@@ -40,6 +40,7 @@
 @import '../../components/radio/radio.component.theme';
 @import '../../components/tree-grid/tree-grid.component.theme';
 @import '../../components/icon/icon.component.theme';
+@import '../../components/form-field/form-field.component.theme';
 
 @mixin nb-theme-components() {
 
@@ -79,4 +80,5 @@
   @include nb-radio-theme();
   @include nb-tree-grid-theme();
   @include nb-icon-theme();
+  @include nb-form-field-theme();
 }
