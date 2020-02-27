@@ -1406,6 +1406,29 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
     ],
   },
   {
+    path: 'form-field',
+    children: [
+      {
+        path: 'form-field-showcase.component',
+        link: '/form-field/form-field-showcase.component',
+        component: 'FormFieldShowcaseComponent',
+        name: 'Form Field Showcase',
+      },
+      {
+        path: 'form-field-password.component',
+        link: '/form-field/form-field-password.component',
+        component: 'FormFieldPasswordComponent',
+        name: 'Form Field Password',
+      },
+      {
+        path: 'form-field-input.component',
+        link: '/form-field/form-field-input.component',
+        component: 'FormFieldInputComponent',
+        name: 'Form Field Input',
+      },
+    ],
+  },
+  {
     path: 'context-menu',
     children: [
       {

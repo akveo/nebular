@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { NbChatFormComponent, NbChatModule } from '@nebular/theme';
+import { NbChatFormComponent, NbChatModule, NbThemeModule } from '@nebular/theme';
 
 describe('NbChatFormComponent', () => {
   let fixture: ComponentFixture<NbChatFormComponent>;
@@ -7,7 +7,7 @@ describe('NbChatFormComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ NbChatModule.forRoot() ],
+      imports: [ NbThemeModule.forRoot(), NbChatModule.forRoot() ],
     });
 
     fixture = TestBed.createComponent(NbChatFormComponent);

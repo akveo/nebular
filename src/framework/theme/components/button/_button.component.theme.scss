@@ -33,6 +33,8 @@
           font-size: nb-theme(button-#{$size}-text-font-size);
           height: nb-theme(button-#{$size}-icon-size);
           width: nb-theme(button-#{$size}-icon-size);
+          margin-top: nb-theme(button-#{$size}-icon-vertical-margin);
+          margin-bottom: nb-theme(button-#{$size}-icon-vertical-margin);
         }
 
         $icon-offset: nb-theme(button-#{$size}-icon-offset);
@@ -43,6 +45,12 @@
         &.icon-end:not(.icon-start) nb-icon {
           @include nb-ltr(margin-left, $icon-offset);
           @include nb-rtl(margin-right, $icon-offset);
+        }
+
+        @each $appearance in ('filled', 'outline', 'ghost', 'hero') {
+          &.icon-start.icon-end.appearance-#{$appearance} {
+            padding: nb-theme(icon-button-#{$appearance}-#{$size}-padding);
+          }
         }
       }
     }
