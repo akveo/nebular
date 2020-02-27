@@ -1,3 +1,5 @@
+@import '../form-field/form-field.component.theme';
+
 @mixin select-outline {
   nb-select.appearance-outline .select-button {
     border-style: nb-theme(select-outline-border-style);
@@ -65,5 +67,8 @@
       @include nb-ltr(padding-right, nb-theme(select-icon-offset));
       @include nb-rtl(padding-left, nb-theme(select-icon-offset));
     }
+
+    @include nb-form-field-with-prefix('nb-select.appearance-outline.size-#{$size} .select-button', $size);
+    @include nb-form-field-with-suffix('nb-select.appearance-outline.size-#{$size} .select-button', $size);
   }
 }

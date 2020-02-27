@@ -54,15 +54,23 @@
       @include nb-ltr(margin-left, calc(#{$addon-width} * -1));
       @include nb-rtl(margin-right, calc(#{$addon-width} * -1));
     }
+  }
+}
 
-    .nb-form-field-control-prefix-#{$size} {
-      @include nb-ltr(padding-left, $addon-width);
-      @include nb-rtl(padding-right, $addon-width);
-    }
+@mixin nb-form-field-with-prefix($selector, $size) {
+  $addon-width: nb-theme(form-field-addon-#{$size}-width);
 
-    .nb-form-field-control-suffix-#{$size} {
-      @include nb-ltr(padding-right, $addon-width);
-      @include nb-rtl(padding-left, $addon-width);
-    }
+  .nb-form-field-control-with-prefix #{$selector} {
+    @include nb-ltr(padding-left, $addon-width);
+    @include nb-rtl(padding-right, $addon-width);
+  }
+}
+
+@mixin nb-form-field-with-suffix($selector, $size) {
+  $addon-width: nb-theme(form-field-addon-#{$size}-width);
+
+  .nb-form-field-control-with-suffix #{$selector} {
+    @include nb-ltr(padding-right, $addon-width);
+    @include nb-rtl(padding-left, $addon-width);
   }
 }

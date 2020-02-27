@@ -35,4 +35,9 @@
     @include input-sizes();
     @include input-shapes();
   }
+
+  @each $size in nb-get-sizes() {
+    @include nb-form-field-with-prefix('[nbInput].size-#{$size}', $size);
+    @include nb-form-field-with-suffix('[nbInput].size-#{$size}', $size);
+  }
 }

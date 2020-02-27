@@ -10,7 +10,6 @@ import {
   ContentChild,
   AfterContentChecked,
   ChangeDetectorRef,
-  Renderer2,
   ElementRef,
   ContentChildren,
   QueryList,
@@ -18,7 +17,7 @@ import {
   OnDestroy,
 } from '@angular/core';
 import { merge, Subject, Observable, combineLatest, ReplaySubject } from 'rxjs';
-import { takeUntil, distinctUntilChanged, map, startWith, pairwise } from 'rxjs/operators';
+import { takeUntil, distinctUntilChanged, map } from 'rxjs/operators';
 
 import { NbPrefixDirective } from './prefix.directive';
 import { NbSuffixDirective } from './suffix.directive';
@@ -110,10 +109,7 @@ export class NbFormFieldComponent implements AfterContentChecked, AfterContentIn
   @ContentChild(NbFormFieldControl, { static: false }) formControl: NbFormFieldControl;
   @ContentChild(NbFormFieldControl, { static: false, read: ElementRef }) formControlElement: ElementRef<HTMLElement>;
 
-  constructor(
-    protected cd: ChangeDetectorRef,
-    protected renderer: Renderer2,
-  ) {
+  constructor(protected cd: ChangeDetectorRef) {
   }
 
   ngAfterContentChecked() {
@@ -133,44 +129,20 @@ export class NbFormFieldComponent implements AfterContentChecked, AfterContentIn
 
   protected subscribeToFormControlStateChange() {
     const { disabled$, focused$, size$, status$ } = this.formControl;
+
     combineLatest([disabled$, focused$, size$, status$])
       .pipe(
         map(([disabled, focused, size, status]) => ({ disabled, focused, size, status })),
         distinctUntilChanged((oldState, state) => this.isStatesEqual(oldState, state)),
-        startWith(null),
-        pairwise(),
         takeUntil(this.destroy$),
       )
-      .subscribe(([oldState, state]: [NbFormControlState|null, NbFormControlState]) => {
-        this.updateFormControlClasses(state, oldState);
-        this.formControlState$.next(state);
-      });
+      .subscribe(this.formControlState$);
   }
 
   protected subscribeToAddonChange() {
     merge(this.prefix.changes, this.suffix.changes)
       .pipe(takeUntil(this.destroy$))
       .subscribe(() => this.cd.markForCheck());
-  }
-
-  protected updateFormControlClasses(state: NbFormControlState, oldState: NbFormControlState | null) {
-    const formControlEl: HTMLElement = this.formControlElement.nativeElement;
-
-    if (oldState) {
-      this.renderer.removeClass(formControlEl, this.getAddonSizeClass('prefix', oldState.size));
-      this.renderer.removeClass(formControlEl, this.getAddonSizeClass('suffix', oldState.size));
-    }
-
-    if (this.prefix.length) {
-      this.renderer.addClass(formControlEl, this.getAddonSizeClass('prefix', state.size));
-    }
-    if (this.suffix.length) {
-      this.renderer.addClass(formControlEl, this.getAddonSizeClass('suffix', state.size));
-    }
-  }
-
-  protected getAddonSizeClass(addon: NbFormControlAddon, size: NbComponentSize): string {
-    return `nb-form-field-control-${addon}-${size}`;
   }
 
   protected getPrefixClasses(state: NbFormControlState): string[] {
