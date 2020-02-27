@@ -98,7 +98,6 @@ export class NbFormFieldComponent implements AfterContentChecked, AfterContentIn
   @ContentChildren(NbSuffixDirective, { descendants: true }) suffix: QueryList<NbSuffixDirective>;
 
   @ContentChild(NbFormFieldControl, { static: false }) formControl: NbFormFieldControl;
-  @ContentChild(NbFormFieldControl, { static: false, read: ElementRef }) formControlElement: ElementRef<HTMLElement>;
 
   constructor(protected cd: ChangeDetectorRef) {
   }
