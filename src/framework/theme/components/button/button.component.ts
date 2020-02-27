@@ -87,22 +87,27 @@ export type NbButtonAppearance = 'filled' | 'outline' | 'ghost' | 'hero';
  * button-tiny-text-font-size:
  * button-tiny-text-line-height:
  * button-tiny-icon-size:
+ * button-tiny-icon-vertical-margin:
  * button-tiny-icon-offset:
  * button-small-text-font-size:
  * button-small-text-line-height:
  * button-small-icon-size:
+ * button-small-icon-vertical-margin:
  * button-small-icon-offset:
  * button-medium-text-font-size:
  * button-medium-text-line-height:
  * button-medium-icon-size:
+ * button-medium-icon-vertical-margin:
  * button-medium-icon-offset:
  * button-large-text-font-size:
  * button-large-text-line-height:
  * button-large-icon-size:
+ * button-large-icon-vertical-margin:
  * button-large-icon-offset:
  * button-giant-text-font-size:
  * button-giant-text-line-height:
  * button-giant-icon-size:
+ * button-giant-icon-vertical-margin:
  * button-giant-icon-offset:
  * button-rectangle-border-radius:
  * button-semi-round-border-radius:
