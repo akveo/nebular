@@ -1,3 +1,13 @@
+<a name="5.0.0-beta.6"></a>
+# [5.0.0-beta.6](https://github.com/akveo/nebular/compare/v4.6.0...v5.0.0-beta.6) (2020-02-27)
+
+
+### Features
+
+* **theme:** form field component ([#2238](https://github.com/akveo/nebular/issues/2238)) ([8865ba5](https://github.com/akveo/nebular/commit/8865ba5))
+
+
+
 <a name="5.0.0-beta.5"></a>
 # [5.0.0-beta.5](https://github.com/akveo/nebular/compare/v4.6.0...v5.0.0-beta.5) (2020-02-04)
 
