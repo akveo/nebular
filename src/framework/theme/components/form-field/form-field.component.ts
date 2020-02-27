@@ -20,7 +20,7 @@ import { takeUntil, distinctUntilChanged, map } from 'rxjs/operators';
 
 import { NbPrefixDirective } from './prefix.directive';
 import { NbSuffixDirective } from './suffix.directive';
-import { NbFormFieldControl, NbFormControlState } from './form-field-control';
+import { NbFormFieldControl, NbFormControlState, NbFormFieldControlConfig } from './form-field-control';
 
 export type NbFormControlAddon = 'prefix' | 'suffix';
 
@@ -97,6 +97,7 @@ export class NbFormFieldComponent implements AfterContentChecked, AfterContentIn
   @ContentChildren(NbSuffixDirective, { descendants: true }) suffix: QueryList<NbSuffixDirective>;
 
   @ContentChild(NbFormFieldControl, { static: false }) formControl: NbFormFieldControl;
+  @ContentChild(NbFormFieldControlConfig, { static: false }) formControlConfig: NbFormFieldControlConfig;
 
   constructor(protected cd: ChangeDetectorRef) {
   }
@@ -114,6 +115,14 @@ export class NbFormFieldComponent implements AfterContentChecked, AfterContentIn
 
   ngOnDestroy() {
     this.destroy$.next();
+  }
+
+  shouldShowPrefix(): boolean {
+    return this.getFormControlConfig().supportsPrefix && !!this.prefix.length;
+  }
+
+  shouldShowSuffix(): boolean {
+    return this.getFormControlConfig().supportsSuffix && !!this.suffix.length;
   }
 
   protected subscribeToFormControlStateChange() {
@@ -149,6 +158,10 @@ export class NbFormFieldComponent implements AfterContentChecked, AfterContentIn
     }
 
     return classes;
+  }
+
+  protected getFormControlConfig(): NbFormFieldControlConfig {
+    return this.formControlConfig || new NbFormFieldControlConfig();
   }
 
   protected isStatesEqual(oldState: NbFormControlState, state: NbFormControlState): boolean {

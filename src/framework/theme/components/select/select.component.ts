@@ -48,7 +48,7 @@ import { NB_DOCUMENT } from '../../theme.options';
 import { NbOptionComponent } from '../option/option.component';
 import { convertToBoolProperty } from '../helpers';
 import { NB_SELECT_INJECTION_TOKEN } from './select-injection-tokens';
-import { NbFormFieldControl } from '../form-field/form-field-control';
+import { NbFormFieldControl, NbFormFieldControlConfig } from '../form-field/form-field-control';
 import { NbFocusMonitor } from '../cdk/a11y/a11y.module';
 
 export type NbSelectAppearance = 'outline' | 'filled' | 'hero';
@@ -496,6 +496,7 @@ export class NbSelectLabelComponent {
     },
     { provide: NB_SELECT_INJECTION_TOKEN, useExisting: NbSelectComponent },
     { provide: NbFormFieldControl, useExisting: NbSelectComponent },
+    { provide: NbFormFieldControlConfig, useValue: new NbFormFieldControlConfig({ supportsSuffix: false }) },
   ],
 })
 export class NbSelectComponent<T> implements OnChanges, AfterViewInit, AfterContentInit, OnDestroy,

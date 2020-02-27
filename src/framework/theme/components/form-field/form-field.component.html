@@ -1,4 +1,4 @@
-<div *ngIf="prefix.length" [ngClass]="prefixClasses$ | async">
+<div *ngIf="shouldShowPrefix()" [ngClass]="prefixClasses$ | async">
   <ng-content select="[nbPrefix]"></ng-content>
 </div>
 
@@ -7,6 +7,6 @@
   <ng-content></ng-content>
 </div>
 
-<div *ngIf="suffix.length" [ngClass]="suffixClasses$ | async">
+<div *ngIf="shouldShowSuffix()" [ngClass]="suffixClasses$ | async">
   <ng-content select="[nbSuffix]"></ng-content>
 </div>
