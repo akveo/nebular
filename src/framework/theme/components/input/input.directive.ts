@@ -4,12 +4,26 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { Directive, Input, HostBinding } from '@angular/core';
+import {
+  Directive,
+  Input,
+  HostBinding,
+  OnDestroy,
+  OnInit,
+  ElementRef,
+  SimpleChanges,
+  OnChanges,
+  DoCheck,
+} from '@angular/core';
+import { Subject, BehaviorSubject } from 'rxjs';
+import { map, finalize, takeUntil } from 'rxjs/operators';
 
 import { convertToBoolProperty, emptyStatusWarning } from '../helpers';
 import { NbComponentSize } from '../component-size';
 import { NbComponentShape } from '../component-shape';
 import { NbComponentStatus } from '../component-status';
+import { NbFormFieldControl } from '../form-field/form-field-control';
+import { NbFocusMonitor } from '../cdk/a11y/a11y.module';
 
 /**
  * Basic input directive.
@@ -192,8 +206,13 @@ import { NbComponentStatus } from '../component-status';
  */
 @Directive({
   selector: 'input[nbInput],textarea[nbInput]',
+  providers: [
+    { provide: NbFormFieldControl, useExisting: NbInputDirective },
+  ],
 })
-export class NbInputDirective {
+export class NbInputDirective implements DoCheck, OnChanges, OnInit, OnDestroy, NbFormFieldControl {
+
+  protected destroy$ = new Subject<void>();
 
   /**
    * Field size modifications. Possible values: `small`, `medium` (default), `large`.
@@ -237,6 +256,42 @@ export class NbInputDirective {
     this._fullWidth = convertToBoolProperty(value);
   }
   private _fullWidth = false;
+
+  constructor(
+    protected elementRef: ElementRef<HTMLInputElement | HTMLTextAreaElement>,
+    protected focusMonitor: NbFocusMonitor,
+  ) {
+  }
+
+  ngDoCheck() {
+    const isDisabled = this.elementRef.nativeElement.disabled;
+    if (isDisabled !== this.disabled$.value) {
+      this.disabled$.next(isDisabled);
+    }
+  }
+
+  ngOnChanges({ fieldStatus, fieldSize }: SimpleChanges) {
+    if (status) {
+      this.status$.next(this.status);
+    }
+    if (fieldSize) {
+      this.size$.next(this.fieldSize);
+    }
+  }
+
+  ngOnInit() {
+    this.focusMonitor.monitor(this.elementRef)
+      .pipe(
+        map(origin => !!origin),
+        finalize(() => this.focusMonitor.stopMonitoring(this.elementRef)),
+        takeUntil(this.destroy$),
+      )
+      .subscribe(this.focused$);
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next();
+  }
 
   @HostBinding('class.size-tiny')
   get tiny() {
@@ -312,4 +367,24 @@ export class NbInputDirective {
   get round() {
     return this.shape === 'round';
   }
+
+  /*
+   * @docs-private
+   **/
+  status$ = new BehaviorSubject<NbComponentStatus>(this.status);
+
+  /*
+   * @docs-private
+   **/
+  size$ = new BehaviorSubject<NbComponentSize>(this.fieldSize);
+
+  /*
+   * @docs-private
+   **/
+  focused$ = new BehaviorSubject<boolean>(false);
+
+  /*
+   * @docs-private
+   **/
+  disabled$ = new BehaviorSubject<boolean>(false);
 }

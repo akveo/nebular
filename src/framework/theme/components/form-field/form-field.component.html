@@ -2,7 +2,7 @@
   <ng-content select="[nbPrefix]"></ng-content>
 </div>
 
-<ng-content select="[nbInput]"></ng-content>
+<ng-content></ng-content>
 
 <div *ngIf="suffix.length" [ngClass]="suffixClasses$ | async">
   <ng-content select="[nbSuffix]"></ng-content>

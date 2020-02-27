@@ -17,12 +17,12 @@ import {
   AfterContentInit,
   OnDestroy,
 } from '@angular/core';
-import { merge, Subject, fromEvent, Observable, BehaviorSubject } from 'rxjs';
-import { takeUntil, switchMap, tap, distinctUntilChanged, map } from 'rxjs/operators';
+import { merge, Subject, Observable, combineLatest, ReplaySubject } from 'rxjs';
+import { takeUntil, distinctUntilChanged, map, startWith, pairwise } from 'rxjs/operators';
 
 import { NbPrefixDirective } from './prefix.directive';
 import { NbSuffixDirective } from './suffix.directive';
-import { NbInputDirective } from '../input/input.directive';
+import { NbFormFieldControl } from './form-field-control';
 import { NbComponentSize } from '../component-size';
 import { NbComponentStatus } from '../component-status';
 
@@ -100,20 +100,15 @@ export class NbFormFieldComponent implements AfterContentChecked, AfterContentIn
 
   protected readonly destroy$ = new Subject<void>();
 
-  protected formControlState$ = new BehaviorSubject<NbFormControlState>({
-    status: 'basic',
-    size: 'medium',
-    focused: false,
-    disabled: false,
-  });
-  prefixClasses$: Observable<string[]> = this.getAddonClassesObservable('prefix');
-  suffixClasses$: Observable<string[]> = this.getAddonClassesObservable('suffix');
+  protected formControlState$ = new ReplaySubject<NbFormControlState>(1);
+  prefixClasses$: Observable<string[]> = this.formControlState$.pipe(map(s => this.getPrefixClasses(s)));
+  suffixClasses$: Observable<string[]> = this.formControlState$.pipe(map(s => this.getSuffixClasses(s)));
 
   @ContentChildren(NbPrefixDirective, { descendants: true }) prefix: QueryList<NbPrefixDirective>;
   @ContentChildren(NbSuffixDirective, { descendants: true }) suffix: QueryList<NbSuffixDirective>;
 
-  @ContentChild(NbInputDirective, { static: false }) formControl: NbInputDirective;
-  @ContentChild(NbInputDirective, { static: false, read: ElementRef }) formControlElement: ElementRef<HTMLInputElement>;
+  @ContentChild(NbFormFieldControl, { static: false }) formControl: NbFormFieldControl;
+  @ContentChild(NbFormFieldControl, { static: false, read: ElementRef }) formControlElement: ElementRef<HTMLElement>;
 
   constructor(
     protected cd: ChangeDetectorRef,
@@ -125,12 +120,10 @@ export class NbFormFieldComponent implements AfterContentChecked, AfterContentIn
     if (!this.formControl) {
       throwFormControlElementNotFound();
     }
-
-    this.checkFormControlState();
   }
 
   ngAfterContentInit() {
-    this.subscribeToFormControlFocusChange();
+    this.subscribeToFormControlStateChange();
     this.subscribeToAddonChange();
   }
 
@@ -138,15 +131,20 @@ export class NbFormFieldComponent implements AfterContentChecked, AfterContentIn
     this.destroy$.next();
   }
 
-  protected subscribeToFormControlFocusChange() {
-    const formControlEl = this.formControlElement.nativeElement;
-    fromEvent(formControlEl, 'focusin')
+  protected subscribeToFormControlStateChange() {
+    const { disabled$, focused$, size$, status$ } = this.formControl;
+    combineLatest([disabled$, focused$, size$, status$])
       .pipe(
-        tap(() => this.updateFormControlState({ focused: true })),
-        switchMap(() => fromEvent(formControlEl, 'focusout')),
+        map(([disabled, focused, size, status]) => ({ disabled, focused, size, status })),
+        distinctUntilChanged((oldState, state) => this.isStatesEqual(oldState, state)),
+        startWith(null),
+        pairwise(),
         takeUntil(this.destroy$),
       )
-      .subscribe(() => this.updateFormControlState({ focused: false }));
+      .subscribe(([oldState, state]: [NbFormControlState|null, NbFormControlState]) => {
+        this.updateFormControlClasses(state, oldState);
+        this.formControlState$.next(state);
+      });
   }
 
   protected subscribeToAddonChange() {
@@ -155,42 +153,32 @@ export class NbFormFieldComponent implements AfterContentChecked, AfterContentIn
       .subscribe(() => this.cd.markForCheck());
   }
 
-  protected checkFormControlState() {
+  protected updateFormControlClasses(state: NbFormControlState, oldState: NbFormControlState | null) {
     const formControlEl: HTMLElement = this.formControlElement.nativeElement;
-    const prevSize = this.formControlState$.value.size;
-    const size = this.formControl.fieldSize;
 
-    this.renderer.removeClass(formControlEl, this.getAddonSizeClass('prefix', prevSize));
-    this.renderer.removeClass(formControlEl, this.getAddonSizeClass('suffix', prevSize));
+    if (oldState) {
+      this.renderer.removeClass(formControlEl, this.getAddonSizeClass('prefix', oldState.size));
+      this.renderer.removeClass(formControlEl, this.getAddonSizeClass('suffix', oldState.size));
+    }
 
     if (this.prefix.length) {
-      this.renderer.addClass(formControlEl, this.getAddonSizeClass('prefix', size));
+      this.renderer.addClass(formControlEl, this.getAddonSizeClass('prefix', state.size));
     }
     if (this.suffix.length) {
-      this.renderer.addClass(formControlEl, this.getAddonSizeClass('suffix', size));
+      this.renderer.addClass(formControlEl, this.getAddonSizeClass('suffix', state.size));
     }
-
-    this.updateFormControlState({
-      size: this.formControl.fieldSize,
-      status: this.formControl.status,
-      disabled: this.formControlElement.nativeElement.disabled,
-    });
-  }
-
-  protected updateFormControlState(updatedState: Partial<NbFormControlState>) {
-    this.formControlState$.next({ ...this.formControlState$.value, ...updatedState });
   }
 
   protected getAddonSizeClass(addon: NbFormControlAddon, size: NbComponentSize): string {
     return `nb-form-field-control-${addon}-${size}`;
   }
 
-  protected getAddonClassesObservable(addon: NbFormControlAddon): Observable<string[]> {
-    return this.formControlState$
-      .pipe(
-        distinctUntilChanged((oldState, state) => this.isStatesEqual(oldState, state)),
-        map((state: NbFormControlState) => this.getAddonClasses(addon, state)),
-      );
+  protected getPrefixClasses(state: NbFormControlState): string[] {
+    return this.getAddonClasses('prefix', state);
+  }
+
+  protected getSuffixClasses(state: NbFormControlState): string[] {
+    return this.getAddonClasses('suffix', state);
   }
 
   protected getAddonClasses(addon: NbFormControlAddon, state: NbFormControlState): string[] {

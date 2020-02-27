@@ -23,10 +23,12 @@ import {
   Output,
   QueryList,
   ViewChild,
+  SimpleChanges,
+  OnChanges,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { merge, Subject } from 'rxjs';
-import { startWith, switchMap, takeUntil, filter } from 'rxjs/operators';
+import { merge, Subject, BehaviorSubject } from 'rxjs';
+import { startWith, switchMap, takeUntil, filter, map, finalize } from 'rxjs/operators';
 
 import {
   NbAdjustableConnectedPositionStrategy,
@@ -46,6 +48,8 @@ import { NB_DOCUMENT } from '../../theme.options';
 import { NbOptionComponent } from '../option/option.component';
 import { convertToBoolProperty } from '../helpers';
 import { NB_SELECT_INJECTION_TOKEN } from './select-injection-tokens';
+import { NbFormFieldControl } from '../form-field/form-field-control';
+import { NbFocusMonitor } from '../cdk/a11y/a11y.module';
 
 export type NbSelectAppearance = 'outline' | 'filled' | 'hero';
 
@@ -491,9 +495,11 @@ export class NbSelectLabelComponent {
       multi: true,
     },
     { provide: NB_SELECT_INJECTION_TOKEN, useExisting: NbSelectComponent },
+    { provide: NbFormFieldControl, useExisting: NbSelectComponent },
   ],
 })
-export class NbSelectComponent<T> implements AfterViewInit, AfterContentInit, OnDestroy, ControlValueAccessor {
+export class NbSelectComponent<T> implements OnChanges, AfterViewInit, AfterContentInit, OnDestroy,
+                                             ControlValueAccessor, NbFormFieldControl {
 
   /**
    * Select size, available sizes:
@@ -682,13 +688,34 @@ export class NbSelectComponent<T> implements AfterViewInit, AfterContentInit, On
   protected onChange: Function = () => {};
   protected onTouched: Function = () => {};
 
+  /*
+   * @docs-private
+   **/
+  status$ = new BehaviorSubject<NbComponentStatus>(this.status);
+
+  /*
+   * @docs-private
+   **/
+  size$ = new BehaviorSubject<NbComponentSize>(this.size);
+
+  /*
+   * @docs-private
+   **/
+  focused$ = new BehaviorSubject<boolean>(false);
+
+  /*
+   * @docs-private
+   **/
+  disabled$ = new BehaviorSubject<boolean>(this.disabled);
+
   constructor(@Inject(NB_DOCUMENT) protected document,
               protected overlay: NbOverlayService,
               protected hostRef: ElementRef<HTMLElement>,
               protected positionBuilder: NbPositionBuilderService,
               protected triggerStrategyBuilder: NbTriggerStrategyBuilderService,
               protected cd: ChangeDetectorRef,
-              protected focusKeyManagerFactoryService: NbFocusKeyManagerFactoryService<NbOptionComponent<T>>) {
+              protected focusKeyManagerFactoryService: NbFocusKeyManagerFactoryService<NbOptionComponent<T>>,
+              protected focusMonitor: NbFocusMonitor) {
   }
 
   /**
@@ -732,6 +759,18 @@ export class NbSelectComponent<T> implements AfterViewInit, AfterContentInit, On
     return this.selectionModel[0].content;
   }
 
+  ngOnChanges({ disabled, status, size}: SimpleChanges) {
+    if (disabled) {
+      this.disabled$.next(disabled.currentValue);
+    }
+    if (status) {
+      this.status$.next(status.currentValue);
+    }
+    if (size) {
+      this.size$.next(size.currentValue);
+    }
+  }
+
   ngAfterContentInit() {
     this.options.changes
       .pipe(
@@ -753,6 +792,7 @@ export class NbSelectComponent<T> implements AfterViewInit, AfterContentInit, On
   ngAfterViewInit() {
     this.triggerStrategy = this.createTriggerStrategy();
 
+    this.subscribeOnButtonFocus();
     this.subscribeOnTriggers();
     this.subscribeOnOptionClick();
   }
@@ -991,6 +1031,16 @@ export class NbSelectComponent<T> implements AfterViewInit, AfterContentInit, On
         this.hide();
         this.onTouched();
       });
+  }
+
+  protected subscribeOnButtonFocus() {
+    this.focusMonitor.monitor(this.button)
+      .pipe(
+        map(origin => !!origin),
+        finalize(() => this.focusMonitor.stopMonitoring(this.button)),
+        takeUntil(this.destroy$),
+      )
+      .subscribe(this.focused$);
   }
 
   protected getContainer() {
