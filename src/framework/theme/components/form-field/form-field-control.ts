@@ -17,3 +17,10 @@ export abstract class NbFormFieldControl {
   focused$: Observable<boolean>;
   disabled$: Observable<boolean>;
 }
+
+export interface NbFormControlState {
+  status: NbComponentStatus;
+  size: NbComponentSize;
+  focused: boolean;
+  disabled: boolean;
+}

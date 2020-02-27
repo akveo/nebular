@@ -21,18 +21,9 @@ import { takeUntil, distinctUntilChanged, map } from 'rxjs/operators';
 
 import { NbPrefixDirective } from './prefix.directive';
 import { NbSuffixDirective } from './suffix.directive';
-import { NbFormFieldControl } from './form-field-control';
-import { NbComponentSize } from '../component-size';
-import { NbComponentStatus } from '../component-status';
+import { NbFormFieldControl, NbFormControlState } from './form-field-control';
 
 export type NbFormControlAddon = 'prefix' | 'suffix';
-
-export interface NbFormControlState {
-  status: NbComponentStatus;
-  size: NbComponentSize;
-  focused: boolean;
-  disabled: boolean;
-}
 
 function throwFormControlElementNotFound() {
   throw new Error(`NbFormFieldComponent must contain [nbInput]`)
