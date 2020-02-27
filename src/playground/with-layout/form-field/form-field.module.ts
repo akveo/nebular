@@ -5,14 +5,26 @@
  */
 
 import { NgModule } from '@angular/core';
-import { NbFormFieldModule, NbInputModule, NbIconModule, NbButtonModule, NbCardModule } from '@nebular/theme';
+import { CommonModule } from '@angular/common';
+import {
+  NbFormFieldModule,
+  NbInputModule,
+  NbIconModule,
+  NbButtonModule,
+  NbCardModule,
+  NbSelectModule,
+} from '@nebular/theme';
 
 import { FormFieldRoutingModule } from './form-field-routing.module';
 import { FormFieldShowcaseComponent } from './form-field-showcase.component';
+import { FormFieldPasswordComponent } from './form-field-password.component';
+import { FormFieldInputComponent } from './form-field-input.component';
 
 @NgModule({
   declarations: [
     FormFieldShowcaseComponent,
+    FormFieldPasswordComponent,
+    FormFieldInputComponent,
   ],
   imports: [
     NbFormFieldModule,
@@ -20,7 +32,9 @@ import { FormFieldShowcaseComponent } from './form-field-showcase.component';
     NbIconModule,
     NbButtonModule,
     NbCardModule,
+    NbSelectModule,
     FormFieldRoutingModule,
+    CommonModule,
   ],
 })
 export class FormFieldModule {}

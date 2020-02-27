@@ -68,6 +68,14 @@ import { NbFocusMonitor } from '../cdk/a11y/a11y.module';
  * Or you can bind control with form controls or ngModel:
  * @stacked-example(Input form binding, input/input-form.component)
  *
+ * Use `<nb-form-field>` to add custom content to the input field.
+ * First import `NbFormFieldModule`. Then put the input field and custom content into
+ * `<nb-form-field>` and add `nbPrefix` or `nbSuffix` directive to the custom content.
+ * `nbPrefix` puts content before input and `nbSuffix` after.
+ *
+ * @stacked-example(Input with icon, form-field/form-field-input.component)
+ * @stacked-example(Input with button, form-field/form-field-password.component)
+ *
  * @styles
  *
  * input-border-style:
