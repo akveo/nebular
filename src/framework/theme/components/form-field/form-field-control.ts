@@ -27,15 +27,6 @@ export abstract class NbFormFieldControl {
 export class NbFormFieldControlConfig {
   supportsPrefix = true;
   supportsSuffix = true;
-
-  constructor(config: { supportsPrefix?: boolean, supportsSuffix?: boolean } = {}) {
-    if (config.supportsPrefix != null) {
-      this.supportsPrefix = config.supportsPrefix;
-    }
-    if (config.supportsSuffix != null) {
-      this.supportsSuffix = config.supportsSuffix;
-    }
-  }
 }
 
 export interface NbFormControlState {

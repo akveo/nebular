@@ -60,6 +60,12 @@ export type NbSelectAppearance = 'outline' | 'filled' | 'hero';
 export class NbSelectLabelComponent {
 }
 
+export function nbSelectFormFieldControlConfigFactory() {
+  const config = new NbFormFieldControlConfig();
+  config.supportsSuffix = false;
+  return config;
+}
+
 /**
  * The `NbSelectComponent` provides a capability to select one of the passed items.
  *
@@ -496,7 +502,7 @@ export class NbSelectLabelComponent {
     },
     { provide: NB_SELECT_INJECTION_TOKEN, useExisting: NbSelectComponent },
     { provide: NbFormFieldControl, useExisting: NbSelectComponent },
-    { provide: NbFormFieldControlConfig, useValue: new NbFormFieldControlConfig({ supportsSuffix: false }) },
+    { provide: NbFormFieldControlConfig, useFactory: nbSelectFormFieldControlConfigFactory },
   ],
 })
 export class NbSelectComponent<T> implements OnChanges, AfterViewInit, AfterContentInit, OnDestroy,
