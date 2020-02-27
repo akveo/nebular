@@ -10,7 +10,6 @@ import {
   ContentChild,
   AfterContentChecked,
   ChangeDetectorRef,
-  ElementRef,
   ContentChildren,
   QueryList,
   AfterContentInit,
@@ -91,8 +90,8 @@ export class NbFormFieldComponent implements AfterContentChecked, AfterContentIn
   protected readonly destroy$ = new Subject<void>();
 
   protected formControlState$ = new ReplaySubject<NbFormControlState>(1);
-  prefixClasses$: Observable<string[]> = this.formControlState$.pipe(map(s => this.getPrefixClasses(s)));
-  suffixClasses$: Observable<string[]> = this.formControlState$.pipe(map(s => this.getSuffixClasses(s)));
+  prefixClasses$: Observable<string[]> = this.formControlState$.pipe(map(s => this.getAddonClasses('prefix', s)));
+  suffixClasses$: Observable<string[]> = this.formControlState$.pipe(map(s => this.getAddonClasses('suffix', s)));
 
   @ContentChildren(NbPrefixDirective, { descendants: true }) prefix: QueryList<NbPrefixDirective>;
   @ContentChildren(NbSuffixDirective, { descendants: true }) suffix: QueryList<NbSuffixDirective>;
@@ -133,14 +132,6 @@ export class NbFormFieldComponent implements AfterContentChecked, AfterContentIn
     merge(this.prefix.changes, this.suffix.changes)
       .pipe(takeUntil(this.destroy$))
       .subscribe(() => this.cd.markForCheck());
-  }
-
-  protected getPrefixClasses(state: NbFormControlState): string[] {
-    return this.getAddonClasses('prefix', state);
-  }
-
-  protected getSuffixClasses(state: NbFormControlState): string[] {
-    return this.getAddonClasses('suffix', state);
   }
 
   protected getAddonClasses(addon: NbFormControlAddon, state: NbFormControlState): string[] {
