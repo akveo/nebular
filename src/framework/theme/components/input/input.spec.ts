@@ -6,7 +6,7 @@
 
 import { Component, Input } from '@angular/core'
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { NbInputDirective } from '@nebular/theme';
+import { NbInputDirective, NbThemeModule } from '@nebular/theme';
 import { By } from '@angular/platform-browser';
 import { NbComponentStatus } from '../component-status';
 import { NbComponentSize } from '../component-size';
@@ -38,7 +38,7 @@ describe('Directive: NbInput', () => {
   beforeEach(() => {
 
     fixture = TestBed.configureTestingModule({
-        imports: [ NbInputModule ],
+        imports: [ NbThemeModule.forRoot(), NbInputModule ],
         declarations: [ InputTestComponent ],
       })
       .createComponent(InputTestComponent);
