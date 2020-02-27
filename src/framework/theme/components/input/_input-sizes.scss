@@ -4,8 +4,6 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-@import '../form-field/form-field.component.theme';
-
 @mixin input-sizes() {
   @each $size in nb-get-sizes() {
     &.size-#{$size} {
