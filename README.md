@@ -1,10 +1,10 @@
-# Nebular [<img src="https://i.imgur.com/oMcxwZ0.png" alt="Eva Design System" height="20px" />](https://eva.design) [![npm](https://img.shields.io/npm/l/@nebular/theme.svg)]() [![Build Status](https://travis-ci.org/akveo/nebular.svg?branch=master)](https://travis-ci.org/akveo/nebular) [![npm](https://img.shields.io/npm/dt/@nebular/theme.svg)](https://www.npmjs.com/package/@nebular/theme) [![Codecov](https://img.shields.io/codecov/c/github/akveo/nebular/master.svg?style=flat-square)](https://codecov.io/gh/akveo/nebular/branch/master)
+# Nebular [<img src="https://i.imgur.com/oMcxwZ0.png" alt="Eva Design System" height="20px" />](https://hubs.ly/H0n4RKf0) [![npm](https://img.shields.io/npm/l/@nebular/theme.svg)]() [![Build Status](https://travis-ci.org/akveo/nebular.svg?branch=master)](https://travis-ci.org/akveo/nebular) [![npm](https://img.shields.io/npm/dt/@nebular/theme.svg)](https://www.npmjs.com/package/@nebular/theme) [![Codecov](https://img.shields.io/codecov/c/github/akveo/nebular/master.svg?style=flat-square)](https://codecov.io/gh/akveo/nebular/branch/master)
 
-[Documentation](https://akveo.github.io/nebular/docs/getting-started/what-is-nebular?utm_source=github&utm_medium=nebular_readme) | [Stackblitz Template](https://stackblitz.com/github/akveo/nebular-seed) | [UI Bakery](https://uibakery.io?utm_source=github&utm_medium=nebular_readme) - Angular UI Builder
+[Documentation](https://hubs.ly/H0n4S800) | [Stackblitz Template](https://stackblitz.com/github/akveo/nebular-seed) | [UI Bakery](https://hubs.ly/H0n4S8d0) - Angular UI Builder
 
 Nebular is a customizable Angular 8 UI Library with a focus on beautiful design and ability to adapt it to your brand easily. It comes with 4 stunning visual themes, a powerful theming engine with runtime theme switching and support of custom css properties mode. Nebular is based on Eva Design System specifications.
 
-<a href="https://akveo.github.io/nebular/?utm_source=github&utm_medium=nebular_cover"><img src="https://i.imgur.com/C8ZN4SA.jpg"></a>
+<a href="https://hubs.ly/H0n4RHQ0"><img src="https://i.imgur.com/C8ZN4SA.jpg"></a>
 
 ## What's included
 
@@ -25,7 +25,7 @@ ng add @nebular/theme
 
 Configuration will be done automatically.
 
-If you want to have more control over setup process you can [use manual setup guide](https://akveo.github.io/nebular/docs/guides/install-nebular#manually).
+If you want to have more control over setup process you can [use manual setup guide](https://hubs.ly/H0n4S8B0).
 
 ## Browser Support
 
@@ -40,7 +40,7 @@ If you want to have more control over setup process you can [use manual setup gu
 
 ## Starters
 
-- [ngx-admin](http://github.com/akveo/ngx-admin) - application based on Nebular modules with beautiful IOT components. [Live Demo](http://akveo.com/ngx-admin?utm_source=github&utm_medium=nebular_readme).
+- [ngx-admin](http://github.com/akveo/ngx-admin) - application based on Nebular modules with beautiful IOT components. [Live Demo](https://hubs.ly/H0n4D8Z0).
 - [ngx-admin-starter](https://github.com/akveo/ngx-admin/tree/starter-kit) - clean application based on Nebular modules with a limited number of additional dependencies.
 
 ## License
@@ -57,5 +57,5 @@ If you want to have more control over setup process you can [use manual setup gu
 - Like our page on [Facebook](https://www.facebook.com/akveo/) :thumbsup:
 
 ## From Developers
-Made with :heart: by [Akveo team](http://akveo.com?utm_source=github&utm_medium=nebular_readme). Follow us on [Twitter](https://twitter.com/akveo_inc) to get the latest news first!
+Made with :heart: by [Akveo team](https://hubs.ly/H0n4C4C0). Follow us on [Twitter](https://twitter.com/akveo_inc) to get the latest news first!
 We're always happy to receive your feedback!
