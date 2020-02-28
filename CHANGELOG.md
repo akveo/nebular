@@ -1,3 +1,14 @@
+<a name="5.0.0-beta.7"></a>
+# [5.0.0-beta.7](https://github.com/akveo/nebular/compare/v4.6.0...v5.0.0-beta.7) (2020-02-28)
+
+
+### Bug Fixes
+
+* **form field:** make form control container take all space ([#2241](https://github.com/akveo/nebular/issues/2241)) ([56a5235](https://github.com/akveo/nebular/commit/56a5235))
+
+
+
+
 <a name="5.0.0-beta.6"></a>
 # [5.0.0-beta.6](https://github.com/akveo/nebular/compare/v4.6.0...v5.0.0-beta.6) (2020-02-27)
 
