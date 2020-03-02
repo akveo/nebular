@@ -1,3 +1,25 @@
+<a name="5.0.0-beta.8"></a>
+# [5.0.0-beta.8](https://github.com/akveo/nebular/compare/v4.6.0...v5.0.0-beta.8) (2020-03-02)
+
+
+### Features
+
+* update to Angular 9 ([#2236](https://github.com/akveo/nebular/issues/2236)) ([145f00c](https://github.com/akveo/nebular/commit/145f00c))
+
+
+### BREAKING CHANGES
+
+We no longer have a direct dependency on tslib. Instead it is now listed a peerDependency. This matches Angular framework.
+
+Users not using the Angular CLI will need to manually install tslib via:
+```
+yarn add tslib
+# or
+npm install tslib --save
+```
+
+
+
 <a name="5.0.0-beta.7"></a>
 # [5.0.0-beta.7](https://github.com/akveo/nebular/compare/v4.6.0...v5.0.0-beta.7) (2020-02-28)
 
