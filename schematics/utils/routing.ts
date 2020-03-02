@@ -7,7 +7,7 @@
 import * as ts from 'typescript';
 import { basename, dirname, join, normalize, NormalizedSep, Path } from '@angular-devkit/core';
 import { SchematicsException, Tree } from '@angular-devkit/schematics';
-import { getSourceFile } from '@angular/cdk/schematics';
+import { parseSourceFile } from '@angular/cdk/schematics';
 import { getDecoratorMetadata, insertImport } from '@schematics/angular/utility/ast-utils';
 import {
   addArrayElement,
@@ -30,7 +30,7 @@ import {
 } from '../utils';
 
 export function findRoutesArray(tree: Tree, modulePath: Path): ts.ArrayLiteralExpression {
-  const source = getSourceFile(tree, modulePath);
+  const source = parseSourceFile(tree, modulePath);
 
   const decoratorNode = getDecoratorMetadata(source, 'NgModule', '@angular/core')[0] as ts.ObjectLiteralExpression;
   if (decoratorNode == null) {
@@ -166,7 +166,7 @@ function addMissingPaths(tree: Tree, routingModulePath: Path, targetFile: Path):
 
     existingPath = fullPathToCheck;
     if (!getRouteChildren(route)) {
-      addObjectProperty(tree, getSourceFile(tree, routingModulePath), route, 'children: []');
+      addObjectProperty(tree, parseSourceFile(tree, routingModulePath), route, 'children: []');
     }
   }
 }
@@ -202,7 +202,7 @@ export function addBaseRoute(tree: Tree, targetFile: Path): void {
   const baseRoute = findRouteWithPath(routesArray, [baseComponentPredicate(targetFile)]);
   if (baseRoute) {
     if (!getRouteChildren(baseRoute)) {
-      addObjectProperty(tree, getSourceFile(tree, baseModulePath), baseRoute, 'children: []');
+      addObjectProperty(tree, parseSourceFile(tree, baseModulePath), baseRoute, 'children: []');
     }
     return;
   }
@@ -220,7 +220,7 @@ export function addRoute(
   componentClass?: string,
   fileImportPath?: string,
 ): void {
-  const source = getSourceFile(tree, routingModulePath);
+  const source = parseSourceFile(tree, routingModulePath);
   const alreadyInRoutes = routes.getFullText().includes(route);
   if (alreadyInRoutes) {
     return;
