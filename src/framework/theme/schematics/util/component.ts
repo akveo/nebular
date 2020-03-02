@@ -5,7 +5,7 @@
  */
 
 import { getDecoratorMetadata } from '@schematics/angular/utility/ast-utils';
-import { getSourceFile } from '@angular/cdk/schematics';
+import { parseSourceFile } from '@angular/cdk/schematics';
 import { Tree } from '@angular-devkit/schematics';
 import { dirname, join, normalize } from '@angular-devkit/core';
 import * as ts from 'typescript';
@@ -26,7 +26,7 @@ export class TemplateDescriptor {
 }
 
 export function getComponentTemplateDescriptor(host: Tree, componentPath: string): TemplateDescriptor {
-  const compSource: ts.SourceFile = getSourceFile(host, componentPath);
+  const compSource: ts.SourceFile = parseSourceFile(host, componentPath);
   const compMetadata: ts.Node = getDecoratorMetadata(compSource, 'Component', '@angular/core')[0];
   const templateProp = getMetadataProperty(compMetadata, 'template');
   const templateUrlProp = getMetadataProperty(compMetadata, 'templateUrl');

@@ -24,8 +24,8 @@ describe('Date Adapters', () => {
     let dateService: NbDateService<Date>;
     let adapterService: NbDateAdapterService<Date>;
     beforeEach(() => {
-      adapterService = TestBed.get(NbDateAdapterService);
-      dateService = TestBed.get(NbDateService);
+      adapterService = TestBed.inject(NbDateAdapterService);
+      dateService = TestBed.inject(NbDateService);
     });
 
     it('should be created', () => {
@@ -73,8 +73,8 @@ describe('Date Adapters', () => {
     let dateService: NbDateService<Date>;
     let adapterService: NbRangeAdapterService<Date>;
     beforeEach(() => {
-      dateService = TestBed.get(NbDateService);
-      adapterService = TestBed.get(NbRangeAdapterService);
+      dateService = TestBed.inject(NbDateService);
+      adapterService = TestBed.inject(NbRangeAdapterService);
     });
 
     it('should be created', () => {

@@ -33,8 +33,8 @@ export class NbActionsTestComponent {
   icon: string;
   link: string;
 
-  @ViewChild(NbActionsComponent, { static: false }) actionsComponent: NbActionsComponent;
-  @ViewChild(NbActionComponent, { static: false }) actionComponent: NbActionComponent;
+  @ViewChild(NbActionsComponent) actionsComponent: NbActionsComponent;
+  @ViewChild(NbActionComponent) actionComponent: NbActionComponent;
 }
 
 describe('NbActionComponent link with icon', () => {
@@ -51,7 +51,7 @@ describe('NbActionComponent link with icon', () => {
         NbActionsModule,
       ],
     });
-    const iconLibs: NbIconLibraries = TestBed.get(NbIconLibraries);
+    const iconLibs: NbIconLibraries = TestBed.inject(NbIconLibraries);
     iconLibs.setDefaultPack('nebular-essentials');
 
     fixture = TestBed.createComponent(NbActionComponent);
@@ -208,7 +208,7 @@ describe('NbActionComponent content projection', () => {
     TestBed.configureTestingModule({
       imports: [ RouterTestingModule.withRoutes([]), NbActionsModule ], declarations: [ NbActionsTestComponent ],
     });
-    const iconLibs: NbIconLibraries = TestBed.get(NbIconLibraries);
+    const iconLibs: NbIconLibraries = TestBed.inject(NbIconLibraries);
     iconLibs.setDefaultPack('nebular-essentials');
 
     fixture = TestBed.createComponent(NbActionsTestComponent);

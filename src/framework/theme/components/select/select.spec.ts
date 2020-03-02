@@ -154,7 +154,7 @@ export class NbReactiveFormSelectComponent {
   showSelect: boolean = true;
   formControl: FormControl = new FormControl();
 
-  @ViewChild(NbSelectComponent, { static: false }) selectComponent: NbSelectComponent<number>;
+  @ViewChild(NbSelectComponent) selectComponent: NbSelectComponent<number>;
   @ViewChildren(NbOptionComponent) optionComponents: QueryList<NbOptionComponent<number>>;
 }
 
@@ -175,7 +175,7 @@ export class NbNgModelSelectComponent {
   options: number[] = [ 1 ];
   selectedValue: number = null;
 
-  @ViewChild(NbOptionComponent, { static: false }) optionComponent: NbOptionComponent<number>;
+  @ViewChild(NbOptionComponent) optionComponent: NbOptionComponent<number>;
 }
 
 @Component({
@@ -295,9 +295,9 @@ export class NbOptionDisabledTestComponent {
   optionGroupDisabled = false;
   optionDisabled = false;
 
-  @ViewChild(NbSelectComponent, { static: false }) selectComponent: NbSelectComponent<number>;
-  @ViewChild(NbOptionGroupComponent, { static: false }) optionGroupComponent: NbOptionGroupComponent;
-  @ViewChild(NbOptionComponent, { static: false }) optionComponent: NbOptionComponent<number>;
+  @ViewChild(NbSelectComponent) selectComponent: NbSelectComponent<number>;
+  @ViewChild(NbOptionGroupComponent) optionGroupComponent: NbOptionGroupComponent;
+  @ViewChild(NbOptionComponent) optionComponent: NbOptionComponent<number>;
 }
 
 describe('Component: NbSelectComponent', () => {
@@ -332,8 +332,8 @@ describe('Component: NbSelectComponent', () => {
     });
 
     fixture = TestBed.createComponent(NbSelectTestComponent);
-    overlayContainerService = TestBed.get(NbOverlayContainerAdapter);
-    document = TestBed.get(NB_DOCUMENT);
+    overlayContainerService = TestBed.inject(NbOverlayContainerAdapter);
+    document = TestBed.inject(NB_DOCUMENT);
     select = fixture.debugElement.query(By.directive(NbSelectComponent)).componentInstance;
 
     overlayContainer = document.createElement('div');

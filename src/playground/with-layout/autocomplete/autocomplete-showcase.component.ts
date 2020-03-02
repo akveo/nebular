@@ -18,7 +18,7 @@ export class AutocompleteShowcaseComponent implements OnInit {
   options: string[];
   filteredOptions$: Observable<string[]>;
 
-  @ViewChild('autoInput', { static: false }) input;
+  @ViewChild('autoInput') input;
 
   ngOnInit() {
     this.options = ['Option 1', 'Option 2', 'Option 3'];

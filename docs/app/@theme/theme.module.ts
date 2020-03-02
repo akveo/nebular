@@ -110,8 +110,8 @@ import {
   ],
 })
 export class NgdThemeModule {
-  static forRoot(): ModuleWithProviders {
-    return <ModuleWithProviders>{
+  static forRoot(): ModuleWithProviders<NgdThemeModule> {
+    return {
       ngModule: NgdThemeModule,
       providers: [
         NgdHighlightService,

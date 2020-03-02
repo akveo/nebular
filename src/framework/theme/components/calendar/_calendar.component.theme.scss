@@ -41,9 +41,10 @@
 
     &.has-week-number {
       nb-card {
-        $week-column-width: #{nb-theme(calendar-weeknumber-width)} +
-                          #{nb-theme(calendar-weeknumber-divider-width)};
-        width: calc(#{nb-theme(calendar-width)} + #{$week-column-width});
+        $calendar-width: nb-theme(calendar-width);
+        $week-col-width: nb-theme(calendar-weeknumber-width);
+        $divider-width: nb-theme(calendar-weeknumber-divider-width);
+        width: calc(#{$calendar-width} + #{$week-col-width} + #{$divider-width});
       }
 
       .month-cell,

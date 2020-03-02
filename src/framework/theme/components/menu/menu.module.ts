@@ -21,8 +21,8 @@ const NB_MENU_PROVIDERS = [NbMenuService, NbMenuInternalService];
   exports: [...nbMenuComponents],
 })
 export class NbMenuModule {
-  static forRoot(): ModuleWithProviders {
-    return <ModuleWithProviders>{
+  static forRoot(): ModuleWithProviders<NbMenuModule> {
+    return {
       ngModule: NbMenuModule,
       providers: [
         ...NB_MENU_PROVIDERS,

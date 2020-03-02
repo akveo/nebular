@@ -16,7 +16,7 @@ describe('date-fns-date-service', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    dateService = new NbDateFnsDateService(TestBed.get(LOCALE_ID), null);
+    dateService = new NbDateFnsDateService(TestBed.inject(LOCALE_ID), null);
   });
 
   it('should parse date according to the MM.dd.yyyy format', () => {
@@ -41,7 +41,7 @@ describe('date-fns-date-service', () => {
 
     beforeEach(() => {
       dateService = new NbDateFnsDateService(
-        TestBed.get(LOCALE_ID),
+        TestBed.inject(LOCALE_ID),
         {
           format: FORMAT,
           parseOptions: {

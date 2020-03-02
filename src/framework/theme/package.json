@@ -21,12 +21,13 @@
     "nebular"
   ],
   "peerDependencies": {
-    "@angular/animations": "^8.0.0",
-    "@angular/common": "^8.0.0",
-    "@angular/core": "^8.0.0",
-    "@angular/router": "^8.0.0",
-    "@angular/cdk": "^8.0.0",
-    "rxjs": "^6.5.1"
+    "@angular/animations": "^9.0.0",
+    "@angular/common": "^9.0.0",
+    "@angular/core": "^9.0.0",
+    "@angular/router": "^9.0.0",
+    "@angular/cdk": "^9.0.0",
+    "rxjs": "^6.5.4",
+    "tslib": "^1.9.0"
   },
   "dependencies": {
     "intersection-observer": "0.7.0"
