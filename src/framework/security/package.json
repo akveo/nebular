@@ -29,7 +29,8 @@
     "@angular/common": "^9.0.0",
     "@angular/core": "^9.0.0",
     "@angular/router": "^9.0.0",
-    "rxjs": "^6.5.4"
+    "rxjs": "^6.5.4",
+    "tslib": "^1.9.0"
   },
   "sideEffects": false
 }
