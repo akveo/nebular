@@ -18,6 +18,7 @@ export class DynamicToAddComponent {
   selector: 'nb-popover-list',
   styles: [`
     nb-card {
+      border: 0;
       margin-bottom: 0;
     }
   `],
@@ -38,6 +39,7 @@ export class PopoverListComponent {
   selector: 'nb-popover-tabs',
   styles: [`
     nb-card {
+      border: 0;
       margin-bottom: 0;
     }
   `],

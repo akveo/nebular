@@ -108,7 +108,7 @@ export class NbAutocompleteComponent<T> implements AfterContentInit, OnDestroy {
   /**
    * NbOptionList with options content.
    * */
-  @ViewChild(NbPortalDirective, { static: false }) portal: NbPortalDirective;
+  @ViewChild(NbPortalDirective) portal: NbPortalDirective;
 
   constructor(protected cd: ChangeDetectorRef) {}
 

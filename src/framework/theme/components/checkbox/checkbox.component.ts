@@ -4,7 +4,16 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { Component, Input, HostBinding, forwardRef, ChangeDetectorRef, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  Input,
+  HostBinding,
+  forwardRef,
+  ChangeDetectorRef,
+  Output,
+  EventEmitter,
+  ChangeDetectionStrategy,
+} from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import { NbComponentStatus } from '../component-status';
@@ -263,6 +272,7 @@ import { convertToBoolProperty, emptyStatusWarning } from '../helpers';
     useExisting: forwardRef(() => NbCheckboxComponent),
     multi: true,
   }],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NbCheckboxComponent implements ControlValueAccessor {
 
@@ -407,11 +417,12 @@ export class NbCheckboxComponent implements ControlValueAccessor {
 
   writeValue(val: any) {
     this._checked = val;
-    this.changeDetector.detectChanges();
+    this.changeDetector.markForCheck();
   }
 
   setDisabledState(val: boolean) {
     this.disabled = convertToBoolProperty(val);
+    this.changeDetector.markForCheck();
   }
 
   setTouched() {

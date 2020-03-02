@@ -46,8 +46,8 @@ const NB_CHAT_COMPONENTS = [
 })
 export class NbChatModule {
 
-  static forRoot(options?: NbChatOptions) {
-    return <ModuleWithProviders> {
+  static forRoot(options?: NbChatOptions): ModuleWithProviders<NbChatModule> {
+    return {
       ngModule: NbChatModule,
       providers: [
         { provide: NbChatOptions, useValue: options || {} },
@@ -55,8 +55,8 @@ export class NbChatModule {
     };
   }
 
-  static forChild(options?: NbChatOptions) {
-    return <ModuleWithProviders> {
+  static forChild(options?: NbChatOptions): ModuleWithProviders<NbChatModule> {
+    return {
       ngModule: NbChatModule,
       providers: [
         { provide: NbChatOptions, useValue: options || {} },

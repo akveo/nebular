@@ -15,7 +15,7 @@ describe('native-date-service', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    dateService = new NbNativeDateService(TestBed.get(LOCALE_ID));
+    dateService = new NbNativeDateService(TestBed.inject(LOCALE_ID));
   });
 
   it('should set locale to en', () => {

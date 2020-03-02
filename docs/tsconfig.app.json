@@ -12,9 +12,8 @@
     ],
     "outDir": "../out-tsc/app",
     "target": "es5",
-    "module": "esnext",
     "baseUrl": ".",
-    "types": [],
+    "types": ["node"],
     "paths": {
       "@nebular/theme": ["../src/framework/theme/public_api.ts"],
       "@nebular/auth": ["../src/framework/auth/public_api.ts"],
@@ -22,6 +21,10 @@
       "@nebular/eva-icons": ["../src/framework/eva-icons/public_api.ts"]
     }
   },
+  "files": [
+    "main.ts",
+    "polyfills.ts"
+  ],
   "exclude": [
     "test.ts",
     "**/*.spec.ts",
@@ -29,11 +32,5 @@
     "assets/**/*.ts",
     "dist/**/*",
     "../src/framework/**/schematics/**/*"
-  ],
-  "include": [
-    "../docs/**/*",
-    "../src/playground/**/*",
-    "../src/framework/**/*",
-    "../src/app/dynamic.component.ts"
   ]
 }

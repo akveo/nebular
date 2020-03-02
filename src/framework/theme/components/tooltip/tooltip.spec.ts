@@ -2,6 +2,8 @@ import { Component, ElementRef, Input, NgModule, Type, ViewChild } from '@angula
 import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
+import { Subject } from 'rxjs';
+import createSpy = jasmine.createSpy;
 
 import { NbThemeModule } from '../../theme.module';
 import { NbLayoutModule } from '../layout/layout.module';
@@ -14,9 +16,7 @@ import { NbTooltipDirective } from './tooltip.directive';
 import { NbTooltipModule } from './tooltip.module';
 import { NbTooltipComponent } from './tooltip.component';
 import { NbIconLibraries } from '../icon/icon-libraries';
-import { Subject } from 'rxjs';
-import createSpy = jasmine.createSpy;
-import { NbOverlayConfig } from '@nebular/theme/components/cdk/overlay/mapping';
+import { NbOverlayConfig } from '../cdk/overlay/mapping';
 
 @Component({
   selector: 'nb-tooltip-default-test',
@@ -29,8 +29,8 @@ import { NbOverlayConfig } from '@nebular/theme/components/cdk/overlay/mapping';
   `,
 })
 export class NbTooltipDefaultTestComponent {
-  @ViewChild('button', { static: false }) button: ElementRef;
-  @ViewChild(NbTooltipDirective, { static: false }) tooltip: NbTooltipDirective;
+  @ViewChild('button') button: ElementRef;
+  @ViewChild(NbTooltipDirective) tooltip: NbTooltipDirective;
 }
 
 @Component({
@@ -51,8 +51,8 @@ export class NbTooltipDefaultTestComponent {
   `,
 })
 export class NbTooltipBindingsTestComponent {
-  @ViewChild(NbTooltipDirective, { static: false }) tooltip: NbTooltipDirective;
-  @ViewChild('button', { static: false }) button: ElementRef;
+  @ViewChild(NbTooltipDirective) tooltip: NbTooltipDirective;
+  @ViewChild('button') button: ElementRef;
   @Input() content: any = '';
   @Input() status = 'primary';
   @Input() icon = '';
@@ -75,8 +75,8 @@ export class NbTooltipBindingsTestComponent {
   `,
 })
 export class NbTooltipInstanceTestComponent {
-  @ViewChild(NbTooltipDirective, { static: false }) tooltip: NbTooltipDirective;
-  @ViewChild('button', { static: false }) button: ElementRef;
+  @ViewChild(NbTooltipDirective) tooltip: NbTooltipDirective;
+  @ViewChild('button') button: ElementRef;
 }
 
 const dynamicOverlayIsShow$ = new Subject();
@@ -193,7 +193,7 @@ describe('Directive: NbTooltipDirective', () => {
       ],
     });
 
-    const iconLibs: NbIconLibraries = TestBed.get(NbIconLibraries);
+    const iconLibs: NbIconLibraries = TestBed.inject(NbIconLibraries);
     iconLibs.registerSvgPack('test', { 'some-icon': '<svg>some-icon</svg>' });
     iconLibs.setDefaultPack('test')
   }));
@@ -336,7 +336,7 @@ describe('Directive: NbTooltipDirective', () => {
           PopoverTestModule,
         ],
       })
-        .overrideComponent(NbTooltipDirective, {
+        .overrideDirective(NbTooltipDirective, {
           set: {
             providers: [
               { provide: NbDynamicOverlayHandler, useValue: overlayHandler },

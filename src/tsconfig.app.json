@@ -3,7 +3,6 @@
   "compilerOptions": {
     "outDir": "../out-tsc/app",
     "baseUrl": "./",
-    "module": "esnext",
     "types": [],
     "paths": {
       "@nebular/*": [
@@ -11,8 +10,9 @@
       ]
     }
   },
-  "include": [
-    "../src/**/*"
+  "files": [
+    "main.ts",
+    "polyfills.ts"
   ],
   "exclude": [
     "test.ts",

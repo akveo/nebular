@@ -7,7 +7,7 @@
 import * as ts from 'typescript';
 import { normalize, Path } from '@angular-devkit/core';
 import { Tree } from '@angular-devkit/schematics';
-import { getSourceFile } from '@angular/cdk/schematics';
+import { parseSourceFile } from '@angular/cdk/schematics';
 import { addDeclarationToModule, findNodes, getSourceNodes } from '@schematics/angular/utility/ast-utils';
 import { applyInsertChange } from './change';
 import { getNodeIndentation } from './formatting';
@@ -16,7 +16,7 @@ import { getNodeIndentation } from './formatting';
  * Returns all exported and named class declarations with a given decorator.
  */
 export function getClassWithDecorator(tree: Tree, path: Path, decoratorName: string): ts.ClassDeclaration[] {
-  return findNodes(getSourceFile(tree, path), ts.SyntaxKind.ClassDeclaration)
+  return findNodes(parseSourceFile(tree, path), ts.SyntaxKind.ClassDeclaration)
     .filter(node => isNodeExported(node as ts.Declaration))
     .filter(node => (node as ts.ClassDeclaration).name != null)
     .filter((node: ts.ClassDeclaration) => hasDecoratorCall(node, decoratorName)) as ts.ClassDeclaration[];
@@ -111,7 +111,7 @@ function addNodeArrayElement(
 }
 
 export function addDeclaration(tree: Tree, modulePath: Path, componentClass: string, importPath: string): void {
-  const source = getSourceFile(tree, modulePath);
+  const source = parseSourceFile(tree, modulePath);
   const declarationsChanges = addDeclarationToModule(source, modulePath, componentClass, importPath);
   applyInsertChange(tree, normalize(source.fileName), ...declarationsChanges);
 }

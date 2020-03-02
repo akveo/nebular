@@ -18,16 +18,13 @@ import { NbIsGrantedDirective } from './directives/is-granted.directive';
   ],
 })
 export class NbSecurityModule {
-  static forRoot(nbSecurityOptions?: NbAclOptions): ModuleWithProviders {
-    return <ModuleWithProviders> {
+  static forRoot(nbSecurityOptions?: NbAclOptions): ModuleWithProviders<NbSecurityModule> {
+    return {
       ngModule: NbSecurityModule,
       providers: [
         { provide: NB_SECURITY_OPTIONS_TOKEN, useValue: nbSecurityOptions },
         NbAclService,
         NbAccessChecker,
-      ],
-      exports: [
-        NbIsGrantedDirective,
       ],
     };
   }
