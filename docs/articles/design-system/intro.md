@@ -1,6 +1,6 @@
 # Eva Design System
 
-Starting with version 4.0 Nebular becomes an Angular implementation of [Eva Design System](https://eva.design?utm_source=nebular_docs&utm_medium=intro).
+Starting with version 4.0 Nebular becomes an Angular implementation of [Eva Design System](https://hubs.ly/H0n4C-S0).
 This means that components visual style and behavior are based on Design System rules and agreements.  
 <hr>
 
