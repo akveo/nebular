@@ -1,3 +1,13 @@
+<a name="5.0.0-beta.7.hotfix"></a>
+# [5.0.0-beta.7.hotfix](https://github.com/akveo/nebular/compare/v4.6.0...v5.0.0-beta.7.hotfix) (2020-03-03)
+
+
+### Bug Fixes
+
+* **input:** use correct status property name ([#2248](https://github.com/akveo/nebular/issues/2248)) ([737ffe2](https://github.com/akveo/nebular/commit/737ffe2))
+
+
+
 <a name="5.0.0-beta.7"></a>
 # [5.0.0-beta.7](https://github.com/akveo/nebular/compare/v4.6.0...v5.0.0-beta.7) (2020-02-28)
 
