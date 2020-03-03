@@ -278,7 +278,7 @@ export class NbInputDirective implements DoCheck, OnChanges, OnInit, OnDestroy, 
     }
   }
 
-  ngOnChanges({ fieldStatus, fieldSize }: SimpleChanges) {
+  ngOnChanges({ status, fieldSize }: SimpleChanges) {
     if (status) {
       this.status$.next(this.status);
     }
