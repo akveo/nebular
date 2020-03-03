@@ -309,7 +309,7 @@ export class NbLayoutComponent implements AfterViewInit, OnDestroy {
     this.scrollTop.shouldRestore()
       .pipe(filter(
         () => this.restoreScrollTopValue),
-        takeUntil(this.destroy$)
+        takeUntil(this.destroy$),
       )
       .subscribe(() => this.scroll(0, 0));
 
