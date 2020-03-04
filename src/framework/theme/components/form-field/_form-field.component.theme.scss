@@ -1,0 +1,76 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
+@mixin nb-form-field-theme() {
+  .nb-form-field-addon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+    @include nb-component-animation(color);
+
+    &-disabled {
+      color: nb-theme(form-field-addon-disabled-text-color);
+    }
+  }
+
+  @each $status in nb-get-statuses() {
+    .nb-form-field-addon-#{$status} {
+      color: nb-theme(form-field-addon-#{$status}-text-color);
+
+      &-highlight {
+        color: nb-theme(form-field-addon-#{$status}-highlight-text-color);
+      }
+    }
+  }
+
+  @each $size in nb-get-sizes() {
+    $addon-height: nb-theme(form-field-addon-#{$size}-height);
+    $addon-width: nb-theme(form-field-addon-#{$size}-width);
+
+    .nb-form-field-prefix-#{$size},
+    .nb-form-field-suffix-#{$size} {
+      height: $addon-height;
+      width: $addon-width;
+      font-size: nb-theme(form-field-addon-#{$size}-font-size);
+      line-height: nb-theme(form-field-addon-#{$size}-line-height);
+      font-weight: nb-theme(form-field-addon-#{$size}-font-weight);
+
+      nb-icon {
+        font-size: nb-theme(form-field-addon-#{$size}-icon-size);
+        line-height: nb-theme(form-field-addon-#{$size}-icon-size);
+      }
+    }
+
+    .nb-form-field-prefix-#{$size} {
+      @include nb-ltr(margin-right, calc(#{$addon-width} * -1));
+      @include nb-rtl(margin-left, calc(#{$addon-width} * -1));
+    }
+
+    .nb-form-field-suffix-#{$size} {
+      @include nb-ltr(margin-left, calc(#{$addon-width} * -1));
+      @include nb-rtl(margin-right, calc(#{$addon-width} * -1));
+    }
+  }
+}
+
+@mixin nb-form-field-with-prefix($selector, $size) {
+  $addon-width: nb-theme(form-field-addon-#{$size}-width);
+
+  .nb-form-field-control-with-prefix #{$selector} {
+    @include nb-ltr(padding-left, $addon-width);
+    @include nb-rtl(padding-right, $addon-width);
+  }
+}
+
+@mixin nb-form-field-with-suffix($selector, $size) {
+  $addon-width: nb-theme(form-field-addon-#{$size}-width);
+
+  .nb-form-field-control-with-suffix #{$selector} {
+    @include nb-ltr(padding-right, $addon-width);
+    @include nb-rtl(padding-left, $addon-width);
+  }
+}

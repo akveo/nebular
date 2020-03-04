@@ -133,7 +133,7 @@ describe('NbSidebarComponent', () => {
     });
 
     it('should compact when sidebar service compact method called', () => {
-      const sidebarService: NbSidebarService = TestBed.get(NbSidebarService);
+      const sidebarService: NbSidebarService = TestBed.inject(NbSidebarService);
 
       expect(sidebarComponent.compacted).toEqual(false);
 

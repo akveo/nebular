@@ -75,6 +75,7 @@ import { convertToBoolProperty, emptyStatusWarning } from '../helpers';
  * toggle-outline-width:
  * toggle-outline-color:
  * toggle-switcher-size:
+ * toggle-switcher-icon-size:
  * toggle-text-font-family:
  * toggle-text-font-size:
  * toggle-text-font-weight:
@@ -264,7 +265,7 @@ import { convertToBoolProperty, emptyStatusWarning } from '../helpers';
     <label class="toggle-label">
       <input type="checkbox"
              class="native-input visually-hidden"
-             role="switcher"
+             role="switch"
              [attr.aria-checked]="checked"
              [disabled]="disabled"
              [checked]="checked"

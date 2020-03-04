@@ -68,9 +68,9 @@ describe('jwt-interceptor', () => {
         NbDummyAuthStrategy,
       ],
     });
-    authService = TestBed.get(NbAuthService);
-    tokenService = TestBed.get(NbTokenService);
-    dummyAuthStrategy = TestBed.get(NbDummyAuthStrategy);
+    authService = TestBed.inject(NbAuthService);
+    tokenService = TestBed.inject(NbTokenService);
+    dummyAuthStrategy = TestBed.inject(NbDummyAuthStrategy);
   });
 
     beforeEach(async(

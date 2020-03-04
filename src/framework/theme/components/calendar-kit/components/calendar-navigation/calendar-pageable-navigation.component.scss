@@ -9,31 +9,5 @@
 :host {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-
-  .prev-month {
-    @include nb-ltr() {
-      margin-left: auto;
-      margin-right: 0.4rem;
-    }
-    @include nb-rtl() {
-      margin-left: 0.4rem;
-      margin-right: auto;
-    }
-  }
-
-  .next-month {
-    @include nb-ltr() {
-      margin-left: 0.4rem;
-      margin-right: auto;
-    }
-    @include nb-rtl() {
-      margin-left: auto;
-      margin-right: 0.4rem;
-    }
-  }
-}
-
-nb-calendar-navigation {
-  margin: 0 0.5rem;
+  justify-content: flex-start;
 }

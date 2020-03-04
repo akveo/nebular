@@ -65,9 +65,9 @@ export class NbThemeModule {
   static forRoot(nbThemeOptions: NbThemeOptions = { name: 'default' },
                  nbJSThemes?: NbJSThemeOptions[],
                  nbMediaBreakpoints?: NbMediaBreakpoint[],
-                 layoutDirection?: NbLayoutDirection): ModuleWithProviders {
+                 layoutDirection?: NbLayoutDirection): ModuleWithProviders<NbThemeModule> {
 
-    return <ModuleWithProviders> {
+    return {
       ngModule: NbThemeModule,
       providers: [
         { provide: NB_THEME_OPTIONS, useValue: nbThemeOptions || {} },

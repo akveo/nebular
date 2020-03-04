@@ -13,7 +13,8 @@ import {
   AfterViewInit,
 } from '@angular/core';
 import { Location } from '@angular/common';
-import { takeWhile } from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 import { NgdAnalytics, NgdIframeCommunicatorService } from '../../../@theme/services';
 import { NgdExampleView } from '../../enum.example-view';
 
@@ -25,7 +26,7 @@ import { NgdExampleView } from '../../enum.example-view';
 })
 export class NgdLiveExampleBlockComponent implements OnInit, AfterViewInit, OnDestroy {
 
-  @ViewChild('iframe', { static: false }) iframe: ElementRef;
+  @ViewChild('iframe') iframe: ElementRef;
   @Input() content: any;
   @Input() hasViewSwitch: boolean = false;
   @Output() changeView = new EventEmitter<NgdExampleView>();
@@ -51,7 +52,8 @@ export class NgdLiveExampleBlockComponent implements OnInit, AfterViewInit, OnDe
   }
 
   iframeHeight = 0;
-  alive: boolean = true;
+
+  private destroy$ = new Subject<void>();
 
   themes: {label: string; value: string}[] = [
     { label: 'Default', value: 'default' },
@@ -79,7 +81,7 @@ export class NgdLiveExampleBlockComponent implements OnInit, AfterViewInit, OnDe
 
   ngOnInit() {
     this.communicator.receive(this.content.id)
-      .pipe(takeWhile(() => this.alive))
+      .pipe(takeUntil(this.destroy$))
       .subscribe(it => {
         this.iframeHeight = it.height;
         this.loading = false;
@@ -97,7 +99,8 @@ export class NgdLiveExampleBlockComponent implements OnInit, AfterViewInit, OnDe
   }
 
   ngOnDestroy() {
-    this.alive = false;
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   switchTheme(theme: string) {

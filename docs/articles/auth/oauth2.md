@@ -140,17 +140,18 @@ And finally, let's add code to our component to initiate the authentication. Fir
 })
 export class NbOAuth2LoginComponent implements OnDestroy {
 
-  alive = true;
+  private destroy$ = new Subject<void>();
 
   login() {
     this.authService.authenticate('google')
-      .pipe(takeWhile(() => this.alive))
+      .pipe(takeUntil(this.destroy$))
       .subscribe((authResult: NbAuthResult) => {
       });
   }
 
   ngOnDestroy(): void {
-    this.alive = false;
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }
 ```
@@ -170,11 +171,11 @@ Now, we need to configure that "callback" URL to be able to properly handle resp
 })
 export class NbOAuth2CallbackPlaygroundComponent implements OnDestroy {
 
-  alive = true;
+  private destroy$ = new Subject<void>();
 
   constructor(private authService: NbAuthService, private router: Router) {
     this.authService.authenticate('google')
-      .pipe(takeWhile(() => this.alive))
+      .pipe(takeUntil(this.destroy$))
       .subscribe((authResult: NbAuthResult) => {
         if (authResult.isSuccess()) {
           this.router.navigateByUrl('/pages/dashboard');
@@ -183,7 +184,8 @@ export class NbOAuth2CallbackPlaygroundComponent implements OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.alive = false;
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }
 ``` 

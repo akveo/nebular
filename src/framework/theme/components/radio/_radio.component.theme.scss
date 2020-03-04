@@ -38,10 +38,17 @@
       }
 
       &.status-#{$status} .native-input:enabled:focus + .outer-circle {
+        background-color: nb-theme(radio-#{$status}-focus-background-color);
         border-color: nb-theme(radio-#{$status}-focus-border-color);
       }
-      &.status-#{$status} .native-input:enabled:checked:focus ~ .inner-circle {
-        background-color: nb-theme(radio-#{$status}-focus-inner-circle-color);
+      &.status-#{$status} .native-input:enabled:checked:focus {
+        & + .outer-circle {
+          background-color: nb-theme(radio-#{$status}-focus-checked-background-color);
+          border-color: nb-theme(radio-#{$status}-focus-checked-border-color);
+        }
+        & ~ .inner-circle {
+          background-color: nb-theme(radio-#{$status}-focus-inner-circle-color);
+        }
       }
 
       &.status-#{$status} label:hover .native-input:enabled + .outer-circle {
@@ -51,6 +58,7 @@
       &.status-#{$status} label:hover .native-input:checked:enabled {
         + .outer-circle {
           background-color: nb-theme(radio-#{$status}-hover-checked-background-color);
+          border-color: nb-theme(radio-#{$status}-hover-checked-border-color);
         }
         ~ .inner-circle {
           background-color: nb-theme(radio-#{$status}-hover-inner-circle-color);
@@ -58,10 +66,17 @@
       }
 
       &.status-#{$status} label .native-input:enabled:active + .outer-circle {
+        background-color: nb-theme(radio-#{$status}-active-background-color);
         border-color: nb-theme(radio-#{$status}-active-border-color);
       }
-      &.status-#{$status} label .native-input:enabled:checked:active ~ .inner-circle {
-        background-color: nb-theme(radio-#{$status}-active-inner-circle-color);
+      &.status-#{$status} label .native-input:enabled:checked:active {
+        & + .outer-circle {
+          background-color: nb-theme(radio-#{$status}-active-checked-background-color);
+          border-color: nb-theme(radio-#{$status}-active-checked-border-color);
+        }
+        & ~ .inner-circle {
+          background-color: nb-theme(radio-#{$status}-active-inner-circle-color);
+        }
       }
 
       &.status-#{$status} .text {
@@ -94,7 +109,8 @@
       font-size: nb-theme(radio-text-font-size);
       font-weight: nb-theme(radio-text-font-weight);
       line-height: nb-theme(radio-text-line-height);
-      margin-left: nb-theme(radio-width);
+      @include nb-ltr(margin-left, nb-theme(radio-width));
+      @include nb-rtl(margin-right, nb-theme(radio-width));
     }
   }
 }

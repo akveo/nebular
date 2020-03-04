@@ -9,7 +9,7 @@
       "es2017"
     ],
     "outDir": "../out-tsc/spec",
-    "module": "commonjs",
+    "module": "esnext",
     "target": "es6",
     "baseUrl": "",
     "types": [

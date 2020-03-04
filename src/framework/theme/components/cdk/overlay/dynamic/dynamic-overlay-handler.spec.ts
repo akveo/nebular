@@ -37,6 +37,7 @@ export class NbDynamicOverlayMockComponent implements NbRenderableContainer {
 @Component({ template: '' })
 export class NbDynamicOverlayMock2Component extends NbDynamicOverlayMockComponent { }
 
+@Injectable()
 export class NbMockDynamicOverlay {
 
   _container: string = 'container';
@@ -105,6 +106,7 @@ export class NbMockDynamicOverlay {
   }
 }
 
+@Injectable()
 export class MockPositionBuilder {
   positionChange = new Subject();
   _connectedTo: ElementRef<any>;

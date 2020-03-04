@@ -9,8 +9,8 @@ import {
   Renderer2, ViewChild, ViewContainerRef, Inject, PLATFORM_ID,
 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
-import { BehaviorSubject } from 'rxjs';
-import { filter, takeWhile } from 'rxjs/operators';
+import { BehaviorSubject, Subject } from 'rxjs';
+import { filter, takeUntil } from 'rxjs/operators';
 
 import { convertToBoolProperty } from '../helpers';
 import { NbThemeService } from '../../services/theme.service';
@@ -200,17 +200,17 @@ export class NbLayoutComponent implements AfterViewInit, OnDestroy {
   }
 
   // TODO remove as of 5.0.0
-  @ViewChild('layoutTopDynamicArea', { read: ViewContainerRef, static: false }) veryTopRef: ViewContainerRef;
+  @ViewChild('layoutTopDynamicArea', { read: ViewContainerRef }) veryTopRef: ViewContainerRef;
 
-  @ViewChild('scrollableContainer', { read: ElementRef, static: false })
+  @ViewChild('scrollableContainer', { read: ElementRef })
   scrollableContainerRef: ElementRef<HTMLElement>;
 
-  @ViewChild('layoutContainer', { read: ElementRef, static: false })
+  @ViewChild('layoutContainer', { read: ElementRef })
   layoutContainerRef: ElementRef<HTMLElement>;
 
   protected afterViewInit$ = new BehaviorSubject(null);
 
-  private alive: boolean = true;
+  private destroy$ = new Subject<void>();
 
   constructor(
     protected themeService: NbThemeService,
@@ -230,7 +230,7 @@ export class NbLayoutComponent implements AfterViewInit, OnDestroy {
 
     this.themeService.onThemeChange()
       .pipe(
-        takeWhile(() => this.alive),
+        takeUntil(this.destroy$),
       )
       .subscribe((theme: any) => {
         const body = this.document.getElementsByTagName('body')[0];
@@ -242,7 +242,7 @@ export class NbLayoutComponent implements AfterViewInit, OnDestroy {
 
     this.themeService.onAppendLayoutClass()
       .pipe(
-        takeWhile(() => this.alive),
+        takeUntil(this.destroy$),
       )
       .subscribe((className: string) => {
         this.renderer.addClass(this.elementRef.nativeElement, className);
@@ -250,7 +250,7 @@ export class NbLayoutComponent implements AfterViewInit, OnDestroy {
 
     this.themeService.onRemoveLayoutClass()
       .pipe(
-        takeWhile(() => this.alive),
+        takeUntil(this.destroy$),
       )
       .subscribe((className: string) => {
         this.renderer.removeClass(this.elementRef.nativeElement, className);
@@ -259,7 +259,7 @@ export class NbLayoutComponent implements AfterViewInit, OnDestroy {
     this.spinnerService.registerLoader(new Promise((resolve, reject) => {
       this.afterViewInit$
         .pipe(
-          takeWhile(() => this.alive),
+          takeUntil(this.destroy$),
         )
         .subscribe((_) => resolve());
     }));
@@ -267,7 +267,7 @@ export class NbLayoutComponent implements AfterViewInit, OnDestroy {
 
     this.rulerService.onGetDimensions()
       .pipe(
-        takeWhile(() => this.alive),
+        takeUntil(this.destroy$),
       )
       .subscribe(({ listener }) => {
         listener.next(this.getDimensions());
@@ -276,7 +276,7 @@ export class NbLayoutComponent implements AfterViewInit, OnDestroy {
 
     this.scrollService.onGetPosition()
       .pipe(
-        takeWhile(() => this.alive),
+        takeUntil(this.destroy$),
       )
       .subscribe(({ listener }) => {
         listener.next(this.getScrollPosition());
@@ -287,7 +287,7 @@ export class NbLayoutComponent implements AfterViewInit, OnDestroy {
       .shouldRestore()
       .pipe(
         filter(() => this.restoreScrollTopValue),
-        takeWhile(() => this.alive),
+        takeUntil(this.destroy$),
       )
       .subscribe(() => {
         this.scroll(0, 0);
@@ -319,18 +319,19 @@ export class NbLayoutComponent implements AfterViewInit, OnDestroy {
 
   ngAfterViewInit() {
     this.layoutDirectionService.onDirectionChange()
-      .pipe(takeWhile(() => this.alive))
+      .pipe(takeUntil(this.destroy$))
       .subscribe(direction => this.document.dir = direction);
 
     this.scrollService.onManualScroll()
-      .pipe(takeWhile(() => this.alive))
+      .pipe(takeUntil(this.destroy$))
       .subscribe(({ x, y }: NbScrollPosition) => this.scroll(x, y));
 
     this.afterViewInit$.next(true);
   }
 
   ngOnDestroy() {
-    this.alive = false;
+    this.destroy$.next();
+    this.destroy$.complete();
     this.unregisterAsOverlayContainer();
   }
 

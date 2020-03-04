@@ -38,8 +38,8 @@ const NB_SIDEBAR_PROVIDERS = [
   ],
 })
 export class NbSidebarModule {
-  static forRoot(): ModuleWithProviders {
-    return <ModuleWithProviders>{
+  static forRoot(): ModuleWithProviders<NbSidebarModule> {
+    return {
       ngModule: NbSidebarModule,
       providers: [
         ...NB_SIDEBAR_PROVIDERS,

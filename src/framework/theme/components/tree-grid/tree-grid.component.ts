@@ -7,10 +7,8 @@
 import {
   AfterViewInit,
   Attribute,
-  ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
-  ContentChildren,
   ElementRef,
   HostBinding,
   Inject,
@@ -18,14 +16,17 @@ import {
   IterableDiffers,
   OnDestroy,
   QueryList,
+  EmbeddedViewRef,
+  ViewContainerRef,
 } from '@angular/core';
-import { fromEvent, merge } from 'rxjs';
-import { debounceTime, takeWhile } from 'rxjs/operators';
+import { fromEvent, merge, Subject } from 'rxjs';
+import { debounceTime, takeUntil } from 'rxjs/operators';
 
 import { NB_DOCUMENT, NB_WINDOW } from '../../theme.options';
 import { NbPlatform } from '../cdk/platform/platform-service';
 import { NbDirectionality } from '../cdk/bidi/bidi-service';
 import { NB_TABLE_TEMPLATE, NbTable } from '../cdk/table/table.module';
+import { NbRowContext } from '../cdk/table/type-mappings';
 import { NbTreeGridDataSource, NbTreeGridDataSourceBuilder } from './data-source/tree-grid-data-source';
 import { NB_DEFAULT_ROW_LEVEL, NbTreeGridPresentationNode } from './data-source/tree-grid.model';
 import { NbToggleOptions } from './data-source/tree-grid.service';
@@ -131,7 +132,6 @@ import { NbColumnsService } from './tree-grid-columns.service';
   selector: 'table[nbTreeGrid]',
   template: NB_TABLE_TEMPLATE,
   styleUrls: ['./tree-grid.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
     { provide: NB_TREE_GRID, useExisting: NbTreeGridComponent },
     NbColumnsService,
@@ -146,15 +146,15 @@ export class NbTreeGridComponent<T> extends NbTable<NbTreeGridPresentationNode<T
               elementRef: ElementRef,
               @Attribute('role') role: string,
               dir: NbDirectionality,
-              @Inject(NB_DOCUMENT) document: any,
-              platform: NbPlatform | undefined,
+              @Inject(NB_DOCUMENT) document,
+              platform: NbPlatform,
               @Inject(NB_WINDOW) private window,
   ) {
     super(differs, changeDetectorRef, elementRef, role, dir, document, platform);
     this.platform = platform;
   }
 
-  private alive: boolean = true;
+  private destroy$ = new Subject<void>();
   private _source: NbTreeGridDataSource<T>;
   private platform: NbPlatform;
 
@@ -190,8 +190,6 @@ export class NbTreeGridComponent<T> extends NbTable<NbTreeGridPresentationNode<T
   }
   private equalColumnsWidthValue: boolean = false;
 
-  @ContentChildren(NbTreeGridRowComponent) private rows: QueryList<NbTreeGridRowComponent>;
-
   @HostBinding('class.nb-tree-grid') readonly treeClass = true;
 
   ngAfterViewInit() {
@@ -201,7 +199,7 @@ export class NbTreeGridComponent<T> extends NbTable<NbTreeGridPresentationNode<T
       this._contentHeaderRowDefs.changes,
       this._contentFooterRowDefs.changes,
     );
-    rowsChange$.pipe(takeWhile(() => this.alive))
+    rowsChange$.pipe(takeUntil(this.destroy$))
       .subscribe(() => this.checkDefsCount());
 
     if (this.platform.isBrowser) {
@@ -209,22 +207,25 @@ export class NbTreeGridComponent<T> extends NbTable<NbTreeGridPresentationNode<T
 
       const windowResize$ = fromEvent(this.window, 'resize').pipe(debounceTime(50));
       merge(rowsChange$, this._contentColumnDefs.changes, windowResize$)
-        .pipe(takeWhile(() => this.alive))
+        .pipe(takeUntil(this.destroy$))
         .subscribe(() => this.updateVisibleColumns());
     }
   }
 
   ngOnDestroy() {
     super.ngOnDestroy();
-    this.alive = false;
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   toggleRow(row: NbTreeGridRowComponent, options?: NbToggleOptions): void {
-    this._source.toggleByIndex(this.getDataIndex(row), options);
+    const context = this.getRowContext(row);
+    this._source.toggle(context.$implicit.data, options);
   }
 
   toggleCellRow(cell: NbTreeGridCellDirective): void {
-    this.toggleRow(this.findCellRow(cell));
+    const context = this.getCellContext(cell);
+    this._source.toggle(context.$implicit.data);
   }
 
   getColumnWidth(): string {
@@ -235,29 +236,34 @@ export class NbTreeGridComponent<T> extends NbTable<NbTreeGridPresentationNode<T
   }
 
   getCellLevel(cell: NbTreeGridCellDirective, columnName: string): number {
-    const isFirstColumn = this.isFirstColumn(columnName);
-    const row = isFirstColumn && this.findCellRow(cell);
-    const level = row && this.getRowLevel(row);
-    if (level || level === 0) {
-      return level;
+    if (this.isFirstColumn(columnName)) {
+      return this.getCellContext(cell).$implicit.level;
     }
     return NB_DEFAULT_ROW_LEVEL;
   }
 
-  private getDataIndex(row: NbTreeGridRowComponent): number {
-    const rowEl = row.elementRef.nativeElement;
-    const parent = rowEl.parentElement;
-    if (parent) {
-      return Array.from(parent.children)
-        .filter((child: Element) => child.hasAttribute('nbtreegridrow'))
-        .indexOf(rowEl);
-    }
-
-    return -1;
+  private getRowContext(row: NbTreeGridRowComponent): NbRowContext<NbTreeGridPresentationNode<T>> {
+    return this.getContextByRowEl(row.elementRef.nativeElement);
   }
 
-  private getRowLevel(row: NbTreeGridRowComponent): number {
-    return this._source.getLevel(this.getDataIndex(row));
+  private getCellContext(cell: NbTreeGridCellDirective): NbRowContext<NbTreeGridPresentationNode<T>> {
+    return this.getContextByCellEl(cell.elementRef.nativeElement);
+  }
+
+  private getContextByCellEl(cellEl: HTMLElement): NbRowContext<NbTreeGridPresentationNode<T>> {
+    return this.getContextByRowEl(cellEl.parentElement);
+  }
+
+  private getContextByRowEl(rowEl: HTMLElement): NbRowContext<NbTreeGridPresentationNode<T>> {
+    const rowsContainer: ViewContainerRef = this._rowOutlet.viewContainer;
+
+    for (let i = 0; i < rowsContainer.length; i++) {
+      const rowViewRef = rowsContainer.get(i) as EmbeddedViewRef<NbRowContext<NbTreeGridPresentationNode<T>>>;
+
+      if (rowViewRef.rootNodes.includes(rowEl)) {
+        return rowViewRef.context;
+      }
+    }
   }
 
   private getColumns(): string[] {
@@ -274,15 +280,6 @@ export class NbTreeGridComponent<T> extends NbTable<NbTreeGridPresentationNode<T
 
   private isFirstColumn(columnName: string): boolean {
     return this.getColumns()[0] === columnName;
-  }
-
-  private findCellRow(cell: NbTreeGridCellDirective): NbTreeGridRowComponent | undefined {
-    const cellRowElement = cell.elementRef.nativeElement.parentElement;
-
-    return this.rows.toArray()
-      .find((row: NbTreeGridRowComponent) => {
-        return row.elementRef.nativeElement === cellRowElement;
-      });
   }
 
   private checkDefsCount(): void {

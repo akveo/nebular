@@ -23,10 +23,12 @@ import {
   Output,
   QueryList,
   ViewChild,
+  SimpleChanges,
+  OnChanges,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { merge } from 'rxjs';
-import { startWith, switchMap, takeWhile, filter } from 'rxjs/operators';
+import { merge, Subject, BehaviorSubject } from 'rxjs';
+import { startWith, switchMap, takeUntil, filter, map, finalize } from 'rxjs/operators';
 
 import {
   NbAdjustableConnectedPositionStrategy,
@@ -43,9 +45,11 @@ import { NbComponentSize } from '../component-size';
 import { NbComponentShape } from '../component-shape';
 import { NbComponentStatus } from '../component-status';
 import { NB_DOCUMENT } from '../../theme.options';
-import { NbOptionComponent } from './option.component';
+import { NbOptionComponent } from '../option/option.component';
 import { convertToBoolProperty } from '../helpers';
 import { NB_SELECT_INJECTION_TOKEN } from './select-injection-tokens';
+import { NbFormFieldControl, NbFormFieldControlConfig } from '../form-field/form-field-control';
+import { NbFocusMonitor } from '../cdk/a11y/a11y.module';
 
 export type NbSelectAppearance = 'outline' | 'filled' | 'hero';
 
@@ -54,6 +58,12 @@ export type NbSelectAppearance = 'outline' | 'filled' | 'hero';
   template: '<ng-content></ng-content>',
 })
 export class NbSelectLabelComponent {
+}
+
+export function nbSelectFormFieldControlConfigFactory() {
+  const config = new NbFormFieldControlConfig();
+  config.supportsSuffix = false;
+  return config;
 }
 
 /**
@@ -139,24 +149,11 @@ export class NbSelectLabelComponent {
  * select-cursor:
  * select-disabled-cursor:
  * select-min-width:
- * select-options-list-max-height:
- * select-options-list-shadow:
- * select-options-list-border-style:
- * select-options-list-border-width:
  * select-outline-width:
  * select-outline-color:
+ * select-icon-offset:
  * select-text-font-family:
  * select-placeholder-text-font-family:
- * select-option-background-color:
- * select-option-text-color:
- * select-option-selected-background-color:
- * select-option-selected-text-color:
- * select-option-focus-background-color:
- * select-option-focus-text-color:
- * select-option-hover-background-color:
- * select-option-hover-text-color:
- * select-option-disabled-background-color:
- * select-option-disabled-text-color:
  * select-tiny-text-font-size:
  * select-tiny-text-font-weight:
  * select-tiny-text-line-height:
@@ -288,11 +285,6 @@ export class NbSelectLabelComponent {
  * select-outline-control-disabled-border-color:
  * select-outline-control-disabled-icon-color:
  * select-outline-control-disabled-text-color:
- * select-option-outline-tiny-padding:
- * select-option-outline-small-padding:
- * select-option-outline-medium-padding:
- * select-option-outline-large-padding:
- * select-option-outline-giant-padding:
  * select-outline-adjacent-border-style:
  * select-outline-adjacent-border-width:
  * select-outline-basic-open-border-color:
@@ -309,18 +301,6 @@ export class NbSelectLabelComponent {
  * select-outline-danger-adjacent-border-color:
  * select-outline-control-open-border-color:
  * select-outline-control-adjacent-border-color:
- * select-group-option-outline-tiny-start-padding:
- * select-group-option-outline-small-start-padding:
- * select-group-option-outline-medium-start-padding:
- * select-group-option-outline-large-start-padding:
- * select-group-option-outline-giant-start-padding:
- * select-options-list-outline-basic-border-color:
- * select-options-list-outline-primary-border-color:
- * select-options-list-outline-success-border-color:
- * select-options-list-outline-info-border-color:
- * select-options-list-outline-warning-border-color:
- * select-options-list-outline-danger-border-color:
- * select-options-list-outline-control-border-color:
  * select-filled-border-style:
  * select-filled-border-width:
  * select-filled-tiny-padding:
@@ -419,23 +399,6 @@ export class NbSelectLabelComponent {
  * select-filled-control-disabled-border-color:
  * select-filled-control-disabled-icon-color:
  * select-filled-control-disabled-text-color:
- * select-option-filled-tiny-padding:
- * select-group-option-filled-tiny-padding-start:
- * select-option-filled-small-padding:
- * select-group-option-filled-small-padding-start:
- * select-option-filled-medium-padding:
- * select-group-option-filled-medium-padding-start:
- * select-option-filled-large-padding:
- * select-group-option-filled-large-padding-start:
- * select-option-filled-giant-padding:
- * select-group-option-filled-giant-padding-start:
- * select-options-list-filled-basic-border-color:
- * select-options-list-filled-primary-border-color:
- * select-options-list-filled-success-border-color:
- * select-options-list-filled-info-border-color:
- * select-options-list-filled-warning-border-color:
- * select-options-list-filled-danger-border-color:
- * select-options-list-filled-control-border-color:
  * select-hero-tiny-padding:
  * select-hero-small-padding:
  * select-hero-medium-padding:
@@ -525,23 +488,6 @@ export class NbSelectLabelComponent {
  * select-hero-control-disabled-background-color:
  * select-hero-control-disabled-icon-color:
  * select-hero-control-disabled-text-color:
- * select-option-hero-tiny-padding:
- * select-group-option-hero-tiny-padding-start:
- * select-option-hero-small-padding:
- * select-group-option-hero-small-padding-start:
- * select-option-hero-medium-padding:
- * select-group-option-hero-medium-padding-start:
- * select-option-hero-large-padding:
- * select-group-option-hero-large-padding-start:
- * select-option-hero-giant-padding:
- * select-group-option-hero-giant-padding-start:
- * select-options-list-hero-basic-border-color:
- * select-options-list-hero-primary-border-color:
- * select-options-list-hero-success-border-color:
- * select-options-list-hero-info-border-color:
- * select-options-list-hero-warning-border-color:
- * select-options-list-hero-danger-border-color:
- * select-options-list-hero-control-border-color:
  * */
 @Component({
   selector: 'nb-select',
@@ -555,9 +501,12 @@ export class NbSelectLabelComponent {
       multi: true,
     },
     { provide: NB_SELECT_INJECTION_TOKEN, useExisting: NbSelectComponent },
+    { provide: NbFormFieldControl, useExisting: NbSelectComponent },
+    { provide: NbFormFieldControlConfig, useFactory: nbSelectFormFieldControlConfigFactory },
   ],
 })
-export class NbSelectComponent<T> implements AfterViewInit, AfterContentInit, OnDestroy, ControlValueAccessor {
+export class NbSelectComponent<T> implements OnChanges, AfterViewInit, AfterContentInit, OnDestroy,
+                                             ControlValueAccessor, NbFormFieldControl {
 
   /**
    * Select size, available sizes:
@@ -692,14 +641,14 @@ export class NbSelectComponent<T> implements AfterViewInit, AfterContentInit, On
   /**
    * Custom select label, will be rendered instead of default enumeration with coma.
    * */
-  @ContentChild(NbSelectLabelComponent, { static: false }) customLabel;
+  @ContentChild(NbSelectLabelComponent) customLabel;
 
   /**
    * NbCard with options content.
    * */
-  @ViewChild(NbPortalDirective, { static: false }) portal: NbPortalDirective;
+  @ViewChild(NbPortalDirective) portal: NbPortalDirective;
 
-  @ViewChild('selectButton', { read: ElementRef, static: false }) button: ElementRef<HTMLButtonElement>;
+  @ViewChild('selectButton', { read: ElementRef }) button: ElementRef<HTMLButtonElement>;
 
   /**
    * Determines is select opened.
@@ -723,10 +672,13 @@ export class NbSelectComponent<T> implements AfterViewInit, AfterContentInit, On
   overlayPosition: NbPosition = '' as NbPosition;
 
   protected ref: NbOverlayRef;
+  protected optionsOverlayOffset = 8;
 
   protected triggerStrategy: NbTriggerStrategy;
 
   protected alive: boolean = true;
+
+  protected destroy$ = new Subject<void>();
 
   protected keyManager: NbFocusKeyManager<NbOptionComponent<T>>;
 
@@ -743,13 +695,34 @@ export class NbSelectComponent<T> implements AfterViewInit, AfterContentInit, On
   protected onChange: Function = () => {};
   protected onTouched: Function = () => {};
 
+  /*
+   * @docs-private
+   **/
+  status$ = new BehaviorSubject<NbComponentStatus>(this.status);
+
+  /*
+   * @docs-private
+   **/
+  size$ = new BehaviorSubject<NbComponentSize>(this.size);
+
+  /*
+   * @docs-private
+   **/
+  focused$ = new BehaviorSubject<boolean>(false);
+
+  /*
+   * @docs-private
+   **/
+  disabled$ = new BehaviorSubject<boolean>(this.disabled);
+
   constructor(@Inject(NB_DOCUMENT) protected document,
               protected overlay: NbOverlayService,
               protected hostRef: ElementRef<HTMLElement>,
               protected positionBuilder: NbPositionBuilderService,
               protected triggerStrategyBuilder: NbTriggerStrategyBuilderService,
               protected cd: ChangeDetectorRef,
-              protected focusKeyManagerFactoryService: NbFocusKeyManagerFactoryService<NbOptionComponent<T>>) {
+              protected focusKeyManagerFactoryService: NbFocusKeyManagerFactoryService<NbOptionComponent<T>>,
+              protected focusMonitor: NbFocusMonitor) {
   }
 
   /**
@@ -782,22 +755,6 @@ export class NbSelectComponent<T> implements AfterViewInit, AfterContentInit, On
     return classes;
   }
 
-  get optionsListClasses(): string[] {
-    const classes = [
-      `appearance-${this.appearance}`,
-      `size-${this.size}`,
-      `shape-${this.shape}`,
-      `status-${this.status}`,
-      this.overlayPosition,
-    ];
-
-    if (this.fullWidth) {
-      classes.push('full-width');
-    }
-
-    return classes;
-  }
-
   /**
    * Content rendered in the label.
    * */
@@ -809,12 +766,24 @@ export class NbSelectComponent<T> implements AfterViewInit, AfterContentInit, On
     return this.selectionModel[0].content;
   }
 
+  ngOnChanges({ disabled, status, size}: SimpleChanges) {
+    if (disabled) {
+      this.disabled$.next(disabled.currentValue);
+    }
+    if (status) {
+      this.status$.next(status.currentValue);
+    }
+    if (size) {
+      this.size$.next(size.currentValue);
+    }
+  }
+
   ngAfterContentInit() {
     this.options.changes
       .pipe(
-        takeWhile(() => this.alive),
         startWith(this.options),
         filter(() => this.queue != null && this.canSelectValue()),
+        takeUntil(this.destroy$),
       )
       .subscribe(() => {
         // Call 'writeValue' when current change detection run is finished.
@@ -830,12 +799,16 @@ export class NbSelectComponent<T> implements AfterViewInit, AfterContentInit, On
   ngAfterViewInit() {
     this.triggerStrategy = this.createTriggerStrategy();
 
+    this.subscribeOnButtonFocus();
     this.subscribeOnTriggers();
     this.subscribeOnOptionClick();
   }
 
   ngOnDestroy() {
     this.alive = false;
+
+    this.destroy$.next();
+    this.destroy$.complete();
 
     if (this.ref) {
       this.ref.dispose();
@@ -990,7 +963,7 @@ export class NbSelectComponent<T> implements AfterViewInit, AfterContentInit, On
     return this.positionBuilder
       .connectedTo(this.button)
       .position(NbPosition.BOTTOM)
-      .offset(0)
+      .offset(this.optionsOverlayOffset)
       .adjustment(NbAdjustment.VERTICAL);
   }
 
@@ -1020,7 +993,7 @@ export class NbSelectComponent<T> implements AfterViewInit, AfterContentInit, On
 
   protected subscribeOnPositionChange() {
     this.positionStrategy.positionChange
-      .pipe(takeWhile(() => this.alive))
+      .pipe(takeUntil(this.destroy$))
       .subscribe((position: NbPosition) => {
         this.overlayPosition = position;
         this.cd.detectChanges();
@@ -1039,7 +1012,7 @@ export class NbSelectComponent<T> implements AfterViewInit, AfterContentInit, On
         switchMap((options: QueryList<NbOptionComponent<T>>) => {
           return merge(...options.map(option => option.click));
         }),
-        takeWhile(() => this.alive),
+        takeUntil(this.destroy$),
       )
       .subscribe((clickedOption: NbOptionComponent<T>) => this.handleOptionClick(clickedOption));
   }
@@ -1047,8 +1020,8 @@ export class NbSelectComponent<T> implements AfterViewInit, AfterContentInit, On
   protected subscribeOnOverlayKeys(): void {
     this.ref.keydownEvents()
       .pipe(
-        takeWhile(() => this.alive),
         filter(() => this.isOpen),
+        takeUntil(this.destroy$),
       )
       .subscribe((event: KeyboardEvent) => {
         if (event.keyCode === ESCAPE) {
@@ -1060,11 +1033,21 @@ export class NbSelectComponent<T> implements AfterViewInit, AfterContentInit, On
       });
 
     this.keyManager.tabOut
-      .pipe(takeWhile(() => this.alive))
+      .pipe(takeUntil(this.destroy$))
       .subscribe(() => {
         this.hide();
         this.onTouched();
       });
+  }
+
+  protected subscribeOnButtonFocus() {
+    this.focusMonitor.monitor(this.button)
+      .pipe(
+        map(origin => !!origin),
+        finalize(() => this.focusMonitor.stopMonitoring(this.button)),
+        takeUntil(this.destroy$),
+      )
+      .subscribe(this.focused$);
   }
 
   protected getContainer() {

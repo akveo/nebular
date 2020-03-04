@@ -21,7 +21,7 @@ import {
   SimpleChanges,
   Optional,
 } from '@angular/core';
-import { takeWhile } from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
 import { Observable, ReplaySubject, Subject } from 'rxjs';
 
 import { NbComponentPortal, NbOverlayRef } from '../cdk/overlay/mapping';
@@ -118,10 +118,10 @@ export abstract class NbBasePicker<D, T, P>
   abstract hideOnSelect: boolean;
 
   /**
-   * Determines should we show calendars header or not.
+   * Determines should we show calendar navigation or not.
    * @type {boolean}
    */
-  abstract showHeader: boolean;
+  abstract showNavigation: boolean;
 
   /**
    * Sets symbol used as a header for week numbers column
@@ -177,7 +177,9 @@ export abstract class NbBasePicker<D, T, P>
    * */
   protected pickerRef: ComponentRef<any>;
 
-  protected alive: boolean = true;
+  protected overlayOffset = 8;
+
+  protected destroy$ = new Subject<void>();
 
   /**
    * Queue contains the last value that was applied to the picker when it was hidden.
@@ -243,7 +245,8 @@ export abstract class NbBasePicker<D, T, P>
   }
 
   ngOnDestroy() {
-    this.alive = false;
+    this.destroy$.next();
+    this.destroy$.complete();
     this.hide();
     this.init$.complete();
 
@@ -318,12 +321,13 @@ export abstract class NbBasePicker<D, T, P>
     return this.positionBuilder
       .connectedTo(this.hostRef)
       .position(NbPosition.BOTTOM)
+      .offset(this.overlayOffset)
       .adjustment(NbAdjustment.COUNTERCLOCKWISE);
   }
 
   protected subscribeOnPositionChange() {
     this.positionStrategy.positionChange
-      .pipe(takeWhile(() => this.alive))
+      .pipe(takeUntil(this.destroy$))
       .subscribe((position: NbPosition) => patch(this.container, { position }));
   }
 
@@ -367,7 +371,7 @@ export abstract class NbBasePicker<D, T, P>
     this.picker.monthCellComponent = this.monthCellComponent;
     this.picker._yearCellComponent = this.yearCellComponent;
     this.picker.size = this.size;
-    this.picker.showHeader = this.showHeader;
+    this.picker.showNavigation = this.showNavigation;
     this.picker.visibleDate = this.visibleDate;
     this.picker.showWeekNumber = this.showWeekNumber;
     this.picker.weekNumberSymbol = this.weekNumberSymbol;
@@ -458,10 +462,10 @@ export class NbBasePickerComponent<D, T, P> extends NbBasePicker<D, T, P> {
   @Input() hideOnSelect: boolean = true;
 
   /**
-   * Determines should we show calendars header or not.
+   * Determines should we show calendars navigation or not.
    * @type {boolean}
    */
-  @Input() showHeader: boolean = true;
+  @Input() showNavigation: boolean = true;
 
   /**
    * Sets symbol used as a header for week numbers column

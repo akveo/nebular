@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ElementRef, HostListener, Inject, Input, OnDestroy } from '@angular/core';
+import { Component, ElementRef, HostListener, Inject, Input, OnDestroy } from '@angular/core';
 import { Subject, timer } from 'rxjs';
 import { take, takeUntil } from 'rxjs/operators';
 import { NbCdkFooterRow, NbCdkHeaderRow, NbCdkRow } from '../cdk/table/type-mappings';
@@ -19,7 +19,6 @@ export const NB_ROW_DOUBLE_CLICK_DELAY: number = 200;
     'role': 'row',
   },
   providers: [{ provide: NbCdkRow, useExisting: NbTreeGridRowComponent }],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NbTreeGridRowComponent extends NbRowComponent implements OnDestroy {
   private readonly doubleClick$ = new Subject();
@@ -81,7 +80,6 @@ export class NbTreeGridRowComponent extends NbRowComponent implements OnDestroy 
     'class': 'nb-tree-grid-header-row',
     'role': 'row',
   },
-  changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [{ provide: NbCdkHeaderRow, useExisting: NbTreeGridHeaderRowComponent }],
 })
 export class NbTreeGridHeaderRowComponent extends NbHeaderRowComponent {}
@@ -94,7 +92,6 @@ export class NbTreeGridHeaderRowComponent extends NbHeaderRowComponent {}
     'class': 'nb-tree-grid-footer-row',
     'role': 'row',
   },
-  changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [{ provide: NbCdkFooterRow, useExisting: NbTreeGridFooterRowComponent }],
 })
 export class NbTreeGridFooterRowComponent extends NbFooterRowComponent {}

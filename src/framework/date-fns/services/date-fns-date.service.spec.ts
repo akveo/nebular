@@ -16,7 +16,7 @@ describe('date-fns-date-service', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    dateService = new NbDateFnsDateService(TestBed.get(LOCALE_ID), null);
+    dateService = new NbDateFnsDateService(TestBed.inject(LOCALE_ID), null);
   });
 
   it('should parse date according to the MM.dd.yyyy format', () => {
@@ -41,11 +41,17 @@ describe('date-fns-date-service', () => {
 
     beforeEach(() => {
       dateService = new NbDateFnsDateService(
-        TestBed.get(LOCALE_ID),
+        TestBed.inject(LOCALE_ID),
         {
           format: FORMAT,
-          parseOptions: { awareOfUnicodeTokens: true },
-          formatOptions: { awareOfUnicodeTokens: true },
+          parseOptions: {
+            useAdditionalWeekYearTokens: true,
+            useAdditionalDayOfYearTokens: true,
+          },
+          formatOptions: {
+            useAdditionalWeekYearTokens: true,
+            useAdditionalDayOfYearTokens: true,
+          },
         },
       );
     });
@@ -65,14 +71,16 @@ describe('date-fns-date-service', () => {
     });
 
     it('should pass parseOptions to parse function', () => {
-      // date-fns require { awareOfUnicodeTokens: true } option to be passed to parse function
+      // date-fns require { useAdditionalWeekYearTokens: true, useAdditionalDayOfYearTokens: true } options
+      // to be passed to parse function
       // when format contains 'DD' or 'YYYY' tokens, otherwise it throws. This option is
       // passed as global config to service constructor so it shouldn't throw.
       expect(() => dateService.parse(formattedDate, 'DD/MM/YYYY')).not.toThrow();
     });
 
     it('should pass formatOptions to format function', () => {
-      // date-fns require { awareOfUnicodeTokens: true } option to be passed to format function
+      // date-fns require { useAdditionalWeekYearTokens: true, useAdditionalDayOfYearTokens: true } options
+      // to be passed to format function
       // when format contains 'DD' or 'YYYY' tokens, otherwise it throws. This option is
       // passed as global config to service constructor so it shouldn't throw.
       expect(() => dateService.format(date, 'DD/MM/YYYY')).not.toThrow();

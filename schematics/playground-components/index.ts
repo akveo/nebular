@@ -7,7 +7,7 @@
 import * as ts from 'typescript';
 import { dirname, join, normalize, Path, PathFragment } from '@angular-devkit/core';
 import { DirEntry, SchematicsException, Tree, Rule } from '@angular-devkit/schematics';
-import { getSourceFile } from '@angular/cdk/schematics';
+import { parseSourceFile } from '@angular/cdk/schematics';
 import {
   addTrailingCommas,
   applyReplaceChange,
@@ -45,7 +45,7 @@ export function playgroundComponents(): Rule {
 }
 
 function generateComponentsList(tree: Tree): void {
-  const componentsListFile = getSourceFile(tree, COMPONENTS_LIST_FILE_PATH);
+  const componentsListFile = parseSourceFile(tree, COMPONENTS_LIST_FILE_PATH);
   const componentsListArray = getComponentsListArray(componentsListFile);
   const routes = removeRoutesWithoutPath(findRoutesInDir(tree, getPlaygroundRootDir(tree)));
   updateComponentsFile(tree, componentsListFile, componentsListArray, routes);

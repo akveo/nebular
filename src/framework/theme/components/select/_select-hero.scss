@@ -1,3 +1,5 @@
+@import '../form-field/form-field.component.theme';
+
 @mixin select-hero {
   nb-select.appearance-hero .select-button {
     border: none;
@@ -6,16 +8,10 @@
   @each $size in nb-get-sizes() {
     nb-select.appearance-hero.size-#{$size} .select-button {
       padding: nb-theme(select-hero-#{$size}-padding);
+      @include nb-ltr(padding-right, nb-theme(select-icon-offset));
+      @include nb-rtl(padding-left, nb-theme(select-icon-offset));
     }
-    .appearance-hero.size-#{$size} {
-      nb-option-group .option-group-title,
-      nb-option {
-        padding: nb-theme(select-option-hero-#{$size}-padding);
-      }
-      nb-option-group nb-option {
-        padding-left: nb-theme(select-group-option-outline-#{$size}-start-padding);
-      }
-    }
+    @include nb-form-field-with-prefix('nb-select.appearance-hero.size-#{$size} .select-button', $size);
   }
 
   @each $status in nb-get-statuses() {
@@ -52,10 +48,6 @@
       nb-icon {
         color: nb-theme(select-hero-#{$status}-icon-color);
       }
-    }
-
-    .options-list-container.appearance-hero.status-#{$status} {
-      border-color: nb-theme(select-options-list-hero-#{$status}-border-color);
     }
   }
 }

@@ -217,7 +217,7 @@ export class NbUserComponent {
    * `primary`, `info`, `success`, `warning`, `danger`
    * @param {string} val
    */
-  @Input() badgeStatus: NbComponentStatus;
+  @Input() badgeStatus: NbComponentStatus = 'basic';
 
   /**
    * Badge position.

@@ -6,8 +6,8 @@ import {
   NbOverlay,
   NbOverlayConfig,
   NbOverlayRef,
-  NbScrollStrategyOptions,
 } from './mapping';
+import { NbScrollStrategyOptions } from '../adapter/block-scroll-strategy-adapter';
 import { NbLayoutDirectionService } from '../../../services/direction.service';
 
 

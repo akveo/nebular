@@ -11,6 +11,7 @@
   flex-direction: row;
   list-style-type: none;
   margin: 0;
+  padding: 0;
 
   .route-tab {
     margin-bottom: -1px;
@@ -38,15 +39,19 @@
       nb-icon {
         vertical-align: middle;
       }
-
-      nb-icon + span {
-        @include nb-ltr(margin-left, 0.5rem);
-        @include nb-rtl(margin-right, 0.5rem);
-      }
     }
   }
 }
 
-:host.full-width .route-tabset {
-  justify-content: space-around;
+:host {
+  .tab-link nb-icon + span {
+    @include nb-ltr(margin-left, 0.5rem);
+    @include nb-rtl(margin-right, 0.5rem);
+  }
+}
+
+:host(.full-width) {
+  .route-tabset {
+    justify-content: space-around;
+  }
 }

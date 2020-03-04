@@ -1,4 +1,4 @@
-import { dest, src, task } from 'gulp';
+import { dest, src, task, series } from 'gulp';
 
 const fs = require('fs');
 const through = require('through2');
@@ -13,13 +13,16 @@ const EXCLUDE = [
 ];
 
 
-task('version', () => {
+task('version', series(
+  ...getPackages().map((packagePath) => () => bumpVersionAndNebularPeers(packagePath)),
+));
+
+function getPackages(): string[] {
   return fs.readdirSync(FRAMEWORK_ROOT)
     .filter(keepNebularPackages)
     .map(createFullPathToPackageJson)
-    .concat(['./package.json', './packages-smoke/package.json'])
-    .map(bumpVersionAndNebularPeers);
-});
+    .concat(['./package.json', './packages-smoke/package.json']);
+}
 
 function createFullPathToPackageJson(pkgName: string): string {
   return `${FRAMEWORK_ROOT}/${pkgName}/package.json`;

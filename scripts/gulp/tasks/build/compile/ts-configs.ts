@@ -19,7 +19,8 @@ export function createTsConfigEsm2015(packageName): string {
     "skipMetadataEmit": false,
     "strictTypeChecks": true,
     "flatModuleOutFile": "index.js",
-    "flatModuleId": "@nebular/${packageName}"
+    "flatModuleId": "@nebular/${packageName}",
+    "enableIvy": false
   }
 }`;
 
@@ -49,7 +50,8 @@ export function createTsConfigEsm5(packageName): string {
     "skipMetadataEmit": true,
     "strictTypeChecks": true,
     "flatModuleOutFile": "index.js",
-    "flatModuleId": "@nebular/${packageName}"
+    "flatModuleId": "@nebular/${packageName}",
+    "enableIvy": false
   }
 }`;
 

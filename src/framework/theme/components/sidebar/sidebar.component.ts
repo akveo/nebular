@@ -5,8 +5,8 @@
  */
 
 import { Component, HostBinding, Input, OnInit, OnDestroy, ElementRef, OnChanges } from '@angular/core';
-import { Subscription } from 'rxjs';
-import { takeWhile } from 'rxjs/operators';
+import { Subscription, Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 import { convertToBoolProperty } from '../helpers';
 import { NbThemeService } from '../../services/theme.service';
@@ -143,7 +143,7 @@ export class NbSidebarComponent implements OnChanges, OnInit, OnDestroy {
   protected stateValue: string;
   protected responsiveValue: boolean = false;
 
-  private alive = true;
+  private destroy$ = new Subject<void>();
 
   containerFixedValue: boolean = true;
 
@@ -302,7 +302,7 @@ export class NbSidebarComponent implements OnChanges, OnInit, OnDestroy {
 
   ngOnInit() {
     this.sidebarService.onToggle()
-      .pipe(takeWhile(() => this.alive))
+      .pipe(takeUntil(this.destroy$))
       .subscribe((data: { compact: boolean, tag: string }) => {
         if (!this.tag || this.tag === data.tag) {
           this.toggle(data.compact);
@@ -310,7 +310,7 @@ export class NbSidebarComponent implements OnChanges, OnInit, OnDestroy {
       });
 
     this.sidebarService.onExpand()
-      .pipe(takeWhile(() => this.alive))
+      .pipe(takeUntil(this.destroy$))
       .subscribe((data: { tag: string }) => {
         if (!this.tag || this.tag === data.tag) {
           this.expand();
@@ -318,7 +318,7 @@ export class NbSidebarComponent implements OnChanges, OnInit, OnDestroy {
       });
 
     this.sidebarService.onCollapse()
-      .pipe(takeWhile(() => this.alive))
+      .pipe(takeUntil(this.destroy$))
       .subscribe((data: { tag: string }) => {
         if (!this.tag || this.tag === data.tag) {
           this.collapse();
@@ -326,7 +326,7 @@ export class NbSidebarComponent implements OnChanges, OnInit, OnDestroy {
       });
 
     this.sidebarService.onCompact()
-      .pipe(takeWhile(() => this.alive))
+      .pipe(takeUntil(this.destroy$))
       .subscribe((data: { tag: string }) => {
         if (!this.tag || this.tag === data.tag) {
           this.compact();
@@ -335,7 +335,8 @@ export class NbSidebarComponent implements OnChanges, OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.alive = false;
+    this.destroy$.next();
+    this.destroy$.complete();
     if (this.mediaQuerySubscription) {
       this.mediaQuerySubscription.unsubscribe();
     }

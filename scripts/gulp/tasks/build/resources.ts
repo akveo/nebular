@@ -1,4 +1,4 @@
-import { dest, src, task } from 'gulp';
+import { dest, src, task, series } from 'gulp';
 import { BUILD_DIR, DEV_SCHEMATICS_PATH, JS_PACKAGES, LIB_DIR, SOURCE_DIR } from '../config';
 
 task('copy-packages-resources', () => {
@@ -22,13 +22,19 @@ task('copy-packages-schematics-resources', () => {
   return src(paths, { base: SOURCE_DIR }).pipe(dest(LIB_DIR));
 });
 
-task('copy-packages-schematics-resources-for-test', ['copy-packages-schematics-resources'], () => {
-  return src(
-    JS_PACKAGES.map(packageName => `${SOURCE_DIR}/${packageName}/package.json`),
-    { base: SOURCE_DIR },
-  )
-    .pipe(dest(LIB_DIR));
-});
+task(
+  'copy-packages-schematics-resources-for-test',
+  series(
+    'copy-packages-schematics-resources',
+    () => {
+      return src(
+        JS_PACKAGES.map(packageName => `${SOURCE_DIR}/${packageName}/package.json`),
+        { base: SOURCE_DIR },
+      )
+        .pipe(dest(LIB_DIR));
+    },
+  ),
+);
 
 task('copy-development-schematics-resources', () => {
   return src(schematicFilePaths(DEV_SCHEMATICS_PATH))
