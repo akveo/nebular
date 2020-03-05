@@ -44,7 +44,7 @@ describe('NbAdjustableConnectedPositionStrategy', () => {
 
     // Have to create layout component as it's required for scroll service to work properly.
     // Also it registers overlay container so we don't have to create it manually.
-    TestBed.createComponent(NbLayoutComponent);
+    TestBed.createComponent(NbLayoutComponent).detectChanges();
 
     overlayHostElement = document.createElement('div');
     overlayHostElement.style.width = '10px';
