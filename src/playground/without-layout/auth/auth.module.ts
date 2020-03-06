@@ -89,9 +89,6 @@ export function filterInterceptorRequest(req: HttpRequest<any>) {
           token: {
             class: NbAuthJWTToken,
           },
-          login: {
-            requireValidToken: false,
-          },
           baseEndpoint: 'http://localhost:4400/api/auth/',
           logout: {
             redirect: {
