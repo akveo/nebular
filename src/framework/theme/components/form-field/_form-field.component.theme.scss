@@ -10,11 +10,14 @@
     justify-content: center;
     align-items: center;
     z-index: 1;
-    @include nb-component-animation(color);
 
     &-disabled {
       color: nb-theme(form-field-addon-disabled-text-color);
     }
+  }
+
+  nb-form-field.nb-transition .nb-form-field-addon {
+    @include nb-component-animation(color);
   }
 
   @each $status in nb-get-statuses() {

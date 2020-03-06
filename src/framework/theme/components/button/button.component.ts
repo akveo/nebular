@@ -14,6 +14,7 @@ import {
   HostListener,
   Input,
   Renderer2,
+  NgZone,
 } from '@angular/core';
 
 import { NbComponentStatus } from '../component-status';
@@ -537,8 +538,6 @@ export type NbButtonAppearance = 'filled' | 'outline' | 'ghost' | 'hero';
 })
 export class NbButtonComponent implements AfterViewInit {
 
-  protected isInitialized: boolean = false;
-
   /**
    * Button size, available sizes:
    * `tiny`, `small`, `medium`, `large`, `giant`
@@ -740,11 +739,6 @@ export class NbButtonComponent implements AfterViewInit {
     return !!(icon && lastChildNotComment(el) === icon);
   }
 
-  @HostBinding('class.transitions')
-  get transitions(): boolean {
-    return this.isInitialized;
-  }
-
   /**
    * @private
    * Keep this handler to partially support anchor disabling.
@@ -767,13 +761,14 @@ export class NbButtonComponent implements AfterViewInit {
     protected renderer: Renderer2,
     protected hostElement: ElementRef<HTMLElement>,
     protected cd: ChangeDetectorRef,
+    protected zone: NgZone,
   ) {}
 
   ngAfterViewInit() {
-    setTimeout(() => {
-      this.isInitialized = true;
-      this.cd.markForCheck();
-    });
+    // TODO: #2254
+    this.zone.runOutsideAngular(() => setTimeout(() => {
+      this.renderer.addClass(this.hostElement.nativeElement, 'nb-transition');
+    }));
   }
 
   protected get iconElement() {

@@ -29,6 +29,6 @@
   }
 }
 
-:host(.transitions) {
+:host(.nb-transition) {
   @include nb-component-animation(background-color, border-color, box-shadow, color);
 }

@@ -11,10 +11,14 @@
 
   .custom-checkbox {
     flex-shrink: 0;
+  }
+}
+
+:host(.nb-transition) {
+  .custom-checkbox {
     @include nb-component-animation(background-color, border, box-shadow);
   }
-
   .text {
-    transition: color 0.15s ease-in;
+    @include nb-component-animation(color);
   }
 }

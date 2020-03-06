@@ -14,6 +14,10 @@ import {
   QueryList,
   AfterContentInit,
   OnDestroy,
+  NgZone,
+  ElementRef,
+  Renderer2,
+  AfterViewInit,
 } from '@angular/core';
 import { merge, Subject, Observable, combineLatest, ReplaySubject } from 'rxjs';
 import { takeUntil, distinctUntilChanged, map } from 'rxjs/operators';
@@ -85,7 +89,7 @@ function throwFormControlElementNotFound() {
   templateUrl: './form-field.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NbFormFieldComponent implements AfterContentChecked, AfterContentInit, OnDestroy {
+export class NbFormFieldComponent implements AfterContentChecked, AfterContentInit, AfterViewInit, OnDestroy {
 
   protected readonly destroy$ = new Subject<void>();
 
@@ -99,7 +103,12 @@ export class NbFormFieldComponent implements AfterContentChecked, AfterContentIn
   @ContentChild(NbFormFieldControl, { static: false }) formControl: NbFormFieldControl;
   @ContentChild(NbFormFieldControlConfig, { static: false }) formControlConfig: NbFormFieldControlConfig;
 
-  constructor(protected cd: ChangeDetectorRef) {
+  constructor(
+    protected cd: ChangeDetectorRef,
+    protected zone: NgZone,
+    protected elementRef: ElementRef,
+    protected renderer: Renderer2,
+  ) {
   }
 
   ngAfterContentChecked() {
@@ -111,6 +120,13 @@ export class NbFormFieldComponent implements AfterContentChecked, AfterContentIn
   ngAfterContentInit() {
     this.subscribeToFormControlStateChange();
     this.subscribeToAddonChange();
+  }
+
+  ngAfterViewInit() {
+    // TODO: #2254
+    this.zone.runOutsideAngular(() => setTimeout(() => {
+      this.renderer.addClass(this.elementRef.nativeElement, 'nb-transition');
+    }));
   }
 
   ngOnDestroy() {

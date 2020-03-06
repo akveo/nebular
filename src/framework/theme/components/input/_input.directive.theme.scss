@@ -16,7 +16,9 @@
     font-family: nb-theme(input-text-font-family);
     -webkit-appearance: none; // removes inner shadow on iOS
 
-    @include nb-component-animation(border, background-color, color, box-shadow);
+    &.nb-transition {
+      @include nb-component-animation(border, background-color, color, box-shadow);
+    }
 
     &::placeholder {
       font-family: nb-theme(input-placeholder-text-font-family);

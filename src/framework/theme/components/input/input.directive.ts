@@ -14,6 +14,9 @@ import {
   SimpleChanges,
   OnChanges,
   DoCheck,
+  AfterViewInit,
+  Renderer2,
+  NgZone,
 } from '@angular/core';
 import { Subject, BehaviorSubject } from 'rxjs';
 import { map, finalize, takeUntil } from 'rxjs/operators';
@@ -218,7 +221,7 @@ import { NbFocusMonitor } from '../cdk/a11y/a11y.module';
     { provide: NbFormFieldControl, useExisting: NbInputDirective },
   ],
 })
-export class NbInputDirective implements DoCheck, OnChanges, OnInit, OnDestroy, NbFormFieldControl {
+export class NbInputDirective implements DoCheck, OnChanges, OnInit, AfterViewInit, OnDestroy, NbFormFieldControl {
 
   protected destroy$ = new Subject<void>();
 
@@ -268,6 +271,8 @@ export class NbInputDirective implements DoCheck, OnChanges, OnInit, OnDestroy, 
   constructor(
     protected elementRef: ElementRef<HTMLInputElement | HTMLTextAreaElement>,
     protected focusMonitor: NbFocusMonitor,
+    protected renderer: Renderer2,
+    protected zone: NgZone,
   ) {
   }
 
@@ -295,6 +300,13 @@ export class NbInputDirective implements DoCheck, OnChanges, OnInit, OnDestroy, 
         takeUntil(this.destroy$),
       )
       .subscribe(this.focused$);
+  }
+
+  ngAfterViewInit() {
+    // TODO: #2254
+    this.zone.runOutsideAngular(() => setTimeout(() => {
+      this.renderer.addClass(this.elementRef.nativeElement, 'nb-transition');
+    }));
   }
 
   ngOnDestroy() {

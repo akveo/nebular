@@ -602,7 +602,7 @@ describe('Component: NbSelectComponent', () => {
   }));
 
   it(`should not call dispose on uninitialized resources`, () => {
-    const selectFixture = new NbSelectComponent(null, null, null, null, null, null, null, null);
+    const selectFixture = new NbSelectComponent(null, null, null, null, null, null, null, null, null, null);
     expect(() => selectFixture.ngOnDestroy()).not.toThrow();
   });
 
