@@ -17,6 +17,9 @@ import {
   OnDestroy,
   Optional,
   Output,
+  AfterViewInit,
+  NgZone,
+  Renderer2,
 } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 
@@ -87,7 +90,7 @@ import { NbSelectComponent } from '../select/select.component';
     <ng-content></ng-content>
   `,
 })
-export class NbOptionComponent<T> implements OnDestroy, NbFocusableOption, NbHighlightableOption {
+export class NbOptionComponent<T> implements OnDestroy, AfterViewInit, NbFocusableOption, NbHighlightableOption {
 
   protected disabledByGroup = false;
 
@@ -130,12 +133,21 @@ export class NbOptionComponent<T> implements OnDestroy, NbFocusableOption, NbHig
 
   constructor(@Optional() @Inject(NB_SELECT_INJECTION_TOKEN) parent,
               protected elementRef: ElementRef,
-              protected cd: ChangeDetectorRef) {
+              protected cd: ChangeDetectorRef,
+              protected zone: NgZone,
+              protected renderer: Renderer2) {
     this.parent = parent;
   }
 
   ngOnDestroy() {
     this.alive = false;
+  }
+
+  ngAfterViewInit() {
+    // TODO: #2254
+    this.zone.runOutsideAngular(() => setTimeout(() => {
+      this.renderer.addClass(this.elementRef.nativeElement, 'nb-transition');
+    }));
   }
 
   /**

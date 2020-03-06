@@ -13,6 +13,10 @@ import {
   Output,
   EventEmitter,
   ChangeDetectionStrategy,
+  Renderer2,
+  ElementRef,
+  AfterViewInit,
+  NgZone,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
@@ -274,7 +278,7 @@ import { convertToBoolProperty, emptyStatusWarning } from '../helpers';
   }],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NbCheckboxComponent implements ControlValueAccessor {
+export class NbCheckboxComponent implements AfterViewInit, ControlValueAccessor {
 
   onChange: any = () => { };
   onTouched: any = () => { };
@@ -405,7 +409,19 @@ export class NbCheckboxComponent implements ControlValueAccessor {
     return this.status === 'control';
   }
 
-  constructor(private changeDetector: ChangeDetectorRef) {}
+  constructor(
+    private changeDetector: ChangeDetectorRef,
+    private renderer: Renderer2,
+    private hostElement: ElementRef<HTMLElement>,
+    private zone: NgZone,
+  ) {}
+
+  ngAfterViewInit() {
+    // TODO: #2254
+    this.zone.runOutsideAngular(() => setTimeout(() => {
+      this.renderer.addClass(this.hostElement.nativeElement, 'nb-transition');
+    }));
+  }
 
   registerOnChange(fn: any) {
     this.onChange = fn;

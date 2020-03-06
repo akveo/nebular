@@ -25,6 +25,8 @@ import {
   ViewChild,
   SimpleChanges,
   OnChanges,
+  Renderer2,
+  NgZone,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { merge, Subject, BehaviorSubject } from 'rxjs';
@@ -722,7 +724,9 @@ export class NbSelectComponent<T> implements OnChanges, AfterViewInit, AfterCont
               protected triggerStrategyBuilder: NbTriggerStrategyBuilderService,
               protected cd: ChangeDetectorRef,
               protected focusKeyManagerFactoryService: NbFocusKeyManagerFactoryService<NbOptionComponent<T>>,
-              protected focusMonitor: NbFocusMonitor) {
+              protected focusMonitor: NbFocusMonitor,
+              protected renderer: Renderer2,
+              protected zone: NgZone) {
   }
 
   /**
@@ -802,6 +806,11 @@ export class NbSelectComponent<T> implements OnChanges, AfterViewInit, AfterCont
     this.subscribeOnButtonFocus();
     this.subscribeOnTriggers();
     this.subscribeOnOptionClick();
+
+    // TODO: #2254
+    this.zone.runOutsideAngular(() => setTimeout(() => {
+      this.renderer.addClass(this.hostRef.nativeElement, 'nb-transition');
+    }));
   }
 
   ngOnDestroy() {
