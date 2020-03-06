@@ -671,12 +671,12 @@ describe('Component: NbSelectComponent', () => {
     const touchedSpy = jasmine.createSpy('touched spy');
 
     const selectFixture = TestBed.createComponent(NbSelectComponent);
-    const selectComponent: NbSelectComponent<any> = selectFixture.componentInstance;
+    select = selectFixture.componentInstance as NbSelectComponent<any>;
     selectFixture.detectChanges();
     flush();
 
-    selectComponent.registerOnTouched(touchedSpy);
-    selectComponent.show();
+    select.registerOnTouched(touchedSpy);
+    select.show();
     selectFixture.debugElement.query(By.css('.select-button')).triggerEventHandler('blur', {});
     expect(touchedSpy).not.toHaveBeenCalled();
   }));
