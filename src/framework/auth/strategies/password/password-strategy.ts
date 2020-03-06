@@ -31,7 +31,7 @@ import { NbAuthIllegalTokenError } from '../../services/token/token';
  *    alwaysFail: false,
  *    endpoint: 'login',
  *    method: 'post',
- *    requireValidToken: false,
+ *    requireValidToken: true,
  *    redirect: {
  *      success: '/',
  *      failure: null,
@@ -43,7 +43,7 @@ import { NbAuthIllegalTokenError } from '../../services/token/token';
  *    alwaysFail: false,
  *    endpoint: 'register',
  *    method: 'post',
- *    requireValidToken: false,
+ *    requireValidToken: true,
  *    redirect: {
  *      success: '/',
  *      failure: null,
@@ -86,7 +86,7 @@ import { NbAuthIllegalTokenError } from '../../services/token/token';
  *  refreshToken?: boolean | NbPasswordStrategyModule = {
  *    endpoint: 'refresh-token',
  *    method: 'post',
- *    requireValidToken: false,
+ *    requireValidToken: true,
  *    redirect: {
  *      success: null,
  *      failure: null,
