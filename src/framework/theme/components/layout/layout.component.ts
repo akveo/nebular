@@ -274,25 +274,6 @@ export class NbLayoutComponent implements AfterViewInit, OnDestroy {
         listener.complete();
       });
 
-    this.scrollService.onGetPosition()
-      .pipe(
-        takeUntil(this.destroy$),
-      )
-      .subscribe(({ listener }) => {
-        listener.next(this.getScrollPosition());
-        listener.complete();
-      });
-
-    this.scrollTop
-      .shouldRestore()
-      .pipe(
-        filter(() => this.restoreScrollTopValue),
-        takeUntil(this.destroy$),
-      )
-      .subscribe(() => {
-        this.scroll(0, 0);
-      });
-
     this.scrollService
       .onScrollableChange()
       .pipe(
@@ -318,6 +299,20 @@ export class NbLayoutComponent implements AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit() {
+    this.scrollService.onGetPosition()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(({ listener }) => {
+        listener.next(this.getScrollPosition());
+        listener.complete();
+      });
+
+    this.scrollTop.shouldRestore()
+      .pipe(filter(
+        () => this.restoreScrollTopValue),
+        takeUntil(this.destroy$),
+      )
+      .subscribe(() => this.scroll(0, 0));
+
     this.layoutDirectionService.onDirectionChange()
       .pipe(takeUntil(this.destroy$))
       .subscribe(direction => this.document.dir = direction);
