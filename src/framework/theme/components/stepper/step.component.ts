@@ -1,5 +1,4 @@
 import { Component, Inject, Input, TemplateRef, ViewChild } from '@angular/core';
-import { AbstractControl } from '@angular/forms';
 import { NbStepperComponent } from './stepper.component';
 import { NB_STEPPER } from './stepper-tokens';
 import { convertToBoolProperty, NbBooleanInput } from '../helpers';
@@ -30,10 +29,8 @@ export class NbStepComponent {
 
   /**
    * Top level abstract control of the step
-   *
-   * @type {AbstractControl}
    */
-  @Input() stepControl: AbstractControl;
+  @Input() stepControl: { valid: boolean, reset: () => {} };
 
   /**
    * Step label
