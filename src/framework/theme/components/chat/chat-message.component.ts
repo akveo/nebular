@@ -9,6 +9,8 @@ import { convertToBoolProperty, NbBooleanInput } from '../helpers';
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 
+import { NbChatMessageFile } from './chat-message-file.component';
+
 /**
  * Chat message component.
  *
@@ -146,9 +148,8 @@ export class NbChatMessageComponent {
 
   /**
    * Array of files `{ url: 'file url', icon: 'file icon class' }`
-   * @type {string}
    */
-  @Input() files: { url: string, type?: string, icon: string }[];
+  @Input() files: NbChatMessageFile[];
 
   /**
    * Quoted message text
