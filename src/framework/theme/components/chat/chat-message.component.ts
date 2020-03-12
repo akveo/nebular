@@ -148,7 +148,7 @@ export class NbChatMessageComponent {
    * Array of files `{ url: 'file url', icon: 'file icon class' }`
    * @type {string}
    */
-  @Input() files: { url: string, icon: string }[];
+  @Input() files: { url: string, type?: string, icon: string }[];
 
   /**
    * Quoted message text
