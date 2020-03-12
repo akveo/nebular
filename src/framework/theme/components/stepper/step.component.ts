@@ -47,7 +47,15 @@ export class NbStepComponent {
    *
    * @type {boolean}
    */
-  @Input() hidden: false;
+  @Input()
+  get hidden(): boolean {
+    return this._hidden;
+  }
+  set hidden(value: boolean) {
+    this._hidden = convertToBoolProperty(value);
+  }
+  protected _hidden = false;
+  static ngAcceptInputType_hidden: NbBooleanInput;
 
   /**
    * Check that label is a TemplateRef.
