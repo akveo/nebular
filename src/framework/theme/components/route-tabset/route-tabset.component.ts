@@ -5,7 +5,7 @@
  */
 
 import { Component, Input, Output, EventEmitter, HostBinding } from '@angular/core';
-import { convertToBoolProperty } from '../helpers';
+import { convertToBoolProperty, NbBooleanInput } from '../helpers';
 
 /**
  * Route tabset components.
@@ -136,6 +136,7 @@ export class NbRouteTabsetComponent {
   set fullWidth(val: boolean) {
     this.fullWidthValue = convertToBoolProperty(val);
   }
+  static ngAcceptInputType_fullWidth: NbBooleanInput;
 
   /**
    * Emits when tab is selected

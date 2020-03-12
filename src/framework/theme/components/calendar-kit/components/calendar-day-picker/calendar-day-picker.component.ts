@@ -19,7 +19,7 @@ import {
 import { NbCalendarMonthModelService } from '../../services/calendar-month-model.service';
 import { NbCalendarDayCellComponent } from './calendar-day-cell.component';
 import { NbCalendarCell, NbCalendarSize } from '../../model';
-import { convertToBoolProperty } from '../../../helpers';
+import { convertToBoolProperty, NbBooleanInput } from '../../../helpers';
 
 
 /**
@@ -113,6 +113,7 @@ export class NbCalendarDayPickerComponent<D, T> implements OnChanges {
     this._showWeekNumber = convertToBoolProperty(value);
   }
   protected _showWeekNumber: boolean = false;
+  static ngAcceptInputType_showWeekNumber: NbBooleanInput;
 
   /**
    * Sets symbol used as a header for week numbers column

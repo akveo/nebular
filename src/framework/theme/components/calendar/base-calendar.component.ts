@@ -9,7 +9,7 @@ import { Component, EventEmitter, HostBinding, Input, OnInit, Output, Type } fro
 import { NbCalendarYearModelService } from '../calendar-kit/services/calendar-year-model.service';
 import { NbCalendarCell, NbCalendarSize, NbCalendarViewMode } from '../calendar-kit/model';
 import { NbDateService } from '../calendar-kit/services/date.service';
-import { convertToBoolProperty } from '../helpers';
+import { convertToBoolProperty, NbBooleanInput } from '../helpers';
 
 /**
  * The basis for calendar and range calendar components.
@@ -96,6 +96,7 @@ export class NbBaseCalendarComponent<D, T> implements OnInit {
     this._showWeekNumber = convertToBoolProperty(value);
   }
   protected _showWeekNumber = false;
+  static ngAcceptInputType_showWeekNumber: NbBooleanInput;
 
   /**
    * Sets symbol used as a header for week numbers column

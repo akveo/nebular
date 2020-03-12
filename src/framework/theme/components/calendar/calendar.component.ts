@@ -7,7 +7,7 @@
 import { Component, EventEmitter, Input, Output, Type } from '@angular/core';
 
 import { NbCalendarCell, NbCalendarSize, NbCalendarViewMode } from '../calendar-kit/model';
-import { convertToBoolProperty } from '../helpers';
+import { convertToBoolProperty, NbBooleanInput } from '../helpers';
 
 
 /**
@@ -282,6 +282,7 @@ export class NbCalendarComponent<D> {
     this._showWeekNumber = convertToBoolProperty(value);
   }
   protected _showWeekNumber: boolean = false;
+  static ngAcceptInputType_showWeekNumber: NbBooleanInput;
 
   /**
    * Sets symbol used as a header for week numbers column

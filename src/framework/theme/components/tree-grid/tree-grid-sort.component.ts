@@ -17,7 +17,7 @@ import {
   TemplateRef,
 } from '@angular/core';
 
-import { convertToBoolProperty } from '../helpers';
+import { convertToBoolProperty, NbBooleanInput } from '../helpers';
 import { NB_SORT_HEADER_COLUMN_DEF } from '../cdk/table/cell';
 
 /** Column definition associated with a `NbSortHeaderDirective`. */
@@ -143,6 +143,7 @@ export class NbSortHeaderComponent {
   get disabled(): boolean {
     return this.disabledValue;
   }
+  static ngAcceptInputType_disabled: NbBooleanInput;
 
   @HostListener('click')
   sortIfEnabled() {

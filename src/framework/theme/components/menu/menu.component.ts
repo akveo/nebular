@@ -21,7 +21,7 @@ import { Router, NavigationEnd } from '@angular/router';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { takeUntil, filter, map } from 'rxjs/operators';
 import { NbMenuInternalService, NbMenuItem, NbMenuBag, NbMenuService } from './menu.service';
-import { convertToBoolProperty } from '../helpers';
+import { convertToBoolProperty, NbBooleanInput } from '../helpers';
 import { NB_WINDOW } from '../../theme.options';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { NbLayoutDirectionService } from '../../services/direction.service';
@@ -251,6 +251,7 @@ export class NbMenuComponent implements OnInit, AfterViewInit, OnDestroy {
     this._autoCollapse = convertToBoolProperty(value);
   }
   protected _autoCollapse: boolean = false;
+  static ngAcceptInputType_autoCollapse: NbBooleanInput;
 
   protected destroy$ = new Subject<void>();
 

@@ -11,7 +11,7 @@ import { NbDateService } from '../calendar-kit/services/date.service';
 import { NbCalendarRangeDayCellComponent } from './calendar-range-day-cell.component';
 import { NbCalendarRangeYearCellComponent } from './calendar-range-year-cell.component';
 import { NbCalendarRangeMonthCellComponent } from './calendar-range-month-cell.component';
-import { convertToBoolProperty } from '../helpers';
+import { convertToBoolProperty, NbBooleanInput } from '../helpers';
 
 
 export interface NbCalendarRange<D> {
@@ -263,6 +263,7 @@ export class NbCalendarRangeComponent<D> {
     this._showWeekNumber = convertToBoolProperty(value);
   }
   protected _showWeekNumber: boolean = false;
+  static ngAcceptInputType_showWeekNumber: NbBooleanInput;
 
   /**
    * Sets symbol used as a header for week numbers column

@@ -6,11 +6,12 @@
 
 import {
   Component,
-  ContentChildren, HostBinding,
+  ContentChildren,
+  HostBinding,
   Input,
   QueryList,
 } from '@angular/core';
-import { convertToBoolProperty } from '../helpers';
+import { convertToBoolProperty, NbBooleanInput } from '../helpers';
 import { NB_STEPPER } from './stepper-tokens';
 import { NbStepComponent } from './step.component';
 
@@ -143,6 +144,7 @@ export class NbStepperComponent {
     return this._disableStepNavigation;
   }
   protected _disableStepNavigation: boolean = false;
+  static ngAcceptInputType_disableStepNavigation: NbBooleanInput;
 
   /**
    * Selected step component
@@ -175,6 +177,7 @@ export class NbStepperComponent {
     return this._linear;
   }
   protected _linear = true;
+  static ngAcceptInputType_linear: NbBooleanInput;
 
   @HostBinding('class.vertical')
   get vertical() {

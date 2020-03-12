@@ -26,7 +26,7 @@ import { Observable, Subject } from 'rxjs';
 // Component class scoped counter for aria attributes.
 let lastOptionId: number = 0;
 
-import { convertToBoolProperty } from '../helpers';
+import { convertToBoolProperty, NbBooleanInput } from '../helpers';
 import { NbFocusableOption } from '../cdk/a11y/focus-key-manager';
 import { NbHighlightableOption } from '../cdk/a11y/descendant-key-manager';
 import { NB_SELECT_INJECTION_TOKEN } from '../select/select-injection-tokens';
@@ -107,6 +107,7 @@ export class NbOptionComponent<T> implements OnDestroy, AfterViewInit, NbFocusab
     this._disabled = convertToBoolProperty(value);
   }
   protected _disabled: boolean = false;
+  static ngAcceptInputType_disabled: NbBooleanInput;
 
   /**
    * Fires value when option selection change.

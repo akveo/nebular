@@ -2,7 +2,7 @@ import { Component, Inject, Input, TemplateRef, ViewChild } from '@angular/core'
 import { AbstractControl } from '@angular/forms';
 import { NbStepperComponent } from './stepper.component';
 import { NB_STEPPER } from './stepper-tokens';
-import { convertToBoolProperty } from '../helpers';
+import { convertToBoolProperty, NbBooleanInput } from '../helpers';
 
 /**
  * Component intended to be used within  the `<nb-stepper>` component.
@@ -71,6 +71,7 @@ export class NbStepComponent {
     this._completed = convertToBoolProperty(value);
   }
   protected _completed: boolean = false;
+  static ngAcceptInputType_completed: NbBooleanInput;
 
   protected get isCompleted() {
     return this.stepControl ? this.stepControl.valid && this.interacted : this.interacted;

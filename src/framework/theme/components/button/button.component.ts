@@ -20,7 +20,7 @@ import {
 import { NbComponentStatus } from '../component-status';
 import { NbComponentShape } from '../component-shape';
 import { NbComponentSize } from '../component-size';
-import { convertToBoolProperty, firstChildNotComment, lastChildNotComment } from '../helpers';
+import { convertToBoolProperty, firstChildNotComment, lastChildNotComment, NbBooleanInput } from '../helpers';
 
 export type NbButtonAppearance = 'filled' | 'outline' | 'ghost' | 'hero';
 
@@ -573,6 +573,7 @@ export class NbButtonComponent implements AfterViewInit {
       this.appearance = 'filled';
     }
   }
+  static ngAcceptInputType_filled: NbBooleanInput;
 
   /**
    * Sets `outline` appearance
@@ -587,6 +588,7 @@ export class NbButtonComponent implements AfterViewInit {
       this.appearance = 'outline';
     }
   }
+  static ngAcceptInputType_outline: NbBooleanInput;
 
   /**
    * Sets `ghost` appearance
@@ -601,6 +603,7 @@ export class NbButtonComponent implements AfterViewInit {
       this.appearance = 'ghost';
     }
   }
+  static ngAcceptInputType_ghost: NbBooleanInput;
 
   /**
    * Sets `hero` appearance
@@ -615,6 +618,7 @@ export class NbButtonComponent implements AfterViewInit {
       this.appearance = 'hero';
     }
   }
+  static ngAcceptInputType_hero: NbBooleanInput;
 
   /**
    * If set element will fill its container
@@ -628,6 +632,7 @@ export class NbButtonComponent implements AfterViewInit {
     this._fullWidth = convertToBoolProperty(value);
   }
   private _fullWidth = false;
+  static ngAcceptInputType_fullWidth: NbBooleanInput;
 
   /**
    * Disables the button
@@ -643,6 +648,7 @@ export class NbButtonComponent implements AfterViewInit {
     this.renderer.setProperty(this.hostElement.nativeElement, 'disabled', this.disabled);
   }
   private _disabled: boolean = false;
+  static ngAcceptInputType_disabled: NbBooleanInput;
 
   // issue #794
   @HostBinding('attr.tabindex')

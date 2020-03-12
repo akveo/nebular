@@ -5,7 +5,7 @@
  */
 
 import { ChangeDetectionStrategy, Component, HostBinding, Input } from '@angular/core';
-import { convertToBoolProperty } from '../helpers';
+import { convertToBoolProperty, NbBooleanInput } from '../helpers';
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 
@@ -124,6 +124,7 @@ export class NbChatMessageComponent {
     this._reply = convertToBoolProperty(value);
   }
   protected _reply: boolean = false;
+  static ngAcceptInputType_reply: NbBooleanInput;
 
   /**
    * Message sender

@@ -48,7 +48,7 @@ import { NbComponentShape } from '../component-shape';
 import { NbComponentStatus } from '../component-status';
 import { NB_DOCUMENT } from '../../theme.options';
 import { NbOptionComponent } from '../option/option.component';
-import { convertToBoolProperty } from '../helpers';
+import { convertToBoolProperty, NbBooleanInput } from '../helpers';
 import { NB_SELECT_INJECTION_TOKEN } from './select-injection-tokens';
 import { NbFormFieldControl, NbFormFieldControlConfig } from '../form-field/form-field-control';
 import { NbFocusMonitor } from '../cdk/a11y/a11y.module';
@@ -545,6 +545,7 @@ export class NbSelectComponent<T> implements OnChanges, AfterViewInit, AfterCont
       this.appearance = 'outline';
     }
   }
+  static ngAcceptInputType_outline: NbBooleanInput;
 
   /**
    * Adds `filled` styles
@@ -559,6 +560,7 @@ export class NbSelectComponent<T> implements OnChanges, AfterViewInit, AfterCont
       this.appearance = 'filled';
     }
   }
+  static ngAcceptInputType_filled: NbBooleanInput;
 
   /**
    * Adds `hero` styles
@@ -573,6 +575,7 @@ export class NbSelectComponent<T> implements OnChanges, AfterViewInit, AfterCont
       this.appearance = 'hero';
     }
   }
+  static ngAcceptInputType_hero: NbBooleanInput;
 
   /**
    * Disables the select
@@ -585,6 +588,7 @@ export class NbSelectComponent<T> implements OnChanges, AfterViewInit, AfterCont
     this._disabled = convertToBoolProperty(value);
   }
   protected _disabled: boolean;
+  static ngAcceptInputType_disabled: NbBooleanInput;
 
   /**
    * If set element will fill its container
@@ -598,6 +602,7 @@ export class NbSelectComponent<T> implements OnChanges, AfterViewInit, AfterCont
     this._fullWidth = convertToBoolProperty(value);
   }
   protected _fullWidth: boolean = false;
+  static ngAcceptInputType_fullWidth: NbBooleanInput;
 
   /**
    * Renders select placeholder if nothing selected.
@@ -628,6 +633,7 @@ export class NbSelectComponent<T> implements OnChanges, AfterViewInit, AfterCont
     this._multiple = convertToBoolProperty(value);
   }
   protected _multiple: boolean = false;
+  static ngAcceptInputType_multiple: NbBooleanInput;
 
   /**
    * Will be emitted when selected value changes.
