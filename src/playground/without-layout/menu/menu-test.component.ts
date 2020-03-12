@@ -17,7 +17,7 @@ import { NbMenuService, NbMenuItem } from '@nebular/theme';
         <nb-menu id="menu-sidebar" tag="sidebarMenu" [items]="sidebarMenuItems"></nb-menu>
       </nb-sidebar>
       <nb-layout-column>
-        <nb-card size="xxlarge">
+        <nb-card size="giant">
           <nb-card-body>
             <nb-menu id="menu-first" tag="firstMenu" [items]="firstMenuItems" [autoCollapse]="true"></nb-menu>
             <router-outlet></router-outlet>
@@ -25,7 +25,7 @@ import { NbMenuService, NbMenuItem } from '@nebular/theme';
             <button nbButton id="homeBtn" (click)="navigateHome()">Home</button>
           </nb-card-body>
         </nb-card>
-        <nb-card size="xxlarge">
+        <nb-card size="giant">
           <nb-card-body>
             <nb-menu id="menu-second" tag="SecondMenu" [items]="secondMenuItems"></nb-menu>
             <router-outlet></router-outlet>
@@ -33,7 +33,7 @@ import { NbMenuService, NbMenuItem } from '@nebular/theme';
             <button nbButton id="homeBtn" (click)="navigateHome()">Home</button>
           </nb-card-body>
         </nb-card>
-        <nb-card size="xxlarge">
+        <nb-card size="giant">
           <nb-card-body>
             <nb-menu id="menu-third" tag="thirdMenu" [items]="thirdMenuItems"></nb-menu>
           </nb-card-body>
