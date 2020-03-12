@@ -18,7 +18,7 @@
       </div>
       <div class="label">
         <ng-container *ngIf="step.isLabelTemplate">
-          <ng-container *ngTemplateOutlet="step.label"></ng-container>
+          <ng-container *ngTemplateOutlet="getStepTemplate(step)"></ng-container>
         </ng-container>
         <span *ngIf="!step.isLabelTemplate">{{ step.label }}</span>
       </div>

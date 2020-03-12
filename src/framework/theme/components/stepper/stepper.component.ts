@@ -10,6 +10,7 @@ import {
   HostBinding,
   Input,
   QueryList,
+  TemplateRef,
 } from '@angular/core';
 import { convertToBoolProperty, NbBooleanInput } from '../helpers';
 import { NB_STEPPER } from './stepper-tokens';
@@ -214,6 +215,16 @@ export class NbStepperComponent {
 
   isStepSelected(step: NbStepComponent) {
     return this.selected === step;
+  }
+
+  /*
+   * @docs-private
+   **/
+  getStepTemplate(step: NbStepComponent): TemplateRef<any> {
+    if (step.isLabelTemplate) {
+      return step.label as TemplateRef<any>;
+    }
+    throw new Error(`NbStepper: Step has no template`);
   }
 
   protected isStepValid(index: number): boolean {
