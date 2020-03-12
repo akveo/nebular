@@ -30,7 +30,7 @@ export class NbStepComponent {
   /**
    * Top level abstract control of the step
    */
-  @Input() stepControl: { valid: boolean, reset: () => {} };
+  @Input() stepControl?: { valid: boolean | null, reset: () => void };
 
   /**
    * Step label
