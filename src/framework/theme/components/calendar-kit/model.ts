@@ -17,6 +17,7 @@ export enum NbCalendarViewMode {
   DATE = 'date',
 }
 
+export type NbCalendarSizeValues = 'medium' | 'large';
 export enum NbCalendarSize {
   MEDIUM = 'medium',
   LARGE = 'large',

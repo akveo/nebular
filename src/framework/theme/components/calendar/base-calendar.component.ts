@@ -7,7 +7,7 @@
 import { Component, EventEmitter, HostBinding, Input, OnInit, Output, Type } from '@angular/core';
 
 import { NbCalendarYearModelService } from '../calendar-kit/services/calendar-year-model.service';
-import { NbCalendarCell, NbCalendarSize, NbCalendarViewMode } from '../calendar-kit/model';
+import { NbCalendarCell, NbCalendarSize, NbCalendarViewMode, NbCalendarSizeValues } from '../calendar-kit/model';
 import { NbDateService } from '../calendar-kit/services/date.service';
 import { convertToBoolProperty, NbBooleanInput } from '../helpers';
 
@@ -68,6 +68,7 @@ export class NbBaseCalendarComponent<D, T> implements OnInit {
    * Can be 'medium' which is default or 'large'.
    * */
   @Input() size: NbCalendarSize = NbCalendarSize.MEDIUM;
+  static ngAcceptInputType_size: NbCalendarSizeValues;
 
   @Input() visibleDate: D;
 

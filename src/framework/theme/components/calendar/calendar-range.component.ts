@@ -6,7 +6,7 @@
 
 import { Component, EventEmitter, Input, Output, Type } from '@angular/core';
 
-import { NbCalendarCell, NbCalendarSize, NbCalendarViewMode } from '../calendar-kit/model';
+import { NbCalendarCell, NbCalendarSize, NbCalendarViewMode, NbCalendarSizeValues } from '../calendar-kit/model';
 import { NbDateService } from '../calendar-kit/services/date.service';
 import { NbCalendarRangeDayCellComponent } from './calendar-range-day-cell.component';
 import { NbCalendarRangeYearCellComponent } from './calendar-range-year-cell.component';
@@ -238,6 +238,7 @@ export class NbCalendarRangeComponent<D> {
    * Can be 'medium' which is default or 'large'.
    * */
   @Input() size: NbCalendarSize = NbCalendarSize.MEDIUM;
+  static ngAcceptInputType_size: NbCalendarSizeValues;
 
   @Input() visibleDate: D;
 

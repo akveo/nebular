@@ -14,7 +14,7 @@ import {
   HostListener,
 } from '@angular/core';
 
-import { NbCalendarCell, NbCalendarSize } from '../calendar-kit/model';
+import { NbCalendarCell, NbCalendarSize, NbCalendarSizeValues } from '../calendar-kit/model';
 import { NbCalendarRange } from './calendar-range.component';
 import { NbDateService } from '../calendar-kit/services/date.service';
 import { NbBaseCalendarRangeCell } from './base-calendar-range-cell';
@@ -39,6 +39,7 @@ export class NbCalendarRangeYearCellComponent<D> extends NbBaseCalendarRangeCell
   @Input() selectedValue: NbCalendarRange<D>;
 
   @Input() size: NbCalendarSize = NbCalendarSize.MEDIUM;
+  static ngAcceptInputType_size: NbCalendarSizeValues;
 
   @Output() select: EventEmitter<D> = new EventEmitter(true);
 
