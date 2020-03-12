@@ -43,7 +43,7 @@ import { NbMenuService, NbMenuItem } from '@nebular/theme';
   `,
 })
 export class MenuTestComponent implements OnInit, OnDestroy {
-  sidebarMenuItems = [
+  sidebarMenuItems: NbMenuItem[] = [
     {
       title: 'Menu Items',
       group: true,
@@ -97,7 +97,7 @@ export class MenuTestComponent implements OnInit, OnDestroy {
       ],
     },
   ];
-  firstMenuItems = [
+  firstMenuItems: NbMenuItem[] = [
     {
       title: 'Menu Items',
       group: true,
@@ -116,7 +116,7 @@ export class MenuTestComponent implements OnInit, OnDestroy {
       icon: 'home-outline',
     },
   ];
-  secondMenuItems = [
+  secondMenuItems: NbMenuItem[] = [
     {
       title: 'Menu items with fragments ',
       group: true,
@@ -125,7 +125,7 @@ export class MenuTestComponent implements OnInit, OnDestroy {
       title: 'Menu #1',
       link: '/menu/menu-test.component/1',
       icon: 'home-outline',
-      pathMatch: 'partial',
+      pathMatch: 'prefix',
     },
     {
       title: 'Menu #12 + fragment',
