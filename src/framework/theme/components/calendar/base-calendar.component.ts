@@ -7,7 +7,13 @@
 import { Component, EventEmitter, HostBinding, Input, OnInit, Output, Type } from '@angular/core';
 
 import { NbCalendarYearModelService } from '../calendar-kit/services/calendar-year-model.service';
-import { NbCalendarCell, NbCalendarSize, NbCalendarViewMode, NbCalendarSizeValues } from '../calendar-kit/model';
+import {
+  NbCalendarCell,
+  NbCalendarSize,
+  NbCalendarViewMode,
+  NbCalendarSizeValues,
+  NbCalendarViewModeValues,
+} from '../calendar-kit/model';
 import { NbDateService } from '../calendar-kit/services/date.service';
 import { convertToBoolProperty, NbBooleanInput } from '../helpers';
 
@@ -32,6 +38,7 @@ export class NbBaseCalendarComponent<D, T> implements OnInit {
    * Defines active view for calendar.
    * */
   @Input('startView') activeViewMode: NbCalendarViewMode = NbCalendarViewMode.DATE;
+  static ngAcceptInputType_activeViewMode: NbCalendarViewModeValues;
 
   /**
    * Minimum available date for selection.

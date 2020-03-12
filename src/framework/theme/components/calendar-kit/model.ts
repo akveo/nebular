@@ -11,6 +11,7 @@ export interface NbCalendarDay {
   isHoliday: boolean;
 }
 
+export type NbCalendarViewModeValues = 'year' | 'month' | 'date';
 export enum NbCalendarViewMode {
   YEAR = 'year',
   MONTH = 'month',

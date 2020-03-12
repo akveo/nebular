@@ -6,7 +6,13 @@
 
 import { Component, EventEmitter, Input, Output, Type } from '@angular/core';
 
-import { NbCalendarCell, NbCalendarSize, NbCalendarViewMode, NbCalendarSizeValues } from '../calendar-kit/model';
+import {
+  NbCalendarCell,
+  NbCalendarSize,
+  NbCalendarViewMode,
+  NbCalendarSizeValues,
+  NbCalendarViewModeValues,
+} from '../calendar-kit/model';
 import { NbDateService } from '../calendar-kit/services/date.service';
 import { NbCalendarRangeDayCellComponent } from './calendar-range-day-cell.component';
 import { NbCalendarRangeYearCellComponent } from './calendar-range-year-cell.component';
@@ -190,6 +196,7 @@ export class NbCalendarRangeComponent<D> {
    * Defines starting view for the calendar.
    * */
   @Input() startView: NbCalendarViewMode = NbCalendarViewMode.DATE;
+  static ngAcceptInputType_startView: NbCalendarViewModeValues;
 
   /**
    * A minimum available date for selection.

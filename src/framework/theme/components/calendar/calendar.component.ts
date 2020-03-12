@@ -6,7 +6,13 @@
 
 import { Component, EventEmitter, Input, Output, Type } from '@angular/core';
 
-import { NbCalendarCell, NbCalendarSize, NbCalendarViewMode, NbCalendarSizeValues } from '../calendar-kit/model';
+import {
+  NbCalendarCell,
+  NbCalendarSize,
+  NbCalendarViewMode,
+  NbCalendarSizeValues,
+  NbCalendarViewModeValues,
+} from '../calendar-kit/model';
 import { convertToBoolProperty, NbBooleanInput } from '../helpers';
 
 
@@ -221,6 +227,7 @@ export class NbCalendarComponent<D> {
    * Defines starting view for calendar.
    * */
   @Input() startView: NbCalendarViewMode = NbCalendarViewMode.DATE;
+  static ngAcceptInputType_startView: NbCalendarViewModeValues;
 
   /**
    * Minimum available date for selection.

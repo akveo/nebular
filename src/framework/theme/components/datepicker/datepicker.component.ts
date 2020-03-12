@@ -42,6 +42,7 @@ import {
   NbCalendarSize,
   NbCalendarViewMode,
   NbCalendarSizeValues,
+  NbCalendarViewModeValues,
 } from '../calendar-kit/model';
 import { NbDateService } from '../calendar-kit/services/date.service';
 import { NB_DATE_SERVICE_OPTIONS, NbDatepicker, NbPickerValidatorConfig } from './datepicker.directive';
@@ -106,7 +107,6 @@ export abstract class NbBasePicker<D, T, P>
    * Can be 'medium' which is default or 'large'.
    * */
   abstract size: NbCalendarSize = NbCalendarSize.MEDIUM;
-  static ngAcceptInputType_size: NbCalendarSizeValues;
 
   /**
    * Depending on this date a particular month is selected in the calendar
@@ -415,6 +415,7 @@ export class NbBasePickerComponent<D, T, P> extends NbBasePicker<D, T, P> {
    * Defines starting view for calendar.
    * */
   @Input() startView: NbCalendarViewMode = NbCalendarViewMode.DATE;
+  static ngAcceptInputType_startView: NbCalendarViewModeValues;
 
   /**
    * Minimum available date for selection.
