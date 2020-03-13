@@ -151,7 +151,7 @@ export class NbStepperComponent {
    * Selected step component
    */
   @Input()
-  get selected(): NbStepComponent | undefined {
+  get selected(): NbStepComponent {
     return this.steps ? this.steps.toArray()[this.selectedIndex] : undefined;
   }
   set selected(step: NbStepComponent) {

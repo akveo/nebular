@@ -507,7 +507,7 @@ export class NbBasePickerComponent<D, T, P> extends NbBasePicker<D, T, P> {
     return
   }
 
-  get value(): T | undefined {
+  get value(): T {
     return undefined;
   }
   set value(value: T) {}
@@ -541,7 +541,7 @@ export class NbDatepickerComponent<D> extends NbBasePickerComponent<D, D, NbCale
     return this.valueChange as EventEmitter<D>;
   }
 
-  get value(): D | undefined {
+  get value(): D {
     return this.picker ? this.picker.date : undefined;
   }
 
@@ -597,7 +597,7 @@ export class NbRangepickerComponent<D>
     return this.valueChange as EventEmitter<NbCalendarRange<D>>;
   }
 
-  get value(): NbCalendarRange<D> | undefined {
+  get value(): NbCalendarRange<D> {
     return this.picker ? this.picker.range : undefined;
   }
 
