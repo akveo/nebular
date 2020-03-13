@@ -170,7 +170,7 @@ import { NbChatMessageComponent } from './chat-message.component';
     <div class="scrollable" #scrollable>
       <div class="messages">
         <ng-content select="nb-chat-message"></ng-content>
-        <p class="no-messages" *ngIf="!messages?.length">No messages yet.</p>
+        <p class="no-messages" *ngIf="!messages?.length">{{ noMessagesPlaceholder }}</p>
       </div>
     </div>
     <div class="form">
@@ -204,6 +204,8 @@ export class NbChatComponent implements OnChanges, AfterContentInit, AfterViewIn
     this._status = value;
   }
   protected _status: NbComponentStatus = 'basic';
+
+  @Input() noMessagesPlaceholder: string = 'No messages yet.';
 
   /**
    * Scroll chat to the bottom of the list when a new message arrives
