@@ -67,11 +67,13 @@ import { NbChatMessageFile } from './chat-message-file.component';
       <ng-container [ngSwitch]="type">
 
         <nb-chat-message-file *ngSwitchCase="'file'"
-                              [sender]="sender" [date]="date" [message]="message" [files]="files">
+                              [sender]="sender" [date]="date" [dateFormat]="dateFormat"
+                              [message]="message" [files]="files">
         </nb-chat-message-file>
 
         <nb-chat-message-quote *ngSwitchCase="'quote'"
-                              [sender]="sender" [date]="date" [message]="message" [quote]="quote">
+                              [sender]="sender" [date]="date" [dateFormat]="dateFormat"
+                              [message]="message" [quote]="quote">
         </nb-chat-message-quote>
 
         <nb-chat-message-map *ngSwitchCase="'map'"
@@ -80,7 +82,8 @@ import { NbChatMessageFile } from './chat-message-file.component';
         </nb-chat-message-map>
 
         <nb-chat-message-text *ngSwitchDefault
-                              [sender]="sender" [date]="date" [message]="message">
+                              [sender]="sender" [date]="date" [dateFormat]="dateFormat"
+                              [message]="message">
         </nb-chat-message-text>
       </ng-container>
     </div>
@@ -145,6 +148,12 @@ export class NbChatMessageComponent {
    * @type {Date}
    */
   @Input() date: Date;
+
+  /**
+   * Message send date format, default 'shortTime'
+   * @type {string}
+   */
+  @Input() dateFormat: string;
 
   /**
    * Array of files `{ url: 'file url', icon: 'file icon class' }`
