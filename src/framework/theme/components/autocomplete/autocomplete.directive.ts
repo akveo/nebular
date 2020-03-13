@@ -202,7 +202,7 @@ export class NbAutocompleteDirective<T> implements OnDestroy, AfterViewInit, Con
   }
 
   @HostListener('input')
-  protected handleInput() {
+  handleInput() {
     const currentValue = this.hostRef.nativeElement.value;
     this._onChange(currentValue);
     this.setHostInputValue(this.getDisplayValue(currentValue));
@@ -211,12 +211,12 @@ export class NbAutocompleteDirective<T> implements OnDestroy, AfterViewInit, Con
 
   @HostListener('keydown.arrowDown')
   @HostListener('keydown.arrowUp')
-  protected handleKeydown() {
+  handleKeydown() {
     this.show();
   }
 
   @HostListener('blur')
-  protected handleBlur() {
+  handleBlur() {
     this._onTouched();
   }
 

@@ -7,9 +7,15 @@
 import { Component, EventEmitter, HostBinding, Input, OnInit, Output, Type } from '@angular/core';
 
 import { NbCalendarYearModelService } from '../calendar-kit/services/calendar-year-model.service';
-import { NbCalendarCell, NbCalendarSize, NbCalendarViewMode } from '../calendar-kit/model';
+import {
+  NbCalendarCell,
+  NbCalendarSize,
+  NbCalendarViewMode,
+  NbCalendarSizeValues,
+  NbCalendarViewModeValues,
+} from '../calendar-kit/model';
 import { NbDateService } from '../calendar-kit/services/date.service';
-import { convertToBoolProperty } from '../helpers';
+import { convertToBoolProperty, NbBooleanInput } from '../helpers';
 
 /**
  * The basis for calendar and range calendar components.
@@ -32,6 +38,7 @@ export class NbBaseCalendarComponent<D, T> implements OnInit {
    * Defines active view for calendar.
    * */
   @Input('startView') activeViewMode: NbCalendarViewMode = NbCalendarViewMode.DATE;
+  static ngAcceptInputType_activeViewMode: NbCalendarViewModeValues;
 
   /**
    * Minimum available date for selection.
@@ -68,6 +75,7 @@ export class NbBaseCalendarComponent<D, T> implements OnInit {
    * Can be 'medium' which is default or 'large'.
    * */
   @Input() size: NbCalendarSize = NbCalendarSize.MEDIUM;
+  static ngAcceptInputType_size: NbCalendarSizeValues;
 
   @Input() visibleDate: D;
 
@@ -96,6 +104,7 @@ export class NbBaseCalendarComponent<D, T> implements OnInit {
     this._showWeekNumber = convertToBoolProperty(value);
   }
   protected _showWeekNumber = false;
+  static ngAcceptInputType_showWeekNumber: NbBooleanInput;
 
   /**
    * Sets symbol used as a header for week numbers column

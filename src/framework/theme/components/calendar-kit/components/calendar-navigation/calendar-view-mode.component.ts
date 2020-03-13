@@ -7,7 +7,7 @@
 import { TranslationWidth } from '@angular/common';
 
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
-import { NbCalendarViewMode } from '../../model';
+import { NbCalendarViewMode, NbCalendarViewModeValues } from '../../model';
 import { NbCalendarYearModelService } from '../../services/calendar-year-model.service';
 import { NbDateService } from '../../services/date.service';
 
@@ -25,6 +25,7 @@ import { NbDateService } from '../../services/date.service';
 export class NbCalendarViewModeComponent<D> {
   @Input() date: D;
   @Input() viewMode: NbCalendarViewMode = NbCalendarViewMode.DATE;
+  static ngAcceptInputType_viewMode: NbCalendarViewModeValues;
   @Output() changeMode = new EventEmitter<void>(true);
 
   constructor(

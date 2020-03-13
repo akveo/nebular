@@ -17,7 +17,7 @@ import {
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 
-import { convertToBoolProperty } from '../helpers';
+import { convertToBoolProperty, NbBooleanInput } from '../helpers';
 import { NbOptionComponent } from './option.component';
 
 /**
@@ -59,6 +59,7 @@ export class NbOptionGroupComponent implements AfterContentInit, OnDestroy {
     }
   }
   protected _disabled: boolean = false;
+  static ngAcceptInputType_disabled: NbBooleanInput;
 
   @HostBinding('attr.disabled')
   get disabledAttribute(): '' | null {

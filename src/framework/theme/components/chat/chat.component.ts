@@ -21,7 +21,7 @@ import {
 
 import { NbComponentSize } from '../component-size';
 import { NbComponentStatus } from '../component-status';
-import { convertToBoolProperty, emptyStatusWarning } from '../helpers';
+import { convertToBoolProperty, emptyStatusWarning, NbBooleanInput } from '../helpers';
 import { NbChatFormComponent } from './chat-form.component';
 import { NbChatMessageComponent } from './chat-message.component';
 
@@ -218,6 +218,7 @@ export class NbChatComponent implements OnChanges, AfterContentInit, AfterViewIn
     this._scrollBottom = convertToBoolProperty(value);
   }
   protected _scrollBottom: boolean = true;
+  static ngAcceptInputType_scrollBottom: NbBooleanInput;
 
   @ViewChild('scrollable') scrollable: ElementRef;
   @ContentChildren(NbChatMessageComponent) messages: QueryList<NbChatMessageComponent>;

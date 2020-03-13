@@ -28,6 +28,8 @@ export enum NbAdjustment {
   HORIZONTAL = 'horizontal',
 }
 
+// tslint:disable-next-line:max-line-length
+export type NbPositionValues = 'top' | 'bottom' | 'left' | 'right' | 'start' | 'end' | 'top-end' | 'top-start' | 'bottom-end' | 'bottom-start' | 'end-top' | 'end-bottom' | 'start-top' | 'start-bottom';
 export enum NbPosition {
   TOP = 'top',
   BOTTOM = 'bottom',

@@ -48,7 +48,7 @@ import { NbComponentShape } from '../component-shape';
 import { NbComponentStatus } from '../component-status';
 import { NB_DOCUMENT } from '../../theme.options';
 import { NbOptionComponent } from '../option/option.component';
-import { convertToBoolProperty } from '../helpers';
+import { convertToBoolProperty, NbBooleanInput } from '../helpers';
 import { NB_SELECT_INJECTION_TOKEN } from './select-injection-tokens';
 import { NbFormFieldControl, NbFormFieldControlConfig } from '../form-field/form-field-control';
 import { NbFocusMonitor } from '../cdk/a11y/a11y.module';
@@ -507,7 +507,7 @@ export function nbSelectFormFieldControlConfigFactory() {
     { provide: NbFormFieldControlConfig, useFactory: nbSelectFormFieldControlConfigFactory },
   ],
 })
-export class NbSelectComponent<T> implements OnChanges, AfterViewInit, AfterContentInit, OnDestroy,
+export class NbSelectComponent implements OnChanges, AfterViewInit, AfterContentInit, OnDestroy,
                                              ControlValueAccessor, NbFormFieldControl {
 
   /**
@@ -545,6 +545,7 @@ export class NbSelectComponent<T> implements OnChanges, AfterViewInit, AfterCont
       this.appearance = 'outline';
     }
   }
+  static ngAcceptInputType_outline: NbBooleanInput;
 
   /**
    * Adds `filled` styles
@@ -559,6 +560,7 @@ export class NbSelectComponent<T> implements OnChanges, AfterViewInit, AfterCont
       this.appearance = 'filled';
     }
   }
+  static ngAcceptInputType_filled: NbBooleanInput;
 
   /**
    * Adds `hero` styles
@@ -573,6 +575,7 @@ export class NbSelectComponent<T> implements OnChanges, AfterViewInit, AfterCont
       this.appearance = 'hero';
     }
   }
+  static ngAcceptInputType_hero: NbBooleanInput;
 
   /**
    * Disables the select
@@ -585,6 +588,7 @@ export class NbSelectComponent<T> implements OnChanges, AfterViewInit, AfterCont
     this._disabled = convertToBoolProperty(value);
   }
   protected _disabled: boolean;
+  static ngAcceptInputType_disabled: NbBooleanInput;
 
   /**
    * If set element will fill its container
@@ -598,6 +602,7 @@ export class NbSelectComponent<T> implements OnChanges, AfterViewInit, AfterCont
     this._fullWidth = convertToBoolProperty(value);
   }
   protected _fullWidth: boolean = false;
+  static ngAcceptInputType_fullWidth: NbBooleanInput;
 
   /**
    * Renders select placeholder if nothing selected.
@@ -608,10 +613,10 @@ export class NbSelectComponent<T> implements OnChanges, AfterViewInit, AfterCont
    * Accepts selected item or array of selected items.
    * */
   @Input()
-  set selected(value: T | T[]) {
+  set selected(value) {
     this.writeValue(value);
   }
-  get selected(): T | T[] {
+  get selected() {
     return this.multiple
       ? this.selectionModel.map(o => o.value)
       : this.selectionModel[0].value;
@@ -628,17 +633,18 @@ export class NbSelectComponent<T> implements OnChanges, AfterViewInit, AfterCont
     this._multiple = convertToBoolProperty(value);
   }
   protected _multiple: boolean = false;
+  static ngAcceptInputType_multiple: NbBooleanInput;
 
   /**
    * Will be emitted when selected value changes.
    * */
-  @Output() selectedChange: EventEmitter<T | T[]> = new EventEmitter();
+  @Output() selectedChange: EventEmitter<any> = new EventEmitter();
 
   /**
    * List of `NbOptionComponent`'s components passed as content.
    * TODO maybe it would be better provide wrapper
    * */
-  @ContentChildren(NbOptionComponent, { descendants: true }) options: QueryList<NbOptionComponent<T>>;
+  @ContentChildren(NbOptionComponent, { descendants: true }) options: QueryList<NbOptionComponent>;
 
   /**
    * Custom select label, will be rendered instead of default enumeration with coma.
@@ -663,7 +669,7 @@ export class NbSelectComponent<T> implements OnChanges, AfterViewInit, AfterCont
   /**
    * List of selected options.
    * */
-  selectionModel: NbOptionComponent<T>[] = [];
+  selectionModel: NbOptionComponent[] = [];
 
   positionStrategy: NbAdjustableConnectedPositionStrategy;
 
@@ -682,14 +688,14 @@ export class NbSelectComponent<T> implements OnChanges, AfterViewInit, AfterCont
 
   protected destroy$ = new Subject<void>();
 
-  protected keyManager: NbFocusKeyManager<NbOptionComponent<T>>;
+  protected keyManager: NbFocusKeyManager<NbOptionComponent>;
 
   /**
    * If a user assigns value before content nb-options's rendered the value will be putted in this variable.
    * And then applied after content rendered.
    * Only the last value will be applied.
    * */
-  protected queue: T | T[];
+  protected queue;
 
   /**
    * Function passed through control value accessor to propagate changes.
@@ -723,7 +729,7 @@ export class NbSelectComponent<T> implements OnChanges, AfterViewInit, AfterCont
               protected positionBuilder: NbPositionBuilderService,
               protected triggerStrategyBuilder: NbTriggerStrategyBuilderService,
               protected cd: ChangeDetectorRef,
-              protected focusKeyManagerFactoryService: NbFocusKeyManagerFactoryService<NbOptionComponent<T>>,
+              protected focusKeyManagerFactoryService: NbFocusKeyManagerFactoryService<NbOptionComponent>,
               protected focusMonitor: NbFocusMonitor,
               protected renderer: Renderer2,
               protected zone: NgZone) {
@@ -764,7 +770,7 @@ export class NbSelectComponent<T> implements OnChanges, AfterViewInit, AfterCont
    * */
   get selectionView() {
     if (this.selectionModel.length > 1) {
-      return this.selectionModel.map((option: NbOptionComponent<T>) => option.content).join(', ');
+      return this.selectionModel.map((option: NbOptionComponent) => option.content).join(', ');
     }
 
     return this.selectionModel[0].content;
@@ -855,7 +861,7 @@ export class NbSelectComponent<T> implements OnChanges, AfterViewInit, AfterCont
     this.cd.markForCheck();
   }
 
-  writeValue(value: T | T[]): void {
+  writeValue(value): void {
     if (!this.alive) {
       return;
     }
@@ -873,7 +879,7 @@ export class NbSelectComponent<T> implements OnChanges, AfterViewInit, AfterCont
   /**
    * Selects option or clear all selected options if value is null.
    * */
-  protected handleOptionClick(option: NbOptionComponent<T>) {
+  protected handleOptionClick(option: NbOptionComponent) {
     this.queue = null;
     if (option.value == null) {
       this.reset();
@@ -888,7 +894,7 @@ export class NbSelectComponent<T> implements OnChanges, AfterViewInit, AfterCont
    * Deselect all selected options.
    * */
   protected reset() {
-    this.selectionModel.forEach((option: NbOptionComponent<T>) => option.deselect());
+    this.selectionModel.forEach((option: NbOptionComponent) => option.deselect());
     this.selectionModel = [];
     this.hide();
     this.button.nativeElement.focus();
@@ -898,7 +904,7 @@ export class NbSelectComponent<T> implements OnChanges, AfterViewInit, AfterCont
   /**
    * Determines how to select option as multiple or single.
    * */
-  protected selectOption(option: NbOptionComponent<T>) {
+  protected selectOption(option: NbOptionComponent) {
     if (this.multiple) {
       this.handleMultipleSelect(option);
     } else {
@@ -909,7 +915,7 @@ export class NbSelectComponent<T> implements OnChanges, AfterViewInit, AfterCont
   /**
    * Select single option.
    * */
-  protected handleSingleSelect(option: NbOptionComponent<T>) {
+  protected handleSingleSelect(option: NbOptionComponent) {
     const selected = this.selectionModel.pop();
 
     if (selected && selected !== option) {
@@ -927,7 +933,7 @@ export class NbSelectComponent<T> implements OnChanges, AfterViewInit, AfterCont
   /**
    * Select for multiple options.
    * */
-  protected handleMultipleSelect(option: NbOptionComponent<T>) {
+  protected handleMultipleSelect(option: NbOptionComponent) {
     if (option.selected) {
       this.selectionModel = this.selectionModel.filter(s => s.value !== option.value);
       option.deselect();
@@ -936,7 +942,7 @@ export class NbSelectComponent<T> implements OnChanges, AfterViewInit, AfterCont
       option.select();
     }
 
-    this.emitSelected(this.selectionModel.map((opt: NbOptionComponent<T>) => opt.value));
+    this.emitSelected(this.selectionModel.map((opt: NbOptionComponent) => opt.value));
   }
 
   protected attachToOverlay() {
@@ -1018,12 +1024,12 @@ export class NbSelectComponent<T> implements OnChanges, AfterViewInit, AfterCont
     this.options.changes
       .pipe(
         startWith(this.options),
-        switchMap((options: QueryList<NbOptionComponent<T>>) => {
+        switchMap((options: QueryList<NbOptionComponent>) => {
           return merge(...options.map(option => option.click));
         }),
         takeUntil(this.destroy$),
       )
-      .subscribe((clickedOption: NbOptionComponent<T>) => this.handleOptionClick(clickedOption));
+      .subscribe((clickedOption: NbOptionComponent) => this.handleOptionClick(clickedOption));
   }
 
   protected subscribeOnOverlayKeys(): void {
@@ -1070,7 +1076,7 @@ export class NbSelectComponent<T> implements OnChanges, AfterViewInit, AfterCont
   /**
    * Propagate selected value.
    * */
-  protected emitSelected(selected: T | T[]) {
+  protected emitSelected(selected) {
     this.onChange(selected);
     this.selectedChange.emit(selected);
   }
@@ -1078,7 +1084,7 @@ export class NbSelectComponent<T> implements OnChanges, AfterViewInit, AfterCont
   /**
    * Set selected value in model.
    * */
-  protected setSelection(value: T | T[]) {
+  protected setSelection(value) {
     const isArray: boolean = Array.isArray(value);
 
     if (this.multiple && !isArray) {
@@ -1093,15 +1099,15 @@ export class NbSelectComponent<T> implements OnChanges, AfterViewInit, AfterCont
     this.selectionModel = [];
 
     if (isArray) {
-      (<T[]> value).forEach((option: T) => this.selectValue(option));
+      value.forEach(option => this.selectValue(option));
     } else {
-      this.selectValue(<T> value);
+      this.selectValue(value);
     }
 
     // find options which were selected before and trigger deselect
     previouslySelectedOptions
-      .filter((option: NbOptionComponent<T>) => !this.selectionModel.includes(option))
-      .forEach((option: NbOptionComponent<T>) => option.deselect());
+      .filter((option: NbOptionComponent) => !this.selectionModel.includes(option))
+      .forEach((option: NbOptionComponent) => option.deselect());
 
     this.cd.markForCheck();
   }
@@ -1109,8 +1115,8 @@ export class NbSelectComponent<T> implements OnChanges, AfterViewInit, AfterCont
   /**
    * Selects value.
    * */
-  protected selectValue(value: T) {
-    const corresponding = this.options.find((option: NbOptionComponent<T>) => option.value === value);
+  protected selectValue(value) {
+    const corresponding = this.options.find((option: NbOptionComponent) => option.value === value);
 
     if (corresponding) {
       corresponding.select();

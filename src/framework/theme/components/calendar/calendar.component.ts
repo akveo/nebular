@@ -6,8 +6,14 @@
 
 import { Component, EventEmitter, Input, Output, Type } from '@angular/core';
 
-import { NbCalendarCell, NbCalendarSize, NbCalendarViewMode } from '../calendar-kit/model';
-import { convertToBoolProperty } from '../helpers';
+import {
+  NbCalendarCell,
+  NbCalendarSize,
+  NbCalendarViewMode,
+  NbCalendarSizeValues,
+  NbCalendarViewModeValues,
+} from '../calendar-kit/model';
+import { convertToBoolProperty, NbBooleanInput } from '../helpers';
 
 
 /**
@@ -221,6 +227,7 @@ export class NbCalendarComponent<D> {
    * Defines starting view for calendar.
    * */
   @Input() startView: NbCalendarViewMode = NbCalendarViewMode.DATE;
+  static ngAcceptInputType_startView: NbCalendarViewModeValues;
 
   /**
    * Minimum available date for selection.
@@ -257,6 +264,7 @@ export class NbCalendarComponent<D> {
    * Can be 'medium' which is default or 'large'.
    * */
   @Input() size: NbCalendarSize = NbCalendarSize.MEDIUM;
+  static ngAcceptInputType_size: NbCalendarSizeValues;
 
   @Input() visibleDate: D;
 
@@ -282,6 +290,7 @@ export class NbCalendarComponent<D> {
     this._showWeekNumber = convertToBoolProperty(value);
   }
   protected _showWeekNumber: boolean = false;
+  static ngAcceptInputType_showWeekNumber: NbBooleanInput;
 
   /**
    * Sets symbol used as a header for week numbers column

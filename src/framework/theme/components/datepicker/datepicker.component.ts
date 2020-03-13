@@ -41,10 +41,12 @@ import {
   NbCalendarCell,
   NbCalendarSize,
   NbCalendarViewMode,
+  NbCalendarSizeValues,
+  NbCalendarViewModeValues,
 } from '../calendar-kit/model';
 import { NbDateService } from '../calendar-kit/services/date.service';
 import { NB_DATE_SERVICE_OPTIONS, NbDatepicker, NbPickerValidatorConfig } from './datepicker.directive';
-import { convertToBoolProperty } from '../helpers';
+import { convertToBoolProperty, NbBooleanInput } from '../helpers';
 
 
 /**
@@ -413,6 +415,7 @@ export class NbBasePickerComponent<D, T, P> extends NbBasePicker<D, T, P> {
    * Defines starting view for calendar.
    * */
   @Input() startView: NbCalendarViewMode = NbCalendarViewMode.DATE;
+  static ngAcceptInputType_startView: NbCalendarViewModeValues;
 
   /**
    * Minimum available date for selection.
@@ -449,6 +452,7 @@ export class NbBasePickerComponent<D, T, P> extends NbBasePicker<D, T, P> {
    * Can be 'medium' which is default or 'large'.
    * */
   @Input() size: NbCalendarSize = NbCalendarSize.MEDIUM;
+  static ngAcceptInputType_size: NbCalendarSizeValues;
 
   /**
    * Depending on this date a particular month is selected in the calendar
@@ -484,6 +488,7 @@ export class NbBasePickerComponent<D, T, P> extends NbBasePicker<D, T, P> {
     this._showWeekNumber = convertToBoolProperty(value);
   }
   protected _showWeekNumber: boolean = false;
+  static ngAcceptInputType_showWeekNumber: NbBooleanInput;
 
   constructor(@Inject(NB_DOCUMENT) document,
               positionBuilder: NbPositionBuilderService,
@@ -502,7 +507,7 @@ export class NbBasePickerComponent<D, T, P> extends NbBasePicker<D, T, P> {
     return
   }
 
-  get value(): T | undefined {
+  get value(): T {
     return undefined;
   }
   set value(value: T) {}
@@ -536,7 +541,7 @@ export class NbDatepickerComponent<D> extends NbBasePickerComponent<D, D, NbCale
     return this.valueChange as EventEmitter<D>;
   }
 
-  get value(): D | undefined {
+  get value(): D {
     return this.picker ? this.picker.date : undefined;
   }
 
@@ -592,7 +597,7 @@ export class NbRangepickerComponent<D>
     return this.valueChange as EventEmitter<NbCalendarRange<D>>;
   }
 
-  get value(): NbCalendarRange<D> | undefined {
+  get value(): NbCalendarRange<D> {
     return this.picker ? this.picker.range : undefined;
   }
 

@@ -27,7 +27,7 @@ import { takeUntil } from 'rxjs/operators';
 import { NbLayoutDirectionService } from '../../services/direction.service';
 import { NbComponentStatus } from '../component-status';
 
-import { convertToBoolProperty, emptyStatusWarning } from '../helpers';
+import { convertToBoolProperty, emptyStatusWarning, NbBooleanInput } from '../helpers';
 
 /**
  * Toggle is a control representing `on` and `off` states.
@@ -313,6 +313,7 @@ export class NbToggleComponent implements OnInit, AfterViewInit, OnDestroy, Cont
     this._checked = convertToBoolProperty(value);
   }
   private _checked: boolean = false;
+  static ngAcceptInputType_checked: NbBooleanInput;
 
   /**
    * Controls input disabled state
@@ -325,6 +326,7 @@ export class NbToggleComponent implements OnInit, AfterViewInit, OnDestroy, Cont
     this._disabled = convertToBoolProperty(value);
   }
   private _disabled: boolean = false;
+  static ngAcceptInputType_disabled: NbBooleanInput;
 
   /**
    * Toggle status.

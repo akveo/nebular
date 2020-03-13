@@ -21,7 +21,7 @@ import {
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import { NbComponentStatus } from '../component-status';
-import { convertToBoolProperty, emptyStatusWarning } from '../helpers';
+import { convertToBoolProperty, emptyStatusWarning, NbBooleanInput } from '../helpers';
 
 /**
  * Styled checkbox component
@@ -310,6 +310,7 @@ export class NbCheckboxComponent implements AfterViewInit, ControlValueAccessor 
     this._checked = convertToBoolProperty(value);
   }
   private _checked: boolean = false;
+  static ngAcceptInputType_checked: NbBooleanInput;
 
   /**
    * Controls input disabled state
@@ -322,6 +323,7 @@ export class NbCheckboxComponent implements AfterViewInit, ControlValueAccessor 
     this._disabled = convertToBoolProperty(value);
   }
   private _disabled: boolean = false;
+  static ngAcceptInputType_disabled: NbBooleanInput;
 
   /**
    * Checkbox status.
@@ -352,6 +354,7 @@ export class NbCheckboxComponent implements AfterViewInit, ControlValueAccessor 
     this._indeterminate = convertToBoolProperty(value);
   }
   private _indeterminate: boolean = false;
+  static ngAcceptInputType_indeterminate: NbBooleanInput;
 
   /**
    * Output when checked state is changed by a user

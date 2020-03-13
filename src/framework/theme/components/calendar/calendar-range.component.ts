@@ -6,12 +6,18 @@
 
 import { Component, EventEmitter, Input, Output, Type } from '@angular/core';
 
-import { NbCalendarCell, NbCalendarSize, NbCalendarViewMode } from '../calendar-kit/model';
+import {
+  NbCalendarCell,
+  NbCalendarSize,
+  NbCalendarViewMode,
+  NbCalendarSizeValues,
+  NbCalendarViewModeValues,
+} from '../calendar-kit/model';
 import { NbDateService } from '../calendar-kit/services/date.service';
 import { NbCalendarRangeDayCellComponent } from './calendar-range-day-cell.component';
 import { NbCalendarRangeYearCellComponent } from './calendar-range-year-cell.component';
 import { NbCalendarRangeMonthCellComponent } from './calendar-range-month-cell.component';
-import { convertToBoolProperty } from '../helpers';
+import { convertToBoolProperty, NbBooleanInput } from '../helpers';
 
 
 export interface NbCalendarRange<D> {
@@ -162,7 +168,7 @@ export interface NbCalendarRange<D> {
   template: `
     <nb-base-calendar
       [date]="range"
-      (dateChange)="onChange($event)"
+      (dateChange)="onChange($any($event))"
       [min]="min"
       [max]="max"
       [filter]="filter"
@@ -190,6 +196,7 @@ export class NbCalendarRangeComponent<D> {
    * Defines starting view for the calendar.
    * */
   @Input() startView: NbCalendarViewMode = NbCalendarViewMode.DATE;
+  static ngAcceptInputType_startView: NbCalendarViewModeValues;
 
   /**
    * A minimum available date for selection.
@@ -238,6 +245,7 @@ export class NbCalendarRangeComponent<D> {
    * Can be 'medium' which is default or 'large'.
    * */
   @Input() size: NbCalendarSize = NbCalendarSize.MEDIUM;
+  static ngAcceptInputType_size: NbCalendarSizeValues;
 
   @Input() visibleDate: D;
 
@@ -263,6 +271,7 @@ export class NbCalendarRangeComponent<D> {
     this._showWeekNumber = convertToBoolProperty(value);
   }
   protected _showWeekNumber: boolean = false;
+  static ngAcceptInputType_showWeekNumber: NbBooleanInput;
 
   /**
    * Sets symbol used as a header for week numbers column

@@ -18,7 +18,7 @@ import {
   ViewContainerRef,
 } from '@angular/core';
 
-import { NbCalendarCell, NbCalendarSize } from '../../model';
+import { NbCalendarCell, NbCalendarSize, NbCalendarSizeValues } from '../../model';
 
 
 @Component({
@@ -41,6 +41,7 @@ export class NbCalendarPickerRowComponent<D, T> implements OnChanges {
   @Input() max: D;
   @Input() filter: (D) => boolean;
   @Input() size: NbCalendarSize = NbCalendarSize.MEDIUM;
+  static ngAcceptInputType_size: NbCalendarSizeValues;
   @Output() select: EventEmitter<D> = new EventEmitter();
 
   // TODO static must be false as of Angular 9.0.0, issues/1514

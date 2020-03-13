@@ -19,7 +19,7 @@ import { skip, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 
 import { NbComponentStatus } from '../component-status';
-import { NbAdjustment, NbPosition } from '../cdk/overlay/overlay-position';
+import { NbAdjustment, NbPosition, NbPositionValues } from '../cdk/overlay/overlay-position';
 import { NbTrigger } from '../cdk/overlay/overlay-trigger';
 import { NbDynamicOverlay } from '../cdk/overlay/dynamic/dynamic-overlay';
 import { NbDynamicOverlayHandler } from '../cdk/overlay/dynamic/dynamic-overlay-handler';
@@ -90,6 +90,8 @@ export class NbTooltipDirective implements OnInit, OnChanges, AfterViewInit, OnD
    */
   @Input('nbTooltipPlacement')
   position: NbPosition = NbPosition.TOP;
+  static ngAcceptInputType_position: NbPositionValues;
+
   /**
    * Container position will change automatically based on this strategy if container can't fit view port.
    * Set this property to `noop` value if you want to disable automatic adjustment.

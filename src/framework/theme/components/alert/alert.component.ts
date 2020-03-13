@@ -8,7 +8,7 @@ import { Component, Input, HostBinding, Output, EventEmitter } from '@angular/co
 
 import { NbComponentSize } from '../component-size';
 import { NbComponentStatus } from '../component-status';
-import { convertToBoolProperty, emptyStatusWarning } from '../helpers';
+import { convertToBoolProperty, emptyStatusWarning, NbBooleanInput } from '../helpers';
 
 
 /**
@@ -169,6 +169,7 @@ export class NbAlertComponent {
     this._closable = convertToBoolProperty(value);
   }
   protected _closable: boolean = false;
+  static ngAcceptInputType_closable: NbBooleanInput;
 
   /**
    * Emits when chip is removed

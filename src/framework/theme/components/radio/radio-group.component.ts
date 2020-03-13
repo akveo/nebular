@@ -23,7 +23,7 @@ import { isPlatformBrowser } from '@angular/common';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { fromEvent, merge, Subject } from 'rxjs';
 import { filter, switchMap, takeUntil } from 'rxjs/operators';
-import { convertToBoolProperty, emptyStatusWarning } from '../helpers';
+import { convertToBoolProperty, emptyStatusWarning, NbBooleanInput } from '../helpers';
 import { NB_DOCUMENT } from '../../theme.options';
 import { NbRadioComponent } from './radio.component';
 import { NbComponentStatus } from '../component-status';
@@ -113,6 +113,7 @@ export class NbRadioGroupComponent implements AfterContentInit, OnDestroy, Contr
     this.updateDisabled();
   }
   protected _disabled: boolean;
+  static ngAcceptInputType_disabled: NbBooleanInput;
 
   /**
    * Radio buttons status.

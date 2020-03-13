@@ -16,7 +16,7 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import { batch } from '../../helpers';
-import { NbCalendarCell, NbCalendarSize } from '../../model';
+import { NbCalendarCell, NbCalendarSize, NbCalendarSizeValues } from '../../model';
 import { NbCalendarMonthCellComponent } from './calendar-month-cell.component';
 import { NbDateService } from '../../services/date.service';
 
@@ -48,6 +48,7 @@ export class NbCalendarMonthPickerComponent<D, T> implements OnChanges {
 
   @Input() filter: (D) => boolean;
   @Input() size: NbCalendarSize = NbCalendarSize.MEDIUM;
+  static ngAcceptInputType_size: NbCalendarSizeValues;
 
   /**
    * Visible month

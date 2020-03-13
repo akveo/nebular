@@ -12,7 +12,7 @@ import {
 } from '@angular/core';
 import { Observable, forkJoin, of as observableOf, interval, timer, Subject } from 'rxjs';
 import { filter, switchMap, map, takeUntil, take } from 'rxjs/operators';
-import { convertToBoolProperty } from '../helpers';
+import { convertToBoolProperty, NbBooleanInput } from '../helpers';
 import { NbLayoutScrollService } from '../../services/scroll.service';
 import { NbLayoutRulerService } from '../../services/ruler.service';
 import { NbListItemComponent } from './list.component';
@@ -78,6 +78,7 @@ export class NbInfiniteListDirective implements AfterViewInit, OnDestroy {
   set listenWindowScroll(value) {
     this.windowScroll = convertToBoolProperty(value);
   }
+  static ngAcceptInputType_listenWindowScroll: NbBooleanInput;
 
   /**
    * Emits when distance between list bottom and current scroll position is less than threshold.

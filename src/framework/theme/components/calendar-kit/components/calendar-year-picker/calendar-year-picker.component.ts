@@ -14,7 +14,7 @@ import {
   Output,
   Type,
 } from '@angular/core';
-import { NbCalendarCell, NbCalendarSize } from '../../model';
+import { NbCalendarCell, NbCalendarSize, NbCalendarSizeValues } from '../../model';
 import { NbCalendarYearCellComponent } from './calendar-year-cell.component';
 import { NbDateService } from '../../services/date.service';
 import { NbCalendarYearModelService } from '../../services/calendar-year-model.service';
@@ -55,6 +55,7 @@ export class NbCalendarYearPickerComponent<D> implements OnChanges {
   cellComponent: Type<NbCalendarCell<D, D>> = NbCalendarYearCellComponent;
 
   @Input() size: NbCalendarSize = NbCalendarSize.MEDIUM;
+  static ngAcceptInputType_size: NbCalendarSizeValues;
 
   @Input() year: D;
 

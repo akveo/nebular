@@ -6,7 +6,7 @@
 
 import { Component, HostBinding, Input } from '@angular/core';
 
-import { convertToBoolProperty } from '../helpers';
+import { convertToBoolProperty, NbBooleanInput } from '../helpers';
 import { NbComponentSize } from '../component-size';
 import { NbComponentStatus } from '../component-status';
 import { NbBadgePosition } from '../badge/badge.component';
@@ -91,6 +91,7 @@ export class NbActionComponent {
     this._disabled = convertToBoolProperty(value);
   }
   protected _disabled: boolean = false;
+  static ngAcceptInputType_disabled: NbBooleanInput;
 
   /**
    * Badge text to display
@@ -220,6 +221,7 @@ export class NbActionsComponent {
     this._fullWidth = convertToBoolProperty(value);
   }
   protected _fullWidth: boolean = false;
+  static ngAcceptInputType_fullWidth: NbBooleanInput;
 
   @HostBinding('class.size-tiny')
   get tiny(): boolean {

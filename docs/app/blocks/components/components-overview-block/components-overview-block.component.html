@@ -6,8 +6,8 @@
 
 <div class="components-list">
   <ng-container *ngFor="let component of components">
-    <h3 *ngIf="component.group" class="group-title h4">{{ component.name }}</h3>
-    <div *ngIf="!component.group" class="component-card-wrapper">
+    <h3 *ngIf="$any(component).group" class="group-title h4">{{ component.name }}</h3>
+    <div *ngIf="!$any(component).group" class="component-card-wrapper">
       <a class="component-navigate-link" [routerLink]="component.link">
         <nb-card [attr.title]="component.name">
           <nb-card-body>

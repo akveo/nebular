@@ -14,7 +14,7 @@ import {
   Output,
 } from '@angular/core';
 
-import { NbCalendarCell, NbCalendarSize } from '../../model';
+import { NbCalendarCell, NbCalendarSize, NbCalendarSizeValues } from '../../model';
 import { NbDateService } from '../../services/date.service';
 
 
@@ -42,6 +42,7 @@ export class NbCalendarDayCellComponent<D> implements NbCalendarCell<D, D> {
   @Input() filter: (D) => boolean;
 
   @Input() size: NbCalendarSize = NbCalendarSize.MEDIUM;
+  static ngAcceptInputType_size: NbCalendarSizeValues;
 
   @Output() select: EventEmitter<D> = new EventEmitter(true);
 

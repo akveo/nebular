@@ -12,7 +12,7 @@ import { isPlatformBrowser } from '@angular/common';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
 
-import { convertToBoolProperty } from '../helpers';
+import { convertToBoolProperty, NbBooleanInput } from '../helpers';
 import { NbThemeService } from '../../services/theme.service';
 import { NbSpinnerService } from '../../services/spinner.service';
 import { NbLayoutDirectionService } from '../../services/direction.service';
@@ -157,6 +157,7 @@ export class NbLayoutComponent implements AfterViewInit, OnDestroy {
   set center(val: boolean) {
     this.centerValue = convertToBoolProperty(val);
   }
+  static ngAcceptInputType_center: NbBooleanInput;
 
   /**
    * Defines whether the layout enters a 'window' mode, when the layout content (including sidebars and fixed header)
@@ -170,6 +171,7 @@ export class NbLayoutComponent implements AfterViewInit, OnDestroy {
     this.windowModeValue = convertToBoolProperty(val);
     this.withScroll = this.windowModeValue;
   }
+  static ngAcceptInputType_windowMode: NbBooleanInput;
 
   /**
    * Defines whether to move the scrollbars to layout or leave it at the body level.
@@ -189,6 +191,7 @@ export class NbLayoutComponent implements AfterViewInit, OnDestroy {
       this.renderer.setStyle(body, 'overflow', 'initial');
     }
   }
+  static ngAcceptInputType_withScroll: NbBooleanInput;
 
   /**
    * Restores scroll to the top of the page after navigation
@@ -198,6 +201,7 @@ export class NbLayoutComponent implements AfterViewInit, OnDestroy {
   set restoreScrollTop(val: boolean) {
     this.restoreScrollTopValue = convertToBoolProperty(val);
   }
+  static ngAcceptInputType_restoreScrollTop: NbBooleanInput;
 
   // TODO remove as of 5.0.0
   @ViewChild('layoutTopDynamicArea', { read: ViewContainerRef }) veryTopRef: ViewContainerRef;
@@ -516,6 +520,7 @@ export class NbLayoutColumnComponent {
     this.leftValue = convertToBoolProperty(val);
     this.startValue = false;
   }
+  static ngAcceptInputType_left: NbBooleanInput;
 
   /**
    * Make column first in the layout.
@@ -526,6 +531,7 @@ export class NbLayoutColumnComponent {
     this.startValue = convertToBoolProperty(val);
     this.leftValue = false;
   }
+  static ngAcceptInputType_start: NbBooleanInput;
 }
 
 /**
@@ -583,6 +589,7 @@ export class NbLayoutHeaderComponent {
   set fixed(val: boolean) {
     this.fixedValue = convertToBoolProperty(val);
   }
+  static ngAcceptInputType_fixed: NbBooleanInput;
 
   /**
    * Places header on a side of the sidebar, and not above.
@@ -595,6 +602,7 @@ export class NbLayoutHeaderComponent {
     this.fixedValue = false;
     this.layout.withSubheader = this.subheaderValue;
   }
+  static ngAcceptInputType_subheader: NbBooleanInput;
 }
 
 /**
@@ -638,5 +646,6 @@ export class NbLayoutFooterComponent {
   set fixed(val: boolean) {
     this.fixedValue = convertToBoolProperty(val);
   }
+  static ngAcceptInputType_fixed: NbBooleanInput;
 
 }
