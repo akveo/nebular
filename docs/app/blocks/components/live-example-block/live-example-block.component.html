@@ -3,7 +3,7 @@
   <div class="actions">
 
     <div class="action-selector">
-      <select class="action-item" [(ngModel)]="currentTheme"  (change)="switchTheme($event.target.value)">
+      <select class="action-item" [(ngModel)]="currentTheme"  (change)="switchTheme($any($event.target).value)">
         <option *ngFor="let theme of themes" [value]="theme.value">{{theme.label}}</option>
       </select>
       <nb-icon icon="color-palette-outline"></nb-icon>
