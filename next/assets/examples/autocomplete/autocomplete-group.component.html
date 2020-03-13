@@ -1,0 +1,22 @@
+<nb-card size="medium">
+  <nb-card-body>
+
+    <input
+      [formControl]="inputFormControl"
+      nbInput
+      type="text"
+      placeholder="Enter value"
+      [nbAutocomplete]="auto" />
+
+    <nb-autocomplete #auto>
+
+      <nb-option-group *ngFor="let group of filteredGroups$ | async; trackBy: trackByFn"  [title]="group.name" >
+        <nb-option *ngFor="let option of group.children" [value]="option">
+          {{ option }}
+        </nb-option>
+      </nb-option-group>
+
+    </nb-autocomplete>
+
+  </nb-card-body>
+</nb-card>

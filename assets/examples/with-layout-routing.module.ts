@@ -20,6 +20,10 @@ const routes: Route[] = [
         loadChildren: () => import('./alert/alert.module').then(m => m.AlertModule),
       },
       {
+        path: 'autocomplete',
+        loadChildren: () => import('./autocomplete/autocomplete.module').then(m => m.AutocompleteModule),
+      },
+      {
         path: 'badge',
         loadChildren: () => import('./badge/badge.module').then(m => m.BadgeModule),
       },
@@ -147,6 +151,10 @@ const routes: Route[] = [
       {
         path: 'toggle',
         loadChildren: () => import('./toggle/toggle.module').then(m => m.ToggleModule),
+      },
+      {
+        path: 'form-field',
+        loadChildren: () => import('./form-field/form-field.module').then(m => m.FormFieldModule),
       },
     ],
   },

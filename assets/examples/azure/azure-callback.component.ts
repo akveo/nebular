@@ -1,7 +1,8 @@
 import { Component, OnDestroy } from '@angular/core';
 import { NbAuthResult, NbAuthService } from '@nebular/auth';
 import { Router } from '@angular/router';
-import { takeWhile } from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'nb-playground-azure-callback',
@@ -13,11 +14,11 @@ import { takeWhile } from 'rxjs/operators';
 })
 export class AzureCallbackComponent implements OnDestroy {
 
-  alive = true;
+  private destroy$ = new Subject<void>();
 
   constructor(private authService: NbAuthService, private router: Router) {
     this.authService.authenticate('azure')
-      .pipe(takeWhile(() => this.alive))
+      .pipe(takeUntil(this.destroy$))
       .subscribe((authResult: NbAuthResult) => {
         if (authResult.isSuccess() && authResult.getRedirect()) {
           this.router.navigateByUrl(authResult.getRedirect());
@@ -26,6 +27,7 @@ export class AzureCallbackComponent implements OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.alive = false;
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

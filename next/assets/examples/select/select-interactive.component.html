@@ -1,0 +1,94 @@
+<nb-card class="configuration">
+  <nb-card-body class="controls-container">
+    <fieldset>
+      <legend>Shape:</legend>
+      <nb-radio-group [(value)]="selectedShape" name="shape">
+        <nb-radio *ngFor="let shape of shapes" name="shape" [value]="shape">{{ shape }}</nb-radio>
+      </nb-radio-group>
+    </fieldset>
+
+    <fieldset>
+      <legend>Size:</legend>
+      <nb-radio-group [(value)]="selectedSize" name="size">
+        <nb-radio *ngFor="let size of sizes" name="size" [value]="size">{{ size }}</nb-radio>
+      </nb-radio-group>
+    </fieldset>
+
+    <button nbButton (click)="toggleFullWidth()">Set {{ this.fullWidth ? 'auto' : 'full' }} width</button>
+    <button nbButton (click)="selectDisabledOption()">Select disabled option</button>
+  </nb-card-body>
+</nb-card>
+
+<nb-card *ngFor="let appearance of appearances">
+  <nb-card-header class="appearance-name">{{ appearance }}</nb-card-header>
+  <nb-card-body class="select-column">
+    <div *ngFor="let status of statuses" [class.control-status-example]="status === 'control'" class="select-container">
+      <nb-select placeholder="Select a value"
+                 [(selected)]="singleSelectValue"
+                 [appearance]="appearance"
+                 [status]="status"
+                 [size]="selectedSize"
+                 [shape]="selectedShape"
+                 [fullWidth]="fullWidth">
+        <nb-option>Reset value</nb-option>
+        <nb-option value="1">Option 1</nb-option>
+        <nb-option value="2">Option 2</nb-option>
+        <nb-option value="3" disabled>Option 3 (disabled)</nb-option>
+        <nb-option value="4">Option 4</nb-option>
+        <nb-option-group title="Group">
+          <nb-option value="5">Option 5</nb-option>
+          <nb-option value="6">Option 6</nb-option>
+        </nb-option-group>
+        <nb-option-group disabled title="Disabled group">
+          <nb-option value="7">Option 7</nb-option>
+          <nb-option value="8">Option 8</nb-option>
+        </nb-option-group>
+      </nb-select>
+    </div>
+
+    <div class="select-container">
+      <nb-select multiple
+                 [(selected)]="multipleSelectValue"
+                 [appearance]="appearance"
+                 placeholder="Multiple select"
+                 [size]="selectedSize"
+                 [shape]="selectedShape"
+                 [fullWidth]="fullWidth">
+        <nb-option>Reset</nb-option>
+        <nb-option value="1">Option 1</nb-option>
+        <nb-option value="2">Option 2</nb-option>
+        <nb-option value="3" disabled>Option 3 (disabled)</nb-option>
+        <nb-option value="4">Option 4</nb-option>
+        <nb-option-group title="Group">
+          <nb-option value="5">Option 5</nb-option>
+          <nb-option value="6">Option 6</nb-option>
+        </nb-option-group>
+        <nb-option-group disabled title="Disabled group">
+          <nb-option value="7">Option 7</nb-option>
+          <nb-option value="8">Option 8</nb-option>
+        </nb-option-group>
+      </nb-select>
+    </div>
+
+    <div class="select-container">
+      <nb-select disabled
+                 placeholder="Disabled select"
+                 [appearance]="appearance"
+                 [size]="selectedSize"
+                 [shape]="selectedShape"
+                 [fullWidth]="fullWidth">
+      </nb-select>
+    </div>
+
+    <div class="select-container">
+      <nb-select selected="1"
+                 disabled
+                 [appearance]="appearance"
+                 [size]="selectedSize"
+                 [shape]="selectedShape"
+                 [fullWidth]="fullWidth">
+        <nb-option value="1">Option 1</nb-option>
+      </nb-select>
+    </div>
+  </nb-card-body>
+</nb-card>

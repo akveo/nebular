@@ -4,16 +4,16 @@ import { NbCalendarDayCellComponent } from '@nebular/theme';
 @Component({
   selector: 'nb-calendar-custom-day-cell',
   styles: [`
-    :host { text-align: center; }
-    span { font-size: 75%; opacity: 0.75; }
+    .cell-content {
+      flex-direction: column;
+    }
   `],
   template: `
-    <div>
+    <div class="cell-content">
       <div>{{ day }}</div>
-      <span>{{ (day + 100) * day }}$</span>
+      <span class="caption" [class.text-control]="selected">{{ (day + 100) * day }}$</span>
     </div>
   `,
-  host: { '(click)': 'onClick()', 'class': 'day-cell' },
 })
 export class CalendarCustomDayCellComponent extends NbCalendarDayCellComponent<Date> {
 }
