@@ -10,17 +10,19 @@ import { NbBlockScrollStrategyAdapter, NbScrollStrategyOptions } from './block-s
 
 @NgModule({})
 export class NbCdkAdapterModule {
-  static forRoot(): ModuleWithProviders {
-    return <ModuleWithProviders>{
+  static forRoot(): ModuleWithProviders<NbCdkAdapterModule> {
+    return {
       ngModule: NbCdkAdapterModule,
       providers: [
         NbViewportRulerAdapter,
         NbOverlayContainerAdapter,
         NbBlockScrollStrategyAdapter,
+        NbScrollDispatcherAdapter,
+        NbScrollStrategyOptions,
         { provide: OverlayContainer, useExisting: NbOverlayContainerAdapter },
         { provide: NbOverlayContainer, useExisting: NbOverlayContainerAdapter },
-        { provide: ScrollDispatcher, useClass: NbScrollDispatcherAdapter },
-        { provide: ScrollStrategyOptions, useClass: NbScrollStrategyOptions },
+        { provide: ScrollDispatcher, useExisting: NbScrollDispatcherAdapter },
+        { provide: ScrollStrategyOptions, useExisting: NbScrollStrategyOptions },
       ],
     };
   }

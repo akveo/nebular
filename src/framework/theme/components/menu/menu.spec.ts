@@ -49,7 +49,7 @@ export class SingleMenuTestComponent {
   constructor (public menuPublicService: NbMenuService) {}
   @Input() items: NbMenuItem[];
   @Input() menuTag: string;
-  @ViewChild(NbMenuComponent, { static: false }) menuComponent: NbMenuComponent;
+  @ViewChild(NbMenuComponent) menuComponent: NbMenuComponent;
 }
 
 @Component({
@@ -98,7 +98,7 @@ function createTestBed(routes: Routes = []) {
 
   TestBed.overrideProvider(Location, { useValue: new SpyLocationPathParameter() });
 
-  const iconLibs: NbIconLibraries = TestBed.get(NbIconLibraries);
+  const iconLibs: NbIconLibraries = TestBed.inject(NbIconLibraries);
   iconLibs.registerSvgPack('test', { 'some-icon': '<svg>some-icon</svg>' });
   iconLibs.setDefaultPack('test')
 }
@@ -218,7 +218,7 @@ describe('NbMenuItem', () => {
     const menuItems = [{ title: '', children: [{ title: '' }] }];
     const { fixture } = createSingleMenuComponent(menuItems);
     const iconComponent = fixture.debugElement.query(By.directive(NbIconComponent)) as DebugElement;
-    const directionService: NbLayoutDirectionService = TestBed.get(NbLayoutDirectionService);
+    const directionService: NbLayoutDirectionService = TestBed.inject(NbLayoutDirectionService);
 
     expect(iconComponent.componentInstance.icon).toEqual('chevron-left-outline');
 
@@ -327,8 +327,8 @@ describe('NbMenuInternalService', () => {
       },
     ];
     createTestBed(routes);
-    router = TestBed.get(Router);
-    menuInternalService = TestBed.get(NbMenuInternalService);
+    router = TestBed.inject(Router);
+    menuInternalService = TestBed.inject(NbMenuInternalService);
   });
 
   describe('selectFromUrl pathMatch full', () => {

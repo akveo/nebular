@@ -8,7 +8,7 @@ import { Component, ChangeDetectionStrategy, ViewChild } from '@angular/core';
 })
 export class AccordionToggleComponent {
 
-  @ViewChild('item', { static: false }) accordion;
+  @ViewChild('item') accordion;
 
   toggle() {
     this.accordion.toggle();

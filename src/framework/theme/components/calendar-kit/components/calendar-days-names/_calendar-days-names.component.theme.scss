@@ -1,0 +1,41 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
+@mixin nb-calendar-days-names-theme() {
+  nb-calendar-days-names {
+    background: nb-theme(calendar-weekday-background);
+    $border: nb-theme(calendar-weekday-divider-width) solid nb-theme(calendar-weekday-divider-color);
+    border-top: $border;
+    border-bottom: $border;
+
+    @include nb-ltr() {
+      padding-left: nb-theme(calendar-picker-padding-start);
+      padding-right: nb-theme(calendar-picker-padding-end);
+    };
+    @include nb-rtl() {
+      padding-left: nb-theme(calendar-picker-padding-end);
+      padding-right: nb-theme(calendar-picker-padding-start);
+    };
+
+    .day {
+      width: nb-theme(calendar-weekday-width);
+      height: nb-theme(calendar-weekday-height);
+      color: nb-theme(calendar-weekday-text-color);
+      font-size: nb-theme(calendar-weekday-text-font-size);
+      font-weight: nb-theme(calendar-weekday-text-font-weight);
+      line-height: nb-theme(calendar-weekday-text-line-height);
+
+      &.holiday {
+        color: nb-theme(calendar-weekday-holiday-text-color);
+      }
+    }
+
+    &.size-large .day {
+      width: nb-theme(calendar-weekday-large-width);
+      height: nb-theme(calendar-weekday-large-height);
+    }
+  }
+}

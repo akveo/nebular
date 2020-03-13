@@ -154,7 +154,7 @@ export class NbReactiveFormSelectComponent {
   showSelect: boolean = true;
   formControl: FormControl = new FormControl();
 
-  @ViewChild(NbSelectComponent, { static: false }) selectComponent: NbSelectComponent<number>;
+  @ViewChild(NbSelectComponent) selectComponent: NbSelectComponent<number>;
   @ViewChildren(NbOptionComponent) optionComponents: QueryList<NbOptionComponent<number>>;
 }
 
@@ -175,7 +175,7 @@ export class NbNgModelSelectComponent {
   options: number[] = [ 1 ];
   selectedValue: number = null;
 
-  @ViewChild(NbOptionComponent, { static: false }) optionComponent: NbOptionComponent<number>;
+  @ViewChild(NbOptionComponent) optionComponent: NbOptionComponent<number>;
 }
 
 @Component({
@@ -295,9 +295,9 @@ export class NbOptionDisabledTestComponent {
   optionGroupDisabled = false;
   optionDisabled = false;
 
-  @ViewChild(NbSelectComponent, { static: false }) selectComponent: NbSelectComponent<number>;
-  @ViewChild(NbOptionGroupComponent, { static: false }) optionGroupComponent: NbOptionGroupComponent;
-  @ViewChild(NbOptionComponent, { static: false }) optionComponent: NbOptionComponent<number>;
+  @ViewChild(NbSelectComponent) selectComponent: NbSelectComponent<number>;
+  @ViewChild(NbOptionGroupComponent) optionGroupComponent: NbOptionGroupComponent;
+  @ViewChild(NbOptionComponent) optionComponent: NbOptionComponent<number>;
 }
 
 describe('Component: NbSelectComponent', () => {
@@ -332,8 +332,8 @@ describe('Component: NbSelectComponent', () => {
     });
 
     fixture = TestBed.createComponent(NbSelectTestComponent);
-    overlayContainerService = TestBed.get(NbOverlayContainerAdapter);
-    document = TestBed.get(NB_DOCUMENT);
+    overlayContainerService = TestBed.inject(NbOverlayContainerAdapter);
+    document = TestBed.inject(NB_DOCUMENT);
     select = fixture.debugElement.query(By.directive(NbSelectComponent)).componentInstance;
 
     overlayContainer = document.createElement('div');
@@ -602,7 +602,7 @@ describe('Component: NbSelectComponent', () => {
   }));
 
   it(`should not call dispose on uninitialized resources`, () => {
-    const selectFixture = new NbSelectComponent(null, null, null, null, null, null, null);
+    const selectFixture = new NbSelectComponent(null, null, null, null, null, null, null, null, null, null);
     expect(() => selectFixture.ngOnDestroy()).not.toThrow();
   });
 
@@ -671,12 +671,12 @@ describe('Component: NbSelectComponent', () => {
     const touchedSpy = jasmine.createSpy('touched spy');
 
     const selectFixture = TestBed.createComponent(NbSelectComponent);
-    const selectComponent: NbSelectComponent<any> = selectFixture.componentInstance;
+    select = selectFixture.componentInstance as NbSelectComponent<any>;
     selectFixture.detectChanges();
     flush();
 
-    selectComponent.registerOnTouched(touchedSpy);
-    selectComponent.show();
+    select.registerOnTouched(touchedSpy);
+    select.show();
     selectFixture.debugElement.query(By.css('.select-button')).triggerEventHandler('blur', {});
     expect(touchedSpy).not.toHaveBeenCalled();
   }));
@@ -842,9 +842,8 @@ describe('NbSelectComponent - Triggers', () => {
       trigger() { return this },
       host() { return this },
       container() { return this },
-      destroy() {},
       build() {
-        return { show$: showTriggerStub, hide$: hideTriggerStub };
+        return { show$: showTriggerStub, hide$: hideTriggerStub, destroy() {} };
       },
     };
 

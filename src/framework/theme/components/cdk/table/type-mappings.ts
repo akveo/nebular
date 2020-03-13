@@ -12,6 +12,7 @@ import {
   CdkHeaderRowDef,
   CdkRow,
   CdkRowDef,
+  RowContext,
 } from '@angular/cdk/table';
 
 export const NbCdkRowDef = CdkRowDef;
@@ -31,3 +32,5 @@ export const NbCdkColumnDef = CdkColumnDef;
 export const NbCdkCell = CdkCell;
 export const NbCdkHeaderCell = CdkHeaderCell;
 export const NbCdkFooterCell = CdkFooterCell;
+
+export type NbRowContext<T> = RowContext<T>;

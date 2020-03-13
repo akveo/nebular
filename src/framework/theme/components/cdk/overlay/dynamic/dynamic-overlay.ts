@@ -1,6 +1,6 @@
 import { ComponentFactoryResolver, ComponentRef, Injectable, NgZone, Type } from '@angular/core';
-import { filter, takeUntil, takeWhile, distinctUntilChanged } from 'rxjs/operators';
-import { Subject, BehaviorSubject, Observable } from 'rxjs';
+import { filter, takeUntil, distinctUntilChanged } from 'rxjs/operators';
+import { Subject, BehaviorSubject, Observable, merge } from 'rxjs';
 
 import {
   NbAdjustableConnectedPositionStrategy,
@@ -32,7 +32,7 @@ export class NbDynamicOverlay {
 
   protected positionStrategyChange$ = new Subject();
   protected isShown$ = new BehaviorSubject<boolean>(false);
-  protected alive = true;
+  protected destroy$ = new Subject<void>();
 
   get isAttached(): boolean {
     return this.ref && this.ref.hasAttached();
@@ -105,9 +105,13 @@ export class NbDynamicOverlay {
 
     this.positionStrategy.positionChange
       .pipe(
-        takeWhile(() => this.alive),
-        takeUntil(this.positionStrategyChange$),
         filter(() => !!this.container),
+        takeUntil(
+          merge(
+            this.positionStrategyChange$,
+            this.destroy$,
+          ),
+        ),
       )
       .subscribe((position: NbPosition) => {
         this.lastAppliedPosition = position;
@@ -165,7 +169,8 @@ export class NbDynamicOverlay {
   }
 
   dispose() {
-    this.alive = false;
+    this.destroy$.next();
+    this.destroy$.complete();
     this.hide();
     this.disposeOverlayRef();
     this.isShown$.complete();
@@ -215,7 +220,7 @@ export class NbDynamicOverlay {
    */
   protected updatePositionWhenStable() {
     this.zone.onStable
-      .pipe(takeWhile(() => this.alive))
+      .pipe(takeUntil(this.destroy$))
       .subscribe(() => {
         this.ref && this.ref.updatePosition();
       });

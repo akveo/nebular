@@ -9,9 +9,14 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'nb-calendar-filter',
   template: `
-    <h1 class="h5">Selected date: {{ date | date }}</h1>
-    <nb-calendar [(date)]="date" [filter]="filter">
-    </nb-calendar>
+    <nb-card>
+      <nb-card-header>
+        <h1 class="h5">Selected date: {{ date | date }}</h1>
+      </nb-card-header>
+      <nb-card-body>
+        <nb-calendar [(date)]="date" [filter]="filter"></nb-calendar>
+      </nb-card-body>
+    </nb-card>
   `,
 })
 export class CalendarFilterComponent {

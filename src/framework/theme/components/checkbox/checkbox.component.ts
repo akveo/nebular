@@ -4,7 +4,20 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { Component, Input, HostBinding, forwardRef, ChangeDetectorRef, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  Input,
+  HostBinding,
+  forwardRef,
+  ChangeDetectorRef,
+  Output,
+  EventEmitter,
+  ChangeDetectionStrategy,
+  Renderer2,
+  ElementRef,
+  AfterViewInit,
+  NgZone,
+} from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import { NbComponentStatus } from '../component-status';
@@ -53,6 +66,7 @@ import { convertToBoolProperty, emptyStatusWarning } from '../helpers';
  * checkbox-text-line-height:
  * checkbox-text-space:
  * checkbox-padding:
+ * checkbox-focus-inset-shadow-length:
  * checkbox-basic-text-color:
  * checkbox-basic-background-color:
  * checkbox-basic-border-color:
@@ -262,8 +276,9 @@ import { convertToBoolProperty, emptyStatusWarning } from '../helpers';
     useExisting: forwardRef(() => NbCheckboxComponent),
     multi: true,
   }],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NbCheckboxComponent implements ControlValueAccessor {
+export class NbCheckboxComponent implements AfterViewInit, ControlValueAccessor {
 
   onChange: any = () => { };
   onTouched: any = () => { };
@@ -394,7 +409,19 @@ export class NbCheckboxComponent implements ControlValueAccessor {
     return this.status === 'control';
   }
 
-  constructor(private changeDetector: ChangeDetectorRef) {}
+  constructor(
+    private changeDetector: ChangeDetectorRef,
+    private renderer: Renderer2,
+    private hostElement: ElementRef<HTMLElement>,
+    private zone: NgZone,
+  ) {}
+
+  ngAfterViewInit() {
+    // TODO: #2254
+    this.zone.runOutsideAngular(() => setTimeout(() => {
+      this.renderer.addClass(this.hostElement.nativeElement, 'nb-transition');
+    }));
+  }
 
   registerOnChange(fn: any) {
     this.onChange = fn;
@@ -406,11 +433,12 @@ export class NbCheckboxComponent implements ControlValueAccessor {
 
   writeValue(val: any) {
     this._checked = val;
-    this.changeDetector.detectChanges();
+    this.changeDetector.markForCheck();
   }
 
   setDisabledState(val: boolean) {
     this.disabled = convertToBoolProperty(val);
+    this.changeDetector.markForCheck();
   }
 
   setTouched() {

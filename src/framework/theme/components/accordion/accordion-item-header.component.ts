@@ -15,7 +15,8 @@ import {
   ChangeDetectorRef,
 } from '@angular/core';
 import { trigger, state, style, animate, transition } from '@angular/animations';
-import { takeWhile } from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 import { NbAccordionItemComponent } from './accordion-item.component';
 
@@ -90,17 +91,18 @@ export class NbAccordionItemHeaderComponent implements OnInit, OnDestroy {
     }
   }
 
-  private alive: boolean = true;
+  private destroy$ = new Subject<void>();
   constructor(@Host() private accordionItem: NbAccordionItemComponent, private cd: ChangeDetectorRef) {
   }
 
   ngOnInit() {
     this.accordionItem.accordionItemInvalidate
-      .pipe(takeWhile(() => this.alive))
+      .pipe(takeUntil(this.destroy$))
       .subscribe(() => this.cd.markForCheck());
   }
 
   ngOnDestroy() {
-    this.alive = false;
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

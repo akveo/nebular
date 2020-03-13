@@ -47,6 +47,7 @@ export class NbOAuth2AuthStrategyOptions extends NbAuthStrategyOptions {
   } = {
     endpoint: 'authorize',
     responseType: NbOAuth2ResponseType.CODE,
+    requireValidToken: true,
   };
   token?: {
     endpoint?: string;
@@ -58,7 +59,7 @@ export class NbOAuth2AuthStrategyOptions extends NbAuthStrategyOptions {
   } = {
     endpoint: 'token',
     grantType: NbOAuth2GrantType.AUTHORIZATION_CODE,
-    requireValidToken: false,
+    requireValidToken: true,
     class: NbAuthOAuth2Token,
   };
   refresh?: {
@@ -69,6 +70,7 @@ export class NbOAuth2AuthStrategyOptions extends NbAuthStrategyOptions {
   } = {
     endpoint: 'token',
     grantType: NbOAuth2GrantType.REFRESH_TOKEN,
+    requireValidToken: true,
   };
 }
 

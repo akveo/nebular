@@ -8,7 +8,6 @@
 
 :host {
   display: flex;
-  @include nb-component-animation(background-color, color);
 
   &:hover {
     cursor: pointer;
@@ -28,5 +27,9 @@
 
 :host([disabled]) {
   pointer-events: none;
+}
+
+:host(.nb-transition) {
+  @include nb-component-animation(background-color, color);
 }
 

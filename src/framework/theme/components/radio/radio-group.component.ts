@@ -21,8 +21,8 @@ import {
 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { fromEvent, merge } from 'rxjs';
-import { filter, switchMap, takeUntil, takeWhile } from 'rxjs/operators';
+import { fromEvent, merge, Subject } from 'rxjs';
+import { filter, switchMap, takeUntil } from 'rxjs/operators';
 import { convertToBoolProperty, emptyStatusWarning } from '../helpers';
 import { NB_DOCUMENT } from '../../theme.options';
 import { NbRadioComponent } from './radio.component';
@@ -80,7 +80,7 @@ import { NbComponentStatus } from '../component-status';
 })
 export class NbRadioGroupComponent implements AfterContentInit, OnDestroy, ControlValueAccessor {
 
-  protected alive: boolean = true;
+  protected destroy$ = new Subject<void>();
   protected onChange = (value: any) => {};
   protected onTouched = () => {};
 
@@ -156,7 +156,7 @@ export class NbRadioGroupComponent implements AfterContentInit, OnDestroy, Contr
     Promise.resolve().then(() => this.updateAndSubscribeToRadios());
 
     this.radios.changes
-      .pipe(takeWhile(() => this.alive))
+      .pipe(takeUntil(this.destroy$))
       .subscribe(() => {
         // 'changes' emit during change detection run and we can't update
         // option properties right of since they already was initialized.
@@ -167,7 +167,8 @@ export class NbRadioGroupComponent implements AfterContentInit, OnDestroy, Contr
   }
 
   ngOnDestroy() {
-    this.alive = false;
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   registerOnChange(fn: any): void {
@@ -197,19 +198,19 @@ export class NbRadioGroupComponent implements AfterContentInit, OnDestroy, Contr
 
   protected updateNames() {
     if (this.radios) {
-      this.radios.forEach((radio: NbRadioComponent) => radio.name = this.name);
+      this.radios.forEach((radio: NbRadioComponent) => radio._setName(this.name));
     }
   }
 
   protected updateValues() {
-    if (this.radios && typeof this.value !== 'undefined') {
-      this.radios.forEach((radio: NbRadioComponent) => radio.checked = radio.value === this.value);
+    if (typeof this.value !== 'undefined') {
+      this.updateAndMarkForCheckRadios((radio: NbRadioComponent) => radio.checked = radio.value === this.value);
     }
   }
 
   protected updateDisabled() {
-    if (this.radios && typeof this.disabled !== 'undefined') {
-      this.radios.forEach((radio: NbRadioComponent) => radio.disabled = this.disabled);
+    if (typeof this.disabled !== 'undefined') {
+      this.updateAndMarkForCheckRadios((radio: NbRadioComponent) => radio.disabled = this.disabled);
     }
   }
 
@@ -220,8 +221,12 @@ export class NbRadioGroupComponent implements AfterContentInit, OnDestroy, Contr
 
     merge(...this.radios.map((radio: NbRadioComponent) => radio.valueChange))
       .pipe(
-        takeWhile(() => this.alive),
-        takeUntil(this.radios.changes),
+        takeUntil(
+          merge(
+            this.radios.changes,
+            this.destroy$,
+          ),
+        ),
       )
       .subscribe((value: any) => {
         this.writeValue(value);
@@ -243,21 +248,32 @@ export class NbRadioGroupComponent implements AfterContentInit, OnDestroy, Contr
     const hostElement = this.hostElement.nativeElement;
     fromEvent<Event>(hostElement, 'focusin')
       .pipe(
-        takeWhile(() => this.alive),
         filter(event => hostElement.contains(event.target as Node)),
         switchMap(() => merge(
           fromEvent<Event>(this.document, 'focusin'),
           fromEvent<Event>(this.document, 'click'),
         )),
         filter(event => !hostElement.contains(event.target as Node)),
-        takeUntil(this.radios.changes),
+        takeUntil(
+          merge(
+            this.radios.changes,
+            this.destroy$,
+          ),
+        ),
       )
       .subscribe(() => this.onTouched());
   }
 
   protected updateStatus() {
+    this.updateAndMarkForCheckRadios((radio: NbRadioComponent) => radio.status = this.status);
+  }
+
+  protected updateAndMarkForCheckRadios(updateFn: (NbRadioComponent) => void) {
     if (this.radios) {
-      this.radios.forEach((radio: NbRadioComponent) => radio.status = this.status);
+      this.radios.forEach((radio) => {
+        updateFn(radio);
+        radio._markForCheck();
+      });
     }
   }
 }

@@ -16,7 +16,9 @@
     font-family: nb-theme(input-text-font-family);
     -webkit-appearance: none; // removes inner shadow on iOS
 
-    @include nb-component-animation(border, background-color, color, box-shadow);
+    &.nb-transition {
+      @include nb-component-animation(border, background-color, color, box-shadow);
+    }
 
     &::placeholder {
       font-family: nb-theme(input-placeholder-text-font-family);
@@ -34,5 +36,10 @@
     @include input-statuses();
     @include input-sizes();
     @include input-shapes();
+  }
+
+  @each $size in nb-get-sizes() {
+    @include nb-form-field-with-prefix('[nbInput].size-#{$size}', $size);
+    @include nb-form-field-with-suffix('[nbInput].size-#{$size}', $size);
   }
 }

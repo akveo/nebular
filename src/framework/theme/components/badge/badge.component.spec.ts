@@ -22,8 +22,8 @@ describe('NbBadgeComponent', () => {
     expect(fixture.debugElement.nativeElement.textContent).toEqual(text);
   });
 
-  it('should has primary status by default', () => {
-    expect(badgeComponent.status).toEqual('primary');
+  it('should has basic status by default', () => {
+    expect(badgeComponent.status).toEqual('basic');
   });
 
   it('should set status class', () => {

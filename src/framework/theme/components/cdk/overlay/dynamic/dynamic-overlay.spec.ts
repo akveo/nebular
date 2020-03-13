@@ -391,7 +391,7 @@ describe('dynamic-overlay', () => {
     dynamicOverlay.show();
     dynamicOverlay.hide();
 
-    const overlayContainer = TestBed.get(NbOverlayContainer);
+    const overlayContainer = TestBed.inject(NbOverlayContainer);
     const getContainerElementSpy = spyOn(overlayContainer, 'getContainerElement').and.returnValues(
       { contains() { return false; } },
       { contains() { return true; } },
@@ -408,11 +408,11 @@ describe('dynamic-overlay', () => {
     dynamicOverlay.show();
     dynamicOverlay.hide();
 
-    const overlayContainer = TestBed.get(NbOverlayContainer);
+    const overlayContainer = TestBed.inject(NbOverlayContainer);
     // return false once to force overlay ref recreation and then always return true
     overlayContainer.getContainerElement = () => {
-      overlayContainer.getContainerElement = () => ({ contains: () => true });
-      return { contains: () => false };
+      overlayContainer.getContainerElement = () => ({ contains: () => true }) as unknown as HTMLElement;
+      return { contains: () => false } as unknown as HTMLElement;
     };
 
     dynamicOverlay.show();

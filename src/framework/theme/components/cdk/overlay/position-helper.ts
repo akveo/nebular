@@ -25,7 +25,7 @@ export class NbPositionHelper {
   }
 
   toLogicalPosition(position: NbGlobalPosition): NbGlobalLogicalPosition {
-    if (Object.values(NbGlobalLogicalPosition).includes(position)) {
+    if (Object.values(NbGlobalLogicalPosition).includes(position as NbGlobalLogicalPosition)) {
       return position as NbGlobalLogicalPosition;
     }
 
@@ -37,7 +37,7 @@ export class NbPositionHelper {
   }
 
   toPhysicalPosition(position: NbGlobalPosition): NbGlobalPhysicalPosition {
-    if (Object.values(NbGlobalPhysicalPosition).includes(position)) {
+    if (Object.values(NbGlobalPhysicalPosition).includes(position as NbGlobalPhysicalPosition)) {
       return position as NbGlobalPhysicalPosition;
     }
 

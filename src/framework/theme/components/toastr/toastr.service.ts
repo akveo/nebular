@@ -226,7 +226,7 @@ export class NbToastrContainerRegistry {
  * @stacked-example(Position, toastr/toastr-positions.component)
  *
  * `status` - coloring and icon of the toast.
- * Default is `primary`.
+ * Default is `basic`.
  *
  * @stacked-example(Status, toastr/toastr-statuses.component)
  *
@@ -313,7 +313,7 @@ export class NbToastrService {
   }
 
   /**
-   * Shows basic toast with message, title and user config.
+   * Shows default toast with message, title and user config.
    * */
   default(message, title?, config?: Partial<NbToastrConfig>): NbToastRef {
     return this.show(message, title, { ...config, status: 'basic' });

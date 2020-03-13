@@ -60,6 +60,7 @@
 
   a {
     color: nb-theme(link-text-color);
+    text-decoration: nb-theme(link-text-decoration);
     font-size: inherit;
     font-style: inherit;
     font-weight: inherit;
@@ -73,13 +74,13 @@
       color: nb-theme(link-text-hover-color);
     }
 
-    .link-control,
-    .link-control:hover {
+    &.link-control,
+    &.link-control:hover {
       color: nb-theme(text-control-color);
     }
 
-    .link-alternate,
-    .link-alternate:hover {
+    &.link-alternate,
+    &.link-alternate:hover {
       color: nb-theme(text-alternate-color);
     }
   }
@@ -125,14 +126,8 @@
     line-height: nb-theme(list-item-line-height);
   }
 
-  .text-basic {
-    color: nb-theme(text-basic-color);
-  }
   .text-alternate {
     color: nb-theme(text-alternate-color);
-  }
-  .text-control {
-    color: nb-theme(text-control-color);
   }
   .text-disabled {
     color: nb-theme(text-disabled-color);
@@ -143,7 +138,7 @@
 
   @each $status in nb-get-statuses() {
     .text-#{$status} {
-      color: nb-theme(color-#{$status}-default);
+      color: nb-theme(text-#{$status}-color);
     }
   }
 }

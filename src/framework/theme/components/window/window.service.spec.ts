@@ -26,7 +26,7 @@ class NbTestWindowComponent {}
   `,
 })
 class NbTestWindowWithTemplateComponent {
-  @ViewChild('contentTemplate', { static: false }) contentTemplate: TemplateRef<any>;
+  @ViewChild('contentTemplate') contentTemplate: TemplateRef<any>;
 
   constructor(private ws: NbWindowService) {}
 
@@ -79,9 +79,9 @@ describe('window-service', () => {
         { provide: NbViewportRulerAdapter, useClass: NbViewportRulerAdapterMock },
       ],
     });
-    windowService = TestBed.get(NbWindowService);
-    overlayContainerService = TestBed.get(NbOverlayContainerAdapter);
-    document = TestBed.get(NB_DOCUMENT);
+    windowService = TestBed.inject(NbWindowService);
+    overlayContainerService = TestBed.inject(NbOverlayContainerAdapter);
+    document = TestBed.inject(NB_DOCUMENT);
   });
 
   beforeEach(() => {

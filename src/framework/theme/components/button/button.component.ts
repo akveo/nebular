@@ -14,6 +14,7 @@ import {
   HostListener,
   Input,
   Renderer2,
+  NgZone,
 } from '@angular/core';
 
 import { NbComponentStatus } from '../component-status';
@@ -26,7 +27,7 @@ export type NbButtonAppearance = 'filled' | 'outline' | 'ghost' | 'hero';
 /**
  * Basic button component.
  *
- * Default button size is `medium` and status color is `primary`:
+ * Default button size is `medium` and status color is `basic`:
  * @stacked-example(Button Showcase, button/button-showcase.component)
  *
  * ```html
@@ -86,14 +87,29 @@ export type NbButtonAppearance = 'filled' | 'outline' | 'ghost' | 'hero';
  * button-disabled-cursor:
  * button-tiny-text-font-size:
  * button-tiny-text-line-height:
+ * button-tiny-icon-size:
+ * button-tiny-icon-vertical-margin:
+ * button-tiny-icon-offset:
  * button-small-text-font-size:
  * button-small-text-line-height:
+ * button-small-icon-size:
+ * button-small-icon-vertical-margin:
+ * button-small-icon-offset:
  * button-medium-text-font-size:
  * button-medium-text-line-height:
+ * button-medium-icon-size:
+ * button-medium-icon-vertical-margin:
+ * button-medium-icon-offset:
  * button-large-text-font-size:
  * button-large-text-line-height:
+ * button-large-icon-size:
+ * button-large-icon-vertical-margin:
+ * button-large-icon-offset:
  * button-giant-text-font-size:
  * button-giant-text-line-height:
+ * button-giant-icon-size:
+ * button-giant-icon-vertical-margin:
+ * button-giant-icon-offset:
  * button-rectangle-border-radius:
  * button-semi-round-border-radius:
  * button-round-border-radius:
@@ -192,6 +208,7 @@ export type NbButtonAppearance = 'filled' | 'outline' | 'ghost' | 'hero';
  * button-outline-border-style:
  * button-outline-border-width:
  * button-outline-text-transform:
+ * button-outline-focus-inset-shadow-length:
  * button-outline-tiny-padding:
  * button-outline-small-padding:
  * button-outline-medium-padding:
@@ -307,6 +324,7 @@ export type NbButtonAppearance = 'filled' | 'outline' | 'ghost' | 'hero';
  * button-ghost-border-style:
  * button-ghost-border-width:
  * button-ghost-text-transform:
+ * button-ghost-focus-inset-shadow-length:
  * button-ghost-tiny-padding:
  * button-ghost-small-padding:
  * button-ghost-medium-padding:
@@ -520,8 +538,6 @@ export type NbButtonAppearance = 'filled' | 'outline' | 'ghost' | 'hero';
 })
 export class NbButtonComponent implements AfterViewInit {
 
-  protected isInitialized: boolean = false;
-
   /**
    * Button size, available sizes:
    * `tiny`, `small`, `medium`, `large`, `giant`
@@ -530,9 +546,9 @@ export class NbButtonComponent implements AfterViewInit {
 
   /**
    * Button status (adds specific styles):
-   * `basic`, `primary`, `info`, `success`, `warning`, `danger`, `control`.
+   * `primary`, `info`, `success`, `warning`, `danger`
    */
-  @Input() status: NbComponentStatus = 'primary';
+  @Input() status: NbComponentStatus = 'basic';
 
   /**
    * Button shapes: `rectangle`, `round`, `semi-round`
@@ -723,11 +739,6 @@ export class NbButtonComponent implements AfterViewInit {
     return !!(icon && lastChildNotComment(el) === icon);
   }
 
-  @HostBinding('class.transitions')
-  get transitions(): boolean {
-    return this.isInitialized;
-  }
-
   /**
    * @private
    * Keep this handler to partially support anchor disabling.
@@ -750,13 +761,14 @@ export class NbButtonComponent implements AfterViewInit {
     protected renderer: Renderer2,
     protected hostElement: ElementRef<HTMLElement>,
     protected cd: ChangeDetectorRef,
+    protected zone: NgZone,
   ) {}
 
   ngAfterViewInit() {
-    setTimeout(() => {
-      this.isInitialized = true;
-      this.cd.markForCheck();
-    });
+    // TODO: #2254
+    this.zone.runOutsideAngular(() => setTimeout(() => {
+      this.renderer.addClass(this.hostElement.nativeElement, 'nb-transition');
+    }));
   }
 
   protected get iconElement() {

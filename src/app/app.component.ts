@@ -7,8 +7,8 @@
 import { AfterViewInit, Component, Inject, OnDestroy } from '@angular/core';
 import { NavigationStart, Router } from '@angular/router';
 import { NB_DOCUMENT } from '@nebular/theme';
-import { fromEvent } from 'rxjs';
-import { filter, takeWhile } from 'rxjs/operators';
+import { fromEvent, Subject } from 'rxjs';
+import { filter, takeUntil } from 'rxjs/operators';
 import { ComponentLink, PLAYGROUND_COMPONENTS } from './playground-components';
 
 @Component({
@@ -34,7 +34,7 @@ import { ComponentLink, PLAYGROUND_COMPONENTS } from './playground-components';
 })
 export class AppComponent implements AfterViewInit, OnDestroy {
 
-  alive: boolean = true;
+  private destroy$ = new Subject<void>();
   document: Document;
   optionsVisible: boolean = true;
   componentsListVisible: boolean = false;
@@ -54,28 +54,29 @@ export class AppComponent implements AfterViewInit, OnDestroy {
 
     fromEvent(this.document, 'keypress')
       .pipe(
-        takeWhile(() => this.alive),
         filter((e: KeyboardEvent) => e.key === 'c'),
+        takeUntil(this.destroy$),
       )
       .subscribe(this.toggleComponentsOverlay.bind(this));
 
     fromEvent(this.document, 'keyup')
       .pipe(
-        takeWhile(() => this.alive),
         filter((e: KeyboardEvent) => e.key === 'Escape' || e.key === 'Esc'),
+        takeUntil(this.destroy$),
       )
       .subscribe(() => this.hideComponentsOverlay());
 
     this.router.events
       .pipe(
-        takeWhile(() => this.alive),
         filter(event => event instanceof NavigationStart),
+        takeUntil(this.destroy$),
       )
       .subscribe(() => this.hideComponentsOverlay())
   }
 
   ngOnDestroy() {
-    this.alive = false;
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   toggleOptions() {

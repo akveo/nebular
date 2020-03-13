@@ -5,13 +5,10 @@
  */
 
 :host {
-  .arrow {
-    position: absolute;
-    width: 0;
-    height: 0;
-  }
+  display: flex;
+  align-items: center;
+}
 
-  ::ng-deep nb-overlay-container .primitive-overlay {
-    padding: 0.75rem 1rem;
-  }
+.nb-form-control-container {
+  width: 100%;
 }

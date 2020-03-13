@@ -6,7 +6,8 @@
 
 import { Component, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import { takeWhile, withLatestFrom, map } from 'rxjs/operators';
+import { takeUntil, withLatestFrom, map } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 import { NbThemeService, NbMenuItem, NbSidebarService, NbMenuService } from '@nebular/theme';
 
 import { NgdMenuService } from '../@theme/services/menu.service';
@@ -24,7 +25,7 @@ export class NgdDocumentationComponent implements OnDestroy {
   collapsedBreakpoints = ['xs', 'is', 'sm', 'md', 'lg'];
   sidebarTag = 'menuSidebar';
 
-  private alive = true;
+  private destroy$ = new Subject<void>();
 
   constructor(
     private service: NgdMenuService,
@@ -42,7 +43,7 @@ export class NgdDocumentationComponent implements OnDestroy {
     this.router.events
       .pipe(
         withLatestFrom(this.themeService.onMediaQueryChange().pipe(map((changes: any[]) => changes[1]))),
-        takeWhile(() => this.alive),
+        takeUntil(this.destroy$),
       )
       .subscribe(([event, mediaQuery]: [any, NbMediaBreakpoint]) => {
         if (event.url === '/docs') {
@@ -62,6 +63,7 @@ export class NgdDocumentationComponent implements OnDestroy {
   }
 
   ngOnDestroy() {
-    this.alive = false;
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

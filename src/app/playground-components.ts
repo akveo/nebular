@@ -113,6 +113,41 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
     ],
   },
   {
+    path: 'autocomplete',
+    children: [
+      {
+        path: 'autocomplete-showcase.component',
+        link: '/autocomplete/autocomplete-showcase.component',
+        component: 'AutocompleteShowcaseComponent',
+        name: 'Autocomplete Showcase',
+      },
+      {
+        path: 'autocomplete-form.component',
+        link: '/autocomplete/autocomplete-form.component',
+        component: 'AutocompleteFormComponent',
+        name: 'Autocomplete Form',
+      },
+      {
+        path: 'autocomplete-group.component',
+        link: '/autocomplete/autocomplete-group.component',
+        component: 'AutocompleteGroupComponent',
+        name: 'Autocomplete Group',
+      },
+      {
+        path: 'autocomplete-custom-display.component',
+        link: '/autocomplete/autocomplete-custom-display.component',
+        component: 'AutocompleteCustomDisplayComponent',
+        name: 'Autocomplete Custom Display',
+      },
+      {
+        path: 'autocomplete-active-first.component',
+        link: '/autocomplete/autocomplete-active-first.component',
+        component: 'AutocompleteActiveFirstComponent',
+        name: 'Autocomplete Active First',
+      },
+    ],
+  },
+  {
     path: 'badge',
     children: [
       {
@@ -240,10 +275,10 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         name: 'Calendar Start View',
       },
       {
-        path: 'calendar-without-header.component',
-        link: '/calendar/calendar-without-header.component',
-        component: 'CalendarWithoutHeaderComponent',
-        name: 'Calendar Without Header',
+        path: 'calendar-without-navigation.component',
+        link: '/calendar/calendar-without-navigation.component',
+        component: 'CalendarWithoutNavigationComponent',
+        name: 'Calendar Without Navigation',
       },
       {
         path: 'calendar-week-number.component',
@@ -1367,6 +1402,29 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         link: '/toggle/toggle-form.component',
         component: 'ToggleFormComponent',
         name: 'Toggle Form',
+      },
+    ],
+  },
+  {
+    path: 'form-field',
+    children: [
+      {
+        path: 'form-field-showcase.component',
+        link: '/form-field/form-field-showcase.component',
+        component: 'FormFieldShowcaseComponent',
+        name: 'Form Field Showcase',
+      },
+      {
+        path: 'form-field-password.component',
+        link: '/form-field/form-field-password.component',
+        component: 'FormFieldPasswordComponent',
+        name: 'Form Field Password',
+      },
+      {
+        path: 'form-field-input.component',
+        link: '/form-field/form-field-input.component',
+        component: 'FormFieldInputComponent',
+        name: 'Form Field Input',
       },
     ],
   },

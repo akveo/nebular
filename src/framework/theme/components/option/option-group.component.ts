@@ -14,11 +14,24 @@ import {
   OnDestroy,
   QueryList,
 } from '@angular/core';
-import { takeWhile } from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 import { convertToBoolProperty } from '../helpers';
 import { NbOptionComponent } from './option.component';
 
+/**
+ * NbOptionGroupComponent
+ *
+ * @styles
+ *
+ * option-group-text-color:
+ * option-group-tiny-start-padding:
+ * option-group-small-start-padding:
+ * option-group-medium-start-padding:
+ * option-group-large-start-padding:
+ * option-group-giant-start-padding:
+ **/
 @Component({
   selector: 'nb-option-group',
   styleUrls: ['./option-group.component.scss'],
@@ -30,7 +43,7 @@ import { NbOptionComponent } from './option.component';
 })
 export class NbOptionGroupComponent implements AfterContentInit, OnDestroy {
 
-  protected alive = true;
+  protected destroy$ = new Subject<void>();
 
   @Input() title: string;
 
@@ -60,12 +73,13 @@ export class NbOptionGroupComponent implements AfterContentInit, OnDestroy {
     }
 
     this.options.changes
-      .pipe(takeWhile(() => this.alive))
+      .pipe(takeUntil(this.destroy$))
       .subscribe(() => this.asyncUpdateOptionsDisabledState());
   }
 
   ngOnDestroy() {
-    this.alive = false;
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   /**

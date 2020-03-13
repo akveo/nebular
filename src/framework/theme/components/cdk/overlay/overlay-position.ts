@@ -11,9 +11,9 @@ import {
   NbFlexibleConnectedPositionStrategy,
   NbOverlayPositionBuilder,
   NbOverlayRef,
-  NbPlatform,
   NbPositionStrategy,
 } from './mapping';
+import { NbPlatform } from '../platform/platform-service';
 import { NbOverlayContainerAdapter } from '../adapter/overlay-container-adapter';
 import { NbViewportRulerAdapter } from '../adapter/viewport-ruler-adapter';
 import { NbGlobalLogicalPosition } from './position-helper';

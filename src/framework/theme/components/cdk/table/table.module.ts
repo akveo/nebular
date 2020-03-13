@@ -1,8 +1,7 @@
-import { Attribute, ChangeDetectorRef, ElementRef, Inject, IterableDiffers, NgModule } from '@angular/core';
+import { Attribute, ChangeDetectorRef, ElementRef, Inject, IterableDiffers, NgModule, Component } from '@angular/core';
 import { CdkTable, CdkTableModule } from '@angular/cdk/table';
 import { NbBidiModule } from '../bidi/bidi.module';
 import { NbDirectionality } from '../bidi/bidi-service';
-import { NbPlatformModule } from '../platform/platform.module';
 import { NbPlatform } from '../platform/platform-service';
 import { NB_DOCUMENT } from '../../../theme.options';
 import {
@@ -32,6 +31,10 @@ export const NB_TABLE_TEMPLATE = `
   <ng-container nbRowOutlet></ng-container>
   <ng-container nbFooterRowOutlet></ng-container>`;
 
+@Component({
+  template: ``,
+})
+// tslint:disable-next-line:component-class-suffix
 export class NbTable<T> extends CdkTable<T> {
   constructor(
     differs: IterableDiffers,
@@ -40,7 +43,7 @@ export class NbTable<T> extends CdkTable<T> {
     @Attribute('role') role: string,
     dir: NbDirectionality,
     @Inject(NB_DOCUMENT) document: any,
-    platform: NbPlatform | undefined,
+    platform: NbPlatform,
   ) {
     super(differs, changeDetectorRef, elementRef, role, dir, document, platform);
   }
@@ -76,7 +79,7 @@ const COMPONENTS = [
 ];
 
 @NgModule({
-  imports: [ NbBidiModule, NbPlatformModule ],
+  imports: [ NbBidiModule ],
   declarations: [ ...COMPONENTS ],
   exports: [ ...COMPONENTS ],
 })
