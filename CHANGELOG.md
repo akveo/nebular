@@ -1,3 +1,133 @@
+<a name="5.0.0"></a>
+# [5.0.0](https://github.com/akveo/nebular/compare/v4.6.0...v5.0.0) (2020-03-09)
+
+
+### Bug Fixes
+
+* **button link:** remove text decoration ([#2190](https://github.com/akveo/nebular/issues/2190)) ([0495259](https://github.com/akveo/nebular/commit/0495259))
+* **cdk:** fix cdk mappings duplicates ([#2068](https://github.com/akveo/nebular/issues/2068)) ([8179a02](https://github.com/akveo/nebular/commit/8179a02))
+* **focus trigger:** prevent stream destroy on focus out ([#2189](https://github.com/akveo/nebular/issues/2189)) ([42ff4ee](https://github.com/akveo/nebular/commit/42ff4ee))
+* **form field:** make form control container take all space ([#2241](https://github.com/akveo/nebular/issues/2241)) ([2e11ec9](https://github.com/akveo/nebular/commit/2e11ec9))
+* **input:** use correct status property name ([#2248](https://github.com/akveo/nebular/issues/2248)) ([737ffe2](https://github.com/akveo/nebular/commit/737ffe2))
+* **layout:** access view child property after view init ([#2249](https://github.com/akveo/nebular/issues/2249)) ([5bb21a7](https://github.com/akveo/nebular/commit/5bb21a7))
+* **menu:** prevent color override in css vars mode ([#2201](https://github.com/akveo/nebular/issues/2201)) ([ac50dae](https://github.com/akveo/nebular/commit/ac50dae))
+* **route tabset:** tab icon margin ([#2154](https://github.com/akveo/nebular/issues/2154)) ([f7210b2](https://github.com/akveo/nebular/commit/f7210b2))
+* **theme:** prevent transition to initial status ([#2256](https://github.com/akveo/nebular/issues/2256)) ([8e52fc0](https://github.com/akveo/nebular/commit/8e52fc0))
+* **trigger:** prevent stream destroy on mouse leave ([#2141](https://github.com/akveo/nebular/issues/2141)) ([7c79d1d](https://github.com/akveo/nebular/commit/7c79d1d))
+* **typography:** concat anchor selector with color class ([#2161](https://github.com/akveo/nebular/issues/2161)) ([8c9ed86](https://github.com/akveo/nebular/commit/8c9ed86))
+* **typography:** use text theme vars for text color classes ([#2192](https://github.com/akveo/nebular/issues/2192)) ([af2e674](https://github.com/akveo/nebular/commit/af2e674))
+* add scroll strategy options to public api ([#2129](https://github.com/akveo/nebular/issues/2129)) ([79ab083](https://github.com/akveo/nebular/commit/79ab083))
+* provide Nebular scroll services adapters ([#2140](https://github.com/akveo/nebular/issues/2140)) ([0e0d11c](https://github.com/akveo/nebular/commit/0e0d11c))
+* support strict template check ([#2273](https://github.com/akveo/nebular/issues/2273)) ([9b4ff5b](https://github.com/akveo/nebular/commit/9b4ff5b))
+* avoid to declare and export NbTable component ([#2126](https://github.com/akveo/nebular/issues/2126)) ([dbf5192](https://github.com/akveo/nebular/commit/dbf5192))
+
+
+### Code Refactoring
+
+* **auth:** require valid token by default ([#2259](https://github.com/akveo/nebular/issues/2259)) ([bc68d11](https://github.com/akveo/nebular/commit/bc68d11))
+* unsubscribe on destroy ([#2112](https://github.com/akveo/nebular/issues/2112)) ([0cab4fc](https://github.com/akveo/nebular/commit/0cab4fc))
+* **select:** update option state colors ([#2110](https://github.com/akveo/nebular/issues/2110)) ([1dbddd5](https://github.com/akveo/nebular/commit/1dbddd5))
+* use basic as default status ([#2136](https://github.com/akveo/nebular/issues/2136)) ([cc9b47e](https://github.com/akveo/nebular/commit/cc9b47e))
+* **mapping** unify state color mapping ([#2075](https://github.com/akveo/nebular/issues/2075)) ([028883a](https://github.com/akveo/nebular/commit/028883a))
+* **context menu** extract text alignment to theme property ([#2148](https://github.com/akveo/nebular/issues/2148)) ([011edd1](https://github.com/akveo/nebular/commit/011edd1))
+* move focus inset shadow to theme ([#2143](https://github.com/akveo/nebular/issues/2143)) ([ecafd16](https://github.com/akveo/nebular/commit/ecafd16))
+
+
+### Features
+
+* update to Angular 9 ([#2236](https://github.com/akveo/nebular/issues/2236)) ([899815f](https://github.com/akveo/nebular/commit/899815f))
+* **calendar:** Eva 1.3 ([#2120](https://github.com/akveo/nebular/issues/2120)) ([0f03fb5](https://github.com/akveo/nebular/commit/0f03fb5))
+* **select:** Eva style ([#2106](https://github.com/akveo/nebular/issues/2106)) ([7355d65](https://github.com/akveo/nebular/commit/7355d65))
+* **theme:** autocomplete component ([#1947](https://github.com/akveo/nebular/issues/1947)) ([d67dd6b](https://github.com/akveo/nebular/commit/d67dd6b))
+* **theme:** form field component ([#2238](https://github.com/akveo/nebular/issues/2238)) ([aee71a7](https://github.com/akveo/nebular/commit/aee71a7))
+* **date fns:** update date-fns to latest version ([#2045](https://github.com/akveo/nebular/issues/2045)) ([1c5323d](https://github.com/akveo/nebular/commit/1c5323d))
+* **typography:** add anchor text decoration theme property ([#2169](https://github.com/akveo/nebular/issues/2169)) ([be80661](https://github.com/akveo/nebular/commit/be80661))
+* **chat:** date format for messages and support for change placeholders ([#2227](https://github.com/akveo/nebular/issues/2227)) ([b63f004](https://github.com/akveo/nebular/commit/b63f004))
+
+
+### BREAKING CHANGES
+
+* **auth:** `requireValidToken` set to true by default.
+Now if response contains invalid token `NbAuthIllegalTokenError` is thrown.
+To enable old behavior, set `requireValidToken: false` in the auth strategy method config, e.g.:
+```
+NbPasswordAuthStrategy.setup({
+  // ...
+  login: {
+    // ...
+    requireValidToken: false,
+  },
+});
+```
+or
+```
+NbOAuth2AuthStrategy.setup({
+  // ...
+  authorize: {
+    // ...
+    requireValidToken: false,
+  },
+});
+```
+* Badge, button, progress bar, toastr components now use basic status as a default.
+* **calendar:**
+    - `NbCalendarHeaderComponent` removed. Along with that `showHeader` property removed from following components:
+    - `NbBaseCalendarComponent`
+    - `NbCalendarRangeComponent`
+    - `NbCalendarComponent`
+    - `NbBasePicker`
+    - `NbBasePickerComponent`
+
+  - `medium` and `size-medium` css classes were removed along with `medium`/`isMedium` properties from the following classes:
+    - `NbCalendarDayPickerComponent`
+    - `NbCalendarMonthPickerComponent`
+    - `NbCalendarYearPickerComponent`
+    - `NbBaseCalendarComponent`
+    - `NbCalendarWeekNumberComponent`
+
+  - Properties `date`, `changeMode`, `isRtl` removed from `NbCalendarPageableNavigationComponent`
+
+  - File `nb-calendar-week-number.component` renamed to `calendar-week-number.component`
+
+  - `YEARS_IN_VIEW, YEARS_IN_ROW` constants removed. Use `NbCalendarYearModelService`s `getYearsInView` and `getRowInView` methods.
+
+  - `NbCalendarNavigationComponent` replaced with `NbCalendarViewModeComponent`.
+
+  - `initYears` method removed from `NbCalendarYearPickerComponent`.
+
+  - `calendar-range-cells.ts` file split into `calendar-range-day-cell.component.ts`, `calendar-range-month-cell.component.ts` and `calendar-range-year-cell.component.ts`.
+
+  - Following theme properties were removed:
+    - `calendar-body-height`
+    - `calendar-header-text-color`
+    - `calendar-header-text-font-family`
+    - `calendar-header-title-text-font-size`
+    - `calendar-header-title-text-font-weight`
+    - `calendar-header-title-text-line-height`
+    - `calendar-header-sub-title-text-font-size`
+    - `calendar-header-sub-title-text-font-weight`
+    - `calendar-header-sub-title-text-line-height`
+    - `calendar-navigation-button-width`
+    - `calendar-large-body-height`
+    - `calendar-cell-in-range-background-color`
+    - `calendar-cell-disabled-background-color`
+    - `datepicker-text-color`
+    - `datepicker-arrow-size`
+* **cdk:** NbPlatform and NbScrollStrategyOptions from theme/components/cdk/overlay/mapping.ts removed. Use NbPlatform from theme/components/cdk/platform/platform-service.ts and NbScrollStrategyOptions from theme/components/cdk/adapter/block-scroll-strategy-adapter.ts.
+NbPlatformModule removed.
+* **select:** `select-option-*` theme properties renamed to `option-`. `nb-option` and `nb-option-group` components moved to own `options` directory.
+* **select:** Generic value type removed from NbSelectComponent.
+* **Angular:** Nebular packages now require Angular 9+.
+* **tslib:** We no longer have a direct dependency on tslib. Instead it is now listed a peerDependency. This matches Angular framework.
+Users not using the Angular CLI will need to manually install tslib via:
+```
+yarn add tslib
+# or
+npm install tslib --save
+```
+
+
+
 <a name="4.6.0"></a>
 # [4.6.0](https://github.com/akveo/nebular/compare/v4.5.0...v4.6.0) (2019-11-26)
 
