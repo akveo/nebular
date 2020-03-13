@@ -154,7 +154,7 @@ export class NbReactiveFormSelectComponent {
   showSelect: boolean = true;
   formControl: FormControl = new FormControl();
 
-  @ViewChild(NbSelectComponent) selectComponent: NbSelectComponent<number>;
+  @ViewChild(NbSelectComponent) selectComponent: NbSelectComponent;
   @ViewChildren(NbOptionComponent) optionComponents: QueryList<NbOptionComponent<number>>;
 }
 
@@ -295,7 +295,7 @@ export class NbOptionDisabledTestComponent {
   optionGroupDisabled = false;
   optionDisabled = false;
 
-  @ViewChild(NbSelectComponent) selectComponent: NbSelectComponent<number>;
+  @ViewChild(NbSelectComponent) selectComponent: NbSelectComponent;
   @ViewChild(NbOptionGroupComponent) optionGroupComponent: NbOptionGroupComponent;
   @ViewChild(NbOptionComponent) optionComponent: NbOptionComponent<number>;
 }
@@ -305,7 +305,7 @@ describe('Component: NbSelectComponent', () => {
   let overlayContainerService: NbOverlayContainerAdapter;
   let overlayContainer: HTMLElement;
   let document: Document;
-  let select: NbSelectComponent<string>;
+  let select: NbSelectComponent;
 
   const setSelectedAndOpen = selected => {
     fixture.componentInstance.selected = selected;
@@ -658,7 +658,7 @@ describe('Component: NbSelectComponent', () => {
     const touchedSpy = jasmine.createSpy('touched spy');
 
     const selectFixture = TestBed.createComponent(NbSelectComponent);
-    const selectComponent: NbSelectComponent<any> = selectFixture.componentInstance;
+    const selectComponent: NbSelectComponent = selectFixture.componentInstance;
     selectFixture.detectChanges();
     flush();
 
@@ -671,7 +671,7 @@ describe('Component: NbSelectComponent', () => {
     const touchedSpy = jasmine.createSpy('touched spy');
 
     const selectFixture = TestBed.createComponent(NbSelectComponent);
-    select = selectFixture.componentInstance as NbSelectComponent<any>;
+    select = selectFixture.componentInstance as NbSelectComponent;
     selectFixture.detectChanges();
     flush();
 
@@ -685,7 +685,7 @@ describe('Component: NbSelectComponent', () => {
 describe('NbSelectComponent - falsy values', () => {
   let fixture: ComponentFixture<NbSelectWithFalsyOptionValuesComponent>;
   let testComponent: NbSelectWithFalsyOptionValuesComponent;
-  let select: NbSelectComponent<any>;
+  let select: NbSelectComponent;
 
   beforeEach(fakeAsync(() => {
     TestBed.configureTestingModule({
@@ -830,7 +830,7 @@ describe('NbSelectComponent - falsy values', () => {
 
 describe('NbSelectComponent - Triggers', () => {
   let fixture: ComponentFixture<BasicSelectTestComponent>;
-  let selectComponent: NbSelectComponent<any>;
+  let selectComponent: NbSelectComponent;
   let triggerBuilderStub;
   let showTriggerStub: Subject<Event>;
   let hideTriggerStub: Subject<Event>;
@@ -889,7 +889,7 @@ describe('NbSelectComponent - Triggers', () => {
 
 describe('NbSelectComponent - Key manager', () => {
   let fixture: ComponentFixture<BasicSelectTestComponent>;
-  let selectComponent: NbSelectComponent<any>;
+  let selectComponent: NbSelectComponent;
   let tabOutStub: Subject<void>;
   let keyManagerFactoryStub;
   let keyManagerStub;
@@ -1004,7 +1004,7 @@ describe('NbOptionComponent', () => {
 describe('NbOptionComponent disabled', () => {
   let fixture: ComponentFixture<NbOptionDisabledTestComponent>;
   let testComponent: NbOptionDisabledTestComponent;
-  let selectComponent: NbSelectComponent<number>;
+  let selectComponent: NbSelectComponent;
   let optionGroupComponent: NbOptionGroupComponent;
   let optionComponent: NbOptionComponent<number>;
 
@@ -1072,7 +1072,7 @@ describe('NbSelect - dynamic options', () => {
   });
 
   describe('Set value from queue', () => {
-    let selectComponent: NbSelectComponent<number>;
+    let selectComponent: NbSelectComponent;
 
     beforeEach(() => {
       // Force select to cache the value as there is no options to select.
@@ -1123,7 +1123,7 @@ describe('NbSelect - dynamic options', () => {
       testComponent.formControl = new FormControl(1);
       fixture.detectChanges();
 
-      const selectComponent: NbSelectComponent<number> = fixture.debugElement
+      const selectComponent: NbSelectComponent = fixture.debugElement
         .query(By.directive(NbSelectComponent)).componentInstance;
       testComponent.options = [0];
       fixture.detectChanges();
@@ -1145,7 +1145,7 @@ describe('NbSelect - dynamic options', () => {
       testComponent.formControl = new FormControl(1);
       fixture.detectChanges();
 
-      const selectComponent: NbSelectComponent<number> = fixture.debugElement
+      const selectComponent: NbSelectComponent = fixture.debugElement
         .query(By.directive(NbSelectComponent)).componentInstance;
       testComponent.options = [0];
       fixture.detectChanges();
@@ -1167,7 +1167,7 @@ describe('NbSelect - dynamic options', () => {
       testComponent.formControl = new FormControl(1);
       fixture.detectChanges();
 
-      const selectComponent: NbSelectComponent<number> = fixture.debugElement
+      const selectComponent: NbSelectComponent = fixture.debugElement
         .query(By.directive(NbSelectComponent)).componentInstance;
       const writeValueSpy = spyOn(selectComponent, 'writeValue').and.callThrough();
 
@@ -1191,7 +1191,7 @@ describe('NbSelect - dynamic options', () => {
       testComponent.formControl = new FormControl(2);
       fixture.detectChanges();
 
-      const selectComponent: NbSelectComponent<number> = fixture.debugElement
+      const selectComponent: NbSelectComponent = fixture.debugElement
         .query(By.directive(NbSelectComponent)).componentInstance;
       const writeValueSpy = spyOn(selectComponent, 'writeValue').and.callThrough();
 
