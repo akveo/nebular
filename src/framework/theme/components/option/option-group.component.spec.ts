@@ -33,7 +33,7 @@ export class NbOptionGroupTestComponent {
   showOption = true;
   optionGroupTitle = '';
 
-  @ViewChild(NbSelectComponent) selectComponent: NbSelectComponent<number>;
+  @ViewChild(NbSelectComponent) selectComponent: NbSelectComponent;
   @ViewChild(NbOptionGroupComponent) optionGroupComponent: NbOptionGroupComponent;
   @ViewChild(NbOptionComponent) optionComponent: NbOptionComponent<number>;
 }
@@ -41,7 +41,7 @@ export class NbOptionGroupTestComponent {
 describe('NbOptionGroupComponent', () => {
   let fixture: ComponentFixture<NbOptionGroupTestComponent>;
   let testComponent: NbOptionGroupTestComponent;
-  let selectComponent: NbSelectComponent<number>;
+  let selectComponent: NbSelectComponent;
   let optionGroupComponent: NbOptionGroupComponent;
   let optionComponent: NbOptionComponent<number>;
 

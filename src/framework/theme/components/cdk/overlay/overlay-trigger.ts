@@ -3,6 +3,7 @@ import { EMPTY, fromEvent as observableFromEvent, merge as observableMerge, Obse
 import { debounceTime, delay, filter, map, repeat, share, switchMap, takeUntil, takeWhile } from 'rxjs/operators';
 import { NB_DOCUMENT } from '../../../theme.options';
 
+export type NbTriggerValues = 'noop' | 'click' | 'hover' | 'hint' | 'focus';
 export enum NbTrigger {
   NOOP = 'noop',
   CLICK = 'click',

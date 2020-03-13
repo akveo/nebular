@@ -21,7 +21,7 @@ import {
 import { Subject, BehaviorSubject } from 'rxjs';
 import { map, finalize, takeUntil } from 'rxjs/operators';
 
-import { convertToBoolProperty, emptyStatusWarning } from '../helpers';
+import { convertToBoolProperty, emptyStatusWarning, NbBooleanInput } from '../helpers';
 import { NbComponentSize } from '../component-size';
 import { NbComponentShape } from '../component-shape';
 import { NbComponentStatus } from '../component-status';
@@ -267,6 +267,7 @@ export class NbInputDirective implements DoCheck, OnChanges, OnInit, AfterViewIn
     this._fullWidth = convertToBoolProperty(value);
   }
   private _fullWidth = false;
+  static ngAcceptInputType_fullWidth: NbBooleanInput;
 
   constructor(
     protected elementRef: ElementRef<HTMLInputElement | HTMLTextAreaElement>,

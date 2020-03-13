@@ -18,9 +18,9 @@ import {
 
 import { NbDynamicOverlay, NbDynamicOverlayController } from '../cdk/overlay/dynamic/dynamic-overlay';
 import { NbDynamicOverlayHandler } from '../cdk/overlay/dynamic/dynamic-overlay-handler';
-import { NbAdjustment, NbPosition } from '../cdk/overlay/overlay-position';
+import { NbAdjustment, NbPosition, NbPositionValues } from '../cdk/overlay/overlay-position';
 import { NbOverlayContent } from '../cdk/overlay/overlay-service';
-import { NbTrigger } from '../cdk/overlay/overlay-trigger';
+import { NbTrigger, NbTriggerValues } from '../cdk/overlay/overlay-trigger';
 import { NbPopoverComponent } from './popover.component';
 import { takeUntil, skip } from 'rxjs/operators';
 import { Subject } from 'rxjs';
@@ -140,6 +140,7 @@ export class NbPopoverDirective implements NbDynamicOverlayController, OnChanges
    * */
   @Input('nbPopoverPlacement')
   position: NbPosition = NbPosition.TOP;
+  static ngAcceptInputType_position: NbPositionValues;
 
   /**
    * Container position will be changes automatically based on this strategy if container can't fit view port.
@@ -167,6 +168,7 @@ export class NbPopoverDirective implements NbDynamicOverlayController, OnChanges
    * */
   @Input('nbPopoverTrigger')
   trigger: NbTrigger = NbTrigger.CLICK;
+  static ngAcceptInputType_trigger: NbTriggerValues;
 
   /**
    * Sets popover offset

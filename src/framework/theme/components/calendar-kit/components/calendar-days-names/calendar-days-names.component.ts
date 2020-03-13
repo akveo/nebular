@@ -6,7 +6,7 @@
 
 import { ChangeDetectionStrategy, Component, OnInit, Input, HostBinding } from '@angular/core';
 
-import { NbCalendarDay, NbCalendarSize } from '../../model';
+import { NbCalendarDay, NbCalendarSize, NbCalendarSizeValues } from '../../model';
 import { NbDateService } from '../../services/date.service';
 
 
@@ -23,6 +23,7 @@ export class NbCalendarDaysNamesComponent<D> implements OnInit {
   days: NbCalendarDay[];
 
   @Input() size: NbCalendarSize;
+  static ngAcceptInputType_size: NbCalendarSizeValues;
 
   @HostBinding('class.size-large')
   get isLarge(): boolean {

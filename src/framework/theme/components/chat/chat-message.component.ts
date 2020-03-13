@@ -5,9 +5,11 @@
  */
 
 import { ChangeDetectionStrategy, Component, HostBinding, Input } from '@angular/core';
-import { convertToBoolProperty } from '../helpers';
+import { convertToBoolProperty, NbBooleanInput } from '../helpers';
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
 import { animate, state, style, transition, trigger } from '@angular/animations';
+
+import { NbChatMessageFile } from './chat-message-file.component';
 
 /**
  * Chat message component.
@@ -124,6 +126,7 @@ export class NbChatMessageComponent {
     this._reply = convertToBoolProperty(value);
   }
   protected _reply: boolean = false;
+  static ngAcceptInputType_reply: NbBooleanInput;
 
   /**
    * Message sender
@@ -145,9 +148,8 @@ export class NbChatMessageComponent {
 
   /**
    * Array of files `{ url: 'file url', icon: 'file icon class' }`
-   * @type {string}
    */
-  @Input() files: { url: string, icon: string }[];
+  @Input() files: NbChatMessageFile[];
 
   /**
    * Quoted message text

@@ -33,7 +33,7 @@ import { NbToggleOptions } from './data-source/tree-grid.service';
 import { NB_TREE_GRID } from './tree-grid-injection-tokens';
 import { NbTreeGridRowComponent } from './tree-grid-row.component';
 import { NbTreeGridCellDirective } from './tree-grid-cell.component';
-import { convertToBoolProperty } from '../helpers';
+import { convertToBoolProperty, NbBooleanInput } from '../helpers';
 import { NbTreeGridColumnDefDirective } from './tree-grid-column-def.directive';
 import {
   NbTreeGridFooterRowDefDirective,
@@ -189,6 +189,7 @@ export class NbTreeGridComponent<T> extends NbTable<NbTreeGridPresentationNode<T
     return this.equalColumnsWidthValue;
   }
   private equalColumnsWidthValue: boolean = false;
+  static ngAcceptInputType_equalColumnsWidth: NbBooleanInput;
 
   @HostBinding('class.nb-tree-grid') readonly treeClass = true;
 

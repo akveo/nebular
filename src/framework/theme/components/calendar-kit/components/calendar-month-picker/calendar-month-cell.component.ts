@@ -13,7 +13,7 @@ import {
   Input,
   Output,
 } from '@angular/core';
-import { NbCalendarCell, NbCalendarSize } from '../../model';
+import { NbCalendarCell, NbCalendarSize, NbCalendarSizeValues } from '../../model';
 import { NbDateService } from '../../services/date.service';
 
 
@@ -36,6 +36,7 @@ export class NbCalendarMonthCellComponent<D> implements NbCalendarCell<D, D> {
   @Input() max: D;
 
   @Input() size: NbCalendarSize = NbCalendarSize.MEDIUM;
+  static ngAcceptInputType_size: NbCalendarSizeValues;
 
   @Output() select: EventEmitter<D> = new EventEmitter(true);
 

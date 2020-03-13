@@ -7,7 +7,7 @@
 import { Component, Input, HostBinding, ChangeDetectionStrategy, OnChanges, SimpleChanges } from '@angular/core';
 
 import { NbDateService } from '../../services/date.service';
-import { NbCalendarSize } from '../../model';
+import { NbCalendarSize, NbCalendarSizeValues } from '../../model';
 
 @Component({
   selector: 'nb-calendar-week-numbers',
@@ -29,6 +29,7 @@ export class NbCalendarWeekNumberComponent<D> implements OnChanges {
 
   @Input()
   size: NbCalendarSize;
+  static ngAcceptInputType_size: NbCalendarSizeValues;
 
   /**
    * Sets symbol used as a header for week numbers column

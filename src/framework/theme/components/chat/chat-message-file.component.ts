@@ -7,6 +7,16 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 
+export interface NbChatMessageFileIconPreview {
+  url: string;
+  icon: string;
+}
+export interface NbChatMessageFileImagePreview {
+  url: string;
+  type: string;
+}
+export type NbChatMessageFile = NbChatMessageFileIconPreview | NbChatMessageFileImagePreview;
+
 /**
  * Chat message component.
  */
@@ -62,7 +72,7 @@ export class NbChatMessageFileComponent {
    * @type {Date}
    */
   @Input()
-  set files(files: any[]) {
+  set files(files: NbChatMessageFile[]) {
     this.readyFiles = (files || []).map((file: any) => {
       const isImage = this.isImage(file);
       return {
@@ -78,7 +88,11 @@ export class NbChatMessageFileComponent {
   }
 
 
-  isImage(file: any): boolean {
-    return ['image/png', 'image/jpeg', 'image/gif'].includes(file.type);
+  isImage(file: NbChatMessageFile): boolean {
+    const type = (file as NbChatMessageFileImagePreview).type;
+    if (type) {
+      return [ 'image/png', 'image/jpeg', 'image/gif' ].includes(type);
+    }
+    return false;
   }
 }

@@ -51,6 +51,7 @@ export class ComponentsListComponent implements AfterViewInit {
   get vertical() {
     return this.isVertical;
   }
+  static ngAcceptInputType_vertical: boolean | string | null | undefined;
 
   @ViewChildren(RouterLinkActive) routerLinks: QueryList<RouterLinkActive>;
   @ViewChildren('link', { read: ElementRef }) linkElements: QueryList<ElementRef<HTMLAnchorElement>>;

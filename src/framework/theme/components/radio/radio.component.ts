@@ -17,7 +17,7 @@ import {
   Renderer2,
 } from '@angular/core';
 
-import { convertToBoolProperty, emptyStatusWarning } from '../helpers';
+import { convertToBoolProperty, emptyStatusWarning, NbBooleanInput } from '../helpers';
 import { NbComponentStatus } from '../component-status';
 
 /**
@@ -258,6 +258,7 @@ export class NbRadioComponent {
     }
   }
   private _checked: boolean = false;
+  static ngAcceptInputType_checked: NbBooleanInput;
 
   @Input()
   get value(): any {
@@ -281,6 +282,7 @@ export class NbRadioComponent {
     }
   }
   private _disabled: boolean = false;
+  static ngAcceptInputType_disabled: NbBooleanInput;
 
   @Input()
   get status(): NbComponentStatus {

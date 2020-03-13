@@ -6,7 +6,7 @@
 
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, Type, HostBinding } from '@angular/core';
 
-import { NbCalendarCell, NbCalendarSize } from '../../model';
+import { NbCalendarCell, NbCalendarSize, NbCalendarSizeValues } from '../../model';
 
 
 @Component({
@@ -36,6 +36,7 @@ export class NbCalendarPickerComponent<D, T> {
   @Input() max: D;
   @Input() filter: (D) => boolean;
   @Input() size: NbCalendarSize = NbCalendarSize.MEDIUM;
+  static ngAcceptInputType_size: NbCalendarSizeValues;
   @Output() select: EventEmitter<D> = new EventEmitter();
 
   @HostBinding('class.size-large')

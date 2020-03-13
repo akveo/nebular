@@ -8,7 +8,7 @@ import { Component, HostBinding, Input, OnInit, OnDestroy, ElementRef, OnChanges
 import { Subscription, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
-import { convertToBoolProperty } from '../helpers';
+import { convertToBoolProperty, NbBooleanInput } from '../helpers';
 import { NbThemeService } from '../../services/theme.service';
 import { NbMediaBreakpoint } from '../../services/breakpoints.service';
 import { NbSidebarService } from './sidebar.service';
@@ -178,6 +178,7 @@ export class NbSidebarComponent implements OnChanges, OnInit, OnDestroy {
     this.startValue = false;
     this.endValue = false;
   }
+  static ngAcceptInputType_right: NbBooleanInput;
 
   /**
    * Places sidebar on the left side
@@ -190,6 +191,7 @@ export class NbSidebarComponent implements OnChanges, OnInit, OnDestroy {
     this.startValue = false;
     this.endValue = false;
   }
+  static ngAcceptInputType_left: NbBooleanInput;
 
   /**
    * Places sidebar on the start edge of layout
@@ -202,6 +204,7 @@ export class NbSidebarComponent implements OnChanges, OnInit, OnDestroy {
     this.leftValue = false;
     this.rightValue = false;
   }
+  static ngAcceptInputType_start: NbBooleanInput;
 
   /**
    * Places sidebar on the end edge of layout
@@ -214,6 +217,7 @@ export class NbSidebarComponent implements OnChanges, OnInit, OnDestroy {
     this.leftValue = false;
     this.rightValue = false;
   }
+  static ngAcceptInputType_end: NbBooleanInput;
 
   /**
    * Makes sidebar fixed (shown above the layout content)
@@ -223,6 +227,7 @@ export class NbSidebarComponent implements OnChanges, OnInit, OnDestroy {
   set fixed(val: boolean) {
     this.fixedValue = convertToBoolProperty(val);
   }
+  static ngAcceptInputType_fixed: NbBooleanInput;
 
   /**
    * Makes sidebar container fixed
@@ -232,6 +237,7 @@ export class NbSidebarComponent implements OnChanges, OnInit, OnDestroy {
   set containerFixed(val: boolean) {
     this.containerFixedValue = convertToBoolProperty(val);
   }
+  static ngAcceptInputType_containerFixed: NbBooleanInput;
 
   /**
    * Initial sidebar state, `expanded`|`collapsed`|`compacted`
@@ -250,6 +256,7 @@ export class NbSidebarComponent implements OnChanges, OnInit, OnDestroy {
   set responsive(val: boolean) {
     this.responsiveValue = convertToBoolProperty(val);
   }
+  static ngAcceptInputType_responsive: NbBooleanInput;
 
   /**
    * Tags a sidebar with some ID, can be later used in the sidebar service

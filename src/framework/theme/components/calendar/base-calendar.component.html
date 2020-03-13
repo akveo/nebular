@@ -21,13 +21,13 @@
                             [size]="size"
                             [date]="date"
                             [showWeekNumber]="showWeekNumber"
-                            (dateChange)="dateChange.emit($event)"
+                            (dateChange)="dateChange.emit($any($event))"
                             [weekNumberSymbol]="weekNumberSymbol">
     </nb-calendar-day-picker>
 
     <nb-calendar-year-picker *ngSwitchCase="ViewMode.YEAR"
                              [cellComponent]="yearCellComponent"
-                             [date]="date"
+                             [date]="$any(date)"
                              [min]="min"
                              [max]="max"
                              [filter]="filter"
@@ -43,7 +43,7 @@
                               [filter]="filter"
                               [size]="size"
                               [month]="visibleDate"
-                              [date]="date"
+                              [date]="$any(date)"
                               (monthChange)="setVisibleDate($event); setViewMode(ViewMode.DATE)">
     </nb-calendar-month-picker>
 
