@@ -168,7 +168,7 @@ export interface NbCalendarRange<D> {
   template: `
     <nb-base-calendar
       [date]="range"
-      (dateChange)="onChange($event)"
+      (dateChange)="onChange($any($event))"
       [min]="min"
       [max]="max"
       [filter]="filter"
