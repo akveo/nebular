@@ -220,11 +220,11 @@ export class NbStepperComponent {
   /*
    * @docs-private
    **/
-  getStepTemplate(step: NbStepComponent): TemplateRef<any> {
+  getStepTemplate(step: NbStepComponent): TemplateRef<any> | null {
     if (step.isLabelTemplate) {
       return step.label as TemplateRef<any>;
     }
-    throw new Error(`NbStepper: Step has no template`);
+    return null;
   }
 
   protected isStepValid(index: number): boolean {
