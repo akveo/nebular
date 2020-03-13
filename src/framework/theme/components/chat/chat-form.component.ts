@@ -72,7 +72,7 @@ import { NbComponentStatus } from '../component-status';
              [(ngModel)]="message"
              [class.with-button]="showButton"
              type="text"
-             placeholder="{{ fileOver ? 'Drop file to send' : 'Type a message' }}"
+             placeholder="{{ fileOver ? dropFilePlaceholder : messagePlaceholder }}"
              (keyup.enter)="sendMessage()">
       <button nbButton
               [status]="getButtonStatus()"
@@ -103,6 +103,11 @@ export class NbChatFormComponent {
   @Input() message: string = '';
 
   /**
+   * Message placeholder text
+   * @type {string}
+   */
+  @Input() messagePlaceholder: string = 'Type a message';
+  /**
    * Send button title
    * @type {string}
    */
@@ -125,6 +130,12 @@ export class NbChatFormComponent {
    * @type {boolean}
    */
   @Input() dropFiles: boolean = false;
+
+  /**
+   * File drop placeholder text
+   * @type {string}
+   */
+  @Input() dropFilePlaceholder: string = 'Drop file to send';
 
   /**
    *

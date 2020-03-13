@@ -23,7 +23,7 @@ export type NbChatMessageFile = NbChatMessageFileIconPreview | NbChatMessageFile
 @Component({
   selector: 'nb-chat-message-file',
   template: `
-    <nb-chat-message-text [sender]="sender" [date]="date" [message]="message">
+    <nb-chat-message-text [sender]="sender" [date]="date" [dateFormat]="dateFormat" [message]="message">
       {{ message }}
     </nb-chat-message-text>
 
@@ -66,6 +66,12 @@ export class NbChatMessageFileComponent {
    * @type {Date}
    */
   @Input() date: Date;
+
+  /**
+   * Message send date format, default 'shortTime'
+   * @type {string}
+   */
+  @Input() dateFormat: string = 'shortTime';
 
   /**
    * Message file path
