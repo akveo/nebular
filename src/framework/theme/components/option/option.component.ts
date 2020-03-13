@@ -90,7 +90,7 @@ import { NbSelectComponent } from '../select/select.component';
     <ng-content></ng-content>
   `,
 })
-export class NbOptionComponent<T> implements OnDestroy, AfterViewInit, NbFocusableOption, NbHighlightableOption {
+export class NbOptionComponent<T = any> implements OnDestroy, AfterViewInit, NbFocusableOption, NbHighlightableOption {
 
   protected disabledByGroup = false;
 
@@ -123,7 +123,7 @@ export class NbOptionComponent<T> implements OnDestroy, AfterViewInit, NbFocusab
   }
 
   selected: boolean = false;
-  protected parent: NbSelectComponent<T>;
+  protected parent: NbSelectComponent;
   protected alive: boolean = true;
 
   /**
@@ -167,7 +167,7 @@ export class NbOptionComponent<T> implements OnDestroy, AfterViewInit, NbFocusab
   get multiple() {
     // We check parent existing because parent can be NbSelectComponent or
     // NbAutocomplete and `miltiple` property exists only in NbSelectComponent
-    return this.parent ? (<NbSelectComponent<T>>this.parent).multiple : false;
+    return this.parent ? (this.parent as NbSelectComponent).multiple : false;
   }
 
   @HostBinding('class.selected')
