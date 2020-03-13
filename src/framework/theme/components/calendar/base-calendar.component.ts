@@ -6,10 +6,16 @@
 
 import { Component, EventEmitter, HostBinding, Input, OnInit, Output, Type } from '@angular/core';
 
-import { YEARS_IN_VIEW } from '../calendar-kit/components/calendar-year-picker/calendar-year-picker.component';
-import { NbCalendarCell, NbCalendarSize, NbCalendarViewMode } from '../calendar-kit/model';
+import { NbCalendarYearModelService } from '../calendar-kit/services/calendar-year-model.service';
+import {
+  NbCalendarCell,
+  NbCalendarSize,
+  NbCalendarViewMode,
+  NbCalendarSizeValues,
+  NbCalendarViewModeValues,
+} from '../calendar-kit/model';
 import { NbDateService } from '../calendar-kit/services/date.service';
-import { convertToBoolProperty } from '../helpers';
+import { convertToBoolProperty, NbBooleanInput } from '../helpers';
 
 /**
  * The basis for calendar and range calendar components.
@@ -32,6 +38,7 @@ export class NbBaseCalendarComponent<D, T> implements OnInit {
    * Defines active view for calendar.
    * */
   @Input('startView') activeViewMode: NbCalendarViewMode = NbCalendarViewMode.DATE;
+  static ngAcceptInputType_activeViewMode: NbCalendarViewModeValues;
 
   /**
    * Minimum available date for selection.
@@ -68,13 +75,16 @@ export class NbBaseCalendarComponent<D, T> implements OnInit {
    * Can be 'medium' which is default or 'large'.
    * */
   @Input() size: NbCalendarSize = NbCalendarSize.MEDIUM;
+  static ngAcceptInputType_size: NbCalendarSizeValues;
 
   @Input() visibleDate: D;
 
   /**
-   * Determines should we show calendars header or not.
+   * Determines whether we should show calendar navigation or not.
    * */
-  @Input() showHeader: boolean = true;
+  @Input()
+  @HostBinding('class.has-navigation')
+  showNavigation: boolean = true;
 
   /**
    * Value which will be rendered as selected.
@@ -94,6 +104,7 @@ export class NbBaseCalendarComponent<D, T> implements OnInit {
     this._showWeekNumber = convertToBoolProperty(value);
   }
   protected _showWeekNumber = false;
+  static ngAcceptInputType_showWeekNumber: NbBooleanInput;
 
   /**
    * Sets symbol used as a header for week numbers column
@@ -105,8 +116,10 @@ export class NbBaseCalendarComponent<D, T> implements OnInit {
    * */
   @Output() dateChange: EventEmitter<T> = new EventEmitter();
 
-  constructor(protected dateService: NbDateService<D>) {
-  }
+  constructor(
+    protected dateService: NbDateService<D>,
+    protected yearModelService: NbCalendarYearModelService<D>,
+  ) {}
 
   ngOnInit() {
     if (!this.visibleDate) {
@@ -114,13 +127,8 @@ export class NbBaseCalendarComponent<D, T> implements OnInit {
     }
   }
 
-  @HostBinding('class.medium')
-  get medium() {
-    return this.size === NbCalendarSize.MEDIUM;
-  }
-
-  @HostBinding('class.large')
-    get large() {
+  @HostBinding('class.size-large')
+  get large() {
     return this.size === NbCalendarSize.LARGE;
   }
 
@@ -142,17 +150,50 @@ export class NbBaseCalendarComponent<D, T> implements OnInit {
     this.changeVisibleMonth(1);
   }
 
-  prevYears() {
+  prevYear() {
     this.changeVisibleYear(-1);
   }
 
-  nextYears() {
+  nextYear() {
     this.changeVisibleYear(1);
   }
 
-  navigateToday() {
+  prevYears() {
+    this.changeVisibleYears(-1);
+  }
+
+  nextYears() {
+    this.changeVisibleYears(1);
+  }
+
+  navigatePrev() {
+    switch (this.activeViewMode) {
+      case NbCalendarViewMode.DATE:
+        return this.prevMonth();
+      case NbCalendarViewMode.MONTH:
+        return this.prevYear();
+      case NbCalendarViewMode.YEAR:
+        return this.prevYears();
+    }
+  }
+
+  navigateNext() {
+    switch (this.activeViewMode) {
+      case NbCalendarViewMode.DATE:
+        return this.nextMonth();
+      case NbCalendarViewMode.MONTH:
+        return this.nextYear();
+      case NbCalendarViewMode.YEAR:
+        return this.nextYears();
+    }
+  }
+
+  onChangeViewMode() {
+    if (this.activeViewMode === NbCalendarViewMode.DATE) {
+      return this.setViewMode(NbCalendarViewMode.YEAR);
+    }
+
     this.setViewMode(NbCalendarViewMode.DATE);
-    this.visibleDate = this.dateService.today();
   }
 
   private changeVisibleMonth(direction: number) {
@@ -160,6 +201,10 @@ export class NbBaseCalendarComponent<D, T> implements OnInit {
   }
 
   private changeVisibleYear(direction: number) {
-    this.visibleDate = this.dateService.addYear(this.visibleDate, direction * YEARS_IN_VIEW);
+    this.visibleDate = this.dateService.addYear(this.visibleDate, direction);
+  }
+
+  private changeVisibleYears(direction: number) {
+    this.visibleDate = this.dateService.addYear(this.visibleDate, direction * this.yearModelService.getYearsInView());
   }
 }

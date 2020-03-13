@@ -13,15 +13,18 @@ import {
   Input,
   Output,
 } from '@angular/core';
-import { NbCalendarCell } from '../../model';
+import { NbCalendarCell, NbCalendarSize, NbCalendarSizeValues } from '../../model';
 import { NbDateService } from '../../services/date.service';
 
 
 @Component({
   selector: 'nb-calendar-month-cell',
-  template: `{{ month }}`,
+  template: `
+    <div class="cell-content">
+      {{ month }}
+    </div>
+  `,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  host: { 'class': 'month-cell' },
 })
 export class NbCalendarMonthCellComponent<D> implements NbCalendarCell<D, D> {
   @Input() date: D;
@@ -31,6 +34,9 @@ export class NbCalendarMonthCellComponent<D> implements NbCalendarCell<D, D> {
   @Input() min: D;
 
   @Input() max: D;
+
+  @Input() size: NbCalendarSize = NbCalendarSize.MEDIUM;
+  static ngAcceptInputType_size: NbCalendarSizeValues;
 
   @Output() select: EventEmitter<D> = new EventEmitter(true);
 
@@ -49,6 +55,14 @@ export class NbCalendarMonthCellComponent<D> implements NbCalendarCell<D, D> {
     return this.smallerThanMin() || this.greaterThanMax();
   }
 
+  @HostBinding('class.size-large')
+  get isLarge(): boolean {
+    return this.size === NbCalendarSize.LARGE;
+  }
+
+  @HostBinding('class.month-cell')
+  monthCellClass = true;
+
   get month(): string {
     return this.dateService.getMonthName(this.date);
   }
@@ -62,19 +76,19 @@ export class NbCalendarMonthCellComponent<D> implements NbCalendarCell<D, D> {
     this.select.emit(this.date);
   }
 
-  private smallerThanMin(): boolean {
+  protected smallerThanMin(): boolean {
     return this.date && this.min && this.dateService.compareDates(this.monthEnd(), this.min) < 0;
   }
 
-  private greaterThanMax(): boolean {
+  protected greaterThanMax(): boolean {
     return this.date && this.max && this.dateService.compareDates(this.monthStart(), this.max) > 0;
   }
 
-  private monthStart(): D {
+  protected monthStart(): D {
     return this.dateService.getMonthStart(this.date);
   }
 
-  private monthEnd(): D {
+  protected monthEnd(): D {
     return this.dateService.getMonthEnd(this.date);
   }
 }

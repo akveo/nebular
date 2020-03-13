@@ -1,6 +1,8 @@
 import { Component, ElementRef, Input, NgModule, TemplateRef, Type, ViewChild } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+import { Subject } from 'rxjs';
+import createSpy = jasmine.createSpy;
 
 import { NbThemeModule } from '../../theme.module';
 import { NbLayoutModule } from '../layout/layout.module';
@@ -12,9 +14,7 @@ import { NbTrigger } from '../cdk/overlay/overlay-trigger';
 import { NbPopoverDirective } from './popover.directive';
 import { NbPopoverComponent } from './popover.component';
 import { NbPopoverModule } from './popover.module';
-import createSpy = jasmine.createSpy;
-import { Subject } from 'rxjs';
-import { NbOverlayConfig } from '@nebular/theme/components/cdk/overlay/mapping';
+import { NbOverlayConfig } from '../cdk/overlay/mapping';
 
 @Component({
   selector: 'nb-popover-component-content-test',
@@ -35,8 +35,8 @@ export class NbPopoverComponentContentTestComponent {
   `,
 })
 export class NbPopoverDefaultTestComponent {
-  @ViewChild('button', { static: false }) button: ElementRef;
-  @ViewChild(NbPopoverDirective, { static: false }) popover: NbPopoverDirective;
+  @ViewChild('button') button: ElementRef;
+  @ViewChild(NbPopoverDirective) popover: NbPopoverDirective;
 
   popoverClass = '';
 }
@@ -59,9 +59,9 @@ export class NbPopoverDefaultTestComponent {
   `,
 })
 export class NbPopoverBindingsTestComponent {
-  @ViewChild(NbPopoverDirective, { static: false }) popover: NbPopoverDirective;
-  @ViewChild('button', { static: false }) button: ElementRef;
-  @ViewChild(TemplateRef, { static: false }) template: TemplateRef<any>;
+  @ViewChild(NbPopoverDirective) popover: NbPopoverDirective;
+  @ViewChild('button') button: ElementRef;
+  @ViewChild(TemplateRef) template: TemplateRef<any>;
   @Input() content: any = '';
   @Input() context: any = { text: 'hello world' };
   @Input() trigger = NbTrigger.CLICK;
@@ -82,9 +82,9 @@ export class NbPopoverBindingsTestComponent {
   `,
 })
 export class NbPopoverInstanceTestComponent {
-  @ViewChild(NbPopoverDirective, { static: false }) popover: NbPopoverDirective;
-  @ViewChild('button', { static: false }) button: ElementRef;
-  @ViewChild(TemplateRef, { static: false }) template: TemplateRef<any>;
+  @ViewChild(NbPopoverDirective) popover: NbPopoverDirective;
+  @ViewChild('button') button: ElementRef;
+  @ViewChild(TemplateRef) template: TemplateRef<any>;
 }
 
 const dynamicOverlayIsShow$ = new Subject();
@@ -328,7 +328,7 @@ describe('Directive: NbPopoverDirective', () => {
           PopoverTestModule,
         ],
       })
-        .overrideComponent(NbPopoverDirective, {
+        .overrideDirective(NbPopoverDirective, {
           set: {
             providers: [
               { provide: NbDynamicOverlayHandler, useValue: overlayHandler },

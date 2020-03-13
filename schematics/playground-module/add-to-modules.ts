@@ -7,7 +7,7 @@
 import * as ts from 'typescript';
 import { dirname, Path } from '@angular-devkit/core';
 import { DirEntry, SchematicContext, SchematicsException, Tree } from '@angular-devkit/schematics';
-import { getSourceFile } from '@angular/cdk/schematics';
+import { parseSourceFile } from '@angular/cdk/schematics';
 import { addImportToModule, addProviderToModule, getDecoratorMetadata } from '@schematics/angular/utility/ast-utils';
 import {
   addRoute,
@@ -82,7 +82,7 @@ function processService(tree: Tree, servicePath: Path): void {
   for (const service of serviceDeclarations) {
     const serviceClassName = (service.name as ts.Identifier).getText();
     const importString = importPath(modulePath, servicePath);
-    const source = getSourceFile(tree, servicePath);
+    const source = parseSourceFile(tree, servicePath);
     const changes = addProviderToModule(source, modulePath, serviceClassName, importString);
 
     applyInsertChange(tree, modulePath, ...changes);
@@ -211,11 +211,11 @@ function addModuleRoute(
   const moduleClassName = (moduleDeclaration.name as ts.Identifier).getText();
   const lazyModuleImport = generateLazyModuleImport(routingModulePath, modulePath, moduleClassName);
   const loadChildren = `loadChildren: ${lazyModuleImport}`;
-  addObjectProperty(tree, getSourceFile(tree, routingModulePath), route, loadChildren);
+  addObjectProperty(tree, parseSourceFile(tree, routingModulePath), route, loadChildren);
 }
 
 function multilineDeclarationsArray(tree: Tree, modulePath: Path): void {
-  const source = getSourceFile(tree, modulePath);
+  const source = parseSourceFile(tree, modulePath);
   const decoratorNode = getDecoratorMetadata(source, 'NgModule', '@angular/core')[0] as ts.ObjectLiteralExpression;
 
   if (!decoratorNode) {
@@ -249,7 +249,7 @@ function processRoutingModule(tree: Tree, modulePath: Path) {
     throw new SchematicsException(`Can't find module for routing module ${featureModulePath }.`);
   }
 
-  const featureModuleSource = getSourceFile(tree, featureModulePath);
+  const featureModuleSource = parseSourceFile(tree, featureModulePath);
   const importString = importPath(featureModulePath, modulePath);
   for (const moduleDeclaration of moduleDeclarations) {
     const className = (moduleDeclaration.name as ts.Identifier).getText();

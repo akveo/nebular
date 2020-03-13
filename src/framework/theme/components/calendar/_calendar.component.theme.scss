@@ -8,94 +8,61 @@
 
   nb-base-calendar {
     nb-card {
-      overflow: hidden;
-    }
-
-    &.medium nb-card {
-      width: nb-theme(calendar-width);
-
-      nb-card-body {
-        height: nb-theme(calendar-body-height);
-      }
-    }
-
-    &.large nb-card {
-      width: nb-theme(calendar-large-width);
-
-      nb-card-body {
-        height: nb-theme(calendar-large-body-height);
-      }
-    }
-
-    &.has-week-number.medium nb-card {
-      width: calc(#{nb-theme(calendar-width)} + #{nb-theme(calendar-day-cell-width)} + 1px);
-    }
-
-    &.has-week-number.large nb-card {
-      width: calc(#{nb-theme(calendar-large-width)} + #{nb-theme(calendar-day-cell-width)} + 1px);
-    }
-
-    nb-card {
-      border: none;
+      background-color: nb-theme(calendar-background-color);
+      border: nb-theme(calendar-border-width) nb-theme(calendar-border-style) nb-theme(calendar-border-color);
+      box-shadow: none;
       margin: 0;
+      width: nb-theme(calendar-width);
+      overflow: hidden;
     }
 
     nb-card-body {
       padding: 0;
-
-      & > nb-calendar-pageable-navigation, & > nb-calendar-navigation {
-        padding: 1rem 0;
-      }
-    }
-  }
-
-  nb-calendar-day-picker .range-cell {
-    flex: 1;
-    margin: 1px 0;
-
-    .day-cell {
-      margin: 0;
     }
 
-    &.in-range {
-      background: nb-theme(calendar-cell-in-range-background-color);
+    .calendar-navigation {
+      border: none;
+      display: flex;
 
-      &:not(.today, :hover) {
-        border-radius: 0;
-      }
+      padding: nb-theme(calendar-navigation-padding);
+      color: nb-theme(calendar-navigation-text-color);
+      font-family: nb-theme(calendar-navigation-text-font-family);
+      font-size: nb-theme(calendar-navigation-title-text-font-size);
+      font-weight: nb-theme(calendar-navigation-title-text-font-weight);
+      line-height: nb-theme(calendar-navigation-title-text-line-height);
     }
 
-    &.start, &.end {
-      @extend .selected;
-      background: nb-theme(calendar-cell-in-range-background-color);
-    }
-
-    &.start {
-      border-top-left-radius: nb-theme(calendar-border-radius);
-      border-bottom-left-radius: nb-theme(calendar-border-radius);
-
-      .day-cell {
-        margin-left: 0;
+    &:not(.has-navigation) {
+      nb-calendar-week-numbers .sign-container,
+      nb-calendar-days-names {
+        border-top: 0;
       }
     }
 
-    &.end {
-      border-top-right-radius: nb-theme(calendar-border-radius);
-      border-bottom-right-radius: nb-theme(calendar-border-radius);
+    &.has-week-number {
+      nb-card {
+        $calendar-width: nb-theme(calendar-width);
+        $week-col-width: nb-theme(calendar-weeknumber-width);
+        $divider-width: nb-theme(calendar-weeknumber-divider-width);
+        width: calc(#{$calendar-width} + #{$week-col-width} + #{$divider-width});
+      }
 
-      .day-cell {
-        margin-right: 0;
+      .month-cell,
+      .year-cell {
+        flex: 1 0 auto;
       }
     }
 
-    &:first-of-type {
-      border-top-left-radius: nb-theme(calendar-border-radius);
-      border-bottom-left-radius: nb-theme(calendar-border-radius);
-    }
+    &.size-large {
+      nb-card {
+        width: nb-theme(calendar-large-width);
+      }
 
-    &:last-of-type {
-      border-top-right-radius: nb-theme(calendar-border-radius);
-      border-bottom-right-radius: nb-theme(calendar-border-radius);
+      &.has-week-number nb-card {
+        $week-column-width: #{nb-theme(calendar-weeknumber-large-width)} +
+                            #{nb-theme(calendar-weeknumber-divider-width)};
+        width: calc(#{nb-theme(calendar-large-width)} + #{$week-column-width});
+      }
     }
   }
 }

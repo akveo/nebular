@@ -11,12 +11,14 @@ export interface NbCalendarDay {
   isHoliday: boolean;
 }
 
+export type NbCalendarViewModeValues = 'year' | 'month' | 'date';
 export enum NbCalendarViewMode {
   YEAR = 'year',
   MONTH = 'month',
   DATE = 'date',
 }
 
+export type NbCalendarSizeValues = 'medium' | 'large';
 export enum NbCalendarSize {
   MEDIUM = 'medium',
   LARGE = 'large',
@@ -30,4 +32,5 @@ export interface NbCalendarCell<D, T> {
   min?: D;
   max?: D;
   filter?: (D) => boolean;
+  size?: NbCalendarSize;
 }

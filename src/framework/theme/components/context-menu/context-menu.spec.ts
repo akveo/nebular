@@ -14,7 +14,7 @@ import { NbMenuModule } from '../menu/menu.module';
 import { NbContextMenuDirective } from './context-menu.directive';
 import { NbContextMenuComponent } from './context-menu.component';
 import { NbContextMenuModule } from './context-menu.module';
-import { NbOverlayConfig } from '@nebular/theme/components/cdk/overlay/mapping';
+import { NbOverlayConfig } from '../cdk/overlay/mapping';
 
 @Component({
   selector: 'nb-context-menu-default-test',
@@ -27,8 +27,8 @@ import { NbOverlayConfig } from '@nebular/theme/components/cdk/overlay/mapping';
   `,
 })
 export class NbContextMenuDefaultTestComponent {
-  @ViewChild('button', { static: false }) button: ElementRef;
-  @ViewChild(NbContextMenuDirective, { static: false }) contextMenu: NbContextMenuDirective;
+  @ViewChild('button') button: ElementRef;
+  @ViewChild(NbContextMenuDirective) contextMenu: NbContextMenuDirective;
 
   items = [{ title: 'User' }, { title: 'Log Out' }];
   contextMenuClass = '';
@@ -50,8 +50,8 @@ export class NbContextMenuDefaultTestComponent {
   `,
 })
 export class NbContextMenuBindingsTestComponent {
-  @ViewChild(NbContextMenuDirective, { static: false }) contextMenu: NbContextMenuDirective;
-  @ViewChild('button', { static: false }) button: ElementRef;
+  @ViewChild(NbContextMenuDirective) contextMenu: NbContextMenuDirective;
+  @ViewChild('button') button: ElementRef;
   @Input() trigger = NbTrigger.CLICK;
   @Input() position = NbPosition.TOP;
   @Input() adjustment = NbAdjustment.CLOCKWISE;
@@ -72,8 +72,8 @@ export class NbContextMenuBindingsTestComponent {
   `,
 })
 export class NbContextMenuInstanceTestComponent {
-  @ViewChild(NbContextMenuDirective, { static: false }) contextMenu: NbContextMenuDirective;
-  @ViewChild('button', { static: false }) button: ElementRef;
+  @ViewChild(NbContextMenuDirective) contextMenu: NbContextMenuDirective;
+  @ViewChild('button') button: ElementRef;
 
   items = [{ title: 'User' }, { title: 'Log Out' }];
 }
@@ -255,7 +255,7 @@ describe('Directive: NbContextMenuDirective', () => {
           ContextMenuTestModule,
         ],
       })
-        .overrideComponent(NbContextMenuDirective, {
+        .overrideDirective(NbContextMenuDirective, {
           set: {
             providers: [
               { provide: NbDynamicOverlayHandler, useValue: overlayHandler },

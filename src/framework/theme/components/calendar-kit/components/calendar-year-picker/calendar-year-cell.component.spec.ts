@@ -42,6 +42,8 @@ describe('Component: NbCalendarYearCell', () => {
   });
 
   it('should contain cell class', () => {
+    component.date = new Date();
+    fixture.detectChanges();
     expect(componentEl.classList).toContain('year-cell');
   });
 

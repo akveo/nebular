@@ -5,7 +5,6 @@
  */
 
 import {
-  ChangeDetectionStrategy,
   Component,
   ContentChild,
   Directive,
@@ -18,7 +17,7 @@ import {
   TemplateRef,
 } from '@angular/core';
 
-import { convertToBoolProperty } from '../helpers';
+import { convertToBoolProperty, NbBooleanInput, NbNullableInput } from '../helpers';
 import { NB_SORT_HEADER_COLUMN_DEF } from '../cdk/table/cell';
 
 /** Column definition associated with a `NbSortHeaderDirective`. */
@@ -35,6 +34,7 @@ export interface NbSortable {
   sort(sortRequest: NbSortRequest);
 }
 
+export type NbSortDirectionValues = 'asc' | 'desc' | '';
 export enum NbSortDirection {
   ASCENDING = 'asc',
   DESCENDING = 'desc',
@@ -52,6 +52,7 @@ const sortDirections: NbSortDirection[] = [
 @Directive({ selector: '[nbSort]' })
 export class NbSortDirective {
   @Input('nbSort') sortable: NbSortable;
+  static ngAcceptInputType_sortable: NbSortable | NbNullableInput;
 
   @Output() sort: EventEmitter<NbSortRequest> = new EventEmitter<NbSortRequest>();
 
@@ -119,11 +120,10 @@ export class NbSortIconComponent {
     <nb-sort-icon *ngIf="!sortIcon; else customIcon" [direction]="direction"></nb-sort-icon>
     <ng-template #customIcon [ngTemplateOutlet]="sortIcon" [ngTemplateOutletContext]="getIconContext()"></ng-template>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NbSortHeaderComponent {
 
-  @ContentChild(NbSortHeaderIconDirective, { read: TemplateRef, static: false })
+  @ContentChild(NbSortHeaderIconDirective, { read: TemplateRef })
   sortIcon: TemplateRef<NbSortHeaderIconDirectiveContext>;
 
   /**
@@ -131,6 +131,7 @@ export class NbSortHeaderComponent {
    * @type {NbSortDirection}
    */
   @Input('nbSortHeader') direction: NbSortDirection;
+  static ngAcceptInputType_direction: NbSortDirectionValues;
 
   private disabledValue: boolean = false;
 
@@ -145,6 +146,7 @@ export class NbSortHeaderComponent {
   get disabled(): boolean {
     return this.disabledValue;
   }
+  static ngAcceptInputType_disabled: NbBooleanInput;
 
   @HostListener('click')
   sortIfEnabled() {

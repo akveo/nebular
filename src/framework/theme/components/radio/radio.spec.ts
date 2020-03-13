@@ -52,7 +52,7 @@ export class NbRadioWithDynamicValuesTestComponent {
   radioValues: number[] = [];
   showRadios: boolean = false;
 
-  @ViewChild(NbRadioGroupComponent, { static: false }) radioGroupComponent: NbRadioGroupComponent;
+  @ViewChild(NbRadioGroupComponent) radioGroupComponent: NbRadioGroupComponent;
   @ViewChildren(NbRadioComponent) radioComponents: QueryList<NbRadioComponent>;
 }
 
@@ -67,8 +67,8 @@ export class NbRadioWithDynamicValuesTestComponent {
   `,
 })
 export class NbTwoRadioGroupsComponent {
-  @ViewChild('firstGroup', { read: NbRadioGroupComponent, static: false }) firstGroup: NbRadioGroupComponent;
-  @ViewChild('secondGroup', { read: NbRadioGroupComponent, static: false }) secondGroup: NbRadioGroupComponent;
+  @ViewChild('firstGroup', { read: NbRadioGroupComponent }) firstGroup: NbRadioGroupComponent;
+  @ViewChild('secondGroup', { read: NbRadioGroupComponent }) secondGroup: NbRadioGroupComponent;
   @ViewChildren(NbRadioComponent, { read: ElementRef }) radios: QueryList<ElementRef>;
 }
 

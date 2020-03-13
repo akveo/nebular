@@ -15,6 +15,7 @@
     "target": "es2015",
     "inlineSources": true,
     "stripInternal": true,
+    "importHelpers": true,
     "baseUrl": ".",
     "paths": {
       "@nebular/theme": ["./src/.lib/theme"]
@@ -36,6 +37,7 @@
     "strictInjectionParameters": true,
     "enableResourceInlining": true,
     "skipMetadataEmit": false,
-    "strictTypeChecks": true
+    "strictTypeChecks": true,
+    "enableIvy": false
   }
 }

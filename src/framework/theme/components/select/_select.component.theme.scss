@@ -9,140 +9,50 @@
 @import './select-hero';
 
 @mixin nb-select-theme() {
-  nb-select {
-    .select-button {
-      min-width: nb-theme(select-min-width);
-      cursor: nb-theme(select-cursor);
+  nb-select .select-button {
+    min-width: nb-theme(select-min-width);
+    cursor: nb-theme(select-cursor);
+    font-family: nb-theme(select-text-font-family);
 
-      &.placeholder {
-        font-family: nb-theme(select-placeholder-text-font-family);
-      }
-      &:focus {
-        outline: none;
-      }
-      &[disabled] {
-        cursor: nb-theme(select-disabled-cursor);
-      }
+    &.placeholder {
+      font-family: nb-theme(select-placeholder-text-font-family);
     }
-  }
-
-  .options-list-container {
-    box-shadow: nb-theme(select-options-list-shadow);
-    border-style: nb-theme(select-options-list-border-style);
-    border-width: nb-theme(select-options-list-border-width);
-    overflow: hidden;
-
-    & > .options-list {
-      margin: 0;
-      padding: 0;
-    }
-  }
-
-  .options-list {
-    background-color: nb-theme(select-option-background-color);
-    max-height: nb-theme(select-options-list-max-height);
-    height: 100%;
-    overflow: auto;
-  }
-
-  nb-option {
-    user-select: none;
-
     &:focus {
       outline: none;
     }
-  }
-
-  nb-select .select-button,
-  nb-option,
-  nb-option-group {
-    font-family: nb-theme(select-text-font-family);
+    &[disabled] {
+      cursor: nb-theme(select-disabled-cursor);
+    }
   }
 
   @each $size in nb-get-sizes() {
-    nb-select.size-#{$size} .select-button,
-    .size-#{$size} nb-option,
-    .size-#{$size} nb-option-group {
-      font-size: nb-theme(select-#{$size}-text-font-size);
-      font-weight: nb-theme(select-#{$size}-text-font-weight);
-      line-height: nb-theme(select-#{$size}-text-line-height);
-    }
+    nb-select.size-#{$size} {
+      .select-button {
+        font-size: nb-theme(select-#{$size}-text-font-size);
+        font-weight: nb-theme(select-#{$size}-text-font-weight);
+        line-height: nb-theme(select-#{$size}-text-line-height);
 
-    nb-select.size-#{$size} .select-button.placeholder {
-      font-size: nb-theme(select-#{$size}-placeholder-text-font-size);
-      font-weight: nb-theme(select-#{$size}-placeholder-text-font-weight);
-    }
+        &.placeholder {
+          font-size: nb-theme(select-#{$size}-placeholder-text-font-size);
+          font-weight: nb-theme(select-#{$size}-placeholder-text-font-weight);
+        }
 
-    nb-select.size-#{$size} .select-button.empty::before {
-      content: ' ';
-      display: block;
-      height: nb-theme(select-#{$size}-text-line-height);
-    }
+        &.empty::before {
+          content: ' ';
+          display: block;
+          height: nb-theme(select-#{$size}-text-line-height);
+        }
+      }
 
-    nb-select.size-#{$size}:not(.full-width),
-    .options-list:not(.full-width) {
-      max-width: nb-theme(select-#{$size}-max-width);
+      &:not(.full-width) {
+        max-width: nb-theme(select-#{$size}-max-width);
+      }
     }
   }
 
   @each $shape in nb-get-shapes() {
     nb-select.shape-#{$shape} .select-button {
       border-radius: nb-theme(select-#{$shape}-border-radius);
-    }
-  }
-
-  .options-list-container {
-    border-radius: nb-theme(select-rectangle-border-radius);
-  }
-
-  nb-option-group,
-  nb-option {
-    background-color: nb-theme(select-option-background-color);
-    color: nb-theme(select-option-text-color);
-
-    &[disabled] {
-      background-color: nb-theme(select-option-disabled-background-color);
-      color: nb-theme(select-option-disabled-text-color);
-    }
-  }
-
-  nb-option-group {
-    color: nb-theme(select-group-option-text-color);
-  }
-
-  nb-option {
-    &.selected {
-      background-color: nb-theme(select-option-selected-background-color);
-      color: nb-theme(select-option-selected-text-color);
-    }
-    &:focus {
-      background-color: nb-theme(select-option-focus-background-color);
-      color: nb-theme(select-option-focus-text-color);
-
-      &.selected {
-        background-color: nb-theme(select-option-selected-focus-background-color);
-        color: nb-theme(select-option-selected-focus-text-color);
-      }
-    }
-    &:hover {
-      background-color: nb-theme(select-option-hover-background-color);
-      color: nb-theme(select-option-hover-text-color);
-
-      &.selected {
-        background-color: nb-theme(select-option-selected-hover-background-color);
-        color: nb-theme(select-option-selected-hover-text-color);
-      }
-    }
-
-    &.multiple {
-      &.selected {
-        background-color: nb-theme(select-option-background-color);
-        color: nb-theme(select-option-text-color);
-      }
-      &:focus {
-        background-color: nb-theme(select-option-focus-background-color);
-        color: nb-theme(select-option-focus-text-color);
-      }
     }
   }
 

@@ -6,114 +6,14 @@
 
 @mixin nb-datepicker-theme {
   nb-datepicker-container {
-    $arrow-size: nb-theme(datepicker-arrow-size);
-    $arrow-content-size: calc(#{$arrow-size} - 2px);
-
     border-color: nb-theme(datepicker-border-color);
     border-style: nb-theme(datepicker-border-style);
     border-width: nb-theme(datepicker-border-width);
     border-radius: nb-theme(datepicker-border-radius);
     background: nb-theme(datepicker-background-color);
-    box-shadow: nb-theme(datepicker-shadow);
-
-    .primitive-overlay {
-      color: nb-theme(datepicker-text-color);
-    }
 
     nb-card {
-      box-shadow: none;
-    }
-
-    .arrow {
-      border-left: $arrow-size solid transparent;
-      border-right: $arrow-size solid transparent;
-      border-bottom: $arrow-size solid nb-theme(datepicker-border-color);
-
-
-      &::after {
-        position: absolute;
-        content: ' ';
-        width: 0;
-        height: 0;
-        top: 3px;
-        left: calc(50% - #{$arrow-content-size});
-        border-left: $arrow-content-size solid transparent;
-        border-right: $arrow-content-size solid transparent;
-        border-bottom: $arrow-content-size solid nb-theme(datepicker-background-color);
-      }
-    }
-
-    &.nb-overlay-bottom .arrow {
-      top: calc(-1 * #{$arrow-size} + 1px);
-      left: calc(50% - #{$arrow-size});
-    }
-
-    &.nb-overlay-bottom-start .arrow {
-      top: calc(-1 * #{$arrow-size} + 1px);
-      @include nb-ltr(right, $arrow-size);
-      @include nb-rtl(left, $arrow-size);
-    }
-
-    &.nb-overlay-bottom-end .arrow {
-      top: calc(-1 * #{$arrow-size} + 1px);
-      @include nb-ltr(left, $arrow-size);
-      @include nb-rtl(right, $arrow-size);
-    }
-
-    &.nb-overlay-left .arrow {
-      right: calc(-1 * #{$arrow-size} - #{$arrow-size} / 2 + 2px);
-      top: calc(50% - #{$arrow-size / 2});
-      transform: rotate(90deg);
-    }
-
-    &.nb-overlay-start-top .arrow {
-      right: calc(-1 * #{$arrow-size} - #{$arrow-size} / 2 + 2px);
-      bottom: $arrow-size;
-      transform: rotate(90deg);
-    }
-
-    &.nb-overlay-start-bottom .arrow {
-      right: calc(-1 * #{$arrow-size} - #{$arrow-size} / 2 + 2px);
-      top: $arrow-size;
-      transform: rotate(90deg);
-    }
-
-    &.nb-overlay-top .arrow {
-      bottom: calc(-1 * #{$arrow-size} + 1px);
-      left: calc(50% - #{$arrow-size});
-      transform: rotate(180deg);
-    }
-
-    &.nb-overlay-top-start .arrow {
-      bottom: calc(-1 * #{$arrow-size} + 1px);
-      @include nb-ltr(right, $arrow-size);
-      @include nb-rtl(left, $arrow-size);
-      transform: rotate(180deg);
-    }
-
-    &.nb-overlay-top-end .arrow {
-      bottom: calc(-1 * #{$arrow-size} + 1px);
-      @include nb-ltr(left, $arrow-size);
-      @include nb-rtl(right, $arrow-size);
-      transform: rotate(180deg);
-    }
-
-    &.nb-overlay-right .arrow {
-      left: calc(-1 * #{$arrow-size} - #{$arrow-size} / 2 + 2px);
-      top: calc(50% - #{$arrow-size / 2});
-      transform: rotate(270deg);
-    }
-
-    &.nb-overlay-end-top .arrow {
-      left: calc(-1 * #{$arrow-size} - #{$arrow-size} / 2 + 2px);
-      bottom: $arrow-size;
-      transform: rotate(270deg);
-    }
-
-    &.nb-overlay-end-bottom .arrow {
-      left: calc(-1 * #{$arrow-size} - #{$arrow-size} / 2 + 2px);
-      top: $arrow-size;
-      transform: rotate(270deg);
+      box-shadow: nb-theme(datepicker-shadow);
     }
   }
 }

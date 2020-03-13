@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'nb-app-spinner-tabs',
   template: `
-    <nb-card size="xsmall">
+    <nb-card size="small">
       <nb-card-body>
 
         <nb-tabset fullWidth (changeTab)="toggleLoadingAnimation()">

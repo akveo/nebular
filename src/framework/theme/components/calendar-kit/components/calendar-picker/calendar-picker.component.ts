@@ -4,9 +4,9 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, Type } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, Type, HostBinding } from '@angular/core';
 
-import { NbCalendarCell } from '../../model';
+import { NbCalendarCell, NbCalendarSize, NbCalendarSizeValues } from '../../model';
 
 
 @Component({
@@ -21,6 +21,7 @@ import { NbCalendarCell } from '../../model';
       [min]="min"
       [max]="max"
       [filter]="filter"
+      [size]="size"
       (select)="select.emit($event)">
     </nb-calendar-picker-row>
   `,
@@ -34,5 +35,12 @@ export class NbCalendarPickerComponent<D, T> {
   @Input() min: D;
   @Input() max: D;
   @Input() filter: (D) => boolean;
+  @Input() size: NbCalendarSize = NbCalendarSize.MEDIUM;
+  static ngAcceptInputType_size: NbCalendarSizeValues;
   @Output() select: EventEmitter<D> = new EventEmitter();
+
+  @HostBinding('class.size-large')
+  get isLarge(): boolean {
+    return this.size === NbCalendarSize.LARGE;
+  }
 }

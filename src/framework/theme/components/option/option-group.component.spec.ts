@@ -33,15 +33,15 @@ export class NbOptionGroupTestComponent {
   showOption = true;
   optionGroupTitle = '';
 
-  @ViewChild(NbSelectComponent, { static: false }) selectComponent: NbSelectComponent<number>;
-  @ViewChild(NbOptionGroupComponent, { static: false }) optionGroupComponent: NbOptionGroupComponent;
-  @ViewChild(NbOptionComponent, { static: false }) optionComponent: NbOptionComponent<number>;
+  @ViewChild(NbSelectComponent) selectComponent: NbSelectComponent;
+  @ViewChild(NbOptionGroupComponent) optionGroupComponent: NbOptionGroupComponent;
+  @ViewChild(NbOptionComponent) optionComponent: NbOptionComponent<number>;
 }
 
 describe('NbOptionGroupComponent', () => {
   let fixture: ComponentFixture<NbOptionGroupTestComponent>;
   let testComponent: NbOptionGroupTestComponent;
-  let selectComponent: NbSelectComponent<number>;
+  let selectComponent: NbSelectComponent;
   let optionGroupComponent: NbOptionGroupComponent;
   let optionComponent: NbOptionComponent<number>;
 
@@ -96,7 +96,7 @@ describe('NbOptionGroupComponent', () => {
     fixture.detectChanges();
 
     const optionGroup = fixture.debugElement.query(By.directive(NbOptionGroupComponent));
-    expect(optionGroup.attributes.disabled).toEqual(null);
+    expect(optionGroup.attributes.disabled).not.toBeDefined();
   });
 
   it('should disable group options if group disabled', () => {

@@ -18,7 +18,7 @@ describe('moment-date-service', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    dateService = new NbMomentDateService(TestBed.get(LOCALE_ID));
+    dateService = new NbMomentDateService(TestBed.inject(LOCALE_ID));
   });
 
   it('should validate as correct if date string is valid according to the format', () => {

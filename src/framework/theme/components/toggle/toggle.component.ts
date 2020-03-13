@@ -15,6 +15,10 @@ import {
   EventEmitter,
   OnDestroy,
   ChangeDetectionStrategy,
+  Renderer2,
+  ElementRef,
+  AfterViewInit,
+  NgZone,
 } from '@angular/core';
 import { trigger, state, style, animate, transition } from '@angular/animations';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
@@ -23,7 +27,7 @@ import { takeUntil } from 'rxjs/operators';
 import { NbLayoutDirectionService } from '../../services/direction.service';
 import { NbComponentStatus } from '../component-status';
 
-import { convertToBoolProperty, emptyStatusWarning } from '../helpers';
+import { convertToBoolProperty, emptyStatusWarning, NbBooleanInput } from '../helpers';
 
 /**
  * Toggle is a control representing `on` and `off` states.
@@ -75,6 +79,7 @@ import { convertToBoolProperty, emptyStatusWarning } from '../helpers';
  * toggle-outline-width:
  * toggle-outline-color:
  * toggle-switcher-size:
+ * toggle-switcher-icon-size:
  * toggle-text-font-family:
  * toggle-text-font-size:
  * toggle-text-font-weight:
@@ -289,7 +294,7 @@ import { convertToBoolProperty, emptyStatusWarning } from '../helpers';
   }],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NbToggleComponent implements OnInit, OnDestroy, ControlValueAccessor {
+export class NbToggleComponent implements OnInit, AfterViewInit, OnDestroy, ControlValueAccessor {
 
   onChange: any = () => { };
   onTouched: any = () => { };
@@ -308,6 +313,7 @@ export class NbToggleComponent implements OnInit, OnDestroy, ControlValueAccesso
     this._checked = convertToBoolProperty(value);
   }
   private _checked: boolean = false;
+  static ngAcceptInputType_checked: NbBooleanInput;
 
   /**
    * Controls input disabled state
@@ -320,6 +326,7 @@ export class NbToggleComponent implements OnInit, OnDestroy, ControlValueAccesso
     this._disabled = convertToBoolProperty(value);
   }
   private _disabled: boolean = false;
+  static ngAcceptInputType_disabled: NbBooleanInput;
 
   /**
    * Toggle status.
@@ -408,12 +415,22 @@ export class NbToggleComponent implements OnInit, OnDestroy, ControlValueAccesso
   constructor(
     private changeDetector: ChangeDetectorRef,
     private layoutDirection: NbLayoutDirectionService,
+    private renderer: Renderer2,
+    private hostElement: ElementRef<HTMLElement>,
+    private zone: NgZone,
   ) {}
 
   ngOnInit(): void {
     this.layoutDirection.onDirectionChange()
       .pipe(takeUntil(this.destroy$))
       .subscribe(() => this.changeDetector.detectChanges());
+  }
+
+  ngAfterViewInit() {
+    // TODO: #2254
+    this.zone.runOutsideAngular(() => setTimeout(() => {
+      this.renderer.addClass(this.hostElement.nativeElement, 'nb-transition');
+    }));
   }
 
   ngOnDestroy() {

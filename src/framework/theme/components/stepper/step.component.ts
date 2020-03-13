@@ -1,8 +1,7 @@
 import { Component, Inject, Input, TemplateRef, ViewChild } from '@angular/core';
-import { AbstractControl } from '@angular/forms';
 import { NbStepperComponent } from './stepper.component';
 import { NB_STEPPER } from './stepper-tokens';
-import { convertToBoolProperty } from '../helpers';
+import { convertToBoolProperty, NbBooleanInput } from '../helpers';
 
 /**
  * Component intended to be used within  the `<nb-stepper>` component.
@@ -30,10 +29,8 @@ export class NbStepComponent {
 
   /**
    * Top level abstract control of the step
-   *
-   * @type {AbstractControl}
    */
-  @Input() stepControl: AbstractControl;
+  @Input() stepControl?: { valid: boolean | null, reset: () => void };
 
   /**
    * Step label
@@ -47,7 +44,15 @@ export class NbStepComponent {
    *
    * @type {boolean}
    */
-  @Input() hidden: false;
+  @Input()
+  get hidden(): boolean {
+    return this._hidden;
+  }
+  set hidden(value: boolean) {
+    this._hidden = convertToBoolProperty(value);
+  }
+  protected _hidden = false;
+  static ngAcceptInputType_hidden: NbBooleanInput;
 
   /**
    * Check that label is a TemplateRef.
@@ -71,6 +76,7 @@ export class NbStepComponent {
     this._completed = convertToBoolProperty(value);
   }
   protected _completed: boolean = false;
+  static ngAcceptInputType_completed: NbBooleanInput;
 
   protected get isCompleted() {
     return this.stepControl ? this.stepControl.valid && this.interacted : this.interacted;

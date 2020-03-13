@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Directive, Input } from '@angular/core';
+import { Component, Directive, Input } from '@angular/core';
 import {
   CdkFooterRow,
   CdkFooterRowDef,
@@ -85,7 +85,6 @@ export class NbRowDefDirective<T> extends CdkRowDef<T> {
     'class': 'nb-header-row',
     'role': 'row',
   },
-  changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [{ provide: CdkHeaderRow, useExisting: NbHeaderRowComponent }],
 })
 export class NbHeaderRowComponent extends CdkHeaderRow {
@@ -100,7 +99,6 @@ export class NbHeaderRowComponent extends CdkHeaderRow {
     'class': 'nb-footer-row',
     'role': 'row',
   },
-  changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [{ provide: CdkFooterRow, useExisting: NbFooterRowComponent }],
 })
 export class NbFooterRowComponent extends CdkFooterRow {
@@ -116,7 +114,6 @@ export class NbFooterRowComponent extends CdkFooterRow {
     'role': 'row',
   },
   providers: [{ provide: CdkRow, useExisting: NbRowComponent }],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NbRowComponent extends CdkRow {
 }

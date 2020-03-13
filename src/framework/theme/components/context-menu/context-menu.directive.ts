@@ -22,7 +22,7 @@ import { NbDynamicOverlay, NbDynamicOverlayController } from '../cdk/overlay/dyn
 import { NbDynamicOverlayHandler } from '../cdk/overlay/dynamic/dynamic-overlay-handler';
 import { NbOverlayRef } from '../cdk/overlay/mapping';
 import { NbAdjustableConnectedPositionStrategy, NbAdjustment, NbPosition } from '../cdk/overlay/overlay-position';
-import { NbTrigger } from '../cdk/overlay/overlay-trigger';
+ import { NbTrigger, NbTriggerValues } from '../cdk/overlay/overlay-trigger';
 import { NbContextMenuComponent } from './context-menu.component';
 import { NbMenuItem, NbMenuService } from '../menu/menu.service';
 
@@ -157,6 +157,7 @@ export class NbContextMenuDirective implements NbDynamicOverlayController, OnCha
    * */
   @Input('nbContextMenuTrigger')
   trigger: NbTrigger = NbTrigger.CLICK;
+  static ngAcceptInputType_trigger: NbTriggerValues;
 
   @Input('nbContextMenuClass')
   contextMenuClass: string = '';

@@ -14,15 +14,18 @@ import {
   Output,
 } from '@angular/core';
 
-import { NbCalendarCell } from '../../model';
+import { NbCalendarCell, NbCalendarSize, NbCalendarSizeValues } from '../../model';
 import { NbDateService } from '../../services/date.service';
 
 
 @Component({
   selector: 'nb-calendar-day-cell',
-  template: '{{ day }}',
+  template: `
+    <div class="cell-content">
+      {{ day }}
+    </div>
+  `,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  host: { 'class': 'day-cell' },
 })
 export class NbCalendarDayCellComponent<D> implements NbCalendarCell<D, D> {
 
@@ -37,6 +40,9 @@ export class NbCalendarDayCellComponent<D> implements NbCalendarCell<D, D> {
   @Input() max: D;
 
   @Input() filter: (D) => boolean;
+
+  @Input() size: NbCalendarSize = NbCalendarSize.MEDIUM;
+  static ngAcceptInputType_size: NbCalendarSizeValues;
 
   @Output() select: EventEmitter<D> = new EventEmitter(true);
 
@@ -62,6 +68,14 @@ export class NbCalendarDayCellComponent<D> implements NbCalendarCell<D, D> {
   @HostBinding('class.disabled') get disabled(): boolean {
     return this.smallerThanMin() || this.greaterThanMax() || this.dontFitFilter();
   }
+
+  @HostBinding('class.size-large')
+  get isLarge(): boolean {
+    return this.size === NbCalendarSize.LARGE;
+  }
+
+  @HostBinding('class.day-cell')
+  dayCellClass = true;
 
   get day(): number {
     return this.date && this.dateService.getDate(this.date);

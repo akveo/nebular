@@ -28,6 +28,12 @@
   width: 100%;
 }
 
+:host(.nb-transition) {
+  .select-button {
+    @include nb-component-animation(background-color, border-color, border-radius, box-shadow, color);
+  }
+}
+
 .select-button {
   position: relative;
   width: 100%;
@@ -35,8 +41,6 @@
   text-overflow: ellipsis;
   text-transform: none;
   white-space: nowrap;
-
-  @include nb-component-animation(background-color, border-color, border-radius, box-shadow, color);
 }
 
 nb-icon {

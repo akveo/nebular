@@ -87,7 +87,7 @@ export abstract class NbDatepicker<T> {
    * */
   abstract format: string;
 
-  abstract get value(): T | undefined;
+  abstract get value(): T;
 
   abstract set value(value: T);
 
@@ -235,14 +235,12 @@ export const NB_DATE_SERVICE_OPTIONS = new InjectionToken('Date service options'
  *
  * @styles
  *
- * datepicker-text-color:
  * datepicker-background-color:
  * datepicker-border-color:
  * datepicker-border-style:
  * datepicker-border-width:
  * datepicker-border-radius:
  * datepicker-shadow:
- * datepicker-arrow-size:
  * */
 @Directive({
   selector: 'input[nbDatepicker]',

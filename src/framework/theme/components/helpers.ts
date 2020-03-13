@@ -4,6 +4,9 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
+export type NbNullableInput = string | null | undefined;
+export type NbBooleanInput = boolean | NbNullableInput;
+
 export function convertToBoolProperty(val: any): boolean {
   if (typeof val === 'string') {
     val = val.toLowerCase().trim();
@@ -41,7 +44,7 @@ export function lastChildNotComment(node: Node) {
 }
 
 /*
- * @breaking-change Remove @5.0.0
+ * @breaking-change Remove @6.0.0
  */
 export function emptyStatusWarning(source: string) {
   console.warn(`${source}: Using empty string as a status is deprecated. Use \`basic\` instead.`);

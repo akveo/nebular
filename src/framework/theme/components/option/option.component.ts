@@ -15,15 +15,68 @@ import {
   Inject,
   Input,
   OnDestroy,
+  Optional,
   Output,
+  AfterViewInit,
+  NgZone,
+  Renderer2,
 } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 
-import { convertToBoolProperty } from '../helpers';
-import { NbFocusableOption } from '../cdk/a11y/focus-key-manager';
-import { NbSelectComponent } from './select.component';
-import { NB_SELECT_INJECTION_TOKEN } from './select-injection-tokens';
+// Component class scoped counter for aria attributes.
+let lastOptionId: number = 0;
 
+import { convertToBoolProperty, NbBooleanInput } from '../helpers';
+import { NbFocusableOption } from '../cdk/a11y/focus-key-manager';
+import { NbHighlightableOption } from '../cdk/a11y/descendant-key-manager';
+import { NB_SELECT_INJECTION_TOKEN } from '../select/select-injection-tokens';
+import { NbSelectComponent } from '../select/select.component';
+
+/**
+ * NbOptionComponent
+ *
+ * @styles
+ *
+ * option-background-color:
+ * option-text-color:
+ * option-text-font-family:
+ * option-hover-background-color:
+ * option-hover-text-color:
+ * option-active-background-color:
+ * option-active-text-color:
+ * option-focus-background-color:
+ * option-focus-text-color:
+ * option-selected-background-color:
+ * option-selected-text-color:
+ * option-selected-hover-background-color:
+ * option-selected-hover-text-color:
+ * option-selected-active-background-color:
+ * option-selected-active-text-color:
+ * option-selected-focus-background-color:
+ * option-selected-focus-text-color:
+ * option-disabled-background-color:
+ * option-disabled-text-color:
+ * option-tiny-text-font-size:
+ * option-tiny-text-font-weight:
+ * option-tiny-text-line-height:
+ * option-tiny-padding:
+ * option-small-text-font-size:
+ * option-small-text-font-weight:
+ * option-small-text-line-height:
+ * option-small-padding:
+ * option-medium-text-font-size:
+ * option-medium-text-font-weight:
+ * option-medium-text-line-height:
+ * option-medium-padding:
+ * option-large-text-font-size:
+ * option-large-text-font-weight:
+ * option-large-text-line-height:
+ * option-large-padding:
+ * option-giant-text-font-size:
+ * option-giant-text-font-weight:
+ * option-giant-text-line-height:
+ * option-giant-padding:
+ **/
 @Component({
   selector: 'nb-option',
   styleUrls: ['./option.component.scss'],
@@ -37,7 +90,7 @@ import { NB_SELECT_INJECTION_TOKEN } from './select-injection-tokens';
     <ng-content></ng-content>
   `,
 })
-export class NbOptionComponent<T> implements OnDestroy, NbFocusableOption {
+export class NbOptionComponent<T = any> implements OnDestroy, AfterViewInit, NbFocusableOption, NbHighlightableOption {
 
   protected disabledByGroup = false;
 
@@ -54,6 +107,7 @@ export class NbOptionComponent<T> implements OnDestroy, NbFocusableOption {
     this._disabled = convertToBoolProperty(value);
   }
   protected _disabled: boolean = false;
+  static ngAcceptInputType_disabled: NbBooleanInput;
 
   /**
    * Fires value when option selection change.
@@ -69,17 +123,32 @@ export class NbOptionComponent<T> implements OnDestroy, NbFocusableOption {
   }
 
   selected: boolean = false;
-  protected parent: NbSelectComponent<T>;
+  protected parent: NbSelectComponent;
   protected alive: boolean = true;
 
-  constructor(@Inject(NB_SELECT_INJECTION_TOKEN) parent,
+  /**
+   * Component scoped id for aria attributes.
+   * */
+  @HostBinding('attr.id')
+  id: string = `nb-option-${lastOptionId++}`;
+
+  constructor(@Optional() @Inject(NB_SELECT_INJECTION_TOKEN) parent,
               protected elementRef: ElementRef,
-              protected cd: ChangeDetectorRef) {
+              protected cd: ChangeDetectorRef,
+              protected zone: NgZone,
+              protected renderer: Renderer2) {
     this.parent = parent;
   }
 
   ngOnDestroy() {
     this.alive = false;
+  }
+
+  ngAfterViewInit() {
+    // TODO: #2254
+    this.zone.runOutsideAngular(() => setTimeout(() => {
+      this.renderer.addClass(this.elementRef.nativeElement, 'nb-transition');
+    }));
   }
 
   /**
@@ -93,9 +162,12 @@ export class NbOptionComponent<T> implements OnDestroy, NbFocusableOption {
     return this.elementRef.nativeElement.textContent;
   }
 
+  // TODO: replace with isShowCheckbox property to control this behaviour outside, issues/1965
   @HostBinding('class.multiple')
   get multiple() {
-    return this.parent.multiple;
+    // We check parent existing because parent can be NbSelectComponent or
+    // NbAutocomplete and `miltiple` property exists only in NbSelectComponent
+    return this.parent ? (this.parent as NbSelectComponent).multiple : false;
   }
 
   @HostBinding('class.selected')
@@ -112,6 +184,12 @@ export class NbOptionComponent<T> implements OnDestroy, NbFocusableOption {
   get tabindex() {
     return '-1';
   }
+
+  @HostBinding('class.active')
+  get activeClass() {
+    return this._active;
+  };
+  protected _active: boolean = false;
 
   @HostListener('click', ['$event'])
   @HostListener('keydown.space', ['$event'])
@@ -163,4 +241,15 @@ export class NbOptionComponent<T> implements OnDestroy, NbFocusableOption {
   getLabel(): string {
     return this.content;
   }
+
+  setActiveStyles(): void {
+    this._active = true;
+    this.cd.markForCheck();
+  }
+
+  setInactiveStyles(): void {
+    this._active = false;
+    this.cd.markForCheck();
+  }
+
 }

@@ -1,3 +1,5 @@
+@import '../form-field/form-field.component.theme';
+
 @mixin select-outline {
   nb-select.appearance-outline .select-button {
     border-style: nb-theme(select-outline-border-style);
@@ -57,10 +59,6 @@
         border-bottom-color: nb-theme(select-outline-#{$status}-adjacent-border-color);
       }
     }
-
-    .options-list-container.appearance-outline.status-#{$status} {
-      border-color: nb-theme(select-options-list-outline-#{$status}-border-color);
-    }
   }
 
   @each $size in nb-get-sizes() {
@@ -69,14 +67,7 @@
       @include nb-ltr(padding-right, nb-theme(select-icon-offset));
       @include nb-rtl(padding-left, nb-theme(select-icon-offset));
     }
-    .appearance-outline.size-#{$size} {
-      nb-option-group .option-group-title,
-      nb-option {
-        padding: nb-theme(select-option-outline-#{$size}-padding);
-      }
-      nb-option-group nb-option {
-        padding-left: nb-theme(select-group-option-outline-#{$size}-start-padding);
-      }
-    }
+
+    @include nb-form-field-with-prefix('nb-select.appearance-outline.size-#{$size} .select-button', $size);
   }
 }

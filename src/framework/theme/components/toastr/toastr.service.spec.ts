@@ -107,7 +107,7 @@ describe('toastr-service', () => {
     expect(attachSpy).toHaveBeenCalled();
     const [[{ config }]] = attachSpy.calls.allArgs();
     expect(config.position).toBe(NbGlobalLogicalPosition.BOTTOM_START, 'incorrect position');
-    expect(config.status).toBe('primary', 'incorrect status');
+    expect(config.status).toBe('basic', 'incorrect status');
     expect(config.duration).toBe(1234, 'incorrect duration');
     expect(config.destroyByClick).toBe(true, 'incorrect destroyByClick');
     expect(config.preventDuplicates).toBe(true, 'incorrect preventDuplicates');

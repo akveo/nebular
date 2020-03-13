@@ -23,7 +23,7 @@ import { isPlatformBrowser } from '@angular/common';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { fromEvent, merge, Subject } from 'rxjs';
 import { filter, switchMap, takeUntil } from 'rxjs/operators';
-import { convertToBoolProperty, emptyStatusWarning } from '../helpers';
+import { convertToBoolProperty, emptyStatusWarning, NbBooleanInput } from '../helpers';
 import { NB_DOCUMENT } from '../../theme.options';
 import { NbRadioComponent } from './radio.component';
 import { NbComponentStatus } from '../component-status';
@@ -113,6 +113,7 @@ export class NbRadioGroupComponent implements AfterContentInit, OnDestroy, Contr
     this.updateDisabled();
   }
   protected _disabled: boolean;
+  static ngAcceptInputType_disabled: NbBooleanInput;
 
   /**
    * Radio buttons status.
@@ -198,19 +199,19 @@ export class NbRadioGroupComponent implements AfterContentInit, OnDestroy, Contr
 
   protected updateNames() {
     if (this.radios) {
-      this.radios.forEach((radio: NbRadioComponent) => radio.name = this.name);
+      this.radios.forEach((radio: NbRadioComponent) => radio._setName(this.name));
     }
   }
 
   protected updateValues() {
-    if (this.radios && typeof this.value !== 'undefined') {
-      this.radios.forEach((radio: NbRadioComponent) => radio.checked = radio.value === this.value);
+    if (typeof this.value !== 'undefined') {
+      this.updateAndMarkForCheckRadios((radio: NbRadioComponent) => radio.checked = radio.value === this.value);
     }
   }
 
   protected updateDisabled() {
-    if (this.radios && typeof this.disabled !== 'undefined') {
-      this.radios.forEach((radio: NbRadioComponent) => radio.disabled = this.disabled);
+    if (typeof this.disabled !== 'undefined') {
+      this.updateAndMarkForCheckRadios((radio: NbRadioComponent) => radio.disabled = this.disabled);
     }
   }
 
@@ -265,8 +266,15 @@ export class NbRadioGroupComponent implements AfterContentInit, OnDestroy, Contr
   }
 
   protected updateStatus() {
+    this.updateAndMarkForCheckRadios((radio: NbRadioComponent) => radio.status = this.status);
+  }
+
+  protected updateAndMarkForCheckRadios(updateFn: (NbRadioComponent) => void) {
     if (this.radios) {
-      this.radios.forEach((radio: NbRadioComponent) => radio.status = this.status);
+      this.radios.forEach((radio) => {
+        updateFn(radio);
+        radio._markForCheck();
+      });
     }
   }
 }

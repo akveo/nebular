@@ -43,7 +43,7 @@ describe('NbLayoutComponent', () => {
       fixture.detectChanges();
 
       layoutComponent = fixture.debugElement.query(By.directive(NbLayoutComponent)).componentInstance;
-      scrollService = TestBed.get(NbLayoutScrollService);
+      scrollService = TestBed.inject(NbLayoutScrollService);
     });
 
     it('should hide overflow when scroll blocked', fakeAsync(() => {
@@ -53,42 +53,6 @@ describe('NbLayoutComponent', () => {
 
       expect(layoutComponent.scrollableContainerRef.nativeElement.style.overflow).toEqual('hidden');
     }));
-
-
-    // Comment this specs until global (theme) styles included into unit test build.
-    // Currently scrollable container and layout has same width so no padding added and specs fail.
-    // it('should add right padding to layout container in LTR mode when blocking scroll', fakeAsync(() => {
-    //   scrollService.scrollable(false);
-    //   flush();
-    //   fixture.detectChanges();
-    //
-    //   expect(layoutComponent.layoutContainerRef.nativeElement.style.paddingRight).not.toEqual('');
-    // }));
-    //
-    // it('should add left padding to layout container in RTL mode when blocking scroll', fakeAsync(() => {
-    //   const layoutDirectionService: NbLayoutDirectionService = TestBed.get(NbLayoutDirectionService);
-    //   layoutDirectionService.setDirection(NbLayoutDirection.RTL);
-    //   flush();
-    //   fixture.detectChanges();
-    //
-    //   scrollService.scrollable(false);
-    //   flush();
-    //   fixture.detectChanges();
-    //
-    //   expect(layoutComponent.layoutContainerRef.nativeElement.style.paddingLeft).not.toEqual('');
-    // }));
-    // it('should not change layout padding if content is not scrollable', fakeAsync(() => {
-    //   fixture.componentInstance.contentHeight = '1px';
-    //   fixture.detectChanges();
-    //
-    //   layoutComponent.layoutContainerRef.nativeElement.style.paddingLeft = '1px';
-    //
-    //   scrollService.scrollable(false);
-    //   flush();
-    //   fixture.detectChanges();
-    //
-    //   expect(layoutComponent.layoutContainerRef.nativeElement.style.paddingLeft).toEqual('1px');
-    // }));
 
     it('should restore previous overflow value when enabling scroll', fakeAsync(() => {
       layoutComponent.scrollableContainerRef.nativeElement.style.overflow = 'auto';
@@ -117,7 +81,7 @@ describe('NbLayoutComponent', () => {
     }));
 
     it('should restore previous padding right value when enabling scroll in RTL mode', fakeAsync(() => {
-      const layoutDirectionService: NbLayoutDirectionService = TestBed.get(NbLayoutDirectionService);
+      const layoutDirectionService: NbLayoutDirectionService = TestBed.inject(NbLayoutDirectionService);
       layoutDirectionService.setDirection(NbLayoutDirection.RTL);
       flush();
       fixture.detectChanges();
