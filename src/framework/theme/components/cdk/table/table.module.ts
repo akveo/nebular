@@ -32,6 +32,7 @@ export const NB_TABLE_TEMPLATE = `
   <ng-container nbFooterRowOutlet></ng-container>`;
 
 @Component({
+  selector: 'nb-table-not-implemented',
   template: ``,
 })
 // tslint:disable-next-line:component-class-suffix
