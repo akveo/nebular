@@ -20,6 +20,7 @@ import { NbGlobalLogicalPosition } from './position-helper';
 import { GlobalPositionStrategy } from '@angular/cdk/overlay';
 
 
+export type NbAdjustmentValues = 'noop' | 'clockwise' | 'counterclockwise' | 'vertical' | 'horizontal';
 export enum NbAdjustment {
   NOOP = 'noop',
   CLOCKWISE = 'clockwise',

@@ -18,7 +18,7 @@ import {
 
 import { NbDynamicOverlay, NbDynamicOverlayController } from '../cdk/overlay/dynamic/dynamic-overlay';
 import { NbDynamicOverlayHandler } from '../cdk/overlay/dynamic/dynamic-overlay-handler';
-import { NbAdjustment, NbPosition, NbPositionValues } from '../cdk/overlay/overlay-position';
+import { NbAdjustment, NbPosition, NbPositionValues, NbAdjustmentValues } from '../cdk/overlay/overlay-position';
 import { NbOverlayContent } from '../cdk/overlay/overlay-service';
 import { NbTrigger, NbTriggerValues } from '../cdk/overlay/overlay-trigger';
 import { NbPopoverComponent } from './popover.component';
@@ -161,6 +161,7 @@ export class NbPopoverDirective implements NbDynamicOverlayController, OnChanges
     this._adjustment = value;
   }
   protected _adjustment: NbAdjustment = NbAdjustment.CLOCKWISE;
+  static ngAcceptInputType_adjustment: NbAdjustmentValues;
 
   /**
    * Describes when the container will be shown.
