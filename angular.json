@@ -263,7 +263,11 @@
               "docs/favicon.ico",
               "docs/favicon.png",
               "docs/google46533d2e7a851062.html",
-              { "glob": "versions.json", "input": "docs/", "output": "/" }
+              {
+                "glob": "versions.json",
+                "input": "docs/",
+                "output": "/"
+              }
             ],
             "styles": [
               "node_modules/pace-js/templates/pace-theme-flash.tmpl.css",
@@ -326,8 +330,7 @@
             "karmaConfig": "./karma.conf.js",
             "polyfills": "docs/polyfills.ts",
             "tsConfig": "docs/tsconfig.spec.json",
-            "scripts": [
-            ],
+            "scripts": [],
             "styles": [
               "node_modules/highlight.js/styles/dracula.css",
               "docs/app/@theme/styles/styles.scss"
@@ -383,5 +386,8 @@
     "@schematics/angular:directive": {
       "prefix": "app"
     }
+  },
+  "cli": {
+    "analytics": "650ae037-17e3-4397-a8eb-7f542a78965d"
   }
 }
