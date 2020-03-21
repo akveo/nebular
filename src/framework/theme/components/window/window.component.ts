@@ -26,7 +26,7 @@ import { NbWindowRef } from './window-ref';
       <nb-card-header>
         <div cdkFocusInitial class="title" tabindex="-1">{{ config.title }}</div>
 
-        <div class="buttons">
+        <div class="buttons" *ngIf="config.showActions">
           <button nbButton ghost (click)="minimize()">
             <nb-icon icon="minus-outline" pack="nebular-essentials"></nb-icon>
           </button>
@@ -40,6 +40,11 @@ import { NbWindowRef } from './window-ref';
             <nb-icon icon="close-outline" pack="nebular-essentials"></nb-icon>
           </button>
         </div>
+        <div class="buttons noActions" *ngIf="!config.showActions">
+        <button nbButton ghost (click)="close()">
+          <nb-icon icon="close-outline" pack="nebular-essentials"></nb-icon>
+        </button>
+      </div>
       </nb-card-header>
       <nb-card-body *ngIf="maximized || isFullScreen">
         <nb-overlay-container></nb-overlay-container>

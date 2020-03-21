@@ -67,6 +67,11 @@ export class NbWindowConfig {
    */
   viewContainerRef: ViewContainerRef = null;
 
+  /**
+   * Defines if the minimize/maximize buttons are shown
+   */
+  showActions?: Boolean = true;
+
   constructor(...configs: Partial<NbWindowConfig>[]) {
     Object.assign(this, ...configs);
   }
