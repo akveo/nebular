@@ -1,7 +1,7 @@
 @import '../../../theme/styles/all';
 @import '../all';
 
-$nb-enabled-themes: (dark);
+$nb-enabled-themes: (corporate);
 
 @include nb-install() {
   @include nb-auth-global();
