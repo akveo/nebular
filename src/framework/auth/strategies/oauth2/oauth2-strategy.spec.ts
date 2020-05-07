@@ -614,7 +614,10 @@ describe('oauth2-auth-strategy', () => {
         });
     });
     it('handle refresh token with NO client auth', (done: DoneFn) => {
-      strategy.setOptions(basicOptions);
+      strategy.setOptions({
+        ... basicOptions,
+        clientId: 'clientId',
+      });
 
       strategy.refreshToken(successToken)
         .subscribe((result: NbAuthResult) => {
@@ -636,7 +639,8 @@ describe('oauth2-auth-strategy', () => {
             && req.headers.get('Content-Type') === 'application/x-www-form-urlencoded'
             && decodeURIComponent(params['grant_type']) === NbOAuth2GrantType.REFRESH_TOKEN
             && decodeURIComponent(params['refresh_token']) === successToken.getRefreshToken()
-            && decodeURIComponent(params['scope']) === 'read')
+            && decodeURIComponent(params['scope']) === 'read'
+            && decodeURIComponent(params['client_id']) === 'clientId')
         },
       )
       .flush(tokenSuccessResponse);
