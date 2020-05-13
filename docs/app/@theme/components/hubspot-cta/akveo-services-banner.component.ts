@@ -37,11 +37,9 @@ export class AkveoServicesBanner implements OnInit {
   ngOnInit() {
     if (this.window?.hbspt?.cta?.load) {
       this.loadCta();
-
-      return;
+    } else {
+      this.loadHubSpotCtaScript();
     }
-
-    this.loadHubSpotCtaScript();
   }
 
   private loadCta() {
