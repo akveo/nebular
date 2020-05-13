@@ -35,23 +35,25 @@ export class AkveoServicesBanner implements OnInit {
   }
 
   ngOnInit() {
-    const banner = this.wrapper.nativeElement;
-
     if (this.window?.hbspt?.cta?.load) {
       this.loadCta();
 
       return;
     }
 
-    banner.appendChild(
-      this.document.createRange().createContextualFragment(
-        `<script type="text/javascript" src="https://js.hscta.net/cta/current.js"></script>`
-      )
-    );
-    banner.querySelector('script').onload = this.loadCta.bind(this);
+    this.loadHubSpotCtaScript();
   }
 
   private loadCta() {
     this.window.hbspt.cta.load(2452262, this.ctaId, {});
+  }
+
+  private loadHubSpotCtaScript() {
+    this.wrapper.nativeElement.appendChild(
+      this.document.createRange().createContextualFragment(
+        `<script type="text/javascript" src="https://js.hscta.net/cta/current.js"></script>`
+      )
+    );
+    this.wrapper.nativeElement.querySelector('script').onload = this.loadCta.bind(this);
   }
 }
