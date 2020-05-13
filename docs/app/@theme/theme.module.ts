@@ -54,6 +54,7 @@ import {
   NgdMenuService,
   NgdMetadataService,
 } from './services';
+import { HubspotCtaComponent } from './components/hubspot-cta/hubspot-cta.component';
 
 @NgModule({
   imports: [
@@ -83,6 +84,7 @@ import {
     NgdDescriptionDirective,
     NgdSearchComponent,
     NgdEvaComponent,
+    HubspotCtaComponent,
   ],
   exports: [
     CommonModule,
@@ -107,6 +109,7 @@ import {
     NgdColorSwatchDirective,
     NgdDescriptionDirective,
     NgdEvaComponent,
+    HubspotCtaComponent,
   ],
 })
 export class NgdThemeModule {
