@@ -43,7 +43,6 @@ export class AkveoServicesBanner implements OnInit {
       return;
     }
 
-    console.log(`load current.js script!`);
     banner.appendChild(
       this.document.createRange().createContextualFragment(
         `<script type="text/javascript" src="https://js.hscta.net/cta/current.js"></script>`
