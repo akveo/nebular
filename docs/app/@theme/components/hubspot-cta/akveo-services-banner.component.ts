@@ -2,20 +2,30 @@ import { Component, ElementRef, Inject, Input, OnInit, ViewChild } from '@angula
 import { NB_DOCUMENT, NB_WINDOW } from '@nebular/theme';
 
 @Component({
-  selector: 'ngd-hubspot-cta-component',
+  selector: 'ngd-akveo-services-banner',
   template: `
     <span #wrapper class="hs-cta-wrapper" id="hs-cta-wrapper-{{ctaId}}">
       <span class="hs-cta-node hs-cta-{{ctaId}}" id="hs-cta-{{ctaId}}">
         <a href="https://cta-redirect.hubspot.com/cta/redirect/2452262/{{ctaId}}" target="_blank">
-          <ng-content></ng-content>
+          <img class="hs-cta-img"
+               id="hs-cta-img-{{ctaId}}"
+               [height]="height"
+               [width]="width"
+               src="https://no-cache.hubspot.com/cta/default/2452262/{{ctaId}}.png"
+               alt="Services on Angular"/>
         </a>
       </span>
     </span>
   `,
+  styleUrls: ['akveo-services-banner.component.scss']
 })
 
-export class HubspotCtaComponent implements OnInit {
+export class AkveoServicesBanner implements OnInit {
   @Input() ctaId: string;
+
+  @Input() width: string;
+
+  @Input() height: string;
 
   @ViewChild('wrapper', { static: true }) wrapper: ElementRef;
 
@@ -33,6 +43,7 @@ export class HubspotCtaComponent implements OnInit {
       return;
     }
 
+    console.log(`load current.js script!`);
     banner.appendChild(
       this.document.createRange().createContextualFragment(
         `<script type="text/javascript" src="https://js.hscta.net/cta/current.js"></script>`
@@ -42,10 +53,6 @@ export class HubspotCtaComponent implements OnInit {
   }
 
   private loadCta() {
-    this.wrapper.nativeElement.appendChild(
-      this.document.createRange().createContextualFragment(
-        `<script type="text/javascript">hbspt.cta.load(2452262, '${this.ctaId}', {});</script>`
-      )
-    );
+    this.window.hbspt.cta.load(2452262, this.ctaId, {});
   }
 }

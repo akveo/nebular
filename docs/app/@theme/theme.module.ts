@@ -54,7 +54,7 @@ import {
   NgdMenuService,
   NgdMetadataService,
 } from './services';
-import { HubspotCtaComponent } from './components/hubspot-cta/hubspot-cta.component';
+import { AkveoServicesBanner } from './components/hubspot-cta/akveo-services-banner.component';
 
 @NgModule({
   imports: [
@@ -84,7 +84,7 @@ import { HubspotCtaComponent } from './components/hubspot-cta/hubspot-cta.compon
     NgdDescriptionDirective,
     NgdSearchComponent,
     NgdEvaComponent,
-    HubspotCtaComponent,
+    AkveoServicesBanner,
   ],
   exports: [
     CommonModule,
@@ -109,7 +109,7 @@ import { HubspotCtaComponent } from './components/hubspot-cta/hubspot-cta.compon
     NgdColorSwatchDirective,
     NgdDescriptionDirective,
     NgdEvaComponent,
-    HubspotCtaComponent,
+    AkveoServicesBanner,
   ],
 })
 export class NgdThemeModule {
