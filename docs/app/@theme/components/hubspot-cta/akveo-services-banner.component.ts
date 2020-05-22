@@ -17,7 +17,7 @@ import { NB_DOCUMENT, NB_WINDOW } from '@nebular/theme';
       </span>
     </span>
   `,
-  styleUrls: ['akveo-services-banner.component.scss']
+  styleUrls: ['akveo-services-banner.component.scss'],
 })
 
 export class AkveoServicesBanner implements OnInit {
