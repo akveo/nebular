@@ -25,11 +25,21 @@ export class NbFirebasePasswordStrategyOptions extends NbAuthStrategyOptions {
     defaultErrors: ['Something went wrong, please try again.'],
     defaultMessages: ['You have been successfully registered.'],
   };
-  login? = {
+  login?: boolean | NbFirebasePasswordStrategyModule = {
     redirect: {
       success: '/',
       failure: null,
-    }
+    },
+    defaultErrors: ['Login/Email combination is not correct, please try again.'],
+    defaultMessages: ['You have been successfully logged in.'],
+  };
+  logout? = {
+    redirect: {
+      success: '/',
+      failure: null,
+    },
+    defaultErrors: ['Something went wrong, please try again.'],
+    defaultMessages: ['You have been successfully logged out.'],
   };
   errors?: NbPasswordStrategyMessage = {
     key: 'message',

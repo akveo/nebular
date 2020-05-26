@@ -17,7 +17,7 @@ import {
 import { NbAuthStrategyOptions } from '../../auth/strategies/auth-strategy-options';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { fromPromise } from 'rxjs/internal-compatibility';
-import { catchError, map, switchMap, tap } from 'rxjs/operators';
+import { catchError, map, switchMap} from 'rxjs/operators';
 import UserCredential = firebase.auth.UserCredential;
 
 
@@ -37,12 +37,29 @@ export class NbFirebasePasswordStrategy extends NbAuthStrategy {
     super();
   }
 
-  authenticate(data?: any): Observable<NbAuthResult> {
-    return undefined;
+  authenticate({ email, password }: any): Observable<NbAuthResult> {
+    return fromPromise(this.afAuth.signInWithEmailAndPassword(email, password))
+      .pipe(
+        switchMap((res) => this.processSuccess(res, 'login')),
+        catchError((error) => this.proccessFailure(error, 'login')),
+      );
   }
 
   logout(): Observable<NbAuthResult> {
-    return undefined;
+    const module = 'logout';
+    return fromPromise(this.afAuth.signOut())
+      .pipe(
+        map(() => {
+          return new NbAuthResult(
+            true,
+            null,
+            this.getOption(`${module}.redirect.success`),
+            [],
+            this.getOption('logout.defaultMessages'),
+          )
+        }),
+        catchError((error) => this.proccessFailure(error, module)),
+      );
   }
 
   refreshToken(data?: any): Observable<NbAuthResult> {
@@ -70,7 +87,7 @@ export class NbFirebasePasswordStrategy extends NbAuthStrategy {
     return observableOf(new NbAuthResult(
       false,
       error,
-      this.getOption(`register.redirect.fail`),
+      this.getOption(`${module}.redirect.fail`),
       this.getOption('errors.getter')(module, error, this.options),
     ));
   }
@@ -81,7 +98,7 @@ export class NbFirebasePasswordStrategy extends NbAuthStrategy {
         return new NbAuthResult(
           true,
           res,
-          this.getOption(`register.redirect.success`),
+          this.getOption(`${module}.redirect.success`),
           [],
           this.getOption('messages.getter')(module, res, this.options),
           this.createToken(token),

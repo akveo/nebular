@@ -36,6 +36,9 @@ import { FirebaseAuthResultComponent } from './result/result.component';
           strategy: 'password',
           terms: false,
         },
+        logout: {
+          strategy: 'password',
+        },
         validation: {
           password: {
             required: true,
@@ -57,6 +60,11 @@ import { FirebaseAuthResultComponent } from './result/result.component';
           name: 'password',
           token: {
             class: NbAuthJWTToken, // TODO: should be custom token?
+          },
+          login: {
+            redirect: {
+              success: '/firebase/result',
+            }
           },
           register: {
             redirect: {
