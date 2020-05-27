@@ -52,4 +52,8 @@ export class FirebaseAuthResultComponent implements OnInit {
   requestPassword() {
     this.router.navigateByUrl('/firebase/request-password');
   }
+
+  resetPassword() {
+    this.router.navigateByUrl('firebase/reset-password');
+  }
 }

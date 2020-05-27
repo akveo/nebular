@@ -46,6 +46,10 @@ import { FirebaseAuthResultComponent } from './result/result.component';
           strategy: 'password',
           socialLinks: [],
         },
+        resetPassword: {
+          strategy: 'password',
+          socialLinks: [],
+        },
         validation: {
           password: {
             required: true,
@@ -84,6 +88,11 @@ import { FirebaseAuthResultComponent } from './result/result.component';
             }
           },
           requestPassword: {
+            redirect: {
+              success: '/firebase/login',
+            }
+          },
+          resetPassword: {
             redirect: {
               success: '/firebase/login',
             }

@@ -7,7 +7,7 @@
 import { Injectable } from '@angular/core';
 import { NbAuthStrategy } from '../../auth/strategies/auth-strategy';
 import { NbAuthResult } from '../../auth/services/auth-result';
-import { Observable, of as observableOf, throwError } from 'rxjs';
+import { Observable, of as observableOf } from 'rxjs';
 import { NbAuthStrategyClass } from '../../auth/auth.options';
 import { HttpClient } from '@angular/common/http';
 import {
@@ -109,9 +109,39 @@ export class NbFirebasePasswordStrategy extends NbAuthStrategy {
       );
   }
 
-  resetPassword({ email }): Observable<NbAuthResult> {
+  resetPassword({ password }): Observable<NbAuthResult> {
+    const module = 'resetPassword';
+    return this.afAuth.authState
+      .pipe(
+        switchMap(user => {
+          if (user == null) {
+            return observableOf(new NbAuthResult(
+              false,
+              null,
+              this.getOption(`${module}.redirect.failure`),
+              ['There is no logged in user so the reset of the password isn\'t possible'],
+            ));
+          }
+          return this.updatePassword(user, password, module);
+        }),
+      );
+  }
 
-    return undefined;
+  private updatePassword(user, password, module) {
+    return fromPromise(user.updatePassword(password))
+      .pipe(
+        map(token => {
+          return new NbAuthResult(
+            true,
+            null,
+            this.getOption(`${module}.redirect.success`),
+            [],
+            this.getOption(`${module}.defaultMessages`),
+            this.createToken(token),
+          );
+        }),
+        catchError(error => this.proccessFailure(error, module)),
+      );
   }
 
   private refreshIdToken(user: User, module): Observable<NbAuthResult> {
