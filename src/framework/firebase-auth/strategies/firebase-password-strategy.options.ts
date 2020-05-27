@@ -5,7 +5,10 @@
  */
 import { NbAuthStrategyOptions } from '../../auth/strategies/auth-strategy-options';
 import { getDeepFromObject } from '../../auth/helpers';
-import { NbPasswordStrategyMessage } from '../../auth/strategies/password/password-strategy-options';
+import {
+  NbPasswordStrategyMessage,
+  NbPasswordStrategyModule
+} from '../../auth/strategies/password/password-strategy-options';
 
 export interface NbFirebasePasswordStrategyModule {
   redirect?: {
@@ -33,13 +36,21 @@ export class NbFirebasePasswordStrategyOptions extends NbAuthStrategyOptions {
     defaultErrors: ['Login/Email combination is not correct, please try again.'],
     defaultMessages: ['You have been successfully logged in.'],
   };
-  logout? = {
+  logout?: boolean | NbFirebasePasswordStrategyModule = {
     redirect: {
       success: '/',
       failure: null,
     },
     defaultErrors: ['Something went wrong, please try again.'],
     defaultMessages: ['You have been successfully logged out.'],
+  };
+  refreshToken?: boolean | NbPasswordStrategyModule = {
+    redirect: {
+      success: null,
+      failure: null,
+    },
+    defaultErrors: ['Something went wrong, please try again.'],
+    defaultMessages: ['Your token has been successfully refreshed.'],
   };
   errors?: NbPasswordStrategyMessage = {
     key: 'message',

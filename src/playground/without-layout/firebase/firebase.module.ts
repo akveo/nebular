@@ -70,7 +70,12 @@ import { FirebaseAuthResultComponent } from './result/result.component';
             redirect: {
               success: '/firebase/result'
             }
-          }
+          },
+          logout: {
+            redirect: {
+              success: '/firebase/login',
+            }
+          },
         }),
       ]
     }),

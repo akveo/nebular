@@ -1,5 +1,11 @@
+<h2>Nebular token:</h2>
 <pre> {{ userToken$ | async | json }} </pre>
+
+<h2>Firebase User:</h2>
+<pre> {{ afUser$ | async | json }}</pre>
 
 <button (click)="logout()">Logout</button>
 
 <button (click)="login()">Login with email/password</button>
+
+
