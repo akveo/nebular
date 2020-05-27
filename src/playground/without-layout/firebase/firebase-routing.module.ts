@@ -16,7 +16,7 @@ import {
   NbResetPasswordComponent,
 } from '@nebular/auth';
 import { FirebasePlaygroundComponent } from './firebase-playground.component';
-import { FirebaseAuthResultComponent } from './result/result.component';
+import { FirebaseAuthShowcaseComponent } from './showcase/firebase-showcase.component';
 
 
 export const routes: Routes = [
@@ -59,8 +59,8 @@ export const routes: Routes = [
   },
   {
     path: 'result',
-    component: FirebaseAuthResultComponent,
-  }
+    component: FirebaseAuthShowcaseComponent,
+  },
   // {
   //   path: 'acl/acl-test.component',
   //   component: AclTestComponent,

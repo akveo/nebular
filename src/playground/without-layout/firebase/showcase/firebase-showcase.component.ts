@@ -1,20 +1,23 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NbAuthService } from '../../../../framework/auth/services/auth.service';
 import { NbAuthToken } from '../../../../framework/auth/services/token/token';
 import { Observable, Subject } from 'rxjs';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { User } from 'firebase';
+import { FirebaseAPIService } from '../firebase-api.service';
+import { take } from 'rxjs/operators';
 
 @Component({
-  selector: 'nb-firebase-auth-result',
-  templateUrl: './result.component.html',
-  styleUrls: ['./result.component.scss']
+  selector: 'nb-firebase-auth-showcase',
+  templateUrl: './firebase-showcase.component.html',
+  styleUrls: ['./firebase-showcase.component.scss'],
 })
-export class FirebaseAuthResultComponent implements OnInit {
+export class FirebaseAuthShowcaseComponent implements OnInit, OnDestroy {
 
   userToken$: Observable<NbAuthToken>;
   afUser$: Observable<User | null>;
+  data$: Observable<any>;
 
   private destroyed$ = new Subject<void>();
 
@@ -22,10 +25,10 @@ export class FirebaseAuthResultComponent implements OnInit {
     private authService: NbAuthService,
     private router: Router,
     private afAuth: AngularFireAuth,
+    private firebaseApi: FirebaseAPIService,
   ) {
     this.userToken$ = this.authService.onTokenChange();
     this.afUser$ = this.afAuth.authState;
-
   }
 
   ngOnInit(): void {
@@ -46,7 +49,8 @@ export class FirebaseAuthResultComponent implements OnInit {
 
   refreshToken() {
     this.authService.refreshToken('password')
-      .subscribe((res) => console.log('result of token refresh', res));
+      .pipe(take(1))
+      .subscribe(() => {});
   }
 
   requestPassword() {
@@ -55,5 +59,15 @@ export class FirebaseAuthResultComponent implements OnInit {
 
   resetPassword() {
     this.router.navigateByUrl('firebase/reset-password');
+  }
+
+  loginWithGoogle() {
+    this.authService.authenticate('google')
+      .pipe(take(1))
+      .subscribe(() => {});
+  }
+
+  getData() {
+    this.data$ = this.firebaseApi.getAdmins();
   }
 }

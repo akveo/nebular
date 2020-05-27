@@ -5,5 +5,8 @@
  */
 
 
-export * from './strategies/firebase-password.strategy';
+export * from './strategies/password/firebase-password.strategy';
+export * from './strategies/password/firebase-password-strategy.options';
+export * from './strategies/google/firebase-google.strategy';
+export * from './strategies/google/firebase-google-strategy.options';
 export * from './firebase-auth.module';

@@ -5,21 +5,21 @@
  */
 
 import { Injectable } from '@angular/core';
-import { NbAuthStrategy } from '../../auth/strategies/auth-strategy';
-import { NbAuthResult } from '../../auth/services/auth-result';
+
 import { Observable, of as observableOf } from 'rxjs';
-import { NbAuthStrategyClass } from '../../auth/auth.options';
-import { HttpClient } from '@angular/common/http';
 import {
   firebasePasswordStrategyOptions,
-  NbFirebasePasswordStrategyOptions
+  NbFirebasePasswordStrategyOptions,
 } from './firebase-password-strategy.options';
-import { NbAuthStrategyOptions } from '../../auth/strategies/auth-strategy-options';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { fromPromise } from 'rxjs/internal-compatibility';
 import { catchError, map, switchMap, take } from 'rxjs/operators';
 import UserCredential = firebase.auth.UserCredential;
 import { User } from 'firebase';
+import { NbAuthStrategy } from '../../../auth/strategies/auth-strategy';
+import { NbAuthStrategyClass } from '../../../auth/auth.options';
+import { NbAuthStrategyOptions } from '../../../auth/strategies/auth-strategy-options';
+import { NbAuthResult } from '../../../auth/services/auth-result';
 
 
 @Injectable()
@@ -32,8 +32,7 @@ export class NbFirebasePasswordStrategy extends NbAuthStrategy {
   }
 
   constructor(
-    protected http: HttpClient,
-    protected afAuth: AngularFireAuth
+    protected afAuth: AngularFireAuth,
   ) {
     super();
   }
@@ -127,7 +126,7 @@ export class NbFirebasePasswordStrategy extends NbAuthStrategy {
       );
   }
 
-  private updatePassword(user, password, module) {
+  protected updatePassword(user, password, module) {
     return fromPromise(user.updatePassword(password))
       .pipe(
         map(token => {
@@ -144,7 +143,7 @@ export class NbFirebasePasswordStrategy extends NbAuthStrategy {
       );
   }
 
-  private refreshIdToken(user: User, module): Observable<NbAuthResult> {
+  protected refreshIdToken(user: User, module): Observable<NbAuthResult> {
     return fromPromise(user.getIdToken(true))
       .pipe(
         map(token => {
@@ -161,7 +160,7 @@ export class NbFirebasePasswordStrategy extends NbAuthStrategy {
       );
   }
 
-  private proccessFailure(error: any, module: string): Observable<NbAuthResult> {
+  protected proccessFailure(error: any, module: string): Observable<NbAuthResult> {
     return observableOf(new NbAuthResult(
       false,
       error,
@@ -170,7 +169,7 @@ export class NbFirebasePasswordStrategy extends NbAuthStrategy {
     ));
   }
 
-  private processSuccess(res: UserCredential | null, module: string): Observable<NbAuthResult> {
+  protected processSuccess(res: UserCredential | null, module: string): Observable<NbAuthResult> {
     return this.afAuth.idToken
       .pipe(map(token => {
         return new NbAuthResult(

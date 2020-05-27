@@ -3,12 +3,13 @@
  * Copyright Akveo. All Rights Reserved.
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
-import { NbAuthStrategyOptions } from '../../auth/strategies/auth-strategy-options';
-import { getDeepFromObject } from '../../auth/helpers';
+import { NbAuthStrategyOptions } from '../../../auth/strategies/auth-strategy-options';
 import {
   NbPasswordStrategyMessage,
-  NbPasswordStrategyModule
-} from '../../auth/strategies/password/password-strategy-options';
+  NbPasswordStrategyModule,
+} from '../../../auth/strategies/password/password-strategy-options';
+import { getDeepFromObject } from '../../../auth/helpers';
+
 
 export interface NbFirebasePasswordStrategyModule {
   redirect?: {
@@ -86,4 +87,5 @@ export class NbFirebasePasswordStrategyOptions extends NbAuthStrategyOptions {
   };
 }
 
+// tslint:disable-next-line:max-line-length
 export const firebasePasswordStrategyOptions: NbFirebasePasswordStrategyOptions = new NbFirebasePasswordStrategyOptions();

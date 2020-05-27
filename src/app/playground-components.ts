@@ -1833,8 +1833,8 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
       {
         path: 'result',
         link: '/firebase/result',
-        component: 'FirebaseAuthResultComponent',
-        name: 'Firebase Auth Result',
+        component: 'FirebaseAuthShowcaseComponent',
+        name: 'Firebase Auth Showcase',
       },
     ],
   },

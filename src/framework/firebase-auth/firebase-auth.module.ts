@@ -6,12 +6,14 @@
 
 
 import { NgModule } from '@angular/core';
-import { NbFirebasePasswordStrategy } from './strategies/firebase-password.strategy';
+import { NbFirebasePasswordStrategy } from './strategies/password/firebase-password.strategy';
+import { NbFirebaseGoogleStrategy } from './strategies/google/firebase-google.strategy';
 
 
 @NgModule({
   providers: [
     NbFirebasePasswordStrategy,
+    NbFirebaseGoogleStrategy,
   ],
 })
 export class FirebaseAuthModule { }

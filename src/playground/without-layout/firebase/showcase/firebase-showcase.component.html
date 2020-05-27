@@ -1,0 +1,22 @@
+<h2>Nebular token:</h2>
+<pre> {{ userToken$ | async | json }} </pre>
+
+<!--<h2>Firebase User:</h2>-->
+<!--<pre> {{ afUser$ | async | json }}</pre>-->
+
+<h2>Data from backend</h2>
+<pre>{{ data$ | async | json }}</pre>
+
+<button (click)="logout()">Logout</button>
+
+<button (click)="login()">Login with email/password</button>
+
+<button (click)="loginWithGoogle()">Login with google</button>
+
+<button (click)="requestPassword()">Request password</button>
+
+<button (click)="resetPassword()">Reset password</button>
+
+<button (click)="refreshToken()">Refresh token</button>
+
+<button (click)="getData()">Get data</button>
