@@ -48,4 +48,8 @@ export class FirebaseAuthResultComponent implements OnInit {
     this.authService.refreshToken('password')
       .subscribe((res) => console.log('result of token refresh', res));
   }
+
+  requestPassword() {
+    this.router.navigateByUrl('/firebase/request-password');
+  }
 }

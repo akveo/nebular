@@ -52,6 +52,14 @@ export class NbFirebasePasswordStrategyOptions extends NbAuthStrategyOptions {
     defaultErrors: ['Something went wrong, please try again.'],
     defaultMessages: ['Your token has been successfully refreshed.'],
   };
+  requestPassword?: boolean | NbPasswordStrategyModule = {
+    redirect: {
+      success: '/',
+      failure: null,
+    },
+    defaultErrors: ['Something went wrong, please try again.'],
+    defaultMessages: ['Reset password instructions have been sent to your email.'],
+  };
   errors?: NbPasswordStrategyMessage = {
     key: 'message',
     getter: (module: string, res, options: NbFirebasePasswordStrategyOptions) => getDeepFromObject(

@@ -57,7 +57,7 @@ export class NbFirebasePasswordStrategy extends NbAuthStrategy {
             null,
             this.getOption(`${module}.redirect.success`),
             [],
-            this.getOption('logout.defaultMessages'),
+            this.getOption(`${module}.defaultMessages`),
           )
         }),
         catchError((error) => this.proccessFailure(error, module)),
@@ -93,22 +93,24 @@ export class NbFirebasePasswordStrategy extends NbAuthStrategy {
   }
 
   requestPassword({ email }: any): Observable<NbAuthResult> {
+    const module = 'requestPassword';
     return fromPromise(this.afAuth.sendPasswordResetEmail(email))
       .pipe(
         map(() => {
           return new NbAuthResult(
-            true
+            true,
+            null,
+            this.getOption(`${module}.redirect.success`),
+            [],
+            this.getOption(`${module}.defaultMessages`),
           );
         }),
-        catchError(() => {
-          return observableOf(new NbAuthResult(
-            false,
-          ))
-        })
+        catchError((error) => this.proccessFailure(error, module)),
       );
   }
 
-  resetPassword(data?: any): Observable<NbAuthResult> {
+  resetPassword({ email }): Observable<NbAuthResult> {
+
     return undefined;
   }
 
@@ -121,7 +123,7 @@ export class NbFirebasePasswordStrategy extends NbAuthStrategy {
             null,
             this.getOption(`${module}.redirect.success`),
             [],
-            this.getOption('refreshToken.defaultMessages'),
+            this.getOption(`${module}.defaultMessages`),
             this.createToken(token),
           );
         }),

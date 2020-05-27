@@ -31,13 +31,20 @@ import { FirebaseAuthResultComponent } from './result/result.component';
       forms: {
         login: {
           strategy: 'password',
+          rememberMe: false,
+          socialLinks: [],
         },
         register: {
           strategy: 'password',
           terms: false,
+          socialLinks: [],
         },
         logout: {
           strategy: 'password',
+        },
+        requestPassword: {
+          strategy: 'password',
+          socialLinks: [],
         },
         validation: {
           password: {
@@ -72,6 +79,11 @@ import { FirebaseAuthResultComponent } from './result/result.component';
             }
           },
           logout: {
+            redirect: {
+              success: '/firebase/login',
+            }
+          },
+          requestPassword: {
             redirect: {
               success: '/firebase/login',
             }
