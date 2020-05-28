@@ -20,6 +20,7 @@ import { NbAuthStrategy } from '../../../auth/strategies/auth-strategy';
 import { NbAuthStrategyClass } from '../../../auth/auth.options';
 import { NbAuthStrategyOptions } from '../../../auth/strategies/auth-strategy-options';
 import { NbAuthResult } from '../../../auth/services/auth-result';
+import { NbAuthIllegalTokenError } from '../../../auth/services/token/token';
 
 
 @Injectable()
@@ -161,11 +162,19 @@ export class NbFirebasePasswordStrategy extends NbAuthStrategy {
   }
 
   protected proccessFailure(error: any, module: string): Observable<NbAuthResult> {
+    let errorMessages = [];
+
+    if (error instanceof NbAuthIllegalTokenError) {
+      errorMessages.push(error.message)
+    } else {
+      errorMessages.push(this.getOption('errors.getter')(module, error, this.options));
+    }
+
     return observableOf(new NbAuthResult(
       false,
       error,
       this.getOption(`${module}.redirect.failure`),
-      this.getOption('errors.getter')(module, error, this.options),
+      errorMessages,
       [],
     ));
   }
