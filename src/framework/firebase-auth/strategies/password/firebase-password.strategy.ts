@@ -166,6 +166,7 @@ export class NbFirebasePasswordStrategy extends NbAuthStrategy {
       error,
       this.getOption(`${module}.redirect.failure`),
       this.getOption('errors.getter')(module, error, this.options),
+      [],
     ));
   }
 

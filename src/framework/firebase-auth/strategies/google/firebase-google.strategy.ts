@@ -8,7 +8,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { firebaseGoolgeStrategyOptions, NbFirebaseGoogleStrategyOptions } from './firebase-google-strategy.options';
 import { Observable } from 'rxjs';
 import { fromPromise } from 'rxjs/internal-compatibility';
-import { catchError, switchMap } from 'rxjs/operators';
+import { catchError, map, switchMap } from 'rxjs/operators';
 import { NbAuthStrategyClass } from '../../../auth/auth.options';
 import { NbAuthStrategyOptions } from '../../../auth/strategies/auth-strategy-options';
 import { NbAuthResult } from '../../../auth/services/auth-result';
@@ -16,6 +16,7 @@ import { NbAuthResult } from '../../../auth/services/auth-result';
 import { NbFirebasePasswordStrategy } from '../password/firebase-password.strategy';
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
+import UserCredential = firebase.auth.UserCredential;
 
 @Injectable()
 export class NbFirebaseGoogleStrategy extends NbFirebasePasswordStrategy {
@@ -33,12 +34,15 @@ export class NbFirebaseGoogleStrategy extends NbFirebasePasswordStrategy {
   }
 
   authenticate(data?: any): Observable<NbAuthResult> {
-    const module = 'login';
+    const module = 'authenticate';
     const provider = new firebase.auth.GoogleAuthProvider();
+    const scopes = this.getOption('scopes');
+    scopes.forEach((scope) => provider.addScope(scope));
+    provider.setCustomParameters(this.getOption('customParameters'));
 
     return fromPromise(this.afAuth.signInWithPopup(provider))
       .pipe(
-        switchMap((res) => this.processSuccess(res, module)),
+        switchMap((res) => this.processSuccess(res)),
         catchError(error => this.proccessFailure(error, module)),
       );
   }
@@ -53,5 +57,19 @@ export class NbFirebaseGoogleStrategy extends NbFirebasePasswordStrategy {
 
   resetPassword(data: any = {}): Observable<NbAuthResult> {
     throw new Error('`resetPassword` is not supported by `NbFirebaseGoogleStrategy`, use `authenticate`.');
+  }
+
+  protected processSuccess(res: UserCredential | null): Observable<NbAuthResult> {
+    return this.afAuth.idToken
+      .pipe(map(token => {
+        return new NbAuthResult(
+          true,
+          res,
+          this.getOption('redirect.success'),
+          [],
+          this.getOption('defaultMessages'),
+          this.createToken(token),
+        );
+      }));
   }
 }

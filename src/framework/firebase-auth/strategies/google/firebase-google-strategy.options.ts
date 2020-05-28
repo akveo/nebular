@@ -13,30 +13,22 @@ import {
 
 
 export class NbFirebaseGoogleStrategyOptions extends NbAuthStrategyOptions {
-  login?: boolean | NbFirebasePasswordStrategyModule = {
-    redirect: {
-      success: '/',
-      failure: null,
-    },
-    defaultErrors: ['Login/Email combination is not correct, please try again.'],
-    defaultMessages: ['You have been successfully logged in.'],
+  redirect?: { success?: string; failure?: string } = {
+    success: '/',
+    failure: null,
   };
   errors?: NbPasswordStrategyMessage = {
     key: 'message',
-    getter: (module: string, res, options: NbFirebasePasswordStrategyOptions) => getDeepFromObject(
+    getter: (module: string, res, options: NbFirebaseGoogleStrategyOptions) => getDeepFromObject(
       res,
       options.errors.key,
-      options[module].defaultErrors,
+      options.defaultErrors,
     ),
   };
-  messages?: NbPasswordStrategyMessage = {
-    key: 'messages',
-    getter: (module: string, res, options: NbFirebasePasswordStrategyOptions) => getDeepFromObject(
-      res.body,
-      options.messages.key,
-      options[module].defaultMessages,
-    ),
-  };
+  scopes?: string[] = [];
+  customParameters?: { [key: string]: string } = {};
+  defaultErrors?: any[] = ['Something went wrong, please try again.'];
+  defaultMessages?: any[] = ['You have been successfully authenticated.'];
 }
 
 export const firebaseGoolgeStrategyOptions: NbFirebaseGoogleStrategyOptions = new NbFirebaseGoogleStrategyOptions();
