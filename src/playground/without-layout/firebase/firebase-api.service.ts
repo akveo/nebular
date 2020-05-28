@@ -9,7 +9,7 @@ export class FirebaseAPIService {
   ) {
   }
 
-  getAdmins() {
-    return this.db.object('/admins/').valueChanges();
+  getGreeting() {
+    return this.db.object('/greeting/').valueChanges();
   }
 }

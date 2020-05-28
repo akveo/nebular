@@ -6,7 +6,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { firebaseGoolgeStrategyOptions, NbFirebaseGoogleStrategyOptions } from './firebase-google-strategy.options';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { fromPromise } from 'rxjs/internal-compatibility';
 import { catchError, map, switchMap } from 'rxjs/operators';
 import { NbAuthStrategyClass } from '../../../auth/auth.options';

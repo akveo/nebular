@@ -6,10 +6,11 @@ import { CommonModule } from '@angular/common';
 import { NbAuthJWTToken, NbAuthModule } from '@nebular/auth';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireModule } from '@angular/fire';
-import { FirebaseAuthShowcaseComponent } from './showcase/firebase-showcase.component';
+import { PasswordAuthShowcaseComponent } from './password-auth-showcase/password-auth-showcase.component';
 import { FirebaseAPIService } from './firebase-api.service';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { NbFirebaseGoogleStrategy } from '../../../framework/firebase-auth/strategies/google/firebase-google.strategy';
+import { GoogleAuthShowcaseComponent } from './google-auth-showcase/google-auth-showcase.component';
 
 @NgModule({
   imports: [
@@ -111,7 +112,8 @@ import { NbFirebaseGoogleStrategy } from '../../../framework/firebase-auth/strat
   ],
   declarations: [
     FirebasePlaygroundComponent,
-    FirebaseAuthShowcaseComponent,
+    PasswordAuthShowcaseComponent,
+    GoogleAuthShowcaseComponent,
   ],
   providers: [
     FirebaseAPIService,
