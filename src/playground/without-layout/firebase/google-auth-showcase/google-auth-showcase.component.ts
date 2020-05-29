@@ -32,10 +32,20 @@ export class GoogleAuthShowcaseComponent {
       .subscribe((authResult: NbAuthResult) => {});
   }
 
-  login() {
+  loginWithGoogle() {
     this.authService.authenticate('google')
       .pipe(take(1))
-      .subscribe((authResult: NbAuthResult) => {});
+      .subscribe((authResult: NbAuthResult) => {
+        console.log(authResult);
+      });
+  }
+
+  loginWithFacebook() {
+    this.authService.authenticate('facebook')
+      .pipe(take(1))
+      .subscribe((authResult: NbAuthResult) => {
+        console.log(authResult);
+      });
   }
 
   getData() {

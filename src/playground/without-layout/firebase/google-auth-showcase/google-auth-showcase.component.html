@@ -18,8 +18,14 @@
 
 <button
   *ngIf="!(isAuthenticated$ | async)"
-  (click)="login()">
+  (click)="loginWithGoogle()">
   Login with google
+</button>
+
+<button
+  *ngIf="!(isAuthenticated$ | async)"
+  (click)="loginWithFacebook()">
+  Login with facebook
 </button>
 
 <button (click)="getData()">Get data from Firebase</button>

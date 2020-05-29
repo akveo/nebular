@@ -5,7 +5,7 @@ import { Observable, of } from 'rxjs';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { FirebaseAPIService } from '../firebase-api.service';
-import { catchError, share, take } from 'rxjs/operators';
+import { catchError, share, take, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'nb-password-auth-showcase',
@@ -16,7 +16,6 @@ export class PasswordAuthShowcaseComponent {
 
   userToken$: Observable<NbAuthToken>;
   isAuthenticated$: Observable<boolean>;
-  // afUser$: Observable<User | null>;
   data$: Observable<any>;
 
   constructor(
@@ -25,9 +24,8 @@ export class PasswordAuthShowcaseComponent {
     private afAuth: AngularFireAuth,
     private firebaseApi: FirebaseAPIService,
   ) {
-    this.userToken$ = this.authService.onTokenChange();
-    this.isAuthenticated$ = this.authService.onAuthenticationChange();
-    // this.afUser$ = this.afAuth.authState;
+    this.userToken$ = this.authService.onTokenChange().pipe(tap((isAuth) => console.log(isAuth)));
+    this.isAuthenticated$ = this.authService.isAuthenticated().pipe(tap((isAuth) => console.log(isAuth)));
   }
 
   logout() {

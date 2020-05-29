@@ -11,12 +11,11 @@ import { FirebaseAPIService } from './firebase-api.service';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { NbFirebaseGoogleStrategy } from '../../../framework/firebase-auth/strategies/google/firebase-google.strategy';
 import { GoogleAuthShowcaseComponent } from './google-auth-showcase/google-auth-showcase.component';
+import { NbFirebaseFacebookStrategy } from '../../../framework/firebase-auth/strategies/facebook/firebase-facebook.strategy';
 
 @NgModule({
   imports: [
     CommonModule,
-    // developers test firebase app
-    // TODO: change for some better alternative
     AngularFireModule.initializeApp({
       apiKey: 'AIzaSyBEvySH74-sISCTkCC6lXUd3zzYj26GjRk',
       authDomain: 'auth-sample-f48f1.firebaseapp.com',
@@ -73,16 +72,16 @@ import { GoogleAuthShowcaseComponent } from './google-auth-showcase/google-auth-
         NbFirebasePasswordStrategy.setup({
           name: 'password',
           token: {
-            class: NbAuthJWTToken, // TODO: should be custom token?
+            class: NbAuthJWTToken,
           },
           login: {
             redirect: {
-              success: '/firebase/result',
+              success: '/firebase/password-showcase',
             },
           },
           register: {
             redirect: {
-              success: '/firebase/result',
+              success: '/firebase/password-showcase',
             },
           },
           logout: {
@@ -103,6 +102,12 @@ import { GoogleAuthShowcaseComponent } from './google-auth-showcase/google-auth-
         }),
         NbFirebaseGoogleStrategy.setup({
           name: 'google',
+          token: {
+            class: NbAuthJWTToken, // TODO: should be custom token?
+          },
+        }),
+        NbFirebaseFacebookStrategy.setup({
+          name: 'facebook',
           token: {
             class: NbAuthJWTToken, // TODO: should be custom token?
           },
