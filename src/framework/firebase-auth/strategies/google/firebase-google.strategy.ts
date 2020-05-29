@@ -5,25 +5,26 @@
  */
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { firebaseGoolgeStrategyOptions, NbFirebaseGoogleStrategyOptions } from './firebase-google-strategy.options';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { fromPromise } from 'rxjs/internal-compatibility';
-import { catchError, map, switchMap } from 'rxjs/operators';
+import { catchError, switchMap } from 'rxjs/operators';
 import { NbAuthStrategyClass } from '../../../auth/auth.options';
 import { NbAuthStrategyOptions } from '../../../auth/strategies/auth-strategy-options';
 import { NbAuthResult } from '../../../auth/services/auth-result';
 
-import { NbFirebasePasswordStrategy } from '../password/firebase-password.strategy';
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
-import UserCredential = firebase.auth.UserCredential;
+import { NbFirebaseBaseStrategy } from '../base/firebase-base.strategy';
+import {
+  NbFirebaseIdentityProviderStrategyOptions
+} from '../base/firebase-identity-provider-strategy.options';
 
 @Injectable()
-export class NbFirebaseGoogleStrategy extends NbFirebasePasswordStrategy {
+export class NbFirebaseGoogleStrategy extends NbFirebaseBaseStrategy {
 
-  protected defaultOptions: NbFirebaseGoogleStrategyOptions = firebaseGoolgeStrategyOptions;
+  protected defaultOptions: NbFirebaseIdentityProviderStrategyOptions = new NbFirebaseIdentityProviderStrategyOptions();
 
-  static setup(options: NbFirebaseGoogleStrategyOptions): [NbAuthStrategyClass, NbAuthStrategyOptions] {
+  static setup(options: NbFirebaseIdentityProviderStrategyOptions): [NbAuthStrategyClass, NbAuthStrategyOptions] {
     return [NbFirebaseGoogleStrategy, options];
   }
 
@@ -42,34 +43,8 @@ export class NbFirebaseGoogleStrategy extends NbFirebasePasswordStrategy {
 
     return fromPromise(this.afAuth.signInWithPopup(provider))
       .pipe(
-        switchMap((res) => this.processSuccess(res)),
+        switchMap((res) => this.processSuccess(res, module)),
         catchError(error => this.proccessFailure(error, module)),
       );
-  }
-
-  register(data?: any): Observable<NbAuthResult> {
-    throw new Error('`register` is not supported by `NbFirebaseGoogleStrategy`, use `authenticate`.');
-  }
-
-  requestPassword(data?: any): Observable<NbAuthResult> {
-    throw new Error('`requestPassword` is not supported by `NbFirebaseGoogleStrategy`, use `authenticate`.');
-  }
-
-  resetPassword(data: any = {}): Observable<NbAuthResult> {
-    throw new Error('`resetPassword` is not supported by `NbFirebaseGoogleStrategy`, use `authenticate`.');
-  }
-
-  protected processSuccess(res: UserCredential | null): Observable<NbAuthResult> {
-    return this.afAuth.idToken
-      .pipe(map(token => {
-        return new NbAuthResult(
-          true,
-          res,
-          this.getOption('redirect.success'),
-          [],
-          this.getOption('defaultMessages'),
-          this.createToken(token),
-        );
-      }));
   }
 }

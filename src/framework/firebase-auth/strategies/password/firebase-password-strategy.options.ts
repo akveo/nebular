@@ -10,18 +10,8 @@ import {
 } from '../../../auth/strategies/password/password-strategy-options';
 import { getDeepFromObject } from '../../../auth/helpers';
 
-
-export interface NbFirebasePasswordStrategyModule {
-  redirect?: {
-    success?: string | null;
-    failure?: string | null;
-  };
-  defaultErrors?: string[],
-  defaultMessages?: string[],
-}
-
 export class NbFirebasePasswordStrategyOptions extends NbAuthStrategyOptions {
-  register?: boolean | NbFirebasePasswordStrategyModule = {
+  register?: boolean | NbPasswordStrategyModule = {
     redirect: {
       success: '/',
       failure: null,
@@ -29,7 +19,7 @@ export class NbFirebasePasswordStrategyOptions extends NbAuthStrategyOptions {
     defaultErrors: ['Something went wrong, please try again.'],
     defaultMessages: ['You have been successfully registered.'],
   };
-  login?: boolean | NbFirebasePasswordStrategyModule = {
+  login?: boolean | NbPasswordStrategyModule = {
     redirect: {
       success: '/',
       failure: null,
@@ -37,7 +27,7 @@ export class NbFirebasePasswordStrategyOptions extends NbAuthStrategyOptions {
     defaultErrors: ['Login/Email combination is not correct, please try again.'],
     defaultMessages: ['You have been successfully logged in.'],
   };
-  logout?: boolean | NbFirebasePasswordStrategyModule = {
+  logout?: boolean | NbPasswordStrategyModule = {
     redirect: {
       success: '/',
       failure: null,

@@ -11,31 +11,22 @@ import {
   firebasePasswordStrategyOptions,
   NbFirebasePasswordStrategyOptions,
 } from './firebase-password-strategy.options';
-import { AngularFireAuth } from '@angular/fire/auth';
 import { fromPromise } from 'rxjs/internal-compatibility';
 import { catchError, map, switchMap, take } from 'rxjs/operators';
-import UserCredential = firebase.auth.UserCredential;
 import { User } from 'firebase';
-import { NbAuthStrategy } from '../../../auth/strategies/auth-strategy';
 import { NbAuthStrategyClass } from '../../../auth/auth.options';
 import { NbAuthStrategyOptions } from '../../../auth/strategies/auth-strategy-options';
 import { NbAuthResult } from '../../../auth/services/auth-result';
-import { NbAuthIllegalTokenError } from '../../../auth/services/token/token';
+import { NbFirebaseBaseStrategy } from '../base/firebase-base.strategy';
 
 
 @Injectable()
-export class NbFirebasePasswordStrategy extends NbAuthStrategy {
+export class NbFirebasePasswordStrategy extends NbFirebaseBaseStrategy {
 
   protected defaultOptions: NbFirebasePasswordStrategyOptions = firebasePasswordStrategyOptions;
 
   static setup(options: NbFirebasePasswordStrategyOptions): [NbAuthStrategyClass, NbAuthStrategyOptions] {
     return [NbFirebasePasswordStrategy, options];
-  }
-
-  constructor(
-    protected afAuth: AngularFireAuth,
-  ) {
-    super();
   }
 
   authenticate({ email, password }: any): Observable<NbAuthResult> {
@@ -47,28 +38,11 @@ export class NbFirebasePasswordStrategy extends NbAuthStrategy {
       );
   }
 
-  logout(): Observable<NbAuthResult> {
-    const module = 'logout';
-    return fromPromise(this.afAuth.signOut())
-      .pipe(
-        map(() => {
-          return new NbAuthResult(
-            true,
-            null,
-            this.getOption(`${module}.redirect.success`),
-            [],
-            this.getOption(`${module}.defaultMessages`),
-          )
-        }),
-        catchError((error) => this.proccessFailure(error, module)),
-      );
-  }
-
   refreshToken(data?: any): Observable<NbAuthResult> {
     const module = 'refreshToken';
     return this.afAuth.authState
       .pipe(
-        take(1), // need this to prevent loop
+        take(1),
         switchMap(user => {
           if (user == null) {
             return observableOf(new NbAuthResult(
@@ -159,37 +133,5 @@ export class NbFirebasePasswordStrategy extends NbAuthStrategy {
         }),
         catchError(error => this.proccessFailure(error, module)),
       );
-  }
-
-  protected proccessFailure(error: any, module: string): Observable<NbAuthResult> {
-    let errorMessages = [];
-
-    if (error instanceof NbAuthIllegalTokenError) {
-      errorMessages.push(error.message)
-    } else {
-      errorMessages.push(this.getOption('errors.getter')(module, error, this.options));
-    }
-
-    return observableOf(new NbAuthResult(
-      false,
-      error,
-      this.getOption(`${module}.redirect.failure`),
-      errorMessages,
-      [],
-    ));
-  }
-
-  protected processSuccess(res: UserCredential | null, module: string): Observable<NbAuthResult> {
-    return this.afAuth.idToken
-      .pipe(map(token => {
-        return new NbAuthResult(
-          true,
-          res,
-          this.getOption(`${module}.redirect.success`),
-          [],
-          this.getOption('messages.getter')(module, res, this.options),
-          this.createToken(token),
-        );
-      }));
   }
 }
