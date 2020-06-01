@@ -1,5 +1,5 @@
 {
-  "name": "@nebular/eva-icons",
+  "name": "@nebular/firebase-auth",
   "version": "5.0.0",
   "description": "@nebular/firebase-auth",
   "author": "akveo",
@@ -28,7 +28,8 @@
     "@angular/core": "^9.0.0",
     "@nebular/auth": "^5.0.0",
     "rxjs": "^6.5.1",
-    "firebase": "^7.14.5"
+    "firebase": "^7.14.5",
+    "@angular/fire": "^6.0.0"
   },
   "sideEffects": false
 }

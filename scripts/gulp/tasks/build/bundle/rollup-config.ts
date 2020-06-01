@@ -47,6 +47,7 @@ const ROLLUP_GLOBALS = {
   '@nebular/moment': 'nb.moment',
   '@nebular/date-fns': 'nb.date-fns',
   '@nebular/eva-icons': 'nb.eva-icons',
+  '@nebular/firebase-auth': 'nb.eva-icons',
 
   'eva-icons': 'eva-icons',
 };

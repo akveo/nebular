@@ -8,7 +8,7 @@ import { capitalize, dasherize } from '@angular-devkit/core/src/utils/strings';
 
 import { BUILD_DIR } from './config';
 
-type NebularPackage = 'auth' | 'bootstrap' | 'dateFns' | 'evaIcons' | 'moment' | 'theme' | 'security';
+type NebularPackage = 'auth' | 'bootstrap' | 'dateFns' | 'evaIcons' | 'moment' | 'theme' | 'security' | 'firebase-auth';
 
 interface PackagePrefix {
   prefix: string;
@@ -26,7 +26,16 @@ interface StringReplacement {
 
 const ROLLUP_CONFIG_DIR = './scripts/gulp/tasks/bundle';
 const ROLLUP_CONFIG_PATH = `${ROLLUP_CONFIG_DIR}/rollup-config.ts`;
-const NEBULAR_PACKAGES: NebularPackage[] = ['auth', 'bootstrap', 'dateFns', 'evaIcons', 'moment', 'theme', 'security'];
+const NEBULAR_PACKAGES: NebularPackage[] = [
+  'auth',
+  'bootstrap',
+  'dateFns',
+  'evaIcons',
+  'moment',
+  'theme',
+  'security',
+  'firebase-auth',
+];
 
 /**
  * Reads package prefix and all package names passed as command line arguments.
