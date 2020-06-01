@@ -10,8 +10,7 @@ import { PasswordAuthShowcaseComponent } from './password-auth-showcase/password
 import { FirebaseAPIService } from './firebase-api.service';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { NbFirebaseGoogleStrategy } from '../../../framework/firebase-auth/strategies/google/firebase-google.strategy';
-import { GoogleAuthShowcaseComponent } from './google-auth-showcase/google-auth-showcase.component';
-import { NbFirebaseFacebookStrategy } from '../../../framework/firebase-auth/strategies/facebook/firebase-facebook.strategy';
+import { IdentityProvidersAuthShowcaseComponent } from './identity-proders-auth-showcase/identity-providers-auth-showcase.component';
 
 @NgModule({
   imports: [
@@ -76,40 +75,34 @@ import { NbFirebaseFacebookStrategy } from '../../../framework/firebase-auth/str
           },
           login: {
             redirect: {
-              success: '/firebase/password-showcase',
+              success: 'example/firebase/password-showcase',
             },
           },
           register: {
             redirect: {
-              success: '/firebase/password-showcase',
+              success: 'example/firebase/password-showcase',
             },
           },
           logout: {
             redirect: {
-              success: '/firebase/login',
+              success: 'example/firebase/login',
             },
           },
           requestPassword: {
             redirect: {
-              success: '/firebase/login',
+              success: 'example/firebase/login',
             },
           },
           resetPassword: {
             redirect: {
-              success: '/firebase/login',
+              success: 'example/firebase/login',
             },
           },
         }),
         NbFirebaseGoogleStrategy.setup({
           name: 'google',
           token: {
-            class: NbAuthJWTToken, // TODO: should be custom token?
-          },
-        }),
-        NbFirebaseFacebookStrategy.setup({
-          name: 'facebook',
-          token: {
-            class: NbAuthJWTToken, // TODO: should be custom token?
+            class: NbAuthJWTToken,
           },
         }),
       ],
@@ -118,7 +111,7 @@ import { NbFirebaseFacebookStrategy } from '../../../framework/firebase-auth/str
   declarations: [
     FirebasePlaygroundComponent,
     PasswordAuthShowcaseComponent,
-    GoogleAuthShowcaseComponent,
+    IdentityProvidersAuthShowcaseComponent,
   ],
   providers: [
     FirebaseAPIService,

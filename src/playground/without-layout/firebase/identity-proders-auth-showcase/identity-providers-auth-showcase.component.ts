@@ -8,10 +8,10 @@ import { NbAuthResult } from '../../../../framework/auth/services/auth-result';
 
 @Component({
   selector: 'app-google-auth-showcase',
-  templateUrl: './google-auth-showcase.component.html',
-  styleUrls: ['./google-auth-showcase.component.scss']
+  templateUrl: './identity-providers-auth-showcase.component.html',
+  styleUrls: ['./identity-providers-auth-showcase.component.scss']
 })
-export class GoogleAuthShowcaseComponent {
+export class IdentityProvidersAuthShowcaseComponent {
 
   userToken$: Observable<NbAuthToken>;
   isAuthenticated$: Observable<boolean>;
@@ -35,17 +35,7 @@ export class GoogleAuthShowcaseComponent {
   loginWithGoogle() {
     this.authService.authenticate('google')
       .pipe(take(1))
-      .subscribe((authResult: NbAuthResult) => {
-        console.log(authResult);
-      });
-  }
-
-  loginWithFacebook() {
-    this.authService.authenticate('facebook')
-      .pipe(take(1))
-      .subscribe((authResult: NbAuthResult) => {
-        console.log(authResult);
-      });
+      .subscribe((authResult: NbAuthResult) => {});
   }
 
   getData() {

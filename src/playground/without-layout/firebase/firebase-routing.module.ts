@@ -17,7 +17,7 @@ import {
 } from '@nebular/auth';
 import { FirebasePlaygroundComponent } from './firebase-playground.component';
 import { PasswordAuthShowcaseComponent } from './password-auth-showcase/password-auth-showcase.component';
-import { GoogleAuthShowcaseComponent } from './google-auth-showcase/google-auth-showcase.component';
+import { IdentityProvidersAuthShowcaseComponent } from './identity-proders-auth-showcase/identity-providers-auth-showcase.component';
 
 
 export const routes: Routes = [
@@ -63,8 +63,8 @@ export const routes: Routes = [
     component: PasswordAuthShowcaseComponent,
   },
   {
-    path: 'google-showcase',
-    component: GoogleAuthShowcaseComponent,
+    path: 'social-auth-showcase',
+    component: IdentityProvidersAuthShowcaseComponent,
   },
   // {
   //   path: 'acl/acl-test.component',
