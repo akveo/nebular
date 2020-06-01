@@ -917,6 +917,22 @@ export const structure = [
       },
       {
         type: 'page',
+        name: 'Firebase Authentication',
+        children: [
+          {
+            type: 'block',
+            block: 'markdown',
+            source: 'auth/firebase-authentication.md',
+          },
+          {
+            type: 'block',
+            block: 'component',
+            source: 'NbPasswordAuthStrategy',
+          },
+        ],
+      },
+      {
+        type: 'page',
         name: 'NbAuthService',
         children: [
           {
