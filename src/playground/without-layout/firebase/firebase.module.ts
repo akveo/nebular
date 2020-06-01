@@ -3,14 +3,16 @@ import { NbFirebasePasswordStrategy, FirebaseAuthModule } from '@nebular/firebas
 import { FirebasePlaygroundRoutingModule } from './firebase-routing.module';
 import { FirebasePlaygroundComponent } from './firebase-playground.component';
 import { CommonModule } from '@angular/common';
-import { NbAuthJWTToken, NbAuthModule } from '@nebular/auth';
+import { NbAuthModule } from '@nebular/auth';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireModule } from '@angular/fire';
 import { PasswordAuthShowcaseComponent } from './password-auth-showcase/password-auth-showcase.component';
 import { FirebaseAPIService } from './firebase-api.service';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { NbFirebaseGoogleStrategy } from '../../../framework/firebase-auth/strategies/google/firebase-google.strategy';
-import { IdentityProvidersAuthShowcaseComponent } from './identity-proders-auth-showcase/identity-providers-auth-showcase.component';
+import {
+  IdentityProvidersAuthShowcaseComponent,
+} from './identity-proders-auth-showcase/identity-providers-auth-showcase.component';
 
 @NgModule({
   imports: [

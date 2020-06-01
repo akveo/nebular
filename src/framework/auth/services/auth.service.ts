@@ -6,7 +6,7 @@
 import { Inject, Injectable } from '@angular/core';
 
 import { Observable, of as observableOf } from 'rxjs';
-import { switchMap, map, tap } from 'rxjs/operators';
+import { switchMap, map } from 'rxjs/operators';
 
 import { NbAuthStrategy } from '../strategies/auth-strategy';
 import { NB_AUTH_STRATEGIES } from '../auth.options';

@@ -59,7 +59,7 @@ export abstract class NbFirebaseBaseStrategy extends NbAuthStrategy {
   }
 
   protected proccessFailure(error: any, module: string): Observable<NbAuthResult> {
-    let errorMessages = [];
+    const errorMessages = [];
 
     if (error instanceof NbAuthIllegalTokenError) {
       errorMessages.push(error.message)

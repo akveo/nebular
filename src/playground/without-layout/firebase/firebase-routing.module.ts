@@ -17,7 +17,9 @@ import {
 } from '@nebular/auth';
 import { FirebasePlaygroundComponent } from './firebase-playground.component';
 import { PasswordAuthShowcaseComponent } from './password-auth-showcase/password-auth-showcase.component';
-import { IdentityProvidersAuthShowcaseComponent } from './identity-proders-auth-showcase/identity-providers-auth-showcase.component';
+import {
+  IdentityProvidersAuthShowcaseComponent,
+} from './identity-proders-auth-showcase/identity-providers-auth-showcase.component';
 
 
 export const routes: Routes = [

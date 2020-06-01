@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { FirebaseAPIService } from '../firebase-api.service';
 import { NbAuthService } from '../../../../framework/auth/services/auth.service';
@@ -9,7 +9,7 @@ import { NbAuthResult } from '../../../../framework/auth/services/auth-result';
 @Component({
   selector: 'app-google-auth-showcase',
   templateUrl: './identity-providers-auth-showcase.component.html',
-  styleUrls: ['./identity-providers-auth-showcase.component.scss']
+  styleUrls: ['./identity-providers-auth-showcase.component.scss'],
 })
 export class IdentityProvidersAuthShowcaseComponent {
 

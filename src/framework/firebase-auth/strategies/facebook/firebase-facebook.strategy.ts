@@ -15,7 +15,7 @@ import { NbAuthResult } from '../../../auth/services/auth-result';
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
 import {
-  NbFirebaseIdentityProviderStrategyOptions
+  NbFirebaseIdentityProviderStrategyOptions,
 } from '../base/firebase-identity-provider-strategy.options';
 import { NbFirebaseBaseStrategy } from '../base/firebase-base.strategy';
 

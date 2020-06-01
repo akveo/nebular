@@ -7,7 +7,7 @@
 import { NbAuthStrategyOptions } from '../../../auth/strategies/auth-strategy-options';
 import {
   NbPasswordStrategyMessage,
-  NbPasswordStrategyModule
+  NbPasswordStrategyModule,
 } from '../../../auth/strategies/password/password-strategy-options';
 import { NbAuthJWTToken } from '../../../auth/services/token/token';
 
@@ -37,7 +37,9 @@ export class NbFirebaseIdentityProviderStrategyOptions extends NbAuthStrategyOpt
   };
   messages?: NbPasswordStrategyMessage = {
     key: 'message',
-    getter: (module: string, res, options: NbFirebaseIdentityProviderStrategyOptions) => options[module].defaultMessages,
+    getter: (module: string, res, options: NbFirebaseIdentityProviderStrategyOptions) => {
+      return options[module].defaultMessages;
+    },
   };
   scopes?: string[] = [];
   customParameters?: { [key: string]: string } = {};
