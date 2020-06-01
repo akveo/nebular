@@ -1,10 +1,13 @@
 ## Firebase authentication with Nebular Auth
-@nebualar/firebase-auth allows authentication in firebase applications with nebular/auth.
+
+`@nebualar/firebase-auth` allows authentication in firebase applications with `@nebular/auth`.
 The package provides the following strategies:
-  - NbFirebasePasswordStrategy - authentication with email/password
-  - NbFirebaseGoogleStrategy - authentication with google accounts
-  - NbFirebaseFacebookStrategy - authentication with facebook accounts
-  - NbFirebaseTwitteStrategy - authentication with twitter accounts
+  - `NbFirebasePasswordStrategy` - authentication with email/password
+  - `NbFirebaseGoogleStrategy` - authentication with google accounts
+  - `NbFirebaseFacebookStrategy` - authentication with facebook accounts
+  - `NbFirebaseTwitteStrategy` - authentication with twitter accounts
+
+`@nebular/auth` package is sponsored by [GO-ER](www.go-er.com) and What Now Travel.
 
 ## Installation
 
@@ -193,3 +196,4 @@ A complete code example could be found on [GitHub](https://github.com/akveo/nebu
 And here the playground examples available to play around with
  - [Firebase Nebular Password Example](/example/firebase/password-showcase)
  - [Firebase Nebular Social Authentication Providers Example](/example/firebase/social-auth-showcase)
+
