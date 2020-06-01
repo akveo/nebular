@@ -8,8 +8,12 @@ import {
   NbPasswordStrategyMessage,
   NbPasswordStrategyModule
 } from '../../../auth/strategies/password/password-strategy-options';
+import { NbAuthJWTToken } from '../../../auth/services/token/token';
 
 export class NbFirebaseIdentityProviderStrategyOptions extends NbAuthStrategyOptions {
+  token? = {
+    class: NbAuthJWTToken,
+  };
   logout?: boolean | NbPasswordStrategyModule = {
     redirect: {
       success: '/',

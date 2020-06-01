@@ -70,9 +70,6 @@ import { IdentityProvidersAuthShowcaseComponent } from './identity-proders-auth-
       strategies: [
         NbFirebasePasswordStrategy.setup({
           name: 'password',
-          token: {
-            class: NbAuthJWTToken,
-          },
           login: {
             redirect: {
               success: 'example/firebase/password-showcase',
@@ -101,9 +98,6 @@ import { IdentityProvidersAuthShowcaseComponent } from './identity-proders-auth-
         }),
         NbFirebaseGoogleStrategy.setup({
           name: 'google',
-          token: {
-            class: NbAuthJWTToken,
-          },
         }),
       ],
     }),

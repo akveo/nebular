@@ -9,8 +9,12 @@ import {
   NbPasswordStrategyModule,
 } from '../../../auth/strategies/password/password-strategy-options';
 import { getDeepFromObject } from '../../../auth/helpers';
+import { NbAuthJWTToken } from '../../../auth/services/token/token';
 
 export class NbFirebasePasswordStrategyOptions extends NbAuthStrategyOptions {
+  token? = {
+    class: NbAuthJWTToken,
+  };
   register?: boolean | NbPasswordStrategyModule = {
     redirect: {
       success: '/',
