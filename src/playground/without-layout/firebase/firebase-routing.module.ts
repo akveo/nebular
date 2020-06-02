@@ -69,20 +69,6 @@ export const routes: Routes = [
     path: 'social-auth-showcase',
     component: IdentityProvidersAuthShowcaseComponent,
   },
-  // {
-  //   path: 'acl/acl-test.component',
-  //   component: AclTestComponent,
-  // },
-  // {
-  //   path: 'auth-guard.service',
-  //   canActivate: [AuthGuard],
-  //   component: AuthPlaygroundComponent,
-  // },
-  // {
-  //   path: 'api-calls.component',
-  //   canActivate: [AuthGuard],
-  //   component: PlaygroundApiCallsComponent,
-  // },
 ];
 
 @NgModule({
