@@ -11,7 +11,7 @@ import { from, Observable } from 'rxjs';
 import { catchError, switchMap } from 'rxjs/operators';
 
 import { NbFirebaseBaseStrategy } from '../base/firebase-base.strategy';
-import { NbFirebaseIdentityProviderStrategyOptions, } from '../base/firebase-identity-provider-strategy.options';
+import { NbFirebaseIdentityProviderStrategyOptions } from '../base/firebase-identity-provider-strategy.options';
 
 import * as firebase from 'firebase/app';
 import 'firebase/auth';

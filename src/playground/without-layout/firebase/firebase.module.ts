@@ -9,7 +9,9 @@ import { FirebaseAuthModule, NbFirebasePasswordStrategy, NbFirebaseGoogleStrateg
 import { FirebaseAPIService } from './firebase-api.service';
 import { FirebasePlaygroundComponent } from './firebase-playground.component';
 import { FirebasePlaygroundRoutingModule } from './firebase-routing.module';
-import { IdentityProvidersAuthShowcaseComponent, } from './identity-proders-auth-showcase/identity-providers-auth-showcase.component';
+import {
+  IdentityProvidersAuthShowcaseComponent,
+} from './identity-proders-auth-showcase/identity-providers-auth-showcase.component';
 import { PasswordAuthShowcaseComponent } from './password-auth-showcase/password-auth-showcase.component';
 
 @NgModule({
