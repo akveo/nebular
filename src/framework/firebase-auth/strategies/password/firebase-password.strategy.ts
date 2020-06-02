@@ -5,19 +5,16 @@
  */
 
 import { Injectable } from '@angular/core';
+import { User } from 'firebase';
+import { Observable, of as observableOf, from } from 'rxjs';
+import { catchError, map, switchMap, take } from 'rxjs/operators';
+import { NbAuthStrategyOptions, NbAuthStrategyClass, NbAuthResult } from '@nebular/auth';
 
-import { Observable, of as observableOf } from 'rxjs';
+import { NbFirebaseBaseStrategy } from '../base/firebase-base.strategy';
 import {
   firebasePasswordStrategyOptions,
   NbFirebasePasswordStrategyOptions,
 } from './firebase-password-strategy.options';
-import { fromPromise } from 'rxjs/internal-compatibility';
-import { catchError, map, switchMap, take } from 'rxjs/operators';
-import { User } from 'firebase';
-import { NbAuthStrategyClass } from '../../../auth/auth.options';
-import { NbAuthStrategyOptions } from '../../../auth/strategies/auth-strategy-options';
-import { NbAuthResult } from '../../../auth/services/auth-result';
-import { NbFirebaseBaseStrategy } from '../base/firebase-base.strategy';
 
 
 @Injectable()
@@ -31,7 +28,7 @@ export class NbFirebasePasswordStrategy extends NbFirebaseBaseStrategy {
 
   authenticate({ email, password }: any): Observable<NbAuthResult> {
     const module = 'login';
-    return fromPromise(this.afAuth.signInWithEmailAndPassword(email, password))
+    return from(this.afAuth.signInWithEmailAndPassword(email, password))
       .pipe(
         switchMap((res) => this.processSuccess(res, module)),
         catchError((error) => this.proccessFailure(error, module)),
@@ -59,7 +56,7 @@ export class NbFirebasePasswordStrategy extends NbFirebaseBaseStrategy {
 
   register({ email, password }: any): Observable<NbAuthResult> {
     const module = 'register';
-    return fromPromise(this.afAuth.createUserWithEmailAndPassword(email, password))
+    return from(this.afAuth.createUserWithEmailAndPassword(email, password))
       .pipe(
         switchMap((res) => this.processSuccess(res, module)),
         catchError((error) => this.proccessFailure(error, module)),
@@ -68,7 +65,7 @@ export class NbFirebasePasswordStrategy extends NbFirebaseBaseStrategy {
 
   requestPassword({ email }: any): Observable<NbAuthResult> {
     const module = 'requestPassword';
-    return fromPromise(this.afAuth.sendPasswordResetEmail(email))
+    return from(this.afAuth.sendPasswordResetEmail(email))
       .pipe(
         map(() => {
           return new NbAuthResult(
@@ -102,7 +99,7 @@ export class NbFirebasePasswordStrategy extends NbFirebaseBaseStrategy {
   }
 
   protected updatePassword(user, password, module) {
-    return fromPromise(user.updatePassword(password))
+    return from(user.updatePassword(password))
       .pipe(
         map(token => {
           return new NbAuthResult(
@@ -119,7 +116,7 @@ export class NbFirebasePasswordStrategy extends NbFirebaseBaseStrategy {
   }
 
   protected refreshIdToken(user: User, module): Observable<NbAuthResult> {
-    return fromPromise(user.getIdToken(true))
+    return from(user.getIdToken(true))
       .pipe(
         map(token => {
           return new NbAuthResult(

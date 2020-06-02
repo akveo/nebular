@@ -6,19 +6,15 @@
 
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { Observable } from 'rxjs';
-import { fromPromise } from 'rxjs/internal-compatibility';
+import { from, Observable } from 'rxjs';
 import { catchError, switchMap } from 'rxjs/operators';
-import { NbAuthStrategyClass } from '../../../auth/auth.options';
-import { NbAuthStrategyOptions } from '../../../auth/strategies/auth-strategy-options';
-import { NbAuthResult } from '../../../auth/services/auth-result';
+import { NbAuthStrategyClass, NbAuthResult, NbAuthStrategyOptions } from '@nebular/auth';
+
+import { NbFirebaseBaseStrategy } from '../base/firebase-base.strategy';
+import { NbFirebaseIdentityProviderStrategyOptions, } from '../base/firebase-identity-provider-strategy.options';
 
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
-import { NbFirebaseBaseStrategy } from '../base/firebase-base.strategy';
-import {
-  NbFirebaseIdentityProviderStrategyOptions,
-} from '../base/firebase-identity-provider-strategy.options';
 
 @Injectable()
 export class NbFirebaseGoogleStrategy extends NbFirebaseBaseStrategy {
@@ -42,7 +38,7 @@ export class NbFirebaseGoogleStrategy extends NbFirebaseBaseStrategy {
     scopes.forEach((scope) => provider.addScope(scope));
     provider.setCustomParameters(this.getOption('customParameters'));
 
-    return fromPromise(this.afAuth.signInWithPopup(provider))
+    return from(this.afAuth.signInWithPopup(provider))
       .pipe(
         switchMap((res) => this.processSuccess(res, module)),
         catchError(error => this.proccessFailure(error, module)),

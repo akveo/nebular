@@ -4,12 +4,12 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { NbAuthStrategyOptions } from '../../../auth/strategies/auth-strategy-options';
 import {
   NbPasswordStrategyMessage,
   NbPasswordStrategyModule,
-} from '../../../auth/strategies/password/password-strategy-options';
-import { NbAuthJWTToken } from '../../../auth/services/token/token';
+  NbAuthJWTToken,
+  NbAuthStrategyOptions,
+} from '@nebular/auth';
 
 export class NbFirebaseIdentityProviderStrategyOptions extends NbAuthStrategyOptions {
   token? = {

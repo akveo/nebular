@@ -1,18 +1,16 @@
-import { NgModule } from '@angular/core';
-import { NbFirebasePasswordStrategy, FirebaseAuthModule } from '@nebular/firebase-auth';
-import { FirebasePlaygroundRoutingModule } from './firebase-routing.module';
-import { FirebasePlaygroundComponent } from './firebase-playground.component';
 import { CommonModule } from '@angular/common';
-import { NbAuthModule } from '@nebular/auth';
-import { AngularFireAuthModule } from '@angular/fire/auth';
+import { NgModule } from '@angular/core';
 import { AngularFireModule } from '@angular/fire';
-import { PasswordAuthShowcaseComponent } from './password-auth-showcase/password-auth-showcase.component';
-import { FirebaseAPIService } from './firebase-api.service';
+import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
-import { NbFirebaseGoogleStrategy } from '../../../framework/firebase-auth/strategies/google/firebase-google.strategy';
-import {
-  IdentityProvidersAuthShowcaseComponent,
-} from './identity-proders-auth-showcase/identity-providers-auth-showcase.component';
+import { NbAuthModule } from '@nebular/auth';
+import { FirebaseAuthModule, NbFirebasePasswordStrategy, NbFirebaseGoogleStrategy } from '@nebular/firebase-auth';
+
+import { FirebaseAPIService } from './firebase-api.service';
+import { FirebasePlaygroundComponent } from './firebase-playground.component';
+import { FirebasePlaygroundRoutingModule } from './firebase-routing.module';
+import { IdentityProvidersAuthShowcaseComponent, } from './identity-proders-auth-showcase/identity-providers-auth-showcase.component';
+import { PasswordAuthShowcaseComponent } from './password-auth-showcase/password-auth-showcase.component';
 
 @NgModule({
   imports: [

@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { NbAuthService } from '../../../../framework/auth/services/auth.service';
-import { NbAuthToken } from '../../../../framework/auth/services/token/token';
-import { Observable, of } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FirebaseAPIService } from '../firebase-api.service';
+import { Observable, of } from 'rxjs';
 import { catchError, share, take } from 'rxjs/operators';
+import { NbAuthService, NbAuthToken } from '@nebular/auth';
+
+import { FirebaseAPIService } from '../firebase-api.service';
 
 @Component({
   selector: 'nb-password-auth-showcase',

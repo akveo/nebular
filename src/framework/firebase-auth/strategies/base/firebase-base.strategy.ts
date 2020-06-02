@@ -5,29 +5,24 @@
  */
 
 import { Injectable } from '@angular/core';
-
-import { Observable, of as observableOf } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { fromPromise } from 'rxjs/internal-compatibility';
+import { Observable, of as observableOf, from } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
+import { NbAuthResult, NbAuthIllegalTokenError, NbAuthStrategy } from '@nebular/auth';
+
 import UserCredential = firebase.auth.UserCredential;
-import { NbAuthStrategy } from '../../../auth/strategies/auth-strategy';
-import { NbAuthResult } from '../../../auth/services/auth-result';
-import { NbAuthIllegalTokenError } from '../../../auth/services/token/token';
 
 
 @Injectable()
 export abstract class NbFirebaseBaseStrategy extends NbAuthStrategy {
 
-  constructor(
-    protected afAuth: AngularFireAuth,
-  ) {
+  constructor(protected afAuth: AngularFireAuth) {
     super();
   }
 
   logout(): Observable<NbAuthResult> {
     const module = 'logout';
-    return fromPromise(this.afAuth.signOut())
+    return from(this.afAuth.signOut())
       .pipe(
         map(() => {
           return new NbAuthResult(

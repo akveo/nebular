@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { FirebaseAPIService } from '../firebase-api.service';
-import { NbAuthService } from '../../../../framework/auth/services/auth.service';
-import { NbAuthToken } from '../../../../framework/auth/services/token/token';
 import { catchError, share, take } from 'rxjs/operators';
-import { NbAuthResult } from '../../../../framework/auth/services/auth-result';
+import { NbAuthResult, NbAuthService, NbAuthToken } from '@nebular/auth';
+
+import { FirebaseAPIService } from '../firebase-api.service';
 
 @Component({
   selector: 'app-google-auth-showcase',
@@ -15,7 +14,6 @@ export class IdentityProvidersAuthShowcaseComponent {
 
   userToken$: Observable<NbAuthToken>;
   isAuthenticated$: Observable<boolean>;
-  // afUser$: Observable<User | null>;
   data$: Observable<any>;
 
   constructor(
