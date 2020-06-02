@@ -80,21 +80,20 @@ export class NbFirebasePasswordStrategy extends NbFirebaseBaseStrategy {
       );
   }
 
-  resetPassword({ password }): Observable<NbAuthResult> {
+  resetPassword({ code, password }): Observable<NbAuthResult> {
     const module = 'resetPassword';
-    return this.afAuth.authState
+    return from(this.afAuth.confirmPasswordReset(code, password))
       .pipe(
-        switchMap(user => {
-          if (user == null) {
-            return observableOf(new NbAuthResult(
-              false,
-              null,
-              this.getOption(`${module}.redirect.failure`),
-              ['There is no logged in user so the reset of the password isn\'t possible'],
-            ));
-          }
-          return this.updatePassword(user, password, module);
+        map(() => {
+          return new NbAuthResult(
+            true,
+            null,
+            this.getOption(`${module}.redirect.success`),
+            [],
+            this.getOption(`${module}.defaultMessages`),
+          );
         }),
+        catchError((error) => this.proccessFailure(error, module)),
       );
   }
 
