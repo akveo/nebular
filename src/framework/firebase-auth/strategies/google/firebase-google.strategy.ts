@@ -5,7 +5,6 @@
  */
 
 import { Injectable } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/auth';
 import { from, Observable } from 'rxjs';
 import { catchError, switchMap } from 'rxjs/operators';
 import { NbAuthStrategyClass, NbAuthResult, NbAuthStrategyOptions } from '@nebular/auth';
@@ -23,12 +22,6 @@ export class NbFirebaseGoogleStrategy extends NbFirebaseBaseStrategy {
 
   static setup(options: NbFirebaseIdentityProviderStrategyOptions): [NbAuthStrategyClass, NbAuthStrategyOptions] {
     return [NbFirebaseGoogleStrategy, options];
-  }
-
-  constructor(
-    protected afAuth: AngularFireAuth,
-  ) {
-    super(afAuth);
   }
 
   authenticate(data?: any): Observable<NbAuthResult> {
