@@ -34,12 +34,12 @@ import { PasswordAuthShowcaseComponent } from './password-auth-showcase/password
       forms: {
         login: {
           strategy: 'password',
-          rememberMe: false,
+          rememberMe: true,
           socialLinks: [],
         },
         register: {
           strategy: 'password',
-          terms: false,
+          terms: true,
           socialLinks: [],
         },
         logout: {
