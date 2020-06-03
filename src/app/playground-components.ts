@@ -1798,6 +1798,53 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
     ],
   },
   {
+    path: 'firebase',
+    children: [
+      {
+        path: 'login',
+        link: '/firebase/login',
+        component: 'NbLoginComponent',
+        name: 'Nb Login',
+      },
+      {
+        path: 'register',
+        link: '/firebase/register',
+        component: 'NbRegisterComponent',
+        name: 'Nb Register',
+      },
+      {
+        path: 'logout',
+        link: '/firebase/logout',
+        component: 'NbLogoutComponent',
+        name: 'Nb Logout',
+      },
+      {
+        path: 'request-password',
+        link: '/firebase/request-password',
+        component: 'NbRequestPasswordComponent',
+        name: 'Nb Request Password',
+      },
+      {
+        path: 'reset-password',
+        link: '/firebase/reset-password',
+        component: 'NbResetPasswordComponent',
+        name: 'Nb Reset Password',
+      },
+      {
+        path: 'password-showcase',
+        link: '/firebase/password-showcase',
+        component: 'PasswordAuthShowcaseComponent',
+        name: 'Password Auth Showcase',
+      },
+      {
+        path: 'social-auth-showcase',
+        link: '/firebase/social-auth-showcase',
+        component: 'IdentityProvidersAuthShowcaseComponent',
+        name: 'Identity Providers Auth Showcase',
+      },
+    ],
+  },
+  {
     path: 'smart-home',
     children: [
       {

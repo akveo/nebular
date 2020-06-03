@@ -50,6 +50,10 @@ const routes: Route[] = [
         loadChildren: () => import('./auth/auth.module').then(m => m.AuthPlaygroundModule),
       },
       {
+        path: 'firebase',
+        loadChildren: () => import('./firebase/firebase.module').then(m => m.FirebasePlaygroundModule),
+      },
+      {
         path: 'smart-home',
         loadChildren: () => import('./smart-home/app.module').then(m => m.AppModule),
       },

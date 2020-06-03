@@ -16,6 +16,8 @@ Nebular modules are distributed as separated `npm` packages:
   - Authentication components (login/register/reset password/restore password).
   - Multiple configurable authentication Strategies (backend connectors).
   - Helpers for token management (storing, passing with HTTP requests, etc).
+- Nebular Auth for Firebase `@nebular/firebase-auth
+  - module for authentication in firebase applications with nebular/auth
 - Nebular Security `@nebular/security` 
   - roles and permissions management.
 - Nebular Moment `@nebular/moment`

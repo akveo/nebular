@@ -12,4 +12,5 @@ export const JS_PACKAGES = [
   'moment',
   'security',
   'theme',
+  'firebase-auth',
 ];
