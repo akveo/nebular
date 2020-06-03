@@ -450,6 +450,12 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         name: 'Datepicker Showcase',
       },
       {
+        path: 'date-timepicker-showcase.component',
+        link: '/datepicker/date-timepicker-showcase.component',
+        component: 'DateTimepickerShowcaseComponent',
+        name: 'Date Timepicker Showcase',
+      },
+      {
         path: 'datepicker-validation.component',
         link: '/datepicker/datepicker-validation.component',
         component: 'DatepickerValidationComponent',
@@ -460,6 +466,17 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         link: '/datepicker/rangepicker-showcase.component',
         component: 'RangepickerShowcaseComponent',
         name: 'Rangepicker Showcase',
+      },
+    ],
+  },
+  {
+    path: 'timepicker',
+    children: [
+      {
+        path: 'timepicker-showcase.component',
+        link: '/timepicker/timepicker-showcase.component',
+        component: 'TimepickerShowcaseComponent',
+        name: 'Timepicker Showcase',
       },
     ],
   },

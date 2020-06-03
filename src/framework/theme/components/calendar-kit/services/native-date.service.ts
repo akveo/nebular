@@ -5,6 +5,7 @@
  */
 
 import { Inject, Injectable, LOCALE_ID } from '@angular/core';
+import { FormatWidth, getLocaleTimeFormat } from '@angular/common';
 import {
   DatePipe,
   FormStyle,
@@ -39,8 +40,16 @@ export class NbNativeDateService extends NbDateService<Date> {
     return !isNaN(this.parse(date, format).getTime());
   }
 
+  isValidTimeString(date: string, format: string): boolean {
+    return this.isValidDateString(date, format);
+  }
+
   today(): Date {
     return new Date();
+  }
+
+  getLocaleTimeFormat(): string {
+    return getLocaleTimeFormat(this.locale, FormatWidth.Short);
   }
 
   getDate(date: Date): number {
@@ -101,6 +110,18 @@ export class NbNativeDateService extends NbDateService<Date> {
     // because of the date overflow.
     month.setDate(Math.min(date.getDate(), this.getMonthEnd(month).getDate()));
     return month;
+  }
+
+  getHour(date: Date): number {
+    return date.getHours();
+  }
+
+  getMinute(date: Date): number {
+    return date.getMinutes();
+  }
+
+  getSecond(date: Date): number {
+    return date.getSeconds();
   }
 
   addYear(date: Date, num: number): Date {
@@ -166,5 +187,9 @@ export class NbNativeDateService extends NbDateService<Date> {
 
   getWeekNumber(date: Date): number {
     return parseInt(this.datePipe.transform(date, 'w'), 10);
+  }
+
+  getCurrentTime(format: string): string {
+    return this.datePipe.transform(this.today(), format);
   }
 }

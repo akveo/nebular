@@ -1,0 +1,56 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+@mixin nb-timepicker-theme() {
+  .nb-time-picker-container {
+    .list-item {
+      &:first-child {
+        border-top: none;
+      }
+
+      &:hover {
+        background-color: nb-theme(time-picker-hover-background-color);
+        color: nb-theme(time-picker-hover-color);
+      }
+
+      &:focus {
+        background-color: nb-theme(time-picker-focus-background-color);
+        color: nb-theme(time-picker-focus-color);
+      }
+
+      &.active {
+        background-color: nb-theme(time-picker-active-background-color);
+        color: nb-theme(time-picker-active-color);
+      }
+
+      &.selected {
+        background-color: nb-theme(time-picker-active-background-color);
+        color: nb-theme(time-picker-active-color);
+      }
+
+      color: nb-theme(time-picker-color);
+      font-size: nb-theme(timepicker-cell-text-font-size);
+      font-weight: nb-theme(timepicker-cell-text-font-weight);
+    }
+
+    .values-list {
+      &:not(:last-of-type) {
+        border-right: 1px solid nb-theme(timepicker-basic-color);
+      }
+
+      @include nb-scrollbars(
+          nb-theme(card-scrollbar-color),
+          nb-theme(card-scrollbar-background-color),
+          nb-theme(card-scrollbar-width));
+
+    }
+
+    .text-hint {
+      &:not(:last-child) {
+        border-right: 1px solid nb-theme(timepicker-basic-color);
+      }
+    }
+  }
+}

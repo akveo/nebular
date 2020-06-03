@@ -178,6 +178,7 @@ export * from './components/window/window-ref';
 export * from './components/window/window.options';
 export * from './components/window/window.component';
 export * from './components/window/windows-container.component';
+export * from './components/timepicker/timepicker.module';
 export * from './components/datepicker/datepicker.module';
 export * from './components/datepicker/datepicker.directive';
 export * from './components/datepicker/datepicker-adapter';

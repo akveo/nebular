@@ -36,6 +36,27 @@ describe('moment-date-service', () => {
     expect(isValid).toBeFalsy();
   });
 
+  it('should validate as correct if time string is valid according to the hours format', () => {
+    const isValid = dateService.isValidTimeString('14:23:00', 'HH:mm:ss');
+    expect(isValid).toBeTruthy();
+  });
+
+  it('should validate as correct if time string is valid according to the twelve hours format',
+    () => {
+    const isValid = dateService.isValidTimeString('04:23:00 AM', 'hh:mm:ss A');
+    expect(isValid).toBeTruthy();
+  });
+
+  it('should validate as incorrect if time string is invalid according to the format', () => {
+    const isValid = dateService.isValidTimeString('24:23:00 AM', 'hh:mm:ss A');
+    expect(isValid).toBeFalsy();
+  });
+
+  it('should validate as incorrect if time string is completely incorrect', () => {
+    const isValid = dateService.isValidTimeString('hello, it is a time string', 'hh:mm:ss A');
+    expect(isValid).toBeFalsy();
+  });
+
   it('should create today date', () => {
     const today = dateService.today();
     expect(dateService.isSameDay(today, moment())).toBeTruthy();
@@ -49,6 +70,21 @@ describe('moment-date-service', () => {
   it('should get month', () => {
     const month = moment().year(2018).month(5).date(15);
     expect(dateService.getMonth(month)).toBe(5);
+  });
+
+  it('should get hour', () => {
+    const hour = moment().year(2018).month(5).date(15).hour(12);
+    expect(dateService.getHour(hour)).toBe(12);
+  });
+
+  it('should get minute', () => {
+    const minute = moment().year(2018).month(5).date(15).hour(12).minute(10);
+    expect(dateService.getMinute(minute)).toBe(10);
+  });
+
+  it('should get second', () => {
+    const second = moment().year(2018).month(5).date(15).hour(12).minute(10).second(24);
+    expect(dateService.getSecond(second)).toBe(24);
   });
 
   it('should get year', () => {

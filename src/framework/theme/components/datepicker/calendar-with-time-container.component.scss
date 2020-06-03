@@ -1,0 +1,52 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+*/
+:host {
+  ::ng-deep nb-card.nb-time-picker-container {
+    flex: 1 0 0;
+
+    border-radius: 0;
+    width: auto;
+    border-right: 0;
+    border-bottom: 0;
+  }
+
+  .picker-footer {
+    padding: 0.0625rem;
+    margin-top: -0.0625rem;
+  }
+
+  .picker-body {
+    align-items: stretch;
+    display: flex;
+    padding: 0 0 0.0625rem;
+
+    nb-base-calendar {
+      margin: -0.0625rem;
+
+      ::ng-deep nb-card {
+        border-radius: 0;
+      }
+    }
+  }
+
+  .timepicker-single-column-width {
+    width: 5rem;
+  }
+
+  .timepicker-multiple-column-width {
+    width: 13.875rem;
+  }
+
+  .picker-title {
+    padding: 1.25rem;
+  }
+
+  .timepicker-section {
+    display: flex;
+    flex-direction: column;
+  }
+
+}

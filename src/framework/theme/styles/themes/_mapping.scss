@@ -2292,6 +2292,17 @@ $eva-mapping: (
   datepicker-border-radius: border-radius,
   datepicker-shadow: none,
 
+  time-picker-color: text-basic-color,
+  time-picker-hover-background-color: color-basic-300,
+  time-picker-hover-color: color-basic-800,
+  time-picker-focus-background-color: color-basic-400,
+  time-picker-focus-color: color-basic-800,
+  time-picker-active-background-color: color-primary-default,
+  time-picker-active-color: text-control-color,
+  timepicker-cell-text-font-size: text-subtitle-font-size,
+  timepicker-cell-text-font-weight: text-subtitle-font-weight,
+  timepicker-basic-color: border-basic-color-3,
+
   radio-width: 1.25rem,
   radio-height: 1.25rem,
   radio-border-style: solid,

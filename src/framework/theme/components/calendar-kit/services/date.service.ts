@@ -50,14 +50,39 @@ export abstract class NbDateService<D> {
   abstract isValidDateString(date: string, format: string): boolean;
 
   /**
+   * Returns true if time string is valid time string according to the provided format.
+   * */
+  abstract isValidTimeString(date: string, format: string): boolean;
+
+  /**
    * Returns today date.
    * */
   abstract today(): D;
 
   /**
+   * Gets the time format based on locale
+   * */
+  abstract getLocaleTimeFormat(): string;
+
+  /**
    * Gets the date of the month component of the given date.
    */
   abstract getDate(date: D): number;
+
+  /**
+   * Gets the hour component of the given date.
+   */
+  abstract getHour(date: D): number;
+
+  /**
+   * Gets the minute component of the given date.
+   */
+  abstract getMinute(date: D): number;
+
+  /**
+   * Gets the second component of the given date.
+   */
+  abstract getSecond(date: D): number;
 
   /**
    * Gets the month component of the given date.
@@ -181,4 +206,6 @@ export abstract class NbDateService<D> {
   abstract getId(): string;
 
   abstract getWeekNumber(date: D): number;
+
+  abstract getCurrentTime(format: string): string;
 }

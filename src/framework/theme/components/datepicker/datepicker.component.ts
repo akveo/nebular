@@ -47,6 +47,7 @@ import {
 import { NbDateService } from '../calendar-kit/services/date.service';
 import { NB_DATE_SERVICE_OPTIONS, NbDatepicker, NbPickerValidatorConfig } from './datepicker.directive';
 import { convertToBoolProperty, NbBooleanInput } from '../helpers';
+import { NbCalendarWithTime, NbCalendarWithTimeComponent } from './calendar-with-time.component';
 
 
 /**
@@ -631,3 +632,60 @@ export class NbRangepickerComponent<D>
     }
   }
 }
+
+@Component({
+  selector: 'nb-date-timepicker',
+  template: '',
+})
+export class NbDateTimePickerComponent<D>
+  extends NbBasePickerComponent<D, NbCalendarWithTime, NbCalendarWithTimeComponent<D>>
+  implements OnInit {
+  protected pickerClass: Type<NbCalendarWithTimeComponent<D>> = NbCalendarWithTimeComponent;
+
+  @Input() isTwelveHoursFormat: boolean;
+  @Input() withSeconds: boolean;
+  @Input() useFullTimeFormat: boolean;
+  @Input() step: number;
+
+  ngOnInit() {
+    this.format = this.buildTimeFormat();
+  }
+
+  protected patchWithInputs() {
+    this.picker.useFullTimeFormat = this.useFullTimeFormat;
+    this.picker.isTwelveHoursFormat = this.isTwelveHoursFormat;
+    this.picker.withSeconds = this.withSeconds;
+    this.picker.step = this.step;
+    this.picker.timeFormat = `${this.isTwelveHoursFormat ? 'hh' : 'HH'}` +
+      `:mm${this.withSeconds && !this.useFullTimeFormat ?
+        ':ss' : ''}${this.isTwelveHoursFormat ? ' a' : ''}`;
+    super.patchWithInputs();
+  }
+
+  protected get pickerValueChange(): Observable<any> {
+    return this.picker.dateChange;
+  }
+
+  get value(): any {
+    return this.picker ? this.picker.date : undefined;
+  }
+
+  set value(date: any) {
+    if (!this.picker) {
+      this.queue = date;
+      return;
+    }
+
+    if (date) {
+      this.visibleDate = date;
+      this.picker.visibleDate = date;
+      this.picker.date = date;
+    }
+  }
+
+  buildTimeFormat(): string {
+    return `yyyy-MM-dd ${this.isTwelveHoursFormat ? 'hh' : 'HH'}:mm${this.withSeconds && !this.useFullTimeFormat &&
+      !this.isTwelveHoursFormat ? ':ss' : ''}${this.isTwelveHoursFormat ? ' a' : ''}`;
+  }
+}
+

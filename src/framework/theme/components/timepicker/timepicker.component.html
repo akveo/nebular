@@ -1,0 +1,81 @@
+<nb-card *nbPortal class="nb-time-picker-container">
+  <nb-card-header class="column-header">
+    <div class="text-hint">{{useFullTimeFormat ? 'Time' : 'Hr'}}</div>
+    <div *ngIf="!useFullTimeFormat" class="text-hint">Min</div>
+    <div *ngIf="withSeconds && !useFullTimeFormat" class="text-hint">Sec</div>
+    <div *ngIf="isTwelveHoursFormat && !useFullTimeFormat" class="text-hint">Am/Pm</div>
+  </nb-card-header>
+  <div class="picker-body">
+    <nb-list *ngIf="useFullTimeFormat" class="values-list">
+      <nb-list-item
+        class="list-item"
+        [ngClass]="{'selected': item === selectedTime.fullTime}"
+        *ngFor="let item of fullTimeOptions">
+        <nb-timepicker-cell
+          [value]="item"
+          [selected]="item === selectedTime.fullTime"
+          [type]="fullTime"
+          (select)="select($event)">
+        </nb-timepicker-cell>
+      </nb-list-item>
+    </nb-list>
+    <nb-list *ngIf="!useFullTimeFormat" class="values-list">
+      <nb-list-item
+        class="list-item"
+        [ngClass]="{'selected': item === selectedTime.hour || (item === '12' && selectedTime.hour === '00')}"
+        *ngFor="let item of hoursColumnOptions">
+        <nb-timepicker-cell
+          [value]="item"
+          [selected]="item === selectedTime.hour"
+          [type]="hour"
+          (select)="select($event)">
+        </nb-timepicker-cell>
+      </nb-list-item>
+    </nb-list>
+    <nb-list *ngIf="!useFullTimeFormat" class="values-list">
+      <nb-list-item
+        class="list-item"
+        [ngClass]="{'selected': item === selectedTime.minute}"
+        *ngFor="let item of minutesColumnOptions">
+        <nb-timepicker-cell
+          [value]="item"
+          [selected]="item === selectedTime.minute"
+          [type]="minute"
+          (select)="select($event)">
+        </nb-timepicker-cell>
+      </nb-list-item>
+    </nb-list>
+    <nb-list *ngIf="showSeconds()" class="values-list">
+      <nb-list-item
+        class="list-item"
+        [ngClass]="{'selected': item === selectedTime.sec}"
+        *ngFor="let item of secondsColumnOptions">
+        <nb-timepicker-cell
+          [value]="item"
+          [selected]="item === selectedTime.sec"
+          [type]="sec"
+          (select)="select($event)">
+        </nb-timepicker-cell>
+      </nb-list-item>
+    </nb-list>
+    <nb-list *ngIf="isTwelveHoursFormat && !useFullTimeFormat" class="values-list">
+      <nb-list-item
+        class="list-item"
+        [ngClass]="{'selected': item  === selectedTime.ampm}"
+        *ngFor="let item of ampmColumnOptions">
+        <nb-timepicker-cell
+          [value]="item"
+          [selected]="item === selectedTime.ampm"
+          [type]="ampm"
+          (select)="select($event)">
+        </nb-timepicker-cell>
+      </nb-list-item>
+    </nb-list>
+  </div>
+  <nb-card-footer *ngIf="showFooter" class="actions-footer">
+    <nb-calendar-actions
+      (setCurrentTime)="setCurrentTime()"
+      (saveValue)="saveValue()"
+    ></nb-calendar-actions>
+  </nb-card-footer>
+</nb-card>

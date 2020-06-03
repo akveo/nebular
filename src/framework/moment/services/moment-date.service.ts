@@ -69,6 +69,10 @@ export class NbMomentDateService extends NbDateService<Moment> {
     return '';
   }
 
+  getLocaleTimeFormat(): string {
+    return moment.localeData().longDateFormat('LT');
+  }
+
   getDate(date: Moment): number {
     return this.clone(date).date();
   }
@@ -87,6 +91,18 @@ export class NbMomentDateService extends NbDateService<Moment> {
 
   getMonth(date: Moment): number {
     return this.clone(date).month();
+  }
+
+  getHour(date: Moment): number {
+    return this.clone(date).hour();
+  }
+
+  getMinute(date: Moment): number {
+    return this.clone(date).minute();
+  }
+
+  getSecond(date: Moment): number {
+    return this.clone(date).second();
   }
 
   getMonthEnd(date: Moment): Moment {
@@ -138,6 +154,10 @@ export class NbMomentDateService extends NbDateService<Moment> {
     return moment(date, format).isValid();
   }
 
+  isValidTimeString(date: string, format: string): boolean {
+    return moment(date, format, true).isValid();
+  }
+
   parse(date: string, format: string): Moment {
     return moment(date, format);
   }
@@ -170,5 +190,9 @@ export class NbMomentDateService extends NbDateService<Moment> {
 
   getWeekNumber(date: Moment): number {
     return date.week();
+  }
+
+  getCurrentTime(format: string): string {
+    return moment().format(format);
   }
 }
