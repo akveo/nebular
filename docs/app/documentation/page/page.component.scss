@@ -189,6 +189,10 @@
           line-height: 1.5;
         }
 
+        .backend-bundle-link {
+          color: nb-theme(color-success-500);
+        }
+
         &.note-info {
           color: $note-fg-info;
           background-color: $note-bg-info;
