@@ -4,7 +4,7 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { NbAuthModule } from '@nebular/auth';
-import { FirebaseAuthModule, NbFirebasePasswordStrategy, NbFirebaseGoogleStrategy } from '@nebular/firebase-auth';
+import { NbFirebaseAuthModule, NbFirebasePasswordStrategy, NbFirebaseGoogleStrategy } from '@nebular/firebase-auth';
 
 import { FirebaseAPIService } from './firebase-api.service';
 import { FirebasePlaygroundComponent } from './firebase-playground.component';
@@ -29,7 +29,7 @@ import { PasswordAuthShowcaseComponent } from './password-auth-showcase/password
     AngularFireAuthModule,
     AngularFireDatabaseModule,
     FirebasePlaygroundRoutingModule,
-    FirebaseAuthModule,
+    NbFirebaseAuthModule,
     NbAuthModule.forRoot({
       forms: {
         login: {
