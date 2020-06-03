@@ -21,4 +21,4 @@ import { NbFirebaseTwitteStrategy } from './strategies/twitter/firebase-twitter.
     NbFirebaseTwitteStrategy,
   ],
 })
-export class FirebaseAuthModule { }
+export class NbFirebaseAuthModule { }
