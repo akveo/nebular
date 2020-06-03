@@ -924,11 +924,6 @@ export const structure = [
             block: 'markdown',
             source: 'auth/firebase-authentication.md',
           },
-          {
-            type: 'block',
-            block: 'component',
-            source: 'NbPasswordAuthStrategy',
-          },
         ],
       },
       {
