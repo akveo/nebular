@@ -24,7 +24,7 @@ The package provides the following strategies:
 Install Nebular Auth and Nebular Firebase Auth.
  
  ```sh
-   npm i @nebular/eva-icons firebase @angular\fire
+   npm i @nebular/auth @angular\firebase-auth
  ```
 
 Import the NbAuthModule with some firebase strategies, in that example we use NbFirebasePasswordStrategy.
@@ -145,15 +145,6 @@ Nebular Firebase Auth for now provides strategies for authentication with Google
 These strategies share the same settings structure and default settings value.
 
 Strategies settings:
-
- <div class="note note-info">
-  <div class="note-title">Note</div>
-  <div class="note-body">
-    There is no need to copy over the whole object to change the settings you need.
-     Also, this.getOption call won't work outside of the default options declaration (which is inside of the NbPasswordAuthStrategy class),
-      so you have to replace it with a custom helper function if you need it.
-  </div>
-</div>
 
 ```ts
 export class NbFirebaseIdentityProviderStrategyOptions extends NbAuthStrategyOptions {
