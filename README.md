@@ -2,7 +2,7 @@
 
 [Documentation](https://hubs.ly/H0n4S800) | [Stackblitz Template](https://stackblitz.com/github/akveo/nebular-seed) | [UI Bakery](https://hubs.ly/H0n4S8d0) - Angular UI Builder
 
-Nebular is a customizable Angular 8 UI Library with a focus on beautiful design and ability to adapt it to your brand easily. It comes with 4 stunning visual themes, a powerful theming engine with runtime theme switching and support of custom css properties mode. Nebular is based on Eva Design System specifications.
+Nebular is a customizable Angular 9 UI Library with a focus on beautiful design and ability to adapt it to your brand easily. It comes with 4 stunning visual themes, a powerful theming engine with runtime theme switching and support of custom css properties mode. Nebular is based on Eva Design System specifications.
 
 <a href="https://hubs.ly/H0n4RHQ0"><img src="https://i.imgur.com/C8ZN4SA.jpg"></a>
 
@@ -36,8 +36,10 @@ If you want to have more control over setup process you can [use manual setup gu
 
 ## Starters
 
-- [ngx-admin](http://github.com/akveo/ngx-admin) - application based on Nebular modules with beautiful IOT components. [Live Demo](https://hubs.ly/H0n4D8Z0).
+- [ngx-admin](http://github.com/akveo/ngx-admin) - 20k+ stars application based on Nebular modules with beautiful E-Commerce & IOT components, for boosting your developing process. [Live Demo](https://hubs.ly/H0n4D8Z0).
 - [ngx-admin-starter](https://github.com/akveo/ngx-admin/tree/starter-kit) - clean application based on Nebular modules with a limited number of additional dependencies.
+- [Backend Bundles](https://hubs.ly/H0qwSbT0) - easy way to integrate ngx-admin with any backend (PHP, .Net, .Net Core, Java etc. )
+<a href="https://hubs.ly/H0qwSbT0"><img src="https://i.imgur.com/qbtASmP.png"></a>
 
 ## License
 [MIT](LICENSE.txt) license.
