@@ -33,27 +33,27 @@ export abstract class NbFirebaseBaseStrategy extends NbAuthStrategy {
             this.getOption(`${module}.defaultMessages`),
           )
         }),
-        catchError((error) => this.proccessFailure(error, module)),
+        catchError((error) => this.processFailure(error, module)),
       );
   }
 
   register(data?: any): Observable<NbAuthResult> {
-    throw new Error(`\`register\` is not supported by \`${this.constructor.name}\`, use \`authenticate\`.`);
+    throw new Error(`'register' is not supported by '${this.constructor.name}', use 'authenticate'.`);
   }
 
   requestPassword(data?: any): Observable<NbAuthResult> {
-    throw new Error(`\`requestPassword\` is not supported by \`${this.constructor.name}\`, use \`authenticate\`.`);
+    throw new Error(`'requestPassword' is not supported by '${this.constructor.name}', use 'authenticate'.`);
   }
 
   resetPassword(data: any = {}): Observable<NbAuthResult> {
-    throw new Error(`\`resetPassword\` is not supported by \`${this.constructor.name}\`, use \`authenticate\`.`);
+    throw new Error(`'resetPassword' is not supported by '${this.constructor.name}', use 'authenticate'.`);
   }
 
   refreshToken(data: any = {}): Observable<NbAuthResult> {
-    throw new Error(`\`refreshToken\` is not supported by \`${this.constructor.name}\`, use \`authenticate\`.`);
+    throw new Error(`'refreshToken' is not supported by '${this.constructor.name}', use 'authenticate'.`);
   }
 
-  protected proccessFailure(error: any, module: string): Observable<NbAuthResult> {
+  protected processFailure(error: any, module: string): Observable<NbAuthResult> {
     const errorMessages = [];
 
     if (error instanceof NbAuthIllegalTokenError) {

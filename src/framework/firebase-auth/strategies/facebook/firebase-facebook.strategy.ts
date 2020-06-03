@@ -36,7 +36,7 @@ export class NbFirebaseFacebookStrategy extends NbFirebaseBaseStrategy {
     return from(this.afAuth.signInWithPopup(provider))
       .pipe(
         switchMap((res) => this.processSuccess(res, module)),
-        catchError(error => this.proccessFailure(error, module)),
+        catchError(error => this.processFailure(error, module)),
       );
   }
 }

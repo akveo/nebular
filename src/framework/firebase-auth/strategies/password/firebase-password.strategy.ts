@@ -31,7 +31,7 @@ export class NbFirebasePasswordStrategy extends NbFirebaseBaseStrategy {
     return from(this.afAuth.signInWithEmailAndPassword(email, password))
       .pipe(
         switchMap((res) => this.processSuccess(res, module)),
-        catchError((error) => this.proccessFailure(error, module)),
+        catchError((error) => this.processFailure(error, module)),
       );
   }
 
@@ -59,7 +59,7 @@ export class NbFirebasePasswordStrategy extends NbFirebaseBaseStrategy {
     return from(this.afAuth.createUserWithEmailAndPassword(email, password))
       .pipe(
         switchMap((res) => this.processSuccess(res, module)),
-        catchError((error) => this.proccessFailure(error, module)),
+        catchError((error) => this.processFailure(error, module)),
       );
   }
 
@@ -76,7 +76,7 @@ export class NbFirebasePasswordStrategy extends NbFirebaseBaseStrategy {
             this.getOption(`${module}.defaultMessages`),
           );
         }),
-        catchError((error) => this.proccessFailure(error, module)),
+        catchError((error) => this.processFailure(error, module)),
       );
   }
 
@@ -93,7 +93,7 @@ export class NbFirebasePasswordStrategy extends NbFirebaseBaseStrategy {
             this.getOption(`${module}.defaultMessages`),
           );
         }),
-        catchError((error) => this.proccessFailure(error, module)),
+        catchError((error) => this.processFailure(error, module)),
       );
   }
 
@@ -110,7 +110,7 @@ export class NbFirebasePasswordStrategy extends NbFirebaseBaseStrategy {
             this.createToken(token),
           );
         }),
-        catchError(error => this.proccessFailure(error, module)),
+        catchError(error => this.processFailure(error, module)),
       );
   }
 
@@ -127,7 +127,7 @@ export class NbFirebasePasswordStrategy extends NbFirebaseBaseStrategy {
             this.createToken(token),
           );
         }),
-        catchError(error => this.proccessFailure(error, module)),
+        catchError(error => this.processFailure(error, module)),
       );
   }
 }
