@@ -7,7 +7,7 @@ The package provides the following strategies:
   - `NbFirebaseFacebookStrategy` - authentication with facebook accounts
   - `NbFirebaseTwitteStrategy` - authentication with twitter accounts
 
-`@nebular/auth` package is sponsored by [GO-ER](www.go-er.com) and What Now Travel.
+`@nebular/auth` package is sponsored by [GO-ER](https://go-er.com) and [What Now Travel](https://whatnow.travel/).
 
 ## Installation
 
