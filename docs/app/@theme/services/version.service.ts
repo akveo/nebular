@@ -20,7 +20,7 @@ export interface Version {
   version associated with a current revision.
 */
 const currentVersionPredicate = environment.production
-  ? (version: Version) => version.name === require('../../../../package.json').versionName
+  ? (version: Version) => version.name === require('../../../../package.json').version
   : (version: Version) => version.isCurrent;
 
 @Injectable()
