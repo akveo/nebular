@@ -48,7 +48,7 @@ export { NbCalendarWeekNumberComponent } from './components/calendar-kit/compone
 export { NbCalendarMonthCellComponent } from './components/calendar-kit/components/calendar-month-picker/calendar-month-cell.component';
 export { NbCalendarYearCellComponent } from './components/calendar-kit/components/calendar-year-picker/calendar-year-cell.component';
 export { NbCalendarPickerRowComponent } from './components/calendar-kit/components/calendar-picker/calendar-picker-row.component';
-export { NbCalendarPickerComponent }from './components/calendar-kit/components/calendar-picker/calendar-picker.component';
+export { NbCalendarPickerComponent } from './components/calendar-kit/components/calendar-picker/calendar-picker.component';
 // tslint:enable:max-line-length
 export * from './components/calendar/base-calendar.component';
 export * from './components/calendar/base-calendar.module';
@@ -102,6 +102,7 @@ export * from './components/chat/chat-message-map.component';
 export * from './components/chat/chat-message-file.component';
 export * from './components/chat/chat-message-quote.component';
 export * from './components/chat/chat-message-text.component';
+export * from './components/chat/chat-message-html.component';
 export * from './components/chat/chat-form.component';
 export * from './components/chat/chat.module';
 export * from './components/chat/chat.options';
