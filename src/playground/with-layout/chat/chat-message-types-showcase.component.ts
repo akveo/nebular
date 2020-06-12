@@ -63,6 +63,14 @@ import { Component } from '@angular/core';
          ]"
         avatar="https://i.gifer.com/no.gif">
       </nb-chat-message>
+      <nb-chat-message
+        message="<a href='https://akveo.github.io/nebular/docs/components/chat-ui/overview'>Nebular Chat UI Link</a>"
+        type="html"
+        sender="John Doe"
+        [reply]="true"
+        [date]="date"
+        avatar="https://i.gifer.com/no.gif">
+      </nb-chat-message>
     </nb-chat>
   `,
   styles: [`

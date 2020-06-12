@@ -37,10 +37,9 @@
     .scrollable {
       overflow: auto;
       flex: 1;
-      @include nb-scrollbars(
-          nb-theme(chat-scrollbar-color),
-          nb-theme(chat-scrollbar-background-color),
-          nb-theme(chat-scrollbar-width));
+      @include nb-scrollbars(nb-theme(chat-scrollbar-color),
+        nb-theme(chat-scrollbar-background-color),
+        nb-theme(chat-scrollbar-width));
     }
 
     .messages {
@@ -96,7 +95,8 @@
       color: white;
     }
 
-    nb-chat-message-text {
+    nb-chat-message-text,
+    nb-chat-message-html {
 
       display: flex;
       flex-direction: column;
@@ -138,10 +138,13 @@
         align-items: center;
         flex-shrink: 0;
         border-radius: 0.5rem;
-        &:hover, &:focus {
+
+        &:hover,
+        &:focus {
           text-decoration: none;
           color: nb-theme(chat-message-file-text-color);
         }
+
         div {
           background-size: cover;
           width: 100%;
@@ -149,7 +152,8 @@
         }
       }
 
-      nb-chat-message-text {
+      nb-chat-message-text,
+      nb-chat-message-html {
         display: block;
         margin-bottom: 0.5rem;
       }
@@ -198,7 +202,8 @@
         @include nb-rtl(margin-left, 3rem);
       }
 
-      nb-chat-message-text {
+      nb-chat-message-text,
+      nb-chat-message-html {
         align-items: flex-start;
 
         .text {
@@ -227,8 +232,10 @@
         @include nb-rtl(margin-right, 3rem);
       }
 
-      nb-chat-message-text {
+      nb-chat-message-text,
+      nb-chat-message-html {
         align-items: flex-end;
+
         .sender {
           @include nb-ltr(text-align, right);
           @include nb-rtl(text-align, left);
@@ -281,6 +288,7 @@
         border-bottom-left-radius: 0;
         border-top-left-radius: 0;
       }
+
       @include nb-rtl {
         border-bottom-right-radius: 0;
         border-top-right-radius: 0;
@@ -323,4 +331,3 @@
     }
   }
 }
-

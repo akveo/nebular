@@ -18,6 +18,7 @@ import { NbChatMessageTextComponent } from './chat-message-text.component';
 import { NbChatMessageFileComponent } from './chat-message-file.component';
 import { NbChatMessageQuoteComponent } from './chat-message-quote.component';
 import { NbChatMessageMapComponent } from './chat-message-map.component';
+import { NbChatMessageHtmlComponent } from './chat-message-html.component';
 import { NbChatOptions } from './chat.options';
 
 const NB_CHAT_COMPONENTS = [
@@ -28,6 +29,7 @@ const NB_CHAT_COMPONENTS = [
   NbChatMessageFileComponent,
   NbChatMessageQuoteComponent,
   NbChatMessageMapComponent,
+  NbChatMessageHtmlComponent,
 ];
 
 @NgModule({

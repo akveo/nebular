@@ -20,7 +20,7 @@ import { NbChatMessageFile } from './chat-message-file.component';
  * if multiple files are provided grouped files are shown
  * - quote - quotes a message with specific quote styles
  * - map - shows a google map picture by provided [latitude] and [longitude] properties
- *
+ * - html - text with htlm content that is render as html
  * @stacked-example(Available Types, chat/chat-message-types-showcase.component)
  *
  * Message with attached files:
@@ -80,6 +80,11 @@ import { NbChatMessageFile } from './chat-message-file.component';
                               [sender]="sender" [date]="date"
                               [message]="message" [latitude]="latitude" [longitude]="longitude">
         </nb-chat-message-map>
+
+        <nb-chat-message-html *ngSwitchCase="'html'"
+                              [sender]="sender" [date]="date" [dateFormat]="dateFormat"
+                              [message]="message">
+        </nb-chat-message-html>
 
         <nb-chat-message-text *ngSwitchDefault
                               [sender]="sender" [date]="date" [dateFormat]="dateFormat"
@@ -188,7 +193,7 @@ export class NbChatMessageComponent {
   }
 
   /**
-   * Message type, available options `text|file|map|quote`
+   * Message type, available options `text|file|map|quote|html`
    * @type {string}
    */
   @Input() type: string;
