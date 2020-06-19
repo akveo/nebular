@@ -5,15 +5,12 @@
  */
 
 @mixin nb-datepicker-theme {
-  nb-datepicker-container {
+  nb-datepicker-container nb-card {
     border-color: nb-theme(datepicker-border-color);
     border-style: nb-theme(datepicker-border-style);
     border-width: nb-theme(datepicker-border-width);
     border-radius: nb-theme(datepicker-border-radius);
     background: nb-theme(datepicker-background-color);
-
-    nb-card {
-      box-shadow: nb-theme(datepicker-shadow);
-    }
+    box-shadow: nb-theme(datepicker-shadow);
   }
 }
