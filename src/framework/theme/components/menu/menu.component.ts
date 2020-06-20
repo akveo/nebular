@@ -17,7 +17,7 @@ import {
   PLATFORM_ID,
 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
-import { Router, NavigationEnd } from '@angular/router';
+import { Router, NavigationEnd, NavigationExtras } from '@angular/router';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { takeUntil, filter, map } from 'rxjs/operators';
 import { NbMenuInternalService, NbMenuItem, NbMenuBag, NbMenuService } from './menu.service';
@@ -350,7 +350,13 @@ export class NbMenuComponent implements OnInit, AfterViewInit, OnDestroy {
 
     if (homeItem) {
       if (homeItem.link) {
-        this.router.navigate([homeItem.link], { queryParams: homeItem.queryParams, fragment: homeItem.fragment });
+        const extras: NavigationExtras = {
+          queryParams: homeItem.queryParams,
+          queryParamsHandling: homeItem.queryParamsHandling,
+          fragment: homeItem.fragment,
+          preserveFragment: homeItem.preserveFragment,
+        };
+        this.router.navigate([homeItem.link], extras);
       }
 
       if (homeItem.url && isPlatformBrowser(this.platformId)) {

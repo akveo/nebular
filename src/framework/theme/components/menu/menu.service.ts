@@ -6,7 +6,7 @@
 
 import { Injectable } from '@angular/core';
 import { Location } from '@angular/common';
-import { Params } from '@angular/router';
+import { Params, QueryParamsHandling } from '@angular/router';
 import { Observable, BehaviorSubject, ReplaySubject, Subject } from 'rxjs';
 import { share } from 'rxjs/operators';
 import { isFragmentContain, isFragmentEqual, isUrlPathContain, isUrlPathEqual } from './url-matching-helpers';
@@ -97,10 +97,12 @@ export class NbMenuItem {
    *@type {Params}
    */
   queryParams?: Params;
+  queryParamsHandling?: QueryParamsHandling;
   parent?: NbMenuItem;
   selected?: boolean;
   data?: any;
   fragment?: string;
+  preserveFragment?: boolean;
 
   /**
    * @returns item parents in top-down order
