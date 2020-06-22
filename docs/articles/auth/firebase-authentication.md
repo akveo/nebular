@@ -15,7 +15,7 @@ The package provides the following strategies:
   <div class="note-title">Note</div>
   <div class="note-body">
    The package connects firebase auth with nebular/auth so you need `firebase` and `@angular/fire` installed
- and configured for your application. For more instructions please see [@angular/fire docs](https://github.com/akveo/nebular/tree/master/src/playground/without-layout/azure).
+ and configured for your application. For more instructions please see [@angular/fire docs](https://github.com/angular/angularfire).
  Also make sure you import AngularFireAuthModule.
   </div>
 </div>
@@ -182,7 +182,7 @@ export class NbFirebaseIdentityProviderStrategyOptions extends NbAuthStrategyOpt
 
 ## Complete example
 
-A complete code example could be found on [GitHub](https://github.com/akveo/nebular/tree/master/src/playground/with-layout/firebase).
+A complete code example could be found on [GitHub](https://github.com/akveo/nebular/tree/master/src/playground/without-layout/firebase).
 
 And here the playground examples available to play around with
  - [Firebase Nebular Password Example](/example/firebase/password-showcase)
