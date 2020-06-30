@@ -14,3 +14,4 @@ export const JS_PACKAGES = [
   'theme',
   'firebase-auth',
 ];
+export const DOCS_SITE_URL = 'https://akveo.github.io/nebular/';
