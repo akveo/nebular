@@ -18,7 +18,8 @@
       "@nebular/theme": ["../src/framework/theme/public_api.ts"],
       "@nebular/auth": ["../src/framework/auth/public_api.ts"],
       "@nebular/security": ["../src/framework/security/public_api.ts"],
-      "@nebular/eva-icons": ["../src/framework/eva-icons/public_api.ts"]
+      "@nebular/eva-icons": ["../src/framework/eva-icons/public_api.ts"],
+      "@nebular/firebase-auth": ["../src/framework/firebase-auth/public_api.ts"]
     }
   },
   "files": [

@@ -1,3 +1,21 @@
+<a name="5.1.0"></a>
+# [5.1.0](https://github.com/akveo/nebular/compare/v5.0.0...v5.1.0) (2020-06-03)
+
+
+### Bug Fixes
+
+* **auth:** set correct theme for auth ([#2287](https://github.com/akveo/nebular/issues/2287)) ([c12873d](https://github.com/akveo/nebular/commit/c12873d))
+* **popover, tooltip:** template check hint for adjustment ([#2278](https://github.com/akveo/nebular/issues/2278)) ([a77863d](https://github.com/akveo/nebular/commit/a77863d))
+* **readme:** fix browser support table ([#2304](https://github.com/akveo/nebular/issues/2304)) ([23dc3be](https://github.com/akveo/nebular/commit/23dc3be))
+
+
+### Features
+
+* Firebase auth ([#2385](https://github.com/akveo/nebular/issues/2385)) ([2f75ba1](https://github.com/akveo/nebular/commit/2f75ba1))
+* **autocomplete:** input for focus on value change ([#2356](https://github.com/akveo/nebular/issues/2356)) ([ab15806](https://github.com/akveo/nebular/commit/ab15806))
+
+
+
 <a name="5.0.0"></a>
 # [5.0.0](https://github.com/akveo/nebular/compare/v4.6.0...v5.0.0) (2020-03-09)
 

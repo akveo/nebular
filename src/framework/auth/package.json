@@ -1,6 +1,6 @@
 {
   "name": "@nebular/auth",
-  "version": "5.0.0",
+  "version": "5.1.0",
   "description": "@nebular/auth",
   "author": "akveo",
   "license": "MIT",
@@ -28,7 +28,7 @@
     "@angular/core": "^9.0.0",
     "@angular/router": "^9.0.0",
     "@angular/forms": "^9.0.0",
-    "@nebular/theme": "5.0.0",
+    "@nebular/theme": "5.1.0",
     "rxjs": "^6.5.1"
   },
   "sideEffects": false

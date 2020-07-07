@@ -1,0 +1,35 @@
+{
+  "name": "@nebular/firebase-auth",
+  "version": "5.1.0",
+  "description": "@nebular/firebase-auth",
+  "author": "akveo",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/akveo/nebular.git"
+  },
+  "bugs": {
+    "url": "https://github.com/akveo/nebular/issues"
+  },
+  "homepage": "https://github.com/akveo/nebular#readme",
+  "keywords": [
+    "angular",
+    "typescript",
+    "ng2-admin",
+    "ngx-admin",
+    "theme",
+    "auth",
+    "login",
+    "register",
+    "nebular",
+    "firebase"
+  ],
+  "peerDependencies": {
+    "@angular/core": "^9.0.0",
+    "@nebular/auth": "5.1.0",
+    "rxjs": "^6.5.1",
+    "firebase": "^7.14.5",
+    "@angular/fire": "^6.0.0"
+  },
+  "sideEffects": false
+}
