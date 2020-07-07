@@ -9,6 +9,6 @@ import { Component, EventEmitter, Output } from '@angular/core';
   styleUrls: ['./calendar-actions.component.scss'],
 })
 export class NbCalendarActionsComponent {
-  @Output() setCurrentTime: EventEmitter<void> = new EventEmitter(true);
-  @Output() saveValue: EventEmitter<void> = new EventEmitter(true);
+  @Output() setCurrentTime: EventEmitter<void> = new EventEmitter();
+  @Output() saveValue: EventEmitter<void> = new EventEmitter();
 }

@@ -4,6 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 @mixin nb-timepicker-theme() {
+  $border: nb-theme(timepicker-border-width) nb-theme(timepicker-border-style) nb-theme(timepicker-basic-color);
   .nb-time-picker-container {
     .list-item {
       &:first-child {
@@ -37,7 +38,7 @@
 
     .values-list {
       &:not(:last-of-type) {
-        border-right: 1px solid nb-theme(timepicker-basic-color);
+        border-right: $border;
       }
 
       @include nb-scrollbars(
@@ -49,8 +50,16 @@
 
     .text-hint {
       &:not(:last-child) {
-        border-right: 1px solid nb-theme(timepicker-basic-color);
+        border-right: $border;
       }
+    }
+
+    .column-header {
+      border-bottom: $border;
+    }
+    .actions-footer {
+      @include nb-ltr(padding-left, 0.625rem);
+      @include nb-rtl(padding-right, 0.625rem);
     }
   }
 }

@@ -5,6 +5,8 @@
  */
 
 @mixin nb-datepicker-theme {
+  $border: nb-theme(datepicker-border-width) nb-theme(datepicker-border-style) nb-theme(datepicker-border-color);
+
   nb-datepicker-container nb-card {
     border-color: nb-theme(datepicker-border-color);
     border-style: nb-theme(datepicker-border-style);
@@ -12,5 +14,21 @@
     border-radius: nb-theme(datepicker-border-radius);
     background: nb-theme(datepicker-background-color);
     box-shadow: nb-theme(datepicker-shadow);
+  }
+  nb-calendar-with-time {
+    .nb-time-picker-container,
+    nb-base-calendar nb-card {
+      border: none;
+    }
+
+    .column-header {
+      border-top: $border;
+      border-radius: 0;
+    }
+
+    .timepicker-section {
+      @include nb-ltr(border-left, $border);
+      @include nb-rtl(border-right, $border);
+    }
   }
 }

@@ -3,10 +3,11 @@
  * Copyright Akveo. All Rights Reserved.
  * Licensed under the MIT License. See License.txt in the project root for license information.
 */
+@import '../../styles/core/mixins';
+
 :host {
   ::ng-deep nb-card.nb-time-picker-container {
     flex: 1 0 0;
-
     border-radius: 0;
     width: auto;
     border-right: 0;
@@ -14,18 +15,16 @@
   }
 
   .picker-footer {
-    padding: 0.0625rem;
-    margin-top: -0.0625rem;
+    @include nb-ltr(padding-left, 0.625rem);
+    @include nb-rtl(padding-right, 0.625rem);
   }
 
   .picker-body {
     align-items: stretch;
     display: flex;
-    padding: 0 0 0.0625rem;
+    padding: 0;
 
     nb-base-calendar {
-      margin: -0.0625rem;
-
       ::ng-deep nb-card {
         border-radius: 0;
       }
