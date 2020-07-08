@@ -22,7 +22,7 @@ export abstract class NbFirebaseBaseStrategy extends NbAuthStrategy {
 
   logout(): Observable<NbAuthResult> {
     const module = 'logout';
-    return from(this.afAuth.signOut())
+    return from(this.afAuth.auth.signOut())
       .pipe(
         map(() => {
           return new NbAuthResult(
