@@ -28,7 +28,7 @@ export class NbFirebasePasswordStrategy extends NbFirebaseBaseStrategy {
 
   authenticate({ email, password }: any): Observable<NbAuthResult> {
     const module = 'login';
-    return from(this.afAuth.signInWithEmailAndPassword(email, password))
+    return from(this.afAuth.auth.signInWithEmailAndPassword(email, password))
       .pipe(
         switchMap((res) => this.processSuccess(res, module)),
         catchError((error) => this.processFailure(error, module)),
@@ -56,7 +56,7 @@ export class NbFirebasePasswordStrategy extends NbFirebaseBaseStrategy {
 
   register({ email, password }: any): Observable<NbAuthResult> {
     const module = 'register';
-    return from(this.afAuth.createUserWithEmailAndPassword(email, password))
+    return from(this.afAuth.auth.createUserWithEmailAndPassword(email, password))
       .pipe(
         switchMap((res) => this.processSuccess(res, module)),
         catchError((error) => this.processFailure(error, module)),
@@ -65,7 +65,7 @@ export class NbFirebasePasswordStrategy extends NbFirebaseBaseStrategy {
 
   requestPassword({ email }: any): Observable<NbAuthResult> {
     const module = 'requestPassword';
-    return from(this.afAuth.sendPasswordResetEmail(email))
+    return from(this.afAuth.auth.sendPasswordResetEmail(email))
       .pipe(
         map(() => {
           return new NbAuthResult(
@@ -82,7 +82,7 @@ export class NbFirebasePasswordStrategy extends NbFirebaseBaseStrategy {
 
   resetPassword({ code, password }): Observable<NbAuthResult> {
     const module = 'resetPassword';
-    return from(this.afAuth.confirmPasswordReset(code, password))
+    return from(this.afAuth.auth.confirmPasswordReset(code, password))
       .pipe(
         map(() => {
           return new NbAuthResult(
