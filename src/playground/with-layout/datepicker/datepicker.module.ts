@@ -13,12 +13,14 @@ import { DatepickerShowcaseComponent } from './datepicker-showcase.component';
 import { DatepickerValidationComponent } from './datepicker-validation.component';
 import { RangepickerShowcaseComponent } from './rangepicker-showcase.component';
 import { DateTimepickerShowcaseComponent } from './date-timepicker-showcase.component';
+import { DateTimepickerFullTImeComponent } from './date-timepicker-full-time.component';
 
 @NgModule({
   declarations: [
     DatepickerFormsComponent,
     DatepickerShowcaseComponent,
     DateTimepickerShowcaseComponent,
+    DateTimepickerFullTImeComponent,
     DatepickerValidationComponent,
     RangepickerShowcaseComponent,
   ],

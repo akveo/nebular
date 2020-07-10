@@ -223,8 +223,4 @@ export class NbNativeDateService extends NbDateService<Date> {
   getWeekNumber(date: Date): number {
     return parseInt(this.datePipe.transform(date, 'w'), 10);
   }
-
-  getCurrentTime(format: string): string {
-    return this.datePipe.transform(this.today(), format);
-  }
 }

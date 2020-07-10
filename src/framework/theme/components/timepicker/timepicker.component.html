@@ -9,13 +9,13 @@
     <nb-list *ngIf="useFullTimeFormat" class="values-list">
       <nb-list-item
         class="list-item"
-        [ngClass]="{'selected': isSelectedTimeValue(item, fullTime)}"
+        [ngClass]="{'selected': isSelectedFullTimeValue(item)}"
         *ngFor="let item of fullTimeOptions; trackBy: trackByTimeValues">
         <nb-timepicker-cell
-          [value]="item"
-          [selected]="item === isSelectedTimeValue(item, fullTime)"
+          [value]="getFullTimeString(item)"
+          [selected]="isSelectedFullTimeValue(item)"
           [type]="fullTime"
-          (select)="select($event)">
+          (select)="selectFullTime(item)">
         </nb-timepicker-cell>
       </nb-list-item>
     </nb-list>

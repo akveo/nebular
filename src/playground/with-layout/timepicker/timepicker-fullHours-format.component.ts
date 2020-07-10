@@ -7,7 +7,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
-  selector: 'nb-timepicker-showcase',
+  selector: 'nb-timepicker-full-hours-format',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <nb-card size="large">
@@ -17,11 +17,12 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
                [nbTimepicker]="timepicker"/>
         <nb-timepicker
           #timepicker="nbTimepicker"
-          [withSeconds]="true"></nb-timepicker>
+          [useFullTimeFormat]="true"
+          [step]="30"></nb-timepicker>
       </nb-card-body>
     </nb-card>
   `,
   styleUrls: ['./timepicker-example.scss'],
 })
-export class TimepickerShowcaseComponent {
+export class TimepickerFullHoursFormatComponent {
 }

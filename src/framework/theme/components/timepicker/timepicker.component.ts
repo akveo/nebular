@@ -94,7 +94,7 @@ export class NbTimePickerComponent<D> implements OnChanges {
     this._timeFormat = timeFormat;
   }
 
-  fullTimeOptions: string[];
+  fullTimeOptions: D[];
   hoursColumnOptions: string[];
   minutesColumnOptions: string[];
   secondsColumnOptions: string[];
@@ -120,16 +120,21 @@ export class NbTimePickerComponent<D> implements OnChanges {
               protected nbCalendarTimeModelService: NbCalendarTimeModelService<D>,
               protected dateService: NbDateService<D>) {
 
-    if (config.isTwelveHoursFormat) {
+    if (config) {
       this.isTwelveHoursFormat = config.isTwelveHoursFormat;
     } else {
       this.isTwelveHoursFormat = dateService.getLocaleTimeFormat().includes('h');
     }
   }
 
-  ngOnChanges({step, isTwelveHoursFormat}: SimpleChanges): void {
+  ngOnChanges({
+                step,
+                isTwelveHoursFormat,
+                withSeconds,
+                useFullTimeFormat,
+              }: SimpleChanges): void {
     this.timeFormat = this.buildTimeFormat();
-    if (step || isTwelveHoursFormat) {
+    if (step || isTwelveHoursFormat || withSeconds || useFullTimeFormat) {
       this.fullTimeOptions = this.useFullTimeFormat ?
         this.nbCalendarTimeModelService.getFullHours(this.isTwelveHoursFormat, this.step) : [];
       this.hoursColumnOptions = this.nbCalendarTimeModelService.getHoursInDay(this.isTwelveHoursFormat);
@@ -138,7 +143,6 @@ export class NbTimePickerComponent<D> implements OnChanges {
       this.ampmColumnOptions = this.isTwelveHoursFormat ? this.nbCalendarTimeModelService.AMPM : [];
     }
   }
-
 
   setHost(hostRef: ElementRef) {
     this.hostRef = hostRef;
@@ -160,27 +164,26 @@ export class NbTimePickerComponent<D> implements OnChanges {
 
   select({value, type}: NbSelectedTimeModel) {
     let newTime: D;
-    if (this.useFullTimeFormat) {
-      newTime = this.dateService.parse(`Jan 1 ${value}`, this.timeFormat);
-    } else if (this.isTwelveHoursFormat && this.nbCalendarTimeModelService.getAmPm(this.date) ===
-      this.nbCalendarTimeModelService.PM) {
-      newTime = this.dateService.setHour(this.date, parseInt(value, 10) - this.HOURS_IND_DAY);
-    } else {
-      const strValue = parseInt(value, 10);
-      switch (type) {
-        case NbTimepickerTypes.HOUR:
-          newTime = this.dateService.setHour(this.date, strValue);
-          break;
-        case NbTimepickerTypes.MINUTE:
-          newTime = this.dateService.setMinute(this.date, strValue);
-          break;
-        case NbTimepickerTypes.SECOND:
-          newTime = this.dateService.setSecond(this.date, strValue);
-          break;
-      }
-    }
+    const val = parseInt(value, 10);
+    switch (type) {
+      case NbTimepickerTypes.HOUR:
+        const hour: number = this.isTwelveHoursFormat &&
+        this.dateService.getHour(this.date) > this.HOURS_IND_DAY ? val + 12 : val;
 
-    this.updateValue(newTime)
+        newTime = this.dateService.setHour(this.date, hour);
+        break;
+      case NbTimepickerTypes.MINUTE:
+        newTime = this.dateService.setMinute(this.date, val);
+        break;
+      case NbTimepickerTypes.SECOND:
+        newTime = this.dateService.setSecond(this.date, val);
+        break;
+    }
+    this.updateValue(newTime);
+  }
+
+  selectFullTime(value: D): void {
+    this.updateValue(value);
   }
 
   changeAMPM({value}: NbSelectedTimeModel) {
@@ -236,13 +239,19 @@ export class NbTimePickerComponent<D> implements OnChanges {
         } else {
           return this.dateService.getHour(this.date) <= this.HOURS_IND_DAY;
         }
-      case NbTimepickerTypes.FULL_TIME:
-        return value === this.dateService.format(this.date, this.timeFormat);
     }
+  }
+
+  getFullTimeString(item: D): string {
+    return this.dateService.format(item, this.timeFormat).toUpperCase()
+  }
+
+  isSelectedFullTimeValue(value: D): boolean {
+    return this.dateService.isEqualTime(value, this.date);
   }
 
   buildTimeFormat(): string {
     return `${this.isTwelveHoursFormat ? 'hh' : 'HH'}:mm${this.withSeconds && !this.useFullTimeFormat ?
-      ':ss' : ''}${this.isTwelveHoursFormat ? ' A' : ''}`
+      ':ss' : ''}${this.isTwelveHoursFormat ? ' a' : ''}`
   }
 }

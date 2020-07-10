@@ -11,6 +11,7 @@ import { DatepickerShowcaseComponent } from './datepicker-showcase.component';
 import { DatepickerValidationComponent } from './datepicker-validation.component';
 import { RangepickerShowcaseComponent } from './rangepicker-showcase.component';
 import { DateTimepickerShowcaseComponent } from './date-timepicker-showcase.component';
+import { DateTimepickerFullTImeComponent } from './date-timepicker-full-time.component';
 
 const routes: Route[] = [
   {
@@ -24,6 +25,10 @@ const routes: Route[] = [
   {
     path: 'date-timepicker-showcase.component',
     component: DateTimepickerShowcaseComponent,
+  },
+  {
+    path: 'date-timepicker-full-time.component',
+    component: DateTimepickerFullTImeComponent,
   },
   {
     path: 'datepicker-validation.component',

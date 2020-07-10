@@ -456,6 +456,12 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         name: 'Date Timepicker Showcase',
       },
       {
+        path: 'date-timepicker-full-time.component',
+        link: '/datepicker/date-timepicker-full-time.component',
+        component: 'DateTimepickerFullTImeComponent',
+        name: 'Date Timepicker Full Time Format',
+      },
+      {
         path: 'datepicker-validation.component',
         link: '/datepicker/datepicker-validation.component',
         component: 'DatepickerValidationComponent',
@@ -477,6 +483,18 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         link: '/timepicker/timepicker-showcase.component',
         component: 'TimepickerShowcaseComponent',
         name: 'Timepicker Showcase',
+      },
+      {
+        path: 'timepicker-twelve-hours-format.component',
+        link: '/timepicker/timepicker-twelve-hours-format.component',
+        component: 'TimepickerTwelveHoursFormatComponent',
+        name: 'Timepicker Twelve Hours Format',
+      },
+      {
+        path: 'timepicker-twelve-full-format.component',
+        link: '/timepicker/timepicker-full-hours-format.component',
+        component: 'TimepickerTwelveFullFormatComponent',
+        name: 'Timepicker Full Hours Format',
       },
     ],
   },

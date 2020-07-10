@@ -232,5 +232,19 @@ export abstract class NbDateService<D> {
 
   abstract getWeekNumber(date: D): number;
 
-  abstract getCurrentTime(format: string): string;
+  isEqualTime(date1: D, date2: D): boolean {
+    return this.isSameHour(date1, date2) && this.isSameMinute(date1, date2) && this.isSameSecond(date1, date2);
+  }
+
+  isSameHour(date1: D, date2: D): boolean {
+    return this.getHour(date1) === this.getHour(date2);
+  }
+
+  isSameMinute(date1: D, date2: D): boolean {
+    return this.getMinute(date1) === this.getMinute(date2);
+  }
+
+  isSameSecond(date1: D, date2: D): boolean {
+    return this.getSecond(date1) === this.getSecond(date2);
+  }
 }

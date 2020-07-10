@@ -22,7 +22,7 @@ export class NbCalendarTimeModelService<D> {
       : range(this.HOURS_IN_DAY, i => this.formatToString(i));
   }
 
-  getFullHours(use12HoursFormat, step = 60): string[] {
+  getFullHours(use12HoursFormat, step = 60): D[] {
     let date: D = this.dateService.createDate(2020, 1, 1);
 
     date = this.dateService.setHour(date, 0);
@@ -32,11 +32,10 @@ export class NbCalendarTimeModelService<D> {
     let endDate: D = this.dateService.createDate(2020, 1, 2);
     endDate = this.dateService.setHour(endDate, 0);
 
-    const result: string[] = [];
+    const result: D[] = [];
 
     while (date < endDate) {
-      result.push(this.dateService.format(date,
-        `${use12HoursFormat ? this.twelveHoursTimeFormat : this.timeFormat}`).toUpperCase());
+      result.push(date);
       date = this.dateService.addMinutes(date, step);
     }
 

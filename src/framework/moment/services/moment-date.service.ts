@@ -211,8 +211,4 @@ export class NbMomentDateService extends NbDateService<Moment> {
   getWeekNumber(date: Moment): number {
     return date.week();
   }
-
-  getCurrentTime(format: string): string {
-    return moment().format(format);
-  }
 }
