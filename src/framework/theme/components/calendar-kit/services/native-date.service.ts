@@ -17,7 +17,6 @@ import {
 
 import { NbDateService } from './date.service';
 
-
 /**
  * The `NbNativeDateService` is basic implementation of `NbDateService` using
  * native js date objects and angular localization services.
@@ -34,6 +33,28 @@ export class NbNativeDateService extends NbDateService<Date> {
   setLocale(locale: string) {
     super.setLocale(locale);
     this.datePipe = new DatePipe(locale);
+  }
+
+
+  setHour(date: Date, hour: number): Date {
+    const result: Date = this.clone(date);
+    result.setHours(hour);
+
+    return result;
+  }
+
+  setMinute(date: Date, minute: number): Date {
+    const result: Date = this.clone(date);
+    result.setMinutes(minute);
+
+    return result;
+  }
+
+  setSecond(date: Date, second: number): Date {
+    const result: Date = this.clone(date);
+    result.setSeconds(second);
+
+    return result;
   }
 
   isValidDateString(date: string, format: string): boolean {
@@ -110,6 +131,20 @@ export class NbNativeDateService extends NbDateService<Date> {
     // because of the date overflow.
     month.setDate(Math.min(date.getDate(), this.getMonthEnd(month).getDate()));
     return month;
+  }
+
+  addMinutes(date: Date, minute: number): Date {
+    const result: Date = new Date(date);
+    result.setMinutes(date.getMinutes() + minute);
+
+    return result;
+  }
+
+  addHour(date: Date, hour: number): Date {
+    const result: Date = new Date(date);
+    result.setHours(date.getHours() + hour);
+
+    return result;
   }
 
   getHour(date: Date): number {

@@ -4,14 +4,17 @@ import { NbDateService } from './date.service';
 
 
 @Injectable()
-export class NbCalendarTimeModelService {
+export class NbCalendarTimeModelService<D> {
   readonly HOURS_IN_DAY: number = 24;
   readonly HOURS_IN_DAY_ALT: number = 12;
   readonly MINUTES_AND_SECONDS: number = 60;
-  readonly AMPM = ['AM', 'PM'];
+  readonly AM: string = 'AM';
+  readonly PM: string = 'PM';
+  readonly AMPM = [this.AM, this.PM];
+  readonly timeFormat: string = 'HH:mm';
+  readonly twelveHoursTimeFormat: string = 'hh:mm a';
 
-  constructor(protected dateService: NbDateService<Date>,
-  ) {}
+  constructor(protected dateService: NbDateService<D>) {}
 
   getHoursInDay(isTwelveHoursFormat: boolean): string[] {
     return isTwelveHoursFormat ?
@@ -19,45 +22,46 @@ export class NbCalendarTimeModelService {
       : range(this.HOURS_IN_DAY, i => this.formatToString(i));
   }
 
-  getFullHours(use12HoursFormat, step): string[] {
-    const hours: number = use12HoursFormat ? this.HOURS_IN_DAY_ALT + 1 : this.HOURS_IN_DAY;
-    const am = [];
-    const pm = [];
+  getFullHours(use12HoursFormat, step = 60): string[] {
+    let date: D = this.dateService.createDate(2020, 1, 1);
 
-    range(hours, value => {
-      for (let i = 0; i < this.MINUTES_AND_SECONDS; i += step) {
-        if (use12HoursFormat) {
-          if (value === 0) {
-            continue;
-          }
-          pm.push(`${this.formatToString(value)}:${this.formatToString(i)} PM`);
-          am.push(`${this.formatToString(value)}:${this.formatToString(i)} AM`);
-        } else {
-          am.push(`${this.formatToString(value)}:${this.formatToString(i)}`);
-        }
-      }
-    });
-    return use12HoursFormat ? [...am, ...pm] : am;
+    date = this.dateService.setHour(date, 0);
+    date = this.dateService.setMinute(date, 0);
+    date = this.dateService.setSecond(date, 0);
+
+    let endDate: D = this.dateService.createDate(2020, 1, 2);
+    endDate = this.dateService.setHour(endDate, 0);
+
+    const result: string[] = [];
+
+    while (date < endDate) {
+      result.push(this.dateService.format(date,
+        `${use12HoursFormat ? this.twelveHoursTimeFormat : this.timeFormat}`).toUpperCase());
+      date = this.dateService.addMinutes(date, step);
+    }
+
+    return result;
   }
 
   getMinutesAndSeconds(): string[] {
     return range(this.MINUTES_AND_SECONDS, i => this.formatToString(i));
   }
 
-  getAmPm(date: Date, format: string): string {
-    const ampm: RegExpMatchArray = this.getFormattedTime(date, format).match(/AM|PM/);
-    if (ampm) {
-      return ampm[0]
-    } else {
-      return '';
-    }
+  getAmPm(date: D): string {
+    return this.dateService.getHour(date) < 12 ? this.AM : this.PM;
   }
 
-  getFormattedTime(date: Date, format: string): string {
+  getFormattedTime(date: D, format: string): string {
     return this.dateService.format(date, format);
   }
 
   formatToString(n: number): string {
-    return n < 10 ? `0${n.toString()}` : n.toString();
+    const symbolToAdd = 2 - n.toString().length;
+
+    if (symbolToAdd > 0) {
+      return '0'.repeat(symbolToAdd) + n;
+    }
+
+    return n.toString();
   }
 }

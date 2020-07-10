@@ -45,6 +45,21 @@ export abstract class NbDateService<D> {
   }
 
   /**
+   * Returns date with selected hour
+   * */
+ abstract setHour(date: D, hour: number): D;
+
+  /**
+   * Returns date with selected minute
+   * */
+  abstract setMinute(date: D, minute: number): D;
+
+  /**
+   * Returns date with selected second
+   * */
+  abstract setSecond(date: D, second: number): D;
+
+  /**
    * Returns true if date string is valid date string according to the provided format.
    * */
   abstract isValidDateString(date: string, format: string): boolean;
@@ -199,6 +214,16 @@ export abstract class NbDateService<D> {
   abstract addMonth(date: D, months: number): D;
 
   /**
+   * Returns date with added number of hours.
+   * */
+  abstract addHour(date: D, hour: number): D;
+
+   /**
+   * Returns date with added number of minutes.
+   * */
+  abstract addMinutes(date: D, minute: number): D;
+
+    /**
    * Returns date with added number of years.
    * */
   abstract addYear(date: D, years: number): D;

@@ -22,7 +22,6 @@ import { NbOverlayService } from '../cdk/overlay/overlay-service';
 import { NbTrigger, NbTriggerStrategy, NbTriggerStrategyBuilderService } from '../cdk/overlay/overlay-trigger';
 import { NbSelectedTimePayload } from './model';
 import { NbDateService } from '../calendar-kit/services/date.service';
-import { NbCalendarTimeModelService } from '../calendar-kit/services/calendar-time-model.service';
 
 @Directive({
   selector: 'input[nbTimepicker]',
@@ -32,11 +31,11 @@ import { NbCalendarTimeModelService } from '../calendar-kit/services/calendar-ti
     multi: true,
   }],
 })
-export class NbTimePickerDirective implements AfterViewInit {
+export class NbTimePickerDirective<D> implements AfterViewInit {
   /**
    * NbTimePickerComponent instance passed via input.
    * */
-  protected _timePickerComponent: NbTimePickerComponent<Date>;
+  protected _timePickerComponent: NbTimePickerComponent<D>;
 
   protected overlayRef: NbOverlayRef;
 
@@ -50,10 +49,11 @@ export class NbTimePickerDirective implements AfterViewInit {
    * Provides timepicker component.
    * */
   @Input('nbTimepicker')
-  get timepicker(): NbTimePickerComponent<Date> {
+  get timepicker(): NbTimePickerComponent<D> {
     return this._timePickerComponent;
   }
-  set timepicker(timePicker: NbTimePickerComponent<Date>) {
+
+  set timepicker(timePicker: NbTimePickerComponent<D>) {
     this._timePickerComponent = timePicker;
   }
 
@@ -89,8 +89,7 @@ export class NbTimePickerDirective implements AfterViewInit {
               protected triggerStrategyBuilder: NbTriggerStrategyBuilderService,
               protected overlay: NbOverlayService,
               protected cd: ChangeDetectorRef,
-              protected dateService: NbDateService<any>,
-              protected nbCalendarTimeModelService: NbCalendarTimeModelService,
+              protected dateService: NbDateService<D>,
   ) {
     this.subscribeOnInputChange();
   }
@@ -107,6 +106,7 @@ export class NbTimePickerDirective implements AfterViewInit {
   }
 
   ngAfterViewInit() {
+    this.input.placeholder = this.timepicker.timeFormat;
     this.triggerStrategy = this.createTriggerStrategy();
     this.subscribeOnTriggers();
   }
@@ -134,6 +134,16 @@ export class NbTimePickerDirective implements AfterViewInit {
 
   setupTimepicker() {
     this.timepicker.setHost(this.hostRef);
+    if (this.timepicker.date) {
+     this.timepicker.date = this.dateService.parse(this.inputValue, this.timepicker.timeFormat);
+    } else {
+     let today = this.dateService.today();
+     today = this.dateService.setHour(today, 0);
+     today = this.dateService.setMinute(today, 0);
+     today = this.dateService.setSecond(today, 0);
+
+     this.timepicker.date = today;
+    }
   }
 
   protected initOverlay() {
@@ -143,19 +153,9 @@ export class NbTimePickerDirective implements AfterViewInit {
   }
 
   protected subscribeOnApplyClick() {
-    this.timepicker.onSelectTime.subscribe((value: NbSelectedTimePayload) => {
-      if (this.timepicker.useFullTimeFormat && value.time.fullTime) {
-        this.setInputValue = value.time.fullTime;
-      } else {
-        const val = value.twelveHourFormat
-          ? `${value.time.hour}:${value.time.minute}${value.time.sec ? ':' + value.time.sec : ''} ${value.time.ampm}` :
-          `${value.time.hour}:${value.time.minute}${value.time.sec ? ':' + value.time.sec : ''}`;
-
-        const date = this.dateService.parse(val, value.format);
-
-        this.setInputValue = this.dateService.format(date, value.format);
-      }
-
+    this.timepicker.onSelectTime.subscribe((value: NbSelectedTimePayload<D>) => {
+      this.setInputValue = this.dateService.format(value.time, value.format);
+      this.timepicker.date = value.time;
       if (value.save) {
         this.hide();
       }
@@ -212,7 +212,9 @@ export class NbTimePickerDirective implements AfterViewInit {
       map(() => this.inputValue),
       takeUntil(this.destroy$),
     )
-    .subscribe((value: string) => this.handleInputChange(value));
+    .subscribe((value: string) => {
+      this.handleInputChange(value);
+    });
   }
 
   /**
@@ -220,22 +222,8 @@ export class NbTimePickerDirective implements AfterViewInit {
    * */
   protected handleInputChange(value: string) {
     const isValidDate: boolean = this.dateService.isValidDateString(value, this.timepicker.timeFormat);
-
     if (isValidDate) {
-      const date: Date = this.dateService.parse(value, this.timepicker.timeFormat);
-      this.timepicker.selectedTime = {
-        hour: this.formatToString(this.timepicker.isTwelveHoursFormat && value !== '12' ?
-          this.dateService.getHour(date) % 12 : this.dateService.getHour(date)),
-        minute: this.formatToString(this.dateService.getMinute(date)),
-        sec: this.formatToString(this.dateService.getSecond(date)),
-        ampm: this.nbCalendarTimeModelService.getAmPm(date, this.timepicker.timeFormat),
-        fullTime: this.timepicker.useFullTimeFormat ?
-          this.dateService.format(date, this.timepicker.timeFormat) : '',
-      };
+      this.timepicker.date = this.dateService.parse(value, this.timepicker.timeFormat);
     }
-  }
-
-  protected formatToString(n: number): string {
-    return n < 10 ? `0${n.toString()}` : n.toString();
   }
 }

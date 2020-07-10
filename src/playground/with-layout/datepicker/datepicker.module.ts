@@ -6,7 +6,7 @@
 
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NbCardModule, NbDatepickerModule, NbInputModule } from '@nebular/theme';
+import { NbCardModule, NbDatepickerModule, NbInputModule, NbTimepickerModule } from '@nebular/theme';
 import { DatepickerRoutingModule } from './datepicker-routing.module';
 import { DatepickerFormsComponent } from './datepicker-forms.component';
 import { DatepickerShowcaseComponent } from './datepicker-showcase.component';
@@ -26,6 +26,7 @@ import { DateTimepickerShowcaseComponent } from './date-timepicker-showcase.comp
     FormsModule,
     ReactiveFormsModule,
     NbDatepickerModule.forRoot(),
+    NbTimepickerModule.forRoot(),
     NbInputModule,
     DatepickerRoutingModule,
     NbCardModule,

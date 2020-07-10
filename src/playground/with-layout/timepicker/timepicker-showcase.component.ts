@@ -14,14 +14,13 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
       <nb-card-body class="example-items-col">
         <input nbInput
                type="text"
-               placeholder="Enter value"
                [nbTimepicker]="timepicker"/>
         <nb-timepicker
           #timepicker="nbTimepicker"
-          [useFullTimeFormat]="false"
-          [step]="40"
+          [useFullTimeFormat]="true"
           [isTwelveHoursFormat]="true"
-          [withSeconds]="true"></nb-timepicker>
+          [step]="30"
+          [withSeconds]="false"></nb-timepicker>
       </nb-card-body>
     </nb-card>
   `,

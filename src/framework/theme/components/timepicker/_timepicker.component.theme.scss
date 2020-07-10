@@ -6,6 +6,9 @@
 @mixin nb-timepicker-theme() {
   $border: nb-theme(timepicker-border-width) nb-theme(timepicker-border-style) nb-theme(timepicker-basic-color);
   .nb-time-picker-container {
+    width: 20rem;
+    height: 26.1875rem;
+
     .list-item {
       &:first-child {
         border-top: none;
@@ -49,6 +52,8 @@
     }
 
     .text-hint {
+      padding: 0.625rem;
+
       &:not(:last-child) {
         border-right: $border;
       }

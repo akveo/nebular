@@ -35,6 +35,18 @@ export class NbMomentDateService extends NbDateService<Moment> {
     this.setMomentLocaleData(locale);
   }
 
+  setHour(date: Moment, hour: number): Moment {
+    return this.clone(date.set({ hour }));
+  }
+
+  setMinute(date: Moment, minute: number): Moment {
+    return this.clone(date.set({ minute }));
+  }
+
+  setSecond(date: Moment, second: number): Moment {
+    return this.clone(date.set({ second }));
+  }
+
   addDay(date: Moment, days: number): Moment {
     return this.clone(date).add({ days });
   }
@@ -45,6 +57,14 @@ export class NbMomentDateService extends NbDateService<Moment> {
 
   addYear(date: Moment, years: number): Moment {
     return this.clone(date).add({ years });
+  }
+
+  addMinutes(date: Moment, minute: number): Moment {
+    return this.clone(date).add( { minute });
+  }
+
+  addHour(date: Moment, hour: number): Moment {
+    return this.clone(date).add( { hour });
   }
 
   clone(date: Moment): Moment {

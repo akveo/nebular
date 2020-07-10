@@ -18,34 +18,36 @@
     @include nb-ltr(padding-left, 0.625rem);
     @include nb-rtl(padding-right, 0.625rem);
   }
+}
 
-  .picker-body {
-    align-items: stretch;
-    display: flex;
-    padding: 0;
+.picker-body {
+  align-items: stretch;
+  display: flex;
+  padding: 0;
 
-    nb-base-calendar {
-      ::ng-deep nb-card {
-        border-radius: 0;
-      }
+  nb-base-calendar {
+    ::ng-deep nb-card {
+      border-radius: 0;
     }
   }
+}
+.calendar-with-time {
+  overflow: hidden;
+}
 
-  .timepicker-single-column-width {
-    width: 5rem;
-  }
+.timepicker-single-column-width {
+  width: 5rem;
+}
 
-  .timepicker-multiple-column-width {
-    width: 13.875rem;
-  }
+.timepicker-multiple-column-width {
+  width: 13.875rem;
+}
 
-  .picker-title {
-    padding: 1.25rem;
-  }
+.picker-title {
+  padding: 1.25rem;
+}
 
-  .timepicker-section {
-    display: flex;
-    flex-direction: column;
-  }
-
+.timepicker-section {
+  display: flex;
+  flex-direction: column;
 }

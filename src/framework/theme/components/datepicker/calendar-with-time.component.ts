@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NbCalendarComponent } from '../calendar/calendar.component';
-import { NbSelectedTimeModel, NbSelectedTimePayload } from '../timepicker/model';
-import { NbCalendarTimeModelService } from '../calendar-kit/services/calendar-time-model.service';
+import { NbSelectedTimePayload } from '../timepicker/model';
+import { NbDateService } from '../calendar-kit/services/date.service';
 
 export interface NbCalendarWithTime {
   isTwelveHoursFormat: boolean;
@@ -24,22 +24,22 @@ export interface NbCalendarWithTime {
           [monthCellComponent]="monthCellComponent"
           [yearCellComponent]="yearCellComponent"
           [size]="size"
-          [visibleDate]="_visibleDate"
+          [visibleDate]="visibleDate"
           [showNavigation]="showNavigation"
           [showWeekNumber]="showWeekNumber"
           [weekNumberSymbol]="weekNumberSymbol"
           (dateChange)="onDateValueChange($event)">
         </nb-base-calendar>
-        <div class="timepicker-section" [ngClass]="{
-         'timepicker-single-column-width' : useFullTimeFormat,
-         'timepicker-multiple-column-width' : !useFullTimeFormat}">
-          <div class="picker-title">{{'Title'}}</div>
+        <div class="timepicker-section"
+             [class.timepicker-single-column-width]="useFullTimeFormat"
+             [class.timepicker-multiple-column-width]="!useFullTimeFormat">
+          <div class="picker-title">{{ title }}</div>
           <nb-timepicker
             #timepicker
             (onSelectTime)="onTimeChange($event)"
-            [selectedTime]="activeTime"
+            [date]="time"
             [isTwelveHoursFormat]="isTwelveHoursFormat"
-            [withSeconds]="this.withSeconds && !this.isTwelveHoursFormat"
+            [withSeconds]="showSeconds()"
             [showFooter]="false"
             [useFullTimeFormat]="useFullTimeFormat"
             [step]="step">
@@ -57,63 +57,55 @@ export interface NbCalendarWithTime {
   `,
   styleUrls: ['./calendar-with-time-container.component.scss'],
 })
-export class NbCalendarWithTimeComponent<D> extends NbCalendarComponent<Date> implements OnInit {
+export class NbCalendarWithTimeComponent<D> extends NbCalendarComponent<D> implements OnInit {
   @Input() isTwelveHoursFormat: boolean;
   @Input() withSeconds: boolean;
   @Input() useFullTimeFormat: boolean;
   @Input() step: number;
   @Input() timeFormat: string;
-  @Input() set visibleDate(date: Date) {
+  @Input() title: string;
+  @Input() set visibleDate(date: D) {
     if (date) {
       this._visibleDate = date;
-      if (this.useFullTimeFormat) {
-        const hours: number = this.isTwelveHoursFormat ? date.getHours() % 12 : date.getHours();
-
-        this.activeTime = {
-          fullTime: `${this.nbCalendarTimeModelService.formatToString(hours)}` +
-          `:${this.nbCalendarTimeModelService.formatToString(date.getMinutes())}${this.isTwelveHoursFormat ?
-            ' ' + this.nbCalendarTimeModelService.getAmPm(date, this.timeFormat) : ''}`,
-        }
-      } else {
-        this.activeTime = {
-          hour: this.isTwelveHoursFormat ?
-            this.nbCalendarTimeModelService.formatToString(date.getHours() % this.HOURS_IN_DAY_ALT) :
-            this.nbCalendarTimeModelService.formatToString(date.getHours()),
-          minute: this.nbCalendarTimeModelService.formatToString(date.getMinutes()),
-          sec: this.nbCalendarTimeModelService.formatToString(date.getSeconds()),
-          ampm: this.isTwelveHoursFormat ? this.nbCalendarTimeModelService.getAmPm(date, this.timeFormat) : '',
-          fullTime: this.nbCalendarTimeModelService.getFormattedTime(date, this.timeFormat),
-        };
-      }
+      this.time = date;
     }
   };
+  get visibleDate(): D {
+    return this._visibleDate;
+  }
 
-  constructor(protected nbCalendarTimeModelService: NbCalendarTimeModelService) {
+  set time(time: D) {
+    this._time = time;
+  };
+
+  get time(): D {
+    return this._time;
+  }
+
+  constructor(protected dateService: NbDateService<D>) {
     super();
   }
 
-  activeTime: NbSelectedTimeModel;
-  _visibleDate: Date;
-
-  readonly HOURS_IN_DAY_ALT: number = 12;
+  _time: D;
+  _visibleDate: D;
 
   ngOnInit(): void {
-    this.date = new Date();
-    this.activeTime = {
-      hour: '00',
-      minute: '00',
-      sec: '00',
-      ampm: 'AM',
-      fullTime: '',
-    };
+    this.date = this.dateService.today();
+
+    let today = this.dateService.today();
+    today = this.dateService.setHour(today, 0);
+    today = this.dateService.setMinute(today, 0);
+    today = this.dateService.setSecond(today, 0);
+
+    this.time = today;
   }
 
   onDateValueChange(date: any): void {
     this.date = date;
   }
 
-  onTimeChange(payload: NbSelectedTimePayload): void {
-    this.activeTime = payload.time;
+  onTimeChange(selectedTime: NbSelectedTimePayload<D>): void {
+    this.time = selectedTime.time;
   }
 
   saveValue(): void {
@@ -121,19 +113,21 @@ export class NbCalendarWithTimeComponent<D> extends NbCalendarComponent<Date> im
   }
 
   saveCurrentTime(): void {
-    this.dateChange.emit(new Date());
+    this.dateChange.emit(this.dateService.today());
   }
 
-  buildDateValue(): Date {
-    const date: string = `${this.date.getFullYear()}-${this.date.getMonth() + 1}-` +
-    `${this.date.getDate()}`;
+  buildDateValue(): D {
+    const date: string = `${this.dateService.getYear(this.date)}-${this.dateService.getMonth(this.date) + 1}-` +
+      `${this.dateService.getDate(this.date)}`;
+    const time: string = this.dateService.format(this.time, this.timeFormat);
 
-    const hour: string = this.isTwelveHoursFormat ?
-      (parseInt(this.activeTime.hour, 10) % 12).toString() : this.activeTime.hour;
+    return this.dateService.parse(`${date} ${time}`, `yyyy-MM-dd ${this.timeFormat}`);
+  }
 
-    const time = this.useFullTimeFormat ? this.activeTime.fullTime :
-      `${hour}:${this.activeTime.minute}${this.withSeconds && !this.isTwelveHoursFormat ?
-      `:${this.activeTime.sec}` : ''} ${this.isTwelveHoursFormat ? this.activeTime.ampm : ''}`;
-    return new Date(`${date} ${time}`);
+  /**
+   * We not show seconds with twelve hours format
+   * */
+  showSeconds(): boolean {
+    return this.withSeconds && !this.isTwelveHoursFormat;
   }
 }

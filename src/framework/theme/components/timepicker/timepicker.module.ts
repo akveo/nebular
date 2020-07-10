@@ -39,7 +39,7 @@ export class NbTimepickerModule {
   static forRoot(config: NbTimePickerConfig = {}): ModuleWithProviders<NbTimepickerModule> {
     return {
       ngModule: NbTimepickerModule,
-      providers: [NbTimePickerComponent, {provide: NB_TIME_PICKER_CONFIG, useValue: config}],
+      providers: [{provide: NB_TIME_PICKER_CONFIG, useValue: config}],
     };
   }
 }

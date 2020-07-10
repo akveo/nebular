@@ -646,6 +646,7 @@ export class NbDateTimePickerComponent<D>
   @Input() withSeconds: boolean;
   @Input() useFullTimeFormat: boolean;
   @Input() step: number;
+  @Input() title: string;
 
   ngOnInit() {
     this.format = this.buildTimeFormat();
@@ -656,6 +657,7 @@ export class NbDateTimePickerComponent<D>
     this.picker.isTwelveHoursFormat = this.isTwelveHoursFormat;
     this.picker.withSeconds = this.withSeconds;
     this.picker.step = this.step;
+    this.picker.title = this.title;
     this.picker.timeFormat = `${this.isTwelveHoursFormat ? 'hh' : 'HH'}` +
       `:mm${this.withSeconds && !this.useFullTimeFormat ?
         ':ss' : ''}${this.isTwelveHoursFormat ? ' a' : ''}`;

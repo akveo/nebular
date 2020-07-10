@@ -10,7 +10,7 @@ export const enum NbTimepickerTypes {
   FULL_TIME = 'fullTime',
   HOUR = 'hour',
   MINUTE = 'minute',
-  SEC = 'sec',
+  SECOND = 'second',
   AMPM = 'ampm',
 }
 export const NB_TIME_PICKER_CONFIG = new InjectionToken('CONFIG');
@@ -20,15 +20,12 @@ export interface NbTimePickerConfig {
 }
 
 export interface NbSelectedTimeModel {
-  hour?: string;
-  minute?: string;
-  sec?: string;
-  ampm?: string;
-  fullTime?: string;
+  value: string;
+  type: NbTimepickerTypes;
 }
 
-export interface NbSelectedTimePayload {
-  time: NbSelectedTimeModel,
+export interface NbSelectedTimePayload<D> {
+  time: D,
   twelveHourFormat: boolean,
   format?: string,
   save?: boolean,

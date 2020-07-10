@@ -7,11 +7,9 @@
 
 .nb-time-picker-container {
   overflow: hidden;
-  width: 20rem;
   margin-bottom: 0;
   flex-direction: column;
   flex-wrap: nowrap;
-  height: 26.1875rem;
 }
 
 .values-list {
@@ -35,7 +33,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 2.75rem;
 }
 
 .picker-body {
@@ -54,7 +51,6 @@
 
 .text-hint {
   width: 100%;
-  padding: 0.625rem;
   text-align: center;
 }
 

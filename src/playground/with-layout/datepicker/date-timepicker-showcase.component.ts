@@ -4,7 +4,8 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewChild } from '@angular/core';
+import { NbTimePickerDirective } from '../../../framework/theme/components/timepicker/timepicker.directive';
 
 @Component({
   selector: 'nb-timepicker-showcase',
@@ -14,14 +15,20 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
       <nb-card-body class="example-items-col">
         <input nbInput placeholder="Pick Date" [nbDatepicker]="formpicker">
         <nb-date-timepicker
-          [isTwelveHoursFormat]="false"
-          [withSeconds]="true"
+          #item
+          [isTwelveHoursFormat]="true"
+          [withSeconds]="false"
+          [title]="'Title'"
           [useFullTimeFormat]="true"
-          [step]="40"
           #formpicker></nb-date-timepicker>
       </nb-card-body>
     </nb-card>
   `,
 })
 export class DateTimepickerShowcaseComponent {
+ // todo: check show method
+
+  @ViewChild('item') dte;
+  @ViewChild(NbTimePickerDirective) time;
+
 }

@@ -9,7 +9,7 @@ import {
   Output,
   ViewChild,
 } from '@angular/core';
-import { NbSelectedTimeModel } from './model';
+import { NbSelectedTimeModel, NbTimepickerTypes } from './model';
 
 @Component({
   selector: 'nb-timepicker-cell',
@@ -28,14 +28,14 @@ export class NbTimePickerCellComponent implements AfterViewInit {
     }
   };
   @Input() value: string;
-  @Input() type: string;
+  @Input() type: NbTimepickerTypes;
   @ViewChild('target') element: ElementRef;
 
   @Output() select: EventEmitter<NbSelectedTimeModel> = new EventEmitter();
 
   @HostListener('click')
   onClick() {
-    this.select.emit({ [this.type]: this.value });
+    this.select.emit({ type: this.type, value: this.value });
     this.scrollToElement();
   }
   _selected: boolean;
