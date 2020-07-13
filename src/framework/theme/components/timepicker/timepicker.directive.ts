@@ -23,6 +23,73 @@ import { NbTrigger, NbTriggerStrategy, NbTriggerStrategyBuilderService } from '.
 import { NbSelectedTimePayload } from './model';
 import { NbDateService } from '../calendar-kit/services/date.service';
 
+/**
+ * The `NbTimePickerDirective` is form control that gives you ability to select time. The timepicker
+ * is shown when input receives a `focus` event.
+ *
+ * ```html
+ * <input [nbTimepicker]="timepicker">
+ * <nb-timepicker #timepicker></nb-datepicker>
+ * ```
+ *
+ * @stacked-example(Showcase, timepicker/timepicker-showcase.component)
+ *
+ * ### Installation
+ *
+ * Import `NbTimepickerModule.forRoot()` to your root module.
+ * ```ts
+ * @NgModule({
+ *   imports: [
+ *     // ...
+ *     NbTimepickerModule.forRoot(),
+ *   ],
+ * })
+ * export class TimepickerModule { }
+ *
+ * You provide isTwelveHoursFormat property to timepicker module
+ * NbTimepickerModule.forRoot({isTwelveHoursFormat: true}),
+ *
+ * You also need to provide implementation of Date service
+ * It could be:
+ * - moment date service:
+ * @NgModule({
+ *   imports: [
+ *     // ...
+ *     NbTimepickerModule,
+ *     NbMomentDateModule,
+ *   ],
+ * })
+ * - native date service
+ *  @NgModule({
+ *   imports: [
+ *     // ...
+ *     NbTimepickerModule,
+ *   ],
+ *   providers: [{ provide: NbDateService, useClass: NbNativeDateService }]
+ * })
+ * - fns date service
+ * @NgModule({
+ *   imports: [
+ *     // ...
+ *     NbTimepickerModule,
+ *     NbDateFnsDateModule,
+ *   ],
+ * })
+ * @styles
+ * timepicker-color:
+ * timepicker-hover-background-color:
+ * timepicker-hover-color:
+ * timepicker-focus-background-color:
+ * timepicker-focus-color:
+ * timepicker-active-background-color:
+ * timepicker-active-color:
+ * timepicker-cell-text-font-size:
+ * timepicker-cell-text-font-weight:
+ * timepicker-basic-color:
+ * timepicker-border-color:
+ * timepicker-border-style:
+ * timepicker-border-width:
+ * */
 @Directive({
   selector: 'input[nbTimepicker]',
   providers: [{
@@ -32,19 +99,6 @@ import { NbDateService } from '../calendar-kit/services/date.service';
   }],
 })
 export class NbTimePickerDirective<D> implements AfterViewInit {
-  /**
-   * NbTimePickerComponent instance passed via input.
-   * */
-  protected _timePickerComponent: NbTimePickerComponent<D>;
-
-  protected overlayRef: NbOverlayRef;
-
-  protected overlayOffset = 8;
-
-  protected positionStrategy: NbAdjustableConnectedPositionStrategy;
-
-  protected destroy$: Subject<void> = new Subject<void>();
-
   /**
    * Provides timepicker component.
    * */
@@ -58,11 +112,17 @@ export class NbTimePickerDirective<D> implements AfterViewInit {
   }
 
   /**
-   * Determines is timepicker overlay opened.
+   * NbTimePickerComponent instance passed via input.
    * */
-  get isOpen(): boolean {
-    return this.overlayRef && this.overlayRef.hasAttached();
-  }
+  protected _timePickerComponent: NbTimePickerComponent<D>;
+
+  /**
+   * Positioning strategy used by overlay.
+   * */
+  protected positionStrategy: NbAdjustableConnectedPositionStrategy;
+  protected overlayRef: NbOverlayRef;
+  protected overlayOffset = 8;
+  protected destroy$: Subject<void> = new Subject<void>();
 
   /**
    * Trigger strategy used by overlay.
@@ -75,6 +135,13 @@ export class NbTimePickerDirective<D> implements AfterViewInit {
    * */
   get input(): HTMLInputElement {
     return this.hostRef.nativeElement;
+  }
+
+  /**
+   * Determines is timepicker overlay opened.
+   * */
+  get isOpen(): boolean {
+    return this.overlayRef && this.overlayRef.hasAttached();
   }
 
   /**
@@ -154,7 +221,7 @@ export class NbTimePickerDirective<D> implements AfterViewInit {
 
   protected subscribeOnApplyClick() {
     this.timepicker.onSelectTime.subscribe((value: NbSelectedTimePayload<D>) => {
-      this.setInputValue = this.dateService.format(value.time, value.format);
+      this.setInputValue = this.dateService.format(value.time, value.format).toUpperCase();
       this.timepicker.date = value.time;
       if (value.save) {
         this.hide();

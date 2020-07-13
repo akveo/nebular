@@ -47,7 +47,7 @@ export abstract class NbDateService<D> {
   /**
    * Returns date with selected hour
    * */
- abstract setHour(date: D, hour: number): D;
+  abstract setHour(date: D, hour: number): D;
 
   /**
    * Returns date with selected minute
@@ -232,8 +232,12 @@ export abstract class NbDateService<D> {
 
   abstract getWeekNumber(date: D): number;
 
-  isEqualTime(date1: D, date2: D): boolean {
-    return this.isSameHour(date1, date2) && this.isSameMinute(date1, date2) && this.isSameSecond(date1, date2);
+  isEqualTime(date1: D, date2: D, compareSeconds: boolean = false): boolean {
+    if (compareSeconds) {
+      return this.isSameHour(date1, date2) && this.isSameMinute(date1, date2) && this.isSameSecond(date1, date2);
+    } else {
+      return this.isSameHour(date1, date2) && this.isSameMinute(date1, date2);
+    }
   }
 
   isSameHour(date1: D, date2: D): boolean {

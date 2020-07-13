@@ -20,7 +20,7 @@ import { NbMomentDateModule } from '../../../framework/moment/moment.module';
     TimepickerFullHoursFormatComponent,
   ],
   imports: [
-    NbTimepickerModule.forRoot(),
+    NbTimepickerModule.forRoot({isTwelveHoursFormat: false}),
     TimepickerRoutingModule,
     NbInputModule,
     NbCardModule,

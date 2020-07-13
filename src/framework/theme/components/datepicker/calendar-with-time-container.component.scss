@@ -6,7 +6,7 @@
 @import '../../styles/core/mixins';
 
 :host {
-  ::ng-deep nb-card.nb-time-picker-container {
+  ::ng-deep nb-card.nb-timepicker-container {
     flex: 1 0 0;
     border-radius: 0;
     width: auto;

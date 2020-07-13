@@ -1,4 +1,4 @@
-<nb-card *nbPortal class="nb-time-picker-container">
+<nb-card *nbPortal class="nb-timepicker-container">
   <nb-card-header class="column-header">
     <div class="text-hint">{{useFullTimeFormat ? 'Time' : 'Hr'}}</div>
     <div *ngIf="!useFullTimeFormat" class="text-hint">Min</div>
@@ -74,6 +74,8 @@
   </div>
   <nb-card-footer *ngIf="showFooter" class="actions-footer">
     <nb-calendar-actions
+      [applyButtonText]="applyButtonText"
+      [currentTimeButtonText]="currentTimeButtonText"
       (setCurrentTime)="setCurrentTime()"
       (saveValue)="saveValue()"
     ></nb-calendar-actions>

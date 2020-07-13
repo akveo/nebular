@@ -15,9 +15,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
         <input nbInput
                type="text"
                [nbTimepicker]="timepicker"/>
-        <nb-timepicker
-          #timepicker="nbTimepicker"
-          [withSeconds]="true"></nb-timepicker>
+        <nb-timepicker #timepicker [withSeconds]="true"></nb-timepicker>
       </nb-card-body>
     </nb-card>
   `,

@@ -186,6 +186,32 @@ describe('native-date-service', () => {
     expect(newDate.getTime()).toBe(new Date(2019, 11, 16).getTime());
   });
 
+  it('should set hour', () => {
+    const newDate = dateService.setHour(new Date(), 12);
+    expect(newDate.getHours()).toEqual(12);
+  });
+
+  it('should set minute', () => {
+    const newDate = dateService.setMinute(new Date(), 30);
+    expect(newDate.getMinutes()).toEqual(30);
+  });
+
+  it('should set seconds', () => {
+    const newDate = dateService.setSecond(new Date(), 30);
+    expect(newDate.getSeconds()).toEqual(30);
+  });
+
+  it('should add hour', () => {
+    const newDate = dateService.addHour(new Date(2020, 3, 24, 8), 1);
+    expect(newDate.getHours()).toEqual(9);
+  });
+
+  it('should add minute', () => {
+    const newDate = dateService.addMinutes(new Date(2020, 3, 24, 8, 40), 20);
+    expect(newDate.getHours()).toEqual(9);
+    expect(newDate.getMinutes()).toEqual(0);
+  });
+
   it('should create date', () => {
     const date = dateService.createDate(2018, 6, 16);
     expect(date).toEqual(new Date(2018, 6, 16));

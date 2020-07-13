@@ -16,6 +16,9 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
         <nb-date-timepicker
           [title]="'Title'"
           [withSeconds]="false"
+          [isTwelveHoursFormat]="true"
+          [applyButtonText]="'Save'"
+          [currentTimeButtonText]="'Set current time'"
           #formpicker></nb-date-timepicker>
       </nb-card-body>
     </nb-card>

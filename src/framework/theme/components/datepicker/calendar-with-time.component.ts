@@ -7,7 +7,151 @@ export interface NbCalendarWithTime {
   isTwelveHoursFormat: boolean;
   withSeconds: boolean;
 }
-
+/**
+ * Calendar with time component.
+ *
+ * ```html
+ * <input nbInput placeholder="Pick Date" [nbDatepicker]="formpicker">
+ * <nb-date-timepicker #formpicker</nb-date-timepicker>
+ * ```
+ *
+ * Basic usage example
+ * @stacked-example(Showcase, calendar/date-timepicker-showcase.component)
+ *
+ * ### Installation
+ *
+ * Import `NbCalendarModule` to your feature module.
+ * ```ts
+ * @NgModule({
+ *   imports: [
+ *     // ...
+ *     NbDatepickerModule.forRoot(),
+ *     NbTimepickerModule.forRoot(),
+ *   ],
+ * })
+ * export class DatepickerModule { }
+ * @styles
+ *
+ * timepicker-color:
+ * timepicker-hover-background-color:
+ * timepicker-hover-color:
+ * timepicker-focus-background-color:
+ * timepicker-focus-color:
+ * timepicker-active-background-color:
+ * timepicker-active-color:
+ * timepicker-cell-text-font-size:
+ * timepicker-cell-text-font-weight:
+ * timepicker-basic-color:
+ * timepicker-border-color:
+ * timepicker-border-style:
+ * timepicker-border-width:
+ * calendar-width:
+ * calendar-background-color:
+ * calendar-border-color:
+ * calendar-border-style:
+ * calendar-border-width:
+ * calendar-border-radius:
+ * calendar-text-color:
+ * calendar-text-font-family:
+ * calendar-text-font-size:
+ * calendar-text-font-weight:
+ * calendar-text-line-height:
+ * calendar-picker-padding-top:
+ * calendar-picker-padding-bottom:
+ * calendar-picker-padding-start:
+ * calendar-picker-padding-end:
+ * calendar-navigation-text-color:
+ * calendar-navigation-text-font-family:
+ * calendar-navigation-title-text-font-size:
+ * calendar-navigation-title-text-font-weight:
+ * calendar-navigation-title-text-line-height:
+ * calendar-navigation-padding:
+ * calendar-cell-inactive-text-color:
+ * calendar-cell-disabled-text-color:
+ * calendar-cell-hover-background-color:
+ * calendar-cell-hover-border-color:
+ * calendar-cell-hover-text-color:
+ * calendar-cell-hover-text-font-size:
+ * calendar-cell-hover-text-font-weight:
+ * calendar-cell-hover-text-line-height:
+ * calendar-cell-active-background-color:
+ * calendar-cell-active-border-color:
+ * calendar-cell-active-text-color:
+ * calendar-cell-active-text-font-size:
+ * calendar-cell-active-text-font-weight:
+ * calendar-cell-active-text-line-height:
+ * calendar-cell-today-background-color:
+ * calendar-cell-today-border-color:
+ * calendar-cell-today-text-color:
+ * calendar-cell-today-text-font-size:
+ * calendar-cell-today-text-font-weight:
+ * calendar-cell-today-text-line-height:
+ * calendar-cell-today-hover-background-color:
+ * calendar-cell-today-hover-border-color:
+ * calendar-cell-today-active-background-color:
+ * calendar-cell-today-active-border-color:
+ * calendar-cell-today-disabled-border-color:
+ * calendar-cell-today-selected-background-color:
+ * calendar-cell-today-selected-border-color:
+ * calendar-cell-today-selected-text-color:
+ * calendar-cell-today-selected-hover-background-color:
+ * calendar-cell-today-selected-hover-border-color:
+ * calendar-cell-today-selected-active-background-color:
+ * calendar-cell-today-selected-active-border-color:
+ * calendar-cell-today-in-range-background-color:
+ * calendar-cell-today-in-range-border-color:
+ * calendar-cell-today-in-range-text-color:
+ * calendar-cell-today-in-range-hover-background-color:
+ * calendar-cell-today-in-range-hover-border-color:
+ * calendar-cell-today-in-range-active-background-color:
+ * calendar-cell-today-in-range-active-border-color:
+ * calendar-cell-selected-background-color:
+ * calendar-cell-selected-border-color:
+ * calendar-cell-selected-text-color:
+ * calendar-cell-selected-text-font-size:
+ * calendar-cell-selected-text-font-weight:
+ * calendar-cell-selected-text-line-height:
+ * calendar-cell-selected-hover-background-color:
+ * calendar-cell-selected-hover-border-color:
+ * calendar-cell-selected-active-background-color:
+ * calendar-cell-selected-active-border-color:
+ * calendar-day-cell-width:
+ * calendar-day-cell-height:
+ * calendar-month-cell-width:
+ * calendar-month-cell-height:
+ * calendar-year-cell-width:
+ * calendar-year-cell-height:
+ * calendar-weekday-background:
+ * calendar-weekday-divider-color:
+ * calendar-weekday-divider-width:
+ * calendar-weekday-text-color:
+ * calendar-weekday-text-font-size:
+ * calendar-weekday-text-font-weight:
+ * calendar-weekday-text-line-height:
+ * calendar-weekday-holiday-text-color:
+ * calendar-weekday-height:
+ * calendar-weekday-width:
+ * calendar-weeknumber-background:
+ * calendar-weeknumber-divider-color:
+ * calendar-weeknumber-divider-width:
+ * calendar-weeknumber-text-color:
+ * calendar-weeknumber-text-font-size:
+ * calendar-weeknumber-text-font-weight:
+ * calendar-weeknumber-text-line-height:
+ * calendar-weeknumber-height:
+ * calendar-weeknumber-width:
+ * calendar-large-width:
+ * calendar-day-cell-large-width:
+ * calendar-day-cell-large-height:
+ * calendar-weekday-large-height:
+ * calendar-weekday-large-width:
+ * calendar-weeknumber-large-height:
+ * calendar-weeknumber-large-width:
+ * calendar-month-cell-large-width:
+ * calendar-month-cell-large-height:
+ * calendar-year-cell-large-width:
+ * calendar-year-cell-large-height:
+ * */
 @Component({
   selector: 'nb-calendar-with-time',
   template: `
@@ -49,6 +193,8 @@ export interface NbCalendarWithTime {
       </nb-card-body>
       <nb-card-footer class="picker-footer">
         <nb-calendar-actions
+          [applyButtonText]="applyButtonText"
+          [currentTimeButtonText]="currentTimeButtonText"
           (setCurrentTime)="saveCurrentTime()"
           (saveValue)="saveValue()"
         ></nb-calendar-actions>
@@ -58,12 +204,46 @@ export interface NbCalendarWithTime {
   styleUrls: ['./calendar-with-time-container.component.scss'],
 })
 export class NbCalendarWithTimeComponent<D> extends NbCalendarComponent<D> implements OnInit {
+  /**
+   * Defines 12 hours format like '07:00 PM'.
+   * */
   @Input() isTwelveHoursFormat: boolean;
+
+  /**
+   * Show seconds in timepicker.
+   * Ignored when useFullTimeFormat is true.
+   * */
   @Input() withSeconds: boolean;
+
+  /**
+   * Show timepicker values in one column with 60 minutes step by default.
+   * */
   @Input() useFullTimeFormat: boolean;
+
+  /**
+   * Defines minutes step when we use fill time format.
+   * If set to 20, it will be: '12:00, 12:20: 12:40, 13:00...'
+   * */
   @Input() step: number;
+
+  /**
+   * Defines time format.
+   * */
   @Input() timeFormat: string;
+
+  /**
+   * Defines text over the timepicker.
+   * */
   @Input() title: string;
+
+
+  @Input() applyButtonText: string;
+
+  @Input() currentTimeButtonText: string;
+
+  /**
+   * Defines selected date.
+   * */
   @Input() set visibleDate(date: D) {
     if (date) {
       this._visibleDate = date;

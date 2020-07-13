@@ -12,17 +12,22 @@ export class NbCalendarTimeModelService<D> {
   readonly PM: string = 'PM';
   readonly AMPM = [this.AM, this.PM];
   readonly timeFormat: string = 'HH:mm';
+  readonly timeFormatWithSeconds: string = 'HH:mm:ss';
+  readonly twelveTimeFormatWithSeconds: string = 'hh:mm:ss a';
+  readonly dateFormat: string = 'yyyy-MM-dd';
   readonly twelveHoursTimeFormat: string = 'hh:mm a';
-
   constructor(protected dateService: NbDateService<D>) {}
 
   getHoursInDay(isTwelveHoursFormat: boolean): string[] {
-    return isTwelveHoursFormat ?
-      range(this.HOURS_IN_DAY_ALT, i => i !== 0 ? this.formatToString(i) : this.HOURS_IN_DAY_ALT.toString())
-      : range(this.HOURS_IN_DAY, i => this.formatToString(i));
+    if (isTwelveHoursFormat) {
+      return range(this.HOURS_IN_DAY_ALT, i => i !== 0 ? this.formatToString(i) :
+        this.HOURS_IN_DAY_ALT.toString());
+    } else {
+      return range(this.HOURS_IN_DAY, i => this.formatToString(i));
+    }
   }
 
-  getFullHours(use12HoursFormat, step = 60): D[] {
+  getFullHours(use12HoursFormat, step = this.MINUTES_AND_SECONDS): D[] {
     let date: D = this.dateService.createDate(2020, 1, 1);
 
     date = this.dateService.setHour(date, 0);
@@ -47,7 +52,7 @@ export class NbCalendarTimeModelService<D> {
   }
 
   getAmPm(date: D): string {
-    return this.dateService.getHour(date) < 12 ? this.AM : this.PM;
+    return this.dateService.getHour(date) < this.HOURS_IN_DAY_ALT ? this.AM : this.PM;
   }
 
   getFormattedTime(date: D, format: string): string {

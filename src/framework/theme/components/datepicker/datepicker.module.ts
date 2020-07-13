@@ -16,7 +16,6 @@ import {
   NbDatepickerComponent,
   NbRangepickerComponent,
   NbBasePickerComponent,
-  NbDateTimePickerComponent,
 } from './datepicker.component';
 import { NbCalendarRangeComponent } from '../calendar/calendar-range.component';
 import { NbCalendarRangeModule } from '../calendar/calendar-range.module';
@@ -26,6 +25,7 @@ import { NbCardModule } from '../card/card.module';
 import { NbBaseCalendarModule } from '../calendar/base-calendar.module';
 import { NbTimepickerModule } from '../timepicker/timepicker.module';
 import { NbCalendarKitModule } from '../calendar-kit/calendar-kit.module';
+import { NbDateTimePickerComponent } from './date-timepicker.component';
 
 @NgModule({
   imports: [

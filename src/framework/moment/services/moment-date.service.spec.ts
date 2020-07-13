@@ -211,6 +211,32 @@ describe('moment-date-service', () => {
     expect(newDate.date()).toEqual(16);
   });
 
+  it('should set hour', () => {
+    const newDate = dateService.setHour(moment(), 12);
+    expect(newDate.hour()).toEqual(12);
+  });
+
+  it('should set minute', () => {
+    const newDate = dateService.setMinute(moment(), 30);
+    expect(newDate.minute()).toEqual(30);
+  });
+
+  it('should set seconds', () => {
+    const newDate = dateService.setSecond(moment(), 30);
+    expect(newDate.seconds()).toEqual(30);
+  });
+
+  it('should add hour', () => {
+    const newDate = dateService.addHour(moment().hour(2), 1);
+    expect(newDate.hour()).toEqual(3);
+  });
+
+  it('should add minute', () => {
+    const newDate = dateService.addMinutes(moment().hour(1).minute(55), 5);
+    expect(newDate.hour()).toEqual(2);
+    expect(newDate.minute()).toEqual(0);
+  });
+
   it('should create date', () => {
     const date = dateService.createDate(2018, 6, 16);
     expect(date.year()).toEqual(2018);

@@ -33,6 +33,6 @@ describe('NbTimePickerComponent', () => {
   it('should set twelve hours format', () => {
     timePicker.isTwelveHoursFormat = true;
     timePicker.withSeconds = true;
-    expect(timePicker.buildTimeFormat()).toEqual('hh:mm:ss A');
+    expect(timePicker.buildTimeFormat()).toEqual('hh:mm:ss a');
   });
 });
