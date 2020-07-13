@@ -3,8 +3,9 @@
 [Documentation](https://hubs.ly/H0n4S800) | [Stackblitz Template](https://stackblitz.com/github/akveo/nebular-seed) | [UI Bakery](https://hubs.ly/H0n4S8d0) - Angular UI Builder
 
 Nebular is a customizable Angular 9 UI Library with a focus on beautiful design and ability to adapt it to your brand easily. It comes with 4 stunning visual themes, a powerful theming engine with runtime theme switching and support of custom css properties mode. Nebular is based on Eva Design System specifications.
+**Nebular 5.0, Angular 9**
 
-<a href="https://hubs.ly/H0n4RHQ0"><img src="https://i.imgur.com/C8ZN4SA.jpg"></a>
+<a href="https://hubs.ly/H0n4RHQ0"><img src="https://i.imgur.com/vu5Ro3A.jpg"></a>
 
 ## What's included
 
