@@ -56,9 +56,6 @@
 
 .actions-footer {
   width: 100%;
-
-  @include nb-ltr(padding-left, 0.625rem);
-  @include nb-rtl(padding-right, 0.625rem);
 }
 
 nb-card-header,

@@ -60,6 +60,17 @@ import { NbCalendarTimeModelService } from '../calendar-kit/services/calendar-ti
  * timepicker-border-color:
  * timepicker-border-style:
  * timepicker-border-width:
+ * timepicker-scrollbar-color:
+ * timepicker-scrollbar-background-color:
+ * timepicker-scrollbar-width:
+ * timepicker-cell-line-height:
+ * timepicker-cell-font-size:
+ * timepicker-single-column-width:
+ * timepicker-multiple-column-width:
+ * timepicker-title-height:
+ * timepicker-title-padding:
+ * timepicker-container-width:
+ * timepicker-container-height:
  * */
 @Component({
   selector: 'nb-timepicker',
@@ -69,6 +80,33 @@ import { NbCalendarTimeModelService } from '../calendar-kit/services/calendar-ti
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NbTimePickerComponent<D> implements OnChanges {
+  _isTwelveHoursFormat: boolean;
+  _withSeconds: boolean;
+  _useFullTimeFormat: boolean;
+  _step: number;
+  _timeFormat: string;
+  fullTimeOptions: D[];
+  hoursColumnOptions: string[];
+  minutesColumnOptions: string[];
+  secondsColumnOptions: string[];
+  ampmColumnOptions: string[];
+  readonly HOURS_IND_DAY: number = 12;
+  fullTime: NbTimepickerTypes = NbTimepickerTypes.FULL_TIME;
+  hour: NbTimepickerTypes = NbTimepickerTypes.HOUR;
+  minute: NbTimepickerTypes = NbTimepickerTypes.MINUTE;
+  sec: NbTimepickerTypes = NbTimepickerTypes.SECOND;
+  ampm: NbTimepickerTypes = NbTimepickerTypes.AMPM;
+  hostRef: ElementRef;
+  /**
+   * Defines time format string.
+   * */
+  get timeFormat(): string {
+    return this._timeFormat;
+  }
+
+  set timeFormat(timeFormat: string) {
+    this._timeFormat = timeFormat;
+  }
 
   /**
    * Defines 12 hours format like '07:00 PM'.
@@ -135,44 +173,14 @@ export class NbTimePickerComponent<D> implements OnChanges {
    * @docs-private
    */
   @Input() showFooter: boolean = true;
-
   @Input() applyButtonText: string;
   @Input() currentTimeButtonText: string;
+
   /**
    * Emits date when selected.
    * */
   @Output() onSelectTime: EventEmitter<NbSelectedTimePayload<D>> = new EventEmitter<NbSelectedTimePayload<D>>();
-
-  /**
-   * Defines time format string.
-   * */
-  get timeFormat(): string {
-    return this._timeFormat;
-  }
-
-  set timeFormat(timeFormat: string) {
-    this._timeFormat = timeFormat;
-  }
-
-  fullTimeOptions: D[];
-  hoursColumnOptions: string[];
-  minutesColumnOptions: string[];
-  secondsColumnOptions: string[];
-  ampmColumnOptions: string[];
-  _isTwelveHoursFormat: boolean;
-  _withSeconds: boolean;
-  _useFullTimeFormat: boolean;
-  _step: number;
-  _timeFormat: string;
   @ViewChild(NbPortalDirective, {static: true}) portal: NbPortalDirective;
-
-  readonly HOURS_IND_DAY: number = 12;
-  fullTime: NbTimepickerTypes = NbTimepickerTypes.FULL_TIME;
-  hour: NbTimepickerTypes = NbTimepickerTypes.HOUR;
-  minute: NbTimepickerTypes = NbTimepickerTypes.MINUTE;
-  sec: NbTimepickerTypes = NbTimepickerTypes.SECOND;
-  ampm: NbTimepickerTypes = NbTimepickerTypes.AMPM;
-  hostRef: ElementRef;
 
   constructor(@Inject(NB_TIME_PICKER_CONFIG) config: NbTimePickerConfig,
               @Inject(LOCALE_ID) locale: string,
@@ -285,7 +293,8 @@ export class NbTimePickerComponent<D> implements OnChanges {
         const selectedHour: number = this.isTwelveHoursFormat && hour > this.HOURS_IND_DAY ?
           hour - this.HOURS_IND_DAY : hour;
 
-        return (item === selectedHour) || (selectedHour === 0 && item === this.HOURS_IND_DAY);
+        return (item === selectedHour) ||
+          (selectedHour === 0 && item === this.HOURS_IND_DAY && this.isTwelveHoursFormat);
       case NbTimepickerTypes.MINUTE:
         const minute: number = this.dateService.getMinute(this.date);
 

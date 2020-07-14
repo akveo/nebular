@@ -232,7 +232,7 @@ describe('moment-date-service', () => {
   });
 
   it('should add minute', () => {
-    const newDate = dateService.addMinutes(moment().hour(1).minute(55), 5);
+    const newDate = dateService.addMinute(moment().hour(1).minute(55), 5);
     expect(newDate.hour()).toEqual(2);
     expect(newDate.minute()).toEqual(0);
   });

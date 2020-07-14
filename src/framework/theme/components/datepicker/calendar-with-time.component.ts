@@ -2,11 +2,13 @@ import { Component, Input, OnInit } from '@angular/core';
 import { NbCalendarComponent } from '../calendar/calendar.component';
 import { NbSelectedTimePayload } from '../timepicker/model';
 import { NbDateService } from '../calendar-kit/services/date.service';
+import { NbCalendarTimeModelService } from '../calendar-kit/services/calendar-time-model.service';
 
 export interface NbCalendarWithTime {
   isTwelveHoursFormat: boolean;
   withSeconds: boolean;
 }
+
 /**
  * Calendar with time component.
  *
@@ -45,6 +47,17 @@ export interface NbCalendarWithTime {
  * timepicker-border-color:
  * timepicker-border-style:
  * timepicker-border-width:
+ * timepicker-scrollbar-color:
+ * timepicker-scrollbar-background-color:
+ * timepicker-scrollbar-width:
+ * timepicker-cell-line-height:
+ * timepicker-cell-font-size:
+ * timepicker-single-column-width:
+ * timepicker-multiple-column-width:
+ * timepicker-title-height:
+ * timepicker-title-padding:
+ * timepicker-container-width:
+ * timepicker-container-height:
  * calendar-width:
  * calendar-background-color:
  * calendar-border-color:
@@ -204,6 +217,31 @@ export interface NbCalendarWithTime {
   styleUrls: ['./calendar-with-time-container.component.scss'],
 })
 export class NbCalendarWithTimeComponent<D> extends NbCalendarComponent<D> implements OnInit {
+  _time: D;
+  _visibleDate: D;
+
+  set time(time: D) {
+    this._time = time;
+  };
+
+  get time(): D {
+    return this._time;
+  }
+
+  /**
+   * Defines selected date.
+   * */
+  @Input() set visibleDate(date: D) {
+    if (date) {
+      this._visibleDate = date;
+      this.time = date;
+    }
+  };
+
+  get visibleDate(): D {
+    return this._visibleDate;
+  }
+
   /**
    * Defines 12 hours format like '07:00 PM'.
    * */
@@ -241,33 +279,11 @@ export class NbCalendarWithTimeComponent<D> extends NbCalendarComponent<D> imple
 
   @Input() currentTimeButtonText: string;
 
-  /**
-   * Defines selected date.
-   * */
-  @Input() set visibleDate(date: D) {
-    if (date) {
-      this._visibleDate = date;
-      this.time = date;
-    }
-  };
-  get visibleDate(): D {
-    return this._visibleDate;
-  }
-
-  set time(time: D) {
-    this._time = time;
-  };
-
-  get time(): D {
-    return this._time;
-  }
-
-  constructor(protected dateService: NbDateService<D>) {
+  constructor(protected dateService: NbDateService<D>,
+              protected calendarTimeModelService: NbCalendarTimeModelService<D>,
+  ) {
     super();
   }
-
-  _time: D;
-  _visibleDate: D;
 
   ngOnInit(): void {
     this.date = this.dateService.today();
@@ -301,11 +317,12 @@ export class NbCalendarWithTimeComponent<D> extends NbCalendarComponent<D> imple
       `${this.dateService.getDate(this.date)}`;
     const time: string = this.dateService.format(this.time, this.timeFormat);
 
-    return this.dateService.parse(`${date} ${time}`, `yyyy-MM-dd ${this.timeFormat}`);
+    return this.dateService.parse(`${date} ${time}`, `${this.calendarTimeModelService.
+      dateFormat} ${this.timeFormat}`);
   }
 
   /**
-   * We not show seconds with twelve hours format
+   * We don't show seconds with twelve hours format
    * */
   showSeconds(): boolean {
     return this.withSeconds && !this.isTwelveHoursFormat;

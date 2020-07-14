@@ -30,5 +30,18 @@
       @include nb-ltr(border-left, $border);
       @include nb-rtl(border-right, $border);
     }
+
+    .timepicker-single-column-width {
+      width: nb-theme(timepicker-single-column-width);;
+    }
+
+    .timepicker-multiple-column-width {
+      width: nb-theme(timepicker-multiple-column-width);
+    }
+
+    .picker-title {
+      height: nb-theme(timepicker-title-height);
+      padding: nb-theme(timepicker-title-padding);
+    }
   }
 }

@@ -41,7 +41,7 @@ export class NbCalendarTimeModelService<D> {
 
     while (date < endDate) {
       result.push(date);
-      date = this.dateService.addMinutes(date, step);
+      date = this.dateService.addMinute(date, step);
     }
 
     return result;

@@ -89,6 +89,17 @@ import { NbDateService } from '../calendar-kit/services/date.service';
  * timepicker-border-color:
  * timepicker-border-style:
  * timepicker-border-width:
+ * timepicker-scrollbar-color:
+ * timepicker-scrollbar-background-color:
+ * timepicker-scrollbar-width:
+ * timepicker-cell-line-height:
+ * timepicker-cell-font-size:
+ * timepicker-single-column-width:
+ * timepicker-multiple-column-width:
+ * timepicker-title-height:
+ * timepicker-title-padding:
+ * timepicker-container-width:
+ * timepicker-container-height:
  * */
 @Directive({
   selector: 'input[nbTimepicker]',

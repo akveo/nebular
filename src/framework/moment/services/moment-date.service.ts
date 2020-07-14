@@ -11,7 +11,7 @@ import { NbDateService } from '@nebular/theme';
 
 import * as _moment from 'moment';
 // @ts-ignore
-import { default as _rollupMoment, Moment } from 'moment';
+import { default as _rollupMoment, LongDateFormatKey, Moment } from 'moment';
 
 const moment = _rollupMoment || _moment;
 
@@ -25,6 +25,7 @@ export class NbMomentDateService extends NbDateService<Moment> {
     days: { [key: string]: string[] },
   };
 
+  readonly DATE_FORMAT: LongDateFormatKey = 'LT';
   constructor(@Inject(LOCALE_ID) locale: string) {
     super();
     this.setLocale(locale);
@@ -36,15 +37,15 @@ export class NbMomentDateService extends NbDateService<Moment> {
   }
 
   setHour(date: Moment, hour: number): Moment {
-    return this.clone(date.set({ hour }));
+    return this.clone(date).set({ hour });
   }
 
   setMinute(date: Moment, minute: number): Moment {
-    return this.clone(date.set({ minute }));
+    return this.clone(date).set({ minute });
   }
 
   setSecond(date: Moment, second: number): Moment {
-    return this.clone(date.set({ second }));
+    return this.clone(date).set({ second });
   }
 
   addDay(date: Moment, days: number): Moment {
@@ -59,7 +60,7 @@ export class NbMomentDateService extends NbDateService<Moment> {
     return this.clone(date).add({ years });
   }
 
-  addMinutes(date: Moment, minute: number): Moment {
+  addMinute(date: Moment, minute: number): Moment {
     return this.clone(date).add( { minute });
   }
 
@@ -90,7 +91,7 @@ export class NbMomentDateService extends NbDateService<Moment> {
   }
 
   getLocaleTimeFormat(): string {
-    return moment.localeData().longDateFormat('LT');
+    return moment.localeData().longDateFormat(this.DATE_FORMAT);
   }
 
   getDate(date: Moment): number {
@@ -122,7 +123,7 @@ export class NbMomentDateService extends NbDateService<Moment> {
   }
 
   getSecond(date: Moment): number {
-    return this.clone(date).second();
+    return date.second();
   }
 
   getMonthEnd(date: Moment): Moment {

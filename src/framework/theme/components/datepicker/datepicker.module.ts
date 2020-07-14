@@ -34,7 +34,7 @@ import { NbDateTimePickerComponent } from './date-timepicker.component';
     NbCalendarRangeModule,
     NbCardModule,
     NbBaseCalendarModule,
-    NbTimepickerModule.forRoot(),
+    NbTimepickerModule,
     CommonModule,
     NbCalendarKitModule,
   ],

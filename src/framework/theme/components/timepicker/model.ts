@@ -13,7 +13,7 @@ export const enum NbTimepickerTypes {
   SECOND = 'second',
   AMPM = 'ampm',
 }
-export const NB_TIME_PICKER_CONFIG = new InjectionToken('CONFIG');
+export const NB_TIME_PICKER_CONFIG = new InjectionToken('NB_TIME_PICKER_CONFIG');
 
 export interface NbTimePickerConfig {
   isTwelveHoursFormat?: boolean,

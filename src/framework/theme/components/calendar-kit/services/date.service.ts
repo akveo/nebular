@@ -221,7 +221,7 @@ export abstract class NbDateService<D> {
    /**
    * Returns date with added number of minutes.
    * */
-  abstract addMinutes(date: D, minute: number): D;
+  abstract addMinute(date: D, minute: number): D;
 
     /**
    * Returns date with added number of years.

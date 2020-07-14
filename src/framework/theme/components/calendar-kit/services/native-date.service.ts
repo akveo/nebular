@@ -133,7 +133,7 @@ export class NbNativeDateService extends NbDateService<Date> {
     return month;
   }
 
-  addMinutes(date: Date, minute: number): Date {
+  addMinute(date: Date, minute: number): Date {
     const result: Date = new Date(date);
     result.setMinutes(date.getMinutes() + minute);
 

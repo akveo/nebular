@@ -1,76 +1,85 @@
 <nb-card *nbPortal class="nb-timepicker-container">
   <nb-card-header class="column-header">
-    <div class="text-hint">{{useFullTimeFormat ? 'Time' : 'Hr'}}</div>
-    <div *ngIf="!useFullTimeFormat" class="text-hint">Min</div>
-    <div *ngIf="withSeconds && !useFullTimeFormat" class="text-hint">Sec</div>
-    <div *ngIf="isTwelveHoursFormat && !useFullTimeFormat" class="text-hint">Am/Pm</div>
+    <ng-container *ngIf="!useFullTimeFormat; else fullTimeHeadersBlock">
+      <div class="text-hint">Hr</div>
+      <div class="text-hint">Min</div>
+      <div *ngIf="withSeconds" class="text-hint">Sec</div>
+      <div *ngIf="isTwelveHoursFormat" class="text-hint">Am/Pm</div>
+    </ng-container>
+    <ng-template #fullTimeHeadersBlock>
+      <div class="text-hint">Time</div>
+    </ng-template>
   </nb-card-header>
   <div class="picker-body">
-    <nb-list *ngIf="useFullTimeFormat" class="values-list">
-      <nb-list-item
-        class="list-item"
-        [ngClass]="{'selected': isSelectedFullTimeValue(item)}"
-        *ngFor="let item of fullTimeOptions; trackBy: trackByTimeValues">
-        <nb-timepicker-cell
-          [value]="getFullTimeString(item)"
-          [selected]="isSelectedFullTimeValue(item)"
-          [type]="fullTime"
-          (select)="selectFullTime(item)">
-        </nb-timepicker-cell>
-      </nb-list-item>
-    </nb-list>
-    <nb-list *ngIf="!useFullTimeFormat" class="values-list">
-      <nb-list-item
-        class="list-item"
-        [ngClass]="{'selected': isSelectedTimeValue(item, hour)}"
-        *ngFor="let item of hoursColumnOptions; trackBy: trackByTimeValues">
-        <nb-timepicker-cell
-          [value]="item"
-          [selected]="isSelectedTimeValue(item, hour)"
-          [type]="hour"
-          (select)="select($event)">
-        </nb-timepicker-cell>
-      </nb-list-item>
-    </nb-list>
-    <nb-list *ngIf="!useFullTimeFormat" class="values-list">
-      <nb-list-item
-        class="list-item"
-        [ngClass]="{'selected': isSelectedTimeValue(item, minute)}"
-        *ngFor="let item of minutesColumnOptions; trackBy: trackByTimeValues">
-        <nb-timepicker-cell
-          [value]="item"
-          [selected]="item === isSelectedTimeValue(item, minute)"
-          [type]="minute"
-          (select)="select($event)">
-        </nb-timepicker-cell>
-      </nb-list-item>
-    </nb-list>
-    <nb-list *ngIf="showSeconds()" class="values-list">
-      <nb-list-item
-        class="list-item"
-        [ngClass]="{'selected': isSelectedTimeValue(item, sec)}"
-        *ngFor="let item of secondsColumnOptions; trackBy: trackByTimeValues">
-        <nb-timepicker-cell
-          [value]="item"
-          [selected]="isSelectedTimeValue(item, sec)"
-          [type]="sec"
-          (select)="select($event)">
-        </nb-timepicker-cell>
-      </nb-list-item>
-    </nb-list>
-    <nb-list *ngIf="isTwelveHoursFormat && !useFullTimeFormat" class="values-list">
-      <nb-list-item
-        class="list-item"
-        [ngClass]="{'selected': isSelectedTimeValue(item, ampm)}"
-        *ngFor="let item of ampmColumnOptions; trackBy: trackByTimeValues">
-        <nb-timepicker-cell
-          [value]="item"
-          [selected]="item === isSelectedTimeValue(item, ampm)"
-          [type]="ampm"
-          (select)="changeAMPM($event)">
-        </nb-timepicker-cell>
-      </nb-list-item>
-    </nb-list>
+    <ng-container *ngIf="!useFullTimeFormat; else fullTimeColumnBlock">
+      <nb-list class="values-list">
+        <nb-list-item
+          class="list-item"
+          [ngClass]="{'selected': isSelectedTimeValue(item, hour)}"
+          *ngFor="let item of hoursColumnOptions; trackBy: trackByTimeValues">
+          <nb-timepicker-cell
+            [value]="item"
+            [selected]="isSelectedTimeValue(item, hour)"
+            [type]="hour"
+            (select)="select($event)">
+          </nb-timepicker-cell>
+        </nb-list-item>
+      </nb-list>
+      <nb-list class="values-list">
+        <nb-list-item
+          class="list-item"
+          [ngClass]="{'selected': isSelectedTimeValue(item, minute)}"
+          *ngFor="let item of minutesColumnOptions; trackBy: trackByTimeValues">
+          <nb-timepicker-cell
+            [value]="item"
+            [selected]="isSelectedTimeValue(item, minute)"
+            [type]="minute"
+            (select)="select($event)">
+          </nb-timepicker-cell>
+        </nb-list-item>
+      </nb-list>
+      <nb-list *ngIf="showSeconds()" class="values-list">
+        <nb-list-item
+          class="list-item"
+          [ngClass]="{'selected': isSelectedTimeValue(item, sec)}"
+          *ngFor="let item of secondsColumnOptions; trackBy: trackByTimeValues">
+          <nb-timepicker-cell
+            [value]="item"
+            [selected]="isSelectedTimeValue(item, sec)"
+            [type]="sec"
+            (select)="select($event)">
+          </nb-timepicker-cell>
+        </nb-list-item>
+      </nb-list>
+      <nb-list *ngIf="isTwelveHoursFormat" class="values-list">
+        <nb-list-item
+          class="list-item"
+          [ngClass]="{'selected': isSelectedTimeValue(item, ampm)}"
+          *ngFor="let item of ampmColumnOptions; trackBy: trackByTimeValues">
+          <nb-timepicker-cell
+            [value]="item"
+            [selected]="item === isSelectedTimeValue(item, ampm)"
+            [type]="ampm"
+            (select)="changeAMPM($event)">
+          </nb-timepicker-cell>
+        </nb-list-item>
+      </nb-list>
+    </ng-container>
+    <ng-template #fullTimeColumnBlock>
+      <nb-list class="values-list">
+        <nb-list-item
+          class="list-item"
+          [ngClass]="{'selected': isSelectedFullTimeValue(item)}"
+          *ngFor="let item of fullTimeOptions; trackBy: trackByTimeValues">
+          <nb-timepicker-cell
+            [value]="getFullTimeString(item)"
+            [selected]="isSelectedFullTimeValue(item)"
+            [type]="fullTime"
+            (select)="selectFullTime(item)">
+          </nb-timepicker-cell>
+        </nb-list-item>
+      </nb-list>
+    </ng-template>
   </div>
   <nb-card-footer *ngIf="showFooter" class="actions-footer">
     <nb-calendar-actions
