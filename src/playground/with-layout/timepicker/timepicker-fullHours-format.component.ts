@@ -11,7 +11,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <nb-card size="large">
-      <nb-card-body class="example-items-col">
+      <nb-card-body>
         <input nbInput
                type="text"
                [nbTimepicker]="timepicker"/>

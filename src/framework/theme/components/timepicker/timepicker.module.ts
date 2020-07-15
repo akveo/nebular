@@ -19,6 +19,7 @@ import { NbTimePickerCellComponent } from './timepicker-cell.component';
 import { NbCalendarTimeModelService } from '../calendar-kit/services/calendar-time-model.service';
 import { NB_TIME_PICKER_CONFIG, NbTimePickerConfig } from './model';
 import { NbCalendarKitModule } from '../calendar-kit/calendar-kit.module';
+import { NbLayoutScrollService } from '../../services/scroll.service';
 
 @NgModule({
   imports: [
@@ -31,7 +32,7 @@ import { NbCalendarKitModule } from '../calendar-kit/calendar-kit.module';
     NbCardModule,
     NbCalendarKitModule,
   ],
-  providers: [NbCalendarTimeModelService],
+  providers: [NbCalendarTimeModelService, NbLayoutScrollService],
   exports: [NbTimePickerComponent, NbTimePickerCellComponent, NbTimePickerDirective],
   declarations: [NbTimePickerComponent, NbTimePickerCellComponent, NbTimePickerDirective],
 })

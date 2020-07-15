@@ -37,27 +37,36 @@
 
     .values-list {
       &:not(:last-of-type) {
-        border-right: $border;
+        @include nb-ltr(border-right, $border);
+        @include nb-rtl(border-left, $border);
       }
 
       @include nb-scrollbars(
           nb-theme(timepicker-scrollbar-color),
           nb-theme(timepicker-scrollbar-background-color),
           nb-theme(timepicker-scrollbar-width));
+    }
 
+    &.supports-scrollbar-theming {
+      .values-list:hover .list-item:not(.am-pm-item) {
+        @include nb-ltr(margin-right, nb-theme(timepicker-list-item-hover));
+        @include nb-rtl(margin-left, nb-theme(timepicker-list-item-hover));
+      }
     }
 
     .text-hint {
       padding: 0.625rem;
 
       &:not(:last-child) {
-        border-right: $border;
+        @include nb-ltr(border-right, $border);
+        @include nb-rtl(border-left, $border);
       }
     }
 
     .column-header {
       border-bottom: $border;
     }
+
     .actions-footer {
       @include nb-ltr(padding-left, 0.625rem);
       @include nb-rtl(padding-right, 0.625rem);

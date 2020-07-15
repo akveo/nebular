@@ -11,18 +11,19 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <nb-card size="large">
-      <nb-card-body class="example-items-col">
+      <nb-card-body>
         <input nbInput placeholder="Pick Date" [nbDatepicker]="formpicker">
         <nb-date-timepicker
           [title]="'Title'"
-          [withSeconds]="false"
-          [isTwelveHoursFormat]="true"
+          [withSeconds]="true"
+          [isTwelveHoursFormat]="false"
           [applyButtonText]="'Save'"
           [currentTimeButtonText]="'Set current time'"
           #formpicker></nb-date-timepicker>
       </nb-card-body>
     </nb-card>
   `,
+  styleUrls: ['./datepicker-example.scss'],
 })
 export class DateTimepickerShowcaseComponent {
 }

@@ -1,4 +1,5 @@
-<nb-card *nbPortal class="nb-timepicker-container">
+<nb-card *nbPortal [class.supports-scrollbar-theming]="!isFirefox()"
+         class="nb-timepicker-container">
   <nb-card-header class="column-header">
     <ng-container *ngIf="!useFullTimeFormat; else fullTimeHeadersBlock">
       <div class="text-hint">Hr</div>
@@ -53,7 +54,7 @@
       </nb-list>
       <nb-list *ngIf="isTwelveHoursFormat" class="values-list">
         <nb-list-item
-          class="list-item"
+          class="list-item am-pm-item"
           [ngClass]="{'selected': isSelectedTimeValue(item, ampm)}"
           *ngFor="let item of ampmColumnOptions; trackBy: trackByTimeValues">
           <nb-timepicker-cell

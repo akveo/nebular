@@ -8,13 +8,11 @@
 .nb-timepicker-container {
   overflow: hidden;
   margin-bottom: 0;
-  flex-direction: column;
-  flex-wrap: nowrap;
 }
 
 .values-list {
   width: 100%;
-  overflow-y: hidden;
+  overflow: hidden;
 
   &:hover {
     overflow-y: auto;
@@ -27,12 +25,6 @@
   border: 0;
   padding: 0;
   cursor: pointer;
-}
-
-.value {
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .picker-body {

@@ -6,27 +6,36 @@ import {
   EventEmitter,
   HostListener,
   Input,
+  NgZone,
+  OnDestroy,
   Output,
   ViewChild,
 } from '@angular/core';
 import { NbSelectedTimeModel, NbTimepickerTypes } from './model';
+import { filter, take, takeUntil } from 'rxjs/operators';
+import { merge, Subject } from 'rxjs';
 
 @Component({
   selector: 'nb-timepicker-cell',
   template: `
-    <div #timepickerOption class="value">{{ value }}</div>
+    <div #timepickerOption>{{ value }}</div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['./timepicker-cell.component.scss'],
 
 })
-export class NbTimePickerCellComponent implements AfterViewInit {
+export class NbTimePickerCellComponent implements AfterViewInit, OnDestroy {
+  protected selectedChange$ = new Subject<boolean>();
+  protected unselected$ = this.selectedChange$.pipe(filter((selected) => !selected));
+  protected destroy$ = new Subject<void>();
   _selected: boolean;
+
   @Input() set selected(selected: boolean) {
     if (selected) {
       this._selected = selected;
       this.scrollToElement();
     }
+    this.selectedChange$.next(selected);
   };
   get selected(): boolean {
     return this._selected;
@@ -37,15 +46,22 @@ export class NbTimePickerCellComponent implements AfterViewInit {
 
   @ViewChild('timepickerOption') element: ElementRef;
 
+  constructor(protected ngZone: NgZone) {
+  }
+
   @HostListener('click')
   onClick() {
     this.select.emit({ type: this.type, value: this.value });
-    this.scrollToElement();
   }
 
   ngAfterViewInit(): void {
     if (this.selected) {
-      this.scrollToElement();
+      this.ngZone.onStable
+      .pipe(
+        take(1),
+        takeUntil(merge(this.unselected$, this.destroy$)))
+      .subscribe(() =>
+        this.ngZone.runOutsideAngular(() => this.scrollToElement()));
     }
   }
 
@@ -53,5 +69,10 @@ export class NbTimePickerCellComponent implements AfterViewInit {
     if (this.element) {
       this.element.nativeElement.scrollIntoView({block: 'center'});
     }
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

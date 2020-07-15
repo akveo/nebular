@@ -207,7 +207,7 @@ describe('native-date-service', () => {
   });
 
   it('should add minute', () => {
-    const newDate = dateService.addMinutes(new Date(2020, 3, 24, 8, 40), 20);
+    const newDate = dateService.addMinute(new Date(2020, 3, 24, 8, 40), 20);
     expect(newDate.getHours()).toEqual(9);
     expect(newDate.getMinutes()).toEqual(0);
   });

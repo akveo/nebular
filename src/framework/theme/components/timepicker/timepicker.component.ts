@@ -22,6 +22,7 @@ import {
 } from './model';
 import { NbDateService } from '../calendar-kit/services/date.service';
 import { NbCalendarTimeModelService } from '../calendar-kit/services/calendar-time-model.service';
+import { NbPlatform } from '../cdk/platform/platform-service';
 
 /**
  * Calendar with Time component provides a capability to choose a date and time used by datepicker.
@@ -183,6 +184,7 @@ export class NbTimePickerComponent<D> implements OnChanges {
   @ViewChild(NbPortalDirective, {static: true}) portal: NbPortalDirective;
 
   constructor(@Inject(NB_TIME_PICKER_CONFIG) config: NbTimePickerConfig,
+              protected platformService: NbPlatform,
               @Inject(LOCALE_ID) locale: string,
               protected cd: ChangeDetectorRef,
               protected calendarTimeModelService: NbCalendarTimeModelService<D>,
@@ -328,5 +330,9 @@ export class NbTimePickerComponent<D> implements OnChanges {
       return `${this.withSeconds && !this.useFullTimeFormat ? this.calendarTimeModelService.timeFormatWithSeconds
         : this.calendarTimeModelService.timeFormat}`;
     }
+  }
+
+  isFirefox(): boolean {
+    return this.platformService.FIREFOX;
   }
 }
