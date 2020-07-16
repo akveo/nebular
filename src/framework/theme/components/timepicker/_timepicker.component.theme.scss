@@ -55,7 +55,7 @@
     }
 
     .text-hint {
-      padding: 0.625rem;
+      padding: nb-theme(timepicker-text-hint-padding);
 
       &:not(:last-child) {
         @include nb-ltr(border-right, $border);

@@ -14,6 +14,7 @@ import { NB_DATE_SERVICE_OPTIONS } from './datepicker.directive';
   selector: 'nb-date-timepicker',
   template: '',
 })
+
 export class NbDateTimePickerComponent<D>
   extends NbBasePickerComponent<D, NbCalendarWithTime, NbCalendarWithTimeComponent<D>>
   implements OnInit {
@@ -21,7 +22,7 @@ export class NbDateTimePickerComponent<D>
 
   @Input() isTwelveHoursFormat: boolean;
   @Input() withSeconds: boolean;
-  @Input() useFullTimeFormat: boolean;
+  @Input() singleColumn: boolean;
   @Input() step: number;
   @Input() title: string;
   @Input() applyButtonText: string;
@@ -43,7 +44,7 @@ export class NbDateTimePickerComponent<D>
   }
 
   protected patchWithInputs() {
-    this.picker.useFullTimeFormat = this.useFullTimeFormat;
+    this.picker.singleColumn = this.singleColumn;
     this.picker.isTwelveHoursFormat = this.isTwelveHoursFormat;
     this.picker.withSeconds = this.withSeconds;
     this.picker.step = this.step;
@@ -86,7 +87,7 @@ export class NbDateTimePickerComponent<D>
       return `${this.calendarWithTimeModelService.dateFormat} ${
         this.calendarWithTimeModelService.twelveHoursTimeFormat}`
     } else {
-      if (this.withSeconds && !this.useFullTimeFormat) {
+      if (this.withSeconds && !this.singleColumn) {
         return `${this.calendarWithTimeModelService.dateFormat} ${
           this.calendarWithTimeModelService.timeFormatWithSeconds}`
       } else {

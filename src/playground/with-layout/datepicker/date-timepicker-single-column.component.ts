@@ -12,14 +12,16 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   template: `
     <nb-card size="large">
       <nb-card-body>
-        <input nbInput
-               type="text"
-               [nbTimepicker]="timepicker"/>
-        <nb-timepicker #timepicker [withSeconds]="false"></nb-timepicker>
+        <input nbInput placeholder="Pick Date" [nbDatepicker]="formpicker">
+        <nb-date-timepicker
+          #formpicker
+          [title]="'Title'"
+          [singleColumn]="true"
+          [step]="10"></nb-date-timepicker>
       </nb-card-body>
     </nb-card>
   `,
-  styleUrls: ['./timepicker-example.scss'],
+  styleUrls: ['./datepicker-example.scss'],
 })
-export class TimepickerShowcaseComponent {
+export class DateTimepickerSingleColumnComponent {
 }

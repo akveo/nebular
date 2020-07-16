@@ -8,6 +8,7 @@ import {
   Input,
   LOCALE_ID,
   OnChanges,
+  OnInit,
   Output,
   SimpleChanges,
   ViewChild,
@@ -25,54 +26,9 @@ import { NbCalendarTimeModelService } from '../calendar-kit/services/calendar-ti
 import { NbPlatform } from '../cdk/platform/platform-service';
 
 /**
- * Calendar with Time component provides a capability to choose a date and time used by datepicker.
- *
- * ```html
- * <input [nbTimepicker]="timepicker">
- * <nb-timepicker #timepicker></nb-datepicker>
- * ```
- *
- * Basic usage example
- * @stacked-example(Showcase, calendar/timepicker-showcase.component)
- *
- * ### Installation
- *
- * Import `NbCalendarModule` to your feature module.
- * ```ts
- * @NgModule({
- *   imports: [
- *     // ...
- *     NbTimepickerModule.forRoot(),
- *   ],
- * })
- * export class TimepickerModule { }
- * @styles
- *
- * timepicker-color:
- * timepicker-hover-background-color:
- * timepicker-hover-color:
- * timepicker-focus-background-color:
- * timepicker-focus-color:
- * timepicker-active-background-color:
- * timepicker-active-color:
- * timepicker-cell-text-font-size:
- * timepicker-cell-text-font-weight:
- * timepicker-basic-color:
- * timepicker-border-color:
- * timepicker-border-style:
- * timepicker-border-width:
- * timepicker-scrollbar-color:
- * timepicker-scrollbar-background-color:
- * timepicker-scrollbar-width:
- * timepicker-cell-line-height:
- * timepicker-cell-font-size:
- * timepicker-single-column-width:
- * timepicker-multiple-column-width:
- * timepicker-title-height:
- * timepicker-title-padding:
- * timepicker-container-width:
- * timepicker-container-height:
- * */
+ * The TimePicker components itself.
+ * Provides a proxy to `TimePicker` options as well as custom picker options.
+ */
 @Component({
   selector: 'nb-timepicker',
   templateUrl: './timepicker.component.html',
@@ -80,10 +36,10 @@ import { NbPlatform } from '../cdk/platform/platform-service';
   exportAs: 'nbTimepicker',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NbTimePickerComponent<D> implements OnChanges {
+export class NbTimePickerComponent<D> implements OnChanges, OnInit {
   _isTwelveHoursFormat: boolean;
   _withSeconds: boolean;
-  _useFullTimeFormat: boolean;
+  _singleColumn: boolean;
   _step: number;
   _timeFormat: string;
   fullTimeOptions: D[];
@@ -98,6 +54,7 @@ export class NbTimePickerComponent<D> implements OnChanges {
   sec: NbTimepickerTypes = NbTimepickerTypes.SECOND;
   ampm: NbTimepickerTypes = NbTimepickerTypes.AMPM;
   hostRef: ElementRef;
+
   /**
    * Defines time format string.
    * */
@@ -110,24 +67,26 @@ export class NbTimePickerComponent<D> implements OnChanges {
   }
 
   /**
-   * Defines 12 hours format like '07:00 PM'.
+   * Defines 12 hours format .
    * */
   @Input()
   get isTwelveHoursFormat(): boolean {
     return this._isTwelveHoursFormat;
   }
+
   set isTwelveHoursFormat(isTwelveHoursFormat: boolean) {
     this._isTwelveHoursFormat = isTwelveHoursFormat;
   };
 
   /**
    * Show seconds in timepicker.
-   * Ignored when useFullTimeFormat is true
+   * Ignored when singleColumn is true
    * */
   @Input()
   get withSeconds(): boolean {
     return this._withSeconds;
   }
+
   set withSeconds(withSeconds: boolean) {
     this._withSeconds = withSeconds;
   };
@@ -136,21 +95,23 @@ export class NbTimePickerComponent<D> implements OnChanges {
    * Show timepicker values in one column with 60 minutes step by default.
    * */
   @Input()
-  get useFullTimeFormat(): boolean {
-    return this._useFullTimeFormat;
+  get singleColumn(): boolean {
+    return this._singleColumn;
   }
-  set useFullTimeFormat(useFullTimeFormat: boolean) {
-    this._useFullTimeFormat = useFullTimeFormat;
+
+  set singleColumn(singleColumn: boolean) {
+    this._singleColumn = singleColumn;
   }
 
   /**
-   * Defines minutes step when we use fill time format.
+   * Defines minutes step when we use single column view.
    * If set to 20, it will be: '12:00, 12:20: 12:40, 13:00...'
    * */
   @Input()
   get step(): number {
     return this._step;
   }
+
   set step(step: number) {
     this._step = step;
   };
@@ -162,10 +123,12 @@ export class NbTimePickerComponent<D> implements OnChanges {
   get date(): D {
     return this._date;
   }
+
   set date(date: D) {
     this._date = date;
     this.cd.markForCheck();
   }
+
   _date: D;
 
   /**
@@ -196,20 +159,20 @@ export class NbTimePickerComponent<D> implements OnChanges {
     }
   }
 
+  ngOnInit(): void {
+    this.timeFormat = this.buildTimeFormat();
+    this.buildColumnOptions();
+  }
+
   ngOnChanges({
                 step,
                 isTwelveHoursFormat,
                 withSeconds,
-                useFullTimeFormat,
+                singleColumn,
               }: SimpleChanges): void {
     this.timeFormat = this.buildTimeFormat();
-    if (step || isTwelveHoursFormat || withSeconds || useFullTimeFormat) {
-      this.fullTimeOptions = this.useFullTimeFormat ?
-        this.calendarTimeModelService.getFullHours(this.isTwelveHoursFormat, this.step) : [];
-      this.hoursColumnOptions = this.calendarTimeModelService.getHoursInDay(this.isTwelveHoursFormat);
-      this.minutesColumnOptions = this.calendarTimeModelService.getMinutesAndSeconds();
-      this.secondsColumnOptions = this.withSeconds ? this.calendarTimeModelService.getMinutesAndSeconds() : [];
-      this.ampmColumnOptions = this.isTwelveHoursFormat ? this.calendarTimeModelService.AMPM : [];
+    if (step || isTwelveHoursFormat || withSeconds || singleColumn) {
+      this.buildColumnOptions();
     }
   }
 
@@ -284,7 +247,7 @@ export class NbTimePickerComponent<D> implements OnChanges {
   }
 
   showSeconds(): boolean {
-    return this.withSeconds && !this.useFullTimeFormat;
+    return this.withSeconds && !this.singleColumn;
   }
 
   isSelectedTimeValue(value: string, type: string) {
@@ -324,12 +287,22 @@ export class NbTimePickerComponent<D> implements OnChanges {
 
   buildTimeFormat(): string {
     if (this.isTwelveHoursFormat) {
-      return `${this.withSeconds && !this.useFullTimeFormat ? this.calendarTimeModelService.twelveTimeFormatWithSeconds
+      return `${this.withSeconds && !this.singleColumn ? this.calendarTimeModelService.twelveTimeFormatWithSeconds
         : this.calendarTimeModelService.twelveHoursTimeFormat}`;
     } else {
-      return `${this.withSeconds && !this.useFullTimeFormat ? this.calendarTimeModelService.timeFormatWithSeconds
+      return `${this.withSeconds && !this.singleColumn ? this.calendarTimeModelService.timeFormatWithSeconds
         : this.calendarTimeModelService.timeFormat}`;
     }
+  }
+
+  buildColumnOptions(): void {
+    this.timeFormat = this.buildTimeFormat();
+    this.fullTimeOptions = this.singleColumn ?
+      this.calendarTimeModelService.getFullHours(this.isTwelveHoursFormat, this.step) : [];
+    this.hoursColumnOptions = this.calendarTimeModelService.getHoursInDay(this.isTwelveHoursFormat);
+    this.minutesColumnOptions = this.calendarTimeModelService.getMinutesAndSeconds();
+    this.secondsColumnOptions = this.withSeconds ? this.calendarTimeModelService.getMinutesAndSeconds() : [];
+    this.ampmColumnOptions = this.isTwelveHoursFormat ? this.calendarTimeModelService.AMPM : [];
   }
 
   isFirefox(): boolean {

@@ -176,6 +176,18 @@ export const NB_DATE_SERVICE_OPTIONS = new InjectionToken('Date service options'
  *
  * @stacked-example(Validation, datepicker/datepicker-validation.component)
  *
+ * Yoy can use date picker with time
+ *
+ * ```html
+ * <input nbInput placeholder="Pick Date" [nbDatepicker]="formpicker">
+ * <nb-date-timepicker [withSeconds]="true" #formpicker</nb-date-timepicker>
+ * ```
+ * @stacked-example(Date timepicker, datepicker/date-timepicker-showcase.component)
+ *
+ * With single column
+ *
+ * @stacked-example(Date timepicker single column, datepicker/date-timepicker-single-column.component)
+
  * The `NbDatepickerComponent` supports date formatting:
  *
  * ```html
@@ -241,6 +253,30 @@ export const NB_DATE_SERVICE_OPTIONS = new InjectionToken('Date service options'
  * datepicker-border-width:
  * datepicker-border-radius:
  * datepicker-shadow:
+ * timepicker-color:
+ * timepicker-hover-background-color:
+ * timepicker-hover-color:
+ * timepicker-focus-background-color:
+ * timepicker-focus-color:
+ * timepicker-active-background-color:
+ * timepicker-active-color:
+ * timepicker-cell-text-font-size:
+ * timepicker-cell-text-font-weight:
+ * timepicker-basic-color:
+ * timepicker-border-color:
+ * timepicker-border-style:
+ * timepicker-border-width:
+ * timepicker-scrollbar-color:
+ * timepicker-scrollbar-background-color:
+ * timepicker-scrollbar-width:
+ * timepicker-cell-line-height:
+ * timepicker-cell-font-size:
+ * timepicker-single-column-width:
+ * timepicker-multiple-column-width:
+ * timepicker-title-height:
+ * timepicker-title-padding:
+ * timepicker-container-width:
+ * timepicker-container-height:
  * */
 @Directive({
   selector: 'input[nbDatepicker]',

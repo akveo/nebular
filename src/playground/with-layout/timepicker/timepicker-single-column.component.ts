@@ -7,21 +7,22 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
-  selector: 'nb-timepicker-showcase',
+  selector: 'nb-timepicker-single-column',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <nb-card size="large">
       <nb-card-body>
-        <input nbInput placeholder="Pick Date" [nbDatepicker]="formpicker">
-        <nb-date-timepicker
-          #formpicker
-          [title]="'Title'"
-          [useFullTimeFormat]="true"
-          [step]="10"></nb-date-timepicker>
+        <input nbInput
+               type="text"
+               [nbTimepicker]="timepicker"/>
+        <nb-timepicker
+          #timepicker="nbTimepicker"
+          [singleColumn]="true"
+          [step]="10"></nb-timepicker>
       </nb-card-body>
     </nb-card>
   `,
-  styleUrls: ['./datepicker-example.scss'],
+  styleUrls: ['./timepicker-example.scss'],
 })
-export class DateTimepickerFullTImeComponent {
+export class TimepickerSingleColumnComponent {
 }

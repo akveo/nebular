@@ -44,38 +44,44 @@ import { NbDateService } from '../calendar-kit/services/date.service';
  *     NbTimepickerModule.forRoot(),
  *   ],
  * })
- * export class TimepickerModule { }
- *
- * You provide isTwelveHoursFormat property to timepicker module
- * NbTimepickerModule.forRoot({isTwelveHoursFormat: true}),
- *
- * You also need to provide implementation of Date service
- * It could be:
- * - moment date service:
+ * export class AppModule { }
+ * ```
+ * And `NbTimepickerModule` to your feature module.
+ * ```ts
  * @NgModule({
  *   imports: [
  *     // ...
  *     NbTimepickerModule,
- *     NbMomentDateModule,
  *   ],
  * })
- * - native date service
- *  @NgModule({
- *   imports: [
- *     // ...
- *     NbTimepickerModule,
- *   ],
- *   providers: [{ provide: NbDateService, useClass: NbNativeDateService }]
- * })
- * - fns date service
- * @NgModule({
- *   imports: [
- *     // ...
- *     NbTimepickerModule,
- *     NbDateFnsDateModule,
- *   ],
- * })
+ * export class PageModule { }
+ * ```
+ * ### Usage
+ *
+ * With Seconds
+ *
+ * ```html
+ * <input [nbTimepicker]="timepicker">
+ * <nb-timepicker #timepicker [withSeconds]="true"></nb-timepicker>
+ * ```
+ * @stacked-example(Time picker with seconds, timepicker/timepicker-with-seconds.component)
+ *
+ * You can specify twelve hours format:
+ *
+ * ```html
+ * <input [nbTimepicker]="timepicker" [isTwelveHoursFormat]="true">
+ * <nb-timepicker #timepicker></nb-datepicker>
+ * ```
+ *
+ * @stacked-example(Twelve hours format showcase, timepicker/timepicker-twelve-hours-format.component)
+ *
+ * Additionally you can enable singleColumn property to display a single picker with concatenated time values inside.
+ * For such display mode 'step' property controls time values step, e.g.: 11:00, 11:20, 11:40, 12:00 ...'
+ *
+ * @stacked-example(Single column, timepicker/timepicker-single-column.component)
+ *
  * @styles
+ *
  * timepicker-color:
  * timepicker-hover-background-color:
  * timepicker-hover-color:
@@ -124,11 +130,13 @@ export class NbTimePickerDirective<D> implements AfterViewInit {
 
   /**
    * NbTimePickerComponent instance passed via input.
+   * @docs-private
    * */
   protected _timePickerComponent: NbTimePickerComponent<D>;
 
   /**
    * Positioning strategy used by overlay.
+   * @docs-private
    * */
   protected positionStrategy: NbAdjustableConnectedPositionStrategy;
   protected overlayRef: NbOverlayRef;
@@ -202,6 +210,9 @@ export class NbTimePickerDirective<D> implements AfterViewInit {
     }
   }
 
+  /**
+   * Attaches picker to the timepicker portal.
+   * */
   protected attachToOverlay() {
     if (!this.overlayRef) {
       this.setupTimepicker();

@@ -1,7 +1,7 @@
 <nb-card *nbPortal [class.supports-scrollbar-theming]="!isFirefox()"
          class="nb-timepicker-container">
   <nb-card-header class="column-header">
-    <ng-container *ngIf="!useFullTimeFormat; else fullTimeHeadersBlock">
+    <ng-container *ngIf="!singleColumn; else fullTimeHeadersBlock">
       <div class="text-hint">Hr</div>
       <div class="text-hint">Min</div>
       <div *ngIf="withSeconds" class="text-hint">Sec</div>
@@ -12,7 +12,7 @@
     </ng-template>
   </nb-card-header>
   <div class="picker-body">
-    <ng-container *ngIf="!useFullTimeFormat; else fullTimeColumnBlock">
+    <ng-container *ngIf="!singleColumn; else fullTimeColumnBlock">
       <nb-list class="values-list">
         <nb-list-item
           class="list-item"

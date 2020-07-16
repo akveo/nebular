@@ -4,11 +4,10 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'nb-date-timepicker-showcase',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <nb-card size="large">
       <nb-card-body>
@@ -17,8 +16,6 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
           [title]="'Title'"
           [withSeconds]="true"
           [isTwelveHoursFormat]="false"
-          [applyButtonText]="'Save'"
-          [currentTimeButtonText]="'Set current time'"
           #formpicker></nb-date-timepicker>
       </nb-card-body>
     </nb-card>
