@@ -29,7 +29,7 @@ export class NbDateTimePickerComponent<D>
   @Input() currentTimeButtonText: string;
 
   ngOnInit() {
-    this.format = this.buildTimeFormat();
+   this.format = this.format || this.buildTimeFormat();
   }
 
   constructor(@Inject(NB_DOCUMENT) document,
