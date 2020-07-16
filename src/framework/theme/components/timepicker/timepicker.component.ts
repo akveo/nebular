@@ -24,7 +24,7 @@ import {
 import { NbDateService } from '../calendar-kit/services/date.service';
 import { NbCalendarTimeModelService } from '../calendar-kit/services/calendar-time-model.service';
 import { NbPlatform } from '../cdk/platform/platform-service';
-import { convertToBoolProperty } from '../helpers';
+import { convertToBoolProperty, NbBooleanInput } from '../helpers';
 
 /**
  * The TimePicker components itself.
@@ -71,36 +71,38 @@ export class NbTimePickerComponent<D> implements OnChanges, OnInit {
    * Defines 12 hours format .
    * */
   @Input()
-  set isTwelveHoursFormat(isTwelveHoursFormat: boolean) {
-    this._isTwelveHoursFormat = convertToBoolProperty(isTwelveHoursFormat);
-  };
   get isTwelveHoursFormat(): boolean {
     return this._isTwelveHoursFormat;
   }
+  set isTwelveHoursFormat(value: boolean) {
+    this._isTwelveHoursFormat = convertToBoolProperty(value);
+  };
+  static ngAcceptInputType_isTwelveHoursFormat: NbBooleanInput;
 
   /**
    * Show seconds in timepicker.
    * Ignored when singleColumn is true
    * */
   @Input()
-  set withSeconds(withSeconds: boolean) {
-    this._withSeconds = convertToBoolProperty(withSeconds);
-  };
   get withSeconds(): boolean {
     return this._withSeconds;
   }
-
+  set withSeconds(value: boolean) {
+    this._withSeconds = convertToBoolProperty(value);
+  };
+  static ngAcceptInputType_withSeconds: NbBooleanInput;
 
   /**
    * Show timepicker values in one column with 60 minutes step by default.
    * */
   @Input()
-  set singleColumn(singleColumn: boolean) {
-    this._singleColumn = convertToBoolProperty(singleColumn);
-  }
   get singleColumn(): boolean {
     return this._singleColumn;
   }
+  set singleColumn(value: boolean) {
+    this._singleColumn = convertToBoolProperty(value);
+  }
+  static ngAcceptInputType_singleColumn: NbBooleanInput;
 
   /**
    * Defines minutes step when we use single column view.

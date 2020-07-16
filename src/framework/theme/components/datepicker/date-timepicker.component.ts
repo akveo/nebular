@@ -9,7 +9,7 @@ import { NbTriggerStrategyBuilderService } from '../cdk/overlay/overlay-trigger'
 import { NbOverlayService } from '../cdk/overlay/overlay-service';
 import { NbDateService } from '../calendar-kit/services/date.service';
 import { NB_DATE_SERVICE_OPTIONS } from './datepicker.directive';
-import { convertToBoolProperty } from '../helpers';
+import { convertToBoolProperty, NbBooleanInput } from '../helpers';
 
 @Component({
   selector: 'nb-date-timepicker',
@@ -25,28 +25,31 @@ export class NbDateTimePickerComponent<D>
   _singleColumn: boolean;
 
   @Input()
-  set isTwelveHoursFormat(isTwelveHoursFormat: boolean) {
-    this._isTwelveHoursFormat = convertToBoolProperty(isTwelveHoursFormat);
-  };
   get isTwelveHoursFormat(): boolean {
     return this._isTwelveHoursFormat;
   }
+  set isTwelveHoursFormat(value: boolean) {
+    this._isTwelveHoursFormat = convertToBoolProperty(value);
+  };
+  static ngAcceptInputType_isTwelveHoursFormat: NbBooleanInput;
 
   @Input()
-  set withSeconds(withSeconds: boolean) {
-    this._withSeconds = convertToBoolProperty(withSeconds);
-  };
   get withSeconds(): boolean {
     return this._withSeconds;
   }
-  @Input()
-  set singleColumn(singleColumn: boolean) {
-    this._singleColumn = convertToBoolProperty(singleColumn);
-  }
+  set withSeconds(value: boolean) {
+    this._withSeconds = convertToBoolProperty(value);
+  };
+  static ngAcceptInputType_withSeconds: NbBooleanInput;
 
+  @Input()
   get singleColumn(): boolean {
     return this._singleColumn;
   }
+  set singleColumn(value: boolean) {
+    this._singleColumn = convertToBoolProperty(value);
+  }
+  static ngAcceptInputType_singleColumn: NbBooleanInput;
 
   @Input() step: number;
   @Input() title: string;

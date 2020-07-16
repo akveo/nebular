@@ -485,12 +485,6 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         name: 'Timepicker Showcase',
       },
       {
-        path: 'timepicker-with-seconds.component',
-        link: '/timepicker/timepicker-with-seconds.component',
-        component: 'TimepickerWithSecondsComponent',
-        name: 'Timepicker With Seconds',
-      },
-      {
         path: 'timepicker-twelve-hours-format.component',
         link: '/timepicker/timepicker-twelve-hours-format.component',
         component: 'TimepickerTwelveHoursFormatComponent',
@@ -501,6 +495,12 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         link: '/timepicker/timepicker-single-column.component',
         component: 'TimepickerSingleColumnComponent',
         name: 'Timepicker Single Column',
+      },
+      {
+        path: 'timepicker-with-seconds.component',
+        link: '/timepicker/timepicker-with-seconds.component',
+        component: 'TimepickerWithSecondsComponent',
+        name: 'Timepicker With Seconds',
       },
     ],
   },
