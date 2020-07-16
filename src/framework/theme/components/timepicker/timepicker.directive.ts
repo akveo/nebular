@@ -17,7 +17,7 @@ import {
   NbPositionBuilderService,
 } from '../cdk/overlay/overlay-position';
 import { fromEvent, Subject } from 'rxjs';
-import { NG_VALUE_ACCESSOR } from '@angular/forms';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { NbOverlayService } from '../cdk/overlay/overlay-service';
 import { NbTrigger, NbTriggerStrategy, NbTriggerStrategyBuilderService } from '../cdk/overlay/overlay-trigger';
 import { NbSelectedTimePayload } from './model';
@@ -115,7 +115,7 @@ import { NbDateService } from '../calendar-kit/services/date.service';
     multi: true,
   }],
 })
-export class NbTimePickerDirective<D> implements AfterViewInit {
+export class NbTimePickerDirective<D> implements AfterViewInit, ControlValueAccessor {
   /**
    * Provides timepicker component.
    * */
@@ -142,7 +142,8 @@ export class NbTimePickerDirective<D> implements AfterViewInit {
   protected overlayRef: NbOverlayRef;
   protected overlayOffset = 8;
   protected destroy$: Subject<void> = new Subject<void>();
-
+  protected _onChange: (value: string) => void = () => {};
+  protected _onTouched = () => {};
   /**
    * Trigger strategy used by overlay.
    * @docs-private
@@ -314,5 +315,17 @@ export class NbTimePickerDirective<D> implements AfterViewInit {
     if (isValidDate) {
       this.timepicker.date = this.dateService.parse(value, this.timepicker.timeFormat);
     }
+  }
+
+  writeValue(value: string): void {
+    this.handleInputChange(value);
+  }
+
+  registerOnChange(fn: (value: any) => {}): void {
+    this._onChange = fn;
+  }
+
+  registerOnTouched(fn: any): void {
+    this._onTouched = fn;
   }
 }
