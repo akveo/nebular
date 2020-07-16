@@ -17,7 +17,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
                [nbTimepicker]="timepicker"/>
         <nb-timepicker
           #timepicker="nbTimepicker"
-          [singleColumn]="true"
+          singleColumn
           [step]="10"></nb-timepicker>
       </nb-card-body>
     </nb-card>

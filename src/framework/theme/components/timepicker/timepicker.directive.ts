@@ -62,14 +62,14 @@ import { NbDateService } from '../calendar-kit/services/date.service';
  *
  * ```html
  * <input [nbTimepicker]="timepicker">
- * <nb-timepicker #timepicker [withSeconds]="true"></nb-timepicker>
+ * <nb-timepicker #timepicker withSeconds></nb-timepicker>
  * ```
  * @stacked-example(Time picker with seconds, timepicker/timepicker-with-seconds.component)
  *
  * You can specify twelve hours format:
  *
  * ```html
- * <input [nbTimepicker]="timepicker" [isTwelveHoursFormat]="true">
+ * <input [nbTimepicker]="timepicker" isTwelveHoursFormat>
  * <nb-timepicker #timepicker></nb-datepicker>
  * ```
  *

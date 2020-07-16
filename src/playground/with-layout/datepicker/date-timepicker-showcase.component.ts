@@ -14,8 +14,7 @@ import { Component } from '@angular/core';
         <input nbInput placeholder="Pick Date" [nbDatepicker]="formpicker">
         <nb-date-timepicker
           [title]="'Title'"
-          [withSeconds]="true"
-          [isTwelveHoursFormat]="false"
+          withSeconds
           #formpicker></nb-date-timepicker>
       </nb-card-body>
     </nb-card>

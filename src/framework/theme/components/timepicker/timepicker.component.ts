@@ -24,6 +24,7 @@ import {
 import { NbDateService } from '../calendar-kit/services/date.service';
 import { NbCalendarTimeModelService } from '../calendar-kit/services/calendar-time-model.service';
 import { NbPlatform } from '../cdk/platform/platform-service';
+import { convertToBoolProperty } from '../helpers';
 
 /**
  * The TimePicker components itself.
@@ -70,37 +71,35 @@ export class NbTimePickerComponent<D> implements OnChanges, OnInit {
    * Defines 12 hours format .
    * */
   @Input()
+  set isTwelveHoursFormat(isTwelveHoursFormat: boolean) {
+    this._isTwelveHoursFormat = convertToBoolProperty(isTwelveHoursFormat);
+  };
   get isTwelveHoursFormat(): boolean {
     return this._isTwelveHoursFormat;
   }
-
-  set isTwelveHoursFormat(isTwelveHoursFormat: boolean) {
-    this._isTwelveHoursFormat = isTwelveHoursFormat;
-  };
 
   /**
    * Show seconds in timepicker.
    * Ignored when singleColumn is true
    * */
   @Input()
+  set withSeconds(withSeconds: boolean) {
+    this._withSeconds = convertToBoolProperty(withSeconds);
+  };
   get withSeconds(): boolean {
     return this._withSeconds;
   }
 
-  set withSeconds(withSeconds: boolean) {
-    this._withSeconds = withSeconds;
-  };
 
   /**
    * Show timepicker values in one column with 60 minutes step by default.
    * */
   @Input()
+  set singleColumn(singleColumn: boolean) {
+    this._singleColumn = convertToBoolProperty(singleColumn);
+  }
   get singleColumn(): boolean {
     return this._singleColumn;
-  }
-
-  set singleColumn(singleColumn: boolean) {
-    this._singleColumn = singleColumn;
   }
 
   /**
@@ -108,25 +107,23 @@ export class NbTimePickerComponent<D> implements OnChanges, OnInit {
    * If set to 20, it will be: '12:00, 12:20: 12:40, 13:00...'
    * */
   @Input()
+  set step(step: number) {
+    this._step = step;
+  }
   get step(): number {
     return this._step;
   }
-
-  set step(step: number) {
-    this._step = step;
-  };
 
   /**
    * Date which will be rendered as selected.
    * */
   @Input()
-  get date(): D {
-    return this._date;
-  }
-
   set date(date: D) {
     this._date = date;
     this.cd.markForCheck();
+  }
+  get date(): D {
+    return this._date;
   }
 
   _date: D;

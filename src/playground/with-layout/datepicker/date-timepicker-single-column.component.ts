@@ -15,8 +15,8 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
         <input nbInput placeholder="Pick Date" [nbDatepicker]="formpicker">
         <nb-date-timepicker
           #formpicker
+          singleColumn
           [title]="'Title'"
-          [singleColumn]="true"
           [step]="10"></nb-date-timepicker>
       </nb-card-body>
     </nb-card>

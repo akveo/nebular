@@ -9,6 +9,7 @@ import { NbTriggerStrategyBuilderService } from '../cdk/overlay/overlay-trigger'
 import { NbOverlayService } from '../cdk/overlay/overlay-service';
 import { NbDateService } from '../calendar-kit/services/date.service';
 import { NB_DATE_SERVICE_OPTIONS } from './datepicker.directive';
+import { convertToBoolProperty } from '../helpers';
 
 @Component({
   selector: 'nb-date-timepicker',
@@ -19,10 +20,34 @@ export class NbDateTimePickerComponent<D>
   extends NbBasePickerComponent<D, NbCalendarWithTime, NbCalendarWithTimeComponent<D>>
   implements OnInit {
   protected pickerClass: Type<NbCalendarWithTimeComponent<D>> = NbCalendarWithTimeComponent;
+  _isTwelveHoursFormat: boolean;
+  _withSeconds: boolean;
+  _singleColumn: boolean;
 
-  @Input() isTwelveHoursFormat: boolean;
-  @Input() withSeconds: boolean;
-  @Input() singleColumn: boolean;
+  @Input()
+  set isTwelveHoursFormat(isTwelveHoursFormat: boolean) {
+    this._isTwelveHoursFormat = convertToBoolProperty(isTwelveHoursFormat);
+  };
+  get isTwelveHoursFormat(): boolean {
+    return this._isTwelveHoursFormat;
+  }
+
+  @Input()
+  set withSeconds(withSeconds: boolean) {
+    this._withSeconds = convertToBoolProperty(withSeconds);
+  };
+  get withSeconds(): boolean {
+    return this._withSeconds;
+  }
+  @Input()
+  set singleColumn(singleColumn: boolean) {
+    this._singleColumn = convertToBoolProperty(singleColumn);
+  }
+
+  get singleColumn(): boolean {
+    return this._singleColumn;
+  }
+
   @Input() step: number;
   @Input() title: string;
   @Input() applyButtonText: string;

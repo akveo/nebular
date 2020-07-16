@@ -180,7 +180,7 @@ export const NB_DATE_SERVICE_OPTIONS = new InjectionToken('Date service options'
  *
  * ```html
  * <input nbInput placeholder="Pick Date" [nbDatepicker]="formpicker">
- * <nb-date-timepicker [withSeconds]="true" #formpicker</nb-date-timepicker>
+ * <nb-date-timepicker withSeconds #formpicker</nb-date-timepicker>
  * ```
  * @stacked-example(Date timepicker, datepicker/date-timepicker-showcase.component)
  *
