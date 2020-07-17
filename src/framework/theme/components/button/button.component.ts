@@ -653,7 +653,9 @@ export class NbButtonComponent implements AfterViewInit {
   // issue #794
   @HostBinding('attr.tabindex')
   get tabbable(): string {
-    return this.disabled ? '-1' : '0';
+    const tabIndex = this.hostElement.nativeElement.getAttribute('tabIndex');
+
+    return this.disabled ? '-1' : (tabIndex || '0');
   }
 
   @HostBinding('class.size-tiny')
