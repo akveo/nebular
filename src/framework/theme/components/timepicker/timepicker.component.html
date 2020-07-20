@@ -16,50 +16,50 @@
       <nb-list class="values-list">
         <nb-list-item
           class="list-item"
-          [ngClass]="{'selected': isSelectedTimeValue(item, hour)}"
+          [ngClass]="{'selected': isSelectedHour(item.value)}"
           *ngFor="let item of hoursColumnOptions; trackBy: trackByTimeValues">
           <nb-timepicker-cell
-            [value]="item"
-            [selected]="isSelectedTimeValue(item, hour)"
+            [value]="item.text"
+            [selected]="isSelectedHour(item.value)"
             [type]="hour"
-            (select)="select($event)">
+            (select)="setHour(item.value)">
           </nb-timepicker-cell>
         </nb-list-item>
       </nb-list>
       <nb-list class="values-list">
         <nb-list-item
           class="list-item"
-          [ngClass]="{'selected': isSelectedTimeValue(item, minute)}"
+          [ngClass]="{'selected': isSelectedMinute(item.value)}"
           *ngFor="let item of minutesColumnOptions; trackBy: trackByTimeValues">
           <nb-timepicker-cell
-            [value]="item"
-            [selected]="isSelectedTimeValue(item, minute)"
+            [value]="item.text"
+            [selected]="isSelectedMinute(item.value)"
             [type]="minute"
-            (select)="select($event)">
+            (select)="setMinute(item.value)">
           </nb-timepicker-cell>
         </nb-list-item>
       </nb-list>
       <nb-list *ngIf="showSeconds()" class="values-list">
         <nb-list-item
           class="list-item"
-          [ngClass]="{'selected': isSelectedTimeValue(item, sec)}"
+          [ngClass]="{'selected': isSelectedSecond(item.value)}"
           *ngFor="let item of secondsColumnOptions; trackBy: trackByTimeValues">
           <nb-timepicker-cell
-            [value]="item"
-            [selected]="isSelectedTimeValue(item, sec)"
+            [value]="item.text"
+            [selected]="isSelectedSecond(item.value)"
             [type]="sec"
-            (select)="select($event)">
+            (select)="setSecond(item.value)">
           </nb-timepicker-cell>
         </nb-list-item>
       </nb-list>
       <nb-list *ngIf="isTwelveHoursFormat" class="values-list">
         <nb-list-item
           class="list-item am-pm-item"
-          [ngClass]="{'selected': isSelectedTimeValue(item, ampm)}"
+          [ngClass]="{'selected': isSelectedAmPm(item)}"
           *ngFor="let item of ampmColumnOptions; trackBy: trackByTimeValues">
           <nb-timepicker-cell
             [value]="item"
-            [selected]="item === isSelectedTimeValue(item, ampm)"
+            [selected]="item === isSelectedAmPm(item)"
             [type]="ampm"
             (select)="changeAMPM($event)">
           </nb-timepicker-cell>

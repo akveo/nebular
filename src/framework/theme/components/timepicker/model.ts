@@ -30,3 +30,8 @@ export interface NbSelectedTimePayload<D> {
   format?: string,
   save?: boolean,
 }
+
+export interface TimeOptions {
+  value: number,
+  text: string,
+}

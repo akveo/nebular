@@ -55,6 +55,10 @@ export class NbCalendarTimeModelService<D> {
     return this.dateService.getHour(date) < this.HOURS_IN_DAY_ALT ? this.AM : this.PM;
   }
 
+  isAm(date: D): boolean {
+    return this.dateService.getHour(date) < 12;
+  }
+
   getFormattedTime(date: D, format: string): string {
     return this.dateService.format(date, format);
   }
