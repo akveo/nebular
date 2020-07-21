@@ -8,7 +8,7 @@ import { ApplicationRef, Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { skip } from 'rxjs/operators';
-import { NbCalendarRange, NbDatepickerDirective } from '@nebular/theme';
+import { NbCalendarRange, NbDatepickerDirective, NbTimepickerModule } from '@nebular/theme';
 
 import { NbDatepickerModule } from './datepicker.module';
 import { NbThemeModule } from '../../theme.module';
@@ -373,6 +373,7 @@ describe('nb-date-timepicker', () => {
         RouterTestingModule.withRoutes([]),
         NbThemeModule.forRoot(),
         NbLayoutModule,
+        NbTimepickerModule.forRoot(),
         NbDatepickerModule.forRoot(),
       ],
       declarations: [NbDateTimepickerTestComponent],
