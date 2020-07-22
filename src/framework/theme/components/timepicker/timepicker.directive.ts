@@ -22,6 +22,7 @@ import { NbOverlayService } from '../cdk/overlay/overlay-service';
 import { NbTrigger, NbTriggerStrategy, NbTriggerStrategyBuilderService } from '../cdk/overlay/overlay-trigger';
 import { NbSelectedTimePayload } from './model';
 import { NbDateService } from '../calendar-kit/services/date.service';
+import { NbCalendarTimeModelService } from '../calendar-kit/services/calendar-time-model.service';
 
 /**
  * The `NbTimePickerDirective` is form control that gives you ability to select time. The timepicker
@@ -176,6 +177,7 @@ export class NbTimePickerDirective<D> implements AfterViewInit, ControlValueAcce
               protected triggerStrategyBuilder: NbTriggerStrategyBuilderService,
               protected overlay: NbOverlayService,
               protected cd: ChangeDetectorRef,
+              protected calendarTimeModelService: NbCalendarTimeModelService<D>,
               protected dateService: NbDateService<D>,
   ) {
     this.subscribeOnInputChange();
@@ -228,9 +230,9 @@ export class NbTimePickerDirective<D> implements AfterViewInit, ControlValueAcce
      this.timepicker.date = this.dateService.parse(this.inputValue, this.timepicker.timeFormat);
     } else {
      let today = this.dateService.today();
-     today = this.dateService.setHour(today, 0);
-     today = this.dateService.setMinute(today, 0);
-     today = this.dateService.setSecond(today, 0);
+     today = this.dateService.setHours(today, 0);
+     today = this.dateService.setMinutes(today, 0);
+     today = this.dateService.setSeconds(today, 0);
 
      this.timepicker.date = today;
     }
@@ -311,6 +313,13 @@ export class NbTimePickerDirective<D> implements AfterViewInit, ControlValueAcce
    * Parses input value and write if it isn't null.
    * */
   protected handleInputChange(value: string) {
+    if (this.dateService.getId() === 'native') {
+      /**
+       * Native date service dont parse only time string value
+       **/
+      value = this.parseNativeDateString(value);
+    }
+
     const isValidDate: boolean = this.dateService.isValidDateString(value, this.timepicker.timeFormat);
     if (isValidDate) {
       this.timepicker.date = this.dateService.parse(value, this.timepicker.timeFormat);
@@ -327,5 +336,14 @@ export class NbTimePickerDirective<D> implements AfterViewInit, ControlValueAcce
 
   registerOnTouched(fn: any): void {
     this._onTouched = fn;
+  }
+
+  protected parseNativeDateString(value: string): string {
+    const date = this.dateService.today();
+    const year = this.dateService.getYear(date);
+    const month = this.calendarTimeModelService.padd(this.dateService.getMonth(date));
+    const day = this.calendarTimeModelService.padd(this.dateService.getDate(date));
+
+    return `${year}-${month}-${day} ${value}`;
   }
 }

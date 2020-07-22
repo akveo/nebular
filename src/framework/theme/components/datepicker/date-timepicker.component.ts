@@ -1,5 +1,5 @@
 import { Component, ComponentFactoryResolver, Inject, Input, OnInit, Optional, Type } from '@angular/core';
-import { NbCalendarWithTime, NbCalendarWithTimeComponent } from './calendar-with-time.component';
+import { NbCalendarWithTimeComponent } from './calendar-with-time.component';
 import { Observable } from 'rxjs';
 import { NbBasePickerComponent } from './datepicker.component';
 import { NbCalendarTimeModelService } from '../calendar-kit/services/calendar-time-model.service';
@@ -15,9 +15,8 @@ import { convertToBoolProperty, NbBooleanInput } from '../helpers';
   selector: 'nb-date-timepicker',
   template: '',
 })
-
 export class NbDateTimePickerComponent<D>
-  extends NbBasePickerComponent<D, NbCalendarWithTime, NbCalendarWithTimeComponent<D>>
+  extends NbBasePickerComponent<D, D, NbCalendarWithTimeComponent<D>>
   implements OnInit {
   protected pickerClass: Type<NbCalendarWithTimeComponent<D>> = NbCalendarWithTimeComponent;
   _isTwelveHoursFormat: boolean;
@@ -28,27 +27,33 @@ export class NbDateTimePickerComponent<D>
   get isTwelveHoursFormat(): boolean {
     return this._isTwelveHoursFormat;
   }
+
   set isTwelveHoursFormat(value: boolean) {
     this._isTwelveHoursFormat = convertToBoolProperty(value);
   };
+
   static ngAcceptInputType_isTwelveHoursFormat: NbBooleanInput;
 
   @Input()
   get withSeconds(): boolean {
     return this._withSeconds;
   }
+
   set withSeconds(value: boolean) {
     this._withSeconds = convertToBoolProperty(value);
   };
+
   static ngAcceptInputType_withSeconds: NbBooleanInput;
 
   @Input()
   get singleColumn(): boolean {
     return this._singleColumn;
   }
+
   set singleColumn(value: boolean) {
     this._singleColumn = convertToBoolProperty(value);
   }
+
   static ngAcceptInputType_singleColumn: NbBooleanInput;
 
   @Input() step: number;
@@ -57,7 +62,7 @@ export class NbDateTimePickerComponent<D>
   @Input() currentTimeButtonText: string;
 
   ngOnInit() {
-   this.format = this.format || this.buildTimeFormat();
+    this.format = this.format || this.buildTimeFormat();
   }
 
   constructor(@Inject(NB_DOCUMENT) document,
@@ -81,10 +86,10 @@ export class NbDateTimePickerComponent<D>
     this.picker.currentTimeButtonText = this.currentTimeButtonText;
 
     if (this.isTwelveHoursFormat) {
-      this.picker.timeFormat = this.calendarWithTimeModelService.twelveHoursTimeFormat;
+      this.picker.timeFormat = this.dateService.getTwelveHoursFormat();
     } else {
-      this.picker.timeFormat = this.withSeconds ? this.calendarWithTimeModelService.timeFormatWithSeconds :
-        this.calendarWithTimeModelService.timeFormatWithSeconds;
+      this.picker.timeFormat = this.withSeconds ? this.dateService.getTwentyFourHoursFormatWithSeconds() :
+        this.dateService.getTwentyFourHoursFormat();
     }
     super.patchWithInputs();
   }
@@ -111,17 +116,10 @@ export class NbDateTimePickerComponent<D>
   }
 
   buildTimeFormat(): string {
-    if (this.isTwelveHoursFormat) {
-      return `${this.calendarWithTimeModelService.dateFormat} ${
-        this.calendarWithTimeModelService.twelveHoursTimeFormat}`
+    if (this.singleColumn) {
+      return this.calendarWithTimeModelService.buildDateFormat(this.isTwelveHoursFormat);
     } else {
-      if (this.withSeconds && !this.singleColumn) {
-        return `${this.calendarWithTimeModelService.dateFormat} ${
-          this.calendarWithTimeModelService.timeFormatWithSeconds}`
-      } else {
-        return `${this.calendarWithTimeModelService.dateFormat} ${
-          this.calendarWithTimeModelService.timeFormat}`
-      }
+      return this.calendarWithTimeModelService.buildDateFormat(this.isTwelveHoursFormat, this.withSeconds);
     }
   }
 }

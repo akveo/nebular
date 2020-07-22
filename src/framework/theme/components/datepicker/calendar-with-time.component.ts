@@ -4,11 +4,6 @@ import { NbSelectedTimePayload } from '../timepicker/model';
 import { NbDateService } from '../calendar-kit/services/date.service';
 import { NbCalendarTimeModelService } from '../calendar-kit/services/calendar-time-model.service';
 
-export interface NbCalendarWithTime {
-  isTwelveHoursFormat: boolean;
-  withSeconds: boolean;
-}
-
 @Component({
   selector: 'nb-calendar-with-time',
   template: `
@@ -38,7 +33,7 @@ export interface NbCalendarWithTime {
           <nb-timepicker
             #timepicker
             (onSelectTime)="onTimeChange($event)"
-            [date]="time"
+            [date]="date"
             [isTwelveHoursFormat]="isTwelveHoursFormat"
             [withSeconds]="showSeconds()"
             [showFooter]="false"
@@ -61,30 +56,10 @@ export interface NbCalendarWithTime {
   styleUrls: ['./calendar-with-time-container.component.scss'],
 })
 export class NbCalendarWithTimeComponent<D> extends NbCalendarComponent<D> implements OnInit {
-  _time: D;
-  _visibleDate: D;
-
-  set time(time: D) {
-    this._time = time;
-  };
-
-  get time(): D {
-    return this._time;
-  }
-
   /**
    * Defines selected date.
    * */
-  @Input() set visibleDate(date: D) {
-    if (date) {
-      this._visibleDate = date;
-      this.time = date;
-    }
-  };
-
-  get visibleDate(): D {
-    return this._visibleDate;
-  }
+  @Input() visibleDate: D;
 
   /**
    * Defines 12 hours format like '07:00 PM'.
@@ -132,12 +107,9 @@ export class NbCalendarWithTimeComponent<D> extends NbCalendarComponent<D> imple
   ngOnInit(): void {
     this.date = this.dateService.today();
 
-    let today = this.dateService.today();
-    today = this.dateService.setHour(today, 0);
-    today = this.dateService.setMinute(today, 0);
-    today = this.dateService.setSecond(today, 0);
-
-    this.time = today;
+    this.date = this.dateService.setHours(this.date, 0);
+    this.date = this.dateService.setMinutes(this.date, 0);
+    this.date = this.dateService.setSeconds(this.date, 0);
   }
 
   onDateValueChange(date: any): void {
@@ -145,24 +117,15 @@ export class NbCalendarWithTimeComponent<D> extends NbCalendarComponent<D> imple
   }
 
   onTimeChange(selectedTime: NbSelectedTimePayload<D>): void {
-    this.time = selectedTime.time;
+    this.date = selectedTime.time;
   }
 
   saveValue(): void {
-    this.dateChange.emit(this.buildDateValue());
+    this.dateChange.emit(this.date);
   }
 
   saveCurrentTime(): void {
     this.dateChange.emit(this.dateService.today());
-  }
-
-  buildDateValue(): D {
-    const date: string = `${this.dateService.getYear(this.date)}-${this.dateService.getMonth(this.date) + 1}-` +
-      `${this.dateService.getDate(this.date)}`;
-    const time: string = this.dateService.format(this.time, this.timeFormat);
-
-    return this.dateService.parse(`${date} ${time}`, `${this.calendarTimeModelService.
-      dateFormat} ${this.timeFormat}`);
   }
 
   /**

@@ -82,17 +82,17 @@ describe('native-date-service', () => {
   it('should get hour', () => {
     const hour = new Date(2018, 5, 15, 12);
 
-    expect(dateService.getHour(hour)).toBe(12);
+    expect(dateService.getHours(hour)).toBe(12);
   });
 
   it('should get minute', () => {
     const minute = new Date(2018, 5, 15, 12, 10);
-    expect(dateService.getMinute(minute)).toBe(10);
+    expect(dateService.getMinutes(minute)).toBe(10);
   });
 
   it('should get second', () => {
     const second = new Date(2018, 5, 15, 12, 10, 24);
-    expect(dateService.getSecond(second)).toBe(24);
+    expect(dateService.getSeconds(second)).toBe(24);
   });
 
   it('should get year', () => {
@@ -187,27 +187,27 @@ describe('native-date-service', () => {
   });
 
   it('should set hour', () => {
-    const newDate = dateService.setHour(new Date(), 12);
+    const newDate = dateService.setHours(new Date(), 12);
     expect(newDate.getHours()).toEqual(12);
   });
 
   it('should set minute', () => {
-    const newDate = dateService.setMinute(new Date(), 30);
+    const newDate = dateService.setMinutes(new Date(), 30);
     expect(newDate.getMinutes()).toEqual(30);
   });
 
   it('should set seconds', () => {
-    const newDate = dateService.setSecond(new Date(), 30);
+    const newDate = dateService.setSeconds(new Date(), 30);
     expect(newDate.getSeconds()).toEqual(30);
   });
 
   it('should add hour', () => {
-    const newDate = dateService.addHour(new Date(2020, 3, 24, 8), 1);
+    const newDate = dateService.addHours(new Date(2020, 3, 24, 8), 1);
     expect(newDate.getHours()).toEqual(9);
   });
 
   it('should add minute', () => {
-    const newDate = dateService.addMinute(new Date(2020, 3, 24, 8, 40), 20);
+    const newDate = dateService.addMinutes(new Date(2020, 3, 24, 8, 40), 20);
     expect(newDate.getHours()).toEqual(9);
     expect(newDate.getMinutes()).toEqual(0);
   });

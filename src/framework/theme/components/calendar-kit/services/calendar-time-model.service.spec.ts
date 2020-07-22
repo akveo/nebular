@@ -34,19 +34,20 @@ describe('time-model-service', () => {
       '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23']);
   });
 
-  it('should return minutes array', () => {
-    const seconds: string[] = timeModel.getMinutesAndSeconds();
-
-    expect(seconds).toEqual(['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12',
-      '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31',
-      '32', '33', '34', '35', '36', '37', '38', '39', '40', '41', '42', '43', '44', '45', '46', '47', '48', '49', '50',
-      '51', '52', '53', '54', '55', '56', '57', '58', '59']);
+  it('should return AM or PM token depend on time', () => {
+    const date = new Date(2018, 7, 1, 14);
+    const token = timeModel.getAmPm(date);
+    expect(token).toEqual('PM');
   });
 
-  it('should return formatted time', () => {
-    const time: string = timeModel.getFormattedTime(
-      new Date(1993, 3, 24, 8, 10), 'HH:mm:SS a');
+  it('should return true if time is am', () => {
+    const date = new Date(2018, 7, 1, 9);
+    const token = timeModel.getAmPm(date);
+    expect(token).toBeTruthy();
+  });
 
-    expect(time).toEqual('08:10:00 AM');
+  it('should format number', () => {
+    const token = timeModel.padd(5);
+    expect(token).toEqual('05');
   });
 });

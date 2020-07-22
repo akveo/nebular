@@ -47,17 +47,17 @@ export abstract class NbDateService<D> {
   /**
    * Returns date with selected hour
    * */
-  abstract setHour(date: D, hour: number): D;
+  abstract setHours(date: D, hour: number): D;
 
   /**
    * Returns date with selected minute
    * */
-  abstract setMinute(date: D, minute: number): D;
+  abstract setMinutes(date: D, minute: number): D;
 
   /**
    * Returns date with selected second
    * */
-  abstract setSecond(date: D, second: number): D;
+  abstract setSeconds(date: D, second: number): D;
 
   /**
    * Returns true if date string is valid date string according to the provided format.
@@ -87,17 +87,17 @@ export abstract class NbDateService<D> {
   /**
    * Gets the hour component of the given date.
    */
-  abstract getHour(date: D): number;
+  abstract getHours(date: D): number;
 
   /**
    * Gets the minute component of the given date.
    */
-  abstract getMinute(date: D): number;
+  abstract getMinutes(date: D): number;
 
   /**
    * Gets the second component of the given date.
    */
-  abstract getSecond(date: D): number;
+  abstract getSeconds(date: D): number;
 
   /**
    * Gets the month component of the given date.
@@ -216,12 +216,12 @@ export abstract class NbDateService<D> {
   /**
    * Returns date with added number of hours.
    * */
-  abstract addHour(date: D, hour: number): D;
+  abstract addHours(date: D, hour: number): D;
 
    /**
    * Returns date with added number of minutes.
    * */
-  abstract addMinute(date: D, minute: number): D;
+  abstract addMinutes(date: D, minute: number): D;
 
     /**
    * Returns date with added number of years.
@@ -232,23 +232,31 @@ export abstract class NbDateService<D> {
 
   abstract getWeekNumber(date: D): number;
 
-  isEqualTime(date1: D, date2: D, compareSeconds: boolean = false): boolean {
-    if (compareSeconds) {
-      return this.isSameHour(date1, date2) && this.isSameMinute(date1, date2) && this.isSameSecond(date1, date2);
-    } else {
-      return this.isSameHour(date1, date2) && this.isSameMinute(date1, date2);
-    }
+  abstract getDateFormat(): string;
+
+  abstract getTwelveHoursFormat(): string;
+
+  isSameHourAndMinute(date1: D, date2: D): boolean {
+    return this.isSameHour(date1, date2) && this.isSameMinute(date1, date2);
   }
 
   isSameHour(date1: D, date2: D): boolean {
-    return this.getHour(date1) === this.getHour(date2);
+    return this.getHours(date1) === this.getHours(date2);
   }
 
   isSameMinute(date1: D, date2: D): boolean {
-    return this.getMinute(date1) === this.getMinute(date2);
+    return this.getMinutes(date1) === this.getMinutes(date2);
   }
 
-  isSameSecond(date1: D, date2: D): boolean {
-    return this.getSecond(date1) === this.getSecond(date2);
+  getTwentyFourHoursFormat(): string {
+    return 'HH:mm';
+  }
+
+  getTwentyFourHoursFormatWithSeconds(): string {
+    return 'HH:mm:ss'
+  }
+
+  getTwelveHoursFormatWithSeconds(): string {
+    return 'hh:mm:ss a';
   }
 }

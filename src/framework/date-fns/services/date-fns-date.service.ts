@@ -51,4 +51,8 @@ export class NbDateFnsDateService extends NbNativeDateService {
   getWeekNumber(date: Date): number {
     return getWeek(date, this.options.getWeekOptions);
   }
+
+  getDateFormat(): string {
+    return 'YYYY-MM-dd';
+  }
 }

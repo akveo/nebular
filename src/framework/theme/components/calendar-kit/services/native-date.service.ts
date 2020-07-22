@@ -36,21 +36,21 @@ export class NbNativeDateService extends NbDateService<Date> {
   }
 
 
-  setHour(date: Date, hour: number): Date {
+  setHours(date: Date, hour: number): Date {
     const result: Date = this.clone(date);
     result.setHours(hour);
 
     return result;
   }
 
-  setMinute(date: Date, minute: number): Date {
+  setMinutes(date: Date, minute: number): Date {
     const result: Date = this.clone(date);
     result.setMinutes(minute);
 
     return result;
   }
 
-  setSecond(date: Date, second: number): Date {
+  setSeconds(date: Date, second: number): Date {
     const result: Date = this.clone(date);
     result.setSeconds(second);
 
@@ -133,29 +133,29 @@ export class NbNativeDateService extends NbDateService<Date> {
     return month;
   }
 
-  addMinute(date: Date, minute: number): Date {
+  addMinutes(date: Date, minute: number): Date {
     const result: Date = new Date(date);
     result.setMinutes(date.getMinutes() + minute);
 
     return result;
   }
 
-  addHour(date: Date, hour: number): Date {
+  addHours(date: Date, hour: number): Date {
     const result: Date = new Date(date);
     result.setHours(date.getHours() + hour);
 
     return result;
   }
 
-  getHour(date: Date): number {
+  getHours(date: Date): number {
     return date.getHours();
   }
 
-  getMinute(date: Date): number {
+  getMinutes(date: Date): number {
     return date.getMinutes();
   }
 
-  getSecond(date: Date): number {
+  getSeconds(date: Date): number {
     return date.getSeconds();
   }
 
@@ -222,5 +222,13 @@ export class NbNativeDateService extends NbDateService<Date> {
 
   getWeekNumber(date: Date): number {
     return parseInt(this.datePipe.transform(date, 'w'), 10);
+  }
+
+  getDateFormat(): string {
+    return 'yyyy-MM-dd';
+  }
+
+  getTwelveHoursFormat(): string {
+    return 'hh:mm a';
   }
 }

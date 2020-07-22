@@ -74,17 +74,17 @@ describe('moment-date-service', () => {
 
   it('should get hour', () => {
     const hour = moment().year(2018).month(5).date(15).hour(12);
-    expect(dateService.getHour(hour)).toBe(12);
+    expect(dateService.getHours(hour)).toBe(12);
   });
 
   it('should get minute', () => {
     const minute = moment().year(2018).month(5).date(15).hour(12).minute(10);
-    expect(dateService.getMinute(minute)).toBe(10);
+    expect(dateService.getMinutes(minute)).toBe(10);
   });
 
   it('should get second', () => {
     const second = moment().year(2018).month(5).date(15).hour(12).minute(10).second(24);
-    expect(dateService.getSecond(second)).toBe(24);
+    expect(dateService.getSeconds(second)).toBe(24);
   });
 
   it('should get year', () => {
@@ -212,27 +212,27 @@ describe('moment-date-service', () => {
   });
 
   it('should set hour', () => {
-    const newDate = dateService.setHour(moment(), 12);
+    const newDate = dateService.setHours(moment(), 12);
     expect(newDate.hour()).toEqual(12);
   });
 
   it('should set minute', () => {
-    const newDate = dateService.setMinute(moment(), 30);
+    const newDate = dateService.setMinutes(moment(), 30);
     expect(newDate.minute()).toEqual(30);
   });
 
   it('should set seconds', () => {
-    const newDate = dateService.setSecond(moment(), 30);
+    const newDate = dateService.setSeconds(moment(), 30);
     expect(newDate.seconds()).toEqual(30);
   });
 
   it('should add hour', () => {
-    const newDate = dateService.addHour(moment().hour(2), 1);
+    const newDate = dateService.addHours(moment().hour(2), 1);
     expect(newDate.hour()).toEqual(3);
   });
 
   it('should add minute', () => {
-    const newDate = dateService.addMinute(moment().hour(1).minute(55), 5);
+    const newDate = dateService.addMinutes(moment().hour(1).minute(55), 5);
     expect(newDate.hour()).toEqual(2);
     expect(newDate.minute()).toEqual(0);
   });

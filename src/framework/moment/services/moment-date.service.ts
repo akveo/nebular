@@ -25,7 +25,7 @@ export class NbMomentDateService extends NbDateService<Moment> {
     days: { [key: string]: string[] },
   };
 
-  readonly DATE_FORMAT: LongDateFormatKey = 'LT';
+  protected readonly TIME_ONLY_FORMAT_KEY: LongDateFormatKey = 'LT';
   constructor(@Inject(LOCALE_ID) locale: string) {
     super();
     this.setLocale(locale);
@@ -36,15 +36,15 @@ export class NbMomentDateService extends NbDateService<Moment> {
     this.setMomentLocaleData(locale);
   }
 
-  setHour(date: Moment, hour: number): Moment {
+  setHours(date: Moment, hour: number): Moment {
     return this.clone(date).set({ hour });
   }
 
-  setMinute(date: Moment, minute: number): Moment {
+  setMinutes(date: Moment, minute: number): Moment {
     return this.clone(date).set({ minute });
   }
 
-  setSecond(date: Moment, second: number): Moment {
+  setSeconds(date: Moment, second: number): Moment {
     return this.clone(date).set({ second });
   }
 
@@ -60,11 +60,11 @@ export class NbMomentDateService extends NbDateService<Moment> {
     return this.clone(date).add({ years });
   }
 
-  addMinute(date: Moment, minute: number): Moment {
+  addMinutes(date: Moment, minute: number): Moment {
     return this.clone(date).add( { minute });
   }
 
-  addHour(date: Moment, hour: number): Moment {
+  addHours(date: Moment, hour: number): Moment {
     return this.clone(date).add( { hour });
   }
 
@@ -91,7 +91,7 @@ export class NbMomentDateService extends NbDateService<Moment> {
   }
 
   getLocaleTimeFormat(): string {
-    return moment.localeData().longDateFormat(this.DATE_FORMAT);
+    return moment.localeData().longDateFormat(this.TIME_ONLY_FORMAT_KEY);
   }
 
   getDate(date: Moment): number {
@@ -111,18 +111,18 @@ export class NbMomentDateService extends NbDateService<Moment> {
   }
 
   getMonth(date: Moment): number {
-    return this.clone(date).month();
+    return date.month();
   }
 
-  getHour(date: Moment): number {
-    return this.clone(date).hour();
+  getHours(date: Moment): number {
+    return date.hour();
   }
 
-  getMinute(date: Moment): number {
-    return this.clone(date).minute();
+  getMinutes(date: Moment): number {
+    return date.minute();
   }
 
-  getSecond(date: Moment): number {
+  getSeconds(date: Moment): number {
     return date.second();
   }
 
@@ -211,5 +211,13 @@ export class NbMomentDateService extends NbDateService<Moment> {
 
   getWeekNumber(date: Moment): number {
     return date.week();
+  }
+
+  getDateFormat(): string {
+    return 'YYYY-MM-DD';
+  }
+
+  getTwelveHoursFormat(): string {
+    return 'hh:mm A';
   }
 }

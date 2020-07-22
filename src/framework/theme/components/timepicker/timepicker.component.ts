@@ -60,6 +60,7 @@ export class NbTimePickerComponent<D> implements OnChanges, OnInit {
   /**
    * Defines time format string.
    * */
+  @Input()
   get timeFormat(): string {
     return this._timeFormat;
   }
@@ -75,9 +76,11 @@ export class NbTimePickerComponent<D> implements OnChanges, OnInit {
   get isTwelveHoursFormat(): boolean {
     return this._isTwelveHoursFormat;
   }
+
   set isTwelveHoursFormat(value: boolean) {
     this._isTwelveHoursFormat = convertToBoolProperty(value);
   };
+
   static ngAcceptInputType_isTwelveHoursFormat: NbBooleanInput;
 
   /**
@@ -88,9 +91,11 @@ export class NbTimePickerComponent<D> implements OnChanges, OnInit {
   get withSeconds(): boolean {
     return this._withSeconds;
   }
+
   set withSeconds(value: boolean) {
     this._withSeconds = convertToBoolProperty(value);
   };
+
   static ngAcceptInputType_withSeconds: NbBooleanInput;
 
   /**
@@ -100,9 +105,11 @@ export class NbTimePickerComponent<D> implements OnChanges, OnInit {
   get singleColumn(): boolean {
     return this._singleColumn;
   }
+
   set singleColumn(value: boolean) {
     this._singleColumn = convertToBoolProperty(value);
   }
+
   static ngAcceptInputType_singleColumn: NbBooleanInput;
 
   /**
@@ -113,6 +120,7 @@ export class NbTimePickerComponent<D> implements OnChanges, OnInit {
   set step(step: number) {
     this._step = step;
   }
+
   get step(): number {
     return this._step;
   }
@@ -126,6 +134,7 @@ export class NbTimePickerComponent<D> implements OnChanges, OnInit {
     this.buildColumnOptions();
     this.cd.markForCheck();
   }
+
   get date(): D {
     return this._date;
   }
@@ -147,7 +156,7 @@ export class NbTimePickerComponent<D> implements OnChanges, OnInit {
   @Output() onSelectTime: EventEmitter<NbSelectedTimePayload<D>> = new EventEmitter<NbSelectedTimePayload<D>>();
   @ViewChild(NbPortalDirective, {static: true}) portal: NbPortalDirective;
 
-  constructor(@Inject(NB_TIME_PICKER_CONFIG) config: NbTimePickerConfig,
+  constructor(@Inject(NB_TIME_PICKER_CONFIG) protected config: NbTimePickerConfig,
               protected platformService: NbPlatform,
               @Inject(LOCALE_ID) locale: string,
               protected cd: ChangeDetectorRef,
@@ -161,7 +170,9 @@ export class NbTimePickerComponent<D> implements OnChanges, OnInit {
   }
 
   ngOnInit(): void {
-    this.timeFormat = this.buildTimeFormat();
+    if (!this.timeFormat) {
+      this.timeFormat = this.config.format || this.buildTimeFormat();
+    }
   }
 
   ngOnChanges({
@@ -170,8 +181,9 @@ export class NbTimePickerComponent<D> implements OnChanges, OnInit {
                 withSeconds,
                 singleColumn,
               }: SimpleChanges): void {
-    this.timeFormat = this.buildTimeFormat();
-
+    if (!this.timeFormat) {
+      this.timeFormat = this.config.format || this.buildTimeFormat();
+    }
     if (!this.date) {
       return
     }
@@ -199,15 +211,15 @@ export class NbTimePickerComponent<D> implements OnChanges, OnInit {
   }
 
   setHour(value: number): void {
-    this.updateValue(this.dateService.setHour(this.date, value));
+    this.updateValue(this.dateService.setHours(this.date, value));
   }
 
   setMinute(value: number): void {
-    this.updateValue(this.dateService.setMinute(this.date, value));
+    this.updateValue(this.dateService.setMinutes(this.date, value));
   }
 
   setSecond(value: number): void {
-    this.updateValue(this.dateService.setSecond(this.date, value));
+    this.updateValue(this.dateService.setSeconds(this.date, value));
   }
 
   selectFullTime(value: D): void {
@@ -215,7 +227,7 @@ export class NbTimePickerComponent<D> implements OnChanges, OnInit {
   }
 
   changeAMPM({value}: NbSelectedTimeModel) {
-    const currentDateAMPM: string = this.calendarTimeModelService.getAmPm(this.date);
+    const currentDateAMPM = this.calendarTimeModelService.getAmPm(this.date);
 
     if (currentDateAMPM === value) {
       return;
@@ -223,7 +235,7 @@ export class NbTimePickerComponent<D> implements OnChanges, OnInit {
 
     const increment = (currentDateAMPM === this.calendarTimeModelService.PM ? -1 : 1) * this.HOURS_IND_DAY;
 
-    this.updateValue(this.dateService.addHour(this.date, increment));
+    this.updateValue(this.dateService.addHours(this.date, increment));
   }
 
   updateValue(date: D): void {
@@ -248,24 +260,24 @@ export class NbTimePickerComponent<D> implements OnChanges, OnInit {
   }
 
   isSelectedHour(val: number): boolean {
-    return this.dateService.getHour(this.date) === val;
+    return this.dateService.getHours(this.date) === val;
   }
 
   isSelectedMinute(val: number): boolean {
-    return this.dateService.getMinute(this.date) === val;
+    return this.dateService.getMinutes(this.date) === val;
   }
 
   isSelectedSecond(val: number): boolean {
-    return this.dateService.getSecond(this.date) === val;
+    return this.dateService.getSeconds(this.date) === val;
   }
 
   isSelectedAmPm(value: string): boolean {
-    const hour: number = this.dateService.getHour(this.date);
+    const hour: number = this.dateService.getHours(this.date);
 
     if (value === this.calendarTimeModelService.PM) {
       return hour >= this.HOURS_IND_DAY;
     } else {
-      return this.dateService.getHour(this.date) < this.HOURS_IND_DAY;
+      return this.dateService.getHours(this.date) < this.HOURS_IND_DAY;
     }
   }
 
@@ -274,13 +286,13 @@ export class NbTimePickerComponent<D> implements OnChanges, OnInit {
   }
 
   isSelectedFullTimeValue(value: D): boolean {
-    return this.dateService.isEqualTime(value, this.date, false);
+    return this.dateService.isSameHourAndMinute(value, this.date);
   }
 
   buildColumnOptions(): void {
     this.timeFormat = this.buildTimeFormat();
     this.fullTimeOptions = this.singleColumn ?
-      this.calendarTimeModelService.getFullHours(this.isTwelveHoursFormat, this.step) : [];
+      this.calendarTimeModelService.getFullHours(this.step) : [];
 
     this.hoursColumnOptions = this.generateHours();
     this.minutesColumnOptions = this.generateMinutesOrSeconds();
@@ -296,36 +308,36 @@ export class NbTimePickerComponent<D> implements OnChanges, OnInit {
   generateHours(): TimeOptions[] {
     if (!this.isTwelveHoursFormat) {
       return range(23, (v: number) => {
-        return {value: v, text: this.calendarTimeModelService.formatToString(v)};
+        return {value: v, text: this.calendarTimeModelService.padd(v)};
       });
     }
 
     if (this.calendarTimeModelService.isAm(this.date)) {
       return (range(12, (v: number) => {
         const text = v === 0 ? 12 : v;
-        return {value: v, text: this.calendarTimeModelService.formatToString(text)}
+        return {value: v, text: this.calendarTimeModelService.padd(text)}
       }));
     }
 
     return (rangeFromTo(12, 24, (v: number) => {
       const text = v === 12 ? 12 : (v - 12);
-      return {value: v, text: this.calendarTimeModelService.formatToString(text)}
+      return {value: v, text: this.calendarTimeModelService.padd(text)}
     }));
   }
 
   generateMinutesOrSeconds(): TimeOptions[] {
     return range(60, (v: number) => {
-      return {value: v, text: this.calendarTimeModelService.formatToString(v)};
+      return {value: v, text: this.calendarTimeModelService.padd(v)};
     });
   }
 
   buildTimeFormat(): string {
     if (this.isTwelveHoursFormat) {
-      return `${this.withSeconds && !this.singleColumn ? this.calendarTimeModelService.twelveTimeFormatWithSeconds
-        : this.calendarTimeModelService.twelveHoursTimeFormat}`;
+      return `${this.withSeconds && !this.singleColumn ? this.dateService.getTwelveHoursFormatWithSeconds()
+        : this.dateService.getTwelveHoursFormat()}`;
     } else {
-      return `${this.withSeconds && !this.singleColumn ? this.calendarTimeModelService.timeFormatWithSeconds
-        : this.calendarTimeModelService.timeFormat}`;
+      return `${this.withSeconds && !this.singleColumn ? this.dateService.getTwentyFourHoursFormatWithSeconds()
+        : this.dateService.getTwentyFourHoursFormat()}`;
     }
   }
 }
