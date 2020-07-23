@@ -50,3 +50,4 @@ debug.log
 local.log
 
 /schematics/dist
+/src/framework/theme/styles/themes/_autocomplete.scss

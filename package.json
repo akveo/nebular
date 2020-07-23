@@ -76,7 +76,8 @@
     "gen:playground-components": "ng g .:playground-components",
     "gulp:change-prefix": "gulp change-prefix",
     "build:ts:custom-prefix": "tsc -p tsconfig-custom.publish.json && ngc -p tsconfig-custom.publish.json",
-    "build:custom-prefix": "npm-run-all -s clean:all \"gulp:change-prefix -- {@}\" build:ts:custom-prefix build:inline-resources build:bundle clean:tmp --"
+    "build:custom-prefix": "npm-run-all -s clean:all \"gulp:change-prefix -- {@}\" build:ts:custom-prefix build:inline-resources build:bundle clean:tmp --",
+    "generate-autocomplete": "node scripts/autocomplete/generate-autocomplete"
   },
   "keywords": [
     "angular",
