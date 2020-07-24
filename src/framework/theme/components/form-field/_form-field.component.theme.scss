@@ -5,6 +5,14 @@
  */
 
 @mixin nb-form-field-theme() {
+  .nb-form-control-container {
+    max-width: inherit;
+
+    input {
+      width: 100%;
+    }
+  }
+
   .nb-form-field-addon {
     display: flex;
     justify-content: center;
@@ -33,6 +41,11 @@
   @each $size in nb-get-sizes() {
     $addon-height: nb-theme(form-field-addon-#{$size}-height);
     $addon-width: nb-theme(form-field-addon-#{$size}-width);
+    $form-field-max-width: nb-theme(input-#{$size}-max-width);
+
+    .nb-form-field-limited-width.nb-form-field-size-#{$size} {
+      max-width: $form-field-max-width;
+    }
 
     .nb-form-field-prefix-#{$size},
     .nb-form-field-suffix-#{$size} {
