@@ -17,7 +17,7 @@
         <nb-list-item
           class="list-item"
           [ngClass]="{'selected': isSelectedFullTimeValue(item)}"
-          *ngFor="let item of fullTimeOptions;">
+          *ngFor="let item of fullTimeOptions; trackBy: trackBySingleColumnValue">
           <nb-timepicker-cell
             [value]="getFullTimeString(item)"
             [selected]="isSelectedFullTimeValue(item)"
@@ -67,7 +67,7 @@
         <nb-list-item
           class="list-item am-pm-item"
           [ngClass]="{'selected': isSelectedAmPm(item)}"
-          *ngFor="let item of ampmColumnOptions;">
+          *ngFor="let item of ampmColumnOptions; trackBy: trackByAmPmValues">
           <nb-timepicker-cell
             [value]="item"
             [selected]="isSelectedAmPm(item)"

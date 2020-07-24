@@ -243,6 +243,14 @@ export class NbTimePickerComponent<D> implements OnChanges, OnInit {
     return item.value;
   }
 
+  trackBySingleColumnValue(index, item: D) {
+    return index;
+  }
+
+  trackByAmPmValues(index, item: string): string {
+    return item;
+  }
+
   showSeconds(): boolean {
     return this.withSeconds && !this.singleColumn;
   }
