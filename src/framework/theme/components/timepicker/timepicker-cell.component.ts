@@ -11,9 +11,10 @@ import {
   Output,
   ViewChild,
 } from '@angular/core';
-import { NbSelectedTimeModel, NbTimepickerTypes } from './model';
+import { NbSelectedTimeModel } from './model';
 import { filter, take, takeUntil } from 'rxjs/operators';
 import { merge, Subject } from 'rxjs';
+import { NbPlatform } from '../cdk/platform/platform-service';
 
 @Component({
   selector: 'nb-timepicker-cell',
@@ -41,17 +42,17 @@ export class NbTimePickerCellComponent implements AfterViewInit, OnDestroy {
     return this._selected;
   }
   @Input() value: string;
-  @Input() type: NbTimepickerTypes;
   @Output() select: EventEmitter<NbSelectedTimeModel> = new EventEmitter();
 
   @ViewChild('timepickerOption') element: ElementRef;
 
-  constructor(protected ngZone: NgZone) {
+  constructor(protected ngZone: NgZone,
+              protected platformService: NbPlatform) {
   }
 
   @HostListener('click')
   onClick() {
-    this.select.emit({ type: this.type, value: this.value });
+    this.select.emit({ value: this.value });
   }
 
   ngAfterViewInit(): void {
@@ -66,7 +67,7 @@ export class NbTimePickerCellComponent implements AfterViewInit, OnDestroy {
   }
 
   scrollToElement() {
-    if (this.element) {
+    if (this.element && this.platformService.isBrowser) {
       this.element.nativeElement.scrollIntoView({block: 'center'});
     }
   }

@@ -1,11 +1,13 @@
 import {
   AfterViewInit,
+  Attribute,
   ChangeDetectorRef,
   ComponentRef,
   Directive,
   ElementRef,
   forwardRef,
   Input,
+  Renderer2,
 } from '@angular/core';
 import { NbTimePickerComponent } from './timepicker.component';
 import { NbOverlayRef, NbScrollStrategy } from '../cdk/overlay/mapping';
@@ -56,7 +58,18 @@ import { NbCalendarTimeModelService } from '../calendar-kit/services/calendar-ti
  *   ],
  * })
  * export class PageModule { }
+ *
  * ```
+ * <div class="note note-info">
+ * <div class="note-title">Note</div>
+ * <div class="note-body">
+ *  Date.parse noes not support parsing time with custom format, we highly recommend to use fnsDate or moment date
+ *  service instead of native date service.
+ If you want to use native date service you should set ISO 8061 time format.
+ * </div>
+ * </div>
+ * <hr>
+ *
  * ### Usage
  *
  * With Seconds
@@ -83,13 +96,13 @@ import { NbCalendarTimeModelService } from '../calendar-kit/services/calendar-ti
  *
  * @styles
  *
- * timepicker-color:
+ * timepicker-text-color:
  * timepicker-hover-background-color:
- * timepicker-hover-color:
+ * timepicker-text-hover-color:
  * timepicker-focus-background-color:
- * timepicker-focus-color:
+ * timepicker-text-focus-color:
  * timepicker-active-background-color:
- * timepicker-active-color:
+ * timepicker-text-active-color:
  * timepicker-cell-text-font-size:
  * timepicker-cell-text-font-weight:
  * timepicker-basic-color:
@@ -100,7 +113,6 @@ import { NbCalendarTimeModelService } from '../calendar-kit/services/calendar-ti
  * timepicker-scrollbar-background-color:
  * timepicker-scrollbar-width:
  * timepicker-cell-line-height:
- * timepicker-cell-font-size:
  * timepicker-single-column-width:
  * timepicker-multiple-column-width:
  * timepicker-title-height:
@@ -130,8 +142,12 @@ export class NbTimePickerDirective<D> implements AfterViewInit, ControlValueAcce
   }
 
   /**
+   * Time picker overlay offset
+   * */
+  @Input() overlayOffset = 8;
+
+  /**
    * NbTimePickerComponent instance passed via input.
-   * @docs-private
    * */
   protected _timePickerComponent: NbTimePickerComponent<D>;
 
@@ -141,7 +157,6 @@ export class NbTimePickerDirective<D> implements AfterViewInit, ControlValueAcce
    * */
   protected positionStrategy: NbAdjustableConnectedPositionStrategy;
   protected overlayRef: NbOverlayRef;
-  protected overlayOffset = 8;
   protected destroy$: Subject<void> = new Subject<void>();
   protected _onChange: (value: string) => void = () => {};
   protected _onTouched = () => {};
@@ -179,9 +194,8 @@ export class NbTimePickerDirective<D> implements AfterViewInit, ControlValueAcce
               protected cd: ChangeDetectorRef,
               protected calendarTimeModelService: NbCalendarTimeModelService<D>,
               protected dateService: NbDateService<D>,
-  ) {
-    this.subscribeOnInputChange();
-  }
+              protected renderer: Renderer2,
+              @Attribute('placeholder') protected placeholder: string) {}
 
   /**
    * Returns host input value.
@@ -195,7 +209,11 @@ export class NbTimePickerDirective<D> implements AfterViewInit, ControlValueAcce
   }
 
   ngAfterViewInit() {
-    this.input.placeholder = this.timepicker.timeFormat;
+    this.subscribeOnInputChange();
+
+    if (!this.placeholder) {
+      this.renderer.setProperty(this.input, 'placeholder', this.timepicker.timeFormat);
+    }
     this.triggerStrategy = this.createTriggerStrategy();
     this.subscribeOnTriggers();
   }
@@ -225,16 +243,21 @@ export class NbTimePickerDirective<D> implements AfterViewInit, ControlValueAcce
   }
 
   setupTimepicker() {
+    if (this.dateService.getId() === 'native') {
+      console.warn('Date.parse noes not support parsing time with custom format, we highly recommend to use' +
+        'fnsDate or moment date service instead of native date service.If you want to use native' +
+        ' date service you should set ISO 8061 time format.')
+    }
     this.timepicker.setHost(this.hostRef);
-    if (this.timepicker.date) {
-     this.timepicker.date = this.dateService.parse(this.inputValue, this.timepicker.timeFormat);
+    if (this.inputValue) {
+      this.timepicker.date = this.dateService.parse(this.inputValue, this.timepicker.timeFormat);
     } else {
-     let today = this.dateService.today();
-     today = this.dateService.setHours(today, 0);
-     today = this.dateService.setMinutes(today, 0);
-     today = this.dateService.setSeconds(today, 0);
+      let today = this.dateService.today();
+      today = this.dateService.setHours(today, 0);
+      today = this.dateService.setMinutes(today, 0);
+      today = this.dateService.setSeconds(today, 0);
 
-     this.timepicker.date = today;
+      this.timepicker.date = today;
     }
   }
 
@@ -245,8 +268,8 @@ export class NbTimePickerDirective<D> implements AfterViewInit, ControlValueAcce
   }
 
   protected subscribeOnApplyClick() {
-    this.timepicker.onSelectTime.subscribe((value: NbSelectedTimePayload<D>) => {
-      this.setInputValue = this.dateService.format(value.time, value.format).toUpperCase();
+    this.timepicker.onSelectTime.pipe(takeUntil(this.destroy$)).subscribe((value: NbSelectedTimePayload<D>) => {
+      this.setInputValue = this.dateService.format(value.time, this.timepicker.timeFormat).toUpperCase();
       this.timepicker.date = value.time;
       if (value.save) {
         this.hide();
@@ -315,7 +338,8 @@ export class NbTimePickerDirective<D> implements AfterViewInit, ControlValueAcce
   protected handleInputChange(value: string) {
     if (this.dateService.getId() === 'native') {
       /**
-       * Native date service dont parse only time string value
+       * Native date service dont parse only time string value,
+       * and we adding year mouth and day to convert string to valid date format
        **/
       value = this.parseNativeDateString(value);
     }

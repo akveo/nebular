@@ -16,20 +16,20 @@
 
       &:hover {
         background-color: nb-theme(timepicker-hover-background-color);
-        color: nb-theme(timepicker-hover-color);
+        color: nb-theme(timepicker-text-hover-color);
       }
 
       &:focus {
         background-color: nb-theme(timepicker-focus-background-color);
-        color: nb-theme(timepicker-focus-color);
+        color: nb-theme(timepicker-text-focus-color);
       }
 
       &.selected {
         background-color: nb-theme(timepicker-active-background-color);
-        color: nb-theme(timepicker-active-color);
+        color: nb-theme(timepicker-text-active-color);
       }
 
-      color: nb-theme(timepicker-color);
+      color: nb-theme(timepicker-text-color);
       font-size: nb-theme(timepicker-cell-text-font-size);
       line-height: nb-theme(timepicker-cell-line-height);
       font-weight: nb-theme(timepicker-cell-text-font-weight);
@@ -49,8 +49,8 @@
 
     &.supports-scrollbar-theming {
       .values-list:hover .list-item:not(.am-pm-item) {
-        @include nb-ltr(margin-right, nb-theme(timepicker-list-item-hover));
-        @include nb-rtl(margin-left, nb-theme(timepicker-list-item-hover));
+        @include nb-ltr(margin-right, -#{nb-theme(timepicker-scrollbar-width)});
+        @include nb-rtl(margin-left, -#{nb-theme(timepicker-scrollbar-width)});
       }
     }
 

@@ -19,7 +19,7 @@ import {
   NbSelectedTimeModel,
   NbSelectedTimePayload,
   NbTimePickerConfig,
-  NbTimepickerTypes, TimeOptions,
+  TimeOptions,
 } from './model';
 import { NbDateService } from '../calendar-kit/services/date.service';
 import { NbCalendarTimeModelService } from '../calendar-kit/services/calendar-time-model.service';
@@ -50,11 +50,6 @@ export class NbTimePickerComponent<D> implements OnChanges, OnInit {
   secondsColumnOptions: TimeOptions[];
   ampmColumnOptions: string[];
   readonly HOURS_IND_DAY: number = 12;
-  fullTime: NbTimepickerTypes = NbTimepickerTypes.FULL_TIME;
-  hour: NbTimepickerTypes = NbTimepickerTypes.HOUR;
-  minute: NbTimepickerTypes = NbTimepickerTypes.MINUTE;
-  sec: NbTimepickerTypes = NbTimepickerTypes.SECOND;
-  ampm: NbTimepickerTypes = NbTimepickerTypes.AMPM;
   hostRef: ElementRef;
 
   /**
@@ -170,9 +165,7 @@ export class NbTimePickerComponent<D> implements OnChanges, OnInit {
   }
 
   ngOnInit(): void {
-    if (!this.timeFormat) {
-      this.timeFormat = this.config.format || this.buildTimeFormat();
-    }
+    this.timeFormat = this.setupTimeFormat();
   }
 
   ngOnChanges({
@@ -181,11 +174,10 @@ export class NbTimePickerComponent<D> implements OnChanges, OnInit {
                 withSeconds,
                 singleColumn,
               }: SimpleChanges): void {
-    if (!this.timeFormat) {
-      this.timeFormat = this.config.format || this.buildTimeFormat();
-    }
+    this.timeFormat = this.setupTimeFormat();
+
     if (!this.date) {
-      return
+      return;
     }
     if (step || isTwelveHoursFormat || withSeconds || singleColumn) {
       this.buildColumnOptions();
@@ -204,8 +196,6 @@ export class NbTimePickerComponent<D> implements OnChanges, OnInit {
     this.date = this.dateService.today();
     this.onSelectTime.emit({
       time: this.date,
-      format: this.timeFormat,
-      twelveHourFormat: this.isTwelveHoursFormat,
       save: true,
     });
   }
@@ -226,7 +216,7 @@ export class NbTimePickerComponent<D> implements OnChanges, OnInit {
     this.updateValue(value);
   }
 
-  changeAMPM({value}: NbSelectedTimeModel) {
+  changeAMPM({value}: NbSelectedTimeModel): void {
     const currentDateAMPM = this.calendarTimeModelService.getAmPm(this.date);
 
     if (currentDateAMPM === value) {
@@ -239,19 +229,17 @@ export class NbTimePickerComponent<D> implements OnChanges, OnInit {
   }
 
   updateValue(date: D): void {
-    this.onSelectTime.emit({time: date, twelveHourFormat: this.isTwelveHoursFormat, format: this.timeFormat});
+    this.onSelectTime.emit({time: date});
   }
 
   saveValue(): void {
     this.onSelectTime.emit({
       time: this.date,
-      twelveHourFormat: this.isTwelveHoursFormat,
-      format: this.timeFormat,
       save: true,
     });
   }
 
-  trackByTimeValues(index, item): any {
+  trackByTimeValues(index, item: TimeOptions): number {
     return item.value;
   }
 
@@ -290,7 +278,7 @@ export class NbTimePickerComponent<D> implements OnChanges, OnInit {
   }
 
   buildColumnOptions(): void {
-    this.timeFormat = this.buildTimeFormat();
+    this.timeFormat = this.setupTimeFormat();
     this.fullTimeOptions = this.singleColumn ?
       this.calendarTimeModelService.getFullHours(this.step) : [];
 
@@ -307,7 +295,7 @@ export class NbTimePickerComponent<D> implements OnChanges, OnInit {
 
   generateHours(): TimeOptions[] {
     if (!this.isTwelveHoursFormat) {
-      return range(23, (v: number) => {
+      return range(24, (v: number) => {
         return {value: v, text: this.calendarTimeModelService.padd(v)};
       });
     }
@@ -329,6 +317,14 @@ export class NbTimePickerComponent<D> implements OnChanges, OnInit {
     return range(60, (v: number) => {
       return {value: v, text: this.calendarTimeModelService.padd(v)};
     });
+  }
+
+  setupTimeFormat(): string {
+    if (!this.timeFormat) {
+      return this.timeFormat = this.config.format || this.buildTimeFormat();
+    }
+
+    return this.timeFormat;
   }
 
   buildTimeFormat(): string {

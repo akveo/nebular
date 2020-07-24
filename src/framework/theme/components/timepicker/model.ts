@@ -6,13 +6,6 @@
 
 import { InjectionToken } from '@angular/core';
 
-export const enum NbTimepickerTypes {
-  FULL_TIME = 'fullTime',
-  HOUR = 'hour',
-  MINUTE = 'minute',
-  SECOND = 'second',
-  AMPM = 'ampm',
-}
 export const NB_TIME_PICKER_CONFIG = new InjectionToken('NB_TIME_PICKER_CONFIG');
 
 export interface NbTimePickerConfig {
@@ -22,13 +15,10 @@ export interface NbTimePickerConfig {
 
 export interface NbSelectedTimeModel {
   value: string;
-  type: NbTimepickerTypes;
 }
 
 export interface NbSelectedTimePayload<D> {
   time: D,
-  twelveHourFormat: boolean,
-  format?: string,
   save?: boolean,
 }
 

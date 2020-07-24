@@ -16,7 +16,6 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
         <nb-date-timepicker
           #formpicker
           singleColumn
-          [title]="'Title'"
           [step]="10"></nb-date-timepicker>
       </nb-card-body>
     </nb-card>

@@ -151,6 +151,7 @@ export const NB_DATE_SERVICE_OPTIONS = new InjectionToken('Date service options'
  *     NbDatepickerModule,
  *   ],
  * })
+ *
  * export class PageModule { }
  * ```
  * ### Usage
@@ -253,13 +254,13 @@ export const NB_DATE_SERVICE_OPTIONS = new InjectionToken('Date service options'
  * datepicker-border-width:
  * datepicker-border-radius:
  * datepicker-shadow:
- * timepicker-color:
+ * timepicker-text-color:
  * timepicker-hover-background-color:
- * timepicker-hover-color:
+ * timepicker-text-hover-color:
  * timepicker-focus-background-color:
- * timepicker-focus-color:
+ * timepicker-text-focus-color:
  * timepicker-active-background-color:
- * timepicker-active-color:
+ * timepicker-text-active-color:
  * timepicker-cell-text-font-size:
  * timepicker-cell-text-font-weight:
  * timepicker-basic-color:
@@ -270,7 +271,6 @@ export const NB_DATE_SERVICE_OPTIONS = new InjectionToken('Date service options'
  * timepicker-scrollbar-background-color:
  * timepicker-scrollbar-width:
  * timepicker-cell-line-height:
- * timepicker-cell-font-size:
  * timepicker-single-column-width:
  * timepicker-multiple-column-width:
  * timepicker-title-height:

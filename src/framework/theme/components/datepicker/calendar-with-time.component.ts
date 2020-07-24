@@ -93,7 +93,6 @@ export class NbCalendarWithTimeComponent<D> extends NbCalendarComponent<D> imple
    * */
   @Input() title: string;
 
-
   @Input() applyButtonText: string;
 
   @Input() currentTimeButtonText: string;
@@ -105,15 +104,26 @@ export class NbCalendarWithTimeComponent<D> extends NbCalendarComponent<D> imple
   }
 
   ngOnInit(): void {
-    this.date = this.dateService.today();
+    if (!this.date) {
+      this.date = this.dateService.today();
 
-    this.date = this.dateService.setHours(this.date, 0);
-    this.date = this.dateService.setMinutes(this.date, 0);
-    this.date = this.dateService.setSeconds(this.date, 0);
+      this.date = this.dateService.setHours(this.date, 0);
+      this.date = this.dateService.setMinutes(this.date, 0);
+      this.date = this.dateService.setSeconds(this.date, 0);
+    }
   }
 
-  onDateValueChange(date: any): void {
-    this.date = date;
+  onDateValueChange(date: D): void {
+    const hours = this.dateService.getHours(this.date);
+    const minutes = this.dateService.getMinutes(this.date);
+    const seconds = this.dateService.getSeconds(this.date);
+
+    let newDate = this.dateService.setHours(date, hours);
+    newDate = this.dateService.setMinutes(newDate, minutes);
+    newDate = this.dateService.setMinutes(newDate, minutes);
+    newDate = this.dateService.setSeconds(newDate, seconds);
+
+    this.date = newDate;
   }
 
   onTimeChange(selectedTime: NbSelectedTimePayload<D>): void {

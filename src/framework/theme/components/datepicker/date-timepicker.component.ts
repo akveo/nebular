@@ -98,6 +98,14 @@ export class NbDateTimePickerComponent<D>
     return this.picker.dateChange;
   }
 
+  protected writeQueue() {
+    if (this.queue) {
+      const date = this.queue;
+      this.queue = null;
+      this.value = date;
+    }
+  }
+
   get value(): any {
     return this.picker ? this.picker.date : undefined;
   }
