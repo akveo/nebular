@@ -87,6 +87,12 @@ describe('moment-date-service', () => {
     expect(dateService.getSeconds(second)).toBe(24);
   });
 
+  it('should get milliseconds', () => {
+    const second = moment().year(2018).month(5).date(15).hour(12)
+    .minute(10).second(24).milliseconds(22);
+    expect(dateService.getMilliseconds(second)).toBe(22);
+  });
+
   it('should get year', () => {
     const year = moment().year(2018).month(5).date(15);
     expect(dateService.getYear(year)).toBe(2018);

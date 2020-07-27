@@ -60,6 +60,10 @@ export abstract class NbDateService<D> {
   abstract setSeconds(date: D, second: number): D;
 
   /**
+   * Returns date with selected milliseconds
+   * */
+  abstract setMilliseconds(date: D, second: number): D;
+  /**
    * Returns true if date string is valid date string according to the provided format.
    * */
   abstract isValidDateString(date: string, format: string): boolean;
@@ -98,6 +102,11 @@ export abstract class NbDateService<D> {
    * Gets the second component of the given date.
    */
   abstract getSeconds(date: D): number;
+
+  /**
+   * Gets the second component of the given date.
+   */
+  abstract getMilliseconds(date: D): number;
 
   /**
    * Gets the month component of the given date.
@@ -223,7 +232,7 @@ export abstract class NbDateService<D> {
    * */
   abstract addMinutes(date: D, minute: number): D;
 
-    /**
+  /**
    * Returns date with added number of years.
    * */
   abstract addYear(date: D, years: number): D;
@@ -235,6 +244,11 @@ export abstract class NbDateService<D> {
   abstract getDateFormat(): string;
 
   abstract getTwelveHoursFormat(): string;
+
+  /**
+   * Returns date with added number of years.
+   * */
+  abstract valueOf(date: D): number;
 
   isSameHourAndMinute(date1: D, date2: D): boolean {
     return this.isSameHour(date1, date2) && this.isSameMinute(date1, date2);

@@ -48,6 +48,10 @@ export class NbMomentDateService extends NbDateService<Moment> {
     return this.clone(date).set({ second });
   }
 
+  setMilliseconds(date: Moment, milliseconds: number): Moment {
+    return this.clone(date).set({ milliseconds });
+  }
+
   addDay(date: Moment, days: number): Moment {
     return this.clone(date).add({ days });
   }
@@ -70,6 +74,10 @@ export class NbMomentDateService extends NbDateService<Moment> {
 
   clone(date: Moment): Moment {
     return date.clone().locale(this.locale);
+  }
+
+  valueOf(date: Moment): number {
+    return date.valueOf();
   }
 
   compareDates(date1: Moment, date2: Moment): number {
@@ -124,6 +132,10 @@ export class NbMomentDateService extends NbDateService<Moment> {
 
   getSeconds(date: Moment): number {
     return date.second();
+  }
+
+  getMilliseconds(date: Moment): number {
+    return date.milliseconds();
   }
 
   getMonthEnd(date: Moment): Moment {

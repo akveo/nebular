@@ -105,11 +105,7 @@ export class NbCalendarWithTimeComponent<D> extends NbCalendarComponent<D> imple
 
   ngOnInit(): void {
     if (!this.date) {
-      this.date = this.dateService.today();
-
-      this.date = this.dateService.setHours(this.date, 0);
-      this.date = this.dateService.setMinutes(this.date, 0);
-      this.date = this.dateService.setSeconds(this.date, 0);
+      this.date = this.calendarTimeModelService.getResetTime();
     }
   }
 
@@ -117,17 +113,26 @@ export class NbCalendarWithTimeComponent<D> extends NbCalendarComponent<D> imple
     const hours = this.dateService.getHours(this.date);
     const minutes = this.dateService.getMinutes(this.date);
     const seconds = this.dateService.getSeconds(this.date);
+    const milliseconds = this.dateService.getMilliseconds(this.date);
 
     let newDate = this.dateService.setHours(date, hours);
     newDate = this.dateService.setMinutes(newDate, minutes);
     newDate = this.dateService.setMinutes(newDate, minutes);
     newDate = this.dateService.setSeconds(newDate, seconds);
+    newDate = this.dateService.setMilliseconds(newDate, milliseconds);
 
     this.date = newDate;
   }
 
   onTimeChange(selectedTime: NbSelectedTimePayload<D>): void {
-    this.date = selectedTime.time;
+    let newDate = this.dateService.clone(this.date);
+
+    newDate = this.dateService.setHours(newDate, this.dateService.getHours(selectedTime.time));
+    newDate = this.dateService.setMinutes(newDate, this.dateService.getMinutes(selectedTime.time));
+    newDate = this.dateService.setSeconds(newDate, this.dateService.getSeconds(selectedTime.time));
+    newDate = this.dateService.setMilliseconds(newDate, this.dateService.getMilliseconds(selectedTime.time));
+
+    this.date = newDate;
   }
 
   saveValue(): void {

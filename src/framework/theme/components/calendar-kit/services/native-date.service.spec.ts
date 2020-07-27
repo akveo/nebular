@@ -95,6 +95,11 @@ describe('native-date-service', () => {
     expect(dateService.getSeconds(second)).toBe(24);
   });
 
+  it('should get second', () => {
+    const second = new Date(2018, 5, 15, 12, 10, 24, 22);
+    expect(dateService.getMilliseconds(second)).toBe(22);
+  });
+
   it('should get year', () => {
     const year = new Date(2018, 5, 15);
     expect(dateService.getYear(year)).toBe(2018);

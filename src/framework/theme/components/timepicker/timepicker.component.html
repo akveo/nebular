@@ -17,7 +17,7 @@
         <nb-list-item
           class="list-item"
           [ngClass]="{'selected': isSelectedFullTimeValue(item)}"
-          *ngFor="let item of fullTimeOptions; trackBy: trackBySingleColumnValue">
+          *ngFor="let item of fullTimeOptions; trackBy: trackBySingleColumnValue.bind(this)">
           <nb-timepicker-cell
             [value]="getFullTimeString(item)"
             [selected]="isSelectedFullTimeValue(item)"

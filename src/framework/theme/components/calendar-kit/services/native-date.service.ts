@@ -57,6 +57,13 @@ export class NbNativeDateService extends NbDateService<Date> {
     return result;
   }
 
+  setMilliseconds(date: Date, second: number): Date {
+    const result: Date = this.clone(date);
+    result.setMilliseconds(second);
+
+    return result;
+  }
+
   isValidDateString(date: string, format: string): boolean {
     return !isNaN(this.parse(date, format).getTime());
   }
@@ -159,6 +166,10 @@ export class NbNativeDateService extends NbDateService<Date> {
     return date.getSeconds();
   }
 
+  getMilliseconds(date: Date): number {
+    return date.getMilliseconds();
+  }
+
   addYear(date: Date, num: number): Date {
     return this.createDate(date.getFullYear() + num, date.getMonth(), date.getDate());
   }
@@ -200,6 +211,10 @@ export class NbNativeDateService extends NbDateService<Date> {
 
   getYearStart(date: Date): Date {
     return this.createDate(date.getFullYear(), 0, 1);
+  }
+
+  valueOf(date: Date): number {
+    return date.valueOf();
   }
 
   isSameDay(date1: Date, date2: Date): boolean {

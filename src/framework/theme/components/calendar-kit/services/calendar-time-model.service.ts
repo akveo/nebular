@@ -30,11 +30,7 @@ export class NbCalendarTimeModelService<D> {
   }
 
   getFullHours(step: number = this.MINUTES_AND_SECONDS): D[] {
-    let date: D = this.dateService.today();
-
-    date = this.dateService.setHours(date, 0);
-    date = this.dateService.setMinutes(date, 0);
-    date = this.dateService.setSeconds(date, 0);
+    let date: D = this.getResetTime();
 
     const endDate = this.dateService.addDay(date, 1);
 
@@ -46,6 +42,16 @@ export class NbCalendarTimeModelService<D> {
     }
 
     return result;
+  }
+
+  getResetTime(): D {
+    let today = this.dateService.today();
+    today = this.dateService.setHours(today, 0);
+    today = this.dateService.setMinutes(today, 0);
+    today = this.dateService.setSeconds(today, 0);
+    today = this.dateService.setMilliseconds(today, 0);
+
+    return today;
   }
 
   getAmPm(date: D): 'AM' | 'PM' {

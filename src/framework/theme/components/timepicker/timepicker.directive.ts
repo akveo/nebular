@@ -6,6 +6,7 @@ import {
   Directive,
   ElementRef,
   forwardRef,
+  Inject,
   Input,
   Renderer2,
 } from '@angular/core';
@@ -18,13 +19,14 @@ import {
   NbPosition,
   NbPositionBuilderService,
 } from '../cdk/overlay/overlay-position';
-import { fromEvent, Subject } from 'rxjs';
+import { fromEvent, merge, Subject } from 'rxjs';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { NbOverlayService } from '../cdk/overlay/overlay-service';
 import { NbTrigger, NbTriggerStrategy, NbTriggerStrategyBuilderService } from '../cdk/overlay/overlay-trigger';
 import { NbSelectedTimePayload } from './model';
 import { NbDateService } from '../calendar-kit/services/date.service';
 import { NbCalendarTimeModelService } from '../calendar-kit/services/calendar-time-model.service';
+import { NB_DOCUMENT } from '../../theme.options';
 
 /**
  * The `NbTimePickerDirective` is form control that gives you ability to select time. The timepicker
@@ -63,9 +65,9 @@ import { NbCalendarTimeModelService } from '../calendar-kit/services/calendar-ti
  * <div class="note note-info">
  * <div class="note-title">Note</div>
  * <div class="note-body">
- *  Date.parse noes not support parsing time with custom format, we highly recommend to use fnsDate or moment date
- *  service instead of native date service.
- If you want to use native date service you should set ISO 8061 time format.
+ *  Date.parse noes not support parsing time with custom format, we highly recommend to use NbDateFnsDateModule
+ *  or NbMomentDateModule instead of native date service (Default date module).
+ *  If you want to use default service you should set ISO 8061 time format.
  * </div>
  * </div>
  * <hr>
@@ -151,6 +153,7 @@ export class NbTimePickerDirective<D> implements AfterViewInit, ControlValueAcce
    * */
   protected _timePickerComponent: NbTimePickerComponent<D>;
 
+  protected lastInputValue: string;
   /**
    * Positioning strategy used by overlay.
    * @docs-private
@@ -158,8 +161,10 @@ export class NbTimePickerDirective<D> implements AfterViewInit, ControlValueAcce
   protected positionStrategy: NbAdjustableConnectedPositionStrategy;
   protected overlayRef: NbOverlayRef;
   protected destroy$: Subject<void> = new Subject<void>();
-  protected _onChange: (value: string) => void = () => {};
-  protected _onTouched = () => {};
+  protected onChange: (value: D) => void = () => {
+  };
+  protected onTouched = () => {
+  };
   /**
    * Trigger strategy used by overlay.
    * @docs-private
@@ -187,7 +192,8 @@ export class NbTimePickerDirective<D> implements AfterViewInit, ControlValueAcce
     return !this.isOpen;
   }
 
-  constructor(protected positionBuilder: NbPositionBuilderService,
+  constructor(@Inject(NB_DOCUMENT) protected document,
+              protected positionBuilder: NbPositionBuilderService,
               protected hostRef: ElementRef,
               protected triggerStrategyBuilder: NbTriggerStrategyBuilderService,
               protected overlay: NbOverlayService,
@@ -195,7 +201,8 @@ export class NbTimePickerDirective<D> implements AfterViewInit, ControlValueAcce
               protected calendarTimeModelService: NbCalendarTimeModelService<D>,
               protected dateService: NbDateService<D>,
               protected renderer: Renderer2,
-              @Attribute('placeholder') protected placeholder: string) {}
+              @Attribute('placeholder') protected placeholder: string) {
+  }
 
   /**
    * Returns host input value.
@@ -204,7 +211,7 @@ export class NbTimePickerDirective<D> implements AfterViewInit, ControlValueAcce
     return this.input.value;
   }
 
-  set setInputValue(value: string) {
+  set inputValue(value: string) {
     this.input.value = value;
   }
 
@@ -252,12 +259,7 @@ export class NbTimePickerDirective<D> implements AfterViewInit, ControlValueAcce
     if (this.inputValue) {
       this.timepicker.date = this.dateService.parse(this.inputValue, this.timepicker.timeFormat);
     } else {
-      let today = this.dateService.today();
-      today = this.dateService.setHours(today, 0);
-      today = this.dateService.setMinutes(today, 0);
-      today = this.dateService.setSeconds(today, 0);
-
-      this.timepicker.date = today;
+      this.timepicker.date = this.calendarTimeModelService.getResetTime();
     }
   }
 
@@ -269,9 +271,12 @@ export class NbTimePickerDirective<D> implements AfterViewInit, ControlValueAcce
 
   protected subscribeOnApplyClick() {
     this.timepicker.onSelectTime.pipe(takeUntil(this.destroy$)).subscribe((value: NbSelectedTimePayload<D>) => {
-      this.setInputValue = this.dateService.format(value.time, this.timepicker.timeFormat).toUpperCase();
+      const time = this.dateService.format(value.time, this.timepicker.timeFormat).toUpperCase();
+      this.inputValue = time;
       this.timepicker.date = value.time;
+      this.onChange(value.time);
       if (value.save) {
+        this.lastInputValue = time;
         this.hide();
       }
     });
@@ -290,7 +295,10 @@ export class NbTimePickerDirective<D> implements AfterViewInit, ControlValueAcce
 
     this.triggerStrategy.hide$
     .pipe(filter(() => this.isOpen))
-    .subscribe(() => this.hide());
+    .subscribe(() => {
+      this.inputValue = this.lastInputValue || '';
+      this.hide()
+    });
   }
 
   protected createTriggerStrategy(): NbTriggerStrategy {
@@ -329,7 +337,18 @@ export class NbTimePickerDirective<D> implements AfterViewInit, ControlValueAcce
     )
     .subscribe((value: string) => {
       this.handleInputChange(value);
+      this.onBlur();
     });
+  }
+
+  protected onBlur() {
+    merge(
+      this.timepicker.blur,
+      fromEvent(this.input, 'blur').pipe(
+        filter(() => !this.isOpen && this.document.activeElement !== this.input),
+      ),
+    ).pipe(takeUntil(this.destroy$))
+    .subscribe(() => this.onTouched());
   }
 
   /**
@@ -355,11 +374,11 @@ export class NbTimePickerDirective<D> implements AfterViewInit, ControlValueAcce
   }
 
   registerOnChange(fn: (value: any) => {}): void {
-    this._onChange = fn;
+    this.onChange = fn;
   }
 
   registerOnTouched(fn: any): void {
-    this._onTouched = fn;
+    this.onTouched = fn;
   }
 
   protected parseNativeDateString(value: string): string {
