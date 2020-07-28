@@ -38,8 +38,8 @@ describe('click-trigger-strategy', () => {
         { provide: NB_DOCUMENT, useExisting: DOCUMENT },
       ],
     });
-    document = bed.get(NB_DOCUMENT);
-    triggerStrategyBuilder = bed.get(NbTriggerStrategyBuilderService);
+    document = bed.inject(NB_DOCUMENT);
+    triggerStrategyBuilder = bed.inject(NbTriggerStrategyBuilderService);
   });
 
   beforeEach(() => {
@@ -117,8 +117,8 @@ describe('hover-trigger-strategy', () => {
         { provide: NB_DOCUMENT, useExisting: DOCUMENT },
       ],
     });
-    document = bed.get(NB_DOCUMENT);
-    triggerStrategyBuilder = bed.get(NbTriggerStrategyBuilderService);
+    document = bed.inject(NB_DOCUMENT);
+    triggerStrategyBuilder = bed.inject(NbTriggerStrategyBuilderService);
   });
 
   beforeEach(() => {
@@ -198,8 +198,8 @@ describe('hint-trigger-strategy', () => {
         { provide: NB_DOCUMENT, useExisting: DOCUMENT },
       ],
     });
-    document = bed.get(NB_DOCUMENT);
-    triggerStrategyBuilder = bed.get(NbTriggerStrategyBuilderService);
+    document = bed.inject(NB_DOCUMENT);
+    triggerStrategyBuilder = bed.inject(NbTriggerStrategyBuilderService);
   });
 
   beforeEach(() => {
@@ -262,8 +262,8 @@ describe('focus-trigger-strategy', () => {
         { provide: NB_DOCUMENT, useExisting: DOCUMENT },
       ],
     });
-    document = bed.get(NB_DOCUMENT);
-    triggerStrategyBuilder = bed.get(NbTriggerStrategyBuilderService);
+    document = bed.inject(NB_DOCUMENT);
+    triggerStrategyBuilder = bed.inject(NbTriggerStrategyBuilderService);
   });
 
   beforeEach(() => {
@@ -363,8 +363,8 @@ describe('noop-trigger-strategy', () => {
         { provide: NB_DOCUMENT, useExisting: DOCUMENT },
       ],
     });
-    document = bed.get(NB_DOCUMENT);
-    triggerStrategyBuilder = bed.get(NbTriggerStrategyBuilderService);
+    document = bed.inject(NB_DOCUMENT);
+    triggerStrategyBuilder = bed.inject(NbTriggerStrategyBuilderService);
   });
 
   beforeEach(() => {
