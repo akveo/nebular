@@ -7,6 +7,7 @@
 import { addModuleImportToRootModule, getProjectFromWorkspace, getProjectTargetOptions } from '@angular/cdk/schematics';
 import { Tree } from '@angular-devkit/schematics';
 import { SchematicTestRunner, UnitTestTree } from '@angular-devkit/schematics/testing';
+import { switchMap } from 'rxjs/operators';
 
 import { getFileContent } from '@schematics/angular/utility/test';
 import { getWorkspace } from '@schematics/angular/utility/config';
@@ -61,9 +62,13 @@ $nb-themes: nb-register-theme((
 `;
 
 function createTestWorkspace(runner: SchematicTestRunner, appOptions: Partial<ApplicationOptions> = {}) {
-  const workspace = runner.runExternalSchematic('@schematics/angular', 'workspace', workspaceOptions);
-  return runner.runExternalSchematicAsync('@schematics/angular', 'application',
-    { ...defaultAppOptions, ...appOptions }, workspace);
+  return runner.runExternalSchematicAsync('@schematics/angular', 'workspace', workspaceOptions)
+    .pipe(
+      switchMap((workspace: UnitTestTree) => {
+        const options = { ...defaultAppOptions, ...appOptions };
+        return runner.runExternalSchematicAsync('@schematics/angular', 'application', options, workspace);
+      }),
+    );
 }
 
 function getPackageDependencies(tree: Tree): any {
