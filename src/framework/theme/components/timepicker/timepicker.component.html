@@ -18,7 +18,7 @@
       <nb-list class="values-list">
         <nb-list-item
           class="list-item"
-          [ngClass]="{'selected': isSelectedFullTimeValue(item)}"
+          [class.selected]="isSelectedFullTimeValue(item)"
           *ngFor="let item of fullTimeOptions; trackBy: trackBySingleColumnValue.bind(this)">
           <nb-timepicker-cell
             [value]="getFullTimeString(item)"
@@ -33,7 +33,7 @@
       <nb-list class="values-list">
         <nb-list-item
           class="list-item"
-          [ngClass]="{'selected': isSelectedHour(item.value)}"
+          [class.selected]="isSelectedHour(item.value)"
           *ngFor="let item of hoursColumnOptions; trackBy: trackByTimeValues">
           <nb-timepicker-cell
             [value]="item.text"
@@ -45,7 +45,7 @@
       <nb-list class="values-list">
         <nb-list-item
           class="list-item"
-          [ngClass]="{'selected': isSelectedMinute(item.value)}"
+          [class.selected]="isSelectedMinute(item.value)"
           *ngFor="let item of minutesColumnOptions; trackBy: trackByTimeValues">
           <nb-timepicker-cell
             [value]="item.text"
@@ -57,7 +57,7 @@
       <nb-list *ngIf="showSeconds()" class="values-list">
         <nb-list-item
           class="list-item"
-          [ngClass]="{'selected': isSelectedSecond(item.value)}"
+          [class.selected]="isSelectedSecond(item.value)"
           *ngFor="let item of secondsColumnOptions; trackBy: trackByTimeValues">
           <nb-timepicker-cell
             [value]="item.text"
@@ -69,7 +69,7 @@
       <nb-list *ngIf="isTwelveHoursFormat" class="values-list">
         <nb-list-item
           class="list-item am-pm-item"
-          [ngClass]="{'selected': isSelectedAmPm(item)}"
+          [class.selected]="isSelectedAmPm(item)"
           *ngFor="let item of ampmColumnOptions; trackBy: trackByAmPmValues">
           <nb-timepicker-cell
             [value]="item"
