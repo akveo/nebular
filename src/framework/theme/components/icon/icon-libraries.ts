@@ -23,10 +23,6 @@ function throwNoDefaultPackError() {
   throw Error('Default pack is not registered.');
 }
 
-function throwIconNotFoundError(name: string, pack: string) {
-  throw Error(`Icon '${name}' is not registered in pack '${pack}'. Check icon name or consider switching icon pack.`);
-}
-
 function throwWrongPackTypeError(name: string, type: string, desiredType: string) {
   throw Error(`Pack '${name}' is not an '${desiredType}' Pack and its type is '${type}'`);
 }
@@ -105,6 +101,10 @@ export class NbIconLibraries {
 
     const icon = this.getIconFromPack(name, iconsPack);
 
+    if (!icon) {
+      return null;
+    }
+
     return {
       name,
       pack: iconsPack.name,
@@ -181,7 +181,7 @@ export class NbIconLibraries {
 
   protected getIconFromPack(name: string, pack: NbIconPack, shouldThrow = true): NbIcon | string {
     if (shouldThrow && !pack.icons.has(name)) {
-      throwIconNotFoundError(name, pack.name);
+      return null
     }
 
     return pack.icons.get(name);

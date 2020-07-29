@@ -188,6 +188,7 @@ export class NbIconComponent implements NbIconConfig, OnChanges, OnInit {
   get config(): string | NbIconConfig {
     return this._config;
   }
+
   set config(value: string | NbIconConfig) {
     if (!value) {
       return;
@@ -204,6 +205,7 @@ export class NbIconComponent implements NbIconConfig, OnChanges, OnInit {
       this.options = value.options;
     }
   }
+
   protected _config: string | NbIconConfig;
 
   constructor(
@@ -218,13 +220,16 @@ export class NbIconComponent implements NbIconConfig, OnChanges, OnInit {
   }
 
   ngOnChanges() {
-    if (this.iconDef) {
-      this.iconDef = this.renderIcon(this.icon, this.pack, this.options);
-    }
+    this.iconDef = this.renderIcon(this.icon, this.pack, this.options);
   }
 
   renderIcon(name: string, pack?: string, options?: { [name: string]: any }) {
     const iconDefinition = this.iconLibrary.getIcon(name, pack);
+
+    if (!iconDefinition) {
+      this.clearIcon();
+      return;
+    }
 
     const content = iconDefinition.icon.getContent(options);
     if (content) {
@@ -233,6 +238,11 @@ export class NbIconComponent implements NbIconConfig, OnChanges, OnInit {
 
     this.assignClasses(iconDefinition.icon.getClasses(options));
     return iconDefinition;
+  }
+
+  protected clearIcon(): void {
+    this.html = '';
+    this.assignClasses([]);
   }
 
   protected assignClasses(classes: string[]) {
