@@ -14,7 +14,7 @@ describe('icons-library', () => {
         NbIconLibraries,
       ],
     });
-    iconsLibrary = bed.get(NbIconLibraries);
+    iconsLibrary = bed.inject(NbIconLibraries);
   });
 
   it('should register raw svg icon', () => {

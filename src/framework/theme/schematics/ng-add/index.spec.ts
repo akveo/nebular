@@ -4,9 +4,17 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { addModuleImportToRootModule, getProjectFromWorkspace, getProjectTargetOptions } from '@angular/cdk/schematics';
+import {
+  addModuleImportToRootModule,
+  getProjectFromWorkspace,
+  getProjectTargetOptions,
+  getAppModulePath,
+  getProjectMainFile,
+  parseSourceFile,
+} from '@angular/cdk/schematics';
 import { Tree } from '@angular-devkit/schematics';
 import { SchematicTestRunner, UnitTestTree } from '@angular-devkit/schematics/testing';
+import { map, switchMap } from 'rxjs/operators';
 
 import { getFileContent } from '@schematics/angular/utility/test';
 import { getWorkspace } from '@schematics/angular/utility/config';
@@ -61,9 +69,13 @@ $nb-themes: nb-register-theme((
 `;
 
 function createTestWorkspace(runner: SchematicTestRunner, appOptions: Partial<ApplicationOptions> = {}) {
-  const workspace = runner.runExternalSchematic('@schematics/angular', 'workspace', workspaceOptions);
-  return runner.runExternalSchematicAsync('@schematics/angular', 'application',
-    { ...defaultAppOptions, ...appOptions }, workspace);
+  return runner.runExternalSchematicAsync('@schematics/angular', 'workspace', workspaceOptions)
+    .pipe(
+      switchMap((workspace: UnitTestTree) => {
+        const options = { ...defaultAppOptions, ...appOptions };
+        return runner.runExternalSchematicAsync('@schematics/angular', 'application', options, workspace);
+      }),
+    );
 }
 
 function getPackageDependencies(tree: Tree): any {
@@ -80,11 +92,11 @@ describe('ng-add', () => {
   }
 
   function runSetupSchematic(options: Partial<NgAddOptions> = {}) {
-    return runner.runSchematic('setup', options, appTree);
+    return runner.runSchematicAsync('setup', options, appTree);
   }
 
   function runPostInstallSchematic(options: Partial<NgAddOptions> = {}) {
-    return runner.runSchematic('post-install', options, appTree);
+    return runner.runSchematicAsync('post-install', options, appTree);
   }
 
   beforeEach((done) => {
@@ -131,97 +143,119 @@ describe('ng-add', () => {
       expect(dependencies['@nebular/theme']).toBe(nebularThemeVersion);
     });
 
-    it('should add @nebular/eva-icons in package.json', function () {
+    it('should add @nebular/eva-icons in package.json', function (done) {
       let dependencies = getPackageDependencies(tree);
       const nebularEvaIconsVersion = require('../../package.json').version;
 
       expect(dependencies['@nebular/eva-icons']).toBeDefined();
       expect(dependencies['@nebular/eva-icons']).toBe(nebularEvaIconsVersion);
 
-      tree = runPostInstallSchematic();
-      dependencies = getPackageDependencies(tree);
+      runPostInstallSchematic().subscribe(updatedTree => {
+        dependencies = getPackageDependencies(updatedTree);
 
-      const evaIconsVersion = require('../../../eva-icons/package.json').peerDependencies['eva-icons'];
-      expect(dependencies['eva-icons']).toBeDefined();
-      expect(dependencies['eva-icons']).toBe(evaIconsVersion);
+        const evaIconsVersion = require('../../../eva-icons/package.json').peerDependencies['eva-icons'];
+        expect(dependencies['eva-icons']).toBeDefined();
+        expect(dependencies['eva-icons']).toBe(evaIconsVersion);
+        done();
+      });
     });
   });
 
-  it('should register NbThemeModule.forRoot()', () => {
-    const tree = runSetupSchematic();
-    const appModuleContent = tree.readContent('/projects/nebular/src/app/app.module.ts');
-
-    expect(appModuleContent).toContain(`NbThemeModule.forRoot({ name: 'default' })`);
+  it('should register NbThemeModule.forRoot()', (done) => {
+    runSetupSchematic().subscribe(tree => {
+      const appModuleContent = tree.readContent('/projects/nebular/src/app/app.module.ts');
+      expect(appModuleContent).toContain(`NbThemeModule.forRoot({ name: 'default' })`);
+      done();
+    });
   });
 
-  it('should register NbThemeModule with specified theme', () => {
-    const tree = runSetupSchematic({ theme: 'cosmic' });
-    const appModuleContent = tree.readContent('/projects/nebular/src/app/app.module.ts');
+  it('should register NbThemeModule with specified theme', (done) => {
+    runSetupSchematic({ theme: 'cosmic' }).subscribe(tree => {
+      const appModuleContent = tree.readContent('/projects/nebular/src/app/app.module.ts');
 
-    expect(appModuleContent).toContain(`NbThemeModule.forRoot({ name: 'cosmic' })`);
+      expect(appModuleContent).toContain(`NbThemeModule.forRoot({ name: 'cosmic' })`);
+      done();
+    });
   });
 
-  it('should register NbLayoutModule', () => {
-    const tree = runSetupSchematic();
-    const appModuleContent = tree.readContent('/projects/nebular/src/app/app.module.ts');
+  it('should register NbLayoutModule', (done) => {
+    runSetupSchematic().subscribe(tree => {
+      const appModuleContent = tree.readContent('/projects/nebular/src/app/app.module.ts');
 
-    expect(appModuleContent).toContain(`NbLayoutModule`);
+      expect(appModuleContent).toContain(`NbLayoutModule`);
+      done();
+    });
   });
 
-  it('should create AppRoutingModule if no Router already registered', () => {
-    const tree = runSetupSchematic();
-    const appModuleContent = tree.readContent('/projects/nebular/src/app/app.module.ts');
+  it('should create AppRoutingModule if no Router already registered', (done) => {
+    runSetupSchematic().subscribe(tree => {
+      const appModuleContent = tree.readContent('/projects/nebular/src/app/app.module.ts');
 
-    expect(appModuleContent).toContain(`AppRoutingModule`);
-    expect(tree.files).toContain('/projects/nebular/src/app/app-routing.module.ts');
+      expect(appModuleContent).toContain(`AppRoutingModule`);
+      expect(tree.files).toContain('/projects/nebular/src/app/app-routing.module.ts');
+      done();
+    });
   });
 
-  it('should register inline theme if no theme already registered', () => {
-    const tree = runSetupSchematic({ customization: false });
-    const workspace = getWorkspace(tree);
-    const project = getProjectFromWorkspace(workspace);
-    const styles = getProjectTargetOptions(project, 'build').styles;
+  it('should register inline theme if no theme already registered', (done) => {
+    runSetupSchematic({ customization: false }).subscribe(tree => {
+      const workspace = getWorkspace(tree);
+      const project = getProjectFromWorkspace(workspace);
+      const styles = getProjectTargetOptions(project, 'build').styles;
 
-    expect(styles).toContain('./node_modules/@nebular/theme/styles/prebuilt/default.css')
+      expect(styles).toContain('./node_modules/@nebular/theme/styles/prebuilt/default.css')
+      done();
+    });
   });
 
   it('should create theme.scss and plug it into the project', (done) => {
-    createTestWorkspace(runner, { style: Style.Scss }).subscribe(applicationTree => {
-      appTree = applicationTree;
-      const tree = runSetupSchematic({ customization: true });
-      const styles = tree.readContent('/projects/nebular/src/styles.scss');
-      const themes = tree.readContent('/projects/nebular/src/themes.scss');
+    createTestWorkspace(runner, { style: Style.Scss })
+      .pipe(
+        switchMap(applicationTree => {
+          return runSetupSchematic({ customization: true }).pipe(map(tree => ({ applicationTree, tree })));
+        }),
+      )
+      .subscribe(({ applicationTree, tree }) => {
+        appTree = applicationTree;
+        const styles = tree.readContent('/projects/nebular/src/styles.scss');
+        const themes = tree.readContent('/projects/nebular/src/themes.scss');
 
-      expect(styles).toContain(EXPECTED_STYLES_SCSS);
-      expect(themes).toContain(EXPECTED_THEME_SCSS);
+        expect(styles).toContain(EXPECTED_STYLES_SCSS);
+        expect(themes).toContain(EXPECTED_THEME_SCSS);
 
-      done();
-    });
+        done();
+      });
   });
 
   it('should throw error if adding scss themes in css project', (done) => {
     createTestWorkspace(runner, { style: Style.Css }).subscribe(tree => {
       appTree = tree;
 
-      expect(() => runSetupSchematic({ customization: true })).toThrow();
+      runSetupSchematic({ customization: true }).subscribe({
+        next: () => done.fail(new Error(`Doesn't throw`)),
+        error: done,
+      });
+    });
+  });
+
+  it('should add the BrowserAnimationsModule to the project module', (done) => {
+    runSetupSchematic({ animations: true }).subscribe(tree => {
+      const fileContent = getFileContent(tree, '/projects/nebular/src/app/app.module.ts');
+
+      expect(fileContent).toContain('BrowserAnimationsModule',
+        'Expected the project app module to import the "BrowserAnimationsModule".');
       done();
     });
   });
 
-  it('should add the BrowserAnimationsModule to the project module', () => {
-    const tree = runSetupSchematic({ animations: true });
-    const fileContent = getFileContent(tree, '/projects/nebular/src/app/app.module.ts');
+  it('should add the NoopAnimationsModule to the project module', (done) => {
+    runSetupSchematic({ animations: false }).subscribe(tree => {
+      const fileContent = getFileContent(tree, '/projects/nebular/src/app/app.module.ts');
 
-    expect(fileContent).toContain('BrowserAnimationsModule',
-      'Expected the project app module to import the "BrowserAnimationsModule".');
-  });
-
-  it('should add the NoopAnimationsModule to the project module', () => {
-    const tree = runSetupSchematic({ animations: false });
-    const fileContent = getFileContent(tree, '/projects/nebular/src/app/app.module.ts');
-
-    expect(fileContent).toContain('NoopAnimationsModule',
-      'Expected the project app module to import the "NoopAnimationsModule".');
+      expect(fileContent).toContain('NoopAnimationsModule',
+        'Expected the project app module to import the "NoopAnimationsModule".');
+      done();
+    });
   });
 
   it('should not add NoopAnimationsModule if BrowserAnimationsModule is set up', () => {
@@ -231,11 +265,15 @@ describe('ng-add', () => {
     // Simulate the case where a developer uses `ng-add` on an Angular CLI project which already
     // explicitly uses the `BrowserAnimationsModule`. It would be wrong to forcibly change
     // to noop animations.
-    const fileContent = addModuleImportToRootModule(appTree, 'BrowserAnimationsModule',
+    addModuleImportToRootModule(appTree, 'BrowserAnimationsModule',
       '@angular/platform-browser/animations', project);
-    runSetupSchematic({ animations: false });
 
-    expect(fileContent).not.toContain('NoopAnimationsModule',
-      'Expected the project app module to not import the "NoopAnimationsModule".');
+    runSetupSchematic({ animations: false }).subscribe(tree => {
+      const appModulePath = getAppModulePath(tree, getProjectMainFile(project));
+      const fileContent = parseSourceFile(tree, appModulePath);
+
+      expect(fileContent).not.toContain('NoopAnimationsModule',
+        'Expected the project app module to not import the "NoopAnimationsModule".');
+    });
   });
 });

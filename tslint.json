@@ -6,6 +6,9 @@
     "node_modules/codelyzer"
   ],
   "rules": {
+    "deprecation": {
+      "severity": "warning"
+    },
     "trailing-comma": [
       true,
       {
@@ -61,7 +64,6 @@
     "no-switch-case-fall-through": true,
     "no-trailing-whitespace": true,
     "no-unnecessary-initializer": true,
-    "no-use-before-declare": true,
     "no-var-keyword": true,
     "object-literal-sort-keys": false,
     "one-line": [
@@ -94,7 +96,6 @@
         "variable-declaration": "nospace"
       }
     ],
-    "typeof-compare": true,
     "unified-signatures": true,
     "variable-name": false,
     "whitespace": [
@@ -134,7 +135,6 @@
     "use-pipe-transform-interface": true,
     "component-class-suffix": true,
     "directive-class-suffix": true,
-    "no-unused-variable": [true, {"ignore-pattern": "^set"}],
     "rxjs-no-unsafe-takeuntil": {
       "options": [{
         "allow": ["count", "defaultIfEmpty", "endWith", "every", "finalize", "finally", "isEmpty", "last", "max", "min", "publish", "publishBehavior", "publishLast", "publishReplay", "reduce", "share", "shareReplay", "skipLast", "takeLast", "throwIfEmpty", "toArray"]

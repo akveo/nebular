@@ -239,10 +239,10 @@ describe('dynamic-overlay-handler', () => {
         { provide: NbPositionBuilderService, useClass: MockPositionBuilder },
       ],
     });
-    overlayHandler = bed.get(NbDynamicOverlayHandler);
-    dynamicOverlay = bed.get(NbDynamicOverlay);
-    triggerStrategyBuilder = bed.get(NbTriggerStrategyBuilderService);
-    positionBuilder = bed.get(NbPositionBuilderService);
+    overlayHandler = bed.inject(NbDynamicOverlayHandler);
+    dynamicOverlay = bed.inject(NbDynamicOverlay);
+    triggerStrategyBuilder = bed.inject(NbTriggerStrategyBuilderService);
+    positionBuilder = bed.inject(NbPositionBuilderService);
   });
 
   it('should throw if nothing passed', () => {

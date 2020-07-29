@@ -18,9 +18,10 @@ import {
   ElementRef,
   Renderer2,
   AfterViewInit,
+  HostBinding,
 } from '@angular/core';
 import { merge, Subject, Observable, combineLatest, ReplaySubject } from 'rxjs';
-import { takeUntil, distinctUntilChanged, map } from 'rxjs/operators';
+import { takeUntil, distinctUntilChanged, map, tap } from 'rxjs/operators';
 
 import { NbPrefixDirective } from './prefix.directive';
 import { NbSuffixDirective } from './suffix.directive';
@@ -103,6 +104,8 @@ export class NbFormFieldComponent implements AfterContentChecked, AfterContentIn
   @ContentChild(NbFormFieldControl, { static: false }) formControl: NbFormFieldControl;
   @ContentChild(NbFormFieldControlConfig, { static: false }) formControlConfig: NbFormFieldControlConfig;
 
+  @HostBinding('class') formFieldClasses;
+
   constructor(
     protected cd: ChangeDetectorRef,
     protected zone: NgZone,
@@ -142,12 +145,19 @@ export class NbFormFieldComponent implements AfterContentChecked, AfterContentIn
   }
 
   protected subscribeToFormControlStateChange() {
-    const { disabled$, focused$, size$, status$ } = this.formControl;
+    const { disabled$, focused$, size$, status$, fullWidth$ } = this.formControl;
 
-    combineLatest([disabled$, focused$, size$, status$])
+    combineLatest([disabled$, focused$, size$, status$, fullWidth$])
       .pipe(
-        map(([disabled, focused, size, status]) => ({ disabled, focused, size, status })),
+        map(([disabled, focused, size, status, fullWidth]) => ({ disabled, focused, size, status, fullWidth })),
         distinctUntilChanged((oldState, state) => this.isStatesEqual(oldState, state)),
+        tap(({ size, fullWidth }) => {
+          const formFieldClasses = [`nb-form-field-size-${size}`];
+          if (!fullWidth) {
+            formFieldClasses.push('nb-form-field-limited-width')
+          }
+          this.formFieldClasses = formFieldClasses.join(' ');
+        }),
         takeUntil(this.destroy$),
       )
       .subscribe(this.formControlState$);
@@ -184,6 +194,7 @@ export class NbFormFieldComponent implements AfterContentChecked, AfterContentIn
     return oldState.status === state.status &&
            oldState.disabled === state.disabled &&
            oldState.focused === state.focused &&
+           oldState.fullWidth === state.fullWidth &&
            oldState.size === state.size;
   }
 }

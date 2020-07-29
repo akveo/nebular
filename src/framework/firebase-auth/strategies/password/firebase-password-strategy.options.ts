@@ -10,10 +10,11 @@ import {
   NbAuthStrategyOptions,
   NbPasswordStrategyMessage,
   NbPasswordStrategyModule,
+  NbStrategyToken,
 } from '@nebular/auth';
 
 export class NbFirebasePasswordStrategyOptions extends NbAuthStrategyOptions {
-  token? = {
+  token?: NbStrategyToken = {
     class: NbAuthJWTToken,
   };
   register?: boolean | NbPasswordStrategyModule = {

@@ -24,12 +24,15 @@ import {
   NbHeaderRowDefDirective,
   NbRowComponent,
   NbRowDefDirective,
+  NbNoDataRowOutletDirective,
 } from './row';
 
 export const NB_TABLE_TEMPLATE = `
   <ng-container nbHeaderRowOutlet></ng-container>
   <ng-container nbRowOutlet></ng-container>
-  <ng-container nbFooterRowOutlet></ng-container>`;
+  <ng-container nbNoDataRowOutlet></ng-container>
+  <ng-container nbFooterRowOutlet></ng-container>
+`;
 
 @Component({
   selector: 'nb-table-not-implemented',
@@ -66,6 +69,7 @@ const COMPONENTS = [
   NbDataRowOutletDirective,
   NbHeaderRowOutletDirective,
   NbFooterRowOutletDirective,
+  NbNoDataRowOutletDirective,
   NbCellOutletDirective,
 
   // Cell directives
