@@ -364,7 +364,7 @@ export class NbTimePickerComponent<D> implements OnChanges, OnInit {
 
   protected setupTimeFormat(): string {
     if (!this.timeFormat) {
-      return this.timeFormat = this.config.format || this.buildTimeFormat();
+      return this.config.format || this.buildTimeFormat();
     }
 
     return this.timeFormat;
