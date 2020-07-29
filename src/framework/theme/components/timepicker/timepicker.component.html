@@ -1,4 +1,5 @@
-<nb-card *nbPortal [class.supports-scrollbar-theming]="!isFirefox()"
+<nb-card *nbPortal
+         [class.supports-scrollbar-theming]="!isFirefox()"
          class="nb-timepicker-container">
   <nb-card-header class="column-header">
     <ng-container *ngIf="singleColumn; else fullTimeHeadersBlock">
@@ -11,6 +12,7 @@
       <div *ngIf="isTwelveHoursFormat" class="text-hint">Am/Pm</div>
     </ng-template>
   </nb-card-header>
+
   <div class="picker-body">
     <ng-container *ngIf="singleColumn; else fullTimeColumnBlock">
       <nb-list class="values-list">
@@ -26,6 +28,7 @@
         </nb-list-item>
       </nb-list>
     </ng-container>
+
     <ng-template #fullTimeColumnBlock>
       <nb-list class="values-list">
         <nb-list-item
@@ -77,6 +80,7 @@
       </nb-list>
     </ng-template>
   </div>
+
   <nb-card-footer *ngIf="showFooter" class="actions-footer">
     <nb-calendar-actions
       [applyButtonText]="applyButtonText"
