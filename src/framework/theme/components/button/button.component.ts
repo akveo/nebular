@@ -561,6 +561,11 @@ export class NbButtonComponent implements AfterViewInit {
   @Input() appearance: NbButtonAppearance = 'filled';
 
   /**
+   * Tabindex of the button.
+   */
+  @Input() tabIndex: number;
+
+  /**
    * Sets `filled` appearance
    */
   @Input()
@@ -653,7 +658,15 @@ export class NbButtonComponent implements AfterViewInit {
   // issue #794
   @HostBinding('attr.tabindex')
   get tabbable(): string {
-    return this.disabled ? '-1' : '0';
+    if (this.disabled) {
+      return '-1';
+    }
+
+    if (this.tabIndex == null) {
+      return '0';
+    }
+
+    return this.tabIndex.toString();
   }
 
   @HostBinding('class.size-tiny')
