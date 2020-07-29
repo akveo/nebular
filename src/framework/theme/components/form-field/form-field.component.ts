@@ -21,7 +21,7 @@ import {
   HostBinding,
 } from '@angular/core';
 import { merge, Subject, Observable, combineLatest, ReplaySubject } from 'rxjs';
-import { takeUntil, distinctUntilChanged, map } from 'rxjs/operators';
+import { takeUntil, distinctUntilChanged, map, tap } from 'rxjs/operators';
 
 import { NbPrefixDirective } from './prefix.directive';
 import { NbSuffixDirective } from './suffix.directive';
@@ -103,7 +103,8 @@ export class NbFormFieldComponent implements AfterContentChecked, AfterContentIn
 
   @ContentChild(NbFormFieldControl, { static: false }) formControl: NbFormFieldControl;
   @ContentChild(NbFormFieldControlConfig, { static: false }) formControlConfig: NbFormFieldControlConfig;
-  @HostBinding('class') formFieldClass;
+
+  @HostBinding('class') formFieldClasses;
 
   constructor(
     protected cd: ChangeDetectorRef,
@@ -148,15 +149,15 @@ export class NbFormFieldComponent implements AfterContentChecked, AfterContentIn
 
     combineLatest([disabled$, focused$, size$, status$, fullWidth$])
       .pipe(
-        map(([disabled, focused, size, status, fullWidth]) => {
+        map(([disabled, focused, size, status, fullWidth]) => ({ disabled, focused, size, status, fullWidth })),
+        distinctUntilChanged((oldState, state) => this.isStatesEqual(oldState, state)),
+        tap(({ size, fullWidth }) => {
           const formFieldClasses = [`nb-form-field-size-${size}`];
           if (!fullWidth) {
             formFieldClasses.push('nb-form-field-limited-width')
           }
-          this.formFieldClass = formFieldClasses.join(' ');
-          return ({ disabled, focused, size, status, fullWidth })
+          this.formFieldClasses = formFieldClasses.join(' ');
         }),
-        distinctUntilChanged((oldState, state) => this.isStatesEqual(oldState, state)),
         takeUntil(this.destroy$),
       )
       .subscribe(this.formControlState$);
