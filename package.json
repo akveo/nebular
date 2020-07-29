@@ -114,7 +114,7 @@
     "moment": "^2.22.2",
     "normalize.css": "8.0.0",
     "pace-js": "^1.0.2",
-    "rxjs": "6.5.4",
+    "rxjs": "^6.5.5",
     "socicon": "3.0.5",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.3"
