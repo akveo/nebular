@@ -413,7 +413,7 @@ export class NbInputDirective implements DoCheck, OnChanges, OnInit, AfterViewIn
   disabled$ = new BehaviorSubject<boolean>(false);
 
   /*
- * @docs-private
- **/
+   * @docs-private
+   **/
   fullWidth$ = new BehaviorSubject<boolean>(this.fullWidth);
 }
