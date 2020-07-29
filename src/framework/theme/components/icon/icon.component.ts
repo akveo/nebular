@@ -188,7 +188,6 @@ export class NbIconComponent implements NbIconConfig, OnChanges, OnInit {
   get config(): string | NbIconConfig {
     return this._config;
   }
-
   set config(value: string | NbIconConfig) {
     if (!value) {
       return;
@@ -205,7 +204,6 @@ export class NbIconComponent implements NbIconConfig, OnChanges, OnInit {
       this.options = value.options;
     }
   }
-
   protected _config: string | NbIconConfig;
 
   constructor(
