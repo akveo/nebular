@@ -19,7 +19,6 @@ import {
   NbSelectedTimeModel,
   NbSelectedTimePayload,
   NbTimePickerConfig,
-  TimeOptions,
 } from './model';
 import { NbDateService } from '../calendar-kit/services/date.service';
 import { NbCalendarTimeModelService } from '../calendar-kit/services/calendar-time-model.service';
@@ -27,6 +26,11 @@ import { NbPlatform } from '../cdk/platform/platform-service';
 import { convertToBoolProperty, NbBooleanInput } from '../helpers';
 import { range, rangeFromTo } from '../calendar-kit/helpers';
 import { Observable, Subject } from 'rxjs';
+
+interface NbTimePartOption {
+  value: number,
+  text: string,
+}
 
 /**
  * The TimePicker components itself.
@@ -48,9 +52,9 @@ export class NbTimePickerComponent<D> implements OnChanges, OnInit {
   _step: number;
   _timeFormat: string;
   fullTimeOptions: D[];
-  hoursColumnOptions: TimeOptions[];
-  minutesColumnOptions: TimeOptions[];
-  secondsColumnOptions: TimeOptions[];
+  hoursColumnOptions: NbTimePartOption[];
+  minutesColumnOptions: NbTimePartOption[];
+  secondsColumnOptions: NbTimePartOption[];
   ampmColumnOptions: string[];
   readonly HOURS_IND_DAY: number = 12;
   hostRef: ElementRef;
@@ -250,7 +254,7 @@ export class NbTimePickerComponent<D> implements OnChanges, OnInit {
     });
   }
 
-  trackByTimeValues(index, item: TimeOptions): number {
+  trackByTimeValues(index, item: NbTimePartOption): number {
     return item.value;
   }
 
@@ -305,7 +309,7 @@ export class NbTimePickerComponent<D> implements OnChanges, OnInit {
   }
 
   getFullTimeString(item: D): string {
-    return this.dateService.format(item, this.timeFormat).toUpperCase()
+    return this.dateService.format(item, this.timeFormat).toUpperCase();
   }
 
   isSelectedFullTimeValue(value: D): boolean {
@@ -335,7 +339,7 @@ export class NbTimePickerComponent<D> implements OnChanges, OnInit {
     return this.platformService.FIREFOX;
   }
 
-  protected generateHours(): TimeOptions[] {
+  protected generateHours(): NbTimePartOption[] {
     if (!this.isTwelveHoursFormat) {
       return range(24, (v: number) => {
         return {value: v, text: this.calendarTimeModelService.padd(v)};
@@ -356,7 +360,7 @@ export class NbTimePickerComponent<D> implements OnChanges, OnInit {
   }
 
 
-  protected generateMinutesOrSeconds(): TimeOptions[] {
+  protected generateMinutesOrSeconds(): NbTimePartOption[] {
     return range(60, (v: number) => {
       return {value: v, text: this.calendarTimeModelService.padd(v)};
     });
