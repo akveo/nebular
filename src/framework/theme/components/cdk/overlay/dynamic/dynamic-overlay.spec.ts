@@ -123,10 +123,10 @@ describe('dynamic-overlay', () => {
         { provide: NbOverlayContainer, useClass: NbOverlayContainerMock },
       ],
     });
-    overlayService = bed.get(NbOverlayService);
-    dynamicOverlayService = bed.get(NbDynamicOverlay);
-    componentFactoryResolver = bed.get(ComponentFactoryResolver);
-    zone = bed.get(NgZone);
+    overlayService = bed.inject(NbOverlayService) as unknown as NbOverlayServiceMock;
+    dynamicOverlayService = bed.inject(NbDynamicOverlay);
+    componentFactoryResolver = bed.inject(ComponentFactoryResolver);
+    zone = bed.inject(NgZone) as unknown as MockNgZone;
   });
 
   beforeEach(() => {
