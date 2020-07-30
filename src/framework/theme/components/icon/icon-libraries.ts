@@ -92,7 +92,7 @@ export class NbIconLibraries {
    *
    * @returns NbIconDefinition
    */
-  getSvgIcon(name: string, pack?: string): NbIconDefinition {
+  getSvgIcon(name: string, pack?: string): NbIconDefinition | null {
     const iconsPack = pack ? this.getPackOrThrow(pack) : this.getDefaultPackOrThrow();
 
     if (iconsPack.type !== NbIconPackType.SVG) {
@@ -144,7 +144,7 @@ export class NbIconLibraries {
    *
    * @returns NbIconDefinition
    */
-  getIcon(name: string, pack?: string): NbIconDefinition {
+  getIcon(name: string, pack?: string): NbIconDefinition | null {
     const iconsPack = pack ? this.getPackOrThrow(pack) : this.getDefaultPackOrThrow();
 
     if (iconsPack.type === NbIconPackType.SVG) {
