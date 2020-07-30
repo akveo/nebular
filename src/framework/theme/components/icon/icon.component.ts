@@ -218,14 +218,18 @@ export class NbIconComponent implements NbIconConfig, OnChanges, OnInit {
   }
 
   ngOnChanges() {
-    this.iconDef = this.renderIcon(this.icon, this.pack, this.options);
+    const iconDef = this.iconLibrary.getIcon(this.icon, this.pack);
+    if (iconDef) {
+      this.renderIcon(this.icon, this.pack, this.options);
+    } else {
+      this.clearIcon();
+    }
   }
 
   renderIcon(name: string, pack?: string, options?: { [name: string]: any }) {
     const iconDefinition = this.iconLibrary.getIcon(name, pack);
 
     if (!iconDefinition) {
-      this.clearIcon();
       return;
     }
 
