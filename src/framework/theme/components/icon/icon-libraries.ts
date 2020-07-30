@@ -127,7 +127,7 @@ export class NbIconLibraries {
       throwWrongPackTypeError(iconsPack.name, iconsPack.type, 'Font');
     }
 
-    const icon = this.getIconFromPack(name, iconsPack, false);
+    const icon = this.getIconFromPack(name, iconsPack);
 
     return {
       name,
@@ -179,11 +179,11 @@ export class NbIconLibraries {
     return this.defaultPack;
   }
 
-  protected getIconFromPack(name: string, pack: NbIconPack, shouldThrow = true): NbIcon | string {
-    if (shouldThrow && !pack.icons.has(name)) {
-      return null
+  protected getIconFromPack(name: string, pack: NbIconPack): NbIcon | string | null {
+    if (pack.icons.has(name)) {
+      return pack.icons.get(name);
     }
 
-    return pack.icons.get(name);
+    return null;
   }
 }
