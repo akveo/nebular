@@ -367,17 +367,11 @@ export class NbTimePickerComponent<D> implements OnChanges, OnInit {
    */
   buildTimeFormat(): string {
     if (this.isTwelveHoursFormat) {
-      return `${
-        this.withSeconds && !this.singleColumn
-          ? this.dateService.getTwelveHoursFormatWithSeconds()
-          : this.dateService.getTwelveHoursFormat()
-      }`;
+      return `${this.withSeconds && !this.singleColumn ? this.dateService.getTwelveHoursFormatWithSeconds()
+        : this.dateService.getTwelveHoursFormat()}`;
     } else {
-      return `${
-        this.withSeconds && !this.singleColumn
-          ? this.dateService.getTwentyFourHoursFormatWithSeconds()
-          : this.dateService.getTwentyFourHoursFormat()
-      }`;
+      return `${this.withSeconds && !this.singleColumn ? this.dateService.getTwentyFourHoursFormatWithSeconds()
+        : this.dateService.getTwentyFourHoursFormat()}`;
     }
   }
 }
