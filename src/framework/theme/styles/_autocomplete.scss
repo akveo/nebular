@@ -1,0 +1,42 @@
+@function border-radius() { @return nb-theme(border-radius); }
+
+@function shadow() { @return nb-theme(shadow); }
+
+@function button-hero-glow-size() { @return nb-theme(button-hero-glow-size); }
+
+@function card-border-width() { @return nb-theme(card-border-width); }
+
+@function card-border-color() { @return nb-theme(card-border-color); }
+
+@function context-menu-border-width() { @return nb-theme(context-menu-border-width); }
+
+@function context-menu-border-color() { @return nb-theme(context-menu-border-color); }
+
+@function tabs-selected() { @return nb-theme(tabs-selected); }
+
+@function tabs-selected-second-color() { @return nb-theme(tabs-selected-second-color); }
+
+@function popover-border-width() { @return nb-theme(popover-border-width); }
+
+@function popover-border-color() { @return nb-theme(popover-border-color); }
+
+@function tabset-border-radius() { @return nb-theme(tabset-border-radius); }
+
+@function route-tabset-border-radius() { @return nb-theme(route-tabset-border-radius); }
+
+@function user-rectangle-border-radius() { @return nb-theme(user-rectangle-border-radius); }
+
+@function checkbox-border-radius() { @return nb-theme(checkbox-border-radius); }
+
+@function modal-border-radius() { @return nb-theme(modal-border-radius); }
+
+@function tabset-shadow() { @return nb-theme(tabset-shadow); }
+
+@function route-tabset-shadow() { @return nb-theme(route-tabset-shadow); }
+
+@function button-hero-shadow() { @return nb-theme(button-hero-shadow); }
+
+@function alert-shadow() { @return nb-theme(alert-shadow); }
+
+@function accordion-shadow() { @return nb-theme(accordion-shadow); }
+

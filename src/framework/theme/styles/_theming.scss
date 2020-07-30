@@ -37,3 +37,4 @@ $nb-themes-export: () !global;
 @import 'core/theming/register';
 @import 'core/theming/install';
 @import 'core/theming/get-value';
+@import './autocomplete';
