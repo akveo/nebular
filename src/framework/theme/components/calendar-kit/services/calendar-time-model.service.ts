@@ -6,20 +6,16 @@ import { NbDateService } from './date.service';
 @Injectable()
 export class NbCalendarTimeModelService<D> {
   readonly HOURS_IN_DAY = 24;
-  readonly HOURS_IN_DAY_ALT = 12;
   readonly MINUTES_AND_SECONDS = 60;
-  readonly AM = 'AM';
-  readonly PM = 'PM';
-  readonly AMPM = [this.AM, this.PM];
 
   constructor(protected dateService: NbDateService<D>) {
   }
 
   getHoursInDay(isTwelveHoursFormat: boolean): string[] {
     if (isTwelveHoursFormat) {
-      return range(this.HOURS_IN_DAY_ALT, i => {
+      return range(this.dateService.HOURS_IN_DAY_PERIOD, i => {
         if (i === 0) {
-          return this.HOURS_IN_DAY_ALT.toString();
+          return this.dateService.HOURS_IN_DAY_PERIOD.toString();
         }
 
         return this.padd(i);
@@ -54,14 +50,6 @@ export class NbCalendarTimeModelService<D> {
     return today;
   }
 
-  getAmPm(date: D): 'AM' | 'PM' {
-    return this.dateService.getHours(date) < this.HOURS_IN_DAY_ALT ? this.AM : this.PM;
-  }
-
-  isAm(date: D): boolean {
-    return this.dateService.getHours(date) < 12;
-  }
-
   padd(n: number): string {
     const symbolToAdd = 2 - n.toString().length;
 
@@ -74,15 +62,12 @@ export class NbCalendarTimeModelService<D> {
 
   buildDateFormat(isTwelveHoursFormat: boolean, withSeconds: boolean = false): string {
     if (isTwelveHoursFormat) {
-      return `${this.dateService.getDateFormat()} ${
-        this.dateService.getTwelveHoursFormat()}`
+      return `${this.dateService.getDateFormat()} ${this.dateService.getTwelveHoursFormat()}`
     } else {
       if (withSeconds) {
-        return `${this.dateService.getDateFormat()} ${
-          this.dateService.getTwentyFourHoursFormatWithSeconds()}`
+        return `${this.dateService.getDateFormat()} ${this.dateService.getTwentyFourHoursFormatWithSeconds()}`
       } else {
-        return `${this.dateService.getDateFormat()} ${
-          this.dateService.getTwentyFourHoursFormat()}`
+        return `${this.dateService.getDateFormat()} ${this.dateService.getTwentyFourHoursFormat()}`
       }
     }
   }

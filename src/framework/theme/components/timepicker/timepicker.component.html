@@ -69,12 +69,12 @@
       <nb-list *ngIf="isTwelveHoursFormat" class="values-list">
         <nb-list-item
           class="list-item am-pm-item"
-          [class.selected]="isSelectedAmPm(item)"
-          *ngFor="let item of ampmColumnOptions; trackBy: trackByAmPmValues">
+          [class.selected]="isSelectedDayPeriod(dayPeriod)"
+          *ngFor="let dayPeriod of dayPeriodColumnOptions; trackBy: trackByDayPeriod">
           <nb-timepicker-cell
-            [value]="item"
-            [selected]="isSelectedAmPm(item)"
-            (select)="changeAMPM($event)">
+            [value]="dayPeriod"
+            [selected]="isSelectedDayPeriod(dayPeriod)"
+            (select)="changeDayPeriod(dayPeriod)">
           </nb-timepicker-cell>
         </nb-list-item>
       </nb-list>

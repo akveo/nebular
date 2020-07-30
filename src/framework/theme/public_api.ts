@@ -60,7 +60,7 @@ export { NbCalendarMonthModelService } from './components/calendar-kit/services/
 export * from './components/calendar-kit/services/calendar-year-model.service';
 export * from './components/calendar-kit/services/calendar-time-model.service';
 export { NbNativeDateService } from './components/calendar-kit/services/native-date.service';
-export { NbDateService } from './components/calendar-kit/services/date.service';
+export { NbDateService, NbDayPeriod } from './components/calendar-kit/services/date.service';
 export * from './components/calendar-kit/model';
 export * from './components/calendar-kit/calendar-kit.module';
 export * from './components/layout/layout.module';

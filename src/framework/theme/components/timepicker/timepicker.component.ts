@@ -13,19 +13,15 @@ import {
   SimpleChanges,
   ViewChild,
 } from '@angular/core';
-import { NbPortalDirective } from '../cdk/overlay/mapping';
-import {
-  NB_TIME_PICKER_CONFIG,
-  NbSelectedTimeModel,
-  NbSelectedTimePayload,
-  NbTimePickerConfig,
-} from './model';
-import { NbDateService } from '../calendar-kit/services/date.service';
-import { NbCalendarTimeModelService } from '../calendar-kit/services/calendar-time-model.service';
-import { NbPlatform } from '../cdk/platform/platform-service';
-import { convertToBoolProperty, NbBooleanInput } from '../helpers';
-import { range, rangeFromTo } from '../calendar-kit/helpers';
 import { Observable, Subject } from 'rxjs';
+
+import { convertToBoolProperty, NbBooleanInput } from '../helpers';
+import { NbPortalDirective } from '../cdk/overlay/mapping';
+import { NbPlatform } from '../cdk/platform/platform-service';
+import { NbDateService, NbDayPeriod } from '../calendar-kit/services/date.service';
+import { range, rangeFromTo } from '../calendar-kit/helpers';
+import { NbCalendarTimeModelService } from '../calendar-kit/services/calendar-time-model.service';
+import { NB_TIME_PICKER_CONFIG, NbSelectedTimePayload, NbTimePickerConfig } from './model';
 
 interface NbTimePartOption {
   value: number,
@@ -55,8 +51,7 @@ export class NbTimePickerComponent<D> implements OnChanges, OnInit {
   hoursColumnOptions: NbTimePartOption[];
   minutesColumnOptions: NbTimePartOption[];
   secondsColumnOptions: NbTimePartOption[];
-  ampmColumnOptions: string[];
-  readonly HOURS_IND_DAY: number = 12;
+  readonly dayPeriodColumnOptions = [ NbDayPeriod.AM, NbDayPeriod.PM ];
   hostRef: ElementRef;
   isAM = true;
 
@@ -141,7 +136,7 @@ export class NbTimePickerComponent<D> implements OnChanges, OnInit {
   @Input()
   set date(date: D) {
     this._date = date;
-    this.isAM = this.calendarTimeModelService.isAm(date);
+    this.isAM = this.dateService.getDayPeriod(this.date) === NbDayPeriod.AM;
     this.buildColumnOptions();
     this.cd.markForCheck();
   }
@@ -231,15 +226,15 @@ export class NbTimePickerComponent<D> implements OnChanges, OnInit {
     this.updateValue(value);
   }
 
-  changeAMPM({value}: NbSelectedTimeModel): void {
-    const currentDateAMPM = this.calendarTimeModelService.getAmPm(this.date);
-
-    if (currentDateAMPM === value) {
+  changeDayPeriod(dayPeriodToSet: NbDayPeriod): void {
+    if (this.dateService.getDayPeriod(this.date) === dayPeriodToSet) {
       return;
     }
 
-    const increment = (currentDateAMPM === this.calendarTimeModelService.PM ? -1 : 1) * this.HOURS_IND_DAY;
-
+    // Subtract hours when switching to AM (before midday, 0-11 in 24-hour) from PM (after midday, 12-24 in 24-hour),
+    // otherwise add hours because switching to PM from AM.
+    const direction = dayPeriodToSet === NbDayPeriod.AM ? -1 : 1;
+    const increment = direction * this.dateService.HOURS_IN_DAY_PERIOD;
     this.updateValue(this.dateService.addHours(this.date, increment));
   }
 
@@ -262,7 +257,7 @@ export class NbTimePickerComponent<D> implements OnChanges, OnInit {
     return this.dateService.valueOf(item);
   }
 
-  trackByAmPmValues(index, item: string): string {
+  trackByDayPeriod(index, item: NbDayPeriod): string {
     return item;
   }
 
@@ -294,18 +289,12 @@ export class NbTimePickerComponent<D> implements OnChanges, OnInit {
     return false;
   }
 
-  isSelectedAmPm(value: string): boolean {
-    if (!this.date) {
-      return false;
+  isSelectedDayPeriod(dayPeriod: NbDayPeriod): boolean {
+    if (this.date) {
+      return dayPeriod === this.dateService.getDayPeriod(this.date);
     }
 
-    const hour: number = this.dateService.getHours(this.date);
-
-    if (value === this.calendarTimeModelService.PM) {
-      return hour >= this.HOURS_IND_DAY;
-    } else {
-      return this.dateService.getHours(this.date) < this.HOURS_IND_DAY;
-    }
+    return false;
   }
 
   getFullTimeString(item: D): string {
@@ -322,14 +311,13 @@ export class NbTimePickerComponent<D> implements OnChanges, OnInit {
 
   protected buildColumnOptions(): void {
     this.timeFormat = this.setupTimeFormat();
-    this.fullTimeOptions = this.singleColumn ?
-      this.calendarTimeModelService.getFullHours(this.step) : [];
+    this.fullTimeOptions = this.singleColumn
+      ? this.calendarTimeModelService.getFullHours(this.step)
+      : [];
 
     this.hoursColumnOptions = this.generateHours();
     this.minutesColumnOptions = this.generateMinutesOrSeconds();
     this.secondsColumnOptions = this.withSeconds ? this.generateMinutesOrSeconds() : [];
-
-    this.ampmColumnOptions = this.isTwelveHoursFormat ? this.calendarTimeModelService.AMPM : [];
   }
 
   /**
@@ -379,11 +367,17 @@ export class NbTimePickerComponent<D> implements OnChanges, OnInit {
    */
   buildTimeFormat(): string {
     if (this.isTwelveHoursFormat) {
-      return `${this.withSeconds && !this.singleColumn ? this.dateService.getTwelveHoursFormatWithSeconds()
-        : this.dateService.getTwelveHoursFormat()}`;
+      return `${
+        this.withSeconds && !this.singleColumn
+          ? this.dateService.getTwelveHoursFormatWithSeconds()
+          : this.dateService.getTwelveHoursFormat()
+      }`;
     } else {
-      return `${this.withSeconds && !this.singleColumn ? this.dateService.getTwentyFourHoursFormatWithSeconds()
-        : this.dateService.getTwentyFourHoursFormat()}`;
+      return `${
+        this.withSeconds && !this.singleColumn
+          ? this.dateService.getTwentyFourHoursFormatWithSeconds()
+          : this.dateService.getTwentyFourHoursFormat()
+      }`;
     }
   }
 }

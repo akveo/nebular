@@ -6,9 +6,18 @@
 
 import { TranslationWidth } from '@angular/common';
 
+export const enum NbDayPeriod {
+  AM = 'AM', // before midday, 0 - 11 in 24-hour format.
+  PM = 'PM', // after midday, 12 - 23 in 24-hour format.
+}
 
 export abstract class NbDateService<D> {
   readonly DAYS_IN_WEEK: number = 7;
+
+  /**
+   * Number of hours in AM/PM day periods.
+   **/
+  readonly HOURS_IN_DAY_PERIOD = 12;
 
   protected locale: string;
 
@@ -272,5 +281,14 @@ export abstract class NbDateService<D> {
 
   getTwelveHoursFormatWithSeconds(): string {
     return 'hh:mm:ss a';
+  }
+
+  getDayPeriod(date: D): NbDayPeriod {
+    const isFirstDayPeriod = this.getHours(date) < this.HOURS_IN_DAY_PERIOD;
+    if (isFirstDayPeriod) {
+      return NbDayPeriod.AM;
+    } else {
+      return NbDayPeriod.PM;
+    }
   }
 }

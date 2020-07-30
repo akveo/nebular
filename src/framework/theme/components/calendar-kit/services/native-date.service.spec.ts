@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { NbDateService } from './date.service';
+import { NbDateService, NbDayPeriod } from './date.service';
 import { NbNativeDateService } from '@nebular/theme';
 import { TestBed } from '@angular/core/testing';
 import { LOCALE_ID } from '@angular/core';
@@ -258,5 +258,20 @@ describe('native-date-service', () => {
     expect(dateService.compareDates(new Date(2018, 6, 16), new Date(2017, 2, 14))).toBeGreaterThan(0);
     expect(dateService.compareDates(new Date(2018, 6, 16), new Date(2019, 2, 14))).toBeLessThan(0);
     expect(dateService.compareDates(new Date(2018, 6, 16), new Date(2018, 6, 16))).toBe(0);
+  });
+
+  it('should return correct day period', () => {
+    const date = new Date(2018, 7, 1, 12);
+
+    expect(dateService.getDayPeriod(date)).toEqual(NbDayPeriod.PM);
+
+    date.setHours(14);
+    expect(dateService.getDayPeriod(date)).toEqual(NbDayPeriod.PM);
+
+    date.setHours(11);
+    expect(dateService.getDayPeriod(date)).toEqual(NbDayPeriod.AM);
+
+    date.setHours(0);
+    expect(dateService.getDayPeriod(date)).toEqual(NbDayPeriod.AM);
   });
 });
