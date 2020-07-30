@@ -9,10 +9,11 @@ import {
   NbPasswordStrategyModule,
   NbAuthJWTToken,
   NbAuthStrategyOptions,
+  NbStrategyToken,
 } from '@nebular/auth';
 
 export class NbFirebaseIdentityProviderStrategyOptions extends NbAuthStrategyOptions {
-  token? = {
+  token?: NbStrategyToken = {
     class: NbAuthJWTToken,
   };
   logout?: boolean | NbPasswordStrategyModule = {
