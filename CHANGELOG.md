@@ -1,3 +1,30 @@
+<a name="6.0.0"></a>
+# [6.0.0](https://github.com/akveo/nebular/compare/v5.1.0...v6.0.0) (2020-07-31)
+
+
+### Bug Fixes
+
+* **datepicker:** background and border theming ([#2418](https://github.com/akveo/nebular/issues/2418)) ([381eb00](https://github.com/akveo/nebular/commit/381eb00))
+* **form field:** addon alignment ([#2460](https://github.com/akveo/nebular/issues/2460)) ([dc154ab](https://github.com/akveo/nebular/commit/dc154ab))
+* **nbButton:** allow specifying custom tabindex ([#2452](https://github.com/akveo/nebular/issues/2452)) ([e9f84be](https://github.com/akveo/nebular/commit/e9f84be))
+
+
+### Code Refactoring
+
+* **nb-icon:** return null if icon wasn't found ([#2466](https://github.com/akveo/nebular/issues/2466)) ([4af8924](https://github.com/akveo/nebular/commit/4af8924))
+
+
+### Features
+
+* upgrade to Angular 10 ([#2464](https://github.com/akveo/nebular/issues/2464)) ([540ee46](https://github.com/akveo/nebular/commit/540ee46))
+
+
+### BREAKING CHANGES
+
+* **nb-icon:** `NbIconLibraries.getSvgIcon` and `NbIconLibraries.getIcon` could return null if icon wasn't found and won't throw. As methods don't throw now, you need to handle possible `null` return value.
+* **Angular:** Nebular packages now require Angular 10+. Nebular packages no longer include ESM5 and FESM5 bundles as per Angular Package Format 10.
+* **NbBasePicker**: Angular lifecycle methods moved to `NbBasePickerComponent`. If you use `NbBasePicker` as a base class of your custom picker change it to `NbBasePickerComponent`.
+
 <a name="5.1.0"></a>
 # [5.1.0](https://github.com/akveo/nebular/compare/v5.0.0...v5.1.0) (2020-06-03)
 
