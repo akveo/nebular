@@ -27,6 +27,8 @@
 @import '../../components/stepper/stepper.component.theme';
 @import '../../components/accordion/accordion.component.theme';
 @import '../../components/button/button.component.theme';
+@import '../../components/button-group/button-toggle.component.theme';
+@import '../../components/button-group/button-group.component.theme';
 @import '../../components/list/list.component.theme';
 @import '../../components/input/input.directive.theme';
 @import '../../components/cdk/overlay/overlay.theme';
@@ -67,6 +69,8 @@
   @include nb-chat-theme();
   @include nb-accordion-theme();
   @include nb-buttons-theme();
+  @include nb-buttons-toggle-theme();
+  @include nb-buttons-group-theme();
   @include nb-list-theme();
   @include nb-input-theme();
   @include nb-overlay-theme();

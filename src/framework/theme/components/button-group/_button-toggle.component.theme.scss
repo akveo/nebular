@@ -1,0 +1,21 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
+@import './button-toggle-filled';
+@import './button-toggle-ghost';
+@import './button-toggle-outline';
+
+@mixin nb-buttons-toggle-theme() {
+  nb-button-toggle, [nbButton] {
+    @include button-theme();
+  }
+
+
+  @include button-toggle-filled;
+  @include button-toggle-outline;
+  @include button-toggle-ghost;
+}
+

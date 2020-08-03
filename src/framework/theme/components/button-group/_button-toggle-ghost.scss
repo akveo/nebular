@@ -4,8 +4,8 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-@mixin button-ghost() {
-  [nbButton].appearance-ghost {
+@mixin button-toggle-ghost() {
+  nb-button-toggle.appearance-ghost {
     @include appearance-ghost();
   }
 }
