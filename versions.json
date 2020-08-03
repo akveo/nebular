@@ -1,7 +1,7 @@
 [
   {
-    "checkoutTarget": "a619c7fbf21836bc1866361b0bc5f0eaae8f3a4f",
-    "name": "5.1.0",
+    "checkoutTarget": "v6.0.0",
+    "name": "6.0.0",
     "path": "/nebular/",
     "isCurrent": true
   },
@@ -11,8 +11,8 @@
     "path": "/nebular/next/"
   },
   {
-    "checkoutTarget": "4.6.x",
-    "name": "4.6.0",
-    "path": "/nebular/4.6.0/"
+    "checkoutTarget": "5.1.x",
+    "name": "5.1.x",
+    "path": "/nebular/5.1.x/"
   }
 ]

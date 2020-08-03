@@ -1,0 +1,25 @@
+<div>Authenticated: {{ isAuthenticated$ | async }}</div>
+
+<div *ngIf="isAuthenticated$ | async">
+  Current User Token:
+  <pre> {{ userToken$ | async | json }} </pre>
+</div>
+
+<div *ngIf="data$ | async">
+  Data from backend
+  <pre>{{ data$ | async | json }}</pre>
+</div>
+
+<button
+  *ngIf="isAuthenticated$ | async"
+  (click)="logout()">
+  Logout
+</button>
+
+<button
+  *ngIf="!(isAuthenticated$ | async)"
+  (click)="loginWithGoogle()">
+  Login with google
+</button>
+
+<button (click)="getData()">Get data from Firebase</button>
