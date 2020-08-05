@@ -6,10 +6,10 @@
 
 import { NgModule } from '@angular/core';
 import { NbButtonGroupComponent } from './button-group.component';
-import { NbButtonToggleComponent } from './button-toggle.component';
+import { NbButtonToggleDirective } from './button-toggle.directive';
 
 @NgModule({
-  exports: [ NbButtonGroupComponent, NbButtonToggleComponent ],
-  declarations: [ NbButtonGroupComponent, NbButtonToggleComponent ],
+  exports: [ NbButtonGroupComponent, NbButtonToggleDirective ],
+  declarations: [ NbButtonGroupComponent, NbButtonToggleDirective ],
 })
 export class NbButtonGroupModule { }

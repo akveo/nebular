@@ -13,22 +13,58 @@ import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { NbComponentShape } from '../component-shape';
 import { convertToBoolProperty, NbBooleanInput } from '../helpers';
-import { NbButtonToggleComponent } from './button-toggle.component';
-import { element } from 'protractor';
-import { chmod } from 'fs';
+import { NbButtonToggleDirective } from './button-toggle.directive';
 
+/**
+ * NbButtonGroupComponent provides grouping and state management capabilities.
+ *
+ * @stacked-example(Button Showcase, button-group/button-group-showcase.component)
+ *
+ * ```html
+ * <nb-button-group
+ *  size="giant"
+ *  status="primary"
+ *  shape="semi-round"
+ *  filled>
+ *  <button nbButtonToggle>A</button>
+ *  <button nbButtonToggle>B</button>
+ *  <button nbButtonToggle>C</button>
+ *  <button nbButtonToggle>D</button>
+ *  <button nbButtonToggle>E</button>
+ *  <button nbButtonToggle>F</button>
+ *  </nb-button-group>
+ *
+ * ```
+ * ### Installation
+ *
+ * Import `NbButtonGroupModule` to your feature module.
+ * ```ts
+ * @NgModule({
+ *   imports: [
+ *     // ...
+ *     NbButtonGroupModule,
+ *   ],
+ * })
+ * export class PageModule { }
+ * ```
+ * ### Usage
+ *
+ * You can select multiple button by adding 'multiple' flag
+ * @stacked-example(Button Group multiple, button-group/button-group-multiple.component.html)
+ *
+ */
 @Component({
   selector: 'nb-button-group',
   template: `
-    <div #buttonContainer (click)="onButtonClick($event, buttonContainer)">
+    <div role="group" (click)="onButtonClick($event)">
       <ng-content></ng-content>
     </div>`,
 })
 export class NbButtonGroupComponent implements AfterContentInit {
-  @ContentChildren(NbButtonToggleComponent) toggleButtons: QueryList<NbButtonToggleComponent>;
+  @ContentChildren(NbButtonToggleDirective) toggleButtons: QueryList<NbButtonToggleDirective>;
   @ContentChildren(NbButtonComponent) nbButtons: QueryList<NbButtonComponent>;
   protected destroy$: Subject<void> = new Subject<void>();
-  protected _multiple: boolean;
+  protected _multiple: boolean = false;
 
   @Input() size: NbComponentSize = 'medium';
   @Input() status: NbComponentStatus = 'basic';
@@ -45,8 +81,8 @@ export class NbButtonGroupComponent implements AfterContentInit {
   set multiple(value: boolean) {
     this._multiple = convertToBoolProperty(value);
   }
-
   static ngAcceptInputType_multiple: NbBooleanInput;
+
   /**
    * Button appearance: `filled`, `outline`, `ghost`
    */
@@ -80,7 +116,6 @@ export class NbButtonGroupComponent implements AfterContentInit {
       this.appearance = 'outline';
     }
   }
-
   static ngAcceptInputType_outline: NbBooleanInput;
 
   /**
@@ -96,7 +131,6 @@ export class NbButtonGroupComponent implements AfterContentInit {
       this.appearance = 'ghost';
     }
   }
-
   static ngAcceptInputType_ghost: NbBooleanInput;
 
   constructor(protected cd: ChangeDetectorRef) {
@@ -112,7 +146,7 @@ export class NbButtonGroupComponent implements AfterContentInit {
   }
 
   pathWithInputs(): void {
-    this.toggleButtons.forEach((item: NbButtonToggleComponent) => {
+    this.toggleButtons.forEach((item: NbButtonToggleDirective) => {
       item.appearance = this.appearance;
       item.status = this.status;
       item.size = this.size;
@@ -127,18 +161,18 @@ export class NbButtonGroupComponent implements AfterContentInit {
     });
   }
 
-  onButtonClick(event, buttonContainer: HTMLElement) {
-    buttonContainer.childNodes.forEach((node) => {
-      if (node === event.target || node.contains(event.target)) {
-        const index = Array.from(buttonContainer.childNodes).indexOf(node);
-
+  onButtonClick(event: any) {
+    this.toggleButtons.forEach((item: any) => {
+      if (item.hostElement.nativeElement.isSameNode(event.target) ||
+        item.hostElement.nativeElement.contains(event.target)) {
         if (this.multiple) {
-          const button = this.toggleButtons.find((_, i) => i === index);
-          button.clicked = !button.clicked;
+          item.clicked = !item.clicked;
         } else {
-          this.toggleButtons.forEach((item: NbButtonToggleComponent, i) => {
-            item.clicked = i === index;
-          });
+          item.clicked = true;
+        }
+      } else {
+        if (!this.multiple) {
+          item.clicked = false;
         }
       }
     });

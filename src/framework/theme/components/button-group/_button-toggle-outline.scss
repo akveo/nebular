@@ -5,7 +5,7 @@
  */
 
 @mixin button-toggle-outline() {
-  nb-button-toggle.appearance-outline {
+  [nbButtonToggle].appearance-outline {
     @include appearance-outline();
   }
 }

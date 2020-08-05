@@ -9,10 +9,9 @@
 @import './button-toggle-outline';
 
 @mixin nb-buttons-toggle-theme() {
-  nb-button-toggle, [nbButton] {
+  [nbButtonToggle], [nbButton] {
     @include button-theme();
   }
-
 
   @include button-toggle-filled;
   @include button-toggle-outline;

@@ -5,7 +5,7 @@
  */
 
 @mixin button-toggle-ghost() {
-  nb-button-toggle.appearance-ghost {
+  [nbButtonToggle].appearance-ghost {
     @include appearance-ghost();
   }
 }

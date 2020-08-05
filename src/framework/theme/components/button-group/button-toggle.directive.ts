@@ -1,6 +1,6 @@
 import {
   ChangeDetectorRef,
-  Component,
+  Directive,
   ElementRef,
   HostBinding,
   Input,
@@ -13,15 +13,16 @@ import { NbComponentStatus } from '../component-status';
 import { NbComponentShape } from '../component-shape';
 import { convertToBoolProperty, firstChildNotComment, lastChildNotComment, NbBooleanInput } from '../helpers';
 
-
-@Component({
-  selector: 'nb-button-toggle',
-  template: `
-    <ng-content></ng-content>`,
-  styleUrls: ['./button-toggle.component.scss'],
-
+/**
+ * The `NbButtonToggleDirective` is wrapper for button provides a capability to work as part of `NbButtonGroupComponent`
+ *
+ * Default button size is `medium` and status color is `basic`:
+ * @stacked-example(Button Showcase, button-group/button-group-showcase.component)
+ */
+@Directive({
+  selector: 'button[nbButtonToggle]',
 })
-export class NbButtonToggleComponent {
+export class NbButtonToggleDirective {
   clicked: boolean;
   /**
    * Button size, available sizes:
@@ -76,7 +77,6 @@ export class NbButtonToggleComponent {
       this.appearance = 'outline';
     }
   }
-
   static ngAcceptInputType_outline: NbBooleanInput;
 
   /**
@@ -93,7 +93,6 @@ export class NbButtonToggleComponent {
       this.appearance = 'ghost';
     }
   }
-
   static ngAcceptInputType_ghost: NbBooleanInput;
 
   /**
@@ -158,7 +157,7 @@ export class NbButtonToggleComponent {
 
   @HostBinding('class.status-primary')
   get primary() {
-    return this.status === 'primary' && this.clicked;
+    return this.status === 'primary' && this.clicked || this.status === 'basic' && this.clicked;
   }
 
   @HostBinding('class.status-info')
@@ -183,7 +182,7 @@ export class NbButtonToggleComponent {
 
   @HostBinding('class.status-basic')
   get basic() {
-    return !this.clicked;
+    return this.status === 'basic' || !this.clicked;
   }
 
   @HostBinding('class.status-control')

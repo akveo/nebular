@@ -6,10 +6,13 @@
 
 @mixin nb-buttons-group-theme() {
   nb-button-group {
-    nb-button-toggle, [nbButton] {
-      &:focus {
-        box-shadow: none;
-      }
+    div {
+      display: flex;
+      align-items: center;
+    }
+
+    [nbButtonToggle], [nbButton] {
+      @include nb-button();
 
       @each $shape in nb-get-shapes() {
         &:last-child.shape-#{$shape} {
@@ -27,9 +30,7 @@
         }
 
         &:not(.appearance-outline) {
-          border-top: none;
-          border-bottom: none;
-          border-left: none;
+          border: none;
 
           &:not(:last-child) {
             @include nb-ltr(border-right, 1px solid nb-theme(button-button-toggle-border-color));

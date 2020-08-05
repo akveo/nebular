@@ -480,6 +480,14 @@ export const structure = [
       },
       {
         type: 'tabs',
+        name: 'Button Group',
+        icon: 'button.svg',
+        source: [
+          'NbButtonGroupComponent',
+        ],
+      },
+      {
+        type: 'tabs',
         name: 'Checkbox',
         icon: 'checkbox.svg',
         source: [

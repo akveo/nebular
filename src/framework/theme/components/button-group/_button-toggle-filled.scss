@@ -5,8 +5,8 @@
  */
 
 @mixin button-toggle-filled() {
-  [nb-button].appearance-filled,
-  nb-button-toggle.appearance-filled {
+  [nbButton].appearance-filled,
+  [nbButtonToggle].appearance-filled {
     @include appearance-filled();
 
     @each $status in nb-get-statuses() {

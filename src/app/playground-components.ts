@@ -225,7 +225,24 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         path: 'button-group-showcase.component',
         link: '/button/button-group-showcase.component',
         component: 'ButtonGroupShowcaseComponent',
-        name: 'Button Group',
+        name: 'Button Group Showcase',
+      },
+    ],
+  },
+  {
+    path: 'button-group',
+    children: [
+      {
+        path: 'button-group-showcase.component',
+        link: '/button-group/button-group-showcase.component',
+        component: 'ButtonGroupShowcaseComponent',
+        name: 'Button Group Showcase',
+      },
+      {
+        path: 'button-group-multiple.component',
+        link: '/button-group/button-group-multiple.component',
+        component: 'ButtonGroupMultipleComponent',
+        name: 'Button Group Multiple',
       },
     ],
   },
