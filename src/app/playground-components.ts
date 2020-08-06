@@ -502,6 +502,18 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         component: 'TimepickerWithSecondsComponent',
         name: 'Timepicker With Seconds',
       },
+      {
+        path: 'timepicker-form-control.component',
+        link: '/timepicker/timepicker-form-control.component',
+        component: 'TimepickerFormControlComponent',
+        name: 'Timepicker Form Control',
+      },
+      {
+        path: 'timepicker-ng-model.component',
+        link: '/timepicker/timepicker-ng-model.component',
+        component: 'TimepickerNgModelComponent',
+        name: 'Timepicker Ng Model',
+      },
     ],
   },
   {

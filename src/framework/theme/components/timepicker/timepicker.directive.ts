@@ -96,6 +96,17 @@ import { NB_DOCUMENT } from '../../theme.options';
  *
  * @stacked-example(Single column, timepicker/timepicker-single-column.component)
  *
+ * You can provide time using form control and ngModel
+ * @stacked-example(Form control, timepicker/timepicker-form-control.component)
+ *
+ * <input [nbTimepicker]="timepicker" isTwelveHoursFormat>
+ * <nb-timepicker #timepicke [formControl]="formControl"></nb-datepicker>
+ *
+ * @stacked-example(NgModel, timepicker/timepicker-ng-model.component)
+ *
+ * <input [nbTimepicker]="timepicker" isTwelveHoursFormat>
+ * <nb-timepicker #timepicke [ngModel]="date"></nb-datepicker>
+ *
  * @styles
  *
  * timepicker-text-color:
@@ -257,7 +268,8 @@ export class NbTimePickerDirective<D> implements AfterViewInit, ControlValueAcce
     }
     this.timepicker.setHost(this.hostRef);
     if (this.inputValue) {
-      this.timepicker.date = this.dateService.parse(this.inputValue, this.timepicker.timeFormat);
+      const val = this.dateService.getId() === 'native' ? this.parseNativeDateString(this.inputValue) : this.inputValue;
+      this.timepicker.date = this.dateService.parse(val, this.timepicker.timeFormat);
     } else {
       this.timepicker.date = this.calendarTimeModelService.getResetTime();
     }
@@ -369,8 +381,15 @@ export class NbTimePickerDirective<D> implements AfterViewInit, ControlValueAcce
     }
   }
 
-  writeValue(value: string): void {
-    this.handleInputChange(value);
+  protected updateValue(value: D) {
+    if (value) {
+      this.timepicker.date = value;
+      this.inputValue = this.dateService.format(value, this.timepicker.timeFormat).toUpperCase();
+    }
+  }
+
+  writeValue(value: D): void {
+    this.updateValue(value);
   }
 
   registerOnChange(fn: (value: any) => {}): void {

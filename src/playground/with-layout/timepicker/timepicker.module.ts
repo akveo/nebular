@@ -13,10 +13,15 @@ import { TimepickerShowcaseComponent } from './timepicker-showcase.component';
 import { TimepickerTwelveHoursFormatComponent } from './timepicker-twelve-hours-format.component';
 import { TimepickerSingleColumnComponent } from './timepicker-single-column.component';
 import { TimepickerWithSecondsComponent } from './timepicker-with-seconds.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { TimepickerFormControlComponent } from './timepicker-form-control.component';
+import { TimepickerNgModelComponent } from './timepicker-ng-model.component';
 
 @NgModule({
   declarations: [
     TimepickerShowcaseComponent,
+    TimepickerFormControlComponent,
+    TimepickerNgModelComponent,
     TimepickerTwelveHoursFormatComponent,
     TimepickerSingleColumnComponent,
     TimepickerWithSecondsComponent,
@@ -27,6 +32,8 @@ import { TimepickerWithSecondsComponent } from './timepicker-with-seconds.compon
     NbTimepickerModule.forRoot({ isTwelveHoursFormat: false }),
     NbInputModule,
     NbCardModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
 })
 export class TimepickerModule {}
