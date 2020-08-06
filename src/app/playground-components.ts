@@ -244,6 +244,30 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         component: 'ButtonGroupMultipleComponent',
         name: 'Button Group Multiple',
       },
+      {
+        path: 'button-group-sizes.component',
+        link: '/button-group/button-group-sizes.component',
+        component: 'ButtonGroupSizesComponent',
+        name: 'Button Group Sizes',
+      },
+      {
+        path: 'button-group-appearance.component',
+        link: '/button-group/button-group-appearance.component',
+        component: 'ButtonGroupAppearancesComponent',
+        name: 'Button Group Appearances',
+      },
+      {
+        path: 'button-group-shapes.component',
+        link: '/button-group/button-group-shapes.component',
+        component: 'ButtonGroupShapesComponent',
+        name: 'Button Group Shapes',
+      },
+      {
+        path: 'button-group-nb-button.component',
+        link: '/button-group/button-group-nb-button.component',
+        component: 'ButtonGroupNbButtonComponent',
+        name: 'Button Group Nb Button',
+      },
     ],
   },
   {

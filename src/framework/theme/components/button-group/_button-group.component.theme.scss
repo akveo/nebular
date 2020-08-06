@@ -37,12 +37,12 @@
           border: none;
 
           &:not(:last-child) {
-            @include nb-ltr(border-right, 1px solid nb-theme(button-button-toggle-border-color));
-            @include nb-rtl(border-left, 1px solid nb-theme(button-button-toggle-border-color));
+            @include nb-ltr(border-right, 1px solid nb-theme(button-toggle-border-color));
+            @include nb-rtl(border-left, 1px solid nb-theme(button-toggle-border-color));
 
             &:hover {
-              @include nb-ltr(border-right, 1px solid nb-theme(button-button-toggle-border-color));
-              @include nb-rtl(border-left, 1px solid nb-theme(button-button-toggle-border-color));
+              @include nb-ltr(border-right, 1px solid nb-theme(button-toggle-border-color));
+              @include nb-rtl(border-left, 1px solid nb-theme(button-toggle-border-color));
             }
           }
         }

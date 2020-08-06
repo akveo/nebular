@@ -484,6 +484,7 @@ export const structure = [
         icon: 'button.svg',
         source: [
           'NbButtonGroupComponent',
+          'NbButtonToggleDirective',
         ],
       },
       {

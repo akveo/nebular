@@ -15,9 +15,6 @@ import { convertToBoolProperty, firstChildNotComment, lastChildNotComment, NbBoo
 
 /**
  * The `NbButtonToggleDirective` is wrapper for button provides a capability to work as part of `NbButtonGroupComponent`
- *
- * Default button size is `medium` and status color is `basic`:
- * @stacked-example(Button Showcase, button-group/button-group-showcase.component)
  */
 @Directive({
   selector: 'button[nbButtonToggle]',
@@ -27,27 +24,32 @@ export class NbButtonToggleDirective {
   /**
    * Button size, available sizes:
    * `tiny`, `small`, `medium`, `large`, `giant`
+   * @docs-private
    */
   @Input() size: NbComponentSize = 'medium';
 
   /**
    * Button status (adds specific styles):
    * `primary`, `info`, `success`, `warning`, `danger`
+   * @docs-private
    */
   @Input() status: NbComponentStatus = 'basic';
 
   /**
    * Button shapes: `rectangle`, `round`, `semi-round`
+   * @docs-private
    */
   @Input() shape: NbComponentShape = 'rectangle';
 
   /**
    * Button appearance: `filled`, `outline`, `ghost`, `hero`
+   * @docs-private
    */
   @Input() appearance: NbButtonAppearance = 'filled';
 
   /**
    * Sets `filled` appearance
+   * @docs-private
    */
   @Input()
   @HostBinding('class.appearance-filled')
@@ -65,6 +67,7 @@ export class NbButtonToggleDirective {
 
   /**
    * Sets `outline` appearance
+   * @docs-private
    */
   @Input()
   @HostBinding('class.appearance-outline')
@@ -81,6 +84,7 @@ export class NbButtonToggleDirective {
 
   /**
    * Sets `ghost` appearance
+   * @docs-private
    */
   @Input()
   @HostBinding('class.appearance-ghost')
@@ -97,6 +101,7 @@ export class NbButtonToggleDirective {
 
   /**
    * If set element will fill its container
+   * @docs-private
    */
   @Input()
   @HostBinding('class.full-width')
@@ -113,6 +118,7 @@ export class NbButtonToggleDirective {
 
   /**
    * Disables the button
+   * @docs-private
    */
   @Input()
   @HostBinding('attr.aria-disabled')

@@ -31,7 +31,7 @@ export type NbButtonAppearance = 'filled' | 'outline' | 'ghost' | 'hero';
  * @stacked-example(Button Showcase, button/button-showcase.component)
  *
  * ```html
- * <button nbButtonToggle></button>
+ * <button nbButton></button>
  * ```
  * ### Installation
  *
