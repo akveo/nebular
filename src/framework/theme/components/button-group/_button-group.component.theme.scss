@@ -19,8 +19,8 @@
       @each $size in nb-get-sizes() {
         &.size-#{$size} {
           nb-icon {
-            margin-right: nb-theme(button-icon-#{$size}-margin);;
-            margin-left: nb-theme(button-icon-#{$size}-margin);;
+            margin-right: nb-theme(button-icon-#{$size}-margin);
+            margin-left: nb-theme(button-icon-#{$size}-margin);
           }
         }
       }
