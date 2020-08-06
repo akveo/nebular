@@ -76,6 +76,11 @@ import { NbButtonToggleDirective } from './button-toggle.directive';
  * button-toggle-filled-warning-text-color:
  * button-toggle-filled-danger-text-color:
  * button-toggle-filled-control-text-color:
+ * button-icon-giant-margin:
+ * button-icon-large-margin:
+ * button-icon-medium-margin:
+ * button-icon-small-margin:
+ * button-icon-tiny-margin:
  * button-outline-width:
  * button-outline-color:
  * button-text-font-family:

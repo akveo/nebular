@@ -12,21 +12,30 @@
     }
 
     [nbButtonToggle], [nbButton] {
+      &:focus {
+        z-index: 1;
+      }
+
+      @each $size in nb-get-sizes() {
+        &.size-#{$size} {
+          nb-icon {
+            margin-right: nb-theme(button-icon-#{$size}-margin);;
+            margin-left: nb-theme(button-icon-#{$size}-margin);;
+          }
+        }
+      }
+
       @include nb-button();
 
       @each $shape in nb-get-shapes() {
         &:last-child.shape-#{$shape} {
-          @include nb-ltr(border-radius, 0 nb-theme(button-#{$shape}-border-radius)
-          nb-theme(button-#{$shape}-border-radius) 0);
-          @include nb-rtl(border-radius, nb-theme(button-#{$shape}-border-radius)
-          0 0 nb-theme(button-#{$shape}-border-radius));
+          @include nb-ltr(border-radius, 0 nb-theme(button-#{$shape}-border-radius) nb-theme(button-#{$shape}-border-radius) 0);
+          @include nb-rtl(border-radius, nb-theme(button-#{$shape}-border-radius) 0 0 nb-theme(button-#{$shape}-border-radius));
         }
 
         &:first-child.shape-#{$shape} {
-          @include nb-ltr(border-radius, nb-theme(button-#{$shape}-border-radius)
-          0 0 nb-theme(button-#{$shape}-border-radius));
-          @include nb-rtl(border-radius, 0 nb-theme(button-#{$shape}-border-radius)
-          nb-theme(button-#{$shape}-border-radius) 0);
+          @include nb-ltr(border-radius, nb-theme(button-#{$shape}-border-radius) 0 0 nb-theme(button-#{$shape}-border-radius));
+          @include nb-rtl(border-radius, 0 nb-theme(button-#{$shape}-border-radius) nb-theme(button-#{$shape}-border-radius) 0);
         }
 
         &:not(:first-child) {
