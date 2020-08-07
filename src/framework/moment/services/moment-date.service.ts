@@ -169,6 +169,6 @@ export class NbMomentDateService extends NbDateService<Moment> {
   }
 
   getWeekNumber(date: Moment): number {
-    return date.week();
+    return date.isoWeek();
   }
 }
