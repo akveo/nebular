@@ -251,8 +251,8 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         name: 'Button Group Sizes',
       },
       {
-        path: 'button-group-appearance.component',
-        link: '/button-group/button-group-appearance.component',
+        path: 'button-group-appearances.component',
+        link: '/button-group/button-group-appearances.component',
         component: 'ButtonGroupAppearancesComponent',
         name: 'Button Group Appearances',
       },
@@ -1344,12 +1344,6 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
   {
     path: 'tree-grid',
     children: [
-      {
-        path: 'tree-grid-showcase.component',
-        link: '/tree-grid/tree-grid-showcase.component',
-        component: 'TreeGridShowcaseComponent',
-        name: 'Tree Grid Showcase',
-      },
       {
         path: 'tree-grid-sortable.component',
         link: '/tree-grid/tree-grid-sortable.component',

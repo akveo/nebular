@@ -20,7 +20,17 @@ import { convertToBoolProperty, firstChildNotComment, lastChildNotComment, NbBoo
   selector: 'button[nbButtonToggle]',
 })
 export class NbButtonToggleDirective {
-  clicked: boolean;
+  @Input()
+  @HostBinding('attr.aria-pressed')
+  get pressed(): boolean {
+    return this._pressed;
+  }
+  set pressed(value: boolean) {
+    this._pressed = convertToBoolProperty(value);
+  }
+  protected _pressed: boolean = false;
+  static ngAcceptInputType_pressed: NbBooleanInput;
+
   /**
    * Button size, available sizes:
    * `tiny`, `small`, `medium`, `large`, `giant`
@@ -163,37 +173,37 @@ export class NbButtonToggleDirective {
 
   @HostBinding('class.status-primary')
   get primary() {
-    return this.status === 'primary' && this.clicked || this.status === 'basic' && this.clicked;
+    return this.status === 'primary' && this.pressed || this.status === 'basic' && this.pressed;
   }
 
   @HostBinding('class.status-info')
   get info() {
-    return this.status === 'info' && this.clicked;
+    return this.status === 'info' && this.pressed;
   }
 
   @HostBinding('class.status-success')
   get success() {
-    return this.status === 'success' && this.clicked;
+    return this.status === 'success' && this.pressed;
   }
 
   @HostBinding('class.status-warning')
   get warning() {
-    return this.status === 'warning' && this.clicked;
+    return this.status === 'warning' && this.pressed;
   }
 
   @HostBinding('class.status-danger')
   get danger() {
-    return this.status === 'danger' && this.clicked;
+    return this.status === 'danger' && this.pressed;
   }
 
   @HostBinding('class.status-basic')
   get basic() {
-    return this.status === 'basic' || !this.clicked;
+    return this.status === 'basic' || !this.pressed;
   }
 
   @HostBinding('class.status-control')
   get control() {
-    return this.status === 'control' && this.clicked;
+    return this.status === 'control' && this.pressed;
   }
 
   @HostBinding('class.shape-rectangle')

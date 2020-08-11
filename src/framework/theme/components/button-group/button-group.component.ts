@@ -3,6 +3,8 @@ import {
   ChangeDetectorRef,
   Component,
   ContentChildren,
+  HostBinding,
+  HostListener,
   Input,
   QueryList,
 } from '@angular/core';
@@ -426,9 +428,8 @@ import { NbButtonToggleDirective } from './button-toggle.directive';
 @Component({
   selector: 'nb-button-group',
   template: `
-    <div role="group" (click)="onButtonClick($event)">
       <ng-content></ng-content>
-    </div>`,
+  `,
 })
 export class NbButtonGroupComponent implements AfterContentInit {
   @ContentChildren(NbButtonToggleDirective) toggleButtons: QueryList<NbButtonToggleDirective>;
@@ -544,18 +545,21 @@ export class NbButtonGroupComponent implements AfterContentInit {
     });
   }
 
+  @HostBinding('attr.role') role = 'group';
+
+  @HostListener('click', ['$event'])
   onButtonClick(event: any) {
     this.toggleButtons.forEach((item: any) => {
       if (item.hostElement.nativeElement.isSameNode(event.target) ||
         item.hostElement.nativeElement.contains(event.target)) {
         if (this.multiple) {
-          item.clicked = !item.clicked;
+          item.pressed = !item.pressed;
         } else {
-          item.clicked = true;
+          item.pressed = true;
         }
       } else {
         if (!this.multiple) {
-          item.clicked = false;
+          item.pressed = false;
         }
       }
     });
