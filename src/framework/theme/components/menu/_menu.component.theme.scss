@@ -63,6 +63,10 @@
       .expand-state {
         color: nb-theme(menu-item-icon-color);
       }
+
+      nb-badge {
+        border-radius: nb-theme(badge-menu-item-border-radius);
+      }
     }
 
     $divider: nb-theme(menu-item-divider-width) nb-theme(menu-item-divider-style) nb-theme(menu-item-divider-color);

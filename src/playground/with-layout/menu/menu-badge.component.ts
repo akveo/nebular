@@ -1,0 +1,46 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { NbMenuItem } from '@nebular/theme';
+
+@Component({
+  selector: 'nb-menu-badge',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  templateUrl: './menu-badge.component.html',
+})
+export class MenuBadgeComponent {
+
+  items: NbMenuItem[] = [
+    {
+      title: 'Profile',
+      expanded: true,
+      children: [
+        {
+          title: 'Messages',
+          badge: {
+            text: '+99',
+            status: 'danger',
+          },
+        },
+        {
+          title: 'Notifications',
+          badge: {
+            text: '50',
+            status: 'warning',
+          },
+        },
+        {
+          title: 'Emails',
+          badge: {
+            text: 'new',
+            status: 'success',
+          },
+        },
+      ],
+    },
+  ];
+}

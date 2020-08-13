@@ -11,8 +11,11 @@ import { Observable, BehaviorSubject, ReplaySubject, Subject } from 'rxjs';
 import { share } from 'rxjs/operators';
 import { isFragmentContain, isFragmentEqual, isUrlPathContain, isUrlPathEqual } from './url-matching-helpers';
 import { NbIconConfig } from '../icon/icon.component';
+import { NbBadgePosition } from '../badge/badge.component';
+import { NbComponentStatus } from '../component-status';
 
 export interface NbMenuBag { tag: string; item: NbMenuItem }
+export interface NbBadgeItem { text?: string; position?: NbBadgePosition, status?: NbComponentStatus }
 
 const itemClick$ = new Subject<NbMenuBag>();
 const addItems$ = new ReplaySubject<{ tag: string; items: NbMenuItem[] }>(1);
@@ -59,6 +62,11 @@ export class NbMenuItem {
    * @type {boolean}
    */
   expanded?: boolean;
+  /**
+   * Badge component
+   * @type {boolean}
+   */
+  badge?: NbBadgeItem;
   /**
    * Children items
    * @type {List<NbMenuItem>}

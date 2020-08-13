@@ -45,8 +45,8 @@ import { NbIconConfig } from '../icon/icon.component';
       <ng-content></ng-content>
     </ng-template>
 
-    <nb-badge *ngIf="badgeText"
-              [text]="badgeText"
+    <nb-badge *ngIf="badgeText || dot"
+              [text]="dot ? '' : badgeText"
               [status]="badgeStatus"
               [position]="badgePosition">
     </nb-badge>
@@ -92,6 +92,21 @@ export class NbActionComponent {
   }
   protected _disabled: boolean = false;
   static ngAcceptInputType_disabled: NbBooleanInput;
+
+  /**
+   * Use dot badge mode
+   * @type boolean
+   */
+  @Input()
+  @HostBinding('class.dot')
+  get dot(): boolean {
+    return this._dot;
+  }
+  set dot(value: boolean) {
+    this._dot = convertToBoolProperty(value);
+  }
+  private _dot = false;
+  static ngAcceptInputType_dot: NbBooleanInput;
 
   /**
    * Badge text to display
@@ -154,6 +169,9 @@ export class NbActionComponent {
  * and we can set it to full a width of a parent component
  * @stacked-example(Full Width, action/action-width.component)
  *
+ * Action dot mode
+ * @stacked-example(Action Dot Mode, action/action-dot-mode.component)
+ *
  * @styles
  *
  * actions-background-color:
@@ -187,6 +205,33 @@ export class NbActionComponent {
  * actions-giant-icon-height:
  * actions-giant-padding:
  * actions-giant-text-font-size:
+ * badge-dot-border-radius:
+ * badge-menu-item-border-radius:
+ * badge-dot-tiny-padding:
+ * badge-dot-small-padding:
+ * badge-dot-medium-padding:
+ * badge-dot-large-padding:
+ * badge-dot-giant-padding:
+ * badge-dot-tiny-top:
+ * badge-dot-small-top:
+ * badge-dot-medium-top:
+ * badge-dot-large-top:
+ * badge-dot-giant-top:
+ * badge-dot-tiny-bottom:
+ * badge-dot-small-bottom:
+ * badge-dot-medium-bottom:
+ * badge-dot-large-bottom:
+ * badge-dot-giant-bottom:
+ * badge-dot-tiny-left:
+ * badge-dot-small-left:
+ * badge-dot-medium-left:
+ * badge-dot-large-left:
+ * badge-dot-giant-left:
+ * badge-dot-tiny-right:
+ * badge-dot-small-right:
+ * badge-dot-medium-right:
+ * badge-dot-large-right:
+ * badge-dot-giant-right:
  */
 @Component({
   selector: 'nb-actions',

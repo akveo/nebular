@@ -69,6 +69,12 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         component: 'ActionWidthComponent',
         name: 'Action Width',
       },
+      {
+        path: 'action-dot-mode.component',
+        link: '/action/action-dot-mode.component',
+        component: 'ActionDotModeComponent',
+        name: 'Action Dot Mode',
+      },
     ],
   },
   {
@@ -670,6 +676,12 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         link: '/menu/menu-link-params.component',
         component: 'MenuLinkParamsComponent',
         name: 'Menu Link Params',
+      },
+      {
+        path: 'menu-badge.component',
+        link: '/menu/menu-badge.component',
+        component: 'MenuBadgeComponent',
+        name: 'Menu Badge',
       },
       {
         path: 'menu-service.component',

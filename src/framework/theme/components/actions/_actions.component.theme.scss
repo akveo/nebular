@@ -22,6 +22,39 @@
       nb-icon {
         font-size: nb-theme(actions-#{$size}-icon-height);
       }
+
+      &.dot {
+        nb-badge {
+          padding: nb-theme(badge-dot-#{$size}-padding);
+          border-radius: nb-theme(badge-dot-border-radius);
+
+          &.position-top {
+            top: nb-theme(badge-dot-#{$size}-top);
+          }
+
+          &.position-bottom {
+            bottom: nb-theme(badge-dot-#{$size}-bottom);
+          }
+
+          &.position-right {
+            right: nb-theme(badge-dot-#{$size}-right);
+          }
+
+          &.position-left {
+            left: nb-theme(badge-dot-#{$size}-left);
+          }
+
+          &.position-start {
+            @include nb-ltr(left, nb-theme(badge-dot-#{$size}-left));
+            @include nb-rtl(right, nb-theme(badge-dot-#{$size}-right));
+          }
+
+          &.position-end {
+            @include nb-ltr(right, nb-theme(badge-dot-#{$size}-right));
+            @include nb-rtl(left, nb-theme(badge-dot-#{$size}-left));
+          }
+        }
+      }
     }
   }
 
