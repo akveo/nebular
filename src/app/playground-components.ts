@@ -605,6 +605,17 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
     ],
   },
   {
+    path: 'file-upload',
+    children: [
+      {
+        path: 'file-upload-showcase.component',
+        link: '/file-upload/file-upload-showcase.component',
+        component: 'FileUploadShowcaseComponent',
+        name: 'File Upload Showcase',
+      },
+    ],
+  },
+  {
     path: 'infinite-list',
     children: [
       {
