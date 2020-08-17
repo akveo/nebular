@@ -70,6 +70,10 @@ const routes: Route[] = [
         loadChildren: () => import('./flip-card/flip-card.module').then(m => m.FlipCardModule),
       },
       {
+        path: 'file-upload',
+        loadChildren: () => import('./file-upload/file-upload.module').then(m => m.FileUploadModule),
+      },
+      {
         path: 'infinite-list',
         loadChildren: () => import('./infinite-list/infinite-list.module').then(m => m.InfiniteListModule),
       },
