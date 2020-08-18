@@ -6,7 +6,9 @@ import {
   HostBinding,
   HostListener,
   Input,
+  OnChanges,
   QueryList,
+  SimpleChanges,
 } from '@angular/core';
 import { NbComponentSize } from '../component-size';
 import { NbComponentStatus } from '../component-status';
@@ -15,7 +17,7 @@ import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { NbComponentShape } from '../component-shape';
 import { convertToBoolProperty, NbBooleanInput } from '../helpers';
-import { NbButtonToggleDirective } from './button-toggle.directive';
+import { NbBaseButtonComponent } from '../button/base-button.component';
 
 /**
  * NbButtonGroupComponent provides grouping and state management capabilities.
@@ -428,12 +430,11 @@ import { NbButtonToggleDirective } from './button-toggle.directive';
 @Component({
   selector: 'nb-button-group',
   template: `
-      <ng-content></ng-content>
+    <ng-content></ng-content>
   `,
 })
-export class NbButtonGroupComponent implements AfterContentInit {
-  @ContentChildren(NbButtonToggleDirective) toggleButtons: QueryList<NbButtonToggleDirective>;
-  @ContentChildren(NbButtonComponent) nbButtons: QueryList<NbButtonComponent>;
+export class NbButtonGroupComponent implements OnChanges, AfterContentInit {
+  @ContentChildren(NbBaseButtonComponent) buttons: QueryList<NbBaseButtonComponent>;
   protected destroy$: Subject<void> = new Subject<void>();
   protected _multiple: boolean = false;
 
@@ -465,6 +466,7 @@ export class NbButtonGroupComponent implements AfterContentInit {
   set multiple(value: boolean) {
     this._multiple = convertToBoolProperty(value);
   }
+
   static ngAcceptInputType_multiple: NbBooleanInput;
 
   /**
@@ -485,6 +487,7 @@ export class NbButtonGroupComponent implements AfterContentInit {
       this.appearance = 'filled';
     }
   }
+
   static ngAcceptInputType_filled: NbBooleanInput;
 
   /**
@@ -500,6 +503,7 @@ export class NbButtonGroupComponent implements AfterContentInit {
       this.appearance = 'outline';
     }
   }
+
   static ngAcceptInputType_outline: NbBooleanInput;
 
   /**
@@ -515,6 +519,7 @@ export class NbButtonGroupComponent implements AfterContentInit {
       this.appearance = 'ghost';
     }
   }
+
   static ngAcceptInputType_ghost: NbBooleanInput;
 
   constructor(protected cd: ChangeDetectorRef) {
@@ -522,34 +527,43 @@ export class NbButtonGroupComponent implements AfterContentInit {
 
   ngAfterContentInit(): void {
     this.pathWithInputs();
-    this.toggleButtons.changes
+    this.buttons.changes
     .pipe(takeUntil(this.destroy$))
     .subscribe(() => {
       this.cd.markForCheck();
     });
   }
 
-  pathWithInputs(): void {
-    this.toggleButtons.forEach((item: NbButtonToggleDirective) => {
-      item.appearance = this.appearance;
-      item.status = this.status;
-      item.size = this.size;
-      item.shape = this.shape;
-    });
+  ngOnChanges({
+                size,
+                status,
+                shape,
+                multiple,
+                filled,
+                outline,
+                ghost,
+              }: SimpleChanges) {
+    if (size || status || shape || multiple || filled || outline || ghost) {
+      this.pathWithInputs();
+    }
+  }
 
-    this.nbButtons.forEach((item: NbButtonComponent) => {
-      item.appearance = this.appearance;
-      item.status = this.status;
-      item.size = this.size;
-      item.shape = this.shape;
-    });
+  pathWithInputs(): void {
+    if (this.buttons) {
+      this.buttons.forEach((item: NbButtonComponent) => {
+        item.appearance = this.appearance;
+        item.status = this.status;
+        item.size = this.size;
+        item.shape = this.shape;
+      });
+    }
   }
 
   @HostBinding('attr.role') role = 'group';
 
   @HostListener('click', ['$event'])
   onButtonClick(event: any) {
-    this.toggleButtons.forEach((item: any) => {
+    this.buttons.forEach((item: any) => {
       if (item.hostElement.nativeElement.isSameNode(event.target) ||
         item.hostElement.nativeElement.contains(event.target)) {
         if (this.multiple) {

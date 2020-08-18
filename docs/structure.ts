@@ -481,7 +481,7 @@ export const structure = [
       {
         type: 'tabs',
         name: 'Button Group',
-        icon: 'button.svg',
+        icon: 'button-group.svg',
         source: [
           'NbButtonGroupComponent',
           'NbButtonToggleDirective',

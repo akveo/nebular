@@ -13,6 +13,7 @@
 
     [nbButtonToggle], [nbButton] {
       &:focus {
+        position: relative;
         z-index: 1;
       }
 
