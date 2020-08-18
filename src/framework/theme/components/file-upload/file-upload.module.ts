@@ -8,10 +8,12 @@ import { NgModule } from '@angular/core';
 
 import { NbSharedModule } from '../shared/shared.module';
 import { NbFileUploadComponent } from './file-upload.component';
+import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
-  imports: [],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule],
   exports: [NbFileUploadComponent],
   declarations: [NbFileUploadComponent],
 })
