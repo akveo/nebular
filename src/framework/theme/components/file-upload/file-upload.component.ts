@@ -8,6 +8,7 @@ import {
   Component,
   HostListener,
 } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 
 /**
  * ...
@@ -38,39 +39,55 @@ import {
 @Component({
   selector: 'nb-file-upload',
   template: `
-    <div class="form-group">
-      <label for="file"></label>
+    <div class="form-group" (drop)="drop($event)">
       <input type="file"
-             id="file"
-             (change)="handleFileInput($event.target.files)">
+             accept="image/*"
+             (change)="handleFileInput($event)">
+      <div class="imagePreview" *ngIf="showImagePreview()">
+        <img [src]="imgUrl" alt="">
+      </div>
     </div>
+    <button (click)="reset()">Reset</button>
   `,
-  styleUrls: [ `./file-upload.component.scss` ],
+  styleUrls: [`./file-upload.component.scss`],
 })
 export class NbFileUploadComponent {
-  fileToUpload: File = null;
+  filePath;
+  imgUrl;
 
-  handleFileInput(files: FileList) {
-    console.log(files);
-    this.fileToUpload = files.item(0);
+  reset() {
+    this.imgUrl = null;
+  }
+  handleFileInput(event: Event) {
+    const file = (event.target as HTMLInputElement).files[0];
+
+    this.previewFile(file);
   }
 
-  @HostListener('dragover', ['$event']) public onDragover(event) {
-    event.preventDefault();
-    event.stopPropagation();
-    console.log(event);
-  }
-
-  @HostListener('dragleave', ['$event']) public onDragleave(event) {
-    console.log(event);
+  @HostListener('dragover', ['$event'])
+  public onDragover(event) {
     event.preventDefault();
     event.stopPropagation();
   }
 
-  @HostListener('drop', ['$event']) public drop(event) {
-    console.log(event);
+  @HostListener('dragleave', ['$event'])
+  public onDragleave(event) {
     event.preventDefault();
     event.stopPropagation();
-    console.log('drop');
+  }
+
+  public drop(event) {
+    this.previewFile(event.dataTransfer.files[0]);
+  }
+
+  previewFile(file) {
+    const reader: FileReader = new FileReader();
+    this.filePath = file;
+    reader.onload = () => this.imgUrl = reader.result;
+    reader.readAsDataURL(file);
+  }
+
+  showImagePreview(): boolean {
+    return this.imgUrl && this.imgUrl !== '';
   }
 }
