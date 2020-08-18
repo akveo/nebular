@@ -1,4 +1,4 @@
-import { ElementRef, HostBinding, Injectable, Input, Renderer2 } from '@angular/core';
+import { ElementRef, HostBinding, Input, Renderer2 } from '@angular/core';
 import { NbComponentSize } from '../component-size';
 import { NbComponentStatus } from '../component-status';
 import { NbComponentShape } from '../component-shape';
