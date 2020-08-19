@@ -8,7 +8,7 @@ import {
   Renderer2,
 } from '@angular/core';
 import { convertToBoolProperty, NbBooleanInput } from '../helpers';
-import { NbBaseButtonComponent } from '../button/base-button.component';
+import { NbBaseButtonDirective } from '../button/base-button.directive';
 
 /**
  * The `NbButtonToggleDirective` is wrapper for button provides a capability to work as part of `NbButtonGroupComponent`
@@ -16,10 +16,10 @@ import { NbBaseButtonComponent } from '../button/base-button.component';
 @Directive({
   selector: 'button[nbButtonToggle]',
   providers: [
-    { provide: NbBaseButtonComponent, useExisting: NbButtonToggleDirective },
+    { provide: NbBaseButtonDirective, useExisting: NbButtonToggleDirective },
   ],
 })
-export class NbButtonToggleDirective extends NbBaseButtonComponent {
+export class NbButtonToggleDirective extends NbBaseButtonDirective {
   @Input()
   @HostBinding('attr.aria-pressed')
   get pressed(): boolean {

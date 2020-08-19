@@ -17,7 +17,7 @@ import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { NbComponentShape } from '../component-shape';
 import { convertToBoolProperty, NbBooleanInput } from '../helpers';
-import { NbBaseButtonComponent } from '../button/base-button.component';
+import { NbBaseButtonDirective } from '../button/base-button.directive';
 
 /**
  * NbButtonGroupComponent provides grouping and state management capabilities.
@@ -434,7 +434,7 @@ import { NbBaseButtonComponent } from '../button/base-button.component';
   `,
 })
 export class NbButtonGroupComponent implements OnChanges, AfterContentInit {
-  @ContentChildren(NbBaseButtonComponent) buttons: QueryList<NbBaseButtonComponent>;
+  @ContentChildren(NbBaseButtonDirective) buttons: QueryList<NbBaseButtonDirective>;
   protected destroy$: Subject<void> = new Subject<void>();
   protected _multiple: boolean = false;
 

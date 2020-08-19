@@ -1,11 +1,12 @@
-import { ElementRef, HostBinding, Input, Renderer2 } from '@angular/core';
+import { Directive, ElementRef, HostBinding, Input, Renderer2 } from '@angular/core';
 import { NbComponentSize } from '../component-size';
 import { NbComponentStatus } from '../component-status';
 import { NbComponentShape } from '../component-shape';
 import { NbButtonAppearance } from './button.component';
 import { convertToBoolProperty, firstChildNotComment, lastChildNotComment, NbBooleanInput } from '../helpers';
 
-export abstract class NbBaseButtonComponent {
+@Directive()
+export abstract class NbBaseButtonDirective {
   /**
    * Button size, available sizes:
    * `tiny`, `small`, `medium`, `large`, `giant`
