@@ -70,6 +70,7 @@ export class NbDynamicOverlay {
     if (this.container) {
       this.updateContext();
     }
+    this.updatePosition();
   }
 
   setContext(context: Object) {
@@ -78,6 +79,7 @@ export class NbDynamicOverlay {
     if (this.container) {
       this.updateContext();
     }
+    this.updatePosition();
   }
 
   setContentAndContext(content: NbOverlayContent, context: Object) {
@@ -86,6 +88,7 @@ export class NbDynamicOverlay {
     if (this.container) {
       this.updateContext();
     }
+    this.updatePosition();
   }
 
   setComponent(componentType: Type<NbRenderableContainer>) {
@@ -227,9 +230,13 @@ export class NbDynamicOverlay {
 
     this.zone.onStable
       .pipe(takeUntil(merge([this.destroy$, overlayDestroy$])))
-      .subscribe(() => {
-        this.ref && this.ref.updatePosition();
-      });
+      .subscribe(() => this.updatePosition());
+  }
+
+  protected updatePosition() {
+    if (this.ref) {
+      this.ref.updatePosition();
+    }
   }
 
   protected hasOverlayInContainer(): boolean {
