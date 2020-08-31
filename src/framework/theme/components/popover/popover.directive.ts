@@ -14,6 +14,7 @@ import {
   OnInit,
   Output,
   EventEmitter,
+  SimpleChanges,
 } from '@angular/core';
 
 import { NbDynamicOverlay, NbDynamicOverlayController } from '../cdk/overlay/dynamic/dynamic-overlay';
@@ -21,6 +22,7 @@ import { NbDynamicOverlayHandler } from '../cdk/overlay/dynamic/dynamic-overlay-
 import { NbAdjustment, NbPosition, NbPositionValues, NbAdjustmentValues } from '../cdk/overlay/overlay-position';
 import { NbOverlayContent } from '../cdk/overlay/overlay-service';
 import { NbTrigger, NbTriggerValues } from '../cdk/overlay/overlay-trigger';
+import { NbOverlayConfig } from '../cdk/overlay/mapping';
 import { NbPopoverComponent } from './popover.component';
 import { takeUntil, skip } from 'rxjs/operators';
 import { Subject } from 'rxjs';
@@ -183,6 +185,8 @@ export class NbPopoverDirective implements NbDynamicOverlayController, OnChanges
   @Output()
   nbPopoverShowStateChange = new EventEmitter<{ isShown: boolean }>();
 
+  protected overlayConfig: NbOverlayConfig = { panelClass: this.popoverClass }
+
   get isShown(): boolean {
     return !!(this.dynamicOverlay && this.dynamicOverlay.isAttached);
   }
@@ -197,7 +201,11 @@ export class NbPopoverDirective implements NbDynamicOverlayController, OnChanges
       .componentType(this.popoverComponent);
   }
 
-  ngOnChanges() {
+  ngOnChanges({ popoverClass }: SimpleChanges) {
+    if (popoverClass) {
+      this.overlayConfig = { panelClass: this.popoverClass };
+    }
+
     this.rebuild();
   }
 
@@ -244,6 +252,6 @@ export class NbPopoverDirective implements NbDynamicOverlayController, OnChanges
       .adjustment(this.adjustment)
       .content(this.content)
       .context(this.context)
-      .overlayConfig({ panelClass: this.popoverClass });
+      .overlayConfig(this.overlayConfig);
   }
 }

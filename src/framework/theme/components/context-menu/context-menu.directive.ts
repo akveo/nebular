@@ -14,17 +14,24 @@ import {
   OnChanges,
   OnDestroy,
   OnInit,
+  SimpleChanges,
 } from '@angular/core';
 import { filter, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 
 import { NbDynamicOverlay, NbDynamicOverlayController } from '../cdk/overlay/dynamic/dynamic-overlay';
 import { NbDynamicOverlayHandler } from '../cdk/overlay/dynamic/dynamic-overlay-handler';
-import { NbOverlayRef } from '../cdk/overlay/mapping';
+import { NbOverlayConfig, NbOverlayRef } from '../cdk/overlay/mapping';
 import { NbAdjustableConnectedPositionStrategy, NbAdjustment, NbPosition } from '../cdk/overlay/overlay-position';
- import { NbTrigger, NbTriggerValues } from '../cdk/overlay/overlay-trigger';
+import { NbTrigger, NbTriggerValues } from '../cdk/overlay/overlay-trigger';
 import { NbContextMenuComponent } from './context-menu.component';
 import { NbMenuItem, NbMenuService } from '../menu/menu.service';
+
+export interface NbContextMenuContext {
+  items: NbMenuItem[];
+  tag: string;
+  position: NbPosition;
+}
 
 /**
  * Full featured context menu directive.
@@ -146,6 +153,9 @@ export class NbContextMenuDirective implements NbDynamicOverlayController, OnCha
    * Basic menu items, will be passed to the internal NbMenuComponent.
    * */
   @Input('nbContextMenu')
+  get items(): NbMenuItem[] {
+    return this._items;
+  }
   set items(items: NbMenuItem[]) {
     this.validateItems(items);
     this._items = items;
@@ -165,6 +175,8 @@ export class NbContextMenuDirective implements NbDynamicOverlayController, OnCha
   protected ref: NbOverlayRef;
   protected container: ComponentRef<any>;
   protected positionStrategy: NbAdjustableConnectedPositionStrategy;
+  protected overlayConfig: NbOverlayConfig = { panelClass: this.contextMenuClass } ;
+  protected overlayContext: NbContextMenuContext = { items: this.items, tag: this.tag, position: this.position };
   protected destroy$ = new Subject<void>();
   private _items: NbMenuItem[] = [];
 
@@ -181,7 +193,15 @@ export class NbContextMenuDirective implements NbDynamicOverlayController, OnCha
       .componentType(NbContextMenuComponent);
   }
 
-  ngOnChanges() {
+  ngOnChanges({ contextMenuClass, items, position, tag }: SimpleChanges) {
+    if (contextMenuClass) {
+      this.overlayConfig = { panelClass: this.contextMenuClass };
+    }
+
+    if (items || position || tag) {
+      this.overlayContext = { items: this.items, position: this.position, tag: this.tag };
+    }
+
     this.rebuild();
   }
 
@@ -217,12 +237,8 @@ export class NbContextMenuDirective implements NbDynamicOverlayController, OnCha
       .position(this.position)
       .trigger(this.trigger)
       .adjustment(this.adjustment)
-      .context({
-        position: this.position,
-        items: this._items,
-        tag: this.tag,
-      })
-      .overlayConfig({panelClass: this.contextMenuClass});
+      .context(this.overlayContext)
+      .overlayConfig(this.overlayConfig);
   }
 
   /*
