@@ -229,7 +229,7 @@ export class NbDynamicOverlay {
     );
 
     this.zone.onStable
-      .pipe(takeUntil(merge([this.destroy$, overlayDestroy$])))
+      .pipe(takeUntil(merge(this.destroy$, overlayDestroy$)))
       .subscribe(() => this.updatePosition());
   }
 
