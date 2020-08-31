@@ -116,7 +116,16 @@ export class NbTooltipDirective implements OnInit, OnChanges, AfterViewInit, OnD
   static ngAcceptInputType_adjustment: NbAdjustmentValues;
 
   @Input('nbTooltipClass')
-  tooltipClass: string = '';
+  get tooltipClass(): string {
+    return this._tooltipClass;
+  }
+  set tooltipClass(value: string) {
+    if (value !== this.tooltipClass) {
+      this._tooltipClass = value;
+      this.overlayConfig = { panelClass: this.tooltipClass };
+    }
+  }
+  _tooltipClass: string = '';
 
   /**
    * Accepts icon name or icon config object
@@ -163,11 +172,7 @@ export class NbTooltipDirective implements OnInit, OnChanges, AfterViewInit, OnD
       .offset(this.offset);
   }
 
-  ngOnChanges({ tooltipClass }: SimpleChanges) {
-    if (tooltipClass) {
-      this.overlayConfig = { panelClass: this.tooltipClass };
-    }
-
+  ngOnChanges() {
     this.rebuild();
   }
 

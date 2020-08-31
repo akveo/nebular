@@ -180,7 +180,16 @@ export class NbPopoverDirective implements NbDynamicOverlayController, OnChanges
   offset = 15;
 
   @Input('nbPopoverClass')
-  popoverClass: string = '';
+  get popoverClass(): string {
+    return this._popoverClass;
+  }
+  set popoverClass(value: string) {
+    if (value !== this.popoverClass) {
+      this._popoverClass = value;
+      this.overlayConfig = { panelClass: this.popoverClass };
+    }
+  }
+  _popoverClass: string = '';
 
   @Output()
   nbPopoverShowStateChange = new EventEmitter<{ isShown: boolean }>();
@@ -201,11 +210,7 @@ export class NbPopoverDirective implements NbDynamicOverlayController, OnChanges
       .componentType(this.popoverComponent);
   }
 
-  ngOnChanges({ popoverClass }: SimpleChanges) {
-    if (popoverClass) {
-      this.overlayConfig = { panelClass: this.popoverClass };
-    }
-
+  ngOnChanges() {
     this.rebuild();
   }
 
