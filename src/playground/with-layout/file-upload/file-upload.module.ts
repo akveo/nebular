@@ -8,13 +8,15 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { NbCardModule } from '@nebular/theme';
-import { FileUploadShowcaseComponent } from './file-upload-showcase.component';
+import { FullWidthFileUploadShowcaseComponent } from './full-width-file-upload-showcase.component';
 import { FileUploadRoutingModule } from './file-upload-routing.module';
 import { NbFileUploadModule } from '../../../framework/theme/components/file-upload/file-upload.module';
+import { CompactFileUploadShowcaseComponent } from './compact-file-upload-showcase.component';
 
 @NgModule({
   declarations: [
-    FileUploadShowcaseComponent,
+    FullWidthFileUploadShowcaseComponent,
+    CompactFileUploadShowcaseComponent,
   ],
   imports: [
     CommonModule,

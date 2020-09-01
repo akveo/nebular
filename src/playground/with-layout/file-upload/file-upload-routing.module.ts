@@ -6,12 +6,17 @@
 
 import { NgModule } from '@angular/core';
 import { RouterModule, Route} from '@angular/router';
-import { FileUploadShowcaseComponent } from './file-upload-showcase.component';
+import { FullWidthFileUploadShowcaseComponent } from './full-width-file-upload-showcase.component';
+import { CompactFileUploadShowcaseComponent } from './compact-file-upload-showcase.component';
 
 const routes: Route[] = [
   {
-    path: 'file-upload-showcase.component',
-    component: FileUploadShowcaseComponent,
+    path: 'full-width-file-upload-showcase.component',
+    component: FullWidthFileUploadShowcaseComponent,
+  },
+  {
+    path: 'compact-file-upload-showcase.component',
+    component: CompactFileUploadShowcaseComponent,
   },
 ];
 

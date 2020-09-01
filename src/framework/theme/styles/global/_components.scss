@@ -24,6 +24,9 @@
 @import '../../components/alert/alert.component.theme';
 @import '../../components/chat/chat.component.theme';
 @import '../../components/spinner/spinner.component.theme';
+@import '../../components/file-upload/drop-area.component.theme';
+@import '../../components/file-upload/file-list-item.component.theme';
+@import '../../components/file-upload/file-item.component.theme';
 @import '../../components/stepper/stepper.component.theme';
 @import '../../components/accordion/accordion.component.theme';
 @import '../../components/button/button.component.theme';
@@ -61,6 +64,9 @@
   @include nb-spinner-theme();
   @include nb-timepicker-theme();
   @include nb-checkbox-theme();
+  @include nb-drop-area-theme();
+  @include nb-file-list-item-theme();
+  @include nb-file-item-theme();
   @include nb-toggle-theme();
   @include nb-progress-bar-theme();
   @include nb-badge-theme();

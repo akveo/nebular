@@ -1,0 +1,17 @@
+@import '../../styles/core/mixins';
+
+:host {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+  nb-drop-area {
+    width: 13.5rem;
+    height: 13.5rem;
+  }
+
+  & * {
+    margin-top: 1rem;
+    margin-right: 1rem;
+  }
+}
