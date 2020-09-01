@@ -1,15 +1,16 @@
 import { Component, ComponentFactoryResolver, Inject, Input, OnInit, Optional, Type } from '@angular/core';
-import { NbCalendarWithTimeComponent } from './calendar-with-time.component';
 import { Observable } from 'rxjs';
-import { NbBasePickerComponent } from './datepicker.component';
-import { NbCalendarTimeModelService } from '../calendar-kit/services/calendar-time-model.service';
+
+import { convertToBoolProperty, NbBooleanInput } from '../helpers';
 import { NB_DOCUMENT } from '../../theme.options';
 import { NbPositionBuilderService } from '../cdk/overlay/overlay-position';
 import { NbTriggerStrategyBuilderService } from '../cdk/overlay/overlay-trigger';
 import { NbOverlayService } from '../cdk/overlay/overlay-service';
+import { NbCalendarTimeModelService } from '../calendar-kit/services/calendar-time-model.service';
 import { NbDateService } from '../calendar-kit/services/date.service';
+import { NbCalendarWithTimeComponent } from './calendar-with-time.component';
+import { NbBasePickerComponent } from './datepicker.component';
 import { NB_DATE_SERVICE_OPTIONS } from './datepicker.directive';
-import { convertToBoolProperty, NbBooleanInput } from '../helpers';
 
 @Component({
   selector: 'nb-date-timepicker',
