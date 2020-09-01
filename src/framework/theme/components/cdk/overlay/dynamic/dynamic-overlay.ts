@@ -33,6 +33,7 @@ export class NbDynamicOverlay {
   protected positionStrategyChange$ = new Subject();
   protected isShown$ = new BehaviorSubject<boolean>(false);
   protected destroy$ = new Subject<void>();
+  protected overlayDestroy$ = new Subject<NbOverlayRef>();
 
   get isAttached(): boolean {
     return this.ref && this.ref.hasAttached();
@@ -69,6 +70,7 @@ export class NbDynamicOverlay {
     if (this.container) {
       this.updateContext();
     }
+    this.updatePosition();
   }
 
   setContext(context: Object) {
@@ -77,6 +79,7 @@ export class NbDynamicOverlay {
     if (this.container) {
       this.updateContext();
     }
+    this.updatePosition();
   }
 
   setContentAndContext(content: NbOverlayContent, context: Object) {
@@ -85,6 +88,7 @@ export class NbDynamicOverlay {
     if (this.container) {
       this.updateContext();
     }
+    this.updatePosition();
   }
 
   setComponent(componentType: Type<NbRenderableContainer>) {
@@ -175,6 +179,7 @@ export class NbDynamicOverlay {
     this.disposeOverlayRef();
     this.isShown$.complete();
     this.positionStrategyChange$.complete();
+    this.overlayDestroy$.complete();
   }
 
   getContainer() {
@@ -187,7 +192,7 @@ export class NbDynamicOverlay {
       scrollStrategy: this.overlay.scrollStrategies.reposition(),
       ...this.overlayConfig,
     });
-    this.updatePositionWhenStable();
+    this.updatePositionWhenStable(this.ref);
   }
 
   protected renderContainer() {
@@ -218,12 +223,20 @@ export class NbDynamicOverlay {
    * Dimensions of the container may change after content update. So we listen to zone.stable event to
    * reposition the container.
    */
-  protected updatePositionWhenStable() {
+  protected updatePositionWhenStable(overlay: NbOverlayRef) {
+    const overlayDestroy$ = this.overlayDestroy$.pipe(
+      filter((destroyedOverlay: NbOverlayRef) => destroyedOverlay === overlay),
+    );
+
     this.zone.onStable
-      .pipe(takeUntil(this.destroy$))
-      .subscribe(() => {
-        this.ref && this.ref.updatePosition();
-      });
+      .pipe(takeUntil(merge(this.destroy$, overlayDestroy$)))
+      .subscribe(() => this.updatePosition());
+  }
+
+  protected updatePosition() {
+    if (this.ref) {
+      this.ref.updatePosition();
+    }
   }
 
   protected hasOverlayInContainer(): boolean {
@@ -233,6 +246,7 @@ export class NbDynamicOverlay {
   protected disposeOverlayRef() {
     if (this.ref) {
       this.ref.dispose();
+      this.overlayDestroy$.next(this.ref);
       this.ref = null;
       this.container = null;
     }
