@@ -16,55 +16,61 @@ import { NB_DATE_SERVICE_OPTIONS } from './datepicker.directive';
   selector: 'nb-date-timepicker',
   template: '',
 })
-export class NbDateTimePickerComponent<D>
-  extends NbBasePickerComponent<D, D, NbCalendarWithTimeComponent<D>>
-  implements OnInit {
+export class NbDateTimePickerComponent<D> extends NbBasePickerComponent<D, D, NbCalendarWithTimeComponent<D>>
+                                          implements OnInit {
+
   protected pickerClass: Type<NbCalendarWithTimeComponent<D>> = NbCalendarWithTimeComponent;
-  _isTwelveHoursFormat: boolean;
-  _withSeconds: boolean;
-  _singleColumn: boolean;
 
-  @Input()
-  get isTwelveHoursFormat(): boolean {
-    return this._isTwelveHoursFormat;
+  get value(): any {
+    return this.picker ? this.picker.date : undefined;
   }
+  set value(date: any) {
+    if (!this.picker) {
+      this.queue = date;
+      return;
+    }
 
-  set isTwelveHoursFormat(value: boolean) {
-    this._isTwelveHoursFormat = convertToBoolProperty(value);
-  };
-
-  static ngAcceptInputType_isTwelveHoursFormat: NbBooleanInput;
-
-  @Input()
-  get withSeconds(): boolean {
-    return this._withSeconds;
+    if (date) {
+      this.visibleDate = date;
+      this.picker.visibleDate = date;
+      this.picker.date = date;
+    }
   }
-
-  set withSeconds(value: boolean) {
-    this._withSeconds = convertToBoolProperty(value);
-  };
-
-  static ngAcceptInputType_withSeconds: NbBooleanInput;
-
-  @Input()
-  get singleColumn(): boolean {
-    return this._singleColumn;
-  }
-
-  set singleColumn(value: boolean) {
-    this._singleColumn = convertToBoolProperty(value);
-  }
-
-  static ngAcceptInputType_singleColumn: NbBooleanInput;
 
   @Input() step: number;
   @Input() title: string;
   @Input() applyButtonText: string;
   @Input() currentTimeButtonText: string;
 
-  ngOnInit() {
-    this.format = this.format || this.buildTimeFormat();
+  @Input()
+  get isTwelveHoursFormat(): boolean {
+    return this._isTwelveHoursFormat;
   }
+  set isTwelveHoursFormat(value: boolean) {
+    this._isTwelveHoursFormat = convertToBoolProperty(value);
+  }
+  _isTwelveHoursFormat: boolean;
+  static ngAcceptInputType_isTwelveHoursFormat: NbBooleanInput;
+
+  @Input()
+  get withSeconds(): boolean {
+    return this._withSeconds;
+  }
+  set withSeconds(value: boolean) {
+    this._withSeconds = convertToBoolProperty(value);
+  }
+  _withSeconds: boolean;
+  static ngAcceptInputType_withSeconds: NbBooleanInput;
+
+  @Input()
+  get singleColumn(): boolean {
+    return this._singleColumn;
+  }
+  set singleColumn(value: boolean) {
+    this._singleColumn = convertToBoolProperty(value);
+  }
+  _singleColumn: boolean;
+  static ngAcceptInputType_singleColumn: NbBooleanInput;
 
   constructor(@Inject(NB_DOCUMENT) document,
               positionBuilder: NbPositionBuilderService,
@@ -75,6 +81,10 @@ export class NbDateTimePickerComponent<D>
               @Optional() @Inject(NB_DATE_SERVICE_OPTIONS) dateServiceOptions,
               protected calendarWithTimeModelService: NbCalendarTimeModelService<D>) {
     super(document, positionBuilder, triggerStrategyBuilder, overlay, cfr, dateService, dateServiceOptions);
+  }
+
+  ngOnInit() {
+    this.format = this.format || this.buildTimeFormat();
   }
 
   protected patchWithInputs() {
@@ -104,23 +114,6 @@ export class NbDateTimePickerComponent<D>
       const date = this.queue;
       this.queue = null;
       this.value = date;
-    }
-  }
-
-  get value(): any {
-    return this.picker ? this.picker.date : undefined;
-  }
-
-  set value(date: any) {
-    if (!this.picker) {
-      this.queue = date;
-      return;
-    }
-
-    if (date) {
-      this.visibleDate = date;
-      this.picker.visibleDate = date;
-      this.picker.date = date;
     }
   }
 
