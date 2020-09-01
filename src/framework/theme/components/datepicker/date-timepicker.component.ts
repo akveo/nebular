@@ -117,7 +117,7 @@ export class NbDateTimePickerComponent<D> extends NbBasePickerComponent<D, D, Nb
     }
   }
 
-  buildTimeFormat(): string {
+  protected buildTimeFormat(): string {
     if (this.singleColumn) {
       return this.calendarWithTimeModelService.buildDateFormat(this.isTwelveHoursFormat);
     } else {
