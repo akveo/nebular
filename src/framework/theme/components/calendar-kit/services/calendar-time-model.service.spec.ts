@@ -25,17 +25,8 @@ describe('time-model-service', () => {
     },
   )));
 
-  it('should return hours in day', () => {
-    const twelveHours: string[] = timeModel.getHoursInDay(true);
-    const hours: string[] = timeModel.getHoursInDay(false);
-
-    expect(twelveHours).toEqual(['12', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11']);
-    expect(hours).toEqual(['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12',
-      '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23']);
-  });
-
   it('should format number', () => {
-    const token = timeModel.padd(5);
+    const token = timeModel.paddToTwoSymbols(5);
     expect(token).toEqual('05');
   });
 });

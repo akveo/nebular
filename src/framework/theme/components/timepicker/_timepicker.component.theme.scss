@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 @mixin nb-timepicker-theme() {
-  $border: nb-theme(timepicker-border-width) nb-theme(timepicker-border-style) nb-theme(timepicker-basic-color);
+  $border: nb-theme(timepicker-border-width) nb-theme(timepicker-border-style) nb-theme(timepicker-basic-border-color);
   .nb-timepicker-container {
     width: nb-theme(timepicker-container-width);
     height: nb-theme(timepicker-container-height);
@@ -16,7 +16,7 @@
 
       &:hover {
         background-color: nb-theme(timepicker-hover-background-color);
-        color: nb-theme(timepicker-text-hover-color);
+        color: nb-theme(timepicker-hover-text-color);
       }
 
       &:focus {
@@ -31,7 +31,8 @@
 
       color: nb-theme(timepicker-text-color);
       font-size: nb-theme(timepicker-cell-text-font-size);
-      line-height: nb-theme(timepicker-cell-line-height);
+      height: nb-theme(timepicker-cell-height);
+      line-height: nb-theme(timepicker-cell-text-line-height);
       font-weight: nb-theme(timepicker-cell-text-font-weight);
     }
 
@@ -55,7 +56,7 @@
     }
 
     .text-hint {
-      padding: nb-theme(timepicker-text-hint-padding);
+      padding: nb-theme(timepicker-header-cell-padding);
 
       &:not(:last-child) {
         @include nb-ltr(border-right, $border);

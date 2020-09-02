@@ -10,17 +10,17 @@ import {
   Input,
   Renderer2,
 } from '@angular/core';
+import { filter, map, takeUntil } from 'rxjs/operators';
+import { fromEvent, merge, Subject } from 'rxjs';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { NbTimePickerComponent } from './timepicker.component';
 import { NbOverlayRef, NbScrollStrategy } from '../cdk/overlay/mapping';
-import { filter, map, takeUntil } from 'rxjs/operators';
 import {
   NbAdjustableConnectedPositionStrategy,
   NbAdjustment,
   NbPosition,
   NbPositionBuilderService,
 } from '../cdk/overlay/overlay-position';
-import { fromEvent, merge, Subject } from 'rxjs';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { NbOverlayService } from '../cdk/overlay/overlay-service';
 import { NbTrigger, NbTriggerStrategy, NbTriggerStrategyBuilderService } from '../cdk/overlay/overlay-trigger';
 import { NbSelectedTimePayload } from './model';
@@ -31,7 +31,6 @@ import { NB_DOCUMENT } from '../../theme.options';
 /**
  * The `NbTimePickerDirective` is form control that gives you ability to select time. The timepicker
  * is shown when input receives a `focus` event.
- *
  * ```html
  * <input [nbTimepicker]="timepicker">
  * <nb-timepicker #timepicker></nb-datepicker>
@@ -62,12 +61,18 @@ import { NB_DOCUMENT } from '../../theme.options';
  * export class PageModule { }
  *
  * ```
- * <div class="note note-info">
+ * <div id="native-parse-issue" class="note note-warning">
  * <div class="note-title">Note</div>
  * <div class="note-body">
- *  Date.parse noes not support parsing time with custom format, we highly recommend to use NbDateFnsDateModule
- *  or NbMomentDateModule instead of native date service (Default date module).
- *  If you want to use default service you should set ISO 8061 time format.
+ * Timepicker use native Date object by default, which doesn't support parsing by custom format.
+ * According to the ECMAScript specification the only supported format is a format described by ISO 8061 standard.
+ * This standard requires date part to be included in the date string,
+ * meaning you have to type a date+time in the input.
+ * We highly recommend you to use NbDateFnsDateModule or NbMomentDateModule to be able to support time only strings in
+ * the timepicker inputs. This modules use date-fns and moment date libraries, which provide capabilities
+ * to parse time only strings.
+ * See "Formatting Issue" at https://akveo.github.io/nebular/docs/components/datepicker/overview
+ * for installation instructions.
  * </div>
  * </div>
  * <hr>
@@ -96,7 +101,7 @@ import { NB_DOCUMENT } from '../../theme.options';
  *
  * @stacked-example(Single column, timepicker/timepicker-single-column.component)
  *
- * You can provide time using form control and ngModel
+ * You can provide time using formControl and ngModel directives
  * @stacked-example(Form control, timepicker/timepicker-form-control.component)
  *
  * <input [nbTimepicker]="timepicker" isTwelveHoursFormat>
@@ -111,21 +116,21 @@ import { NB_DOCUMENT } from '../../theme.options';
  *
  * timepicker-text-color:
  * timepicker-hover-background-color:
- * timepicker-text-hover-color:
+ * timepicker-hover-text-color:
  * timepicker-focus-background-color:
  * timepicker-text-focus-color:
  * timepicker-active-background-color:
  * timepicker-text-active-color:
  * timepicker-cell-text-font-size:
  * timepicker-cell-text-font-weight:
- * timepicker-basic-color:
+ * timepicker-basic-border-color:
  * timepicker-border-color:
  * timepicker-border-style:
  * timepicker-border-width:
  * timepicker-scrollbar-color:
  * timepicker-scrollbar-background-color:
  * timepicker-scrollbar-width:
- * timepicker-cell-line-height:
+ * timepicker-cell-height:
  * timepicker-single-column-width:
  * timepicker-multiple-column-width:
  * timepicker-title-height:
@@ -153,16 +158,12 @@ export class NbTimePickerDirective<D> implements AfterViewInit, ControlValueAcce
   set timepicker(timePicker: NbTimePickerComponent<D>) {
     this._timePickerComponent = timePicker;
   }
+  protected _timePickerComponent: NbTimePickerComponent<D>;
 
   /**
    * Time picker overlay offset
    * */
   @Input() overlayOffset = 8;
-
-  /**
-   * NbTimePickerComponent instance passed via input.
-   * */
-  protected _timePickerComponent: NbTimePickerComponent<D>;
 
   protected lastInputValue: string;
   /**
@@ -262,9 +263,8 @@ export class NbTimePickerDirective<D> implements AfterViewInit, ControlValueAcce
 
   setupTimepicker() {
     if (this.dateService.getId() === 'native') {
-      console.warn('Date.parse noes not support parsing time with custom format, we highly recommend to use' +
-        'fnsDate or moment date service instead of native date service.If you want to use native' +
-        ' date service you should set ISO 8061 time format.')
+      console.warn('Date.parse noes not support parsing time with custom format.' +
+        ' See details here https://akveo.github.io/nebular/docs/components/datepicker/overview#native-parse-issue')
     }
     this.timepicker.setHost(this.hostRef);
     if (this.inputValue) {
@@ -403,8 +403,8 @@ export class NbTimePickerDirective<D> implements AfterViewInit, ControlValueAcce
   protected parseNativeDateString(value: string): string {
     const date = this.dateService.today();
     const year = this.dateService.getYear(date);
-    const month = this.calendarTimeModelService.padd(this.dateService.getMonth(date));
-    const day = this.calendarTimeModelService.padd(this.dateService.getDate(date));
+    const month = this.calendarTimeModelService.paddToTwoSymbols(this.dateService.getMonth(date));
+    const day = this.calendarTimeModelService.paddToTwoSymbols(this.dateService.getDate(date));
 
     return `${year}-${month}-${day} ${value}`;
   }

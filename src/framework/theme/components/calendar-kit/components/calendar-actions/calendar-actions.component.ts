@@ -9,25 +9,29 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
       status="primary"
       size="small"
       (click)="setCurrentTime.emit()">
-      {{ currentTimeText }}</button>
+      {{ _currentTimeText }}</button>
     <button
       nbButton
       status="primary"
       size="small"
       (click)="saveValue.emit()">
-      {{ applyText }}</button>
+      {{ _applyText }}</button>
   `,
   styleUrls: ['./calendar-actions.component.scss'],
 })
 export class NbCalendarActionsComponent {
   @Input() set applyButtonText(value: string) {
-    this.applyText = value || 'OK';
+    if (value) {
+      this._applyText = value;
+    }
   };
   @Input() set currentTimeButtonText(value: string) {
-    this.currentTimeText = value || 'NOW';
+    if (value) {
+      this._currentTimeText = value;
+    }
   }
-  applyText: string;
-  currentTimeText: string;
+  _applyText: string = 'ok';
+  _currentTimeText: string = 'now';
   @Output() setCurrentTime: EventEmitter<void> = new EventEmitter();
   @Output() saveValue: EventEmitter<void> = new EventEmitter();
 }

@@ -53,6 +53,6 @@ export class NbDateFnsDateService extends NbNativeDateService {
   }
 
   getDateFormat(): string {
-    return 'YYYY-MM-dd';
+    return this.getLocaleTimeFormat();
   }
 }

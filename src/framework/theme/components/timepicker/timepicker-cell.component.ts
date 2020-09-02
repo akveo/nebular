@@ -11,15 +11,15 @@ import {
   Output,
   ViewChild,
 } from '@angular/core';
-import { NbSelectedTimeModel } from './model';
 import { filter, take, takeUntil } from 'rxjs/operators';
 import { merge, Subject } from 'rxjs';
+import { NbSelectedTimeModel } from './model';
 import { NbPlatform } from '../cdk/platform/platform-service';
 
 @Component({
   selector: 'nb-timepicker-cell',
   template: `
-    <div #timepickerOption>{{ value }}</div>
+    <div #valueContainer>{{ value }}</div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['./timepicker-cell.component.scss'],
@@ -44,7 +44,7 @@ export class NbTimePickerCellComponent implements AfterViewInit, OnDestroy {
   @Input() value: string;
   @Output() select: EventEmitter<NbSelectedTimeModel> = new EventEmitter();
 
-  @ViewChild('timepickerOption') element: ElementRef;
+  @ViewChild('valueContainer') valueContainerElement: ElementRef;
 
   constructor(protected ngZone: NgZone,
               protected platformService: NbPlatform) {
@@ -62,13 +62,17 @@ export class NbTimePickerCellComponent implements AfterViewInit, OnDestroy {
         take(1),
         takeUntil(merge(this.unselected$, this.destroy$)))
       .subscribe(() =>
+        /**
+         * In order to scroll to selected cell when component opened,
+         * we need to call scrollToElement in runOutsideAngular function
+         */
         this.ngZone.runOutsideAngular(() => this.scrollToElement()));
     }
   }
 
   scrollToElement() {
-    if (this.element && this.platformService.isBrowser) {
-      this.element.nativeElement.scrollIntoView({block: 'center'});
+    if (this.valueContainerElement && this.platformService.isBrowser) {
+      this.valueContainerElement.nativeElement.scrollIntoView({block: 'center'});
     }
   }
 

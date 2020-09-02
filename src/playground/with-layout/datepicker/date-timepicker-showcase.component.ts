@@ -11,11 +11,11 @@ import { Component } from '@angular/core';
   template: `
     <nb-card size="large">
       <nb-card-body>
-        <input nbInput placeholder="Pick Date" [nbDatepicker]="formpicker">
+        <input nbInput placeholder="Pick Date" [nbDatepicker]="dateTimePicker">
         <nb-date-timepicker
           [title]="'Title'"
           withSeconds
-          #formpicker></nb-date-timepicker>
+          #dateTimePicker></nb-date-timepicker>
       </nb-card-body>
     </nb-card>
   `,

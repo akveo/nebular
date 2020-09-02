@@ -42,11 +42,6 @@ interface NbTimePartOption {
 export class NbTimePickerComponent<D> implements OnChanges, OnInit {
   protected blur$: Subject<void> = new Subject<void>();
 
-  _isTwelveHoursFormat: boolean;
-  _withSeconds: boolean;
-  _singleColumn: boolean;
-  _step: number;
-  _timeFormat: string;
   fullTimeOptions: D[];
   hoursColumnOptions: NbTimePartOption[];
   minutesColumnOptions: NbTimePartOption[];
@@ -69,10 +64,10 @@ export class NbTimePickerComponent<D> implements OnChanges, OnInit {
   get timeFormat(): string {
     return this._timeFormat;
   }
-
   set timeFormat(timeFormat: string) {
     this._timeFormat = timeFormat;
   }
+  protected _timeFormat: string;
 
   /**
    * Defines 12 hours format .
@@ -81,11 +76,10 @@ export class NbTimePickerComponent<D> implements OnChanges, OnInit {
   get isTwelveHoursFormat(): boolean {
     return this._isTwelveHoursFormat;
   }
-
   set isTwelveHoursFormat(value: boolean) {
     this._isTwelveHoursFormat = convertToBoolProperty(value);
   };
-
+  protected _isTwelveHoursFormat: boolean;
   static ngAcceptInputType_isTwelveHoursFormat: NbBooleanInput;
 
   /**
@@ -96,11 +90,10 @@ export class NbTimePickerComponent<D> implements OnChanges, OnInit {
   get withSeconds(): boolean {
     return this._withSeconds;
   }
-
   set withSeconds(value: boolean) {
     this._withSeconds = convertToBoolProperty(value);
   };
-
+  protected _withSeconds: boolean;
   static ngAcceptInputType_withSeconds: NbBooleanInput;
 
   /**
@@ -110,11 +103,10 @@ export class NbTimePickerComponent<D> implements OnChanges, OnInit {
   get singleColumn(): boolean {
     return this._singleColumn;
   }
-
   set singleColumn(value: boolean) {
     this._singleColumn = convertToBoolProperty(value);
   }
-
+  _singleColumn: boolean;
   static ngAcceptInputType_singleColumn: NbBooleanInput;
 
   /**
@@ -125,10 +117,10 @@ export class NbTimePickerComponent<D> implements OnChanges, OnInit {
   set step(step: number) {
     this._step = step;
   }
-
   get step(): number {
     return this._step;
   }
+  protected _step: number;
 
   /**
    * Date which will be rendered as selected.
@@ -312,7 +304,7 @@ export class NbTimePickerComponent<D> implements OnChanges, OnInit {
   protected buildColumnOptions(): void {
     this.timeFormat = this.setupTimeFormat();
     this.fullTimeOptions = this.singleColumn
-      ? this.calendarTimeModelService.getFullHours(this.step)
+      ? this.calendarTimeModelService.getHoursRange(this.step)
       : [];
 
     this.hoursColumnOptions = this.generateHours();
@@ -330,27 +322,27 @@ export class NbTimePickerComponent<D> implements OnChanges, OnInit {
   protected generateHours(): NbTimePartOption[] {
     if (!this.isTwelveHoursFormat) {
       return range(24, (v: number) => {
-        return {value: v, text: this.calendarTimeModelService.padd(v)};
+        return {value: v, text: this.calendarTimeModelService.paddToTwoSymbols(v)};
       });
     }
 
     if (this.isAM) {
       return (range(12, (v: number) => {
         const text = v === 0 ? 12 : v;
-        return {value: v, text: this.calendarTimeModelService.padd(text)}
+        return {value: v, text: this.calendarTimeModelService.paddToTwoSymbols(text)}
       }));
     }
 
     return (rangeFromTo(12, 24, (v: number) => {
       const text = v === 12 ? 12 : (v - 12);
-      return {value: v, text: this.calendarTimeModelService.padd(text)}
+      return {value: v, text: this.calendarTimeModelService.paddToTwoSymbols(text)}
     }));
   }
 
 
   protected generateMinutesOrSeconds(): NbTimePartOption[] {
     return range(60, (v: number) => {
-      return {value: v, text: this.calendarTimeModelService.padd(v)};
+      return {value: v, text: this.calendarTimeModelService.paddToTwoSymbols(v)};
     });
   }
 

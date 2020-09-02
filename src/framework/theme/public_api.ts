@@ -34,6 +34,7 @@ export * from './components/calendar/calendar-range.module';
 export * from './components/calendar/calendar-range.component';
 // tslint:disable:max-line-length
 export { NbCalendarDayCellComponent } from './components/calendar-kit/components/calendar-day-picker/calendar-day-cell.component';
+export { NbDateTimePickerComponent } from './components/datepicker/date-timepicker.component';
 export { NbCalendarYearPickerComponent } from './components/calendar-kit/components/calendar-year-picker/calendar-year-picker.component';
 export {
   NbCalendarMonthPickerComponent,
@@ -75,6 +76,7 @@ export * from './components/sidebar/sidebar.module';
 export * from './components/sidebar/sidebar.service';
 export * from './components/sidebar/sidebar.component';
 export * from './components/tabset/tabset.module';
+export * from './components/datepicker/date-timepicker.component';
 export * from './components/tabset/tabset.component';
 export * from './components/user/user.module';
 export * from './components/user/user.component';
