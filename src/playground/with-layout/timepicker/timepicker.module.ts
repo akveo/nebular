@@ -16,6 +16,7 @@ import { TimepickerWithSecondsComponent } from './timepicker-with-seconds.compon
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TimepickerFormControlComponent } from './timepicker-form-control.component';
 import { TimepickerNgModelComponent } from './timepicker-ng-model.component';
+import { NbDateFnsDateModule } from '@nebular/date-fns';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { TimepickerNgModelComponent } from './timepicker-ng-model.component';
     CommonModule,
     TimepickerRoutingModule,
     NbTimepickerModule.forRoot({ isTwelveHoursFormat: false }),
+    NbDateFnsDateModule.forRoot({}),
     NbInputModule,
     NbCardModule,
     FormsModule,
