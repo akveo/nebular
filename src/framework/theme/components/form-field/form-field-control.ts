@@ -18,6 +18,7 @@ export abstract class NbFormFieldControl {
   size$: Observable<NbComponentSize>;
   focused$: Observable<boolean>;
   disabled$: Observable<boolean>;
+  fullWidth$: Observable<boolean>;
 }
 
 /*
@@ -32,6 +33,7 @@ export class NbFormFieldControlConfig {
 export interface NbFormControlState {
   status: NbComponentStatus;
   size: NbComponentSize;
+  fullWidth: boolean;
   focused: boolean;
   disabled: boolean;
 }

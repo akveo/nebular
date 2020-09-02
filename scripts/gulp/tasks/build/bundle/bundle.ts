@@ -8,7 +8,6 @@ import { ROLLUP_COMMON_CONFIG } from './rollup-config';
 
 for (const packageName of JS_PACKAGES) {
   task(`bundle:fesm2015:${packageName}`, () => bundleFesm2015Module(packageName));
-  task(`bundle:fesm5:${packageName}`, () => bundleFesm5Module(packageName));
   task(`bundle:umd:${packageName}`, () => bundleUmdModule(packageName));
 }
 
@@ -16,7 +15,6 @@ task(
   'bundle',
   parallel(
     ...JS_PACKAGES.map(packageName => `bundle:fesm2015:${packageName}`),
-    ...JS_PACKAGES.map(packageName => `bundle:fesm5:${packageName}`),
     ...JS_PACKAGES.map(packageName => `bundle:umd:${packageName}`),
   ),
 );
@@ -34,22 +32,11 @@ function bundleFesm2015Module(name: string) {
   });
 }
 
-function bundleFesm5Module(name: string) {
-  return bundle({
-    src: `${LIB_DIR}/${name}/esm5/**/*.js`,
-    moduleName: `nb.${name}`,
-    entry: `${LIB_DIR}/${name}/esm5/index.js`,
-    format: 'es',
-    output: `index.js`,
-    dest: `${LIB_DIR}/${name}/fesm5`,
-  });
-}
-
 function bundleUmdModule(name: string) {
   return bundle({
-    src: `${LIB_DIR}/${name}/esm5/**/*.js`,
+    src: `${LIB_DIR}/${name}/esm2015/**/*.js`,
     moduleName: `nb.${name}`,
-    entry: `${LIB_DIR}/${name}/esm5/index.js`,
+    entry: `${LIB_DIR}/${name}/esm2015/index.js`,
     format: 'umd',
     output: `${name}.umd.js`,
     dest: `${LIB_DIR}/${name}/bundles`,

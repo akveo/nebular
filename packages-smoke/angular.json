@@ -98,7 +98,7 @@
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
-              "tsConfig": "./tsconfig.es2015.json"
+              "tsConfig": "./src/tsconfig.app.es2015.json"
             }
           }
         },
@@ -155,7 +155,7 @@
           "builder": "@angular-devkit/build-angular:server",
           "options": {
             "outputPath": "dist/server",
-            "main": "src/main.server.ts",
+            "main": "server.ts",
             "tsConfig": "src/tsconfig.server.json"
           },
           "configurations": {
@@ -169,6 +169,32 @@
               "sourceMap": false,
               "optimization": true
             }
+          }
+        },
+        "serve-ssr": {
+          "builder": "@nguniversal/builders:ssr-dev-server",
+          "options": {
+            "browserTarget": "packages-smoke:build",
+            "serverTarget": "packages-smoke:server"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "packages-smoke:build:production",
+              "serverTarget": "packages-smoke:server:production"
+            }
+          }
+        },
+        "prerender": {
+          "builder": "@nguniversal/builders:prerender",
+          "options": {
+            "browserTarget": "packages-smoke:build:production",
+            "serverTarget": "packages-smoke:server:production",
+            "routes": [
+              "/"
+            ]
+          },
+          "configurations": {
+            "production": {}
           }
         }
       }

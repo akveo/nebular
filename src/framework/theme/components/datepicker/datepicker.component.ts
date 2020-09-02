@@ -52,9 +52,7 @@ import { convertToBoolProperty, NbBooleanInput } from '../helpers';
 /**
  * The `NbBasePicker` component concentrates overlay manipulation logic.
  * */
-export abstract class NbBasePicker<D, T, P>
-                extends NbDatepicker<T>
-                implements OnInit, OnChanges, AfterViewInit, OnDestroy {
+export abstract class NbBasePicker<D, T, P> extends NbDatepicker<T> {
   /**
    * Datepicker date format. Can be used only with date adapters (moment, date-fns) since native date
    * object doesn't support formatting.
@@ -232,35 +230,6 @@ export abstract class NbBasePicker<D, T, P>
 
   protected abstract get pickerValueChange(): Observable<T>;
 
-  ngOnInit() {
-    this.checkFormat();
-  }
-
-  ngOnChanges(changes: SimpleChanges) {
-    if (changes.format && !changes.format.isFirstChange()) {
-      this.checkFormat();
-    }
-  }
-
-  ngAfterViewInit() {
-    this.init$.next();
-  }
-
-  ngOnDestroy() {
-    this.destroy$.next();
-    this.destroy$.complete();
-    this.hide();
-    this.init$.complete();
-
-    if (this.ref) {
-      this.ref.dispose();
-    }
-
-    if (this.triggerStrategy) {
-      this.triggerStrategy.destroy();
-    }
-  }
-
   /**
    * Datepicker knows nothing about host html input element.
    * So, attach method attaches datepicker to the host input element.
@@ -397,7 +366,8 @@ export abstract class NbBasePicker<D, T, P>
 @Component({
   template: '',
 })
-export class NbBasePickerComponent<D, T, P> extends NbBasePicker<D, T, P> {
+export class NbBasePickerComponent<D, T, P> extends NbBasePicker<D, T, P>
+                                            implements OnInit, OnChanges, AfterViewInit, OnDestroy {
 
   /**
    * Datepicker date format. Can be used only with date adapters (moment, date-fns) since native date
@@ -499,6 +469,35 @@ export class NbBasePickerComponent<D, T, P> extends NbBasePicker<D, T, P> {
               @Optional() @Inject(NB_DATE_SERVICE_OPTIONS) dateServiceOptions,
   ) {
     super(overlay, positionBuilder, triggerStrategyBuilder, cfr, dateService, dateServiceOptions);
+  }
+
+  ngOnInit() {
+    this.checkFormat();
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.format && !changes.format.isFirstChange()) {
+      this.checkFormat();
+    }
+  }
+
+  ngAfterViewInit() {
+    this.init$.next();
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
+    this.hide();
+    this.init$.complete();
+
+    if (this.ref) {
+      this.ref.dispose();
+    }
+
+    if (this.triggerStrategy) {
+      this.triggerStrategy.destroy();
+    }
   }
 
   protected pickerClass: Type<P>;

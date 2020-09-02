@@ -23,10 +23,6 @@ function throwNoDefaultPackError() {
   throw Error('Default pack is not registered.');
 }
 
-function throwIconNotFoundError(name: string, pack: string) {
-  throw Error(`Icon '${name}' is not registered in pack '${pack}'. Check icon name or consider switching icon pack.`);
-}
-
 function throwWrongPackTypeError(name: string, type: string, desiredType: string) {
   throw Error(`Pack '${name}' is not an '${desiredType}' Pack and its type is '${type}'`);
 }
@@ -96,7 +92,7 @@ export class NbIconLibraries {
    *
    * @returns NbIconDefinition
    */
-  getSvgIcon(name: string, pack?: string): NbIconDefinition {
+  getSvgIcon(name: string, pack?: string): NbIconDefinition | null {
     const iconsPack = pack ? this.getPackOrThrow(pack) : this.getDefaultPackOrThrow();
 
     if (iconsPack.type !== NbIconPackType.SVG) {
@@ -104,6 +100,10 @@ export class NbIconLibraries {
     }
 
     const icon = this.getIconFromPack(name, iconsPack);
+
+    if (!icon) {
+      return null;
+    }
 
     return {
       name,
@@ -127,7 +127,7 @@ export class NbIconLibraries {
       throwWrongPackTypeError(iconsPack.name, iconsPack.type, 'Font');
     }
 
-    const icon = this.getIconFromPack(name, iconsPack, false);
+    const icon = this.getIconFromPack(name, iconsPack);
 
     return {
       name,
@@ -144,7 +144,7 @@ export class NbIconLibraries {
    *
    * @returns NbIconDefinition
    */
-  getIcon(name: string, pack?: string): NbIconDefinition {
+  getIcon(name: string, pack?: string): NbIconDefinition | null {
     const iconsPack = pack ? this.getPackOrThrow(pack) : this.getDefaultPackOrThrow();
 
     if (iconsPack.type === NbIconPackType.SVG) {
@@ -179,11 +179,11 @@ export class NbIconLibraries {
     return this.defaultPack;
   }
 
-  protected getIconFromPack(name: string, pack: NbIconPack, shouldThrow = true): NbIcon | string {
-    if (shouldThrow && !pack.icons.has(name)) {
-      throwIconNotFoundError(name, pack.name);
+  protected getIconFromPack(name: string, pack: NbIconPack): NbIcon | string | null {
+    if (pack.icons.has(name)) {
+      return pack.icons.get(name);
     }
 
-    return pack.icons.get(name);
+    return null;
   }
 }

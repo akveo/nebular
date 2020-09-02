@@ -14,7 +14,7 @@ describe('icons-library', () => {
         NbIconLibraries,
       ],
     });
-    iconsLibrary = bed.get(NbIconLibraries);
+    iconsLibrary = bed.inject(NbIconLibraries);
   });
 
   it('should register raw svg icon', () => {
@@ -68,15 +68,13 @@ describe('icons-library', () => {
     expect(icon.type).toEqual('svg');
   });
 
-  it('should throw for unknown svg icon', () => {
+  it('should return null for unknown svg icon', () => {
 
     iconsLibrary.registerSvgPack('super-pack', { home: '<svg><rect></rect></svg>', gear: '<svg></svg>'  });
     iconsLibrary.setDefaultPack('super-pack');
 
 
-    expect(() => iconsLibrary.getSvgIcon('unknown'))
-      // tslint:disable-next-line:max-line-length
-      .toThrowError(`Icon 'unknown' is not registered in pack 'super-pack'. Check icon name or consider switching icon pack.`);
+    expect(iconsLibrary.getSvgIcon('unknown')).toBeNull();
   });
 
   it('should throw for no default pack', () => {
@@ -94,15 +92,13 @@ describe('icons-library', () => {
       .toThrowError(`Pack 'font-pack' is not an 'SVG' Pack and its type is 'font'`);
   });
 
-  it('should throw for wrong pack', () => {
+  it('should return null for wrong pack', () => {
 
     iconsLibrary.registerSvgPack('super-pack', { home: '<svg><rect></rect></svg>', gear: '<svg></svg>'  });
     iconsLibrary.registerFontPack('font-pack');
     iconsLibrary.setDefaultPack('super-pack');
 
-    expect(() => iconsLibrary.getSvgIcon('unknown'))
-      // tslint:disable-next-line:max-line-length
-      .toThrowError(`Icon 'unknown' is not registered in pack 'super-pack'. Check icon name or consider switching icon pack.`);
+    expect(iconsLibrary.getSvgIcon('unknown')).toBeNull();
   });
 
   it('should throw for wrong pack when setting default', () => {

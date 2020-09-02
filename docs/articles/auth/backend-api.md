@@ -4,7 +4,7 @@
   <div class="note-title">Note</div>
   <div class="note-body">
     While this page provides description about the API endpoints required to integrate Nebular Auth module with your backend, you can also save time by purchasing a
-    <a href="https://hubs.ly/H0n4D6G0">
+    <a class="backend-bundle-link" href="https://hubs.ly/H0qxp6h0">
       backend bundle from Akveo Store
     </a>
     for your technology.

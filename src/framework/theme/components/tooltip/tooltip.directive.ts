@@ -14,6 +14,7 @@ import {
   OnInit,
   Output,
   EventEmitter,
+  SimpleChanges,
 } from '@angular/core';
 import { skip, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
@@ -23,6 +24,7 @@ import { NbAdjustment, NbPosition, NbPositionValues, NbAdjustmentValues } from '
 import { NbTrigger } from '../cdk/overlay/overlay-trigger';
 import { NbDynamicOverlay } from '../cdk/overlay/dynamic/dynamic-overlay';
 import { NbDynamicOverlayHandler } from '../cdk/overlay/dynamic/dynamic-overlay-handler';
+import { NbOverlayConfig } from '../cdk/overlay/mapping';
 import { NbTooltipComponent } from './tooltip.component';
 import { NbIconConfig } from '../icon/icon.component';
 
@@ -114,7 +116,16 @@ export class NbTooltipDirective implements OnInit, OnChanges, AfterViewInit, OnD
   static ngAcceptInputType_adjustment: NbAdjustmentValues;
 
   @Input('nbTooltipClass')
-  tooltipClass: string = '';
+  get tooltipClass(): string {
+    return this._tooltipClass;
+  }
+  set tooltipClass(value: string) {
+    if (value !== this.tooltipClass) {
+      this._tooltipClass = value;
+      this.overlayConfig = { panelClass: this.tooltipClass };
+    }
+  }
+  _tooltipClass: string = '';
 
   /**
    * Accepts icon name or icon config object
@@ -143,6 +154,8 @@ export class NbTooltipDirective implements OnInit, OnChanges, AfterViewInit, OnD
 
   @Output()
   nbTooltipShowStateChange = new EventEmitter<{ isShown: boolean }>();
+
+  protected overlayConfig: NbOverlayConfig = { panelClass: this.tooltipClass };
 
   get isShown(): boolean {
     return !!(this.dynamicOverlay && this.dynamicOverlay.isAttached);
@@ -205,6 +218,6 @@ export class NbTooltipDirective implements OnInit, OnChanges, AfterViewInit, OnD
       .adjustment(this.adjustment)
       .content(this.content)
       .context(this.context)
-      .overlayConfig({ panelClass: this.tooltipClass });
+      .overlayConfig(this.overlayConfig);
   }
 }

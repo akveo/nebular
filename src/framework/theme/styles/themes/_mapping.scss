@@ -2286,9 +2286,9 @@ $eva-mapping: (
   select-hero-control-disabled-text-color: text-disabled-color,
 
   datepicker-background-color: background-basic-color-1,
-  datepicker-border-color: border-basic-color-3,
+  datepicker-border-color: border-basic-color-4,
   datepicker-border-style: solid,
-  datepicker-border-width: 0,
+  datepicker-border-width: 0.0625rem,
   datepicker-border-radius: border-radius,
   datepicker-shadow: none,
 
@@ -2734,6 +2734,12 @@ $eva-mapping: (
   toggle-control-disabled-switcher-background-color: color-basic-transparent-600,
   toggle-control-disabled-checked-switcher-checkmark-color: color-basic-100,
   toggle-control-disabled-text-color: text-control-color,
+
+  form-field-tiny-max-width: input-tiny-max-width,
+  form-field-small-max-width: input-small-max-width,
+  form-field-medium-max-width: input-medium-max-width,
+  form-field-large-max-width: input-large-max-width,
+  form-field-giant-max-width: input-giant-max-width,
 
   form-field-addon-basic-text-color: color-basic-600,
   form-field-addon-basic-highlight-text-color: color-primary-500,

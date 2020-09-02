@@ -16,13 +16,15 @@ Nebular modules are distributed as separated `npm` packages:
   - Authentication components (login/register/reset password/restore password).
   - Multiple configurable authentication Strategies (backend connectors).
   - Helpers for token management (storing, passing with HTTP requests, etc).
+- Nebular Auth for Firebase `@nebular/firebase-auth
+  - module for authentication in firebase applications with nebular/auth
 - Nebular Security `@nebular/security` 
   - roles and permissions management.
 - Nebular Moment `@nebular/moment`
 - Nebular date-fns `@nebular/date-fns`
   - modules allowing Nebular components to work with dates with help most popular date libraries. 
 - Admin dashboard starter kit <a href="https://github.com/akveo/ngx-admin" target="_blank">ngx-admin</a> - Angular application based on Nebular modules with beautiful IOT and E-commerce components.
-- <a href="https://hubs.ly/H0n4CXS0">Backend Bundles</a> - backend starter kits connected to ngx-admin UI.
+- <a href="https://hubs.ly/H0qwS6H0">Backend Bundles</a> - backend starter kits connected to ngx-admin UI.
 
 <hr>
 
