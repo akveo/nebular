@@ -11,6 +11,7 @@ import { NbMenuItem } from '@nebular/theme';
   selector: 'nb-menu-badge',
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './menu-badge.component.html',
+  styleUrls: ['./menu-badge.component.scss'],
 })
 export class MenuBadgeComponent {
 
@@ -18,6 +19,10 @@ export class MenuBadgeComponent {
     {
       title: 'Profile',
       expanded: true,
+      badge: {
+        text: '30',
+        status: 'primary',
+      },
       children: [
         {
           title: 'Messages',
