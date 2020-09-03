@@ -97,12 +97,12 @@ import { NB_DOCUMENT } from '../../theme.options';
  *
  * @stacked-example(Twelve hours format showcase, timepicker/timepicker-twelve-hours-format.component)
  *
- * Additionally, you can enable singleColumn property to display a single picker with concatenated time values inside.
- * For such display mode 'step' property controls time values step, e.g.: 11:00, 11:20, 11:40, 12:00 ...'
+ * Additionally, you can enable `singleColumn` property to display a single picker with concatenated time values inside.
+ * For such display mode `step` property controls time values step, e.g.: 11:00, 11:20, 11:40...'
  *
  * @stacked-example(Single column, timepicker/timepicker-single-column.component)
  *
- * You can provide time using formControl and ngModel directives
+ * You can provide time using `formControl` and `ngModel` directives
  * @stacked-example(Form control, timepicker/timepicker-form-control.component)
  *
  * <input [nbTimepicker]="timepicker" isTwelveHoursFormat>
@@ -162,7 +162,7 @@ export class NbTimePickerDirective<D> implements AfterViewInit, ControlValueAcce
   protected _timePickerComponent: NbTimePickerComponent<D>;
 
   /**
-   * Time picker overlay offset
+   * Time picker overlay offset.
    * */
   @Input() overlayOffset = 8;
 
