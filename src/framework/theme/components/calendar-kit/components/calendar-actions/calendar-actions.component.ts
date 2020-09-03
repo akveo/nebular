@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'nb-calendar-actions',
@@ -9,29 +9,38 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
       status="primary"
       size="small"
       (click)="setCurrentTime.emit()">
-      {{ _currentTimeText }}</button>
+      {{ currentTimeText }}</button>
     <button
       nbButton
       status="primary"
       size="small"
       (click)="saveValue.emit()">
-      {{ _applyText }}</button>
+      {{ applyText }}</button>
   `,
   styleUrls: ['./calendar-actions.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NbCalendarActionsComponent {
   @Input() set applyButtonText(value: string) {
     if (value) {
-      this._applyText = value;
+      this._applyButtonText = value;
     }
   };
+  get applyText() {
+    return this._applyButtonText;
+  };
+  protected _applyButtonText = 'ok';
+
   @Input() set currentTimeButtonText(value: string) {
     if (value) {
-      this._currentTimeText = value;
+      this._currentTimeButtonText = value;
     }
   }
-  _applyText: string = 'ok';
-  _currentTimeText: string = 'now';
+  get currentTimeText() {
+    return this._currentTimeButtonText;
+  };
+  _currentTimeButtonText = 'now';
+
   @Output() setCurrentTime: EventEmitter<void> = new EventEmitter();
   @Output() saveValue: EventEmitter<void> = new EventEmitter();
 }

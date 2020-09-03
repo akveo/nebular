@@ -3,13 +3,13 @@
          class="nb-timepicker-container">
   <nb-card-header class="column-header">
     <ng-container *ngIf="singleColumn; else fullTimeHeadersBlock">
-      <div class="text-hint">Time</div>
+      <div class="header-cell">Time</div>
     </ng-container>
     <ng-template #fullTimeHeadersBlock>
-      <div class="text-hint">Hr</div>
-      <div class="text-hint">Min</div>
-      <div *ngIf="withSeconds" class="text-hint">Sec</div>
-      <div *ngIf="isTwelveHoursFormat" class="text-hint">Am/Pm</div>
+      <div class="header-cell">{{ hoursText }}</div>
+      <div class="header-cell">{{ minutesText }}</div>
+      <div *ngIf="withSeconds" class="header-cell">{{ secondsText }}</div>
+      <div *ngIf="isTwelveHoursFormat" class="header-cell">{{ ampmText }}</div>
     </ng-template>
   </nb-card-header>
 

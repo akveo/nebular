@@ -8,6 +8,7 @@ import {
   forwardRef,
   Inject,
   Input,
+  isDevMode,
   Renderer2,
 } from '@angular/core';
 import { filter, map, takeUntil } from 'rxjs/operators';
@@ -29,7 +30,7 @@ import { NbCalendarTimeModelService } from '../calendar-kit/services/calendar-ti
 import { NB_DOCUMENT } from '../../theme.options';
 
 /**
- * The `NbTimePickerDirective` is form control that gives you ability to select time. The timepicker
+ * The `NbTimePickerDirective` is form control that gives you ability to select a time. The timepicker
  * is shown when input receives a `focus` event.
  * ```html
  * <input [nbTimepicker]="timepicker">
@@ -64,12 +65,12 @@ import { NB_DOCUMENT } from '../../theme.options';
  * <div id="native-parse-issue" class="note note-warning">
  * <div class="note-title">Note</div>
  * <div class="note-body">
- * Timepicker use native Date object by default, which doesn't support parsing by custom format.
- * According to the ECMAScript specification the only supported format is a format described by ISO 8061 standard.
+ * Timepicker uses native Date object by default, which doesn't support parsing by custom format.
+ * According to the ECMAScript specification, the only supported format is a format described by ISO 8061 standard.
  * This standard requires date part to be included in the date string,
  * meaning you have to type a date+time in the input.
  * We highly recommend you to use NbDateFnsDateModule or NbMomentDateModule to be able to support time only strings in
- * the timepicker inputs. This modules use date-fns and moment date libraries, which provide capabilities
+ * the timepicker inputs. These modules use date-fns and moment date libraries, which provide capabilities
  * to parse time only strings.
  * See "Formatting Issue" at https://akveo.github.io/nebular/docs/components/datepicker/overview
  * for installation instructions.
@@ -96,7 +97,7 @@ import { NB_DOCUMENT } from '../../theme.options';
  *
  * @stacked-example(Twelve hours format showcase, timepicker/timepicker-twelve-hours-format.component)
  *
- * Additionally you can enable singleColumn property to display a single picker with concatenated time values inside.
+ * Additionally, you can enable singleColumn property to display a single picker with concatenated time values inside.
  * For such display mode 'step' property controls time values step, e.g.: 11:00, 11:20, 11:40, 12:00 ...'
  *
  * @stacked-example(Single column, timepicker/timepicker-single-column.component)
@@ -114,16 +115,16 @@ import { NB_DOCUMENT } from '../../theme.options';
  *
  * @styles
  *
- * timepicker-text-color:
+ * timepicker-cell-text-color:
  * timepicker-hover-background-color:
  * timepicker-hover-text-color:
  * timepicker-focus-background-color:
- * timepicker-text-focus-color:
+ * timepicker-focus-text-color:
  * timepicker-active-background-color:
- * timepicker-text-active-color:
+ * timepicker-active-text-color:
  * timepicker-cell-text-font-size:
+ * timepicker-cell-text-font-family:
  * timepicker-cell-text-font-weight:
- * timepicker-basic-border-color:
  * timepicker-border-color:
  * timepicker-border-style:
  * timepicker-border-width:
@@ -262,7 +263,7 @@ export class NbTimePickerDirective<D> implements AfterViewInit, ControlValueAcce
   }
 
   setupTimepicker() {
-    if (this.dateService.getId() === 'native') {
+    if (this.dateService.getId() === 'native' && isDevMode()) {
       console.warn('Date.parse noes not support parsing time with custom format.' +
         ' See details here https://akveo.github.io/nebular/docs/components/datepicker/overview#native-parse-issue')
     }

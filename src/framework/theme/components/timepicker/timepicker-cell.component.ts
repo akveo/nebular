@@ -21,9 +21,8 @@ import { NbPlatform } from '../cdk/platform/platform-service';
   template: `
     <div #valueContainer>{{ value }}</div>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['./timepicker-cell.component.scss'],
-
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NbTimePickerCellComponent implements AfterViewInit, OnDestroy {
   protected selectedChange$ = new Subject<boolean>();
@@ -62,10 +61,6 @@ export class NbTimePickerCellComponent implements AfterViewInit, OnDestroy {
         take(1),
         takeUntil(merge(this.unselected$, this.destroy$)))
       .subscribe(() =>
-        /**
-         * In order to scroll to selected cell when component opened,
-         * we need to call scrollToElement in runOutsideAngular function
-         */
         this.ngZone.runOutsideAngular(() => this.scrollToElement()));
     }
   }

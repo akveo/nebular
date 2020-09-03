@@ -1,8 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { NbCalendarComponent } from '../calendar/calendar.component';
 import { NbSelectedTimePayload } from '../timepicker/model';
 import { NbDateService } from '../calendar-kit/services/date.service';
 import { NbCalendarTimeModelService } from '../calendar-kit/services/calendar-time-model.service';
+import { NbCalendarSize } from '../calendar-kit/model';
 
 @Component({
   selector: 'nb-calendar-with-time',
@@ -27,6 +28,7 @@ import { NbCalendarTimeModelService } from '../calendar-kit/services/calendar-ti
           (dateChange)="onDateValueChange($event)">
         </nb-base-calendar>
         <div class="timepicker-section"
+             [class.size-large]="isLarge()"
              [class.timepicker-single-column-width]="singleColumn"
              [class.timepicker-multiple-column-width]="!singleColumn">
           <div class="picker-title">{{ title }}</div>
@@ -54,6 +56,7 @@ import { NbCalendarTimeModelService } from '../calendar-kit/services/calendar-ti
     </nb-card>
   `,
   styleUrls: ['./calendar-with-time-container.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NbCalendarWithTimeComponent<D> extends NbCalendarComponent<D> implements OnInit {
   /**
@@ -98,6 +101,7 @@ export class NbCalendarWithTimeComponent<D> extends NbCalendarComponent<D> imple
   @Input() currentTimeButtonText: string;
 
   constructor(protected dateService: NbDateService<D>,
+              protected cd: ChangeDetectorRef,
               protected calendarTimeModelService: NbCalendarTimeModelService<D>,
   ) {
     super();
@@ -148,5 +152,9 @@ export class NbCalendarWithTimeComponent<D> extends NbCalendarComponent<D> imple
    * */
   showSeconds(): boolean {
     return this.withSeconds && !this.isTwelveHoursFormat;
+  }
+
+  isLarge(): boolean {
+    return this.size === NbCalendarSize.LARGE;
   }
 }

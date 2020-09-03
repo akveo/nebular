@@ -13,7 +13,7 @@ import { Component } from '@angular/core';
       <nb-card-body>
         <input nbInput placeholder="Pick Date" [nbDatepicker]="dateTimePicker">
         <nb-date-timepicker
-          [title]="'Title'"
+          size="large"
           withSeconds
           #dateTimePicker></nb-date-timepicker>
       </nb-card-body>

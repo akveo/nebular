@@ -26,6 +26,14 @@
       border-radius: 0;
     }
 
+    .timepicker-section.size-large nb-list-item {
+      height: nb-theme(calendar-day-cell-large-height);
+    }
+
+    .timepicker-section.size-large .header-cell {
+      height: nb-theme(calendar-weekday-large-height);
+    }
+
     .timepicker-section {
       @include nb-ltr(border-left, $border);
       @include nb-rtl(border-right, $border);

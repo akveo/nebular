@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 @mixin nb-timepicker-theme() {
-  $border: nb-theme(timepicker-border-width) nb-theme(timepicker-border-style) nb-theme(timepicker-basic-border-color);
+  $border: nb-theme(timepicker-border-width) nb-theme(timepicker-border-style) nb-theme(timepicker-border-color);
   .nb-timepicker-container {
     width: nb-theme(timepicker-container-width);
     height: nb-theme(timepicker-container-height);
@@ -21,16 +21,17 @@
 
       &:focus {
         background-color: nb-theme(timepicker-focus-background-color);
-        color: nb-theme(timepicker-text-focus-color);
+        color: nb-theme(timepicker-focus-text-color);
       }
 
       &.selected {
         background-color: nb-theme(timepicker-active-background-color);
-        color: nb-theme(timepicker-text-active-color);
+        color: nb-theme(timepicker-active-text-color);
       }
 
-      color: nb-theme(timepicker-text-color);
+      color: nb-theme(timepicker-cell-text-color);
       font-size: nb-theme(timepicker-cell-text-font-size);
+      font-family: nb-theme(timepicker-cell-text-font-family);
       height: nb-theme(timepicker-cell-height);
       line-height: nb-theme(timepicker-cell-text-line-height);
       font-weight: nb-theme(timepicker-cell-text-font-weight);
@@ -55,8 +56,13 @@
       }
     }
 
-    .text-hint {
-      padding: nb-theme(timepicker-header-cell-padding);
+    .header-cell {
+      color: nb-theme(timepicker-header-cell-text-color);
+      font-size: nb-theme(timepicker-header-cell-text-font-size);
+      font-family: nb-theme(timepicker-header-cell-text-font-family);
+      height: nb-theme(timepicker-header-cell-height);
+      line-height: nb-theme(timepicker-header-cell-text-line-height);
+      font-weight: nb-theme(timepicker-header-cell-text-font-weight);
 
       &:not(:last-child) {
         @include nb-ltr(border-right, $border);

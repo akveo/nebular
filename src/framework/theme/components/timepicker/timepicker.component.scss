@@ -41,9 +41,11 @@
   padding: 0;
 }
 
-.text-hint {
+.header-cell {
   width: 100%;
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .actions-footer {

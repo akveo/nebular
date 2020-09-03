@@ -28,7 +28,6 @@ export class NbDateFnsDateService extends NbNativeDateService {
     @Optional() @Inject(NB_DATE_SERVICE_OPTIONS) options,
   ) {
     super(locale);
-    this.setLocale(locale);
     this.options = options || {};
   }
 
@@ -53,6 +52,6 @@ export class NbDateFnsDateService extends NbNativeDateService {
   }
 
   getDateFormat(): string {
-    return this.getLocaleTimeFormat();
+    return 'YYYY-MM-dd';
   }
 }

@@ -1,4 +1,13 @@
-import { Component, ComponentFactoryResolver, Inject, Input, OnInit, Optional, Type } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ComponentFactoryResolver,
+  Inject,
+  Input,
+  OnInit,
+  Optional,
+  Type,
+} from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { convertToBoolProperty, NbBooleanInput } from '../helpers';
@@ -15,6 +24,7 @@ import { NB_DATE_SERVICE_OPTIONS } from './datepicker.directive';
 @Component({
   selector: 'nb-date-timepicker',
   template: '',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NbDateTimePickerComponent<D> extends NbBasePickerComponent<D, D, NbCalendarWithTimeComponent<D>>
                                           implements OnInit {
@@ -103,6 +113,10 @@ export class NbDateTimePickerComponent<D> extends NbBasePickerComponent<D, D, Nb
         this.dateService.getTwentyFourHoursFormat();
     }
     super.patchWithInputs();
+
+    if (this.picker.cd) {
+      this.picker.cd.markForCheck();
+    }
   }
 
   protected get pickerValueChange(): Observable<any> {

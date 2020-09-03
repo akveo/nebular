@@ -146,6 +146,10 @@ export class NbTimePickerComponent<D> implements OnChanges, OnInit {
    */
   @Input() showFooter: boolean = true;
   @Input() applyButtonText: string;
+  @Input() hoursText = 'Hr';
+  @Input() minutesText = 'Min';
+  @Input() secondsText = 'Sec';
+  @Input() ampmText = 'Am/Pm';
   @Input() currentTimeButtonText: string;
 
   /**
