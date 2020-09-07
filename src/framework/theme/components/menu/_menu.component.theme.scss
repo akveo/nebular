@@ -64,8 +64,8 @@
         color: nb-theme(menu-item-icon-color);
       }
 
-      nb-badge {
-        border-radius: nb-theme(badge-menu-item-border-radius);
+      nb-badge.dot-mode {
+        padding: nb-theme(menu-item-badge-padding);
       }
     }
 

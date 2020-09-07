@@ -29,6 +29,11 @@
   left: 0;
 }
 
+:host(.position-middle) {
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
 :host(.position-start) {
   @include nb-ltr(left, 0);
   @include nb-rtl(right, 0);

@@ -44,9 +44,9 @@ import { NbIconConfig } from '../icon/icon.component';
     <ng-template #projectedContent>
       <ng-content></ng-content>
     </ng-template>
-
-    <nb-badge *ngIf="badgeText || dot"
-              [text]="dot ? '' : badgeText"
+    <nb-badge *ngIf="badgeText || badgeDot"
+              [text]="badgeText"
+              [dotMode]="badgeDot"
               [status]="badgeStatus"
               [position]="badgePosition">
     </nb-badge>
@@ -98,15 +98,15 @@ export class NbActionComponent {
    * @type boolean
    */
   @Input()
-  @HostBinding('class.dot')
-  get dot(): boolean {
-    return this._dot;
+  @HostBinding('class.badge-dot')
+  get badgeDot(): boolean {
+    return this._badgeDot;
   }
-  set dot(value: boolean) {
-    this._dot = convertToBoolProperty(value);
+  set badgeDot(value: boolean) {
+    this._badgeDot = convertToBoolProperty(value);
   }
-  private _dot = false;
-  static ngAcceptInputType_dot: NbBooleanInput;
+  protected _badgeDot: boolean;
+  static ngAcceptInputType_badgeDot: NbBooleanInput;
 
   /**
    * Badge text to display
@@ -206,7 +206,6 @@ export class NbActionComponent {
  * actions-giant-padding:
  * actions-giant-text-font-size:
  * badge-dot-border-radius:
- * badge-menu-item-border-radius:
  * badge-dot-tiny-padding:
  * badge-dot-small-padding:
  * badge-dot-medium-padding:

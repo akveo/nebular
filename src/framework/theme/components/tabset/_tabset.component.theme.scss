@@ -32,6 +32,10 @@
       }
     }
 
+    nb-badge.dot-mode {
+      padding: 0.25rem;
+    }
+
     .tab.active {
       .tab-link {
         background-color: nb-theme(tabset-tab-active-background-color);

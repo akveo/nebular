@@ -20,11 +20,12 @@ import { isPlatformBrowser } from '@angular/common';
 import { Router, NavigationEnd } from '@angular/router';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { takeUntil, filter, map } from 'rxjs/operators';
-import { NbMenuInternalService, NbMenuItem, NbMenuBag, NbMenuService, NbBadgeItem } from './menu.service';
+import { NbMenuInternalService, NbMenuItem, NbMenuBag, NbMenuService } from './menu.service';
 import { convertToBoolProperty, NbBooleanInput } from '../helpers';
 import { NB_WINDOW } from '../../theme.options';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { NbLayoutDirectionService } from '../../services/direction.service';
+import { NbBadgeItem } from '../badge/model';
 
 export enum NbToggleStates {
   Expanded = 'expanded',

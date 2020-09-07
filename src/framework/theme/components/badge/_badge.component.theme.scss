@@ -12,6 +12,10 @@
     font-weight: nb-theme(badge-text-font-weight);
     line-height: nb-theme(badge-text-line-height);
     padding: nb-theme(badge-padding);
+
+    &.dot-mode {
+      border-radius: nb-theme(badge-dot-border-radius);
+    }
   }
 
   @each $status in nb-get-statuses() {

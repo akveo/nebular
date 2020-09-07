@@ -23,35 +23,34 @@
         font-size: nb-theme(actions-#{$size}-icon-height);
       }
 
-      &.dot {
+      &.badge-dot {
         nb-badge {
           padding: nb-theme(badge-dot-#{$size}-padding);
-          border-radius: nb-theme(badge-dot-border-radius);
 
           &.position-top {
-            top: nb-theme(badge-dot-#{$size}-top);
+            top: nb-theme(action-badge-#{$size}-dot-mode-position-top-offset);
           }
 
           &.position-bottom {
-            bottom: nb-theme(badge-dot-#{$size}-bottom);
+            bottom: nb-theme(action-badge-#{$size}-dot-mode-position-bottom-offset);
           }
 
           &.position-right {
-            right: nb-theme(badge-dot-#{$size}-right);
+            right: nb-theme(action-badge-#{$size}-dot-mode-position-rigth-offset);
           }
 
           &.position-left {
-            left: nb-theme(badge-dot-#{$size}-left);
+            left: nb-theme(action-badge-#{$size}-dot-mode-position-left-offset);
           }
 
           &.position-start {
-            @include nb-ltr(left, nb-theme(badge-dot-#{$size}-left));
-            @include nb-rtl(right, nb-theme(badge-dot-#{$size}-right));
+            @include nb-ltr(left, nb-theme(action-badge-#{$size}-dot-mode-position-left-offset));
+            @include nb-rtl(right, nb-theme(action-badge-#{$size}-dot-mode-position-rigth-offset));
           }
 
           &.position-end {
-            @include nb-ltr(right, nb-theme(badge-dot-#{$size}-right));
-            @include nb-rtl(left, nb-theme(badge-dot-#{$size}-left));
+            @include nb-ltr(right, nb-theme(action-badge-#{$size}-dot-mode-position-rigth-offset));
+            @include nb-rtl(left, nb-theme(action-badge-#{$size}-dot-mode-position-left-offset));
           }
         }
       }

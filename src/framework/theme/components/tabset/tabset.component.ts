@@ -57,6 +57,20 @@ export class NbTabComponent {
   @Input() tabId: string;
 
   /**
+   * Use Dot-mode
+   * @type {boolean}
+   */
+  @Input()
+  get dotMode(): boolean {
+    return this._dotMode;
+  }
+  set dotMode(val: boolean) {
+    this._dotMode = convertToBoolProperty(val);
+  }
+  protected _dotMode: boolean;
+  static ngAcceptInputType_dotMode: NbBooleanInput;
+
+  /**
    * Tab icon name or icon config object
    * @type {string | NbIconConfig}
    */
@@ -261,8 +275,9 @@ export class NbTabComponent {
           <nb-icon *ngIf="tab.tabIcon" [config]="tab.tabIcon"></nb-icon>
           <span *ngIf="tab.tabTitle" class="tab-text">{{ tab.tabTitle }}</span>
         </a>
-        <nb-badge *ngIf="tab.badgeText"
+        <nb-badge *ngIf="tab.badgeText || tab.dotMode"
           [text]="tab.badgeText"
+          [dotMode]="tab.dotMode"
           [status]="tab.badgeStatus"
           [position]="tab.badgePosition">
         </nb-badge>
