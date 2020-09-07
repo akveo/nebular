@@ -33,7 +33,9 @@
     }
 
     nb-badge.dot-mode {
-      padding: 0.25rem;
+      margin-left: nb-theme(tabset-tab-dot-mode-margin);
+      margin-right: nb-theme(tabset-tab-dot-mode-margin);
+      padding: nb-theme(tabset-tab-dot-mode-padding);
     }
 
     .tab.active {
