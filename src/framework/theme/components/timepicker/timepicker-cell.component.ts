@@ -56,6 +56,9 @@ export class NbTimePickerCellComponent implements AfterViewInit, OnDestroy {
 
   ngAfterViewInit(): void {
     if (this.selected) {
+      // Since we render timepicker in the overlay, at the moment this hook called,
+      // timepicker could be not fully rendered and placed. Because of it, we're waiting for Angular
+      // to finish change detection run and only then scroll to the selected cell.
       this.ngZone.onStable
       .pipe(
         take(1),
