@@ -89,7 +89,7 @@ import { NB_DOCUMENT } from '../../theme.options';
  * ```
  * @stacked-example(Time picker with seconds, timepicker/timepicker-with-seconds.component)
  *
- * To force timepicker work in 12 hours format, use `twelveHoursFormat` input
+ * To force timepicker work in 12 hours format, use `twelveHoursFormat` input.
  * By default, timepicker choose 12 or 24 formats based on application locale standards
  *
  * ```html
