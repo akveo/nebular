@@ -318,7 +318,7 @@ export class NbTimePickerDirective<D> implements AfterViewInit, ControlValueAcce
     .pipe(filter(() => this.isOpen))
     .subscribe(() => {
       this.inputValue = this.lastInputValue || '';
-      this.hide()
+      this.hide();
     });
   }
 
