@@ -26,7 +26,6 @@ export class NbFileUploadService {
     };
 
     reader.onerror = (ev) => {
-      console.log(ev);
     };
 
     return fileItem;
