@@ -15,17 +15,17 @@
       }
 
       &:hover {
-        background-color: nb-theme(timepicker-hover-background-color);
-        color: nb-theme(timepicker-hover-text-color);
+        background-color: nb-theme(timepicker-cell-hover-background-color);
+        color: nb-theme(timepicker-cell-hover-text-color);
       }
 
       &:focus {
-        background-color: nb-theme(timepicker-focus-background-color);
-        color: nb-theme(timepicker-focus-text-color);
+        background-color: nb-theme(timepicker-cell-focus-background-color);
+        color: nb-theme(timepicker-cell-focus-text-color);
       }
 
       &.selected {
-        background-color: nb-theme(timepicker-active-background-color);
+        background-color: nb-theme(timepicker-cell-active-background-color);
         color: nb-theme(timepicker-cell-active-text-color);
       }
 

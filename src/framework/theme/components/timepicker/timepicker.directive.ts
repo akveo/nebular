@@ -119,22 +119,29 @@ import { NB_DOCUMENT } from '../../theme.options';
  * @styles
  *
  * timepicker-cell-text-color:
- * timepicker-hover-background-color:
- * timepicker-hover-text-color:
- * timepicker-focus-background-color:
- * timepicker-focus-text-color:
- * timepicker-active-background-color:
+ * timepicker-cell-hover-background-color:
+ * timepicker-cell-hover-text-color:
+ * timepicker-cell-focus-background-color:
+ * timepicker-cell-focus-text-color:
+ * timepicker-cell-active-background-color:
  * timepicker-cell-active-text-color:
  * timepicker-cell-text-font-size:
  * timepicker-cell-text-font-family:
+ * timepicker-cell-text-line-height:
  * timepicker-cell-text-font-weight:
+ * timepicker-cell-height:
+ * timepicker-header-cell-text-color:
+ * timepicker-header-cell-text-font-size:
+ * timepicker-header-cell-text-font-family:
+ * timepicker-header-cell-height:
+ * timepicker-header-cell-text-line-height:
+ * timepicker-header-cell-text-font-weight:
  * timepicker-border-color:
  * timepicker-border-style:
  * timepicker-border-width:
  * timepicker-scrollbar-color:
  * timepicker-scrollbar-background-color:
  * timepicker-scrollbar-width:
- * timepicker-cell-height:
  * timepicker-single-column-width:
  * timepicker-multiple-column-width:
  * timepicker-title-height:
