@@ -44,6 +44,7 @@ export class NbDateTimePickerComponent<D> extends NbBasePickerComponent<D, D, Nb
       this.visibleDate = date;
       this.picker.visibleDate = date;
       this.picker.date = date;
+      this.picker.cd.markForCheck();
     }
   }
 
