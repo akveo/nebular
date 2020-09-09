@@ -113,7 +113,7 @@ export class NbCalendarWithTimeComponent<D> extends NbCalendarComponent<D> imple
   @ViewChild(NbTimePickerComponent) timepicker: NbTimePickerComponent<D>;
 
   constructor(protected dateService: NbDateService<D>,
-              protected cd: ChangeDetectorRef,
+              public cd: ChangeDetectorRef,
               protected calendarTimeModelService: NbCalendarTimeModelService<D>,
   ) {
     super();
