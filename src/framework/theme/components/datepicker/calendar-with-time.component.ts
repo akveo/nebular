@@ -1,9 +1,19 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  Input,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { NbCalendarComponent } from '../calendar/calendar.component';
 import { NbSelectedTimePayload } from '../timepicker/model';
 import { NbDateService } from '../calendar-kit/services/date.service';
 import { NbCalendarTimeModelService } from '../calendar-kit/services/calendar-time-model.service';
 import { NbCalendarSize } from '../calendar-kit/model';
+import { NbPortalOutletDirective } from '../cdk/overlay/mapping';
+import { NbTimePickerComponent } from '../timepicker/timepicker.component';
 
 @Component({
   selector: 'nb-calendar-with-time',
@@ -33,7 +43,6 @@ import { NbCalendarSize } from '../calendar-kit/model';
              [class.timepicker-multiple-column-width]="!singleColumn">
           <div class="picker-title">{{ title }}</div>
           <nb-timepicker
-            #timepicker
             (onSelectTime)="onTimeChange($event)"
             [date]="date"
             [twelveHoursFormat]="twelveHoursFormat"
@@ -42,7 +51,7 @@ import { NbCalendarSize } from '../calendar-kit/model';
             [singleColumn]="singleColumn"
             [step]="step">
           </nb-timepicker>
-          <ng-container [ngTemplateOutlet]="timepicker.portal.templateRef"></ng-container>
+          <ng-container nbPortalOutlet></ng-container>
         </div>
       </nb-card-body>
       <nb-card-footer class="picker-footer">
@@ -58,7 +67,7 @@ import { NbCalendarSize } from '../calendar-kit/model';
   styleUrls: ['./calendar-with-time-container.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NbCalendarWithTimeComponent<D> extends NbCalendarComponent<D> implements OnInit {
+export class NbCalendarWithTimeComponent<D> extends NbCalendarComponent<D> implements OnInit, AfterViewInit {
   /**
    * Defines selected date.
    * */
@@ -100,6 +109,9 @@ export class NbCalendarWithTimeComponent<D> extends NbCalendarComponent<D> imple
 
   @Input() currentTimeButtonText: string;
 
+  @ViewChild(NbPortalOutletDirective) portalOutlet: NbPortalOutletDirective;
+  @ViewChild(NbTimePickerComponent) timepicker: NbTimePickerComponent<D>;
+
   constructor(protected dateService: NbDateService<D>,
               protected cd: ChangeDetectorRef,
               protected calendarTimeModelService: NbCalendarTimeModelService<D>,
@@ -111,6 +123,10 @@ export class NbCalendarWithTimeComponent<D> extends NbCalendarComponent<D> imple
     if (!this.date) {
       this.date = this.calendarTimeModelService.getResetTime();
     }
+  }
+
+  ngAfterViewInit() {
+    this.portalOutlet.attachTemplatePortal(this.timepicker.portal);
   }
 
   onDateValueChange(date: D): void {
