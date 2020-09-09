@@ -385,6 +385,7 @@ export class NbTimePickerDirective<D> implements AfterViewInit, ControlValueAcce
 
     const isValidDate: boolean = this.dateService.isValidDateString(value, this.timepicker.timeFormat);
     if (isValidDate) {
+      this.lastInputValue = value;
       this.timepicker.date = this.dateService.parse(value, this.timepicker.timeFormat);
     }
   }
