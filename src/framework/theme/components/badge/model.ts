@@ -11,5 +11,5 @@ export interface NbBadgeItem {
   text?: string;
   position?: NbBadgePosition;
   status?: NbComponentStatus;
-  dotMode?: boolean;
+  badgeDot?: boolean;
 }
