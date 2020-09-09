@@ -42,8 +42,8 @@ export class NbCalendarTimeModelService<D> {
     return n.toString();
   }
 
-  buildDateFormat(isTwelveHoursFormat: boolean, withSeconds: boolean = false): string {
-    if (isTwelveHoursFormat) {
+  buildDateFormat(twelveHoursFormat: boolean, withSeconds: boolean = false): string {
+    if (twelveHoursFormat) {
       return `${this.dateService.getDateFormat()} ${this.dateService.getTwelveHoursFormat()}`
     }
 

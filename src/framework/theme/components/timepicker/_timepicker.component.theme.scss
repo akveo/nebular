@@ -26,7 +26,7 @@
 
       &.selected {
         background-color: nb-theme(timepicker-active-background-color);
-        color: nb-theme(timepicker-active-text-color);
+        color: nb-theme(timepicker-cell-active-text-color);
       }
 
       color: nb-theme(timepicker-cell-text-color);

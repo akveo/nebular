@@ -26,12 +26,12 @@ describe('NbTimePickerComponent', () => {
   });
 
   it('should set correct time format', () => {
-    timePicker.isTwelveHoursFormat = false;
+    timePicker.twelveHoursFormat = false;
     expect(timePicker.buildTimeFormat()).toEqual('HH:mm');
   });
 
   it('should set twelve hours format', () => {
-    timePicker.isTwelveHoursFormat = true;
+    timePicker.twelveHoursFormat = true;
     timePicker.withSeconds = true;
     expect(timePicker.buildTimeFormat()).toEqual('hh:mm:ss a');
   });

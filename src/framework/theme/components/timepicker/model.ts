@@ -9,7 +9,7 @@ import { InjectionToken } from '@angular/core';
 export const NB_TIME_PICKER_CONFIG = new InjectionToken('NB_TIME_PICKER_CONFIG');
 
 export interface NbTimePickerConfig {
-  isTwelveHoursFormat?: boolean,
+  twelveHoursFormat?: boolean,
   format?: string,
 }
 

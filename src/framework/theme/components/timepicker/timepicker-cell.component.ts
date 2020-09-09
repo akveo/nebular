@@ -60,14 +60,14 @@ export class NbTimePickerCellComponent implements AfterViewInit, OnDestroy {
       .pipe(
         take(1),
         takeUntil(merge(this.unselected$, this.destroy$)))
-      .subscribe(() =>
-        this.ngZone.runOutsideAngular(() => this.scrollToElement()));
+      .subscribe(() => this.scrollToElement());
     }
   }
 
-  scrollToElement() {
+  protected scrollToElement() {
     if (this.valueContainerElement && this.platformService.isBrowser) {
-      this.valueContainerElement.nativeElement.scrollIntoView({block: 'center'});
+      this.ngZone.runOutsideAngular(() =>
+        this.valueContainerElement.nativeElement.scrollIntoView({block: 'center'}));
     }
   }
 

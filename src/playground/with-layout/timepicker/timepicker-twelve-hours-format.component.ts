@@ -16,7 +16,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
                type="text"
                [nbTimepicker]="timepicker"/>
         <nb-timepicker
-          #timepicker="nbTimepicker" isTwelveHoursFormat></nb-timepicker>
+          #timepicker="nbTimepicker" twelveHoursFormat></nb-timepicker>
       </nb-card-body>
     </nb-card>
   `,

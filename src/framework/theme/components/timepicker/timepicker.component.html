@@ -9,7 +9,7 @@
       <div class="header-cell">{{ hoursText }}</div>
       <div class="header-cell">{{ minutesText }}</div>
       <div *ngIf="withSeconds" class="header-cell">{{ secondsText }}</div>
-      <div *ngIf="isTwelveHoursFormat" class="header-cell">{{ ampmText }}</div>
+      <div *ngIf="twelveHoursFormat" class="header-cell">{{ ampmText }}</div>
     </ng-template>
   </nb-card-header>
 
@@ -66,7 +66,7 @@
           </nb-timepicker-cell>
         </nb-list-item>
       </nb-list>
-      <nb-list *ngIf="isTwelveHoursFormat" class="values-list">
+      <nb-list *ngIf="twelveHoursFormat" class="values-list">
         <nb-list-item
           class="list-item am-pm-item"
           [class.selected]="isSelectedDayPeriod(dayPeriod)"

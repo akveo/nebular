@@ -72,7 +72,8 @@ import { NB_DOCUMENT } from '../../theme.options';
  * We highly recommend you to use NbDateFnsDateModule or NbMomentDateModule to be able to support time only strings in
  * the timepicker inputs. These modules use date-fns and moment date libraries, which provide capabilities
  * to parse time only strings.
- * See "Formatting Issue" at https://akveo.github.io/nebular/docs/components/datepicker/overview
+ * See "Formatting Issue" at
+ * <a href="https://akveo.github.io/nebular/docs/components/datepicker/overview#formatting-issue">Date picker docs</a>
  * for installation instructions.
  * </div>
  * </div>
@@ -80,7 +81,7 @@ import { NB_DOCUMENT } from '../../theme.options';
  *
  * ### Usage
  *
- * With Seconds
+ * To show seconds column along with hours and minutes use `withSeconds` input
  *
  * ```html
  * <input [nbTimepicker]="timepicker">
@@ -88,29 +89,31 @@ import { NB_DOCUMENT } from '../../theme.options';
  * ```
  * @stacked-example(Time picker with seconds, timepicker/timepicker-with-seconds.component)
  *
- * You can specify twelve hours format:
+ * To force timepicker work in 12 hours format, use `twelveHoursFormat` input
+ * By default, timepicker choose 12 or 24 formats based on application locale standards
  *
  * ```html
- * <input [nbTimepicker]="timepicker" isTwelveHoursFormat>
+ * <input [nbTimepicker]="timepicker" twelveHoursFormat>
  * <nb-timepicker #timepicker></nb-datepicker>
  * ```
  *
  * @stacked-example(Twelve hours format showcase, timepicker/timepicker-twelve-hours-format.component)
  *
- * Additionally, you can enable `singleColumn` property to display a single picker with concatenated time values inside.
- * For such display mode `step` property controls time values step, e.g.: 11:00, 11:20, 11:40...'
+ * A single column picker with options value as time and minute, so users won’t be able to pick
+ * hours and minutes individually.
+ * You can control options minutes offset via `step` input, e.g.: 11:00, 11:20, 11:40...'
  *
  * @stacked-example(Single column, timepicker/timepicker-single-column.component)
  *
- * You can provide time using `formControl` and `ngModel` directives
+ * Timepicker support forms and reactive forms API so you can provide value using `formControl` and `ngModel` directives
  * @stacked-example(Form control, timepicker/timepicker-form-control.component)
  *
- * <input [nbTimepicker]="timepicker" isTwelveHoursFormat>
+ * <input [nbTimepicker]="timepicker" twelveHoursFormat>
  * <nb-timepicker #timepicke [formControl]="formControl"></nb-datepicker>
  *
  * @stacked-example(NgModel, timepicker/timepicker-ng-model.component)
  *
- * <input [nbTimepicker]="timepicker" isTwelveHoursFormat>
+ * <input [nbTimepicker]="timepicker" twelveHoursFormat>
  * <nb-timepicker #timepicke [ngModel]="date"></nb-datepicker>
  *
  * @styles
@@ -121,7 +124,7 @@ import { NB_DOCUMENT } from '../../theme.options';
  * timepicker-focus-background-color:
  * timepicker-focus-text-color:
  * timepicker-active-background-color:
- * timepicker-active-text-color:
+ * timepicker-cell-active-text-color:
  * timepicker-cell-text-font-size:
  * timepicker-cell-text-font-family:
  * timepicker-cell-text-font-weight:
@@ -186,6 +189,7 @@ export class NbTimePickerDirective<D> implements AfterViewInit, ControlValueAcce
 
   /**
    * Returns html input element.
+   * @docs-private
    * */
   get input(): HTMLInputElement {
     return this.hostRef.nativeElement;
@@ -193,6 +197,7 @@ export class NbTimePickerDirective<D> implements AfterViewInit, ControlValueAcce
 
   /**
    * Determines is timepicker overlay opened.
+   * @docs-private
    * */
   get isOpen(): boolean {
     return this.overlayRef && this.overlayRef.hasAttached();
@@ -200,6 +205,7 @@ export class NbTimePickerDirective<D> implements AfterViewInit, ControlValueAcce
 
   /**
    * Determines is timepicker overlay closed.
+   * @docs-private
    * */
   get isClosed(): boolean {
     return !this.isOpen;
@@ -219,6 +225,7 @@ export class NbTimePickerDirective<D> implements AfterViewInit, ControlValueAcce
 
   /**
    * Returns host input value.
+   * @docs-private
    * */
   get inputValue(): string {
     return this.input.value;
@@ -253,6 +260,7 @@ export class NbTimePickerDirective<D> implements AfterViewInit, ControlValueAcce
 
   /**
    * Attaches picker to the timepicker portal.
+   * @docs-private
    * */
   protected attachToOverlay() {
     if (!this.overlayRef) {
@@ -366,6 +374,7 @@ export class NbTimePickerDirective<D> implements AfterViewInit, ControlValueAcce
 
   /**
    * Parses input value and write if it isn't null.
+   * @docs-private
    * */
   protected handleInputChange(value: string) {
     if (this.dateService.getId() === 'native') {

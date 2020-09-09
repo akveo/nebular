@@ -30,7 +30,7 @@ import { NbDateFnsDateModule } from '@nebular/date-fns';
   imports: [
     CommonModule,
     TimepickerRoutingModule,
-    NbTimepickerModule.forRoot({ isTwelveHoursFormat: false }),
+    NbTimepickerModule.forRoot({ twelveHoursFormat: false }),
     NbDateFnsDateModule.forRoot({}),
     NbInputModule,
     NbCardModule,

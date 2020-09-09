@@ -53,14 +53,14 @@ export class NbDateTimePickerComponent<D> extends NbBasePickerComponent<D, D, Nb
   @Input() currentTimeButtonText: string;
 
   @Input()
-  get isTwelveHoursFormat(): boolean {
-    return this._isTwelveHoursFormat;
+  get twelveHoursFormat(): boolean {
+    return this._twelveHoursFormat;
   }
-  set isTwelveHoursFormat(value: boolean) {
-    this._isTwelveHoursFormat = convertToBoolProperty(value);
+  set twelveHoursFormat(value: boolean) {
+    this._twelveHoursFormat = convertToBoolProperty(value);
   }
-  _isTwelveHoursFormat: boolean;
-  static ngAcceptInputType_isTwelveHoursFormat: NbBooleanInput;
+  _twelveHoursFormat: boolean;
+  static ngAcceptInputType_twelveHoursFormat: NbBooleanInput;
 
   @Input()
   get withSeconds(): boolean {
@@ -99,14 +99,14 @@ export class NbDateTimePickerComponent<D> extends NbBasePickerComponent<D, D, Nb
 
   protected patchWithInputs() {
     this.picker.singleColumn = this.singleColumn;
-    this.picker.isTwelveHoursFormat = this.isTwelveHoursFormat;
+    this.picker.twelveHoursFormat = this.twelveHoursFormat;
     this.picker.withSeconds = this.withSeconds;
     this.picker.step = this.step;
     this.picker.title = this.title;
     this.picker.applyButtonText = this.applyButtonText;
     this.picker.currentTimeButtonText = this.currentTimeButtonText;
 
-    if (this.isTwelveHoursFormat) {
+    if (this.twelveHoursFormat) {
       this.picker.timeFormat = this.dateService.getTwelveHoursFormat();
     } else {
       this.picker.timeFormat = this.withSeconds ? this.dateService.getTwentyFourHoursFormatWithSeconds() :
@@ -114,9 +114,7 @@ export class NbDateTimePickerComponent<D> extends NbBasePickerComponent<D, D, Nb
     }
     super.patchWithInputs();
 
-    if (this.picker.cd) {
-      this.picker.cd.markForCheck();
-    }
+    this.picker.cd.markForCheck();
   }
 
   protected get pickerValueChange(): Observable<any> {
@@ -133,9 +131,9 @@ export class NbDateTimePickerComponent<D> extends NbBasePickerComponent<D, D, Nb
 
   protected buildTimeFormat(): string {
     if (this.singleColumn) {
-      return this.calendarWithTimeModelService.buildDateFormat(this.isTwelveHoursFormat);
+      return this.calendarWithTimeModelService.buildDateFormat(this.twelveHoursFormat);
     } else {
-      return this.calendarWithTimeModelService.buildDateFormat(this.isTwelveHoursFormat, this.withSeconds);
+      return this.calendarWithTimeModelService.buildDateFormat(this.twelveHoursFormat, this.withSeconds);
     }
   }
 }

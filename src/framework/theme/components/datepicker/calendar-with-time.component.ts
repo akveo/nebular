@@ -36,7 +36,7 @@ import { NbCalendarSize } from '../calendar-kit/model';
             #timepicker
             (onSelectTime)="onTimeChange($event)"
             [date]="date"
-            [isTwelveHoursFormat]="isTwelveHoursFormat"
+            [twelveHoursFormat]="twelveHoursFormat"
             [withSeconds]="showSeconds()"
             [showFooter]="false"
             [singleColumn]="singleColumn"
@@ -67,7 +67,7 @@ export class NbCalendarWithTimeComponent<D> extends NbCalendarComponent<D> imple
   /**
    * Defines 12 hours format like '07:00 PM'.
    * */
-  @Input() isTwelveHoursFormat: boolean;
+  @Input() twelveHoursFormat: boolean;
 
   /**
    * Show seconds in timepicker.
@@ -151,7 +151,7 @@ export class NbCalendarWithTimeComponent<D> extends NbCalendarComponent<D> imple
    * We don't show seconds with twelve hours format
    * */
   showSeconds(): boolean {
-    return this.withSeconds && !this.isTwelveHoursFormat;
+    return this.withSeconds && !this.twelveHoursFormat;
   }
 
   isLarge(): boolean {
