@@ -18,7 +18,7 @@ import { convertToBoolProperty, NbBooleanInput } from '../helpers';
     </ng-container>
     <div *ngIf="hover" style="z-index: 3" class="actions">
       <button nbButton shape="round">
-        <nb-icon icon="edit-outline" (click)="onEdit.emit()"></nb-icon>
+        <nb-icon icon="edit-outline"></nb-icon>
       </button>
       <button
         nbButton
