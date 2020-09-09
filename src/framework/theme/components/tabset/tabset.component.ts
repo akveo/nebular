@@ -57,7 +57,7 @@ export class NbTabComponent {
   @Input() tabId: string;
 
   /**
-   * Use Dot-mode
+   * Use badge dot mode
    * @type {boolean}
    */
   @Input()

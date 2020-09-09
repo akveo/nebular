@@ -94,7 +94,7 @@ export class NbActionComponent {
   static ngAcceptInputType_disabled: NbBooleanInput;
 
   /**
-   * Use dot badge mode
+   * Use badge dot mode
    * @type boolean
    */
   @Input()

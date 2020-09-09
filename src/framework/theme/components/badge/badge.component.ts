@@ -108,7 +108,7 @@ export class NbBadgeComponent {
   protected _position: NbBadgePosition = this._defaultPosition;
 
   /**
-   * Use dot-mode
+   * Use badge dot mode
    * @type boolean
    */
   @Input()
