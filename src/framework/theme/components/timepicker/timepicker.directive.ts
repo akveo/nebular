@@ -243,6 +243,7 @@ export class NbTimePickerDirective<D> implements AfterViewInit, ControlValueAcce
     }
     this.triggerStrategy = this.createTriggerStrategy();
     this.subscribeOnTriggers();
+    this.subscribeToBlur();
   }
 
   show() {
@@ -356,13 +357,10 @@ export class NbTimePickerDirective<D> implements AfterViewInit, ControlValueAcce
       map(() => this.inputValue),
       takeUntil(this.destroy$),
     )
-    .subscribe((value: string) => {
-      this.handleInputChange(value);
-      this.onBlur();
-    });
+    .subscribe((value: string) => this.handleInputChange(value));
   }
 
-  protected onBlur() {
+  protected subscribeToBlur() {
     merge(
       this.timepicker.blur,
       fromEvent(this.input, 'blur').pipe(
