@@ -1,0 +1,58 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+@import '../../styles/core/mixins';
+
+.nb-timepicker-container {
+  overflow: hidden;
+  margin-bottom: 0;
+}
+
+.values-list {
+  width: 100%;
+  overflow: hidden;
+
+  &:hover {
+    overflow-y: auto;
+  }
+
+  scroll-snap-type: y proximity;
+}
+
+.list-item {
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+.picker-body {
+  display: flex;
+  width: 100%;
+  flex: 1 0 0;
+  overflow: hidden;
+}
+
+.column-header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 0;
+}
+
+.header-cell {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.actions-footer {
+  width: 100%;
+}
+
+nb-card-header,
+nb-card-footer {
+  flex: 0 0 auto;
+}
