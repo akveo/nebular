@@ -151,6 +151,7 @@ export const NB_DATE_SERVICE_OPTIONS = new InjectionToken('Date service options'
  *     NbDatepickerModule,
  *   ],
  * })
+ *
  * export class PageModule { }
  * ```
  * ### Usage
@@ -176,13 +177,26 @@ export const NB_DATE_SERVICE_OPTIONS = new InjectionToken('Date service options'
  *
  * @stacked-example(Validation, datepicker/datepicker-validation.component)
  *
+ * If you need to pick a time along with the date, you can use nb-date-timepicker
+ *
+ * ```html
+ * <input nbInput placeholder="Pick Date" [nbDatepicker]="dateTimePicker">
+ * <nb-date-timepicker withSeconds #dateTimePicker</nb-date-timepicker>
+ * ```
+ * @stacked-example(Date timepicker, datepicker/date-timepicker-showcase.component)
+ *
+ * A single column picker with options value as time and minute, so users won’t be able to pick
+ * hours and minutes individually.
+ *
+ * @stacked-example(Date timepicker single column, datepicker/date-timepicker-single-column.component)
+
  * The `NbDatepickerComponent` supports date formatting:
  *
  * ```html
  * <input [nbDatepicker]="datepicker">
  * <nb-datepicker #datepicker format="MM\dd\yyyy"></nb-datepicker>
  * ```
- *
+ * <span id="formatting-issue"></span>
  * ## Formatting Issue
  *
  * By default, datepicker uses angulars `LOCALE_ID` token for localization and `DatePipe` for dates formatting.
