@@ -535,6 +535,15 @@ export const structure = [
         ],
       },
       {
+        type: 'tabs',
+        name: 'Timepicker',
+        icon: 'timepicker.svg',
+        source: [
+          'NbTimePickerDirective',
+          'NbTimePickerComponent',
+        ],
+      },
+      {
         type: 'group',
         name: 'Modals & Overlays',
       },

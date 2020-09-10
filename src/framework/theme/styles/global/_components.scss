@@ -41,6 +41,7 @@
 @import '../../components/tree-grid/tree-grid.component.theme';
 @import '../../components/icon/icon.component.theme';
 @import '../../components/form-field/form-field.component.theme';
+@import '../../components/timepicker/timepicker.component.theme';
 
 @mixin nb-theme-components() {
 
@@ -58,6 +59,7 @@
   @include nb-actions-theme();
   @include nb-search-theme();
   @include nb-spinner-theme();
+  @include nb-timepicker-theme();
   @include nb-checkbox-theme();
   @include nb-toggle-theme();
   @include nb-progress-bar-theme();

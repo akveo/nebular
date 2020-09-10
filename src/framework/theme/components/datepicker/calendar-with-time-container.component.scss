@@ -1,0 +1,41 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+*/
+@import '../../styles/core/mixins';
+
+:host {
+  ::ng-deep nb-card.nb-timepicker-container {
+    flex: 1 0 0;
+    border-radius: 0;
+    width: auto;
+    border-right: 0;
+    border-bottom: 0;
+  }
+
+  .picker-footer {
+    @include nb-ltr(padding-left, 0.625rem);
+    @include nb-rtl(padding-right, 0.625rem);
+  }
+}
+
+.picker-body {
+  align-items: stretch;
+  display: flex;
+  padding: 0;
+
+  nb-base-calendar {
+    ::ng-deep nb-card {
+      border-radius: 0;
+    }
+  }
+}
+.calendar-with-time {
+  overflow: hidden;
+}
+
+.timepicker-section {
+  display: flex;
+  flex-direction: column;
+}

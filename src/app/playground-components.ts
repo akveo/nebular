@@ -450,6 +450,18 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         name: 'Datepicker Showcase',
       },
       {
+        path: 'date-timepicker-showcase.component',
+        link: '/datepicker/date-timepicker-showcase.component',
+        component: 'DateTimepickerShowcaseComponent',
+        name: 'Date Timepicker Showcase',
+      },
+      {
+        path: 'date-timepicker-single-column.component',
+        link: '/datepicker/date-timepicker-single-column.component',
+        component: 'DateTimepickerSingleColumnComponent',
+        name: 'Date Timepicker Single Column',
+      },
+      {
         path: 'datepicker-validation.component',
         link: '/datepicker/datepicker-validation.component',
         component: 'DatepickerValidationComponent',
@@ -460,6 +472,47 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         link: '/datepicker/rangepicker-showcase.component',
         component: 'RangepickerShowcaseComponent',
         name: 'Rangepicker Showcase',
+      },
+    ],
+  },
+  {
+    path: 'timepicker',
+    children: [
+      {
+        path: 'timepicker-showcase.component',
+        link: '/timepicker/timepicker-showcase.component',
+        component: 'TimepickerShowcaseComponent',
+        name: 'Timepicker Showcase',
+      },
+      {
+        path: 'timepicker-twelve-hours-format.component',
+        link: '/timepicker/timepicker-twelve-hours-format.component',
+        component: 'TimepickerTwelveHoursFormatComponent',
+        name: 'Timepicker Twelve Hours Format',
+      },
+      {
+        path: 'timepicker-single-column.component',
+        link: '/timepicker/timepicker-single-column.component',
+        component: 'TimepickerSingleColumnComponent',
+        name: 'Timepicker Single Column',
+      },
+      {
+        path: 'timepicker-with-seconds.component',
+        link: '/timepicker/timepicker-with-seconds.component',
+        component: 'TimepickerWithSecondsComponent',
+        name: 'Timepicker With Seconds',
+      },
+      {
+        path: 'timepicker-form-control.component',
+        link: '/timepicker/timepicker-form-control.component',
+        component: 'TimepickerFormControlComponent',
+        name: 'Timepicker Form Control',
+      },
+      {
+        path: 'timepicker-ng-model.component',
+        link: '/timepicker/timepicker-ng-model.component',
+        component: 'TimepickerNgModelComponent',
+        name: 'Timepicker Ng Model',
       },
     ],
   },
