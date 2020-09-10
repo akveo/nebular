@@ -1,0 +1,10 @@
+@import '../../styles/core/mixins';
+
+:host {
+  .files-container {
+    display: flex;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+}

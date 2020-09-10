@@ -1,0 +1,21 @@
+@import '../../styles/core/mixins';
+
+:host {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+
+  .file-name {
+    flex: 1;
+  }
+
+  img {
+    height: auto;
+    width: 10%;
+  }
+
+  nb-progress-bar {
+    width: 100%;
+  }
+
+}

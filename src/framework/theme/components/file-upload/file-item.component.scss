@@ -1,0 +1,28 @@
+@import '../../styles/core/mixins';
+
+:host {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+
+  img {
+    height: 100%;
+    width: 100%;
+  }
+
+  nb-icon {
+    width: 100%;
+  }
+
+  nb-progress-bar {
+    position: absolute;
+    width: 85%;
+  }
+
+  .actions {
+    position: absolute;
+  }
+}

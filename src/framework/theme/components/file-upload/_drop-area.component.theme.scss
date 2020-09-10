@@ -1,0 +1,49 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
+@import '../../styles/core/mixins';
+
+@mixin nb-drop-area-theme() {
+  nb-drop-area {
+    background-color: nb-theme(file-upload-background-color);
+    height: nb-theme(file-upload-grag-zonde-height);
+    border-radius: nb-theme(file-upload-grag-zonde-border-radius);
+    border: nb-theme(file-upload-grag-zonde-border-width) solid nb-theme(file-upload-grag-zonde-border-color);
+
+    &.disabled {
+      background-color: #f7fafb;
+
+      nb-icon,
+      span {
+        color: #cbd9e2;
+      }
+    }
+
+    nb-icon {
+      margin-bottom: 0.5rem;
+      height: nb-theme(file-upload-grag-zonde-icon-height);
+    }
+
+    span {
+      line-height: nb-theme(file-upload-grag-zonde-text-font-line-height);
+      font-weight: bold;
+    }
+
+    nb-icon,
+    span {
+      color: nb-theme(file-upload-grag-zonde-color);
+    }
+
+    &.dragover {
+      border-color: nb-theme(file-upload-dragover-border-color);
+      background-color: nb-theme(file-upload-hover-background-color);
+
+      & span, & > nb-icon:first-child {
+        color: nb-theme(file-upload-dragover-text-color);
+      }
+    }
+  }
+}
