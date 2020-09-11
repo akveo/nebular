@@ -28,7 +28,6 @@ export class NbDateFnsDateService extends NbNativeDateService {
     @Optional() @Inject(NB_DATE_SERVICE_OPTIONS) options,
   ) {
     super(locale);
-    this.setLocale(locale);
     this.options = options || {};
   }
 
@@ -50,5 +49,9 @@ export class NbDateFnsDateService extends NbNativeDateService {
 
   getWeekNumber(date: Date): number {
     return getWeek(date, this.options.getWeekOptions);
+  }
+
+  getDateFormat(): string {
+    return 'YYYY-MM-dd';
   }
 }
