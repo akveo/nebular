@@ -34,6 +34,7 @@ export * from './components/calendar/calendar-range.module';
 export * from './components/calendar/calendar-range.component';
 // tslint:disable:max-line-length
 export { NbCalendarDayCellComponent } from './components/calendar-kit/components/calendar-day-picker/calendar-day-cell.component';
+export { NbDateTimePickerComponent } from './components/datepicker/date-timepicker.component';
 export { NbCalendarYearPickerComponent } from './components/calendar-kit/components/calendar-year-picker/calendar-year-picker.component';
 export {
   NbCalendarMonthPickerComponent,
@@ -58,8 +59,9 @@ export * from './components/calendar/calendar-range-month-cell.component';
 export * from './components/calendar/calendar-range-year-cell.component';
 export { NbCalendarMonthModelService } from './components/calendar-kit/services/calendar-month-model.service';
 export * from './components/calendar-kit/services/calendar-year-model.service';
+export * from './components/calendar-kit/services/calendar-time-model.service';
 export { NbNativeDateService } from './components/calendar-kit/services/native-date.service';
-export { NbDateService } from './components/calendar-kit/services/date.service';
+export { NbDateService, NbDayPeriod } from './components/calendar-kit/services/date.service';
 export * from './components/calendar-kit/model';
 export * from './components/calendar-kit/calendar-kit.module';
 export * from './components/layout/layout.module';
@@ -74,6 +76,7 @@ export * from './components/sidebar/sidebar.module';
 export * from './components/sidebar/sidebar.service';
 export * from './components/sidebar/sidebar.component';
 export * from './components/tabset/tabset.module';
+export * from './components/datepicker/date-timepicker.component';
 export * from './components/tabset/tabset.component';
 export * from './components/user/user.module';
 export * from './components/user/user.component';
@@ -178,6 +181,12 @@ export * from './components/window/window-ref';
 export * from './components/window/window.options';
 export * from './components/window/window.component';
 export * from './components/window/windows-container.component';
+export * from './components/timepicker/timepicker.module';
+export * from './components/timepicker/model';
+export * from './components/timepicker/timepicker.component';
+export * from './components/timepicker/timepicker.directive';
+export * from './components/timepicker/timepicker.directive';
+
 export * from './components/datepicker/datepicker.module';
 export * from './components/datepicker/datepicker.directive';
 export * from './components/datepicker/datepicker-adapter';

@@ -1,3 +1,13 @@
+<a name="6.0.1"></a>
+## [6.0.1](https://github.com/akveo/nebular/compare/v6.0.0...v6.0.1) (2020-08-31)
+
+
+### Bug Fixes
+
+* **dynamic overlay:** prevent multiple onStable subscriptions ([#2494](https://github.com/akveo/nebular/issues/2494)) ([f22e87d](https://github.com/akveo/nebular/commit/f22e87d))
+
+
+
 <a name="6.0.0"></a>
 # [6.0.0](https://github.com/akveo/nebular/compare/v5.1.0...v6.0.0) (2020-07-31)
 

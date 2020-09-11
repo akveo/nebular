@@ -66,6 +66,10 @@ const routes: Route[] = [
         loadChildren: () => import('./datepicker/datepicker.module').then(m => m.DatepickerModule),
       },
       {
+        path: 'timepicker',
+        loadChildren: () => import('./timepicker/timepicker.module').then(m => m.TimepickerModule),
+      },
+      {
         path: 'dialog',
         loadChildren: () => import('./dialog/dialog.module').then(m => m.DialogModule),
       },
