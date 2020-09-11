@@ -134,7 +134,6 @@ $eva-mapping: (
 
   menu-item-border-radius: 0,
   menu-item-padding: 0.75rem 1rem,
-  menu-item-badge-padding: 0.3rem,
 
   menu-item-hover-background-color: menu-background-color,
   menu-item-hover-cursor: pointer,
@@ -205,7 +204,7 @@ $eva-mapping: (
   tabset-tab-disabled-background-color: transparent,
   tabset-tab-disabled-text-color: text-disabled-color,
   tabset-tab-disabled-underline-color: transparent,
-  tabset-tab-dot-mode-margin: 0.5rem,
+  tabset-tab-dot-mode-offset: 0.75rem,
   tabset-tab-dot-mode-padding: 0.25rem,
 
   tabset-divider-color: divider-color,
@@ -1395,43 +1394,34 @@ $eva-mapping: (
   checkbox-control-disabled-checked-background-color: color-basic-transparent-600,
   checkbox-control-disabled-checked-border-color: color-basic-transparent-600,
 
+  badge-dot-mode-border-radius: 0.5rem,
+  badge-dot-mode-padding: 0.3rem,
+
+  action-badge-dot-mode-border-radius: 0.5rem,
+  action-badge-dot-tiny-padding: 0.13rem,
+  action-badge-dot-small-padding: 0.2rem,
+  action-badge-dot-medium-padding: 0.3rem,
+  action-badge-dot-large-padding: 0.44rem,
+  action-badge-dot-giant-padding: 0.5rem,
+
+  action-tiny-badge-dot-mode-vertical-offset: 0.1rem,
+  action-small-badge-dot-mode-vertical-offset: 0.19rem,
+  action-medium-badge-dot-mode-vertical-offset: 0.28rem,
+  action-large-badge-dot-mode-vertical-offset: 0.45rem,
+  action-giant-badge-dot-mode-vertical-offset: 0.5rem,
+
+  action-tiny-badge-dot-mode-horizontal-offset: 1.35rem,
+  action-small-badge-dot-mode-horizontal-offset: 1.44rem,
+  action-medium-badge-dot-mode-horizontal-offset: 1.5rem,
+  action-giant-badge-dot-mode-horizontal-offset: 1.7rem,
+  action-large-badge-dot-mode-horizontal-offset: 1.7rem,
+
   badge-border-radius: border-radius,
   badge-text-font-family: text-button-font-family,
   badge-text-font-size: text-button-tiny-font-size,
   badge-text-font-weight: text-button-font-weight,
   badge-text-line-height: text-button-tiny-line-height,
   badge-padding: 0.25rem 0.4rem,
-
-  badge-dot-border-radius: 0.5rem,
-  badge-dot-tiny-padding: 0.13rem,
-  badge-dot-small-padding: 0.2rem,
-  badge-dot-medium-padding: 0.3rem,
-  badge-dot-large-padding: 0.44rem,
-  badge-dot-giant-padding: 0.5rem,
-
-  action-badge-tiny-dot-mode-position-top-offset: 0.1rem,
-  action-badge-small-dot-mode-position-top-offset: 0.19rem,
-  action-badge-medium-dot-mode-position-top-offset: 0.28rem,
-  action-badge-large-dot-mode-position-top-offset: 0.45rem,
-  action-badge-giant-dot-mode-position-top-offset: 0.5rem,
-
-  action-badge-tiny-dot-mode-position-bottom-offset: 0.1rem,
-  action-badge-small-dot-mode-position-bottom-offset: 0.19rem,
-  action-badge-medium-dot-mode-position-bottom-offset: 0.28rem,
-  action-badge-large-dot-mode-position-bottom-offset: 0.45rem,
-  action-badge-giant-dot-mode-position-bottom-offset: 0.5rem,
-
-  action-badge-tiny-dot-mode-position-left-offset: 1.35rem,
-  action-badge-small-dot-mode-position-left-offset: 1.44rem,
-  action-badge-medium-dot-mode-position-left-offset: 1.5rem,
-  action-badge-giant-dot-mode-position-left-offset: 1.7rem,
-  action-badge-large-dot-mode-position-left-offset: 1.7rem,
-
-  action-badge-tiny-dot-mode-position-rigth-offset: 1.35rem,
-  action-badge-small-dot-mode-position-rigth-offset: 1.44rem,
-  action-badge-medium-dot-mode-position-rigth-offset: 1.5rem,
-  action-badge-giant-dot-mode-position-rigth-offset: 1.7rem,
-  action-badge-large-dot-mode-position-rigth-offset: 1.7rem,
 
   badge-basic-background-color: background-basic-color-2,
   badge-basic-text-color: text-basic-color,

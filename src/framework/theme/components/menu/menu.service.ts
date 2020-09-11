@@ -11,7 +11,7 @@ import { Observable, BehaviorSubject, ReplaySubject, Subject } from 'rxjs';
 import { share } from 'rxjs/operators';
 import { isFragmentContain, isFragmentEqual, isUrlPathContain, isUrlPathEqual } from './url-matching-helpers';
 import { NbIconConfig } from '../icon/icon.component';
-import { NbBadgeItem } from '../badge/model';
+import { NbBadge } from '../badge/model';
 
 export interface NbMenuBag { tag: string; item: NbMenuItem }
 
@@ -24,6 +24,8 @@ const itemSelect$ = new ReplaySubject<NbMenuBag>(1);
 const itemHover$ = new ReplaySubject<NbMenuBag>(1);
 const submenuToggle$ = new ReplaySubject<NbMenuBag>(1);
 const collapseAll$ = new ReplaySubject<{ tag: string }>(1);
+
+export type MenuBadgeConfig = Omit<NbBadge, 'position'>;
 
 // TODO: check if we need both URL and LINK
 /**
@@ -64,7 +66,7 @@ export class NbMenuItem {
    * Badge component
    * @type {boolean}
    */
-  badge?: NbBadgeItem;
+  badge?: MenuBadgeConfig;
   /**
    * Children items
    * @type {List<NbMenuItem>}

@@ -34,7 +34,7 @@ export class MenuBadgeComponent {
         {
           title: 'Notifications',
           badge: {
-            badgeDot: true,
+            dotMode: true,
             status: 'warning',
           },
         },

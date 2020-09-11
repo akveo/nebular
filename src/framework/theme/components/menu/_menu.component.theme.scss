@@ -63,10 +63,6 @@
       .expand-state {
         color: nb-theme(menu-item-icon-color);
       }
-
-      nb-badge.dot-mode {
-        padding: nb-theme(menu-item-badge-padding);
-      }
     }
 
     $divider: nb-theme(menu-item-divider-width) nb-theme(menu-item-divider-style) nb-theme(menu-item-divider-color);

@@ -14,7 +14,8 @@
     padding: nb-theme(badge-padding);
 
     &.dot-mode {
-      border-radius: nb-theme(badge-dot-border-radius);
+      padding: nb-theme(badge-dot-mode-padding);
+      border-radius: nb-theme(badge-dot-mode-border-radius);
     }
   }
 

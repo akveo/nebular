@@ -46,7 +46,6 @@ import { MenuBadgeComponent } from './menu-badge.component';
     NbCardModule,
     MenuRoutingModule,
     NbButtonModule,
-    NbBadgeModule,
   ],
 })
 export class MenuModule {}

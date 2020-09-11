@@ -29,9 +29,9 @@
   left: 0;
 }
 
-:host(.position-middle) {
+:host(.position-center) {
   top: 50%;
-  transform: translate(-50%, -50%);
+  transform: translateY(-50%);
 }
 
 :host(.position-start) {

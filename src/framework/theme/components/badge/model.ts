@@ -7,9 +7,9 @@ import { NbBadgePosition } from './badge.component';
 import { NbComponentStatus } from '../component-status';
 
 
-export interface NbBadgeItem {
+export interface NbBadge {
   text?: string;
   position?: NbBadgePosition;
   status?: NbComponentStatus;
-  badgeDot?: boolean;
+  dotMode?: boolean;
 }

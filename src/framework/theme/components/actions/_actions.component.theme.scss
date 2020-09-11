@@ -23,39 +23,39 @@
         font-size: nb-theme(actions-#{$size}-icon-height);
       }
 
-      &.badge-dot {
-        nb-badge {
-          padding: nb-theme(badge-dot-#{$size}-padding);
 
-          &.position-top {
-            top: nb-theme(action-badge-#{$size}-dot-mode-position-top-offset);
-          }
+      nb-badge.dot-mode {
+        padding: nb-theme(action-badge-dot-#{$size}-padding);
 
-          &.position-bottom {
-            bottom: nb-theme(action-badge-#{$size}-dot-mode-position-bottom-offset);
-          }
+        &.position-top {
+          top: nb-theme(action-badge-#{$size}-dot-mode-vertical-offset);
+        }
 
-          &.position-right {
-            right: nb-theme(action-badge-#{$size}-dot-mode-position-rigth-offset);
-          }
+        &.position-bottom {
+          bottom: nb-theme(action-badge-#{$size}-dot-mode-vertical-offset);
+        }
 
-          &.position-left {
-            left: nb-theme(action-badge-#{$size}-dot-mode-position-left-offset);
-          }
+        &.position-right {
+          right: nb-theme(action-#{$size}-badge-dot-mode-horizontal-offset);
+        }
 
-          &.position-start {
-            @include nb-ltr(left, nb-theme(action-badge-#{$size}-dot-mode-position-left-offset));
-            @include nb-rtl(right, nb-theme(action-badge-#{$size}-dot-mode-position-rigth-offset));
-          }
+        &.position-left {
+          left: nb-theme(action-#{$size}-badge-dot-mode-horizontal-offset);
+        }
 
-          &.position-end {
-            @include nb-ltr(right, nb-theme(action-badge-#{$size}-dot-mode-position-rigth-offset));
-            @include nb-rtl(left, nb-theme(action-badge-#{$size}-dot-mode-position-left-offset));
-          }
+        &.position-start {
+          @include nb-ltr(left, nb-theme(action-#{$size}-badge-dot-mode-horizontal-offset));
+          @include nb-rtl(right, nb-theme(action-#{$size}-badge-dot-mode-horizontal-offset));
+        }
+
+        &.position-end {
+          @include nb-ltr(right, nb-theme(action-#{$size}-badge-dot-mode-horizontal-offset));
+          @include nb-rtl(left, nb-theme(action-#{$size}-badge-dot-mode-horizontal-offset));
         }
       }
     }
   }
+
 
   nb-action {
     $divider: nb-theme(actions-divider-width) nb-theme(actions-divider-style) nb-theme(actions-divider-color);
@@ -63,8 +63,8 @@
     @include nb-rtl(border-right, $divider);
 
     &:first-child {
-      @include nb-ltr(border-left, none!important);
-      @include nb-rtl(border-right, none!important);
+      @include nb-ltr(border-left, none !important);
+      @include nb-rtl(border-right, none !important);
     }
 
     nb-icon {

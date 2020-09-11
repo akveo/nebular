@@ -8,9 +8,10 @@ import { Component, HostBinding, Input } from '@angular/core';
 
 import { NbComponentStatus } from '../component-status';
 import { convertToBoolProperty, emptyStatusWarning } from '../helpers';
+import { NbBadge } from './model';
 
-export type NbBadgePhysicalPosition = 'top left' | 'top right' | 'bottom left' | 'bottom right' | 'middle right' | 'middle left';
-export type NbBadgeLogicalPosition = 'top start' | 'top end' | 'bottom start' | 'bottom end' | 'middle start'| 'middle end';
+export type NbBadgePhysicalPosition = 'top left' | 'top right' | 'bottom left' | 'bottom right' | 'center right' | 'center left';
+export type NbBadgeLogicalPosition = 'top start' | 'top end' | 'bottom start' | 'bottom end' | 'center start'| 'center end';
 export type NbBadgePosition = NbBadgePhysicalPosition | NbBadgeLogicalPosition;
 
 
@@ -81,7 +82,7 @@ export type NbBadgePosition = NbBadgePhysicalPosition | NbBadgeLogicalPosition;
   styleUrls: ['./badge.component.scss'],
   template: `{{dotMode ? '' : text}}`,
 })
-export class NbBadgeComponent {
+export class NbBadgeComponent implements NbBadge {
 
   /**
    * Text to display
@@ -109,6 +110,7 @@ export class NbBadgeComponent {
 
   /**
    * Use badge dot mode
+   * Overrides text in badge
    * @type boolean
    */
   @Input()
@@ -203,8 +205,8 @@ export class NbBadgeComponent {
     return this.position.includes('end');
   }
 
-  @HostBinding('class.position-middle')
-  get middle(): boolean {
-    return this.position.includes('middle');
+  @HostBinding('class.position-center')
+  get center(): boolean {
+    return this.position.includes('center');
   }
 }

@@ -98,7 +98,6 @@ export class NbActionComponent {
    * @type boolean
    */
   @Input()
-  @HostBinding('class.badge-dot')
   get badgeDot(): boolean {
     return this._badgeDot;
   }
@@ -170,7 +169,7 @@ export class NbActionComponent {
  * @stacked-example(Full Width, action/action-width.component)
  *
  * Action dot mode
- * @stacked-example(Action Dot Mode, action/action-dot-mode.component)
+ * @stacked-example(Action badge in dot mode, action/action-dot-mode.component)
  *
  * @styles
  *
@@ -205,32 +204,32 @@ export class NbActionComponent {
  * actions-giant-icon-height:
  * actions-giant-padding:
  * actions-giant-text-font-size:
- * badge-dot-border-radius:
- * badge-dot-tiny-padding:
- * badge-dot-small-padding:
- * badge-dot-medium-padding:
- * badge-dot-large-padding:
- * badge-dot-giant-padding:
- * badge-dot-tiny-top:
- * badge-dot-small-top:
- * badge-dot-medium-top:
- * badge-dot-large-top:
- * badge-dot-giant-top:
- * badge-dot-tiny-bottom:
- * badge-dot-small-bottom:
- * badge-dot-medium-bottom:
- * badge-dot-large-bottom:
- * badge-dot-giant-bottom:
- * badge-dot-tiny-left:
- * badge-dot-small-left:
- * badge-dot-medium-left:
- * badge-dot-large-left:
- * badge-dot-giant-left:
- * badge-dot-tiny-right:
- * badge-dot-small-right:
- * badge-dot-medium-right:
- * badge-dot-large-right:
- * badge-dot-giant-right:
+ * badge-dot-mode-border-radius:
+ * action-badge-dot-tiny-padding:
+ * action-badge-dot-small-padding:
+ * action-badge-dot-medium-padding:
+ * action-badge-dot-large-padding:
+ * action-badge-dot-giant-padding:
+ * action-badge-dot-tiny-top:
+ * action-badge-dot-small-top:
+ * action-badge-dot-medium-top:
+ * action-badge-dot-large-top:
+ * action-badge-dot-giant-top:
+ * action-badge-dot-tiny-bottom:
+ * action-badge-dot-small-bottom:
+ * action-badge-dot-medium-bottom:
+ * action-badge-dot-large-bottom:
+ * action-badge-dot-giant-bottom:
+ * action-badge-dot-tiny-left:
+ * action-badge-dot-small-left:
+ * action-badge-dot-medium-left:
+ * action-badge-dot-large-left:
+ * action-badge-dot-giant-left:
+ * action-badge-dot-tiny-right:
+ * action-badge-dot-small-right:
+ * action-badge-dot-medium-right:
+ * action-badge-dot-large-right:
+ * action-badge-dot-giant-right:
  */
 @Component({
   selector: 'nb-actions',
