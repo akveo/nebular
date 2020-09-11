@@ -10,11 +10,11 @@ import {
   QueryList,
   SimpleChanges,
 } from '@angular/core';
+import { Subject } from 'rxjs';
 import { NbComponentSize } from '../component-size';
 import { NbComponentStatus } from '../component-status';
 import { NbButtonAppearance, NbButtonComponent } from '../button/button.component';
 import { takeUntil } from 'rxjs/operators';
-import { Subject } from 'rxjs';
 import { NbComponentShape } from '../component-shape';
 import { convertToBoolProperty, NbBooleanInput } from '../helpers';
 import { NbBaseButtonDirective } from '../button/base-button.directive';
@@ -436,8 +436,6 @@ import { NbBaseButtonDirective } from '../button/base-button.directive';
 export class NbButtonGroupComponent implements OnChanges, AfterContentInit {
   @ContentChildren(NbBaseButtonDirective) buttons: QueryList<NbBaseButtonDirective>;
   protected destroy$: Subject<void> = new Subject<void>();
-  protected _multiple: boolean = false;
-
   /**
    * Button group size, available sizes:
    * `tiny`, `small`, `medium`, `large`, `giant`
@@ -467,6 +465,7 @@ export class NbButtonGroupComponent implements OnChanges, AfterContentInit {
     this._multiple = convertToBoolProperty(value);
   }
 
+  protected _multiple: boolean = false;
   static ngAcceptInputType_multiple: NbBooleanInput;
 
   /**
@@ -522,43 +521,6 @@ export class NbButtonGroupComponent implements OnChanges, AfterContentInit {
 
   static ngAcceptInputType_ghost: NbBooleanInput;
 
-  constructor(protected cd: ChangeDetectorRef) {
-  }
-
-  ngAfterContentInit(): void {
-    this.pathWithInputs();
-    this.buttons.changes
-    .pipe(takeUntil(this.destroy$))
-    .subscribe(() => {
-      this.cd.markForCheck();
-    });
-  }
-
-  ngOnChanges({
-                size,
-                status,
-                shape,
-                multiple,
-                filled,
-                outline,
-                ghost,
-              }: SimpleChanges) {
-    if (size || status || shape || multiple || filled || outline || ghost) {
-      this.pathWithInputs();
-    }
-  }
-
-  pathWithInputs(): void {
-    if (this.buttons) {
-      this.buttons.forEach((item: NbButtonComponent) => {
-        item.appearance = this.appearance;
-        item.status = this.status;
-        item.size = this.size;
-        item.shape = this.shape;
-      });
-    }
-  }
-
   @HostBinding('attr.role') role = 'group';
 
   @HostListener('click', ['$event'])
@@ -577,5 +539,39 @@ export class NbButtonGroupComponent implements OnChanges, AfterContentInit {
         }
       }
     });
+  }
+
+  constructor(protected cd: ChangeDetectorRef) {
+  }
+
+  ngAfterContentInit(): void {
+    this.updateButtonInputs();
+    this.buttons.changes
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(() => {
+      this.updateButtonInputs();
+    });
+  }
+
+  ngOnChanges({
+                size,
+                status,
+                shape,
+                multiple,
+                filled,
+                outline,
+                ghost,
+              }: SimpleChanges) {
+    if (size || status || shape || multiple || filled || outline || ghost) {
+      this.updateButtonInputs();
+    }
+  }
+
+  updateButtonInputs(): void {
+    if (this.buttons) {
+      this.buttons.forEach((item: NbButtonComponent) => {
+        item.updateSmth({appearance: this.appearance, size: this.size, status: this.status, shape: this.shape}, this.cd)
+      });
+    }
   }
 }

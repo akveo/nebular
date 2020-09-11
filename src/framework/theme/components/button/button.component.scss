@@ -5,6 +5,7 @@
  */
 
 @import '../../styles/core/mixins';
+@import './button-mixins';
 
 :host {
   @include nb-button();

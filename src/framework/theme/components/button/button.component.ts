@@ -607,21 +607,6 @@ export class NbButtonComponent extends NbBaseButtonDirective implements AfterVie
     return this.status === 'control';
   }
 
-  @HostBinding('class.shape-rectangle')
-  get rectangle() {
-    return this.shape === 'rectangle';
-  }
-
-  @HostBinding('class.shape-round')
-  get round() {
-    return this.shape === 'round';
-  }
-
-  @HostBinding('class.shape-semi-round')
-  get semiRound() {
-    return this.shape === 'semi-round';
-  }
-
   @HostBinding('class.icon-start')
   get iconLeft(): boolean {
     const el = this.hostElement.nativeElement;
@@ -660,7 +645,7 @@ export class NbButtonComponent extends NbBaseButtonDirective implements AfterVie
     protected cd: ChangeDetectorRef,
     protected zone: NgZone,
   ) {
-    super(renderer, hostElement);
+    super(renderer, hostElement, cd);
   }
 
   ngAfterViewInit() {

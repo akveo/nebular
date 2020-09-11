@@ -4,7 +4,7 @@ import {
   ElementRef,
   HostBinding,
   Input,
-  NgZone,
+  NgZone, Optional,
   Renderer2,
 } from '@angular/core';
 import { convertToBoolProperty, NbBooleanInput } from '../helpers';
@@ -33,6 +33,7 @@ export class NbButtonToggleDirective extends NbBaseButtonDirective {
 
   @HostBinding('class.status-primary')
   get primary() {
+    // If user sets status basic, pressed button should be primary
     return this.status === 'primary' && this.pressed || this.status === 'basic' && this.pressed;
   }
 
@@ -66,27 +67,12 @@ export class NbButtonToggleDirective extends NbBaseButtonDirective {
     return this.status === 'control' && this.pressed;
   }
 
-  @HostBinding('class.shape-rectangle')
-  get rectangle() {
-    return this.shape === 'rectangle';
-  }
-
-  @HostBinding('class.shape-round')
-  get round() {
-    return this.shape === 'round';
-  }
-
-  @HostBinding('class.shape-semi-round')
-  get semiRound() {
-    return this.shape === 'semi-round';
-  }
-
   constructor(
     protected renderer: Renderer2,
     protected hostElement: ElementRef<HTMLElement>,
     protected cd: ChangeDetectorRef,
     protected zone: NgZone,
   ) {
-    super(renderer, hostElement);
+    super(renderer, hostElement, cd);
   }
 }

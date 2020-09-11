@@ -1,9 +1,11 @@
-import { Directive, ElementRef, HostBinding, Input, Renderer2 } from '@angular/core';
+import { ChangeDetectorRef, Directive, ElementRef, HostBinding, Input, Optional, Renderer2 } from '@angular/core';
 import { NbComponentSize } from '../component-size';
 import { NbComponentStatus } from '../component-status';
 import { NbComponentShape } from '../component-shape';
 import { NbButtonAppearance } from './button.component';
 import { convertToBoolProperty, firstChildNotComment, lastChildNotComment, NbBooleanInput } from '../helpers';
+import * as firebase from 'firebase';
+import Operation = firebase.auth.ActionCodeInfo.Operation;
 
 @Directive()
 export abstract class NbBaseButtonDirective {
@@ -37,11 +39,13 @@ export abstract class NbBaseButtonDirective {
   get filled(): boolean {
     return this.appearance === 'filled';
   }
+
   set filled(value: boolean) {
     if (convertToBoolProperty(value)) {
       this.appearance = 'filled';
     }
   }
+
   static ngAcceptInputType_filled: NbBooleanInput;
 
   /**
@@ -52,11 +56,13 @@ export abstract class NbBaseButtonDirective {
   get outline(): boolean {
     return this.appearance === 'outline';
   }
+
   set outline(value: boolean) {
     if (convertToBoolProperty(value)) {
       this.appearance = 'outline';
     }
   }
+
   static ngAcceptInputType_outline: NbBooleanInput;
 
   /**
@@ -68,11 +74,13 @@ export abstract class NbBaseButtonDirective {
 
     return this.appearance === 'ghost';
   }
+
   set ghost(value: boolean) {
     if (convertToBoolProperty(value)) {
       this.appearance = 'ghost';
     }
   }
+
   static ngAcceptInputType_ghost: NbBooleanInput;
 
   /**
@@ -83,9 +91,11 @@ export abstract class NbBaseButtonDirective {
   get fullWidth(): boolean {
     return this._fullWidth;
   }
+
   set fullWidth(value: boolean) {
     this._fullWidth = convertToBoolProperty(value);
   }
+
   private _fullWidth = false;
   static ngAcceptInputType_fullWidth: NbBooleanInput;
 
@@ -98,10 +108,12 @@ export abstract class NbBaseButtonDirective {
   get disabled(): boolean {
     return this._disabled;
   }
+
   set disabled(value: boolean) {
     this._disabled = convertToBoolProperty(value);
     this.renderer.setProperty(this.hostElement.nativeElement, 'disabled', this.disabled);
   }
+
   private _disabled: boolean = false;
   static ngAcceptInputType_disabled: NbBooleanInput;
 
@@ -162,7 +174,25 @@ export abstract class NbBaseButtonDirective {
   protected constructor(
     protected renderer: Renderer2,
     protected hostElement: ElementRef<HTMLElement>,
-  ) {}
+    // @breaking-change @7.0.0  make cd required
+    @Optional() protected cd?: ChangeDetectorRef,
+  ) {
+  }
+
+  updateSmth(config: {
+    appearance: NbButtonAppearance;
+    size: NbComponentSize;
+    shape: NbComponentShape;
+    status: NbComponentStatus
+  }) {
+    this.appearance = config.appearance;
+    this.status = config.status;
+    this.size = config.size;
+    this.shape = config.shape;
+    if (this.cd) {
+      this.cd.markForCheck();
+    }
+  }
 
   get iconElement() {
     const el = this.hostElement.nativeElement;

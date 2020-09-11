@@ -7,9 +7,10 @@
 @import './button-toggle-filled';
 @import './button-toggle-ghost';
 @import './button-toggle-outline';
+@import '../button/button-mixins';
 
 @mixin nb-buttons-toggle-theme() {
-  [nbButtonToggle], [nbButton] {
+  [nbButtonToggle] {
     @include button-theme();
   }
 
