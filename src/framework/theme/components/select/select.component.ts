@@ -723,6 +723,11 @@ export class NbSelectComponent implements OnChanges, AfterViewInit, AfterContent
    **/
   disabled$ = new BehaviorSubject<boolean>(this.disabled);
 
+  /*
+   * @docs-private
+   **/
+  fullWidth$ = new BehaviorSubject<boolean>(this.fullWidth);
+
   constructor(@Inject(NB_DOCUMENT) protected document,
               protected overlay: NbOverlayService,
               protected hostRef: ElementRef<HTMLElement>,
@@ -776,7 +781,7 @@ export class NbSelectComponent implements OnChanges, AfterViewInit, AfterContent
     return this.selectionModel[0].content;
   }
 
-  ngOnChanges({ disabled, status, size}: SimpleChanges) {
+  ngOnChanges({ disabled, status, size, fullWidth }: SimpleChanges) {
     if (disabled) {
       this.disabled$.next(disabled.currentValue);
     }
@@ -785,6 +790,9 @@ export class NbSelectComponent implements OnChanges, AfterViewInit, AfterContent
     }
     if (size) {
       this.size$.next(size.currentValue);
+    }
+    if (fullWidth) {
+      this.fullWidth$.next(fullWidth.currentValue);
     }
   }
 

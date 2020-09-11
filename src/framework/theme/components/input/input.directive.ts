@@ -284,12 +284,15 @@ export class NbInputDirective implements DoCheck, OnChanges, OnInit, AfterViewIn
     }
   }
 
-  ngOnChanges({ status, fieldSize }: SimpleChanges) {
+  ngOnChanges({ status, fieldSize, fullWidth }: SimpleChanges) {
     if (status) {
       this.status$.next(this.status);
     }
     if (fieldSize) {
       this.size$.next(this.fieldSize);
+    }
+    if (fullWidth) {
+      this.fullWidth$.next(this.fullWidth);
     }
   }
 
@@ -408,4 +411,9 @@ export class NbInputDirective implements DoCheck, OnChanges, OnInit, AfterViewIn
    * @docs-private
    **/
   disabled$ = new BehaviorSubject<boolean>(false);
+
+  /*
+   * @docs-private
+   **/
+  fullWidth$ = new BehaviorSubject<boolean>(this.fullWidth);
 }

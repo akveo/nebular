@@ -4,7 +4,7 @@ import { dest, series, src, task } from 'gulp';
 import * as replace from 'gulp-replace';
 import * as log from 'fancy-log';
 
-import { createTsConfigEsm2015, createTsConfigEsm5 } from './ts-configs';
+import { createTsConfigEsm2015 } from './ts-configs';
 import { BUILD_DIR, DEV_SCHEMATICS_PATH, JS_PACKAGES } from '../../config';
 
 task('compile-packages-schematics', () => {
@@ -28,12 +28,8 @@ task('replace-scss-with-css', () => {
 for (const packageName of JS_PACKAGES) {
   task(`compile-${packageName}`, () => {
     const esm2015configFileName = createTsConfigEsm2015(packageName);
-    const esm5configFileName = createTsConfigEsm5(packageName);
 
-    return Promise.all([
-      tsCompile('ngc', ['-p', esm2015configFileName]),
-      tsCompile('ngc', ['-p', esm5configFileName]),
-    ]);
+    return tsCompile('ngc', ['-p', esm2015configFileName]);
   });
 }
 

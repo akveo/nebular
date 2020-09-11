@@ -123,10 +123,10 @@ describe('dynamic-overlay', () => {
         { provide: NbOverlayContainer, useClass: NbOverlayContainerMock },
       ],
     });
-    overlayService = bed.get(NbOverlayService);
-    dynamicOverlayService = bed.get(NbDynamicOverlay);
-    componentFactoryResolver = bed.get(ComponentFactoryResolver);
-    zone = bed.get(NgZone);
+    overlayService = bed.inject(NbOverlayService) as unknown as NbOverlayServiceMock;
+    dynamicOverlayService = bed.inject(NbDynamicOverlay);
+    componentFactoryResolver = bed.inject(ComponentFactoryResolver);
+    zone = bed.inject(NgZone) as unknown as MockNgZone;
   });
 
   beforeEach(() => {
@@ -293,7 +293,7 @@ describe('dynamic-overlay', () => {
 
     expect(instance.content).toBe(newContent);
     expect(renderContentSpy).toHaveBeenCalledTimes(2);
-    expect(updatePositionSpy).toHaveBeenCalledTimes(1);
+    expect(updatePositionSpy).toHaveBeenCalledTimes(2);
   });
 
   it('should set context when shown', () => {
@@ -307,7 +307,7 @@ describe('dynamic-overlay', () => {
 
     expect(instance.context).toBe(newContext);
     expect(renderContentSpy).toHaveBeenCalledTimes(2);
-    expect(updatePositionSpy).toHaveBeenCalledTimes(1);
+    expect(updatePositionSpy).toHaveBeenCalledTimes(2);
   });
 
   it('should set context & content when shown', () => {
@@ -325,7 +325,7 @@ describe('dynamic-overlay', () => {
     expect(instance.context).toBe(newContext);
     expect(instance.content).toBe(newContent);
     expect(renderContentSpy).toHaveBeenCalledTimes(3);
-    expect(updatePositionSpy).toHaveBeenCalledTimes(2);
+    expect(updatePositionSpy).toHaveBeenCalledTimes(4);
   });
 
   it('should set component', () => {

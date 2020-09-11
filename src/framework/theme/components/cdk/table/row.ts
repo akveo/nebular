@@ -10,6 +10,7 @@ import {
   DataRowOutlet,
   HeaderRowOutlet,
   FooterRowOutlet,
+  NoDataRowOutlet,
 } from '@angular/cdk/table';
 
 @Directive({
@@ -29,6 +30,12 @@ export class NbHeaderRowOutletDirective extends HeaderRowOutlet {}
   providers: [{ provide: FooterRowOutlet, useExisting: NbFooterRowOutletDirective }],
 })
 export class NbFooterRowOutletDirective extends FooterRowOutlet {}
+
+@Directive({
+  selector: '[nbNoDataRowOutlet]',
+  providers: [{ provide: NoDataRowOutlet, useExisting: NbNoDataRowOutletDirective }],
+})
+export class NbNoDataRowOutletDirective extends NoDataRowOutlet {}
 
 @Directive({
   selector: '[nbCellOutlet]',
