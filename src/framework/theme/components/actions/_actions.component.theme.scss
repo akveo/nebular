@@ -22,37 +22,6 @@
       nb-icon {
         font-size: nb-theme(actions-#{$size}-icon-height);
       }
-
-
-      nb-badge.dot-mode {
-        padding: nb-theme(action-badge-dot-#{$size}-padding);
-
-        &.position-top {
-          top: nb-theme(action-badge-#{$size}-dot-mode-vertical-offset);
-        }
-
-        &.position-bottom {
-          bottom: nb-theme(action-badge-#{$size}-dot-mode-vertical-offset);
-        }
-
-        &.position-right {
-          right: nb-theme(action-#{$size}-badge-dot-mode-horizontal-offset);
-        }
-
-        &.position-left {
-          left: nb-theme(action-#{$size}-badge-dot-mode-horizontal-offset);
-        }
-
-        &.position-start {
-          @include nb-ltr(left, nb-theme(action-#{$size}-badge-dot-mode-horizontal-offset));
-          @include nb-rtl(right, nb-theme(action-#{$size}-badge-dot-mode-horizontal-offset));
-        }
-
-        &.position-end {
-          @include nb-ltr(right, nb-theme(action-#{$size}-badge-dot-mode-horizontal-offset));
-          @include nb-rtl(left, nb-theme(action-#{$size}-badge-dot-mode-horizontal-offset));
-        }
-      }
     }
   }
 

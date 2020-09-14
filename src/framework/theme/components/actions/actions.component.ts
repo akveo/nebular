@@ -25,12 +25,14 @@ import { NbIconConfig } from '../icon/icon.component';
          [title]="title"
          *ngIf="link">
         <nb-icon [config]="icon"></nb-icon>
+        <ng-container [ngTemplateOutlet]="badgeTemplate"></ng-container>
       </a>
       <a class="icon-container"
          [href]="href"
          [title]="title"
          *ngIf="href && !link">
         <nb-icon [config]="icon"></nb-icon>
+        <ng-container [ngTemplateOutlet]="badgeTemplate"></ng-container>
       </a>
       <a class="icon-container"
          href="#"
@@ -38,18 +40,22 @@ import { NbIconConfig } from '../icon/icon.component';
          *ngIf="!href && !link"
          (click)="$event.preventDefault()">
         <nb-icon [config]="icon"></nb-icon>
+        <ng-container [ngTemplateOutlet]="badgeTemplate"></ng-container>
       </a>
     </ng-container>
 
     <ng-template #projectedContent>
       <ng-content></ng-content>
+      <ng-container [ngTemplateOutlet]="badgeTemplate"></ng-container>
     </ng-template>
-    <nb-badge *ngIf="badgeText || badgeDot"
-              [text]="badgeText"
-              [dotMode]="badgeDot"
-              [status]="badgeStatus"
-              [position]="badgePosition">
-    </nb-badge>
+    <ng-template #badgeTemplate>
+      <nb-badge *ngIf="badgeText || badgeDot"
+                [text]="badgeText"
+                [dotMode]="badgeDot"
+                [status]="badgeStatus"
+                [position]="badgePosition">
+      </nb-badge>
+    </ng-template>
   `,
 })
 export class NbActionComponent {
