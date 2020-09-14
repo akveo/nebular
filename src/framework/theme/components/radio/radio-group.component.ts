@@ -182,10 +182,7 @@ export class NbRadioGroupComponent implements AfterContentInit, OnDestroy, Contr
 
   writeValue(value: any): void {
     this.value = value;
-
-    if (typeof value !== 'undefined') {
-      this.updateValues();
-    }
+    this.updateValues();
   }
 
   protected updateAndSubscribeToRadios() {
@@ -204,9 +201,7 @@ export class NbRadioGroupComponent implements AfterContentInit, OnDestroy, Contr
   }
 
   protected updateValues() {
-    if (typeof this.value !== 'undefined') {
-      this.updateAndMarkForCheckRadios((radio: NbRadioComponent) => radio.checked = radio.value === this.value);
-    }
+    this.updateAndMarkForCheckRadios((radio: NbRadioComponent) => radio.checked = radio.value === this.value);
   }
 
   protected updateDisabled() {
