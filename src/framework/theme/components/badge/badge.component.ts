@@ -109,8 +109,7 @@ export class NbBadgeComponent implements NbBadge {
   protected _position: NbBadgePosition = this._defaultPosition;
 
   /**
-   * Use badge dot mode
-   * Overrides text in badge
+   * Shows badge as a dot. No text is shown.
    * @type boolean
    */
   @Input()
