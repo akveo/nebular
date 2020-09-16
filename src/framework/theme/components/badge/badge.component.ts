@@ -8,12 +8,17 @@ import { Component, HostBinding, Input } from '@angular/core';
 
 import { NbComponentStatus } from '../component-status';
 import { convertToBoolProperty, emptyStatusWarning } from '../helpers';
-import { NbBadge } from './model';
 
 export type NbBadgePhysicalPosition = 'top left' | 'top right' | 'bottom left' | 'bottom right' | 'center right' | 'center left';
 export type NbBadgeLogicalPosition = 'top start' | 'top end' | 'bottom start' | 'bottom end' | 'center start'| 'center end';
 export type NbBadgePosition = NbBadgePhysicalPosition | NbBadgeLogicalPosition;
 
+export interface NbBadge {
+  text?: string;
+  position?: NbBadgePosition;
+  status?: NbComponentStatus;
+  dotMode?: boolean;
+}
 
 /**
  * Badge is a simple labeling component.

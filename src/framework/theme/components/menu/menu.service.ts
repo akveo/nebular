@@ -11,7 +11,7 @@ import { Observable, BehaviorSubject, ReplaySubject, Subject } from 'rxjs';
 import { share } from 'rxjs/operators';
 import { isFragmentContain, isFragmentEqual, isUrlPathContain, isUrlPathEqual } from './url-matching-helpers';
 import { NbIconConfig } from '../icon/icon.component';
-import { NbBadge } from '../badge/model';
+import { NbBadge } from '../badge/badge.component';
 
 export interface NbMenuBag { tag: string; item: NbMenuItem }
 
