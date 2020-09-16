@@ -182,11 +182,10 @@ export class NbRadioGroupComponent implements AfterContentInit, OnDestroy, Contr
 
   writeValue(value: any): void {
     this.value = value;
-    this.updateValues();
   }
 
   protected updateAndSubscribeToRadios() {
-    this.getUpdateCheckedValue();
+    this.updateValueFromCheckedOption();
     this.updateNames();
     this.updateValues();
     this.updateDisabled();
@@ -274,11 +273,10 @@ export class NbRadioGroupComponent implements AfterContentInit, OnDestroy, Contr
     }
   }
 
-  protected getUpdateCheckedValue() {
-    const checkedValue = this.radios.reduce((value, item) => item.checked ? item.value : value, undefined);
-
-    if (checkedValue && checkedValue !== this.value) {
-      this._value = checkedValue;
+  protected updateValueFromCheckedOption() {
+    const checkedRadio = this.radios.find((radio) => radio.checked);
+    if (checkedRadio && !this.value && checkedRadio.value !== this.value) {
+      this.value = checkedRadio.value;
     }
   }
 }
