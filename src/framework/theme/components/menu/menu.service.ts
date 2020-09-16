@@ -25,7 +25,7 @@ const itemHover$ = new ReplaySubject<NbMenuBag>(1);
 const submenuToggle$ = new ReplaySubject<NbMenuBag>(1);
 const collapseAll$ = new ReplaySubject<{ tag: string }>(1);
 
-export type MenuBadgeConfig = Omit<NbBadge, 'position'>;
+export type NbMenuBadgeConfig = Omit<NbBadge, 'position'>;
 
 // TODO: check if we need both URL and LINK
 /**
@@ -66,7 +66,7 @@ export class NbMenuItem {
    * Badge component
    * @type {boolean}
    */
-  badge?: MenuBadgeConfig;
+  badge?: NbMenuBadgeConfig;
   /**
    * Children items
    * @type {List<NbMenuItem>}

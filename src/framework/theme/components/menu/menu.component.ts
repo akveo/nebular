@@ -20,7 +20,7 @@ import { isPlatformBrowser } from '@angular/common';
 import { Router, NavigationEnd } from '@angular/router';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { takeUntil, filter, map } from 'rxjs/operators';
-import { NbMenuInternalService, NbMenuItem, NbMenuBag, NbMenuService, MenuBadgeConfig } from './menu.service';
+import { NbMenuInternalService, NbMenuItem, NbMenuBag, NbMenuService, NbMenuBadgeConfig } from './menu.service';
 import { convertToBoolProperty, NbBooleanInput } from '../helpers';
 import { NB_WINDOW } from '../../theme.options';
 import { animate, state, style, transition, trigger } from '@angular/animations';
@@ -44,7 +44,7 @@ export enum NbToggleStates {
 })
 export class NbMenuItemComponent implements DoCheck, AfterViewInit, OnDestroy {
   @Input() menuItem = <NbMenuItem>null;
-  @Input() badge: MenuBadgeConfig;
+  @Input() badge: NbMenuBadgeConfig;
 
   @Output() hoverItem = new EventEmitter<any>();
   @Output() toggleSubMenu = new EventEmitter<any>();
