@@ -210,32 +210,6 @@ export class NbActionComponent {
  * actions-giant-icon-height:
  * actions-giant-padding:
  * actions-giant-text-font-size:
- * badge-dot-mode-border-radius:
- * action-badge-dot-tiny-padding:
- * action-badge-dot-small-padding:
- * action-badge-dot-medium-padding:
- * action-badge-dot-large-padding:
- * action-badge-dot-giant-padding:
- * action-badge-dot-tiny-top:
- * action-badge-dot-small-top:
- * action-badge-dot-medium-top:
- * action-badge-dot-large-top:
- * action-badge-dot-giant-top:
- * action-badge-dot-tiny-bottom:
- * action-badge-dot-small-bottom:
- * action-badge-dot-medium-bottom:
- * action-badge-dot-large-bottom:
- * action-badge-dot-giant-bottom:
- * action-badge-dot-tiny-left:
- * action-badge-dot-small-left:
- * action-badge-dot-medium-left:
- * action-badge-dot-large-left:
- * action-badge-dot-giant-left:
- * action-badge-dot-tiny-right:
- * action-badge-dot-small-right:
- * action-badge-dot-medium-right:
- * action-badge-dot-large-right:
- * action-badge-dot-giant-right:
  */
 @Component({
   selector: 'nb-actions',
