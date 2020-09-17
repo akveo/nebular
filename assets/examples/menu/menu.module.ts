@@ -16,6 +16,7 @@ import {
   MenuServiceItem332Component,
 } from './menu-service-children';
 import { MenuServiceComponent } from './menu-service.component';
+import { MenuBadgeComponent } from './menu-badge.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { MenuServiceComponent } from './menu-service.component';
     MenuServiceItem331Component,
     MenuServiceItem332Component,
     MenuServiceComponent,
+    MenuBadgeComponent,
   ],
   imports: [
     NbMenuModule.forRoot(),
