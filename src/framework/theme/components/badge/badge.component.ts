@@ -7,12 +7,18 @@
 import { Component, HostBinding, Input } from '@angular/core';
 
 import { NbComponentStatus } from '../component-status';
-import { emptyStatusWarning } from '../helpers';
+import { convertToBoolProperty, emptyStatusWarning } from '../helpers';
 
-export type NbBadgePhysicalPosition = 'top left' | 'top right' | 'bottom left' | 'bottom right';
-export type NbBadgeLogicalPosition = 'top start' | 'top end' | 'bottom start' | 'bottom end';
+export type NbBadgePhysicalPosition = 'top left' | 'top right' | 'bottom left' | 'bottom right' | 'center right' | 'center left';
+export type NbBadgeLogicalPosition = 'top start' | 'top end' | 'bottom start' | 'bottom end' | 'center start'| 'center end';
 export type NbBadgePosition = NbBadgePhysicalPosition | NbBadgeLogicalPosition;
 
+export interface NbBadge {
+  text?: string;
+  position?: NbBadgePosition;
+  status?: NbComponentStatus;
+  dotMode?: boolean;
+}
 
 /**
  * Badge is a simple labeling component.
@@ -79,9 +85,9 @@ export type NbBadgePosition = NbBadgePhysicalPosition | NbBadgeLogicalPosition;
 @Component({
   selector: 'nb-badge',
   styleUrls: ['./badge.component.scss'],
-  template: `{{text}}`,
+  template: `{{dotMode ? '' : text}}`,
 })
-export class NbBadgeComponent {
+export class NbBadgeComponent implements NbBadge {
 
   /**
    * Text to display
@@ -106,6 +112,20 @@ export class NbBadgeComponent {
   }
   protected _defaultPosition: NbBadgePosition = 'top right';
   protected _position: NbBadgePosition = this._defaultPosition;
+
+  /**
+   * Shows badge as a dot. No text is shown.
+   * @type boolean
+   */
+  @Input()
+  @HostBinding('class.dot-mode')
+  get dotMode(): boolean {
+    return this._dotMode;
+  }
+  set dotMode(value: boolean) {
+    this._dotMode = convertToBoolProperty(value);
+  }
+  protected _dotMode: boolean;
 
   /**
    * Badge status (adds specific styles):
@@ -187,5 +207,10 @@ export class NbBadgeComponent {
   @HostBinding('class.position-end')
   get end(): boolean {
     return this.position.includes('end');
+  }
+
+  @HostBinding('class.position-center')
+  get center(): boolean {
+    return this.position.includes('center');
   }
 }
