@@ -42,50 +42,50 @@ import { NbIconConfig } from '../icon/icon.component';
  * toastr-basic-text-color:
  * toastr-icon-basic-background-color:
  * toastr-icon-basic-color:
- * toastr-destroyable-hover-basic-background-color:
- * toastr-destroyable-hover-basic-border-color:
+ * toastr-destroyable-basic-hover-background-color:
+ * toastr-destroyable-basic-hover-border-color:
  * toastr-primary-background-color:
  * toastr-primary-border-color:
  * toastr-primary-text-color:
  * toastr-icon-primary-background-color:
  * toastr-icon-primary-color:
- * toastr-destroyable-hover-primary-background-color:
- * toastr-destroyable-hover-primary-border-color:
+ * toastr-destroyable-primary-hover-background-color:
+ * toastr-destroyable-primary-hover-border-color:
  * toastr-success-background-color:
  * toastr-success-border-color:
  * toastr-success-text-color:
  * toastr-icon-success-background-color:
  * toastr-icon-success-color:
- * toastr-destroyable-hover-success-background-color:
- * toastr-destroyable-hover-success-border-color:
+ * toastr-destroyable-success-hover-background-color:
+ * toastr-destroyable-success-hover-border-color:
  * toastr-info-background-color:
  * toastr-info-border-color:
  * toastr-info-text-color:
  * toastr-icon-info-background-color:
  * toastr-icon-info-color:
- * toastr-destroyable-hover-info-background-color:
- * toastr-destroyable-hover-info-border-color:
+ * toastr-destroyable-info-hover-background-color:
+ * toastr-destroyable-info-hover-border-color:
  * toastr-warning-background-color:
  * toastr-warning-border-color:
  * toastr-warning-text-color:
  * toastr-icon-warning-background-color:
  * toastr-icon-warning-color:
- * toastr-destroyable-hover-warning-background-color:
- * toastr-destroyable-hover-warning-border-color:
+ * toastr-destroyable-warning-hover-background-color:
+ * toastr-destroyable-warning-hover-border-color:
  * toastr-danger-background-color:
  * toastr-danger-border-color:
  * toastr-danger-text-color:
  * toastr-icon-danger-background-color:
  * toastr-icon-danger-color:
- * toastr-destroyable-hover-danger-background-color:
- * toastr-destroyable-hover-danger-border-color:
+ * toastr-destroyable-danger-hover-background-color:
+ * toastr-destroyable-danger-hover-border-color:
  * toastr-control-background-color:
  * toastr-control-border-color:
  * toastr-control-text-color:
  * toastr-icon-control-background-color:
  * toastr-icon-control-color:
- * toastr-destroyable-hover-control-background-color:
- * toastr-destroyable-hover-control-border-color:
+ * toastr-destroyable-control-hover-background-color:
+ * toastr-destroyable-control-hover-border-color:
  * */
 @Component({
   selector: 'nb-toast',

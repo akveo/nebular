@@ -25,6 +25,8 @@
 }
 
 a.icon-container {
+  position: relative;
+
   &:hover, &:focus {
     text-decoration: none;
   }
