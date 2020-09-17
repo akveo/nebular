@@ -1,3 +1,58 @@
+<a name="6.0.1"></a>
+## [6.0.1](https://github.com/akveo/nebular/compare/v6.0.0...v6.0.1) (2020-08-31)
+
+
+### Bug Fixes
+
+* **dynamic overlay:** prevent multiple onStable subscriptions ([#2494](https://github.com/akveo/nebular/issues/2494)) ([f22e87d](https://github.com/akveo/nebular/commit/f22e87d))
+
+
+
+<a name="6.0.0"></a>
+# [6.0.0](https://github.com/akveo/nebular/compare/v5.1.0...v6.0.0) (2020-07-31)
+
+
+### Bug Fixes
+
+* **datepicker:** background and border theming ([#2418](https://github.com/akveo/nebular/issues/2418)) ([381eb00](https://github.com/akveo/nebular/commit/381eb00))
+* **form field:** addon alignment ([#2460](https://github.com/akveo/nebular/issues/2460)) ([dc154ab](https://github.com/akveo/nebular/commit/dc154ab))
+* **nbButton:** allow specifying custom tabindex ([#2452](https://github.com/akveo/nebular/issues/2452)) ([e9f84be](https://github.com/akveo/nebular/commit/e9f84be))
+
+
+### Code Refactoring
+
+* **nb-icon:** return null if icon wasn't found ([#2466](https://github.com/akveo/nebular/issues/2466)) ([4af8924](https://github.com/akveo/nebular/commit/4af8924))
+
+
+### Features
+
+* upgrade to Angular 10 ([#2464](https://github.com/akveo/nebular/issues/2464)) ([540ee46](https://github.com/akveo/nebular/commit/540ee46))
+
+
+### BREAKING CHANGES
+
+* **nb-icon:** `NbIconLibraries.getSvgIcon` and `NbIconLibraries.getIcon` could return null if icon wasn't found and won't throw. As methods don't throw now, you need to handle possible `null` return value.
+* **Angular:** Nebular packages now require Angular 10+. Nebular packages no longer include ESM5 and FESM5 bundles as per Angular Package Format 10.
+* **NbBasePicker**: Angular lifecycle methods moved to `NbBasePickerComponent`. If you use `NbBasePicker` as a base class of your custom picker change it to `NbBasePickerComponent`.
+
+<a name="5.1.0"></a>
+# [5.1.0](https://github.com/akveo/nebular/compare/v5.0.0...v5.1.0) (2020-06-03)
+
+
+### Bug Fixes
+
+* **auth:** set correct theme for auth ([#2287](https://github.com/akveo/nebular/issues/2287)) ([c12873d](https://github.com/akveo/nebular/commit/c12873d))
+* **popover, tooltip:** template check hint for adjustment ([#2278](https://github.com/akveo/nebular/issues/2278)) ([a77863d](https://github.com/akveo/nebular/commit/a77863d))
+* **readme:** fix browser support table ([#2304](https://github.com/akveo/nebular/issues/2304)) ([23dc3be](https://github.com/akveo/nebular/commit/23dc3be))
+
+
+### Features
+
+* Firebase auth ([#2385](https://github.com/akveo/nebular/issues/2385)) ([2f75ba1](https://github.com/akveo/nebular/commit/2f75ba1))
+* **autocomplete:** input for focus on value change ([#2356](https://github.com/akveo/nebular/issues/2356)) ([ab15806](https://github.com/akveo/nebular/commit/ab15806))
+
+
+
 <a name="5.0.0"></a>
 # [5.0.0](https://github.com/akveo/nebular/compare/v4.6.0...v5.0.0) (2020-03-09)
 

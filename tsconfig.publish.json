@@ -18,7 +18,8 @@
     "importHelpers": true,
     "baseUrl": ".",
     "paths": {
-      "@nebular/theme": ["./src/.lib/theme"]
+      "@nebular/theme": ["./src/.lib/theme"],
+      "@nebular/auth": ["./src/.lib/auth"]
     },
     "skipLibCheck": true,
     "typeRoots": [

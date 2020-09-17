@@ -25,6 +25,8 @@ const ROLLUP_GLOBALS = {
   '@angular/cdk/table': 'ng.cdk.table',
   '@angular/cdk/bidi': 'ng.cdk.bidi',
   '@angular/cdk/keycodes': 'ng.cdk.keycodes',
+  '@angular/fire': 'ng.fire',
+  '@angular/fire/auth': 'ng.fire.auth',
 
 
   // RxJS dependencies
@@ -33,6 +35,9 @@ const ROLLUP_GLOBALS = {
 
   // 3rd party dependencies
   'intersection-observer': 'intersection-observer',
+  'firebase': 'firebase',
+  'firebase/app': 'firebase.app',
+  'firebase/auth': 'firebase.auth',
 
   // date libs for date service
   'moment': 'moment',
@@ -47,6 +52,7 @@ const ROLLUP_GLOBALS = {
   '@nebular/moment': 'nb.moment',
   '@nebular/date-fns': 'nb.date-fns',
   '@nebular/eva-icons': 'nb.eva-icons',
+  '@nebular/firebase-auth': 'nb.firebase-auth',
 
   'eva-icons': 'eva-icons',
 };

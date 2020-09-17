@@ -37,6 +37,7 @@ import {
 } from '../cdk/a11y/descendant-key-manager';
 import { NbAutocompleteComponent } from './autocomplete.component';
 import { NbOptionComponent } from '../option/option.component';
+import { convertToBoolProperty } from '../helpers';
 
 /**
  * The `NbAutocompleteDirective` provides a capability to expand input with
@@ -134,6 +135,18 @@ export class NbAutocompleteDirective<T> implements OnDestroy, AfterViewInit, Con
   set autocomplete(autocomplete: NbAutocompleteComponent<T>) {
     this._autocomplete = autocomplete;
   }
+
+  /**
+   * Determines if the input will be focused when the control value is changed
+   * */
+  @Input()
+  get focusInputOnValueChange(): boolean {
+    return this._focusInputOnValueChange;
+  }
+  set focusInputOnValueChange(value: boolean) {
+    this._focusInputOnValueChange = convertToBoolProperty(value);
+  }
+  protected _focusInputOnValueChange: boolean = true;
 
   @HostBinding('class.nb-autocomplete-position-top')
   get top(): boolean {
@@ -301,7 +314,9 @@ export class NbAutocompleteDirective<T> implements OnDestroy, AfterViewInit, Con
     }
     this.setHostInputValue(value);
     this._onChange(value);
-    this.hostRef.nativeElement.focus();
+    if (this.focusInputOnValueChange) {
+      this.hostRef.nativeElement.focus();
+    }
     this.autocomplete.emitSelected(value);
     this.hide();
   }

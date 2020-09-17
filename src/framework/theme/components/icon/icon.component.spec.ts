@@ -38,7 +38,7 @@ describe('Component: NbIcon', () => {
     });
 
     fixture = bed.createComponent(IconTestComponent);
-    iconsLibrary = bed.get(NbIconLibraries);
+    iconsLibrary = bed.inject(NbIconLibraries);
 
     iconsLibrary
       .registerSvgPack('svg-pack', { home: '<svg><rect></rect></svg>' }, { packClass: 'custom-pack' });

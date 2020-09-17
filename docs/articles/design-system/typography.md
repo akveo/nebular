@@ -1,6 +1,6 @@
 # Nebular Typography
 
-The main goal of typography is to describe how design is applied to letters and text. Nebular Typography is based on [Eva Design System](https://hubs.ly/H0n4RGn0) specification.
+The main goal of typography is to describe how design is applied to letters and text. Nebular Typography is based on [Eva Design System](https://eva.design?utm_campaign=eva_design%20-%20home%20-%20nebular%20intro&utm_source=nebular&utm_medium=referral&utm_content=nebular_typography) specification.
 
 ## Font Family
 

@@ -535,6 +535,15 @@ export const structure = [
         ],
       },
       {
+        type: 'tabs',
+        name: 'Timepicker',
+        icon: 'timepicker.svg',
+        source: [
+          'NbTimePickerDirective',
+          'NbTimePickerComponent',
+        ],
+      },
+      {
         type: 'group',
         name: 'Modals & Overlays',
       },
@@ -912,6 +921,17 @@ export const structure = [
             type: 'block',
             block: 'markdown',
             source: 'auth/backend-api.md',
+          },
+        ],
+      },
+      {
+        type: 'page',
+        name: 'Firebase Authentication',
+        children: [
+          {
+            type: 'block',
+            block: 'markdown',
+            source: 'auth/firebase-authentication.md',
           },
         ],
       },
