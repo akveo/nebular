@@ -27,7 +27,7 @@ export class MenuBadgeComponent {
         {
           title: 'Messages',
           badge: {
-            text: '+99',
+            text: '99+',
             status: 'danger',
           },
         },
