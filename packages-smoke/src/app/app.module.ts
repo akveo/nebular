@@ -15,7 +15,7 @@ import { NbEvaIconsModule } from '@nebular/eva-icons';
     AppComponent,
   ],
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'packages-smoke' }),
     NbThemeModule.forRoot({ name: 'default' }),
     NbAuthModule.forRoot(),
     NbSecurityModule.forRoot(),

@@ -3,7 +3,7 @@ language: node_js
 addons:
   chrome: stable
 node_js:
-  - '10'
+  - '12'
 
 
 env:

@@ -10,7 +10,7 @@ import { NbCalendarRange } from '../calendar/calendar-range.component';
 import { NbDatepickerComponent, NbRangepickerComponent } from './datepicker.component';
 import { NbDatepickerAdapter } from './datepicker.directive';
 import { NbDateService } from '../calendar-kit/services/date.service';
-
+import { NbDateTimePickerComponent } from './date-timepicker.component';
 
 @Injectable()
 export class NbDateAdapterService<D> extends NbDatepickerAdapter<D> {
@@ -74,5 +74,26 @@ export class NbRangeAdapterService<D> extends NbDatepickerAdapter<NbCalendarRang
   isValid(range: string, format: string): boolean {
     const [start, end] = range.split('-').map(subDate => subDate.trim());
     return this.dateService.isValidDateString(start, format) && this.dateService.isValidDateString(end, format);
+  }
+}
+
+@Injectable()
+export class NbDateTimeAdapterService<D> extends NbDatepickerAdapter<D> {
+  picker: Type<NbDateTimePickerComponent<D>> = NbDateTimePickerComponent;
+
+  constructor(protected dateService: NbDateService<D>) {
+    super();
+  }
+
+  parse(date: string, format: string): D {
+    return this.dateService.parse(date, format);
+  }
+
+  format(date: any, format: string): string {
+    return this.dateService.format(date, format);
+  }
+
+  isValid(date: string, format: string): boolean {
+    return this.dateService.isValidDateString(date, format);
   }
 }

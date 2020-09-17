@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { NbDateService } from './date.service';
+import { NbDateService, NbDayPeriod } from './date.service';
 import { NbNativeDateService } from '@nebular/theme';
 import { TestBed } from '@angular/core/testing';
 import { LOCALE_ID } from '@angular/core';
@@ -43,6 +43,27 @@ describe('native-date-service', () => {
     expect(isValid).toBeFalsy();
   });
 
+  it('should validate as correct if time string is valid according to the hours format', () => {
+    const isValid = dateService.isValidTimeString('14:23 00', 'HH:mm:ss');
+    expect(isValid).toBeTruthy();
+  });
+
+  it('should validate as correct if time string is valid according to the twelve hours format',
+    () => {
+    const isValid = dateService.isValidTimeString('04:23 00 AM', 'hh:mm:ss A');
+    expect(isValid).toBeTruthy();
+  });
+
+  it('should validate as incorrect if time string is invalid according to the format', () => {
+    const isValid = dateService.isValidTimeString('24:23:00 AM', 'hh:mm:ss A');
+    expect(isValid).toBeFalsy();
+  });
+
+  it('should validate as incorrect if time string is completely incorrect', () => {
+    const isValid = dateService.isValidTimeString('hello, it is a time string', 'hh:mm:ss A');
+    expect(isValid).toBeFalsy();
+  });
+
   it('should create today date', () => {
     const today = dateService.today();
     expect(dateService.isSameDay(today, new Date())).toBeTruthy();
@@ -56,6 +77,27 @@ describe('native-date-service', () => {
   it('should get month', () => {
     const month = new Date(2018, 5, 15);
     expect(dateService.getMonth(month)).toBe(5);
+  });
+
+  it('should get hour', () => {
+    const hour = new Date(2018, 5, 15, 12);
+
+    expect(dateService.getHours(hour)).toBe(12);
+  });
+
+  it('should get minute', () => {
+    const minute = new Date(2018, 5, 15, 12, 10);
+    expect(dateService.getMinutes(minute)).toBe(10);
+  });
+
+  it('should get second', () => {
+    const second = new Date(2018, 5, 15, 12, 10, 24);
+    expect(dateService.getSeconds(second)).toBe(24);
+  });
+
+  it('should get second', () => {
+    const second = new Date(2018, 5, 15, 12, 10, 24, 22);
+    expect(dateService.getMilliseconds(second)).toBe(22);
   });
 
   it('should get year', () => {
@@ -149,6 +191,32 @@ describe('native-date-service', () => {
     expect(newDate.getTime()).toBe(new Date(2019, 11, 16).getTime());
   });
 
+  it('should set hour', () => {
+    const newDate = dateService.setHours(new Date(), 12);
+    expect(newDate.getHours()).toEqual(12);
+  });
+
+  it('should set minute', () => {
+    const newDate = dateService.setMinutes(new Date(), 30);
+    expect(newDate.getMinutes()).toEqual(30);
+  });
+
+  it('should set seconds', () => {
+    const newDate = dateService.setSeconds(new Date(), 30);
+    expect(newDate.getSeconds()).toEqual(30);
+  });
+
+  it('should add hour', () => {
+    const newDate = dateService.addHours(new Date(2020, 3, 24, 8), 1);
+    expect(newDate.getHours()).toEqual(9);
+  });
+
+  it('should add minute', () => {
+    const newDate = dateService.addMinutes(new Date(2020, 3, 24, 8, 40), 20);
+    expect(newDate.getHours()).toEqual(9);
+    expect(newDate.getMinutes()).toEqual(0);
+  });
+
   it('should create date', () => {
     const date = dateService.createDate(2018, 6, 16);
     expect(date).toEqual(new Date(2018, 6, 16));
@@ -190,5 +258,20 @@ describe('native-date-service', () => {
     expect(dateService.compareDates(new Date(2018, 6, 16), new Date(2017, 2, 14))).toBeGreaterThan(0);
     expect(dateService.compareDates(new Date(2018, 6, 16), new Date(2019, 2, 14))).toBeLessThan(0);
     expect(dateService.compareDates(new Date(2018, 6, 16), new Date(2018, 6, 16))).toBe(0);
+  });
+
+  it('should return correct day period', () => {
+    const date = new Date(2018, 7, 1, 12);
+
+    expect(dateService.getDayPeriod(date)).toEqual(NbDayPeriod.PM);
+
+    date.setHours(14);
+    expect(dateService.getDayPeriod(date)).toEqual(NbDayPeriod.PM);
+
+    date.setHours(11);
+    expect(dateService.getDayPeriod(date)).toEqual(NbDayPeriod.AM);
+
+    date.setHours(0);
+    expect(dateService.getDayPeriod(date)).toEqual(NbDayPeriod.AM);
   });
 });

@@ -32,6 +32,24 @@
       }
     }
 
+    nb-badge.dot-mode.position-left {
+      left: nb-theme(tabset-tab–badge-dot-mode-horizontal-offset);
+    }
+
+    nb-badge.dot-mode.position-right {
+      right: nb-theme(tabset-tab–badge-dot-mode-horizontal-offset);
+    }
+
+    nb-badge.dot-mode.position-start {
+      @include nb-ltr(left, nb-theme(tabset-tab–badge-dot-mode-horizontal-offset));
+      @include nb-rtl(right, nb-theme(tabset-tab–badge-dot-mode-horizontal-offset));
+    }
+
+    nb-badge.dot-mode.position-end {
+      @include nb-ltr(right, nb-theme(tabset-tab–badge-dot-mode-horizontal-offset));
+      @include nb-rtl(left, nb-theme(tabset-tab–badge-dot-mode-horizontal-offset));
+    }
+
     .tab.active {
       .tab-link {
         background-color: nb-theme(tabset-tab-active-background-color);

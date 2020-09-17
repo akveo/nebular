@@ -237,7 +237,7 @@ describe('toastr-container-registry', () => {
   beforeEach(() => {
     const cfr = TestBed.configureTestingModule({
       imports: [NbToastrModule.forRoot()],
-    }).get(ComponentFactoryResolver);
+    }).inject(ComponentFactoryResolver);
 
     toastrContainerRegistry = new NbToastrContainerRegistry(
       overlayStub,

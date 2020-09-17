@@ -1,6 +1,6 @@
 # What is Nebular?
 
-Nebular is a customizable Angular UI Library based on [Eva Design System](https://hubs.ly/H0n4RG00) specifications, with 40+ UI components, 4 visual themes, Auth and Security modules. 
+Nebular is a customizable Angular UI Library based on [Eva Design System](https://eva.design?utm_campaign=eva_design%20-%20home%20-%20nebular%20intro&utm_source=nebular&utm_medium=referral&utm_content=what_is_nebular) specifications, with 40+ UI components, 4 visual themes, Auth and Security modules. 
 <hr>
 
 ## What's included
@@ -24,7 +24,7 @@ Nebular modules are distributed as separated `npm` packages:
 - Nebular date-fns `@nebular/date-fns`
   - modules allowing Nebular components to work with dates with help most popular date libraries. 
 - Admin dashboard starter kit <a href="https://github.com/akveo/ngx-admin" target="_blank">ngx-admin</a> - Angular application based on Nebular modules with beautiful IOT and E-commerce components.
-- <a href="https://hubs.ly/H0qwS6H0">Backend Bundles</a> - backend starter kits connected to ngx-admin UI.
+- <a href="https://store.akveo.com/pages/all-collections?utm_campaign=akveo_store%20-%20all%20bundles%20-%20nebular%20landing&utm_source=nebular&utm_medium=referral&utm_content=nebular_intro">Backend Bundles</a> - backend starter kits connected to ngx-admin UI.
 
 <hr>
 
