@@ -275,7 +275,8 @@ export class NbRadioGroupComponent implements AfterContentInit, OnDestroy, Contr
 
   protected updateValueFromCheckedOption() {
     const checkedRadio = this.radios.find((radio) => radio.checked);
-    if (checkedRadio && !this.value && checkedRadio.value !== this.value) {
+    const isValueMissing = this.value === undefined || this.value === null;
+    if (checkedRadio && isValueMissing && checkedRadio.value !== this.value) {
       this.value = checkedRadio.value;
     }
   }
