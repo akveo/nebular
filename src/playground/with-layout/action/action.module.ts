@@ -13,6 +13,7 @@ import { ActionShowcaseComponent } from './action-showcase.component';
 import { ActionSizesComponent } from './action-sizes.component';
 import { ActionTestComponent } from './action-test.component';
 import { ActionWidthComponent } from './action-width.component';
+import { ActionDotModeComponent } from './action-dot-mode.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { ActionWidthComponent } from './action-width.component';
     ActionSizesComponent,
     ActionTestComponent,
     ActionWidthComponent,
+    ActionDotModeComponent,
   ],
   imports: [
     NbActionsModule,

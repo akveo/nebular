@@ -25,12 +25,14 @@ import { NbIconConfig } from '../icon/icon.component';
          [title]="title"
          *ngIf="link">
         <nb-icon [config]="icon"></nb-icon>
+        <ng-container [ngTemplateOutlet]="badgeTemplate"></ng-container>
       </a>
       <a class="icon-container"
          [href]="href"
          [title]="title"
          *ngIf="href && !link">
         <nb-icon [config]="icon"></nb-icon>
+        <ng-container [ngTemplateOutlet]="badgeTemplate"></ng-container>
       </a>
       <a class="icon-container"
          href="#"
@@ -38,18 +40,22 @@ import { NbIconConfig } from '../icon/icon.component';
          *ngIf="!href && !link"
          (click)="$event.preventDefault()">
         <nb-icon [config]="icon"></nb-icon>
+        <ng-container [ngTemplateOutlet]="badgeTemplate"></ng-container>
       </a>
     </ng-container>
 
     <ng-template #projectedContent>
       <ng-content></ng-content>
+      <ng-container [ngTemplateOutlet]="badgeTemplate"></ng-container>
     </ng-template>
-
-    <nb-badge *ngIf="badgeText"
-              [text]="badgeText"
-              [status]="badgeStatus"
-              [position]="badgePosition">
-    </nb-badge>
+    <ng-template #badgeTemplate>
+      <nb-badge *ngIf="badgeText || badgeDot"
+                [text]="badgeText"
+                [dotMode]="badgeDot"
+                [status]="badgeStatus"
+                [position]="badgePosition">
+      </nb-badge>
+    </ng-template>
   `,
 })
 export class NbActionComponent {
@@ -92,6 +98,20 @@ export class NbActionComponent {
   }
   protected _disabled: boolean = false;
   static ngAcceptInputType_disabled: NbBooleanInput;
+
+  /**
+   * Use badge dot mode
+   * @type boolean
+   */
+  @Input()
+  get badgeDot(): boolean {
+    return this._badgeDot;
+  }
+  set badgeDot(value: boolean) {
+    this._badgeDot = convertToBoolProperty(value);
+  }
+  protected _badgeDot: boolean;
+  static ngAcceptInputType_badgeDot: NbBooleanInput;
 
   /**
    * Badge text to display
@@ -153,6 +173,9 @@ export class NbActionComponent {
  *
  * and we can set it to full a width of a parent component
  * @stacked-example(Full Width, action/action-width.component)
+ *
+ * Action dot mode
+ * @stacked-example(Action badge in dot mode, action/action-dot-mode.component)
  *
  * @styles
  *

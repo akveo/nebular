@@ -25,14 +25,15 @@
     }
   }
 
+
   nb-action {
     $divider: nb-theme(actions-divider-width) nb-theme(actions-divider-style) nb-theme(actions-divider-color);
     @include nb-ltr(border-left, $divider);
     @include nb-rtl(border-right, $divider);
 
     &:first-child {
-      @include nb-ltr(border-left, none!important);
-      @include nb-rtl(border-right, none!important);
+      @include nb-ltr(border-left, none !important);
+      @include nb-rtl(border-right, none !important);
     }
 
     nb-icon {

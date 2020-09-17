@@ -204,6 +204,8 @@ $eva-mapping: (
   tabset-tab-disabled-background-color: transparent,
   tabset-tab-disabled-text-color: text-disabled-color,
   tabset-tab-disabled-underline-color: transparent,
+  tabset-tab–badge-dot-mode-horizontal-offset: 0.75rem,
+  tabset-tab-badge-dot-mode-padding: 0.25rem,
 
   tabset-divider-color: divider-color,
   tabset-divider-style: divider-style,
@@ -1391,6 +1393,9 @@ $eva-mapping: (
   checkbox-control-disabled-text-color: text-control-color,
   checkbox-control-disabled-checked-background-color: color-basic-transparent-600,
   checkbox-control-disabled-checked-border-color: color-basic-transparent-600,
+
+  badge-dot-mode-border-radius: 0.5rem,
+  badge-dot-mode-padding: 0.3rem,
 
   badge-border-radius: border-radius,
   badge-text-font-family: text-button-font-family,
