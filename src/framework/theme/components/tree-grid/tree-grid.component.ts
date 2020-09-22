@@ -268,11 +268,15 @@ export class NbTreeGridComponent<T> extends NbTable<NbTreeGridPresentationNode<T
   }
 
   private getColumns(): string[] {
-    const { columns } = this._contentHeaderRowDefs.length
-      ? this._contentHeaderRowDefs.first
-      : this._contentRowDefs.first;
+    let rowDef: NbTreeGridHeaderRowDefDirective | NbTreeGridRowDefDirective<any>;
 
-    return Array.from(columns || []);
+    if (this._contentHeaderRowDefs.length) {
+      rowDef = this._contentHeaderRowDefs.first as NbTreeGridHeaderRowDefDirective;
+    } else {
+      rowDef = this._contentRowDefs.first as NbTreeGridRowDefDirective<any>;
+    }
+
+    return Array.from(rowDef.getVisibleColumns() || []);
   }
 
   private getColumnsCount(): number {

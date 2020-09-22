@@ -14,6 +14,7 @@ import {
   CdkHeaderCell,
   CdkHeaderCellDef,
 } from '@angular/cdk/table';
+import { coerceBooleanProperty } from '@angular/cdk/coercion';
 
 /**
  * Cell definition for the nb-table.
@@ -63,13 +64,27 @@ export const NB_SORT_HEADER_COLUMN_DEF = new InjectionToken('NB_SORT_HEADER_COLU
 })
 export class NbColumnDefDirective extends CdkColumnDef {
   /** Unique name for this column. */
-  @Input('nbColumnDef') name: string;
+  @Input('nbColumnDef')
+  get name(): string {
+    return this._name;
+  }
+  set name(value: string) {
+    this._setNameInput(value);
+  }
 
   /** Whether this column should be sticky positioned at the start of the row */
   @Input() sticky: boolean;
 
   /** Whether this column should be sticky positioned on the end of the row */
-  @Input() stickyEnd: boolean;
+  @Input()
+  get stickyEnd(): boolean {
+    return this._stickyEnd;
+  }
+  set stickyEnd(value: boolean) {
+    const prevValue = this._stickyEnd;
+    this._stickyEnd = coerceBooleanProperty(value);
+    this._hasStickyChanged = prevValue !== this._stickyEnd;
+  }
 }
 
 /** Header cell template container that adds the right classes and role. */
