@@ -7,8 +7,12 @@
 import * as ts from 'typescript';
 import { dirname, Path } from '@angular-devkit/core';
 import { DirEntry, SchematicContext, SchematicsException, Tree } from '@angular-devkit/schematics';
-import { parseSourceFile } from '@angular/cdk/schematics';
-import { addImportToModule, addProviderToModule, getDecoratorMetadata } from '@schematics/angular/utility/ast-utils';
+import {
+  addImportToModule,
+  addSymbolToNgModuleMetadata,
+  getDecoratorMetadata,
+  parseSourceFile,
+} from '@angular/cdk/schematics';
 import {
   addRoute,
   generateComponentRoute,
@@ -83,7 +87,7 @@ function processService(tree: Tree, servicePath: Path): void {
     const serviceClassName = (service.name as ts.Identifier).getText();
     const importString = importPath(modulePath, servicePath);
     const source = parseSourceFile(tree, servicePath);
-    const changes = addProviderToModule(source, modulePath, serviceClassName, importString);
+    const changes = addSymbolToNgModuleMetadata(source, modulePath, 'providers', serviceClassName, importString);
 
     applyInsertChange(tree, modulePath, ...changes);
   }
