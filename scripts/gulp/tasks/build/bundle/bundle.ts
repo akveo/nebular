@@ -3,7 +3,7 @@ import * as rollup from 'gulp-rollup';
 import * as rename from 'gulp-rename';
 import * as replace from 'gulp-replace';
 
-import { JS_PACKAGES, LIB_DIR } from '../../config';
+import { ES5_BUILD_DIR, JS_PACKAGES, LIB_DIR } from '../../config';
 import { ROLLUP_COMMON_CONFIG } from './rollup-config';
 
 for (const packageName of JS_PACKAGES) {
@@ -34,9 +34,9 @@ function bundleFesm2015Module(name: string) {
 
 function bundleUmdModule(name: string) {
   return bundle({
-    src: `${LIB_DIR}/${name}/esm2015/**/*.js`,
+    src: `${ES5_BUILD_DIR}/${name}/**/*.js`,
     moduleName: `nb.${name}`,
-    entry: `${LIB_DIR}/${name}/esm2015/index.js`,
+    entry: `${ES5_BUILD_DIR}/${name}/index.js`,
     format: 'umd',
     output: `${name}.umd.js`,
     dest: `${LIB_DIR}/${name}/bundles`,
