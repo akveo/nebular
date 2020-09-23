@@ -33,7 +33,7 @@ packages_smoke_ts3() {
 }
 
 # @breaking-change Remove @7.0.0. Not a breaking change, just a reminder to remove checks with multiple TS versions.
-# Revert changes in this file introduced in the PR where packages_smoke_ts3 and packages_smoke_ts4 functions were added.
+# Revert changes in this file introduced in the PR #2523.
 # Added for Nebular 6 as Angular 10 supports both TypeScript 3 and 4 versions.
 packages_smoke_ts4() {
   echo "Starting framework build smoke testing"
@@ -68,6 +68,8 @@ packages_smoke_ts4() {
 }
 
 packages_smoke() {
+  local d=$(pwd)
   packages_smoke_ts3
+  cd "$d" || exit
   packages_smoke_ts4
 }
