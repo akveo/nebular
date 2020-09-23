@@ -43,7 +43,16 @@ function bundleUmdModule(name: string) {
   });
 }
 
-function bundle(config: any) {
+interface BundleConfig {
+  src: string;
+  moduleName: string;
+  entry: string;
+  format: string;
+  output: string;
+  dest: string;
+}
+
+function bundle(config: BundleConfig) {
   return src(config.src)
     .pipe(rollup(Object.assign({}, ROLLUP_COMMON_CONFIG, {
       moduleName: config.moduleName,
