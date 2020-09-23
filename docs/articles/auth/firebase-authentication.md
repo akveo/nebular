@@ -24,7 +24,7 @@ The package provides the following strategies:
 Install Nebular Auth and Nebular Firebase Auth.
  
  ```sh
-   npm i @nebular/auth @angular\firebase-auth
+   npm i @nebular/auth @nebular/firebase-auth
  ```
 
 Import the NbAuthModule with some firebase strategies, in that example we use NbFirebasePasswordStrategy.
