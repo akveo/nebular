@@ -51,6 +51,7 @@ packages_smoke_ts4() {
 
   echo "Installing built packages"
   npm install
+  npm run ng -- update @angular/core @angular/cli @angular/cdk --force
   npm i -D typescript@4
 
   echo "Verifying application build"
