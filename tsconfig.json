@@ -15,7 +15,13 @@
     "lib": [
       "es2017",
       "dom"
-    ]
+    ],
+    "baseUrl": ".",
+    "paths": {
+      "@nebular/*": [
+        "./src/framework/*/public_api.ts"
+      ]
+    }
   },
   "angularCompilerOptions": {
     "strictTemplates": true
