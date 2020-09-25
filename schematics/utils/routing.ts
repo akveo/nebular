@@ -127,7 +127,8 @@ export function generateLazyModuleImport(from: Path, to: Path, moduleClassName: 
 export function addMissingChildRoutes(tree: Tree, routingModulePath: Path, targetFile: Path): void {
   const routingModuleDir = dirname(routingModulePath);
   if (isRootPlaygroundModule(routingModuleDir)) {
-    return addRootRoute(tree, targetFile);
+    addRootRoute(tree, targetFile);
+    return;
   }
 
   if (isBasePlaygroundModule(routingModuleDir)) {
