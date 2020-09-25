@@ -34,7 +34,7 @@ import { NB_DOCUMENT } from '../../theme.options';
  * is shown when input receives a `focus` event.
  * ```html
  * <input [nbTimepicker]="timepicker">
- * <nb-timepicker #timepicker></nb-datepicker>
+ * <nb-timepicker #timepicker></nb-timepicker>
  * ```
  *
  * @stacked-example(Showcase, timepicker/timepicker-showcase.component)
@@ -94,7 +94,7 @@ import { NB_DOCUMENT } from '../../theme.options';
  *
  * ```html
  * <input [nbTimepicker]="timepicker" twelveHoursFormat>
- * <nb-timepicker #timepicker></nb-datepicker>
+ * <nb-timepicker #timepicker></nb-timepicker>
  * ```
  *
  * @stacked-example(Twelve hours format showcase, timepicker/timepicker-twelve-hours-format.component)
@@ -109,12 +109,12 @@ import { NB_DOCUMENT } from '../../theme.options';
  * @stacked-example(Form control, timepicker/timepicker-form-control.component)
  *
  * <input [nbTimepicker]="timepicker" twelveHoursFormat>
- * <nb-timepicker #timepicke [formControl]="formControl"></nb-datepicker>
+ * <nb-timepicker #timepicke [formControl]="formControl"></nb-timepicker>
  *
  * @stacked-example(NgModel, timepicker/timepicker-ng-model.component)
  *
  * <input [nbTimepicker]="timepicker" twelveHoursFormat>
- * <nb-timepicker #timepicke [ngModel]="date"></nb-datepicker>
+ * <nb-timepicker #timepicke [ngModel]="date"></nb-timepicker>
  *
  * @styles
  *
