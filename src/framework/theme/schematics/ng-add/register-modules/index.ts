@@ -86,10 +86,8 @@ function registerRouterIfNeeded(options: Schema): Rule {
  * Checks if `RouterModule` or `AppRoutingModule` already imported in the `AppModule`.
  * */
 function shouldRegisterRouter(tree: Tree, project: WorkspaceProject): boolean {
-  const appRoutingModuleAlreadyImported = isImportedInMainModule(tree, project,
-    'AppRoutingModule', './app-routing.module');
-  const routerModuleAlreadyImported = isImportedInMainModule(tree, project,
-    'RouterModule', '@angular/router');
+  const appRoutingModuleAlreadyImported = isImportedInMainModule(tree, project, 'AppRoutingModule');
+  const routerModuleAlreadyImported = isImportedInMainModule(tree, project, 'RouterModule');
 
   return !(appRoutingModuleAlreadyImported || routerModuleAlreadyImported);
 }

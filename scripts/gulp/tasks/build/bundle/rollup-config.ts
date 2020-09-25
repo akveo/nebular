@@ -25,6 +25,8 @@ const ROLLUP_GLOBALS = {
   '@angular/cdk/table': 'ng.cdk.table',
   '@angular/cdk/bidi': 'ng.cdk.bidi',
   '@angular/cdk/keycodes': 'ng.cdk.keycodes',
+  '@angular/cdk/coercion': 'ng.cdk.coercion',
+  '@angular/cdk/collections': 'ng.cdk.collections',
   '@angular/fire': 'ng.fire',
   '@angular/fire/auth': 'ng.fire.auth',
 
