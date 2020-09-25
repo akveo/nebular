@@ -1,3 +1,22 @@
+<a name="6.2.0"></a>
+# [6.2.0](https://github.com/akveo/nebular/compare/v6.1.0...v6.2.0) (2020-09-25)
+
+
+### Bug Fixes
+
+* **build:** provide ES5 code in UMD bundles ([#2520](https://github.com/akveo/nebular/issues/2520)) ([e64bac0](https://github.com/akveo/nebular/commit/e64bac0))
+* **timepicker:** remove duplicate providers ([#2529](https://github.com/akveo/nebular/issues/2529)) ([7e5e489](https://github.com/akveo/nebular/commit/7e5e489))
+
+
+### Features
+
+* **datepicker:** export calendar with time component ([#2528](https://github.com/akveo/nebular/issues/2528)) ([f378492](https://github.com/akveo/nebular/commit/f378492))
+* add support for TypeScript 4.0 ([#2523](https://github.com/akveo/nebular/issues/2523)) ([7b7f0a4](https://github.com/akveo/nebular/commit/7b7f0a4))
+
+Please note required `@angular/cdk` package version changed to `10.2.1`+.
+
+
+
 <a name="6.1.0"></a>
 # [6.1.0](https://github.com/akveo/nebular/compare/v6.0.1...v6.1.0) (2020-09-17)
 
