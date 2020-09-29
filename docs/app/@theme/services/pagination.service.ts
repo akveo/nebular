@@ -41,7 +41,7 @@ export class NgdPaginationService {
     this.paginationItems = this.addPrevNextPointers(
       this.prepareItems(
         this.structureService.getPreparedStructure(),
-        { link: basePath })
+        { link: basePath }),
     );
   }
 
