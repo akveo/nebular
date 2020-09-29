@@ -6,6 +6,8 @@
 
 @mixin nb-buttons-group-theme() {
   nb-button-group {
+    display: flex;
+
     div {
       display: flex;
       align-items: center;

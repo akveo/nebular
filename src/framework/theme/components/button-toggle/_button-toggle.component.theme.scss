@@ -4,18 +4,19 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-@import './button-toggle-filled';
-@import './button-toggle-ghost';
-@import './button-toggle-outline';
 @import '../button/button-mixins';
 
 @mixin nb-buttons-toggle-theme() {
   [nbButtonToggle] {
-    @include button-theme();
+    @extend [nbButton]
   }
 
-  @include button-toggle-filled;
-  @include button-toggle-outline;
-  @include button-toggle-ghost;
+  [nbButtonToggle].appearance-filled {
+     @each $status in nb-get-statuses() {
+       &.status-#{$status} {
+         color: nb-theme(button-toggle-filled-#{$status}-text-color);
+       }
+     }
+   }
 }
 

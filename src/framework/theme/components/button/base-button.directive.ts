@@ -4,8 +4,7 @@ import { NbComponentStatus } from '../component-status';
 import { NbComponentShape } from '../component-shape';
 import { NbButtonAppearance } from './button.component';
 import { convertToBoolProperty, firstChildNotComment, lastChildNotComment, NbBooleanInput } from '../helpers';
-import * as firebase from 'firebase';
-import Operation = firebase.auth.ActionCodeInfo.Operation;
+
 
 @Directive()
 export abstract class NbBaseButtonDirective {

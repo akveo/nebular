@@ -4,7 +4,7 @@ import {
   ElementRef,
   HostBinding,
   Input,
-  NgZone, Optional,
+  NgZone,
   Renderer2,
 } from '@angular/core';
 import { convertToBoolProperty, NbBooleanInput } from '../helpers';

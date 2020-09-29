@@ -16,6 +16,7 @@ import { ButtonGroupSizesComponent } from './button-group-sizes.component';
 import { ButtonGroupAppearancesComponent } from './button-group-appearances.component';
 import { ButtonGroupShapesComponent } from './button-group-shapes.component';
 import { ButtonGroupNbButtonComponent } from './button-group-nb-button.component';
+import {NbButtonToggleModule} from '../../../framework/theme/components/button-toggle/button-toggle.module';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { ButtonGroupNbButtonComponent } from './button-group-nb-button.component
     NbButtonGroupModule,
     NbCardModule,
     NbIconModule,
+    NbButtonToggleModule,
   ],
 })
 export class ButtonGroupModule {}
