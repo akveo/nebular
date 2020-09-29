@@ -11,7 +11,7 @@ import { Component } from '@angular/core';
   template: `
     <nb-card>
       <nb-card-body>
-        <nb-full-width-file-upload disabled allowPreview></nb-full-width-file-upload>
+        <nb-full-width-file-upload allowPreview></nb-full-width-file-upload>
       </nb-card-body>
     </nb-card>`,
 })
