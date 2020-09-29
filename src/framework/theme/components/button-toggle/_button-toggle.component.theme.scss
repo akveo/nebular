@@ -8,7 +8,7 @@
 
 @mixin nb-buttons-toggle-theme() {
   [nbButtonToggle] {
-    @extend [nbButton]
+    @extend [nbButton];
   }
 
   [nbButtonToggle].appearance-filled {
