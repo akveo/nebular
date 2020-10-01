@@ -18,6 +18,7 @@ import { NbFileUploadService } from './service/file-upload.service';
 import { NbBaseFileUploadComponent } from './base-file-upload.component';
 import { NbCompactFileUploadComponent } from './compact-file-upload.component';
 import { NbFileItemComponent } from './file-item.component';
+import {NbFileUploadComponent} from './file-upload.component';
 
 
 @NgModule({
@@ -29,6 +30,7 @@ import { NbFileItemComponent } from './file-item.component';
     NbFileListItemComponent,
     NbFileItemComponent,
     NbBaseFileUploadComponent,
+    NbFileUploadComponent,
   ],
   declarations: [
     NbFullWidthFileUploadComponent,
@@ -37,6 +39,7 @@ import { NbFileItemComponent } from './file-item.component';
     NbFileListItemComponent,
     NbFileItemComponent,
     NbBaseFileUploadComponent,
+    NbFileUploadComponent,
   ],
   providers: [NbFileUploadService],
 })

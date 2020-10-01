@@ -12,11 +12,15 @@ import { FullWidthFileUploadShowcaseComponent } from './full-width-file-upload-s
 import { FileUploadRoutingModule } from './file-upload-routing.module';
 import { NbFileUploadModule } from '../../../framework/theme/components/file-upload/file-upload.module';
 import { CompactFileUploadShowcaseComponent } from './compact-file-upload-showcase.component';
+import { FileUploadShowcaseComponent } from './file-upload-showcase.component';
+import { CompactFileUploadMultipleComponent } from './nb-compact-file-upload-multiple.component';
 
 @NgModule({
   declarations: [
     FullWidthFileUploadShowcaseComponent,
     CompactFileUploadShowcaseComponent,
+    FileUploadShowcaseComponent,
+    CompactFileUploadMultipleComponent,
   ],
   imports: [
     CommonModule,

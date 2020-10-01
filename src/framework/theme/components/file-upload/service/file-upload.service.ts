@@ -15,12 +15,13 @@ export class NbFileUploadService {
     reader.readAsDataURL(file);
 
     reader.onprogress = (event) => {
-      fileItem.totalSize = event.total / 100;
-      fileItem.loaded = event.loaded / 100;
+      fileItem.totalSize = Math.round(event.total / 100);
+      fileItem.loaded = Math.round(event.loaded / 100);
       fileItem.progressPercent = Math.round((event.loaded / event.total) * 100);
     };
     reader.onload = () => {
       fileItem.loaded = fileItem.totalSize;
+      fileItem.progressPercent = 100;
       fileItem.url = reader.result as string;
       fileItem.uploaded = true;
     };

@@ -1,29 +1,35 @@
-import { Component, EventEmitter, HostBinding, HostListener, Input, Output } from '@angular/core';
-import { NbFileModel } from './model';
-import { convertToBoolProperty, NbBooleanInput } from '../helpers';
+import {
+  Component,
+  EventEmitter,
+  HostBinding,
+  HostListener,
+  Input,
+  Output,
+} from '@angular/core';
+import {NbFileModel} from './model';
+import {convertToBoolProperty, NbBooleanInput} from '../helpers';
+import {DomSanitizer} from '@angular/platform-browser';
 
 @Component({
   selector: 'nb-file-item',
   template: `
-    <ng-container *ngIf="showImage()">
-      <img *ngIf="allowPreview && file.isImage" [src]="file.url">
-    </ng-container>
-    <ng-container *ngIf="!showImage() && file.uploaded">
+    <div *ngIf="this.file.isImage && this.allowPreview && file.loaded" class="image" [style.backgroundImage]="getImageUrl(file.url)">
+    </div>
+    <ng-container *ngIf="!this.file.isImage && this.allowPreview && file.uploaded">
       <nb-icon icon="file-text-outline"></nb-icon>
       <span>{{ file.name }}</span>
     </ng-container>
     <ng-container *ngIf="!file.uploaded">
       <span>Uploading...</span>
       <nb-progress-bar [value]="file.progressPercent" status="primary"></nb-progress-bar>
+      {{ file.progressPercent }}
     </ng-container>
     <div *ngIf="hover" style="z-index: 3" class="actions">
-      <button nbButton shape="round">
-        <nb-icon icon="edit-outline"></nb-icon>
-      </button>
       <button
         nbButton
         shape="round"
-        (click)="removeItem.emit(file.id)">
+        (click)="removeItem.emit(file.id)"
+      >
         <nb-icon icon="trash-2-outline"></nb-icon>
       </button>
     </div>
@@ -36,26 +42,19 @@ export class NbFileItemComponent {
   @Input() get allowPreview(): boolean {
     return this._allowPreview;
   }
-
-  @HostBinding('class.hover')
-  get hover() {
-    return this._hover;
-  }
-
-  set hover(value) {
-    this._hover = value;
-  }
-
-  _hover = false;
-
   set allowPreview(value: boolean) {
     this._allowPreview = convertToBoolProperty(value);
   }
 
+  @Output() removeItem = new EventEmitter<string>();
+
+  @HostBinding('class.hover')
+  get hover() { return this._hover; }
+  set hover(value) { this._hover = value; }
+  _hover = false;
+
   protected _allowPreview: boolean = true;
   static ngAcceptInputType_allowPreview: NbBooleanInput;
-
-  @Output() removeItem = new EventEmitter<string>();
 
   @HostListener('mouseover', ['$event'])
   public mouseEnter(event) {
@@ -71,7 +70,10 @@ export class NbFileItemComponent {
     event.stopPropagation();
   }
 
-  showImage(): boolean {
-    return this.file.isImage && this.allowPreview;
+  constructor(private sanitizer: DomSanitizer) {
+  }
+
+  getImageUrl(url: string) {
+    return this.sanitizer.bypassSecurityTrustStyle(`url(${url})`);
   }
 }

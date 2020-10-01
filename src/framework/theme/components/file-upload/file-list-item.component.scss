@@ -16,6 +16,11 @@
 
   nb-progress-bar {
     width: 100%;
+    align-self: flex-end;
+  }
+
+  .remove-button {
+    align-self: flex-start;
   }
 
 }

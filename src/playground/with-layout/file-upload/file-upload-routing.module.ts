@@ -8,6 +8,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Route} from '@angular/router';
 import { FullWidthFileUploadShowcaseComponent } from './full-width-file-upload-showcase.component';
 import { CompactFileUploadShowcaseComponent } from './compact-file-upload-showcase.component';
+import { FileUploadShowcaseComponent } from './file-upload-showcase.component';
+import {CompactFileUploadMultipleComponent} from './nb-compact-file-upload-multiple.component';
 
 const routes: Route[] = [
   {
@@ -17,6 +19,14 @@ const routes: Route[] = [
   {
     path: 'compact-file-upload-showcase.component',
     component: CompactFileUploadShowcaseComponent,
+  },
+  {
+    path: 'compact-file-upload-multiple.component',
+    component: CompactFileUploadMultipleComponent,
+  },
+  {
+    path: 'file-upload-showcase.component',
+    component: FileUploadShowcaseComponent,
   },
 ];
 

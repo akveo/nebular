@@ -6,13 +6,7 @@
 
 import {
   Component,
-  HostBinding,
-  HostListener,
-  Input,
 } from '@angular/core';
-import { ControlValueAccessor } from '@angular/forms';
-import { convertToBoolProperty, NbBooleanInput } from '../helpers';
-import { NbFileModel } from './model';
 import { NbBaseFileUploadComponent } from './base-file-upload.component';
 
 /**
@@ -47,9 +41,9 @@ import { NbBaseFileUploadComponent } from './base-file-upload.component';
                   [multiple]="multiple"
                   (fileUpload)="handleFileUpload($event)">
     </nb-drop-area>
-    <div class="files-container">
-    <ng-container *ngFor="let file of files">
-    <nb-file-list-item [allowPreview]="allowPreview"
+    <div class="files-container" *ngIf="files?.length">
+      <ng-container *ngFor="let file of files">
+        <nb-file-list-item [allowPreview]="allowPreview"
                            [file]="file"
                            (removeItem)="removeItem($event)">
         </nb-file-list-item>

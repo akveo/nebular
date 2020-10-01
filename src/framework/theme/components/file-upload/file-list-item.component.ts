@@ -15,9 +15,9 @@ import { convertToBoolProperty, NbBooleanInput } from '../helpers';
                  icon="file-text-outline"></nb-icon>
       </ng-template>
     </ng-container>
-    <span class="file-name">{{file.name}}</span>
-    <span class="file-size">{{ ' ' + file.loaded + '/' + file.totalSize + 'KB'}}</span>
-    <button nbButton *ngIf="file.uploaded" size="medium" appearance="ghost" (click)="removeItem.emit(file.id)">
+    <span class="file-name">{{ file.name }}</span>
+    <span class="file-size">{{ ' ' + file.loaded + 'KB/' + file.totalSize + 'KB' }}</span>
+    <button nbButton *ngIf="file.uploaded" class="remove-button" size="medium" appearance="ghost" (click)="removeItem.emit(file.id)">
       <nb-icon icon="trash-2-outline"></nb-icon>
     </button>
     <nb-progress-bar [value]="file.progressPercent" status="primary"></nb-progress-bar>
