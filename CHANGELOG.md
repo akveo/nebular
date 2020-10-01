@@ -1,3 +1,14 @@
+<a name="6.2.1"></a>
+## [6.2.1](https://github.com/akveo/nebular/compare/v6.2.0...v6.2.1) (2020-10-01)
+
+
+### Bug Fixes
+
+* **accordion:** extract inner elements styles outside accordion ([#2536](https://github.com/akveo/nebular/issues/2536)) ([9089690](https://github.com/akveo/nebular/commit/9089690))
+* **calendar range cells:** handle unset date or selectedValue ([#2537](https://github.com/akveo/nebular/issues/2537)) ([0f20b9c](https://github.com/akveo/nebular/commit/0f20b9c))
+
+
+
 <a name="6.2.0"></a>
 # [6.2.0](https://github.com/akveo/nebular/compare/v6.1.0...v6.2.0) (2020-09-25)
 
