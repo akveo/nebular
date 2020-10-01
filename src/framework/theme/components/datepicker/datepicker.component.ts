@@ -286,6 +286,7 @@ export abstract class NbBasePicker<D, T, P> extends NbDatepicker<T> {
     this.subscribeOnValueChange();
     this.writeQueue();
     this.patchWithInputs();
+    this.pickerRef.changeDetectorRef.markForCheck();
   }
 
   protected createPositionStrategy(): NbAdjustableConnectedPositionStrategy {
