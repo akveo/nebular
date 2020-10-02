@@ -1,6 +1,6 @@
 {
   "name": "@nebular/theme",
-  "version": "6.0.1",
+  "version": "6.2.1",
   "description": "@nebular/theme",
   "author": "akveo",
   "license": "MIT",
@@ -25,7 +25,7 @@
     "@angular/common": "^10.0.0",
     "@angular/core": "^10.0.0",
     "@angular/router": "^10.0.0",
-    "@angular/cdk": "^10.0.0",
+    "@angular/cdk": "^10.2.1",
     "rxjs": "^6.5.4",
     "tslib": "^2.0.0"
   },

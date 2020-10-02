@@ -141,8 +141,8 @@ export class NbCalendarDayPickerComponent<D, T> implements OnChanges {
   constructor(private monthModel: NbCalendarMonthModelService<D>) {
   }
 
-  ngOnChanges({ visibleDate }: SimpleChanges) {
-    if (visibleDate) {
+  ngOnChanges({ visibleDate, boundingMonths }: SimpleChanges) {
+    if (visibleDate || boundingMonths) {
       this.weeks = this.monthModel.createDaysGrid(this.visibleDate, this.boundingMonths);
     }
   }

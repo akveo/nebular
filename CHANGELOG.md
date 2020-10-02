@@ -1,5 +1,54 @@
+<a name="6.2.1"></a>
+## [6.2.1](https://github.com/akveo/nebular/compare/v6.2.0...v6.2.1) (2020-10-01)
+
+
+### Bug Fixes
+
+* **accordion:** extract inner elements styles outside accordion ([#2536](https://github.com/akveo/nebular/issues/2536)) ([9089690](https://github.com/akveo/nebular/commit/9089690))
+* **calendar range cells:** handle unset date or selectedValue ([#2537](https://github.com/akveo/nebular/issues/2537)) ([0f20b9c](https://github.com/akveo/nebular/commit/0f20b9c))
+
+
+
+<a name="6.2.0"></a>
+# [6.2.0](https://github.com/akveo/nebular/compare/v6.1.0...v6.2.0) (2020-09-25)
+
+
+### Bug Fixes
+
+* **build:** provide ES5 code in UMD bundles ([#2520](https://github.com/akveo/nebular/issues/2520)) ([e64bac0](https://github.com/akveo/nebular/commit/e64bac0))
+* **timepicker:** remove duplicate providers ([#2529](https://github.com/akveo/nebular/issues/2529)) ([7e5e489](https://github.com/akveo/nebular/commit/7e5e489))
+
+
+### Features
+
+* **datepicker:** export calendar with time component ([#2528](https://github.com/akveo/nebular/issues/2528)) ([f378492](https://github.com/akveo/nebular/commit/f378492))
+* add support for TypeScript 4.0 ([#2523](https://github.com/akveo/nebular/issues/2523)) ([7b7f0a4](https://github.com/akveo/nebular/commit/7b7f0a4))
+
+Please note required `@angular/cdk` package version changed to `10.2.1`+.
+
+
+
+<a name="6.1.0"></a>
+# [6.1.0](https://github.com/akveo/nebular/compare/v6.0.1...v6.1.0) (2020-09-17)
+
+
+### Bug Fixes
+
+* **auth:** add client_id to the refresh request ([#2350](https://github.com/akveo/nebular/issues/2350)) ([10b01fa](https://github.com/akveo/nebular/commit/10b01fa))
+* **radio:** add value reset with undefined ([#2511](https://github.com/akveo/nebular/issues/2511)) ([9ac12c7](https://github.com/akveo/nebular/commit/9ac12c7))
+* **rangepicker:** avoid setting month cell to null ([#2330](https://github.com/akveo/nebular/issues/2330)) ([a577b26](https://github.com/akveo/nebular/commit/a577b26))
+
+
+### Features
+
+* **badge:** dot mode ([#2479](https://github.com/akveo/nebular/issues/2479)) ([afe02b7](https://github.com/akveo/nebular/commit/afe02b7))
+* **menu:** support more navigation extras ([#2420](https://github.com/akveo/nebular/issues/2420)) ([03aabfa](https://github.com/akveo/nebular/commit/03aabfa))
+* **timepicker:** add timepicker component ([#2402](https://github.com/akveo/nebular/issues/2402)) ([70ee391](https://github.com/akveo/nebular/commit/70ee391))
+
+
+
 <a name="6.0.1"></a>
-## [6.0.1](https://github.com/akveo/nebular/compare/v6.0.0...v6.0.1) (2020-08-31)
+# [6.0.1](https://github.com/akveo/nebular/compare/v6.0.0...v6.0.1) (2020-08-31)
 
 
 ### Bug Fixes

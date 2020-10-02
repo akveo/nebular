@@ -185,8 +185,6 @@ export * from './components/timepicker/timepicker.module';
 export * from './components/timepicker/model';
 export * from './components/timepicker/timepicker.component';
 export * from './components/timepicker/timepicker.directive';
-export * from './components/timepicker/timepicker.directive';
-
 export * from './components/datepicker/datepicker.module';
 export * from './components/datepicker/datepicker.directive';
 export * from './components/datepicker/datepicker-adapter';

@@ -4,8 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { getDecoratorMetadata } from '@schematics/angular/utility/ast-utils';
-import { parseSourceFile } from '@angular/cdk/schematics';
+import { getDecoratorMetadata, parseSourceFile } from '@angular/cdk/schematics';
 import { Tree } from '@angular-devkit/schematics';
 import { dirname, join, normalize } from '@angular-devkit/core';
 import * as ts from 'typescript';

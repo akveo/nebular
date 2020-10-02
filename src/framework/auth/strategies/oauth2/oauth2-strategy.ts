@@ -307,6 +307,7 @@ export class NbOAuth2AuthStrategy extends NbAuthStrategy {
       grant_type: this.getOption('refresh.grantType'),
       refresh_token: token.getRefreshToken(),
       scope: this.getOption('refresh.scope'),
+      client_id: this.getOption('clientId'),
     };
     return this.urlEncodeParameters(this.cleanParams(this.addCredentialsToParams(params)));
   }
