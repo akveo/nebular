@@ -12,7 +12,7 @@
 
 @mixin nb-buttons-theme() {
   [nbButton] {
-    @include button-theme();
+    @include nb-button-theme();
   }
 
   a[nbButton] {

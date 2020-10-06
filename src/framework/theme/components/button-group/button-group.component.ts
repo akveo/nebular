@@ -570,7 +570,7 @@ export class NbButtonGroupComponent implements OnChanges, AfterContentInit {
   updateButtonInputs(): void {
     if (this.buttons) {
       this.buttons.forEach((item: NbButtonComponent) => {
-        item.updateSmth({
+        item.updateAttributes({
           appearance: this.appearance,
           size: this.size,
           status: this.status,

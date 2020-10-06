@@ -8,30 +8,27 @@
   nb-button-group {
     display: flex;
 
-    div {
-      display: flex;
-      align-items: center;
-    }
-
     [nbButtonToggle], [nbButton] {
       &:focus {
-        //Needs to make shadow visible
+        // Sibling buttons are covering outline shadow. position: relative; declaration makes shadow appear on top of sibling buttons.
         position: relative;
       }
 
       @each $shape in nb-get-shapes() {
+        $button-border-radius: nb-theme(button-#{$shape}-border-radius);
+
         &:last-child.shape-#{$shape} {
           @include nb-ltr(
-              border-radius, 0 nb-theme(button-#{$shape}-border-radius) nb-theme(button-#{$shape}-border-radius) 0);
+              border-radius, 0 $button-border-radius $button-border-radius 0);
           @include nb-rtl(
-              border-radius, nb-theme(button-#{$shape}-border-radius) 0 0 nb-theme(button-#{$shape}-border-radius));
+              border-radius, $button-border-radius 0 0 $button-border-radius);
         }
 
         &:first-child.shape-#{$shape} {
           @include nb-ltr(
-              border-radius, nb-theme(button-#{$shape}-border-radius) 0 0 nb-theme(button-#{$shape}-border-radius));
+              border-radius, $button-border-radius 0 0 $button-border-radius);
           @include nb-rtl(
-              border-radius, 0 nb-theme(button-#{$shape}-border-radius) nb-theme(button-#{$shape}-border-radius) 0);
+              border-radius, 0 $button-border-radius $button-border-radius 0);
         }
 
         &:not(:first-child) {
@@ -42,25 +39,10 @@
           border: none;
 
           &:not(:last-child) {
-            @include nb-ltr(border-right,
-              nb-theme(button-toggle-border-width)
-              nb-theme(button-toggle-border-style)
-              nb-theme(button-toggle-border-color));
-            @include nb-rtl(border-left,
-              nb-theme(button-toggle-border-width)
-              nb-theme(button-toggle-border-style)
-              nb-theme(button-toggle-border-color));
+            $border: nb-theme(button-toggle-border-width) nb-theme(button-toggle-border-style) nb-theme(button-toggle-border-color);
 
-            &:hover {
-              @include nb-ltr(border-right,
-                nb-theme(button-toggle-border-width)
-                nb-theme(button-toggle-border-style)
-                nb-theme(button-toggle-border-color));
-              @include nb-rtl(border-left,
-                nb-theme(button-toggle-border-width)
-                nb-theme(button-toggle-border-style)
-                nb-theme(button-toggle-border-color));
-            }
+            @include nb-ltr(border-right, $border);
+            @include nb-rtl(border-left, $border);
           }
         }
       }

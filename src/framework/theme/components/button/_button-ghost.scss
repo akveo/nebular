@@ -7,6 +7,6 @@
 
 @mixin button-ghost() {
   [nbButton].appearance-ghost {
-    @include appearance-ghost();
+    @include nb-appearance-ghost();
   }
 }

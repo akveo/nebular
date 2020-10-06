@@ -7,6 +7,6 @@
 
 @mixin button-outline() {
   [nbButton].appearance-outline {
-    @include appearance-outline();
+    @include nb-appearance-outline();
   }
 }

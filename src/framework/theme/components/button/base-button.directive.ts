@@ -174,11 +174,11 @@ export abstract class NbBaseButtonDirective {
     protected renderer: Renderer2,
     protected hostElement: ElementRef<HTMLElement>,
     // @breaking-change @7.0.0  make cd required
-    @Optional() protected cd?: ChangeDetectorRef,
+    protected cd: ChangeDetectorRef,
   ) {
   }
 
-  updateSmth(config: {
+  updateAttributes(config: {
     appearance: NbButtonAppearance;
     size: NbComponentSize;
     shape: NbComponentShape;
@@ -188,9 +188,7 @@ export abstract class NbBaseButtonDirective {
     this.status = config.status;
     this.size = config.size;
     this.shape = config.shape;
-    if (this.cd) {
-      this.cd.markForCheck();
-    }
+    this.cd.markForCheck();
   }
 
   get iconElement() {

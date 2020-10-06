@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-@mixin nb-button() {
+@mixin nb-button-core() {
   appearance: none;
   text-align: center;
   display: inline-flex;
@@ -27,7 +27,7 @@
   }
 }
 
-@mixin button-theme() {
+@mixin nb-button-theme() {
   cursor: nb-theme(button-cursor);
   font-family: nb-theme(button-text-font-family);
   font-weight: nb-theme(button-text-font-weight);
@@ -49,6 +49,7 @@
       nb-icon {
         font-size: nb-theme(button-#{$size}-text-font-size);
         height: nb-theme(button-#{$size}-icon-size);
+        width: nb-theme(button-#{$size}-icon-size);
         margin-top: nb-theme(button-#{$size}-icon-vertical-margin);
         margin-bottom: nb-theme(button-#{$size}-icon-vertical-margin);
       }
@@ -78,7 +79,7 @@
   }
 }
 
-@mixin appearance-ghost() {
+@mixin nb-appearance-ghost() {
   background-color: nb-theme(button-ghost-background-color);
   border-color: nb-theme(button-ghost-border-color);
   border-style: nb-theme(button-ghost-border-style);
@@ -127,7 +128,7 @@
   }
 }
 
-@mixin appearance-filled() {
+@mixin nb-appearance-filled() {
   border-style: nb-theme(button-filled-border-style);
   border-width: nb-theme(button-filled-border-width);
   text-transform: nb-theme(button-filled-text-transform);
@@ -168,7 +169,7 @@
   }
 }
 
-@mixin appearance-outline() {
+@mixin nb-appearance-outline() {
   border-style: nb-theme(button-outline-border-style);
   border-width: nb-theme(button-outline-border-width);
   text-transform: nb-theme(button-outline-text-transform);
