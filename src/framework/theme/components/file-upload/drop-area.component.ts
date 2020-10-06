@@ -86,7 +86,7 @@ export class NbDropAreaComponent implements ControlValueAccessor {
     this.onTouched = fn;
   }
 
-  writeValue(obj: any): void {
-    this.fileUpload.emit(obj);
+  writeValue(fileModel: NbFileModel): void {
+    this.fileUpload.emit(fileModel);
   }
 }

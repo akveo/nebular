@@ -5,9 +5,10 @@
  */
 
 import {
-  Component,
+  Component, forwardRef,
 } from '@angular/core';
 import { NbBaseFileUploadComponent } from './base-file-upload.component';
+import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
 /**
  * File Upload
@@ -50,6 +51,13 @@ import { NbBaseFileUploadComponent } from './base-file-upload.component';
       </ng-container>
     </div>
   `,
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => NbFullWidthFileUploadComponent),
+      multi: true,
+    },
+  ],
   styleUrls: [`./full-width-file-upload.component.scss`],
 })
 export class NbFullWidthFileUploadComponent extends NbBaseFileUploadComponent {

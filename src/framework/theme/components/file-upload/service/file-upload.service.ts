@@ -5,13 +5,15 @@ import { NbFileModel } from '../model';
 export class NbFileUploadService {
 
   readFile(file: File): NbFileModel {
+    const reader = new FileReader();
     const fileItem: NbFileModel = {
       name: file.name,
       id: file.name + Math.floor(Math.random() * 10000),
       isImage: this.isImage(file.name),
+      reader: reader,
+      file: file,
     };
 
-    const reader = new FileReader();
     reader.readAsDataURL(file);
 
     reader.onprogress = (event) => {

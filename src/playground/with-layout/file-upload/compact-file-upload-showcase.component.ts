@@ -5,15 +5,25 @@
  */
 
 import { Component } from '@angular/core';
+import {NbFileModel} from '../../../framework/theme/components/file-upload/model';
 
 @Component({
   selector: 'nb-compact-file-upload-showcase-component',
   template: `
     <nb-card>
       <nb-card-body>
-        <nb-compact-file-upload allowPreview></nb-compact-file-upload>
+        <nb-compact-file-upload allowPreview [(ngModel)]="files"></nb-compact-file-upload>
       </nb-card-body>
     </nb-card>`,
 })
 export class CompactFileUploadShowcaseComponent {
+
+  _files: NbFileModel[];
+  set files(files) {
+    this._files = files;
+  }
+  get files() {
+    return this._files;
+  }
+
 }

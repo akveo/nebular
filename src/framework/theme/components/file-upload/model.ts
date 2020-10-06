@@ -7,11 +7,13 @@
 export class NbFileModel {
   id: string;
   isImage: boolean;
-  file?: File;
+  reader: FileReader;
+  file: File;
   name?: string;
   url?: string;
   totalSize?: number;
   loaded?: number;
   uploaded?: boolean;
   progressPercent?: number;
+
 }

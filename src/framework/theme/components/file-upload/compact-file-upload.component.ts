@@ -1,6 +1,6 @@
-import {Component, ElementRef, ViewChild} from '@angular/core';
+import { Component,  forwardRef } from '@angular/core';
 import { NbBaseFileUploadComponent } from './base-file-upload.component';
-import {NbDropAreaComponent} from './drop-area.component';
+import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
   selector: 'nb-compact-file-upload',
@@ -21,6 +21,13 @@ import {NbDropAreaComponent} from './drop-area.component';
       </nb-file-item>
     </ng-container>
   `,
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => NbCompactFileUploadComponent),
+      multi: true,
+    },
+  ],
   styleUrls: [`./compact-file-upload.component.scss`],
 })
 export class NbCompactFileUploadComponent extends NbBaseFileUploadComponent {
