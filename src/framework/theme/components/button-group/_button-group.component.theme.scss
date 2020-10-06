@@ -10,7 +10,8 @@
 
     [nbButtonToggle], [nbButton] {
       &:focus {
-        // Sibling buttons are covering outline shadow. position: relative; declaration makes shadow appear on top of sibling buttons.
+        // Sibling buttons are covering outline shadow.
+        // position: relative; declaration makes shadow appear on top of sibling buttons.
         position: relative;
       }
 
@@ -39,7 +40,9 @@
           border: none;
 
           &:not(:last-child) {
-            $border: nb-theme(button-toggle-border-width) nb-theme(button-toggle-border-style) nb-theme(button-toggle-border-color);
+            $border: nb-theme(button-toggle-border-width)
+                     nb-theme(button-toggle-border-style)
+                     nb-theme(button-toggle-border-color);
 
             @include nb-ltr(border-right, $border);
             @include nb-rtl(border-left, $border);
