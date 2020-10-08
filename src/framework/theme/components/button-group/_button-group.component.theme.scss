@@ -7,8 +7,11 @@
 @mixin nb-buttons-group-theme() {
   nb-button-group {
     display: flex;
+    align-items: flex-start;
 
     [nbButtonToggle], [nbButton] {
+      display: flex;
+
       &:focus {
         // Sibling buttons are covering outline shadow.
         // position: relative; declaration makes shadow appear on top of sibling buttons.
