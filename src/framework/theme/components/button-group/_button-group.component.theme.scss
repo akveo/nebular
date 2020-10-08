@@ -23,16 +23,16 @@
 
         &:last-child.shape-#{$shape} {
           @include nb-ltr(
-              border-radius, 0 $button-border-radius $button-border-radius 0);
+                          border-radius, 0 $button-border-radius $button-border-radius 0);
           @include nb-rtl(
-              border-radius, $button-border-radius 0 0 $button-border-radius);
+                          border-radius, $button-border-radius 0 0 $button-border-radius);
         }
 
         &:first-child.shape-#{$shape} {
           @include nb-ltr(
-              border-radius, $button-border-radius 0 0 $button-border-radius);
+                          border-radius, $button-border-radius 0 0 $button-border-radius);
           @include nb-rtl(
-              border-radius, 0 $button-border-radius $button-border-radius 0);
+                          border-radius, 0 $button-border-radius $button-border-radius 0);
         }
 
         &:not(:first-child) {
@@ -43,12 +43,18 @@
           border: none;
 
           &:not(:last-child) {
-            $border: nb-theme(button-toggle-border-width)
-                     nb-theme(button-toggle-border-style)
-                     nb-theme(button-toggle-border-color);
+            $border: nb-theme(button-toggle-border-width) nb-theme(button-toggle-border-style) nb-theme(button-toggle-border-color);
 
             @include nb-ltr(border-right, $border);
             @include nb-rtl(border-left, $border);
+          }
+        }
+      }
+
+      &.appearance-filled {
+        @each $status in nb-get-statuses() {
+          &.status-#{$status} {
+            color: nb-theme(button-toggle-filled-#{$status}-text-color);
           }
         }
       }

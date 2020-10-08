@@ -446,7 +446,7 @@ export class NbButtonGroupComponent implements OnChanges, AfterContentInit {
    * Button group status (adds specific styles):
    * `primary`, `info`, `success`, `warning`, `danger`
    */
-  @Input() status: NbComponentStatus = 'basic';
+  @Input() status: NbComponentStatus = 'primary';
 
   /**
    * Button group shapes: `rectangle`, `round`, `semi-round`
