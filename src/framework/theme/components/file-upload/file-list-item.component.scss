@@ -1,41 +1,60 @@
 @import '../../styles/core/mixins';
 
 :host {
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
-  align-items: flex-start;
 
-  .file-name {
-    flex: 1;
-  }
+  .file-badge {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: flex-start;
+    margin: 0.5rem 0;
 
-  .file-info {
-    margin-top: 0;
-    margin-bottom: 0;
-    margin-left: auto;
-  }
+    .preview-container {
+      width: 5rem;
+      height: 5rem;
+      margin-right: 1rem;
+      margin-bottom: 0.5rem;
+    }
 
-  .preview-container {
-    width: 5rem;
-    height: 5rem;
-  }
+    .image {
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: cover;
+      width: 100%;
+      height: 100%;
+    }
 
-  .image {
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-    width: 100%;
-    height: 100%;
+    .info {
+      flex: 1 1;
+      display: flex;
+      flex-wrap: wrap;
+
+      .name {
+        flex: 1 0 auto;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        margin-bottom: 0.5rem;
+        margin-right: 0.5rem;
+      }
+
+      .additional-info {
+        flex: 0 1;
+        display: flex;
+        align-items: flex-start;
+      }
+    }
+
+    button.remove {
+      margin-top: -0.6875rem;
+      margin-left: 0.5rem;
+    }
   }
 
   nb-progress-bar {
     width: 100%;
+    margin: 0;
     align-self: flex-end;
-  }
-
-  .remove-button {
-    align-self: flex-start;
   }
 
 }
