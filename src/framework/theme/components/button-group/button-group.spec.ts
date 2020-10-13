@@ -24,13 +24,16 @@ import { NbButtonToggleDirective } from '@nebular/theme/components/button-toggle
       <button nbButtonToggle>C</button>
       <button nbButtonToggle>D</button>
       <button nbButtonToggle>E</button>
-      <button nbButtonToggle>F</button>
+      <button nbButtonToggle *ngIf="showLast">F</button>
     </nb-button-group>
   `,
 })
 export class NbButtonGroupTestComponent {
   @ViewChild(NbButtonGroupComponent) buttonGroup: NbButtonGroupComponent;
   @ViewChildren(NbButtonToggleDirective) buttonToggle: QueryList<NbButtonToggleDirective>;
+
+  showLast = false;
+
 }
 describe('Component: NbButtonGroup', () => {
   let fixture: ComponentFixture<NbButtonGroupTestComponent>;
@@ -45,6 +48,8 @@ describe('Component: NbButtonGroup', () => {
     fixture = TestBed.createComponent(NbButtonGroupTestComponent);
     buttonGroupTest = fixture.componentInstance;
 
+    fixture.detectChanges();
+    buttonGroupTest.showLast = true;
     fixture.detectChanges();
   });
 
