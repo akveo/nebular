@@ -1,6 +1,6 @@
 ## Firebase authentication with Nebular Auth
 
-`@nebualar/firebase-auth` allows authentication in firebase applications with `@nebular/auth`.
+`@nebular/firebase-auth` allows authentication in firebase applications with `@nebular/auth`.
 The package provides the following strategies:
   - `NbFirebasePasswordStrategy` - authentication with email/password
   - `NbFirebaseGoogleStrategy` - authentication with google accounts
