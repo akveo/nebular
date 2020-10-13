@@ -46,7 +46,7 @@ export class NbToastrConfig {
    * */
   preventDuplicates: boolean = false;
   /**
-   * Determines the how to threat duplicates.
+   * Determines the how to treat duplicates.
    * */
   duplicatesBehaviour: NbDuplicateToastBehaviour = 'previous';
   /*
