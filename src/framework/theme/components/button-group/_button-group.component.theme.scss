@@ -43,7 +43,10 @@
           border: none;
 
           &:not(:last-child) {
-            $border: nb-theme(button-toggle-border-width) nb-theme(button-toggle-border-style) nb-theme(button-toggle-border-color);
+            $border-width: nb-theme(button-toggle-border-width);
+            $border-style: nb-theme(button-toggle-border-style);
+            $border-color: nb-theme(button-toggle-border-color);
+            $border: $border-width $border-style $border-color;
 
             @include nb-ltr(border-right, $border);
             @include nb-rtl(border-left, $border);
