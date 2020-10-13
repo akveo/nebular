@@ -227,12 +227,6 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         component: 'ButtonInteractiveComponent',
         name: 'Button Interactive',
       },
-      {
-        path: 'button-group-showcase.component',
-        link: '/button/button-group-showcase.component',
-        component: 'ButtonGroupShowcaseComponent',
-        name: 'Button Group Showcase',
-      },
     ],
   },
   {
