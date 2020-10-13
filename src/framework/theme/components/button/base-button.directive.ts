@@ -1,4 +1,13 @@
-import { ChangeDetectorRef, Directive, ElementRef, HostBinding, Input, Optional, Renderer2 } from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectorRef,
+  Directive,
+  ElementRef,
+  HostBinding,
+  Input,
+  NgZone,
+  Renderer2,
+} from '@angular/core';
 import { NbComponentSize } from '../component-size';
 import { NbComponentStatus } from '../component-status';
 import { NbComponentShape } from '../component-shape';
@@ -7,7 +16,7 @@ import { convertToBoolProperty, firstChildNotComment, lastChildNotComment, NbBoo
 
 
 @Directive()
-export abstract class NbBaseButtonDirective {
+export abstract class NbBaseButtonDirective implements AfterViewInit {
   /**
    * Button size, available sizes:
    * `tiny`, `small`, `medium`, `large`, `giant`
@@ -175,7 +184,15 @@ export abstract class NbBaseButtonDirective {
     protected hostElement: ElementRef<HTMLElement>,
     // @breaking-change @7.0.0  make cd required
     protected cd: ChangeDetectorRef,
+    protected zone: NgZone,
   ) {
+  }
+
+  ngAfterViewInit() {
+    // TODO: #2254
+    this.zone.runOutsideAngular(() => setTimeout(() => {
+      this.renderer.addClass(this.hostElement.nativeElement, 'nb-transition');
+    }));
   }
 
   updateAttributes(config: {

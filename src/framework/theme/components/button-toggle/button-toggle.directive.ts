@@ -73,6 +73,6 @@ export class NbButtonToggleDirective extends NbBaseButtonDirective {
     protected cd: ChangeDetectorRef,
     protected zone: NgZone,
   ) {
-    super(renderer, hostElement, cd);
+    super(renderer, hostElement, cd, zone);
   }
 }

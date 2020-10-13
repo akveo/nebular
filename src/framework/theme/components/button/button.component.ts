@@ -645,13 +645,6 @@ export class NbButtonComponent extends NbBaseButtonDirective implements AfterVie
     protected cd: ChangeDetectorRef,
     protected zone: NgZone,
   ) {
-    super(renderer, hostElement, cd);
-  }
-
-  ngAfterViewInit() {
-    // TODO: #2254
-    this.zone.runOutsideAngular(() => setTimeout(() => {
-      this.renderer.addClass(this.hostElement.nativeElement, 'nb-transition');
-    }));
+    super(renderer, hostElement, cd, zone);
   }
 }
