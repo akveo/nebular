@@ -246,7 +246,7 @@ export class NbToastrContainerRegistry {
  *
  * @stacked-example(Prevent duplicates, toastr/toastr-prevent-duplicates.component)
  *
- * `duplicatesBehaviour` - determines how to threat the toasts duplication.
+ * `duplicatesBehaviour` - determines how to treat the toasts duplication.
  * Compare with the previous message `previous`
  * or with all visible messages `all`.
  *
