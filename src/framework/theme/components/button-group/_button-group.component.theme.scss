@@ -5,25 +5,26 @@
  */
 
 @mixin nb-buttons-group-theme() {
+  $border: nb-theme(button-toggle-border-width)
+           nb-theme(button-toggle-border-style)
+           nb-theme(button-toggle-border-color);
+
   nb-button-group {
     display: inline-flex;
 
-    [nbButtonToggle], [nbButton] {
+    [nbButton],
+    [nbButtonToggle] {
       @each $shape in nb-get-shapes() {
-        $button-border-radius: nb-theme(button-#{$shape}-border-radius);
+        $border-radius: nb-theme(button-#{$shape}-border-radius);
 
         &:last-child.shape-#{$shape} {
-          @include nb-ltr(
-                          border-radius, 0 $button-border-radius $button-border-radius 0);
-          @include nb-rtl(
-                          border-radius, $button-border-radius 0 0 $button-border-radius);
+          @include nb-ltr(border-radius, 0 $border-radius $border-radius 0);
+          @include nb-rtl(border-radius, $border-radius 0 0 $border-radius);
         }
 
         &:first-child.shape-#{$shape} {
-          @include nb-ltr(
-                          border-radius, $button-border-radius 0 0 $button-border-radius);
-          @include nb-rtl(
-                          border-radius, 0 $button-border-radius $button-border-radius 0);
+          @include nb-ltr(border-radius, $border-radius 0 0 $border-radius);
+          @include nb-rtl(border-radius, 0 $border-radius $border-radius 0);
         }
 
         &:not(:first-child) {
@@ -34,11 +35,6 @@
           border: none;
 
           &:not(:last-child) {
-            $border-width: nb-theme(button-toggle-border-width);
-            $border-style: nb-theme(button-toggle-border-style);
-            $border-color: nb-theme(button-toggle-border-color);
-            $border: $border-width $border-style $border-color;
-
             @include nb-ltr(border-right, $border);
             @include nb-rtl(border-left, $border);
           }
