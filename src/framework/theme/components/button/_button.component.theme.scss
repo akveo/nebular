@@ -8,7 +8,6 @@
 @import './button-outline';
 @import './button-ghost';
 @import './button-hero';
-@import './button-mixins';
 
 @mixin nb-buttons-theme() {
   [nbButton] {
