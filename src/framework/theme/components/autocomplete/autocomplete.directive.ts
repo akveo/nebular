@@ -182,6 +182,9 @@ export class NbAutocompleteDirective<T> implements OnDestroy, AfterViewInit, Con
     return (this.isOpen && this.keyManager.activeItem) ? this.keyManager.activeItem.id : null;
   }
 
+  @HostBinding(`disabled`)
+  disabled: boolean;
+
   constructor(
     protected hostRef: ElementRef,
     protected overlay: NbOverlayService,
@@ -258,6 +261,11 @@ export class NbAutocompleteDirective<T> implements OnDestroy, AfterViewInit, Con
 
   registerOnTouched(fn: any): void {
     this._onTouched = fn;
+  }
+
+  setDisabledState(isDisabled: boolean): void {
+    this.disabled = convertToBoolProperty(isDisabled);
+    this.cd.markForCheck();
   }
 
   protected subscribeOnOptionClick() {
