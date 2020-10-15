@@ -12,12 +12,6 @@
     [nbButtonToggle], [nbButton] {
       display: flex;
 
-      &:focus {
-        // Sibling buttons are covering outline shadow.
-        // position: relative; declaration makes shadow appear on top of sibling buttons.
-        position: relative;
-      }
-
       @each $shape in nb-get-shapes() {
         $button-border-radius: nb-theme(button-#{$shape}-border-radius);
 
