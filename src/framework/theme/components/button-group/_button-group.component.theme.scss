@@ -6,12 +6,9 @@
 
 @mixin nb-buttons-group-theme() {
   nb-button-group {
-    display: flex;
-    align-items: flex-start;
+    display: inline-flex;
 
     [nbButtonToggle], [nbButton] {
-      display: flex;
-
       @each $shape in nb-get-shapes() {
         $button-border-radius: nb-theme(button-#{$shape}-border-radius);
 
