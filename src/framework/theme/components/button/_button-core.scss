@@ -4,6 +4,8 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
+@import '../../styles/core/mixins';
+
 @mixin nb-button-core() {
   appearance: none;
   text-align: center;
@@ -24,5 +26,9 @@
 
   ::ng-deep nb-icon {
     vertical-align: top;
+  }
+
+  &.nb-transition {
+    @include nb-component-animation(background-color, border-color, box-shadow, color);
   }
 }

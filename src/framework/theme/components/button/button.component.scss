@@ -4,13 +4,8 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-@import '../../styles/core/mixins';
 @import './button-core';
 
 :host {
   @include nb-button-core();
-}
-
-:host(.nb-transition) {
-  @include nb-component-animation(background-color, border-color, box-shadow, color);
 }
