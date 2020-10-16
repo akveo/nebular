@@ -14,30 +14,37 @@
 
     [nbButton],
     [nbButtonToggle] {
-      @each $shape in nb-get-shapes() {
-        $border-radius: nb-theme(button-#{$shape}-border-radius);
-
-        &:last-child.shape-#{$shape} {
-          @include nb-ltr(border-radius, 0 $border-radius $border-radius 0);
-          @include nb-rtl(border-radius, $border-radius 0 0 $border-radius);
+      @include nb-ltr {
+        &:first-child {
+          border-top-right-radius: 0;
+          border-bottom-right-radius: 0;
         }
-
-        &:first-child.shape-#{$shape} {
-          @include nb-ltr(border-radius, $border-radius 0 0 $border-radius);
-          @include nb-rtl(border-radius, 0 $border-radius $border-radius 0);
+        &:last-child {
+          border-top-left-radius: 0;
+          border-bottom-left-radius: 0;
         }
-
-        &:not(:first-child) {
-          border-radius: 0;
+      }
+      @include nb-rtl {
+        &:first-child {
+          border-top-left-radius: 0;
+          border-bottom-left-radius: 0;
         }
+        &:last-child {
+          border-top-right-radius: 0;
+          border-bottom-right-radius: 0;
+        }
+      }
 
-        &:not(.appearance-outline) {
-          border: none;
+      &:not(:first-child):not(:last-child) {
+        border-radius: 0;
+      }
 
-          &:not(:last-child) {
-            @include nb-ltr(border-right, $border);
-            @include nb-rtl(border-left, $border);
-          }
+      &:not(.appearance-outline) {
+        border: none;
+
+        &:not(:last-child) {
+          @include nb-ltr(border-right, $border);
+          @include nb-rtl(border-left, $border);
         }
       }
 
