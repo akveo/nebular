@@ -533,6 +533,11 @@ export class NbSelectComponent implements OnChanges, AfterViewInit, AfterContent
   @Input() appearance: NbSelectAppearance = 'outline';
 
   /**
+   * Specifies class for overlay
+   * */
+  @Input() overlayClass: string | string[] | Set<string> | Record<string, any>;
+
+  /**
    * Adds `outline` styles
    */
   @Input()
