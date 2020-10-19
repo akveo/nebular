@@ -21,8 +21,7 @@ export class AutocompleteFormComponent implements OnInit {
   filteredControlOptions$: Observable<string[]>;
   filteredNgModelOptions$: Observable<string[]>;
   inputFormControl: FormControl;
-  value?: string;
-  disabled = false;
+  value: string;
 
   ngOnInit() {
 
@@ -38,17 +37,13 @@ export class AutocompleteFormComponent implements OnInit {
       );
   }
 
-  private filter(value?: string): string[] {
-    const filterValue = value?.toLowerCase() ?? '';
+  private filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
     return this.options.filter(optionValue => optionValue.toLowerCase().includes(filterValue));
   }
 
-  onModelChange(value?: string) {
+  onModelChange(value: string) {
     this.filteredNgModelOptions$ = of(this.filter(value));
   }
-
-  toggleDisable() {
-    this.disabled = !this.disabled;
-    this.disabled ? this.inputFormControl.disable() : this.inputFormControl.enable();
-  }
 }
+

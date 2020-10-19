@@ -19,7 +19,6 @@
     <input
       [ngModel]="value"
       (ngModelChange)="onModelChange($event)"
-      [disabled]="disabled"
       nbInput
       type="text"
       placeholder="ngModel"
@@ -32,8 +31,6 @@
       </nb-option>
 
     </nb-autocomplete>
-
-    <button type="button" (click)="toggleDisable()">Toggle disable</button>
 
   </nb-card-body>
 </nb-card>

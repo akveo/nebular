@@ -1,0 +1,67 @@
+<nb-card size="small">
+  <nb-card-body class="example-items-rows">
+
+    <button type="button" (click)="toggleDisabled()">Toggle disabled</button>
+
+    <label>
+      Input + disabled <br>
+      <input
+      nbInput
+      disabled
+      type="text"
+      placeholder="Plain input"
+      [nbAutocomplete]="auto" />
+    </label>
+
+    <label>
+      Input + [disabled] <br>
+      <input
+      nbInput
+      [disabled]="disabled"
+      type="text"
+      placeholder="Plain input"
+      [nbAutocomplete]="auto" />
+    </label>
+
+    <label>
+      Input + formControl <br>
+      <input
+      [formControl]="inputFormControl"
+      nbInput
+      type="text"
+      placeholder="Form control"
+      [nbAutocomplete]="auto" />
+    </label>
+
+    <label>
+      Input + ngModel + disabled <br>
+      <input
+      ngModel
+      nbInput
+      disabled
+      type="text"
+      placeholder="ngModel"
+      [nbAutocomplete]="auto" />
+    </label>
+
+    <label>
+      Input + ngModel + [disabled] <br>
+      <input
+      ngModel
+      nbInput
+      [disabled]="disabled"
+      type="text"
+      placeholder="ngModel"
+      [nbAutocomplete]="auto" />
+    </label>
+
+    <nb-autocomplete #auto>
+
+      <nb-option *ngFor="let option of options" [value]="option">
+        {{ option }}
+      </nb-option>
+
+    </nb-autocomplete>
+
+  </nb-card-body>
+</nb-card>
