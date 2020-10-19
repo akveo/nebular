@@ -16,6 +16,7 @@ import {
   Input,
   OnDestroy,
   QueryList,
+  Renderer2,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { NbOverlayRef, NbScrollStrategy } from '../cdk/overlay/mapping';
@@ -182,9 +183,6 @@ export class NbAutocompleteDirective<T> implements OnDestroy, AfterViewInit, Con
     return (this.isOpen && this.keyManager.activeItem) ? this.keyManager.activeItem.id : null;
   }
 
-  @HostBinding(`disabled`)
-  disabled: boolean;
-
   constructor(
     protected hostRef: ElementRef,
     protected overlay: NbOverlayService,
@@ -192,6 +190,7 @@ export class NbAutocompleteDirective<T> implements OnDestroy, AfterViewInit, Con
     protected triggerStrategyBuilder: NbTriggerStrategyBuilderService,
     protected positionBuilder: NbPositionBuilderService,
     protected activeDescendantKeyManagerFactory: NbActiveDescendantKeyManagerFactoryService<NbOptionComponent<T>>,
+    protected renderer: Renderer2,
   ) {}
 
   ngAfterViewInit() {
@@ -264,8 +263,12 @@ export class NbAutocompleteDirective<T> implements OnDestroy, AfterViewInit, Con
   }
 
   setDisabledState(isDisabled: boolean): void {
-    this.disabled = convertToBoolProperty(isDisabled);
-    this.cd.markForCheck();
+    const disabled = convertToBoolProperty(isDisabled);
+    if (disabled) {
+      this.renderer.setAttribute(this.hostRef.nativeElement, 'disabled', 'disabled');
+    } else {
+      this.renderer.removeAttribute(this.hostRef.nativeElement, 'disabled');
+    }
   }
 
   protected subscribeOnOptionClick() {

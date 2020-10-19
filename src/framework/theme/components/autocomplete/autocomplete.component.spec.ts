@@ -317,12 +317,10 @@ describe('Component: NbAutocompleteComponent', () => {
   it('should update disabled state', () => {
     autocompleteDirective.setDisabledState(true);
     fixture.detectChanges();
-    expect(autocompleteDirective.disabled).toBe(true);
     expect(input.disabled).toBe(true);
 
     autocompleteDirective.setDisabledState(false);
     fixture.detectChanges();
-    expect(autocompleteDirective.disabled).toBe(false);
     expect(input.disabled).toBe(false);
   });
 
