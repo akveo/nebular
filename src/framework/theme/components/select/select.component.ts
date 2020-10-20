@@ -533,9 +533,14 @@ export class NbSelectComponent implements OnChanges, AfterViewInit, AfterContent
   @Input() appearance: NbSelectAppearance = 'outline';
 
   /**
-   * Specifies class for overlay
+   * Specifies class for options
    * */
-  @Input() overlayClass: string | string[] | Set<string> | Record<string, any>;
+  @Input() optionsClass: string | string[] | Set<string> | Record<string, any>;
+
+    /**
+   * Specifies class for panel of options
+   * */
+  @Input() optionsPanelClass: string | string[];
 
   /**
    * Adds `outline` styles
@@ -980,7 +985,11 @@ export class NbSelectComponent implements OnChanges, AfterViewInit, AfterContent
   protected createOverlay() {
     const scrollStrategy = this.createScrollStrategy();
     this.positionStrategy = this.createPositionStrategy();
-    this.ref = this.overlay.create({ positionStrategy: this.positionStrategy, scrollStrategy });
+    this.ref = this.overlay.create({
+      positionStrategy: this.positionStrategy,
+      scrollStrategy,
+      panelClass: this.optionsPanelClass,
+    });
   }
 
   protected createKeyManager(): void {
