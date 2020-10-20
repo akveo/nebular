@@ -19,6 +19,10 @@ export class AutocompleteDisabledComponent {
 
   toggleDisabled() {
     this.disabled = !this.disabled;
-    this.disabled ? this.inputFormControl.disable() : this.inputFormControl.enable();
+    if (this.disabled) {
+      this.inputFormControl.disable();
+    } else {
+      this.inputFormControl.enable();
+    }
   }
 }
