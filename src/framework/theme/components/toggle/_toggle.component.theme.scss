@@ -19,7 +19,7 @@
         Setting it in SCSS as we don't have access to theme variables from TS.
       */
 
-      $switcher-vertical-offset: (nb-theme(toggle-height) - nb-theme(toggle-switcher-size)) / 2;
+      $switcher-vertical-offset: (#{nb-theme(toggle-height)} - #{nb-theme(toggle-switcher-size)}) / 2;
       @include nb-ltr() {
         &.checked .toggle-switcher {
           left: calc(100%
