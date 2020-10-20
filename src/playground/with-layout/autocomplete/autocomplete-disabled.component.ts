@@ -8,14 +8,14 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
 @Component({
-  selector: 'nb-autocomplete-disabled',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './autocomplete-disabled.component.html',
+  styleUrls: ['./autocomplete-disabled.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AutocompleteDisabledComponent {
   options = ['Option 1', 'Option 2', 'Option 3'];
+  disabled = true;
   inputFormControl = new FormControl();
-  disabled = false;
 
   toggleDisabled() {
     this.disabled = !this.disabled;

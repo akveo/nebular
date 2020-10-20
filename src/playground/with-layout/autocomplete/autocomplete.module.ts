@@ -5,7 +5,7 @@
  */
 
 import { NgModule } from '@angular/core';
-import { NbAutocompleteModule, NbCardModule, NbInputModule } from '@nebular/theme';
+import { NbAutocompleteModule, NbButtonModule, NbCardModule, NbInputModule } from '@nebular/theme';
 import { AutocompleteShowcaseComponent } from './autocomplete-showcase.component';
 import { AutocompleteRoutingModule } from './autocomplete-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -41,6 +41,7 @@ import { CommonModule } from '@angular/common';
     NbInputModule,
     AutocompleteRoutingModule,
     NbCardModule,
+    NbButtonModule,
   ],
 })
 export class AutocompleteModule {}
