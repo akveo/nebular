@@ -15,6 +15,7 @@ import {
   HostListener,
   Input,
   OnDestroy,
+  Optional,
   QueryList,
   Renderer2,
 } from '@angular/core';
@@ -190,7 +191,8 @@ export class NbAutocompleteDirective<T> implements OnDestroy, AfterViewInit, Con
     protected triggerStrategyBuilder: NbTriggerStrategyBuilderService,
     protected positionBuilder: NbPositionBuilderService,
     protected activeDescendantKeyManagerFactory: NbActiveDescendantKeyManagerFactoryService<NbOptionComponent<T>>,
-    protected renderer: Renderer2,
+    // @breaking-change @7.0.0 Make renderer required.
+    @Optional() protected renderer?: Renderer2,
   ) {}
 
   ngAfterViewInit() {
@@ -262,12 +264,12 @@ export class NbAutocompleteDirective<T> implements OnDestroy, AfterViewInit, Con
     this._onTouched = fn;
   }
 
-  setDisabledState(isDisabled: boolean): void {
-    const disabled = convertToBoolProperty(isDisabled);
-    if (disabled) {
-      this.renderer.setAttribute(this.hostRef.nativeElement, 'disabled', 'disabled');
-    } else {
-      this.renderer.removeAttribute(this.hostRef.nativeElement, 'disabled');
+  setDisabledState(disabled: boolean): void {
+    // @breaking-change @7.0.0 Keep only `this.renderer.setProperty` without `if/else`.
+    if (this.renderer) {
+      this.renderer.setProperty(this.hostRef.nativeElement, 'disabled', disabled);
+    } else if (this.hostRef.nativeElement) {
+      this.hostRef.nativeElement.disabled = disabled;
     }
   }
 
