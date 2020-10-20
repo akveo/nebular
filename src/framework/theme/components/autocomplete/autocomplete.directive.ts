@@ -404,7 +404,7 @@ export class NbAutocompleteDirective<T> implements OnDestroy, AfterViewInit, Con
   protected createOverlay() {
     const scrollStrategy = this.createScrollStrategy();
     this.overlayRef = this.overlay.create(
-      { positionStrategy: this.positionStrategy, scrollStrategy });
+      { positionStrategy: this.positionStrategy, scrollStrategy, panelClass: this.autocomplete.optionsPanelClass });
   }
 
   protected initOverlay() {

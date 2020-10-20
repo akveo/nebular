@@ -96,6 +96,16 @@ export class NbAutocompleteComponent<T> implements AfterContentInit, OnDestroy {
   @Input() activeFirst: boolean = false;
 
   /**
+   * Specifies class for options
+   * */
+  @Input() optionsClass: string | string[] | Set<string> | Record<string, any>;
+
+  /**
+   * Specifies class for panel of options
+   * */
+  @Input() optionsPanelClass: string | string[];
+
+  /**
    * Will be emitted when selected value changes.
    * */
   @Output() selectedChange: EventEmitter<T> = new EventEmitter();
