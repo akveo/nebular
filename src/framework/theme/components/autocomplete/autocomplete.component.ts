@@ -96,12 +96,12 @@ export class NbAutocompleteComponent<T> implements AfterContentInit, OnDestroy {
   @Input() activeFirst: boolean = false;
 
   /**
-   * Specifies class for options
+   * Specifies class to be set on `nb-option`s container (`nb-option-list`)
    * */
-  @Input() optionsClass: string | string[] | Set<string> | Record<string, any>;
+  @Input() optionsListClass: string | string[] | Set<string> | Record<string, any>;
 
   /**
-   * Specifies class for panel of options
+   * Specifies class for the overlay panel with options
    * */
   @Input() optionsPanelClass: string | string[];
 
