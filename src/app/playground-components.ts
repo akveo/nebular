@@ -151,6 +151,12 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         component: 'AutocompleteActiveFirstComponent',
         name: 'Autocomplete Active First',
       },
+      {
+        path: 'autocomplete-disabled.component',
+        link: '/autocomplete/autocomplete-disabled.component',
+        component: 'AutocompleteDisabledComponent',
+        name: 'Autocomplete Disabled',
+      },
     ],
   },
   {
