@@ -11,6 +11,7 @@ import { AutocompleteFormComponent } from './autocomplete-form.component';
 import { AutocompleteGroupComponent } from './autocomplete-group.component';
 import { AutocompleteCustomDisplayComponent } from './autocomplete-custom-display.component';
 import { AutocompleteActiveFirstComponent } from './autocomplete-active-first.component';
+import { AutocompleteDisabledComponent } from './autocomplete-disabled.component';
 
 const routes: Route[] = [
   {
@@ -32,6 +33,10 @@ const routes: Route[] = [
   {
     path: 'autocomplete-active-first.component',
     component: AutocompleteActiveFirstComponent,
+  },
+  {
+    path: 'autocomplete-disabled.component',
+    component: AutocompleteDisabledComponent,
   },
 ];
 
