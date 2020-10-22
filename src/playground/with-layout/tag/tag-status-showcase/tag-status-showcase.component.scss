@@ -1,0 +1,18 @@
+:host {
+  display: flex;
+  flex-direction: column;
+}
+
+nb-tag {
+  margin: 1rem;
+}
+
+.tags-pad {
+  margin-bottom: 1rem;
+  background-color: white;
+  width: fit-content;
+}
+
+.control-pad {
+  background-color: black;
+}

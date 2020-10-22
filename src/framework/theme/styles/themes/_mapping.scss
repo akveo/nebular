@@ -2581,6 +2581,87 @@ $eva-mapping: (
   icon-danger-color: color-danger-default,
   icon-control-color: color-basic-100,
 
+
+  tag-height: 1.875rem,
+  tag-width: 3.125rem,
+  tag-border-width: 1px,
+  tag-border-radius: 100px,
+  tag-padding: 0 0.25rem,
+  tag-text-font-family: text-subtitle-2-font-family,
+  tag-text-font-size: text-subtitle-2-font-size,
+  tag-text-font-weight: text-subtitle-2-font-weight,
+  tag-text-line-height: text-subtitle-2-line-height,
+
+  tag-rectangle-border-radius: border-radius,
+  tag-semi-round-border-radius: 0.75rem,
+  tag-round-border-radius: 1.5rem,
+
+  tag-filled-border-style: solid,
+  tag-filled-border-width: 0.0625rem,
+  tag-filled-text-transform: capitalize,
+
+  tag-filled-basic-background-color: color-basic-default,
+  tag-filled-basic-border-color: color-basic-default-border,
+  tag-filled-basic-text-color: color-basic-800,
+
+  tag-filled-primary-background-color: color-primary-default,
+  tag-filled-primary-border-color: color-primary-default-border,
+  tag-filled-primary-text-color: text-control-color,
+
+  tag-filled-success-background-color: color-success-default,
+  tag-filled-success-border-color: color-success-default-border,
+  tag-filled-success-text-color: text-control-color,
+
+  tag-filled-info-background-color: color-info-default,
+  tag-filled-info-border-color: color-info-default-border,
+  tag-filled-info-text-color: text-control-color,
+
+  tag-filled-warning-background-color: color-warning-default,
+  tag-filled-warning-border-color: color-warning-default-border,
+  tag-filled-warning-text-color: text-control-color,
+
+  tag-filled-danger-background-color: color-danger-default,
+  tag-filled-danger-border-color: color-danger-default-border,
+  tag-filled-danger-text-color: text-control-color,
+
+  tag-filled-control-background-color: color-control-default,
+  tag-filled-control-border-color: color-control-default-border,
+  tag-filled-control-text-color: color-basic-800,
+
+  tag-outline-border-style: solid,
+  tag-outline-border-width: 0.0625rem,
+  tag-outline-text-transform: capitalize,
+  tag-outline-focus-inset-shadow-length: 0 0 0 100vmax,
+
+  tag-outline-basic-background-color: color-basic-transparent-default,
+  tag-outline-basic-border-color: color-basic-transparent-default-border,
+  tag-outline-basic-text-color: text-hint-color,
+
+  tag-outline-primary-background-color: color-primary-transparent-default,
+  tag-outline-primary-border-color: color-primary-transparent-default-border,
+  tag-outline-primary-text-color: text-primary-color,
+
+  tag-outline-success-background-color: color-success-transparent-default,
+  tag-outline-success-border-color: color-success-transparent-default-border,
+  tag-outline-success-text-color: text-success-color,
+
+  tag-outline-info-background-color: color-info-transparent-default,
+  tag-outline-info-border-color: color-info-transparent-default-border,
+  tag-outline-info-text-color: text-info-color,
+
+  tag-outline-warning-background-color: color-warning-transparent-default,
+  tag-outline-warning-border-color: color-warning-transparent-default-border,
+  tag-outline-warning-text-color: text-warning-color,
+
+  tag-outline-danger-background-color: color-danger-transparent-default,
+  tag-outline-danger-border-color: color-danger-transparent-default-border,
+  tag-outline-danger-text-color: text-danger-color,
+
+  tag-outline-control-background-color: color-control-transparent-default,
+  tag-outline-control-border-color: color-control-transparent-default-border,
+  tag-outline-control-text-color: text-control-color,
+
+
   toggle-height: 1.875rem,
   toggle-width: 3.125rem,
   toggle-border-width: 1px,

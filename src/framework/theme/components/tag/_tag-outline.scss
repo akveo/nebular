@@ -1,0 +1,21 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
+@mixin tag-outline() {
+  nb-tag.appearance-outline {
+    border-style: nb-theme(tag-outline-border-style);
+    border-width: nb-theme(tag-outline-border-width);
+    text-transform: nb-theme(tag-outline-text-transform);
+
+    @each $status in nb-get-statuses() {
+      &.status-#{$status} {
+        background-color: nb-theme(tag-outline-#{$status}-background-color);
+        border-color: nb-theme(tag-outline-#{$status}-border-color);
+        color: nb-theme(tag-outline-#{$status}-text-color);
+      }
+    }
+  }
+}

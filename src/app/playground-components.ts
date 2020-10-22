@@ -1133,6 +1133,23 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
     ],
   },
   {
+    path: 'tag',
+    children: [
+      {
+        path: 'tag',
+        link: '/tag/tag',
+        component: 'TagShowcaseComponent',
+        name: 'Tag Showcase',
+      },
+      {
+        path: 'tag-status',
+        link: '/tag/tag-status',
+        component: 'TagStatusShowcaseComponent',
+        name: 'Tag Status Showcase',
+      },
+    ],
+  },
+  {
     path: 'tabset',
     children: [
       {
