@@ -443,6 +443,6 @@ export class NbAutocompleteDirective<T> implements OnDestroy, AfterViewInit, Con
   }
 
   protected createScrollStrategy(): NbScrollStrategy {
-    return this.overlay.scrollStrategies.block();
+    return this.overlay.scrollStrategies.reposition();
   }
 }
