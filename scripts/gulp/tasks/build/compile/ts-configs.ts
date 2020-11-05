@@ -1,4 +1,5 @@
 import { writeFileSync } from 'fs';
+import { ES5_BUILD_DIR } from '../../config';
 
 export function createTsConfigEsm2015(packageName): string {
   const config = `{
@@ -25,6 +26,37 @@ export function createTsConfigEsm2015(packageName): string {
 }`;
 
   const configName = `tsconfig.build-esm2015.${packageName}.json`;
+  writeConfig(configName, config);
+
+  return configName;
+}
+
+export function createTsConfigEsm5(packageName): string {
+  const config = `
+{
+  "extends": "./tsconfig.publish",
+  "compilerOptions": {
+    "outDir": "${ES5_BUILD_DIR}/${packageName}",
+    "declaration": false,
+    "target": "es5",
+    "rootDir": "./.ng_build/${packageName}"
+  },
+  "files": ["./.ng_build/${packageName}/public_api.ts"],
+  "angularCompilerOptions": {
+    "skipTemplateCodegen": true,
+    "strictMetadataEmit": false,
+    "fullTemplateTypeCheck": true,
+    "strictInjectionParameters": true,
+    "enableResourceInlining": true,
+    "skipMetadataEmit": true,
+    "strictTypeChecks": true,
+    "flatModuleOutFile": "index.js",
+    "flatModuleId": "@nebular/${packageName}",
+    "enableIvy": false
+  }
+}`;
+
+  const configName = `tsconfig.build-esm5.${packageName}.json`;
   writeConfig(configName, config);
 
   return configName;

@@ -7,8 +7,7 @@
 import * as ts from 'typescript';
 import { basename, dirname, join, normalize, NormalizedSep, Path } from '@angular-devkit/core';
 import { SchematicsException, Tree } from '@angular-devkit/schematics';
-import { parseSourceFile } from '@angular/cdk/schematics';
-import { getDecoratorMetadata, insertImport } from '@schematics/angular/utility/ast-utils';
+import { parseSourceFile, getDecoratorMetadata, insertImport } from '@angular/cdk/schematics';
 import {
   addArrayElement,
   addObjectProperty,
@@ -128,7 +127,8 @@ export function generateLazyModuleImport(from: Path, to: Path, moduleClassName: 
 export function addMissingChildRoutes(tree: Tree, routingModulePath: Path, targetFile: Path): void {
   const routingModuleDir = dirname(routingModulePath);
   if (isRootPlaygroundModule(routingModuleDir)) {
-    return addRootRoute(tree, targetFile);
+    addRootRoute(tree, targetFile);
+    return;
   }
 
   if (isBasePlaygroundModule(routingModuleDir)) {

@@ -69,6 +69,12 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         component: 'ActionWidthComponent',
         name: 'Action Width',
       },
+      {
+        path: 'action-dot-mode.component',
+        link: '/action/action-dot-mode.component',
+        component: 'ActionDotModeComponent',
+        name: 'Action Dot Mode',
+      },
     ],
   },
   {
@@ -144,6 +150,12 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         link: '/autocomplete/autocomplete-active-first.component',
         component: 'AutocompleteActiveFirstComponent',
         name: 'Autocomplete Active First',
+      },
+      {
+        path: 'autocomplete-disabled.component',
+        link: '/autocomplete/autocomplete-disabled.component',
+        component: 'AutocompleteDisabledComponent',
+        name: 'Autocomplete Disabled',
       },
     ],
   },
@@ -752,6 +764,12 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         link: '/menu/menu-link-params.component',
         component: 'MenuLinkParamsComponent',
         name: 'Menu Link Params',
+      },
+      {
+        path: 'menu-badge.component',
+        link: '/menu/menu-badge.component',
+        component: 'MenuBadgeComponent',
+        name: 'Menu Badge',
       },
       {
         path: 'menu-service.component',

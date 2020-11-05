@@ -29,8 +29,8 @@ interface FSEntry {
             <th nbTreeGridHeaderCell *nbTreeGridHeaderCellDef nbSortHeader>
               {{customColumn}}
               <span *nbSortHeaderIcon="let asc = isAscending; let desc = isDescending">
-                <span *ngIf="asc" class="nb-chevron-down" aria-label="sorted ascending"></span>
-                <span *ngIf="desc" class="nb-chevron-up" aria-label="sorted descending"></span>
+                <nb-icon *ngIf="asc" icon="chevron-down-outline" aria-label="sorted ascending"></nb-icon>
+                <nb-icon *ngIf="desc" icon="chevron-up-outline" aria-label="sorted descending"></nb-icon>
               </span>
             </th>
 
@@ -38,9 +38,9 @@ interface FSEntry {
               <button nbTreeGridRowToggle
                       *ngIf="row.hasChildren()"
                       [attr.aria-label]="row.expanded ? 'collapse' : 'expand'">
-                <span [ngClass]="{'nb-chevron-down': row.expanded, 'nb-chevron-right': !row.expanded}"
-                      aria-hidden="true">
-                </span>
+                <nb-icon [icon]="row.expanded ? 'chevron-down-outline' : 'chevron-right-outline'"
+                         aria-hidden="true">
+                </nb-icon>
               </button>
               {{row.data.name}}
             </td>

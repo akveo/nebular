@@ -18,14 +18,12 @@
         We need to set initial positions as Angular animations won't work in IE11 if positions have no initial value.
         Setting it in SCSS as we don't have access to theme variables from TS.
       */
-
-      $switcher-vertical-offset: (nb-theme(toggle-height) - nb-theme(toggle-switcher-size)) / 2;
       @include nb-ltr() {
         &.checked .toggle-switcher {
           left: calc(100%
                      - #{nb-theme(toggle-switcher-size)}
                      - #{nb-theme(toggle-border-width)}
-                     - #{$switcher-vertical-offset});
+                     - #{nb-theme(toggle-border-width)});
         }
 
         &:not(.checked) .toggle-switcher {
@@ -38,7 +36,7 @@
           right: calc(100%
                       - #{nb-theme(toggle-switcher-size)}
                       - #{nb-theme(toggle-border-width)}
-                      - #{$switcher-vertical-offset});
+                      - #{nb-theme(toggle-border-width)});
         }
 
         &:not(.checked) .toggle-switcher {

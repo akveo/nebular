@@ -7,8 +7,7 @@
 import * as ts from 'typescript';
 import { normalize, Path } from '@angular-devkit/core';
 import { Tree } from '@angular-devkit/schematics';
-import { parseSourceFile } from '@angular/cdk/schematics';
-import { addDeclarationToModule, findNodes, getSourceNodes } from '@schematics/angular/utility/ast-utils';
+import { findNodes, parseSourceFile, getSourceNodes, addDeclarationToModule } from '@angular/cdk/schematics';
 import { applyInsertChange } from './change';
 import { getNodeIndentation } from './formatting';
 

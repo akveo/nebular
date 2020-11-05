@@ -35,10 +35,15 @@ import { NbDateTimePickerComponent } from './date-timepicker.component';
     NbCardModule,
     NbBaseCalendarModule,
     NbTimepickerModule,
-    CommonModule,
     NbCalendarKitModule,
   ],
-  exports: [NbDatepickerDirective, NbDatepickerComponent, NbRangepickerComponent, NbDateTimePickerComponent],
+  exports: [
+    NbDatepickerDirective,
+    NbDatepickerComponent,
+    NbRangepickerComponent,
+    NbDateTimePickerComponent,
+    NbCalendarWithTimeComponent,
+  ],
   declarations: [
     NbDatepickerDirective,
     NbDatepickerContainerComponent,

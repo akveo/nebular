@@ -6,6 +6,8 @@
    [routerLink]="menuItem.link"
    [queryParams]="menuItem.queryParams"
    [fragment]="menuItem.fragment"
+   [queryParamsHandling]="menuItem.queryParamsHandling"
+   [preserveFragment]="menuItem.preserveFragment"
    [skipLocationChange]="menuItem.skipLocationChange"
    [attr.target]="menuItem.target"
    [attr.title]="menuItem.title"
@@ -14,6 +16,7 @@
    (click)="onItemClick(menuItem);">
   <nb-icon class="menu-icon" [config]="menuItem.icon" *ngIf="menuItem.icon"></nb-icon>
   <span class="menu-title">{{ menuItem.title }}</span>
+  <ng-container *ngIf="badge" [ngTemplateOutlet]="badgeTemplate"></ng-container>
 </a>
 <a *ngIf="menuItem.url && !menuItem.children && !menuItem.link && !menuItem.group"
    [attr.href]="menuItem.url"
@@ -24,6 +27,7 @@
    (click)="onSelectItem(menuItem)">
   <nb-icon class="menu-icon" [config]="menuItem.icon" *ngIf="menuItem.icon"></nb-icon>
   <span class="menu-title">{{ menuItem.title }}</span>
+  <ng-container *ngIf="badge" [ngTemplateOutlet]="badgeTemplate"></ng-container>
 </a>
 <a *ngIf="!menuItem.children && !menuItem.link && !menuItem.url && !menuItem.group"
    [attr.target]="menuItem.target"
@@ -33,6 +37,7 @@
    (click)="$event.preventDefault(); onItemClick(menuItem);">
   <nb-icon class="menu-icon" [config]="menuItem.icon" *ngIf="menuItem.icon"></nb-icon>
   <span class="menu-title">{{ menuItem.title }}</span>
+  <ng-container *ngIf="badge" [ngTemplateOutlet]="badgeTemplate"></ng-container>
 </a>
 <a *ngIf="menuItem.children"
    (click)="$event.preventDefault(); onToggleSubMenu(menuItem);"
@@ -43,6 +48,7 @@
    href="#">
   <nb-icon class="menu-icon" [config]="menuItem.icon" *ngIf="menuItem.icon"></nb-icon>
   <span class="menu-title">{{ menuItem.title }}</span>
+  <ng-container *ngIf="badge" [ngTemplateOutlet]="badgeTemplate"></ng-container>
   <nb-icon class="expand-state" [icon]="getExpandStateIcon()" pack="nebular-essentials"></nb-icon>
 </a>
 <ul *ngIf="menuItem.children"
@@ -53,6 +59,7 @@
   <ng-container *ngFor="let item of menuItem.children">
     <li nbMenuItem *ngIf="!item.hidden"
         [menuItem]="item"
+        [badge]="item.badge"
         [class.menu-group]="item.group"
         (hoverItem)="onHoverItem($event)"
         (toggleSubMenu)="onToggleSubMenu($event)"
@@ -62,3 +69,8 @@
     </li>
   </ng-container>
 </ul>
+
+<ng-template #badgeTemplate>
+  <nb-badge [text]="badge.text" [dotMode]="badge.dotMode" [status]="badge.status">
+  </nb-badge>
+</ng-template>

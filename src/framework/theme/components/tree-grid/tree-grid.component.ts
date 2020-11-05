@@ -18,6 +18,7 @@ import {
   QueryList,
   EmbeddedViewRef,
   ViewContainerRef,
+  Optional,
 } from '@angular/core';
 import { fromEvent, merge, Subject } from 'rxjs';
 import { debounceTime, takeUntil } from 'rxjs/operators';
@@ -25,7 +26,13 @@ import { debounceTime, takeUntil } from 'rxjs/operators';
 import { NB_DOCUMENT, NB_WINDOW } from '../../theme.options';
 import { NbPlatform } from '../cdk/platform/platform-service';
 import { NbDirectionality } from '../cdk/bidi/bidi-service';
-import { NB_TABLE_TEMPLATE, NbTable } from '../cdk/table/table.module';
+import {
+  NB_TABLE_TEMPLATE,
+  NbTable,
+  NB_TABLE_PROVIDERS,
+  NB_COALESCED_STYLE_SCHEDULER,
+  NB_VIEW_REPEATER_STRATEGY,
+} from '../cdk/table/table.module';
 import { NbRowContext } from '../cdk/table/type-mappings';
 import { NbTreeGridDataSource, NbTreeGridDataSourceBuilder } from './data-source/tree-grid-data-source';
 import { NB_DEFAULT_ROW_LEVEL, NbTreeGridPresentationNode } from './data-source/tree-grid.model';
@@ -135,6 +142,7 @@ import { NbColumnsService } from './tree-grid-columns.service';
   providers: [
     { provide: NB_TREE_GRID, useExisting: NbTreeGridComponent },
     NbColumnsService,
+    ...NB_TABLE_PROVIDERS,
   ],
 })
 export class NbTreeGridComponent<T> extends NbTable<NbTreeGridPresentationNode<T>>
@@ -149,8 +157,11 @@ export class NbTreeGridComponent<T> extends NbTable<NbTreeGridPresentationNode<T
               @Inject(NB_DOCUMENT) document,
               platform: NbPlatform,
               @Inject(NB_WINDOW) private window,
+              @Optional() @Inject(NB_VIEW_REPEATER_STRATEGY) protected readonly _viewRepeater?,
+              @Optional() @Inject(NB_COALESCED_STYLE_SCHEDULER) protected readonly _coalescedStyleScheduler?,
   ) {
-    super(differs, changeDetectorRef, elementRef, role, dir, document, platform);
+    super(differs, changeDetectorRef, elementRef, role, dir, document, platform, _viewRepeater,
+          _coalescedStyleScheduler);
     this.platform = platform;
   }
 
@@ -268,11 +279,15 @@ export class NbTreeGridComponent<T> extends NbTable<NbTreeGridPresentationNode<T
   }
 
   private getColumns(): string[] {
-    const { columns } = this._contentHeaderRowDefs.length
-      ? this._contentHeaderRowDefs.first
-      : this._contentRowDefs.first;
+    let rowDef: NbTreeGridHeaderRowDefDirective | NbTreeGridRowDefDirective<any>;
 
-    return Array.from(columns || []);
+    if (this._contentHeaderRowDefs.length) {
+      rowDef = this._contentHeaderRowDefs.first as NbTreeGridHeaderRowDefDirective;
+    } else {
+      rowDef = this._contentRowDefs.first as NbTreeGridRowDefDirective<any>;
+    }
+
+    return Array.from(rowDef.getVisibleColumns() || []);
   }
 
   private getColumnsCount(): number {
