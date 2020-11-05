@@ -454,6 +454,11 @@ export class NbButtonGroupComponent implements OnChanges, AfterContentInit {
   @Input() shape: NbComponentShape = 'rectangle';
 
   /**
+   * Button group appearance: `filled`, `outline`, `ghost`, `hero`
+   */
+  @Input() appearance: NbButtonAppearance = 'filled';
+
+  /**
    * Sets `outline` appearance
    */
   @Input()
@@ -467,11 +472,6 @@ export class NbButtonGroupComponent implements OnChanges, AfterContentInit {
 
   protected _multiple: boolean = false;
   static ngAcceptInputType_multiple: NbBooleanInput;
-
-  /**
-   * Button appearance: `filled`, `outline`, `ghost`
-   */
-  protected appearance: NbButtonAppearance = 'filled';
 
   /**
    * Sets `filled` appearance
