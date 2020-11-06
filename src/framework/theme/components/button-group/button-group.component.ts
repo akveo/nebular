@@ -11,12 +11,13 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+
+import { convertToBoolProperty, NbBooleanInput } from '../helpers';
 import { NbComponentSize } from '../component-size';
+import { NbComponentShape } from '../component-shape';
 import { NbComponentStatus } from '../component-status';
 import { NbButtonAppearance, NbButtonComponent } from '../button/button.component';
-import { takeUntil } from 'rxjs/operators';
-import { NbComponentShape } from '../component-shape';
-import { convertToBoolProperty, NbBooleanInput } from '../helpers';
 import { NbBaseButtonDirective } from '../button/base-button.directive';
 
 /**
@@ -434,8 +435,11 @@ import { NbBaseButtonDirective } from '../button/base-button.directive';
   `,
 })
 export class NbButtonGroupComponent implements OnChanges, AfterContentInit {
-  @ContentChildren(NbBaseButtonDirective) buttons: QueryList<NbBaseButtonDirective>;
+
   protected destroy$: Subject<void> = new Subject<void>();
+
+  @ContentChildren(NbBaseButtonDirective) buttons: QueryList<NbBaseButtonDirective>;
+
   /**
    * Button group size, available sizes:
    * `tiny`, `small`, `medium`, `large`, `giant`
@@ -465,11 +469,9 @@ export class NbButtonGroupComponent implements OnChanges, AfterContentInit {
   get multiple(): boolean {
     return this._multiple;
   }
-
   set multiple(value: boolean) {
     this._multiple = convertToBoolProperty(value);
   }
-
   protected _multiple: boolean = false;
   static ngAcceptInputType_multiple: NbBooleanInput;
 
@@ -480,13 +482,11 @@ export class NbButtonGroupComponent implements OnChanges, AfterContentInit {
   get filled(): boolean {
     return this.appearance === 'filled';
   }
-
   set filled(value: boolean) {
     if (convertToBoolProperty(value)) {
       this.appearance = 'filled';
     }
   }
-
   static ngAcceptInputType_filled: NbBooleanInput;
 
   /**
@@ -496,13 +496,11 @@ export class NbButtonGroupComponent implements OnChanges, AfterContentInit {
   get outline(): boolean {
     return this.appearance === 'outline';
   }
-
   set outline(value: boolean) {
     if (convertToBoolProperty(value)) {
       this.appearance = 'outline';
     }
   }
-
   static ngAcceptInputType_outline: NbBooleanInput;
 
   /**
@@ -512,13 +510,11 @@ export class NbButtonGroupComponent implements OnChanges, AfterContentInit {
   get ghost(): boolean {
     return this.appearance === 'ghost';
   }
-
   set ghost(value: boolean) {
     if (convertToBoolProperty(value)) {
       this.appearance = 'ghost';
     }
   }
-
   static ngAcceptInputType_ghost: NbBooleanInput;
 
   @HostBinding('attr.role') role = 'group';
@@ -547,21 +543,13 @@ export class NbButtonGroupComponent implements OnChanges, AfterContentInit {
   ngAfterContentInit(): void {
     this.updateButtonInputs();
     this.buttons.changes
-    .pipe(takeUntil(this.destroy$))
-    .subscribe(() => {
-      this.updateButtonInputs();
-    });
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(() => {
+        this.updateButtonInputs();
+      });
   }
 
-  ngOnChanges({
-                size,
-                status,
-                shape,
-                multiple,
-                filled,
-                outline,
-                ghost,
-              }: SimpleChanges) {
+  ngOnChanges({ size, status, shape, multiple, filled, outline, ghost }: SimpleChanges) {
     if (size || status || shape || multiple || filled || outline || ghost) {
       this.updateButtonInputs();
     }
@@ -575,7 +563,7 @@ export class NbButtonGroupComponent implements OnChanges, AfterContentInit {
           size: this.size,
           status: this.status,
           shape: this.shape,
-        }) // , this.cd)
+        });
       });
     }
   }
