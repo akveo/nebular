@@ -15,21 +15,21 @@
     [nbButton],
     [nbButtonToggle] {
       @include nb-ltr {
-        &:first-child {
+        &:first-child:not(:last-child) {
           border-top-right-radius: 0;
           border-bottom-right-radius: 0;
         }
-        &:last-child {
+        &:last-child:not(:first-child) {
           border-top-left-radius: 0;
           border-bottom-left-radius: 0;
         }
       }
       @include nb-rtl {
-        &:first-child {
+        &:first-child:not(:last-child) {
           border-top-left-radius: 0;
           border-bottom-left-radius: 0;
         }
-        &:last-child {
+        &:last-child:not(:first-child) {
           border-top-right-radius: 0;
           border-bottom-right-radius: 0;
         }
