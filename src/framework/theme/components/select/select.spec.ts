@@ -67,7 +67,7 @@ const TEST_GROUPS = [
       { title: 'Option 41', value: '' },
       { title: 'Option 42', value: '0' },
       { title: 'Option 43', value: 0 },
-      { title: 'Option 44'},
+      { title: 'Option 44' },
     ],
   },
 ];
@@ -119,6 +119,23 @@ export class NbSelectTestComponent {
   `,
 })
 export class BasicSelectTestComponent {}
+
+@Component({
+  template: `
+    <nb-layout>
+      <nb-layout-column>
+        <nb-select [selected]="selected" [compareFn]="compareFn">
+          <nb-option *ngFor="let option of options" [value]="option">{{ option }}</nb-option>
+        </nb-select>
+      </nb-layout-column>
+    </nb-layout>
+  `,
+})
+export class NbSelectWithOptionsObjectsComponent {
+  @Input() compareFn = (o1: any, o2: any) => JSON.stringify(o1) === JSON.stringify(o2);
+  @Input() selected = { id: 2 };
+  @Input() options = [{ id: 1 }, { id: 2 }, { id: 3 }];
+}
 
 @Component({
   template: `
@@ -325,6 +342,7 @@ describe('Component: NbSelectComponent', () => {
       ],
       declarations: [
         NbSelectTestComponent,
+        NbSelectWithOptionsObjectsComponent,
         NbSelectWithInitiallySelectedOptionComponent,
         NbReactiveFormSelectComponent,
         NbNgModelSelectComponent,
@@ -482,6 +500,21 @@ describe('Component: NbSelectComponent', () => {
 
   it('should select initially specified value without errors', fakeAsync(() => {
     const selectFixture = TestBed.createComponent(NbSelectWithInitiallySelectedOptionComponent);
+    selectFixture.detectChanges();
+    flush();
+    selectFixture.detectChanges();
+
+    const selectedOption = selectFixture.debugElement.query(By.directive(NbSelectComponent))
+      .componentInstance
+      .options.find(o => o.selected);
+
+    expect(selectedOption.value).toEqual(selectFixture.componentInstance.selected);
+    const selectButton = selectFixture.nativeElement.querySelector('nb-select button') as HTMLElement;
+    expect(selectButton.textContent).toEqual(selectedOption.value.toString());
+  }));
+
+  it('should select initially specified object without errors', fakeAsync(() => {
+    const selectFixture = TestBed.createComponent(NbSelectWithOptionsObjectsComponent);
     selectFixture.detectChanges();
     flush();
     selectFixture.detectChanges();

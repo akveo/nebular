@@ -508,7 +508,7 @@ export function nbSelectFormFieldControlConfigFactory() {
   ],
 })
 export class NbSelectComponent implements OnChanges, AfterViewInit, AfterContentInit, OnDestroy,
-                                             ControlValueAccessor, NbFormFieldControl {
+                                          ControlValueAccessor, NbFormFieldControl {
 
   /**
    * Select size, available sizes:
@@ -608,6 +608,19 @@ export class NbSelectComponent implements OnChanges, AfterViewInit, AfterContent
    * Renders select placeholder if nothing selected.
    * */
   @Input() placeholder: string = '';
+
+  /**
+   * Custom function for comparing option values
+   */
+  @Input()
+  get compareFn(): Function {
+    return this._isEqual;
+  }
+  set compareFn(fn: Function) {
+    this._isEqual = fn;
+  }
+  protected _isEqual: Function = (v1: any, v2: any) => v1 === v2;
+  static ngAcceptInputType_compareFn: Function
 
   /**
    * Accepts selected item or array of selected items.
@@ -926,7 +939,7 @@ export class NbSelectComponent implements OnChanges, AfterViewInit, AfterContent
   protected handleSingleSelect(option: NbOptionComponent) {
     const selected = this.selectionModel.pop();
 
-    if (selected && selected !== option) {
+    if (selected && !this._isEqual(selected.value, option.value)) {
       selected.deselect();
     }
 
@@ -943,7 +956,7 @@ export class NbSelectComponent implements OnChanges, AfterViewInit, AfterContent
    * */
   protected handleMultipleSelect(option: NbOptionComponent) {
     if (option.selected) {
-      this.selectionModel = this.selectionModel.filter(s => s.value !== option.value);
+      this.selectionModel = this.selectionModel.filter(s => !this._isEqual(s.value, option.value));
       option.deselect();
     } else {
       this.selectionModel.push(option);
@@ -1124,7 +1137,7 @@ export class NbSelectComponent implements OnChanges, AfterViewInit, AfterContent
    * Selects value.
    * */
   protected selectValue(value) {
-    const corresponding = this.options.find((option: NbOptionComponent) => option.value === value);
+    const corresponding = this.options.find((option: NbOptionComponent) => this._isEqual(option.value, value));
 
     if (corresponding) {
       corresponding.select();
