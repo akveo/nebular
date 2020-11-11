@@ -20,6 +20,7 @@ import { NbBaseButtonDirective } from '../button/base-button.directive';
   ],
 })
 export class NbButtonToggleDirective extends NbBaseButtonDirective {
+
   @Input()
   @HostBinding('attr.aria-pressed')
   get pressed(): boolean {
@@ -31,40 +32,40 @@ export class NbButtonToggleDirective extends NbBaseButtonDirective {
   protected _pressed: boolean = false;
   static ngAcceptInputType_pressed: NbBooleanInput;
 
-  @HostBinding('class.status-primary')
-  get primary() {
-    // If user sets status basic, pressed button should be primary
-    return this.status === 'primary' && this.pressed || this.status === 'basic' && this.pressed;
+  @HostBinding('class.status-basic')
+  get basic(): boolean {
+    // By design, all toggle buttons should have a `basic` status when not pressed.
+    return !this.pressed;
   }
 
-  @HostBinding('class.status-info')
-  get info() {
-    return this.status === 'info' && this.pressed;
+  @HostBinding('class.status-primary')
+  get primary(): boolean {
+    return this.pressed && (this.status === 'basic' || this.status === 'primary');
   }
 
   @HostBinding('class.status-success')
-  get success() {
-    return this.status === 'success' && this.pressed;
+  get success(): boolean {
+    return this.pressed && this.status === 'success';
+  }
+
+  @HostBinding('class.status-info')
+  get info(): boolean {
+    return this.pressed && this.status === 'info';
   }
 
   @HostBinding('class.status-warning')
-  get warning() {
-    return this.status === 'warning' && this.pressed;
+  get warning(): boolean {
+    return this.pressed && this.status === 'warning';
   }
 
   @HostBinding('class.status-danger')
-  get danger() {
-    return this.status === 'danger' && this.pressed;
-  }
-
-  @HostBinding('class.status-basic')
-  get basic() {
-    return this.status === 'basic' || !this.pressed;
+  get danger(): boolean {
+    return this.pressed && this.status === 'danger';
   }
 
   @HostBinding('class.status-control')
-  get control() {
-    return this.status === 'control' && this.pressed;
+  get control(): boolean {
+    return this.pressed && this.status === 'control';
   }
 
   constructor(
