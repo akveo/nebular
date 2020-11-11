@@ -48,12 +48,8 @@
         }
       }
 
-      &.appearance-filled {
-        @each $status in nb-get-statuses() {
-          &.status-#{$status} {
-            color: nb-theme(button-toggle-filled-#{$status}-text-color);
-          }
-        }
+      &.appearance-filled.status-basic {
+        color: nb-theme(button-group-button-filled-basic-text-color);
       }
     }
   }
