@@ -6,7 +6,7 @@
 
 import { chain, Rule, SchematicContext, Tree } from '@angular-devkit/schematics';
 import { addModuleImportToRootModule, getProjectMainFile, hasNgModuleImport } from '@angular/cdk/schematics';
-import { WorkspaceProject } from '@angular-devkit/core/src/experimental/workspace';
+import { ProjectDefinition } from '@angular-devkit/core/src/workspace';
 import { normalize } from '@angular-devkit/core';
 import { bold, red } from '@angular-devkit/core/src/terminal';
 
@@ -28,8 +28,8 @@ export function registerModules(options: Schema): Rule {
 }
 
 function registerAnimationsModule(options: Schema) {
-  return (tree: Tree, context: SchematicContext) => {
-    const project = getProject(tree, options.project);
+  return async (tree: Tree, context: SchematicContext) => {
+    const project = await getProject(tree, options.project);
     const appModulePath = getAppModulePath(tree, getProjectMainFile(project));
     const browserAnimationsModuleName = 'BrowserAnimationsModule';
     const noopAnimationsModuleName = 'NoopAnimationsModule';
@@ -56,8 +56,8 @@ function registerAnimationsModule(options: Schema) {
 }
 
 function registerNebularModules(options: Schema): Rule {
-  return (tree: Tree) => {
-    const project = getProject(tree, options.project);
+  return async (tree: Tree) => {
+    const project = await getProject(tree, options.project);
     const nebularThemeModule = `NbThemeModule.forRoot({ name: '${options.theme}' })`;
 
     addModuleImportToRootModule(tree, nebularThemeModule, '@nebular/theme', project);
@@ -71,11 +71,11 @@ function registerNebularModules(options: Schema): Rule {
  * in the `AppModule`.
  * */
 function registerRouterIfNeeded(options: Schema): Rule {
-  return (tree: Tree) => {
-    const project = getProject(tree, options.project);
+  return async (tree: Tree) => {
+    const project = await getProject(tree, options.project);
 
     if (shouldRegisterRouter(tree, project)) {
-      registerRoutingModule(tree, options.project);
+      await registerRoutingModule(tree, options.project);
     }
 
     return tree;
@@ -85,16 +85,16 @@ function registerRouterIfNeeded(options: Schema): Rule {
 /**
  * Checks if `RouterModule` or `AppRoutingModule` already imported in the `AppModule`.
  * */
-function shouldRegisterRouter(tree: Tree, project: WorkspaceProject): boolean {
+function shouldRegisterRouter(tree: Tree, project: ProjectDefinition): boolean {
   const appRoutingModuleAlreadyImported = isImportedInMainModule(tree, project, 'AppRoutingModule');
   const routerModuleAlreadyImported = isImportedInMainModule(tree, project, 'RouterModule');
 
   return !(appRoutingModuleAlreadyImported || routerModuleAlreadyImported);
 }
 
-function registerRoutingModule(tree: Tree, projectName: string) {
-  registerAppRoutingModule(tree, projectName);
-  createAppRoutingModule(tree, projectName);
+async function registerRoutingModule(tree: Tree, projectName: string) {
+  await registerAppRoutingModule(tree, projectName);
+  await createAppRoutingModule(tree, projectName);
 }
 
 /**
@@ -102,14 +102,14 @@ function registerRoutingModule(tree: Tree, projectName: string) {
  * and customization. So, I don't think we have to use schematics
  * template files.
  * */
-function createAppRoutingModule(tree: Tree, projectName: string) {
-  const project = getProject(tree, projectName);
+async function createAppRoutingModule(tree: Tree, projectName: string) {
+  const project = await getProject(tree, projectName);
   const appRoutingModulePath = normalize(`${project.sourceRoot}/app/app-routing.module.ts`);
 
   tree.create(appRoutingModulePath, appRoutingModuleContent);
 }
 
-function registerAppRoutingModule(tree: Tree, projectName: string) {
-  const project = getProject(tree, projectName);
+async function registerAppRoutingModule(tree: Tree, projectName: string) {
+  const project = await getProject(tree, projectName);
   addModuleImportToRootModule(tree, 'AppRoutingModule', './app-routing.module', project);
 }
