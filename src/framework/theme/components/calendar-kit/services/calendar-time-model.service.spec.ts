@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { async, inject, TestBed } from '@angular/core/testing';
+import { inject, TestBed, waitForAsync } from '@angular/core/testing';
 import { NbDateService } from './date.service';
 import { NbNativeDateService } from './native-date.service';
 import { NbCalendarTimeModelService } from '@nebular/theme';
@@ -18,7 +18,7 @@ describe('time-model-service', () => {
     });
   });
 
-  beforeEach(async(inject(
+  beforeEach(waitForAsync(inject(
     [NbCalendarTimeModelService],
     (_monthModel) => {
       timeModel = _monthModel;

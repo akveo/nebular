@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { TestBed, inject, async } from '@angular/core/testing';
+import { TestBed, inject, waitForAsync } from '@angular/core/testing';
 
 import { NbJSThemeOptions } from './js-themes/theme.options';
 import { BUILT_IN_THEMES, NbJSThemesRegistry } from './js-themes-registry.service';
@@ -54,7 +54,7 @@ describe('js-themes-registry-service', () => {
   });
 
 // Single async inject to save references; which are used in all tests below
-  beforeEach(async(inject(
+  beforeEach(waitForAsync(inject(
     [NbJSThemesRegistry],
     (_jsThemesRegistry) => {
       jsThemesRegistry = _jsThemesRegistry;

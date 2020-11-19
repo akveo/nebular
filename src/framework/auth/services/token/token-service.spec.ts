@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { async, inject, TestBed } from '@angular/core/testing';
+import { inject, TestBed, waitForAsync } from '@angular/core/testing';
 import { take } from 'rxjs/operators';
 
 import { NbTokenLocalStorage, NbTokenStorage } from './token-storage';
@@ -37,7 +37,7 @@ describe('token-service', () => {
     });
   });
 
-    beforeEach(async(inject(
+    beforeEach(waitForAsync(inject(
     [NbTokenService, NbTokenStorage],
     (_tokenService, _tokenStorage) => {
       tokenService = _tokenService;
