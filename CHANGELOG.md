@@ -1,3 +1,20 @@
+<a name="7.0.0-beta.1"></a>
+# [7.0.0-beta.1](https://github.com/akveo/nebular/compare/v6.2.1...v7.0.0-beta.1) (2020-11-23)
+
+
+### Features
+
+* update Angular to 11 ([0ab048c](https://github.com/akveo/nebular/commit/0ab048c))
+
+### BREAKING CHANGES
+
+* **NbScrollDispatcherAdapter:** The `document` parameter in the `NbScrollDispatcherAdapter` constructor
+is now required.
+* **NbViewportRulerAdapter:** The `document` parameter in the `NbViewportRulerAdapter` constructor
+is now required.
+
+
+
 <a name="6.2.1"></a>
 ## [6.2.1](https://github.com/akveo/nebular/compare/v6.2.0...v6.2.1) (2020-10-01)
 
