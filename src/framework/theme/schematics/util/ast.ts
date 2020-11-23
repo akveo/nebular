@@ -7,10 +7,10 @@
 import { Tree } from '@angular-devkit/schematics';
 import { dirname, normalize, Path } from '@angular-devkit/core';
 import { getProjectMainFile, hasNgModuleImport } from '@angular/cdk/schematics';
-import { WorkspaceProject } from '@angular-devkit/core/src/experimental/workspace';
+import { ProjectDefinition } from '@angular-devkit/core/src/workspace';
 import { findBootstrapModulePath } from '@schematics/angular/utility/ng-ast-utils';
 
-export function isImportedInMainModule(tree: Tree, project: WorkspaceProject, moduleName: string): boolean {
+export function isImportedInMainModule(tree: Tree, project: ProjectDefinition, moduleName: string): boolean {
   const appModulePath = getAppModulePath(tree, getProjectMainFile(project));
 
   return hasNgModuleImport(tree, appModulePath, moduleName);

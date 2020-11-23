@@ -1,7 +1,7 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { APP_BASE_HREF } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { TestBed, ComponentFixture, fakeAsync, tick, async, inject } from '@angular/core/testing';
+import { TestBed, ComponentFixture, fakeAsync, tick, inject, waitForAsync } from '@angular/core/testing';
 import { NbLayoutRulerService, NbLayoutDimensions } from './ruler.service';
 import { NbLayoutModule } from '../components/layout/layout.module';
 import { NbThemeService } from './theme.service';
@@ -51,7 +51,11 @@ describe('NbLayoutRulerService', () => {
 
   beforeEach(() => {
     fixture = TestBed.configureTestingModule({
-      imports: [ RouterModule.forRoot([]), NbThemeModule.forRoot(), NbLayoutModule ],
+      imports: [
+        RouterModule.forRoot([], { relativeLinkResolution: 'legacy' }),
+        NbThemeModule.forRoot(),
+        NbLayoutModule,
+      ],
       providers: [ NbLayoutRulerService, NbThemeService, { provide: APP_BASE_HREF, useValue: '/' } ],
       declarations: [ RulerTestComponent ],
     })
@@ -62,7 +66,7 @@ describe('NbLayoutRulerService', () => {
     fixture.detectChanges();
   });
 
-  beforeEach(async(inject(
+  beforeEach(waitForAsync(inject(
     [NbLayoutRulerService, NB_DOCUMENT],
     (_rulerService, _document) => {
       rulerService = _rulerService;
