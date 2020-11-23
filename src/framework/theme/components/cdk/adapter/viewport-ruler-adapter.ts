@@ -10,9 +10,9 @@ import { NbLayoutScrollService, NbScrollPosition } from '../../../services/scrol
 @Injectable()
 export class NbViewportRulerAdapter extends ViewportRuler {
   constructor(platform: NbPlatform, ngZone: NgZone,
-              protected ruler: NbLayoutRulerService,
-              protected scroll: NbLayoutScrollService) {
-    super(platform, ngZone);
+    protected ruler: NbLayoutRulerService,
+    protected scroll: NbLayoutScrollService) {
+    super(platform, ngZone, document);
   }
 
   getViewportSize(): Readonly<{ width: number; height: number; }> {
