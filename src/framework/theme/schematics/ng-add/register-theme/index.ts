@@ -33,9 +33,6 @@ export function registerCustomizableTheme(options: Schema) {
 
     createThemeSCSS(tree, options.theme, project.sourceRoot as string);
     insertThemeImportInStyles(tree, stylesPath);
-
-
-    return tree;
   }
 }
 

@@ -76,8 +76,6 @@ function registerRouterIfNeeded(options: Schema): Rule {
     if (shouldRegisterRouter(tree, project)) {
       await registerRoutingModule(tree, options.project);
     }
-
-    return tree;
   }
 }
 

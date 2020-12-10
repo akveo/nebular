@@ -26,8 +26,6 @@ export function wrapRootComponentInLayout(options: Schema): Rule {
     } else {
       wrapHtmlFileTemplate(tree, templateDescriptor);
     }
-
-    return tree;
   }
 }
 
