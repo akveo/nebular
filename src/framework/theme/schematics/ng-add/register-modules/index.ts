@@ -5,7 +5,13 @@
  */
 
 import { chain, Rule, SchematicContext, Tree } from '@angular-devkit/schematics';
-import { addModuleImportToRootModule, getProjectMainFile, hasNgModuleImport } from '@angular/cdk/schematics';
+import { getRouterModuleDeclaration } from '@schematics/angular/utility/ast-utils';
+import {
+  addModuleImportToRootModule,
+  getProjectMainFile,
+  hasNgModuleImport,
+  parseSourceFile,
+} from '@angular/cdk/schematics';
 import { ProjectDefinition } from '@angular-devkit/core/src/workspace';
 import { normalize } from '@angular-devkit/core';
 
@@ -84,7 +90,9 @@ function registerRouterIfNeeded(options: Schema): Rule {
  * */
 function shouldRegisterRouter(tree: Tree, project: ProjectDefinition): boolean {
   const appRoutingModuleAlreadyImported = isImportedInMainModule(tree, project, 'AppRoutingModule');
-  const routerModuleAlreadyImported = isImportedInMainModule(tree, project, 'RouterModule');
+
+  const appModulePath = getAppModulePath(tree, getProjectMainFile(project));
+  const routerModuleAlreadyImported = !!getRouterModuleDeclaration(parseSourceFile(tree, appModulePath));
 
   return !(appRoutingModuleAlreadyImported || routerModuleAlreadyImported);
 }
