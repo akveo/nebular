@@ -8,7 +8,6 @@ import { chain, Rule, SchematicContext, Tree } from '@angular-devkit/schematics'
 import { addModuleImportToRootModule, getProjectMainFile, hasNgModuleImport } from '@angular/cdk/schematics';
 import { ProjectDefinition } from '@angular-devkit/core/src/workspace';
 import { normalize } from '@angular-devkit/core';
-import { bold, red } from '@angular-devkit/core/src/terminal';
 
 import { Schema } from '../schema';
 import { getAppModulePath, getProject, isImportedInMainModule } from '../../util';
@@ -41,9 +40,9 @@ function registerAnimationsModule(options: Schema) {
       // animations. If we would add the BrowserAnimationsModule while the NoopAnimationsModule
       // is already configured, we would cause unexpected behavior and runtime exceptions.
       if (hasNgModuleImport(tree, appModulePath, noopAnimationsModuleName)) {
-        return context.logger.warn(red(`Could not set up "${bold(browserAnimationsModuleName)}" ` +
-          `because "${bold(noopAnimationsModuleName)}" is already imported. Please manually ` +
-          `set up browser animations.`));
+        return context.logger.warn(`\u001b[31mCould not set up "${browserAnimationsModuleName}" ` +
+          `because "${noopAnimationsModuleName}" is already imported. Please manually ` +
+          `set up browser animations.`);
       }
 
       addModuleImportToRootModule(tree, browserAnimationsModuleName, animationsPackage, project);
