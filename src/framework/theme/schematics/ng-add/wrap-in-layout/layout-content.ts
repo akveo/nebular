@@ -10,8 +10,7 @@ const layoutStart = `<nb-layout>
   <!-- Insert header here -->
   </nb-layout-header>
 
-  <nb-layout-column>
-`;
+  <nb-layout-column>`;
 
 const layoutEnd = `  </nb-layout-column>
 
@@ -23,9 +22,9 @@ const layoutEnd = `  </nb-layout-column>
 
 export function wrapInlineTemplateInLayout(template: string): string {
   return ` \`
-${padd(layoutStart, 4)}
+${paddNotEmpty(layoutStart, 4)}
 ${padd(template, 4)}
-${padd(layoutEnd, 4)}
+${paddNotEmpty(layoutEnd, 4)}
   \``;
 }
 
@@ -44,5 +43,12 @@ function padd(text: string, paddLen: number): string {
     .split('\n')
     .map(line => `${' '.repeat(paddLen)}${line}`)
     .join('\n');
+}
+
+/**
+ * Same as padd, but doesn't padd empty lines.
+ * */
+function paddNotEmpty(text: string, paddLen: number): string {
+  return padd(text, paddLen).replace(/^ +$/gm, '');
 }
 
