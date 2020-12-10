@@ -36,7 +36,7 @@ function wrapInlineTemplate(tree: Tree, templateDescriptor: TemplateDescriptor) 
 
   const wrappedTemplate = wrapInlineTemplateInLayout(template);
   const recorder = tree.beginUpdate(componentPath)
-    .remove(templateProp.initializer.pos, template.length)
+    .remove(templateProp.initializer.pos, templateProp.initializer.getFullText().length)
     .insertLeft(templateProp.initializer.pos, wrappedTemplate);
 
   tree.commitUpdate(recorder);

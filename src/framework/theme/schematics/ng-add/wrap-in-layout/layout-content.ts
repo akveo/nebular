@@ -26,7 +26,7 @@ export function wrapInlineTemplateInLayout(template: string): string {
 ${padd(layoutStart, 4)}
 ${padd(template, 4)}
 ${padd(layoutEnd, 4)}
-`;
+  \``;
 }
 
 export function wrapHtmlFileTemplateInLayout(template: string): string {
