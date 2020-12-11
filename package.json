@@ -103,7 +103,7 @@
     "date-fns": "2",
     "docsearch.js": "^2.5.2",
     "eva-icons": "^1.1.2",
-    "firebase": "8.0.0",
+    "firebase": "^8.0.0",
     "gulp-bump": "2.7.0",
     "highlight.js": "9.12.0",
     "intersection-observer": "0.7.0",
