@@ -91,7 +91,7 @@
     "@angular/common": "^11.0.1",
     "@angular/compiler": "^11.0.1",
     "@angular/core": "^11.0.1",
-    "@angular/fire": "^6.0.4",
+    "@angular/fire": "^6.1.0",
     "@angular/forms": "^11.0.1",
     "@angular/localize": "^11.0.1",
     "@angular/platform-browser": "^11.0.1",
