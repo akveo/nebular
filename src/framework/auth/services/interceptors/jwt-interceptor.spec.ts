@@ -1,7 +1,7 @@
 import { Injector } from '@angular/core';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { HTTP_INTERCEPTORS, HttpRequest } from '@angular/common/http';
-import { TestBed, async, inject } from '@angular/core/testing';
+import { TestBed, inject, waitForAsync } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { of as observableOf } from 'rxjs';
@@ -73,7 +73,7 @@ describe('jwt-interceptor', () => {
     dummyAuthStrategy = TestBed.inject(NbDummyAuthStrategy);
   });
 
-    beforeEach(async(
+    beforeEach(waitForAsync(
       inject([HttpClient, HttpTestingController], (_httpClient, _httpMock) => {
         http = _httpClient;
         httpMock = _httpMock;

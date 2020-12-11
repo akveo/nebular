@@ -17,8 +17,8 @@ import { Schema } from '../schema';
  * work of Nebular components.
  * */
 export function wrapRootComponentInLayout(options: Schema): Rule {
-  return (tree: Tree) => {
-    const componentPath: string = getAppComponentPath(tree, options.project);
+  return async (tree: Tree) => {
+    const componentPath: string = await getAppComponentPath(tree, options.project);
     const templateDescriptor: TemplateDescriptor = getComponentTemplateDescriptor(tree, componentPath);
 
     if (templateDescriptor.isInline()) {
@@ -26,8 +26,6 @@ export function wrapRootComponentInLayout(options: Schema): Rule {
     } else {
       wrapHtmlFileTemplate(tree, templateDescriptor);
     }
-
-    return tree;
   }
 }
 
@@ -36,7 +34,7 @@ function wrapInlineTemplate(tree: Tree, templateDescriptor: TemplateDescriptor) 
 
   const wrappedTemplate = wrapInlineTemplateInLayout(template);
   const recorder = tree.beginUpdate(componentPath)
-    .remove(templateProp.initializer.pos, template.length)
+    .remove(templateProp.initializer.pos, templateProp.initializer.getFullText().length)
     .insertLeft(templateProp.initializer.pos, wrappedTemplate);
 
   tree.commitUpdate(recorder);

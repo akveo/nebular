@@ -1,4 +1,4 @@
-import { async, ComponentFixture, fakeAsync, inject, TestBed, tick } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, inject, TestBed, tick, waitForAsync } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
@@ -52,7 +52,7 @@ describe('NbRestoreScrollTopHelper', () => {
     fixture.detectChanges();
   });
 
-  beforeEach(async(inject(
+  beforeEach(waitForAsync(inject(
     [NbRestoreScrollTopHelper, Router],
     (_restoreHelper, _router) => {
       restoreHelper = _restoreHelper;
