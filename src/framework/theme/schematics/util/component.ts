@@ -43,8 +43,8 @@ export function getComponentTemplateDescriptor(host: Tree, componentPath: string
   );
 }
 
-export function getAppComponentPath(tree: Tree, projectName: string): string {
-  const project = getProject(tree, projectName);
+export async function getAppComponentPath(tree: Tree, projectName: string): Promise<string> {
+  const project = await getProject(tree, projectName);
   return normalize(`${project.sourceRoot}/app/app.component.ts`);
 }
 

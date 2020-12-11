@@ -1,6 +1,6 @@
 import { NbToastContainer, NbToastrContainerRegistry, NbToastrService } from './toastr.service';
 import { NbGlobalLogicalPosition, NbGlobalPhysicalPosition } from '../cdk/overlay/position-helper';
-import {ComponentFixture, TestBed, async} from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import {Component, ComponentFactoryResolver} from '@angular/core';
 import { NbToast, NbToastrModule } from '@nebular/theme';
 import { NbThemeModule, NbLayoutModule } from '@nebular/theme';
@@ -28,7 +28,7 @@ export class  NbToastrTestComponent {
 describe('toastr-component', () => {
   let fixture: ComponentFixture<NbToastrTestComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [
         RouterTestingModule.withRoutes([]),
