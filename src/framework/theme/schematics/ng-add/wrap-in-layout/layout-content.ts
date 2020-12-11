@@ -37,7 +37,7 @@ ${layoutEnd}
 
 /**
  * Adds padding to the each line of the multyline string.
- * */
+ **/
 function padd(text: string, paddLen: number): string {
   return text
     .split('\n')
@@ -47,7 +47,7 @@ function padd(text: string, paddLen: number): string {
 
 /**
  * Same as padd, but doesn't padd empty lines.
- * */
+ **/
 function paddNotEmpty(text: string, paddLen: number): string {
   return padd(text, paddLen).replace(/^ +$/gm, '');
 }
