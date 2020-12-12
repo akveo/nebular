@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { TestBed, inject, async } from '@angular/core/testing';
+import { TestBed, inject, waitForAsync } from '@angular/core/testing';
 
 import { DEFAULT_MEDIA_BREAKPOINTS, NbMediaBreakpointsService } from './breakpoints.service';
 import { NB_MEDIA_BREAKPOINTS } from '../theme.options';
@@ -23,7 +23,7 @@ describe('breakpoint-service', () => {
   });
 
   // Single async inject to save references; which are used in all tests below
-  beforeEach(async(inject(
+  beforeEach(waitForAsync(inject(
     [NbMediaBreakpointsService],
     (_breakpointService) => {
       breakpointService = _breakpointService
