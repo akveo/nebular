@@ -314,4 +314,14 @@ describe('Component: NbAutocompleteComponent', () => {
     expect(autocompleteDirective.isClosed).toBe(true);
   });
 
+  it('should update disabled state', () => {
+    autocompleteDirective.setDisabledState(true);
+    fixture.detectChanges();
+    expect(input.disabled).toBe(true);
+
+    autocompleteDirective.setDisabledState(false);
+    fixture.detectChanges();
+    expect(input.disabled).toBe(false);
+  });
+
 });
