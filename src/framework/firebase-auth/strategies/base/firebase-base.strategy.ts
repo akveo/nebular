@@ -10,6 +10,7 @@ import { Observable, of as observableOf, from } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { NbAuthResult, NbAuthIllegalTokenError, NbAuthStrategy } from '@nebular/auth';
 
+import firebase from 'firebase/app';
 import UserCredential = firebase.auth.UserCredential;
 
 
