@@ -223,7 +223,7 @@ export class NbButtonGroupComponent implements OnChanges, AfterContentInit {
       .subscribe(({ source }: NbButtonToggleChange) => {
         toggleButtons
           .filter((button: NbButtonToggleDirective) => button !== source)
-          .forEach((button: NbButtonToggleDirective) => button.pressed = false);
+          .forEach((button: NbButtonToggleDirective) => button._updatePressed(false));
       });
   }
 
