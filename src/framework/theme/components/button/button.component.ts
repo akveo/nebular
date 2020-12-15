@@ -18,9 +18,7 @@ import {
 } from '@angular/core';
 
 import { convertToBoolProperty, firstChildNotComment, lastChildNotComment, NbBooleanInput } from '../helpers';
-import { NbBaseButtonDirective } from './base-button.directive';
-
-export type NbButtonAppearance = 'filled' | 'outline' | 'ghost' | 'hero';
+import { NbButton } from './base-button';
 
 /**
  * Basic button component.
@@ -528,16 +526,15 @@ export type NbButtonAppearance = 'filled' | 'outline' | 'ghost' | 'hero';
  */
 @Component({
   selector: 'button[nbButton],a[nbButton],input[type="button"][nbButton],input[type="submit"][nbButton]',
-  styleUrls: ['./button.component.scss'],
   template: `
     <ng-content></ng-content>
   `,
   providers: [
-    { provide: NbBaseButtonDirective, useExisting: NbButtonComponent },
+    { provide: NbButton, useExisting: NbButtonComponent },
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NbButtonComponent extends NbBaseButtonDirective implements AfterViewInit {
+export class NbButtonComponent extends NbButton implements AfterViewInit {
   /**
    * Sets `hero` appearance
    */

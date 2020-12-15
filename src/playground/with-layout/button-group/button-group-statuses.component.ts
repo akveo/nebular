@@ -7,9 +7,8 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
-  selector: 'nb-button-group-nb-button',
+  templateUrl: './button-group-statuses.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: './button-group-nb-button.component.html',
 })
-export class ButtonGroupNbButtonComponent {
+export class ButtonGroupStatusesComponent {
 }

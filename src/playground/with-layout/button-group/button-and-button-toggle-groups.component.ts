@@ -7,10 +7,9 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
-  selector: 'nb-button-group-sizes',
-  templateUrl: './button-group-sizes.component.html',
+  templateUrl: './button-and-button-toggle-groups.component.html',
   styleUrls: ['./button-group-spacing.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ButtonGroupSizesComponent {
+export class ButtonAndButtonToggleGroupsComponent {
 }

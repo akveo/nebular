@@ -11,12 +11,15 @@ import {
 import { NbComponentSize } from '../component-size';
 import { NbComponentStatus } from '../component-status';
 import { NbComponentShape } from '../component-shape';
-import { NbButtonAppearance } from './button.component';
 import { convertToBoolProperty, firstChildNotComment, lastChildNotComment, NbBooleanInput } from '../helpers';
 
+export type NbButtonAppearance = 'filled' | 'outline' | 'ghost' | 'hero';
+
+export type NbButtonProperties = Pick<NbButton, 'appearance' | 'size' | 'shape' | 'status' | 'disabled'> & Object;
 
 @Directive()
-export abstract class NbBaseButtonDirective implements AfterViewInit {
+// tslint:disable-next-line:directive-class-suffix
+export abstract class NbButton implements AfterViewInit {
   /**
    * Button size, available sizes:
    * `tiny`, `small`, `medium`, `large`, `giant`
@@ -47,13 +50,11 @@ export abstract class NbBaseButtonDirective implements AfterViewInit {
   get filled(): boolean {
     return this.appearance === 'filled';
   }
-
   set filled(value: boolean) {
     if (convertToBoolProperty(value)) {
       this.appearance = 'filled';
     }
   }
-
   static ngAcceptInputType_filled: NbBooleanInput;
 
   /**
@@ -64,13 +65,11 @@ export abstract class NbBaseButtonDirective implements AfterViewInit {
   get outline(): boolean {
     return this.appearance === 'outline';
   }
-
   set outline(value: boolean) {
     if (convertToBoolProperty(value)) {
       this.appearance = 'outline';
     }
   }
-
   static ngAcceptInputType_outline: NbBooleanInput;
 
   /**
@@ -79,16 +78,13 @@ export abstract class NbBaseButtonDirective implements AfterViewInit {
   @Input()
   @HostBinding('class.appearance-ghost')
   get ghost(): boolean {
-
     return this.appearance === 'ghost';
   }
-
   set ghost(value: boolean) {
     if (convertToBoolProperty(value)) {
       this.appearance = 'ghost';
     }
   }
-
   static ngAcceptInputType_ghost: NbBooleanInput;
 
   /**
@@ -99,11 +95,9 @@ export abstract class NbBaseButtonDirective implements AfterViewInit {
   get fullWidth(): boolean {
     return this._fullWidth;
   }
-
   set fullWidth(value: boolean) {
     this._fullWidth = convertToBoolProperty(value);
   }
-
   private _fullWidth = false;
   static ngAcceptInputType_fullWidth: NbBooleanInput;
 
@@ -116,12 +110,12 @@ export abstract class NbBaseButtonDirective implements AfterViewInit {
   get disabled(): boolean {
     return this._disabled;
   }
-
   set disabled(value: boolean) {
-    this._disabled = convertToBoolProperty(value);
-    this.renderer.setProperty(this.hostElement.nativeElement, 'disabled', this.disabled);
+    if (this.disabled !== convertToBoolProperty(value)) {
+      this._disabled = !this.disabled;
+      this.renderer.setProperty(this.hostElement.nativeElement, 'disabled', this.disabled);
+    }
   }
-
   private _disabled: boolean = false;
   static ngAcceptInputType_disabled: NbBooleanInput;
 
@@ -182,7 +176,6 @@ export abstract class NbBaseButtonDirective implements AfterViewInit {
   protected constructor(
     protected renderer: Renderer2,
     protected hostElement: ElementRef<HTMLElement>,
-    // @breaking-change @7.0.0  make cd required
     protected cd: ChangeDetectorRef,
     protected zone: NgZone,
   ) {
@@ -195,17 +188,22 @@ export abstract class NbBaseButtonDirective implements AfterViewInit {
     }));
   }
 
-  updateAttributes(config: {
-    appearance: NbButtonAppearance;
-    size: NbComponentSize;
-    shape: NbComponentShape;
-    status: NbComponentStatus
-  }) {
-    this.appearance = config.appearance;
-    this.status = config.status;
-    this.size = config.size;
-    this.shape = config.shape;
-    this.cd.markForCheck();
+  /**
+   * @docs-private
+   **/
+  updateProperties(config: Partial<NbButtonProperties>) {
+    let isPropertyChanged = false;
+
+    for (const key in config) {
+      if (config.hasOwnProperty(key) && this[key] !== config[key]) {
+        this[key] = config[key];
+        isPropertyChanged = true;
+      }
+    }
+
+    if (isPropertyChanged) {
+      this.cd.markForCheck();
+    }
   }
 
   get iconElement() {

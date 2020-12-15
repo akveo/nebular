@@ -6,7 +6,14 @@
 
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NbCardModule, NbIconModule, NbButtonModule, NbButtonToggleModule, NbButtonGroupModule } from '@nebular/theme';
+import {
+  NbCardModule,
+  NbIconModule,
+  NbButtonModule,
+  NbButtonGroupModule,
+  NbRadioModule,
+  NbCheckboxModule,
+} from '@nebular/theme';
 
 import { ButtonGroupShowcaseComponent } from './button-group-showcase.component';
 import { ButtonGroupMultipleComponent } from './button-group-multiple.component';
@@ -14,7 +21,10 @@ import { ButtonGroupRoutingModule } from './button-group-routing.module';
 import { ButtonGroupSizesComponent } from './button-group-sizes.component';
 import { ButtonGroupAppearancesComponent } from './button-group-appearances.component';
 import { ButtonGroupShapesComponent } from './button-group-shapes.component';
-import { ButtonGroupNbButtonComponent } from './button-group-nb-button.component';
+import { ButtonAndButtonToggleGroupsComponent } from './button-and-button-toggle-groups.component';
+import { ButtonGroupInteractiveComponent } from './button-group-interactive.component';
+import { ButtonGroupDisabledComponent } from './button-group-disabled.component';
+import { ButtonGroupStatusesComponent } from './button-group-statuses.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +33,10 @@ import { ButtonGroupNbButtonComponent } from './button-group-nb-button.component
     ButtonGroupSizesComponent,
     ButtonGroupAppearancesComponent,
     ButtonGroupShapesComponent,
-    ButtonGroupNbButtonComponent,
+    ButtonAndButtonToggleGroupsComponent,
+    ButtonGroupInteractiveComponent,
+    ButtonGroupDisabledComponent,
+    ButtonGroupStatusesComponent,
   ],
   imports: [
     CommonModule,
@@ -31,7 +44,8 @@ import { ButtonGroupNbButtonComponent } from './button-group-nb-button.component
     NbIconModule,
     NbButtonModule,
     NbButtonGroupModule,
-    NbButtonToggleModule,
+    NbRadioModule,
+    NbCheckboxModule,
     ButtonGroupRoutingModule,
   ],
 })

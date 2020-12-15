@@ -16,7 +16,8 @@
   vertical-align: middle;
   user-select: none;
 
-  &:hover, &:focus {
+  &:hover,
+  &:focus {
     text-decoration: none;
   }
 
@@ -24,7 +25,7 @@
     width: 100%;
   }
 
-  ::ng-deep nb-icon {
+  nb-icon {
     vertical-align: top;
   }
 

@@ -1,36 +1,75 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
 import {
   ChangeDetectorRef,
   Directive,
   ElementRef,
+  EventEmitter,
   HostBinding,
+  HostListener,
   Input,
   NgZone,
+  Output,
   Renderer2,
 } from '@angular/core';
+import { Observable, Subject } from 'rxjs';
+
 import { convertToBoolProperty, NbBooleanInput } from '../helpers';
-import { NbBaseButtonDirective } from '../button/base-button.directive';
+import { NbButton, NbButtonAppearance } from '../button/base-button';
+
+export type NbButtonToggleAppearance = Exclude<NbButtonAppearance, 'hero'>;
+
+export interface NbButtonToggleChange {
+  source: NbButtonToggleDirective;
+  pressed: boolean;
+}
 
 /**
- * The `NbButtonToggleDirective` is wrapper for button provides a capability to work as part of `NbButtonGroupComponent`
+ * `[nbButtonToggle]` is a directive to add a `pressed` state to a button.
  */
 @Directive({
   selector: 'button[nbButtonToggle]',
   providers: [
-    { provide: NbBaseButtonDirective, useExisting: NbButtonToggleDirective },
+    { provide: NbButton, useExisting: NbButtonToggleDirective },
   ],
+  exportAs: 'nbButtonToggle',
 })
-export class NbButtonToggleDirective extends NbBaseButtonDirective {
+export class NbButtonToggleDirective extends NbButton {
 
+  protected readonly _pressedChange$ = new Subject<NbButtonToggleChange>();
+
+  get pressedChange$(): Observable<NbButtonToggleChange> {
+    return this._pressedChange$.asObservable();
+  }
+
+  @Input() appearance: NbButtonToggleAppearance = 'filled';
+
+  /**
+   * Controls button pressed state
+   **/
   @Input()
   @HostBinding('attr.aria-pressed')
   get pressed(): boolean {
     return this._pressed;
   }
   set pressed(value: boolean) {
-    this._pressed = convertToBoolProperty(value);
+    if (this.pressed !== convertToBoolProperty(value)) {
+      this._pressed = !this.pressed;
+      this.pressedChange.emit(this.pressed);
+      this._pressedChange$.next({ source: this, pressed: this.pressed })
+    }
   }
   protected _pressed: boolean = false;
   static ngAcceptInputType_pressed: NbBooleanInput;
+
+  /**
+   * Emits whenever button pressed state change
+   **/
+  @Output() readonly pressedChange = new EventEmitter<boolean>();
 
   @HostBinding('class.status-basic')
   get basic(): boolean {
@@ -66,6 +105,11 @@ export class NbButtonToggleDirective extends NbBaseButtonDirective {
   @HostBinding('class.status-control')
   get control(): boolean {
     return this.pressed && this.status === 'control';
+  }
+
+  @HostListener('click')
+  onClick(): void {
+    this.pressed = !this.pressed;
   }
 
   constructor(

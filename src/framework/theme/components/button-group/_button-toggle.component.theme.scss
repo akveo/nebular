@@ -8,8 +8,6 @@
 
 @mixin nb-buttons-toggle-theme() {
   [nbButtonToggle] {
-    @include nb-button-core();
-
     @extend [nbButton];
   }
 }

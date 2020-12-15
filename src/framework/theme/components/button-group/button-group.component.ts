@@ -1,46 +1,35 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
 import {
   AfterContentInit,
   ChangeDetectorRef,
   Component,
   ContentChildren,
   HostBinding,
-  HostListener,
   Input,
   OnChanges,
   QueryList,
   SimpleChanges,
 } from '@angular/core';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { merge, Observable, Subject } from 'rxjs';
+import { filter, map, startWith, takeUntil } from 'rxjs/operators';
 
 import { convertToBoolProperty, NbBooleanInput } from '../helpers';
 import { NbComponentSize } from '../component-size';
 import { NbComponentShape } from '../component-shape';
 import { NbComponentStatus } from '../component-status';
-import { NbButtonAppearance, NbButtonComponent } from '../button/button.component';
-import { NbBaseButtonDirective } from '../button/base-button.directive';
+import { NbButton } from '../button/base-button';
+import { NbButtonToggleAppearance, NbButtonToggleChange, NbButtonToggleDirective } from './button-toggle.directive';
 
 /**
- * NbButtonGroupComponent provides grouping and state management capabilities.
- * In order to check one or multiple options add nbButtonToggle attribute to the button inside of
- * the nb-button-group component
- * @stacked-example(Button Showcase, button-group/button-group-showcase.component)
+ * `<nb-button-group>` visually groups buttons together and allow to control buttons properties and the state as a
+ * group.
+ * @stacked-example(Button Group Showcase, button-group/button-group-showcase.component)
  *
- * ```html
- * <nb-button-group
- *  size="giant"
- *  status="primary"
- *  shape="semi-round"
- *  filled>
- *    <button nbButtonToggle>A</button>
- *    <button nbButtonToggle>B</button>
- *    <button nbButtonToggle>C</button>
- *    <button nbButtonToggle>D</button>
- *    <button nbButtonToggle>E</button>
- *    <button nbButtonToggle>F</button>
- *  </nb-button-group>
- *
- * ```
  * ### Installation
  *
  * Import `NbButtonGroupModule` to your feature module.
@@ -53,25 +42,36 @@ import { NbBaseButtonDirective } from '../button/base-button.directive';
  * })
  * export class PageModule { }
  * ```
+ *
  * ### Usage
  *
- * You can select multiple options by adding `multiple` flag
- * @stacked-example(Button Group multiple, button-group/button-group-multiple.component.html)
+ * You can use `<nb-button-group>` to group a series of `[nbButton]` or `[nbButtonToggle]` components.
+ * @stacked-example(Button and Button Toggle Groups, button-group/button-and-button-toggle-groups.component)
  *
- * There are three button group sizes:
+ * For a group of multiple `[nbButtonToggle]` you also can control multi-selection behavior. By default, the group
+ * component allows only one pressed button toggle at a time (similar to the radio group). To be able to keep multiple
+ * toggles pressed, you need to add `multiple` attributes to the `<nb-button-toggle>`.
+ * @stacked-example(Button Group Multiple, button-group/button-group-multiple.component)
  *
- * @stacked-example(Button Group Sizes, button-group/button-group-sizes.component.html)
+ * To disable a group of buttons, add a `disabled` attribute to the `<nb-button-group>`.
+ * @stacked-example(Button Group Disabled, button-group/button-group-disabled.component)
  *
- * And two additional style types - `filled`, `outline` and `ghost`:
- * @stacked-example(Button Group Appearances, button-group/button-group-appearances.component.html)
+ * The group component controls all visual attributes of buttons such as `appearance`, `status`, `size`, `shape`.
+ * You can change it via the appropriate attributes.
  *
- * Buttons groups available in different shapes:
- * @stacked-example(Button Group Shapes, button-group/button-group-shapes.component.html)
+ * Button group appearances:
+ * @stacked-example(Button Group Appearances, button-group/button-group-appearances.component)
  *
- * You can add `nbButton` to the button group
- * @stacked-example(Button Group with nbButton, button-group/button-group-nb-button.component.html)
+ * Button group statuses:
+ * @stacked-example(Button Group Statuses, button-group/button-group-statuses.component)
  *
- * */
+ * Button group sizes:
+ * @stacked-example(Button Group Sizes, button-group/button-group-sizes.component)
+ *
+ * Buttons group shapes:
+ * @additional-example(Button Group Shapes, button-group/button-group-shapes.component)
+ *
+ **/
 @Component({
   selector: 'nb-button-group',
   template: `
@@ -80,9 +80,10 @@ import { NbBaseButtonDirective } from '../button/base-button.directive';
 })
 export class NbButtonGroupComponent implements OnChanges, AfterContentInit {
 
-  protected destroy$: Subject<void> = new Subject<void>();
+  protected readonly destroy$: Subject<void> = new Subject<void>();
+  protected readonly buttonsChange$ = new Subject<NbButton[]>();
 
-  @ContentChildren(NbBaseButtonDirective) buttons: QueryList<NbBaseButtonDirective>;
+  @ContentChildren(NbButton) readonly buttons: QueryList<NbButton>;
 
   /**
    * Button group size, available sizes:
@@ -92,9 +93,9 @@ export class NbButtonGroupComponent implements OnChanges, AfterContentInit {
 
   /**
    * Button group status (adds specific styles):
-   * `primary`, `info`, `success`, `warning`, `danger`
+   * `basic`, `primary`, `info`, `success`, `warning`, `danger`, `control`
    */
-  @Input() status: NbComponentStatus = 'primary';
+  @Input() status: NbComponentStatus = 'basic';
 
   /**
    * Button group shapes: `rectangle`, `round`, `semi-round`
@@ -102,12 +103,24 @@ export class NbButtonGroupComponent implements OnChanges, AfterContentInit {
   @Input() shape: NbComponentShape = 'rectangle';
 
   /**
-   * Button group appearance: `filled`, `outline`, `ghost`, `hero`
+   * Button group appearance: `filled`, `outline`, `ghost`
    */
-  @Input() appearance: NbButtonAppearance = 'filled';
+  @Input() appearance: NbButtonToggleAppearance = 'filled';
+
+  @Input()
+  get disabled(): boolean {
+    return this._disabled;
+  }
+  set disabled(value: boolean) {
+    if (this.disabled !== convertToBoolProperty(value)) {
+      this._disabled = !this.disabled;
+    }
+  }
+  protected _disabled = false;
+  static ngAcceptInputType_disabled: NbBooleanInput;
 
   /**
-   * Sets `outline` appearance
+   * Allows to keep multiple button toggles pressed. Off by default.
    */
   @Input()
   get multiple(): boolean {
@@ -163,52 +176,64 @@ export class NbButtonGroupComponent implements OnChanges, AfterContentInit {
 
   @HostBinding('attr.role') role = 'group';
 
-  @HostListener('click', ['$event'])
-  onButtonClick(event: any) {
-    this.buttons.forEach((item: any) => {
-      if (item.hostElement.nativeElement.isSameNode(event.target) ||
-        item.hostElement.nativeElement.contains(event.target)) {
-        if (this.multiple) {
-          item.pressed = !item.pressed;
-        } else {
-          item.pressed = true;
-        }
-      } else {
-        if (!this.multiple) {
-          item.pressed = false;
-        }
-      }
-    });
-  }
+  constructor(protected cd: ChangeDetectorRef) {}
 
-  constructor(protected cd: ChangeDetectorRef) {
+  ngOnChanges({ size, status, shape, multiple, filled, outline, ghost, disabled }: SimpleChanges) {
+    if (size || status || shape || multiple || filled || outline || ghost || disabled) {
+      this.updateButtonProperties(this.buttons?.toArray() || []);
+    }
   }
 
   ngAfterContentInit(): void {
-    this.updateButtonInputs();
-    this.buttons.changes
+    this.buttonsChange$
       .pipe(takeUntil(this.destroy$))
-      .subscribe(() => {
-        this.updateButtonInputs();
+      .subscribe((buttons: NbButton[]) => {
+        this.listenButtonPressedState(buttons);
+        this.updateButtonProperties(buttons);
+      });
+
+    this.buttons.changes
+      .pipe(
+        startWith(this.buttons),
+        map((buttons: QueryList<NbButton>) => buttons.toArray()),
+        takeUntil(this.destroy$),
+      )
+      .subscribe(this.buttonsChange$);
+  }
+
+  protected listenButtonPressedState(buttons: NbButton[]): void {
+    const toggleButtons: NbButtonToggleDirective[] = buttons.filter((button: NbButton) => {
+      return !!(button as NbButtonToggleDirective).pressedChange;
+    }) as NbButtonToggleDirective[];
+
+    if (!toggleButtons.length) {
+      return;
+    }
+
+    const buttonsPressedChange$: Observable<NbButtonToggleChange>[] = toggleButtons
+      .map((button: NbButtonToggleDirective) => button.pressedChange$);
+
+    merge(...buttonsPressedChange$)
+      .pipe(
+        filter(({ pressed }: NbButtonToggleChange) => !this.multiple && pressed),
+        takeUntil(merge(this.buttonsChange$, this.destroy$)),
+      )
+      .subscribe(({ source }: NbButtonToggleChange) => {
+        toggleButtons
+          .filter((button: NbButtonToggleDirective) => button !== source)
+          .forEach((button: NbButtonToggleDirective) => button.pressed = false);
       });
   }
 
-  ngOnChanges({ size, status, shape, multiple, filled, outline, ghost }: SimpleChanges) {
-    if (size || status || shape || multiple || filled || outline || ghost) {
-      this.updateButtonInputs();
-    }
-  }
-
-  updateButtonInputs(): void {
-    if (this.buttons) {
-      this.buttons.forEach((item: NbButtonComponent) => {
-        item.updateAttributes({
-          appearance: this.appearance,
-          size: this.size,
-          status: this.status,
-          shape: this.shape,
-        });
+  protected updateButtonProperties(buttons: NbButton[]): void {
+    buttons.forEach((button: NbButton) => {
+      button.updateProperties({
+        appearance: this.appearance,
+        size: this.size,
+        status: this.status,
+        shape: this.shape,
+        disabled: this.disabled,
       });
-    }
+    });
   }
 }

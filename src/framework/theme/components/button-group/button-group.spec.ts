@@ -5,11 +5,9 @@
  */
 
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { NbButtonGroupComponent } from './button-group.component';
 import { Component, QueryList, ViewChild, ViewChildren } from '@angular/core';
-import { NbButtonGroupModule } from '@nebular/theme/components/button-group/button-group.module';
-import { NbButtonModule } from '@nebular/theme/components/button/button.module';
-import { NbButtonToggleDirective } from '@nebular/theme/components/button-toggle/button-toggle.directive';
+
+import { NbButtonModule, NbButtonGroupComponent, NbButtonGroupModule, NbButtonToggleDirective } from '@nebular/theme';
 
 @Component({
   selector: 'nb-button-group-test',

@@ -11,7 +11,10 @@ import { ButtonGroupMultipleComponent } from './button-group-multiple.component'
 import { ButtonGroupSizesComponent } from './button-group-sizes.component';
 import { ButtonGroupAppearancesComponent } from './button-group-appearances.component';
 import { ButtonGroupShapesComponent } from './button-group-shapes.component';
-import { ButtonGroupNbButtonComponent } from './button-group-nb-button.component';
+import { ButtonAndButtonToggleGroupsComponent } from './button-and-button-toggle-groups.component';
+import { ButtonGroupInteractiveComponent } from './button-group-interactive.component';
+import { ButtonGroupDisabledComponent } from './button-group-disabled.component';
+import { ButtonGroupStatusesComponent } from './button-group-statuses.component';
 
 const routes: Route[] = [
   {
@@ -35,8 +38,20 @@ const routes: Route[] = [
     component: ButtonGroupShapesComponent,
   },
   {
-    path: 'button-group-nb-button.component',
-    component: ButtonGroupNbButtonComponent,
+    path: 'button-and-button-toggle-groups.component',
+    component: ButtonAndButtonToggleGroupsComponent,
+  },
+  {
+    path: 'button-group-interactive.component',
+    component: ButtonGroupInteractiveComponent,
+  },
+  {
+    path: 'button-group-disabled.component',
+    component: ButtonGroupDisabledComponent,
+  },
+  {
+    path: 'button-group-statuses.component',
+    component: ButtonGroupStatusesComponent,
   },
 ];
 

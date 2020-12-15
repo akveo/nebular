@@ -4,6 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
+@import './button-core';
 @import './button-filled';
 @import './button-outline';
 @import './button-ghost';
@@ -11,6 +12,8 @@
 
 @mixin nb-buttons-theme() {
   [nbButton] {
+    @include nb-button-core();
+
     cursor: nb-theme(button-cursor);
     font-family: nb-theme(button-text-font-family);
     font-weight: nb-theme(button-text-font-weight);
