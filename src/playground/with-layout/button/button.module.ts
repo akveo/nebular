@@ -6,7 +6,7 @@
 
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NbCardModule, NbIconModule, NbRadioModule, NbButtonModule } from '@nebular/theme';
+import { NbButtonModule, NbCardModule, NbIconModule, NbRadioModule } from '@nebular/theme';
 import { ButtonRoutingModule } from './button-routing.module';
 import { ButtonColorsComponent } from './button-colors.component';
 import { ButtonFullWidthComponent } from './button-full-width.component';
