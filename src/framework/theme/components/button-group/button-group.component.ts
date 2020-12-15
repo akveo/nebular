@@ -182,7 +182,7 @@ export class NbButtonGroupComponent implements OnChanges, AfterContentInit {
 
   ngOnChanges({ size, status, shape, multiple, filled, outline, ghost, disabled }: SimpleChanges) {
     if (size || status || shape || multiple || filled || outline || ghost || disabled) {
-      this.updateButtonProperties(this.buttons?.toArray() || []);
+      this.syncButtonsProperties(this.buttons?.toArray() || []);
     }
   }
 
@@ -191,7 +191,7 @@ export class NbButtonGroupComponent implements OnChanges, AfterContentInit {
       .pipe(takeUntil(this.destroy$))
       .subscribe((buttons: NbButton[]) => {
         this.listenButtonPressedState(buttons);
-        this.updateButtonProperties(buttons);
+        this.syncButtonsProperties(buttons);
       });
 
     this.buttons.changes
@@ -227,7 +227,7 @@ export class NbButtonGroupComponent implements OnChanges, AfterContentInit {
       });
   }
 
-  protected updateButtonProperties(buttons: NbButton[]): void {
+  protected syncButtonsProperties(buttons: NbButton[]): void {
     buttons.forEach((button: NbButton) => {
       button.updateProperties({
         appearance: this.appearance,
