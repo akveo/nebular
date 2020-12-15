@@ -550,25 +550,6 @@ export class NbButtonComponent extends NbButton implements AfterViewInit {
   }
   static ngAcceptInputType_hero: NbBooleanInput;
 
-  /**
-   * Tabindex of the button.
-   */
-  @Input() tabIndex: number;
-
-  // issue #794
-  @HostBinding('attr.tabindex')
-  get tabbable(): string {
-    if (this.disabled) {
-      return '-1';
-    }
-
-    if (this.tabIndex == null) {
-      return '0';
-    }
-
-    return this.tabIndex.toString();
-  }
-
   @HostBinding('class.status-primary')
   get primary() {
     return this.status === 'primary';

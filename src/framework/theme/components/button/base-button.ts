@@ -119,6 +119,25 @@ export abstract class NbButton implements AfterViewInit {
   private _disabled: boolean = false;
   static ngAcceptInputType_disabled: NbBooleanInput;
 
+  /**
+   * Tabindex of the button.
+   */
+  @Input() tabIndex: number;
+
+  // issue #794
+  @HostBinding('attr.tabindex')
+  get tabbable(): string {
+    if (this.disabled) {
+      return '-1';
+    }
+
+    if (this.tabIndex == null) {
+      return '0';
+    }
+
+    return this.tabIndex.toString();
+  }
+
   @HostBinding('class.size-tiny')
   get tiny() {
     return this.size === 'tiny';
