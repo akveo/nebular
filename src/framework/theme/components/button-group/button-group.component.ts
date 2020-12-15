@@ -6,6 +6,7 @@
 
 import {
   AfterContentInit,
+  ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
   ContentChildren,
@@ -77,6 +78,7 @@ import { NbButtonToggleAppearance, NbButtonToggleChange, NbButtonToggleDirective
   template: `
     <ng-content></ng-content>
   `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NbButtonGroupComponent implements OnChanges, AfterContentInit {
 
