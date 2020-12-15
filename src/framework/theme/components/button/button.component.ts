@@ -585,20 +585,6 @@ export class NbButtonComponent extends NbButton implements AfterViewInit {
     return this.status === 'control';
   }
 
-  @HostBinding('class.icon-start')
-  get iconLeft(): boolean {
-    const el = this.hostElement.nativeElement;
-    const icon = this.iconElement;
-    return !!(icon && firstChildNotComment(el) === icon);
-  }
-
-  @HostBinding('class.icon-end')
-  get iconRight(): boolean {
-    const el = this.hostElement.nativeElement;
-    const icon = this.iconElement;
-    return !!(icon && lastChildNotComment(el) === icon);
-  }
-
   /**
    * @private
    * Keep this handler to partially support anchor disabling.
