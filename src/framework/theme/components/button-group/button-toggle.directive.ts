@@ -125,8 +125,6 @@ export class NbButtonToggleDirective extends NbButton {
    * @docs-private
    */
   _updatePressed(value: boolean) {
-    // When the group value changes, the button will not be notified.
-    // Use `markForCheck` to explicit update button toggle's status.
     this.pressed = value;
     this.cd.markForCheck();
   }
