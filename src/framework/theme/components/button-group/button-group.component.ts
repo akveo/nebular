@@ -205,7 +205,7 @@ export class NbButtonGroupComponent implements OnChanges, AfterContentInit {
 
   protected listenButtonPressedState(buttons: NbButton[]): void {
     const toggleButtons: NbButtonToggleDirective[] = buttons.filter((button: NbButton) => {
-      return !!(button as NbButtonToggleDirective).pressedChange;
+      return button instanceof NbButtonToggleDirective;
     }) as NbButtonToggleDirective[];
 
     if (!toggleButtons.length) {
