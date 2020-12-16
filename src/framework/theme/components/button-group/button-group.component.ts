@@ -16,8 +16,8 @@ import {
   QueryList,
   SimpleChanges,
 } from '@angular/core';
-import { merge, Observable, Subject } from 'rxjs';
-import { filter, map, startWith, takeUntil } from 'rxjs/operators';
+import { from, merge, Observable, Subject } from 'rxjs';
+import { filter, switchMap, takeUntil } from 'rxjs/operators';
 
 import { convertToBoolProperty, NbBooleanInput } from '../helpers';
 import { NbComponentSize } from '../component-size';
@@ -196,11 +196,17 @@ export class NbButtonGroupComponent implements OnChanges, AfterContentInit {
 
     this.buttons.changes
       .pipe(
-        startWith(this.buttons),
-        map((buttons: QueryList<NbButton>) => buttons.toArray()),
+        // `buttons.changes` emit during change detection run after projected content already was initialized.
+        // So at this time, it's too late to update projected buttons properties as updating bindings after
+        // initialization doesn't make sense. Changes won't be picked up and should cause an "expression changed" error.
+        // Instead, we wrap the new buttons list into a promise to defer update to the following microtask and also to
+        // trigger change detection one more time.
+        switchMap((buttons: QueryList<NbButton>) => from(Promise.resolve(buttons.toArray()))),
         takeUntil(this.destroy$),
       )
       .subscribe(this.buttonsChange$);
+
+    this.buttonsChange$.next(this.buttons.toArray());
   }
 
   protected listenButtonPressedState(buttons: NbButton[]): void {
