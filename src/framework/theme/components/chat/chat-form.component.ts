@@ -72,10 +72,10 @@ import { NbComponentStatus } from '../component-status';
              [(ngModel)]="message"
              [class.with-button]="showButton"
              type="text"
-             placeholder="{{ fileOver ? 'Drop file to send' : 'Type a message' }}"
+             placeholder="{{ fileOver ? dropFilePlaceholder : messagePlaceholder }}"
              (keyup.enter)="sendMessage()">
       <button nbButton
-              [status]="status || 'primary'"
+              [status]="getButtonStatus()"
               *ngIf="showButton"
               [class.with-icon]="!buttonTitle"
               (click)="sendMessage()"
@@ -89,7 +89,7 @@ import { NbComponentStatus } from '../component-status';
 })
 export class NbChatFormComponent {
 
-  status: NbComponentStatus | '' = '';
+  status: NbComponentStatus = 'basic';
   inputFocus: boolean = false;
   inputHover: boolean = false;
 
@@ -102,6 +102,11 @@ export class NbChatFormComponent {
    */
   @Input() message: string = '';
 
+  /**
+   * Message placeholder text
+   * @type {string}
+   */
+  @Input() messagePlaceholder: string = 'Type a message';
   /**
    * Send button title
    * @type {string}
@@ -125,6 +130,12 @@ export class NbChatFormComponent {
    * @type {boolean}
    */
   @Input() dropFiles: boolean = false;
+
+  /**
+   * File drop placeholder text
+   * @type {string}
+   */
+  @Input() dropFilePlaceholder: string = 'Drop file to send';
 
   /**
    *
@@ -201,15 +212,27 @@ export class NbChatFormComponent {
     }
   }
 
-  getInputStatus(): NbComponentStatus | '' {
+  getInputStatus(): NbComponentStatus {
     if (this.fileOver) {
-      return this.status || 'primary';
+      return this.getHighlightStatus();
     }
 
     if (this.inputFocus || this.inputHover) {
       return this.status;
     }
 
-    return '';
+    return 'basic';
+  }
+
+  getButtonStatus(): NbComponentStatus {
+    return this.getHighlightStatus();
+  }
+
+  protected getHighlightStatus(): NbComponentStatus {
+    if (this.status === 'basic' || this.status === 'control') {
+      return 'primary';
+    }
+
+    return this.status;
   }
 }

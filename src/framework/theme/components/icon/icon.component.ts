@@ -19,6 +19,13 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { NbComponentStatus } from '../component-status';
 import { NbIconLibraries } from './icon-libraries';
 
+export interface NbIconConfig {
+  icon: string;
+  pack?: string;
+  status?: NbComponentStatus;
+  options?: { [name: string]: any };
+}
+
 /**
  * Icon component. Allows to render both `svg` and `font` icons.
  * Starting from Nebular 4.0 uses [Eva Icons](https://akveo.github.io/eva-icons/) pack by default.
@@ -38,7 +45,7 @@ import { NbIconLibraries } from './icon-libraries';
  * which integrates SVG [Eva Icons](https://akveo.github.io/eva-icons/) pack to Nebular. To add it to your
  * project run:
  * ```sh
- * npm i @nebular/eva-icons@next
+ * npm i eva-icons @nebular/eva-icons
  * ```
  * This command will install Eva Icons pack. Then register `NbEvaIconsModule` into your app module:
  * ```ts
@@ -90,11 +97,14 @@ import { NbIconLibraries } from './icon-libraries';
  * icon-line-height:
  * icon-width:
  * icon-height:
+ * icon-svg-vertical-align:
+ * icon-basic-color:
  * icon-primary-color:
  * icon-info-color:
  * icon-success-color:
  * icon-warning-color:
  * icon-danger-color:
+ * icon-control-color:
  */
 @Component({
   selector: 'nb-icon',
@@ -102,13 +112,13 @@ import { NbIconLibraries } from './icon-libraries';
   template: '',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NbIconComponent implements OnChanges, OnInit {
+export class NbIconComponent implements NbIconConfig, OnChanges, OnInit {
 
   protected iconDef;
   protected prevClasses = [];
 
   @HostBinding('innerHtml')
-  html: SafeHtml;
+  html: SafeHtml = '';
 
   @HostBinding('class.status-primary')
   get primary() {
@@ -135,6 +145,16 @@ export class NbIconComponent implements OnChanges, OnInit {
     return this.status === 'danger';
   }
 
+  @HostBinding('class.status-basic')
+  get basic() {
+    return this.status === 'basic';
+  }
+
+  @HostBinding('class.status-control')
+  get control() {
+    return this.status === 'control';
+  }
+
   /**
    * Icon name
    * @param {string} status
@@ -155,9 +175,36 @@ export class NbIconComponent implements OnChanges, OnInit {
 
   /**
    * Icon status (adds specific styles):
-   * `primary`, `info`, `success`, `warning`, `danger`
+   * `basic`, `primary`, `info`, `success`, `warning`, `danger`, `control`
    */
-  @Input() status: NbComponentStatus;
+  @Input() status?: NbComponentStatus;
+
+  /**
+   * Sets all icon configurable properties via config object.
+   * If passed value is a string set icon name.
+   * @docs-private
+   */
+  @Input()
+  get config(): string | NbIconConfig {
+    return this._config;
+  }
+  set config(value: string | NbIconConfig) {
+    if (!value) {
+      return;
+    }
+
+    this._config = value;
+
+    if (typeof value === 'string') {
+      this.icon = value;
+    } else {
+      this.icon = value.icon;
+      this.pack = value.pack;
+      this.status = value.status;
+      this.options = value.options;
+    }
+  }
+  protected _config: string | NbIconConfig;
 
   constructor(
     protected sanitizer: DomSanitizer,
@@ -171,13 +218,20 @@ export class NbIconComponent implements OnChanges, OnInit {
   }
 
   ngOnChanges() {
-    if (this.iconDef) {
-      this.iconDef = this.renderIcon(this.icon, this.pack, this.options);
+    const iconDef = this.iconLibrary.getIcon(this.icon, this.pack);
+    if (iconDef) {
+      this.renderIcon(this.icon, this.pack, this.options);
+    } else {
+      this.clearIcon();
     }
   }
 
   renderIcon(name: string, pack?: string, options?: { [name: string]: any }) {
     const iconDefinition = this.iconLibrary.getIcon(name, pack);
+
+    if (!iconDefinition) {
+      return;
+    }
 
     const content = iconDefinition.icon.getContent(options);
     if (content) {
@@ -186,6 +240,11 @@ export class NbIconComponent implements OnChanges, OnInit {
 
     this.assignClasses(iconDefinition.icon.getClasses(options));
     return iconDefinition;
+  }
+
+  protected clearIcon(): void {
+    this.html = '';
+    this.assignClasses([]);
   }
 
   protected assignClasses(classes: string[]) {

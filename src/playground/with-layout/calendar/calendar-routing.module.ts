@@ -14,7 +14,8 @@ import { CalendarRangeShowcaseComponent } from './calendar-range-showcase.compon
 import { CalendarShowcaseComponent } from './calendar-showcase.component';
 import { CalendarSizeComponent } from './calendar-size.component';
 import { CalendarStartViewComponent } from './calendar-start-view.component';
-import { CalendarWithoutHeaderComponent } from './calendar-without-header.component';
+import { CalendarWithoutNavigationComponent } from './calendar-without-navigation.component';
+import { CalendarWeekNumberComponent } from './calendar-week-number.component';
 
 const routes: Route[] = [
   {
@@ -50,8 +51,12 @@ const routes: Route[] = [
     component: CalendarStartViewComponent,
   },
   {
-    path: 'calendar-without-header.component',
-    component: CalendarWithoutHeaderComponent,
+    path: 'calendar-without-navigation.component',
+    component: CalendarWithoutNavigationComponent,
+  },
+  {
+    path: 'calendar-week-number.component',
+    component: CalendarWeekNumberComponent,
   },
 ];
 

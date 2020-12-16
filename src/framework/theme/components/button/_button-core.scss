@@ -1,0 +1,35 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
+@import '../../styles/core/mixins';
+
+@mixin nb-button-core() {
+  appearance: none;
+  text-align: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  user-select: none;
+
+  &:hover,
+  &:focus {
+    text-decoration: none;
+  }
+
+  &.full-width {
+    width: 100%;
+  }
+
+  nb-icon {
+    vertical-align: top;
+  }
+
+  &.nb-transition {
+    @include nb-component-animation(background-color, border-color, box-shadow, color);
+  }
+}

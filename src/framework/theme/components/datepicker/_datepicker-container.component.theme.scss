@@ -5,65 +5,51 @@
  */
 
 @mixin nb-datepicker-theme {
-  nb-datepicker-container {
-    $arrow-size: nb-theme(datepicker-arrow-size);
-    $arrow-content-size: calc(#{$arrow-size} - 2px);
+  $border: nb-theme(datepicker-border-width) nb-theme(datepicker-border-style) nb-theme(datepicker-border-color);
 
+  nb-datepicker-container nb-card {
     border-color: nb-theme(datepicker-border-color);
     border-style: nb-theme(datepicker-border-style);
     border-width: nb-theme(datepicker-border-width);
     border-radius: nb-theme(datepicker-border-radius);
     background: nb-theme(datepicker-background-color);
     box-shadow: nb-theme(datepicker-shadow);
-
-    .primitive-overlay {
-      color: nb-theme(datepicker-text-color);
+  }
+  nb-calendar-with-time {
+    .nb-timepicker-container,
+    nb-base-calendar nb-card {
+      border: none;
     }
 
-    nb-card {
-      box-shadow: none;
+    .column-header {
+      border-top: $border;
+      border-radius: 0;
     }
 
-    .arrow {
-      border-left: $arrow-size solid transparent;
-      border-right: $arrow-size solid transparent;
-      border-bottom: $arrow-size solid nb-theme(datepicker-border-color);
-
-
-      &::after {
-        position: absolute;
-        content: ' ';
-        width: 0;
-        height: 0;
-        top: 3px;
-        left: calc(50% - #{$arrow-content-size});
-        border-left: $arrow-content-size solid transparent;
-        border-right: $arrow-content-size solid transparent;
-        border-bottom: $arrow-content-size solid nb-theme(datepicker-background-color);
-      }
+    .timepicker-section.size-large nb-list-item {
+      height: nb-theme(calendar-day-cell-large-height);
     }
 
-    &.nb-overlay-bottom .arrow {
-      top: calc(-1 * #{$arrow-size} + 1px);
-      left: calc(50% - #{$arrow-size});
+    .timepicker-section.size-large .header-cell {
+      height: nb-theme(calendar-weekday-large-height);
     }
 
-    &.nb-overlay-left .arrow {
-      right: calc(-1 * #{$arrow-size} - #{$arrow-size} / 2 + 2px);
-      top: calc(50% - #{$arrow-size / 2});
-      transform: rotate(90deg);
+    .timepicker-section {
+      @include nb-ltr(border-left, $border);
+      @include nb-rtl(border-right, $border);
     }
 
-    &.nb-overlay-top .arrow {
-      bottom: calc(-1 * #{$arrow-size} + 1px);
-      left: calc(50% - #{$arrow-size});
-      transform: rotate(180deg);
+    .timepicker-single-column-width {
+      width: nb-theme(timepicker-single-column-width);;
     }
 
-    &.nb-overlay-right .arrow {
-      left: calc(-1 * #{$arrow-size} - #{$arrow-size} / 2 + 2px);
-      top: calc(50% - #{$arrow-size / 2});
-      transform: rotate(270deg);
+    .timepicker-multiple-column-width {
+      width: nb-theme(timepicker-multiple-column-width);
+    }
+
+    .picker-title {
+      height: nb-theme(timepicker-title-height);
+      padding: nb-theme(timepicker-title-padding);
     }
   }
 }

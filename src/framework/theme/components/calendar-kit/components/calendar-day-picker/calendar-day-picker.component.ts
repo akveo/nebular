@@ -18,7 +18,8 @@ import {
 
 import { NbCalendarMonthModelService } from '../../services/calendar-month-model.service';
 import { NbCalendarDayCellComponent } from './calendar-day-cell.component';
-import { NbCalendarCell, NbCalendarSize } from '../../model';
+import { NbCalendarCell, NbCalendarSize, NbCalendarSizeValues } from '../../model';
+import { convertToBoolProperty, NbBooleanInput } from '../../../helpers';
 
 
 /**
@@ -26,20 +27,28 @@ import { NbCalendarCell, NbCalendarSize } from '../../model';
  * */
 @Component({
   selector: 'nb-calendar-day-picker',
-  styles: [` :host { display: block; } `],
   template: `
-    <nb-calendar-days-names></nb-calendar-days-names>
-    <nb-calendar-picker
-      [data]="weeks"
-      [visibleDate]="visibleDate"
-      [selectedValue]="date"
-      [cellComponent]="cellComponent"
-      [min]="min"
-      [max]="max"
-      [filter]="filter"
-      (select)="onSelect($event)">
-    </nb-calendar-picker>
+    <nb-calendar-week-numbers *ngIf="showWeekNumber"
+                              [weeks]="weeks"
+                              [size]="size"
+                              [weekNumberSymbol]="weekNumberSymbol">
+    </nb-calendar-week-numbers>
+    <div class="days-container">
+      <nb-calendar-days-names [size]="size"></nb-calendar-days-names>
+      <nb-calendar-picker
+          [data]="weeks"
+          [visibleDate]="visibleDate"
+          [selectedValue]="date"
+          [cellComponent]="cellComponent"
+          [min]="min"
+          [max]="max"
+          [filter]="filter"
+          [size]="size"
+          (select)="onSelect($event)">
+      </nb-calendar-picker>
+    </div>
   `,
+  styleUrls: ['./calendar-day-picker.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NbCalendarDayPickerComponent<D, T> implements OnChanges {
@@ -86,6 +95,7 @@ export class NbCalendarDayPickerComponent<D, T> implements OnChanges {
    * Can be 'medium' which is default or 'large'.
    * */
   @Input() size: NbCalendarSize = NbCalendarSize.MEDIUM;
+  static ngAcceptInputType_size: NbCalendarSizeValues;
 
   /**
    * Already selected date.
@@ -93,16 +103,30 @@ export class NbCalendarDayPickerComponent<D, T> implements OnChanges {
   @Input() date: T;
 
   /**
+   * Determines should we show week numbers column.
+   * False by default.
+   * */
+  @Input()
+  get showWeekNumber(): boolean {
+    return this._showWeekNumber;
+  }
+  set showWeekNumber(value: boolean) {
+    this._showWeekNumber = convertToBoolProperty(value);
+  }
+  protected _showWeekNumber: boolean = false;
+  static ngAcceptInputType_showWeekNumber: NbBooleanInput;
+
+  /**
+   * Sets symbol used as a header for week numbers column
+   * */
+  @Input() weekNumberSymbol: string;
+
+  /**
    * Fires newly selected date.
    * */
   @Output() dateChange = new EventEmitter<D>();
 
-  @HostBinding('class.medium')
-  get medium() {
-    return this.size === NbCalendarSize.MEDIUM;
-  }
-
-  @HostBinding('class.large')
+  @HostBinding('class.size-large')
   get large() {
     return this.size === NbCalendarSize.LARGE;
   }
@@ -117,8 +141,8 @@ export class NbCalendarDayPickerComponent<D, T> implements OnChanges {
   constructor(private monthModel: NbCalendarMonthModelService<D>) {
   }
 
-  ngOnChanges({ visibleDate }: SimpleChanges) {
-    if (visibleDate) {
+  ngOnChanges({ visibleDate, boundingMonths }: SimpleChanges) {
+    if (visibleDate || boundingMonths) {
       this.weeks = this.monthModel.createDaysGrid(this.visibleDate, this.boundingMonths);
     }
   }

@@ -1,4 +1,5 @@
 import { writeFileSync } from 'fs';
+import { ES5_BUILD_DIR } from '../../config';
 
 export function createTsConfigEsm2015(packageName): string {
   const config = `{
@@ -19,7 +20,8 @@ export function createTsConfigEsm2015(packageName): string {
     "skipMetadataEmit": false,
     "strictTypeChecks": true,
     "flatModuleOutFile": "index.js",
-    "flatModuleId": "@nebular/${packageName}"
+    "flatModuleId": "@nebular/${packageName}",
+    "enableIvy": false
   }
 }`;
 
@@ -34,7 +36,7 @@ export function createTsConfigEsm5(packageName): string {
 {
   "extends": "./tsconfig.publish",
   "compilerOptions": {
-    "outDir": "./src/.lib/${packageName}/esm5",
+    "outDir": "${ES5_BUILD_DIR}/${packageName}",
     "declaration": false,
     "target": "es5",
     "rootDir": "./.ng_build/${packageName}"
@@ -49,7 +51,8 @@ export function createTsConfigEsm5(packageName): string {
     "skipMetadataEmit": true,
     "strictTypeChecks": true,
     "flatModuleOutFile": "index.js",
-    "flatModuleId": "@nebular/${packageName}"
+    "flatModuleId": "@nebular/${packageName}",
+    "enableIvy": false
   }
 }`;
 

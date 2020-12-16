@@ -6,10 +6,12 @@
 
 import { Injectable } from '@angular/core';
 import { Location } from '@angular/common';
-import { Params } from '@angular/router';
+import { Params, QueryParamsHandling } from '@angular/router';
 import { Observable, BehaviorSubject, ReplaySubject, Subject } from 'rxjs';
 import { share } from 'rxjs/operators';
 import { isFragmentContain, isFragmentEqual, isUrlPathContain, isUrlPathEqual } from './url-matching-helpers';
+import { NbIconConfig } from '../icon/icon.component';
+import { NbBadge } from '../badge/badge.component';
 
 export interface NbMenuBag { tag: string; item: NbMenuItem }
 
@@ -22,6 +24,8 @@ const itemSelect$ = new ReplaySubject<NbMenuBag>(1);
 const itemHover$ = new ReplaySubject<NbMenuBag>(1);
 const submenuToggle$ = new ReplaySubject<NbMenuBag>(1);
 const collapseAll$ = new ReplaySubject<{ tag: string }>(1);
+
+export type NbMenuBadgeConfig = Omit<NbBadge, 'position'>;
 
 // TODO: check if we need both URL and LINK
 /**
@@ -49,15 +53,20 @@ export class NbMenuItem {
    */
   url?: string;
   /**
-   * Icon class name
-   * @type {string}
+   * Icon class name or icon config object
+   * @type {string | NbIconConfig}
    */
-  icon?: string;
+  icon?: string | NbIconConfig;
   /**
    * Expanded by default
    * @type {boolean}
    */
   expanded?: boolean;
+  /**
+   * Badge component
+   * @type {boolean}
+   */
+  badge?: NbMenuBadgeConfig;
   /**
    * Children items
    * @type {List<NbMenuItem>}
@@ -96,10 +105,12 @@ export class NbMenuItem {
    *@type {Params}
    */
   queryParams?: Params;
+  queryParamsHandling?: QueryParamsHandling;
   parent?: NbMenuItem;
   selected?: boolean;
   data?: any;
   fragment?: string;
+  preserveFragment?: boolean;
 
   /**
    * @returns item parents in top-down order

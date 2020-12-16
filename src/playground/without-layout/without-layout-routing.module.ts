@@ -15,43 +15,47 @@ const routes: Route[] = [
     children: [
       {
         path: 'context-menu',
-        loadChildren: './context-menu/context-menu.module#ContextMenuModule',
+        loadChildren: () => import('./context-menu/context-menu.module').then(m => m.ContextMenuModule),
       },
       {
         path: 'layout',
-        loadChildren: './layout/layout.module#LayoutModule',
+        loadChildren: () => import('./layout/layout.module').then(m => m.LayoutModule),
       },
       {
         path: 'scroll',
-        loadChildren: './scroll/scroll.module#ScrollModule',
+        loadChildren: () => import('./scroll/scroll.module').then(m => m.ScrollModule),
       },
       {
         path: 'search',
-        loadChildren: './search/search.module#SearchModule',
+        loadChildren: () => import('./search/search.module').then(m => m.SearchModule),
       },
       {
         path: 'sidebar',
-        loadChildren: './sidebar/sidebar.module#SidebarModule',
+        loadChildren: () => import('./sidebar/sidebar.module').then(m => m.SidebarModule),
       },
       {
         path: 'menu',
-        loadChildren: './menu/menu-test.module#MenuTestModule',
+        loadChildren: () => import('./menu/menu-test.module').then(m => m.MenuTestModule),
       },
       {
         path: 'user',
-        loadChildren: './user/user-test.module#UserTestModule',
+        loadChildren: () => import('./user/user-test.module').then(m => m.UserTestModule),
       },
       {
         path: 'azure',
-        loadChildren: './azure/azure.module#AzurePlaygroundModule',
+        loadChildren: () => import('./azure/azure.module').then(m => m.AzurePlaygroundModule),
       },
       {
         path: 'auth',
-        loadChildren: './auth/auth.module#AuthPlaygroundModule',
+        loadChildren: () => import('./auth/auth.module').then(m => m.AuthPlaygroundModule),
+      },
+      {
+        path: 'firebase',
+        loadChildren: () => import('./firebase/firebase.module').then(m => m.FirebasePlaygroundModule),
       },
       {
         path: 'smart-home',
-        loadChildren: './smart-home/app.module#AppModule',
+        loadChildren: () => import('./smart-home/app.module').then(m => m.AppModule),
       },
     ],
   },

@@ -4,6 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
+@import './button-core';
 @import './button-filled';
 @import './button-outline';
 @import './button-ghost';
@@ -11,13 +12,18 @@
 
 @mixin nb-buttons-theme() {
   [nbButton] {
+    @include nb-button-core();
+
     cursor: nb-theme(button-cursor);
     font-family: nb-theme(button-text-font-family);
     font-weight: nb-theme(button-text-font-weight);
 
     &:focus {
-      box-shadow: 0 0 0 nb-theme(button-outline-width) nb-theme(button-outline-color);
+      // Sibling buttons are covering outline shadow.
+      // position: relative; declaration makes shadow appear on top of sibling buttons.
+      position: relative;
       outline: none;
+      @include nb-outline(nb-theme(button-outline-width), nb-theme(button-outline-color));
     }
 
     &[disabled] {
@@ -28,6 +34,30 @@
       &.size-#{$size} {
         font-size: nb-theme(button-#{$size}-text-font-size);
         line-height: nb-theme(button-#{$size}-text-line-height);
+
+        nb-icon {
+          font-size: nb-theme(button-#{$size}-text-font-size);
+          height: nb-theme(button-#{$size}-icon-size);
+          width: nb-theme(button-#{$size}-icon-size);
+          margin-top: nb-theme(button-#{$size}-icon-vertical-margin);
+          margin-bottom: nb-theme(button-#{$size}-icon-vertical-margin);
+        }
+
+        $icon-offset: nb-theme(button-#{$size}-icon-offset);
+        &.icon-start:not(.icon-end) nb-icon {
+          @include nb-ltr(margin-right, $icon-offset);
+          @include nb-rtl(margin-left, $icon-offset);
+        }
+        &.icon-end:not(.icon-start) nb-icon {
+          @include nb-ltr(margin-left, $icon-offset);
+          @include nb-rtl(margin-right, $icon-offset);
+        }
+
+        @each $appearance in ('filled', 'outline', 'ghost', 'hero') {
+          &.icon-start.icon-end.appearance-#{$appearance} {
+            padding: nb-theme(icon-button-#{$appearance}-#{$size}-padding);
+          }
+        }
       }
     }
 
@@ -36,6 +66,10 @@
         border-radius: nb-theme(button-#{$shape}-border-radius);
       }
     }
+  }
+
+  a[nbButton] {
+    text-decoration: none;
   }
 
   @include button-filled;

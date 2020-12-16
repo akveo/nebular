@@ -69,6 +69,12 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         component: 'ActionWidthComponent',
         name: 'Action Width',
       },
+      {
+        path: 'action-dot-mode.component',
+        link: '/action/action-dot-mode.component',
+        component: 'ActionDotModeComponent',
+        name: 'Action Dot Mode',
+      },
     ],
   },
   {
@@ -109,6 +115,47 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         link: '/alert/alert-test.component',
         component: 'AlertTestComponent',
         name: 'Alert Test',
+      },
+    ],
+  },
+  {
+    path: 'autocomplete',
+    children: [
+      {
+        path: 'autocomplete-showcase.component',
+        link: '/autocomplete/autocomplete-showcase.component',
+        component: 'AutocompleteShowcaseComponent',
+        name: 'Autocomplete Showcase',
+      },
+      {
+        path: 'autocomplete-form.component',
+        link: '/autocomplete/autocomplete-form.component',
+        component: 'AutocompleteFormComponent',
+        name: 'Autocomplete Form',
+      },
+      {
+        path: 'autocomplete-group.component',
+        link: '/autocomplete/autocomplete-group.component',
+        component: 'AutocompleteGroupComponent',
+        name: 'Autocomplete Group',
+      },
+      {
+        path: 'autocomplete-custom-display.component',
+        link: '/autocomplete/autocomplete-custom-display.component',
+        component: 'AutocompleteCustomDisplayComponent',
+        name: 'Autocomplete Custom Display',
+      },
+      {
+        path: 'autocomplete-active-first.component',
+        link: '/autocomplete/autocomplete-active-first.component',
+        component: 'AutocompleteActiveFirstComponent',
+        name: 'Autocomplete Active First',
+      },
+      {
+        path: 'autocomplete-disabled.component',
+        link: '/autocomplete/autocomplete-disabled.component',
+        component: 'AutocompleteDisabledComponent',
+        name: 'Autocomplete Disabled',
       },
     ],
   },
@@ -189,6 +236,65 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
     ],
   },
   {
+    path: 'button-group',
+    children: [
+      {
+        path: 'button-group-showcase.component',
+        link: '/button-group/button-group-showcase.component',
+        component: 'ButtonGroupShowcaseComponent',
+        name: 'Button Group Showcase',
+      },
+      {
+        path: 'button-group-multiple.component',
+        link: '/button-group/button-group-multiple.component',
+        component: 'ButtonGroupMultipleComponent',
+        name: 'Button Group Multiple',
+      },
+      {
+        path: 'button-group-sizes.component',
+        link: '/button-group/button-group-sizes.component',
+        component: 'ButtonGroupSizesComponent',
+        name: 'Button Group Sizes',
+      },
+      {
+        path: 'button-group-appearances.component',
+        link: '/button-group/button-group-appearances.component',
+        component: 'ButtonGroupAppearancesComponent',
+        name: 'Button Group Appearances',
+      },
+      {
+        path: 'button-group-shapes.component',
+        link: '/button-group/button-group-shapes.component',
+        component: 'ButtonGroupShapesComponent',
+        name: 'Button Group Shapes',
+      },
+      {
+        path: 'button-and-button-toggle-groups.component',
+        link: '/button-group/button-and-button-toggle-groups.component',
+        component: 'ButtonAndButtonToggleGroupsComponent',
+        name: 'Button And Button Toggle Groups',
+      },
+      {
+        path: 'button-group-interactive.component',
+        link: '/button-group/button-group-interactive.component',
+        component: 'ButtonGroupInteractiveComponent',
+        name: 'Button Group Interactive',
+      },
+      {
+        path: 'button-group-disabled.component',
+        link: '/button-group/button-group-disabled.component',
+        component: 'ButtonGroupDisabledComponent',
+        name: 'Button Group Disabled',
+      },
+      {
+        path: 'button-group-statuses.component',
+        link: '/button-group/button-group-statuses.component',
+        component: 'ButtonGroupStatusesComponent',
+        name: 'Button Group Statuses',
+      },
+    ],
+  },
+  {
     path: 'calendar',
     children: [
       {
@@ -240,10 +346,16 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         name: 'Calendar Start View',
       },
       {
-        path: 'calendar-without-header.component',
-        link: '/calendar/calendar-without-header.component',
-        component: 'CalendarWithoutHeaderComponent',
-        name: 'Calendar Without Header',
+        path: 'calendar-without-navigation.component',
+        link: '/calendar/calendar-without-navigation.component',
+        component: 'CalendarWithoutNavigationComponent',
+        name: 'Calendar Without Navigation',
+      },
+      {
+        path: 'calendar-week-number.component',
+        link: '/calendar/calendar-week-number.component',
+        component: 'CalendarWeekNumberComponent',
+        name: 'Calendar Week Number',
       },
     ],
   },
@@ -409,6 +521,18 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         name: 'Datepicker Showcase',
       },
       {
+        path: 'date-timepicker-showcase.component',
+        link: '/datepicker/date-timepicker-showcase.component',
+        component: 'DateTimepickerShowcaseComponent',
+        name: 'Date Timepicker Showcase',
+      },
+      {
+        path: 'date-timepicker-single-column.component',
+        link: '/datepicker/date-timepicker-single-column.component',
+        component: 'DateTimepickerSingleColumnComponent',
+        name: 'Date Timepicker Single Column',
+      },
+      {
         path: 'datepicker-validation.component',
         link: '/datepicker/datepicker-validation.component',
         component: 'DatepickerValidationComponent',
@@ -419,6 +543,47 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         link: '/datepicker/rangepicker-showcase.component',
         component: 'RangepickerShowcaseComponent',
         name: 'Rangepicker Showcase',
+      },
+    ],
+  },
+  {
+    path: 'timepicker',
+    children: [
+      {
+        path: 'timepicker-showcase.component',
+        link: '/timepicker/timepicker-showcase.component',
+        component: 'TimepickerShowcaseComponent',
+        name: 'Timepicker Showcase',
+      },
+      {
+        path: 'timepicker-twelve-hours-format.component',
+        link: '/timepicker/timepicker-twelve-hours-format.component',
+        component: 'TimepickerTwelveHoursFormatComponent',
+        name: 'Timepicker Twelve Hours Format',
+      },
+      {
+        path: 'timepicker-single-column.component',
+        link: '/timepicker/timepicker-single-column.component',
+        component: 'TimepickerSingleColumnComponent',
+        name: 'Timepicker Single Column',
+      },
+      {
+        path: 'timepicker-with-seconds.component',
+        link: '/timepicker/timepicker-with-seconds.component',
+        component: 'TimepickerWithSecondsComponent',
+        name: 'Timepicker With Seconds',
+      },
+      {
+        path: 'timepicker-form-control.component',
+        link: '/timepicker/timepicker-form-control.component',
+        component: 'TimepickerFormControlComponent',
+        name: 'Timepicker Form Control',
+      },
+      {
+        path: 'timepicker-ng-model.component',
+        link: '/timepicker/timepicker-ng-model.component',
+        component: 'TimepickerNgModelComponent',
+        name: 'Timepicker Ng Model',
       },
     ],
   },
@@ -629,6 +794,12 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         link: '/menu/menu-link-params.component',
         component: 'MenuLinkParamsComponent',
         name: 'Menu Link Params',
+      },
+      {
+        path: 'menu-badge.component',
+        link: '/menu/menu-badge.component',
+        component: 'MenuBadgeComponent',
+        name: 'Menu Badge',
       },
       {
         path: 'menu-service.component',
@@ -947,6 +1118,12 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         link: '/select/select-test.component',
         component: 'SelectTestComponent',
         name: 'Select Test',
+      },
+      {
+        path: 'select-compare-with.component',
+        link: '/select/select-compare-with.component',
+        component: 'SelectCompareWithComponent',
+        name: 'Select Compare With',
       },
     ],
   },
@@ -1324,6 +1501,70 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
     ],
   },
   {
+    path: 'toggle',
+    children: [
+      {
+        path: 'toggle-disabled.component',
+        link: '/toggle/toggle-disabled.component',
+        component: 'ToggleDisabledComponent',
+        name: 'Toggle Disabled',
+      },
+      {
+        path: 'toggle-showcase.component',
+        link: '/toggle/toggle-showcase.component',
+        component: 'ToggleShowcaseComponent',
+        name: 'Toggle Showcase',
+      },
+      {
+        path: 'toggle-status.component',
+        link: '/toggle/toggle-status.component',
+        component: 'ToggleStatusComponent',
+        name: 'Toggle Status',
+      },
+      {
+        path: 'toggle-test.component',
+        link: '/toggle/toggle-test.component',
+        component: 'ToggleTestComponent',
+        name: 'Toggle Test',
+      },
+      {
+        path: 'toggle-label-position.component',
+        link: '/toggle/toggle-label-position.component',
+        component: 'ToggleLabelPositionComponent',
+        name: 'Toggle Label Position',
+      },
+      {
+        path: 'toggle-form.component',
+        link: '/toggle/toggle-form.component',
+        component: 'ToggleFormComponent',
+        name: 'Toggle Form',
+      },
+    ],
+  },
+  {
+    path: 'form-field',
+    children: [
+      {
+        path: 'form-field-showcase.component',
+        link: '/form-field/form-field-showcase.component',
+        component: 'FormFieldShowcaseComponent',
+        name: 'Form Field Showcase',
+      },
+      {
+        path: 'form-field-password.component',
+        link: '/form-field/form-field-password.component',
+        component: 'FormFieldPasswordComponent',
+        name: 'Form Field Password',
+      },
+      {
+        path: 'form-field-input.component',
+        link: '/form-field/form-field-input.component',
+        component: 'FormFieldInputComponent',
+        name: 'Form Field Input',
+      },
+    ],
+  },
+  {
     path: 'context-menu',
     children: [
       {
@@ -1689,6 +1930,53 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         link: '/auth/api-calls.component',
         component: 'PlaygroundApiCallsComponent',
         name: 'Playground Api Calls',
+      },
+    ],
+  },
+  {
+    path: 'firebase',
+    children: [
+      {
+        path: 'login',
+        link: '/firebase/login',
+        component: 'NbLoginComponent',
+        name: 'Nb Login',
+      },
+      {
+        path: 'register',
+        link: '/firebase/register',
+        component: 'NbRegisterComponent',
+        name: 'Nb Register',
+      },
+      {
+        path: 'logout',
+        link: '/firebase/logout',
+        component: 'NbLogoutComponent',
+        name: 'Nb Logout',
+      },
+      {
+        path: 'request-password',
+        link: '/firebase/request-password',
+        component: 'NbRequestPasswordComponent',
+        name: 'Nb Request Password',
+      },
+      {
+        path: 'reset-password',
+        link: '/firebase/reset-password',
+        component: 'NbResetPasswordComponent',
+        name: 'Nb Reset Password',
+      },
+      {
+        path: 'password-showcase',
+        link: '/firebase/password-showcase',
+        component: 'PasswordAuthShowcaseComponent',
+        name: 'Password Auth Showcase',
+      },
+      {
+        path: 'social-auth-showcase',
+        link: '/firebase/social-auth-showcase',
+        component: 'IdentityProvidersAuthShowcaseComponent',
+        name: 'Identity Providers Auth Showcase',
       },
     ],
   },

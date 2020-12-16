@@ -19,7 +19,7 @@ import createSpy = jasmine.createSpy;
 export class TabsetTestComponent {
   showTabs = true;
 
-  @ViewChild(NbTabsetComponent, { static: false }) tabsetComponent: NbTabsetComponent;
+  @ViewChild(NbTabsetComponent) tabsetComponent: NbTabsetComponent;
   @ViewChildren(NbTabComponent) tabComponents: QueryList<NbTabComponent>;
 
   getDisabledTab(): NbTabComponent {

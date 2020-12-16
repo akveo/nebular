@@ -37,7 +37,7 @@ import { NbDialogContainerComponent } from './dialog-container';
  * ```ts
  * @NgModule({
  *   imports: [
- *   	// ...
+ *     // ...
  *     NbDialogModule.forRoot(config),
  *   ],
  * })
@@ -48,7 +48,7 @@ import { NbDialogContainerComponent } from './dialog-container';
  * ```ts
  * @NgModule({
  *   imports: [
- *   	// ...
+ *     // ...
  *     NbDialogModule.forChild(config),
  *   ],
  * })
@@ -171,6 +171,7 @@ export class NbDialogService {
       scrollStrategy,
       hasBackdrop: config.hasBackdrop,
       backdropClass: config.backdropClass,
+      panelClass: config.dialogClass,
     });
   }
 

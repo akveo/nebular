@@ -5,17 +5,30 @@
  */
 
 import { Component } from '@angular/core';
+import { NbDateService } from '@nebular/theme';
 
 @Component({
   selector: 'nb-calendar-min-max',
   template: `
-    <h1 class="h5">Selected date: {{ date | date }}</h1>
-    <nb-calendar [(date)]="date" [min]="min" [max]="max">
-    </nb-calendar>
+    <nb-card>
+      <nb-card-header>
+        <h1 class="h5">Selected date: {{ date | date }}</h1>
+      </nb-card-header>
+      <nb-card-body>
+        <nb-calendar [(date)]="date" [min]="min" [max]="max"></nb-calendar>
+      </nb-card-body>
+    </nb-card>
   `,
 })
 export class CalendarMinMaxComponent {
-  date = new Date();
-  min = new Date(2018, 6, 15);
-  max = new Date(2018, 8, 15);
+  date: Date;
+  min: Date;
+  max: Date;
+
+  constructor(dateService: NbDateService<Date>) {
+    this.date = dateService.today();
+    this.date.setDate(15);
+    this.min = dateService.addDay(this.date, -7);
+    this.max = dateService.addDay(this.date, 7);
+  }
 }

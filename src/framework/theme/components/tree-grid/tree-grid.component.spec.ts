@@ -29,11 +29,14 @@ interface CustomStructure {
   expanded?: boolean;
 }
 
+@Component({
+  template: '',
+})
 class BaseTreeGridTestComponent {
   columns: string[];
   dataSource: NbTreeGridDataSource<any>;
 
-  @ViewChild(NbTreeGridComponent, { static: false }) treeGridComponent: NbTreeGridComponent<any>;
+  @ViewChild(NbTreeGridComponent) treeGridComponent: NbTreeGridComponent<any>;
   @ViewChildren(NbTreeGridRowComponent) rowComponents: QueryList<NbTreeGridRowComponent>;
 }
 

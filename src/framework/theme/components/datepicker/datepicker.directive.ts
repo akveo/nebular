@@ -24,8 +24,8 @@ import {
   ValidatorFn,
   Validators,
 } from '@angular/forms';
-import { fromEvent, Observable, merge } from 'rxjs';
-import { map, takeWhile, filter, take, tap } from 'rxjs/operators';
+import { fromEvent, Observable, merge, Subject } from 'rxjs';
+import { map, takeUntil, filter, take, tap } from 'rxjs/operators';
 
 import { NB_DOCUMENT } from '../../theme.options';
 import { NbDateService } from '../calendar-kit/services/date.service';
@@ -87,7 +87,7 @@ export abstract class NbDatepicker<T> {
    * */
   abstract format: string;
 
-  abstract get value(): T | undefined;
+  abstract get value(): T;
 
   abstract set value(value: T);
 
@@ -137,7 +137,7 @@ export const NB_DATE_SERVICE_OPTIONS = new InjectionToken('Date service options'
  * ```ts
  * @NgModule({
  *   imports: [
- *   	// ...
+ *     // ...
  *     NbDatepickerModule.forRoot(),
  *   ],
  * })
@@ -147,10 +147,11 @@ export const NB_DATE_SERVICE_OPTIONS = new InjectionToken('Date service options'
  * ```ts
  * @NgModule({
  *   imports: [
- *   	// ...
+ *     // ...
  *     NbDatepickerModule,
  *   ],
  * })
+ *
  * export class PageModule { }
  * ```
  * ### Usage
@@ -176,13 +177,26 @@ export const NB_DATE_SERVICE_OPTIONS = new InjectionToken('Date service options'
  *
  * @stacked-example(Validation, datepicker/datepicker-validation.component)
  *
+ * If you need to pick a time along with the date, you can use nb-date-timepicker
+ *
+ * ```html
+ * <input nbInput placeholder="Pick Date" [nbDatepicker]="dateTimePicker">
+ * <nb-date-timepicker withSeconds #dateTimePicker></nb-date-timepicker>
+ * ```
+ * @stacked-example(Date timepicker, datepicker/date-timepicker-showcase.component)
+ *
+ * A single column picker with options value as time and minute, so users won’t be able to pick
+ * hours and minutes individually.
+ *
+ * @stacked-example(Date timepicker single column, datepicker/date-timepicker-single-column.component)
+
  * The `NbDatepickerComponent` supports date formatting:
  *
  * ```html
  * <input [nbDatepicker]="datepicker">
  * <nb-datepicker #datepicker format="MM\dd\yyyy"></nb-datepicker>
  * ```
- *
+ * <span id="formatting-issue"></span>
  * ## Formatting Issue
  *
  * By default, datepicker uses angulars `LOCALE_ID` token for localization and `DatePipe` for dates formatting.
@@ -206,13 +220,14 @@ export const NB_DATE_SERVICE_OPTIONS = new InjectionToken('Date service options'
  * Also format can be set globally with `NbDateFnsDateModule.forRoot({ format: 'dd.MM.yyyy' })` and
  * `NbDateFnsDateModule.forChild({ format: 'dd.MM.yyyy' })` methods.
  *
- * Please note to use some of the formatting tokens you also need to pass `{ awareOfUnicodeTokens: true }` to date-fns
- * parse and format functions. You can configure options passed this functions by setting `formatOptions` and
+ * Please note to use some of the formatting tokens you also need to pass
+ * `{ useAdditionalWeekYearTokens: true, useAdditionalDayOfYearTokens: true }` to date-fns parse and format functions.
+ * You can configure options passed this functions by setting `formatOptions` and
  * `parseOptions` of options object passed to `NbDateFnsDateModule.forRoot` and `NbDateFnsDateModule.forChild` methods.
  * ```ts
  * NbDateFnsDateModule.forRoot({
- *   parseOptions: { awareOfUnicodeTokens: true },
- *   formatOptions: { awareOfUnicodeTokens: true },
+ *   parseOptions: { useAdditionalWeekYearTokens: true, useAdditionalDayOfYearTokens: true },
+ *   formatOptions: { useAdditionalWeekYearTokens: true, useAdditionalDayOfYearTokens: true },
  * })
  * ```
  * Further info on `date-fns` formatting tokens could be found at
@@ -234,14 +249,12 @@ export const NB_DATE_SERVICE_OPTIONS = new InjectionToken('Date service options'
  *
  * @styles
  *
- * datepicker-text-color:
  * datepicker-background-color:
  * datepicker-border-color:
  * datepicker-border-style:
  * datepicker-border-width:
  * datepicker-border-radius:
  * datepicker-shadow:
- * datepicker-arrow-size:
  * */
 @Directive({
   selector: 'input[nbDatepicker]',
@@ -277,7 +290,7 @@ export class NbDatepickerDirective<D> implements OnDestroy, ControlValueAccessor
    * Datepicker instance.
    * */
   protected picker: NbDatepicker<D>;
-  protected alive: boolean = true;
+  protected destroy$ = new Subject<void>();
   protected isDatepickerReady: boolean = false;
   protected queue: D | undefined;
   protected onChange: (D) => void = () => {};
@@ -316,7 +329,8 @@ export class NbDatepickerDirective<D> implements OnDestroy, ControlValueAccessor
   }
 
   ngOnDestroy() {
-    this.alive = false;
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   /**
@@ -432,10 +446,10 @@ export class NbDatepickerDirective<D> implements OnDestroy, ControlValueAccessor
     if (!this.isDatepickerReady) {
       this.picker.init
         .pipe(
-          takeWhile(() => this.alive),
           take(1),
           tap(() => this.isDatepickerReady = true),
           filter(() => !!this.queue),
+          takeUntil(this.destroy$),
         )
         .subscribe(() => {
           this.writeValue(this.queue);
@@ -446,7 +460,7 @@ export class NbDatepickerDirective<D> implements OnDestroy, ControlValueAccessor
     }
 
     this.picker.valueChange
-      .pipe(takeWhile(() => this.alive))
+      .pipe(takeUntil(this.destroy$))
       .subscribe((value: D) => {
         this.writePicker(value);
         this.writeInput(value);
@@ -462,10 +476,8 @@ export class NbDatepickerDirective<D> implements OnDestroy, ControlValueAccessor
       fromEvent(this.input, 'blur').pipe(
         filter(() => !this.picker.isShown && this.document.activeElement !== this.input),
       ),
-    ).pipe(
-      takeWhile(() => this.alive),
-      take(1),
-    ).subscribe(() => this.onTouched());
+    ).pipe(takeUntil(this.destroy$))
+     .subscribe(() => this.onTouched());
   }
 
   protected writePicker(value: D) {
@@ -488,7 +500,7 @@ export class NbDatepickerDirective<D> implements OnDestroy, ControlValueAccessor
     fromEvent(this.input, 'input')
       .pipe(
         map(() => this.inputValue),
-        takeWhile(() => this.alive),
+        takeUntil(this.destroy$),
       )
       .subscribe((value: string) => this.handleInputChange(value));
   }

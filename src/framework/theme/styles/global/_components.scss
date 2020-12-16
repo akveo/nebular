@@ -18,6 +18,7 @@
 @import '../../components/actions/actions.component.theme';
 @import '../../components/search/search.component.theme';
 @import '../../components/checkbox/checkbox.component.theme';
+@import '../../components/toggle/toggle.component.theme';
 @import '../../components/progress-bar/progress-bar.component.theme';
 @import '../../components/badge/badge.component.theme';
 @import '../../components/alert/alert.component.theme';
@@ -26,18 +27,23 @@
 @import '../../components/stepper/stepper.component.theme';
 @import '../../components/accordion/accordion.component.theme';
 @import '../../components/button/button.component.theme';
+@import '../../components/button-group/button-toggle.component.theme';
+@import '../../components/button-group/button-group.component.theme';
 @import '../../components/list/list.component.theme';
 @import '../../components/input/input.directive.theme';
 @import '../../components/cdk/overlay/overlay.theme';
 @import '../../components/popover/popover.component.theme';
 @import '../../components/context-menu/context-menu.component.theme';
 @import '../../components/select/select.component.theme';
+@import '../../components/option/option-list.component.theme';
 @import '../../components/toastr/toast.component.theme';
 @import '../../components/tooltip/tooltip.component.theme';
 @import '../../components/datepicker/datepicker-container.component.theme';
 @import '../../components/radio/radio.component.theme';
 @import '../../components/tree-grid/tree-grid.component.theme';
 @import '../../components/icon/icon.component.theme';
+@import '../../components/form-field/form-field.component.theme';
+@import '../../components/timepicker/timepicker.component.theme';
 
 @mixin nb-theme-components() {
 
@@ -55,7 +61,9 @@
   @include nb-actions-theme();
   @include nb-search-theme();
   @include nb-spinner-theme();
+  @include nb-timepicker-theme();
   @include nb-checkbox-theme();
+  @include nb-toggle-theme();
   @include nb-progress-bar-theme();
   @include nb-badge-theme();
   @include nb-stepper-theme();
@@ -63,16 +71,20 @@
   @include nb-chat-theme();
   @include nb-accordion-theme();
   @include nb-buttons-theme();
+  @include nb-buttons-toggle-theme();
+  @include nb-buttons-group-theme();
   @include nb-list-theme();
   @include nb-input-theme();
   @include nb-overlay-theme();
   @include nb-popover-theme();
   @include nb-context-menu-theme();
   @include nb-select-theme();
+  @include nb-option-list-theme();
   @include nb-toast-theme();
   @include nb-tooltip-theme();
   @include nb-datepicker-theme();
   @include nb-radio-theme();
   @include nb-tree-grid-theme();
   @include nb-icon-theme();
+  @include nb-form-field-theme();
 }

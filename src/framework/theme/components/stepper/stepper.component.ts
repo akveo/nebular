@@ -6,11 +6,13 @@
 
 import {
   Component,
-  ContentChildren, HostBinding,
+  ContentChildren,
+  HostBinding,
   Input,
   QueryList,
+  TemplateRef,
 } from '@angular/core';
-import { convertToBoolProperty } from '../helpers';
+import { convertToBoolProperty, NbBooleanInput } from '../helpers';
 import { NB_STEPPER } from './stepper-tokens';
 import { NbStepComponent } from './step.component';
 
@@ -143,12 +145,13 @@ export class NbStepperComponent {
     return this._disableStepNavigation;
   }
   protected _disableStepNavigation: boolean = false;
+  static ngAcceptInputType_disableStepNavigation: NbBooleanInput;
 
   /**
    * Selected step component
    */
   @Input()
-  get selected(): NbStepComponent | undefined {
+  get selected(): NbStepComponent {
     return this.steps ? this.steps.toArray()[this.selectedIndex] : undefined;
   }
   set selected(step: NbStepComponent) {
@@ -175,6 +178,7 @@ export class NbStepperComponent {
     return this._linear;
   }
   protected _linear = true;
+  static ngAcceptInputType_linear: NbBooleanInput;
 
   @HostBinding('class.vertical')
   get vertical() {
@@ -211,6 +215,16 @@ export class NbStepperComponent {
 
   isStepSelected(step: NbStepComponent) {
     return this.selected === step;
+  }
+
+  /*
+   * @docs-private
+   **/
+  getStepTemplate(step: NbStepComponent): TemplateRef<any> | null {
+    if (step.isLabelTemplate) {
+      return step.label as TemplateRef<any>;
+    }
+    return null;
   }
 
   protected isStepValid(index: number): boolean {

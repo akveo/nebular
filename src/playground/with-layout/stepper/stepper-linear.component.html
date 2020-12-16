@@ -19,7 +19,7 @@
                    nbInput
                    ngModel
                    #name="ngModel"
-                   [status]="name.invalid ? 'danger' : ''">
+                   [status]="name.invalid ? 'danger' : 'basic'">
           </div>
           <button nbButton nbStepperNext>next</button>
         </form>
@@ -36,7 +36,7 @@
                    nbInput
                    ngModel
                    #movie="ngModel"
-                   [status]="movie.invalid ? 'danger' : ''">
+                   [status]="movie.invalid ? 'danger' : 'basic'">
           </div>
           <button nbButton nbStepperNext>next</button>
         </form>
@@ -52,8 +52,8 @@
                    required
                    nbInput
                    ngModel
-                   #somethingForm="ngModel"
-                   [status]="somethingForm.invalid ? 'danger' : ''">
+                   #somethingInput="ngModel"
+                   [status]="somethingInput.invalid ? 'danger' : 'basic'">
           </div>
           <button nbButton nbStepperNext>next</button>
         </form>

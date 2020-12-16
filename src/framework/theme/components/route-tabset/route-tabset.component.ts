@@ -5,7 +5,7 @@
  */
 
 import { Component, Input, Output, EventEmitter, HostBinding } from '@angular/core';
-import { convertToBoolProperty } from '../helpers';
+import { convertToBoolProperty, NbBooleanInput } from '../helpers';
 
 /**
  * Route tabset components.
@@ -33,7 +33,7 @@ import { convertToBoolProperty } from '../helpers';
  * ```ts
  * @NgModule({
  *   imports: [
- *   	// ...
+ *     // ...
  *     NbRouteTabsetModule,
  *   ],
  * })
@@ -88,7 +88,7 @@ import { convertToBoolProperty } from '../helpers';
             class="route-tab disabled"
             tabindex="-1">
           <a tabindex="-1" class="tab-link">
-            <nb-icon *ngIf="tab.icon" [icon]="tab.icon"></nb-icon>
+            <nb-icon *ngIf="tab.icon" [config]="tab.icon"></nb-icon>
             <span *ngIf="tab.title" class="tab-text">{{ tab.title }}</span>
           </a>
         </li>
@@ -136,6 +136,7 @@ export class NbRouteTabsetComponent {
   set fullWidth(val: boolean) {
     this.fullWidthValue = convertToBoolProperty(val);
   }
+  static ngAcceptInputType_fullWidth: NbBooleanInput;
 
   /**
    * Emits when tab is selected

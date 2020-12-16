@@ -8,7 +8,7 @@ import { ApplicationRef, Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { skip } from 'rxjs/operators';
-import { NbCalendarRange, NbDatepickerDirective } from '@nebular/theme';
+import { NbCalendarRange, NbDatepickerDirective, NbTimepickerModule, NbDateTimePickerComponent } from '@nebular/theme';
 
 import { NbDatepickerModule } from './datepicker.module';
 import { NbThemeModule } from '../../theme.module';
@@ -27,8 +27,8 @@ import { NbDatepickerComponent, NbRangepickerComponent } from './datepicker.comp
   `,
 })
 export class NbDatepickerTestComponent {
-  @ViewChild(NbDatepickerComponent, { static: false }) datepicker: NbDatepickerComponent<Date>;
-  @ViewChild(NbDatepickerDirective, { static: false }) datepickerDirective: NbDatepickerDirective<Date>;
+  @ViewChild(NbDatepickerComponent) datepicker: NbDatepickerComponent<Date>;
+  @ViewChild(NbDatepickerDirective) datepickerDirective: NbDatepickerDirective<Date>;
 }
 
 @Component({
@@ -43,8 +43,26 @@ export class NbDatepickerTestComponent {
   `,
 })
 export class NbRangepickerTestComponent {
-  @ViewChild(NbRangepickerComponent, { static: false }) rangepicker: NbRangepickerComponent<Date>;
-  @ViewChild(NbDatepickerDirective, { static: false }) datepickerDirective: NbDatepickerDirective<Date>;
+  @ViewChild(NbRangepickerComponent) rangepicker: NbRangepickerComponent<Date>;
+  @ViewChild(NbDatepickerDirective) datepickerDirective: NbDatepickerDirective<Date>;
+}
+
+
+
+@Component({
+  selector: 'nb-date-timepicker-test',
+  template: `
+    <nb-layout>
+      <nb-layout-column>
+        <input [nbDatepicker]="rangepicker">
+        <nb-date-timepicker #rangepicker></nb-date-timepicker>
+      </nb-layout-column>
+    </nb-layout>
+  `,
+})
+export class NbDateTimepickerTestComponent {
+  @ViewChild(NbDateTimePickerComponent) dateTimepicker: NbDateTimePickerComponent<Date>;
+  @ViewChild(NbDatepickerDirective) datepickerDirective: NbDatepickerDirective<Date>;
 }
 
 describe('nb-datepicker', () => {
@@ -72,7 +90,7 @@ describe('nb-datepicker', () => {
     });
 
     fixture = TestBed.createComponent(NbDatepickerTestComponent);
-    appRef = TestBed.get(ApplicationRef);
+    appRef = TestBed.inject(ApplicationRef);
 
     fixture.detectChanges();
   });
@@ -82,6 +100,11 @@ describe('nb-datepicker', () => {
     datepickerDirective = fixture.componentInstance.datepickerDirective;
     overlay = fixture.nativeElement.querySelector('nb-layout');
     input = fixture.nativeElement.querySelector('input');
+  });
+
+  it('should not throw when destroyed right after creation', () => {
+    const picker = TestBed.createComponent(NbDatepickerComponent).componentInstance;
+    expect(picker.ngOnDestroy.bind(picker)).not.toThrow();
   });
 
   it('should render calendar', () => {
@@ -197,7 +220,7 @@ describe('nb-rangepicker', () => {
     });
 
     fixture = TestBed.createComponent(NbRangepickerTestComponent);
-    appRef = TestBed.get(ApplicationRef);
+    appRef = TestBed.inject(ApplicationRef);
 
     fixture.detectChanges();
   });
@@ -329,3 +352,62 @@ describe('nb-rangepicker', () => {
     expect(datepickerDirective.validate()).not.toBe(null);
   });
 });
+
+describe('nb-date-timepicker', () => {
+  let fixture: ComponentFixture<NbDateTimepickerTestComponent>;
+  let appRef: ApplicationRef;
+  let dateTimepicker: NbDateTimePickerComponent<Date>;
+  let datepickerDirective: NbDatepickerDirective<Date>;
+  let overlay: HTMLElement;
+  let input: HTMLInputElement;
+
+  const showDatTimepicker = () => {
+    dateTimepicker.show();
+    appRef.tick();
+  };
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [
+        RouterTestingModule.withRoutes([]),
+        NbThemeModule.forRoot(),
+        NbLayoutModule,
+        NbTimepickerModule.forRoot(),
+        NbDatepickerModule.forRoot(),
+      ],
+      declarations: [NbDateTimepickerTestComponent],
+    });
+
+    fixture = TestBed.createComponent(NbDateTimepickerTestComponent);
+    appRef = TestBed.inject(ApplicationRef);
+
+    fixture.detectChanges();
+  });
+
+  beforeEach(() => {
+    dateTimepicker = fixture.componentInstance.dateTimepicker;
+    datepickerDirective = fixture.componentInstance.datepickerDirective;
+    overlay = fixture.nativeElement.querySelector('nb-layout');
+    input = fixture.nativeElement.querySelector('input');
+  });
+
+  it('should render calendar', () => {
+    showDatTimepicker();
+    const calendar = overlay.querySelector('nb-calendar-with-time');
+    expect(calendar).toBeTruthy();
+  });
+
+  it('should not render overlay on load', () => {
+    const datepickerContainer = overlay.querySelector('nb-datepicker-container');
+    expect(datepickerContainer).toBeNull();
+  });
+
+  it('should render overlay lazily', () => {
+    const datepickerContainer = overlay.querySelector('nb-datepicker-container');
+    expect(datepickerContainer).toBeNull();
+    showDatTimepicker();
+    const calendar = overlay.querySelector('nb-calendar-with-time');
+    expect(calendar).toBeTruthy();
+  });
+});
+

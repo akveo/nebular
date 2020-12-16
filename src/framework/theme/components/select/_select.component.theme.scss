@@ -9,125 +9,50 @@
 @import './select-hero';
 
 @mixin nb-select-theme() {
-  nb-select {
-    .select-button {
-      min-width: nb-theme(select-min-width);
-      cursor: nb-theme(select-cursor);
+  nb-select .select-button {
+    min-width: nb-theme(select-min-width);
+    cursor: nb-theme(select-cursor);
+    font-family: nb-theme(select-text-font-family);
 
-      &.placeholder {
-        font-weight: nb-theme(select-placeholder-text-font-weight);
-      }
-      &:focus {
-        box-shadow: 0 0 0 nb-theme(select-outline-width) nb-theme(select-outline-color);
-        outline: none;
-      }
-      &[disabled] {
-        cursor: nb-theme(select-disabled-cursor);
-      }
+    &.placeholder {
+      font-family: nb-theme(select-placeholder-text-font-family);
     }
-  }
-
-  .options-list-container {
-    box-shadow: nb-theme(select-options-list-shadow);
-    border-style: nb-theme(select-options-list-border-style);
-    border-width: nb-theme(select-options-list-border-width);
-    overflow: hidden;
-
-    &.top {
-      border-bottom: none;
-    }
-
-    &.bottom {
-      border-top: none;
-    }
-
-    & > .options-list {
-      margin: 0;
-      padding: 0;
-    }
-  }
-
-  .options-list {
-    background-color: nb-theme(select-option-background-color);
-    max-height: nb-theme(select-options-list-max-height);
-    height: 100%;
-    overflow: auto;
-  }
-
-  nb-option {
-    user-select: none;
-
     &:focus {
       outline: none;
     }
-  }
-
-  nb-select .select-button,
-  nb-option,
-  nb-option-group {
-    font-family: nb-theme(select-text-font-family);
-    font-weight: nb-theme(select-text-font-weight);
+    &[disabled] {
+      cursor: nb-theme(select-disabled-cursor);
+    }
   }
 
   @each $size in nb-get-sizes() {
-    nb-select.size-#{$size} .select-button,
-    .size-#{$size} nb-option {
-      font-size: nb-theme(select-#{$size}-text-font-size);
-      line-height: nb-theme(select-#{$size}-text-line-height);
-    }
+    nb-select.size-#{$size} {
+      .select-button {
+        font-size: nb-theme(select-#{$size}-text-font-size);
+        font-weight: nb-theme(select-#{$size}-text-font-weight);
+        line-height: nb-theme(select-#{$size}-text-line-height);
 
-    nb-select.size-#{$size} .select-button.empty::before {
-      content: ' ';
-      display: block;
-      height: nb-theme(select-#{$size}-text-line-height);
-    }
+        &.placeholder {
+          font-size: nb-theme(select-#{$size}-placeholder-text-font-size);
+          font-weight: nb-theme(select-#{$size}-placeholder-text-font-weight);
+        }
 
-    nb-select.size-#{$size}:not(.full-width),
-    .options-list:not(.full-width) {
-      max-width: nb-theme(select-#{$size}-max-width);
+        &.empty::before {
+          content: ' ';
+          display: block;
+          height: nb-theme(select-#{$size}-text-line-height);
+        }
+      }
+
+      &:not(.full-width) {
+        max-width: nb-theme(select-#{$size}-max-width);
+      }
     }
   }
 
   @each $shape in nb-get-shapes() {
     nb-select.shape-#{$shape} .select-button {
       border-radius: nb-theme(select-#{$shape}-border-radius);
-    }
-
-    .options-list-container.shape-#{$shape} {
-      &.bottom {
-        border-bottom-left-radius: nb-theme(select-#{$shape}-border-radius);
-        border-bottom-right-radius: nb-theme(select-#{$shape}-border-radius);
-      }
-      &.top {
-        border-top-left-radius: nb-theme(select-#{$shape}-border-radius);
-        border-top-right-radius: nb-theme(select-#{$shape}-border-radius);
-      }
-    }
-  }
-
-  nb-option-group,
-  nb-option {
-    background-color: nb-theme(select-option-background-color);
-    color: nb-theme(select-option-text-color);
-
-    &[disabled] {
-      background-color: nb-theme(select-option-disabled-background-color);
-      color: nb-theme(select-option-disabled-text-color);
-    }
-  }
-
-  nb-option {
-    &.selected {
-      background-color: nb-theme(select-option-selected-background-color);
-      color: nb-theme(select-option-selected-text-color);
-    }
-    &:focus {
-      background-color: nb-theme(select-option-focus-background-color);
-      color: nb-theme(select-option-focus-text-color);
-    }
-    &:hover {
-      background-color: nb-theme(select-option-hover-background-color);
-      color: nb-theme(select-option-hover-text-color);
     }
   }
 

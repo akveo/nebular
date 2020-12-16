@@ -4,8 +4,9 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { NbCalendarDay } from '../../model';
+import { ChangeDetectionStrategy, Component, OnInit, Input, HostBinding } from '@angular/core';
+
+import { NbCalendarDay, NbCalendarSize, NbCalendarSizeValues } from '../../model';
 import { NbDateService } from '../../services/date.service';
 
 
@@ -20,6 +21,14 @@ import { NbDateService } from '../../services/date.service';
 export class NbCalendarDaysNamesComponent<D> implements OnInit {
 
   days: NbCalendarDay[];
+
+  @Input() size: NbCalendarSize;
+  static ngAcceptInputType_size: NbCalendarSizeValues;
+
+  @HostBinding('class.size-large')
+  get isLarge(): boolean {
+    return this.size === NbCalendarSize.LARGE;
+  }
 
   constructor(private dateService: NbDateService<D>) {
   }

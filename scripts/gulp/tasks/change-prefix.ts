@@ -1,6 +1,6 @@
 import { renameSync as fsRenameSync } from 'fs';
 import { join } from 'path';
-import { dest, src, task } from 'gulp';
+import { dest, src, task, series, parallel } from 'gulp';
 import * as rename from 'gulp-rename';
 import * as replace from 'gulp-replace';
 import * as minimist from 'minimist';
@@ -8,7 +8,7 @@ import { capitalize, dasherize } from '@angular-devkit/core/src/utils/strings';
 
 import { BUILD_DIR } from './config';
 
-type NebularPackage = 'auth' | 'bootstrap' | 'dateFns' | 'evaIcons' | 'moment' | 'theme' | 'security';
+type NebularPackage = 'auth' | 'bootstrap' | 'dateFns' | 'evaIcons' | 'moment' | 'theme' | 'security' | 'firebase-auth';
 
 interface PackagePrefix {
   prefix: string;
@@ -26,7 +26,16 @@ interface StringReplacement {
 
 const ROLLUP_CONFIG_DIR = './scripts/gulp/tasks/bundle';
 const ROLLUP_CONFIG_PATH = `${ROLLUP_CONFIG_DIR}/rollup-config.ts`;
-const NEBULAR_PACKAGES: NebularPackage[] = ['auth', 'bootstrap', 'dateFns', 'evaIcons', 'moment', 'theme', 'security'];
+const NEBULAR_PACKAGES: NebularPackage[] = [
+  'auth',
+  'bootstrap',
+  'dateFns',
+  'evaIcons',
+  'moment',
+  'theme',
+  'security',
+  'firebase-auth',
+];
 
 /**
  * Reads package prefix and all package names passed as command line arguments.
@@ -205,17 +214,27 @@ task('patch-rollup-config', () => {
  * `$npm run build:custom-prefix -- --prefix @custom-prefix --theme @custom-prefix/ui-kit`.
  * It will create ready to publish bundles for each package in `src/.lib/[package-name]` directory.
  */
-task('change-prefix', ['copy-build-dir-and-rename', 'generate-ts-config', 'patch-rollup-config'], () => {
-  const replacements: StringReplacement[] = getReplacements(getPackageNamesConfig(process.argv));
+task(
+  'change-prefix',
+  series(
+    parallel(
+      'copy-build-dir-and-rename',
+      'generate-ts-config',
+      'patch-rollup-config',
+    ),
+    () => {
+      const replacements: StringReplacement[] = getReplacements(getPackageNamesConfig(process.argv));
 
-  let stream = src(`${BUILD_DIR}/**/*`);
+      let stream = src(`${BUILD_DIR}/**/*`);
 
-  for (const { from, to } of replacements) {
-    stream = stream.pipe(replace(from, to));
-  }
+      for (const { from, to } of replacements) {
+        stream = stream.pipe(replace(from, to));
+      }
 
-  return stream.pipe(dest(BUILD_DIR));
-});
+      return stream.pipe(dest(BUILD_DIR));
+    },
+  ),
+);
 
 function throwNoPrefixSpecified() {
   throw new Error(`'--prefix' parameter must be specified`);

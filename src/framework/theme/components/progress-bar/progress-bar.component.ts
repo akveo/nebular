@@ -71,6 +71,9 @@ import { NbComponentStatus } from '../component-status';
  * progress-bar-giant-text-font-size:
  * progress-bar-giant-text-font-weight:
  * progress-bar-giant-text-line-height:
+ * progress-bar-basic-background-color:
+ * progress-bar-basic-filled-background-color:
+ * progress-bar-basic-text-color:
  * progress-bar-primary-background-color:
  * progress-bar-primary-filled-background-color:
  * progress-bar-primary-text-color:
@@ -86,6 +89,9 @@ import { NbComponentStatus } from '../component-status';
  * progress-bar-danger-background-color:
  * progress-bar-danger-filled-background-color:
  * progress-bar-danger-text-color:
+ * progress-bar-control-background-color:
+ * progress-bar-control-filled-background-color:
+ * progress-bar-control-text-color:
  */
 @Component({
   selector: 'nb-progress-bar',
@@ -107,9 +113,9 @@ export class NbProgressBarComponent {
   @Input() value: number = 0;
 
   /**
-   * Progress bar background (`primary` (default), `info`, `success`, `warning`, `danger`)
+   * Progress bar background (`basic` (default), `primary`, `info`, `success`, `warning`, `danger`, `control`)
    */
-  @Input() status: NbComponentStatus = 'primary';
+  @Input() status: NbComponentStatus = 'basic';
 
   /**
    * Progress bar size (`tiny`, `small`, `medium` (default), `large`, `giant`)
@@ -169,5 +175,15 @@ export class NbProgressBarComponent {
   @HostBinding('class.status-danger')
   get danger(): boolean {
     return this.status === 'danger';
+  }
+
+  @HostBinding('class.status-basic')
+  get basic(): boolean {
+    return this.status === 'basic';
+  }
+
+  @HostBinding('class.status-control')
+  get control(): boolean {
+    return this.status === 'control';
   }
 }

@@ -34,7 +34,7 @@ import { Component, Input, HostBinding } from '@angular/core';
  * ```ts
  * @NgModule({
  *   imports: [
- *   	// ...
+ *     // ...
  *     NbCardModule,
  *   ],
  * })

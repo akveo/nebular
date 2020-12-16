@@ -6,10 +6,11 @@
 
 import { Component, HostBinding, Input } from '@angular/core';
 
-import { convertToBoolProperty } from '../helpers';
+import { convertToBoolProperty, NbBooleanInput } from '../helpers';
 import { NbComponentSize } from '../component-size';
 import { NbComponentStatus } from '../component-status';
 import { NbBadgePosition } from '../badge/badge.component';
+import { NbIconConfig } from '../icon/icon.component';
 
 /**
  * Action item, display a link with an icon, or any other content provided instead.
@@ -23,32 +24,38 @@ import { NbBadgePosition } from '../badge/badge.component';
          [routerLink]="link"
          [title]="title"
          *ngIf="link">
-        <nb-icon [icon]="icon"></nb-icon>
+        <nb-icon [config]="icon"></nb-icon>
+        <ng-container [ngTemplateOutlet]="badgeTemplate"></ng-container>
       </a>
       <a class="icon-container"
          [href]="href"
          [title]="title"
          *ngIf="href && !link">
-        <nb-icon [icon]="icon"></nb-icon>
+        <nb-icon [config]="icon"></nb-icon>
+        <ng-container [ngTemplateOutlet]="badgeTemplate"></ng-container>
       </a>
       <a class="icon-container"
          href="#"
          [title]="title"
          *ngIf="!href && !link"
          (click)="$event.preventDefault()">
-        <nb-icon [icon]="icon"></nb-icon>
+        <nb-icon [config]="icon"></nb-icon>
+        <ng-container [ngTemplateOutlet]="badgeTemplate"></ng-container>
       </a>
     </ng-container>
 
     <ng-template #projectedContent>
       <ng-content></ng-content>
+      <ng-container [ngTemplateOutlet]="badgeTemplate"></ng-container>
     </ng-template>
-
-    <nb-badge *ngIf="badgeText"
-              [text]="badgeText"
-              [status]="badgeStatus"
-              [position]="badgePosition">
-    </nb-badge>
+    <ng-template #badgeTemplate>
+      <nb-badge *ngIf="badgeText || badgeDot"
+                [text]="badgeText"
+                [dotMode]="badgeDot"
+                [status]="badgeStatus"
+                [position]="badgePosition">
+      </nb-badge>
+    </ng-template>
   `,
 })
 export class NbActionComponent {
@@ -72,10 +79,10 @@ export class NbActionComponent {
   @Input() title: string = '';
 
   /**
-   * Icon name
-   * @type string
+   * Icon name or config object
+   * @type {string | NbIconConfig}
    */
-  @Input() icon: string;
+  @Input() icon: string | NbIconConfig;
 
   /**
    * Visually disables the item
@@ -90,6 +97,21 @@ export class NbActionComponent {
     this._disabled = convertToBoolProperty(value);
   }
   protected _disabled: boolean = false;
+  static ngAcceptInputType_disabled: NbBooleanInput;
+
+  /**
+   * Use badge dot mode
+   * @type boolean
+   */
+  @Input()
+  get badgeDot(): boolean {
+    return this._badgeDot;
+  }
+  set badgeDot(value: boolean) {
+    this._badgeDot = convertToBoolProperty(value);
+  }
+  protected _badgeDot: boolean;
+  static ngAcceptInputType_badgeDot: NbBooleanInput;
 
   /**
    * Badge text to display
@@ -102,7 +124,7 @@ export class NbActionComponent {
    * 'primary', 'info', 'success', 'warning', 'danger'
    * @param {string} val
    */
-  @Input() badgeStatus: NbComponentStatus;
+  @Input() badgeStatus: NbComponentStatus = 'basic';
 
   /**
    * Badge position.
@@ -151,6 +173,9 @@ export class NbActionComponent {
  *
  * and we can set it to full a width of a parent component
  * @stacked-example(Full Width, action/action-width.component)
+ *
+ * Action dot mode
+ * @stacked-example(Action badge in dot mode, action/action-dot-mode.component)
  *
  * @styles
  *
@@ -219,6 +244,7 @@ export class NbActionsComponent {
     this._fullWidth = convertToBoolProperty(value);
   }
   protected _fullWidth: boolean = false;
+  static ngAcceptInputType_fullWidth: NbBooleanInput;
 
   @HostBinding('class.size-tiny')
   get tiny(): boolean {

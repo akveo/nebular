@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'nb-app-spinner-card',
   template: `
-    <nb-card accent="danger" size="xsmall" [nbSpinner]="loading"
+    <nb-card accent="danger" size="tiny" [nbSpinner]="loading"
              nbSpinnerStatus="danger"
              nbSpinnerSize="large"
              nbSpinnerMessage="">

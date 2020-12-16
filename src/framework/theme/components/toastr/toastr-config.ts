@@ -8,6 +8,8 @@ import { InjectionToken } from '@angular/core';
 
 import { NbGlobalLogicalPosition, NbGlobalPosition } from '../cdk/overlay/position-helper';
 import { NbComponentStatus } from '../component-status';
+import { emptyStatusWarning } from '../helpers';
+import { NbIconConfig } from '../icon/icon.component';
 
 type IconToClassMap = {
   [status in NbComponentStatus]: string;
@@ -28,7 +30,7 @@ export class NbToastrConfig {
   /**
    * Status chooses color scheme for the toast.
    * */
-  status: '' | NbComponentStatus = 'primary';
+  status: NbComponentStatus = 'basic';
   /**
    * Duration is timeout between toast appears and disappears.
    * */
@@ -44,7 +46,7 @@ export class NbToastrConfig {
    * */
   preventDuplicates: boolean = false;
   /**
-   * Determines the how to threat duplicates.
+   * Determines the how to treat duplicates.
    * */
   duplicatesBehaviour: NbDuplicateToastBehaviour = 'previous';
   /*
@@ -52,15 +54,21 @@ export class NbToastrConfig {
   * */
   limit?: number = null;
   /**
+   * Class to be applied to the toast.
+   */
+  toastClass: string = '';
+  /**
    * Determines render icon or not.
    * */
   hasIcon: boolean = true;
   /**
-   * Icon name that can be provided to render custom icon.
+   * Icon name or icon config object that can be provided to render custom icon.
    * */
-  icon: string = 'email';
+  icon: string | NbIconConfig = 'email';
   /**
    * Icon pack to look for the icon in.
+   * @deprecated Set pack via icon config object passed to icon property
+   * @breaking-change 5.0.0
    * */
   iconPack: string;
   /**
@@ -72,17 +80,26 @@ export class NbToastrConfig {
     info: 'question-mark-outline',
     warning: 'alert-triangle-outline',
     primary: 'email-outline',
+    control: 'email-outline',
+    basic: 'email-outline',
   };
 
   constructor(config: Partial<NbToastrConfig>) {
+    if ((config.status as string) === '') {
+      emptyStatusWarning('NbToastr');
+      config.status = 'basic';
+    }
+
     this.patchIcon(config);
     Object.assign(this, config);
   }
 
   protected patchIcon(config: Partial<NbToastrConfig>) {
     if (!('icon' in config)) {
-      config.icon = this.icons[config.status || 'primary'];
-      config.iconPack = 'nebular-essentials';
+      config.icon = {
+        icon: this.icons[config.status || 'basic'],
+        pack: 'nebular-essentials',
+      };
     }
   }
 }

@@ -138,6 +138,17 @@ export const structure = [
       },
       {
         type: 'page',
+        name: 'Typography',
+        children: [
+          {
+            type: 'block',
+            block: 'markdown',
+            source: 'design-system/typography.md',
+          },
+        ],
+      },
+      {
+        type: 'page',
         name: 'Enable Customizable Theme',
         children: [
           {
@@ -469,10 +480,27 @@ export const structure = [
       },
       {
         type: 'tabs',
+        name: 'Button Group',
+        icon: 'button-group.svg',
+        source: [
+          'NbButtonGroupComponent',
+          'NbButtonToggleDirective',
+        ],
+      },
+      {
+        type: 'tabs',
         name: 'Checkbox',
         icon: 'checkbox.svg',
         source: [
           'NbCheckboxComponent',
+        ],
+      },
+      {
+        type: 'tabs',
+        name: 'Toggle',
+        icon: 'toggle.svg',
+        source: [
+          'NbToggleComponent',
         ],
       },
       {
@@ -490,6 +518,19 @@ export const structure = [
         icon: 'select.svg',
         source: [
           'NbSelectComponent',
+          'NbOptionListComponent',
+          'NbOptionGroupComponent',
+        ],
+      },
+      {
+        type: 'tabs',
+        name: 'Autocomplete',
+        icon: 'autocomplete.svg',
+        source: [
+          'NbAutocompleteDirective',
+          'NbAutocompleteComponent',
+          'NbOptionListComponent',
+          'NbOptionGroupComponent',
         ],
       },
       {
@@ -500,6 +541,15 @@ export const structure = [
           'NbDatepickerDirective',
           'NbDatepickerComponent',
           'NbRangepickerComponent',
+        ],
+      },
+      {
+        type: 'tabs',
+        name: 'Timepicker',
+        icon: 'timepicker.svg',
+        source: [
+          'NbTimePickerDirective',
+          'NbTimePickerComponent',
         ],
       },
       {
@@ -869,6 +919,28 @@ export const structure = [
             type: 'block',
             block: 'markdown',
             source: 'auth/azure.md',
+          },
+        ],
+      },
+      {
+        type: 'page',
+        name: 'Backend API endpoints',
+        children: [
+          {
+            type: 'block',
+            block: 'markdown',
+            source: 'auth/backend-api.md',
+          },
+        ],
+      },
+      {
+        type: 'page',
+        name: 'Firebase Authentication',
+        children: [
+          {
+            type: 'block',
+            block: 'markdown',
+            source: 'auth/firebase-authentication.md',
           },
         ],
       },

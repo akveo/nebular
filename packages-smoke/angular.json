@@ -12,32 +12,33 @@
         "@schematics/angular:component": {
           "inlineTemplate": true,
           "inlineStyle": true,
-          "spec": false
+          "skipTests": true
         },
         "@schematics/angular:class": {
-          "spec": false
+          "skipTests": true
         },
         "@schematics/angular:directive": {
-          "spec": false
+          "skipTests": true
         },
         "@schematics/angular:guard": {
-          "spec": false
+          "skipTests": true
         },
         "@schematics/angular:module": {
-          "spec": false
+          "skipTests": true
         },
         "@schematics/angular:pipe": {
-          "spec": false
+          "skipTests": true
         },
         "@schematics/angular:service": {
-          "spec": false
+          "skipTests": true
         }
       },
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/packages-smoke",
+            "aot": true,
+            "outputPath": "dist/browser",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -53,6 +54,12 @@
           },
           "configurations": {
             "production": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -62,7 +69,6 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
               "aot": true,
               "extractLicenses": true,
@@ -70,6 +76,12 @@
               "buildOptimizer": true
             },
             "production-2015": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -79,13 +91,12 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
               "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
-              "tsConfig": "./tsconfig.es2015.json"
+              "tsConfig": "./src/tsconfig.app.es2015.json"
             }
           }
         },
@@ -136,6 +147,52 @@
             "exclude": [
               "**/node_modules/**"
             ]
+          }
+        },
+        "server": {
+          "builder": "@angular-devkit/build-angular:server",
+          "options": {
+            "outputPath": "dist/server",
+            "main": "server.ts",
+            "tsConfig": "src/tsconfig.server.json"
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "sourceMap": false,
+              "optimization": true
+            }
+          }
+        },
+        "serve-ssr": {
+          "builder": "@nguniversal/builders:ssr-dev-server",
+          "options": {
+            "browserTarget": "packages-smoke:build",
+            "serverTarget": "packages-smoke:server"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "packages-smoke:build:production",
+              "serverTarget": "packages-smoke:server:production"
+            }
+          }
+        },
+        "prerender": {
+          "builder": "@nguniversal/builders:prerender",
+          "options": {
+            "browserTarget": "packages-smoke:build:production",
+            "serverTarget": "packages-smoke:server:production",
+            "routes": [
+              "/"
+            ]
+          },
+          "configurations": {
+            "production": {}
           }
         }
       }

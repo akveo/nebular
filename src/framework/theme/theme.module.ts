@@ -4,8 +4,8 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { NgModule, ModuleWithProviders } from '@angular/core';
-import { CommonModule, DOCUMENT } from '@angular/common';
+import { NgModule, ModuleWithProviders, PLATFORM_ID } from '@angular/core';
+import { CommonModule, DOCUMENT, isPlatformBrowser } from '@angular/common';
 
 import {
   NB_BUILT_IN_JS_THEMES,
@@ -30,8 +30,16 @@ import { NbLayoutScrollService } from './services/scroll.service';
 import { NbLayoutRulerService } from './services/ruler.service';
 import { NbOverlayModule } from './components/cdk/overlay/overlay.module';
 
-export function nbWindowFactory() {
-  return window;
+export function windowFactory(platformId: Object): Window | undefined {
+  if (isPlatformBrowser(platformId)) {
+    return window;
+  }
+
+  // Provide undefined to get the error when trying to access the window as it
+  // shouldn't be used outside the browser. Those who need to provide something
+  // instead of window (e.g. domino window when running in node) could override
+  // NB_WINDOW token.
+  return undefined;
 }
 
 @NgModule({
@@ -57,17 +65,17 @@ export class NbThemeModule {
   static forRoot(nbThemeOptions: NbThemeOptions = { name: 'default' },
                  nbJSThemes?: NbJSThemeOptions[],
                  nbMediaBreakpoints?: NbMediaBreakpoint[],
-                 layoutDirection?: NbLayoutDirection): ModuleWithProviders {
+                 layoutDirection?: NbLayoutDirection): ModuleWithProviders<NbThemeModule> {
 
-    return <ModuleWithProviders> {
+    return {
       ngModule: NbThemeModule,
       providers: [
         { provide: NB_THEME_OPTIONS, useValue: nbThemeOptions || {} },
         { provide: NB_BUILT_IN_JS_THEMES, useValue: BUILT_IN_THEMES },
         { provide: NB_JS_THEMES, useValue: nbJSThemes || [] },
         { provide: NB_MEDIA_BREAKPOINTS, useValue: nbMediaBreakpoints || DEFAULT_MEDIA_BREAKPOINTS },
-        { provide: NB_WINDOW, useFactory: nbWindowFactory },
         { provide: NB_DOCUMENT, useExisting: DOCUMENT },
+        { provide: NB_WINDOW, useFactory: windowFactory, deps: [ PLATFORM_ID ] },
         NbJSThemesRegistry,
         NbThemeService,
         NbMediaBreakpointsService,

@@ -28,7 +28,7 @@
     nb-menu {
       border-radius: nb-theme(context-menu-border-radius);
       overflow: hidden;
-      text-align: center;
+      text-align: nb-theme(context-menu-text-align);
     }
   }
 }

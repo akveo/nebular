@@ -24,6 +24,11 @@ export class NbDialogConfig<D = any> {
   backdropClass: string = 'overlay-backdrop';
 
   /**
+   * Class that'll be assigned to the dialog overlay.
+   * */
+  dialogClass: string = '';
+
+  /**
    * If true then mouse clicks by backdrop will close a dialog.
    * */
   closeOnBackdropClick: boolean = true;

@@ -55,7 +55,7 @@ import { NbAuthStrategyClass } from '../../auth.options';
  *     endpoint?: string;
  *     redirectUri?: string;
  *     responseType?: string;
- *     requireValidToken: false,
+ *     requireValidToken: true,
  *     scope?: string;
  *     state?: string;
  *     params?: { [key: string]: string };
@@ -66,7 +66,7 @@ import { NbAuthStrategyClass } from '../../auth.options';
  *   token?: {
  *     endpoint?: string;
  *     grantType?: string;
- *     requireValidToken: false,
+ *     requireValidToken: true,
  *     redirectUri?: string;
  *     scope?: string;
  *     class: NbAuthTokenClass,
@@ -79,7 +79,7 @@ import { NbAuthStrategyClass } from '../../auth.options';
  *     endpoint?: string;
  *     grantType?: string;
  *     scope?: string;
- *     requireValidToken: false,
+ *     requireValidToken: true,
  *   } = {
  *     endpoint: 'token',
  *     grantType: NbOAuth2GrantType.REFRESH_TOKEN,
@@ -307,6 +307,7 @@ export class NbOAuth2AuthStrategy extends NbAuthStrategy {
       grant_type: this.getOption('refresh.grantType'),
       refresh_token: token.getRefreshToken(),
       scope: this.getOption('refresh.scope'),
+      client_id: this.getOption('clientId'),
     };
     return this.urlEncodeParameters(this.cleanParams(this.addCredentialsToParams(params)));
   }

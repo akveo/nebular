@@ -7,11 +7,18 @@
 import { Component, HostBinding, Input } from '@angular/core';
 
 import { NbComponentStatus } from '../component-status';
+import { convertToBoolProperty, emptyStatusWarning } from '../helpers';
 
-export type NbBadgePhysicalPosition = 'top left' | 'top right' | 'bottom left' | 'bottom right';
-export type NbBadgeLogicalPosition = 'top start' | 'top end' | 'bottom start' | 'bottom end';
+export type NbBadgePhysicalPosition = 'top left' | 'top right' | 'bottom left' | 'bottom right' | 'center right' | 'center left';
+export type NbBadgeLogicalPosition = 'top start' | 'top end' | 'bottom start' | 'bottom end' | 'center start'| 'center end';
 export type NbBadgePosition = NbBadgePhysicalPosition | NbBadgeLogicalPosition;
 
+export interface NbBadge {
+  text?: string;
+  position?: NbBadgePosition;
+  status?: NbComponentStatus;
+  dotMode?: boolean;
+}
 
 /**
  * Badge is a simple labeling component.
@@ -60,6 +67,8 @@ export type NbBadgePosition = NbBadgePhysicalPosition | NbBadgeLogicalPosition;
  * badge-text-font-weight:
  * badge-text-line-height:
  * badge-padding:
+ * badge-basic-background-color:
+ * badge-basic-text-color:
  * badge-primary-background-color:
  * badge-primary-text-color:
  * badge-success-background-color:
@@ -70,13 +79,15 @@ export type NbBadgePosition = NbBadgePhysicalPosition | NbBadgeLogicalPosition;
  * badge-warning-text-color:
  * badge-danger-background-color:
  * badge-danger-text-color:
+ * badge-control-background-color:
+ * badge-control-text-color:
  */
 @Component({
   selector: 'nb-badge',
   styleUrls: ['./badge.component.scss'],
-  template: `{{text}}`,
+  template: `{{dotMode ? '' : text}}`,
 })
-export class NbBadgeComponent {
+export class NbBadgeComponent implements NbBadge {
 
   /**
    * Text to display
@@ -103,10 +114,35 @@ export class NbBadgeComponent {
   protected _position: NbBadgePosition = this._defaultPosition;
 
   /**
-   * Badge status (adds specific styles):
-   * 'primary', 'info', 'success', 'warning', 'danger'
+   * Shows badge as a dot. No text is shown.
+   * @type boolean
    */
-  @Input() status: NbComponentStatus = 'primary';
+  @Input()
+  @HostBinding('class.dot-mode')
+  get dotMode(): boolean {
+    return this._dotMode;
+  }
+  set dotMode(value: boolean) {
+    this._dotMode = convertToBoolProperty(value);
+  }
+  protected _dotMode: boolean;
+
+  /**
+   * Badge status (adds specific styles):
+   * 'basic', 'primary', 'info', 'success', 'warning', 'danger', 'control'
+   */
+  @Input()
+  get status(): NbComponentStatus {
+    return this._status;
+  }
+  set status(value: NbComponentStatus) {
+    if ((value as string) === '') {
+      emptyStatusWarning('NbBadge');
+      value = 'basic';
+    }
+    this._status = value;
+  }
+  protected _status: NbComponentStatus = 'basic';
 
   @HostBinding('class.status-primary')
   get primary(): boolean {
@@ -131,6 +167,16 @@ export class NbBadgeComponent {
   @HostBinding('class.status-danger')
   get danger(): boolean {
     return this.status === 'danger';
+  }
+
+  @HostBinding('class.status-basic')
+  get basic(): boolean {
+    return this.status === 'basic';
+  }
+
+  @HostBinding('class.status-control')
+  get control(): boolean {
+    return this.status === 'control';
   }
 
   @HostBinding('class.position-top')
@@ -161,5 +207,10 @@ export class NbBadgeComponent {
   @HostBinding('class.position-end')
   get end(): boolean {
     return this.position.includes('end');
+  }
+
+  @HostBinding('class.position-center')
+  get center(): boolean {
+    return this.position.includes('center');
   }
 }

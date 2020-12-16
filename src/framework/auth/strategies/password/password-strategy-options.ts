@@ -38,12 +38,12 @@ export interface NbPasswordStrategyMessage {
 }
 
 export class NbPasswordAuthStrategyOptions extends NbAuthStrategyOptions {
-  baseEndpoint? = '/api/auth/';
+  baseEndpoint?: string = '/api/auth/';
   login?: boolean | NbPasswordStrategyModule = {
     alwaysFail: false,
     endpoint: 'login',
     method: 'post',
-    requireValidToken: false,
+    requireValidToken: true,
     redirect: {
       success: '/',
       failure: null,
@@ -55,7 +55,7 @@ export class NbPasswordAuthStrategyOptions extends NbAuthStrategyOptions {
     alwaysFail: false,
     endpoint: 'register',
     method: 'post',
-    requireValidToken: false,
+    requireValidToken: true,
     redirect: {
       success: '/',
       failure: null,
@@ -98,7 +98,7 @@ export class NbPasswordAuthStrategyOptions extends NbAuthStrategyOptions {
   refreshToken?: boolean | NbPasswordStrategyModule = {
     endpoint: 'refresh-token',
     method: 'post',
-    requireValidToken: false,
+    requireValidToken: true,
     redirect: {
       success: null,
       failure: null,

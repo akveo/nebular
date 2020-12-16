@@ -7,7 +7,7 @@
 import { Component, HostBinding, Input } from '@angular/core';
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
 
-import { convertToBoolProperty } from '../helpers';
+import { convertToBoolProperty, NbBooleanInput } from '../helpers';
 import { NbComponentSize } from '../component-size';
 import { NbComponentShape } from '../component-shape';
 import { NbComponentStatus } from '../component-status';
@@ -167,6 +167,7 @@ export class NbUserComponent {
     this._showName = convertToBoolProperty(val);
   }
   private _showName: boolean = true;
+  static ngAcceptInputType_showName: NbBooleanInput;
 
   /**
    * Whether to show a user title or not
@@ -180,6 +181,7 @@ export class NbUserComponent {
     this._showTitle = convertToBoolProperty(val);
   }
   private _showTitle: boolean = true;
+  static ngAcceptInputType_showTitle: NbBooleanInput;
 
   /**
    * Whether to show a user initials (if no picture specified) or not
@@ -193,6 +195,7 @@ export class NbUserComponent {
     this._showInitials = convertToBoolProperty(val);
   }
   private _showInitials: boolean = true;
+  static ngAcceptInputType_showInitials: NbBooleanInput;
 
   /**
    * Whether to show only a picture or also show the name and title
@@ -205,6 +208,7 @@ export class NbUserComponent {
   set onlyPicture(val: boolean) {
     this.showName = this.showTitle = !convertToBoolProperty(val);
   }
+  static ngAcceptInputType_onlyPicture: NbBooleanInput;
 
   /**
    * Badge text to display
@@ -217,7 +221,7 @@ export class NbUserComponent {
    * `primary`, `info`, `success`, `warning`, `danger`
    * @param {string} val
    */
-  @Input() badgeStatus: NbComponentStatus;
+  @Input() badgeStatus: NbComponentStatus = 'basic';
 
   /**
    * Badge position.

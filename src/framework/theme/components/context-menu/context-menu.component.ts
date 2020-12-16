@@ -19,6 +19,7 @@ import { NbPositionedContainer, NbRenderableContainer } from '../cdk/overlay/ove
  * context-menu-border-style:
  * context-menu-border-width:
  * context-menu-border-radius:
+ * context-menu-text-align:
  * context-menu-min-width:
  * context-menu-max-width:
  * context-menu-shadow:

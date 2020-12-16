@@ -6,7 +6,7 @@ import { ScrollStrategy } from '@angular/cdk/overlay';
 import { NbDynamicOverlay } from './dynamic-overlay';
 import { NbOverlayService } from '../overlay-service';
 import { NbRenderableContainer } from '../overlay-container';
-import { NbComponentPortal, NbOverlayConfig } from '../mapping';
+import { NbComponentPortal, NbOverlayConfig, NbOverlayContainer } from '../mapping';
 
 @Component({ template: '' })
 export class NbDynamicOverlayMockComponent implements NbRenderableContainer {
@@ -75,6 +75,12 @@ const scrollStrategies = {
   reposition: () => (<unknown> repositionRes) as ScrollStrategy,
 };
 
+export class NbOverlayContainerMock {
+  getContainerElement() {
+    return { contains() { return true; } };
+  }
+}
+
 export class NbOverlayServiceMock {
   _config: NbOverlayConfig;
 
@@ -114,12 +120,13 @@ describe('dynamic-overlay', () => {
         NbDynamicOverlay,
         { provide: NbOverlayService, useClass: NbOverlayServiceMock },
         { provide: NgZone, useClass: MockNgZone },
+        { provide: NbOverlayContainer, useClass: NbOverlayContainerMock },
       ],
     });
-    overlayService = bed.get(NbOverlayService);
-    dynamicOverlayService = bed.get(NbDynamicOverlay);
-    componentFactoryResolver = bed.get(ComponentFactoryResolver);
-    zone = bed.get(NgZone);
+    overlayService = bed.inject(NbOverlayService) as unknown as NbOverlayServiceMock;
+    dynamicOverlayService = bed.inject(NbDynamicOverlay);
+    componentFactoryResolver = bed.inject(ComponentFactoryResolver);
+    zone = bed.inject(NgZone) as unknown as MockNgZone;
   });
 
   beforeEach(() => {
@@ -199,7 +206,7 @@ describe('dynamic-overlay', () => {
     expect(createOverlaySpy).toHaveBeenCalledTimes(1);
   });
 
-  it('should not attache to ref if already shown', () => {
+  it('should not attach to ref if already shown', () => {
     const attachSpy = spyOn(ref, 'attach').and.callThrough();
     const hasAttacheSpy = spyOn(ref, 'hasAttached');
 
@@ -260,6 +267,16 @@ describe('dynamic-overlay', () => {
     expect(instance.content).toBe(newContent);
   });
 
+  it('should set overlay config', () => {
+    const overlayConfig: NbOverlayConfig = { panelClass: 'additional-overlay-class' };
+    const createOverlaySpy = spyOn(overlayService, 'create').and.callThrough();
+
+    dynamicOverlay.setOverlayConfig(overlayConfig);
+    dynamicOverlay.show();
+
+    expect(createOverlaySpy).toHaveBeenCalledWith(jasmine.objectContaining(overlayConfig));
+  });
+
   it('should return container', () => {
     dynamicOverlay.show();
     expect(dynamicOverlay.getContainer()).toBe(container as any);
@@ -276,7 +293,7 @@ describe('dynamic-overlay', () => {
 
     expect(instance.content).toBe(newContent);
     expect(renderContentSpy).toHaveBeenCalledTimes(2);
-    expect(updatePositionSpy).toHaveBeenCalledTimes(1);
+    expect(updatePositionSpy).toHaveBeenCalledTimes(2);
   });
 
   it('should set context when shown', () => {
@@ -290,7 +307,7 @@ describe('dynamic-overlay', () => {
 
     expect(instance.context).toBe(newContext);
     expect(renderContentSpy).toHaveBeenCalledTimes(2);
-    expect(updatePositionSpy).toHaveBeenCalledTimes(1);
+    expect(updatePositionSpy).toHaveBeenCalledTimes(2);
   });
 
   it('should set context & content when shown', () => {
@@ -308,18 +325,16 @@ describe('dynamic-overlay', () => {
     expect(instance.context).toBe(newContext);
     expect(instance.content).toBe(newContent);
     expect(renderContentSpy).toHaveBeenCalledTimes(3);
-    expect(updatePositionSpy).toHaveBeenCalledTimes(2);
+    expect(updatePositionSpy).toHaveBeenCalledTimes(4);
   });
 
   it('should set component', () => {
-    const detachSpy = spyOn(ref, 'detach').and.callThrough();
     const disposeSpy = spyOn(ref, 'dispose').and.callThrough();
     const attachSpy = spyOn(ref, 'attach').and.callThrough();
     const hasAttacheSpy = spyOn(ref, 'hasAttached');
 
     dynamicOverlay.setComponent(NbDynamicOverlayMock2Component);
 
-    expect(detachSpy).toHaveBeenCalledTimes(0);
     expect(disposeSpy).toHaveBeenCalledTimes(0);
     expect(attachSpy).toHaveBeenCalledTimes(0);
 
@@ -327,14 +342,12 @@ describe('dynamic-overlay', () => {
     hasAttacheSpy.and.returnValue(true);
 
     expect(ref.portal.component).toBe(NbDynamicOverlayMock2Component);
-    expect(detachSpy).toHaveBeenCalledTimes(0);
     expect(disposeSpy).toHaveBeenCalledTimes(0);
     expect(attachSpy).toHaveBeenCalledTimes(1);
 
     dynamicOverlay.setComponent(NbDynamicOverlayMockComponent);
 
     expect(ref.portal.component).toBe(NbDynamicOverlayMockComponent);
-    expect(detachSpy).toHaveBeenCalledTimes(1);
     expect(disposeSpy).toHaveBeenCalledTimes(1);
     expect(attachSpy).toHaveBeenCalledTimes(2);
 
@@ -343,7 +356,6 @@ describe('dynamic-overlay', () => {
 
     dynamicOverlay.setComponent(NbDynamicOverlayMock2Component);
 
-    expect(detachSpy).toHaveBeenCalledTimes(3);
     expect(disposeSpy).toHaveBeenCalledTimes(2);
     expect(attachSpy).toHaveBeenCalledTimes(2);
   });
@@ -375,4 +387,36 @@ describe('dynamic-overlay', () => {
     expect(updatePositionSpy).toHaveBeenCalledTimes(1);
   });
 
+  it(`should recreate overlay if it's host isn't child of overlay container`, () => {
+    dynamicOverlay.show();
+    dynamicOverlay.hide();
+
+    const overlayContainer = TestBed.inject(NbOverlayContainer);
+    const getContainerElementSpy = spyOn(overlayContainer, 'getContainerElement').and.returnValues(
+      { contains() { return false; } },
+      { contains() { return true; } },
+    );
+
+    dynamicOverlay.show();
+
+    expect(getContainerElementSpy).toHaveBeenCalledTimes(2);
+  });
+
+  it(`should dispose overlay ref when recreating overlay`, () => {
+    const disposeSpy = spyOn(ref, 'dispose').and.callThrough();
+
+    dynamicOverlay.show();
+    dynamicOverlay.hide();
+
+    const overlayContainer = TestBed.inject(NbOverlayContainer);
+    // return false once to force overlay ref recreation and then always return true
+    overlayContainer.getContainerElement = () => {
+      overlayContainer.getContainerElement = () => ({ contains: () => true }) as unknown as HTMLElement;
+      return { contains: () => false } as unknown as HTMLElement;
+    };
+
+    dynamicOverlay.show();
+
+    expect(disposeSpy).toHaveBeenCalledTimes(1);
+  });
 });

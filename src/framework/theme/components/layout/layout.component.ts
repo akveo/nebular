@@ -9,10 +9,10 @@ import {
   Renderer2, ViewChild, ViewContainerRef, Inject, PLATFORM_ID,
 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
-import { BehaviorSubject } from 'rxjs';
-import { filter, takeWhile } from 'rxjs/operators';
+import { BehaviorSubject, Subject } from 'rxjs';
+import { filter, takeUntil } from 'rxjs/operators';
 
-import { convertToBoolProperty } from '../helpers';
+import { convertToBoolProperty, NbBooleanInput } from '../helpers';
 import { NbThemeService } from '../../services/theme.service';
 import { NbSpinnerService } from '../../services/spinner.service';
 import { NbLayoutDirectionService } from '../../services/direction.service';
@@ -42,17 +42,7 @@ import { NbOverlayContainerAdapter } from '../cdk/adapter/overlay-container-adap
  * ```
  * ### Installation
  *
- * Import `NbLayoutModule.forRoot()` to your app module.
- * ```ts
- * @NgModule({
- *   imports: [
- *     // ...
- *     NbLayoutModule.forRoot(),
- *   ],
- * })
- * export class AppModule { }
- * ```
- * and `NbLayoutModule` to your feature module where the component should be shown:
+ * Import `NbLayoutModule` to your app module.
  * ```ts
  * @NgModule({
  *   imports: [
@@ -60,7 +50,7 @@ import { NbOverlayContainerAdapter } from '../cdk/adapter/overlay-container-adap
  *     NbLayoutModule,
  *   ],
  * })
- * export class PageModule { }
+ * export class AppModule { }
  * ```
  * ### Usage
  * By default the layout fills up the whole view-port.
@@ -167,6 +157,7 @@ export class NbLayoutComponent implements AfterViewInit, OnDestroy {
   set center(val: boolean) {
     this.centerValue = convertToBoolProperty(val);
   }
+  static ngAcceptInputType_center: NbBooleanInput;
 
   /**
    * Defines whether the layout enters a 'window' mode, when the layout content (including sidebars and fixed header)
@@ -180,6 +171,7 @@ export class NbLayoutComponent implements AfterViewInit, OnDestroy {
     this.windowModeValue = convertToBoolProperty(val);
     this.withScroll = this.windowModeValue;
   }
+  static ngAcceptInputType_windowMode: NbBooleanInput;
 
   /**
    * Defines whether to move the scrollbars to layout or leave it at the body level.
@@ -199,6 +191,7 @@ export class NbLayoutComponent implements AfterViewInit, OnDestroy {
       this.renderer.setStyle(body, 'overflow', 'initial');
     }
   }
+  static ngAcceptInputType_withScroll: NbBooleanInput;
 
   /**
    * Restores scroll to the top of the page after navigation
@@ -208,19 +201,20 @@ export class NbLayoutComponent implements AfterViewInit, OnDestroy {
   set restoreScrollTop(val: boolean) {
     this.restoreScrollTopValue = convertToBoolProperty(val);
   }
+  static ngAcceptInputType_restoreScrollTop: NbBooleanInput;
 
   // TODO remove as of 5.0.0
-  @ViewChild('layoutTopDynamicArea', { read: ViewContainerRef, static: false }) veryTopRef: ViewContainerRef;
+  @ViewChild('layoutTopDynamicArea', { read: ViewContainerRef }) veryTopRef: ViewContainerRef;
 
-  @ViewChild('scrollableContainer', { read: ElementRef, static: false })
+  @ViewChild('scrollableContainer', { read: ElementRef })
   scrollableContainerRef: ElementRef<HTMLElement>;
 
-  @ViewChild('layoutContainer', { read: ElementRef, static: false })
+  @ViewChild('layoutContainer', { read: ElementRef })
   layoutContainerRef: ElementRef<HTMLElement>;
 
   protected afterViewInit$ = new BehaviorSubject(null);
 
-  private alive: boolean = true;
+  private destroy$ = new Subject<void>();
 
   constructor(
     protected themeService: NbThemeService,
@@ -240,7 +234,7 @@ export class NbLayoutComponent implements AfterViewInit, OnDestroy {
 
     this.themeService.onThemeChange()
       .pipe(
-        takeWhile(() => this.alive),
+        takeUntil(this.destroy$),
       )
       .subscribe((theme: any) => {
         const body = this.document.getElementsByTagName('body')[0];
@@ -252,7 +246,7 @@ export class NbLayoutComponent implements AfterViewInit, OnDestroy {
 
     this.themeService.onAppendLayoutClass()
       .pipe(
-        takeWhile(() => this.alive),
+        takeUntil(this.destroy$),
       )
       .subscribe((className: string) => {
         this.renderer.addClass(this.elementRef.nativeElement, className);
@@ -260,7 +254,7 @@ export class NbLayoutComponent implements AfterViewInit, OnDestroy {
 
     this.themeService.onRemoveLayoutClass()
       .pipe(
-        takeWhile(() => this.alive),
+        takeUntil(this.destroy$),
       )
       .subscribe((className: string) => {
         this.renderer.removeClass(this.elementRef.nativeElement, className);
@@ -269,7 +263,7 @@ export class NbLayoutComponent implements AfterViewInit, OnDestroy {
     this.spinnerService.registerLoader(new Promise((resolve, reject) => {
       this.afterViewInit$
         .pipe(
-          takeWhile(() => this.alive),
+          takeUntil(this.destroy$),
         )
         .subscribe((_) => resolve());
     }));
@@ -277,30 +271,11 @@ export class NbLayoutComponent implements AfterViewInit, OnDestroy {
 
     this.rulerService.onGetDimensions()
       .pipe(
-        takeWhile(() => this.alive),
+        takeUntil(this.destroy$),
       )
       .subscribe(({ listener }) => {
         listener.next(this.getDimensions());
         listener.complete();
-      });
-
-    this.scrollService.onGetPosition()
-      .pipe(
-        takeWhile(() => this.alive),
-      )
-      .subscribe(({ listener }) => {
-        listener.next(this.getScrollPosition());
-        listener.complete();
-      });
-
-    this.scrollTop
-      .shouldRestore()
-      .pipe(
-        filter(() => this.restoreScrollTopValue),
-        takeWhile(() => this.alive),
-      )
-      .subscribe(() => {
-        this.scroll(0, 0);
       });
 
     this.scrollService
@@ -328,19 +303,34 @@ export class NbLayoutComponent implements AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit() {
+    this.scrollService.onGetPosition()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(({ listener }) => {
+        listener.next(this.getScrollPosition());
+        listener.complete();
+      });
+
+    this.scrollTop.shouldRestore()
+      .pipe(filter(
+        () => this.restoreScrollTopValue),
+        takeUntil(this.destroy$),
+      )
+      .subscribe(() => this.scroll(0, 0));
+
     this.layoutDirectionService.onDirectionChange()
-      .pipe(takeWhile(() => this.alive))
+      .pipe(takeUntil(this.destroy$))
       .subscribe(direction => this.document.dir = direction);
 
     this.scrollService.onManualScroll()
-      .pipe(takeWhile(() => this.alive))
+      .pipe(takeUntil(this.destroy$))
       .subscribe(({ x, y }: NbScrollPosition) => this.scroll(x, y));
 
     this.afterViewInit$.next(true);
   }
 
   ngOnDestroy() {
-    this.alive = false;
+    this.destroy$.next();
+    this.destroy$.complete();
     this.unregisterAsOverlayContainer();
   }
 
@@ -530,6 +520,7 @@ export class NbLayoutColumnComponent {
     this.leftValue = convertToBoolProperty(val);
     this.startValue = false;
   }
+  static ngAcceptInputType_left: NbBooleanInput;
 
   /**
    * Make column first in the layout.
@@ -540,6 +531,7 @@ export class NbLayoutColumnComponent {
     this.startValue = convertToBoolProperty(val);
     this.leftValue = false;
   }
+  static ngAcceptInputType_start: NbBooleanInput;
 }
 
 /**
@@ -597,6 +589,7 @@ export class NbLayoutHeaderComponent {
   set fixed(val: boolean) {
     this.fixedValue = convertToBoolProperty(val);
   }
+  static ngAcceptInputType_fixed: NbBooleanInput;
 
   /**
    * Places header on a side of the sidebar, and not above.
@@ -609,6 +602,7 @@ export class NbLayoutHeaderComponent {
     this.fixedValue = false;
     this.layout.withSubheader = this.subheaderValue;
   }
+  static ngAcceptInputType_subheader: NbBooleanInput;
 }
 
 /**
@@ -652,5 +646,6 @@ export class NbLayoutFooterComponent {
   set fixed(val: boolean) {
     this.fixedValue = convertToBoolProperty(val);
   }
+  static ngAcceptInputType_fixed: NbBooleanInput;
 
 }

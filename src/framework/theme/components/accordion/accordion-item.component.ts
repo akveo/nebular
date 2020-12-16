@@ -19,10 +19,10 @@ import {
   OnDestroy,
 } from '@angular/core';
 import { Subject } from 'rxjs';
-import { takeWhile } from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
 
 import { NbAccordionComponent } from './accordion.component';
-import { convertToBoolProperty } from '../helpers';
+import { convertToBoolProperty, NbBooleanInput } from '../helpers';
 
 /**
  * Component intended to be used within `<nb-accordion>` component
@@ -52,6 +52,7 @@ export class NbAccordionItemComponent implements OnInit, OnChanges, OnDestroy {
     this.collapsedChange.emit(this.collapsedValue);
     this.invalidate();
   }
+  static ngAcceptInputType_collapsed: NbBooleanInput;
 
   /**
    * Item is expanded (`false` by default)
@@ -65,6 +66,7 @@ export class NbAccordionItemComponent implements OnInit, OnChanges, OnDestroy {
   set expanded(val: boolean) {
     this.collapsedValue = !convertToBoolProperty(val);
   }
+  static ngAcceptInputType_expanded: NbBooleanInput;
 
   /**
    * Item is disabled and cannot be opened.
@@ -79,6 +81,7 @@ export class NbAccordionItemComponent implements OnInit, OnChanges, OnDestroy {
     this.disabledValue = convertToBoolProperty(val);
     this.invalidate();
   }
+  static ngAcceptInputType_disabled: NbBooleanInput;
 
   /**
    * Emits whenever the expanded state of the accordion changes.
@@ -90,7 +93,7 @@ export class NbAccordionItemComponent implements OnInit, OnChanges, OnDestroy {
 
   private collapsedValue = true;
   private disabledValue = false;
-  private alive = true;
+  private destroy$ = new Subject<void>();
 
   constructor(@Host() private accordion: NbAccordionComponent, private cd: ChangeDetectorRef) {
   }
@@ -126,7 +129,7 @@ export class NbAccordionItemComponent implements OnInit, OnChanges, OnDestroy {
 
   ngOnInit() {
     this.accordion.openCloseItems
-      .pipe(takeWhile(() => this.alive))
+      .pipe(takeUntil(this.destroy$))
       .subscribe(collapsed => {
         !this.disabled && (this.collapsed = collapsed);
     });
@@ -137,7 +140,8 @@ export class NbAccordionItemComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.alive = false;
+    this.destroy$.next();
+    this.destroy$.complete();
     this.accordionItemInvalidate.complete();
   }
 

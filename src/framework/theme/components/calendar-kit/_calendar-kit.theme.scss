@@ -4,173 +4,18 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
+@import './components/calendar-navigation/calendar-navigation.theme';
+@import './components/calendar-picker/calendar-picker.component.theme';
+@import './components/calendar-days-names/calendar-days-names.component.theme';
+@import './components/calendar-week-number/calendar-week-number.component.theme';
+@import './components/calendar-day-picker/calendar-day-picker.component.theme';
+@import './components/calendar-cell.theme';
+
 @mixin nb-calendar-kit-theme() {
-
-  nb-calendar-header {
-    .header {
-      display: flex;
-      flex-direction: column;
-
-      color: nb-theme(calendar-header-text-color);
-      font-family: nb-theme(calendar-header-text-font-family);
-    }
-
-    .title {
-      display: flex;
-      align-items: center;
-      font-size: nb-theme(calendar-header-title-text-font-size);
-      font-weight: nb-theme(calendar-header-title-text-font-weight);
-      line-height: nb-theme(calendar-header-title-text-line-height);
-
-      .nb-arrow-dropright {
-        margin-left: 0.5rem;
-      }
-
-      .nb-arrow-dropleft {
-        margin-right: 0.5rem;
-      }
-
-      &:hover {
-        color: nb-theme(calendar-cell-hover-background-color);
-        cursor: pointer;
-      }
-
-      &:active {
-        color: nb-theme(calendar-cell-active-background-color);
-      }
-    }
-
-    .sub-title {
-      font-size: nb-theme(calendar-header-sub-title-text-font-size);
-      font-weight: nb-theme(calendar-header-sub-title-text-font-weight);
-      line-height: nb-theme(calendar-header-sub-title-text-line-height);
-    }
-  }
-
-  nb-calendar-navigation button[nbButton] {
-    width: nb-theme(calendar-navigation-button-width);
-  }
-
-  nb-calendar-days-names .day {
-    width: nb-theme(calendar-weekday-width);
-    height: nb-theme(calendar-weekday-height);
-    color: nb-theme(calendar-weekday-text-color);
-    font-size: nb-theme(calendar-weekday-text-font-size);
-    font-weight: nb-theme(calendar-weekday-text-font-weight);
-    line-height: nb-theme(calendar-weekday-text-line-height);
-
-    &.holiday {
-      color: nb-theme(calendar-weekday-holiday-text-color);
-    }
-  }
-
-  nb-calendar-day-picker {
-    &.medium .day-cell {
-      width: nb-theme(calendar-day-cell-width);
-      height: nb-theme(calendar-day-cell-height);
-    }
-
-    &.large .day-cell {
-      width: nb-theme(calendar-day-cell-large-width);
-      height: nb-theme(calendar-day-cell-large-height);
-    }
-  }
-
-  nb-calendar-month-picker {
-    &.medium .month-cell {
-      width: nb-theme(calendar-month-cell-width);
-      height: nb-theme(calendar-month-cell-height);
-    }
-
-    &.large .month-cell {
-      width: nb-theme(calendar-month-cell-large-width);
-      height: nb-theme(calendar-month-cell-large-height);
-    }
-  }
-
-  nb-calendar-year-picker {
-    &.medium .year-cell {
-      width: nb-theme(calendar-year-cell-width);
-      height: nb-theme(calendar-year-cell-height);
-    }
-
-    &.large .year-cell {
-      width: nb-theme(calendar-year-cell-large-width);
-      height: nb-theme(calendar-year-cell-large-height);
-    }
-  }
-
-  nb-calendar-day-picker .day-cell {
-    &.bounding-month {
-      color: nb-theme(calendar-cell-inactive-text-color);
-    }
-
-    &:not(.disabled):not(.empty):hover {
-      background-color: nb-theme(calendar-cell-hover-background-color);
-      color: nb-theme(calendar-cell-hover-text-color);
-      font-size: nb-theme(calendar-cell-hover-text-font-size);
-      font-weight: nb-theme(calendar-cell-hover-text-font-weight);
-      line-height: nb-theme(calendar-cell-hover-text-line-height);
-    }
-  }
-
-  nb-calendar-day-picker .day-cell,
-  nb-calendar-month-picker .month-cell,
-  nb-calendar-year-picker .year-cell {
-    border-radius: nb-theme(calendar-border-radius);
-    color: nb-theme(calendar-text-color);
-    font-family: nb-theme(calendar-text-font-family);
-    font-size: nb-theme(calendar-text-font-size);
-    font-weight: nb-theme(calendar-text-font-weight);
-    line-height: nb-theme(calendar-text-line-height);
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 1px;
-
-    &:not(.empty):not(.disabled) {
-      cursor: pointer;
-    }
-
-    &.disabled {
-      background-color: nb-theme(calendar-cell-disabled-background-color);
-      color: nb-theme(calendar-cell-disabled-text-color);
-    }
-
-    &.today {
-      background-color: nb-theme(calendar-cell-today-background-color);
-      color: nb-theme(calendar-cell-today-text-color);
-      font-size: nb-theme(calendar-cell-today-text-font-size);
-      font-weight: nb-theme(calendar-cell-today-text-font-weight);
-      line-height: nb-theme(calendar-cell-today-text-line-height);
-    }
-
-    &.selected {
-      background-color: nb-theme(calendar-cell-selected-background-color);
-      color: nb-theme(calendar-cell-selected-text-color);
-      font-size: nb-theme(calendar-cell-selected-text-font-size);
-      font-weight: nb-theme(calendar-cell-selected-text-font-weight);
-      line-height: nb-theme(calendar-cell-selected-text-line-height);
-    }
-  }
-
-  nb-calendar-month-picker .month-cell,
-  nb-calendar-year-picker .year-cell {
-    &:hover, &:hover:active {
-      background-color: nb-theme(calendar-cell-hover-background-color);
-      color: nb-theme(calendar-cell-hover-text-color);
-      font-size: nb-theme(calendar-cell-hover-text-font-size);
-      font-weight: nb-theme(calendar-cell-hover-text-font-weight);
-      line-height: nb-theme(calendar-cell-hover-text-line-height);
-    }
-
-    &:active {
-      background-color: nb-theme(calendar-cell-active-background-color);
-      color: nb-theme(calendar-cell-active-text-color);
-      font-size: nb-theme(calendar-cell-active-text-font-size);
-      font-weight: nb-theme(calendar-cell-active-text-font-weight);
-      line-height: nb-theme(calendar-cell-active-text-line-height);
-    }
-  }
+  @include nb-calendar-navigation-theme();
+  @include nb-calendar-picker-theme();
+  @include nb-calendar-days-names-theme();
+  @include nb-calendar-week-numbers-theme();
+  @include nb-calendar-day-picker-theme();
+  @include nb-calendar-cell-theme();
 }

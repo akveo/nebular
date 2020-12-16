@@ -1,0 +1,63 @@
+@import '../../styles/core/mixins';
+
+:host {
+  display: inline-flex;
+  outline: none;
+}
+
+:host(.toggle-label-left) .text:not(:empty) {
+  padding-right: 0.6875rem;
+  @include nb-ltr(order, -1);
+  @include nb-rtl(order, 1);
+}
+
+:host(.toggle-label-right) .text:not(:empty) {
+  padding-left: 0.6875rem;
+  @include nb-ltr(order, 1);
+  @include nb-rtl(order, -1);
+}
+
+:host(.toggle-label-start) .toggle-label {
+  flex-direction: row-reverse;
+
+  .text:not(:empty) {
+    @include nb-ltr(padding-right, 0.6875rem);
+    @include nb-rtl(padding-left, 0.6875rem);
+  }
+}
+
+:host(.toggle-label-end) .text:not(:empty) {
+  @include nb-ltr(padding-left, 0.6875rem);
+  @include nb-rtl(padding-right, 0.6875rem);
+}
+
+:host(.nb-transition) {
+  .toggle {
+    @include nb-component-animation(background-color, border, box-shadow);
+  }
+}
+
+.toggle-label {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.toggle {
+  position: relative;
+  display: inline-flex;
+  box-sizing: content-box;
+}
+
+.toggle-switcher {
+  position: absolute;
+  border-radius: 50%;
+  margin: 1px;
+
+  nb-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}

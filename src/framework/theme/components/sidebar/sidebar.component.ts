@@ -8,7 +8,7 @@ import { Component, HostBinding, Input, OnInit, OnDestroy, ElementRef } from '@a
 import { Subject } from 'rxjs';
 import { takeUntil, filter } from 'rxjs/operators';
 
-import { convertToBoolProperty } from '../helpers';
+import { convertToBoolProperty, NbBooleanInput } from '../helpers';
 import { NbThemeService } from '../../services/theme.service';
 import { NbMediaBreakpoint } from '../../services/breakpoints.service';
 import { NbSidebarService, getSidebarState$ } from './sidebar.service';
@@ -166,8 +166,9 @@ export class NbSidebarComponent implements OnInit, OnDestroy {
    */
   static readonly RESPONSIVE_STATE_PC: string = 'pc';
 
-  protected destroy$ = new Subject<void>();
   protected responsiveState: NbSidebarResponsiveState = 'pc';
+
+  protected destroy$ = new Subject<void>();
 
   containerFixedValue: boolean = true;
 
@@ -201,6 +202,7 @@ export class NbSidebarComponent implements OnInit, OnDestroy {
     this.startValue = false;
     this.endValue = false;
   }
+  static ngAcceptInputType_right: NbBooleanInput;
 
   /**
    * Places sidebar on the left side
@@ -213,6 +215,7 @@ export class NbSidebarComponent implements OnInit, OnDestroy {
     this.startValue = false;
     this.endValue = false;
   }
+  static ngAcceptInputType_left: NbBooleanInput;
 
   /**
    * Places sidebar on the start edge of layout
@@ -225,6 +228,7 @@ export class NbSidebarComponent implements OnInit, OnDestroy {
     this.leftValue = false;
     this.rightValue = false;
   }
+  static ngAcceptInputType_start: NbBooleanInput;
 
   /**
    * Places sidebar on the end edge of layout
@@ -237,6 +241,7 @@ export class NbSidebarComponent implements OnInit, OnDestroy {
     this.leftValue = false;
     this.rightValue = false;
   }
+  static ngAcceptInputType_end: NbBooleanInput;
 
   /**
    * Makes sidebar fixed (shown above the layout content)
@@ -246,6 +251,7 @@ export class NbSidebarComponent implements OnInit, OnDestroy {
   set fixed(val: boolean) {
     this.fixedValue = convertToBoolProperty(val);
   }
+  static ngAcceptInputType_fixed: NbBooleanInput;
 
   /**
    * Makes sidebar container fixed
@@ -255,6 +261,7 @@ export class NbSidebarComponent implements OnInit, OnDestroy {
   set containerFixed(val: boolean) {
     this.containerFixedValue = convertToBoolProperty(val);
   }
+  static ngAcceptInputType_containerFixed: NbBooleanInput;
 
   /**
    * Initial sidebar state, `expanded`|`collapsed`|`compacted`
@@ -281,6 +288,7 @@ export class NbSidebarComponent implements OnInit, OnDestroy {
     this._responsive = convertToBoolProperty(value);
   }
   protected _responsive: boolean = false;
+  static ngAcceptInputType_responsive: NbBooleanInput;
 
   /**
    * Tags a sidebar with some ID, can be later used in the sidebar service
@@ -344,6 +352,13 @@ export class NbSidebarComponent implements OnInit, OnDestroy {
       )
       .subscribe(() => this.collapse());
 
+    this.sidebarService.onCompact()
+      .pipe(
+        filter(({ tag }) => !this.tag || this.tag === tag),
+        takeUntil(this.destroy$),
+      )
+      .subscribe(() => this.compact());
+
     getSidebarState$
       .pipe(
         filter(({ tag }) => !this.tag || this.tag === tag),
@@ -366,7 +381,7 @@ export class NbSidebarComponent implements OnInit, OnDestroy {
       const link = this.getMenuLink(event.target);
 
       if (link && link.nextElementSibling && link.nextElementSibling.classList.contains('menu-items')) {
-        this.expand();
+        this.sidebarService.expand(this.tag);
       }
     }
   }

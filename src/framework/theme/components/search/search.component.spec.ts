@@ -99,7 +99,7 @@ describe('NbSearchComponent', () => {
     tick();
     const searchFieldComponent: NbSearchFieldComponent = getSearchFieldComponent();
 
-    const searchService = TestBed.get(NbSearchService);
+    const searchService = TestBed.inject(NbSearchService);
     const searchInput = spyOn(searchService, 'searchInput').and.callThrough();
     const searchTerm = 'search term';
 

@@ -7,8 +7,7 @@
 import * as ts from 'typescript';
 import { basename, dirname, join, normalize, NormalizedSep, Path } from '@angular-devkit/core';
 import { SchematicsException, Tree } from '@angular-devkit/schematics';
-import { getSourceFile } from '@angular/cdk/schematics';
-import { getDecoratorMetadata, insertImport } from '@schematics/angular/utility/ast-utils';
+import { parseSourceFile, getDecoratorMetadata, insertImport } from '@angular/cdk/schematics';
 import {
   addArrayElement,
   addObjectProperty,
@@ -30,7 +29,7 @@ import {
 } from '../utils';
 
 export function findRoutesArray(tree: Tree, modulePath: Path): ts.ArrayLiteralExpression {
-  const source = getSourceFile(tree, modulePath);
+  const source = parseSourceFile(tree, modulePath);
 
   const decoratorNode = getDecoratorMetadata(source, 'NgModule', '@angular/core')[0] as ts.ObjectLiteralExpression;
   if (decoratorNode == null) {
@@ -116,9 +115,9 @@ export function generateRoute(...routeFields: string[]) {
 
 export type RoutePredicate = (route: ts.ObjectLiteralExpression) => boolean;
 
-export function generateLazyModulePath(from: Path, to: Path, moduleClassName: string): string {
+export function generateLazyModuleImport(from: Path, to: Path, moduleClassName: string): string {
   const path = normalize(importPath(from, to));
-  return `./${dirname(path)}/${basename(path)}#${moduleClassName}`;
+  return `() => import('./${dirname(path)}/${basename(path)}').then(m => m.${moduleClassName})`;
 }
 
 /**
@@ -128,7 +127,8 @@ export function generateLazyModulePath(from: Path, to: Path, moduleClassName: st
 export function addMissingChildRoutes(tree: Tree, routingModulePath: Path, targetFile: Path): void {
   const routingModuleDir = dirname(routingModulePath);
   if (isRootPlaygroundModule(routingModuleDir)) {
-    return addRootRoute(tree, targetFile);
+    addRootRoute(tree, targetFile);
+    return;
   }
 
   if (isBasePlaygroundModule(routingModuleDir)) {
@@ -166,7 +166,7 @@ function addMissingPaths(tree: Tree, routingModulePath: Path, targetFile: Path):
 
     existingPath = fullPathToCheck;
     if (!getRouteChildren(route)) {
-      addObjectProperty(tree, getSourceFile(tree, routingModulePath), route, 'children: []');
+      addObjectProperty(tree, parseSourceFile(tree, routingModulePath), route, 'children: []');
     }
   }
 }
@@ -190,8 +190,8 @@ export function addRootRoute(tree: Tree, targetFile: Path): void {
   const isLayout = isLayoutPath(targetFile);
   const baseModulePath = isLayout ? LAYOUT_MODULE_PATH : NO_LAYOUT_MODULE_PATH ;
   const baseModuleClass = isLayout ? LAYOUT_MODULE_CLASS : NO_LAYOUT_MODULE_CLASS  ;
-  const lazyModulePath = generateLazyModulePath(PLAYGROUND_ROUTING_MODULE_PATH, baseModulePath, baseModuleClass);
-  const routeString = generatePathRoute('', `loadChildren: '${lazyModulePath}'`);
+  const lazyModuleImport = generateLazyModuleImport(PLAYGROUND_ROUTING_MODULE_PATH, baseModulePath, baseModuleClass);
+  const routeString = generatePathRoute('', `loadChildren: ${lazyModuleImport}`);
   addRoute(tree, PLAYGROUND_ROUTING_MODULE_PATH, routesArray, routeString);
 }
 
@@ -202,7 +202,7 @@ export function addBaseRoute(tree: Tree, targetFile: Path): void {
   const baseRoute = findRouteWithPath(routesArray, [baseComponentPredicate(targetFile)]);
   if (baseRoute) {
     if (!getRouteChildren(baseRoute)) {
-      addObjectProperty(tree, getSourceFile(tree, baseModulePath), baseRoute, 'children: []');
+      addObjectProperty(tree, parseSourceFile(tree, baseModulePath), baseRoute, 'children: []');
     }
     return;
   }
@@ -220,7 +220,7 @@ export function addRoute(
   componentClass?: string,
   fileImportPath?: string,
 ): void {
-  const source = getSourceFile(tree, routingModulePath);
+  const source = parseSourceFile(tree, routingModulePath);
   const alreadyInRoutes = routes.getFullText().includes(route);
   if (alreadyInRoutes) {
     return;
@@ -365,9 +365,9 @@ export function componentRoutePredicate(componentClass: string, route: ts.Object
   return !!component && component.initializer.getText() === componentClass;
 }
 
-export function lazyModulePredicate(lazyModulePath: string, route: ts.ObjectLiteralExpression): boolean {
+export function lazyModulePredicate(lazyModuleImport: string, route: ts.ObjectLiteralExpression): boolean {
   const loadChildren = getRouteLazyModule(route);
-  return !!loadChildren && loadChildren.initializer.getText() === `'${lazyModulePath}'`;
+  return !!loadChildren && loadChildren.initializer.getText() === lazyModuleImport;
 }
 
 export function baseComponentPredicate(modulePath: Path): RoutePredicate {
@@ -379,9 +379,9 @@ export function rootRoutePredicate(modulePath: Path): RoutePredicate {
   const isLayout = isLayoutPath(modulePath);
   const baseModulePath = isLayout ? LAYOUT_MODULE_PATH : NO_LAYOUT_MODULE_PATH;
   const baseModuleClass = isLayout ? LAYOUT_MODULE_CLASS : NO_LAYOUT_MODULE_CLASS;
-  const lazyModulePath = generateLazyModulePath(PLAYGROUND_ROUTING_MODULE_PATH, baseModulePath, baseModuleClass);
+  const lazyModuleImport = generateLazyModuleImport(PLAYGROUND_ROUTING_MODULE_PATH, baseModulePath, baseModuleClass);
 
-  return (route: ts.ObjectLiteralExpression) => lazyModulePredicate(lazyModulePath, route);
+  return (route: ts.ObjectLiteralExpression) => lazyModulePredicate(lazyModuleImport, route);
 }
 
 export function isLazyRoute(route: ts.ObjectLiteralExpression): boolean {

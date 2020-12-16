@@ -10,6 +10,7 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 import { NbComponentStatus } from '../component-status';
 import { NbRenderableContainer } from '../cdk/overlay/overlay-container';
 import { NbPosition } from '../cdk/overlay/overlay-position';
+import { NbIconConfig } from '../icon/icon.component';
 
 
 /**
@@ -29,17 +30,30 @@ import { NbPosition } from '../cdk/overlay/overlay-position';
  * tooltip-text-font-size:
  * tooltip-text-font-weight:
  * tooltip-text-line-height:
+ * tooltip-icon-height:
+ * tooltip-icon-width:
  * tooltip-max-width:
+ * tooltip-basic-background-color:
+ * tooltip-basic-border-color:
+ * tooltip-basic-text-color:
  * tooltip-primary-background-color:
+ * tooltip-primary-border-color:
  * tooltip-primary-text-color:
  * tooltip-info-background-color:
+ * tooltip-info-border-color:
  * tooltip-info-text-color:
  * tooltip-success-background-color:
+ * tooltip-success-border-color:
  * tooltip-success-text-color:
  * tooltip-warning-background-color:
+ * tooltip-warning-border-color:
  * tooltip-warning-text-color:
  * tooltip-danger-background-color:
+ * tooltip-danger-border-color:
  * tooltip-danger-text-color:
+ * tooltip-control-background-color:
+ * tooltip-control-border-color:
+ * tooltip-control-text-color:
  * tooltip-shadow:
  */
 @Component({
@@ -48,7 +62,7 @@ import { NbPosition } from '../cdk/overlay/overlay-position';
   template: `
     <span class="arrow"></span>
     <div class="content">
-      <nb-icon *ngIf="context?.icon" [icon]="context.icon"></nb-icon>
+      <nb-icon *ngIf="context?.icon" [config]="context.icon"></nb-icon>
       <span *ngIf="content">{{ content }}</span>
     </div>
   `,
@@ -87,10 +101,14 @@ export class NbTooltipComponent implements NbRenderableContainer {
   }
 
   @Input()
-  context: { icon?: string, status?: '' | NbComponentStatus } = {};
+  context: { icon?: string | NbIconConfig, status?: NbComponentStatus } = {};
 
   get statusClass() {
-    return this.context.status ? `status-${this.context.status}` : '';
+    if (this.context.status) {
+      return `status-${this.context.status}`;
+    }
+
+    return '';
   }
 
   /**

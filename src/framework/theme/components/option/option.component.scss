@@ -1,0 +1,35 @@
+/*!
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
+@import '../../styles/core/mixins';
+
+:host {
+  display: flex;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  nb-checkbox {
+    display: flex;
+    pointer-events: none;
+    @include nb-ltr(margin-right, 0.5rem);
+    @include nb-rtl(margin-left, 0.5rem);
+
+    ::ng-deep .label {
+      padding: 0;
+    }
+  }
+}
+
+:host([disabled]) {
+  pointer-events: none;
+}
+
+:host(.nb-transition) {
+  @include nb-component-animation(background-color, color);
+}
+

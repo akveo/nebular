@@ -25,27 +25,72 @@ export interface NbRenderableContainer {
   renderContent();
 }
 
-export abstract class NbPositionedContainer {
+@Component({
+  template: '',
+})
+// @breaking-change @5.0.0 Rename to NbPositionedContainerComponent and enable ts lint
+// tslint:disable-next-line
+export class NbPositionedContainer {
   @Input() position: NbPosition;
 
   @HostBinding('class.nb-overlay-top')
   get top(): boolean {
-    return this.position === NbPosition.TOP
+    return this.position === NbPosition.TOP;
+  }
+
+  @HostBinding('class.nb-overlay-top-start')
+  get topStart(): boolean {
+    return this.position === NbPosition.TOP_START;
+  }
+
+  @HostBinding('class.nb-overlay-top-end')
+  get topEnd(): boolean {
+    return this.position === NbPosition.TOP_END;
   }
 
   @HostBinding('class.nb-overlay-right')
   get right(): boolean {
-    return this.position === NbPosition.RIGHT
+    return this.position === NbPosition.RIGHT || this.position === NbPosition.END;
+  }
+
+  @HostBinding('class.nb-overlay-end-top')
+  get endTop(): boolean {
+    return this.position === NbPosition.END_TOP;
+  }
+
+  @HostBinding('class.nb-overlay-end-bottom')
+  get endBottom(): boolean {
+    return this.position === NbPosition.END_BOTTOM;
   }
 
   @HostBinding('class.nb-overlay-bottom')
   get bottom(): boolean {
-    return this.position === NbPosition.BOTTOM
+    return this.position === NbPosition.BOTTOM;
+  }
+
+  @HostBinding('class.nb-overlay-bottom-start')
+  get bottomStart(): boolean {
+    return this.position === NbPosition.BOTTOM_START;
+  }
+
+  @HostBinding('class.nb-overlay-bottom-end')
+  get bottomEnd(): boolean {
+    return this.position === NbPosition.BOTTOM_END;
   }
 
   @HostBinding('class.nb-overlay-left')
   get left(): boolean {
-    return this.position === NbPosition.LEFT
+    return this.position === NbPosition.LEFT || this.position === NbPosition.START;
+  }
+
+  @HostBinding('class.nb-overlay-start-top')
+  get startTop(): boolean {
+    return this.position === NbPosition.START_TOP;
+  }
+
+  @HostBinding('class.nb-overlay-start-bottom')
+  get startBottom(): boolean {
+    return this.position === NbPosition.START_BOTTOM;
   }
 }
 

@@ -3,7 +3,6 @@
   "compilerOptions": {
     "outDir": "../out-tsc/app-wp",
     "baseUrl": "./",
-    "module": "es2015",
     "types": [],
     "paths": {
       "@nebular/*": [
@@ -11,8 +10,9 @@
       ]
     }
   },
-  "include": [
-    "../src/**/*.ts"
+  "files": [
+    "main.ts",
+    "polyfills.ts"
   ],
   "exclude": [
     "test.ts",

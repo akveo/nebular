@@ -6,7 +6,7 @@
 
 import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
 import { Subject } from 'rxjs';
-import { convertToBoolProperty } from '../helpers';
+import { convertToBoolProperty, NbBooleanInput } from '../helpers';
 
 /**
  * An accordion allows to toggle the display of sections of content
@@ -87,6 +87,7 @@ export class NbAccordionComponent {
   set multi(val: boolean) {
     this.multiValue = convertToBoolProperty(val);
   }
+  static ngAcceptInputType_multi: NbBooleanInput;
 
   private multiValue = false;
 

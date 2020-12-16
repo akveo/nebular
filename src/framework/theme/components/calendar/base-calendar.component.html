@@ -1,74 +1,51 @@
 <nb-card>
-  <nb-card-header *ngIf="showHeader">
-    <nb-calendar-header (navigateToday)="navigateToday()"></nb-calendar-header>
+  <nb-card-header *ngIf="showNavigation" class="calendar-navigation">
+    <nb-calendar-view-mode [date]="visibleDate"
+                           [viewMode]="activeViewMode"
+                           (changeMode)="onChangeViewMode()">
+    </nb-calendar-view-mode>
+
+    <nb-calendar-pageable-navigation (prev)="navigatePrev()" (next)="navigateNext()">
+    </nb-calendar-pageable-navigation>
   </nb-card-header>
 
   <nb-card-body [ngSwitch]="activeViewMode">
 
-    <ng-container *ngSwitchCase="ViewMode.DATE">
+    <nb-calendar-day-picker *ngSwitchCase="ViewMode.DATE"
+                            [boundingMonths]="boundingMonth"
+                            [cellComponent]="dayCellComponent"
+                            [min]="min"
+                            [max]="max"
+                            [filter]="filter"
+                            [visibleDate]="visibleDate"
+                            [size]="size"
+                            [date]="date"
+                            [showWeekNumber]="showWeekNumber"
+                            (dateChange)="dateChange.emit($any($event))"
+                            [weekNumberSymbol]="weekNumberSymbol">
+    </nb-calendar-day-picker>
 
-      <nb-calendar-pageable-navigation
-        *ngSwitchCase="ViewMode.DATE"
-        [date]="visibleDate"
-        (next)="nextMonth()"
-        (prev)="prevMonth()"
-        (changeMode)="setViewMode(ViewMode.YEAR)">
-      </nb-calendar-pageable-navigation>
+    <nb-calendar-year-picker *ngSwitchCase="ViewMode.YEAR"
+                             [cellComponent]="yearCellComponent"
+                             [date]="$any(date)"
+                             [min]="min"
+                             [max]="max"
+                             [filter]="filter"
+                             [size]="size"
+                             [year]="visibleDate"
+                             (yearChange)="setVisibleDate($event); setViewMode(ViewMode.MONTH)">
+    </nb-calendar-year-picker>
 
-      <nb-calendar-day-picker
-        [boundingMonths]="boundingMonth"
-        [cellComponent]="dayCellComponent"
-        [min]="min"
-        [max]="max"
-        [filter]="filter"
-        [visibleDate]="visibleDate"
-        [size]="size"
-        [date]="date"
-        (dateChange)="dateChange.emit($event)">
-      </nb-calendar-day-picker>
-
-    </ng-container>
-
-    <ng-container *ngSwitchCase="ViewMode.YEAR">
-
-      <nb-calendar-pageable-navigation
-        [date]="visibleDate"
-        (next)="nextYears()"
-        (prev)="prevYears()"
-        (changeMode)="setViewMode(ViewMode.DATE)">
-      </nb-calendar-pageable-navigation>
-
-      <nb-calendar-year-picker
-        [cellComponent]="yearCellComponent"
-        [date]="date"
-        [min]="min"
-        [max]="max"
-        [filter]="filter"
-        [size]="size"
-        [year]="visibleDate"
-        (yearChange)="setVisibleDate($event); setViewMode(ViewMode.MONTH)">
-      </nb-calendar-year-picker>
-
-    </ng-container>
-
-    <ng-container *ngSwitchCase="ViewMode.MONTH">
-
-      <nb-calendar-navigation
-        [date]="visibleDate"
-        (changeMode)="setViewMode(ViewMode.DATE)">
-      </nb-calendar-navigation>
-
-      <nb-calendar-month-picker
-        [cellComponent]="monthCellComponent"
-        [min]="min"
-        [max]="max"
-        [filter]="filter"
-        [size]="size"
-        [month]="visibleDate"
-        (monthChange)="setVisibleDate($event); setViewMode(ViewMode.DATE)">
-      </nb-calendar-month-picker>
-
-    </ng-container>
+    <nb-calendar-month-picker *ngSwitchCase="ViewMode.MONTH"
+                              [cellComponent]="monthCellComponent"
+                              [min]="min"
+                              [max]="max"
+                              [filter]="filter"
+                              [size]="size"
+                              [month]="visibleDate"
+                              [date]="$any(date)"
+                              (monthChange)="setVisibleDate($event); setViewMode(ViewMode.DATE)">
+    </nb-calendar-month-picker>
 
   </nb-card-body>
 

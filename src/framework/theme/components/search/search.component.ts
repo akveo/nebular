@@ -22,8 +22,8 @@ import {
 } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 
-import { of as observableOf } from 'rxjs';
-import { filter, delay, takeWhile } from 'rxjs/operators';
+import { of as observableOf, Subject } from 'rxjs';
+import { filter, delay, takeUntil } from 'rxjs/operators';
 
 import { NbSearchService } from './search.service';
 import { NbThemeService } from '../../services/theme.service';
@@ -87,7 +87,7 @@ export class NbSearchFieldComponent implements OnChanges, AfterViewInit {
   @Output() search = new EventEmitter();
   @Output() searchInput = new EventEmitter();
 
-  @ViewChild('searchInput', { static: false }) inputElement: ElementRef<HTMLInputElement>;
+  @ViewChild('searchInput') inputElement: ElementRef<HTMLInputElement>;
 
   @HostBinding('class.show')
   get showClass() {
@@ -238,7 +238,7 @@ export type NbSearchType = 'modal-zoomin' | 'rotate-layout' | 'modal-move' |
 })
 export class NbSearchComponent implements OnInit, OnDestroy {
 
-  private alive = true;
+  private destroy$ = new Subject<void>();
   private overlayRef: NbOverlayRef;
   showSearchField = false;
 
@@ -270,8 +270,8 @@ export class NbSearchComponent implements OnInit, OnDestroy {
    */
   @Input() type: NbSearchType;
 
-  @ViewChild(NbPortalDirective, { static: false }) searchFieldPortal: NbPortalDirective;
-  @ViewChild('searchButton', { read: ElementRef, static: false }) searchButton: ElementRef<HTMLElement>;
+  @ViewChild(NbPortalDirective) searchFieldPortal: NbPortalDirective;
+  @ViewChild('searchButton', { read: ElementRef }) searchButton: ElementRef<HTMLElement>;
 
   constructor(
     private searchService: NbSearchService,
@@ -284,22 +284,22 @@ export class NbSearchComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.router.events
       .pipe(
-        takeWhile(() => this.alive),
         filter(event => event instanceof NavigationEnd),
+        takeUntil(this.destroy$),
       )
       .subscribe(() => this.hideSearch());
 
     this.searchService.onSearchActivate()
       .pipe(
-        takeWhile(() => this.alive),
         filter(data => !this.tag || data.tag === this.tag),
+        takeUntil(this.destroy$),
       )
       .subscribe(() => this.openSearch());
 
     this.searchService.onSearchDeactivate()
       .pipe(
-        takeWhile(() => this.alive),
         filter(data => !this.tag || data.tag === this.tag),
+        takeUntil(this.destroy$),
       )
       .subscribe(() => this.hideSearch());
   }
@@ -310,7 +310,8 @@ export class NbSearchComponent implements OnInit, OnDestroy {
       this.overlayRef.detach();
     }
 
-    this.alive = false;
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   openSearch() {

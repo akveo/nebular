@@ -18,9 +18,10 @@ import {
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { convertToBoolProperty } from '../helpers';
+import { convertToBoolProperty, NbBooleanInput } from '../helpers';
 import { NbComponentStatus } from '../component-status';
 import { NbBadgePosition } from '../badge/badge.component';
+import { NbIconConfig } from '../icon/icon.component';
 
 /**
  * Specific tab container.
@@ -50,10 +51,30 @@ export class NbTabComponent {
   @Input() tabTitle: string;
 
   /**
-   * Tab icon
+   * Tab id
    * @type {string}
    */
-  @Input() tabIcon: string;
+  @Input() tabId: string;
+
+  /**
+   * Use badge dot mode
+   * @type {boolean}
+   */
+  @Input()
+  get badgeDot(): boolean {
+    return this._badgeDot;
+  }
+  set badgeDot(val: boolean) {
+    this._badgeDot = convertToBoolProperty(val);
+  }
+  protected _badgeDot: boolean;
+  static ngAcceptInputType_badgeDot: NbBooleanInput;
+
+  /**
+   * Tab icon name or icon config object
+   * @type {string | NbIconConfig}
+   */
+  @Input() tabIcon: string | NbIconConfig;
 
   /**
    * Item is disabled and cannot be opened.
@@ -67,6 +88,7 @@ export class NbTabComponent {
   set disabled(val: boolean) {
     this.disabledValue = convertToBoolProperty(val);
   }
+  static ngAcceptInputType_disabled: NbBooleanInput;
 
   /**
    * Show only icons when width is smaller than `tabs-icon-only-max-width`
@@ -76,10 +98,10 @@ export class NbTabComponent {
   set responsive(val: boolean) {
     this.responsiveValue = convertToBoolProperty(val);
   }
-
   get responsive() {
     return this.responsiveValue;
   }
+  static ngAcceptInputType_responsive: NbBooleanInput;
 
   @Input() route: string;
 
@@ -103,6 +125,7 @@ export class NbTabComponent {
       this.init = true;
     }
   }
+  static ngAcceptInputType_active: NbBooleanInput;
 
   /**
    * Lazy load content before tab selection
@@ -113,6 +136,7 @@ export class NbTabComponent {
   set lazyLoad(val: boolean) {
     this.init = convertToBoolProperty(val);
   }
+  static ngAcceptInputType_lazyLoad: NbBooleanInput;
 
   /**
    * Badge text to display
@@ -125,7 +149,7 @@ export class NbTabComponent {
    * 'primary', 'info', 'success', 'warning', 'danger'
    * @param {string} val
    */
-  @Input() badgeStatus: NbComponentStatus;
+  @Input() badgeStatus: NbComponentStatus = 'basic';
 
   /**
    * Badge position.
@@ -248,11 +272,12 @@ export class NbTabComponent {
           [attr.tabindex]="tab.disabled ? -1 : 0"
           class="tab">
         <a href (click)="$event.preventDefault()" tabindex="-1" class="tab-link">
-          <nb-icon *ngIf="tab.tabIcon" [icon]="tab.tabIcon"></nb-icon>
+          <nb-icon *ngIf="tab.tabIcon" [config]="tab.tabIcon"></nb-icon>
           <span *ngIf="tab.tabTitle" class="tab-text">{{ tab.tabTitle }}</span>
         </a>
-        <nb-badge *ngIf="tab.badgeText"
+        <nb-badge *ngIf="tab.badgeText || tab.badgeDot"
           [text]="tab.badgeText"
+          [dotMode]="tab.badgeDot"
           [status]="tab.badgeStatus"
           [position]="tab.badgePosition">
         </nb-badge>
@@ -276,6 +301,7 @@ export class NbTabsetComponent implements AfterContentInit {
   set fullWidth(val: boolean) {
     this.fullWidthValue = convertToBoolProperty(val);
   }
+  static ngAcceptInputType_fullWidth: NbBooleanInput;
 
   /**
    * If specified - tabset listens to this parameter and selects corresponding tab.

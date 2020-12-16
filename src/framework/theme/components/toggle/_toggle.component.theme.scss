@@ -1,0 +1,155 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
+@mixin nb-toggle-theme() {
+  nb-toggle {
+    .toggle {
+      height: nb-theme(toggle-height);
+      width: nb-theme(toggle-width);
+      border-width: nb-theme(toggle-border-width);
+      border-style: solid;
+      border-radius: nb-theme(toggle-border-radius);
+      cursor: nb-theme(toggle-cursor);
+
+      /*
+        We need to set initial positions as Angular animations won't work in IE11 if positions have no initial value.
+        Setting it in SCSS as we don't have access to theme variables from TS.
+      */
+      @include nb-ltr() {
+        &.checked .toggle-switcher {
+          left: calc(100%
+                     - #{nb-theme(toggle-switcher-size)}
+                     - #{nb-theme(toggle-border-width)}
+                     - #{nb-theme(toggle-border-width)});
+        }
+
+        &:not(.checked) .toggle-switcher {
+          right: 0;
+        }
+      }
+
+      @include nb-rtl() {
+        &.checked .toggle-switcher {
+          right: calc(100%
+                      - #{nb-theme(toggle-switcher-size)}
+                      - #{nb-theme(toggle-border-width)}
+                      - #{nb-theme(toggle-border-width)});
+        }
+
+        &:not(.checked) .toggle-switcher {
+          left: 0;
+        }
+      }
+    }
+
+    .native-input:enabled:focus + .toggle {
+      @include nb-outline(nb-theme(toggle-outline-width), nb-theme(toggle-outline-color));
+    }
+
+    .native-input:disabled + .toggle {
+      cursor: nb-theme(toggle-disabled-cursor);
+    }
+
+    .toggle-switcher {
+      width: nb-theme(toggle-switcher-size);
+      height: nb-theme(toggle-switcher-size);
+
+      nb-icon {
+        height: nb-theme(toggle-switcher-icon-size);
+        width: nb-theme(toggle-switcher-icon-size);
+      }
+    }
+
+    .text {
+      font-family: nb-theme(toggle-text-font-family);
+      font-size: nb-theme(toggle-text-font-size);
+      font-weight: nb-theme(toggle-text-font-weight);
+      line-height: nb-theme(toggle-text-line-height);
+    }
+  }
+
+  @each $status in nb-get-statuses() {
+    @include nb-toggle-status($status);
+  }
+}
+
+@mixin nb-toggle-status($status) {
+  nb-toggle.status-#{$status} {
+
+    .text {
+      color: nb-theme(toggle-#{$status}-text-color);
+    }
+
+    .toggle {
+      background-color: nb-theme(toggle-#{$status}-background-color);
+      border-color: nb-theme(toggle-#{$status}-border-color);
+    }
+
+    .toggle.checked {
+      background-color: nb-theme(toggle-#{$status}-checked-background-color);
+      border-color: nb-theme(toggle-#{$status}-checked-border-color);
+    }
+
+    .native-input:enabled {
+      &:focus + .toggle {
+        background-color: nb-theme(toggle-#{$status}-focus-background-color);
+        border-color: nb-theme(toggle-#{$status}-focus-border-color);
+
+        &.checked {
+          background-color: nb-theme(toggle-#{$status}-focus-checked-background-color);
+          border-color: nb-theme(toggle-#{$status}-focus-checked-border-color);
+        }
+      }
+
+      &:active + .toggle {
+        background-color: nb-theme(toggle-#{$status}-active-background-color);
+        border-color: nb-theme(toggle-#{$status}-active-border-color);
+
+        &.checked {
+          background-color: nb-theme(toggle-#{$status}-active-checked-background-color);
+          border-color: nb-theme(toggle-#{$status}-active-checked-border-color);
+        }
+      }
+    }
+
+    .native-input:enabled + .toggle:hover {
+      background-color: nb-theme(toggle-#{$status}-hover-background-color);
+      border-color: nb-theme(toggle-#{$status}-hover-border-color);
+
+      &.checked {
+        background-color: nb-theme(toggle-#{$status}-hover-checked-background-color);
+        border-color: nb-theme(toggle-#{$status}-hover-checked-border-color);
+      }
+    }
+
+    .toggle-switcher {
+      background-color: nb-theme(toggle-#{$status}-checked-switcher-background-color);
+
+      nb-icon {
+        color: nb-theme(toggle-#{$status}-checked-switcher-checkmark-color);
+      }
+    }
+
+    .native-input:disabled {
+      & + .toggle {
+        background-color: nb-theme(toggle-#{$status}-disabled-background-color);
+        border-color: nb-theme(toggle-#{$status}-disabled-border-color);
+
+        .toggle-switcher {
+          background-color: nb-theme(toggle-#{$status}-disabled-switcher-background-color);
+
+          nb-icon {
+            color: nb-theme(toggle-#{$status}-disabled-checked-switcher-checkmark-color);
+          }
+        }
+      }
+
+      & ~ .text {
+        color: nb-theme(toggle-#{$status}-disabled-text-color);
+      }
+    }
+  }
+}

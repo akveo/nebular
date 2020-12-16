@@ -11,7 +11,7 @@ In case you need to have more icons available, Nebular provides a `@nebular/eva-
 Install the pack:
 
  ```sh
- npm i @nebular/eva-icons@next
+ npm i eva-icons @nebular/eva-icons
  ```
 
 This command will install Eva Icons pack. Then register `NbEvaIconsModule` into your app module:
@@ -91,7 +91,7 @@ If the icons are provided as SVG elements, you can register the pack as follows:
   import { NbIconLibraries } from '@nebular/theme';
 
   constructor(private iconLibraries: NbIconLibraries) {
-    this.iconsLibrary.registerSvgPack('social-networks', {
+    this.iconLibraries.registerSvgPack('social-networks', {
           'facebook': '<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24"> ... </svg>',
           'twitter': '<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24"> ... </svg>',
           // ...

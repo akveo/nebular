@@ -5,18 +5,18 @@
  */
 
 @mixin nb-scrollbars($fg, $bg, $size, $border-radius: $size / 2) {
-  ::-webkit-scrollbar {
+  &::-webkit-scrollbar {
     width: $size;
     height: $size;
   }
 
-  ::-webkit-scrollbar-thumb {
+  &::-webkit-scrollbar-thumb {
     background: $fg;
     cursor: pointer;
     border-radius: $border-radius;
   }
 
-  ::-webkit-scrollbar-track {
+  &::-webkit-scrollbar-track {
     background: $bg;
   }
 
@@ -30,6 +30,18 @@
   @for $i from $from through $to {
     h#{$i} {
       margin: 0;
+    }
+  }
+}
+
+@mixin nb-outline($outline-width, $outline-color, $inset-shadow-length: 0) {
+  $outset-shadow: 0 0 0 $outline-width $outline-color;
+  box-shadow: $outset-shadow;
+
+  @if ($inset-shadow-length != 0) {
+    &:not(:hover):not(:active) {
+      $inset-shadow: inset $inset-shadow-length $outline-color;
+      box-shadow: $outset-shadow, $inset-shadow;
     }
   }
 }

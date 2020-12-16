@@ -56,7 +56,8 @@ export class NgdStructureService {
       }
 
       if (item.block === 'markdown') {
-        item.children = this.textService.mdToSectionsHTML(require(`raw-loader!../../../articles/${item.source}`));
+        const article = require(`raw-loader!../../../articles/${item.source}`).default;
+        item.children = this.textService.mdToSectionsHTML(article);
       }
 
       if (item.children) {
@@ -93,9 +94,13 @@ export class NgdStructureService {
   }
 
   protected prepareComponent(component: any) {
-    const textNodes = component.overview.filter(node => node.type === 'text');
-    if (textNodes && textNodes.length) {
-      textNodes[0].content = `## ${component.name}\n\n${textNodes[0].content}`; // TODO: this is bad
+    if (!component.isPrepared) {
+      const textNodes = component.overview.filter(node => node.type === 'text');
+      if (textNodes && textNodes.length) {
+        textNodes[0].content = `## ${component.name}\n\n${textNodes[0].content}`; // TODO: this is bad
+      }
+      // Set isPrepared property to skip repeatin sources in structure.ts
+      component.isPrepared = true;
     }
     return {
       ... component,

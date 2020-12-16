@@ -11,15 +11,16 @@ import {
   NbFlexibleConnectedPositionStrategy,
   NbOverlayPositionBuilder,
   NbOverlayRef,
-  NbPlatform,
   NbPositionStrategy,
 } from './mapping';
+import { NbPlatform } from '../platform/platform-service';
 import { NbOverlayContainerAdapter } from '../adapter/overlay-container-adapter';
 import { NbViewportRulerAdapter } from '../adapter/viewport-ruler-adapter';
 import { NbGlobalLogicalPosition } from './position-helper';
 import { GlobalPositionStrategy } from '@angular/cdk/overlay';
 
 
+export type NbAdjustmentValues = 'noop' | 'clockwise' | 'counterclockwise' | 'vertical' | 'horizontal';
 export enum NbAdjustment {
   NOOP = 'noop',
   CLOCKWISE = 'clockwise',
@@ -28,6 +29,8 @@ export enum NbAdjustment {
   HORIZONTAL = 'horizontal',
 }
 
+// tslint:disable-next-line:max-line-length
+export type NbPositionValues = 'top' | 'bottom' | 'left' | 'right' | 'start' | 'end' | 'top-end' | 'top-start' | 'bottom-end' | 'bottom-start' | 'end-top' | 'end-bottom' | 'start-top' | 'start-bottom';
 export enum NbPosition {
   TOP = 'top',
   BOTTOM = 'bottom',
@@ -35,6 +38,14 @@ export enum NbPosition {
   RIGHT = 'right',
   START = 'start',
   END = 'end',
+  TOP_END = 'top-end',
+  TOP_START = 'top-start',
+  BOTTOM_END = 'bottom-end',
+  BOTTOM_START = 'bottom-start',
+  END_TOP = 'end-top',
+  END_BOTTOM = 'end-bottom',
+  START_TOP = 'start-top',
+  START_BOTTOM = 'start-bottom',
 }
 
 const POSITIONS = {
@@ -50,11 +61,66 @@ const POSITIONS = {
   [NbPosition.TOP](offset) {
     return { originX: 'center', originY: 'top', overlayX: 'center', overlayY: 'bottom', offsetY: -offset };
   },
+  [NbPosition.START](offset) {
+    return this[NbPosition.LEFT](offset);
+  },
+  [NbPosition.END](offset) {
+    return this[NbPosition.RIGHT](offset);
+  },
+  [NbPosition.END_TOP](offset) {
+    return { originX: 'end', originY: 'bottom', overlayX: 'start', overlayY: 'bottom', offsetX: offset };
+  },
+  [NbPosition.END_BOTTOM](offset) {
+    return { originX: 'end', originY: 'top', overlayX: 'start', overlayY: 'top', offsetX: offset };
+  },
+  [NbPosition.BOTTOM_START](offset) {
+    return { originX: 'end', originY: 'bottom', overlayX: 'end', overlayY: 'top', offsetY: offset };
+  },
+  [NbPosition.BOTTOM_END](offset) {
+    return { originX: 'start', originY: 'bottom', overlayX: 'start', overlayY: 'top', offsetY: offset };
+  },
+  [NbPosition.START_TOP](offset) {
+    return { originX: 'start', originY: 'bottom', overlayX: 'end', overlayY: 'bottom', offsetX: -offset };
+  },
+  [NbPosition.START_BOTTOM](offset) {
+    return { originX: 'start', originY: 'top', overlayX: 'end', overlayY: 'top', offsetX: -offset };
+  },
+  [NbPosition.TOP_START](offset) {
+    return { originX: 'end', originY: 'top', overlayX: 'end', overlayY: 'bottom', offsetY: -offset };
+  },
+  [NbPosition.TOP_END](offset) {
+    return { originX: 'start', originY: 'top', overlayX: 'start', overlayY: 'bottom', offsetY: -offset };
+  },
 };
 
-const COUNTER_CLOCKWISE_POSITIONS = [NbPosition.TOP, NbPosition.LEFT, NbPosition.BOTTOM, NbPosition.RIGHT];
-const NOOP_POSITIONS = [NbPosition.TOP, NbPosition.BOTTOM, NbPosition.LEFT, NbPosition.RIGHT];
-const CLOCKWISE_POSITIONS = [NbPosition.TOP, NbPosition.RIGHT, NbPosition.BOTTOM, NbPosition.LEFT];
+const COUNTER_CLOCKWISE_POSITIONS = [
+  NbPosition.TOP,
+  NbPosition.TOP_END,
+  NbPosition.TOP_START,
+  NbPosition.START,
+  NbPosition.START_TOP,
+  NbPosition.START_BOTTOM,
+  NbPosition.BOTTOM,
+  NbPosition.BOTTOM_START,
+  NbPosition.BOTTOM_END,
+  NbPosition.END,
+  NbPosition.END_BOTTOM,
+  NbPosition.END_TOP,
+];
+const CLOCKWISE_POSITIONS = [
+  NbPosition.TOP,
+  NbPosition.TOP_START,
+  NbPosition.TOP_END,
+  NbPosition.END,
+  NbPosition.END_TOP,
+  NbPosition.END_BOTTOM,
+  NbPosition.BOTTOM,
+  NbPosition.BOTTOM_END,
+  NbPosition.BOTTOM_START,
+  NbPosition.START,
+  NbPosition.START_BOTTOM,
+  NbPosition.START_TOP,
+];
 const VERTICAL_POSITIONS = [NbPosition.BOTTOM, NbPosition.TOP];
 const HORIZONTAL_POSITIONS = [NbPosition.START, NbPosition.END];
 
@@ -126,7 +192,7 @@ export class NbAdjustableConnectedPositionStrategy
   protected createPositions(): NbPosition[] {
     switch (this._adjustment) {
       case NbAdjustment.NOOP:
-        return NOOP_POSITIONS.filter(position => this._position === position);
+        return [ this._position ];
       case NbAdjustment.CLOCKWISE:
         return this.reorderPreferredPositions(CLOCKWISE_POSITIONS);
       case NbAdjustment.COUNTERCLOCKWISE:
@@ -146,10 +212,22 @@ export class NbAdjustableConnectedPositionStrategy
   }
 
   protected reorderPreferredPositions(positions: NbPosition[]): NbPosition[] {
-    const cpy = positions.slice();
-    const startIndex = positions.indexOf(this._position);
-    const start = cpy.splice(startIndex);
-    return start.concat(...cpy);
+    // Physical positions should be mapped to logical as adjustments use logical positions.
+    const startPositionIndex = positions.indexOf(this.mapToLogicalPosition(this._position));
+    const firstPart = positions.slice(startPositionIndex);
+    const secondPart = positions.slice(0, startPositionIndex);
+    return firstPart.concat(secondPart);
+  }
+
+  protected mapToLogicalPosition(position: NbPosition): NbPosition {
+    if (position === NbPosition.LEFT) {
+      return NbPosition.START;
+    }
+    if (position === NbPosition.RIGHT) {
+      return NbPosition.END;
+    }
+
+    return position;
   }
 }
 

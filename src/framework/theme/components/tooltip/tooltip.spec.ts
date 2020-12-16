@@ -1,7 +1,9 @@
 import { Component, ElementRef, Input, NgModule, Type, ViewChild } from '@angular/core';
-import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
+import { Subject } from 'rxjs';
+import createSpy = jasmine.createSpy;
 
 import { NbThemeModule } from '../../theme.module';
 import { NbLayoutModule } from '../layout/layout.module';
@@ -14,6 +16,7 @@ import { NbTooltipDirective } from './tooltip.directive';
 import { NbTooltipModule } from './tooltip.module';
 import { NbTooltipComponent } from './tooltip.component';
 import { NbIconLibraries } from '../icon/icon-libraries';
+import { NbOverlayConfig } from '../cdk/overlay/mapping';
 
 @Component({
   selector: 'nb-tooltip-default-test',
@@ -26,8 +29,8 @@ import { NbIconLibraries } from '../icon/icon-libraries';
   `,
 })
 export class NbTooltipDefaultTestComponent {
-  @ViewChild('button', { static: false }) button: ElementRef;
-  @ViewChild(NbTooltipDirective, { static: false }) tooltip: NbTooltipDirective;
+  @ViewChild('button') button: ElementRef;
+  @ViewChild(NbTooltipDirective) tooltip: NbTooltipDirective;
 }
 
 @Component({
@@ -40,21 +43,23 @@ export class NbTooltipDefaultTestComponent {
           [nbTooltipPlacement]="position"
           [nbTooltipAdjustment]="adjustment"
           [nbTooltipStatus]="status"
-          [nbTooltipIcon]="icon">
+          [nbTooltipIcon]="icon"
+          [nbTooltipClass]="tooltipClass">
         </button>
       </nb-layout-column>
     </nb-layout>
   `,
 })
 export class NbTooltipBindingsTestComponent {
-  @ViewChild(NbTooltipDirective, { static: false }) tooltip: NbTooltipDirective;
-  @ViewChild('button', { static: false }) button: ElementRef;
+  @ViewChild(NbTooltipDirective) tooltip: NbTooltipDirective;
+  @ViewChild('button') button: ElementRef;
   @Input() content: any = '';
   @Input() status = 'primary';
   @Input() icon = '';
   @Input() trigger = NbTrigger.CLICK;
   @Input() position = NbPosition.TOP;
   @Input() adjustment = NbAdjustment.CLOCKWISE;
+  tooltipClass = '';
 }
 
 @Component({
@@ -70,15 +75,17 @@ export class NbTooltipBindingsTestComponent {
   `,
 })
 export class NbTooltipInstanceTestComponent {
-  @ViewChild(NbTooltipDirective, { static: false }) tooltip: NbTooltipDirective;
-  @ViewChild('button', { static: false }) button: ElementRef;
+  @ViewChild(NbTooltipDirective) tooltip: NbTooltipDirective;
+  @ViewChild('button') button: ElementRef;
 }
 
+const dynamicOverlayIsShow$ = new Subject();
 const dynamicOverlay = {
   show() {},
   hide() {},
   toggle() {},
   destroy() {},
+  isShown: dynamicOverlayIsShow$,
 };
 
 export class NbDynamicOverlayHandlerMock {
@@ -90,6 +97,7 @@ export class NbDynamicOverlayHandlerMock {
   _position: NbPosition = NbPosition.TOP;
   _adjustment: NbAdjustment = NbAdjustment.NOOP;
   _offset: number;
+  _overlayConfig: NbOverlayConfig = {};
 
   constructor() {
   }
@@ -134,6 +142,11 @@ export class NbDynamicOverlayHandlerMock {
     return this;
   }
 
+  overlayConfig(overlayConfig: NbOverlayConfig) {
+    this._overlayConfig = overlayConfig;
+    return this;
+  }
+
   build() {
     return dynamicOverlay;
   }
@@ -169,7 +182,7 @@ describe('Directive: NbTooltipDirective', () => {
 
   const overlayHandler = new NbDynamicOverlayHandlerMock();
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.resetTestingModule();
     TestBed.configureTestingModule({
       imports: [
@@ -180,7 +193,7 @@ describe('Directive: NbTooltipDirective', () => {
       ],
     });
 
-    const iconLibs: NbIconLibraries = TestBed.get(NbIconLibraries);
+    const iconLibs: NbIconLibraries = TestBed.inject(NbIconLibraries);
     iconLibs.registerSvgPack('test', { 'some-icon': '<svg>some-icon</svg>' });
     iconLibs.setDefaultPack('test')
   }));
@@ -260,11 +273,61 @@ describe('Directive: NbTooltipDirective', () => {
       expect(iconContainer.className).toContain('status-danger');
     });
 
+    it('should emit show state change event when shows up', () => {
+      fixture = TestBed.createComponent(NbTooltipDefaultTestComponent);
+      fixture.detectChanges();
+      const tooltip: NbTooltipDirective = fixture.componentInstance.tooltip;
+
+      const stateChangeSpy = createSpy('stateChangeSpy');
+      tooltip.nbTooltipShowStateChange.subscribe(stateChangeSpy);
+
+      tooltip.show();
+      fixture.detectChanges();
+
+      expect(stateChangeSpy).toHaveBeenCalledTimes(1);
+      expect(stateChangeSpy).toHaveBeenCalledWith(jasmine.objectContaining({ isShown: true }));
+    });
+
+    it('should emit show state change event when hides', () => {
+      fixture = TestBed.createComponent(NbTooltipDefaultTestComponent);
+      fixture.detectChanges();
+      const tooltip: NbTooltipDirective = fixture.componentInstance.tooltip;
+      tooltip.show();
+      fixture.detectChanges();
+
+      const stateChangeSpy = createSpy('stateChangeSpy');
+      tooltip.nbTooltipShowStateChange.subscribe(stateChangeSpy);
+
+      tooltip.hide();
+      fixture.detectChanges();
+
+      expect(stateChangeSpy).toHaveBeenCalledTimes(1);
+      expect(stateChangeSpy).toHaveBeenCalledWith(jasmine.objectContaining({ isShown: false }));
+    });
+
+    it('should set isShown to false when hidden', () => {
+      fixture = TestBed.createComponent(NbTooltipDefaultTestComponent);
+      fixture.detectChanges();
+      const tooltip: NbTooltipDirective = fixture.componentInstance.tooltip;
+
+      expect(tooltip.isShown).toEqual(false);
+    });
+
+    it('should set isShown to true when shown', () => {
+      fixture = TestBed.createComponent(NbTooltipDefaultTestComponent);
+      fixture.detectChanges();
+      const tooltip: NbTooltipDirective = fixture.componentInstance.tooltip;
+      tooltip.show();
+      fixture.detectChanges();
+
+      expect(tooltip.isShown).toEqual(true);
+    });
+
   });
 
   describe('mocked services', () => {
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
       TestBed.resetTestingModule();
       TestBed.configureTestingModule({
         imports: [
@@ -273,7 +336,7 @@ describe('Directive: NbTooltipDirective', () => {
           PopoverTestModule,
         ],
       })
-        .overrideComponent(NbTooltipDirective, {
+        .overrideDirective(NbTooltipDirective, {
           set: {
             providers: [
               { provide: NbDynamicOverlayHandler, useValue: overlayHandler },
@@ -418,6 +481,17 @@ describe('Directive: NbTooltipDirective', () => {
         fixture.detectChanges();
         expect(contentSpy).toHaveBeenCalledTimes(3);
         expect(contentSpy).toHaveBeenCalledWith('new string');
+      });
+
+      it('should set overlay config', () => {
+        const tooltipClass = 'custom-popover-class';
+        const overlayConfigSpy = spyOn(overlayHandler, 'overlayConfig').and.callThrough();
+
+        fixture = TestBed.createComponent(NbTooltipBindingsTestComponent);
+        fixture.componentInstance.tooltipClass = tooltipClass;
+        fixture.detectChanges();
+
+        expect(overlayConfigSpy).toHaveBeenCalledWith(jasmine.objectContaining({ panelClass: tooltipClass }));
       });
     });
 

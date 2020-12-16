@@ -17,11 +17,6 @@
     line-height: nb-theme(sidebar-text-line-height);
     width: nb-theme(sidebar-width);
 
-    @include nb-scrollbars(
-        nb-theme(sidebar-scrollbar-color),
-        nb-theme(sidebar-scrollbar-background-color),
-        nb-theme(sidebar-scrollbar-width));
-
     .main-container {
       height: nb-theme(sidebar-height);
       width: nb-theme(sidebar-width);
@@ -36,6 +31,11 @@
         overflow-y: scroll;
         -webkit-overflow-scrolling: touch;
       }
+
+      @include nb-scrollbars(
+          nb-theme(sidebar-scrollbar-color),
+          nb-theme(sidebar-scrollbar-background-color),
+          nb-theme(sidebar-scrollbar-width));
     }
 
     // TODO: width used to use transition on width
@@ -84,7 +84,7 @@
         }
 
         > .menu-items > .menu-item > a {
-          span, .expand-state {
+          span, nb-badge, .expand-state {
             display: none;
           }
         }

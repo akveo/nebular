@@ -1,6 +1,7 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "module": "es2020",
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
     "declaration": false,
@@ -14,6 +15,15 @@
     "lib": [
       "es2017",
       "dom"
-    ]
+    ],
+    "baseUrl": ".",
+    "paths": {
+      "@nebular/*": [
+        "./src/framework/*/public_api.ts"
+      ]
+    }
+  },
+  "angularCompilerOptions": {
+    "strictTemplates": true
   }
 }

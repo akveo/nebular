@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { NbChatFormComponent, NbChatModule } from '@nebular/theme';
+import { NbChatFormComponent, NbChatModule, NbThemeModule } from '@nebular/theme';
 
 describe('NbChatFormComponent', () => {
   let fixture: ComponentFixture<NbChatFormComponent>;
@@ -7,7 +7,7 @@ describe('NbChatFormComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ NbChatModule.forRoot() ],
+      imports: [ NbThemeModule.forRoot(), NbChatModule.forRoot() ],
     });
 
     fixture = TestBed.createComponent(NbChatFormComponent);
@@ -18,8 +18,8 @@ describe('NbChatFormComponent', () => {
 
   describe('getInputStatus', () => {
 
-    it('should return no status by default', () => {
-      expect(chatFormComponent.getInputStatus()).toEqual('');
+    it('should return basic status by default', () => {
+      expect(chatFormComponent.getInputStatus()).toEqual('basic');
     });
 
     it('should return component status if input focused', () => {
@@ -36,17 +36,34 @@ describe('NbChatFormComponent', () => {
       expect(chatFormComponent.getInputStatus()).toEqual('info');
     });
 
-    it('should return component status if file over', () => {
+    it('should return primary if file over and status is basic or control', () => {
+      chatFormComponent.fileOver = true;
+
+      expect(chatFormComponent.getInputStatus()).toEqual('primary');
+    });
+
+    it('should return status if file over and status is not basic nor control', () => {
       chatFormComponent.status = 'info';
       chatFormComponent.fileOver = true;
 
       expect(chatFormComponent.getInputStatus()).toEqual('info');
     });
+  });
 
-    it('should return primary status if file over and no status set', () => {
-      chatFormComponent.fileOver = true;
+  describe('getButtonStatus', () => {
 
-      expect(chatFormComponent.getInputStatus()).toEqual('primary');
+    it('should return primary if status is basic or control', () => {
+      chatFormComponent.status = 'basic';
+      expect(chatFormComponent.getButtonStatus()).toEqual('primary');
+
+      chatFormComponent.status = 'control';
+      expect(chatFormComponent.getButtonStatus()).toEqual('primary');
+    });
+
+    it('should return status if status is not basic nor control', () => {
+      chatFormComponent.status = 'info';
+
+      expect(chatFormComponent.getButtonStatus()).toEqual('info');
     });
   });
 });

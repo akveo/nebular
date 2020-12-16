@@ -9,7 +9,7 @@
       "es2017"
     ],
     "outDir": "../out-tsc/spec",
-    "module": "commonjs",
+    "module": "es2020",
     "target": "es6",
     "baseUrl": "",
     "types": [

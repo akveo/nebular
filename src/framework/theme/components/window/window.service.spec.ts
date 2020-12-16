@@ -1,12 +1,14 @@
-import { Component, ElementRef, NgModule, ViewChild, TemplateRef } from '@angular/core';
-import { TestBed } from '@angular/core/testing';
-import { NB_DOCUMENT } from '../../theme.options';
-import { NbThemeModule } from '../../theme.module';
-import { NbOverlayContainerAdapter } from '../cdk/adapter/overlay-container-adapter';
-import { NbViewportRulerAdapter } from '../cdk/adapter/viewport-ruler-adapter';
-import { NbWindowModule } from './window.module';
-import { NbWindowService } from './window.service';
 import createSpy = jasmine.createSpy;
+import { Component, ElementRef, NgModule, ViewChild, TemplateRef } from '@angular/core';
+import { TestBed, fakeAsync, flush } from '@angular/core/testing';
+import {
+  NbWindowService,
+  NbWindowModule,
+  NbViewportRulerAdapter,
+  NbOverlayContainerAdapter,
+  NB_DOCUMENT,
+  NbThemeModule,
+} from '@nebular/theme';
 
 const WINDOW_CONTENT = 'window content';
 @Component({
@@ -24,7 +26,7 @@ class NbTestWindowComponent {}
   `,
 })
 class NbTestWindowWithTemplateComponent {
-  @ViewChild('contentTemplate', { static: false }) contentTemplate: TemplateRef<any>;
+  @ViewChild('contentTemplate') contentTemplate: TemplateRef<any>;
 
   constructor(private ws: NbWindowService) {}
 
@@ -38,7 +40,7 @@ class NbTestWindowWithTemplateComponent {
 
 @Component({
   selector: 'nb-test-window-with-component',
-  template: `<p>window content {{ componentInput }}<p>`,
+  template: `<p id="window-content">window content {{ componentInput }}<p>`,
 })
 export class TestWindowComponent {}
 
@@ -77,9 +79,9 @@ describe('window-service', () => {
         { provide: NbViewportRulerAdapter, useClass: NbViewportRulerAdapterMock },
       ],
     });
-    windowService = TestBed.get(NbWindowService);
-    overlayContainerService = TestBed.get(NbOverlayContainerAdapter);
-    document = TestBed.get(NB_DOCUMENT);
+    windowService = TestBed.inject(NbWindowService);
+    overlayContainerService = TestBed.inject(NbOverlayContainerAdapter);
+    document = TestBed.inject(NB_DOCUMENT);
   });
 
   beforeEach(() => {
@@ -259,4 +261,32 @@ describe('window-service', () => {
     const windowElement: ElementRef<HTMLElement> = windowRef.componentRef.injector.get(ElementRef);
     expect(windowElement.nativeElement.innerText).toEqual('window content hello world');
   });
+
+  it('should create new window container when overlay container changed', fakeAsync(() => {
+    const fixture = TestBed.createComponent(NbTestWindowWithTemplateComponent);
+    fixture.detectChanges();
+
+    // Show window to force windows container creation
+    const windowRef = fixture.componentInstance.openWindow();
+    fixture.detectChanges();
+    flush();
+
+    windowRef.close();
+    fixture.detectChanges();
+    flush();
+
+    // Change overlay container
+    overlayContainerService.ngOnDestroy();
+    overlayContainerService.clearContainer();
+    overlayContainer = document.createElement('div');
+    overlayContainerService.setContainer(overlayContainer);
+    document.body.appendChild(overlayContainer);
+
+    windowService.open(TestWindowComponent);
+    fixture.detectChanges();
+    flush();
+
+    const windowContent = document.getElementById('window-content');
+    expect(document.body.contains(windowContent)).toEqual(true);
+  }));
 });

@@ -1,14 +1,18 @@
-import { Injectable, NgZone } from '@angular/core';
+import { Inject, Injectable, NgZone } from '@angular/core';
 import { CdkScrollable, ScrollDispatcher } from '@angular/cdk/overlay';
 import { Observable } from 'rxjs';
 
-import { NbPlatform } from '../overlay/mapping';
+import { NbPlatform } from '../platform/platform-service';
 import { NbLayoutScrollService } from '../../../services/scroll.service';
+import { NB_DOCUMENT } from '../../../theme.options';
 
 @Injectable()
 export class NbScrollDispatcherAdapter extends ScrollDispatcher {
-  constructor(ngZone: NgZone, platform: NbPlatform, protected scrollService: NbLayoutScrollService) {
-    super(ngZone, platform);
+  constructor(ngZone: NgZone,
+              platform: NbPlatform,
+              protected scrollService: NbLayoutScrollService,
+              @Inject(NB_DOCUMENT) document: any) {
+    super(ngZone, platform, document);
   }
 
   scrolled(auditTimeInMs?: number): Observable<CdkScrollable | void> {

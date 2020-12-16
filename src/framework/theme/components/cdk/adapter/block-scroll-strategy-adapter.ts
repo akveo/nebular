@@ -29,6 +29,7 @@ export class NbBlockScrollStrategyAdapter extends BlockScrollStrategy {
   }
 }
 
+@Injectable()
 export class NbScrollStrategyOptions extends ScrollStrategyOptions {
   constructor(protected scrollService: NbLayoutScrollService,
               protected scrollDispatcher: ScrollDispatcher,

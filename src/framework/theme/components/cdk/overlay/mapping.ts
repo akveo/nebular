@@ -29,9 +29,8 @@ import {
   OverlayRef,
   PositionStrategy,
   ScrollStrategy,
-  ScrollStrategyOptions,
 } from '@angular/cdk/overlay';
-import { Platform } from '@angular/cdk/platform';
+import { NbScrollStrategyOptions } from '../adapter/block-scroll-strategy-adapter';
 
 
 @Directive({ selector: '[nbPortal]' })
@@ -47,10 +46,7 @@ export class NbComponentPortal<T = any> extends ComponentPortal<T> {
 
 @Injectable()
 export class NbOverlay extends Overlay {
-}
-
-@Injectable()
-export class NbPlatform extends Platform {
+  scrollStrategies: NbScrollStrategyOptions;
 }
 
 @Injectable()
@@ -63,6 +59,7 @@ export class NbTemplatePortal<T = any> extends TemplatePortal<T> {
   }
 }
 
+@Injectable()
 export class NbOverlayContainer extends OverlayContainer {
 }
 
@@ -80,7 +77,6 @@ export type NbConnectedPosition = ConnectedPosition;
 export type NbConnectedOverlayPositionChange = ConnectedOverlayPositionChange;
 export type NbConnectionPositionPair = ConnectionPositionPair;
 export type NbOverlayConfig = OverlayConfig;
-export type NbScrollStrategyOptions = ScrollStrategyOptions;
 export type NbScrollStrategy = ScrollStrategy;
 
 const CDK_MODULES = [OverlayModule, PortalModule];
@@ -99,12 +95,11 @@ const CDK_MODULES = [OverlayModule, PortalModule];
   declarations: [NbPortalDirective, NbPortalOutletDirective],
 })
 export class NbCdkMappingModule {
-  static forRoot(): ModuleWithProviders {
-    return <ModuleWithProviders> {
+  static forRoot(): ModuleWithProviders<NbCdkMappingModule> {
+    return {
       ngModule: NbCdkMappingModule,
       providers: [
         NbOverlay,
-        NbPlatform,
         NbOverlayPositionBuilder,
       ],
     };

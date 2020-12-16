@@ -7,7 +7,7 @@
 import * as ts from 'typescript';
 import { dirname, join, normalize, Path, PathFragment } from '@angular-devkit/core';
 import { DirEntry, SchematicsException, Tree, Rule } from '@angular-devkit/schematics';
-import { getSourceFile } from '@angular/cdk/schematics';
+import { parseSourceFile } from '@angular/cdk/schematics';
 import {
   addTrailingCommas,
   applyReplaceChange,
@@ -22,7 +22,7 @@ import {
   isComponentRoute,
   isLazyRoute,
   isRoutingModule,
-  lazyRoutePathToFilePath,
+  lazyModuleImportToFilePath,
   removePropsQuotes,
   singleQuotes,
   splitClassName,
@@ -45,7 +45,7 @@ export function playgroundComponents(): Rule {
 }
 
 function generateComponentsList(tree: Tree): void {
-  const componentsListFile = getSourceFile(tree, COMPONENTS_LIST_FILE_PATH);
+  const componentsListFile = parseSourceFile(tree, COMPONENTS_LIST_FILE_PATH);
   const componentsListArray = getComponentsListArray(componentsListFile);
   const routes = removeRoutesWithoutPath(findRoutesInDir(tree, getPlaygroundRootDir(tree)));
   updateComponentsFile(tree, componentsListFile, componentsListArray, routes);
@@ -119,8 +119,8 @@ function getLazyModuleRoutes(
 ): ComponentLink[] {
   const lazyModule = getRouteLazyModule(route);
   if (lazyModule) {
-    const lazyModulePath = lazyModule && trimQuotes(lazyModule.initializer.getText());
-    const moduleDirPath = dirname(lazyRoutePathToFilePath(lazyModulePath) as Path) as PathFragment;
+    const lazyModuleImport = lazyModule.initializer.getText();
+    const moduleDirPath = dirname(lazyModuleImportToFilePath(lazyModuleImport) as Path) as PathFragment;
     return findRoutesInDir(tree, routingModuleDir.dir(moduleDirPath));
   }
   return [];

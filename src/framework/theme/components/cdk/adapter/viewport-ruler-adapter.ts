@@ -1,18 +1,20 @@
-import { Injectable, NgZone } from '@angular/core';
+import { Inject, Injectable, NgZone } from '@angular/core';
 import { ViewportRuler } from '@angular/cdk/overlay';
 import { map } from 'rxjs/operators';
 
-import { NbPlatform } from '../overlay/mapping';
+import { NbPlatform } from '../platform/platform-service';
 import { NbLayoutRulerService } from '../../../services/ruler.service';
 import { NbLayoutScrollService, NbScrollPosition } from '../../../services/scroll.service';
+import { NB_DOCUMENT } from '../../../theme.options';
 
 
 @Injectable()
 export class NbViewportRulerAdapter extends ViewportRuler {
   constructor(platform: NbPlatform, ngZone: NgZone,
               protected ruler: NbLayoutRulerService,
-              protected scroll: NbLayoutScrollService) {
-    super(platform, ngZone);
+              protected scroll: NbLayoutScrollService,
+              @Inject(NB_DOCUMENT) document: any) {
+    super(platform, ngZone, document);
   }
 
   getViewportSize(): Readonly<{ width: number; height: number; }> {

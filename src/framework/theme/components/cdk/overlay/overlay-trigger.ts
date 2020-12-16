@@ -3,6 +3,7 @@ import { EMPTY, fromEvent as observableFromEvent, merge as observableMerge, Obse
 import { debounceTime, delay, filter, map, repeat, share, switchMap, takeUntil, takeWhile } from 'rxjs/operators';
 import { NB_DOCUMENT } from '../../../theme.options';
 
+export type NbTriggerValues = 'noop' | 'click' | 'hover' | 'hint' | 'focus';
 export enum NbTrigger {
   NOOP = 'noop',
   CLICK = 'click',
@@ -102,14 +103,13 @@ export class NbHoverTriggerStrategy extends NbTriggerStrategyBase {
   show$: Observable<Event> = observableFromEvent<Event>(this.host, 'mouseenter')
     .pipe(
       filter(() => !this.container()),
+      // this `delay & takeUntil & repeat` operators combination is a synonym for `conditional debounce`
+      // meaning that if one event occurs in some time after the initial one we won't react to it
       delay(100),
-      takeUntil(
-        observableMerge(
-          observableFromEvent(this.host, 'mouseleave'),
-          this.destroyed$,
-        ),
-      ),
+      // tslint:disable-next-line:rxjs-no-unsafe-takeuntil
+      takeUntil(observableFromEvent(this.host, 'mouseleave')),
       repeat(),
+      takeUntil(this.destroyed$),
     );
 
   hide$: Observable<Event> = observableFromEvent<Event>(this.host, 'mouseleave')
@@ -133,16 +133,13 @@ export class NbHoverTriggerStrategy extends NbTriggerStrategyBase {
 export class NbHintTriggerStrategy extends NbTriggerStrategyBase {
   show$: Observable<Event> = observableFromEvent<Event>(this.host, 'mouseenter')
     .pipe(
-      delay(100),
-      takeUntil(
-        observableMerge(
-          observableFromEvent(this.host, 'mouseleave'),
-          this.destroyed$,
-        ),
-      ),
       // this `delay & takeUntil & repeat` operators combination is a synonym for `conditional debounce`
       // meaning that if one event occurs in some time after the initial one we won't react to it
+      delay(100),
+      // tslint:disable-next-line:rxjs-no-unsafe-takeuntil
+      takeUntil(observableFromEvent(this.host, 'mouseleave')),
       repeat(),
+      takeUntil(this.destroyed$),
     );
 
   hide$: Observable<Event> = observableFromEvent(this.host, 'mouseleave')
@@ -192,13 +189,10 @@ export class NbFocusTriggerStrategy extends NbTriggerStrategyBase {
     .pipe(
       filter(() => !this.container()),
       debounceTime(100),
-      takeUntil(
-        observableMerge(
-          observableFromEvent(this.host, 'focusout'),
-          this.destroyed$,
-        ),
-      ),
+      // tslint:disable-next-line:rxjs-no-unsafe-takeuntil
+      takeUntil(observableFromEvent(this.host, 'focusout')),
       repeat(),
+      takeUntil(this.destroyed$),
     );
 
   hide$ = observableMerge(this.focusOut$, this.tabKeyPress$, this.clickOut$)
