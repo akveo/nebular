@@ -416,25 +416,26 @@ export class NbSidebarComponent implements OnInit, OnDestroy {
         const isCollapsed = this.collapsedBreakpoints.includes(current.name);
         const isCompacted = this.compactedBreakpoints.includes(current.name);
 
-        const oldResponsiveState = this.responsiveState;
+        let newResponsiveState;
 
         if (isCompacted) {
           this.fixed = this.containerFixedValue;
           this.compact();
-          this.responsiveState = 'tablet';
+          newResponsiveState = 'tablet';
         }
         if (isCollapsed) {
           this.fixed = true;
           this.collapse();
-          this.responsiveState = 'mobile';
+          newResponsiveState = 'mobile';
         }
         if (!isCollapsed && !isCompacted && prev.width < current.width) {
           this.expand();
           this.fixed = false;
-          this.responsiveState = 'pc';
+          newResponsiveState = 'pc';
         }
 
-        if (this.responsiveState !== oldResponsiveState) {
+        if (newResponsiveState && newResponsiveState !== this.responsiveState) {
+          this.responsiveState = newResponsiveState;
           this.responsiveStateChange.emit(this.responsiveState);
         }
       });
