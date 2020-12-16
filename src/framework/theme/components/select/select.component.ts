@@ -622,7 +622,6 @@ export class NbSelectComponent implements OnChanges, AfterViewInit, AfterContent
     this._isEqual = fn;
   }
   protected _isEqual: NbSelectCompareFunction = (v1: any, v2: any) => v1 === v2;
-  static ngAcceptInputType_compareFn: NbSelectCompareFunction;
 
   /**
    * Accepts selected item or array of selected items.
