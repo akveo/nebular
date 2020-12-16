@@ -616,14 +616,14 @@ export class NbSelectComponent implements OnChanges, AfterViewInit, AfterContent
    */
   @Input()
   get compareFn(): NbSelectCompareFunction {
-    return this._isEqual;
+    return this._compareFn;
   }
   set compareFn(fn: NbSelectCompareFunction) {
     if (typeof fn === 'function') {
-      this._isEqual = fn;
+      this._compareFn = fn;
     }
   }
-  protected _isEqual: NbSelectCompareFunction = (v1: any, v2: any) => v1 === v2;
+  protected _compareFn: NbSelectCompareFunction = (v1: any, v2: any) => v1 === v2;
 
   /**
    * Accepts selected item or array of selected items.
@@ -942,7 +942,7 @@ export class NbSelectComponent implements OnChanges, AfterViewInit, AfterContent
   protected handleSingleSelect(option: NbOptionComponent) {
     const selected = this.selectionModel.pop();
 
-    if (selected && !this._isEqual(selected.value, option.value)) {
+    if (selected && !this._compareFn(selected.value, option.value)) {
       selected.deselect();
     }
 
@@ -959,7 +959,7 @@ export class NbSelectComponent implements OnChanges, AfterViewInit, AfterContent
    * */
   protected handleMultipleSelect(option: NbOptionComponent) {
     if (option.selected) {
-      this.selectionModel = this.selectionModel.filter(s => !this._isEqual(s.value, option.value));
+      this.selectionModel = this.selectionModel.filter(s => !this._compareFn(s.value, option.value));
       option.deselect();
     } else {
       this.selectionModel.push(option);
@@ -1140,7 +1140,7 @@ export class NbSelectComponent implements OnChanges, AfterViewInit, AfterContent
    * Selects value.
    * */
   protected selectValue(value) {
-    const corresponding = this.options.find((option: NbOptionComponent) => this._isEqual(option.value, value));
+    const corresponding = this.options.find((option: NbOptionComponent) => this._compareFn(option.value, value));
 
     if (corresponding) {
       corresponding.select();
