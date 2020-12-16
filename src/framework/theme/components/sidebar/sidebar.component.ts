@@ -322,6 +322,11 @@ export class NbSidebarComponent implements OnInit, OnDestroy {
    */
   @Output() readonly stateChange = new EventEmitter<NbSidebarState>();
 
+  /**
+   * Emits whenever sidebar responsive state change.
+   */
+  @Output() readonly responsiveStateChange = new EventEmitter<NbSidebarResponsiveState>();
+
   constructor(private sidebarService: NbSidebarService,
     private themeService: NbThemeService,
     private element: ElementRef) {
@@ -451,6 +456,8 @@ export class NbSidebarComponent implements OnInit, OnDestroy {
         const isCollapsed = this.collapsedBreakpoints.includes(current.name);
         const isCompacted = this.compactedBreakpoints.includes(current.name);
 
+        const oldResponsiveState = this.responsiveState;
+
         if (isCompacted) {
           this.fixed = this.containerFixedValue;
           this.compact();
@@ -465,6 +472,10 @@ export class NbSidebarComponent implements OnInit, OnDestroy {
           this.expand();
           this.fixed = false;
           this.responsiveState = 'pc';
+        }
+
+        if (this.responsiveState !== oldResponsiveState) {
+          this.responsiveStateChange.emit(this.responsiveState);
         }
       });
   }
