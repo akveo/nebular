@@ -66,12 +66,6 @@ export class NbToastrConfig {
    * */
   icon: string | NbIconConfig = 'email';
   /**
-   * Icon pack to look for the icon in.
-   * @deprecated Set pack via icon config object passed to icon property
-   * @breaking-change 5.0.0
-   * */
-  iconPack: string;
-  /**
    * Toast status icon-class mapping.
    * */
   protected icons: IconToClassMap = {

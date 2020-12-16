@@ -157,31 +157,6 @@ export class NbToastComponent implements OnInit {
     return this.toast.config.icon;
   }
 
-  /* @deprecated Use pack property of icon config */
-  get iconPack(): string {
-    return this.toast.config.iconPack;
-  }
-
-  /*
-    @breaking-change 5 remove
-    @deprecated
-  */
-  get iconConfig(): NbIconConfig {
-    const toastConfig = this.toast.config;
-    const isIconName = typeof this.icon === 'string';
-
-    if (!isIconName) {
-      return toastConfig.icon as NbIconConfig;
-    }
-
-    const iconConfig: NbIconConfig = { icon: toastConfig.icon as string };
-    if (toastConfig.iconPack) {
-      iconConfig.pack = toastConfig.iconPack;
-    }
-
-    return iconConfig;
-  }
-
   @HostListener('click')
   onClick() {
     this.destroy.emit();
