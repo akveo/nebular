@@ -611,7 +611,8 @@ export class NbSelectComponent implements OnChanges, AfterViewInit, AfterContent
   @Input() placeholder: string = '';
 
   /**
-   * Custom function for comparing option values
+   * A function to compare option value with selected value.
+   * By default, values are compared with strict equality (`===`).
    */
   @Input()
   get compareFn(): NbSelectCompareFunction {
