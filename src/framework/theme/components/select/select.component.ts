@@ -615,21 +615,21 @@ export class NbSelectComponent implements OnChanges, AfterViewInit, AfterContent
    * By default, values are compared with strict equality (`===`).
    */
   @Input()
-  get compareFn(): NbSelectCompareFunction {
-    return this._compareFn;
+  get compareWith(): NbSelectCompareFunction {
+    return this._compareWith;
   }
-  set compareFn(fn: NbSelectCompareFunction) {
+  set compareWith(fn: NbSelectCompareFunction) {
     if (typeof fn !== 'function') {
       return;
     }
 
-    this._compareFn = fn;
+    this._compareWith = fn;
 
     if (this.selectionModel.length && this.canSelectValue()) {
       this.setSelection(this.selected);
     }
   }
-  protected _compareFn: NbSelectCompareFunction = (v1: any, v2: any) => v1 === v2;
+  protected _compareWith: NbSelectCompareFunction = (v1: any, v2: any) => v1 === v2;
 
   /**
    * Accepts selected item or array of selected items.
@@ -948,7 +948,7 @@ export class NbSelectComponent implements OnChanges, AfterViewInit, AfterContent
   protected handleSingleSelect(option: NbOptionComponent) {
     const selected = this.selectionModel.pop();
 
-    if (selected && !this._compareFn(selected.value, option.value)) {
+    if (selected && !this._compareWith(selected.value, option.value)) {
       selected.deselect();
     }
 
@@ -965,7 +965,7 @@ export class NbSelectComponent implements OnChanges, AfterViewInit, AfterContent
    * */
   protected handleMultipleSelect(option: NbOptionComponent) {
     if (option.selected) {
-      this.selectionModel = this.selectionModel.filter(s => !this._compareFn(s.value, option.value));
+      this.selectionModel = this.selectionModel.filter(s => !this._compareWith(s.value, option.value));
       option.deselect();
     } else {
       this.selectionModel.push(option);
@@ -1146,7 +1146,7 @@ export class NbSelectComponent implements OnChanges, AfterViewInit, AfterContent
    * Selects value.
    * */
   protected selectValue(value) {
-    const corresponding = this.options.find((option: NbOptionComponent) => this._compareFn(option.value, value));
+    const corresponding = this.options.find((option: NbOptionComponent) => this._compareWith(option.value, value));
 
     if (corresponding) {
       corresponding.select();

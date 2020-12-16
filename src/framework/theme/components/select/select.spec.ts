@@ -124,7 +124,7 @@ export class BasicSelectTestComponent {}
   template: `
     <nb-layout>
       <nb-layout-column>
-        <nb-select [selected]="selected" [compareFn]="compareFn">
+        <nb-select [selected]="selected" [compareWith]="compareFn">
           <nb-option *ngFor="let option of options" [value]="option">{{ option }}</nb-option>
         </nb-select>
       </nb-layout-column>
