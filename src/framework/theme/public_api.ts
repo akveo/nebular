@@ -73,7 +73,7 @@ export * from './components/menu/menu.component'
 export * from './components/route-tabset/route-tabset.module';
 export * from './components/route-tabset/route-tabset.component';
 export * from './components/sidebar/sidebar.module';
-export * from './components/sidebar/sidebar.service';
+export { NbSidebarService } from './components/sidebar/sidebar.service';
 export * from './components/sidebar/sidebar.component';
 export * from './components/tabset/tabset.module';
 export * from './components/datepicker/date-timepicker.component';
