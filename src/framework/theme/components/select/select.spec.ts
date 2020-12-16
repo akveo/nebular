@@ -135,6 +135,8 @@ export class NbSelectWithOptionsObjectsComponent {
   @Input() compareFn = (o1: any, o2: any) => JSON.stringify(o1) === JSON.stringify(o2);
   @Input() selected = { id: 2 };
   @Input() options = [{ id: 1 }, { id: 2 }, { id: 3 }];
+
+  @ViewChildren(NbOptionComponent) optionComponents: QueryList<NbOptionComponent>;
 }
 
 @Component({
@@ -513,19 +515,15 @@ describe('Component: NbSelectComponent', () => {
     expect(selectButton.textContent).toEqual(selectedOption.value.toString());
   }));
 
-  it('should select initially specified object without errors', fakeAsync(() => {
+  it('should use compareWith function to compare values', fakeAsync(() => {
     const selectFixture = TestBed.createComponent(NbSelectWithOptionsObjectsComponent);
+    const testComponent = selectFixture.componentInstance;
     selectFixture.detectChanges();
     flush();
     selectFixture.detectChanges();
 
-    const selectedOption = selectFixture.debugElement.query(By.directive(NbSelectComponent))
-      .componentInstance
-      .options.find(o => o.selected);
-
-    expect(selectedOption.value).toEqual(selectFixture.componentInstance.selected);
-    const selectButton = selectFixture.nativeElement.querySelector('nb-select button') as HTMLElement;
-    expect(selectButton.textContent).toEqual(selectedOption.value.toString());
+    const selectedOption = testComponent.optionComponents.find(o => o.selected);
+    expect(selectedOption.value).toEqual({ id: 2 });
   }));
 
   it('should ignore selection change if destroyed', fakeAsync(() => {
