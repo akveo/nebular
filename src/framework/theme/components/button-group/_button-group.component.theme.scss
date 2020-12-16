@@ -5,10 +5,6 @@
  */
 
 @mixin nb-buttons-group-theme() {
-  $border: nb-theme(button-toggle-border-width)
-           nb-theme(button-toggle-border-style)
-           nb-theme(button-toggle-border-color);
-
   nb-button-group {
     display: inline-flex;
 
@@ -39,17 +35,34 @@
         border-radius: 0;
       }
 
-      &:not(.appearance-outline) {
-        border: none;
+      &.appearance-filled,
+      &.appearance-ghost {
+        // Makes border same color as background. We need to keep the border so that buttons inside and outside
+        // the group have the same height.
+        border-color: transparent;
+      }
 
-        &:not(:last-child) {
-          @include nb-ltr(border-right, $border);
-          @include nb-rtl(border-left, $border);
+      &.appearance-filled {
+        .status-basic {
+          color: nb-theme(button-group-filled-button-basic-text-color);
+        }
+
+        @each $status in nb-get-statuses() {
+          // I can't figure out any sane selector to turn the start border into a divider for buttons
+          // in the default state only (not hovered, focused, etc.). So I went with this horrible thing.
+          // Another way was to copy button styles here, but then we need to keep track of button styles
+          // all the time. Also, it would increase the number of duplicate button styles.
+          &.status-#{$status}:not(:first-child):not(:hover):not(:focus):not(:active):not([disabled]) {
+            @include nb-ltr(border-left-color, nb-theme(button-group-filled-#{$status}-divider-color));
+            @include nb-rtl(border-right-color, nb-theme(button-group-filled-#{$status}-divider-color));
+          }
         }
       }
 
-      &.appearance-filled.status-basic {
-        color: nb-theme(button-group-button-filled-basic-text-color);
+      // See the comment on the selector above
+      &.appearance-ghost:not(:first-child):not(:hover):not(:focus):not(:active):not([disabled]) {
+        @include nb-ltr(border-left-color, nb-theme(button-group-ghost-divider-color));
+        @include nb-rtl(border-right-color, nb-theme(button-group-ghost-divider-color));
       }
     }
   }

@@ -1012,11 +1012,16 @@ $eva-mapping: (
   button-hero-control-disabled-background-color: color-basic-transparent-300,
   button-hero-control-disabled-text-color: text-disabled-color,
 
-  button-toggle-border-color: border-basic-color-5,
-  button-toggle-border-style: solid,
-  button-toggle-border-width: 1px,
+  button-group-filled-button-basic-text-color: text-hint-color,
+  button-group-filled-basic-divider-color: color-basic-focus-border,
+  button-group-filled-primary-divider-color: color-primary-focus,
+  button-group-filled-success-divider-color: color-success-focus,
+  button-group-filled-info-divider-color: color-info-focus,
+  button-group-filled-warning-divider-color: color-warning-focus,
+  button-group-filled-danger-divider-color: color-danger-focus,
+  button-group-filled-control-divider-color: color-control-focus,
 
-  button-group-button-filled-basic-text-color: text-hint-color,
+  button-group-ghost-divider-color: color-basic-focus-border,
 
   icon-button-filled-tiny-padding: 0.4375rem 0.3125rem,
   icon-button-filled-small-padding: 0.5625rem 0.4375rem,

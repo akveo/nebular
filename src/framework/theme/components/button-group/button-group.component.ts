@@ -72,6 +72,17 @@ import { NbButtonToggleAppearance, NbButtonToggleChange, NbButtonToggleDirective
  * Buttons group shapes:
  * @additional-example(Button Group Shapes, button-group/button-group-shapes.component)
  *
+ * @styles
+ *
+ * button-group-filled-button-basic-text-color:
+ * button-group-filled-basic-divider-color:
+ * button-group-filled-primary-divider-color:
+ * button-group-filled-success-divider-color:
+ * button-group-filled-info-divider-color:
+ * button-group-filled-warning-divider-color:
+ * button-group-filled-danger-divider-color:
+ * button-group-filled-control-divider-color:
+ * button-group-ghost-divider-color:
  **/
 @Component({
   selector: 'nb-button-group',
