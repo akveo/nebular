@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { async, inject, TestBed } from '@angular/core/testing';
+import { inject, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { NbTokenLocalStorage, NbTokenStorage } from './token-storage';
 import { NB_AUTH_TOKENS } from '../../auth.options';
@@ -31,7 +31,7 @@ describe('token-storage', () => {
     });
   });
 
-    beforeEach(async(inject(
+    beforeEach(waitForAsync(inject(
     [NbTokenStorage, NbAuthTokenParceler],
     (_tokenStorage, _tokenParceler) => {
       tokenStorage = _tokenStorage;

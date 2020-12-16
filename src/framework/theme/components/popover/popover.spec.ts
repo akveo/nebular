@@ -1,5 +1,5 @@
 import { Component, ElementRef, Input, NgModule, TemplateRef, Type, ViewChild } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Subject } from 'rxjs';
 import createSpy = jasmine.createSpy;
@@ -192,7 +192,7 @@ describe('Directive: NbPopoverDirective', () => {
 
   const overlayHandler = new NbDynamicOverlayHandlerMock();
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.resetTestingModule();
     TestBed.configureTestingModule({
       imports: [
@@ -319,7 +319,7 @@ describe('Directive: NbPopoverDirective', () => {
 
   describe('mocked services', () => {
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
       TestBed.resetTestingModule();
       TestBed.configureTestingModule({
         imports: [
