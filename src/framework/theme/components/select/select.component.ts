@@ -53,6 +53,7 @@ import { NB_SELECT_INJECTION_TOKEN } from './select-injection-tokens';
 import { NbFormFieldControl, NbFormFieldControlConfig } from '../form-field/form-field-control';
 import { NbFocusMonitor } from '../cdk/a11y/a11y.module';
 
+export type NbSelectCompareFunction<T = any> = (v1: any, v2: any) => boolean;
 export type NbSelectAppearance = 'outline' | 'filled' | 'hero';
 
 @Component({
@@ -613,14 +614,14 @@ export class NbSelectComponent implements OnChanges, AfterViewInit, AfterContent
    * Custom function for comparing option values
    */
   @Input()
-  get compareFn(): Function {
+  get compareFn(): NbSelectCompareFunction {
     return this._isEqual;
   }
-  set compareFn(fn: Function) {
+  set compareFn(fn: NbSelectCompareFunction) {
     this._isEqual = fn;
   }
-  protected _isEqual: Function = (v1: any, v2: any) => v1 === v2;
-  static ngAcceptInputType_compareFn: Function
+  protected _isEqual: NbSelectCompareFunction = (v1: any, v2: any) => v1 === v2;
+  static ngAcceptInputType_compareFn: NbSelectCompareFunction;
 
   /**
    * Accepts selected item or array of selected items.
