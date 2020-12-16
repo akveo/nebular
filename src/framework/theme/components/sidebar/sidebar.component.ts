@@ -136,33 +136,33 @@ export class NbSidebarComponent implements OnInit, OnDestroy {
 
   /**
    * @deprecated Use NbSidebarState type instead
-   * @breaking-change Remove @5.0.0
+   * @breaking-change Remove @8.0.0
    */
   static readonly STATE_EXPANDED: string = 'expanded';
   /**
    * @deprecated Use NbSidebarState type instead
-   * @breaking-change Remove @5.0.0
+   * @breaking-change Remove @8.0.0
    */
   static readonly STATE_COLLAPSED: string = 'collapsed';
   /**
    * @deprecated Use NbSidebarState type instead
-   * @breaking-change Remove @5.0.0
+   * @breaking-change Remove @8.0.0
    */
   static readonly STATE_COMPACTED: string = 'compacted';
 
   /**
    * @deprecated Use NbSidebarResponsiveState type instead
-   * @breaking-change Remove @5.0.0
+   * @breaking-change Remove @8.0.0
    */
   static readonly RESPONSIVE_STATE_MOBILE: string = 'mobile';
   /**
    * @deprecated Use NbSidebarResponsiveState type instead
-   * @breaking-change Remove @5.0.0
+   * @breaking-change Remove @8.0.0
    */
   static readonly RESPONSIVE_STATE_TABLET: string = 'tablet';
   /**
    * @deprecated Use NbSidebarResponsiveState type instead
-   * @breaking-change Remove @5.0.0
+   * @breaking-change Remove @8.0.0
    */
   static readonly RESPONSIVE_STATE_PC: string = 'pc';
 
@@ -324,7 +324,7 @@ export class NbSidebarComponent implements OnInit, OnDestroy {
 
   /**
    * @deprecated Use `responsive` property instead
-   * @breaking-change Remove @5.0.0
+   * @breaking-change Remove @8.0.0
    */
   toggleResponsive(enabled: boolean) {
     this.responsive = enabled;
