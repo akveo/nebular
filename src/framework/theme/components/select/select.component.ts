@@ -619,8 +619,14 @@ export class NbSelectComponent implements OnChanges, AfterViewInit, AfterContent
     return this._compareFn;
   }
   set compareFn(fn: NbSelectCompareFunction) {
-    if (typeof fn === 'function') {
-      this._compareFn = fn;
+    if (typeof fn !== 'function') {
+      return;
+    }
+
+    this._compareFn = fn;
+
+    if (this.selectionModel.length && this.canSelectValue()) {
+      this.setSelection(this.selected);
     }
   }
   protected _compareFn: NbSelectCompareFunction = (v1: any, v2: any) => v1 === v2;
