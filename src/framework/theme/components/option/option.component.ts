@@ -213,7 +213,8 @@ export class NbOptionComponent<T = any> implements OnDestroy, AfterViewInit, NbF
    * Sets disabled by group state and marks component for check.
    */
   setDisabledByGroupState(disabled: boolean): void {
-    if (this.disabledByGroup !== disabled) {
+    // Check if the component still alive as the option group defer method call so the component may become destroyed.
+    if (this.disabledByGroup !== disabled && this.alive) {
       this.disabledByGroup = disabled;
       this.cd.markForCheck();
     }
