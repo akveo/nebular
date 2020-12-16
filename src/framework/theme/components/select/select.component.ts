@@ -145,6 +145,11 @@ export function nbSelectFormFieldControlConfigFactory() {
  *
  * @stacked-example(Select shapes, select/select-shapes.component)
  *
+ * By default, the component selects options whose values are strictly equal (`===`) with the select value.
+ * To change such behavior, pass a custom comparator function to the `compareWith` attribute.
+ *
+ * @stacked-example(Select custom comparator, select/select-compare-with.component)
+ *
  * @additional-example(Interactive, select/select-interactive.component)
  *
  * @styles
