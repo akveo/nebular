@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { Component, HostBinding, Input, OnInit, OnDestroy, ElementRef } from '@angular/core';
+import { Component, HostBinding, Input, OnInit, OnDestroy, ElementRef, Output, EventEmitter } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil, filter } from 'rxjs/operators';
 
@@ -317,6 +317,11 @@ export class NbSidebarComponent implements OnInit, OnDestroy {
    */
   @Input() collapsedBreakpoints: string[] = ['xs', 'is'];
 
+  /**
+   * Emits whenever sidebar state change.
+   */
+  @Output() readonly stateChange = new EventEmitter<NbSidebarState>();
+
   constructor(private sidebarService: NbSidebarService,
     private themeService: NbThemeService,
     private element: ElementRef) {
@@ -432,6 +437,7 @@ export class NbSidebarComponent implements OnInit, OnDestroy {
     } else {
       this.state = compact ? 'compacted' : 'collapsed';
     }
+    this.stateChange.emit(this.state);
   }
 
   protected subscribeToMediaQueryChange() {
