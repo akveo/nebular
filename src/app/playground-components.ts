@@ -236,6 +236,65 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
     ],
   },
   {
+    path: 'button-group',
+    children: [
+      {
+        path: 'button-group-showcase.component',
+        link: '/button-group/button-group-showcase.component',
+        component: 'ButtonGroupShowcaseComponent',
+        name: 'Button Group Showcase',
+      },
+      {
+        path: 'button-group-multiple.component',
+        link: '/button-group/button-group-multiple.component',
+        component: 'ButtonGroupMultipleComponent',
+        name: 'Button Group Multiple',
+      },
+      {
+        path: 'button-group-sizes.component',
+        link: '/button-group/button-group-sizes.component',
+        component: 'ButtonGroupSizesComponent',
+        name: 'Button Group Sizes',
+      },
+      {
+        path: 'button-group-appearances.component',
+        link: '/button-group/button-group-appearances.component',
+        component: 'ButtonGroupAppearancesComponent',
+        name: 'Button Group Appearances',
+      },
+      {
+        path: 'button-group-shapes.component',
+        link: '/button-group/button-group-shapes.component',
+        component: 'ButtonGroupShapesComponent',
+        name: 'Button Group Shapes',
+      },
+      {
+        path: 'button-and-button-toggle-groups.component',
+        link: '/button-group/button-and-button-toggle-groups.component',
+        component: 'ButtonAndButtonToggleGroupsComponent',
+        name: 'Button And Button Toggle Groups',
+      },
+      {
+        path: 'button-group-interactive.component',
+        link: '/button-group/button-group-interactive.component',
+        component: 'ButtonGroupInteractiveComponent',
+        name: 'Button Group Interactive',
+      },
+      {
+        path: 'button-group-disabled.component',
+        link: '/button-group/button-group-disabled.component',
+        component: 'ButtonGroupDisabledComponent',
+        name: 'Button Group Disabled',
+      },
+      {
+        path: 'button-group-statuses.component',
+        link: '/button-group/button-group-statuses.component',
+        component: 'ButtonGroupStatusesComponent',
+        name: 'Button Group Statuses',
+      },
+    ],
+  },
+  {
     path: 'calendar',
     children: [
       {
