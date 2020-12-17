@@ -10,7 +10,7 @@ describe('Component: NbProgressBar', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ NbThemeModule.forRoot(), NbProgressBarModule ]
+      imports: [ NbThemeModule.forRoot(), NbProgressBarModule ],
     });
 
     fixture = TestBed.createComponent(NbProgressBarComponent);
