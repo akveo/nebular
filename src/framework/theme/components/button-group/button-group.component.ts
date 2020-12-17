@@ -75,6 +75,12 @@ import { NbButtonToggleAppearance, NbButtonToggleChange, NbButtonToggleDirective
  * @styles
  *
  * button-group-filled-button-basic-text-color:
+ * button-group-filled-button-primary-text-color:
+ * button-group-filled-button-success-text-color:
+ * button-group-filled-button-info-text-color:
+ * button-group-filled-button-warning-text-color:
+ * button-group-filled-button-danger-text-color:
+ * button-group-filled-button-control-text-color:
  * button-group-filled-basic-divider-color:
  * button-group-filled-primary-divider-color:
  * button-group-filled-success-divider-color:
