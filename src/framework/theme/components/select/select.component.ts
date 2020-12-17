@@ -29,7 +29,7 @@ import {
   NgZone,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { merge, Subject, BehaviorSubject } from 'rxjs';
+import { merge, Subject, BehaviorSubject, from } from 'rxjs';
 import { startWith, switchMap, takeUntil, filter, map, finalize } from 'rxjs/operators';
 
 import {
@@ -801,17 +801,14 @@ export class NbSelectComponent implements OnChanges, AfterViewInit, AfterContent
       .pipe(
         startWith(this.options),
         filter(() => this.queue != null && this.canSelectValue()),
-        takeUntil(this.destroy$),
-      )
-      .subscribe(() => {
         // Call 'writeValue' when current change detection run is finished.
         // When writing is finished, change detection starts again, since
         // microtasks queue is empty.
         // Prevents ExpressionChangedAfterItHasBeenCheckedError.
-        Promise.resolve().then(() => {
-          this.writeValue(this.queue);
-        });
-      });
+        switchMap((options: QueryList<NbOptionComponent>) => from(Promise.resolve(options))),
+        takeUntil(this.destroy$),
+      )
+      .subscribe(() => this.writeValue(this.queue));
   }
 
   ngAfterViewInit() {
