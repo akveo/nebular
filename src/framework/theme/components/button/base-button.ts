@@ -8,10 +8,12 @@ import {
   NgZone,
   Renderer2,
 } from '@angular/core';
-import { NbComponentSize } from '../component-size';
-import { NbComponentStatus } from '../component-status';
-import { NbComponentShape } from '../component-shape';
+
+import { NbStatusService } from '../../services/status.service';
 import { convertToBoolProperty, firstChildNotComment, lastChildNotComment, NbBooleanInput } from '../helpers';
+import { NbComponentSize } from '../component-size';
+import { NbComponentOrCustomStatus } from '../component-status';
+import { NbComponentShape } from '../component-shape';
 
 export type NbButtonAppearance = 'filled' | 'outline' | 'ghost' | 'hero';
 
@@ -30,7 +32,7 @@ export abstract class NbButton implements AfterViewInit {
    * Button status (adds specific styles):
    * `primary`, `info`, `success`, `warning`, `danger`
    */
-  @Input() status: NbComponentStatus = 'basic';
+  @Input() status: NbComponentOrCustomStatus = 'basic';
 
   /**
    * Button shapes: `rectangle`, `round`, `semi-round`
@@ -192,11 +194,20 @@ export abstract class NbButton implements AfterViewInit {
     return !!(icon && lastChildNotComment(el) === icon);
   }
 
+  @HostBinding('class')
+  get additionalClasses(): string[] {
+    if (this.statusService.isCustomStatus(this.status)) {
+      return [this.statusService.getStatusClass(this.status)];
+    }
+    return [];
+  }
+
   protected constructor(
     protected renderer: Renderer2,
     protected hostElement: ElementRef<HTMLElement>,
     protected cd: ChangeDetectorRef,
     protected zone: NgZone,
+    protected statusService: NbStatusService,
   ) {
   }
 

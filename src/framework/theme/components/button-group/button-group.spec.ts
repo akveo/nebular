@@ -16,6 +16,7 @@ import {
   NbComponentShape,
   NbComponentStatus,
   NbButtonToggleAppearance,
+  NbThemeModule,
 } from '@nebular/theme';
 
 @Component({
@@ -56,8 +57,8 @@ describe('Component: NbButtonGroup', () => {
 
   beforeEach(fakeAsync(() => {
     TestBed.configureTestingModule({
+      imports: [ NbThemeModule.forRoot(), NbButtonGroupModule, NbButtonModule ],
       declarations: [NbButtonGroupTestComponent],
-      imports: [NbButtonGroupModule, NbButtonModule],
     });
 
     fixture = TestBed.createComponent(NbButtonGroupTestComponent);

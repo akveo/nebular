@@ -2,9 +2,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Component, DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { ReactiveFormsModule, FormControl } from '@angular/forms';
-import { NbIconModule } from '@nebular/theme';
 
-import { NbCheckboxComponent } from './checkbox.component';
+import { NbIconModule, NbCheckboxModule, NbCheckboxComponent, NbThemeModule } from '@nebular/theme';
 
 describe('Component: NbCheckbox', () => {
 
@@ -16,8 +15,7 @@ describe('Component: NbCheckbox', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [NbIconModule],
-      declarations: [NbCheckboxComponent],
+      imports: [ NbThemeModule.forRoot(), NbIconModule, NbCheckboxModule],
     });
 
     fixture = TestBed.createComponent(NbCheckboxComponent);
@@ -170,7 +168,7 @@ describe('Component: NbCheckbox with form control', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ReactiveFormsModule, NbIconModule],
+      imports: [ReactiveFormsModule, NbThemeModule.forRoot(), NbIconModule, NbCheckboxModule],
       declarations: [NbCheckboxComponent, CheckboxWithFormControlComponent],
     });
 

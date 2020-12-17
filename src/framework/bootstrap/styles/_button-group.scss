@@ -88,7 +88,7 @@
     }
   }
 
-  @each $status in nb-get-statuses() {
+  @each $status in nb-get-core-statuses() {
     .btn-group:not(.btn-divided-group) {
       .btn.btn-outline-#{$status}.active {
         background-color: nb-theme(button-filled-#{$status}-active-background-color);
@@ -244,7 +244,7 @@
   }
 
   .btn-divided-group {
-    @each $status in nb-get-statuses() {
+    @each $status in nb-get-core-statuses() {
       .btn-#{$status} {
         background-color: nb-theme(button-filled-#{$status}-background-color);
         border-color: nb-theme(button-filled-#{$status}-border-color);
