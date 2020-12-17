@@ -19,7 +19,7 @@ import {
 import { ActivatedRoute } from '@angular/router';
 
 import { convertToBoolProperty, NbBooleanInput } from '../helpers';
-import { NbComponentStatus } from '../component-status';
+import { NbComponentOrCustomStatus } from '../component-status';
 import { NbBadgePosition } from '../badge/badge.component';
 import { NbIconConfig } from '../icon/icon.component';
 
@@ -149,7 +149,7 @@ export class NbTabComponent {
    * 'primary', 'info', 'success', 'warning', 'danger'
    * @param {string} val
    */
-  @Input() badgeStatus: NbComponentStatus = 'basic';
+  @Input() badgeStatus: NbComponentOrCustomStatus = 'basic';
 
   /**
    * Badge position.

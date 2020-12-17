@@ -111,7 +111,7 @@
   .caption-2 {
     color: nb-theme(text-hint-color);
 
-    @each $status in nb-get-statuses() {
+    @each $status in nb-get-core-statuses() {
       &.status-#{$status} {
         color: nb-theme(text-#{$status}-color);
       }
@@ -136,7 +136,7 @@
     color: nb-theme(text-hint-color);
   }
 
-  @each $status in nb-get-statuses() {
+  @each $status in nb-get-core-statuses() {
     .text-#{$status} {
       color: nb-theme(text-#{$status}-color);
     }

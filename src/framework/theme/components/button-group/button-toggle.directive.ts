@@ -18,6 +18,7 @@ import {
 } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 
+import { NbStatusService } from '../../services/status.service';
 import { convertToBoolProperty, NbBooleanInput } from '../helpers';
 import { NbButton, NbButtonAppearance } from '../button/base-button';
 
@@ -107,6 +108,14 @@ export class NbButtonToggleDirective extends NbButton {
     return this.pressed && this.status === 'control';
   }
 
+  @HostBinding('class')
+  get additionalClasses(): string[] {
+    if (this.statusService.isCustomStatus(this.status)) {
+      return [this.statusService.getStatusClass(this.status)];
+    }
+    return [];
+  }
+
   @HostListener('click')
   onClick(): void {
     this.pressed = !this.pressed;
@@ -117,8 +126,9 @@ export class NbButtonToggleDirective extends NbButton {
     protected hostElement: ElementRef<HTMLElement>,
     protected cd: ChangeDetectorRef,
     protected zone: NgZone,
+    protected statusService: NbStatusService,
   ) {
-    super(renderer, hostElement, cd, zone);
+    super(renderer, hostElement, cd, zone, statusService);
   }
 
   /**

@@ -16,7 +16,7 @@ import {
 } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 
-import { NbComponentStatus } from '../component-status';
+import { NbComponentOrCustomStatus } from '../component-status';
 
 /**
  * Chat form component.
@@ -89,7 +89,7 @@ import { NbComponentStatus } from '../component-status';
 })
 export class NbChatFormComponent {
 
-  status: NbComponentStatus = 'basic';
+  status: NbComponentOrCustomStatus = 'basic';
   inputFocus: boolean = false;
   inputHover: boolean = false;
 
@@ -205,14 +205,14 @@ export class NbChatFormComponent {
     }
   }
 
-  setStatus(status: NbComponentStatus): void {
+  setStatus(status: NbComponentOrCustomStatus): void {
     if (this.status !== status) {
       this.status = status;
       this.cd.detectChanges();
     }
   }
 
-  getInputStatus(): NbComponentStatus {
+  getInputStatus(): NbComponentOrCustomStatus {
     if (this.fileOver) {
       return this.getHighlightStatus();
     }
@@ -224,11 +224,11 @@ export class NbChatFormComponent {
     return 'basic';
   }
 
-  getButtonStatus(): NbComponentStatus {
+  getButtonStatus(): NbComponentOrCustomStatus {
     return this.getHighlightStatus();
   }
 
-  protected getHighlightStatus(): NbComponentStatus {
+  protected getHighlightStatus(): NbComponentOrCustomStatus {
     if (this.status === 'basic' || this.status === 'control') {
       return 'primary';
     }

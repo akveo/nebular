@@ -14,6 +14,7 @@ export * from './services/color.helper';
 export * from './services/direction.service';
 export * from './services/scroll.service';
 export * from './services/ruler.service';
+export * from './services/status.service';
 export * from './services/js-themes-registry.service';
 export * from './services/js-themes/corporate.theme';
 export * from './services/js-themes/cosmic.theme';

@@ -3,6 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { RouterLinkWithHref } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
+
 import {
   NbActionComponent,
   NbActionsComponent,
@@ -206,7 +207,8 @@ describe('NbActionComponent content projection', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ RouterTestingModule.withRoutes([]), NbActionsModule ], declarations: [ NbActionsTestComponent ],
+      imports: [ RouterTestingModule.withRoutes([]), NbThemeModule.forRoot(), NbActionsModule ],
+      declarations: [ NbActionsTestComponent ],
     });
     const iconLibs: NbIconLibraries = TestBed.inject(NbIconLibraries);
     iconLibs.setDefaultPack('nebular-essentials');

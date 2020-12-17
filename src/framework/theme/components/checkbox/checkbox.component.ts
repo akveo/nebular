@@ -20,8 +20,9 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
-import { NbComponentStatus } from '../component-status';
-import { convertToBoolProperty, emptyStatusWarning, NbBooleanInput } from '../helpers';
+import { NbStatusService } from '../../services/status.service';
+import { NbComponentOrCustomStatus } from '../component-status';
+import { convertToBoolProperty, NbBooleanInput } from '../helpers';
 
 /**
  * Styled checkbox component
@@ -310,19 +311,7 @@ export class NbCheckboxComponent implements AfterViewInit, ControlValueAccessor 
    * Checkbox status.
    * Possible values are: `basic`, `primary`, `success`, `warning`, `danger`, `info`, `control`.
    */
-  @Input()
-  get status(): NbComponentStatus {
-    return this._status;
-  }
-  set status(value: NbComponentStatus) {
-    if ((value as string) === '') {
-      emptyStatusWarning('NbCheckbox');
-      this._status = 'basic';
-    } else {
-      this._status = value;
-    }
-  }
-  protected _status: NbComponentStatus = 'basic';
+  @Input() status: NbComponentOrCustomStatus = 'basic';
 
   /**
    * Controls checkbox indeterminate state
@@ -378,11 +367,20 @@ export class NbCheckboxComponent implements AfterViewInit, ControlValueAccessor 
     return this.status === 'control';
   }
 
+  @HostBinding('class')
+  get additionalClasses(): string[] {
+    if (this.statusService.isCustomStatus(this.status)) {
+      return [this.statusService.getStatusClass(this.status)];
+    }
+    return [];
+  }
+
   constructor(
     private changeDetector: ChangeDetectorRef,
     private renderer: Renderer2,
     private hostElement: ElementRef<HTMLElement>,
     private zone: NgZone,
+    private statusService: NbStatusService,
   ) {}
 
   ngAfterViewInit() {

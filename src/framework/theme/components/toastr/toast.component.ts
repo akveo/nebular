@@ -16,8 +16,9 @@ import {
   Renderer2,
 } from '@angular/core';
 
-import { NbToast } from './model';
+import { NbStatusService } from '../../services/status.service';
 import { NbIconConfig } from '../icon/icon.component';
+import { NbToast } from './model';
 
 /**
  * The `NbToastComponent` is responsible for rendering each toast with appropriate styles.
@@ -157,12 +158,24 @@ export class NbToastComponent implements OnInit {
     return this.toast.config.icon;
   }
 
+  @HostBinding('class')
+  get additionalClasses(): string[] {
+    if (this.statusService.isCustomStatus(this.toast.config.status)) {
+      return [this.statusService.getStatusClass(this.toast.config.status)];
+    }
+    return [];
+  }
+
   @HostListener('click')
   onClick() {
     this.destroy.emit();
   }
 
-  constructor(protected renderer: Renderer2, protected elementRef: ElementRef) {}
+  constructor(
+    protected renderer: Renderer2,
+    protected elementRef: ElementRef,
+    protected statusService: NbStatusService,
+  ) {}
 
   ngOnInit() {
     if (this.toast.config.toastClass) {

@@ -43,10 +43,6 @@
       }
 
       &.appearance-filled {
-        .status-basic {
-          color: nb-theme(button-group-filled-button-basic-text-color);
-        }
-
         @each $status in nb-get-statuses() {
           // I can't figure out any sane selector to turn the start border into a divider for buttons
           // in the default state only (not hovered, focused, etc.). So I went with this horrible thing.
@@ -55,6 +51,10 @@
           &.status-#{$status}:not(:first-child):not(:hover):not(:focus):not(:active):not([disabled]) {
             @include nb-ltr(border-left-color, nb-theme(button-group-filled-#{$status}-divider-color));
             @include nb-rtl(border-right-color, nb-theme(button-group-filled-#{$status}-divider-color));
+          }
+
+          &.status-#{$status} {
+            color: nb-theme(button-group-filled-button-#{$status}-text-color);
           }
         }
       }

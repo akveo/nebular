@@ -7,7 +7,8 @@
 import { Component, HostBinding, Input } from '@angular/core';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 
-import { NbComponentStatus } from '../component-status';
+import { NbStatusService } from '../../services/status.service';
+import { NbComponentOrCustomStatus } from '../component-status';
 import { NbRenderableContainer } from '../cdk/overlay/overlay-container';
 import { NbPosition } from '../cdk/overlay/overlay-position';
 import { NbIconConfig } from '../icon/icon.component';
@@ -101,14 +102,17 @@ export class NbTooltipComponent implements NbRenderableContainer {
   }
 
   @Input()
-  context: { icon?: string | NbIconConfig, status?: NbComponentStatus } = {};
+  context: { icon?: string | NbIconConfig, status?: NbComponentOrCustomStatus } = {};
 
   get statusClass() {
     if (this.context.status) {
-      return `status-${this.context.status}`;
+      return this.statusService.getStatusClass(this.context.status);
     }
 
     return '';
+  }
+
+  constructor(protected statusService: NbStatusService) {
   }
 
   /**
