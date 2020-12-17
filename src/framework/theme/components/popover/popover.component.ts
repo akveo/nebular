@@ -15,7 +15,7 @@ import {
 import { NbComponentPortal, NbTemplatePortal } from '../cdk/overlay/mapping';
 import {
   NbOverlayContainerComponent,
-  NbPositionedContainer,
+  NbPositionedContainerComponent,
   NbRenderableContainer,
 } from '../cdk/overlay/overlay-container';
 
@@ -47,7 +47,7 @@ import {
     <nb-overlay-container></nb-overlay-container>
   `,
 })
-export class NbPopoverComponent extends NbPositionedContainer implements NbRenderableContainer {
+export class NbPopoverComponent extends NbPositionedContainerComponent implements NbRenderableContainer {
   @ViewChild(NbOverlayContainerComponent) overlayContainer: NbOverlayContainerComponent;
 
   @Input() content: any;
