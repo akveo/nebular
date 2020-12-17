@@ -17,7 +17,7 @@ import {
   Renderer2,
 } from '@angular/core';
 
-import { convertToBoolProperty, emptyStatusWarning, NbBooleanInput } from '../helpers';
+import { convertToBoolProperty, NbBooleanInput } from '../helpers';
 import { NbComponentStatus } from '../component-status';
 
 /**
@@ -284,21 +284,7 @@ export class NbRadioComponent {
   private _disabled: boolean = false;
   static ngAcceptInputType_disabled: NbBooleanInput;
 
-  @Input()
-  get status(): NbComponentStatus {
-    return this._status;
-  }
-  set status(value: NbComponentStatus) {
-    if ((value as string) === '') {
-      emptyStatusWarning('NbRadio');
-      value = 'basic';
-    }
-
-    if (this._status !== value) {
-      this._status = value;
-    }
-  }
-  private _status: NbComponentStatus = 'basic';
+  @Input() status: NbComponentStatus = 'basic';
 
   @Output() valueChange: EventEmitter<any> = new EventEmitter();
 

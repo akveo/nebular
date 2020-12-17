@@ -21,7 +21,7 @@ import {
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import { NbComponentStatus } from '../component-status';
-import { convertToBoolProperty, emptyStatusWarning, NbBooleanInput } from '../helpers';
+import { convertToBoolProperty, NbBooleanInput } from '../helpers';
 
 /**
  * Styled checkbox component
@@ -310,19 +310,7 @@ export class NbCheckboxComponent implements AfterViewInit, ControlValueAccessor 
    * Checkbox status.
    * Possible values are: `basic`, `primary`, `success`, `warning`, `danger`, `info`, `control`.
    */
-  @Input()
-  get status(): NbComponentStatus {
-    return this._status;
-  }
-  set status(value: NbComponentStatus) {
-    if ((value as string) === '') {
-      emptyStatusWarning('NbCheckbox');
-      this._status = 'basic';
-    } else {
-      this._status = value;
-    }
-  }
-  protected _status: NbComponentStatus = 'basic';
+  @Input() status: NbComponentStatus = 'basic';
 
   /**
    * Controls checkbox indeterminate state

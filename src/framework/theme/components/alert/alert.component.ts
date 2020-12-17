@@ -8,7 +8,7 @@ import { Component, Input, HostBinding, Output, EventEmitter } from '@angular/co
 
 import { NbComponentSize } from '../component-size';
 import { NbComponentStatus } from '../component-status';
-import { convertToBoolProperty, emptyStatusWarning, NbBooleanInput } from '../helpers';
+import { convertToBoolProperty, NbBooleanInput } from '../helpers';
 
 
 /**
@@ -130,18 +130,7 @@ export class NbAlertComponent {
    * Alert status (adds specific styles):
    * `basic` (default), `primary`, `success`, `info`, `warning`, `danger`, `control`.
    */
-  @Input()
-  get status(): NbComponentStatus {
-    return this._status;
-  }
-  set status(value: NbComponentStatus) {
-    if ((value as string) === '') {
-      emptyStatusWarning('NbAlert');
-      value = 'basic';
-    }
-    this._status = value;
-  }
-  protected _status: NbComponentStatus = 'basic';
+  @Input() status: NbComponentStatus = 'basic';
 
   /**
    * Alert accent (color of the top border):

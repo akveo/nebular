@@ -8,7 +8,6 @@ import { Component, HostBinding, Input } from '@angular/core';
 
 import { NbComponentSize } from '../component-size';
 import { NbComponentStatus } from '../component-status';
-import { emptyStatusWarning } from '../helpers';
 
 /**
  * Styled spinner component
@@ -76,18 +75,7 @@ export class NbSpinnerComponent {
    * Spinner status (adds specific styles):
    * `basic`, `primary`, `info`, `success`, `warning`, `danger`, `control`.
    */
-  @Input()
-  get status(): NbComponentStatus {
-    return this._status;
-  }
-  set status(value: NbComponentStatus) {
-    if ((value as string) === '') {
-      emptyStatusWarning('NbSpinner');
-      value = 'basic';
-    }
-    this._status = value;
-  }
-  protected _status: NbComponentStatus = 'basic';
+  @Input() status: NbComponentStatus = 'basic';
 
   @HostBinding('class.size-tiny')
   get tiny() {

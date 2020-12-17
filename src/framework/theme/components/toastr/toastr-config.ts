@@ -8,7 +8,6 @@ import { InjectionToken } from '@angular/core';
 
 import { NbGlobalLogicalPosition, NbGlobalPosition } from '../cdk/overlay/position-helper';
 import { NbComponentStatus } from '../component-status';
-import { emptyStatusWarning } from '../helpers';
 import { NbIconConfig } from '../icon/icon.component';
 
 type IconToClassMap = {
@@ -79,11 +78,6 @@ export class NbToastrConfig {
   };
 
   constructor(config: Partial<NbToastrConfig>) {
-    if ((config.status as string) === '') {
-      emptyStatusWarning('NbToastr');
-      config.status = 'basic';
-    }
-
     this.patchIcon(config);
     Object.assign(this, config);
   }

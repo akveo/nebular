@@ -7,7 +7,7 @@
 import { Component, HostBinding, Input } from '@angular/core';
 
 import { NbComponentStatus } from '../component-status';
-import { convertToBoolProperty, emptyStatusWarning } from '../helpers';
+import { convertToBoolProperty } from '../helpers';
 
 export type NbBadgePhysicalPosition = 'top left' | 'top right' | 'bottom left' | 'bottom right' | 'center right' | 'center left';
 export type NbBadgeLogicalPosition = 'top start' | 'top end' | 'bottom start' | 'bottom end' | 'center start'| 'center end';
@@ -131,18 +131,7 @@ export class NbBadgeComponent implements NbBadge {
    * Badge status (adds specific styles):
    * 'basic', 'primary', 'info', 'success', 'warning', 'danger', 'control'
    */
-  @Input()
-  get status(): NbComponentStatus {
-    return this._status;
-  }
-  set status(value: NbComponentStatus) {
-    if ((value as string) === '') {
-      emptyStatusWarning('NbBadge');
-      value = 'basic';
-    }
-    this._status = value;
-  }
-  protected _status: NbComponentStatus = 'basic';
+  @Input() status: NbComponentStatus = 'basic';
 
   @HostBinding('class.status-primary')
   get primary(): boolean {

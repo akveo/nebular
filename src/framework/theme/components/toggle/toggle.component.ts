@@ -27,7 +27,7 @@ import { takeUntil } from 'rxjs/operators';
 import { NbLayoutDirectionService } from '../../services/direction.service';
 import { NbComponentStatus } from '../component-status';
 
-import { convertToBoolProperty, emptyStatusWarning, NbBooleanInput } from '../helpers';
+import { convertToBoolProperty, NbBooleanInput } from '../helpers';
 
 /**
  * Toggle is a control representing `on` and `off` states.
@@ -332,18 +332,7 @@ export class NbToggleComponent implements OnInit, AfterViewInit, OnDestroy, Cont
    * Toggle status.
    * Possible values are: `basic`, `primary`, `success`, `warning`, `danger`, `info`, `control`.
    */
-  @Input()
-  get status(): NbComponentStatus {
-    return this._status;
-  }
-  set status(value: NbComponentStatus) {
-    if ((value as string) === '') {
-      emptyStatusWarning('NbToggle');
-      value = 'basic';
-    }
-    this._status = value;
-  }
-  _status: NbComponentStatus = 'basic';
+  @Input() status: NbComponentStatus = 'basic';
 
   /**
    * Toggle label position.

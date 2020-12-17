@@ -21,7 +21,7 @@ import {
 import { Subject, BehaviorSubject } from 'rxjs';
 import { map, finalize, takeUntil } from 'rxjs/operators';
 
-import { convertToBoolProperty, emptyStatusWarning, NbBooleanInput } from '../helpers';
+import { convertToBoolProperty, NbBooleanInput } from '../helpers';
 import { NbComponentSize } from '../component-size';
 import { NbComponentShape } from '../component-shape';
 import { NbComponentStatus } from '../component-status';
@@ -235,19 +235,7 @@ export class NbInputDirective implements DoCheck, OnChanges, OnInit, AfterViewIn
    * Field status (adds specific styles):
    * `basic`, `primary`, `info`, `success`, `warning`, `danger`, `control`
    */
-  @Input()
-  get status(): NbComponentStatus {
-    return this._status;
-  }
-  set status(value: NbComponentStatus) {
-    if ((value as string) === '') {
-      emptyStatusWarning('NbInput');
-      this._status = 'basic';
-    } else {
-      this._status = value;
-    }
-  }
-  protected _status: NbComponentStatus = 'basic';
+  @Input() status: NbComponentStatus = 'basic';
 
   /**
    * Field shapes modifications. Possible values: `rectangle` (default), `round`, `semi-round`.

@@ -23,7 +23,7 @@ import { isPlatformBrowser } from '@angular/common';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { fromEvent, merge, Subject } from 'rxjs';
 import { filter, switchMap, takeUntil } from 'rxjs/operators';
-import { convertToBoolProperty, emptyStatusWarning, NbBooleanInput } from '../helpers';
+import { convertToBoolProperty, NbBooleanInput } from '../helpers';
 import { NB_DOCUMENT } from '../../theme.options';
 import { NbRadioComponent } from './radio.component';
 import { NbComponentStatus } from '../component-status';
@@ -124,11 +124,6 @@ export class NbRadioGroupComponent implements AfterContentInit, OnDestroy, Contr
     return this._status;
   }
   set status(value: NbComponentStatus) {
-    if ((value as string) === '') {
-      emptyStatusWarning('NbRadio');
-      value = 'basic';
-    }
-
     if (this._status !== value) {
       this._status = value;
       this.updateStatus();
