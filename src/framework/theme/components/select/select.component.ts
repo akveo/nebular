@@ -32,6 +32,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { merge, Subject, BehaviorSubject } from 'rxjs';
 import { startWith, switchMap, takeUntil, filter, map, finalize } from 'rxjs/operators';
 
+import { NbStatusService } from '../../services/status.service';
 import {
   NbAdjustableConnectedPositionStrategy,
   NbAdjustment,
@@ -45,7 +46,7 @@ import { NbFocusKeyManager, NbFocusKeyManagerFactoryService } from '../cdk/a11y/
 import { ESCAPE } from '../cdk/keycodes/keycodes';
 import { NbComponentSize } from '../component-size';
 import { NbComponentShape } from '../component-shape';
-import { NbComponentStatus } from '../component-status';
+import { NbComponentOrCustomStatus } from '../component-status';
 import { NB_DOCUMENT } from '../../theme.options';
 import { NbOptionComponent } from '../option/option.component';
 import { convertToBoolProperty, NbBooleanInput } from '../helpers';
@@ -526,7 +527,7 @@ export class NbSelectComponent implements OnChanges, AfterViewInit, AfterContent
    * Select status (adds specific styles):
    * `basic`, `primary`, `info`, `success`, `warning`, `danger`, `control`
    */
-  @Input() status: NbComponentStatus = 'basic';
+  @Input() status: NbComponentOrCustomStatus = 'basic';
 
   /**
    * Select shapes: `rectangle` (default), `round`, `semi-round`
@@ -662,6 +663,14 @@ export class NbSelectComponent implements OnChanges, AfterViewInit, AfterContent
   protected _multiple: boolean = false;
   static ngAcceptInputType_multiple: NbBooleanInput;
 
+  @HostBinding('class')
+  get additionalClasses(): string[] {
+    if (this.statusService.isCustomStatus(this.status)) {
+      return [this.statusService.getStatusClass(this.status)];
+    }
+    return [];
+  }
+
   /**
    * Will be emitted when selected value changes.
    * */
@@ -733,7 +742,7 @@ export class NbSelectComponent implements OnChanges, AfterViewInit, AfterContent
   /*
    * @docs-private
    **/
-  status$ = new BehaviorSubject<NbComponentStatus>(this.status);
+  status$ = new BehaviorSubject<NbComponentOrCustomStatus>(this.status);
 
   /*
    * @docs-private
@@ -764,7 +773,8 @@ export class NbSelectComponent implements OnChanges, AfterViewInit, AfterContent
               protected focusKeyManagerFactoryService: NbFocusKeyManagerFactoryService<NbOptionComponent>,
               protected focusMonitor: NbFocusMonitor,
               protected renderer: Renderer2,
-              protected zone: NgZone) {
+              protected zone: NgZone,
+              protected statusService: NbStatusService) {
   }
 
   /**

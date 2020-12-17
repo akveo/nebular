@@ -7,7 +7,7 @@
 import { InjectionToken } from '@angular/core';
 
 import { NbGlobalLogicalPosition, NbGlobalPosition } from '../cdk/overlay/position-helper';
-import { NbComponentStatus } from '../component-status';
+import { NbComponentOrCustomStatus, NbComponentStatus } from '../component-status';
 import { NbIconConfig } from '../icon/icon.component';
 
 type IconToClassMap = {
@@ -29,7 +29,7 @@ export class NbToastrConfig {
   /**
    * Status chooses color scheme for the toast.
    * */
-  status: NbComponentStatus = 'basic';
+  status: NbComponentOrCustomStatus = 'basic';
   /**
    * Duration is timeout between toast appears and disappears.
    * */
@@ -85,7 +85,7 @@ export class NbToastrConfig {
   protected patchIcon(config: Partial<NbToastrConfig>) {
     if (!('icon' in config)) {
       config.icon = {
-        icon: this.icons[config.status || 'basic'],
+        icon: this.icons[config.status] || this.icons.basic,
         pack: 'nebular-essentials',
       };
     }

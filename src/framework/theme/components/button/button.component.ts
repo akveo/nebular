@@ -17,6 +17,7 @@ import {
   NgZone,
 } from '@angular/core';
 
+import { NbStatusService } from '../../services/status.service';
 import { convertToBoolProperty, NbBooleanInput } from '../helpers';
 import { NbButton } from './base-button';
 
@@ -608,7 +609,8 @@ export class NbButtonComponent extends NbButton implements AfterViewInit {
     protected hostElement: ElementRef<HTMLElement>,
     protected cd: ChangeDetectorRef,
     protected zone: NgZone,
+    protected statusService: NbStatusService,
   ) {
-    super(renderer, hostElement, cd, zone);
+    super(renderer, hostElement, cd, zone, statusService);
   }
 }

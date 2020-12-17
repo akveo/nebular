@@ -19,10 +19,11 @@ import {
 import { from, merge, Observable, Subject } from 'rxjs';
 import { filter, switchMap, takeUntil } from 'rxjs/operators';
 
+import { NbStatusService } from '../../services/status.service';
 import { convertToBoolProperty, NbBooleanInput } from '../helpers';
 import { NbComponentSize } from '../component-size';
 import { NbComponentShape } from '../component-shape';
-import { NbComponentStatus } from '../component-status';
+import { NbComponentOrCustomStatus } from '../component-status';
 import { NbButton } from '../button/base-button';
 import { NbButtonToggleAppearance, NbButtonToggleChange, NbButtonToggleDirective } from './button-toggle.directive';
 
@@ -114,7 +115,7 @@ export class NbButtonGroupComponent implements OnChanges, AfterContentInit {
    * Button group status (adds specific styles):
    * `basic`, `primary`, `info`, `success`, `warning`, `danger`, `control`
    */
-  @Input() status: NbComponentStatus = 'basic';
+  @Input() status: NbComponentOrCustomStatus = 'basic';
 
   /**
    * Button group shapes: `rectangle`, `round`, `semi-round`
@@ -195,7 +196,18 @@ export class NbButtonGroupComponent implements OnChanges, AfterContentInit {
 
   @HostBinding('attr.role') role = 'group';
 
-  constructor(protected cd: ChangeDetectorRef) {}
+  @HostBinding('class')
+  get additionalClasses(): string[] {
+    if (this.statusService.isCustomStatus(this.status)) {
+      return [this.statusService.getStatusClass(this.status)];
+    }
+    return [];
+  }
+
+  constructor(
+    protected cd: ChangeDetectorRef,
+    protected statusService: NbStatusService,
+  ) {}
 
   ngOnChanges({ size, status, shape, multiple, filled, outline, ghost, disabled }: SimpleChanges) {
     if (size || status || shape || multiple || filled || outline || ghost || disabled) {

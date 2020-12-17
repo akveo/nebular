@@ -6,8 +6,9 @@
 
 import { Component, Input, HostBinding } from '@angular/core';
 
+import { NbStatusService } from '../../services/status.service';
 import { NbComponentSize } from '../component-size';
-import { NbComponentStatus } from '../component-status';
+import { NbComponentOrCustomStatus, NbComponentStatus } from '../component-status';
 
 /**
  * Component intended to be used within the `<nb-card>` component.
@@ -174,7 +175,7 @@ export class NbCardComponent {
    * `basic`, `primary`, `info`, `success`, `warning`, `danger`, `control`
    */
   @Input()
-  status: '' | NbComponentStatus = '';
+  status: '' | NbComponentOrCustomStatus = '';
 
   /**
    * Card accent (color of the top border):
@@ -281,5 +282,16 @@ export class NbCardComponent {
   @HostBinding('class.accent-control')
   get controlAccent() {
     return this.accent === 'control';
+  }
+
+  @HostBinding('class')
+  get additionalClasses(): string[] {
+    if (this.statusService.isCustomStatus(this.status)) {
+      return [this.statusService.getStatusClass(this.status)];
+    }
+    return [];
+  }
+
+  constructor(protected statusService: NbStatusService) {
   }
 }

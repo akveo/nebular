@@ -23,10 +23,11 @@ import { isPlatformBrowser } from '@angular/common';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { fromEvent, merge, Subject } from 'rxjs';
 import { filter, switchMap, takeUntil } from 'rxjs/operators';
+
 import { convertToBoolProperty, NbBooleanInput } from '../helpers';
 import { NB_DOCUMENT } from '../../theme.options';
+import { NbComponentOrCustomStatus } from '../component-status';
 import { NbRadioComponent } from './radio.component';
-import { NbComponentStatus } from '../component-status';
 
 /**
  * The `NbRadioGroupComponent` is the wrapper for `nb-radio` button.
@@ -120,16 +121,16 @@ export class NbRadioGroupComponent implements AfterContentInit, OnDestroy, Contr
    * Possible values are `primary` (default), `success`, `warning`, `danger`, `info`.
    */
   @Input()
-  get status(): NbComponentStatus {
+  get status(): NbComponentOrCustomStatus {
     return this._status;
   }
-  set status(value: NbComponentStatus) {
+  set status(value: NbComponentOrCustomStatus) {
     if (this._status !== value) {
       this._status = value;
       this.updateStatus();
     }
   }
-  protected _status: NbComponentStatus = 'basic';
+  protected _status: NbComponentOrCustomStatus = 'basic';
 
   @ContentChildren(NbRadioComponent, { descendants: true }) radios: QueryList<NbRadioComponent>;
 

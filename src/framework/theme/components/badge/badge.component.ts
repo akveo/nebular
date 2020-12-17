@@ -6,7 +6,8 @@
 
 import { Component, HostBinding, Input } from '@angular/core';
 
-import { NbComponentStatus } from '../component-status';
+import { NbStatusService } from '../../services/status.service';
+import { NbComponentOrCustomStatus } from '../component-status';
 import { convertToBoolProperty } from '../helpers';
 
 export type NbBadgePhysicalPosition = 'top left' | 'top right' | 'bottom left' | 'bottom right' | 'center right' | 'center left';
@@ -16,7 +17,7 @@ export type NbBadgePosition = NbBadgePhysicalPosition | NbBadgeLogicalPosition;
 export interface NbBadge {
   text?: string;
   position?: NbBadgePosition;
-  status?: NbComponentStatus;
+  status?: NbComponentOrCustomStatus;
   dotMode?: boolean;
 }
 
@@ -131,7 +132,15 @@ export class NbBadgeComponent implements NbBadge {
    * Badge status (adds specific styles):
    * 'basic', 'primary', 'info', 'success', 'warning', 'danger', 'control'
    */
-  @Input() status: NbComponentStatus = 'basic';
+  @Input() status: NbComponentOrCustomStatus = 'basic';
+
+  @HostBinding('class')
+  get additionalClasses(): string[] {
+    if (this.statusService.isCustomStatus(this.status)) {
+      return [this.statusService.getStatusClass(this.status)];
+    }
+    return [];
+  }
 
   @HostBinding('class.status-primary')
   get primary(): boolean {
@@ -201,5 +210,8 @@ export class NbBadgeComponent implements NbBadge {
   @HostBinding('class.position-center')
   get center(): boolean {
     return this.position.includes('center');
+  }
+
+  constructor(protected statusService: NbStatusService) {
   }
 }
