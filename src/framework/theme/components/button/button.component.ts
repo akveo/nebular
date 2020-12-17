@@ -17,7 +17,7 @@ import {
   NgZone,
 } from '@angular/core';
 
-import { convertToBoolProperty, firstChildNotComment, lastChildNotComment, NbBooleanInput } from '../helpers';
+import { convertToBoolProperty, NbBooleanInput } from '../helpers';
 import { NbButton } from './base-button';
 
 /**
