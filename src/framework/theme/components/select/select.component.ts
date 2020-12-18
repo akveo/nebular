@@ -54,6 +54,7 @@ import { convertToBoolProperty, NbBooleanInput } from '../helpers';
 import { NB_SELECT_INJECTION_TOKEN } from './select-injection-tokens';
 import { NbFormFieldControl, NbFormFieldControlConfig } from '../form-field/form-field-control';
 import { NbFocusMonitor } from '../cdk/a11y/a11y.module';
+import { NbScrollStrategies } from '../cdk/adapter/block-scroll-strategy-adapter';
 
 export type NbSelectCompareFunction<T = any> = (v1: any, v2: any) => boolean;
 export type NbSelectAppearance = 'outline' | 'filled' | 'hero';
@@ -679,6 +680,11 @@ export class NbSelectComponent implements OnChanges, AfterViewInit, AfterContent
    **/
   @Input() optionsOverlayOffset = 8;
 
+  /**
+   * Determines options overlay scroll strategy.
+   **/
+  @Input() scrollStrategy: NbScrollStrategies = 'block';
+
   @HostBinding('class')
   get additionalClasses(): string[] {
     if (this.statusService.isCustomStatus(this.status)) {
@@ -1044,7 +1050,7 @@ export class NbSelectComponent implements OnChanges, AfterViewInit, AfterContent
   }
 
   protected createScrollStrategy(): NbScrollStrategy {
-    return this.overlay.scrollStrategies.block();
+    return this.overlay.scrollStrategies[this.scrollStrategy]();
   }
 
   protected createTriggerStrategy(): NbTriggerStrategy {
