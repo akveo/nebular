@@ -461,6 +461,11 @@ export class NbBasePickerComponent<D, T, P> extends NbBasePicker<D, T, P>
   protected _showWeekNumber: boolean = false;
   static ngAcceptInputType_showWeekNumber: NbBooleanInput;
 
+  /**
+   * Determines picker overlay offset (in pixels).
+   * */
+  @Input() overlayOffset = 8;
+
   constructor(@Inject(NB_DOCUMENT) document,
               positionBuilder: NbPositionBuilderService,
               triggerStrategyBuilder: NbTriggerStrategyBuilderService,
