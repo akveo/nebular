@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { async, inject, TestBed } from '@angular/core/testing';
+import { inject, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { NbAuthSimpleToken, nbAuthCreateToken, NbAuthJWTToken } from './token';
 import { NB_AUTH_FALLBACK_TOKEN, NbAuthTokenParceler } from './token-parceler';
@@ -37,7 +37,7 @@ describe('token-parceler', () => {
       });
     });
 
-    beforeEach(async(inject(
+    beforeEach(waitForAsync(inject(
       [NbAuthTokenParceler],
       (_tokenParceler) => {
         tokenParceler = _tokenParceler;
@@ -89,7 +89,7 @@ describe('token-parceler', () => {
       });
     });
 
-    beforeEach(async(inject(
+    beforeEach(waitForAsync(inject(
       [NbAuthTokenParceler],
       (_tokenParceler) => {
         tokenParceler = _tokenParceler;

@@ -17,7 +17,7 @@ import { SchematicTestRunner, UnitTestTree } from '@angular-devkit/schematics/te
 import { map, switchMap } from 'rxjs/operators';
 
 import { getFileContent } from '@schematics/angular/utility/test';
-import { getWorkspace } from '@schematics/angular/utility/config';
+import { getWorkspace } from '@schematics/angular/utility/workspace';
 import { Schema as WorkspaceOptions } from '@schematics/angular/workspace/schema';
 import { Schema as ApplicationOptions, Style } from '@schematics/angular/application/schema';
 
@@ -198,8 +198,8 @@ describe('ng-add', () => {
   });
 
   it('should register inline theme if no theme already registered', (done) => {
-    runSetupSchematic({ customization: false }).subscribe(tree => {
-      const workspace = getWorkspace(tree);
+    runSetupSchematic({ customization: false }).subscribe(async tree => {
+      const workspace = await getWorkspace(tree);
       const project = getProjectFromWorkspace(workspace);
       const styles = getProjectTargetOptions(project, 'build').styles;
 
@@ -258,8 +258,8 @@ describe('ng-add', () => {
     });
   });
 
-  it('should not add NoopAnimationsModule if BrowserAnimationsModule is set up', () => {
-    const workspace = getWorkspace(appTree);
+  it('should not add NoopAnimationsModule if BrowserAnimationsModule is set up', async () => {
+    const workspace = await getWorkspace(appTree);
     const project = getProjectFromWorkspace(workspace);
 
     // Simulate the case where a developer uses `ng-add` on an Angular CLI project which already

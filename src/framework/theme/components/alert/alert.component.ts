@@ -6,9 +6,10 @@
 
 import { Component, Input, HostBinding, Output, EventEmitter } from '@angular/core';
 
+import { NbStatusService } from '../../services/status.service';
 import { NbComponentSize } from '../component-size';
-import { NbComponentStatus } from '../component-status';
-import { convertToBoolProperty, emptyStatusWarning, NbBooleanInput } from '../helpers';
+import { NbComponentOrCustomStatus, NbComponentStatus } from '../component-status';
+import { convertToBoolProperty, NbBooleanInput } from '../helpers';
 
 
 /**
@@ -130,18 +131,7 @@ export class NbAlertComponent {
    * Alert status (adds specific styles):
    * `basic` (default), `primary`, `success`, `info`, `warning`, `danger`, `control`.
    */
-  @Input()
-  get status(): NbComponentStatus {
-    return this._status;
-  }
-  set status(value: NbComponentStatus) {
-    if ((value as string) === '') {
-      emptyStatusWarning('NbAlert');
-      value = 'basic';
-    }
-    this._status = value;
-  }
-  protected _status: NbComponentStatus = 'basic';
+  @Input() status: NbComponentOrCustomStatus = 'basic';
 
   /**
    * Alert accent (color of the top border):
@@ -176,6 +166,9 @@ export class NbAlertComponent {
    * @type EventEmitter<any>
    */
   @Output() close = new EventEmitter();
+
+  constructor(protected statusService: NbStatusService) {
+  }
 
   /**
    * Emits the removed chip event
@@ -312,5 +305,13 @@ export class NbAlertComponent {
   @HostBinding('class.outline-control')
   get controlOutline() {
     return this.outline === 'control';
+  }
+
+  @HostBinding('class')
+  get additionalClasses(): string[] {
+    if (this.statusService.isCustomStatus(this.status)) {
+      return [this.statusService.getStatusClass(this.status)];
+    }
+    return [];
   }
 }

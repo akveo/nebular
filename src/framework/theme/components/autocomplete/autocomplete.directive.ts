@@ -191,8 +191,7 @@ export class NbAutocompleteDirective<T> implements OnDestroy, AfterViewInit, Con
     protected triggerStrategyBuilder: NbTriggerStrategyBuilderService,
     protected positionBuilder: NbPositionBuilderService,
     protected activeDescendantKeyManagerFactory: NbActiveDescendantKeyManagerFactoryService<NbOptionComponent<T>>,
-    // @breaking-change @7.0.0 Make renderer required.
-    @Optional() protected renderer?: Renderer2,
+    protected renderer: Renderer2,
   ) {}
 
   ngAfterViewInit() {
@@ -265,12 +264,7 @@ export class NbAutocompleteDirective<T> implements OnDestroy, AfterViewInit, Con
   }
 
   setDisabledState(disabled: boolean): void {
-    // @breaking-change @7.0.0 Keep only `this.renderer.setProperty` without `if/else`.
-    if (this.renderer) {
-      this.renderer.setProperty(this.hostRef.nativeElement, 'disabled', disabled);
-    } else if (this.hostRef.nativeElement) {
-      this.hostRef.nativeElement.disabled = disabled;
-    }
+    this.renderer.setProperty(this.hostRef.nativeElement, 'disabled', disabled);
   }
 
   protected subscribeOnOptionClick() {

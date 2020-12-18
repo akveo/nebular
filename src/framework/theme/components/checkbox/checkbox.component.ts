@@ -20,8 +20,9 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
-import { NbComponentStatus } from '../component-status';
-import { convertToBoolProperty, emptyStatusWarning, NbBooleanInput } from '../helpers';
+import { NbStatusService } from '../../services/status.service';
+import { NbComponentOrCustomStatus } from '../component-status';
+import { convertToBoolProperty, NbBooleanInput } from '../helpers';
 
 /**
  * Styled checkbox component
@@ -283,25 +284,6 @@ export class NbCheckboxComponent implements AfterViewInit, ControlValueAccessor 
   onChange: any = () => { };
   onTouched: any = () => { };
 
-  /**
-   * Checkbox value
-   * @deprecated
-   * @breaking-change Remove @5.0.0
-   */
-  @Input()
-  get value(): boolean {
-    return this.checked;
-  }
-
-  /**
-   * @deprecated
-   * @breaking-change Remove @5.0.0
-   */
-  set value(value: boolean) {
-    console.warn('NbCheckbox: `value` is deprecated and will be removed in 5.0.0. Use `checked` instead.');
-    this.checked = value;
-  }
-
   @Input()
   get checked(): boolean {
     return this._checked;
@@ -329,19 +311,7 @@ export class NbCheckboxComponent implements AfterViewInit, ControlValueAccessor 
    * Checkbox status.
    * Possible values are: `basic`, `primary`, `success`, `warning`, `danger`, `info`, `control`.
    */
-  @Input()
-  get status(): NbComponentStatus {
-    return this._status;
-  }
-  set status(value: NbComponentStatus) {
-    if ((value as string) === '') {
-      emptyStatusWarning('NbCheckbox');
-      this._status = 'basic';
-    } else {
-      this._status = value;
-    }
-  }
-  protected _status: NbComponentStatus = 'basic';
+  @Input() status: NbComponentOrCustomStatus = 'basic';
 
   /**
    * Controls checkbox indeterminate state
@@ -355,21 +325,6 @@ export class NbCheckboxComponent implements AfterViewInit, ControlValueAccessor 
   }
   private _indeterminate: boolean = false;
   static ngAcceptInputType_indeterminate: NbBooleanInput;
-
-  /**
-   * Output when checked state is changed by a user
-   * @deprecated
-   * @breaking-change Remove @5.0.0
-   * @type EventEmitter<boolean>
-   */
-  @Output()
-  get valueChange(): EventEmitter<boolean> {
-    console.warn('NbCheckbox: `valueChange` is deprecated and will be removed in 5.0.0. Use `checkedChange` instead.');
-    return this.checkedChange;
-  }
-  set valueChange(valueChange: EventEmitter<boolean>) {
-    this.checkedChange = valueChange;
-  }
 
   /**
    * Output when checked state is changed by a user
@@ -412,11 +367,20 @@ export class NbCheckboxComponent implements AfterViewInit, ControlValueAccessor 
     return this.status === 'control';
   }
 
+  @HostBinding('class')
+  get additionalClasses(): string[] {
+    if (this.statusService.isCustomStatus(this.status)) {
+      return [this.statusService.getStatusClass(this.status)];
+    }
+    return [];
+  }
+
   constructor(
     private changeDetector: ChangeDetectorRef,
     private renderer: Renderer2,
     private hostElement: ElementRef<HTMLElement>,
     private zone: NgZone,
+    private statusService: NbStatusService,
   ) {}
 
   ngAfterViewInit() {

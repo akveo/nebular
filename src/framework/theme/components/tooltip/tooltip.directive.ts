@@ -14,12 +14,11 @@ import {
   OnInit,
   Output,
   EventEmitter,
-  SimpleChanges,
 } from '@angular/core';
 import { skip, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 
-import { NbComponentStatus } from '../component-status';
+import { NbComponentOrCustomStatus } from '../component-status';
 import { NbAdjustment, NbPosition, NbPositionValues, NbAdjustmentValues } from '../cdk/overlay/overlay-position';
 import { NbTrigger } from '../cdk/overlay/overlay-trigger';
 import { NbDynamicOverlay } from '../cdk/overlay/dynamic/dynamic-overlay';
@@ -104,12 +103,6 @@ export class NbTooltipDirective implements OnInit, OnChanges, AfterViewInit, OnD
     return this._adjustment;
   }
   set adjustment(value: NbAdjustment) {
-    if (!value) {
-      // @breaking-change Remove @5.0.0
-      console.warn(`Falsy values for 'nbPopoverAdjustment' are deprecated and will be removed in Nebular 5.
- Use 'noop' instead.`);
-      value = NbAdjustment.NOOP;
-    }
     this._adjustment = value;
   }
   protected _adjustment: NbAdjustment = NbAdjustment.CLOCKWISE;
@@ -141,7 +134,7 @@ export class NbTooltipDirective implements OnInit, OnChanges, AfterViewInit, OnD
    * @param {string} status
    */
   @Input('nbTooltipStatus')
-  set status(status: NbComponentStatus) {
+  set status(status: NbComponentOrCustomStatus) {
     this.context = Object.assign(this.context, {status});
   }
 

@@ -19,9 +19,10 @@ import {
   OnChanges,
 } from '@angular/core';
 
+import { NbStatusService } from '../../services/status.service';
 import { NbComponentSize } from '../component-size';
-import { NbComponentStatus } from '../component-status';
-import { convertToBoolProperty, emptyStatusWarning, NbBooleanInput } from '../helpers';
+import { NbComponentOrCustomStatus } from '../component-status';
+import { convertToBoolProperty, NbBooleanInput } from '../helpers';
 import { NbChatFormComponent } from './chat-form.component';
 import { NbChatMessageComponent } from './chat-message.component';
 
@@ -192,18 +193,7 @@ export class NbChatComponent implements OnChanges, AfterContentInit, AfterViewIn
    * Chat status color (adds specific styles):
    * `basic` (default), `primary`, `success`, `info`, `warning`, `danger`, `control`.
    */
-  @Input()
-  get status(): NbComponentStatus {
-    return this._status;
-  }
-  set status(value: NbComponentStatus) {
-    if (!value) {
-      emptyStatusWarning('NbChat');
-      value = 'basic';
-    }
-    this._status = value;
-  }
-  protected _status: NbComponentStatus = 'basic';
+  @Input() status: NbComponentOrCustomStatus = 'basic';
 
   @Input() noMessagesPlaceholder: string = 'No messages yet.';
 
@@ -223,6 +213,9 @@ export class NbChatComponent implements OnChanges, AfterContentInit, AfterViewIn
   @ViewChild('scrollable') scrollable: ElementRef;
   @ContentChildren(NbChatMessageComponent) messages: QueryList<NbChatMessageComponent>;
   @ContentChild(NbChatFormComponent) chatForm: NbChatFormComponent;
+
+  constructor(protected statusService: NbStatusService) {
+  }
 
   ngOnChanges(changes: SimpleChanges) {
     if ('status' in changes) {
@@ -318,5 +311,13 @@ export class NbChatComponent implements OnChanges, AfterContentInit, AfterViewIn
   @HostBinding('class.status-control')
   get control(): boolean {
     return this.status === 'control';
+  }
+
+  @HostBinding('class')
+  get additionalClasses(): string[] {
+    if (this.statusService.isCustomStatus(this.status)) {
+      return [this.statusService.getStatusClass(this.status)];
+    }
+    return [];
   }
 }

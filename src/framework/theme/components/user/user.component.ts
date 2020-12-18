@@ -10,7 +10,7 @@ import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
 import { convertToBoolProperty, NbBooleanInput } from '../helpers';
 import { NbComponentSize } from '../component-size';
 import { NbComponentShape } from '../component-shape';
-import { NbComponentStatus } from '../component-status';
+import { NbComponentOrCustomStatus } from '../component-status';
 import { NbBadgePosition } from '../badge/badge.component';
 
 /**
@@ -221,7 +221,7 @@ export class NbUserComponent {
    * `primary`, `info`, `success`, `warning`, `danger`
    * @param {string} val
    */
-  @Input() badgeStatus: NbComponentStatus = 'basic';
+  @Input() badgeStatus: NbComponentOrCustomStatus = 'basic';
 
   /**
    * Badge position.

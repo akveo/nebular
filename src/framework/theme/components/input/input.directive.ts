@@ -21,10 +21,11 @@ import {
 import { Subject, BehaviorSubject } from 'rxjs';
 import { map, finalize, takeUntil } from 'rxjs/operators';
 
-import { convertToBoolProperty, emptyStatusWarning, NbBooleanInput } from '../helpers';
+import { NbStatusService } from '../../services/status.service';
+import { convertToBoolProperty, NbBooleanInput } from '../helpers';
 import { NbComponentSize } from '../component-size';
 import { NbComponentShape } from '../component-shape';
-import { NbComponentStatus } from '../component-status';
+import { NbComponentOrCustomStatus } from '../component-status';
 import { NbFormFieldControl } from '../form-field/form-field-control';
 import { NbFocusMonitor } from '../cdk/a11y/a11y.module';
 
@@ -235,19 +236,7 @@ export class NbInputDirective implements DoCheck, OnChanges, OnInit, AfterViewIn
    * Field status (adds specific styles):
    * `basic`, `primary`, `info`, `success`, `warning`, `danger`, `control`
    */
-  @Input()
-  get status(): NbComponentStatus {
-    return this._status;
-  }
-  set status(value: NbComponentStatus) {
-    if ((value as string) === '') {
-      emptyStatusWarning('NbInput');
-      this._status = 'basic';
-    } else {
-      this._status = value;
-    }
-  }
-  protected _status: NbComponentStatus = 'basic';
+  @Input() status: NbComponentOrCustomStatus = 'basic';
 
   /**
    * Field shapes modifications. Possible values: `rectangle` (default), `round`, `semi-round`.
@@ -269,11 +258,20 @@ export class NbInputDirective implements DoCheck, OnChanges, OnInit, AfterViewIn
   private _fullWidth = false;
   static ngAcceptInputType_fullWidth: NbBooleanInput;
 
+  @HostBinding('class')
+  get additionalClasses(): string[] {
+    if (this.statusService.isCustomStatus(this.status)) {
+      return [this.statusService.getStatusClass(this.status)];
+    }
+    return [];
+  }
+
   constructor(
     protected elementRef: ElementRef<HTMLInputElement | HTMLTextAreaElement>,
     protected focusMonitor: NbFocusMonitor,
     protected renderer: Renderer2,
     protected zone: NgZone,
+    protected statusService: NbStatusService,
   ) {
   }
 
@@ -395,7 +393,7 @@ export class NbInputDirective implements DoCheck, OnChanges, OnInit, AfterViewIn
   /*
    * @docs-private
    **/
-  status$ = new BehaviorSubject<NbComponentStatus>(this.status);
+  status$ = new BehaviorSubject<NbComponentOrCustomStatus>(this.status);
 
   /*
    * @docs-private

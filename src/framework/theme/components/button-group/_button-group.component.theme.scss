@@ -1,0 +1,69 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
+@mixin nb-buttons-group-theme() {
+  nb-button-group {
+    display: inline-flex;
+
+    [nbButton],
+    [nbButtonToggle] {
+      @include nb-ltr() {
+        &:first-child:not(:last-child) {
+          border-top-right-radius: 0;
+          border-bottom-right-radius: 0;
+        }
+        &:last-child:not(:first-child) {
+          border-top-left-radius: 0;
+          border-bottom-left-radius: 0;
+        }
+      }
+      @include nb-rtl() {
+        &:first-child:not(:last-child) {
+          border-top-left-radius: 0;
+          border-bottom-left-radius: 0;
+        }
+        &:last-child:not(:first-child) {
+          border-top-right-radius: 0;
+          border-bottom-right-radius: 0;
+        }
+      }
+
+      &:not(:first-child):not(:last-child) {
+        border-radius: 0;
+      }
+
+      &.appearance-filled,
+      &.appearance-ghost {
+        // Makes border same color as background. We need to keep the border so that buttons inside and outside
+        // the group have the same height.
+        border-color: transparent;
+      }
+
+      &.appearance-filled {
+        @each $status in nb-get-statuses() {
+          // I can't figure out any sane selector to turn the start border into a divider for buttons
+          // in the default state only (not hovered, focused, etc.). So I went with this horrible thing.
+          // Another way was to copy button styles here, but then we need to keep track of button styles
+          // all the time. Also, it would increase the number of duplicate button styles.
+          &.status-#{$status}:not(:first-child):not(:hover):not(:focus):not(:active):not([disabled]) {
+            @include nb-ltr(border-left-color, nb-theme(button-group-filled-#{$status}-divider-color));
+            @include nb-rtl(border-right-color, nb-theme(button-group-filled-#{$status}-divider-color));
+          }
+
+          &.status-#{$status} {
+            color: nb-theme(button-group-filled-button-#{$status}-text-color);
+          }
+        }
+      }
+
+      // See the comment on the selector above
+      &.appearance-ghost:not(:first-child):not(:hover):not(:focus):not(:active):not([disabled]) {
+        @include nb-ltr(border-left-color, nb-theme(button-group-ghost-divider-color));
+        @include nb-rtl(border-right-color, nb-theme(button-group-ghost-divider-color));
+      }
+    }
+  }
+}

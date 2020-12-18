@@ -1,0 +1,92 @@
+<nb-card>
+  <nb-card-body>
+
+    <fieldset>
+      <legend class="subtitle">Size:</legend>
+      <nb-radio-group [(value)]="selectedSize" name="size">
+        <nb-radio *ngFor="let size of sizes" name="size" [value]="size">{{ size }}</nb-radio>
+      </nb-radio-group>
+    </fieldset>
+
+    <fieldset>
+      <legend class="subtitle">Shape:</legend>
+      <nb-radio-group [(value)]="selectedShape" name="shape">
+        <nb-radio *ngFor="let shape of shapes" name="shape" [value]="shape">{{ shape }}</nb-radio>
+      </nb-radio-group>
+    </fieldset>
+
+    <fieldset>
+      <nb-checkbox [(checked)]="multiple">Multiple</nb-checkbox>
+    </fieldset>
+
+    <fieldset>
+      <nb-checkbox [(checked)]="disabledGroup">Disabled group</nb-checkbox>
+    </fieldset>
+
+    <fieldset>
+      <nb-checkbox [(checked)]="disabledFirstButton">Disable first button</nb-checkbox>
+    </fieldset>
+
+    <fieldset>
+      <nb-checkbox [(checked)]="disabledSecondButton">Disable second button</nb-checkbox>
+    </fieldset>
+
+    <fieldset>
+      <nb-checkbox [(checked)]="disabledThirdButton">Disable third button</nb-checkbox>
+    </fieldset>
+
+    <div class="reference-row">
+      <button nbButton status="basic">Reference button</button>
+      <button nbButton status="primary">Reference button</button>
+      <button nbButton status="success">Reference button</button>
+      <button nbButton status="info">Reference button</button>
+      <button nbButton status="warning">Reference button</button>
+      <button nbButton status="danger">Reference button</button>
+      <div class="control-status-example">
+        <button nbButton status="control">Reference button</button>
+      </div>
+    </div>
+
+    <div class="reference-row">
+      <button nbButtonToggle status="basic">Reference toggle</button>
+      <button nbButtonToggle status="primary">Reference toggle</button>
+      <button nbButtonToggle status="success">Reference toggle</button>
+      <button nbButtonToggle status="info">Reference toggle</button>
+      <button nbButtonToggle status="warning">Reference toggle</button>
+      <button nbButtonToggle status="danger">Reference toggle</button>
+      <div class="control-status-example">
+        <button nbButtonToggle status="control">Reference toggle</button>
+      </div>
+    </div>
+
+    <div *ngFor="let appearance of appearances" class="appearance-container">
+      <p class="subtitle appearance-name">{{ appearance }}:</p>
+
+      <div class="appearance-row">
+        <div *ngFor="let status of statuses" [class.control-status-example]="status === 'control'" class="status-container">
+          <nb-button-group [status]="status"
+                           [appearance]="appearance"
+                           [size]="selectedSize"
+                           [shape]="selectedShape"
+                           [disabled]="disabledGroup">
+            <button nbButton [disabled]="disabledFirstButton">Button</button>
+            <button nbButton [disabled]="disabledSecondButton">Button</button>
+            <button nbButton [disabled]="disabledThirdButton">Button</button>
+          </nb-button-group>
+
+          <nb-button-group [status]="status"
+                           [appearance]="appearance"
+                           [size]="selectedSize"
+                           [shape]="selectedShape"
+                           [multiple]="multiple"
+                           [disabled]="disabledGroup">
+            <button nbButtonToggle [disabled]="disabledFirstButton">Toggle</button>
+            <button nbButtonToggle [disabled]="disabledSecondButton">Toggle</button>
+            <button nbButtonToggle [disabled]="disabledThirdButton">Toggle</button>
+          </nb-button-group>
+        </div>
+      </div>
+    </div>
+
+  </nb-card-body>
+</nb-card>

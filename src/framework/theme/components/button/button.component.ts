@@ -17,12 +17,9 @@ import {
   NgZone,
 } from '@angular/core';
 
-import { NbComponentStatus } from '../component-status';
-import { NbComponentShape } from '../component-shape';
-import { NbComponentSize } from '../component-size';
-import { convertToBoolProperty, firstChildNotComment, lastChildNotComment, NbBooleanInput } from '../helpers';
-
-export type NbButtonAppearance = 'filled' | 'outline' | 'ghost' | 'hero';
+import { NbStatusService } from '../../services/status.service';
+import { convertToBoolProperty, NbBooleanInput } from '../helpers';
+import { NbButton } from './base-button';
 
 /**
  * Basic button component.
@@ -530,86 +527,15 @@ export type NbButtonAppearance = 'filled' | 'outline' | 'ghost' | 'hero';
  */
 @Component({
   selector: 'button[nbButton],a[nbButton],input[type="button"][nbButton],input[type="submit"][nbButton]',
-  styleUrls: ['./button.component.scss'],
   template: `
     <ng-content></ng-content>
   `,
+  providers: [
+    { provide: NbButton, useExisting: NbButtonComponent },
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NbButtonComponent implements AfterViewInit {
-
-  /**
-   * Button size, available sizes:
-   * `tiny`, `small`, `medium`, `large`, `giant`
-   */
-  @Input() size: NbComponentSize = 'medium';
-
-  /**
-   * Button status (adds specific styles):
-   * `primary`, `info`, `success`, `warning`, `danger`
-   */
-  @Input() status: NbComponentStatus = 'basic';
-
-  /**
-   * Button shapes: `rectangle`, `round`, `semi-round`
-   */
-  @Input() shape: NbComponentShape = 'rectangle';
-
-  /**
-   * Button appearance: `filled`, `outline`, `ghost`, `hero`
-   */
-  @Input() appearance: NbButtonAppearance = 'filled';
-
-  /**
-   * Tabindex of the button.
-   */
-  @Input() tabIndex: number;
-
-  /**
-   * Sets `filled` appearance
-   */
-  @Input()
-  @HostBinding('class.appearance-filled')
-  get filled(): boolean {
-    return this.appearance === 'filled';
-  }
-  set filled(value: boolean) {
-    if (convertToBoolProperty(value)) {
-      this.appearance = 'filled';
-    }
-  }
-  static ngAcceptInputType_filled: NbBooleanInput;
-
-  /**
-   * Sets `outline` appearance
-   */
-  @Input()
-  @HostBinding('class.appearance-outline')
-  get outline(): boolean {
-    return this.appearance === 'outline';
-  }
-  set outline(value: boolean) {
-    if (convertToBoolProperty(value)) {
-      this.appearance = 'outline';
-    }
-  }
-  static ngAcceptInputType_outline: NbBooleanInput;
-
-  /**
-   * Sets `ghost` appearance
-   */
-  @Input()
-  @HostBinding('class.appearance-ghost')
-  get ghost(): boolean {
-    return this.appearance === 'ghost';
-  }
-  set ghost(value: boolean) {
-    if (convertToBoolProperty(value)) {
-      this.appearance = 'ghost';
-    }
-  }
-  static ngAcceptInputType_ghost: NbBooleanInput;
-
+export class NbButtonComponent extends NbButton implements AfterViewInit {
   /**
    * Sets `hero` appearance
    */
@@ -624,75 +550,6 @@ export class NbButtonComponent implements AfterViewInit {
     }
   }
   static ngAcceptInputType_hero: NbBooleanInput;
-
-  /**
-   * If set element will fill its container
-   */
-  @Input()
-  @HostBinding('class.full-width')
-  get fullWidth(): boolean {
-    return this._fullWidth;
-  }
-  set fullWidth(value: boolean) {
-    this._fullWidth = convertToBoolProperty(value);
-  }
-  private _fullWidth = false;
-  static ngAcceptInputType_fullWidth: NbBooleanInput;
-
-  /**
-   * Disables the button
-   */
-  @Input()
-  @HostBinding('attr.aria-disabled')
-  @HostBinding('class.btn-disabled')
-  get disabled(): boolean {
-    return this._disabled;
-  }
-  set disabled(value: boolean) {
-    this._disabled = convertToBoolProperty(value);
-    this.renderer.setProperty(this.hostElement.nativeElement, 'disabled', this.disabled);
-  }
-  private _disabled: boolean = false;
-  static ngAcceptInputType_disabled: NbBooleanInput;
-
-  // issue #794
-  @HostBinding('attr.tabindex')
-  get tabbable(): string {
-    if (this.disabled) {
-      return '-1';
-    }
-
-    if (this.tabIndex == null) {
-      return '0';
-    }
-
-    return this.tabIndex.toString();
-  }
-
-  @HostBinding('class.size-tiny')
-  get tiny() {
-    return this.size === 'tiny';
-  }
-
-  @HostBinding('class.size-small')
-  get small() {
-    return this.size === 'small';
-  }
-
-  @HostBinding('class.size-medium')
-  get medium() {
-    return this.size === 'medium';
-  }
-
-  @HostBinding('class.size-large')
-  get large() {
-    return this.size === 'large';
-  }
-
-  @HostBinding('class.size-giant')
-  get giant() {
-    return this.size === 'giant';
-  }
 
   @HostBinding('class.status-primary')
   get primary() {
@@ -729,35 +586,6 @@ export class NbButtonComponent implements AfterViewInit {
     return this.status === 'control';
   }
 
-  @HostBinding('class.shape-rectangle')
-  get rectangle() {
-    return this.shape === 'rectangle';
-  }
-
-  @HostBinding('class.shape-round')
-  get round() {
-    return this.shape === 'round';
-  }
-
-  @HostBinding('class.shape-semi-round')
-  get semiRound() {
-    return this.shape === 'semi-round';
-  }
-
-  @HostBinding('class.icon-start')
-  get iconLeft(): boolean {
-    const el = this.hostElement.nativeElement;
-    const icon = this.iconElement;
-    return !!(icon && firstChildNotComment(el) === icon);
-  }
-
-  @HostBinding('class.icon-end')
-  get iconRight(): boolean {
-    const el = this.hostElement.nativeElement;
-    const icon = this.iconElement;
-    return !!(icon && lastChildNotComment(el) === icon);
-  }
-
   /**
    * @private
    * Keep this handler to partially support anchor disabling.
@@ -781,17 +609,8 @@ export class NbButtonComponent implements AfterViewInit {
     protected hostElement: ElementRef<HTMLElement>,
     protected cd: ChangeDetectorRef,
     protected zone: NgZone,
-  ) {}
-
-  ngAfterViewInit() {
-    // TODO: #2254
-    this.zone.runOutsideAngular(() => setTimeout(() => {
-      this.renderer.addClass(this.hostElement.nativeElement, 'nb-transition');
-    }));
-  }
-
-  protected get iconElement() {
-    const el = this.hostElement.nativeElement;
-    return el.querySelector('nb-icon');
+    protected statusService: NbStatusService,
+  ) {
+    super(renderer, hostElement, cd, zone, statusService);
   }
 }
