@@ -9,7 +9,6 @@ import { NgModule } from '@angular/core';
 import { NbFullWidthFileUploadComponent } from './full-width-file-upload.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NgdThemeModule } from '../../../../../docs/app/@theme/theme.module';
 import { NbProgressBarModule } from '../progress-bar/progress-bar.module';
 import { NbButtonModule } from '../button/button.module';
 import { NbDropAreaComponent } from './drop-area.component';
@@ -22,7 +21,7 @@ import {NbFileUploadComponent} from './file-upload.component';
 
 
 @NgModule({
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, NgdThemeModule, NbProgressBarModule, NbButtonModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, NbProgressBarModule, NbButtonModule],
   exports: [
     NbFullWidthFileUploadComponent,
     NbCompactFileUploadComponent,
