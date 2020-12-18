@@ -47,7 +47,7 @@ If you want to have more control over setup process you can [use manual setup gu
 
 ## More from Akveo
 - [Eva Icons](https://github.com/akveo/eva-icons) - 480+ beautiful Open Source icons
-- [Akveo templates](https://www.akveo.com/templates?utm_campaign=services%20-%20github%20-%20templates&utm_source=github&utm_medium=readme_nebular&utm_content=templates) - 10+ Ready-to-use apps templates to speed up your apps developments
+- [Akveo templates](https://www.akveo.com/templates?utm_campaign=services%20-%20github%20-%20templates&utm_source=nebular&utm_medium=referral&utm_content=nebular%20github%20readme%20more%20from%20akveo%20link) - 10+ Ready-to-use apps templates to speed up your apps developments
 
 ## How can I support the developers?
 - Star our GitHub repo :star:

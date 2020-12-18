@@ -60,7 +60,9 @@
           }
         }
       }
+    }
 
+    @each $status in nb-get-core-statuses() {
       &.accent-#{$status} {
         border-top-color: nb-theme(card-header-#{$status}-background-color);
       }

@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { TestBed, inject, async } from '@angular/core/testing';
+import { TestBed, inject, waitForAsync } from '@angular/core/testing';
 import { NbAclService } from './acl.service';
 import { NB_SECURITY_OPTIONS_TOKEN } from '../security.options';
 import { deepExtend } from '../../auth/helpers'; // TODO: common module?
@@ -345,7 +345,7 @@ describe('acl-service', () => {
     });
 
     // Single async inject to save references; which are used in all tests below
-    beforeEach(async(inject(
+    beforeEach(waitForAsync(inject(
       [NbAclService],
       (_aclService) => {
         aclService = _aclService
@@ -385,7 +385,7 @@ describe('acl-service', () => {
     });
 
     // Single async inject to save references; which are used in all tests below
-    beforeEach(async(inject(
+    beforeEach(waitForAsync(inject(
       [NbAclService],
       (_aclService) => {
         aclService = _aclService
@@ -431,7 +431,7 @@ describe('acl-service', () => {
     });
 
     // Single async inject to save references; which are used in all tests below
-    beforeEach(async(inject(
+    beforeEach(waitForAsync(inject(
       [NbAclService],
       (_aclService) => {
         aclService = _aclService
@@ -482,7 +482,7 @@ describe('acl-service', () => {
     });
 
     // Single async inject to save references; which are used in all tests below
-    beforeEach(async(inject(
+    beforeEach(waitForAsync(inject(
       [NbAclService],
       (_aclService) => {
         aclService = _aclService

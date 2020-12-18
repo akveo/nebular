@@ -8,7 +8,7 @@ import { Component, HostBinding, Input } from '@angular/core';
 
 import { convertToBoolProperty, NbBooleanInput } from '../helpers';
 import { NbComponentSize } from '../component-size';
-import { NbComponentStatus } from '../component-status';
+import { NbComponentOrCustomStatus } from '../component-status';
 import { NbBadgePosition } from '../badge/badge.component';
 import { NbIconConfig } from '../icon/icon.component';
 
@@ -121,10 +121,10 @@ export class NbActionComponent {
 
   /**
    * Badge status (adds specific styles):
-   * 'primary', 'info', 'success', 'warning', 'danger'
+   * 'basic', 'primary', 'info', 'success', 'warning', 'danger', 'control'
    * @param {string} val
    */
-  @Input() badgeStatus: NbComponentStatus = 'basic';
+  @Input() badgeStatus: NbComponentOrCustomStatus = 'basic';
 
   /**
    * Badge position.

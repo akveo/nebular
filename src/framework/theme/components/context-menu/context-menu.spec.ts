@@ -1,5 +1,5 @@
 import { Component, ElementRef, Input, NgModule, Type, ViewChild } from '@angular/core';
-import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 
@@ -179,7 +179,7 @@ describe('Directive: NbContextMenuDirective', () => {
 
   const overlayHandler = new NbDynamicOverlayHandlerMock();
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.resetTestingModule();
     TestBed.configureTestingModule({
       imports: [
@@ -245,7 +245,7 @@ describe('Directive: NbContextMenuDirective', () => {
 
   describe('mocked services', () => {
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
       TestBed.resetTestingModule();
       TestBed.configureTestingModule({
         imports: [

@@ -17,11 +17,13 @@ $nb-theme: ();
 $nb-processed-theme: ();
 $nb-theme-export-mode: false !default;
 $nb-themes-export: ();
+$nb-custom-statuses: () !default;
 
 // public variables
 $nb-enable-css-custom-properties: false !global !default;
 $nb-enabled-themes: () !global;
 $nb-themes: () !global;
+$nb-custom-statuses: () !global !default;
 
 // private variables
 $nb-theme-process-mode: 'lazy-process' !global;

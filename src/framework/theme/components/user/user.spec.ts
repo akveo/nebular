@@ -1,5 +1,11 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { NbComponentSize, NbLayoutDirectionService, NbUserComponent, NbUserModule } from '@nebular/theme';
+import {
+  NbComponentSize,
+  NbLayoutDirectionService,
+  NbThemeModule,
+  NbUserComponent,
+  NbUserModule,
+} from '@nebular/theme';
 
 const NAME_SELECTOR = '.user-name';
 const TITLE_SELECTOR = '.user-title';
@@ -15,7 +21,7 @@ describe('NbUserComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ NbUserModule ],
+      imports: [ NbThemeModule.forRoot(), NbUserModule ],
       providers: [ NbLayoutDirectionService ],
     });
 

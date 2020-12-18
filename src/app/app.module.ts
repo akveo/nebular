@@ -30,7 +30,7 @@ import { NbEvaIconsModule } from '@nebular/eva-icons';
         path: '',
         loadChildren: () => import('../playground/playground.module').then(m => m.PlaygroundModule),
       },
-    ], { useHash: true }),
+    ], { useHash: true, relativeLinkResolution: 'legacy' }),
     NbThemeModule.forRoot(),
     NbEvaIconsModule,
   ],

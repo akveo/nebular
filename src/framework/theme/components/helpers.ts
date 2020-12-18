@@ -42,10 +42,3 @@ export function lastChildNotComment(node: Node) {
     .filter((child: Node) => child.nodeType !== Node.COMMENT_NODE);
   return children[children.length - 1];
 }
-
-/*
- * @breaking-change Remove @6.0.0
- */
-export function emptyStatusWarning(source: string) {
-  console.warn(`${source}: Using empty string as a status is deprecated. Use \`basic\` instead.`);
-}

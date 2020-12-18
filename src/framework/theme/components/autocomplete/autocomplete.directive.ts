@@ -103,8 +103,6 @@ export class NbAutocompleteDirective<T> implements OnDestroy, AfterViewInit, Con
 
   protected overlayRef: NbOverlayRef;
 
-  protected overlayOffset = 8;
-
   protected keyManager: NbActiveDescendantKeyManager<NbOptionComponent<T>>;
 
   protected destroy$: Subject<void> = new Subject<void>();
@@ -137,6 +135,11 @@ export class NbAutocompleteDirective<T> implements OnDestroy, AfterViewInit, Con
   set autocomplete(autocomplete: NbAutocompleteComponent<T>) {
     this._autocomplete = autocomplete;
   }
+
+  /**
+   * Determines options overlay offset (in pixels).
+   **/
+  @Input() overlayOffset: number = 8;
 
   /**
    * Determines if the input will be focused when the control value is changed
@@ -191,8 +194,7 @@ export class NbAutocompleteDirective<T> implements OnDestroy, AfterViewInit, Con
     protected triggerStrategyBuilder: NbTriggerStrategyBuilderService,
     protected positionBuilder: NbPositionBuilderService,
     protected activeDescendantKeyManagerFactory: NbActiveDescendantKeyManagerFactoryService<NbOptionComponent<T>>,
-    // @breaking-change @7.0.0 Make renderer required.
-    @Optional() protected renderer?: Renderer2,
+    protected renderer: Renderer2,
   ) {}
 
   ngAfterViewInit() {
@@ -265,12 +267,7 @@ export class NbAutocompleteDirective<T> implements OnDestroy, AfterViewInit, Con
   }
 
   setDisabledState(disabled: boolean): void {
-    // @breaking-change @7.0.0 Keep only `this.renderer.setProperty` without `if/else`.
-    if (this.renderer) {
-      this.renderer.setProperty(this.hostRef.nativeElement, 'disabled', disabled);
-    } else if (this.hostRef.nativeElement) {
-      this.hostRef.nativeElement.disabled = disabled;
-    }
+    this.renderer.setProperty(this.hostRef.nativeElement, 'disabled', disabled);
   }
 
   protected subscribeOnOptionClick() {
@@ -417,7 +414,7 @@ export class NbAutocompleteDirective<T> implements OnDestroy, AfterViewInit, Con
   protected createOverlay() {
     const scrollStrategy = this.createScrollStrategy();
     this.overlayRef = this.overlay.create(
-      { positionStrategy: this.positionStrategy, scrollStrategy });
+      { positionStrategy: this.positionStrategy, scrollStrategy, panelClass: this.autocomplete.optionsPanelClass });
   }
 
   protected initOverlay() {

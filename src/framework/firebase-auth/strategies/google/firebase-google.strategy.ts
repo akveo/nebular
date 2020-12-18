@@ -12,7 +12,7 @@ import { NbAuthStrategyClass, NbAuthResult, NbAuthStrategyOptions } from '@nebul
 import { NbFirebaseBaseStrategy } from '../base/firebase-base.strategy';
 import { NbFirebaseIdentityProviderStrategyOptions } from '../base/firebase-identity-provider-strategy.options';
 
-import * as firebase from 'firebase/app';
+import firebase from 'firebase/app';
 import 'firebase/auth';
 
 @Injectable()

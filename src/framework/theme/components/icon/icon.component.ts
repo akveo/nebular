@@ -16,13 +16,14 @@ import {
 } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
-import { NbComponentStatus } from '../component-status';
+import { NbStatusService } from '../../services/status.service';
+import { NbComponentOrCustomStatus } from '../component-status';
 import { NbIconLibraries } from './icon-libraries';
 
 export interface NbIconConfig {
   icon: string;
   pack?: string;
-  status?: NbComponentStatus;
+  status?: NbComponentOrCustomStatus;
   options?: { [name: string]: any };
 }
 
@@ -155,6 +156,14 @@ export class NbIconComponent implements NbIconConfig, OnChanges, OnInit {
     return this.status === 'control';
   }
 
+  @HostBinding('class')
+  get additionalClasses(): string[] {
+    if (this.statusService.isCustomStatus(this.status)) {
+      return [this.statusService.getStatusClass(this.status)];
+    }
+    return [];
+  }
+
   /**
    * Icon name
    * @param {string} status
@@ -177,7 +186,7 @@ export class NbIconComponent implements NbIconConfig, OnChanges, OnInit {
    * Icon status (adds specific styles):
    * `basic`, `primary`, `info`, `success`, `warning`, `danger`, `control`
    */
-  @Input() status?: NbComponentStatus;
+  @Input() status?: NbComponentOrCustomStatus;
 
   /**
    * Sets all icon configurable properties via config object.
@@ -211,6 +220,7 @@ export class NbIconComponent implements NbIconConfig, OnChanges, OnInit {
     protected iconLibrary: NbIconLibraries,
     protected el: ElementRef,
     protected renderer: Renderer2,
+    protected statusService: NbStatusService,
   ) {}
 
   ngOnInit() {

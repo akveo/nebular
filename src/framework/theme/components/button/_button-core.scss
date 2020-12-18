@@ -6,7 +6,7 @@
 
 @import '../../styles/core/mixins';
 
-:host {
+@mixin nb-button-core() {
   appearance: none;
   text-align: center;
   display: inline-flex;
@@ -16,7 +16,8 @@
   vertical-align: middle;
   user-select: none;
 
-  &:hover, &:focus {
+  &:hover,
+  &:focus {
     text-decoration: none;
   }
 
@@ -24,11 +25,11 @@
     width: 100%;
   }
 
-  ::ng-deep nb-icon {
+  nb-icon {
     vertical-align: top;
   }
-}
 
-:host(.nb-transition) {
-  @include nb-component-animation(background-color, border-color, box-shadow, color);
+  &.nb-transition {
+    @include nb-component-animation(background-color, border-color, box-shadow, color);
+  }
 }
