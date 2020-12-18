@@ -1,6 +1,7 @@
-import { NbProgressBarComponent } from './progress-bar.component';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+
+import { NbThemeModule, NbProgressBarModule, NbProgressBarComponent } from '@nebular/theme';
 
 describe('Component: NbProgressBar', () => {
 
@@ -9,7 +10,7 @@ describe('Component: NbProgressBar', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [NbProgressBarComponent],
+      imports: [ NbThemeModule.forRoot(), NbProgressBarModule ],
     });
 
     fixture = TestBed.createComponent(NbProgressBarComponent);

@@ -15,7 +15,9 @@ import {
   HostListener,
   Input,
   OnDestroy,
+  Optional,
   QueryList,
+  Renderer2,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { NbOverlayRef, NbScrollStrategy } from '../cdk/overlay/mapping';
@@ -189,6 +191,7 @@ export class NbAutocompleteDirective<T> implements OnDestroy, AfterViewInit, Con
     protected triggerStrategyBuilder: NbTriggerStrategyBuilderService,
     protected positionBuilder: NbPositionBuilderService,
     protected activeDescendantKeyManagerFactory: NbActiveDescendantKeyManagerFactoryService<NbOptionComponent<T>>,
+    protected renderer: Renderer2,
   ) {}
 
   ngAfterViewInit() {
@@ -258,6 +261,10 @@ export class NbAutocompleteDirective<T> implements OnDestroy, AfterViewInit, Con
 
   registerOnTouched(fn: any): void {
     this._onTouched = fn;
+  }
+
+  setDisabledState(disabled: boolean): void {
+    this.renderer.setProperty(this.hostRef.nativeElement, 'disabled', disabled);
   }
 
   protected subscribeOnOptionClick() {

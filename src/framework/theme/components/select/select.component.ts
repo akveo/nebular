@@ -29,9 +29,10 @@ import {
   NgZone,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { merge, Subject, BehaviorSubject } from 'rxjs';
+import { merge, Subject, BehaviorSubject, from } from 'rxjs';
 import { startWith, switchMap, takeUntil, filter, map, finalize } from 'rxjs/operators';
 
+import { NbStatusService } from '../../services/status.service';
 import {
   NbAdjustableConnectedPositionStrategy,
   NbAdjustment,
@@ -45,7 +46,7 @@ import { NbFocusKeyManager, NbFocusKeyManagerFactoryService } from '../cdk/a11y/
 import { ESCAPE } from '../cdk/keycodes/keycodes';
 import { NbComponentSize } from '../component-size';
 import { NbComponentShape } from '../component-shape';
-import { NbComponentStatus } from '../component-status';
+import { NbComponentOrCustomStatus } from '../component-status';
 import { NB_DOCUMENT } from '../../theme.options';
 import { NbOptionComponent } from '../option/option.component';
 import { convertToBoolProperty, NbBooleanInput } from '../helpers';
@@ -53,6 +54,7 @@ import { NB_SELECT_INJECTION_TOKEN } from './select-injection-tokens';
 import { NbFormFieldControl, NbFormFieldControlConfig } from '../form-field/form-field-control';
 import { NbFocusMonitor } from '../cdk/a11y/a11y.module';
 
+export type NbSelectCompareFunction<T = any> = (v1: any, v2: any) => boolean;
 export type NbSelectAppearance = 'outline' | 'filled' | 'hero';
 
 @Component({
@@ -143,6 +145,11 @@ export function nbSelectFormFieldControlConfigFactory() {
  * Select is available in different shapes, that could be combined with the other properties:
  *
  * @stacked-example(Select shapes, select/select-shapes.component)
+ *
+ * By default, the component selects options whose values are strictly equal (`===`) with the select value.
+ * To change such behavior, pass a custom comparator function to the `compareWith` attribute.
+ *
+ * @stacked-example(Select custom comparator, select/select-compare-with.component)
  *
  * @additional-example(Interactive, select/select-interactive.component)
  *
@@ -508,7 +515,7 @@ export function nbSelectFormFieldControlConfigFactory() {
   ],
 })
 export class NbSelectComponent implements OnChanges, AfterViewInit, AfterContentInit, OnDestroy,
-                                             ControlValueAccessor, NbFormFieldControl {
+                                          ControlValueAccessor, NbFormFieldControl {
 
   /**
    * Select size, available sizes:
@@ -520,7 +527,7 @@ export class NbSelectComponent implements OnChanges, AfterViewInit, AfterContent
    * Select status (adds specific styles):
    * `basic`, `primary`, `info`, `success`, `warning`, `danger`, `control`
    */
-  @Input() status: NbComponentStatus = 'basic';
+  @Input() status: NbComponentOrCustomStatus = 'basic';
 
   /**
    * Select shapes: `rectangle` (default), `round`, `semi-round`
@@ -610,6 +617,27 @@ export class NbSelectComponent implements OnChanges, AfterViewInit, AfterContent
   @Input() placeholder: string = '';
 
   /**
+   * A function to compare option value with selected value.
+   * By default, values are compared with strict equality (`===`).
+   */
+  @Input()
+  get compareWith(): NbSelectCompareFunction {
+    return this._compareWith;
+  }
+  set compareWith(fn: NbSelectCompareFunction) {
+    if (typeof fn !== 'function') {
+      return;
+    }
+
+    this._compareWith = fn;
+
+    if (this.selectionModel.length && this.canSelectValue()) {
+      this.setSelection(this.selected);
+    }
+  }
+  protected _compareWith: NbSelectCompareFunction = (v1: any, v2: any) => v1 === v2;
+
+  /**
    * Accepts selected item or array of selected items.
    * */
   @Input()
@@ -634,6 +662,14 @@ export class NbSelectComponent implements OnChanges, AfterViewInit, AfterContent
   }
   protected _multiple: boolean = false;
   static ngAcceptInputType_multiple: NbBooleanInput;
+
+  @HostBinding('class')
+  get additionalClasses(): string[] {
+    if (this.statusService.isCustomStatus(this.status)) {
+      return [this.statusService.getStatusClass(this.status)];
+    }
+    return [];
+  }
 
   /**
    * Will be emitted when selected value changes.
@@ -706,7 +742,7 @@ export class NbSelectComponent implements OnChanges, AfterViewInit, AfterContent
   /*
    * @docs-private
    **/
-  status$ = new BehaviorSubject<NbComponentStatus>(this.status);
+  status$ = new BehaviorSubject<NbComponentOrCustomStatus>(this.status);
 
   /*
    * @docs-private
@@ -737,7 +773,8 @@ export class NbSelectComponent implements OnChanges, AfterViewInit, AfterContent
               protected focusKeyManagerFactoryService: NbFocusKeyManagerFactoryService<NbOptionComponent>,
               protected focusMonitor: NbFocusMonitor,
               protected renderer: Renderer2,
-              protected zone: NgZone) {
+              protected zone: NgZone,
+              protected statusService: NbStatusService) {
   }
 
   /**
@@ -801,17 +838,14 @@ export class NbSelectComponent implements OnChanges, AfterViewInit, AfterContent
       .pipe(
         startWith(this.options),
         filter(() => this.queue != null && this.canSelectValue()),
-        takeUntil(this.destroy$),
-      )
-      .subscribe(() => {
         // Call 'writeValue' when current change detection run is finished.
         // When writing is finished, change detection starts again, since
         // microtasks queue is empty.
         // Prevents ExpressionChangedAfterItHasBeenCheckedError.
-        Promise.resolve().then(() => {
-          this.writeValue(this.queue);
-        });
-      });
+        switchMap((options: QueryList<NbOptionComponent>) => from(Promise.resolve(options))),
+        takeUntil(this.destroy$),
+      )
+      .subscribe(() => this.writeValue(this.queue));
   }
 
   ngAfterViewInit() {
@@ -926,7 +960,7 @@ export class NbSelectComponent implements OnChanges, AfterViewInit, AfterContent
   protected handleSingleSelect(option: NbOptionComponent) {
     const selected = this.selectionModel.pop();
 
-    if (selected && selected !== option) {
+    if (selected && !this._compareWith(selected.value, option.value)) {
       selected.deselect();
     }
 
@@ -943,7 +977,7 @@ export class NbSelectComponent implements OnChanges, AfterViewInit, AfterContent
    * */
   protected handleMultipleSelect(option: NbOptionComponent) {
     if (option.selected) {
-      this.selectionModel = this.selectionModel.filter(s => s.value !== option.value);
+      this.selectionModel = this.selectionModel.filter(s => !this._compareWith(s.value, option.value));
       option.deselect();
     } else {
       this.selectionModel.push(option);
@@ -1124,7 +1158,7 @@ export class NbSelectComponent implements OnChanges, AfterViewInit, AfterContent
    * Selects value.
    * */
   protected selectValue(value) {
-    const corresponding = this.options.find((option: NbOptionComponent) => option.value === value);
+    const corresponding = this.options.find((option: NbOptionComponent) => this._compareWith(option.value, value));
 
     if (corresponding) {
       corresponding.select();

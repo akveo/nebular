@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { async, inject, TestBed } from '@angular/core/testing';
+import { inject, TestBed, waitForAsync } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ActivatedRoute } from '@angular/router';
@@ -92,7 +92,7 @@ describe('oauth2-auth-strategy', () => {
     });
   });
 
-  beforeEach(async(inject(
+  beforeEach(waitForAsync(inject(
     [NbOAuth2AuthStrategy, HttpTestingController],
     (_strategy, _httpMock) => {
       strategy = _strategy;

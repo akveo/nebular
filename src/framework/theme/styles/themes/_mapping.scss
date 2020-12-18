@@ -1012,6 +1012,24 @@ $eva-mapping: (
   button-hero-control-disabled-background-color: color-basic-transparent-300,
   button-hero-control-disabled-text-color: text-disabled-color,
 
+  button-group-filled-button-basic-text-color: text-hint-color,
+  button-group-filled-button-primary-text-color: button-filled-primary-text-color,
+  button-group-filled-button-success-text-color: button-filled-success-text-color,
+  button-group-filled-button-info-text-color: button-filled-info-text-color,
+  button-group-filled-button-warning-text-color: button-filled-warning-text-color,
+  button-group-filled-button-danger-text-color: button-filled-danger-text-color,
+  button-group-filled-button-control-text-color: button-filled-control-text-color,
+
+  button-group-filled-basic-divider-color: color-basic-focus-border,
+  button-group-filled-primary-divider-color: color-primary-focus,
+  button-group-filled-success-divider-color: color-success-focus,
+  button-group-filled-info-divider-color: color-info-focus,
+  button-group-filled-warning-divider-color: color-warning-focus,
+  button-group-filled-danger-divider-color: color-danger-focus,
+  button-group-filled-control-divider-color: color-control-focus,
+
+  button-group-ghost-divider-color: color-basic-focus-border,
+
   icon-button-filled-tiny-padding: 0.4375rem 0.3125rem,
   icon-button-filled-small-padding: 0.5625rem 0.4375rem,
   icon-button-filled-medium-padding: 0.6875rem 0.5625rem,

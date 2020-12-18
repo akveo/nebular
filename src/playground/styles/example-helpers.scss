@@ -46,7 +46,7 @@
     }
   }
 
-  @each $status in nb-get-statuses() {
+  @each $status in nb-get-core-statuses() {
     @if ($status != 'control') {
       .colored-column-#{$status} {
         background: nb-theme(color-#{$status}-300);

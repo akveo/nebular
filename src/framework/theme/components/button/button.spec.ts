@@ -5,7 +5,8 @@
  */
 
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { NbButtonComponent } from './button.component';
+
+import { NbThemeModule, NbButtonModule, NbButtonComponent } from '@nebular/theme';
 
 describe('Component: NbButton', () => {
 
@@ -14,7 +15,7 @@ describe('Component: NbButton', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [NbButtonComponent],
+      imports: [ NbThemeModule.forRoot(), NbButtonModule ],
     });
 
     fixture = TestBed.createComponent(NbButtonComponent);

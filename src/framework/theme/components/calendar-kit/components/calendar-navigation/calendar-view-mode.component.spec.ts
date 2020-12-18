@@ -10,6 +10,7 @@ import {
   NbCalendarViewMode,
   NbCalendarViewModeComponent,
   NbCalendarKitModule,
+  NbThemeModule,
 } from '@nebular/theme';
 
 
@@ -20,7 +21,7 @@ describe('Component: NbCalendarViewModeComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [NbCalendarKitModule],
+      imports: [ NbThemeModule.forRoot(), NbCalendarKitModule],
     });
     fixture = TestBed.createComponent<NbCalendarViewModeComponent<Date>>(NbCalendarViewModeComponent);
     component = fixture.componentInstance;
