@@ -37,7 +37,7 @@ export class NgdFragmentTargetDirective implements OnInit, OnDestroy {
       .pipe(
         publish(null),
         refCount(),
-        // takeUntil(this.destroy$),
+        takeUntil(this.destroy$),
         filter(() => this.ngdFragmentSync),
       )
       .subscribe((fragment: string) => {

@@ -25,7 +25,6 @@ import { routes } from './app.routes';
 
 import { structure  } from '../structure';
 import { DOCS, STRUCTURE } from './app.options';
-import { NbFileUploadModule } from '../../src/framework/theme/components/file-upload/file-upload.module';
 const docs = require('../output.json');
 
 @NgModule({
@@ -39,7 +38,6 @@ const docs = require('../output.json');
     NbLayoutModule,
     NbTabsetModule,
     NbCheckboxModule,
-    NbFileUploadModule,
     NbProgressBarModule,
     NbMenuModule.forRoot(),
     NbThemeModule.forRoot(),

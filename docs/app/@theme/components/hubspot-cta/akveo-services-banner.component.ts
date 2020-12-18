@@ -20,7 +20,6 @@ import { NB_DOCUMENT, NB_WINDOW } from '@nebular/theme';
   styleUrls: ['akveo-services-banner.component.scss'],
 })
 
-// tslint:disable-next-line:component-class-suffix
 export class AkveoServicesBanner implements OnInit {
   @Input() ctaId: string;
 
@@ -50,8 +49,8 @@ export class AkveoServicesBanner implements OnInit {
   private loadHubSpotCtaScript() {
     this.wrapper.nativeElement.appendChild(
       this.document.createRange().createContextualFragment(
-        `<script type="text/javascript" src="https://js.hscta.net/cta/current.js"></script>`,
-      ),
+        `<script type="text/javascript" src="https://js.hscta.net/cta/current.js"></script>`
+      )
     );
     this.wrapper.nativeElement.querySelector('script').onload = this.loadCta.bind(this);
   }
