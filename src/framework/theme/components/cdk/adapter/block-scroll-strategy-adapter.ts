@@ -41,3 +41,5 @@ export class NbScrollStrategyOptions extends ScrollStrategyOptions {
 
   block = () => new NbBlockScrollStrategyAdapter(this.document, this.viewportRuler, this.scrollService);
 }
+
+export type NbScrollStrategies = keyof Pick<NbScrollStrategyOptions, 'noop' | 'close' | 'block' | 'reposition'>;
