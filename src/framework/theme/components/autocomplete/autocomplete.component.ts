@@ -19,6 +19,7 @@ import {
   AfterContentInit,
   OnDestroy,
 } from '@angular/core';
+import { NgClass } from '@angular/common';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
@@ -98,7 +99,7 @@ export class NbAutocompleteComponent<T> implements AfterContentInit, OnDestroy {
   /**
    * Specifies class to be set on `nb-option`s container (`nb-option-list`)
    * */
-  @Input() optionsListClass: string | string[] | Set<string> | Record<string, any>;
+  @Input() optionsListClass: NgClass['ngClass'];
 
   /**
    * Specifies class for the overlay panel with options

@@ -28,6 +28,7 @@ import {
   Renderer2,
   NgZone,
 } from '@angular/core';
+import { NgClass } from '@angular/common';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { merge, Subject, BehaviorSubject, from } from 'rxjs';
 import { startWith, switchMap, takeUntil, filter, map, finalize } from 'rxjs/operators';
@@ -542,7 +543,7 @@ export class NbSelectComponent implements OnChanges, AfterViewInit, AfterContent
   /**
    * Specifies class to be set on `nb-option`s container (`nb-option-list`)
    * */
-  @Input() optionsListClass: string | string[] | Set<string> | Record<string, any>;
+  @Input() optionsListClass: NgClass['ngClass'];
 
   /**
    * Specifies class for the overlay panel with options
