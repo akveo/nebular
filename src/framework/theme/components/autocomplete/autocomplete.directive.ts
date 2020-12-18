@@ -103,8 +103,6 @@ export class NbAutocompleteDirective<T> implements OnDestroy, AfterViewInit, Con
 
   protected overlayRef: NbOverlayRef;
 
-  protected overlayOffset = 8;
-
   protected keyManager: NbActiveDescendantKeyManager<NbOptionComponent<T>>;
 
   protected destroy$: Subject<void> = new Subject<void>();
@@ -137,6 +135,11 @@ export class NbAutocompleteDirective<T> implements OnDestroy, AfterViewInit, Con
   set autocomplete(autocomplete: NbAutocompleteComponent<T>) {
     this._autocomplete = autocomplete;
   }
+
+  /**
+   * Determines options overlay offset (in pixels).
+   **/
+  @Input() overlayOffset: number = 8;
 
   /**
    * Determines if the input will be focused when the control value is changed

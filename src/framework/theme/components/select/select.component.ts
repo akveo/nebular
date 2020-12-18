@@ -674,6 +674,11 @@ export class NbSelectComponent implements OnChanges, AfterViewInit, AfterContent
   protected _multiple: boolean = false;
   static ngAcceptInputType_multiple: NbBooleanInput;
 
+  /**
+   * Determines options overlay offset (in pixels).
+   **/
+  @Input() optionsOverlayOffset = 8;
+
   @HostBinding('class')
   get additionalClasses(): string[] {
     if (this.statusService.isCustomStatus(this.status)) {
@@ -727,7 +732,6 @@ export class NbSelectComponent implements OnChanges, AfterViewInit, AfterContent
   overlayPosition: NbPosition = '' as NbPosition;
 
   protected ref: NbOverlayRef;
-  protected optionsOverlayOffset = 8;
 
   protected triggerStrategy: NbTriggerStrategy;
 
