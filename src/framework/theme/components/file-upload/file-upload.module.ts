@@ -18,10 +18,11 @@ import { NbBaseFileUploadComponent } from './base-file-upload.component';
 import { NbCompactFileUploadComponent } from './compact-file-upload.component';
 import { NbFileItemComponent } from './file-item.component';
 import {NbFileUploadComponent} from './file-upload.component';
+import { NbIconModule } from '../icon/icon.module';
 
 
 @NgModule({
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, NbProgressBarModule, NbButtonModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, NbProgressBarModule, NbButtonModule, NbIconModule],
   exports: [
     NbFullWidthFileUploadComponent,
     NbCompactFileUploadComponent,
