@@ -19,6 +19,7 @@ import {
   AfterContentInit,
   OnDestroy,
 } from '@angular/core';
+import { NgClass } from '@angular/common';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
@@ -94,6 +95,16 @@ export class NbAutocompleteComponent<T> implements AfterContentInit, OnDestroy {
    * Flag passed as input to always make first option active.
    * */
   @Input() activeFirst: boolean = false;
+
+  /**
+   * Specifies class to be set on `nb-option`s container (`nb-option-list`)
+   * */
+  @Input() optionsListClass: NgClass['ngClass'];
+
+  /**
+   * Specifies class for the overlay panel with options
+   * */
+  @Input() optionsPanelClass: string | string[];
 
   /**
    * Will be emitted when selected value changes.
