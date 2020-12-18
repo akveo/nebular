@@ -256,7 +256,6 @@
             "main": "docs/main.ts",
             "tsConfig": "docs/tsconfig.app.json",
             "polyfills": "docs/polyfills.ts",
-            "rebaseRootRelativeCssUrls": true,
             "assets": [
               "docs/assets",
               "docs/404.html",

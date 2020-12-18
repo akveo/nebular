@@ -17,8 +17,9 @@ import {
   Renderer2,
 } from '@angular/core';
 
-import { convertToBoolProperty, emptyStatusWarning, NbBooleanInput } from '../helpers';
-import { NbComponentStatus } from '../component-status';
+import { NbStatusService } from '../../services/status.service';
+import { convertToBoolProperty, NbBooleanInput } from '../helpers';
+import { NbComponentOrCustomStatus } from '../component-status';
 
 /**
  * The `NbRadioComponent` provides the same functionality as native `<input type="radio">`
@@ -284,21 +285,7 @@ export class NbRadioComponent {
   private _disabled: boolean = false;
   static ngAcceptInputType_disabled: NbBooleanInput;
 
-  @Input()
-  get status(): NbComponentStatus {
-    return this._status;
-  }
-  set status(value: NbComponentStatus) {
-    if ((value as string) === '') {
-      emptyStatusWarning('NbRadio');
-      value = 'basic';
-    }
-
-    if (this._status !== value) {
-      this._status = value;
-    }
-  }
-  private _status: NbComponentStatus = 'basic';
+  @Input() status: NbComponentOrCustomStatus = 'basic';
 
   @Output() valueChange: EventEmitter<any> = new EventEmitter();
 
@@ -309,6 +296,7 @@ export class NbRadioComponent {
   constructor(
     protected cd: ChangeDetectorRef,
     protected renderer: Renderer2,
+    protected statusService: NbStatusService,
   ) {}
 
   @HostBinding('class.status-primary')
@@ -344,6 +332,14 @@ export class NbRadioComponent {
   @HostBinding('class.status-control')
   get isControl(): boolean {
     return this.status === 'control';
+  }
+
+  @HostBinding('class')
+  get additionalClasses(): string[] {
+    if (this.statusService.isCustomStatus(this.status)) {
+      return [this.statusService.getStatusClass(this.status)];
+    }
+    return [];
   }
 
   onChange(event: Event) {

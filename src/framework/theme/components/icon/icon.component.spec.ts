@@ -11,6 +11,7 @@ import { By } from '@angular/platform-browser';
 import { NbIconModule } from './icon.module';
 import { NbIconLibraries } from './icon-libraries';
 import { NbIconComponent } from './icon.component';
+import { NbThemeModule } from '@nebular/theme/theme.module';
 
 
 @Component({
@@ -32,7 +33,7 @@ describe('Component: NbIcon', () => {
   beforeEach(() => {
 
     const bed = TestBed.configureTestingModule({
-      imports: [ NbIconModule ],
+      imports: [ NbThemeModule.forRoot(), NbIconModule ],
       providers: [ NbIconLibraries ],
       declarations: [ IconTestComponent ],
     });

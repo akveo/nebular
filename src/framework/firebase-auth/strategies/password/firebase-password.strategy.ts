@@ -5,7 +5,7 @@
  */
 
 import { Injectable } from '@angular/core';
-import { User } from 'firebase';
+import firebase from 'firebase/app';
 import { Observable, of as observableOf, from } from 'rxjs';
 import { catchError, map, switchMap, take } from 'rxjs/operators';
 import { NbAuthStrategyOptions, NbAuthStrategyClass, NbAuthResult } from '@nebular/auth';
@@ -114,7 +114,7 @@ export class NbFirebasePasswordStrategy extends NbFirebaseBaseStrategy {
       );
   }
 
-  protected refreshIdToken(user: User, module): Observable<NbAuthResult> {
+  protected refreshIdToken(user: firebase.User, module): Observable<NbAuthResult> {
     return from(user.getIdToken(true))
       .pipe(
         map(token => {

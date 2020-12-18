@@ -45,7 +45,7 @@ const docs = require('../output.json');
     NbThemeModule.forRoot(),
     NgdThemeModule.forRoot(),
     NbSidebarModule.forRoot(),
-    RouterModule.forRoot(routes, { useHash: false }),
+    RouterModule.forRoot(routes, { useHash: false, relativeLinkResolution: 'legacy' }),
   ],
   declarations: [
     NgdAppComponent,

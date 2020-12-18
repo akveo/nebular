@@ -15,7 +15,7 @@ import {
   QueryList,
 } from '@angular/core';
 import { takeUntil } from 'rxjs/operators';
-import { Subject } from 'rxjs';
+import { from, Subject } from 'rxjs';
 
 import { convertToBoolProperty, NbBooleanInput } from '../helpers';
 import { NbOptionComponent } from './option.component';
@@ -87,7 +87,7 @@ export class NbOptionGroupComponent implements AfterContentInit, OnDestroy {
    * Sets disabled state for each option to current group disabled state.
    */
   protected updateOptionsDisabledState(): void {
-    this.options.forEach((option: NbOptionComponent<any>) => option.setDisabledByGroupState(this.disabled));
+    this.options.forEach((option: NbOptionComponent) => option.setDisabledByGroupState(this.disabled));
   }
 
   /**
@@ -96,7 +96,10 @@ export class NbOptionGroupComponent implements AfterContentInit, OnDestroy {
    * Use this method when updating options during change detection run (e.g. QueryList.changes, lifecycle hooks).
    */
   protected asyncUpdateOptionsDisabledState(): void {
-    Promise.resolve().then(() => this.updateOptionsDisabledState());
+    // Wrap Promise into Observable with `takeUntil(this.destroy$)` to prevent update if component destroyed.
+    from(Promise.resolve())
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(() => this.updateOptionsDisabledState());
   }
 }
 

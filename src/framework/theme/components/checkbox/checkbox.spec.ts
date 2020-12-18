@@ -2,9 +2,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Component, DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { ReactiveFormsModule, FormControl } from '@angular/forms';
-import { NbIconModule } from '@nebular/theme';
 
-import { NbCheckboxComponent } from './checkbox.component';
+import { NbIconModule, NbCheckboxModule, NbCheckboxComponent, NbThemeModule } from '@nebular/theme';
 
 describe('Component: NbCheckbox', () => {
 
@@ -16,8 +15,7 @@ describe('Component: NbCheckbox', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [NbIconModule],
-      declarations: [NbCheckboxComponent],
+      imports: [ NbThemeModule.forRoot(), NbIconModule, NbCheckboxModule],
     });
 
     fixture = TestBed.createComponent(NbCheckboxComponent);
@@ -38,18 +36,6 @@ describe('Component: NbCheckbox', () => {
     checkbox.disabled = false;
     fixture.detectChanges();
     expect(checkboxInput.nativeElement.disabled).toBeFalsy();
-  });
-
-  it('Setting deprecated value to true makes checkbox input checked', () => {
-    checkbox.value = true;
-    fixture.detectChanges();
-    expect(checkboxInput.nativeElement.checked).toBeTruthy();
-  });
-
-  it('Setting deprecated value to false makes checkbox input unchecked', () => {
-    checkbox.value = false;
-    fixture.detectChanges();
-    expect(checkboxInput.nativeElement.checked).toBeFalsy();
   });
 
   it('Setting checked to true makes checkbox input checked', () => {
@@ -92,31 +78,6 @@ describe('Component: NbCheckbox', () => {
     checkbox.status = 'info';
     fixture.detectChanges();
     expect(testContainerEl.classList.contains('status-info')).toBeTruthy();
-  });
-
-  it('deprecated should not emit change event when input changed', () => {
-
-    const spy = jasmine.createSpy('valueChange subscriber');
-
-    checkbox.valueChange
-      .subscribe(spy);
-
-    checkbox.checked = true;
-    fixture.detectChanges();
-    expect(spy).toHaveBeenCalledTimes(0);
-  });
-
-  it('deprecated  should emit change event when clicked', () => {
-
-    const spy = jasmine.createSpy('valueChange subscriber');
-
-    checkbox.valueChange
-      .subscribe(spy);
-
-    label.nativeElement.click();
-
-    fixture.detectChanges();
-    expect(spy).toHaveBeenCalledTimes(1);
   });
 
   it('should not emit change event when input changed', () => {
@@ -207,7 +168,7 @@ describe('Component: NbCheckbox with form control', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ReactiveFormsModule, NbIconModule],
+      imports: [ReactiveFormsModule, NbThemeModule.forRoot(), NbIconModule, NbCheckboxModule],
       declarations: [NbCheckboxComponent, CheckboxWithFormControlComponent],
     });
 

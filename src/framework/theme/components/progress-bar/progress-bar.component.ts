@@ -6,8 +6,9 @@
 
 import { Component, HostBinding, Input } from '@angular/core';
 
+import { NbStatusService } from '../../services/status.service';
 import { NbComponentSize } from '../component-size';
-import { NbComponentStatus } from '../component-status';
+import { NbComponentOrCustomStatus } from '../component-status';
 
 /**
  * Progress Bar is a component for indicating progress.
@@ -115,7 +116,7 @@ export class NbProgressBarComponent {
   /**
    * Progress bar background (`basic` (default), `primary`, `info`, `success`, `warning`, `danger`, `control`)
    */
-  @Input() status: NbComponentStatus = 'basic';
+  @Input() status: NbComponentOrCustomStatus = 'basic';
 
   /**
    * Progress bar size (`tiny`, `small`, `medium` (default), `large`, `giant`)
@@ -185,5 +186,16 @@ export class NbProgressBarComponent {
   @HostBinding('class.status-control')
   get control(): boolean {
     return this.status === 'control';
+  }
+
+  @HostBinding('class')
+  get additionalClasses(): string[] {
+    if (this.statusService.isCustomStatus(this.status)) {
+      return [this.statusService.getStatusClass(this.status)];
+    }
+    return [];
+  }
+
+  constructor(protected statusService: NbStatusService) {
   }
 }

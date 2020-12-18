@@ -7,7 +7,7 @@
 import { Component, Input } from '@angular/core';
 
 import { NbMenuItem } from '../../components/menu/menu.service';
-import { NbPositionedContainer, NbRenderableContainer } from '../cdk/overlay/overlay-container';
+import { NbPositionedContainerComponent, NbRenderableContainer } from '../cdk/overlay/overlay-container';
 
 /**
  * Context menu component used as content within NbContextMenuDirective.
@@ -30,7 +30,7 @@ import { NbPositionedContainer, NbRenderableContainer } from '../cdk/overlay/ove
     <nb-menu class="context-menu" [items]="context.items" [tag]="context.tag"></nb-menu>
   `,
 })
-export class NbContextMenuComponent extends NbPositionedContainer implements NbRenderableContainer {
+export class NbContextMenuComponent extends NbPositionedContainerComponent implements NbRenderableContainer {
 
   @Input() items: NbMenuItem[] = [];
   @Input() tag: string;

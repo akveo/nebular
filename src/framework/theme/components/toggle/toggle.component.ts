@@ -24,10 +24,11 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { NbLayoutDirectionService } from '../../services/direction.service';
-import { NbComponentStatus } from '../component-status';
 
-import { convertToBoolProperty, emptyStatusWarning, NbBooleanInput } from '../helpers';
+import { NbStatusService } from '../../services/status.service';
+import { NbLayoutDirectionService } from '../../services/direction.service';
+import { NbComponentOrCustomStatus } from '../component-status';
+import { convertToBoolProperty, NbBooleanInput } from '../helpers';
 
 /**
  * Toggle is a control representing `on` and `off` states.
@@ -332,18 +333,7 @@ export class NbToggleComponent implements OnInit, AfterViewInit, OnDestroy, Cont
    * Toggle status.
    * Possible values are: `basic`, `primary`, `success`, `warning`, `danger`, `info`, `control`.
    */
-  @Input()
-  get status(): NbComponentStatus {
-    return this._status;
-  }
-  set status(value: NbComponentStatus) {
-    if ((value as string) === '') {
-      emptyStatusWarning('NbToggle');
-      value = 'basic';
-    }
-    this._status = value;
-  }
-  _status: NbComponentStatus = 'basic';
+  @Input() status: NbComponentOrCustomStatus = 'basic';
 
   /**
    * Toggle label position.
@@ -392,6 +382,14 @@ export class NbToggleComponent implements OnInit, AfterViewInit, OnDestroy, Cont
     return this.status === 'control';
   }
 
+  @HostBinding('class')
+  get additionalClasses(): string[] {
+    if (this.statusService.isCustomStatus(this.status)) {
+      return [this.statusService.getStatusClass(this.status)];
+    }
+    return [];
+  }
+
   @HostBinding('class.toggle-label-left')
   get labelLeft() {
     return this.labelPosition === 'left';
@@ -418,6 +416,7 @@ export class NbToggleComponent implements OnInit, AfterViewInit, OnDestroy, Cont
     private renderer: Renderer2,
     private hostElement: ElementRef<HTMLElement>,
     private zone: NgZone,
+    protected statusService: NbStatusService,
   ) {}
 
   ngOnInit(): void {

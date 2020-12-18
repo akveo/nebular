@@ -5,7 +5,8 @@
  */
 
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { NbSpinnerComponent } from './spinner.component';
+
+import { NbThemeModule, NbSpinnerModule, NbSpinnerComponent } from '@nebular/theme';
 
 describe('Component: NbSpinner', () => {
 
@@ -14,7 +15,7 @@ describe('Component: NbSpinner', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [NbSpinnerComponent],
+      imports: [NbThemeModule.forRoot(), NbSpinnerModule],
     });
 
     fixture = TestBed.createComponent(NbSpinnerComponent);

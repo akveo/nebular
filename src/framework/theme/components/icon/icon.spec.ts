@@ -4,10 +4,9 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { NbFontIcon, NbSvgIcon } from './icon';
 import { TestBed } from '@angular/core/testing';
-import { NbIconModule, NbIconComponent, NbIconConfig } from '@nebular/theme';
 
+import { NbIconModule, NbIconComponent, NbIconConfig, NbThemeModule, NbFontIcon, NbSvgIcon } from '@nebular/theme';
 
 describe('icon', () => {
   let fontIcon: NbFontIcon;
@@ -80,7 +79,7 @@ describe('NbIconComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ NbIconModule ],
+      imports: [ NbThemeModule.forRoot(), NbIconModule ],
     });
   });
 

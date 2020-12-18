@@ -29,6 +29,7 @@ import { NbLayoutDirectionService, NbLayoutDirection, NB_LAYOUT_DIRECTION } from
 import { NbLayoutScrollService } from './services/scroll.service';
 import { NbLayoutRulerService } from './services/ruler.service';
 import { NbOverlayModule } from './components/cdk/overlay/overlay.module';
+import { NbStatusService } from './services/status.service';
 
 export function windowFactory(platformId: Object): Window | undefined {
   if (isPlatformBrowser(platformId)) {
@@ -85,6 +86,7 @@ export class NbThemeModule {
         NbLayoutScrollService,
         NbLayoutRulerService,
         ...NbOverlayModule.forRoot().providers,
+        NbStatusService,
       ],
     };
   }
