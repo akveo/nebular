@@ -23,10 +23,11 @@ import { NbComponentShape } from '../component-shape';
 import { NbComponentSize } from '../component-size';
 import { NbComponentStatus } from '../component-status';
 import { AsyncValidatorFn, ControlValueAccessor, NG_VALUE_ACCESSOR, ValidatorFn } from '@angular/forms';
-import { coerceArray, coerceBooleanProperty, coerceNumberProperty } from '@angular/cdk/coercion';
+import { coerceArray, coerceNumberProperty } from '@angular/cdk/coercion';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { NbTagInputInputComponent } from './tag-input-input.component';
 import { delay, filter, startWith, takeUntil } from 'rxjs/operators';
+import { convertToBoolProperty, NbBooleanInput, NbNumberInput } from '../helpers';
 
 /**
  * Styled tag-input component
@@ -74,142 +75,6 @@ import { delay, filter, startWith, takeUntil } from 'rxjs/operators';
  *
  * TagInput can use auto complete
  * @stacked-example(TagInput auto complete, tag-input/tag-input-autocomplete.component)
- *
- * @styles container
- *
- * input-border-style:
- * input-border-width:
- * input-outline-color:
- * input-outline-width:
- * input-placeholder-text-font-family:
- * input-text-font-family:
- * input-basic-text-color:
- * input-basic-placeholder-text-color:
- * input-basic-background-color:
- * input-basic-border-color:
- * input-basic-focus-background-color:
- * input-basic-focus-border-color:
- * input-basic-hover-background-color:
- * input-basic-hover-border-color:
- * input-basic-disabled-background-color:
- * input-basic-disabled-border-color:
- * input-basic-disabled-text-color:
- * input-basic-disabled-placeholder-text-color:
- * input-primary-text-color:
- * input-primary-placeholder-text-color:
- * input-primary-background-color:
- * input-primary-border-color:
- * input-primary-focus-background-color:
- * input-primary-focus-border-color:
- * input-primary-hover-background-color:
- * input-primary-hover-border-color:
- * input-primary-disabled-background-color:
- * input-primary-disabled-border-color:
- * input-primary-disabled-text-color:
- * input-primary-disabled-placeholder-text-color:
- * input-success-text-color:
- * input-success-placeholder-text-color:
- * input-success-background-color:
- * input-success-border-color:
- * input-success-focus-background-color:
- * input-success-focus-border-color:
- * input-success-hover-background-color:
- * input-success-hover-border-color:
- * input-success-disabled-background-color:
- * input-success-disabled-border-color:
- * input-success-disabled-text-color:
- * input-success-disabled-placeholder-text-color:
- * input-info-text-color:
- * input-info-placeholder-text-color:
- * input-info-background-color:
- * input-info-border-color:
- * input-info-focus-background-color:
- * input-info-focus-border-color:
- * input-info-hover-background-color:
- * input-info-hover-border-color:
- * input-info-disabled-background-color:
- * input-info-disabled-border-color:
- * input-info-disabled-text-color:
- * input-info-disabled-placeholder-text-color:
- * input-warning-text-color:
- * input-warning-placeholder-text-color:
- * input-warning-background-color:
- * input-warning-border-color:
- * input-warning-focus-background-color:
- * input-warning-focus-border-color:
- * input-warning-hover-background-color:
- * input-warning-hover-border-color:
- * input-warning-disabled-background-color:
- * input-warning-disabled-border-color:
- * input-warning-disabled-text-color:
- * input-warning-disabled-placeholder-text-color:
- * input-danger-text-color:
- * input-danger-placeholder-text-color:
- * input-danger-background-color:
- * input-danger-border-color:
- * input-danger-focus-background-color:
- * input-danger-focus-border-color:
- * input-danger-hover-background-color:
- * input-danger-hover-border-color:
- * input-danger-disabled-background-color:
- * input-danger-disabled-border-color:
- * input-danger-disabled-text-color:
- * input-danger-disabled-placeholder-text-color:
- * input-control-text-color:
- * input-control-placeholder-text-color:
- * input-control-background-color:
- * input-control-border-color:
- * input-control-focus-background-color:
- * input-control-focus-border-color:
- * input-control-hover-background-color:
- * input-control-hover-border-color:
- * input-control-disabled-background-color:
- * input-control-disabled-border-color:
- * input-control-disabled-text-color:
- * input-control-disabled-placeholder-text-color:
- * input-rectangle-border-radius:
- * input-semi-round-border-radius:
- * input-round-border-radius:
- * input-tiny-text-font-size:
- * input-tiny-text-font-weight:
- * input-tiny-text-line-height:
- * input-tiny-placeholder-text-font-size:
- * input-tiny-placeholder-text-font-weight:
- * input-tiny-placeholder-text-line-height:
- * input-tiny-padding:
- * input-tiny-max-width:
- * input-small-text-font-size:
- * input-small-text-font-weight:
- * input-small-text-line-height:
- * input-small-placeholder-text-font-size:
- * input-small-placeholder-text-font-weight:
- * input-small-placeholder-text-line-height:
- * input-small-padding:
- * input-small-max-width:
- * input-medium-text-font-size:
- * input-medium-text-font-weight:
- * input-medium-text-line-height:
- * input-medium-placeholder-text-font-size:
- * input-medium-placeholder-text-font-weight:
- * input-medium-placeholder-text-line-height:
- * input-medium-padding:
- * input-medium-max-width:
- * input-large-text-font-size:
- * input-large-text-font-weight:
- * input-large-text-line-height:
- * input-large-placeholder-text-font-size:
- * input-large-placeholder-text-font-weight:
- * input-large-placeholder-text-line-height:
- * input-large-padding:
- * input-large-max-width:
- * input-giant-text-font-size:
- * input-giant-text-font-weight:
- * input-giant-text-line-height:
- * input-giant-placeholder-text-font-size:
- * input-giant-placeholder-text-font-weight:
- * input-giant-placeholder-text-line-height:
- * input-giant-padding:
- * input-giant-max-width:
  *
  * @styles tag
  * tag-input-tiny-text-font-size:
@@ -364,44 +229,47 @@ export class NbTagInputComponent implements OnInit, OnDestroy, AfterViewInit, Co
    * Controls input disabled state
    */
   @Input()
-  get disabled(): any {
+  get disabled(): boolean {
     return this._disabled;
   }
-  set disabled(value: any) {
-    if (this.disabled !== coerceBooleanProperty(value)) {
+  set disabled(value: boolean) {
+    if (this.disabled !== convertToBoolProperty(value)) {
       this.disabled$.next(!this.disabled);
     }
   }
-  private _disabled: boolean = false;
+  private _disabled = false;
+  static ngAcceptInputType_disabled: NbBooleanInput;
 
   /**
    * Controls whether it allows duplicates
    */
   @Input()
-  get allowDuplicate(): any {
+  get allowDuplicate(): boolean {
     return this._allowDuplicate;
   }
-  set allowDuplicate(value: any) {
-    this._allowDuplicate = coerceBooleanProperty(value);
+  set allowDuplicate(value: boolean) {
+    this._allowDuplicate = convertToBoolProperty(value);
   }
-  private _allowDuplicate: boolean = false;
+  private _allowDuplicate = false;
+  static ngAcceptInputType_allowDuplicate: NbBooleanInput;
 
   /**
    * Controls the number of maximum tags
    */
   @Input()
-  get maxTags(): any {
+  get maxTags(): number {
     return this._maxTags;
   }
-  set maxTags(value: any) {
+  set maxTags(value: number) {
     this._maxTags = coerceNumberProperty(value);
   }
   private _maxTags: number;
+  static ngAcceptInputType_maxTags: NbNumberInput;
 
   /**
    * Placeholder text when tags number reaches the maxTags limit
    */
-  @Input() maxTagsText: string = '';
+  @Input() maxTagsText = '';
 
   /**
    * Validators for tags
@@ -418,12 +286,12 @@ export class NbTagInputComponent implements OnInit, OnDestroy, AfterViewInit, Co
    */
   @Input() errorMessages: { [key: string]: string } = {};
 
-  @ViewChild('tagInputInput') public tagInputInput: NbTagInputInputComponent;
+  @ViewChild('tagInputInput') tagInputInput: NbTagInputInputComponent;
 
   onChange: any = () => { };
   onTouched: any = () => { };
 
-  public errors: string[] = [];
+  errors: string[] = [];
 
   private destroy$ = new Subject<void>();
 
@@ -466,14 +334,14 @@ export class NbTagInputComponent implements OnInit, OnDestroy, AfterViewInit, Co
     this.destroy$.complete();
   }
 
-  writeValue(val: any): void {
+  writeValue(val): void {
     this._tags = val;
     this.changeDetector.markForCheck();
   }
-  registerOnChange(fn: any): void {
+  registerOnChange(fn): void {
     this.onChange = fn;
   }
-  registerOnTouched(fn: any): void {
+  registerOnTouched(fn): void {
     this.onTouched = fn;
   }
   /**
@@ -498,20 +366,21 @@ export class NbTagInputComponent implements OnInit, OnDestroy, AfterViewInit, Co
   /**
    * Placeholder text for the input of adding a new tag
    */
-  @Input() placeholder: string = 'Add a new tag';
+  @Input() placeholder = 'Add a new tag';
 
   /**
    * If set element will fill container. `false` by default.
    */
   @Input()
   @HostBinding('class.input-full-width')
-  get fullWidth(): any {
+  get fullWidth(): boolean {
     return this._fullWidth;
   }
-  set fullWidth(value: any) {
-    this._fullWidth = coerceBooleanProperty(value);
+  set fullWidth(value: boolean) {
+    this._fullWidth = convertToBoolProperty(value);
   }
   private _fullWidth = false;
+  static ngAcceptInputType_fullWidth: NbBooleanInput;
 
   /**
    * Tag shapes modifications. Possible values: `rectangle`, `round` (default), `semi-round`.
@@ -535,25 +404,27 @@ export class NbTagInputComponent implements OnInit, OnDestroy, AfterViewInit, Co
    * Controls tags can be removed or not.
    */
   @Input()
-  get removable(): any {
+  get removable(): boolean {
     return this._removable;
   }
-  set removable(value: any) {
-    this._removable = coerceBooleanProperty(value);
+  set removable(value: boolean) {
+    this._removable = convertToBoolProperty(value);
   }
-  private _removable: boolean = true;
+  private _removable = true;
+  static ngAcceptInputType_removable: NbBooleanInput;
 
   /**
    * Controls tags can be edited or not.
    */
   @Input()
-  get editable(): any {
+  get editable(): boolean {
     return this._editable;
   }
-  set editable(value: any) {
-    this._editable = coerceBooleanProperty(value);
+  set editable(value: boolean) {
+    this._editable = convertToBoolProperty(value);
   }
-  private _editable: boolean = true;
+  private _editable = true;
+  static ngAcceptInputType_editable: NbBooleanInput;
 
   /**
    * The options for the auto complete
@@ -564,13 +435,14 @@ export class NbTagInputComponent implements OnInit, OnDestroy, AfterViewInit, Co
    * Controls it has auto complete or not
    */
   @Input()
-  get autoComplete(): any {
+  get autoComplete(): boolean {
     return this._autoComplete;
   }
-  set autoComplete(value: any) {
-    this._autoComplete = coerceBooleanProperty(value);
+  set autoComplete(value: boolean) {
+    this._autoComplete = convertToBoolProperty(value);
   }
-  private _autoComplete: boolean = false;
+  private _autoComplete = false;
+  static ngAcceptInputType_autoComplete: NbBooleanInput;
 
   /**
    * Output when a tag is added
@@ -578,7 +450,7 @@ export class NbTagInputComponent implements OnInit, OnDestroy, AfterViewInit, Co
    */
   @Output() tagAdded = new EventEmitter<string>();
 
-  public onTagAdded(tag: string): void {
+  onTagAdded(tag: string): void {
     this.tagAdded.emit(tag);
   }
 
@@ -588,7 +460,7 @@ export class NbTagInputComponent implements OnInit, OnDestroy, AfterViewInit, Co
    */
   @Output() tagRemoved = new EventEmitter<{ index: number, tag: string }>();
 
-  public onTagRemoved(tag: { index: number, tag: string }): void {
+  onTagRemoved(tag: { index: number, tag: string }): void {
     this.tagRemoved.emit(tag);
   }
 
@@ -598,7 +470,7 @@ export class NbTagInputComponent implements OnInit, OnDestroy, AfterViewInit, Co
    */
   @Output() tagUpdated = new EventEmitter<{ index: number, tag: string }>();
 
-  public onTagUpdated(tag: { index: number, tag: string }): void {
+  onTagUpdated(tag: { index: number, tag: string }): void {
     this.tagUpdated.emit(tag);
   }
 
@@ -607,7 +479,7 @@ export class NbTagInputComponent implements OnInit, OnDestroy, AfterViewInit, Co
    */
   @Output() textChanged = new EventEmitter<string>();
 
-  public onTextChanged(text: string): void {
+  onTextChanged(text: string): void {
     this.textChanged.emit(text);
   }
 }

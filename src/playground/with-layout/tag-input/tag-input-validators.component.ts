@@ -36,15 +36,15 @@ import { FormControl, Validators } from '@angular/forms';
 })
 export class TagInputValidatorsComponent {
 
-  public validators = [Validators.maxLength(5), this.startsWithAt];
-  public asyncValidators = [this.validateAsync];
+  validators = [Validators.maxLength(5), this.startsWithAt];
+  asyncValidators = [this.validateAsync];
 
-  public errorMessages = {
+  errorMessages = {
     'maxlength': `Tag's max length is 5`,
     'startsWithAt@': `Tag needs to start with '@'`,
   };
 
-  public asyncErrorMessages = {
+  asyncErrorMessages = {
     'isNaN': 'Numbers only',
   };
 
@@ -60,7 +60,7 @@ export class TagInputValidatorsComponent {
 
   private validateAsync(control: FormControl): Promise<any> {
     return new Promise(resolve => {
-      const result = isNaN(control.value) ? {
+      const result = Number.isNaN(control.value) ? {
         'isNaN': true,
       } : null;
 
