@@ -1271,6 +1271,65 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
     ],
   },
   {
+    path: 'tag-input',
+    children: [
+      {
+        path: 'tag-input-test.component',
+        link: '/tag-input/tag-input-test.component',
+        component: 'TagInputTestComponent',
+        name: 'Tag Input Test',
+      },
+      {
+        path: 'tag-input-colors.component',
+        link: '/tag-input/tag-input-colors.component',
+        component: 'TagInputColorsComponent',
+        name: 'Tag Input Colors',
+      },
+      {
+        path: 'tag-input-sizes.component',
+        link: '/tag-input/tag-input-sizes.component',
+        component: 'TagInputSizesComponent',
+        name: 'Tag Input Sizes',
+      },
+      {
+        path: 'tag-input-shapes.component',
+        link: '/tag-input/tag-input-shapes.component',
+        component: 'TagInputShapesComponent',
+        name: 'Tag Input Shapes',
+      },
+      {
+        path: 'tag-input-max-tags.component',
+        link: '/tag-input/tag-input-max-tags.component',
+        component: 'TagInputMaxTagsComponent',
+        name: 'Tag Input Max Tags',
+      },
+      {
+        path: 'tag-input-validators.component',
+        link: '/tag-input/tag-input-validators.component',
+        component: 'TagInputValidatorsComponent',
+        name: 'Tag Input Validators',
+      },
+      {
+        path: 'tag-input-events.component',
+        link: '/tag-input/tag-input-events.component',
+        component: 'TagInputEventsComponent',
+        name: 'Tag Input Events',
+      },
+      {
+        path: 'tag-input-form.component',
+        link: '/tag-input/tag-input-form.component',
+        component: 'TagInputFormComponent',
+        name: 'Tag Input Form',
+      },
+      {
+        path: 'tag-input-autocomplete.component',
+        link: '/tag-input/tag-input-autocomplete.component',
+        component: 'TagInputAutoCompleteComponent',
+        name: 'Tag Input Auto Complete',
+      },
+    ],
+  },
+  {
     path: 'toastr',
     children: [
       {

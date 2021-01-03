@@ -1,0 +1,43 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
+ @mixin tag-input-tag-statuses() {
+  @each $status in nb-get-statuses() {
+    &.status-#{$status} {
+      background-color: nb-theme(tag-input-tag-#{$status}-background-color);
+      border-color    : nb-theme(tag-input-tag-#{$status}-border-color);
+      color           : nb-theme(tag-input-tag-#{$status}-text-color);
+
+      &:hover {
+        background-color: nb-theme(tag-input-tag-#{$status}-hover-background-color);
+        border-color    : nb-theme(tag-input-tag-#{$status}-hover-border-color);
+      }
+    }
+  }
+}
+
+@mixin tag-input-tag-editing-statuses() {
+  @each $status in nb-get-statuses() {
+    &.status-#{$status} {
+      background-color: nb-theme(tag-input-tag-#{$status}-editing-background-color);
+      color           : nb-theme(tag-input-tag-#{$status}-editing-text-color);
+    }
+  }
+}
+
+@mixin tag-input-tag-disabled-statuses() {
+  @each $status in nb-get-statuses() {
+    &.status-#{$status} {
+
+      &.tag-input-tag-disabled,
+      &.tag-input-tag-disabled:hover {
+        background-color: nb-theme(tag-input-tag-#{$status}-disabled-background-color);
+        border-color    : nb-theme(tag-input-tag-#{$status}-disabled-border-color);
+        color           : nb-theme(tag-input-tag-#{$status}-disabled-text-color);
+      }
+    }
+  }
+}

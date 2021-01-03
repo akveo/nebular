@@ -5,7 +5,7 @@
  */
 
 import { NgModule } from '@angular/core';
-import { RouterModule, Route} from '@angular/router';
+import { RouterModule, Route } from '@angular/router';
 import { PlaygroundLayoutComponent } from './playground-layout.component';
 
 const routes: Route[] = [
@@ -130,6 +130,10 @@ const routes: Route[] = [
         loadChildren: () => import('./tabset/tabset.module').then(m => m.TabsetModule),
       },
       {
+        path: 'tag-input',
+        loadChildren: () => import('./tag-input/tag-input.module').then(m => m.TagInputModule),
+      },
+      {
         path: 'toastr',
         loadChildren: () => import('./toastr/toastr.module').then(m => m.ToastrModule),
       },
@@ -175,7 +179,7 @@ const routes: Route[] = [
 ];
 
 @NgModule({
-  imports: [ RouterModule.forChild(routes) ],
-  exports: [ RouterModule ],
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule],
 })
-export class WithLayoutRoutingModule {}
+export class WithLayoutRoutingModule { }
