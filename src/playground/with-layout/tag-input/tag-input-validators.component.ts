@@ -58,6 +58,7 @@ export class TagInputValidatorsComponent {
     return null;
   }
 
+  //  deepcode ignore no-any:
   private validateAsync(control: FormControl): Promise<any> {
     return new Promise(resolve => {
       const result = Number.isNaN(control.value) ? {
