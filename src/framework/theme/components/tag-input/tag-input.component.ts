@@ -288,8 +288,8 @@ export class NbTagInputComponent implements OnInit, OnDestroy, AfterViewInit, Co
 
   @ViewChild('tagInputInput') tagInputInput: NbTagInputInputComponent;
 
-  onChange: any = () => { };
-  onTouched: any = () => { };
+  onChange = () => { };
+  onTouched = () => { };
 
   errors: string[] = [];
 

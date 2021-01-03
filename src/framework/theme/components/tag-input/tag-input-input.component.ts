@@ -97,7 +97,7 @@ export class NbTagInputInputComponent extends NbInputDirective implements OnInit
       }
     }
   }
-  private _disabled: boolean = false;
+  private _disabled = false;
 
   @Input() allowDuplicate;
 
@@ -128,7 +128,7 @@ export class NbTagInputInputComponent extends NbInputDirective implements OnInit
 
   @Input() autoComplete: boolean;
 
-  @ViewChildren(NbTagInputTagComponent) public tags: QueryList<NbTagInputTagComponent>;
+  @ViewChildren(NbTagInputTagComponent) tags: QueryList<NbTagInputTagComponent>;
 
   @Output() tagAdded = new EventEmitter<string>();
 
@@ -144,7 +144,7 @@ export class NbTagInputInputComponent extends NbInputDirective implements OnInit
 
   private updatingIndex: number;
 
-  public form: FormGroup;
+  form: FormGroup;
 
   private autoDirective: NbAutocompleteDirective<string>;
 
@@ -220,19 +220,19 @@ export class NbTagInputInputComponent extends NbInputDirective implements OnInit
     super.ngAfterViewInit();
   }
 
-  public onKeyDown($event) {
+  onKeyDown($event) {
     if ($event.key === 'Enter') {
       this.addTag();
     }
   }
 
-  public onBlur(e) {
+  onBlur(e) {
     if (!e.relatedTarget || e.relatedTarget.tagName !== 'NB-OPTION') {
       this.addTag();
     }
   }
 
-  public removeTag(index) {
+  removeTag(index) {
     const removingTag: NbTagInputTagComponent = this.tags.toArray()[index];
     removingTag.removing();
     this.tagRemoved.emit({ index, tag: this.tagValues[index] });
@@ -243,19 +243,19 @@ export class NbTagInputInputComponent extends NbInputDirective implements OnInit
     }, 200);
   }
 
-  public updatingTag(tag: string) {
+  updatingTag(tag: string) {
     this.tagUpdate.setValue(tag);
   }
 
-  public activateEditing(index) {
+  activateEditing(index) {
     this.updatingIndex = index;
   }
 
-  public endEditing(index) {
+  endEditing(index) {
     this.tagUpdate.setValue('');
   }
 
-  public updateTag(t: { index: number, tag: string }) {
+  updateTag(t: { index: number, tag: string }) {
     this.tagUpdated.emit(t);
   }
 
@@ -296,12 +296,12 @@ export class NbTagInputInputComponent extends NbInputDirective implements OnInit
     }
   }
 
-  public hasErrors(): boolean {
+  hasErrors(): boolean {
     const { value, valid } = this.form;
     return (value.tag || value.tagUpdate) && !valid;
   }
 
-  public getErrorMessages(messages: { [key: string]: string }): string[] {
+  getErrorMessages(messages: { [key: string]: string }): string[] {
     return Object.keys(messages)
       .filter(err => this.form.controls.tag.hasError(err) || this.form.controls.tagUpdate.hasError(err))
       .map(err => messages[err]);

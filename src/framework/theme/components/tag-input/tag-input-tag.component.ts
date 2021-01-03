@@ -71,11 +71,11 @@ export class NbTagInputTagComponent implements AfterViewInit {
       this._disabled = !this.disabled;
     }
   }
-  private _disabled: boolean = false;
+  private _disabled = false;
 
   @ViewChild('tagText') tagTextElementRef;
 
-  editing: boolean = false;
+  editing = false;
 
   @Output() remove: EventEmitter<number> = new EventEmitter();
 
@@ -87,7 +87,7 @@ export class NbTagInputTagComponent implements AfterViewInit {
 
   @Output() endEditing: EventEmitter<number> = new EventEmitter();
 
-  public isValid = true;
+  isValid = true;
 
   private originalValue: string;
 
@@ -183,17 +183,17 @@ export class NbTagInputTagComponent implements AfterViewInit {
     return this.tagShape === 'round';
   }
 
-  public removeTag(index) {
+  removeTag(index) {
     if (!this.disabled) {
       return this.remove.emit(index);
     }
   }
 
-  public updateTag(index, newTag) {
+  updateTag(index, newTag) {
     return this.update.emit({ index, tag: newTag });
   }
 
-  public toggleEditMode(): void {
+  toggleEditMode(): void {
     return this.editing || this.disabled || !this.editable ? undefined : this.activateEditMode();
   }
 
@@ -213,14 +213,14 @@ export class NbTagInputTagComponent implements AfterViewInit {
   }
 
   @HostListener('keydown', ['$event'])
-  public keydown(event: KeyboardEvent): void {
+  keydown(event: KeyboardEvent): void {
     if (event.key === 'Enter') {
       this._updateTag();
     }
   }
 
   @HostListener('keyup', ['$event'])
-  public keyup(event: KeyboardEvent): void {
+  keyup(event: KeyboardEvent): void {
     this.updating.emit(this.getContentEditableText());
   }
 
@@ -248,7 +248,7 @@ export class NbTagInputTagComponent implements AfterViewInit {
     }
   }
 
-  public onBlurred(): void {
+  onBlurred(): void {
     this._updateTag();
   }
 
@@ -257,7 +257,7 @@ export class NbTagInputTagComponent implements AfterViewInit {
     return input ? input.innerText.trim() : '';
   }
 
-  public adding(): void {
+  adding(): void {
     this.renderer.addClass(this.elementRef.nativeElement, 'adding');
 
     setTimeout(() => {
@@ -266,7 +266,7 @@ export class NbTagInputTagComponent implements AfterViewInit {
     }, 300);
   }
 
-  public removing(): void {
+  removing(): void {
     this.renderer.addClass(this.elementRef.nativeElement, 'removing');
 
     setTimeout(() => {
