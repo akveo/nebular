@@ -1,8 +1,8 @@
-import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, flush, TestBed, tick } from '@angular/core/testing';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { NbIconModule, NbThemeModule, NbTagInputModule, NbTagInputComponent } from '@nebular/theme'
 import { By } from '@angular/platform-browser';
-import { Validators } from '@angular/forms';
+import { FormControl, Validators } from '@angular/forms';
 import createSpy = jasmine.createSpy;
 
 
@@ -255,6 +255,39 @@ describe('Component: NbTagInput', () => {
     expect(taginput.tagInputInput.form.valid).toBeFalsy();
     expect(taginput.tagInputInput.form.controls.tag.valid).toBeFalsy();
   });
+
+  it('Setting asyncValidators for validating tags when adding', fakeAsync(() => {
+    taginput.asyncValidators = [(control: FormControl): Promise<any> => {
+      return new Promise(resolve => {
+        const result = isNaN(control.value) ? {
+          'isNaN': true,
+        } : null;
+
+        setTimeout(() => {
+          resolve(result);
+        }, 400);
+      })
+    }];
+    fixture.detectChanges();
+
+    taginput.tagInputInput.form.controls.tag.setValue('Java');
+    fixture.detectChanges();
+    flush();
+    fixture.detectChanges();
+    expect(taginput.tagInputInput.form.valid).toBeFalsy();
+    expect(taginput.tagInputInput.form.controls.tag.valid).toBeFalsy();
+  }));
+
+  it('Should add a new tag when blur event occurs on tag-input input element', () => {
+    taginput.tags = ['Java', 'Python', 'C#'];
+    fixture.detectChanges();
+
+    taginput.tagInputInput.form.controls.tag.setValue('PHP');
+    taginput.tagInputInput.tagInputElementRef.nativeElement.dispatchEvent(new Event('blur'));
+    fixture.detectChanges();
+
+    expect(taginput.tags).toEqual(['Java', 'Python', 'C#', 'PHP']);
+  })
 
   it('Should emit tagAdded when a tag is added', () => {
     fixture.detectChanges();

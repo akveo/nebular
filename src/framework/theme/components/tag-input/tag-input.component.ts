@@ -346,23 +346,20 @@ export class NbTagInputComponent implements OnInit, OnDestroy, AfterViewInit, Co
     this.onTouched = fn;
   }
   /**
-   * Field size modifications. Possible values: `small`, `medium` (default), `large`.
+   * Field size modifications. Possible values: `tiny`, `small`, `medium` (default), `large`, `giant`.
    */
-  @Input()
-  fieldSize: NbComponentSize = 'medium';
+  @Input() fieldSize: NbComponentSize = 'medium';
 
   /**
    * Field status (adds specific styles):
    * `basic`, `primary`, `info`, `success`, `warning`, `danger`, `control`
    */
-  @Input()
-  status: NbComponentStatus = 'basic';
+  @Input() status: NbComponentStatus = 'basic';
 
   /**
    * Field shapes modifications. Possible values: `rectangle` (default), `round`, `semi-round`.
    */
-  @Input()
-  shape: NbComponentShape = 'rectangle';
+  @Input() shape: NbComponentShape = 'rectangle';
 
   /**
    * Placeholder text for the input of adding a new tag
@@ -386,15 +383,13 @@ export class NbTagInputComponent implements OnInit, OnDestroy, AfterViewInit, Co
   /**
    * Tag shapes modifications. Possible values: `rectangle`, `round` (default), `semi-round`.
    */
-  @Input()
-  tagShape: NbComponentShape = 'round';
+  @Input() tagShape: NbComponentShape = 'round';
 
   /**
    * Tag status (adds specific styles):
    * `basic`, `primary`, `info`, `success`, `warning`, `danger`, `control`
    */
-  @Input()
-  tagStatus: NbComponentStatus = 'basic';
+  @Input() tagStatus: NbComponentStatus = 'basic';
 
   /*
    * @docs-private
@@ -477,6 +472,7 @@ export class NbTagInputComponent implements OnInit, OnDestroy, AfterViewInit, Co
 
   /**
    * Output when tag text changed
+   * @type EventEmitter<string>
    */
   @Output() textChanged = new EventEmitter<string>();
 

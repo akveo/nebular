@@ -1,3 +1,8 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 import {
   AfterViewInit,
   ChangeDetectorRef,
@@ -33,20 +38,40 @@ import { NbComponentStatus } from '../component-status';
       `,
 })
 export class NbTagInputTagComponent implements AfterViewInit {
+  /**
+   * Tag value
+   */
   @Input() tagValue;
 
+  /**
+   * Tag index of itself
+   */
   @Input() index;
 
-  @Input()
-  tagSize: NbComponentSize = 'medium';
+  /**
+   * Tag size modifications. Possible values: `tiny`, `small`, `medium` (default), `large`, `giant`.
+   */
+  @Input() tagSize: NbComponentSize = 'medium';
 
-  @Input()
-  tagShape: NbComponentShape = 'rectangle';
+  /**
+   * Tag shapes modifications. Possible values: `rectangle` (default), `round`, `semi-round`.
+   */
+  @Input() tagShape: NbComponentShape = 'rectangle';
 
+  /**
+   * Controls itself can be removed or not.
+   */
   @Input() removable;
 
+  /**
+   * Controls itself can be edited or not.
+   */
   @Input() editable;
 
+  /**
+   * Tag status (adds specific styles):
+   * `basic`, `primary`, `info`, `success`, `warning`, `danger`, `control`
+   */
   @Input()
   get tagStatus(): NbComponentStatus {
     return this._tagStatus;
@@ -60,6 +85,9 @@ export class NbTagInputTagComponent implements AfterViewInit {
   }
   protected _tagStatus: NbComponentStatus = 'basic';
 
+  /**
+   * Controls disabled state
+   */
   @Input()
   @HostBinding('class.tag-input-tag-disabled')
   get disabled(): boolean {
@@ -73,22 +101,51 @@ export class NbTagInputTagComponent implements AfterViewInit {
   }
   private _disabled = false;
 
+  /**
+   * Tag text html element ref
+   */
   @ViewChild('tagText') tagTextElementRef;
 
+  /**
+   * Indicates the tag is under editing mode or not
+   */
   editing = false;
 
+  /**
+   * Output when it is removed
+   * @type EventEmitter<number>
+   */
   @Output() remove: EventEmitter<number> = new EventEmitter();
 
+  /**
+   * Output when it is updated
+   * @type EventEmitter<{ index: number, tag: string }>
+   */
   @Output() update: EventEmitter<{ index: number, tag: string }> = new EventEmitter();
 
+  /**
+   * Output when it starts to be edited
+   * @type EventEmitter<string>
+   */
   @Output() updating: EventEmitter<string> = new EventEmitter();
 
+  /**
+   * Output when it is activated into editing mode
+   * @type EventEmitter<number>
+   */
   @Output() activateEditing: EventEmitter<number> = new EventEmitter();
 
+  /**
+   * Output when it ends editing
+   * @type EventEmitter<number>
+   */
   @Output() endEditing: EventEmitter<number> = new EventEmitter();
 
   isValid = true;
 
+  /**
+   * Tag value before it is edited
+   */
   private originalValue: string;
 
   constructor(

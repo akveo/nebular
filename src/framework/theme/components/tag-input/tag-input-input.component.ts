@@ -1,3 +1,8 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
 import {
   AfterViewInit,
   ChangeDetectorRef,
@@ -67,20 +72,35 @@ import { NbTagInputTagComponent } from './tag-input-tag.component';
 })
 export class NbTagInputInputComponent extends NbInputDirective implements OnInit, AfterViewInit {
 
-  @Input()
-  tagShape: NbComponentShape = 'rectangle';
+  /**
+   * Tag shapes modifications. Possible values: `rectangle` (default), `round`, `semi-round`.
+   */
+  @Input() tagShape: NbComponentShape = 'rectangle';
 
-  @Input()
-  tagStatus: NbComponentStatus = 'basic';
+  /**
+   * Tag status (adds specific styles):
+   * `basic`, `primary`, `info`, `success`, `warning`, `danger`, `control`
+   */
+  @Input() tagStatus: NbComponentStatus = 'basic';
 
-  @Input()
-  tagSize: NbComponentSize = 'medium';
+  /**
+   * Tag size modifications. Possible values: `tiny`, `small`, `medium` (default), `large`, `giant`.
+   */
+  @Input() tagSize: NbComponentSize = 'medium';
 
-
+  /**
+   * The values of all tags
+   */
   @Input() tagValues: string[] = [];
 
+  /**
+   * Placeholder text for the input of adding a new tag
+   */
   @Input() placeholder;
 
+  /**
+   * Controls disabled state
+   */
   @Input()
   @HostBinding('class.tag-input-disabled')
   get disabled(): boolean {
@@ -99,24 +119,54 @@ export class NbTagInputInputComponent extends NbInputDirective implements OnInit
   }
   private _disabled = false;
 
+  /**
+   * Controls whether it allows duplicates
+   */
   @Input() allowDuplicate;
 
+  /**
+   * Controls tags can be removed or not.
+   */
   @Input() removable;
 
+  /**
+   * Controls tags can be edited or not.
+   */
   @Input() editable;
 
+  /**
+   * Controls the number of maximum tags
+   */
   @Input() maxTags: number;
 
+  /**
+   * Placeholder text when tags number reaches the maxTags limit
+   */
   @Input() maxTagsText: string;
 
+  /**
+   * Validators for tags
+   */
   @Input() validators: ValidatorFn[] = [];
 
+  /**
+   * AsyncValidators for tags
+   */
   @Input() asyncValidators: AsyncValidatorFn[] = [];
 
+  /**
+   * The element ref of the input for adding new tags
+   */
   @ViewChild('tagInput') tagInputElementRef: ElementRef;
 
+  /**
+   * The ref of the auto complete component
+   */
   @ViewChild('auto') auto: NbAutocompleteComponent<string>;
 
+  /**
+   * Auto complete options
+   */
   @Input()
   get autoCompleteOptions(): Observable<string[]> {
     return this._autoCompleteOptions;
@@ -126,26 +176,60 @@ export class NbTagInputInputComponent extends NbInputDirective implements OnInit
   }
   private _autoCompleteOptions: Observable<string[]>;
 
+  /**
+   * Controls it has auto complete or not
+   */
   @Input() autoComplete: boolean;
 
+  /**
+   * The tags component list
+   */
   @ViewChildren(NbTagInputTagComponent) tags: QueryList<NbTagInputTagComponent>;
 
+  /**
+   * Output when a tag is added
+   * @type EventEmitter<string>
+   */
   @Output() tagAdded = new EventEmitter<string>();
 
+  /**
+   * Output when a tag is removed
+   * @type EventEmitter<{ index: number, tag: string }>
+   */
   @Output() tagRemoved = new EventEmitter<{ index: number, tag: string }>();
 
+  /**
+   * Output when a tag is updated
+   * @type EventEmitter<{ index: number, tag: string }>
+   */
   @Output() tagUpdated = new EventEmitter<{ index: number, tag: string }>();
 
+  /**
+   * Output when tag text changed
+   * @type EventEmitter<string>
+   */
   @Output() textChanged = new EventEmitter<string>();
 
+  /**
+   * Hidden tag control for update validation
+   */
   private tagUpdate: FormControl = new FormControl();
 
+  /**
+   * Tag control associated to the input for adding
+   */
   private tag: FormControl = new FormControl();
 
+  /**
+   * Index of the current updating one
+   */
   private updatingIndex: number;
 
   form: FormGroup;
 
+  /**
+   * Auto complete directive
+   */
   private autoDirective: NbAutocompleteDirective<string>;
 
   constructor(
@@ -195,6 +279,7 @@ export class NbTagInputInputComponent extends NbInputDirective implements OnInit
 
     const statusChanges$ = this.tagUpdate.statusChanges;
 
+    // Validate when updating
     statusChanges$.pipe(
       filter((status: string) => status !== 'PENDING'),
       takeUntil(this.destroy$),
@@ -205,6 +290,7 @@ export class NbTagInputInputComponent extends NbInputDirective implements OnInit
       }
     });
 
+    // Add auto complete
     if (this.autoComplete) {
       this.autoDirective = new NbAutocompleteDirective<string>(this.tagInputElementRef,
         this.overlay,
@@ -227,6 +313,7 @@ export class NbTagInputInputComponent extends NbInputDirective implements OnInit
   }
 
   onBlur(e) {
+    // Not to add a tag if the target element is 'NB-OPTION' from auto complete
     if (!e.relatedTarget || e.relatedTarget.tagName !== 'NB-OPTION') {
       this.addTag();
     }
