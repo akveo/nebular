@@ -2,9 +2,42 @@ import { ComponentFixture, fakeAsync, flush, TestBed, tick } from '@angular/core
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { NbIconModule, NbThemeModule, NbTagInputModule, NbTagInputComponent } from '@nebular/theme'
 import { By } from '@angular/platform-browser';
-import { FormControl, Validators } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import createSpy = jasmine.createSpy;
+import { Component, OnInit } from '@angular/core';
+import { of } from 'rxjs';
 
+@Component({
+  selector: 'nb-tag-input-form-test',
+  template: `
+    <nb-layout>
+      <nb-layout-column>
+        <form [formGroup]="form">
+          <nb-tag-input
+            status="primary"
+            tagStatus="primary"
+            placeholder="add a new tag"
+            formControlName="tags"
+            fullWidth>
+          </nb-tag-input>
+        </form>
+        <div>
+          <button nbButton status="primary" (click)="getControlValues()">get values</button>
+        </div>
+      </nb-layout-column>
+    </nb-layout>
+  `,
+})
+export class NbTagInputFormTestComponent implements OnInit {
+  form: FormGroup;
+  controlValues;
+
+  ngOnInit() {
+    this.form = new FormGroup({
+      tags: new FormControl(['Java', 'C#', 'Python']),
+    });
+  }
+}
 
 describe('Component: NbTagInput', () => {
 
@@ -34,11 +67,36 @@ describe('Component: NbTagInput', () => {
     expect(taginputinputtagElement.classes['tag-input-tag-disabled']).toBeTruthy();
   }));
 
+  it('Setting disabled to true then to false to re-enable taginput', fakeAsync(() => {
+    taginput.tags = ['Java', 'Python', 'C#'];
+    taginput.disabled = true;
+    fixture.detectChanges();
+    tick();
+    fixture.detectChanges();
+
+    taginput.disabled = false;
+    fixture.detectChanges();
+    tick();
+    fixture.detectChanges();
+
+    const taginputinputElement = fixture.debugElement.query(By.css('nb-tag-input-input'));
+    const taginputinputtagElement = fixture.debugElement.queryAll(By.css('nb-tag-input-tag'))[0];
+    expect(taginput.tagInputInput.form.controls.tag.disabled).toBeFalsy();
+    expect(taginputinputElement.classes['tag-input-disabled']).toBeFalsy();
+    expect(taginputinputtagElement.classes['tag-input-tag-disabled']).toBeFalsy();
+  }));
+
   it('Setting allowDuplicate to true allows duplicate tags', () => {
     taginput.tags = ['Java', 'Python', 'C#', 'Python'];
     taginput.allowDuplicate = true;
     fixture.detectChanges();
     expect(taginput.tags).toEqual(['Java', 'Python', 'C#', 'Python']);
+
+    taginput.tagInputInput.form.controls.tag.setValue('Python');
+    taginput.tagInputInput.tagInputElementRef.nativeElement.dispatchEvent(new Event('blur'));
+    fixture.detectChanges();
+
+    expect(taginput.tags).toEqual(['Java', 'Python', 'C#', 'Python', 'Python']);
   });
 
   it('Setting allowDuplicate to false does not allow duplicate tags', () => {
@@ -46,6 +104,13 @@ describe('Component: NbTagInput', () => {
     taginput.allowDuplicate = false;
     fixture.detectChanges();
     expect(taginput.tags).toEqual(['Java', 'Python', 'C#']);
+
+    taginput.tagInputInput.form.controls.tag.setValue('Python');
+    taginput.tagInputInput.tagInputElementRef.nativeElement.dispatchEvent(new Event('blur'));
+    fixture.detectChanges();
+
+    expect(taginput.tags).toEqual(['Java', 'Python', 'C#']);
+
   });
 
   it('Setting status to basic apply corresponding class to host element', () => {
@@ -353,4 +418,51 @@ describe('Component: NbTagInput', () => {
 
     expect(textChangedSpy).toHaveBeenCalledWith('a');
   });
+
+  it('', () => {
+    taginput.tags = [''];
+    taginput.autoComplete = true;
+    taginput.autoCompleteOptions = of(['Java', 'Python', 'C#', 'Go', 'PHP', 'F#']);
+    fixture.detectChanges();
+
+    expect(taginput.tagInputInput.auto.options.length).toEqual(6);
+  });
+});
+
+describe('Component: form', () => {
+  let fixture: ComponentFixture<NbTagInputFormTestComponent>;
+  let formTestComponent: NbTagInputFormTestComponent;
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [
+        ReactiveFormsModule,
+        NbThemeModule.forRoot(),
+        NbTagInputModule,
+        NbEvaIconsModule,
+        NbIconModule,
+      ],
+      declarations: [
+        NbTagInputFormTestComponent
+      ],
+    });
+
+    fixture = TestBed.createComponent(NbTagInputFormTestComponent);
+    formTestComponent = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should get form control value', () => {
+    expect(formTestComponent.form.controls.tags.value)
+      .toEqual(['Java', 'C#', 'Python']);
+  });
+
+  it('should get changed form control value', () => {
+    formTestComponent.form.controls.tags
+      .setValue(['Java', 'C#', 'Python', 'PHP']);
+    fixture.detectChanges();
+
+    expect(formTestComponent.form.controls.tags.value)
+      .toEqual(['Java', 'C#', 'Python', 'PHP']);
+  })
 });
