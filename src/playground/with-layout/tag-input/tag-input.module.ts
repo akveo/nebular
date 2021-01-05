@@ -15,6 +15,7 @@ import { TagInputFormComponent } from './tag-input-form.component';
 import { TagInputMaxTagsComponent } from './tag-input-max-tags.component';
 import { TagInputRoutingModule } from './tag-input-routing.module';
 import { TagInputShapesComponent } from './tag-input-shapes.component';
+import { TagInputShowcaseComponent } from './tag-input-showcase.component';
 import { TagInputSizesComponent } from './tag-input-sizes.component';
 import { TagInputTestComponent } from './tag-input-test.component';
 import { TagInputValidatorsComponent } from './tag-input-validators.component';
@@ -30,6 +31,7 @@ import { TagInputValidatorsComponent } from './tag-input-validators.component';
     TagInputEventsComponent,
     TagInputFormComponent,
     TagInputAutoCompleteComponent,
+    TagInputShowcaseComponent,
   ],
   imports: [
     CommonModule,

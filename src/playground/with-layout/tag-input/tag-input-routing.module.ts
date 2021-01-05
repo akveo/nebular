@@ -12,6 +12,7 @@ import { TagInputEventsComponent } from './tag-input-events.component';
 import { TagInputFormComponent } from './tag-input-form.component';
 import { TagInputMaxTagsComponent } from './tag-input-max-tags.component';
 import { TagInputShapesComponent } from './tag-input-shapes.component';
+import { TagInputShowcaseComponent } from './tag-input-showcase.component';
 import { TagInputSizesComponent } from './tag-input-sizes.component';
 import { TagInputTestComponent } from './tag-input-test.component';
 import { TagInputValidatorsComponent } from './tag-input-validators.component';
@@ -53,6 +54,10 @@ const routes: Route[] = [
     path: 'tag-input-autocomplete.component',
     component: TagInputAutoCompleteComponent,
   },
+  {
+    path: 'tag-input-showcase.component',
+    component: TagInputShowcaseComponent
+  }
 ];
 
 @NgModule({

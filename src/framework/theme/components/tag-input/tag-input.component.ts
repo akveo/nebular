@@ -59,7 +59,7 @@ import { convertToBoolProperty, NbBooleanInput, NbNumberInput } from '../helpers
  * @stacked-example(TagInput Shapes, tag-input/tag-input-shapes.component)
  *
  * TagInput's 'maxTags' property is to setup the maximum number of the tags the control can accept:
- * @stacked-example(TagInput maxTags, tag-input/tag-input-max-tags.compnent)
+ * @stacked-example(TagInput maxTags, tag-input/tag-input-max-tags.component)
  *
  * TagInput's 'validators' and 'asyncValidators' are to setup tag's validators
  * @stacked-example(TagInput validators, tag-input/tag-input-validators.component)
@@ -76,7 +76,8 @@ import { convertToBoolProperty, NbBooleanInput, NbNumberInput } from '../helpers
  * TagInput can use auto complete
  * @stacked-example(TagInput auto complete, tag-input/tag-input-autocomplete.component)
  *
- * @styles tag
+ * @styles
+ * 
  * tag-input-tiny-text-font-size:
  * tag-input-tiny-text-font-weight:
  * tag-input-tiny-text-line-height:

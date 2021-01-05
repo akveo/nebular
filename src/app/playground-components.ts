@@ -1327,6 +1327,12 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         component: 'TagInputAutoCompleteComponent',
         name: 'Tag Input Auto Complete',
       },
+      {
+        path: 'tag-input-showcase.component',
+        link: '/tag-input/tag-input-showcase.component',
+        component: 'TagInputShowcaseComponent',
+        name: 'Tag Input Showcase',
+      },
     ],
   },
   {
