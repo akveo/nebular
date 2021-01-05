@@ -443,7 +443,7 @@ describe('Component: form', () => {
         NbIconModule,
       ],
       declarations: [
-        NbTagInputFormTestComponent
+        NbTagInputFormTestComponent,
       ],
     });
 
