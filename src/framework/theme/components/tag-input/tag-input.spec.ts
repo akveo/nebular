@@ -257,16 +257,17 @@ describe('Component: NbTagInput', () => {
   });
 
   it('Setting asyncValidators for validating tags when adding', fakeAsync(() => {
+    //  deepcode ignore no-any:
     taginput.asyncValidators = [(control: FormControl): Promise<any> => {
       return new Promise(resolve => {
-        const result = isNaN(control.value) ? {
-          'isNaN': true,
+        const result = (control.value.charAt(0) !== '@' && control.value !== '') ? {
+          'startsWithAt@': true,
         } : null;
 
         setTimeout(() => {
           resolve(result);
         }, 400);
-      })
+      });
     }];
     fixture.detectChanges();
 

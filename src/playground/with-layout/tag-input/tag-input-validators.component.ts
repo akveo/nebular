@@ -19,7 +19,7 @@ import { FormControl, Validators } from '@angular/forms';
       </nb-card-body>
     </nb-card>
     <nb-card>
-      <nb-card-header>Numbers only, async validators</nb-card-header>
+      <nb-card-header>Start with '@', async validators</nb-card-header>
       <nb-card-body>
         <nb-tag-input
           status="primary"
@@ -28,7 +28,7 @@ import { FormControl, Validators } from '@angular/forms';
           fullWidth
           [asyncValidators]="asyncValidators"
           [errorMessages]="asyncErrorMessages"
-          [tags]="['111', '222', '333']">
+          [tags]="['@Java', '@C#', '@TS']">
         </nb-tag-input>
       </nb-card-body>
     </nb-card>
@@ -45,14 +45,14 @@ export class TagInputValidatorsComponent {
   };
 
   asyncErrorMessages = {
-    'isNaN': 'Numbers only',
+    'startsWithAt@': `Tag needs to start with '@'`,
   };
 
   private startsWithAt(control: FormControl) {
     if (control.value.charAt(0) !== '@' && control.value !== '') {
       return {
         'startsWithAt@': true,
-      }
+      };
     }
 
     return null;
@@ -61,13 +61,13 @@ export class TagInputValidatorsComponent {
   //  deepcode ignore no-any:
   private validateAsync(control: FormControl): Promise<any> {
     return new Promise(resolve => {
-      const result = isNaN(control.value) ? {
-        'isNaN': true,
+      const result = (control.value.charAt(0) !== '@' && control.value !== '') ? {
+        'startsWithAt@': true,
       } : null;
 
       setTimeout(() => {
         resolve(result);
       }, 400);
-    })
+    });
   }
 }
