@@ -77,7 +77,7 @@ import { convertToBoolProperty, NbBooleanInput, NbNumberInput } from '../helpers
  * @stacked-example(TagInput auto complete, tag-input/tag-input-autocomplete.component)
  *
  * @styles
- * 
+ *
  * tag-input-tiny-text-font-size:
  * tag-input-tiny-text-font-weight:
  * tag-input-tiny-text-line-height:

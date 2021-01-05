@@ -56,8 +56,8 @@ const routes: Route[] = [
   },
   {
     path: 'tag-input-showcase.component',
-    component: TagInputShowcaseComponent
-  }
+    component: TagInputShowcaseComponent,
+  },
 ];
 
 @NgModule({
