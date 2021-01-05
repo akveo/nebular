@@ -24,6 +24,7 @@
   @include nb-option-list-theme();
   @include nb-input-theme();
   @include nb-overlay-theme();
+  @include nb-tag-input-theme();
 
   @include nbd-common();
 

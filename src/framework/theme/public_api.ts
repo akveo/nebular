@@ -50,7 +50,7 @@ export { NbCalendarWeekNumberComponent } from './components/calendar-kit/compone
 export { NbCalendarMonthCellComponent } from './components/calendar-kit/components/calendar-month-picker/calendar-month-cell.component';
 export { NbCalendarYearCellComponent } from './components/calendar-kit/components/calendar-year-picker/calendar-year-cell.component';
 export { NbCalendarPickerRowComponent } from './components/calendar-kit/components/calendar-picker/calendar-picker-row.component';
-export { NbCalendarPickerComponent }from './components/calendar-kit/components/calendar-picker/calendar-picker.component';
+export { NbCalendarPickerComponent } from './components/calendar-kit/components/calendar-picker/calendar-picker.component';
 // tslint:enable:max-line-length
 export * from './components/calendar/base-calendar.component';
 export * from './components/calendar/base-calendar.module';
@@ -229,3 +229,5 @@ export * from './components/form-field/form-field.component';
 export * from './components/form-field/prefix.directive';
 export * from './components/form-field/suffix.directive';
 export * from './components/form-field/form-field-control';
+export * from './components/tag-input/tag-input.component';
+export * from './components/tag-input/tag-input.module';

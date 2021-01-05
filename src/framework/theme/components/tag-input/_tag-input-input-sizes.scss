@@ -1,0 +1,19 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
+ @mixin tag-input-input-sizes() {
+  @each $size in nb-get-sizes() {
+    &.size-#{$size} {
+      input {
+        height: nb-theme(tag-input-input-#{$size}-height);
+      }
+
+      &:not(.input-full-width) {
+        max-width: nb-theme(input-#{$size}-max-width);
+      }
+    }
+  }
+}

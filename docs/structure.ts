@@ -408,13 +408,13 @@ export const structure = [
         type: 'tabs',
         name: 'List',
         icon: 'list.svg',
-        source: [ 'NbListComponent', 'NbListItemComponent' ],
+        source: ['NbListComponent', 'NbListItemComponent'],
       },
       {
         type: 'tabs',
         name: 'Infinite List',
         icon: 'infinite-scroll.svg',
-        source: [ 'NbInfiniteListDirective', 'NbListPageTrackerDirective' ],
+        source: ['NbInfiniteListDirective', 'NbListPageTrackerDirective'],
       },
       {
         type: 'group',
@@ -468,7 +468,7 @@ export const structure = [
         type: 'tabs',
         name: 'Input',
         icon: 'input.svg',
-        source: [ 'NbInputDirective' ],
+        source: ['NbInputDirective'],
       },
       {
         type: 'tabs',
@@ -550,6 +550,14 @@ export const structure = [
         source: [
           'NbTimePickerDirective',
           'NbTimePickerComponent',
+        ],
+      },
+      {
+        type: 'tabs',
+        name: 'Tag Input',
+        icon: 'taginput.svg',
+        source: [
+          'NbTagInputComponent',
         ],
       },
       {

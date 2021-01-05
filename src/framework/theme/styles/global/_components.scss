@@ -44,6 +44,7 @@
 @import '../../components/icon/icon.component.theme';
 @import '../../components/form-field/form-field.component.theme';
 @import '../../components/timepicker/timepicker.component.theme';
+@import '../../components/tag-input/tag-input.component.theme';
 
 @mixin nb-theme-components() {
 
@@ -75,6 +76,7 @@
   @include nb-buttons-group-theme();
   @include nb-list-theme();
   @include nb-input-theme();
+  @include nb-tag-input-theme();
   @include nb-overlay-theme();
   @include nb-popover-theme();
   @include nb-context-menu-theme();

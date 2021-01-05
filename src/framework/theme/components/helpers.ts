@@ -6,6 +6,7 @@
 
 export type NbNullableInput = string | null | undefined;
 export type NbBooleanInput = boolean | NbNullableInput;
+export type NbNumberInput = number | NbNullableInput;
 
 export function convertToBoolProperty(val: any): boolean {
   if (typeof val === 'string') {
