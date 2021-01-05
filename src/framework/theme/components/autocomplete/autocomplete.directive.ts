@@ -15,16 +15,16 @@ import {
   HostListener,
   Input,
   OnDestroy,
-  Optional,
   QueryList,
   Renderer2,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { merge, Subject } from 'rxjs';
+import { filter, startWith, switchMap, takeUntil, tap } from 'rxjs/operators';
+
 import { NbOverlayRef, NbScrollStrategy } from '../cdk/overlay/mapping';
 import { NbTrigger, NbTriggerStrategy, NbTriggerStrategyBuilderService } from '../cdk/overlay/overlay-trigger';
 import { NbOverlayService } from '../cdk/overlay/overlay-service';
-import { filter, startWith, switchMap, takeUntil, tap } from 'rxjs/operators';
-import { merge, Subject } from 'rxjs';
 import { ENTER, ESCAPE } from '../cdk/keycodes/keycodes';
 import {
   NbAdjustableConnectedPositionStrategy,
@@ -37,9 +37,10 @@ import {
   NbActiveDescendantKeyManagerFactoryService,
   NbKeyManagerActiveItemMode,
 } from '../cdk/a11y/descendant-key-manager';
-import { NbAutocompleteComponent } from './autocomplete.component';
+import { NbScrollStrategies } from '../cdk/adapter/block-scroll-strategy-adapter';
 import { NbOptionComponent } from '../option/option.component';
 import { convertToBoolProperty } from '../helpers';
+import { NbAutocompleteComponent } from './autocomplete.component';
 
 /**
  * The `NbAutocompleteDirective` provides a capability to expand input with
@@ -103,8 +104,6 @@ export class NbAutocompleteDirective<T> implements OnDestroy, AfterViewInit, Con
 
   protected overlayRef: NbOverlayRef;
 
-  protected overlayOffset = 8;
-
   protected keyManager: NbActiveDescendantKeyManager<NbOptionComponent<T>>;
 
   protected destroy$: Subject<void> = new Subject<void>();
@@ -139,6 +138,11 @@ export class NbAutocompleteDirective<T> implements OnDestroy, AfterViewInit, Con
   }
 
   /**
+   * Determines options overlay offset (in pixels).
+   **/
+  @Input() overlayOffset: number = 8;
+
+  /**
    * Determines if the input will be focused when the control value is changed
    * */
   @Input()
@@ -149,6 +153,11 @@ export class NbAutocompleteDirective<T> implements OnDestroy, AfterViewInit, Con
     this._focusInputOnValueChange = convertToBoolProperty(value);
   }
   protected _focusInputOnValueChange: boolean = true;
+
+  /**
+   * Determines options overlay scroll strategy.
+   **/
+  @Input() scrollStrategy: NbScrollStrategies = 'block';
 
   @HostBinding('class.nb-autocomplete-position-top')
   get top(): boolean {
@@ -411,7 +420,7 @@ export class NbAutocompleteDirective<T> implements OnDestroy, AfterViewInit, Con
   protected createOverlay() {
     const scrollStrategy = this.createScrollStrategy();
     this.overlayRef = this.overlay.create(
-      { positionStrategy: this.positionStrategy, scrollStrategy });
+      { positionStrategy: this.positionStrategy, scrollStrategy, panelClass: this.autocomplete.optionsPanelClass });
   }
 
   protected initOverlay() {
@@ -437,6 +446,6 @@ export class NbAutocompleteDirective<T> implements OnDestroy, AfterViewInit, Con
   }
 
   protected createScrollStrategy(): NbScrollStrategy {
-    return this.overlay.scrollStrategies.block();
+    return this.overlay.scrollStrategies[this.scrollStrategy]();
   }
 }

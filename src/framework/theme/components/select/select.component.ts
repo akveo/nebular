@@ -28,6 +28,7 @@ import {
   Renderer2,
   NgZone,
 } from '@angular/core';
+import { NgClass } from '@angular/common';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { merge, Subject, BehaviorSubject, from } from 'rxjs';
 import { startWith, switchMap, takeUntil, filter, map, finalize } from 'rxjs/operators';
@@ -53,6 +54,7 @@ import { convertToBoolProperty, NbBooleanInput } from '../helpers';
 import { NB_SELECT_INJECTION_TOKEN } from './select-injection-tokens';
 import { NbFormFieldControl, NbFormFieldControlConfig } from '../form-field/form-field-control';
 import { NbFocusMonitor } from '../cdk/a11y/a11y.module';
+import { NbScrollStrategies } from '../cdk/adapter/block-scroll-strategy-adapter';
 
 export type NbSelectCompareFunction<T = any> = (v1: any, v2: any) => boolean;
 export type NbSelectAppearance = 'outline' | 'filled' | 'hero';
@@ -540,6 +542,16 @@ export class NbSelectComponent implements OnChanges, AfterViewInit, AfterContent
   @Input() appearance: NbSelectAppearance = 'outline';
 
   /**
+   * Specifies class to be set on `nb-option`s container (`nb-option-list`)
+   * */
+  @Input() optionsListClass: NgClass['ngClass'];
+
+  /**
+   * Specifies class for the overlay panel with options
+   * */
+  @Input() optionsPanelClass: string | string[];
+
+  /**
    * Adds `outline` styles
    */
   @Input()
@@ -663,6 +675,16 @@ export class NbSelectComponent implements OnChanges, AfterViewInit, AfterContent
   protected _multiple: boolean = false;
   static ngAcceptInputType_multiple: NbBooleanInput;
 
+  /**
+   * Determines options overlay offset (in pixels).
+   **/
+  @Input() optionsOverlayOffset = 8;
+
+  /**
+   * Determines options overlay scroll strategy.
+   **/
+  @Input() scrollStrategy: NbScrollStrategies = 'block';
+
   @HostBinding('class')
   get additionalClasses(): string[] {
     if (this.statusService.isCustomStatus(this.status)) {
@@ -716,7 +738,6 @@ export class NbSelectComponent implements OnChanges, AfterViewInit, AfterContent
   overlayPosition: NbPosition = '' as NbPosition;
 
   protected ref: NbOverlayRef;
-  protected optionsOverlayOffset = 8;
 
   protected triggerStrategy: NbTriggerStrategy;
 
@@ -1009,7 +1030,11 @@ export class NbSelectComponent implements OnChanges, AfterViewInit, AfterContent
   protected createOverlay() {
     const scrollStrategy = this.createScrollStrategy();
     this.positionStrategy = this.createPositionStrategy();
-    this.ref = this.overlay.create({ positionStrategy: this.positionStrategy, scrollStrategy });
+    this.ref = this.overlay.create({
+      positionStrategy: this.positionStrategy,
+      scrollStrategy,
+      panelClass: this.optionsPanelClass,
+    });
   }
 
   protected createKeyManager(): void {
@@ -1025,7 +1050,7 @@ export class NbSelectComponent implements OnChanges, AfterViewInit, AfterContent
   }
 
   protected createScrollStrategy(): NbScrollStrategy {
-    return this.overlay.scrollStrategies.block();
+    return this.overlay.scrollStrategies[this.scrollStrategy]();
   }
 
   protected createTriggerStrategy(): NbTriggerStrategy {

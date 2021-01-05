@@ -77,9 +77,9 @@ export class NbTooltipDirective implements OnInit, OnChanges, AfterViewInit, OnD
   protected destroy$ = new Subject<void>();
   protected tooltipComponent = NbTooltipComponent;
   protected dynamicOverlay: NbDynamicOverlay;
-  protected offset = 8;
 
   context: Object = {};
+
   /**
    * Tooltip message
    */
@@ -144,6 +144,11 @@ export class NbTooltipDirective implements OnInit, OnChanges, AfterViewInit, OnD
    * */
   @Input('nbTooltipTrigger')
   trigger: NbTrigger = NbTrigger.HINT;
+
+  /**
+   * Determines tooltip overlay offset (in pixels).
+   **/
+  @Input('nbTooltipOffset') offset = 8;
 
   @Output()
   nbTooltipShowStateChange = new EventEmitter<{ isShown: boolean }>();
