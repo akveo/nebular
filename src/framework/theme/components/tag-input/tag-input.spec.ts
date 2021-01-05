@@ -419,7 +419,7 @@ describe('Component: NbTagInput', () => {
     expect(textChangedSpy).toHaveBeenCalledWith('a');
   });
 
-  it('', () => {
+  it('should initialize auto complete options', () => {
     taginput.tags = [''];
     taginput.autoComplete = true;
     taginput.autoCompleteOptions = of(['Java', 'Python', 'C#', 'Go', 'PHP', 'F#']);
