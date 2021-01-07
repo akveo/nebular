@@ -210,7 +210,7 @@ export class NbMenuItemComponent implements DoCheck, AfterViewInit, OnDestroy {
   selector: 'nb-menu',
   styleUrls: ['./menu.component.scss'],
   template: `
-    <ul class="menu-items">
+    <ul class="menu-items" [class]="flow()">
       <ng-container *ngFor="let item of items">
         <li nbMenuItem *ngIf="!item.hidden"
             [menuItem]="item"
@@ -241,6 +241,12 @@ export class NbMenuComponent implements OnInit, AfterViewInit, OnDestroy {
    * @type List<NbMenuItem> | List<any> | any
    */
   @Input() items: NbMenuItem[];
+  
+  /**
+   * Set menu horizontal
+   * @type Boolean
+   */
+  @Input() horizontal: Boolean = false;
 
   /**
    * Collapse all opened submenus on the toggle event
@@ -263,6 +269,12 @@ export class NbMenuComponent implements OnInit, AfterViewInit, OnDestroy {
               @Inject(PLATFORM_ID) protected platformId,
               protected menuInternalService: NbMenuInternalService,
               protected router: Router) {
+  }
+  
+  flow(){
+    if(this.horizontal)
+       return 'horizontal';
+    return;
   }
 
   ngOnInit() {
