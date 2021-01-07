@@ -8,6 +8,10 @@
 
 :host ::ng-deep {
   display: block;
+  
+  .horizontal{
+    display: flex;
+  }
 
   .menu-items,
   .menu-item > .menu-items {
