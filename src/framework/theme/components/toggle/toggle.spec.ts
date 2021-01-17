@@ -1,11 +1,15 @@
-import { NbToggleModule } from '@nebular/theme/components/toggle/toggle.module';
-import { NbToggleComponent } from './toggle.component';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Component, DebugElement } from '@angular/core';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { ReactiveFormsModule, FormControl } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NbLayoutDirectionService, NbLayoutDirection } from '../../services/direction.service';
+import { ReactiveFormsModule, FormControl } from '@angular/forms';
+import {
+  NbThemeModule,
+  NbLayoutDirectionService,
+  NbLayoutDirection,
+  NbToggleModule,
+  NbToggleComponent,
+} from '@nebular/theme';
 
 
 describe('Component: NbToggle', () => {
@@ -16,7 +20,7 @@ describe('Component: NbToggle', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [BrowserAnimationsModule, NbToggleModule],
+      imports: [BrowserAnimationsModule, NbThemeModule.forRoot(), NbToggleModule],
       providers: [NbLayoutDirectionService],
     });
 
@@ -132,7 +136,7 @@ describe('Component: NbToggle with form control', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ReactiveFormsModule, BrowserAnimationsModule, NbToggleModule],
+      imports: [ReactiveFormsModule, BrowserAnimationsModule, NbThemeModule.forRoot(), NbToggleModule],
       providers: [NbLayoutDirectionService],
       declarations: [ToggleWithFormControlComponent],
     });

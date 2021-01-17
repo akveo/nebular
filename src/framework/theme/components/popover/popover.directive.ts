@@ -154,12 +154,6 @@ export class NbPopoverDirective implements NbDynamicOverlayController, OnChanges
     return this._adjustment;
   }
   set adjustment(value: NbAdjustment) {
-    if (!value) {
-      // @breaking-change Remove @5.0.0
-      console.warn(`Falsy values for 'nbPopoverAdjustment' are deprecated and will be removed in Nebular 5.
- Use 'noop' instead.`);
-      value = NbAdjustment.NOOP;
-    }
     this._adjustment = value;
   }
   protected _adjustment: NbAdjustment = NbAdjustment.CLOCKWISE;

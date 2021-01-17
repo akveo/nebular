@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { NbBadgeComponent, NbBadgeModule, NbBadgePosition, NbComponentStatus } from '@nebular/theme';
+
+import { NbBadgeComponent, NbBadgeModule, NbBadgePosition, NbComponentStatus, NbThemeModule } from '@nebular/theme';
 
 describe('NbBadgeComponent', () => {
   let fixture: ComponentFixture<NbBadgeComponent>;
@@ -7,7 +8,7 @@ describe('NbBadgeComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ NbBadgeModule ],
+      imports: [ NbThemeModule.forRoot(), NbBadgeModule ],
     });
 
     fixture = TestBed.createComponent(NbBadgeComponent);

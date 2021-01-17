@@ -18,7 +18,7 @@ import {
 } from '@angular/core';
 
 import { NbComponentSize } from '../component-size';
-import { NbComponentStatus } from '../component-status';
+import { NbComponentOrCustomStatus } from '../component-status';
 import { NbSpinnerComponent } from './spinner.component';
 
 /**
@@ -78,7 +78,7 @@ export class NbSpinnerDirective implements OnInit {
    * Spinner status color
    * `basic`, `primary`, `info`, `success`, `warning`, `danger`, `control`.
    */
-  @Input('nbSpinnerStatus') spinnerStatus: NbComponentStatus = 'basic';
+  @Input('nbSpinnerStatus') spinnerStatus: NbComponentOrCustomStatus = 'basic';
 
   /**
    * Spinner size. Possible values: `tiny`, `small`, `medium` (default), `large`, `giant`

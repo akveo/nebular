@@ -21,6 +21,6 @@
     </nb-icon>
 </button>
 
-<nb-option-list *nbPortal [size]="size" [position]="overlayPosition" [style.width.px]="hostWidth">
+<nb-option-list *nbPortal [size]="size" [position]="overlayPosition" [style.width.px]="hostWidth" [ngClass]="optionsListClass">
   <ng-content select="nb-option, nb-option-group"></ng-content>
 </nb-option-list>

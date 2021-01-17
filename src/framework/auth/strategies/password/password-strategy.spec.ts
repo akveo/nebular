@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { async, inject, TestBed } from '@angular/core/testing';
+import { inject, TestBed, waitForAsync } from '@angular/core/testing';
 import { NbPasswordAuthStrategy } from './password-strategy';
 import { NbAuthResult } from '../../services/auth-result';
 
@@ -51,7 +51,7 @@ describe('password-auth-strategy', () => {
     });
   });
 
-  beforeEach(async(inject(
+  beforeEach(waitForAsync(inject(
     [NbPasswordAuthStrategy, HttpTestingController],
     (_strategy, _httpMock) => {
       strategy = _strategy;

@@ -5,8 +5,12 @@
  */
 
 import { Injectable } from '@angular/core';
-import { Subject, Observable } from 'rxjs';
-import { share } from 'rxjs/operators';
+import { Subject, Observable, Observer } from 'rxjs';
+import { share, refCount } from 'rxjs/operators';
+import { NbSidebarResponsiveState, NbSidebarState } from './sidebar.component';
+
+export const getSidebarState$ = new Subject<{ tag: string, observer: Observer<NbSidebarState> }>();
+export const getSidebarResponsiveState$ = new Subject<{ tag: string, observer: Observer<NbSidebarResponsiveState> }>();
 
 /**
  * Sidebar service.
@@ -92,5 +96,27 @@ export class NbSidebarService {
    */
   compact(tag?: string) {
     this.compact$.next({ tag });
+  }
+
+  /**
+   * Returns sidebar state
+   * @param {string} tag If you have multiple sidebars on the page, mark them with `tag` input property and pass it here
+   * to specify which sidebar state you need
+   */
+  getSidebarState(tag?: string): Observable<NbSidebarState> {
+    const observer = new Subject<NbSidebarState>();
+    getSidebarState$.next({ observer, tag });
+    return observer.pipe(refCount());
+  }
+
+  /**
+   * Returns sidebar responsive state
+   * @param {string} tag If you have multiple sidebars on the page, mark them with `tag` input property and pass it here
+   * to specify which sidebar responsive state you need
+   */
+  getSidebarResponsiveState(tag?: string): Observable<NbSidebarResponsiveState> {
+    const observer = new Subject<NbSidebarResponsiveState>();
+    getSidebarResponsiveState$.next({ observer, tag });
+    return observer.pipe(refCount());
   }
 }
