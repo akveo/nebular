@@ -850,7 +850,7 @@ export class NbSelectComponent implements OnChanges, AfterViewInit, AfterContent
       this.size$.next(size.currentValue);
     }
     if (fullWidth) {
-      this.fullWidth$.next(fullWidth.currentValue);
+      this.fullWidth$.next(this.fullWidth);
     }
   }
 

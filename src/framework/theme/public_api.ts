@@ -201,6 +201,8 @@ export * from './components/radio/radio-group.component';
 export * from './components/radio/radio.component';
 export * from './components/tag/tag.module';
 export * from './components/tag/tag.component';
+export * from './components/tag/tag-list.component';
+export * from './components/tag/tag-input.directive';
 export * from './components/tree-grid/tree-grid.module';
 export * from './components/tree-grid/tree-grid.component';
 export * from './components/tree-grid/tree-grid-row.component';

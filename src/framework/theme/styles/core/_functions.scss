@@ -26,3 +26,11 @@
   $new: ($key: $value);
   @return map-merge($map, $new);
 }
+
+@function nb-theme-var-negative($value) {
+  @if ($nb-enable-css-custom-properties) {
+    @return calc(#{$value} * -1);
+  } @else {
+    @return -$value;
+  }
+}

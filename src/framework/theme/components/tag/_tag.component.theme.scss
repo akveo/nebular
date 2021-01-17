@@ -4,31 +4,12 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-@import "tag-filled";
-@import "tag-outline";
+@import './tag';
+@import './tag-list';
+@import './tag-input';
 
-@mixin nb-tag-theme() {
-
-  nb-tag {
-    height: nb-theme(tag-height);
-    min-width: nb-theme(tag-width);
-    border-width: nb-theme(tag-border-width);
-    border-radius: nb-theme(tag-border-radius);
-    padding: nb-theme(tag-padding);
-
-    font-family: nb-theme(tag-text-font-family);
-    font-size: nb-theme(tag-text-font-size);
-    font-weight: nb-theme(tag-text-font-weight);
-    line-height: nb-theme(tag-text-line-height);
-
-    @each $shape in nb-get-shapes() {
-      &.shape-#{$shape} {
-        border-radius: nb-theme(button-#{$shape}-border-radius);
-      }
-    }
-  }
-
-  @include tag-filled;
-  @include tag-outline;
-
+@mixin nb-tags-theme() {
+  @include nb-tag-theme();
+  @include nb-tag-list-theme();
+  @include nb-tag-input-theme();
 }

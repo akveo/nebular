@@ -1,0 +1,58 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
+@mixin nb-tag-input-theme() {
+  .nb-tag-input {
+    appearance: none;
+    border: transparent;
+    background: transparent;
+    outline: none;
+
+    flex: 1;
+    padding: 0;
+    min-width: nb-theme(tag-input-min-width);
+
+    font-family: nb-theme(tag-input-text-font-family);
+
+    &::placeholder {
+      font-family: nb-theme(tag-input-placeholder-text-font-family);
+    }
+
+    @each $size in nb-get-sizes() {
+      &.size-#{$size} {
+        font-size: nb-theme(tag-input-#{$size}-text-font-size);
+        font-weight: nb-theme(tag-input-#{$size}-text-font-weight);
+        line-height: nb-theme(tag-input-#{$size}-text-line-height);
+
+        padding: nb-theme(tag-input-#{$size}-padding);
+
+        &::placeholder {
+          font-size: nb-theme(tag-input-#{$size}-placeholder-text-font-size);
+          font-weight: nb-theme(tag-input-#{$size}-placeholder-text-font-weight);
+          line-height: nb-theme(tag-input-#{$size}-placeholder-text-line-height);
+        }
+      }
+    }
+
+    @each $status in nb-get-statuses() {
+      &.status-#{$status} {
+        color: nb-theme(tag-input-#{$status}-text-color);
+
+        &::placeholder {
+          color: nb-theme(tag-input-#{$status}-placeholder-text-color);
+        }
+
+        &:disabled {
+          color: nb-theme(tag-input-#{$status}-disabled-text-color);
+
+          &::placeholder {
+            color: nb-theme(tag-input-#{$status}-disabled-placeholder-text-color);
+          }
+        }
+      }
+    }
+  }
+}

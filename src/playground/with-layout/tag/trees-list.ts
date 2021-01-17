@@ -4,14 +4,4 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-@import '../../styles/core/mixins';
-
-:host {
-  display: flex;
-  align-items: center;
-  width: fit-content;
-}
-
-span {
-  margin: 0 0.25rem;
-}
+export const trees = [ 'Prometheus', 'Methuselah', 'Gran Abuelo', 'Scofield Juniper', 'Panke Baobab', 'Jaya Sri Maha Bodhi' ];

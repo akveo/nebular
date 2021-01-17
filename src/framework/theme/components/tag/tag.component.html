@@ -1,6 +1,8 @@
-<span>
-  {{text}}
-</span>
-<nb-icon icon="close-outline"
-         (click)="close.emit(text)"
-></nb-icon>
+{{ text }}
+<nb-icon *ngIf="removable"
+         (click)="_remove()"
+         class="nb-tag-remove size-{{size}}"
+         icon="close-outline"
+         pack="nebular-essentials"
+         aria-hidden="true">
+</nb-icon>

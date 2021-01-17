@@ -55,7 +55,6 @@
   @include nb-card-theme();
   @include nd-reveal-card-theme();
   @include nd-flip-card-theme();
-  @include nb-tag-theme();
   @include nb-tabset-theme();
   @include nb-route-tabset-theme();
   @include nb-menu-theme();
@@ -89,4 +88,5 @@
   @include nb-tree-grid-theme();
   @include nb-icon-theme();
   @include nb-form-field-theme();
+  @include nb-tags-theme();
 }

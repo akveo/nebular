@@ -59,4 +59,6 @@
   @include select-outline();
   @include select-filled();
   @include select-hero();
+
+  @include nb-form-field-root-component('nb-select');
 }
