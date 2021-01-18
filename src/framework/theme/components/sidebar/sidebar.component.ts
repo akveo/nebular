@@ -4,7 +4,18 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { Component, HostBinding, Input, OnInit, OnDestroy, ElementRef, Output, EventEmitter } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  EventEmitter,
+  HostBinding,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil, filter } from 'rxjs/operators';
 
@@ -131,6 +142,7 @@ export class NbSidebarFooterComponent {
       <ng-content select="nb-sidebar-footer"></ng-content>
     </div>
   `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NbSidebarComponent implements OnInit, OnDestroy {
 
@@ -295,10 +307,12 @@ export class NbSidebarComponent implements OnInit, OnDestroy {
    */
   @Output() readonly responsiveStateChange = new EventEmitter<NbSidebarResponsiveState>();
 
-  constructor(private sidebarService: NbSidebarService,
+  constructor(
+    private sidebarService: NbSidebarService,
     private themeService: NbThemeService,
-    private element: ElementRef) {
-  }
+    private element: ElementRef,
+    private cd: ChangeDetectorRef,
+  ) {}
 
   ngOnInit() {
     this.sidebarService.onToggle()
@@ -364,6 +378,7 @@ export class NbSidebarComponent implements OnInit, OnDestroy {
   collapse() {
     this.state = 'collapsed';
     this.stateChange.emit(this.state);
+    this.cd.markForCheck();
   }
 
   /**
@@ -372,6 +387,7 @@ export class NbSidebarComponent implements OnInit, OnDestroy {
   expand() {
     this.state = 'expanded';
     this.stateChange.emit(this.state);
+    this.cd.markForCheck();
   }
 
   /**
@@ -380,6 +396,7 @@ export class NbSidebarComponent implements OnInit, OnDestroy {
   compact() {
     this.state = 'compacted';
     this.stateChange.emit(this.state);
+    this.cd.markForCheck();
   }
 
   /**
@@ -406,6 +423,7 @@ export class NbSidebarComponent implements OnInit, OnDestroy {
       this.state = compact ? 'compacted' : 'collapsed';
     }
     this.stateChange.emit(this.state);
+    this.cd.markForCheck();
   }
 
   protected subscribeToMediaQueryChange() {
@@ -440,6 +458,7 @@ export class NbSidebarComponent implements OnInit, OnDestroy {
         if (newResponsiveState && newResponsiveState !== this.responsiveState) {
           this.responsiveState = newResponsiveState;
           this.responsiveStateChange.emit(this.responsiveState);
+          this.cd.markForCheck();
         }
       });
   }
