@@ -36,6 +36,8 @@ export interface NbTagInputAddEvent {
  *
  * @stacked-example(Tag Input, tag/tag-input.component)
  *
+ * @additional-example(Tag Input with Autocomplete, tag/tag-input-with-autocomplete.component)
+ *
  * @styles
  *
  * tag-list-tiny-tag-offset:
