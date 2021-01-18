@@ -26,7 +26,8 @@
       @include nb-outline(nb-theme(button-outline-width), nb-theme(button-outline-color));
     }
 
-    &[disabled] {
+    &[disabled],
+    &.btn-disabled {
       cursor: nb-theme(button-disabled-cursor);
     }
 
