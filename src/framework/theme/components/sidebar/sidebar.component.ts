@@ -363,6 +363,7 @@ export class NbSidebarComponent implements OnInit, OnDestroy {
    */
   collapse() {
     this.state = 'collapsed';
+    this.stateChange.emit(this.state);
   }
 
   /**
@@ -370,6 +371,7 @@ export class NbSidebarComponent implements OnInit, OnDestroy {
    */
   expand() {
     this.state = 'expanded';
+    this.stateChange.emit(this.state);
   }
 
   /**
@@ -377,6 +379,7 @@ export class NbSidebarComponent implements OnInit, OnDestroy {
    */
   compact() {
     this.state = 'compacted';
+    this.stateChange.emit(this.state);
   }
 
   /**
