@@ -1,3 +1,83 @@
+<a name="7.0.0"></a>
+# [7.0.0](https://github.com/akveo/nebular/compare/v6.2.1...v7.0.0) (2021-01-18)
+
+
+### Bug Fixes
+
+* **autocomplete:** update input element disabled state ([#2555](https://github.com/akveo/nebular/issues/2555)) ([23e59ba](https://github.com/akveo/nebular/commit/23e59ba))
+* **radio, select:** prevent updates of destroyed component ([#2617](https://github.com/akveo/nebular/issues/2617)) ([1ead242](https://github.com/akveo/nebular/commit/1ead242))
+* **sidebar:** emit state change ([#2645](https://github.com/akveo/nebular/issues/2645)) ([8a35e85](https://github.com/akveo/nebular/commit/8a35e85))
+* **toggle:** alignment of toggle switches ([#2561](https://github.com/akveo/nebular/issues/2561)) ([09a7ba1](https://github.com/akveo/nebular/commit/09a7ba1))
+
+
+### Code Refactoring
+
+* **sidebar:** use OnPush change detection strategy ([#2646](https://github.com/akveo/nebular/issues/2646)) ([59daeea](https://github.com/akveo/nebular/commit/59daeea))
+* **auth:** remove redundant _all.scss theme file ([#2623](https://github.com/akveo/nebular/issues/2623)) ([09c5e91](https://github.com/akveo/nebular/commit/09c5e91))
+* **autocomplete:** make renderer constructor parameter required ([#2621](https://github.com/akveo/nebular/issues/2621)) ([2cd2c78](https://github.com/akveo/nebular/commit/2cd2c78))
+* **overlay:** add missing component class suffix ([#2622](https://github.com/akveo/nebular/issues/2622)) ([3e20fe4](https://github.com/akveo/nebular/commit/3e20fe4))
+
+
+### Features
+
+
+* update to Angular 11 ([#2611](https://github.com/akveo/nebular/issues/2611)) ([847bc99](https://github.com/akveo/nebular/commit/847bc99))
+* tag component ([#2565](https://github.com/akveo/nebular/issues/2565)) ([bcdfcd8](https://github.com/akveo/nebular/commit/bcdfcd8))
+* button group component ([#2473](https://github.com/akveo/nebular/issues/2473)) ([72bb1b3](https://github.com/akveo/nebular/commit/72bb1b3))
+* **deps:** migrate to firebase 8 ([#2584](https://github.com/akveo/nebular/issues/2584)) ([b7a2c6e](https://github.com/akveo/nebular/commit/b7a2c6e))
+* **select, autocomplete:** ability to change scroll strategy ([#2567](https://github.com/akveo/nebular/issues/2567)) ([d10275b](https://github.com/akveo/nebular/commit/d10275b))
+* **autocomplete, datepicker, select, tooltip:** add ability to customize overlay offset ([#2628](https://github.com/akveo/nebular/issues/2628)) ([c1aafb9](https://github.com/akveo/nebular/commit/c1aafb9))
+* **checkbox:** remove deprecated value input ([#2618](https://github.com/akveo/nebular/issues/2618)) ([0380050](https://github.com/akveo/nebular/commit/0380050))
+* **select:** add custom comparator input ([#2590](https://github.com/akveo/nebular/issues/2590)) ([1f8a57b](https://github.com/akveo/nebular/commit/1f8a57b))
+* **select, autocomplete:** add input to set options list class ([#2560](https://github.com/akveo/nebular/issues/2560)) ([92083e8](https://github.com/akveo/nebular/commit/92083e8))
+* **sidebar:** add the ability to determine state and responsiveState  ([#1893](https://github.com/akveo/nebular/issues/1893)) ([bac0edc](https://github.com/akveo/nebular/commit/bac0edc))
+* **theme:** ability to add custom statuses ([#2625](https://github.com/akveo/nebular/issues/2625)) ([3b2e903](https://github.com/akveo/nebular/commit/3b2e903))
+* **toastr:** remove deprecated iconPack property ([#2620](https://github.com/akveo/nebular/issues/2620)) ([77a3519](https://github.com/akveo/nebular/commit/77a3519))
+* **tooltip, popover:** remove ability to use falsy adjustment ([#2619](https://github.com/akveo/nebular/issues/2619)) ([32ab00e](https://github.com/akveo/nebular/commit/32ab00e))
+
+
+### BREAKING CHANGES
+
+* **deps:**
+  - Bump Angular version to 11+.
+  - `@nebular/fire` requires `@angular/fire` 6.1.0+ and `firebase` 8.0.0+.
+
+* **sidebar:** Added change detector ref constructor parameter.
+
+* **checkbox:** `NbCheckboxComponent.value` and `NbCheckboxComponent.valueChange` properties removed. Use `checked` and `checkedChange` accordingly.
+
+* **autocomplete:** `renderer` constructor parameter is now required.
+
+* **toastr:** `NbToastrConfig.iconPack` property removed. You can set icon pack via `icon` property:
+  ```
+  const toastrConfig = {
+    // ...
+    icon: { icon: 'star', pack: 'eva' },
+  }
+  ```
+
+  `NbToastComponent.iconPack` and `NbToastComponent.iconConfig` properties removed.
+  Use `icon` property instead.
+
+* **tooltip, popover:** Falsy adjustment values no longer become converted to `NbAdjustment.NOOP`, pass `NbAdjustment.NOOP` instead.
+
+* **theme:** The document parameter in the NbViewportRulerAdapter and NbScrollDispatcherAdapter constructors is now required.
+
+* **theme:** Empty string won't be converted to `basic` status anymore. If you used to set `status` properties to `''` change it to `'basic'`.
+
+* **theme:** `NbPositionedContainer` renamed to `NbPositionedContainerComponent`.
+
+* **auth:** `~@nebular/auth/styles/all`file removed. Replace `~@nebular/auth/styles/all` imports with `~@nebular/auth/styles/globals`.
+
+* **theme:**:
+
+  - `NbComponentStatus` type replaced with `NbComponentOrCustomStatus` in following properties: `NbActionComponent.badgeStatus`, `NbBadge.status`, `NbBadgeComponent.status`, `NbButtonComponent.status`, `NbAlertComponent.status`, `NbCardComponent.status`, `NbChatFormComponent.status`, `NbChatComponent.status`, `NbCheckboxComponent.status`, `NbFormFieldControl.status$`, `NbFormControlState.status`, `NbInputDirective.status`, `NbInputDirective.status%`, `NbSelectComponent.status`, `NbSelectComponent.status$`, `NbIconConfig.status`, `NbIconComponent.status`, `NbProgressBarComponent.status`, `NbRadioComponent.status`, `NbRadioGroupComponent.status`, `NbSpinnerDirective.spinnerStatus`, `NbSpinnerComponent.status`, `NbTabComponent.badgeStatus`, `NbToastrConfig.status`, `NbToggleComponent.status`, `NbTooltipDirective.status`, `NbTooltipComponent.context.status`, `NbUserComponent.badgeStatus`.
+    If you extended listed components replace `NbComponentStatus` in the property type with `NbComponentOrCustomStatus`.
+  - `NbBadgeComponent`, `NbButtonComponent`, `NbAlertComponent`, `NbCardComponent`, `NbChatComponent`, `NbCheckboxComponent`, `NbInputDirective`, `NbSelectComponent`, `NbIconComponent`, `NbProgressBarComponent`, `NbRadioComponent`, `NbSpinnerComponent`, `NbToastComponent`, `NbToggleComponent`, `NbTooltipComponent` constructors now require `NbStatusService` as a constructor parameter. If you extended listed components, inject `NbStatusService` and pass it to the base class.
+
+
+
+
 <a name="6.2.1"></a>
 ## [6.2.1](https://github.com/akveo/nebular/compare/v6.2.0...v6.2.1) (2020-10-01)
 
