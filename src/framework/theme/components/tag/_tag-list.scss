@@ -36,7 +36,7 @@
 
     @each $shape in nb-get-shapes() {
       &.shape-#{$shape} {
-        @extend [nbInput].shape-#{$shape};
+        border-radius: nb-theme(tag-list-with-input-#{$shape}-border-radius);
       }
     }
 

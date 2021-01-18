@@ -59,6 +59,9 @@ import { NbTagInputDirective } from './tag-input.directive';
  * tag-list-with-input-medium-padding:
  * tag-list-with-input-large-padding:
  * tag-list-with-input-giant-padding:
+ * tag-list-with-input-rectangle-border-radius:
+ * tag-list-with-input-semi-round-border-radius:
+ * tag-list-with-input-round-border-radius:
  */
 @Component({
   selector: 'nb-tag-list',
