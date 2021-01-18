@@ -355,10 +355,9 @@ export class NbTagListComponent implements OnInit, AfterContentInit, AfterViewIn
 
     if (tagToToggle.selected && !this.multiple) {
       this.tags.forEach((tag: NbTagComponent) => {
-        if (tag === tagToToggle) {
-          return;
+        if (tag !== tagToToggle) {
+          tag.selected = false;
         }
-        tag.selected = false;
       });
     }
   }
