@@ -32,6 +32,10 @@ const routes: Route[] = [
         loadChildren: () => import('./button/button.module').then(m => m.ButtonModule),
       },
       {
+        path: 'button-group',
+        loadChildren: () => import('./button-group/button-group.module').then(m => m.ButtonGroupModule),
+      },
+      {
         path: 'calendar',
         loadChildren: () => import('./calendar/calendar.module').then(m => m.CalendarModule),
       },
@@ -114,6 +118,10 @@ const routes: Route[] = [
       {
         path: 'stepper',
         loadChildren: () => import('./stepper/stepper.module').then(m => m.StepperModule),
+      },
+      {
+        path: 'tag',
+        loadChildren: () => import('./tag/tag.module').then(m => m.TagModule),
       },
       {
         path: 'tabset',
