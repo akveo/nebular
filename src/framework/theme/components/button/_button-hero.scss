@@ -50,7 +50,8 @@
           background-image: linear-gradient(to right, $left-active-color, $right-active-color);
         }
 
-        &[disabled] {
+        &[disabled],
+        &.btn-disabled {
           background-color: nb-theme(button-hero-#{$status}-disabled-background-color);
           background-image: none;
           color: nb-theme(button-hero-#{$status}-disabled-text-color);

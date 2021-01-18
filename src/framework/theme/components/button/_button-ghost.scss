@@ -45,7 +45,8 @@
           color: nb-theme(button-ghost-#{$status}-active-text-color);
         }
 
-        &[disabled] {
+        &[disabled],
+        &.btn-disabled {
           background-color: nb-theme(button-ghost-#{$status}-disabled-background-color);
           border-color: nb-theme(button-ghost-#{$status}-disabled-border-color);
           color: nb-theme(button-ghost-#{$status}-disabled-text-color);
