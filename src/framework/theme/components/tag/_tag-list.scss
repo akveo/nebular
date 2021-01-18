@@ -1,0 +1,68 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
+@mixin nb-tag-list-theme() {
+  nb-tag-list {
+    display: inline-flex;
+    outline: none;
+
+    @each $size in nb-get-sizes() {
+      &.size-#{$size} {
+        .nb-tag-list-tags-wrapper {
+          margin: nb-theme-var-negative(nb-theme(tag-list-#{$size}-tag-offset));
+
+          nb-tag,
+          .nb-tag-input {
+            margin: nb-theme(tag-list-#{$size}-tag-offset);
+          }
+        }
+      }
+    }
+  }
+
+  .nb-tag-list-tags-wrapper {
+    display: inline-flex;
+    align-items: center;
+    align-content: center;
+    flex-wrap: wrap;
+    flex: 1;
+  }
+
+  .nb-tag-list-with-input {
+    @include nb-input-core-theme();
+
+    @each $shape in nb-get-shapes() {
+      &.shape-#{$shape} {
+        border-radius: nb-theme(tag-list-with-input-#{$shape}-border-radius);
+      }
+    }
+
+    @each $size in nb-get-sizes() {
+      &.size-#{$size} {
+        padding: nb-theme(tag-list-with-input-#{$size}-padding);
+      }
+    }
+
+    @each $status in nb-get-statuses() {
+      &.status-#{$status} {
+        background-color: nb-theme(tag-input-#{$status}-background-color);
+        border-color: nb-theme(tag-input-#{$status}-border-color);
+
+        &.focus {
+          background-color: nb-theme(tag-input-#{$status}-focus-background-color);
+          border-color: nb-theme(tag-input-#{$status}-focus-border-color);
+        }
+      }
+    }
+  }
+
+  @include nb-form-field-root-component('nb-tag-list');
+
+  @each $size in nb-get-sizes() {
+    @include nb-form-field-with-prefix('.nb-tag-list-with-input.size-#{$size}', $size);
+    @include nb-form-field-with-suffix('.nb-tag-list-with-input.size-#{$size}', $size);
+  }
+}
