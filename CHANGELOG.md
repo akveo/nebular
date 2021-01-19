@@ -1,3 +1,16 @@
+<a name="6.2.2"></a>
+## [6.2.2](https://github.com/akveo/nebular/compare/v6.2.1...v6.2.2) (2021-01-19)
+
+
+### Bug Fixes
+
+* **autocomplete:** update input element disabled state ([#2555](https://github.com/akveo/nebular/issues/2555)) ([5bc3e14](https://github.com/akveo/nebular/commit/5bc3e14))
+* **button:** styling for disabled anchor ([#2649](https://github.com/akveo/nebular/issues/2649)) ([e346e13](https://github.com/akveo/nebular/commit/e346e13))
+* **radio, select:** prevent updates of destroyed component ([#2617](https://github.com/akveo/nebular/issues/2617)) ([7df0b1e](https://github.com/akveo/nebular/commit/7df0b1e))
+* **toggle:** alignment of toggle switches ([#2561](https://github.com/akveo/nebular/issues/2561)) ([e7fbb88](https://github.com/akveo/nebular/commit/e7fbb88))
+
+
+
 <a name="6.2.1"></a>
 ## [6.2.1](https://github.com/akveo/nebular/compare/v6.2.0...v6.2.1) (2020-10-01)
 
