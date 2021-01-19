@@ -215,7 +215,8 @@
       margin-right: 1rem;
     }
 
-    &.get-started {
+    &.get-started,
+    &.download {
       background: white;
       color: $get-started-fg;
     }

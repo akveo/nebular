@@ -1,0 +1,18 @@
+nb-card {
+  width: 25rem;
+  margin-bottom: 0;
+}
+
+nb-card-header {
+  display: flex;
+  align-items: center;
+}
+
+.close-button {
+  margin-left: auto;
+  padding: 0;
+}
+
+::ng-deep .hs-custom-form .hs-submit-btn {
+  margin-top: 2rem;
+}
