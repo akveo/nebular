@@ -4,5 +4,5 @@
 for dir in ./src/.lib/*/
 do
     dir=${dir%*/}
-    npm publish --access=public src/.lib/${dir##*/}
+    npm publish --tag v6-lts --access=public src/.lib/${dir##*/}
 done
