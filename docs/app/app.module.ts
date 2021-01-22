@@ -18,6 +18,7 @@ import {
   NbTabsetModule,
   NbProgressBarModule,
   NbCheckboxModule,
+  NbDialogModule,
 } from '@nebular/theme';
 import { NgdThemeModule } from './@theme/theme.module';
 import { NgdAppComponent } from './app.component';
@@ -43,6 +44,7 @@ const docs = require('../output.json');
     NbThemeModule.forRoot(),
     NgdThemeModule.forRoot(),
     NbSidebarModule.forRoot(),
+    NbDialogModule.forRoot(),
     RouterModule.forRoot(routes, { useHash: false, relativeLinkResolution: 'legacy' }),
   ],
   declarations: [

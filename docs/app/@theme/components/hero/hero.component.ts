@@ -1,4 +1,13 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { NbDialogService } from '@nebular/theme';
+
+import { NgdDownloadDialogComponent } from './download-dialog.component';
 
 @Component({
   selector: 'ngd-hero',
@@ -10,6 +19,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
         <a class="btn get-started" routerLink="docs">Get Started</a>
         <a class="btn" href="https://www.akveo.com/ngx-admin?utm_campaign=ngx_admin%20-%20website%20-%20nebular%20landing%20-%20traffic&utm_source=nebular&utm_medium=referral&utm_content=nebular_docs_home_hero"
            target="_blank">Demo</a>
+        <button (click)="showDownloadDialog()" class="btn download">Download</button>
       </div>
       <div class="hero-features">
         <div class="hero-feature">
@@ -54,4 +64,12 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NgdHeroComponent {
+
+  constructor(
+    private dialogService: NbDialogService,
+  ) {}
+
+  showDownloadDialog(): void {
+    this.dialogService.open(NgdDownloadDialogComponent);
+  }
 }
