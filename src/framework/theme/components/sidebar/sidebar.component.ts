@@ -16,8 +16,8 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
-import { Subject } from 'rxjs';
-import { takeUntil, filter } from 'rxjs/operators';
+import { combineLatest, Subject } from 'rxjs';
+import { takeUntil, filter, map, startWith } from 'rxjs/operators';
 
 import { convertToBoolProperty, NbBooleanInput } from '../helpers';
 import { NbThemeService } from '../../services/theme.service';
@@ -146,6 +146,7 @@ export class NbSidebarFooterComponent {
 })
 export class NbSidebarComponent implements OnInit, OnDestroy {
 
+  protected readonly responsiveValueChange$: Subject<boolean> = new Subject<boolean>();
   protected responsiveState: NbSidebarResponsiveState = 'pc';
 
   protected destroy$ = new Subject<void>();
@@ -265,7 +266,10 @@ export class NbSidebarComponent implements OnInit, OnDestroy {
     return this._responsive;
   }
   set responsive(value: boolean) {
-    this._responsive = convertToBoolProperty(value);
+    if (this.responsive !== convertToBoolProperty(value)) {
+      this._responsive = !this.responsive;
+      this.responsiveValueChange$.next(this.responsive);
+    }
   }
   protected _responsive: boolean = false;
   static ngAcceptInputType_responsive: NbBooleanInput;
@@ -351,6 +355,13 @@ export class NbSidebarComponent implements OnInit, OnDestroy {
       .pipe(filter(({ tag }) => !this.tag || this.tag === tag))
       .subscribe(({ observer }) => observer.next(this.responsiveState));
 
+    this.responsiveValueChange$
+      .pipe(
+        filter((responsive: boolean) => !responsive),
+        takeUntil(this.destroy$),
+      )
+      .subscribe(() => this.expand());
+
     this.subscribeToMediaQueryChange();
   }
 
@@ -421,9 +432,13 @@ export class NbSidebarComponent implements OnInit, OnDestroy {
   }
 
   protected subscribeToMediaQueryChange() {
-    this.themeService.onMediaQueryChange()
+    combineLatest([
+      this.responsiveValueChange$.pipe(startWith(this.responsive)),
+      this.themeService.onMediaQueryChange(),
+    ])
       .pipe(
-        filter(() => this.responsive),
+        filter(([responsive]) => responsive),
+        map(([, breakpoints]) => breakpoints),
         takeUntil(this.destroy$),
       )
       .subscribe(([prev, current]: [NbMediaBreakpoint, NbMediaBreakpoint]) => {
