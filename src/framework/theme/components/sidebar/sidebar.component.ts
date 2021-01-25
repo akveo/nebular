@@ -255,7 +255,7 @@ export class NbSidebarComponent implements OnInit, OnDestroy {
   set state(value: NbSidebarState) {
     this._state = value;
   }
-  protected _state: NbSidebarState;
+  protected _state: NbSidebarState = 'expanded';
 
   /**
    * Makes sidebar listen to media query events and change its behaviour
