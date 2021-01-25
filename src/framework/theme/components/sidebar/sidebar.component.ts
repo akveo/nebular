@@ -348,11 +348,17 @@ export class NbSidebarComponent implements OnInit, OnDestroy {
       .subscribe(() => this.compact());
 
     getSidebarState$
-      .pipe(filter(({ tag }) => !this.tag || this.tag === tag))
+      .pipe(
+        filter(({ tag }) => !this.tag || this.tag === tag),
+        takeUntil(this.destroy$),
+      )
       .subscribe(({ observer }) => observer.next(this.state));
 
     getSidebarResponsiveState$
-      .pipe(filter(({ tag }) => !this.tag || this.tag === tag))
+      .pipe(
+        filter(({ tag }) => !this.tag || this.tag === tag),
+        takeUntil(this.destroy$),
+      )
       .subscribe(({ observer }) => observer.next(this.responsiveState));
 
     this.responsiveValueChange$
