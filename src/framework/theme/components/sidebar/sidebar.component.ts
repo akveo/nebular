@@ -376,18 +376,14 @@ export class NbSidebarComponent implements OnInit, OnDestroy {
    * Collapses the sidebar
    */
   collapse() {
-    this.state = 'collapsed';
-    this.stateChange.emit(this.state);
-    this.cd.markForCheck();
+    this.updateState('collapsed');
   }
 
   /**
    * Expands the sidebar
    */
   expand() {
-    this.state = 'expanded';
-    this.stateChange.emit(this.state);
-    this.cd.markForCheck();
+    this.updateState('expanded');
   }
 
   /**
@@ -418,12 +414,10 @@ export class NbSidebarComponent implements OnInit, OnDestroy {
     }
 
     if (this.state === 'compacted' || this.state === 'collapsed') {
-      this.state = 'expanded';
+      this.updateState('expanded');
     } else {
-      this.state = compact ? 'compacted' : 'collapsed';
+      this.updateState(compact ? 'compacted' : 'collapsed');
     }
-    this.stateChange.emit(this.state);
-    this.cd.markForCheck();
   }
 
   protected subscribeToMediaQueryChange() {
@@ -473,6 +467,14 @@ export class NbSidebarComponent implements OnInit, OnDestroy {
     }
 
     return this.getMenuLink(element.parentElement);
+  }
+
+  protected updateState(state: NbSidebarState): void {
+    if (this.state !== state) {
+      this.state = state;
+      this.stateChange.emit(this.state);
+      this.cd.markForCheck();
+    }
   }
 
   /**
