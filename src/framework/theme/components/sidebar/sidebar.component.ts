@@ -16,8 +16,8 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
-import { Subject } from 'rxjs';
-import { takeUntil, filter } from 'rxjs/operators';
+import { combineLatest, Subject } from 'rxjs';
+import { takeUntil, filter, map, startWith } from 'rxjs/operators';
 
 import { convertToBoolProperty, NbBooleanInput } from '../helpers';
 import { NbThemeService } from '../../services/theme.service';
@@ -146,6 +146,7 @@ export class NbSidebarFooterComponent {
 })
 export class NbSidebarComponent implements OnInit, OnDestroy {
 
+  protected readonly responsiveValueChange$: Subject<boolean> = new Subject<boolean>();
   protected responsiveState: NbSidebarResponsiveState = 'pc';
 
   protected destroy$ = new Subject<void>();
@@ -254,7 +255,7 @@ export class NbSidebarComponent implements OnInit, OnDestroy {
   set state(value: NbSidebarState) {
     this._state = value;
   }
-  protected _state: NbSidebarState;
+  protected _state: NbSidebarState = 'expanded';
 
   /**
    * Makes sidebar listen to media query events and change its behaviour
@@ -265,7 +266,10 @@ export class NbSidebarComponent implements OnInit, OnDestroy {
     return this._responsive;
   }
   set responsive(value: boolean) {
-    this._responsive = convertToBoolProperty(value);
+    if (this.responsive !== convertToBoolProperty(value)) {
+      this._responsive = !this.responsive;
+      this.responsiveValueChange$.next(this.responsive);
+    }
   }
   protected _responsive: boolean = false;
   static ngAcceptInputType_responsive: NbBooleanInput;
@@ -344,12 +348,25 @@ export class NbSidebarComponent implements OnInit, OnDestroy {
       .subscribe(() => this.compact());
 
     getSidebarState$
-      .pipe(filter(({ tag }) => !this.tag || this.tag === tag))
+      .pipe(
+        filter(({ tag }) => !this.tag || this.tag === tag),
+        takeUntil(this.destroy$),
+      )
       .subscribe(({ observer }) => observer.next(this.state));
 
     getSidebarResponsiveState$
-      .pipe(filter(({ tag }) => !this.tag || this.tag === tag))
+      .pipe(
+        filter(({ tag }) => !this.tag || this.tag === tag),
+        takeUntil(this.destroy$),
+      )
       .subscribe(({ observer }) => observer.next(this.responsiveState));
+
+    this.responsiveValueChange$
+      .pipe(
+        filter((responsive: boolean) => !responsive),
+        takeUntil(this.destroy$),
+      )
+      .subscribe(() => this.expand());
 
     this.subscribeToMediaQueryChange();
   }
@@ -376,27 +393,21 @@ export class NbSidebarComponent implements OnInit, OnDestroy {
    * Collapses the sidebar
    */
   collapse() {
-    this.state = 'collapsed';
-    this.stateChange.emit(this.state);
-    this.cd.markForCheck();
+    this.updateState('collapsed');
   }
 
   /**
    * Expands the sidebar
    */
   expand() {
-    this.state = 'expanded';
-    this.stateChange.emit(this.state);
-    this.cd.markForCheck();
+    this.updateState('expanded');
   }
 
   /**
    * Compacts the sidebar (minimizes)
    */
   compact() {
-    this.state = 'compacted';
-    this.stateChange.emit(this.state);
-    this.cd.markForCheck();
+    this.updateState('compacted');
   }
 
   /**
@@ -418,18 +429,20 @@ export class NbSidebarComponent implements OnInit, OnDestroy {
     }
 
     if (this.state === 'compacted' || this.state === 'collapsed') {
-      this.state = 'expanded';
+      this.updateState('expanded');
     } else {
-      this.state = compact ? 'compacted' : 'collapsed';
+      this.updateState(compact ? 'compacted' : 'collapsed');
     }
-    this.stateChange.emit(this.state);
-    this.cd.markForCheck();
   }
 
   protected subscribeToMediaQueryChange() {
-    this.themeService.onMediaQueryChange()
+    combineLatest([
+      this.responsiveValueChange$.pipe(startWith(this.responsive)),
+      this.themeService.onMediaQueryChange(),
+    ])
       .pipe(
-        filter(() => this.responsive),
+        filter(([responsive]) => responsive),
+        map(([, breakpoints]) => breakpoints),
         takeUntil(this.destroy$),
       )
       .subscribe(([prev, current]: [NbMediaBreakpoint, NbMediaBreakpoint]) => {
@@ -449,7 +462,7 @@ export class NbSidebarComponent implements OnInit, OnDestroy {
           this.collapse();
           newResponsiveState = 'mobile';
         }
-        if (!isCollapsed && !isCompacted && prev.width < current.width) {
+        if (!isCollapsed && !isCompacted && (!prev.width || prev.width < current.width)) {
           this.expand();
           this.fixed = false;
           newResponsiveState = 'pc';
@@ -473,6 +486,14 @@ export class NbSidebarComponent implements OnInit, OnDestroy {
     }
 
     return this.getMenuLink(element.parentElement);
+  }
+
+  protected updateState(state: NbSidebarState): void {
+    if (this.state !== state) {
+      this.state = state;
+      this.stateChange.emit(this.state);
+      this.cd.markForCheck();
+    }
   }
 
   /**
