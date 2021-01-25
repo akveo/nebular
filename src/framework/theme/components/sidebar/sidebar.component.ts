@@ -407,9 +407,7 @@ export class NbSidebarComponent implements OnInit, OnDestroy {
    * Compacts the sidebar (minimizes)
    */
   compact() {
-    this.state = 'compacted';
-    this.stateChange.emit(this.state);
-    this.cd.markForCheck();
+    this.updateState('compacted');
   }
 
   /**
