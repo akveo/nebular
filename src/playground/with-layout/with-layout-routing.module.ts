@@ -130,6 +130,10 @@ const routes: Route[] = [
         loadChildren: () => import('./stepper/stepper.module').then(m => m.StepperModule),
       },
       {
+        path: 'tag',
+        loadChildren: () => import('./tag/tag.module').then(m => m.TagModule),
+      },
+      {
         path: 'tabset',
         loadChildren: () => import('./tabset/tabset.module').then(m => m.TabsetModule),
       },

@@ -7,10 +7,6 @@
 @mixin nb-form-field-theme() {
   .nb-form-control-container {
     max-width: inherit;
-
-    input {
-      width: 100%;
-    }
   }
 
   .nb-form-field-addon {
@@ -70,6 +66,12 @@
       @include nb-ltr(margin-left, calc(#{$addon-width} * -1));
       @include nb-rtl(margin-right, calc(#{$addon-width} * -1));
     }
+  }
+}
+
+@mixin nb-form-field-root-component($selector) {
+  nb-form-field #{$selector} {
+    width: 100%;
   }
 }
 

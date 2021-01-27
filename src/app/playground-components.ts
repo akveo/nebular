@@ -1233,6 +1233,47 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
     ],
   },
   {
+    path: 'tag',
+    children: [
+      {
+        path: 'tag-showcase.component',
+        link: '/tag/tag-showcase.component',
+        component: 'TagShowcaseComponent',
+        name: 'Tag Showcase',
+      },
+      {
+        path: 'tag-appearance.component',
+        link: '/tag/tag-appearance.component',
+        component: 'TagAppearanceComponent',
+        name: 'Tag Appearance',
+      },
+      {
+        path: 'tag-input.component',
+        link: '/tag/tag-input.component',
+        component: 'TagInputComponent',
+        name: 'Tag Input',
+      },
+      {
+        path: 'tag-input-with-autocomplete.component',
+        link: '/tag/tag-input-with-autocomplete.component',
+        component: 'TagInputWithAutocompleteComponent',
+        name: 'Tag Input With Autocomplete',
+      },
+      {
+        path: 'tag-status.component',
+        link: '/tag/tag-status.component',
+        component: 'TagStatusComponent',
+        name: 'Tag Status',
+      },
+      {
+        path: 'tag-removable.component',
+        link: '/tag/tag-removable.component',
+        component: 'TagRemovableComponent',
+        name: 'Tag Removable',
+      },
+    ],
+  },
+  {
     path: 'tabset',
     children: [
       {

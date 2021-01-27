@@ -1,0 +1,61 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
+@mixin hs-custom-form() {
+  .hs-custom-form {
+    .modal-header {
+      display: none;
+    }
+
+    .modal-body {
+      padding-bottom: 0;
+    }
+
+    .actions {
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    input.hs-input {
+      @extend [nbInput], .status-basic, .size-medium, .shape-rectangle;
+      padding: nb-theme(input-medium-padding) !important;
+      width: 100%;
+    }
+
+    .hs-richtext .modal-body {
+      padding: 0;
+      margin-bottom: 1rem;
+
+      p {
+        margin-bottom: 0;
+        text-align: left !important;
+        height: auto;
+      }
+    }
+
+    .hs-recaptcha {
+      margin-top: 1rem;
+    }
+
+    .hs-error-msgs {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    .hs-form-required, .hs-error-msg {
+      margin-top: 0.5rem;
+      color: nb-theme(text-danger-color);
+    }
+
+    .hs_error_rollup {
+      display: none;
+    }
+
+    .hs-submit-btn {
+      @extend [nbButton], .appearance-filled, .status-basic, .size-medium;
+    }
+  }
+}

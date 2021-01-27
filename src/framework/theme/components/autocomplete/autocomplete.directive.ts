@@ -159,6 +159,8 @@ export class NbAutocompleteDirective<T> implements OnDestroy, AfterViewInit, Con
    **/
   @Input() scrollStrategy: NbScrollStrategies = 'block';
 
+  @Input() customOverlayHost: ElementRef;
+
   @HostBinding('class.nb-autocomplete-position-top')
   get top(): boolean {
     return this.isOpen && this.autocomplete.options.length && this.autocomplete.overlayPosition === NbPosition.TOP;
@@ -308,7 +310,7 @@ export class NbAutocompleteDirective<T> implements OnDestroy, AfterViewInit, Con
   }
 
   protected setupAutocomplete() {
-    this.autocomplete.setHost(this.hostRef);
+    this.autocomplete.setHost(this.customOverlayHost || this.hostRef);
   }
 
   protected getDisplayValue(value: string) {
@@ -367,7 +369,7 @@ export class NbAutocompleteDirective<T> implements OnDestroy, AfterViewInit, Con
 
   protected createPositionStrategy(): NbAdjustableConnectedPositionStrategy {
     return this.positionBuilder
-      .connectedTo(this.hostRef)
+      .connectedTo(this.customOverlayHost || this.hostRef)
       .position(NbPosition.BOTTOM)
       .offset(this.overlayOffset)
       .adjustment(NbAdjustment.VERTICAL);

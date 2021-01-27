@@ -561,6 +561,16 @@ export const structure = [
         ],
       },
       {
+        type: 'tabs',
+        name: 'Tag',
+        icon: '',
+        source: [
+          'NbTagListComponent',
+          'NbTagInputDirective',
+          'NbTagComponent',
+        ],
+      },
+      {
         type: 'group',
         name: 'Modals & Overlays',
       },
