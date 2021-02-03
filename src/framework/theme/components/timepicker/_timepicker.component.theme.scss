@@ -1,0 +1,82 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+@mixin nb-timepicker-theme() {
+  $border: nb-theme(timepicker-border-width) nb-theme(timepicker-border-style) nb-theme(timepicker-border-color);
+  .nb-timepicker-container {
+    width: nb-theme(timepicker-container-width);
+    height: nb-theme(timepicker-container-height);
+
+    .list-item {
+      &:first-child {
+        border-top: none;
+      }
+
+      &:hover {
+        background-color: nb-theme(timepicker-cell-hover-background-color);
+        color: nb-theme(timepicker-cell-hover-text-color);
+      }
+
+      &:focus {
+        background-color: nb-theme(timepicker-cell-focus-background-color);
+        color: nb-theme(timepicker-cell-focus-text-color);
+      }
+
+      &.selected {
+        background-color: nb-theme(timepicker-cell-active-background-color);
+        color: nb-theme(timepicker-cell-active-text-color);
+      }
+
+      color: nb-theme(timepicker-cell-text-color);
+      font-size: nb-theme(timepicker-cell-text-font-size);
+      font-family: nb-theme(timepicker-cell-text-font-family);
+      height: nb-theme(timepicker-cell-height);
+      line-height: nb-theme(timepicker-cell-text-line-height);
+      font-weight: nb-theme(timepicker-cell-text-font-weight);
+    }
+
+    .values-list {
+      &:not(:last-of-type) {
+        @include nb-ltr(border-right, $border);
+        @include nb-rtl(border-left, $border);
+      }
+
+      @include nb-scrollbars(
+          nb-theme(timepicker-scrollbar-color),
+          nb-theme(timepicker-scrollbar-background-color),
+          nb-theme(timepicker-scrollbar-width));
+    }
+
+    &.supports-scrollbar-theming {
+      .values-list:hover .list-item:not(.am-pm-item) {
+        @include nb-ltr(margin-right, -#{nb-theme(timepicker-scrollbar-width)});
+        @include nb-rtl(margin-left, -#{nb-theme(timepicker-scrollbar-width)});
+      }
+    }
+
+    .header-cell {
+      color: nb-theme(timepicker-header-cell-text-color);
+      font-size: nb-theme(timepicker-header-cell-text-font-size);
+      font-family: nb-theme(timepicker-header-cell-text-font-family);
+      height: nb-theme(timepicker-header-cell-height);
+      line-height: nb-theme(timepicker-header-cell-text-line-height);
+      font-weight: nb-theme(timepicker-header-cell-text-font-weight);
+
+      &:not(:last-child) {
+        @include nb-ltr(border-right, $border);
+        @include nb-rtl(border-left, $border);
+      }
+    }
+
+    .column-header {
+      border-bottom: $border;
+    }
+
+    .actions-footer {
+      @include nb-ltr(padding-left, 0.625rem);
+      @include nb-rtl(padding-right, 0.625rem);
+    }
+  }
+}

@@ -19,7 +19,7 @@ import {
 import { ActivatedRoute } from '@angular/router';
 
 import { convertToBoolProperty, NbBooleanInput } from '../helpers';
-import { NbComponentStatus } from '../component-status';
+import { NbComponentOrCustomStatus } from '../component-status';
 import { NbBadgePosition } from '../badge/badge.component';
 import { NbIconConfig } from '../icon/icon.component';
 
@@ -55,6 +55,20 @@ export class NbTabComponent {
    * @type {string}
    */
   @Input() tabId: string;
+
+  /**
+   * Use badge dot mode
+   * @type {boolean}
+   */
+  @Input()
+  get badgeDot(): boolean {
+    return this._badgeDot;
+  }
+  set badgeDot(val: boolean) {
+    this._badgeDot = convertToBoolProperty(val);
+  }
+  protected _badgeDot: boolean;
+  static ngAcceptInputType_badgeDot: NbBooleanInput;
 
   /**
    * Tab icon name or icon config object
@@ -135,7 +149,7 @@ export class NbTabComponent {
    * 'primary', 'info', 'success', 'warning', 'danger'
    * @param {string} val
    */
-  @Input() badgeStatus: NbComponentStatus = 'basic';
+  @Input() badgeStatus: NbComponentOrCustomStatus = 'basic';
 
   /**
    * Badge position.
@@ -261,8 +275,9 @@ export class NbTabComponent {
           <nb-icon *ngIf="tab.tabIcon" [config]="tab.tabIcon"></nb-icon>
           <span *ngIf="tab.tabTitle" class="tab-text">{{ tab.tabTitle }}</span>
         </a>
-        <nb-badge *ngIf="tab.badgeText"
+        <nb-badge *ngIf="tab.badgeText || tab.badgeDot"
           [text]="tab.badgeText"
+          [dotMode]="tab.badgeDot"
           [status]="tab.badgeStatus"
           [position]="tab.badgePosition">
         </nb-badge>

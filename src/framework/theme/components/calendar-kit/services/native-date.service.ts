@@ -5,6 +5,7 @@
  */
 
 import { Inject, Injectable, LOCALE_ID } from '@angular/core';
+import { FormatWidth, getLocaleTimeFormat } from '@angular/common';
 import {
   DatePipe,
   FormStyle,
@@ -15,7 +16,6 @@ import {
 } from '@angular/common';
 
 import { NbDateService } from './date.service';
-
 
 /**
  * The `NbNativeDateService` is basic implementation of `NbDateService` using
@@ -35,12 +35,49 @@ export class NbNativeDateService extends NbDateService<Date> {
     this.datePipe = new DatePipe(locale);
   }
 
+
+  setHours(date: Date, hour: number): Date {
+    const result: Date = this.clone(date);
+    result.setHours(hour);
+
+    return result;
+  }
+
+  setMinutes(date: Date, minute: number): Date {
+    const result: Date = this.clone(date);
+    result.setMinutes(minute);
+
+    return result;
+  }
+
+  setSeconds(date: Date, second: number): Date {
+    const result: Date = this.clone(date);
+    result.setSeconds(second);
+
+    return result;
+  }
+
+  setMilliseconds(date: Date, second: number): Date {
+    const result: Date = this.clone(date);
+    result.setMilliseconds(second);
+
+    return result;
+  }
+
   isValidDateString(date: string, format: string): boolean {
     return !isNaN(this.parse(date, format).getTime());
   }
 
+  isValidTimeString(date: string, format: string): boolean {
+    return this.isValidDateString(date, format);
+  }
+
   today(): Date {
     return new Date();
+  }
+
+  getLocaleTimeFormat(): string {
+    return getLocaleTimeFormat(this.locale, FormatWidth.Short);
   }
 
   getDate(date: Date): number {
@@ -77,7 +114,7 @@ export class NbNativeDateService extends NbDateService<Date> {
   }
 
   getDayOfWeekNames(): string[] {
-    return getLocaleDayNames(this.locale, FormStyle.Format, TranslationWidth.Short);
+    return [...getLocaleDayNames(this.locale, FormStyle.Format, TranslationWidth.Short)];
   }
 
   format(date: Date, format: string): string {
@@ -101,6 +138,36 @@ export class NbNativeDateService extends NbDateService<Date> {
     // because of the date overflow.
     month.setDate(Math.min(date.getDate(), this.getMonthEnd(month).getDate()));
     return month;
+  }
+
+  addMinutes(date: Date, minute: number): Date {
+    const result: Date = new Date(date);
+    result.setMinutes(date.getMinutes() + minute);
+
+    return result;
+  }
+
+  addHours(date: Date, hour: number): Date {
+    const result: Date = new Date(date);
+    result.setHours(date.getHours() + hour);
+
+    return result;
+  }
+
+  getHours(date: Date): number {
+    return date.getHours();
+  }
+
+  getMinutes(date: Date): number {
+    return date.getMinutes();
+  }
+
+  getSeconds(date: Date): number {
+    return date.getSeconds();
+  }
+
+  getMilliseconds(date: Date): number {
+    return date.getMilliseconds();
   }
 
   addYear(date: Date, num: number): Date {
@@ -146,6 +213,10 @@ export class NbNativeDateService extends NbDateService<Date> {
     return this.createDate(date.getFullYear(), 0, 1);
   }
 
+  valueOf(date: Date): number {
+    return date.valueOf();
+  }
+
   isSameDay(date1: Date, date2: Date): boolean {
     return this.isSameMonth(date1, date2) &&
       date1.getDate() === date2.getDate();
@@ -166,5 +237,13 @@ export class NbNativeDateService extends NbDateService<Date> {
 
   getWeekNumber(date: Date): number {
     return parseInt(this.datePipe.transform(date, 'w'), 10);
+  }
+
+  getDateFormat(): string {
+    return 'yyyy-MM-dd';
+  }
+
+  getTwelveHoursFormat(): string {
+    return 'hh:mm a';
   }
 }

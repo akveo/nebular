@@ -1,6 +1,6 @@
 {
   "name": "@nebular/auth",
-  "version": "6.0.0",
+  "version": "7.0.0",
   "description": "@nebular/auth",
   "author": "akveo",
   "license": "MIT",
@@ -24,11 +24,11 @@
     "nebular"
   ],
   "peerDependencies": {
-    "@angular/common": "^10.0.0",
-    "@angular/core": "^10.0.0",
-    "@angular/router": "^10.0.0",
-    "@angular/forms": "^10.0.0",
-    "@nebular/theme": "6.0.0",
+    "@angular/common": "^11.0.0",
+    "@angular/core": "^11.0.0",
+    "@angular/router": "^11.0.0",
+    "@angular/forms": "^11.0.0",
+    "@nebular/theme": "7.0.0",
     "rxjs": "^6.5.1"
   },
   "sideEffects": false

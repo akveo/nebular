@@ -17,7 +17,13 @@ export class NbTreeGridColumnDefDirective extends NbColumnDefDirective implement
   /**
    * Column name
    */
-  @Input('nbTreeGridColumnDef') name: string;
+  @Input('nbTreeGridColumnDef')
+  get name(): string {
+    return this._name;
+  }
+  set name(value: string) {
+    this._setNameInput(value);
+  }
 
   private hideOnValue: number | null = null;
   /**

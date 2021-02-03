@@ -3,7 +3,7 @@
  * Copyright Akveo. All Rights Reserved.
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
-import { async, TestBed, inject } from '@angular/core/testing';
+import { TestBed, inject, waitForAsync } from '@angular/core/testing';
 import { of as observableOf } from 'rxjs';
 
 import { NbRoleProvider } from './role.provider';
@@ -39,7 +39,7 @@ function setupAcl(can, roles: string|string[]) {
   });
 
   // Single async inject to save references; which are used in all tests below
-  beforeEach(async(inject(
+  beforeEach(waitForAsync(inject(
     [NbAccessChecker],
     (_accessChecker) => {
       accessChecker = _accessChecker

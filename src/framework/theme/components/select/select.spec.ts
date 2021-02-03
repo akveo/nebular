@@ -67,7 +67,7 @@ const TEST_GROUPS = [
       { title: 'Option 41', value: '' },
       { title: 'Option 42', value: '0' },
       { title: 'Option 43', value: 0 },
-      { title: 'Option 44'},
+      { title: 'Option 44' },
     ],
   },
 ];
@@ -119,6 +119,25 @@ export class NbSelectTestComponent {
   `,
 })
 export class BasicSelectTestComponent {}
+
+@Component({
+  template: `
+    <nb-layout>
+      <nb-layout-column>
+        <nb-select [selected]="selected" [compareWith]="compareFn">
+          <nb-option *ngFor="let option of options" [value]="option">{{ option }}</nb-option>
+        </nb-select>
+      </nb-layout-column>
+    </nb-layout>
+  `,
+})
+export class NbSelectWithOptionsObjectsComponent {
+  @Input() compareFn = (o1: any, o2: any) => JSON.stringify(o1) === JSON.stringify(o2);
+  @Input() selected = { id: 2 };
+  @Input() options = [{ id: 1 }, { id: 2 }, { id: 3 }];
+
+  @ViewChildren(NbOptionComponent) optionComponents: QueryList<NbOptionComponent>;
+}
 
 @Component({
   template: `
@@ -325,6 +344,7 @@ describe('Component: NbSelectComponent', () => {
       ],
       declarations: [
         NbSelectTestComponent,
+        NbSelectWithOptionsObjectsComponent,
         NbSelectWithInitiallySelectedOptionComponent,
         NbReactiveFormSelectComponent,
         NbNgModelSelectComponent,
@@ -495,6 +515,17 @@ describe('Component: NbSelectComponent', () => {
     expect(selectButton.textContent).toEqual(selectedOption.value.toString());
   }));
 
+  it('should use compareWith function to compare values', fakeAsync(() => {
+    const selectFixture = TestBed.createComponent(NbSelectWithOptionsObjectsComponent);
+    const testComponent = selectFixture.componentInstance;
+    selectFixture.detectChanges();
+    flush();
+    selectFixture.detectChanges();
+
+    const selectedOption = testComponent.optionComponents.find(o => o.selected);
+    expect(selectedOption.value).toEqual({ id: 2 });
+  }));
+
   it('should ignore selection change if destroyed', fakeAsync(() => {
     const selectFixture = TestBed.createComponent(NbReactiveFormSelectComponent);
     const testSelectComponent = selectFixture.componentInstance;
@@ -602,7 +633,7 @@ describe('Component: NbSelectComponent', () => {
   }));
 
   it(`should not call dispose on uninitialized resources`, () => {
-    const selectFixture = new NbSelectComponent(null, null, null, null, null, null, null, null, null, null);
+    const selectFixture = new NbSelectComponent(null, null, null, null, null, null, null, null, null, null, null);
     expect(() => selectFixture.ngOnDestroy()).not.toThrow();
   });
 

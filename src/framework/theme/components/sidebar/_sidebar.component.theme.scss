@@ -84,7 +84,7 @@
         }
 
         > .menu-items > .menu-item > a {
-          span, .expand-state {
+          span, nb-badge, .expand-state {
             display: none;
           }
         }

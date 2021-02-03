@@ -1,7 +1,7 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { APP_BASE_HREF } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { TestBed, ComponentFixture, fakeAsync, tick, async, inject } from '@angular/core/testing';
+import { TestBed, ComponentFixture, fakeAsync, tick, inject, waitForAsync } from '@angular/core/testing';
 import { NbLayoutScrollService, NbScrollPosition } from './scroll.service';
 import { NbLayoutModule } from '../components/layout/layout.module';
 import { NbThemeService } from './theme.service';
@@ -56,7 +56,11 @@ describe('NbScrollService', () => {
 
   beforeEach(() => {
     fixture = TestBed.configureTestingModule({
-      imports: [ RouterModule.forRoot([]), NbThemeModule.forRoot(), NbLayoutModule ],
+      imports: [
+        RouterModule.forRoot([], { relativeLinkResolution: 'legacy' }),
+        NbThemeModule.forRoot(),
+        NbLayoutModule,
+      ],
       providers: [ NbLayoutScrollService, NbThemeService, { provide: APP_BASE_HREF, useValue: '/' } ],
       declarations: [ ScrollTestComponent ],
     })
@@ -67,7 +71,7 @@ describe('NbScrollService', () => {
     fixture.detectChanges();
   });
 
-  beforeEach(async(inject(
+  beforeEach(waitForAsync(inject(
     [NbLayoutScrollService, NB_WINDOW],
     (_scrollService, _window) => {
       scrollService = _scrollService;

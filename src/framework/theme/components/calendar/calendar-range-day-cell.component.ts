@@ -91,7 +91,7 @@ export class NbCalendarRangeDayCellComponent<D> extends NbBaseCalendarRangeCell<
     }
 
     if (this.selectedValue) {
-      return this.dateService.isSameDay(this.date, this.selectedValue.start);
+      return this.dateService.isSameDaySafe(this.date, this.selectedValue.start);
     }
   }
 

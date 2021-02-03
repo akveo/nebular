@@ -19,10 +19,7 @@ import {
 import { By } from '@angular/platform-browser';
 import createSpy = jasmine.createSpy;
 
-import { NbRadioModule } from './radio.module';
-import { NbRadioComponent } from './radio.component';
-import { NbRadioGroupComponent } from './radio-group.component';
-import { NB_DOCUMENT } from '../../theme.options';
+import { NbThemeModule, NbRadioModule, NbRadioComponent, NbRadioGroupComponent, NB_DOCUMENT } from '@nebular/theme';
 
 @Component({
   selector: 'nb-radio-test',
@@ -78,7 +75,7 @@ describe('radio', () => {
 
   beforeEach(fakeAsync(() => {
     TestBed.configureTestingModule({
-      imports: [NbRadioModule],
+      imports: [ NbThemeModule.forRoot(), NbRadioModule ],
       declarations: [NbRadioTestComponent],
       providers: [ { provide: NB_DOCUMENT, useValue: document } ],
     });
@@ -109,7 +106,7 @@ describe('NbRadioGroupComponent', () => {
 
   beforeEach(fakeAsync(() => {
     TestBed.configureTestingModule({
-      imports: [ NbRadioModule ],
+      imports: [ NbThemeModule.forRoot(), NbRadioModule ],
       declarations: [ NbRadioWithDynamicValuesTestComponent, NbTwoRadioGroupsComponent ],
       providers: [ { provide: NB_DOCUMENT, useValue: document } ],
     });

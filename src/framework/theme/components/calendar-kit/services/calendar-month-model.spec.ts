@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { async, inject, TestBed } from '@angular/core/testing';
+import { inject, TestBed, waitForAsync } from '@angular/core/testing';
 import { DatePipe } from '@angular/common';
 
 import { NbCalendarMonthModelService } from './calendar-month-model.service';
@@ -21,7 +21,7 @@ describe('month-model-service', () => {
     });
   });
 
-  beforeEach(async(inject(
+  beforeEach(waitForAsync(inject(
     [NbCalendarMonthModelService],
     (_monthModel) => {
       monthModel = _monthModel;

@@ -1,0 +1,59 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
+@import './tag-filled';
+@import './tag-outline';
+
+@mixin nb-tag-theme() {
+  nb-tag {
+    border-style: nb-theme(tag-border-style);
+    border-width: nb-theme(tag-border-width);
+    border-radius: nb-theme(tag-border-radius);
+
+    display: inline-flex;
+    align-items: center;
+
+    font-family: nb-theme(tag-text-font-family);
+    text-transform: nb-theme(tag-text-transform);
+
+    cursor: default;
+
+    &.nb-transition {
+      @include nb-component-animation(background-color, border-color, color);
+    }
+
+    @each $size in nb-get-sizes() {
+      &.size-#{$size} {
+        font-size: nb-theme(tag-#{$size}-text-font-size);
+        font-weight: nb-theme(tag-#{$size}-text-font-weight);
+        line-height: nb-theme(tag-#{$size}-text-line-height);
+        padding: nb-theme(tag-#{$size}-padding);
+      }
+    }
+
+    @include nb-tag-filled();
+    @include nb-tag-outline();
+  }
+
+  .nb-tag-remove {
+    cursor: pointer;
+
+    @each $size in nb-get-sizes() {
+      &.size-#{$size} {
+        font-size: nb-theme(tag-#{$size}-text-line-height);
+
+        @include nb-ltr() {
+          margin-left: nb-theme(tag-#{$size}-close-offset);
+          margin-right: nb-theme-var-negative(nb-theme(tag-#{$size}-close-offset));
+        }
+        @include nb-rtl() {
+          margin-right: nb-theme(tag-#{$size}-close-offset);
+          margin-left: nb-theme-var-negative(nb-theme(tag-#{$size}-close-offset));
+        }
+      }
+    }
+  }
+}

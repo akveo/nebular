@@ -7,6 +7,7 @@
 @import '../../../../src/framework/theme/styles/global/components';
 @import '../../../../src/framework/theme/styles/global/typography/typography';
 @import '../../../../src/framework/bootstrap/styles/globals';
+@import './hs-form';
 
 @include nb-install() {
   @include nb-layout-theme();
@@ -29,6 +30,8 @@
 
   // loading progress bar
   @include ngd-pace-theme();
+
+  @include hs-custom-form();
 };
 
 body {

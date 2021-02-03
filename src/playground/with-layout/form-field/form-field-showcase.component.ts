@@ -23,7 +23,6 @@ import { Component } from '@angular/core';
           <nb-select>
             <nb-option>1</nb-option>
           </nb-select>
-          <nb-icon nbSuffix icon="star" pack="eva"></nb-icon>
         </nb-form-field>
 
       </nb-card-body>

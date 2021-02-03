@@ -4,20 +4,16 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import * as ts from 'typescript';
 import { Tree } from '@angular-devkit/schematics';
 import { dirname, normalize, Path } from '@angular-devkit/core';
-import { getProjectMainFile, parseSourceFile } from '@angular/cdk/schematics';
-import { WorkspaceProject } from '@angular-devkit/core/src/experimental/workspace';
-import { isImported } from '@schematics/angular/utility/ast-utils';
+import { getProjectMainFile, hasNgModuleImport } from '@angular/cdk/schematics';
+import { ProjectDefinition } from '@angular-devkit/core/src/workspace';
 import { findBootstrapModulePath } from '@schematics/angular/utility/ng-ast-utils';
 
-export function isImportedInMainModule(tree: Tree, project: WorkspaceProject, moduleName: string,
-                                       importPath: string): boolean {
+export function isImportedInMainModule(tree: Tree, project: ProjectDefinition, moduleName: string): boolean {
   const appModulePath = getAppModulePath(tree, getProjectMainFile(project));
-  const appModuleSource = parseSourceFile(tree, appModulePath) as ts.SourceFile;
 
-  return isImported(appModuleSource, moduleName, importPath);
+  return hasNgModuleImport(tree, appModulePath, moduleName);
 }
 
 

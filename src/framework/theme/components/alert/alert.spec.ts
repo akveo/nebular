@@ -5,7 +5,8 @@
  */
 
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { NbAlertComponent } from './alert.component';
+
+import { NbAlertComponent, NbAlertModule, NbThemeModule } from '@nebular/theme';
 
 describe('Component: NbAlert', () => {
 
@@ -14,7 +15,7 @@ describe('Component: NbAlert', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [NbAlertComponent],
+      imports: [ NbThemeModule.forRoot(), NbAlertModule ],
     });
 
     fixture = TestBed.createComponent(NbAlertComponent);

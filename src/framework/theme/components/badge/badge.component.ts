@@ -6,13 +6,20 @@
 
 import { Component, HostBinding, Input } from '@angular/core';
 
-import { NbComponentStatus } from '../component-status';
-import { emptyStatusWarning } from '../helpers';
+import { NbStatusService } from '../../services/status.service';
+import { NbComponentOrCustomStatus } from '../component-status';
+import { convertToBoolProperty } from '../helpers';
 
-export type NbBadgePhysicalPosition = 'top left' | 'top right' | 'bottom left' | 'bottom right';
-export type NbBadgeLogicalPosition = 'top start' | 'top end' | 'bottom start' | 'bottom end';
+export type NbBadgePhysicalPosition = 'top left' | 'top right' | 'bottom left' | 'bottom right' | 'center right' | 'center left';
+export type NbBadgeLogicalPosition = 'top start' | 'top end' | 'bottom start' | 'bottom end' | 'center start'| 'center end';
 export type NbBadgePosition = NbBadgePhysicalPosition | NbBadgeLogicalPosition;
 
+export interface NbBadge {
+  text?: string;
+  position?: NbBadgePosition;
+  status?: NbComponentOrCustomStatus;
+  dotMode?: boolean;
+}
 
 /**
  * Badge is a simple labeling component.
@@ -79,9 +86,9 @@ export type NbBadgePosition = NbBadgePhysicalPosition | NbBadgeLogicalPosition;
 @Component({
   selector: 'nb-badge',
   styleUrls: ['./badge.component.scss'],
-  template: `{{text}}`,
+  template: `{{dotMode ? '' : text}}`,
 })
-export class NbBadgeComponent {
+export class NbBadgeComponent implements NbBadge {
 
   /**
    * Text to display
@@ -108,21 +115,32 @@ export class NbBadgeComponent {
   protected _position: NbBadgePosition = this._defaultPosition;
 
   /**
+   * Shows badge as a dot. No text is shown.
+   * @type boolean
+   */
+  @Input()
+  @HostBinding('class.dot-mode')
+  get dotMode(): boolean {
+    return this._dotMode;
+  }
+  set dotMode(value: boolean) {
+    this._dotMode = convertToBoolProperty(value);
+  }
+  protected _dotMode: boolean;
+
+  /**
    * Badge status (adds specific styles):
    * 'basic', 'primary', 'info', 'success', 'warning', 'danger', 'control'
    */
-  @Input()
-  get status(): NbComponentStatus {
-    return this._status;
-  }
-  set status(value: NbComponentStatus) {
-    if ((value as string) === '') {
-      emptyStatusWarning('NbBadge');
-      value = 'basic';
+  @Input() status: NbComponentOrCustomStatus = 'basic';
+
+  @HostBinding('class')
+  get additionalClasses(): string[] {
+    if (this.statusService.isCustomStatus(this.status)) {
+      return [this.statusService.getStatusClass(this.status)];
     }
-    this._status = value;
+    return [];
   }
-  protected _status: NbComponentStatus = 'basic';
 
   @HostBinding('class.status-primary')
   get primary(): boolean {
@@ -187,5 +205,13 @@ export class NbBadgeComponent {
   @HostBinding('class.position-end')
   get end(): boolean {
     return this.position.includes('end');
+  }
+
+  @HostBinding('class.position-center')
+  get center(): boolean {
+    return this.position.includes('center');
+  }
+
+  constructor(protected statusService: NbStatusService) {
   }
 }

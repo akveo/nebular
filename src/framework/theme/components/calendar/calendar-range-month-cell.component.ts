@@ -60,7 +60,7 @@ export class NbCalendarRangeMonthCellComponent<D> extends NbBaseCalendarRangeCel
     }
 
     if (this.selectedValue) {
-      return this.dateService.isSameMonth(this.date, this.selectedValue.start);
+      return this.dateService.isSameMonthSafe(this.date, this.selectedValue.start);
     }
   }
 

@@ -5,6 +5,8 @@
  */
 
 @mixin nb-datepicker-theme {
+  $border: nb-theme(datepicker-border-width) nb-theme(datepicker-border-style) nb-theme(datepicker-border-color);
+
   nb-datepicker-container nb-card {
     border-color: nb-theme(datepicker-border-color);
     border-style: nb-theme(datepicker-border-style);
@@ -12,5 +14,42 @@
     border-radius: nb-theme(datepicker-border-radius);
     background: nb-theme(datepicker-background-color);
     box-shadow: nb-theme(datepicker-shadow);
+  }
+  nb-calendar-with-time {
+    .nb-timepicker-container,
+    nb-base-calendar nb-card {
+      border: none;
+    }
+
+    .column-header {
+      border-top: $border;
+      border-radius: 0;
+    }
+
+    .timepicker-section.size-large nb-list-item {
+      height: nb-theme(calendar-day-cell-large-height);
+    }
+
+    .timepicker-section.size-large .header-cell {
+      height: nb-theme(calendar-weekday-large-height);
+    }
+
+    .timepicker-section {
+      @include nb-ltr(border-left, $border);
+      @include nb-rtl(border-right, $border);
+    }
+
+    .timepicker-single-column-width {
+      width: nb-theme(timepicker-single-column-width);;
+    }
+
+    .timepicker-multiple-column-width {
+      width: nb-theme(timepicker-multiple-column-width);
+    }
+
+    .picker-title {
+      height: nb-theme(timepicker-title-height);
+      padding: nb-theme(timepicker-title-padding);
+    }
   }
 }

@@ -1,6 +1,6 @@
 {
   "name": "@nebular/theme",
-  "version": "6.0.0",
+  "version": "7.0.0",
   "description": "@nebular/theme",
   "author": "akveo",
   "license": "MIT",
@@ -21,11 +21,11 @@
     "nebular"
   ],
   "peerDependencies": {
-    "@angular/animations": "^10.0.0",
-    "@angular/common": "^10.0.0",
-    "@angular/core": "^10.0.0",
-    "@angular/router": "^10.0.0",
-    "@angular/cdk": "^10.0.0",
+    "@angular/animations": "^11.0.0",
+    "@angular/common": "^11.0.0",
+    "@angular/core": "^11.0.0",
+    "@angular/router": "^11.0.0",
+    "@angular/cdk": "^11.0.0",
     "rxjs": "^6.5.4",
     "tslib": "^2.0.0"
   },

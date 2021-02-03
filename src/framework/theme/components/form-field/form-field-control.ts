@@ -5,7 +5,7 @@
  */
 
 import { Injectable } from '@angular/core';
-import { NbComponentStatus } from '../component-status';
+import { NbComponentOrCustomStatus } from '../component-status';
 import { NbComponentSize } from '../component-size';
 import { Observable } from 'rxjs';
 
@@ -14,7 +14,7 @@ import { Observable } from 'rxjs';
  **/
 @Injectable()
 export abstract class NbFormFieldControl {
-  status$: Observable<NbComponentStatus>;
+  status$: Observable<NbComponentOrCustomStatus>;
   size$: Observable<NbComponentSize>;
   focused$: Observable<boolean>;
   disabled$: Observable<boolean>;
@@ -31,7 +31,7 @@ export class NbFormFieldControlConfig {
 }
 
 export interface NbFormControlState {
-  status: NbComponentStatus;
+  status: NbComponentOrCustomStatus;
   size: NbComponentSize;
   fullWidth: boolean;
   focused: boolean;

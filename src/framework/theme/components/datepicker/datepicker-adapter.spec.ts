@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { NbCalendarRange, NbDateService } from '@nebular/theme';
+import { NbCalendarRange, NbDateService, NbDateTimeAdapterService } from '@nebular/theme';
 
 import { NbDateAdapterService, NbRangeAdapterService } from './datepicker-adapter';
 
@@ -16,6 +16,7 @@ describe('Date Adapters', () => {
         { provide: NbDateService, useValue: mockDateService },
         NbDateAdapterService,
         NbRangeAdapterService,
+        NbDateTimeAdapterService,
       ],
     });
   });
@@ -148,4 +149,40 @@ describe('Date Adapters', () => {
       }
     });
   });
+
+  describe('NbDateTimeAdapterService', () => {
+    let dateService: NbDateService<Date>;
+    let adapterService: NbDateTimeAdapterService<Date>;
+    beforeEach(() => {
+      dateService = TestBed.inject(NbDateService);
+      adapterService = TestBed.inject(NbDateTimeAdapterService);
+    });
+
+    it('should be created', () => {
+      expect(adapterService).toBeTruthy();
+    });
+
+    it('should use date service to parse date', () => {
+      const date = '24/03/93 20:30:24';
+      const format = 'mm/dd/yy HH:mm:ss';
+      const parsed = new Date();
+      const spy = spyOn(dateService, 'parse').and.returnValue(parsed);
+
+      expect(adapterService.parse(date, format)).toEqual(parsed);
+      expect(spy).toHaveBeenCalledTimes(1);
+      expect(spy).toHaveBeenCalledWith(date, format);
+    });
+
+    it('should use date service to format date', () => {
+      const date = new Date();
+      const format = 'mm/dd/yyyy HH:mm:ss';
+      const formatted = 'formatted';
+      const spy = spyOn(dateService, 'format').and.returnValue(formatted);
+
+      expect(adapterService.format(date, format)).toEqual(formatted);
+      expect(spy).toHaveBeenCalledTimes(1);
+      expect(spy).toHaveBeenCalledWith(date, format);
+    });
+  });
 });
+

@@ -1,5 +1,5 @@
 {
-  "extends": "../tsconfig.base.json",
+  "extends": "../tsconfig.json",
   "compilerOptions": {
     "sourceMap": true,
     "declaration": false,
@@ -19,7 +19,9 @@
       "@nebular/auth": ["../src/framework/auth/public_api.ts"],
       "@nebular/security": ["../src/framework/security/public_api.ts"],
       "@nebular/eva-icons": ["../src/framework/eva-icons/public_api.ts"],
-      "@nebular/firebase-auth": ["../src/framework/firebase-auth/public_api.ts"]
+      "@nebular/firebase-auth": ["../src/framework/firebase-auth/public_api.ts"],
+      "@nebular/date-fns": ["../src/framework/date-fns/public_api.ts"],
+      "@nebular/moment": ["../src/framework/moment/public_api.ts"]
     }
   },
   "files": [

@@ -4,6 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
+@import './button-core';
 @import './button-filled';
 @import './button-outline';
 @import './button-ghost';
@@ -11,16 +12,22 @@
 
 @mixin nb-buttons-theme() {
   [nbButton] {
+    @include nb-button-core();
+
     cursor: nb-theme(button-cursor);
     font-family: nb-theme(button-text-font-family);
     font-weight: nb-theme(button-text-font-weight);
 
     &:focus {
+      // Sibling buttons are covering outline shadow.
+      // position: relative; declaration makes shadow appear on top of sibling buttons.
+      position: relative;
       outline: none;
       @include nb-outline(nb-theme(button-outline-width), nb-theme(button-outline-color));
     }
 
-    &[disabled] {
+    &[disabled],
+    &.btn-disabled {
       cursor: nb-theme(button-disabled-cursor);
     }
 

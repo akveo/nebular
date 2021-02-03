@@ -6,9 +6,9 @@
 
 import { Component, HostBinding, Input } from '@angular/core';
 
+import { NbStatusService } from '../../services/status.service';
 import { NbComponentSize } from '../component-size';
-import { NbComponentStatus } from '../component-status';
-import { emptyStatusWarning } from '../helpers';
+import { NbComponentOrCustomStatus } from '../component-status';
 
 /**
  * Styled spinner component
@@ -76,18 +76,7 @@ export class NbSpinnerComponent {
    * Spinner status (adds specific styles):
    * `basic`, `primary`, `info`, `success`, `warning`, `danger`, `control`.
    */
-  @Input()
-  get status(): NbComponentStatus {
-    return this._status;
-  }
-  set status(value: NbComponentStatus) {
-    if ((value as string) === '') {
-      emptyStatusWarning('NbSpinner');
-      value = 'basic';
-    }
-    this._status = value;
-  }
-  protected _status: NbComponentStatus = 'basic';
+  @Input() status: NbComponentOrCustomStatus = 'basic';
 
   @HostBinding('class.size-tiny')
   get tiny() {
@@ -147,5 +136,16 @@ export class NbSpinnerComponent {
   @HostBinding('class.status-control')
   get control() {
     return this.status === 'control';
+  }
+
+  @HostBinding('class')
+  get additionalClasses(): string[] {
+    if (this.statusService.isCustomStatus(this.status)) {
+      return [this.statusService.getStatusClass(this.status)];
+    }
+    return [];
+  }
+
+  constructor(protected statusService: NbStatusService) {
   }
 }

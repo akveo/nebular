@@ -21,12 +21,13 @@ import {
 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { fromEvent, merge, Subject } from 'rxjs';
-import { filter, switchMap, takeUntil } from 'rxjs/operators';
-import { convertToBoolProperty, emptyStatusWarning, NbBooleanInput } from '../helpers';
+import { from, fromEvent, merge, Subject } from 'rxjs';
+import { filter, startWith, switchMap, takeUntil } from 'rxjs/operators';
+
+import { convertToBoolProperty, NbBooleanInput } from '../helpers';
 import { NB_DOCUMENT } from '../../theme.options';
+import { NbComponentOrCustomStatus } from '../component-status';
 import { NbRadioComponent } from './radio.component';
-import { NbComponentStatus } from '../component-status';
 
 /**
  * The `NbRadioGroupComponent` is the wrapper for `nb-radio` button.
@@ -120,21 +121,16 @@ export class NbRadioGroupComponent implements AfterContentInit, OnDestroy, Contr
    * Possible values are `primary` (default), `success`, `warning`, `danger`, `info`.
    */
   @Input()
-  get status(): NbComponentStatus {
+  get status(): NbComponentOrCustomStatus {
     return this._status;
   }
-  set status(value: NbComponentStatus) {
-    if ((value as string) === '') {
-      emptyStatusWarning('NbRadio');
-      value = 'basic';
-    }
-
+  set status(value: NbComponentOrCustomStatus) {
     if (this._status !== value) {
       this._status = value;
       this.updateStatus();
     }
   }
-  protected _status: NbComponentStatus = 'basic';
+  protected _status: NbComponentOrCustomStatus = 'basic';
 
   @ContentChildren(NbRadioComponent, { descendants: true }) radios: QueryList<NbRadioComponent>;
 
@@ -154,17 +150,17 @@ export class NbRadioGroupComponent implements AfterContentInit, OnDestroy, Contr
     // last option will stay selected.
     this.updateNames();
 
-    Promise.resolve().then(() => this.updateAndSubscribeToRadios());
-
     this.radios.changes
-      .pipe(takeUntil(this.destroy$))
-      .subscribe(() => {
+      .pipe(
+        startWith(this.radios),
         // 'changes' emit during change detection run and we can't update
         // option properties right of since they already was initialized.
         // Instead we schedule microtask to update radios after change detection
-        // run is finished.
-        Promise.resolve().then(() => this.updateAndSubscribeToRadios());
-      });
+        // run is finished and trigger one more change detection run.
+        switchMap((radios: QueryList<NbRadioComponent>) => from(Promise.resolve(radios))),
+        takeUntil(this.destroy$),
+      )
+      .subscribe(() => this.updateAndSubscribeToRadios());
   }
 
   ngOnDestroy() {
@@ -182,13 +178,10 @@ export class NbRadioGroupComponent implements AfterContentInit, OnDestroy, Contr
 
   writeValue(value: any): void {
     this.value = value;
-
-    if (typeof value !== 'undefined') {
-      this.updateValues();
-    }
   }
 
   protected updateAndSubscribeToRadios() {
+    this.updateValueFromCheckedOption();
     this.updateNames();
     this.updateValues();
     this.updateDisabled();
@@ -204,9 +197,7 @@ export class NbRadioGroupComponent implements AfterContentInit, OnDestroy, Contr
   }
 
   protected updateValues() {
-    if (typeof this.value !== 'undefined') {
-      this.updateAndMarkForCheckRadios((radio: NbRadioComponent) => radio.checked = radio.value === this.value);
-    }
+    this.updateAndMarkForCheckRadios((radio: NbRadioComponent) => radio.checked = radio.value === this.value);
   }
 
   protected updateDisabled() {
@@ -275,6 +266,14 @@ export class NbRadioGroupComponent implements AfterContentInit, OnDestroy, Contr
         updateFn(radio);
         radio._markForCheck();
       });
+    }
+  }
+
+  protected updateValueFromCheckedOption() {
+    const checkedRadio = this.radios.find((radio) => radio.checked);
+    const isValueMissing = this.value === undefined || this.value === null;
+    if (checkedRadio && isValueMissing && checkedRadio.value !== this.value) {
+      this.value = checkedRadio.value;
     }
   }
 }

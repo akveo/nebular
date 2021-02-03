@@ -4,8 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { getDecoratorMetadata } from '@schematics/angular/utility/ast-utils';
-import { parseSourceFile } from '@angular/cdk/schematics';
+import { getDecoratorMetadata, parseSourceFile } from '@angular/cdk/schematics';
 import { Tree } from '@angular-devkit/schematics';
 import { dirname, join, normalize } from '@angular-devkit/core';
 import * as ts from 'typescript';
@@ -44,8 +43,8 @@ export function getComponentTemplateDescriptor(host: Tree, componentPath: string
   );
 }
 
-export function getAppComponentPath(tree: Tree, projectName: string): string {
-  const project = getProject(tree, projectName);
+export async function getAppComponentPath(tree: Tree, projectName: string): Promise<string> {
+  const project = await getProject(tree, projectName);
   return normalize(`${project.sourceRoot}/app/app.component.ts`);
 }
 

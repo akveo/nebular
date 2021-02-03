@@ -12,8 +12,8 @@ import { Component } from '@angular/core';
   template: `
     <nb-card size="large">
       <nb-card-body>
-        <input nbInput placeholder="Pick Date" [nbDatepicker]="formpicker">
-        <nb-datepicker #formpicker></nb-datepicker>
+        <input nbInput placeholder="Pick Date" [nbDatepicker]="dateTimePicker">
+        <nb-datepicker #dateTimePicker></nb-datepicker>
       </nb-card-body>
     </nb-card>
   `,

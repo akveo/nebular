@@ -16,7 +16,7 @@ Sometimes effective troubleshooters are hard to come by. And sometimes, a little
 - Deployment 
 - Workshop Mentoring
  
-<a href="https://hubs.ly/H0n4DhM0">Want to know more?</a>
+<a href="https://www.akveo.com/contact?utm_campaign=services%20-%20consulting%20-%20nebular%20professional%20services&utm_source=nebular&utm_medium=referral&utm_content=nebular_services_consulting_request">Want to know more?</a>
 
 <hr>
 ## Support
@@ -27,7 +27,7 @@ The mission of the Akveo support team is to help you to solve technical challeng
 - Remote assistance from an engineer 
 - Full application code analysis 
 
-<a href="https://hubs.ly/H0n4D2Y0">Need help? Contact us</a>
+<a href="https://www.akveo.com/contact?utm_campaign=services%20-%20consulting%20-%20nebular%20professional%20services&utm_source=nebular&utm_medium=referral&utm_content=support_cta">Need help? Contact us</a>
 
 
 <hr>
@@ -40,4 +40,4 @@ The convenience of desktop learning from anywhere. Our Nebular tutors offer a co
 ### Offline study
 Onsite training. Wherever you are, our Nebular expert will come to you and boost the skills of your developers, quickly and effectively. We will tailor a high-impact training course that addresses your specific goals and gets your team’s skills where they need to be.
 
-Ready to dive into Nebular? <a href="https://hubs.ly/H0n4D550">Get in touch</a>
+Ready to dive into Nebular? <a href="https://www.akveo.com/contact?utm_campaign=services%20-%20consulting%20-%20nebular%20professional%20services&utm_source=nebular&utm_medium=referral&utm_content=training_request">Get in touch</a>

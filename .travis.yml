@@ -3,7 +3,7 @@ language: node_js
 addons:
   chrome: stable
 node_js:
-  - '10'
+  - '12'
 
 
 env:
@@ -21,6 +21,8 @@ env:
     - NG_CLI_ANALYTICS=false
     - secure: HPaMw9w/sNMtubB8F1/+vqsPeYDQAsqmtHorlw9RIRmH4CCpN3IE/zrltM8ufX8GzToVnK5y3r2zgI+FrVomqAk6tH8nJe1v5bjMxxUDTI1YRfnPOnVxIXnxkQ+l0oZnDjXggfXtBnoLpoz++aHXoRKG+dPVAtur9tjZs2J1d/kNBnt2DWtk9Mb1J1EFVHVMCTD3/+KJzIhzLux8JUY8uxk5DfjKxTDmd24Qj7BGvaaVNmLJdMAVvXGnfV2e2vMbfxdH8rSZAr303GDAfkQama8W/YsQi5RFtxWXS/7bPTOUYSSD7sYqXYzYyW1LBZX0Fws9TOWX1pL5WT2TryP//Ccs4OE7w5Dkzfb2DmYNlWoPhSYj8w1y5RJ6PEzbOk0KkzEzbb5exVW4MHRTDb4LK4F5GhmtS30w9DFwRSfC2VeYmIoZwGxOZq4kT8pWjIAaD8jW7Lqmo/1dj0YBbQlLuvfBR0A9vtBYjbmrYcqMqu5FLyzHkwCdAh0z7vkJHk1BSi8oW5xs7Vvuaou0200aBbv6tt+NEhUjdm+h0IxM3eypqaQuIJGaofwLe0W/9SqRS3/72uae6qXUBREdJXjWJvrbFSR34LpHx0noPyil1H6VVJFSYjKqkj5h68U+CvK5BNAkGgRZLmwL8Q0fuWZGY8cEpnVFAX6qDHOLLS6aJYQ=
   matrix:
+    - MODE=packages_smoke
+    - MODE=deploy_docs
     - MODE=browserstack_e2e
     - MODE=browserstack_unit_test
     - MODE=build
@@ -28,8 +30,6 @@ env:
     - MODE=lint
     - MODE=deploy_dev
     - MODE=publish_dev
-    - MODE=packages_smoke
-    - MODE=deploy_docs
 branches:
   only:
   - master

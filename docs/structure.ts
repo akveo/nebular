@@ -480,6 +480,15 @@ export const structure = [
       },
       {
         type: 'tabs',
+        name: 'Button Group',
+        icon: 'button-group.svg',
+        source: [
+          'NbButtonGroupComponent',
+          'NbButtonToggleDirective',
+        ],
+      },
+      {
+        type: 'tabs',
         name: 'Checkbox',
         icon: 'checkbox.svg',
         source: [
@@ -532,6 +541,25 @@ export const structure = [
           'NbDatepickerDirective',
           'NbDatepickerComponent',
           'NbRangepickerComponent',
+        ],
+      },
+      {
+        type: 'tabs',
+        name: 'Timepicker',
+        icon: 'timepicker.svg',
+        source: [
+          'NbTimePickerDirective',
+          'NbTimePickerComponent',
+        ],
+      },
+      {
+        type: 'tabs',
+        name: 'Tag',
+        icon: '',
+        source: [
+          'NbTagListComponent',
+          'NbTagInputDirective',
+          'NbTagComponent',
         ],
       },
       {
