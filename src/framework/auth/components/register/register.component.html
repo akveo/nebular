@@ -112,7 +112,7 @@
            [status]="rePass.dirty ? (rePass.invalid || password.value != rePass.value  ? 'danger' : 'success') : 'basic'"
            [required]="getConfigValue('forms.validation.password.required')"
            [attr.aria-invalid]="rePass.invalid && rePass.touched ? true : null">
-    <ng-container *ngIf="rePass.invalid && rePass.touched">
+    <ng-container *ngIf="(rePass.invalid || password.value != rePass.value) && rePass.touched">
       <p class="caption status-danger" *ngIf="rePass.errors?.required">
         Password confirmation is required!
       </p>
