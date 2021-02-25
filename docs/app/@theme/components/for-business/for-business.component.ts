@@ -5,6 +5,9 @@
  */
 
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { NbDialogService } from '@nebular/theme';
+
+import { NgdHubspotFormDialogComponent } from '../hubspot-form-dialog/hubspot-form-dialog.component';
 
 @Component({
   selector: 'ngd-for-business',
@@ -39,7 +42,18 @@ export class NgdForBusinessComponent {
     'The review of your project',
   ];
 
-  openDialog() {
+  constructor(private dialogService: NbDialogService) {
+  }
 
+  openDialog(): void {
+    const context = {
+      title: '',
+      formConfig: {
+        portalId: '2452262',
+        formId: '40c56c10-9b41-4d12-95dd-e6c186ac4273',
+      },
+    };
+
+    this.dialogService.open(NgdHubspotFormDialogComponent, { context });
   }
 }
