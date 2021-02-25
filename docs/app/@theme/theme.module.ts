@@ -39,6 +39,7 @@ import {
   NgdSearchComponent,
   NgdEvaComponent,
   NgdDownloadDialogComponent,
+  NgdForBusinessComponent,
 } from './components';
 
 import {
@@ -89,6 +90,7 @@ import { AkveoServicesBanner } from './components/hubspot-cta/akveo-services-ban
     NgdEvaComponent,
     AkveoServicesBanner,
     NgdDownloadDialogComponent,
+    NgdForBusinessComponent,
   ],
   exports: [
     CommonModule,
@@ -114,6 +116,7 @@ import { AkveoServicesBanner } from './components/hubspot-cta/akveo-services-ban
     NgdDescriptionDirective,
     NgdEvaComponent,
     AkveoServicesBanner,
+    NgdForBusinessComponent,
   ],
 })
 export class NgdThemeModule {
