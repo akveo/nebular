@@ -11,6 +11,10 @@ nb-card-header {
   align-items: center;
 }
 
+nb-card-body {
+  min-height: 5rem;
+}
+
 .close-button {
   margin-left: auto;
   padding: 0;

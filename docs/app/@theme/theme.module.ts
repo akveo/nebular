@@ -21,6 +21,7 @@ import {
   NbSelectModule,
   NbInputModule,
   NbDialogModule,
+  NbSpinnerModule,
 } from '@nebular/theme';
 
 import { NbEvaIconsModule } from '@nebular/eva-icons';
@@ -73,6 +74,7 @@ import { AkveoServicesBanner } from './components/hubspot-cta/akveo-services-ban
     NbInputModule,
     NbEvaIconsModule,
     NbDialogModule,
+    NbSpinnerModule,
     RouterModule,
   ],
   declarations: [

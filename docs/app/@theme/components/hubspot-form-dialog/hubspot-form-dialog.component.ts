@@ -4,8 +4,8 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { AfterViewInit, Component } from '@angular/core';
-import { NbDialogRef } from '@nebular/theme';
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
+import { NB_WINDOW, NbDialogRef } from '@nebular/theme';
 
 let formContainerUniqueId = 0;
 
@@ -18,38 +18,72 @@ let formContainerUniqueId = 0;
           <nb-icon icon="close" pack="eva"></nb-icon>
         </button>
       </nb-card-header>
-      <nb-card-body>
-        <div [attr.id]="formContainerId"></div>
+      <nb-card-body [nbSpinner]="showSpinner">
+        <div #formContainer [attr.id]="formContainerId"></div>
       </nb-card-body>
     </nb-card>
   `,
   styleUrls: ['./hubspot-form-dialog.component.scss'],
 })
-export class NgdHubspotFormDialogComponent implements AfterViewInit {
+export class NgdHubspotFormDialogComponent implements OnInit, AfterViewInit {
 
-  private readonly defaultConfig = {
+  protected readonly defaultConfig = {
     submitButtonClass: 'hs-submit-btn btn',
     css: '',
     cssClass: 'hs-custom-form',
   };
 
+  showSpinner: boolean = false;
+
   formContainerId: string = `hubspot-form-container-id-${formContainerUniqueId++}`;
   title: string;
   formConfig;
 
-  constructor(protected ref: NbDialogRef<NgdHubspotFormDialogComponent>) {
+  @ViewChild('formContainer') formContainer: ElementRef<HTMLDivElement>;
+
+  constructor(
+    protected ref: NbDialogRef<NgdHubspotFormDialogComponent>,
+    protected cd: ChangeDetectorRef,
+    @Inject(NB_WINDOW) protected window,
+  ) {}
+
+  ngOnInit() {
+    this.showSpinner = this.couldEnableSpinner();
   }
 
   ngAfterViewInit() {
-    const config = { ...this.defaultConfig, ...this.formConfig };
-    if (!config.target) {
-      config.target = '#' + this.formContainerId;
+    const config = this.createConfig();
+
+    if (this.showSpinner) {
+      this.listenFormInit();
     }
 
     (window as unknown as { hbspt: any }).hbspt.forms.create(config);
   }
 
+  private createConfig(): Object {
+    const config = { ...this.defaultConfig, ...this.formConfig };
+    if (!config.target) {
+      config.target = '#' + this.formContainerId;
+    }
+    return config;
+  }
+
   closeDialog(): void {
     this.ref.close();
+  }
+
+  protected couldEnableSpinner(): boolean {
+    return !!this.window.MutationObserver;
+  }
+
+  protected listenFormInit(): void {
+    const observer = new MutationObserver(() => {
+      this.showSpinner = false;
+      this.cd.markForCheck();
+      observer.disconnect();
+    });
+
+    observer.observe(this.formContainer.nativeElement, { childList: true });
   }
 }
