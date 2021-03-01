@@ -47,7 +47,7 @@ export class NgdForBusinessComponent {
 
   openDialog(): void {
     const context = {
-      title: '',
+      title: 'Nebular for business',
       formConfig: {
         portalId: '2452262',
         formId: '40c56c10-9b41-4d12-95dd-e6c186ac4273',
