@@ -1,6 +1,9 @@
 nb-card {
   width: 25rem;
   margin-bottom: 0;
+  height: 100%;
+  max-height: 100vh;
+  max-height: -webkit-fill-available;
 }
 
 nb-card-header {
