@@ -52,6 +52,19 @@
     }
   }
 
+  .for-business-section {
+    background: nb-theme(background-basic-color-2);
+    padding: 0 1rem;
+
+    & + .features {
+      padding-top: 3rem;
+    }
+  }
+
+  ngd-for-business {
+    margin: 0 auto;
+  }
+
   .features {
     background-color: nb-theme(background-basic-color-2);
     padding-top: 5rem;
@@ -123,6 +136,10 @@
 
     ngd-eva.content-center {
       padding-bottom: 10rem;
+    }
+
+    .for-business-section {
+      padding: 2rem 2rem 0;
     }
   }
 

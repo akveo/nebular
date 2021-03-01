@@ -12,6 +12,10 @@
       </svg>
     </section>
 
+    <section class="for-business-section" [attr.aria-labelledby]="ngdForBusiness.headingId">
+      <ngd-for-business #ngdForBusiness="ngdForBusiness"></ngd-for-business>
+    </section>
+
     <section class="features">
       <div class="content-center">
         <ngd-icon-card *ngFor="let feature of features"

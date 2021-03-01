@@ -7,7 +7,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { NbDialogService } from '@nebular/theme';
 
-import { NgdDownloadDialogComponent } from './download-dialog.component';
+import { NgdHubspotFormDialogComponent } from '../hubspot-form-dialog/hubspot-form-dialog.component';
 
 @Component({
   selector: 'ngd-hero',
@@ -70,6 +70,15 @@ export class NgdHeroComponent {
   ) {}
 
   showDownloadDialog(): void {
-    this.dialogService.open(NgdDownloadDialogComponent);
+    const context = {
+      title: 'Download',
+      formConfig: {
+        portalId: '2452262',
+        formId: '0d8d709d-f487-4dd2-af4f-cdcbe3ac51ae',
+        redirectUrl: 'https://github.com/akveo/nebular',
+      },
+    };
+
+    this.dialogService.open(NgdHubspotFormDialogComponent, { context });
   }
 }

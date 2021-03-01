@@ -54,6 +54,10 @@
       display: none;
     }
 
+    .hs-form-field {
+      margin-top: 1rem;
+    }
+
     .hs-submit-btn {
       @extend [nbButton], .appearance-filled, .status-basic, .size-medium;
     }
