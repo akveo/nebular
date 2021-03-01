@@ -14,7 +14,7 @@ import { NgdHubspotFormDialogComponent } from '../hubspot-form-dialog/hubspot-fo
   template: `
     <div class="left">
       <h2 [attr.id]="headingId" class="heading h1 text-control">Nebular for business</h2>
-      <button (click)="openDialog()" class="submit" nbButton status="control">Submit</button>
+      <button (click)="openDialog()" class="submit" nbButton status="control">Submit your request</button>
     </div>
 
     <div class="right">

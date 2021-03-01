@@ -38,11 +38,10 @@
 
 .submit {
   margin: auto auto 0;
-  width: 10rem;
 
   &.appearance-filled.status-control {
     color: nb-theme(text-primary-color);
-    text-transform: capitalize;
+    text-transform: none;
   }
 }
 
