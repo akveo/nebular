@@ -61,16 +61,16 @@ export class NgdHubspotFormDialogComponent implements OnInit, AfterViewInit {
     (window as unknown as { hbspt: any }).hbspt.forms.create(config);
   }
 
-  private createConfig(): Object {
+  closeDialog(): void {
+    this.ref.close();
+  }
+
+  private createConfig() {
     const config = { ...this.defaultConfig, ...this.formConfig };
     if (!config.target) {
       config.target = '#' + this.formContainerId;
     }
     return config;
-  }
-
-  closeDialog(): void {
-    this.ref.close();
   }
 
   protected couldEnableSpinner(): boolean {
