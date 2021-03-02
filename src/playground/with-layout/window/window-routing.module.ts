@@ -21,7 +21,7 @@ const routes: Route[] = [
     component: WindowShowcaseComponent,
   },
   {
-    path: 'window-backdrop.component',
+    path: 'windows-backdrop.component',
     component: WindowsBackdropComponent,
   },
   {
