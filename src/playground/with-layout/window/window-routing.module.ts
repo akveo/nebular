@@ -9,6 +9,7 @@ import { RouterModule, Route} from '@angular/router';
 import { TemplateWindowComponent } from './template-window.component';
 import { WindowShowcaseComponent } from './window-showcase.component';
 import { WindowsBackdropComponent } from './windows-backdrop.component';
+import { WindowIconComponent } from './window-icon.component';
 
 const routes: Route[] = [
   {
@@ -20,9 +21,13 @@ const routes: Route[] = [
     component: WindowShowcaseComponent,
   },
   {
-    path: 'windows-backdrop.component',
+    path: 'window-backdrop.component',
     component: WindowsBackdropComponent,
   },
+  {
+    path: 'windows-icon.component',
+    component: WindowIconComponent
+  }
 ];
 
 @NgModule({

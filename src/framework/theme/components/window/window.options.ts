@@ -3,6 +3,7 @@ import { TemplateRef, InjectionToken, ViewContainerRef } from '@angular/core';
 // tslint:disable-next-line
 import { ComponentType } from '@angular/cdk/overlay';
 import { NbComponentType } from '../cdk/overlay/mapping';
+import { NbIconConfig } from '../icon/icon.component';
 
 export enum NbWindowState {
   MINIMIZED = 'minimized',
@@ -66,6 +67,11 @@ export class NbWindowConfig {
    * content will be rendered.
    */
   viewContainerRef: ViewContainerRef = null;
+
+  /**
+   * Icon to be applied on the title
+   */
+  icon?: NbIconConfig
 
   constructor(...configs: Partial<NbWindowConfig>[]) {
     Object.assign(this, ...configs);
