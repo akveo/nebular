@@ -49,7 +49,7 @@
   <nb-icon class="menu-icon" [config]="menuItem.icon" *ngIf="menuItem.icon"></nb-icon>
   <span class="menu-title">{{ menuItem.title }}</span>
   <ng-container *ngIf="badge" [ngTemplateOutlet]="badgeTemplate"></ng-container>
-  <nb-icon class="expand-state" [icon]="getExpandStateIcon()" pack="nebular-essentials"></nb-icon>
+  <nb-icon *ngIf="hasVisibleChildren()" class="expand-state" [icon]="getExpandStateIcon()" pack="nebular-essentials"></nb-icon>
 </a>
 <ul *ngIf="menuItem.children"
     [class.collapsed]="!(menuItem.children && menuItem.expanded)"

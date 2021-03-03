@@ -191,6 +191,18 @@ describe('NbMenuItem', () => {
     expect(parentItem.querySelector('ul.menu-items')).not.toBeNull();
   });
 
+  it('should not render the expand icon when all the children are hidden', () => {
+    const { fixture } = createSingleMenuComponent([
+      {
+        title: 'Parent item',
+        expanded: true,
+        children: [{ title: 'Hidden child item', hidden: true }],
+      },
+    ]);
+    const expandIconWrapper = fixture.nativeElement.querySelector('.expand-state');
+    expect(expandIconWrapper).toBeNull();
+  });
+
   it('should expand child menu items', () => {
     const { fixture } = createSingleMenuComponent([
       { title: 'Parent item', expanded: true, children: [{  title: 'Child item' }] },
