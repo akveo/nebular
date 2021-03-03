@@ -1456,11 +1456,11 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         name: 'Windows Backdrop',
       },
       {
-        path: "window-icon.component",
-        link: "/window/windows-icon.component",
-        component: "WindowIconComponent",
-        name: "Window with nbIcon"
-      }
+        path: 'window-icon.component',
+        link: '/window/windows-icon.component',
+        component: 'WindowIconComponent',
+        name: 'Window with nbIcon',
+      },
     ],
   },
   {

@@ -26,8 +26,8 @@ const routes: Route[] = [
   },
   {
     path: 'windows-icon.component',
-    component: WindowIconComponent
-  }
+    component: WindowIconComponent,
+  },
 ];
 
 @NgModule({

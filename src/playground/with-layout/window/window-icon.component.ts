@@ -14,10 +14,10 @@ export class WindowIconComponent {
         this.windowService.open(FormComponent, {
             title: `Window`,
             icon: {
-                icon: "star",
-                pack: "eva",
-                status: "success"
-            }
+                icon: 'star',
+                pack: 'eva',
+                status: 'success',
+            },
         });
     }
 }

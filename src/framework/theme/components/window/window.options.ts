@@ -71,7 +71,7 @@ export class NbWindowConfig {
   /**
    * Icon to be applied on the title
    */
-  icon?: NbIconConfig
+  icon?: NbIconConfig = null;
 
   constructor(...configs: Partial<NbWindowConfig>[]) {
     Object.assign(this, ...configs);
