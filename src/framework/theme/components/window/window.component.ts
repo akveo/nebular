@@ -26,7 +26,7 @@ import { NbWindowRef } from './window-ref';
       <nb-card-header>
         <div cdkFocusInitial class="title" tabindex="-1">
           <nb-icon *ngIf="config.icon" [icon]="config.icon.icon" [options]="config.icon.options" [pack]="config.icon.pack" [status]="config.icon.status"></nb-icon>
-          {{ config.title }}
+          <span id="title">{{ config.title }}</span>
         </div>
 
         <div class="buttons">
