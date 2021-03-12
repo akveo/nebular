@@ -1455,6 +1455,12 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         component: 'WindowsBackdropComponent',
         name: 'Windows Backdrop',
       },
+      {
+        path: 'windows-result.component',
+        link: '/window/windows-result.component',
+        component: 'WindowsResultComponent',
+        name: 'Windows Result',
+      },
     ],
   },
   {
