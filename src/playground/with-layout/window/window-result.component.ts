@@ -1,6 +1,5 @@
-import { Component }                 from '@angular/core';
-import { NbWindowService }           from '@nebular/theme';
-import { FormComponent }             from './components/form.component';
+import { Component } from '@angular/core';
+import { NbWindowService } from '@nebular/theme';
 import { WindowNamePromptComponent } from './components/name-prompt-window.component';
 
 @Component({
