@@ -180,6 +180,10 @@ export class NbRadioGroupComponent implements AfterContentInit, OnDestroy, Contr
     this.value = value;
   }
 
+  setDisabledState(isDisabled: boolean): void {
+    this.disabled = isDisabled;
+  }
+
   protected updateAndSubscribeToRadios() {
     this.updateValueFromCheckedOption();
     this.updateNames();
