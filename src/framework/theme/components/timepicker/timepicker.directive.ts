@@ -176,6 +176,13 @@ export class NbTimePickerDirective<D> implements AfterViewInit, ControlValueAcce
    * */
   @Input() overlayOffset = 8;
 
+
+  /**
+   * String representation of latest selected date.
+   * Updated when value is updated programmatically (writeValue), via timepicker (subscribeOnApplyClick)
+   * or via input field (handleInputChange)
+   * @docs-private
+   */
   protected lastInputValue: string;
   /**
    * Positioning strategy used by overlay.
@@ -280,7 +287,7 @@ export class NbTimePickerDirective<D> implements AfterViewInit, ControlValueAcce
 
   setupTimepicker() {
     if (this.dateService.getId() === 'native' && isDevMode()) {
-      console.warn('Date.parse noes not support parsing time with custom format.' +
+      console.warn('Date.parse does not support parsing time with custom format.' +
         ' See details here https://akveo.github.io/nebular/docs/components/datepicker/overview#native-parse-issue')
     }
     this.timepicker.setHost(this.hostRef);
@@ -403,7 +410,10 @@ export class NbTimePickerDirective<D> implements AfterViewInit, ControlValueAcce
   protected updateValue(value: D) {
     if (value) {
       this.timepicker.date = value;
-      this.inputValue = this.dateService.format(value, this.timepicker.timeFormat).toUpperCase();
+
+      const timeString = this.dateService.format(value, this.timepicker.timeFormat).toUpperCase();
+      this.inputValue = timeString;
+      this.lastInputValue = timeString;
     }
   }
 
