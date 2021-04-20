@@ -3,6 +3,7 @@ import {
   Component,
   ComponentFactoryResolver,
   Inject,
+  Injector,
   Input,
   OnInit,
   Optional,
@@ -88,10 +89,11 @@ export class NbDateTimePickerComponent<D> extends NbBasePickerComponent<D, D, Nb
               triggerStrategyBuilder: NbTriggerStrategyBuilderService,
               overlay: NbOverlayService,
               cfr: ComponentFactoryResolver,
+              injector: Injector,
               dateService: NbDateService<D>,
               @Optional() @Inject(NB_DATE_SERVICE_OPTIONS) dateServiceOptions,
               protected calendarWithTimeModelService: NbCalendarTimeModelService<D>) {
-    super(document, positionBuilder, triggerStrategyBuilder, overlay, cfr, dateService, dateServiceOptions);
+    super(document, positionBuilder, triggerStrategyBuilder, overlay, cfr, injector, dateService, dateServiceOptions);
   }
 
   ngOnInit() {

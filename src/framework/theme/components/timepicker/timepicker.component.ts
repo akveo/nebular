@@ -6,7 +6,6 @@ import {
   EventEmitter,
   Inject,
   Input,
-  LOCALE_ID,
   OnChanges,
   OnInit,
   Output,
@@ -21,7 +20,13 @@ import { NbPlatform } from '../cdk/platform/platform-service';
 import { NbDateService, NbDayPeriod } from '../calendar-kit/services/date.service';
 import { range, rangeFromTo } from '../calendar-kit/helpers';
 import { NbCalendarTimeModelService } from '../calendar-kit/services/calendar-time-model.service';
-import { NB_TIME_PICKER_CONFIG, NbSelectedTimePayload, NbTimePickerConfig } from './model';
+import {
+  NB_TIME_PICKER_CONFIG,
+  NB_TIME_PICKER_LOCALIZATION,
+  NbSelectedTimePayload,
+  NbTimePickerConfig,
+  NbTimepickerLocalization,
+} from './model';
 
 interface NbTimePartOption {
   value: number,
@@ -146,10 +151,10 @@ export class NbTimePickerComponent<D> implements OnChanges, OnInit {
    */
   @Input() showFooter: boolean = true;
   @Input() applyButtonText: string;
-  @Input() hoursText = 'Hr';
-  @Input() minutesText = 'Min';
-  @Input() secondsText = 'Sec';
-  @Input() ampmText = 'Am/Pm';
+  @Input() hoursText = this.tokens.hoursText;
+  @Input() minutesText = this.tokens.minutesText;
+  @Input() secondsText = this.tokens.secondsText;
+  @Input() ampmText = this.tokens.ampmText;
   @Input() currentTimeButtonText: string;
 
   /**
@@ -159,8 +164,8 @@ export class NbTimePickerComponent<D> implements OnChanges, OnInit {
   @ViewChild(NbPortalDirective, {static: true}) portal: NbPortalDirective;
 
   constructor(@Inject(NB_TIME_PICKER_CONFIG) protected config: NbTimePickerConfig,
+              @Inject(NB_TIME_PICKER_LOCALIZATION) protected tokens: NbTimepickerLocalization,
               protected platformService: NbPlatform,
-              @Inject(LOCALE_ID) locale: string,
               public cd: ChangeDetectorRef,
               protected calendarTimeModelService: NbCalendarTimeModelService<D>,
               protected dateService: NbDateService<D>) {
