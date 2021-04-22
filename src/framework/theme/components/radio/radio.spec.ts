@@ -16,6 +16,7 @@ import {
   ViewChild,
   ViewChildren,
 } from '@angular/core';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import createSpy = jasmine.createSpy;
 
@@ -69,6 +70,19 @@ export class NbTwoRadioGroupsComponent {
   @ViewChildren(NbRadioComponent, { read: ElementRef }) radios: QueryList<ElementRef>;
 }
 
+@Component({
+  template: `
+    <nb-radio-group name="1" [formControl]="control">
+      <nb-radio value="1"></nb-radio>
+      <nb-radio value="2"></nb-radio>
+    </nb-radio-group>
+  `,
+})
+export class NbFormsIntegrationComponent {
+  @ViewChild(NbRadioGroupComponent) radioGroup: NbRadioGroupComponent;
+  control = new FormControl({ value: '1', disabled: true})
+}
+
 describe('radio', () => {
   let fixture: ComponentFixture<NbRadioTestComponent>;
   let comp: NbRadioTestComponent;
@@ -106,8 +120,8 @@ describe('NbRadioGroupComponent', () => {
 
   beforeEach(fakeAsync(() => {
     TestBed.configureTestingModule({
-      imports: [ NbThemeModule.forRoot(), NbRadioModule ],
-      declarations: [ NbRadioWithDynamicValuesTestComponent, NbTwoRadioGroupsComponent ],
+      imports: [ NbThemeModule.forRoot(), NbRadioModule, ReactiveFormsModule ],
+      declarations: [ NbRadioWithDynamicValuesTestComponent, NbTwoRadioGroupsComponent, NbFormsIntegrationComponent ],
       providers: [ { provide: NB_DOCUMENT, useValue: document } ],
     });
 
@@ -288,4 +302,14 @@ describe('NbRadioGroupComponent', () => {
     expect(secondGroup.radios.first.checked).toEqual(true);
     expect(radioFromSecondGroup.checked).toEqual(true);
   });
+
+  it('should disable radio group if form control is disabled', fakeAsync(() => {
+    const radioFixture = TestBed.createComponent(NbFormsIntegrationComponent);
+    radioFixture.detectChanges();
+
+    const { radioGroup } = radioFixture.componentInstance;
+    tick();
+
+    expect(radioGroup.radios.first.disabled).toEqual(true);
+  }));
 });
