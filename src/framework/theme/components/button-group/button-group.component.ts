@@ -10,14 +10,16 @@ import {
   ChangeDetectorRef,
   Component,
   ContentChildren,
+  EventEmitter,
   HostBinding,
   Input,
   OnChanges,
+  Output,
   QueryList,
   SimpleChanges,
 } from '@angular/core';
 import { from, merge, Observable, Subject } from 'rxjs';
-import { filter, switchMap, takeUntil } from 'rxjs/operators';
+import { debounceTime, filter, switchMap, takeUntil } from 'rxjs/operators';
 
 import { NbStatusService } from '../../services/status.service';
 import { convertToBoolProperty, NbBooleanInput } from '../helpers';
@@ -54,6 +56,10 @@ import { NbButtonToggleAppearance, NbButtonToggleChange, NbButtonToggleDirective
  * component allows only one pressed button toggle at a time (similar to the radio group). To be able to keep multiple
  * toggles pressed, you need to add `multiple` attributes to the `<nb-button-toggle>`.
  * @stacked-example(Button Group Multiple, button-group/button-group-multiple.component)
+ *
+ * You can use `[value]` property on `[nbButtonToggle]` to assign values to button
+ * and listen to current state of button group via `(valueChange)` output.
+ * @stacked-example(Button Group Value Change, button-group/button-group-value-change.component)
  *
  * To disable a group of buttons, add a `disabled` attribute to the `<nb-button-group>`.
  * @stacked-example(Button Group Disabled, button-group/button-group-disabled.component)
@@ -194,6 +200,11 @@ export class NbButtonGroupComponent implements OnChanges, AfterContentInit {
   }
   static ngAcceptInputType_ghost: NbBooleanInput;
 
+  /**
+   * Emits when active toggle change
+   */
+  @Output() valueChange = new EventEmitter<any[]>()
+
   @HostBinding('attr.role') role = 'group';
 
   @HostBinding('class')
@@ -260,6 +271,15 @@ export class NbButtonGroupComponent implements OnChanges, AfterContentInit {
           .filter((button: NbButtonToggleDirective) => button !== source)
           .forEach((button: NbButtonToggleDirective) => button._updatePressed(false));
       });
+
+    merge(...buttonsPressedChange$)
+      .pipe(
+        debounceTime(0),
+        takeUntil(merge(this.buttonsChange$, this.destroy$)),
+      )
+      .subscribe(() => {
+        this.emitCurrentValue(toggleButtons);
+      })
   }
 
   protected syncButtonsProperties(buttons: NbButton[]): void {
@@ -272,5 +292,9 @@ export class NbButtonGroupComponent implements OnChanges, AfterContentInit {
         disabled: this.disabled,
       });
     });
+  }
+
+  private emitCurrentValue(toggleButtons: NbButtonToggleDirective[]): void {
+    this.valueChange.emit(toggleButtons.filter(btn => btn.pressed).map(btn => btn.value));
   }
 }

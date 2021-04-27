@@ -292,6 +292,12 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         component: 'ButtonGroupStatusesComponent',
         name: 'Button Group Statuses',
       },
+      {
+        path: 'button-group-value-change.component',
+        link: '/button-group/button-group-value-change.component',
+        component: 'ButtonGroupValueChangeComponent',
+        name: 'Button Group Value Change',
+      },
     ],
   },
   {

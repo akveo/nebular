@@ -1,0 +1,29 @@
+<nb-card>
+  <nb-card-header>Single selection</nb-card-header>
+  <nb-card-body>
+    <nb-button-group (valueChange)="onValueChangeSingle($event)">
+      <button nbButtonToggle [value]="1">One</button>
+      <button nbButtonToggle [value]="2">Two</button>
+      <button nbButtonToggle [value]="3">Three</button>
+    </nb-button-group>
+
+    <p class="text">
+      {{ logSingle }}
+    </p>
+  </nb-card-body>
+</nb-card>
+<nb-card>
+  <nb-card-header>Multiple selection</nb-card-header>
+  <nb-card-body>
+    <nb-button-group multiple (valueChange)="onValueChangeMultiple($event)">
+      <button nbButtonToggle [value]="1">One</button>
+      <button nbButtonToggle [value]="2">Two</button>
+      <button nbButtonToggle [value]="3">Three</button>
+    </nb-button-group>
+
+    <p class="text">
+      {{ logMultiple }}
+    </p>
+  </nb-card-body>
+</nb-card>
+
