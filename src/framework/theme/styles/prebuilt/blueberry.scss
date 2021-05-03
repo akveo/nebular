@@ -1,0 +1,7 @@
+@import '../all';
+
+$nb-enabled-themes: (blueberry);
+
+@include nb-install() {
+  @include nb-theme-global();
+};

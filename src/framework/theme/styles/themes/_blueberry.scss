@@ -1,0 +1,163 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
+@import '../core/functions';
+@import '../core/mixins';
+@import 'default';
+
+$theme: (
+
+  color-primary-100: #cff7fe,
+  color-primary-200: #9feafe,
+  color-primary-300: #70d7fe,
+  color-primary-400: #4cc3fd,
+  color-primary-500: #11a1fd,
+  color-primary-600: #0c7dd9,
+  color-primary-700: #085db6,
+  color-primary-800: #054292,
+  color-primary-900: #032f79,
+
+  color-primary-transparent-100: rgba(17, 161, 253, 0.08),
+  color-primary-transparent-200: rgba(17, 161, 253, 0.16),
+  color-primary-transparent-300: rgba(17, 161, 253, 0.24),
+  color-primary-transparent-400: rgba(17, 161, 253, 0.32),
+  color-primary-transparent-500: rgba(17, 161, 253, 0.4),
+  color-primary-transparent-600: rgba(17, 161, 253, 0.48),
+
+  color-success-100: #cbfbd7,
+  color-success-200: #98f8ba,
+  color-success-300: #63eca1,
+  color-success-400: #3cd993,
+  color-success-500: #07c180,
+  color-success-600: #05a57d,
+  color-success-700: #038a76,
+  color-success-800: #026f6a,
+  color-success-900: #01585c,
+
+  color-success-transparent-100: rgba(7, 193, 128, 0.08),
+  color-success-transparent-200: rgba(7, 193, 128, 0.16),
+  color-success-transparent-300: rgba(7, 193, 128, 0.24),
+  color-success-transparent-400: rgba(7, 193, 128, 0.32),
+  color-success-transparent-500: rgba(7, 193, 128, 0.4),
+  color-success-transparent-600: rgba(7, 193, 128, 0.48),
+
+  color-info-100: #dee6fe,
+  color-info-200: #bdccfe,
+  color-info-300: #9cb0fc,
+  color-info-400: #8299fa,
+  color-info-500: #5a75f8,
+  color-info-600: #4158d5,
+  color-info-700: #2d3fb2,
+  color-info-800: #1c2a8f,
+  color-info-900: #111b77,
+
+  color-info-transparent-100: rgba(90, 117, 248, 0.08),
+  color-info-transparent-200: rgba(90, 117, 248, 0.16),
+  color-info-transparent-300: rgba(90, 117, 248, 0.24),
+  color-info-transparent-400: rgba(90, 117, 248, 0.32),
+  color-info-transparent-500: rgba(90, 117, 248, 0.4),
+  color-info-transparent-600: rgba(90, 117, 248, 0.48),
+
+  color-warning-100: #fff2d5,
+  color-warning-200: #ffe2ac,
+  color-warning-300: #ffce83,
+  color-warning-400: #ffba64,
+  color-warning-500: #ff9931,
+  color-warning-600: #db7723,
+  color-warning-700: #b75918,
+  color-warning-800: #933e0f,
+  color-warning-900: #7a2c09,
+
+  color-warning-transparent-100: rgba(255, 153, 49, 0.08),
+  color-warning-transparent-200: rgba(255, 153, 49, 0.16),
+  color-warning-transparent-300: rgba(255, 153, 49, 0.24),
+  color-warning-transparent-400: rgba(255, 153, 49, 0.32),
+  color-warning-transparent-500: rgba(255, 153, 49, 0.4),
+  color-warning-transparent-600: rgba(255, 153, 49, 0.48),
+
+  color-danger-100: #fee0d4,
+  color-danger-200: #fdb9aa,
+  color-danger-300: #fb8a7f,
+  color-danger-400: #f85f5e,
+  color-danger-500: #f42b3d,
+  color-danger-600: #d11f3f,
+  color-danger-700: #af153f,
+  color-danger-800: #8d0d3c,
+  color-danger-900: #750839,
+
+  color-danger-transparent-100: rgba(244, 43, 61, 0.08),
+  color-danger-transparent-200: rgba(244, 43, 61, 0.16),
+  color-danger-transparent-300: rgba(244, 43, 61, 0.24),
+  color-danger-transparent-400: rgba(244, 43, 61, 0.32),
+  color-danger-transparent-500: rgba(244, 43, 61, 0.4),
+  color-danger-transparent-600: rgba(244, 43, 61, 0.48),
+
+  color-basic-100: #ffffff,
+  color-basic-200: #f3f7f9,
+  color-basic-300: #e3eef6,
+  color-basic-400: #cbdfea,
+  color-basic-500: #a6c1d3,
+  color-basic-600: #7d9eb5,
+  color-basic-700: #486f88,
+  color-basic-800: #223345,
+  color-basic-900: #1a2b38,
+  color-basic-1000: #151a30,
+  color-basic-1100: #101426,
+
+  color-basic-transparent-100: rgba(125, 158, 181, 0.08),
+  color-basic-transparent-200: rgba(125, 158, 181, 0.16),
+  color-basic-transparent-300: rgba(125, 158, 181, 0.24),
+  color-basic-transparent-400: rgba(125, 158, 181, 0.32),
+  color-basic-transparent-500: rgba(125, 158, 181, 0.4),
+  color-basic-transparent-600: rgba(125, 158, 181, 0.48),
+
+  color-basic-alternative-100: #1a2b38,
+  color-basic-alternative-transparent-100: rgba(255, 255, 255, 0.08),
+  color-basic-alternative-transparent-200: rgba(255, 255, 255, 0.16),
+  color-basic-alternative-transparent-300: rgba(255, 255, 255, 0.24),
+  color-basic-alternative-transparent-400: rgba(255, 255, 255, 0.32),
+  color-basic-alternative-transparent-500: rgba(255, 255, 255, 0.4),
+  color-basic-alternative-transparent-600: rgba(255, 255, 255, 0.48),
+
+  /* Supporting variables */
+
+  sidebar-background-color: color-primary-900,
+  sidebar-text-color: color-basic-300,
+
+  menu-text-color: color-basic-500,
+  menu-group-text-color: color-basic-500,
+  menu-background-color: color-primary-900,
+
+  menu-item-active-text-color: color-basic-100,
+  menu-item-icon-active-color: color-basic-100,
+  menu-item-icon-color: color-basic-500,
+  menu-item-hover-text-color: color-basic-100,
+  menu-item-active-background-color: color-primary-800,
+  menu-item-hover-background-color: color-primary-800,
+  menu-item-divider-width: 0,
+
+  menu-submenu-background-color: color-primary-900,
+  menu-submenu-text-color: color-basic-500,
+  menu-submenu-item-border-width: 0,
+  menu-submenu-item-hover-text-color: color-basic-100,
+  menu-submenu-item-active-background-color: color-primary-800,
+  menu-submenu-item-active-text-color: color-basic-100,
+  menu-submenu-item-hover-background-color: color-primary-800,
+
+  context-menu-inner-background-color: color-basic-100,
+  context-menu-border-width: 0.0625rem,
+
+  shadow: 0 0.3125rem 1.25rem 0 rgba(176, 195, 211, 0.16),
+  card-shadow: 0 0.3125rem 1.25rem 0 rgba(176, 195, 211, 0.16),
+  card-border-width: 0,
+
+  tabs-selected: color-primary-500,
+  tabs-selected-second-color: color-primary-500,
+
+  popover-border-width: 0.0625rem,
+);
+
+$nb-themes: nb-register-theme($theme, blueberry, default);

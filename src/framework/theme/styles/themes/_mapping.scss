@@ -340,6 +340,7 @@ $eva-mapping: (
   popover-padding: 0.75rem 1rem,
 
   context-menu-background-color: background-basic-color-1,
+  context-menu-inner-background-color: background-basic-color-1,
   context-menu-border-color: transparent,
   context-menu-border-style: solid,
   context-menu-border-width: 0,
@@ -2642,7 +2643,7 @@ $eva-mapping: (
   tag-filled-basic-active-border-color: color-basic-focus-border,
   tag-filled-basic-hover-background-color: color-basic-hover,
   tag-filled-basic-hover-border-color: color-basic-hover-border,
-  tag-filled-basic-selected-background-color: color-basic-actove,
+  tag-filled-basic-selected-background-color: color-basic-active,
   tag-filled-basic-selected-border-color: color-basic-active-border,
 
   tag-filled-primary-background-color: color-primary-default,
