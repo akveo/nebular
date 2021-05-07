@@ -226,7 +226,7 @@ describe('NbSidebarComponent', () => {
       expect(sidebarComponent.state).toEqual('expanded');
     });
 
-    it('Should return default sidebar state getSidebarState', (done: DoneFn) => {
+    it('Should return default sidebar state', (done: DoneFn) => {
       const sidebarService: NbSidebarService = TestBed.inject(NbSidebarService);
       fixture.detectChanges();
       sidebarService.getSidebarState().subscribe((state: NbSidebarState) => {
@@ -245,7 +245,7 @@ describe('NbSidebarComponent', () => {
       });
     });
 
-    it('Should return default sidebar responsive getSidebarResponsiveState', (done: DoneFn) => {
+    it('Should return default sidebar responsive state', (done: DoneFn) => {
       const sidebarService: NbSidebarService = TestBed.inject(NbSidebarService);
       fixture.detectChanges();
       sidebarService.getSidebarResponsiveState().subscribe((state: NbSidebarResponsiveState) => {
