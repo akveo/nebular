@@ -99,7 +99,7 @@ export class NbSidebarService {
   }
 
   /**
-   * Returns sidebar state once, if you need updated state please subscribe again
+   * Returns sidebar state observable which emits once
    * @param {string} tag If you have multiple sidebars on the page, mark them with `tag` input property and pass it here
    * to specify which sidebar state you need
    */
@@ -110,7 +110,7 @@ export class NbSidebarService {
   }
 
   /**
-   * Returns sidebar responsive state once, if you need updated state please subscribe again
+   * Returns sidebar state observable which emits once
    * @param {string} tag If you have multiple sidebars on the page, mark them with `tag` input property and pass it here
    * to specify which sidebar responsive state you need
    */
