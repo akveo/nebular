@@ -1,0 +1,90 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
+@import '../../styles/themes';
+
+:host {
+  display: flex;
+  flex-direction: column;
+  max-width: 55.625rem;
+  overflow: hidden;
+
+  background: nb-theme(background-basic-color-1);
+  border: 1px solid nb-theme(border-basic-color-3);
+  border-radius: nb-theme(border-radius);
+}
+
+.left,
+.right {
+  padding: 2rem;
+}
+
+.left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  $grad-start: nb-theme(color-primary-500);
+  $grad-end: nb-theme(color-primary-400);
+  background: linear-gradient(86.61deg, $grad-start 0.85%, $grad-end 99.82%);
+}
+
+.heading {
+  text-align: center;
+}
+
+.submit {
+  margin: auto auto 0;
+
+  &.appearance-filled.status-control {
+    color: nb-theme(text-primary-color);
+    text-transform: none;
+  }
+}
+
+.offerings-title {
+  color: rgba(nb-theme(color-fg-heading), 0.5);
+}
+
+.offerings {
+  margin: 1.5rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.offering {
+  margin-bottom: 0.5rem;
+
+  &::before {
+    content: '•';
+    margin-right: 0.15rem;
+  }
+}
+
+@include media-breakpoint-up(md) {
+  :host {
+    flex-direction: row;
+  }
+
+  .left {
+    max-width: 21rem;
+    padding: 3rem;
+  }
+
+  .right {
+    padding: 3.625rem 2.25rem;
+  }
+
+  .offerings-title-second-line {
+    display: block;
+  }
+}
+
+@include media-breakpoint-up(lg) {
+  .offerings {
+    columns: 2;
+  }
+}
