@@ -7,6 +7,7 @@
 @import '../core/functions';
 @import '../core/mixins';
 @import 'default';
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
 
 $theme: (
 
@@ -124,28 +125,32 @@ $theme: (
 
   /* Supporting variables */
 
-  sidebar-background-color: color-primary-900,
-  sidebar-text-color: color-basic-300,
+  sidebar-background-color: #0c2556,
+  sidebar-text-color: rgba(255, 255, 255, 0.6),
+  sidebar-width: 16.5rem,
 
-  menu-text-color: color-basic-500,
-  menu-group-text-color: color-basic-500,
-  menu-background-color: color-primary-900,
+  menu-background-color: #0c2556,
+  menu-text-color: rgba(255, 255, 255, 0.6),
+  menu-group-text-color: rgba(255, 255, 255, 0.6),
+  menu-text-font-weight: 600,
 
   menu-item-active-text-color: color-basic-100,
   menu-item-icon-active-color: color-basic-100,
-  menu-item-icon-color: color-basic-500,
+  menu-item-icon-color: #6d8eaa,
   menu-item-hover-text-color: color-basic-100,
-  menu-item-active-background-color: color-primary-800,
-  menu-item-hover-background-color: color-primary-800,
+  menu-item-hover-background-color: #0f2e69,
   menu-item-divider-width: 0,
+  menu-item-padding: 0.5rem 1rem,
+  menu-submenu-padding: 0 1.5rem,
+  menu-item-icon-margin: 0 0.5rem 0 0,
+  menu-item-icon-width: 1rem,
 
-  menu-submenu-background-color: color-primary-900,
-  menu-submenu-text-color: color-basic-500,
+  menu-submenu-background-color: #0c2556,
+  menu-submenu-text-color: rgba(255, 255, 255, 0.6),
   menu-submenu-item-border-width: 0,
   menu-submenu-item-hover-text-color: color-basic-100,
-  menu-submenu-item-active-background-color: color-primary-800,
   menu-submenu-item-active-text-color: color-basic-100,
-  menu-submenu-item-hover-background-color: color-primary-800,
+  menu-submenu-item-hover-background-color: #0f2e69,
 
   context-menu-inner-background-color: color-basic-100,
   context-menu-border-width: 0.0625rem,
@@ -157,6 +162,10 @@ $theme: (
   tabs-selected: color-primary-500,
   tabs-selected-second-color: color-primary-500,
 
+  font-family-primary: unquote('Inter, sans-serif'),
+  font-family-secondary: font-family-primary,
+
+  layout-background-color: color-basic-200,
   popover-border-width: 0.0625rem,
 );
 

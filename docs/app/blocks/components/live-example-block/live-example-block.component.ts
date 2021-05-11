@@ -51,6 +51,11 @@ export class NgdLiveExampleBlockComponent implements OnInit, AfterViewInit, OnDe
     return this.currentTheme === 'dark';
   }
 
+  @HostBinding('class.theme-blueberry')
+  private get isBlueberry() {
+    return this.currentTheme === 'blueberry';
+  }
+
   iframeHeight = 0;
 
   private destroy$ = new Subject<void>();
@@ -60,6 +65,7 @@ export class NgdLiveExampleBlockComponent implements OnInit, AfterViewInit, OnDe
     { label: 'Dark', value: 'dark' },
     { label: 'Cosmic', value: 'cosmic' },
     { label: 'Corporate', value: 'corporate' },
+    { label: 'Blueberry', value: 'blueberry' },
   ];
 
   currentTheme: string = 'default';

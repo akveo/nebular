@@ -20,6 +20,7 @@ export * from './services/js-themes/corporate.theme';
 export * from './services/js-themes/cosmic.theme';
 export * from './services/js-themes/default.theme';
 export * from './services/js-themes/dark.theme';
+export * from './services/js-themes/blueberry.theme';
 export * from './services/js-themes/theme.options';
 export * from './components/component-size';
 export * from './components/component-shape';
