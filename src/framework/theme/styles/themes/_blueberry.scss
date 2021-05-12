@@ -9,6 +9,9 @@
 @import 'default';
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
 
+$menu-background-color: #0c2556;
+$menu-hover-background-color: #0f2e69;
+
 $theme: (
 
   color-primary-100: #cff7fe,
@@ -125,11 +128,11 @@ $theme: (
 
   /* Supporting variables */
 
-  sidebar-background-color: #0c2556,
+  sidebar-background-color: $menu-background-color,
   sidebar-text-color: rgba(255, 255, 255, 0.6),
   sidebar-width: 16.5rem,
 
-  menu-background-color: #0c2556,
+  menu-background-color: $menu-background-color,
   menu-text-color: rgba(255, 255, 255, 0.6),
   menu-group-text-color: rgba(255, 255, 255, 0.6),
   menu-text-font-weight: 600,
@@ -138,21 +141,22 @@ $theme: (
   menu-item-icon-active-color: color-basic-100,
   menu-item-icon-color: #6d8eaa,
   menu-item-hover-text-color: color-basic-100,
-  menu-item-hover-background-color: #0f2e69,
+  menu-item-hover-background-color: $menu-hover-background-color,
   menu-item-divider-width: 0,
   menu-item-padding: 0.5rem 1rem,
   menu-submenu-padding: 0 1.5rem,
   menu-item-icon-margin: 0 0.5rem 0 0,
   menu-item-icon-width: 1rem,
 
-  menu-submenu-background-color: #0c2556,
+  menu-submenu-background-color: $menu-background-color,
   menu-submenu-text-color: rgba(255, 255, 255, 0.6),
   menu-submenu-item-border-width: 0,
   menu-submenu-item-hover-text-color: color-basic-100,
   menu-submenu-item-active-text-color: color-basic-100,
-  menu-submenu-item-hover-background-color: #0f2e69,
+  menu-submenu-item-hover-background-color: $menu-hover-background-color,
 
-  context-menu-inner-background-color: color-basic-100,
+  context-menu-background-color: $menu-background-color,
+  context-menu-inner-background-color: $menu-hover-background-color,
   context-menu-border-width: 0.0625rem,
 
   shadow: 0 0.3125rem 1.25rem 0 rgba(176, 195, 211, 0.16),
