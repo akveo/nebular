@@ -184,6 +184,7 @@ export class NbTagListComponent implements OnInit, AfterContentInit, AfterViewIn
   ngAfterContentInit() {
     this.initKeyManager();
     this.setAutocompleteCustomHost();
+    this.listenNoTags();
   }
 
   ngAfterViewInit() {
@@ -194,7 +195,6 @@ export class NbTagListComponent implements OnInit, AfterContentInit, AfterViewIn
     this.listenTagRemove();
     this.listenTagDestroy();
     this.listenActiveTagChange();
-    this.listenNoTags();
 
     // TODO: #2254
     this.zone.runOutsideAngular(() => setTimeout(() => {
