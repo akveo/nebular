@@ -341,6 +341,7 @@ $eva-mapping: (
 
   context-menu-background-color: background-basic-color-1,
   context-menu-inner-background-color: background-basic-color-1,
+  context-menu-item-hover-background-color: transparent,
   context-menu-border-color: transparent,
   context-menu-border-style: solid,
   context-menu-border-width: 0,
@@ -349,6 +350,10 @@ $eva-mapping: (
   context-menu-min-width: 10rem,
   context-menu-max-width: 15rem,
   context-menu-shadow: shadow,
+  context-menu-text-color: text-basic-color,
+  context-menu-item-icon-color: text-basic-color,
+  context-menu-item-hover-text-color: text-primary-color,
+  context-menu-item-icon-hover-color: text-primary-color,
 
   actions-background-color: transparent,
   actions-divider-color: divider-color,

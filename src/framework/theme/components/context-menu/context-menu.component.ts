@@ -15,6 +15,8 @@ import { NbPositionedContainerComponent, NbRenderableContainer } from '../cdk/ov
  * @styles
  *
  * context-menu-background-color:
+ * context-menu-inner-background-color:
+ * context-menu-item-hover-background-color:
  * context-menu-border-color:
  * context-menu-border-style:
  * context-menu-border-width:
@@ -23,6 +25,10 @@ import { NbPositionedContainerComponent, NbRenderableContainer } from '../cdk/ov
  * context-menu-min-width:
  * context-menu-max-width:
  * context-menu-shadow:
+ * context-menu-text-color:
+ * context-menu-item-icon-color:
+ * context-menu-item-hover-text-color:
+ * context-menu-item-icon-hover-color:
  * */
 @Component({
   selector: 'nb-context-menu',

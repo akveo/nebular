@@ -155,9 +155,14 @@ $theme: (
   menu-submenu-item-active-text-color: color-basic-100,
   menu-submenu-item-hover-background-color: $menu-hover-background-color,
 
-  context-menu-background-color: $menu-background-color,
-  context-menu-inner-background-color: $menu-hover-background-color,
-  context-menu-border-width: 0.0625rem,
+  context-menu-background-color: color-basic-100,
+  context-menu-inner-background-color: color-basic-100,
+  context-menu-border-width: 0,
+  context-menu-text-color: color-basic-800,
+  context-menu-item-hover-background-color: color-basic-300,
+  context-menu-item-icon-color: context-menu-text-color,
+  context-menu-item-hover-text-color: context-menu-text-color,
+  context-menu-item-icon-hover-color: context-menu-text-color,
 
   shadow: 0 0.3125rem 1.25rem 0 rgba(176, 195, 211, 0.16),
   card-shadow: 0 0.3125rem 1.25rem 0 rgba(176, 195, 211, 0.16),
