@@ -70,6 +70,7 @@ import { NbComponentOrCustomStatus } from '../component-status';
              (mouseenter)="inputHover = true"
              (mouseleave)="inputHover = false"
              [(ngModel)]="message"
+             (ngModelChange)="onModelChanged($event)"
              [class.with-button]="showButton"
              type="text"
              placeholder="{{ fileOver ? dropFilePlaceholder : messagePlaceholder }}"
@@ -142,6 +143,12 @@ export class NbChatFormComponent {
    * @type {EventEmitter<{ message: string, files: File[] }>}
    */
   @Output() send = new EventEmitter<{ message: string, files: File[] }>();
+
+  /**
+   * Emits changed input value
+   * @type {string}
+   */
+  @Output() onInputChanged = new EventEmitter<string>();
 
   @HostBinding('class.file-over') fileOver = false;
 
@@ -235,4 +242,9 @@ export class NbChatFormComponent {
 
     return this.status;
   }
+
+  onModelChanged(value: string): void {
+    this.onInputChanged.emit(value);
+  }
+
 }

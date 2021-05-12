@@ -54,4 +54,10 @@ export class ChatShowcaseComponent {
       setTimeout(() => { this.messages.push(botReply) }, 500);
     }
   }
+
+  onChatInputChanged(value: string): void {
+    // TODO
+    // better to have visibility on this
+    // console.log('chat input changed', value);
+  }
 }
