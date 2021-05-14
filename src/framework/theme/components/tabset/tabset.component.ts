@@ -23,6 +23,8 @@ import { NbComponentOrCustomStatus } from '../component-status';
 import { NbBadgePosition } from '../badge/badge.component';
 import { NbIconConfig } from '../icon/icon.component';
 
+let tabUId = 0;
+
 /**
  * Specific tab container.
  *
@@ -107,6 +109,9 @@ export class NbTabComponent {
 
   @HostBinding('class.content-active')
   activeValue: boolean = false;
+
+  @HostBinding('attr.data-nb-tabuid')
+  tabUId: string = `nb-tab-${tabUId++}`;
 
   responsiveValue: boolean = false;
   disabledValue = false;
@@ -270,6 +275,7 @@ export class NbTabComponent {
           [class.active]="tab.active"
           [class.disabled]="tab.disabled"
           [attr.tabindex]="tab.disabled ? -1 : 0"
+          [attr.data-tabuid]="tab.tabUId"
           class="tab">
         <a href (click)="$event.preventDefault()" tabindex="-1" class="tab-link">
           <nb-icon *ngIf="tab.tabIcon" [config]="tab.tabIcon"></nb-icon>
