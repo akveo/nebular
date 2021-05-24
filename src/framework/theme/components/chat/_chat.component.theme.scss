@@ -218,6 +218,9 @@
       flex-direction: row-reverse;
 
       .message {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
         margin-left: 0;
 
         @include nb-ltr(margin-right, 0.5rem);

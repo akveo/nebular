@@ -468,6 +468,12 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         component: 'ChatTestComponent',
         name: 'Chat Test',
       },
+      {
+        path: 'chat-custom-messsage-showcase.component',
+        link: '/chat/chat-custom-messsage-showcase.component',
+        component: 'ChatCustomMesssageShowcaseComponent',
+        name: 'Chat Custom Messsage Showcase',
+      },
     ],
   },
   {
@@ -1241,6 +1247,12 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         link: '/tag/tag-removable.component',
         component: 'TagRemovableComponent',
         name: 'Tag Removable',
+      },
+      {
+        path: 'tab-github-test.component',
+        link: '/tag/tab-github-test.component',
+        component: 'TagGithubTestComponent',
+        name: 'Tag Github Test',
       },
     ],
   },

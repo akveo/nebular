@@ -15,6 +15,7 @@ import { ChatMessageTypesShowcaseComponent } from './chat-message-types-showcase
 import { ChatShowcaseComponent } from './chat-showcase.component';
 import { ChatSizesComponent } from './chat-sizes.component';
 import { ChatTestComponent } from './chat-test.component';
+import { ChatCustomMesssageShowcaseComponent } from './chat-custom-messsage-showcase.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { ChatTestComponent } from './chat-test.component';
     ChatShowcaseComponent,
     ChatSizesComponent,
     ChatTestComponent,
+    ChatCustomMesssageShowcaseComponent,
   ],
   imports: [
     CommonModule,

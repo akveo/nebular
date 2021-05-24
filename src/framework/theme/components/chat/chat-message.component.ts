@@ -4,12 +4,13 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { ChangeDetectionStrategy, Component, HostBinding, Input } from '@angular/core';
-import { convertToBoolProperty, NbBooleanInput } from '../helpers';
+import { ChangeDetectionStrategy, Component, ContentChildren, HostBinding, Input, QueryList } from '@angular/core';
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 
+import { convertToBoolProperty, NbBooleanInput } from '../helpers';
 import { NbChatMessageFile } from './chat-message-file.component';
+import { NbChatCustomMessageDirective } from './chat-custom-message.directive';
 
 /**
  * Chat message component.
@@ -58,14 +59,9 @@ import { NbChatMessageFile } from './chat-message-file.component';
 @Component({
   selector: 'nb-chat-message',
   template: `
-    <div class="avatar" [style.background-image]="avatarStyle" *ngIf="!reply">
-      <ng-container *ngIf="!avatarStyle">
-        {{ getInitials() }}
-      </ng-container>
-    </div>
+    <nb-chat-avatar *ngIf="!reply" [initials]="getInitials()" [avatarStyle]="avatarStyle"></nb-chat-avatar>
     <div class="message">
-      <ng-container [ngSwitch]="type">
-
+      <ng-container [ngSwitch]="type" *ngIf="isDefaultMessageType(type); else customTemplate">
         <nb-chat-message-file *ngSwitchCase="'file'"
                               [sender]="sender" [date]="date" [dateFormat]="dateFormat"
                               [message]="message" [files]="files">
@@ -81,12 +77,24 @@ import { NbChatMessageFile } from './chat-message-file.component';
                               [message]="message" [latitude]="latitude" [longitude]="longitude">
         </nb-chat-message-map>
 
+        <nb-chat-message-text *ngSwitchCase="'text'"
+                [sender]="sender" [date]="date" [dateFormat]="dateFormat"
+                [message]="message">
+        </nb-chat-message-text>
+
         <nb-chat-message-text *ngSwitchDefault
-                              [sender]="sender" [date]="date" [dateFormat]="dateFormat"
-                              [message]="message">
+                                [sender]="sender" [date]="date" [dateFormat]="dateFormat"
+                                [message]="message">
         </nb-chat-message-text>
       </ng-container>
     </div>
+
+    <ng-template #customTemplate>
+        <nb-chat-message-text
+          [sender]="sender" [date]="date" [dateFormat]="dateFormat" [message]="message">
+        </nb-chat-message-text>
+      <ng-container [ngTemplateOutlet]="getActualTemplate(type)" [ngTemplateOutletContext]="{$implicit: customMessageData}"></ng-container>
+    </ng-template>
   `,
   animations: [
     trigger('flyInOut', [
@@ -104,6 +112,7 @@ import { NbChatMessageFile } from './chat-message-file.component';
 })
 export class NbChatMessageComponent {
 
+  @ContentChildren(NbChatCustomMessageDirective) customMessages: QueryList<NbChatCustomMessageDirective>;
 
   @HostBinding('@flyInOut')
   get flyInOut() {
@@ -193,15 +202,34 @@ export class NbChatMessageComponent {
    */
   @Input() type: string;
 
+  @Input() customMessageData: any;
+
+  private readonly defaultMessageTypes: string[] = ['text', 'file', 'map', 'quote', undefined];
+
   constructor(protected domSanitizer: DomSanitizer) { }
 
   getInitials(): string {
     if (this.sender) {
       const names = this.sender.split(' ');
-
       return names.map(n => n.charAt(0)).splice(0, 2).join('').toUpperCase();
     }
-
     return '';
   }
+
+  isDefaultMessageType(msgType: string): boolean {
+    return this.defaultMessageTypes.some(el => el === msgType);
+  }
+
+  getActualTemplate(type: any): any {
+    if (!type) {
+      throw new Error('Custom template type must be provided');
+    }
+
+    const customMessage = this.customMessages.find(msg => msg.customMessageType === type);
+    if (customMessage === undefined || !customMessage.templateRef) {
+      throw new Error(`Can't find template for custom message type = ${type}.`);
+    }
+    return customMessage.templateRef
+  }
+
 }
