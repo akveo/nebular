@@ -97,13 +97,13 @@ export class NbTreeGridDataSource<T> extends NbDataSource<NbTreeGridPresentation
   protected updateChangeSubscription() {
     const dataStream = this.data;
 
-    const filteredData = combineLatest(dataStream, this.filterRequest)
+    const filteredData = combineLatest([dataStream, this.filterRequest])
       .pipe(
         map(([data]) => this.treeGridDataService.copy(data)),
         map(data => this.filterData(data)),
       );
 
-    const sortedData = combineLatest(filteredData, this.sortRequest)
+    const sortedData = combineLatest([filteredData, this.sortRequest])
       .pipe(
         map(([data]) => this.sortData(data)),
       );
