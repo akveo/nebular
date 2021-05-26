@@ -47,7 +47,7 @@ export class NbLayoutRulerService {
    * @returns {Observable<NbLayoutDimensions>}
    */
   getDimensions(): Observable<NbLayoutDimensions> {
-    return Observable.create((observer: Subscriber<NbLayoutDimensions>) => {
+    return new Observable((observer: Subscriber<NbLayoutDimensions>) => {
       const listener = new Subject<NbLayoutDimensions>();
       listener.subscribe(observer);
       this.contentDimensionsReq$.next({ listener });
