@@ -1,20 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-    selector: 'nb-chat-custom-messsage-showcase',
-    templateUrl: './chat-custom-message-showcase.component.html',
-    styles: [`
-        nb-chat {
-        width: 500px;
-        }
-    `],
+    selector: 'nb-chat-custom-messsage',
+    templateUrl: './chat-custom-message.component.html',
+    styleUrls: ['./chat-custom-message.component.scss'],
 })
-
-export class ChatCustomMesssageShowcaseComponent implements OnInit {
+export class ChatCustomMesssageComponent implements OnInit {
 
     messages: any[] = [];
-
-    constructor() { }
 
     ngOnInit(): void {
         this.loadMessages();
@@ -83,6 +76,11 @@ export class ChatCustomMesssageShowcaseComponent implements OnInit {
                 reply: true,
                 date: new Date(),
                 type: 'table',
+                customMessageData: {
+                  column1: 'Fitst Name',
+                  column2: 'Last Name',
+                  column3: 'Age',
+                },
                 user: {
                     name: 'Fredegar Bolger',
                     avatar: 'https://i.gifer.com/no.gif',

@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { ChangeDetectionStrategy, Component, ContentChildren, HostBinding, Input, QueryList } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ContentChildren, HostBinding, Input, QueryList, TemplateRef } from '@angular/core';
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 
@@ -77,11 +77,6 @@ import { NbChatCustomMessageDirective } from './chat-custom-message.directive';
                               [message]="message" [latitude]="latitude" [longitude]="longitude">
         </nb-chat-message-map>
 
-        <nb-chat-message-text *ngSwitchCase="'text'"
-                [sender]="sender" [date]="date" [dateFormat]="dateFormat"
-                [message]="message">
-        </nb-chat-message-text>
-
         <nb-chat-message-text *ngSwitchDefault
                                 [sender]="sender" [date]="date" [dateFormat]="dateFormat"
                                 [message]="message">
@@ -93,7 +88,7 @@ import { NbChatCustomMessageDirective } from './chat-custom-message.directive';
         <nb-chat-message-text
           [sender]="sender" [date]="date" [dateFormat]="dateFormat" [message]="message">
         </nb-chat-message-text>
-      <ng-container [ngTemplateOutlet]="getActualTemplate(type)" [ngTemplateOutletContext]="{$implicit: customMessageData}"></ng-container>
+      <ng-container [ngTemplateOutlet]="_getTemplateByType(type)" [ngTemplateOutletContext]="_getTemplateContext()"></ng-container>
     </ng-template>
   `,
   animations: [
@@ -202,9 +197,13 @@ export class NbChatMessageComponent {
    */
   @Input() type: string;
 
+  /**
+   * Data will be set as custom message template context
+   * @type {any}
+   */
   @Input() customMessageData: any;
 
-  private readonly defaultMessageTypes: string[] = ['text', 'file', 'map', 'quote', undefined];
+  protected readonly defaultMessageTypes: string[] = ['text', 'file', 'map', 'quote'];
 
   constructor(protected domSanitizer: DomSanitizer) { }
 
@@ -216,20 +215,21 @@ export class NbChatMessageComponent {
     return '';
   }
 
-  isDefaultMessageType(msgType: string): boolean {
-    return this.defaultMessageTypes.some(el => el === msgType);
+  isDefaultMessageType(type: string): boolean {
+    return type === null || type === undefined || this.defaultMessageTypes.includes(type);
   }
 
-  getActualTemplate(type: any): any {
-    if (!type) {
-      throw new Error('Custom template type must be provided');
+  _getTemplateByType(type: string): TemplateRef<any> {
+    const customMessage = this.customMessages.find(msg => msg.type === type);
+    if (customMessage === undefined) {
+      throw new Error(`nb-chat: Can't find template for custom type '${type}'.
+       Make sure you provide it in the chat component with *nbCustomMessage='${type}'.`);
     }
+    return customMessage.templateRef;
+  }
 
-    const customMessage = this.customMessages.find(msg => msg.customMessageType === type);
-    if (customMessage === undefined || !customMessage.templateRef) {
-      throw new Error(`Can't find template for custom message type = ${type}.`);
-    }
-    return customMessage.templateRef
+  _getTemplateContext(): any {
+    return { $implicit: this.customMessageData };
   }
 
 }
