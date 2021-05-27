@@ -30,6 +30,14 @@ export class RouteTabsetShowcaseComponent {
       route: [ './tab2' ],
     },
     {
+      title: 'Query params',
+      icon: 'flash-outline',
+      responsive: true,
+      disabled: false,
+      route: './tab3',
+      queryParams: { param1: 123456, param2: 'test' },
+    },
+    {
       title: 'Transaction',
       icon: 'flash-outline',
       responsive: true,
