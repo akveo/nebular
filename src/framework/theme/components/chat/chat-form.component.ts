@@ -145,7 +145,7 @@ export class NbChatFormComponent {
   @Output() send = new EventEmitter<{ message: string, files: File[] }>();
 
   /**
-   * Emits changed input value
+   * Emits on message input `input` event
    * @type {string}
    */
   @Output() onInputChanged = new EventEmitter<string>();

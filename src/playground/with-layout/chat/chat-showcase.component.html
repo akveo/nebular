@@ -11,6 +11,6 @@
                    [longitude]="msg.longitude"
                    [avatar]="msg.user.avatar">
   </nb-chat-message>
-  <nb-chat-form (send)="sendMessage($event)" [dropFiles]="true" (onInputChanged)="onChatInputChanged($event)">
+  <nb-chat-form (send)="sendMessage($event)" [dropFiles]="true">
   </nb-chat-form>
 </nb-chat>
