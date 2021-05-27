@@ -108,8 +108,8 @@ describe('NbTabsetComponent', () => {
 
   it(`should set proper tab IDs`, () => {
     const items = fixture.nativeElement.querySelectorAll('li');
-    expect(items[0].getAttribute('data-tabuid')).toEqual('tab-1');
-    expect(items[1].getAttribute('data-tabuid')).toEqual('tab-2');
-    expect(items[2].getAttribute('data-tabuid')).toEqual('tab-3');
+    expect(items[0].getAttribute('data-tab-id')).toEqual('tab-1');
+    expect(items[1].getAttribute('data-tab-id')).toEqual('tab-2');
+    expect(items[2].getAttribute('data-tab-id')).toEqual('tab-3');
   });
 });
