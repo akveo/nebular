@@ -8,18 +8,17 @@ import { NbChatMessageComponent, NbChatModule, NbThemeModule } from '@nebular/th
   template: `
     <nb-chat [title]="chatTitle" size="large">
     <nb-chat-message *ngFor="let msg of messages"
-        [type]="msg.type"
-        [message]="msg.text"
-        [reply]="msg.reply"
-        [sender]="msg.user.name"
-        [date]="msg.date"
-        [avatar]="msg.user.avatar"
-        [customMessageData]="msg.optionalData">
+      [type]="msg.type"
+      [message]="msg.text"
+      [reply]="msg.reply"
+      [sender]="msg.user.name"
+      [date]="msg.date"
+      [avatar]="msg.user.avatar"
+      [customMessageData]="msg.optionalData">
 
-        <div *nbCustomMessage="'link'; let data">
-            <a [href]="data.href">{{ data.label }}</a>
-        </div>
-
+      <div *nbCustomMessage="'link'; let data">
+        <a [href]="data.href">{{ data.label }}</a>
+      </div>
     </nb-chat-message>
       <nb-chat-form (send)="sendMessage($event)" [dropFiles]="false">
       </nb-chat-form>

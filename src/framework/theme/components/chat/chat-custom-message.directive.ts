@@ -6,8 +6,8 @@ import { Directive, Input, OnInit, TemplateRef } from '@angular/core';
 export class NbChatCustomMessageDirective implements OnInit {
 
   @Input() set nbCustomMessage(content: string) {
-    if (!content || !this.templateRef) {
-      this.throwCustomMessageContentIsMissed();
+    if (!content) {
+      throwCustomMessageContentIsMissed();
     }
     this._type = content;
   }
@@ -17,24 +17,29 @@ export class NbChatCustomMessageDirective implements OnInit {
   }
   protected _type: string;
 
-  constructor(public templateRef: TemplateRef<any>) { }
-
-  ngOnInit(): void {
-    if (!this._type) {
-      this.throwCustomMessageTypeIsRequired();
+  constructor(public templateRef: TemplateRef<any>) {
+    if (!this.templateRef) {
+      throwCustomMessageContentIsMissed()
     }
   }
 
-  protected throwCustomMessageTypeIsRequired(): void {
-    throw new Error('[nbCustomMessage]: custom message type is required provided');
+  ngOnInit(): void {
+    if (!this._type) {
+      throwCustomMessageTypeIsRequired();
+    }
   }
 
-  protected throwCustomMessageContentIsMissed(): void {
-    throw new Error(`nbCustomMessage: should be applied to the ng-tempate
-    or use a structural directive syntax:
-    <some-element *nbCustomMessage="customTypeName">
-     <yourCustomTemplate></yourCustomTemplate>
-    </some-element>
-  `);
-  }
+}
+
+function throwCustomMessageTypeIsRequired(): void {
+  throw new Error('[nbCustomMessage]: custom message type is required.');
+}
+
+function throwCustomMessageContentIsMissed(): void {
+  throw new Error(`nbCustomMessage: should be applied to the ng-tempate
+  or use a structural directive syntax:
+  <some-element *nbCustomMessage="customTypeName">
+   <yourCustomTemplate></yourCustomTemplate>
+  </some-element>
+`);
 }

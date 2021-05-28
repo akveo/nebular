@@ -1,34 +1,33 @@
 <nb-chat title="Nebular Conversational UI" size="large">
     <nb-chat-message *ngFor="let msg of messages"
-        [type]="msg.type"
-        [message]="msg.text"
-        [reply]="msg.reply"
-        [sender]="msg.user.name"
-        [date]="msg.date"
-        [files]="msg.files"
-        [quote]="msg.quote"
-        [latitude]="msg.latitude"
-        [longitude]="msg.longitude"
-        [avatar]="msg.user.avatar"
-        [customMessageData]="msg.customMessageData">
+      [type]="msg.type"
+      [message]="msg.text"
+      [reply]="msg.reply"
+      [sender]="msg.user.name"
+      [date]="msg.date"
+      [customMessageData]="msg.customMessageData">
 
-        <div *nbCustomMessage="'link'; let data">
-            <a [href]="data.href">{{ data.label }}</a>
-        </div>
-        <div class="button-wrapper" *nbCustomMessage="'button'; let data">
-            <button class="custom-button">{{ data }}</button></div>
+      <div *nbCustomMessage="'link'; let data">
+        <a [href]="data.href">{{ data.label }}</a>
+      </div>
 
-        <div *nbCustomMessage="'img'">
-            <picture>
-                <img src="https://i.gifer.com/no.gif">
-            </picture>
-        </div>
+      <div class="button-wrapper" *nbCustomMessage="'button'; let data">
+        <button class="custom-button">{{ data }}</button>
+      </div>
 
-        <div *nbCustomMessage="'table'; let data">
-          <nb-custom-message-table [tableHeader]="data"></nb-custom-message-table>
-        </div>
+      <div *nbCustomMessage="'img'">
+        <picture>
+          <img src="https://i.gifer.com/no.gif">
+        </picture>
+      </div>
+
+      <div *nbCustomMessage="'table'; let data">
+        <nb-custom-message-table [tableHeader]="data"></nb-custom-message-table>
+      </div>
 
     </nb-chat-message>
     <nb-chat-form (send)="sendMessage($event)" [dropFiles]="false">
     </nb-chat-form>
+
+
 </nb-chat>

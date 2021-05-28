@@ -1248,12 +1248,6 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         component: 'TagRemovableComponent',
         name: 'Tag Removable',
       },
-      {
-        path: 'tab-github-test.component',
-        link: '/tag/tab-github-test.component',
-        component: 'TagGithubTestComponent',
-        name: 'Tag Github Test',
-      },
     ],
   },
   {

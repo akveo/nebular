@@ -78,8 +78,8 @@ import { NbChatCustomMessageDirective } from './chat-custom-message.directive';
         </nb-chat-message-map>
 
         <nb-chat-message-text *ngSwitchDefault
-                                [sender]="sender" [date]="date" [dateFormat]="dateFormat"
-                                [message]="message">
+                              [sender]="sender" [date]="date" [dateFormat]="dateFormat"
+                              [message]="message">
         </nb-chat-message-text>
       </ng-container>
     </div>
@@ -107,6 +107,9 @@ import { NbChatCustomMessageDirective } from './chat-custom-message.directive';
 })
 export class NbChatMessageComponent {
 
+  protected readonly defaultMessageTypes: string[] = ['text', 'file', 'map', 'quote'];
+  avatarStyle: SafeStyle;
+
   @ContentChildren(NbChatCustomMessageDirective) customMessages: QueryList<NbChatCustomMessageDirective>;
 
   @HostBinding('@flyInOut')
@@ -118,8 +121,6 @@ export class NbChatMessageComponent {
   get notReply() {
     return !this.reply;
   }
-
-  avatarStyle: SafeStyle;
 
   /**
    * Determines if a message is a reply
@@ -203,8 +204,6 @@ export class NbChatMessageComponent {
    */
   @Input() customMessageData: any;
 
-  protected readonly defaultMessageTypes: string[] = ['text', 'file', 'map', 'quote'];
-
   constructor(protected domSanitizer: DomSanitizer) { }
 
   getInitials(): string {
@@ -216,7 +215,7 @@ export class NbChatMessageComponent {
   }
 
   isDefaultMessageType(type: string): boolean {
-    return type === null || type === undefined || this.defaultMessageTypes.includes(type);
+    return type == null || this.defaultMessageTypes.includes(type);
   }
 
   _getTemplateByType(type: string): TemplateRef<any> {
@@ -228,7 +227,7 @@ export class NbChatMessageComponent {
     return customMessage.templateRef;
   }
 
-  _getTemplateContext(): any {
+  _getTemplateContext(): { $implicit: any } {
     return { $implicit: this.customMessageData };
   }
 
