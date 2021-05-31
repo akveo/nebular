@@ -25,6 +25,7 @@ import { NbComponentOrCustomStatus } from '../component-status';
 import { convertToBoolProperty, NbBooleanInput } from '../helpers';
 import { NbChatFormComponent } from './chat-form.component';
 import { NbChatMessageComponent } from './chat-message.component';
+import { NbCustomMessageService } from './custom-message.service';
 
 /**
  * Conversational UI collection - a set of components for chat-like UI construction.
@@ -88,7 +89,7 @@ import { NbChatMessageComponent } from './chat-message.component';
  *
  * ### Usage
  *
- * There are three main components:
+ * There are four main components:
  * ```ts
  * <nb-chat>
  * </nb-chat> // chat container
@@ -96,8 +97,12 @@ import { NbChatMessageComponent } from './chat-message.component';
  * <nb-chat-form>
  * </nb-chat-form> // chat form with drag&drop files feature
  *
+ * <div *nbCustomMessage=""> // chat message with custom template and type
+ *  ...element body
+ * </div>
+ *
  * <nb-chat-message>
- * </nb-chat-message> // chat message, available multiple types
+ * </nb-chat-message> // chat message, available multiple predefined types
  * ```
  *
  * Two users conversation showcase:
@@ -110,6 +115,18 @@ import { NbChatMessageComponent } from './chat-message.component';
  * Also it is possible to configure sizes through `[size]` input:
  *
  * @stacked-example(Chat Sizes, chat/chat-sizes.component)
+ *
+ * Available to provide custom template for chat messages <br/>
+ * **Important note: custom chat messages must be defined before chat-message:**
+ * ```ts
+ *  <div *nbCustomMessage="'type'; let data">
+ *  </div>
+ *
+ *  <nb-chat-message *ngFor="let msg of messages">
+ *  </nb-chat-message>
+ * ```
+ *
+ * @stacked-example(Custom message, chat/chat-custom-message.component)
  *
  * @styles
  *
@@ -178,6 +195,9 @@ import { NbChatMessageComponent } from './chat-message.component';
       <ng-content select="nb-chat-form"></ng-content>
     </div>
   `,
+  providers: [
+    NbCustomMessageService,
+  ],
 })
 export class NbChatComponent implements OnChanges, AfterContentInit, AfterViewInit {
 
@@ -214,8 +234,7 @@ export class NbChatComponent implements OnChanges, AfterContentInit, AfterViewIn
   @ContentChildren(NbChatMessageComponent) messages: QueryList<NbChatMessageComponent>;
   @ContentChild(NbChatFormComponent) chatForm: NbChatFormComponent;
 
-  constructor(protected statusService: NbStatusService) {
-  }
+  constructor(protected statusService: NbStatusService) { }
 
   ngOnChanges(changes: SimpleChanges) {
     if ('status' in changes) {

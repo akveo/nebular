@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NbChatMessageComponent, NbChatModule, NbThemeModule } from '@nebular/theme';
+import { NbCustomMessageService } from './custom-message.service';
 
 @Component({
   selector: 'nb-chat-message-test',
@@ -72,7 +73,7 @@ describe('Chat-message component: NbChatMessageTestComponent', () => {
 
   it('should be created', () => {
     expect(component).toBeTruthy();
-  })
+  });
 
   it('should create custom messages with content', () => {
     component.loadMessages();
@@ -86,7 +87,7 @@ describe('Chat-message component: NbChatMessageTestComponent', () => {
 
     const linkLabel = customMessageElement.textContent;
     expect(linkLabel).toBe('Visit Akveo Nebular');
-  })
+  });
 
 
 });
@@ -98,6 +99,7 @@ describe('Component: NbChatMessageComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [BrowserAnimationsModule, NbThemeModule.forRoot(), NbChatModule],
+      providers: [NbCustomMessageService],
     });
 
     fixture = TestBed.createComponent(NbChatMessageComponent);
@@ -107,7 +109,7 @@ describe('Component: NbChatMessageComponent', () => {
 
   it('should be created', () => {
     expect(chat).toBeTruthy();
-  })
+  });
 
   it('ChatMessageComponent testing getInitials method', () => {
     chat.sender = '';
@@ -117,24 +119,17 @@ describe('Component: NbChatMessageComponent', () => {
     chat.sender = 'John Connor';
     fixture.detectChanges();
     expect(chat.getInitials()).toEqual('JC');
-  })
+  });
 
-  it('ChatMessageComponent testing isDefaultMessageType method', () => {
-    expect(chat.isDefaultMessageType(null)).toBe(true);
-    expect(chat.isDefaultMessageType(undefined)).toBe(true);
-    expect(chat.isDefaultMessageType('text')).toBe(true);
-    expect(chat.isDefaultMessageType('file')).toBe(true);
-    expect(chat.isDefaultMessageType('map')).toBe(true);
-    expect(chat.isDefaultMessageType('quote')).toBe(true);
-    expect(chat.isDefaultMessageType('link')).toBe(false);
-    expect(chat.isDefaultMessageType('button')).toBe(false);
-  })
-
-  it('ChatMessageComponent testing _getTemplateByType method', () => {
-    expect(() => chat._getTemplateByType('link'))
-      .toThrowError(`nb-chat: Can't find template for custom type 'link'.
-       Make sure you provide it in the chat component with *nbCustomMessage='link'.`);
-  })
-
+  it('ChatMessageComponent testing _isDefaultMessageType method', () => {
+    chat._isDefaultMessageType(null);
+    expect(chat._isDefaultMessageType(null)).toBe(true);
+    expect(chat._isDefaultMessageType(undefined)).toBe(true);
+    expect(chat._isDefaultMessageType('text')).toBe(true);
+    expect(chat._isDefaultMessageType('file')).toBe(true);
+    expect(chat._isDefaultMessageType('map')).toBe(true);
+    expect(chat._isDefaultMessageType('quote')).toBe(true);
+    expect(chat._isDefaultMessageType('link')).toBe(false);
+    expect(chat._isDefaultMessageType('button')).toBe(false);
+  });
 });
-

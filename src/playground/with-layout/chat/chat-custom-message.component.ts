@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'nb-chat-custom-messsage',
+  selector: 'nb-chat-custom-message',
   templateUrl: './chat-custom-message.component.html',
   styleUrls: ['./chat-custom-message.component.scss'],
 })
-export class ChatCustomMesssageComponent implements OnInit {
+export class ChatCustomMessageComponent implements OnInit {
 
   messages: any[] = [];
 

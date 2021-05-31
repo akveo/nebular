@@ -36,7 +36,7 @@ describe('Chat-message-quote component: NbChatMessageQuoteTestComponent', () => 
 
   it('should be created', () => {
     expect(component).toBeTruthy();
-  })
+  });
 
   it('quote should be created', () => {
     component.message = 'some test message';
@@ -46,7 +46,7 @@ describe('Chat-message-quote component: NbChatMessageQuoteTestComponent', () => 
     fixture.detectChanges();
     const quoteElement = fixture.nativeElement.querySelector('.quote');
     expect(quoteElement).toBeTruthy();
-  })
+  });
 
   it('should be created inner chat message', () => {
     component.message = 'some test message';
@@ -56,6 +56,6 @@ describe('Chat-message-quote component: NbChatMessageQuoteTestComponent', () => 
     fixture.detectChanges();
     const quoteElement = fixture.nativeElement.querySelector('nb-chat-message-text');
     expect(quoteElement).toBeTruthy();
-  })
+  });
 
 });

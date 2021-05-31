@@ -15,7 +15,7 @@ import { ChatMessageTypesShowcaseComponent } from './chat-message-types-showcase
 import { ChatShowcaseComponent } from './chat-showcase.component';
 import { ChatSizesComponent } from './chat-sizes.component';
 import { ChatTestComponent } from './chat-test.component';
-import { ChatCustomMesssageComponent } from './chat-custom-message.component';
+import { ChatCustomMessageComponent } from './chat-custom-message.component';
 import { ChatCustomMessageTableComponent } from './components/chat-custom-message-table.component';
 
 @NgModule({
@@ -27,7 +27,7 @@ import { ChatCustomMessageTableComponent } from './components/chat-custom-messag
     ChatShowcaseComponent,
     ChatSizesComponent,
     ChatTestComponent,
-    ChatCustomMesssageComponent,
+    ChatCustomMessageComponent,
     ChatCustomMessageTableComponent,
   ],
   imports: [

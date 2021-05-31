@@ -21,6 +21,7 @@ import { Component, Input } from '@angular/core';
       </tr>
     </table>
   `,
+  styleUrls: ['./chat-custom-message-table.component.scss'],
 })
 export class ChatCustomMessageTableComponent {
   @Input() tableHeader: any;

@@ -4,13 +4,13 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { ChangeDetectionStrategy, Component, ContentChildren, HostBinding, Input, QueryList, TemplateRef } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostBinding, Input, TemplateRef } from '@angular/core';
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 
 import { convertToBoolProperty, NbBooleanInput } from '../helpers';
 import { NbChatMessageFile } from './chat-message-file.component';
-import { NbChatCustomMessageDirective } from './chat-custom-message.directive';
+import { NbCustomMessageService } from './custom-message.service';
 
 /**
  * Chat message component.
@@ -61,24 +61,35 @@ import { NbChatCustomMessageDirective } from './chat-custom-message.directive';
   template: `
     <nb-chat-avatar *ngIf="!reply" [initials]="getInitials()" [avatarStyle]="avatarStyle"></nb-chat-avatar>
     <div class="message">
-      <ng-container [ngSwitch]="type" *ngIf="isDefaultMessageType(type); else customTemplate">
+      <ng-container [ngSwitch]="type" *ngIf="_isDefaultMessageType(type); else customTemplate">
         <nb-chat-message-file *ngSwitchCase="'file'"
-                              [sender]="sender" [date]="date" [dateFormat]="dateFormat"
-                              [message]="message" [files]="files">
+                              [sender]="sender"
+                              [date]="date"
+                              [dateFormat]="dateFormat"
+                              [message]="message"
+                              [files]="files">
         </nb-chat-message-file>
 
         <nb-chat-message-quote *ngSwitchCase="'quote'"
-                              [sender]="sender" [date]="date" [dateFormat]="dateFormat"
-                              [message]="message" [quote]="quote">
+                              [sender]="sender"
+                              [date]="date"
+                              [dateFormat]="dateFormat"
+                              [message]="message"
+                              [quote]="quote">
         </nb-chat-message-quote>
 
         <nb-chat-message-map *ngSwitchCase="'map'"
-                              [sender]="sender" [date]="date"
-                              [message]="message" [latitude]="latitude" [longitude]="longitude">
+                              [sender]="sender"
+                              [date]="date"
+                              [message]="message"
+                              [latitude]="latitude"
+                              [longitude]="longitude">
         </nb-chat-message-map>
 
         <nb-chat-message-text *ngSwitchDefault
-                              [sender]="sender" [date]="date" [dateFormat]="dateFormat"
+                              [sender]="sender"
+                              [date]="date"
+                              [dateFormat]="dateFormat"
                               [message]="message">
         </nb-chat-message-text>
       </ng-container>
@@ -86,7 +97,10 @@ import { NbChatCustomMessageDirective } from './chat-custom-message.directive';
 
     <ng-template #customTemplate>
         <nb-chat-message-text
-          [sender]="sender" [date]="date" [dateFormat]="dateFormat" [message]="message">
+          [sender]="sender"
+          [date]="date"
+          [dateFormat]="dateFormat"
+          [message]="message">
         </nb-chat-message-text>
       <ng-container [ngTemplateOutlet]="_getTemplateByType(type)" [ngTemplateOutletContext]="_getTemplateContext()"></ng-container>
     </ng-template>
@@ -109,8 +123,6 @@ export class NbChatMessageComponent {
 
   protected readonly defaultMessageTypes: string[] = ['text', 'file', 'map', 'quote'];
   avatarStyle: SafeStyle;
-
-  @ContentChildren(NbChatCustomMessageDirective) customMessages: QueryList<NbChatCustomMessageDirective>;
 
   @HostBinding('@flyInOut')
   get flyInOut() {
@@ -204,7 +216,7 @@ export class NbChatMessageComponent {
    */
   @Input() customMessageData: any;
 
-  constructor(protected domSanitizer: DomSanitizer) { }
+  constructor(protected domSanitizer: DomSanitizer, protected customMessageService: NbCustomMessageService) { }
 
   getInitials(): string {
     if (this.sender) {
@@ -214,17 +226,17 @@ export class NbChatMessageComponent {
     return '';
   }
 
-  isDefaultMessageType(type: string): boolean {
+  _isDefaultMessageType(type: string): boolean {
     return type == null || this.defaultMessageTypes.includes(type);
   }
 
   _getTemplateByType(type: string): TemplateRef<any> {
-    const customMessage = this.customMessages.find(msg => msg.type === type);
-    if (customMessage === undefined) {
+    const template = this.customMessageService.getMessageTemplate(type);
+    if (!template) {
       throw new Error(`nb-chat: Can't find template for custom type '${type}'.
-       Make sure you provide it in the chat component with *nbCustomMessage='${type}'.`);
+            Make sure you provide it in the chat component with *nbCustomMessage='${type}'.`);
     }
-    return customMessage.templateRef;
+    return template;
   }
 
   _getTemplateContext(): { $implicit: any } {

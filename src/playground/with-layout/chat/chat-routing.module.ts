@@ -13,7 +13,7 @@ import { ChatMessageTypesShowcaseComponent } from './chat-message-types-showcase
 import { ChatShowcaseComponent } from './chat-showcase.component';
 import { ChatSizesComponent } from './chat-sizes.component';
 import { ChatTestComponent } from './chat-test.component';
-import { ChatCustomMesssageComponent } from './chat-custom-message.component';
+import { ChatCustomMessageComponent } from './chat-custom-message.component';
 
 const routes: Route[] = [
   {
@@ -45,8 +45,8 @@ const routes: Route[] = [
     component: ChatTestComponent,
   },
   {
-    path: 'chat-custom-messsage.component',
-    component: ChatCustomMesssageComponent,
+    path: 'chat-custom-message.component',
+    component: ChatCustomMessageComponent,
   },
 ];
 
