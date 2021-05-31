@@ -184,7 +184,6 @@ export class NbTagListComponent implements OnInit, AfterContentInit, AfterViewIn
   ngAfterContentInit() {
     this.initKeyManager();
     this.setAutocompleteCustomHost();
-    this.listenNoTags();
   }
 
   ngAfterViewInit() {
@@ -195,6 +194,7 @@ export class NbTagListComponent implements OnInit, AfterContentInit, AfterViewIn
     this.listenTagRemove();
     this.listenTagDestroy();
     this.listenActiveTagChange();
+    this.listenNoTags();
 
     // TODO: #2254
     this.zone.runOutsideAngular(() => setTimeout(() => {
@@ -311,7 +311,7 @@ export class NbTagListComponent implements OnInit, AfterContentInit, AfterViewIn
         filter((tags: QueryList<NbTagComponent>) => tags.length === 0),
         takeUntil(this.destroy$),
       )
-      .subscribe(() => this.focusInput());
+      .subscribe(() => this.focusInputIfActive());
   }
 
   protected listenActiveTagChange(): void {
@@ -368,6 +368,12 @@ export class NbTagListComponent implements OnInit, AfterContentInit, AfterViewIn
   protected focusInput(): void {
     if (this._hasInput) {
       this.tagInput._hostElement.nativeElement.focus();
+    }
+  }
+
+  protected focusInputIfActive(): void {
+    if (this._isFocused) {
+      this.focusInput();
     }
   }
 }
