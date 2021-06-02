@@ -5,14 +5,15 @@ function throwCustomMessageTypeIsRequired(): void {
   throw new Error('[nbCustomMessage]: custom message type is required.');
 }
 
-function throwCustomMessageContentIsMissed(): void {
-  throw new Error(`[nbCustomMessage]: should be applied to the ng-template
-  or use a structural directive syntax:
-  <some-element *nbCustomMessage="customTypeName">
-   <yourCustomTemplate></yourCustomTemplate>
-  </some-element>
-`);
-}
+/**
+ * Usage details:
+ * [nbCustomMessage]: should be applied to the ng-template
+ * or use a structural directive syntax:
+ *
+ * <some-element *nbCustomMessage="customTypeName">
+ * <yourCustomTemplate></yourCustomTemplate>
+ * </some-element>
+ */
 
 @Directive({
   selector: `[nbCustomMessage]`,
@@ -22,9 +23,6 @@ export class NbChatCustomMessageDirective implements OnInit, OnDestroy {
   protected _type: string;
 
   @Input() set nbCustomMessage(content: string) {
-    if (!content) {
-      throwCustomMessageContentIsMissed();
-    }
     this._type = content;
   }
 
