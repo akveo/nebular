@@ -116,7 +116,7 @@
     "pace-js": "^1.0.2",
     "rxjs": "^6.5.5",
     "socicon": "3.0.5",
-    "tslib": "^2.0.0",
+    "tslib": "^2.1.0",
     "zone.js": "~0.11.4"
   },
   "devDependencies": {

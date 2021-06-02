@@ -27,7 +27,7 @@
     "@angular/router": "^12.0.0",
     "@angular/cdk": "^12.0.0",
     "rxjs": "^6.5.4",
-    "tslib": "^2.0.0"
+    "tslib": "^2.1.0"
   },
   "dependencies": {
     "intersection-observer": "0.7.0"
