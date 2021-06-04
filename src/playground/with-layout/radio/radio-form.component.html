@@ -1,0 +1,25 @@
+<nb-card>
+  <nb-card-header>Forms example: {{ radioForm.value |  selectedOption }}</nb-card-header>
+  <nb-card-body>
+    <form [formGroup]="formGroup">
+
+      <nb-radio-group formControlName="radioGroup">
+        <nb-radio *ngFor="let option of options" [value]="option.value">
+          {{ option.label }}
+        </nb-radio>
+      </nb-radio-group>
+
+    </form>
+  </nb-card-body>
+</nb-card>
+
+<nb-card>
+  <nb-card-header>NgModel: {{ selected |  selectedOption }}</nb-card-header>
+  <nb-card-body>
+    <nb-radio-group [(ngModel)]="selected">
+      <nb-radio *ngFor="let option of options" [value]="option.value">
+        {{ option.label }}
+      </nb-radio>
+    </nb-radio-group>
+  </nb-card-body>
+</nb-card>
