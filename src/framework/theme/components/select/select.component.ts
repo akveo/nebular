@@ -153,6 +153,10 @@ export function nbSelectFormFieldControlConfigFactory() {
  *
  * @stacked-example(Select custom comparator, select/select-compare-with.component)
  *
+ * Select input can be customizable with icons:
+ *
+ * @stacked-example(Select with icons, select/select-icon.component)
+ *
  * @additional-example(Interactive, select/select-interactive.component)
  *
  * @styles
