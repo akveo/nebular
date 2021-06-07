@@ -15,7 +15,7 @@ export class NbCustomMessageTestComponent {
   customMessageType: string = 'simpleMessageType';
 }
 
-describe('Directive chat-custom-message-dircetive: NbCustomMessageTestComponent', () => {
+describe('Directive chat-custom-message-directive: NbCustomMessageTestComponent', () => {
   let fixture: ComponentFixture<NbCustomMessageTestComponent>;
   let component: NbCustomMessageTestComponent;
 
