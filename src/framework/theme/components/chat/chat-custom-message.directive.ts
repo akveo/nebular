@@ -10,11 +10,10 @@ function throwCustomMessageTypeIsRequired(): void {
  * [nbCustomMessage]: should be applied to the ng-template
  * or use a structural directive syntax:
  *
- * <some-element *nbCustomMessage="customTypeName">
- * <yourCustomTemplate></yourCustomTemplate>
- * </some-element>
+ * <div *nbCustomMessage="my-custom-type">
+ *   <!-- custom message -->
+ * </div>
  */
-
 @Directive({
   selector: `[nbCustomMessage]`,
 })
