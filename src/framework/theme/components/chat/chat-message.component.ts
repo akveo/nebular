@@ -71,19 +71,19 @@ import { NbCustomMessageService } from './custom-message.service';
         </nb-chat-message-file>
 
         <nb-chat-message-quote *ngSwitchCase="'quote'"
-                              [sender]="sender"
-                              [date]="date"
-                              [dateFormat]="dateFormat"
-                              [message]="message"
-                              [quote]="quote">
+                               [sender]="sender"
+                               [date]="date"
+                               [dateFormat]="dateFormat"
+                               [message]="message"
+                               [quote]="quote">
         </nb-chat-message-quote>
 
         <nb-chat-message-map *ngSwitchCase="'map'"
-                              [sender]="sender"
-                              [date]="date"
-                              [message]="message"
-                              [latitude]="latitude"
-                              [longitude]="longitude">
+                             [sender]="sender"
+                             [date]="date"
+                             [message]="message"
+                             [latitude]="latitude"
+                             [longitude]="longitude">
         </nb-chat-message-map>
 
         <nb-chat-message-text *ngSwitchDefault
@@ -96,11 +96,10 @@ import { NbCustomMessageService } from './custom-message.service';
     </div>
 
     <ng-template #customTemplate>
-        <nb-chat-message-text
-          [sender]="sender"
-          [date]="date"
-          [dateFormat]="dateFormat"
-          [message]="message">
+        <nb-chat-message-text [sender]="sender"
+                              [date]="date"
+                              [dateFormat]="dateFormat"
+                              [message]="message">
         </nb-chat-message-text>
       <ng-container [ngTemplateOutlet]="_getTemplateByType(type)" [ngTemplateOutletContext]="_getTemplateContext()"></ng-container>
     </ng-template>
@@ -122,6 +121,7 @@ import { NbCustomMessageService } from './custom-message.service';
 export class NbChatMessageComponent {
 
   protected readonly defaultMessageTypes: string[] = ['text', 'file', 'map', 'quote'];
+
   avatarStyle: SafeStyle;
 
   @HostBinding('@flyInOut')
@@ -221,8 +221,10 @@ export class NbChatMessageComponent {
   getInitials(): string {
     if (this.sender) {
       const names = this.sender.split(' ');
+
       return names.map(n => n.charAt(0)).splice(0, 2).join('').toUpperCase();
     }
+
     return '';
   }
 
