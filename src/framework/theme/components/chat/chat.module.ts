@@ -35,7 +35,7 @@ const NB_CHAT_COMPONENTS = [
 
 const NB_CHAT_DIRECTIVES = [
   NbChatCustomMessageDirective,
-]
+];
 
 @NgModule({
   imports: [
