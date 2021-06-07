@@ -5,9 +5,11 @@ import { NbChatModule, NbThemeModule } from '@nebular/theme';
 @Component({
   selector: 'nb-chat-message-quote-test',
   template: `
-    <nb-chat-message-quote
-      [sender]="sender" [date]="date" [dateFormat]="dateFormat"
-      [message]="message" [quote]="quote">
+    <nb-chat-message-quote [sender]="sender"
+                           [date]="date"
+                           [dateFormat]="dateFormat"
+                           [message]="message"
+                           [quote]="quote">
     </nb-chat-message-quote>
     `,
 })
