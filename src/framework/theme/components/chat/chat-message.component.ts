@@ -229,6 +229,7 @@ export class NbChatMessageComponent {
   }
 
   _isDefaultMessageType(type: string): boolean {
+    // Unset type defaults to "text" type
     return type == null || this.defaultMessageTypes.includes(type);
   }
 
