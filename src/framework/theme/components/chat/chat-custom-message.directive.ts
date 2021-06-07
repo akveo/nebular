@@ -21,8 +21,12 @@ export class NbChatCustomMessageDirective implements OnInit, OnDestroy {
 
   protected _type: string;
 
-  @Input() set nbCustomMessage(content: string) {
-    this._type = content;
+  @Input()
+  get nbCustomMessage(): string {
+    return this._type;
+  }
+  set nbCustomMessage(value: string) {
+    this._type = value;
   }
 
   get type(): string {
