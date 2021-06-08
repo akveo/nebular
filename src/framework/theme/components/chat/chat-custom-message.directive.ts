@@ -39,10 +39,10 @@ export class NbChatCustomMessageDirective implements OnInit, OnDestroy {
     if (!this._type) {
       throwCustomMessageTypeIsRequired();
     }
-    this.customMessageService.setMessageTemplate(this.type, this.templateRef);
+    this.customMessageService.registerMessageTemplate(this.type, this.templateRef);
   }
 
   ngOnDestroy() {
-    this.customMessageService.delete(this.type);
+    this.customMessageService.unregisterMessageTemplate(this.type);
   }
 }

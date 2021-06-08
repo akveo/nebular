@@ -12,11 +12,11 @@ export class NbCustomMessageService {
     return this.customMessages.get(type);
   }
 
-  setMessageTemplate(type: string, template: TemplateRef<any>): void {
+  registerMessageTemplate(type: string, template: TemplateRef<any>): void {
     this.customMessages.set(type, template);
   }
 
-  delete(type: string): boolean {
+  unregisterMessageTemplate(type: string): boolean {
     return this.customMessages.delete(type);
   }
 
