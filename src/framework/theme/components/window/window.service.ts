@@ -98,6 +98,10 @@ import { NB_DOCUMENT } from '../../theme.options';
  * You can read about all available options on [API tab](docs/components/window/api#nbwindowconfig).
  *
  * @stacked-example(Configuration, window/windows-backdrop.component)
+ *
+ * Control buttons
+ * User can manage available window control buttons (minimize, collapse, expand, maximize)
+ * @stacked-example(Control buttons, window/windows-controls.component)
  */
 @Injectable()
 export class NbWindowService {

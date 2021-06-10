@@ -1,7 +1,6 @@
 import { TemplateRef, InjectionToken, ViewContainerRef } from '@angular/core';
 // Do not remove (TS4023).
 // tslint:disable-next-line
-import { ComponentType } from '@angular/cdk/overlay';
 import { NbComponentType } from '../cdk/overlay/mapping';
 
 export enum NbWindowState {
@@ -13,6 +12,12 @@ export enum NbWindowState {
 export interface NbWindowStateChange {
   oldState: NbWindowState;
   newState: NbWindowState;
+}
+
+interface NbWindowControlButtonConfig {
+  disableMinimize?: boolean;
+  disableMaximize?: boolean;
+  disableExpandCollapse?: boolean;
 }
 
 /**
@@ -65,7 +70,27 @@ export class NbWindowConfig {
    * component instantiated inside of the window. This does not affect where the window
    * content will be rendered.
    */
+
   viewContainerRef: ViewContainerRef = null;
+
+/**
+ * Windows control buttons can be hidden by setting property to true
+ * ```ts
+ * windowService.open(FormComponent, {
+ *     title: `Window`,
+ *     buttonConfig: {
+ *      disableExpandCollapse: true,
+ *       disableMaximize: false,
+ *       disableMinimize: false,
+ *     },
+ *   })
+ * ```
+ */
+  buttonConfig: NbWindowControlButtonConfig = {
+    disableMinimize: false,
+    disableMaximize: false,
+    disableExpandCollapse: false,
+  };
 
   constructor(...configs: Partial<NbWindowConfig>[]) {
     Object.assign(this, ...configs);

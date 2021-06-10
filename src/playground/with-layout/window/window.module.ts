@@ -6,11 +6,13 @@
 
 import { NgModule } from '@angular/core';
 import { NbButtonModule, NbInputModule, NbWindowModule } from '@nebular/theme';
+import { FormsModule } from '@angular/forms';
 import { WindowRoutingModule } from './window-routing.module';
 import { TemplateWindowComponent } from './template-window.component';
 import { WindowShowcaseComponent } from './window-showcase.component';
 import { WindowsBackdropComponent } from './windows-backdrop.component';
 import { FormComponent } from './components/form.component';
+import { WindowControlsComponent } from './window-controls.component';
 
 @NgModule({
   declarations: [
@@ -18,12 +20,14 @@ import { FormComponent } from './components/form.component';
     WindowShowcaseComponent,
     WindowsBackdropComponent,
     FormComponent,
+    WindowControlsComponent,
   ],
   imports: [
     NbWindowModule.forRoot(),
     NbButtonModule,
     NbInputModule,
     WindowRoutingModule,
+    FormsModule,
   ],
   entryComponents: [ FormComponent ],
 })
