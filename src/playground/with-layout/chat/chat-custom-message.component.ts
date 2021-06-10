@@ -42,6 +42,20 @@ export class ChatCustomMessageComponent implements OnInit {
         },
       },
       {
+        reply: true,
+        text: 'with reply',
+        type: 'link',
+        customMessageData: {
+          href: 'https://akveo.github.io/ngx-admin/',
+          label: 'Visit Akveo Nebular',
+        },
+        date: new Date(),
+        user: {
+          name: 'Meriadoc Brandybuck',
+          avatar: 'https://i.gifer.com/no.gif',
+        },
+      },
+      {
         text: 'Hey look at this awesome button',
         reply: false,
         date: new Date(),
@@ -55,6 +69,49 @@ export class ChatCustomMessageComponent implements OnInit {
       {
         text: `Now let's try to use table`,
         reply: true,
+        date: new Date(),
+        type: 'table',
+        customMessageData: {
+          column1: 'Fitst Name',
+          column2: 'Last Name',
+          column3: 'Age',
+        },
+        user: {
+          name: 'Fredegar Bolger',
+          avatar: 'https://i.gifer.com/no.gif',
+        },
+      },
+      {
+        reply: true,
+        date: new Date(),
+        type: 'table',
+        customMessageData: {
+          column1: 'Fitst Name',
+          column2: 'Last Name',
+          column3: 'Age',
+        },
+        user: {
+          name: 'Fredegar Bolger',
+          avatar: 'https://i.gifer.com/no.gif',
+        },
+      },
+      {
+        text: `Now let's try to use table`,
+        reply: false,
+        date: new Date(),
+        type: 'table',
+        customMessageData: {
+          column1: 'Fitst Name',
+          column2: 'Last Name',
+          column3: 'Age',
+        },
+        user: {
+          name: 'Fredegar Bolger',
+          avatar: 'https://i.gifer.com/no.gif',
+        },
+      },
+      {
+        reply: false,
         date: new Date(),
         type: 'table',
         customMessageData: {

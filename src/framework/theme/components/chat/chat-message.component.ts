@@ -11,6 +11,7 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 import { convertToBoolProperty, NbBooleanInput } from '../helpers';
 import { NbChatMessageFile } from './chat-message-file.component';
 import { NbCustomMessageService } from './custom-message.service';
+import { NbChatCustomMessageDirective } from './chat-custom-message.directive';
 
 /**
  * Chat message component.
@@ -42,6 +43,48 @@ import { NbCustomMessageService } from './custom-message.service';
  *   message="Here I am">
  * </nb-chat-message>
  * ```
+ *
+ * Custom message.
+ *
+ * You can provide a template for you own message types via the ngCustomMessage directive.
+ * First, you need to provide a message template. To do this write a template of your message in the nb-chat element,
+ * before nb-chat-message. Mark it's root element with ngCustomMessage directive and define it's type as a value
+ * of `*ngCustomMessage="my-custom-type"`. Custom messages has simple predefined styles with `.nb-custom-message` class.
+ * If you want to use custom styling you have to use DisableDefaultStyles input:
+ * `*nbCustomMessage="'button'; disableDefaultStyles: true" class="your-custom-class"`
+ *
+ * ```html
+ *  <div *nbCustomMessage="'link'; let data">
+ *    <a [href]="data.href">{{ data.label }}</a>
+ *  </div>
+ *
+ *  <div *nbCustomMessage="'img'; disableDefaultStyles: true" class="image-container">
+ *   <picture>
+ *     <img src="https://i.gifer.com/no.gif" alt="picture">
+ *     </picture>
+ *   </div>
+ * ```
+ * // Important note
+ * Than, you need to set type property of the message which should be rendered via you custom template
+ * to the value you passed to the nbCustomMessage directive.
+ *
+ * Example of message object
+ * ```ts
+ *    {
+ *      reply: false,
+ *      type: 'link',
+ *       customMessageData: {
+ *         href: 'https://akveo.github.io/ngx-admin/',
+ *         label: 'Visit Akveo Nebular',
+ *       },
+ *       date: new Date(),
+ *       user: {
+ *         name: 'Frodo Baggins',
+ *         avatar: 'https://i.gifer.com/no.gif',
+ *       },
+ *     },
+ * ```
+ * @stacked-example(Custom message, chat/chat-custom-message.component)
  *
  * @styles
  *
@@ -101,7 +144,9 @@ import { NbCustomMessageService } from './custom-message.service';
                               [dateFormat]="dateFormat"
                               [message]="message">
         </nb-chat-message-text>
-      <ng-container [ngTemplateOutlet]="_getTemplateByType(type)" [ngTemplateOutletContext]="_getTemplateContext()"></ng-container>
+      <div [class.nb-custom-message]="!isCustomStylingScheme(type)">
+        <ng-container [ngTemplateOutlet]="_getTemplateByType(type)" [ngTemplateOutletContext]="_getTemplateContext()"></ng-container>
+      </div>
     </ng-template>
   `,
   animations: [
@@ -121,6 +166,7 @@ import { NbCustomMessageService } from './custom-message.service';
 export class NbChatMessageComponent {
 
   protected readonly defaultMessageTypes: string[] = ['text', 'file', 'map', 'quote'];
+  protected customMessageInstance: NbChatCustomMessageDirective;
 
   avatarStyle: SafeStyle;
 
@@ -221,10 +267,8 @@ export class NbChatMessageComponent {
   getInitials(): string {
     if (this.sender) {
       const names = this.sender.split(' ');
-
       return names.map(n => n.charAt(0)).splice(0, 2).join('').toUpperCase();
     }
-
     return '';
   }
 
@@ -234,7 +278,7 @@ export class NbChatMessageComponent {
   }
 
   _getTemplateByType(type: string): TemplateRef<any> {
-    const template = this.customMessageService.getMessageTemplate(type);
+    const template = this.customMessageInstance.templateRef;
     if (!template) {
       throw new Error(`nb-chat: Can't find template for custom type '${type}'.
             Make sure you provide it in the chat component with *nbCustomMessage='${type}'.`);
@@ -244,6 +288,15 @@ export class NbChatMessageComponent {
 
   _getTemplateContext(): { $implicit: any } {
     return { $implicit: this.customMessageData };
+  }
+
+  isCustomStylingScheme(type): boolean {
+    this.extractCustomMessageInstance(type);
+    return this.customMessageInstance.nbCustomMessageDisableDefaultStyles;
+  }
+
+  protected extractCustomMessageInstance(type: string): void {
+    this.customMessageInstance = this.customMessageService.getInstance(type);
   }
 
 }

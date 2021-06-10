@@ -1,35 +1,24 @@
 nb-chat {
   width: 500px;
   margin: 0 auto;
+}
 
-  .link-wrapper {
-    padding: 1rem 1rem 1rem 0;
+img {
+  max-width: 100%;
+  max-height: 100%;
+}
 
-    .custom-chat-link {
-      background: #3366ff;
-      color: #ffffff;
-      padding: 1rem;
-      border-radius: 0.5rem;
-      border-top-left-radius: 0;
-    }
-  }
+.table-container {
+  padding-top: 1rem;
+}
 
-  .table-container {
-    padding-top: 1rem;
-  }
-
-  .image-container {
-    flex: 1 1 auto;
-
-    img {
-      max-width: 100%;
-      max-height: 100%;
-    }
-  }
+.image-container {
+  flex: 1 1 auto;
 }
 
 .button-wrapper {
   padding-top: 5px;
+  display: inline-block;
 }
 
 .custom-button {

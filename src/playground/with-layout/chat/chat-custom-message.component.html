@@ -1,19 +1,20 @@
 <nb-chat title="Nebular Conversational UI" size="large">
-  <div *nbCustomMessage="'link'; let data" class="link-wrapper">
-    <a class="custom-chat-link link-control" [href]="data.href">{{ data.label }}</a>
+
+  <div *nbCustomMessage="'link'; let data">
+    <a [href]="data.href">{{ data.label }}</a>
   </div>
 
-  <div *nbCustomMessage="'button'; let data" class="button-wrapper">
+  <div *nbCustomMessage="'button'; let data; disableDefaultStyles: true" class="button-wrapper">
     <button nbButton class="custom-button">{{ data }}</button>
   </div>
 
-  <div *nbCustomMessage="'img'" class="image-container">
+  <div *nbCustomMessage="'img'; disableDefaultStyles: true" class="image-container">
     <picture>
       <img src="https://i.gifer.com/no.gif" alt="picture">
     </picture>
   </div>
 
-  <div *nbCustomMessage="'table'; let data" class="table-container">
+  <div *nbCustomMessage="'table'; let data">
     <nb-custom-message-table [tableHeader]="data"></nb-custom-message-table>
   </div>
 
