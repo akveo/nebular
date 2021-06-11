@@ -40,10 +40,8 @@ export class NbChatCustomMessageDirective implements OnInit, OnDestroy {
   /**
    * Flag that allow to disable default styling for custom message container and use user provided styles
    *
-   * ```html
-   * <div *nbCustomMessage="'custom-name'; disableDefaultStyles: true" class="class-name">
-   * </div>
-   * ```html
+   * `<div *nbCustomMessage="'custom-name'; disableDefaultStyles: true" class="class-name">
+   * </div>`
    * @type {boolean}
    */
   @Input()

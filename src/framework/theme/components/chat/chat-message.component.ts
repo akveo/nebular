@@ -47,9 +47,11 @@ import { NbChatCustomMessageDirective } from './chat-custom-message.directive';
  * Custom message.
  *
  * You can provide a template for you own message types via the ngCustomMessage directive.
- * First, you need to provide a message template. To do this write a template of your message in the nb-chat element,
- * before nb-chat-message. Mark it's root element with ngCustomMessage directive and define it's type as a value
- * of `*ngCustomMessage="my-custom-type"`. Custom messages has simple predefined styles with `.nb-custom-message` class.
+ * First, you have to to provide a message template. <br/>
+ * To do this write a template of your message in the nb-chat element,
+ * before nb-chat-message. Mark it's root element with `*ngCustomMessage' directive and define it's type as a value
+ * of `*ngCustomMessage="my-custom-type"`. <br/>
+ * Custom messages has simple predefined styles with `.nb-custom-message` class. <br/>
  * If you want to use custom styling you have to use DisableDefaultStyles input:
  * `*nbCustomMessage="'button'; disableDefaultStyles: true" class="your-custom-class"`
  *
@@ -65,7 +67,7 @@ import { NbChatCustomMessageDirective } from './chat-custom-message.directive';
  *   </div>
  * ```
  * // Important note
- * Than, you need to set type property of the message which should be rendered via you custom template
+ * Than, you have to to set type property of the message which should be rendered via you custom template
  * to the value you passed to the nbCustomMessage directive.
  *
  * Example of message object
