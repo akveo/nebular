@@ -278,12 +278,8 @@ export class NbChatMessageComponent {
   }
 
   _getTemplateByType(type: string): TemplateRef<any> {
-    const template = this.customMessageInstance.templateRef;
-    if (!template) {
-      throw new Error(`nb-chat: Can't find template for custom type '${type}'.
-            Make sure you provide it in the chat component with *nbCustomMessage='${type}'.`);
-    }
-    return template;
+    const customMessage = this.getCustomMessage(type);
+    return customMessage.templateRef;
   }
 
   _getTemplateContext(): { $implicit: any } {
@@ -291,12 +287,17 @@ export class NbChatMessageComponent {
   }
 
   isCustomStylingScheme(type): boolean {
-    this.extractCustomMessageInstance(type);
-    return this.customMessageInstance.nbCustomMessageDisableDefaultStyles;
+    const customMessage = this.getCustomMessage(type);
+    return customMessage.nbCustomMessageDisableDefaultStyles;
   }
 
-  protected extractCustomMessageInstance(type: string): void {
-    this.customMessageInstance = this.customMessageService.getInstance(type);
-  }
+  protected getCustomMessage(type: string): NbChatCustomMessageDirective {
+    const customMessageDirective = this.customMessageService.getInstance(type);
+    if (!customMessageDirective) {
+      throw new Error(`nb-chat: Can't find template for custom type '${type}'.
+            Make sure you provide it in the chat component with *nbCustomMessage='${type}'.`);
+    }
+    return customMessageDirective;
+}
 
 }
