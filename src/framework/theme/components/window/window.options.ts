@@ -1,4 +1,4 @@
-import { TemplateRef, InjectionToken, ViewContainerRef } from '@angular/core';
+import { TemplateRef, InjectionToken, ViewContainerRef, OnInit } from '@angular/core';
 // Do not remove (TS4023).
 // tslint:disable-next-line
 import { NbComponentType } from '../cdk/overlay/mapping';
@@ -14,16 +14,23 @@ export interface NbWindowStateChange {
   newState: NbWindowState;
 }
 
-interface NbWindowControlButtonConfig {
-  disableMinimize?: boolean;
-  disableMaximize?: boolean;
-  disableExpandCollapse?: boolean;
+export interface NbWindowControlButtonsConfig {
+  minimize: boolean;
+  maximize: boolean;
+  expandCollapse: boolean;
+}
+
+export const NB_WINDOW_DEFAULT_BUTTONS_CONFIG: NbWindowControlButtonsConfig = {
+  minimize: true,
+  maximize: true,
+  expandCollapse: true,
 }
 
 /**
  * Window configuration options.
  */
 export class NbWindowConfig {
+
   /**
    * Window title.
    */
@@ -73,27 +80,28 @@ export class NbWindowConfig {
 
   viewContainerRef: ViewContainerRef = null;
 
-/**
- * Windows control buttons can be hidden by setting property to true
- * ```ts
- * windowService.open(FormComponent, {
- *     title: `Window`,
- *     buttonConfig: {
- *      disableExpandCollapse: true,
- *       disableMaximize: false,
- *       disableMinimize: false,
- *     },
- *   })
- * ```
- */
-  buttonConfig: NbWindowControlButtonConfig = {
-    disableMinimize: false,
-    disableMaximize: false,
-    disableExpandCollapse: false,
-  };
+  /**
+   * Windows control buttons can be hidden by setting property to true
+   * ```ts
+   * windowService.open(FormComponent, {
+   *     title: `Window`,
+   *     buttons: {
+   *       minimize: false,
+   *       maximize: true,
+   *       expandCollapse: true
+   *     },
+   *   })
+   * ```
+   */
+  buttons: Partial<NbWindowControlButtonsConfig> = {};
 
   constructor(...configs: Partial<NbWindowConfig>[]) {
     Object.assign(this, ...configs);
+    this.applyDefaultButtonConfig();
+  }
+
+  protected applyDefaultButtonConfig() {
+    Object.assign(this, { buttons: { ...NB_WINDOW_DEFAULT_BUTTONS_CONFIG, ...this.buttons } });
   }
 }
 

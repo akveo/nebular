@@ -101,7 +101,9 @@ import { NB_DOCUMENT } from '../../theme.options';
  *
  * Control buttons
  * User can manage available window control buttons (minimize, collapse, expand, maximize)
- * @stacked-example(Control buttons, window/windows-controls.component)
+ *
+ * @stacked-example(Control buttons, window/window-controls.component)
+ *
  */
 @Injectable()
 export class NbWindowService {

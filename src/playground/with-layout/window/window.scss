@@ -15,8 +15,16 @@ button + button {
   margin-left: 2rem;
 }
 
+.nb-controls-content {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
 .nb-controls-wrapper {
-  padding-top: 1rem;
+  border: solid 0.1rem;
+  padding: 1rem;
+  border-radius: 0.5rem;
 }
 
 .nb-checkbox-label {
@@ -27,4 +35,8 @@ button + button {
 
 .nb-button-control {
   margin-bottom: 0.5rem;
+}
+
+.nb-controls-open {
+  padding-left: 1rem;
 }

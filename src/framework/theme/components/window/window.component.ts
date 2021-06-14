@@ -27,19 +27,19 @@ import { NbWindowRef } from './window-ref';
         <div cdkFocusInitial class="title" tabindex="-1">{{ config.title }}</div>
 
         <div class="buttons">
-          <ng-container *ngIf="!isMinimizedDisabled">
+          <ng-container *ngIf="isMinimizedVisible">
             <button nbButton ghost (click)="minimize()">
               <nb-icon icon="minus-outline" pack="nebular-essentials"></nb-icon>
             </button>
           </ng-container>
 
-          <ng-container *ngIf="!isMaximizedDisabled">
+          <ng-container *ngIf="isMaximizedVisible">
             <button nbButton ghost *ngIf="isFullScreen" (click)="maximize()">
               <nb-icon icon="collapse-outline" pack="nebular-essentials"></nb-icon>
             </button>
           </ng-container>
 
-          <ng-container *ngIf="!isExpandCollapseDisabled">
+          <ng-container *ngIf="isExpandCollapseVisible">
             <button nbButton ghost *ngIf="minimized || maximized" (click)="maximizeOrFullScreen()">
               <nb-icon icon="expand-outline" pack="nebular-essentials"></nb-icon>
             </button>
@@ -75,16 +75,16 @@ export class NbWindowComponent implements OnInit, AfterViewChecked, OnDestroy {
     return this.windowRef.state === NbWindowState.MINIMIZED;
   }
 
-  get isMinimizedDisabled(): boolean {
-    return this.config.buttonConfig.disableMinimize || false;
+  get isMinimizedVisible(): boolean {
+    return this.config.buttons.minimize;
   }
 
-  get isMaximizedDisabled(): boolean {
-    return this.config.buttonConfig.disableMaximize || false;
+  get isMaximizedVisible(): boolean {
+    return this.config.buttons.maximize;
   }
 
-  get isExpandCollapseDisabled(): boolean {
-    return this.config.buttonConfig.disableExpandCollapse || false
+  get isExpandCollapseVisible(): boolean {
+    return this.config.buttons.expandCollapse;
   }
 
   @ViewChild(NbOverlayContainerComponent) overlayContainer: NbOverlayContainerComponent;
