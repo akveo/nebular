@@ -3,7 +3,8 @@ import { Injectable } from '@angular/core';
 import { NbChatCustomMessageDirective } from './chat-custom-message.directive';
 
 /**
- * Service for self register custom messages
+ * `NbCustomMessageService` is used to store instances of `NbChatCustomMessageDirective`s which
+ * were provided in the chat component.
  */
 @Injectable()
 export class NbCustomMessageService {
