@@ -43,51 +43,6 @@ import { NbChatCustomMessageDirective } from './chat-custom-message.directive';
  *   message="Here I am">
  * </nb-chat-message>
  * ```
- *
- * Custom message.
- *
- * You can provide a template for you own message types via the ngCustomMessage directive.
- * First, you have to to provide a message template. <br/>
- * To do this write a template of your message in the nb-chat element,
- * before nb-chat-message. Mark it's root element with `*ngCustomMessage' directive and define it's type as a value
- * of `*ngCustomMessage="my-custom-type"`. <br/>
- * Custom messages has simple predefined styles with `.nb-custom-message` class. <br/>
- * If you want to use custom styling you have to use noStyles input:
- * `*nbCustomMessage="'button'; noStyles: true" class="your-custom-class"`
- *
- * ```html
- *  <div *nbCustomMessage="'link'; let data">
- *    <a [href]="data.href">{{ data.label }}</a>
- *  </div>
- *
- *  <div *nbCustomMessage="'img'; noStyles: true" class="image-container">
- *   <picture>
- *     <img src="https://i.gifer.com/no.gif" alt="picture">
- *     </picture>
- *   </div>
- * ```
- * // Important note
- * Than, you have to to set type property of the message which should be rendered via you custom template
- * to the value you passed to the nbCustomMessage directive.
- *
- * Example of message object
- * ```ts
- *    {
- *      reply: false,
- *      type: 'link',
- *       customMessageData: {
- *         href: 'https://akveo.github.io/ngx-admin/',
- *         label: 'Visit Akveo Nebular',
- *       },
- *       date: new Date(),
- *       user: {
- *         name: 'Frodo Baggins',
- *         avatar: 'https://i.gifer.com/no.gif',
- *       },
- *     },
- * ```
- * @stacked-example(Custom message, chat/chat-custom-message.component)
- *
  * @styles
  *
  * chat-message-background:
