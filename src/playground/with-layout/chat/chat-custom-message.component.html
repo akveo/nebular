@@ -1,22 +1,21 @@
-<nb-chat title="Nebular Conversational UI" size="large">
+<nb-chat #chatComponent title="Nebular Conversational UI" size="large" [scrollBottom]="false">
 
-  <div *nbCustomMessage="'link'; let data">
-    <a [href]="data.href">{{ data.label }}</a>
+  <a *nbCustomMessage="'link'; let data" [href]="data.href" target="_blank">
+    {{ data.text }}
+  </a>
+
+  <div *nbCustomMessage="'button'; let buttonText">
+    <p class="text-control button-custom-message-text">Wow! Button in a message!</p>
+    <button nbButton status="control" (click)="chatComponent.scrollListBottom()">
+      {{ buttonText }}
+    </button>
   </div>
 
-  <div *nbCustomMessage="'button'; let data; noStyles: true" class="button-wrapper">
-    <button nbButton class="custom-button">{{ data }}</button>
-  </div>
-
-  <div *nbCustomMessage="'img'; noStyles: true" class="image-container">
-    <picture>
-      <img src="https://i.gifer.com/no.gif" alt="picture">
-    </picture>
-  </div>
-
-  <div *nbCustomMessage="'table'; let data">
-    <nb-custom-message-table [tableHeader]="data"></nb-custom-message-table>
-  </div>
+  <nb-custom-message-table *nbCustomMessage="'table'; noStyles: true; let tableData; let isReply=isReply"
+                           [columns]="tableData.columns"
+                           [rows]="tableData.rows"
+                           [isReply]="isReply">
+  </nb-custom-message-table>
 
   <nb-chat-message *ngFor="let msg of messages"
     [type]="msg.type"

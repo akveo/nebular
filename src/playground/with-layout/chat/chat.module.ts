@@ -6,7 +6,8 @@
 
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NbCardModule, NbChatModule } from '@nebular/theme';
+import { NbCardModule, NbChatModule, NbButtonModule } from '@nebular/theme';
+
 import { ChatRoutingModule } from './chat-routing.module';
 import { ChatColorsComponent } from './chat-colors.component';
 import { ChatConversationShowcaseComponent } from './chat-conversation-showcase.component';
@@ -34,6 +35,8 @@ import { ChatCustomMessageTableComponent } from './components/chat-custom-messag
     CommonModule,
     NbChatModule.forRoot(),
     NbCardModule,
-    ChatRoutingModule ],
+    NbButtonModule,
+    ChatRoutingModule,
+  ],
 })
 export class ChatModule {}

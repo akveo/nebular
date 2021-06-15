@@ -4,24 +4,10 @@ nb-chat {
 }
 
 img {
-  max-width: 100%;
-  max-height: 100%;
-}
-
-.table-container {
-  padding-top: 1rem;
-}
-
-.image-container {
-  flex: 1 1 auto;
-}
-
-.button-wrapper {
-  padding-top: 5px;
-  display: inline-block;
-}
-
-.custom-button {
   width: 100%;
-  height: 100%;
+  height: auto;
+}
+
+.button-custom-message-text {
+  margin-top: 0;
 }

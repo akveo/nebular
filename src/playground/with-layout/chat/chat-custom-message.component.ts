@@ -1,11 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'nb-chat-custom-message',
   templateUrl: './chat-custom-message.component.html',
   styleUrls: ['./chat-custom-message.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ChatCustomMessageComponent implements OnInit {
+
+  readonly tableData = {
+    columns: [ 'First Name', 'Last Name', 'Age' ],
+    rows: [
+      { firstName: 'Robert', lastName: 'Baratheon', age: 46 },
+      { firstName: 'Jaime', lastName: 'Lannister', age: 31 },
+    ],
+  };
 
   messages: any[] = [];
 
@@ -29,12 +37,13 @@ export class ChatCustomMessageComponent implements OnInit {
   private loadMessages(): void {
     this.messages = [
       {
-        reply: false,
         type: 'link',
+        text: 'Now you able to use links!',
         customMessageData: {
-          href: 'https://akveo.github.io/ngx-admin/',
-          label: 'Visit Akveo Nebular',
+          href: 'https://akveo.github.io/nebular/',
+          text: 'Go to Nebular',
         },
+        reply: false,
         date: new Date(),
         user: {
           name: 'Frodo Baggins',
@@ -42,13 +51,12 @@ export class ChatCustomMessageComponent implements OnInit {
         },
       },
       {
-        reply: true,
-        text: 'with reply',
         type: 'link',
         customMessageData: {
           href: 'https://akveo.github.io/ngx-admin/',
-          label: 'Visit Akveo Nebular',
+          text: 'Go to ngx-admin',
         },
+        reply: true,
         date: new Date(),
         user: {
           name: 'Meriadoc Brandybuck',
@@ -56,82 +64,35 @@ export class ChatCustomMessageComponent implements OnInit {
         },
       },
       {
-        text: 'Hey look at this awesome button',
+        type: 'button',
+        customMessageData: 'Click to scroll down',
         reply: false,
         date: new Date(),
-        type: 'button',
-        customMessageData: 'custom button label',
         user: {
           name: 'Gimli Gloin',
           avatar: '',
         },
       },
       {
-        text: `Now let's try to use table`,
-        reply: true,
-        date: new Date(),
         type: 'table',
-        customMessageData: {
-          column1: 'Fitst Name',
-          column2: 'Last Name',
-          column3: 'Age',
-        },
-        user: {
-          name: 'Fredegar Bolger',
-          avatar: 'https://i.gifer.com/no.gif',
-        },
-      },
-      {
-        reply: true,
-        date: new Date(),
-        type: 'table',
-        customMessageData: {
-          column1: 'Fitst Name',
-          column2: 'Last Name',
-          column3: 'Age',
-        },
-        user: {
-          name: 'Fredegar Bolger',
-          avatar: 'https://i.gifer.com/no.gif',
-        },
-      },
-      {
         text: `Now let's try to use table`,
+        customMessageData: this.tableData,
         reply: false,
         date: new Date(),
-        type: 'table',
-        customMessageData: {
-          column1: 'Fitst Name',
-          column2: 'Last Name',
-          column3: 'Age',
-        },
         user: {
           name: 'Fredegar Bolger',
           avatar: 'https://i.gifer.com/no.gif',
         },
       },
       {
-        reply: false,
-        date: new Date(),
         type: 'table',
-        customMessageData: {
-          column1: 'Fitst Name',
-          column2: 'Last Name',
-          column3: 'Age',
-        },
-        user: {
-          name: 'Fredegar Bolger',
-          avatar: 'https://i.gifer.com/no.gif',
-        },
-      },
-      {
-        text: 'Hey looks at that pic I just found!',
+        text: `And one more table but now in the reply`,
+        customMessageData: this.tableData,
         reply: true,
         date: new Date(),
-        type: 'img',
         user: {
-          name: 'Peregrin Took',
-          avatar: '',
+          name: 'Fredegar Bolger',
+          avatar: 'https://i.gifer.com/no.gif',
         },
       },
     ]
