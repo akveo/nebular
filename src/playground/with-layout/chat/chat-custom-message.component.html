@@ -4,11 +4,11 @@
     <a [href]="data.href">{{ data.label }}</a>
   </div>
 
-  <div *nbCustomMessage="'button'; let data; disableDefaultStyles: true" class="button-wrapper">
+  <div *nbCustomMessage="'button'; let data; noStyles: true" class="button-wrapper">
     <button nbButton class="custom-button">{{ data }}</button>
   </div>
 
-  <div *nbCustomMessage="'img'; disableDefaultStyles: true" class="image-container">
+  <div *nbCustomMessage="'img'; noStyles: true" class="image-container">
     <picture>
       <img src="https://i.gifer.com/no.gif" alt="picture">
     </picture>

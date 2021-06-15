@@ -52,15 +52,15 @@ import { NbChatCustomMessageDirective } from './chat-custom-message.directive';
  * before nb-chat-message. Mark it's root element with `*ngCustomMessage' directive and define it's type as a value
  * of `*ngCustomMessage="my-custom-type"`. <br/>
  * Custom messages has simple predefined styles with `.nb-custom-message` class. <br/>
- * If you want to use custom styling you have to use DisableDefaultStyles input:
- * `*nbCustomMessage="'button'; disableDefaultStyles: true" class="your-custom-class"`
+ * If you want to use custom styling you have to use noStyles input:
+ * `*nbCustomMessage="'button'; noStyles: true" class="your-custom-class"`
  *
  * ```html
  *  <div *nbCustomMessage="'link'; let data">
  *    <a [href]="data.href">{{ data.label }}</a>
  *  </div>
  *
- *  <div *nbCustomMessage="'img'; disableDefaultStyles: true" class="image-container">
+ *  <div *nbCustomMessage="'img'; noStyles: true" class="image-container">
  *   <picture>
  *     <img src="https://i.gifer.com/no.gif" alt="picture">
  *     </picture>
@@ -146,7 +146,7 @@ import { NbChatCustomMessageDirective } from './chat-custom-message.directive';
                               [dateFormat]="dateFormat"
                               [message]="message">
         </nb-chat-message-text>
-      <div [class.nb-custom-message]="!isCustomStylingScheme(type)">
+      <div [class.nb-custom-message]="!_isCustomStylingScheme(type)">
         <ng-container [ngTemplateOutlet]="_getTemplateByType(type)" [ngTemplateOutletContext]="_getTemplateContext()"></ng-container>
       </div>
     </ng-template>
@@ -288,14 +288,15 @@ export class NbChatMessageComponent {
     return { $implicit: this.customMessageData };
   }
 
-  isCustomStylingScheme(type): boolean {
-    const customMessage = this.getCustomMessage(type);
-    return customMessage.nbCustomMessageDisableDefaultStyles;
+  _isCustomStylingScheme(type): boolean {
+    const customMessageDirective = this.getCustomMessage(type);
+    return customMessageDirective.nbCustomMessageNoStyles;
   }
 
   protected getCustomMessage(type: string): NbChatCustomMessageDirective {
     const customMessageDirective = this.customMessageService.getInstance(type);
     if (!customMessageDirective) {
+      // TODO: split lines
       throw new Error(`nb-chat: Can't find template for custom type '${type}'.
             Make sure you provide it in the chat component with *nbCustomMessage='${type}'.`);
     }
