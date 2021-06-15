@@ -107,6 +107,8 @@ import { NbButtonToggleAppearance, NbButtonToggleChange, NbButtonToggleDirective
 })
 export class NbButtonGroupComponent implements OnChanges, AfterContentInit {
 
+  protected lastEmittedValue: any[] = [];
+
   protected readonly destroy$: Subject<void> = new Subject<void>();
   protected readonly buttonsChange$ = new Subject<NbButton[]>();
 
@@ -302,6 +304,12 @@ export class NbButtonGroupComponent implements OnChanges, AfterContentInit {
       .filter((b: NbButtonToggleDirective) => b.pressed && typeof b.value !== 'undefined')
       .map((b: NbButtonToggleDirective) => b.value);
 
+    // Prevent multiple emissions of empty value.
+    if (pressedToggleValues.length === 0 && this.lastEmittedValue.length === 0) {
+      return;
+    }
+
     this.valueChange.emit(pressedToggleValues);
+    this.lastEmittedValue = pressedToggleValues;
   }
 }
