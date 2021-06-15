@@ -166,6 +166,7 @@
     font-size: 2.4rem;
     line-height: 1.125em;
     font-weight: bold;
+    margin-top: 0;
     margin-bottom: 2rem;
     text-shadow: $shadow;
 
@@ -179,9 +180,10 @@
   }
 
   p {
-    font-size: 1.25em;
-    line-height: 2em;
-    padding-right: 2em;
+    font-size: 1rem;
+    line-height: 1.75em;
+    padding-right: 3em;
+    margin-bottom: 3rem;
   }
 
   .badges {
