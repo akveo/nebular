@@ -109,7 +109,8 @@ import { NbChatCustomMessageDirective } from './chat-custom-message.directive';
       <div [class.nb-custom-message]="_areDefaultStylesEnabled()"
            [class.nb-custom-message-no-space]="_addNoSpaceClass"
            [class.nb-custom-message-reply]="_addReplyClass"
-           [class.nb-custom-message-not-reply]="_addNotReplyClass">
+           [class.nb-custom-message-not-reply]="_addNotReplyClass"
+           [class.nb-custom-message-full-width]="!_areDefaultStylesEnabled()">
         <ng-container [ngTemplateOutlet]="_getTemplate()"
                       [ngTemplateOutletContext]="_getTemplateContext()">
         </ng-container>
