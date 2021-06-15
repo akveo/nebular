@@ -167,6 +167,16 @@ import { NbCustomMessageService } from './custom-message.service';
  * ```html
  *   <div *nbCustomMessage="'my-custom-type'; noStyles: true">...</div>
  * ```
+ * When you decide to use your own styles, the `isReply` property of the custom message template context
+ * would come in handy. This property allows you to determine whether the message is a reply or not.
+ * For example, to change link text color (as replies have a different background):
+ * ```html
+ * <a *nbCustomMessage="'link'; let data; let isReply=isReply"
+ *    [href]="data.href"
+ *    [class.link-control]="!isReply">
+ *   {{ data.label }}
+ * </a>
+ * ```
  *
  * Below, you could find a more complex example with multiple custom message types:
  * @stacked-example(Custom message, chat/chat-custom-message.component)

@@ -246,8 +246,8 @@ export class NbChatMessageComponent {
     return customMessage.templateRef;
   }
 
-  _getTemplateContext(): { $implicit: any } {
-    return { $implicit: this.customMessageData };
+  _getTemplateContext(): { $implicit: any, isReply: boolean } {
+    return { $implicit: this.customMessageData, isReply: this.reply };
   }
 
   _areDefaultStylesEnabled(type: string): boolean {
@@ -270,6 +270,5 @@ export class NbChatMessageComponent {
         `Make sure you provide it in the chat component with *nbCustomMessage='${type}'.`);
     }
     return customMessageDirective;
-}
-
+  }
 }
