@@ -127,7 +127,6 @@ import { NbChatCustomMessageDirective } from './chat-custom-message.directive';
 export class NbChatMessageComponent {
 
   protected readonly defaultMessageTypes: string[] = ['text', 'file', 'map', 'quote'];
-  protected customMessageInstance: NbChatCustomMessageDirective;
 
   avatarStyle: SafeStyle;
 
