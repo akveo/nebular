@@ -7,7 +7,13 @@
 
   max-width: 45rem;
 
+  color: nb-theme(color-fg-heading);
+  margin-bottom: 1rem;
+
   p {
+    color: #6e82a9;
+    font-size: 1rem;
+    line-height: 1.75rem;
     text-align: center;
   }
 }
