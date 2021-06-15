@@ -19,7 +19,7 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import { from, merge, Observable, Subject } from 'rxjs';
-import { debounceTime, filter, switchMap, takeUntil } from 'rxjs/operators';
+import { debounceTime, filter, startWith, switchMap, takeUntil } from 'rxjs/operators';
 
 import { NbStatusService } from '../../services/status.service';
 import { convertToBoolProperty, NbBooleanInput } from '../helpers';
@@ -276,12 +276,13 @@ export class NbButtonGroupComponent implements OnChanges, AfterContentInit {
 
     merge(...buttonsPressedChange$)
       .pipe(
+        // Use startWith to emit if some buttons are initially pressed.
+        startWith(''),
+        // Use debounce to emit change once when pressed state change in multiple button toggles.
         debounceTime(0),
         takeUntil(merge(this.buttonsChange$, this.destroy$)),
       )
-      .subscribe(() => {
-        this.emitCurrentValue(toggleButtons);
-      })
+      .subscribe(() => this.emitCurrentValue(toggleButtons));
   }
 
   protected syncButtonsProperties(buttons: NbButton[]): void {
