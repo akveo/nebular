@@ -7,12 +7,10 @@ function throwCustomMessageTypeIsRequired(): void {
 }
 
 /**
- * Usage details:
- * [nbCustomMessage]: should be applied to the ng-template
- * or use a structural directive syntax:
+ * `[nbCustomMessage]` directive should be applied to the ng-template or via structural directive syntax:
  *
  * ```html
- * <div *nbCustomMessage="my-custom-type">
+ * <div *nbCustomMessage="my-custom-type; let data">
  *   <!-- custom message -->
  * </div>
  * ```
@@ -23,7 +21,7 @@ function throwCustomMessageTypeIsRequired(): void {
 export class NbChatCustomMessageDirective implements OnInit, OnDestroy {
 
   /**
-   * Custom user defined type
+   * Defines a message type which should rendered with the custom message template.
    * @type {string}
    */
   @Input()
@@ -36,7 +34,7 @@ export class NbChatCustomMessageDirective implements OnInit, OnDestroy {
   protected _type: string;
 
   /**
-   * Flag that allow to disable default styling for custom message container and use user provided styles
+   * Disables generic to all messages styles, such as round corners, text color, background, etc.
    *
    * `<div *nbCustomMessage="'custom-name'; disableDefaultStyles: true" class="class-name">
    * </div>`
