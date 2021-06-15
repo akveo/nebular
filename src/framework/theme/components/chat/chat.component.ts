@@ -25,6 +25,7 @@ import { NbComponentOrCustomStatus } from '../component-status';
 import { convertToBoolProperty, NbBooleanInput } from '../helpers';
 import { NbChatFormComponent } from './chat-form.component';
 import { NbChatMessageComponent } from './chat-message.component';
+import { NbCustomMessageService } from './custom-message.service';
 
 /**
  * Conversational UI collection - a set of components for chat-like UI construction.
@@ -111,6 +112,75 @@ import { NbChatMessageComponent } from './chat-message.component';
  *
  * @stacked-example(Chat Sizes, chat/chat-sizes.component)
  *
+ * # Custom message types
+ *
+ * Besides built-in message types, you could provide custom ones with their own template to render.
+ * As an example, let's add the `link` message type.
+ * <br>
+ * First, you need to provide a template for the `link` message type:
+ * ```html
+ * <nb-chat>
+ *   <a *nbCustomMessage="'link'" href="https://example.com">example.com</a>
+ * </nb-chat>
+ * ```
+ * Then, add the `nb-chat-message` component with the `link` type:
+ * ```html
+ * <nb-chat>
+ *   <a *nbCustomMessage="'link'" href="https://example.com">example.com</a>
+ *   <nb-chat-message type="link"></nb-chat-message>
+ * </nb-chat>
+ * ```
+ *
+ * <div class="note note-warning">
+ *   <div class="note-title">Important!</div>
+ *   <div class="note-body">
+ *     Custom chat messages must be defined before the `nb-chat-message`.
+ *   </div>
+ * </div>
+ *
+ * Custom message templates could have arbitrary data associated with them. Let's extract hardcoded link
+ * href and text. To pass some data to the custom message template, use the `customMessageData` input
+ * of the `nb-chat-message` component:
+ * ```html
+ * ...
+ * <nb-chat-message type="link" [customMessageData]="{ href: 'https://example.com', text: 'example.com' }">
+ * </nb-chat-message>
+ * ...
+ * ```
+ * When `customMessageData` is set, this object would become a template context and you'll be able
+ * to reference it via `let varName` syntax:
+ * ```html
+ * <a *nbCustomMessage="'link'; let data" [href]="data.href">{{ data.text }}</a>
+ * ```
+ *
+ * That's it, full example will look like this:
+ * ```html
+ * <nb-chat title="Nebular Conversational UI">
+ *   <a *nbCustomMessage="'link'; let data" [href]="data.href">{{ data.text }}</a>
+ *   <nb-chat-message type="link" [customMessageData]="{ href: 'https://example.com', text: 'example.com' }">
+ *   </nb-chat-message>
+ * </nb-chat>
+ * ```
+ *
+ * If you want to style your custom template from the ground up you could turn off generic message styling
+ * (such as round borders, color, background, etc.) via the `noStyles` input:
+ * ```html
+ *   <div *nbCustomMessage="'my-custom-type'; noStyles: true">...</div>
+ * ```
+ * When you decide to use your own styles, the `isReply` property of the custom message template context
+ * would come in handy. This property allows you to determine whether the message is a reply or not.
+ * For example, to change link text color (as replies have a different background):
+ * ```html
+ * <a *nbCustomMessage="'link'; let data; let isReply=isReply"
+ *    [href]="data.href"
+ *    [class.link-control]="!isReply">
+ *   {{ data.label }}
+ * </a>
+ * ```
+ *
+ * Below, you could find a more complex example with multiple custom message types:
+ * @stacked-example(Custom message, chat/chat-custom-message.component)
+ *
  * @styles
  *
  * chat-background-color:
@@ -178,6 +248,9 @@ import { NbChatMessageComponent } from './chat-message.component';
       <ng-content select="nb-chat-form"></ng-content>
     </div>
   `,
+  providers: [
+    NbCustomMessageService,
+  ],
 })
 export class NbChatComponent implements OnChanges, AfterContentInit, AfterViewInit {
 
