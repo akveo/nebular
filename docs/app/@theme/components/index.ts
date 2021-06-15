@@ -12,3 +12,4 @@ export * from './description/description.directive';
 export * from './search/search.component';
 export * from './eva/eva.component';
 export * from './for-business/for-business.component';
+export * from './components-promo/components-promo.component';
