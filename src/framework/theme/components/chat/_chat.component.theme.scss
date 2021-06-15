@@ -113,6 +113,7 @@
         word-break: break-word;
         white-space: pre-wrap;
         max-width: 100%;
+        margin-top: 0;
         margin-bottom: 0;
       }
 
@@ -181,6 +182,7 @@
         color: nb-theme(chat-message-quote-text-color);
         padding: 1rem;
         border-radius: 0.5rem;
+        margin-top: 0;
         margin-bottom: 0.5rem;
       }
 
@@ -333,7 +335,6 @@
     color: nb-theme(chat-message-sender-text-color);
     border-radius: 0.5rem;
     display: inline-block;
-    margin-top: 0.3rem;
   }
 
   .nb-custom-message-not-reply {
