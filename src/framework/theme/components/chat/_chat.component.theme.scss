@@ -333,7 +333,12 @@
   .nb-custom-message {
     display: inline-block;
     padding: nb-theme(chat-padding);
+    margin-top: 0.5rem;
     border-radius: 0.5rem;
+  }
+
+  .nb-custom-message-no-space {
+    margin-top: 0;
   }
 
   .nb-custom-message-not-reply {
