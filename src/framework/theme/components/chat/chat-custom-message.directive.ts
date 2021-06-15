@@ -38,7 +38,8 @@ export class NbChatCustomMessageDirective implements OnInit, OnDestroy {
   }
 
   /**
-   * Disables generic to all messages styles, such as round corners, text color, background, etc.
+   * Disables generic to all message styles, such as round corners, text color, background, etc.,
+   * so a custom message could be styled from the ground up.
    *
    * `<div *nbCustomMessage="'custom-name'; disableDefaultStyles: true" class="class-name">
    * </div>`
