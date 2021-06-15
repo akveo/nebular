@@ -20,7 +20,6 @@ import {
   OnInit,
   SimpleChanges,
   Optional,
-  Injector,
 } from '@angular/core';
 import { takeUntil } from 'rxjs/operators';
 import { Observable, ReplaySubject, Subject } from 'rxjs';
@@ -194,7 +193,6 @@ export abstract class NbBasePicker<D, T, P> extends NbDatepicker<T> {
                         protected positionBuilder: NbPositionBuilderService,
                         protected triggerStrategyBuilder: NbTriggerStrategyBuilderService,
                         protected cfr: ComponentFactoryResolver,
-                        protected injector: Injector,
                         protected dateService: NbDateService<D>,
                         protected dateServiceOptions,
   ) {
@@ -283,9 +281,7 @@ export abstract class NbBasePicker<D, T, P> extends NbDatepicker<T> {
   }
 
   protected openDatepicker() {
-    this.container = this.ref.attach(
-      new NbComponentPortal(NbDatepickerContainerComponent, null, this.injector, this.cfr),
-    );
+    this.container = this.ref.attach(new NbComponentPortal(NbDatepickerContainerComponent, null, null, this.cfr));
     this.instantiatePicker();
     this.subscribeOnValueChange();
     this.writeQueue();
@@ -475,11 +471,10 @@ export class NbBasePickerComponent<D, T, P> extends NbBasePicker<D, T, P>
               triggerStrategyBuilder: NbTriggerStrategyBuilderService,
               overlay: NbOverlayService,
               cfr: ComponentFactoryResolver,
-              injector: Injector,
               dateService: NbDateService<D>,
               @Optional() @Inject(NB_DATE_SERVICE_OPTIONS) dateServiceOptions,
   ) {
-    super(overlay, positionBuilder, triggerStrategyBuilder, cfr, injector, dateService, dateServiceOptions);
+    super(overlay, positionBuilder, triggerStrategyBuilder, cfr, dateService, dateServiceOptions);
   }
 
   ngOnInit() {

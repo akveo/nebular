@@ -6,6 +6,7 @@ import {
   EventEmitter,
   Inject,
   Input,
+  LOCALE_ID,
   OnChanges,
   OnInit,
   Output,
@@ -21,11 +22,10 @@ import { NbDateService, NbDayPeriod } from '../calendar-kit/services/date.servic
 import { range, rangeFromTo } from '../calendar-kit/helpers';
 import { NbCalendarTimeModelService } from '../calendar-kit/services/calendar-time-model.service';
 import {
+  NB_DEFAULT_TIMEPICKER_LOCALIZATION_CONFIG,
   NB_TIME_PICKER_CONFIG,
-  NB_TIME_PICKER_LOCALIZATION,
   NbSelectedTimePayload,
   NbTimePickerConfig,
-  NbTimepickerLocalization,
 } from './model';
 
 interface NbTimePartOption {
@@ -151,10 +151,10 @@ export class NbTimePickerComponent<D> implements OnChanges, OnInit {
    */
   @Input() showFooter: boolean = true;
   @Input() applyButtonText: string;
-  @Input() hoursText = this.tokens.hoursText;
-  @Input() minutesText = this.tokens.minutesText;
-  @Input() secondsText = this.tokens.secondsText;
-  @Input() ampmText = this.tokens.ampmText;
+  @Input() hoursText: string;
+  @Input() minutesText: string;
+  @Input() secondsText: string;
+  @Input() ampmText: string;
   @Input() currentTimeButtonText: string;
 
   /**
@@ -164,16 +164,12 @@ export class NbTimePickerComponent<D> implements OnChanges, OnInit {
   @ViewChild(NbPortalDirective, {static: true}) portal: NbPortalDirective;
 
   constructor(@Inject(NB_TIME_PICKER_CONFIG) protected config: NbTimePickerConfig,
-              @Inject(NB_TIME_PICKER_LOCALIZATION) protected tokens: NbTimepickerLocalization,
               protected platformService: NbPlatform,
+              @Inject(LOCALE_ID) locale: string,
               public cd: ChangeDetectorRef,
               protected calendarTimeModelService: NbCalendarTimeModelService<D>,
               protected dateService: NbDateService<D>) {
-    if (config) {
-      this.twelveHoursFormat = config.twelveHoursFormat;
-    } else {
-      this.twelveHoursFormat = dateService.getLocaleTimeFormat().includes('h');
-    }
+    this.initFromConfig(this.config);
   }
 
   ngOnInit(): void {
@@ -348,7 +344,6 @@ export class NbTimePickerComponent<D> implements OnChanges, OnInit {
     }));
   }
 
-
   protected generateMinutesOrSeconds(): NbTimePartOption[] {
     return range(60, (v: number) => {
       return {value: v, text: this.calendarTimeModelService.paddToTwoSymbols(v)};
@@ -374,5 +369,19 @@ export class NbTimePickerComponent<D> implements OnChanges, OnInit {
       return `${this.withSeconds && !this.singleColumn ? this.dateService.getTwentyFourHoursFormatWithSeconds()
         : this.dateService.getTwentyFourHoursFormat()}`;
     }
+  }
+
+  protected initFromConfig(config: NbTimePickerConfig) {
+    if (config) {
+      this.twelveHoursFormat = config.twelveHoursFormat;
+    } else {
+      this.twelveHoursFormat = this.dateService.getLocaleTimeFormat().includes('h');
+    }
+
+    const localeConfig = { ...NB_DEFAULT_TIMEPICKER_LOCALIZATION_CONFIG, ...config?.localization ?? {} };
+    this.hoursText = localeConfig.hoursText;
+    this.minutesText = localeConfig.minutesText;
+    this.secondsText = localeConfig.secondsText;
+    this.ampmText = localeConfig.ampmText;
   }
 }
