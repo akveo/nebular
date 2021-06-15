@@ -21,7 +21,12 @@ import { NbPlatform } from '../cdk/platform/platform-service';
 import { NbDateService, NbDayPeriod } from '../calendar-kit/services/date.service';
 import { range, rangeFromTo } from '../calendar-kit/helpers';
 import { NbCalendarTimeModelService } from '../calendar-kit/services/calendar-time-model.service';
-import { NB_TIME_PICKER_CONFIG, NbSelectedTimePayload, NbTimePickerConfig } from './model';
+import {
+  NB_DEFAULT_TIMEPICKER_LOCALIZATION_CONFIG,
+  NB_TIME_PICKER_CONFIG,
+  NbSelectedTimePayload,
+  NbTimePickerConfig,
+} from './model';
 
 interface NbTimePartOption {
   value: number,
@@ -146,10 +151,10 @@ export class NbTimePickerComponent<D> implements OnChanges, OnInit {
    */
   @Input() showFooter: boolean = true;
   @Input() applyButtonText: string;
-  @Input() hoursText = 'Hr';
-  @Input() minutesText = 'Min';
-  @Input() secondsText = 'Sec';
-  @Input() ampmText = 'Am/Pm';
+  @Input() hoursText: string;
+  @Input() minutesText: string;
+  @Input() secondsText: string;
+  @Input() ampmText: string;
   @Input() currentTimeButtonText: string;
 
   /**
@@ -164,11 +169,7 @@ export class NbTimePickerComponent<D> implements OnChanges, OnInit {
               public cd: ChangeDetectorRef,
               protected calendarTimeModelService: NbCalendarTimeModelService<D>,
               protected dateService: NbDateService<D>) {
-    if (config) {
-      this.twelveHoursFormat = config.twelveHoursFormat;
-    } else {
-      this.twelveHoursFormat = dateService.getLocaleTimeFormat().includes('h');
-    }
+    this.initFromConfig(this.config);
   }
 
   ngOnInit(): void {
@@ -343,7 +344,6 @@ export class NbTimePickerComponent<D> implements OnChanges, OnInit {
     }));
   }
 
-
   protected generateMinutesOrSeconds(): NbTimePartOption[] {
     return range(60, (v: number) => {
       return {value: v, text: this.calendarTimeModelService.paddToTwoSymbols(v)};
@@ -369,5 +369,19 @@ export class NbTimePickerComponent<D> implements OnChanges, OnInit {
       return `${this.withSeconds && !this.singleColumn ? this.dateService.getTwentyFourHoursFormatWithSeconds()
         : this.dateService.getTwentyFourHoursFormat()}`;
     }
+  }
+
+  protected initFromConfig(config: NbTimePickerConfig) {
+    if (config) {
+      this.twelveHoursFormat = config.twelveHoursFormat;
+    } else {
+      this.twelveHoursFormat = this.dateService.getLocaleTimeFormat().includes('h');
+    }
+
+    const localeConfig = { ...NB_DEFAULT_TIMEPICKER_LOCALIZATION_CONFIG, ...config?.localization ?? {} };
+    this.hoursText = localeConfig.hoursText;
+    this.minutesText = localeConfig.minutesText;
+    this.secondsText = localeConfig.secondsText;
+    this.ampmText = localeConfig.ampmText;
   }
 }
