@@ -43,6 +43,7 @@ import { NbChatCustomMessageDirective } from './chat-custom-message.directive';
  *   message="Here I am">
  * </nb-chat-message>
  * ```
+ *
  * @styles
  *
  * chat-message-background:

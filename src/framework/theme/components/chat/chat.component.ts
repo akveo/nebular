@@ -287,7 +287,8 @@ export class NbChatComponent implements OnChanges, AfterContentInit, AfterViewIn
   @ContentChildren(NbChatMessageComponent) messages: QueryList<NbChatMessageComponent>;
   @ContentChild(NbChatFormComponent) chatForm: NbChatFormComponent;
 
-  constructor(protected statusService: NbStatusService) { }
+  constructor(protected statusService: NbStatusService) {
+  }
 
   ngOnChanges(changes: SimpleChanges) {
     if ('status' in changes) {
