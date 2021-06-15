@@ -66,7 +66,7 @@ import { NbChatCustomMessageDirective } from './chat-custom-message.directive';
     </nb-chat-avatar>
 
     <div class="message">
-      <ng-container [ngSwitch]="type" *ngIf="_isBuiltInMessageType(type); else customTemplate">
+      <ng-container [ngSwitch]="type" *ngIf="_isBuiltInMessageType(); else customTemplate">
         <nb-chat-message-file *ngSwitchCase="'file'"
                               [sender]="sender"
                               [date]="date"
@@ -106,11 +106,11 @@ import { NbChatCustomMessageDirective } from './chat-custom-message.directive';
                             [dateFormat]="dateFormat"
                             [message]="message">
       </nb-chat-message-text>
-      <div [class.nb-custom-message]="_areDefaultStylesEnabled(type)"
-           [class.nb-custom-message-no-space]="_noSpaceClass(type)"
-           [class.nb-custom-message-reply]="_replyClass(type)"
-           [class.nb-custom-message-not-reply]="_notReplyClass(type)">
-        <ng-container [ngTemplateOutlet]="_getTemplateByType(type)"
+      <div [class.nb-custom-message]="_areDefaultStylesEnabled()"
+           [class.nb-custom-message-no-space]="_addNoSpaceClass"
+           [class.nb-custom-message-reply]="_addReplyClass"
+           [class.nb-custom-message-not-reply]="_addNotReplyClass">
+        <ng-container [ngTemplateOutlet]="_getTemplate()"
                       [ngTemplateOutletContext]="_getTemplateContext()">
         </ng-container>
       </div>
@@ -135,6 +135,18 @@ export class NbChatMessageComponent {
   protected readonly builtInMessageTypes: string[] = ['text', 'file', 'map', 'quote'];
 
   avatarStyle: SafeStyle;
+
+  get _addReplyClass(): boolean {
+    return this._areDefaultStylesEnabled() && this.reply;
+  }
+
+  get _addNotReplyClass(): boolean {
+    return this._areDefaultStylesEnabled() && this.notReply;
+  }
+
+  get _addNoSpaceClass(): boolean {
+    return this._areDefaultStylesEnabled() && !this.message;
+  }
 
   @HostBinding('@flyInOut')
   get flyInOut() {
@@ -238,13 +250,13 @@ export class NbChatMessageComponent {
     return '';
   }
 
-  _isBuiltInMessageType(type: string): boolean {
+  _isBuiltInMessageType(): boolean {
     // Unset type defaults to "text" type
-    return type == null || this.builtInMessageTypes.includes(type);
+    return this.type == null || this.builtInMessageTypes.includes(this.type);
   }
 
-  _getTemplateByType(type: string): TemplateRef<any> {
-    const customMessage = this.getCustomMessage(type);
+  _getTemplate(): TemplateRef<any> {
+    const customMessage = this.getCustomMessage(this.type);
     return customMessage.templateRef;
   }
 
@@ -252,21 +264,9 @@ export class NbChatMessageComponent {
     return { $implicit: this.customMessageData, isReply: this.reply };
   }
 
-  _areDefaultStylesEnabled(type: string): boolean {
-    const customMessageDirective = this.getCustomMessage(type);
+  _areDefaultStylesEnabled(): boolean {
+    const customMessageDirective = this.getCustomMessage(this.type);
     return !customMessageDirective.noStyles;
-  }
-
-  _replyClass(type: string): boolean {
-    return this._areDefaultStylesEnabled(type) && this.reply;
-  }
-
-  _notReplyClass(type: string): boolean {
-    return this._areDefaultStylesEnabled(type) && this.notReply;
-  }
-
-  _noSpaceClass(type: string): boolean {
-    return this._areDefaultStylesEnabled(type) && !this.message;
   }
 
   protected getCustomMessage(type: string): NbChatCustomMessageDirective {
