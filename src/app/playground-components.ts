@@ -474,6 +474,12 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         component: 'ChatTestComponent',
         name: 'Chat Test',
       },
+      {
+        path: 'chat-custom-message.component',
+        link: '/chat/chat-custom-message.component',
+        component: 'ChatCustomMessageComponent',
+        name: 'Chat Custom Message',
+      },
     ],
   },
   {
