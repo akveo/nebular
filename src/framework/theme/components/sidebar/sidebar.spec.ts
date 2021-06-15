@@ -19,6 +19,7 @@ import {
   NbMediaBreakpoint,
   NbThemeService,
   NbMediaBreakpointsService,
+  NbSidebarResponsiveState,
 } from '@nebular/theme';
 
 @Component({
@@ -223,6 +224,45 @@ describe('NbSidebarComponent', () => {
       sidebarComponent = fixture.debugElement.query(By.directive(NbSidebarComponent)).componentInstance;
 
       expect(sidebarComponent.state).toEqual('expanded');
+    });
+
+    it('Should return default sidebar state', (done: DoneFn) => {
+      const sidebarService: NbSidebarService = TestBed.inject(NbSidebarService);
+      fixture.detectChanges();
+      sidebarService.getSidebarState().subscribe((state: NbSidebarState) => {
+        expect(state).toBe('expanded');
+        done();
+      });
+    });
+
+    it('Should return changed sidebar state', (done: DoneFn) => {
+      const sidebarService: NbSidebarService = TestBed.inject(NbSidebarService);
+      sidebarComponent.collapse();
+      fixture.detectChanges();
+      sidebarService.getSidebarState().subscribe((state: NbSidebarState) => {
+        expect(state).toBe('collapsed');
+        done();
+      });
+    });
+
+    it('Should return default sidebar responsive state', (done: DoneFn) => {
+      const sidebarService: NbSidebarService = TestBed.inject(NbSidebarService);
+      fixture.detectChanges();
+      sidebarService.getSidebarResponsiveState().subscribe((state: NbSidebarResponsiveState) => {
+        expect(state).toBe('pc');
+        done();
+      });
+    });
+
+    it('Should return changed sidebar responsive state', (done: DoneFn) => {
+      const sidebarService: NbSidebarService = TestBed.inject(NbSidebarService);
+      themeService.setBreakpointTo('md');
+      sidebarComponent.responsive = true;
+      fixture.detectChanges();
+      sidebarService.getSidebarResponsiveState().subscribe((state: NbSidebarResponsiveState) => {
+        expect(state).toBe('tablet');
+        done();
+      });
     });
   });
 });
