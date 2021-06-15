@@ -75,7 +75,7 @@ export class ChatCustomMessageComponent implements OnInit {
       },
       {
         type: 'table',
-        text: `Now let's try to use table`,
+        text: `Now let's try to add a table`,
         customMessageData: this.tableData,
         reply: false,
         date: new Date(),
