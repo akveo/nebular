@@ -8,7 +8,7 @@ function throwCustomMessageTypeIsRequired(): void {
 }
 
 /**
- * `[nbCustomMessage]` directive should be applied to the ng-template or via structural directive syntax:
+ * `[nbCustomMessage]` directive should be used as a structural directive or should be applied to the `ng-template`:
  *
  * ```html
  * <div *nbCustomMessage="'my-custom-type'; let data">
@@ -18,6 +18,7 @@ function throwCustomMessageTypeIsRequired(): void {
  * or
  * ```html
  * <ng-template nbCustomMessage='my-custom-type' let-data>
+ *   <!-- custom message -->
  * </ng-template>
  * ```
  */
