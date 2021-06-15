@@ -59,7 +59,11 @@ import { NbChatCustomMessageDirective } from './chat-custom-message.directive';
 @Component({
   selector: 'nb-chat-message',
   template: `
-    <nb-chat-avatar *ngIf="!reply" [initials]="getInitials()" [avatarStyle]="avatarStyle"></nb-chat-avatar>
+    <nb-chat-avatar *ngIf="notReply"
+                    [initials]="getInitials()"
+                    [avatarStyle]="avatarStyle">
+    </nb-chat-avatar>
+
     <div class="message">
       <ng-container [ngSwitch]="type" *ngIf="_isBuiltInMessageType(type); else customTemplate">
         <nb-chat-message-file *ngSwitchCase="'file'"

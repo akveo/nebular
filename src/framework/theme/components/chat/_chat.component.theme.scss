@@ -82,6 +82,7 @@
     }
 
     .avatar {
+      display: block;
       border-radius: 50%;
       flex-shrink: 0;
       background: nb-theme(chat-message-avatar-background-color);
