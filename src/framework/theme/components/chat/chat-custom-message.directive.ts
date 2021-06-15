@@ -1,5 +1,5 @@
 import { Directive, Input, OnDestroy, OnInit, TemplateRef } from '@angular/core';
-import { convertToBoolProperty } from '../helpers';
+import { convertToBoolProperty, NbBooleanInput } from '../helpers';
 import { NbCustomMessageService } from './custom-message.service';
 
 function throwCustomMessageTypeIsRequired(): void {
@@ -22,9 +22,6 @@ function throwCustomMessageTypeIsRequired(): void {
 })
 export class NbChatCustomMessageDirective implements OnInit, OnDestroy {
 
-  protected _type: string;
-  protected _useCustomStyling: boolean = false;
-
   /**
    * Custom user defined type
    * @type {string}
@@ -36,6 +33,7 @@ export class NbChatCustomMessageDirective implements OnInit, OnDestroy {
   set nbCustomMessage(value: string) {
     this._type = value;
   }
+  protected _type: string;
 
   /**
    * Flag that allow to disable default styling for custom message container and use user provided styles
@@ -45,12 +43,14 @@ export class NbChatCustomMessageDirective implements OnInit, OnDestroy {
    * @type {boolean}
    */
   @Input()
-  set nbCustomMessageDisableDefaultStyles(val: boolean) {
-    this._useCustomStyling = convertToBoolProperty(val);
+  set nbCustomMessageDisableDefaultStyles(value: boolean) {
+    this._useCustomStyling = convertToBoolProperty(value);
   }
   get nbCustomMessageDisableDefaultStyles(): boolean {
     return this._useCustomStyling;
   }
+  protected _useCustomStyling: boolean = false;
+  static ngAcceptInputType_nbCustomMessageDisableDefaultStyles: NbBooleanInput;
 
   get type(): string {
     return this._type
