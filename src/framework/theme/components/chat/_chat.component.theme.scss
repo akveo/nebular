@@ -104,8 +104,8 @@
       .sender {
         font-size: 0.875rem;
         color: nb-theme(chat-message-sender-text-color);
+        margin-top: 0;
         margin-bottom: 0.5rem;
-        margin-top: 0.5rem;
       }
 
       p {
@@ -250,7 +250,6 @@
         align-items: flex-end;
       }
     }
-
   }
 
   nb-chat-form {
