@@ -29,12 +29,12 @@ import {
                      [disabled]="groupDisabled"
                      [multiple]="multiple"
                      (valueChange)="onValueChange($event)">
-      <button nbButtonToggle [value]="'A'">A</button>
-      <button nbButtonToggle [value]="'B'">B</button>
-      <button nbButtonToggle [value]="'C'">C</button>
-      <button nbButtonToggle [value]="'D'">D</button>
-      <button nbButtonToggle [value]="'E'">E</button>
-      <button nbButtonToggle [value]="'F'" *ngIf="showLastButton">F</button>
+      <button nbButtonToggle value="A">A</button>
+      <button nbButtonToggle value="B">B</button>
+      <button nbButtonToggle value="C">C</button>
+      <button nbButtonToggle value="D">D</button>
+      <button nbButtonToggle value="E">E</button>
+      <button nbButtonToggle value="F" *ngIf="showLastButton">F</button>
     </nb-button-group>
   `,
 })
@@ -51,8 +51,7 @@ export class NbButtonGroupTestComponent {
   @ViewChild(NbButtonGroupComponent) buttonGroup: NbButtonGroupComponent;
   @ViewChildren(NbButtonToggleDirective) toggleButtons: QueryList<NbButtonToggleDirective>;
 
-  onValueChange($event: any) {
-  }
+  onValueChange() {}
 }
 
 describe('Component: NbButtonGroup', () => {
