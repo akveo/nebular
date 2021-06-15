@@ -190,14 +190,6 @@
       }
     }
 
-    .nb-custom-message {
-      padding: nb-theme(chat-padding);
-      color: nb-theme(chat-message-sender-text-color);
-      border-radius: 0.5rem;
-      display: inline-block;
-      margin-top: 0.3rem;
-    }
-
     &.not-reply {
       .message {
         @include nb-ltr(margin-left, 0.5rem);
@@ -220,19 +212,6 @@
 
       nb-chat-message-file {
         align-items: flex-start;
-      }
-
-      .nb-custom-message {
-        background: nb-theme(chat-message-background);
-        color: nb-theme(chat-message-text-color);
-        border-top-left-radius: 0;
-        a {
-          color: nb-theme(chat-message-text-color);
-          &:hover, &:focus {
-            text-decoration: none;
-            color: nb-theme(chat-message-text-color);
-          }
-        }
       }
     }
 
@@ -269,15 +248,6 @@
 
       nb-chat-message-file {
         align-items: flex-end;
-      }
-
-      .nb-custom-message {
-        background: nb-theme(chat-message-reply-background-color);
-        color: nb-theme(chat-message-reply-text-color);
-        border-top-right-radius: 0;
-        a:hover, a:focus {
-          text-decoration: none;
-        }
       }
     }
 
@@ -355,6 +325,41 @@
           height: 100%;
         }
       }
+    }
+  }
+
+  .nb-custom-message {
+    padding: nb-theme(chat-padding);
+    color: nb-theme(chat-message-sender-text-color);
+    border-radius: 0.5rem;
+    display: inline-block;
+    margin-top: 0.3rem;
+  }
+
+  .nb-custom-message-not-reply {
+    background: nb-theme(chat-message-background);
+    color: nb-theme(chat-message-text-color);
+    border-top-left-radius: 0;
+
+    a {
+      color: nb-theme(chat-message-text-color);
+
+      &:hover,
+      &:focus {
+        text-decoration: none;
+        color: nb-theme(chat-message-text-color);
+      }
+    }
+  }
+
+  .nb-custom-message-reply {
+    background: nb-theme(chat-message-reply-background-color);
+    color: nb-theme(chat-message-reply-text-color);
+    border-top-right-radius: 0;
+
+    a:hover,
+    a:focus {
+      text-decoration: none;
     }
   }
 }

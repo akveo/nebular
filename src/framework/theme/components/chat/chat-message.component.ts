@@ -96,13 +96,17 @@ import { NbChatCustomMessageDirective } from './chat-custom-message.directive';
     </div>
 
     <ng-template #customTemplate>
-        <nb-chat-message-text [sender]="sender"
-                              [date]="date"
-                              [dateFormat]="dateFormat"
-                              [message]="message">
-        </nb-chat-message-text>
-      <div [class.nb-custom-message]="_shouldUseDefaultStyles(type)">
-        <ng-container [ngTemplateOutlet]="_getTemplateByType(type)" [ngTemplateOutletContext]="_getTemplateContext()"></ng-container>
+      <nb-chat-message-text [sender]="sender"
+                            [date]="date"
+                            [dateFormat]="dateFormat"
+                            [message]="message">
+      </nb-chat-message-text>
+      <div [class.nb-custom-message]="_areDefaultStylesEnabled(type)"
+           [class.nb-custom-message-reply]="_areReplyStylesEnabled(type)"
+           [class.nb-custom-message-not-reply]="_areNotReplyStylesEnabled(type)">
+        <ng-container [ngTemplateOutlet]="_getTemplateByType(type)"
+                      [ngTemplateOutletContext]="_getTemplateContext()">
+        </ng-container>
       </div>
     </ng-template>
   `,
@@ -243,9 +247,17 @@ export class NbChatMessageComponent {
     return { $implicit: this.customMessageData };
   }
 
-  _shouldUseDefaultStyles(type): boolean {
+  _areDefaultStylesEnabled(type: string): boolean {
     const customMessageDirective = this.getCustomMessage(type);
     return !customMessageDirective.noStyles;
+  }
+
+  _areReplyStylesEnabled(type: string): boolean {
+    return this._areDefaultStylesEnabled(type) && this.reply;
+  }
+
+  _areNotReplyStylesEnabled(type: string): boolean {
+    return this._areDefaultStylesEnabled(type) && this.notReply;
   }
 
   protected getCustomMessage(type: string): NbChatCustomMessageDirective {
