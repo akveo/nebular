@@ -251,9 +251,8 @@ export class NbChatMessageComponent {
   protected getCustomMessage(type: string): NbChatCustomMessageDirective {
     const customMessageDirective = this.customMessageService.getInstance(type);
     if (!customMessageDirective) {
-      // TODO: split lines
-      throw new Error(`nb-chat: Can't find template for custom type '${type}'.
-            Make sure you provide it in the chat component with *nbCustomMessage='${type}'.`);
+      throw new Error(`nb-chat: Can't find template for custom type '${type}'. ` +
+        `Make sure you provide it in the chat component with *nbCustomMessage='${type}'.`);
     }
     return customMessageDirective;
 }
