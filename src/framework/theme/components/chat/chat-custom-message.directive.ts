@@ -58,6 +58,10 @@ export class NbChatCustomMessageDirective implements OnInit, OnDestroy {
   protected _noStyles: boolean = false;
   static ngAcceptInputType_noStyles: NbBooleanInput;
 
+  get noStyles(): boolean {
+    return this.nbCustomMessageNoStyles;
+  }
+
   constructor(public templateRef: TemplateRef<any>, protected customMessageService: NbCustomMessageService) { }
 
   ngOnInit() {

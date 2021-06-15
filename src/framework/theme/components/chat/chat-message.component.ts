@@ -101,7 +101,7 @@ import { NbChatCustomMessageDirective } from './chat-custom-message.directive';
                               [dateFormat]="dateFormat"
                               [message]="message">
         </nb-chat-message-text>
-      <div [class.nb-custom-message]="!_isCustomStylingScheme(type)">
+      <div [class.nb-custom-message]="_shouldUseDefaultStyles(type)">
         <ng-container [ngTemplateOutlet]="_getTemplateByType(type)" [ngTemplateOutletContext]="_getTemplateContext()"></ng-container>
       </div>
     </ng-template>
@@ -243,9 +243,9 @@ export class NbChatMessageComponent {
     return { $implicit: this.customMessageData };
   }
 
-  _isCustomStylingScheme(type): boolean {
+  _shouldUseDefaultStyles(type): boolean {
     const customMessageDirective = this.getCustomMessage(type);
-    return customMessageDirective.nbCustomMessageNoStyles;
+    return !customMessageDirective.noStyles;
   }
 
   protected getCustomMessage(type: string): NbChatCustomMessageDirective {
