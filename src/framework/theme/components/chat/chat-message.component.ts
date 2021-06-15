@@ -223,7 +223,7 @@ export class NbChatMessageComponent {
   @Input() type: string;
 
   /**
-   * Data will be set as custom message template context
+   * Data which will be set as custom message template context
    * @type {any}
    */
   @Input() customMessageData: any;
