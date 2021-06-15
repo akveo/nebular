@@ -122,14 +122,13 @@ describe('Component: NbChatMessageComponent', () => {
   });
 
   it('ChatMessageComponent testing _isDefaultMessageType method', () => {
-    chat._isDefaultMessageType(null);
-    expect(chat._isDefaultMessageType(null)).toBe(true);
-    expect(chat._isDefaultMessageType(undefined)).toBe(true);
-    expect(chat._isDefaultMessageType('text')).toBe(true);
-    expect(chat._isDefaultMessageType('file')).toBe(true);
-    expect(chat._isDefaultMessageType('map')).toBe(true);
-    expect(chat._isDefaultMessageType('quote')).toBe(true);
-    expect(chat._isDefaultMessageType('link')).toBe(false);
-    expect(chat._isDefaultMessageType('button')).toBe(false);
+    expect(chat._isBuiltInMessageType(null)).toBe(true);
+    expect(chat._isBuiltInMessageType(undefined)).toBe(true);
+    expect(chat._isBuiltInMessageType('text')).toBe(true);
+    expect(chat._isBuiltInMessageType('file')).toBe(true);
+    expect(chat._isBuiltInMessageType('map')).toBe(true);
+    expect(chat._isBuiltInMessageType('quote')).toBe(true);
+    expect(chat._isBuiltInMessageType('link')).toBe(false);
+    expect(chat._isBuiltInMessageType('button')).toBe(false);
   });
 });

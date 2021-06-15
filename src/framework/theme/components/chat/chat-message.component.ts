@@ -61,7 +61,7 @@ import { NbChatCustomMessageDirective } from './chat-custom-message.directive';
   template: `
     <nb-chat-avatar *ngIf="!reply" [initials]="getInitials()" [avatarStyle]="avatarStyle"></nb-chat-avatar>
     <div class="message">
-      <ng-container [ngSwitch]="type" *ngIf="_isDefaultMessageType(type); else customTemplate">
+      <ng-container [ngSwitch]="type" *ngIf="_isBuiltInMessageType(type); else customTemplate">
         <nb-chat-message-file *ngSwitchCase="'file'"
                               [sender]="sender"
                               [date]="date"
@@ -126,7 +126,7 @@ import { NbChatCustomMessageDirective } from './chat-custom-message.directive';
 })
 export class NbChatMessageComponent {
 
-  protected readonly defaultMessageTypes: string[] = ['text', 'file', 'map', 'quote'];
+  protected readonly builtInMessageTypes: string[] = ['text', 'file', 'map', 'quote'];
 
   avatarStyle: SafeStyle;
 
@@ -232,9 +232,9 @@ export class NbChatMessageComponent {
     return '';
   }
 
-  _isDefaultMessageType(type: string): boolean {
+  _isBuiltInMessageType(type: string): boolean {
     // Unset type defaults to "text" type
-    return type == null || this.defaultMessageTypes.includes(type);
+    return type == null || this.builtInMessageTypes.includes(type);
   }
 
   _getTemplateByType(type: string): TemplateRef<any> {
