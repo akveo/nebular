@@ -33,6 +33,10 @@ export class NbChatCustomMessageDirective implements OnInit, OnDestroy {
   }
   protected _type: string;
 
+  get type(): string {
+    return this._type
+  }
+
   /**
    * Disables generic to all messages styles, such as round corners, text color, background, etc.
    *
@@ -49,10 +53,6 @@ export class NbChatCustomMessageDirective implements OnInit, OnDestroy {
   }
   protected _useCustomStyling: boolean = false;
   static ngAcceptInputType_nbCustomMessageDisableDefaultStyles: NbBooleanInput;
-
-  get type(): string {
-    return this._type
-  }
 
   constructor(public templateRef: TemplateRef<any>, protected customMessageService: NbCustomMessageService) { }
 
