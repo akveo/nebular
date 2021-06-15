@@ -296,7 +296,11 @@ export class NbButtonGroupComponent implements OnChanges, AfterContentInit {
     });
   }
 
-  private emitCurrentValue(toggleButtons: NbButtonToggleDirective[]): void {
-    this.valueChange.emit(toggleButtons.filter(btn => btn.pressed).map(btn => btn.value));
+  protected emitCurrentValue(toggleButtons: NbButtonToggleDirective[]): void {
+    const pressedToggleValues = toggleButtons
+      .filter((b: NbButtonToggleDirective) => b.pressed && typeof b.value !== 'undefined')
+      .map((b: NbButtonToggleDirective) => b.value);
+
+    this.valueChange.emit(pressedToggleValues);
   }
 }
