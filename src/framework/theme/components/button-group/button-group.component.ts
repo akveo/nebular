@@ -57,8 +57,9 @@ import { NbButtonToggleAppearance, NbButtonToggleChange, NbButtonToggleDirective
  * toggles pressed, you need to add `multiple` attributes to the `<nb-button-toggle>`.
  * @stacked-example(Button Group Multiple, button-group/button-group-multiple.component)
  *
- * You can use `[value]` property on `[nbButtonToggle]` to assign values to button
- * and listen to current state of button group via `(valueChange)` output.
+ * To know which buttons are currently pressed listen to `(valueChange)` on the `nb-button-group`. Event
+ * contains an array of values of currently pressed button toggles. You can assign a value to the
+ * `[nbButtonToggle]` via the `value` input.
  * @stacked-example(Button Group Value Change, button-group/button-group-value-change.component)
  *
  * To disable a group of buttons, add a `disabled` attribute to the `<nb-button-group>`.
@@ -201,7 +202,8 @@ export class NbButtonGroupComponent implements OnChanges, AfterContentInit {
   static ngAcceptInputType_ghost: NbBooleanInput;
 
   /**
-   * Emits when active toggle change
+   * Emits when `nbButtonToggle` pressed state change. `$event` contains an array of the currently pressed button
+   * toggles.
    */
   @Output() valueChange = new EventEmitter<any[]>()
 
