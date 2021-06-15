@@ -331,37 +331,31 @@
   }
 
   .nb-custom-message {
-    padding: nb-theme(chat-padding);
-    color: nb-theme(chat-message-sender-text-color);
-    border-radius: 0.5rem;
     display: inline-block;
+    padding: nb-theme(chat-padding);
+    border-radius: 0.5rem;
   }
 
   .nb-custom-message-not-reply {
     background: nb-theme(chat-message-background);
     color: nb-theme(chat-message-text-color);
-    border-top-left-radius: 0;
 
-    a {
+    @include nb-ltr(border-top-left-radius, 0);
+    @include nb-rtl(border-top-right-radius, 0);
+
+    a,
+    a:hover,
+    a:focus, {
       color: nb-theme(chat-message-text-color);
-
-      &:hover,
-      &:focus {
-        text-decoration: none;
-        color: nb-theme(chat-message-text-color);
-      }
     }
   }
 
   .nb-custom-message-reply {
     background: nb-theme(chat-message-reply-background-color);
     color: nb-theme(chat-message-reply-text-color);
-    border-top-right-radius: 0;
 
-    a:hover,
-    a:focus {
-      text-decoration: none;
-    }
+    @include nb-ltr(border-top-right-radius, 0);
+    @include nb-rtl(border-top-left-radius, 0);
   }
 }
 
