@@ -153,6 +153,9 @@ export function nbSelectFormFieldControlConfigFactory() {
  *
  * @stacked-example(Select custom comparator, select/select-compare-with.component)
  *
+ * You can add an additional icon to the select via the `nb-form-field` component:
+ * @stacked-example(Select with icon, select/select-icon.component)
+ *
  * @additional-example(Interactive, select/select-interactive.component)
  *
  * @styles

@@ -9,6 +9,7 @@ import { RouterModule, Route} from '@angular/router';
 import {
   RouteTabsetShowcaseChild1Component,
   RouteTabsetShowcaseChild2Component,
+  RouteTabsetShowcaseChild3Component,
 } from './components/route-tabset-children.component';
 import { RouteTabsetShowcaseComponent } from './route-tabset-showcase.component';
 import { TabsetBadgeComponent } from './tabset-badge.component';
@@ -35,6 +36,10 @@ const routes: Route[] = [
       {
         path: 'tab2',
         component: RouteTabsetShowcaseChild2Component,
+      },
+      {
+        path: 'tab3',
+        component: RouteTabsetShowcaseChild3Component,
       },
     ],
   },

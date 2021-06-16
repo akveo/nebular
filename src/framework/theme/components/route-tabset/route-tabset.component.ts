@@ -99,6 +99,13 @@ import { convertToBoolProperty, NbBooleanInput } from '../helpers';
               routerLinkActive="active"
               [routerLinkActiveOptions]="activeLinkOptions"
               [class.responsive]="tab.responsive"
+              [queryParams]="tab.queryParams"
+              [queryParamsHandling]="tab.queryParamsHandling"
+              [fragment]="tab.fragment"
+              [preserveFragment]="tab.preserveFragment"
+              [skipLocationChange]="tab.skipLocationChange"
+              [replaceUrl]="tab.replaceUrl"
+              [state]="tab.state"
               tabindex="0"
               class="route-tab">
             <a tabindex="-1" class="tab-link">

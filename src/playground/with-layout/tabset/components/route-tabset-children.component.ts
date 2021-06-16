@@ -23,3 +23,15 @@ export class RouteTabsetShowcaseChild1Component {
 })
 export class RouteTabsetShowcaseChild2Component {
 }
+
+@Component({
+  selector: 'nb-route-tabset-showcase-child3',
+  template: `<p>Hello world</p>`,
+  styles: [`
+    :host p {
+      padding: 1.25rem;
+    }
+  `],
+})
+export class RouteTabsetShowcaseChild3Component {
+}

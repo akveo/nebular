@@ -1,0 +1,24 @@
+<nb-card>
+  <nb-card-body>
+    <p class="subtitle">NgModel value: {{ ngModelValue }}</p>
+
+    <nb-radio-group [(ngModel)]="ngModelValue" name="ng-model-group">
+      <nb-radio value="1">Option 1</nb-radio>
+      <nb-radio value="2">Option 2</nb-radio>
+      <nb-radio value="3">Option 3</nb-radio>
+    </nb-radio-group>
+  </nb-card-body>
+</nb-card>
+
+<nb-card>
+  <nb-card-body>
+    <p class="subtitle">Form control value: {{ formControl.value }}</p>
+
+    <nb-radio-group [formControl]="formControl" name="reactive-forms-group">
+      <nb-radio value="1">Option 1</nb-radio>
+      <nb-radio value="2">Option 2</nb-radio>
+      <nb-radio value="3">Option 3</nb-radio>
+    </nb-radio-group>
+  </nb-card-body>
+</nb-card>
+
