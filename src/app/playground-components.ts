@@ -1289,6 +1289,12 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
             component: 'RouteTabsetShowcaseChild2Component',
             name: 'Route Tabset Showcase Child2',
           },
+          {
+            path: 'tab3',
+            link: '/tabset/route-tabset-showcase.component/tab3',
+            component: 'RouteTabsetShowcaseChild3Component',
+            name: 'Route Tabset Showcase Child3',
+          },
         ],
       },
       {
