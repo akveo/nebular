@@ -162,7 +162,7 @@ describe('window-service', () => {
     const windowRef = windowService.open(NbTestWindowComponent, { closeOnEsc: true });
     windowRef.componentRef.changeDetectorRef.detectChanges();
     windowRef.onClose.subscribe(closeSpy);
-    document.body.dispatchEvent(new KeyboardEvent('keydown', <any>{ keyCode: 27 }));
+    document.body.dispatchEvent(new KeyboardEvent('keydown', <any> { keyCode: 27 }));
 
     expect(closeSpy).toHaveBeenCalled();
   });
