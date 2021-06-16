@@ -5,8 +5,8 @@
  */
 
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { NbButtonModule, NbInputModule, NbWindowModule } from '@nebular/theme';
+import { NbButtonModule, NbCardModule, NbCheckboxModule, NbInputModule, NbWindowModule } from '@nebular/theme';
+
 import { WindowRoutingModule } from './window-routing.module';
 import { TemplateWindowComponent } from './template-window.component';
 import { WindowShowcaseComponent } from './window-showcase.component';
@@ -26,8 +26,9 @@ import { WindowControlsComponent } from './window-controls.component';
     NbWindowModule.forRoot(),
     NbButtonModule,
     NbInputModule,
+    NbCheckboxModule,
+    NbCardModule,
     WindowRoutingModule,
-    FormsModule,
   ],
   entryComponents: [ FormComponent ],
 })
