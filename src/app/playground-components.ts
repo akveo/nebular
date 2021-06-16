@@ -1001,6 +1001,12 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         component: 'RadioDisabledGroupComponent',
         name: 'Radio Disabled Group',
       },
+      {
+        path: 'radio-form.component',
+        link: '/radio/radio-form.component',
+        component: 'RadioFormComponent',
+        name: 'Radio Form',
+      },
     ],
   },
   {

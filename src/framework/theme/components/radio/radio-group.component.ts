@@ -65,6 +65,9 @@ import { NbRadioComponent } from './radio.component';
  * Also, you can disable the whole group using `disabled` attribute.
  * @stacked-example(Disabled group, radio/radio-disabled-group.component)
  *
+ * Example of usage with form controls
+ * @stacked-example(Radio Group with forms, radio/radio-form.component)
+ *
  * */
 @Component({
   selector: 'nb-radio-group',
