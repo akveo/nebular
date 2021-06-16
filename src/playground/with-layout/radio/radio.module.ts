@@ -14,7 +14,6 @@ import { RadioShowcaseComponent } from './radio-showcase.component';
 import { RadioStatusesComponent } from './radio-statuses.component';
 import { RadioDisabledGroupComponent } from './radio-disabled-group.component';
 import { RadioFormComponent } from './radio-form.component';
-import { SelectedOptionPipe } from './radio-selected-option.pipe';
 
 @NgModule({
   declarations: [
@@ -24,7 +23,6 @@ import { SelectedOptionPipe } from './radio-selected-option.pipe';
     RadioStatusesComponent,
     RadioDisabledGroupComponent,
     RadioFormComponent,
-    SelectedOptionPipe,
   ],
   imports: [
     CommonModule,
