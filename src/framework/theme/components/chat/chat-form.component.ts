@@ -55,8 +55,8 @@ import { NbComponentOrCustomStatus } from '../component-status';
           <span class="remove" (click)="removeFile(file)">&times;</span>
         </div>
 
-        <div>
-          <nb-icon *ngIf="!file.urlStyle" icon="file-text-outline" pack="nebular-essentials"></nb-icon>
+        <div *ngIf="!file.urlStyle">
+          <nb-icon icon="file-text-outline" pack="nebular-essentials"></nb-icon>
           <span class="remove" (click)="removeFile(file)">&times;</span>
         </div>
       </ng-container>
