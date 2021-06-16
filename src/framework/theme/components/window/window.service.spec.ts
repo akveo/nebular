@@ -16,7 +16,7 @@ const WINDOW_CONTENT = 'window content';
   selector: 'nb-test-window',
   template: WINDOW_CONTENT,
 })
-class NbTestWindowComponent { }
+class NbTestWindowComponent {}
 
 @Component({
   selector: 'nb-test-window-with-template',
@@ -29,7 +29,7 @@ class NbTestWindowComponent { }
 class NbTestWindowWithTemplateComponent {
   @ViewChild('contentTemplate') contentTemplate: TemplateRef<any>;
 
-  constructor(private ws: NbWindowService) { }
+  constructor(private ws: NbWindowService) {}
 
   openWindow() {
     return this.ws.open(
@@ -43,13 +43,13 @@ class NbTestWindowWithTemplateComponent {
   selector: 'nb-test-window-with-component',
   template: `<p id="window-content">window content {{ componentInput }}<p>`,
 })
-export class TestWindowComponent { }
+export class TestWindowComponent {}
 
 @NgModule({
   declarations: [NbTestWindowComponent, NbTestWindowWithTemplateComponent, TestWindowComponent],
   entryComponents: [NbTestWindowComponent, NbTestWindowWithTemplateComponent, TestWindowComponent],
 })
-class NbTestWindowModule { }
+class NbTestWindowModule {}
 
 let overlayContainerService: NbOverlayContainerAdapter;
 let overlayContainer: HTMLElement;
@@ -172,7 +172,7 @@ describe('window-service', () => {
     const windowRef = windowService.open(NbTestWindowComponent, { closeOnEsc: false });
     windowRef.componentRef.changeDetectorRef.detectChanges();
     windowRef.onClose.subscribe(closeSpy);
-    document.body.dispatchEvent(new KeyboardEvent('keydown', <any>{ keyCode: 27 }));
+    document.body.dispatchEvent(new KeyboardEvent('keydown', <any> { keyCode: 27 }));
 
     expect(closeSpy).not.toHaveBeenCalled();
   });
@@ -215,7 +215,7 @@ describe('window-service', () => {
     expect(queryBackdrop().hasAttribute('hidden')).toBeFalsy();
   });
 
-  it(`shouldn't render window content when minimized`, function () {
+  it(`shouldn't render window content when minimized`, function() {
     const windowRef = windowService.open(NbTestWindowComponent);
     windowRef.minimize();
     windowRef.componentRef.changeDetectorRef.detectChanges();
@@ -224,7 +224,7 @@ describe('window-service', () => {
     expect(windowElement.querySelector('nb-card-body')).toBeNull();
   });
 
-  it(`should render window content when unminimized`, function () {
+  it(`should render window content when unminimized`, function() {
     const windowRef = windowService.open(NbTestWindowComponent);
     windowRef.minimize();
     windowRef.componentRef.changeDetectorRef.detectChanges();
@@ -235,7 +235,7 @@ describe('window-service', () => {
     expect(windowElement.querySelector('nb-card-body')).not.toBeNull();
   });
 
-  it(`should render window content from template with context`, function () {
+  it(`should render window content from template with context`, function() {
     const fixture = TestBed.createComponent(NbTestWindowWithTemplateComponent);
     fixture.detectChanges();
 
@@ -247,7 +247,7 @@ describe('window-service', () => {
     expect(windowElement.nativeElement.innerText).toContain('Static text: hello world');
   });
 
-  it(`should render window content from component without context`, function () {
+  it(`should render window content from component without context`, function() {
     const windowRef = windowService.open(TestWindowComponent);
     windowRef.componentRef.changeDetectorRef.detectChanges();
 
@@ -255,8 +255,8 @@ describe('window-service', () => {
     expect(windowElement.nativeElement.innerText).toEqual('window content');
   });
 
-  it(`should render window content from component with context`, function () {
-    const windowRef = windowService.open(TestWindowComponent, { context: { componentInput: 'hello world' } });
+  it(`should render window content from component with context`, function() {
+    const windowRef = windowService.open(TestWindowComponent, { context: { componentInput: 'hello world' }});
     windowRef.componentRef.changeDetectorRef.detectChanges();
 
     const windowElement: ElementRef<HTMLElement> = windowRef.componentRef.injector.get(ElementRef);

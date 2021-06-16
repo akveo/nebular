@@ -30,7 +30,6 @@ export const NB_WINDOW_DEFAULT_BUTTONS_CONFIG: NbWindowControlButtonsConfig = {
  * Window configuration options.
  */
 export class NbWindowConfig {
-
   /**
    * Window title.
    */
@@ -77,7 +76,6 @@ export class NbWindowConfig {
    * component instantiated inside of the window. This does not affect where the window
    * content will be rendered.
    */
-
   viewContainerRef: ViewContainerRef = null;
 
   /**
