@@ -1,4 +1,4 @@
-import { TemplateRef, InjectionToken, ViewContainerRef, OnInit } from '@angular/core';
+import { TemplateRef, InjectionToken, ViewContainerRef } from '@angular/core';
 // Do not remove (TS4023).
 // tslint:disable-next-line
 import { NbComponentType } from '../cdk/overlay/mapping';
