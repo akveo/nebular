@@ -80,17 +80,7 @@ export class NbWindowConfig {
   viewContainerRef: ViewContainerRef = null;
 
   /**
-   * Windows control buttons can be hidden by setting property to true
-   * ```ts
-   * windowService.open(FormComponent, {
-   *     title: `Window`,
-   *     buttons: {
-   *       minimize: false,
-   *       maximize: true,
-   *       expandCollapse: true
-   *     },
-   *   })
-   * ```
+   * Windows control buttons can be hidden by setting according property to false.
    */
   buttons: Partial<NbWindowControlButtonsConfig> = {};
 
