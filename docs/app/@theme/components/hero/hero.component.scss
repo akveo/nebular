@@ -34,7 +34,7 @@
     }
 
     @include media-breakpoint-up(sm) {
-      max-width: 32rem;
+      max-width: 40rem;
     }
   }
 
@@ -68,6 +68,12 @@
     width: 100%;
     max-width: 16rem;
     margin-bottom: 1.5rem;
+  }
+
+  .hero-promo {
+    color: $title-fg;
+
+    margin-bottom: 2rem;
   }
 
   .feature-key {
@@ -107,7 +113,6 @@
       flex: 1 0 auto;
       display: flex;
       padding-top: 1.75rem;
-      margin-left: -4rem;
     }
 
     @include media-breakpoint-up(md) {
@@ -161,6 +166,7 @@
     font-size: 2.4rem;
     line-height: 1.125em;
     font-weight: bold;
+    margin-top: 0;
     margin-bottom: 2rem;
     text-shadow: $shadow;
 
@@ -174,9 +180,10 @@
   }
 
   p {
-    font-size: 1.25em;
-    line-height: 2em;
-    padding-right: 2em;
+    font-size: 1rem;
+    line-height: 1.75em;
+    padding-right: 3em;
+    margin-bottom: 3rem;
   }
 
   .badges {
@@ -208,7 +215,7 @@
     width: 100%;
 
     @include media-breakpoint-up(sm) {
-      max-width: 11.875rem;
+      max-width: 11.2rem;
     }
 
     &:not(:last-child) {

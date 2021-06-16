@@ -693,6 +693,7 @@ export const structure = [
           'NbChatComponent',
           'NbChatMessageComponent',
           'NbChatFormComponent',
+          'NbChatCustomMessageDirective',
         ],
       },
       {

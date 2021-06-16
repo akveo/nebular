@@ -14,7 +14,12 @@ import { NgdHubspotFormDialogComponent } from '../hubspot-form-dialog/hubspot-fo
   styleUrls: ['./hero.component.scss'],
   template: `
     <div class="block">
-      <h1>Nebular: Customizable UI Kit, Auth&nbsp;&&nbsp;Security</h1>
+      <h1>Nebular: Customizable Angular UI Kit</h1>
+      <p class="hero-promo">
+        Nebular is a customizable Angular UI library that contains 40+ UI components, four visual themes, and Auth and Security modules.
+        Recognized at the prestigious AngularConnect 2018, this Angular framework allows focusing on beautiful designs to adapt them to your brand.
+        Nebular is free of charge and open-source.
+      </p>
       <div class="btns-wrapper">
         <a class="btn get-started" routerLink="docs">Get Started</a>
         <a class="btn" href="https://www.akveo.com/ngx-admin?utm_campaign=ngx_admin%20-%20website%20-%20nebular%20landing%20-%20traffic&utm_source=nebular&utm_medium=referral&utm_content=nebular_docs_home_hero"
@@ -24,7 +29,7 @@ import { NgdHubspotFormDialogComponent } from '../hubspot-form-dialog/hubspot-fo
       <div class="hero-features">
         <div class="hero-feature">
           <div class="feature-key">
-            35+
+            40+
           </div>
           <h3 class="feature-title">
             Angular Components

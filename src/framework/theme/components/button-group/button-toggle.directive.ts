@@ -50,6 +50,11 @@ export class NbButtonToggleDirective extends NbButton {
   @Input() appearance: NbButtonToggleAppearance = 'filled';
 
   /**
+   * A value associated with the button.
+   */
+  @Input() value: any;
+
+  /**
    * Controls button pressed state
    **/
   @Input()
