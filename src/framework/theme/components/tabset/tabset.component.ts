@@ -270,6 +270,7 @@ export class NbTabComponent {
           [class.active]="tab.active"
           [class.disabled]="tab.disabled"
           [attr.tabindex]="tab.disabled ? -1 : 0"
+          [attr.data-tab-id]="tab.tabId"
           class="tab">
         <a href (click)="$event.preventDefault()" tabindex="-1" class="tab-link">
           <nb-icon *ngIf="tab.tabIcon" [config]="tab.tabIcon"></nb-icon>
