@@ -18,13 +18,13 @@ export interface NbWindowStateChange {
 export interface NbWindowControlButtonsConfig {
   minimize: boolean;
   maximize: boolean;
-  expandCollapse: boolean;
+  fullScreen: boolean;
 }
 
 export const NB_WINDOW_DEFAULT_BUTTONS_CONFIG: NbWindowControlButtonsConfig = {
   minimize: true,
   maximize: true,
-  expandCollapse: true,
+  fullScreen: true,
 }
 
 /**

@@ -299,7 +299,7 @@ describe('window-service', () => {
   });
 
   it('should render only close button', () => {
-    const config: NbWindowControlButtonsConfig = { minimize: false, maximize: false, expandCollapse: false };
+    const config: NbWindowControlButtonsConfig = { minimize: false, maximize: false, fullScreen: false };
     const windowRef = windowService.open(NbTestWindowComponent, { buttons: config});
     windowRef.componentRef.changeDetectorRef.detectChanges();
     const windowElement: ElementRef<HTMLElement> = windowRef.componentRef.injector.get(ElementRef);
@@ -308,7 +308,7 @@ describe('window-service', () => {
   });
 
   it('should render minimize and close button', () => {
-    const config: NbWindowControlButtonsConfig = { minimize: true, maximize: false, expandCollapse: false };
+    const config: NbWindowControlButtonsConfig = { minimize: true, maximize: false, fullScreen: false };
     const windowRef = windowService.open(NbTestWindowComponent, { buttons: config});
     windowRef.maximize();
     windowRef.componentRef.changeDetectorRef.detectChanges();

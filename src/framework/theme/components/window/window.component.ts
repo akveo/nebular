@@ -27,19 +27,19 @@ import { NbWindowRef } from './window-ref';
         <div cdkFocusInitial class="title" tabindex="-1">{{ config.title }}</div>
 
         <div class="buttons">
-          <ng-container *ngIf="isMinimizedVisible">
+          <ng-container *ngIf="showMinimize">
             <button nbButton ghost (click)="minimize()">
               <nb-icon icon="minus-outline" pack="nebular-essentials"></nb-icon>
             </button>
           </ng-container>
 
-          <ng-container *ngIf="isMaximizedVisible">
+          <ng-container *ngIf="showMaximize">
             <button nbButton ghost *ngIf="isFullScreen" (click)="maximize()">
               <nb-icon icon="collapse-outline" pack="nebular-essentials"></nb-icon>
             </button>
           </ng-container>
 
-          <ng-container *ngIf="isExpandCollapseVisible">
+          <ng-container *ngIf="showFullScreen">
             <button nbButton ghost *ngIf="minimized || maximized" (click)="maximizeOrFullScreen()">
               <nb-icon icon="expand-outline" pack="nebular-essentials"></nb-icon>
             </button>
@@ -75,16 +75,16 @@ export class NbWindowComponent implements OnInit, AfterViewChecked, OnDestroy {
     return this.windowRef.state === NbWindowState.MINIMIZED;
   }
 
-  get isMinimizedVisible(): boolean {
+  get showMinimize(): boolean {
     return this.config.buttons.minimize;
   }
 
-  get isMaximizedVisible(): boolean {
+  get showMaximize(): boolean {
     return this.config.buttons.maximize;
   }
 
-  get isExpandCollapseVisible(): boolean {
-    return this.config.buttons.expandCollapse;
+  get showFullScreen(): boolean {
+    return this.config.buttons.fullScreen;
   }
 
   @ViewChild(NbOverlayContainerComponent) overlayContainer: NbOverlayContainerComponent;
