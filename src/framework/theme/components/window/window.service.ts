@@ -99,9 +99,7 @@ import { NB_DOCUMENT } from '../../theme.options';
  *
  * @stacked-example(Configuration, window/windows-backdrop.component)
  *
- * Control buttons
- * User can manage available window control buttons (minimize, collapse, expand, maximize)
- *
+ * You can configure which buttons are available in a window via the `buttons` property of the window config.
  * @stacked-example(Control buttons, window/window-controls.component)
  *
  */
