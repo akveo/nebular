@@ -1,5 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { NbChatFormComponent, NbChatModule, NbThemeModule } from '@nebular/theme';
+import createSpy = jasmine.createSpy;
 
 describe('NbChatFormComponent', () => {
   let fixture: ComponentFixture<NbChatFormComponent>;
@@ -65,5 +66,18 @@ describe('NbChatFormComponent', () => {
 
       expect(chatFormComponent.getButtonStatus()).toEqual('info');
     });
+  });
+
+  describe('chat-form input change event', () => {
+    it('should emit changed input event', fakeAsync(() => {
+      const onInputChange = createSpy('onInputChange');
+      const chatFormInput = fixture.nativeElement.querySelector('input');
+      fixture.componentInstance.onInputChange.subscribe(onInputChange);
+      chatFormInput.value = 'new input value';
+      chatFormInput.dispatchEvent(new Event('input'));
+      fixture.detectChanges();
+      tick();
+      expect(onInputChange).toHaveBeenCalled();
+    }));
   });
 });

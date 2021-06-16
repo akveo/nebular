@@ -22,6 +22,7 @@ import { SelectStatusComponent } from './select-status.component';
 import { SelectInteractiveComponent } from './select-interactive.component';
 import { SelectTestComponent } from './select-test.component';
 import { SelectCompareWithComponent } from './select-compare-with.component';
+import { SelectIconComponent } from './select-icon.component';
 
 const routes: Route[] = [
   {
@@ -87,6 +88,10 @@ const routes: Route[] = [
   {
     path: 'select-compare-with.component',
     component: SelectCompareWithComponent,
+  },
+  {
+    path: 'select-icon.component',
+    component: SelectIconComponent,
   },
 ];
 
