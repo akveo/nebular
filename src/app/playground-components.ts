@@ -292,6 +292,12 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         component: 'ButtonGroupStatusesComponent',
         name: 'Button Group Statuses',
       },
+      {
+        path: 'button-group-value-change.component',
+        link: '/button-group/button-group-value-change.component',
+        component: 'ButtonGroupValueChangeComponent',
+        name: 'Button Group Value Change',
+      },
     ],
   },
   {
@@ -467,6 +473,12 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         link: '/chat/chat-test.component',
         component: 'ChatTestComponent',
         name: 'Chat Test',
+      },
+      {
+        path: 'chat-custom-message.component',
+        link: '/chat/chat-custom-message.component',
+        component: 'ChatCustomMessageComponent',
+        name: 'Chat Custom Message',
       },
     ],
   },
@@ -989,6 +1001,12 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         component: 'RadioDisabledGroupComponent',
         name: 'Radio Disabled Group',
       },
+      {
+        path: 'radio-form.component',
+        link: '/radio/radio-form.component',
+        component: 'RadioFormComponent',
+        name: 'Radio Form',
+      },
     ],
   },
   {
@@ -1124,6 +1142,12 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         link: '/select/select-compare-with.component',
         component: 'SelectCompareWithComponent',
         name: 'Select Compare With',
+      },
+      {
+        path: 'select-icon.component',
+        link: '/select/select-icon.component',
+        component: 'SelectIconComponent',
+        name: 'Select Icon',
       },
     ],
   },
