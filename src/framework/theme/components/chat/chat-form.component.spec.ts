@@ -70,14 +70,14 @@ describe('NbChatFormComponent', () => {
 
   describe('chat-form input change event', () => {
     it('should emit changed input event', fakeAsync(() => {
-      const onInputChanged = createSpy('onInputChanged');
+      const onInputChange = createSpy('onInputChange');
       const chatFormInput = fixture.nativeElement.querySelector('input');
-      fixture.componentInstance.onInputChanged.subscribe(onInputChanged);
+      fixture.componentInstance.onInputChange.subscribe(onInputChange);
       chatFormInput.value = 'new input value';
       chatFormInput.dispatchEvent(new Event('input'));
       fixture.detectChanges();
       tick();
-      expect(onInputChanged).toHaveBeenCalled();
+      expect(onInputChange).toHaveBeenCalled();
     }));
   });
 });
