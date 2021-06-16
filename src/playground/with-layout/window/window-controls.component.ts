@@ -12,7 +12,7 @@ export class WindowControlsComponent {
 
   minimize = true;
   maximize = true;
-  expandCollapse = true;
+  fullScreen = true;
 
   constructor(private windowService: NbWindowService) { }
 
@@ -20,7 +20,7 @@ export class WindowControlsComponent {
     const buttonsConfig: NbWindowControlButtonsConfig = {
       minimize: this.minimize,
       maximize: this.maximize,
-      expandCollapse: this.expandCollapse,
+      fullScreen: this.fullScreen,
     };
 
     this.windowService.open(FormComponent, { title: `Window`, buttons: buttonsConfig });
