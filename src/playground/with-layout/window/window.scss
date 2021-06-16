@@ -14,29 +14,3 @@
 button + button {
   margin-left: 2rem;
 }
-
-.nb-controls-content {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}
-
-.nb-controls-wrapper {
-  border: solid 0.1rem;
-  padding: 1rem;
-  border-radius: 0.5rem;
-}
-
-.nb-checkbox-label {
-  font-weight: bold;
-  margin-left: 0.4rem;
-  margin-right: 0.5rem;
-}
-
-.nb-button-control {
-  margin-bottom: 0.5rem;
-}
-
-.nb-controls-open {
-  padding-left: 1rem;
-}
