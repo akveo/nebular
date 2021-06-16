@@ -18,38 +18,38 @@ export class NgdHomeComponent {
   features = [
     {
       title: 'Introduction',
-      description: 'Install from scratch or based on ngx-admin',
+      description: 'Install from scratch or based on ngx-admin.',
       icon: 'assets/img/intro.svg',
       link: 'docs',
     },
     {
       title: 'Guides',
-      description: 'Theme System configuration, customisation and other articles',
+      description: 'Theme System configuration, customization, and other articles.',
       icon: 'assets/img/guides.svg',
       link: 'docs/guides/install-based-on-starter-kit',
     },
     {
       title: 'Components',
-      description: 'Native Angular components with configurable styles',
+      description: 'Native Angular components with configurable styles.',
       icon: 'assets/img/components.svg',
       link: 'docs/components/components-overview',
     },
     {
       title: 'Design System',
-      description: `Based on Eva Design System, with 4 visual themes & handy variables to create your own.
-                    With hot-reload out of the box`,
+      description: `Based on Eva Design System, with 4 visual themes & handy variables to create your custom ones.
+                    With hot-reload out of the box.`,
       icon: 'assets/img/themes.svg',
       link: 'docs/design-system/eva-design-system-intro',
     },
     {
       title: 'Auth',
-      description: 'Authentication layer with configurable Strategies',
+      description: 'The authentication layer with configurable strategies.',
       icon: 'assets/img/auth.svg',
       link: 'docs/auth/introduction',
     },
     {
       title: 'Security',
-      description: 'ACL list with helpful directives',
+      description: 'An ACL list with helpful directives.',
       icon: 'assets/img/security.svg',
       link: 'docs/security/introduction',
     },
@@ -68,12 +68,12 @@ export class NgdHomeComponent {
     },
     {
       title: 'Open',
-      description: `Source code is free and available under MIT licence.`,
+      description: `Source code is free and available under the MIT license.`,
       icon: 'assets/img/open-sourced.svg',
     },
     {
       title: 'Customizable',
-      description: `Straightforward way to integrate your brand`,
+      description: `A straightforward way to integrate your brand.`,
       icon: 'assets/img/extendable.svg',
     },
   ];

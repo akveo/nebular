@@ -37,9 +37,9 @@ export class NgdForBusinessComponent {
 
   offerings: string[] = [
     'A custom template development',
-    'Developers, designers, analytics, QA, PM & marketing',
-    'Nebular customization services',
-    'The review of your project',
+    'The services of developers, designers, analytics, QAs, PMs & marketing specialists;',
+    'Nebular customization services;',
+    'The review of your project.',
   ];
 
   constructor(private dialogService: NbDialogService) {
