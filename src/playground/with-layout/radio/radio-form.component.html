@@ -1,25 +1,24 @@
 <nb-card>
-  <nb-card-header>Forms example: {{ radioForm.value |  selectedOption }}</nb-card-header>
   <nb-card-body>
-    <form [formGroup]="formGroup">
+    <p class="subtitle">NgModel value: {{ ngModelValue }}</p>
 
-      <nb-radio-group formControlName="radioGroup">
-        <nb-radio *ngFor="let option of options" [value]="option.value">
-          {{ option.label }}
-        </nb-radio>
-      </nb-radio-group>
-
-    </form>
+    <nb-radio-group [(ngModel)]="ngModelValue" name="ng-model-group">
+      <nb-radio value="1">Option 1</nb-radio>
+      <nb-radio value="2">Option 2</nb-radio>
+      <nb-radio value="3">Option 3</nb-radio>
+    </nb-radio-group>
   </nb-card-body>
 </nb-card>
 
 <nb-card>
-  <nb-card-header>NgModel: {{ selected |  selectedOption }}</nb-card-header>
   <nb-card-body>
-    <nb-radio-group [(ngModel)]="selected">
-      <nb-radio *ngFor="let option of options" [value]="option.value">
-        {{ option.label }}
-      </nb-radio>
+    <p class="subtitle">Form control value: {{ formControl.value }}</p>
+
+    <nb-radio-group [formControl]="formControl" name="reactive-forms-group">
+      <nb-radio value="1">Option 1</nb-radio>
+      <nb-radio value="2">Option 2</nb-radio>
+      <nb-radio value="3">Option 3</nb-radio>
     </nb-radio-group>
   </nb-card-body>
 </nb-card>
+
