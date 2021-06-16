@@ -21,7 +21,7 @@
   .buttons {
     width: 9.5rem;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: flex-end;
 
     [nbButton] {
       flex: 0 0 3rem;

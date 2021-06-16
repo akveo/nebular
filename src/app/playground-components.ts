@@ -1485,6 +1485,12 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         component: 'WindowsBackdropComponent',
         name: 'Windows Backdrop',
       },
+      {
+        path: 'window-controls.component',
+        link: '/window/window-controls.component',
+        component: 'WindowControlsComponent',
+        name: 'Window Controls',
+      },
     ],
   },
   {

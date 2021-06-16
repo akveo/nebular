@@ -9,6 +9,7 @@ import { RouterModule, Route} from '@angular/router';
 import { TemplateWindowComponent } from './template-window.component';
 import { WindowShowcaseComponent } from './window-showcase.component';
 import { WindowsBackdropComponent } from './windows-backdrop.component';
+import { WindowControlsComponent } from './window-controls.component';
 
 const routes: Route[] = [
   {
@@ -22,6 +23,10 @@ const routes: Route[] = [
   {
     path: 'windows-backdrop.component',
     component: WindowsBackdropComponent,
+  },
+  {
+    path: 'window-controls.component',
+    component: WindowControlsComponent,
   },
 ];
 

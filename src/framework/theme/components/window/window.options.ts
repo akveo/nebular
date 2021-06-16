@@ -15,6 +15,18 @@ export interface NbWindowStateChange {
   newState: NbWindowState;
 }
 
+export interface NbWindowControlButtonsConfig {
+  minimize: boolean;
+  maximize: boolean;
+  fullScreen: boolean;
+}
+
+export const NB_WINDOW_DEFAULT_BUTTONS_CONFIG: NbWindowControlButtonsConfig = {
+  minimize: true,
+  maximize: true,
+  fullScreen: true,
+}
+
 /**
  * Window configuration options.
  */
@@ -67,8 +79,18 @@ export class NbWindowConfig {
    */
   viewContainerRef: ViewContainerRef = null;
 
+  /**
+   * Windows control buttons can be hidden by setting according property to false.
+   */
+  buttons: Partial<NbWindowControlButtonsConfig> = {};
+
   constructor(...configs: Partial<NbWindowConfig>[]) {
     Object.assign(this, ...configs);
+    this.applyDefaultButtonConfig();
+  }
+
+  protected applyDefaultButtonConfig() {
+    Object.assign(this, { buttons: { ...NB_WINDOW_DEFAULT_BUTTONS_CONFIG, ...this.buttons } });
   }
 }
 
