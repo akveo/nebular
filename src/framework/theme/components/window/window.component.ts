@@ -148,7 +148,7 @@ export class NbWindowComponent implements OnInit, AfterViewChecked, OnDestroy {
   }
 
   maximizeOrFullScreen() {
-    if (this.windowRef.state === NbWindowState.MINIMIZED) {
+    if (this.windowRef.state === NbWindowState.MINIMIZED && this.showMaximize) {
       this.maximize();
     } else {
       this.fullScreen();
