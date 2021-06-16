@@ -5,8 +5,9 @@
  */
 
 import { NgModule } from '@angular/core';
-import { RouterModule, Route} from '@angular/router';
+import { RouterModule, Route } from '@angular/router';
 import { TemplateWindowComponent } from './template-window.component';
+import { WindowResultComponent } from './window-result.component';
 import { WindowShowcaseComponent } from './window-showcase.component';
 import { WindowsBackdropComponent } from './windows-backdrop.component';
 
@@ -23,10 +24,14 @@ const routes: Route[] = [
     path: 'windows-backdrop.component',
     component: WindowsBackdropComponent,
   },
+  {
+    path: 'windows-result.component',
+    component: WindowResultComponent,
+  },
 ];
 
 @NgModule({
-  imports: [ RouterModule.forChild(routes) ],
-  exports: [ RouterModule ],
-})
+            imports: [ RouterModule.forChild(routes) ],
+            exports: [ RouterModule ],
+          })
 export class WindowRoutingModule {}

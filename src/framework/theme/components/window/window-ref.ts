@@ -36,7 +36,7 @@ export class NbWindowRef {
   }
 
   protected _closed = false;
-  protected closed$ = new Subject();
+  protected closed$ = new Subject<{}>();
   /**
    * Emits when window was closed.
    */
@@ -76,7 +76,7 @@ export class NbWindowRef {
   /**
    * Closes window.
    * */
-  close() {
+  close(res?: {}) {
     if (this._closed) {
       return;
     }
@@ -84,7 +84,7 @@ export class NbWindowRef {
     this._closed = true;
     this.componentRef.destroy();
     this.stateChange$.complete();
-    this.closed$.next();
+    this.closed$.next(res);
     this.closed$.complete();
   }
 }
