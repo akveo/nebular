@@ -10,7 +10,7 @@
     "e2e": "ng e2e",
     "dev:ssr": "ng run packages-smoke:serve-ssr",
     "serve:ssr": "node dist/server/main.js",
-    "build:ssr": "ng build --prod && ng run packages-smoke:server:production",
+    "build:ssr": "ng build --configuration production && ng run packages-smoke:server:production",
     "prerender": "ng run packages-smoke:prerender"
   },
   "private": true,
