@@ -1,18 +1,9 @@
 import { Component } from '@angular/core';
-import { NbStepChangedEvent } from '../../../framework/theme/components/stepper/stepper.component';
+import { NbStepChangedEvent } from '@nebular/theme';
 
 @Component({
   templateUrl: './stepper-step-change-event.component.html',
-  styles     : [`
-  button {
-      margin: 0.5rem;
-  }
-
-  random-index {
-      display: flex;
-      align-items: center;
-  }
-  `],
+  styleUrls: ['./stepper-step-change-event.component.scss'],
 })
 
 export class StepperStepChangeEventComponent {
