@@ -104,6 +104,7 @@ describe('Component: NbButtonGroup', () => {
     fixture.detectChanges();
     flush();
     fixture.detectChanges();
+    tick();
     expect(toggleButtons.last.status).toEqual(buttonGroup.status);
   }));
 
@@ -112,6 +113,7 @@ describe('Component: NbButtonGroup', () => {
     fixture.detectChanges();
     flush();
     fixture.detectChanges();
+    tick();
     expect(toggleButtons.last.size).toEqual(buttonGroup.size);
   }));
 
@@ -120,6 +122,7 @@ describe('Component: NbButtonGroup', () => {
     fixture.detectChanges();
     flush();
     fixture.detectChanges();
+    tick();
     expect(toggleButtons.last.appearance).toEqual(buttonGroup.appearance);
   }));
 
@@ -128,6 +131,7 @@ describe('Component: NbButtonGroup', () => {
     fixture.detectChanges();
     flush();
     fixture.detectChanges();
+    tick();
     expect(toggleButtons.last.shape).toEqual(buttonGroup.shape);
   }));
 
@@ -137,6 +141,7 @@ describe('Component: NbButtonGroup', () => {
     fixture.detectChanges();
     flush();
     fixture.detectChanges();
+    tick();
     expect(toggleButtons.last.disabled).toEqual(true);
   }));
 
