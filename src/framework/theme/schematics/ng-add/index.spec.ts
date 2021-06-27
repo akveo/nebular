@@ -14,7 +14,6 @@ import {
 } from '@angular/cdk/schematics';
 import { Tree } from '@angular-devkit/schematics';
 import { SchematicTestRunner, UnitTestTree } from '@angular-devkit/schematics/testing';
-import { map, switchMap } from 'rxjs/operators';
 
 import { getFileContent } from '@schematics/angular/utility/test';
 import { getWorkspace } from '@schematics/angular/utility/workspace';
@@ -68,14 +67,12 @@ $nb-themes: nb-register-theme((
 ), default, default);
 `;
 
-function createTestWorkspace(runner: SchematicTestRunner, appOptions: Partial<ApplicationOptions> = {}) {
-  return runner.runExternalSchematicAsync('@schematics/angular', 'workspace', workspaceOptions)
-    .pipe(
-      switchMap((workspace: UnitTestTree) => {
-        const options = { ...defaultAppOptions, ...appOptions };
-        return runner.runExternalSchematicAsync('@schematics/angular', 'application', options, workspace);
-      }),
-    );
+async function createTestWorkspace(runner: SchematicTestRunner, appOptions: Partial<ApplicationOptions> = {}) {
+  const workspace: UnitTestTree = await runner
+    .runExternalSchematicAsync('@schematics/angular', 'workspace', workspaceOptions)
+    .toPromise();
+  const options = { ...defaultAppOptions, ...appOptions };
+  return runner.runExternalSchematicAsync('@schematics/angular', 'application', options, workspace).toPromise();
 }
 
 function getPackageDependencies(tree: Tree): any {
@@ -99,14 +96,11 @@ describe('ng-add', () => {
     return runner.runSchematicAsync('post-install', options, appTree);
   }
 
-  beforeEach((done) => {
+  beforeEach(async () => {
     const collectionPath = require.resolve('../collection.json');
     runner = new SchematicTestRunner('schematics', collectionPath);
 
-    createTestWorkspace(runner).subscribe(tree => {
-      appTree = tree;
-      done();
-    });
+    appTree = await createTestWorkspace(runner)
   });
 
   describe('ng-add', () => {
@@ -208,33 +202,22 @@ describe('ng-add', () => {
     });
   });
 
-  it('should create theme.scss and plug it into the project', (done) => {
-    createTestWorkspace(runner, { style: Style.Scss })
-      .pipe(
-        switchMap(applicationTree => {
-          return runSetupSchematic({ customization: true }).pipe(map(tree => ({ applicationTree, tree })));
-        }),
-      )
-      .subscribe(({ applicationTree, tree }) => {
-        appTree = applicationTree;
-        const styles = tree.readContent('/projects/nebular/src/styles.scss');
-        const themes = tree.readContent('/projects/nebular/src/themes.scss');
+  it('should create theme.scss and plug it into the project', async () => {
+    appTree = await createTestWorkspace(runner, { style: Style.Scss });
+    const tree = await runSetupSchematic({ customization: true }).toPromise();
+    const styles = tree.readContent('/projects/nebular/src/styles.scss');
+    const themes = tree.readContent('/projects/nebular/src/themes.scss');
 
-        expect(styles).toContain(EXPECTED_STYLES_SCSS);
-        expect(themes).toContain(EXPECTED_THEME_SCSS);
-
-        done();
-      });
+    expect(styles).toContain(EXPECTED_STYLES_SCSS);
+    expect(themes).toContain(EXPECTED_THEME_SCSS);
   });
 
-  it('should throw error if adding scss themes in css project', (done) => {
-    createTestWorkspace(runner, { style: Style.Css }).subscribe(tree => {
-      appTree = tree;
+  it('should throw error if adding scss themes in css project', async (done) => {
+    appTree = await createTestWorkspace(runner, { style: Style.Css });
 
-      runSetupSchematic({ customization: true }).subscribe({
-        next: () => done.fail(new Error(`Doesn't throw`)),
-        error: done,
-      });
+    runSetupSchematic({ customization: true }).subscribe({
+      next: () => done.fail(new Error(`Doesn't throw`)),
+      error: done,
     });
   });
 

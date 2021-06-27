@@ -1,7 +1,6 @@
 {
   "compilerOptions": {
     "declaration": true,
-    "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "lib": [
       "dom",
