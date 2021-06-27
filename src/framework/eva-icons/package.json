@@ -23,7 +23,7 @@
     "eva-icons"
   ],
   "peerDependencies": {
-    "@nebular/theme": "7.0.0",
+    "@nebular/theme": "8.0.0",
     "eva-icons": "^1.1.2"
   },
   "sideEffects": false
