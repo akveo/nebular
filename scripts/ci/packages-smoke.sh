@@ -18,7 +18,7 @@ packages_smoke() {
   npm install
 
   echo "Verifying application build"
-  npm run build -- --prod
+  npm run build -- --configuration=production
   npm run build -- --configuration=production-2015
   npm run e2e
   npm run e2e -- --configuration=production-2015

@@ -1,5 +1,5 @@
 {
   "$schema": "http://json-schema.org/schema",
-  "id": "playground",
+  "$id": "playground",
   "type": "object"
 }

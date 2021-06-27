@@ -260,7 +260,7 @@ export class NbLayoutComponent implements AfterViewInit, OnDestroy {
         this.renderer.removeClass(this.elementRef.nativeElement, className);
       });
 
-    this.spinnerService.registerLoader(new Promise((resolve, reject) => {
+    this.spinnerService.registerLoader(new Promise<void>((resolve) => {
       this.afterViewInit$
         .pipe(
           takeUntil(this.destroy$),

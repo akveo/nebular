@@ -13,7 +13,7 @@ deploy_dev() {
 
   npm run build:prod -- --base-href="/${DEMO_DIR}/" --output-path "ci/dist/${DEMO_DIR}"
   npm run docs:prepare
-  npm run build -- docs --prod --base-href="/${DOCS_DIR}/" --output-path="ci/dist/${DOCS_DIR}"
+  npm run build -- docs --configuration production --base-href="/${DOCS_DIR}/" --output-path="ci/dist/${DOCS_DIR}"
 
 
   npm run firebase use dev -- --token="${FIREBASE_KEY}"

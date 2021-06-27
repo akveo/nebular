@@ -5,6 +5,8 @@
  */
 
 import { Component, Input, Output, EventEmitter, HostBinding } from '@angular/core';
+import { RouterLinkActive } from '@angular/router';
+
 import { convertToBoolProperty, NbBooleanInput } from '../helpers';
 
 /**
@@ -133,7 +135,7 @@ export class NbRouteTabsetComponent {
    * Options passed to `routerLinkActiveOptions` directive which set on tab links.
    * `{ exact: true }` by default.
    */
-  @Input() activeLinkOptions = { exact: true };
+  @Input() activeLinkOptions: RouterLinkActive['routerLinkActiveOptions'] = { exact: true };
 
   /**
    * Take full width of a parent

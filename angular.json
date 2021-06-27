@@ -11,7 +11,6 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "aot": true,
             "outputPath": "dist",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -27,7 +26,13 @@
               "src/favicon.ico"
             ],
             "styles": [],
-            "scripts": []
+            "scripts": [],
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
           },
           "configurations": {
             "production": {
@@ -52,7 +57,8 @@
                 }
               ]
             }
-          }
+          },
+          "defaultConfiguration": ""
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
@@ -132,7 +138,6 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "aot": true,
             "outputPath": "dist",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -148,7 +153,13 @@
               "src/favicon.ico"
             ],
             "styles": [],
-            "scripts": []
+            "scripts": [],
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
           },
           "configurations": {
             "production": {
@@ -173,7 +184,8 @@
                 }
               ]
             }
-          }
+          },
+          "defaultConfiguration": ""
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
@@ -250,7 +262,6 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "aot": true,
             "outputPath": "docs/dist",
             "index": "docs/index.html",
             "main": "docs/main.ts",
@@ -268,17 +279,41 @@
             "styles": [
               "node_modules/pace-js/templates/pace-theme-flash.tmpl.css",
               "node_modules/bootstrap/dist/css/bootstrap.css",
-              "node_modules/docsearch.js/dist/cdn/docsearch.min.css",
+              {
+                "inject": true,
+                "bundleName": "algolia",
+                "input": "node_modules/docsearch.js/dist/cdn/docsearch.min.css"
+              },
               "node_modules/highlight.js/styles/dracula.css",
               "docs/app/@theme/styles/styles.scss"
             ],
             "scripts": [
               "node_modules/pace-js/pace.min.js",
               "node_modules/docsearch.js/dist/cdn/docsearch.min.js"
-            ]
+            ],
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
           },
           "configurations": {
             "production": {
+              "assets": [
+                {
+                  "input": "docs/assets",
+                  "glob": "**/*",
+                  "ignore": ["examples/**/*"],
+                  "output": "/assets"
+                },
+                "docs/404.html",
+                "docs/favicon.ico",
+                "docs/favicon.png",
+                "docs/google46533d2e7a851062.html",
+                "docs/robots.txt",
+                { "glob": "versions.json", "input": "docs/", "output": "/" }
+              ],
               "budgets": [
                 {
                   "type": "anyComponentStyle",
@@ -300,7 +335,8 @@
                 }
               ]
             }
-          }
+          },
+          "defaultConfiguration": ""
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
