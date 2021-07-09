@@ -43,7 +43,7 @@ If you want to have more control over setup process you can [use manual setup gu
 
 ## UI Bakery
 Try low-code internal tool builder for free
-<a href="https://uibakery.io/?utm_source=github&utm_medium=clicks&utm_campaign=banner&__hstc=251808470.e6c76ea11d86b9092ffbf55eff4ed699.1622624288040.1625149154523.1625830413723.23&__hssc=251808470.1.1625830413723&__hsfp=4064566011"><img src="https://user-images.githubusercontent.com/6151971/125071660-41f84900-e0c2-11eb-882a-0c675eb1e5e3.png"></a>
+<a href="https://uibakery.io/?utm_source=github&utm_medium=clicks&utm_campaign=banner"><img src="https://user-images.githubusercontent.com/6151971/125071660-41f84900-e0c2-11eb-882a-0c675eb1e5e3.png"></a>
 
 ## License
 [MIT](LICENSE.txt) license.
