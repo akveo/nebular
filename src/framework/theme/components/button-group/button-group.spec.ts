@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { ComponentFixture, TestBed, fakeAsync, flush } from '@angular/core/testing';
+import { ComponentFixture, TestBed, fakeAsync, flush, tick } from '@angular/core/testing';
 import { Component, QueryList, ViewChild, ViewChildren } from '@angular/core';
 
 import {
@@ -26,13 +26,15 @@ import {
                      [status]="status"
                      [shape]="shape"
                      [appearance]="appearance"
-                     [disabled]="groupDisabled">
-      <button nbButtonToggle>A</button>
-      <button nbButtonToggle>B</button>
-      <button nbButtonToggle>C</button>
-      <button nbButtonToggle>D</button>
-      <button nbButtonToggle>E</button>
-      <button nbButtonToggle *ngIf="showLastButton">F</button>
+                     [disabled]="groupDisabled"
+                     [multiple]="multiple"
+                     (valueChange)="onValueChange($event)">
+      <button nbButtonToggle value="A">A</button>
+      <button nbButtonToggle value="B">B</button>
+      <button nbButtonToggle value="C">C</button>
+      <button nbButtonToggle value="D">D</button>
+      <button nbButtonToggle value="E">E</button>
+      <button nbButtonToggle value="F" *ngIf="showLastButton">F</button>
     </nb-button-group>
   `,
 })
@@ -42,11 +44,14 @@ export class NbButtonGroupTestComponent {
   status: NbComponentStatus = 'danger';
   appearance: NbButtonToggleAppearance = 'outline';
   groupDisabled: boolean = false;
+  multiple: boolean = false;
 
   showLastButton = false;
 
   @ViewChild(NbButtonGroupComponent) buttonGroup: NbButtonGroupComponent;
   @ViewChildren(NbButtonToggleDirective) toggleButtons: QueryList<NbButtonToggleDirective>;
+
+  onValueChange() {}
 }
 
 describe('Component: NbButtonGroup', () => {
@@ -99,6 +104,7 @@ describe('Component: NbButtonGroup', () => {
     fixture.detectChanges();
     flush();
     fixture.detectChanges();
+    tick();
     expect(toggleButtons.last.status).toEqual(buttonGroup.status);
   }));
 
@@ -107,6 +113,7 @@ describe('Component: NbButtonGroup', () => {
     fixture.detectChanges();
     flush();
     fixture.detectChanges();
+    tick();
     expect(toggleButtons.last.size).toEqual(buttonGroup.size);
   }));
 
@@ -115,6 +122,7 @@ describe('Component: NbButtonGroup', () => {
     fixture.detectChanges();
     flush();
     fixture.detectChanges();
+    tick();
     expect(toggleButtons.last.appearance).toEqual(buttonGroup.appearance);
   }));
 
@@ -123,6 +131,7 @@ describe('Component: NbButtonGroup', () => {
     fixture.detectChanges();
     flush();
     fixture.detectChanges();
+    tick();
     expect(toggleButtons.last.shape).toEqual(buttonGroup.shape);
   }));
 
@@ -132,6 +141,26 @@ describe('Component: NbButtonGroup', () => {
     fixture.detectChanges();
     flush();
     fixture.detectChanges();
+    tick();
     expect(toggleButtons.last.disabled).toEqual(true);
   }));
+
+  it('should correctly emit active buttons', fakeAsync(() => {
+    const clickButton = (el: HTMLElement, index = 0) => {
+      el.querySelectorAll<HTMLButtonElement>('[nbButtonToggle]')[index].click();
+    }
+    const nativeElement = fixture.nativeElement;
+    spyOn(testComponent, 'onValueChange').and.callThrough();
+    testComponent.showLastButton = true;
+    testComponent.multiple = true;
+    fixture.detectChanges();
+
+    clickButton(nativeElement, 0);
+    tick();
+    expect(testComponent.onValueChange).toHaveBeenCalledWith(['A']);
+
+    clickButton(nativeElement, 5);
+    tick();
+    expect(testComponent.onValueChange).toHaveBeenCalledWith(['A', 'F']);
+  }))
 });

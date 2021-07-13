@@ -111,7 +111,7 @@ async function buildDocsApp(projectDir: string, baseHref: string) {
     baseHref = baseHref + '/';
   }
   await runCommand('npm run docs:prepare', { cwd: projectDir });
-  await runCommand(`npm run build -- docs --prod --base-href '${baseHref}'`, { cwd: projectDir });
+  await runCommand(`npm run build -- docs --configuration production --base-href '${baseHref}'`, { cwd: projectDir });
   await runCommand('npm run docs:dirs', { cwd: projectDir });
 }
 

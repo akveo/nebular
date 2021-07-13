@@ -115,6 +115,14 @@
     margin: 0 auto;
   }
 
+  .components-promo {
+    margin-bottom: 3rem;
+
+    ngd-components-promo {
+      margin: auto;
+    }
+  }
+
   @include media-breakpoint-up(is) {
     ngd-hero {
       margin-top: 4rem;

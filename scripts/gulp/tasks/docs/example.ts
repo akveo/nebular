@@ -23,12 +23,19 @@ const EXAMPLES_SRC = [
   './src/playground/without-layout/**/*.*',
 ];
 const EXAMPLES_DEST = './docs/assets/examples';
+const EXAMPLES_DEST_PROD = './docs/dist/assets/examples';
 
 task('copy-examples', () => {
   del.sync(EXAMPLES_DEST);
   return src(EXAMPLES_SRC)
     .pipe(replace(/\/\*\*.*\*\/\n\s*\n/s, ''))
     .pipe(dest(EXAMPLES_DEST));
+});
+
+task('copy-examples-prod', () => {
+  return src(EXAMPLES_SRC)
+    .pipe(replace(/\/\*\*.*\*\/\n\s*\n/s, ''))
+    .pipe(dest(EXAMPLES_DEST_PROD));
 });
 
 task('generate-doc-json', generateDocJson);

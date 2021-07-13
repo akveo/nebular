@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/schema",
-  "id": "playground-components",
+  "$id": "playground-components",
   "type": "object",
   "properties": {
   }

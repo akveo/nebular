@@ -65,6 +65,9 @@ import { NbRadioComponent } from './radio.component';
  * Also, you can disable the whole group using `disabled` attribute.
  * @stacked-example(Disabled group, radio/radio-disabled-group.component)
  *
+ * Radio group supports `ngModel` and reactive forms:
+ * @stacked-example(Radio Group with forms, radio/radio-form.component)
+ *
  * */
 @Component({
   selector: 'nb-radio-group',
@@ -178,6 +181,10 @@ export class NbRadioGroupComponent implements AfterContentInit, OnDestroy, Contr
 
   writeValue(value: any): void {
     this.value = value;
+  }
+
+  setDisabledState(isDisabled: boolean): void {
+    this.disabled = isDisabled;
   }
 
   protected updateAndSubscribeToRadios() {

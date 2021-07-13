@@ -8,6 +8,7 @@ import {
   NbOverlayContainerAdapter,
   NB_DOCUMENT,
   NbThemeModule,
+  NbWindowControlButtonsConfig,
 } from '@nebular/theme';
 
 import { NbIconConfig } from '../icon/icon.component';
@@ -291,4 +292,33 @@ describe('window-service', () => {
     const windowContent = document.getElementById('window-content');
     expect(document.body.contains(windowContent)).toEqual(true);
   }));
+
+  it('should render all control buttons by default', () => {
+    const windowRef = windowService.open(NbTestWindowComponent);
+    windowRef.componentRef.changeDetectorRef.detectChanges();
+    const windowElement: ElementRef<HTMLElement> = windowRef.componentRef.injector.get(ElementRef);
+    expect(windowElement.nativeElement.querySelectorAll('button').length).toBe(3);
+  });
+
+  it('should render only close button', () => {
+    const config: NbWindowControlButtonsConfig = { minimize: false, maximize: false, fullScreen: false };
+    const windowRef = windowService.open(NbTestWindowComponent, { buttons: config});
+    windowRef.componentRef.changeDetectorRef.detectChanges();
+    const windowElement: ElementRef<HTMLElement> = windowRef.componentRef.injector.get(ElementRef);
+    const closeButton = windowElement.nativeElement.querySelectorAll('button')[0];
+    expect(closeButton.getElementsByTagName('nb-icon')[0].getAttribute('icon')).toBe('close-outline');
+  });
+
+  it('should render minimize and close button', () => {
+    const config: NbWindowControlButtonsConfig = { minimize: true, maximize: false, fullScreen: false };
+    const windowRef = windowService.open(NbTestWindowComponent, { buttons: config});
+    windowRef.maximize();
+    windowRef.componentRef.changeDetectorRef.detectChanges();
+    const windowElement: ElementRef<HTMLElement> = windowRef.componentRef.injector.get(ElementRef);
+    const buttons = Array.from(windowElement.nativeElement.querySelectorAll('button'));
+    const icons = buttons.map(e => e.getElementsByTagName('nb-icon')[0].getAttribute('icon'));
+    expect(icons.sort()).toEqual(['minus-outline', 'close-outline'].sort());
+  });
+
+
 });

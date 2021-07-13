@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/schema",
-  "id": "new-component",
+  "$id": "new-component",
   "title": "New Nebular Component Schema",
   "type": "object",
   "properties": {
