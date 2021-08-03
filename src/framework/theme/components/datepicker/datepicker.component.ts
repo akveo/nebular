@@ -27,7 +27,8 @@ import { Observable, ReplaySubject, Subject } from 'rxjs';
 import { NbComponentPortal, NbOverlayRef } from '../cdk/overlay/mapping';
 import {
   NbAdjustableConnectedPositionStrategy,
-  NbAdjustment, NbAdjustmentValues,
+  NbAdjustment,
+  NbAdjustmentValues,
   NbPosition,
   NbPositionBuilderService,
 } from '../cdk/overlay/overlay-position';
