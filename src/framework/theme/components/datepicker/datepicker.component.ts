@@ -27,7 +27,7 @@ import { Observable, ReplaySubject, Subject } from 'rxjs';
 import { NbComponentPortal, NbOverlayRef } from '../cdk/overlay/mapping';
 import {
   NbAdjustableConnectedPositionStrategy,
-  NbAdjustment,
+  NbAdjustment, NbAdjustmentValues,
   NbPosition,
   NbPositionBuilderService,
 } from '../cdk/overlay/overlay-position';
@@ -179,6 +179,8 @@ export abstract class NbBasePicker<D, T, P> extends NbDatepicker<T> {
 
   protected overlayOffset = 8;
 
+  protected adjustment: NbAdjustment = NbAdjustment.COUNTERCLOCKWISE;
+
   protected destroy$ = new Subject<void>();
 
   /**
@@ -294,7 +296,7 @@ export abstract class NbBasePicker<D, T, P> extends NbDatepicker<T> {
       .connectedTo(this.hostRef)
       .position(NbPosition.BOTTOM)
       .offset(this.overlayOffset)
-      .adjustment(NbAdjustment.COUNTERCLOCKWISE);
+      .adjustment(this.adjustment);
   }
 
   protected subscribeOnPositionChange() {
@@ -465,6 +467,9 @@ export class NbBasePickerComponent<D, T, P> extends NbBasePicker<D, T, P>
    * Determines picker overlay offset (in pixels).
    * */
   @Input() overlayOffset = 8;
+
+  @Input() adjustment: NbAdjustment = NbAdjustment.COUNTERCLOCKWISE;
+  static ngAcceptInputType_adjustment: NbAdjustmentValues;
 
   constructor(@Inject(NB_DOCUMENT) document,
               positionBuilder: NbPositionBuilderService,
