@@ -74,7 +74,7 @@ async function prepareVersion(version: Version, distDir: string, ghspaScript: st
 
   await copyToBuildDir(MASTER_BRANCH_DIR, projectDir);
   await checkoutVersion(version.checkoutTarget, projectDir);
-  await runCommand('npm install', { cwd: projectDir });
+  await runCommand('npm ci', { cwd: projectDir });
   await addVersionNameToPackageJson(version.name, join(projectDir, 'package.json'));
   await buildDocsApp(projectDir, version.path);
   await copy(join(projectDir, 'docs/dist'), distDir);
