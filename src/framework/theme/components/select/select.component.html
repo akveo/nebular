@@ -7,15 +7,17 @@
         type="button"
         #selectButton>
 
-    <ng-container *ngIf="selectionModel.length; else placeholderTemplate">
-      <ng-container *ngIf="customLabel; else defaultSelectionTemplate">
-        <ng-content select="nb-select-label"></ng-content>
+    <span>
+      <ng-container *ngIf="selectionModel.length; else placeholderTemplate">
+        <ng-container *ngIf="customLabel; else defaultSelectionTemplate">
+          <ng-content select="nb-select-label"></ng-content>
+        </ng-container>
+
+        <ng-template #defaultSelectionTemplate>{{ selectionView }}</ng-template>
       </ng-container>
 
-      <ng-template #defaultSelectionTemplate>{{ selectionView }}</ng-template>
-    </ng-container>
-
-    <ng-template #placeholderTemplate>{{ placeholder }}</ng-template>
+      <ng-template #placeholderTemplate>{{ placeholder }}</ng-template>
+    </span>
 
     <nb-icon icon="chevron-down-outline" pack="nebular-essentials" (click)="disabled && $event.stopPropagation()" aria-hidden="true">
     </nb-icon>
