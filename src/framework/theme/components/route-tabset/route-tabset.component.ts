@@ -19,7 +19,7 @@ import { convertToBoolProperty, NbBooleanInput } from '../helpers';
  *    title: 'Route tab #1',
  *    route: '/pages/description',
  *    icon: 'home',
- *    responsive: true, // hide title before `route-tabs-icon-only-max-width` value
+ *    responsive: true, // hide title before `tabset-tab-text-hide-breakpoint` value
  *  },
  *  {
  *    title: 'Route tab #2',
