@@ -103,7 +103,7 @@ async function checkoutVersion(checkoutTarget: string, repoDirectory: string) {
 async function addVersionNameToPackageJson(versionName: string, packageJsonPath: string) {
   const packageJsonObject = await readJson(packageJsonPath);
   packageJsonObject.versionName = versionName;
-  await writeJson(packageJsonPath, packageJsonObject);
+  await writeJson(packageJsonPath, packageJsonObject, { EOL: '\n' });
 }
 
 async function buildDocsApp(projectDir: string, baseHref: string) {
