@@ -1024,7 +1024,7 @@ export class NbSelectComponent implements OnChanges, AfterViewInit, AfterContent
 
   protected setActiveOption() {
     if (this.selectionModel.length) {
-      this.keyManager.setActiveItem(this.selectionModel[ 0 ]);
+      this.keyManager.setActiveItem(this.selectionModel[0]);
     } else {
       this.keyManager.setFirstItemActive();
     }
@@ -1156,9 +1156,14 @@ export class NbSelectComponent implements OnChanges, AfterViewInit, AfterContent
    * */
   protected setSelection(value) {
     const isArray: boolean = Array.isArray(value);
+    let formattedValue = value;
 
-    if (this.multiple && !isArray) {
-      throw new Error('Can\'t assign single value if select is marked as multiple');
+    if (this.multiple) {
+      if (value === null || value === undefined) {
+        formattedValue = [];
+      } else if (!isArray) {
+        throw new Error('Can\'t assign single value if select is marked as multiple');
+      }
     }
 
     if (!this.multiple && isArray) {
@@ -1168,10 +1173,10 @@ export class NbSelectComponent implements OnChanges, AfterViewInit, AfterContent
     const previouslySelectedOptions = this.selectionModel;
     this.selectionModel = [];
 
-    if (isArray) {
-      value.forEach(option => this.selectValue(option));
+    if (this.multiple) {
+      formattedValue.forEach(option => this.selectValue(option));
     } else {
-      this.selectValue(value);
+      this.selectValue(formattedValue);
     }
 
     // find options which were selected before and trigger deselect
