@@ -151,6 +151,7 @@ export class NbTimePickerComponent<D> implements OnChanges, OnInit {
    */
   @Input() showFooter: boolean = true;
   @Input() applyButtonText: string;
+  @Input() timeText: string;
   @Input() hoursText: string;
   @Input() minutesText: string;
   @Input() secondsText: string;
@@ -378,10 +379,21 @@ export class NbTimePickerComponent<D> implements OnChanges, OnInit {
       this.twelveHoursFormat = this.dateService.getLocaleTimeFormat().includes('h');
     }
 
-    const localeConfig = { ...NB_DEFAULT_TIMEPICKER_LOCALIZATION_CONFIG, ...config?.localization ?? {} };
-    this.hoursText = localeConfig.hoursText;
-    this.minutesText = localeConfig.minutesText;
-    this.secondsText = localeConfig.secondsText;
-    this.ampmText = localeConfig.ampmText;
+    const {
+      hoursText,
+      minutesText,
+      secondsText,
+      ampmText,
+      timeText,
+      applyButtonText,
+      currentTimeButtonText,
+    } = { ...NB_DEFAULT_TIMEPICKER_LOCALIZATION_CONFIG, ...config?.localization ?? {} };
+    this.hoursText = hoursText;
+    this.minutesText = minutesText;
+    this.secondsText = secondsText;
+    this.ampmText = ampmText;
+    this.timeText = timeText;
+    this.applyButtonText = applyButtonText;
+    this.currentTimeButtonText = currentTimeButtonText;
   }
 }
