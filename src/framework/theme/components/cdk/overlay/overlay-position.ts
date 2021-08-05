@@ -18,6 +18,8 @@ import { NbOverlayContainerAdapter } from '../adapter/overlay-container-adapter'
 import { NbViewportRulerAdapter } from '../adapter/viewport-ruler-adapter';
 import { NbGlobalLogicalPosition } from './position-helper';
 import { GlobalPositionStrategy } from '@angular/cdk/overlay';
+import { Direction } from '@angular/cdk/bidi';
+import { ConnectedPosition } from '@angular/cdk/overlay/position/flexible-connected-position-strategy';
 
 
 export type NbAdjustmentValues = 'noop' | 'clockwise' | 'counterclockwise' | 'vertical' | 'horizontal';
@@ -47,6 +49,21 @@ export enum NbPosition {
   START_TOP = 'start-top',
   START_BOTTOM = 'start-bottom',
 }
+
+const REVERTED_POSITIONS = {
+  [NbPosition.RIGHT](offset) {
+    return { originX: 'start', originY: 'center', overlayX: 'end', overlayY: 'center', offsetX: offset };
+  },
+  [NbPosition.LEFT](offset) {
+    return { originX: 'end', originY: 'center', overlayX: 'start', overlayY: 'center', offsetX: -offset };
+  },
+  [NbPosition.START](offset) {
+    return this[NbPosition.RIGHT](offset);
+  },
+  [NbPosition.END](offset) {
+    return this[NbPosition.LEFT](offset);
+  },
+};
 
 const POSITIONS = {
   [NbPosition.RIGHT](offset) {
@@ -142,6 +159,7 @@ export class NbAdjustableConnectedPositionStrategy
   protected _position: NbPosition;
   protected _offset: number = 15;
   protected _adjustment: NbAdjustment;
+  private _direction: Direction | undefined;
 
   protected appliedPositions: { key: NbPosition, connectedPosition: NbConnectedPosition }[];
 
@@ -160,6 +178,7 @@ export class NbAdjustableConnectedPositionStrategy
      * if no positions provided.
      * */
     this.applyPositions();
+    this._direction = overlayRef.getDirection();
     super.attach(overlayRef);
   }
 
@@ -205,29 +224,62 @@ export class NbAdjustableConnectedPositionStrategy
   }
 
   protected persistChosenPositions(positions: NbPosition[]) {
-    this.appliedPositions = positions.map(position => ({
-      key: position,
-      connectedPosition: POSITIONS[position](this._offset),
-    }));
+    this.appliedPositions = positions.map(this.getConnectedPosition.bind(this));
   }
 
   protected reorderPreferredPositions(positions: NbPosition[]): NbPosition[] {
     // Physical positions should be mapped to logical as adjustments use logical positions.
-    const startPositionIndex = positions.indexOf(this.mapToLogicalPosition(this._position));
+    const positionStrategy = this._direction === 'ltr' ?
+      new RegularPositionStrategy(this._position) :
+      new RevertedPositionStrategy(this._position);
+    const startPositionIndex = positions.indexOf(this.mapToLogicalPosition(positionStrategy));
     const firstPart = positions.slice(startPositionIndex);
     const secondPart = positions.slice(0, startPositionIndex);
     return firstPart.concat(secondPart);
   }
 
-  protected mapToLogicalPosition(position: NbPosition): NbPosition {
-    if (position === NbPosition.LEFT) {
+  protected mapToLogicalPosition(positionStrategy: PositionStrategy): NbPosition {
+    return positionStrategy.execute();
+  }
+
+  private getConnectedPosition(position: NbPosition): { key: NbPosition, connectedPosition: ConnectedPosition } {
+    const positionGrid = this._direction === 'rtl' ? { ...POSITIONS, ...REVERTED_POSITIONS } : POSITIONS;
+
+    return { key: position, connectedPosition: positionGrid[position](this._offset) };
+  }
+}
+
+interface PositionStrategy {
+  execute(): NbPosition;
+}
+
+class RegularPositionStrategy implements PositionStrategy {
+  constructor(private position: NbPosition) {
+  }
+
+  execute(): NbPosition {
+    if (this.position === NbPosition.LEFT) {
       return NbPosition.START;
     }
-    if (position === NbPosition.RIGHT) {
+    if (this.position === NbPosition.RIGHT) {
       return NbPosition.END;
     }
+    return this.position;
+  }
+}
 
-    return position;
+class RevertedPositionStrategy implements PositionStrategy {
+  constructor(private position: NbPosition) {
+  }
+
+  execute(): NbPosition {
+    if (this.position === NbPosition.LEFT) {
+      return NbPosition.END;
+    }
+    if (this.position === NbPosition.RIGHT) {
+      return NbPosition.START;
+    }
+    return this.position;
   }
 }
 
