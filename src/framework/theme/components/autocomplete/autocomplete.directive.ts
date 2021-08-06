@@ -38,7 +38,7 @@ import {
   NbKeyManagerActiveItemMode,
 } from '../cdk/a11y/descendant-key-manager';
 import { NbScrollStrategies } from '../cdk/adapter/block-scroll-strategy-adapter';
-import { NbOptionComponent } from '../option/option.component';
+import { NbOptionComponent, _getOptionScrollPosition } from '../option/option.component';
 import { convertToBoolProperty } from '../helpers';
 import { NbAutocompleteComponent } from './autocomplete.component';
 
@@ -395,7 +395,13 @@ export class NbAutocompleteDirective<T> implements OnDestroy, AfterViewInit, Con
           this.handleInputValueUpdate(activeItem.value);
 
         } else {
+          const prevActiveItem = this.keyManager.activeItem;
+
           this.keyManager.onKeydown(event);
+
+          if (this.keyManager.activeItem !== prevActiveItem) {
+            this.scrollToOption(this.keyManager.activeItemIndex || 0);
+          }
         }
       });
 
@@ -449,5 +455,32 @@ export class NbAutocompleteDirective<T> implements OnDestroy, AfterViewInit, Con
 
   protected createScrollStrategy(): NbScrollStrategy {
     return this.overlay.scrollStrategies[this.scrollStrategy]();
+  }
+
+  protected scrollToOption(index: number): void {
+    const autocomplete = this.autocomplete;
+
+    if (autocomplete) {
+      if (index === 0) {
+        this.autocomplete.scrollTop = 0;
+
+        return;
+      }
+
+      const option = autocomplete.options.toArray()[index];
+
+      if (option) {
+        const element = option.hostElement;
+
+        const newScrollPosition = _getOptionScrollPosition(
+          element.offsetTop,
+          element.offsetHeight,
+          autocomplete.scrollTop,
+          this.overlayRef.overlayElement.offsetHeight,
+        );
+
+        this.autocomplete.scrollTop = newScrollPosition;
+      }
+    }
   }
 }

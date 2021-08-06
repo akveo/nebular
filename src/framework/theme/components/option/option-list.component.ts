@@ -22,13 +22,15 @@ import { NbPosition } from '../cdk/overlay/overlay-position';
 @Component({
   selector: 'nb-option-list',
   template: `
-    <ul class="option-list">
+    <ul class="option-list" [scrollTop]="scrollTop">
       <ng-content></ng-content>
     </ul>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NbOptionListComponent<T> {
+
+  @Input() scrollTop: number = 0;
 
   @Input() size: NbComponentSize = 'medium';
 

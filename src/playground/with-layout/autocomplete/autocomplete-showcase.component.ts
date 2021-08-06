@@ -21,7 +21,7 @@ export class AutocompleteShowcaseComponent implements OnInit {
   @ViewChild('autoInput') input;
 
   ngOnInit() {
-    this.options = ['Option 1', 'Option 2', 'Option 3'];
+    this.options = Array.from(Array(20).keys()).map((value) => `Option ${value + 1}`);
     this.filteredOptions$ = of(this.options);
   }
 
