@@ -327,8 +327,7 @@ export class NbAutocompleteDirective<T> implements OnDestroy, AfterViewInit, Con
   }
 
   protected handleInputValueUpdate(value: T) {
-    const displayValue = value === undefined || value === null ? '' : value;
-    this.setHostInputValue(displayValue);
+    this.setHostInputValue(value ?? '');
     this._onChange(value);
     if (this.focusInputOnValueChange) {
       this.hostRef.nativeElement.focus();
