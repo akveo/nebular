@@ -5,6 +5,8 @@
  */
 
 import { ComponentFactoryResolver, ComponentRef, Inject, Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { filter } from 'rxjs/operators';
 
 import { NbComponentPortal, NbOverlayRef } from '../cdk/overlay/mapping';
 import { NbOverlayService, patch } from '../cdk/overlay/overlay-service';
@@ -18,11 +20,16 @@ import { NB_DOCUMENT } from '../../theme.options';
 
 export class NbToastRef {
   constructor(private toastContainer: NbToastContainer,
-              private toast: NbToast) {
+              private toast: NbToast,
+              private toastComponent: NbToastComponent) {
   }
 
   close() {
     this.toastContainer.destroy(this.toast);
+  }
+
+  onClick(): Observable<void> {
+    return this.toastComponent.destroy.pipe(filter(() => this.toast.config.destroyByClick))
   }
 }
 
@@ -57,7 +64,7 @@ export class NbToastContainer {
 
     this.prevToast = toast;
 
-    return new NbToastRef(this, toast);
+    return new NbToastRef(this, toast, toastComponent);
   }
 
   destroy(toast: NbToast) {
