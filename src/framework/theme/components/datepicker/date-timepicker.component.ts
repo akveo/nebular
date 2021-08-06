@@ -2,10 +2,12 @@ import {
   ChangeDetectionStrategy,
   Component,
   ComponentFactoryResolver,
+  EventEmitter,
   Inject,
   Input,
   OnInit,
   Optional,
+  Output,
   Type,
 } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -21,6 +23,10 @@ import { NbCalendarWithTimeComponent } from './calendar-with-time.component';
 import { NbBasePickerComponent } from './datepicker.component';
 import { NB_DATE_SERVICE_OPTIONS } from './datepicker.directive';
 
+/**
+ * The DateTimePicker component itself.
+ * Provides a proxy to `NbCalendarWithTimeComponent` options as well as custom picker options.
+ */
 @Component({
   selector: 'nb-date-timepicker',
   template: '',
@@ -48,11 +54,19 @@ export class NbDateTimePickerComponent<D> extends NbBasePickerComponent<D, D, Nb
     }
   }
 
+  /**
+   * Defines minutes step when we use fill time format.
+   * If set to 20, it will be: '12:00, 12:20: 12:40, 13:00...'
+   * */
   @Input() step: number;
+
   @Input() title: string;
   @Input() applyButtonText: string;
   @Input() currentTimeButtonText: string;
 
+  /**
+   * Defines 12 hours format like '07:00 PM'.
+   * */
   @Input()
   get twelveHoursFormat(): boolean {
     return this._twelveHoursFormat;
@@ -63,6 +77,10 @@ export class NbDateTimePickerComponent<D> extends NbBasePickerComponent<D, D, Nb
   _twelveHoursFormat: boolean;
   static ngAcceptInputType_twelveHoursFormat: NbBooleanInput;
 
+  /**
+   * Show seconds in timepicker.
+   * Ignored when singleColumn is true.
+   * */
   @Input()
   get withSeconds(): boolean {
     return this._withSeconds;
@@ -73,6 +91,9 @@ export class NbDateTimePickerComponent<D> extends NbBasePickerComponent<D, D, Nb
   _withSeconds: boolean;
   static ngAcceptInputType_withSeconds: NbBooleanInput;
 
+  /**
+   * Show timepicker values in one column with 60 minutes step by default.
+   * */
   @Input()
   get singleColumn(): boolean {
     return this._singleColumn;
@@ -82,6 +103,13 @@ export class NbDateTimePickerComponent<D> extends NbBasePickerComponent<D, D, Nb
   }
   _singleColumn: boolean;
   static ngAcceptInputType_singleColumn: NbBooleanInput;
+
+  /**
+   * Emits date with time when selected.
+   * */
+  @Output() get dateTimeChange(): EventEmitter<D> {
+    return this.valueChange as EventEmitter<D>;
+  }
 
   constructor(@Inject(NB_DOCUMENT) document,
               positionBuilder: NbPositionBuilderService,
