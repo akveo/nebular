@@ -6,7 +6,7 @@
 
 import { ComponentFactoryResolver, ComponentRef, Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { filter } from 'rxjs/operators';
+import { filter, takeUntil } from 'rxjs/operators';
 
 import { NbComponentPortal, NbOverlayRef } from '../cdk/overlay/mapping';
 import { NbOverlayService, patch } from '../cdk/overlay/overlay-service';
@@ -28,8 +28,12 @@ export class NbToastRef {
     this.toastContainer.destroy(this.toast);
   }
 
+  onClose(): Observable<void> {
+    return this.toastComponent.destroy.asObservable();
+  }
+
   onClick(): Observable<void> {
-    return this.toastComponent.destroy.pipe(filter(() => this.toast.config.destroyByClick))
+    return this.toastComponent.toastClicked.asObservable();
   }
 }
 
@@ -132,7 +136,9 @@ export class NbToastContainer {
   }
 
   protected subscribeOnClick(toastComponent: NbToastComponent, toast: NbToast) {
-    toastComponent.destroy.subscribe(() => this.destroy(toast));
+    toastComponent.toastClicked
+      .pipe(takeUntil(toastComponent.destroy), filter(() => toast.config.destroyByClick))
+      .subscribe(() => this.destroy(toast));
   }
 
   protected updateContainer() {
