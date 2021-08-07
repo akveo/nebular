@@ -125,7 +125,9 @@ export class NbNativeDateService extends NbDateService<Date> {
    * We haven't got capability to parse date using formatting without third party libraries.
    * */
   parse(date: string, format: string): Date {
-    return new Date(Date.parse(date));
+    const parsedValue = new Date(Date.parse(date));
+    const isProperlyParsed = parsedValue && parsedValue.toString() !== 'Invalid Date';
+    return isProperlyParsed ? parsedValue : null;
   }
 
   addDay(date: Date, num: number): Date {
