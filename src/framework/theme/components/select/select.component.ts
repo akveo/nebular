@@ -1155,17 +1155,18 @@ export class NbSelectComponent implements OnChanges, AfterViewInit, AfterContent
    * Set selected value in model.
    * */
   protected setSelection(value) {
-    const isArray: boolean = Array.isArray(value);
-    let formattedValue = value;
+    const isResetValue = value == null;
+    let safeValue = value;
 
     if (this.multiple) {
-      if (value === null || value === undefined) {
-        formattedValue = [];
-      } else if (!isArray) {
-        throw new Error('Can\'t assign single value if select is marked as multiple');
-      }
+      safeValue = value ?? [];
     }
 
+    const isArray: boolean = Array.isArray(safeValue);
+
+    if (this.multiple && !isArray && !isResetValue) {
+      throw new Error('Can\'t assign single value if select is marked as multiple');
+    }
     if (!this.multiple && isArray) {
       throw new Error('Can\'t assign array if select is not marked as multiple');
     }
@@ -1174,9 +1175,9 @@ export class NbSelectComponent implements OnChanges, AfterViewInit, AfterContent
     this.selectionModel = [];
 
     if (this.multiple) {
-      formattedValue.forEach(option => this.selectValue(option));
+      safeValue.forEach(option => this.selectValue(option));
     } else {
-      this.selectValue(formattedValue);
+      this.selectValue(safeValue);
     }
 
     // find options which were selected before and trigger deselect
@@ -1191,6 +1192,10 @@ export class NbSelectComponent implements OnChanges, AfterViewInit, AfterContent
    * Selects value.
    * */
   protected selectValue(value) {
+    if (!value) {
+      return;
+    }
+
     const corresponding = this.options.find((option: NbOptionComponent) => this._compareWith(option.value, value));
 
     if (corresponding) {
