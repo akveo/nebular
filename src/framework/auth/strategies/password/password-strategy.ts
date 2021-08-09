@@ -157,7 +157,7 @@ export class NbPasswordAuthStrategy extends NbAuthStrategy {
     const method = this.getOption(`${module}.method`);
     const url = this.getActionEndpoint(module);
     const requireValidToken = this.getOption(`${module}.requireValidToken`);
-    return this.http.request(method, url, {body: data, observe: 'response'})
+    return this.http.request(method, url, { body: data, observe: 'response', headers: this.defaultOptions.headers })
       .pipe(
         map((res) => {
           if (this.getOption(`${module}.alwaysFail`)) {
@@ -185,7 +185,7 @@ export class NbPasswordAuthStrategy extends NbAuthStrategy {
     const method = this.getOption(`${module}.method`);
     const url = this.getActionEndpoint(module);
     const requireValidToken = this.getOption(`${module}.requireValidToken`);
-    return this.http.request(method, url, {body: data, observe: 'response'})
+    return this.http.request(method, url, { body: data, observe: 'response', headers: this.defaultOptions.headers })
       .pipe(
         map((res) => {
           if (this.getOption(`${module}.alwaysFail`)) {
@@ -213,7 +213,7 @@ export class NbPasswordAuthStrategy extends NbAuthStrategy {
     const module = 'requestPass';
     const method = this.getOption(`${module}.method`);
     const url = this.getActionEndpoint(module);
-    return this.http.request(method, url, {body: data, observe: 'response'})
+    return this.http.request(method, url, { body: data, observe: 'response', headers: this.defaultOptions.headers })
       .pipe(
         map((res) => {
           if (this.getOption(`${module}.alwaysFail`)) {
@@ -243,7 +243,7 @@ export class NbPasswordAuthStrategy extends NbAuthStrategy {
     const url = this.getActionEndpoint(module);
     const tokenKey = this.getOption(`${module}.resetPasswordTokenKey`);
     data[tokenKey] = this.route.snapshot.queryParams[tokenKey];
-    return this.http.request(method, url, {body: data, observe: 'response'})
+    return this.http.request(method, url, { body: data, observe: 'response', headers: this.defaultOptions.headers })
       .pipe(
         map((res) => {
           if (this.getOption(`${module}.alwaysFail`)) {
@@ -278,7 +278,7 @@ export class NbPasswordAuthStrategy extends NbAuthStrategy {
           if (!url) {
             return observableOf(res);
           }
-          return this.http.request(method, url, {observe: 'response'});
+          return this.http.request(method, url, { observe: 'response', headers: this.defaultOptions.headers });
         }),
         map((res) => {
           if (this.getOption(`${module}.alwaysFail`)) {
@@ -308,7 +308,7 @@ export class NbPasswordAuthStrategy extends NbAuthStrategy {
     const url = this.getActionEndpoint(module);
     const requireValidToken = this.getOption(`${module}.requireValidToken`);
 
-    return this.http.request(method, url, {body: data, observe: 'response'})
+    return this.http.request(method, url, { body: data, observe: 'response', headers: this.defaultOptions.headers })
       .pipe(
         map((res) => {
           if (this.getOption(`${module}.alwaysFail`)) {
