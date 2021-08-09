@@ -99,7 +99,7 @@ export class NbToastComponent implements OnInit, OnDestroy {
   toast: NbToast;
 
   @Output() destroy: EventEmitter<void> = new EventEmitter();
-  @Output() toastClicked: EventEmitter<void> = new EventEmitter();
+  @Output() toastClick: EventEmitter<void> = new EventEmitter();
 
   @HostBinding('class.status-success')
   get success(): boolean {
@@ -170,7 +170,7 @@ export class NbToastComponent implements OnInit, OnDestroy {
 
   @HostListener('click')
   onClick() {
-    this.toastClicked.emit();
+    this.toastClick.emit();
   }
 
   constructor(

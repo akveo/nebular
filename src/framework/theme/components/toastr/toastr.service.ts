@@ -33,7 +33,7 @@ export class NbToastRef {
   }
 
   onClick(): Observable<void> {
-    return this.toastComponent.toastClicked.asObservable();
+    return this.toastComponent.toastClick.asObservable();
   }
 }
 
@@ -136,7 +136,7 @@ export class NbToastContainer {
   }
 
   protected subscribeOnClick(toastComponent: NbToastComponent, toast: NbToast) {
-    toastComponent.toastClicked
+    toastComponent.toastClick
       .pipe(takeUntil(toastComponent.destroy), filter(() => toast.config.destroyByClick))
       .subscribe(() => this.destroy(toast));
   }
