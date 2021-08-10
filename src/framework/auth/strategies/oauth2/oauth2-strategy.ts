@@ -220,7 +220,7 @@ export class NbOAuth2AuthStrategy extends NbAuthStrategy {
     const requireValidToken = this.getOption(`${module}.requireValidToken`);
 
     let headers = this.buildAuthHeader() || new HttpHeaders() ;
-    headers = headers.append('Content-Type', 'application/x-www-form-urlencoded');
+    headers = { ...headers, ...this.options.headers, 'Content-Type': 'application/x-www-form-urlencoded' };
 
     return this.http.post(url, this.buildRefreshRequestData(token), { headers: headers })
       .pipe(
@@ -243,7 +243,7 @@ export class NbOAuth2AuthStrategy extends NbAuthStrategy {
     const requireValidToken = this.getOption(`${module}.requireValidToken`);
 
     let headers = this.buildAuthHeader() || new HttpHeaders() ;
-    headers = headers.append('Content-Type', 'application/x-www-form-urlencoded');
+    headers = { ...headers, ...this.options.headers, 'Content-Type': 'application/x-www-form-urlencoded' };
 
     return this.http.post(url, this.buildPasswordRequestData(username, password), { headers: headers })
       .pipe(
@@ -275,7 +275,7 @@ export class NbOAuth2AuthStrategy extends NbAuthStrategy {
     const requireValidToken = this.getOption(`${module}.requireValidToken`);
 
     let headers = this.buildAuthHeader() || new HttpHeaders() ;
-    headers = headers.append('Content-Type', 'application/x-www-form-urlencoded');
+    headers = { ...headers, ...this.options.headers, 'Content-Type': 'application/x-www-form-urlencoded' };
 
     return this.http.post(url, this.buildCodeRequestData(code), { headers: headers })
       .pipe(
