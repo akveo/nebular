@@ -17,12 +17,12 @@
   }
 
   nb-sidebar.fixed {
-    left: calc((100vw - #{nb-theme(layout-window-mode-max-width)}) / 2);
+    left: calc(math.div((100vw - #{nb-theme(layout-window-mode-max-width)}), 2));
   }
 
   .layout .layout-container {
     nb-sidebar.fixed.right {
-      right: calc((100vw - #{nb-theme(layout-window-mode-max-width)}) / 2);
+      right: calc(math.div((100vw - #{nb-theme(layout-window-mode-max-width)}), 2));
     }
 
     nb-sidebar.fixed {
@@ -84,7 +84,7 @@
     }
 
     @media screen and (min-width: nb-theme(layout-window-mode-max-width) + 20px) {
-      $padding-top: nb-theme(layout-window-mode-padding-top) / 4;
+      $padding-top: math.div(nb-theme(layout-window-mode-padding-top), 4);
 
       @include window-mode($padding-top);
 
@@ -96,7 +96,7 @@
     }
 
     @media screen and (min-width: nb-theme(layout-window-mode-max-width) + 150px) {
-      $padding-top: nb-theme(layout-window-mode-padding-top) / 2;
+      $padding-top: math.div(nb-theme(layout-window-mode-padding-top), 2);
 
       @include window-mode($padding-top);
 

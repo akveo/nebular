@@ -4,7 +4,9 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-@mixin nb-scrollbars($fg, $bg, $size, $border-radius: $size / 2) {
+@use 'sass:math';
+
+@mixin nb-scrollbars($fg, $bg, $size, $border-radius: math.div($size, 2)) {
   &::-webkit-scrollbar {
     width: $size;
     height: $size;
