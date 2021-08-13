@@ -9,10 +9,22 @@ export class NbCalendarTimeModelService<D> {
   constructor(protected dateService: NbDateService<D>) {
   }
 
-  getHoursRange(step: number = this.MINUTES_AND_SECONDS): D[] {
-    let date: D = this.getResetTime();
+  getHoursRange(step: number = this.MINUTES_AND_SECONDS, currentDate?: D, min?: D, max?: D): D[] {
+    let date: D = currentDate || this.getResetTime();
 
-    const endDate = this.dateService.addDay(date, 1);
+    date = this.dateService.setHours(date, 0);
+    date = this.dateService.setMinutes(date, 0);
+    date = this.dateService.setSeconds(date, 0);
+
+    if (min && date < min) {
+      date = min;
+    }
+
+    let endDate = this.dateService.addDay(date, 1);
+
+    if (max && endDate > max) {
+      endDate = max;
+    }
 
     const result: D[] = [];
 

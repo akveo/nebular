@@ -63,10 +63,13 @@ export class NbCalendarPickerRowComponent<D, T> implements OnChanges {
   }
 
   private patchWithContext(component: NbCalendarCell<D, T>, date: D) {
+    let minDate = new Date(this.min as any);
+    minDate.setHours(0, 0, 0);
+
     component.visibleDate = this.visibleDate;
     component.selectedValue = this.selectedValue;
     component.date = date;
-    component.min = this.min;
+    component.min = minDate as any as D;
     component.max = this.max;
     component.filter = this.filter;
     component.size = this.size;

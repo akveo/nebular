@@ -44,6 +44,8 @@ import { NbTimePickerComponent } from '../timepicker/timepicker.component';
           <div class="picker-title">{{ title }}</div>
           <nb-timepicker
             (onSelectTime)="onTimeChange($event)"
+            [min]="min"
+            [max]="max"
             [date]="date"
             [twelveHoursFormat]="twelveHoursFormat"
             [withSeconds]="showSeconds()"
