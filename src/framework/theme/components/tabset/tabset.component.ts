@@ -14,14 +14,16 @@ import {
   QueryList,
   AfterContentInit,
   HostBinding,
-  ChangeDetectorRef,
+  ChangeDetectorRef, ViewChild, ContentChild, TemplateRef, ViewContainerRef, AfterViewInit,
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { CdkPortalOutlet, TemplatePortal } from '@angular/cdk/portal';
 
 import { convertToBoolProperty, NbBooleanInput } from '../helpers';
 import { NbComponentOrCustomStatus } from '../component-status';
 import { NbBadgePosition } from '../badge/badge.component';
 import { NbIconConfig } from '../icon/icon.component';
+import { NB_TAB_CONTENT } from './tab-content';
 
 /**
  * Specific tab container.
@@ -37,13 +39,15 @@ import { NbIconConfig } from '../icon/icon.component';
 @Component({
   selector: 'nb-tab',
   template: `
-    <ng-container *ngIf="init">
+    <ng-template portalHost #container>
       <ng-content></ng-content>
-    </ng-container>
+    </ng-template>
   `,
 })
-export class NbTabComponent {
-
+export class NbTabComponent implements AfterViewInit {
+  @ViewChild('container', { read: TemplateRef, static: true }) _implicitContent: TemplateRef<any>;
+  @ContentChild(NB_TAB_CONTENT, { read: TemplateRef, static: true }) _explicitContent: TemplateRef<any>;
+  @ViewChild(CdkPortalOutlet, { static: true }) _portalHost: CdkPortalOutlet;
   /**
    * Tab title
    * @type {string}
@@ -122,7 +126,9 @@ export class NbTabComponent {
   set active(val: boolean) {
     this.activeValue = convertToBoolProperty(val);
     if (this.activeValue) {
-      this.init = true;
+      this._contentPortal.attach(this._portalHost);
+    } else if (this._contentPortal.isAttached) {
+      this._contentPortal.detach();
     }
   }
   static ngAcceptInputType_active: NbBooleanInput;
@@ -131,10 +137,10 @@ export class NbTabComponent {
    * Lazy load content before tab selection
    * TODO: rename, as lazy is by default, and this is more `instant load`
    * @param {boolean} val
+   * @deprecated To be turned into a <ng-template nbTabContent>
    */
   @Input()
   set lazyLoad(val: boolean) {
-    this.init = convertToBoolProperty(val);
   }
   static ngAcceptInputType_lazyLoad: NbBooleanInput;
 
@@ -160,7 +166,16 @@ export class NbTabComponent {
    */
   @Input() badgePosition: NbBadgePosition;
 
-  init: boolean = false;
+  /** Portal that will be the hosted content of the tab */
+  private _contentPortal: TemplatePortal | null = null;
+
+  constructor(private _viewContainerRef: ViewContainerRef) {
+  }
+
+  ngAfterViewInit(): void {
+    this._contentPortal = new TemplatePortal(
+      this._explicitContent || this._implicitContent, this._viewContainerRef);
+  }
 }
 
 // TODO: Combine tabset with route-tabset, so that we can:
