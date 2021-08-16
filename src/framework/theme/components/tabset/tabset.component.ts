@@ -125,6 +125,9 @@ export class NbTabComponent implements AfterViewInit {
   }
   set active(val: boolean) {
     this.activeValue = convertToBoolProperty(val);
+    if (this.activeValue) {
+      this.init = true;
+    }
     this._initView();
   }
   static ngAcceptInputType_active: NbBooleanInput;
@@ -137,6 +140,7 @@ export class NbTabComponent implements AfterViewInit {
    */
   @Input()
   set lazyLoad(val: boolean) {
+    this.init = convertToBoolProperty(val);
   }
   static ngAcceptInputType_lazyLoad: NbBooleanInput;
 
@@ -162,6 +166,11 @@ export class NbTabComponent implements AfterViewInit {
    */
   @Input() badgePosition: NbBadgePosition;
 
+  /**
+   * @deprecated To be turned into a active property
+   * @type string
+   */
+  init: boolean = false;
   /** Portal that will be the hosted content of the tab */
   private _contentPortal: TemplatePortal | null = null;
 
