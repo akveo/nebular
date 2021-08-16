@@ -63,7 +63,7 @@ export class NbCalendarPickerRowComponent<D, T> implements OnChanges {
   }
 
   private patchWithContext(component: NbCalendarCell<D, T>, date: D) {
-    let minDate = new Date(this.min as any);
+    const minDate = new Date(this.min as any);
     minDate.setHours(0, 0, 0);
 
     component.visibleDate = this.visibleDate;
