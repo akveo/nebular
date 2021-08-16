@@ -14,7 +14,12 @@ import {
   QueryList,
   AfterContentInit,
   HostBinding,
-  ChangeDetectorRef, ViewChild, ContentChild, TemplateRef, ViewContainerRef, AfterViewInit,
+  ChangeDetectorRef,
+  ViewChild,
+  ContentChild,
+  TemplateRef,
+  ViewContainerRef,
+  AfterViewInit,
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CdkPortalOutlet, TemplatePortal } from '@angular/cdk/portal';
