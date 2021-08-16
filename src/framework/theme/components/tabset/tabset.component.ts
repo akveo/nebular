@@ -168,7 +168,7 @@ export class NbTabComponent implements AfterViewInit {
 
   /**
    * @deprecated To be turned into a active property
-   * @type string
+   * @type boolean
    */
   init: boolean = false;
   /** Portal that will be the hosted content of the tab */
