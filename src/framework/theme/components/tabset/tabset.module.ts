@@ -13,10 +13,16 @@ import { NbTabsetComponent, NbTabComponent } from './tabset.component';
 import { NbBadgeModule } from '../badge/badge.module';
 import { NbIconModule } from '../icon/icon.module';
 import { NbTabContentDirective } from './tab-content';
+import { NbTabLabelDirective } from './tab-label';
 
 const NB_TABSET_COMPONENTS = [
   NbTabsetComponent,
   NbTabComponent,
+];
+
+const NB_TABSET_DIRECTIVES = [
+  NbTabContentDirective,
+  NbTabLabelDirective,
 ];
 
 @NgModule({
@@ -28,11 +34,11 @@ const NB_TABSET_COMPONENTS = [
   ],
   declarations: [
     ...NB_TABSET_COMPONENTS,
-    NbTabContentDirective,
+    ...NB_TABSET_DIRECTIVES,
   ],
   exports: [
     ...NB_TABSET_COMPONENTS,
-    NbTabContentDirective,
+    ...NB_TABSET_DIRECTIVES,
   ],
 })
 export class NbTabsetModule { }

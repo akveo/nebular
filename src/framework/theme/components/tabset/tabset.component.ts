@@ -29,6 +29,7 @@ import { NbComponentOrCustomStatus } from '../component-status';
 import { NbBadgePosition } from '../badge/badge.component';
 import { NbIconConfig } from '../icon/icon.component';
 import { NB_TAB_CONTENT } from './tab-content';
+import { NB_TAB_LABEL, NbTabLabelDirective } from './tab-label';
 
 /**
  * Specific tab container.
@@ -53,6 +54,13 @@ export class NbTabComponent implements AfterViewInit {
   @ViewChild('container', { read: TemplateRef, static: true }) _implicitContent: TemplateRef<any>;
   @ContentChild(NB_TAB_CONTENT, { read: TemplateRef, static: true }) _explicitContent: TemplateRef<any>;
   @ViewChild(CdkPortalOutlet, { static: true }) _portalHost: CdkPortalOutlet;
+
+  /** Content for the tab label given by `<ng-template nb-tab-label>`. */
+  @ContentChild(NB_TAB_LABEL)
+  get templateLabel(): NbTabLabelDirective { return this._templateLabel; }
+  set templateLabel(value: NbTabLabelDirective) { this._setTemplateLabelInput(value); }
+  protected _templateLabel: NbTabLabelDirective;
+
   /**
    * Tab title
    * @type {string}
@@ -191,6 +199,12 @@ export class NbTabComponent implements AfterViewInit {
     }
   }
 
+  private _setTemplateLabelInput(value: NbTabLabelDirective) {
+    if (value) {
+      this._templateLabel = value;
+    }
+  }
+
   ngAfterViewInit(): void {
     this._contentPortal = new TemplatePortal(
       this._explicitContent || this._implicitContent, this._viewContainerRef);
@@ -308,7 +322,15 @@ export class NbTabComponent implements AfterViewInit {
           class="tab">
         <a href (click)="$event.preventDefault()" tabindex="-1" class="tab-link">
           <nb-icon *ngIf="tab.tabIcon" [config]="tab.tabIcon"></nb-icon>
-          <span *ngIf="tab.tabTitle" class="tab-text">{{ tab.tabTitle }}</span>
+          <!-- If there is a label template, use it. -->
+          <ng-template [ngIf]="tab.templateLabel">
+            <ng-template [cdkPortalOutlet]="tab.templateLabel"></ng-template>
+          </ng-template>
+
+          <!-- If there is not a label template, fall back to the tab title. -->
+          <ng-template [ngIf]="!tab.templateLabel">
+            <span class="tab-text">{{ tab.tabTitle }}</span>
+          </ng-template>
         </a>
         <nb-badge *ngIf="tab.badgeText || tab.badgeDot"
           [text]="tab.badgeText"
