@@ -125,7 +125,7 @@ export class NbTabComponent implements AfterViewInit {
   }
   set active(val: boolean) {
     this.activeValue = convertToBoolProperty(val);
-    this.initView();
+    this._initView();
   }
   static ngAcceptInputType_active: NbBooleanInput;
 
@@ -168,11 +168,11 @@ export class NbTabComponent implements AfterViewInit {
   constructor(private _viewContainerRef: ViewContainerRef) {
   }
 
-  private initView(): void {
-    if (!this._contentPortal.isAttached && this.activeValue) {
+  private _initView(): void {
+    if (!this._contentPortal.isAttached && this.active) {
       this._contentPortal.attach(this._portalHost);
     }
-    if (this._contentPortal.isAttached && !this.activeValue) {
+    if (this._contentPortal.isAttached && !this.active) {
       this._contentPortal.detach();
     }
   }
