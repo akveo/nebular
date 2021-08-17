@@ -19,13 +19,17 @@ export class NbBlockScrollStrategyAdapter extends BlockScrollStrategy {
   }
 
   enable() {
-    super.enable();
-    this.scrollService.scrollable(false);
+    try {
+      super.enable();
+      this.scrollService.scrollable(false);
+    } catch (error) { }
   }
 
   disable() {
-    super.disable();
-    this.scrollService.scrollable(true);
+    try {
+      super.disable();
+      this.scrollService.scrollable(true);
+    } catch (error) { }
   }
 }
 
