@@ -1,6 +1,15 @@
 import { ComponentRef, Inject, Injectable } from '@angular/core';
 import { EMPTY, fromEvent as observableFromEvent, merge as observableMerge, Observable, Subject } from 'rxjs';
-import { debounceTime, delay, filter, map, repeat, share, switchMap, takeUntil, takeWhile } from 'rxjs/operators';
+import {
+  debounceTime,
+  delay,
+  filter,
+  repeat,
+  share,
+  switchMap,
+  takeUntil,
+  takeWhile,
+} from 'rxjs/operators';
 import { NB_DOCUMENT } from '../../../theme.options';
 
 export type NbTriggerValues = 'noop' | 'click' | 'hover' | 'hint' | 'focus';
@@ -71,26 +80,27 @@ export class NbClickTriggerStrategy extends NbTriggerStrategyBase {
   // of the container and then later on decide should we hide it or show
   // if we track the click & state separately this will case a behavior when the container is getting shown
   // and then hidden right away
-  protected click$: Observable<[boolean, Event]> = observableFromEvent<Event>(this.document, 'click')
+  protected clickIn$: Observable<Event> = observableFromEvent<Event>(this.host, 'click')
     .pipe(
-      map((event: Event) => [!this.container() && this.isOnHost(event), event] as [boolean, Event]),
+      filter(() => !this.container()),
+      takeUntil(this.destroyed$),
       share(),
+    );
+
+  protected clickOut$: Observable<Event> = this.clickIn$
+    .pipe(
+      switchMap(() => observableFromEvent<Event>(this.document, 'click')
+        .pipe(
+          takeWhile(() => !!this.container()),
+          filter(event => this.isNotOnHostOrContainer(event)),
+        ),
+      ),
       takeUntil(this.destroyed$),
     );
 
-  readonly show$: Observable<Event> = this.click$
-    .pipe(
-      filter(([shouldShow]) => shouldShow),
-      map(([, event]) => event),
-      takeUntil(this.destroyed$),
-    );
+  readonly show$: Observable<Event> = this.clickIn$;
 
-  readonly hide$: Observable<Event> = this.click$
-    .pipe(
-      filter(([shouldShow, event]) => !shouldShow && !this.isOnContainer(event)),
-      map(([, event]) => event),
-      takeUntil(this.destroyed$),
-    );
+  readonly hide$: Observable<Event> = this.clickOut$;
 }
 
 /**
