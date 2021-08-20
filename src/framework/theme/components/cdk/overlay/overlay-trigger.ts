@@ -1,15 +1,6 @@
 import { ComponentRef, Inject, Injectable } from '@angular/core';
 import { EMPTY, fromEvent as observableFromEvent, merge as observableMerge, Observable, Subject } from 'rxjs';
-import {
-  debounceTime,
-  delay,
-  filter,
-  repeat,
-  share,
-  switchMap,
-  takeUntil,
-  takeWhile,
-} from 'rxjs/operators';
+import { debounceTime, delay, filter, repeat, share, switchMap, takeUntil, takeWhile } from 'rxjs/operators';
 import { NB_DOCUMENT } from '../../../theme.options';
 
 export type NbTriggerValues = 'noop' | 'click' | 'hover' | 'hint' | 'focus';
