@@ -181,10 +181,14 @@ export class NbFocusTriggerStrategy extends NbTriggerStrategyBase {
       takeUntil(this.destroyed$),
     );
 
-  protected clickOut$: Observable<Event> = observableFromEvent<Event>(this.document, 'click')
+  protected clickOut$: Observable<Event> = this.clickIn$
     .pipe(
-      filter(() => !!this.container()),
-      filter(event => this.isNotOnHostOrContainer(event)),
+      switchMap(() => observableFromEvent<Event>(this.document, 'click')
+        .pipe(
+          takeWhile(() => !!this.container()),
+          filter(event => this.isNotOnHostOrContainer(event)),
+        ),
+      ),
       takeUntil(this.destroyed$),
     );
 
@@ -205,7 +209,7 @@ export class NbFocusTriggerStrategy extends NbTriggerStrategyBase {
       takeUntil(this.destroyed$),
     );
 
-  hide$ = observableMerge(this.focusOut$, this.tabKeyPress$, this.clickOut$)
+  hide$ = observableMerge(this.focusOut$, this.clickOut$)
     .pipe(takeUntil(this.destroyed$));
 }
 
