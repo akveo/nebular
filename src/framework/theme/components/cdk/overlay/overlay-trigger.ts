@@ -192,7 +192,7 @@ export class NbFocusTriggerStrategy extends NbTriggerStrategyBase {
       takeUntil(this.destroyed$),
     );
 
-  protected tabKeyPress$: Observable<Event> = observableFromEvent<Event>(this.document, 'keydown')
+  protected tabKeyPress$: Observable<Event> = observableFromEvent<Event>(this.host, 'keydown')
     .pipe(
       filter((event: KeyboardEvent) => event.keyCode === 9),
       filter(() => !!this.container()),
@@ -209,7 +209,7 @@ export class NbFocusTriggerStrategy extends NbTriggerStrategyBase {
       takeUntil(this.destroyed$),
     );
 
-  hide$ = observableMerge(this.focusOut$, this.clickOut$)
+  hide$ = observableMerge(this.focusOut$, this.tabKeyPress$, this.clickOut$)
     .pipe(takeUntil(this.destroyed$));
 }
 
