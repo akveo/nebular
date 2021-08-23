@@ -163,6 +163,10 @@ export class NbTooltipDirective implements OnInit, OnChanges, AfterViewInit, OnD
   get disabled(): boolean { return this._disabled; }
   set disabled(value: boolean) {
     this._disabled = convertToBoolProperty(value);
+
+    if (value && this.isShown) {
+      this.hide();
+    }
   }
   static ngAcceptInputType_disabled: NbBooleanInput;
 
