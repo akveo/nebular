@@ -8,24 +8,25 @@ import {
   AfterViewInit,
   Directive,
   ElementRef,
+  EventEmitter,
   Input,
   OnChanges,
   OnDestroy,
   OnInit,
   Output,
-  EventEmitter,
 } from '@angular/core';
 import { skip, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 
 import { NbComponentOrCustomStatus } from '../component-status';
-import { NbAdjustment, NbPosition, NbPositionValues, NbAdjustmentValues } from '../cdk/overlay/overlay-position';
+import { NbAdjustment, NbAdjustmentValues, NbPosition, NbPositionValues } from '../cdk/overlay/overlay-position';
 import { NbTrigger } from '../cdk/overlay/overlay-trigger';
 import { NbDynamicOverlay } from '../cdk/overlay/dynamic/dynamic-overlay';
 import { NbDynamicOverlayHandler } from '../cdk/overlay/dynamic/dynamic-overlay-handler';
 import { NbOverlayConfig } from '../cdk/overlay/mapping';
 import { NbTooltipComponent } from './tooltip.component';
 import { NbIconConfig } from '../icon/icon.component';
+import { convertToBoolProperty, NbBooleanInput } from '../helpers';
 
 /**
  *
@@ -77,6 +78,8 @@ export class NbTooltipDirective implements OnInit, OnChanges, AfterViewInit, OnD
   protected destroy$ = new Subject<void>();
   protected tooltipComponent = NbTooltipComponent;
   protected dynamicOverlay: NbDynamicOverlay;
+  private _trigger = NbTrigger.HINT;
+  private _disabled = false;
 
   context: Object = {};
 
@@ -143,12 +146,25 @@ export class NbTooltipDirective implements OnInit, OnChanges, AfterViewInit, OnD
    * Available options: `click`, `hover`, `hint`, `focus` and `noop`
    * */
   @Input('nbTooltipTrigger')
-  trigger: NbTrigger = NbTrigger.HINT;
+  get trigger(): NbTrigger {
+    return this._disabled ? NbTrigger.NOOP : this._trigger;
+  }
+  set trigger(value) {
+    this._trigger = value;
+  }
 
   /**
    * Determines tooltip overlay offset (in pixels).
    **/
   @Input('nbTooltipOffset') offset = 8;
+
+  /** Disables the display of the tooltip. */
+  @Input('nbTooltipDisabled')
+  get disabled(): boolean { return this._disabled; }
+  set disabled(value: boolean) {
+    this._disabled = convertToBoolProperty(value);
+  }
+  static ngAcceptInputType_disabled: NbBooleanInput;
 
   @Output()
   nbTooltipShowStateChange = new EventEmitter<{ isShown: boolean }>();
