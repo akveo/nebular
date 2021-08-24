@@ -66,6 +66,8 @@ export class InfiniteListPlaceholdersComponent implements OnInit, OnDestroy {
       this.initialScrollRestoration = window.history.scrollRestoration;
       history.scrollRestoration = 'manual';
     }
+
+    this.loadNext();
   }
 
   ngOnInit() {

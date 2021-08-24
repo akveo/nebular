@@ -57,7 +57,9 @@ export class InfiniteListScrollModesComponent {
   };
   pageSize = 10;
 
-  constructor(private newsService: NewsService) {}
+  constructor(private newsService: NewsService) {
+    this.loadNext(this.secondCard);
+  }
 
   loadNext(cardData) {
     if (cardData.loading) { return }

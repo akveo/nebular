@@ -29,7 +29,9 @@ export class InfiniteListShowcaseComponent {
   pageToLoadNext = 1;
   loading = false;
 
-  constructor(private newsService: NewsService) {}
+  constructor(private newsService: NewsService) {
+    this.loadNext();
+  }
 
   loadNext() {
     if (this.loading) { return }
