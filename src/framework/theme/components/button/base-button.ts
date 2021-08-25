@@ -182,16 +182,16 @@ export abstract class NbButton implements AfterViewInit {
 
   @HostBinding('class.icon-start')
   get iconLeft(): boolean {
-    const el = this.hostElement.nativeElement;
     const icon = this.iconElement;
-    return !!(icon && firstChildNotComment(el) === icon);
+
+    return !!(icon && this._firstChildNotComment === icon);
   }
 
   @HostBinding('class.icon-end')
   get iconRight(): boolean {
-    const el = this.hostElement.nativeElement;
     const icon = this.iconElement;
-    return !!(icon && lastChildNotComment(el) === icon);
+
+    return !!(icon && this._lastChildNotComment === icon);
   }
 
   @HostBinding('class')
@@ -201,6 +201,9 @@ export abstract class NbButton implements AfterViewInit {
     }
     return [];
   }
+
+  private _lastChildNotComment: ChildNode | undefined;
+  private _firstChildNotComment: ChildNode | undefined;
 
   protected constructor(
     protected renderer: Renderer2,
@@ -216,6 +219,11 @@ export abstract class NbButton implements AfterViewInit {
     this.zone.runOutsideAngular(() => setTimeout(() => {
       this.renderer.addClass(this.hostElement.nativeElement, 'nb-transition');
     }));
+
+    setTimeout(() => {
+      this._lastChildNotComment = lastChildNotComment(this.hostElement.nativeElement);
+      this._firstChildNotComment = firstChildNotComment(this.hostElement.nativeElement);
+    })
   }
 
   /**
