@@ -1192,7 +1192,7 @@ export class NbSelectComponent implements OnChanges, AfterViewInit, AfterContent
    * Selects value.
    * */
   protected selectValue(value) {
-    if (!value) {
+    if (value == null) {
       return;
     }
 
