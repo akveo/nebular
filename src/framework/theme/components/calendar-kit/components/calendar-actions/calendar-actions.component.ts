@@ -5,17 +5,18 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from 
   template: `
     <button
       nbButton
+      status="primary"
+      size="small"
+      (click)="saveValue.emit()">
+      {{ applyText }}</button>
+    <button
+      *ngIf="isCurrentTimeButton"
+      nbButton
       ghost
       status="primary"
       size="small"
       (click)="setCurrentTime.emit()">
       {{ currentTimeText }}</button>
-    <button
-      nbButton
-      status="primary"
-      size="small"
-      (click)="saveValue.emit()">
-      {{ applyText }}</button>
   `,
   styleUrls: ['./calendar-actions.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -40,6 +41,8 @@ export class NbCalendarActionsComponent {
     return this._currentTimeButtonText;
   };
   _currentTimeButtonText = 'now';
+
+  @Input() isCurrentTimeButton: boolean;
 
   @Output() setCurrentTime: EventEmitter<void> = new EventEmitter();
   @Output() saveValue: EventEmitter<void> = new EventEmitter();

@@ -58,6 +58,7 @@ import { NbTimePickerComponent } from '../timepicker/timepicker.component';
         <nb-calendar-actions
           [applyButtonText]="applyButtonText"
           [currentTimeButtonText]="currentTimeButtonText"
+          [isCurrentTimeButton]="isCurrentTimeButton"
           (setCurrentTime)="saveCurrentTime()"
           (saveValue)="saveValue()"
         ></nb-calendar-actions>
@@ -108,6 +109,8 @@ export class NbCalendarWithTimeComponent<D> extends NbCalendarComponent<D> imple
   @Input() applyButtonText: string;
 
   @Input() currentTimeButtonText: string;
+
+  @Input() isCurrentTimeButton: boolean;
 
   @ViewChild(NbPortalOutletDirective) portalOutlet: NbPortalOutletDirective;
   @ViewChild(NbTimePickerComponent) timepicker: NbTimePickerComponent<D>;
