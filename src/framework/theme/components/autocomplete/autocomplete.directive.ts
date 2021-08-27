@@ -458,29 +458,29 @@ export class NbAutocompleteDirective<T> implements OnDestroy, AfterViewInit, Con
   }
 
   protected scrollToOption(index: number): void {
-    const autocomplete = this.autocomplete;
+    if (!this.autocomplete) {
+      return;
+    }
 
-    if (autocomplete) {
-      if (index === 0) {
-        this.autocomplete.scrollTop = 0;
+    if (index === 0) {
+      this.autocomplete.scrollTop = 0;
 
-        return;
-      }
+      return;
+    }
 
-      const option = autocomplete.options.toArray()[index];
+    const option = this.autocomplete.options.toArray()[index];
 
-      if (option) {
-        const element = option.hostElement;
+    if (option) {
+      const element = option.hostElement;
 
-        const newScrollPosition = _getOptionScrollPosition(
-          element.offsetTop,
-          element.offsetHeight,
-          autocomplete.scrollTop,
-          this.overlayRef.overlayElement.offsetHeight,
-        );
+      const newScrollPosition = _getOptionScrollPosition(
+        element.offsetTop,
+        element.offsetHeight,
+        this.autocomplete.scrollTop,
+        this.overlayRef.overlayElement.offsetHeight,
+      );
 
-        this.autocomplete.scrollTop = newScrollPosition;
-      }
+      this.autocomplete.scrollTop = newScrollPosition;
     }
   }
 }
