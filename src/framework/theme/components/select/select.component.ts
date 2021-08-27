@@ -520,7 +520,7 @@ export function nbSelectFormFieldControlConfigFactory() {
   ],
 })
 export class NbSelectComponent implements OnChanges, AfterViewInit, AfterContentInit, OnDestroy,
-  ControlValueAccessor, NbFormFieldControl {
+                                          ControlValueAccessor, NbFormFieldControl {
 
   /**
    * Select size, available sizes:
@@ -765,8 +765,8 @@ export class NbSelectComponent implements OnChanges, AfterViewInit, AfterContent
   /**
    * Function passed through control value accessor to propagate changes.
    * */
-  protected onChange: Function = () => { };
-  protected onTouched: Function = () => { };
+  protected onChange: Function = () => {};
+  protected onTouched: Function = () => {};
 
   /*
    * @docs-private
@@ -794,16 +794,16 @@ export class NbSelectComponent implements OnChanges, AfterViewInit, AfterContent
   fullWidth$ = new BehaviorSubject<boolean>(this.fullWidth);
 
   constructor(@Inject(NB_DOCUMENT) protected document,
-    protected overlay: NbOverlayService,
-    protected hostRef: ElementRef<HTMLElement>,
-    protected positionBuilder: NbPositionBuilderService,
-    protected triggerStrategyBuilder: NbTriggerStrategyBuilderService,
-    protected cd: ChangeDetectorRef,
-    protected focusKeyManagerFactoryService: NbFocusKeyManagerFactoryService<NbOptionComponent>,
-    protected focusMonitor: NbFocusMonitor,
-    protected renderer: Renderer2,
-    protected zone: NgZone,
-    protected statusService: NbStatusService) {
+              protected overlay: NbOverlayService,
+              protected hostRef: ElementRef<HTMLElement>,
+              protected positionBuilder: NbPositionBuilderService,
+              protected triggerStrategyBuilder: NbTriggerStrategyBuilderService,
+              protected cd: ChangeDetectorRef,
+              protected focusKeyManagerFactoryService: NbFocusKeyManagerFactoryService<NbOptionComponent>,
+              protected focusMonitor: NbFocusMonitor,
+              protected renderer: Renderer2,
+              protected zone: NgZone,
+              protected statusService: NbStatusService) {
   }
 
   /**
@@ -1029,7 +1029,7 @@ export class NbSelectComponent implements OnChanges, AfterViewInit, AfterContent
 
   protected setActiveOption() {
     if (this.selectionModel.length) {
-      this.keyManager.setActiveItem(this.selectionModel[0]);
+      this.keyManager.setActiveItem(this.selectionModel[ 0 ]);
     } else {
       this.keyManager.setFirstItemActive();
     }
@@ -1141,7 +1141,7 @@ export class NbSelectComponent implements OnChanges, AfterViewInit, AfterContent
   }
 
   protected getContainer() {
-    return this.ref && this.ref.hasAttached() && <ComponentRef<any>>{
+    return this.ref && this.ref.hasAttached() && <ComponentRef<any>> {
       location: {
         nativeElement: this.ref.overlayElement,
       },
