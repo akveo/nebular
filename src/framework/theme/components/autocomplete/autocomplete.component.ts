@@ -78,11 +78,9 @@ export class NbAutocompleteComponent<T> implements AfterContentInit, OnDestroy {
    * Current offset from the top to display active option.
    */
   _scrollTop: number = 0;
-
   get scrollTop(): number {
     return this._scrollTop;
   }
-
   set scrollTop(value: number) {
     this._scrollTop = value;
     this.cd.detectChanges();
