@@ -398,7 +398,9 @@ export class NbDatepickerDirective<D> implements OnDestroy, ControlValueAccessor
     // In case nb-rangepicker connected value is an object { min:Date, max: Date }.
     const checkedDate = (date as any)?.start ?? date;
 
-    if ((!config.min || !this.dateService.isValid(checkedDate) || this.dateService.compareDates(config.min, checkedDate) <= 0)) {
+    if ((!config.min ||
+         !this.dateService.isValid(checkedDate) ||
+         this.dateService.compareDates(config.min, checkedDate) <= 0)) {
       return null;
     }
 
@@ -415,7 +417,9 @@ export class NbDatepickerDirective<D> implements OnDestroy, ControlValueAccessor
     // In case nb-rangepicker connected value is an object { min:Date, max: Date }.
     const checkedDate = (date as any)?.end ?? date;
 
-    if ((!config.max || !this.dateService.isValid(checkedDate) || this.dateService.compareDates(config.max, checkedDate) >= 0)) {
+    if ((!config.max ||
+         !this.dateService.isValid(checkedDate) ||
+         this.dateService.compareDates(config.max, checkedDate) >= 0)) {
       return null;
     }
     return { nbDatepickerMax: { max: config.max, actual: checkedDate } };
