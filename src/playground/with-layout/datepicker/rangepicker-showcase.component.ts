@@ -19,5 +19,4 @@ import { Component } from '@angular/core';
   `,
   styleUrls: ['./datepicker-example.scss'],
 })
-export class RangepickerShowcaseComponent {
-}
+export class RangepickerShowcaseComponent {}

@@ -191,6 +191,10 @@ export class NbMomentDateService extends NbDateService<Moment> {
     return moment(date, format, true).isValid();
   }
 
+  isValid(date: Moment): boolean {
+    return date.isValid();
+  }
+
   parse(date: string, format: string): Moment {
     return moment(date, format);
   }

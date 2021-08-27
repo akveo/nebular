@@ -65,11 +65,15 @@ export class NbNativeDateService extends NbDateService<Date> {
   }
 
   isValidDateString(date: string, format: string): boolean {
-    return !isNaN(this.parse(date, format).getTime());
+    return this.isValid(this.parse(date, format));
   }
 
   isValidTimeString(date: string, format: string): boolean {
     return this.isValidDateString(date, format);
+  }
+
+  isValid(date: Date): boolean {
+    return !isNaN(date.getTime());
   }
 
   today(): Date {
@@ -125,9 +129,7 @@ export class NbNativeDateService extends NbDateService<Date> {
    * We haven't got capability to parse date using formatting without third party libraries.
    * */
   parse(date: string, format: string): Date {
-    const parsedValue = new Date(Date.parse(date));
-    const isProperlyParsed = parsedValue && parsedValue.toString() !== 'Invalid Date';
-    return isProperlyParsed ? parsedValue : null;
+    return new Date(Date.parse(date));
   }
 
   addDay(date: Date, num: number): Date {

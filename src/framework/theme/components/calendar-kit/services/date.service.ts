@@ -72,10 +72,16 @@ export abstract class NbDateService<D> {
    * Returns date with selected milliseconds
    * */
   abstract setMilliseconds(date: D, second: number): D;
+
   /**
    * Returns true if date string is valid date string according to the provided format.
    * */
   abstract isValidDateString(date: string, format: string): boolean;
+
+  /**
+   * Returns true if date is valid date.
+   * */
+  abstract isValid(date: D): boolean;
 
   /**
    * Returns true if time string is valid time string according to the provided format.
