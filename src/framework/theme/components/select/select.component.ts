@@ -1024,7 +1024,7 @@ export class NbSelectComponent implements OnChanges, AfterViewInit, AfterContent
 
   protected setActiveOption() {
     if (this.selectionModel.length) {
-      this.keyManager.setActiveItem(this.selectionModel[ 0 ]);
+      this.keyManager.setActiveItem(this.selectionModel[0]);
     } else {
       this.keyManager.setFirstItemActive();
     }
@@ -1155,12 +1155,18 @@ export class NbSelectComponent implements OnChanges, AfterViewInit, AfterContent
    * Set selected value in model.
    * */
   protected setSelection(value) {
-    const isArray: boolean = Array.isArray(value);
+    const isResetValue = value == null;
+    let safeValue = value;
 
-    if (this.multiple && !isArray) {
-      throw new Error('Can\'t assign single value if select is marked as multiple');
+    if (this.multiple) {
+      safeValue = value ?? [];
     }
 
+    const isArray: boolean = Array.isArray(safeValue);
+
+    if (this.multiple && !isArray && !isResetValue) {
+      throw new Error('Can\'t assign single value if select is marked as multiple');
+    }
     if (!this.multiple && isArray) {
       throw new Error('Can\'t assign array if select is not marked as multiple');
     }
@@ -1168,10 +1174,10 @@ export class NbSelectComponent implements OnChanges, AfterViewInit, AfterContent
     const previouslySelectedOptions = this.selectionModel;
     this.selectionModel = [];
 
-    if (isArray) {
-      value.forEach(option => this.selectValue(option));
+    if (this.multiple) {
+      safeValue.forEach(option => this.selectValue(option));
     } else {
-      this.selectValue(value);
+      this.selectValue(safeValue);
     }
 
     // find options which were selected before and trigger deselect
@@ -1186,6 +1192,10 @@ export class NbSelectComponent implements OnChanges, AfterViewInit, AfterContent
    * Selects value.
    * */
   protected selectValue(value) {
+    if (value == null) {
+      return;
+    }
+
     const corresponding = this.options.find((option: NbOptionComponent) => this._compareWith(option.value, value));
 
     if (corresponding) {
