@@ -108,7 +108,7 @@ export class NbAutocompleteDirective<T> implements OnDestroy, AfterViewInit, Con
 
   protected destroy$: Subject<void> = new Subject<void>();
 
-  protected _onChange: (value: T) => void = () => {};
+  protected _onChange: (value: T | string) => void = () => {};
 
   protected _onTouched = () => {};
 
@@ -124,6 +124,16 @@ export class NbAutocompleteDirective<T> implements OnDestroy, AfterViewInit, Con
    * */
   get isClosed(): boolean {
     return !this.isOpen;
+  }
+
+  /**
+   * Provides autocomplete value.
+   * */
+  get value(): T {
+    return this.hostRef.nativeElement.value;
+  }
+  set value(value: T) {
+    this.handleInputValueUpdate(value);
   }
 
   /**
@@ -328,7 +338,7 @@ export class NbAutocompleteDirective<T> implements OnDestroy, AfterViewInit, Con
 
   protected handleInputValueUpdate(value: T) {
     this.setHostInputValue(value ?? '');
-    this._onChange(value);
+    this._onChange(value ?? '');
     if (this.focusInputOnValueChange) {
       this.hostRef.nativeElement.focus();
     }
