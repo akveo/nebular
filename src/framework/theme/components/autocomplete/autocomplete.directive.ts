@@ -152,7 +152,7 @@ export class NbAutocompleteDirective<T> implements OnDestroy, AfterViewInit, Con
   set focusInputOnValueChange(value: boolean) {
     this._focusInputOnValueChange = convertToBoolProperty(value);
   }
-  protected _focusInputOnValueChange: boolean = true;
+  protected _focusInputOnValueChange: boolean = false;
 
   /**
    * Determines options overlay scroll strategy.
@@ -263,7 +263,7 @@ export class NbAutocompleteDirective<T> implements OnDestroy, AfterViewInit, Con
   }
 
   writeValue(value: T): void {
-    this.handleInputValueUpdate(value);
+    this.handleInputValueUpdate(value, this.focusInputOnValueChange);
   }
 
   registerOnChange(fn: (value: any) => {}): void {
@@ -326,10 +326,10 @@ export class NbAutocompleteDirective<T> implements OnDestroy, AfterViewInit, Con
     };
   }
 
-  protected handleInputValueUpdate(value: T) {
+  protected handleInputValueUpdate(value: T, focusInput: boolean = true) {
     this.setHostInputValue(value ?? '');
     this._onChange(value);
-    if (this.focusInputOnValueChange) {
+    if (focusInput) {
       this.hostRef.nativeElement.focus();
     }
     this.autocomplete.emitSelected(value);
