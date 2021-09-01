@@ -46,7 +46,7 @@ export class SomePageComponent {
 
 As a result, you should have a page with a simple layout on it looking similar to this:
 
-![image](assets/images/articles/sample-page.png)
+![image](../../assets/images/articles/sample-page.png)
 
 <div class="note note-info">
   <div class="note-title">Adding into existing page</div>
