@@ -555,6 +555,11 @@ export class NbSelectComponent implements OnChanges, AfterViewInit, AfterContent
   @Input() optionsPanelClass: string | string[];
 
   /**
+   * Select maximum selections available in multiple-select
+   */
+  @Input() maxSelections: number = null;
+
+  /**
    * Adds `outline` styles
    */
   @Input()
@@ -1001,11 +1006,21 @@ export class NbSelectComponent implements OnChanges, AfterViewInit, AfterContent
    * */
   protected handleMultipleSelect(option: NbOptionComponent) {
     if (option.selected) {
+      if (this.maxSelections !== null && this.selectionModel.length === this.maxSelections) {
+        this.options.forEach((opt: NbOptionComponent) => opt.disabled = false);
+      }
       this.selectionModel = this.selectionModel.filter(s => !this._compareWith(s.value, option.value));
       option.deselect();
     } else {
       this.selectionModel.push(option);
       option.select();
+      if (this.maxSelections !== null && this.selectionModel.length === this.maxSelections) {
+        this.options.forEach((opt: NbOptionComponent) => {
+          if (!opt.selected && opt.value !== null) {
+            opt.disabled = true;
+          }
+        });
+      }
     }
 
     this.emitSelected(this.selectionModel.map((opt: NbOptionComponent) => opt.value));
@@ -1175,7 +1190,13 @@ export class NbSelectComponent implements OnChanges, AfterViewInit, AfterContent
     this.selectionModel = [];
 
     if (this.multiple) {
-      safeValue.forEach(option => this.selectValue(option));
+      this.options.forEach((opt: NbOptionComponent) => opt.disabled = false);
+      safeValue.forEach(option => {
+        if (this.maxSelections !== null && this.maxSelections === this.selectionModel.length) {
+          return;
+        }
+        this.selectValue(option);
+      });
     } else {
       this.selectValue(safeValue);
     }
@@ -1184,6 +1205,14 @@ export class NbSelectComponent implements OnChanges, AfterViewInit, AfterContent
     previouslySelectedOptions
       .filter((option: NbOptionComponent) => !this.selectionModel.includes(option))
       .forEach((option: NbOptionComponent) => option.deselect());
+
+    if (this.maxSelections !== null && this.selectionModel.length === this.maxSelections) {
+      this.options.forEach((opt: NbOptionComponent) => {
+        if (!opt.selected && opt.value !== null) {
+          opt.disabled = true;
+        }
+      });
+    }
 
     this.cd.markForCheck();
   }
