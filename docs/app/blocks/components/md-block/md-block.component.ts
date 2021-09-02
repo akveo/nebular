@@ -4,15 +4,16 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
-import { from, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Subject } from 'rxjs';
+import { map, takeUntil } from 'rxjs/operators';
 import { NgdTextService } from '../../../@theme/services';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'ngd-md-block',
   template: `
-    <nb-card *ngFor="let section of content | async;" [ngdFragment]="section?.fragment">
+    <nb-card *ngFor="let section of content;" [ngdFragment]="section?.fragment">
       <nb-card-body>
         <div [innerHtml]="section?.html"></div>
       </nb-card-body>
@@ -20,17 +21,27 @@ import { NgdTextService } from '../../../@theme/services';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NgdMdBLockComponent implements OnInit {
+export class NgdMdBLockComponent implements OnInit, OnDestroy {
   @Input() source: string;
-  content: Observable<MdChildren[]> | undefined;
+  public content: MdChildren[] = [];
+  private _destroy = new Subject();
 
-  constructor(private textService: NgdTextService) {
+  constructor(private textService: NgdTextService, private http: HttpClient, private cdr: ChangeDetectorRef) {
   }
 
-  ngOnInit() {
-    const article = import(`../../../../articles/${this.source}!txt`);
+  ngOnInit(): void {
+    this.http.get(`articles/${this.source}`, { responseType: 'text' }).pipe(
+      takeUntil(this._destroy),
+      map((item) => this.textService.mdToSectionsHTML(item)),
+    ).subscribe((item) => {
+      this.content = item;
+      this.cdr.markForCheck();
+    });
+  }
 
-    this.content = from(article).pipe(map((str) => this.textService.mdToSectionsHTML(str)));
+  ngOnDestroy(): void {
+    this._destroy.next();
+    this._destroy.complete();
   }
 }
 
