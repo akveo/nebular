@@ -11,8 +11,3 @@ declare var module: {
 declare var require: any;
 declare var structure: any;
 declare var docs: any;
-
-declare module '*!txt' {
-  const content: string;
-  export default content;
-}
