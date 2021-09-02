@@ -8,13 +8,14 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnDestroy
 import { Subject } from 'rxjs';
 import { map, takeUntil } from 'rxjs/operators';
 import { NgdArticleService, NgdTextService } from '../../../@theme/services';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 @Component({
   selector: 'ngd-md-block',
   template: `
     <nb-card *ngFor="let section of content;" [ngdFragment]="section.fragment">
       <nb-card-body>
-        <div [innerHtml]="section.html"></div>
+        <div [innerHtml]="getTemplate(section.html)"></div>
       </nb-card-body>
     </nb-card>
   `,
@@ -28,7 +29,13 @@ export class NgdMdBLockComponent implements OnInit, OnDestroy {
   constructor(
     private textService: NgdTextService,
     private articleService: NgdArticleService,
-    private cdr: ChangeDetectorRef) {
+    private cdr: ChangeDetectorRef,
+    private readonly domSanitizer: DomSanitizer) {
+  }
+
+  // TODO: create NbDOMPurifyPipe
+  getTemplate(content: string): SafeHtml {
+    return this.domSanitizer.bypassSecurityTrustHtml(content);
   }
 
   ngOnInit(): void {
