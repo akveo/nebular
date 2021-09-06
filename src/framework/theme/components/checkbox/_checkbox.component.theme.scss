@@ -19,14 +19,6 @@
       border-width: nb-theme(checkbox-border-width);
       border-radius: nb-theme(checkbox-border-radius);
       position: relative;
-
-      nb-icon {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 50%;
-      }
     }
 
     .native-input:focus:not(:checked) + .custom-checkbox {
@@ -35,6 +27,14 @@
     }
     .native-input:focus:checked + .custom-checkbox {
       @include nb-outline(nb-theme(checkbox-outline-width), nb-theme(checkbox-outline-color));
+    }
+
+    .custom-checkbox-icon {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 50%;
     }
 
     .text {
