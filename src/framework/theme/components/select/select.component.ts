@@ -902,7 +902,7 @@ export class NbSelectComponent implements OnChanges, AfterViewInit, AfterContent
   show() {
     if (this.isHidden) {
       this.attachToOverlay();
-      this.setActiveOption();
+      setTimeout(() => this.setActiveOption())
       this.cd.markForCheck();
     }
   }
