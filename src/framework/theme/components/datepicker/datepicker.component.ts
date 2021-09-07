@@ -53,7 +53,7 @@ import { convertToBoolProperty, NbBooleanInput } from '../helpers';
 /**
  * The `NbBasePicker` component concentrates overlay manipulation logic.
  * */
-export abstract class NbBasePicker<D, T, P> extends NbDatepicker<T> {
+export abstract class NbBasePicker<D, T, P> extends NbDatepicker<T, D> {
   /**
    * Datepicker date format. Can be used only with date adapters (moment, date-fns) since native date
    * object doesn't support formatting.
@@ -74,17 +74,17 @@ export abstract class NbBasePicker<D, T, P> extends NbDatepicker<T> {
   /**
    * Minimum available date for selection.
    * */
-  abstract min: T;
+  abstract min: D;
 
   /**
    * Maximum available date for selection.
    * */
-  abstract max: T;
+  abstract max: D;
 
   /**
    * Predicate that decides which cells will be disabled.
    * */
-  abstract filter: (T) => boolean;
+  abstract filter: (D) => boolean;
 
   /**
    * Custom day cell component. Have to implement `NbCalendarCell` interface.
@@ -242,7 +242,7 @@ export abstract class NbBasePicker<D, T, P> extends NbDatepicker<T> {
     this.subscribeOnTriggers();
   }
 
-  getValidatorConfig(): NbPickerValidatorConfig<T> {
+  getValidatorConfig(): NbPickerValidatorConfig<D> {
     return { min: this.min, max: this.max, filter: this.filter };
   }
 
@@ -394,17 +394,17 @@ export class NbBasePickerComponent<D, T, P> extends NbBasePicker<D, T, P>
   /**
    * Minimum available date for selection.
    * */
-  @Input() min: T;
+  @Input() min: D;
 
   /**
    * Maximum available date for selection.
    * */
-  @Input() max: T;
+  @Input() max: D;
 
   /**
    * Predicate that decides which cells will be disabled.
    * */
-  @Input() filter: (T) => boolean;
+  @Input() filter: (D) => boolean;
 
   /**
    * Custom day cell component. Have to implement `NbCalendarCell` interface.
