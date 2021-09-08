@@ -12,6 +12,7 @@ import {
   ContentChildren,
   EventEmitter,
   HostBinding,
+  InjectionToken,
   Input,
   OnChanges,
   Output,
@@ -27,7 +28,14 @@ import { NbComponentSize } from '../component-size';
 import { NbComponentShape } from '../component-shape';
 import { NbComponentOrCustomStatus } from '../component-status';
 import { NbButton } from '../button/base-button';
-import { NbButtonToggleAppearance, NbButtonToggleChange, NbButtonToggleDirective } from './button-toggle.directive';
+import {
+  NbButtonToggleAppearance,
+  NbButtonToggleChange,
+  NbButtonToggleDirective,
+} from './button-toggle.directive';
+
+export const NB_BUTTON_GROUP_COMPONENT =
+  new InjectionToken<NbButtonGroupComponent>('NbButtonGroupComponent');
 
 /**
  * `<nb-button-group>` visually groups buttons together and allow to control buttons properties and the state as a
@@ -103,6 +111,7 @@ import { NbButtonToggleAppearance, NbButtonToggleChange, NbButtonToggleDirective
   template: `
     <ng-content></ng-content>
   `,
+  providers: [{provide: NB_BUTTON_GROUP_COMPONENT, useExisting: NbButtonGroupComponent}],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NbButtonGroupComponent implements OnChanges, AfterContentInit {
