@@ -1,6 +1,6 @@
 import { ComponentRef, Inject, Injectable } from '@angular/core';
 import { EMPTY, fromEvent as observableFromEvent, merge as observableMerge, Observable, Subject } from 'rxjs';
-import { debounceTime, delay, filter, map, repeat, share, switchMap, takeUntil, takeWhile } from 'rxjs/operators';
+import {debounceTime, delay, filter, map, repeat, share, switchMap, takeUntil, takeWhile } from 'rxjs/operators';
 import { NB_DOCUMENT } from '../../../theme.options';
 
 export type NbTriggerValues = 'noop' | 'click' | 'hover' | 'hint' | 'focus';
@@ -37,11 +37,11 @@ export abstract class NbTriggerStrategyBase implements NbTriggerStrategy {
   protected destroyed$ = new Subject();
 
   protected isNotOnHostOrContainer(event: Event): boolean {
-    return !this.isOnHost(event) && !this.isOnContainer(event);
+    return !this.isOnHost(event) && !this.isOnContainer(event) && !this.isOnCdkOverlayContainer(event);
   }
 
   protected isOnHostOrContainer(event: Event): boolean {
-    return this.isOnHost(event) || this.isOnContainer(event);
+    return this.isOnHost(event) || this.isOnContainer(event) || this.isOnCdkOverlayContainer(event);
   }
 
   protected isOnHost({ target }: Event): boolean {
@@ -50,6 +50,10 @@ export abstract class NbTriggerStrategyBase implements NbTriggerStrategy {
 
   protected isOnContainer({ target }: Event): boolean {
     return this.container() && this.container().location.nativeElement.contains(target);
+  }
+
+  protected isOnCdkOverlayContainer(event): boolean {
+    return event.path?.find((el: Element) => el.classList?.contains('cdk-overlay-container'));
   }
 
   abstract show$: Observable<Event>;
@@ -87,7 +91,8 @@ export class NbClickTriggerStrategy extends NbTriggerStrategyBase {
 
   readonly hide$: Observable<Event> = this.click$
     .pipe(
-      filter(([shouldShow, event]) => !shouldShow && !this.isOnContainer(event)),
+      filter(([shouldShow, event]) =>
+        !shouldShow && !(this.isOnContainer(event) || this.isOnCdkOverlayContainer(event))),
       map(([, event]) => event),
       takeUntil(this.destroyed$),
     );
