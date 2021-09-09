@@ -103,6 +103,11 @@ export class NbTabComponent {
   }
   static ngAcceptInputType_responsive: NbBooleanInput;
 
+  /**
+   * Makes this tab a link that initiates navigation to a route
+   * Makes this tab active when the navigation route equals to this value
+   * @type string
+   */
   @Input() route: string;
 
   @HostBinding('class.content-active')
