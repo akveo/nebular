@@ -105,7 +105,6 @@ export class NbTabComponent {
 
   /**
    * Makes this tab a link that initiates navigation to a route
-   * Makes this tab active when the navigation route equals to this value
    * @type string
    */
   @Input() route: string;
