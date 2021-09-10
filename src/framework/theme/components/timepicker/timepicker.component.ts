@@ -379,21 +379,13 @@ export class NbTimePickerComponent<D> implements OnChanges, OnInit {
       this.twelveHoursFormat = this.dateService.getLocaleTimeFormat().includes('h');
     }
 
-    const {
-      hoursText,
-      minutesText,
-      secondsText,
-      ampmText,
-      timeText,
-      applyButtonText,
-      currentTimeButtonText,
-    } = { ...NB_DEFAULT_TIMEPICKER_LOCALIZATION_CONFIG, ...config?.localization ?? {} };
-    this.hoursText = hoursText;
-    this.minutesText = minutesText;
-    this.secondsText = secondsText;
-    this.ampmText = ampmText;
-    this.timeText = timeText;
-    this.applyButtonText = applyButtonText;
-    this.currentTimeButtonText = currentTimeButtonText;
+    const localeConfig = { ...NB_DEFAULT_TIMEPICKER_LOCALIZATION_CONFIG, ...config?.localization ?? {} };
+    this.hoursText = localeConfig.hoursText;
+    this.minutesText = localeConfig.minutesText;
+    this.secondsText = localeConfig.secondsText;
+    this.ampmText = localeConfig.ampmText;
+    this.timeText = localeConfig.timeText;
+    this.applyButtonText = localeConfig.applyButtonText;
+    this.currentTimeButtonText = localeConfig.currentTimeButtonText;
   }
 }
