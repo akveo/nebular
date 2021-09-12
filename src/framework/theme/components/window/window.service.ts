@@ -91,6 +91,11 @@ import { NB_DOCUMENT } from '../../theme.options';
  *
  * @stacked-example(Window content from TemplateRef, window/template-window.component)
  *
+ * The window may return result through `NbWindowRef`. Calling component can receive this result with `onClose`
+ * stream of `NbWindowRef`.
+ *
+ * @stacked-example(Result, window/window-result.component)
+ *
  * ### Configuration
  *
  * As mentioned above, `open` method of the `NbWindowService` may receive optional configuration options.

@@ -1,0 +1,25 @@
+import {Component} from '@angular/core';
+import {NbWindowRef} from '../../../../framework/theme/components/window/window-ref';
+
+@Component({
+  selector: 'nb-name-prompt',
+  template: `
+    <form class="form">
+      <label for="name">Enter your name:</label>
+      <input nbInput #name id="name" type="text">
+    </form>
+
+    <button nbButton status="success" (click)="submit(name.value)">Submit</button>
+  `,
+})
+export class VisitorsFormComponent {
+  constructor(public windowRef: NbWindowRef) {}
+
+  submit(name) {
+    this.windowRef.close(name);
+  }
+
+  close() {
+    this.windowRef.close();
+  }
+}

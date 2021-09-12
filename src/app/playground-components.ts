@@ -1491,6 +1491,12 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         component: 'WindowControlsComponent',
         name: 'Window Controls',
       },
+      {
+        path: 'window-result.component',
+        link: '/window/window-result.component',
+        component: 'WindowResultComponent',
+        name: 'Window Result',
+      },
     ],
   },
   {

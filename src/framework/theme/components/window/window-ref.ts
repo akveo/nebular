@@ -76,7 +76,7 @@ export class NbWindowRef {
   /**
    * Closes window.
    * */
-  close() {
+  close(res?: any) {
     if (this._closed) {
       return;
     }
@@ -84,7 +84,7 @@ export class NbWindowRef {
     this._closed = true;
     this.componentRef.destroy();
     this.stateChange$.complete();
-    this.closed$.next();
+    this.closed$.next(res);
     this.closed$.complete();
   }
 }

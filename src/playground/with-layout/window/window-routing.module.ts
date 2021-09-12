@@ -10,6 +10,7 @@ import { TemplateWindowComponent } from './template-window.component';
 import { WindowShowcaseComponent } from './window-showcase.component';
 import { WindowsBackdropComponent } from './windows-backdrop.component';
 import { WindowControlsComponent } from './window-controls.component';
+import { WindowResultComponent } from './window-result.component';
 
 const routes: Route[] = [
   {
@@ -27,6 +28,10 @@ const routes: Route[] = [
   {
     path: 'window-controls.component',
     component: WindowControlsComponent,
+  },
+  {
+    path: 'window-result.component',
+    component: WindowResultComponent,
   },
 ];
 
