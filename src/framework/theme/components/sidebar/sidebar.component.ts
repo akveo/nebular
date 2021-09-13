@@ -23,6 +23,7 @@ import { convertToBoolProperty, NbBooleanInput } from '../helpers';
 import { NbThemeService } from '../../services/theme.service';
 import { NbMediaBreakpoint } from '../../services/breakpoints.service';
 import { NbSidebarService, getSidebarState$, getSidebarResponsiveState$ } from './sidebar.service';
+import { NbMenuItem, NbMenuService } from '../menu/menu.service';
 
 export type NbSidebarState = 'expanded' | 'collapsed' | 'compacted';
 export type NbSidebarResponsiveState = 'mobile' | 'tablet' | 'pc';
@@ -136,7 +137,7 @@ export class NbSidebarFooterComponent {
     <div class="main-container"
          [class.main-container-fixed]="containerFixedValue">
       <ng-content select="nb-sidebar-header"></ng-content>
-      <div class="scrollable" (click)="onClick($event)">
+      <div class="scrollable">
         <ng-content></ng-content>
       </div>
       <ng-content select="nb-sidebar-footer"></ng-content>
@@ -316,6 +317,7 @@ export class NbSidebarComponent implements OnInit, OnDestroy {
     private themeService: NbThemeService,
     private element: ElementRef,
     private cd: ChangeDetectorRef,
+    private menuService: NbMenuService,
   ) {}
 
   ngOnInit() {
@@ -368,25 +370,20 @@ export class NbSidebarComponent implements OnInit, OnDestroy {
       )
       .subscribe(() => this.expand());
 
+    this.menuService.onSubmenuToggle()
+      .pipe(
+        filter((data: { tag: string; item: NbMenuItem }) =>
+          (!data.tag || !this.tag || this.tag === data.tag) && data.item.expanded),
+        takeUntil(this.destroy$),
+      )
+      .subscribe((data: { tag: string; item: NbMenuItem }) => this.sidebarService.expand(data.tag));
+
     this.subscribeToMediaQueryChange();
   }
 
   ngOnDestroy() {
     this.destroy$.next();
     this.destroy$.complete();
-  }
-
-  // TODO: this is more of a workaround, should be a better way to make components communicate to each other
-  onClick(event): void {
-    const menu = this.element.nativeElement.querySelector('nb-menu');
-
-    if (menu && menu.contains(event.target)) {
-      const link = this.getMenuLink(event.target);
-
-      if (link && link.nextElementSibling && link.nextElementSibling.classList.contains('menu-items')) {
-        this.sidebarService.expand(this.tag);
-      }
-    }
   }
 
   /**
