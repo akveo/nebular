@@ -63,6 +63,8 @@ export class NbAutocompleteComponent<T> implements AfterContentInit, OnDestroy {
    */
   _overlayPosition: NbPosition = '' as NbPosition;
 
+  private _optionsWidth: number | undefined;
+
   get overlayPosition(): NbPosition {
     return this._overlayPosition;
   }
@@ -105,6 +107,17 @@ export class NbAutocompleteComponent<T> implements AfterContentInit, OnDestroy {
    * Specifies class for the overlay panel with options
    * */
   @Input() optionsPanelClass: string | string[];
+
+  /**
+   * Specifies width to be set on `nb-option`s container (`nb-option-list`)
+   * */
+  @Input()
+  get optionsWidth(): number {
+    return this._optionsWidth ?? this.hostWidth;
+  }
+  set optionsWidth(value: number) {
+    this._optionsWidth = value;
+  }
 
   /**
    * Will be emitted when selected value changes.
