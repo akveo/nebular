@@ -555,6 +555,11 @@ export class NbSelectComponent implements OnChanges, AfterViewInit, AfterContent
   @Input() optionsPanelClass: string | string[];
 
   /**
+   * Specifies width to be set on `nb-option`s container (`nb-option-list`)
+   * */
+  @Input() optionsWidth: number;
+
+  /**
    * Adds `outline` styles
    */
   @Input()
@@ -812,7 +817,7 @@ export class NbSelectComponent implements OnChanges, AfterViewInit, AfterContent
    * Returns width of the select button.
    * */
   get hostWidth(): number {
-    return this.button.nativeElement.getBoundingClientRect().width;
+    return this.optionsWidth ?? this.button.nativeElement.getBoundingClientRect().width;
   }
 
   get selectButtonClasses(): string[] {
