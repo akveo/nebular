@@ -557,7 +557,13 @@ export class NbSelectComponent implements OnChanges, AfterViewInit, AfterContent
   /**
    * Specifies width to be set on `nb-option`s container (`nb-option-list`)
    * */
-  @Input() optionsWidth: number;
+  @Input()
+  get optionsWidth(): number {
+    return this._optionsWidth ?? this.hostWidth;
+  }
+  set optionsWidth(value: number) {
+    this._optionsWidth = value;
+  }
 
   /**
    * Adds `outline` styles
@@ -755,6 +761,8 @@ export class NbSelectComponent implements OnChanges, AfterViewInit, AfterContent
 
   protected keyManager: NbFocusKeyManager<NbOptionComponent>;
 
+  private _optionsWidth: number | undefined;
+
   /**
    * If a user assigns value before content nb-options's rendered the value will be putted in this variable.
    * And then applied after content rendered.
@@ -817,7 +825,7 @@ export class NbSelectComponent implements OnChanges, AfterViewInit, AfterContent
    * Returns width of the select button.
    * */
   get hostWidth(): number {
-    return this.optionsWidth ?? this.button.nativeElement.getBoundingClientRect().width;
+    return this.button.nativeElement.getBoundingClientRect().width;
   }
 
   get selectButtonClasses(): string[] {
