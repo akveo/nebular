@@ -10,9 +10,10 @@ import {
   ElementRef,
   EventEmitter,
   HostBinding,
-  HostListener, Inject,
+  HostListener,
   Input,
-  NgZone, Optional,
+  NgZone,
+  Optional,
   Output,
   Renderer2,
 } from '@angular/core';
@@ -21,7 +22,7 @@ import { Observable, Subject } from 'rxjs';
 import { NbStatusService } from '../../services/status.service';
 import { convertToBoolProperty, NbBooleanInput } from '../helpers';
 import { NbButton, NbButtonAppearance } from '../button/base-button';
-import {NB_BUTTON_GROUP_COMPONENT, NbButtonGroupComponent} from './button-group.component';
+import { NbButtonGroupComponent } from './button-group.component';
 
 export type NbButtonToggleAppearance = Exclude<NbButtonAppearance, 'hero'>;
 
@@ -131,12 +132,12 @@ export class NbButtonToggleDirective extends NbButton {
   }
 
   constructor(
-    @Optional() @Inject(NB_BUTTON_GROUP_COMPONENT) protected buttonGroup: NbButtonGroupComponent,
     protected renderer: Renderer2,
     protected hostElement: ElementRef<HTMLElement>,
     protected cd: ChangeDetectorRef,
     protected zone: NgZone,
     protected statusService: NbStatusService,
+    @Optional() protected buttonGroup?: NbButtonGroupComponent,
   ) {
     super(renderer, hostElement, cd, zone, statusService);
   }
