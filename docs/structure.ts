@@ -541,6 +541,7 @@ export const structure = [
           'NbDatepickerDirective',
           'NbDatepickerComponent',
           'NbRangepickerComponent',
+          'NbDateTimePickerComponent',
         ],
       },
       {
