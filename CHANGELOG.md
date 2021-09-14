@@ -1,3 +1,13 @@
+<a name="7.0.1"></a>
+## [7.0.1](https://github.com/akveo/nebular/compare/v7.0.0...v7.0.1) (2021-09-14)
+
+
+### Bug Fixes
+
+* **focus trigger strategy:** detect click out via activeElement ([#2865](https://github.com/akveo/nebular/issues/2865)) ([b5a86d3](https://github.com/akveo/nebular/commit/b5a86d3))
+
+
+
 <a name="7.0.0"></a>
 # [7.0.0](https://github.com/akveo/nebular/compare/v6.2.1...v7.0.0) (2021-01-18)
 
