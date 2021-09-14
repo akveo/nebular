@@ -564,6 +564,7 @@ export class NbSelectComponent implements OnChanges, AfterViewInit, AfterContent
   set optionsWidth(value: number) {
     this._optionsWidth = value;
   }
+  protected _optionsWidth: number | undefined;
 
   /**
    * Adds `outline` styles
@@ -760,8 +761,6 @@ export class NbSelectComponent implements OnChanges, AfterViewInit, AfterContent
   protected destroy$ = new Subject<void>();
 
   protected keyManager: NbFocusKeyManager<NbOptionComponent>;
-
-  private _optionsWidth: number | undefined;
 
   /**
    * If a user assigns value before content nb-options's rendered the value will be putted in this variable.
