@@ -10,7 +10,7 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from 
       (click)="saveValue.emit()">
       {{ applyText }}</button>
     <button
-      *ngIf="isCurrentTimeButton"
+      *ngIf="showCurrentTimeButton"
       nbButton
       ghost
       status="primary"
@@ -42,7 +42,7 @@ export class NbCalendarActionsComponent {
   };
   _currentTimeButtonText = 'now';
 
-  @Input() isCurrentTimeButton: boolean;
+  @Input() showCurrentTimeButton: boolean;
 
   @Output() setCurrentTime: EventEmitter<void> = new EventEmitter();
   @Output() saveValue: EventEmitter<void> = new EventEmitter();
