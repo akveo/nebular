@@ -7,11 +7,11 @@ import { NbWindowConfig, NbWindowState, NbWindowStateChange } from './window.opt
  * The `NbWindowRef` helps to manipulate window after it was created.
  * The window can be dismissed by using `close` method of the windowRef.
  * You can access rendered component as `componentRef` property of the windowRef.
- * Property `windowContentInstance` contains the instance of the component opened into he window.
+ * Property `windowContentInstance` contains the instance of the component opened into the window.
  */
 export class NbWindowRef<T = any> {
   componentRef: ComponentRef<NbWindowComponent>;
-  windowContentInstance: T;
+  componentInstance: T;
 
   protected prevStateValue: NbWindowState;
   protected stateValue: NbWindowState;
@@ -85,7 +85,7 @@ export class NbWindowRef<T = any> {
 
     this._closed = true;
     this.componentRef.destroy();
-    this.windowContentInstance = null;
+    this.componentInstance = null;
     this.stateChange$.complete();
     this.closed$.next();
     this.closed$.complete();
