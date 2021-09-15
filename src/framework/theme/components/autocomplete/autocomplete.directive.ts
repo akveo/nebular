@@ -39,7 +39,6 @@ import {
 } from '../cdk/a11y/descendant-key-manager';
 import { NbScrollStrategies } from '../cdk/adapter/block-scroll-strategy-adapter';
 import { NbOptionComponent } from '../option/option.component';
-import { convertToBoolProperty } from '../helpers';
 import { NbAutocompleteComponent } from './autocomplete.component';
 
 /**
@@ -141,18 +140,6 @@ export class NbAutocompleteDirective<T> implements OnDestroy, AfterViewInit, Con
    * Determines options overlay offset (in pixels).
    **/
   @Input() overlayOffset: number = 8;
-
-  /**
-   * Determines if the input will be focused when the control value is changed
-   * */
-  @Input()
-  get focusInputOnValueChange(): boolean {
-    return this._focusInputOnValueChange;
-  }
-  set focusInputOnValueChange(value: boolean) {
-    this._focusInputOnValueChange = convertToBoolProperty(value);
-  }
-  protected _focusInputOnValueChange: boolean = false;
 
   /**
    * Determines options overlay scroll strategy.
@@ -263,7 +250,7 @@ export class NbAutocompleteDirective<T> implements OnDestroy, AfterViewInit, Con
   }
 
   writeValue(value: T): void {
-    this.handleInputValueUpdate(value, this.focusInputOnValueChange);
+    this.handleInputValueUpdate(value);
   }
 
   registerOnChange(fn: (value: any) => {}): void {
@@ -293,7 +280,7 @@ export class NbAutocompleteDirective<T> implements OnDestroy, AfterViewInit, Con
         }),
         takeUntil(this.destroy$),
       )
-      .subscribe((clickedOption: NbOptionComponent<T>) => this.handleInputValueUpdate(clickedOption.value));
+      .subscribe((clickedOption: NbOptionComponent<T>) => this.handleInputValueUpdate(clickedOption.value, true));
   }
 
   protected subscribeOnPositionChange() {
@@ -326,7 +313,7 @@ export class NbAutocompleteDirective<T> implements OnDestroy, AfterViewInit, Con
     };
   }
 
-  protected handleInputValueUpdate(value: T, focusInput: boolean = true) {
+  protected handleInputValueUpdate(value: T, focusInput: boolean = false) {
     this.setHostInputValue(value ?? '');
     this._onChange(value);
     if (focusInput) {
