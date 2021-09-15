@@ -184,7 +184,7 @@ export class NbMomentDateService extends NbDateService<Moment> {
   }
 
   isValidDateString(date: string, format: string): boolean {
-    return moment(date, format || this.localeData.defaultFormat).isValid();
+    return this.parse(date, format).isValid();
   }
 
   isValidTimeString(date: string, format: string): boolean {
