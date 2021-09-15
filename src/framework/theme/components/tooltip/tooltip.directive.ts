@@ -8,18 +8,18 @@ import {
   AfterViewInit,
   Directive,
   ElementRef,
-  EventEmitter,
   Input,
   OnChanges,
   OnDestroy,
   OnInit,
   Output,
+  EventEmitter,
 } from '@angular/core';
 import { skip, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 
 import { NbComponentOrCustomStatus } from '../component-status';
-import { NbAdjustment, NbAdjustmentValues, NbPosition, NbPositionValues } from '../cdk/overlay/overlay-position';
+import { NbAdjustment, NbPosition, NbPositionValues, NbAdjustmentValues } from '../cdk/overlay/overlay-position';
 import { NbTrigger } from '../cdk/overlay/overlay-trigger';
 import { NbDynamicOverlay } from '../cdk/overlay/dynamic/dynamic-overlay';
 import { NbDynamicOverlayHandler } from '../cdk/overlay/dynamic/dynamic-overlay-handler';

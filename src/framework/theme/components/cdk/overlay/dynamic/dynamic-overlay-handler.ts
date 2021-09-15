@@ -62,10 +62,10 @@ export class NbDynamicOverlayHandler {
     return this;
   }
 
-  disable(disable: boolean) {
-    this._disable = disable;
+  disable(disabled: boolean) {
+    this._disable = disabled;
 
-    if (disable && this.dynamicOverlay && this.dynamicOverlay.isAttached) {
+    if (disabled && this.dynamicOverlay && this.dynamicOverlay.isAttached) {
       this.dynamicOverlay.hide();
     }
     return this;

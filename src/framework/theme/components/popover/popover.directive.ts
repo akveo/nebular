@@ -14,7 +14,6 @@ import {
   OnInit,
   Output,
   EventEmitter,
-  SimpleChanges,
 } from '@angular/core';
 
 import { NbDynamicOverlay, NbDynamicOverlayController } from '../cdk/overlay/dynamic/dynamic-overlay';
@@ -173,6 +172,9 @@ export class NbPopoverDirective implements NbDynamicOverlayController, OnChanges
   @Input('nbPopoverOffset')
   offset = 15;
 
+  /** Disables the display of the tooltip. */
+  @Input('nbTooltipDisabled') disabled: boolean = false;
+
   @Input('nbPopoverClass')
   get popoverClass(): string {
     return this._popoverClass;
@@ -247,6 +249,7 @@ export class NbPopoverDirective implements NbDynamicOverlayController, OnChanges
     return this.dynamicOverlayHandler
       .position(this.position)
       .trigger(this.trigger)
+      .disable(this.disabled)
       .offset(this.offset)
       .adjustment(this.adjustment)
       .content(this.content)
