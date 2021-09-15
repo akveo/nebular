@@ -26,7 +26,6 @@ import { NbDynamicOverlayHandler } from '../cdk/overlay/dynamic/dynamic-overlay-
 import { NbOverlayConfig } from '../cdk/overlay/mapping';
 import { NbTooltipComponent } from './tooltip.component';
 import { NbIconConfig } from '../icon/icon.component';
-import { convertToBoolProperty, NbBooleanInput } from '../helpers';
 
 /**
  *
@@ -78,8 +77,6 @@ export class NbTooltipDirective implements OnInit, OnChanges, AfterViewInit, OnD
   protected destroy$ = new Subject<void>();
   protected tooltipComponent = NbTooltipComponent;
   protected dynamicOverlay: NbDynamicOverlay;
-  private _trigger = NbTrigger.HINT;
-  private _disabled = false;
 
   context: Object = {};
 
@@ -146,12 +143,7 @@ export class NbTooltipDirective implements OnInit, OnChanges, AfterViewInit, OnD
    * Available options: `click`, `hover`, `hint`, `focus` and `noop`
    * */
   @Input('nbTooltipTrigger')
-  get trigger(): NbTrigger {
-    return this._disabled ? NbTrigger.NOOP : this._trigger;
-  }
-  set trigger(value) {
-    this._trigger = value;
-  }
+  trigger: NbTrigger = NbTrigger.HINT;
 
   /**
    * Determines tooltip overlay offset (in pixels).
@@ -159,16 +151,7 @@ export class NbTooltipDirective implements OnInit, OnChanges, AfterViewInit, OnD
   @Input('nbTooltipOffset') offset = 8;
 
   /** Disables the display of the tooltip. */
-  @Input('nbTooltipDisabled')
-  get disabled(): boolean { return this._disabled; }
-  set disabled(value: boolean) {
-    this._disabled = convertToBoolProperty(value);
-
-    if (value && this.isShown) {
-      this.hide();
-    }
-  }
-  static ngAcceptInputType_disabled: NbBooleanInput;
+  @Input('nbTooltipDisabled') disabled: boolean = false;
 
   @Output()
   nbTooltipShowStateChange = new EventEmitter<{ isShown: boolean }>();
@@ -233,6 +216,7 @@ export class NbTooltipDirective implements OnInit, OnChanges, AfterViewInit, OnD
     return this.dynamicOverlayHandler
       .position(this.position)
       .trigger(this.trigger)
+      .disable(this.disabled)
       .adjustment(this.adjustment)
       .content(this.content)
       .context(this.context)
