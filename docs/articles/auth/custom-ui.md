@@ -154,7 +154,7 @@ export class NgxAuthRoutingModule {
 
 Now open your browsers at http://localhost:4200/#/auth and you should be able to see the auth container: 
 
-![image](../../assets/images/articles/custom-auth/auth-container.png)
+![image](assets/images/articles/custom-auth/auth-container.png)
 
 Great, let's move on to the most interesting part.
 <hr>
@@ -264,7 +264,7 @@ Paste the template into your `auth/login.component.html` and modify as necessary
 That's it! You can check your page at http://localhost:4200/#/auth.
 
 
-![image](../../assets/images/articles/custom-auth/form-with-labels.png)
+![image](assets/images/articles/custom-auth/form-with-labels.png)
 
 ## Complete example
 

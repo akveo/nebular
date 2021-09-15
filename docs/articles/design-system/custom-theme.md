@@ -241,7 +241,7 @@ $nb-themes: nb-register-theme((
 ```
 Simple as that, here's our result:
 
-![image](../../assets/images/articles/design-system/aquamarine-theme.png)
+![image](assets/images/articles/design-system/aquamarine-theme.png)
 
 That's it. In a similar way, the rest of the available theme variables could be changed to achieve the desired result.
 Complete list of variables could be found under [Default Theme Variables](docs/design-system/default-theme) table.
