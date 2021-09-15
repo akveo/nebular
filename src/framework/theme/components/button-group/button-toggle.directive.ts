@@ -125,10 +125,9 @@ export class NbButtonToggleDirective extends NbButton {
 
   @HostListener('click')
   onClick(): void {
-    if (!this.buttonGroup?.multiple && this.pressed) {
-      return;
+    if (this.buttonGroup?.multiple || !this.pressed) {
+      this.pressed = !this.pressed;
     }
-    this.pressed = !this.pressed;
   }
 
   constructor(
