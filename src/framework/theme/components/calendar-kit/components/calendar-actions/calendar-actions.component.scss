@@ -1,5 +1,17 @@
+@import '../../../../styles/core/mixins';
+
 :host {
   display: flex;
-  flex-direction: row-reverse;
   justify-content: space-between;
+
+  @include nb-ltr() {
+    .apply-text-button {
+      margin-left: auto;
+    }
+  }
+  @include nb-rtl() {
+    .apply-text-button {
+      margin-right: auto;
+    }
+  }
 }

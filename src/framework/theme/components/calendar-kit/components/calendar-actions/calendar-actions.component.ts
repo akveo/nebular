@@ -4,12 +4,6 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from 
   selector: 'nb-calendar-actions',
   template: `
     <button
-      nbButton
-      status="primary"
-      size="small"
-      (click)="saveValue.emit()">
-      {{ applyText }}</button>
-    <button
       *ngIf="showCurrentTimeButton"
       nbButton
       ghost
@@ -17,6 +11,13 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from 
       size="small"
       (click)="setCurrentTime.emit()">
       {{ currentTimeText }}</button>
+    <button
+      class="apply-text-button"
+      nbButton
+      status="primary"
+      size="small"
+      (click)="saveValue.emit()">
+      {{ applyText }}</button>
   `,
   styleUrls: ['./calendar-actions.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
