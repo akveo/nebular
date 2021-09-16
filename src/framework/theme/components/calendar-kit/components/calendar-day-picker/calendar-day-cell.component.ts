@@ -91,11 +91,11 @@ export class NbCalendarDayCellComponent<D> implements NbCalendarCell<D, D> {
   }
 
   private smallerThanMin(): boolean {
-    return this.date && this.min && this.min instanceof Date && this.dateService.compareDates(this.date, this.min) < 0;
+    return this.date && this.min && this.dateService.compareDates(this.date, this.min) < 0;
   }
 
   private greaterThanMax(): boolean {
-    return this.date && this.max && this.max instanceof Date && this.dateService.compareDates(this.date, this.max) > 0;
+    return this.date && this.max && this.dateService.compareDates(this.date, this.max) > 0;
   }
 
   private dontFitFilter(): boolean {
