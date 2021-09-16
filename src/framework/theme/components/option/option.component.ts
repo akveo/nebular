@@ -94,6 +94,8 @@ export class NbOptionComponent<T = any> implements OnDestroy, AfterViewInit, NbF
 
   protected disabledByGroup = false;
 
+  protected disabledByHandle = false;
+
   /**
    * Option value that will be fired on selection.
    * */
@@ -101,7 +103,7 @@ export class NbOptionComponent<T = any> implements OnDestroy, AfterViewInit, NbF
 
   @Input()
   get disabled(): boolean {
-    return this._disabled || this.disabledByGroup;
+    return this._disabled || this.disabledByGroup || this.disabledByHandle;
   }
   set disabled(value: boolean) {
     this._disabled = convertToBoolProperty(value);
@@ -207,6 +209,14 @@ export class NbOptionComponent<T = any> implements OnDestroy, AfterViewInit, NbF
 
   deselect() {
     this.setSelection(false);
+  }
+
+  enable() {
+    this.disabledByHandle = false;
+  }
+
+  disable() {
+    this.disabledByHandle = true;
   }
 
   /**
