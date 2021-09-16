@@ -1,19 +1,25 @@
 import {
+  AfterContentChecked,
   AfterViewInit,
   ChangeDetectorRef,
+  ContentChildren,
   Directive,
   ElementRef,
+  EmbeddedViewRef,
   HostBinding,
   Input,
   NgZone,
+  QueryList,
   Renderer2,
+  ViewContainerRef,
 } from '@angular/core';
 
 import { NbStatusService } from '../../services/status.service';
-import { convertToBoolProperty, firstChildNotComment, lastChildNotComment, NbBooleanInput } from '../helpers';
+import { convertToBoolProperty, NbBooleanInput } from '../helpers';
 import { NbComponentSize } from '../component-size';
 import { NbComponentOrCustomStatus } from '../component-status';
 import { NbComponentShape } from '../component-shape';
+import { NbIconComponent } from '../icon/icon.component';
 
 export type NbButtonAppearance = 'filled' | 'outline' | 'ghost' | 'hero';
 
@@ -21,7 +27,7 @@ export type NbButtonProperties = Pick<NbButton, 'appearance' | 'size' | 'shape' 
 
 @Directive()
 // tslint:disable-next-line:directive-class-suffix
-export abstract class NbButton implements AfterViewInit {
+export abstract class NbButton implements AfterContentChecked, AfterViewInit {
   /**
    * Button size, available sizes:
    * `tiny`, `small`, `medium`, `large`, `giant`
@@ -180,19 +186,9 @@ export abstract class NbButton implements AfterViewInit {
     return this.shape === 'semi-round';
   }
 
-  @HostBinding('class.icon-start')
-  get iconLeft(): boolean {
-    const icon = this.iconElement;
+  @HostBinding('class.icon-start') iconLeft = false;
 
-    return !!(icon && this._firstChildNotComment === icon);
-  }
-
-  @HostBinding('class.icon-end')
-  get iconRight(): boolean {
-    const icon = this.iconElement;
-
-    return !!(icon && this._lastChildNotComment === icon);
-  }
+  @HostBinding('class.icon-end') iconRight = false;
 
   @HostBinding('class')
   get additionalClasses(): string[] {
@@ -202,8 +198,7 @@ export abstract class NbButton implements AfterViewInit {
     return [];
   }
 
-  private _lastChildNotComment: ChildNode | undefined;
-  private _firstChildNotComment: ChildNode | undefined;
+  @ContentChildren(NbIconComponent, { read: ElementRef }) icons: QueryList<ElementRef>;
 
   protected constructor(
     protected renderer: Renderer2,
@@ -211,7 +206,18 @@ export abstract class NbButton implements AfterViewInit {
     protected cd: ChangeDetectorRef,
     protected zone: NgZone,
     protected statusService: NbStatusService,
+    protected view: ViewContainerRef,
   ) {
+  }
+
+  ngAfterContentChecked() {
+    const nodes = (this.cd as EmbeddedViewRef<any>).rootNodes
+      .filter((child: Node) => child.nodeType !== Node.COMMENT_NODE);
+    const firstEl = nodes[0];
+    const lastEl = nodes[nodes.length - 1];
+
+    this.iconLeft = this.icons.some((item) => item.nativeElement === firstEl);
+    this.iconRight = this.icons.some((item) => item.nativeElement === lastEl);
   }
 
   ngAfterViewInit() {
@@ -219,11 +225,6 @@ export abstract class NbButton implements AfterViewInit {
     this.zone.runOutsideAngular(() => setTimeout(() => {
       this.renderer.addClass(this.hostElement.nativeElement, 'nb-transition');
     }));
-
-    setTimeout(() => {
-      this._lastChildNotComment = lastChildNotComment(this.hostElement.nativeElement);
-      this._firstChildNotComment = firstChildNotComment(this.hostElement.nativeElement);
-    })
   }
 
   /**
