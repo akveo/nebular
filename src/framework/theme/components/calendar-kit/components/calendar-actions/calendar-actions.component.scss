@@ -4,14 +4,10 @@
   display: flex;
   justify-content: space-between;
 
-  @include nb-ltr() {
-    .apply-text-button {
-      margin-left: auto;
-    }
-  }
-  @include nb-rtl() {
-    .apply-text-button {
-      margin-right: auto;
-    }
+  .apply-text-button {
+    @include nb-ltr(margin-left, auto);
+    @include nb-rtl(margin-right, auto);
   }
 }
+
+
