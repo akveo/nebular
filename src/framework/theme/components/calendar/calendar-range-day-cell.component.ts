@@ -124,11 +124,11 @@ export class NbCalendarRangeDayCellComponent<D> extends NbBaseCalendarRangeCell<
   }
 
   protected smallerThanMin(): boolean {
-    return this.date && this.min && this.min instanceof Date && this.dateService.compareDates(this.date, this.min) < 0;
+    return this.date && this.min && this.dateService.compareDates(this.date, this.min) < 0;
   }
 
   protected greaterThanMax(): boolean {
-    return this.date && this.max && this.max instanceof Date && this.dateService.compareDates(this.date, this.max) > 0;
+    return this.date && this.max && this.dateService.compareDates(this.date, this.max) > 0;
   }
 
   protected dontFitFilter(): boolean {
