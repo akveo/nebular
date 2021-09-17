@@ -5,16 +5,20 @@
  */
 
 import {
+  AfterContentInit,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
+  ContentChildren,
   ElementRef,
   EventEmitter,
   HostBinding,
   Input,
   OnDestroy,
   OnInit,
+  Optional,
   Output,
+  QueryList,
 } from '@angular/core';
 import { combineLatest, Subject } from 'rxjs';
 import { takeUntil, filter, map, startWith } from 'rxjs/operators';
@@ -24,6 +28,7 @@ import { NbThemeService } from '../../services/theme.service';
 import { NbMediaBreakpoint } from '../../services/breakpoints.service';
 import { NbSidebarService, getSidebarState$, getSidebarResponsiveState$ } from './sidebar.service';
 import { NbMenuItem, NbMenuService } from '../menu/menu.service';
+import { NbMenuComponent } from '../menu/menu.component';
 
 export type NbSidebarState = 'expanded' | 'collapsed' | 'compacted';
 export type NbSidebarResponsiveState = 'mobile' | 'tablet' | 'pc';
@@ -145,7 +150,7 @@ export class NbSidebarFooterComponent {
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NbSidebarComponent implements OnInit, OnDestroy {
+export class NbSidebarComponent implements OnInit, AfterContentInit, OnDestroy {
 
   protected readonly responsiveValueChange$: Subject<boolean> = new Subject<boolean>();
   protected responsiveState: NbSidebarResponsiveState = 'pc';
@@ -164,10 +169,12 @@ export class NbSidebarComponent implements OnInit, OnDestroy {
   get expanded() {
     return this.state === 'expanded';
   }
+
   @HostBinding('class.collapsed')
   get collapsed() {
     return this.state === 'collapsed';
   }
+
   @HostBinding('class.compacted')
   get compacted() {
     return this.state === 'compacted';
@@ -184,6 +191,7 @@ export class NbSidebarComponent implements OnInit, OnDestroy {
     this.startValue = false;
     this.endValue = false;
   }
+
   static ngAcceptInputType_right: NbBooleanInput;
 
   /**
@@ -197,6 +205,7 @@ export class NbSidebarComponent implements OnInit, OnDestroy {
     this.startValue = false;
     this.endValue = false;
   }
+
   static ngAcceptInputType_left: NbBooleanInput;
 
   /**
@@ -210,6 +219,7 @@ export class NbSidebarComponent implements OnInit, OnDestroy {
     this.leftValue = false;
     this.rightValue = false;
   }
+
   static ngAcceptInputType_start: NbBooleanInput;
 
   /**
@@ -223,6 +233,7 @@ export class NbSidebarComponent implements OnInit, OnDestroy {
     this.leftValue = false;
     this.rightValue = false;
   }
+
   static ngAcceptInputType_end: NbBooleanInput;
 
   /**
@@ -233,6 +244,7 @@ export class NbSidebarComponent implements OnInit, OnDestroy {
   set fixed(val: boolean) {
     this.fixedValue = convertToBoolProperty(val);
   }
+
   static ngAcceptInputType_fixed: NbBooleanInput;
 
   /**
@@ -243,6 +255,7 @@ export class NbSidebarComponent implements OnInit, OnDestroy {
   set containerFixed(val: boolean) {
     this.containerFixedValue = convertToBoolProperty(val);
   }
+
   static ngAcceptInputType_containerFixed: NbBooleanInput;
 
   /**
@@ -253,9 +266,11 @@ export class NbSidebarComponent implements OnInit, OnDestroy {
   get state(): NbSidebarState {
     return this._state;
   }
+
   set state(value: NbSidebarState) {
     this._state = value;
   }
+
   protected _state: NbSidebarState = 'expanded';
 
   /**
@@ -266,12 +281,14 @@ export class NbSidebarComponent implements OnInit, OnDestroy {
   get responsive(): boolean {
     return this._responsive;
   }
+
   set responsive(value: boolean) {
     if (this.responsive !== convertToBoolProperty(value)) {
       this._responsive = !this.responsive;
       this.responsiveValueChange$.next(this.responsive);
     }
   }
+
   protected _responsive: boolean = false;
   static ngAcceptInputType_responsive: NbBooleanInput;
 
@@ -312,56 +329,60 @@ export class NbSidebarComponent implements OnInit, OnDestroy {
    */
   @Output() readonly responsiveStateChange = new EventEmitter<NbSidebarResponsiveState>();
 
+  @ContentChildren(NbMenuComponent) menu: QueryList<NbMenuComponent>;
+
   constructor(
     private sidebarService: NbSidebarService,
     private themeService: NbThemeService,
     private element: ElementRef,
     private cd: ChangeDetectorRef,
-    private menuService: NbMenuService,
-  ) {}
+    // @breaking-change 9.0.0 make required
+    @Optional() private menuService?: NbMenuService,
+  ) {
+  }
 
   ngOnInit() {
     this.sidebarService.onToggle()
       .pipe(
-        filter(({ tag }) => !this.tag || this.tag === tag),
+        filter(({tag}) => !this.tag || this.tag === tag),
         takeUntil(this.destroy$),
       )
-      .subscribe(({ compact }) => this.toggle(compact));
+      .subscribe(({compact}) => this.toggle(compact));
 
     this.sidebarService.onExpand()
       .pipe(
-        filter(({ tag }) => !this.tag || this.tag === tag),
+        filter(({tag}) => !this.tag || this.tag === tag),
         takeUntil(this.destroy$),
       )
       .subscribe(() => this.expand());
 
     this.sidebarService.onCollapse()
       .pipe(
-        filter(({ tag }) => !this.tag || this.tag === tag),
+        filter(({tag}) => !this.tag || this.tag === tag),
         takeUntil(this.destroy$),
       )
       .subscribe(() => this.collapse());
 
     this.sidebarService.onCompact()
       .pipe(
-        filter(({ tag }) => !this.tag || this.tag === tag),
+        filter(({tag}) => !this.tag || this.tag === tag),
         takeUntil(this.destroy$),
       )
       .subscribe(() => this.compact());
 
     getSidebarState$
       .pipe(
-        filter(({ tag }) => !this.tag || this.tag === tag),
+        filter(({tag}) => !this.tag || this.tag === tag),
         takeUntil(this.destroy$),
       )
-      .subscribe(({ observer }) => observer.next(this.state));
+      .subscribe(({observer}) => observer.next(this.state));
 
     getSidebarResponsiveState$
       .pipe(
-        filter(({ tag }) => !this.tag || this.tag === tag),
+        filter(({tag}) => !this.tag || this.tag === tag),
         takeUntil(this.destroy$),
       )
-      .subscribe(({ observer }) => observer.next(this.responsiveState));
+      .subscribe(({observer}) => observer.next(this.responsiveState));
 
     this.responsiveValueChange$
       .pipe(
@@ -370,15 +391,17 @@ export class NbSidebarComponent implements OnInit, OnDestroy {
       )
       .subscribe(() => this.expand());
 
+    this.subscribeToMediaQueryChange();
+  }
+
+  ngAfterContentInit() {
     this.menuService.onSubmenuToggle()
       .pipe(
         filter((data: { tag: string; item: NbMenuItem }) =>
-          (!data.tag || !this.tag || this.tag === data.tag) && data.item.expanded),
+          (!data.tag || this.menu?.some(child => child.tag === data.tag)) && data.item.expanded),
         takeUntil(this.destroy$),
       )
-      .subscribe((data: { tag: string; item: NbMenuItem }) => this.sidebarService.expand(data.tag));
-
-    this.subscribeToMediaQueryChange();
+      .subscribe((data: { tag: string; item: NbMenuItem }) => this.sidebarService.expand(this.tag));
   }
 
   ngOnDestroy() {
@@ -500,6 +523,7 @@ export class NbSidebarComponent implements OnInit, OnDestroy {
   toggleResponsive(enabled: boolean) {
     this.responsive = enabled;
   }
+
   /**
    * @deprecated Use NbSidebarState type instead
    * @breaking-change Remove @8.0.0
