@@ -13,6 +13,7 @@ import {
   HostListener,
   Input,
   NgZone,
+  Optional,
   Output,
   Renderer2,
 } from '@angular/core';
@@ -21,6 +22,7 @@ import { Observable, Subject } from 'rxjs';
 import { NbStatusService } from '../../services/status.service';
 import { convertToBoolProperty, NbBooleanInput } from '../helpers';
 import { NbButton, NbButtonAppearance } from '../button/base-button';
+import { NbButtonGroupComponent } from './button-group.component';
 
 export type NbButtonToggleAppearance = Exclude<NbButtonAppearance, 'hero'>;
 
@@ -123,7 +125,10 @@ export class NbButtonToggleDirective extends NbButton {
 
   @HostListener('click')
   onClick(): void {
-    this.pressed = !this.pressed;
+    // Don't remove the pressed state of the button in single-toggle button-groups
+    if (this.buttonGroup?.multiple || !this.pressed) {
+      this.pressed = !this.pressed;
+    }
   }
 
   constructor(
@@ -132,6 +137,7 @@ export class NbButtonToggleDirective extends NbButton {
     protected cd: ChangeDetectorRef,
     protected zone: NgZone,
     protected statusService: NbStatusService,
+    @Optional() protected buttonGroup?: NbButtonGroupComponent,
   ) {
     super(renderer, hostElement, cd, zone, statusService);
   }
