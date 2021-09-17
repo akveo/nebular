@@ -557,7 +557,7 @@ export class NbSelectComponent implements OnChanges, AfterViewInit, AfterContent
   /**
    * Set the maximal number of selections in multiple-select
    */
-  @Input() maxSelections: number = null;
+  @Input() maxSelections: number = Infinity;
 
   /**
    * Adds `outline` styles
