@@ -1031,9 +1031,9 @@ export class NbSelectComponent implements OnChanges, AfterViewInit, AfterContent
   protected manageDisablingOptions() {
     this.options.forEach((opt: NbOptionComponent) => {
       if (!opt.selected && opt.value !== null && opt.value !== undefined && this.isMaxSelectionsSet) {
-        opt.disable();
+        opt.disableManual();
       } else {
-        opt.enable();
+        opt.enableManual();
       }
     });
   }
@@ -1214,10 +1214,7 @@ export class NbSelectComponent implements OnChanges, AfterViewInit, AfterContent
     // find options which were selected before and trigger deselect
     previouslySelectedOptions
       .filter((option: NbOptionComponent) => !this.selectionModel.includes(option))
-      .forEach((option: NbOptionComponent) => {
-        option.deselect();
-        option.enable();
-      });
+      .forEach((option: NbOptionComponent) => option.deselect());
 
     this.manageDisablingOptions();
 
