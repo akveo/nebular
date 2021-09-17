@@ -31,7 +31,7 @@ import {
 import { NgClass } from '@angular/common';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { merge, Subject, BehaviorSubject, from } from 'rxjs';
-import { startWith, switchMap, takeUntil, filter, map, finalize } from 'rxjs/operators';
+import { startWith, switchMap, takeUntil, filter, map, finalize, take } from 'rxjs/operators';
 
 import { NbStatusService } from '../../services/status.service';
 import {
@@ -902,7 +902,11 @@ export class NbSelectComponent implements OnChanges, AfterViewInit, AfterContent
   show() {
     if (this.isHidden) {
       this.attachToOverlay();
-      setTimeout(() => this.setActiveOption())
+
+      this.positionStrategy.positionChange.pipe(take(1), takeUntil(this.destroy$)).subscribe(() => {
+        this.setActiveOption();
+      });
+
       this.cd.markForCheck();
     }
   }
