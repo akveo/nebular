@@ -11,7 +11,6 @@ import {
   NgZone,
   QueryList,
   Renderer2,
-  ViewContainerRef,
 } from '@angular/core';
 
 import { NbStatusService } from '../../services/status.service';
@@ -206,18 +205,15 @@ export abstract class NbButton implements AfterContentChecked, AfterViewInit {
     protected cd: ChangeDetectorRef,
     protected zone: NgZone,
     protected statusService: NbStatusService,
-    protected view: ViewContainerRef,
   ) {
   }
 
   ngAfterContentChecked() {
-    const nodes = (this.cd as EmbeddedViewRef<any>).rootNodes
-      .filter((child: Node) => child.nodeType !== Node.COMMENT_NODE);
-    const firstEl = nodes[0];
-    const lastEl = nodes[nodes.length - 1];
+    const firstNode = this.nodes[0];
+    const lastNode = this.nodes[this.nodes.length - 1];
 
-    this.iconLeft = this.icons.some((item) => item.nativeElement === firstEl);
-    this.iconRight = this.icons.some((item) => item.nativeElement === lastEl);
+    this.iconLeft = this.isIconExist(firstNode);
+    this.iconRight = this.isIconExist(lastNode);
   }
 
   ngAfterViewInit() {
@@ -248,5 +244,13 @@ export abstract class NbButton implements AfterContentChecked, AfterViewInit {
   get iconElement() {
     const el = this.hostElement.nativeElement;
     return el.querySelector('nb-icon');
+  }
+
+  protected get nodes(): Node[] {
+    return (this.cd as EmbeddedViewRef<any>).rootNodes.filter((child: Node) => child.nodeType !== Node.COMMENT_NODE);
+  }
+
+  protected isIconExist(node: Node): boolean {
+    return this.icons.some((item) => item.nativeElement === node);
   }
 }
