@@ -15,16 +15,16 @@ import {
   OnDestroy,
   OnInit,
 } from '@angular/core';
-import {filter, takeUntil} from 'rxjs/operators';
-import {Subject} from 'rxjs';
+import { filter, takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
-import {NbDynamicOverlay, NbDynamicOverlayController} from '../cdk/overlay/dynamic/dynamic-overlay';
-import {NbDynamicOverlayHandler} from '../cdk/overlay/dynamic/dynamic-overlay-handler';
-import {NbOverlayConfig, NbOverlayRef} from '../cdk/overlay/mapping';
-import {NbAdjustableConnectedPositionStrategy, NbAdjustment, NbPosition} from '../cdk/overlay/overlay-position';
-import {NbTrigger, NbTriggerValues} from '../cdk/overlay/overlay-trigger';
-import {NbContextMenuComponent} from './context-menu.component';
-import {NbMenuItem, NbMenuService} from '../menu/menu.service';
+import { NbDynamicOverlay, NbDynamicOverlayController } from '../cdk/overlay/dynamic/dynamic-overlay';
+import { NbDynamicOverlayHandler } from '../cdk/overlay/dynamic/dynamic-overlay-handler';
+import { NbOverlayConfig, NbOverlayRef } from '../cdk/overlay/mapping';
+import { NbAdjustableConnectedPositionStrategy, NbAdjustment, NbPosition } from '../cdk/overlay/overlay-position';
+import { NbTrigger, NbTriggerValues } from '../cdk/overlay/overlay-trigger';
+import { NbContextMenuComponent } from './context-menu.component';
+import { NbMenuItem, NbMenuService } from '../menu/menu.service';
 
 export interface NbContextMenuContext {
   items: NbMenuItem[];
