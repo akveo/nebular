@@ -5,24 +5,31 @@
  */
 
 import { Component } from '@angular/core';
-import { NbWindowRef } from '../../../../framework/theme/components/window/window-ref';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { NbWindowRef } from '@nebular/theme';
 
 @Component({
   selector: 'nb-visitors-form',
   template: `
-    <form class="form">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="form">
       <label for="name">Enter your name:</label>
-      <input nbInput #name id="name" type="text">
-    </form>
+      <input nbInput id="name" type="text" formControlName="name">
 
-    <button nbButton status="success" (click)="submit(name.value)">Submit</button>
+      <button nbButton type="submit" status="success">Submit</button>
+    </form>
   `,
 })
 export class VisitorsFormComponent {
-  constructor(public windowRef: NbWindowRef) {}
+  form: FormGroup;
 
-  submit(name) {
-    this.windowRef.close(name);
+  constructor(private fb: FormBuilder, public windowRef: NbWindowRef) {
+    this.form = fb.group({
+      name: null,
+    });
+  }
+
+  onSubmit() {
+    this.windowRef.close(this.form.value.name);
   }
 
   close() {

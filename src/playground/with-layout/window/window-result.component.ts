@@ -5,7 +5,7 @@
  */
 
 import { Component } from '@angular/core';
-import { NbWindowService } from '../../../framework/theme/components/window/window.service';
+import { NbWindowService } from '@nebular/theme';
 import { VisitorsFormComponent } from './components/visitors-form.component';
 
 @Component({
@@ -23,11 +23,11 @@ import { VisitorsFormComponent } from './components/visitors-form.component';
 export class WindowResultComponent {
   visitors: string[] = [];
 
-  constructor(private windowService: NbWindowService) {
-  }
+  constructor(private windowService: NbWindowService) {}
 
   openWindow() {
-    this.windowService.open(VisitorsFormComponent, {title: `Window`})
-      .onClose.subscribe((visitor: string) => visitor && this.visitors.push(visitor));
+    const windowRef = this.windowService.open(VisitorsFormComponent, {title: `Window`});
+
+    windowRef.onClose.subscribe((visitor: string) => visitor && this.visitors.push(visitor));
   }
 }

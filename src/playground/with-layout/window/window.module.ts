@@ -6,6 +6,7 @@
 
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NbButtonModule, NbCardModule, NbCheckboxModule, NbInputModule, NbWindowModule } from '@nebular/theme';
 
 import { WindowRoutingModule } from './window-routing.module';
@@ -29,6 +30,8 @@ import { VisitorsFormComponent } from './components/visitors-form.component';
   ],
   imports: [
     CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
     NbWindowModule.forRoot(),
     NbButtonModule,
     NbInputModule,

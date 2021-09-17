@@ -5,9 +5,12 @@
 ::ng-deep .form {
   display: flex;
   flex-direction: column;
-  margin-bottom: 1.5rem;
 
   .text-label {
+    margin-top: 1.5rem;
+  }
+
+  button {
     margin-top: 1.5rem;
   }
 }
