@@ -14,7 +14,8 @@ import {
   QueryList,
   AfterContentInit,
   HostBinding,
-  ChangeDetectorRef, ContentChild,
+  ChangeDetectorRef,
+  ContentChild,
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
@@ -47,7 +48,11 @@ export class NbTabComponent {
   /** Content for the tab label given by `<ng-template nb-tab-label>`. */
   @ContentChild(NB_TAB_LABEL)
   get templateLabel(): NbTabLabelDirective { return this._templateLabel; }
-  set templateLabel(value: NbTabLabelDirective) { this._setTemplateLabelInput(value); }
+  set templateLabel(value: NbTabLabelDirective) {
+    if (value) {
+      this._templateLabel = value;
+    }
+  }
   protected _templateLabel: NbTabLabelDirective;
 
   /**
@@ -167,12 +172,6 @@ export class NbTabComponent {
   @Input() badgePosition: NbBadgePosition;
 
   init: boolean = false;
-
-  protected _setTemplateLabelInput(value: NbTabLabelDirective) {
-    if (value) {
-      this._templateLabel = value;
-    }
-  }
 }
 
 // TODO: Combine tabset with route-tabset, so that we can:
