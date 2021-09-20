@@ -5,7 +5,7 @@ export const NB_TAB_LABEL = new InjectionToken<NbTabLabelDirective>('NbTabLabel'
 
 /** Used to flag tab labels for use with the portal directive */
 @Directive({
-  selector: '[nb-tab-label], [nbTabLabel]',
+  selector: '[nbTabLabel]',
   providers: [{ provide: NB_TAB_LABEL, useExisting: NbTabLabelDirective }],
 })
 export class NbTabLabelDirective extends CdkPortal {
