@@ -5,7 +5,6 @@
  */
 
 import { NgModule } from '@angular/core';
-import { PortalModule } from '@angular/cdk/portal';
 
 import { NbSharedModule } from '../shared/shared.module';
 
@@ -24,7 +23,6 @@ const NB_TABSET_COMPONENTS = [
     NbSharedModule,
     NbBadgeModule,
     NbIconModule,
-    PortalModule,
   ],
   declarations: [
     ...NB_TABSET_COMPONENTS,
