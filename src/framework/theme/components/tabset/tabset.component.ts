@@ -55,8 +55,6 @@ export class NbTabComponent {
   @ContentChild(NB_TAB_CONTENT, { read: TemplateRef, static: true }) _explicitContent: TemplateRef<any>;
   @ViewChild('container', { read: TemplateRef, static: true }) _implicitContent: TemplateRef<any>;
 
-  private ref: EmbeddedViewRef<any> | null = null;
-
   /**
    * Tab title
    * @type {string}
@@ -181,13 +179,15 @@ export class NbTabComponent {
    */
   init: boolean = false;
 
+  protected embeddedViewRef: EmbeddedViewRef<any> | null = null;
+
   private _initView(): void {
-    if (!this.ref && this.active) {
-      this.ref = this.container.createEmbeddedView(this._explicitContent || this._implicitContent);
+    if (!this.embeddedViewRef && this.active) {
+      this.embeddedViewRef = this.container.createEmbeddedView(this._explicitContent || this._implicitContent);
     }
-    if (this.ref && !this.active) {
-      this.ref.destroy();
-      this.ref = null;
+    if (this.embeddedViewRef && !this.active) {
+      this.embeddedViewRef.destroy();
+      this.embeddedViewRef = null;
     }
   }
 }
