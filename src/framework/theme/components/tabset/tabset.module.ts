@@ -5,7 +5,7 @@
  */
 
 import { NgModule } from '@angular/core';
-import { NbPortalModule } from '../cdk/portal/portal.module';
+import { NbPortalModule } from '../cdk/portal';
 
 import { NbSharedModule } from '../shared/shared.module';
 

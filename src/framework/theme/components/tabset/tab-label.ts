@@ -1,5 +1,5 @@
 import { Directive, InjectionToken } from '@angular/core';
-import { CdkPortal } from '@angular/cdk/portal';
+import { NbPortal } from '../cdk/portal';
 
 export const NB_TAB_LABEL = new InjectionToken<NbTabLabelDirective>('NbTabLabel');
 
@@ -8,5 +8,5 @@ export const NB_TAB_LABEL = new InjectionToken<NbTabLabelDirective>('NbTabLabel'
   selector: '[nbTabLabel]',
   providers: [{ provide: NB_TAB_LABEL, useExisting: NbTabLabelDirective }],
 })
-export class NbTabLabelDirective extends CdkPortal {
+export class NbTabLabelDirective extends NbPortal {
 }
