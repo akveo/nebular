@@ -18,6 +18,10 @@ const NB_TABSET_COMPONENTS = [
   NbTabComponent,
 ];
 
+const NB_TABSET_DIRECTIVES = [
+  NbTabContentDirective,
+];
+
 @NgModule({
   imports: [
     NbSharedModule,
@@ -26,11 +30,11 @@ const NB_TABSET_COMPONENTS = [
   ],
   declarations: [
     ...NB_TABSET_COMPONENTS,
-    NbTabContentDirective,
+    ...NB_TABSET_DIRECTIVES,
   ],
   exports: [
     ...NB_TABSET_COMPONENTS,
-    NbTabContentDirective,
+    ...NB_TABSET_DIRECTIVES,
   ],
 })
 export class NbTabsetModule { }
