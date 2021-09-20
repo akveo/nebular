@@ -14,7 +14,7 @@ import {
   QueryList,
   AfterContentInit,
   HostBinding,
-  ChangeDetectorRef,
+  ChangeDetectorRef, ContentChild,
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
@@ -22,6 +22,7 @@ import { convertToBoolProperty, NbBooleanInput } from '../helpers';
 import { NbComponentOrCustomStatus } from '../component-status';
 import { NbBadgePosition } from '../badge/badge.component';
 import { NbIconConfig } from '../icon/icon.component';
+import { NB_TAB_LABEL, NbTabLabelDirective } from './tab-label';
 
 /**
  * Specific tab container.
@@ -43,6 +44,11 @@ import { NbIconConfig } from '../icon/icon.component';
   `,
 })
 export class NbTabComponent {
+  /** Content for the tab label given by `<ng-template nb-tab-label>`. */
+  @ContentChild(NB_TAB_LABEL)
+  get templateLabel(): NbTabLabelDirective { return this._templateLabel; }
+  set templateLabel(value: NbTabLabelDirective) { this._setTemplateLabelInput(value); }
+  protected _templateLabel: NbTabLabelDirective;
 
   /**
    * Tab title
@@ -161,6 +167,12 @@ export class NbTabComponent {
   @Input() badgePosition: NbBadgePosition;
 
   init: boolean = false;
+
+  protected _setTemplateLabelInput(value: NbTabLabelDirective) {
+    if (value) {
+      this._templateLabel = value;
+    }
+  }
 }
 
 // TODO: Combine tabset with route-tabset, so that we can:
@@ -274,7 +286,14 @@ export class NbTabComponent {
           class="tab">
         <a href (click)="$event.preventDefault()" tabindex="-1" class="tab-link">
           <nb-icon *ngIf="tab.tabIcon" [config]="tab.tabIcon"></nb-icon>
-          <span *ngIf="tab.tabTitle" class="tab-text">{{ tab.tabTitle }}</span>
+          <!-- If there is a label template, use it. -->
+          <ng-template [ngIf]="tab.templateLabel">
+            <ng-template [cdkPortalOutlet]="tab.templateLabel"></ng-template>
+          </ng-template>
+          <!-- If there is not a label template, fall back to the tab title. -->
+          <ng-template [ngIf]="!tab.templateLabel">
+            <span class="tab-text">{{ tab.tabTitle }}</span>
+          </ng-template>
         </a>
         <nb-badge *ngIf="tab.badgeText || tab.badgeDot"
           [text]="tab.badgeText"

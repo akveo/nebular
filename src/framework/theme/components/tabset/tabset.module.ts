@@ -5,16 +5,22 @@
  */
 
 import { NgModule } from '@angular/core';
+import { PortalModule } from '@angular/cdk/portal';
 
 import { NbSharedModule } from '../shared/shared.module';
 
 import { NbTabsetComponent, NbTabComponent } from './tabset.component';
 import { NbBadgeModule } from '../badge/badge.module';
 import { NbIconModule } from '../icon/icon.module';
+import { NbTabLabelDirective } from './tab-label';
 
 const NB_TABSET_COMPONENTS = [
   NbTabsetComponent,
   NbTabComponent,
+];
+
+const NB_TABSET_DIRECTIVES = [
+  NbTabLabelDirective,
 ];
 
 @NgModule({
@@ -22,12 +28,15 @@ const NB_TABSET_COMPONENTS = [
     NbSharedModule,
     NbBadgeModule,
     NbIconModule,
+    PortalModule,
   ],
   declarations: [
     ...NB_TABSET_COMPONENTS,
+    ...NB_TABSET_DIRECTIVES,
   ],
   exports: [
     ...NB_TABSET_COMPONENTS,
+    ...NB_TABSET_DIRECTIVES,
   ],
 })
 export class NbTabsetModule { }
