@@ -19,10 +19,9 @@ import {
   ContentChild,
   TemplateRef,
   ViewContainerRef,
-  AfterViewInit,
+  EmbeddedViewRef,
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { CdkPortalOutlet, TemplatePortal } from '@angular/cdk/portal';
 
 import { convertToBoolProperty, NbBooleanInput } from '../helpers';
 import { NbComponentOrCustomStatus } from '../component-status';
@@ -44,15 +43,20 @@ import { NB_TAB_CONTENT } from './tab-content';
 @Component({
   selector: 'nb-tab',
   template: `
-    <ng-template portalHost #container>
+    <ng-container #outlet></ng-container>
+
+    <ng-template #container>
       <ng-content></ng-content>
     </ng-template>
   `,
 })
-export class NbTabComponent implements AfterViewInit {
-  @ViewChild('container', { read: TemplateRef, static: true }) _implicitContent: TemplateRef<any>;
+export class NbTabComponent {
+  @ViewChild('outlet', { read: ViewContainerRef, static: true }) container: ViewContainerRef;
   @ContentChild(NB_TAB_CONTENT, { read: TemplateRef, static: true }) _explicitContent: TemplateRef<any>;
-  @ViewChild(CdkPortalOutlet, { static: true }) _portalHost: CdkPortalOutlet;
+  @ViewChild('container', { read: TemplateRef, static: true }) _implicitContent: TemplateRef<any>;
+
+  private ref: EmbeddedViewRef<any> | null = null;
+
   /**
    * Tab title
    * @type {string}
@@ -176,24 +180,15 @@ export class NbTabComponent implements AfterViewInit {
    * @type boolean
    */
   init: boolean = false;
-  /** Portal that will be the hosted content of the tab */
-  private _contentPortal: TemplatePortal | null = null;
-
-  constructor(private _viewContainerRef: ViewContainerRef) {
-  }
 
   private _initView(): void {
-    if (!this._contentPortal.isAttached && this.active) {
-      this._contentPortal.attach(this._portalHost);
+    if (!this.ref && this.active) {
+      this.ref = this.container.createEmbeddedView(this._explicitContent || this._implicitContent);
     }
-    if (this._contentPortal.isAttached && !this.active) {
-      this._contentPortal.detach();
+    if (this.ref && !this.active) {
+      this.ref.destroy();
+      this.ref = null;
     }
-  }
-
-  ngAfterViewInit(): void {
-    this._contentPortal = new TemplatePortal(
-      this._explicitContent || this._implicitContent, this._viewContainerRef);
   }
 }
 
