@@ -178,16 +178,6 @@ export class NbTabComponent {
 
   currentTemplate: TemplateRef<any> | null = null;
 
-  // private _initView(): void {
-  //   if (!this.embeddedViewRef && this.active) {
-  //     this.embeddedViewRef = this.container.createEmbeddedView(this._explicitContent || this._implicitContent);
-  //   }
-  //   if (this.embeddedViewRef && !this.active) {
-  //     this.embeddedViewRef.destroy();
-  //     this.embeddedViewRef = null;
-  //   }
-  // }
-
   protected _initView(): void {
     if (this.active) {
       this.currentTemplate = this._explicitContent || this._implicitContent;
