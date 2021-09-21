@@ -50,11 +50,7 @@ import { NB_LAZY_CONTENT } from './lazy-content';
   `,
 })
 export class NbTabComponent {
-  @ContentChild(NB_LAZY_CONTENT, { read: TemplateRef, static: true })
-  get lazyTemplate(): TemplateRef<any> {
-    return this._lazyTemplate;
-  }
-  protected _lazyTemplate: TemplateRef<any>;
+  @ContentChild(NB_LAZY_CONTENT, { read: TemplateRef, static: true }) protected _lazyTemplate: TemplateRef<any>;
 
   /**
    * Tab title
@@ -181,6 +177,10 @@ export class NbTabComponent {
 
   get showLazy(): boolean {
     return !!this._lazyTemplate && this.active;
+  }
+
+  get lazyTemplate(): TemplateRef<any> {
+    return this._lazyTemplate;
   }
 }
 
