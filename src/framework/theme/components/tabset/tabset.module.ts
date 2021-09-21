@@ -11,7 +11,7 @@ import { NbSharedModule } from '../shared/shared.module';
 import { NbTabsetComponent, NbTabComponent } from './tabset.component';
 import { NbBadgeModule } from '../badge/badge.module';
 import { NbIconModule } from '../icon/icon.module';
-import { NbTabContentDirective } from './tab-content';
+import { NbLazyContentDirective } from './lazy-content';
 
 const NB_TABSET_COMPONENTS = [
   NbTabsetComponent,
@@ -19,7 +19,7 @@ const NB_TABSET_COMPONENTS = [
 ];
 
 const NB_TABSET_DIRECTIVES = [
-  NbTabContentDirective,
+  NbLazyContentDirective,
 ];
 
 @NgModule({

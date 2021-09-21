@@ -15,10 +15,8 @@ import {
   AfterContentInit,
   HostBinding,
   ChangeDetectorRef,
-  ViewChild,
   ContentChild,
   TemplateRef,
-  AfterViewInit,
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
@@ -26,7 +24,7 @@ import { convertToBoolProperty, NbBooleanInput } from '../helpers';
 import { NbComponentOrCustomStatus } from '../component-status';
 import { NbBadgePosition } from '../badge/badge.component';
 import { NbIconConfig } from '../icon/icon.component';
-import { NB_TAB_CONTENT } from './tab-content';
+import { NB_LAZY_CONTENT } from './lazy-content';
 
 /**
  * Specific tab container.
@@ -42,18 +40,17 @@ import { NB_TAB_CONTENT } from './tab-content';
 @Component({
   selector: 'nb-tab',
   template: `
-    <ng-container *ngIf="active">
-      <ng-container *ngTemplateOutlet="currentTemplate"></ng-container>
+    <ng-container *ngIf="showLazy; else notLazy">
+      <ng-container *ngTemplateOutlet="lazyTemplate"></ng-container>
     </ng-container>
 
-    <ng-template #container>
+    <ng-template #notLazy>
       <ng-content></ng-content>
     </ng-template>
   `,
 })
-export class NbTabComponent implements AfterViewInit {
-  @ContentChild(NB_TAB_CONTENT, { read: TemplateRef, static: true }) _explicitContent: TemplateRef<any>;
-  @ViewChild('container', { read: TemplateRef, static: true }) _implicitContent: TemplateRef<any>;
+export class NbTabComponent {
+  @ContentChild(NB_LAZY_CONTENT, { read: TemplateRef, static: true }) lazyTemplate: TemplateRef<any>;
 
   /**
    * Tab title
@@ -142,7 +139,7 @@ export class NbTabComponent implements AfterViewInit {
    * Lazy load content before tab selection
    * TODO: rename, as lazy is by default, and this is more `instant load`
    * @param {boolean} val
-   * @deprecated To be turned into a <ng-template nbTabContent>
+   * @deprecated To be turned into a <ng-template nbLazyContent>
    */
   @Input()
   set lazyLoad(val: boolean) {
@@ -178,10 +175,8 @@ export class NbTabComponent implements AfterViewInit {
    */
   init: boolean = false;
 
-  currentTemplate: TemplateRef<any> | null = null;
-
-  ngAfterViewInit() {
-    this.currentTemplate = this._explicitContent || this._implicitContent;
+  get showLazy(): boolean {
+    return !!this.lazyTemplate && this.active;
   }
 }
 
