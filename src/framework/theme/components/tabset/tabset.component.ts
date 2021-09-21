@@ -18,8 +18,6 @@ import {
   ViewChild,
   ContentChild,
   TemplateRef,
-  ViewContainerRef,
-  EmbeddedViewRef,
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
@@ -43,7 +41,7 @@ import { NB_TAB_CONTENT } from './tab-content';
 @Component({
   selector: 'nb-tab',
   template: `
-    <ng-container #outlet></ng-container>
+    <ng-container *ngTemplateOutlet="currentTemplate"></ng-container>
 
     <ng-template #container>
       <ng-content></ng-content>
@@ -51,7 +49,6 @@ import { NB_TAB_CONTENT } from './tab-content';
   `,
 })
 export class NbTabComponent {
-  @ViewChild('outlet', { read: ViewContainerRef, static: true }) container: ViewContainerRef;
   @ContentChild(NB_TAB_CONTENT, { read: TemplateRef, static: true }) _explicitContent: TemplateRef<any>;
   @ViewChild('container', { read: TemplateRef, static: true }) _implicitContent: TemplateRef<any>;
 
@@ -179,15 +176,23 @@ export class NbTabComponent {
    */
   init: boolean = false;
 
-  protected embeddedViewRef: EmbeddedViewRef<any> | null = null;
+  currentTemplate: TemplateRef<any> | null = null;
 
-  private _initView(): void {
-    if (!this.embeddedViewRef && this.active) {
-      this.embeddedViewRef = this.container.createEmbeddedView(this._explicitContent || this._implicitContent);
-    }
-    if (this.embeddedViewRef && !this.active) {
-      this.embeddedViewRef.destroy();
-      this.embeddedViewRef = null;
+  // private _initView(): void {
+  //   if (!this.embeddedViewRef && this.active) {
+  //     this.embeddedViewRef = this.container.createEmbeddedView(this._explicitContent || this._implicitContent);
+  //   }
+  //   if (this.embeddedViewRef && !this.active) {
+  //     this.embeddedViewRef.destroy();
+  //     this.embeddedViewRef = null;
+  //   }
+  // }
+
+  protected _initView(): void {
+    if (this.active) {
+      this.currentTemplate = this._explicitContent || this._implicitContent;
+    } else {
+      this.currentTemplate = null;
     }
   }
 }
