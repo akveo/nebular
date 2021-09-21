@@ -17,7 +17,7 @@ import {
   ChangeDetectorRef,
   ViewChild,
   ContentChild,
-  TemplateRef,
+  TemplateRef, AfterViewInit,
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
@@ -41,14 +41,16 @@ import { NB_TAB_CONTENT } from './tab-content';
 @Component({
   selector: 'nb-tab',
   template: `
-    <ng-container *ngTemplateOutlet="currentTemplate"></ng-container>
+    <ng-container *ngIf="active">
+      <ng-container *ngTemplateOutlet="currentTemplate"></ng-container>
+    </ng-container>
 
     <ng-template #container>
       <ng-content></ng-content>
     </ng-template>
   `,
 })
-export class NbTabComponent {
+export class NbTabComponent implements AfterViewInit {
   @ContentChild(NB_TAB_CONTENT, { read: TemplateRef, static: true }) _explicitContent: TemplateRef<any>;
   @ViewChild('container', { read: TemplateRef, static: true }) _implicitContent: TemplateRef<any>;
 
@@ -132,7 +134,6 @@ export class NbTabComponent {
     if (this.activeValue) {
       this.init = true;
     }
-    this._initView();
   }
   static ngAcceptInputType_active: NbBooleanInput;
 
@@ -178,12 +179,8 @@ export class NbTabComponent {
 
   currentTemplate: TemplateRef<any> | null = null;
 
-  protected _initView(): void {
-    if (this.active) {
-      this.currentTemplate = this._explicitContent || this._implicitContent;
-    } else {
-      this.currentTemplate = null;
-    }
+  ngAfterViewInit() {
+    this.currentTemplate = this._explicitContent || this._implicitContent;
   }
 }
 
