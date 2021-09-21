@@ -17,7 +17,8 @@ import {
   ChangeDetectorRef,
   ViewChild,
   ContentChild,
-  TemplateRef, AfterViewInit,
+  TemplateRef,
+  AfterViewInit,
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
