@@ -7,7 +7,7 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnDestroy } from '@angular/core';
 import { takeUntil, map } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
-import { of as observableOf,  combineLatest, Subject } from 'rxjs';
+import { combineLatest, Subject, Observable } from 'rxjs';
 
 @Component({
   selector: 'ngd-page-toc',
@@ -31,14 +31,14 @@ export class NgdPageTocComponent implements OnDestroy {
   items: any[];
 
   @Input()
-  set toc(value) {
+  set toc(value: Observable<any>[]) {
     combineLatest(
-      observableOf(value || []),
       this.activatedRoute.fragment,
+      ...value,
     )
       .pipe(
-        map(([toc, fragment]) => {
-          toc = toc.map((item: any) => ({ ...item, selected: fragment === item.fragment }));
+        map(([fragment, ...toc]) => {
+          toc = [].concat(...toc).map((item: any) => ({ ...item, selected: fragment === item.fragment }));
           if (toc.length && !toc.find(item => item.selected)) {
             toc[0].selected = true;
           }
