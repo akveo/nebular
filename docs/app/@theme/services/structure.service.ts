@@ -5,7 +5,7 @@
  */
 
 import { Inject, Injectable } from '@angular/core';
-import { of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { NgdTabbedService } from './tabbed.service';
@@ -57,6 +57,12 @@ export class NgdStructureService {
         if (item.block === 'component') {
           item.source = this.prepareComponent(preparedDocs.classes.find((data) => data.name === item.source));
         }
+      }
+
+      if (item.block === 'markdown') {
+        item.sections = this.articleService.getArticle(item.source).pipe(
+          map((article) => this.textService.mdToSectionsHTML(article)),
+        );
       }
 
       if (item.children) {
@@ -116,7 +122,7 @@ export class NgdStructureService {
     };
   }
 
-  protected prepareToc(item: any) {
+  protected prepareToc(item: any): Observable<any[]> {
     return item.children.reduce((acc: any[], child: any) => {
       if (child.block === 'markdown') {
         return [...acc, this.getTocForMd(child)];
@@ -131,9 +137,8 @@ export class NgdStructureService {
     }, []);
   }
 
-  protected getTocForMd(block: any) {
-    return this.articleService.getArticle(block.source).pipe(
-      map((item) => this.textService.mdToSectionsHTML(item)),
+  protected getTocForMd(block: any): Observable<any[]> {
+    return (block.sections as Observable<any[]>).pipe(
       map((item) => item.map((val) => ({
         title: val.title,
         fragment: val.fragment,
@@ -141,14 +146,14 @@ export class NgdStructureService {
     );
   }
 
-  protected getTocForComponent(block: any) {
+  protected getTocForComponent(block: any): Observable<any[]> {
     return of([{
       title: block.source.name,
       fragment: block.source.slag,
     }]);
   }
 
-  protected getTocForTabbed(block: any) {
+  protected getTocForTabbed(block: any): Observable<any[]> {
     return of(block.children.map((component: any) => ({
       title: component.name,
       fragment: this.textService.createSlag(component.name),

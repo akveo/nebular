@@ -4,10 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { Subject } from 'rxjs';
-import { map, takeUntil } from 'rxjs/operators';
-import { NgdArticleService, NgdTextService } from '../../../@theme/services';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 @Component({
@@ -21,14 +18,10 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NgdMdBLockComponent implements OnInit, OnDestroy {
-  @Input() source: string | undefined;
-  public content: MdChildren[] = [];
-  private _destroy = new Subject();
+export class NgdMdBLockComponent {
+  @Input() content: MdChildren[] = []
 
   constructor(
-    private textService: NgdTextService,
-    private articleService: NgdArticleService,
     private cdr: ChangeDetectorRef,
     private readonly domSanitizer: DomSanitizer) {
   }
@@ -36,23 +29,6 @@ export class NgdMdBLockComponent implements OnInit, OnDestroy {
   // TODO: create NbDOMPurifyPipe
   getTemplate(content: string): SafeHtml {
     return this.domSanitizer.bypassSecurityTrustHtml(content);
-  }
-
-  ngOnInit(): void {
-    if (this.source) {
-      this.articleService.getArticle(this.source).pipe(
-        takeUntil(this._destroy),
-        map((item) => this.textService.mdToSectionsHTML(item)),
-      ).subscribe((item) => {
-        this.content = item;
-        this.cdr.markForCheck();
-      });
-    }
-  }
-
-  ngOnDestroy(): void {
-    this._destroy.next();
-    this._destroy.complete();
   }
 }
 
