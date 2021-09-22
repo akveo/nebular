@@ -123,7 +123,7 @@ export class NgdStructureService {
   }
 
   protected prepareToc(item: any): Observable<any[]> {
-    const tocList$ = item.children.reduce((acc: any[], child: any) => {
+    const tocList = item.children.reduce((acc: Observable<any>[], child: any) => {
       if (child.block === 'markdown') {
         return [...acc, this.getTocForMd(child)];
       }
@@ -136,7 +136,7 @@ export class NgdStructureService {
       return acc;
     }, []);
 
-    return combineLatest(tocList$).pipe(map((toc) => [].concat(...toc)))
+    return combineLatest(tocList).pipe(map((toc) => [].concat(...toc)))
   }
 
   protected getTocForMd(block: any): Observable<any[]> {
