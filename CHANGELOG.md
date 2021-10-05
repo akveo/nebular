@@ -1,3 +1,13 @@
+<a name="7.0.2"></a>
+## [7.0.2](https://github.com/akveo/nebular/compare/v7.0.1...v7.0.2) (2021-10-05)
+
+
+### Bug Fixes
+
+* **focus trigger strategy clickout:** consider click target ([#2885](https://github.com/akveo/nebular/issues/2885)) ([dd40d4a](https://github.com/akveo/nebular/commit/dd40d4a))
+
+
+
 <a name="7.0.1"></a>
 ## [7.0.1](https://github.com/akveo/nebular/compare/v7.0.0...v7.0.1) (2021-09-14)
 
