@@ -179,7 +179,12 @@ export class NbFocusTriggerStrategy extends NbTriggerStrategyBase {
        * Event target of `click` could be different from `activeElement`.
        * If during click you return focus to the host, it won't be opened.
        */
-      filter(() => this.isNotOnHostOrContainer({ target: this.document.activeElement } as unknown as Event)),
+      filter((event) => {
+        if (this.isNotOnHostOrContainer(event)) {
+          return this.isNotOnHostOrContainer({ target: this.document.activeElement } as unknown as Event);
+        }
+        return false;
+      }),
       takeUntil(this.destroyed$),
     );
 
