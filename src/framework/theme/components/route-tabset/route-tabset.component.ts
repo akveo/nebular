@@ -5,6 +5,8 @@
  */
 
 import { Component, Input, Output, EventEmitter, HostBinding } from '@angular/core';
+import { RouterLinkActive } from '@angular/router';
+
 import { convertToBoolProperty, NbBooleanInput } from '../helpers';
 
 /**
@@ -17,7 +19,7 @@ import { convertToBoolProperty, NbBooleanInput } from '../helpers';
  *    title: 'Route tab #1',
  *    route: '/pages/description',
  *    icon: 'home',
- *    responsive: true, // hide title before `route-tabs-icon-only-max-width` value
+ *    responsive: true, // hide title before `tabset-tab-text-hide-breakpoint` value
  *  },
  *  {
  *    title: 'Route tab #2',
@@ -109,7 +111,7 @@ import { convertToBoolProperty, NbBooleanInput } from '../helpers';
               tabindex="0"
               class="route-tab">
             <a tabindex="-1" class="tab-link">
-              <nb-icon *ngIf="tab.icon" [icon]="tab.icon"></nb-icon>
+              <nb-icon *ngIf="tab.icon" [config]="tab.icon"></nb-icon>
               <span *ngIf="tab.title" class="tab-text">{{ tab.title }}</span>
             </a>
           </li>
@@ -133,7 +135,7 @@ export class NbRouteTabsetComponent {
    * Options passed to `routerLinkActiveOptions` directive which set on tab links.
    * `{ exact: true }` by default.
    */
-  @Input() activeLinkOptions = { exact: true };
+  @Input() activeLinkOptions: RouterLinkActive['routerLinkActiveOptions'] = { exact: true };
 
   /**
    * Take full width of a parent

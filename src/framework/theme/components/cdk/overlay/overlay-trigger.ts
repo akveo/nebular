@@ -36,6 +36,7 @@ export abstract class NbTriggerStrategyBase implements NbTriggerStrategy {
 
   protected destroyed$ = new Subject();
 
+  // @breaking-change 9.0.0 Change parameter to Element instead of Event
   protected isNotOnHostOrContainer(event: Event): boolean {
     return !this.isOnHost(event) && !this.isOnContainer(event);
   }
@@ -174,7 +175,16 @@ export class NbFocusTriggerStrategy extends NbTriggerStrategyBase {
   protected clickOut$: Observable<Event> = observableFromEvent<Event>(this.document, 'click')
     .pipe(
       filter(() => !!this.container()),
-      filter(event => this.isNotOnHostOrContainer(event)),
+      /**
+       * Event target of `click` could be different from `activeElement`.
+       * If during click you return focus to the host, it won't be opened.
+       */
+      filter((event) => {
+        if (this.isNotOnHostOrContainer(event)) {
+          return this.isNotOnHostOrContainer({ target: this.document.activeElement } as unknown as Event);
+        }
+        return false;
+      }),
       takeUntil(this.destroyed$),
     );
 

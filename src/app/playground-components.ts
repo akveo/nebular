@@ -556,6 +556,12 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         component: 'RangepickerShowcaseComponent',
         name: 'Rangepicker Showcase',
       },
+      {
+        path: 'datepicker-filter.component',
+        link: '/datepicker/datepicker-filter.component',
+        component: 'DatepickerFilterComponent',
+        name: 'Datepicker Filter',
+      },
     ],
   },
   {

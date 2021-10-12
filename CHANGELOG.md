@@ -1,3 +1,41 @@
+<a name="8.0.0"></a>
+# [8.0.0](https://github.com/akveo/nebular/compare/v7.0.0...v8.0.0) (2021-06-27)
+
+### BREAKING CHANGES
+
+* Minimal required Angular version to `12`.
+* Minimal required `tslib` version is `2.1.0`.
+* `NbTable` and `NbTreeGridComponent`:
+  - `_viewRepeater`, `_coalescedStyleScheduler` constructor parameters are now required.
+  - New parameters (`_viewportRuler`, `_stickyPositioningListener`) added to the constructor.
+* **chat:** `NbChatMessageComponent` constructor now has a second parameter (`NbCustomMessageService`).
+
+### Bug Fixes
+
+* **button:** styling for disabled anchor ([#2649](https://github.com/akveo/nebular/issues/2649)) ([19a5b43](https://github.com/akveo/nebular/commit/19a5b43))
+* **chat:** double image preview ([#2766](https://github.com/akveo/nebular/issues/2766)) ([1b3c809](https://github.com/akveo/nebular/commit/1b3c809))
+* **context menu:** emit destroy when component got destroyed ([#2767](https://github.com/akveo/nebular/issues/2767)) ([5036b89](https://github.com/akveo/nebular/commit/5036b89))
+* **radio:** add setDisabledState hook ([#2717](https://github.com/akveo/nebular/issues/2717)) ([db9e556](https://github.com/akveo/nebular/commit/db9e556))
+* **scroll dispatcher:** emit scroll events from cdkScrollable directive ([#2714](https://github.com/akveo/nebular/issues/2714)) ([f715e97](https://github.com/akveo/nebular/commit/f715e97))
+* **sidebar:** sidebar state observable ([#2729](https://github.com/akveo/nebular/issues/2729)) ([dd0c88e](https://github.com/akveo/nebular/commit/dd0c88e))
+* **sidebar:** update state when responsive setting change ([#2654](https://github.com/akveo/nebular/issues/2654)) ([bf7e2a3](https://github.com/akveo/nebular/commit/bf7e2a3))
+* **tag list:** prevent autofocus on initial load ([#2734](https://github.com/akveo/nebular/issues/2734)) ([8d60faf](https://github.com/akveo/nebular/commit/8d60faf))
+* **timepicker:** save lastInputValue when changed via form api ([#2718](https://github.com/akveo/nebular/issues/2718)) ([74096d0](https://github.com/akveo/nebular/commit/74096d0))
+
+
+### Features
+
+* update to Angular 12 ([#2769](https://github.com/akveo/nebular/issues/2769)) ([5e74916](https://github.com/akveo/nebular/commit/5e74916))
+* **button group:** add valueChange output ([#2722](https://github.com/akveo/nebular/issues/2722)) ([39c610c](https://github.com/akveo/nebular/commit/39c610c))
+* **chat:** add support for custom message template ([#2750](https://github.com/akveo/nebular/issues/2750)) ([d84497c](https://github.com/akveo/nebular/commit/d84497c))
+* **chat form:** add output for input change ([#2735](https://github.com/akveo/nebular/issues/2735)) ([1bb0dfb](https://github.com/akveo/nebular/commit/1bb0dfb))
+* **route tabset:** add support for NavigationExtras options ([#2753](https://github.com/akveo/nebular/issues/2753)) ([bcf7b65](https://github.com/akveo/nebular/commit/bcf7b65))
+* **tabset:** add a tabId data attribute to the tab button ([#2738](https://github.com/akveo/nebular/issues/2738)) ([5aaab17](https://github.com/akveo/nebular/commit/5aaab17))
+* **timepicker:** add localization config ([#2719](https://github.com/akveo/nebular/issues/2719)) ([b9c77ce](https://github.com/akveo/nebular/commit/b9c77ce))
+* **window:** add window buttons configuration ([#2762](https://github.com/akveo/nebular/issues/2762)) ([9dcd40e](https://github.com/akveo/nebular/commit/9dcd40e))
+
+
+
 <a name="7.0.0"></a>
 # [7.0.0](https://github.com/akveo/nebular/compare/v6.2.1...v7.0.0) (2021-01-18)
 
