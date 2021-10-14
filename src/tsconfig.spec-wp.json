@@ -1,5 +1,5 @@
 {
-  "extends": "./tsconfig.app.json",
+  "extends": "./tsconfig.spec.json",
   "compilerOptions": {
     "paths": {
       "@nebular/*": [
