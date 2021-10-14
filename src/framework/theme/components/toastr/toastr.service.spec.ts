@@ -1,11 +1,19 @@
-import { NbToastContainer, NbToastrContainerRegistry, NbToastrService } from './toastr.service';
-import { NbGlobalLogicalPosition, NbGlobalPhysicalPosition } from '../cdk/overlay/position-helper';
+import { Component, ComponentFactoryResolver } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import {Component, ComponentFactoryResolver} from '@angular/core';
-import { NbToast, NbToastrModule } from '@nebular/theme';
-import { NbThemeModule, NbLayoutModule } from '@nebular/theme';
-import {RouterTestingModule} from '@angular/router/testing';
-import {NoopAnimationsModule} from '@angular/platform-browser/animations';
+import { RouterTestingModule } from '@angular/router/testing';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+
+import {
+  NbToastContainer,
+  NbToastrContainerRegistry,
+  NbToastrService,
+  NbGlobalLogicalPosition,
+  NbGlobalPhysicalPosition,
+  NbToast,
+  NbToastrModule,
+  NbThemeModule,
+  NbLayoutModule,
+} from '@nebular/theme';
 
 @Component({
   selector: 'nb-toastr-test',

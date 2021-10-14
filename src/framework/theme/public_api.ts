@@ -148,6 +148,7 @@ export * from './components/cdk/overlay/dynamic/dynamic-overlay-handler';
 export * from './components/cdk/platform/platform-service';
 export * from './components/cdk/a11y/a11y.module';
 export * from './components/cdk/a11y/focus-trap';
+export * from './components/cdk/a11y/focus-key-manager';
 export * from './components/cdk/adapter/adapter.module';
 export * from './components/cdk/adapter/block-scroll-strategy-adapter';
 export * from './components/cdk/adapter/overlay-container-adapter';

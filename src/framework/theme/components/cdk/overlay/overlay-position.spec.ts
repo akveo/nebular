@@ -1,19 +1,18 @@
 import { TestBed } from '@angular/core/testing';
 import { Component, NgModule } from '@angular/core';
+import { RouterTestingModule } from '@angular/router/testing';
 import {
   NbThemeModule,
   NbOverlayModule,
   NbPositionBuilderService,
   NbOverlayService,
   NbComponentPortal,
-  NbLayoutModule, NbLayoutComponent,
-} from '@nebular/theme';
-import {
+  NbLayoutModule,
+  NbLayoutComponent,
   NbAdjustableConnectedPositionStrategy,
   NbPosition,
   NbAdjustment,
-} from '@nebular/theme/components/cdk/overlay/overlay-position';
-import { RouterTestingModule } from '@angular/router/testing';
+} from '@nebular/theme';
 
 @Component({
   template: `portal-component`,
