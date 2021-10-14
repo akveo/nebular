@@ -33,7 +33,7 @@ export * from './components/calendar/calendar.module';
 export * from './components/calendar/calendar.component';
 export * from './components/calendar/calendar-range.module';
 export * from './components/calendar/calendar-range.component';
-// tslint:disable:max-line-length
+/* eslint-disable max-len */
 export { NbCalendarDayCellComponent } from './components/calendar-kit/components/calendar-day-picker/calendar-day-cell.component';
 export { NbDateTimePickerComponent } from './components/datepicker/date-timepicker.component';
 export { NbCalendarYearPickerComponent } from './components/calendar-kit/components/calendar-year-picker/calendar-year-picker.component';
@@ -51,7 +51,7 @@ export { NbCalendarMonthCellComponent } from './components/calendar-kit/componen
 export { NbCalendarYearCellComponent } from './components/calendar-kit/components/calendar-year-picker/calendar-year-cell.component';
 export { NbCalendarPickerRowComponent } from './components/calendar-kit/components/calendar-picker/calendar-picker-row.component';
 export { NbCalendarPickerComponent }from './components/calendar-kit/components/calendar-picker/calendar-picker.component';
-// tslint:enable:max-line-length
+/* eslint-enable max-len */
 export * from './components/calendar/base-calendar.component';
 export * from './components/calendar/base-calendar.module';
 export * from './components/calendar/base-calendar-range-cell';

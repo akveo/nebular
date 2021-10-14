@@ -107,7 +107,7 @@ export class NbHoverTriggerStrategy extends NbTriggerStrategyBase {
       // this `delay & takeUntil & repeat` operators combination is a synonym for `conditional debounce`
       // meaning that if one event occurs in some time after the initial one we won't react to it
       delay(100),
-      // tslint:disable-next-line:rxjs-no-unsafe-takeuntil
+      // eslint-disable-next-line rxjs/no-unsafe-takeuntil
       takeUntil(observableFromEvent(this.host, 'mouseleave')),
       repeat(),
       takeUntil(this.destroyed$),
@@ -137,7 +137,7 @@ export class NbHintTriggerStrategy extends NbTriggerStrategyBase {
       // this `delay & takeUntil & repeat` operators combination is a synonym for `conditional debounce`
       // meaning that if one event occurs in some time after the initial one we won't react to it
       delay(100),
-      // tslint:disable-next-line:rxjs-no-unsafe-takeuntil
+      // eslint-disable-next-line rxjs/no-unsafe-takeuntil
       takeUntil(observableFromEvent(this.host, 'mouseleave')),
       repeat(),
       takeUntil(this.destroyed$),
@@ -199,7 +199,7 @@ export class NbFocusTriggerStrategy extends NbTriggerStrategyBase {
     .pipe(
       filter(() => !this.container()),
       debounceTime(100),
-      // tslint:disable-next-line:rxjs-no-unsafe-takeuntil
+      // eslint-disable-next-line rxjs/no-unsafe-takeuntil
       takeUntil(observableFromEvent(this.host, 'focusout')),
       repeat(),
       takeUntil(this.destroyed$),

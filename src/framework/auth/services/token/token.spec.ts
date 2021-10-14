@@ -11,7 +11,7 @@ describe('auth token', () => {
   describe('NbAuthJWTToken', () => {
     const now = new Date();
 
-    // tslint:disable
+    /* eslint-disable */
     const simpleToken = new NbAuthSimpleToken('token','strategy');
     const validJWTToken = new NbAuthJWTToken('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJjZXJlbWEuZnIiLCJpYXQiOjE1MzIzNTA4MDAsImV4cCI6MjUzMjM1MDgwMCwic3ViIjoiQWxhaW4gQ0hBUkxFUyIsImFkbWluIjp0cnVlfQ.Rgkgb4KvxY2wp2niXIyLJNJeapFp9z3tCF-zK6Omc8c', 'strategy');
 
@@ -21,7 +21,7 @@ describe('auth token', () => {
 
     const expiredJWTToken = new NbAuthJWTToken('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzY290Y2guaW8iLCJleHAiOjEzMDA4MTkzODAsIm5hbWUiOiJDaHJpcyBTZXZpbGxlamEiLCJhZG1pbiI6dHJ1ZX0.03f329983b86f7d9a9f5fef85305880101d5e302afafa20154d094b229f75773','strategy');
 
-    // tslint:enable
+    /* eslint-enable */
 
     it('JWT Token constructor, not valid JWT token, must consist of three parts', () => {
       expect(() => {
@@ -49,7 +49,7 @@ describe('auth token', () => {
 
     it('getPayload success', () => {
       expect(validJWTToken.getPayload())
-      // tslint:disable-next-line
+      // eslint-disable-next-line
         .toEqual(JSON.parse('{"iss":"cerema.fr","iat":1532350800,"exp":2532350800,"sub":"Alain CHARLES","admin":true}'));
     });
 
@@ -130,7 +130,7 @@ describe('auth token', () => {
 
     it('getPayload success', () => {
       expect(validJWTToken.getPayload())
-      // tslint:disable-next-line
+      // eslint-disable-next-line
         .toEqual(JSON.parse('{"iss":"cerema.fr","iat":1532350800,"exp":2532350800,"sub":"Alain CHARLES","admin":true}'));
     });
 
@@ -233,7 +233,7 @@ describe('auth token', () => {
     };
 
     const validPayload = {
-      // tslint:disable-next-line
+      // eslint-disable-next-line
       access_token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJjZXJlbWEuZnIiLCJpYXQiOjE1MzIzNTA4MDAsImV4cCI6MjUzMjM1MDgwMCwic3ViIjoiQWxhaW4gQ0hBUkxFUyIsImFkbWluIjp0cnVlfQ.Rgkgb4KvxY2wp2niXIyLJNJeapFp9z3tCF-zK6Omc8c',
       expires_in: 1000000000,
       refresh_token: 'tGzv3JOkF0XG5Qx2TlKWIA',
@@ -242,7 +242,7 @@ describe('auth token', () => {
     };
 
     const noExpButIatPayload = {
-      // tslint:disable-next-line
+      // eslint-disable-next-line
       access_token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJjZXJlbWEuZnIiLCJpYXQiOjE1MzIzNTA4MDAsInN1YiI6IkFsYWluIENIQVJMRVMiLCJhZG1pbiI6dHJ1ZX0.heHVXkHexwqbPCPUAvkJlXO6tvxzxTKf4iP0OWBbp7Y',
       expires_in: expires_in,
       refresh_token: 'tGzv3JOkF0XG5Qx2TlKWIA',
@@ -251,7 +251,7 @@ describe('auth token', () => {
     };
 
     const noExpNoIatPayload = {
-      // tslint:disable-next-line
+      // eslint-disable-next-line
       access_token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJjZXJlbWEuZnIiLCJzdWIiOiJBbGFpbiBDSEFSTEVTIiwiYWRtaW4iOnRydWV9.LKZggkN-r_5hnEcCg5GzbSqZz5_SUHEB1Bf9Sy1qJd4',
       expires_in: expires_in,
       refresh_token: 'tGzv3JOkF0XG5Qx2TlKWIA',
@@ -260,7 +260,7 @@ describe('auth token', () => {
     };
 
     const permanentPayload = {
-      // tslint:disable-next-line
+      // eslint-disable-next-line
       access_token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJjZXJlbWEuZnIiLCJzdWIiOiJBbGFpbiBDSEFSTEVTIiwiYWRtaW4iOnRydWV9.LKZggkN-r_5hnEcCg5GzbSqZz5_SUHEB1Bf9Sy1qJd4',
       token_type: 'bearer',
       example_parameter: 'example_value',
