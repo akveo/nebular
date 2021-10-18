@@ -51,6 +51,7 @@ export { NbCalendarMonthCellComponent } from './components/calendar-kit/componen
 export { NbCalendarYearCellComponent } from './components/calendar-kit/components/calendar-year-picker/calendar-year-cell.component';
 export { NbCalendarPickerRowComponent } from './components/calendar-kit/components/calendar-picker/calendar-picker-row.component';
 export { NbCalendarPickerComponent }from './components/calendar-kit/components/calendar-picker/calendar-picker.component';
+export { NbCalendarActionsComponent }from './components/calendar-kit/components/calendar-actions/calendar-actions.component';
 /* eslint-enable max-len */
 export * from './components/calendar/base-calendar.component';
 export * from './components/calendar/base-calendar.module';
@@ -78,6 +79,7 @@ export { NbSidebarService } from './components/sidebar/sidebar.service';
 export * from './components/sidebar/sidebar.component';
 export * from './components/tabset/tabset.module';
 export * from './components/datepicker/date-timepicker.component';
+export * from './components/datepicker/calendar-with-time.component';
 export * from './components/tabset/tabset.component';
 export * from './components/user/user.module';
 export * from './components/user/user.component';
@@ -193,6 +195,7 @@ export * from './components/timepicker/timepicker.module';
 export * from './components/timepicker/model';
 export * from './components/timepicker/timepicker.component';
 export * from './components/timepicker/timepicker.directive';
+export * from './components/timepicker/timepicker-cell.component';
 export * from './components/datepicker/datepicker.module';
 export * from './components/datepicker/datepicker.directive';
 export * from './components/datepicker/datepicker-adapter';

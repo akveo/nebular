@@ -190,7 +190,7 @@ export class NbFocusTriggerStrategy extends NbTriggerStrategyBase {
 
   protected tabKeyPress$: Observable<Event> = observableFromEvent<Event>(this.document, 'keydown')
     .pipe(
-      filter((event: KeyboardEvent) => event.keyCode === 9),
+      filter((event: Event) => (event as KeyboardEvent).keyCode === 9),
       filter(() => !!this.container()),
       takeUntil(this.destroyed$),
     );

@@ -329,6 +329,46 @@
           }
         }
       }
+    },
+    "theme": {
+      "projectType": "library",
+      "root": "src/framework/theme",
+      "sourceRoot": "src/framework/theme",
+      "prefix": "nb",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "src/framework/theme/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "src/framework/theme/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "src/framework/theme/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "src/framework/theme/test.ts",
+            "tsConfig": "src/tsconfig.spec.json",
+            "karmaConfig": "karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "src/framework/theme/**/*.ts",
+              "src/framework/theme/**/*.html"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "playground",

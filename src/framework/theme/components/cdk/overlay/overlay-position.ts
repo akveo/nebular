@@ -207,7 +207,7 @@ export class NbAdjustableConnectedPositionStrategy
   protected persistChosenPositions(positions: NbPosition[]) {
     this.appliedPositions = positions.map(position => ({
       key: position,
-      connectedPosition: POSITIONS[position](this._offset),
+      connectedPosition: POSITIONS[position](this._offset) as NbConnectedPosition,
     }));
   }
 
