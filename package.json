@@ -52,7 +52,6 @@
     "pree2e": "webdriver-manager update --standalone false --gecko false",
     "e2e": "ng e2e playground-e2e",
     "e2e:wp": "ng e2e playground-e2e --configuration:production-wp",
-    "prepush": "npm run ci:lint",
     "clean:tmp": "rimraf .ng_build .ng_compiled .es5_build tsconfig-custom.publish.json tsconfig.build*",
     "clean:lib": "rimraf src/.lib",
     "clean:all": "npm-run-all -p clean:tmp clean:lib",
@@ -77,7 +76,8 @@
     "gen:playground-components": "ng g .:playground-components",
     "gulp:change-prefix": "gulp change-prefix",
     "build:ts:custom-prefix": "tsc -p tsconfig-custom.publish.json && ngc -p tsconfig-custom.publish.json",
-    "build:custom-prefix": "npm-run-all -s clean:all \"gulp:change-prefix -- {@}\" build:ts:custom-prefix build:inline-resources build:bundle clean:tmp --"
+    "build:custom-prefix": "npm-run-all -s clean:all \"gulp:change-prefix -- {@}\" build:ts:custom-prefix build:inline-resources build:bundle clean:tmp --",
+    "prepare": "husky install"
   },
   "keywords": [
     "angular",
@@ -161,7 +161,7 @@
     "gulp-sass": "4.0.2",
     "gulp-sourcemaps": "2.6.5",
     "gulp-typedoc": "2.2.3",
-    "husky": "0.13.3",
+    "husky": "^7.0.2",
     "jasmine-core": "~3.5.0",
     "jasmine-spec-reporter": "~5.0.0",
     "karma": "~6.3.4",
@@ -173,6 +173,7 @@
     "karma-jasmine-html-reporter": "^1.5.0",
     "karma-sauce-launcher": "1.2.0",
     "karma-spec-reporter": "0.0.32",
+    "lint-staged": "^11.2.3",
     "minimist": "^1.2.0",
     "ng-packagr": "^12.2.3",
     "npm-run-all": "4.1.5",
