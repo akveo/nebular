@@ -98,6 +98,17 @@
         "eslint-config-prettier"
       ],
       "rules": {}
+    },
+    {
+      "files": [
+        "./*.js"
+      ],
+      "parserOptions": {
+        "ecmaVersion": 11
+      },
+      "env": {
+        "node": true
+      }
     }
   ]
 }
