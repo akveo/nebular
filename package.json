@@ -4,11 +4,6 @@
   "license": "MIT",
   "author": "akveo <contact@akveo.com>",
   "private": true,
-  "browserslist": [
-    "> 1%",
-    "last 2 versions",
-    "IE 11"
-  ],
   "bugs": {
     "url": "https://github.com/akveo/nebular/issues"
   },
@@ -89,18 +84,17 @@
   ],
   "dependencies": {
     "@angular/animations": "^12.2.10",
+    "@angular/cdk": "^12.2.10",
     "@angular/common": "^12.2.10",
     "@angular/compiler": "^12.2.10",
     "@angular/core": "^12.2.10",
     "@angular/fire": "^6.1.0",
     "@angular/forms": "^12.2.10",
-    "@angular/localize": "^12.2.10",
     "@angular/platform-browser": "^12.2.10",
     "@angular/platform-browser-dynamic": "^12.2.10",
     "@angular/router": "^12.2.10",
     "bootstrap": "4.0.0",
     "colors.js": "1.2.4",
-    "core-js": "2.5.7",
     "date-fns": "2",
     "docsearch.js": "^2.5.2",
     "eva-icons": "^1.1.2",
@@ -129,7 +123,6 @@
     "@angular-eslint/eslint-plugin-template": "12.5.0",
     "@angular-eslint/schematics": "12.5.0",
     "@angular-eslint/template-parser": "12.5.0",
-    "@angular/cdk": "^12.2.10",
     "@angular/cli": "^12.2.10",
     "@angular/compiler-cli": "^12.2.10",
     "@angular/language-service": "^12.2.10",
