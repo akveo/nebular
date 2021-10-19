@@ -38,6 +38,7 @@ testem.log
 /docs/assets/examples
 /docs/dist
 /packages-smoke/dist
+.eslintcache
 
 # e2e
 /e2e/*.js
