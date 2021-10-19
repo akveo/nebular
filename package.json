@@ -95,7 +95,7 @@
     "@angular/router": "^12.2.10",
     "bootstrap": "4.0.0",
     "colors.js": "1.2.4",
-    "date-fns": "2",
+    "date-fns": "^2.0.0",
     "docsearch.js": "^2.5.2",
     "eva-icons": "^1.1.2",
     "firebase": "^8.0.0",
