@@ -17,7 +17,8 @@
       },
       "extends": [
         "plugin:@angular-eslint/recommended",
-        "plugin:@angular-eslint/template/process-inline-templates"
+        "plugin:@angular-eslint/template/process-inline-templates",
+        "eslint-config-prettier"
       ],
       "plugins": [
         "eslint-plugin-rxjs"
@@ -50,43 +51,13 @@
             "style": "camelCase"
           }
         ],
-        "semi": "off",
-        "@typescript-eslint/semi": "error",
         "quotes": "off",
-        "@typescript-eslint/quotes": ["error", "single"],
         "dot-notation": "off",
         "@typescript-eslint/dot-notation": "error",
-        "brace-style": "off",
-        "@typescript-eslint/brace-style": ["error", "1tbs"],
-        "comma-dangle": "off",
-        "@typescript-eslint/comma-dangle": [
-          "error",
-          "always-multiline"
-        ],
-        "indent": "off",
-        "@typescript-eslint/indent": ["error", 2],
-        "max-len": [
-          "error",
-          {
-            "code": 120
-          }
-        ],
         "no-shadow": "off",
         "@typescript-eslint/no-shadow": "error",
         "no-underscore-dangle": "off",
         "@typescript-eslint/consistent-type-definitions": "error",
-        "@typescript-eslint/member-delimiter-style": [
-          "error",
-          {
-            "overrides": {
-              "typeLiteral": {
-                "singleline": {
-                  "delimiter": "comma"
-                }
-              }
-            }
-          }
-        ],
         "rxjs/no-unsafe-takeuntil": [
           "error",
           {
@@ -122,7 +93,8 @@
         "*.html"
       ],
       "extends": [
-        "plugin:@angular-eslint/template/recommended"
+        "plugin:@angular-eslint/template/recommended",
+        "eslint-config-prettier"
       ],
       "rules": {}
     }
