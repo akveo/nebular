@@ -15,10 +15,10 @@ import { NgdAnalytics } from './@theme/services/analytics.service';
 })
 export class NgdAppComponent implements OnInit {
 
-  constructor(private analytics: NgdAnalytics) {
-  }
+  // constructor(private analytics: NgdAnalytics) {
+  // }
 
   ngOnInit(): void {
-    this.analytics.trackPageViews();
+    // this.analytics.trackPageViews();
   }
 }
