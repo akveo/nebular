@@ -30,7 +30,7 @@ const docs = require('../output.json');
 
 @NgModule({
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
     BrowserAnimationsModule,
     FormsModule,
     HttpClientModule,

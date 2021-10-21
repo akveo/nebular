@@ -11,7 +11,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist",
+            "outputPath": "dist/playground/browser",
             "index": "src/index.html",
             "main": "src/main.ts",
             "tsConfig": "src/tsconfig.app.json",
@@ -262,7 +262,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "docs/dist",
+            "outputPath": "docs/dist/browser",
             "index": "docs/index.html",
             "main": "docs/main.ts",
             "tsConfig": "docs/tsconfig.app.json",
@@ -348,6 +348,68 @@
               "browserTarget": "docs:build:production"
             }
           }
+        },
+        "server": {
+          "builder": "@angular-devkit/build-angular:server",
+          "options": {
+            "outputPath": "docs/dist/server",
+            "main": "docs/server.ts",
+            "tsConfig": "docs/tsconfig.server.json",
+            "optimization": false,
+            "sourceMap": true,
+            "extractLicenses": false
+          },
+          "configurations": {
+            "production": {
+              "outputHashing": "media",
+              "fileReplacements": [
+                {
+                  "replace": "docs/environments/environment.ts",
+                  "with": "docs/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "sourceMap": false,
+              "extractLicenses": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve-ssr": {
+          "builder": "@nguniversal/builders:ssr-dev-server",
+          "configurations": {
+            "development": {
+              "browserTarget": "docs:build",
+              "serverTarget": "docs:server"
+            },
+            "production": {
+              "browserTarget": "docs:build:production",
+              "serverTarget": "docs:server:production"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "prerender": {
+          "builder": "@nguniversal/builders:prerender",
+          "options": {
+            "routes": [
+              "/",
+              "/docs",
+              "/docs/guides/create-nebular-page",
+              "/example"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "docs:build:production",
+              "serverTarget": "docs:server:production"
+            },
+            "development": {
+              "browserTarget": "docs:build:development",
+              "serverTarget": "docs:server:development"
+            }
+          },
+          "defaultConfiguration": "production"
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
