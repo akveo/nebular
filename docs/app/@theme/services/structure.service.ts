@@ -124,19 +124,22 @@ export class NgdStructureService {
     };
   }
 
-  protected prepareToc(item: any): Observable<any[]> {
-    const tocList = item.children.reduce((acc: Observable<any>[], child: any) => {
-      if (child.block === 'markdown') {
-        acc.push(this.getTocForMd(child));
-      } else if (child.block === 'tabbed') {
-        acc.push(this.getTocForTabbed(child));
-      } else if (child.block === 'component') {
-        acc.push(this.getTocForComponent(child));
-      }
-      return acc;
-    }, []);
+  protected prepareToc(item: any): Observable<NgdToc[]> {
+    const tocList: Observable<NgdToc>[] = item.children
+      .reduce((acc: Observable<NgdToc>[], child: any) => {
+        if (child.block === 'markdown') {
+          acc.push(this.getTocForMd(child));
+        } else if (child.block === 'tabbed') {
+          acc.push(this.getTocForTabbed(child));
+        } else if (child.block === 'component') {
+          acc.push(this.getTocForComponent(child));
+        }
+        return acc;
+      }, []);
 
-    return combineLatest(tocList).pipe(map((toc) => [].concat(...toc)))
+    return combineLatest(tocList).pipe(
+      map((toc) => [].concat(...toc)),
+    );
   }
 
   protected getTocForMd(block: { sections: Observable<NgdMdSection[]> }): Observable<NgdToc> {
