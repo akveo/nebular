@@ -449,6 +449,46 @@
           }
         }
       }
+    },
+    "eva-icons": {
+      "projectType": "library",
+      "root": "src/framework/eva-icons",
+      "sourceRoot": "src/framework/eva-icons",
+      "prefix": "nb",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "src/framework/eva-icons/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "src/framework/eva-icons/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "src/framework/eva-icons/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "src/framework/eva-icons/test.ts",
+            "tsConfig": "src/framework/eva-icons/tsconfig.spec.json",
+            "karmaConfig": "karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "src/framework/eva-icons/**/*.ts",
+              "src/framework/eva-icons/**/*.html"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "playground",
