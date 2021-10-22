@@ -127,13 +127,11 @@ export class NgdStructureService {
   protected prepareToc(item: any): Observable<any[]> {
     const tocList = item.children.reduce((acc: Observable<any>[], child: any) => {
       if (child.block === 'markdown') {
-        return [...acc, this.getTocForMd(child)];
-      }
-      if (child.block === 'tabbed') {
-        return [...acc, this.getTocForTabbed(child)];
-      }
-      if (child.block === 'component') {
-        return [...acc, this.getTocForComponent(child)];
+        acc.push(this.getTocForMd(child));
+      } else if (child.block === 'tabbed') {
+        acc.push(this.getTocForTabbed(child));
+      } else if (child.block === 'component') {
+        acc.push(this.getTocForComponent(child));
       }
       return acc;
     }, []);
