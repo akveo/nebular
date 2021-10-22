@@ -1,7 +1,9 @@
 {
   "root": true,
   "ignorePatterns": [
-    "projects/**/*"
+    "src/framework/**/*",
+    "docs/**/*",
+    "packages-smoke/**/*"
   ],
   "overrides": [
     {
@@ -32,7 +34,6 @@
               "attribute"
             ],
             "prefix": [
-              "nb",
               "ngd",
               "ngx"
             ],
