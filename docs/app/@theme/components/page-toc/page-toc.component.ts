@@ -32,10 +32,10 @@ export class NgdPageTocComponent implements OnDestroy {
 
   @Input()
   set toc(value: Observable<any[]>) {
-    combineLatest(
+    combineLatest([
       value,
       this.activatedRoute.fragment,
-    )
+    ])
       .pipe(
         map(([toc, fragment]) => {
           toc = toc.map((item: any) => ({ ...item, selected: fragment === item.fragment }));
