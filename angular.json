@@ -369,6 +369,46 @@
           }
         }
       }
+    },
+    "auth": {
+      "projectType": "library",
+      "root": "src/framework/auth",
+      "sourceRoot": "src/framework/auth",
+      "prefix": "nb",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "src/framework/auth/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "src/framework/auth/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "src/framework/auth/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "src/framework/auth/test.ts",
+            "tsConfig": "src/framework/auth/tsconfig.spec.json",
+            "karmaConfig": "karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "src/framework/auth/**/*.ts",
+              "src/framework/auth/**/*.html"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "playground",
