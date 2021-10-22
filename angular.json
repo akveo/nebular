@@ -489,6 +489,46 @@
           }
         }
       }
+    },
+    "firebase-auth": {
+      "projectType": "library",
+      "root": "src/framework/firebase-auth",
+      "sourceRoot": "src/framework/firebase-auth",
+      "prefix": "nb",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "src/framework/firebase-auth/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "src/framework/firebase-auth/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "src/framework/firebase-auth/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "src/framework/firebase-auth/test.ts",
+            "tsConfig": "src/framework/firebase-auth/tsconfig.spec.json",
+            "karmaConfig": "karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "src/framework/firebase-auth/**/*.ts",
+              "src/framework/firebase-auth/**/*.html"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "playground",
