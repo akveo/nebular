@@ -355,7 +355,7 @@
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
             "main": "src/framework/theme/test.ts",
-            "tsConfig": "src/tsconfig.spec.json",
+            "tsConfig": "src/framework/theme/tsconfig.spec.json",
             "karmaConfig": "karma.conf.js"
           }
         },

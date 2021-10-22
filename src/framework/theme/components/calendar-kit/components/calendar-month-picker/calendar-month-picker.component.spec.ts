@@ -5,15 +5,15 @@
  */
 
 import { DebugElement, NO_ERRORS_SCHEMA } from '@angular/core';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
-
-import { NbCalendarMonthPickerComponent } from './calendar-month-picker.component';
-import { NbDateService } from '../../services/date.service';
-import { NbNativeDateService } from '../../services/native-date.service';
-import { NbCalendarMonthCellComponent } from './calendar-month-cell.component';
+import { ComponentFixture, fakeAsync, TestBed } from '@angular/core/testing';
 import { DatePipe } from '@angular/common';
-
+import { By } from '@angular/platform-browser';
+import {
+  NbCalendarMonthPickerComponent,
+  NbDateService,
+  NbNativeDateService,
+  NbCalendarMonthCellComponent,
+} from '@nebular/theme';
 
 describe('Component: NbCalendarMonthPicker', () => {
   let fixture: ComponentFixture<NbCalendarMonthPickerComponent<Date, Date>>;
@@ -39,11 +39,11 @@ describe('Component: NbCalendarMonthPicker', () => {
     expect(component.cellComponent).toBe(NbCalendarMonthCellComponent);
   });
 
-  it('should fire monthChange when cell selected', done => {
-    component.monthChange.subscribe(done);
-    componentEl.query(By.css('nb-calendar-picker'))
-      .nativeElement
-      .dispatchEvent(new CustomEvent('select'));
+  it('should fire monthChange when cell selected', () => {
+    const monthChangeSpy = jasmine.createSpy('monthChange spy');
+    component.monthChange.subscribe(monthChangeSpy);
+    componentEl.query(By.css('nb-calendar-picker')).nativeElement.dispatchEvent(new CustomEvent('select'));
+    expect(monthChangeSpy).toHaveBeenCalled();
   });
 
   it('should not have duplicate months', () => {

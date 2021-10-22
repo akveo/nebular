@@ -18,14 +18,14 @@ import {
 @Component({
   selector: 'nb-toastr-test',
   template: `
-      <nb-layout>
-          <nb-layout-column>
-              <div class="test-div"></div>
-          </nb-layout-column>
-      </nb-layout>
+    <nb-layout>
+      <nb-layout-column>
+        <div class="test-div"></div>
+      </nb-layout-column>
+    </nb-layout>
   `,
 })
-export class  NbToastrTestComponent {
+export class NbToastrTestComponent {
   constructor(private toastrService: NbToastrService) {}
 
   showToast(className: string) {
@@ -36,28 +36,29 @@ export class  NbToastrTestComponent {
 describe('toastr-component', () => {
   let fixture: ComponentFixture<NbToastrTestComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      imports: [
-        RouterTestingModule.withRoutes([]),
-        NoopAnimationsModule,
-        NbThemeModule.forRoot(),
-        NbLayoutModule,
-        NbToastrModule.forRoot(),
-      ],
-      declarations: [
-        NbToastrTestComponent,
-      ],
-    }).compileComponents();
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        imports: [
+          RouterTestingModule.withRoutes([]),
+          NoopAnimationsModule,
+          NbThemeModule.forRoot(),
+          NbLayoutModule,
+          NbToastrModule.forRoot(),
+        ],
+        declarations: [NbToastrTestComponent],
+      }).compileComponents();
 
-    fixture = TestBed.createComponent(NbToastrTestComponent);
-  }));
+      fixture = TestBed.createComponent(NbToastrTestComponent);
+    }),
+  );
 
-  it('should add \'toastr-overlay-container\' class to overlay', () => {
+  it("should add 'toastr-overlay-container' class to overlay", () => {
     fixture.debugElement.componentInstance.showToast('toast-test-class');
     fixture.detectChanges();
-    expect(fixture.nativeElement.querySelector('.cdk-global-overlay-wrapper').classList)
-      .toContain('toastr-overlay-container');
+    expect(fixture.nativeElement.querySelector('.cdk-global-overlay-wrapper').classList).toContain(
+      'toastr-overlay-container',
+    );
   });
 
   it('should set class if provided', () => {
@@ -74,8 +75,7 @@ describe('toastr-service', () => {
 
   beforeEach(() => {
     containerStub = {
-      attach() {
-      },
+      attach() {},
     };
   });
 
@@ -88,7 +88,7 @@ describe('toastr-service', () => {
   });
 
   beforeEach(() => {
-    toastr = new NbToastrService(<any> {}, <any> containerRegistryStub);
+    toastr = new NbToastrService(<any>{}, <any>containerRegistryStub);
   });
 
   it('should attach to toastr container', () => {
@@ -113,7 +113,7 @@ describe('toastr-service', () => {
     });
 
     expect(attachSpy).toHaveBeenCalled();
-    const [[{ config }]] = attachSpy.calls.allArgs();
+    const [[{ config }]] = attachSpy.calls.allArgs() as [[{ config }]];
     expect(config.position).toBe(NbGlobalLogicalPosition.BOTTOM_START, 'incorrect position');
     expect(config.status).toBe('basic', 'incorrect status');
     expect(config.duration).toBe(1234, 'incorrect duration');
@@ -194,13 +194,12 @@ describe('toastr-container-registry', () => {
 
   beforeEach(() => {
     containerStub = {
-
       attach() {
         return {
           location: {
             nativeElement: 'element',
           },
-        }
+        };
       },
       dispose() {},
       hostElement: {
@@ -219,9 +218,8 @@ describe('toastr-container-registry', () => {
     positionBuilder = {
       global() {
         return {
-          position() {
-          },
-        }
+          position() {},
+        };
       },
     };
 
@@ -239,7 +237,7 @@ describe('toastr-container-registry', () => {
           return documentStub._contains;
         },
       },
-    }
+    };
   });
 
   beforeEach(() => {
@@ -273,7 +271,6 @@ describe('toastr-container-registry', () => {
     expect(overlayCreateSpy).toHaveBeenCalledTimes(1);
   });
 
-
   it('should re-create when unattached from document', () => {
     const overlayCreateSpy = spyOn(overlayStub, 'create').and.returnValue(containerStub);
 
@@ -285,8 +282,7 @@ describe('toastr-container-registry', () => {
   });
 
   it('should return the same position for top-end and top-right when ltr', () => {
-    spyOn(positionHelper, 'toLogicalPosition')
-      .and.returnValue(NbGlobalLogicalPosition.TOP_END);
+    spyOn(positionHelper, 'toLogicalPosition').and.returnValue(NbGlobalLogicalPosition.TOP_END);
 
     const topEnd = toastrContainerRegistry.get(NbGlobalLogicalPosition.TOP_END);
     const topRight = toastrContainerRegistry.get(NbGlobalPhysicalPosition.TOP_RIGHT);
@@ -328,7 +324,7 @@ describe('toastr-container', () => {
   });
 
   beforeEach(() => {
-    toastrContainer = new NbToastContainer(<any> {}, containerRefStub, positionHelperStub);
+    toastrContainer = new NbToastContainer(<any>{}, containerRefStub, positionHelperStub);
   });
 
   it('should prevent duplicates if previous toast is the same', () => {
@@ -338,11 +334,11 @@ describe('toastr-container', () => {
       config: { status: 'dander', preventDuplicates: true, duplicatesBehaviour: 'previous' },
     };
 
-    const toast2 = Object.assign({}, toast1, {title: 'toast2'});
+    const toast2 = Object.assign({}, toast1, { title: 'toast2' });
 
-    toastrContainer.attach(<NbToast> toast1);
-    toastrContainer.attach(<NbToast> toast2);
-    const duplicateToast = toastrContainer.attach(<NbToast> toast2);
+    toastrContainer.attach(<NbToast>toast1);
+    toastrContainer.attach(<NbToast>toast2);
+    const duplicateToast = toastrContainer.attach(<NbToast>toast2);
 
     expect(duplicateToast).toBeUndefined();
   });
@@ -354,31 +350,30 @@ describe('toastr-container', () => {
       config: { status: 'dander', preventDuplicates: true, duplicatesBehaviour: 'all' },
     };
 
-    const toast2 = Object.assign({}, toast1, {title: 'toast2'});
+    const toast2 = Object.assign({}, toast1, { title: 'toast2' });
 
-    toastrContainer.attach(<NbToast> toast1);
-    toastrContainer.attach(<NbToast> toast2);
-    const duplicateToast = toastrContainer.attach(<NbToast> toast1);
+    toastrContainer.attach(<NbToast>toast1);
+    toastrContainer.attach(<NbToast>toast2);
+    const duplicateToast = toastrContainer.attach(<NbToast>toast1);
 
     expect(duplicateToast).toBeUndefined();
   });
 
   describe('if limit set', () => {
-
     const toast1 = {
       title: 'toast1',
       config: { limit: 3 },
     };
 
-    const toast2 = Object.assign({}, toast1, {title: 'toast2'});
-    const toast3 = Object.assign({}, toast1, {title: 'toast3'});
-    const toast4 = Object.assign({}, toast1, {title: 'toast4'});
+    const toast2 = Object.assign({}, toast1, { title: 'toast2' });
+    const toast3 = Object.assign({}, toast1, { title: 'toast3' });
+    const toast4 = Object.assign({}, toast1, { title: 'toast4' });
 
     function attachToasts() {
-      toastrContainer.attach(<NbToast> toast1);
-      toastrContainer.attach(<NbToast> toast2);
-      toastrContainer.attach(<NbToast> toast3);
-      toastrContainer.attach(<NbToast> toast4);
+      toastrContainer.attach(<NbToast>toast1);
+      toastrContainer.attach(<NbToast>toast2);
+      toastrContainer.attach(<NbToast>toast3);
+      toastrContainer.attach(<NbToast>toast4);
     }
 
     it('should remove the first toast in container in top position', () => {
@@ -395,7 +390,7 @@ describe('toastr-container', () => {
         },
       };
 
-      toastrContainer = new NbToastContainer(<any> {}, containerRefStub, positionHelperStub);
+      toastrContainer = new NbToastContainer(<any>{}, containerRefStub, positionHelperStub);
 
       attachToasts();
       expect(containerRefStub.instance.content.length).toEqual(3);
