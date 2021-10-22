@@ -12,7 +12,7 @@ import { NgdMdSection } from '../../../@theme/services/text.service';
 @Component({
   selector: 'ngd-md-block',
   template: `
-    <nb-card *ngFor="let section of content;" [ngdFragment]="section.fragment">
+    <nb-card *ngFor="let section of sections;" [ngdFragment]="section.fragment">
       <nb-card-body>
         <div [innerHtml]="getTemplate(section.html)"></div>
       </nb-card-body>
@@ -21,7 +21,7 @@ import { NgdMdSection } from '../../../@theme/services/text.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NgdMdBLockComponent {
-  @Input() content: NgdMdSection[] = []
+  @Input() sections: NgdMdSection[] = []
 
   constructor(
     private cd: ChangeDetectorRef,
