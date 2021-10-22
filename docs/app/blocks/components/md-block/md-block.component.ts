@@ -29,7 +29,7 @@ export class NgdMdBLockComponent {
   @Input() content: MdChildren[] = []
 
   constructor(
-    private cdr: ChangeDetectorRef,
+    private cd: ChangeDetectorRef,
     private readonly domSanitizer: DomSanitizer) {
   }
 
