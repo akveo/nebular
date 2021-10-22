@@ -529,6 +529,46 @@
           }
         }
       }
+    },
+    "moment": {
+      "projectType": "library",
+      "root": "src/framework/moment",
+      "sourceRoot": "src/framework/moment",
+      "prefix": "nb",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "src/framework/moment/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "src/framework/moment/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "src/framework/moment/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "src/framework/moment/test.ts",
+            "tsConfig": "src/framework/moment/tsconfig.spec.json",
+            "karmaConfig": "karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "src/framework/moment/**/*.ts",
+              "src/framework/moment/**/*.html"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "playground",
