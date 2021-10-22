@@ -26,7 +26,6 @@ export class NgdMdBLockComponent {
     private readonly domSanitizer: DomSanitizer) {
   }
 
-  // TODO: create NbDOMPurifyPipe
   getTemplate(content: string): SafeHtml {
     return this.domSanitizer.bypassSecurityTrustHtml(content);
   }
