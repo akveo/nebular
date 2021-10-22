@@ -7,12 +7,7 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
-interface MdChildren {
-  fragment: string;
-  html: string;
-  source: string;
-  title: string;
-}
+import { NgdMdSection } from '../../../@theme/services/text.service';
 
 @Component({
   selector: 'ngd-md-block',
@@ -26,7 +21,7 @@ interface MdChildren {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NgdMdBLockComponent {
-  @Input() content: MdChildren[] = []
+  @Input() content: NgdMdSection[] = []
 
   constructor(
     private cd: ChangeDetectorRef,

@@ -9,9 +9,11 @@ import { combineLatest, Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { NgdTabbedService } from './tabbed.service';
-import { NgdTextService } from './text.service';
+import { NgdMdSection, NgdTextService } from './text.service';
 import { DOCS, STRUCTURE } from '../../app.options';
 import { NgdArticleService } from './article.service';
+
+type NgdToc = { title: string, fragment: string }[];
 
 @Injectable()
 export class NgdStructureService {
@@ -139,23 +141,24 @@ export class NgdStructureService {
     return combineLatest(tocList).pipe(map((toc) => [].concat(...toc)))
   }
 
-  protected getTocForMd(block: any): Observable<any[]> {
-    return (block.sections as Observable<any[]>).pipe(
-      map((item) => item.map((val) => ({
-        title: val.title,
-        fragment: val.fragment,
-      }))),
-    );
+  protected getTocForMd(block: { sections: Observable<NgdMdSection[]> }): Observable<NgdToc> {
+    return block.sections
+      .pipe(
+        map((sections) => {
+          return sections
+            .map(({ title, fragment }) => ({ title, fragment }));
+        }),
+      );
   }
 
-  protected getTocForComponent(block: any): Observable<any[]> {
+  protected getTocForComponent(block: any): Observable<NgdToc> {
     return of([{
       title: block.source.name,
       fragment: block.source.slag,
     }]);
   }
 
-  protected getTocForTabbed(block: any): Observable<any[]> {
+  protected getTocForTabbed(block: any): Observable<NgdToc> {
     return of(block.children.map((component: any) => ({
       title: component.name,
       fragment: this.textService.createSlag(component.name),
