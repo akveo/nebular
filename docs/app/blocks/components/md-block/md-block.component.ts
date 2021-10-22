@@ -7,6 +7,13 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
+interface MdChildren {
+  fragment: string;
+  html: string;
+  source: string;
+  title: string;
+}
+
 @Component({
   selector: 'ngd-md-block',
   template: `
@@ -29,11 +36,4 @@ export class NgdMdBLockComponent {
   getTemplate(content: string): SafeHtml {
     return this.domSanitizer.bypassSecurityTrustHtml(content);
   }
-}
-
-interface MdChildren {
-  fragment: string;
-  html: string;
-  source: string;
-  title: string;
 }
