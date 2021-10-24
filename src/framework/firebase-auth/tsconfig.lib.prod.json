@@ -2,7 +2,15 @@
 {
   "extends": "./tsconfig.lib.json",
   "compilerOptions": {
-    "declarationMap": false
+    "declarationMap": false,
+    "paths": {
+      "@nebular/theme": [
+        "dist/theme"
+      ],
+      "@nebular/auth": [
+        "dist/auth"
+      ]
+    }
   },
   "angularCompilerOptions": {
     "compilationMode": "partial"

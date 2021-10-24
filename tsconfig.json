@@ -25,28 +25,7 @@
     ],
     "paths": {
       "@nebular/*": [
-        "./src/framework/*/public_api.ts"
-      ],
-      "@nebular/moment": [
-        "dist/moment"
-      ],
-      "@nebular/firebase-auth": [
-        "dist/firebase-auth"
-      ],
-      "@nebular/eva-icons": [
-        "dist/eva-icons"
-      ],
-      "@nebular/date-fns": [
-        "dist/date-fns"
-      ],
-      "@nebular/auth": [
-        "dist/auth"
-      ],
-      "@nebular/security": [
-        "dist/security"
-      ],
-      "@nebular/theme": [
-        "dist/theme"
+        "src/framework/*/public_api.ts"
       ]
     }
   },
