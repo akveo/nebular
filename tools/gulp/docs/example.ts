@@ -1,14 +1,12 @@
 import { dest, src, task, series } from 'gulp';
 import { accessSync, readFileSync, writeFileSync } from 'fs';
-import { DOCS_OUTPUT, EXTENSIONS } from '../config';
 import { join } from 'path';
-import { exportThemes } from './export-themes';
+import { DOCS_OUTPUT, EXTENSIONS } from '../config';
 
 const del = require('del');
 const replace = require('gulp-replace');
-const typedoc = require('gulp-typedoc');
-const sass = require('gulp-sass');
-const exec = require('child_process').execSync;
+
+export const prepareExamples = series(copyExamples, validateExamples, populateOverviewAndLiveExamples);
 
 /**
  * Copy everything from with-layout and without-layout dirs
@@ -25,12 +23,12 @@ const EXAMPLES_SRC = [
 const EXAMPLES_DEST = './docs/assets/examples';
 const EXAMPLES_DEST_PROD = './docs/dist/assets/examples';
 
-task('copy-examples', () => {
+function copyExamples() {
   del.sync(EXAMPLES_DEST);
   return src(EXAMPLES_SRC)
     .pipe(replace(/\/\*\*.*\*\/\n\s*\n/s, ''))
     .pipe(dest(EXAMPLES_DEST));
-});
+}
 
 task('copy-examples-prod', () => {
   return src(EXAMPLES_SRC)
@@ -38,63 +36,24 @@ task('copy-examples-prod', () => {
     .pipe(dest(EXAMPLES_DEST_PROD));
 });
 
-task('generate-doc-json', generateDocJson);
-function generateDocJson() {
-  return src(['src/framework/**/*.ts', '!src/**/*.spec.ts', '!src/framework/theme/**/node_modules{,/**}']).pipe(
-    typedoc({
-      module: 'commonjs',
-      target: 'ES6',
-      // TODO: ignoreCompilerErrors, huh?
-      ignoreCompilerErrors: true,
-      includeDeclarations: true,
-      emitDecoratorMetadata: true,
-      experimentalDecorators: true,
-      excludeExternals: true,
-      exclude: 'node_modules/**/*',
-      json: 'docs/docs.json',
-      version: true,
-      noLib: true,
-    }),
-  );
+function validateExamples(done) {
+  const docs = JSON.parse(readFileSync(DOCS_OUTPUT, 'utf8'));
+
+  docs.classes.forEach((cls) => validate(cls));
+
+  done();
 }
 
-task('parse-themes', parseThemes);
-function parseThemes() {
-  exec('prsr -g typedoc -f angular -i docs/docs.json -o docs/output.json');
+function populateOverviewAndLiveExamples(done) {
+  const docs = JSON.parse(readFileSync(DOCS_OUTPUT, 'utf8'));
+  docs.classes.forEach((cls) => {
+    cls.overview = cls.overview.map(unfold);
+    cls.liveExamples = cls.liveExamples.map(unfold);
+  });
+  writeFileSync(DOCS_OUTPUT, JSON.stringify(docs));
 
-  return src('docs/themes.scss').pipe(
-    sass({
-      functions: exportThemes('docs/', ''),
-    }),
-  );
+  done();
 }
-
-task('generate-doc-json-and-parse-themes', series('generate-doc-json', 'parse-themes'));
-
-task(
-  'validate-examples',
-  series('copy-examples', (done) => {
-    const docs = JSON.parse(readFileSync(DOCS_OUTPUT, 'utf8'));
-
-    docs.classes.forEach((cls) => validate(cls));
-
-    done();
-  }),
-);
-
-task(
-  'find-full-examples',
-  series('validate-examples', (done) => {
-    const docs = JSON.parse(readFileSync(DOCS_OUTPUT, 'utf8'));
-    docs.classes.forEach((cls) => {
-      cls.overview = cls.overview.map(unfold);
-      cls.liveExamples = cls.liveExamples.map(unfold);
-    });
-    writeFileSync(DOCS_OUTPUT, JSON.stringify(docs));
-
-    done();
-  }),
-);
 
 function unfold(tag) {
   if (tag.type === 'text') {
