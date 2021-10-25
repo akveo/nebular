@@ -11,6 +11,7 @@ import {
   EventEmitter,
   HostBinding,
   HostListener,
+  Inject,
   Input,
   NgZone,
   Optional,
@@ -22,7 +23,7 @@ import { Observable, Subject } from 'rxjs';
 import { NbStatusService } from '../../services/status.service';
 import { convertToBoolProperty, NbBooleanInput } from '../helpers';
 import { NbButton, NbButtonAppearance } from '../button/base-button';
-import { NbButtonGroupComponent } from './button-group.component';
+import { NB_BUTTON_GROUP } from './button-group-injection-tokens';
 
 export type NbButtonToggleAppearance = Exclude<NbButtonAppearance, 'hero'>;
 
@@ -36,13 +37,10 @@ export interface NbButtonToggleChange {
  */
 @Directive({
   selector: 'button[nbButtonToggle]',
-  providers: [
-    { provide: NbButton, useExisting: NbButtonToggleDirective },
-  ],
+  providers: [{ provide: NbButton, useExisting: NbButtonToggleDirective }],
   exportAs: 'nbButtonToggle',
 })
 export class NbButtonToggleDirective extends NbButton {
-
   protected readonly _pressedChange$ = new Subject<NbButtonToggleChange>();
 
   get pressedChange$(): Observable<NbButtonToggleChange> {
@@ -68,7 +66,7 @@ export class NbButtonToggleDirective extends NbButton {
     if (this.pressed !== convertToBoolProperty(value)) {
       this._pressed = !this.pressed;
       this.pressedChange.emit(this.pressed);
-      this._pressedChange$.next({ source: this, pressed: this.pressed })
+      this._pressedChange$.next({ source: this, pressed: this.pressed });
     }
   }
   protected _pressed: boolean = false;
@@ -137,7 +135,7 @@ export class NbButtonToggleDirective extends NbButton {
     protected cd: ChangeDetectorRef,
     protected zone: NgZone,
     protected statusService: NbStatusService,
-    @Optional() protected buttonGroup?: NbButtonGroupComponent,
+    @Optional() @Inject(NB_BUTTON_GROUP) protected buttonGroup?,
   ) {
     super(renderer, hostElement, cd, zone, statusService);
   }
