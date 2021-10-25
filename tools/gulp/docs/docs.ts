@@ -3,16 +3,10 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'fs';
 import { isAbsolute, join, resolve, sep } from 'path';
 
 import './example';
-import { structure as DOCS } from '../../../../docs/structure';
+import { structure as DOCS } from '../../../docs/structure';
 import { DOCS_DIST, DOCS_SITE_URL } from '../config';
 
-task(
-  'docs',
-  series(
-    'generate-doc-json-and-parse-themes',
-    'find-full-examples',
-  ),
-);
+task('docs', series('generate-doc-json-and-parse-themes', 'find-full-examples'));
 
 task('create-docs-dirs', (done) => {
   const docsStructure = flatten('docs', routesTree(DOCS));
@@ -27,7 +21,6 @@ task('create-sitemap', (done) => {
 
   done();
 });
-
 
 function createSitemap(docsPages) {
   const sitemap = getSitemap(docsPages);
@@ -45,12 +38,14 @@ function getSitemap(docsPages) {
 }
 
 function getUrlTags(docsPages) {
-  return docsPages.map(pageUrl => {
-    return `
+  return docsPages
+    .map((pageUrl) => {
+      return `
      <url>
        <loc>${DOCS_SITE_URL}${pageUrl}</loc>
      </url>`;
-  }).join('');
+    })
+    .join('');
 }
 
 function routesTree(structure) {
@@ -58,8 +53,7 @@ function routesTree(structure) {
     .filter((page: any) => ['section', 'page', 'tabs'].includes(page.type))
     .map((page: any) => {
       if (page.type === 'tabs') {
-        page.children = ['overview', 'api', 'theme', 'examples']
-          .map(name => ({ name, type: 'page'}));
+        page.children = ['overview', 'api', 'theme', 'examples'].map((name) => ({ name, type: 'page' }));
       }
       return page;
     })
@@ -67,12 +61,13 @@ function routesTree(structure) {
       return {
         path: prepareSlag(page.name),
         children: page.children ? routesTree(page.children) : [],
-      }
+      };
     });
 }
 
 function prepareSlag(name) {
-  return name.replace(/[^a-zA-Z0-9\s]+/g, '')
+  return name
+    .replace(/[^a-zA-Z0-9\s]+/g, '')
     .replace(/\s/g, '-')
     .toLowerCase();
 }
@@ -117,7 +112,7 @@ function createDirsStructure(dirs) {
   });
 }
 
-function mkDirByPathSync(targetDir, {isRelativeToScript = false} = {}) {
+function mkDirByPathSync(targetDir, { isRelativeToScript = false } = {}) {
   const initDir = isAbsolute(targetDir) ? sep : '';
   const baseDir = isRelativeToScript ? __dirname : '.';
 
@@ -134,4 +129,3 @@ function mkDirByPathSync(targetDir, {isRelativeToScript = false} = {}) {
     return curDir;
   }, initDir);
 }
-

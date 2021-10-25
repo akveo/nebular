@@ -44,7 +44,7 @@
     "test": "ng test",
     "test:wp": "ng test --configuration=production-wp",
     "test:coverage": "rimraf coverage && ng test playground --code-coverage --watch=false",
-    "test:schematics": "rimraf ./src/.lib && gulp build-packages-schematics-for-test && jasmine ./src/.lib/**/*.spec.js",
+    "test:schematics": "gulp build-packages-schematics-for-test && jasmine dist/**/*.spec.js",
     "lint": "ng lint",
     "lint:styles": "stylelint ./src/framework/**/*.scss && stylelint ./docs/**/*.scss",
     "lint:fix": "lint-staged --config ./.lintstagedrc-fix.json",

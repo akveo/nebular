@@ -10,7 +10,7 @@ class Prop {
 
   constructor(name) {
     this.name = name;
-  };
+  }
 }
 
 class PropLink {
@@ -95,7 +95,7 @@ const exporter = {
       resultObj[resultThemeName].data[resultProp].value = value;
       if (scopedParent && THEMES[scopedParent].data[prop] === value) {
         if (resultObj[resultThemeName].data[resultProp].parents.length === 0) {
-          exporter.linkProps(resultObj, scopedParent, prop, resultThemeName, prop)
+          exporter.linkProps(resultObj, scopedParent, prop, resultThemeName, prop);
         } else {
           resultObj[resultThemeName].data[resultProp].parents.push(new PropLink(scopedParent, prop));
         }
@@ -103,7 +103,6 @@ const exporter = {
     }
     return resultObj;
   },
-
 
   linkProps(resultObj, parentThemeName, parentPropName, childThemeName, childPropName) {
     if (!resultObj.hasOwnProperty(parentThemeName)) {
@@ -116,7 +115,6 @@ const exporter = {
     resultObj[parentThemeName].data[parentPropName].childs.push(new PropLink(childThemeName, childPropName));
     return resultObj;
   },
-
 
   function(path) {
     return function (file, themes, mapping) {
@@ -132,7 +130,6 @@ const exporter = {
         };
       });
 
-
       let output = {
         themes: exporter.parseThemes(themesValue),
         // TODO: we need to change internal function interface as it very hard to re-use them
@@ -142,7 +139,7 @@ const exporter = {
       output = _.defaults(JSON.parse(fs.readFileSync(path + '/' + file.getValue())), output);
       fs.writeFileSync(path + '/' + file.getValue(), JSON.stringify(output, null, '  '));
       return themes;
-    }
+    };
   },
 
   interface(name) {

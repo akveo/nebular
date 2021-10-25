@@ -40,8 +40,8 @@ task('copy-examples-prod', () => {
 
 task('generate-doc-json', generateDocJson);
 function generateDocJson() {
-  return src(['src/framework/**/*.ts', '!src/**/*.spec.ts', '!src/framework/theme/**/node_modules{,/**}'])
-    .pipe(typedoc({
+  return src(['src/framework/**/*.ts', '!src/**/*.spec.ts', '!src/framework/theme/**/node_modules{,/**}']).pipe(
+    typedoc({
       module: 'commonjs',
       target: 'ES6',
       // TODO: ignoreCompilerErrors, huh?
@@ -54,60 +54,46 @@ function generateDocJson() {
       json: 'docs/docs.json',
       version: true,
       noLib: true,
-    }));
+    }),
+  );
 }
 
-task(
-  'parse-themes',
-  parseThemes,
-);
+task('parse-themes', parseThemes);
 function parseThemes() {
   exec('prsr -g typedoc -f angular -i docs/docs.json -o docs/output.json');
 
-  return src('docs/themes.scss')
-    .pipe(sass({
+  return src('docs/themes.scss').pipe(
+    sass({
       functions: exportThemes('docs/', ''),
-    }));
-
+    }),
+  );
 }
 
-task(
-  'generate-doc-json-and-parse-themes',
-  series(
-    'generate-doc-json',
-    'parse-themes',
-  ),
-);
+task('generate-doc-json-and-parse-themes', series('generate-doc-json', 'parse-themes'));
 
 task(
   'validate-examples',
-  series(
-    'copy-examples',
-    (done) => {
-      const docs = JSON.parse(readFileSync(DOCS_OUTPUT, 'utf8'));
+  series('copy-examples', (done) => {
+    const docs = JSON.parse(readFileSync(DOCS_OUTPUT, 'utf8'));
 
-      docs.classes.forEach(cls => validate(cls));
+    docs.classes.forEach((cls) => validate(cls));
 
-      done();
-    },
-  ),
+    done();
+  }),
 );
 
 task(
   'find-full-examples',
-  series(
-    'validate-examples',
-    (done) => {
-      const docs = JSON.parse(readFileSync(DOCS_OUTPUT, 'utf8'));
-      docs.classes.forEach(cls => {
-        cls.overview = cls.overview.map(unfold);
-        cls.liveExamples = cls.liveExamples.map(unfold);
-      });
-      writeFileSync(DOCS_OUTPUT, JSON.stringify(docs));
+  series('validate-examples', (done) => {
+    const docs = JSON.parse(readFileSync(DOCS_OUTPUT, 'utf8'));
+    docs.classes.forEach((cls) => {
+      cls.overview = cls.overview.map(unfold);
+      cls.liveExamples = cls.liveExamples.map(unfold);
+    });
+    writeFileSync(DOCS_OUTPUT, JSON.stringify(docs));
 
-      done();
-    },
-  ),
+    done();
+  }),
 );
 
 function unfold(tag) {
@@ -133,9 +119,7 @@ function unfoldFile(tag) {
 }
 
 function unfoldComponent(tag) {
-  const files = EXTENSIONS
-    .map(extension => `${tag.content.id}.${extension}`)
-    .filter(isFileExists);
+  const files = EXTENSIONS.map((extension) => `${tag.content.id}.${extension}`).filter(isFileExists);
 
   return createNode(tag, files);
 }
@@ -152,9 +136,7 @@ function createNode(tag, files, id = tag.content.id) {
 }
 
 function validate(cls) {
-  const examples = cls.overview
-    .filter(({ type }) => type !== 'text')
-    .map(({ content }) => content);
+  const examples = cls.overview.filter(({ type }) => type !== 'text').map(({ content }) => content);
 
   const missing = examples.filter(({ id }) => !isFileExists(id) && !isComponentExists(id));
 
@@ -169,9 +151,7 @@ function createMissingMsg(examples): string {
 }
 
 function isComponentExists(path): boolean {
-  return EXTENSIONS
-    .map(extension => `${path}.${extension}`)
-    .some(isFileExists);
+  return EXTENSIONS.map((extension) => `${path}.${extension}`).some(isFileExists);
 }
 
 function isFileExists(file): boolean {
@@ -185,7 +165,7 @@ function isFileExists(file): boolean {
 }
 
 function isFile(id) {
-  return EXTENSIONS.some(extension => id.endsWith(extension));
+  return EXTENSIONS.some((extension) => id.endsWith(extension));
 }
 
 function withoutExtension(file) {
