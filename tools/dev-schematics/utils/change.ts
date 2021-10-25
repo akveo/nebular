@@ -17,7 +17,8 @@ export interface ReplaceChange {
 export function applyInsertChange(tree: Tree, path: Path, ...changes: Change[]): Tree {
   const recorder = tree.beginUpdate(path);
 
-  changes.filter(change => change instanceof InsertChange)
+  changes
+    .filter((change) => change instanceof InsertChange)
     .forEach((change: InsertChange) => recorder.insertLeft(change.pos, change.toAdd));
 
   tree.commitUpdate(recorder);

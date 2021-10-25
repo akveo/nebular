@@ -44,7 +44,7 @@ export function findRoutesArray(tree: Tree, modulePath: Path): ts.ArrayLiteralEx
       return routesArgument as ts.ArrayLiteralExpression;
     }
     if (routesArgument.kind === ts.SyntaxKind.Identifier) {
-      const declaration = getRoutesVariableDeclaration(source, (routesArgument as ts.Identifier));
+      const declaration = getRoutesVariableDeclaration(source, routesArgument as ts.Identifier);
       return declaration.initializer as ts.ArrayLiteralExpression;
     }
 
@@ -56,7 +56,7 @@ export function findRoutesArray(tree: Tree, modulePath: Path): ts.ArrayLiteralEx
 
 function getImports(moduleDecorator: ts.ObjectLiteralExpression): ts.PropertyAssignment {
   const imports = moduleDecorator.properties
-    .filter(p => p.kind === ts.SyntaxKind.PropertyAssignment)
+    .filter((p) => p.kind === ts.SyntaxKind.PropertyAssignment)
     .find((p: ts.PropertyAssignment) => p.name.getText() === 'imports') as ts.PropertyAssignment;
 
   if (imports == null) {
@@ -70,9 +70,8 @@ function getImports(moduleDecorator: ts.ObjectLiteralExpression): ts.PropertyAss
 }
 
 function getRouterModuleCall(importsNode: ts.PropertyAssignment): ts.CallExpression {
-  const routerModuleCall = (importsNode.initializer as ts.ArrayLiteralExpression)
-    .elements
-    .filter(el => el.kind === ts.SyntaxKind.CallExpression)
+  const routerModuleCall = (importsNode.initializer as ts.ArrayLiteralExpression).elements
+    .filter((el) => el.kind === ts.SyntaxKind.CallExpression)
     .find((el: ts.CallExpression) => el.expression.getText() === 'RouterModule.forChild') as ts.CallExpression;
   if (routerModuleCall == null) {
     throw new SchematicsException(`Can't find RouterModule.forChild call in module imports.`);
@@ -188,8 +187,8 @@ export function addRootRoute(tree: Tree, targetFile: Path): void {
   }
 
   const isLayout = isLayoutPath(targetFile);
-  const baseModulePath = isLayout ? LAYOUT_MODULE_PATH : NO_LAYOUT_MODULE_PATH ;
-  const baseModuleClass = isLayout ? LAYOUT_MODULE_CLASS : NO_LAYOUT_MODULE_CLASS  ;
+  const baseModulePath = isLayout ? LAYOUT_MODULE_PATH : NO_LAYOUT_MODULE_PATH;
+  const baseModuleClass = isLayout ? LAYOUT_MODULE_CLASS : NO_LAYOUT_MODULE_CLASS;
   const lazyModuleImport = generateLazyModuleImport(PLAYGROUND_ROUTING_MODULE_PATH, baseModulePath, baseModuleClass);
   const routeString = generatePathRoute('', `loadChildren: ${lazyModuleImport}`);
   addRoute(tree, PLAYGROUND_ROUTING_MODULE_PATH, routesArray, routeString);
@@ -285,8 +284,9 @@ export function findRouteWithPath(
 }
 
 export function getRoutesFromArray(routesArray: ts.ArrayLiteralExpression): ts.ObjectLiteralExpression[] {
-  return routesArray.elements
-    .filter(node => node.kind === ts.SyntaxKind.ObjectLiteralExpression) as ts.ObjectLiteralExpression[];
+  return routesArray.elements.filter(
+    (node) => node.kind === ts.SyntaxKind.ObjectLiteralExpression,
+  ) as ts.ObjectLiteralExpression[];
 }
 
 export function getRouteChildren(route: ts.ObjectLiteralExpression): ts.ArrayLiteralExpression | undefined {
@@ -303,12 +303,11 @@ export function getRouteChildren(route: ts.ObjectLiteralExpression): ts.ArrayLit
 }
 
 export function getRouteProps(route: ts.ObjectLiteralExpression): ts.PropertyAssignment[] {
-  return route.properties
-    .filter(prop => prop.kind === ts.SyntaxKind.PropertyAssignment) as ts.PropertyAssignment[];
+  return route.properties.filter((prop) => prop.kind === ts.SyntaxKind.PropertyAssignment) as ts.PropertyAssignment[];
 }
 
 export function findRouteProp(route: ts.ObjectLiteralExpression, propName: string): ts.PropertyAssignment | undefined {
-  return getRouteProps(route).find(prop => prop.name.getText() === propName);
+  return getRouteProps(route).find((prop) => prop.name.getText() === propName);
 }
 
 export function getRouteLazyModule(route: ts.ObjectLiteralExpression): ts.PropertyAssignment | undefined {
@@ -327,7 +326,7 @@ export function getRoutePath(route: ts.ObjectLiteralExpression): ts.PropertyAssi
  * Returns array of route paths relative to playground.
  */
 export function dirsToRoutePaths(dirPath: string): string[] {
-  return dirPath.split(NormalizedSep).filter(dir => dir);
+  return dirPath.split(NormalizedSep).filter((dir) => dir);
 }
 
 /**

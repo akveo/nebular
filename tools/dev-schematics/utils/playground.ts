@@ -27,7 +27,7 @@ export const NO_LAYOUT_ROUTING_MODULE_PATH = join(NO_LAYOUT_DIR_PATH, `${NO_LAYO
 export const NO_LAYOUT_MODULE_CLASS = 'WithoutLayoutModule';
 export const NO_LAYOUT_COMPONENT_CLASS = 'PlaygroundBaseComponent';
 
-export const INCLUDE_DIRS: string[] = [ LAYOUT_DIR_PATH, NO_LAYOUT_DIR_PATH ];
+export const INCLUDE_DIRS: string[] = [LAYOUT_DIR_PATH, NO_LAYOUT_DIR_PATH];
 
 /**
  * Returns root playground directory.
@@ -49,7 +49,7 @@ export function getPlaygroundDirs(tree: Tree): DirEntry[] {
 
   return pgDir.subdirs
     .filter((dirName: PathFragment) => INCLUDE_DIRS.includes(join(pgDir.path, dirName)))
-    .map(path => pgDir.dir(path));
+    .map((path) => pgDir.dir(path));
 }
 
 /**
@@ -59,7 +59,7 @@ export function getPlaygroundDirs(tree: Tree): DirEntry[] {
 export function getModuleDirs(tree: Tree): DirEntry[] {
   const baseDirs = getPlaygroundDirs(tree);
   const baseDirectChildren = baseDirs.reduce((dirs: DirEntry[], dir: DirEntry) => {
-    return dirs.concat(dir.subdirs.map(subDir => dir.dir(subDir)));
+    return dirs.concat(dir.subdirs.map((subDir) => dir.dir(subDir)));
   }, []);
   return baseDirs.concat(baseDirectChildren);
 }
@@ -125,15 +125,15 @@ export function isRoutingModule(fileName: PathFragment): boolean {
 }
 
 export function getServicesFromDir(dir: DirEntry): Path[] {
-  return dir.subfiles.filter(isService).map(fileName => join(dir.path, fileName));
+  return dir.subfiles.filter(isService).map((fileName) => join(dir.path, fileName));
 }
 
 export function getComponentsFromDir(dir: DirEntry): Path[] {
-  return dir.subfiles.filter(isComponent).map(fileName => join(dir.path, fileName));
+  return dir.subfiles.filter(isComponent).map((fileName) => join(dir.path, fileName));
 }
 
 export function getDirectivesFromDir(dir: DirEntry): Path[] {
-  return dir.subfiles.filter(isDirective).map(fileName => join(dir.path, fileName));
+  return dir.subfiles.filter(isDirective).map((fileName) => join(dir.path, fileName));
 }
 
 export function getFeatureModuleFromDir(dir: DirEntry): Path | null {

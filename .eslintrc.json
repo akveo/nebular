@@ -3,7 +3,8 @@
   "ignorePatterns": [
     "src/framework/**/*",
     "docs/**/*",
-    "packages-smoke/**/*"
+    "packages-smoke/**/*",
+    "tools/dev-schematics/*/files"
   ],
   "overrides": [
     {

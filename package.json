@@ -41,8 +41,7 @@
     "build:packages-sass": "sass dist --load-path=node_modules --style=compressed --no-source-map",
     "postbuild:packages-sass": "ts-node tools/build-packages/sass-import.ts --sass-loader",
     "build:bootstrap": "cp -r src/framework/bootstrap dist",
-    "prebuild:dev-schematics": "rimraf schematics/dist",
-    "build:dev-schematics": "tsc --project=schematics/tsconfig.json",
+    "build:dev-schematics": "gulp build-development-schematics",
     "test": "ng test",
     "test:wp": "ng test --configuration=production-wp",
     "test:coverage": "rimraf coverage && ng test playground --code-coverage --watch=false",
@@ -169,5 +168,5 @@
     "typedoc": "^0.12.0",
     "typescript": "~4.3.5"
   },
-  "schematics": "./schematics/dist/collection.json"
+  "schematics": "./tools/dev-schematics/dist/collection.json"
 }

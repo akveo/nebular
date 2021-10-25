@@ -15,7 +15,6 @@ import { basename, dirname, normalize, Path, strings } from '@angular-devkit/cor
 // per file.
 export function newComponent(options: any): Rule {
   return (tree: Tree, context: SchematicContext) => {
-
     options.path = '/src/framework/theme/components/';
     options.prefix = 'nb';
     options.selector = options.selector || buildSelector(options);
@@ -33,15 +32,11 @@ export function newComponent(options: any): Rule {
       }),
     ]);
 
-    return chain([
-      branchAndMerge(chain([
-        mergeWith(templateSource),
-      ])),
-    ])(tree, context);
+    return chain([branchAndMerge(chain([mergeWith(templateSource)]))])(tree, context);
   };
 }
 
-export function parseName(path: string, name: string): { name: string, path: Path } {
+export function parseName(path: string, name: string): { name: string; path: Path } {
   const nameWithoutPath = basename(name as Path);
   const namePath = dirname((path + '/' + name) as Path);
 

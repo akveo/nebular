@@ -16,8 +16,8 @@ import { getNodeIndentation } from './formatting';
  */
 export function getClassWithDecorator(tree: Tree, path: Path, decoratorName: string): ts.ClassDeclaration[] {
   return findNodes(parseSourceFile(tree, path), ts.SyntaxKind.ClassDeclaration)
-    .filter(node => isNodeExported(node as ts.Declaration))
-    .filter(node => (node as ts.ClassDeclaration).name != null)
+    .filter((node) => isNodeExported(node as ts.Declaration))
+    .filter((node) => (node as ts.ClassDeclaration).name != null)
     .filter((node: ts.ClassDeclaration) => hasDecoratorCall(node, decoratorName)) as ts.ClassDeclaration[];
 }
 
@@ -32,9 +32,9 @@ export function hasDecoratorCall(classDeclaration: ts.ClassDeclaration, decorato
   }
 
   return classDeclaration.decorators
-    .filter(d => d.expression.kind === ts.SyntaxKind.CallExpression)
-    .map(d => (d.expression as ts.CallExpression).expression)
-    .some(decoratorFactoryCall => decoratorFactoryCall.getText() === decoratorName);
+    .filter((d) => d.expression.kind === ts.SyntaxKind.CallExpression)
+    .map((d) => (d.expression as ts.CallExpression).expression)
+    .some((decoratorFactoryCall) => decoratorFactoryCall.getText() === decoratorName);
 }
 
 /**
@@ -50,7 +50,7 @@ export function isNodeExported(node: ts.Declaration): boolean {
 
 export function findDeclarationByIdentifier(source: ts.SourceFile, identifierText: string): ts.VariableDeclaration {
   return getSourceNodes(source)
-    .filter(node => node.kind === ts.SyntaxKind.VariableDeclaration)
+    .filter((node) => node.kind === ts.SyntaxKind.VariableDeclaration)
     .find((node: ts.VariableDeclaration) => node.name.getText() === identifierText) as ts.VariableDeclaration;
 }
 
@@ -63,12 +63,7 @@ export function addObjectProperty(
   addNodeArrayElement(tree, source, node, property);
 }
 
-export function addArrayElement(
-  tree: Tree,
-  source: ts.SourceFile,
-  node: ts.ArrayLiteralExpression,
-  element: string,
-) {
+export function addArrayElement(tree: Tree, source: ts.SourceFile, node: ts.ArrayLiteralExpression, element: string) {
   addNodeArrayElement(tree, source, node, element);
 }
 
@@ -97,9 +92,7 @@ function addNodeArrayElement(
   const indentedElement = elementIndentation + element.replace(/\n/gm, `\n${elementIndentation}`);
   const closingBracketIndentation = nodeIndentation;
 
-  const toAdd = prevElementTrailingComma + '\n' +
-    indentedElement + ',\n' +
-    closingBracketIndentation;
+  const toAdd = prevElementTrailingComma + '\n' + indentedElement + ',\n' + closingBracketIndentation;
 
   const recorder = tree.beginUpdate(source.fileName);
   if (toRemove.length) {

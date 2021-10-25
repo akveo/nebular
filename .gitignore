@@ -50,4 +50,4 @@ Thumbs.db
 debug.log
 local.log
 
-/schematics/dist
+/tools/dev-schematics/dist

@@ -2,3 +2,4 @@
 build
 coverage
 dist
+tools/dev-schematics/*/files

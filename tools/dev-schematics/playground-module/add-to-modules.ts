@@ -55,15 +55,19 @@ function processDirs(tree: Tree, context: SchematicContext, dirs: DirEntry[]): v
     processDir(tree, context, dir);
 
     if (dir.subdirs.length) {
-      processDirs(tree, context, dir.subdirs.map(d => dir.dir(d)));
+      processDirs(
+        tree,
+        context,
+        dir.subdirs.map((d) => dir.dir(d)),
+      );
     }
   }
 }
 
 function processDir(tree: Tree, context: SchematicContext, dir: DirEntry): void {
-  getComponentsFromDir(dir).forEach(path => processComponent(tree, context, path));
-  getDirectivesFromDir(dir).forEach(path => processDirectives(tree, path));
-  getServicesFromDir(dir).forEach(path => processService(tree, path));
+  getComponentsFromDir(dir).forEach((path) => processComponent(tree, context, path));
+  getDirectivesFromDir(dir).forEach((path) => processDirectives(tree, path));
+  getServicesFromDir(dir).forEach((path) => processService(tree, path));
 
   const modulePath = getFeatureModuleFromDir(dir);
   if (modulePath) {
@@ -136,9 +140,11 @@ function addComponentRoute(
     throw new SchematicsException(`Can't find routing module for module ${modulePath}.`);
   }
   if (componentDeclarations.length > 1) {
-    context.logger.warn(`Found more than one component declaration in ${componentPath}. ` +
-      'Route will be created only for the first one.\n' +
-      'Move all helper components which don\'t need own routes to sub directory without routing module in it.');
+    context.logger.warn(
+      `Found more than one component declaration in ${componentPath}. ` +
+        'Route will be created only for the first one.\n' +
+        "Move all helper components which don't need own routes to sub directory without routing module in it.",
+    );
   }
 
   const componentClassName = (componentDeclarations[0].name as ts.Identifier).getText();
@@ -184,8 +190,9 @@ function processFeatureModule(tree: Tree, context: SchematicContext, modulePath:
   }
 
   if (moduleDeclarations.length > 1) {
-    context.logger.warn(`Found more than one module declaration in ${modulePath}. ` +
-      'Route will be created only for the first one.');
+    context.logger.warn(
+      `Found more than one module declaration in ${modulePath}. ` + 'Route will be created only for the first one.',
+    );
   }
   addModuleRoute(tree, moduleDeclarations[0], modulePath, routingModulePath);
 }
@@ -227,7 +234,7 @@ function multilineDeclarationsArray(tree: Tree, modulePath: Path): void {
   }
 
   const declarationsNode = decoratorNode.properties
-    .filter(prop => prop.kind === ts.SyntaxKind.PropertyAssignment)
+    .filter((prop) => prop.kind === ts.SyntaxKind.PropertyAssignment)
     .find((prop: ts.PropertyAssignment) => prop.name.getText() === 'declarations') as ts.PropertyAssignment;
 
   if (!declarationsNode) {
@@ -250,7 +257,7 @@ function processRoutingModule(tree: Tree, modulePath: Path) {
 
   const featureModulePath = findFeatureModule(tree, dirname(modulePath));
   if (!featureModulePath) {
-    throw new SchematicsException(`Can't find module for routing module ${featureModulePath }.`);
+    throw new SchematicsException(`Can't find module for routing module ${featureModulePath}.`);
   }
 
   const featureModuleSource = parseSourceFile(tree, featureModulePath);

@@ -8,28 +8,32 @@
     "declaration": true,
     "module": "commonjs",
     "moduleResolution": "node",
-    "outDir": "./src/.lib",
-    "rootDir": "./src/framework",
+    "outDir": "./dist",
     "noEmitOnError": true,
     "noFallthroughCasesInSwitch": true,
-    "noImplicitAny": false,
-    "noImplicitThis": false,
+    "noImplicitAny": true,
+    "noImplicitThis": true,
     "noUnusedParameters": true,
     "noUnusedLocals": true,
+    "rootDir": ".",
+    "rootDirs": [
+      "../../src/framework/theme/schematics/util"
+    ],
     "skipDefaultLibCheck": true,
     "skipLibCheck": true,
-    "sourceMap": false,
+    "sourceMap": true,
     "strictNullChecks": true,
-    "target": "es5",
-    "typeRoots": [
-      "node_modules/@types"
+    "target": "es6",
+    "types": [
+      "jasmine",
+      "node"
     ]
   },
   "include": [
-    "./src/framework/**/schematics/**/*"
+    "./**/*"
   ],
   "exclude": [
-    "./src/framework/**/schematics/**/files/**/*",
-    "./src/framework/**/schematics/**/*.spec.ts"
+    "./**/files/**/*",
+    "dist"
   ]
 }

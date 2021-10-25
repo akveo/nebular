@@ -77,9 +77,9 @@ function findRoutesInDir(tree: Tree, dir: DirEntry): ComponentLink[] {
 function parseRoutes(tree: Tree, dir: DirEntry, routeEntries: ts.ObjectLiteralExpression[]): ComponentLink[] {
   const foundRoutes: ComponentLink[] = [];
   const routesWithPath = routeEntries
-    .filter(r => r.properties.length > 0)
-    .filter(r => !!getRoutePath(r))
-    .filter(r => isLazyRoute(r) || isComponentRoute(r));
+    .filter((r) => r.properties.length > 0)
+    .filter((r) => !!getRoutePath(r))
+    .filter((r) => isLazyRoute(r) || isComponentRoute(r));
 
   for (const route of routesWithPath) {
     const component = getComponentRoute(route);
@@ -100,11 +100,7 @@ function getComponentRoute(route: ts.ObjectLiteralExpression): string | undefine
   }
 }
 
-function getChildRoutes(
-  tree: Tree,
-  routingModuleDir: DirEntry,
-  route: ts.ObjectLiteralExpression,
-): ComponentLink[] {
+function getChildRoutes(tree: Tree, routingModuleDir: DirEntry, route: ts.ObjectLiteralExpression): ComponentLink[] {
   const childrenProp = getRouteChildren(route);
   if (childrenProp) {
     return parseRoutes(tree, routingModuleDir, getRoutesFromArray(childrenProp));

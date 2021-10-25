@@ -9,5 +9,5 @@ import { generateMissingModules } from './generate-missing-modules';
 import { addToModules } from './add-to-modules';
 
 export function playgroundModule(): Rule {
-  return () => chain([ generateMissingModules, addToModules ]);
+  return () => chain([generateMissingModules, addToModules]);
 }

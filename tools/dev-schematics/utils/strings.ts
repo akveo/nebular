@@ -1,4 +1,4 @@
-const QUOTES = [ `'`, `"`, '`' ];
+const QUOTES = [`'`, `"`, '`'];
 
 export function trimQuotes(stringLiteral: string): string {
   if (stringLiteral.length === 0) {
@@ -23,9 +23,7 @@ const COMPONENT_SUFFIX = 'Component';
  * Splits string in words by capital letters. Also removes 'Component' suffix.
  */
 export function splitClassName(className: string): string {
-  const withoutSuffix = className.endsWith(COMPONENT_SUFFIX)
-    ? className.replace(COMPONENT_SUFFIX, '')
-    : className;
+  const withoutSuffix = className.endsWith(COMPONENT_SUFFIX) ? className.replace(COMPONENT_SUFFIX, '') : className;
 
   return withoutSuffix.replace(/([a-z])([A-Z])/g, '$1 $2');
 }

@@ -30,8 +30,8 @@ interface ModuleOptions {
 }
 
 export function generateMissingModules(tree: Tree): Rule {
-  const moduleDirs = [ getPlaygroundRootDir(tree), ...getModuleDirs(tree) ];
-  const moduleRules = moduleDirs.map(moduleDir => dirRule(tree, moduleDir));
+  const moduleDirs = [getPlaygroundRootDir(tree), ...getModuleDirs(tree)];
+  const moduleRules = moduleDirs.map((moduleDir) => dirRule(tree, moduleDir));
 
   return chain(moduleRules);
 }
@@ -41,13 +41,10 @@ function dirRule(tree: Tree, moduleDir: DirEntry): Rule {
 }
 
 function fromTemplate(tree: Tree, options: Object): Rule {
-  const transformedSource = apply(
-    url('./files'),
-    [
-      template(options),
-      filter((filePath: Path) => shouldCreateModule(tree, filePath)),
-    ],
-  );
+  const transformedSource = apply(url('./files'), [
+    template(options),
+    filter((filePath: Path) => shouldCreateModule(tree, filePath)),
+  ]);
 
   return mergeWith(transformedSource);
 }
@@ -55,9 +52,7 @@ function fromTemplate(tree: Tree, options: Object): Rule {
 function shouldCreateModule(tree: Tree, filePath: Path): boolean {
   const dir = tree.getDir(normalize(dirname(filePath)));
   const fileName = basename(filePath);
-  const isModuleExist = isFeatureModule(fileName)
-    ? hasFeatureModuleInDir(dir)
-    : hasRoutingModuleInDir(dir);
+  const isModuleExist = isFeatureModule(fileName) ? hasFeatureModuleInDir(dir) : hasRoutingModuleInDir(dir);
 
   if (isModuleExist) {
     return false;
