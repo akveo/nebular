@@ -8,5 +8,12 @@
       "@nebular/auth": "nb.auth",
       "firebase/app": "firebase.app"
     }
-  }
+  },
+  "assets": [
+    "LICENSE.txt",
+    "**/*.{html,scss}",
+    "schematics/collection.json",
+    "schematics/*/schema.json",
+    "schematics/*/files/**"
+  ]
 }

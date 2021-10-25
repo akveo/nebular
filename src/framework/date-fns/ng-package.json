@@ -10,5 +10,12 @@
       "date-fns/format": "date-fns.format",
       "date-fns/getWeek": "date-fns.getWeek"
     }
-  }
+  },
+  "assets": [
+    "LICENSE.txt",
+    "**/*.{html,scss}",
+    "schematics/collection.json",
+    "schematics/*/schema.json",
+    "schematics/*/files/**"
+  ]
 }

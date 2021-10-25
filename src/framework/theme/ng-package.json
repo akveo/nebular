@@ -4,5 +4,12 @@
   "lib": {
     "entryFile": "./public_api.ts"
   },
-  "allowedNonPeerDependencies": ["intersection-observer"]
+  "allowedNonPeerDependencies": ["intersection-observer"],
+  "assets": [
+    "LICENSE.txt",
+    "**/*.{html,scss}",
+    "schematics/collection.json",
+    "schematics/*/schema.json",
+    "schematics/*/files/**"
+  ]
 }

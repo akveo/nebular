@@ -8,5 +8,12 @@
       "@nebular/theme": "nb.theme",
       "eva-icons": "eva"
     }
-  }
+  },
+  "assets": [
+    "LICENSE.txt",
+    "**/*.{html,scss}",
+    "schematics/collection.json",
+    "schematics/*/schema.json",
+    "schematics/*/files/**"
+  ]
 }
