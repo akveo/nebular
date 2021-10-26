@@ -50,23 +50,19 @@
       }
     }
 
-    .route-tab:focus {
-      .tab-link {
-        background-color: nb-theme(route-tabset-tab-focus-background-color);
-        color: nb-theme(route-tabset-tab-focus-text-color);
-        &::before {
-          background-color: nb-theme(route-tabset-tab-focus-underline-color);
-        }
+    .tab-link:focus {
+      background-color: nb-theme(route-tabset-tab-focus-background-color);
+      color: nb-theme(route-tabset-tab-focus-text-color);
+      &::before {
+        background-color: nb-theme(route-tabset-tab-focus-underline-color);
       }
     }
 
-    .route-tab:hover {
-      .tab-link {
-        background-color: nb-theme(route-tabset-tab-hover-background-color);
-        color: nb-theme(route-tabset-tab-hover-text-color);
-        &::before {
-          background-color: nb-theme(route-tabset-tab-hover-underline-color);
-        }
+    .tab-link:hover {
+      background-color: nb-theme(route-tabset-tab-hover-background-color);
+      color: nb-theme(route-tabset-tab-hover-text-color);
+      &::before {
+        background-color: nb-theme(route-tabset-tab-hover-underline-color);
       }
     }
 

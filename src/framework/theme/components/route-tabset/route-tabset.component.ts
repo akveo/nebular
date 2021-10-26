@@ -96,10 +96,15 @@ import { convertToBoolProperty, NbBooleanInput } from '../helpers';
         </li>
 
         <ng-template #enabled>
-          <li (click)="$event.preventDefault(); selectTab(tab)"
+          <li
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="activeLinkOptions"
+            tabindex="-1"
+            class="route-tab"
+          >
+            <a
+              (click)="selectTab(tab)"
               [routerLink]="tab.route"
-              routerLinkActive="active"
-              [routerLinkActiveOptions]="activeLinkOptions"
               [class.responsive]="tab.responsive"
               [queryParams]="tab.queryParams"
               [queryParamsHandling]="tab.queryParamsHandling"
@@ -108,9 +113,8 @@ import { convertToBoolProperty, NbBooleanInput } from '../helpers';
               [skipLocationChange]="tab.skipLocationChange"
               [replaceUrl]="tab.replaceUrl"
               [state]="tab.state"
-              tabindex="0"
-              class="route-tab">
-            <a tabindex="-1" class="tab-link">
+              class="tab-link"
+            >
               <nb-icon *ngIf="tab.icon" [config]="tab.icon"></nb-icon>
               <span *ngIf="tab.title" class="tab-text">{{ tab.title }}</span>
             </a>
