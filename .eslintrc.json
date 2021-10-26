@@ -27,32 +27,6 @@
         "eslint-plugin-rxjs"
       ],
       "rules": {
-        "@angular-eslint/component-selector": [
-          "error",
-          {
-            "type": [
-              "element",
-              "attribute"
-            ],
-            "prefix": [
-              "ngd",
-              "ngx"
-            ],
-            "style": "kebab-case"
-          }
-        ],
-        "@angular-eslint/directive-selector": [
-          "error",
-          {
-            "type": "attribute",
-            "prefix": [
-              "nb",
-              "ngd",
-              "ngx"
-            ],
-            "style": "camelCase"
-          }
-        ],
         "quotes": "off",
         "dot-notation": "off",
         "no-restricted-globals": ["error", "fit", "fdescribe"],
