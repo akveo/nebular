@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { Component, Input, Output, EventEmitter, HostBinding } from '@angular/core';
+import {Component, Input, Output, EventEmitter, HostBinding} from '@angular/core';
 import {RouterLink, RouterLinkActive} from '@angular/router';
 
 import { convertToBoolProperty, NbBooleanInput } from '../helpers';
@@ -23,6 +23,7 @@ export interface NbRouteTab {
   skipLocationChange?: RouterLink['skipLocationChange'] | undefined;
   replaceUrl?: RouterLink['replaceUrl'] | undefined;
   state?: RouterLink['state'] | undefined;
+  activeLinkOptions?: RouterLinkActive['routerLinkActiveOptions'] | undefined;
 }
 
 /**
@@ -115,7 +116,7 @@ export interface NbRouteTab {
           <li (click)="$event.preventDefault(); selectTab(tab)"
               [routerLink]="tab.route"
               routerLinkActive="active"
-              [routerLinkActiveOptions]="activeLinkOptions"
+              [routerLinkActiveOptions]="activeLinkOptions | mergeConfigs:tab.activeLinkOptions"
               [class.responsive]="tab.responsive"
               [queryParams]="tab.queryParams"
               [queryParamsHandling]="tab.queryParamsHandling"
