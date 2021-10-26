@@ -5,9 +5,25 @@
  */
 
 import { Component, Input, Output, EventEmitter, HostBinding } from '@angular/core';
-import { RouterLinkActive } from '@angular/router';
+import {RouterLink, RouterLinkActive} from '@angular/router';
 
 import { convertToBoolProperty, NbBooleanInput } from '../helpers';
+import {NbIconConfig} from '../icon/icon.component';
+
+export interface NbRouteTab {
+  route?: RouterLink['routerLink'] | undefined;
+  title?: string | undefined;
+  icon?: string | NbIconConfig | undefined;
+  disabled?: boolean | undefined;
+  responsive?: boolean | undefined;
+  queryParams?: RouterLink['queryParams'] | undefined;
+  queryParamsHandling?: RouterLink['queryParamsHandling'] | undefined;
+  fragment?: RouterLink['fragment'] | undefined;
+  preserveFragment?: RouterLink['preserveFragment'] | undefined;
+  skipLocationChange?: RouterLink['skipLocationChange'] | undefined;
+  replaceUrl?: RouterLink['replaceUrl'] | undefined;
+  state?: RouterLink['state'] | undefined;
+}
 
 /**
  * Route tabset components.
@@ -127,9 +143,8 @@ export class NbRouteTabsetComponent {
 
   /**
    * Tabs configuration
-   * @param Object{route: string, title: string, tag?: string, responsive?: boolean, disabled?: boolean}
    */
-  @Input() tabs: any[];
+  @Input() tabs: NbRouteTab[];
 
   /**
    * Options passed to `routerLinkActiveOptions` directive which set on tab links.
@@ -149,11 +164,11 @@ export class NbRouteTabsetComponent {
 
   /**
    * Emits when tab is selected
-   * @type {EventEmitter<any>}
+   * @type {EventEmitter<NbRouteTab>}
    */
-  @Output() changeTab = new EventEmitter<any>();
+  @Output() changeTab = new EventEmitter<NbRouteTab>();
 
-  selectTab(tab: any) {
+  selectTab(tab: NbRouteTab) {
     this.changeTab.emit(tab);
   }
 }

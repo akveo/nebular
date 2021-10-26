@@ -5,6 +5,7 @@
  */
 
 import { Component } from '@angular/core';
+import { NbRouteTab } from '@nebular/theme';
 
 @Component({
   selector: 'nb-route-tabset-showcase',
@@ -17,7 +18,7 @@ import { Component } from '@angular/core';
   `,
 })
 export class RouteTabsetShowcaseComponent {
-  tabs: any[] = [
+  tabs: NbRouteTab[] = [
     {
       title: 'Users',
       icon: 'person',
