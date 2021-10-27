@@ -58,13 +58,13 @@ const blocks = [
 ];
 
 @NgModule({
-    imports: [
-        CommonModule,
-        RouterModule,
-        NgdThemeModule,
-        NbInputModule,
-        NbSpinnerModule,
-    ],
+  imports: [
+    CommonModule,
+    RouterModule,
+    NgdThemeModule,
+    NbInputModule,
+    NbSpinnerModule,
+  ],
   declarations: [
     ...blocks,
   ],

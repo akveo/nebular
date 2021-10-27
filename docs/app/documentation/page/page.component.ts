@@ -22,7 +22,6 @@ export class NgdPageComponent implements OnInit, AfterContentChecked, OnDestroy 
 
   currentItem;
   private destroy$ = new Subject<void>();
-  private destroyMarkdown$ = new Subject<void>();
 
   currentTabName: string = '';
 
@@ -56,7 +55,6 @@ export class NgdPageComponent implements OnInit, AfterContentChecked, OnDestroy 
   ngOnDestroy() {
     this.destroy$.next();
     this.destroy$.complete();
-    this.destroyMarkdown$.complete();
   }
 
   handlePageNavigation() {
