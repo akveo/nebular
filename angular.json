@@ -269,6 +269,7 @@
             "polyfills": "docs/polyfills.ts",
             "assets": [
               "docs/assets",
+              "docs/articles",
               "docs/404.html",
               "docs/favicon.ico",
               "docs/favicon.png",
@@ -306,6 +307,11 @@
                   "glob": "**/*",
                   "ignore": ["examples/**/*"],
                   "output": "/assets"
+                },
+                {
+                  "input": "docs/articles",
+                  "glob": "**/*",
+                  "output": "/articles"
                 },
                 "docs/404.html",
                 "docs/favicon.ico",

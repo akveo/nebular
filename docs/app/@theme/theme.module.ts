@@ -58,6 +58,7 @@ import {
   NgdAnalytics,
   NgdMenuService,
   NgdMetadataService,
+  NgdArticleService,
 } from './services';
 import { AkveoServicesBanner } from './components/hubspot-cta/akveo-services-banner.component';
 
@@ -142,6 +143,7 @@ export class NgdThemeModule {
         NgdMenuService,
         NgdVisibilityService,
         NgdMetadataService,
+        NgdArticleService,
       ],
     };
   }
