@@ -12,11 +12,11 @@ import {
   OnInit,
 } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { Observable, Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 import { NgdMdSection } from '../../../@theme/services/text.service';
 import { NgdMdSectionsService } from '../../../@theme/services';
-import { Observable, Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'ngd-md-block',
