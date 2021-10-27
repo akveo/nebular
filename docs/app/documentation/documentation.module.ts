@@ -5,7 +5,7 @@
  */
 
 import { NgModule } from '@angular/core';
-import { NbCardModule } from '@nebular/theme';
+import { NbCardModule, NbSpinnerModule } from '@nebular/theme';
 
 import { NgdDocumentationRoutingModule } from './documentation-routing.module';
 import { NgdThemeModule } from '../@theme/theme.module';
@@ -16,12 +16,13 @@ import { NgdBlocksModule } from '../blocks/blocks.module';
 
 
 @NgModule({
-  imports: [
-    NgdDocumentationRoutingModule,
-    NgdThemeModule,
-    NbCardModule,
-    NgdBlocksModule,
-  ],
+    imports: [
+        NgdDocumentationRoutingModule,
+        NgdThemeModule,
+        NbCardModule,
+        NgdBlocksModule,
+        NbSpinnerModule,
+    ],
   declarations: [
     NgdPageComponent,
     NgdDocumentationComponent,

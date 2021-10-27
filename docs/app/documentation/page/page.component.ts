@@ -11,7 +11,7 @@ import { filter, map, publishReplay, refCount, tap, takeUntil } from 'rxjs/opera
 import { Subject } from 'rxjs';
 import { NB_WINDOW } from '@nebular/theme';
 import { NgdTabbedBlockComponent } from '../../blocks/components/tabbed-block/tabbed-block.component';
-import { NgdStructureService } from '../../@theme/services';
+import { NgdMdSection, NgdStructureService } from '../../@theme/services';
 
 @Component({
   selector: 'ngd-page',
@@ -21,6 +21,8 @@ import { NgdStructureService } from '../../@theme/services';
 export class NgdPageComponent implements OnInit, AfterContentChecked, OnDestroy {
 
   currentItem;
+  loading = false;
+  sections: NgdMdSection[] = [];
   private destroy$ = new Subject<void>();
 
   currentTabName: string = '';
@@ -80,7 +82,22 @@ export class NgdPageComponent implements OnInit, AfterContentChecked, OnDestroy 
       )
       .subscribe((item) => {
         this.currentItem = item;
+
+        this.markdownSectionsListener();
       });
+  }
+
+  protected markdownSectionsListener(): void {
+    const markdown = this.currentItem.children.find((block) => block.block === 'markdown');
+
+    if (markdown) {
+      this.loading = true;
+
+      markdown.sections.pipe(takeUntil(this.destroy$)).subscribe((sections) => {
+        this.loading = false;
+        this.sections = sections;
+      })
+    }
   }
 
   protected getCurrentTabName(): string {

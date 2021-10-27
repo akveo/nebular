@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 import { NgdMdSection } from '../../../@theme/services/text.service';
@@ -23,10 +23,7 @@ import { NgdMdSection } from '../../../@theme/services/text.service';
 export class NgdMdBLockComponent {
   @Input() sections: NgdMdSection[] = []
 
-  constructor(
-    private cd: ChangeDetectorRef,
-    private readonly domSanitizer: DomSanitizer) {
-  }
+  constructor(private readonly domSanitizer: DomSanitizer) {}
 
   getTemplate(content: string): SafeHtml {
     return this.domSanitizer.bypassSecurityTrustHtml(content);
