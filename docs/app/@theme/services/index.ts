@@ -12,3 +12,4 @@ export * from './analytics.service';
 export * from './menu.service';
 export * from './metadata.service';
 export * from './article.service';
+export * from './md-sections.service';
