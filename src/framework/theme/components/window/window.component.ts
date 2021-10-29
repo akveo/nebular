@@ -12,7 +12,9 @@ import {
   ComponentFactoryResolver,
   Input,
   AfterViewChecked,
+  ViewContainerRef,
 } from '@angular/core';
+import { TemplatePortal } from '@angular/cdk/portal';
 import { NbFocusTrap, NbFocusTrapFactoryService } from '../cdk/a11y/focus-trap';
 import { NbComponentPortal, NbComponentType, NbTemplatePortal } from '../cdk/overlay/mapping';
 import { NbOverlayContainerComponent } from '../cdk/overlay/overlay-container';
@@ -24,7 +26,10 @@ import { NbWindowRef } from './window-ref';
   template: `
     <nb-card>
       <nb-card-header>
-        <div cdkFocusInitial class="title" tabindex="-1">{{ config.title }}</div>
+        <ng-container *ngIf="titleTemplatePortal">
+          <ng-template [cdkPortalOutlet]="titleTemplatePortal"></ng-template>
+        </ng-container>
+        <div *ngIf="!titleTemplatePortal" cdkFocusInitial class="title" tabindex="-1">{{ config.title }}</div>
 
         <div class="buttons">
           <ng-container *ngIf="showMinimize">
@@ -91,6 +96,8 @@ export class NbWindowComponent implements OnInit, AfterViewChecked, OnDestroy {
 
   protected focusTrap: NbFocusTrap;
 
+  titleTemplatePortal: TemplatePortal<any> | undefined;
+
   constructor(
     @Inject(NB_WINDOW_CONTENT) public content: TemplateRef<any> | NbComponentType,
     @Inject(NB_WINDOW_CONTEXT) public context: Object,
@@ -99,6 +106,7 @@ export class NbWindowComponent implements OnInit, AfterViewChecked, OnDestroy {
     protected focusTrapFactory: NbFocusTrapFactoryService,
     protected elementRef: ElementRef,
     protected renderer: Renderer2,
+    protected viewContainerRef: ViewContainerRef,
   ) {}
 
   ngOnInit() {
@@ -108,6 +116,14 @@ export class NbWindowComponent implements OnInit, AfterViewChecked, OnDestroy {
 
     if (this.config.windowClass) {
       this.renderer.addClass(this.elementRef.nativeElement, this.config.windowClass);
+    }
+
+    if (this.config.titleTemplate instanceof TemplateRef) {
+      this.titleTemplatePortal = new TemplatePortal(
+        this.config.titleTemplate,
+        this.viewContainerRef,
+        { $implicit: this.config.titleTemplateContext },
+      );
     }
   }
 

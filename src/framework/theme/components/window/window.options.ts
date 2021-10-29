@@ -37,6 +37,17 @@ export class NbWindowConfig {
   title: string = '';
 
   /**
+   * Window title as template. Use it instead of `title` property.
+   */
+  titleTemplate?: TemplateRef<any>;
+
+  /**
+   * Title as template may receive data through `config.titleTemplateContext` property.
+   * Window title as Template. You can access context inside template as $implicit.
+   */
+  titleTemplateContext?: Object = {};
+
+  /**
    * Initial window state. Full screen by default.
    */
   initialState: NbWindowState = NbWindowState.FULL_SCREEN;
