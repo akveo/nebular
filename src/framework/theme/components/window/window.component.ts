@@ -26,10 +26,13 @@ import { NbWindowRef } from './window-ref';
   template: `
     <nb-card>
       <nb-card-header>
-        <ng-container *ngIf="titleTemplatePortal">
-          <ng-template [cdkPortalOutlet]="titleTemplatePortal"></ng-template>
-        </ng-container>
-        <div *ngIf="!titleTemplatePortal" cdkFocusInitial class="title" tabindex="-1">{{ config.title }}</div>
+        <div *ngIf="titleTemplatePortal; else textTitleTemplate" cdkFocusInitial>
+          <ng-container *ngTemplateOutlet="config.titleTemplate; context: {$implicit: config.titleTemplateContext}"></ng-container>
+        </div>
+
+        <ng-template #textTitleTemplate>
+          <div *ngIf="!titleTemplatePortal" cdkFocusInitial class="title" tabindex="-1">{{ config.title }}</div>
+        </ng-template>
 
         <div class="buttons">
           <ng-container *ngIf="showMinimize">
