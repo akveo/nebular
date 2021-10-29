@@ -1,6 +1,6 @@
-import { Injectable, Inject } from '@angular/core';
+import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
-import { Location } from '@angular/common';
+import { Location, isPlatformServer } from '@angular/common';
 
 import { filter, delay, map } from 'rxjs/operators';
 import { NB_WINDOW } from '@nebular/theme';
@@ -12,8 +12,11 @@ export class NgdAnalytics {
 
   constructor(@Inject(NB_WINDOW) private window,
               private location: Location,
-              private router: Router) {
-    this.enabled = this.window.location.href.indexOf('akveo.github.io') >= 0;
+              private router: Router,
+              @Inject(PLATFORM_ID) private platformId: Object) {
+    const isServer = isPlatformServer(platformId);
+
+    this.enabled = !isServer && this.window.location.href.indexOf('akveo.github.io') >= 0;
   }
 
   trackPageViews() {

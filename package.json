@@ -81,7 +81,8 @@
     "dev:ssr": "ng run docs:serve-ssr",
     "serve:ssr": "node docs/dist/server/main.js",
     "build:ssr": "ng build && ng run docs:server",
-    "prerender": "ng run docs:prerender"
+    "docs:prerender": "ng run docs:prerender",
+    "docs:build-prerender": "npm run docs:prepare && npm run docs:prerender && npm run docs:dirs"
   },
   "keywords": [
     "angular",

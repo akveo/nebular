@@ -88,7 +88,7 @@ export class NgdHeaderComponent implements OnInit {
 
   ngOnInit() {
     this.currentVersion$ = this.versionService.getCurrentVersion();
-    this.currentVersionName$ = this.currentVersion$.pipe(map((version: Version) => version.name));
+    this.currentVersionName$ = this.currentVersion$.pipe(map((version: Version) => version?.name ?? ''));
     this.supportedVersions$ = this.versionService.getSupportedVersions();
 
     this.showVersionSelect$ = this.supportedVersions$
