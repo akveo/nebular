@@ -1,4 +1,4 @@
-import { dest, src, task, series } from 'gulp';
+import { dest, src, series } from 'gulp';
 import { accessSync, readFileSync, writeFileSync } from 'fs';
 import { join } from 'path';
 import { DOCS_OUTPUT, EXTENSIONS } from '../config';
@@ -21,7 +21,6 @@ const EXAMPLES_SRC = [
   './src/playground/without-layout/**/*.*',
 ];
 const EXAMPLES_DEST = './docs/assets/examples';
-const EXAMPLES_DEST_PROD = './docs/dist/assets/examples';
 
 function copyExamples() {
   del.sync(EXAMPLES_DEST);
@@ -29,12 +28,6 @@ function copyExamples() {
     .pipe(replace(/\/\*\*.*\*\/\n\s*\n/s, ''))
     .pipe(dest(EXAMPLES_DEST));
 }
-
-task('copy-examples-prod', () => {
-  return src(EXAMPLES_SRC)
-    .pipe(replace(/\/\*\*.*\*\/\n\s*\n/s, ''))
-    .pipe(dest(EXAMPLES_DEST_PROD));
-});
 
 function validateExamples(done) {
   const docs = JSON.parse(readFileSync(DOCS_OUTPUT, 'utf8'));
