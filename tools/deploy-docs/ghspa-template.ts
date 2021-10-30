@@ -8,7 +8,7 @@ function removeTrailingSlash(path: string): string {
 }
 
 export function generateGithubSpaScript(versionsToRedirect: Version[]): string {
-  const paths: string[] = versionsToRedirect.map(v => v.path).map(removeTrailingSlash);
+  const paths: string[] = versionsToRedirect.map((v) => v.path).map(removeTrailingSlash);
 
   return `
 /**

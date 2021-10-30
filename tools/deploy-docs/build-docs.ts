@@ -48,25 +48,25 @@ export interface Version {
 
   log(`Cleaning up working directory (${WORK_DIR})`);
   await remove(WORK_DIR);
-}());
+})();
 
 function ensureSingleCurrentVersion(versions: Version[]) {
-  const currentVersion = versions.filter(v => v.isCurrent);
+  const currentVersion = versions.filter((v) => v.isCurrent);
   if (currentVersion.length !== 1) {
-    throw new Error(`Versions config error: Only one current version allowed.`)
+    throw new Error(`Versions config error: Only one current version allowed.`);
   }
 }
 
 async function buildDocs(versions: Version[]) {
   const ghspaScript = generateGithubSpaScript(versions);
 
-  return Promise.all(versions.map((version: Version) => {
-    const versionDistDir = version.isCurrent
-      ? OUT_DIR
-      : join(OUT_DIR, version.name);
+  return Promise.all(
+    versions.map((version: Version) => {
+      const versionDistDir = version.isCurrent ? OUT_DIR : join(OUT_DIR, version.name);
 
-    return prepareVersion(version, versionDistDir, ghspaScript);
-  }));
+      return prepareVersion(version, versionDistDir, ghspaScript);
+    }),
+  );
 }
 
 async function prepareVersion(version: Version, distDir: string, ghspaScript: string) {
