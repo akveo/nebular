@@ -26,12 +26,12 @@ import { NbWindowRef } from './window-ref';
   template: `
     <nb-card>
       <nb-card-header>
-        <div *ngIf="titleTemplatePortal; else textTitleTemplate" cdkFocusInitial>
+        <div *ngIf="titleTemplatePortal; else textTitleTemplate" cdkFocusInitial tabindex="-1">
           <ng-container *ngTemplateOutlet="config.titleTemplate; context: {$implicit: config.titleTemplateContext}"></ng-container>
         </div>
 
         <ng-template #textTitleTemplate>
-          <div *ngIf="!titleTemplatePortal" cdkFocusInitial class="title" tabindex="-1">{{ config.title }}</div>
+          <div cdkFocusInitial class="title" tabindex="-1">{{ config.title }}</div>
         </ng-template>
 
         <div class="buttons">
@@ -119,14 +119,6 @@ export class NbWindowComponent implements OnInit, AfterViewChecked, OnDestroy {
 
     if (this.config.windowClass) {
       this.renderer.addClass(this.elementRef.nativeElement, this.config.windowClass);
-    }
-
-    if (this.config.titleTemplate instanceof TemplateRef) {
-      this.titleTemplatePortal = new TemplatePortal(
-        this.config.titleTemplate,
-        this.viewContainerRef,
-        { $implicit: this.config.titleTemplateContext },
-      );
     }
   }
 
