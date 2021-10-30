@@ -28,8 +28,6 @@ env:
     - MODE=build
     - MODE=docs
     - MODE=lint
-    - MODE=deploy_dev
-    - MODE=publish_dev
 branches:
   only:
   - master
@@ -37,9 +35,6 @@ branches:
 
 matrix:
   fast_finish: true
-  allow_failures:
-    - env: MODE=deploy_dev
-    - env: MODE=publish_dev
 
 install:
   - npm install
