@@ -59,7 +59,7 @@
     "release:prepare": "npm run build:package",
     "release:validate": "npm-run-all release:prepare build:wp ci:lint e2e:wp && npm run test:wp -- --watch=false",
     "release": "npm-run-all release:validate publish",
-    "publish": "./scripts/publish.sh",
+    "publish": "./tools/publish.sh",
     "postinstall": "npm-run-all -p build:dev-schematics ngcc-compile",
     "gen:playground": "ng g .:playground",
     "gen:playground-module": "ng g .:playground-module",
