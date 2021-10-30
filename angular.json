@@ -220,7 +220,8 @@
             "scripts": [
               "node_modules/pace-js/pace.min.js",
               "node_modules/docsearch.js/dist/cdn/docsearch.min.js"
-            ]
+            ],
+            "allowedCommonJsDependencies": ["highlight.js"]
           },
           "configurations": {
             "production": {
