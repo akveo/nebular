@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-# Iterates over all modules bundled in the src/.lib and publish them
-for dir in ./src/.lib/*/
+# Iterates over all modules bundled in the dist/ and publish them
+for dir in ./dist/*/
 do
     dir=${dir%*/}
-    npm publish --access=public src/.lib/${dir##*/}
+    npm publish --access=public dist/${dir##*/}
 done

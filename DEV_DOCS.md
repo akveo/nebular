@@ -393,7 +393,7 @@ To start a new release (publish the framework packages on NPM) you need:
      Where `<version>` is version of package becoming LTS and `<tag>` is `v<major-version>-lts`. For example, when 4.6.3 becomes LTS, command would be: `npm dist-tag add @nebular/theme@4.6.3 v4-lts`
 
 1. create a new release branch called `release:v1.0.2`
-2. `npm run release:validate` - this will create ready for publishing packages in src/.lib then build prod & AOT builds of the playground app using prepared packages and then run e2e tests again it.
+2. `npm run release:validate` - this will create ready for publishing packages in dist/ then build prod & AOT builds of the playground app using prepared packages and then run e2e tests again it.
 3. MANUALLY update a version in main ./package.json to a new one
 4. - `npm run version:bump`
    - update version in `package-lock.json` and `packages-smoke/package-lock.json`
