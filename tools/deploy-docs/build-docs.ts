@@ -1,4 +1,5 @@
 import { join } from 'path';
+import { writeFile } from 'fs/promises';
 import { copy, mkdirp, remove, outputFile, writeJson, readJson } from 'fs-extra';
 
 import { generateGithubSpaScript } from './ghspa-template';
@@ -76,6 +77,7 @@ async function prepareVersion(version: Version, distDir: string, ghspaScript: st
   await checkoutVersion(version.checkoutTarget, projectDir);
   await runCommand('npm ci', { cwd: projectDir });
   await addVersionNameToPackageJson(version.name, join(projectDir, 'package.json'));
+  await addVersionTs(version, join(projectDir, 'package.json'));
   await buildDocsApp(projectDir, version.path);
   await copy(join(projectDir, 'docs/dist'), distDir);
   await outputFile(join(distDir, 'assets/ghspa.js'), ghspaScript);
@@ -104,6 +106,11 @@ async function addVersionNameToPackageJson(versionName: string, packageJsonPath:
   const packageJsonObject = await readJson(packageJsonPath);
   packageJsonObject.versionName = versionName;
   await writeJson(packageJsonPath, packageJsonObject, { EOL: '\n' });
+}
+
+async function addVersionTs(version: Version, versionTsPath: string) {
+  const source = `export const VERSION_NAME = '${version.name}';`;
+  await writeFile(versionTsPath, source, 'utf8');
 }
 
 async function buildDocsApp(projectDir: string, baseHref: string) {
