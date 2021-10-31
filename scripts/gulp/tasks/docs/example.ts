@@ -23,7 +23,7 @@ const EXAMPLES_SRC = [
   './src/playground/without-layout/**/*.*',
 ];
 const EXAMPLES_DEST = './docs/assets/examples';
-const EXAMPLES_DEST_PROD = './docs/dist/assets/examples';
+const EXAMPLES_DEST_PROD = './docs/dist/browser/assets/examples';
 
 task('copy-examples', () => {
   del.sync(EXAMPLES_DEST);

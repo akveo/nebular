@@ -77,7 +77,7 @@ async function prepareVersion(version: Version, distDir: string, ghspaScript: st
   await runCommand('npm install', { cwd: projectDir });
   await addVersionNameToPackageJson(version.name, join(projectDir, 'package.json'));
   await buildDocsApp(projectDir, version.path);
-  await copy(join(projectDir, 'docs/dist'), distDir);
+  await copy(join(projectDir, 'docs/dist/browser'), distDir);
   await outputFile(join(distDir, 'assets/ghspa.js'), ghspaScript);
 
   await remove(projectDir);
