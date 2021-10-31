@@ -10,7 +10,6 @@
 - [Release](#release)
 - [create a new component guide](#create-a-new-component-guide)
 - [Playground](#playground)
-- [TODO](#todo)
 
 # Things you must follow before contributing
 - Don’t overcomplicate
