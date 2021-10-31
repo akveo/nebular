@@ -491,9 +491,3 @@ If a component is just a helper and shouldn't has it's own route, you can put in
 Each module found will be added as a lazy route for closest parent module. Route path will be set to a module directory name.
 
 Then schematic will collect all component routes and write list into `./src/app/playground-components.ts` (used by docs app).
-
-# TODO
- - steps to start the development
- - describe framework and demo dependencies
- - create a new component guide
- - usage guide
