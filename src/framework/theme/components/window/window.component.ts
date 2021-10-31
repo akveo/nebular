@@ -12,9 +12,7 @@ import {
   ComponentFactoryResolver,
   Input,
   AfterViewChecked,
-  ViewContainerRef,
 } from '@angular/core';
-import { TemplatePortal } from '@angular/cdk/portal';
 import { NbFocusTrap, NbFocusTrapFactoryService } from '../cdk/a11y/focus-trap';
 import { NbComponentPortal, NbComponentType, NbTemplatePortal } from '../cdk/overlay/mapping';
 import { NbOverlayContainerComponent } from '../cdk/overlay/overlay-container';
@@ -26,7 +24,7 @@ import { NbWindowRef } from './window-ref';
   template: `
     <nb-card>
       <nb-card-header>
-        <div *ngIf="titleTemplatePortal; else textTitleTemplate" cdkFocusInitial tabindex="-1">
+        <div *ngIf="config.titleTemplate; else textTitleTemplate" cdkFocusInitial tabindex="-1">
           <ng-container *ngTemplateOutlet="config.titleTemplate; context: {$implicit: config.titleTemplateContext}"></ng-container>
         </div>
 
@@ -99,8 +97,6 @@ export class NbWindowComponent implements OnInit, AfterViewChecked, OnDestroy {
 
   protected focusTrap: NbFocusTrap;
 
-  titleTemplatePortal: TemplatePortal<any> | undefined;
-
   constructor(
     @Inject(NB_WINDOW_CONTENT) public content: TemplateRef<any> | NbComponentType,
     @Inject(NB_WINDOW_CONTEXT) public context: Object,
@@ -109,7 +105,6 @@ export class NbWindowComponent implements OnInit, AfterViewChecked, OnDestroy {
     protected focusTrapFactory: NbFocusTrapFactoryService,
     protected elementRef: ElementRef,
     protected renderer: Renderer2,
-    protected viewContainerRef: ViewContainerRef,
   ) {}
 
   ngOnInit() {
