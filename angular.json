@@ -391,14 +391,6 @@
         },
         "prerender": {
           "builder": "@nguniversal/builders:prerender",
-          "options": {
-            "routes": [
-              "/",
-              "/docs",
-              "/docs/guides/create-nebular-page",
-              "/example"
-            ]
-          },
           "configurations": {
             "production": {
               "browserTarget": "docs:build:production",

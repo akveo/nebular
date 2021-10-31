@@ -4,7 +4,7 @@ import { isAbsolute, join, resolve, sep } from 'path';
 
 import './example';
 import { structure as DOCS } from '../../../../docs/structure';
-import { DOCS_DIST, DOCS_SITE_URL } from '../config';
+import { DOCS_DIST, DOCS_SITE_URL, DOCS_DIR } from '../config';
 
 task(
   'docs',
@@ -17,6 +17,13 @@ task(
 task('create-docs-dirs', (done) => {
   const docsStructure = flatten('docs', routesTree(DOCS));
   createDirsStructure(docsStructure);
+
+  done();
+});
+
+task('create-docs-routes', (done) => {
+  const docsStructure = flatten('docs', routesTree(DOCS));
+  createRoutes(docsStructure);
 
   done();
 });
@@ -103,6 +110,10 @@ function flattenLeafs(root, arr) {
   });
 
   return res;
+}
+
+function createRoutes(dirs) {
+  writeFileSync(join(DOCS_DIR, 'routes.txt'), dirs.join('\r\n'));
 }
 
 function createDirsStructure(dirs) {

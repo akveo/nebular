@@ -4,8 +4,9 @@ export const ES5_BUILD_DIR = './.es5_build';
 export const LIB_DIR = './src/.lib';
 export const DOCS_OUTPUT = './docs/output.json';
 export const EXTENSIONS = ['ts', 'html', 'scss'];
-export const DOCS_DIST = './docs/dist';
+export const DOCS_DIST = './docs/dist/browser';
 export const DEV_SCHEMATICS_PATH = './schematics';
+export const DOCS_DIR = './docs';
 export const JS_PACKAGES = [
   'auth',
   'date-fns',

@@ -81,8 +81,9 @@
     "dev:ssr": "ng run docs:serve-ssr",
     "serve:ssr": "node docs/dist/server/main.js",
     "build:ssr": "ng build && ng run docs:server",
-    "docs:prerender": "ng run docs:prerender",
-    "docs:build-prerender": "npm run docs:prepare && npm run docs:prerender && npm run docs:dirs"
+    "docs:prerender": "ng run docs:prerender --routes-file ./docs/routes.txt",
+    "docs:build-prerender": "npm run docs:prepare && npm run docs:create-routes && npm run docs:prerender",
+    "docs:create-routes": "gulp create-docs-routes"
   },
   "keywords": [
     "angular",
