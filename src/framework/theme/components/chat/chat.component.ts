@@ -17,6 +17,8 @@ import {
   SimpleChanges,
   AfterContentInit,
   OnChanges,
+  Directive,
+  TemplateRef,
 } from '@angular/core';
 
 import { NbStatusService } from '../../services/status.service';
@@ -99,6 +101,15 @@ import { NbCustomMessageService } from './custom-message.service';
  *
  * <nb-chat-message>
  * </nb-chat-message> // chat message, available multiple types
+ * ```
+ *
+ * A custom template can be provided to title. It will be used instead of `[title]` input:
+ * ```ts
+ * <nb-chat>
+ *   <ng-template nbChatTitle>
+ *     Your custom template for title
+ *   </ng-template>
+ * </nb-chat>
  * ```
  *
  * Two users conversation showcase:
@@ -237,7 +248,15 @@ import { NbCustomMessageService } from './custom-message.service';
   selector: 'nb-chat',
   styleUrls: ['./chat.component.scss'],
   template: `
-    <div class="header">{{ title }}</div>
+    <div class="header">
+      <ng-container *ngIf="templateTitle; else textTitleTemplate"
+                    [ngTemplateOutlet]="templateTitle.templateRef">
+      </ng-container>
+      <ng-template #textTitleTemplate>
+        {{ title }}
+      </ng-template>
+    </div>
+
     <div class="scrollable" #scrollable>
       <div class="messages">
         <ng-content select="nb-chat-message"></ng-content>
@@ -253,6 +272,14 @@ import { NbCustomMessageService } from './custom-message.service';
   ],
 })
 export class NbChatComponent implements OnChanges, AfterContentInit, AfterViewInit {
+  @ContentChild(NbChatTitleDirective)
+  get templateTitle(): NbChatTitleDirective { return this._templateTitle; }
+  set templateTitle(value: NbChatTitleDirective) {
+    if (value) {
+      this._templateTitle = value;
+    }
+  }
+  protected _templateTitle: NbChatTitleDirective;
 
   @Input() title: string;
 
@@ -393,4 +420,11 @@ export class NbChatComponent implements OnChanges, AfterContentInit, AfterViewIn
     }
     return [];
   }
+}
+
+@Directive({
+  selector: `[nbChatTitle]`,
+})
+export class NbChatTitleDirective {
+  constructor(public templateRef: TemplateRef<any>) {}
 }

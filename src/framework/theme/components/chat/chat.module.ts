@@ -11,7 +11,7 @@ import { NbButtonModule } from '../button/button.module';
 import { NbInputModule } from '../input/input.module';
 import { NbIconModule } from '../icon/icon.module';
 
-import { NbChatComponent } from './chat.component';
+import { NbChatComponent, NbChatTitleDirective } from './chat.component';
 import { NbChatMessageComponent } from './chat-message.component';
 import { NbChatFormComponent } from './chat-form.component';
 import { NbChatMessageTextComponent } from './chat-message-text.component';
@@ -35,6 +35,7 @@ const NB_CHAT_COMPONENTS = [
 
 const NB_CHAT_DIRECTIVES = [
   NbChatCustomMessageDirective,
+  NbChatTitleDirective,
 ];
 
 @NgModule({
