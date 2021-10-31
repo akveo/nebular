@@ -50,3 +50,4 @@ debug.log
 local.log
 
 /schematics/dist
+/docs/routes.txt
