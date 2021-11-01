@@ -12,7 +12,6 @@
   "scripts": {
     "ng": "ng",
     "ngcc-compile": "ngcc --properties es2015 browser module main --first-only --create-ivy-entry-points",
-    "conventional-changelog": "conventional-changelog",
     "prestart": "npm run gen:playground",
     "start": "ng serve",
     "start:prod": "ng serve --configuration=production",
@@ -52,7 +51,7 @@
     "ci:test": "rimraf coverage && npm run build:package && npm run test:wp -- --code-coverage --watch=false && npm run test:schematics",
     "ci:e2e": "npm-run-all build:package e2e:wp",
     "version:bump": "gulp version",
-    "version:changelog": "npm run conventional-changelog -- -p angular -i CHANGELOG.md -s",
+    "version:changelog": "conventional-changelog -- -p angular -i CHANGELOG.md -s",
     "release:validate": "npm-run-all build:packages build:wp ci:lint e2e:wp && npm run test:wp -- --watch=false",
     "release": "npm-run-all release:validate publish",
     "publish": "./tools/publish.sh",
