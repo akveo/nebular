@@ -16,11 +16,13 @@ export class NgdSearchComponent implements AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.window.docsearch({
-      apiKey: 'fe0dbef6ee2b748314266d7d71d7dea3',
-      indexName: 'nebular',
-      inputSelector: '#doc-search',
-      debug: false,
-    });
+    if (this.window) {
+      this.window.docsearch({
+        apiKey: 'fe0dbef6ee2b748314266d7d71d7dea3',
+        indexName: 'nebular',
+        inputSelector: '#doc-search',
+        debug: false,
+      });
+    }
   }
 }
