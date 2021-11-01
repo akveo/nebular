@@ -20,11 +20,11 @@ jobs:
           node-version: 'lts/*'
           cache: 'npm'
       - run: npm install
-      - run: npm run build:package
+      - run: npm run build:packages
       - uses: actions/upload-artifact@v2
         with:
           name: built-packages
-          path: './src/.lib/*'
+          path: './src/dist/*'
           retention-days: 1
   build-docs:
     needs: setup
@@ -72,4 +72,3 @@ jobs:
       - run: |
           npm run ci:test
           npm install codecov -g && codecov
-          npm run test:schematics
