@@ -31,7 +31,9 @@
       text-align: nb-theme(context-menu-text-align);
 
       nb-icon.expand-state {
-        pointer-events: none;
+        svg {
+          pointer-events: none;
+        }
       }
     }
   }
