@@ -1,6 +1,6 @@
 import { TemplateRef, InjectionToken, ViewContainerRef } from '@angular/core';
 // Do not remove (TS4023).
-// tslint:disable-next-line
+// eslint-disable-next-line
 import { ComponentType } from '@angular/cdk/overlay';
 import { NbComponentType } from '../cdk/overlay/mapping';
 

@@ -2,20 +2,13 @@
   "extends": "../tsconfig.json",
   "compilerOptions": {
     "outDir": "../out-tsc/app",
-    "baseUrl": "./",
-    "types": [],
-    "paths": {
-      "@nebular/*": [
-        "./framework/*/public_api.ts"
-      ]
-    }
+    "types": []
   },
   "files": [
     "main.ts",
     "polyfills.ts"
   ],
-  "exclude": [
-    "test.ts",
-    "**/*.spec.ts"
+  "include": [
+    "**/*.d.ts"
   ]
 }
