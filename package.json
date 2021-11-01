@@ -140,7 +140,6 @@
     "karma-coverage": "~2.0.3",
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "~1.7.0",
-    "karma-sauce-launcher": "1.2.0",
     "karma-spec-reporter": "0.0.32",
     "lint-staged": "^11.2.3",
     "ng-packagr": "^12.2.3",
