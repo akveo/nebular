@@ -42,7 +42,10 @@ export class NgdPageComponent implements OnInit, AfterContentChecked, OnDestroy 
 
   ngOnInit() {
     this.handlePageNavigation();
-    this.window.history.scrollRestoration = 'manual';
+
+    if (this.window) {
+      this.window.history.scrollRestoration = 'manual';
+    }
   }
 
   ngAfterContentChecked() {

@@ -1,5 +1,6 @@
-import { Component, ElementRef, Inject, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Inject, Input, OnInit, PLATFORM_ID, ViewChild } from '@angular/core';
 import { NB_DOCUMENT, NB_WINDOW } from '@nebular/theme';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'ngd-akveo-services-banner',
@@ -31,10 +32,17 @@ export class AkveoServicesBanner implements OnInit {
 
   constructor(private host: ElementRef,
               @Inject(NB_DOCUMENT) private document,
-              @Inject(NB_WINDOW) private window) {
-  }
+              @Inject(NB_WINDOW) private window,
+              @Inject(PLATFORM_ID) private platformId: Object,
+  ) {}
 
   ngOnInit() {
+    const isBrowser = isPlatformBrowser(this.platformId);
+
+    if (!isBrowser) {
+      return;
+    }
+
     if (this.window?.hbspt?.cta?.load) {
       this.loadCta();
     } else {
