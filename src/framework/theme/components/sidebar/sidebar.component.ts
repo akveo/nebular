@@ -324,7 +324,7 @@ export class NbSidebarComponent implements OnInit, OnDestroy {
         filter(({ tag }) => !this.tag || this.tag === tag),
         takeUntil(this.destroy$),
       )
-      .subscribe(({ compact }) => this.toggle(compact));
+      .subscribe(({ compact, tag }) => this.toggle(compact, tag));
 
     this.sidebarService.onExpand()
       .pipe(
@@ -414,6 +414,7 @@ export class NbSidebarComponent implements OnInit, OnDestroy {
    * Toggles sidebar state (expanded|collapsed|compacted)
    * @param {boolean} compact If true, then sidebar state will be changed between expanded & compacted,
    * otherwise - between expanded & collapsed. False by default.
+   * @param {string} tag If you have multiple sidebars on the page, mark them with `tag` input property and pass it here
    *
    * Toggle sidebar state
    *
@@ -421,7 +422,7 @@ export class NbSidebarComponent implements OnInit, OnDestroy {
    * this.sidebar.toggle(true);
    * ```
    */
-  toggle(compact: boolean = false) {
+  toggle(compact: boolean = false, tag?: string) {
     if (this.responsive) {
       if (this.responsiveState === 'mobile') {
         compact = false;
@@ -429,9 +430,9 @@ export class NbSidebarComponent implements OnInit, OnDestroy {
     }
 
     if (this.state === 'compacted' || this.state === 'collapsed') {
-      this.updateState('expanded');
+      this.sidebarService.expand(tag);
     } else {
-      this.updateState(compact ? 'compacted' : 'collapsed');
+      compact ? this.sidebarService.compact(tag) : this.sidebarService.collapse(tag);
     }
   }
 
