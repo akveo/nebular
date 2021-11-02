@@ -1,58 +1,59 @@
 import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NbChatMessageComponent, NbChatModule, NbThemeModule } from '@nebular/theme';
-import { NbCustomMessageService } from './custom-message.service';
+import { NbChatMessageComponent, NbChatModule, NbThemeModule, NbCustomMessageService } from '@nebular/theme';
 
 @Component({
   selector: 'nb-chat-message-test',
   template: `
     <nb-chat size="large">
-    <nb-chat-message *ngFor="let msg of messages"
-                     [type]="msg.type"
-                     [message]="msg.text"
-                     [reply]="msg.reply"
-                     [sender]="msg.user.name"
-                     [date]="msg.date"
-                     [avatar]="msg.user.avatar"
-                     [customMessageData]="msg.optionalData">
-
-      <div *nbCustomMessage="'link'; let data">
-        <a [href]="data.href">{{ data.label }}</a>
-      </div>
-    </nb-chat-message>
-      <nb-chat-form [dropFiles]="false">
-      </nb-chat-form>
+      <nb-chat-message
+        *ngFor="let msg of messages"
+        [type]="msg.type"
+        [message]="msg.text"
+        [reply]="msg.reply"
+        [sender]="msg.user.name"
+        [date]="msg.date"
+        [avatar]="msg.user.avatar"
+        [customMessageData]="msg.optionalData"
+      >
+        <div *nbCustomMessage="'link'; let data">
+          <a [href]="data.href">{{ data.label }}</a>
+        </div>
+      </nb-chat-message>
+      <nb-chat-form [dropFiles]="false"> </nb-chat-form>
     </nb-chat>
-    `,
+  `,
 })
 export class NbChatMessageTestComponent {
   messages = [];
 
   loadMessages(): void {
-    this.messages = [{
-      reply: false,
-      type: 'link',
-      optionalData: {
-        href: 'https://akveo.github.io/ngx-admin/',
-        label: 'Visit Akveo Nebular',
+    this.messages = [
+      {
+        reply: false,
+        type: 'link',
+        optionalData: {
+          href: 'https://akveo.github.io/ngx-admin/',
+          label: 'Visit Akveo Nebular',
+        },
+        date: new Date(),
+        user: {
+          name: 'Frodo Baggins',
+          avatar: 'https://i.gifer.com/no.gif',
+        },
       },
-      date: new Date(),
-      user: {
-        name: 'Frodo Baggins',
-        avatar: 'https://i.gifer.com/no.gif',
+      {
+        text: 'Hello, how are you?',
+        reply: true,
+        type: 'text',
+        date: new Date(),
+        user: {
+          name: 'Bilbo Baggins',
+          avatar: '',
+        },
       },
-    },
-    {
-      text: 'Hello, how are you?',
-      reply: true,
-      type: 'text',
-      date: new Date(),
-      user: {
-        name: 'Bilbo Baggins',
-        avatar: '',
-      },
-    }];
+    ];
   }
 }
 
@@ -88,8 +89,6 @@ describe('Chat-message component: NbChatMessageTestComponent', () => {
     const linkLabel = customMessageElement.textContent;
     expect(linkLabel).toBe('Visit Akveo Nebular');
   });
-
-
 });
 
 describe('Component: NbChatMessageComponent', () => {

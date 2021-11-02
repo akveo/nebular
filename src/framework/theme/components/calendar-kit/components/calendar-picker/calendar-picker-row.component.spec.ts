@@ -9,11 +9,13 @@ import { By } from '@angular/platform-browser';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { DatePipe } from '@angular/common';
 
-import { NbCalendarPickerRowComponent } from './calendar-picker-row.component';
-import { NbCalendarDayCellComponent } from '../calendar-day-picker/calendar-day-cell.component';
-import { NbDateService } from '../../services/date.service';
-import { NbNativeDateService } from '../../services/native-date.service';
-import { NbCalendarKitModule } from '../../calendar-kit.module';
+import {
+  NbCalendarPickerRowComponent,
+  NbCalendarDayCellComponent,
+  NbDateService,
+  NbNativeDateService,
+  NbCalendarKitModule,
+} from '@nebular/theme';
 
 describe('Component: NbCalendarPickerRow', () => {
   let fixture: ComponentFixture<NbCalendarPickerRowComponent<Date, Date>>;

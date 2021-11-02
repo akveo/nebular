@@ -5,17 +5,14 @@
  */
 
 import { TestBed, inject, waitForAsync } from '@angular/core/testing';
-import { NbAclService } from './acl.service';
-import { NB_SECURITY_OPTIONS_TOKEN } from '../security.options';
+import { NbAclService, NB_SECURITY_OPTIONS_TOKEN } from '@nebular/security';
 import { deepExtend } from '../../auth/helpers'; // TODO: common module?
-
 
 let aclService: NbAclService;
 
-function sharedAclTests (defaultSettings) {
-
+function sharedAclTests(defaultSettings) {
   it(`should store different object`, () => {
-    expect(defaultSettings.accessControl).not.toBe(aclService['state']);
+    expect(defaultSettings.accessControl).not.toBe(aclService.state);
   });
 
   it(`forbidden for any role - permission - resource`, () => {
@@ -29,7 +26,7 @@ function sharedAclTests (defaultSettings) {
     };
 
     aclService.register('guest', null, {});
-    expect(aclService['state']).toEqual(modifiedRoles);
+    expect(aclService.state).toEqual(modifiedRoles);
   });
 
   it(`can register a role with default values`, () => {
@@ -39,7 +36,7 @@ function sharedAclTests (defaultSettings) {
     };
 
     aclService.register('guest');
-    expect(aclService['state']).toEqual(modifiedRoles);
+    expect(aclService.state).toEqual(modifiedRoles);
   });
 
   it(`can register a role with custom values`, () => {
@@ -50,7 +47,7 @@ function sharedAclTests (defaultSettings) {
     };
 
     aclService.register('guest', null, { view: ['users'] });
-    expect(aclService['state']).toEqual(modifiedRoles);
+    expect(aclService.state).toEqual(modifiedRoles);
   });
 
   it(`will rewrite newly registered role`, () => {
@@ -62,7 +59,7 @@ function sharedAclTests (defaultSettings) {
       view: ['users'],
     };
     aclService.register('guest', null, { view: ['users'] });
-    expect(aclService['state']).toEqual(modifiedRoles);
+    expect(aclService.state).toEqual(modifiedRoles);
 
     modifiedRoles = deepExtend({}, defaultSettings.accessControl);
     modifiedRoles.guest = {
@@ -70,7 +67,7 @@ function sharedAclTests (defaultSettings) {
       edit: ['users'],
     };
     aclService.register('guest', null, { edit: ['users'] });
-    expect(aclService['state']).toEqual(modifiedRoles);
+    expect(aclService.state).toEqual(modifiedRoles);
   });
 
   it(`can register multiple roles`, () => {
@@ -83,7 +80,7 @@ function sharedAclTests (defaultSettings) {
     };
 
     aclService.register('guest', null, { view: ['users'] });
-    expect(aclService['state']).toEqual(modifiedRoles);
+    expect(aclService.state).toEqual(modifiedRoles);
 
     modifiedRoles = deepExtend({}, defaultSettings.accessControl);
     modifiedRoles.guest = {
@@ -95,17 +92,19 @@ function sharedAclTests (defaultSettings) {
       edit: ['users'],
     };
     aclService.register('user', 'guest', { edit: ['users'] });
-    expect(aclService['state']).toEqual(modifiedRoles);
+    expect(aclService.state).toEqual(modifiedRoles);
   });
 
   it(`cannot register a role with an empty name`, () => {
-    expect(() => aclService.register('', null, { view: ['users'] }))
-      .toThrow(new Error('NbAclService: role name cannot be empty'));
+    expect(() => aclService.register('', null, { view: ['users'] })).toThrow(
+      new Error('NbAclService: role name cannot be empty'),
+    );
   });
 
   it(`cannot check bulk resource`, () => {
-    expect(() => aclService.can('guest', 'edit', '*'))
-      .toThrow(new Error(`NbAclService: cannot use empty or bulk '*' resource placeholder with 'can' method`));
+    expect(() => aclService.can('guest', 'edit', '*')).toThrow(
+      new Error(`NbAclService: cannot use empty or bulk '*' resource placeholder with 'can' method`),
+    );
   });
 
   it(`can handle permissions`, () => {
@@ -209,8 +208,7 @@ function sharedAclTests (defaultSettings) {
   });
 
   it(`cannot allow empty role for 'allow' method`, () => {
-    expect(() => aclService.allow('', null, 'users' ))
-      .toThrow(new Error('NbAclService: role name cannot be empty'));
+    expect(() => aclService.allow('', null, 'users')).toThrow(new Error('NbAclService: role name cannot be empty'));
   });
 
   it(`should allow new role`, () => {
@@ -227,7 +225,6 @@ function sharedAclTests (defaultSettings) {
     expect(aclService.can('guest', 'view', 'users')).toBe(true);
     expect(aclService.can('guest', 'edit', 'users')).toBe(true);
   });
-
 
   it(`should allow new permissions on parent role`, () => {
     aclService.register('guest', null, { view: ['users'] });
@@ -253,7 +250,6 @@ function sharedAclTests (defaultSettings) {
   });
 
   it(`cannot be changed by reference through module options`, () => {
-
     const settings = {
       accessControl: {
         guest: {
@@ -274,13 +270,13 @@ function sharedAclTests (defaultSettings) {
     expect(aclService.can('super_user', 'view', 'users')).toBe(false);
     expect(aclService.can('super_user', 'edit', 'users')).toBe(false);
 
-    settings.accessControl['admin'] =  {
+    settings.accessControl.admin = {
       parent: 'guest',
       manage: ['all'],
       view: ['users'],
     };
 
-    settings.accessControl['admin'] =  {
+    settings.accessControl.admin = {
       parent: 'guest',
       manage: ['all'],
       edit: ['users'],
@@ -293,7 +289,6 @@ function sharedAclTests (defaultSettings) {
   });
 
   it(`cannot be changed by reference through allow`, () => {
-
     const resources = ['dashboard'];
 
     aclService.allow('super_user', 'view', resources);
@@ -304,22 +299,20 @@ function sharedAclTests (defaultSettings) {
   });
 
   it(`cannot be changed by reference through register`, () => {
-
     const abilities = { view: ['users'] };
 
     aclService.register('moderator', null, abilities);
 
     expect(aclService.can('moderator', 'view', 'users')).toBe(true);
 
-    abilities['view'] = ['users', 'dashboard'];
-    abilities['edit'] = ['users'];
+    abilities.view = ['users', 'dashboard'];
+    abilities.edit = ['users'];
     expect(aclService.can('moderator', 'view', 'users')).toBe(true);
     expect(aclService.can('moderator', 'view', 'dashboard')).toBe(false);
     expect(aclService.can('moderator', 'edit', 'users')).toBe(false);
   });
 
   it(`can accept roles as string`, () => {
-
     aclService.register('role', null, { view: 'all', edit: '*' });
 
     expect(aclService.can('role', 'view', 'all')).toBe(true);
@@ -329,39 +322,33 @@ function sharedAclTests (defaultSettings) {
   });
 }
 
-
 describe('acl-service', () => {
-
   describe('with default settings', () => {
-
     beforeEach(() => {
       // Configure testbed to prepare services
       TestBed.configureTestingModule({
-        providers: [
-          { provide: NB_SECURITY_OPTIONS_TOKEN, useValue: {} },
-          NbAclService,
-        ],
+        providers: [{ provide: NB_SECURITY_OPTIONS_TOKEN, useValue: {} }, NbAclService],
       });
     });
 
     // Single async inject to save references; which are used in all tests below
-    beforeEach(waitForAsync(inject(
-      [NbAclService],
-      (_aclService) => {
-        aclService = _aclService
-      },
-    )));
+    beforeEach(
+      waitForAsync(
+        inject([NbAclService], (_aclService) => {
+          aclService = _aclService;
+        }),
+      ),
+    );
 
     it(`has empty default state`, () => {
-      expect(aclService['state']).toEqual({});
+      expect(aclService.state).toEqual({});
     });
 
     sharedAclTests({ accessControl: {} });
   });
 
   describe('with some roles settings', () => {
-
-     const defaultSettings = {
+    const defaultSettings = {
       accessControl: {
         guest: {
           parent: null,
@@ -385,15 +372,16 @@ describe('acl-service', () => {
     });
 
     // Single async inject to save references; which are used in all tests below
-    beforeEach(waitForAsync(inject(
-      [NbAclService],
-      (_aclService) => {
-        aclService = _aclService
-      },
-    )));
+    beforeEach(
+      waitForAsync(
+        inject([NbAclService], (_aclService) => {
+          aclService = _aclService;
+        }),
+      ),
+    );
 
     it(`has predefined default state`, () => {
-      expect(aclService['state']).toEqual(defaultSettings.accessControl);
+      expect(aclService.state).toEqual(defaultSettings.accessControl);
     });
 
     sharedAclTests(defaultSettings);
@@ -406,7 +394,6 @@ describe('acl-service', () => {
   });
 
   describe('with some roles settings (not cloned)', () => {
-
     const defaultSettings = {
       accessControl: {
         guest: {
@@ -423,23 +410,21 @@ describe('acl-service', () => {
     beforeEach(() => {
       // Configure testbed to prepare services
       TestBed.configureTestingModule({
-        providers: [
-          { provide: NB_SECURITY_OPTIONS_TOKEN, useFactory: () => defaultSettings },
-          NbAclService,
-        ],
+        providers: [{ provide: NB_SECURITY_OPTIONS_TOKEN, useFactory: () => defaultSettings }, NbAclService],
       });
     });
 
     // Single async inject to save references; which are used in all tests below
-    beforeEach(waitForAsync(inject(
-      [NbAclService],
-      (_aclService) => {
-        aclService = _aclService
-      },
-    )));
+    beforeEach(
+      waitForAsync(
+        inject([NbAclService], (_aclService) => {
+          aclService = _aclService;
+        }),
+      ),
+    );
 
     it(`has predefined default state`, () => {
-      expect(aclService['state']).toEqual(defaultSettings.accessControl);
+      expect(aclService.state).toEqual(defaultSettings.accessControl);
     });
 
     sharedAclTests(defaultSettings);
@@ -452,7 +437,6 @@ describe('acl-service', () => {
   });
 
   describe('with bulk resources', () => {
-
     const defaultSettings = {
       accessControl: {
         guest: {
@@ -482,15 +466,16 @@ describe('acl-service', () => {
     });
 
     // Single async inject to save references; which are used in all tests below
-    beforeEach(waitForAsync(inject(
-      [NbAclService],
-      (_aclService) => {
-        aclService = _aclService
-      },
-    )));
+    beforeEach(
+      waitForAsync(
+        inject([NbAclService], (_aclService) => {
+          aclService = _aclService;
+        }),
+      ),
+    );
 
     it(`has predefined default state`, () => {
-      expect(aclService['state']).toEqual(defaultSettings.accessControl);
+      expect(aclService.state).toEqual(defaultSettings.accessControl);
     });
 
     sharedAclTests(defaultSettings);
