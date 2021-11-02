@@ -12,6 +12,7 @@ let aclService: NbAclService;
 
 function sharedAclTests(defaultSettings) {
   it(`should store different object`, () => {
+    // @ts-ignore
     expect(defaultSettings.accessControl).not.toBe(aclService.state);
   });
 
@@ -26,6 +27,7 @@ function sharedAclTests(defaultSettings) {
     };
 
     aclService.register('guest', null, {});
+    // @ts-ignore
     expect(aclService.state).toEqual(modifiedRoles);
   });
 
@@ -36,6 +38,7 @@ function sharedAclTests(defaultSettings) {
     };
 
     aclService.register('guest');
+    // @ts-ignore
     expect(aclService.state).toEqual(modifiedRoles);
   });
 
@@ -47,6 +50,7 @@ function sharedAclTests(defaultSettings) {
     };
 
     aclService.register('guest', null, { view: ['users'] });
+    // @ts-ignore
     expect(aclService.state).toEqual(modifiedRoles);
   });
 
@@ -59,6 +63,7 @@ function sharedAclTests(defaultSettings) {
       view: ['users'],
     };
     aclService.register('guest', null, { view: ['users'] });
+    // @ts-ignore
     expect(aclService.state).toEqual(modifiedRoles);
 
     modifiedRoles = deepExtend({}, defaultSettings.accessControl);
@@ -67,6 +72,7 @@ function sharedAclTests(defaultSettings) {
       edit: ['users'],
     };
     aclService.register('guest', null, { edit: ['users'] });
+    // @ts-ignore
     expect(aclService.state).toEqual(modifiedRoles);
   });
 
@@ -80,6 +86,7 @@ function sharedAclTests(defaultSettings) {
     };
 
     aclService.register('guest', null, { view: ['users'] });
+    // @ts-ignore
     expect(aclService.state).toEqual(modifiedRoles);
 
     modifiedRoles = deepExtend({}, defaultSettings.accessControl);
@@ -92,6 +99,7 @@ function sharedAclTests(defaultSettings) {
       edit: ['users'],
     };
     aclService.register('user', 'guest', { edit: ['users'] });
+    // @ts-ignore
     expect(aclService.state).toEqual(modifiedRoles);
   });
 
@@ -270,12 +278,14 @@ function sharedAclTests(defaultSettings) {
     expect(aclService.can('super_user', 'view', 'users')).toBe(false);
     expect(aclService.can('super_user', 'edit', 'users')).toBe(false);
 
+    // @ts-ignore
     settings.accessControl.admin = {
       parent: 'guest',
       manage: ['all'],
       view: ['users'],
     };
 
+    // @ts-ignore
     settings.accessControl.admin = {
       parent: 'guest',
       manage: ['all'],
@@ -306,6 +316,7 @@ function sharedAclTests(defaultSettings) {
     expect(aclService.can('moderator', 'view', 'users')).toBe(true);
 
     abilities.view = ['users', 'dashboard'];
+    // @ts-ignore
     abilities.edit = ['users'];
     expect(aclService.can('moderator', 'view', 'users')).toBe(true);
     expect(aclService.can('moderator', 'view', 'dashboard')).toBe(false);
@@ -341,6 +352,7 @@ describe('acl-service', () => {
     );
 
     it(`has empty default state`, () => {
+      // @ts-ignore
       expect(aclService.state).toEqual({});
     });
 
@@ -381,6 +393,7 @@ describe('acl-service', () => {
     );
 
     it(`has predefined default state`, () => {
+      // @ts-ignore
       expect(aclService.state).toEqual(defaultSettings.accessControl);
     });
 
@@ -424,6 +437,7 @@ describe('acl-service', () => {
     );
 
     it(`has predefined default state`, () => {
+      // @ts-ignore
       expect(aclService.state).toEqual(defaultSettings.accessControl);
     });
 
@@ -475,6 +489,7 @@ describe('acl-service', () => {
     );
 
     it(`has predefined default state`, () => {
+      // @ts-ignore
       expect(aclService.state).toEqual(defaultSettings.accessControl);
     });
 
