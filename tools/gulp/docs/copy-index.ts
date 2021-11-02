@@ -8,12 +8,19 @@ import { task } from 'gulp';
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'fs';
 import { isAbsolute, join, resolve, sep } from 'path';
 import { structure as DOCS_STRUCTURE } from '../../../docs/structure';
-import { DOCS_DIST } from '../config';
+import { DOCS_DIR, DOCS_DIST } from '../config';
 import { flatten, routesTree } from './docs-utils';
 
 task('docs-copy-index', (done) => {
   const docsStructure = flatten('docs', routesTree(DOCS_STRUCTURE));
   createDirsStructure(docsStructure);
+
+  done();
+});
+
+task('create-docs-routes', (done) => {
+  const docsStructure = flatten('docs', routesTree(DOCS_STRUCTURE));
+  createRoutes(docsStructure);
 
   done();
 });
@@ -28,6 +35,10 @@ function createDirsStructure(dirs) {
 
     writeFileSync(join(fullPath, 'index.html'), index);
   });
+}
+
+function createRoutes(dirs) {
+  writeFileSync(join(DOCS_DIR, 'routes.txt'), dirs.join('\r\n'));
 }
 
 function mkDirByPathSync(targetDir) {

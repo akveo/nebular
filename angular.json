@@ -301,6 +301,60 @@
               "docs/**/*.html"
             ]
           }
+        },
+        "server": {
+          "builder": "@angular-devkit/build-angular:server",
+          "options": {
+            "outputPath": "dist/server",
+            "main": "docs/server.ts",
+            "tsConfig": "docs/tsconfig.server.json",
+            "optimization": false,
+            "sourceMap": true,
+            "extractLicenses": false
+          },
+          "configurations": {
+            "production": {
+              "outputHashing": "media",
+              "fileReplacements": [
+                {
+                  "replace": "docs/environments/environment.ts",
+                  "with": "docs/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "sourceMap": false,
+              "extractLicenses": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve-ssr": {
+          "builder": "@nguniversal/builders:ssr-dev-server",
+          "configurations": {
+            "development": {
+              "browserTarget": "docs:build:development",
+              "serverTarget": "docs:server:development"
+            },
+            "production": {
+              "browserTarget": "docs:build:production",
+              "serverTarget": "docs:server:production"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "prerender": {
+          "builder": "@nguniversal/builders:prerender",
+          "configurations": {
+            "production": {
+              "browserTarget": "docs:build:production",
+              "serverTarget": "docs:server:production"
+            },
+            "development": {
+              "browserTarget": "docs:build:development",
+              "serverTarget": "docs:server:development"
+            }
+          },
+          "defaultConfiguration": "production"
         }
       }
     },
