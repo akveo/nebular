@@ -1038,7 +1038,7 @@ describe('password-auth-strategy', () => {
       strategy.setOptions({
         name: ownerStrategyName,
         token: {
-          getter: (module: string, res: HttpResponse<Object>) => res.body.token,
+          getter: (module: string, res: HttpResponse<{ token: string }>) => res.body.token,
         },
       });
     });
@@ -1186,7 +1186,7 @@ describe('password-auth-strategy', () => {
           key: 'token',
         },
         messages: {
-          getter: (module: string, res: HttpResponse<Object>) => res.body.messages,
+          getter: (module: string, res: HttpResponse<{ messages: string[] }>) => res.body.messages,
         },
         errors: {
           getter: (module: string, res: HttpErrorResponse) => res.error.errors,
