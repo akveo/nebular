@@ -46,26 +46,22 @@ module.exports = function (config) {
         os_version: '10',
       },
     },
-    browserStack: {
-      project: 'Nebular Unit Tests',
-      startTunnel: false,
-      retryLimit: 1,
-      timeout: 600,
-      pollingTimeout: 20000,
-      video: false,
-    },
   };
 
-  if (process.env['TRAVIS']) {
-    const buildId = `TRAVIS #${process.env['TRAVIS_BUILD_NUMBER']} (${process.env['TRAVIS_BUILD_ID']})`;
-    const key = require('./scripts/ci/browserstack/config');
+  if (process.env.CI) {
+    config.browserStack = {
+      startTunnel: false,
+      build: process.env.BROWSERSTACK_BUILD_NAME,
+      project: process.env.BROWSERSTACK_PROJECT_NAME,
+      tunnelIdentifier: process.env.BROWSERSTACK_LOCAL_IDENTIFIER,
+      timeout: 600,
+      video: false,
+      user: process.env.BROWSERSTACK_USERNAME,
+      key: process.env.BROWSERSTACK_ACCESS_KEY,
+    };
     configuration.singleRun = true;
-    configuration.reporters.push('BrowserStack');
-    configuration.browserStack.build = buildId;
-    configuration.browserStack.tunnelIdentifier = process.env['TRAVIS_JOB_ID'];
-    configuration.browserStack.username = process.env['BROWSER_STACK_USERNAME'];
-    configuration.browserStack.accessKey = key;
     configuration.browsers = ['BrowserstackChromeCI'];
+    configuration.reporters.push('BrowserStack');
   }
 
   config.set(configuration);

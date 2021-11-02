@@ -1,5 +1,5 @@
 name: PR check
-on: [push]
+on: [ push ]
 jobs:
   setup:
     runs-on: ubuntu-latest
@@ -69,6 +69,20 @@ jobs:
           node-version: '14'
           cache: 'npm'
       - run: npm install
-      - run: |
-          npm run ci:test
-          npm install codecov -g && codecov
+      - name: BrowserStack Setup
+        uses: 'browserstack/github-actions@master'
+        with:
+          username: ${{ secrets.BROWSERSTACK_USERNAME }}
+          access-key: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
+      - name: Start BrowserStackLocal Tunnel
+        uses: browserstack/github-actions/setup-local@1
+        with:
+          local-testing: start
+      - name: Test packages
+        run: npm run test playground -- -c=production-wp --watch=false
+      - name: Stop BrowserStackLocal Tunnel
+        uses: browserstack/github-actions/setup-local@1
+        with:
+          local-testing: stop
+      - name: Upload coverage to codecov
+        uses: codecov/codecov-action@v2
