@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NbChatMessageComponent, NbChatModule, NbThemeModule, NbCustomMessageService } from '@nebular/theme';
+import { NbChatMessageComponent, NbChatModule, NbThemeModule, NbChatCustomMessageService } from '@nebular/theme';
 
 @Component({
   selector: 'nb-chat-message-test',
@@ -98,7 +98,7 @@ describe('Component: NbChatMessageComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [BrowserAnimationsModule, NbThemeModule.forRoot(), NbChatModule],
-      providers: [NbCustomMessageService],
+      providers: [NbChatCustomMessageService],
     });
 
     fixture = TestBed.createComponent(NbChatMessageComponent);
