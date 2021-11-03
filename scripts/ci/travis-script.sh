@@ -27,10 +27,6 @@ fi
 
 if [[ "${MODE}" = docs ]]; then
   npm run ci:docs
-elif [[ "${MODE}" = deploy_dev ]]; then
-  deploy_dev
-elif [[ "${MODE}" = publish_dev ]]; then
-  publish_dev
 elif [[ "${MODE}" = deploy_docs ]]; then
   deploy_docs
   exit 0

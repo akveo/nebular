@@ -38,6 +38,7 @@ testem.log
 /docs/assets/examples
 /docs/dist
 /packages-smoke/dist
+.eslintcache
 
 # e2e
 /e2e/*.js
@@ -49,4 +50,4 @@ Thumbs.db
 debug.log
 local.log
 
-/schematics/dist
+/tools/dev-schematics/dist
