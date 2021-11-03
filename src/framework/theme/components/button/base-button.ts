@@ -20,7 +20,7 @@ export type NbButtonAppearance = 'filled' | 'outline' | 'ghost' | 'hero';
 export type NbButtonProperties = Pick<NbButton, 'appearance' | 'size' | 'shape' | 'status' | 'disabled'> & Object;
 
 @Directive()
-// tslint:disable-next-line:directive-class-suffix
+// eslint-disable-next-line @angular-eslint/directive-class-suffix
 export abstract class NbButton implements AfterViewInit {
   /**
    * Button size, available sizes:

@@ -5,23 +5,21 @@ packages_smoke() {
   PROJECT="packages-smoke"
 
   echo "Building packages"
-  npm run release:prepare
+  npm run build:packages
 
   echo "Setting up playground application for testing"
   rm -rf ../${PROJECT}
   cp -r ./${PROJECT} ../${PROJECT}
   cd ../${PROJECT}
   mkdir -p .lib
-  cp -r ../nebular/src/.lib/* ./.lib
+  cp -r ../nebular/dist/* ./.lib
 
   echo "Installing built packages"
   npm install
 
   echo "Verifying application build"
   npm run build -- --configuration=production
-  npm run build -- --configuration=production-2015
   npm run e2e
-  npm run e2e -- --configuration=production-2015
 
   echo "Run with ssr"
   npm run build:ssr
