@@ -72,6 +72,7 @@ jobs:
       - uses: actions/download-artifact@v2
         with:
           name: built-packages
+          path: dist
       - name: BrowserStack Setup
         uses: 'browserstack/github-actions@master'
         with:
