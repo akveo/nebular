@@ -79,7 +79,7 @@ export class NbThemeService {
           return [
             this.breakpointService.getByWidth(prevWidth),
             this.breakpointService.getByWidth(width),
-          ]
+          ] as [NbMediaBreakpoint, NbMediaBreakpoint];
         }),
         filter(([prevPoint, point]: [NbMediaBreakpoint, NbMediaBreakpoint]) => {
           return prevPoint.name !== point.name;

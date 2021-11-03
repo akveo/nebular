@@ -9,7 +9,6 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NbCalendarYearPickerComponent } from './calendar-year-picker.component';
 import { NbCalendarKitModule } from '../../calendar-kit.module';
 
-
 describe('Component: NbCalendarYearPicker', () => {
   let fixture: ComponentFixture<NbCalendarYearPickerComponent<Date>>;
   let component: NbCalendarYearPickerComponent<Date>;
@@ -17,7 +16,7 @@ describe('Component: NbCalendarYearPicker', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ NbCalendarKitModule ],
+      imports: [NbCalendarKitModule],
     });
     fixture = TestBed.createComponent<NbCalendarYearPickerComponent<Date>>(NbCalendarYearPickerComponent);
     component = fixture.componentInstance;
@@ -35,9 +34,12 @@ describe('Component: NbCalendarYearPicker', () => {
     expect(componentEl.querySelector('nb-calendar-picker')).toBeDefined();
   });
 
-  it('should fire monthChange when click on a year', done => {
-    component.yearChange.subscribe(done);
-    componentEl.querySelector('nb-calendar-picker')
-      .dispatchEvent(new CustomEvent('select'));
+  it('should fire yearChange when click on a year', () => {
+    const yearChangeSpy = jasmine.createSpy('yearChange spy');
+
+    component.yearChange.subscribe(yearChangeSpy);
+    componentEl.querySelector('nb-calendar-picker').dispatchEvent(new CustomEvent('select'));
+
+    expect(yearChangeSpy).toHaveBeenCalled();
   });
 });

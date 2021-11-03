@@ -20,7 +20,7 @@ import {
   Output,
   QueryList,
 } from '@angular/core';
-import { combineLatest, Subject } from 'rxjs';
+import { combineLatest, Observable, Subject } from 'rxjs';
 import { takeUntil, filter, map, startWith } from 'rxjs/operators';
 
 import { convertToBoolProperty, NbBooleanInput } from '../helpers';
@@ -445,7 +445,7 @@ export class NbSidebarComponent implements OnInit, AfterContentInit, OnDestroy {
   protected subscribeToMediaQueryChange() {
     combineLatest([
       this.responsiveValueChange$.pipe(startWith(this.responsive)),
-      this.themeService.onMediaQueryChange(),
+      this.themeService.onMediaQueryChange() as Observable<[NbMediaBreakpoint, NbMediaBreakpoint]>,
     ])
       .pipe(
         filter(([responsive]) => responsive),
@@ -485,7 +485,7 @@ export class NbSidebarComponent implements OnInit, AfterContentInit, OnDestroy {
 
   protected getMenuLink(element: HTMLElement): HTMLElement | undefined {
     if (!element || element.tagName.toLowerCase() === 'nb-menu') {
-      return;
+      return undefined;
     }
 
     if (element.tagName.toLowerCase() === 'a') {
