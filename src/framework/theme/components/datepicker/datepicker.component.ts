@@ -515,7 +515,7 @@ export class NbBasePickerComponent<D, T, P> extends NbBasePicker<D, T, P>
   protected pickerClass: Type<P>;
 
   protected get pickerValueChange(): Observable<T> {
-    return
+    return undefined;
   }
 
   get value(): T {

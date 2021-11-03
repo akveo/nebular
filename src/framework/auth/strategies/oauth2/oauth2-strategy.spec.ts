@@ -419,7 +419,7 @@ describe('oauth2-auth-strategy', () => {
           expect(result).toBeTruthy();
           expect(result.isSuccess()).toBe(true);
           expect(result.isFailure()).toBe(false);
-          // tslint:disable-next-line
+          // eslint-disable-next-line
           expect(result.getToken().getValue()).toEqual(nbAuthCreateToken(NbAuthOAuth2Token, token, 'strategy').getValue());
           expect(result.getMessages()).toEqual(successMessages);
           expect(result.getErrors()).toEqual([]); // no error message, response is success
