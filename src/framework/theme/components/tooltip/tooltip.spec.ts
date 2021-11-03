@@ -38,14 +38,16 @@ export class NbTooltipDefaultTestComponent {
   template: `
     <nb-layout>
       <nb-layout-column>
-        <button #button [nbTooltip]="content"
+        <button
+          #button
+          [nbTooltip]="content"
           [nbTooltipTrigger]="trigger"
           [nbTooltipPlacement]="position"
           [nbTooltipAdjustment]="adjustment"
           [nbTooltipStatus]="status"
           [nbTooltipIcon]="icon"
-          [nbTooltipClass]="tooltipClass">
-        </button>
+          [nbTooltipClass]="tooltipClass"
+        ></button>
       </nb-layout-column>
     </nb-layout>
   `,
@@ -99,8 +101,7 @@ export class NbDynamicOverlayHandlerMock {
   _offset: number;
   _overlayConfig: NbOverlayConfig = {};
 
-  constructor() {
-  }
+  constructor() {}
 
   host(host: ElementRef) {
     this._host = host;
@@ -155,57 +156,44 @@ export class NbDynamicOverlayHandlerMock {
     return dynamicOverlay;
   }
 
-  connect() {
-  }
+  connect() {}
 
-  disconnect() {
-  }
+  disconnect() {}
 
-  destroy() {
-  }
+  destroy() {}
 }
 
-const TEST_COMPONENTS = [
-  NbTooltipDefaultTestComponent,
-  NbTooltipBindingsTestComponent,
-  NbTooltipInstanceTestComponent,
-];
+const TEST_COMPONENTS = [NbTooltipDefaultTestComponent, NbTooltipBindingsTestComponent, NbTooltipInstanceTestComponent];
 
 @NgModule({
   imports: [NbLayoutModule, NbTooltipModule],
   exports: [...TEST_COMPONENTS],
   declarations: [...TEST_COMPONENTS],
 })
-class PopoverTestModule { }
+class PopoverTestModule {}
 
 describe('Directive: NbTooltipDirective', () => {
-
   const overlayHandler = new NbDynamicOverlayHandlerMock();
 
-  beforeEach(waitForAsync(() => {
-    TestBed.resetTestingModule();
-    TestBed.configureTestingModule({
-      imports: [
-        NoopAnimationsModule,
-        RouterTestingModule.withRoutes([]),
-        NbThemeModule.forRoot(),
-        PopoverTestModule,
-      ],
-    });
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.resetTestingModule();
+      TestBed.configureTestingModule({
+        imports: [NoopAnimationsModule, RouterTestingModule.withRoutes([]), NbThemeModule.forRoot(), PopoverTestModule],
+      });
 
-    const iconLibs: NbIconLibraries = TestBed.inject(NbIconLibraries);
-    iconLibs.registerSvgPack('test', { 'some-icon': '<svg>some-icon</svg>' });
-    iconLibs.setDefaultPack('test')
-  }));
+      const iconLibs: NbIconLibraries = TestBed.inject(NbIconLibraries);
+      iconLibs.registerSvgPack('test', { 'some-icon': '<svg>some-icon</svg>' });
+      iconLibs.setDefaultPack('test');
+    }),
+  );
 
   describe('smoke ', () => {
-
     let fixture: ComponentFixture<any>;
 
     afterEach(() => {
       fixture.destroy();
     });
-
 
     it('should render string', () => {
       fixture = TestBed.createComponent(NbTooltipDefaultTestComponent);
@@ -217,12 +205,11 @@ describe('Directive: NbTooltipDirective', () => {
       expect(textContainer.textContent).toContain('test');
     });
 
-    it('should hide', () => fakeAsync(() => {
+    it('should hide', fakeAsync(() => {
       fixture = TestBed.createComponent(NbTooltipDefaultTestComponent);
       fixture.detectChanges();
       fixture.componentInstance.tooltip.show();
       fixture.detectChanges();
-
 
       const textContainer = fixture.nativeElement.querySelector('nb-tooltip .content span');
       expect(textContainer.textContent).toContain('test');
@@ -322,30 +309,22 @@ describe('Directive: NbTooltipDirective', () => {
 
       expect(tooltip.isShown).toEqual(true);
     });
-
   });
 
   describe('mocked services', () => {
-
-    beforeEach(waitForAsync(() => {
-      TestBed.resetTestingModule();
-      TestBed.configureTestingModule({
-        imports: [
-          RouterTestingModule.withRoutes([]),
-          NbThemeModule.forRoot(),
-          PopoverTestModule,
-        ],
-      })
-        .overrideDirective(NbTooltipDirective, {
+    beforeEach(
+      waitForAsync(() => {
+        TestBed.resetTestingModule();
+        TestBed.configureTestingModule({
+          imports: [RouterTestingModule.withRoutes([]), NbThemeModule.forRoot(), PopoverTestModule],
+        }).overrideDirective(NbTooltipDirective, {
           set: {
-            providers: [
-              { provide: NbDynamicOverlayHandler, useValue: overlayHandler },
-            ],
+            providers: [{ provide: NbDynamicOverlayHandler, useValue: overlayHandler }],
           },
         });
-    }));
+      }),
+    );
     describe('default tooltip', () => {
-
       let fixture: ComponentFixture<NbTooltipDefaultTestComponent>;
 
       afterEach(() => {
@@ -408,7 +387,6 @@ describe('Directive: NbTooltipDirective', () => {
         expect(hideSpy).toHaveBeenCalledTimes(1);
         expect(toggleSpy).toHaveBeenCalledTimes(0);
 
-
         fixture.componentInstance.tooltip.toggle();
         fixture.detectChanges();
 
@@ -419,7 +397,6 @@ describe('Directive: NbTooltipDirective', () => {
     });
 
     describe('binding tooltip', () => {
-
       let fixture: ComponentFixture<NbTooltipBindingsTestComponent>;
 
       afterEach(() => {
@@ -427,7 +404,6 @@ describe('Directive: NbTooltipDirective', () => {
       });
 
       it('should rebuild', () => {
-
         const componentSpy = spyOn(overlayHandler, 'componentType').and.callThrough();
         const hostSpy = spyOn(overlayHandler, 'host').and.callThrough();
         const positionSpy = spyOn(overlayHandler, 'position').and.callThrough();
@@ -496,7 +472,6 @@ describe('Directive: NbTooltipDirective', () => {
     });
 
     describe('instance tooltip', () => {
-
       let fixture: ComponentFixture<NbTooltipInstanceTestComponent>;
 
       afterEach(() => {
@@ -504,7 +479,6 @@ describe('Directive: NbTooltipDirective', () => {
       });
 
       it('should rebuild', () => {
-
         const componentSpy = spyOn(overlayHandler, 'componentType').and.callThrough();
         const hostSpy = spyOn(overlayHandler, 'host').and.callThrough();
         const positionSpy = spyOn(overlayHandler, 'position').and.callThrough();
@@ -547,7 +521,6 @@ describe('Directive: NbTooltipDirective', () => {
         expect(buildSpy).toHaveBeenCalledTimes(1);
         expect(rebuildSpy).toHaveBeenCalledTimes(2);
       });
-
     });
   });
 });
