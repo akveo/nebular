@@ -2,9 +2,11 @@ import { Component, EventEmitter, Output, QueryList, ViewChild, ViewChildren, In
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NB_DOCUMENT } from '@nebular/theme/theme.options';
 import { By } from '@angular/platform-browser';
+import { Subject, merge } from 'rxjs';
+
 import {
+  NB_DOCUMENT,
   NbOptionComponent,
   NbAutocompleteModule,
   NbThemeModule,
@@ -17,7 +19,6 @@ import {
   NbOverlayConfig,
   NbOverlayRef,
 } from '@nebular/theme';
-import { Subject, merge } from 'rxjs';
 
 const TEST_GROUPS = [
   {

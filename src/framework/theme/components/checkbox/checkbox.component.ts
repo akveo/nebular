@@ -263,8 +263,8 @@ import { convertToBoolProperty, NbBooleanInput } from '../helpers';
              (click)="$event.stopPropagation()"
              [indeterminate]="indeterminate">
       <span [class.indeterminate]="indeterminate" [class.checked]="checked" class="custom-checkbox">
-        <nb-icon *ngIf="indeterminate" icon="minus-bold-outline" pack="nebular-essentials"></nb-icon>
-        <nb-icon *ngIf="checked && !indeterminate" icon="checkmark-bold-outline" pack="nebular-essentials"></nb-icon>
+        <nb-icon *ngIf="indeterminate" icon="minus-bold-outline" pack="nebular-essentials" class="custom-checkbox-icon"></nb-icon>
+        <nb-icon *ngIf="checked && !indeterminate" icon="checkmark-bold-outline" pack="nebular-essentials" class="custom-checkbox-icon"></nb-icon>
       </span>
       <span class="text">
         <ng-content></ng-content>

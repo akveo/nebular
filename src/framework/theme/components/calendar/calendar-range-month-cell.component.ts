@@ -62,6 +62,8 @@ export class NbCalendarRangeMonthCellComponent<D> extends NbBaseCalendarRangeCel
     if (this.selectedValue) {
       return this.dateService.isSameMonthSafe(this.date, this.selectedValue.start);
     }
+
+    return false;
   }
 
   @HostBinding('class.in-range')
@@ -69,6 +71,7 @@ export class NbCalendarRangeMonthCellComponent<D> extends NbBaseCalendarRangeCel
     if (this.hasRange) {
       return this.isInRage(this.date, this.selectedValue);
     }
+    return false;
   }
 
   @HostBinding('class.start')
@@ -76,6 +79,7 @@ export class NbCalendarRangeMonthCellComponent<D> extends NbBaseCalendarRangeCel
     if (this.hasRange) {
       return this.dateService.isSameMonth(this.date, this.selectedValue.start);
     }
+    return false;
   }
 
   @HostBinding('class.end')
@@ -83,6 +87,7 @@ export class NbCalendarRangeMonthCellComponent<D> extends NbBaseCalendarRangeCel
     if (this.hasRange) {
       return this.dateService.isSameMonth(this.date, this.selectedValue.end);
     }
+    return false;
   }
 
   @HostBinding('class.today')

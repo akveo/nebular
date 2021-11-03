@@ -5,14 +5,15 @@
  */
 
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { NbIconModule } from '@nebular/theme';
-
-import { NbCalendarViewModeComponent } from './calendar-view-mode.component';
-import { NbCalendarPageableNavigationComponent } from './calendar-pageable-navigation.component';
-import { NbDateService } from '../../services/date.service';
-import { NbNativeDateService } from '../../services/native-date.service';
-import { NbThemeModule } from '../../../../theme.module';
 import { DatePipe } from '@angular/common';
+import {
+  NbIconModule,
+  NbCalendarViewModeComponent,
+  NbCalendarPageableNavigationComponent,
+  NbDateService,
+  NbNativeDateService,
+  NbThemeModule,
+} from '@nebular/theme';
 
 describe('Component: NbCalendarPageableNavigation', () => {
   let fixture: ComponentFixture<NbCalendarPageableNavigationComponent<Date>>;
@@ -25,21 +26,28 @@ describe('Component: NbCalendarPageableNavigation', () => {
       declarations: [NbCalendarViewModeComponent, NbCalendarPageableNavigationComponent],
       providers: [{ provide: NbDateService, useClass: NbNativeDateService }, DatePipe],
     });
-    fixture =
-      TestBed.createComponent<NbCalendarPageableNavigationComponent<Date>>(NbCalendarPageableNavigationComponent);
+    fixture = TestBed.createComponent<NbCalendarPageableNavigationComponent<Date>>(
+      NbCalendarPageableNavigationComponent,
+    );
     component = fixture.componentInstance;
     componentEl = fixture.debugElement.nativeElement;
   });
 
-  it('should fire next when next button clicked', () => {
+  it('should fire prev when prev button clicked', (done) => {
     fixture.detectChanges();
-    component.next.subscribe(e => expect(e).toBeUndefined());
+    component.prev.subscribe((e) => {
+      expect(e).toBeUndefined();
+      done();
+    });
     componentEl.querySelector('button:first-child').dispatchEvent(new Event('click'));
   });
 
-  it('should fire prev when prev button clicked', () => {
+  it('should fire next when next button clicked', (done) => {
     fixture.detectChanges();
-    component.prev.subscribe(e => expect(e).toBeUndefined());
+    component.next.subscribe((e) => {
+      expect(e).toBeUndefined();
+      done();
+    });
     componentEl.querySelector('button:last-child').dispatchEvent(new Event('click'));
   });
 });

@@ -41,7 +41,7 @@ export class NbRadioTestComponent {
   template: `
     <nb-radio-group>
       <ng-template [ngIf]="showRadios">
-        <nb-radio *ngFor="let radio of radioValues" [value]="radio">{{radio}}</nb-radio>
+        <nb-radio *ngFor="let radio of radioValues" [value]="radio">{{ radio }}</nb-radio>
       </ng-template>
     </nb-radio-group>
   `,
@@ -80,7 +80,7 @@ export class NbTwoRadioGroupsComponent {
 })
 export class NbFormsIntegrationComponent {
   @ViewChild(NbRadioGroupComponent) radioGroup: NbRadioGroupComponent;
-  control = new FormControl({ value: '1', disabled: true})
+  control = new FormControl({ value: '1', disabled: true });
 }
 
 describe('radio', () => {
@@ -89,9 +89,9 @@ describe('radio', () => {
 
   beforeEach(fakeAsync(() => {
     TestBed.configureTestingModule({
-      imports: [ NbThemeModule.forRoot(), NbRadioModule ],
+      imports: [NbThemeModule.forRoot(), NbRadioModule],
       declarations: [NbRadioTestComponent],
-      providers: [ { provide: NB_DOCUMENT, useValue: document } ],
+      providers: [{ provide: NB_DOCUMENT, useValue: document }],
     });
 
     fixture = TestBed.createComponent(NbRadioTestComponent);
@@ -106,9 +106,12 @@ describe('radio', () => {
     expect(radios.length).toBe(3);
   });
 
-  it('should fire value when selected', done => {
+  it('should fire value when selected', (done) => {
     const secondRadio: DebugElement = fixture.debugElement.queryAll(By.directive(NbRadioComponent))[1];
-    comp.valueChange.subscribe(done);
+    comp.valueChange.subscribe((value) => {
+      expect(value).toEqual(secondRadio.componentInstance.value);
+      done();
+    });
     const input = secondRadio.query(By.css('input'));
     input.nativeElement.click();
   });
@@ -120,9 +123,9 @@ describe('NbRadioGroupComponent', () => {
 
   beforeEach(fakeAsync(() => {
     TestBed.configureTestingModule({
-      imports: [ NbThemeModule.forRoot(), NbRadioModule, ReactiveFormsModule ],
-      declarations: [ NbRadioWithDynamicValuesTestComponent, NbTwoRadioGroupsComponent, NbFormsIntegrationComponent ],
-      providers: [ { provide: NB_DOCUMENT, useValue: document } ],
+      imports: [NbThemeModule.forRoot(), NbRadioModule, ReactiveFormsModule],
+      declarations: [NbRadioWithDynamicValuesTestComponent, NbTwoRadioGroupsComponent, NbFormsIntegrationComponent],
+      providers: [{ provide: NB_DOCUMENT, useValue: document }],
     });
 
     fixture = TestBed.createComponent(NbRadioWithDynamicValuesTestComponent);

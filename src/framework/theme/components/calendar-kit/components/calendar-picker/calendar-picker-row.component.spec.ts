@@ -21,11 +21,8 @@ describe('Component: NbCalendarPickerRow', () => {
   let componentEl: HTMLElement;
 
   const queryTestCell = (): NbCalendarDayCellComponent<Date> => {
-    return fixture.debugElement
-      .query(By.directive(NbCalendarDayCellComponent))
-      .componentInstance;
+    return fixture.debugElement.query(By.directive(NbCalendarDayCellComponent)).componentInstance;
   };
-
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -101,14 +98,16 @@ describe('Component: NbCalendarPickerRow', () => {
     expect(cell.filter).toBe(filter);
   });
 
-  it('should fire select when entire cell selected', () => {
+  it('should fire select when entire cell selected', (done) => {
     const date = new Date();
     component.row = [date];
     component.ngOnChanges();
     fixture.detectChanges();
     const cell: NbCalendarDayCellComponent<Date> = queryTestCell();
-    component.select.subscribe(e => expect(e).toBe(date));
+    component.select.subscribe((e) => {
+      expect(e).toBe(date);
+      done();
+    });
     cell.select.emit(cell.date);
   });
 });
-
