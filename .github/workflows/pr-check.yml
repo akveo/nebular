@@ -115,3 +115,16 @@ jobs:
           local-testing: stop
       - name: Upload coverage to codecov
         uses: codecov/codecov-action@v2
+  packages-smoke:
+    needs: setup
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+      - uses: actions/download-artifact@v2
+        with:
+          name: built-packages
+          path: dist
+      - run: sh tools/ci/packages-smoke.sh
