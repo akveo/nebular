@@ -116,7 +116,7 @@ jobs:
       - name: Upload coverage to codecov
         uses: codecov/codecov-action@v2
   packages-smoke:
-    needs: setup
+    needs: build-packages
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
