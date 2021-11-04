@@ -152,7 +152,7 @@
           },
           "configurations": {
             "production-wp": {
-              "devServerTarget": "playground:production-wp"
+              "devServerTarget": "playground:serve:production-wp"
             }
           }
         },

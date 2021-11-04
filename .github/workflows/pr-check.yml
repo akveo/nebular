@@ -58,7 +58,7 @@ jobs:
           node-version: '14'
           cache: 'npm'
       - run: npm install
-      - run: npm run ci:e2e
+      - run: npx ng e2e playground-e2e -- --configuration=production-wp
   unit-test:
     needs: build-packages
     runs-on: ubuntu-latest
