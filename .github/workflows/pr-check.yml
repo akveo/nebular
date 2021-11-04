@@ -1,7 +1,7 @@
 name: PR check
 on: [ push ]
 jobs:
-  setup:
+  build-packages:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -10,15 +10,6 @@ jobs:
           node-version: '14'
           cache: 'npm'
       - run: npm ci
-  build-packages:
-    needs: setup
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
-        with:
-          node-version: '14'
-      - run: npm ci
       - run: npm run build:packages
       - uses: actions/upload-artifact@v2
         with:
@@ -26,7 +17,7 @@ jobs:
           path: 'dist/'
           retention-days: 1
   build-docs:
-    needs: setup
+    needs: build-packages
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -34,7 +25,7 @@ jobs:
         with:
           node-version: '14'
       - run: npm ci
-      - run: npm run ci:docs
+      - run: npm run docs:build
   build-playground:
     needs: build-packages
     runs-on: ubuntu-latest
@@ -46,7 +37,6 @@ jobs:
       - run: npm ci
       - run: npm run build playground -- --configuration=production-wp
 #  lint:
-#    needs: setup
 #    runs-on: ubuntu-latest
 #    steps:
 #      - uses: actions/checkout@v2
