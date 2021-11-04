@@ -117,4 +117,16 @@ jobs:
         with:
           name: built-packages
           path: dist
-      - run: sh tools/ci/packages-smoke.sh
+      - run: npm ci
+        working-directory: packages-smoke
+      - name: Build
+        run: npm run build -- --configuration=production
+        working-directory: packages-smoke
+      - name: E2E
+        run: npm run e2e
+        working-directory: packages-smoke
+      - name: SSR
+        run: |
+          npm run build:ssr
+          npm run serve:ssr
+        working-directory: packages-smoke
