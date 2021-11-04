@@ -17,8 +17,6 @@ import {
   SimpleChanges,
   AfterContentInit,
   OnChanges,
-  Directive,
-  TemplateRef,
 } from '@angular/core';
 
 import { NbStatusService } from '../../services/status.service';
@@ -28,6 +26,7 @@ import { convertToBoolProperty, NbBooleanInput } from '../helpers';
 import { NbChatFormComponent } from './chat-form.component';
 import { NbChatMessageComponent } from './chat-message.component';
 import { NbCustomMessageService } from './custom-message.service';
+import { NbChatTitleDirective } from './chat-title.directive';
 
 /**
  * Conversational UI collection - a set of components for chat-like UI construction.
@@ -103,14 +102,8 @@ import { NbCustomMessageService } from './custom-message.service';
  * </nb-chat-message> // chat message, available multiple types
  * ```
  *
- * A custom template can be provided to title. It will be used instead of `[title]` input:
- * ```ts
- * <nb-chat>
- *   <ng-template nbChatTitle>
- *     Your custom template for title
- *   </ng-template>
- * </nb-chat>
- * ```
+ * You could provide a title template via the `nbChatTitle` directive. It overrides `title` input.
+ * @stacked-example(Custom message, chat/chat-template-title.component)
  *
  * Two users conversation showcase:
  * @stacked-example(Conversation, chat/chat-conversation-showcase.component)
@@ -249,8 +242,11 @@ import { NbCustomMessageService } from './custom-message.service';
   styleUrls: ['./chat.component.scss'],
   template: `
     <div class="header">
-      <ng-container *ngIf="templateTitle; else textTitleTemplate"
-                    [ngTemplateOutlet]="templateTitle.templateRef">
+      <ng-container
+        *ngIf="templateTitle; else textTitleTemplate"
+        [ngTemplateOutlet]="templateTitle.templateRef"
+        [ngTemplateOutletContext]="{ $implicit: templateTitle.context }"
+      >
       </ng-container>
       <ng-template #textTitleTemplate>
         {{ title }}
@@ -267,20 +263,9 @@ import { NbCustomMessageService } from './custom-message.service';
       <ng-content select="nb-chat-form"></ng-content>
     </div>
   `,
-  providers: [
-    NbCustomMessageService,
-  ],
+  providers: [NbCustomMessageService],
 })
 export class NbChatComponent implements OnChanges, AfterContentInit, AfterViewInit {
-  @ContentChild(NbChatTitleDirective)
-  get templateTitle(): NbChatTitleDirective { return this._templateTitle; }
-  set templateTitle(value: NbChatTitleDirective) {
-    if (value) {
-      this._templateTitle = value;
-    }
-  }
-  protected _templateTitle: NbChatTitleDirective;
-
   @Input() title: string;
 
   /**
@@ -302,7 +287,7 @@ export class NbChatComponent implements OnChanges, AfterContentInit, AfterViewIn
    */
   @Input()
   get scrollBottom(): boolean {
-    return this._scrollBottom
+    return this._scrollBottom;
   }
   set scrollBottom(value: boolean) {
     this._scrollBottom = convertToBoolProperty(value);
@@ -313,9 +298,9 @@ export class NbChatComponent implements OnChanges, AfterContentInit, AfterViewIn
   @ViewChild('scrollable') scrollable: ElementRef;
   @ContentChildren(NbChatMessageComponent) messages: QueryList<NbChatMessageComponent>;
   @ContentChild(NbChatFormComponent) chatForm: NbChatFormComponent;
+  @ContentChild(NbChatTitleDirective) templateTitle: NbChatTitleDirective;
 
-  constructor(protected statusService: NbStatusService) {
-  }
+  constructor(protected statusService: NbStatusService) {}
 
   ngOnChanges(changes: SimpleChanges) {
     if ('status' in changes) {
@@ -328,11 +313,10 @@ export class NbChatComponent implements OnChanges, AfterContentInit, AfterViewIn
   }
 
   ngAfterViewInit() {
-    this.messages.changes
-      .subscribe((messages) => {
-        this.messages = messages;
-        this.updateView();
-      });
+    this.messages.changes.subscribe((messages) => {
+      this.messages = messages;
+      this.updateView();
+    });
 
     this.updateView();
   }
@@ -420,11 +404,4 @@ export class NbChatComponent implements OnChanges, AfterContentInit, AfterViewIn
     }
     return [];
   }
-}
-
-@Directive({
-  selector: `[nbChatTitle]`,
-})
-export class NbChatTitleDirective {
-  constructor(public templateRef: TemplateRef<any>) {}
 }

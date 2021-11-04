@@ -480,6 +480,12 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         component: 'ChatCustomMessageComponent',
         name: 'Chat Custom Message',
       },
+      {
+        path: 'chat-template-title.component',
+        link: '/chat/chat-template-title.component',
+        component: 'ChatTemplateTitleComponent',
+        name: 'Chat Template Title',
+      },
     ],
   },
   {
