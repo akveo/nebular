@@ -36,25 +36,17 @@ const config = {
   },
 };
 
-if (process.env['TRAVIS']) {
-  const [platform] = process.env.MODE.split('_');
-
+if (process.env.CI) {
   config.directConnect = false;
-
-  if (platform === 'browserstack') {
-    const key = require('./scripts/ci/browserstack/config');
-
-    config.browserstackUser = process.env['BROWSER_STACK_USERNAME'];
-    config.browserstackKey = key;
-
-    config.capabilities = {
-      'browserstack.localIdentifier': process.env['TRAVIS_JOB_ID'],
-      'browserstack.local': 'true',
-      build: process.env['TRAVIS_JOB_ID'],
-      name: 'Nebular E2E Tests',
-      browserName: 'chrome',
-    };
-  }
+  config.browserstackUser = process.env.BROWSERSTACK_USERNAME;
+  config.browserstackKey = process.env.BROWSERSTACK_ACCESS_KEY;
+  config.capabilities = {
+    'browserstack.localIdentifier': process.env.BROWSERSTACK_LOCAL_IDENTIFIER,
+    'browserstack.local': 'true',
+    build: process.env.BROWSERSTACK_BUILD_NAME,
+    name: process.env.BROWSERSTACK_PROJECT_NAME,
+    browserName: 'chrome',
+  };
 }
 
 exports.config = config;

@@ -58,7 +58,21 @@ jobs:
         with:
           name: built-packages
           path: dist
-      - run: npx ng e2e playground-e2e --configuration=production-wp
+      - name: BrowserStack Setup
+        uses: 'browserstack/github-actions@master'
+        with:
+          username: ${{ secrets.BROWSERSTACK_USERNAME }}
+          access-key: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
+      - name: Start BrowserStackLocal Tunnel
+        uses: browserstack/github-actions/setup-local@master
+        with:
+          local-testing: start
+      - name: Test
+        run: npx ng e2e playground-e2e --configuration=production-wp
+      - name: Stop BrowserStackLocal Tunnel
+        uses: browserstack/github-actions/setup-local@master
+        with:
+          local-testing: stop
   unit-test:
     needs: build-packages
     runs-on: ubuntu-latest
