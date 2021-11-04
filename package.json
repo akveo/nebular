@@ -79,7 +79,6 @@
     "@angular/core": "^12.2.10",
     "@angular/fire": "^6.1.0",
     "@angular/forms": "^12.2.10",
-    "@angular/localize": "^12.2.12",
     "@angular/platform-browser": "^12.2.10",
     "@angular/platform-browser-dynamic": "^12.2.10",
     "@angular/router": "^12.2.10",
