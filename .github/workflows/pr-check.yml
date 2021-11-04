@@ -36,7 +36,7 @@ jobs:
       - run: npm ci
       - run: npm run ci:docs
   build-playground:
-    needs: setup
+    needs: build-packages
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
