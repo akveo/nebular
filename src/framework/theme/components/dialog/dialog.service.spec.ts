@@ -16,6 +16,9 @@ export class NbViewportRulerMockAdapter extends NbViewportRulerAdapter {
   getViewportSize(): Readonly<{ width: number; height: number }> {
     return { width: 1600, height: 900 };
   }
+  getViewportScrollPosition(): { left: number; top: number } {
+    return { left: 0, top: 0 };
+  }
 }
 
 @Component({ selector: 'nb-test-dialog', template: '<button class="test-focusable-button"></button>' })
