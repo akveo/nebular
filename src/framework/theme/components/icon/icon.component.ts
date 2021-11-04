@@ -240,7 +240,7 @@ export class NbIconComponent implements NbIconConfig, OnChanges, OnInit {
     const iconDefinition = this.iconLibrary.getIcon(name, pack);
 
     if (!iconDefinition) {
-      return;
+      return undefined;
     }
 
     const content = iconDefinition.icon.getContent(options);
