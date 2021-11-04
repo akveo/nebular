@@ -555,6 +555,11 @@ export class NbSelectComponent implements OnChanges, AfterViewInit, AfterContent
   @Input() optionsPanelClass: string | string[];
 
   /**
+   * Specifies tabindex for select component
+   * */
+  @Input() tabIndex: number = 0;
+
+  /**
    * Adds `outline` styles
    */
   @Input()
