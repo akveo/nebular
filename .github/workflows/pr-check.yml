@@ -44,7 +44,7 @@ jobs:
         with:
           node-version: '14'
       - run: npm ci
-      - run: npm run build playgound -- --configuration=production-wp
+      - run: npm run build playground -- --configuration=production-wp
 #  lint:
 #    needs: setup
 #    runs-on: ubuntu-latest
