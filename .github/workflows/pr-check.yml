@@ -37,17 +37,17 @@ jobs:
           cache: 'npm'
       - run: npm install
       - run: npm run ci:docs
-  lint:
-    needs: setup
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
-        with:
-          node-version: '14'
-          cache: 'npm'
-      - run: npm install
-      - run: npm run ci:lint
+#  lint:
+#    needs: setup
+#    runs-on: ubuntu-latest
+#    steps:
+#      - uses: actions/checkout@v2
+#      - uses: actions/setup-node@v2
+#        with:
+#          node-version: '14'
+#          cache: 'npm'
+#      - run: npm install
+#      - run: npm run ci:lint
   e2e:
     needs: setup
     runs-on: ubuntu-latest
