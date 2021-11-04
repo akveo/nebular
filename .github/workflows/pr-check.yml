@@ -78,7 +78,7 @@ jobs:
         with:
           local-testing: start
       - name: Test
-        run: npx ng e2e playground-e2e --configuration=production-wp
+        run: npm run ng -- e2e playground-e2e --configuration=production-wp
       - name: Stop BrowserStackLocal Tunnel
         uses: browserstack/github-actions/setup-local@master
         with:
