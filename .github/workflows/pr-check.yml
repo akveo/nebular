@@ -65,8 +65,8 @@ jobs:
 #      - name: BrowserStack Setup
 #        uses: 'browserstack/github-actions@master'
 #        with:
-#          username: ${{ secrets.BROWSERSTACK_USERNAME }}
-#          access-key: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
+#          username: ${{ BROWSERSTACK_USERNAME }}
+#          access-key: ${{ BROWSERSTACK_ACCESS_KEY }}
 #      - name: Start BrowserStackLocal Tunnel
 #        uses: browserstack/github-actions/setup-local@master
 #        with:
@@ -80,6 +80,9 @@ jobs:
   unit-test:
     needs: build-packages
     runs-on: ubuntu-latest
+    env:
+      BROWSER_STACK_USERNAME: debac1
+      BROWSER_STACK_KEY: sHJfQQC3yDFg5iMZdrhA
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
@@ -90,11 +93,12 @@ jobs:
         with:
           name: built-packages
           path: dist
+      - run: BROWSER_STACK_KEY=$(echo $BROWSER_STACK_KEY | rev)
       - name: BrowserStack Setup
         uses: 'browserstack/github-actions@master'
         with:
-          username: ${{ secrets.BROWSERSTACK_USERNAME }}
-          access-key: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
+          username: ${{ BROWSERSTACK_USERNAME }}
+          access-key: ${{ BROWSERSTACK_ACCESS_KEY }}
       - name: Start BrowserStackLocal Tunnel
         uses: browserstack/github-actions/setup-local@master
         with:
