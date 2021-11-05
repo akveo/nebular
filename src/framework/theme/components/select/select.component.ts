@@ -63,8 +63,7 @@ export type NbSelectAppearance = 'outline' | 'filled' | 'hero';
   selector: 'nb-select-label',
   template: '<ng-content></ng-content>',
 })
-export class NbSelectLabelComponent {
-}
+export class NbSelectLabelComponent {}
 
 export function nbSelectFormFieldControlConfigFactory() {
   const config = new NbFormFieldControlConfig();
@@ -519,9 +518,9 @@ export function nbSelectFormFieldControlConfigFactory() {
     { provide: NbFormFieldControlConfig, useFactory: nbSelectFormFieldControlConfigFactory },
   ],
 })
-export class NbSelectComponent implements OnChanges, AfterViewInit, AfterContentInit, OnDestroy,
-                                          ControlValueAccessor, NbFormFieldControl {
-
+export class NbSelectComponent
+  implements OnChanges, AfterViewInit, AfterContentInit, OnDestroy, ControlValueAccessor, NbFormFieldControl
+{
   /**
    * Select size, available sizes:
    * `tiny`, `small`, `medium` (default), `large`, `giant`
@@ -660,9 +659,7 @@ export class NbSelectComponent implements OnChanges, AfterViewInit, AfterContent
     this.writeValue(value);
   }
   get selected() {
-    return this.multiple
-      ? this.selectionModel.map(o => o.value)
-      : this.selectionModel[0].value;
+    return this.multiple ? this.selectionModel.map((o) => o.value) : this.selectionModel[0].value;
   }
 
   /**
@@ -788,18 +785,19 @@ export class NbSelectComponent implements OnChanges, AfterViewInit, AfterContent
    **/
   fullWidth$ = new BehaviorSubject<boolean>(this.fullWidth);
 
-  constructor(@Inject(NB_DOCUMENT) protected document,
-              protected overlay: NbOverlayService,
-              protected hostRef: ElementRef<HTMLElement>,
-              protected positionBuilder: NbPositionBuilderService,
-              protected triggerStrategyBuilder: NbTriggerStrategyBuilderService,
-              protected cd: ChangeDetectorRef,
-              protected focusKeyManagerFactoryService: NbFocusKeyManagerFactoryService<NbOptionComponent>,
-              protected focusMonitor: NbFocusMonitor,
-              protected renderer: Renderer2,
-              protected zone: NgZone,
-              protected statusService: NbStatusService) {
-  }
+  constructor(
+    @Inject(NB_DOCUMENT) protected document,
+    protected overlay: NbOverlayService,
+    protected hostRef: ElementRef<HTMLElement>,
+    protected positionBuilder: NbPositionBuilderService,
+    protected triggerStrategyBuilder: NbTriggerStrategyBuilderService,
+    protected cd: ChangeDetectorRef,
+    protected focusKeyManagerFactoryService: NbFocusKeyManagerFactoryService<NbOptionComponent>,
+    protected focusMonitor: NbFocusMonitor,
+    protected renderer: Renderer2,
+    protected zone: NgZone,
+    protected statusService: NbStatusService,
+  ) {}
 
   /**
    * Determines is select hidden.
@@ -880,9 +878,11 @@ export class NbSelectComponent implements OnChanges, AfterViewInit, AfterContent
     this.subscribeOnOptionClick();
 
     // TODO: #2254
-    this.zone.runOutsideAngular(() => setTimeout(() => {
-      this.renderer.addClass(this.hostRef.nativeElement, 'nb-transition');
-    }));
+    this.zone.runOutsideAngular(() =>
+      setTimeout(() => {
+        this.renderer.addClass(this.hostRef.nativeElement, 'nb-transition');
+      }),
+    );
   }
 
   ngOnDestroy() {
@@ -899,15 +899,15 @@ export class NbSelectComponent implements OnChanges, AfterViewInit, AfterContent
     }
   }
 
-  show() {
-    if (this.isHidden) {
+  show(): void {
+    if (this.canOpen()) {
       this.attachToOverlay();
       this.setActiveOption();
       this.cd.markForCheck();
     }
   }
 
-  hide() {
+  hide(): void {
     if (this.isOpen) {
       this.ref.detach();
       this.cd.markForCheck();
@@ -1001,7 +1001,7 @@ export class NbSelectComponent implements OnChanges, AfterViewInit, AfterContent
    * */
   protected handleMultipleSelect(option: NbOptionComponent) {
     if (option.selected) {
-      this.selectionModel = this.selectionModel.filter(s => !this._compareWith(s.value, option.value));
+      this.selectionModel = this.selectionModel.filter((s) => !this._compareWith(s.value, option.value));
       option.deselect();
     } else {
       this.selectionModel.push(option);
@@ -1066,23 +1066,19 @@ export class NbSelectComponent implements OnChanges, AfterViewInit, AfterContent
 
   protected subscribeOnTriggers() {
     this.triggerStrategy.show$.subscribe(() => this.show());
-    this.triggerStrategy.hide$
-      .pipe(filter(() => this.isOpen))
-      .subscribe(($event: Event) => {
-        this.hide();
-        if (!this.isClickedWithinComponent($event)) {
-          this.onTouched();
-        }
-      });
+    this.triggerStrategy.hide$.pipe(filter(() => this.isOpen)).subscribe(($event: Event) => {
+      this.hide();
+      if (!this.isClickedWithinComponent($event)) {
+        this.onTouched();
+      }
+    });
   }
 
   protected subscribeOnPositionChange() {
-    this.positionStrategy.positionChange
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((position: NbPosition) => {
-        this.overlayPosition = position;
-        this.cd.detectChanges();
-      });
+    this.positionStrategy.positionChange.pipe(takeUntil(this.destroy$)).subscribe((position: NbPosition) => {
+      this.overlayPosition = position;
+      this.cd.detectChanges();
+    });
   }
 
   protected subscribeOnOptionClick() {
@@ -1095,7 +1091,7 @@ export class NbSelectComponent implements OnChanges, AfterViewInit, AfterContent
       .pipe(
         startWith(this.options),
         switchMap((options: QueryList<NbOptionComponent>) => {
-          return merge(...options.map(option => option.click));
+          return merge(...options.map((option) => option.click));
         }),
         takeUntil(this.destroy$),
       )
@@ -1103,7 +1099,8 @@ export class NbSelectComponent implements OnChanges, AfterViewInit, AfterContent
   }
 
   protected subscribeOnOverlayKeys(): void {
-    this.ref.keydownEvents()
+    this.ref
+      .keydownEvents()
       .pipe(
         filter(() => this.isOpen),
         takeUntil(this.destroy$),
@@ -1117,18 +1114,17 @@ export class NbSelectComponent implements OnChanges, AfterViewInit, AfterContent
         }
       });
 
-    this.keyManager.tabOut
-      .pipe(takeUntil(this.destroy$))
-      .subscribe(() => {
-        this.hide();
-        this.onTouched();
-      });
+    this.keyManager.tabOut.pipe(takeUntil(this.destroy$)).subscribe(() => {
+      this.hide();
+      this.onTouched();
+    });
   }
 
   protected subscribeOnButtonFocus() {
-    this.focusMonitor.monitor(this.button)
+    this.focusMonitor
+      .monitor(this.button)
       .pipe(
-        map(origin => !!origin),
+        map((origin) => !!origin),
         finalize(() => this.focusMonitor.stopMonitoring(this.button)),
         takeUntil(this.destroy$),
       )
@@ -1136,11 +1132,15 @@ export class NbSelectComponent implements OnChanges, AfterViewInit, AfterContent
   }
 
   protected getContainer() {
-    return this.ref && this.ref.hasAttached() && <ComponentRef<any>> {
-      location: {
-        nativeElement: this.ref.overlayElement,
-      },
-    };
+    return (
+      this.ref &&
+      this.ref.hasAttached() &&
+      <ComponentRef<any>>{
+        location: {
+          nativeElement: this.ref.overlayElement,
+        },
+      }
+    );
   }
 
   /**
@@ -1165,17 +1165,17 @@ export class NbSelectComponent implements OnChanges, AfterViewInit, AfterContent
     const isArray: boolean = Array.isArray(safeValue);
 
     if (this.multiple && !isArray && !isResetValue) {
-      throw new Error('Can\'t assign single value if select is marked as multiple');
+      throw new Error("Can't assign single value if select is marked as multiple");
     }
     if (!this.multiple && isArray) {
-      throw new Error('Can\'t assign array if select is not marked as multiple');
+      throw new Error("Can't assign array if select is not marked as multiple");
     }
 
     const previouslySelectedOptions = this.selectionModel;
     this.selectionModel = [];
 
     if (this.multiple) {
-      safeValue.forEach(option => this.selectValue(option));
+      safeValue.forEach((option) => this.selectValue(option));
     } else {
       this.selectValue(safeValue);
     }
@@ -1202,6 +1202,11 @@ export class NbSelectComponent implements OnChanges, AfterViewInit, AfterContent
       corresponding.select();
       this.selectionModel.push(corresponding);
     }
+  }
+
+  /** Whether the overlay is allowed to open. */
+  protected canOpen(): boolean {
+    return this.isHidden && !this.disabled && this.options?.length > 0;
   }
 
   /**
