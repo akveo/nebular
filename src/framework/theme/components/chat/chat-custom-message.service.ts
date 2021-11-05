@@ -1,3 +1,9 @@
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
 import { Injectable } from '@angular/core';
 
 import { NbChatCustomMessageDirective } from './chat-custom-message.directive';
@@ -7,8 +13,7 @@ import { NbChatCustomMessageDirective } from './chat-custom-message.directive';
  * were provided in the chat component.
  */
 @Injectable()
-export class NbCustomMessageService {
-
+export class NbChatCustomMessageService {
   protected readonly customMessages = new Map<string, NbChatCustomMessageDirective>();
 
   register(type: string, instance: NbChatCustomMessageDirective): void {
