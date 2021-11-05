@@ -8,6 +8,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "lint": "ng lint",
+    "e2e": "ng e2e",
     "dev:ssr": "ng run packages-smoke:serve-ssr",
     "serve:ssr": "node dist/packages-smoke/server/main.js",
     "build:ssr": "ng build --configuration=production && ng run packages-smoke:server --configuration=production",
@@ -58,11 +59,13 @@
     "@typescript-eslint/parser": "4.28.2",
     "eslint": "^7.26.0",
     "jasmine-core": "~3.8.0",
+    "jasmine-spec-reporter": "~5.0.0",
     "karma": "~6.3.0",
     "karma-chrome-launcher": "~3.1.0",
     "karma-coverage": "~2.0.3",
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "~1.7.0",
+    "protractor": "~7.0.0",
     "typescript": "~4.3.5"
   }
 }
