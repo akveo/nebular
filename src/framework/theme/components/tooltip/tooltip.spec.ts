@@ -4,19 +4,21 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Subject } from 'rxjs';
 import createSpy = jasmine.createSpy;
-
-import { NbThemeModule } from '../../theme.module';
-import { NbLayoutModule } from '../layout/layout.module';
-import { NbAdjustment, NbPosition } from '../cdk/overlay/overlay-position';
-import { NbDynamicOverlayHandler } from '../cdk/overlay/dynamic/dynamic-overlay-handler';
-import { NbOverlayContent } from '../cdk/overlay/overlay-service';
-import { NbRenderableContainer } from '../cdk/overlay/overlay-container';
-import { NbTrigger } from '../cdk/overlay/overlay-trigger';
-import { NbTooltipDirective } from './tooltip.directive';
-import { NbTooltipModule } from './tooltip.module';
-import { NbTooltipComponent } from './tooltip.component';
-import { NbIconLibraries } from '../icon/icon-libraries';
-import { NbOverlayConfig } from '../cdk/overlay/mapping';
+import {
+  NbThemeModule,
+  NbLayoutModule,
+  NbAdjustment,
+  NbPosition,
+  NbDynamicOverlayHandler,
+  NbOverlayContent,
+  NbRenderableContainer,
+  NbTrigger,
+  NbTooltipDirective,
+  NbTooltipModule,
+  NbTooltipComponent,
+  NbIconLibraries,
+  NbOverlayConfig,
+} from '@nebular/theme';
 
 @Component({
   selector: 'nb-tooltip-default-test',

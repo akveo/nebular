@@ -113,6 +113,7 @@ export * from './components/chat/chat.module';
 export * from './components/chat/chat.options';
 export * from './components/chat/chat-avatar.component';
 export * from './components/chat/chat-custom-message.directive';
+export * from './components/chat/chat-custom-message.service';
 export * from './components/spinner/spinner.component';
 export * from './components/spinner/spinner.directive';
 export * from './components/spinner/spinner.module';
