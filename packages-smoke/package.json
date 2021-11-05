@@ -32,6 +32,7 @@
     "@nebular/security": "file:.lib/security",
     "@nebular/theme": "file:.lib/theme",
     "@nguniversal/express-engine": "^12.1.2",
+    "date-fns": "^2.25.0",
     "eva-icons": "^1.1.2",
     "express": "^4.15.2",
     "moment": "^2.22.2",
