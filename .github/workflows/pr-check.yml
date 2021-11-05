@@ -120,7 +120,7 @@ jobs:
       - uses: actions/download-artifact@v2
         with:
           name: built-packages
-          path: dist
+          path: packages-smoke/.lib/
       - run: npm ci
         working-directory: packages-smoke
       - name: Build

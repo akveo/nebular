@@ -19,10 +19,7 @@
     "lib": [
       "es2018",
       "dom"
-    ],
-    "paths": {
-      "@nebular/*": ["../dist/*"]
-    }
+    ]
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
