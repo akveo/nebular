@@ -24,7 +24,7 @@ export class NbRestoreScrollTopHelper {
         startWith(null),
         filter(event => event === null || event instanceof NavigationEnd),
         pairwise(),
-        map(([prev, current]: [NavigationEnd, NavigationEnd]) => this.pageChanged(prev, current)),
+        map(([prev, current]) => this.pageChanged(prev as NavigationEnd, current as NavigationEnd)),
         filter(res => !!res),
       );
   }
