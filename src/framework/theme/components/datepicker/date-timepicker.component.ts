@@ -63,6 +63,7 @@ export class NbDateTimePickerComponent<D> extends NbBasePickerComponent<D, D, Nb
   @Input() title: string;
   @Input() applyButtonText: string;
   @Input() currentTimeButtonText: string;
+  @Input() showCurrentTimeButton = true;
 
   /**
    * Defines 12 hours format like '07:00 PM'.
@@ -134,6 +135,7 @@ export class NbDateTimePickerComponent<D> extends NbBasePickerComponent<D, D, Nb
     this.picker.title = this.title;
     this.picker.applyButtonText = this.applyButtonText;
     this.picker.currentTimeButtonText = this.currentTimeButtonText;
+    this.picker.showCurrentTimeButton = this.showCurrentTimeButton;
 
     if (this.twelveHoursFormat) {
       this.picker.timeFormat = this.dateService.getTwelveHoursFormat();
