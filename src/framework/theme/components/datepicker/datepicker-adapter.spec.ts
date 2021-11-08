@@ -1,7 +1,11 @@
 import { TestBed } from '@angular/core/testing';
-import { NbCalendarRange, NbDateService, NbDateTimeAdapterService } from '@nebular/theme';
-
-import { NbDateAdapterService, NbRangeAdapterService } from './datepicker-adapter';
+import {
+  NbCalendarRange,
+  NbDateService,
+  NbDateTimeAdapterService,
+  NbDateAdapterService,
+  NbRangeAdapterService,
+} from '@nebular/theme';
 
 describe('Date Adapters', () => {
   beforeEach(() => {
@@ -95,8 +99,8 @@ describe('Date Adapters', () => {
       expect(actualStart).toEqual(expectedStart);
       expect(actualEnd).toEqual(expectedEnd);
       expect(spy).toHaveBeenCalledTimes(2);
-      expect(spy.calls.argsFor(0)).toEqual([ startDate, format ]);
-      expect(spy.calls.argsFor(1)).toEqual([ endDate, format ]);
+      expect(spy.calls.argsFor(0)).toEqual([startDate, format]);
+      expect(spy.calls.argsFor(1)).toEqual([endDate, format]);
     });
 
     it('should format valid date range', () => {
@@ -108,7 +112,7 @@ describe('Date Adapters', () => {
       expect(spy).toHaveBeenCalledTimes(2);
     });
 
-    it('should not format if range isn\'t passed', () => {
+    it("should not format if range isn't passed", () => {
       const spy = spyOn(dateService, 'isValidDateString').and.returnValues(false, false);
 
       expect(adapterService.format(null, '')).toEqual('');
@@ -136,7 +140,7 @@ describe('Date Adapters', () => {
       const endDate = '12/11/11';
       const date = `${startDate}-${endDate}`;
       const format = 'mm/dd/yy';
-      const results = [ true, false, true, true ];
+      const results = [true, false, true, true];
       const spy = spyOn(dateService, 'isValidDateString').and.returnValues(...results);
 
       for (let i = 0, callsCount = 0; i < results.length - 1; i += 2) {
@@ -144,8 +148,8 @@ describe('Date Adapters', () => {
         callsCount += 2;
 
         expect(spy).toHaveBeenCalledTimes(callsCount);
-        expect(spy.calls.argsFor(i)).toEqual([ startDate, format ]);
-        expect(spy.calls.argsFor(i + 1)).toEqual([ endDate, format ]);
+        expect(spy.calls.argsFor(i)).toEqual([startDate, format]);
+        expect(spy.calls.argsFor(i + 1)).toEqual([endDate, format]);
       }
     });
   });
@@ -185,4 +189,3 @@ describe('Date Adapters', () => {
     });
   });
 });
-
