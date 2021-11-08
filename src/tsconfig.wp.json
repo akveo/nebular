@@ -1,21 +1,10 @@
 {
-  "extends": "../tsconfig.json",
+  "extends": "./tsconfig.app.json",
   "compilerOptions": {
-    "outDir": "../out-tsc/app-wp",
-    "baseUrl": "./",
-    "types": [],
     "paths": {
       "@nebular/*": [
-        "./.lib/*"
+        "dist/*"
       ]
     }
-  },
-  "files": [
-    "main.ts",
-    "polyfills.ts"
-  ],
-  "exclude": [
-    "test.ts",
-    "**/*.spec.ts"
-  ]
+  }
 }

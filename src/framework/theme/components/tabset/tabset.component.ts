@@ -103,6 +103,10 @@ export class NbTabComponent {
   }
   static ngAcceptInputType_responsive: NbBooleanInput;
 
+  /**
+   * Makes this tab a link that initiates navigation to a route
+   * @type string
+   */
   @Input() route: string;
 
   @HostBinding('class.content-active')
@@ -207,7 +211,8 @@ export class NbTabComponent {
  *
  * `tabIcon` should be used to add an icon to the tab. Icon can also be combined with title.
  * `responsive` tab property if set allows you to hide the title on smaller screens
- * (`tabs-icon-only-max-width` property) for better responsive behaviour. You can open the following example and make
+ * (`tabset-tab-text-hide-breakpoint` property) for better responsive behaviour.
+ * You can open the following example and make
  * your screen smaller - titles will be hidden in the last tabset in the list:
  *
  * @stacked-example(Icon, tabset/tabset-icon.component)

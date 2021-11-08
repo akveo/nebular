@@ -52,7 +52,7 @@ export class NbToastContainer {
 
   attach(toast: NbToast): NbToastRef {
     if (toast.config.preventDuplicates && this.isDuplicate(toast)) {
-      return;
+      return undefined;
     }
 
     this.removeToastIfLimitReached(toast);

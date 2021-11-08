@@ -37,6 +37,6 @@ Basically, that's it. Now you have two themes registered.
 
 ## Related Articles
 
-- [Change Theme in Runtime](docs/design-system/change-curren-theme)
+- [Change Theme in Runtime](docs/design-system/changing-theme)
 - [Enable CSS Properties Mode](docs/design-system/enable-css-properties-mode)
 - [Create Custom Theme](docs/design-system/create-custom-theme)
