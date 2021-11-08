@@ -16,6 +16,7 @@ import {
   HostBinding,
   ChangeDetectorRef,
   ContentChild,
+  TemplateRef,
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
@@ -46,7 +47,7 @@ import { NbTabLabelDirective } from './tab-label';
 })
 export class NbTabComponent {
   /** Content for the tab label given by `<ng-template nbTabLabel>`. */
-  @ContentChild(NbTabLabelDirective) templateLabel: NbTabLabelDirective | undefined;
+  @ContentChild(NbTabLabelDirective, { read: TemplateRef }) templateLabel: TemplateRef<any> | undefined;
 
   /**
    * Tab title
@@ -287,7 +288,7 @@ export class NbTabComponent {
           <nb-icon *ngIf="tab.tabIcon" [config]="tab.tabIcon"></nb-icon>
           <!-- If there is a label template, use it. -->
           <ng-template [ngIf]="tab.templateLabel">
-            <ng-template *ngTemplateOutlet="tab.templateLabel.template"></ng-template>
+            <ng-template *ngTemplateOutlet="tab.templateLabel"></ng-template>
           </ng-template>
           <!-- If there is not a label template, fall back to the tab title. -->
           <ng-template [ngIf]="!tab.templateLabel">
