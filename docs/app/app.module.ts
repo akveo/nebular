@@ -24,9 +24,9 @@ import { NgdThemeModule } from './@theme/theme.module';
 import { NgdAppComponent } from './app.component';
 import { routes } from './app.routes';
 
-import { structure  } from '../structure';
+import { structure } from '../structure';
 import { DOCS, STRUCTURE } from './app.options';
-const docs = require('../output.json');
+import * as docs from '../output.json';
 
 @NgModule({
   imports: [
@@ -47,17 +47,9 @@ const docs = require('../output.json');
     NbDialogModule.forRoot(),
     RouterModule.forRoot(routes, { useHash: false, relativeLinkResolution: 'legacy' }),
   ],
-  declarations: [
-    NgdAppComponent,
-  ],
-  providers: [
-    Title,
-    { provide: STRUCTURE, useValue: structure },
-    { provide: DOCS, useValue: docs },
-  ],
-  entryComponents: [
-  ],
+  declarations: [NgdAppComponent],
+  providers: [Title, { provide: STRUCTURE, useValue: structure }, { provide: DOCS, useValue: docs }],
+  entryComponents: [],
   bootstrap: [NgdAppComponent],
 })
-export class AppModule {
-}
+export class AppModule {}

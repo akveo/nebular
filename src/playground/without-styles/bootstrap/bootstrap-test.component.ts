@@ -4,33 +4,18 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { Component, OnInit } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap'
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NbThemeService } from '@nebular/theme';
 
-import 'style-loader!./styles.scss';
-
 @Component({
-  selector: 'nb-bootstrap-test',
-  styles: [
-    `
-    button {
-      margin-right: 1rem;
-    }
-
-    .input-group {
-      margin-bottom: 1rem;
-    }
-    `,
-  ],
+  selector: 'npg-bootstrap-test',
   templateUrl: './bootstrap-test.component.html',
+  styleUrls: ['./bootstrap-test.component.scss', './styles.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class BootstrapTestComponent implements OnInit {
-
-  constructor(
-    private themeService: NbThemeService,
-    private modalService: NgbModal,
-  ) {}
+  constructor(private themeService: NbThemeService, private modalService: NgbModal) {}
 
   ngOnInit() {
     this.themeService.changeTheme('default');

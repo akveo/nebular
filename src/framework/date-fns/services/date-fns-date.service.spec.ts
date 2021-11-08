@@ -8,8 +8,7 @@ import { TestBed } from '@angular/core/testing';
 import { LOCALE_ID } from '@angular/core';
 
 import { NbDateService } from '@nebular/theme';
-
-import { NbDateFnsDateService } from './date-fns-date.service';
+import { NbDateFnsDateService } from '@nebular/date-fns';
 
 describe('date-fns-date-service', () => {
   let dateService: NbDateService<Date>;
@@ -24,7 +23,7 @@ describe('date-fns-date-service', () => {
     expect(dateService.parse(date, 'MM.dd.yyyy')).toEqual(new Date(2018, 5, 15));
   });
 
-  it('should not format if date isn\'t passed', () => {
+  it("should not format if date isn't passed", () => {
     expect(() => dateService.format(undefined, 'DD.MM.YYYY')).not.toThrow();
     expect(dateService.format(undefined, 'DD.MM.YYYY')).toEqual('');
   });
@@ -40,23 +39,20 @@ describe('date-fns-date-service', () => {
     const formattedDate = `${month}${SEPARATOR}${day}${SEPARATOR}${year}`;
 
     beforeEach(() => {
-      dateService = new NbDateFnsDateService(
-        TestBed.inject(LOCALE_ID),
-        {
-          format: FORMAT,
-          parseOptions: {
-            useAdditionalWeekYearTokens: true,
-            useAdditionalDayOfYearTokens: true,
-          },
-          formatOptions: {
-            useAdditionalWeekYearTokens: true,
-            useAdditionalDayOfYearTokens: true,
-          },
+      dateService = new NbDateFnsDateService(TestBed.inject(LOCALE_ID), {
+        format: FORMAT,
+        parseOptions: {
+          useAdditionalWeekYearTokens: true,
+          useAdditionalDayOfYearTokens: true,
         },
-      );
+        formatOptions: {
+          useAdditionalWeekYearTokens: true,
+          useAdditionalDayOfYearTokens: true,
+        },
+      });
     });
 
-    it('should use format from global config if isn\'t passed as parameter', () => {
+    it("should use format from global config if isn't passed as parameter", () => {
       expect(dateService.format(date, undefined)).toEqual(formattedDate);
 
       const parsedDate = dateService.parse(formattedDate, FORMAT);

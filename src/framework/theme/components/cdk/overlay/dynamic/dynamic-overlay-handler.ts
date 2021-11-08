@@ -140,7 +140,7 @@ export class NbDynamicOverlayHandler {
      * so we just ignore this call
      */
     if (!this.dynamicOverlay) {
-      return;
+      return undefined;
     }
 
     if (this.isPositionStrategyUpdateRequired()) {
