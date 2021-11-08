@@ -1,5 +1,4 @@
 import { ElementRef, Injectable, SimpleChange, Type } from '@angular/core';
-import { filter } from 'rxjs/operators';
 
 import { NbTrigger, NbTriggerStrategy, NbTriggerStrategyBuilderService } from '../overlay-trigger';
 import {
@@ -62,11 +61,8 @@ export class NbDynamicOverlayHandler {
   }
 
   disabled(disabled: boolean) {
+    this.changes.disabled = new NbDynamicOverlayChange(this._disabled, disabled);
     this._disabled = disabled;
-
-    if (disabled && this.dynamicOverlay && this.dynamicOverlay.isAttached) {
-      this.dynamicOverlay.hide();
-    }
     return this;
   }
 
@@ -123,6 +119,7 @@ export class NbDynamicOverlayHandler {
       this._context,
       this.createPositionStrategy(),
       this._overlayConfig,
+      this._disabled,
     );
 
     this.connect();
@@ -160,6 +157,10 @@ export class NbDynamicOverlayHandler {
 
     if (this.isOverlayConfigUpdateRequired()) {
       this.dynamicOverlay.setOverlayConfig(this._overlayConfig);
+    }
+
+    if (this.changes.disabled) {
+      this.dynamicOverlay.setDisabled(this._disabled);
     }
 
     this.clearChanges();
@@ -204,7 +205,7 @@ export class NbDynamicOverlayHandler {
       .container(() => dynamicOverlay.getContainer())
       .build();
 
-    this.triggerStrategy.show$.pipe(filter(() => !this._disabled)).subscribe(() => dynamicOverlay.show());
+    this.triggerStrategy.show$.subscribe(() => dynamicOverlay.show());
     this.triggerStrategy.hide$.subscribe(() => dynamicOverlay.hide());
   }
 
