@@ -23,7 +23,7 @@ import { convertToBoolProperty, NbBooleanInput } from '../helpers';
 import { NbComponentOrCustomStatus } from '../component-status';
 import { NbBadgePosition } from '../badge/badge.component';
 import { NbIconConfig } from '../icon/icon.component';
-import { NB_TAB_LABEL, NbTabLabelDirective } from './tab-label';
+import { NbTabLabelDirective } from './tab-label';
 
 /**
  * Specific tab container.
@@ -45,15 +45,8 @@ import { NB_TAB_LABEL, NbTabLabelDirective } from './tab-label';
   `,
 })
 export class NbTabComponent {
-  /** Content for the tab label given by `<ng-template nb-tab-label>`. */
-  @ContentChild(NB_TAB_LABEL)
-  get templateLabel(): NbTabLabelDirective { return this._templateLabel; }
-  set templateLabel(value: NbTabLabelDirective) {
-    if (value) {
-      this._templateLabel = value;
-    }
-  }
-  protected _templateLabel: NbTabLabelDirective;
+  /** Content for the tab label given by `<ng-template nbTabLabel>`. */
+  @ContentChild(NbTabLabelDirective) templateLabel: NbTabLabelDirective | undefined;
 
   /**
    * Tab title
@@ -278,32 +271,36 @@ export class NbTabComponent {
   styleUrls: ['./tabset.component.scss'],
   template: `
     <ul class="tabset">
-      <li *ngFor="let tab of tabs"
-          (click)="selectTab(tab)"
-          (keyup.space)="selectTab(tab)"
-          (keyup.enter)="selectTab(tab)"
-          [class.responsive]="tab.responsive"
-          [class.active]="tab.active"
-          [class.disabled]="tab.disabled"
-          [attr.tabindex]="tab.disabled ? -1 : 0"
-          [attr.data-tab-id]="tab.tabId"
-          class="tab">
+      <li
+        *ngFor="let tab of tabs"
+        (click)="selectTab(tab)"
+        (keyup.space)="selectTab(tab)"
+        (keyup.enter)="selectTab(tab)"
+        [class.responsive]="tab.responsive"
+        [class.active]="tab.active"
+        [class.disabled]="tab.disabled"
+        [attr.tabindex]="tab.disabled ? -1 : 0"
+        [attr.data-tab-id]="tab.tabId"
+        class="tab"
+      >
         <a href (click)="$event.preventDefault()" tabindex="-1" class="tab-link">
           <nb-icon *ngIf="tab.tabIcon" [config]="tab.tabIcon"></nb-icon>
           <!-- If there is a label template, use it. -->
           <ng-template [ngIf]="tab.templateLabel">
-            <ng-template [cdkPortalOutlet]="tab.templateLabel"></ng-template>
+            <ng-template *ngTemplateOutlet="tab.templateLabel.template"></ng-template>
           </ng-template>
           <!-- If there is not a label template, fall back to the tab title. -->
           <ng-template [ngIf]="!tab.templateLabel">
             <span class="tab-text">{{ tab.tabTitle }}</span>
           </ng-template>
         </a>
-        <nb-badge *ngIf="tab.badgeText || tab.badgeDot"
+        <nb-badge
+          *ngIf="tab.badgeText || tab.badgeDot"
           [text]="tab.badgeText"
           [dotMode]="tab.badgeDot"
           [status]="tab.badgeStatus"
-          [position]="tab.badgePosition">
+          [position]="tab.badgePosition"
+        >
         </nb-badge>
       </li>
     </ul>
@@ -311,7 +308,6 @@ export class NbTabComponent {
   `,
 })
 export class NbTabsetComponent implements AfterContentInit {
-
   @ContentChildren(NbTabComponent) tabs: QueryList<NbTabComponent>;
 
   @HostBinding('class.full-width')
@@ -339,17 +335,14 @@ export class NbTabsetComponent implements AfterContentInit {
    */
   @Output() changeTab = new EventEmitter<any>();
 
-  constructor(private route: ActivatedRoute,
-              private changeDetectorRef: ChangeDetectorRef) {
-  }
+  constructor(private route: ActivatedRoute, private changeDetectorRef: ChangeDetectorRef) {}
 
   // TODO: refactoring this component, avoid change detection loop
   ngAfterContentInit() {
     this.route.params
       .pipe(
-        map(
-          (params: any) =>
-            this.tabs.find((tab) => this.routeParam ? tab.route === params[this.routeParam] : tab.active),
+        map((params: any) =>
+          this.tabs.find((tab) => (this.routeParam ? tab.route === params[this.routeParam] : tab.active)),
         ),
         delay(0),
         map((tab: NbTabComponent) => tab || this.tabs.first),
@@ -364,7 +357,7 @@ export class NbTabsetComponent implements AfterContentInit {
   // TODO: navigate to routeParam
   selectTab(selectedTab: NbTabComponent) {
     if (!selectedTab.disabled) {
-      this.tabs.forEach(tab => tab.active = tab === selectedTab);
+      this.tabs.forEach((tab) => (tab.active = tab === selectedTab));
       this.changeTab.emit(selectedTab);
     }
   }
