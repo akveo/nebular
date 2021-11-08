@@ -19,10 +19,11 @@ import { NbToastComponent } from './toast.component';
 import { NB_DOCUMENT } from '../../theme.options';
 
 export class NbToastRef {
-  constructor(private toastContainer: NbToastContainer,
-              private toast: NbToast,
-              private toastComponent: NbToastComponent) {
-  }
+  constructor(
+    private toastContainer: NbToastContainer,
+    private toast: NbToast,
+    private toastComponent: NbToastComponent,
+  ) {}
 
   close() {
     this.toastContainer.destroy(this.toast);
@@ -45,10 +46,11 @@ export class NbToastContainer {
     return this.containerRef.location.nativeElement;
   }
 
-  constructor(protected position: NbGlobalPosition,
-              protected containerRef: ComponentRef<NbToastrContainerComponent>,
-              protected positionHelper: NbPositionHelper) {
-  }
+  constructor(
+    protected position: NbGlobalPosition,
+    protected containerRef: ComponentRef<NbToastrContainerComponent>,
+    protected positionHelper: NbPositionHelper,
+  ) {}
 
   attach(toast: NbToast): NbToastRef {
     if (toast.config.preventDuplicates && this.isDuplicate(toast)) {
@@ -76,7 +78,7 @@ export class NbToastContainer {
       this.prevToast = null;
     }
 
-    this.toasts = this.toasts.filter(t => t !== toast);
+    this.toasts = this.toasts.filter((t) => t !== toast);
     this.updateContainer();
   }
 
@@ -91,13 +93,11 @@ export class NbToastContainer {
   }
 
   protected isDuplicateAmongAll(toast: NbToast): boolean {
-    return this.toasts.some(t => this.toastDuplicateCompareFunc(t, toast));
+    return this.toasts.some((t) => this.toastDuplicateCompareFunc(t, toast));
   }
 
   protected toastDuplicateCompareFunc = (t1: NbToast, t2: NbToast): boolean => {
-    return t1.message === t2.message
-      && t1.title === t2.title
-      && t1.config.status === t2.config.status;
+    return t1.message === t2.message && t1.title === t2.title && t1.config.status === t2.config.status;
   };
 
   protected removeToastIfLimitReached(toast: NbToast) {
@@ -137,7 +137,10 @@ export class NbToastContainer {
 
   protected subscribeOnClick(toastComponent: NbToastComponent, toast: NbToast) {
     toastComponent.toastClick
-      .pipe(takeUntil(toastComponent.destroy), filter(() => toast.config.destroyByClick))
+      .pipe(
+        filter(() => toast.config.destroyByClick),
+        takeUntil(toastComponent.destroy),
+      )
       .subscribe(() => this.destroy(toast));
   }
 
@@ -155,12 +158,13 @@ interface NbToastrOverlayWithContainer {
 export class NbToastrContainerRegistry {
   protected overlays: Map<NbGlobalPosition, NbToastrOverlayWithContainer> = new Map();
 
-  constructor(protected overlay: NbOverlayService,
-              protected positionBuilder: NbPositionBuilderService,
-              protected positionHelper: NbPositionHelper,
-              protected cfr: ComponentFactoryResolver,
-              @Inject(NB_DOCUMENT) protected document: any) {
-  }
+  constructor(
+    protected overlay: NbOverlayService,
+    protected positionBuilder: NbPositionBuilderService,
+    protected positionHelper: NbPositionHelper,
+    protected cfr: ComponentFactoryResolver,
+    @Inject(NB_DOCUMENT) protected document: any,
+  ) {}
 
   get(position: NbGlobalPosition): NbToastContainer {
     const logicalPosition: NbGlobalLogicalPosition = this.positionHelper.toLogicalPosition(position);
@@ -276,9 +280,10 @@ export class NbToastrContainerRegistry {
  * */
 @Injectable()
 export class NbToastrService {
-  constructor(@Inject(NB_TOASTR_CONFIG) protected globalConfig: NbToastrConfig,
-              protected containerRegistry: NbToastrContainerRegistry) {
-  }
+  constructor(
+    @Inject(NB_TOASTR_CONFIG) protected globalConfig: NbToastrConfig,
+    protected containerRegistry: NbToastrContainerRegistry,
+  ) {}
 
   /**
    * Shows toast with message, title and user config.
