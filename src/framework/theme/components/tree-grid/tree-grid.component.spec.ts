@@ -17,7 +17,7 @@ import {
 
 interface TreeNode<T> {
   data: T;
-  expanded?: boolean,
+  expanded?: boolean;
   children?: TreeNode<T>[];
 }
 
@@ -46,8 +46,8 @@ class BaseTreeGridTestComponent {
       <tr nbTreeGridRow *nbTreeGridRowDef="let row; columns: columns"></tr>
 
       <ng-container *ngFor="let column of columns" [nbTreeGridColumnDef]="column">
-        <th nbTreeGridHeaderCell *nbTreeGridHeaderCellDef>{{column}}</th>
-        <td nbTreeGridCell *nbTreeGridCellDef="let row">{{row.data[column]}}</td>
+        <th nbTreeGridHeaderCell *nbTreeGridHeaderCellDef>{{ column }}</th>
+        <td nbTreeGridCell *nbTreeGridCellDef="let row">{{ row.data[column] }}</td>
       </ng-container>
     </table>
   `,
@@ -61,23 +61,18 @@ export class TreeGridBasicTestComponent extends BaseTreeGridTestComponent {}
       <tr nbTreeGridRow *nbTreeGridRowDef="let row; columns: columns"></tr>
 
       <ng-container *ngFor="let column of columns" [nbTreeGridColumnDef]="column">
-        <th nbTreeGridHeaderCell *nbTreeGridHeaderCellDef>{{column}}</th>
-        <td nbTreeGridCell *nbTreeGridCellDef="let row">{{row.data[column]}}</td>
+        <th nbTreeGridHeaderCell *nbTreeGridHeaderCellDef>{{ column }}</th>
+        <td nbTreeGridCell *nbTreeGridCellDef="let row">{{ row.data[column] }}</td>
       </ng-container>
     </table>
   `,
 })
 export class TreeGridWithHeaderTestComponent extends BaseTreeGridTestComponent {}
 
-function setupFixture(
-    componentType: Type<any>,
-    columns: string[],
-    data?: TreeNode<any>[],
-  ): ComponentFixture<any> {
-
+function setupFixture(componentType: Type<any>, columns: string[], data?: TreeNode<any>[]): ComponentFixture<any> {
   TestBed.configureTestingModule({
-    imports: [ NbThemeModule.forRoot(), NbTreeGridModule ],
-    declarations: [ componentType ],
+    imports: [NbThemeModule.forRoot(), NbTreeGridModule],
+    declarations: [componentType],
   });
 
   const fixture = TestBed.createComponent(componentType);
@@ -90,53 +85,61 @@ function setupFixture(
   return fixture;
 }
 
-const abcColumns: string[] = [ 'a', 'b', 'c' ];
-const twoRowsData: TreeNode<any>[] = [
-  { data: { a: 'a1', b: 'b1', c: 'c1' } },
-  { data: { a: 'a2', b: 'b2', c: 'c2' } },
-];
+const abcColumns: string[] = ['a', 'b', 'c'];
+const twoRowsData: TreeNode<any>[] = [{ data: { a: 'a1', b: 'b1', c: 'c1' } }, { data: { a: 'a2', b: 'b2', c: 'c2' } }];
 const nestedRowData: TreeNode<any>[] = [
   {
     data: { a: 'a1', b: 'b1', c: 'c1' },
-    children: [ { data: { a: 'a2', b: 'b2', c: 'c2' } } ],
+    children: [{ data: { a: 'a2', b: 'b2', c: 'c2' } }],
   },
 ];
 const nestedExpandedRowData: TreeNode<any>[] = [
   {
     data: { a: 'a1', b: 'b1', c: 'c1' },
     expanded: true,
-    children: [ { data: { a: 'a2', b: 'b2', c: 'c2' } } ],
+    children: [{ data: { a: 'a2', b: 'b2', c: 'c2' } }],
   },
 ];
 const customStructureData: CustomStructure[] = [
   {
-    a: 'a1', b: 'b1', c: 'c1', expanded: true,
+    a: 'a1',
+    b: 'b1',
+    c: 'c1',
+    expanded: true,
     childNodes: [{ a: 'a2', b: 'b2', c: 'c2' }],
   },
 ];
 
 describe('NbTreeGridComponent', () => {
-
   it('should convert plain data to NbTreeGridDataSource', () => {
-    const fixture: ComponentFixture<TreeGridBasicTestComponent> =
-      setupFixture(TreeGridBasicTestComponent, abcColumns, twoRowsData);
+    const fixture: ComponentFixture<TreeGridBasicTestComponent> = setupFixture(
+      TreeGridBasicTestComponent,
+      abcColumns,
+      twoRowsData,
+    );
     expect(fixture.componentInstance.treeGridComponent.dataSource instanceof NbTreeGridDataSource).toEqual(true);
   });
 
   it('should render rows', () => {
-    const fixture: ComponentFixture<TreeGridBasicTestComponent> =
-      setupFixture(TreeGridBasicTestComponent, abcColumns, twoRowsData);
+    const fixture: ComponentFixture<TreeGridBasicTestComponent> = setupFixture(
+      TreeGridBasicTestComponent,
+      abcColumns,
+      twoRowsData,
+    );
     const rows: HTMLElement[] = fixture.nativeElement.querySelectorAll('.nb-tree-grid .nb-tree-grid-row');
     expect(rows.length).toEqual(twoRowsData.length);
   });
 
   it('should render data in row', () => {
-    const fixture: ComponentFixture<TreeGridBasicTestComponent> =
-      setupFixture(TreeGridBasicTestComponent, abcColumns, twoRowsData);
+    const fixture: ComponentFixture<TreeGridBasicTestComponent> = setupFixture(
+      TreeGridBasicTestComponent,
+      abcColumns,
+      twoRowsData,
+    );
     const rows: HTMLElement[] = fixture.nativeElement.querySelectorAll('.nb-tree-grid-row');
 
     rows.forEach((row: HTMLElement, rowIndex: number) => {
-      const dataCell = row.querySelectorAll('.nb-tree-grid-cell');
+      const dataCell = row.querySelectorAll<HTMLElement>('.nb-tree-grid-cell');
 
       dataCell.forEach((cell: HTMLElement, cellIndex: number) => {
         expect(cell.innerText).toEqual(twoRowsData[rowIndex].data[abcColumns[cellIndex]]);
@@ -145,12 +148,15 @@ describe('NbTreeGridComponent', () => {
   });
 
   it('should render header row if provided', () => {
-    const fixture: ComponentFixture<TreeGridWithHeaderTestComponent> =
-      setupFixture(TreeGridWithHeaderTestComponent, abcColumns, twoRowsData);
+    const fixture: ComponentFixture<TreeGridWithHeaderTestComponent> = setupFixture(
+      TreeGridWithHeaderTestComponent,
+      abcColumns,
+      twoRowsData,
+    );
     const headerRow: HTMLElement = fixture.nativeElement.querySelector('.nb-tree-grid-header-row');
     expect(headerRow).not.toBeNull();
 
-    const headerCells = headerRow.querySelectorAll('.nb-tree-grid-header-cell');
+    const headerCells = headerRow.querySelectorAll<HTMLElement>('.nb-tree-grid-header-cell');
     expect(headerCells.length).toEqual(abcColumns.length);
 
     headerCells.forEach((cell: HTMLElement, cellIndex: number) => {
@@ -159,10 +165,13 @@ describe('NbTreeGridComponent', () => {
   });
 
   it('should render column text in header cell', () => {
-    const fixture: ComponentFixture<TreeGridWithHeaderTestComponent> =
-      setupFixture(TreeGridWithHeaderTestComponent, abcColumns, twoRowsData);
+    const fixture: ComponentFixture<TreeGridWithHeaderTestComponent> = setupFixture(
+      TreeGridWithHeaderTestComponent,
+      abcColumns,
+      twoRowsData,
+    );
     const headerRow: HTMLElement = fixture.nativeElement.querySelector('.nb-tree-grid-header-row');
-    const headerCells = headerRow.querySelectorAll('.nb-tree-grid-header-cell');
+    const headerCells = headerRow.querySelectorAll<HTMLElement>('.nb-tree-grid-header-cell');
 
     headerCells.forEach((cell: HTMLElement, cellIndex: number) => {
       expect(cell.innerText).toEqual(abcColumns[cellIndex]);
@@ -170,22 +179,31 @@ describe('NbTreeGridComponent', () => {
   });
 
   it('should not render collapsed rows', () => {
-    const fixture: ComponentFixture<TreeGridWithHeaderTestComponent> =
-      setupFixture(TreeGridBasicTestComponent, abcColumns, nestedRowData);
+    const fixture: ComponentFixture<TreeGridWithHeaderTestComponent> = setupFixture(
+      TreeGridBasicTestComponent,
+      abcColumns,
+      nestedRowData,
+    );
     const rows = fixture.nativeElement.querySelectorAll('.nb-tree-grid-row');
     expect(rows.length).toEqual(1);
   });
 
   it('should render initially expanded row', () => {
-    const fixture: ComponentFixture<TreeGridWithHeaderTestComponent> =
-      setupFixture(TreeGridBasicTestComponent, abcColumns, nestedExpandedRowData);
+    const fixture: ComponentFixture<TreeGridWithHeaderTestComponent> = setupFixture(
+      TreeGridBasicTestComponent,
+      abcColumns,
+      nestedExpandedRowData,
+    );
     const rows = fixture.nativeElement.querySelectorAll('.nb-tree-grid-row');
     expect(rows.length).toEqual(2);
   });
 
   it('should remove collapsed rows', fakeAsync(() => {
-    const fixture: ComponentFixture<TreeGridWithHeaderTestComponent> =
-      setupFixture(TreeGridBasicTestComponent, abcColumns, nestedExpandedRowData);
+    const fixture: ComponentFixture<TreeGridWithHeaderTestComponent> = setupFixture(
+      TreeGridBasicTestComponent,
+      abcColumns,
+      nestedExpandedRowData,
+    );
     const row: HTMLElement = fixture.nativeElement.querySelector('.nb-tree-grid-row');
     row.click();
     fixture.detectChanges();
@@ -195,8 +213,11 @@ describe('NbTreeGridComponent', () => {
   }));
 
   it('should add expanded row children', fakeAsync(() => {
-    const fixture: ComponentFixture<TreeGridWithHeaderTestComponent> =
-      setupFixture(TreeGridBasicTestComponent, abcColumns, nestedRowData);
+    const fixture: ComponentFixture<TreeGridWithHeaderTestComponent> = setupFixture(
+      TreeGridBasicTestComponent,
+      abcColumns,
+      nestedRowData,
+    );
     const row: HTMLElement = fixture.nativeElement.querySelector('.nb-tree-grid-row');
     row.click();
     fixture.detectChanges();
@@ -208,18 +229,18 @@ describe('NbTreeGridComponent', () => {
   describe('NbTreeGridDataSourceBuilder custom node getters', () => {
     const mockConnectionViewer = { viewChange: EMPTY };
     const getters: NbGetters<CustomStructure, CustomStructure> = {
-      dataGetter: node => node,
-      childrenGetter: node => node.childNodes,
-      expandedGetter: node => !!node.expanded,
+      dataGetter: (node) => node,
+      childrenGetter: (node) => node.childNodes,
+      expandedGetter: (node) => !!node.expanded,
     };
     let dataSourceBuilder: NbTreeGridDataSourceBuilder<CustomStructure>;
 
     beforeEach(() => {
       TestBed.configureTestingModule({
-        imports: [ NbThemeModule.forRoot(), NbTreeGridModule ],
+        imports: [NbThemeModule.forRoot(), NbTreeGridModule],
       });
     });
-    beforeEach(inject([ NbTreeGridDataSourceBuilder ], builder => {
+    beforeEach(inject([NbTreeGridDataSourceBuilder], (builder) => {
       dataSourceBuilder = builder;
     }));
 
@@ -231,9 +252,10 @@ describe('NbTreeGridComponent', () => {
       expect(dataGetterSpy).toHaveBeenCalledTimes(2);
 
       let presentationNodes: NbTreeGridPresentationNode<CustomStructure>[] = [];
-      dataSource.connect(mockConnectionViewer)
+      dataSource
+        .connect(mockConnectionViewer)
         .pipe(take(1))
-        .subscribe(nodes => presentationNodes = nodes as NbTreeGridPresentationNode<CustomStructure>[]);
+        .subscribe((nodes) => (presentationNodes = nodes as NbTreeGridPresentationNode<CustomStructure>[]));
       tick();
 
       expect(presentationNodes[0].data).toEqual(customStructureData[0]);
@@ -248,9 +270,10 @@ describe('NbTreeGridComponent', () => {
       expect(childrenGetterSpy).toHaveBeenCalledTimes(2);
 
       let presentationNodes: NbTreeGridPresentationNode<CustomStructure>[] = [];
-      dataSource.connect(mockConnectionViewer)
+      dataSource
+        .connect(mockConnectionViewer)
         .pipe(take(1))
-        .subscribe(nodes => presentationNodes = nodes as NbTreeGridPresentationNode<CustomStructure>[]);
+        .subscribe((nodes) => (presentationNodes = nodes as NbTreeGridPresentationNode<CustomStructure>[]));
       tick();
 
       expect(presentationNodes[0].data.childNodes[0]).toEqual(customStructureData[0].childNodes[0]);
@@ -264,9 +287,10 @@ describe('NbTreeGridComponent', () => {
       expect(expandedGetterSpy).toHaveBeenCalledTimes(2);
 
       let presentationNodes: NbTreeGridPresentationNode<CustomStructure>[] = [];
-      dataSource.connect(mockConnectionViewer)
+      dataSource
+        .connect(mockConnectionViewer)
         .pipe(take(1))
-        .subscribe(nodes => presentationNodes = nodes as NbTreeGridPresentationNode<CustomStructure>[]);
+        .subscribe((nodes) => (presentationNodes = nodes as NbTreeGridPresentationNode<CustomStructure>[]));
       tick();
 
       expect(presentationNodes[0].expanded).toEqual(true);

@@ -2,6 +2,10 @@ import { Injectable } from '@angular/core';
 
 import { NbOverlayContainer } from '../overlay/mapping';
 
+function throwLayoutNotFoundError(): void {
+  throw new Error(`[NbOverlayContainerAdapter]: Layout not found.
+  When using Nebular '<nb-layout>' is required and should wrap other nebular components.`);
+}
 
 /**
  * Provides nb-layout as overlay container.
@@ -24,10 +28,17 @@ export class NbOverlayContainerAdapter extends NbOverlayContainer {
   }
 
   protected _createContainer(): void {
-    const container = this._document.createElement('div');
+    this.checkContainer();
 
+    const container = this._document.createElement('div');
     container.classList.add('cdk-overlay-container');
     this.container.appendChild(container);
     this._containerElement = container;
+  }
+
+  protected checkContainer(): void {
+    if (!this.container) {
+      throwLayoutNotFoundError();
+    }
   }
 }

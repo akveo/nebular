@@ -4,20 +4,16 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { NbThemeService } from '@nebular/theme';
-import 'style-loader!../styles/styles.scss';
-
 
 @Component({
-  selector: 'nb-playground-base',
-  template: `
-    <router-outlet></router-outlet>
-  `,
+  template: ` <router-outlet></router-outlet> `,
+  styleUrls: ['../styles/styles.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class PlaygroundBaseComponent implements OnInit {
-  constructor(private themeService: NbThemeService) {
-  }
+  constructor(private themeService: NbThemeService) {}
 
   ngOnInit() {
     this.themeService.changeTheme('default');

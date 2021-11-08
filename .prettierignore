@@ -1,0 +1,5 @@
+# Ignore artifacts:
+build
+coverage
+dist
+tools/dev-schematics/*/files
