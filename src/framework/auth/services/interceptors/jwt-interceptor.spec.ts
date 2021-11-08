@@ -7,23 +7,28 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { of as observableOf } from 'rxjs';
 
 import {
-  NB_AUTH_OPTIONS, NB_AUTH_STRATEGIES,
+  NbAuthJWTInterceptor,
+  NbAuthService,
+  NB_AUTH_OPTIONS,
+  NB_AUTH_STRATEGIES,
   NB_AUTH_TOKEN_INTERCEPTOR_FILTER,
   NB_AUTH_TOKENS,
   NB_AUTH_USER_OPTIONS,
-} from '@nebular/auth/auth.options';
-import { NbAuthJWTInterceptor, NbAuthService } from '@nebular/auth';
-import { NbTokenService } from '@nebular/auth/services/token/token.service';
-import { NbTokenLocalStorage, NbTokenStorage } from '@nebular/auth/services/token/token-storage';
-import { NB_AUTH_FALLBACK_TOKEN, NbAuthTokenParceler } from '@nebular/auth/services/token/token-parceler';
-import { NbDummyAuthStrategy } from '@nebular/auth';
-import { nbOptionsFactory, nbStrategiesFactory } from '@nebular/auth/auth.module';
-import { NbAuthJWTToken, NbAuthSimpleToken} from '@nebular/auth/services/token/token';
-
+  NbTokenService,
+  NbTokenLocalStorage,
+  NbTokenStorage,
+  NB_AUTH_FALLBACK_TOKEN,
+  NbAuthTokenParceler,
+  NbDummyAuthStrategy,
+  nbOptionsFactory,
+  nbStrategiesFactory,
+  NbAuthJWTToken,
+  NbAuthSimpleToken,
+} from '@nebular/auth';
 
 describe('jwt-interceptor', () => {
 
-  // tslint:disable
+  // eslint-disable
   const validJWTValue = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJjZXJlbWEuZnIiLCJpYXQiOjE1MzIzNTA4MDAsImV4cCI6MjUzMjM1MDgwMCwic3ViIjoiQWxhaW4gQ0hBUkxFUyIsImFkbWluIjp0cnVlfQ.Rgkgb4KvxY2wp2niXIyLJNJeapFp9z3tCF-zK6Omc8c';
   const validJWTToken = new NbAuthJWTToken(validJWTValue, 'dummy');
   const expiredJWTToken = new NbAuthJWTToken('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzY290Y2guaW8iLCJleHAiOjEzMDA4MTkzODAsIm5hbWUiOiJDaHJpcyBTZXZpbGxlamEiLCJhZG1pbiI6dHJ1ZX0.03f329983b86f7d9a9f5fef85305880101d5e302afafa20154d094b229f75773','dummy');
