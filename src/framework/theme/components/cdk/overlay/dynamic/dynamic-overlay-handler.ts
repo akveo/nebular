@@ -159,7 +159,7 @@ export class NbDynamicOverlayHandler {
       this.dynamicOverlay.setOverlayConfig(this._overlayConfig);
     }
 
-    if (this.changes.disabled) {
+    if (this.isDisabledUpdated()) {
       this.dynamicOverlay.setDisabled(this._disabled);
     }
 
@@ -263,6 +263,10 @@ export class NbDynamicOverlayHandler {
 
   protected isOverlayConfigUpdated(): boolean {
     return this.changes.overlayConfig && this.changes.overlayConfig.isChanged();
+  }
+
+  protected isDisabledUpdated(): boolean {
+    return this.changes.disabled && this.changes.disabled.isChanged();
   }
 
   protected clearChanges() {
