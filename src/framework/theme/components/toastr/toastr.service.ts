@@ -19,22 +19,20 @@ import { NbToastComponent } from './toast.component';
 import { NB_DOCUMENT } from '../../theme.options';
 
 export class NbToastRef {
-  constructor(
-    private toastContainer: NbToastContainer,
-    private toast: NbToast,
-    private toastComponent: NbToastComponent,
-  ) {}
+  toastInstance: NbToastComponent;
+
+  constructor(private toastContainer: NbToastContainer, private toast: NbToast) {}
 
   close() {
     this.toastContainer.destroy(this.toast);
   }
 
   onClose(): Observable<void> {
-    return this.toastComponent.destroy.asObservable();
+    return this.toastInstance.destroy.asObservable();
   }
 
   onClick(): Observable<void> {
-    return this.toastComponent.toastClick.asObservable();
+    return this.toastInstance.toastClick.asObservable();
   }
 }
 
@@ -70,7 +68,10 @@ export class NbToastContainer {
 
     this.prevToast = toast;
 
-    return new NbToastRef(this, toast, toastComponent);
+    const toastRef = new NbToastRef(this, toast);
+    toastRef.toastInstance = toastComponent;
+
+    return toastRef;
   }
 
   destroy(toast: NbToast) {
