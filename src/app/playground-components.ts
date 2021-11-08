@@ -1497,6 +1497,12 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         component: 'WindowControlsComponent',
         name: 'Window Controls',
       },
+      {
+        path: 'window-template-title.component',
+        link: '/window/window-template-title.component',
+        component: 'WindowTemplateTitleComponent',
+        name: 'Window Template Title',
+      },
     ],
   },
   {
