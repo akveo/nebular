@@ -1,0 +1,21 @@
+{
+  "$schema": "../../../node_modules/ng-packagr/ng-package.schema.json",
+  "dest": "../../../dist/date-fns",
+  "lib": {
+    "entryFile": "./public_api.ts",
+    "umdId": "nb.date-fns",
+    "umdModuleIds": {
+      "@nebular/theme": "nb.theme",
+      "date-fns/parse": "date-fns.parse",
+      "date-fns/format": "date-fns.format",
+      "date-fns/getWeek": "date-fns.getWeek"
+    }
+  },
+  "assets": [
+    "LICENSE.txt",
+    "**/*.{html,scss}",
+    "schematics/collection.json",
+    "schematics/*/schema.json",
+    "schematics/*/files/**"
+  ]
+}

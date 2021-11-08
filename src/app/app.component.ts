@@ -12,7 +12,7 @@ import { filter, takeUntil } from 'rxjs/operators';
 import { ComponentLink, PLAYGROUND_COMPONENTS } from './playground-components';
 
 @Component({
-  selector: 'nb-app-root',
+  selector: 'npg-app-root',
   styleUrls: ['./app.component.scss'],
   template: `
     <div class="options-bar" dir="ltr">
@@ -33,17 +33,13 @@ import { ComponentLink, PLAYGROUND_COMPONENTS } from './playground-components';
   `,
 })
 export class AppComponent implements AfterViewInit, OnDestroy {
-
   private destroy$ = new Subject<void>();
   document: Document;
   optionsVisible: boolean = true;
   componentsListVisible: boolean = false;
   components: ComponentLink[] = PLAYGROUND_COMPONENTS;
 
-  constructor(
-    @Inject(NB_DOCUMENT) document,
-    private router: Router,
-  ) {
+  constructor(@Inject(NB_DOCUMENT) document, private router: Router) {
     this.document = document;
   }
 
@@ -52,14 +48,14 @@ export class AppComponent implements AfterViewInit, OnDestroy {
       return;
     }
 
-    fromEvent(this.document, 'keypress')
+    fromEvent<KeyboardEvent>(this.document, 'keypress')
       .pipe(
         filter((e: KeyboardEvent) => e.key === 'c'),
         takeUntil(this.destroy$),
       )
       .subscribe(this.toggleComponentsOverlay.bind(this));
 
-    fromEvent(this.document, 'keyup')
+    fromEvent<KeyboardEvent>(this.document, 'keyup')
       .pipe(
         filter((e: KeyboardEvent) => e.key === 'Escape' || e.key === 'Esc'),
         takeUntil(this.destroy$),
@@ -68,10 +64,10 @@ export class AppComponent implements AfterViewInit, OnDestroy {
 
     this.router.events
       .pipe(
-        filter(event => event instanceof NavigationStart),
+        filter((event) => event instanceof NavigationStart),
         takeUntil(this.destroy$),
       )
-      .subscribe(() => this.hideComponentsOverlay())
+      .subscribe(() => this.hideComponentsOverlay());
   }
 
   ngOnDestroy() {

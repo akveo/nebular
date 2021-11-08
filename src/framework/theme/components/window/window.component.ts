@@ -24,7 +24,13 @@ import { NbWindowRef } from './window-ref';
   template: `
     <nb-card>
       <nb-card-header>
-        <div cdkFocusInitial class="title" tabindex="-1">{{ config.title }}</div>
+        <div *ngIf="config.titleTemplate; else textTitleTemplate" cdkFocusInitial tabindex="-1">
+          <ng-container *ngTemplateOutlet="config.titleTemplate; context: {$implicit: config.titleTemplateContext}"></ng-container>
+        </div>
+
+        <ng-template #textTitleTemplate>
+          <div cdkFocusInitial class="title" tabindex="-1">{{ config.title }}</div>
+        </ng-template>
 
         <div class="buttons">
           <ng-container *ngIf="showMinimize">
@@ -167,6 +173,8 @@ export class NbWindowComponent implements OnInit, AfterViewChecked, OnDestroy {
   protected attachComponent() {
     const portal = new NbComponentPortal(this.content as Type<any>, null, null, this.cfr);
     const ref = this.overlayContainer.attachComponentPortal(portal, this.context);
+    this.windowRef.componentInstance = ref.instance;
+
     ref.changeDetectorRef.detectChanges();
   }
 }
