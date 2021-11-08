@@ -242,7 +242,7 @@ export class NbDialogService {
     }
 
     if (config.closeOnEsc) {
-      observableFromEvent(this.document, 'keyup')
+      observableFromEvent<KeyboardEvent>(this.document, 'keyup')
         .pipe(
           filter((event: KeyboardEvent) => event.keyCode === 27),
           takeUntil(dialogRef.onClose),
