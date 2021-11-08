@@ -4,6 +4,8 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
+@use 'sass:math';
+
 @mixin nb-popover-theme {
   nb-popover {
     $arrow-size: nb-theme(popover-arrow-size);
@@ -59,19 +61,19 @@
     }
 
     &.nb-overlay-left .arrow {
-      right: calc(-1 * #{$arrow-size} - #{$arrow-size} / 2 + 2px);
-      top: calc(50% - #{$arrow-size / 2});
+      right: calc(-1 * #{$arrow-size} - math.div(#{$arrow-size}, 2) + 2px);
+      top: calc(50% - #{math.div($arrow-size, 2)});
       transform: rotate(90deg);
     }
 
     &.nb-overlay-start-top .arrow {
-      right: calc(-1 * #{$arrow-size} - #{$arrow-size} / 2 + 2px);
+      right: calc(-1 * #{$arrow-size} - math.div(#{$arrow-size}, 2) + 2px);
       bottom: $arrow-size;
       transform: rotate(90deg);
     }
 
     &.nb-overlay-start-bottom .arrow {
-      right: calc(-1 * #{$arrow-size} - #{$arrow-size} / 2 + 2px);
+      right: calc(-1 * #{$arrow-size} - math.div(#{$arrow-size}, 2) + 2px);
       top: $arrow-size;
       transform: rotate(90deg);
     }
@@ -97,19 +99,19 @@
     }
 
     &.nb-overlay-right .arrow {
-      left: calc(-1 * #{$arrow-size} - #{$arrow-size} / 2 + 2px);
-      top: calc(50% - #{$arrow-size / 2});
+      left: calc(-1 * #{$arrow-size} - math.div(#{$arrow-size}, 2) + 2px);
+      top: calc(50% - #{math.div($arrow-size, 2)});
       transform: rotate(270deg);
     }
 
     &.nb-overlay-end-top .arrow {
-      left: calc(-1 * #{$arrow-size} - #{$arrow-size} / 2 + 2px);
+      left: calc(-1 * #{$arrow-size} - math.div(#{$arrow-size}, 2) + 2px);
       bottom: $arrow-size;
       transform: rotate(270deg);
     }
 
     &.nb-overlay-end-bottom .arrow {
-      left: calc(-1 * #{$arrow-size} - #{$arrow-size} / 2 + 2px);
+      left: calc(-1 * #{$arrow-size} - math.div(#{$arrow-size}, 2) + 2px);
       top: $arrow-size;
       transform: rotate(270deg);
     }
