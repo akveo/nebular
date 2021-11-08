@@ -7,10 +7,7 @@
 import { inject, TestBed, waitForAsync } from '@angular/core/testing';
 import { DatePipe } from '@angular/common';
 
-import { NbCalendarMonthModelService } from './calendar-month-model.service';
-import { NbDateService } from './date.service';
-import { NbNativeDateService } from './native-date.service';
-
+import { NbCalendarMonthModelService, NbDateService, NbNativeDateService } from '@nebular/theme';
 
 describe('month-model-service', () => {
   let monthModel: NbCalendarMonthModelService<Date>;
@@ -21,12 +18,13 @@ describe('month-model-service', () => {
     });
   });
 
-  beforeEach(waitForAsync(inject(
-    [NbCalendarMonthModelService],
-    (_monthModel) => {
-      monthModel = _monthModel;
-    },
-  )));
+  beforeEach(
+    waitForAsync(
+      inject([NbCalendarMonthModelService], (_monthModel) => {
+        monthModel = _monthModel;
+      }),
+    ),
+  );
 
   it('should create days grid with active month', () => {
     const date = new Date(2018, 7, 1);
@@ -42,10 +40,10 @@ describe('month-model-service', () => {
     const grid: Date[][] = monthModel.createDaysGrid(date, false);
     const firstTwoEmpty = grid.shift().slice(0, 3);
     const lastTwoEmpty = grid.pop().slice(6);
-    firstTwoEmpty.forEach(cell => {
+    firstTwoEmpty.forEach((cell) => {
       expect(cell).toBeNull();
     });
-    lastTwoEmpty.forEach(cell => {
+    lastTwoEmpty.forEach((cell) => {
       expect(cell).toBeNull();
     });
   });

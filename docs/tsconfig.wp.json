@@ -1,0 +1,8 @@
+{
+  "extends": "./tsconfig.app.json",
+  "paths": {
+    "@nebular/*": [
+      "dist/*"
+    ]
+  }
+}
