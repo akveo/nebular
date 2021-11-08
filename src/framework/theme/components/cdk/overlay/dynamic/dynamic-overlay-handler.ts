@@ -1,5 +1,5 @@
-import { filter } from 'rxjs/operators';
 import { ElementRef, Injectable, SimpleChange, Type } from '@angular/core';
+import { filter } from 'rxjs/operators';
 
 import { NbTrigger, NbTriggerStrategy, NbTriggerStrategyBuilderService } from '../overlay-trigger';
 import {
@@ -14,7 +14,6 @@ import { NbDynamicOverlay } from './dynamic-overlay';
 import { NbOverlayConfig } from '../mapping';
 
 export class NbDynamicOverlayChange extends SimpleChange {
-
   constructor(previousValue: any, currentValue: any, firstChange: boolean = false) {
     super(previousValue, currentValue, firstChange);
   }
@@ -26,7 +25,6 @@ export class NbDynamicOverlayChange extends SimpleChange {
 
 @Injectable()
 export class NbDynamicOverlayHandler {
-
   protected _componentType: Type<NbRenderableContainer>;
   protected _host: ElementRef;
   protected _context: Object = {};
@@ -45,10 +43,11 @@ export class NbDynamicOverlayHandler {
 
   protected changes: { [key: string]: NbDynamicOverlayChange } = {};
 
-  constructor(private positionBuilder: NbPositionBuilderService,
-              private triggerStrategyBuilder: NbTriggerStrategyBuilderService,
-              private dynamicOverlayService: NbDynamicOverlay) {
-  }
+  constructor(
+    private positionBuilder: NbPositionBuilderService,
+    private triggerStrategyBuilder: NbTriggerStrategyBuilderService,
+    private dynamicOverlayService: NbDynamicOverlay,
+  ) {}
 
   host(host: ElementRef) {
     this.changes.host = new NbDynamicOverlayChange(this._host, host);
@@ -116,7 +115,7 @@ export class NbDynamicOverlayHandler {
   build() {
     if (!this._componentType || !this._host) {
       throw Error(`NbDynamicOverlayHandler: at least 'componentType' and 'host' should be
-      passed before building a dynamic overlay.`)
+      passed before building a dynamic overlay.`);
     }
     this.dynamicOverlay = this.dynamicOverlayService.create(
       this._componentType,
@@ -210,9 +209,7 @@ export class NbDynamicOverlayHandler {
   }
 
   protected isContainerRerenderRequired() {
-    return this.isContentUpdated()
-      || this.isContextUpdated()
-      || this.isPositionStrategyUpdateRequired();
+    return this.isContentUpdated() || this.isContextUpdated() || this.isPositionStrategyUpdateRequired();
   }
 
   protected isPositionStrategyUpdateRequired(): boolean {
