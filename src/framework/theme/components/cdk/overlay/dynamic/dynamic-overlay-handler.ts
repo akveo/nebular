@@ -30,7 +30,7 @@ export class NbDynamicOverlayHandler {
   protected _context: Object = {};
   protected _content: NbOverlayContent;
   protected _trigger: NbTrigger = NbTrigger.NOOP;
-  protected _disable: boolean = false;
+  protected _disabled: boolean = false;
   protected _position: NbPosition = NbPosition.TOP;
   protected _adjustment: NbAdjustment = NbAdjustment.NOOP;
   protected _offset: number = 15;
@@ -61,8 +61,8 @@ export class NbDynamicOverlayHandler {
     return this;
   }
 
-  disable(disabled: boolean) {
-    this._disable = disabled;
+  disabled(disabled: boolean) {
+    this._disabled = disabled;
 
     if (disabled && this.dynamicOverlay && this.dynamicOverlay.isAttached) {
       this.dynamicOverlay.hide();
@@ -204,7 +204,7 @@ export class NbDynamicOverlayHandler {
       .container(() => dynamicOverlay.getContainer())
       .build();
 
-    this.triggerStrategy.show$.pipe(filter(() => !this._disable)).subscribe(() => dynamicOverlay.show());
+    this.triggerStrategy.show$.pipe(filter(() => !this._disabled)).subscribe(() => dynamicOverlay.show());
     this.triggerStrategy.hide$.subscribe(() => dynamicOverlay.hide());
   }
 
