@@ -6,16 +6,9 @@ import { NbStepChangeEvent } from '@nebular/theme';
   styleUrls: ['./stepper-step-change-event.component.scss'],
 })
 export class StepperStepChangeEventComponent {
-  currentStepIndex = 0;
-  previousStepIndex = 0;
-  randomIndex = 0;
+  changeEvent: NbStepChangeEvent;
 
-  handleStepChange(stepperInfo: NbStepChangeEvent): void {
-    this.currentStepIndex = stepperInfo.index;
-    this.previousStepIndex = stepperInfo.previouslySelectedIndex;
-  }
-
-  onClick() {
-    this.randomIndex = Math.floor(Math.random() * 4);
+  handleStepChange(e: NbStepChangeEvent): void {
+    this.changeEvent = e;
   }
 }

@@ -1,6 +1,9 @@
 <nb-card>
   <nb-card-body>
-    <nb-stepper orientation="horizontal" [selectedIndex]="randomIndex" (stepChange)="handleStepChange($event)">
+    <p *ngIf="changeEvent">Previous step: {{ changeEvent.previouslySelectedIndex }}</p>
+    <p *ngIf="changeEvent">Current step: {{ changeEvent.index }}</p>
+
+    <nb-stepper orientation="horizontal" (stepChange)="handleStepChange($event)">
       <nb-step [label]="labelOne">
         <ng-template #labelOne>First step</ng-template>
         <h4>Step content #1</h4>
@@ -41,11 +44,5 @@
         <button nbButton disabled nbStepperNext>next</button>
       </nb-step>
     </nb-stepper>
-
-    <div class="random-index">
-      <button nbButton (click)="onClick()">Random index</button>
-
-      <span class="h4"> Current step - {{ currentStepIndex }}, previous step - {{ previousStepIndex }} </span>
-    </div>
   </nb-card-body>
 </nb-card>
