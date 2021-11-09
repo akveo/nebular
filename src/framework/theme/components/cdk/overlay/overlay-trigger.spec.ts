@@ -1,9 +1,7 @@
 import { DOCUMENT } from '@angular/common';
-import { fakeAsync, flush, TestBed, tick } from '@angular/core/testing';
+import { fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { ComponentRef } from '@angular/core';
-
-import { NbTrigger, NbTriggerStrategyBuilderService } from './overlay-trigger';
-import { NB_DOCUMENT } from '../../../theme.options';
+import { NbTrigger, NbTriggerStrategyBuilderService, NB_DOCUMENT } from '@nebular/theme';
 import createSpy = jasmine.createSpy;
 
 // TODO: move into a separate file
