@@ -83,5 +83,5 @@ export class NbFirebasePasswordStrategyOptions extends NbAuthStrategyOptions {
   };
 }
 
-// tslint:disable-next-line:max-line-length
+// eslint-disable-next-line max-len
 export const firebasePasswordStrategyOptions: NbFirebasePasswordStrategyOptions = new NbFirebasePasswordStrategyOptions();

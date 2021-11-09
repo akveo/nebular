@@ -556,6 +556,12 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         component: 'RangepickerShowcaseComponent',
         name: 'Rangepicker Showcase',
       },
+      {
+        path: 'datepicker-filter.component',
+        link: '/datepicker/datepicker-filter.component',
+        component: 'DatepickerFilterComponent',
+        name: 'Datepicker Filter',
+      },
     ],
   },
   {
@@ -1225,6 +1231,12 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         component: 'StepperLinearComponent',
         name: 'Stepper Linear',
       },
+      {
+        path: 'stepper-step-change-event.component',
+        link: '/stepper/stepper-step-change-event.component',
+        component: 'StepperStepChangeEventComponent',
+        name: 'Stepper Step Change Event',
+      },
     ],
   },
   {
@@ -1490,6 +1502,12 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         link: '/window/window-controls.component',
         component: 'WindowControlsComponent',
         name: 'Window Controls',
+      },
+      {
+        path: 'window-template-title.component',
+        link: '/window/window-template-title.component',
+        component: 'WindowTemplateTitleComponent',
+        name: 'Window Template Title',
       },
     ],
   },
