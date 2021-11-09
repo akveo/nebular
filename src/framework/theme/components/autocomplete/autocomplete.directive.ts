@@ -247,14 +247,14 @@ export class NbAutocompleteDirective<T> implements OnDestroy, AfterViewInit, Con
     this._onTouched();
   }
 
-  show(): void {
+  show() {
     if (this.isClosed && this.autocomplete.options.length) {
       this.attachToOverlay();
       this.setActiveItem();
     }
   }
 
-  hide(): void {
+  hide() {
     if (this.isOpen) {
       this.overlayRef.detach();
       // Need to update class via @HostBinding

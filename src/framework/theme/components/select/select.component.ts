@@ -899,7 +899,7 @@ export class NbSelectComponent
     }
   }
 
-  show(): void {
+  show() {
     if (this.canOpen()) {
       this.attachToOverlay();
       this.setActiveOption();
@@ -907,7 +907,7 @@ export class NbSelectComponent
     }
   }
 
-  hide(): void {
+  hide() {
     if (this.isOpen) {
       this.ref.detach();
       this.cd.markForCheck();
@@ -1206,7 +1206,7 @@ export class NbSelectComponent
 
   /** Whether the overlay is allowed to open. */
   protected canOpen(): boolean {
-    return this.isHidden && !this.disabled && this.options?.length > 0;
+    return this.isHidden && this.options?.length > 0;
   }
 
   /**
