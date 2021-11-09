@@ -62,25 +62,29 @@ import { NbComponentOrCustomStatus } from '../component-status';
       </ng-container>
     </div>
     <div class="message-row">
-      <input nbInput
-             fullWidth
-             [status]="getInputStatus()"
-             (focus)="inputFocus = true"
-             (blur)="inputFocus = false"
-             (mouseenter)="inputHover = true"
-             (mouseleave)="inputHover = false"
-             [(ngModel)]="message"
-             (ngModelChange)="onModelChange($event)"
-             [class.with-button]="showButton"
-             type="text"
-             placeholder="{{ fileOver ? dropFilePlaceholder : messagePlaceholder }}"
-             (keyup.enter)="sendMessage()">
-      <button nbButton
-              [status]="getButtonStatus()"
-              *ngIf="showButton"
-              [class.with-icon]="!buttonTitle"
-              (click)="sendMessage()"
-              class="send-button">
+      <input
+        nbInput
+        fullWidth
+        [status]="getInputStatus()"
+        (focus)="inputFocus = true"
+        (blur)="inputFocus = false"
+        (mouseenter)="inputHover = true"
+        (mouseleave)="inputHover = false"
+        [(ngModel)]="message"
+        (ngModelChange)="onModelChange($event)"
+        [class.with-button]="showButton"
+        type="text"
+        placeholder="{{ fileOver ? dropFilePlaceholder : messagePlaceholder }}"
+        (keyup.enter)="sendMessage()"
+      />
+      <button
+        nbButton
+        [status]="getButtonStatus()"
+        *ngIf="showButton"
+        [class.with-icon]="!buttonTitle"
+        (click)="sendMessage()"
+        class="send-button"
+      >
         <nb-icon *ngIf="!buttonTitle; else title" [icon]="buttonIcon" pack="nebular-essentials"></nb-icon>
         <ng-template #title>{{ buttonTitle }}</ng-template>
       </button>
@@ -89,7 +93,6 @@ import { NbComponentOrCustomStatus } from '../component-status';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NbChatFormComponent {
-
   status: NbComponentOrCustomStatus = 'basic';
   inputFocus: boolean = false;
   inputHover: boolean = false;
@@ -142,18 +145,18 @@ export class NbChatFormComponent {
    *
    * @type {EventEmitter<{ message: string, files: File[] }>}
    */
-  @Output() send = new EventEmitter<{ message: string, files: File[] }>();
+  @Output() send = new EventEmitter<{ message: string; files: File[] }>();
 
   /**
    * Emits when message input value has been changed
    * @type {EventEmitter<string>}
    */
+  // eslint-disable-next-line @angular-eslint/no-output-on-prefix
   @Output() onInputChange = new EventEmitter<string>();
 
   @HostBinding('class.file-over') fileOver = false;
 
-  constructor(protected cd: ChangeDetectorRef, protected domSanitizer: DomSanitizer) {
-  }
+  constructor(protected cd: ChangeDetectorRef, protected domSanitizer: DomSanitizer) {}
 
   @HostListener('drop', ['$event'])
   onDrop(event: any) {
@@ -163,7 +166,6 @@ export class NbChatFormComponent {
 
       this.fileOver = false;
       if (event.dataTransfer && event.dataTransfer.files) {
-
         for (const file of event.dataTransfer.files) {
           const res = file;
 
@@ -191,7 +193,7 @@ export class NbChatFormComponent {
   }
 
   @HostListener('dragover', ['$event'])
-  onDragOver(event: any) {
+  onDragOver(event: DragEvent) {
     event.preventDefault();
     event.stopPropagation();
     if (this.dropFiles) {
@@ -200,7 +202,7 @@ export class NbChatFormComponent {
   }
 
   @HostListener('dragleave', ['$event'])
-  onDragLeave(event: any) {
+  onDragLeave(event: DragEvent) {
     event.preventDefault();
     event.stopPropagation();
     if (this.dropFiles) {
@@ -250,5 +252,4 @@ export class NbChatFormComponent {
   onModelChange(value: string): void {
     this.onInputChange.emit(value);
   }
-
 }
