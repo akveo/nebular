@@ -90,8 +90,9 @@ export interface NbStepChangeEvent {
  * 'nbStepperPrevious' and 'nbStepperNext' buttons.
  * @stacked-example(Disabled steps navigation, stepper/stepper-disabled-step-nav.component)
  *
- * `stepChange` output for listening step change. This event emits `NbStepChangeEvent` object.
+ * Use `stepChange` output to listening to step change event. This event emits `NbStepChangeEvent` object.
  * @stacked-example(Step change event, stepper/stepper-step-change-event.component)
+ *
  * @styles
  *
  * stepper-step-text-color:
