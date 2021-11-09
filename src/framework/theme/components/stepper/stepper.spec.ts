@@ -90,11 +90,16 @@ describe('Stepper: Step Change', () => {
 
   it('should emit step change when changing step via selected input', () => {
     stepper.stepChange.subscribe(stepChangeSpy);
-    const step = fixture.debugElement.query(By.css('.step')).componentInstance;
-    stepper.selected = step;
-
+    const thirdStep = testComponent.steps.get(2);
+    stepper.selected = thirdStep;
     fixture.detectChanges();
-    expect(stepChangeSpy).not.toHaveBeenCalled();
+
+    expect(stepChangeSpy).toHaveBeenCalled();
+    const [changeEvent] = stepChangeSpy.calls.first().args;
+    expect(changeEvent.index).toEqual(2);
+    expect(changeEvent.step).toEqual(thirdStep);
+    expect(changeEvent.previouslySelectedIndex).toEqual(1);
+    expect(changeEvent.previouslySelectedStep).toEqual(testComponent.steps.get(1));
   });
 
   it('should emit step change when changing step via selectedIndex input', () => {
