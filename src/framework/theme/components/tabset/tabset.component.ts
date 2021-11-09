@@ -45,7 +45,7 @@ import { NbTabTitleDirective } from './tab-title';
   `,
 })
 export class NbTabComponent {
-  /** Content for the tab label given by `<ng-template nbTabTitle>`. */
+  /** Content for the tab label given by '<ng-template nbTabTitle>'. */
   @ContentChild(NbTabTitleDirective) titleTemplate: NbTabTitleDirective | undefined;
 
   /**
@@ -223,6 +223,9 @@ export class NbTabComponent {
  *
  * It is also possible to disable a tab using `disabled` property:
  * @stacked-example(Disabled Tab, tabset/tabset-disabled.component)
+ *
+ * You can provide a template as a tab title via `<ng-template nbTabTitle>`:
+ * @stacked-example(Tab title template, tabset/tabset-title.component)
  *
  * @styles
  *
