@@ -286,11 +286,9 @@ export class NbTabComponent {
       >
         <a href (click)="$event.preventDefault()" tabindex="-1" class="tab-link">
           <nb-icon *ngIf="tab.tabIcon" [config]="tab.tabIcon"></nb-icon>
-          <!-- If there is a label template, use it. -->
           <ng-template [ngIf]="tab.templateLabel">
             <ng-template *ngTemplateOutlet="tab.templateLabel"></ng-template>
           </ng-template>
-          <!-- If there is not a label template, fall back to the tab title. -->
           <ng-template [ngIf]="!tab.templateLabel">
             <span class="tab-text">{{ tab.tabTitle }}</span>
           </ng-template>
