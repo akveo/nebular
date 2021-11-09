@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { NbStepperComponent, NbStepperModule, NbThemeModule } from '@nebular/theme';
+import { NbStepComponent, NbStepperComponent, NbStepperModule, NbThemeModule } from '@nebular/theme';
 
 @Component({
   selector: 'nb-step-changed-test',
@@ -21,9 +21,13 @@ import { NbStepperComponent, NbStepperModule, NbThemeModule } from '@nebular/the
     </nb-stepper>
   `,
 })
-export class NbStepChangeTestComponent {}
+export class NbStepChangeTestComponent {
+  @ViewChild(NbStepperComponent) stepper: NbStepperComponent;
+  @ViewChildren(NbStepComponent) steps: QueryList<NbStepComponent>;
+}
 
 describe('Stepper: Step Change', () => {
+  let testComponent: NbStepChangeTestComponent;
   let stepper: NbStepperComponent;
   let fixture: ComponentFixture<NbStepChangeTestComponent>;
   let stepChangeSpy;
@@ -35,8 +39,9 @@ describe('Stepper: Step Change', () => {
     });
 
     fixture = TestBed.createComponent(NbStepChangeTestComponent);
-    stepper = fixture.debugElement.query(By.directive(NbStepperComponent)).componentInstance;
     fixture.detectChanges();
+    testComponent = fixture.componentInstance;
+    stepper = testComponent.stepper;
     stepChangeSpy = jasmine.createSpy('step change spy');
   });
 
@@ -57,7 +62,7 @@ describe('Stepper: Step Change', () => {
     expect(stepChangeSpy).toHaveBeenCalled();
   });
 
-  it('Step change should not emit if navigation is disabled', () => {
+  it('should not emit step change if navigation is disabled', () => {
     stepper.stepChange.subscribe(stepChangeSpy);
     stepper.disableStepNavigation = true;
     const step = fixture.debugElement.query(By.css('.step'));
@@ -67,7 +72,7 @@ describe('Stepper: Step Change', () => {
     expect(stepChangeSpy).not.toHaveBeenCalled();
   });
 
-  it('Step change should not emit in last step', () => {
+  it('should not emit step change when calling next on the last step', () => {
     stepper.selectedIndex = 2;
     stepper.stepChange.subscribe(stepChangeSpy);
     stepper.next();
@@ -75,7 +80,7 @@ describe('Stepper: Step Change', () => {
     expect(stepChangeSpy).not.toHaveBeenCalled();
   });
 
-  it('Step change should not emit in first step', () => {
+  it('should not emit step change when calling prev on the first step', () => {
     stepper.selectedIndex = 0;
     stepper.stepChange.subscribe(stepChangeSpy);
     stepper.previous();
@@ -83,7 +88,7 @@ describe('Stepper: Step Change', () => {
     expect(stepChangeSpy).not.toHaveBeenCalled();
   });
 
-  it('Step change should emit via selected input', () => {
+  it('should emit step change when changing step via selected input', () => {
     stepper.stepChange.subscribe(stepChangeSpy);
     const step = fixture.debugElement.query(By.css('.step')).componentInstance;
     stepper.selected = step;
@@ -92,10 +97,11 @@ describe('Stepper: Step Change', () => {
     expect(stepChangeSpy).not.toHaveBeenCalled();
   });
 
-  it('Step change should emit via selectedIndex input', () => {
+  it('should emit step change when changing step via selectedIndex input', () => {
     stepper.stepChange.subscribe(stepChangeSpy);
     stepper.selectedIndex = 2;
     fixture.detectChanges();
+
     expect(stepChangeSpy).toHaveBeenCalled();
   });
 });
