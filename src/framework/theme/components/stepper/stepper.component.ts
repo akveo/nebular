@@ -20,7 +20,7 @@ import { NbStepComponent } from './step.component';
 
 export type NbStepperOrientation = 'vertical' | 'horizontal';
 
-export interface NbStepChangedEvent {
+export interface NbStepChangeEvent {
   index: number;
   step: NbStepComponent;
   previouslySelectedIndex: number;
@@ -90,7 +90,7 @@ export interface NbStepChangedEvent {
  * 'nbStepperPrevious' and 'nbStepperNext' buttons.
  * @stacked-example(Disabled steps navigation, stepper/stepper-disabled-step-nav.component)
  *
- * `stepChanged` output for listening step change. This event emits `NbStepChangedEvent` object.
+ * `stepChange` output for listening step change. This event emits `NbStepChangeEvent` object.
  * @stacked-example(Step change event, stepper/stepper-step-change-event.component)
  * @styles
  *
@@ -142,7 +142,7 @@ export class NbStepperComponent {
       const previouslySelectedStep = this.selected;
       this._selectedIndex = index;
 
-      this.stepChanged.emit({
+      this.stepChange.emit({
         index: this.selectedIndex,
         step: this.selected,
         previouslySelectedIndex,
@@ -202,9 +202,9 @@ export class NbStepperComponent {
 
   /**
    * Emits when step changed
-   * @type {EventEmitter<NbStepChangedEvent>}
+   * @type {EventEmitter<NbStepChangeEvent>}
    */
-  @Output() stepChanged = new EventEmitter<NbStepChangedEvent>();
+  @Output() stepChange = new EventEmitter<NbStepChangeEvent>();
 
   @HostBinding('class.vertical')
   get vertical() {
@@ -247,7 +247,7 @@ export class NbStepperComponent {
   reset() {
     this._selectedIndex = 0;
     this.steps.forEach((step) => step.reset());
-    this.stepChanged.emit({
+    this.stepChange.emit({
       index: this.selectedIndex,
       step: this.selected,
       previouslySelectedIndex: undefined,
