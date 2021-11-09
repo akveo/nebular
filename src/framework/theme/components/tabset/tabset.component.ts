@@ -16,7 +16,6 @@ import {
   HostBinding,
   ChangeDetectorRef,
   ContentChild,
-  TemplateRef,
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
@@ -24,7 +23,7 @@ import { convertToBoolProperty, NbBooleanInput } from '../helpers';
 import { NbComponentOrCustomStatus } from '../component-status';
 import { NbBadgePosition } from '../badge/badge.component';
 import { NbIconConfig } from '../icon/icon.component';
-import { NbTabLabelDirective } from './tab-label';
+import { NbTabTitleDirective } from './tab-title';
 
 /**
  * Specific tab container.
@@ -46,8 +45,8 @@ import { NbTabLabelDirective } from './tab-label';
   `,
 })
 export class NbTabComponent {
-  /** Content for the tab label given by `<ng-template nbTabLabel>`. */
-  @ContentChild(NbTabLabelDirective, { read: TemplateRef }) titleTemplate: TemplateRef<any> | undefined;
+  /** Content for the tab label given by `<ng-template nbTabTitle>`. */
+  @ContentChild(NbTabTitleDirective) titleTemplate: NbTabTitleDirective | undefined;
 
   /**
    * Tab title
@@ -288,7 +287,7 @@ export class NbTabComponent {
           <nb-icon *ngIf="tab.tabIcon" [config]="tab.tabIcon"></nb-icon>
           <ng-container
             *ngIf="tab.titleTemplate; else textTitleTemplate"
-            [ngTemplateOutlet]="tab.titleTemplate"
+            [ngTemplateOutlet]="tab.titleTemplate.templateRef"
           ></ng-container>
           <ng-template #textTitleTemplate>
             <span class="tab-text">{{ tab.tabTitle }}</span>
