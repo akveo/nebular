@@ -8,7 +8,7 @@ import { share } from 'rxjs/operators';
 export enum NbLayoutDirection {
   LTR = 'ltr',
   RTL = 'rtl',
-};
+}
 
 /**
  * Layout direction setting injection token.
@@ -21,7 +21,7 @@ export const NB_LAYOUT_DIRECTION = new InjectionToken<NbLayoutDirection>('Layout
  */
 @Injectable()
 export class NbLayoutDirectionService {
-  private $directionChange = new ReplaySubject(1);
+  private $directionChange = new ReplaySubject<NbLayoutDirection>(1);
 
   constructor(
     @Optional() @Inject(NB_LAYOUT_DIRECTION) private direction = NbLayoutDirection.LTR,

@@ -1,15 +1,14 @@
 import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { NbChatModule, NbThemeModule } from '@nebular/theme';
-import { NbCustomMessageService } from './custom-message.service';
+import { NbChatModule, NbThemeModule, NbChatCustomMessageService } from '@nebular/theme';
 
 @Component({
   selector: 'nb-custom-message-directive-test',
   template: `
     <div *nbCustomMessage="customMessageType">
-        <p>Hello world</p>
+      <p>Hello world</p>
     </div>
-    `,
+  `,
 })
 export class NbCustomMessageTestComponent {
   customMessageType: string = 'simpleMessageType';
@@ -23,7 +22,7 @@ describe('Directive chat-custom-message-directive: NbCustomMessageTestComponent'
     TestBed.configureTestingModule({
       imports: [NbThemeModule.forRoot(), NbChatModule],
       declarations: [NbCustomMessageTestComponent],
-      providers: [NbCustomMessageService],
+      providers: [NbChatCustomMessageService],
     });
 
     fixture = TestBed.createComponent(NbCustomMessageTestComponent);

@@ -27,11 +27,8 @@ import { NbComponentSize } from '../component-size';
 import { NbComponentShape } from '../component-shape';
 import { NbComponentOrCustomStatus } from '../component-status';
 import { NbButton } from '../button/base-button';
-import {
-  NbButtonToggleAppearance,
-  NbButtonToggleChange,
-  NbButtonToggleDirective,
-} from './button-toggle.directive';
+import { NbButtonToggleAppearance, NbButtonToggleChange, NbButtonToggleDirective } from './button-toggle.directive';
+import { NB_BUTTON_GROUP } from './button-group-injection-tokens';
 
 /**
  * `<nb-button-group>` visually groups buttons together and allow to control buttons properties and the state as a
@@ -104,13 +101,11 @@ import {
  **/
 @Component({
   selector: 'nb-button-group',
-  template: `
-    <ng-content></ng-content>
-  `,
+  template: ` <ng-content></ng-content> `,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [{ provide: NB_BUTTON_GROUP, useExisting: NbButtonGroupComponent }],
 })
 export class NbButtonGroupComponent implements OnChanges, AfterContentInit {
-
   protected lastEmittedValue: any[] = [];
 
   protected readonly destroy$: Subject<void> = new Subject<void>();
@@ -211,7 +206,7 @@ export class NbButtonGroupComponent implements OnChanges, AfterContentInit {
    * Emits when `nbButtonToggle` pressed state change. `$event` contains an array of the currently pressed button
    * toggles.
    */
-  @Output() valueChange = new EventEmitter<any[]>()
+  @Output() valueChange = new EventEmitter<any[]>();
 
   @HostBinding('attr.role') role = 'group';
 
@@ -223,10 +218,7 @@ export class NbButtonGroupComponent implements OnChanges, AfterContentInit {
     return [];
   }
 
-  constructor(
-    protected cd: ChangeDetectorRef,
-    protected statusService: NbStatusService,
-  ) {}
+  constructor(protected cd: ChangeDetectorRef, protected statusService: NbStatusService) {}
 
   ngOnChanges({ size, status, shape, multiple, filled, outline, ghost, disabled }: SimpleChanges) {
     if (size || status || shape || multiple || filled || outline || ghost || disabled) {
@@ -235,12 +227,10 @@ export class NbButtonGroupComponent implements OnChanges, AfterContentInit {
   }
 
   ngAfterContentInit(): void {
-    this.buttonsChange$
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((buttons: NbButton[]) => {
-        this.listenButtonPressedState(buttons);
-        this.syncButtonsProperties(buttons);
-      });
+    this.buttonsChange$.pipe(takeUntil(this.destroy$)).subscribe((buttons: NbButton[]) => {
+      this.listenButtonPressedState(buttons);
+      this.syncButtonsProperties(buttons);
+    });
 
     this.buttons.changes
       .pipe(
@@ -266,8 +256,9 @@ export class NbButtonGroupComponent implements OnChanges, AfterContentInit {
       return;
     }
 
-    const buttonsPressedChange$: Observable<NbButtonToggleChange>[] = toggleButtons
-      .map((button: NbButtonToggleDirective) => button.pressedChange$);
+    const buttonsPressedChange$: Observable<NbButtonToggleChange>[] = toggleButtons.map(
+      (button: NbButtonToggleDirective) => button.pressedChange$,
+    );
 
     merge(...buttonsPressedChange$)
       .pipe(

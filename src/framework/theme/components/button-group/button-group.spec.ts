@@ -22,13 +22,15 @@ import {
 @Component({
   selector: 'nb-button-group-test',
   template: `
-    <nb-button-group [size]="size"
-                     [status]="status"
-                     [shape]="shape"
-                     [appearance]="appearance"
-                     [disabled]="groupDisabled"
-                     [multiple]="multiple"
-                     (valueChange)="onValueChange($event)">
+    <nb-button-group
+      [size]="size"
+      [status]="status"
+      [shape]="shape"
+      [appearance]="appearance"
+      [disabled]="groupDisabled"
+      [multiple]="multiple"
+      (valueChange)="onValueChange($event)"
+    >
       <button nbButtonToggle value="A">A</button>
       <button nbButtonToggle value="B">B</button>
       <button nbButtonToggle value="C">C</button>
@@ -51,7 +53,7 @@ export class NbButtonGroupTestComponent {
   @ViewChild(NbButtonGroupComponent) buttonGroup: NbButtonGroupComponent;
   @ViewChildren(NbButtonToggleDirective) toggleButtons: QueryList<NbButtonToggleDirective>;
 
-  onValueChange() {}
+  onValueChange(value) {}
 }
 
 describe('Component: NbButtonGroup', () => {
@@ -62,7 +64,7 @@ describe('Component: NbButtonGroup', () => {
 
   beforeEach(fakeAsync(() => {
     TestBed.configureTestingModule({
-      imports: [ NbThemeModule.forRoot(), NbButtonGroupModule, NbButtonModule ],
+      imports: [NbThemeModule.forRoot(), NbButtonGroupModule, NbButtonModule],
       declarations: [NbButtonGroupTestComponent],
     });
 
@@ -78,25 +80,25 @@ describe('Component: NbButtonGroup', () => {
   }));
 
   it('should change buttons status after initialization', () => {
-    toggleButtons.forEach(button => expect(button.status).toEqual(buttonGroup.status));
+    toggleButtons.forEach((button) => expect(button.status).toEqual(buttonGroup.status));
   });
 
   it('should change buttons size after initialization', () => {
-    toggleButtons.forEach(button => expect(button.size).toEqual(buttonGroup.size));
+    toggleButtons.forEach((button) => expect(button.size).toEqual(buttonGroup.size));
   });
 
   it('should change buttons appearance after initialization', () => {
-    toggleButtons.forEach(button => expect(button.appearance).toEqual(buttonGroup.appearance));
+    toggleButtons.forEach((button) => expect(button.appearance).toEqual(buttonGroup.appearance));
   });
 
   it('should change buttons shape after initialization', () => {
-    toggleButtons.forEach(button => expect(button.shape).toEqual(buttonGroup.shape));
+    toggleButtons.forEach((button) => expect(button.shape).toEqual(buttonGroup.shape));
   });
 
   it('should change buttons disabled state after initialization', () => {
     testComponent.groupDisabled = true;
     fixture.detectChanges();
-    toggleButtons.forEach(button => expect(button.disabled).toEqual(true));
+    toggleButtons.forEach((button) => expect(button.disabled).toEqual(true));
   });
 
   it('should change the status of newly added buttons', fakeAsync(() => {
@@ -148,7 +150,7 @@ describe('Component: NbButtonGroup', () => {
   it('should correctly emit active buttons', fakeAsync(() => {
     const clickButton = (el: HTMLElement, index = 0) => {
       el.querySelectorAll<HTMLButtonElement>('[nbButtonToggle]')[index].click();
-    }
+    };
     const nativeElement = fixture.nativeElement;
     spyOn(testComponent, 'onValueChange').and.callThrough();
     testComponent.showLastButton = true;
@@ -162,5 +164,5 @@ describe('Component: NbButtonGroup', () => {
     clickButton(nativeElement, 5);
     tick();
     expect(testComponent.onValueChange).toHaveBeenCalledWith(['A', 'F']);
-  }))
+  }));
 });
