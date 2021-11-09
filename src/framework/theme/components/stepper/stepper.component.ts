@@ -118,12 +118,11 @@ export interface NbStepChangedEvent {
  */
 @Component({
   selector: 'nb-stepper',
-  styleUrls: [ './stepper.component.scss' ],
+  styleUrls: ['./stepper.component.scss'],
   templateUrl: './stepper.component.html',
-  providers: [ { provide: NB_STEPPER, useExisting: NbStepperComponent } ],
+  providers: [{ provide: NB_STEPPER, useExisting: NbStepperComponent }],
 })
 export class NbStepperComponent {
-
   /**
    * Selected step index
    */
@@ -148,7 +147,7 @@ export class NbStepperComponent {
         step: this.selected,
         previouslySelectedIndex,
         previouslySelectedStep,
-      })
+      });
     }
   }
 
@@ -247,7 +246,7 @@ export class NbStepperComponent {
    * */
   reset() {
     this._selectedIndex = 0;
-    this.steps.forEach(step => step.reset());
+    this.steps.forEach((step) => step.reset());
     this.stepChanged.emit({
       index: this.selectedIndex,
       step: this.selected,
@@ -275,9 +274,6 @@ export class NbStepperComponent {
   }
 
   protected canBeSelected(indexToCheck: number): boolean {
-    if (indexToCheck === this.selectedIndex) {
-      return false;
-    }
     const noSteps = !this.steps || this.steps.length === 0;
     if (noSteps || indexToCheck < 0 || indexToCheck >= this.steps.length || indexToCheck === this.selectedIndex) {
       return false;
