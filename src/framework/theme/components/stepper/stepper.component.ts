@@ -245,13 +245,17 @@ export class NbStepperComponent {
    * Reset stepper and stepControls to initial state
    * */
   reset() {
+    const previouslySelectedIndex = this.selectedIndex;
+    const previouslySelectedStep = this.selected;
+
     this._selectedIndex = 0;
     this.steps.forEach((step) => step.reset());
+
     this.stepChange.emit({
       index: this.selectedIndex,
       step: this.selected,
-      previouslySelectedIndex: undefined,
-      previouslySelectedStep: undefined,
+      previouslySelectedIndex,
+      previouslySelectedStep,
     });
   }
 
