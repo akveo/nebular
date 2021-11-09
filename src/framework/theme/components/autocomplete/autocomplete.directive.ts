@@ -248,7 +248,7 @@ export class NbAutocompleteDirective<T> implements OnDestroy, AfterViewInit, Con
   }
 
   show() {
-    if (this.isClosed && this.autocomplete.options.length) {
+    if (this.canOpen()) {
       this.attachToOverlay();
       this.setActiveItem();
     }
@@ -438,5 +438,10 @@ export class NbAutocompleteDirective<T> implements OnDestroy, AfterViewInit, Con
 
   protected createScrollStrategy(): NbScrollStrategy {
     return this.overlay.scrollStrategies[this.scrollStrategy]();
+  }
+
+  /** Whether the overlay is allowed to open. */
+  protected canOpen(): boolean {
+    return this.isClosed && this.autocomplete.options.length > 0;
   }
 }
