@@ -8,6 +8,7 @@ import {
   Component,
   Optional,
   Provider,
+  SkipSelf,
 } from '@angular/core';
 import {
   _COALESCED_STYLE_SCHEDULER,
@@ -16,6 +17,7 @@ import {
   CdkTableModule,
   RenderRow,
   RowContext,
+  StickyPositioningListener,
 } from '@angular/cdk/table';
 import { _DisposeViewRepeaterStrategy, _VIEW_REPEATER_STRATEGY, _ViewRepeater } from '@angular/cdk/collections';
 
@@ -23,6 +25,8 @@ import { NbBidiModule } from '../bidi/bidi.module';
 import { NbDirectionality } from '../bidi/bidi-service';
 import { NbPlatform } from '../platform/platform-service';
 import { NB_DOCUMENT } from '../../../theme.options';
+import { NbViewportRulerAdapter } from '../adapter/viewport-ruler-adapter';
+import { NB_STICKY_POSITIONING_LISTENER } from '../../cdk/table/type-mappings';
 import {
   NbCellDefDirective,
   NbCellDirective,
@@ -66,7 +70,7 @@ export const NB_TABLE_PROVIDERS: Provider[] = [
   template: ``,
   providers: NB_TABLE_PROVIDERS,
 })
-// tslint:disable-next-line:component-class-suffix
+// eslint-disable-next-line @angular-eslint/component-class-suffix
 export class NbTable<T> extends CdkTable<T> {
   constructor(
     differs: IterableDiffers,
@@ -76,13 +80,16 @@ export class NbTable<T> extends CdkTable<T> {
     dir: NbDirectionality,
     @Inject(NB_DOCUMENT) document: any,
     platform: NbPlatform,
-    @Optional() @Inject(_VIEW_REPEATER_STRATEGY)
-    protected readonly _viewRepeater?: _ViewRepeater<T, RenderRow<T>, RowContext<T>>,
-    @Optional() @Inject(_COALESCED_STYLE_SCHEDULER)
-    protected readonly _coalescedStyleScheduler?: _CoalescedStyleScheduler,
+    @Inject(_VIEW_REPEATER_STRATEGY)
+    protected readonly _viewRepeater: _ViewRepeater<T, RenderRow<T>, RowContext<T>>,
+    @Inject(_COALESCED_STYLE_SCHEDULER)
+    protected readonly _coalescedStyleScheduler: _CoalescedStyleScheduler,
+    _viewportRuler: NbViewportRulerAdapter,
+    @Optional() @SkipSelf() @Inject(NB_STICKY_POSITIONING_LISTENER)
+    protected readonly _stickyPositioningListener: StickyPositioningListener,
   ) {
     super(differs, changeDetectorRef, elementRef, role, dir, document, platform, _viewRepeater,
-          _coalescedStyleScheduler);
+          _coalescedStyleScheduler, _viewportRuler, _stickyPositioningListener);
   }
 }
 

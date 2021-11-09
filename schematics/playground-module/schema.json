@@ -1,8 +1,0 @@
-{
-  "$schema": "http://json-schema.org/schema",
-  "id": "playground-module",
-  "title": "All playground components to a given module",
-  "type": "object",
-  "properties": {
-  }
-}

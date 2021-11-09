@@ -5,12 +5,8 @@
  */
 
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { NbCalendarDaysNamesComponent } from './calendar-days-names.component';
-import { NbDateService } from '../../services/date.service';
-import { NbNativeDateService } from '../../services/native-date.service';
 import { DatePipe } from '@angular/common';
-
+import { NbCalendarDaysNamesComponent, NbDateService, NbNativeDateService } from '@nebular/theme';
 
 describe('Component: NbCalendarDaysNames', () => {
   let fixture: ComponentFixture<NbCalendarDaysNamesComponent<Date>>;
@@ -38,7 +34,7 @@ describe('Component: NbCalendarDaysNames', () => {
 
   it('should contain narrow names', () => {
     const days = componentEl.querySelectorAll('div');
-    [].forEach.call(days, day => {
+    days.forEach((day) => {
       expect(day.textContent.length).toBe(2);
     });
   });
