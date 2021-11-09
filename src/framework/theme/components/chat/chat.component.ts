@@ -243,9 +243,9 @@ import { NbChatTitleDirective } from './chat-title.directive';
   template: `
     <div class="header">
       <ng-container
-        *ngIf="templateTitle; else textTitleTemplate"
-        [ngTemplateOutlet]="templateTitle.templateRef"
-        [ngTemplateOutletContext]="{ $implicit: templateTitle.context }"
+        *ngIf="titleTemplate; else textTitleTemplate"
+        [ngTemplateOutlet]="titleTemplate.templateRef"
+        [ngTemplateOutletContext]="{ $implicit: titleTemplate.context }"
       >
       </ng-container>
       <ng-template #textTitleTemplate>
@@ -298,7 +298,7 @@ export class NbChatComponent implements OnChanges, AfterContentInit, AfterViewIn
   @ViewChild('scrollable') scrollable: ElementRef;
   @ContentChildren(NbChatMessageComponent) messages: QueryList<NbChatMessageComponent>;
   @ContentChild(NbChatFormComponent) chatForm: NbChatFormComponent;
-  @ContentChild(NbChatTitleDirective) templateTitle: NbChatTitleDirective;
+  @ContentChild(NbChatTitleDirective) titleTemplate: NbChatTitleDirective;
 
   constructor(protected statusService: NbStatusService) {}
 
