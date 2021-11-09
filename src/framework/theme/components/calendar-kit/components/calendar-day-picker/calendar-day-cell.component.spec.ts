@@ -7,10 +7,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { DatePipe } from '@angular/common';
 
-import { NbCalendarDayCellComponent } from './calendar-day-cell.component';
-import { NbDateService } from '../../services/date.service';
-import { NbNativeDateService } from '../../services/native-date.service';
-import { NbCalendarKitModule } from '../../calendar-kit.module';
+import { NbCalendarDayCellComponent, NbDateService, NbNativeDateService, NbCalendarKitModule } from '@nebular/theme';
 
 describe('Component: NbCalendarDayCell', () => {
   let component: NbCalendarDayCellComponent<Date>;

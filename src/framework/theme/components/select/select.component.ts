@@ -31,7 +31,7 @@ import {
 import { NgClass } from '@angular/common';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { merge, Subject, BehaviorSubject, from } from 'rxjs';
-import { startWith, switchMap, takeUntil, filter, map, finalize } from 'rxjs/operators';
+import { startWith, switchMap, takeUntil, filter, map, finalize, take } from 'rxjs/operators';
 
 import { NbStatusService } from '../../services/status.service';
 import {
@@ -554,6 +554,18 @@ export class NbSelectComponent
   @Input() optionsPanelClass: string | string[];
 
   /**
+   * Specifies width (in pixels) to be set on `nb-option`s container (`nb-option-list`)
+   * */
+  @Input()
+  get optionsWidth(): number {
+    return this._optionsWidth ?? this.hostWidth;
+  }
+  set optionsWidth(value: number) {
+    this._optionsWidth = value;
+  }
+  protected _optionsWidth: number | undefined;
+
+  /**
    * Adds `outline` styles
    */
   @Input()
@@ -902,7 +914,11 @@ export class NbSelectComponent
   show() {
     if (this.canOpen()) {
       this.attachToOverlay();
-      this.setActiveOption();
+
+      this.positionStrategy.positionChange.pipe(take(1), takeUntil(this.destroy$)).subscribe(() => {
+        this.setActiveOption();
+      });
+
       this.cd.markForCheck();
     }
   }
