@@ -47,7 +47,7 @@ import { NbTabLabelDirective } from './tab-label';
 })
 export class NbTabComponent {
   /** Content for the tab label given by `<ng-template nbTabLabel>`. */
-  @ContentChild(NbTabLabelDirective, { read: TemplateRef }) templateLabel: TemplateRef<any> | undefined;
+  @ContentChild(NbTabLabelDirective, { read: TemplateRef }) titleTemplate: TemplateRef<any> | undefined;
 
   /**
    * Tab title
@@ -286,10 +286,11 @@ export class NbTabComponent {
       >
         <a href (click)="$event.preventDefault()" tabindex="-1" class="tab-link">
           <nb-icon *ngIf="tab.tabIcon" [config]="tab.tabIcon"></nb-icon>
-          <ng-template [ngIf]="tab.templateLabel">
-            <ng-template *ngTemplateOutlet="tab.templateLabel"></ng-template>
-          </ng-template>
-          <ng-template [ngIf]="!tab.templateLabel">
+          <ng-container
+            *ngIf="tab.titleTemplate; else textTitleTemplate"
+            [ngTemplateOutlet]="tab.titleTemplate"
+          ></ng-container>
+          <ng-template #textTitleTemplate>
             <span class="tab-text">{{ tab.tabTitle }}</span>
           </ng-template>
         </a>
