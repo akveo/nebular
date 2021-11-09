@@ -4,11 +4,10 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { NbDateService, NbDayPeriod } from './date.service';
-import { NbNativeDateService } from '@nebular/theme';
 import { TestBed } from '@angular/core/testing';
 import { LOCALE_ID } from '@angular/core';
 
+import { NbNativeDateService, NbDateService, NbDayPeriod } from '@nebular/theme';
 
 describe('native-date-service', () => {
   let dateService: NbDateService<Date>;

@@ -1,6 +1,6 @@
 import { TemplateRef, InjectionToken, ViewContainerRef } from '@angular/core';
 // Do not remove (TS4023).
-// tslint:disable-next-line
+// eslint-disable-next-line
 import { ComponentType } from '@angular/cdk/overlay';
 import { NbComponentType } from '../cdk/overlay/mapping';
 import { NbIconConfig } from '../icon/icon.component';
@@ -36,6 +36,17 @@ export class NbWindowConfig {
    * Window title.
    */
   title: string = '';
+
+  /**
+   * Window title as template. Use it instead of `title` property.
+   */
+  titleTemplate?: TemplateRef<any>;
+
+  /**
+   * Title as template may receive data through `config.titleTemplateContext` property.
+   * Window title as Template. You can access context inside template as $implicit.
+   */
+  titleTemplateContext?: Object = {};
 
   /**
    * Initial window state. Full screen by default.

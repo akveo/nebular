@@ -12,6 +12,7 @@ import { StepperValidationComponent } from './stepper-validation.component';
 import { StepperVerticalComponent } from './stepper-vertical.component';
 import { StepperDisabledStepNavComponent } from './stepper-disabled-step-nav.component';
 import { StepperLinearComponent } from './stepper-linear.component';
+import { StepperStepChangeEventComponent } from './stepper-step-change-event.component';
 
 const routes: Route[] = [
   {
@@ -37,6 +38,10 @@ const routes: Route[] = [
   {
     path: 'stepper-linear.component',
     component: StepperLinearComponent,
+  },
+  {
+    path: 'stepper-step-change-event.component',
+    component: StepperStepChangeEventComponent,
   },
 ];
 

@@ -28,6 +28,12 @@ import { NbWindowRef } from './window-ref';
           <nb-icon *ngIf="config.icon" [icon]="config.icon.icon" [options]="config.icon.options" [pack]="config.icon.pack" [status]="config.icon.status"></nb-icon>
           <span id="title">{{ config.title }}</span>
         </div>
+        <div *ngIf="config.titleTemplate; else textTitleTemplate" cdkFocusInitial tabindex="-1">
+          <ng-container *ngTemplateOutlet="config.titleTemplate; context: {$implicit: config.titleTemplateContext}"></ng-container>
+        </div>
+        <ng-template #textTitleTemplate>
+          <div cdkFocusInitial class="title" tabindex="-1">{{ config.title }}</div>
+        </ng-template>
 
         <div class="buttons">
           <ng-container *ngIf="showMinimize">
