@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { NbStepperComponent, NbStepComponent, NbIconModule, NbStepperModule } from '@nebular/theme';
+import { NbStepperComponent, NbStepperModule, NbThemeModule } from '@nebular/theme';
 
 @Component({
   selector: 'nb-step-changed-test',
@@ -30,7 +30,7 @@ describe('Stepper: Step Change', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [NbStepperModule, NbIconModule],
+      imports: [NbThemeModule.forRoot(), NbStepperModule],
       declarations: [NbStepChangeTestComponent],
     });
 
@@ -40,7 +40,7 @@ describe('Stepper: Step Change', () => {
     stepChangeSpy = jasmine.createSpy('step change spy');
   });
 
-  it('Should emit step change on next method', () => {
+  it('should emit step change on next method', () => {
     stepper.stepChange.subscribe(stepChangeSpy);
     stepper.next();
     fixture.detectChanges();
@@ -48,7 +48,7 @@ describe('Stepper: Step Change', () => {
     expect(stepChangeSpy).toHaveBeenCalled();
   });
 
-  it('Should emit step change by clicking on step', () => {
+  it('should emit step change by clicking on step', () => {
     stepper.stepChange.subscribe(stepChangeSpy);
     const step = fixture.debugElement.query(By.css('.step'));
     step.triggerEventHandler('click', null);
@@ -100,15 +100,13 @@ describe('Stepper: Step Change', () => {
   });
 });
 
-// TODO: this definitely requires more testing!
 describe('Component: NbStepper', () => {
   let stepper: NbStepperComponent;
   let fixture: ComponentFixture<NbStepperComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [NbIconModule],
-      declarations: [NbStepComponent, NbStepperComponent],
+      imports: [NbThemeModule.forRoot(), NbStepperModule],
     });
 
     fixture = TestBed.createComponent(NbStepperComponent);
