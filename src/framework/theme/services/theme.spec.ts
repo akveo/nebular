@@ -5,14 +5,17 @@
  */
 
 import { TestBed, inject, waitForAsync } from '@angular/core/testing';
-
-import { DEFAULT_MEDIA_BREAKPOINTS, NbMediaBreakpointsService } from './breakpoints.service';
-import { NbThemeService } from './theme.service';
-import { BUILT_IN_THEMES, NbJSThemesRegistry } from './js-themes-registry.service';
 import {
-  NB_BUILT_IN_JS_THEMES, NB_JS_THEMES, NB_MEDIA_BREAKPOINTS,
+  DEFAULT_MEDIA_BREAKPOINTS,
+  NbMediaBreakpointsService,
+  NbThemeService,
+  BUILT_IN_THEMES,
+  NbJSThemesRegistry,
+  NB_BUILT_IN_JS_THEMES,
+  NB_JS_THEMES,
+  NB_MEDIA_BREAKPOINTS,
   NB_THEME_OPTIONS,
-} from '../theme.options';
+} from '@nebular/theme';
 
 describe('theme-service', () => {
   let breakpointService: NbMediaBreakpointsService;
@@ -33,22 +36,22 @@ describe('theme-service', () => {
     });
   });
 
-// Single async inject to save references; which are used in all tests below
-  beforeEach(waitForAsync(inject(
-    [NbMediaBreakpointsService, NbThemeService],
-    (_breakpointService, _themeService) => {
-      breakpointService = _breakpointService;
-      themeService = _themeService;
-    },
-  )));
+  // Single async inject to save references; which are used in all tests below
+  beforeEach(
+    waitForAsync(
+      inject([NbMediaBreakpointsService, NbThemeService], (_breakpointService, _themeService) => {
+        breakpointService = _breakpointService;
+        themeService = _themeService;
+      }),
+    ),
+  );
 
   it('returns default theme specified in options', () => {
     let current: any;
 
-    const subscription = themeService.onThemeChange()
-      .subscribe((change: any) => {
-        current = change;
-      });
+    const subscription = themeService.onThemeChange().subscribe((change: any) => {
+      current = change;
+    });
     try {
       expect(current.name).toEqual('default');
       expect(current.previous).toBeUndefined();
@@ -60,10 +63,9 @@ describe('theme-service', () => {
   it('listens to theme change, saving a previous one', () => {
     let current: any;
 
-    const subscription = themeService.onThemeChange()
-      .subscribe((change: any) => {
-        current = change;
-      });
+    const subscription = themeService.onThemeChange().subscribe((change: any) => {
+      current = change;
+    });
     try {
       expect(current.name).toEqual('default');
       expect(current.previous).toBeUndefined();
@@ -83,10 +85,9 @@ describe('theme-service', () => {
   it('listens to window media query change', () => {
     let current: any;
 
-    const subscription = themeService.onMediaQueryChange()
-      .subscribe((change: any) => {
-        current = change;
-      });
+    const subscription = themeService.onMediaQueryChange().subscribe((change: any) => {
+      current = change;
+    });
     try {
       expect(current).toBeUndefined();
 
@@ -109,10 +110,9 @@ describe('theme-service', () => {
   it('listens to theme variables change', () => {
     let current: any;
 
-    const subscription = themeService.getJsTheme()
-      .subscribe((change: any) => {
-        current = change.variables;
-      });
+    const subscription = themeService.getJsTheme().subscribe((change: any) => {
+      current = change.variables;
+    });
     try {
       // TODO could be rewrite with usage of done()
       expect(current).not.toBeUndefined();
@@ -124,10 +124,8 @@ describe('theme-service', () => {
 
       themeService.changeTheme('corporate');
       expect(current.bg).toEqual('#ffffff');
-
     } finally {
       subscription.unsubscribe();
     }
   });
-
 });

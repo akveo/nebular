@@ -281,6 +281,8 @@ export class NbTreeGridComponent<T> extends NbTable<NbTreeGridPresentationNode<T
         return rowViewRef.context;
       }
     }
+
+    return undefined;
   }
 
   private getColumns(): string[] {
