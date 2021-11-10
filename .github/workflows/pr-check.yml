@@ -16,6 +16,18 @@ jobs:
           name: built-packages
           path: 'dist/'
           retention-days: 1
+  build-packages-rxjs-7:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+          cache: 'npm'
+      - run: |
+          npm ci
+          npm install rxjs@7.4.0
+          npm run build:packages
   build-docs:
     needs: build-packages
     runs-on: ubuntu-latest
