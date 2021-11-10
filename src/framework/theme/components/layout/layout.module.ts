@@ -23,8 +23,6 @@ const NB_LAYOUT_COMPONENTS = [
   NbLayoutColumnComponent,
   NbLayoutFooterComponent,
   NbLayoutHeaderComponent,
-  NbLtrLayoutDirectionDirective,
-  NbRtlLayoutDirectionDirective,
 ];
 
 const NB_LAYOUT_DIRECTIVES = [NbLtrLayoutDirectionDirective, NbRtlLayoutDirectionDirective];

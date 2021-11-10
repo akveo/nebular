@@ -5,9 +5,9 @@
  */
 
 import { ChangeDetectorRef, Directive, OnDestroy, OnInit, TemplateRef, ViewContainerRef } from '@angular/core';
-import { NbLayoutDirection, NbLayoutDirectionService } from '../../services/direction.service';
-import { takeUntil } from 'rxjs/operators';
+import { distinctUntilChanged, map, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { NbLayoutDirection, NbLayoutDirectionService } from '../../services/direction.service';
 
 /**
  * There are two structural directives which display the template content depending on layout direction.
@@ -17,38 +17,38 @@ import { Subject } from 'rxjs';
  */
 @Directive()
 export abstract class NbLayoutDirectionDirective implements OnInit, OnDestroy {
-  private destroy$ = new Subject<void>();
-
-  private hasView = false;
+  protected destroy$ = new Subject<void>();
 
   constructor(
     protected templateRef: TemplateRef<any>,
     protected viewContainer: ViewContainerRef,
     protected cd: ChangeDetectorRef,
     protected directionService: NbLayoutDirectionService,
-    protected direction: NbLayoutDirection,
+    protected directionToShow: NbLayoutDirection,
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.directionService
       .onDirectionChange()
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((value) => this.updateView(value === this.direction));
+      .pipe(
+        distinctUntilChanged(),
+        map((layoutDirection: NbLayoutDirection) => layoutDirection === this.directionToShow),
+        takeUntil(this.destroy$),
+      )
+      .subscribe((shouldShow: boolean) => this.updateView<boolean>(shouldShow));
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
   }
 
-  updateView(val: boolean) {
-    if (val && !this.hasView) {
+  protected updateView<T>(shouldShow: T): void {
+    if (shouldShow && !this.viewContainer.length) {
       this.viewContainer.createEmbeddedView(this.templateRef);
       this.cd.markForCheck();
-      this.hasView = true;
-    } else if (!val && this.hasView) {
+    } else if (!shouldShow && this.viewContainer.length) {
       this.viewContainer.clear();
-      this.hasView = false;
     }
   }
 }
