@@ -18,7 +18,7 @@ import { ComponentLink, PLAYGROUND_COMPONENTS } from './playground-components';
     <div class="options-bar" dir="ltr">
       <ng-container *ngIf="optionsVisible">
         <nb-layout-direction-toggle></nb-layout-direction-toggle>
-        <nb-layout-theme-toggle></nb-layout-theme-toggle>
+        <npg-layout-theme-toggle></npg-layout-theme-toggle>
         <button (click)="showComponentsOverlay()">Components (c)</button>
         <nb-components-overlay *ngIf="optionsVisible && componentsListVisible" (closeClicked)="hideComponentsOverlay()">
           <nb-components-list [components]="components"></nb-components-list>

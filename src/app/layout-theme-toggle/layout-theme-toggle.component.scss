@@ -1,13 +1,16 @@
 :host {
   display: block;
   padding: 0.5em;
+}
 
-  button {
-    margin-right: 0.25rem;
-  }
+button {
+  margin-right: 0.25rem;
+}
 
-  label {
-    margin: 0;
-  }
+label {
+  margin: 0;
+}
 
+.theme-radio {
+  text-transform: capitalize;
 }
