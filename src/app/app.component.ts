@@ -4,43 +4,62 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { AfterViewInit, Component, Inject, OnDestroy } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NavigationStart, Router } from '@angular/router';
 import { NB_DOCUMENT } from '@nebular/theme';
-import { fromEvent, Subject } from 'rxjs';
+import { fromEvent, Observable, Subject } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
-import { ComponentLink, PLAYGROUND_COMPONENTS } from './playground-components';
+import { ComponentsListSearchService } from './components-list.service';
+import { ComponentLink } from './playground-components';
 
 @Component({
   selector: 'npg-app-root',
   styleUrls: ['./app.component.scss'],
   template: `
     <div class="options-bar" dir="ltr">
-      <ng-container *ngIf="optionsVisible">
-        <nb-layout-direction-toggle></nb-layout-direction-toggle>
-        <nb-layout-theme-toggle></nb-layout-theme-toggle>
-        <button (click)="showComponentsOverlay()">Components (c)</button>
-        <nb-components-overlay *ngIf="optionsVisible && componentsListVisible" (closeClicked)="hideComponentsOverlay()">
-          <nb-components-list [components]="components"></nb-components-list>
-        </nb-components-overlay>
-      </ng-container>
       <button (click)="toggleOptions()" [class.fixed]="!optionsVisible" class="options-show">
         <ng-container *ngIf="optionsVisible">hide</ng-container>
         <ng-container *ngIf="!optionsVisible">show</ng-container>
       </button>
+      <ng-container *ngIf="optionsVisible">
+        <npg-layout-direction-toggle></npg-layout-direction-toggle>
+        <npg-layout-theme-toggle></npg-layout-theme-toggle>
+
+        <input
+          #componentSearch
+          type="text"
+          (focus)="onFocus()"
+          placeholder="Component name /"
+          (input)="onSearchChange($event)"
+          (keyup.enter)="onEnterClick()"
+        />
+      </ng-container>
+    </div>
+    <div class="component-list-wrapper" *ngIf="isComponentListVisible">
+      <npg-components-list [components]="components$ | async"></npg-components-list>
     </div>
     <router-outlet></router-outlet>
   `,
 })
-export class AppComponent implements AfterViewInit, OnDestroy {
+export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
   private destroy$ = new Subject<void>();
+  isComponentListVisible: boolean = false;
   document: Document;
   optionsVisible: boolean = true;
-  componentsListVisible: boolean = false;
-  components: ComponentLink[] = PLAYGROUND_COMPONENTS;
+  components$: Observable<ComponentLink[]>;
 
-  constructor(@Inject(NB_DOCUMENT) document, private router: Router) {
+  @ViewChild('componentSearch') componentSearch: ElementRef;
+
+  constructor(
+    @Inject(NB_DOCUMENT) document,
+    private router: Router,
+    private componentsListSearchService: ComponentsListSearchService,
+  ) {
     this.document = document;
+  }
+
+  ngOnInit(): void {
+    this.components$ = this.componentsListSearchService.componentsList$;
   }
 
   ngAfterViewInit() {
@@ -48,26 +67,37 @@ export class AppComponent implements AfterViewInit, OnDestroy {
       return;
     }
 
-    fromEvent<KeyboardEvent>(this.document, 'keypress')
-      .pipe(
-        filter((e: KeyboardEvent) => e.key === 'c'),
-        takeUntil(this.destroy$),
-      )
-      .subscribe(this.toggleComponentsOverlay.bind(this));
-
     fromEvent<KeyboardEvent>(this.document, 'keyup')
-      .pipe(
-        filter((e: KeyboardEvent) => e.key === 'Escape' || e.key === 'Esc'),
-        takeUntil(this.destroy$),
-      )
-      .subscribe(() => this.hideComponentsOverlay());
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((e: KeyboardEvent) => {
+        if (e.key === 'ArrowDown') {
+          this.handleArrowDown();
+        }
+
+        if (e.key === 'ArrowUp') {
+          this.handleArrowUp();
+        }
+
+        if (e.key === 'Escape') {
+          this.isComponentListVisible = false;
+          this.componentSearch.nativeElement.blur();
+        }
+
+        if (e.key === '/') {
+          this.componentSearch.nativeElement.focus();
+        }
+      });
 
     this.router.events
       .pipe(
         filter((event) => event instanceof NavigationStart),
         takeUntil(this.destroy$),
       )
-      .subscribe(() => this.hideComponentsOverlay());
+      .subscribe(() => {
+        this.isComponentListVisible = false;
+      });
+
+    this.componentSearch.nativeElement.value = this.componentsListSearchService.inputSearch$.value;
   }
 
   ngOnDestroy() {
@@ -75,19 +105,39 @@ export class AppComponent implements AfterViewInit, OnDestroy {
     this.destroy$.complete();
   }
 
+  onEnterClick(): void {
+    this.router.navigate([this.componentsListSearchService.selectedElement$.value]);
+    this.componentSearch.nativeElement.blur();
+  }
+
   toggleOptions() {
     this.optionsVisible = !this.optionsVisible;
   }
 
-  toggleComponentsOverlay() {
-    this.componentsListVisible = !this.componentsListVisible;
+  onFocus(): void {
+    this.isComponentListVisible = true;
   }
 
-  hideComponentsOverlay() {
-    this.componentsListVisible = false;
+  onSearchChange(event): void {
+    this.componentsListSearchService.activeElementIndex$.next(0);
+    this.componentsListSearchService.inputSearch$.next(event.target.value);
   }
 
-  showComponentsOverlay() {
-    this.componentsListVisible = true;
+  private handleArrowDown(): void {
+    const nextElementIndex = this.componentsListSearchService.activeElementIndex$.value + 1;
+    const filteredElementLength = this.componentsListSearchService.flatFilteredComponentLinkList$.value.length - 1;
+
+    this.componentsListSearchService.activeElementIndex$.next(
+      nextElementIndex > filteredElementLength ? 0 : nextElementIndex,
+    );
+  }
+
+  private handleArrowUp(): void {
+    const prevElementIndex = this.componentsListSearchService.activeElementIndex$.value - 1;
+    const filteredElementLength = this.componentsListSearchService.flatFilteredComponentLinkList$.value.length - 1;
+
+    this.componentsListSearchService.activeElementIndex$.next(
+      prevElementIndex < 0 ? filteredElementLength : prevElementIndex,
+    );
   }
 }

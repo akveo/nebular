@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NbThemeService } from '@nebular/theme';
 
 @Component({
-  selector: 'nb-layout-theme-toggle',
+  selector: 'npg-layout-theme-toggle',
   styleUrls: ['./layout-theme-toggle.component.scss'],
   template: `
     <div dir="ltr">

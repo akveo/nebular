@@ -2,17 +2,22 @@
   display: flex;
 }
 
+.component-list-wrapper {
+  padding: 1.8rem 3.75rem;
+  min-height: 100vh;
+}
+
 ::ng-deep {
   .options-bar {
     display: flex;
     align-items: center;
   }
   .options-show {
-    margin-left: auto;
+    margin: 0 1.25rem;
   }
   .options-show.fixed {
     position: fixed;
-    right: 0;
-    top: 0;
+    left: 0;
+    top: 0.5rem;
   }
 }
