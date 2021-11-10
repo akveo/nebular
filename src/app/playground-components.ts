@@ -1231,6 +1231,12 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         component: 'StepperLinearComponent',
         name: 'Stepper Linear',
       },
+      {
+        path: 'stepper-step-change-event.component',
+        link: '/stepper/stepper-step-change-event.component',
+        component: 'StepperStepChangeEventComponent',
+        name: 'Stepper Step Change Event',
+      },
     ],
   },
   {
