@@ -25,7 +25,7 @@ import { NbComponentOrCustomStatus } from '../component-status';
 import { convertToBoolProperty, NbBooleanInput } from '../helpers';
 import { NbChatFormComponent } from './chat-form.component';
 import { NbChatMessageComponent } from './chat-message.component';
-import { NbCustomMessageService } from './custom-message.service';
+import { NbChatCustomMessageService } from './chat-custom-message.service';
 
 /**
  * Conversational UI collection - a set of components for chat-like UI construction.
@@ -248,12 +248,9 @@ import { NbCustomMessageService } from './custom-message.service';
       <ng-content select="nb-chat-form"></ng-content>
     </div>
   `,
-  providers: [
-    NbCustomMessageService,
-  ],
+  providers: [NbChatCustomMessageService],
 })
 export class NbChatComponent implements OnChanges, AfterContentInit, AfterViewInit {
-
   @Input() title: string;
 
   /**
@@ -275,7 +272,7 @@ export class NbChatComponent implements OnChanges, AfterContentInit, AfterViewIn
    */
   @Input()
   get scrollBottom(): boolean {
-    return this._scrollBottom
+    return this._scrollBottom;
   }
   set scrollBottom(value: boolean) {
     this._scrollBottom = convertToBoolProperty(value);
@@ -287,8 +284,7 @@ export class NbChatComponent implements OnChanges, AfterContentInit, AfterViewIn
   @ContentChildren(NbChatMessageComponent) messages: QueryList<NbChatMessageComponent>;
   @ContentChild(NbChatFormComponent) chatForm: NbChatFormComponent;
 
-  constructor(protected statusService: NbStatusService) {
-  }
+  constructor(protected statusService: NbStatusService) {}
 
   ngOnChanges(changes: SimpleChanges) {
     if ('status' in changes) {
@@ -301,11 +297,10 @@ export class NbChatComponent implements OnChanges, AfterContentInit, AfterViewIn
   }
 
   ngAfterViewInit() {
-    this.messages.changes
-      .subscribe((messages) => {
-        this.messages = messages;
-        this.updateView();
-      });
+    this.messages.changes.subscribe((messages) => {
+      this.messages = messages;
+      this.updateView();
+    });
 
     this.updateView();
   }

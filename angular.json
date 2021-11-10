@@ -152,7 +152,7 @@
           },
           "configurations": {
             "production-wp": {
-              "devServerTarget": "playground:production-wp"
+              "devServerTarget": "playground:serve:production-wp"
             }
           }
         },
@@ -250,6 +250,26 @@
               "extractLicenses": false,
               "sourceMap": true,
               "namedChunks": true
+            },
+            "production-wp": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "docs/environments/environment.ts",
+                  "with": "docs/environments/environment.prod.ts"
+                }
+              ],
+              "outputHashing": "all",
+              "tsConfig": "docs/tsconfig.wp.json"
             },
             "prerender": {
               "budgets": [
