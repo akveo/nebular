@@ -11,7 +11,6 @@
   "repository": "git+https://github.com/akveo/nebular.git",
   "scripts": {
     "ng": "ng",
-    "ngcc-compile": "ngcc --properties es2015 browser module main --first-only --create-ivy-entry-points",
     "prestart": "npm run gen:playground",
     "start": "ng serve",
     "start:prod": "ng serve --configuration=production",
@@ -49,7 +48,7 @@
     "release:validate": "npm-run-all build:packages build:wp ci:lint e2e:wp && npm run test:wp -- --watch=false",
     "release": "npm-run-all release:validate publish",
     "publish": "./tools/publish.sh",
-    "postinstall": "npm-run-all -p build:dev-schematics ngcc-compile",
+    "postinstall": "npm run build:dev-schematics",
     "gen:playground": "ng g .:playground",
     "gen:playground-module": "ng g .:playground-module",
     "gen:playground-components": "ng g .:playground-components",
