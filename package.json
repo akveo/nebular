@@ -107,7 +107,7 @@
     "@types/highlight.js": "^9.12.4",
     "@types/jasmine": "~3.10.0",
     "@types/jasminewd2": "2.0.3",
-    "@types/node": "^14.17.6",
+    "@types/node": "^16.11.7",
     "@typescript-eslint/eslint-plugin": "5.3.0",
     "@typescript-eslint/parser": "5.3.0",
     "angular-cli-ghpages": "0.5.0",
