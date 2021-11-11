@@ -8,11 +8,7 @@ import { Component, ElementRef, Input } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
-import { NbIconModule } from './icon.module';
-import { NbIconLibraries } from './icon-libraries';
-import { NbIconComponent } from './icon.component';
-import { NbThemeModule } from '@nebular/theme/theme.module';
-
+import { NbThemeModule, NbIconModule, NbIconLibraries, NbIconComponent } from '@nebular/theme';
 
 @Component({
   template: `
