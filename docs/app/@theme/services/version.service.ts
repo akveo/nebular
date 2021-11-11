@@ -12,35 +12,31 @@ export interface Version {
   isCurrent?: boolean;
 }
 
-/*
-  In production we run multiple versions of docs apps and all of them load single versions.json config.
-  To help determine which version entry from the config is associated with a currently running app, docs build script
-  adds `versionName` to the package.json and sets it to name of version associated with this app.
-  When running docs locally we could just find version with `isCurrent` flag as it would always refer to the
-  version associated with a current revision.
-*/
-const currentVersionPredicate = environment.production
-  ? (version: Version) => version.name === require('../../../../package.json').versionName
-  : (version: Version) => version.isCurrent;
+import { VERSION_NAME } from '../../../version';
 
 @Injectable()
 export class NgdVersionService {
+  protected readonly devVersion: Version = { name: VERSION_NAME, path: '.', checkoutTarget: 'master', isCurrent: true };
 
   supportedVersions$: Observable<Version[]>;
 
   constructor(private http: HttpClient) {
-    this.supportedVersions$ = this.http.get<Version[]>(environment.versionsUrl)
-      .pipe(
+    if (environment.production) {
+      this.supportedVersions$ = this.http.get<Version[]>(environment.versionsUrl).pipe(
         catchError(() => of([])),
         shareReplay(1),
       );
+    }
+    this.supportedVersions$ = of([this.devVersion]).pipe(shareReplay(1));
   }
 
   getCurrentVersion(): Observable<Version> {
-    return this.supportedVersions$
-      .pipe(
-        map((versions: Version[]) => versions.find(currentVersionPredicate)),
+    if (environment.production) {
+      return this.supportedVersions$.pipe(
+        map((versions: Version[]) => versions.find(({ name }) => name === VERSION_NAME)),
       );
+    }
+    return of(this.devVersion);
   }
 
   getSupportedVersions(): Observable<Version[]> {

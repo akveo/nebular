@@ -36,6 +36,7 @@ export abstract class NbTriggerStrategyBase implements NbTriggerStrategy {
 
   protected destroyed$ = new Subject();
 
+  // @breaking-change 9.0.0 Change parameter to Element instead of Event
   protected isNotOnHostOrContainer(event: Event): boolean {
     return !this.isOnHost(event) && !this.isOnContainer(event);
   }
@@ -107,7 +108,7 @@ export class NbHoverTriggerStrategy extends NbTriggerStrategyBase {
       // this `delay & takeUntil & repeat` operators combination is a synonym for `conditional debounce`
       // meaning that if one event occurs in some time after the initial one we won't react to it
       delay(100),
-      // tslint:disable-next-line:rxjs-no-unsafe-takeuntil
+      // eslint-disable-next-line rxjs/no-unsafe-takeuntil
       takeUntil(observableFromEvent(this.host, 'mouseleave')),
       repeat(),
       takeUntil(this.destroyed$),
@@ -137,7 +138,7 @@ export class NbHintTriggerStrategy extends NbTriggerStrategyBase {
       // this `delay & takeUntil & repeat` operators combination is a synonym for `conditional debounce`
       // meaning that if one event occurs in some time after the initial one we won't react to it
       delay(100),
-      // tslint:disable-next-line:rxjs-no-unsafe-takeuntil
+      // eslint-disable-next-line rxjs/no-unsafe-takeuntil
       takeUntil(observableFromEvent(this.host, 'mouseleave')),
       repeat(),
       takeUntil(this.destroyed$),
@@ -177,7 +178,16 @@ export class NbFocusTriggerStrategy extends NbTriggerStrategyBase {
       switchMap(() => observableFromEvent<Event>(this.document, 'click')
         .pipe(
           takeWhile(() => !!this.container()),
-          filter(event => this.isNotOnHostOrContainer(event)),
+          /**
+       * Event target of `click` could be different from `activeElement`.
+       * If during click you return focus to the host, it won't be opened.
+       */
+      filter((event) => {
+        if (this.isNotOnHostOrContainer(event)) {
+          return this.isNotOnHostOrContainer({ target: this.document.activeElement } as unknown as Event);
+        }
+        return false;
+      }),
         ),
       ),
       takeUntil(this.destroyed$),
@@ -185,7 +195,7 @@ export class NbFocusTriggerStrategy extends NbTriggerStrategyBase {
 
   protected tabKeyPress$: Observable<Event> = observableFromEvent<Event>(this.host, 'keydown')
     .pipe(
-      filter((event: KeyboardEvent) => event.keyCode === 9),
+      filter((event: Event) => (event as KeyboardEvent).keyCode === 9),
       filter(() => !!this.container()),
       takeUntil(this.destroyed$),
     );
@@ -194,7 +204,7 @@ export class NbFocusTriggerStrategy extends NbTriggerStrategyBase {
     .pipe(
       filter(() => !this.container()),
       debounceTime(100),
-      // tslint:disable-next-line:rxjs-no-unsafe-takeuntil
+      // eslint-disable-next-line rxjs/no-unsafe-takeuntil
       takeUntil(observableFromEvent(this.host, 'focusout')),
       repeat(),
       takeUntil(this.destroyed$),
