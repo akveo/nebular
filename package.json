@@ -30,7 +30,7 @@
     "prebuild:packages": "rimraf dist",
     "build:packages": "npm-run-all \"build theme\" \"build auth\" \"build moment\" \"build security\" \"build date-fns\" \"build firebase-auth\" \"build eva-icons\" build:bootstrap build:packages-schematics build:packages-sass",
     "build:packages-schematics": "tsc -p src/framework/theme/tsconfig.schematics.json",
-    "build:packages-sass": "sass dist --load-path=node_modules --style=compressed --no-source-map",
+    "build:packages-sass": "sass dist/{auth,bootstrap,theme}/styles/prebuilt --load-path=node_modules --style=compressed --no-source-map",
     "build:bootstrap": "cp -r src/framework/bootstrap dist",
     "build:dev-schematics": "gulp build-development-schematics",
     "test": "ng test",
