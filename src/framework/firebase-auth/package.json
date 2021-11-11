@@ -31,5 +31,8 @@
     "firebase": "^8.0.0",
     "@angular/fire": "^6.1.0"
   },
+  "dependencies": {
+    "tslib": "^2.3.0"
+  },
   "sideEffects": false
 }

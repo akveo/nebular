@@ -11,9 +11,9 @@ const packageJsonName = 'package.json';
 
 interface PackageJson {
   version: string;
-  dependencies: { [key: string]: string },
-  devDependencies: { [key: string]: string },
-  peerDependencies: { [key: string]: string },
+  dependencies: { [key: string]: string };
+  devDependencies: { [key: string]: string };
+  peerDependencies: { [key: string]: string };
 }
 
 export function getNebularVersion(): string {
@@ -173,8 +173,13 @@ function peerDependencyAlreadyExists(packageJson: PackageJson, packageName: stri
  * Sorts the keys of the given object.
  * @returns A new object instance with sorted keys
  */
-function sortObjectByKeys(obj: object) {
-  return Object.keys(obj).sort().reduce((result, key) => (result[key] = obj[key]) && result, {});
+function sortObjectByKeys(obj: { [key: string]: string }): { [key: string]: string } {
+  return Object.keys(obj)
+    .sort()
+    .reduce<{ [key: string]: string }>((result, key) => {
+      result[key] = obj[key];
+      return result;
+    }, {});
 }
 
 function getNebularPackageJson(): PackageJson {
@@ -184,5 +189,3 @@ function getNebularPackageJson(): PackageJson {
 function getNebularEvaIconsPackageJson(): PackageJson {
   return require('../../../eva-icons/package.json');
 }
-
-

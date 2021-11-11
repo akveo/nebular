@@ -28,6 +28,7 @@ import { NbComponentPortal, NbOverlayRef } from '../cdk/overlay/mapping';
 import {
   NbAdjustableConnectedPositionStrategy,
   NbAdjustment,
+  NbAdjustmentValues,
   NbPosition,
   NbPositionBuilderService,
 } from '../cdk/overlay/overlay-position';
@@ -179,6 +180,8 @@ export abstract class NbBasePicker<D, T, P> extends NbDatepicker<T> {
 
   protected overlayOffset = 8;
 
+  protected adjustment: NbAdjustment = NbAdjustment.COUNTERCLOCKWISE;
+
   protected destroy$ = new Subject<void>();
 
   /**
@@ -294,7 +297,7 @@ export abstract class NbBasePicker<D, T, P> extends NbDatepicker<T> {
       .connectedTo(this.hostRef)
       .position(NbPosition.BOTTOM)
       .offset(this.overlayOffset)
-      .adjustment(NbAdjustment.COUNTERCLOCKWISE);
+      .adjustment(this.adjustment);
   }
 
   protected subscribeOnPositionChange() {
@@ -466,6 +469,9 @@ export class NbBasePickerComponent<D, T, P> extends NbBasePicker<D, T, P>
    * */
   @Input() overlayOffset = 8;
 
+  @Input() adjustment: NbAdjustment = NbAdjustment.COUNTERCLOCKWISE;
+  static ngAcceptInputType_adjustment: NbAdjustmentValues;
+
   constructor(@Inject(NB_DOCUMENT) document,
               positionBuilder: NbPositionBuilderService,
               triggerStrategyBuilder: NbTriggerStrategyBuilderService,
@@ -509,7 +515,7 @@ export class NbBasePickerComponent<D, T, P> extends NbBasePicker<D, T, P>
   protected pickerClass: Type<P>;
 
   protected get pickerValueChange(): Observable<T> {
-    return
+    return undefined;
   }
 
   get value(): T {
