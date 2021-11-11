@@ -251,7 +251,7 @@
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "aot": true,
-            "outputPath": "docs/dist",
+            "outputPath": "dist/docs",
             "index": "docs/index.html",
             "main": "docs/main.ts",
             "tsConfig": "docs/tsconfig.app.json",
