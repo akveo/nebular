@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-@mixin nb-scrollbars($fg, $bg, $size, $border-radius: $size / 2) {
+@mixin nb-scrollbars($fg, $bg, $size, $border-radius: $size * 0.5) {
   &::-webkit-scrollbar {
     width: $size;
     height: $size;
@@ -65,11 +65,7 @@
 }
 
 @mixin install-thumb() {
-  $thumb-selectors: (
-    '::-webkit-slider-thumb'
-    '::-moz-range-thumb'
-    '::-ms-thumb'
-  );
+  $thumb-selectors: ('::-webkit-slider-thumb' '::-moz-range-thumb' '::-ms-thumb');
 
   @each $selector in $thumb-selectors {
     &#{$selector} {
@@ -81,11 +77,7 @@
 }
 
 @mixin install-track() {
-  $thumb-selectors: (
-    '::-webkit-slider-runnable-track'
-    '::-moz-range-track'
-    '::-ms-track'
-  );
+  $thumb-selectors: ('::-webkit-slider-runnable-track' '::-moz-range-track' '::-ms-track');
 
   @each $selector in $thumb-selectors {
     &#{$selector} {
@@ -98,10 +90,7 @@
 
 @mixin install-placeholder($color, $font-size, $opacity: 1) {
   $placeholder-selectors: (
-    '::-webkit-input-placeholder'
-    '::-moz-placeholder'
-    ':-moz-placeholder'
-    ':-ms-input-placeholder'
+    '::-webkit-input-placeholder' '::-moz-placeholder' ':-moz-placeholder' ':-ms-input-placeholder'
   );
 
   &::placeholder {
@@ -150,9 +139,9 @@
     }
   }
   -webkit-animation: $animations;
-  -moz-animation:    $animations;
-  -o-animation:      $animations;
-  animation:         $animations;
+  -moz-animation: $animations;
+  -o-animation: $animations;
+  animation: $animations;
 }
 
 @mixin keyframes($animationName) {
@@ -332,5 +321,5 @@ But sometimes it's hard to find, what the previous value should be. And such mix
 @mixin nb-rtl($prop: null, $value: null) {
   @include _prepend-with-selector('[dir=rtl]', $prop, $value) {
     @content;
-  };
+  }
 }
