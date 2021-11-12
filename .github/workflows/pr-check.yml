@@ -16,6 +16,7 @@ jobs:
           name: built-packages
           path: 'dist/'
           retention-days: 1
+  # Remove once Angular drop support for RxJS@6
   build-packages-rxjs-7:
     runs-on: ubuntu-latest
     steps:
