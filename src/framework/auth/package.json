@@ -34,5 +34,22 @@
   "dependencies": {
     "tslib": "^2.3.0"
   },
-  "sideEffects": false
+  "sideEffects": false,
+  "exports": {
+    "./styles/prebuilt/corporate.css": {
+      "style": "./styles/prebuilt/corporate.css"
+    },
+    "./styles/prebuilt/cosmic.css": {
+      "style": "./styles/prebuilt/cosmic.css"
+    },
+    "./styles/prebuilt/dark.css": {
+      "style": "./styles/prebuilt/dark.css"
+    },
+    "./styles/prebuilt/default.css": {
+      "style": "./styles/prebuilt/default.css"
+    },
+    "./styles/globals": {
+      "sass": "./styles/_globals.scss"
+    }
+  }
 }
