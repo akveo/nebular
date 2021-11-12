@@ -141,7 +141,6 @@ export class NbTabComponent {
 
   /**
    * Lazy load content before tab selection
-   * TODO: rename, as lazy is by default, and this is more `instant load`
    * @param {boolean} val
    * @deprecated To be turned into a <ng-template nbLazyContent>
    */
