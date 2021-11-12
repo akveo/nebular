@@ -16,10 +16,10 @@ import {
   OnDestroy,
   Output,
   Type,
-  AfterViewInit,
   OnInit,
   SimpleChanges,
   Optional,
+  AfterContentInit,
 } from '@angular/core';
 import { takeUntil } from 'rxjs/operators';
 import { Observable, ReplaySubject, Subject } from 'rxjs';
@@ -372,10 +372,7 @@ export abstract class NbBasePicker<D, T, P> extends NbDatepicker<T, D> {
 @Component({
   template: '',
 })
-export class NbBasePickerComponent<D, T, P>
-  extends NbBasePicker<D, T, P>
-  implements OnInit, OnChanges, AfterViewInit, OnDestroy
-{
+export class NbBasePickerComponent<D, T, P> extends NbBasePicker<D, T, P> implements OnInit, OnChanges, OnDestroy {
   /**
    * Datepicker date format. Can be used only with date adapters (moment, date-fns) since native date
    * object doesn't support formatting.
@@ -489,16 +486,13 @@ export class NbBasePickerComponent<D, T, P>
 
   ngOnInit() {
     this.checkFormat();
+    this.init$.next();
   }
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.format && !changes.format.isFirstChange()) {
       this.checkFormat();
     }
-  }
-
-  ngAfterViewInit() {
-    this.init$.next();
   }
 
   ngOnDestroy() {
