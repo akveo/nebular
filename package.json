@@ -68,7 +68,7 @@
     "@angular/common": "^13.0.0",
     "@angular/compiler": "^13.0.0",
     "@angular/core": "^13.0.0",
-    "@angular/fire": "^6.1.0",
+    "@angular/fire": "^7.2.0",
     "@angular/forms": "^13.0.0",
     "@angular/platform-browser": "^13.0.0",
     "@angular/platform-browser-dynamic": "^13.0.0",
@@ -78,7 +78,7 @@
     "date-fns": "^2.0.0",
     "docsearch.js": "^2.5.2",
     "eva-icons": "^1.1.3",
-    "firebase": "^8.0.0",
+    "firebase": "^9.4.0",
     "highlight.js": "^9.18.5",
     "marked": "^1.2.9",
     "moment": "^2.22.2",
@@ -86,7 +86,8 @@
     "pace-js": "^1.0.2",
     "rxjs": "^6.5.3",
     "tslib": "^2.3.0",
-    "zone.js": "~0.11.4"
+    "zone.js": "~0.11.4",
+    "rxfire": "^6.0.0"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~13.0.1",
