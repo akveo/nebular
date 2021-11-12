@@ -142,7 +142,8 @@ export class NbTabComponent {
   /**
    * Lazy load content before tab selection
    * @param {boolean} val
-   * @deprecated To be turned into a <ng-template nbLazyContent>
+   * @deprecated This setting never worked. Wrap content into a `nbTabContent` to make it lazy.
+   * @breaking-change Remove 10.0.0
    */
   @Input()
   set lazyLoad(val: boolean) {
@@ -173,7 +174,8 @@ export class NbTabComponent {
   @Input() badgePosition: NbBadgePosition;
 
   /**
-   * @deprecated To be turned into a active property
+   * @deprecated
+   * @breaking-change Remove 10.0.0
    * @type boolean
    */
   init: boolean = false;
