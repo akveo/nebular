@@ -7,5 +7,5 @@ import { Directive, TemplateRef } from '@angular/core';
   selector: '[nbTabContent]',
 })
 export class NbTabContentDirective {
-  constructor(public template: TemplateRef<any>) {}
+  constructor(public templateRef: TemplateRef<any>) {}
 }

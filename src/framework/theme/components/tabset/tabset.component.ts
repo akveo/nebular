@@ -16,7 +16,6 @@ import {
   HostBinding,
   ChangeDetectorRef,
   ContentChild,
-  TemplateRef,
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
@@ -40,17 +39,17 @@ import { NbTabContentDirective } from './tab-content.directive';
 @Component({
   selector: 'nb-tab',
   template: `
-    <ng-container *ngIf="showLazy; else notLazy">
-      <ng-container *ngTemplateOutlet="lazyTemplate"></ng-container>
+    <ng-container *ngIf="tabContentDirective; else projectedContent">
+      <ng-container *ngTemplateOutlet="tabContentDirective.templateRef"></ng-container>
     </ng-container>
 
-    <ng-template #notLazy>
+    <ng-template #projectedContent>
       <ng-content></ng-content>
     </ng-template>
   `,
 })
 export class NbTabComponent {
-  @ContentChild(NbTabContentDirective, { read: TemplateRef, static: true }) protected _lazyTemplate: TemplateRef<any>;
+  @ContentChild(NbTabContentDirective) tabContentDirective: NbTabContentDirective;
 
   /**
    * Tab title
@@ -179,14 +178,6 @@ export class NbTabComponent {
    * @type boolean
    */
   init: boolean = false;
-
-  get showLazy(): boolean {
-    return !!this._lazyTemplate && this.active;
-  }
-
-  get lazyTemplate(): TemplateRef<any> {
-    return this._lazyTemplate;
-  }
 }
 
 // TODO: Combine tabset with route-tabset, so that we can:
