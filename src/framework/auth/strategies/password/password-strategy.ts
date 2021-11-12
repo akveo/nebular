@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, of as observableOf } from 'rxjs';
 import { switchMap, map, catchError } from 'rxjs/operators';
@@ -156,7 +156,7 @@ export class NbPasswordAuthStrategy extends NbAuthStrategy {
     const method = this.getOption(`${module}.method`);
     const url = this.getActionEndpoint(module);
     const requireValidToken = this.getOption(`${module}.requireValidToken`);
-    return this.http.request(method, url, { body: data, observe: 'response', headers: this.getOption('headers') }).pipe(
+    return this.http.request(method, url, { body: data, observe: 'response', headers: this.headers }).pipe(
       map((res) => {
         if (this.getOption(`${module}.alwaysFail`)) {
           throw this.createFailResponse(data);
@@ -184,7 +184,7 @@ export class NbPasswordAuthStrategy extends NbAuthStrategy {
     const method = this.getOption(`${module}.method`);
     const url = this.getActionEndpoint(module);
     const requireValidToken = this.getOption(`${module}.requireValidToken`);
-    return this.http.request(method, url, { body: data, observe: 'response', headers: this.getOption('headers') }).pipe(
+    return this.http.request(method, url, { body: data, observe: 'response', headers: this.headers }).pipe(
       map((res) => {
         if (this.getOption(`${module}.alwaysFail`)) {
           throw this.createFailResponse(data);
@@ -212,7 +212,7 @@ export class NbPasswordAuthStrategy extends NbAuthStrategy {
     const module = 'requestPass';
     const method = this.getOption(`${module}.method`);
     const url = this.getActionEndpoint(module);
-    return this.http.request(method, url, { body: data, observe: 'response', headers: this.getOption('headers') }).pipe(
+    return this.http.request(method, url, { body: data, observe: 'response', headers: this.headers }).pipe(
       map((res) => {
         if (this.getOption(`${module}.alwaysFail`)) {
           throw this.createFailResponse();
@@ -241,7 +241,7 @@ export class NbPasswordAuthStrategy extends NbAuthStrategy {
     const url = this.getActionEndpoint(module);
     const tokenKey = this.getOption(`${module}.resetPasswordTokenKey`);
     data[tokenKey] = this.route.snapshot.queryParams[tokenKey];
-    return this.http.request(method, url, { body: data, observe: 'response', headers: this.getOption('headers') }).pipe(
+    return this.http.request(method, url, { body: data, observe: 'response', headers: this.headers }).pipe(
       map((res) => {
         if (this.getOption(`${module}.alwaysFail`)) {
           throw this.createFailResponse();
@@ -274,7 +274,7 @@ export class NbPasswordAuthStrategy extends NbAuthStrategy {
         if (!url) {
           return observableOf(res);
         }
-        return this.http.request(method, url, { observe: 'response', headers: this.getOption('headers') });
+        return this.http.request(method, url, { observe: 'response', headers: this.headers });
       }),
       map((res) => {
         if (this.getOption(`${module}.alwaysFail`)) {
@@ -304,7 +304,7 @@ export class NbPasswordAuthStrategy extends NbAuthStrategy {
     const url = this.getActionEndpoint(module);
     const requireValidToken = this.getOption(`${module}.requireValidToken`);
 
-    return this.http.request(method, url, { body: data, observe: 'response', headers: this.getOption('headers') }).pipe(
+    return this.http.request(method, url, { body: data, observe: 'response', headers: this.headers }).pipe(
       map((res) => {
         if (this.getOption(`${module}.alwaysFail`)) {
           throw this.createFailResponse(data);
@@ -338,5 +338,16 @@ export class NbPasswordAuthStrategy extends NbAuthStrategy {
       errors.push('Something went wrong.');
     }
     return observableOf(new NbAuthResult(false, res, this.getOption(`${module}.redirect.failure`), errors));
+  }
+
+  protected get headers(): HttpHeaders {
+    const optionHeaders: { [key: string]: string | string[] } = this.getOption('headers') ?? {};
+    let headers = new HttpHeaders();
+
+    Object.entries(optionHeaders).forEach(([key, value]) => {
+      headers = headers.append(key, value);
+    });
+
+    return headers;
   }
 }
