@@ -39,9 +39,10 @@ import { NbTabContentDirective } from './tab-content.directive';
 @Component({
   selector: 'nb-tab',
   template: `
-    <ng-container *ngIf="tabContentDirective; else projectedContent">
-      <ng-container *ngTemplateOutlet="tabContentDirective.templateRef"></ng-container>
-    </ng-container>
+    <ng-container
+      *ngIf="tabContentDirective; else projectedContent"
+      [ngTemplateOutlet]="tabContentDirective.templateRef"
+    ></ng-container>
 
     <ng-template #projectedContent>
       <ng-content></ng-content>
