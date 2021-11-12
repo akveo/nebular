@@ -26,6 +26,7 @@ node_modules
 
 # misc
 /.angular/cache
+/packages-smoke/.angular/cache
 /.sass-cache
 /connect.lock
 /coverage/*
