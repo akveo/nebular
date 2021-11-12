@@ -203,9 +203,8 @@ export class NbOAuth2AuthStrategy extends NbAuthStrategy {
     const module = 'refresh';
     const url = this.getActionEndpoint(module);
     const requireValidToken = this.getOption(`${module}.requireValidToken`);
-    const headers = this.getHeaders();
 
-    return this.http.post(url, this.buildRefreshRequestData(token), { headers: headers }).pipe(
+    return this.http.post(url, this.buildRefreshRequestData(token), { headers: this.headers }).pipe(
       map((res) => {
         return new NbAuthResult(
           true,
@@ -224,9 +223,8 @@ export class NbOAuth2AuthStrategy extends NbAuthStrategy {
     const module = 'token';
     const url = this.getActionEndpoint(module);
     const requireValidToken = this.getOption(`${module}.requireValidToken`);
-    const headers = this.getHeaders();
 
-    return this.http.post(url, this.buildPasswordRequestData(username, password), { headers: headers }).pipe(
+    return this.http.post(url, this.buildPasswordRequestData(username, password), { headers: this.headers }).pipe(
       map((res) => {
         return new NbAuthResult(
           true,
@@ -253,9 +251,8 @@ export class NbOAuth2AuthStrategy extends NbAuthStrategy {
     const module = 'token';
     const url = this.getActionEndpoint(module);
     const requireValidToken = this.getOption(`${module}.requireValidToken`);
-    const headers = this.getHeaders();
 
-    return this.http.post(url, this.buildCodeRequestData(code), { headers: headers }).pipe(
+    return this.http.post(url, this.buildCodeRequestData(code), { headers: this.headers }).pipe(
       map((res) => {
         return new NbAuthResult(
           true,
@@ -395,7 +392,7 @@ export class NbOAuth2AuthStrategy extends NbAuthStrategy {
     return refreshedToken;
   }
 
-  protected getHeaders(): HttpHeaders {
+  protected get headers(): HttpHeaders {
     const optionHeaders: { [key: string]: string | string[] } = this.getOption('headers') ?? {};
     let headers = this.buildAuthHeader() || new HttpHeaders();
 
