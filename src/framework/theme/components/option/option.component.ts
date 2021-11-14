@@ -162,6 +162,10 @@ export class NbOptionComponent<T = any> implements OnDestroy, AfterViewInit, NbF
     return this.elementRef.nativeElement.textContent;
   }
 
+  get hostElement() {
+    return this.elementRef.nativeElement;
+  }
+
   // TODO: replace with isShowCheckbox property to control this behaviour outside, issues/1965
   @HostBinding('class.multiple')
   get multiple() {
@@ -253,4 +257,24 @@ export class NbOptionComponent<T = any> implements OnDestroy, AfterViewInit, NbF
     this.cd.markForCheck();
   }
 
+}
+
+/**
+ * Determines the position to which to scroll a panel in order for an option to be into view.
+ * @param optionOffset Offset of the option from the top of the panel.
+ * @param optionHeight Height of the options.
+ * @param currentScrollPosition Current scroll position of the panel.
+ * @param panelHeight Height of the panel.
+ */
+export function _getOptionScrollPosition(optionOffset: number, optionHeight: number,
+  currentScrollPosition: number, panelHeight: number): number {
+  if (optionOffset < currentScrollPosition) {
+    return optionOffset;
+  }
+
+  if (optionOffset + optionHeight > currentScrollPosition + panelHeight) {
+    return Math.max(0, optionOffset - panelHeight + optionHeight);
+  }
+
+  return currentScrollPosition;
 }
