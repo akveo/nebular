@@ -251,7 +251,7 @@ export class NbTabComponent {
  * ```
  *
  * You can provide a template as a tab title via `<ng-template nbTabTitle>`:
- * @stacked-example(Tab title template, tabset/tabset-title.component)
+ * @stacked-example(Tab title template, tabset/tabset-template-title.component)
  *
  * @styles
  *
