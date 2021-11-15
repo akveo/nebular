@@ -8,6 +8,7 @@ import {
   NbConnectedOverlayPositionChange,
   NbConnectedPosition,
   NbConnectionPositionPair,
+  NbDirection,
   NbFlexibleConnectedPositionStrategy,
   NbOverlayPositionBuilder,
   NbOverlayRef,
@@ -18,9 +19,6 @@ import { NbOverlayContainerAdapter } from '../adapter/overlay-container-adapter'
 import { NbViewportRulerAdapter } from '../adapter/viewport-ruler-adapter';
 import { NbGlobalLogicalPosition } from './position-helper';
 import { GlobalPositionStrategy } from '@angular/cdk/overlay';
-import { Direction } from '@angular/cdk/bidi';
-import { ConnectedPosition } from '@angular/cdk/overlay/position/flexible-connected-position-strategy';
-
 
 export type NbAdjustmentValues = 'noop' | 'clockwise' | 'counterclockwise' | 'vertical' | 'horizontal';
 export enum NbAdjustment {
@@ -32,7 +30,21 @@ export enum NbAdjustment {
 }
 
 // eslint-disable-next-line max-len
-export type NbPositionValues = 'top' | 'bottom' | 'left' | 'right' | 'start' | 'end' | 'top-end' | 'top-start' | 'bottom-end' | 'bottom-start' | 'end-top' | 'end-bottom' | 'start-top' | 'start-bottom';
+export type NbPositionValues =
+  | 'top'
+  | 'bottom'
+  | 'left'
+  | 'right'
+  | 'start'
+  | 'end'
+  | 'top-end'
+  | 'top-start'
+  | 'bottom-end'
+  | 'bottom-start'
+  | 'end-top'
+  | 'end-bottom'
+  | 'start-top'
+  | 'start-bottom';
 export enum NbPosition {
   TOP = 'top',
   BOTTOM = 'bottom',
@@ -141,12 +153,10 @@ const CLOCKWISE_POSITIONS = [
 const VERTICAL_POSITIONS = [NbPosition.BOTTOM, NbPosition.TOP];
 const HORIZONTAL_POSITIONS = [NbPosition.START, NbPosition.END];
 
-
 function comparePositions(p1: NbConnectedPosition, p2: NbConnectedPosition): boolean {
-  return p1.originX === p2.originX
-    && p1.originY === p2.originY
-    && p1.overlayX === p2.overlayX
-    && p1.overlayY === p2.overlayY;
+  return (
+    p1.originX === p2.originX && p1.originY === p2.originY && p1.overlayX === p2.overlayX && p1.overlayY === p2.overlayY
+  );
 }
 
 /**
@@ -154,14 +164,15 @@ function comparePositions(p1: NbConnectedPosition, p2: NbConnectedPosition): boo
  * You have to provide adjustment and appropriate strategy will be chosen in runtime.
  * */
 export class NbAdjustableConnectedPositionStrategy
-  extends NbFlexibleConnectedPositionStrategy implements NbPositionStrategy {
-
+  extends NbFlexibleConnectedPositionStrategy
+  implements NbPositionStrategy
+{
   protected _position: NbPosition;
   protected _offset: number = 15;
   protected _adjustment: NbAdjustment;
-  private _direction: Direction | undefined;
+  private _direction: NbDirection | undefined;
 
-  protected appliedPositions: { key: NbPosition, connectedPosition: NbConnectedPosition }[];
+  protected appliedPositions: { key: NbPosition; connectedPosition: NbConnectedPosition }[];
 
   readonly positionChange: Observable<NbPosition> = this.positionChanges.pipe(
     map((positionChange: NbConnectedOverlayPositionChange) => positionChange.connectionPair),
@@ -211,7 +222,7 @@ export class NbAdjustableConnectedPositionStrategy
   protected createPositions(): NbPosition[] {
     switch (this._adjustment) {
       case NbAdjustment.NOOP:
-        return [ this._position ];
+        return [this._position];
       case NbAdjustment.CLOCKWISE:
         return this.reorderPreferredPositions(CLOCKWISE_POSITIONS);
       case NbAdjustment.COUNTERCLOCKWISE:
@@ -229,9 +240,10 @@ export class NbAdjustableConnectedPositionStrategy
 
   protected reorderPreferredPositions(positions: NbPosition[]): NbPosition[] {
     // Physical positions should be mapped to logical as adjustments use logical positions.
-    const positionStrategy = this._direction === 'ltr' ?
-      new RegularPositionStrategy(this._position) :
-      new RevertedPositionStrategy(this._position);
+    const positionStrategy =
+      this._direction === 'ltr'
+        ? new RegularPositionStrategy(this._position)
+        : new RevertedPositionStrategy(this._position);
     const startPositionIndex = positions.indexOf(this.mapToLogicalPosition(positionStrategy));
     const firstPart = positions.slice(startPositionIndex);
     const secondPart = positions.slice(0, startPositionIndex);
@@ -242,10 +254,10 @@ export class NbAdjustableConnectedPositionStrategy
     return positionStrategy.execute();
   }
 
-  private getConnectedPosition(position: NbPosition): { key: NbPosition, connectedPosition: ConnectedPosition } {
+  private getConnectedPosition(position: NbPosition): { key: NbPosition; connectedPosition: NbConnectedPosition } {
     const positionGrid = this._direction === 'rtl' ? { ...POSITIONS, ...REVERTED_POSITIONS } : POSITIONS;
 
-    return { key: position, connectedPosition: positionGrid[position](this._offset) };
+    return { key: position, connectedPosition: positionGrid[position](this._offset) as NbConnectedPosition };
   }
 }
 
@@ -254,8 +266,7 @@ interface PositionStrategy {
 }
 
 class RegularPositionStrategy implements PositionStrategy {
-  constructor(private position: NbPosition) {
-  }
+  constructor(private position: NbPosition) {}
 
   execute(): NbPosition {
     if (this.position === NbPosition.LEFT) {
@@ -269,8 +280,7 @@ class RegularPositionStrategy implements PositionStrategy {
 }
 
 class RevertedPositionStrategy implements PositionStrategy {
-  constructor(private position: NbPosition) {
-  }
+  constructor(private position: NbPosition) {}
 
   execute(): NbPosition {
     if (this.position === NbPosition.LEFT) {
@@ -284,7 +294,6 @@ class RevertedPositionStrategy implements PositionStrategy {
 }
 
 export class NbGlobalPositionStrategy extends GlobalPositionStrategy {
-
   position(position: NbGlobalLogicalPosition): this {
     switch (position) {
       case NbGlobalLogicalPosition.TOP_START:
@@ -304,12 +313,13 @@ export class NbGlobalPositionStrategy extends GlobalPositionStrategy {
 
 @Injectable()
 export class NbPositionBuilderService {
-  constructor(@Inject(NB_DOCUMENT) protected document,
-              protected viewportRuler: NbViewportRulerAdapter,
-              protected platform: NbPlatform,
-              protected positionBuilder: NbOverlayPositionBuilder,
-              protected overlayContainer: NbOverlayContainerAdapter) {
-  }
+  constructor(
+    @Inject(NB_DOCUMENT) protected document,
+    protected viewportRuler: NbViewportRulerAdapter,
+    protected platform: NbPlatform,
+    protected positionBuilder: NbOverlayPositionBuilder,
+    protected overlayContainer: NbOverlayContainerAdapter,
+  ) {}
 
   global(): NbGlobalPositionStrategy {
     return new NbGlobalPositionStrategy();
