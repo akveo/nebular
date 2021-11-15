@@ -343,6 +343,6 @@ export class NbPasswordAuthStrategy extends NbAuthStrategy {
   protected getHeaders(): HttpHeaders {
     const headers = new HttpHeaders();
 
-    return this.assignOptionHeaders(headers);
+    return this.setOptionHeaders(headers);
   }
 }

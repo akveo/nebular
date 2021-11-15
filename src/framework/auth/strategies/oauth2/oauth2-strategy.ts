@@ -396,7 +396,7 @@ export class NbOAuth2AuthStrategy extends NbAuthStrategy {
     let headers = this.buildAuthHeader() ?? new HttpHeaders();
     headers = headers.append('Content-Type', 'application/x-www-form-urlencoded');
 
-    return this.assignOptionHeaders(headers);
+    return this.setOptionHeaders(headers);
   }
 
   register(data?: any): Observable<NbAuthResult> {

@@ -61,13 +61,13 @@ export abstract class NbAuthStrategy {
     return actionEndpoint ? baseEndpoint + actionEndpoint : '';
   }
 
-  protected assignOptionHeaders(headers: HttpHeaders): HttpHeaders {
+  protected setOptionHeaders(headers: HttpHeaders): HttpHeaders {
     const optionHeaders: { [key: string]: string | string[] } = this.getOption('headers') ?? {};
 
-    Object.entries(optionHeaders).forEach(([key, value]) => {
-      headers = headers.append(key, value);
-    });
+    for (const key of headers.keys()) {
+      optionHeaders[key] = headers.getAll(key);
+    }
 
-    return headers;
+    return new HttpHeaders(optionHeaders);
   }
 }
