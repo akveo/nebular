@@ -376,7 +376,7 @@ export class NbAutocompleteDirective<T> implements OnDestroy, AfterViewInit, Con
           if (!activeItem) {
             return;
           }
-          this.handleInputValueUpdate(activeItem.value);
+          this.handleInputValueUpdate(activeItem.value, true);
 
         } else {
           this.keyManager.onKeydown(event);
