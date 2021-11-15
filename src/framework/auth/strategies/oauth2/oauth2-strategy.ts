@@ -393,7 +393,7 @@ export class NbOAuth2AuthStrategy extends NbAuthStrategy {
   }
 
   protected getHeaders(): HttpHeaders {
-    let headers = this.buildAuthHeader() || new HttpHeaders();
+    let headers = this.buildAuthHeader() ?? new HttpHeaders();
     headers = headers.append('Content-Type', 'application/x-www-form-urlencoded');
 
     return this.assignOptionHeaders(headers);
