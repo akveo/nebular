@@ -34,7 +34,7 @@ import { NbTabContentDirective } from './tab-content.directive';
  *   badgeStatus="danger">
  *   <p>List of <strong>users</strong>.</p>
  * </nb-tab>
- ```
+ * ```
  */
 @Component({
   selector: 'nb-tab',
@@ -141,7 +141,7 @@ export class NbTabComponent {
 
   /**
    * Lazy load content before tab selection
-   * @param {boolean} val
+   * @docs-private
    * @deprecated This setting never worked. Wrap content into a `nbTabContent` to make it lazy.
    * @breaking-change Remove 10.0.0
    */
@@ -176,7 +176,7 @@ export class NbTabComponent {
   /**
    * @deprecated
    * @breaking-change Remove 10.0.0
-   * @type boolean
+   * @docs-private
    */
   init: boolean = false;
 }
