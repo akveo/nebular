@@ -4,25 +4,19 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import {
-  ChangeDetectionStrategy,
-  Component,
-  Input,
-  OnDestroy,
-  OnInit,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnDestroy } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 import { NgdMdSection } from '../../../@theme/services/text.service';
-import { NgdMdSectionsService } from '../../../@theme/services';
+import { NgdLastViewedSectionService } from '../../../@theme/services';
 
 @Component({
   selector: 'ngd-md-block',
   template: `
     <div [nbSpinner]="loading">
-      <nb-card *ngFor="let section of sections | async" [ngdFragment]="section.fragment">
+      <nb-card *ngFor="let section of sections$ | async" [ngdFragment]="section.fragment">
         <nb-card-body>
           <div [innerHtml]="getTemplate(section.html)"></div>
         </nb-card-body>
@@ -31,29 +25,27 @@ import { NgdMdSectionsService } from '../../../@theme/services';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NgdMdBLockComponent implements OnInit, OnDestroy {
-  @Input() sections$: Observable<NgdMdSection[]> | undefined;
-  public loading = false;
-  private destroy$ = new Subject();
+export class NgdMdBLockComponent implements OnDestroy {
+  private destroy$ = new Subject<void>();
+  loading = true;
 
-  constructor(private readonly domSanitizer: DomSanitizer, private mdSectionsService: NgdMdSectionsService) {}
-
-  public ngOnInit(): void {
-    if (this.sections$) {
-      this.loading = true;
-
-      this.sections$.pipe(takeUntil(this.destroy$)).subscribe((sections) => {
-        this.loading = false;
-        this.mdSectionsService.setSections(sections);
-      })
-    }
+  @Input()
+  get sections$(): Observable<NgdMdSection[]> {
+    return this.lastViewedSectionService.getSections();
+  }
+  set sections$(value: Observable<NgdMdSection[]>) {
+    value.pipe(takeUntil(this.destroy$)).subscribe((sections) => {
+      this.loading = false;
+      this.lastViewedSectionService.setSection(sections);
+    });
   }
 
-  public get sections(): Observable<NgdMdSection[]> {
-    return this.mdSectionsService.sections$;
-  }
+  constructor(
+    private readonly domSanitizer: DomSanitizer,
+    private lastViewedSectionService: NgdLastViewedSectionService,
+  ) {}
 
-  public ngOnDestroy(): void {
+  ngOnDestroy() {
     this.destroy$.next();
     this.destroy$.complete();
   }
