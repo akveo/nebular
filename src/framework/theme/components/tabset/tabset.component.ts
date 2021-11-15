@@ -228,11 +228,25 @@ export class NbTabComponent {
  * (`tabset-tab-text-hide-breakpoint` property) for better responsive behaviour.
  * You can open the following example and make
  * your screen smaller - titles will be hidden in the last tabset in the list:
- *
  * @stacked-example(Icon, tabset/tabset-icon.component)
  *
  * It is also possible to disable a tab using `disabled` property:
  * @stacked-example(Disabled Tab, tabset/tabset-disabled.component)
+ *
+ * By default, the tab contents instantiated straightaway. To make tab contents load lazy,
+ * declare the body of a tab in a template with `nbTabContent` directive.
+ * ```html
+ * <nb-tabset>
+ *   <nb-tab>
+ *     <some-component *nbTabContent>Lazy content</some-component>
+ *   </nb-tab>
+ *   <nb-tab>
+ *     <ng-template nbTabContent>
+ *       Lazy content with template syntax
+ *     </ng-template>
+ *   </nb-tab>
+ * </nb-tabset>
+ * ```
  *
  * @styles
  *
