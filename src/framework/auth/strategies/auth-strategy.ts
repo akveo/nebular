@@ -64,10 +64,10 @@ export abstract class NbAuthStrategy {
   protected setOptionHeaders(headers: HttpHeaders): HttpHeaders {
     const optionHeaders: { [key: string]: string | string[] } = this.getOption('headers') ?? {};
 
-    for (const key of headers.keys()) {
-      optionHeaders[key] = headers.getAll(key);
-    }
+    Object.entries(optionHeaders).forEach(([key, value]) => {
+      headers = headers.append(key, value);
+    });
 
-    return new HttpHeaders(optionHeaders);
+    return headers;
   }
 }
