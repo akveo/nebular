@@ -7,7 +7,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
-  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './tabset-title.component.html',
   styles: [
     `
@@ -16,5 +15,6 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
       }
     `,
   ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TabsetTitleComponent {}

@@ -3,13 +3,12 @@
     <nb-tabset>
       <nb-tab>
         <ng-template nbTabTitle>
-          <span>label</span>
+          <span>Orders</span>
         </ng-template>
-      </nb-tab>
-      <nb-tab tabTitle="Orders">
         <p>List of <strong>orders</strong>.</p>
       </nb-tab>
       <nb-tab tabTitle="Transactions" disabled>
+        <span *nbTabTitle>Transactions</span>
         <p>List of <strong>transactions</strong>.</p>
       </nb-tab>
     </nb-tabset>
