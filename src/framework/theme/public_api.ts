@@ -80,6 +80,7 @@ export * from './components/tabset/tabset.module';
 export * from './components/datepicker/date-timepicker.component';
 export * from './components/datepicker/calendar-with-time.component';
 export * from './components/tabset/tabset.component';
+export * from './components/tabset/tab-content.directive';
 export * from './components/tabset/tab-title';
 export * from './components/user/user.module';
 export * from './components/user/user.component';

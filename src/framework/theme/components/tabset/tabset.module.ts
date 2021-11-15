@@ -11,11 +11,12 @@ import { NbSharedModule } from '../shared/shared.module';
 import { NbTabsetComponent, NbTabComponent } from './tabset.component';
 import { NbBadgeModule } from '../badge/badge.module';
 import { NbIconModule } from '../icon/icon.module';
+import { NbTabContentDirective } from './tab-content.directive';
 import { NbTabTitleDirective } from './tab-title';
 
 const NB_TABSET_COMPONENTS = [NbTabsetComponent, NbTabComponent];
 
-const NB_TABSET_DIRECTIVES = [NbTabTitleDirective];
+const NB_TABSET_DIRECTIVES = [NbTabContentDirective, NbTabTitleDirective];
 
 @NgModule({
   imports: [NbSharedModule, NbBadgeModule, NbIconModule],

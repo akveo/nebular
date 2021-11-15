@@ -23,6 +23,7 @@ import { convertToBoolProperty, NbBooleanInput } from '../helpers';
 import { NbComponentOrCustomStatus } from '../component-status';
 import { NbBadgePosition } from '../badge/badge.component';
 import { NbIconConfig } from '../icon/icon.component';
+import { NbTabContentDirective } from './tab-content.directive';
 import { NbTabTitleDirective } from './tab-title';
 
 /**
@@ -34,17 +35,23 @@ import { NbTabTitleDirective } from './tab-title';
  *   badgeStatus="danger">
  *   <p>List of <strong>users</strong>.</p>
  * </nb-tab>
- ```
+ * ```
  */
 @Component({
   selector: 'nb-tab',
   template: `
-    <ng-container *ngIf="init">
+    <ng-container
+      *ngIf="tabContentDirective; else projectedContent"
+      [ngTemplateOutlet]="tabContentDirective.templateRef"
+    ></ng-container>
+
+    <ng-template #projectedContent>
       <ng-content></ng-content>
-    </ng-container>
+    </ng-template>
   `,
 })
 export class NbTabComponent {
+  @ContentChild(NbTabContentDirective) tabContentDirective: NbTabContentDirective;
   /** Content for the tab label given by '<ng-template nbTabTitle>'. */
   @ContentChild(NbTabTitleDirective) titleTemplate: NbTabTitleDirective | undefined;
 
@@ -137,8 +144,9 @@ export class NbTabComponent {
 
   /**
    * Lazy load content before tab selection
-   * TODO: rename, as lazy is by default, and this is more `instant load`
-   * @param {boolean} val
+   * @docs-private
+   * @deprecated This setting never worked. Wrap content into a `nbTabContent` to make it lazy.
+   * @breaking-change Remove 10.0.0
    */
   @Input()
   set lazyLoad(val: boolean) {
@@ -168,6 +176,11 @@ export class NbTabComponent {
    */
   @Input() badgePosition: NbBadgePosition;
 
+  /**
+   * @deprecated
+   * @breaking-change Remove 10.0.0
+   * @docs-private
+   */
   init: boolean = false;
 }
 
@@ -218,11 +231,25 @@ export class NbTabComponent {
  * (`tabset-tab-text-hide-breakpoint` property) for better responsive behaviour.
  * You can open the following example and make
  * your screen smaller - titles will be hidden in the last tabset in the list:
- *
  * @stacked-example(Icon, tabset/tabset-icon.component)
  *
  * It is also possible to disable a tab using `disabled` property:
  * @stacked-example(Disabled Tab, tabset/tabset-disabled.component)
+ *
+ * By default, the tab contents instantiated straightaway. To make tab contents load lazy,
+ * declare the body of a tab in a template with `nbTabContent` directive.
+ * ```html
+ * <nb-tabset>
+ *   <nb-tab>
+ *     <some-component *nbTabContent>Lazy content</some-component>
+ *   </nb-tab>
+ *   <nb-tab>
+ *     <ng-template nbTabContent>
+ *       Lazy content with template syntax
+ *     </ng-template>
+ *   </nb-tab>
+ * </nb-tabset>
+ * ```
  *
  * You can provide a template as a tab title via `<ng-template nbTabTitle>`:
  * @stacked-example(Tab title template, tabset/tabset-title.component)
