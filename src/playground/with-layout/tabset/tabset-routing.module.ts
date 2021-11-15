@@ -18,7 +18,7 @@ import { TabsetShowcaseComponent } from './tabset-showcase.component';
 import { TabsetTestComponent } from './tabset-test.component';
 import { TabsetWidthComponent } from './tabset-width.component';
 import { TabsetDisabledComponent } from './tabset-disabled.component';
-import { TabsetTitleComponent } from './tabset-title.component';
+import { TabsetTemplateTitleComponent } from './tabset-template-title.component';
 
 const routes: Route[] = [
   {
@@ -73,8 +73,8 @@ const routes: Route[] = [
     component: TabsetDisabledComponent,
   },
   {
-    path: 'tabset-title.component',
-    component: TabsetTitleComponent,
+    path: 'tabset-template-title.component',
+    component: TabsetTemplateTitleComponent,
   },
 ];
 

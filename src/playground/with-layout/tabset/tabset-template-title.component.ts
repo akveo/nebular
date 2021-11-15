@@ -17,4 +17,4 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TabsetTitleComponent {}
+export class TabsetTemplateTitleComponent {}
