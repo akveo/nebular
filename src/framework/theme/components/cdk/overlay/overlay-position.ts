@@ -62,7 +62,7 @@ export enum NbPosition {
   START_BOTTOM = 'start-bottom',
 }
 
-const REVERTED_POSITIONS = {
+const RTL_PHYSICAL_POSITIONS = {
   [NbPosition.RIGHT](offset) {
     return { originX: 'start', originY: 'center', overlayX: 'end', overlayY: 'center', offsetX: offset };
   },
@@ -255,7 +255,7 @@ export class NbAdjustableConnectedPositionStrategy
   }
 
   private getConnectedPosition(position: NbPosition): { key: NbPosition; connectedPosition: NbConnectedPosition } {
-    const positionGrid = this._direction === 'rtl' ? { ...POSITIONS, ...REVERTED_POSITIONS } : POSITIONS;
+    const positionGrid = this._direction === 'rtl' ? { ...POSITIONS, ...RTL_PHYSICAL_POSITIONS } : POSITIONS;
 
     return { key: position, connectedPosition: positionGrid[position](this._offset) as NbConnectedPosition };
   }
