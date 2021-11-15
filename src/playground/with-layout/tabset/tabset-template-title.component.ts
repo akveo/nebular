@@ -7,7 +7,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
-  templateUrl: './tabset-title.component.html',
+  templateUrl: './tabset-template-title.component.html',
   styles: [
     `
       :host nb-tab {
