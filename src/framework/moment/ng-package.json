@@ -2,12 +2,7 @@
   "$schema": "../../../node_modules/ng-packagr/ng-package.schema.json",
   "dest": "../../../dist/moment",
   "lib": {
-    "entryFile": "./public_api.ts",
-    "umdId": "nb.moment",
-    "umdModuleIds": {
-      "@nebular/theme": "nb.theme",
-      "moment": "moment"
-    }
+    "entryFile": "./public_api.ts"
   },
   "assets": [
     "LICENSE.txt",
