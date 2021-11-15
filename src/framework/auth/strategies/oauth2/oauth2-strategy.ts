@@ -204,7 +204,7 @@ export class NbOAuth2AuthStrategy extends NbAuthStrategy {
     const url = this.getActionEndpoint(module);
     const requireValidToken = this.getOption(`${module}.requireValidToken`);
 
-    return this.http.post(url, this.buildRefreshRequestData(token), { headers: this.headers }).pipe(
+    return this.http.post(url, this.buildRefreshRequestData(token), { headers: this.getHeaders() }).pipe(
       map((res) => {
         return new NbAuthResult(
           true,
@@ -224,7 +224,7 @@ export class NbOAuth2AuthStrategy extends NbAuthStrategy {
     const url = this.getActionEndpoint(module);
     const requireValidToken = this.getOption(`${module}.requireValidToken`);
 
-    return this.http.post(url, this.buildPasswordRequestData(username, password), { headers: this.headers }).pipe(
+    return this.http.post(url, this.buildPasswordRequestData(username, password), { headers: this.getHeaders() }).pipe(
       map((res) => {
         return new NbAuthResult(
           true,
@@ -252,7 +252,7 @@ export class NbOAuth2AuthStrategy extends NbAuthStrategy {
     const url = this.getActionEndpoint(module);
     const requireValidToken = this.getOption(`${module}.requireValidToken`);
 
-    return this.http.post(url, this.buildCodeRequestData(code), { headers: this.headers }).pipe(
+    return this.http.post(url, this.buildCodeRequestData(code), { headers: this.getHeaders() }).pipe(
       map((res) => {
         return new NbAuthResult(
           true,
@@ -392,17 +392,11 @@ export class NbOAuth2AuthStrategy extends NbAuthStrategy {
     return refreshedToken;
   }
 
-  protected get headers(): HttpHeaders {
-    const optionHeaders: { [key: string]: string | string[] } = this.getOption('headers') ?? {};
+  protected getHeaders(): HttpHeaders {
     let headers = this.buildAuthHeader() || new HttpHeaders();
-
     headers = headers.append('Content-Type', 'application/x-www-form-urlencoded');
 
-    Object.entries(optionHeaders).forEach(([key, value]) => {
-      headers = headers.append(key, value);
-    });
-
-    return headers;
+    return this.assignOptionHeaders(headers);
   }
 
   register(data?: any): Observable<NbAuthResult> {
