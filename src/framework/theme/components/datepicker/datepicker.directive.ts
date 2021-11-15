@@ -5,6 +5,7 @@
  */
 
 import {
+  ChangeDetectorRef,
   Directive,
   ElementRef,
   forwardRef,
@@ -12,7 +13,6 @@ import {
   InjectionToken,
   Input,
   OnDestroy,
-  ChangeDetectorRef,
   Type,
 } from '@angular/core';
 import {
@@ -24,11 +24,11 @@ import {
   ValidatorFn,
   Validators,
 } from '@angular/forms';
-import { fromEvent, Observable, merge, Subject } from 'rxjs';
-import { map, takeUntil, filter, take, tap } from 'rxjs/operators';
+import {fromEvent, merge, Observable, Subject} from 'rxjs';
+import {filter, map, take, takeUntil, tap} from 'rxjs/operators';
 
-import { NB_DOCUMENT } from '../../theme.options';
-import { NbDateService } from '../calendar-kit/services/date.service';
+import {NB_DOCUMENT} from '../../theme.options';
+import {NbDateService} from '../calendar-kit/services/date.service';
 
 
 /**
@@ -173,9 +173,13 @@ export const NB_DATE_SERVICE_OPTIONS = new InjectionToken('Date service options'
  * @stacked-example(Forms, datepicker/datepicker-forms.component)
  *
  * `NbDatepickerDirective` may be validated using `min` and `max` dates passed to the datepicker.
- * And `filter` predicate that receives date object and has to return a boolean value.
  *
  * @stacked-example(Validation, datepicker/datepicker-validation.component)
+ *
+ * Also `NbDatepickerDirective` may be filtered using `filter` predicate
+ * that receives date object and has to return a boolean value.
+ *
+ * @stacked-example(Filter, datepicker/datepicker-filter.component)
  *
  * If you need to pick a time along with the date, you can use nb-date-timepicker
  *
@@ -485,8 +489,7 @@ export class NbDatepickerDirective<D> implements OnDestroy, ControlValueAccessor
   }
 
   protected writeInput(value: D) {
-    const stringRepresentation = this.datepickerAdapter.format(value, this.picker.format);
-    this.hostRef.nativeElement.value = stringRepresentation;
+    this.hostRef.nativeElement.value = this.datepickerAdapter.format(value, this.picker.format);
   }
 
   /**

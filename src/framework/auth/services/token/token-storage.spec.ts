@@ -6,11 +6,16 @@
 
 import { inject, TestBed, waitForAsync } from '@angular/core/testing';
 
-import { NbTokenLocalStorage, NbTokenStorage } from './token-storage';
-import { NB_AUTH_TOKENS } from '../../auth.options';
-import { NbAuthSimpleToken, nbAuthCreateToken } from './token';
-import { NbAuthJWTToken } from '@nebular/auth/services/token/token';
-import { NB_AUTH_FALLBACK_TOKEN, NbAuthTokenParceler } from './token-parceler';
+import {
+  NbTokenLocalStorage,
+  NbTokenStorage,
+  NB_AUTH_TOKENS,
+  NbAuthSimpleToken,
+  nbAuthCreateToken,
+  NbAuthJWTToken,
+  NB_AUTH_FALLBACK_TOKEN,
+  NbAuthTokenParceler,
+} from '@nebular/auth';
 
 describe('token-storage', () => {
 

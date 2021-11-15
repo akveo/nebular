@@ -86,9 +86,7 @@ export class NbAccordionItemHeaderComponent implements OnInit, OnDestroy {
     if (this.isCollapsed) {
       return 'collapsed';
     }
-    if (this.expanded) {
-      return 'expanded';
-    }
+    return 'expanded';
   }
 
   private destroy$ = new Subject<void>();

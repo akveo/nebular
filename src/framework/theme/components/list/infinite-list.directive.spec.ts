@@ -3,13 +3,15 @@ import { APP_BASE_HREF } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { By } from '@angular/platform-browser';
 import { TestBed, ComponentFixture, fakeAsync, tick } from '@angular/core/testing';
-import { NbThemeModule } from '../../theme.module';
-import { NbLayoutModule } from '../layout/layout.module';
-import { NbLayoutComponent } from '../layout/layout.component';
-import { NbLayoutScrollService } from '../../services/scroll.service';
-import { NbListModule } from './list.module';
-import { NbListComponent } from './list.component';
-import { NbInfiniteListDirective } from './infinite-list.directive';
+import {
+  NbThemeModule,
+  NbLayoutModule,
+  NbLayoutComponent,
+  NbLayoutScrollService,
+  NbListModule,
+  NbListComponent,
+  NbInfiniteListDirective,
+} from '@nebular/theme';
 
 const CONTENT_PADDING = 20;
 const CONTENT_HEIGHT = 10000 + CONTENT_PADDING;
@@ -34,30 +36,33 @@ let infiniteListDirective: NbInfiniteListDirective;
           [threshold]="threshold"
           [listenWindowScroll]="listenWindowScroll"
           (bottomThreshold)="bottomThreshold()"
-          (topThreshold)="topThreshold()">
+          (topThreshold)="topThreshold()"
+        >
           <nb-list-item class="inner"></nb-list-item>
         </nb-list>
       </nb-layout-column>
     </nb-layout>
   `,
-  styles: [`
-    ::ng-deep nb-layout.with-scroll .scrollable-container {
-      overflow: auto;
-      height: 100vh;
-    }
-    .scroller {
-      background: lightgray;
-      padding: ${CONTENT_PADDING}px;
-    }
-    .element-scroll {
-      height: ${ELEMENT_HEIGHT}px;
-      overflow-y: auto;
-    }
-    .inner {
-      background: lightgoldenrodyellow;
-      height: ${CONTENT_HEIGHT}px;
-    }
-  `],
+  styles: [
+    `
+      ::ng-deep nb-layout.with-scroll .scrollable-container {
+        overflow: auto;
+        height: 100vh;
+      }
+      .scroller {
+        background: lightgray;
+        padding: ${CONTENT_PADDING}px;
+      }
+      .element-scroll {
+        height: ${ELEMENT_HEIGHT}px;
+        overflow-y: auto;
+      }
+      .inner {
+        background: lightgoldenrodyellow;
+        height: ${CONTENT_HEIGHT}px;
+      }
+    `,
+  ],
 })
 class ScrollTestComponent {
   listenWindowScroll = false;
@@ -69,22 +74,19 @@ class ScrollTestComponent {
 }
 
 describe('Directive: NbScrollDirective', () => {
-
   beforeEach(() => {
     fixture = TestBed.configureTestingModule({
-        imports: [
-          RouterModule.forRoot([], { relativeLinkResolution: 'legacy' }),
-          NbThemeModule.forRoot(),
-          NbLayoutModule,
-          NbListModule,
-        ],
-        providers: [ NbLayoutScrollService, { provide: APP_BASE_HREF, useValue: '/' } ],
-        declarations: [ ScrollTestComponent ],
-      })
-      .createComponent(ScrollTestComponent);
+      imports: [
+        RouterModule.forRoot([], { relativeLinkResolution: 'legacy' }),
+        NbThemeModule.forRoot(),
+        NbLayoutModule,
+        NbListModule,
+      ],
+      providers: [NbLayoutScrollService, { provide: APP_BASE_HREF, useValue: '/' }],
+      declarations: [ScrollTestComponent],
+    }).createComponent(ScrollTestComponent);
 
     fixture.detectChanges();
-
 
     listElementRef = fixture.debugElement.query(By.directive(NbListComponent));
     layoutComponent = fixture.debugElement.query(By.directive(NbLayoutComponent)).componentInstance;
@@ -171,7 +173,7 @@ describe('Directive: NbScrollDirective', () => {
     tick();
     expect(tresholdSpy).toHaveBeenCalledTimes(0);
 
-    const positionBelowThreshold = CONTENT_HEIGHT - (THRESHOLD / 2);
+    const positionBelowThreshold = CONTENT_HEIGHT - THRESHOLD / 2;
     scrollingNativeElement.scrollTop = positionBelowThreshold;
     scrollingNativeElement.dispatchEvent(new Event('scroll'));
     tick();
@@ -193,7 +195,7 @@ describe('Directive: NbScrollDirective', () => {
     tick();
     expect(tresholdSpy).toHaveBeenCalledTimes(0);
 
-    const positionBelowThreshold = CONTENT_HEIGHT - (THRESHOLD / 2);
+    const positionBelowThreshold = CONTENT_HEIGHT - THRESHOLD / 2;
     documentElement.scrollTop = positionBelowThreshold;
     window.dispatchEvent(new Event('scroll'));
     tick();

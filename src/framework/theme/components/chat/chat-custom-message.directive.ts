@@ -1,7 +1,7 @@
 import { Directive, Input, OnDestroy, OnInit, TemplateRef } from '@angular/core';
 
 import { convertToBoolProperty, NbBooleanInput } from '../helpers';
-import { NbCustomMessageService } from './custom-message.service';
+import { NbChatCustomMessageService } from './chat-custom-message.service';
 
 function throwCustomMessageTypeIsRequired(): void {
   throw new Error('[nbCustomMessage]: custom message type is required.');
@@ -26,7 +26,6 @@ function throwCustomMessageTypeIsRequired(): void {
   selector: `[nbCustomMessage]`,
 })
 export class NbChatCustomMessageDirective implements OnInit, OnDestroy {
-
   /**
    * Defines a message type which should rendered with the custom message template.
    * @type {string}
@@ -41,7 +40,7 @@ export class NbChatCustomMessageDirective implements OnInit, OnDestroy {
   protected _type: string;
 
   get type(): string {
-    return this._type
+    return this._type;
   }
 
   /**
@@ -64,7 +63,7 @@ export class NbChatCustomMessageDirective implements OnInit, OnDestroy {
     return this.nbCustomMessageNoStyles;
   }
 
-  constructor(public templateRef: TemplateRef<any>, protected customMessageService: NbCustomMessageService) { }
+  constructor(public templateRef: TemplateRef<any>, protected customMessageService: NbChatCustomMessageService) {}
 
   ngOnInit() {
     if (!this._type) {

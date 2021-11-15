@@ -279,7 +279,7 @@ export class NbMenuComponent implements OnInit, AfterViewInit, OnDestroy {
     this.menuInternalService
       .onNavigateHome()
       .pipe(
-        filter((data: { tag: string; items: NbMenuItem[] }) => this.compareTag(data.tag)),
+        filter((data: { tag: string }) => this.compareTag(data.tag)),
         takeUntil(this.destroy$),
       )
       .subscribe(() => this.navigateHome());
@@ -384,6 +384,8 @@ export class NbMenuComponent implements OnInit, AfterViewInit, OnDestroy {
         return homeItem;
       }
     }
+
+    return undefined;
   }
 
   protected compareTag(tag: string) {
