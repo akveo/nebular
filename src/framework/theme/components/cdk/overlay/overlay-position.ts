@@ -170,7 +170,7 @@ export class NbAdjustableConnectedPositionStrategy
   protected _position: NbPosition;
   protected _offset: number = 15;
   protected _adjustment: NbAdjustment;
-  private _direction: NbDirection | undefined;
+  protected _direction: NbDirection | undefined;
 
   protected appliedPositions: { key: NbPosition; connectedPosition: NbConnectedPosition }[];
 
