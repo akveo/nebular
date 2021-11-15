@@ -156,7 +156,7 @@ export class NbPasswordAuthStrategy extends NbAuthStrategy {
     const method = this.getOption(`${module}.method`);
     const url = this.getActionEndpoint(module);
     const requireValidToken = this.getOption(`${module}.requireValidToken`);
-    return this.http.request(method, url, { body: data, observe: 'response', headers: this.headers }).pipe(
+    return this.http.request(method, url, { body: data, observe: 'response', headers: this.getHeaders() }).pipe(
       map((res) => {
         if (this.getOption(`${module}.alwaysFail`)) {
           throw this.createFailResponse(data);
@@ -184,7 +184,7 @@ export class NbPasswordAuthStrategy extends NbAuthStrategy {
     const method = this.getOption(`${module}.method`);
     const url = this.getActionEndpoint(module);
     const requireValidToken = this.getOption(`${module}.requireValidToken`);
-    return this.http.request(method, url, { body: data, observe: 'response', headers: this.headers }).pipe(
+    return this.http.request(method, url, { body: data, observe: 'response', headers: this.getHeaders() }).pipe(
       map((res) => {
         if (this.getOption(`${module}.alwaysFail`)) {
           throw this.createFailResponse(data);
@@ -212,7 +212,7 @@ export class NbPasswordAuthStrategy extends NbAuthStrategy {
     const module = 'requestPass';
     const method = this.getOption(`${module}.method`);
     const url = this.getActionEndpoint(module);
-    return this.http.request(method, url, { body: data, observe: 'response', headers: this.headers }).pipe(
+    return this.http.request(method, url, { body: data, observe: 'response', headers: this.getHeaders() }).pipe(
       map((res) => {
         if (this.getOption(`${module}.alwaysFail`)) {
           throw this.createFailResponse();
@@ -241,7 +241,7 @@ export class NbPasswordAuthStrategy extends NbAuthStrategy {
     const url = this.getActionEndpoint(module);
     const tokenKey = this.getOption(`${module}.resetPasswordTokenKey`);
     data[tokenKey] = this.route.snapshot.queryParams[tokenKey];
-    return this.http.request(method, url, { body: data, observe: 'response', headers: this.headers }).pipe(
+    return this.http.request(method, url, { body: data, observe: 'response', headers: this.getHeaders() }).pipe(
       map((res) => {
         if (this.getOption(`${module}.alwaysFail`)) {
           throw this.createFailResponse();
@@ -274,7 +274,7 @@ export class NbPasswordAuthStrategy extends NbAuthStrategy {
         if (!url) {
           return observableOf(res);
         }
-        return this.http.request(method, url, { observe: 'response', headers: this.headers });
+        return this.http.request(method, url, { observe: 'response', headers: this.getHeaders() });
       }),
       map((res) => {
         if (this.getOption(`${module}.alwaysFail`)) {
@@ -304,7 +304,7 @@ export class NbPasswordAuthStrategy extends NbAuthStrategy {
     const url = this.getActionEndpoint(module);
     const requireValidToken = this.getOption(`${module}.requireValidToken`);
 
-    return this.http.request(method, url, { body: data, observe: 'response', headers: this.headers }).pipe(
+    return this.http.request(method, url, { body: data, observe: 'response', headers: this.getHeaders() }).pipe(
       map((res) => {
         if (this.getOption(`${module}.alwaysFail`)) {
           throw this.createFailResponse(data);
@@ -340,14 +340,9 @@ export class NbPasswordAuthStrategy extends NbAuthStrategy {
     return observableOf(new NbAuthResult(false, res, this.getOption(`${module}.redirect.failure`), errors));
   }
 
-  protected get headers(): HttpHeaders {
-    const optionHeaders: { [key: string]: string | string[] } = this.getOption('headers') ?? {};
-    let headers = new HttpHeaders();
+  protected getHeaders(): HttpHeaders {
+    const headers = new HttpHeaders();
 
-    Object.entries(optionHeaders).forEach(([key, value]) => {
-      headers = headers.append(key, value);
-    });
-
-    return headers;
+    return this.assignOptionHeaders(headers);
   }
 }
