@@ -16,9 +16,9 @@ This mode comes in handy when you need to have multiple themes and be able to ch
 Assuming you already have the `themes.scss` file with the `default` theme enabled, let's add a second theme:
 
 ```scss
-@import '~@nebular/theme/styles/theming';
-@import '~@nebular/theme/styles/themes/default';
-@import '~@nebular/theme/styles/themes/dark';
+@import '@nebular/theme/styles/theming';
+@import '@nebular/theme/styles/themes/default';
+@import '@nebular/theme/styles/themes/dark';
 
 $nb-themes: nb-register-theme((
   text-basic-color: color-basic-800, // some styles we changed
@@ -37,6 +37,6 @@ Basically, that's it. Now you have two themes registered.
 
 ## Related Articles
 
-- [Change Theme in Runtime](docs/design-system/change-curren-theme)
+- [Change Theme in Runtime](docs/design-system/changing-theme)
 - [Enable CSS Properties Mode](docs/design-system/enable-css-properties-mode)
 - [Create Custom Theme](docs/design-system/create-custom-theme)
