@@ -4,9 +4,5 @@ import { Directive, TemplateRef } from '@angular/core';
   selector: '[nbTabTitle]',
 })
 export class NbTabTitleDirective {
-  constructor(private _templateRef: TemplateRef<any>) {}
-
-  get templateRef(): TemplateRef<any> {
-    return this._templateRef;
-  }
+  constructor(public templateRef: TemplateRef<any>) {}
 }

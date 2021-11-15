@@ -24,7 +24,7 @@ import { NbComponentOrCustomStatus } from '../component-status';
 import { NbBadgePosition } from '../badge/badge.component';
 import { NbIconConfig } from '../icon/icon.component';
 import { NbTabContentDirective } from './tab-content.directive';
-import { NbTabTitleDirective } from './tab-title';
+import { NbTabTitleDirective } from './tab-title.directive';
 
 /**
  * Specific tab container.
@@ -52,8 +52,7 @@ import { NbTabTitleDirective } from './tab-title';
 })
 export class NbTabComponent {
   @ContentChild(NbTabContentDirective) tabContentDirective: NbTabContentDirective;
-  /** Content for the tab label given by '<ng-template nbTabTitle>'. */
-  @ContentChild(NbTabTitleDirective) titleTemplate: NbTabTitleDirective | undefined;
+  @ContentChild(NbTabTitleDirective) titleTemplate: NbTabTitleDirective;
 
   /**
    * Tab title
