@@ -275,7 +275,7 @@ export class NbContextMenuDirective implements NbDynamicOverlayController, OnCha
   private subscribeOnItemClick() {
     this.menuService.onItemClick()
       .pipe(
-        filter(({ tag }) => tag === this.tag),
+        filter(({ tag }) => tag === this.tag && this.trigger !== NbTrigger.NOOP),
         takeUntil(this.destroy$),
       )
       .subscribe(() => this.hide());
