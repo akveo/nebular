@@ -19,7 +19,6 @@ import { NbOverlayContainerAdapter } from '../adapter/overlay-container-adapter'
 import { NbViewportRulerAdapter } from '../adapter/viewport-ruler-adapter';
 import { NbGlobalLogicalPosition } from './position-helper';
 import { GlobalPositionStrategy } from '@angular/cdk/overlay';
-import { NbLayoutDirectionService } from '../../../services/direction.service';
 
 export type NbAdjustmentValues = 'noop' | 'clockwise' | 'counterclockwise' | 'vertical' | 'horizontal';
 export enum NbAdjustment {
@@ -193,7 +192,7 @@ export class NbAdjustableConnectedPositionStrategy
     super.attach(overlayRef);
   }
 
-  setDirection(direction: NbDirection): this {
+  direction(direction: NbDirection): this {
     this._direction = direction;
     return this;
   }
@@ -324,7 +323,6 @@ export class NbPositionBuilderService {
     protected platform: NbPlatform,
     protected positionBuilder: NbOverlayPositionBuilder,
     protected overlayContainer: NbOverlayContainerAdapter,
-    protected directionService: NbLayoutDirectionService,
   ) {}
 
   global(): NbGlobalPositionStrategy {
@@ -332,7 +330,7 @@ export class NbPositionBuilderService {
   }
 
   connectedTo(elementRef: ElementRef): NbAdjustableConnectedPositionStrategy {
-    const strategy = new NbAdjustableConnectedPositionStrategy(
+    return new NbAdjustableConnectedPositionStrategy(
       elementRef,
       this.viewportRuler,
       this.document,
@@ -341,13 +339,5 @@ export class NbPositionBuilderService {
     )
       .withFlexibleDimensions(false)
       .withPush(false);
-
-    strategy.setDirection(this.directionService.getDirection());
-
-    this.directionService.onDirectionChange().subscribe((direction) => {
-      strategy.setDirection(direction);
-    });
-
-    return strategy;
   }
 }
