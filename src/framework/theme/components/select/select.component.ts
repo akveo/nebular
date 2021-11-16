@@ -912,7 +912,7 @@ export class NbSelectComponent
   }
 
   show() {
-    if (this.canOpen()) {
+    if (this.shouldShow()) {
       this.attachToOverlay();
 
       this.positionStrategy.positionChange.pipe(take(1), takeUntil(this.destroy$)).subscribe(() => {
@@ -1220,8 +1220,7 @@ export class NbSelectComponent
     }
   }
 
-  /** Whether the overlay is allowed to open. */
-  protected canOpen(): boolean {
+  protected shouldShow(): boolean {
     return this.isHidden && this.options?.length > 0;
   }
 
