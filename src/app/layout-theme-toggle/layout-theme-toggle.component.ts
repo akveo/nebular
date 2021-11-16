@@ -9,7 +9,7 @@ import { NbThemeService } from '@nebular/theme';
       <label *ngFor="let theme of themeList; index as i" class="theme-radio">
         <input
           type="radio"
-          value="theme"
+          [value]="theme"
           name="theme"
           [attr.checked]="i === 0 || null"
           (change)="handleChange(theme)"
