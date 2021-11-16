@@ -6,8 +6,15 @@ import { NbThemeService } from '@nebular/theme';
   styleUrls: ['./layout-theme-toggle.component.scss'],
   template: `
     <div dir="ltr">
-      <label *ngFor="let theme of themeList" class="theme-radio"
-        ><input type="radio" value="theme" name="theme" (change)="handleChange(theme)" /> {{ theme }}
+      <label *ngFor="let theme of themeList; index as i" class="theme-radio">
+        <input
+          type="radio"
+          value="theme"
+          name="theme"
+          [attr.checked]="i === 0 || null"
+          (change)="handleChange(theme)"
+        />
+        {{ theme }}
       </label>
     </div>
   `,
