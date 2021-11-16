@@ -20,6 +20,10 @@
     background: $bg;
   }
 
+  &::-webkit-scrollbar-corner {
+    background: $bg;
+  }
+
   // TODO: remove
   // For Internet Explorer
   scrollbar-face-color: $fg;

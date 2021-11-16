@@ -81,7 +81,7 @@ export interface NbPickerValidatorConfig<D> {
  * Datepicker is an control that can pick any values anyway.
  * It has to be bound to the datepicker directive through nbDatepicker input.
  * */
-export abstract class NbDatepicker<T> {
+export abstract class NbDatepicker<T, D = T> {
   /**
    * HTML input element date format.
    * */
@@ -103,7 +103,7 @@ export abstract class NbDatepicker<T> {
   /**
    * Returns validator configuration based on the input properties.
    * */
-  abstract getValidatorConfig(): NbPickerValidatorConfig<T>;
+  abstract getValidatorConfig(): NbPickerValidatorConfig<D>;
 
   abstract show();
 
