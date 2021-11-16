@@ -24,6 +24,7 @@ import { NbComponentOrCustomStatus } from '../component-status';
 import { NbBadgePosition } from '../badge/badge.component';
 import { NbIconConfig } from '../icon/icon.component';
 import { NbTabContentDirective } from './tab-content.directive';
+import { NbTabTitleDirective } from './tab-title.directive';
 
 /**
  * Specific tab container.
@@ -51,6 +52,7 @@ import { NbTabContentDirective } from './tab-content.directive';
 })
 export class NbTabComponent {
   @ContentChild(NbTabContentDirective) tabContentDirective: NbTabContentDirective;
+  @ContentChild(NbTabTitleDirective) tabTitleDirective: NbTabTitleDirective;
 
   /**
    * Tab title
@@ -248,6 +250,9 @@ export class NbTabComponent {
  * </nb-tabset>
  * ```
  *
+ * You can provide a template as a tab title via `<ng-template nbTabTitle>`:
+ * @stacked-example(Tab title template, tabset/tabset-template-title.component)
+ *
  * @styles
  *
  * tabset-background-color:
@@ -309,7 +314,13 @@ export class NbTabComponent {
       >
         <a href (click)="$event.preventDefault()" tabindex="-1" class="tab-link">
           <nb-icon *ngIf="tab.tabIcon" [config]="tab.tabIcon"></nb-icon>
-          <span *ngIf="tab.tabTitle" class="tab-text">{{ tab.tabTitle }}</span>
+          <ng-container
+            *ngIf="tab.tabTitleDirective; else textTitleTemplate"
+            [ngTemplateOutlet]="tab.tabTitleDirective.templateRef"
+          ></ng-container>
+          <ng-template #textTitleTemplate>
+            <span class="tab-text">{{ tab.tabTitle }}</span>
+          </ng-template>
         </a>
         <nb-badge
           *ngIf="tab.badgeText || tab.badgeDot"
