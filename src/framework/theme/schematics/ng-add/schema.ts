@@ -6,7 +6,7 @@
 
 export interface Schema {
   project: string;
-  theme: 'default' | 'dark' | 'cosmic' | 'corporate';
+  theme: 'default' | 'dark' | 'cosmic' | 'corporate' | 'blueberry';
   customization: boolean;
   layout: boolean;
   animations: boolean;

@@ -261,6 +261,18 @@ export const structure = [
           },
         ],
       },
+      {
+        type: 'page',
+        name: 'Blueberry Theme',
+        children: [
+          {
+            type: 'block',
+            block: 'theme',
+            name: 'Blueberry',
+            source: 'blueberry',
+          },
+        ],
+      },
     ],
   },
   {

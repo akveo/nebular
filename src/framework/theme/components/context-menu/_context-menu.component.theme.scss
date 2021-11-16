@@ -29,6 +29,26 @@
       border-radius: nb-theme(context-menu-border-radius);
       overflow: hidden;
       text-align: nb-theme(context-menu-text-align);
+      background-color: nb-theme(context-menu-inner-background-color);
+
+      .menu-item {
+        a {
+          color: nb-theme(context-menu-text-color);
+
+          .menu-icon {
+            color: nb-theme(context-menu-item-icon-color);
+          }
+        }
+
+        a:hover {
+          color: nb-theme(context-menu-item-hover-text-color);
+          background-color: nb-theme(context-menu-item-hover-background-color);
+
+          .menu-icon {
+            color: nb-theme(context-menu-item-icon-hover-color);
+          }
+        }
+      }
     }
   }
 }
