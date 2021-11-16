@@ -18,8 +18,8 @@ Starting with Nebular 4, Nebular can run in custom CSS properties mode in a simp
 To enable the mode, find your `themes.scss` and set the `$nb-enable-css-custom-properties` to `true`:
 
 ```scss
-@import '~@nebular/theme/styles/theming';
-@import '~@nebular/theme/styles/themes/default';
+@import '@nebular/theme/styles/theming';
+@import '@nebular/theme/styles/themes/default';
 
 $nb-enable-css-custom-properties: true; // <-- enable css custom properties
 
