@@ -398,8 +398,17 @@ export class NbDatepickerDirective<D> implements OnDestroy, ControlValueAccessor
   protected minValidator(): ValidationErrors | null {
     const config = this.picker.getValidatorConfig();
     const date = this.datepickerAdapter.parse(this.inputValue, this.picker.format);
-    return (!config.min || !date || this.dateService.compareDates(config.min, date) <= 0) ?
-      null : { nbDatepickerMin: { min: config.min, actual: date } };
+
+    // In case nb-rangepicker connected value is an object { min:Date, max: Date }.
+    const checkedDate = (date as any)?.start ?? date;
+
+    if ((!config.min ||
+         !this.dateService.isValid(checkedDate) ||
+         this.dateService.compareDates(config.min, checkedDate) <= 0)) {
+      return null;
+    }
+
+    return { nbDatepickerMin: { min: config.min, actual: checkedDate } };
   }
 
   /**
@@ -408,8 +417,16 @@ export class NbDatepickerDirective<D> implements OnDestroy, ControlValueAccessor
   protected maxValidator(): ValidationErrors | null {
     const config = this.picker.getValidatorConfig();
     const date = this.datepickerAdapter.parse(this.inputValue, this.picker.format);
-    return (!config.max || !date || this.dateService.compareDates(config.max, date) >= 0) ?
-      null : { nbDatepickerMax: { max: config.max, actual: date } };
+
+    // In case nb-rangepicker connected value is an object { min:Date, max: Date }.
+    const checkedDate = (date as any)?.end ?? date;
+
+    if ((!config.max ||
+         !this.dateService.isValid(checkedDate) ||
+         this.dateService.compareDates(config.max, checkedDate) >= 0)) {
+      return null;
+    }
+    return { nbDatepickerMax: { max: config.max, actual: checkedDate } };
   }
 
   /**

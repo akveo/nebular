@@ -65,11 +65,15 @@ export class NbNativeDateService extends NbDateService<Date> {
   }
 
   isValidDateString(date: string, format: string): boolean {
-    return !isNaN(this.parse(date, format).getTime());
+    return this.isValid(this.parse(date, format));
   }
 
   isValidTimeString(date: string, format: string): boolean {
     return this.isValidDateString(date, format);
+  }
+
+  isValid(date: Date): boolean {
+    return !isNaN(date.getTime());
   }
 
   today(): Date {
