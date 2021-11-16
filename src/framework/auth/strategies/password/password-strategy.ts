@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, of as observableOf } from 'rxjs';
 import { switchMap, map, catchError } from 'rxjs/operators';
@@ -338,11 +338,5 @@ export class NbPasswordAuthStrategy extends NbAuthStrategy {
       errors.push('Something went wrong.');
     }
     return observableOf(new NbAuthResult(false, res, this.getOption(`${module}.redirect.failure`), errors));
-  }
-
-  protected getHeaders(): HttpHeaders {
-    const headers = new HttpHeaders();
-
-    return this.setOptionHeaders(headers);
   }
 }

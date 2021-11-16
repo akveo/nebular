@@ -310,6 +310,24 @@ export class NbOAuth2AuthStrategy extends NbAuthStrategy {
     return undefined;
   }
 
+  protected getHeaders(): HttpHeaders {
+    let headers = super.getHeaders();
+    headers = headers.append('Content-Type', 'application/x-www-form-urlencoded');
+
+    const authHeaders = this.buildAuthHeader();
+    if (authHeaders === undefined) {
+      return headers;
+    }
+
+    for (const headerKey of authHeaders.keys()) {
+      for (const headerValue of authHeaders.getAll(headerKey)) {
+        headers = headers.append(headerKey, headerValue);
+      }
+    }
+
+    return headers;
+  }
+
   protected cleanParams(params: any): any {
     Object.entries(params).forEach(([key, val]) => !val && delete params[key]);
     return params;
@@ -390,13 +408,6 @@ export class NbOAuth2AuthStrategy extends NbAuthStrategy {
       refreshedToken.setRefreshToken(existingToken.getRefreshToken());
     }
     return refreshedToken;
-  }
-
-  protected getHeaders(): HttpHeaders {
-    let headers = this.buildAuthHeader() ?? new HttpHeaders();
-    headers = headers.append('Content-Type', 'application/x-www-form-urlencoded');
-
-    return this.setOptionHeaders(headers);
   }
 
   register(data?: any): Observable<NbAuthResult> {
