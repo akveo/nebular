@@ -14,7 +14,7 @@ import { NbThemeService } from '@nebular/theme';
           [attr.checked]="i === 0 || null"
           (change)="handleChange(theme)"
         />
-        {{ theme }}
+        {{ theme | titlecase }}
       </label>
     </div>
   `,
