@@ -19,7 +19,7 @@
       <tbody>
         <tr *ngFor="let prop of filtered">
           <td>
-            <a [routerLink]="" fragment="{{ prop.name }}">{{ prop.name }}</a>
+            <a [routerLink]="[]" fragment="{{ prop.name }}">{{ prop.name }}</a>
           </td>
 
           <td ngdColorSwatch>{{ prop.value }}</td>
