@@ -45,7 +45,7 @@ export class NbDynamicOverlayHandler {
 
   protected changes: { [key: string]: NbDynamicOverlayChange } = {};
 
-  protected destroy$ = new Subject();
+  protected destroy$ = new Subject<void>();
 
   constructor(
     private positionBuilder: NbPositionBuilderService,
