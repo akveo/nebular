@@ -25,7 +25,7 @@ import { NbComponentOrCustomStatus } from '../component-status';
 import { convertToBoolProperty, NbBooleanInput } from '../helpers';
 import { NbChatFormComponent } from './chat-form.component';
 import { NbChatMessageComponent } from './chat-message.component';
-import { NbCustomMessageService } from './custom-message.service';
+import { NbChatCustomMessageService } from './chat-custom-message.service';
 import { NbChatTitleDirective } from './chat-title.directive';
 
 /**
@@ -263,7 +263,7 @@ import { NbChatTitleDirective } from './chat-title.directive';
       <ng-content select="nb-chat-form"></ng-content>
     </div>
   `,
-  providers: [NbCustomMessageService],
+  providers: [NbChatCustomMessageService],
 })
 export class NbChatComponent implements OnChanges, AfterContentInit, AfterViewInit {
   @Input() title: string;

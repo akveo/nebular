@@ -5,13 +5,11 @@
  */
 
 @mixin nb-stepper-theme {
-
   nb-stepper {
-
     &.horizontal {
       .header .step {
         width: nb-theme(stepper-step-index-width);
-        margin: 0 nb-theme(stepper-step-index-width) / 2;
+        margin: 0 nb-theme(stepper-step-index-width) * 0.5;
       }
 
       .header .connector {

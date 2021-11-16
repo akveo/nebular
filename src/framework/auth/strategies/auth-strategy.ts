@@ -1,16 +1,11 @@
-import { HttpResponse } from '@angular/common/http';
+import { HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { NbAuthResult } from '../services/auth-result';
 import { NbAuthStrategyOptions } from './auth-strategy-options';
 import { deepExtend, getDeepFromObject } from '../helpers';
-import {
-  NbAuthToken,
-  nbAuthCreateToken,
-  NbAuthIllegalTokenError,
-} from '../services/token/token';
+import { NbAuthToken, nbAuthCreateToken, NbAuthIllegalTokenError } from '../services/token/token';
 
 export abstract class NbAuthStrategy {
-
   protected defaultOptions: NbAuthStrategyOptions;
   protected options: NbAuthStrategyOptions;
 
@@ -25,7 +20,7 @@ export abstract class NbAuthStrategy {
   }
 
   createToken<T extends NbAuthToken>(value: any, failWhenInvalidToken?: boolean): T {
-    const token =  nbAuthCreateToken<T>(this.getOption('token.class'), value, this.getName());
+    const token = nbAuthCreateToken<T>(this.getOption('token.class'), value, this.getName());
     // At this point, nbAuthCreateToken failed with NbAuthIllegalTokenError which MUST be intercepted by strategies
     // Or token is created. It MAY be created even if backend did not return any token, in this case it is !Valid
     if (failWhenInvalidToken && !token.isValid()) {
@@ -64,5 +59,18 @@ export abstract class NbAuthStrategy {
     const actionEndpoint: string = this.getOption(`${action}.endpoint`);
     const baseEndpoint: string = this.getOption('baseEndpoint');
     return actionEndpoint ? baseEndpoint + actionEndpoint : '';
+  }
+
+  protected getHeaders(): HttpHeaders {
+    const customHeaders: NbAuthStrategyOptions['headers'] = this.getOption('headers') ?? {};
+    if (customHeaders instanceof HttpHeaders) {
+      return customHeaders;
+    }
+
+    let headers = new HttpHeaders();
+    Object.entries(customHeaders).forEach(([key, value]) => {
+      headers = headers.append(key, value);
+    });
+    return headers;
   }
 }

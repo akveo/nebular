@@ -13,6 +13,7 @@ import { WindowShowcaseComponent } from './window-showcase.component';
 import { WindowsBackdropComponent } from './windows-backdrop.component';
 import { FormComponent } from './components/form.component';
 import { WindowControlsComponent } from './window-controls.component';
+import { WindowTemplateTitleComponent } from './window-template-title.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { WindowControlsComponent } from './window-controls.component';
     WindowsBackdropComponent,
     FormComponent,
     WindowControlsComponent,
+    WindowTemplateTitleComponent,
   ],
   imports: [
     NbWindowModule.forRoot(),
