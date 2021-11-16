@@ -16,9 +16,9 @@ This mode comes in handy when you need to have multiple themes and be able to ch
 Assuming you already have the `themes.scss` file with the `default` theme enabled, let's add a second theme:
 
 ```scss
-@import '~@nebular/theme/styles/theming';
-@import '~@nebular/theme/styles/themes/default';
-@import '~@nebular/theme/styles/themes/dark';
+@import '@nebular/theme/styles/theming';
+@import '@nebular/theme/styles/themes/default';
+@import '@nebular/theme/styles/themes/dark';
 
 $nb-themes: nb-register-theme((
   text-basic-color: color-basic-800, // some styles we changed
