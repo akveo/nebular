@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 
 import { NbLayoutDirectionService } from '../../../services/direction.service';
-
+import { NbPosition } from './overlay-position';
+import { NbDirection } from './mapping';
 
 export enum NbGlobalLogicalPosition {
   TOP_START = 'top-start',
@@ -21,7 +22,10 @@ export type NbGlobalPosition = NbGlobalPhysicalPosition | NbGlobalLogicalPositio
 
 @Injectable()
 export class NbPositionHelper {
-  constructor(protected layoutDirection: NbLayoutDirectionService) {
+  constructor(protected layoutDirection: NbLayoutDirectionService) {}
+
+  toLogicalPositionByDirection(direction: NbDirection, position: NbPosition): NbPosition {
+    return direction === 'ltr' ? this.toLogicalPositionWhenLtr(position) : this.toLogicalPositionWhenRtl(position);
   }
 
   toLogicalPosition(position: NbGlobalPosition): NbGlobalLogicalPosition {
@@ -30,9 +34,9 @@ export class NbPositionHelper {
     }
 
     if (this.layoutDirection.isLtr()) {
-      return this.toLogicalPositionWhenLtr(position as NbGlobalPhysicalPosition);
+      return this.toLogicalGlobalPositionWhenLtr(position as NbGlobalPhysicalPosition);
     } else {
-      return this.toLogicalPositionWhenRtl(position as NbGlobalPhysicalPosition);
+      return this.toLogicalGlobalPositionWhenRtl(position as NbGlobalPhysicalPosition);
     }
   }
 
@@ -51,18 +55,39 @@ export class NbPositionHelper {
   isTopPosition(position: NbGlobalPosition) {
     const logicalPosition = this.toLogicalPosition(position);
 
-    return logicalPosition === NbGlobalLogicalPosition.TOP_END
-      || logicalPosition === NbGlobalLogicalPosition.TOP_START;
+    return logicalPosition === NbGlobalLogicalPosition.TOP_END || logicalPosition === NbGlobalLogicalPosition.TOP_START;
   }
 
   isRightPosition(position: NbGlobalPosition) {
     const physicalPosition = this.toPhysicalPosition(position);
 
-    return physicalPosition === NbGlobalPhysicalPosition.TOP_RIGHT
-      || physicalPosition === NbGlobalPhysicalPosition.BOTTOM_RIGHT;
+    return (
+      physicalPosition === NbGlobalPhysicalPosition.TOP_RIGHT ||
+      physicalPosition === NbGlobalPhysicalPosition.BOTTOM_RIGHT
+    );
   }
 
-  protected toLogicalPositionWhenLtr(position: NbGlobalPhysicalPosition): NbGlobalLogicalPosition {
+  protected toLogicalPositionWhenLtr(position: NbPosition): NbPosition {
+    if (position === NbPosition.LEFT) {
+      return NbPosition.START;
+    }
+    if (position === NbPosition.RIGHT) {
+      return NbPosition.END;
+    }
+    return position;
+  }
+
+  protected toLogicalPositionWhenRtl(position: NbPosition): NbPosition {
+    if (position === NbPosition.LEFT) {
+      return NbPosition.END;
+    }
+    if (position === NbPosition.RIGHT) {
+      return NbPosition.START;
+    }
+    return position;
+  }
+
+  protected toLogicalGlobalPositionWhenLtr(position: NbGlobalPhysicalPosition): NbGlobalLogicalPosition {
     switch (position) {
       case NbGlobalPhysicalPosition.TOP_RIGHT:
         return NbGlobalLogicalPosition.TOP_END;
@@ -75,7 +100,7 @@ export class NbPositionHelper {
     }
   }
 
-  protected toLogicalPositionWhenRtl(position: NbGlobalPhysicalPosition): NbGlobalLogicalPosition {
+  protected toLogicalGlobalPositionWhenRtl(position: NbGlobalPhysicalPosition): NbGlobalLogicalPosition {
     switch (position) {
       case NbGlobalPhysicalPosition.TOP_RIGHT:
         return NbGlobalLogicalPosition.TOP_START;
