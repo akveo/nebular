@@ -11,13 +11,13 @@ import {
   QueryList,
 } from '@angular/core';
 import { Observable, forkJoin, of as observableOf, interval, timer, Subject } from 'rxjs';
-import { filter, switchMap, map, takeUntil, take } from 'rxjs/operators';
+import { filter, switchMap, map, takeUntil, take, throttleTime } from 'rxjs/operators';
 import { convertToBoolProperty, NbBooleanInput } from '../helpers';
 import { NbLayoutScrollService } from '../../services/scroll.service';
 import { NbLayoutRulerService } from '../../services/ruler.service';
 import { NbListItemComponent } from './list.component';
 
-export class NbScrollableContainerDimentions {
+export class NbScrollableContainerDimensions {
   scrollTop: number;
   scrollHeight: number;
   clientHeight: number;
@@ -55,7 +55,6 @@ export class NbScrollableContainerDimentions {
   selector: '[nbInfiniteList]',
 })
 export class NbInfiniteListDirective implements AfterViewInit, OnDestroy {
-
   private destroy$ = new Subject<void>();
   private lastScrollPosition;
   windowScroll = false;
@@ -108,13 +107,15 @@ export class NbInfiniteListDirective implements AfterViewInit, OnDestroy {
   ) {}
 
   ngAfterViewInit() {
-    this.scrollService.onScroll()
+    this.scrollService
+      .onScroll()
       .pipe(
         filter(() => this.windowScroll),
         switchMap(() => this.getContainerDimensions()),
+        throttleTime(250),
         takeUntil(this.destroy$),
       )
-      .subscribe(dimentions => this.checkPosition(dimentions));
+      .subscribe((dimensions) => this.checkPosition(dimensions));
 
     this.listItems.changes
       .pipe(
@@ -122,17 +123,19 @@ export class NbInfiniteListDirective implements AfterViewInit, OnDestroy {
         // so dimensions will be incorrect.
         // Check every 50ms for a second if dom and query are in sync.
         // Once they synchronized, we can get proper dimensions.
-        switchMap(() => interval(50).pipe(
-          filter(() => this.inSyncWithDom()),
-          take(1),
-          takeUntil(timer(1000)),
-        )),
+        switchMap(() =>
+          interval(50).pipe(
+            filter(() => this.inSyncWithDom()),
+            take(1),
+            takeUntil(timer(1000)),
+          ),
+        ),
         switchMap(() => this.getContainerDimensions()),
         takeUntil(this.destroy$),
       )
-      .subscribe(dimentions => this.checkPosition(dimentions));
+      .subscribe((dimensions) => this.checkPosition(dimensions));
 
-      this.getContainerDimensions().subscribe(dimentions => this.checkPosition(dimentions));
+    this.getContainerDimensions(true).subscribe((dimensions) => this.checkPosition(dimensions));
   }
 
   ngOnDestroy() {
@@ -140,14 +143,14 @@ export class NbInfiniteListDirective implements AfterViewInit, OnDestroy {
     this.destroy$.complete();
   }
 
-  checkPosition({ scrollHeight, scrollTop, clientHeight }: NbScrollableContainerDimentions) {
+  checkPosition({ scrollHeight, scrollTop, clientHeight }: NbScrollableContainerDimensions) {
     const initialCheck = this.lastScrollPosition == null;
     const manualCheck = this.lastScrollPosition === scrollTop;
     const scrollUp = scrollTop < this.lastScrollPosition;
     const scrollDown = scrollTop > this.lastScrollPosition;
     const distanceToBottom = scrollHeight - scrollTop - clientHeight;
 
-    if ((initialCheck ||  manualCheck || scrollDown) && distanceToBottom <= this.threshold) {
+    if ((initialCheck || manualCheck || scrollDown) && distanceToBottom <= this.threshold) {
       this.bottomThreshold.emit();
     }
     if ((initialCheck || scrollUp) && scrollTop <= this.threshold) {
@@ -157,20 +160,19 @@ export class NbInfiniteListDirective implements AfterViewInit, OnDestroy {
     this.lastScrollPosition = scrollTop;
   }
 
-  private getContainerDimensions(): Observable<NbScrollableContainerDimentions> {
-    if (this.elementScroll) {
+  private getContainerDimensions(isFirstEmit?: boolean): Observable<NbScrollableContainerDimensions> {
+    if (isFirstEmit || this.elementScroll) {
       const { scrollTop, scrollHeight, clientHeight } = this.elementRef.nativeElement;
       return observableOf({ scrollTop, scrollHeight, clientHeight });
     }
 
-    return forkJoin([this.scrollService.getPosition(), this.dimensionsService.getDimensions()])
-      .pipe(
-          map(([scrollPosition, dimensions]) => ({
-            scrollTop: scrollPosition.y,
-            scrollHeight: dimensions.scrollHeight,
-            clientHeight: dimensions.clientHeight,
-          })),
-      );
+    return forkJoin([this.scrollService.getPosition(), this.dimensionsService.getDimensions()]).pipe(
+      map(([scrollPosition, dimensions]) => ({
+        scrollTop: scrollPosition.y,
+        scrollHeight: dimensions.scrollHeight,
+        clientHeight: dimensions.clientHeight,
+      })),
+    );
   }
 
   private inSyncWithDom(): boolean {
