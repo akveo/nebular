@@ -35,7 +35,7 @@ import { ComponentLink } from './playground-components';
         />
       </ng-container>
     </div>
-    <div class="component-list-wrapper" *ngIf="isComponentListVisible">
+    <div class="component-list-wrapper" *ngIf="showComponentsList">
       <npg-components-list [components]="components$ | async"></npg-components-list>
     </div>
     <router-outlet></router-outlet>
@@ -43,10 +43,10 @@ import { ComponentLink } from './playground-components';
 })
 export class AppComponent implements AfterViewInit, OnDestroy {
   private readonly destroy$ = new Subject<void>();
-  private lastFocusedElement: HTMLElement;
   private readonly document: Document;
+  private lastFocusedElement: HTMLElement;
   showToolbar: boolean = true;
-  isComponentListVisible: boolean = false;
+  showComponentsList: boolean = false;
   components$: Observable<ComponentLink[]> = this.componentsListService.componentsList$;
 
   @ViewChild('componentSearch') componentSearch: ElementRef;
@@ -97,11 +97,11 @@ export class AppComponent implements AfterViewInit, OnDestroy {
   }
 
   showComponentList(): void {
-    this.isComponentListVisible = true;
+    this.showComponentsList = true;
   }
 
   hideComponentsList(): void {
-    this.isComponentListVisible = false;
+    this.showComponentsList = false;
   }
 
   onSearchChange(event): void {
