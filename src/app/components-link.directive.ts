@@ -16,7 +16,7 @@ export class ComponentLinkDirective implements OnInit, OnDestroy {
   constructor(private componentsListService: ComponentsListService, private cd: ChangeDetectorRef) {}
 
   ngOnInit(): void {
-    this.componentsListService.selected$
+    this.componentsListService.selectedLink$
       .pipe(
         map((elem) => this.npgComponentLink === elem),
         distinctUntilChanged(),

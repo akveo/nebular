@@ -11,9 +11,9 @@ export class ComponentsListService {
   private readonly activeElementIndex$ = new BehaviorSubject<number>(0);
   private readonly flatFilteredComponentLinkList$ = new BehaviorSubject<ComponentLink[]>([]);
 
-  readonly selected$ = combineLatest([this.flatFilteredComponentLinkList$, this.activeElementIndex$]).pipe(
-    map(([flatArray, index]) => {
-      return flatArray[index]?.link;
+  readonly selectedLink$ = combineLatest([this.flatFilteredComponentLinkList$, this.activeElementIndex$]).pipe(
+    map(([filteredComponents, activeElementIndex]: [ComponentLink[], number]) => {
+      return filteredComponents[activeElementIndex]?.link;
     }),
   );
 
