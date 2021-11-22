@@ -1357,6 +1357,12 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         component: 'TabsetDisabledComponent',
         name: 'Tabset Disabled',
       },
+      {
+        path: 'tabset-template-title.component',
+        link: '/tabset/tabset-template-title.component',
+        component: 'TabsetTemplateTitleComponent',
+        name: 'Tabset Template Title',
+      },
     ],
   },
   {

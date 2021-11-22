@@ -679,8 +679,8 @@ describe('Component: NbSelectComponent', () => {
   it('should not mark touched when select button loose focus and select open', fakeAsync(() => {
     const touchedSpy = jasmine.createSpy('touched spy');
 
-    const selectFixture = TestBed.createComponent(NbSelectComponent);
-    select = selectFixture.componentInstance as NbSelectComponent;
+    const selectFixture = TestBed.createComponent(NbSelectTestComponent);
+    select = selectFixture.debugElement.query(By.directive(NbSelectComponent)).componentInstance;
     selectFixture.detectChanges();
     flush();
 
