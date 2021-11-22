@@ -43,6 +43,7 @@ import { ComponentLink } from './playground-components';
 })
 export class AppComponent implements AfterViewInit, OnDestroy {
   private destroy$ = new Subject<void>();
+  private lastFocusedElement: HTMLElement;
   document: Document;
   optionsVisible: boolean = true;
   isComponentListVisible: boolean = false;
@@ -56,6 +57,7 @@ export class AppComponent implements AfterViewInit, OnDestroy {
     private componentsListService: ComponentsListService,
   ) {
     this.document = document;
+    this.lastFocusedElement = this.document.body;
   }
 
   ngAfterViewInit() {
@@ -104,7 +106,6 @@ export class AppComponent implements AfterViewInit, OnDestroy {
   }
 
   private handleButtonPressUp(e: KeyboardEvent): void {
-    let prevFocusedElement = this.document.body;
     if (e.key === 'ArrowDown') {
       this.componentsListService.selectNextComponent();
     }
@@ -115,11 +116,11 @@ export class AppComponent implements AfterViewInit, OnDestroy {
 
     if (e.key === 'Escape') {
       this.isComponentListVisible = false;
-      prevFocusedElement.focus();
+      this.lastFocusedElement.focus();
     }
 
     if (e.key === '/') {
-      prevFocusedElement = this.document.activeElement as HTMLElement;
+      this.lastFocusedElement = this.document.activeElement as HTMLElement;
       this.componentSearch.nativeElement.focus();
     }
   }
