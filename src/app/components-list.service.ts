@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
 import { ComponentLink, PLAYGROUND_COMPONENTS } from './playground-components';
 
 @Injectable({
@@ -9,20 +9,21 @@ import { ComponentLink, PLAYGROUND_COMPONENTS } from './playground-components';
 export class ComponentsListService {
   private readonly searchString$ = new BehaviorSubject<string>('');
   private readonly activeElementIndex$ = new BehaviorSubject<number>(0);
-  private readonly flatFilteredComponentLinkList$ = new BehaviorSubject<ComponentLink[]>([]);
-
-  readonly selectedLink$ = combineLatest([this.flatFilteredComponentLinkList$, this.activeElementIndex$]).pipe(
-    map(([filteredComponents, activeElementIndex]: [ComponentLink[], number]) => {
-      return filteredComponents[activeElementIndex]?.link;
-    }),
-  );
 
   readonly componentsList$: Observable<ComponentLink[]> = this.searchString$.pipe(
-    map((searchString) => {
-      const filteredComponentLinkList = this.filter(searchString);
-      const flatFilteredComponentLinkList = this.flatComponentsList(filteredComponentLinkList);
-      this.flatFilteredComponentLinkList$.next(flatFilteredComponentLinkList);
-      return filteredComponentLinkList;
+    map((searchString: string) => this.filter(searchString)),
+  );
+
+  private readonly flatFilteredComponentsList$ = this.componentsList$.pipe(
+    map((components: ComponentLink[]) => this.flatComponentsList(components)),
+  );
+
+  readonly selectedLink$: Observable<string> = combineLatest([
+    this.flatFilteredComponentsList$,
+    this.activeElementIndex$,
+  ]).pipe(
+    map(([filteredComponents, activeElementIndex]: [ComponentLink[], number]) => {
+      return filteredComponents[activeElementIndex].link;
     }),
   );
 
@@ -32,17 +33,31 @@ export class ComponentsListService {
   }
 
   selectNextComponent(): void {
-    const nextElementIndex = this.activeElementIndex$.value + 1;
-    const filteredElementLength = this.flatFilteredComponentLinkList$.value.length - 1;
+    this.flatFilteredComponentsList$
+      .pipe(
+        map((components: ComponentLink[]) => components.length),
+        take(1),
+      )
+      .subscribe((componentsListLength: number) => {
+        const nextElementIndex = this.activeElementIndex$.value + 1;
+        const filteredElementLength = componentsListLength - 1;
 
-    this.activeElementIndex$.next(nextElementIndex > filteredElementLength ? 0 : nextElementIndex);
+        this.activeElementIndex$.next(nextElementIndex > filteredElementLength ? 0 : nextElementIndex);
+      });
   }
 
   selectPreviousComponent(): void {
-    const prevElementIndex = this.activeElementIndex$.value - 1;
-    const filteredElementLength = this.flatFilteredComponentLinkList$.value.length - 1;
+    this.flatFilteredComponentsList$
+      .pipe(
+        map((components: ComponentLink[]) => components.length),
+        take(1),
+      )
+      .subscribe((componentsListLength: number) => {
+        const prevElementIndex = this.activeElementIndex$.value - 1;
+        const filteredElementLength = componentsListLength - 1;
 
-    this.activeElementIndex$.next(prevElementIndex < 0 ? filteredElementLength : prevElementIndex);
+        this.activeElementIndex$.next(prevElementIndex < 0 ? filteredElementLength : prevElementIndex);
+      });
   }
 
   private flatComponentsList(componentLink: ComponentLink[]): ComponentLink[] {
