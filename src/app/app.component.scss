@@ -1,21 +1,17 @@
-.framework-options-bar {
-  display: flex;
-}
-
 .component-list-wrapper {
   padding: 1.8rem 3.75rem;
   min-height: 100vh;
 }
 
-::ng-deep {
-  .options-bar {
-    display: flex;
-    align-items: center;
-  }
-  .options-show {
-    margin: 0 1.25rem;
-  }
-  .options-show.fixed {
+.toolbar {
+  display: flex;
+  align-items: center;
+}
+
+.toolbar-toggle {
+  margin: 0 1.25rem;
+
+  &-fixed {
     position: fixed;
     left: 0;
     top: 0.5rem;

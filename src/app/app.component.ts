@@ -16,12 +16,11 @@ import { ComponentLink } from './playground-components';
   selector: 'npg-app-root',
   styleUrls: ['./app.component.scss'],
   template: `
-    <div class="options-bar" dir="ltr">
-      <button (click)="toggleOptions()" [class.fixed]="!optionsVisible" class="options-show">
-        <ng-container *ngIf="optionsVisible">hide</ng-container>
-        <ng-container *ngIf="!optionsVisible">show</ng-container>
+    <div class="toolbar" dir="ltr">
+      <button (click)="toggleToolbar()" [class.toolbar-toggle-fixed]="!showToolbar" class="toolbar-toggle">
+        {{ showToolbar ? 'hide' : 'show' }} toolbar
       </button>
-      <ng-container *ngIf="optionsVisible">
+      <ng-container *ngIf="showToolbar">
         <npg-layout-direction-toggle></npg-layout-direction-toggle>
         <npg-layout-theme-toggle></npg-layout-theme-toggle>
 
@@ -46,7 +45,7 @@ export class AppComponent implements AfterViewInit, OnDestroy {
   private readonly destroy$ = new Subject<void>();
   private lastFocusedElement: HTMLElement;
   private readonly document: Document;
-  optionsVisible: boolean = true;
+  showToolbar: boolean = true;
   isComponentListVisible: boolean = false;
   components$: Observable<ComponentLink[]> = this.componentsListService.componentsList$;
 
@@ -90,8 +89,8 @@ export class AppComponent implements AfterViewInit, OnDestroy {
     });
   }
 
-  toggleOptions() {
-    this.optionsVisible = !this.optionsVisible;
+  toggleToolbar() {
+    this.showToolbar = !this.showToolbar;
   }
 
   showComponentList(): void {
