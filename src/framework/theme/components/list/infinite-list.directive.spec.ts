@@ -2,7 +2,7 @@ import { Component, DebugElement } from '@angular/core';
 import { APP_BASE_HREF } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { By } from '@angular/platform-browser';
-import { TestBed, ComponentFixture, fakeAsync, tick } from '@angular/core/testing';
+import { TestBed, ComponentFixture, fakeAsync, tick, flush } from '@angular/core/testing';
 import {
   NbThemeModule,
   NbLayoutModule,
@@ -17,6 +17,7 @@ const CONTENT_PADDING = 20;
 const CONTENT_HEIGHT = 10000 + CONTENT_PADDING;
 const ELEMENT_HEIGHT = 500;
 const THRESHOLD = 200;
+const THROTTLE_TIME = 250;
 
 let fixture: ComponentFixture<ScrollTestComponent>;
 let testComponent: ScrollTestComponent;
@@ -140,28 +141,32 @@ describe('Directive: NbScrollDirective', () => {
     expect(checkPositionSpy).toHaveBeenCalledTimes(1);
   });
 
-  it('should ignore element scroll when listening to window or layout scroll', () => {
+  it('should ignore element scroll when listening to window or layout scroll', fakeAsync(() => {
     testComponent.listenWindowScroll = true;
     fixture.detectChanges();
 
     const checkPositionSpy = spyOn(infiniteListDirective, 'checkPosition');
 
     listElementRef.nativeElement.dispatchEvent(new Event('scroll'));
+    tick(THROTTLE_TIME);
     expect(checkPositionSpy).toHaveBeenCalledTimes(0);
 
     window.dispatchEvent(new Event('scroll'));
+    tick(THROTTLE_TIME);
     expect(checkPositionSpy).toHaveBeenCalledTimes(1);
 
     testComponent.withScroll = true;
     fixture.detectChanges();
 
     listElementRef.nativeElement.dispatchEvent(new Event('scroll'));
+    tick(THROTTLE_TIME);
     expect(checkPositionSpy).toHaveBeenCalledTimes(1);
 
     const layoutScrollContainer = layoutComponent.scrollableContainerRef.nativeElement;
     layoutScrollContainer.dispatchEvent(new Event('scroll'));
+    tick(THROTTLE_TIME);
     expect(checkPositionSpy).toHaveBeenCalledTimes(2);
-  });
+  }));
 
   it('should trigger bottomThreshold only when treshold reached (element scroll)', fakeAsync(() => {
     const scrollingNativeElement = listElementRef.nativeElement;
@@ -170,13 +175,13 @@ describe('Directive: NbScrollDirective', () => {
     const positionUnderThreshold = CONTENT_HEIGHT - THRESHOLD - ELEMENT_HEIGHT - 1;
     scrollingNativeElement.scrollTop = positionUnderThreshold;
     scrollingNativeElement.dispatchEvent(new Event('scroll'));
-    tick();
+    tick(THROTTLE_TIME);
     expect(tresholdSpy).toHaveBeenCalledTimes(0);
 
     const positionBelowThreshold = CONTENT_HEIGHT - THRESHOLD / 2;
     scrollingNativeElement.scrollTop = positionBelowThreshold;
     scrollingNativeElement.dispatchEvent(new Event('scroll'));
-    tick();
+    tick(THROTTLE_TIME);
     expect(tresholdSpy).toHaveBeenCalledTimes(1);
   }));
 
@@ -192,13 +197,13 @@ describe('Directive: NbScrollDirective', () => {
     const positionUnderThreshold = CONTENT_HEIGHT - THRESHOLD - reporterHeight;
     documentElement.scrollTop = positionUnderThreshold;
     window.dispatchEvent(new Event('scroll'));
-    tick();
+    tick(THROTTLE_TIME);
     expect(tresholdSpy).toHaveBeenCalledTimes(0);
 
     const positionBelowThreshold = CONTENT_HEIGHT - THRESHOLD / 2;
     documentElement.scrollTop = positionBelowThreshold;
     window.dispatchEvent(new Event('scroll'));
-    tick();
+    tick(THROTTLE_TIME);
     expect(tresholdSpy).toHaveBeenCalledTimes(1);
   }));
 
@@ -214,13 +219,13 @@ describe('Directive: NbScrollDirective', () => {
     const positionUnderThreshold = CONTENT_HEIGHT - THRESHOLD - scroller.clientHeight - 1;
     scroller.scrollTop = positionUnderThreshold;
     scroller.dispatchEvent(new Event('scroll'));
-    tick();
+    tick(THROTTLE_TIME);
     expect(tresholdSpy).toHaveBeenCalledTimes(0);
 
     const positionBelowThreshold = CONTENT_HEIGHT - THRESHOLD / 2;
     scroller.scrollTop = positionBelowThreshold;
     scroller.dispatchEvent(new Event('scroll'));
-    tick();
+    tick(THROTTLE_TIME);
     expect(tresholdSpy).toHaveBeenCalledTimes(1);
   }));
 
@@ -230,12 +235,12 @@ describe('Directive: NbScrollDirective', () => {
 
     scrollingElement.scrollTop = THRESHOLD + 1;
     scrollingElement.dispatchEvent(new Event('scroll'));
-    tick();
+    tick(THROTTLE_TIME);
     expect(tresholdSpy).toHaveBeenCalledTimes(0);
 
     scrollingElement.scrollTop = THRESHOLD - 1;
     scrollingElement.dispatchEvent(new Event('scroll'));
-    tick();
+    tick(THROTTLE_TIME);
     expect(tresholdSpy).toHaveBeenCalledTimes(1);
   }));
 
@@ -248,12 +253,12 @@ describe('Directive: NbScrollDirective', () => {
 
     documentElement.scrollTop = THRESHOLD + 1;
     window.dispatchEvent(new Event('scroll'));
-    tick();
+    tick(THROTTLE_TIME);
     expect(tresholdSpy).toHaveBeenCalledTimes(0);
 
     documentElement.scrollTop = THRESHOLD - 1;
     window.dispatchEvent(new Event('scroll'));
-    tick();
+    tick(THROTTLE_TIME);
     expect(tresholdSpy).toHaveBeenCalledTimes(1);
   }));
 
@@ -267,12 +272,12 @@ describe('Directive: NbScrollDirective', () => {
 
     layoutElement.scrollTop = THRESHOLD + 1;
     layoutElement.dispatchEvent(new Event('scroll'));
-    tick();
+    tick(THROTTLE_TIME);
     expect(tresholdSpy).toHaveBeenCalledTimes(0);
 
     layoutElement.scrollTop = THRESHOLD - 1;
     layoutElement.dispatchEvent(new Event('scroll'));
-    tick();
+    tick(THROTTLE_TIME);
     expect(tresholdSpy).toHaveBeenCalledTimes(1);
   }));
 });
