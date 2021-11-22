@@ -33,30 +33,32 @@ export class ComponentsListService {
   }
 
   selectNextComponent(): void {
-    this.flatFilteredComponentsList$
-      .pipe(
-        map((components: ComponentLink[]) => components.length),
-        take(1),
-      )
-      .subscribe((componentsListLength: number) => {
-        const nextElementIndex = this.activeElementIndex$.value + 1;
-        const filteredElementLength = componentsListLength - 1;
-
-        this.activeElementIndex$.next(nextElementIndex > filteredElementLength ? 0 : nextElementIndex);
-      });
+    this.moveSelection(1);
   }
 
   selectPreviousComponent(): void {
-    this.flatFilteredComponentsList$
+    this.moveSelection(-1);
+  }
+
+  private moveSelection(offset: 1 | -1): void {
+    combineLatest([this.activeElementIndex$, this.flatFilteredComponentsList$])
       .pipe(
-        map((components: ComponentLink[]) => components.length),
+        map(([selectedIndex, components]: [number, ComponentLink[]]) => [selectedIndex, components.length]),
         take(1),
       )
-      .subscribe((componentsListLength: number) => {
-        const prevElementIndex = this.activeElementIndex$.value - 1;
-        const filteredElementLength = componentsListLength - 1;
-
-        this.activeElementIndex$.next(prevElementIndex < 0 ? filteredElementLength : prevElementIndex);
+      .subscribe(([selectedIndex, length]: number[]) => {
+        const indexToSelect = selectedIndex + offset;
+        if (indexToSelect >= 0 && indexToSelect < length) {
+          return indexToSelect;
+        }
+        // If we went out of bounds when moving forward (offset === 1), we should select the first element.
+        // Otherwise, we're moving backward, and after we pass the first element,
+        // we move the selection to the last one (length - 1).
+        if (offset === 1) {
+          return 0;
+        } else {
+          return length - 1;
+        }
       });
   }
 
