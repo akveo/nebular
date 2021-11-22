@@ -68,18 +68,14 @@ export class AppComponent implements AfterViewInit, OnDestroy {
 
     fromEvent<KeyboardEvent>(this.document, 'keyup')
       .pipe(takeUntil(this.destroy$))
-      .subscribe((e: KeyboardEvent) => {
-        this.handleButtonPressUp(e);
-      });
+      .subscribe((e: KeyboardEvent) => this.handleButtonPressUp(e));
 
     this.router.events
       .pipe(
         filter((event) => event instanceof NavigationStart),
         takeUntil(this.destroy$),
       )
-      .subscribe(() => {
-        this.isComponentListVisible = false;
-      });
+      .subscribe(() => this.hideComponentsList());
   }
 
   ngOnDestroy() {
@@ -102,6 +98,10 @@ export class AppComponent implements AfterViewInit, OnDestroy {
     this.isComponentListVisible = true;
   }
 
+  hideComponentsList(): void {
+    this.isComponentListVisible = false;
+  }
+
   onSearchChange(event): void {
     this.showComponentList();
     this.componentsListService.updateSearch(event.target.value);
@@ -117,7 +117,7 @@ export class AppComponent implements AfterViewInit, OnDestroy {
     }
 
     if (e.key === 'Escape') {
-      this.isComponentListVisible = false;
+      this.hideComponentsList();
       this.lastFocusedElement.focus();
     }
 
