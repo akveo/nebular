@@ -519,7 +519,7 @@ export class NbLayoutComponent implements AfterViewInit, OnDestroy {
  */
 @Component({
   selector: 'nb-layout-column',
-  template: ` <ng-content></ng-content> `,
+  template: `<ng-content></ng-content>`,
 })
 export class NbLayoutColumnComponent {
   @HostBinding('class.left') leftValue: boolean;
