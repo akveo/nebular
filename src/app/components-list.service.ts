@@ -7,17 +7,17 @@ import { ComponentLink, PLAYGROUND_COMPONENTS } from './playground-components';
   providedIn: 'root',
 })
 export class ComponentsListService {
-  private searchString$ = new BehaviorSubject<string>('');
-  private activeElementIndex$ = new BehaviorSubject<number>(0);
-  private flatFilteredComponentLinkList$ = new BehaviorSubject<ComponentLink[]>([]);
+  private readonly searchString$ = new BehaviorSubject<string>('');
+  private readonly activeElementIndex$ = new BehaviorSubject<number>(0);
+  private readonly flatFilteredComponentLinkList$ = new BehaviorSubject<ComponentLink[]>([]);
 
-  selected$ = combineLatest([this.flatFilteredComponentLinkList$, this.activeElementIndex$]).pipe(
+  readonly selected$ = combineLatest([this.flatFilteredComponentLinkList$, this.activeElementIndex$]).pipe(
     map(([flatArray, index]) => {
       return flatArray[index]?.link;
     }),
   );
 
-  componentsList$: Observable<ComponentLink[]> = this.searchString$.pipe(
+  readonly componentsList$: Observable<ComponentLink[]> = this.searchString$.pipe(
     map((searchString) => {
       const filteredComponentLinkList = this.filter(searchString);
       const flatFilteredComponentLinkList = this.flatComponentsList(filteredComponentLinkList);
