@@ -85,9 +85,9 @@ export class AppComponent implements AfterViewInit, OnDestroy {
   }
 
   navigateToComponent(): void {
-    this.componentSearch.nativeElement.blur(); // move focus from search input
-    this.componentsListService.selected$.pipe(take(1)).subscribe((value) => {
-      this.router.navigate([value]);
+    this.componentSearch.nativeElement.blur(); // remove focus from search input
+    this.componentsListService.selected$.pipe(take(1), takeUntil(this.destroy$)).subscribe((selectedLink) => {
+      this.router.navigate([selectedLink]);
     });
   }
 
