@@ -8,7 +8,7 @@ import { ComponentLink, PLAYGROUND_COMPONENTS } from './playground-components';
 })
 export class ComponentsListService {
   private readonly searchString$ = new BehaviorSubject<string>('');
-  private readonly selectedIndex$ = new BehaviorSubject<number>(0);
+  private readonly selectedLinkIndex$ = new BehaviorSubject<number>(0);
 
   readonly components$: Observable<ComponentLink[]> = this.searchString$.pipe(
     map((searchString: string) => this.filter(searchString)),
@@ -20,13 +20,13 @@ export class ComponentsListService {
     shareReplay(1),
   );
 
-  readonly selectedLink$: Observable<string> = combineLatest([this.componentLinks$, this.selectedIndex$]).pipe(
+  readonly selectedLink$: Observable<string> = combineLatest([this.componentLinks$, this.selectedLinkIndex$]).pipe(
     map(([filteredComponents, activeElementIndex]) => filteredComponents[activeElementIndex]),
     shareReplay(1),
   );
 
   updateSearch(searchString: string): void {
-    this.selectedIndex$.next(0);
+    this.selectedLinkIndex$.next(0);
     this.searchString$.next(searchString);
   }
 
@@ -39,7 +39,7 @@ export class ComponentsListService {
   }
 
   private moveSelection(offset: 1 | -1): void {
-    combineLatest([this.selectedIndex$, this.componentLinks$])
+    combineLatest([this.selectedLinkIndex$, this.componentLinks$])
       .pipe(
         map(([selectedIndex, components]: [number, string[]]) => [selectedIndex, components.length]),
         take(1),
@@ -56,7 +56,7 @@ export class ComponentsListService {
         if (isOutOfBounds && offset === -1) {
           indexToSelect = length - 1;
         }
-        this.selectedIndex$.next(indexToSelect);
+        this.selectedLinkIndex$.next(indexToSelect);
       });
   }
 
