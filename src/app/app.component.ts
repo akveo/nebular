@@ -44,7 +44,7 @@ import { ComponentLink } from './playground-components';
 export class AppComponent implements AfterViewInit, OnDestroy {
   private destroy$ = new Subject<void>();
   private lastFocusedElement: HTMLElement;
-  document: Document;
+  private readonly document: Document;
   optionsVisible: boolean = true;
   isComponentListVisible: boolean = false;
   components$: Observable<ComponentLink[]> = this.componentsListService.componentsList$;
