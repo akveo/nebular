@@ -8,7 +8,7 @@ import { ComponentLink, PLAYGROUND_COMPONENTS } from './playground-components';
 })
 export class ComponentsListService {
   private readonly searchString$ = new BehaviorSubject<string>('');
-  private readonly activeElementIndex$ = new BehaviorSubject<number>(0);
+  private readonly selectedIndex$ = new BehaviorSubject<number>(0);
 
   readonly componentsList$: Observable<ComponentLink[]> = this.searchString$.pipe(
     map((searchString: string) => this.filter(searchString)),
@@ -20,7 +20,7 @@ export class ComponentsListService {
 
   readonly selectedLink$: Observable<string> = combineLatest([
     this.flatFilteredComponentsList$,
-    this.activeElementIndex$,
+    this.selectedIndex$,
   ]).pipe(
     map(([filteredComponents, activeElementIndex]: [ComponentLink[], number]) => {
       return filteredComponents[activeElementIndex].link;
@@ -28,7 +28,7 @@ export class ComponentsListService {
   );
 
   updateSearch(searchString: string): void {
-    this.activeElementIndex$.next(0);
+    this.selectedIndex$.next(0);
     this.searchString$.next(searchString);
   }
 
@@ -41,7 +41,7 @@ export class ComponentsListService {
   }
 
   private moveSelection(offset: 1 | -1): void {
-    combineLatest([this.activeElementIndex$, this.flatFilteredComponentsList$])
+    combineLatest([this.selectedIndex$, this.flatFilteredComponentsList$])
       .pipe(
         map(([selectedIndex, components]: [number, ComponentLink[]]) => [selectedIndex, components.length]),
         take(1),
