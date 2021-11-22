@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
-import { map, take } from 'rxjs/operators';
+import { map, shareReplay, take } from 'rxjs/operators';
 import { ComponentLink, PLAYGROUND_COMPONENTS } from './playground-components';
 
 @Injectable({
@@ -12,10 +12,12 @@ export class ComponentsListService {
 
   readonly componentsList$: Observable<ComponentLink[]> = this.searchString$.pipe(
     map((searchString: string) => this.filter(searchString)),
+    shareReplay(1),
   );
 
   private readonly flatFilteredComponentsList$ = this.componentsList$.pipe(
     map((components: ComponentLink[]) => this.flatComponentsList(components)),
+    shareReplay(1),
   );
 
   readonly selectedLink$: Observable<string> = combineLatest([
@@ -25,6 +27,7 @@ export class ComponentsListService {
     map(([filteredComponents, activeElementIndex]: [ComponentLink[], number]) => {
       return filteredComponents[activeElementIndex].link;
     }),
+    shareReplay(1),
   );
 
   updateSearch(searchString: string): void {
