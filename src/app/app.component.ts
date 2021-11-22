@@ -42,7 +42,7 @@ import { ComponentLink } from './playground-components';
   `,
 })
 export class AppComponent implements AfterViewInit, OnDestroy {
-  private destroy$ = new Subject<void>();
+  private readonly destroy$ = new Subject<void>();
   private lastFocusedElement: HTMLElement;
   private readonly document: Document;
   optionsVisible: boolean = true;
