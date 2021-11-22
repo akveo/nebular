@@ -91,6 +91,9 @@ export class AppComponent implements AfterViewInit, OnDestroy {
 
   toggleToolbar() {
     this.showToolbar = !this.showToolbar;
+    if (!this.showToolbar) {
+      this.hideComponentsList();
+    }
   }
 
   showComponentList(): void {
