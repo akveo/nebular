@@ -8,6 +8,7 @@ import { ComponentsListService } from './components-list.service';
 })
 export class ComponentLinkDirective implements OnInit, OnDestroy {
   private destroy$ = new Subject<void>();
+
   @Input() npgComponentLink: string = '';
 
   @HostBinding('class.selected')
@@ -18,7 +19,7 @@ export class ComponentLinkDirective implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.componentsListService.selectedLink$
       .pipe(
-        map((elem) => this.npgComponentLink === elem),
+        map((selectedLink: string) => this.npgComponentLink === selectedLink),
         distinctUntilChanged(),
         takeUntil(this.destroy$),
       )
