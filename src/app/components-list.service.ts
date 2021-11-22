@@ -10,12 +10,12 @@ export class ComponentsListService {
   private readonly searchString$ = new BehaviorSubject<string>('');
   private readonly selectedIndex$ = new BehaviorSubject<number>(0);
 
-  readonly componentsList$: Observable<ComponentLink[]> = this.searchString$.pipe(
+  readonly components$: Observable<ComponentLink[]> = this.searchString$.pipe(
     map((searchString: string) => this.filter(searchString)),
     shareReplay(1),
   );
 
-  private readonly componentLinks$ = this.componentsList$.pipe(
+  private readonly componentLinks$ = this.components$.pipe(
     map((components: ComponentLink[]) => this.extractLinks(components)),
     shareReplay(1),
   );

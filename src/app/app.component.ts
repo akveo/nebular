@@ -47,7 +47,7 @@ export class AppComponent implements AfterViewInit, OnDestroy {
   private lastFocusedElement: HTMLElement;
   showToolbar: boolean = true;
   showComponentsList: boolean = false;
-  components$: Observable<ComponentLink[]> = this.componentsListService.componentsList$;
+  components$: Observable<ComponentLink[]> = this.componentsListService.components$;
 
   @ViewChild('componentSearch') componentSearch: ElementRef;
 
