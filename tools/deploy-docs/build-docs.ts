@@ -1,6 +1,7 @@
 import { join } from 'path';
 import { writeFile } from 'fs/promises';
-import { copy, mkdirp, remove, outputFile, writeJson, readJson } from 'fs-extra';
+import { copy, mkdirp, remove, outputFile, writeJson, readJson, readFile, stat, readdir } from 'fs-extra';
+import * as fs from 'fs';
 
 import { generateGithubSpaScript } from './ghspa-template';
 import { runCommand } from './run-command';
@@ -9,7 +10,9 @@ import { log } from './log';
 import { REPO_URL, OUT_DIR, REPO_OWNER, REPO_NAME } from './config';
 const WORK_DIR = join(process.cwd(), '../_DOCS_BUILD_WORK_DIR_');
 const MASTER_BRANCH_DIR = join(WORK_DIR, 'MASTER');
-const DOCS_VERSIONS_PATH = join(MASTER_BRANCH_DIR, 'docs/versions.json');
+const DOCS_VERSIONS_PATH = join(MASTER_BRANCH_DIR, 'tools/deploy-docs/versions.json');
+const GH_PAGES_DIR = join(WORK_DIR, 'gh-pages');
+const FILE_WITH_HASH = 'last-commit-hash.txt';
 
 export interface Version {
   checkoutTarget: string;
@@ -61,6 +64,9 @@ function ensureSingleCurrentVersion(versions: Version[]) {
 async function buildDocs(versions: Version[]) {
   const ghspaScript = generateGithubSpaScript(versions);
 
+  await copyToBuildDir(MASTER_BRANCH_DIR, GH_PAGES_DIR);
+  await checkoutVersion('gh-pages', GH_PAGES_DIR);
+
   return Promise.all(
     versions.map((version: Version) => {
       const versionDistDir = version.isCurrent ? OUT_DIR : join(OUT_DIR, version.name);
@@ -72,17 +78,62 @@ async function buildDocs(versions: Version[]) {
 
 async function prepareVersion(version: Version, distDir: string, ghspaScript: string) {
   const projectDir = join(WORK_DIR, `${version.name}`);
+  const lastHashPath = join(join(GH_PAGES_DIR, version.isCurrent ? '' : version.name), FILE_WITH_HASH);
+
+  let lastHash, currentHash;
+
+  await checkFileExists(lastHashPath).then((fileExists: boolean) => {
+    if (fileExists) {
+      lastHash = readFile(lastHashPath, 'utf8');
+    }
+  });
 
   await copyToBuildDir(MASTER_BRANCH_DIR, projectDir);
   await checkoutVersion(version.checkoutTarget, projectDir);
-  await runCommand('npm ci', { cwd: projectDir });
-  await addVersionNameToPackageJson(version.name, join(projectDir, 'package.json'));
-  await addVersionTs(version, join(projectDir, 'package.json'));
-  await buildDocsApp(projectDir, version.path);
-  await copy(join(projectDir, 'docs/dist'), distDir);
-  await outputFile(join(distDir, 'assets/ghspa.js'), ghspaScript);
 
-  await remove(projectDir);
+  await createFileWithCommitHash(join(projectDir, FILE_WITH_HASH), projectDir);
+  currentHash = await readFile(join(projectDir, FILE_WITH_HASH), 'utf8');
+
+  if (currentHash === lastHash) {
+    await copyExistingDocs(version, distDir);
+  } else {
+    await runCommand('npm ci', { cwd: projectDir });
+    await addVersionNameToPackageJson(version.name, join(projectDir, 'package.json'));
+    await addVersionTs(version, join(projectDir, 'version.ts'));
+    await buildDocsApp(projectDir, version.path);
+    await createFileWithCommitHash(join(OUT_DIR, FILE_WITH_HASH), projectDir);
+    await copy(join(projectDir, OUT_DIR), distDir);
+    await outputFile(join(distDir, 'assets/ghspa.js'), ghspaScript);
+
+    await remove(projectDir);
+  }
+}
+
+async function checkFileExists(file) {
+  return fs.promises
+    .access(file, fs.constants.F_OK)
+    .then(() => true)
+    .catch(() => false);
+}
+
+async function copyExistingDocs(version, distDir) {
+  log(`Copying existing docs ${version.name} from gh-pages`);
+
+  const directoryPath = join(GH_PAGES_DIR, version.isCurrent ? '' : version.name);
+
+  try {
+    await readdir(directoryPath, (error, files) => {
+      files.forEach((file) => {
+        stat(join(directoryPath, file), (err, stats) => {
+          if (!stats.isDirectory() || file === 'docs' || file === 'assets') {
+            copy(join(directoryPath, file), join(distDir, file));
+          }
+        });
+      });
+    });
+  } catch (e) {
+    throw new Error(`Error copying existing docs: ${e.message}`);
+  }
 }
 
 async function copyToBuildDir(from: string, to: string) {
@@ -111,6 +162,10 @@ async function addVersionNameToPackageJson(versionName: string, packageJsonPath:
 async function addVersionTs(version: Version, versionTsPath: string) {
   const source = `export const VERSION_NAME = '${version.name}';`;
   await writeFile(versionTsPath, source, 'utf8');
+}
+
+async function createFileWithCommitHash(path: string, projectDir: string) {
+  await runCommand(`git rev-parse HEAD > ${path}`, { cwd: projectDir });
 }
 
 async function buildDocsApp(projectDir: string, baseHref: string) {
