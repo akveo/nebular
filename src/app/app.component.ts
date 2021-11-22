@@ -27,7 +27,7 @@ import { ComponentLink } from './playground-components';
         <input
           #componentSearch
           type="text"
-          placeholder="Component name /"
+          placeholder="Components search (/)"
           (focus)="showComponentList()"
           (click)="showComponentList()"
           (input)="onSearchChange($event)"
