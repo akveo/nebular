@@ -30,6 +30,7 @@ import { ComponentLink } from './playground-components';
           type="text"
           placeholder="Component name /"
           (focus)="showComponentList()"
+          (click)="showComponentList()"
           (input)="onSearchChange($event)"
           (keyup.enter)="navigateToComponent()"
         />
