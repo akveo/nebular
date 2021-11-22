@@ -63,6 +63,10 @@ export class ComponentsListService {
   }
 
   private filter(searchString: string): ComponentLink[] {
+    if (searchString === '') {
+      return PLAYGROUND_COMPONENTS;
+    }
+
     const getNodes = (components: ComponentLink[], componentLink: ComponentLink) => {
       if (componentLink.name?.toLowerCase().includes(searchString)) {
         components.push(componentLink);
