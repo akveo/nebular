@@ -7,7 +7,7 @@ import { ComponentLink, PLAYGROUND_COMPONENTS } from './playground-components';
   providedIn: 'root',
 })
 export class ComponentsListService {
-  private inputSearch$ = new BehaviorSubject<string>('');
+  private searchString$ = new BehaviorSubject<string>('');
   private activeElementIndex$ = new BehaviorSubject<number>(0);
   private flatFilteredComponentLinkList$ = new BehaviorSubject<ComponentLink[]>([]);
 
@@ -16,18 +16,19 @@ export class ComponentsListService {
       return flatArray[index]?.link;
     }),
   );
-  componentsList$: Observable<ComponentLink[]> = this.inputSearch$.pipe(
-    map((inputValue) => {
-      const filteredComponentLinkList = this.filter(inputValue);
+
+  componentsList$: Observable<ComponentLink[]> = this.searchString$.pipe(
+    map((searchString) => {
+      const filteredComponentLinkList = this.filter(searchString);
       const flatFilteredComponentLinkList = this.flatComponentsList(filteredComponentLinkList);
       this.flatFilteredComponentLinkList$.next(flatFilteredComponentLinkList);
       return filteredComponentLinkList;
     }),
   );
 
-  updateSearch(value: string): void {
+  updateSearch(searchString: string): void {
     this.activeElementIndex$.next(0);
-    this.inputSearch$.next(value);
+    this.searchString$.next(searchString);
   }
 
   selectNextComponent(): void {
