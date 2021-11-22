@@ -84,13 +84,13 @@ export class ComponentsListService {
       return PLAYGROUND_COMPONENTS;
     }
 
-    const getNodes = (components: ComponentLink[], componentLink: ComponentLink) => {
+    const filterBySearchString = (components: ComponentLink[], componentLink: ComponentLink) => {
       if (componentLink.name?.toLowerCase().includes(searchString)) {
         components.push(componentLink);
         return components;
       }
       if (componentLink.children) {
-        const children = componentLink.children.reduce(getNodes, []);
+        const children = componentLink.children.reduce(filterBySearchString, []);
         if (children.length) {
           components.push({ ...componentLink, children });
         }
@@ -98,6 +98,6 @@ export class ComponentsListService {
       return components;
     };
 
-    return PLAYGROUND_COMPONENTS.reduce(getNodes, []);
+    return PLAYGROUND_COMPONENTS.reduce(filterBySearchString, []);
   }
 }
