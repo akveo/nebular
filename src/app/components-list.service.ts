@@ -15,18 +15,13 @@ export class ComponentsListService {
     shareReplay(1),
   );
 
-  private readonly flatFilteredComponentsList$ = this.componentsList$.pipe(
-    map((components: ComponentLink[]) => this.flatComponentsList(components)),
+  private readonly componentLinks$ = this.componentsList$.pipe(
+    map((components: ComponentLink[]) => this.extractLinks(components)),
     shareReplay(1),
   );
 
-  readonly selectedLink$: Observable<string> = combineLatest([
-    this.flatFilteredComponentsList$,
-    this.selectedIndex$,
-  ]).pipe(
-    map(([filteredComponents, activeElementIndex]: [ComponentLink[], number]) => {
-      return filteredComponents[activeElementIndex].link;
-    }),
+  readonly selectedLink$: Observable<string> = combineLatest([this.componentLinks$, this.selectedIndex$]).pipe(
+    map(([filteredComponents, activeElementIndex]) => filteredComponents[activeElementIndex]),
     shareReplay(1),
   );
 
@@ -44,9 +39,9 @@ export class ComponentsListService {
   }
 
   private moveSelection(offset: 1 | -1): void {
-    combineLatest([this.selectedIndex$, this.flatFilteredComponentsList$])
+    combineLatest([this.selectedIndex$, this.componentLinks$])
       .pipe(
-        map(([selectedIndex, components]: [number, ComponentLink[]]) => [selectedIndex, components.length]),
+        map(([selectedIndex, components]: [number, string[]]) => [selectedIndex, components.length]),
         take(1),
       )
       .subscribe(([selectedIndex, length]: number[]) => {
@@ -65,18 +60,13 @@ export class ComponentsListService {
       });
   }
 
-  private flatComponentsList(componentLink: ComponentLink[]): ComponentLink[] {
-    return componentLink.reduce((acc: ComponentLink[], item) => {
+  private extractLinks(componentLink: ComponentLink[]): string[] {
+    return componentLink.reduce((acc: string[], item) => {
       if (item.link) {
-        acc.push({
-          component: item.component,
-          link: item.link,
-          name: item.name,
-          path: item.path,
-        });
+        acc.push(item.link);
       }
       if (item.children) {
-        acc = [...acc, ...this.flatComponentsList(item.children)];
+        acc = [...acc, ...this.extractLinks(item.children)];
       }
       return acc;
     }, []);
