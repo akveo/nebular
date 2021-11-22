@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Directive, HostBinding, Input, OnDestroy, OnInit } from '@angular/core';
+import { OnInit, ChangeDetectorRef, Directive, ElementRef, HostBinding, Input, OnDestroy } from '@angular/core';
 import { Subject } from 'rxjs';
 import { distinctUntilChanged, map, takeUntil } from 'rxjs/operators';
 import { ComponentsListService } from './components-list.service';
@@ -14,9 +14,14 @@ export class ComponentLinkDirective implements OnInit, OnDestroy {
   @HostBinding('class.selected')
   selected = false;
 
-  constructor(private componentsListService: ComponentsListService, private cd: ChangeDetectorRef) {}
+  constructor(
+    private componentsListService: ComponentsListService,
+    private cd: ChangeDetectorRef,
+    private elementRef: ElementRef<Element>,
+  ) {}
 
-  ngOnInit(): void {
+  ngOnInit() {
+    let isFirstEmission = true;
     this.componentsListService.selectedLink$
       .pipe(
         map((selectedLink: string) => this.npgComponentLink === selectedLink),
@@ -26,6 +31,12 @@ export class ComponentLinkDirective implements OnInit, OnDestroy {
       .subscribe((isSelected) => {
         this.selected = isSelected;
         this.cd.markForCheck();
+
+        if (isFirstEmission) {
+          isFirstEmission = false;
+        } else {
+          this.elementRef.nativeElement.scrollIntoView({ block: 'nearest' });
+        }
       });
   }
 
