@@ -135,7 +135,7 @@ export class NbInfiniteListDirective implements AfterViewInit, OnDestroy {
       )
       .subscribe((dimensions) => this.checkPosition(dimensions));
 
-    this.getContainerDimensions(true).subscribe((dimensions) => this.checkPosition(dimensions));
+    this.getContainerDimensions().subscribe((dimensions) => this.checkPosition(dimensions));
   }
 
   ngOnDestroy() {
@@ -160,8 +160,8 @@ export class NbInfiniteListDirective implements AfterViewInit, OnDestroy {
     this.lastScrollPosition = scrollTop;
   }
 
-  private getContainerDimensions(isFirstEmit?: boolean): Observable<NbScrollableContainerDimensions> {
-    if (isFirstEmit || this.elementScroll) {
+  private getContainerDimensions(): Observable<NbScrollableContainerDimensions> {
+    if (this.elementScroll) {
       const { scrollTop, scrollHeight, clientHeight } = this.elementRef.nativeElement;
       return observableOf({ scrollTop, scrollHeight, clientHeight });
     }
