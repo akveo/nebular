@@ -33,10 +33,11 @@ import { ComponentLink } from './playground-components';
           (input)="onSearchChange($event)"
           (keyup.enter)="navigateToComponent()"
         />
+
+        <div class="component-list-wrapper" *ngIf="showComponentsList">
+          <npg-components-list [components]="components$ | async"></npg-components-list>
+        </div>
       </ng-container>
-    </div>
-    <div class="component-list-wrapper" *ngIf="showComponentsList">
-      <npg-components-list [components]="components$ | async"></npg-components-list>
     </div>
     <router-outlet></router-outlet>
   `,
