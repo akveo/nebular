@@ -2,11 +2,7 @@
   "$schema": "../../../node_modules/ng-packagr/ng-package.schema.json",
   "dest": "../../../dist/auth",
   "lib": {
-    "entryFile": "./public_api.ts",
-    "umdId": "nb.auth",
-    "umdModuleIds": {
-      "@nebular/theme": "nb.theme"
-    }
+    "entryFile": "./public_api.ts"
   },
   "assets": [
     "LICENSE.txt",

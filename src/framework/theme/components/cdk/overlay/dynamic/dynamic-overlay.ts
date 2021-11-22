@@ -27,7 +27,7 @@ export class NbDynamicOverlay {
   protected lastAppliedPosition: NbPosition;
   protected disabled = false;
 
-  protected positionStrategyChange$ = new Subject();
+  protected positionStrategyChange$ = new Subject<void>();
   protected isShown$ = new BehaviorSubject<boolean>(false);
   protected destroy$ = new Subject<void>();
   protected overlayDestroy$ = new Subject<NbOverlayRef>();
