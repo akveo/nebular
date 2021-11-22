@@ -47,18 +47,18 @@ export class ComponentsListService {
         take(1),
       )
       .subscribe(([selectedIndex, length]: number[]) => {
-        const indexToSelect = selectedIndex + offset;
-        if (indexToSelect >= 0 && indexToSelect < length) {
-          return indexToSelect;
-        }
+        let indexToSelect = selectedIndex + offset;
+        const isOutOfBounds = indexToSelect < 0 || indexToSelect >= length;
         // If we went out of bounds when moving forward (offset === 1), we should select the first element.
         // Otherwise, we're moving backward, and after we pass the first element,
         // we move the selection to the last one (length - 1).
-        if (offset === 1) {
-          return 0;
-        } else {
-          return length - 1;
+        if (isOutOfBounds && offset === 1) {
+          indexToSelect = 0;
         }
+        if (isOutOfBounds && offset === -1) {
+          indexToSelect = length - 1;
+        }
+        this.selectedIndex$.next(indexToSelect);
       });
   }
 
