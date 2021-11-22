@@ -16,14 +16,16 @@ import { ComponentLink } from './playground-components';
   selector: 'npg-app-root',
   styleUrls: ['./app.component.scss'],
   template: `
-    <div class="toolbar" dir="ltr">
+    <div class="toolbar" [class.tools-visible]="showToolbar" dir="ltr">
       <button (click)="toggleToolbar()" [class.toolbar-toggle-fixed]="!showToolbar" class="toolbar-toggle">
         {{ showToolbar ? 'hide' : 'show' }} toolbar
       </button>
       <ng-container *ngIf="showToolbar">
+        <span class="tools-divider"></span>
         <npg-layout-direction-toggle></npg-layout-direction-toggle>
+        <span class="tools-divider"></span>
         <npg-layout-theme-toggle></npg-layout-theme-toggle>
-
+        <span class="tools-divider"></span>
         <input
           #componentSearch
           type="text"
@@ -34,10 +36,13 @@ import { ComponentLink } from './playground-components';
           (keyup.enter)="navigateToComponent()"
         />
 
-        <div class="component-list-wrapper" *ngIf="showComponentsList">
+        <ng-container *ngIf="showComponentsList">
           <button (click)="hideComponentsList()" tabindex="-1">hide list</button>
-          <npg-components-list [components]="components$ | async"></npg-components-list>
-        </div>
+
+          <div class="component-list-wrapper">
+            <npg-components-list [components]="components$ | async"></npg-components-list>
+          </div>
+        </ng-container>
       </ng-container>
     </div>
     <router-outlet></router-outlet>

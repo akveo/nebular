@@ -2,20 +2,27 @@
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-}
 
-.toolbar-toggle {
-  margin: 0 1.25rem;
-
-  &-fixed {
-    position: fixed;
-    left: 0;
-    top: 0.5rem;
+  &.tools-visible {
+    padding: 0.25rem;
   }
 }
 
+.toolbar-toggle-fixed {
+  position: fixed;
+  left: 0.25rem;
+  top: 0.25rem;
+}
+
+.tools-divider {
+  display: inline-block;
+  border-right: 1px solid rgba(0, 0, 0, 0.25);
+  height: 1em;
+  margin: 0 0.5rem;
+}
+
 .component-list-wrapper {
-  padding: 2rem;
   flex: 0 0 100vw;
   min-height: 100vh;
+  padding: 0.5rem 1rem;
 }
