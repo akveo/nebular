@@ -63,18 +63,18 @@ export class ComponentsListService {
   }
 
   private filter(searchString: string): ComponentLink[] {
-    const getNodes = (result: ComponentLink[], object: ComponentLink) => {
-      if (object.name?.toLowerCase().includes(searchString)) {
-        result.push(object);
-        return result;
+    const getNodes = (components: ComponentLink[], componentLink: ComponentLink) => {
+      if (componentLink.name?.toLowerCase().includes(searchString)) {
+        components.push(componentLink);
+        return components;
       }
-      if (object.children) {
-        const children = object.children.reduce(getNodes, []);
+      if (componentLink.children) {
+        const children = componentLink.children.reduce(getNodes, []);
         if (children.length) {
-          result.push({ ...object, children });
+          components.push({ ...componentLink, children });
         }
       }
-      return result;
+      return components;
     };
 
     return PLAYGROUND_COMPONENTS.reduce(getNodes, []);
