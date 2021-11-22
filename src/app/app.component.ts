@@ -102,6 +102,7 @@ export class AppComponent implements AfterViewInit, OnDestroy {
   }
 
   onSearchChange(event): void {
+    this.showComponentList();
     this.componentsListService.updateSearch(event.target.value);
   }
 
