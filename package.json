@@ -45,7 +45,7 @@
     "ci:lint": "npm-run-all -p lint lint:styles",
     "version:bump": "gulp version",
     "version:changelog": "conventional-changelog -- -p angular -i CHANGELOG.md -s",
-    "release:validate": "npm-run-all build:packages build:wp ci:lint \"e2e -c=production-wp\" && npm run test:wp -- --watch=false",
+    "release:validate": "npm-run-all build:packages build:wp \"e2e -c=production-wp\" && npm run test:wp -- --watch=false",
     "release": "npm-run-all release:validate publish",
     "publish": "./tools/publish.sh",
     "postinstall": "npm run build:dev-schematics",
