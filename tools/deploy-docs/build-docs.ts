@@ -10,7 +10,7 @@ import { log } from './log';
 import { REPO_URL, OUT_DIR, REPO_OWNER, REPO_NAME } from './config';
 const WORK_DIR = join(process.cwd(), '../_DOCS_BUILD_WORK_DIR_');
 const MASTER_BRANCH_DIR = join(WORK_DIR, 'MASTER');
-const DOCS_VERSIONS_PATH = join(MASTER_BRANCH_DIR, 'tools/deploy-docs/versions.json');
+const DOCS_VERSIONS_PATH = join(MASTER_BRANCH_DIR, 'docs/versions.json');
 const GH_PAGES_DIR = join(WORK_DIR, 'gh-pages');
 const FILE_WITH_HASH = 'last-commit-hash.txt';
 
@@ -84,7 +84,9 @@ async function prepareVersion(version: Version, distDir: string, ghspaScript: st
 
   await checkFileExists(lastHashPath).then((fileExists: boolean) => {
     if (fileExists) {
-      lastHash = readFile(lastHashPath, 'utf8');
+      readFile(lastHashPath, 'utf8', (error: NodeJS.ErrnoException, data: string) => {
+        lastHash = data;
+      });
     }
   });
 
@@ -124,11 +126,15 @@ async function copyExistingDocs(version, distDir) {
   try {
     await readdir(directoryPath, (error, files) => {
       files.forEach((file) => {
-        stat(join(directoryPath, file), (err, stats) => {
-          if (!stats.isDirectory() || file === 'docs' || file === 'assets') {
-            copy(join(directoryPath, file), join(distDir, file));
-          }
-        });
+        try {
+          stat(join(directoryPath, file), (err, stats) => {
+            if (!stats.isDirectory() || file === 'docs' || file === 'assets') {
+              copy(join(directoryPath, file), join(distDir, file));
+            }
+          });
+        } catch (e) {
+          throw new Error(`Error copying file: ${e.message}`);
+        }
       });
     });
   } catch (e) {
