@@ -1,4 +1,5 @@
 {
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
   "stylelint.validate": ["css", "less", "postcss", "scss"],
   // disable error duplication for scss files
   "scss.validate": false,
