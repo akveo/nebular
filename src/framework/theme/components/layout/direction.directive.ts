@@ -10,7 +10,7 @@ import { Subject } from 'rxjs';
 import { NbLayoutDirection, NbLayoutDirectionService } from '../../services/direction.service';
 
 @Directive()
-export abstract class NbLayoutDirectionDirective implements OnInit, OnDestroy {
+abstract class NbLayoutDirectionDirective implements OnInit, OnDestroy {
   protected destroy$ = new Subject<void>();
 
   constructor(
