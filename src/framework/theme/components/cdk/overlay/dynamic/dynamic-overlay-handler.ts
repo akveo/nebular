@@ -1,4 +1,6 @@
 import { ElementRef, Injectable, SimpleChange, Type } from '@angular/core';
+import { Subject } from 'rxjs';
+import { skip, takeUntil } from 'rxjs/operators';
 
 import { NbTrigger, NbTriggerStrategy, NbTriggerStrategyBuilderService } from '../overlay-trigger';
 import {
@@ -12,8 +14,6 @@ import { NbOverlayContent } from '../overlay-service';
 import { NbDynamicOverlay } from './dynamic-overlay';
 import { NbOverlayConfig } from '../mapping';
 import { NbLayoutDirectionService } from '../../../../services/direction.service';
-import { Subject } from 'rxjs';
-import { skip, takeUntil } from 'rxjs/operators';
 
 export class NbDynamicOverlayChange extends SimpleChange {
   constructor(previousValue: any, currentValue: any, firstChange: boolean = false) {
