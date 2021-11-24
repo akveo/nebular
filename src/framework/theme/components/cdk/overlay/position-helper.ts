@@ -24,7 +24,9 @@ export class NbPositionHelper {
   constructor(protected layoutDirection: NbLayoutDirectionService) {}
 
   toLogicalPositionByDirection(direction: NbLayoutDirection, position: NbPosition): NbPosition {
-    return direction === 'ltr' ? this.toLogicalPositionWhenLtr(position) : this.toLogicalPositionWhenRtl(position);
+    return direction === NbLayoutDirection.LTR
+      ? this.toLogicalPositionWhenLtr(position)
+      : this.toLogicalPositionWhenRtl(position);
   }
 
   toLogicalPosition(position: NbGlobalPosition): NbGlobalLogicalPosition {

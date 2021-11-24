@@ -1,4 +1,5 @@
 import { ElementRef, Inject, Injectable } from '@angular/core';
+import { GlobalPositionStrategy } from '@angular/cdk/overlay';
 
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
@@ -9,6 +10,8 @@ import {
   NbConnectedPosition,
   NbConnectionPositionPair,
   NbFlexibleConnectedPositionStrategy,
+  NbFlexibleConnectedPositionStrategyOrigin,
+  NbOverlayContainer,
   NbOverlayPositionBuilder,
   NbOverlayRef,
   NbPositionStrategy,
@@ -17,11 +20,6 @@ import { NbPlatform } from '../platform/platform-service';
 import { NbOverlayContainerAdapter } from '../adapter/overlay-container-adapter';
 import { NbViewportRulerAdapter } from '../adapter/viewport-ruler-adapter';
 import { NbGlobalLogicalPosition, NbPositionHelper } from './position-helper';
-import { GlobalPositionStrategy } from '@angular/cdk/overlay';
-import { ViewportRuler } from '@angular/cdk/scrolling';
-import { Platform } from '@angular/cdk/platform';
-import { OverlayContainer } from '@angular/cdk/overlay/overlay-container';
-import { FlexibleConnectedPositionStrategyOrigin } from '@angular/cdk/overlay/position/flexible-connected-position-strategy';
 import { NbLayoutDirection } from '../../../services/direction.service';
 
 export type NbAdjustmentValues = 'noop' | 'clockwise' | 'counterclockwise' | 'vertical' | 'horizontal';
@@ -189,11 +187,11 @@ export class NbAdjustableConnectedPositionStrategy
   );
 
   constructor(
-    connectedTo: FlexibleConnectedPositionStrategyOrigin,
-    _viewportRuler: ViewportRuler,
+    connectedTo: NbFlexibleConnectedPositionStrategyOrigin,
+    _viewportRuler: NbViewportRulerAdapter,
     _document: Document,
-    _platform: Platform,
-    _overlayContainer: OverlayContainer,
+    _platform: NbPlatform,
+    _overlayContainer: NbOverlayContainer,
     _positionHelper: NbPositionHelper,
   ) {
     super(connectedTo, _viewportRuler, _document, _platform, _overlayContainer);
@@ -270,7 +268,8 @@ export class NbAdjustableConnectedPositionStrategy
   }
 
   private getConnectedPosition(position: NbPosition): { key: NbPosition; connectedPosition: NbConnectedPosition } {
-    const positionGrid = this._direction === 'rtl' ? { ...POSITIONS, ...RTL_PHYSICAL_POSITIONS } : POSITIONS;
+    const positionGrid =
+      this._direction === NbLayoutDirection.RTL ? { ...POSITIONS, ...RTL_PHYSICAL_POSITIONS } : POSITIONS;
 
     return { key: position, connectedPosition: positionGrid[position](this._offset) as NbConnectedPosition };
   }
