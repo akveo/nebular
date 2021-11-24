@@ -23,7 +23,6 @@ import {
   PositionStrategy,
   ScrollStrategy,
 } from '@angular/cdk/overlay';
-import { Direction } from '@angular/cdk/bidi';
 import { NbScrollStrategyOptions } from '../adapter/block-scroll-strategy-adapter';
 
 @Directive({ selector: '[nbPortal]' })
@@ -64,7 +63,6 @@ export type NbConnectedOverlayPositionChange = ConnectedOverlayPositionChange;
 export type NbConnectionPositionPair = ConnectionPositionPair;
 export type NbOverlayConfig = OverlayConfig;
 export type NbScrollStrategy = ScrollStrategy;
-export type NbDirection = Direction;
 
 const CDK_MODULES = [OverlayModule, PortalModule];
 

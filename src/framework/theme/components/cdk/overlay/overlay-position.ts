@@ -8,7 +8,6 @@ import {
   NbConnectedOverlayPositionChange,
   NbConnectedPosition,
   NbConnectionPositionPair,
-  NbDirection,
   NbFlexibleConnectedPositionStrategy,
   NbOverlayPositionBuilder,
   NbOverlayRef,
@@ -23,6 +22,7 @@ import { ViewportRuler } from '@angular/cdk/scrolling';
 import { Platform } from '@angular/cdk/platform';
 import { OverlayContainer } from '@angular/cdk/overlay/overlay-container';
 import { FlexibleConnectedPositionStrategyOrigin } from '@angular/cdk/overlay/position/flexible-connected-position-strategy';
+import { NbLayoutDirection } from '../../../services/direction.service';
 
 export type NbAdjustmentValues = 'noop' | 'clockwise' | 'counterclockwise' | 'vertical' | 'horizontal';
 export enum NbAdjustment {
@@ -174,7 +174,7 @@ export class NbAdjustableConnectedPositionStrategy
   protected _position: NbPosition;
   protected _offset: number = 15;
   protected _adjustment: NbAdjustment;
-  protected _direction: NbDirection | undefined;
+  protected _direction: NbLayoutDirection | undefined;
   protected _positionHelper: NbPositionHelper;
 
   protected appliedPositions: { key: NbPosition; connectedPosition: NbConnectedPosition }[];
@@ -210,7 +210,7 @@ export class NbAdjustableConnectedPositionStrategy
     super.attach(overlayRef);
   }
 
-  direction(direction: NbDirection): this {
+  direction(direction: NbLayoutDirection): this {
     this._direction = direction;
     return this;
   }

@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 
-import { NbLayoutDirectionService } from '../../../services/direction.service';
+import { NbLayoutDirection, NbLayoutDirectionService } from '../../../services/direction.service';
 import { NbPosition } from './overlay-position';
-import { NbDirection } from './mapping';
 
 export enum NbGlobalLogicalPosition {
   TOP_START = 'top-start',
@@ -24,7 +23,7 @@ export type NbGlobalPosition = NbGlobalPhysicalPosition | NbGlobalLogicalPositio
 export class NbPositionHelper {
   constructor(protected layoutDirection: NbLayoutDirectionService) {}
 
-  toLogicalPositionByDirection(direction: NbDirection, position: NbPosition): NbPosition {
+  toLogicalPositionByDirection(direction: NbLayoutDirection, position: NbPosition): NbPosition {
     return direction === 'ltr' ? this.toLogicalPositionWhenLtr(position) : this.toLogicalPositionWhenRtl(position);
   }
 
