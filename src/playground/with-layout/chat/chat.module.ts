@@ -18,6 +18,7 @@ import { ChatSizesComponent } from './chat-sizes.component';
 import { ChatTestComponent } from './chat-test.component';
 import { ChatCustomMessageComponent } from './chat-custom-message.component';
 import { ChatCustomMessageTableComponent } from './components/chat-custom-message-table.component';
+import { ChatTemplateTitleComponent } from './chat-template-title.component';
 
 @NgModule({
   declarations: [
@@ -30,13 +31,8 @@ import { ChatCustomMessageTableComponent } from './components/chat-custom-messag
     ChatTestComponent,
     ChatCustomMessageComponent,
     ChatCustomMessageTableComponent,
+    ChatTemplateTitleComponent,
   ],
-  imports: [
-    CommonModule,
-    NbChatModule.forRoot(),
-    NbCardModule,
-    NbButtonModule,
-    ChatRoutingModule,
-  ],
+  imports: [CommonModule, NbChatModule.forRoot(), NbCardModule, NbButtonModule, ChatRoutingModule],
 })
 export class ChatModule {}

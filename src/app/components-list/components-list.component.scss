@@ -16,6 +16,10 @@
 .component-link {
   display: block;
 
+  &.selected {
+    background: #ccc;
+  }
+
   &:focus {
     transform: scale(1.02);
   }
