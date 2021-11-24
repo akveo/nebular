@@ -9,12 +9,6 @@ import { distinctUntilChanged, map, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { NbLayoutDirection, NbLayoutDirectionService } from '../../services/direction.service';
 
-/**
- * There are two structural directives which display the template content depending on layout direction.
- * `*nbLtr` displays the content when layout direction is `ltr`.
- * `*nbRtl` displays the content when layout direction is `rtl`.
- * Use them without any conditions.
- */
 @Directive()
 export abstract class NbLayoutDirectionDirective implements OnInit, OnDestroy {
   protected destroy$ = new Subject<void>();
@@ -53,6 +47,13 @@ export abstract class NbLayoutDirectionDirective implements OnInit, OnDestroy {
   }
 }
 
+/**
+ * Apply `nbLtr` directive to the element you need to show only when layout direction is `LTR`.
+ *
+ * ```html
+ * <div *nbLtr>This text is visible only when layout direction is LTR</div>
+ * ```
+ */
 @Directive({
   selector: '[nbLtr]',
 })
@@ -67,6 +68,13 @@ export class NbLtrLayoutDirectionDirective extends NbLayoutDirectionDirective {
   }
 }
 
+/**
+ * Apply `nbRtl` directive to the element you need to show only when layout direction is `RTL`.
+ *
+ * ```html
+ * <div *nbRtl>This text is visible only when layout direction is RTL</div>
+ * ```
+ */
 @Directive({
   selector: '[nbRtl]',
 })
