@@ -70,6 +70,13 @@ export class NbInfiniteListDirective implements AfterViewInit, OnDestroy {
   threshold: number;
 
   /**
+   * Ignores subsequent source values for specified duration after scroll emits first value.
+   * In milliseconds.
+   */
+  @Input()
+  throttleTime = 0;
+
+  /**
    * By default component observes list scroll position.
    * If set to `true`, component will observe position of page scroll instead.
    */
@@ -112,7 +119,7 @@ export class NbInfiniteListDirective implements AfterViewInit, OnDestroy {
       .pipe(
         filter(() => this.windowScroll),
         switchMap(() => this.getContainerDimensions()),
-        throttleTime(250),
+        throttleTime(this.throttleTime),
         takeUntil(this.destroy$),
       )
       .subscribe((dimensions) => this.checkPosition(dimensions));

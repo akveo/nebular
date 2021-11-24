@@ -92,6 +92,7 @@ describe('Directive: NbScrollDirective', () => {
     listElementRef = fixture.debugElement.query(By.directive(NbListComponent));
     layoutComponent = fixture.debugElement.query(By.directive(NbLayoutComponent)).componentInstance;
     infiniteListDirective = listElementRef.injector.get(NbInfiniteListDirective);
+    infiniteListDirective.throttleTime = THROTTLE_TIME;
     testComponent = fixture.componentInstance;
   });
 
