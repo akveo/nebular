@@ -1,16 +1,8 @@
-:host {
-  display: block;
-  padding: 0.5em;
+input {
+  margin: 0.125rem 0.125rem 0 0;
+  vertical-align: top;
+}
 
-  input {
-    margin-right: 0.25rem;
-  }
-
-  label {
-    margin: 0;
-  }
-
-  span {
-    vertical-align: middle;
-  }
+label {
+  margin: 0;
 }
