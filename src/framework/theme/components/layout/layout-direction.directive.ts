@@ -10,7 +10,7 @@ import { Subject } from 'rxjs';
 import { NbLayoutDirection, NbLayoutDirectionService } from '../../services/direction.service';
 
 @Directive()
-abstract class NbLayoutDirectionDirective implements OnInit, OnDestroy {
+abstract class NbBaseLayoutDirectionDirective implements OnInit, OnDestroy {
   protected destroy$ = new Subject<void>();
 
   constructor(
@@ -57,7 +57,7 @@ abstract class NbLayoutDirectionDirective implements OnInit, OnDestroy {
 @Directive({
   selector: '[nbLtr]',
 })
-export class NbLtrLayoutDirectionDirective extends NbLayoutDirectionDirective {
+export class NbLtrDirective extends NbBaseLayoutDirectionDirective {
   constructor(
     protected templateRef: TemplateRef<any>,
     protected viewContainer: ViewContainerRef,
@@ -78,7 +78,7 @@ export class NbLtrLayoutDirectionDirective extends NbLayoutDirectionDirective {
 @Directive({
   selector: '[nbRtl]',
 })
-export class NbRtlLayoutDirectionDirective extends NbLayoutDirectionDirective {
+export class NbRtlDirective extends NbBaseLayoutDirectionDirective {
   constructor(
     protected templateRef: TemplateRef<any>,
     protected viewContainer: ViewContainerRef,

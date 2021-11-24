@@ -16,7 +16,7 @@ import {
 
 import { NbRestoreScrollTopHelper } from './restore-scroll-top.service';
 
-import { NbLtrLayoutDirectionDirective, NbRtlLayoutDirectionDirective } from './direction.directive';
+import { NbLtrDirective, NbRtlDirective } from './layout-direction.directive';
 
 const NB_LAYOUT_COMPONENTS = [
   NbLayoutComponent,
@@ -25,7 +25,7 @@ const NB_LAYOUT_COMPONENTS = [
   NbLayoutHeaderComponent,
 ];
 
-const NB_LAYOUT_DIRECTIVES = [NbLtrLayoutDirectionDirective, NbRtlLayoutDirectionDirective];
+const NB_LAYOUT_DIRECTIVES = [NbLtrDirective, NbRtlDirective];
 
 @NgModule({
   imports: [NbSharedModule],

@@ -351,8 +351,8 @@ export const structure = [
           'NbLayoutHeaderComponent',
           'NbLayoutColumnComponent',
           'NbLayoutFooterComponent',
-          'NbLtrLayoutDirectionDirective',
-          'NbRtlLayoutDirectionDirective',
+          'NbLtrDirective',
+          'NbRtlDirective',
         ],
       },
       {
