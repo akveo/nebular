@@ -19,7 +19,6 @@ import {
   OnInit,
   SimpleChanges,
   Optional,
-  AfterContentInit,
 } from '@angular/core';
 import { takeUntil } from 'rxjs/operators';
 import { Observable, ReplaySubject, Subject } from 'rxjs';
