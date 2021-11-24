@@ -25,8 +25,8 @@ abstract class NbBaseLayoutDirectionDirective implements OnInit, OnDestroy {
     this.directionService
       .onDirectionChange()
       .pipe(
-        distinctUntilChanged(),
         map((layoutDirection: NbLayoutDirection) => layoutDirection === this.directionToShow),
+        distinctUntilChanged(),
         takeUntil(this.destroy$),
       )
       .subscribe((shouldShow: boolean) => this.updateView<boolean>(shouldShow));
