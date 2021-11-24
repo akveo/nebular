@@ -23,10 +23,10 @@ export type NbGlobalPosition = NbGlobalPhysicalPosition | NbGlobalLogicalPositio
 export class NbPositionHelper {
   constructor(protected layoutDirection: NbLayoutDirectionService) {}
 
-  toLogicalPositionByDirection(direction: NbLayoutDirection, position: NbPosition): NbPosition {
-    return direction === NbLayoutDirection.LTR
-      ? this.toLogicalPositionWhenLtr(position)
-      : this.toLogicalPositionWhenRtl(position);
+  toLogicalNbPosition(position: NbPosition): NbPosition {
+    return this.layoutDirection.isLtr()
+      ? this.toLogicalNbPositionWhenLtr(position)
+      : this.toLogicalNbPositionWhenRtl(position);
   }
 
   toLogicalPosition(position: NbGlobalPosition): NbGlobalLogicalPosition {
@@ -35,9 +35,9 @@ export class NbPositionHelper {
     }
 
     if (this.layoutDirection.isLtr()) {
-      return this.toLogicalGlobalPositionWhenLtr(position as NbGlobalPhysicalPosition);
+      return this.toLogicalPositionWhenLtr(position as NbGlobalPhysicalPosition);
     } else {
-      return this.toLogicalGlobalPositionWhenRtl(position as NbGlobalPhysicalPosition);
+      return this.toLogicalPositionWhenRtl(position as NbGlobalPhysicalPosition);
     }
   }
 
@@ -68,7 +68,7 @@ export class NbPositionHelper {
     );
   }
 
-  protected toLogicalPositionWhenLtr(position: NbPosition): NbPosition {
+  protected toLogicalNbPositionWhenLtr(position: NbPosition): NbPosition {
     if (position === NbPosition.LEFT) {
       return NbPosition.START;
     }
@@ -78,7 +78,7 @@ export class NbPositionHelper {
     return position;
   }
 
-  protected toLogicalPositionWhenRtl(position: NbPosition): NbPosition {
+  protected toLogicalNbPositionWhenRtl(position: NbPosition): NbPosition {
     if (position === NbPosition.LEFT) {
       return NbPosition.END;
     }
@@ -88,7 +88,7 @@ export class NbPositionHelper {
     return position;
   }
 
-  protected toLogicalGlobalPositionWhenLtr(position: NbGlobalPhysicalPosition): NbGlobalLogicalPosition {
+  protected toLogicalPositionWhenLtr(position: NbGlobalPhysicalPosition): NbGlobalLogicalPosition {
     switch (position) {
       case NbGlobalPhysicalPosition.TOP_RIGHT:
         return NbGlobalLogicalPosition.TOP_END;
@@ -101,7 +101,7 @@ export class NbPositionHelper {
     }
   }
 
-  protected toLogicalGlobalPositionWhenRtl(position: NbGlobalPhysicalPosition): NbGlobalLogicalPosition {
+  protected toLogicalPositionWhenRtl(position: NbGlobalPhysicalPosition): NbGlobalLogicalPosition {
     switch (position) {
       case NbGlobalPhysicalPosition.TOP_RIGHT:
         return NbGlobalLogicalPosition.TOP_START;
