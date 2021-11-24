@@ -19,7 +19,7 @@ export interface NbWindowControlButtonsConfig {
   minimize: boolean;
   maximize: boolean;
   fullScreen: boolean;
-  close?: boolean;
+  close: boolean;
 }
 
 export const NB_WINDOW_DEFAULT_BUTTONS_CONFIG: NbWindowControlButtonsConfig = {
