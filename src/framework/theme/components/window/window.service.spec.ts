@@ -9,6 +9,7 @@ import {
   NB_DOCUMENT,
   NbThemeModule,
   NbWindowControlButtonsConfig,
+  NbWindowComponent,
 } from '@nebular/theme';
 
 const WINDOW_CONTENT = 'window content';
@@ -312,14 +313,27 @@ describe('window-service', () => {
     expect(icons.sort()).toEqual(['minus-outline', 'close-outline'].sort());
   });
 
-  it('should render maximize and full-screen button', () => {
-    const config: NbWindowControlButtonsConfig = { minimize: true, maximize: true, fullScreen: true, close: false };
-    const windowRef = windowService.open(NbTestWindowComponent, { buttons: config });
-    windowRef.minimize();
-    windowRef.componentRef.changeDetectorRef.detectChanges();
+  it('should render close button by default', () => {
+    const windowRef = windowService.open(NbTestWindowComponent);
+    const windowComponent: NbWindowComponent = windowRef.componentRef.instance;
+
+    expect(windowComponent.showClose).toBe(true);
+
     const windowElement: ElementRef<HTMLElement> = windowRef.componentRef.injector.get(ElementRef);
-    const buttons = Array.from(windowElement.nativeElement.querySelectorAll('button'));
-    const icons = buttons.map((e) => e.getElementsByTagName('nb-icon')[0].getAttribute('icon'));
-    expect(icons.sort()).toEqual(['minus-outline', 'expand-outline'].sort());
+    const windowButtonIcons = Array.from<HTMLElement>(windowElement.nativeElement.querySelectorAll('.buttons nb-icon'));
+    const iconNames = windowButtonIcons.map((buttonIcon: HTMLElement) => buttonIcon.getAttribute('icon'));
+    expect(iconNames).toContain('close-outline');
+  });
+
+  it('should not render close button if disabled from config', () => {
+    const windowRef = windowService.open(NbTestWindowComponent, { buttons: { close: false } });
+    const windowComponent: NbWindowComponent = windowRef.componentRef.instance;
+
+    expect(windowComponent.showClose).toBe(false);
+
+    const windowElement: ElementRef<HTMLElement> = windowRef.componentRef.injector.get(ElementRef);
+    const windowButtonIcons = Array.from<HTMLElement>(windowElement.nativeElement.querySelectorAll('.buttons nb-icon'));
+    const iconNames = windowButtonIcons.map((buttonIcon: HTMLElement) => buttonIcon.getAttribute('icon'));
+    expect(iconNames).not.toContain('close-outline');
   });
 });
