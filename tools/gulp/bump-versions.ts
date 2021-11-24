@@ -11,7 +11,8 @@ const through = require('through2');
 
 const VERSION_APPENDIX = process.env.NEBULAR_VERSION_APPENDIX;
 const VERSION =
-  process.env.NEBULAR_VERSION || require('package.json').version + (VERSION_APPENDIX ? '-' + VERSION_APPENDIX : '');
+  process.env.NEBULAR_VERSION ||
+  require('../../package.json').version + (VERSION_APPENDIX ? '-' + VERSION_APPENDIX : '');
 const FRAMEWORK_ROOT = './src/framework';
 
 const EXCLUDE = ['icons'];

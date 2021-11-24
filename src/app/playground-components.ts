@@ -2,7 +2,7 @@ export abstract class ComponentLink {
   path: string;
   name?: string;
   component?: string;
-  link?: any[] | string;
+  link?: string;
   children?: ComponentLink[];
 }
 
