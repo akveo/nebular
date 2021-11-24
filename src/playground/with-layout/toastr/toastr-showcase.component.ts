@@ -1,14 +1,14 @@
 import { Component, HostBinding } from '@angular/core';
-import { NbToastrService } from '@nebular/theme';
+import { NbGlobalPhysicalPosition, NbToastrService } from '@nebular/theme';
 
 @Component({
-  selector: 'nb-toastr-showcase',
+  selector: 'npg-toastr-showcase',
   template: `
-    <button nbButton (click)="showToast('top-right', 'success')">Top Right</button>
-    <button nbButton (click)="showToast('bottom-left', 'info')">Bottom left</button>
+    <button nbButton (click)="showToast(NbGlobalPhysicalPosition.TOP_RIGHT, 'success')">Top Right</button>
+    <button nbButton (click)="showToast(NbGlobalPhysicalPosition.BOTTOM_LEFT, 'info')">Bottom left</button>
   `,
   styles: [
-      `
+    `
       ::ng-deep nb-layout-column {
         height: 80vw;
       }
@@ -21,14 +21,12 @@ export class ToastrShowcaseComponent {
   @HostBinding('class')
   classes = 'example-items-rows';
 
-  constructor(private toastrService: NbToastrService) {
-  }
+  NbGlobalPhysicalPosition = NbGlobalPhysicalPosition;
+
+  constructor(private toastrService: NbToastrService) {}
 
   showToast(position, status) {
     this.index += 1;
-    this.toastrService.show(
-      status || 'Success',
-      `Toast ${this.index}`,
-      { position, status });
+    this.toastrService.show(status || 'Success', `Toast ${this.index}`, { position, status });
   }
 }
