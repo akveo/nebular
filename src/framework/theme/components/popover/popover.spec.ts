@@ -111,6 +111,7 @@ export class NbDynamicOverlayHandlerMock {
   _adjustment: NbAdjustment = NbAdjustment.NOOP;
   _offset = 15;
   _overlayConfig: NbOverlayConfig = {};
+  _disabled = false;
 
   constructor() {}
 
@@ -156,6 +157,11 @@ export class NbDynamicOverlayHandlerMock {
 
   overlayConfig(overlayConfig: NbOverlayConfig) {
     this._overlayConfig = overlayConfig;
+    return this;
+  }
+
+  disabled(disabled: boolean) {
+    this._disabled = disabled;
     return this;
   }
 

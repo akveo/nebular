@@ -2,12 +2,7 @@
   "$schema": "../../../node_modules/ng-packagr/ng-package.schema.json",
   "dest": "../../../dist/eva-icons",
   "lib": {
-    "entryFile": "./public_api.ts",
-    "umdId": "nb.eva-icons",
-    "umdModuleIds": {
-      "@nebular/theme": "nb.theme",
-      "eva-icons": "eva"
-    }
+    "entryFile": "./public_api.ts"
   },
   "assets": [
     "LICENSE.txt",

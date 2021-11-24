@@ -17,8 +17,8 @@ Create a `themes.scss` in your `src` folder and import a theme of your choice:
 
 ```scss
 // import Nebular Theme System and the default theme
-@import '~@nebular/theme/styles/theming';
-@import '~@nebular/theme/styles/themes/default';
+@import '@nebular/theme/styles/theming';
+@import '@nebular/theme/styles/themes/default';
 
 ```
 <hr>
@@ -29,8 +29,8 @@ To adjust some of the theme variables, we need to register our changes using `nb
 Let's make text color lighter and disabled text - darker:
 
 ```scss
-@import '~@nebular/theme/styles/theming';
-@import '~@nebular/theme/styles/themes/default';
+@import '@nebular/theme/styles/theming';
+@import '@nebular/theme/styles/themes/default';
 
 $nb-themes: nb-register-theme((
   text-basic-color: color-basic-800, // <- we setting color-basic-800 instead of color-basic-1000
@@ -42,8 +42,8 @@ We can also modify a primary color, for example make it violet.
 [Eva Colors](https://colors.eva.design?utm_campaign=eva_design%20-%20eva%20colors%20-%20nebular%20docs%20link&utm_source=nebular&utm_medium=referral&utm_content=enable_customizable_theme_primary_color) is a great tool to generate colors pallet from a given brand color.
 
 ```scss
-@import '~@nebular/theme/styles/theming';
-@import '~@nebular/theme/styles/themes/default';
+@import '@nebular/theme/styles/theming';
+@import '@nebular/theme/styles/themes/default';
 
 $nb-themes: nb-register-theme((
   
@@ -72,7 +72,7 @@ The last thing, find your `styles.scss` (or create one and add it into `angular.
 @import 'themes';
 
 // framework component styles
-@import '~@nebular/theme/styles/globals';
+@import '@nebular/theme/styles/globals';
 
 // install the framework styles
 @include nb-install() {
