@@ -74,7 +74,7 @@ export class NbInfiniteListDirective implements AfterViewInit, OnDestroy {
    * In milliseconds.
    */
   @Input()
-  throttleTime = 0;
+  throttleTime = 100;
 
   /**
    * By default component observes list scroll position.
