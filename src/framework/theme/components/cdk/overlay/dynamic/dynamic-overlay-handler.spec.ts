@@ -16,6 +16,7 @@ import {
   NbTrigger,
   NbTriggerStrategy,
   NbTriggerStrategyBuilderService,
+  NbLayoutDirectionService,
 } from '@nebular/theme';
 
 @Component({ template: '' })
@@ -127,6 +128,8 @@ export class MockPositionBuilder {
 
   apply() {}
 
+  direction() {}
+
   detach() {}
 
   dispose() {}
@@ -213,6 +216,7 @@ describe('dynamic-overlay-handler', () => {
     const bed = TestBed.configureTestingModule({
       declarations: [NbDynamicOverlayMockComponent, NbDynamicOverlayMock2Component],
       providers: [
+        NbLayoutDirectionService,
         NbDynamicOverlayHandler,
         { provide: NbDynamicOverlay, useClass: NbMockDynamicOverlay },
         { provide: NbTriggerStrategyBuilderService, useClass: MockTriggerStrategyBuilder },
