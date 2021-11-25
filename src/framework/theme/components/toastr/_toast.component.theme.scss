@@ -4,6 +4,8 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
+@use '../../styles/theming' as *;
+
 @mixin nb-toast-theme() {
   nb-toast {
     border-style: nb-theme(toastr-border-style);

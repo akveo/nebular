@@ -4,22 +4,22 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-@mixin nb-route-tabset-theme() {
+@use '../../styles/theming' as *;
 
+@mixin nb-route-tabset-theme() {
   nb-route-tabset {
     @include nb-scrollbars(
-        nb-theme(route-tabset-scrollbar-color),
-        nb-theme(route-tabset-scrollbar-background-color),
-        nb-theme(route-tabset-scrollbar-width));
+      nb-theme(route-tabset-scrollbar-color),
+      nb-theme(route-tabset-scrollbar-background-color),
+      nb-theme(route-tabset-scrollbar-width)
+    );
 
     background-color: nb-theme(route-tabset-background-color);
     border-radius: nb-theme(route-tabset-border-radius);
     box-shadow: nb-theme(route-tabset-shadow);
 
     .route-tabset {
-      border-bottom:
-        nb-theme(route-tabset-divider-width)
-        nb-theme(route-tabset-divider-style)
+      border-bottom: nb-theme(route-tabset-divider-width) nb-theme(route-tabset-divider-style)
         nb-theme(route-tabset-divider-color);
     }
 

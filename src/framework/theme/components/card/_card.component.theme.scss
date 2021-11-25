@@ -4,6 +4,8 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
+@use '../../styles/theming' as *;
+
 @mixin nb-card-header() {
   padding: nb-theme(card-padding);
   border-bottom: nb-theme(card-divider-width) nb-theme(card-divider-style) nb-theme(card-divider-color);
@@ -36,9 +38,10 @@
     margin-bottom: nb-theme(card-margin-bottom);
 
     @include nb-scrollbars(
-        nb-theme(card-scrollbar-color),
-        nb-theme(card-scrollbar-background-color),
-        nb-theme(card-scrollbar-width));
+      nb-theme(card-scrollbar-color),
+      nb-theme(card-scrollbar-background-color),
+      nb-theme(card-scrollbar-width)
+    );
 
     @each $size in nb-get-sizes() {
       &.size-#{$size} {
@@ -85,9 +88,10 @@
     padding: nb-theme(card-padding);
     position: relative;
     @include nb-scrollbars(
-        nb-theme(card-scrollbar-color),
-        nb-theme(card-scrollbar-background-color),
-        nb-theme(card-scrollbar-width));
+      nb-theme(card-scrollbar-color),
+      nb-theme(card-scrollbar-background-color),
+      nb-theme(card-scrollbar-width)
+    );
   }
 
   nb-card-footer {
@@ -101,4 +105,3 @@
     @include nb-card-header();
   }
 }
-

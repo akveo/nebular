@@ -6,7 +6,7 @@
 
 @use 'sass:math';
 
-@import '../../styles/core/mixins';
+@use '../../styles/theming' as *;
 
 $arrow-size: 6px;
 
@@ -68,7 +68,7 @@ $arrow-size: 6px;
 :host(.left),
 :host(.start) {
   .arrow {
-    $inline-offset: round(-$arrow-size - math.div($arrow-size, 2.5));
+    $inline-offset: math.round(-$arrow-size - math.div($arrow-size, 2.5));
     @include nb-ltr() {
       right: $inline-offset;
       transform: rotate(90deg);
@@ -83,7 +83,7 @@ $arrow-size: 6px;
 
 :host(.start-top) {
   .arrow {
-    right: round(-$arrow-size - math.div($arrow-size, 2.5));
+    right: math.round(-$arrow-size - math.div($arrow-size, 2.5));
     bottom: $arrow-size;
     transform: rotate(90deg);
   }
@@ -91,7 +91,7 @@ $arrow-size: 6px;
 
 :host(.start-bottom) {
   .arrow {
-    right: round(-$arrow-size - math.div($arrow-size, 2.5));
+    right: math.round(-$arrow-size - math.div($arrow-size, 2.5));
     top: $arrow-size;
     transform: rotate(90deg);
   }
@@ -126,7 +126,7 @@ $arrow-size: 6px;
 :host(.right),
 :host(.end) {
   .arrow {
-    $inline-offset: round(-$arrow-size - math.div($arrow-size, 2.5));
+    $inline-offset: math.round(-$arrow-size - math.div($arrow-size, 2.5));
     @include nb-ltr() {
       left: $inline-offset;
       transform: rotate(270deg);
