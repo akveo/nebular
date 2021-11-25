@@ -259,8 +259,8 @@ export class NbAdjustableConnectedPositionStrategy
 
   protected reorderPreferredPositions(positions: NbPosition[]): NbPosition[] {
     // Physical positions should be mapped to logical as adjustments use logical positions.
-    const position = this.mapToLogicalPosition(this._position);
-    const startPositionIndex = positions.indexOf(position);
+    const startPosition = this.mapToLogicalPosition(this._position);
+    const startPositionIndex = positions.indexOf(startPosition);
     const firstPart = positions.slice(startPositionIndex);
     const secondPart = positions.slice(0, startPositionIndex);
     return firstPart.concat(secondPart);
