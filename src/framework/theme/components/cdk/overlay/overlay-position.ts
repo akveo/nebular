@@ -293,7 +293,6 @@ export class NbPositionBuilderService {
     protected platform: NbPlatform,
     protected positionBuilder: NbOverlayPositionBuilder,
     protected overlayContainer: NbOverlayContainerAdapter,
-    protected positionHelper: NbPositionHelper,
   ) {}
 
   global(): NbGlobalPositionStrategy {
