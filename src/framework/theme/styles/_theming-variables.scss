@@ -1,0 +1,28 @@
+/*
+  Declare variables before making them global.
+  dart-sass doesn't allow to declare variable with !global.
+ */
+$nb-enable-css-custom-properties: false !default;
+$nb-enabled-themes: ();
+$nb-themes: ();
+$nb-theme-process-mode: 'lazy-process' !default;
+$nb-theme-name: null;
+$nb-theme: ();
+$nb-processed-theme: ();
+$nb-theme-export-mode: false !default;
+$nb-themes-export: ();
+$nb-custom-statuses: () !default;
+
+// public variables
+$nb-enable-css-custom-properties: false !default !global;
+$nb-enabled-themes: () !global;
+$nb-themes: () !global;
+$nb-custom-statuses: () !default !global;
+
+// private variables
+$nb-theme-process-mode: 'lazy-process' !global;
+$nb-theme-name: null !global;
+$nb-theme: () !global;
+$nb-processed-theme: () !global;
+$nb-theme-export-mode: false !default !global;
+$nb-themes-export: () !global;

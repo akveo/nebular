@@ -4,6 +4,9 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
+@use 'sass:list';
+@use 'theming/get-value';
+
 @mixin nb-scrollbars($fg, $bg, $size, $border-radius: $size * 0.5) {
   &::-webkit-scrollbar {
     width: $size;
@@ -128,11 +131,11 @@
 }
 
 @mixin animation($animate...) {
-  $max: length($animate);
+  $max: list.length($animate);
   $animations: '';
 
   @for $i from 1 through $max {
-    $animations: #{$animations + nth($animate, $i)};
+    $animations: #{$animations + list.nth($animate, $i)};
 
     @if $i < $max {
       $animations: #{$animations + ', '};
@@ -172,7 +175,7 @@
   @include keyframes(btn-#{$name}-pulse) {
     0% {
       box-shadow: none;
-      opacity: nb-theme(btn-disabled-opacity);
+      opacity: get-value.nb-theme(btn-disabled-opacity);
     }
     50% {
       box-shadow: 0 0 1rem 0 $color;
@@ -180,7 +183,7 @@
     }
     100% {
       box-shadow: none;
-      opacity: nb-theme(btn-disabled-opacity);
+      opacity: get-value.nb-theme(btn-disabled-opacity);
     }
   }
 }

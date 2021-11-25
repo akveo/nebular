@@ -38,17 +38,17 @@ const defaultAppOptions: ApplicationOptions = {
   skipPackageJson: false,
 };
 
-const EXPECTED_STYLES_SCSS = `@import 'themes';
+const EXPECTED_STYLES_SCSS = `@use 'themes';
 
-@import '@nebular/theme/styles/globals';
+@use '@nebular/theme/styles/globals';
 
 @include nb-install() {
   @include nb-theme-global();
 };
 `;
 
-const EXPECTED_THEME_SCSS = `@import '@nebular/theme/styles/theming';
-@import '@nebular/theme/styles/themes/default';
+const EXPECTED_THEME_SCSS = `@use '@nebular/theme/styles/theming';
+@use '@nebular/theme/styles/themes/default';
 
 $nb-themes: nb-register-theme((
 

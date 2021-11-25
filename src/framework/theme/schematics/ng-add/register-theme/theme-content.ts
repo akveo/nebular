@@ -5,8 +5,8 @@
  */
 
 export function createThemeContent(themeName: string): string {
-  return `@import '@nebular/theme/styles/theming';
-@import '@nebular/theme/styles/themes/${themeName}';
+  return `@use '@nebular/theme/styles/theming';
+@use '@nebular/theme/styles/themes/${themeName}';
 
 $nb-themes: nb-register-theme((
 
@@ -26,9 +26,9 @@ $nb-themes: nb-register-theme((
 `;
 }
 
-export const stylesContent = `@import 'themes';
+export const stylesContent = `@use 'themes';
 
-@import '@nebular/theme/styles/globals';
+@use '@nebular/theme/styles/globals';
 
 @include nb-install() {
   @include nb-theme-global();
