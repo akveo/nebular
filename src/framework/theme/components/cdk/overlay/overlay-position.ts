@@ -171,7 +171,6 @@ export class NbAdjustableConnectedPositionStrategy
   protected _offset: number = 15;
   protected _adjustment: NbAdjustment;
   protected _direction: NbLayoutDirection | undefined;
-  protected _positionHelper: NbPositionHelper;
 
   protected appliedPositions: { key: NbPosition; connectedPosition: NbConnectedPosition }[];
 
