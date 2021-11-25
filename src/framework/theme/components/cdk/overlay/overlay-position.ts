@@ -10,8 +10,6 @@ import {
   NbConnectedPosition,
   NbConnectionPositionPair,
   NbFlexibleConnectedPositionStrategy,
-  NbFlexibleConnectedPositionStrategyOrigin,
-  NbOverlayContainer,
   NbOverlayPositionBuilder,
   NbOverlayRef,
   NbPositionStrategy,
@@ -186,19 +184,6 @@ export class NbAdjustableConnectedPositionStrategy
     }),
   );
 
-  constructor(
-    connectedTo: NbFlexibleConnectedPositionStrategyOrigin,
-    _viewportRuler: NbViewportRulerAdapter,
-    _document: Document,
-    _platform: NbPlatform,
-    _overlayContainer: NbOverlayContainer,
-    _positionHelper: NbPositionHelper,
-  ) {
-    super(connectedTo, _viewportRuler, _document, _platform, _overlayContainer);
-
-    this._positionHelper = _positionHelper;
-  }
-
   attach(overlayRef: NbOverlayRef) {
     /**
      * We have to apply positions before attach because super.attach() validates positions and crashes app
@@ -254,6 +239,16 @@ export class NbAdjustableConnectedPositionStrategy
     }
   }
 
+  protected mapToLogicalPosition(position: NbPosition): NbPosition {
+    if (position === NbPosition.LEFT) {
+      return this._direction === NbLayoutDirection.LTR ? NbPosition.START : NbPosition.END;
+    }
+    if (position === NbPosition.RIGHT) {
+      return this._direction === NbLayoutDirection.LTR ? NbPosition.END : NbPosition.START;
+    }
+    return position;
+  }
+
   protected persistChosenPositions(positions: NbPosition[]) {
     const positionGrid = this._direction === NbLayoutDirection.RTL ? RTL_PHYSICAL_POSITIONS : POSITIONS;
 
@@ -265,7 +260,7 @@ export class NbAdjustableConnectedPositionStrategy
 
   protected reorderPreferredPositions(positions: NbPosition[]): NbPosition[] {
     // Physical positions should be mapped to logical as adjustments use logical positions.
-    const position = this._positionHelper.toLogicalNbPosition(this._position);
+    const position = this.mapToLogicalPosition(this._position);
     const startPositionIndex = positions.indexOf(position);
     const firstPart = positions.slice(startPositionIndex);
     const secondPart = positions.slice(0, startPositionIndex);
@@ -313,7 +308,6 @@ export class NbPositionBuilderService {
       this.document,
       this.platform,
       this.overlayContainer,
-      this.positionHelper,
     )
       .withFlexibleDimensions(false)
       .withPush(false);

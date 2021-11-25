@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 
 import { NbLayoutDirectionService } from '../../../services/direction.service';
-import { NbPosition } from './overlay-position';
 
 export enum NbGlobalLogicalPosition {
   TOP_START = 'top-start',
@@ -22,12 +21,6 @@ export type NbGlobalPosition = NbGlobalPhysicalPosition | NbGlobalLogicalPositio
 @Injectable()
 export class NbPositionHelper {
   constructor(protected layoutDirection: NbLayoutDirectionService) {}
-
-  toLogicalNbPosition(position: NbPosition): NbPosition {
-    return this.layoutDirection.isLtr()
-      ? this.toLogicalNbPositionWhenLtr(position)
-      : this.toLogicalNbPositionWhenRtl(position);
-  }
 
   toLogicalPosition(position: NbGlobalPosition): NbGlobalLogicalPosition {
     if (Object.values(NbGlobalLogicalPosition).includes(position as NbGlobalLogicalPosition)) {
@@ -66,26 +59,6 @@ export class NbPositionHelper {
       physicalPosition === NbGlobalPhysicalPosition.TOP_RIGHT ||
       physicalPosition === NbGlobalPhysicalPosition.BOTTOM_RIGHT
     );
-  }
-
-  protected toLogicalNbPositionWhenLtr(position: NbPosition): NbPosition {
-    if (position === NbPosition.LEFT) {
-      return NbPosition.START;
-    }
-    if (position === NbPosition.RIGHT) {
-      return NbPosition.END;
-    }
-    return position;
-  }
-
-  protected toLogicalNbPositionWhenRtl(position: NbPosition): NbPosition {
-    if (position === NbPosition.LEFT) {
-      return NbPosition.END;
-    }
-    if (position === NbPosition.RIGHT) {
-      return NbPosition.START;
-    }
-    return position;
   }
 
   protected toLogicalPositionWhenLtr(position: NbGlobalPhysicalPosition): NbGlobalLogicalPosition {

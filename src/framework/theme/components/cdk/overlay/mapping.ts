@@ -14,7 +14,6 @@ import {
   ConnectedPosition,
   ConnectionPositionPair,
   FlexibleConnectedPositionStrategy,
-  FlexibleConnectedPositionStrategyOrigin,
   Overlay,
   OverlayConfig,
   OverlayContainer,
@@ -64,7 +63,6 @@ export type NbConnectedOverlayPositionChange = ConnectedOverlayPositionChange;
 export type NbConnectionPositionPair = ConnectionPositionPair;
 export type NbOverlayConfig = OverlayConfig;
 export type NbScrollStrategy = ScrollStrategy;
-export type NbFlexibleConnectedPositionStrategyOrigin = FlexibleConnectedPositionStrategyOrigin;
 
 const CDK_MODULES = [OverlayModule, PortalModule];
 
