@@ -63,21 +63,6 @@ export enum NbPosition {
   START_BOTTOM = 'start-bottom',
 }
 
-const RTL_PHYSICAL_POSITIONS = {
-  [NbPosition.RIGHT](offset) {
-    return { originX: 'start', originY: 'center', overlayX: 'end', overlayY: 'center', offsetX: offset };
-  },
-  [NbPosition.LEFT](offset) {
-    return { originX: 'end', originY: 'center', overlayX: 'start', overlayY: 'center', offsetX: -offset };
-  },
-  [NbPosition.START](offset) {
-    return this[NbPosition.RIGHT](offset);
-  },
-  [NbPosition.END](offset) {
-    return this[NbPosition.LEFT](offset);
-  },
-};
-
 const POSITIONS = {
   [NbPosition.RIGHT](offset) {
     return { originX: 'end', originY: 'center', overlayX: 'start', overlayY: 'center', offsetX: offset };
@@ -120,6 +105,22 @@ const POSITIONS = {
   },
   [NbPosition.TOP_END](offset) {
     return { originX: 'start', originY: 'top', overlayX: 'start', overlayY: 'bottom', offsetY: -offset };
+  },
+};
+
+const RTL_PHYSICAL_POSITIONS = {
+  ...POSITIONS,
+  [NbPosition.RIGHT](offset) {
+    return { originX: 'start', originY: 'center', overlayX: 'end', overlayY: 'center', offsetX: offset };
+  },
+  [NbPosition.LEFT](offset) {
+    return { originX: 'end', originY: 'center', overlayX: 'start', overlayY: 'center', offsetX: -offset };
+  },
+  [NbPosition.START](offset) {
+    return this[NbPosition.RIGHT](offset);
+  },
+  [NbPosition.END](offset) {
+    return this[NbPosition.LEFT](offset);
   },
 };
 
@@ -254,7 +255,12 @@ export class NbAdjustableConnectedPositionStrategy
   }
 
   protected persistChosenPositions(positions: NbPosition[]) {
-    this.appliedPositions = positions.map(this.getConnectedPosition.bind(this));
+    const positionGrid = this._direction === NbLayoutDirection.RTL ? RTL_PHYSICAL_POSITIONS : POSITIONS;
+
+    this.appliedPositions = positions.map((position) => ({
+      key: position,
+      connectedPosition: positionGrid[position](this._offset) as NbConnectedPosition,
+    }));
   }
 
   protected reorderPreferredPositions(positions: NbPosition[]): NbPosition[] {
@@ -264,13 +270,6 @@ export class NbAdjustableConnectedPositionStrategy
     const firstPart = positions.slice(startPositionIndex);
     const secondPart = positions.slice(0, startPositionIndex);
     return firstPart.concat(secondPart);
-  }
-
-  private getConnectedPosition(position: NbPosition): { key: NbPosition; connectedPosition: NbConnectedPosition } {
-    const positionGrid =
-      this._direction === NbLayoutDirection.RTL ? { ...POSITIONS, ...RTL_PHYSICAL_POSITIONS } : POSITIONS;
-
-    return { key: position, connectedPosition: positionGrid[position](this._offset) as NbConnectedPosition };
   }
 }
 
