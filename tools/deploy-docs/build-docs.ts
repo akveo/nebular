@@ -1,13 +1,14 @@
 import { join } from 'path';
 import { writeFile } from 'fs/promises';
-import { copy, mkdirp, remove, outputFile, writeJson, readJson, readFile, stat, readdir } from 'fs-extra';
-import * as fs from 'fs';
+import { copy, mkdirp, remove, writeJson, readJson, readFile, stat, readdir, pathExists, outputFile } from 'fs-extra';
 
 import { generateGithubSpaScript } from './ghspa-template';
 import { runCommand } from './run-command';
 import { log } from './log';
 
 import { REPO_URL, OUT_DIR, REPO_OWNER, REPO_NAME } from './config';
+import { promisify } from 'util';
+import { exec } from 'child_process';
 const WORK_DIR = join(process.cwd(), '../_DOCS_BUILD_WORK_DIR_');
 const MASTER_BRANCH_DIR = join(WORK_DIR, 'MASTER');
 const DOCS_VERSIONS_PATH = join(MASTER_BRANCH_DIR, 'docs/versions.json');
@@ -33,6 +34,13 @@ export interface Version {
   log(`Cloning ${REPO_URL} into ${MASTER_BRANCH_DIR}`);
   await runCommand(`git clone ${REPO_URL} ${MASTER_BRANCH_DIR}`, { cwd: WORK_DIR });
 
+  log('Checkout gh-pages to check for existing');
+  await copyToBuildDir(MASTER_BRANCH_DIR, GH_PAGES_DIR);
+  await checkoutVersion('gh-pages', GH_PAGES_DIR);
+
+  log('Search for commit hash files in gh-pages');
+  const builtVersions: { hash; path }[] = await checkBuiltVersions();
+
   log('Reading versions configuration');
   const config: Version[] = await import(DOCS_VERSIONS_PATH);
   ensureSingleCurrentVersion(config);
@@ -42,7 +50,7 @@ export interface Version {
   log(jsonConfig);
 
   log(`Building docs`);
-  await buildDocs(config);
+  await buildDocs(config, builtVersions);
 
   log(`Adding versions.json to ${OUT_DIR}`);
   await outputFile(join(OUT_DIR, 'versions.json'), jsonConfig);
@@ -61,43 +69,62 @@ function ensureSingleCurrentVersion(versions: Version[]) {
   }
 }
 
-async function buildDocs(versions: Version[]) {
-  const ghspaScript = generateGithubSpaScript(versions);
+async function checkBuiltVersions() {
+  let builtVersions: { hash; path }[] = [];
 
-  await copyToBuildDir(MASTER_BRANCH_DIR, GH_PAGES_DIR);
-  await checkoutVersion('gh-pages', GH_PAGES_DIR);
+  //take hash from the GH_PAGES_DIR directory
+  const hashFilePath = join(GH_PAGES_DIR, FILE_WITH_HASH);
+  const exists = await pathExists(hashFilePath);
+
+  if (exists) {
+    builtVersions.push({ hash: await readFile(hashFilePath, 'utf8'), path: GH_PAGES_DIR });
+  }
+
+  //take hash from the first-level directories of GH_PAGES_DIR
+  const files = await readdir(GH_PAGES_DIR);
+  for await (let file of files) {
+    const stats = await stat(join(GH_PAGES_DIR, file));
+    if (stats.isDirectory()) {
+      const hashFilePathInDirectory = join(GH_PAGES_DIR, file, FILE_WITH_HASH);
+      const existsInDirectory = await pathExists(hashFilePathInDirectory);
+      if (existsInDirectory) {
+        builtVersions.push({
+          hash: await readFile(hashFilePathInDirectory, 'utf8'),
+          path: join(GH_PAGES_DIR, file),
+        });
+      }
+    }
+  }
+
+  console.log('Built versions in gh-pages:', builtVersions);
+
+  return builtVersions;
+}
+
+async function buildDocs(versions: Version[], builtVersions: { hash; path }[]) {
+  const ghspaScript = generateGithubSpaScript(versions);
 
   return Promise.all(
     versions.map((version: Version) => {
       const versionDistDir = version.isCurrent ? OUT_DIR : join(OUT_DIR, version.name);
 
-      return prepareVersion(version, versionDistDir, ghspaScript);
+      return prepareVersion(version, versionDistDir, ghspaScript, builtVersions);
     }),
   );
 }
 
-async function prepareVersion(version: Version, distDir: string, ghspaScript: string) {
+async function prepareVersion(version: Version, distDir: string, ghspaScript: string, builtVersions: { hash; path }[]) {
   const projectDir = join(WORK_DIR, `${version.name}`);
-  const lastHashPath = join(join(GH_PAGES_DIR, version.isCurrent ? '' : version.name), FILE_WITH_HASH);
-
-  let lastHash, currentHash;
-
-  await checkFileExists(lastHashPath).then((fileExists: boolean) => {
-    if (fileExists) {
-      readFile(lastHashPath, 'utf8', (error: NodeJS.ErrnoException, data: string) => {
-        lastHash = data;
-      });
-    }
-  });
 
   await copyToBuildDir(MASTER_BRANCH_DIR, projectDir);
   await checkoutVersion(version.checkoutTarget, projectDir);
 
-  await createFileWithCommitHash(join(projectDir, FILE_WITH_HASH), projectDir);
-  currentHash = await readFile(join(projectDir, FILE_WITH_HASH), 'utf8');
+  const { stdout: currentHash } = await promisify(exec)('git rev-parse HEAD', { cwd: projectDir });
 
-  if (currentHash === lastHash) {
-    await copyExistingDocs(version, distDir);
+  const correspondingVersion = builtVersions.find((item) => currentHash === item.hash);
+
+  if (correspondingVersion) {
+    await copyExistingDocs(version, correspondingVersion.path, distDir);
   } else {
     await runCommand('npm ci', { cwd: projectDir });
     await addVersionNameToPackageJson(version.name, join(projectDir, 'package.json'));
@@ -111,35 +138,18 @@ async function prepareVersion(version: Version, distDir: string, ghspaScript: st
   }
 }
 
-async function checkFileExists(file) {
-  return fs.promises
-    .access(file, fs.constants.F_OK)
-    .then(() => true)
-    .catch(() => false);
-}
+async function copyExistingDocs(version, correspondingVersionPath, distDir) {
+  log(`Copying existing docs ${version.name} from ${correspondingVersionPath}`);
 
-async function copyExistingDocs(version, distDir) {
-  log(`Copying existing docs ${version.name} from gh-pages`);
-
-  const directoryPath = join(GH_PAGES_DIR, version.isCurrent ? '' : version.name);
-
-  try {
-    await readdir(directoryPath, (error, files) => {
-      files.forEach((file) => {
-        try {
-          stat(join(directoryPath, file), (err, stats) => {
-            if (!stats.isDirectory() || file === 'docs' || file === 'assets') {
-              copy(join(directoryPath, file), join(distDir, file));
-            }
-          });
-        } catch (e) {
-          throw new Error(`Error copying file: ${e.message}`);
-        }
-      });
-    });
-  } catch (e) {
-    throw new Error(`Error copying existing docs: ${e.message}`);
-  }
+  const files = await readdir(correspondingVersionPath);
+  await Promise.all(
+    files.map(async (file: string) => {
+      const stats = await stat(join(correspondingVersionPath, file));
+      if (!stats.isDirectory() || file === 'docs' || file === 'assets') {
+        await copy(join(correspondingVersionPath, file), join(distDir, file));
+      }
+    }),
+  );
 }
 
 async function copyToBuildDir(from: string, to: string) {
