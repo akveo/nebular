@@ -31,7 +31,6 @@ export enum NbAdjustment {
   HORIZONTAL = 'horizontal',
 }
 
-// eslint-disable-next-line max-len
 export type NbPositionValues =
   | 'top'
   | 'bottom'
