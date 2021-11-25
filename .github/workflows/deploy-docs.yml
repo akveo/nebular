@@ -3,6 +3,11 @@ on:
   push:
     branches:
       - master
+
+  release:
+    types:
+      - published
+
 jobs:
   deploy-docs:
     runs-on: ubuntu-latest
