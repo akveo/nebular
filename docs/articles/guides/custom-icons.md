@@ -86,6 +86,8 @@ Now we can use `font-awesome` icons without specifying the pack:
 <nb-icon icon="star"></nb-icon>
 ```
 
+### Ligature font pack
+
 `registerFontPack` supports fonts with ligatures. To register ligature font pack add `ligature: true` property to the configuration parameter:
 
 ```ts
