@@ -67,6 +67,7 @@ export * from './components/calendar-kit/model';
 export * from './components/calendar-kit/calendar-kit.module';
 export * from './components/layout/layout.module';
 export * from './components/layout/layout.component';
+export * from './components/layout/layout-direction.directive';
 export * from './components/layout/restore-scroll-top.service';
 export * from './components/menu/menu.module';
 export { NbMenuService, NbMenuItem, NbMenuBag } from './components/menu/menu.service';

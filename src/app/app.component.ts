@@ -37,7 +37,7 @@ import { ComponentLink } from './playground-components';
         />
 
         <ng-container *ngIf="showComponentsList">
-          <button (click)="hideComponentsList()" tabindex="-1">hide list</button>
+          <button (click)="hideComponentsList()" tabindex="-1" class="hide-components-list">hide list</button>
 
           <div class="component-list-wrapper">
             <npg-components-list [components]="components$ | async"></npg-components-list>
