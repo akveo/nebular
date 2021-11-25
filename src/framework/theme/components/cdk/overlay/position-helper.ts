@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { NbLayoutDirection, NbLayoutDirectionService } from '../../../services/direction.service';
+import { NbLayoutDirectionService } from '../../../services/direction.service';
 import { NbPosition } from './overlay-position';
 
 export enum NbGlobalLogicalPosition {
