@@ -17,7 +17,7 @@ import {
 import { NbPlatform } from '../platform/platform-service';
 import { NbOverlayContainerAdapter } from '../adapter/overlay-container-adapter';
 import { NbViewportRulerAdapter } from '../adapter/viewport-ruler-adapter';
-import { NbGlobalLogicalPosition, NbPositionHelper } from './position-helper';
+import { NbGlobalLogicalPosition } from './position-helper';
 import { NbLayoutDirection } from '../../../services/direction.service';
 
 export type NbAdjustmentValues = 'noop' | 'clockwise' | 'counterclockwise' | 'vertical' | 'horizontal';
