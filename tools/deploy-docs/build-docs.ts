@@ -142,14 +142,12 @@ async function copyExistingDocs(version, correspondingVersionPath, distDir) {
   log(`Copying existing docs ${version.name} from ${correspondingVersionPath}`);
 
   const files = await readdir(correspondingVersionPath);
-  await Promise.all(
-    files.map(async (file: string) => {
-      const stats = await stat(join(correspondingVersionPath, file));
-      if (!stats.isDirectory() || file === 'docs' || file === 'assets') {
-        await copy(join(correspondingVersionPath, file), join(distDir, file));
-      }
-    }),
-  );
+  for await (let file of files) {
+    const stats = await stat(join(correspondingVersionPath, file));
+    if (!stats.isDirectory() || file === 'docs' || file === 'assets') {
+      await copy(join(correspondingVersionPath, file), join(distDir, file));
+    }
+  }
 }
 
 async function copyToBuildDir(from: string, to: string) {
