@@ -2,7 +2,7 @@
   Declare variables before making them global.
   dart-sass doesn't allow to declare variable with !global.
  */
-$nb-enable-css-custom-properties: false !default;
+$nb-enable-css-custom-properties: true !default;
 $nb-enabled-themes: ();
 $nb-themes: ();
 $nb-theme-process-mode: 'lazy-process' !default;
@@ -17,7 +17,7 @@ $tabset-tab-text-hide-breakpoint: 36rem !default;
 $route-tabset-tab-text-hide-breakpoint: 36rem !default;
 
 // public variables
-$nb-enable-css-custom-properties: false !default !global;
+$nb-enable-css-custom-properties: true !default !global;
 $nb-enabled-themes: () !global;
 $nb-themes: () !global;
 $nb-custom-statuses: () !default !global;
