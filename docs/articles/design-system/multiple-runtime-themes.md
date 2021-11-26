@@ -2,7 +2,6 @@
 
 This mode comes in handy when you need to have multiple themes and be able to change them in the run-time.
 
-
 <div class="note note-info section-end">
   <div class="note-title">Setup Required</div>
   <div class="note-body">
@@ -13,26 +12,38 @@ This mode comes in handy when you need to have multiple themes and be able to ch
 <hr>
 
 ## Enable Second Theme
+
 Assuming you already have the `themes.scss` file with the `default` theme enabled, let's add a second theme:
 
 ```scss
-@import '@nebular/theme/styles/theming';
-@import '@nebular/theme/styles/themes/default';
-@import '@nebular/theme/styles/themes/dark';
+@forward '@nebular/theme/styles/theming';
+@use '@nebular/theme/styles/theming' as *;
+@use '@nebular/theme/styles/themes/default';
+@use '@nebular/theme/styles/themes/dark';
 
-$nb-themes: nb-register-theme((
-  text-basic-color: color-basic-800, // some styles we changed
-  text-disabled-color: color-basic-600,
-), default, default);
+$nb-themes: nb-register-theme(
+  (
+    // some styles we changed
+    text-basic-color: color-basic-800,
+    text-disabled-color: color-basic-600
+  ),
+  default,
+  default
+);
 
-$nb-themes: nb-register-theme((
-  text-basic-color: color-basic-800, // some styles we changed
-  text-disabled-color: color-basic-600,
-), dark, dark);
-
+$nb-themes: nb-register-theme(
+  (
+    // some styles we changed
+    text-basic-color: color-basic-800,
+    text-disabled-color: color-basic-600
+  ),
+  dark,
+  dark
+);
 ```
 
 Basically, that's it. Now you have two themes registered.
+
 <hr>
 
 ## Related Articles

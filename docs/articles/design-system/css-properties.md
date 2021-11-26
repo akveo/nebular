@@ -3,7 +3,7 @@
 Custom CSS properties - custom variables that could be declared in CSS, changed and resolved in browser runtime.
 This allows dynamically change application themes with no need to reload the page. Moreover, no additional CSS is loaded, resulting in good performance achievements.
 
-Starting with Nebular 4, Nebular can run in custom CSS properties mode in a simple configuration change.  
+Starting with Nebular 4, Nebular can run in custom CSS properties mode in a simple configuration change.
 
 <div class="note note-info section-end">
   <div class="note-title">Setup Required</div>
@@ -18,18 +18,21 @@ Starting with Nebular 4, Nebular can run in custom CSS properties mode in a simp
 To enable the mode, find your `themes.scss` and set the `$nb-enable-css-custom-properties` to `true`:
 
 ```scss
-@import '@nebular/theme/styles/theming';
-@import '@nebular/theme/styles/themes/default';
+@forward '@nebular/theme/styles/theming';
+@use '@nebular/theme/styles/theming' as *;
+@use '@nebular/theme/styles/themes/default';
 
 $nb-enable-css-custom-properties: true; // <-- enable css custom properties
 
-$nb-themes: nb-register-theme((
-  
-  // your theme
-
-  text-basic-color: color-basic-800,
-  text-disabled-color: color-basic-600,
-), default, default);
+$nb-themes: nb-register-theme(
+  (
+    // your theme
+    text-basic-color: color-basic-800,
+    text-disabled-color: color-basic-600
+  ),
+  default,
+  default
+);
 ```
 
 As a result, all theme properties will be placed under `body` element as custom css properties:
@@ -43,9 +46,9 @@ As a result, all theme properties will be placed under `body` element as custom 
 
 ```
 
-When you change a theme, the theme class will be changed, resulting in a new set of css properties, and changing all the component styles dynamically, in the runtime. 
-<hr>  
+When you change a theme, the theme class will be changed, resulting in a new set of css properties, and changing all the component styles dynamically, in the runtime.
 
+<hr>
 
 ## Related Articles
 
