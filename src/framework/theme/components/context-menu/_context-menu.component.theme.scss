@@ -6,7 +6,6 @@
 @import '../../styles/core/mixins';
 
 @mixin nb-context-menu-theme() {
-
   .context-menu-host {
     /*
       Fixes click not being bubbled to the body in Safari.
@@ -30,10 +29,8 @@
       overflow: hidden;
       text-align: nb-theme(context-menu-text-align);
 
-      nb-icon.expand-state {
-        svg {
-          pointer-events: none;
-        }
+      nb-icon.expand-state svg {
+        pointer-events: none;
       }
     }
   }
