@@ -5,7 +5,7 @@
  */
 
 @use '../../styles/theming' as *;
-@use '../../styles/globals' as *;
+@use '../../styles/global/breakpoints' as *;
 
 @mixin nb-sidebar-theme() {
   nb-sidebar {
