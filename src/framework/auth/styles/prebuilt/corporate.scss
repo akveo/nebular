@@ -1,8 +1,8 @@
-@import '../../../theme/styles/all';
-@import '../globals';
+@use '../../../theme/styles/theming';
+@use '../globals';
 
-$nb-enabled-themes: (corporate);
+theming.$nb-enabled-themes: (corporate);
 
-@include nb-install() {
-  @include nb-auth-global();
-};
+@include theming.nb-install() {
+  @include globals.nb-auth-global();
+}
