@@ -5,7 +5,7 @@
  */
 
 import { NgModule } from '@angular/core';
-import { RouterModule, Route} from '@angular/router';
+import { RouterModule, Route } from '@angular/router';
 import { ChatColorsComponent } from './chat-colors.component';
 import { ChatConversationShowcaseComponent } from './chat-conversation-showcase.component';
 import { ChatDropComponent } from './chat-drop.component';
@@ -14,6 +14,7 @@ import { ChatShowcaseComponent } from './chat-showcase.component';
 import { ChatSizesComponent } from './chat-sizes.component';
 import { ChatTestComponent } from './chat-test.component';
 import { ChatCustomMessageComponent } from './chat-custom-message.component';
+import { ChatTemplateTitleComponent } from './chat-template-title.component';
 
 const routes: Route[] = [
   {
@@ -48,10 +49,14 @@ const routes: Route[] = [
     path: 'chat-custom-message.component',
     component: ChatCustomMessageComponent,
   },
+  {
+    path: 'chat-template-title.component',
+    component: ChatTemplateTitleComponent,
+  },
 ];
 
 @NgModule({
-  imports: [ RouterModule.forChild(routes) ],
-  exports: [ RouterModule ],
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule],
 })
 export class ChatRoutingModule {}

@@ -10,11 +10,12 @@ In case you need to have more icons available, Nebular provides a `@nebular/eva-
 
 Install the pack:
 
- ```sh
- npm i eva-icons @nebular/eva-icons
- ```
+```sh
+npm i eva-icons @nebular/eva-icons
+```
 
 This command will install Eva Icons pack. Then register `NbEvaIconsModule` into your app module:
+
 ```ts
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 
@@ -24,9 +25,11 @@ import { NbEvaIconsModule } from '@nebular/eva-icons';
     NbEvaIconsModule,
   ],
 })
-export class AppModule { }  
+export class AppModule {}
 ```
+
 Import `NbIconModule` into your feature module where you need to show the icon:
+
 ```ts
 import { NbIconModule } from '@nebular/theme';
 
@@ -36,7 +39,7 @@ import { NbIconModule } from '@nebular/theme';
     NbIconModule,
   ],
 })
-export class PageModule { }
+export class PageModule {}
 ```
 
 Importing `NbEvaIconsModule` also sets the Eva pack as the default pack, which means you can render a Eva icon without specifying the pack implicitly:
@@ -66,8 +69,8 @@ Then simply register the pack using `NbIconLibraries` service in you `app.compon
 <nb-icon icon="star" pack="font-awesome"></nb-icon>
 ```
 
-
 Lastly, we can set this pack as the default and not specify it implicitly while using `<nb-icon>`:
+
 ```ts
   import { NbIconLibraries } from '@nebular/theme';
 
@@ -81,6 +84,16 @@ Now we can use `font-awesome` icons without specifying the pack:
 
 ```html
 <nb-icon icon="star"></nb-icon>
+```
+
+### Ligature font pack
+
+`registerFontPack` supports fonts with ligatures. To register ligature font pack add `ligature: true` property to the configuration parameter:
+
+```ts
+this.iconLibraries.registerFontPack('material-icons', {
+  ligature: true,
+});
 ```
 
 ## 3rd-party/Custom SVG Pack
@@ -104,7 +117,7 @@ And then use it as any other icon:
 
 ```html
 <nb-icon icon="facebook" pack="social-networks"></nb-icon>
-``` 
+```
 
 ## Related Articles
 

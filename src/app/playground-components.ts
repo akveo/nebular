@@ -2,7 +2,7 @@ export abstract class ComponentLink {
   path: string;
   name?: string;
   component?: string;
-  link?: any[] | string;
+  link?: string;
   children?: ComponentLink[];
 }
 
@@ -479,6 +479,12 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         link: '/chat/chat-custom-message.component',
         component: 'ChatCustomMessageComponent',
         name: 'Chat Custom Message',
+      },
+      {
+        path: 'chat-template-title.component',
+        link: '/chat/chat-template-title.component',
+        component: 'ChatTemplateTitleComponent',
+        name: 'Chat Template Title',
       },
     ],
   },
@@ -1350,6 +1356,12 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         link: '/tabset/tabset-disabled.component',
         component: 'TabsetDisabledComponent',
         name: 'Tabset Disabled',
+      },
+      {
+        path: 'tabset-template-title.component',
+        link: '/tabset/tabset-template-title.component',
+        component: 'TabsetTemplateTitleComponent',
+        name: 'Tabset Template Title',
       },
     ],
   },

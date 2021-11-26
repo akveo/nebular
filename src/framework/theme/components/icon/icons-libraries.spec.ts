@@ -108,6 +108,19 @@ describe('icons-library', () => {
     expect(icon.type).toEqual('font');
   });
 
+  it('should return ligature icon', () => {
+    iconsLibrary.registerFontPack('font-pack', { ligature: true, packClass: 'font', iconClassPrefix: 'fp' });
+    iconsLibrary.setDefaultPack('font-pack');
+
+    const icon = iconsLibrary.getFontIcon('home');
+
+    expect(icon.icon.getContent()).toEqual('home');
+    expect(icon.icon.getClasses()).toEqual(['font', 'fp-home']);
+    expect(icon.name).toEqual('home');
+    expect(icon.pack).toEqual('font-pack');
+    expect(icon.type).toEqual('font');
+  });
+
   it('should return icon', () => {
     iconsLibrary.registerSvgPack('super-pack', { home: '<svg><rect></rect></svg>', gear: '<svg></svg>' });
     iconsLibrary.registerFontPack('font-pack', { packClass: 'font', iconClassPrefix: 'fp' });

@@ -912,7 +912,7 @@ export class NbSelectComponent
   }
 
   show() {
-    if (this.isHidden) {
+    if (this.shouldShow()) {
       this.attachToOverlay();
 
       this.positionStrategy.positionChange.pipe(take(1), takeUntil(this.destroy$)).subscribe(() => {
@@ -1218,6 +1218,10 @@ export class NbSelectComponent
       corresponding.select();
       this.selectionModel.push(corresponding);
     }
+  }
+
+  protected shouldShow(): boolean {
+    return this.isHidden && this.options?.length > 0;
   }
 
   /**
