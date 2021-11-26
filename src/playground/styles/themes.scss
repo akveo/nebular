@@ -1,5 +1,5 @@
 @forward '../../framework/theme/styles/theming';
-@use '../../framework/theme/styles/theming';
+@use '../../framework/theme/styles/theming' as *;
 @use '../../framework/theme/styles/themes';
 
-theming.$nb-enable-css-custom-properties: false;
+$nb-enable-css-custom-properties: false;
