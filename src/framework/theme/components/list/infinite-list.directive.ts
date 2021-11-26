@@ -10,8 +10,8 @@ import {
   ContentChildren,
   QueryList,
 } from '@angular/core';
-import { Observable, forkJoin, of as observableOf, interval, timer, Subject } from 'rxjs';
-import { filter, switchMap, map, takeUntil, take, throttleTime } from 'rxjs/operators';
+import { Observable, forkJoin, of as observableOf, interval, timer, Subject, merge } from 'rxjs';
+import { filter, switchMap, map, takeUntil, take, throttle } from 'rxjs/operators';
 import { convertToBoolProperty, NbBooleanInput } from '../helpers';
 import { NbLayoutScrollService } from '../../services/scroll.service';
 import { NbLayoutRulerService } from '../../services/ruler.service';
@@ -61,6 +61,7 @@ export class NbInfiniteListDirective implements AfterViewInit, OnDestroy {
   private get elementScroll() {
     return !this.windowScroll;
   }
+  private elementScroll$ = new Subject();
 
   /**
    * Threshold after which event load more event will be emited.
@@ -101,7 +102,7 @@ export class NbInfiniteListDirective implements AfterViewInit, OnDestroy {
   @HostListener('scroll')
   onElementScroll() {
     if (this.elementScroll) {
-      this.checkPosition(this.elementRef.nativeElement);
+      this.elementScroll$.next();
     }
   }
 
@@ -114,10 +115,9 @@ export class NbInfiniteListDirective implements AfterViewInit, OnDestroy {
   ) {}
 
   ngAfterViewInit() {
-    this.scrollService
-      .onScroll()
+    merge(this.scrollService.onScroll(), this.elementScroll$)
       .pipe(
-        filter(() => this.windowScroll),
+        throttle(() => interval(this.throttleTime)),
         switchMap(() => this.getContainerDimensions()),
         takeUntil(this.destroy$),
       )
@@ -169,11 +169,10 @@ export class NbInfiniteListDirective implements AfterViewInit, OnDestroy {
   private getContainerDimensions(): Observable<NbScrollableContainerDimensions> {
     if (this.elementScroll) {
       const { scrollTop, scrollHeight, clientHeight } = this.elementRef.nativeElement;
-      return observableOf({ scrollTop, scrollHeight, clientHeight }).pipe(throttleTime(this.throttleTime));
+      return observableOf({ scrollTop, scrollHeight, clientHeight });
     }
 
     return forkJoin([this.scrollService.getPosition(), this.dimensionsService.getDimensions()]).pipe(
-      throttleTime(this.throttleTime),
       map(([scrollPosition, dimensions]) => ({
         scrollTop: scrollPosition.y,
         scrollHeight: dimensions.scrollHeight,
