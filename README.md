@@ -13,7 +13,7 @@ Nebular is a customizable Angular 10 UI Library with a focus on beautiful design
 - **Configurable options** - colors, sizes, appearances, shapes, and other useful settings
 - **3 Auth strategies and Security** - authentication and security layer easily configurable for your API
 - **Powerful theming engine** with custom CSS properties mode
-- **SVG Eva Icons support**  - 480+ general purpose icons
+- **SVG Eva Icons support** - 480+ general purpose icons
 
 ## Quick Start
 
@@ -29,10 +29,7 @@ If you want to have more control over setup process you can [use manual setup gu
 
 ## Browser Support
 
-| [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/chrome/chrome_48x48.png" alt="Chrome" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Chrome | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/firefox/firefox_48x48.png" alt="Firefox" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Firefox | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/edge/edge_48x48.png" alt="IE / Edge" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>IE / Edge | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/safari/safari_48x48.png" alt="Safari" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Safari | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/opera/opera_48x48.png" alt="Opera" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Opera |
-| --- | --- | --- | --- | --- |
-| last 2 versions | last 2 versions | IE11, Edge | last 2 versions | last 2 versions 
-
+Nebular supports most recent browsers. Browser support list can be found <a href="https://angular.io/guide/browser-support" target="_blank">here</a>.
 
 ## Starters
 
@@ -41,17 +38,21 @@ If you want to have more control over setup process you can [use manual setup gu
 - [Backend Bundles](https://store.akveo.com/pages/all-collections?utm_campaign=nebular%20-%20home%20-%20nebular%20github%20readme&utm_source=nebular&utm_medium=banner&utm_content=nebular_readme_image) - easy way to integrate ngx-admin with any backend (PHP, .Net, .Net Core, Java etc. )
 
 ## UI Bakery
+
 Try low-code internal tool builder for free
 <a href="https://uibakery.io/?utm_source=github&utm_medium=clicks&utm_campaign=banner"><img src="https://user-images.githubusercontent.com/6151971/125071660-41f84900-e0c2-11eb-882a-0c675eb1e5e3.png"></a>
 
 ## License
+
 [MIT](LICENSE.txt) license.
 
 ## More from Akveo
+
 - [Eva Icons](https://github.com/akveo/eva-icons) - 480+ beautiful Open Source icons
 - [Akveo templates](https://www.akveo.com/templates?utm_campaign=services%20-%20github%20-%20templates&utm_source=nebular&utm_medium=referral&utm_content=nebular%20github%20readme%20more%20from%20akveo%20link) - 10+ Ready-to-use apps templates to speed up your apps developments
 
 ## How can I support the developers?
+
 - Star our GitHub repo :star:
 - Create pull requests, submit bugs, suggest new features or documentation updates :wrench:
 - Read us on [Medium](https://medium.com/akveo-engineering)
@@ -59,5 +60,6 @@ Try low-code internal tool builder for free
 - Like our page on [Facebook](https://www.facebook.com/akveo/) :thumbsup:
 
 ## From Developers
+
 Made with :heart: by [Akveo team](https://www.akveo.com?utm_campaign=service%20-%20akveo%20website%20-%20nebular%20github%20readme%20-%20traffic&utm_source=nebular&utm_medium=referral&utm_content=github_readme). Follow us on [Twitter](https://twitter.com/akveo_inc) to get the latest news first!
 We're always happy to receive your feedback!
