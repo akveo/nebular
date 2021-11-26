@@ -119,7 +119,6 @@ export class NbInfiniteListDirective implements AfterViewInit, OnDestroy {
       .pipe(
         filter(() => this.windowScroll),
         switchMap(() => this.getContainerDimensions()),
-        throttleTime(this.throttleTime),
         takeUntil(this.destroy$),
       )
       .subscribe((dimensions) => this.checkPosition(dimensions));
@@ -170,10 +169,11 @@ export class NbInfiniteListDirective implements AfterViewInit, OnDestroy {
   private getContainerDimensions(): Observable<NbScrollableContainerDimensions> {
     if (this.elementScroll) {
       const { scrollTop, scrollHeight, clientHeight } = this.elementRef.nativeElement;
-      return observableOf({ scrollTop, scrollHeight, clientHeight });
+      return observableOf({ scrollTop, scrollHeight, clientHeight }).pipe(throttleTime(this.throttleTime));
     }
 
     return forkJoin([this.scrollService.getPosition(), this.dimensionsService.getDimensions()]).pipe(
+      throttleTime(this.throttleTime),
       map(([scrollPosition, dimensions]) => ({
         scrollTop: scrollPosition.y,
         scrollHeight: dimensions.scrollHeight,
