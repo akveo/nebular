@@ -5,8 +5,8 @@ This mode comes in handy when you need to have multiple themes and be able to ch
 <div class="note note-info section-end">
   <div class="note-title">Setup Required</div>
   <div class="note-body">
-    This guide assumes you already enabled [Theme Customization](docs/design-system/enable-customizable-theme)
-    and reviewed [Eva Design System Theme](docs/design-system/eva-design-system-theme) rules.
+    This guide assumes you already enabled <a href="docs/design-system/enable-customizable-theme">Theme Customization</a> 
+    and reviewed <a href="docs/design-system/design-system-theme">Eva Design System Theme</a> rules.
   </div>
 </div>
 <hr>
