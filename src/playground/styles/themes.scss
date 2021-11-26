@@ -1,4 +1,5 @@
-@import '../../framework/theme/styles/theming';
-@import '../../framework/theme/styles/themes';
+@forward '../../framework/theme/styles/theming';
+@use '../../framework/theme/styles/theming';
+@use '../../framework/theme/styles/themes';
 
-$nb-enable-css-custom-properties: false;
+theming.$nb-enable-css-custom-properties: false;
