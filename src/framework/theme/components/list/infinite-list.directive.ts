@@ -70,7 +70,7 @@ export class NbInfiniteListDirective implements AfterViewInit, OnDestroy {
   threshold: number;
 
   /**
-   * Ignores subsequent source values for specified duration after scroll emits first value.
+   * Prevent subsequent bottom/topThreshold emissions for specified duration after emitting once.
    * In milliseconds.
    */
   @Input()
