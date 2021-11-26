@@ -4,6 +4,8 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
+@use '../../theme/styles/theming' as *;
+
 @mixin b-btn-size($size) {
   font-size: nb-theme(button-#{$size}-text-font-size);
   line-height: nb-theme(button-#{$size}-text-line-height);

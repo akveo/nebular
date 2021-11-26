@@ -4,11 +4,11 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-@import '../../../theme/styles/all';
-@import '../globals';
+@use '../../../theme/styles/theming';
+@use '../globals';
 
-$nb-enabled-themes: (dark);
+theming.$nb-enabled-themes: (dark);
 
-@include nb-install() {
-  @include nb-bootstrap-global();
-};
+@include theming.nb-install() {
+  @include globals.nb-bootstrap-global();
+}
