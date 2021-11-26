@@ -5,9 +5,9 @@
  */
 
 @use '../src/framework/theme/styles/theming-variables';
+theming-variables.$nb-theme-export-mode: true;
 @use '../src/framework/theme/styles/theming';
 @use '../src/framework/theme/styles/themes';
 @use '../src/framework/theme/styles/themes/mapping';
-theming-variables.$nb-theme-export-mode: true;
 
 $v: export('output.json', theming-variables.$nb-themes-export, mapping.$eva-mapping);
