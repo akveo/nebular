@@ -12,12 +12,18 @@ $nb-processed-theme: ();
 $nb-theme-export-mode: false !default;
 $nb-themes-export: ();
 $nb-custom-statuses: () !default;
+$layout-window-mode-max-width: 1920px !default;
+$tabset-tab-text-hide-breakpoint: 36rem !default;
+$route-tabset-tab-text-hide-breakpoint: 36rem !default;
 
 // public variables
 $nb-enable-css-custom-properties: false !default !global;
 $nb-enabled-themes: () !global;
 $nb-themes: () !global;
 $nb-custom-statuses: () !default !global;
+$layout-window-mode-max-width: 1920px !default !global;
+$tabset-tab-text-hide-breakpoint: 36rem !default !global;
+$route-tabset-tab-text-hide-breakpoint: 36rem !default !global;
 
 // private variables
 $nb-theme-process-mode: 'lazy-process' !global;

@@ -97,7 +97,7 @@
     }
 
     .tab.responsive {
-      @media screen and (max-width: nb-theme(tabset-tab-text-hide-breakpoint)) {
+      @media screen and (max-width: $tabset-tab-text-hide-breakpoint) {
         .tab-text {
           display: none;
         }

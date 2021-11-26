@@ -86,7 +86,7 @@
     }
 
     .route-tab.responsive {
-      @media screen and (max-width: nb-theme(route-tabset-tab-text-hide-breakpoint)) {
+      @media screen and (max-width: $route-tabset-tab-text-hide-breakpoint) {
         .tab-text {
           display: none;
         }
