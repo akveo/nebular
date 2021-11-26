@@ -7,7 +7,7 @@
 @use 'sass:list';
 @use 'theming/get-value';
 
-@mixin nb-scrollbars($fg, $bg, $size, $border-radius: $size * 0.5) {
+@mixin nb-scrollbars($fg, $bg, $size, $border-radius: calc(#{$size} * 0.5)) {
   &::-webkit-scrollbar {
     width: $size;
     height: $size;

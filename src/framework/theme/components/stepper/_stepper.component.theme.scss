@@ -11,7 +11,7 @@
     &.horizontal {
       .header .step {
         width: nb-theme(stepper-step-index-width);
-        margin: 0 nb-theme(stepper-step-index-width) * 0.5;
+        margin: 0 calc(#{nb-theme(stepper-step-index-width)} * 0.5);
       }
 
       .header .connector {
