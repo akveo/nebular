@@ -17,6 +17,7 @@ const CONTENT_PADDING = 20;
 const CONTENT_HEIGHT = 10000 + CONTENT_PADDING;
 const ELEMENT_HEIGHT = 500;
 const THRESHOLD = 200;
+const THROTTLE_TIME = 0;
 
 let fixture: ComponentFixture<ScrollTestComponent>;
 let testComponent: ScrollTestComponent;
@@ -33,6 +34,7 @@ let infiniteListDirective: NbInfiniteListDirective;
           class="scroller"
           [class.element-scroll]="!listenWindowScroll"
           nbInfiniteList
+          [throttleTime]="throttleTime"
           [threshold]="threshold"
           [listenWindowScroll]="listenWindowScroll"
           (bottomThreshold)="bottomThreshold()"
@@ -68,6 +70,7 @@ class ScrollTestComponent {
   listenWindowScroll = false;
   threshold = THRESHOLD;
   withScroll = false;
+  throttleTime = THROTTLE_TIME;
 
   bottomThreshold() {}
   topThreshold() {}
@@ -278,5 +281,97 @@ describe('Directive: NbScrollDirective', () => {
     layoutElement.dispatchEvent(new Event('scroll'));
     tick(infiniteListDirective.throttleTime);
     expect(tresholdSpy).toHaveBeenCalledTimes(1);
+  }));
+
+  it('should prevent subsequent bottomThreshold emissions for throttleTime duration (window scroll)', fakeAsync(() => {
+    const { documentElement } = document;
+
+    testComponent.listenWindowScroll = true;
+    testComponent.throttleTime = 250;
+    fixture.detectChanges();
+
+    const thresholdSpy = spyOn(testComponent, 'bottomThreshold');
+
+    documentElement.scrollTop = CONTENT_HEIGHT - THRESHOLD / 2;
+
+    window.dispatchEvent(new Event('scroll'));
+    tick(50);
+    window.dispatchEvent(new Event('scroll'));
+    tick(50);
+    window.dispatchEvent(new Event('scroll'));
+    tick(50);
+    window.dispatchEvent(new Event('scroll'));
+    tick(50);
+    window.dispatchEvent(new Event('scroll'));
+    tick(50);
+    expect(thresholdSpy).toHaveBeenCalledTimes(1);
+  }));
+
+  it('should prevent subsequent topThreshold emissions for throttleTime duration (window scroll)', fakeAsync(() => {
+    const { documentElement } = document;
+    testComponent.listenWindowScroll = true;
+    testComponent.throttleTime = 250;
+    fixture.detectChanges();
+
+    const thresholdSpy = spyOn(testComponent, 'topThreshold');
+
+    documentElement.scrollTop = THRESHOLD + 1;
+    window.dispatchEvent(new Event('scroll'));
+    documentElement.scrollTop = THRESHOLD - 1;
+
+    window.dispatchEvent(new Event('scroll'));
+    tick(50);
+    window.dispatchEvent(new Event('scroll'));
+    tick(50);
+    window.dispatchEvent(new Event('scroll'));
+    tick(50);
+    window.dispatchEvent(new Event('scroll'));
+    tick(50);
+    window.dispatchEvent(new Event('scroll'));
+    tick(50);
+    expect(thresholdSpy).toHaveBeenCalledTimes(1);
+  }));
+
+  it('should prevent subsequent bottomThreshold emissions for throttleTime duration (element scroll)', fakeAsync(() => {
+    const scrollingNativeElement = listElementRef.nativeElement;
+    testComponent.throttleTime = 250;
+    fixture.detectChanges();
+
+    const thresholdSpy = spyOn(testComponent, 'bottomThreshold');
+
+    scrollingNativeElement.scrollTop = CONTENT_HEIGHT - THRESHOLD / 2;
+
+    window.dispatchEvent(new Event('scroll'));
+    tick(50);
+    window.dispatchEvent(new Event('scroll'));
+    tick(50);
+    window.dispatchEvent(new Event('scroll'));
+    tick(50);
+    window.dispatchEvent(new Event('scroll'));
+    tick(50);
+    window.dispatchEvent(new Event('scroll'));
+    tick(50);
+    expect(thresholdSpy).toHaveBeenCalledTimes(1);
+  }));
+
+  it('should prevent subsequent topThreshold emissions for throttleTime duration (element scroll)', fakeAsync(() => {
+    const scrollingElement = listElementRef.nativeElement;
+    const thresholdSpy = spyOn(testComponent, 'topThreshold');
+
+    scrollingElement.scrollTop = THRESHOLD + 1;
+    window.dispatchEvent(new Event('scroll'));
+    scrollingElement.scrollTop = THRESHOLD - 1;
+
+    window.dispatchEvent(new Event('scroll'));
+    tick(50);
+    window.dispatchEvent(new Event('scroll'));
+    tick(50);
+    window.dispatchEvent(new Event('scroll'));
+    tick(50);
+    window.dispatchEvent(new Event('scroll'));
+    tick(50);
+    window.dispatchEvent(new Event('scroll'));
+    tick(50);
+    expect(thresholdSpy).toHaveBeenCalledTimes(1);
   }));
 });
