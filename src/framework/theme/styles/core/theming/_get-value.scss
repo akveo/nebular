@@ -53,7 +53,7 @@
     @if (theming-variables.$nb-theme-process-mode == 'lazy-process') {
       theming-variables.$nb-theme-name: get-current-theme-name();
 
-      $theme: register.nb-get-registered-theme($nb-theme-name);
+      $theme: register.nb-get-registered-theme(theming-variables.$nb-theme-name);
       $value: nb-deep-find-value($theme, $key, map.get($theme, $key));
     }
   }
