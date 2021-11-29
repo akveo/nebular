@@ -35,7 +35,6 @@ import { Subject } from 'rxjs';
   `,
 })
 export class NbAuthComponent implements OnDestroy {
-
   private destroy$ = new Subject<void>();
 
   subscription: any;
@@ -45,8 +44,8 @@ export class NbAuthComponent implements OnDestroy {
 
   // showcase of how to use the onAuthenticationChange method
   constructor(protected auth: NbAuthService, protected location: Location) {
-
-    this.subscription = auth.onAuthenticationChange()
+    this.subscription = auth
+      .onAuthenticationChange()
       .pipe(takeUntil(this.destroy$))
       .subscribe((authenticated: boolean) => {
         this.authenticated = authenticated;

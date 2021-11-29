@@ -1,19 +1,19 @@
 import { NbAuthToken } from './token/token';
 
 export class NbAuthResult {
-
   protected token: NbAuthToken;
   protected errors: string[] = [];
   protected messages: string[] = [];
 
   // TODO: better pass object
-  constructor(protected success: boolean,
-              protected response?: any,
-              protected redirect?: any,
-              errors?: any,
-              messages?: any,
-              token: NbAuthToken = null) {
-
+  constructor(
+    protected success: boolean,
+    protected response?: any,
+    protected redirect?: any,
+    errors?: any,
+    messages?: any,
+    token: NbAuthToken = null,
+  ) {
     this.errors = this.errors.concat([errors]);
     if (errors instanceof Array) {
       this.errors = errors;
@@ -40,11 +40,11 @@ export class NbAuthResult {
   }
 
   getErrors(): string[] {
-    return this.errors.filter(val => !!val);
+    return this.errors.filter((val) => !!val);
   }
 
   getMessages(): string[] {
-    return this.messages.filter(val => !!val);
+    return this.messages.filter((val) => !!val);
   }
 
   isSuccess(): boolean {

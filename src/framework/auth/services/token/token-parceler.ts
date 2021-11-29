@@ -4,10 +4,10 @@ import { nbAuthCreateToken, NbAuthToken, NbAuthTokenClass } from './token';
 import { NB_AUTH_TOKENS } from '../../auth.options';
 
 export interface NbTokenPack {
-  name: string,
-  ownerStrategyName: string,
-  createdAt: Number,
-  value: string,
+  name: string;
+  ownerStrategyName: string;
+  createdAt: Number;
+  value: string;
 }
 
 export const NB_AUTH_FALLBACK_TOKEN = new InjectionToken<NbAuthTokenClass>('Nebular Auth Options');
@@ -17,10 +17,10 @@ export const NB_AUTH_FALLBACK_TOKEN = new InjectionToken<NbAuthTokenClass>('Nebu
  */
 @Injectable()
 export class NbAuthTokenParceler {
-
-  constructor(@Inject(NB_AUTH_FALLBACK_TOKEN) private fallbackClass: NbAuthTokenClass,
-              @Inject(NB_AUTH_TOKENS) private tokenClasses: NbAuthTokenClass[]) {
-  }
+  constructor(
+    @Inject(NB_AUTH_FALLBACK_TOKEN) private fallbackClass: NbAuthTokenClass,
+    @Inject(NB_AUTH_TOKENS) private tokenClasses: NbAuthTokenClass[],
+  ) {}
 
   wrap(token: NbAuthToken): string {
     return JSON.stringify({
@@ -46,7 +46,6 @@ export class NbAuthTokenParceler {
     }
 
     return nbAuthCreateToken(tokenClass, tokenValue, tokenOwnerStrategyName, tokenCreatedAt);
-
   }
 
   // TODO: this could be moved to a separate token registry
@@ -57,7 +56,7 @@ export class NbAuthTokenParceler {
   protected parseTokenPack(value): NbTokenPack {
     try {
       return JSON.parse(value);
-    } catch (e) { }
+    } catch (e) {}
     return null;
   }
 }

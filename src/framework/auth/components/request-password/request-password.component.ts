@@ -18,7 +18,6 @@ import { NbAuthResult } from '../../services/auth-result';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NbRequestPasswordComponent {
-
   redirectDelay: number = 0;
   showMessages: any = {};
   strategy: string = '';
@@ -28,11 +27,12 @@ export class NbRequestPasswordComponent {
   messages: string[] = [];
   user: any = {};
 
-  constructor(protected service: NbAuthService,
-              @Inject(NB_AUTH_OPTIONS) protected options = {},
-              protected cd: ChangeDetectorRef,
-              protected router: Router) {
-
+  constructor(
+    protected service: NbAuthService,
+    @Inject(NB_AUTH_OPTIONS) protected options = {},
+    protected cd: ChangeDetectorRef,
+    protected router: Router,
+  ) {
     this.redirectDelay = this.getConfigValue('forms.requestPassword.redirectDelay');
     this.showMessages = this.getConfigValue('forms.requestPassword.showMessages');
     this.strategy = this.getConfigValue('forms.requestPassword.strategy');

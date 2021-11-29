@@ -55,7 +55,7 @@ export class NbOAuth2AuthStrategyOptions extends NbAuthStrategyOptions {
     redirectUri?: string;
     scope?: string; // Used only with 'password' grantType
     requireValidToken?: boolean;
-    class: NbAuthTokenClass,
+    class: NbAuthTokenClass;
   } = {
     endpoint: 'token',
     grantType: NbOAuth2GrantType.AUTHORIZATION_CODE,

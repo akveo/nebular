@@ -50,22 +50,20 @@ import { deepExtend } from './helpers';
 
 export function nbStrategiesFactory(options: NbAuthOptions, injector: Injector): NbAuthStrategy[] {
   const strategies = [];
-  options.strategies
-    .forEach(([strategyClass, strategyOptions]: [NbAuthStrategyClass, NbAuthStrategyOptions]) => {
-      const strategy: NbAuthStrategy = injector.get(strategyClass);
-      strategy.setOptions(strategyOptions);
+  options.strategies.forEach(([strategyClass, strategyOptions]: [NbAuthStrategyClass, NbAuthStrategyOptions]) => {
+    const strategy: NbAuthStrategy = injector.get(strategyClass);
+    strategy.setOptions(strategyOptions);
 
-      strategies.push(strategy);
-    });
+    strategies.push(strategy);
+  });
   return strategies;
 }
 
 export function nbTokensFactory(strategies: NbAuthStrategy[]): NbAuthTokenClass[] {
   const tokens = [];
-  strategies
-    .forEach((strategy: NbAuthStrategy) => {
-      tokens.push(strategy.getOption('token.class'));
-    });
+  strategies.forEach((strategy: NbAuthStrategy) => {
+    tokens.push(strategy.getOption('token.class'));
+  });
   return tokens;
 }
 

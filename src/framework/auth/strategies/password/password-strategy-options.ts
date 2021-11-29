@@ -27,14 +27,14 @@ export interface NbPasswordStrategyReset extends NbPasswordStrategyModule {
 }
 
 export interface NbPasswordStrategyToken {
-  class?: NbAuthTokenClass,
-  key?: string,
-  getter?: Function,
+  class?: NbAuthTokenClass;
+  key?: string;
+  getter?: Function;
 }
 
 export interface NbPasswordStrategyMessage {
-  key?: string,
-  getter?: Function,
+  key?: string;
+  getter?: Function;
 }
 
 export class NbPasswordAuthStrategyOptions extends NbAuthStrategyOptions {
@@ -109,26 +109,18 @@ export class NbPasswordAuthStrategyOptions extends NbAuthStrategyOptions {
   token?: NbPasswordStrategyToken = {
     class: NbAuthSimpleToken,
     key: 'data.token',
-    getter: (module: string, res: HttpResponse<Object>, options: NbPasswordAuthStrategyOptions) => getDeepFromObject(
-      res.body,
-      options.token.key,
-    ),
+    getter: (module: string, res: HttpResponse<Object>, options: NbPasswordAuthStrategyOptions) =>
+      getDeepFromObject(res.body, options.token.key),
   };
   errors?: NbPasswordStrategyMessage = {
     key: 'data.errors',
-    getter: (module: string, res: HttpErrorResponse, options: NbPasswordAuthStrategyOptions) => getDeepFromObject(
-      res.error,
-      options.errors.key,
-      options[module].defaultErrors,
-    ),
+    getter: (module: string, res: HttpErrorResponse, options: NbPasswordAuthStrategyOptions) =>
+      getDeepFromObject(res.error, options.errors.key, options[module].defaultErrors),
   };
   messages?: NbPasswordStrategyMessage = {
     key: 'data.messages',
-    getter: (module: string, res: HttpResponse<Object>, options: NbPasswordAuthStrategyOptions) => getDeepFromObject(
-      res.body,
-      options.messages.key,
-      options[module].defaultMessages,
-    ),
+    getter: (module: string, res: HttpResponse<Object>, options: NbPasswordAuthStrategyOptions) =>
+      getDeepFromObject(res.body, options.messages.key, options[module].defaultMessages),
   };
   validation?: {
     password?: {

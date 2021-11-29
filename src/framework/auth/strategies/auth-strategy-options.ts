@@ -14,5 +14,5 @@ export interface NbStrategyToken {
 export class NbAuthStrategyOptions {
   name: string;
   token?: NbStrategyToken;
-  headers?: HttpHeaders | { [header: string]: string | string[]; };
+  headers?: HttpHeaders | { [header: string]: string | string[] };
 }
