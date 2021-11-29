@@ -5,6 +5,7 @@
  */
 
 import {
+  AfterViewInit,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
@@ -16,7 +17,7 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
-import { combineLatest, Observable, Subject } from 'rxjs';
+import { combineLatest, fromEvent, Observable, Subject } from 'rxjs';
 import { takeUntil, filter, map, startWith } from 'rxjs/operators';
 
 import { convertToBoolProperty, NbBooleanInput } from '../helpers';
@@ -35,12 +36,9 @@ export type NbSidebarResponsiveState = 'mobile' | 'tablet' | 'pc';
  */
 @Component({
   selector: 'nb-sidebar-header',
-  template: `
-    <ng-content></ng-content>
-  `,
+  template: ` <ng-content></ng-content> `,
 })
-export class NbSidebarHeaderComponent {
-}
+export class NbSidebarHeaderComponent {}
 
 /**
  * Sidebar footer container.
@@ -50,12 +48,9 @@ export class NbSidebarHeaderComponent {
  */
 @Component({
   selector: 'nb-sidebar-footer',
-  template: `
-    <ng-content></ng-content>
-  `,
+  template: ` <ng-content></ng-content> `,
 })
-export class NbSidebarFooterComponent {
-}
+export class NbSidebarFooterComponent {}
 
 /**
  * Layout sidebar component.
@@ -133,10 +128,9 @@ export class NbSidebarFooterComponent {
   selector: 'nb-sidebar',
   styleUrls: ['./sidebar.component.scss'],
   template: `
-    <div class="main-container"
-         [class.main-container-fixed]="containerFixedValue">
+    <div class="main-container" [class.main-container-fixed]="containerFixedValue">
       <ng-content select="nb-sidebar-header"></ng-content>
-      <div class="scrollable" (click)="onClick($event)">
+      <div class="scrollable" id="scrollable">
         <ng-content></ng-content>
       </div>
       <ng-content select="nb-sidebar-footer"></ng-content>
@@ -144,8 +138,7 @@ export class NbSidebarFooterComponent {
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NbSidebarComponent implements OnInit, OnDestroy {
-
+export class NbSidebarComponent implements OnInit, OnDestroy, AfterViewInit {
   protected readonly responsiveValueChange$: Subject<boolean> = new Subject<boolean>();
   protected responsiveState: NbSidebarResponsiveState = 'pc';
 
@@ -319,28 +312,32 @@ export class NbSidebarComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.sidebarService.onToggle()
+    this.sidebarService
+      .onToggle()
       .pipe(
         filter(({ tag }) => !this.tag || this.tag === tag),
         takeUntil(this.destroy$),
       )
       .subscribe(({ compact }) => this.toggle(compact));
 
-    this.sidebarService.onExpand()
+    this.sidebarService
+      .onExpand()
       .pipe(
         filter(({ tag }) => !this.tag || this.tag === tag),
         takeUntil(this.destroy$),
       )
       .subscribe(() => this.expand());
 
-    this.sidebarService.onCollapse()
+    this.sidebarService
+      .onCollapse()
       .pipe(
         filter(({ tag }) => !this.tag || this.tag === tag),
         takeUntil(this.destroy$),
       )
       .subscribe(() => this.collapse());
 
-    this.sidebarService.onCompact()
+    this.sidebarService
+      .onCompact()
       .pipe(
         filter(({ tag }) => !this.tag || this.tag === tag),
         takeUntil(this.destroy$),
@@ -371,22 +368,31 @@ export class NbSidebarComponent implements OnInit, OnDestroy {
     this.subscribeToMediaQueryChange();
   }
 
+  ngAfterViewInit() {
+    // TODO: this is more of a workaround, should be a better way to make components communicate to each other
+    fromEvent(document.getElementById('scrollable'), 'click', { capture: true }).subscribe((event) => {
+      const menu = this.element.nativeElement.querySelector('nb-menu');
+
+      if (menu && menu.contains(event.target)) {
+        const link = this.getMenuLink(event.target as HTMLElement);
+
+        if (
+          link &&
+          link.nextElementSibling &&
+          link.nextElementSibling.classList.contains('menu-items') &&
+          this.state !== 'expanded'
+        ) {
+          this.sidebarService.expand(this.tag);
+          event.preventDefault();
+          event.stopPropagation();
+        }
+      }
+    });
+  }
+
   ngOnDestroy() {
     this.destroy$.next();
     this.destroy$.complete();
-  }
-
-  // TODO: this is more of a workaround, should be a better way to make components communicate to each other
-  onClick(event): void {
-    const menu = this.element.nativeElement.querySelector('nb-menu');
-
-    if (menu && menu.contains(event.target)) {
-      const link = this.getMenuLink(event.target);
-
-      if (link && link.nextElementSibling && link.nextElementSibling.classList.contains('menu-items')) {
-        this.sidebarService.expand(this.tag);
-      }
-    }
   }
 
   /**
@@ -446,7 +452,6 @@ export class NbSidebarComponent implements OnInit, OnDestroy {
         takeUntil(this.destroy$),
       )
       .subscribe(([prev, current]: [NbMediaBreakpoint, NbMediaBreakpoint]) => {
-
         const isCollapsed = this.collapsedBreakpoints.includes(current.name);
         const isCompacted = this.compactedBreakpoints.includes(current.name);
 
