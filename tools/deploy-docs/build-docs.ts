@@ -7,8 +7,8 @@ import { runCommand } from './run-command';
 import { log } from './log';
 
 import { REPO_URL, OUT_DIR, REPO_OWNER, REPO_NAME } from './config';
-import { promisify } from 'util';
-import { exec } from 'child_process';
+import { getStdout } from './get-stdout';
+
 const WORK_DIR = join(process.cwd(), '../_DOCS_BUILD_WORK_DIR_');
 const MASTER_BRANCH_DIR = join(WORK_DIR, 'MASTER');
 const DOCS_VERSIONS_PATH = join(MASTER_BRANCH_DIR, 'docs/versions.json');
@@ -34,12 +34,11 @@ export interface Version {
   log(`Cloning ${REPO_URL} into ${MASTER_BRANCH_DIR}`);
   await runCommand(`git clone ${REPO_URL} ${MASTER_BRANCH_DIR}`, { cwd: WORK_DIR });
 
-  log('Checkout gh-pages to check for existing');
+  log('Get build versions from gh-pages branch');
   await copyToBuildDir(MASTER_BRANCH_DIR, GH_PAGES_DIR);
   await checkoutVersion('gh-pages', GH_PAGES_DIR);
-
-  log('Search for commit hash files in gh-pages');
   const builtVersions: { hash; path }[] = await checkBuiltVersions();
+  log(`Built versions in gh-pages: ${builtVersions}`);
 
   log('Reading versions configuration');
   const config: Version[] = await import(DOCS_VERSIONS_PATH);
@@ -96,8 +95,6 @@ async function checkBuiltVersions() {
     }
   }
 
-  console.log('Built versions in gh-pages:', builtVersions);
-
   return builtVersions;
 }
 
@@ -119,18 +116,18 @@ async function prepareVersion(version: Version, distDir: string, ghspaScript: st
   await copyToBuildDir(MASTER_BRANCH_DIR, projectDir);
   await checkoutVersion(version.checkoutTarget, projectDir);
 
-  const { stdout: currentHash } = await promisify(exec)('git rev-parse HEAD', { cwd: projectDir });
+  const currentHash = getStdout('git rev-parse HEAD', { cwd: projectDir, showLog: true });
 
-  const correspondingVersion = builtVersions.find((item) => currentHash === item.hash);
+  const existInGhPages = builtVersions.find((item) => currentHash === item.hash);
 
-  if (correspondingVersion) {
-    await copyExistingDocs(version, correspondingVersion.path, distDir);
+  if (existInGhPages) {
+    await copyFromGhPages(version, existInGhPages.path, distDir);
   } else {
     await runCommand('npm ci', { cwd: projectDir });
     await addVersionNameToPackageJson(version.name, join(projectDir, 'package.json'));
     await addVersionTs(version, join(projectDir, 'version.ts'));
     await buildDocsApp(projectDir, version.path);
-    await createFileWithCommitHash(join(OUT_DIR, FILE_WITH_HASH), projectDir);
+    await addCommitHash(join(OUT_DIR, FILE_WITH_HASH), projectDir);
     await copy(join(projectDir, OUT_DIR), distDir);
     await outputFile(join(distDir, 'assets/ghspa.js'), ghspaScript);
 
@@ -138,7 +135,7 @@ async function prepareVersion(version: Version, distDir: string, ghspaScript: st
   }
 }
 
-async function copyExistingDocs(version, correspondingVersionPath, distDir) {
+async function copyFromGhPages(version, correspondingVersionPath, distDir) {
   log(`Copying existing docs ${version.name} from ${correspondingVersionPath}`);
 
   const files = await readdir(correspondingVersionPath);
@@ -178,7 +175,7 @@ async function addVersionTs(version: Version, versionTsPath: string) {
   await writeFile(versionTsPath, source, 'utf8');
 }
 
-async function createFileWithCommitHash(path: string, projectDir: string) {
+async function addCommitHash(path: string, projectDir: string) {
   await runCommand(`git rev-parse HEAD > ${path}`, { cwd: projectDir });
 }
 
