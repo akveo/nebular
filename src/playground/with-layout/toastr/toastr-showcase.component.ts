@@ -2,7 +2,6 @@ import { Component, HostBinding } from '@angular/core';
 import { NbGlobalPhysicalPosition, NbToastrService } from '@nebular/theme';
 
 @Component({
-  selector: 'npg-toastr-showcase',
   template: `
     <button nbButton (click)="showToast(NbGlobalPhysicalPosition.TOP_RIGHT, 'success')">Top Right</button>
     <button nbButton (click)="showToast(NbGlobalPhysicalPosition.BOTTOM_LEFT, 'info')">Bottom left</button>
