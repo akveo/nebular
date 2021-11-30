@@ -9,11 +9,10 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { NbWindowRef } from '@nebular/theme';
 
 @Component({
-  selector: 'nb-visitors-form',
   template: `
     <form [formGroup]="form" (ngSubmit)="onSubmit()" class="form">
       <label for="name">Enter your name:</label>
-      <input nbInput id="name" type="text" formControlName="name">
+      <input nbInput id="name" type="text" formControlName="name" />
 
       <button nbButton type="submit" status="success">Submit</button>
     </form>
