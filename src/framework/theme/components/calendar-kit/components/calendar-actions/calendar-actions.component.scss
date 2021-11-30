@@ -1,4 +1,11 @@
+@import '../../../../styles/core/mixins';
+
 :host {
   display: flex;
   justify-content: space-between;
+
+  .apply-text-button {
+    @include nb-ltr(margin-left, auto);
+    @include nb-rtl(margin-right, auto);
+  }
 }

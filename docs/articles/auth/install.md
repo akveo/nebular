@@ -130,7 +130,7 @@ export const routes: Routes = [
 Last but not least - install the component styles into your styles.scss ([more details](docs/design-system/enable-customizable-theme)):
 
 ```scss
-@import '~@nebular/auth/styles/globals';
+@import '@nebular/auth/styles/globals';
 
 // ... 
 

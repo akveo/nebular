@@ -4,7 +4,6 @@
   "lib": {
     "entryFile": "./public_api.ts"
   },
-  "allowedNonPeerDependencies": ["intersection-observer"],
   "assets": [
     "LICENSE.txt",
     "**/*.{html,scss}",
