@@ -31,10 +31,6 @@ export class ToastrPositionsComponent {
 
   constructor(private toastrService: NbToastrService) {}
 
-  showToastText() {
-    this.toastrService.show(`test`, `Error`, { position: NbGlobalPhysicalPosition.TOP_RIGHT, status: 'danger' });
-  }
-
   showToast(position: NbGlobalPosition) {
     this.toastrService.show('This is super toast message', `This is toast number: ${++this.index}`, { position });
   }
