@@ -9,7 +9,7 @@ import { NbWindowConfig, NbWindowState, NbWindowStateChange } from './window.opt
  * You can access rendered component as `componentRef` property of the windowRef.
  * Property `contentInstance` contains the instance of the component opened in the window.
  */
-export class NbWindowRef<T = any> {
+export class NbWindowRef<T = any, R = any> {
   componentRef: ComponentRef<NbWindowComponent>;
   componentInstance: T;
 
@@ -38,7 +38,7 @@ export class NbWindowRef<T = any> {
   }
 
   protected _closed = false;
-  protected closed$ = new Subject<void>();
+  protected closed$ = new Subject<R>();
   /**
    * Emits when window was closed.
    */
@@ -78,7 +78,7 @@ export class NbWindowRef<T = any> {
   /**
    * Closes window.
    * */
-  close(res?: any) {
+  close(res?: R) {
     if (this._closed) {
       return;
     }
