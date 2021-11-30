@@ -598,6 +598,7 @@ export class NbRangepickerComponent<D> extends NbBasePickerComponent<
    * */
   @Input() set range(range: NbCalendarRange<D>) {
     this.value = range;
+    this.onChange$.next(range);
   }
 
   /**
