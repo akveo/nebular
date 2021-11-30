@@ -2,7 +2,7 @@ import { Component, DebugElement } from '@angular/core';
 import { APP_BASE_HREF } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { By } from '@angular/platform-browser';
-import { TestBed, ComponentFixture, fakeAsync, tick } from '@angular/core/testing';
+import { TestBed, ComponentFixture, fakeAsync, tick, flush } from '@angular/core/testing';
 import {
   NbThemeModule,
   NbLayoutModule,
@@ -285,9 +285,10 @@ describe('Directive: NbScrollDirective', () => {
 
   it('should prevent subsequent bottomThreshold emissions for throttleTime duration (window scroll)', fakeAsync(() => {
     const { documentElement } = document;
+    const THROTTLE = 200;
 
     testComponent.listenWindowScroll = true;
-    testComponent.throttleTime = 250;
+    testComponent.throttleTime = THROTTLE;
     fixture.detectChanges();
 
     const thresholdSpy = spyOn(testComponent, 'bottomThreshold');
@@ -295,83 +296,97 @@ describe('Directive: NbScrollDirective', () => {
     documentElement.scrollTop = CONTENT_HEIGHT - THRESHOLD / 2;
 
     window.dispatchEvent(new Event('scroll'));
-    tick(50);
+    tick(THROTTLE / 2); // 100ms passed
     window.dispatchEvent(new Event('scroll'));
-    tick(50);
-    window.dispatchEvent(new Event('scroll'));
-    tick(50);
-    window.dispatchEvent(new Event('scroll'));
-    tick(50);
-    window.dispatchEvent(new Event('scroll'));
-    tick(50);
+    tick(THROTTLE / 2 - 1); // 199ms passed, resent scroll event should be throttled
     expect(thresholdSpy).toHaveBeenCalledTimes(1);
+    tick(1); // 200ms passed, throttling has stopped
+
+    window.dispatchEvent(new Event('scroll'));
+    tick();
+    expect(thresholdSpy).toHaveBeenCalledTimes(2);
+    tick(THROTTLE); // waiting for the end of the throttle interval
   }));
 
   it('should prevent subsequent topThreshold emissions for throttleTime duration (window scroll)', fakeAsync(() => {
     const { documentElement } = document;
-    testComponent.listenWindowScroll = true;
-    testComponent.throttleTime = 250;
-    fixture.detectChanges();
+    const THROTTLE = 200;
 
-    const thresholdSpy = spyOn(testComponent, 'topThreshold');
+    testComponent.listenWindowScroll = true;
+    testComponent.throttleTime = THROTTLE;
+
+    fixture.detectChanges();
 
     documentElement.scrollTop = THRESHOLD + 1;
     window.dispatchEvent(new Event('scroll'));
-    documentElement.scrollTop = THRESHOLD - 1;
 
+    const thresholdSpy = spyOn(testComponent, 'topThreshold');
+
+    documentElement.scrollTop -= 1;
     window.dispatchEvent(new Event('scroll'));
-    tick(50);
+    tick(THROTTLE / 2); // 100ms passed
+    documentElement.scrollTop -= 1;
     window.dispatchEvent(new Event('scroll'));
-    tick(50);
-    window.dispatchEvent(new Event('scroll'));
-    tick(50);
-    window.dispatchEvent(new Event('scroll'));
-    tick(50);
-    window.dispatchEvent(new Event('scroll'));
-    tick(50);
+    tick(THROTTLE / 2 - 1); // 199ms passed, resent scroll event should be throttled
     expect(thresholdSpy).toHaveBeenCalledTimes(1);
+    tick(1); // 200ms passed, throttling has stopped
+
+    documentElement.scrollTop -= 1;
+    window.dispatchEvent(new Event('scroll'));
+    tick();
+    expect(thresholdSpy).toHaveBeenCalledTimes(2);
+    tick(THROTTLE); // waiting for the end of the throttle interval
   }));
 
   it('should prevent subsequent bottomThreshold emissions for throttleTime duration (element scroll)', fakeAsync(() => {
     const scrollingNativeElement = listElementRef.nativeElement;
-    testComponent.throttleTime = 250;
+    const THROTTLE = 200;
+
+    testComponent.throttleTime = THROTTLE;
     fixture.detectChanges();
 
     const thresholdSpy = spyOn(testComponent, 'bottomThreshold');
 
     scrollingNativeElement.scrollTop = CONTENT_HEIGHT - THRESHOLD / 2;
 
-    window.dispatchEvent(new Event('scroll'));
-    tick(50);
-    window.dispatchEvent(new Event('scroll'));
-    tick(50);
-    window.dispatchEvent(new Event('scroll'));
-    tick(50);
-    window.dispatchEvent(new Event('scroll'));
-    tick(50);
-    window.dispatchEvent(new Event('scroll'));
-    tick(50);
+    scrollingNativeElement.dispatchEvent(new Event('scroll'));
+    tick(THROTTLE / 2); // 100ms passed
+    scrollingNativeElement.dispatchEvent(new Event('scroll'));
+    tick(THROTTLE / 2 - 1); // 199ms passed, resent scroll event should be throttled
     expect(thresholdSpy).toHaveBeenCalledTimes(1);
+    tick(1); // 200ms passed, throttling has stopped
+
+    scrollingNativeElement.dispatchEvent(new Event('scroll'));
+    tick();
+    expect(thresholdSpy).toHaveBeenCalledTimes(2);
+    tick(THROTTLE); // waiting for the end of the throttle interval
   }));
 
   it('should prevent subsequent topThreshold emissions for throttleTime duration (element scroll)', fakeAsync(() => {
     const scrollingElement = listElementRef.nativeElement;
-    const thresholdSpy = spyOn(testComponent, 'topThreshold');
+    const THROTTLE = 200;
+
+    testComponent.throttleTime = THROTTLE;
+    fixture.detectChanges();
 
     scrollingElement.scrollTop = THRESHOLD + 1;
-    window.dispatchEvent(new Event('scroll'));
-    scrollingElement.scrollTop = THRESHOLD - 1;
+    scrollingElement.dispatchEvent(new Event('scroll'));
 
-    window.dispatchEvent(new Event('scroll'));
-    tick(50);
-    window.dispatchEvent(new Event('scroll'));
-    tick(50);
-    window.dispatchEvent(new Event('scroll'));
-    tick(50);
-    window.dispatchEvent(new Event('scroll'));
-    tick(50);
-    window.dispatchEvent(new Event('scroll'));
-    tick(50);
+    const thresholdSpy = spyOn(testComponent, 'topThreshold');
+
+    scrollingElement.scrollTop -= 1;
+    scrollingElement.dispatchEvent(new Event('scroll'));
+    tick(THROTTLE / 2); // 100ms passed
+    scrollingElement.scrollTop -= 1;
+    scrollingElement.dispatchEvent(new Event('scroll'));
+    tick(THROTTLE / 2 - 1); // 199ms passed, resent scroll event should be throttled
     expect(thresholdSpy).toHaveBeenCalledTimes(1);
+    tick(1); // 200ms passed, throttling has stopped
+
+    scrollingElement.scrollTop -= 1;
+    scrollingElement.dispatchEvent(new Event('scroll'));
+    tick();
+    expect(thresholdSpy).toHaveBeenCalledTimes(2);
+    tick(THROTTLE); // waiting for the end of the throttle interval
   }));
 });

@@ -10,7 +10,7 @@ import {
   ContentChildren,
   QueryList,
 } from '@angular/core';
-import { Observable, forkJoin, of as observableOf, interval, timer, Subject, merge } from 'rxjs';
+import { Observable, forkJoin, of as observableOf, interval, timer, Subject, merge, BehaviorSubject } from 'rxjs';
 import { filter, switchMap, map, takeUntil, take, throttle } from 'rxjs/operators';
 import { convertToBoolProperty, NbBooleanInput } from '../helpers';
 import { NbLayoutScrollService } from '../../services/scroll.service';
@@ -61,7 +61,10 @@ export class NbInfiniteListDirective implements AfterViewInit, OnDestroy {
   private get elementScroll() {
     return !this.windowScroll;
   }
-  private elementScroll$ = new Subject();
+  private elementScroll$ = new Subject<void>();
+  private bottomThreshold$ = new Subject<void>();
+  private topThreshold$ = new Subject<void>();
+  private throttleTime$ = new BehaviorSubject<number>(0);
 
   /**
    * Threshold after which event load more event will be emited.
@@ -75,7 +78,12 @@ export class NbInfiniteListDirective implements AfterViewInit, OnDestroy {
    * In milliseconds.
    */
   @Input()
-  throttleTime = 0;
+  set throttleTime(value: number) {
+    this.throttleTime$.next(value);
+  }
+  get throttleTime() {
+    return this.throttleTime$.value;
+  }
 
   /**
    * By default component observes list scroll position.
@@ -117,11 +125,28 @@ export class NbInfiniteListDirective implements AfterViewInit, OnDestroy {
   ngAfterViewInit() {
     merge(this.scrollService.onScroll(), this.elementScroll$)
       .pipe(
-        throttle(() => interval(this.throttleTime)),
         switchMap(() => this.getContainerDimensions()),
         takeUntil(this.destroy$),
       )
       .subscribe((dimensions) => this.checkPosition(dimensions));
+
+    this.throttleTime$
+      .pipe(
+        switchMap(() => this.topThreshold$.pipe(throttle(() => interval(this.throttleTime)))),
+        takeUntil(this.destroy$),
+      )
+      .subscribe(() => {
+        this.topThreshold.emit();
+      });
+
+    this.throttleTime$
+      .pipe(
+        switchMap(() => this.bottomThreshold$.pipe(throttle(() => interval(this.throttleTime)))),
+        takeUntil(this.destroy$),
+      )
+      .subscribe(() => {
+        this.bottomThreshold.emit();
+      });
 
     this.listItems.changes
       .pipe(
@@ -145,6 +170,9 @@ export class NbInfiniteListDirective implements AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy() {
+    this.topThreshold$.complete();
+    this.bottomThreshold$.complete();
+    this.elementScroll$.complete();
     this.destroy$.next();
     this.destroy$.complete();
   }
@@ -157,10 +185,11 @@ export class NbInfiniteListDirective implements AfterViewInit, OnDestroy {
     const distanceToBottom = scrollHeight - scrollTop - clientHeight;
 
     if ((initialCheck || manualCheck || scrollDown) && distanceToBottom <= this.threshold) {
-      this.bottomThreshold.emit();
+      this.bottomThreshold$.next();
     }
+
     if ((initialCheck || scrollUp) && scrollTop <= this.threshold) {
-      this.topThreshold.emit();
+      this.topThreshold$.next();
     }
 
     this.lastScrollPosition = scrollTop;
