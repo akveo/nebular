@@ -15,6 +15,7 @@ import { WindowShowcaseComponent } from './window-showcase.component';
 import { WindowsBackdropComponent } from './windows-backdrop.component';
 import { FormComponent } from './components/form.component';
 import { WindowControlsComponent } from './window-controls.component';
+import { WindowTemplateTitleComponent } from './window-template-title.component';
 import { WindowResultComponent } from './window-result.component';
 import { VisitorsFormComponent } from './components/visitors-form.component';
 
@@ -25,6 +26,7 @@ import { VisitorsFormComponent } from './components/visitors-form.component';
     WindowsBackdropComponent,
     FormComponent,
     WindowControlsComponent,
+    WindowTemplateTitleComponent,
     WindowResultComponent,
     VisitorsFormComponent,
   ],

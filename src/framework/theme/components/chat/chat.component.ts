@@ -25,7 +25,8 @@ import { NbComponentOrCustomStatus } from '../component-status';
 import { convertToBoolProperty, NbBooleanInput } from '../helpers';
 import { NbChatFormComponent } from './chat-form.component';
 import { NbChatMessageComponent } from './chat-message.component';
-import { NbCustomMessageService } from './custom-message.service';
+import { NbChatCustomMessageService } from './chat-custom-message.service';
+import { NbChatTitleDirective } from './chat-title.directive';
 
 /**
  * Conversational UI collection - a set of components for chat-like UI construction.
@@ -100,6 +101,9 @@ import { NbCustomMessageService } from './custom-message.service';
  * <nb-chat-message>
  * </nb-chat-message> // chat message, available multiple types
  * ```
+ *
+ * You could provide a chat title as a template via the `nbChatTitle` directive. It overrides `title` input.
+ * @stacked-example(Custom title, chat/chat-template-title.component)
  *
  * Two users conversation showcase:
  * @stacked-example(Conversation, chat/chat-conversation-showcase.component)
@@ -237,7 +241,18 @@ import { NbCustomMessageService } from './custom-message.service';
   selector: 'nb-chat',
   styleUrls: ['./chat.component.scss'],
   template: `
-    <div class="header">{{ title }}</div>
+    <div class="header">
+      <ng-container
+        *ngIf="titleTemplate; else textTitleTemplate"
+        [ngTemplateOutlet]="titleTemplate.templateRef"
+        [ngTemplateOutletContext]="{ $implicit: titleTemplate.context }"
+      >
+      </ng-container>
+      <ng-template #textTitleTemplate>
+        {{ title }}
+      </ng-template>
+    </div>
+
     <div class="scrollable" #scrollable>
       <div class="messages">
         <ng-content select="nb-chat-message"></ng-content>
@@ -248,12 +263,9 @@ import { NbCustomMessageService } from './custom-message.service';
       <ng-content select="nb-chat-form"></ng-content>
     </div>
   `,
-  providers: [
-    NbCustomMessageService,
-  ],
+  providers: [NbChatCustomMessageService],
 })
 export class NbChatComponent implements OnChanges, AfterContentInit, AfterViewInit {
-
   @Input() title: string;
 
   /**
@@ -275,7 +287,7 @@ export class NbChatComponent implements OnChanges, AfterContentInit, AfterViewIn
    */
   @Input()
   get scrollBottom(): boolean {
-    return this._scrollBottom
+    return this._scrollBottom;
   }
   set scrollBottom(value: boolean) {
     this._scrollBottom = convertToBoolProperty(value);
@@ -286,9 +298,9 @@ export class NbChatComponent implements OnChanges, AfterContentInit, AfterViewIn
   @ViewChild('scrollable') scrollable: ElementRef;
   @ContentChildren(NbChatMessageComponent) messages: QueryList<NbChatMessageComponent>;
   @ContentChild(NbChatFormComponent) chatForm: NbChatFormComponent;
+  @ContentChild(NbChatTitleDirective) titleTemplate: NbChatTitleDirective;
 
-  constructor(protected statusService: NbStatusService) {
-  }
+  constructor(protected statusService: NbStatusService) {}
 
   ngOnChanges(changes: SimpleChanges) {
     if ('status' in changes) {
@@ -301,11 +313,10 @@ export class NbChatComponent implements OnChanges, AfterContentInit, AfterViewIn
   }
 
   ngAfterViewInit() {
-    this.messages.changes
-      .subscribe((messages) => {
-        this.messages = messages;
-        this.updateView();
-      });
+    this.messages.changes.subscribe((messages) => {
+      this.messages = messages;
+      this.updateView();
+    });
 
     this.updateView();
   }

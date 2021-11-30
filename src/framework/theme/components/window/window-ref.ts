@@ -38,7 +38,7 @@ export class NbWindowRef<T = any> {
   }
 
   protected _closed = false;
-  protected closed$ = new Subject();
+  protected closed$ = new Subject<void>();
   /**
    * Emits when window was closed.
    */
