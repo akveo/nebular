@@ -29,6 +29,10 @@
       border-radius: nb-theme(context-menu-border-radius);
       overflow: hidden;
       text-align: nb-theme(context-menu-text-align);
+
+      nb-icon.expand-state svg {
+        pointer-events: none;
+      }
     }
   }
 }
