@@ -27,6 +27,6 @@ export class WindowResultComponent {
   openWindow() {
     const windowRef = this.windowService.open(VisitorsFormComponent, { title: `Window` });
 
-    windowRef.onClose.subscribe((visitor: string) => visitor && this.visitors.push(visitor));
+    windowRef.onClose.subscribe((visitor) => this.visitors.push(visitor));
   }
 }
