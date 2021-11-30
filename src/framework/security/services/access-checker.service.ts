@@ -16,9 +16,7 @@ import { map } from 'rxjs/operators';
  */
 @Injectable()
 export class NbAccessChecker {
-
-  constructor(protected roleProvider: NbRoleProvider, protected acl: NbAclService) {
-  }
+  constructor(protected roleProvider: NbRoleProvider, protected acl: NbAclService) {}
 
   /**
    * Checks whether access is granted or not
@@ -28,12 +26,11 @@ export class NbAccessChecker {
    * @returns {Observable<boolean>}
    */
   isGranted(permission: string, resource: string): Observable<boolean> {
-    return this.roleProvider.getRole()
-      .pipe(
-        map((role: string|string[]) => Array.isArray(role) ? role : [role]),
-        map((roles: string[]) => {
-          return roles.some(role => this.acl.can(role, permission, resource));
-        }),
-      );
+    return this.roleProvider.getRole().pipe(
+      map((role: string | string[]) => (Array.isArray(role) ? role : [role])),
+      map((roles: string[]) => {
+        return roles.some((role) => this.acl.can(role, permission, resource));
+      }),
+    );
   }
 }
