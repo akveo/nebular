@@ -12,26 +12,20 @@ import { NbDateFnsOptions, NbDateFnsDateService } from './services/date-fns-date
 const dateFnsServiceProvider = { provide: NbDateService, useClass: NbDateFnsDateService };
 
 @NgModule({
-  providers: [ dateFnsServiceProvider ],
+  providers: [dateFnsServiceProvider],
 })
 export class NbDateFnsDateModule {
   static forRoot(options: Partial<NbDateFnsOptions>): ModuleWithProviders<NbDateFnsDateModule> {
     return {
       ngModule: NbDateFnsDateModule,
-      providers: [
-        dateFnsServiceProvider,
-        { provide: NB_DATE_SERVICE_OPTIONS, useValue: options },
-      ],
+      providers: [dateFnsServiceProvider, { provide: NB_DATE_SERVICE_OPTIONS, useValue: options }],
     };
   }
 
   static forChild(options: Partial<NbDateFnsOptions>): ModuleWithProviders<NbDateFnsDateModule> {
     return {
       ngModule: NbDateFnsDateModule,
-      providers: [
-        dateFnsServiceProvider,
-        { provide: NB_DATE_SERVICE_OPTIONS, useValue: options },
-      ],
+      providers: [dateFnsServiceProvider, { provide: NB_DATE_SERVICE_OPTIONS, useValue: options }],
     };
   }
 }
