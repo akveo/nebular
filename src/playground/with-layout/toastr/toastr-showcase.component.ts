@@ -3,8 +3,8 @@ import { NbGlobalPhysicalPosition, NbToastrService } from '@nebular/theme';
 
 @Component({
   template: `
-    <button nbButton (click)="showToast(NbGlobalPhysicalPosition.TOP_RIGHT, 'success')">Top Right</button>
-    <button nbButton (click)="showToast(NbGlobalPhysicalPosition.BOTTOM_LEFT, 'info')">Bottom left</button>
+    <button nbButton (click)="showToast(positions.TOP_RIGHT, 'success')">Top Right</button>
+    <button nbButton (click)="showToast(positions.BOTTOM_LEFT, 'info')">Bottom left</button>
   `,
   styles: [
     `
@@ -20,7 +20,7 @@ export class ToastrShowcaseComponent {
   @HostBinding('class')
   classes = 'example-items-rows';
 
-  NbGlobalPhysicalPosition = NbGlobalPhysicalPosition;
+  positions = NbGlobalPhysicalPosition;
 
   constructor(private toastrService: NbToastrService) {}
 
