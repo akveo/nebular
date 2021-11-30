@@ -9,10 +9,9 @@ import { NbWindowService } from '@nebular/theme';
 import { VisitorsFormComponent } from './components/visitors-form.component';
 
 @Component({
-  selector: 'nb-window-result',
   template: `
     <button nbButton status="primary" (click)="openWindow()">Open window</button>
-    <br>
+    <br />
     <h3 class="h5">Window visitors:</h3>
     <ul>
       <li *ngFor="let visitor of visitors">{{ visitor }}</li>
@@ -26,7 +25,7 @@ export class WindowResultComponent {
   constructor(private windowService: NbWindowService) {}
 
   openWindow() {
-    const windowRef = this.windowService.open(VisitorsFormComponent, {title: `Window`});
+    const windowRef = this.windowService.open(VisitorsFormComponent, { title: `Window` });
 
     windowRef.onClose.subscribe((visitor: string) => visitor && this.visitors.push(visitor));
   }
