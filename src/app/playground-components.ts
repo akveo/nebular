@@ -1521,6 +1521,12 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         component: 'WindowTemplateTitleComponent',
         name: 'Window Template Title',
       },
+      {
+        path: 'window-result.component',
+        link: '/window/window-result.component',
+        component: 'WindowResultComponent',
+        name: 'Window Result',
+      },
     ],
   },
   {
