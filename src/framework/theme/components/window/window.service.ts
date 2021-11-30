@@ -86,8 +86,8 @@ import { NB_DOCUMENT } from '../../theme.options';
  *
  * @stacked-example(Window content from TemplateRef, window/template-window.component)
  *
- * The window may return result through `NbWindowRef`. Calling component can receive this result with `onClose`
- * stream of `NbWindowRef`.
+ * You could pass the optional window return value to the `NbWindowRef.close` method.
+ * The passed value would be emitted to the `NbWindowRef.onClose` listeners.
  *
  * @stacked-example(Result, window/window-result.component)
  *
