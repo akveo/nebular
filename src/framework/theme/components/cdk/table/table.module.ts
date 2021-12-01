@@ -70,7 +70,7 @@ export const NB_TABLE_PROVIDERS: Provider[] = [
   template: ``,
   providers: NB_TABLE_PROVIDERS,
 })
-// tslint:disable-next-line:component-class-suffix
+// eslint-disable-next-line @angular-eslint/component-class-suffix
 export class NbTable<T> extends CdkTable<T> {
   constructor(
     differs: IterableDiffers,

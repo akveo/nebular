@@ -4,8 +4,9 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-@mixin nb-search-theme() {
+@use '../../styles/theming' as *;
 
+@mixin nb-search-theme() {
   nb-search-field {
     .close-button {
       z-index: 1;
@@ -50,7 +51,6 @@
       .search::after {
         border: 1.5rem solid nb-theme(search-extra-background-color);
       }
-
     }
 
     &.modal-half {

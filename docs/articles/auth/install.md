@@ -10,11 +10,12 @@
 ## Install the module
 
 First, let's install the module as it's distributed as npm package. Make sure you have the [Nebular Theme module up and running](https://akveo.github.io/nebulardocs/installation/add-into-existing-project).
-Nebular Theme is required to use built-in Auth Components. If you are not going to use those at all, you can use `Auth Module` without the `Nebular Theme` module.  
+Nebular Theme is required to use built-in Auth Components. If you are not going to use those at all, you can use `Auth Module` without the `Nebular Theme` module.
 
 ```bash
 npm i @nebular/auth
 ```
+
 <hr>
 
 ## HttpClientModule
@@ -54,7 +55,7 @@ To add a strategy we need to call static `setup` method to pass a list of option
 @NgModule({
   imports: [
    // ...
-    
+
    NbAuthModule.forRoot({
          strategies: [
            NbPasswordAuthStrategy.setup({
@@ -62,7 +63,7 @@ To add a strategy we need to call static `setup` method to pass a list of option
            }),
          ],
          forms: {},
-       }), 
+       }),
   ],
 });
 
@@ -70,12 +71,12 @@ To add a strategy we need to call static `setup` method to pass a list of option
 
 We also specified `forms` key, that configures available options for the Auth Components.
 We leave it empty for now and get back to it in the [Configuring UI](docs/auth/configuring-ui) article.
+
 <hr>
 
 ## Enable Auth Components
 
 Next, we need to configure Auth Components routes, let's add those into your `app-routing.module.ts`:
-
 
 ```ts
 import {
@@ -88,8 +89,8 @@ import {
 } from '@nebular/auth';
 
 export const routes: Routes = [
-  // ... 
-  
+  // ...
+
   {
     path: 'auth',
     component: NbAuthComponent,
@@ -120,9 +121,9 @@ export const routes: Routes = [
       },
     ],
   },
-  
 ];
 ```
+
 <hr>
 
 ## Enable Styles
@@ -130,15 +131,13 @@ export const routes: Routes = [
 Last but not least - install the component styles into your styles.scss ([more details](docs/design-system/enable-customizable-theme)):
 
 ```scss
-@import '~@nebular/auth/styles/globals';
-
-// ... 
+// ...
+@use '@nebular/auth/styles/globals' as *;
 
 @include nb-install() {
   @include nb-theme-global();
   @include nb-auth-global(); // append the install mixin inside of the nb-install
-};
-
+} ;
 ```
 
 At this point, if you navigate to http://localhost:4200/#/auth/login the login form is shown.

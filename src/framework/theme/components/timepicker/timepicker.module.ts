@@ -10,12 +10,12 @@ import { CommonModule } from '@angular/common';
 import { NbOverlayModule } from '../cdk/overlay/overlay.module';
 import { NbListModule } from '../list/list.module';
 import { NbCardModule } from '../card/card.module';
+import { NbCalendarKitModule } from '../calendar-kit/calendar-kit.module';
 import { NbTimePickerDirective } from './timepicker.directive';
 import { NbTimePickerComponent } from './timepicker.component';
 import { NbTimePickerCellComponent } from './timepicker-cell.component';
 import { NbCalendarTimeModelService } from '../calendar-kit/services/calendar-time-model.service';
 import { NB_TIME_PICKER_CONFIG, NbTimePickerConfig } from './model';
-import { NbCalendarKitModule } from '../calendar-kit/calendar-kit.module';
 
 @NgModule({
   imports: [

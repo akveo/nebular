@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-@import '../../../styles/core/mixins';
+@use '../../../styles/theming' as *;
 
 ::ng-deep nb-layout.modal-half {
   .layout {
@@ -21,7 +21,6 @@
 }
 
 :host.modal-half {
-
   .search {
     text-align: center;
     position: fixed;

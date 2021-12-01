@@ -4,6 +4,9 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
+@use 'sass:list';
+@use 'sass:map';
+
 $grid-columns: 12 !default;
 $grid-gutter-width-base: 24px !default;
 $grid-gutter-widths: (
@@ -11,9 +14,8 @@ $grid-gutter-widths: (
   sm: $grid-gutter-width-base,
   md: $grid-gutter-width-base,
   lg: $grid-gutter-width-base,
-  xl: $grid-gutter-width-base
+  xl: $grid-gutter-width-base,
 ) !default;
-
 
 $grid-breakpoints: (
   xs: 0,
@@ -23,7 +25,7 @@ $grid-breakpoints: (
   lg: 992px,
   xl: 1200px,
   xxl: 1400px,
-  xxxl: 1600px
+  xxxl: 1600px,
 );
 
 $container-max-widths: (
@@ -33,17 +35,17 @@ $container-max-widths: (
   lg: 960px,
   xl: 1140px,
   xxl: 1320px,
-  xxxl: 1500px
+  xxxl: 1500px,
 );
 
 @function breakpoint-min($name, $breakpoints: $grid-breakpoints) {
-  $min: map-get($breakpoints, $name);
+  $min: map.get($breakpoints, $name);
   @return if($min != 0, $min, null);
 }
 
-@function breakpoint-next($name, $breakpoints: $grid-breakpoints, $breakpoint-names: map-keys($breakpoints)) {
-  $n: index($breakpoint-names, $name);
-  @return if($n < length($breakpoint-names), nth($breakpoint-names, $n + 1), null);
+@function breakpoint-next($name, $breakpoints: $grid-breakpoints, $breakpoint-names: map.keys($breakpoints)) {
+  $n: list.index($breakpoint-names, $name);
+  @return if($n < list.length($breakpoint-names), list.nth($breakpoint-names, $n + 1), null);
 }
 
 @function breakpoint-max($name, $breakpoints: $grid-breakpoints) {
