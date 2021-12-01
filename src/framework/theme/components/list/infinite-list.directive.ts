@@ -62,6 +62,7 @@ export class NbInfiniteListDirective implements AfterViewInit, OnDestroy {
     return !this.windowScroll;
   }
   private elementScroll$ = new Subject<void>();
+  private windowScroll$ = this.scrollService.onScroll().pipe(filter(() => this.windowScroll));
   private bottomThreshold$ = new Subject<void>();
   private topThreshold$ = new Subject<void>();
   private throttleTime$ = new BehaviorSubject<number>(0);
@@ -123,7 +124,7 @@ export class NbInfiniteListDirective implements AfterViewInit, OnDestroy {
   ) {}
 
   ngAfterViewInit() {
-    merge(this.scrollService.onScroll(), this.elementScroll$)
+    merge(this.windowScroll$, this.elementScroll$)
       .pipe(
         switchMap(() => this.getContainerDimensions()),
         takeUntil(this.destroy$),
