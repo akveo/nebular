@@ -79,7 +79,7 @@ async function prepareVersion(version: Version, distDir: string, ghspaScript: st
   await addVersionNameToPackageJson(version.name, join(projectDir, 'package.json'));
   await addVersionTs(version, join(projectDir, 'package.json'));
   await buildDocsApp(projectDir, version.path);
-  await copy(join(projectDir, 'docs/dist'), distDir);
+  await copy(join(projectDir, 'dist/docs'), distDir);
   await outputFile(join(distDir, 'assets/ghspa.js'), ghspaScript);
 
   await remove(projectDir);

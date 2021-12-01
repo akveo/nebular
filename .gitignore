@@ -53,3 +53,4 @@ debug.log
 local.log
 
 /tools/dev-schematics/dist
+/docs/routes.txt

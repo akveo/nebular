@@ -61,7 +61,7 @@ import {
   NgdArticleService,
   NgdLastViewedSectionService,
 } from './services';
-import { AkveoServicesBanner } from './components/hubspot-cta/akveo-services-banner.component';
+import { AkveoServicesBannerComponent } from './components/hubspot-cta/akveo-services-banner.component';
 
 @NgModule({
   imports: [
@@ -93,7 +93,7 @@ import { AkveoServicesBanner } from './components/hubspot-cta/akveo-services-ban
     NgdDescriptionDirective,
     NgdSearchComponent,
     NgdEvaComponent,
-    AkveoServicesBanner,
+    AkveoServicesBannerComponent,
     NgdHubspotFormDialogComponent,
     NgdForBusinessComponent,
     NgdComponentsPromoComponent,
@@ -121,7 +121,7 @@ import { AkveoServicesBanner } from './components/hubspot-cta/akveo-services-ban
     NgdColorSwatchDirective,
     NgdDescriptionDirective,
     NgdEvaComponent,
-    AkveoServicesBanner,
+    AkveoServicesBannerComponent,
     NgdForBusinessComponent,
     NgdComponentsPromoComponent,
   ],

@@ -21,7 +21,7 @@ export class NgdVisibilityService {
 
   constructor(@Inject(PLATFORM_ID) platformId: Object, @Inject(NB_WINDOW) private window) {
     this.isBrowser = isPlatformBrowser(platformId);
-    this.supportsIntersectionObserver = !!this.window.IntersectionObserver;
+    this.supportsIntersectionObserver = this.window?.IntersectionObserver;
   }
 
   visibilityChange(target: Element, options: IntersectionObserverInit): Observable<IntersectionObserverEntry> {

@@ -270,6 +270,26 @@
               ],
               "outputHashing": "all",
               "tsConfig": "docs/tsconfig.wp.json"
+            },
+            "prerender": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "docs/environments/environment.ts",
+                  "with": "docs/environments/environment.prod.ts"
+                }
+              ],
+              "outputHashing": "all",
+              "baseHref": "/nebular/"
             }
           },
           "defaultConfiguration": "production"
@@ -321,6 +341,63 @@
               "docs/**/*.html"
             ]
           }
+        },
+        "server": {
+          "builder": "@angular-devkit/build-angular:server",
+          "options": {
+            "outputPath": "dist/server",
+            "main": "docs/server.ts",
+            "tsConfig": "docs/tsconfig.server.json",
+            "optimization": false,
+            "sourceMap": true,
+            "extractLicenses": false
+          },
+          "configurations": {
+            "production": {
+              "outputHashing": "media",
+              "fileReplacements": [
+                {
+                  "replace": "docs/environments/environment.ts",
+                  "with": "docs/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "sourceMap": false,
+              "extractLicenses": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve-ssr": {
+          "builder": "@nguniversal/builders:ssr-dev-server",
+          "configurations": {
+            "development": {
+              "browserTarget": "docs:build:development",
+              "serverTarget": "docs:server:development"
+            },
+            "production": {
+              "browserTarget": "docs:build:production",
+              "serverTarget": "docs:server:production"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "prerender": {
+          "builder": "@nguniversal/builders:prerender",
+          "options": {
+            "numProcesses": 270
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "docs:build:prerender",
+              "serverTarget": "docs:server:production"
+            },
+            "development": {
+              "browserTarget": "docs:build:development",
+              "serverTarget": "docs:server:development"
+            }
+          },
+          "defaultConfiguration": "production"
         }
       }
     },

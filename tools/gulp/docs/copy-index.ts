@@ -5,44 +5,19 @@
  */
 
 import { task } from 'gulp';
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'fs';
-import { isAbsolute, join, resolve, sep } from 'path';
+import { writeFileSync } from 'fs';
+import { join } from 'path';
 import { structure as DOCS_STRUCTURE } from '../../../docs/structure';
-import { DOCS_DIST } from '../config';
+import { DOCS_DIR } from '../config';
 import { flatten, routesTree } from './docs-utils';
 
-task('docs-copy-index', (done) => {
+task('create-docs-routes', (done) => {
   const docsStructure = flatten('docs', routesTree(DOCS_STRUCTURE));
-  createDirsStructure(docsStructure);
+  createRoutes(docsStructure);
 
   done();
 });
 
-function createDirsStructure(dirs) {
-  const index = readFileSync(join(DOCS_DIST, 'index.html'), 'utf8');
-  dirs.forEach((dir: any) => {
-    const fullPath = join(DOCS_DIST, dir);
-    if (!existsSync(fullPath)) {
-      mkDirByPathSync(fullPath);
-    }
-
-    writeFileSync(join(fullPath, 'index.html'), index);
-  });
-}
-
-function mkDirByPathSync(targetDir) {
-  const initDir = isAbsolute(targetDir) ? sep : '';
-
-  targetDir.split(sep).reduce((parentDir, childDir) => {
-    const curDir = resolve('.', parentDir, childDir);
-    try {
-      mkdirSync(curDir);
-    } catch (err) {
-      if (err.code !== 'EEXIST') {
-        throw err;
-      }
-    }
-
-    return curDir;
-  }, initDir);
+function createRoutes(dirs) {
+  writeFileSync(join(DOCS_DIR, 'routes.txt'), dirs.join('\r\n'));
 }
