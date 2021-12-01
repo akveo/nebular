@@ -447,6 +447,14 @@ export const structure = [
         source: ['NbButtonComponent'],
       },
       {
+        type: 'fileUpload',
+        name: 'File Upload',
+        icon: 'checkbox.svg',
+        source: [
+          'NbFileUploadComponent',
+        ],
+      },
+      {
         type: 'tabs',
         name: 'Button Group',
         icon: 'button-group.svg',

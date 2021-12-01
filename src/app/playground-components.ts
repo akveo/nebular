@@ -700,6 +700,35 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
     ],
   },
   {
+    path: 'file-upload',
+    children: [
+      {
+        path: 'full-width-file-upload-showcase.component',
+        link: '/file-upload/full-width-file-upload-showcase.component',
+        component: 'FullWidthFileUploadShowcaseComponent',
+        name: 'Full Width File Upload Showcase',
+      },
+      {
+        path: 'compact-file-upload-showcase.component',
+        link: '/file-upload/compact-file-upload-showcase.component',
+        component: 'CompactFileUploadShowcaseComponent',
+        name: 'Compact File Upload Showcase',
+      },
+      {
+        path: 'compact-file-upload-multiple.component',
+        link: '/file-upload/compact-file-upload-multiple.component',
+        component: 'CompactFileUploadMultipleComponent',
+        name: 'Compact File Upload Multiple',
+      },
+      {
+        path: 'file-upload-showcase.component',
+        link: '/file-upload/file-upload-showcase.component',
+        component: 'FileUploadShowcaseComponent',
+        name: 'File Upload Showcase',
+      },
+    ],
+  },
+  {
     path: 'infinite-list',
     children: [
       {
