@@ -1,8 +1,9 @@
 input {
-  margin: 0.125rem 0.125rem 0 0;
-  vertical-align: top;
+  margin-right: 0.125rem;
 }
 
 label {
   margin: 0;
+  display: inline-flex;
+  align-items: center;
 }

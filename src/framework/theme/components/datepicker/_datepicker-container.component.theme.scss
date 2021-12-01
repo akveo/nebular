@@ -4,6 +4,8 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
+@use '../../styles/theming' as *;
+
 @mixin nb-datepicker-theme {
   $border: nb-theme(datepicker-border-width) nb-theme(datepicker-border-style) nb-theme(datepicker-border-color);
 
@@ -40,7 +42,7 @@
     }
 
     .timepicker-single-column-width {
-      width: nb-theme(timepicker-single-column-width);;
+      width: nb-theme(timepicker-single-column-width);
     }
 
     .timepicker-multiple-column-width {

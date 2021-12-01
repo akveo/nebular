@@ -1,0 +1,7 @@
+@use '../all';
+
+$nb-enabled-themes: (cosmic);
+
+@include all.nb-install() {
+  @include all.nb-theme-global();
+}

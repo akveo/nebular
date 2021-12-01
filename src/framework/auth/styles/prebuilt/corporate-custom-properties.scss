@@ -1,0 +1,9 @@
+@use '../../../theme/styles/themes/corporate';
+@use '../../../theme/styles/theming' as *;
+@use '../globals' as *;
+
+$nb-enabled-themes: (corporate);
+
+@include nb-install() {
+  @include nb-auth-global();
+}

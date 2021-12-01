@@ -227,7 +227,7 @@ export class NbTabComponent {
  *
  * `tabIcon` should be used to add an icon to the tab. Icon can also be combined with title.
  * `responsive` tab property if set allows you to hide the title on smaller screens
- * (`tabset-tab-text-hide-breakpoint` property) for better responsive behaviour.
+ * (`$tabset-tab-text-hide-breakpoint` variable) for better responsive behaviour.
  * You can open the following example and make
  * your screen smaller - titles will be hidden in the last tabset in the list:
  * @stacked-example(Icon, tabset/tabset-icon.component)
@@ -293,7 +293,6 @@ export class NbTabComponent {
  * tabset-scrollbar-color:
  * tabset-scrollbar-background-color:
  * tabset-scrollbar-width:
- * tabset-tab-text-hide-breakpoint:
  */
 @Component({
   selector: 'nb-tabset',

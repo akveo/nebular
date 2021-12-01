@@ -1,4 +1,5 @@
-@import '../form-field/form-field.component.theme';
+@use '../../styles/theming' as *;
+@use '../form-field/form-field.component.theme' as form-field-theme;
 
 @mixin select-outline {
   nb-select.appearance-outline .select-button {
@@ -68,6 +69,9 @@
       @include nb-rtl(padding-left, nb-theme(select-icon-offset));
     }
 
-    @include nb-form-field-with-prefix('nb-select.appearance-outline.size-#{$size} .select-button', $size);
+    @include form-field-theme.nb-form-field-with-prefix(
+      'nb-select.appearance-outline.size-#{$size} .select-button',
+      $size
+    );
   }
 }
