@@ -118,7 +118,7 @@ export interface NbRouteTab {
             (click)="$event.preventDefault(); selectTab(tab)"
             [routerLink]="tab.route"
             routerLinkActive="active"
-            [routerLinkActiveOptions]="activeLinkOptions | mergeConfigs: tab.activeLinkOptions"
+            [routerLinkActiveOptions]="activeLinkOptions | nbMergeConfigs: tab.activeLinkOptions"
             [class.responsive]="tab.responsive"
             [queryParams]="tab.queryParams"
             [queryParamsHandling]="tab.queryParamsHandling"

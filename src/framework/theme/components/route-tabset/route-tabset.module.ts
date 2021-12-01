@@ -9,12 +9,12 @@ import { NgModule } from '@angular/core';
 import { NbSharedModule } from '../shared/shared.module';
 
 import { NbRouteTabsetComponent } from './route-tabset.component';
-import { MergeConfigsPipe } from './merge-configs.pipe';
+import { NbMergeConfigsPipe } from './merge-configs.pipe';
 import { NbIconModule } from '../icon/icon.module';
 
 @NgModule({
   imports: [NbSharedModule, NbIconModule],
-  declarations: [NbRouteTabsetComponent, MergeConfigsPipe],
+  declarations: [NbRouteTabsetComponent, NbMergeConfigsPipe],
   exports: [NbRouteTabsetComponent],
 })
 export class NbRouteTabsetModule {}

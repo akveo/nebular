@@ -1,9 +1,9 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'mergeConfigs',
+  name: 'nbMergeConfigs',
 })
-export class MergeConfigsPipe implements PipeTransform {
+export class NbMergeConfigsPipe implements PipeTransform {
   transform<Config>(...configs: Config[]): Config {
     return Object.assign({}, ...configs);
   }
