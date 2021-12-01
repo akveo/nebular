@@ -23,39 +23,27 @@ import { ChatShowcaseService } from './chat-showcase.service';
   ],
 })
 export class ChatTemplateTitleComponent {
-  messages: any[];
+  messages: any[] = [
+    {
+      text: 'Custom template was provided as a title!',
+      date: new Date(),
+      reply: false,
+      user: {
+        name: 'Bot',
+        avatar: 'https://s3.amazonaws.com/pix.iemoji.com/images/emoji/apple/ios-12/256/robot-face.png',
+      },
+    },
+  ];
 
-  constructor(protected chatShowcaseService: ChatShowcaseService) {
-    this.messages = this.chatShowcaseService.loadMessages();
-  }
-
-  sendMessage(event: any) {
-    const files = !event.files
-      ? []
-      : event.files.map((file) => {
-          return {
-            url: file.src,
-            type: file.type,
-            icon: 'file-text-outline',
-          };
-        });
-
+  sendMessage(event) {
     this.messages.push({
       text: event.message,
       date: new Date(),
       reply: true,
-      type: files.length ? 'file' : 'text',
-      files: files,
       user: {
-        name: 'Jonh Doe',
-        avatar: 'https://i.gifer.com/no.gif',
+        name: 'John Doe',
+        avatar: 'https://techcrunch.com/wp-content/uploads/2015/08/safe_image.gif',
       },
     });
-    const botReply = this.chatShowcaseService.reply(event.message);
-    if (botReply) {
-      setTimeout(() => {
-        this.messages.push(botReply);
-      }, 500);
-    }
   }
 }
