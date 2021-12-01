@@ -1,4 +1,4 @@
-@import '../../styles/core/mixins';
+@use '../../styles/theming' as *;
 
 :host {
   .label {

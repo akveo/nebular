@@ -4,8 +4,9 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-@mixin nb-b-icon-buttons-theme() {
+@use '../../theme/styles/theming' as *;
 
+@mixin nb-b-icon-buttons-theme() {
   .btn-icon {
     font-size: 1.75rem;
     padding: 0.5rem 1rem;
@@ -20,11 +21,11 @@
     @include nb-ltr() {
       padding-left: 1rem;
       text-align: left;
-    };
+    }
     @include nb-rtl() {
       padding-right: 1rem;
       text-align: right;
-    };
+    }
 
     nb-icon,
     .icon {

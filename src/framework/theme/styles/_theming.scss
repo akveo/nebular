@@ -4,38 +4,11 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-/*
-  Declare variables before making them global.
-  dart-sass doesn't allow to declare variable with !global.
- */
-$nb-enable-css-custom-properties: false !default;
-$nb-enabled-themes: ();
-$nb-themes: ();
-$nb-theme-process-mode: null;
-$nb-theme-name: 'default';
-$nb-theme: ();
-$nb-processed-theme: ();
-$nb-theme-export-mode: false !default;
-$nb-themes-export: ();
-$nb-custom-statuses: () !default;
-
-// public variables
-$nb-enable-css-custom-properties: false !global !default;
-$nb-enabled-themes: () !global;
-$nb-themes: () !global;
-$nb-custom-statuses: () !global !default;
-
-// private variables
-$nb-theme-process-mode: 'lazy-process' !global;
-$nb-theme-name: null !global;
-$nb-theme: () !global;
-$nb-processed-theme: () !global;
-$nb-theme-export-mode: false !global !default;
-$nb-themes-export: () !global;
-
-@import 'core/mixins';
-@import 'core/functions';
-@import 'core/variants';
-@import 'core/theming/register';
-@import 'core/theming/install';
-@import 'core/theming/get-value';
+@forward 'theming-variables' show $nb-enable-css-custom-properties, $nb-enabled-themes, $nb-themes, $nb-custom-statuses,
+  $layout-window-mode-max-width, $tabset-tab-text-hide-breakpoint, $route-tabset-tab-text-hide-breakpoint;
+@forward 'core/mixins';
+@forward 'core/functions';
+@forward 'core/variants';
+@forward 'core/theming/register' show nb-register-theme;
+@forward 'core/theming/install';
+@forward 'core/theming/get-value';

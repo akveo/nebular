@@ -4,7 +4,8 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-@import '../../styles/themes';
+@use '../../styles/themes' as *;
+@use '../../../../../src/framework/theme/styles/globals' as *;
 
 :host {
   display: flex;

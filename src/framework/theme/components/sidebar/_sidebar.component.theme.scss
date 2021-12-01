@@ -4,6 +4,9 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
+@use '../../styles/theming' as *;
+@use '../../styles/global/breakpoints' as *;
+
 @mixin nb-sidebar-theme() {
   nb-sidebar {
     background-color: nb-theme(sidebar-background-color);

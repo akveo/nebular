@@ -1,9 +1,8 @@
+@use '../../styles/theming' as *;
+
 @mixin nb-list-theme() {
   nb-list-item {
-    border-bottom:
-      nb-theme(list-item-divider-width)
-      nb-theme(list-item-divider-style)
-      nb-theme(list-item-divider-color);
+    border-bottom: nb-theme(list-item-divider-width) nb-theme(list-item-divider-style) nb-theme(list-item-divider-color);
 
     color: nb-theme(list-item-text-color);
     font-family: nb-theme(list-item-font-family);
@@ -13,10 +12,7 @@
     padding: nb-theme(list-item-padding);
 
     &:first-child {
-      border-top:
-        nb-theme(list-item-divider-width)
-        nb-theme(list-item-divider-style)
-        nb-theme(list-item-divider-color);
+      border-top: nb-theme(list-item-divider-width) nb-theme(list-item-divider-style) nb-theme(list-item-divider-color);
     }
   }
 }
