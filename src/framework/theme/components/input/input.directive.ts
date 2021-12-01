@@ -1,3 +1,4 @@
+/* eslint-disable @angular-eslint/no-conflicting-lifecycle */
 /**
  * @license
  * Copyright Akveo. All Rights Reserved.

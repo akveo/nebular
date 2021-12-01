@@ -31,10 +31,6 @@ import { NbColumnsService } from './tree-grid-columns.service';
 
 @Directive({
   selector: 'td[nbTreeGridCell]',
-  host: {
-    'class': 'nb-tree-grid-cell',
-    'role': 'gridcell',
-  },
   providers: [{ provide: NbCdkCell, useExisting: NbTreeGridCellDirective }],
 })
 export class NbTreeGridCellDirective extends NbCellDirective implements OnInit, OnDestroy {
@@ -45,6 +41,9 @@ export class NbTreeGridCellDirective extends NbCellDirective implements OnInit, 
   private initialRightPadding: string = '';
   private latestWidth: string;
   elementRef: ElementRef<HTMLElement>;
+
+  @HostBinding('attr.role') role = 'gridcell';
+  @HostBinding('class') classes = 'nb-tree-grid-cell';
 
   @HostBinding('style.width')
   get columnWidth(): string {
@@ -143,16 +142,15 @@ export class NbTreeGridCellDirective extends NbCellDirective implements OnInit, 
 
 @Directive({
   selector: 'th[nbTreeGridHeaderCell]',
-  host: {
-    'class': 'nb-tree-grid-header-cell',
-    'role': 'columnheader',
-  },
   providers: [{ provide: NbCdkHeaderCell, useExisting: NbTreeGridHeaderCellDirective }],
 })
 export class NbTreeGridHeaderCellDirective extends NbHeaderCellDirective implements OnInit, OnDestroy {
   private destroy$ = new Subject<void>();
   private latestWidth: string;
   private readonly tree: NbTreeGridComponent<any>;
+
+  @HostBinding('attr.role') role = 'columnheader';
+  @HostBinding('class') classes = 'nb-tree-grid-header-cell';
 
   @HostBinding('style.width')
   get columnWidth(): string {
@@ -188,16 +186,15 @@ export class NbTreeGridHeaderCellDirective extends NbHeaderCellDirective impleme
 
 @Directive({
   selector: 'td[nbTreeGridFooterCell]',
-  host: {
-    'class': 'nb-tree-grid-footer-cell',
-    'role': 'gridcell',
-  },
   providers: [{ provide: NbCdkFooterCell, useExisting: NbTreeGridFooterCellDirective }],
 })
 export class NbTreeGridFooterCellDirective extends NbFooterCellDirective implements OnInit, OnDestroy {
   private destroy$ = new Subject<void>();
   private latestWidth: string;
   private readonly tree: NbTreeGridComponent<any>;
+
+  @HostBinding('attr.role') role = 'gridcell';
+  @HostBinding('class') classes = 'nb-tree-grid-footer-cell';
 
   @HostBinding('style.width')
   get columnWidth(): string {

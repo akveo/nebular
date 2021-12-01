@@ -83,6 +83,7 @@ export class NbSearchFieldComponent implements OnChanges, AfterViewInit {
   @Input() hint: string;
   @Input() show = false;
 
+  // eslint-disable-next-line @angular-eslint/no-output-native
   @Output() close = new EventEmitter();
   @Output() search = new EventEmitter();
   @Output() searchInput = new EventEmitter();

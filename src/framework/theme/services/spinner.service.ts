@@ -56,14 +56,14 @@ export class NbSpinnerService {
   private showSpinner(): void {
     const el = this.getSpinnerElement();
     if (el) {
-      el.style['display'] = 'block';
+      el.style.display = 'block';
     }
   }
 
   private hideSpinner(): void {
     const el = this.getSpinnerElement();
     if (el) {
-      el.style['display'] = 'none';
+      el.style.display = 'none';
     }
   }
 
