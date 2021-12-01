@@ -4,28 +4,28 @@
 @use 'pace.theme';
 
 @use '../../../../src/framework/theme/styles/global/normalize';
-@use 'theme-components' as theme-components;
+@use '../../../../src/framework/theme/styles/global/components' as *;
 @use '../../../../src/framework/theme/styles/global/typography/typography';
 @use '../../../../src/framework/bootstrap/styles/globals' as bootstrap-globals;
 @use 'hs-form';
 
 @include nb-install() {
-  @include theme-components.nb-layout-theme();
-  @include theme-components.nb-sidebar-theme();
-  @include theme-components.nb-card-theme();
-  @include theme-components.nb-menu-theme();
-  @include theme-components.nb-actions-theme();
-  @include theme-components.nb-search-theme();
+  @include nb-layout-theme();
+  @include nb-sidebar-theme();
+  @include nb-card-theme();
+  @include nb-menu-theme();
+  @include nb-actions-theme();
+  @include nb-search-theme();
   @include bootstrap-globals.nb-bootstrap-global();
-  @include theme-components.nb-icon-theme();
-  @include theme-components.nb-input-theme();
+  @include nb-icon-theme();
+  @include nb-input-theme();
   @include typography.nb-typography();
-  @include theme-components.nb-buttons-theme();
-  @include theme-components.nb-select-theme();
-  @include theme-components.nb-option-list-theme();
-  @include theme-components.nb-input-theme();
-  @include theme-components.nb-overlay-theme();
-  @include theme-components.nb-spinner-theme();
+  @include nb-buttons-theme();
+  @include nb-select-theme();
+  @include nb-option-list-theme();
+  @include nb-input-theme();
+  @include nb-overlay-theme();
+  @include nb-spinner-theme();
 
   @include common.nbd-common();
 
