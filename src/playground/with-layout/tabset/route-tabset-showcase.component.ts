@@ -8,7 +8,6 @@ import { Component } from '@angular/core';
 import { NbRouteTab } from '@nebular/theme';
 
 @Component({
-  selector: 'nb-route-tabset-showcase',
   template: `
     <nb-card>
       <nb-card-body>
