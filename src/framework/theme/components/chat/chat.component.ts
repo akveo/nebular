@@ -102,8 +102,8 @@ import { NbChatTitleDirective } from './chat-title.directive';
  * </nb-chat-message> // chat message, available multiple types
  * ```
  *
- * You could provide a chat title as a template via the `nbChatTitle` directive. It overrides `title` input.
- * @stacked-example(Custom title, chat/chat-template-title.component)
+ * You could provide a title template via the `nbChatTitle` directive. It overrides `title` input.
+ * @stacked-example(Custom template as a title, chat/chat-template-title.component)
  *
  * Two users conversation showcase:
  * @stacked-example(Conversation, chat/chat-conversation-showcase.component)
