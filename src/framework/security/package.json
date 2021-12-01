@@ -26,11 +26,13 @@
     "nebular"
   ],
   "peerDependencies": {
-    "@angular/common": "^12.0.0",
-    "@angular/core": "^12.0.0",
-    "@angular/router": "^12.0.0",
-    "rxjs": "^6.5.4",
-    "tslib": "^2.1.0"
+    "@angular/common": "^13.0.0",
+    "@angular/core": "^13.0.0",
+    "@angular/router": "^13.0.0",
+    "rxjs": "^6.5.3 || ^7.4.0"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0"
   },
   "sideEffects": false
 }

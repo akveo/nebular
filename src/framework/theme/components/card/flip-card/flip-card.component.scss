@@ -13,6 +13,7 @@
 
 :host {
   display: block;
+  min-width: 0;
   perspective: 1200px;
   position: relative;
 }
@@ -46,6 +47,8 @@
   .front-container,
   .back-container {
     flex: 1;
+    height: fit-content;
+    overflow: auto;
 
     .flip-button {
       cursor: pointer;

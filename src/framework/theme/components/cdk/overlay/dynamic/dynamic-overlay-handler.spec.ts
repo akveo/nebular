@@ -1,45 +1,38 @@
 import { TestBed } from '@angular/core/testing';
 import { Subject } from 'rxjs';
-import {
-  Component,
-  ComponentFactoryResolver,
-  ComponentRef,
-  ElementRef,
-  Injectable,
-  Input,
-  Type,
-} from '@angular/core';
+import { Component, ComponentFactoryResolver, ComponentRef, ElementRef, Injectable, Input, Type } from '@angular/core';
 import { takeUntil } from 'rxjs/operators';
-
-import { NbRenderableContainer } from '../overlay-container';
 import {
+  NbOverlayConfig,
+  NbRenderableContainer,
   NbAdjustableConnectedPositionStrategy,
   NbAdjustment,
   NbPosition,
   NbPositionBuilderService,
-} from '../overlay-position';
-import { NbDynamicOverlay } from './dynamic-overlay';
-import { NbOverlayContent } from '../overlay-service';
-import { NbDynamicOverlayChange, NbDynamicOverlayHandler } from './dynamic-overlay-handler';
-import { NbTrigger, NbTriggerStrategy, NbTriggerStrategyBuilderService } from '../overlay-trigger';
-import { NbOverlayConfig } from '@nebular/theme/components/cdk/overlay/mapping';
+  NbDynamicOverlay,
+  NbOverlayContent,
+  NbDynamicOverlayChange,
+  NbDynamicOverlayHandler,
+  NbTrigger,
+  NbTriggerStrategy,
+  NbTriggerStrategyBuilderService,
+  NbLayoutDirectionService,
+} from '@nebular/theme';
 
 @Component({ template: '' })
 export class NbDynamicOverlayMockComponent implements NbRenderableContainer {
-
   @Input() content: any;
   @Input() context: Object;
   @Input() cfr: ComponentFactoryResolver;
 
-  renderContent() { }
+  renderContent() {}
 }
 
 @Component({ template: '' })
-export class NbDynamicOverlayMock2Component extends NbDynamicOverlayMockComponent { }
+export class NbDynamicOverlayMock2Component extends NbDynamicOverlayMockComponent {}
 
 @Injectable()
 export class NbMockDynamicOverlay {
-
   _container: string = 'container';
   _componentType: Type<NbRenderableContainer>;
   _context: Object = {};
@@ -49,12 +42,13 @@ export class NbMockDynamicOverlay {
 
   constructor() {}
 
-  create(componentType: Type<NbRenderableContainer>,
-         content: NbOverlayContent,
-         context: Object,
-         positionStrategy: NbAdjustableConnectedPositionStrategy,
-         overlayConfig: NbOverlayConfig) {
-
+  create(
+    componentType: Type<NbRenderableContainer>,
+    content: NbOverlayContent,
+    context: Object,
+    positionStrategy: NbAdjustableConnectedPositionStrategy,
+    overlayConfig: NbOverlayConfig,
+  ) {
     this.setContext(context);
     this.setContent(content);
     this.setComponent(componentType);
@@ -89,17 +83,13 @@ export class NbMockDynamicOverlay {
     this._positionStrategy = positionStrategy;
   }
 
-  show() {
-  }
+  show() {}
 
-  hide() {
-  }
+  hide() {}
 
-  toggle() {
-  }
+  toggle() {}
 
-  dispose() {
-  }
+  dispose() {}
 
   getContainer() {
     return this._container;
@@ -134,22 +124,19 @@ export class MockPositionBuilder {
     return this;
   }
 
-  attach() {
-  };
+  attach() {}
 
-  apply() {
-  };
+  apply() {}
 
-  detach() {
-  };
+  direction() {}
 
-  dispose() {
-  };
+  detach() {}
+
+  dispose() {}
 }
 
 @Injectable()
 export class MockTriggerStrategyBuilder {
-
   _host: HTMLElement;
   _container: () => ComponentRef<any>;
   _trigger: NbTrigger;
@@ -184,7 +171,6 @@ export class MockTriggerStrategyBuilder {
 }
 
 describe('dynamic-overlay-change', () => {
-
   it('should check if string is changed', () => {
     const change = new NbDynamicOverlayChange('prev', 'next');
 
@@ -215,7 +201,6 @@ describe('dynamic-overlay-change', () => {
 });
 
 describe('dynamic-overlay-handler', () => {
-
   let overlayHandler: NbDynamicOverlayHandler;
   let dynamicOverlay: any;
   let triggerStrategyBuilder: any;
@@ -223,9 +208,7 @@ describe('dynamic-overlay-handler', () => {
 
   const configure = (host?): any => {
     host = host ? host : new ElementRef(document.createElement('b'));
-    return overlayHandler
-      .componentType(NbDynamicOverlayMockComponent)
-      .host(host);
+    return overlayHandler.componentType(NbDynamicOverlayMockComponent).host(host);
   };
 
   beforeEach(() => {
@@ -233,6 +216,7 @@ describe('dynamic-overlay-handler', () => {
     const bed = TestBed.configureTestingModule({
       declarations: [NbDynamicOverlayMockComponent, NbDynamicOverlayMock2Component],
       providers: [
+        NbLayoutDirectionService,
         NbDynamicOverlayHandler,
         { provide: NbDynamicOverlay, useClass: NbMockDynamicOverlay },
         { provide: NbTriggerStrategyBuilderService, useClass: MockTriggerStrategyBuilder },
@@ -496,7 +480,6 @@ describe('dynamic-overlay-handler', () => {
   });
 
   it('should set and update componentType', () => {
-
     let dynamic: any = configure().componentType(NbDynamicOverlayMockComponent).build();
     expect(dynamic._componentType).toBe(NbDynamicOverlayMockComponent);
 
@@ -508,19 +491,13 @@ describe('dynamic-overlay-handler', () => {
     const host1 = new ElementRef(document.createElement('b'));
     const host2 = new ElementRef(document.createElement('b'));
 
-    configure(host1)
-      .position(NbPosition.BOTTOM)
-      .adjustment(NbAdjustment.CLOCKWISE)
-      .build();
+    configure(host1).position(NbPosition.BOTTOM).adjustment(NbAdjustment.CLOCKWISE).build();
 
     expect(positionBuilder._connectedTo).toBe(host1);
     expect(positionBuilder._position).toBe(NbPosition.BOTTOM);
     expect(positionBuilder._adjustment).toBe(NbAdjustment.CLOCKWISE);
 
-    configure(host2)
-      .position(NbPosition.LEFT)
-      .adjustment(NbAdjustment.HORIZONTAL)
-      .build();
+    configure(host2).position(NbPosition.LEFT).adjustment(NbAdjustment.HORIZONTAL).build();
 
     expect(positionBuilder._connectedTo).toBe(host2);
     expect(positionBuilder._position).toBe(NbPosition.LEFT);

@@ -13,16 +13,8 @@ import { MergeConfigsPipe } from './merge-configs.pipe';
 import { NbIconModule } from '../icon/icon.module';
 
 @NgModule({
-  imports: [
-    NbSharedModule,
-    NbIconModule,
-  ],
-  declarations: [
-    NbRouteTabsetComponent,
-    MergeConfigsPipe,
-  ],
-  exports: [
-    NbRouteTabsetComponent,
-  ],
+  imports: [NbSharedModule, NbIconModule],
+  declarations: [NbRouteTabsetComponent, MergeConfigsPipe],
+  exports: [NbRouteTabsetComponent],
 })
-export class NbRouteTabsetModule { }
+export class NbRouteTabsetModule {}

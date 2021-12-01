@@ -1,0 +1,9 @@
+@use '../../../theme/styles/themes/default';
+@use '../../../theme/styles/theming' as *;
+@use '../globals' as *;
+
+$nb-enabled-themes: (default);
+
+@include nb-install() {
+  @include nb-auth-global();
+}

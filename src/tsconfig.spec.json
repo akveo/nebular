@@ -2,23 +2,9 @@
   "extends": "../tsconfig.json",
   "compilerOptions": {
     "outDir": "../out-tsc/spec",
-    "baseUrl": "./",
-    "target": "es5",
     "types": [
-      "jasmine",
-      "node"
-    ],
-    "paths": {
-      "@nebular/*": [
-        "./framework/*/public_api.ts"
-      ],
-      "@nebular/theme/*": [
-        "./framework/theme/*"
-      ],
-      "@nebular/auth/*": [
-        "./framework/auth/*"
-      ]
-    }
+      "jasmine"
+    ]
   },
   "files": [
     "test.ts",

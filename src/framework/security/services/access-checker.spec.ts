@@ -5,14 +5,11 @@
  */
 import { TestBed, inject, waitForAsync } from '@angular/core/testing';
 import { of as observableOf } from 'rxjs';
-
-import { NbRoleProvider } from './role.provider';
-import { NbAclService } from './acl.service';
-import { NbAccessChecker } from './access-checker.service';
+import { NbRoleProvider, NbAclService, NbAccessChecker } from '@nebular/security';
 
 let accessChecker: NbAccessChecker;
 
-function setupAcl(can, roles: string|string[]) {
+function setupAcl(can, roles: string | string[]) {
   beforeEach(() => {
     // Configure testbed to prepare services
     TestBed.configureTestingModule({
@@ -39,16 +36,16 @@ function setupAcl(can, roles: string|string[]) {
   });
 
   // Single async inject to save references; which are used in all tests below
-  beforeEach(waitForAsync(inject(
-    [NbAccessChecker],
-    (_accessChecker) => {
-      accessChecker = _accessChecker
-    },
-  )));
+  beforeEach(
+    waitForAsync(
+      inject([NbAccessChecker], (_accessChecker) => {
+        accessChecker = _accessChecker;
+      }),
+    ),
+  );
 }
 
 describe('authorization checker', () => {
-
   describe('acl returns true', () => {
     setupAcl({ admin: true }, 'admin');
 
@@ -56,7 +53,7 @@ describe('authorization checker', () => {
       accessChecker.isGranted('delete', 'users').subscribe((result: boolean) => {
         expect(result).toBe(true);
         done();
-      })
+      });
     });
   });
 
@@ -67,7 +64,7 @@ describe('authorization checker', () => {
       accessChecker.isGranted('delete', 'users').subscribe((result: boolean) => {
         expect(result).toBe(false);
         done();
-      })
+      });
     });
   });
 
@@ -78,7 +75,7 @@ describe('authorization checker', () => {
       accessChecker.isGranted('delete', 'users').subscribe((result: boolean) => {
         expect(result).toBe(false);
         done();
-      })
+      });
     });
   });
 
@@ -89,7 +86,7 @@ describe('authorization checker', () => {
       accessChecker.isGranted('delete', 'users').subscribe((result: boolean) => {
         expect(result).toBe(true);
         done();
-      })
+      });
     });
   });
 
@@ -100,7 +97,7 @@ describe('authorization checker', () => {
       accessChecker.isGranted('delete', 'users').subscribe((result: boolean) => {
         expect(result).toBe(true);
         done();
-      })
+      });
     });
   });
 });

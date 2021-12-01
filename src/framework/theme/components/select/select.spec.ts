@@ -4,16 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import {
-  Component,
-  ElementRef,
-  EventEmitter,
-  Input,
-  Output,
-  QueryList,
-  ViewChild,
-  ViewChildren,
-} from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, Output, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { ComponentFixture, fakeAsync, flush, TestBed } from '@angular/core/testing';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
@@ -31,8 +22,8 @@ import {
   NbOptionComponent,
   NbOptionGroupComponent,
   NbTriggerStrategyBuilderService,
+  NbFocusKeyManagerFactoryService,
 } from '@nebular/theme';
-import { NbFocusKeyManagerFactoryService } from '@nebular/theme/components/cdk/a11y/focus-key-manager';
 
 const eventMock = { preventDefault() {} } as Event;
 
@@ -81,9 +72,10 @@ const TEST_GROUPS = [
           placeholder="This is test select component"
           [multiple]="multiple"
           [selected]="selected"
-          (selectedChange)="selectedChange.emit($event)">
+          (selectedChange)="selectedChange.emit($event)"
+        >
           <nb-select-label *ngIf="!multiple && customLabel">
-            {{ selected.reverse() }}
+            {{ selected.split('').reverse().join('') }}
           </nb-select-label>
           <nb-option>None</nb-option>
           <nb-option-group *ngFor="let group of groups" [title]="group.title">
@@ -107,13 +99,11 @@ export class NbSelectTestComponent {
   template: `
     <nb-layout>
       <nb-layout-column>
-
         <nb-select>
           <nb-option value="a">a</nb-option>
           <nb-option value="b">b</nb-option>
           <nb-option value="c">c</nb-option>
         </nb-select>
-
       </nb-layout-column>
     </nb-layout>
   `,
@@ -152,24 +142,22 @@ export class NbSelectWithOptionsObjectsComponent {
 })
 export class NbSelectWithInitiallySelectedOptionComponent {
   @Input() selected = 1;
-  @Input() options = [ 1, 2, 3 ];
+  @Input() options = [1, 2, 3];
 }
 
 @Component({
   template: `
     <nb-layout>
       <nb-layout-column>
-
         <nb-select *ngIf="showSelect" [formControl]="formControl">
           <nb-option *ngFor="let option of options" [value]="option">{{ option }}</nb-option>
         </nb-select>
-
       </nb-layout-column>
     </nb-layout>
   `,
 })
 export class NbReactiveFormSelectComponent {
-  options: number[] = [ 1 ];
+  options: number[] = [1];
   showSelect: boolean = true;
   formControl: FormControl = new FormControl();
 
@@ -181,17 +169,15 @@ export class NbReactiveFormSelectComponent {
   template: `
     <nb-layout>
       <nb-layout-column>
-
         <nb-select [(ngModel)]="selectedValue">
           <nb-option *ngFor="let option of options" [value]="option">{{ option }}</nb-option>
         </nb-select>
-
       </nb-layout-column>
     </nb-layout>
   `,
 })
 export class NbNgModelSelectComponent {
-  options: number[] = [ 1 ];
+  options: number[] = [1];
   selectedValue: number = null;
 
   @ViewChild(NbOptionComponent) optionComponent: NbOptionComponent<number>;
@@ -201,7 +187,6 @@ export class NbNgModelSelectComponent {
   template: `
     <nb-layout>
       <nb-layout-column>
-
         <nb-select>
           <nb-option>No value option</nb-option>
           <nb-option [value]="null">undefined value</nb-option>
@@ -212,7 +197,6 @@ export class NbNgModelSelectComponent {
           <nb-option [value]="nanValue">NaN value</nb-option>
           <nb-option value="1">truthy value</nb-option>
         </nb-select>
-
       </nb-layout-column>
     </nb-layout>
   `,
@@ -277,7 +261,6 @@ export class NbSelectWithFalsyOptionValuesComponent {
   template: `
     <nb-layout>
       <nb-layout-column>
-
         <nb-select multiple>
           <nb-option>No value option</nb-option>
           <nb-option [value]="null">undefined value</nb-option>
@@ -288,7 +271,6 @@ export class NbSelectWithFalsyOptionValuesComponent {
           <nb-option [value]="nanValue">NaN value</nb-option>
           <nb-option value="1">truthy value</nb-option>
         </nb-select>
-
       </nb-layout-column>
     </nb-layout>
   `,
@@ -299,13 +281,11 @@ export class NbMultipleSelectWithFalsyOptionValuesComponent extends NbSelectWith
   template: `
     <nb-layout>
       <nb-layout-column>
-
         <nb-select>
           <nb-option-group [disabled]="optionGroupDisabled">
             <nb-option [value]="1" [disabled]="optionDisabled">1</nb-option>
           </nb-option-group>
         </nb-select>
-
       </nb-layout-column>
     </nb-layout>
   `,
@@ -326,7 +306,7 @@ describe('Component: NbSelectComponent', () => {
   let document: Document;
   let select: NbSelectComponent;
 
-  const setSelectedAndOpen = selected => {
+  const setSelectedAndOpen = (selected) => {
     fixture.componentInstance.selected = selected;
     fixture.detectChanges();
     select.show();
@@ -386,10 +366,10 @@ describe('Component: NbSelectComponent', () => {
     expect(selected[2].textContent).toContain('Option 31');
   });
 
-  it('should fire selectedChange item when selection changes', done => {
+  it('should fire selectedChange item when selection changes', (done) => {
     setSelectedAndOpen('Option 1');
 
-    fixture.componentInstance.selectedChange.subscribe(selection => {
+    fixture.componentInstance.selectedChange.subscribe((selection) => {
       expect(selection).toBe('Option 21');
       done();
     });
@@ -398,7 +378,7 @@ describe('Component: NbSelectComponent', () => {
     option.dispatchEvent(new Event('click'));
   });
 
-  it('should fire selectedChange items when selecting multiple one by one', done => {
+  it('should fire selectedChange items when selecting multiple one by one', (done) => {
     select.multiple = true;
     setSelectedAndOpen([]);
 
@@ -488,17 +468,15 @@ describe('Component: NbSelectComponent', () => {
     expect(button.textContent).toContain('Option 1');
   });
 
-  it('should render custom label when something selected and custom label provided', () => {
-    select.customLabel = true;
-    setSelectedAndOpen('Option 1');
-    select.selectedChange.subscribe(selection => {
-      fixture.componentInstance.selected = selection;
-      fixture.detectChanges();
-
-      const button = fixture.nativeElement.querySelector('button');
-      expect(button.textContent).toContain('1 noitpO');
-    });
-  });
+  it('should render custom label when something selected and custom label provided', fakeAsync(() => {
+    fixture.componentInstance.customLabel = true;
+    fixture.componentInstance.selected = 'Option 1';
+    fixture.detectChanges();
+    flush();
+    fixture.detectChanges();
+    const button = fixture.nativeElement.querySelector('button');
+    expect(button.textContent).toContain('1 noitpO');
+  }));
 
   it('should select initially specified value without errors', fakeAsync(() => {
     const selectFixture = TestBed.createComponent(NbSelectWithInitiallySelectedOptionComponent);
@@ -506,9 +484,9 @@ describe('Component: NbSelectComponent', () => {
     flush();
     selectFixture.detectChanges();
 
-    const selectedOption = selectFixture.debugElement.query(By.directive(NbSelectComponent))
-      .componentInstance
-      .options.find(o => o.selected);
+    const selectedOption = selectFixture.debugElement
+      .query(By.directive(NbSelectComponent))
+      .componentInstance.options.find((o) => o.selected);
 
     expect(selectedOption.value).toEqual(selectFixture.componentInstance.selected);
     const selectButton = selectFixture.nativeElement.querySelector('nb-select button') as HTMLElement;
@@ -522,7 +500,7 @@ describe('Component: NbSelectComponent', () => {
     flush();
     selectFixture.detectChanges();
 
-    const selectedOption = testComponent.optionComponents.find(o => o.selected);
+    const selectedOption = testComponent.optionComponents.find((o) => o.selected);
     expect(selectedOption.value).toEqual({ id: 2 });
   }));
 
@@ -532,7 +510,7 @@ describe('Component: NbSelectComponent', () => {
     selectFixture.detectChanges();
     flush();
 
-    const setSelectionSpy = spyOn((testSelectComponent.selectComponent as any), 'setSelection').and.callThrough();
+    const setSelectionSpy = spyOn(testSelectComponent.selectComponent as any, 'setSelection').and.callThrough();
     testSelectComponent.showSelect = false;
     selectFixture.detectChanges();
 
@@ -563,7 +541,7 @@ describe('Component: NbSelectComponent', () => {
     selectFixture.detectChanges();
     flush();
 
-    const optionToSelect = testComponent.options.find(o => o.value != null);
+    const optionToSelect = testComponent.options.find((o) => o.value != null);
     const optionSelectSpy = spyOn(optionToSelect, 'select').and.callThrough();
 
     expect(optionToSelect.selected).toEqual(false);
@@ -604,7 +582,7 @@ describe('Component: NbSelectComponent', () => {
     flush();
     selectFixture.detectChanges();
 
-    const selectedOption: NbOptionComponent<any> = testSelectComponent.options.find(o => o.selected);
+    const selectedOption: NbOptionComponent<any> = testSelectComponent.options.find((o) => o.selected);
     const selectionChangeSpy = createSpy('selectionChangeSpy');
     selectedOption.selectionChange.subscribe(selectionChangeSpy);
 
@@ -623,7 +601,7 @@ describe('Component: NbSelectComponent', () => {
     flush();
     selectFixture.detectChanges();
 
-    const selectedOption: NbOptionComponent<any> = testSelectComponent.options.find(o => o.selected);
+    const selectedOption: NbOptionComponent<any> = testSelectComponent.options.find((o) => o.selected);
     const selectionChangeSpy = spyOn(selectedOption, 'deselect');
 
     testSelectComponent.selected = selectedOption.value;
@@ -642,7 +620,7 @@ describe('Component: NbSelectComponent', () => {
     selectFixture.detectChanges();
     const button = selectFixture.debugElement.query(By.css('button'));
 
-    expect(button.classes['empty']).toEqual(true);
+    expect(button.classes.empty).toEqual(true);
   });
 
   it(`should set overlay width same as button inside select`, () => {
@@ -701,8 +679,8 @@ describe('Component: NbSelectComponent', () => {
   it('should not mark touched when select button loose focus and select open', fakeAsync(() => {
     const touchedSpy = jasmine.createSpy('touched spy');
 
-    const selectFixture = TestBed.createComponent(NbSelectComponent);
-    select = selectFixture.componentInstance as NbSelectComponent;
+    const selectFixture = TestBed.createComponent(NbSelectTestComponent);
+    select = selectFixture.debugElement.query(By.directive(NbSelectComponent)).componentInstance;
     selectFixture.detectChanges();
     flush();
 
@@ -720,16 +698,8 @@ describe('NbSelectComponent - falsy values', () => {
 
   beforeEach(fakeAsync(() => {
     TestBed.configureTestingModule({
-      imports: [
-        RouterTestingModule.withRoutes([]),
-        NbThemeModule.forRoot(),
-        NbLayoutModule,
-        NbSelectModule,
-      ],
-      declarations: [
-        NbSelectWithFalsyOptionValuesComponent,
-        NbMultipleSelectWithFalsyOptionValuesComponent,
-      ],
+      imports: [RouterTestingModule.withRoutes([]), NbThemeModule.forRoot(), NbLayoutModule, NbSelectModule],
+      declarations: [NbSelectWithFalsyOptionValuesComponent, NbMultipleSelectWithFalsyOptionValuesComponent],
     });
 
     fixture = TestBed.createComponent(NbSelectWithFalsyOptionValuesComponent);
@@ -870,17 +840,23 @@ describe('NbSelectComponent - Triggers', () => {
     showTriggerStub = new Subject<Event>();
     hideTriggerStub = new Subject<Event>();
     triggerBuilderStub = {
-      trigger() { return this },
-      host() { return this },
-      container() { return this },
+      trigger() {
+        return this;
+      },
+      host() {
+        return this;
+      },
+      container() {
+        return this;
+      },
       build() {
         return { show$: showTriggerStub, hide$: hideTriggerStub, destroy() {} };
       },
     };
 
     TestBed.configureTestingModule({
-      imports: [ RouterTestingModule.withRoutes([]), NbThemeModule.forRoot(), NbLayoutModule, NbSelectModule ],
-      declarations: [ BasicSelectTestComponent ],
+      imports: [RouterTestingModule.withRoutes([]), NbThemeModule.forRoot(), NbLayoutModule, NbSelectModule],
+      declarations: [BasicSelectTestComponent],
     });
     TestBed.overrideProvider(NbTriggerStrategyBuilderService, { useValue: triggerBuilderStub });
 
@@ -928,17 +904,23 @@ describe('NbSelectComponent - Key manager', () => {
   beforeEach(fakeAsync(() => {
     tabOutStub = new Subject<void>();
     keyManagerStub = {
-      withTypeAhead() { return this; },
+      withTypeAhead() {
+        return this;
+      },
       setActiveItem() {},
       setFirstItemActive() {},
       onKeydown() {},
       tabOut: tabOutStub,
     };
-    keyManagerFactoryStub = { create() { return keyManagerStub; } };
+    keyManagerFactoryStub = {
+      create() {
+        return keyManagerStub;
+      },
+    };
 
     TestBed.configureTestingModule({
-      imports: [ RouterTestingModule.withRoutes([]), NbThemeModule.forRoot(), NbLayoutModule, NbSelectModule ],
-      declarations: [ BasicSelectTestComponent ],
+      imports: [RouterTestingModule.withRoutes([]), NbThemeModule.forRoot(), NbLayoutModule, NbSelectModule],
+      declarations: [BasicSelectTestComponent],
     });
     TestBed.overrideProvider(NbFocusKeyManagerFactoryService, { useValue: keyManagerFactoryStub });
 
@@ -976,11 +958,7 @@ describe('NbOptionComponent', () => {
         NbLayoutModule,
         NbSelectModule,
       ],
-      declarations: [
-        NbNgModelSelectComponent,
-        NbSelectTestComponent,
-        NbReactiveFormSelectComponent,
-      ],
+      declarations: [NbNgModelSelectComponent, NbSelectTestComponent, NbReactiveFormSelectComponent],
     });
 
     fixture = TestBed.createComponent(NbReactiveFormSelectComponent);
@@ -1041,13 +1019,8 @@ describe('NbOptionComponent disabled', () => {
 
   beforeEach(fakeAsync(() => {
     TestBed.configureTestingModule({
-      imports: [
-        RouterTestingModule.withRoutes([]),
-        NbThemeModule.forRoot(),
-        NbLayoutModule,
-        NbSelectModule,
-      ],
-      declarations: [ NbOptionDisabledTestComponent ],
+      imports: [RouterTestingModule.withRoutes([]), NbThemeModule.forRoot(), NbLayoutModule, NbSelectModule],
+      declarations: [NbOptionDisabledTestComponent],
     });
 
     fixture = TestBed.createComponent(NbOptionDisabledTestComponent);
@@ -1095,7 +1068,7 @@ describe('NbSelect - dynamic options', () => {
         NbLayoutModule,
         NbSelectModule,
       ],
-      declarations: [ NbReactiveFormSelectComponent ],
+      declarations: [NbReactiveFormSelectComponent],
     });
 
     fixture = TestBed.createComponent(NbReactiveFormSelectComponent);
@@ -1111,8 +1084,7 @@ describe('NbSelect - dynamic options', () => {
       testComponent.formControl = new FormControl(1);
       fixture.detectChanges();
 
-      selectComponent = fixture.debugElement
-        .query(By.directive(NbSelectComponent)).componentInstance;
+      selectComponent = fixture.debugElement.query(By.directive(NbSelectComponent)).componentInstance;
     });
 
     it('should set value from queue when options added dynamically (after change detection run)', fakeAsync(() => {
@@ -1154,8 +1126,9 @@ describe('NbSelect - dynamic options', () => {
       testComponent.formControl = new FormControl(1);
       fixture.detectChanges();
 
-      const selectComponent: NbSelectComponent = fixture.debugElement
-        .query(By.directive(NbSelectComponent)).componentInstance;
+      const selectComponent: NbSelectComponent = fixture.debugElement.query(
+        By.directive(NbSelectComponent),
+      ).componentInstance;
       testComponent.options = [0];
       fixture.detectChanges();
       flush();
@@ -1176,8 +1149,9 @@ describe('NbSelect - dynamic options', () => {
       testComponent.formControl = new FormControl(1);
       fixture.detectChanges();
 
-      const selectComponent: NbSelectComponent = fixture.debugElement
-        .query(By.directive(NbSelectComponent)).componentInstance;
+      const selectComponent: NbSelectComponent = fixture.debugElement.query(
+        By.directive(NbSelectComponent),
+      ).componentInstance;
       testComponent.options = [0];
       fixture.detectChanges();
       flush();
@@ -1198,8 +1172,9 @@ describe('NbSelect - dynamic options', () => {
       testComponent.formControl = new FormControl(1);
       fixture.detectChanges();
 
-      const selectComponent: NbSelectComponent = fixture.debugElement
-        .query(By.directive(NbSelectComponent)).componentInstance;
+      const selectComponent: NbSelectComponent = fixture.debugElement.query(
+        By.directive(NbSelectComponent),
+      ).componentInstance;
       const writeValueSpy = spyOn(selectComponent, 'writeValue').and.callThrough();
 
       testComponent.options = [1];
@@ -1222,8 +1197,9 @@ describe('NbSelect - dynamic options', () => {
       testComponent.formControl = new FormControl(2);
       fixture.detectChanges();
 
-      const selectComponent: NbSelectComponent = fixture.debugElement
-        .query(By.directive(NbSelectComponent)).componentInstance;
+      const selectComponent: NbSelectComponent = fixture.debugElement.query(
+        By.directive(NbSelectComponent),
+      ).componentInstance;
       const writeValueSpy = spyOn(selectComponent, 'writeValue').and.callThrough();
 
       testComponent.options = [0];

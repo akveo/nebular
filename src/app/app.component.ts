@@ -4,47 +4,67 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { AfterViewInit, Component, Inject, OnDestroy } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Inject, OnDestroy, ViewChild } from '@angular/core';
 import { NavigationStart, Router } from '@angular/router';
 import { NB_DOCUMENT } from '@nebular/theme';
-import { fromEvent, Subject } from 'rxjs';
-import { filter, takeUntil } from 'rxjs/operators';
-import { ComponentLink, PLAYGROUND_COMPONENTS } from './playground-components';
+import { fromEvent, Observable, Subject } from 'rxjs';
+import { filter, take, takeUntil } from 'rxjs/operators';
+import { ComponentsListService } from './components-list.service';
+import { ComponentLink } from './playground-components';
 
 @Component({
-  selector: 'nb-app-root',
+  selector: 'npg-app-root',
   styleUrls: ['./app.component.scss'],
   template: `
-    <div class="options-bar" dir="ltr">
-      <ng-container *ngIf="optionsVisible">
-        <nb-layout-direction-toggle></nb-layout-direction-toggle>
-        <nb-layout-theme-toggle></nb-layout-theme-toggle>
-        <button (click)="showComponentsOverlay()">Components (c)</button>
-        <nb-components-overlay *ngIf="optionsVisible && componentsListVisible" (closeClicked)="hideComponentsOverlay()">
-          <nb-components-list [components]="components"></nb-components-list>
-        </nb-components-overlay>
-      </ng-container>
-      <button (click)="toggleOptions()" [class.fixed]="!optionsVisible" class="options-show">
-        <ng-container *ngIf="optionsVisible">hide</ng-container>
-        <ng-container *ngIf="!optionsVisible">show</ng-container>
+    <div class="toolbar" [class.tools-visible]="showToolbar" dir="ltr">
+      <button (click)="toggleToolbar()" [class.toolbar-toggle-fixed]="!showToolbar" class="toolbar-toggle">
+        {{ showToolbar ? 'hide' : 'show' }} toolbar
       </button>
+      <ng-container *ngIf="showToolbar">
+        <span class="tools-divider"></span>
+        <npg-layout-direction-toggle></npg-layout-direction-toggle>
+        <span class="tools-divider"></span>
+        <npg-layout-theme-toggle></npg-layout-theme-toggle>
+        <span class="tools-divider"></span>
+        <input
+          #componentSearch
+          type="text"
+          placeholder="Components search (/)"
+          (focus)="showComponentList()"
+          (click)="showComponentList()"
+          (input)="onSearchChange($event)"
+          (keyup.enter)="navigateToComponent()"
+        />
+
+        <ng-container *ngIf="showComponentsList">
+          <button (click)="hideComponentsList()" tabindex="-1" class="hide-components-list">hide list</button>
+
+          <div class="component-list-wrapper">
+            <npg-components-list [components]="components$ | async"></npg-components-list>
+          </div>
+        </ng-container>
+      </ng-container>
     </div>
     <router-outlet></router-outlet>
   `,
 })
 export class AppComponent implements AfterViewInit, OnDestroy {
+  private readonly destroy$ = new Subject<void>();
+  private readonly document: Document;
+  private lastFocusedElement: HTMLElement;
+  showToolbar: boolean = true;
+  showComponentsList: boolean = false;
+  components$: Observable<ComponentLink[]> = this.componentsListService.components$;
 
-  private destroy$ = new Subject<void>();
-  document: Document;
-  optionsVisible: boolean = true;
-  componentsListVisible: boolean = false;
-  components: ComponentLink[] = PLAYGROUND_COMPONENTS;
+  @ViewChild('componentSearch') componentSearch: ElementRef;
 
   constructor(
     @Inject(NB_DOCUMENT) document,
     private router: Router,
+    private componentsListService: ComponentsListService,
   ) {
     this.document = document;
+    this.lastFocusedElement = this.document.body;
   }
 
   ngAfterViewInit() {
@@ -52,26 +72,16 @@ export class AppComponent implements AfterViewInit, OnDestroy {
       return;
     }
 
-    fromEvent(this.document, 'keypress')
-      .pipe(
-        filter((e: KeyboardEvent) => e.key === 'c'),
-        takeUntil(this.destroy$),
-      )
-      .subscribe(this.toggleComponentsOverlay.bind(this));
-
-    fromEvent(this.document, 'keyup')
-      .pipe(
-        filter((e: KeyboardEvent) => e.key === 'Escape' || e.key === 'Esc'),
-        takeUntil(this.destroy$),
-      )
-      .subscribe(() => this.hideComponentsOverlay());
+    fromEvent<KeyboardEvent>(this.document, 'keyup')
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((e: KeyboardEvent) => this.handleButtonPressUp(e));
 
     this.router.events
       .pipe(
-        filter(event => event instanceof NavigationStart),
+        filter((event) => event instanceof NavigationStart),
         takeUntil(this.destroy$),
       )
-      .subscribe(() => this.hideComponentsOverlay())
+      .subscribe(() => this.hideComponentsList());
   }
 
   ngOnDestroy() {
@@ -79,19 +89,50 @@ export class AppComponent implements AfterViewInit, OnDestroy {
     this.destroy$.complete();
   }
 
-  toggleOptions() {
-    this.optionsVisible = !this.optionsVisible;
+  navigateToComponent(): void {
+    this.componentSearch.nativeElement.blur(); // remove focus from search input
+    this.componentsListService.selectedLink$.pipe(take(1), takeUntil(this.destroy$)).subscribe((selectedLink) => {
+      this.router.navigate([selectedLink]);
+    });
   }
 
-  toggleComponentsOverlay() {
-    this.componentsListVisible = !this.componentsListVisible;
+  toggleToolbar() {
+    this.showToolbar = !this.showToolbar;
+    if (!this.showToolbar) {
+      this.hideComponentsList();
+    }
   }
 
-  hideComponentsOverlay() {
-    this.componentsListVisible = false;
+  showComponentList(): void {
+    this.showComponentsList = true;
   }
 
-  showComponentsOverlay() {
-    this.componentsListVisible = true;
+  hideComponentsList(): void {
+    this.showComponentsList = false;
+  }
+
+  onSearchChange(event): void {
+    this.showComponentList();
+    this.componentsListService.updateSearch(event.target.value);
+  }
+
+  private handleButtonPressUp(e: KeyboardEvent): void {
+    if (e.key === 'ArrowDown') {
+      this.componentsListService.selectNextComponent();
+    }
+
+    if (e.key === 'ArrowUp') {
+      this.componentsListService.selectPreviousComponent();
+    }
+
+    if (e.key === 'Escape') {
+      this.hideComponentsList();
+      this.lastFocusedElement.focus();
+    }
+
+    if (e.key === '/') {
+      this.lastFocusedElement = this.document.activeElement as HTMLElement;
+      this.componentSearch.nativeElement.focus();
+    }
   }
 }

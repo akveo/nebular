@@ -28,7 +28,7 @@ export class RouteTabsetShowcaseComponent {
       title: 'Orders',
       icon: 'paper-plane-outline',
       responsive: true,
-      route: [ './tab2' ],
+      route: ['./tab2'],
     },
     {
       title: 'Query params',
