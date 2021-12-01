@@ -43,10 +43,5 @@ export class RouteTabsetShowcaseComponent {
       responsive: true,
       disabled: true,
     },
-    {
-      title: 'All time highlighted',
-      route: '/tabset/route-tabset-showcase.component',
-      activeLinkOptions: { exact: false },
-    },
   ];
 }
