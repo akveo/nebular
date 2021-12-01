@@ -4,12 +4,11 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-@use '../../../theme/styles/themes/corporate';
+@use '../../../theme/styles/themes/default';
 @use '../../../theme/styles/theming' as *;
 @use '../globals' as *;
 
-$nb-enabled-themes: (corporate);
-$nb-enable-css-custom-properties: false;
+$nb-enabled-themes: (default);
 
 @include nb-install() {
   @include nb-bootstrap-global();

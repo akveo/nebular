@@ -5,11 +5,12 @@
  */
 
 @use '../../../theme/styles/themes/dark';
-@use '../../../theme/styles/theming';
-@use '../globals';
+@use '../../../theme/styles/theming' as *;
+@use '../globals' as *;
 
-theming.$nb-enabled-themes: (dark);
+$nb-enabled-themes: (dark);
+$nb-enable-css-custom-properties: false;
 
-@include theming.nb-install() {
-  @include globals.nb-bootstrap-global();
+@include nb-install() {
+  @include nb-bootstrap-global();
 }

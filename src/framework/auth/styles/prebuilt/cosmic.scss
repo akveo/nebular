@@ -1,9 +1,10 @@
 @use '../../../theme/styles/themes/cosmic';
-@use '../../../theme/styles/theming';
-@use '../globals';
+@use '../../../theme/styles/theming' as *;
+@use '../globals' as *;
 
-theming.$nb-enabled-themes: (cosmic);
+$nb-enabled-themes: (cosmic);
+$nb-enable-css-custom-properties: false;
 
-@include theming.nb-install() {
-  @include globals.nb-auth-global();
+@include nb-install() {
+  @include nb-auth-global();
 }
