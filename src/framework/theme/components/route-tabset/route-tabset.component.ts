@@ -117,7 +117,6 @@ export interface NbRouteTab {
           <li
             routerLinkActive="active"
             [routerLinkActiveOptions]="activeLinkOptions | nbMergeConfigs: tab.activeLinkOptions"
-            tabindex="-1"
             class="route-tab"
           >
             <a
