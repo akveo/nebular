@@ -1,4 +1,6 @@
 import { ElementRef, Injectable, SimpleChange, Type } from '@angular/core';
+import { Subject } from 'rxjs';
+import { skip, takeUntil } from 'rxjs/operators';
 
 import { NbTrigger, NbTriggerStrategy, NbTriggerStrategyBuilderService } from '../overlay-trigger';
 import {
@@ -11,6 +13,7 @@ import { NbRenderableContainer } from '../overlay-container';
 import { NbOverlayContent } from '../overlay-service';
 import { NbDynamicOverlay } from './dynamic-overlay';
 import { NbOverlayConfig } from '../mapping';
+import { NbLayoutDirectionService } from '../../../../services/direction.service';
 
 export class NbDynamicOverlayChange extends SimpleChange {
   constructor(previousValue: any, currentValue: any, firstChange: boolean = false) {
@@ -42,10 +45,13 @@ export class NbDynamicOverlayHandler {
 
   protected changes: { [key: string]: NbDynamicOverlayChange } = {};
 
+  protected destroy$ = new Subject<void>();
+
   constructor(
     private positionBuilder: NbPositionBuilderService,
     private triggerStrategyBuilder: NbTriggerStrategyBuilderService,
     private dynamicOverlayService: NbDynamicOverlay,
+    private directionService: NbLayoutDirectionService,
   ) {}
 
   host(host: ElementRef) {
@@ -174,6 +180,7 @@ export class NbDynamicOverlayHandler {
     }
     this.disconnect();
     this.subscribeOnTriggers(this.dynamicOverlay);
+    this.subscribeOnDirectionChange();
   }
 
   disconnect() {
@@ -183,6 +190,9 @@ export class NbDynamicOverlayHandler {
   }
 
   destroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
+
     this.disconnect();
     this.clearChanges();
     if (this.dynamicOverlay) {
@@ -195,7 +205,8 @@ export class NbDynamicOverlayHandler {
       .connectedTo(this._host)
       .position(this._position)
       .adjustment(this._adjustment)
-      .offset(this._offset);
+      .offset(this._offset)
+      .direction(this.directionService.getDirection());
   }
 
   protected subscribeOnTriggers(dynamicOverlay: NbDynamicOverlay) {
@@ -207,6 +218,15 @@ export class NbDynamicOverlayHandler {
 
     this.triggerStrategy.show$.subscribe(() => dynamicOverlay.show());
     this.triggerStrategy.hide$.subscribe(() => dynamicOverlay.hide());
+  }
+
+  protected subscribeOnDirectionChange() {
+    this.directionService
+      .onDirectionChange()
+      .pipe(skip(1), takeUntil(this.destroy$))
+      .subscribe(() => {
+        this.dynamicOverlay.setPositionStrategy(this.createPositionStrategy());
+      });
   }
 
   protected isContainerRerenderRequired() {

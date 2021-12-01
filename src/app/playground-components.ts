@@ -2,7 +2,7 @@ export abstract class ComponentLink {
   path: string;
   name?: string;
   component?: string;
-  link?: any[] | string;
+  link?: string;
   children?: ComponentLink[];
 }
 
@@ -1520,6 +1520,12 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         link: '/window/window-template-title.component',
         component: 'WindowTemplateTitleComponent',
         name: 'Window Template Title',
+      },
+      {
+        path: 'window-result.component',
+        link: '/window/window-result.component',
+        component: 'WindowResultComponent',
+        name: 'Window Result',
       },
     ],
   },
