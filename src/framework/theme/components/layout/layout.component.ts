@@ -113,7 +113,6 @@ import { NbOverlayContainerAdapter } from '../cdk/adapter/overlay-container-adap
  * layout-min-height:
  * layout-content-width:
  * layout-window-mode-min-width:
- * layout-window-mode-max-width:
  * layout-window-mode-background-color:
  * layout-window-mode-padding-top:
  * layout-window-shadow:

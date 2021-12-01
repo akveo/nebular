@@ -3,10 +3,11 @@
  * Copyright Akveo. All Rights Reserved.
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
-@import '../../theme/styles/core/mixins';
+
+@use '../../theme/styles/theming' as *;
+@use '../../theme/components/card/card.component.theme' as card-theme;
 
 @mixin nb-b-modals-theme() {
-
   .modal-content {
     display: flex;
     flex-direction: column;
@@ -25,9 +26,10 @@
     margin-bottom: nb-theme(card-margin-bottom);
 
     @include nb-scrollbars(
-        nb-theme(card-scrollbar-color),
-        nb-theme(card-scrollbar-background-color),
-        nb-theme(card-scrollbar-width));
+      nb-theme(card-scrollbar-color),
+      nb-theme(card-scrollbar-background-color),
+      nb-theme(card-scrollbar-width)
+    );
   }
 
   .modal-header {
@@ -63,9 +65,10 @@
     padding: nb-theme(card-padding);
     position: relative;
     @include nb-scrollbars(
-        nb-theme(card-scrollbar-color),
-        nb-theme(card-scrollbar-background-color),
-        nb-theme(card-scrollbar-width));
+      nb-theme(card-scrollbar-color),
+      nb-theme(card-scrollbar-background-color),
+      nb-theme(card-scrollbar-width)
+    );
   }
 
   .modal-footer {
@@ -76,6 +79,6 @@
   }
 
   nb-card-header {
-    @include nb-card-header();
+    @include card-theme.nb-card-header();
   }
 }

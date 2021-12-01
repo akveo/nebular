@@ -19,7 +19,7 @@ import { convertToBoolProperty, NbBooleanInput } from '../helpers';
  *    title: 'Route tab #1',
  *    route: '/pages/description',
  *    icon: 'home',
- *    responsive: true, // hide title before `tabset-tab-text-hide-breakpoint` value
+ *    responsive: true, // hide title before `$tabset-tab-text-hide-breakpoint` value
  *  },
  *  {
  *    title: 'Route tab #2',
@@ -77,7 +77,6 @@ import { convertToBoolProperty, NbBooleanInput } from '../helpers';
  * route-tabset-scrollbar-color:
  * route-tabset-scrollbar-background-color:
  * route-tabset-scrollbar-width:
- * route-tabset-tab-text-hide-breakpoint:
  */
 @Component({
   selector: 'nb-route-tabset',
@@ -85,10 +84,12 @@ import { convertToBoolProperty, NbBooleanInput } from '../helpers';
   template: `
     <ul class="route-tabset">
       <ng-container *ngFor="let tab of tabs">
-        <li *ngIf="tab.disabled; else enabled"
-            [class.responsive]="tab.responsive"
-            class="route-tab disabled"
-            tabindex="-1">
+        <li
+          *ngIf="tab.disabled; else enabled"
+          [class.responsive]="tab.responsive"
+          class="route-tab disabled"
+          tabindex="-1"
+        >
           <a tabindex="-1" class="tab-link">
             <nb-icon *ngIf="tab.icon" [config]="tab.icon"></nb-icon>
             <span *ngIf="tab.title" class="tab-text">{{ tab.title }}</span>
@@ -96,20 +97,22 @@ import { convertToBoolProperty, NbBooleanInput } from '../helpers';
         </li>
 
         <ng-template #enabled>
-          <li (click)="$event.preventDefault(); selectTab(tab)"
-              [routerLink]="tab.route"
-              routerLinkActive="active"
-              [routerLinkActiveOptions]="activeLinkOptions"
-              [class.responsive]="tab.responsive"
-              [queryParams]="tab.queryParams"
-              [queryParamsHandling]="tab.queryParamsHandling"
-              [fragment]="tab.fragment"
-              [preserveFragment]="tab.preserveFragment"
-              [skipLocationChange]="tab.skipLocationChange"
-              [replaceUrl]="tab.replaceUrl"
-              [state]="tab.state"
-              tabindex="0"
-              class="route-tab">
+          <li
+            (click)="$event.preventDefault(); selectTab(tab)"
+            [routerLink]="tab.route"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="activeLinkOptions"
+            [class.responsive]="tab.responsive"
+            [queryParams]="tab.queryParams"
+            [queryParamsHandling]="tab.queryParamsHandling"
+            [fragment]="tab.fragment"
+            [preserveFragment]="tab.preserveFragment"
+            [skipLocationChange]="tab.skipLocationChange"
+            [replaceUrl]="tab.replaceUrl"
+            [state]="tab.state"
+            tabindex="0"
+            class="route-tab"
+          >
             <a tabindex="-1" class="tab-link">
               <nb-icon *ngIf="tab.icon" [config]="tab.icon"></nb-icon>
               <span *ngIf="tab.title" class="tab-text">{{ tab.title }}</span>
@@ -122,7 +125,6 @@ import { convertToBoolProperty, NbBooleanInput } from '../helpers';
   `,
 })
 export class NbRouteTabsetComponent {
-
   @HostBinding('class.full-width') fullWidthValue: boolean = false;
 
   /**
