@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-@use 'tree-grid-sort.component.theme' as tree-grid-sort;
+@use 'tree-grid-sort.component.theme' as tree-grid-sort-theme;
 @use '../../styles/theming' as *;
 
 @mixin nb-tree-grid-theme() {
@@ -68,5 +68,5 @@
     }
   }
 
-  @include tree-grid-sort.nb-tree-grid-sort-header-theme();
+  @include tree-grid-sort-theme.nb-tree-grid-sort-header-theme();
 }
