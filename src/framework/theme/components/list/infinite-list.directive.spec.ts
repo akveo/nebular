@@ -17,7 +17,6 @@ const CONTENT_PADDING = 20;
 const CONTENT_HEIGHT = 10000 + CONTENT_PADDING;
 const ELEMENT_HEIGHT = 500;
 const THRESHOLD = 200;
-const THROTTLE_TIME = 0;
 
 let fixture: ComponentFixture<ScrollTestComponent>;
 let testComponent: ScrollTestComponent;
@@ -70,7 +69,7 @@ class ScrollTestComponent {
   listenWindowScroll = false;
   threshold = THRESHOLD;
   withScroll = false;
-  throttleTime = THROTTLE_TIME;
+  throttleTime = 0;
 
   bottomThreshold() {}
   topThreshold() {}
