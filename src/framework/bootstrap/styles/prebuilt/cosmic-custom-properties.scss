@@ -10,6 +10,4 @@
 
 $nb-enabled-themes: (cosmic);
 
-@include nb-install() {
-  @include nb-bootstrap-global();
-}
+@include nb-install();
