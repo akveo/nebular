@@ -121,8 +121,10 @@
 @mixin nb-install-global-with-css-props() {
   @content;
 
-  @each $theme-name in register.nb-get-enabled-themes() {
-    @include nb-install-css-properties($theme-name, register.nb-get-registered-theme($theme-name));
+  @if (theming-variables.$nb-global-styles-on-install) {
+    @each $theme-name in register.nb-get-enabled-themes() {
+      @include nb-install-css-properties($theme-name, register.nb-get-registered-theme($theme-name));
+    }
   }
 }
 

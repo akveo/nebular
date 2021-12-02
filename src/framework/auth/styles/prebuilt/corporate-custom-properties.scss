@@ -4,6 +4,4 @@
 
 $nb-enabled-themes: (corporate);
 
-@include nb-install() {
-  @include nb-auth-global();
-}
+@include nb-install();
