@@ -3,7 +3,9 @@
 }
 
 .theme-radio-label {
-  margin-right: 0.25rem;
+  display: inline-flex;
+  align-items: center;
+  margin-right: 0.5rem;
 
   &:last-child {
     margin-right: 0;
@@ -11,6 +13,5 @@
 }
 
 .theme-radio {
-  margin: 0.125rem 0.125rem 0 0;
-  vertical-align: top;
+  margin-right: 0.125rem;
 }

@@ -5,9 +5,26 @@
  */
 
 import { Component, Input, Output, EventEmitter, HostBinding } from '@angular/core';
-import { RouterLinkActive } from '@angular/router';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 
 import { convertToBoolProperty, NbBooleanInput } from '../helpers';
+import { NbIconConfig } from '../icon/icon.component';
+
+export interface NbRouteTab {
+  route?: RouterLink['routerLink'] | undefined;
+  title?: string | undefined;
+  icon?: string | NbIconConfig | undefined;
+  disabled?: boolean | undefined;
+  responsive?: boolean | undefined;
+  queryParams?: RouterLink['queryParams'] | undefined;
+  queryParamsHandling?: RouterLink['queryParamsHandling'] | undefined;
+  fragment?: RouterLink['fragment'] | undefined;
+  preserveFragment?: RouterLink['preserveFragment'] | undefined;
+  skipLocationChange?: RouterLink['skipLocationChange'] | undefined;
+  replaceUrl?: RouterLink['replaceUrl'] | undefined;
+  state?: RouterLink['state'] | undefined;
+  activeLinkOptions?: RouterLinkActive['routerLinkActiveOptions'] | undefined;
+}
 
 /**
  * Route tabset components.
@@ -19,7 +36,7 @@ import { convertToBoolProperty, NbBooleanInput } from '../helpers';
  *    title: 'Route tab #1',
  *    route: '/pages/description',
  *    icon: 'home',
- *    responsive: true, // hide title before `tabset-tab-text-hide-breakpoint` value
+ *    responsive: true, // hide title before `$tabset-tab-text-hide-breakpoint` value
  *  },
  *  {
  *    title: 'Route tab #2',
@@ -77,7 +94,6 @@ import { convertToBoolProperty, NbBooleanInput } from '../helpers';
  * route-tabset-scrollbar-color:
  * route-tabset-scrollbar-background-color:
  * route-tabset-scrollbar-width:
- * route-tabset-tab-text-hide-breakpoint:
  */
 @Component({
   selector: 'nb-route-tabset',
@@ -85,10 +101,12 @@ import { convertToBoolProperty, NbBooleanInput } from '../helpers';
   template: `
     <ul class="route-tabset">
       <ng-container *ngFor="let tab of tabs">
-        <li *ngIf="tab.disabled; else enabled"
-            [class.responsive]="tab.responsive"
-            class="route-tab disabled"
-            tabindex="-1">
+        <li
+          *ngIf="tab.disabled; else enabled"
+          [class.responsive]="tab.responsive"
+          class="route-tab disabled"
+          tabindex="-1"
+        >
           <a tabindex="-1" class="tab-link">
             <nb-icon *ngIf="tab.icon" [config]="tab.icon"></nb-icon>
             <span *ngIf="tab.title" class="tab-text">{{ tab.title }}</span>
@@ -96,10 +114,14 @@ import { convertToBoolProperty, NbBooleanInput } from '../helpers';
         </li>
 
         <ng-template #enabled>
-          <li (click)="$event.preventDefault(); selectTab(tab)"
+          <li
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="activeLinkOptions | nbMergeConfigs: tab.activeLinkOptions"
+            class="route-tab"
+          >
+            <a
+              (click)="selectTab(tab)"
               [routerLink]="tab.route"
-              routerLinkActive="active"
-              [routerLinkActiveOptions]="activeLinkOptions"
               [class.responsive]="tab.responsive"
               [queryParams]="tab.queryParams"
               [queryParamsHandling]="tab.queryParamsHandling"
@@ -108,9 +130,8 @@ import { convertToBoolProperty, NbBooleanInput } from '../helpers';
               [skipLocationChange]="tab.skipLocationChange"
               [replaceUrl]="tab.replaceUrl"
               [state]="tab.state"
-              tabindex="0"
-              class="route-tab">
-            <a tabindex="-1" class="tab-link">
+              class="tab-link"
+            >
               <nb-icon *ngIf="tab.icon" [config]="tab.icon"></nb-icon>
               <span *ngIf="tab.title" class="tab-text">{{ tab.title }}</span>
             </a>
@@ -122,14 +143,12 @@ import { convertToBoolProperty, NbBooleanInput } from '../helpers';
   `,
 })
 export class NbRouteTabsetComponent {
-
   @HostBinding('class.full-width') fullWidthValue: boolean = false;
 
   /**
    * Tabs configuration
-   * @param Object{route: string, title: string, tag?: string, responsive?: boolean, disabled?: boolean}
    */
-  @Input() tabs: any[];
+  @Input() tabs: NbRouteTab[];
 
   /**
    * Options passed to `routerLinkActiveOptions` directive which set on tab links.
@@ -149,11 +168,11 @@ export class NbRouteTabsetComponent {
 
   /**
    * Emits when tab is selected
-   * @type {EventEmitter<any>}
+   * @type {EventEmitter<NbRouteTab>}
    */
-  @Output() changeTab = new EventEmitter<any>();
+  @Output() changeTab = new EventEmitter<NbRouteTab>();
 
-  selectTab(tab: any) {
+  selectTab(tab: NbRouteTab) {
     this.changeTab.emit(tab);
   }
 }

@@ -35,21 +35,20 @@ export abstract class NbTriggerStrategyBase implements NbTriggerStrategy {
 
   protected destroyed$ = new Subject<void>();
 
-  // @breaking-change 9.0.0 Change parameter to Element instead of Event
-  protected isNotOnHostOrContainer(event: Event): boolean {
-    return !this.isOnHost(event) && !this.isOnContainer(event);
+  protected isNotOnHostOrContainer(element: Element): boolean {
+    return !this.isOnHost(element) && !this.isOnContainer(element);
   }
 
-  protected isOnHostOrContainer(event: Event): boolean {
-    return this.isOnHost(event) || this.isOnContainer(event);
+  protected isOnHostOrContainer(element: Element): boolean {
+    return this.isOnHost(element) || this.isOnContainer(element);
   }
 
-  protected isOnHost({ target }: Event): boolean {
-    return this.host.contains(target as Node);
+  protected isOnHost(element: Element): boolean {
+    return this.host.contains(element);
   }
 
-  protected isOnContainer({ target }: Event): boolean {
-    return this.container() && this.container().location.nativeElement.contains(target);
+  protected isOnContainer(element: Element): boolean {
+    return this.container() && this.container().location.nativeElement.contains(element);
   }
 
   abstract show$: Observable<Event>;
@@ -74,7 +73,7 @@ export class NbClickTriggerStrategy extends NbTriggerStrategyBase {
   // if we track the click & state separately this will case a behavior when the container is getting shown
   // and then hidden right away
   protected click$: Observable<[boolean, Event]> = observableFromEvent<Event>(this.document, 'click').pipe(
-    map((event: Event) => [!this.container() && this.isOnHost(event), event] as [boolean, Event]),
+    map((event: Event) => [!this.container() && this.isOnHost(event.target as Element), event] as [boolean, Event]),
     share(),
     takeUntil(this.destroyed$),
   );
@@ -86,7 +85,7 @@ export class NbClickTriggerStrategy extends NbTriggerStrategyBase {
   );
 
   readonly hide$: Observable<Event> = this.click$.pipe(
-    filter(([shouldShow, event]) => !shouldShow && !this.isOnContainer(event)),
+    filter(([shouldShow, event]) => !shouldShow && !this.isOnContainer(event.target as Element)),
     map(([, event]) => event),
     takeUntil(this.destroyed$),
   );
@@ -114,7 +113,7 @@ export class NbHoverTriggerStrategy extends NbTriggerStrategyBase {
       observableFromEvent<Event>(this.document, 'mousemove').pipe(
         debounceTime(100),
         takeWhile(() => !!this.container()),
-        filter((event) => this.isNotOnHostOrContainer(event)),
+        filter((event) => this.isNotOnHostOrContainer(event.target as Element)),
       ),
     ),
     takeUntil(this.destroyed$),
@@ -150,7 +149,7 @@ export class NbFocusTriggerStrategy extends NbTriggerStrategyBase {
     switchMap(() =>
       observableFromEvent<Event>(this.document, 'focusin').pipe(
         takeWhile(() => !!this.container()),
-        filter((event) => this.isNotOnHostOrContainer(event)),
+        filter((event) => this.isNotOnHostOrContainer(event.target as Element)),
       ),
     ),
     takeUntil(this.destroyed$),
@@ -168,8 +167,8 @@ export class NbFocusTriggerStrategy extends NbTriggerStrategyBase {
      * If during click you return focus to the host, it won't be opened.
      */
     filter((event) => {
-      if (this.isNotOnHostOrContainer(event)) {
-        return this.isNotOnHostOrContainer({ target: this.document.activeElement } as unknown as Event);
+      if (this.isNotOnHostOrContainer(event.target as Element)) {
+        return this.isNotOnHostOrContainer(this.document.activeElement);
       }
       return false;
     }),

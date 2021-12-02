@@ -1,7 +1,7 @@
-@import 'themes';
-@import '../../framework/theme/styles/globals';
-@import '../../framework/auth/styles/globals';
-@import 'example-helpers';
+@use '../../framework/theme/styles/globals' as *;
+@use '../../framework/auth/styles/globals' as *;
+@use 'themes' as *;
+@use 'example-helpers' as *;
 
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap');
 
@@ -10,7 +10,7 @@
   @include nb-auth-global();
 
   @include nb-example-helpers();
-};
+}
 
 body {
   scrollbar-face-color: rgba(0, 0, 0, 0.3);

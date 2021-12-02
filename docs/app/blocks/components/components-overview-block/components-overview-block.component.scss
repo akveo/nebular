@@ -1,7 +1,7 @@
-@import '../../../@theme/styles/themes';
+@use '../../../@theme/styles/themes' as *;
+@use '../../../../../src/framework/theme/styles/globals' as *;
 
 @include nb-install-component() {
-
   .header-card .page-heading {
     margin-bottom: 0;
   }
@@ -36,7 +36,6 @@
       text-decoration: none;
     }
 
-
     nb-card {
       box-shadow: 0 4px 27px 0 rgba(230, 234, 240, 0.2);
       transition: transform 0.25s ease;
@@ -62,7 +61,6 @@
 
   @include media-breakpoint-up(is) {
     .components-list {
-
       .component-card-wrapper {
         flex: 1 0 auto;
         width: 50%;

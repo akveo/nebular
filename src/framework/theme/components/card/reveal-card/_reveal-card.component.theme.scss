@@ -1,3 +1,5 @@
+@use '../../../styles/theming' as *;
+
 @mixin nd-reveal-card-theme {
   nb-reveal-card {
     box-shadow: nb-theme(card-shadow);
