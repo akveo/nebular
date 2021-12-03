@@ -17,6 +17,4 @@ jobs:
           cache: 'npm'
       - run: npm ci
       - run: npm run docs:gh-pages
-      - run: npx angular-cli-ghpages --dir . --repo=https://GH_TOKEN@github.com/${REPO_OWNER}/${REPO_NAME}.git
-        env:
-          GH_TOKEN: secrets.GH_TOKEN
+      - run: npx angular-cli-ghpages --dir . --repo=https://GITHUB_TOKEN@github.com/${REPO_OWNER}/${REPO_NAME}.git
