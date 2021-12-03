@@ -19,6 +19,7 @@ $route-tabset-tab-text-hide-breakpoint: 36rem !default;
 // `nb-install` mixin. Used to generate components themes without global theme styles.
 // Works only when `$nb-enable-css-custom-properties` mode enabled.
 $nb-global-styles-on-install: true !default;
+$nb-eva-2: false !default;
 
 // public variables
 $nb-enable-css-custom-properties: true !default !global;
@@ -37,3 +38,4 @@ $nb-processed-theme: () !global;
 $nb-theme-export-mode: false !default !global;
 $nb-themes-export: () !global;
 $nb-global-styles-on-install: true !default !global;
+$nb-eva-2: false !default !global;

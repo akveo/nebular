@@ -34,5 +34,7 @@ $theme: (
   outline-color: color-basic-700,
 );
 
-// register the theme
+@if (theming-variables.$nb-eva-2) {
+  $theme: ();
+}
 theming-variables.$nb-themes: register.nb-register-theme($theme, dark, default);

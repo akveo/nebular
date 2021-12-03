@@ -4,6 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
+@use '../../styles/theming-variables' as *;
 @use '../../styles/theming' as *;
 @use 'button-core';
 @use 'button-filled';
@@ -12,10 +13,86 @@
 @use 'button-hero';
 
 @mixin nb-buttons-theme() {
+  @if ($nb-eva-2) {
+    @include _button-eva-2-theme();
+  } @else {
+    [nbButton] {
+      @include button-core.nb-button-core();
+
+      cursor: nb-theme(button-cursor);
+      font-family: nb-theme(button-text-font-family);
+      font-weight: nb-theme(button-text-font-weight);
+
+      &:focus {
+        // Sibling buttons are covering outline shadow.
+        // position: relative; declaration makes shadow appear on top of sibling buttons.
+        position: relative;
+        outline: none;
+        @include nb-outline(nb-theme(button-outline-width), nb-theme(button-outline-color));
+      }
+
+      &[disabled],
+      &.btn-disabled {
+        cursor: nb-theme(button-disabled-cursor);
+      }
+
+      @each $size in nb-get-sizes() {
+        &.size-#{$size} {
+          font-size: nb-theme(button-#{$size}-text-font-size);
+          line-height: nb-theme(button-#{$size}-text-line-height);
+
+          nb-icon {
+            font-size: nb-theme(button-#{$size}-text-font-size);
+            height: nb-theme(button-#{$size}-icon-size);
+            width: nb-theme(button-#{$size}-icon-size);
+            margin-top: nb-theme(button-#{$size}-icon-vertical-margin);
+            margin-bottom: nb-theme(button-#{$size}-icon-vertical-margin);
+          }
+
+          $icon-offset: nb-theme(button-#{$size}-icon-offset);
+
+          &.icon-start:not(.icon-end) nb-icon {
+            @include nb-ltr(margin-right, $icon-offset);
+            @include nb-rtl(margin-left, $icon-offset);
+          }
+
+          &.icon-end:not(.icon-start) nb-icon {
+            @include nb-ltr(margin-left, $icon-offset);
+            @include nb-rtl(margin-right, $icon-offset);
+          }
+
+          @each $appearance in ('filled', 'outline', 'ghost', 'hero') {
+            &.icon-start.icon-end.appearance-#{$appearance} {
+              padding: nb-theme(icon-button-#{$appearance}-#{$size}-padding);
+            }
+          }
+        }
+      }
+
+      @each $shape in nb-get-shapes() {
+        &.shape-#{$shape} {
+          border-radius: nb-theme(button-#{$shape}-border-radius);
+        }
+      }
+    }
+
+    a[nbButton] {
+      text-decoration: none;
+    }
+
+    @include button-filled.button-filled;
+    @include button-outline.button-outline;
+    @include button-ghost.button-ghost;
+    @include button-hero.button-hero;
+  }
+}
+
+@mixin _button-eva-2-theme() {
   [nbButton] {
     @include button-core.nb-button-core();
 
     cursor: nb-theme(button-cursor);
+
     font-family: nb-theme(button-text-font-family);
     font-weight: nb-theme(button-text-font-weight);
 
@@ -32,6 +109,10 @@
       cursor: nb-theme(button-disabled-cursor);
     }
 
+    a[nbButton] {
+      text-decoration: none;
+    }
+
     @each $size in nb-get-sizes() {
       &.size-#{$size} {
         font-size: nb-theme(button-#{$size}-text-font-size);
@@ -46,10 +127,12 @@
         }
 
         $icon-offset: nb-theme(button-#{$size}-icon-offset);
+
         &.icon-start:not(.icon-end) nb-icon {
           @include nb-ltr(margin-right, $icon-offset);
           @include nb-rtl(margin-left, $icon-offset);
         }
+
         &.icon-end:not(.icon-start) nb-icon {
           @include nb-ltr(margin-left, $icon-offset);
           @include nb-rtl(margin-right, $icon-offset);
@@ -70,12 +153,5 @@
     }
   }
 
-  a[nbButton] {
-    text-decoration: none;
-  }
-
-  @include button-filled.button-filled;
   @include button-outline.button-outline;
-  @include button-ghost.button-ghost;
-  @include button-hero.button-hero;
 }

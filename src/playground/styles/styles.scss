@@ -1,9 +1,14 @@
 @use '../../framework/theme/styles/globals' as *;
+@use '../../framework/theme/styles/theming-variables';
 @use '../../framework/auth/styles/globals' as *;
 @use 'themes' as *;
 @use 'example-helpers' as *;
 
-@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap');
+@if (theming-variables.$nb-eva-2) {
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+} @else {
+  @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap');
+}
 
 @include nb-install() {
   @include nb-theme-global();

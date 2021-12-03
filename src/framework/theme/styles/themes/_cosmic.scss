@@ -43,4 +43,7 @@ $theme: (
   color-basic-transparent-600: rgba(180, 180, 219, 0.48),
 );
 
+@if (theming-variables.$nb-eva-2) {
+  $theme: ();
+}
 theming-variables.$nb-themes: register.nb-register-theme($theme, cosmic, dark);

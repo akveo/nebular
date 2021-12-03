@@ -4,6 +4,8 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
+@use '../theming-variables';
+
 $eva-mapping: (
   /* Components mappings - maps theme variables onto component variables */ link-text-color: text-primary-color,
   link-text-decoration: underline,
@@ -2843,3 +2845,61 @@ $eva-mapping: (
   form-field-addon-giant-line-height: text-button-giant-line-height,
   form-field-addon-giant-font-weight: text-button-font-weight
 );
+
+@if (theming-variables.$nb-eva-2) {
+  $eva-mapping: (
+    button-cursor: pointer,
+    button-outline-border-style: solid,
+    button-outline-border-width: 0.0625rem,
+    button-outline-text-transform: uppercase,
+    button-outline-tiny-padding: 0.3125rem 0.625rem,
+    button-outline-small-padding: 0.4375rem 0.875rem,
+    button-outline-medium-padding: 0.6875rem 1.125rem,
+    button-outline-large-padding: 0.8125rem 1.125rem,
+    button-outline-giant-padding: 0.9375rem 1.375rem,
+    button-outline-basic-background-color: color-basic-transparent-default,
+    button-outline-basic-border-color: color-basic-transparent-default-border,
+    button-outline-basic-text-color: text-hint-color,
+    button-outline-basic-focus-background-color: color-basic-transparent-focus,
+    button-outline-basic-focus-border-color: color-basic-transparent-focus-border,
+    button-outline-basic-focus-text-color: text-hint-color,
+    button-outline-basic-hover-background-color: color-basic-transparent-hover,
+    button-outline-basic-hover-border-color: color-basic-transparent-hover-border,
+    button-outline-basic-hover-text-color: text-hint-color,
+    button-outline-basic-active-background-color: color-basic-transparent-active,
+    button-outline-basic-active-border-color: color-basic-transparent-active-border,
+    button-outline-basic-active-text-color: text-hint-color,
+    button-outline-basic-disabled-background-color: color-basic-transparent-disabled,
+    button-outline-basic-disabled-border-color: color-basic-transparent-disabled-border,
+    button-outline-basic-disabled-text-color: text-disabled-color,
+    button-outline-primary-background-color: color-primary-transparent-default,
+    button-outline-primary-border-color: color-primary-transparent-default-border,
+    button-outline-primary-text-color: text-hint-color,
+    button-outline-primary-focus-background-color: color-primary-transparent-focus,
+    button-outline-primary-focus-border-color: color-primary-transparent-focus-border,
+    button-outline-primary-focus-text-color: text-hint-color,
+    button-outline-primary-hover-background-color: color-primary-transparent-hover,
+    button-outline-primary-hover-border-color: color-primary-transparent-hover-border,
+    button-outline-primary-hover-text-color: text-hint-color,
+    button-outline-primary-active-background-color: color-primary-transparent-active,
+    button-outline-primary-active-border-color: color-primary-transparent-active-border,
+    button-outline-primary-active-text-color: text-hint-color,
+    button-outline-primary-disabled-background-color: color-primary-transparent-disabled,
+    button-outline-primary-disabled-border-color: color-primary-transparent-disabled-border,
+    button-outline-primary-disabled-text-color: text-disabled-color,
+    button-outline-secondary-border-color: color-secondary-transparent-default-border,
+    button-outline-secondary-text-color: text-hint-color,
+    button-outline-secondary-focus-background-color: color-secondary-transparent-focus,
+    button-outline-secondary-focus-border-color: color-secondary-transparent-focus-border,
+    button-outline-secondary-focus-text-color: text-hint-color,
+    button-outline-secondary-hover-background-color: color-secondary-transparent-hover,
+    button-outline-secondary-hover-border-color: color-secondary-transparent-hover-border,
+    button-outline-secondary-hover-text-color: text-hint-color,
+    button-outline-secondary-active-background-color: color-secondary-transparent-active,
+    button-outline-secondary-active-border-color: color-secondary-transparent-active-border,
+    button-outline-secondary-active-text-color: text-hint-color,
+    button-outline-secondary-disabled-background-color: color-secondary-transparent-disabled,
+    button-outline-secondary-disabled-border-color: color-secondary-transparent-disabled-border,
+    button-outline-secondary-disabled-text-color: text-disabled-color,
+  );
+}

@@ -32,4 +32,7 @@ $theme: (
   accordion-shadow: none,
 );
 
+@if (theming-variables.$nb-eva-2) {
+  $theme: ();
+}
 theming-variables.$nb-themes: register.nb-register-theme($theme, corporate, default);
