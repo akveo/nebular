@@ -539,6 +539,7 @@ export class NbDatepickerComponent<D> extends NbBasePickerComponent<D, D, NbCale
    * */
   @Input() set date(date: D) {
     this.value = date;
+    this.onChange$.next(date);
   }
 
   /**
@@ -549,7 +550,7 @@ export class NbDatepickerComponent<D> extends NbBasePickerComponent<D, D, NbCale
   }
 
   get value(): D {
-    return this.picker?.range ?? this.queue;
+    return this.picker?.range ?? undefined;
   }
 
   set value(date: D) {
@@ -598,6 +599,7 @@ export class NbRangepickerComponent<D> extends NbBasePickerComponent<
    * */
   @Input() set range(range: NbCalendarRange<D>) {
     this.value = range;
+    this.onChange$.next(range);
   }
 
   /**
@@ -608,7 +610,7 @@ export class NbRangepickerComponent<D> extends NbBasePickerComponent<
   }
 
   get value(): NbCalendarRange<D> {
-    return this.picker?.range ?? this.queue;
+    return this.picker?.range ?? undefined;
   }
 
   set value(range: NbCalendarRange<D>) {

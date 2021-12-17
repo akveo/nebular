@@ -452,12 +452,11 @@ export class NbDatepickerDirective<D> implements OnDestroy, ControlValueAccessor
         .pipe(
           take(1),
           tap(() => (this.isDatepickerReady = true)),
-          map(() => this.queue || this.picker.value),
-          filter((value) => !!value),
+          filter(() => !!this.queue),
           takeUntil(this.destroy$),
         )
-        .subscribe((value) => {
-          this.writeValue(value);
+        .subscribe(() => {
+          this.writeValue(this.queue);
           this.changeDetector.detectChanges();
           this.queue = undefined;
         });
