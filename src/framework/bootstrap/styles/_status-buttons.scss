@@ -4,6 +4,8 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
+@use '../../theme/styles/theming' as *;
+
 @mixin b-btn-status($status) {
   background-color: nb-theme(button-filled-#{$status}-background-color);
   border-color: nb-theme(button-filled-#{$status}-border-color);
@@ -32,7 +34,6 @@
 }
 
 @mixin b-btn-statuses() {
-
   .btn.btn-primary {
     @include b-btn-status(primary);
   }
@@ -42,7 +43,7 @@
   }
 
   .btn.btn-warning {
-    @include b-btn-status(warning );
+    @include b-btn-status(warning);
   }
 
   .btn.btn-info {

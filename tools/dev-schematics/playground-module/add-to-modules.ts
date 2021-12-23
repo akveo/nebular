@@ -245,6 +245,13 @@ function multilineDeclarationsArray(tree: Tree, modulePath: Path): void {
   }
 
   const declarationsArray = declarationsNode.initializer as ts.ArrayLiteralExpression;
+
+  const isAlreadyMultiline = declarationsArray.getText().includes('\n');
+  const fitsMaxLineLength = declarationsNode.getFullText().length <= 120; // from prettier config
+  if (isAlreadyMultiline || fitsMaxLineLength) {
+    return;
+  }
+
   const replaces = multilineArrayLiteral(source.getFullText(), declarationsArray);
   applyReplaceChange(tree, modulePath, ...replaces);
 }

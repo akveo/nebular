@@ -4,7 +4,7 @@
 * Licensed under the MIT License. See License.txt in the project root for license information.
 */
 
-@import '../../../styles/core/mixins';
+@use '../../../styles/theming' as *;
 
 :host {
   button {
@@ -53,7 +53,6 @@
 }
 
 :host.modal-zoomin {
-
   display: block;
 
   .search {
@@ -122,7 +121,6 @@
       transition: opacity 0.5s, transform 0.5s;
     }
   }
-
 
   &.show {
     .search {

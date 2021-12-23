@@ -4,12 +4,15 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
+@use 'sass:list';
+@use '../theming-variables';
+
 @function nb-get-core-statuses() {
   @return 'basic', 'primary', 'success', 'warning', 'danger', 'info', 'control';
 }
 
 @function nb-get-statuses() {
-  @return join(nb-get-core-statuses(), $nb-custom-statuses);
+  @return list.join(nb-get-core-statuses(), theming-variables.$nb-custom-statuses);
 }
 
 @function nb-get-sizes() {

@@ -4,6 +4,8 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
+@use '../../styles/theming' as *;
+
 @mixin nb-tree-grid-sort-header-theme() {
   .nb-tree-grid-header-change-sort-button {
     background: nb-theme(tree-grid-sort-header-button-background-color);

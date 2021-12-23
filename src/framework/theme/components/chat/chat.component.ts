@@ -26,6 +26,7 @@ import { convertToBoolProperty, NbBooleanInput } from '../helpers';
 import { NbChatFormComponent } from './chat-form.component';
 import { NbChatMessageComponent } from './chat-message.component';
 import { NbChatCustomMessageService } from './chat-custom-message.service';
+import { NbChatTitleDirective } from './chat-title.directive';
 
 /**
  * Conversational UI collection - a set of components for chat-like UI construction.
@@ -100,6 +101,9 @@ import { NbChatCustomMessageService } from './chat-custom-message.service';
  * <nb-chat-message>
  * </nb-chat-message> // chat message, available multiple types
  * ```
+ *
+ * You could provide a title template via the `nbChatTitle` directive. It overrides `title` input.
+ * @stacked-example(Custom template as a title, chat/chat-template-title.component)
  *
  * Two users conversation showcase:
  * @stacked-example(Conversation, chat/chat-conversation-showcase.component)
@@ -237,7 +241,18 @@ import { NbChatCustomMessageService } from './chat-custom-message.service';
   selector: 'nb-chat',
   styleUrls: ['./chat.component.scss'],
   template: `
-    <div class="header">{{ title }}</div>
+    <div class="header">
+      <ng-container
+        *ngIf="titleTemplate; else textTitleTemplate"
+        [ngTemplateOutlet]="titleTemplate.templateRef"
+        [ngTemplateOutletContext]="{ $implicit: titleTemplate.context }"
+      >
+      </ng-container>
+      <ng-template #textTitleTemplate>
+        {{ title }}
+      </ng-template>
+    </div>
+
     <div class="scrollable" #scrollable>
       <div class="messages">
         <ng-content select="nb-chat-message"></ng-content>
@@ -283,6 +298,7 @@ export class NbChatComponent implements OnChanges, AfterContentInit, AfterViewIn
   @ViewChild('scrollable') scrollable: ElementRef;
   @ContentChildren(NbChatMessageComponent) messages: QueryList<NbChatMessageComponent>;
   @ContentChild(NbChatFormComponent) chatForm: NbChatFormComponent;
+  @ContentChild(NbChatTitleDirective) titleTemplate: NbChatTitleDirective;
 
   constructor(protected statusService: NbStatusService) {}
 

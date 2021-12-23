@@ -1,0 +1,19 @@
+name: Deploy docs
+on:
+  push:
+    branches:
+      - master
+  release:
+    types:
+      - published
+jobs:
+  deploy-docs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+          cache: 'npm'
+      - run: npm ci
+      - run: npm run docs:gh-pages

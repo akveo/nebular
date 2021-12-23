@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-@import '../../../styles/core/mixins';
+@use '../../../styles/theming' as *;
 
 ::ng-deep nb-layout.modal-drop .layout {
   position: relative;
@@ -19,7 +19,6 @@
 }
 
 :host.modal-drop {
-
   .search {
     display: flex;
     flex-direction: column;
@@ -127,8 +126,6 @@
         opacity: 1;
         transition: opacity 0s 0.4s;
       }
-
-
 
       span {
         opacity: 1;

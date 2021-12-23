@@ -1,0 +1,39 @@
+/*
+  Declare variables before making them global.
+  dart-sass doesn't allow to declare variable with !global.
+ */
+$nb-enable-css-custom-properties: true !default;
+$nb-enabled-themes: ();
+$nb-themes: ();
+$nb-theme-process-mode: 'lazy-process' !default;
+$nb-theme-name: null;
+$nb-theme: ();
+$nb-processed-theme: ();
+$nb-theme-export-mode: false !default;
+$nb-themes-export: ();
+$nb-custom-statuses: () !default;
+$layout-window-mode-max-width: 1920px !default;
+$tabset-tab-text-hide-breakpoint: 36rem !default;
+$route-tabset-tab-text-hide-breakpoint: 36rem !default;
+// If disabled `nb-install` wouldn't produce global theme styles and only install content provided into
+// `nb-install` mixin. Used to generate components themes without global theme styles.
+// Works only when `$nb-enable-css-custom-properties` mode enabled.
+$nb-global-styles-on-install: true !default;
+
+// public variables
+$nb-enable-css-custom-properties: true !default !global;
+$nb-enabled-themes: () !global;
+$nb-themes: () !global;
+$nb-custom-statuses: () !default !global;
+$layout-window-mode-max-width: 1920px !default !global;
+$tabset-tab-text-hide-breakpoint: 36rem !default !global;
+$route-tabset-tab-text-hide-breakpoint: 36rem !default !global;
+
+// private variables
+$nb-theme-process-mode: 'lazy-process' !global;
+$nb-theme-name: null !global;
+$nb-theme: () !global;
+$nb-processed-theme: () !global;
+$nb-theme-export-mode: false !default !global;
+$nb-themes-export: () !global;
+$nb-global-styles-on-install: true !default !global;
