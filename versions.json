@@ -1,7 +1,7 @@
 [
   {
-    "checkoutTarget": "de1ada462",
-    "name": "8.0.0",
+    "checkoutTarget": "v9.0.0",
+    "name": "9.0.0",
     "path": "/nebular/",
     "isCurrent": true
   },
@@ -11,8 +11,8 @@
     "path": "/nebular/next/"
   },
   {
-    "checkoutTarget": "7.0.x",
-    "name": "7.0.x",
-    "path": "/nebular/7.0.x/"
+    "checkoutTarget": "8.0.x",
+    "name": "8.0.x",
+    "path": "/nebular/8.0.x/"
   }
 ]

@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Route} from '@angular/router';
+import { RouterModule, Route } from '@angular/router';
 import {
   RouteTabsetShowcaseChild1Component,
   RouteTabsetShowcaseChild2Component,
@@ -12,6 +12,7 @@ import { TabsetShowcaseComponent } from './tabset-showcase.component';
 import { TabsetTestComponent } from './tabset-test.component';
 import { TabsetWidthComponent } from './tabset-width.component';
 import { TabsetDisabledComponent } from './tabset-disabled.component';
+import { TabsetTemplateTitleComponent } from './tabset-template-title.component';
 
 const routes: Route[] = [
   {
@@ -65,10 +66,14 @@ const routes: Route[] = [
     path: 'tabset-disabled.component',
     component: TabsetDisabledComponent,
   },
+  {
+    path: 'tabset-template-title.component',
+    component: TabsetTemplateTitleComponent,
+  },
 ];
 
 @NgModule({
-  imports: [ RouterModule.forChild(routes) ],
-  exports: [ RouterModule ],
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule],
 })
 export class TabsetRoutingModule {}

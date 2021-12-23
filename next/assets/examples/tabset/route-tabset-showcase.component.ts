@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
+import { NbRouteTab } from '@nebular/theme';
 
 @Component({
-  selector: 'nb-route-tabset-showcase',
   template: `
     <nb-card>
       <nb-card-body>
@@ -11,7 +11,7 @@ import { Component } from '@angular/core';
   `,
 })
 export class RouteTabsetShowcaseComponent {
-  tabs: any[] = [
+  tabs: NbRouteTab[] = [
     {
       title: 'Users',
       icon: 'person',
@@ -21,7 +21,7 @@ export class RouteTabsetShowcaseComponent {
       title: 'Orders',
       icon: 'paper-plane-outline',
       responsive: true,
-      route: [ './tab2' ],
+      route: ['./tab2'],
     },
     {
       title: 'Query params',

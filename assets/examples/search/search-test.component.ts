@@ -60,12 +60,10 @@ import { NbSearchService } from '@nebular/theme';
   `,
 })
 export class SearchTestComponent implements OnInit {
-
-  constructor(private searchService: NbSearchService) {
-  }
+  constructor(private searchService: NbSearchService) {}
 
   ngOnInit() {
-    this.searchService.onSearchSubmit().subscribe((data: { term: string, tag: string }) => {
+    this.searchService.onSearchSubmit().subscribe((data: { term: string; tag?: string }) => {
       console.info(`term: ${data.term}, from search: ${data.tag}`);
     });
   }

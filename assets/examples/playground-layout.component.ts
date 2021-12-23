@@ -1,10 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { NbThemeService } from '@nebular/theme';
-import 'style-loader!../styles/styles.scss';
-
 
 @Component({
-  selector: 'nb-playground-layout',
   template: `
     <nb-layout>
       <nb-layout-column>
@@ -12,10 +9,11 @@ import 'style-loader!../styles/styles.scss';
       </nb-layout-column>
     </nb-layout>
   `,
+  styleUrls: ['../styles/styles.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class PlaygroundLayoutComponent implements OnInit {
-  constructor(private themeService: NbThemeService) {
-  }
+  constructor(private themeService: NbThemeService) {}
 
   ngOnInit() {
     this.themeService.changeTheme('default');
