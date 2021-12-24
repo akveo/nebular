@@ -14,10 +14,5 @@
     "checkoutTarget": "8.0.x",
     "name": "8.0.x",
     "path": "/nebular/8.0.x/"
-  },
-  {
-    "checkoutTarget": "7.0.x",
-    "name": "7.0.x",
-    "path": "/nebular/7.0.x/"
   }
 ]
