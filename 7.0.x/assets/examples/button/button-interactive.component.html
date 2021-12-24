@@ -1,0 +1,50 @@
+<nb-card>
+  <nb-card-body>
+
+    <fieldset>
+      <legend class="subtitle">Size:</legend>
+      <nb-radio-group [(value)]="selectedSize" name="size">
+        <nb-radio *ngFor="let size of sizes" name="size" [value]="size">{{ size }}</nb-radio>
+      </nb-radio-group>
+    </fieldset>
+
+    <fieldset>
+      <legend class="subtitle">Shape:</legend>
+      <nb-radio-group [(value)]="selectedShape" name="shape">
+        <nb-radio *ngFor="let shape of shapes" name="shape" [value]="shape">{{ shape }}</nb-radio>
+      </nb-radio-group>
+    </fieldset>
+
+    <button nbButton (click)="showDisabledRow = !showDisabledRow">
+      {{ showDisabledRow ? 'Hide' : 'Show' }} disabled row
+    </button>
+
+    <div *ngFor="let appearance of appearances" class="appearance-container">
+      <p class="subtitle appearance-name">{{ appearance }}:</p>
+      <div class="appearance-row">
+        <div *ngFor="let status of statuses" [class.control-status-example]="status === 'control'" class="status-container">
+          <button nbButton
+                  [appearance]="appearance"
+                  [status]="status"
+                  [size]="selectedSize"
+                  [shape]="selectedShape">
+            {{ status }}
+          </button>
+        </div>
+      </div>
+      <div class="appearance-row" *ngIf="showDisabledRow">
+        <div *ngFor="let status of statuses" [class.control-status-example]="status === 'control'" class="status-container">
+          <button nbButton
+                  [appearance]="appearance"
+                  [status]="status"
+                  [size]="selectedSize"
+                  [shape]="selectedShape"
+                  disabled>
+            {{ status }}
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </nb-card-body>
+</nb-card>

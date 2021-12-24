@@ -1,0 +1,15 @@
+@import '../../styles/themes';
+
+.text {
+  margin: 1rem 0 0;
+  // Set constant line height to prevent text shifting.
+  line-height: nb-theme(text-subtitle-line-height);
+}
+
+.text-italic {
+  font-style: italic;
+}
+
+.text-underline {
+  text-decoration: underline;
+}

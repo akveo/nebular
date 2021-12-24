@@ -1,0 +1,10 @@
+<nb-card>
+  <nb-card-body>
+
+    <nb-tag-list (tagRemove)="onTagRemove($event)">
+      <nb-tag *ngFor="let tree of trees" [text]="tree" removable></nb-tag>
+      <input type="text" nbTagInput (tagAdd)="onTagAdd($event)" fullWidth>
+    </nb-tag-list>
+
+  </nb-card-body>
+</nb-card>
