@@ -1,0 +1,16 @@
+::ng-deep nb-layout-column {
+  height: 400px;
+}
+
+::ng-deep .form {
+  display: flex;
+  flex-direction: column;
+
+  .text-label {
+    margin-top: 1.5rem;
+  }
+}
+
+button + button {
+  margin-left: 2rem;
+}
