@@ -15,8 +15,7 @@ jobs:
         with:
           node-version: '14'
           cache: 'npm'
-          github_token: ${{ secrets.GITHUB_TOKEN }}
       - run: npm ci
       - run: npm run docs:gh-pages
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
