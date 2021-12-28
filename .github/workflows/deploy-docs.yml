@@ -16,10 +16,6 @@ jobs:
           node-version: '14'
           cache: 'npm'
       - run: npm ci
-      - run: |
-        git config --local user.email "katebatura@gmail.com"
-        git config --local user.name "katebatura"
-        git commit -m "Add changes" -a
-      - run: npm run docs:gh-pages
         env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+      - run: npm run docs:gh-pages
