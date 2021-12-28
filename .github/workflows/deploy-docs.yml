@@ -20,6 +20,6 @@ jobs:
         git config --local user.email "katebatura@gmail.com"
         git config --local user.name "katebatura"
         git commit -m "Add changes" -a
-        npm run docs:gh-pages
+      - run: npm run docs:gh-pages
         env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
