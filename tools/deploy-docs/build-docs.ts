@@ -11,7 +11,7 @@ import { getStdout } from './get-stdout';
 
 const WORK_DIR = join(process.cwd(), '../_DOCS_BUILD_WORK_DIR_');
 const MASTER_BRANCH_DIR = join(WORK_DIR, 'MASTER');
-const DOCS_VERSIONS_PATH = join(MASTER_BRANCH_DIR, 'docs/versions.json');
+const DOCS_VERSIONS_PATH = join(process.cwd(), 'docs/versions.json');
 const GH_PAGES_DIR = join(WORK_DIR, 'gh-pages');
 const FILE_WITH_HASH = 'last-commit-hash.txt';
 
@@ -38,7 +38,7 @@ export interface Version {
   await copyToBuildDir(MASTER_BRANCH_DIR, GH_PAGES_DIR);
   await checkoutVersion('gh-pages', GH_PAGES_DIR);
   const builtVersions: { hash; path }[] = await checkBuiltVersions();
-  log(`Built versions in gh-pages: ${builtVersions}`);
+  log(`Built versions in gh-pages: ${JSON.stringify(builtVersions)}`);
 
   log('Reading versions configuration');
   const config: Version[] = await import(DOCS_VERSIONS_PATH);
@@ -54,11 +54,11 @@ export interface Version {
   log(`Adding versions.json to ${OUT_DIR}`);
   await outputFile(join(OUT_DIR, 'versions.json'), jsonConfig);
 
-  log(`Deploying to ghpages`);
-  await deploy(OUT_DIR);
+  //log(`Deploying to ghpages`);
+  //await deploy(OUT_DIR);
 
-  log(`Cleaning up working directory (${WORK_DIR})`);
-  await remove(WORK_DIR);
+  //log(`Cleaning up working directory (${WORK_DIR})`);
+  //await remove(WORK_DIR);
 })();
 
 function ensureSingleCurrentVersion(versions: Version[]) {
@@ -102,7 +102,7 @@ async function buildDocs(versions: Version[], builtVersions: { hash; path }[]) {
   const ghspaScript = generateGithubSpaScript(versions);
 
   return Promise.all(
-    versions.map((version: Version) => {
+    versions.map((version: Version, index) => {
       const versionDistDir = version.isCurrent ? OUT_DIR : join(OUT_DIR, version.name);
 
       return prepareVersion(version, versionDistDir, ghspaScript, builtVersions);
@@ -116,7 +116,7 @@ async function prepareVersion(version: Version, distDir: string, ghspaScript: st
   await copyToBuildDir(MASTER_BRANCH_DIR, projectDir);
   await checkoutVersion(version.checkoutTarget, projectDir);
 
-  const currentHash = getStdout('git rev-parse HEAD', { cwd: projectDir, showLog: true });
+  const currentHash = await getStdout('git rev-parse HEAD', { cwd: projectDir, showLog: true });
 
   const existInGhPages = builtVersions.find((item) => currentHash === item.hash);
 
@@ -125,6 +125,7 @@ async function prepareVersion(version: Version, distDir: string, ghspaScript: st
   } else {
     await runCommand('npm ci', { cwd: projectDir });
     await addVersionNameToPackageJson(version.name, join(projectDir, 'package.json'));
+    //await addVersionTs(version, join(projectDir, 'docs', 'version.ts'));
     await addVersionTs(version, join(projectDir, 'version.ts'));
     await buildDocsApp(projectDir, version.path);
     await addCommitHash(join(OUT_DIR, FILE_WITH_HASH), projectDir);
