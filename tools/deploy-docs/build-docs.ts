@@ -6,7 +6,7 @@ import { generateGithubSpaScript } from './ghspa-template';
 import { runCommand } from './run-command';
 import { log } from './log';
 
-import { REPO_URL, OUT_DIR, REPO_OWNER, REPO_NAME } from './config';
+import { REPO_URL, OUT_DIR } from './config';
 import { getStdout } from './get-stdout';
 
 const WORK_DIR = join(process.cwd(), '../_DOCS_BUILD_WORK_DIR_');
@@ -54,11 +54,8 @@ export interface Version {
   log(`Adding versions.json to ${OUT_DIR}`);
   await outputFile(join(OUT_DIR, 'versions.json'), jsonConfig);
 
-  //log(`Deploying to ghpages`);
-  //await deploy(OUT_DIR);
-
-  //log(`Cleaning up working directory (${WORK_DIR})`);
-  //await remove(WORK_DIR);
+  log(`Cleaning up working directory (${WORK_DIR})`);
+  await remove(WORK_DIR);
 })();
 
 function ensureSingleCurrentVersion(versions: Version[]) {
@@ -187,11 +184,4 @@ async function buildDocsApp(projectDir: string, baseHref: string) {
   await runCommand('npm run docs:prepare', { cwd: projectDir });
   await runCommand(`npm run build -- docs --configuration production --base-href '${baseHref}'`, { cwd: projectDir });
   await runCommand('npm run docs:dirs', { cwd: projectDir });
-}
-
-async function deploy(distDir: string) {
-  await runCommand(
-    `npx angular-cli-ghpages --dir . --repo=https://GH_TOKEN@github.com/${REPO_OWNER}/${REPO_NAME}.git`,
-    { cwd: distDir, showLog: true },
-  );
 }
