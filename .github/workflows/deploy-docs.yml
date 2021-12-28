@@ -15,7 +15,7 @@ jobs:
         with:
           node-version: '14'
           cache: 'npm'
-          repo-token: ${{ secrets.GH_TOKEN }}
+          token: ${{ secrets.GH_TOKEN }}
       - run: npm ci
       - run: npm run docs:gh-pages
       - run: npx angular-cli-ghpages --dir . --repo=https://github.com/katebatura/nebular.git
