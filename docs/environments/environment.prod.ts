@@ -11,5 +11,5 @@
 
 export const environment = {
   production: true,
-  versionsUrl: '/nebular/versions.json',
+  versionsUrl: '/nebular/docs/versions.json',
 };
