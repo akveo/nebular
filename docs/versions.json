@@ -6,7 +6,7 @@
     "isCurrent": true
   },
   {
-    "checkoutTarget": "master",
+    "checkoutTarget": "d68f8e53290e1292136c25759dd7de373b9d3e53",
     "name": "next",
     "path": "/nebular/next/"
   },
