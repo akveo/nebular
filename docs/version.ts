@@ -4,4 +4,4 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-export const VERSION_NAME = 'dev';
+export const VERSION_NAME = 'dev-test';
