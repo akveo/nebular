@@ -11,7 +11,7 @@ import { getStdout } from './get-stdout';
 
 const WORK_DIR = join(process.cwd(), '../_DOCS_BUILD_WORK_DIR_');
 const MASTER_BRANCH_DIR = join(WORK_DIR, 'MASTER');
-const DOCS_VERSIONS_PATH = join(process.cwd(), 'docs/versions.json');
+const DOCS_VERSIONS_PATH = join(MASTER_BRANCH_DIR, 'docs/versions.json');
 const GH_PAGES_DIR = join(WORK_DIR, 'gh-pages');
 const FILE_WITH_HASH = 'last-commit-hash.txt';
 

@@ -29,12 +29,11 @@ export class NgdVersionService {
   }
 
   getCurrentVersion(): Observable<Version> {
-    if (environment.production) {
-      return this.supportedVersions$.pipe(
-        map((versions: Version[]) => versions.find(({ name }) => name === VERSION_NAME)),
-      );
-    }
-    return of(this.devVersion);
+    console.log('env: ', environment.production);
+
+    return this.supportedVersions$.pipe(
+      map((versions: Version[]) => versions.find(({ name }) => name === VERSION_NAME)),
+    );
   }
 
   getSupportedVersions(): Observable<Version[]> {
