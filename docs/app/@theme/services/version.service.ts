@@ -21,23 +21,19 @@ export class NgdVersionService {
   supportedVersions$: Observable<Version[]>;
 
   constructor(private http: HttpClient) {
-    if (environment.production) {
-      this.supportedVersions$ = this.http.get<Version[]>(environment.versionsUrl).pipe(
-        catchError(() => of([])),
-        shareReplay(1),
-      );
-    } else {
-      this.supportedVersions$ = of([this.devVersion]).pipe(shareReplay(1));
-    }
+    console.log('env: ', environment.production);
+    this.supportedVersions$ = this.http.get<Version[]>(environment.versionsUrl).pipe(
+      catchError(() => of([])),
+      shareReplay(1),
+    );
   }
 
   getCurrentVersion(): Observable<Version> {
-    if (environment.production) {
-      return this.supportedVersions$.pipe(
-        map((versions: Version[]) => versions.find(({ name }) => name === VERSION_NAME)),
-      );
-    }
-    return of(this.devVersion);
+    console.log('env1: ', environment.production);
+
+    return this.supportedVersions$.pipe(
+      map((versions: Version[]) => versions.find(({ name }) => name === VERSION_NAME)),
+    );
   }
 
   getSupportedVersions(): Observable<Version[]> {
