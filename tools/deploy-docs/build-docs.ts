@@ -122,8 +122,8 @@ async function prepareVersion(version: Version, distDir: string, ghspaScript: st
   } else {
     await runCommand('npm ci', { cwd: projectDir });
     await addVersionNameToPackageJson(version.name, join(projectDir, 'package.json'));
-    await addVersionTs(version, join(projectDir, 'docs', 'version.ts'));
-    //await addVersionTs(version, join(projectDir, 'version.ts'));
+    //await addVersionTs(version, join(projectDir, 'docs', 'version.ts'));
+    await addVersionTs(version, join(projectDir, 'version.ts'));
     await buildDocsApp(projectDir, version.path);
     await addCommitHash(join(OUT_DIR, FILE_WITH_HASH), projectDir);
     await copy(join(projectDir, OUT_DIR), distDir);
