@@ -15,35 +15,37 @@ import { NgdVersionService, Version } from '../../services';
       </button>
       <div class="logo">
         <a routerLink="/">Nebular</a>
-        <span class="version" *ngIf="currentVersionName$ | async">
-          v{{ currentVersionName$ | async }}
-        </span>
+        <span class="version" *ngIf="currentVersionName$ | async"> v{{ currentVersionName$ | async }} </span>
+        {{ a }}
       </div>
     </div>
     <div class="section middle">
       <nb-menu [items]="mainMenu"></nb-menu>
       <ngd-search *ngIf="showSearch"></ngd-search>
-      <nb-select class="version-select"
-                 *ngIf="(showVersionSelect$ | async)"
-                 [selected]="currentVersion$ | async"
-                 (selectedChange)="redirectToVersion($event)">
+      <nb-select
+        class="version-select"
+        *ngIf="showVersionSelect$ | async"
+        [selected]="currentVersion$ | async"
+        (selectedChange)="redirectToVersion($event)"
+      >
         <nb-option *ngFor="let version of supportedVersions$ | async" [value]="version">
           {{ version.name }}
         </nb-option>
       </nb-select>
     </div>
     <div class="section right">
-      <iframe class="stars"
-              src="https://ghbtns.com/github-btn.html?user=akveo&repo=nebular&type=star&count=true"
-              frameborder="0"
-              scrolling="0">
+      <iframe
+        class="stars"
+        src="https://ghbtns.com/github-btn.html?user=akveo&repo=nebular&type=star&count=true"
+        frameborder="0"
+        scrolling="0"
+      >
       </iframe>
     </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NgdHeaderComponent implements OnInit {
-
   @Input() showSearch = true;
   @HostBinding('class.docs-page') @Input() isDocs = false;
 
@@ -51,6 +53,7 @@ export class NgdHeaderComponent implements OnInit {
   supportedVersions$: Observable<Version[]>;
   currentVersion$: Observable<Version>;
   currentVersionName$: Observable<string>;
+  a: boolean;
   showVersionSelect$: Observable<boolean>;
 
   mainMenu: NbMenuItem[] = [
@@ -89,13 +92,13 @@ export class NgdHeaderComponent implements OnInit {
   ngOnInit() {
     this.currentVersion$ = this.versionService.getCurrentVersion();
     this.currentVersionName$ = this.currentVersion$.pipe(map((version: Version) => version.name));
+    this.a = this.versionService.a();
     this.supportedVersions$ = this.versionService.getSupportedVersions();
 
-    this.showVersionSelect$ = this.supportedVersions$
-      .pipe(
-        map((versions: Version[]) => versions.length > 0),
-        startWith(false),
-      );
+    this.showVersionSelect$ = this.supportedVersions$.pipe(
+      map((versions: Version[]) => versions.length > 0),
+      startWith(false),
+    );
 
     if (!this.isDocs) {
       this.mainMenu.push({

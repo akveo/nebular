@@ -43,4 +43,8 @@ export class NgdVersionService {
   getSupportedVersions(): Observable<Version[]> {
     return this.supportedVersions$;
   }
+
+  a() {
+    return environment.production;
+  }
 }
