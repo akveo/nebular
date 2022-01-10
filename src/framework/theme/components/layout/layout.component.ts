@@ -282,6 +282,7 @@ export class NbLayoutComponent implements AfterViewInit, OnDestroy {
       .onScrollableChange()
       .pipe(
         filter(() => this.withScrollValue),
+        takeUntil(this.destroy$),
       )
       .subscribe((scrollable: boolean) => {
         /**

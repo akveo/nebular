@@ -250,6 +250,8 @@ export class NbContextMenuDirective implements NbDynamicOverlayController, OnCha
 
   ngOnDestroy() {
     this.dynamicOverlayHandler.destroy();
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   protected configureDynamicOverlay() {
