@@ -442,7 +442,7 @@ export class NbAutocompleteDirective<T> implements OnDestroy, AfterViewInit, Con
     if (index === 0 && labelCount === 1) {
       // If we are at the first option of the first option group, we scroll the list to the top
       // to allow the user to read the top group's label.
-      this._autocomplete.list.setScrollTop(0);
+      this._autocomplete.list?.setScrollTop(0);
     } else if (this._autocomplete.list?.list) {
       const option = this._autocomplete.options.toArray()[index];
       if (option) {
