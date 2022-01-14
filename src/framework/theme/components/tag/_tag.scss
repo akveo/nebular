@@ -4,8 +4,9 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-@import './tag-filled';
-@import './tag-outline';
+@use '../../styles/theming' as *;
+@use 'tag-filled';
+@use 'tag-outline';
 
 @mixin nb-tag-theme() {
   nb-tag {
@@ -34,8 +35,8 @@
       }
     }
 
-    @include nb-tag-filled();
-    @include nb-tag-outline();
+    @include tag-filled.nb-tag-filled();
+    @include tag-outline.nb-tag-outline();
   }
 
   .nb-tag-remove {

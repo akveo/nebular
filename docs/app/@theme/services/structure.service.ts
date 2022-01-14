@@ -62,9 +62,7 @@ export class NgdStructureService {
       }
 
       if (item.block === 'markdown') {
-        item.sections = this.articleService.getArticle(item.source).pipe(
-          map((article) => this.textService.mdToSectionsHTML(article)),
-        );
+        item.sections = this.articleService.getArticle(item.source);
       }
 
       if (item.children) {

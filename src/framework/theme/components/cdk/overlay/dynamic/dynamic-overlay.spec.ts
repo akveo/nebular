@@ -2,11 +2,14 @@ import { TestBed } from '@angular/core/testing';
 import { Component, ComponentFactoryResolver, EventEmitter, Input, NgZone } from '@angular/core';
 import { Subject } from 'rxjs';
 import { ScrollStrategy } from '@angular/cdk/overlay';
-
-import { NbDynamicOverlay } from './dynamic-overlay';
-import { NbOverlayService } from '../overlay-service';
-import { NbRenderableContainer } from '../overlay-container';
-import { NbComponentPortal, NbOverlayConfig, NbOverlayContainer } from '../mapping';
+import {
+  NbDynamicOverlay,
+  NbOverlayService,
+  NbRenderableContainer,
+  NbComponentPortal,
+  NbOverlayConfig,
+  NbOverlayContainer,
+} from '@nebular/theme';
 
 @Component({ template: '' })
 export class NbDynamicOverlayMockComponent implements NbRenderableContainer {

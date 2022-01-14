@@ -1,7 +1,7 @@
-@import '../../../@theme/styles/themes';
+@use '../../../@theme/styles/themes' as *;
+@use '../../../../../src/framework/theme/styles/globals' as *;
 
 @include nb-install-component() {
-
   $tab-fg: nb-theme(color-fg-heading-light);
   $tab-active-fg: #ffffff;
   $tab-active-bg: linear-gradient(225deg, #333c66 0%, #1d2447 100%);
@@ -27,7 +27,9 @@
       vertical-align: middle;
     }
 
-    &:focus, &:active, &:hover {
+    &:focus,
+    &:active,
+    &:hover {
       cursor: pointer;
       color: $tab-fg;
       outline: 0;
@@ -43,7 +45,7 @@
 
     > ul {
       padding: 0;
-      margin-bottom: 0!important; // TODO: check selectors
+      margin-bottom: 0 !important; // TODO: check selectors
       border-radius: 0.5rem 0.5rem 0 0;
       background-color: $tabs-bb;
       overflow: hidden;
@@ -51,7 +53,7 @@
       li {
         padding: 0.4rem;
         width: 20%;
-        margin-bottom: 0!important; // TODO: check selectors
+        margin-bottom: 0 !important; // TODO: check selectors
 
         &:first-child {
           margin-left: 0;
@@ -81,4 +83,3 @@
     }
   }
 }
-

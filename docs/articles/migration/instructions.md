@@ -7,16 +7,6 @@ This means that every Nebular version number could be broken down into the *majo
 - **minor** - contains new small features and bug fixes. Minor versions are backward-compatible.
 - **patch** - bug fix releases.
 
-## Long time support versions
-
-Starting with Nebular 3 we introduce support policy schedule. 
-All major versions will receive 6 months of long-time support (LTS) addressing:
-
-- critical bug fixes
-- security fixes
-- Angular major version update
-
-
 ## Migration Steps
 
 Installation of the minor and patch version in most of the times won't require any developer assistance during the update, though we recommend following these steps for all cases:

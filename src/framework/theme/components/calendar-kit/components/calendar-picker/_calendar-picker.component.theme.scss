@@ -4,6 +4,8 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
+@use '../../../../styles/theming' as *;
+
 @mixin nb-calendar-picker-theme() {
   nb-calendar-picker {
     display: block;
@@ -13,10 +15,10 @@
     @include nb-ltr() {
       padding-right: nb-theme(calendar-picker-padding-end);
       padding-left: nb-theme(calendar-picker-padding-start);
-    };
+    }
     @include nb-rtl() {
       padding-right: nb-theme(calendar-picker-padding-start);
       padding-left: nb-theme(calendar-picker-padding-end);
-    };
+    }
   }
 }

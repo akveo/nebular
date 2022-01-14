@@ -4,34 +4,27 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-@import '../core/functions';
-@import '../core/mixins';
-@import 'default';
+@use '../core/theming/register';
+@use '../theming-variables';
+@use 'default';
 
 $theme: (
   border-radius: 0.17rem,
   shadow: none,
-
   button-hero-glow-size: 0 0 20px 0,
-
   card-border-width: 1px,
   card-border-color: border-basic-color-4,
-
   context-menu-border-width: 1px,
   context-menu-border-color: border-basic-color-4,
-
   tabs-selected: color-primary-500,
   tabs-selected-second-color: color-primary-500,
-
   popover-border-width: 1px,
   popover-border-color: border-basic-color-4,
-
   tabset-border-radius: border-radius,
   route-tabset-border-radius: border-radius,
   user-rectangle-border-radius: border-radius,
   checkbox-border-radius: border-radius,
   modal-border-radius: border-radius,
-
   tabset-shadow: none,
   route-tabset-shadow: none,
   button-hero-shadow: none,
@@ -39,4 +32,4 @@ $theme: (
   accordion-shadow: none,
 );
 
-$nb-themes: nb-register-theme($theme, corporate, default);
+theming-variables.$nb-themes: register.nb-register-theme($theme, corporate, default);

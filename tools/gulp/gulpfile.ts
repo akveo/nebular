@@ -9,3 +9,4 @@ import './schematics/test-packages-schematics';
 import './docs/prepare-docs';
 import './docs/copy-index';
 import './docs/sitemap';
+import './bump-versions';
