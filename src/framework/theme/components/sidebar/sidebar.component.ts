@@ -41,12 +41,9 @@ export type NbSidebarResponsiveState = 'mobile' | 'tablet' | 'pc';
  */
 @Component({
   selector: 'nb-sidebar-header',
-  template: `
-    <ng-content></ng-content>
-  `,
+  template: ` <ng-content></ng-content> `,
 })
-export class NbSidebarHeaderComponent {
-}
+export class NbSidebarHeaderComponent {}
 
 /**
  * Sidebar footer container.
@@ -56,12 +53,9 @@ export class NbSidebarHeaderComponent {
  */
 @Component({
   selector: 'nb-sidebar-footer',
-  template: `
-    <ng-content></ng-content>
-  `,
+  template: ` <ng-content></ng-content> `,
 })
-export class NbSidebarFooterComponent {
-}
+export class NbSidebarFooterComponent {}
 
 /**
  * Layout sidebar component.
@@ -139,8 +133,7 @@ export class NbSidebarFooterComponent {
   selector: 'nb-sidebar',
   styleUrls: ['./sidebar.component.scss'],
   template: `
-    <div class="main-container"
-         [class.main-container-fixed]="containerFixedValue">
+    <div class="main-container" [class.main-container-fixed]="containerFixedValue">
       <ng-content select="nb-sidebar-header"></ng-content>
       <div class="scrollable">
         <ng-content></ng-content>
@@ -329,28 +322,32 @@ export class NbSidebarComponent implements OnInit, AfterContentInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.sidebarService.onToggle()
+    this.sidebarService
+      .onToggle()
       .pipe(
         filter(({ tag }) => !this.tag || this.tag === tag),
         takeUntil(this.destroy$),
       )
       .subscribe(({ compact }) => this.toggle(compact));
 
-    this.sidebarService.onExpand()
+    this.sidebarService
+      .onExpand()
       .pipe(
         filter(({ tag }) => !this.tag || this.tag === tag),
         takeUntil(this.destroy$),
       )
       .subscribe(() => this.expand());
 
-    this.sidebarService.onCollapse()
+    this.sidebarService
+      .onCollapse()
       .pipe(
         filter(({ tag }) => !this.tag || this.tag === tag),
         takeUntil(this.destroy$),
       )
       .subscribe(() => this.collapse());
 
-    this.sidebarService.onCompact()
+    this.sidebarService
+      .onCompact()
       .pipe(
         filter(({ tag }) => !this.tag || this.tag === tag),
         takeUntil(this.destroy$),
@@ -453,7 +450,6 @@ export class NbSidebarComponent implements OnInit, AfterContentInit, OnDestroy {
         takeUntil(this.destroy$),
       )
       .subscribe(([prev, current]: [NbMediaBreakpoint, NbMediaBreakpoint]) => {
-
         const isCollapsed = this.collapsedBreakpoints.includes(current.name);
         const isCompacted = this.compactedBreakpoints.includes(current.name);
 
@@ -502,43 +498,4 @@ export class NbSidebarComponent implements OnInit, AfterContentInit, OnDestroy {
       this.cd.markForCheck();
     }
   }
-
-  /**
-   * @deprecated Use `responsive` property instead
-   * @breaking-change Remove @8.0.0
-   */
-  toggleResponsive(enabled: boolean) {
-    this.responsive = enabled;
-  }
-  /**
-   * @deprecated Use NbSidebarState type instead
-   * @breaking-change Remove @8.0.0
-   */
-  static readonly STATE_EXPANDED: string = 'expanded';
-  /**
-   * @deprecated Use NbSidebarState type instead
-   * @breaking-change Remove @8.0.0
-   */
-  static readonly STATE_COLLAPSED: string = 'collapsed';
-  /**
-   * @deprecated Use NbSidebarState type instead
-   * @breaking-change Remove @8.0.0
-   */
-  static readonly STATE_COMPACTED: string = 'compacted';
-
-  /**
-   * @deprecated Use NbSidebarResponsiveState type instead
-   * @breaking-change Remove @8.0.0
-   */
-  static readonly RESPONSIVE_STATE_MOBILE: string = 'mobile';
-  /**
-   * @deprecated Use NbSidebarResponsiveState type instead
-   * @breaking-change Remove @8.0.0
-   */
-  static readonly RESPONSIVE_STATE_TABLET: string = 'tablet';
-  /**
-   * @deprecated Use NbSidebarResponsiveState type instead
-   * @breaking-change Remove @8.0.0
-   */
-  static readonly RESPONSIVE_STATE_PC: string = 'pc';
 }

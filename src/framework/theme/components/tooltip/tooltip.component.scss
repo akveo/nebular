@@ -4,7 +4,9 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-@import '../../styles/core/mixins';
+@use 'sass:math';
+
+@use '../../styles/theming' as *;
 
 $arrow-size: 6px;
 
@@ -66,22 +68,22 @@ $arrow-size: 6px;
 :host(.left),
 :host(.start) {
   .arrow {
-    $inline-offset: round(-$arrow-size - $arrow-size / 2.5);
+    $inline-offset: math.round(-$arrow-size - math.div($arrow-size, 2.5));
     @include nb-ltr() {
       right: $inline-offset;
       transform: rotate(90deg);
-    };
+    }
     @include nb-rtl() {
       left: $inline-offset;
       transform: rotate(270deg);
-    };
-    top: calc(50% - #{$arrow-size / 2.5});
+    }
+    top: calc(50% - #{math.div($arrow-size, 2.5)});
   }
 }
 
 :host(.start-top) {
   .arrow {
-    right: round(-$arrow-size - $arrow-size / 2.5);
+    right: math.round(-$arrow-size - math.div($arrow-size, 2.5));
     bottom: $arrow-size;
     transform: rotate(90deg);
   }
@@ -89,7 +91,7 @@ $arrow-size: 6px;
 
 :host(.start-bottom) {
   .arrow {
-    right: round(-$arrow-size - $arrow-size / 2.5);
+    right: math.round(-$arrow-size - math.div($arrow-size, 2.5));
     top: $arrow-size;
     transform: rotate(90deg);
   }
@@ -124,16 +126,16 @@ $arrow-size: 6px;
 :host(.right),
 :host(.end) {
   .arrow {
-    $inline-offset: round(-$arrow-size - $arrow-size / 2.5);
+    $inline-offset: math.round(-$arrow-size - math.div($arrow-size, 2.5));
     @include nb-ltr() {
       left: $inline-offset;
       transform: rotate(270deg);
-    };
+    }
     @include nb-rtl() {
       right: $inline-offset;
       transform: rotate(90deg);
-    };
-    top: calc(50% - #{$arrow-size / 2.5});
+    }
+    top: calc(50% - #{math.div($arrow-size, 2.5)});
   }
 }
 

@@ -1,17 +1,15 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { AngularFireModule } from '@angular/fire';
-import { AngularFireAuthModule } from '@angular/fire/auth';
-import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { NbAuthModule } from '@nebular/auth';
 import { NbFirebaseAuthModule, NbFirebasePasswordStrategy, NbFirebaseGoogleStrategy } from '@nebular/firebase-auth';
 
 import { FirebaseAPIService } from './firebase-api.service';
 import { FirebasePlaygroundComponent } from './firebase-playground.component';
 import { FirebasePlaygroundRoutingModule } from './firebase-routing.module';
-import {
-  IdentityProvidersAuthShowcaseComponent,
-} from './identity-proders-auth-showcase/identity-providers-auth-showcase.component';
+import { IdentityProvidersAuthShowcaseComponent } from './identity-proders-auth-showcase/identity-providers-auth-showcase.component';
 import { PasswordAuthShowcaseComponent } from './password-auth-showcase/password-auth-showcase.component';
 
 @NgModule({
@@ -104,14 +102,7 @@ import { PasswordAuthShowcaseComponent } from './password-auth-showcase/password
       ],
     }),
   ],
-  declarations: [
-    FirebasePlaygroundComponent,
-    PasswordAuthShowcaseComponent,
-    IdentityProvidersAuthShowcaseComponent,
-  ],
-  providers: [
-    FirebaseAPIService,
-  ],
+  declarations: [FirebasePlaygroundComponent, PasswordAuthShowcaseComponent, IdentityProvidersAuthShowcaseComponent],
+  providers: [FirebaseAPIService],
 })
-export class FirebasePlaygroundModule {
-}
+export class FirebasePlaygroundModule {}

@@ -4,14 +4,13 @@
 * Licensed under the MIT License. See License.txt in the project root for license information.
 */
 
-@import '../../../styles/core/mixins';
+@use '../../../styles/theming' as *;
 
 ::ng-deep nb-layout.column-curtain.with-search .layout {
   pointer-events: none;
 }
 
 :host.column-curtain {
-
   display: block;
   position: fixed;
   z-index: 1050;

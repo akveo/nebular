@@ -4,6 +4,8 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
+@use '../../styles/theming' as *;
+
 @mixin nb-alert-theme() {
   nb-alert {
     border-radius: nb-theme(alert-border-radius);
@@ -18,9 +20,10 @@
     margin-bottom: nb-theme(alert-bottom-margin);
 
     @include nb-scrollbars(
-        nb-theme(alert-scrollbar-color),
-        nb-theme(alert-scrollbar-background-color),
-        nb-theme(alert-scrollbar-width));
+      nb-theme(alert-scrollbar-color),
+      nb-theme(alert-scrollbar-background-color),
+      nb-theme(alert-scrollbar-width)
+    );
 
     &.closable {
       @include nb-ltr(padding-right, nb-theme(alert-closable-start-padding));
@@ -64,4 +67,3 @@
     }
   }
 }
-

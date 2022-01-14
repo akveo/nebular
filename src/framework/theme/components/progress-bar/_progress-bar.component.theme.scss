@@ -4,6 +4,8 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
+@use '../../styles/theming' as *;
+
 @mixin nb-progress-bar-theme() {
   nb-progress-bar {
     .progress-container {
@@ -21,7 +23,6 @@
   }
 
   @each $size in nb-get-sizes() {
-
     nb-progress-bar.size-#{$size} {
       .progress-container {
         height: nb-theme(progress-bar-#{$size}-height);
@@ -36,7 +37,6 @@
   }
 
   @each $status in nb-get-statuses() {
-
     nb-progress-bar.status-#{$status} {
       .progress-container {
         background-color: nb-theme(progress-bar-#{$status}-background-color);
@@ -49,4 +49,3 @@
     }
   }
 }
-

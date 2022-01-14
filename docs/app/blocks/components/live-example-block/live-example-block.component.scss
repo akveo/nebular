@@ -1,7 +1,6 @@
-@import '../../../@theme/styles/themes';
+@use '../../../@theme/styles/themes' as *;
 
 @include nb-install-component() {
-
   // TODO: move some variables in Nebular themes
   // colors
   $action-bg: white;
@@ -62,7 +61,8 @@
       margin-left: 0;
     }
 
-    &:hover, &:focus {
+    &:hover,
+    &:focus {
       text-decoration: none;
     }
   }
@@ -174,4 +174,3 @@
     }
   }
 }
-
