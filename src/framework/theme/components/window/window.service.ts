@@ -86,6 +86,11 @@ import { NB_DOCUMENT } from '../../theme.options';
  *
  * @stacked-example(Window content from TemplateRef, window/template-window.component)
  *
+ * You could pass the optional window return value to the `NbWindowRef.close` method.
+ * The passed value would be emitted to the `NbWindowRef.onClose` listeners.
+ *
+ * @stacked-example(Result, window/window-result.component)
+ *
  * ### Configuration
  *
  * As mentioned above, `open` method of the `NbWindowService` may receive optional configuration options.

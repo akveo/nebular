@@ -1,4 +1,4 @@
-@import '../../theme/styles/global/breakpoints';
+@use '../../theme/styles/globals' as *;
 
 :host {
   $auth-layout-padding: 2.5rem;

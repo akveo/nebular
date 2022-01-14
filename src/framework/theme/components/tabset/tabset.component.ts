@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { map, delay, filter } from 'rxjs/operators';
+import { map, delay, filter, takeUntil } from 'rxjs/operators';
 import {
   Component,
   Input,
@@ -16,8 +16,10 @@ import {
   HostBinding,
   ChangeDetectorRef,
   ContentChild,
+  OnDestroy,
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Subject } from 'rxjs';
 
 import { convertToBoolProperty, NbBooleanInput } from '../helpers';
 import { NbComponentOrCustomStatus } from '../component-status';
@@ -227,7 +229,7 @@ export class NbTabComponent {
  *
  * `tabIcon` should be used to add an icon to the tab. Icon can also be combined with title.
  * `responsive` tab property if set allows you to hide the title on smaller screens
- * (`tabset-tab-text-hide-breakpoint` property) for better responsive behaviour.
+ * (`$tabset-tab-text-hide-breakpoint` variable) for better responsive behaviour.
  * You can open the following example and make
  * your screen smaller - titles will be hidden in the last tabset in the list:
  * @stacked-example(Icon, tabset/tabset-icon.component)
@@ -293,7 +295,6 @@ export class NbTabComponent {
  * tabset-scrollbar-color:
  * tabset-scrollbar-background-color:
  * tabset-scrollbar-width:
- * tabset-tab-text-hide-breakpoint:
  */
 @Component({
   selector: 'nb-tabset',
@@ -335,7 +336,7 @@ export class NbTabComponent {
     <ng-content select="nb-tab"></ng-content>
   `,
 })
-export class NbTabsetComponent implements AfterContentInit {
+export class NbTabsetComponent implements AfterContentInit, OnDestroy {
   @ContentChildren(NbTabComponent) tabs: QueryList<NbTabComponent>;
 
   @HostBinding('class.full-width')
@@ -363,6 +364,8 @@ export class NbTabsetComponent implements AfterContentInit {
    */
   @Output() changeTab = new EventEmitter<any>();
 
+  private destroy$: Subject<void> = new Subject<void>();
+
   constructor(private route: ActivatedRoute, private changeDetectorRef: ChangeDetectorRef) {}
 
   // TODO: refactoring this component, avoid change detection loop
@@ -375,11 +378,17 @@ export class NbTabsetComponent implements AfterContentInit {
         delay(0),
         map((tab: NbTabComponent) => tab || this.tabs.first),
         filter((tab: NbTabComponent) => !!tab),
+        takeUntil(this.destroy$),
       )
       .subscribe((tabToSelect: NbTabComponent) => {
         this.selectTab(tabToSelect);
         this.changeDetectorRef.markForCheck();
       });
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   // TODO: navigate to routeParam

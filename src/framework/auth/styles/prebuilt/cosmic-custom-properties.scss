@@ -1,0 +1,7 @@
+@use '../../../theme/styles/themes/cosmic';
+@use '../../../theme/styles/theming' as *;
+@use '../globals' as *;
+
+$nb-enabled-themes: (cosmic);
+
+@include nb-install();

@@ -3,6 +3,9 @@
  * Copyright Akveo. All Rights Reserved.
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
+
+@use '../../styles/theming' as *;
+
 @mixin nb-timepicker-theme() {
   $border: nb-theme(timepicker-border-width) nb-theme(timepicker-border-style) nb-theme(timepicker-border-color);
   .nb-timepicker-container {

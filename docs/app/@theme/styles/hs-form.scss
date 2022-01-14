@@ -4,6 +4,8 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
+@use 'themes' as *;
+
 @mixin hs-custom-form() {
   .hs-custom-form {
     .modal-header {
@@ -45,7 +47,8 @@
       padding: 0;
     }
 
-    .hs-form-required, .hs-error-msg {
+    .hs-form-required,
+    .hs-error-msg {
       margin-top: 0.5rem;
       color: nb-theme(text-danger-color);
     }
