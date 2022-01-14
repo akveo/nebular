@@ -507,7 +507,7 @@ export const structure = [
       {
         type: 'tabs',
         name: 'Tag',
-        icon: '',
+        icon: 'tag.svg',
         source: ['NbTagListComponent', 'NbTagInputDirective', 'NbTagComponent'],
       },
       {

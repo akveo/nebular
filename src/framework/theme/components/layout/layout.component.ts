@@ -300,7 +300,7 @@ export class NbLayoutComponent implements AfterViewInit, OnDestroy {
 
     this.scrollService
       .onScrollableChange()
-      .pipe(filter(() => this.withScrollValue))
+      .pipe(filter(() => this.withScrollValue), takeUntil(this.destroy$))
       .subscribe((scrollable: boolean) => {
         /**
          * In case when Nebular Layout custom scroll `withScroll` mode is enabled

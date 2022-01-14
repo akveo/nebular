@@ -10,6 +10,4 @@
 
 $nb-enabled-themes: (default);
 
-@include nb-install() {
-  @include nb-bootstrap-global();
-}
+@include nb-install();
