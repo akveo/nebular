@@ -32,13 +32,24 @@ import { NB_DATE_SERVICE_OPTIONS } from './datepicker.directive';
   template: '',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NbDateTimePickerComponent<D> extends NbBasePickerComponent<D, D, NbCalendarWithTimeComponent<D>>
-                                          implements OnInit {
-
+export class NbDateTimePickerComponent<D>
+  extends NbBasePickerComponent<D, D, NbCalendarWithTimeComponent<D>>
+  implements OnInit
+{
   protected pickerClass: Type<NbCalendarWithTimeComponent<D>> = NbCalendarWithTimeComponent;
 
+  /**
+   * Date with time which will be rendered as selected.
+   * */
+  @Input() set dateTime(date: D) {
+    this.value = date;
+    if (this.format) {
+      this.onChange$.next(date);
+    }
+  }
+
   get value(): any {
-    return this.picker ? this.picker.date : undefined;
+    return this.picker?.date ?? undefined;
   }
   set value(date: any) {
     if (!this.picker) {
@@ -112,19 +123,25 @@ export class NbDateTimePickerComponent<D> extends NbBasePickerComponent<D, D, Nb
     return this.valueChange as EventEmitter<D>;
   }
 
-  constructor(@Inject(NB_DOCUMENT) document,
-              positionBuilder: NbPositionBuilderService,
-              triggerStrategyBuilder: NbTriggerStrategyBuilderService,
-              overlay: NbOverlayService,
-              cfr: ComponentFactoryResolver,
-              dateService: NbDateService<D>,
-              @Optional() @Inject(NB_DATE_SERVICE_OPTIONS) dateServiceOptions,
-              protected calendarWithTimeModelService: NbCalendarTimeModelService<D>) {
+  constructor(
+    @Inject(NB_DOCUMENT) document,
+    positionBuilder: NbPositionBuilderService,
+    triggerStrategyBuilder: NbTriggerStrategyBuilderService,
+    overlay: NbOverlayService,
+    cfr: ComponentFactoryResolver,
+    dateService: NbDateService<D>,
+    @Optional() @Inject(NB_DATE_SERVICE_OPTIONS) dateServiceOptions,
+    protected calendarWithTimeModelService: NbCalendarTimeModelService<D>,
+  ) {
     super(document, positionBuilder, triggerStrategyBuilder, overlay, cfr, dateService, dateServiceOptions);
   }
 
   ngOnInit() {
+    super.ngOnInit();
     this.format = this.format || this.buildTimeFormat();
+    if (this.queue) {
+      this.dateTime = this.queue;
+    }
   }
 
   protected patchWithInputs() {
@@ -140,8 +157,9 @@ export class NbDateTimePickerComponent<D> extends NbBasePickerComponent<D, D, Nb
     if (this.twelveHoursFormat) {
       this.picker.timeFormat = this.dateService.getTwelveHoursFormat();
     } else {
-      this.picker.timeFormat = this.withSeconds ? this.dateService.getTwentyFourHoursFormatWithSeconds() :
-        this.dateService.getTwentyFourHoursFormat();
+      this.picker.timeFormat = this.withSeconds
+        ? this.dateService.getTwentyFourHoursFormatWithSeconds()
+        : this.dateService.getTwentyFourHoursFormat();
     }
     super.patchWithInputs();
 
@@ -168,4 +186,3 @@ export class NbDateTimePickerComponent<D> extends NbBasePickerComponent<D, D, Nb
     }
   }
 }
-
