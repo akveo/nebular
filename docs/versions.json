@@ -2,17 +2,7 @@
   {
     "checkoutTarget": "v9.0.0",
     "name": "9.0.0",
-    "path": "/nebular/",
+    "path": "/design-sytem/",
     "isCurrent": true
-  },
-  {
-    "checkoutTarget": "master",
-    "name": "next",
-    "path": "/nebular/next/"
-  },
-  {
-    "checkoutTarget": "8.0.x",
-    "name": "8.0.x",
-    "path": "/nebular/8.0.x/"
   }
 ]
