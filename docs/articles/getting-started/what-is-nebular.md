@@ -1,4 +1,4 @@
-# What is Incognita?
+# What is Beast?
 
 Nebular is a customizable Angular UI Library based on [Eva Design System](https://eva.design?utm_campaign=eva_design%20-%20home%20-%20nebular%20intro&utm_source=nebular&utm_medium=referral&utm_content=what_is_nebular) specifications, with 40+ UI components, 4 visual themes, Auth and Security modules.
 
