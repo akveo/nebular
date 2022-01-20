@@ -53,7 +53,7 @@ export class NgdHeaderComponent implements OnInit {
     },
     {
       title: 'Componentes',
-      link: '/docs/components/components-overview',
+      link: '/docs/componentes/components-overview',
     },
     {
       title: 'Design System',

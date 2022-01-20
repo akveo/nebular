@@ -12,9 +12,7 @@ import { NbThemeService } from '@nebular/theme';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })
-
 export class NgdHomeComponent {
-
   features = [
     {
       title: 'Introduction',
@@ -32,7 +30,7 @@ export class NgdHomeComponent {
       title: 'Components',
       description: 'Native Angular components with configurable styles.',
       icon: 'assets/img/components.svg',
-      link: 'docs/components/components-overview',
+      link: 'docs/componentes/components-overview',
     },
     {
       title: 'Design System',
