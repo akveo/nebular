@@ -14,36 +14,29 @@ import { NgdVersionService, Version } from '../../services';
         <nb-icon icon="menu-2"></nb-icon>
       </button>
       <div class="logo">
-        <a routerLink="/">Nebular</a>
-        <span class="version" *ngIf="currentVersionName$ | async">
-          v{{ currentVersionName$ | async }}
-        </span>
+        <a routerLink="/">Beast</a>
+        <!-- <span class="version" *ngIf="currentVersionName$ | async"> v{{ currentVersionName$ | async }} </span> -->
       </div>
     </div>
     <div class="section middle">
       <nb-menu [items]="mainMenu"></nb-menu>
       <ngd-search *ngIf="showSearch"></ngd-search>
-      <nb-select class="version-select"
-                 *ngIf="(showVersionSelect$ | async)"
-                 [selected]="currentVersion$ | async"
-                 (selectedChange)="redirectToVersion($event)">
+      <!-- <nb-select
+        class="version-select"
+        *ngIf="showVersionSelect$ | async"
+        [selected]="currentVersion$ | async"
+        (selectedChange)="redirectToVersion($event)"
+      >
         <nb-option *ngFor="let version of supportedVersions$ | async" [value]="version">
           {{ version.name }}
         </nb-option>
-      </nb-select>
+      </nb-select> -->
     </div>
-    <div class="section right">
-      <iframe class="stars"
-              src="https://ghbtns.com/github-btn.html?user=akveo&repo=nebular&type=star&count=true"
-              frameborder="0"
-              scrolling="0">
-      </iframe>
-    </div>
+    <div class="section right"></div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NgdHeaderComponent implements OnInit {
-
   @Input() showSearch = true;
   @HostBinding('class.docs-page') @Input() isDocs = false;
 
@@ -59,7 +52,7 @@ export class NgdHeaderComponent implements OnInit {
       link: '/docs',
     },
     {
-      title: 'Components',
+      title: 'Componentes',
       link: '/docs/components/components-overview',
     },
     {
@@ -67,13 +60,13 @@ export class NgdHeaderComponent implements OnInit {
       link: '/docs/design-system/eva-design-system-intro',
     },
     {
-      title: 'Auth',
-      link: '/docs/auth/introduction',
+      title: 'Sobre',
+      link: '/docs/incio/sobre',
     },
-    {
-      title: 'Security',
-      link: '/docs/security/introduction',
-    },
+    // {
+    //   title: 'Security',
+    //   link: '/docs/security/introduction',
+    // },
   ];
 
   @Input() sidebarTag: string;
@@ -91,18 +84,10 @@ export class NgdHeaderComponent implements OnInit {
     this.currentVersionName$ = this.currentVersion$.pipe(map((version: Version) => version.name));
     this.supportedVersions$ = this.versionService.getSupportedVersions();
 
-    this.showVersionSelect$ = this.supportedVersions$
-      .pipe(
-        map((versions: Version[]) => versions.length > 0),
-        startWith(false),
-      );
-
-    if (!this.isDocs) {
-      this.mainMenu.push({
-        title: 'Professional Services',
-        link: '/docs/getting-started/professional-services',
-      });
-    }
+    this.showVersionSelect$ = this.supportedVersions$.pipe(
+      map((versions: Version[]) => versions.length > 0),
+      startWith(false),
+    );
   }
 
   toggleSidebar() {
