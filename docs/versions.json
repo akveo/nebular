@@ -1,6 +1,6 @@
 [
   {
-    "checkoutTarget": "v9.0.3",
+    "checkoutTarget": "master",
     "name": "9.0.3",
     "path": "/design-sytem/",
     "isCurrent": true
