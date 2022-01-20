@@ -280,7 +280,7 @@ export const structure = [
     children: [
       {
         type: 'page',
-        name: 'Components Overview',
+        name: 'Overview',
         children: [
           {
             type: 'block',
