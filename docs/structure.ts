@@ -1,22 +1,22 @@
 export const structure = [
   {
     type: 'section',
-    name: 'Getting Started',
+    name: 'Início',
     children: [
       {
         type: 'page',
-        name: 'What is Nebular?',
+        name: 'O que é o Beast?',
         children: [
           {
             type: 'block',
             block: 'markdown',
-            source: 'getting-started/what-is-nebular.md',
+            source: 'getting-started/what-is-beast.md',
           },
         ],
       },
       {
         type: 'page',
-        name: 'Where to start?',
+        name: 'Como começar?',
         children: [
           {
             type: 'block',
@@ -27,12 +27,12 @@ export const structure = [
       },
       {
         type: 'page',
-        name: 'Professional Services',
+        name: 'Sobre',
         children: [
           {
             type: 'block',
             block: 'markdown',
-            source: 'getting-started/professional-services.md',
+            source: 'getting-started/about.md',
           },
         ],
       },
@@ -40,7 +40,7 @@ export const structure = [
   },
   {
     type: 'section',
-    name: 'Guides',
+    name: 'Guias',
     children: [
       {
         type: 'page',
@@ -72,17 +72,6 @@ export const structure = [
             type: 'block',
             block: 'markdown',
             source: 'guides/create-page.md',
-          },
-        ],
-      },
-      {
-        type: 'page',
-        name: 'Backend integration',
-        children: [
-          {
-            type: 'block',
-            block: 'markdown',
-            source: 'guides/backend-integration.md',
           },
         ],
       },
@@ -265,46 +254,7 @@ export const structure = [
   },
   {
     type: 'section',
-    name: 'Migration',
-    children: [
-      {
-        type: 'page',
-        name: 'General Instructions',
-        children: [
-          {
-            type: 'block',
-            block: 'markdown',
-            source: 'migration/instructions.md',
-          },
-        ],
-      },
-      {
-        type: 'page',
-        name: '3.5.0-4.0.0 Migration',
-        children: [
-          {
-            type: 'block',
-            block: 'markdown',
-            source: 'migration/350-400.md',
-          },
-        ],
-      },
-      {
-        type: 'page',
-        name: '2.0.0-rc.8-2.0.0-rc.9 Auth Migration',
-        children: [
-          {
-            type: 'block',
-            block: 'markdown',
-            source: 'migration/200rc8-200rc9-auth.md',
-          },
-        ],
-      },
-    ],
-  },
-  {
-    type: 'section',
-    name: 'Usability',
+    name: 'Usabilidade',
     children: [
       {
         type: 'page',
@@ -326,7 +276,7 @@ export const structure = [
   },
   {
     type: 'section',
-    name: 'Components',
+    name: 'Componentes',
     children: [
       {
         type: 'page',
@@ -650,7 +600,7 @@ export const structure = [
   },
   {
     type: 'section',
-    name: 'Services',
+    name: 'Serviços',
     children: [
       {
         type: 'page',
@@ -721,221 +671,7 @@ export const structure = [
   },
   {
     type: 'section',
-    name: 'Auth',
-    children: [
-      {
-        type: 'page',
-        name: 'Introduction',
-        children: [
-          {
-            type: 'block',
-            block: 'markdown',
-            source: 'auth/intro.md',
-          },
-        ],
-      },
-      {
-        type: 'page',
-        name: 'Installation',
-        children: [
-          {
-            type: 'block',
-            block: 'markdown',
-            source: 'auth/install.md',
-          },
-        ],
-      },
-      {
-        type: 'page',
-        name: 'Configuring a Strategy',
-        children: [
-          {
-            type: 'block',
-            block: 'markdown',
-            source: 'auth/strategy.md',
-          },
-        ],
-      },
-      {
-        type: 'page',
-        name: 'Configuring UI',
-        children: [
-          {
-            type: 'block',
-            block: 'markdown',
-            source: 'auth/ui.md',
-          },
-        ],
-      },
-      {
-        type: 'page',
-        name: 'Custom Auth Components',
-        children: [
-          {
-            type: 'block',
-            block: 'markdown',
-            source: 'auth/custom-ui.md',
-          },
-        ],
-      },
-      {
-        type: 'page',
-        name: 'Redirect after Login',
-        children: [
-          {
-            type: 'block',
-            block: 'markdown',
-            source: 'auth/redirect.md',
-          },
-        ],
-      },
-      {
-        type: 'page',
-        name: 'Getting User Token',
-        children: [
-          {
-            type: 'block',
-            block: 'markdown',
-            source: 'auth/token.md',
-          },
-        ],
-      },
-      {
-        type: 'page',
-        name: 'Protecting application routes',
-        children: [
-          {
-            type: 'block',
-            block: 'markdown',
-            source: 'auth/guard.md',
-          },
-        ],
-      },
-      {
-        type: 'page',
-        name: 'Configuring Google OAuth2',
-        children: [
-          {
-            type: 'block',
-            block: 'markdown',
-            source: 'auth/oauth2.md',
-          },
-        ],
-      },
-      {
-        type: 'page',
-        name: 'Configuring Azure OAuth2',
-        children: [
-          {
-            type: 'block',
-            block: 'markdown',
-            source: 'auth/azure.md',
-          },
-        ],
-      },
-      {
-        type: 'page',
-        name: 'Backend API endpoints',
-        children: [
-          {
-            type: 'block',
-            block: 'markdown',
-            source: 'auth/backend-api.md',
-          },
-        ],
-      },
-      {
-        type: 'page',
-        name: 'Firebase Authentication',
-        children: [
-          {
-            type: 'block',
-            block: 'markdown',
-            source: 'auth/firebase-authentication.md',
-          },
-        ],
-      },
-      {
-        type: 'page',
-        name: 'NbAuthService',
-        children: [
-          {
-            type: 'block',
-            block: 'component',
-            source: 'NbAuthService',
-          },
-        ],
-      },
-      {
-        type: 'page',
-        name: 'NbPasswordAuthStrategy',
-        children: [
-          {
-            type: 'block',
-            block: 'component',
-            source: 'NbPasswordAuthStrategy',
-          },
-        ],
-      },
-      {
-        type: 'page',
-        name: 'NbOAuth2AuthStrategy',
-        children: [
-          {
-            type: 'block',
-            block: 'component',
-            source: 'NbOAuth2AuthStrategy',
-          },
-        ],
-      },
-      {
-        type: 'page',
-        name: 'NbDummyAuthStrategy',
-        children: [
-          {
-            type: 'block',
-            block: 'component',
-            source: 'NbDummyAuthStrategy',
-          },
-        ],
-      },
-      {
-        type: 'page',
-        name: 'NbTokenService',
-        children: [
-          {
-            type: 'block',
-            block: 'component',
-            source: 'NbTokenService',
-          },
-          {
-            type: 'block',
-            block: 'component',
-            source: 'NbAuthSimpleToken',
-          },
-          {
-            type: 'block',
-            block: 'component',
-            source: 'NbAuthJWTToken',
-          },
-        ],
-      },
-      {
-        type: 'page',
-        name: 'NbTokenLocalStorage',
-        children: [
-          {
-            type: 'block',
-            block: 'component',
-            source: 'NbTokenLocalStorage',
-          },
-        ],
-      },
-    ],
-  },
-  {
-    type: 'section',
-    name: 'Security',
+    name: 'Segurança',
     children: [
       {
         type: 'page',
