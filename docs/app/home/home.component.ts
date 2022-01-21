@@ -16,51 +16,27 @@ export class NgdHomeComponent {
   features = [
     {
       title: 'Introdução',
-      description: 'Install from scratch or based on ngx-admin.',
+      description: 'Sessão de onboarding para entender tudo o que precisa saber para começar a utilizar o Beast',
       icon: 'assets/img/intro.svg',
       link: 'docs',
     },
     {
-      title: 'Guias',
-      description: 'Theme System configuration, customization, and other articles.',
-      icon: 'assets/img/guides.svg',
-      link: 'docs/guides/install-based-on-starter-kit',
+      title: 'Branding',
+      description: `Os principais padrões e fundamentos para começar a usar a nossa marca`,
+      icon: 'assets/img/themes.svg',
+      link: 'docs/design-system/cores',
     },
     {
       title: 'Componentes',
-      description: 'Native Angular components with configurable styles.',
+      description: 'Explore os componentes que compõem a interface da Dadosfera',
       icon: 'assets/img/components.svg',
       link: 'docs/componentes/components-overview',
     },
     {
-      title: 'Design System',
-      description: `Based on Eva Design System, with 4 visual themes & handy variables to create your custom ones.
-                    With hot-reload out of the box.`,
-      icon: 'assets/img/themes.svg',
-      link: 'docs/design-system/eva-design-system-intro',
-    },
-  ];
-
-  advantages = [
-    {
-      title: 'Modular',
-      description: `Each feature is a separate npm module. Use only what you need.`,
-      icon: 'assets/img/modular.svg',
-    },
-    {
-      title: 'Configurable',
-      description: `Sizes, colors, appearances, shapes, and other useful settings.`,
-      icon: 'assets/img/native.svg',
-    },
-    {
-      title: 'Open',
-      description: `Source code is free and available under the MIT license.`,
-      icon: 'assets/img/open-sourced.svg',
-    },
-    {
-      title: 'Customizable',
-      description: `A straightforward way to integrate your brand.`,
-      icon: 'assets/img/extendable.svg',
+      title: 'Recursos',
+      description: `Faça o download e acesse os principais links da nossa identidade visual`,
+      icon: 'assets/img/guides.svg',
+      link: 'docs/design-system/recursos',
     },
   ];
 

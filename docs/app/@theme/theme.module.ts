@@ -38,8 +38,6 @@ import {
   NgdColorSwatchDirective,
   NgdDescriptionDirective,
   NgdSearchComponent,
-  NgdEvaComponent,
-  NgdComponentsPromoComponent,
 } from './components';
 
 import {
@@ -89,8 +87,6 @@ import {
     NgdColorSwatchDirective,
     NgdDescriptionDirective,
     NgdSearchComponent,
-    NgdEvaComponent,
-    NgdComponentsPromoComponent,
   ],
   exports: [
     CommonModule,
@@ -114,8 +110,6 @@ import {
     NgdPageTabsComponent,
     NgdColorSwatchDirective,
     NgdDescriptionDirective,
-    NgdEvaComponent,
-    NgdComponentsPromoComponent,
   ],
 })
 export class NgdThemeModule {
