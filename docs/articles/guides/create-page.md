@@ -1,7 +1,7 @@
-# Create Nebular Page
+# Criar página
 
-Let's create a simple Nebular page (header + sidebar) in your project.
-We suppose that you have a separate module per page, let's open your `some-page.module.ts` and import necessary layout components:
+Vamos criar uma página simples (cabeçalho + barra lateral) em seu projeto.
+Supondo que você tenha um módulo separado por página, vamos abrir seu `some-page.module.ts` e importar os componentes de layout necessários:
 
 ```ts
 import { RouterModule } from '@angular/router'; // we also need angular router for Nebular to function properly
@@ -14,7 +14,7 @@ import { NbSidebarModule, NbLayoutModule, NbButtonModule } from '@nebular/theme'
   imports: [
     RouterModule, // RouterModule.forRoot(routes, { useHash: true }), if this is your app.module
     NbLayoutModule,
-    NbSidebarModule, // NbSidebarModule.forRoot(), //if this is your app.module
+    NbSidebarModule, // NbSidebarModule.forRoot(), // if this is your app.module
     NbButtonModule,
   ],
   ...
@@ -23,7 +23,8 @@ export class SomePageModule {
 
 ```
 
-Then let's add layout components with a sticky header into your `some-page.component.ts`:
+Então vamos adicionar componentes de layout com um header fixo em seu `some-page.component.ts`:
+Toda página precisa ter um `<nb-layout></nb-layout>` por volta.
 
 ```ts
 @Component({
@@ -45,23 +46,14 @@ export class SomePageComponent {
 
 ```
 
-As a result, you should have a page with a simple layout on it looking similar to this:
+Como resultado, você deve ter uma página com um layout simples semelhante a este:
 
 ![image](assets/images/articles/sample-page.png)
 
 <div class="note note-info">
-  <div class="note-title">Adding into existing page</div>
+  <div class="note-title">Adicionando em páginas existentes</div>
   <div class="note-body">
-    In case you already have some code on your page and want to mix it with Nebular components you would need to place your page code inside of the Nebular layout. 
-    `<nb-layout></nb-layout>` is a required root component for Nebular to work.
+    Caso você já tenha algum código em sua página e queira misturá-lo com componentes do Beast, você precisaria colocar o código da sua página dentro do layout do Beast.
+    Como já dito, `nb-layout` é um componente necessário para o funcionamento do Beast.
   </div>
 </div>
-<hr>
-
-## Artigos relacionados
-
-- [NbLayout, NbLayoutColumn, NbLayoutHeader, NbLayoutFooter](docs/components/layout)
-- [Design System Intro](/docs/design-system/eva-design-system-intro)
-- [Design System Rules](docs/design-system/design-system-theme)
-- [Enabling Customizable Themes](docs/design-system/enable-customizable-theme)
-- [Deploying to production server](docs/guides/server-deployment)
