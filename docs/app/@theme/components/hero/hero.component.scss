@@ -166,12 +166,17 @@
     line-height: 1.125em;
     font-weight: bold;
     margin-top: 0;
-    margin-bottom: 2rem;
+    margin-bottom: 0;
     text-shadow: $shadow;
 
     @include media-breakpoint-up(sm) {
       font-size: 3rem;
     }
+  }
+
+  h2 {
+    margin-bottom: 2rem;
+    margin-top: 0;
   }
 
   h1,

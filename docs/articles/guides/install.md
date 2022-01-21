@@ -111,7 +111,7 @@ That's it. Now you can [create a Nebular page](docs/guides/create-nebular-page).
 
 <hr>
 
-## Related Articles
+## Artigos relacionados
 
 - [Create Nebular Page](docs/guides/create-nebular-page)
 - [Nebular UI Components](docs/componentes/components-overview)

@@ -1,79 +1,59 @@
-# Nebular Typography
+# Tipografia
 
-The main goal of typography is to describe how design is applied to letters and text. Nebular Typography is based on [Eva Design System](https://eva.design?utm_campaign=eva_design%20-%20home%20-%20nebular%20intro&utm_source=nebular&utm_medium=referral&utm_content=nebular_typography) specification.
+A tipografia é a base para o tom, a voz e o conteúdo. Ela maximiza a legibilidade e comunica conceitos com clareza.
+
+<hr>
 
 ## Font Family
 
-Nebular theme contains two font-family properties:
+Nosso design possui duas propriedades de família de fontes:
 
-- **font-family-primary** - utilized by all text elements on the page
-- **font-family-secondary** - utilized by heading elements (`<h1>`, `<h2>`, etc)
+- **font-family-primary** - utilizado por todos os elementos de texto na página
+- **font-family-secondary** - utilizado por elementos de cabeçalho (`<h1>`, `<h2>`, etc)
 
-By default both font-family-primary and font-family-secondary use `'Open Sans, sans-serif'` font family names.
+Atualmente, tanto `font-family-primary` quanto `font-family-secondary` usam a família de fonte **Menco**.
+
 <hr>
 
-## Colors
+## Cores das fontes
 
-There are 5 text colors available within the Design System: 
+Existem 5 cores de texto disponíveis no Design System:
 
-- **text-basic-color** - main text color, should be used on top of basic backgrounds, usually cards, sidebars, headers, available as `.text-basic` CSS class
-- **text-alternate-color** - alternative color used on top of alternate backgrounds - colored headers, sidebars, available as `.text-alternate` CSS class
-- **text-control-color** - should we used as a text color for status backgrounds (`success`, `primary`, etc) - usually buttons, selects , available as `.text-control` CSS class
-- **text-disabled-color** - indicates text disabled state, available as `.text-disabled` CSS class
-- **text-hint-color** - used by secondary texts - captions, placeholders, labels, available as `.text-hint` CSS class
+- **text-basic-color** - cor do texto principal, deve ser usada em cima de fundos básicos, geralmente cartões, barras laterais, cabeçalhos, disponíveis como classe CSS `.text-basic`
+- **text-alternate-color** - cor alternativa usada em cima de fundos alternativos - cabeçalhos coloridos, barras laterais, disponíveis como classe CSS `.text-alternate`
+- **text-control-color** - devemos usar como cor de texto para fundos de status (`sucesso`, `primário`, etc) - geralmente botões, seleções, disponíveis como classe CSS `.text-control`
+- **text-disabled-color** - indica o estado desabilitado do texto, disponível como classe CSS `.text-disabled`
+- **text-hint-color** - usado por textos secundários - legendas, espaços reservados, rótulos, disponíveis como classe CSS `.text-hint`
+
 <hr>
 
-## Text Styles
+## Estilos de texto
 
-Nebular typography consist of 14 text styles, where text styles is a combination of `font-size`, `font-weight`, `line-height` and `font-family` properties:
+A tipografia consiste em 14 estilos de texto, onde os estilos de texto são uma combinação das propriedades `font-size`, `font-weight`, `line-height` e `font-family`:
 
-- **6 heading** styles, used by `<h1>`-`<h6>` elements, also available as CSS classes `.h1`, `.h2` ... `.h6`
-- **2 subtitle** styles, used as a text for most of the controls (inputs, menus, etc) with classes `.subtitle`, `.subtitle-2`
-- **2 paragraph** styles for regular text and `<p>` element, with classes `.paragraph`, `.paragraph-2`
-- **2 caption** styles for smaller text like tooltips and input captions, with classes `.caption`, `.caption-2`
-- **label** style, used by `<label>` element as available as `.label` CSS class
-- **button** text style, used by button element
+- **6 heading** estilos, usados pelos elementos `<h1>`-`<h6>`, também disponíveis como classes CSS `.h1`, `.h2` ... `.h6`
+- **2 subtitle** estilos, usado como texto para a maioria dos controles (entradas, menus, etc) com classes `.subtitle`, `.subtitle-2`
+- **2 paragraph** estilos para texto regular e elemento `<p>`, com classes `.paragraph`, `.paragraph-2`
+- **2 caption** estilos para texto menor, como dicas de ferramentas e legendas de entrada, com classes `.caption`, `.caption-2`
+- **label** style, usado pelo elemento `<label>` como disponível como classe CSS `.label`
+- **button** estilo de texto, usado pelo elemento `<button>`
 <hr>
 
-## Apply text styles classes and properties
+## Aplicar classes e propriedades de estilos de texto
 
-All of the text styles could be applied by simply adding CSS classes to an element:
+Todos os estilos de texto podem ser aplicados simplesmente adicionando classes CSS a um elemento:
 
 ```html
-<input type="email" name="email" />
-<span class="caption-2 text-hint">Work email address</span>
+<input type="email" name="email" /> <span class="caption-2 text-hint">Work email address</span>
 ```
-Here we added both `caption-2` and `text-hint` making the span to be a caption with a hint text color.
 
-Colors and fonts are also available as theme properties using `nb-theme()` SCSS function:
+Aqui nós adicionamos `caption-2` e `text-hint` fazendo com que o `span` seja uma legenda com uma cor de texto padrão.
+
+Cores e fontes também estão disponíveis como propriedades de tema usando a função SCSS `nb-theme()`:
+
 ```scss
 .my-text {
   font-family: nb-theme(font-family-primary);
   color: nb-theme(text-basic-color);
 }
 ```
-<hr>
-
-## Customize Typography styles
-
-All text styles and colors are available as [Nebular Theme](docs/design-system/design-system-theme) properties. 
-This means that all styles could be easily customized by changing theme variables:
-
-```scss
-text-caption-font-family: font-family-primary,
-text-caption-font-size: 0.75rem,
-text-caption-font-weight: 400,
-text-caption-line-height: 1rem,
-```
-
-Complete list of typography variables could be find at [Default Theme Variables](docs/design-system/default-theme) page. 
-<hr>
-
-## Related Articles
-
-- [Enable Theme Customization](docs/design-system/enable-customizable-theme)
-- [Create Custom Theme](docs/design-system/create-custom-theme)
-- [Default Theme Variables](docs/design-system/default-theme)
-- [Use Theme Variables](docs/design-system/use-theme-variables)
-- [Create Custom Theme](docs/design-system/create-custom-theme)
-

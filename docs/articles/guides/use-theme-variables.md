@@ -49,7 +49,7 @@ The mixin will multiple the component styles per each enabled theme, giving the 
 Note, in case when [Custom CSS Properties](docs/design-system/enable-css-properties-mode) mode enables,
 the mixin **is not needed**, since there is no need to multiple the styles.
 
-## Related Articles
+## Artigos relacionados
 
 - [Design System Theme](docs/design-system/design-system-theme)
 - [Enable Customizable Theme](docs/design-system/enable-customizable-theme)

@@ -5,28 +5,6 @@ export const structure = [
     children: [
       {
         type: 'page',
-        name: 'O que é o Beast?',
-        children: [
-          {
-            type: 'block',
-            block: 'markdown',
-            source: 'getting-started/what-is-beast.md',
-          },
-        ],
-      },
-      {
-        type: 'page',
-        name: 'Como começar?',
-        children: [
-          {
-            type: 'block',
-            block: 'markdown',
-            source: 'getting-started/where-to-start.md',
-          },
-        ],
-      },
-      {
-        type: 'page',
         name: 'Sobre',
         children: [
           {
@@ -36,64 +14,14 @@ export const structure = [
           },
         ],
       },
-    ],
-  },
-  {
-    type: 'section',
-    name: 'Guias',
-    children: [
       {
         type: 'page',
-        name: 'Install Nebular',
+        name: 'Biblioteca Angular',
         children: [
           {
             type: 'block',
             block: 'markdown',
-            source: 'guides/install.md',
-          },
-        ],
-      },
-      {
-        type: 'page',
-        name: 'Install based on starter kit',
-        children: [
-          {
-            type: 'block',
-            block: 'markdown',
-            source: 'guides/install-starter-kit.md',
-          },
-        ],
-      },
-      {
-        type: 'page',
-        name: 'Create Nebular Page',
-        children: [
-          {
-            type: 'block',
-            block: 'markdown',
-            source: 'guides/create-page.md',
-          },
-        ],
-      },
-      {
-        type: 'page',
-        name: 'Register Icon Pack',
-        children: [
-          {
-            type: 'block',
-            block: 'markdown',
-            source: 'guides/custom-icons.md',
-          },
-        ],
-      },
-      {
-        type: 'page',
-        name: 'Server deployment',
-        children: [
-          {
-            type: 'block',
-            block: 'markdown',
-            source: 'guides/server-deployment.md',
+            source: 'getting-started/angular-lib.md',
           },
         ],
       },
@@ -105,29 +33,18 @@ export const structure = [
     children: [
       {
         type: 'page',
-        name: 'Eva Design System Intro',
+        name: 'Cores',
         children: [
           {
             type: 'block',
             block: 'markdown',
-            source: 'design-system/intro.md',
+            source: 'design-system/colors.md',
           },
         ],
       },
       {
         type: 'page',
-        name: 'Design System Theme',
-        children: [
-          {
-            type: 'block',
-            block: 'markdown',
-            source: 'design-system/theme.md',
-          },
-        ],
-      },
-      {
-        type: 'page',
-        name: 'Typography',
+        name: 'Tipografia',
         children: [
           {
             type: 'block',
@@ -138,73 +55,18 @@ export const structure = [
       },
       {
         type: 'page',
-        name: 'Enable Customizable Theme',
+        name: 'Recursos',
         children: [
           {
             type: 'block',
             block: 'markdown',
-            source: 'design-system/enable-customizable-theme.md',
+            source: 'design-system/resources.md',
           },
         ],
       },
       {
         type: 'page',
-        name: 'Use Theme Variables',
-        children: [
-          {
-            type: 'block',
-            block: 'markdown',
-            source: 'design-system/use-theme-variables.md',
-          },
-        ],
-      },
-      {
-        type: 'page',
-        name: 'Create Custom Theme',
-        children: [
-          {
-            type: 'block',
-            block: 'markdown',
-            source: 'design-system/custom-theme.md',
-          },
-        ],
-      },
-      {
-        type: 'page',
-        name: 'Enable CSS Properties mode',
-        children: [
-          {
-            type: 'block',
-            block: 'markdown',
-            source: 'design-system/css-properties.md',
-          },
-        ],
-      },
-      {
-        type: 'page',
-        name: 'Enable Multiple Runtime Themes',
-        children: [
-          {
-            type: 'block',
-            block: 'markdown',
-            source: 'design-system/multiple-runtime-themes.md',
-          },
-        ],
-      },
-      {
-        type: 'page',
-        name: 'Changing Theme',
-        children: [
-          {
-            type: 'block',
-            block: 'markdown',
-            source: 'design-system/theme-change.md',
-          },
-        ],
-      },
-      {
-        type: 'page',
-        name: 'Default Theme',
+        name: 'Tema padrão',
         children: [
           {
             type: 'block',
@@ -216,7 +78,7 @@ export const structure = [
       },
       {
         type: 'page',
-        name: 'Dark Theme',
+        name: 'Tema dark',
         children: [
           {
             type: 'block',
@@ -226,27 +88,64 @@ export const structure = [
           },
         ],
       },
+    ],
+  },
+  {
+    type: 'section',
+    name: 'Guias',
+    children: [
       {
         type: 'page',
-        name: 'Cosmic Theme',
+        name: 'Instalar lib - Angular',
         children: [
           {
             type: 'block',
-            block: 'theme',
-            name: 'Cosmic',
-            source: 'cosmic',
+            block: 'markdown',
+            source: 'guides/install.md',
           },
         ],
       },
       {
         type: 'page',
-        name: 'Corporate Theme',
+        name: 'Criar página - Angular',
         children: [
           {
             type: 'block',
-            block: 'theme',
-            name: 'Corporate',
-            source: 'corporate',
+            block: 'markdown',
+            source: 'guides/create-page.md',
+          },
+        ],
+      },
+      {
+        type: 'page',
+        name: 'Variáveis do tema - Angular',
+        children: [
+          {
+            type: 'block',
+            block: 'markdown',
+            source: 'guides/use-theme-variables.md',
+          },
+        ],
+      },
+      {
+        type: 'page',
+        name: 'Temas Runtime - Angular',
+        children: [
+          {
+            type: 'block',
+            block: 'markdown',
+            source: 'guides/multiple-runtime-themes.md',
+          },
+        ],
+      },
+      {
+        type: 'page',
+        name: 'Trocar tema - Angular',
+        children: [
+          {
+            type: 'block',
+            block: 'markdown',
+            source: 'guides/theme-change.md',
           },
         ],
       },

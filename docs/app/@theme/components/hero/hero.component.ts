@@ -11,21 +11,23 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   styleUrls: ['./hero.component.scss'],
   template: `
     <div class="block">
-      <h1>Beast: Design System da Dadosfera</h1>
+      <h1>Bem vindo ao Beast</h1>
+      <h2>O Design System da Dadosfera</h2>
       <p class="hero-promo">
-        Nebular is a customizable Angular UI library that contains 40+ UI components, four visual themes, and Auth and
-        Security modules. Recognized at the prestigious AngularConnect 2018, this Angular framework allows focusing on
-        beautiful designs to adapt them to your brand. Nebular is free of charge and open-source.
+        Design System é um ecossistema de bibliotecas instaláveis, com componentes programados e padrões semânticos de
+        design, que reúne padrões de comportamentos e unifica a linguagem do Produto. Desenvolvido para criar
+        experiências simples, intuitivas e bonitas, se apoia no atributo da Plataforma:
+        <strong>Beautiful & Intuitive</strong>.
       </p>
       <div class="btns-wrapper">
         <a class="btn get-started" routerLink="docs">Documentação</a>
       </div>
       <div class="hero-features">
-        <div class="hero-feature">
+        <!--<div class="hero-feature">
           <div class="feature-key">40+</div>
           <h3 class="feature-title">Angular Components</h3>
         </div>
-        <!-- <div class="hero-feature">
+         <div class="hero-feature">
           <div class="feature-key">4</div>
           <h3 class="feature-title">Visual themes</h3>
         </div>
@@ -33,13 +35,13 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
           <div class="feature-key">3</div>
           <h3 class="feature-title">Auth strategies</h3>
         </div>
-        -->
+
         <div class="hero-feature">
           <div class="feature-key">
             <nb-icon icon="lock"></nb-icon>
           </div>
           <h3 class="feature-title">Segurança/ACL</h3>
-        </div>
+        </div>-->
       </div>
     </div>
     <div class="right-block">
