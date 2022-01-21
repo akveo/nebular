@@ -10,15 +10,12 @@ jobs:
   deploy-docs:
     runs-on: ubuntu-latest
     env:
-      GH_TOKEN: ${{ secrets.GH_TOKEN }}
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
         with:
           node-version: '14'
           cache: 'npm'
-      - run: |
-          touch .env
-          echo GH_TOKEN=${{ secrets.GH_TOKEN }} >> .env
       - run: npm ci
       - run: npm run docs:gh-pages
