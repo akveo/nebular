@@ -30,7 +30,7 @@ export class NgdHomeComponent {
       title: 'Componentes',
       description: 'Explore os componentes que compõem a interface da Dadosfera',
       icon: 'assets/img/components.svg',
-      link: 'docs/componentes/components-overview',
+      link: 'docs/componentes/overview',
     },
     {
       title: 'Recursos',

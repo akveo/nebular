@@ -48,20 +48,20 @@ export class NgdHeaderComponent implements OnInit {
 
   mainMenu: NbMenuItem[] = [
     {
-      title: 'Docs',
+      title: 'Introdução',
       link: '/docs',
     },
     {
+      title: 'Branding',
+      link: '/docs/design-system/cores',
+    },
+    {
       title: 'Componentes',
-      link: '/docs/componentes/components-overview',
+      link: '/docs/componentes/overview',
     },
     {
-      title: 'Design System',
-      link: '/docs/design-system/eva-design-system-intro',
-    },
-    {
-      title: 'Sobre',
-      link: '/docs/incio/sobre',
+      title: 'Recursos',
+      link: '/docs/design-system/recursos',
     },
     // {
     //   title: 'Security',
