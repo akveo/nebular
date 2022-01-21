@@ -15,19 +15,19 @@ import { NbThemeService } from '@nebular/theme';
 export class NgdHomeComponent {
   features = [
     {
-      title: 'Introduction',
+      title: 'Introdução',
       description: 'Install from scratch or based on ngx-admin.',
       icon: 'assets/img/intro.svg',
       link: 'docs',
     },
     {
-      title: 'Guides',
+      title: 'Guias',
       description: 'Theme System configuration, customization, and other articles.',
       icon: 'assets/img/guides.svg',
       link: 'docs/guides/install-based-on-starter-kit',
     },
     {
-      title: 'Components',
+      title: 'Componentes',
       description: 'Native Angular components with configurable styles.',
       icon: 'assets/img/components.svg',
       link: 'docs/componentes/components-overview',
@@ -38,18 +38,6 @@ export class NgdHomeComponent {
                     With hot-reload out of the box.`,
       icon: 'assets/img/themes.svg',
       link: 'docs/design-system/eva-design-system-intro',
-    },
-    {
-      title: 'Auth',
-      description: 'The authentication layer with configurable strategies.',
-      icon: 'assets/img/auth.svg',
-      link: 'docs/auth/introduction',
-    },
-    {
-      title: 'Security',
-      description: 'An ACL list with helpful directives.',
-      icon: 'assets/img/security.svg',
-      link: 'docs/security/introduction',
     },
   ];
 
