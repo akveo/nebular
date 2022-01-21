@@ -1,14 +1,13 @@
-# Use Theme Variable
+# Usar variáveis do tema
 
-In case when you need to access theme variables from your application component,
-Nebular provides you with simple sass function called `nb-theme`.
+Caso você precise acessar variáveis de tema do seu componente de aplicação, o Beast fornece uma função sass simples chamada `nb-theme`.
 
 <hr>
 
-## Import Theme
+## Importar tema
 
-In you `*.component.scss` add an import of `themes.scss`
-(created in [Enable Customizable Theme](docs/design-system/enable-customizable-theme) step):
+No arquivo `*.component.scss` adicione uma importação de `themes.scss`
+(criado em [Temas runtime](docs/guias/temas-runtime--angular)):
 
 ```scss
 @use '../../../themes' as *;
@@ -16,9 +15,9 @@ In you `*.component.scss` add an import of `themes.scss`
 
 <hr>
 
-## Access Variable
+## Acessando a variável
 
-Now we can simply call `nb-theme(variable-name)` to access a variable:
+Agora podemos simplesmente chamar `nb-theme(variable-name)` para acessar uma variável:
 
 ```scss
 @use '../../../themes' as *;
@@ -28,14 +27,14 @@ Now we can simply call `nb-theme(variable-name)` to access a variable:
 }
 ```
 
-Complete list of variables could be found under [Default Theme Variables](docs/design-system/default-theme) table.
+A lista completa de variáveis pode ser encontrada na tabela [Tema Padrão](docs/design-system/default-theme).
 
 <hr>
 
-## Access with Multiples Theme Mode
+## Acesso com o modo de múltiplos temas
 
-In a case when you have [Multiple Runtime Themes](docs/design-system/enable-multiple-runtime-themes), you also need to cover your component styles
-using `nb-install-component` mixin like this:
+Em um caso em que você tenha múltiplos temas em runtime (default e dark, por exemplo), você precisa adicionar seus estilos de componentes
+usando o mixin `nb-install-component` assim:
 
 ```scss
 @use '../../../themes' as *;
@@ -44,13 +43,3 @@ using `nb-install-component` mixin like this:
   background: nb-theme(background-basic-color-1);
 }
 ```
-
-The mixin will multiple the component styles per each enabled theme, giving the ability to use run-time themes.
-Note, in case when [Custom CSS Properties](docs/design-system/enable-css-properties-mode) mode enables,
-the mixin **is not needed**, since there is no need to multiple the styles.
-
-## Artigos relacionados
-
-- [Design System Theme](docs/design-system/design-system-theme)
-- [Enable Customizable Theme](docs/design-system/enable-customizable-theme)
-- [Create Custom Theme](docs/design-system/create-custom-theme)

@@ -11,7 +11,7 @@ Os estilos do Beast vêm em um arquivo css por padrão. Para poder personalizar 
 <div class="note note-info section-end">
   <div class="note-title">Nota</div>
   <div class="note-body">
-    Você pode já ter esta configuração se usou `ng add @nebular/theme` e selecionou "customizable themes" durante o processo de instalação.
+    Você pode já ter esta configuração se usou `ng add @beast/theme` e selecionou "customizable themes" durante o processo de instalação.
   </div>
 </div>
 
@@ -21,9 +21,9 @@ Crie um `themes.scss` em sua pasta `src` e importe um tema de sua escolha:
 
 ```scss
 // import Nebular Theme System and the default theme
-@forward '@nebular/theme/styles/theming';
-@use '@nebular/theme/styles/theming' as *;
-@use '@nebular/theme/styles/themes/default';
+@forward '@beast/theme/styles/theming';
+@use '@beast/theme/styles/theming' as *;
+@use '@beast/theme/styles/themes/default';
 ```
 
 ## Modificando as variáveis do tema
@@ -31,9 +31,9 @@ Crie um `themes.scss` em sua pasta `src` e importe um tema de sua escolha:
 Para ajustar algumas das variáveis do tema, precisamos registrar nossas alterações usando a função `nb-register-theme`.
 
 ```scss
-@forward '@nebular/theme/styles/theming';
-@use '@nebular/theme/styles/theming' as *;
-@use '@nebular/theme/styles/themes/default';
+@forward '@beast/theme/styles/theming';
+@use '@beast/theme/styles/theming' as *;
+@use '@beast/theme/styles/themes/default';
 
 $nb-themes: nb-register-theme(
   (
@@ -49,14 +49,14 @@ $nb-themes: nb-register-theme(
 
 ## Habilitar Beast Styles
 
-A última coisa, encontre seu `styles.scss` (ou crie um e adicione-o em `angular.json` em `"styles": [..]`) ou seu aplicativo e cole o seguinte:
+A última coisa, encontre seu `styles.scss` (ou crie um e adicione-o em `angular.json` em `"styles": [..]`) em sua aplicação e cole o seguinte:
 
 ```scss
 // this is our just created themes.scss file, make sure the path to the file is correct
 @use 'themes' as *;
 
 // framework component styles
-@use '@nebular/theme/styles/globals' as *;
+@use '@beast/theme/styles/globals' as *;
 
 // install the framework styles
 @include nb-install() {
@@ -71,10 +71,10 @@ A última coisa, encontre seu `styles.scss` (ou crie um e adicione-o em `angular
 Supondo que você já tenha o arquivo `themes.scss` com o tema `default` habilitado, vamos adicionar um segundo tema:
 
 ```scss
-@forward '@nebular/theme/styles/theming';
-@use '@nebular/theme/styles/theming' as *;
-@use '@nebular/theme/styles/themes/default';
-@use '@nebular/theme/styles/themes/dark';
+@forward '@beast/theme/styles/theming';
+@use '@beast/theme/styles/theming' as *;
+@use '@beast/theme/styles/themes/default';
+@use '@beast/theme/styles/themes/dark';
 
 $nb-themes: nb-register-theme(
   (

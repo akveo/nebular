@@ -1,15 +1,14 @@
 # RTL
 
-All Nebular components support RTL out of the box.
+Todos os componentes Beast suportam RTL por padrão.
 
-The components that accept a position as a setting now also support logical start and end values, similar to flexbox. The value of start and end depends on the current layout direction. For LTR it's left and for RTL - right.
-For instance, if we need the sidebar to be positioned logically depending on a language direction, then instead of setting it to left we can set its position to start:
+Os componentes que aceitam uma posição como configuração, também suportam valores iniciais e finais lógicos, semelhantes ao flexbox. O valor de início e fim depende da direção do layout atual. Para LTR é esquerda e para RTL, direita. Por exemplo, se precisarmos que a barra lateral seja posicionada logicamente dependendo da direção do idioma, em vez de defini-la para a esquerda, podemos definir sua posição para iniciar:
 
 ```html
 <nb-sidebar start></nb-sidebar>
 ```
 
-Document direction could be set through the `NbThemeModule.forRoot` call. Supported values are `ltr` and `rtl`.
+A direção do documento pode ser definida através do `NbThemeModule.forRoot`. Os valores suportados são `ltr` e `rtl`.
 
 ```typescript
 @NgModule({
@@ -19,16 +18,16 @@ Document direction could be set through the `NbThemeModule.forRoot` call. Suppor
 })
 ```
 
-Default value is `ltr`.
+O valor padrão é `ltr`.
 
 <div class="note note-info">
-  <div class="note-title">Note</div>
+  <div class="note-title">Nota</div>
   <div class="note-body">
-    Components must be placed inside of the `<nb-layout></nb-layout>` component to correctly support language direction.
+    Os componentes devem ser colocados dentro do componente `nb-layout` para suportar corretamente a direção do idioma.
   </div>
 </div>
 
-To help you add RTL support to your custom components, Nebular provides you with two scss mixins: `nb-lrt` and `nb-rtl`. You can use them to alter values of css properties, which don't support logical values, like paddings, margins, etc. You can pass single property and value as arguments, pass multiple statements as the content of mixin or both. For example:
+Para ajudá-lo a adicionar suporte RTL aos seus componentes personalizados, o Beast fornece dois mixins scss: `nb-lrt` e `nb-rtl`. Você pode usá-los para alterar valores de propriedades CSS que não suportam valores lógicos, como preenchimentos, margens, etc. Você pode passar uma única propriedade e valor como argumentos, passar várias instruções como conteúdo de mixin ou ambos. Por exemplo:
 
 ```scss
 :host {
@@ -48,15 +47,15 @@ To help you add RTL support to your custom components, Nebular provides you with
 }
 ```
 
-Please note, the mixins are only available within component `:host` selector or `nb-install-component()` mixin if used.
+Observe que os mixins estão disponíveis apenas no seletor do componente `:host` ou no mixin `nb-install-component()`, se usado.
 
-If you need to change direction dynamically, get current value or listen to changes of direction, Nebular provides `NbLayoutDirectionService`.
+Se você precisar mudar a direção dinamicamente, obter o valor atual ou ouvir as mudanças de direção, o Beast fornece `NbLayoutDirectionService`.
 
-# Layout direction directives
+# Diretivas de direção de layout
 
-Nebular provides `nbLtr` and `nbRlt` directives to show content based on the current direction.
-For example, you could apply the `nbRtl` directive to the element you need to show only when layout direction is right-to-left add:
+O Beast também fornece diretivas `nbLtr` e `nbRlt` para mostrar o conteúdo baseado na direção atual.
+Por exemplo, você pode aplicar a diretiva `nbRtl` ao elemento que você precisa mostrar apenas quando a direção do layout for da direita para a esquerda:
 
 ```html
-<div *nbRtl>This text is visible only when layout direction is RTL</div>
+<div *nbRtl>Este texto é visível apenas quando a direção do layout é RTL</div>
 ```
