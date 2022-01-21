@@ -4,20 +4,18 @@
       <ngd-header class="docs-header" [sidebarTag]="sidebarTag" [isDocs]="true"></ngd-header>
     </div>
   </nb-layout-header>
-  <nb-sidebar class="menu-sidebar" [tag]="sidebarTag" [responsive]="true" [compactedBreakpoints]="[]" [collapsedBreakpoints]="collapsedBreakpoints">
+  <nb-sidebar
+    class="menu-sidebar"
+    [tag]="sidebarTag"
+    [responsive]="true"
+    [compactedBreakpoints]="[]"
+    [collapsedBreakpoints]="collapsedBreakpoints"
+  >
     <button (click)="collapseMenu()" class="collapse-all">Collapse all</button>
     <nb-menu [items]="menuItems" tag="leftMenu"></nb-menu>
   </nb-sidebar>
   <nb-layout-column>
     <router-outlet></router-outlet>
-
-    <div class="contact-us">
-      <h2>Need some help or found an issue?</h2>
-      <p>
-        Ask on <a href="https://stackoverflow.com/questions/ask">Stack Overflow</a> with tag `nebular` or
-        post an issue on <a href="https://github.com/akveo/nebular/issues/new">GitHub</a>.
-      </p>
-    </div>
   </nb-layout-column>
   <nb-layout-footer>
     <ngd-footer></ngd-footer>

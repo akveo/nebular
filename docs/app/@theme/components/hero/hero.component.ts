@@ -18,14 +18,14 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
         beautiful designs to adapt them to your brand. Nebular is free of charge and open-source.
       </p>
       <div class="btns-wrapper">
-        <a class="btn get-started" routerLink="docs">Get Started</a>
+        <a class="btn get-started" routerLink="docs">Documentação</a>
       </div>
       <div class="hero-features">
         <div class="hero-feature">
           <div class="feature-key">40+</div>
           <h3 class="feature-title">Angular Components</h3>
         </div>
-        <div class="hero-feature">
+        <!-- <div class="hero-feature">
           <div class="feature-key">4</div>
           <h3 class="feature-title">Visual themes</h3>
         </div>
@@ -33,11 +33,12 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
           <div class="feature-key">3</div>
           <h3 class="feature-title">Auth strategies</h3>
         </div>
+        -->
         <div class="hero-feature">
           <div class="feature-key">
             <nb-icon icon="lock"></nb-icon>
           </div>
-          <h3 class="feature-title">Security</h3>
+          <h3 class="feature-title">Segurança/ACL</h3>
         </div>
       </div>
     </div>
