@@ -190,7 +190,7 @@ async function buildDocsApp(projectDir: string, baseHref: string) {
 
 async function deploy(distDir: string) {
   await runCommand(
-    `npx angular-cli-ghpages --dir . --repo=https://github.com/${REPO_OWNER}/${REPO_NAME}.git --no-silent`,
+    `npx angular-cli-ghpages --dir . --repo=https://GH_TOKEN@github.com/${REPO_OWNER}/${REPO_NAME}.git --no-silent`,
     { cwd: distDir, showLog: true },
   );
 }
