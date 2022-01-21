@@ -17,7 +17,7 @@ jobs:
         with:
           node-version: '14'
           cache: 'npm'
-      run: |
+      - run: |
         touch .env
         echo GH_TOKEN=${{ secrets.GH_TOKEN }} >> .env
       - run: npm ci
