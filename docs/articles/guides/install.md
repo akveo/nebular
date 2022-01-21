@@ -14,7 +14,7 @@ Nesta etapa, presumimos que você já tenha uma aplicação Angular criada.
 npm install --save @beast/theme @angular/cdk @angular/animations eva-icons @beast/eva-icons
 ```
 
-Além disso, você pode instalar o módulo de segurança: `npm install --save @beast/auth @beast/security`
+Além disso, você pode instalar o módulo de segurança: `npm install --save @beast/security`
 
 ### Configurar o Beast
 
