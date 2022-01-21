@@ -17,5 +17,8 @@ jobs:
         with:
           node-version: '14'
           cache: 'npm'
+      - run: |
+          git config --global user.email ${{ secrets.USER_EMAIL }}
+          git config --global user.name ${{ secrets.USER_NAME }}
       - run: npm ci
       - run: npm run docs:gh-pages
