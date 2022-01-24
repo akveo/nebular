@@ -1,22 +1,24 @@
-# Assign multiple roles to a user
+# Atribuir várias roles a um usuário
 
-In a case when you have slightly more complicated requirements, when a user has more than one role, you can configure the `NbRoleProvider` service to return an array of user roles.
+Em um caso em que você tem requisitos um pouco mais complicados, quando um usuário tem mais de uma função, você pode configurar o serviço `NbRoleProvider` para retornar um array de funções de usuário.
+
 <hr>
 
-## Roles configuration
+## Configurações de Roles
 
-In the simplest form you just need to modify the `getRole` method to return an array of roles:
+Na forma mais simples, você só precisa modificar o método `getRole` para retornar um array de roles:
+
 ```ts
 // ...
 
 import { of as observableOf } from 'rxjs/observable/of';
-import { NbSecurityModule, NbRoleProvider } from '@nebular/security';
+import { NbSecurityModule, NbRoleProvider } from '@beast/security';
 
 
 @NgModule({
   imports: [
    // ...
-    
+
    NbSecurityModule.forRoot({
     // ...
    }),
@@ -34,6 +36,6 @@ import { NbSecurityModule, NbRoleProvider } from '@nebular/security';
       },
     },
   ],
-``` 
+```
 
-Thus, once a user is accessing some secured resource, `isGranted` method returns `true` if at least one of the roles can access the resource.
+Assim, uma vez que um usuário está acessando algum recurso, o método `isGranted` retorna `true` se pelo menos uma das roles pode acessar o recurso.

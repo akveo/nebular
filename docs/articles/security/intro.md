@@ -1,28 +1,11 @@
-# Security
+# Segurança
 
-Security is an important part of any adult web application. It is a common task to manage user access to particular resources.
-Unlike the `Nebular Auth`, which provides a way to `authenticate` a user, `Nebular Security` helps you to `authorize` a user to access some of the application resources.
+A segurança é uma parte importante de qualquer aplicativo da web para adultos. É uma tarefa comum gerenciar o acesso do usuário a recursos específicos.
+O `Beast Security` ajuda você a `autorizar` um usuário a acessar alguns dos recursos do aplicativo.
 
-<div class="note note-warning">
-  <div class="note-title">Warning</div>
-  <div class="note-body">
-    Front-end ACL won't resolve all of the security issues and just provides a better user experience for your application.
-    It is essential to duplicate security rules on the back-end side.
-  </div>
-</div>
-<hr>
+## O que está incluído
 
-## What's included
-
-- ACL roles/permissions/resources configuration
-- `RoleProvider` - user role determination, authentication agnostic
-- `NbAccessChecker` - a service that checks whether access is granted or not
-- `*nbIsGranted` - conditional directive to manager your content visibility
-
-- _Security Decorator_ - a decorator that manages access to a particular method, coming soon.
-
-<hr>
-
-## Artigos relacionados
-
-- Security Module [Installation](docs/security/installation)
+- ACL - configuração de funções/permissões/recursos
+- `RoleProvider` - determinação da função do usuário
+- `NbAccessChecker` - um serviço que verifica se o acesso é concedido ou não
+- `*nbIsGranted` - diretiva condicional para gerenciar sua visibilidade de conteúdo
