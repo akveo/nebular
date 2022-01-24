@@ -43,7 +43,7 @@ import { NbChatTitleDirective } from './chat-title.directive';
  *
  * Basic chat configuration and usage:
  * ```ts
- * <nb-chat title="Nebular Conversational UI">
+ * <nb-chat title="Beast Conversational UI">
  *       <nb-chat-message *ngFor="let msg of messages"
  *                        [type]="msg.type"
  *                        [message]="msg.text"
@@ -159,7 +159,7 @@ import { NbChatTitleDirective } from './chat-title.directive';
  *
  * That's it, full example will look like this:
  * ```html
- * <nb-chat title="Nebular Conversational UI">
+ * <nb-chat title="Beast Conversational UI">
  *   <a *nbCustomMessage="'link'; let data" [href]="data.href">{{ data.text }}</a>
  *   <nb-chat-message type="link" [customMessageData]="{ href: 'https://example.com', text: 'example.com' }">
  *   </nb-chat-message>

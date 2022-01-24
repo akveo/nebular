@@ -23,7 +23,7 @@ import { NbComponentOrCustomStatus } from '../component-status';
 
 /**
  * The `NbRadioComponent` provides the same functionality as native `<input type="radio">`
- * with Nebular styles and animations.
+ * with Beast styles and animations.
  *
  * @stacked-example(Showcase, radio/radio-showcase.component)
  *
@@ -224,7 +224,8 @@ import { NbComponentOrCustomStatus } from '../component-status';
         [checked]="checked"
         [disabled]="disabled"
         (change)="onChange($event)"
-        (click)="onClick($event)">
+        (click)="onClick($event)"
+      />
       <span class="outer-circle"></span>
       <span class="inner-circle"></span>
       <span class="text">
@@ -236,7 +237,6 @@ import { NbComponentOrCustomStatus } from '../component-status';
   styleUrls: ['./radio.component.scss'],
 })
 export class NbRadioComponent {
-
   @Input()
   get name(): string {
     return this._name;
@@ -289,6 +289,7 @@ export class NbRadioComponent {
 
   @Output() valueChange: EventEmitter<any> = new EventEmitter();
 
+  // eslint-disable-next-line @angular-eslint/no-output-native
   @Output() blur: EventEmitter<void> = new EventEmitter();
 
   @ViewChild('input', { read: ElementRef }) input: ElementRef<HTMLInputElement>;
