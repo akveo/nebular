@@ -1,22 +1,26 @@
 import { Component } from '@angular/core';
 
 @Component({
+  // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'nb-chat-sizes',
-  styles: [`
-    ::ng-deep nb-layout-column {
-      justify-content: center;
-      display: flex;
-    }
-    nb-chat {
-      width: 500px;
-      margin: 0.5rem 0 2rem 2rem;
-    }`],
+  styles: [
+    `
+      ::ng-deep nb-layout-column {
+        justify-content: center;
+        display: flex;
+      }
+      nb-chat {
+        width: 500px;
+        margin: 0.5rem 0 2rem 2rem;
+      }
+    `,
+  ],
   templateUrl: './chat-size.component.html',
 })
 export class ChatSizesComponent {
   chats: any[] = [
     {
-      title: 'Nebular Conversational UI Small',
+      title: 'Beast Conversational UI Small',
       messages: [
         {
           text: 'Small!',
@@ -31,7 +35,7 @@ export class ChatSizesComponent {
       size: 'small',
     },
     {
-      title: 'Nebular Conversational UI Medium',
+      title: 'Beast Conversational UI Medium',
       messages: [
         {
           text: 'Medium!',

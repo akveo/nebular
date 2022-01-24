@@ -1,24 +1,27 @@
 import { Component } from '@angular/core';
 
 @Component({
+  // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'nb-chat-colors',
   templateUrl: './chat-colors.component.html',
-  styles: [`
-    ::ng-deep nb-layout-column {
-      justify-content: center;
-      display: flex;
-    }
-    nb-chat {
-      width: 500px;
-      margin: 0.5rem 0 2rem 2rem;
-    }
-  `],
+  styles: [
+    `
+      ::ng-deep nb-layout-column {
+        justify-content: center;
+        display: flex;
+      }
+      nb-chat {
+        width: 500px;
+        margin: 0.5rem 0 2rem 2rem;
+      }
+    `,
+  ],
 })
 export class ChatColorsComponent {
   chats: any[] = [
     {
       status: 'success',
-      title: 'Nebular Conversational UI Success',
+      title: 'Beast Conversational UI Success',
       messages: [
         {
           text: 'Success!',
@@ -33,7 +36,7 @@ export class ChatColorsComponent {
     },
     {
       status: 'danger',
-      title: 'Nebular Conversational UI Danger',
+      title: 'Beast Conversational UI Danger',
       messages: [
         {
           text: 'Danger!',
@@ -48,7 +51,7 @@ export class ChatColorsComponent {
     },
     {
       status: 'primary',
-      title: 'Nebular Conversational UI Primary',
+      title: 'Beast Conversational UI Primary',
       messages: [
         {
           text: 'Primary!',
@@ -63,7 +66,7 @@ export class ChatColorsComponent {
     },
     {
       status: 'info',
-      title: 'Nebular Conversational UI Info',
+      title: 'Beast Conversational UI Info',
       messages: [
         {
           text: 'Info!',
@@ -78,7 +81,7 @@ export class ChatColorsComponent {
     },
     {
       status: 'warning',
-      title: 'Nebular Conversational UI Warning',
+      title: 'Beast Conversational UI Warning',
       messages: [
         {
           text: 'Warning!',

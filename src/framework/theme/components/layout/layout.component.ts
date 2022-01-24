@@ -34,7 +34,7 @@ import { NbOverlayContainerAdapter } from '../cdk/adapter/overlay-container-adap
 
 /**
  * Layout container component.
- * When using with Nebular Theme System it is required that all child components should be placed inside.
+ * When using with Beast Theme System it is required that all child components should be placed inside.
  *
  * Basic example of two column layout with header:
  *
@@ -300,10 +300,13 @@ export class NbLayoutComponent implements AfterViewInit, OnDestroy {
 
     this.scrollService
       .onScrollableChange()
-      .pipe(filter(() => this.withScrollValue), takeUntil(this.destroy$))
+      .pipe(
+        filter(() => this.withScrollValue),
+        takeUntil(this.destroy$),
+      )
       .subscribe((scrollable: boolean) => {
         /**
-         * In case when Nebular Layout custom scroll `withScroll` mode is enabled
+         * In case when Beast Layout custom scroll `withScroll` mode is enabled
          * we need to disable default CDK scroll blocker (@link NbBlockScrollStrategyAdapter) on HTML element
          * so that it won't add additional positioning.
          */

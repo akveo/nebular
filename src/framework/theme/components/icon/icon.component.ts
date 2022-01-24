@@ -29,7 +29,6 @@ export interface NbIconConfig {
 
 /**
  * Icon component. Allows to render both `svg` and `font` icons.
- * Starting from Nebular 4.0 uses [Eva Icons](https://akveo.github.io/eva-icons/) pack by default.
  *
  * Basic icon example:
  * @stacked-example(Showcase, icon/icon-showcase.component)
@@ -41,16 +40,9 @@ export interface NbIconConfig {
  * ```
  * ### Installation
  *
- * By default Nebular comes without any pre-installed icon pack.
- * Starting with Nebular 4.0.0 we ship separate package called `@nebular/eva-icons`
- * which integrates SVG [Eva Icons](https://akveo.github.io/eva-icons/) pack to Nebular. To add it to your
- * project run:
- * ```sh
- * npm i eva-icons @nebular/eva-icons
- * ```
- * This command will install Eva Icons pack. Then register `NbEvaIconsModule` into your app module:
+ * Register `NbEvaIconsModule` into your app module:
  * ```ts
- * import { NbEvaIconsModule } from '@nebular/eva-icons';
+ * import { NbEvaIconsModule } from '@beast/eva-icons';
  *
  * @NgModule({
  *   imports: [
@@ -62,7 +54,7 @@ export interface NbIconConfig {
  * ```
  * Last thing, import `NbIconModule` to your feature module where you need to show an icon:
  * ```ts
- * import { NbIconModule } from '@nebular/theme';
+ * import { NbIconModule } from '@beast/theme';
  *
  * @NgModule({
  *   imports: [
@@ -114,7 +106,6 @@ export interface NbIconConfig {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NbIconComponent implements NbIconConfig, OnChanges, OnInit {
-
   protected iconDef;
   protected prevClasses = [];
 
