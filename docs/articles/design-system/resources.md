@@ -6,7 +6,7 @@ Aqui você pode baixar todos os recursos necessários do nosso design system.
 
 ## Fontes
 
-Baixe as principais fontes usadas em nosso Branding e em nossos Produtos.
+Baixe as principais fontes usadas em nosso Branding e em nossos produtos [nesse link](https://drive.google.com/drive/folders/1pKd1qcHQFIsxONVP6-YKgKTSC-TA996u).
 
 <hr>
 
