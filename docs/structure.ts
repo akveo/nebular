@@ -574,7 +574,7 @@ export const structure = [
     children: [
       {
         type: 'page',
-        name: 'Introduction',
+        name: 'Introdução',
         children: [
           {
             type: 'block',
@@ -585,7 +585,7 @@ export const structure = [
       },
       {
         type: 'page',
-        name: 'Installation',
+        name: 'Intalação',
         children: [
           {
             type: 'block',
@@ -596,7 +596,7 @@ export const structure = [
       },
       {
         type: 'page',
-        name: 'ACL Configuration & Usage',
+        name: 'ACL',
         children: [
           {
             type: 'block',
@@ -607,7 +607,7 @@ export const structure = [
       },
       {
         type: 'page',
-        name: 'Multiple User Roles',
+        name: 'Múltiplas Roles',
         children: [
           {
             type: 'block',
