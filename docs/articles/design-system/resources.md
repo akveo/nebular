@@ -10,7 +10,7 @@ Baixe as principais fontes usadas em nosso Branding e em nossos produtos [nesse 
 
 <hr>
 
-## Logos
+## Logotipos
 
 Os logotipos são as representações mais imediatas da nossa empresa, cultura e marca. Você pode baixá-los [aqui](https://drive.google.com/drive/folders/1VEE7xRgfN7pFZLKjMUL8B471DT-AOfGI).
 
