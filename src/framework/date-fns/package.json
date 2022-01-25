@@ -1,7 +1,7 @@
 {
-  "name": "@nebular/date-fns",
+  "name": "@beast/date-fns",
   "version": "9.0.0",
-  "description": "@nebular/date-fns",
+  "description": "@beast/date-fns",
   "author": "akveo",
   "license": "MIT",
   "repository": {

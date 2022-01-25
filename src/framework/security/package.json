@@ -1,7 +1,7 @@
 {
-  "name": "@nebular/security",
+  "name": "@beast/security",
   "version": "9.0.0",
-  "description": "@nebular/security",
+  "description": "@beast/security",
   "author": "akveo",
   "license": "MIT",
   "repository": {
