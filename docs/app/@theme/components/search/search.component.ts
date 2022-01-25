@@ -5,15 +5,13 @@ import { NB_WINDOW } from '@nebular/theme';
   selector: 'ngd-search',
   styleUrls: ['./search.component.scss'],
   template: `
-    <nb-icon icon="search-outline"></nb-icon>
-    <input type="text" nbInput id="doc-search" placeholder="Start typing...">
+    <nb-icon style="display: none" icon="search-outline"></nb-icon>
+    <input style="display: none" type="text" nbInput id="doc-search" placeholder="Start typing..." />
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NgdSearchComponent implements AfterViewInit {
-
-  constructor(@Inject(NB_WINDOW) private window) {
-  }
+  constructor(@Inject(NB_WINDOW) private window) {}
 
   ngAfterViewInit() {
     this.window.docsearch({
