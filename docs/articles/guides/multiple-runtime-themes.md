@@ -8,13 +8,6 @@ Este modo é útil quando você precisa ter vários temas e quer alterá-los em 
 
 Os estilos do Beast vêm em um arquivo css por padrão. Para poder personalizar as variáveis do tema, os arquivos scss devem estar habilitados.
 
-<div class="note note-info section-end">
-  <div class="note-title">Nota</div>
-  <div class="note-body">
-    Você pode já ter esta configuração se usou `ng add @beast/theme` e selecionou "customizable themes" durante o processo de instalação.
-  </div>
-</div>
-
 ## Importanto um tema
 
 Crie um `themes.scss` em sua pasta `src` e importe um tema de sua escolha:

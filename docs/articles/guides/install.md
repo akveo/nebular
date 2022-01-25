@@ -68,7 +68,7 @@ export class AppModule {
 
 ## Configurar fonte
 
-Para configurar a fonte, você deve adicionar a seguinte linha no seu `index.html`:
+Para habilitar a fonte `Menco`, você deve adicionar a seguinte linha no seu `index.html`:
 
 ```html
 <link rel="stylesheet" href="https://use.typekit.net/qks0jns.css" />
