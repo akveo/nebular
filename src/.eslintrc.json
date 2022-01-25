@@ -1,20 +1,11 @@
 {
   "extends": "../.eslintrc.json",
-  "ignorePatterns": [
-    "assets",
-    "backend",
-    "framework"
-  ],
+  "ignorePatterns": ["assets", "backend", "framework"],
   "overrides": [
     {
-      "files": [
-        "*.ts"
-      ],
+      "files": ["*.ts"],
       "parserOptions": {
-        "project": [
-          "src/tsconfig.app.json",
-          "src/tsconfig.spec.json"
-        ],
+        "project": ["src/tsconfig.app.json", "src/tsconfig.spec.json"],
         "createDefaultProgram": true
       },
       "rules": {
@@ -22,7 +13,7 @@
           "error",
           {
             "type": "attribute",
-            "prefix": "npg",
+            "prefix": ["npg", "nb", "ngx", "app"],
             "style": "camelCase"
           }
         ],
@@ -30,16 +21,14 @@
           "error",
           {
             "type": "element",
-            "prefix": "npg",
+            "prefix": ["npg", "nb", "ngx", "app"],
             "style": "kebab-case"
           }
         ]
       }
     },
     {
-      "files": [
-        "*.html"
-      ],
+      "files": ["*.html"],
       "rules": {}
     }
   ]

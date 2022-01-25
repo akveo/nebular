@@ -9,7 +9,7 @@ import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { filter, map, publishReplay, refCount, tap, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
-import { NB_WINDOW } from '@nebular/theme';
+import { NB_WINDOW } from '@beast/theme';
 import { NgdTabbedBlockComponent } from '../../blocks/components/tabbed-block/tabbed-block.component';
 import { NgdStructureService } from '../../@theme/services';
 

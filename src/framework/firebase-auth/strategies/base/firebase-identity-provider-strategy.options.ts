@@ -10,7 +10,7 @@ import {
   NbAuthJWTToken,
   NbAuthStrategyOptions,
   NbStrategyToken,
-} from '@nebular/auth';
+} from '@beast/auth';
 
 export class NbFirebaseIdentityProviderStrategyOptions extends NbAuthStrategyOptions {
   token?: NbStrategyToken = {
@@ -44,4 +44,4 @@ export class NbFirebaseIdentityProviderStrategyOptions extends NbAuthStrategyOpt
   };
   scopes?: string[] = [];
   customParameters?: { [key: string]: string } = {};
-};
+}

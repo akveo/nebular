@@ -3,7 +3,7 @@ import { Component, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { ActivatedRoute, Params } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
-import { NbTabComponent, NbTabsetComponent, NbTabsetModule } from '@nebular/theme';
+import { NbTabComponent, NbTabsetComponent, NbTabsetModule } from '@beast/theme';
 import { BehaviorSubject } from 'rxjs';
 import createSpy = jasmine.createSpy;
 
@@ -37,7 +37,7 @@ export class ActivatedRouteStub {
 
   setParams(params?: Params) {
     this.subject.next(params);
-  };
+  }
 }
 
 describe('NbTabsetComponent', () => {
@@ -50,12 +50,8 @@ describe('NbTabsetComponent', () => {
     activatedRouteStub = new ActivatedRouteStub();
 
     TestBed.configureTestingModule({
-      declarations: [ TabsetTestComponent ],
-      imports: [
-        CommonModule,
-        RouterTestingModule.withRoutes([]),
-        NbTabsetModule,
-      ],
+      declarations: [TabsetTestComponent],
+      imports: [CommonModule, RouterTestingModule.withRoutes([]), NbTabsetModule],
       providers: [{ provide: ActivatedRoute, useValue: activatedRouteStub }],
     });
 

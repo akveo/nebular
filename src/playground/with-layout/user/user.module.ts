@@ -5,7 +5,7 @@
  */
 
 import { NgModule } from '@angular/core';
-import { NbCardModule, NbUserModule } from '@nebular/theme';
+import { NbCardModule, NbUserModule } from '@beast/theme';
 import { UserRoutingModule } from './user-routing.module';
 import { UserShowcaseComponent } from './user-showcase.component';
 import { UserSizesComponent } from './user-sizes.component';
@@ -21,6 +21,6 @@ import { NbUserShapeComponent } from './user-shape.component';
     UserHideCaptionsComponent,
     NbUserShapeComponent,
   ],
-  imports: [ NbUserModule, NbCardModule, UserRoutingModule ],
+  imports: [NbUserModule, NbCardModule, UserRoutingModule],
 })
 export class UserModule {}

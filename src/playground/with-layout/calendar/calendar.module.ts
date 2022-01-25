@@ -6,7 +6,7 @@
 
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NbCalendarModule, NbCalendarRangeModule, NbButtonModule, NbCardModule } from '@nebular/theme';
+import { NbCalendarModule, NbCalendarRangeModule, NbButtonModule, NbCardModule } from '@beast/theme';
 import { CalendarRoutingModule } from './calendar-routing.module';
 import { CalendarBoundingMonthComponent } from './calendar-bounding-month.component';
 import { CalendarCustomDayCellShowcaseComponent } from './calendar-custom-day-cell-showcase.component';
@@ -34,13 +34,6 @@ import { CalendarWeekNumberComponent } from './calendar-week-number.component';
     CalendarCustomDayCellComponent,
     CalendarWeekNumberComponent,
   ],
-  imports: [
-    CommonModule,
-    NbButtonModule,
-    NbCardModule,
-    NbCalendarModule,
-    NbCalendarRangeModule,
-    CalendarRoutingModule,
-  ],
+  imports: [CommonModule, NbButtonModule, NbCardModule, NbCalendarModule, NbCalendarRangeModule, CalendarRoutingModule],
 })
 export class CalendarModule {}

@@ -16,7 +16,7 @@ import {
   NbContextMenuComponent,
   NbContextMenuModule,
   NbOverlayConfig,
-} from '@nebular/theme';
+} from '@beast/theme';
 
 @Component({
   selector: 'nb-context-menu-default-test',

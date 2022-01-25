@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, HostBinding, Inject, Input, OnInit } from '@angular/core';
-import { NB_WINDOW, NbMenuItem, NbSidebarService } from '@nebular/theme';
+import { NB_WINDOW, NbMenuItem, NbSidebarService } from '@beast/theme';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 

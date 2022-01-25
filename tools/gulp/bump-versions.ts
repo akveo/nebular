@@ -44,7 +44,7 @@ function bumpVersionAndNebularPeers(pkgPath: string) {
         pkgJson.version = VERSION;
         if (pkgJson.peerDependencies) {
           Object.keys(pkgJson.peerDependencies)
-            .filter((peer) => peer.includes('@nebular'))
+            .filter((peer) => peer.includes('@beast'))
             .forEach((peer) => (pkgJson.peerDependencies[peer] = VERSION));
         }
 

@@ -5,9 +5,9 @@
  */
 
 export function createThemeContent(themeName: string): string {
-  return `@forward '@nebular/theme/styles/theming';
-@use '@nebular/theme/styles/theming' as *;
-@use '@nebular/theme/styles/themes/${themeName}';
+  return `@forward '@beast/theme/styles/theming';
+@use '@beast/theme/styles/theming' as *;
+@use '@beast/theme/styles/themes/${themeName}';
 
 $nb-themes: nb-register-theme((
 
@@ -29,7 +29,7 @@ $nb-themes: nb-register-theme((
 
 export const stylesContent = `@use 'themes' as *;
 
-@use '@nebular/theme/styles/globals' as *;
+@use '@beast/theme/styles/globals' as *;
 
 @include nb-install() {
   @include nb-theme-global();

@@ -6,7 +6,7 @@
 
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NbCardModule, NbInputModule } from '@nebular/theme';
+import { NbCardModule, NbInputModule } from '@beast/theme';
 import { InputRoutingModule } from './input-routing.module';
 import { InputColorsComponent } from './input-colors.component';
 import { InputFullWidthComponent } from './input-full-width.component';
@@ -26,12 +26,6 @@ import { InputFormComponent } from './input-form.component';
     InputTypesComponent,
     InputFormComponent,
   ],
-  imports: [
-    FormsModule,
-    ReactiveFormsModule,
-    NbInputModule,
-    NbCardModule,
-    InputRoutingModule,
-  ],
+  imports: [FormsModule, ReactiveFormsModule, NbInputModule, NbCardModule, InputRoutingModule],
 })
 export class InputModule {}

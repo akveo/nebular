@@ -5,7 +5,7 @@
  */
 
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { NbComponentSize } from '@nebular/theme';
+import { NbComponentSize } from '@beast/theme';
 
 @Component({
   selector: 'nb-action-sizes',
@@ -13,5 +13,5 @@ import { NbComponentSize } from '@nebular/theme';
   templateUrl: './action-sizes.component.html',
 })
 export class ActionSizesComponent {
-  sizes: NbComponentSize[] = [ 'tiny', 'small', 'medium', 'large', 'giant' ];
+  sizes: NbComponentSize[] = ['tiny', 'small', 'medium', 'large', 'giant'];
 }

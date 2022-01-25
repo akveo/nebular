@@ -13,7 +13,7 @@ import {
   NbButtonModule,
   NbCardModule,
   NbSelectModule,
-} from '@nebular/theme';
+} from '@beast/theme';
 
 import { FormFieldRoutingModule } from './form-field-routing.module';
 import { FormFieldShowcaseComponent } from './form-field-showcase.component';
@@ -21,11 +21,7 @@ import { FormFieldPasswordComponent } from './form-field-password.component';
 import { FormFieldInputComponent } from './form-field-input.component';
 
 @NgModule({
-  declarations: [
-    FormFieldShowcaseComponent,
-    FormFieldPasswordComponent,
-    FormFieldInputComponent,
-  ],
+  declarations: [FormFieldShowcaseComponent, FormFieldPasswordComponent, FormFieldInputComponent],
   imports: [
     NbFormFieldModule,
     NbInputModule,

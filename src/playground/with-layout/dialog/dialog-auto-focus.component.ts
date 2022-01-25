@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NbDialogService } from '@nebular/theme';
+import { NbDialogService } from '@beast/theme';
 import { AutoFocusDialogComponent } from './components/auto-focus-dialog.component';
 
 @Component({
@@ -11,8 +11,7 @@ import { AutoFocusDialogComponent } from './components/auto-focus-dialog.compone
   styleUrls: ['./dialog-common.scss'],
 })
 export class DialogAutoFocusComponent {
-  constructor(private dialogService: NbDialogService) {
-  }
+  constructor(private dialogService: NbDialogService) {}
 
   openWithAutoFocus() {
     this.open(true);

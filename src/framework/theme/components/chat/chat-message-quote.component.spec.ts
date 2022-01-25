@@ -1,17 +1,19 @@
 import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { NbChatModule, NbThemeModule } from '@nebular/theme';
+import { NbChatModule, NbThemeModule } from '@beast/theme';
 
 @Component({
   selector: 'nb-chat-message-quote-test',
   template: `
-    <nb-chat-message-quote [sender]="sender"
-                           [date]="date"
-                           [dateFormat]="dateFormat"
-                           [message]="message"
-                           [quote]="quote">
+    <nb-chat-message-quote
+      [sender]="sender"
+      [date]="date"
+      [dateFormat]="dateFormat"
+      [message]="message"
+      [quote]="quote"
+    >
     </nb-chat-message-quote>
-    `,
+  `,
 })
 export class NbChatMessageQuoteTestComponent {
   sender: string;
@@ -59,5 +61,4 @@ describe('Chat-message-quote component: NbChatMessageQuoteTestComponent', () => 
     const quoteElement = fixture.nativeElement.querySelector('nb-chat-message-text');
     expect(quoteElement).toBeTruthy();
   });
-
 });

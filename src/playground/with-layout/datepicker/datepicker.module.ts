@@ -6,7 +6,7 @@
 
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NbCardModule, NbDatepickerModule, NbInputModule, NbTimepickerModule } from '@nebular/theme';
+import { NbCardModule, NbDatepickerModule, NbInputModule, NbTimepickerModule } from '@beast/theme';
 import { DatepickerRoutingModule } from './datepicker-routing.module';
 import { DatepickerFormsComponent } from './datepicker-forms.component';
 import { DatepickerShowcaseComponent } from './datepicker-showcase.component';

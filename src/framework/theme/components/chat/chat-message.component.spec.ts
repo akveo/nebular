@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NbChatMessageComponent, NbChatModule, NbThemeModule, NbChatCustomMessageService } from '@nebular/theme';
+import { NbChatMessageComponent, NbChatModule, NbThemeModule, NbChatCustomMessageService } from '@beast/theme';
 
 @Component({
   selector: 'nb-chat-message-test',

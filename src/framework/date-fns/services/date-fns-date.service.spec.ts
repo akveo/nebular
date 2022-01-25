@@ -7,8 +7,8 @@
 import { TestBed } from '@angular/core/testing';
 import { LOCALE_ID } from '@angular/core';
 
-import { NbDateService } from '@nebular/theme';
-import { NbDateFnsDateService } from '@nebular/date-fns';
+import { NbDateService } from '@beast/theme';
+import { NbDateFnsDateService } from '@beast/date-fns';
 
 describe('date-fns-date-service', () => {
   let dateService: NbDateService<Date>;

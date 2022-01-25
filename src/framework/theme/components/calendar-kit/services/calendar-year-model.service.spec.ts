@@ -1,4 +1,4 @@
-import { NbNativeDateService, NbCalendarYearModelService } from '@nebular/theme';
+import { NbNativeDateService, NbCalendarYearModelService } from '@beast/theme';
 
 describe('NbCalendarYearModelService', () => {
   let yearModelService: NbCalendarYearModelService<Date>;

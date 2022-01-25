@@ -13,7 +13,7 @@ import {
   NbListModule,
   NbPopoverModule,
   NbTabsetModule,
-} from '@nebular/theme';
+} from '@beast/theme';
 import { DynamicToAddComponent, PopoverListComponent, PopoverTabsComponent } from './components/dynamic.components';
 import { PopoverRoutingModule } from './popover-routing.module';
 import { PopoverCustomComponentComponent } from './popover-custom-component.component';
@@ -51,6 +51,6 @@ import { PopoverDynamicCodeComponent } from './popover-dynamic-code.component';
     NbTabsetModule,
     PopoverRoutingModule,
   ],
-  entryComponents: [ DynamicToAddComponent, PopoverListComponent, PopoverTabsComponent ],
+  entryComponents: [DynamicToAddComponent, PopoverListComponent, PopoverTabsComponent],
 })
 export class PopoverModule {}

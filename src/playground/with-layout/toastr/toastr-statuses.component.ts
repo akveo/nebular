@@ -1,5 +1,5 @@
 import { Component, HostBinding } from '@angular/core';
-import { NbToastrService, NbComponentStatus } from '@nebular/theme';
+import { NbToastrService, NbComponentStatus } from '@beast/theme';
 
 @Component({
   selector: 'nb-toastr-statuses',
@@ -17,7 +17,7 @@ import { NbToastrService, NbComponentStatus } from '@nebular/theme';
     </nb-card>
   `,
   styles: [
-      `
+    `
       ::ng-deep nb-layout-column {
         height: 80vw;
       }
@@ -30,8 +30,7 @@ export class ToastrStatusesComponent {
   @HostBinding('class')
   classes = 'example-items-rows';
 
-  constructor(private toastrService: NbToastrService) {
-  }
+  constructor(private toastrService: NbToastrService) {}
 
   showToast(status: NbComponentStatus) {
     this.toastrService.show(status, `Toast: ${++this.index}`, { status });

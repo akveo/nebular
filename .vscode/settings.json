@@ -20,7 +20,7 @@
     },
     "**/*.js.map": true,
 
-    // exclude @nebular build folders
+    // exclude @beast build folders
     "**/dist": true
   }
 }

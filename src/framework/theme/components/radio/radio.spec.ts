@@ -20,7 +20,7 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import createSpy = jasmine.createSpy;
 
-import { NbThemeModule, NbRadioModule, NbRadioComponent, NbRadioGroupComponent, NB_DOCUMENT } from '@nebular/theme';
+import { NbThemeModule, NbRadioModule, NbRadioComponent, NbRadioGroupComponent, NB_DOCUMENT } from '@beast/theme';
 
 @Component({
   selector: 'nb-radio-test',

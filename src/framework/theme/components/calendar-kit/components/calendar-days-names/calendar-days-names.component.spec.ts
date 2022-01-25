@@ -6,7 +6,7 @@
 
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { DatePipe } from '@angular/common';
-import { NbCalendarDaysNamesComponent, NbDateService, NbNativeDateService } from '@nebular/theme';
+import { NbCalendarDaysNamesComponent, NbDateService, NbNativeDateService } from '@beast/theme';
 
 describe('Component: NbCalendarDaysNames', () => {
   let fixture: ComponentFixture<NbCalendarDaysNamesComponent<Date>>;

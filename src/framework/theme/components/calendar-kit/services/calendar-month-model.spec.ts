@@ -7,7 +7,7 @@
 import { inject, TestBed, waitForAsync } from '@angular/core/testing';
 import { DatePipe } from '@angular/common';
 
-import { NbCalendarMonthModelService, NbDateService, NbNativeDateService } from '@nebular/theme';
+import { NbCalendarMonthModelService, NbDateService, NbNativeDateService } from '@beast/theme';
 
 describe('month-model-service', () => {
   let monthModel: NbCalendarMonthModelService<Date>;

@@ -1,6 +1,6 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { TestBed, ComponentFixture, fakeAsync, tick, ComponentFixtureAutoDetect } from '@angular/core/testing';
-import { NbListModule, NbListComponent } from '@nebular/theme';
+import { NbListModule, NbListComponent } from '@beast/theme';
 
 function waitForSpyCall(spy: jasmine.Spy, checkInterval: number = 40, timeout: number = 1000): Promise<any> {
   const initialCallsCount = spy.calls.count();

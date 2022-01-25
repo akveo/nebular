@@ -1,7 +1,7 @@
 import { Component, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { NbStepComponent, NbStepperComponent, NbStepperModule, NbThemeModule } from '@nebular/theme';
+import { NbStepComponent, NbStepperComponent, NbStepperModule, NbThemeModule } from '@beast/theme';
 
 @Component({
   selector: 'nb-step-changed-test',

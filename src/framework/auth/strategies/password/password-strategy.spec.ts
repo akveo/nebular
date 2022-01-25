@@ -8,7 +8,7 @@ import { inject, TestBed, waitForAsync } from '@angular/core/testing';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { NbPasswordAuthStrategy, NbAuthResult, nbAuthCreateToken, NbAuthSimpleToken } from '@nebular/auth';
+import { NbPasswordAuthStrategy, NbAuthResult, nbAuthCreateToken, NbAuthSimpleToken } from '@beast/auth';
 
 const ownerStrategyName = 'strategy';
 

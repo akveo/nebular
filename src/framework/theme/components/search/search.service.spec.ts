@@ -1,6 +1,6 @@
 import createSpy = jasmine.createSpy;
 import objectContaining = jasmine.objectContaining;
-import { NbSearchService } from '@nebular/theme';
+import { NbSearchService } from '@beast/theme';
 
 describe('NbSearchService', () => {
   it('should emit onSearchInput when searchInput called', () => {

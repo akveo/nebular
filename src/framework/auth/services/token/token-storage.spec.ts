@@ -15,10 +15,9 @@ import {
   NbAuthJWTToken,
   NB_AUTH_FALLBACK_TOKEN,
   NbAuthTokenParceler,
-} from '@nebular/auth';
+} from '@beast/auth';
 
 describe('token-storage', () => {
-
   let tokenStorage: NbTokenStorage;
   let tokenParceler: NbAuthTokenParceler;
   const testTokenKey = 'auth_app_token';
@@ -36,18 +35,18 @@ describe('token-storage', () => {
     });
   });
 
-    beforeEach(waitForAsync(inject(
-    [NbTokenStorage, NbAuthTokenParceler],
-    (_tokenStorage, _tokenParceler) => {
-      tokenStorage = _tokenStorage;
-      tokenParceler = _tokenParceler;
-    },
-  )));
+  beforeEach(
+    waitForAsync(
+      inject([NbTokenStorage, NbAuthTokenParceler], (_tokenStorage, _tokenParceler) => {
+        tokenStorage = _tokenStorage;
+        tokenParceler = _tokenParceler;
+      }),
+    ),
+  );
 
   afterEach(() => {
     localStorage.removeItem(testTokenKey);
   });
-
 
   it('set test token', () => {
     const token = nbAuthCreateToken(NbAuthSimpleToken, testTokenValue, ownerStrategyName);

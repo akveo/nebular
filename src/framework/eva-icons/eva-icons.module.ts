@@ -5,7 +5,7 @@
  */
 
 import { NgModule } from '@angular/core';
-import { NbIconLibraries, NbIcons, NbSvgIcon } from '@nebular/theme';
+import { NbIconLibraries, NbIcons, NbSvgIcon } from '@beast/theme';
 import { icons } from 'eva-icons';
 import { customIcons } from './customIcons';
 

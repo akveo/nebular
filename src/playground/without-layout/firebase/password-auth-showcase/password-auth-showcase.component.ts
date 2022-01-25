@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { catchError, share, take } from 'rxjs/operators';
-import { NbAuthService, NbAuthToken } from '@nebular/auth';
+import { NbAuthService, NbAuthToken } from '@beast/auth';
 
 import { FirebaseAPIService } from '../firebase-api.service';
 
@@ -12,7 +12,6 @@ import { FirebaseAPIService } from '../firebase-api.service';
   styleUrls: ['./password-auth-showcase.component.scss'],
 })
 export class PasswordAuthShowcaseComponent {
-
   userToken$: Observable<NbAuthToken>;
   isAuthenticated$: Observable<boolean>;
   data$: Observable<any>;
@@ -40,11 +39,10 @@ export class PasswordAuthShowcaseComponent {
   }
 
   getData() {
-    this.data$ = this.firebaseApi.getGreeting()
-      .pipe(
-        take(1),
-        catchError((error) => of(error)),
-        share(),
-      );
+    this.data$ = this.firebaseApi.getGreeting().pipe(
+      take(1),
+      catchError((error) => of(error)),
+      share(),
+    );
   }
 }

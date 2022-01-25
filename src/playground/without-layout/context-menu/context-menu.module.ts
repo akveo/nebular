@@ -12,7 +12,7 @@ import {
   NbLayoutModule,
   NbMenuModule,
   NbUserModule,
-} from '@nebular/theme';
+} from '@beast/theme';
 import { ContextMenuRoutingModule } from './context-menu-routing.module';
 import { ContextMenuClickComponent } from './context-menu-click.component';
 import { ContextMenuShowcaseComponent } from './context-menu-showcase.component';

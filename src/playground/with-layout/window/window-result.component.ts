@@ -5,7 +5,7 @@
  */
 
 import { Component } from '@angular/core';
-import { NbWindowService } from '@nebular/theme';
+import { NbWindowService } from '@beast/theme';
 import { VisitorsFormComponent } from './components/visitors-form.component';
 
 @Component({

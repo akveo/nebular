@@ -15,7 +15,7 @@ import {
   NbInputModule,
   NbRadioModule,
   NbSelectModule,
-} from '@nebular/theme';
+} from '@beast/theme';
 import { SelectRoutingModule } from './select-routing.module';
 import { SelectCleanComponent } from './select-clean.component';
 import { SelectDisabledComponent } from './select-disabled.component';

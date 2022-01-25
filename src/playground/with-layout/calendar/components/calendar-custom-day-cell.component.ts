@@ -1,13 +1,15 @@
 import { Component } from '@angular/core';
-import { NbCalendarDayCellComponent } from '@nebular/theme';
+import { NbCalendarDayCellComponent } from '@beast/theme';
 
 @Component({
   selector: 'nb-calendar-custom-day-cell',
-  styles: [`
-    .cell-content {
-      flex-direction: column;
-    }
-  `],
+  styles: [
+    `
+      .cell-content {
+        flex-direction: column;
+      }
+    `,
+  ],
   template: `
     <div class="cell-content">
       <div>{{ day }}</div>
@@ -15,5 +17,4 @@ import { NbCalendarDayCellComponent } from '@nebular/theme';
     </div>
   `,
 })
-export class CalendarCustomDayCellComponent extends NbCalendarDayCellComponent<Date> {
-}
+export class CalendarCustomDayCellComponent extends NbCalendarDayCellComponent<Date> {}

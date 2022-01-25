@@ -13,7 +13,7 @@ import {
   NbDateService,
   NbNativeDateService,
   NbCalendarMonthCellComponent,
-} from '@nebular/theme';
+} from '@beast/theme';
 
 describe('Component: NbCalendarMonthPicker', () => {
   let fixture: ComponentFixture<NbCalendarMonthPickerComponent<Date, Date>>;
