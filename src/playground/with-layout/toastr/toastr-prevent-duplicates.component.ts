@@ -1,5 +1,5 @@
 import { Component, HostBinding } from '@angular/core';
-import { NbToastrService } from '@nebular/theme';
+import { NbToastrService } from '@beast/theme';
 
 @Component({
   selector: 'nb-toastr-prevent-duplicates',
@@ -8,7 +8,7 @@ import { NbToastrService } from '@nebular/theme';
     <button nbButton (click)="showToast(false)">Without prevent duplicates</button>
   `,
   styles: [
-      `
+    `
       ::ng-deep nb-layout-column {
         height: 80vw;
       }
@@ -16,17 +16,12 @@ import { NbToastrService } from '@nebular/theme';
   ],
 })
 export class ToastrPreventDuplicatesComponent {
-
   @HostBinding('class')
   classes = 'example-items-rows';
 
-  constructor(private toastrService: NbToastrService) {
-  }
+  constructor(private toastrService: NbToastrService) {}
 
   showToast(preventDuplicates) {
-    this.toastrService.show(
-      'This is super toast message',
-      `This is toast title`,
-      { preventDuplicates });
+    this.toastrService.show('This is super toast message', `This is toast title`, { preventDuplicates });
   }
 }

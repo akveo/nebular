@@ -15,11 +15,10 @@ import {
   NbRegisterComponent,
   NbRequestPasswordComponent,
   NbResetPasswordComponent,
-} from '@nebular/auth';
+} from '@beast/auth';
 import { AclTestComponent } from './acl/acl-test.component';
 import { AuthGuard } from './auth-guard.service';
 import { PlaygroundApiCallsComponent } from './api-calls/api-calls.component';
-
 
 export const routes: Routes = [
   {
@@ -79,5 +78,4 @@ export const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class AuthPlaygroundRoutingModule {
-}
+export class AuthPlaygroundRoutingModule {}

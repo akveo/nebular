@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NbDialogService } from '@nebular/theme';
+import { NbDialogService } from '@beast/theme';
 import { HasBackdropDialogComponent } from './components/has-backdrop-dialog.component';
 
 @Component({
@@ -11,8 +11,7 @@ import { HasBackdropDialogComponent } from './components/has-backdrop-dialog.com
   styleUrls: ['./dialog-common.scss'],
 })
 export class DialogHasBackdropComponent {
-  constructor(private dialogService: NbDialogService) {
-  }
+  constructor(private dialogService: NbDialogService) {}
 
   openWithBackdrop() {
     this.open(true);

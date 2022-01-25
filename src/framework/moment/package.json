@@ -1,7 +1,7 @@
 {
-  "name": "@nebular/moment",
+  "name": "@beast/moment",
   "version": "9.0.0",
-  "description": "@nebular/moment",
+  "description": "@beast/moment",
   "author": "akveo",
   "license": "MIT",
   "repository": {
@@ -21,7 +21,7 @@
     "nebular"
   ],
   "peerDependencies": {
-    "@nebular/theme": "9.0.0",
+    "@beast/theme": "9.0.0",
     "moment": "^2.22.2"
   },
   "dependencies": {

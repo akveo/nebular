@@ -6,7 +6,7 @@
 
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { NbThemeService } from '@nebular/theme';
+import { NbThemeService } from '@beast/theme';
 
 @Component({
   selector: 'npg-bootstrap-test',

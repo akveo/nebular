@@ -7,7 +7,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { NbInputModule, NbSpinnerModule } from '@nebular/theme';
+import { NbInputModule, NbSpinnerModule } from '@beast/theme';
 
 import { NgdThemeModule } from '../@theme/theme.module';
 
@@ -58,21 +58,8 @@ const blocks = [
 ];
 
 @NgModule({
-  imports: [
-    CommonModule,
-    RouterModule,
-    NgdThemeModule,
-    NbInputModule,
-    NbSpinnerModule,
-  ],
-  declarations: [
-    ...blocks,
-  ],
-  exports: [
-    CommonModule,
-    RouterModule,
-    ...blocks,
-  ],
+  imports: [CommonModule, RouterModule, NgdThemeModule, NbInputModule, NbSpinnerModule],
+  declarations: [...blocks],
+  exports: [CommonModule, RouterModule, ...blocks],
 })
-export class NgdBlocksModule {
-}
+export class NgdBlocksModule {}

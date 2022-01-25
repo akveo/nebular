@@ -17,7 +17,7 @@ import {
   NbTriggerStrategy,
   NbTriggerStrategyBuilderService,
   NbLayoutDirectionService,
-} from '@nebular/theme';
+} from '@beast/theme';
 
 @Component({ template: '' })
 export class NbDynamicOverlayMockComponent implements NbRenderableContainer {

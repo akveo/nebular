@@ -14,7 +14,7 @@ import {
   NbIconModule,
   NbRadioModule,
   NbSelectModule,
-} from '@nebular/theme';
+} from '@beast/theme';
 import { SelectRoutingModule } from './select-routing.module';
 import { SelectCleanComponent } from './select-clean.component';
 import { SelectDisabledComponent } from './select-disabled.component';
@@ -33,7 +33,6 @@ import { SelectInteractiveComponent } from './select-interactive.component';
 import { SelectTestComponent } from './select-test.component';
 import { SelectCompareWithComponent } from './select-compare-with.component';
 import { SelectIconComponent } from './select-icon.component';
-
 
 @NgModule({
   declarations: [
@@ -68,4 +67,4 @@ import { SelectIconComponent } from './select-icon.component';
     NbFormFieldModule,
   ],
 })
-export class SelectModule { }
+export class SelectModule {}

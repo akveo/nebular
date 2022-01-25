@@ -18,7 +18,7 @@ import {
   NbTooltipComponent,
   NbIconLibraries,
   NbOverlayConfig,
-} from '@nebular/theme';
+} from '@beast/theme';
 
 @Component({
   selector: 'nb-tooltip-default-test',

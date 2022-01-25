@@ -1,5 +1,5 @@
 import { AfterViewInit, ChangeDetectionStrategy, Component, Inject } from '@angular/core';
-import { NB_WINDOW } from '@nebular/theme';
+import { NB_WINDOW } from '@beast/theme';
 
 @Component({
   selector: 'ngd-search',

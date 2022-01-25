@@ -40,8 +40,8 @@ function installMainPeerDependencies(tree: Tree) {
 
   addDependencyToPackageJson(tree, '@angular/animations', angularCoreVersion);
   addDependencyToPackageJson(tree, '@angular/cdk', angularCdkVersion, true);
-  addDependencyToPackageJson(tree, '@nebular/theme', nebularThemeVersion);
-  addDependencyToPackageJson(tree, '@nebular/eva-icons', nebularThemeVersion);
+  addDependencyToPackageJson(tree, '@beast/theme', nebularThemeVersion);
+  addDependencyToPackageJson(tree, '@beast/eva-icons', nebularThemeVersion);
 
   addDevDependencyToPackageJson(tree, '@schematics/angular', angularCliVersion);
 }

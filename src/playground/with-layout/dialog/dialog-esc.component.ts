@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NbDialogService } from '@nebular/theme';
+import { NbDialogService } from '@beast/theme';
 import { EscDialogComponent } from './components/esc-dialog.component';
 
 @Component({
@@ -11,8 +11,7 @@ import { EscDialogComponent } from './components/esc-dialog.component';
   styleUrls: ['./dialog-common.scss'],
 })
 export class DialogEscComponent {
-  constructor(private dialogService: NbDialogService) {
-  }
+  constructor(private dialogService: NbDialogService) {}
 
   openWithEscClose() {
     this.open(true);

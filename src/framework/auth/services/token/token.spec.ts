@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { NbAuthOAuth2Token, NbAuthJWTToken, NbAuthSimpleToken, NbAuthOAuth2JWTToken } from '@nebular/auth';
+import { NbAuthOAuth2Token, NbAuthJWTToken, NbAuthSimpleToken, NbAuthOAuth2JWTToken } from '@beast/auth';
 
 describe('auth token', () => {
   describe('NbAuthJWTToken', () => {

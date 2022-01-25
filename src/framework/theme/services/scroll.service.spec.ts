@@ -9,7 +9,7 @@ import {
   NbThemeService,
   NbThemeModule,
   NB_WINDOW,
-} from '@nebular/theme';
+} from '@beast/theme';
 
 let currentWindow;
 let fixture: ComponentFixture<ScrollTestComponent>;

@@ -6,7 +6,7 @@
 
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { NbActionsModule, NbCardModule, NbLayoutModule, NbUserModule } from '@nebular/theme';
+import { NbActionsModule, NbCardModule, NbLayoutModule, NbUserModule } from '@beast/theme';
 import { ActionRoutingModule } from './action-routing.module';
 import { ActionBadgeComponent } from './action-badge.component';
 import { ActionShowcaseComponent } from './action-showcase.component';
@@ -24,13 +24,6 @@ import { ActionDotModeComponent } from './action-dot-mode.component';
     ActionWidthComponent,
     ActionDotModeComponent,
   ],
-  imports: [
-    NbActionsModule,
-    NbLayoutModule,
-    NbCardModule,
-    NbUserModule,
-    ActionRoutingModule,
-    CommonModule,
-  ],
+  imports: [NbActionsModule, NbLayoutModule, NbCardModule, NbUserModule, ActionRoutingModule, CommonModule],
 })
 export class ActionModule {}

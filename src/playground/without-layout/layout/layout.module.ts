@@ -5,7 +5,7 @@
  */
 
 import { NgModule } from '@angular/core';
-import { NbActionsModule, NbCardModule, NbLayoutModule, NbSidebarModule } from '@nebular/theme';
+import { NbActionsModule, NbCardModule, NbLayoutModule, NbSidebarModule } from '@beast/theme';
 import { LayoutRoutingModule } from './layout-routing.module';
 import { LayoutColumnLeftComponent } from './layout-column-left.component';
 import { LayoutFixedHeaderComponent } from './layout-fixed-header.component';
@@ -33,12 +33,6 @@ import { ThemeChangeTestComponent } from './theme-change-test.component';
     ThemeBreakpointTestComponent,
     ThemeChangeTestComponent,
   ],
-  imports: [
-    NbLayoutModule,
-    NbSidebarModule.forRoot(),
-    NbActionsModule,
-    NbCardModule,
-    LayoutRoutingModule,
-  ],
+  imports: [NbLayoutModule, NbSidebarModule.forRoot(), NbActionsModule, NbCardModule, LayoutRoutingModule],
 })
 export class LayoutModule {}

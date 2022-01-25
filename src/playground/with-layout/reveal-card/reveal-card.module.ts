@@ -5,7 +5,7 @@
  */
 
 import { NgModule } from '@angular/core';
-import { NbCardModule } from '@nebular/theme';
+import { NbCardModule } from '@beast/theme';
 import { RevealCardRoutingModule } from './reveal-card-routing.module';
 import { RevealCardAccentsComponent } from './reveal-card-accents.component';
 import { RevealCardColorsComponent } from './reveal-card-colors.component';
@@ -21,6 +21,6 @@ import { RevealCardSizesComponent } from './reveal-card-sizes.component';
     RevealCardShowcaseComponent,
     RevealCardSizesComponent,
   ],
-  imports: [ NbCardModule, RevealCardRoutingModule ],
+  imports: [NbCardModule, RevealCardRoutingModule],
 })
 export class RevealCardModule {}

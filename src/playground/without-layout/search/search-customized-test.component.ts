@@ -6,7 +6,7 @@
 
 import { Component, OnInit } from '@angular/core';
 
-import { NbSearchService } from '@nebular/theme';
+import { NbSearchService } from '@beast/theme';
 
 @Component({
   selector: 'nb-search-test-customized',

@@ -6,7 +6,7 @@
 
 import { TestBed, inject, waitForAsync } from '@angular/core/testing';
 
-import { DEFAULT_MEDIA_BREAKPOINTS, NbMediaBreakpointsService, NB_MEDIA_BREAKPOINTS } from '@nebular/theme';
+import { DEFAULT_MEDIA_BREAKPOINTS, NbMediaBreakpointsService, NB_MEDIA_BREAKPOINTS } from '@beast/theme';
 
 describe('breakpoint-service', () => {
   let breakpointService: NbMediaBreakpointsService;

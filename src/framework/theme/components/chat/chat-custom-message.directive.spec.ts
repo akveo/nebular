@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { NbChatModule, NbThemeModule, NbChatCustomMessageService } from '@nebular/theme';
+import { NbChatModule, NbThemeModule, NbChatCustomMessageService } from '@beast/theme';
 
 @Component({
   selector: 'nb-custom-message-directive-test',

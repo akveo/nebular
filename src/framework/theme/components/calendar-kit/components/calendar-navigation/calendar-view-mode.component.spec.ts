@@ -6,7 +6,7 @@
 
 import { ComponentFixture, fakeAsync, flush, TestBed } from '@angular/core/testing';
 
-import { NbCalendarViewMode, NbCalendarViewModeComponent, NbCalendarKitModule, NbThemeModule } from '@nebular/theme';
+import { NbCalendarViewMode, NbCalendarViewModeComponent, NbCalendarKitModule, NbThemeModule } from '@beast/theme';
 
 describe('Component: NbCalendarViewModeComponent', () => {
   let fixture: ComponentFixture<NbCalendarViewModeComponent<Date>>;

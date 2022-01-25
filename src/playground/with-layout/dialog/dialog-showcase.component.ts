@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NbDialogService } from '@nebular/theme';
+import { NbDialogService } from '@beast/theme';
 import { ShowcaseDialogComponent } from './components/showcase-dialog.component';
 
 @Component({
@@ -8,8 +8,7 @@ import { ShowcaseDialogComponent } from './components/showcase-dialog.component'
   styleUrls: ['./dialog-common.scss'],
 })
 export class DialogShowcaseComponent {
-  constructor(private dialogService: NbDialogService) {
-  }
+  constructor(private dialogService: NbDialogService) {}
 
   open() {
     this.dialogService.open(ShowcaseDialogComponent, {

@@ -11,7 +11,7 @@ import {
   NbCalendarViewMode,
   NbCalendarYearModelService,
   NbThemeModule,
-} from '@nebular/theme';
+} from '@beast/theme';
 
 describe('NbBaseCalendarComponent', () => {
   let fixture: ComponentFixture<NbBaseCalendarComponent<Date, Date>>;
@@ -19,7 +19,7 @@ describe('NbBaseCalendarComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ NbCalendarModule, NbThemeModule.forRoot() ],
+      imports: [NbCalendarModule, NbThemeModule.forRoot()],
     });
 
     fixture = TestBed.createComponent<NbBaseCalendarComponent<Date, Date>>(NbBaseCalendarComponent);

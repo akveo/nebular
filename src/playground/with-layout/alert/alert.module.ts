@@ -6,7 +6,7 @@
 
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NbAlertModule, NbCardModule } from '@nebular/theme';
+import { NbAlertModule, NbCardModule } from '@beast/theme';
 import { AlertRoutingModule } from './alert-routing.module';
 import { AlertAccentsComponent } from './alert-accents.component';
 import { AlertColorsComponent } from './alert-colors.component';
@@ -24,11 +24,6 @@ import { AlertTestComponent } from './alert-test.component';
     AlertSizesComponent,
     AlertTestComponent,
   ],
-  imports: [
-    CommonModule,
-    NbAlertModule,
-    NbCardModule,
-    AlertRoutingModule,
-  ],
+  imports: [CommonModule, NbAlertModule, NbCardModule, AlertRoutingModule],
 })
 export class AlertModule {}

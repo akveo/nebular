@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NbDialogService } from '@nebular/theme';
+import { NbDialogService } from '@beast/theme';
 import { ScrollDialogComponent } from './components/scroll-dialog.component';
 
 @Component({
@@ -11,8 +11,7 @@ import { ScrollDialogComponent } from './components/scroll-dialog.component';
   styleUrls: ['./dialog-common.scss'],
 })
 export class DialogScrollComponent {
-  constructor(private dialogService: NbDialogService) {
-  }
+  constructor(private dialogService: NbDialogService) {}
 
   openWithScroll() {
     this.open(true);

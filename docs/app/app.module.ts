@@ -19,7 +19,7 @@ import {
   NbProgressBarModule,
   NbCheckboxModule,
   NbDialogModule,
-} from '@nebular/theme';
+} from '@beast/theme';
 import { NgdThemeModule } from './@theme/theme.module';
 import { NgdAppComponent } from './app.component';
 import { routes } from './app.routes';

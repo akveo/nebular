@@ -6,9 +6,9 @@
 
 import { Component, Input } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { NbInputDirective, NbThemeModule } from '@nebular/theme';
+import { NbInputDirective, NbThemeModule } from '@beast/theme';
 import { By } from '@angular/platform-browser';
-import { NbComponentStatus, NbComponentSize, NbComponentShape, NbInputModule } from '@nebular/theme';
+import { NbComponentStatus, NbComponentSize, NbComponentShape, NbInputModule } from '@beast/theme';
 
 @Component({
   template: `

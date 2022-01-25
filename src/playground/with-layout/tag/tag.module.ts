@@ -13,7 +13,7 @@ import {
   NbIconModule,
   NbInputModule,
   NbTagModule,
-} from '@nebular/theme';
+} from '@beast/theme';
 
 import { TagRoutingModule } from './tag-routing.module';
 import { TagShowcaseComponent } from './tag-showcase.component';
@@ -43,4 +43,4 @@ import { TagRemovableComponent } from './tag-removable.component';
     TagRemovableComponent,
   ],
 })
-export class TagModule { }
+export class TagModule {}

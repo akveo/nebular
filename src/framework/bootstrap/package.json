@@ -22,7 +22,7 @@
   ],
   "peerDependencies": {
     "bootstrap": "^4.0.0",
-    "@nebular/theme": "9.0.0"
+    "@beast/theme": "9.0.0"
   },
   "exports": {
     "./styles/prebuilt/corporate.css": {
