@@ -149,6 +149,17 @@ export const structure = [
           },
         ],
       },
+      {
+        type: 'page',
+        name: 'Manutenção do projeto',
+        children: [
+          {
+            type: 'block',
+            block: 'markdown',
+            source: 'guides/maintenance.md',
+          },
+        ],
+      },
     ],
   },
   {

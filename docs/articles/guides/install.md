@@ -2,11 +2,36 @@
 
 Esse tutorial explica como instalar os módulos do Beast nos projetos Angular.
 
-## Manualmente
+<hr>
 
-### Instalando as dependências
+## Instalando as dependências
 
 Nesta etapa, presumimos que você já tenha uma aplicação Angular criada.
+
+### Pré-requisitos
+
+Para seguir com esse guia, você precisa ter os seguintes pré-requisitos resolvidos:
+
+1. Conta ativa na AWS, com permissões para AWS CLI e CodeArtifacts.
+2. AWS CLI [baixada](https://aws.amazon.com/pt/cli/) e [configurada](https://docs.aws.amazon.com/pt_br/cli/latest/userguide/cli-chap-configure.html)
+
+### Login na AWS CLI
+
+Adicione o seguinte script em seu `package.json`:
+
+```json
+{
+  "scripts": {
+    "co:login": "aws codeartifact login --tool npm --repository beast --domain dadosfera"
+  }
+}
+```
+
+Com o AWS CLI configurado e script adicionado, execute o seguinte comando:
+
+```bash
+npm run co:login
+```
 
 ### Instalando módulos do Beast
 
@@ -14,9 +39,11 @@ Nesta etapa, presumimos que você já tenha uma aplicação Angular criada.
 npm install --save @beast/theme @angular/cdk @angular/animations eva-icons @beast/eva-icons
 ```
 
-Além disso, você pode instalar o módulo de segurança: `npm install --save @beast/security`
+Além disso, você pode instalar o módulo de segurança/ACL: `npm install --save @beast/security`
 
-### Configurar o Beast
+<hr>
+
+## Configurar o Beast
 
 Vamos configurar o Beast no módulo do app:
 
@@ -37,26 +64,18 @@ export class AppModule {
 
 ```
 
-### Configurar tema
+<hr>
 
-Para seguir com a customização do tema, cheque o guia [aqui](docs/guias/temas-runtime--angular).
+## Configurar fonte
+
+Para configurar a fonte, você deve adicionar a seguinte linha no seu `index.html`:
+
+```html
+<link rel="stylesheet" href="https://use.typekit.net/qks0jns.css" />
+```
 
 <hr>
 
-## Usando a CLI do Angular
+## Configurar tema
 
-### Instalação
-
-Para instalar a CLI do Angular use o seguinte comando:
-
-```bash
-npm install -g @angular/cli
-```
-
-### Instalando o Beast
-
-Basta usar o seguinte comando dentro da sua aplicação Angular:
-
-```bash
-ng add @beast/theme
-```
+Para seguir com a customização do tema, cheque o guia [aqui](docs/guias/temas-runtime--angular).
