@@ -2,13 +2,9 @@
 
 Este modo é útil quando você precisa ter vários temas e quer alterá-los em tempo de execução.
 
-<hr>
-
-# Habilitar múltiplos temas em runtime
-
 Os estilos do Beast vêm em um arquivo css por padrão. Para poder personalizar as variáveis do tema, os arquivos scss devem estar habilitados.
 
-## Importanto um tema
+### Importanto um tema
 
 Crie um `themes.scss` em sua pasta `src` e importe um tema de sua escolha:
 
@@ -19,7 +15,7 @@ Crie um `themes.scss` em sua pasta `src` e importe um tema de sua escolha:
 @use '@beast/theme/styles/themes/default';
 ```
 
-## Modificando as variáveis do tema
+### Modificando as variáveis do tema
 
 Para ajustar algumas das variáveis do tema, precisamos registrar nossas alterações usando a função `nb-register-theme`.
 
@@ -40,7 +36,7 @@ $nb-themes: nb-register-theme(
 );
 ```
 
-## Habilitar Beast Styles
+### Habilitar Beast Styles
 
 A última coisa, encontre seu `styles.scss` (ou crie um e adicione-o em `angular.json` em `"styles": [..]`) em sua aplicação e cole o seguinte:
 
