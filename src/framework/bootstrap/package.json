@@ -1,7 +1,7 @@
 {
-  "name": "@nebular/bootstrap",
-  "version": "9.1.0-rc.1",
-  "description": "@nebular/bootstrap",
+  "name": "@beast/bootstrap",
+  "version": "9.1.0",
+  "description": "@beast/bootstrap",
   "author": "akveo",
   "license": "MIT",
   "repository": {

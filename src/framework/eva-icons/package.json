@@ -1,7 +1,7 @@
 {
-  "name": "@nebular/eva-icons",
-  "version": "9.1.0-rc.1",
-  "description": "@nebular/eva-icons",
+  "name": "@beast/eva-icons",
+  "version": "9.1.0",
+  "description": "@beast/eva-icons",
   "author": "akveo",
   "license": "MIT",
   "repository": {
