@@ -86,6 +86,7 @@
 @use '../../components/icon/icon.component.theme' as icon-theme;
 @use '../../components/form-field/form-field.component.theme' as form-field-theme;
 @use '../../components/timepicker/timepicker.component.theme' as timepicker-theme;
+@use '../../components/pagination/pagination.component.theme' as pagination-theme;
 
 @mixin nb-theme-components() {
   @include layout-theme.nb-layout-theme();
@@ -129,4 +130,5 @@
   @include icon-theme.nb-icon-theme();
   @include form-field-theme.nb-form-field-theme();
   @include tag-theme.nb-tags-theme();
+  @include pagination-theme.nb-pagination-theme();
 }

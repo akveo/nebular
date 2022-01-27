@@ -38,10 +38,16 @@ ng g .:new-component ComponentName
 
 Com o componente criado, você deve seguir os seguintes passos para o mesmo funcionar corretamente no pacote e na documentação:
 
-1. Incluir o tema _scss_ criado em `src/framework/theme/styles/global`
-2. Incluir o tema _scss_ em `docs/app/@theme/styles`
-3. Criar o _playground_ do componente em `src/playground/with-layout/component-name`, com rota e módulo próprios
-4. Atualizar o arquivo `docs/structure.ts`, seguindo os exemplos já existentes no mesmo, para que o componente apareça na documentação
+1. Exportar o módulo do componente criado em `src/framework/theme/public_api.ts`
+2. Incluir o tema _scss_ criado em `src/framework/theme/styles/global/_components.scss`
+3. Incluir o tema _scss_ em `docs/app/@theme/styles/styles.scss`
+4. Criar o _playground_ do componente em `src/playground/with-layout/component-name`, com rota e módulo próprios
+5. Atualizar o arquivo `docs/structure.ts`, seguindo os exemplos já existentes no mesmo, para que o componente apareça na documentação
+
+Durante o desenvolvimento:
+
+1. Executar o comando `npm run gen:playground && npm run gen:playground-module && npm run gen:playground-components` para criar uma rota testável do componente
+2. Executar o comando `npm run start` para servir a aplicação na porta 4200.
 
 ### Documentação do componente
 
