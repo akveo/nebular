@@ -1678,6 +1678,17 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
     ],
   },
   {
+    path: 'pagination',
+    children: [
+      {
+        path: 'pagination-showcase.component',
+        link: '/pagination/pagination-showcase.component',
+        component: 'PaginationShowcaseComponent',
+        name: 'Pagination Showcase',
+      },
+    ],
+  },
+  {
     path: 'context-menu',
     children: [
       {

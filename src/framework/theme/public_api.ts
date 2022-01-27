@@ -244,3 +244,4 @@ export * from './components/form-field/form-field.component';
 export * from './components/form-field/prefix.directive';
 export * from './components/form-field/suffix.directive';
 export * from './components/form-field/form-field-control';
+export * from './components/pagination/pagination.module';

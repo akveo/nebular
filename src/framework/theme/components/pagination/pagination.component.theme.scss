@@ -1,0 +1,6 @@
+@use '../../styles/theming' as *;
+
+@mixin nb-pagination-theme() {
+  nb-pagination {
+  }
+}
