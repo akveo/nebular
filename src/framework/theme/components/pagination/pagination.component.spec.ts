@@ -8,7 +8,7 @@ import { fakeAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { NbPaginationComponent } from './pagination.component';
 
-describe('NbPaginationComponent', () => {
+describe('Component: NbPagination', () => {
   let component: NbPaginationComponent;
   let fixture: ComponentFixture<NbPaginationComponent>;
 
