@@ -4,14 +4,14 @@
     size="medium"
     shape="round"
     ghost
-    [disabled]="currentPage === 1"
+    [disabled]="currentPage === 1 || disabled"
     (click)="onPageChange(currentPage - 1)"
   >
     <nb-icon icon="chevron-left-outline"></nb-icon>
   </button>
 
   <ng-container *ngIf="currentPage > 1 + siblingsCount">
-    <button nbButton size="medium" shape="round" ghost (click)="onPageChange(1)">1</button>
+    <button nbButton size="medium" shape="round" ghost (click)="onPageChange(1)" [disabled]="disabled">1</button>
     <ng-container *ngIf="currentPage > 2 + siblingsCount">
       <button nbButton size="medium" shape="round" ghost [disabled]="true">
         <div class="dots">...</div>
@@ -27,6 +27,7 @@
       ghost
       *ngFor="let previousPage of previousPages"
       (click)="onPageChange(previousPage)"
+      [disabled]="disabled"
     >
       {{ previousPage }}
     </button>
@@ -44,6 +45,7 @@
       ghost
       *ngFor="let nextPage of nextPages"
       (click)="onPageChange(nextPage)"
+      [disabled]="disabled"
     >
       {{ nextPage }}
     </button>
@@ -55,7 +57,9 @@
         <div class="dots">...</div>
       </button>
     </ng-container>
-    <button nbButton size="medium" shape="round" ghost (click)="onPageChange(lastPage)">{{ lastPage }}</button>
+    <button nbButton size="medium" shape="round" ghost (click)="onPageChange(lastPage)" [disabled]="disabled">
+      {{ lastPage }}
+    </button>
   </ng-container>
 
   <button
@@ -63,7 +67,7 @@
     size="medium"
     shape="round"
     ghost
-    [disabled]="currentPage === lastPage"
+    [disabled]="currentPage === lastPage || disabled"
     (click)="onPageChange(currentPage + 1)"
   >
     <nb-icon icon="chevron-right-outline"></nb-icon>
@@ -77,6 +81,7 @@
     [(selected)]="pageSizeSelected"
     (selectedChange)="onPageSizeOptionChange(+$event)"
     #paginationSelect
+    [disabled]="disabled"
   >
     <nb-option *ngFor="let option of pageSizeOptions" [value]="option">{{ option }}</nb-option>
   </nb-select>
