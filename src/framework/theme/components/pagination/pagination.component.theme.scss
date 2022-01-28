@@ -2,5 +2,6 @@
 
 @mixin nb-pagination-theme() {
   nb-pagination {
+    font-family: nb-theme(font-family-primary);
   }
 }

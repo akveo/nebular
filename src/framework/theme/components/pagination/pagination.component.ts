@@ -15,8 +15,29 @@ import {
   ElementRef,
   AfterViewInit,
 } from '@angular/core';
+import { NbComponentStatus } from '../component-status';
 import { NbSelectComponent } from '../select/select.component';
 
+/**
+ * Basic pagination component.
+ *
+ * The pagination component is a combination of the "button", "icon" and "select" components.
+ *
+ * @stacked-example(Showcase, pagination/pagination-showcase.component)
+ *
+ * ### Installation
+ *
+ * Import `NbPaginationModule` to your feature module.
+ * ```ts
+ * @NgModule({
+ *   imports: [
+ *     // ...
+ *     NbPaginationModule,
+ *   ],
+ * })
+ * export class PageModule { }
+ * ```
+ */
 @Component({
   selector: 'nb-pagination',
   templateUrl: './pagination.component.html',
@@ -25,27 +46,27 @@ import { NbSelectComponent } from '../select/select.component';
 })
 export class NbPaginationComponent implements OnInit, AfterViewInit {
   /**
-   * Options to change limit of items on page. Default value: [10, 15, 20, 50]
+   * Optional. Options to change limit of items on page. Default value: `[10, 15, 20, 50]`
    */
-  @Input() pageSizeOptions: number[] = [10, 15, 20, 50];
+  @Input() pageSizeOptions?: number[] = [10, 15, 20, 50];
 
   /**
-   * Show or not page size options
+   * Optional. Show or not page size options
    */
-  @Input() showPageSizeOptions: boolean = true;
+  @Input() showPageSizeOptions?: boolean = true;
 
   /**
-   * Total items to be paginated
+   * Required. Total items to be paginated
    */
   @Input() totalCount: number;
 
   /**
-   * Number of items per page
+   * Optional. Number of items per page. Default value is `10`
    */
   @Input() itemsPerPage?: number = 10;
 
   /**
-   * Current active page
+   * Optional. Force current active page
    */
   @Input() currentPage?: number = 1;
 
@@ -63,6 +84,26 @@ export class NbPaginationComponent implements OnInit, AfterViewInit {
    * Will be emitted when items per page option value changes. When the value changes, `currentPage` will become 1
    * */
   @Output() itemsPerPageChanged: EventEmitter<number> = new EventEmitter<number>();
+
+  /**
+   * Text "show" that will be displayed on page size options
+   */
+  @Input() textShow: string = 'Mostrar';
+
+  /**
+   * Text "of" that will be displayed on page size options
+   */
+  @Input() textOf: string = 'de';
+
+  /**
+   * Text "results" that will be displayed on page size options
+   */
+  @Input() textItems: string = 'resultados';
+
+  /**
+   * Set background color on current active page
+   */
+  @Input() status: NbComponentStatus = 'primary';
 
   previousPages: number[];
   nextPages: number[];

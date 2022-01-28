@@ -39,8 +39,8 @@ ng g .:new-component ComponentName
 Com o componente criado, você deve seguir os seguintes passos para o mesmo funcionar corretamente no pacote e na documentação:
 
 1. Exportar o módulo do componente criado em `src/framework/theme/public_api.ts`
-2. Incluir o tema _scss_ criado em `src/framework/theme/styles/global/_components.scss`
-3. Incluir o tema _scss_ em `docs/app/@theme/styles/styles.scss`
+2. Incluir o tema _scss_ criado em `src/framework/theme/styles/global/_components.scss` (@forward, @use e @include)
+3. Analisar a necessidade de incluir o tema _scss_ em `docs/app/@theme/styles/styles.scss`
 4. Criar o _playground_ do componente em `src/playground/with-layout/component-name`, com rota e módulo próprios
 5. Atualizar o arquivo `docs/structure.ts`, seguindo os exemplos já existentes no mesmo, para que o componente apareça na documentação
 
