@@ -86,24 +86,29 @@ export class NbPaginationComponent implements OnInit, AfterViewInit {
   @Output() itemsPerPageChanged: EventEmitter<number> = new EventEmitter<number>();
 
   /**
-   * Text "show" that will be displayed on page size options
+   * Text "show" that will be displayed on page size options. Default value is "Mostrar"
    */
   @Input() textShow: string = 'Mostrar';
 
   /**
-   * Text "of" that will be displayed on page size options
+   * Text "of" that will be displayed on page size options. Default value is "de".
    */
   @Input() textOf: string = 'de';
 
   /**
-   * Text "results" that will be displayed on page size options
+   * Optional. Text "results" that will be displayed on page size options. Default value is "resultados".
    */
   @Input() textItems: string = 'resultados';
 
   /**
-   * Set background color on current active page
+   * Optional. Set background color on current active page
    */
   @Input() status: NbComponentStatus = 'primary';
+
+  /**
+   * Optional. Disable actions (change page and page size) on pagination
+   */
+  @Input() disabled?: boolean = false;
 
   previousPages: number[];
   nextPages: number[];
