@@ -25,4 +25,16 @@ describe('Component: NbPagination', () => {
   it('should compile', () => {
     expect(component).toBeTruthy();
   });
+
+  // it('should set disabled attribute if disabled set to true', () => {
+
+  // });
+
+  // it('should set texts to page size options', () => {
+
+  // });
+
+  // it('should set current page', () => {
+
+  // });
 });

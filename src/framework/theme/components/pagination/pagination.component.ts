@@ -125,7 +125,10 @@ export class NbPaginationComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     if (this.showPageSizeOptions) {
-      this.paginationSelect.button.nativeElement.style.minWidth = '5rem';
+      const nativeElement = this.paginationSelect.button?.nativeElement;
+      if (nativeElement) {
+        nativeElement.style.minWidth = '5rem';
+      }
     }
   }
 
