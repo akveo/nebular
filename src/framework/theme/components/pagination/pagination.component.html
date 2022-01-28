@@ -75,7 +75,7 @@
     placeholder="Selecione"
     [(selected)]="pageSizeSelected"
     (selectedChange)="onPageSizeOptionChange(+$event)"
-    class="pagination-select"
+    #paginationSelect
   >
     <nb-option *ngFor="let option of pageSizeOptions" [value]="option">{{ option }}</nb-option>
   </nb-select>
