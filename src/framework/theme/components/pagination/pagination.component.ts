@@ -4,7 +4,18 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import {
+  Component,
+  ChangeDetectionStrategy,
+  Input,
+  Output,
+  EventEmitter,
+  OnInit,
+  ViewChild,
+  ElementRef,
+  AfterViewInit,
+} from '@angular/core';
+import { NbSelectComponent } from '../select/select.component';
 
 @Component({
   selector: 'nb-pagination',
@@ -12,7 +23,7 @@ import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter, OnInit
   styleUrls: ['./pagination.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NbPaginationComponent implements OnInit {
+export class NbPaginationComponent implements OnInit, AfterViewInit {
   /**
    * Options to change limit of items on page. Default value: [10, 15, 20, 50]
    */
@@ -58,9 +69,18 @@ export class NbPaginationComponent implements OnInit {
   lastPage: number;
   pageSizeSelected: number;
 
+  @ViewChild('paginationSelect')
+  paginationSelect: NbSelectComponent;
+
   ngOnInit(): void {
     this.generatePreviousAndLastAndNextPages();
     this.pageSizeSelected = this.pageSizeOptions[0] || 10;
+  }
+
+  ngAfterViewInit(): void {
+    if (this.showPageSizeOptions) {
+      this.paginationSelect.button.nativeElement.style.minWidth = '5rem';
+    }
   }
 
   generatePagesArray(from: number, to: number) {
