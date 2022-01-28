@@ -32,7 +32,7 @@
     </button>
   </ng-container>
 
-  <button nbButton size="medium" status="primary" shape="round" class="subtitle" (click)="onPageChange(currentPage)">
+  <button nbButton size="medium" [status]="status" shape="round" class="subtitle" (click)="onPageChange(currentPage)">
     {{ currentPage }}
   </button>
 
@@ -70,7 +70,7 @@
   </button>
 </div>
 <div *ngIf="showPageSizeOptions">
-  <span class="paragraph"> Mostrar </span>
+  <span class="paragraph"> {{ textShow }} </span>
   <nb-select
     placeholder="Selecione"
     [(selected)]="pageSizeSelected"
@@ -79,5 +79,5 @@
   >
     <nb-option *ngFor="let option of pageSizeOptions" [value]="option">{{ option }}</nb-option>
   </nb-select>
-  <span class="paragraph"> de {{ totalCount }} resultados </span>
+  <span class="paragraph"> {{ textOf }} {{ totalCount }} {{ textItems }} </span>
 </div>

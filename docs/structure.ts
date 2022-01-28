@@ -458,6 +458,12 @@ export const structure = [
       },
       {
         type: 'tabs',
+        name: 'Pagination',
+        icon: 'tabs.svg',
+        source: ['NbPaginationComponent'],
+      },
+      {
+        type: 'tabs',
         name: 'Chat UI',
         icon: 'chat-ui.svg',
         source: ['NbChatComponent', 'NbChatMessageComponent', 'NbChatFormComponent', 'NbChatCustomMessageDirective'],
