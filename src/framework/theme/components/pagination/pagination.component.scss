@@ -60,4 +60,14 @@
     @extend .medium-size;
     padding: 0;
   }
+
+  .paragraph {
+    &:first-of-type {
+      margin-right: 0.5rem;
+    }
+
+    &:last-of-type {
+      margin-left: 0.5rem;
+    }
+  }
 }
