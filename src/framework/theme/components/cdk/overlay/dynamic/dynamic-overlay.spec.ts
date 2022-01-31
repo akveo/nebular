@@ -332,7 +332,7 @@ describe('dynamic-overlay', () => {
     expect(instance.context).toBe(newContext);
     expect(instance.content).toBe(newContent);
     expect(renderContentSpy).toHaveBeenCalledTimes(3);
-    expect(updatePositionSpy).toHaveBeenCalledTimes(4);
+    expect(updatePositionSpy).toHaveBeenCalledTimes(3);
   });
 
   it('should set component', () => {
