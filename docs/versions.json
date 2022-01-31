@@ -1,7 +1,7 @@
 [
   {
     "checkoutTarget": "master",
-    "name": "9.0.0",
+    "name": "9.0.1",
     "path": "/beast/",
     "isCurrent": true
   }

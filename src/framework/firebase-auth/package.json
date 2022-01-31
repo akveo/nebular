@@ -1,6 +1,6 @@
 {
   "name": "@beast/firebase-auth",
-  "version": "9.0.0",
+  "version": "9.0.1",
   "description": "@beast/firebase-auth",
   "author": "akveo",
   "license": "MIT",
@@ -26,7 +26,7 @@
   ],
   "peerDependencies": {
     "@angular/core": "^13.0.0",
-    "@beast/auth": "9.0.0",
+    "@beast/auth": "9.0.1",
     "rxjs": "^6.5.3 || ^7.4.0",
     "firebase": "^9.4.0",
     "@angular/fire": "^7.2.0"

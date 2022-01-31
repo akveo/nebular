@@ -1,5 +1,5 @@
 import { ComponentFactoryResolver, ComponentRef, Injectable, NgZone, Type } from '@angular/core';
-import { filter, takeUntil, distinctUntilChanged } from 'rxjs/operators';
+import { filter, takeUntil, distinctUntilChanged, take } from 'rxjs/operators';
 import { Subject, BehaviorSubject, Observable, merge } from 'rxjs';
 
 import { NbAdjustableConnectedPositionStrategy, NbPosition } from '../overlay-position';
@@ -234,7 +234,9 @@ export class NbDynamicOverlay {
       filter((destroyedOverlay: NbOverlayRef) => destroyedOverlay === overlay),
     );
 
-    this.zone.onStable.pipe(takeUntil(merge(this.destroy$, overlayDestroy$))).subscribe(() => this.updatePosition());
+    this.zone.onStable
+      .pipe(take(1), takeUntil(merge(this.destroy$, overlayDestroy$)))
+      .subscribe(() => this.updatePosition());
   }
 
   protected updatePosition() {
