@@ -1,3 +1,12 @@
+<a name="9.0.1"></a>
+
+## [9.0.1](https://github.com/akveo/nebular/compare/v9.0.0...v9.0.1) (2022-01-31)
+
+### Bug Fixes
+
+- **overlay:** take 1 on stable event ([#3013](https://github.com/akveo/nebular/issues/3013)) ([a73351a](https://github.com/akveo/nebular/commit/a73351a))
+- **components:** memory leaks ([#3000](https://github.com/akveo/nebular/issues/3000)) ([d6374b1](https://github.com/akveo/nebular/commit/d6374b1))
+
 <a name="9.0.0"></a>
 
 # [9.0.0](https://github.com/akveo/nebular/compare/v8.0.0...v9.0.0) (2021-12-01)

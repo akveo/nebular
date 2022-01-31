@@ -1,6 +1,6 @@
 {
   "name": "@beast/moment",
-  "version": "9.0.0",
+  "version": "9.0.1",
   "description": "@beast/moment",
   "author": "akveo",
   "license": "MIT",
@@ -21,7 +21,7 @@
     "nebular"
   ],
   "peerDependencies": {
-    "@beast/theme": "9.0.0",
+    "@beast/theme": "9.0.1",
     "moment": "^2.22.2"
   },
   "dependencies": {
