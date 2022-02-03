@@ -15,7 +15,7 @@ import { NgdVersionService, Version } from '../../services';
       </button>
       <div class="logo">
         <a routerLink="/">
-          <img src="/assets/img/beast-logo.png" />
+          <img src="assets/img/beast-logo.png" />
         </a>
         <!-- <span class="version" *ngIf="currentVersionName$ | async"> v{{ currentVersionName$ | async }} </span> -->
       </div>
