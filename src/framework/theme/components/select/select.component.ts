@@ -948,7 +948,7 @@ export class NbSelectComponent
       return;
     }
 
-    if (this.canSelectValue()) {
+    if (this.canSelectValue() && value != null) {
       this.setSelection(value);
       if (this.selectionModel.length) {
         this.queue = null;
