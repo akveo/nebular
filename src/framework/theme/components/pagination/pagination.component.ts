@@ -124,7 +124,6 @@ export class NbPaginationComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    console.log(this.totalCount);
     if (this.showPageSizeOptions) {
       const nativeElement = this.paginationSelect.button?.nativeElement;
       if (nativeElement) {
