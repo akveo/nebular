@@ -27,7 +27,7 @@
       ghost
       *ngFor="let previousPage of previousPages"
       (click)="onPageChange(previousPage)"
-      [disabled]="disabled"
+      [disabled]="disabled || totalCount === undefined"
     >
       {{ previousPage }}
     </button>
@@ -67,7 +67,7 @@
     size="medium"
     shape="round"
     ghost
-    [disabled]="currentPage === lastPage || disabled"
+    [disabled]="currentPage === lastPage || disabled || totalCount === undefined"
     (click)="onPageChange(currentPage + 1)"
   >
     <nb-icon icon="chevron-right-outline"></nb-icon>
