@@ -11,7 +11,7 @@ Nosso design possui duas propriedades de família de fontes:
 - **font-family-primary** - utilizado por todos os elementos de texto na página
 - **font-family-secondary** - utilizado por elementos de cabeçalho (`<h1>`, `<h2>`, etc)
 
-Atualmente, tanto `font-family-primary` quanto `font-family-secondary` usam a família de fonte **Menco**.
+Atualmente, tanto `font-family-primary` quanto `font-family-secondary` usam a família de fonte **Quicksand**.
 
 <hr>
 
