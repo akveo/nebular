@@ -68,10 +68,14 @@ export class AppModule {
 
 ## Configurar fonte
 
-Para habilitar a fonte `Menco`, você deve adicionar a seguinte linha no seu `index.html`:
+Para habilitar a fonte `Quicksand`, você deve adicionar as seguintes linhas no seu `index.html`:
 
 ```html
-<link rel="stylesheet" href="https://use.typekit.net/qks0jns.css" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link
+  href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap"
+  rel="stylesheet"
+/>
 ```
 
 <hr>
