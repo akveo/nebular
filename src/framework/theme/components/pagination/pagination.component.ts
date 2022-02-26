@@ -5,15 +5,14 @@
  */
 
 import {
-  Component,
-  ChangeDetectionStrategy,
-  Input,
-  Output,
-  EventEmitter,
-  OnInit,
-  ViewChild,
-  ElementRef,
   AfterViewInit,
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  ViewChild,
 } from '@angular/core';
 import { NbComponentStatus } from '../component-status';
 import { NbSelectComponent } from '../select/select.component';
@@ -110,16 +109,17 @@ export class NbPaginationComponent implements OnInit, AfterViewInit {
    */
   @Input() disabled?: boolean = false;
 
-  previousPages: number[];
-  nextPages: number[];
+  paginationRange: any[] = [];
   lastPage: number;
   pageSizeSelected: number;
 
   @ViewChild('paginationSelect')
   paginationSelect: NbSelectComponent;
 
+  DOTS = '...';
+
   ngOnInit(): void {
-    this.generatePreviousAndLastAndNextPages();
+    this.generatePaginationRange();
     this.pageSizeSelected = this.pageSizeOptions[0] || 10;
   }
 
@@ -132,44 +132,70 @@ export class NbPaginationComponent implements OnInit, AfterViewInit {
     }
   }
 
-  generatePagesArray(from: number, to: number) {
-    return [...new Array(to - from)].map((_, index) => from + index + 1).filter((page) => page > 0);
-  }
-
   onPageChange(page: number) {
     this.currentPage = page;
     this.pageChanged.emit(this.currentPage);
-    this.generatePreviousAndLastAndNextPages();
+    this.generatePaginationRange();
   }
 
   onPageSizeOptionChange(perPage: number) {
     this.itemsPerPage = perPage;
     this.currentPage = 1;
     this.itemsPerPageChanged.emit(this.itemsPerPage);
-    this.generatePreviousAndLastAndNextPages();
+    this.generatePaginationRange();
   }
 
-  generatePreviousAndLastAndNextPages() {
-    this.generatePreviousPages();
-    this.generateLastPage();
-    this.generateNextPages();
+  range(start: number, end: number) {
+    const length = end - start + 1;
+    return Array.from({ length }, (_, idx) => idx + start);
   }
 
-  generatePreviousPages() {
-    this.previousPages =
-      this.currentPage > 1
-        ? this.generatePagesArray(this.currentPage - 1 - this.siblingsCount, this.currentPage - 1)
-        : [];
-  }
+  generatePaginationRange() {
+    const totalPageCount = Math.ceil(this.totalCount / this.itemsPerPage);
+    this.lastPage = totalPageCount;
 
-  generateNextPages() {
-    this.nextPages =
-      this.currentPage < this.lastPage
-        ? this.generatePagesArray(this.currentPage, Math.min(this.currentPage + this.siblingsCount, this.lastPage))
-        : [];
-  }
+    // Pages count is determined as siblingCount + firstPage + lastPage + currentPage + 2*DOTS
+    const totalPageNumbers = this.siblingsCount + 5;
 
-  generateLastPage() {
-    this.lastPage = Math.ceil(this.totalCount / this.itemsPerPage);
+    /*
+      If the number of pages is less than the page numbers we want to show in our
+      paginationComponent, we return the range [1..totalPageCount]
+    */
+    if (totalPageNumbers >= totalPageCount) {
+      this.paginationRange = this.range(1, totalPageCount);
+      return;
+    }
+
+    const leftSiblingIndex = Math.max(this.currentPage - this.siblingsCount, 1);
+    const rightSiblingIndex = Math.min(this.currentPage + this.siblingsCount, totalPageCount);
+
+    /*
+      We do not want to show dots if there is only one position left
+      after/before the left/right page count as that would lead to a change if our Pagination
+      component size which we do not want
+    */
+    const shouldShowLeftDots = leftSiblingIndex > 2;
+    const shouldShowRightDots = rightSiblingIndex < totalPageCount - 2;
+
+    const firstPageIndex = 1;
+    const lastPageIndex = totalPageCount;
+
+    if (!shouldShowLeftDots && shouldShowRightDots) {
+      const leftItemCount = 3 + 2 * this.siblingsCount;
+      const leftRange = this.range(1, leftItemCount);
+
+      this.paginationRange = [...leftRange, this.DOTS, totalPageCount];
+    }
+
+    if (shouldShowLeftDots && !shouldShowRightDots) {
+      const rightItemCount = 3 + 2 * this.siblingsCount;
+      const rightRange = this.range(totalPageCount - rightItemCount + 1, totalPageCount);
+      this.paginationRange = [firstPageIndex, this.DOTS, ...rightRange];
+    }
+
+    if (shouldShowLeftDots && shouldShowRightDots) {
+      const middleRange = this.range(leftSiblingIndex, rightSiblingIndex);
+      this.paginationRange = [firstPageIndex, this.DOTS, ...middleRange, this.DOTS, lastPageIndex];
+    }
   }
 }
