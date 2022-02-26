@@ -62,5 +62,5 @@
   >
     <nb-option *ngFor="let option of pageSizeOptions" [value]="option">{{ option }}</nb-option>
   </nb-select>
-  <span class="paragraph"> {{ textOf }} {{ totalCount }} {{ textItems }} </span>
+  <span class="paragraph"> {{ textOf }} {{ totalCount || 0 }} {{ textItems }} </span>
 </div>
