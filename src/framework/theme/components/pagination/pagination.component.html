@@ -1,4 +1,5 @@
 <div class="pages">
+  <!-- Previous arrow -->
   <button
     nbButton
     size="medium"
@@ -27,7 +28,7 @@
       ghost
       *ngFor="let previousPage of previousPages"
       (click)="onPageChange(previousPage)"
-      [disabled]="disabled || totalCount === undefined"
+      [disabled]="disabled || totalCount === undefined || totalCount === 0 || totalCount === null"
     >
       {{ previousPage }}
     </button>
@@ -62,12 +63,15 @@
     </button>
   </ng-container>
 
+  <!-- Next arrow -->
   <button
     nbButton
     size="medium"
     shape="round"
     ghost
-    [disabled]="currentPage === lastPage || disabled || totalCount === undefined"
+    [disabled]="
+      currentPage === lastPage || disabled || totalCount === undefined || totalCount === 0 || totalCount === null
+    "
     (click)="onPageChange(currentPage + 1)"
   >
     <nb-icon icon="chevron-right-outline"></nb-icon>
