@@ -1,82 +1,55 @@
-<div class="pages">
-  <!-- Previous arrow -->
-  <button
-    nbButton
-    size="medium"
-    shape="round"
-    ghost
-    [disabled]="currentPage === 1 || disabled"
-    (click)="onPageChange(currentPage - 1)"
-  >
-    <nb-icon icon="chevron-left-outline"></nb-icon>
-  </button>
-
-  <ng-container *ngIf="currentPage > 1 + siblingsCount">
-    <button nbButton size="medium" shape="round" ghost (click)="onPageChange(1)" [disabled]="disabled">1</button>
-    <ng-container *ngIf="currentPage > 2 + siblingsCount">
-      <button nbButton size="medium" shape="round" ghost [disabled]="true">
-        <div class="dots">...</div>
-      </button>
-    </ng-container>
-  </ng-container>
-
-  <ng-container *ngIf="previousPages?.length > 0">
+<ul class="pages">
+  <li>
     <button
       nbButton
       size="medium"
       shape="round"
       ghost
-      *ngFor="let previousPage of previousPages"
-      (click)="onPageChange(previousPage)"
-      [disabled]="disabled || totalCount === undefined || totalCount === 0 || totalCount === null"
+      [disabled]="currentPage === 1 || disabled"
+      (click)="onPageChange(currentPage - 1)"
     >
-      {{ previousPage }}
+      <nb-icon icon="chevron-left-outline"></nb-icon>
     </button>
-  </ng-container>
+  </li>
 
-  <button nbButton size="medium" [status]="status" shape="round" class="subtitle" (click)="onPageChange(currentPage)">
-    {{ currentPage }}
-  </button>
+  <li *ngIf="totalCount < itemsPerPage || totalCount === null || totalCount === undefined">
+    <button nbButton size="medium" shape="round" [status]="status" class="subtitle">1</button>
+  </li>
 
-  <ng-container *ngIf="nextPages?.length > 0">
+  <li *ngFor="let page of paginationRange">
+    <ng-container *ngIf="page === DOTS">
+      <button nbButton size="medium" shape="round" ghost [disabled]="true">
+        <div class="dots">...</div>
+      </button>
+    </ng-container>
+
+    <ng-container *ngIf="page !== DOTS && page === currentPage">
+      <button nbButton size="medium" shape="round" [status]="status" class="subtitle">
+        {{ page }}
+      </button>
+    </ng-container>
+    <ng-container *ngIf="page !== DOTS && page !== currentPage">
+      <button nbButton size="medium" shape="round" (click)="onPageChange(page)" [disabled]="disabled" ghost>
+        {{ page }}
+      </button>
+    </ng-container>
+  </li>
+
+  <li>
     <button
       nbButton
       size="medium"
       shape="round"
       ghost
-      *ngFor="let nextPage of nextPages"
-      (click)="onPageChange(nextPage)"
-      [disabled]="disabled"
+      [disabled]="
+        currentPage === lastPage || disabled || totalCount === undefined || totalCount === 0 || totalCount === null
+      "
+      (click)="onPageChange(currentPage + 1)"
     >
-      {{ nextPage }}
+      <nb-icon icon="chevron-right-outline"></nb-icon>
     </button>
-  </ng-container>
-
-  <ng-container *ngIf="currentPage + siblingsCount < lastPage">
-    <ng-container *ngIf="currentPage + 1 + siblingsCount < lastPage">
-      <button nbButton size="medium" shape="round" ghost [disabled]="true">
-        <div class="dots">...</div>
-      </button>
-    </ng-container>
-    <button nbButton size="medium" shape="round" ghost (click)="onPageChange(lastPage)" [disabled]="disabled">
-      {{ lastPage }}
-    </button>
-  </ng-container>
-
-  <!-- Next arrow -->
-  <button
-    nbButton
-    size="medium"
-    shape="round"
-    ghost
-    [disabled]="
-      currentPage === lastPage || disabled || totalCount === undefined || totalCount === 0 || totalCount === null
-    "
-    (click)="onPageChange(currentPage + 1)"
-  >
-    <nb-icon icon="chevron-right-outline"></nb-icon>
-  </button>
-</div>
+  </li>
+</ul>
 
 <div *ngIf="showPageSizeOptions">
   <span class="paragraph"> {{ textShow }} </span>
