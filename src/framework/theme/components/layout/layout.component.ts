@@ -297,6 +297,14 @@ export class NbLayoutComponent implements AfterViewInit, OnDestroy {
         }
       });
 
+    this.scrollService
+      .onGetPosition()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(({ listener }) => {
+        listener.next(this.getScrollPosition());
+        listener.complete();
+      });
+
     if (isPlatformBrowser(this.platformId)) {
       // trigger first time so that after the change we have the initial value
       this.themeService.changeWindowWidth(this.window.innerWidth);
@@ -304,12 +312,6 @@ export class NbLayoutComponent implements AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit() {
-    this.scrollService.onGetPosition()
-      .pipe(takeUntil(this.destroy$))
-      .subscribe(({ listener }) => {
-        listener.next(this.getScrollPosition());
-        listener.complete();
-      });
 
     this.scrollTop.shouldRestore()
       .pipe(filter(
