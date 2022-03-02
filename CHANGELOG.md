@@ -1,3 +1,16 @@
+<a name="7.0.5"></a>
+## [7.0.5](https://github.com/akveo/nebular/compare/v7.0.1...v7.0.5) (2022-03-02)
+
+
+### Bug Fixes
+
+* **layout:** move scroll position update in constructor ([#3038](https://github.com/akveo/nebular/issues/3038)) ([efe2ede](https://github.com/akveo/nebular/commit/efe2ede))
+* memory leaks ([#2999](https://github.com/akveo/nebular/issues/2999)) ([2850a31](https://github.com/akveo/nebular/commit/2850a31))
+* **7.0.x:** change build docs output path ([#2942](https://github.com/akveo/nebular/issues/2942)) ([10c1147](https://github.com/akveo/nebular/commit/10c1147))
+* **focus trigger strategy clickout:** consider click target ([#2885](https://github.com/akveo/nebular/issues/2885)) ([dd40d4a](https://github.com/akveo/nebular/commit/dd40d4a))
+
+
+
 <a name="7.0.4"></a>
 ## [7.0.4](https://github.com/akveo/nebular/compare/v7.0.1...v7.0.4) (2022-01-12)
 
