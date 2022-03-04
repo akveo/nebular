@@ -12,7 +12,7 @@
     </button>
   </li>
 
-  <li *ngIf="totalCount < itemsPerPage || totalCount === null || totalCount === undefined">
+  <li *ngIf="totalCount === 0 || totalCount === null || totalCount === undefined">
     <button nbButton size="medium" shape="round" [status]="status" class="subtitle">1</button>
   </li>
 
