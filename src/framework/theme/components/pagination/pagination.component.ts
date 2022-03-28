@@ -10,8 +10,10 @@ import {
   Component,
   EventEmitter,
   Input,
+  OnChanges,
   OnInit,
   Output,
+  SimpleChanges,
   ViewChild,
 } from '@angular/core';
 import { NbComponentStatus } from '../component-status';
@@ -43,7 +45,7 @@ import { NbSelectComponent } from '../select/select.component';
   styleUrls: ['./pagination.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NbPaginationComponent implements OnInit, AfterViewInit {
+export class NbPaginationComponent implements OnInit, AfterViewInit, OnChanges {
   /**
    * Optional. Options to change limit of items on page. Default value: `[10, 15, 20, 50]`
    */
@@ -128,6 +130,18 @@ export class NbPaginationComponent implements OnInit, AfterViewInit {
       const nativeElement = this.paginationSelect.button?.nativeElement;
       if (nativeElement) {
         nativeElement.style.minWidth = '5rem';
+      }
+    }
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes) {
+      if (Object.keys(changes).includes('totalCount')) {
+        this.generatePaginationRange();
+
+        if (this.currentPage > this.lastPage) {
+          this.currentPage = 1;
+        }
       }
     }
   }
