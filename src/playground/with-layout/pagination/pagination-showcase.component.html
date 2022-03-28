@@ -1,8 +1,13 @@
 <nb-card>
   <nb-card-header>Pagination</nb-card-header>
   <nb-card-body>
+    <nb-form-field style="margin-bottom: 20px">
+      <label for="pagination-total" class="label">Número total de itens</label>
+      <input id="pagination-total" nbInput [(ngModel)]="totalCount" type="number" />
+    </nb-form-field>
+
     <nb-pagination
-      [totalCount]="0"
+      [totalCount]="totalCount"
       [itemsPerPage]="10"
       [showPageSizeOptions]="true"
       [pageSizeOptions]="[10, 20, 30]"

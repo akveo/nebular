@@ -6,12 +6,30 @@
 
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NbButtonModule, NbCardModule, NbIconModule, NbPaginationModule } from '@beast/theme';
+import {
+  NbButtonModule,
+  NbCardModule,
+  NbFormFieldModule,
+  NbIconModule,
+  NbInputModule,
+  NbPaginationModule,
+} from '@beast/theme';
 import { PaginationRoutingModule } from './pagination-routing.module';
 import { PaginationShowcaseComponent } from './pagination-showcase.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [PaginationShowcaseComponent],
-  imports: [CommonModule, NbCardModule, NbButtonModule, NbIconModule, NbPaginationModule, PaginationRoutingModule],
+  imports: [
+    CommonModule,
+    NbCardModule,
+    NbButtonModule,
+    NbInputModule,
+    NbIconModule,
+    NbFormFieldModule,
+    FormsModule,
+    NbPaginationModule,
+    PaginationRoutingModule,
+  ],
 })
 export class PaginationModule {}
