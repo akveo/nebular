@@ -568,12 +568,6 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         component: 'DatepickerFilterComponent',
         name: 'Datepicker Filter',
       },
-      {
-        path: 'date-timepicker-with-initial-value-showcase.component',
-        link: '/datepicker/date-timepicker-with-initial-value-showcase.component',
-        component: 'DateTimepickerWithInitialValueShowcaseComponent',
-        name: 'Date Timepicker With Initial Value Showcase',
-      },
     ],
   },
   {
