@@ -15,6 +15,7 @@ import { RangepickerShowcaseComponent } from './rangepicker-showcase.component';
 import { DateTimepickerShowcaseComponent } from './date-timepicker-showcase.component';
 import { DateTimepickerSingleColumnComponent } from './date-timepicker-single-column.component';
 import { DatepickerFilterComponent } from './datepicker-filter.component';
+import { DateTimepickerWithInitialValueShowcaseComponent } from './date-timepicker-with-initial-value-showcase.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { DatepickerFilterComponent } from './datepicker-filter.component';
     DatepickerValidationComponent,
     RangepickerShowcaseComponent,
     DatepickerFilterComponent,
+    DateTimepickerWithInitialValueShowcaseComponent,
   ],
   imports: [
     FormsModule,

@@ -5,7 +5,7 @@
  */
 
 import { NgModule } from '@angular/core';
-import { RouterModule, Route} from '@angular/router';
+import { RouterModule, Route } from '@angular/router';
 import { DatepickerFormsComponent } from './datepicker-forms.component';
 import { DatepickerShowcaseComponent } from './datepicker-showcase.component';
 import { DatepickerValidationComponent } from './datepicker-validation.component';
@@ -13,6 +13,7 @@ import { RangepickerShowcaseComponent } from './rangepicker-showcase.component';
 import { DateTimepickerShowcaseComponent } from './date-timepicker-showcase.component';
 import { DateTimepickerSingleColumnComponent } from './date-timepicker-single-column.component';
 import { DatepickerFilterComponent } from './datepicker-filter.component';
+import { DateTimepickerWithInitialValueShowcaseComponent } from './date-timepicker-with-initial-value-showcase.component';
 
 const routes: Route[] = [
   {
@@ -43,10 +44,14 @@ const routes: Route[] = [
     path: 'datepicker-filter.component',
     component: DatepickerFilterComponent,
   },
+  {
+    path: 'date-timepicker-with-initial-value-showcase.component',
+    component: DateTimepickerWithInitialValueShowcaseComponent,
+  },
 ];
 
 @NgModule({
-  imports: [ RouterModule.forChild(routes) ],
-  exports: [ RouterModule ],
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule],
 })
 export class DatepickerRoutingModule {}
