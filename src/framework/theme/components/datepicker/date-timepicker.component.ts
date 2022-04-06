@@ -32,10 +32,9 @@ import { NB_DATE_SERVICE_OPTIONS } from './datepicker.directive';
   template: '',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NbDateTimePickerComponent<D>
-  extends NbBasePickerComponent<D, D, NbCalendarWithTimeComponent<D>>
-  implements OnInit
-{
+export class NbDateTimePickerComponent<D> extends NbBasePickerComponent<D, D, NbCalendarWithTimeComponent<D>>
+                                          implements OnInit {
+
   protected pickerClass: Type<NbCalendarWithTimeComponent<D>> = NbCalendarWithTimeComponent;
 
   get value(): any {
@@ -113,22 +112,19 @@ export class NbDateTimePickerComponent<D>
     return this.valueChange as EventEmitter<D>;
   }
 
-  constructor(
-    @Inject(NB_DOCUMENT) document,
-    positionBuilder: NbPositionBuilderService,
-    triggerStrategyBuilder: NbTriggerStrategyBuilderService,
-    overlay: NbOverlayService,
-    cfr: ComponentFactoryResolver,
-    dateService: NbDateService<D>,
-    @Optional() @Inject(NB_DATE_SERVICE_OPTIONS) dateServiceOptions,
-    protected calendarWithTimeModelService: NbCalendarTimeModelService<D>,
-  ) {
+  constructor(@Inject(NB_DOCUMENT) document,
+              positionBuilder: NbPositionBuilderService,
+              triggerStrategyBuilder: NbTriggerStrategyBuilderService,
+              overlay: NbOverlayService,
+              cfr: ComponentFactoryResolver,
+              dateService: NbDateService<D>,
+              @Optional() @Inject(NB_DATE_SERVICE_OPTIONS) dateServiceOptions,
+              protected calendarWithTimeModelService: NbCalendarTimeModelService<D>) {
     super(document, positionBuilder, triggerStrategyBuilder, overlay, cfr, dateService, dateServiceOptions);
   }
 
   ngOnInit() {
     this.format = this.format || this.buildTimeFormat();
-    this.init$.next();
   }
 
   protected patchWithInputs() {
@@ -144,9 +140,8 @@ export class NbDateTimePickerComponent<D>
     if (this.twelveHoursFormat) {
       this.picker.timeFormat = this.dateService.getTwelveHoursFormat();
     } else {
-      this.picker.timeFormat = this.withSeconds
-        ? this.dateService.getTwentyFourHoursFormatWithSeconds()
-        : this.dateService.getTwentyFourHoursFormat();
+      this.picker.timeFormat = this.withSeconds ? this.dateService.getTwentyFourHoursFormatWithSeconds() :
+        this.dateService.getTwentyFourHoursFormat();
     }
     super.patchWithInputs();
 
@@ -173,3 +168,4 @@ export class NbDateTimePickerComponent<D>
     }
   }
 }
+
