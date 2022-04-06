@@ -125,6 +125,7 @@ export class NbDateTimePickerComponent<D> extends NbBasePickerComponent<D, D, Nb
 
   ngOnInit() {
     this.format = this.format || this.buildTimeFormat();
+    this.init$.next();
   }
 
   protected patchWithInputs() {
