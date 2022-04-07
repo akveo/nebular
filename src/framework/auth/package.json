@@ -1,6 +1,6 @@
 {
   "name": "@beast/auth",
-  "version": "9.0.1",
+  "version": "9.0.2",
   "description": "@beast/auth",
   "author": "akveo",
   "license": "MIT",
@@ -28,7 +28,7 @@
     "@angular/core": "^13.0.0",
     "@angular/router": "^13.0.0",
     "@angular/forms": "^13.0.0",
-    "@beast/theme": "9.0.1",
+    "@beast/theme": "9.0.2",
     "rxjs": "^6.5.3 || ^7.4.0"
   },
   "dependencies": {
