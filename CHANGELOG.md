@@ -1,3 +1,11 @@
+<a name="9.0.2"></a>
+
+## [9.0.2](https://github.com/akveo/nebular/compare/v9.0.1...v9.0.2) (2022-04-07)
+
+### Bug Fixes
+
+- **datepicker:** fix initial value render ([#3050](https://github.com/akveo/nebular/issues/3050)) ([e821643](https://github.com/akveo/nebular/commit/e821643))
+
 <a name="9.0.1"></a>
 
 ## [9.0.1](https://github.com/akveo/nebular/compare/v9.0.0...v9.0.1) (2022-01-31)
