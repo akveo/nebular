@@ -15,31 +15,11 @@ Para seguir com esse guia, você precisa ter os seguintes pré-requisitos resolv
 1. Conta ativa na AWS, com permissões para AWS CLI e CodeArtifacts.
 2. AWS CLI [baixada](https://aws.amazon.com/pt/cli/) e [configurada](https://docs.aws.amazon.com/pt_br/cli/latest/userguide/cli-chap-configure.html)
 
-### Login na AWS CLI
-
-Adicione o seguinte script em seu `package.json`:
-
-```json
-{
-  "scripts": {
-    "co:login": "aws codeartifact login --tool npm --repository beast --domain dadosfera"
-  }
-}
-```
-
-Com o AWS CLI configurado e script adicionado, execute o seguinte comando:
-
-```bash
-npm run co:login
-```
-
 ### Instalando módulos do Beast
 
 ```bash
-npm install --save @beast/theme @angular/cdk @angular/animations eva-icons @beast/eva-icons
+npm install --save https://github.com/dadosfera/beast/releases/download/9.0.2/beast-theme-9.0.2.tgz @angular/cdk @angular/animations eva-icons https://github.com/dadosfera/beast/releases/download/9.0.2/beast-eva-icons-9.0.2.tgz
 ```
-
-Além disso, você pode instalar o módulo de segurança/ACL: `npm install --save @beast/security`
 
 <hr>
 

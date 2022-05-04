@@ -6,25 +6,16 @@ Aqui você encontra tutoriais gerais de como manter a biblioteca para o Angular 
 
 ## Publicar nova versão do pacote no CodeArtifacts
 
-### Pré-requisitos
-
-Para seguir com esse guia, você precisa ter os seguintes pré-requisitos resolvidos:
-
-1. Conta ativa na AWS, com permissões para AWS CLI e CodeArtifacts
-2. AWS CLI [baixada](https://aws.amazon.com/pt/cli/) e [configurada](https://docs.aws.amazon.com/pt_br/cli/latest/userguide/cli-chap-configure.html)
-
 ### Publicar
 
-Com o AWS CLI configurado, execute os seguintes comandos na raiz do projeto:
+Execute os seguintes comandos na raiz do projeto:
 
 ```bash
 npm run prebuild:packages
 npm run build:packages
-npm run co:login
-npm run publish
 ```
 
-**É importante verificar, após cada comando executado, se os outputs deram sucesso. Além disso, também é importante verificar se os nomes e versões dos pacotes estão corretos. Se alguma versão incorreta for para produção, é possível removê-la pelo console da AWS.**
+Navegar para a pasta `dist` e depois para dentro dos pacotes desejados. Na pasta do pacote desejado, executar `npm pack` e subir o arquivo `.tar.gz` para a release do github.
 
 <hr>
 
