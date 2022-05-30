@@ -25,7 +25,7 @@ import { filter, startWith, switchMap, takeUntil, tap } from 'rxjs/operators';
 import { NbOverlayRef, NbScrollStrategy } from '../cdk/overlay/mapping';
 import { NbTrigger, NbTriggerStrategy, NbTriggerStrategyBuilderService } from '../cdk/overlay/overlay-trigger';
 import { NbOverlayService } from '../cdk/overlay/overlay-service';
-import { ENTER, ESCAPE } from '../cdk/keycodes/keycodes';
+import { ENTER, ESCAPE } from '@angular/cdk/keycodes';
 import {
   NbAdjustableConnectedPositionStrategy,
   NbAdjustment,
@@ -235,7 +235,7 @@ export class NbAutocompleteDirective<T> implements OnDestroy, AfterViewInit, Con
   }
 
   show() {
-    if (this.shouldShow()) {
+    if (this.isClosed) {
       this.attachToOverlay();
       this.setActiveItem();
     }
@@ -425,9 +425,5 @@ export class NbAutocompleteDirective<T> implements OnDestroy, AfterViewInit, Con
 
   protected createScrollStrategy(): NbScrollStrategy {
     return this.overlay.scrollStrategies[this.scrollStrategy]();
-  }
-
-  protected shouldShow(): boolean {
-    return this.isClosed && this.autocomplete.options.length > 0;
   }
 }
