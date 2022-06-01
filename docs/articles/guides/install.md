@@ -18,7 +18,7 @@ Para seguir com esse guia, você precisa ter os seguintes pré-requisitos resolv
 ### Instalando módulos do Beast
 
 ```bash
-npm install --save https://github.com/dadosfera/beast/releases/download/9.0.2/beast-theme-9.0.2.tgz @angular/cdk @angular/animations eva-icons https://github.com/dadosfera/beast/releases/download/9.0.2/beast-eva-icons-9.0.2.tgz
+npm install --save https://github.com/dadosfera/beast/releases/download/9.0.3/beast-theme-9.0.3.tgz @angular/cdk @angular/animations eva-icons https://github.com/dadosfera/beast/releases/download/9.0.3/beast-eva-icons-9.0.3.tgz
 ```
 
 <hr>
