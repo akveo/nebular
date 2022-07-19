@@ -45,7 +45,8 @@
    [attr.title]="menuItem.title"
    [class.active]="menuItem.selected"
    (mouseenter)="onHoverItem(menuItem)"
-   href="#">
+   role="button"
+   tabindex="0">
   <nb-icon class="menu-icon" [config]="menuItem.icon" *ngIf="menuItem.icon"></nb-icon>
   <span class="menu-title">{{ menuItem.title }}</span>
   <ng-container *ngIf="badge" [ngTemplateOutlet]="badgeTemplate"></ng-container>
