@@ -7,6 +7,9 @@
 :host {
   display: flex;
   align-items: center;
+  &[hidden] {
+    display: none;
+  }
 }
 
 .nb-form-control-container {
