@@ -1150,7 +1150,7 @@ export class NbSelectComponent
         if (event.keyCode === ESCAPE) {
           this.hide();
           this.button.nativeElement.focus();
-        } else {
+        } else if (!this.isOptionSearchInputAllowed) {
           this.keyManager.onKeydown(event);
         }
       });
