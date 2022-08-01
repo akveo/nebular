@@ -8,17 +8,10 @@ Esse tutorial explica como instalar os módulos do Beast nos projetos Angular.
 
 Nesta etapa, presumimos que você já tenha uma aplicação Angular criada.
 
-### Pré-requisitos
-
-Para seguir com esse guia, você precisa ter os seguintes pré-requisitos resolvidos:
-
-1. Conta ativa na AWS, com permissões para AWS CLI e CodeArtifacts.
-2. AWS CLI [baixada](https://aws.amazon.com/pt/cli/) e [configurada](https://docs.aws.amazon.com/pt_br/cli/latest/userguide/cli-chap-configure.html)
-
 ### Instalando módulos do Beast
 
 ```bash
-npm install --save https://github.com/dadosfera/beast/releases/download/9.0.3/beast-theme-9.0.3.tgz @angular/cdk @angular/animations eva-icons https://github.com/dadosfera/beast/releases/download/9.0.3/beast-eva-icons-9.0.3.tgz
+npm install --save https://github.com/dadosfera/beast/releases/download/VERSION/beast-theme-VERSION.tgz @angular/cdk @angular/animations eva-icons https://github.com/dadosfera/beast/releases/download/VERSION/beast-eva-icons-VERSION.tgz
 ```
 
 <hr>
