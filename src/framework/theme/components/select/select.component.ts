@@ -711,7 +711,8 @@ export class NbSelectComponent
    * Will be emitted when selected value changes.
    * */
   @Output() selectedChange: EventEmitter<any> = new EventEmitter();
-  @Output() selectClose: EventEmitter<any> = new EventEmitter();
+  @Output() selectOpen: EventEmitter<void> = new EventEmitter();
+  @Output() selectClose: EventEmitter<void> = new EventEmitter();
   @Output() optionSearchChange: EventEmitter<string> = new EventEmitter();
 
   /**
@@ -938,6 +939,8 @@ export class NbSelectComponent
           this.setActiveOption();
         }
       });
+
+      this.selectOpen.emit();
 
       this.cd.markForCheck();
     }
