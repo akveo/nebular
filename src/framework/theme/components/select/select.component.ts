@@ -948,6 +948,8 @@ export class NbSelectComponent
       this.ref.detach();
       this.cd.markForCheck();
       this.selectClose.emit();
+
+      this.optionSearchInput.nativeElement.value = this.selectionView;
       this.optionSearchChange.emit('');
     }
   }
