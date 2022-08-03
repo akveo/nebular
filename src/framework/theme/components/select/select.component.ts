@@ -862,7 +862,7 @@ export class NbSelectComponent
       return this.selectionModel.map((option: NbOptionComponent) => option.content).join(', ');
     }
 
-    return this.selectionModel[0]?.content;
+    return this.selectionModel[0]?.content ?? '';
   }
 
   ngOnChanges({ disabled, status, size, fullWidth }: SimpleChanges) {
