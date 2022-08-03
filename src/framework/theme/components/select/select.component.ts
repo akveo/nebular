@@ -697,6 +697,16 @@ export class NbSelectComponent
    **/
   @Input() scrollStrategy: NbScrollStrategies = 'block';
 
+  /**
+   * Experimental input.
+   * Could be changed without any prior notice.
+   * Use at your own risk.
+   *
+   * It replaces the button with input when the select is opened.
+   * That replacement provides a very basic API to implement options filtering functionality.
+   * Filtering itself isn't implemented inside select.
+   * So it should be implemented by the user.
+   */
   @Input() withOptionSearch: boolean = false;
 
   @HostBinding('class')
