@@ -369,7 +369,7 @@ export class NbTimePickerDirective<D> implements AfterViewInit, ControlValueAcce
     .connectedTo(this.hostRef)
     .position(NbPosition.BOTTOM)
     .offset(this.overlayOffset)
-    .adjustment(NbAdjustment.VERTICAL);
+    .adjustment(NbAdjustment.COUNTERCLOCKWISE);
   }
 
   protected getContainer() {
