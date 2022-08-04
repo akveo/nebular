@@ -1,3 +1,18 @@
+<a name="9.1.0-rc.1"></a>
+# [9.1.0-rc.1](https://github.com/akveo/nebular/compare/v9.0.3...v9.1.0-rc.1) (2022-08-04)
+
+
+### Bug Fixes
+
+* **timepicker:** change position adjustment to "counterclockwise" ([#3085](https://github.com/akveo/nebular/issues/3085)) ([a546295](https://github.com/akveo/nebular/commit/a546295))
+
+
+### Features
+
+* **select:** options search ([#3091](https://github.com/akveo/nebular/issues/3091)) ([ff4f738](https://github.com/akveo/nebular/commit/ff4f738))
+
+
+
 <a name="9.0.3"></a>
 ## [9.0.3](https://github.com/akveo/nebular/compare/v9.0.2...v9.0.3) (2022-05-26)
 
