@@ -73,6 +73,8 @@ const TEST_GROUPS = [
           [multiple]="multiple"
           [selected]="selected"
           (selectedChange)="selectedChange.emit($event)"
+          (selectOpen)="opened = true"
+          (selectClose)="opened = false"
         >
           <nb-select-label *ngIf="!multiple && customLabel">
             {{ selected.split('').reverse().join('') }}
@@ -93,6 +95,7 @@ export class NbSelectTestComponent {
   @Output() selectedChange: EventEmitter<any> = new EventEmitter();
   @ViewChildren(NbOptionComponent) options: QueryList<NbOptionComponent<any>>;
   groups = TEST_GROUPS;
+  opened = false;
 }
 
 @Component({
@@ -689,6 +692,22 @@ describe('Component: NbSelectComponent', () => {
     selectFixture.debugElement.query(By.css('.select-button')).triggerEventHandler('blur', {});
     expect(touchedSpy).not.toHaveBeenCalled();
   }));
+
+  it('should emit open event after opening and close event after closing', fakeAsync(() => {
+    const selectFixture = TestBed.createComponent(NbSelectTestComponent);
+    select = selectFixture.debugElement.query(By.directive(NbSelectComponent)).componentInstance;
+
+    selectFixture.detectChanges();
+    expect(selectFixture.componentInstance.opened).toBe(false);
+    select.show();
+    selectFixture.detectChanges();
+    flush();
+    expect(selectFixture.componentInstance.opened).toBe(true);
+    select.hide();
+    selectFixture.detectChanges();
+    flush();
+    expect(selectFixture.componentInstance.opened).toBe(false);
+  }));
 });
 
 describe('NbSelectComponent - falsy values', () => {
@@ -1215,4 +1234,116 @@ describe('NbSelect - dynamic options', () => {
       expect(writeValueSpy).toHaveBeenCalledTimes(2);
     }));
   });
+});
+
+@Component({
+  template: `
+    <nb-layout>
+      <nb-layout-column>
+        <nb-select
+          [(ngModel)]="selectedValue"
+          [withOptionSearch]="true"
+          (optionSearchChange)="filterValue = $event"
+          (selectOpen)="isOpened = true"
+          (selectClose)="isOpened = false"
+        >
+          <nb-option *ngFor="let option of options" [value]="option">{{ option }}</nb-option>
+        </nb-select>
+      </nb-layout-column>
+    </nb-layout>
+  `,
+})
+export class NbSelectWithExperimentalSearchComponent {
+  options: number[] = [1, 2, 3, 4, 5];
+  selectedValue: number = null;
+  filterValue: string = '';
+  isOpened: boolean = false;
+  @ViewChild(NbSelectComponent) selectComponent: NbSelectComponent;
+}
+
+describe('NbSelect - experimental search', () => {
+  let fixture: ComponentFixture<NbSelectWithExperimentalSearchComponent>;
+  let testComponent: NbSelectWithExperimentalSearchComponent;
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [
+        RouterTestingModule.withRoutes([]),
+        FormsModule,
+        NbThemeModule.forRoot(),
+        NbLayoutModule,
+        NbSelectModule,
+      ],
+      declarations: [NbSelectWithExperimentalSearchComponent],
+    });
+
+    fixture = TestBed.createComponent(NbSelectWithExperimentalSearchComponent);
+    testComponent = fixture.componentInstance;
+
+    fixture.detectChanges();
+  });
+
+  it("should update search input and don't emit filterChange when value of select is changed", fakeAsync(() => {
+    const searchInput = testComponent.selectComponent.optionSearchInput.nativeElement;
+
+    expect(searchInput.value).toEqual('');
+    expect(testComponent.filterValue).toEqual('');
+
+    testComponent.selectedValue = 1;
+    fixture.detectChanges();
+    flush();
+    fixture.detectChanges();
+    expect(searchInput.value).toEqual('1');
+    expect(testComponent.filterValue).toEqual('');
+
+    testComponent.selectedValue = 2;
+    fixture.detectChanges();
+    flush();
+    fixture.detectChanges();
+    expect(searchInput.value).toEqual('2');
+    expect(testComponent.filterValue).toEqual('');
+  }));
+
+  it('should mark touched when select button loose focus and select closed', fakeAsync(() => {
+    const touchedSpy = jasmine.createSpy('touched spy');
+
+    const selectFixture = TestBed.createComponent(NbSelectComponent);
+    const selectComponent: NbSelectComponent = selectFixture.componentInstance;
+    selectFixture.detectChanges();
+    flush();
+
+    selectComponent.registerOnTouched(touchedSpy);
+    selectFixture.debugElement.query(By.css('input')).triggerEventHandler('blur', {});
+    expect(touchedSpy).toHaveBeenCalledTimes(1);
+  }));
+
+  it('should make filter value empty and restore input to default after select is closed', fakeAsync(() => {
+    const searchInput = fixture.debugElement.query(By.css('input'));
+
+    testComponent.selectedValue = 1;
+
+    fixture.detectChanges();
+    flush();
+    fixture.detectChanges();
+
+    const initialValue = searchInput.nativeElement.value;
+
+    testComponent.selectComponent.show();
+    searchInput.triggerEventHandler('input', { target: { value: '123' } });
+
+    fixture.detectChanges();
+    flush();
+    fixture.detectChanges();
+
+    expect(testComponent.filterValue).toBe('123');
+
+    testComponent.selectComponent.hide();
+
+    fixture.detectChanges();
+    flush();
+    fixture.detectChanges();
+
+    expect(testComponent.filterValue).toBe('');
+    expect(searchInput.nativeElement.value).toBe(initialValue);
+  }));
 });

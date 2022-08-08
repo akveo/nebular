@@ -9,7 +9,7 @@ Os estilos do Beast vêm em um arquivo css por padrão. Para poder personalizar 
 Crie um `themes.scss` em sua pasta `src` e importe um tema de sua escolha:
 
 ```scss
-// import Nebular Theme System and the default theme
+// import Beast Theme System and the default theme
 @forward '@beast/theme/styles/theming';
 @use '@beast/theme/styles/theming' as *;
 @use '@beast/theme/styles/themes/default';

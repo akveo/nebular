@@ -12,6 +12,7 @@ import {
   NbCardModule,
   NbFormFieldModule,
   NbIconModule,
+  NbInputModule,
   NbRadioModule,
   NbSelectModule,
 } from '@beast/theme';
@@ -33,6 +34,7 @@ import { SelectInteractiveComponent } from './select-interactive.component';
 import { SelectTestComponent } from './select-test.component';
 import { SelectCompareWithComponent } from './select-compare-with.component';
 import { SelectIconComponent } from './select-icon.component';
+import { SelectSearchShowcaseComponent } from './select-search-showcase.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +55,7 @@ import { SelectIconComponent } from './select-icon.component';
     SelectTestComponent,
     SelectCompareWithComponent,
     SelectIconComponent,
+    SelectSearchShowcaseComponent,
   ],
   imports: [
     FormsModule,
@@ -65,6 +68,7 @@ import { SelectIconComponent } from './select-icon.component';
     NbButtonModule,
     NbIconModule,
     NbFormFieldModule,
+    NbInputModule,
   ],
 })
 export class SelectModule {}

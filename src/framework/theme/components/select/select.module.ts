@@ -8,11 +8,9 @@ import { NbButtonModule } from '../button/button.module';
 import { NbSelectComponent, NbSelectLabelComponent } from './select.component';
 import { NbOptionModule } from '../option/option-list.module';
 import { NbIconModule } from '../icon/icon.module';
+import { NbFormFieldModule } from '../form-field/form-field.module';
 
-const NB_SELECT_COMPONENTS = [
-  NbSelectComponent,
-  NbSelectLabelComponent,
-];
+const NB_SELECT_COMPONENTS = [NbSelectComponent, NbSelectLabelComponent];
 
 @NgModule({
   imports: [
@@ -23,12 +21,9 @@ const NB_SELECT_COMPONENTS = [
     NbCardModule,
     NbIconModule,
     NbOptionModule,
+    NbFormFieldModule,
   ],
-  exports: [
-    ...NB_SELECT_COMPONENTS,
-    NbOptionModule,
-  ],
+  exports: [...NB_SELECT_COMPONENTS, NbOptionModule],
   declarations: [...NB_SELECT_COMPONENTS],
 })
-export class NbSelectModule {
-}
+export class NbSelectModule {}
