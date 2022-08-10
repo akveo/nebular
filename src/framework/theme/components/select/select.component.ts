@@ -894,12 +894,12 @@ export class NbSelectComponent
     this.options.changes
       .pipe(
         startWith(this.options),
-        filter(() => this.queue != null && this.canSelectValue()),
         // Call 'writeValue' when current change detection run is finished.
         // When writing is finished, change detection starts again, since
         // microtasks queue is empty.
         // Prevents ExpressionChangedAfterItHasBeenCheckedError.
         switchMap((options: QueryList<NbOptionComponent>) => from(Promise.resolve(options))),
+        filter(() => this.queue != null && this.canSelectValue()),
         takeUntil(this.destroy$),
       )
       .subscribe(() => this.writeValue(this.queue));
