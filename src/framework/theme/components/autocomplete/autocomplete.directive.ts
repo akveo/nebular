@@ -373,6 +373,7 @@ export class NbAutocompleteDirective<T> implements OnDestroy, AfterViewInit, Con
           this.handleInputValueUpdate(activeItem.value, true);
         } else {
           this.keyManager.onKeydown(event);
+          this.scrollToOption(this.keyManager.activeItemIndex || 0);
         }
       });
   }
@@ -429,5 +430,67 @@ export class NbAutocompleteDirective<T> implements OnDestroy, AfterViewInit, Con
 
   protected shouldShow(): boolean {
     return this.isClosed && this.autocomplete.options.length > 0;
+  }
+
+  private scrollToOption(index: number): void {
+    const labelCount = this.countGroupLabelsBeforeOption(
+      index,
+      this._autocomplete.options,
+      this._autocomplete.optionGroups,
+    );
+
+    if (index === 0 && labelCount === 1) {
+      // If we are at the first option of the first option group, we scroll the list to the top
+      // to allow the user to read the top group's label.
+      this._autocomplete.list?.setScrollTop(0);
+    } else if (this._autocomplete.list?.list) {
+      const option = this._autocomplete.options.toArray()[index];
+      if (option) {
+        const element = option.getHostElement();
+        const newScrollPosition = this.getOptionScrollPosition(
+          element.offsetTop,
+          element.offsetHeight,
+          this._autocomplete.list.getScrollTop(),
+          this._autocomplete.list.list.nativeElement.offsetHeight,
+        );
+
+        this._autocomplete.list.setScrollTop(newScrollPosition);
+      }
+    }
+  }
+
+  countGroupLabelsBeforeOption(optionIndex: number, options: QueryList<any>, optionGroups: QueryList<any>): number {
+    if (optionGroups.length) {
+      let optionsArray = options.toArray();
+      let groups = optionGroups.toArray();
+      let groupCounter = 0;
+
+      groups.forEach((group, index) => {
+        if (group.options.toArray().includes(optionsArray[optionIndex])) {
+          groupCounter = index + 1;
+        }
+      });
+
+      return groupCounter;
+    }
+
+    return 0;
+  }
+
+  getOptionScrollPosition(
+    optionOffset: number,
+    optionHeight: number,
+    currentScrollPosition: number,
+    portalHeight: number,
+  ): number {
+    if (optionOffset < currentScrollPosition) {
+      return optionOffset;
+    }
+
+    if (optionOffset + optionHeight > currentScrollPosition + portalHeight) {
+      return Math.max(0, optionOffset - portalHeight + optionHeight);
+    }
+
+    return currentScrollPosition;
   }
 }

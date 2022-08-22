@@ -26,6 +26,8 @@ import { takeUntil } from 'rxjs/operators';
 import { NbComponentSize } from '../component-size';
 import { NbPosition } from '../cdk/overlay/overlay-position';
 import { NbOptionComponent } from '../option/option.component';
+import { NbOptionListComponent } from '../option/option-list.component';
+import { NbOptionGroupComponent } from '../option/option-group.component';
 import { NbPortalDirective } from '../cdk/overlay/mapping';
 
 // Component class scoped counter for aria attributes.
@@ -126,10 +128,14 @@ export class NbAutocompleteComponent<T> implements AfterContentInit, OnDestroy {
    * */
   @ContentChildren(NbOptionComponent, { descendants: true }) options: QueryList<NbOptionComponent<T>>;
 
+  @ContentChildren(NbOptionGroupComponent, { descendants: true }) optionGroups: QueryList<NbOptionGroupComponent>;
+
   /**
    * NbOptionList with options content.
    * */
   @ViewChild(NbPortalDirective) portal: NbPortalDirective;
+
+  @ViewChild(NbOptionListComponent) list: NbOptionListComponent<T>;
 
   constructor(protected cd: ChangeDetectorRef) {}
 
