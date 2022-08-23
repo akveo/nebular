@@ -1,5 +1,5 @@
 <button
-  [hidden]="isOptionSearchInputAllowed"
+  [hidden]="isOptionSearchInputShown"
   [disabled]="disabled"
   [ngClass]="selectButtonClasses"
   (blur)="trySetTouched()"
@@ -30,7 +30,7 @@
   </nb-icon>
 </button>
 
-<nb-form-field [hidden]="!isOptionSearchInputAllowed">
+<nb-form-field [hidden]="!isOptionSearchInputShown">
   <input
     nbInput
     fullWidth
@@ -41,8 +41,6 @@
     [shape]="shape"
     [fieldSize]="size"
     (blur)="trySetTouched()"
-    (keydown.arrowDown)="show()"
-    (keydown.arrowUp)="show()"
     (click)="$event.stopPropagation()"
     (input)="onInput($event)"
   />

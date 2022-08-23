@@ -30,8 +30,9 @@ import {
 } from '@angular/core';
 import { NgClass } from '@angular/common';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { merge, Subject, BehaviorSubject, from, combineLatest } from 'rxjs';
-import { startWith, switchMap, takeUntil, filter, map, finalize, take } from 'rxjs/operators';
+import { ListKeyManager } from '@angular/cdk/a11y';
+import { merge, Subject, BehaviorSubject, from, combineLatest, animationFrameScheduler } from 'rxjs';
+import { startWith, switchMap, takeUntil, filter, map, finalize, take, observeOn } from 'rxjs/operators';
 
 import { NbStatusService } from '../../services/status.service';
 import {
@@ -55,6 +56,7 @@ import { NB_SELECT_INJECTION_TOKEN } from './select-injection-tokens';
 import { NbFormFieldControl, NbFormFieldControlConfig } from '../form-field/form-field-control';
 import { NbFocusMonitor } from '../cdk/a11y/a11y.module';
 import { NbScrollStrategies } from '../cdk/adapter/block-scroll-strategy-adapter';
+import { NbActiveDescendantKeyManagerFactoryService } from '../cdk/a11y/descendant-key-manager';
 
 export type NbSelectCompareFunction<T = any> = (v1: any, v2: any) => boolean;
 export type NbSelectAppearance = 'outline' | 'filled' | 'hero';
@@ -753,7 +755,11 @@ export class NbSelectComponent
   }
 
   get isOptionSearchInputAllowed(): boolean {
-    return this.withOptionSearch && this.isOpen && !this.multiple;
+    return this.withOptionSearch && !this.multiple;
+  }
+
+  get isOptionSearchInputShown(): boolean {
+    return this.isOptionSearchInputAllowed && this.isOpen;
   }
 
   /**
@@ -777,7 +783,7 @@ export class NbSelectComponent
 
   protected destroy$ = new Subject<void>();
 
-  protected keyManager: NbFocusKeyManager<NbOptionComponent>;
+  protected keyManager: ListKeyManager<NbOptionComponent>;
 
   /**
    * If a user assigns value before content nb-options's rendered the value will be putted in this variable.
@@ -829,6 +835,7 @@ export class NbSelectComponent
     protected renderer: Renderer2,
     protected zone: NgZone,
     protected statusService: NbStatusService,
+    protected activeDescendantKeyManagerFactoryService: NbActiveDescendantKeyManagerFactoryService<NbOptionComponent>,
   ) {}
 
   /**
@@ -842,7 +849,7 @@ export class NbSelectComponent
    * Returns width of the select button.
    * */
   get hostWidth(): number {
-    if (this.isOptionSearchInputAllowed) {
+    if (this.isOptionSearchInputShown) {
       return this.optionSearchInput.nativeElement.getBoundingClientRect().width;
     }
     return this.button.nativeElement.getBoundingClientRect().width;
@@ -943,11 +950,10 @@ export class NbSelectComponent
       this.attachToOverlay();
 
       this.positionStrategy.positionChange.pipe(take(1), takeUntil(this.destroy$)).subscribe(() => {
-        if (this.isOptionSearchInputAllowed) {
+        if (this.isOptionSearchInputShown) {
           this.optionSearchInput.nativeElement.focus();
-        } else {
-          this.setActiveOption();
         }
+        this.setActiveOption();
       });
 
       this.selectOpen.emit();
@@ -1070,13 +1076,14 @@ export class NbSelectComponent
       this.subscribeOnPositionChange();
       this.createKeyManager();
       this.subscribeOnOverlayKeys();
+      this.subscribeOnOptionSearchChange();
     }
 
     this.ref.attach(this.portal);
   }
 
   protected setActiveOption() {
-    if (this.selectionModel.length) {
+    if (this.selectionModel.length && !this.selectionModel[0].hidden) {
       this.keyManager.setActiveItem(this.selectionModel[0]);
     } else {
       this.keyManager.setFirstItemActive();
@@ -1094,7 +1101,15 @@ export class NbSelectComponent
   }
 
   protected createKeyManager(): void {
-    this.keyManager = this.focusKeyManagerFactoryService.create(this.options).withTypeAhead(200);
+    let keyManager: ListKeyManager<NbOptionComponent>;
+    if (this.isOptionSearchInputAllowed) {
+      keyManager = this.activeDescendantKeyManagerFactoryService.create(this.options);
+    } else {
+      keyManager = this.focusKeyManagerFactoryService.create(this.options).withTypeAhead(200);
+    }
+    this.keyManager = keyManager.skipPredicate((option) => {
+      return this.isOptionHidden(option);
+    });
   }
 
   protected createPositionStrategy(): NbAdjustableConnectedPositionStrategy {
@@ -1165,7 +1180,7 @@ export class NbSelectComponent
         if (event.keyCode === ESCAPE) {
           this.hide();
           this.button.nativeElement.focus();
-        } else if (!this.isOptionSearchInputAllowed) {
+        } else {
           this.keyManager.onKeydown(event);
         }
       });
@@ -1174,6 +1189,20 @@ export class NbSelectComponent
       this.hide();
       this.onTouched();
     });
+  }
+
+  protected subscribeOnOptionSearchChange() {
+    this.optionSearchChange
+      .pipe(
+        observeOn(animationFrameScheduler),
+        filter(() => this.isOptionSearchInputShown),
+        takeUntil(this.destroy$),
+      )
+      .subscribe(() => {
+        if (this.isOptionHidden(this.keyManager.activeItem)) {
+          this.keyManager.setFirstItemActive();
+        }
+      });
   }
 
   protected subscribeOnButtonFocus() {
@@ -1290,6 +1319,10 @@ export class NbSelectComponent
 
   protected canSelectValue(): boolean {
     return !!(this.options && this.options.length);
+  }
+
+  protected isOptionHidden(option: NbOptionComponent): boolean {
+    return option.hidden;
   }
 
   @HostBinding('class.size-tiny')

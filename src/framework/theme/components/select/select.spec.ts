@@ -24,6 +24,7 @@ import {
   NbTriggerStrategyBuilderService,
   NbFocusKeyManagerFactoryService,
 } from '@nebular/theme';
+import { NbActiveDescendantKeyManagerFactoryService } from '../cdk/a11y/descendant-key-manager';
 
 const eventMock = { preventDefault() {} } as Event;
 
@@ -614,7 +615,7 @@ describe('Component: NbSelectComponent', () => {
   }));
 
   it(`should not call dispose on uninitialized resources`, () => {
-    const selectFixture = new NbSelectComponent(null, null, null, null, null, null, null, null, null, null, null);
+    const selectFixture = new NbSelectComponent(null, null, null, null, null, null, null, null, null, null, null, null);
     expect(() => selectFixture.ngOnDestroy()).not.toThrow();
   });
 
@@ -929,6 +930,9 @@ describe('NbSelectComponent - Key manager', () => {
       setActiveItem() {},
       setFirstItemActive() {},
       onKeydown() {},
+      skipPredicate() {
+        return this;
+      },
       tabOut: tabOutStub,
     };
     keyManagerFactoryStub = {
@@ -942,6 +946,7 @@ describe('NbSelectComponent - Key manager', () => {
       declarations: [BasicSelectTestComponent],
     });
     TestBed.overrideProvider(NbFocusKeyManagerFactoryService, { useValue: keyManagerFactoryStub });
+    TestBed.overrideProvider(NbActiveDescendantKeyManagerFactoryService, { useValue: keyManagerFactoryStub });
 
     fixture = TestBed.createComponent(BasicSelectTestComponent);
     fixture.detectChanges();
