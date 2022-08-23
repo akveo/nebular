@@ -1,28 +1,60 @@
-<button [disabled]="disabled"
-        [ngClass]="selectButtonClasses"
-        (blur)="trySetTouched()"
-        (keydown.arrowDown)="show()"
-        (keydown.arrowUp)="show()"
-        class="select-button"
-        type="button"
-        #selectButton>
-
-    <span>
-      <ng-container *ngIf="selectionModel.length; else placeholderTemplate">
-        <ng-container *ngIf="customLabel; else defaultSelectionTemplate">
-          <ng-content select="nb-select-label"></ng-content>
-        </ng-container>
-
-        <ng-template #defaultSelectionTemplate>{{ selectionView }}</ng-template>
+<button
+  [hidden]="isOptionSearchInputAllowed"
+  [disabled]="disabled"
+  [ngClass]="selectButtonClasses"
+  (blur)="trySetTouched()"
+  (keydown.arrowDown)="show()"
+  (keydown.arrowUp)="show()"
+  class="select-button"
+  type="button"
+  #selectButton
+>
+  <span (click)="disabled && $event.stopPropagation()">
+    <ng-container *ngIf="selectionModel.length; else placeholderTemplate">
+      <ng-container *ngIf="customLabel; else defaultSelectionTemplate">
+        <ng-content select="nb-select-label"></ng-content>
       </ng-container>
 
-      <ng-template #placeholderTemplate>{{ placeholder }}</ng-template>
-    </span>
+      <ng-template #defaultSelectionTemplate>{{ selectionView }}</ng-template>
+    </ng-container>
 
-    <nb-icon icon="chevron-down-outline" pack="nebular-essentials" (click)="disabled && $event.stopPropagation()" aria-hidden="true">
-    </nb-icon>
+    <ng-template #placeholderTemplate>{{ placeholder }}</ng-template>
+  </span>
+
+  <nb-icon
+    icon="chevron-down-outline"
+    pack="nebular-essentials"
+    (click)="disabled && $event.stopPropagation()"
+    aria-hidden="true"
+  >
+  </nb-icon>
 </button>
 
-<nb-option-list *nbPortal [size]="size" [position]="overlayPosition" [style.width.px]="optionsWidth" [ngClass]="optionsListClass">
+<nb-form-field [hidden]="!isOptionSearchInputAllowed">
+  <input
+    nbInput
+    fullWidth
+    #optionSearchInput
+    [value]="selectionView"
+    [placeholder]="placeholder"
+    [status]="status"
+    [shape]="shape"
+    [fieldSize]="size"
+    (blur)="trySetTouched()"
+    (keydown.arrowDown)="show()"
+    (keydown.arrowUp)="show()"
+    (click)="$event.stopPropagation()"
+    (input)="onInput($event)"
+  />
+  <nb-icon nbSuffix icon="chevron-up-outline" pack="nebular-essentials" aria-hidden="true"> </nb-icon>
+</nb-form-field>
+
+<nb-option-list
+  *nbPortal
+  [size]="size"
+  [position]="overlayPosition"
+  [style.width.px]="optionsWidth"
+  [ngClass]="optionsListClass"
+>
   <ng-content select="nb-option, nb-option-group"></ng-content>
 </nb-option-list>

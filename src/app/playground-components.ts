@@ -1161,6 +1161,12 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         component: 'SelectIconComponent',
         name: 'Select Icon',
       },
+      {
+        path: 'select-search-showcase.component',
+        link: '/select/select-search-showcase.component',
+        component: 'SelectSearchShowcaseComponent',
+        name: 'Select Search Showcase',
+      },
     ],
   },
   {
