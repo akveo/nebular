@@ -45,7 +45,7 @@ import { NbOverlayRef, NbPortalDirective, NbScrollStrategy } from '../cdk/overla
 import { NbOverlayService } from '../cdk/overlay/overlay-service';
 import { NbTrigger, NbTriggerStrategy, NbTriggerStrategyBuilderService } from '../cdk/overlay/overlay-trigger';
 import { NbFocusKeyManager, NbFocusKeyManagerFactoryService } from '../cdk/a11y/focus-key-manager';
-import { ESCAPE } from '../cdk/keycodes/keycodes';
+import { ENTER, ESCAPE } from '../cdk/keycodes/keycodes';
 import { NbComponentSize } from '../component-size';
 import { NbComponentShape } from '../component-shape';
 import { NbComponentOrCustomStatus } from '../component-status';
@@ -1180,6 +1180,12 @@ export class NbSelectComponent
         if (event.keyCode === ESCAPE) {
           this.hide();
           this.button.nativeElement.focus();
+        } else if (event.keyCode === ENTER && this.isOptionSearchInputShown) {
+          event.preventDefault();
+          const activeItem = this.keyManager.activeItem;
+          if (activeItem) {
+            this.selectOption(activeItem);
+          }
         } else {
           this.keyManager.onKeydown(event);
         }
