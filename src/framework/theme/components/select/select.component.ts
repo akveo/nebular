@@ -1113,7 +1113,7 @@ export class NbSelectComponent
   }
 
   protected createPositionStrategy(): NbAdjustableConnectedPositionStrategy {
-    const element: ElementRef<HTMLInputElement | HTMLButtonElement> = this.withOptionSearch
+    const element: ElementRef<HTMLInputElement | HTMLButtonElement> = this.isOptionSearchInputAllowed
       ? this.optionSearchInput
       : this.button;
     return this.positionBuilder
