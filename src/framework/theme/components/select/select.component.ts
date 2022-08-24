@@ -44,7 +44,7 @@ import {
 import { NbOverlayRef, NbPortalDirective, NbScrollStrategy } from '../cdk/overlay/mapping';
 import { NbOverlayService } from '../cdk/overlay/overlay-service';
 import { NbTrigger, NbTriggerStrategy, NbTriggerStrategyBuilderService } from '../cdk/overlay/overlay-trigger';
-import { NbFocusKeyManager, NbFocusKeyManagerFactoryService } from '../cdk/a11y/focus-key-manager';
+import { NbFocusKeyManagerFactoryService } from '../cdk/a11y/focus-key-manager';
 import { ENTER, ESCAPE } from '../cdk/keycodes/keycodes';
 import { NbComponentSize } from '../component-size';
 import { NbComponentShape } from '../component-shape';
