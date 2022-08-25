@@ -1,4 +1,5 @@
 <button
+  [hidden]="isOptionSearchInputShown"
   [disabled]="disabled"
   [ngClass]="selectButtonClasses"
   (blur)="trySetTouched()"
@@ -28,6 +29,23 @@
   >
   </nb-icon>
 </button>
+
+<nb-form-field [hidden]="!isOptionSearchInputShown">
+  <input
+    nbInput
+    fullWidth
+    #optionSearchInput
+    [value]="selectionView"
+    [placeholder]="placeholder"
+    [status]="status"
+    [shape]="shape"
+    [fieldSize]="size"
+    (blur)="trySetTouched()"
+    (click)="$event.stopPropagation()"
+    (input)="onInput($event)"
+  />
+  <nb-icon nbSuffix icon="chevron-up-outline" pack="nebular-essentials" aria-hidden="true"> </nb-icon>
+</nb-form-field>
 
 <nb-option-list
   *nbPortal

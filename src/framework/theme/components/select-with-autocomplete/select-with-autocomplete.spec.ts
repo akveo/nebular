@@ -13,17 +13,18 @@ import { from, zip, Subject } from 'rxjs';
 import createSpy = jasmine.createSpy;
 
 import {
-  NbSelectModule,
+  NbSelectWithAutocompleteModule as NbSelectModule,
   NbThemeModule,
   NbOverlayContainerAdapter,
   NB_DOCUMENT,
-  NbSelectComponent,
+  NbSelectWithAutocompleteComponent as NbSelectComponent,
   NbLayoutModule,
   NbOptionComponent,
   NbOptionGroupComponent,
   NbTriggerStrategyBuilderService,
   NbFocusKeyManagerFactoryService,
 } from '@nebular/theme';
+import { NbActiveDescendantKeyManagerFactoryService } from '../cdk/a11y/descendant-key-manager';
 
 const eventMock = { preventDefault() {} } as Event;
 
@@ -68,11 +69,13 @@ const TEST_GROUPS = [
   template: `
     <nb-layout>
       <nb-layout-column>
-        <nb-select
+        <nb-select-with-autocomplete
           placeholder="This is test select component"
           [multiple]="multiple"
           [selected]="selected"
           (selectedChange)="selectedChange.emit($event)"
+          (selectOpen)="opened = true"
+          (selectClose)="opened = false"
         >
           <nb-select-label *ngIf="!multiple && customLabel">
             {{ selected.split('').reverse().join('') }}
@@ -81,7 +84,7 @@ const TEST_GROUPS = [
           <nb-option-group *ngFor="let group of groups" [title]="group.title">
             <nb-option *ngFor="let option of group.options" [value]="option.value">{{ option.title }}</nb-option>
           </nb-option-group>
-        </nb-select>
+        </nb-select-with-autocomplete>
       </nb-layout-column>
     </nb-layout>
   `,
@@ -93,17 +96,18 @@ export class NbSelectTestComponent {
   @Output() selectedChange: EventEmitter<any> = new EventEmitter();
   @ViewChildren(NbOptionComponent) options: QueryList<NbOptionComponent<any>>;
   groups = TEST_GROUPS;
+  opened = false;
 }
 
 @Component({
   template: `
     <nb-layout>
       <nb-layout-column>
-        <nb-select>
+        <nb-select-with-autocomplete>
           <nb-option value="a">a</nb-option>
           <nb-option value="b">b</nb-option>
           <nb-option value="c">c</nb-option>
-        </nb-select>
+        </nb-select-with-autocomplete>
       </nb-layout-column>
     </nb-layout>
   `,
@@ -114,9 +118,9 @@ export class BasicSelectTestComponent {}
   template: `
     <nb-layout>
       <nb-layout-column>
-        <nb-select [selected]="selected" [compareWith]="compareFn">
+        <nb-select-with-autocomplete [selected]="selected" [compareWith]="compareFn">
           <nb-option *ngFor="let option of options" [value]="option">{{ option }}</nb-option>
-        </nb-select>
+        </nb-select-with-autocomplete>
       </nb-layout-column>
     </nb-layout>
   `,
@@ -133,9 +137,9 @@ export class NbSelectWithOptionsObjectsComponent {
   template: `
     <nb-layout>
       <nb-layout-column>
-        <nb-select [selected]="selected">
+        <nb-select-with-autocomplete [selected]="selected">
           <nb-option *ngFor="let option of options" [value]="option">{{ option }}</nb-option>
-        </nb-select>
+        </nb-select-with-autocomplete>
       </nb-layout-column>
     </nb-layout>
   `,
@@ -149,9 +153,9 @@ export class NbSelectWithInitiallySelectedOptionComponent {
   template: `
     <nb-layout>
       <nb-layout-column>
-        <nb-select *ngIf="showSelect" [formControl]="formControl">
+        <nb-select-with-autocomplete *ngIf="showSelect" [formControl]="formControl">
           <nb-option *ngFor="let option of options" [value]="option">{{ option }}</nb-option>
-        </nb-select>
+        </nb-select-with-autocomplete>
       </nb-layout-column>
     </nb-layout>
   `,
@@ -169,9 +173,9 @@ export class NbReactiveFormSelectComponent {
   template: `
     <nb-layout>
       <nb-layout-column>
-        <nb-select [(ngModel)]="selectedValue">
+        <nb-select-with-autocomplete [(ngModel)]="selectedValue">
           <nb-option *ngFor="let option of options" [value]="option">{{ option }}</nb-option>
-        </nb-select>
+        </nb-select-with-autocomplete>
       </nb-layout-column>
     </nb-layout>
   `,
@@ -187,7 +191,7 @@ export class NbNgModelSelectComponent {
   template: `
     <nb-layout>
       <nb-layout-column>
-        <nb-select>
+        <nb-select-with-autocomplete>
           <nb-option>No value option</nb-option>
           <nb-option [value]="null">undefined value</nb-option>
           <nb-option [value]="undefined">undefined value</nb-option>
@@ -196,7 +200,7 @@ export class NbNgModelSelectComponent {
           <nb-option [value]="''">empty string value</nb-option>
           <nb-option [value]="nanValue">NaN value</nb-option>
           <nb-option value="1">truthy value</nb-option>
-        </nb-select>
+        </nb-select-with-autocomplete>
       </nb-layout-column>
     </nb-layout>
   `,
@@ -261,7 +265,7 @@ export class NbSelectWithFalsyOptionValuesComponent {
   template: `
     <nb-layout>
       <nb-layout-column>
-        <nb-select multiple>
+        <nb-select-with-autocomplete multiple>
           <nb-option>No value option</nb-option>
           <nb-option [value]="null">undefined value</nb-option>
           <nb-option [value]="undefined">undefined value</nb-option>
@@ -270,7 +274,7 @@ export class NbSelectWithFalsyOptionValuesComponent {
           <nb-option [value]="''">empty string value</nb-option>
           <nb-option [value]="nanValue">NaN value</nb-option>
           <nb-option value="1">truthy value</nb-option>
-        </nb-select>
+        </nb-select-with-autocomplete>
       </nb-layout-column>
     </nb-layout>
   `,
@@ -281,11 +285,11 @@ export class NbMultipleSelectWithFalsyOptionValuesComponent extends NbSelectWith
   template: `
     <nb-layout>
       <nb-layout-column>
-        <nb-select>
+        <nb-select-with-autocomplete>
           <nb-option-group [disabled]="optionGroupDisabled">
             <nb-option [value]="1" [disabled]="optionDisabled">1</nb-option>
           </nb-option-group>
-        </nb-select>
+        </nb-select-with-autocomplete>
       </nb-layout-column>
     </nb-layout>
   `,
@@ -489,7 +493,7 @@ describe('Component: NbSelectComponent', () => {
       .componentInstance.options.find((o) => o.selected);
 
     expect(selectedOption.value).toEqual(selectFixture.componentInstance.selected);
-    const selectButton = selectFixture.nativeElement.querySelector('nb-select button') as HTMLElement;
+    const selectButton = selectFixture.nativeElement.querySelector('nb-select-with-autocomplete button') as HTMLElement;
     expect(selectButton.textContent).toEqual(selectedOption.value.toString());
   }));
 
@@ -611,7 +615,7 @@ describe('Component: NbSelectComponent', () => {
   }));
 
   it(`should not call dispose on uninitialized resources`, () => {
-    const selectFixture = new NbSelectComponent(null, null, null, null, null, null, null, null, null, null, null);
+    const selectFixture = new NbSelectComponent(null, null, null, null, null, null, null, null, null, null, null, null);
     expect(() => selectFixture.ngOnDestroy()).not.toThrow();
   });
 
@@ -688,6 +692,22 @@ describe('Component: NbSelectComponent', () => {
     select.show();
     selectFixture.debugElement.query(By.css('.select-button')).triggerEventHandler('blur', {});
     expect(touchedSpy).not.toHaveBeenCalled();
+  }));
+
+  it('should emit open event after opening and close event after closing', fakeAsync(() => {
+    const selectFixture = TestBed.createComponent(NbSelectTestComponent);
+    select = selectFixture.debugElement.query(By.directive(NbSelectComponent)).componentInstance;
+
+    selectFixture.detectChanges();
+    expect(selectFixture.componentInstance.opened).toBe(false);
+    select.show();
+    selectFixture.detectChanges();
+    flush();
+    expect(selectFixture.componentInstance.opened).toBe(true);
+    select.hide();
+    selectFixture.detectChanges();
+    flush();
+    expect(selectFixture.componentInstance.opened).toBe(false);
   }));
 });
 
@@ -910,6 +930,9 @@ describe('NbSelectComponent - Key manager', () => {
       setActiveItem() {},
       setFirstItemActive() {},
       onKeydown() {},
+      skipPredicate() {
+        return this;
+      },
       tabOut: tabOutStub,
     };
     keyManagerFactoryStub = {
@@ -923,6 +946,7 @@ describe('NbSelectComponent - Key manager', () => {
       declarations: [BasicSelectTestComponent],
     });
     TestBed.overrideProvider(NbFocusKeyManagerFactoryService, { useValue: keyManagerFactoryStub });
+    TestBed.overrideProvider(NbActiveDescendantKeyManagerFactoryService, { useValue: keyManagerFactoryStub });
 
     fixture = TestBed.createComponent(BasicSelectTestComponent);
     fixture.detectChanges();
@@ -1215,4 +1239,116 @@ describe('NbSelect - dynamic options', () => {
       expect(writeValueSpy).toHaveBeenCalledTimes(2);
     }));
   });
+});
+
+@Component({
+  template: `
+    <nb-layout>
+      <nb-layout-column>
+        <nb-select-with-autocomplete
+          [(ngModel)]="selectedValue"
+          [withOptionSearch]="true"
+          (optionSearchChange)="filterValue = $event"
+          (selectOpen)="isOpened = true"
+          (selectClose)="isOpened = false"
+        >
+          <nb-option *ngFor="let option of options" [value]="option">{{ option }}</nb-option>
+        </nb-select-with-autocomplete>
+      </nb-layout-column>
+    </nb-layout>
+  `,
+})
+export class NbSelectWithExperimentalSearchComponent {
+  options: number[] = [1, 2, 3, 4, 5];
+  selectedValue: number = null;
+  filterValue: string = '';
+  isOpened: boolean = false;
+  @ViewChild(NbSelectComponent) selectComponent: NbSelectComponent;
+}
+
+describe('NbSelect - experimental search', () => {
+  let fixture: ComponentFixture<NbSelectWithExperimentalSearchComponent>;
+  let testComponent: NbSelectWithExperimentalSearchComponent;
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [
+        RouterTestingModule.withRoutes([]),
+        FormsModule,
+        NbThemeModule.forRoot(),
+        NbLayoutModule,
+        NbSelectModule,
+      ],
+      declarations: [NbSelectWithExperimentalSearchComponent],
+    });
+
+    fixture = TestBed.createComponent(NbSelectWithExperimentalSearchComponent);
+    testComponent = fixture.componentInstance;
+
+    fixture.detectChanges();
+  });
+
+  it("should update search input and don't emit filterChange when value of select is changed", fakeAsync(() => {
+    const searchInput = testComponent.selectComponent.optionSearchInput.nativeElement;
+
+    expect(searchInput.value).toEqual('');
+    expect(testComponent.filterValue).toEqual('');
+
+    testComponent.selectedValue = 1;
+    fixture.detectChanges();
+    flush();
+    fixture.detectChanges();
+    expect(searchInput.value).toEqual('1');
+    expect(testComponent.filterValue).toEqual('');
+
+    testComponent.selectedValue = 2;
+    fixture.detectChanges();
+    flush();
+    fixture.detectChanges();
+    expect(searchInput.value).toEqual('2');
+    expect(testComponent.filterValue).toEqual('');
+  }));
+
+  it('should mark touched when select button loose focus and select closed', fakeAsync(() => {
+    const touchedSpy = jasmine.createSpy('touched spy');
+
+    const selectFixture = TestBed.createComponent(NbSelectComponent);
+    const selectComponent: NbSelectComponent = selectFixture.componentInstance;
+    selectFixture.detectChanges();
+    flush();
+
+    selectComponent.registerOnTouched(touchedSpy);
+    selectFixture.debugElement.query(By.css('input')).triggerEventHandler('blur', {});
+    expect(touchedSpy).toHaveBeenCalledTimes(1);
+  }));
+
+  it('should make filter value empty and restore input to default after select is closed', fakeAsync(() => {
+    const searchInput = fixture.debugElement.query(By.css('input'));
+
+    testComponent.selectedValue = 1;
+
+    fixture.detectChanges();
+    flush();
+    fixture.detectChanges();
+
+    const initialValue = searchInput.nativeElement.value;
+
+    testComponent.selectComponent.show();
+    searchInput.triggerEventHandler('input', { target: { value: '123' } });
+
+    fixture.detectChanges();
+    flush();
+    fixture.detectChanges();
+
+    expect(testComponent.filterValue).toBe('123');
+
+    testComponent.selectComponent.hide();
+
+    fixture.detectChanges();
+    flush();
+    fixture.detectChanges();
+
+    expect(testComponent.filterValue).toBe('');
+    expect(searchInput.nativeElement.value).toBe(initialValue);
+  }));
 });

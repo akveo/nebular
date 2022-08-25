@@ -12,9 +12,9 @@ import {
   NbCardModule,
   NbFormFieldModule,
   NbIconModule,
-  NbInputModule,
   NbRadioModule,
   NbSelectModule,
+  NbSelectWithAutocompleteModule,
 } from '@nebular/theme';
 import { SelectRoutingModule } from './select-routing.module';
 import { SelectCleanComponent } from './select-clean.component';
@@ -61,6 +61,7 @@ import { SelectSearchShowcaseComponent } from './select-search-showcase.componen
     FormsModule,
     ReactiveFormsModule,
     NbSelectModule,
+    NbSelectWithAutocompleteModule,
     SelectRoutingModule,
     NbCardModule,
     CommonModule,
@@ -68,7 +69,6 @@ import { SelectSearchShowcaseComponent } from './select-search-showcase.componen
     NbButtonModule,
     NbIconModule,
     NbFormFieldModule,
-    NbInputModule,
   ],
 })
 export class SelectModule {}
