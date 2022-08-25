@@ -3,8 +3,8 @@
     <nb-select-with-autocomplete
       placeholder="Select Showcase"
       [(selected)]="selectedItem"
-      [withOptionSearch]="true"
-      (optionSearchChange)="filterValue = $event"
+      [withOptionsAutocomplete]="true"
+      (optionsAutocompleteInputChange)="filterValue = $event"
     >
       <nb-option value="">Option empty</nb-option>
       <nb-option [hidden]="!isEqual(filterValue, 0, 'Option 0')" value="0">Option 0</nb-option>
@@ -16,8 +16,8 @@
     <nb-select-with-autocomplete
       placeholder="Select Showcase"
       [multiple]="true"
-      [withOptionSearch]="true"
-      (optionSearchChange)="filterValue = $event"
+      [withOptionsAutocomplete]="true"
+      (optionsAutocompleteInputChange)="filterValue = $event"
     >
       <nb-option value="">Option empty</nb-option>
       <nb-option [hidden]="!isEqual(filterValue, 0, 'Option 0')" value="0">Option 0</nb-option>

@@ -277,7 +277,7 @@ export class NbSelectWithAutocompleteComponent
    * Filtering itself isn't implemented inside select.
    * So it should be implemented by the user.
    */
-  @Input() withOptionSearch: boolean = false;
+  @Input() withOptionsAutocomplete: boolean = false;
 
   @HostBinding('class')
   get additionalClasses(): string[] {
@@ -293,7 +293,7 @@ export class NbSelectWithAutocompleteComponent
   @Output() selectedChange: EventEmitter<any> = new EventEmitter();
   @Output() selectOpen: EventEmitter<void> = new EventEmitter();
   @Output() selectClose: EventEmitter<void> = new EventEmitter();
-  @Output() optionSearchChange: EventEmitter<string> = new EventEmitter();
+  @Output() optionsAutocompleteInputChange: EventEmitter<string> = new EventEmitter();
 
   /**
    * List of `NbOptionComponent`'s components passed as content.
@@ -312,7 +312,9 @@ export class NbSelectWithAutocompleteComponent
   @ViewChild(NbPortalDirective) portal: NbPortalDirective;
 
   @ViewChild('selectButton', { read: ElementRef }) button: ElementRef<HTMLButtonElement> | undefined;
-  @ViewChild('optionSearchInput', { read: ElementRef }) optionSearchInput: ElementRef<HTMLInputElement> | undefined;
+  @ViewChild('optionsAutocompleteInput', { read: ElementRef }) optionsAutocompleteInput:
+    | ElementRef<HTMLInputElement>
+    | undefined;
 
   /**
    * Determines is select opened.
@@ -322,12 +324,12 @@ export class NbSelectWithAutocompleteComponent
     return this.ref && this.ref.hasAttached();
   }
 
-  get isOptionSearchInputAllowed(): boolean {
-    return this.withOptionSearch && !this.multiple;
+  get isOptionsAutocompleteAllowed(): boolean {
+    return this.withOptionsAutocomplete && !this.multiple;
   }
 
-  get isOptionSearchInputShown(): boolean {
-    return this.isOptionSearchInputAllowed && this.isOpen;
+  get isOptionsAutocompleteInputShown(): boolean {
+    return this.isOptionsAutocompleteAllowed && this.isOpen;
   }
 
   /**
@@ -417,8 +419,8 @@ export class NbSelectWithAutocompleteComponent
    * Returns width of the select button.
    * */
   get hostWidth(): number {
-    if (this.isOptionSearchInputShown) {
-      return this.optionSearchInput.nativeElement.getBoundingClientRect().width;
+    if (this.isOptionsAutocompleteInputShown) {
+      return this.optionsAutocompleteInput.nativeElement.getBoundingClientRect().width;
     }
     return this.button.nativeElement.getBoundingClientRect().width;
   }
@@ -509,8 +511,8 @@ export class NbSelectWithAutocompleteComponent
     }
   }
 
-  onInput(event: Event) {
-    this.optionSearchChange.emit((event.target as HTMLInputElement).value);
+  onAutocompleteInputChange(event: Event) {
+    this.optionsAutocompleteInputChange.emit((event.target as HTMLInputElement).value);
   }
 
   show() {
@@ -518,8 +520,8 @@ export class NbSelectWithAutocompleteComponent
       this.attachToOverlay();
 
       this.positionStrategy.positionChange.pipe(take(1), takeUntil(this.destroy$)).subscribe(() => {
-        if (this.isOptionSearchInputShown) {
-          this.optionSearchInput.nativeElement.focus();
+        if (this.isOptionsAutocompleteInputShown) {
+          this.optionsAutocompleteInput.nativeElement.focus();
         }
         this.setActiveOption();
       });
@@ -536,8 +538,8 @@ export class NbSelectWithAutocompleteComponent
       this.cd.markForCheck();
       this.selectClose.emit();
 
-      this.optionSearchInput.nativeElement.value = this.selectionView;
-      this.optionSearchChange.emit('');
+      this.optionsAutocompleteInput.nativeElement.value = this.selectionView;
+      this.optionsAutocompleteInputChange.emit('');
     }
   }
 
@@ -644,7 +646,7 @@ export class NbSelectWithAutocompleteComponent
       this.subscribeOnPositionChange();
       this.createKeyManager();
       this.subscribeOnOverlayKeys();
-      this.subscribeOnOptionSearchChange();
+      this.subscribeOnOptionsAutocompleteChange();
     }
 
     this.ref.attach(this.portal);
@@ -670,7 +672,7 @@ export class NbSelectWithAutocompleteComponent
 
   protected createKeyManager(): void {
     let keyManager: ListKeyManager<NbOptionComponent>;
-    if (this.isOptionSearchInputAllowed) {
+    if (this.isOptionsAutocompleteAllowed) {
       keyManager = this.activeDescendantKeyManagerFactoryService.create(this.options);
     } else {
       keyManager = this.focusKeyManagerFactoryService.create(this.options).withTypeAhead(200);
@@ -681,8 +683,8 @@ export class NbSelectWithAutocompleteComponent
   }
 
   protected createPositionStrategy(): NbAdjustableConnectedPositionStrategy {
-    const element: ElementRef<HTMLInputElement | HTMLButtonElement> = this.isOptionSearchInputAllowed
-      ? this.optionSearchInput
+    const element: ElementRef<HTMLInputElement | HTMLButtonElement> = this.isOptionsAutocompleteAllowed
+      ? this.optionsAutocompleteInput
       : this.button;
     return this.positionBuilder
       .connectedTo(element)
@@ -748,7 +750,7 @@ export class NbSelectWithAutocompleteComponent
         if (event.keyCode === ESCAPE) {
           this.hide();
           this.button.nativeElement.focus();
-        } else if (event.keyCode === ENTER && this.isOptionSearchInputShown) {
+        } else if (event.keyCode === ENTER && this.isOptionsAutocompleteInputShown) {
           event.preventDefault();
           const activeItem = this.keyManager.activeItem;
           if (activeItem) {
@@ -765,11 +767,11 @@ export class NbSelectWithAutocompleteComponent
     });
   }
 
-  protected subscribeOnOptionSearchChange() {
-    this.optionSearchChange
+  protected subscribeOnOptionsAutocompleteChange() {
+    this.optionsAutocompleteInputChange
       .pipe(
         observeOn(animationFrameScheduler),
-        filter(() => this.isOptionSearchInputShown),
+        filter(() => this.isOptionsAutocompleteInputShown),
         takeUntil(this.destroy$),
       )
       .subscribe(() => {
@@ -786,7 +788,7 @@ export class NbSelectWithAutocompleteComponent
       finalize(() => this.focusMonitor.stopMonitoring(this.button)),
     );
 
-    const filterInputFocus$ = this.focusMonitor.monitor(this.optionSearchInput).pipe(
+    const filterInputFocus$ = this.focusMonitor.monitor(this.optionsAutocompleteInput).pipe(
       map((origin) => !!origin),
       startWith(false),
       finalize(() => this.focusMonitor.stopMonitoring(this.button)),
