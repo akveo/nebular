@@ -11,6 +11,7 @@ import { Component } from '@angular/core';
   templateUrl: './select-autocomplete-showcase.component.html',
 })
 export class SelectAutocompleteShowcaseComponent {
+  withAutocomplete = true;
   selectedItem = '2';
   filterValue = '';
 

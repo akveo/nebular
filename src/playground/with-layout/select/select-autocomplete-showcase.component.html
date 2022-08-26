@@ -1,9 +1,10 @@
 <nb-card size="small">
   <nb-card-body>
+    <button nbButton (click)="withAutocomplete = !withAutocomplete">Toggle autocomplete: {{ withAutocomplete }}</button>
     <nb-select-with-autocomplete
       placeholder="Select Showcase"
       [(selected)]="selectedItem"
-      [withOptionsAutocomplete]="true"
+      [withOptionsAutocomplete]="withAutocomplete"
       (optionsAutocompleteInputChange)="filterValue = $event"
     >
       <nb-option value="">Option empty</nb-option>
@@ -16,7 +17,7 @@
     <nb-select-with-autocomplete
       placeholder="Select Showcase"
       [multiple]="true"
-      [withOptionsAutocomplete]="true"
+      [withOptionsAutocomplete]="withAutocomplete"
       (optionsAutocompleteInputChange)="filterValue = $event"
     >
       <nb-option value="">Option empty</nb-option>
