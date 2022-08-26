@@ -31,7 +31,7 @@ import {
 import { NgClass } from '@angular/common';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { ListKeyManager } from '@angular/cdk/a11y';
-import { merge, Subject, BehaviorSubject, from, combineLatest, animationFrameScheduler } from 'rxjs';
+import { merge, Subject, BehaviorSubject, from, combineLatest, animationFrameScheduler, EMPTY } from 'rxjs';
 import { startWith, switchMap, takeUntil, filter, map, finalize, take, observeOn } from 'rxjs/operators';
 
 import { NbStatusService } from '../../services/status.service';
@@ -44,7 +44,7 @@ import {
 import { NbOverlayRef, NbPortalDirective, NbScrollStrategy } from '../cdk/overlay/mapping';
 import { NbOverlayService } from '../cdk/overlay/overlay-service';
 import { NbTrigger, NbTriggerStrategy, NbTriggerStrategyBuilderService } from '../cdk/overlay/overlay-trigger';
-import { NbFocusKeyManagerFactoryService } from '../cdk/a11y/focus-key-manager';
+import { NbFocusKeyManager, NbFocusKeyManagerFactoryService } from '../cdk/a11y/focus-key-manager';
 import { ENTER, ESCAPE } from '../cdk/keycodes/keycodes';
 import { NbComponentSize } from '../component-size';
 import { NbComponentShape } from '../component-shape';
@@ -56,7 +56,10 @@ import { NB_SELECT_INJECTION_TOKEN } from '../select/select-injection-tokens';
 import { NbFormFieldControl, NbFormFieldControlConfig } from '../form-field/form-field-control';
 import { NbFocusMonitor } from '../cdk/a11y/a11y.module';
 import { NbScrollStrategies } from '../cdk/adapter/block-scroll-strategy-adapter';
-import { NbActiveDescendantKeyManagerFactoryService } from '../cdk/a11y/descendant-key-manager';
+import {
+  NbActiveDescendantKeyManager,
+  NbActiveDescendantKeyManagerFactoryService,
+} from '../cdk/a11y/descendant-key-manager';
 import {
   NbSelectAppearance,
   NbSelectCompareFunction,
@@ -277,7 +280,20 @@ export class NbSelectWithAutocompleteComponent
    * Filtering itself isn't implemented inside select.
    * So it should be implemented by the user.
    */
-  @Input() withOptionsAutocomplete: boolean = false;
+  @Input()
+  set withOptionsAutocomplete(value: boolean) {
+    this._withOptionsAutocomplete = value;
+    this.updatePositionStrategy();
+    this.updateCurrentKeyManager();
+
+    if (!value) {
+      this.resetAutocompleteInput();
+    }
+  }
+  get withOptionsAutocomplete(): boolean {
+    return this._withOptionsAutocomplete;
+  }
+  protected _withOptionsAutocomplete: boolean = false;
 
   @HostBinding('class')
   get additionalClasses(): string[] {
@@ -337,7 +353,9 @@ export class NbSelectWithAutocompleteComponent
    * */
   selectionModel: NbOptionComponent[] = [];
 
-  positionStrategy: NbAdjustableConnectedPositionStrategy;
+  positionStrategy$: BehaviorSubject<NbAdjustableConnectedPositionStrategy | undefined> = new BehaviorSubject(
+    undefined,
+  );
 
   /**
    * Current overlay position because of we have to toggle overlayPosition
@@ -353,7 +371,9 @@ export class NbSelectWithAutocompleteComponent
 
   protected destroy$ = new Subject<void>();
 
-  protected keyManager: ListKeyManager<NbOptionComponent>;
+  protected currentKeyManager: ListKeyManager<NbOptionComponent>;
+  protected focusKeyManager: NbFocusKeyManager<NbOptionComponent>;
+  protected activeDescendantKeyManager: NbActiveDescendantKeyManager<NbOptionComponent>;
 
   /**
    * If a user assigns value before content nb-options's rendered the value will be putted in this variable.
@@ -519,12 +539,18 @@ export class NbSelectWithAutocompleteComponent
     if (this.shouldShow()) {
       this.attachToOverlay();
 
-      this.positionStrategy.positionChange.pipe(take(1), takeUntil(this.destroy$)).subscribe(() => {
-        if (this.isOptionsAutocompleteInputShown) {
-          this.optionsAutocompleteInput.nativeElement.focus();
-        }
-        this.setActiveOption();
-      });
+      this.positionStrategy$
+        .pipe(
+          switchMap((positionStrategy) => positionStrategy.positionChange ?? EMPTY),
+          take(1),
+          takeUntil(this.destroy$),
+        )
+        .subscribe(() => {
+          if (this.isOptionsAutocompleteInputShown) {
+            this.optionsAutocompleteInput.nativeElement.focus();
+          }
+          this.setActiveOption();
+        });
 
       this.selectOpen.emit();
 
@@ -538,8 +564,7 @@ export class NbSelectWithAutocompleteComponent
       this.cd.markForCheck();
       this.selectClose.emit();
 
-      this.optionsAutocompleteInput.nativeElement.value = this.selectionView;
-      this.optionsAutocompleteInputChange.emit('');
+      this.resetAutocompleteInput();
     }
   }
 
@@ -654,32 +679,52 @@ export class NbSelectWithAutocompleteComponent
 
   protected setActiveOption() {
     if (this.selectionModel.length && !this.selectionModel[0].hidden) {
-      this.keyManager.setActiveItem(this.selectionModel[0]);
+      this.currentKeyManager?.setActiveItem(this.selectionModel[0]);
     } else {
-      this.keyManager.setFirstItemActive();
+      this.currentKeyManager?.setFirstItemActive();
     }
   }
 
   protected createOverlay() {
     const scrollStrategy = this.createScrollStrategy();
-    this.positionStrategy = this.createPositionStrategy();
+    this.positionStrategy$.next(this.createPositionStrategy());
     this.ref = this.overlay.create({
-      positionStrategy: this.positionStrategy,
+      positionStrategy: this.positionStrategy$.value,
       scrollStrategy,
       panelClass: this.optionsPanelClass,
     });
   }
 
   protected createKeyManager(): void {
-    let keyManager: ListKeyManager<NbOptionComponent>;
+    this.activeDescendantKeyManager = this.activeDescendantKeyManagerFactoryService
+      .create(this.options)
+      .skipPredicate((option) => {
+        return this.isOptionHidden(option);
+      });
+
+    this.focusKeyManager = this.focusKeyManagerFactoryService
+      .create(this.options)
+      .withTypeAhead(200)
+      .skipPredicate((option) => {
+        return this.isOptionHidden(option);
+      });
+
+    this.updateCurrentKeyManager();
+  }
+
+  protected updateCurrentKeyManager() {
+    this.currentKeyManager?.setActiveItem(-1);
     if (this.isOptionsAutocompleteAllowed) {
-      keyManager = this.activeDescendantKeyManagerFactoryService.create(this.options);
+      this.currentKeyManager = this.activeDescendantKeyManager;
     } else {
-      keyManager = this.focusKeyManagerFactoryService.create(this.options).withTypeAhead(200);
+      this.currentKeyManager = this.focusKeyManager;
     }
-    this.keyManager = keyManager.skipPredicate((option) => {
-      return this.isOptionHidden(option);
-    });
+    this.setActiveOption();
+  }
+
+  protected resetAutocompleteInput() {
+    this.optionsAutocompleteInput.nativeElement.value = this.selectionView;
+    this.optionsAutocompleteInputChange.emit('');
   }
 
   protected createPositionStrategy(): NbAdjustableConnectedPositionStrategy {
@@ -691,6 +736,16 @@ export class NbSelectWithAutocompleteComponent
       .position(NbPosition.BOTTOM)
       .offset(this.optionsOverlayOffset)
       .adjustment(NbAdjustment.VERTICAL);
+  }
+
+  protected updatePositionStrategy(): void {
+    if (this.ref) {
+      this.positionStrategy$.next(this.createPositionStrategy());
+      this.ref.updatePositionStrategy(this.positionStrategy$.value);
+      if (this.isOpen) {
+        this.ref.updatePosition();
+      }
+    }
   }
 
   protected createScrollStrategy(): NbScrollStrategy {
@@ -716,10 +771,15 @@ export class NbSelectWithAutocompleteComponent
   }
 
   protected subscribeOnPositionChange() {
-    this.positionStrategy.positionChange.pipe(takeUntil(this.destroy$)).subscribe((position: NbPosition) => {
-      this.overlayPosition = position;
-      this.cd.detectChanges();
-    });
+    this.positionStrategy$
+      .pipe(
+        switchMap((positionStrategy) => positionStrategy.positionChange ?? EMPTY),
+        takeUntil(this.destroy$),
+      )
+      .subscribe((position: NbPosition) => {
+        this.overlayPosition = position;
+        this.cd.detectChanges();
+      });
   }
 
   protected subscribeOnOptionClick() {
@@ -752,19 +812,24 @@ export class NbSelectWithAutocompleteComponent
           this.button.nativeElement.focus();
         } else if (event.keyCode === ENTER && this.isOptionsAutocompleteInputShown) {
           event.preventDefault();
-          const activeItem = this.keyManager.activeItem;
+          const activeItem = this.currentKeyManager.activeItem;
           if (activeItem) {
             this.selectOption(activeItem);
           }
         } else {
-          this.keyManager.onKeydown(event);
+          this.currentKeyManager.onKeydown(event);
         }
       });
 
-    this.keyManager.tabOut.pipe(takeUntil(this.destroy$)).subscribe(() => {
-      this.hide();
-      this.onTouched();
-    });
+    merge(
+      this.focusKeyManager.tabOut.pipe(filter(() => !this.isOptionsAutocompleteInputShown)),
+      this.activeDescendantKeyManager.tabOut.pipe(filter(() => this.isOptionsAutocompleteInputShown)),
+    )
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(() => {
+        this.hide();
+        this.onTouched();
+      });
   }
 
   protected subscribeOnOptionsAutocompleteChange() {
@@ -775,8 +840,8 @@ export class NbSelectWithAutocompleteComponent
         takeUntil(this.destroy$),
       )
       .subscribe(() => {
-        if (this.isOptionHidden(this.keyManager.activeItem)) {
-          this.keyManager.setFirstItemActive();
+        if (this.isOptionHidden(this.currentKeyManager.activeItem)) {
+          this.currentKeyManager.setFirstItemActive();
         }
       });
   }
