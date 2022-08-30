@@ -617,7 +617,7 @@ export class NbSelectWithAutocompleteComponent
     this.selectionModel.forEach((option: NbOptionComponent) => option.deselect());
     this.selectionModel = [];
     this.hide();
-    this.button.nativeElement.focus();
+    this.focusButton();
     this.emitSelected(this.multiple ? [] : null);
   }
 
@@ -645,8 +645,7 @@ export class NbSelectWithAutocompleteComponent
     this.selectionModel = [option];
     option.select();
     this.hide();
-    this.button.nativeElement.focus();
-
+    this.focusButton();
     this.emitSelected(option.value);
   }
 
@@ -809,7 +808,7 @@ export class NbSelectWithAutocompleteComponent
       .subscribe((event: KeyboardEvent) => {
         if (event.keyCode === ESCAPE) {
           this.hide();
-          this.button.nativeElement.focus();
+          this.focusButton();
         } else if (event.keyCode === ENTER && this.isOptionsAutocompleteInputShown) {
           event.preventDefault();
           const activeItem = this.currentKeyManager.activeItem;
@@ -877,6 +876,18 @@ export class NbSelectWithAutocompleteComponent
         },
       }
     );
+  }
+
+  protected focusButton() {
+    /**
+     * Need to wrap with setTimeout
+     * because otherwise focus could be called
+     * when the component hasn't rerendered the button
+     * which was hidden by `isOptionsAutocompleteInputShown` property.
+     */
+    setTimeout(() => {
+      this.button?.nativeElement?.focus();
+    });
   }
 
   /**
