@@ -1,0 +1,66 @@
+/*
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
+@use '../../styles/theming' as *;
+@use '../form-field/form-field.component.theme' as form-field-theme;
+@use 'select-with-autocomplete-outline';
+@use 'select-with-autocomplete-filled';
+@use 'select-with-autocomplete-hero';
+
+@mixin nb-select-with-autocomplete-theme() {
+  nb-select-with-autocomplete .select-button {
+    min-width: nb-theme(select-min-width);
+    cursor: nb-theme(select-cursor);
+    font-family: nb-theme(select-text-font-family);
+
+    &.placeholder {
+      font-family: nb-theme(select-placeholder-text-font-family);
+    }
+    &:focus {
+      outline: none;
+    }
+    &[disabled] {
+      cursor: nb-theme(select-disabled-cursor);
+    }
+  }
+
+  @each $size in nb-get-sizes() {
+    nb-select-with-autocomplete.size-#{$size} {
+      .select-button {
+        font-size: nb-theme(select-#{$size}-text-font-size);
+        font-weight: nb-theme(select-#{$size}-text-font-weight);
+        line-height: nb-theme(select-#{$size}-text-line-height);
+
+        &.placeholder {
+          font-size: nb-theme(select-#{$size}-placeholder-text-font-size);
+          font-weight: nb-theme(select-#{$size}-placeholder-text-font-weight);
+        }
+
+        &.empty::before {
+          content: ' ';
+          display: block;
+          height: nb-theme(select-#{$size}-text-line-height);
+        }
+      }
+
+      &:not(.full-width) {
+        max-width: nb-theme(select-#{$size}-max-width);
+      }
+    }
+  }
+
+  @each $shape in nb-get-shapes() {
+    nb-select-with-autocomplete.shape-#{$shape} .select-button {
+      border-radius: nb-theme(select-#{$shape}-border-radius);
+    }
+  }
+
+  @include select-with-autocomplete-outline.select-with-autocomplete-outline();
+  @include select-with-autocomplete-filled.select-with-autocomplete-filled();
+  @include select-with-autocomplete-hero.select-with-autocomplete-hero();
+
+  @include form-field-theme.nb-form-field-root-component('nb-select-with-autocomplete');
+}
