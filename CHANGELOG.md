@@ -1,3 +1,13 @@
+<a name="9.1.0-rc.2"></a>
+# [9.1.0-rc.2](https://github.com/akveo/nebular/compare/v9.1.0-rc.1...v9.1.0-rc.2) (2022-08-31)
+
+
+### Features
+
+* add keyboad navigation to select with autocomplete ([#3097](https://github.com/akveo/nebular/issues/3097)) ([c52fe3a](https://github.com/akveo/nebular/commit/c52fe3a))
+
+
+
 <a name="9.1.0-rc.1"></a>
 # [9.1.0-rc.1](https://github.com/akveo/nebular/compare/v9.0.3...v9.1.0-rc.1) (2022-08-04)
 
