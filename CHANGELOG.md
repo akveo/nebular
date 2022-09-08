@@ -1,3 +1,13 @@
+<a name="9.1.0-rc.3"></a>
+# [9.1.0-rc.3](https://github.com/akveo/nebular/compare/v9.1.0-rc.2...v9.1.0-rc.3) (2022-09-08)
+
+
+### Bug Fixes
+
+* **select-with-autocomplete:** fix first render with disabled autocomplete ([#3104](https://github.com/akveo/nebular/issues/3104)) ([efcd690](https://github.com/akveo/nebular/commit/efcd690))
+
+
+
 <a name="9.1.0-rc.2"></a>
 # [9.1.0-rc.2](https://github.com/akveo/nebular/compare/v9.1.0-rc.1...v9.1.0-rc.2) (2022-08-31)
 
