@@ -722,8 +722,10 @@ export class NbSelectWithAutocompleteComponent
   }
 
   protected resetAutocompleteInput() {
-    this.optionsAutocompleteInput.nativeElement.value = this.selectionView;
-    this.optionsAutocompleteInputChange.emit('');
+    if (this.optionsAutocompleteInput?.nativeElement) {
+      this.optionsAutocompleteInput.nativeElement.value = this.selectionView;
+      this.optionsAutocompleteInputChange.emit('');
+    }
   }
 
   protected createPositionStrategy(): NbAdjustableConnectedPositionStrategy {
