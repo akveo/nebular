@@ -38,6 +38,10 @@
         background-color: nb-theme(select-filled-#{$status}-hover-background-color);
         border-color: nb-theme(select-filled-#{$status}-hover-border-color);
       }
+      &:focus:hover {
+        background-color: nb-theme(select-filled-#{$status}-focus-and-hover-background-color);
+        border-color: nb-theme(select-filled-#{$status}-focus-and-hover-border-color);
+      }
 
       &[disabled] {
         background-color: nb-theme(select-filled-#{$status}-disabled-background-color);
