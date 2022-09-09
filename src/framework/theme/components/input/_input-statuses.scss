@@ -25,6 +25,10 @@
         background-color: nb-theme(input-#{$status}-hover-background-color);
         border-color: nb-theme(input-#{$status}-hover-border-color);
       }
+      &:focus:hover {
+        background-color: nb-theme(input-#{$status}-focus-and-hover-background-color);
+        border-color: nb-theme(input-#{$status}-focus-and-hover-border-color);
+      }
 
       &:disabled {
         background-color: nb-theme(input-#{$status}-disabled-background-color);

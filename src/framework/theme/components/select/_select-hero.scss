@@ -39,6 +39,11 @@
         $right-color: nb-theme(select-hero-#{$status}-hover-right-background-color);
         background-image: linear-gradient(to right, $left-color, $right-color);
       }
+      &:focus:hover {
+        $left-color: nb-theme(select-hero-#{$status}-focus-and-hover-left-background-color);
+        $right-color: nb-theme(select-hero-#{$status}-focus-and-hover-right-background-color);
+        background-image: linear-gradient(to right, $left-color, $right-color);
+      }
       &[disabled] {
         color: nb-theme(select-hero-#{$status}-disabled-text-color);
         background-color: nb-theme(select-hero-#{$status}-disabled-background-color);
