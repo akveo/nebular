@@ -1,3 +1,13 @@
+<a name="9.1.0-rc.4"></a>
+# [9.1.0-rc.4](https://github.com/akveo/nebular/compare/v9.1.0-rc.3...v9.1.0-rc.4) (2022-09-09)
+
+
+### Features
+
+* **input:** add more input color options ([#3108](https://github.com/akveo/nebular/issues/3108)) ([54da714](https://github.com/akveo/nebular/commit/54da714))
+
+
+
 <a name="9.1.0-rc.3"></a>
 # [9.1.0-rc.3](https://github.com/akveo/nebular/compare/v9.1.0-rc.2...v9.1.0-rc.3) (2022-09-08)
 
