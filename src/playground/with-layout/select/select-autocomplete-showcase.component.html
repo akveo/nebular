@@ -1,10 +1,12 @@
 <nb-card size="small">
   <nb-card-body>
     <button nbButton (click)="withAutocomplete = !withAutocomplete">Toggle autocomplete: {{ withAutocomplete }}</button>
+    <button nbButton (click)="multiple = !multiple">Toggle multiple: {{ multiple }}</button>
     <nb-select-with-autocomplete
       placeholder="Select Showcase"
       [(selected)]="selectedItem"
       [withOptionsAutocomplete]="withAutocomplete"
+      [multiple]="multiple"
       (optionsAutocompleteInputChange)="filterValue = $event"
     >
       <nb-option value="">Option empty</nb-option>

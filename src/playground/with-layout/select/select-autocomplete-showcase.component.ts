@@ -12,6 +12,7 @@ import { Component } from '@angular/core';
 })
 export class SelectAutocompleteShowcaseComponent {
   withAutocomplete = true;
+  multiple = false;
   selectedItem = '2';
   filterValue = '';
 
