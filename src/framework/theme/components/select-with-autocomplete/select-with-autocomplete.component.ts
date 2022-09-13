@@ -256,6 +256,9 @@ export class NbSelectWithAutocompleteComponent
   }
   set multiple(value: boolean) {
     this._multiple = convertToBoolProperty(value);
+
+    this.updatePositionStrategy();
+    this.updateCurrentKeyManager();
   }
   protected _multiple: boolean = false;
   static ngAcceptInputType_multiple: NbBooleanInput;
