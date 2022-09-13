@@ -472,7 +472,7 @@ export class NbSelectWithAutocompleteComponent
       return this.selectionModel.map((option: NbOptionComponent) => option.content).join(', ');
     }
 
-    return this.selectionModel[0]?.content ?? '';
+    return this.selectionModel[0]?.content?.trim() ?? '';
   }
 
   ngOnChanges({ disabled, status, size, fullWidth }: SimpleChanges) {
