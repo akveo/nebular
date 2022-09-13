@@ -282,7 +282,7 @@ export class NbSelectWithAutocompleteComponent
    */
   @Input()
   set withOptionsAutocomplete(value: boolean) {
-    this._withOptionsAutocomplete = value;
+    this._withOptionsAutocomplete = convertToBoolProperty(value);
     this.updatePositionStrategy();
     this.updateCurrentKeyManager();
 
