@@ -42,6 +42,7 @@
     [fieldSize]="size"
     (blur)="trySetTouched()"
     (click)="$event.stopPropagation()"
+    (dblclick)="$event.stopPropagation()"
     (input)="onAutocompleteInputChange($event)"
   />
   <nb-icon nbSuffix icon="chevron-up-outline" pack="nebular-essentials" aria-hidden="true"> </nb-icon>
