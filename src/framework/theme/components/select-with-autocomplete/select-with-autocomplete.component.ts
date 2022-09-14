@@ -256,6 +256,9 @@ export class NbSelectWithAutocompleteComponent
   }
   set multiple(value: boolean) {
     this._multiple = convertToBoolProperty(value);
+
+    this.updatePositionStrategy();
+    this.updateCurrentKeyManager();
   }
   protected _multiple: boolean = false;
   static ngAcceptInputType_multiple: NbBooleanInput;
@@ -282,7 +285,7 @@ export class NbSelectWithAutocompleteComponent
    */
   @Input()
   set withOptionsAutocomplete(value: boolean) {
-    this._withOptionsAutocomplete = value;
+    this._withOptionsAutocomplete = convertToBoolProperty(value);
     this.updatePositionStrategy();
     this.updateCurrentKeyManager();
 
@@ -469,7 +472,7 @@ export class NbSelectWithAutocompleteComponent
       return this.selectionModel.map((option: NbOptionComponent) => option.content).join(', ');
     }
 
-    return this.selectionModel[0]?.content ?? '';
+    return this.selectionModel[0]?.content?.trim() ?? '';
   }
 
   ngOnChanges({ disabled, status, size, fullWidth }: SimpleChanges) {
