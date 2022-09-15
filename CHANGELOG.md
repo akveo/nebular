@@ -1,3 +1,13 @@
+<a name="9.1.0-rc.5"></a>
+# [9.1.0-rc.5](https://github.com/akveo/nebular/compare/v9.1.0-rc.4...v9.1.0-rc.5) (2022-09-15)
+
+
+### Bug Fixes
+
+* **select-with-autocomplete:** improve select open after input changed ([#3110](https://github.com/akveo/nebular/issues/3110)) ([eaa036b](https://github.com/akveo/nebular/commit/eaa036b))
+
+
+
 <a name="9.1.0-rc.4"></a>
 # [9.1.0-rc.4](https://github.com/akveo/nebular/compare/v9.1.0-rc.3...v9.1.0-rc.4) (2022-09-09)
 
