@@ -448,6 +448,8 @@ export class NbSelectWithAutocompleteComponent
     return this.button.nativeElement.getBoundingClientRect().width;
   }
 
+  lastShownButtonWidth: number | undefined = undefined;
+
   get selectButtonClasses(): string[] {
     const classes = [];
 
@@ -540,6 +542,8 @@ export class NbSelectWithAutocompleteComponent
 
   show() {
     if (this.shouldShow()) {
+      this.lastShownButtonWidth = this.hostWidth;
+
       this.attachToOverlay();
 
       this.positionStrategy$
