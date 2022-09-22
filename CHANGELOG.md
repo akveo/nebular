@@ -1,3 +1,13 @@
+<a name="9.1.0-rc.6"></a>
+# [9.1.0-rc.6](https://github.com/akveo/nebular/compare/v9.1.0-rc.5...v9.1.0-rc.6) (2022-09-22)
+
+
+### Bug Fixes
+
+* **select-with-autocomplete:** fix select autocomplete width ([#3113](https://github.com/akveo/nebular/issues/3113)) ([078c9f3](https://github.com/akveo/nebular/commit/078c9f3))
+
+
+
 <a name="9.1.0-rc.5"></a>
 # [9.1.0-rc.5](https://github.com/akveo/nebular/compare/v9.1.0-rc.4...v9.1.0-rc.5) (2022-09-15)
 
