@@ -12,9 +12,9 @@ import {
   NbCardModule,
   NbFormFieldModule,
   NbIconModule,
-  NbInputModule,
   NbRadioModule,
   NbSelectModule,
+  NbSelectWithAutocompleteModule,
 } from '@nebular/theme';
 import { SelectRoutingModule } from './select-routing.module';
 import { SelectCleanComponent } from './select-clean.component';
@@ -34,7 +34,7 @@ import { SelectInteractiveComponent } from './select-interactive.component';
 import { SelectTestComponent } from './select-test.component';
 import { SelectCompareWithComponent } from './select-compare-with.component';
 import { SelectIconComponent } from './select-icon.component';
-import { SelectSearchShowcaseComponent } from './select-search-showcase.component';
+import { SelectAutocompleteShowcaseComponent } from './select-autocomplete-showcase.component';
 
 @NgModule({
   declarations: [
@@ -55,12 +55,13 @@ import { SelectSearchShowcaseComponent } from './select-search-showcase.componen
     SelectTestComponent,
     SelectCompareWithComponent,
     SelectIconComponent,
-    SelectSearchShowcaseComponent,
+    SelectAutocompleteShowcaseComponent,
   ],
   imports: [
     FormsModule,
     ReactiveFormsModule,
     NbSelectModule,
+    NbSelectWithAutocompleteModule,
     SelectRoutingModule,
     NbCardModule,
     CommonModule,
@@ -68,7 +69,6 @@ import { SelectSearchShowcaseComponent } from './select-search-showcase.componen
     NbButtonModule,
     NbIconModule,
     NbFormFieldModule,
-    NbInputModule,
   ],
 })
 export class SelectModule {}

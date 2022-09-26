@@ -1,4 +1,5 @@
 <button
+  [hidden]="isOptionsAutocompleteInputShown"
   [disabled]="disabled"
   [ngClass]="selectButtonClasses"
   (blur)="trySetTouched()"
@@ -28,6 +29,25 @@
   >
   </nb-icon>
 </button>
+
+<nb-form-field [hidden]="!isOptionsAutocompleteInputShown">
+  <input
+    nbInput
+    fullWidth
+    [style.max-width.px]="lastShownButtonWidth"
+    #optionsAutocompleteInput
+    [value]="selectionView"
+    [placeholder]="placeholder"
+    [status]="status"
+    [shape]="shape"
+    [fieldSize]="size"
+    (blur)="trySetTouched()"
+    (click)="$event.stopPropagation()"
+    (dblclick)="$event.stopPropagation()"
+    (input)="onAutocompleteInputChange($event)"
+  />
+  <nb-icon nbSuffix icon="chevron-up-outline" pack="nebular-essentials" aria-hidden="true"> </nb-icon>
+</nb-form-field>
 
 <nb-option-list
   *nbPortal

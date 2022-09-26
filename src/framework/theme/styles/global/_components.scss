@@ -36,6 +36,7 @@
 @forward '../../components/popover/popover.component.theme';
 @forward '../../components/context-menu/context-menu.component.theme';
 @forward '../../components/select/select.component.theme';
+@forward '../../components/select-with-autocomplete/select-with-autocomplete.component.theme';
 @forward '../../components/option/option-list.component.theme';
 @forward '../../components/toastr/toast.component.theme';
 @forward '../../components/tooltip/tooltip.component.theme';
@@ -77,6 +78,8 @@
 @use '../../components/popover/popover.component.theme' as popover-theme;
 @use '../../components/context-menu/context-menu.component.theme' as context-menu-theme;
 @use '../../components/select/select.component.theme' as select-theme;
+@use '../../components/select-with-autocomplete/select-with-autocomplete.component.theme' as
+  select-with-autocomplete-theme;
 @use '../../components/option/option-list.component.theme' as option-list-theme;
 @use '../../components/toastr/toast.component.theme' as toast-theme;
 @use '../../components/tooltip/tooltip.component.theme' as tooltip-theme;
@@ -120,6 +123,7 @@
   @include popover-theme.nb-popover-theme();
   @include context-menu-theme.nb-context-menu-theme();
   @include select-theme.nb-select-theme();
+  @include select-with-autocomplete-theme.nb-select-with-autocomplete-theme();
   @include option-list-theme.nb-option-list-theme();
   @include toast-theme.nb-toast-theme();
   @include tooltip-theme.nb-tooltip-theme();
