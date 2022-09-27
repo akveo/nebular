@@ -457,8 +457,10 @@ export class NbDatepickerDirective<D> implements OnDestroy, ControlValueAccessor
         takeUntil(this.destroy$),
       )
       .subscribe(([prevFormat, nextFormat]) => {
-        const date = this.datepickerAdapter.parse(this.inputValue, prevFormat);
-        this.writeInput(date);
+        if (this.inputValue) {
+          const date = this.datepickerAdapter.parse(this.inputValue, prevFormat);
+          this.writeInput(date);
+        }
       });
 
     // In case datepicker component placed after the input with datepicker directive,

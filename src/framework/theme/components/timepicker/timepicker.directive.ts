@@ -199,8 +199,10 @@ export class NbTimePickerDirective<D> implements AfterViewInit, ControlValueAcce
         takeUntil(this.destroy$),
       )
       .subscribe(([prevFormat, nextFormat]) => {
-        const date = this.dateService.parse(this.inputValue, prevFormat);
-        this.writeValue(date);
+        if (this.inputValue) {
+          const date = this.dateService.parse(this.inputValue, prevFormat);
+          this.writeValue(date);
+        }
       });
   }
   protected _timePickerComponent: NbTimePickerComponent<D>;
