@@ -44,7 +44,7 @@ interface NbTimePartOption {
   exportAs: 'nbTimepicker',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NbTimePickerComponent<D> implements OnChanges, OnInit {
+export class NbTimePickerComponent<D> implements OnChanges {
   protected blur$: Subject<void> = new Subject<void>();
 
   fullTimeOptions: D[];
@@ -54,6 +54,8 @@ export class NbTimePickerComponent<D> implements OnChanges, OnInit {
   readonly dayPeriodColumnOptions = [NbDayPeriod.AM, NbDayPeriod.PM];
   hostRef: ElementRef;
   isAM = true;
+
+  timepickerFormatChange$: Subject<void> = new Subject();
 
   /**
    * Emits when timepicker looses focus.
@@ -73,6 +75,8 @@ export class NbTimePickerComponent<D> implements OnChanges, OnInit {
     this._timeFormat = timeFormat;
   }
   protected _timeFormat: string;
+
+  computedTimeFormat: string = this.setupTimeFormat();
 
   /**
    * Defines 12 hours format .
@@ -174,12 +178,12 @@ export class NbTimePickerComponent<D> implements OnChanges, OnInit {
     this.initFromConfig(this.config);
   }
 
-  ngOnInit(): void {
-    this.timeFormat = this.setupTimeFormat();
-  }
-
   ngOnChanges({ step, twelveHoursFormat, withSeconds, singleColumn }: SimpleChanges): void {
-    this.timeFormat = this.setupTimeFormat();
+    const nextTimeFormat = this.setupTimeFormat();
+    if (nextTimeFormat !== this.computedTimeFormat) {
+      this.computedTimeFormat = nextTimeFormat;
+      this.timepickerFormatChange$.next();
+    }
 
     const isConfigChanged = step || twelveHoursFormat || withSeconds || singleColumn;
 
@@ -292,7 +296,7 @@ export class NbTimePickerComponent<D> implements OnChanges, OnInit {
   }
 
   getFullTimeString(item: D): string {
-    return this.dateService.format(item, this.timeFormat).toUpperCase();
+    return this.dateService.format(item, this.computedTimeFormat).toUpperCase();
   }
 
   isSelectedFullTimeValue(value: D): boolean {
@@ -304,7 +308,7 @@ export class NbTimePickerComponent<D> implements OnChanges, OnInit {
   }
 
   protected buildColumnOptions(): void {
-    this.timeFormat = this.setupTimeFormat();
+    // this.timeFormat = this.setupTimeFormat();
     this.fullTimeOptions = this.singleColumn ? this.calendarTimeModelService.getHoursRange(this.step) : [];
 
     this.hoursColumnOptions = this.generateHours();

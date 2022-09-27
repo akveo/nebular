@@ -11,8 +11,8 @@ import {
   isDevMode,
   Renderer2,
 } from '@angular/core';
-import { filter, map, takeUntil } from 'rxjs/operators';
-import { fromEvent, merge, Subject } from 'rxjs';
+import { distinctUntilChanged, filter, map, pairwise, takeUntil } from 'rxjs/operators';
+import { fromEvent, merge, Subject, Subscription } from 'rxjs';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { NbTimePickerComponent } from './timepicker.component';
 import { NbOverlayRef, NbScrollStrategy } from '../cdk/overlay/mapping';
@@ -189,8 +189,22 @@ export class NbTimePickerDirective<D> implements AfterViewInit, ControlValueAcce
 
   set timepicker(timePicker: NbTimePickerComponent<D>) {
     this._timePickerComponent = timePicker;
+
+    this.pickerInputsChangedSubscription?.unsubscribe();
+    this.pickerInputsChangedSubscription = this._timePickerComponent.timepickerFormatChange$
+      .pipe(
+        map(() => this._timePickerComponent.computedTimeFormat),
+        distinctUntilChanged(),
+        pairwise(),
+        takeUntil(this.destroy$),
+      )
+      .subscribe(([prevFormat, nextFormat]) => {
+        const date = this.dateService.parse(this.inputValue, prevFormat);
+        this.writeValue(date);
+      });
   }
   protected _timePickerComponent: NbTimePickerComponent<D>;
+  protected pickerInputsChangedSubscription: Subscription | undefined;
 
   /**
    * Time picker overlay offset.
@@ -272,7 +286,7 @@ export class NbTimePickerDirective<D> implements AfterViewInit, ControlValueAcce
     this.subscribeOnInputChange();
 
     if (!this.placeholder) {
-      this.renderer.setProperty(this.input, 'placeholder', this.timepicker.timeFormat);
+      this.renderer.setProperty(this.input, 'placeholder', this.timepicker.computedTimeFormat);
     }
     this.triggerStrategy = this.createTriggerStrategy();
     this.subscribeOnTriggers();
@@ -314,7 +328,7 @@ export class NbTimePickerDirective<D> implements AfterViewInit, ControlValueAcce
     this.timepicker.setHost(this.hostRef);
     if (this.inputValue) {
       const val = this.dateService.getId() === 'native' ? this.parseNativeDateString(this.inputValue) : this.inputValue;
-      this.timepicker.date = this.dateService.parse(val, this.timepicker.timeFormat);
+      this.timepicker.date = this.dateService.parse(val, this.timepicker.computedTimeFormat);
     } else {
       this.timepicker.date = this.calendarTimeModelService.getResetTime();
     }
@@ -328,7 +342,7 @@ export class NbTimePickerDirective<D> implements AfterViewInit, ControlValueAcce
 
   protected subscribeOnApplyClick() {
     this.timepicker.onSelectTime.pipe(takeUntil(this.destroy$)).subscribe((value: NbSelectedTimePayload<D>) => {
-      const time = this.dateService.format(value.time, this.timepicker.timeFormat).toUpperCase();
+      const time = this.dateService.format(value.time, this.timepicker.computedTimeFormat).toUpperCase();
       this.inputValue = time;
       this.timepicker.date = value.time;
       this.onChange(value.time);
@@ -416,11 +430,11 @@ export class NbTimePickerDirective<D> implements AfterViewInit, ControlValueAcce
       value = this.parseNativeDateString(value);
     }
 
-    const isValidDate: boolean = this.dateService.isValidDateString(value, this.timepicker.timeFormat);
+    const isValidDate: boolean = this.dateService.isValidDateString(value, this.timepicker.computedTimeFormat);
     if (isValidDate) {
       this.lastInputValue = value;
 
-      const date = this.dateService.parse(value, this.timepicker.timeFormat);
+      const date = this.dateService.parse(value, this.timepicker.computedTimeFormat);
       this.onChange(date);
       this.timepicker.date = date;
     }
@@ -430,7 +444,7 @@ export class NbTimePickerDirective<D> implements AfterViewInit, ControlValueAcce
     if (value) {
       this.timepicker.date = value;
 
-      const timeString = this.dateService.format(value, this.timepicker.timeFormat).toUpperCase();
+      const timeString = this.dateService.format(value, this.timepicker.computedTimeFormat).toUpperCase();
       this.inputValue = timeString;
       this.lastInputValue = timeString;
     }
