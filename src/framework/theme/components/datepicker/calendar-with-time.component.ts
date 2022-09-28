@@ -171,11 +171,8 @@ export class NbCalendarWithTimeComponent<D> extends NbCalendarComponent<D> imple
     this.dateChange.emit(this.dateService.today());
   }
 
-  /**
-   * We don't show seconds with twelve hours format
-   * */
   showSeconds(): boolean {
-    return this.withSeconds && !this.twelveHoursFormat;
+    return this.withSeconds;
   }
 
   isLarge(): boolean {
