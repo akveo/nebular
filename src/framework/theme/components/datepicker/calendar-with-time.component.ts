@@ -35,12 +35,15 @@ import { NbTimePickerComponent } from '../timepicker/timepicker.component';
           [showNavigation]="showNavigation"
           [showWeekNumber]="showWeekNumber"
           [weekNumberSymbol]="weekNumberSymbol"
-          (dateChange)="onDateValueChange($event)">
+          (dateChange)="onDateValueChange($event)"
+        >
         </nb-base-calendar>
-        <div class="timepicker-section"
-             [class.size-large]="isLarge()"
-             [class.timepicker-single-column-width]="singleColumn"
-             [class.timepicker-multiple-column-width]="!singleColumn">
+        <div
+          class="timepicker-section"
+          [class.size-large]="isLarge()"
+          [class.timepicker-single-column-width]="singleColumn"
+          [class.timepicker-multiple-column-width]="!singleColumn"
+        >
           <div class="picker-title">{{ title }}</div>
           <nb-timepicker
             (onSelectTime)="onTimeChange($event)"
@@ -49,7 +52,8 @@ import { NbTimePickerComponent } from '../timepicker/timepicker.component';
             [withSeconds]="showSeconds()"
             [showFooter]="false"
             [singleColumn]="singleColumn"
-            [step]="step">
+            [step]="step"
+          >
           </nb-timepicker>
           <ng-container nbPortalOutlet></ng-container>
         </div>
@@ -115,9 +119,10 @@ export class NbCalendarWithTimeComponent<D> extends NbCalendarComponent<D> imple
   @ViewChild(NbPortalOutletDirective) portalOutlet: NbPortalOutletDirective;
   @ViewChild(NbTimePickerComponent) timepicker: NbTimePickerComponent<D>;
 
-  constructor(protected dateService: NbDateService<D>,
-              public cd: ChangeDetectorRef,
-              protected calendarTimeModelService: NbCalendarTimeModelService<D>,
+  constructor(
+    protected dateService: NbDateService<D>,
+    public cd: ChangeDetectorRef,
+    protected calendarTimeModelService: NbCalendarTimeModelService<D>,
   ) {
     super();
   }
