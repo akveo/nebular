@@ -326,7 +326,7 @@ export class NbTimePickerComponent<D> implements OnChanges {
 
     this.hoursColumnOptions = this.generateHours();
     this.minutesColumnOptions = this.generateMinutesOrSeconds();
-    this.secondsColumnOptions = this.withSeconds ? this.generateMinutesOrSeconds() : [];
+    this.secondsColumnOptions = this.showSeconds() ? this.generateMinutesOrSeconds() : [];
   }
 
   /**

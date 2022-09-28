@@ -158,9 +158,10 @@ export class NbDateTimePickerComponent<D>
     if (this.twelveHoursFormat) {
       this.picker.timeFormat = this.dateService.getTwelveHoursFormat();
     } else {
-      this.picker.timeFormat = this.withSeconds
-        ? this.dateService.getTwentyFourHoursFormatWithSeconds()
-        : this.dateService.getTwentyFourHoursFormat();
+      this.picker.timeFormat =
+        this.withSeconds && !this.singleColumn
+          ? this.dateService.getTwentyFourHoursFormatWithSeconds()
+          : this.dateService.getTwentyFourHoursFormat();
     }
     super.patchWithInputs();
 

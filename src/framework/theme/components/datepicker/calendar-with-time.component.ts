@@ -178,7 +178,7 @@ export class NbCalendarWithTimeComponent<D> extends NbCalendarComponent<D> imple
   }
 
   showSeconds(): boolean {
-    return this.withSeconds;
+    return this.withSeconds && !this.singleColumn;
   }
 
   isLarge(): boolean {
