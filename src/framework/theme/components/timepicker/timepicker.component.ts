@@ -321,7 +321,6 @@ export class NbTimePickerComponent<D> implements OnChanges {
   }
 
   protected buildColumnOptions(): void {
-    // this.timeFormat = this.setupTimeFormat();
     this.fullTimeOptions = this.singleColumn ? this.calendarTimeModelService.getHoursRange(this.step) : [];
 
     this.hoursColumnOptions = this.generateHours();
