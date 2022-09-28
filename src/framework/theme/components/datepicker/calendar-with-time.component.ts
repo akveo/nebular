@@ -49,6 +49,7 @@ import { NbTimePickerComponent } from '../timepicker/timepicker.component';
             (onSelectTime)="onTimeChange($event)"
             [date]="date"
             [twelveHoursFormat]="twelveHoursFormat"
+            [showAmPmLabel]="showAmPmLabel"
             [withSeconds]="showSeconds()"
             [showFooter]="false"
             [singleColumn]="singleColumn"
@@ -82,6 +83,11 @@ export class NbCalendarWithTimeComponent<D> extends NbCalendarComponent<D> imple
    * Defines 12 hours format like '07:00 PM'.
    * */
   @Input() twelveHoursFormat: boolean;
+
+  /**
+   * Defines should show am/pm label if twelveHoursFormat enabled.
+   * */
+  @Input() showAmPmLabel: boolean;
 
   /**
    * Show seconds in timepicker.

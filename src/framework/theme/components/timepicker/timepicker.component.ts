@@ -92,6 +92,19 @@ export class NbTimePickerComponent<D> implements OnChanges {
   static ngAcceptInputType_twelveHoursFormat: NbBooleanInput;
 
   /**
+   * Defines should show am/pm label if twelveHoursFormat enabled.
+   * */
+  @Input()
+  get showAmPmLabel(): boolean {
+    return this._showAmPmLabel;
+  }
+  set showAmPmLabel(value: boolean) {
+    this._showAmPmLabel = convertToBoolProperty(value);
+  }
+  protected _showAmPmLabel: boolean = true;
+  static ngAcceptInputType_showAmPmLabel: NbBooleanInput;
+
+  /**
    * Show seconds in timepicker.
    * Ignored when singleColumn is true
    * */

@@ -7,7 +7,9 @@
       <div class="header-cell">{{ hoursText }}</div>
       <div class="header-cell">{{ minutesText }}</div>
       <div *ngIf="withSeconds" class="header-cell">{{ secondsText }}</div>
-      <div *ngIf="twelveHoursFormat" class="header-cell">{{ ampmText }}</div>
+      <div *ngIf="twelveHoursFormat" class="header-cell">
+        <ng-template [ngIf]="showAmPmLabel">{{ ampmText }}</ng-template>
+      </div>
     </ng-template>
   </nb-card-header>
 
