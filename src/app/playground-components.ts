@@ -545,6 +545,24 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         name: 'Date Timepicker Showcase',
       },
       {
+        path: 'date-timepicker-dynamic-inputs-showcase.component',
+        link: '/datepicker/date-timepicker-dynamic-inputs-showcase.component',
+        component: 'DateTimepickerDynamicInputsShowcaseComponent',
+        name: 'Date Timepicker Dynamic Inputs Showcase',
+      },
+      {
+        path: 'datepicker-dynamic-inputs-showcase.component',
+        link: '/datepicker/datepicker-dynamic-inputs-showcase.component',
+        component: 'DatepickerDynamicInputsShowcaseComponent',
+        name: 'Datepicker Dynamic Inputs Showcase',
+      },
+      {
+        path: 'range-picker-dynamic-inputs-showcase.component',
+        link: '/datepicker/rangepicker-dynamic-inputs-showcase.component',
+        component: 'RangeickerDynamicInputsShowcaseComponent',
+        name: 'Range Picker Dynamic Inputs Showcase',
+      },
+      {
         path: 'date-timepicker-single-column.component',
         link: '/datepicker/date-timepicker-single-column.component',
         component: 'DateTimepickerSingleColumnComponent',
@@ -596,6 +614,12 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         link: '/timepicker/timepicker-with-seconds.component',
         component: 'TimepickerWithSecondsComponent',
         name: 'Timepicker With Seconds',
+      },
+      {
+        path: 'timepicker-dynamic-inputs-showcase.component',
+        link: '/timepicker/timepicker-dynamic-inputs-showcase.component',
+        component: 'TimepickerDynamicInputsShowcaseComponent',
+        name: 'Timepicker Dynamic Inputs Showcase',
       },
       {
         path: 'timepicker-form-control.component',
