@@ -25,7 +25,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { fromEvent, merge, Observable, Subject, Subscription } from 'rxjs';
-import { distinctUntilChanged, filter, map, pairwise, take, takeUntil, tap } from 'rxjs/operators';
+import { distinctUntilChanged, filter, map, pairwise, startWith, take, takeUntil, tap } from 'rxjs/operators';
 
 import { NB_DOCUMENT } from '../../theme.options';
 import { NbDateService } from '../calendar-kit/services/date.service';
@@ -452,6 +452,7 @@ export class NbDatepickerDirective<D> implements OnDestroy, ControlValueAccessor
     this.pickerInputsChangedSubscription = this.picker.formatChanged$
       .pipe(
         map(() => this.picker.format),
+        startWith(this.picker.format),
         distinctUntilChanged(),
         pairwise(),
         takeUntil(this.destroy$),

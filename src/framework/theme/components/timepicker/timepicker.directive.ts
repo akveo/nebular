@@ -11,7 +11,7 @@ import {
   isDevMode,
   Renderer2,
 } from '@angular/core';
-import { distinctUntilChanged, filter, map, pairwise, takeUntil } from 'rxjs/operators';
+import { distinctUntilChanged, filter, map, pairwise, startWith, takeUntil } from 'rxjs/operators';
 import { fromEvent, merge, Subject, Subscription } from 'rxjs';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { NbTimePickerComponent } from './timepicker.component';
@@ -194,6 +194,7 @@ export class NbTimePickerDirective<D> implements AfterViewInit, ControlValueAcce
     this.pickerInputsChangedSubscription = this._timePickerComponent.timepickerFormatChange$
       .pipe(
         map(() => this._timePickerComponent.computedTimeFormat),
+        startWith(this._timePickerComponent.computedTimeFormat),
         distinctUntilChanged(),
         pairwise(),
         takeUntil(this.destroy$),
