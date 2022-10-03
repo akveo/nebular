@@ -35,21 +35,26 @@ import { NbTimePickerComponent } from '../timepicker/timepicker.component';
           [showNavigation]="showNavigation"
           [showWeekNumber]="showWeekNumber"
           [weekNumberSymbol]="weekNumberSymbol"
-          (dateChange)="onDateValueChange($event)">
+          (dateChange)="onDateValueChange($event)"
+        >
         </nb-base-calendar>
-        <div class="timepicker-section"
-             [class.size-large]="isLarge()"
-             [class.timepicker-single-column-width]="singleColumn"
-             [class.timepicker-multiple-column-width]="!singleColumn">
+        <div
+          class="timepicker-section"
+          [class.size-large]="isLarge()"
+          [class.timepicker-single-column-width]="singleColumn"
+          [class.timepicker-multiple-column-width]="!singleColumn"
+        >
           <div class="picker-title">{{ title }}</div>
           <nb-timepicker
             (onSelectTime)="onTimeChange($event)"
             [date]="date"
             [twelveHoursFormat]="twelveHoursFormat"
+            [showAmPmLabel]="showAmPmLabel"
             [withSeconds]="showSeconds()"
             [showFooter]="false"
             [singleColumn]="singleColumn"
-            [step]="step">
+            [step]="step"
+          >
           </nb-timepicker>
           <ng-container nbPortalOutlet></ng-container>
         </div>
@@ -78,6 +83,11 @@ export class NbCalendarWithTimeComponent<D> extends NbCalendarComponent<D> imple
    * Defines 12 hours format like '07:00 PM'.
    * */
   @Input() twelveHoursFormat: boolean;
+
+  /**
+   * Defines should show am/pm label if twelveHoursFormat enabled.
+   * */
+  @Input() showAmPmLabel: boolean;
 
   /**
    * Show seconds in timepicker.
@@ -115,9 +125,10 @@ export class NbCalendarWithTimeComponent<D> extends NbCalendarComponent<D> imple
   @ViewChild(NbPortalOutletDirective) portalOutlet: NbPortalOutletDirective;
   @ViewChild(NbTimePickerComponent) timepicker: NbTimePickerComponent<D>;
 
-  constructor(protected dateService: NbDateService<D>,
-              public cd: ChangeDetectorRef,
-              protected calendarTimeModelService: NbCalendarTimeModelService<D>,
+  constructor(
+    protected dateService: NbDateService<D>,
+    public cd: ChangeDetectorRef,
+    protected calendarTimeModelService: NbCalendarTimeModelService<D>,
   ) {
     super();
   }
@@ -166,11 +177,8 @@ export class NbCalendarWithTimeComponent<D> extends NbCalendarComponent<D> imple
     this.dateChange.emit(this.dateService.today());
   }
 
-  /**
-   * We don't show seconds with twelve hours format
-   * */
   showSeconds(): boolean {
-    return this.withSeconds && !this.twelveHoursFormat;
+    return this.withSeconds && !this.singleColumn;
   }
 
   isLarge(): boolean {

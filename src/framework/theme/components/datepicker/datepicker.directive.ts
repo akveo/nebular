@@ -24,8 +24,8 @@ import {
   ValidatorFn,
   Validators,
 } from '@angular/forms';
-import { fromEvent, merge, Observable, Subject } from 'rxjs';
-import { filter, map, take, takeUntil, tap } from 'rxjs/operators';
+import { fromEvent, merge, Observable, Subject, Subscription } from 'rxjs';
+import { distinctUntilChanged, filter, map, pairwise, startWith, take, takeUntil, tap } from 'rxjs/operators';
 
 import { NB_DOCUMENT } from '../../theme.options';
 import { NbDateService } from '../calendar-kit/services/date.service';
@@ -113,6 +113,8 @@ export abstract class NbDatepicker<T, D = T> {
   abstract get isShown(): boolean;
 
   abstract get blur(): Observable<void>;
+
+  abstract get formatChanged$(): Observable<void>;
 }
 
 export const NB_DATE_ADAPTER = new InjectionToken<NbDatepickerAdapter<any>>('Datepicker Adapter');
@@ -285,6 +287,8 @@ export class NbDatepickerDirective<D> implements OnDestroy, ControlValueAccessor
     this.setupPicker();
   }
 
+  protected pickerInputsChangedSubscription: Subscription | undefined;
+
   /**
    * Datepicker adapter.
    * */
@@ -443,6 +447,22 @@ export class NbDatepickerDirective<D> implements OnDestroy, ControlValueAccessor
     if (this.inputValue) {
       this.picker.value = this.datepickerAdapter.parse(this.inputValue, this.picker.format);
     }
+
+    this.pickerInputsChangedSubscription?.unsubscribe();
+    this.pickerInputsChangedSubscription = this.picker.formatChanged$
+      .pipe(
+        map(() => this.picker.format),
+        startWith(this.picker.format),
+        distinctUntilChanged(),
+        pairwise(),
+        takeUntil(this.destroy$),
+      )
+      .subscribe(([prevFormat, nextFormat]) => {
+        if (this.inputValue) {
+          const date = this.datepickerAdapter.parse(this.inputValue, prevFormat);
+          this.writeInput(date);
+        }
+      });
 
     // In case datepicker component placed after the input with datepicker directive,
     // we can't read `this.picker.format` on first change detection run,

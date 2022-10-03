@@ -1,0 +1,15 @@
+<nb-card size="large">
+  <nb-card-body>
+    <section>
+      <input nbInput placeholder="Pick Date" [ngModel]="now" [nbDatepicker]="datePicker" />
+      <nb-datepicker [format]="format" #datePicker></nb-datepicker>
+    </section>
+
+    <section>
+      <button nbButton (click)="toggleFormat()">format — {{ format }}</button>
+      <button nbButton (click)="toggleFormatSwitching()">
+        {{ formatToggleTimer ? 'Stop' : 'Start' }} auto format toggle
+      </button>
+    </section>
+  </nb-card-body>
+</nb-card>
