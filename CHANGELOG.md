@@ -1,3 +1,88 @@
+<a name="9.1.0-rc.6"></a>
+# [9.1.0-rc.6](https://github.com/akveo/nebular/compare/v9.1.0-rc.5...v9.1.0-rc.6) (2022-09-22)
+
+
+### Bug Fixes
+
+* **select-with-autocomplete:** fix select autocomplete width ([#3113](https://github.com/akveo/nebular/issues/3113)) ([078c9f3](https://github.com/akveo/nebular/commit/078c9f3))
+
+
+
+<a name="9.1.0-rc.5"></a>
+# [9.1.0-rc.5](https://github.com/akveo/nebular/compare/v9.1.0-rc.4...v9.1.0-rc.5) (2022-09-15)
+
+
+### Bug Fixes
+
+* **select-with-autocomplete:** improve select open after input changed ([#3110](https://github.com/akveo/nebular/issues/3110)) ([eaa036b](https://github.com/akveo/nebular/commit/eaa036b))
+
+
+
+<a name="9.1.0-rc.4"></a>
+# [9.1.0-rc.4](https://github.com/akveo/nebular/compare/v9.1.0-rc.3...v9.1.0-rc.4) (2022-09-09)
+
+
+### Features
+
+* **input:** add more input color options ([#3108](https://github.com/akveo/nebular/issues/3108)) ([54da714](https://github.com/akveo/nebular/commit/54da714))
+
+
+
+<a name="9.1.0-rc.3"></a>
+# [9.1.0-rc.3](https://github.com/akveo/nebular/compare/v9.1.0-rc.2...v9.1.0-rc.3) (2022-09-08)
+
+
+### Bug Fixes
+
+* **select-with-autocomplete:** fix first render with disabled autocomplete ([#3104](https://github.com/akveo/nebular/issues/3104)) ([efcd690](https://github.com/akveo/nebular/commit/efcd690))
+
+
+
+<a name="9.1.0-rc.2"></a>
+# [9.1.0-rc.2](https://github.com/akveo/nebular/compare/v9.1.0-rc.1...v9.1.0-rc.2) (2022-08-31)
+
+
+### Features
+
+* add keyboad navigation to select with autocomplete ([#3097](https://github.com/akveo/nebular/issues/3097)) ([c52fe3a](https://github.com/akveo/nebular/commit/c52fe3a))
+
+
+
+<a name="9.1.0-rc.1"></a>
+# [9.1.0-rc.1](https://github.com/akveo/nebular/compare/v9.0.3...v9.1.0-rc.1) (2022-08-04)
+
+
+### Bug Fixes
+
+* **timepicker:** change position adjustment to "counterclockwise" ([#3085](https://github.com/akveo/nebular/issues/3085)) ([a546295](https://github.com/akveo/nebular/commit/a546295))
+
+
+### Features
+
+* **select:** options search ([#3091](https://github.com/akveo/nebular/issues/3091)) ([ff4f738](https://github.com/akveo/nebular/commit/ff4f738))
+
+
+
+<a name="9.0.3"></a>
+## [9.0.3](https://github.com/akveo/nebular/compare/v9.0.2...v9.0.3) (2022-05-26)
+
+
+### Bug Fixes
+
+* **select:** disable opening disabled select after clicking on content ([#3068](https://github.com/akveo/nebular/issues/3068)) ([1c6ef1b](https://github.com/akveo/nebular/commit/1c6ef1b))
+
+
+
+<a name="9.0.2"></a>
+## [9.0.2](https://github.com/akveo/nebular/compare/v9.0.1...v9.0.2) (2022-04-07)
+
+
+### Bug Fixes
+
+- **datepicker:** fix initial value render ([#3050](https://github.com/akveo/nebular/issues/3050)) ([e821643](https://github.com/akveo/nebular/commit/e821643))
+
+
+
 <a name="9.0.1"></a>
 
 ## [9.0.1](https://github.com/akveo/nebular/compare/v9.0.0...v9.0.1) (2022-01-31)

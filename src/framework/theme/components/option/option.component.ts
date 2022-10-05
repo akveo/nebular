@@ -82,16 +82,11 @@ import { NbSelectComponent } from '../select/select.component';
   styleUrls: ['./option.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <nb-checkbox *ngIf="withCheckbox"
-                 [checked]="selected"
-                 [disabled]="disabled"
-                 aria-hidden="true">
-    </nb-checkbox>
+    <nb-checkbox *ngIf="withCheckbox" [checked]="selected" [disabled]="disabled" aria-hidden="true"> </nb-checkbox>
     <ng-content></ng-content>
   `,
 })
 export class NbOptionComponent<T = any> implements OnDestroy, AfterViewInit, NbFocusableOption, NbHighlightableOption {
-
   protected disabledByGroup = false;
 
   /**
@@ -132,11 +127,13 @@ export class NbOptionComponent<T = any> implements OnDestroy, AfterViewInit, NbF
   @HostBinding('attr.id')
   id: string = `nb-option-${lastOptionId++}`;
 
-  constructor(@Optional() @Inject(NB_SELECT_INJECTION_TOKEN) parent,
-              protected elementRef: ElementRef,
-              protected cd: ChangeDetectorRef,
-              protected zone: NgZone,
-              protected renderer: Renderer2) {
+  constructor(
+    @Optional() @Inject(NB_SELECT_INJECTION_TOKEN) parent,
+    protected elementRef: ElementRef,
+    protected cd: ChangeDetectorRef,
+    protected zone: NgZone,
+    protected renderer: Renderer2,
+  ) {
     this.parent = parent;
   }
 
@@ -146,9 +143,11 @@ export class NbOptionComponent<T = any> implements OnDestroy, AfterViewInit, NbF
 
   ngAfterViewInit() {
     // TODO: #2254
-    this.zone.runOutsideAngular(() => setTimeout(() => {
-      this.renderer.addClass(this.elementRef.nativeElement, 'nb-transition');
-    }));
+    this.zone.runOutsideAngular(() =>
+      setTimeout(() => {
+        this.renderer.addClass(this.elementRef.nativeElement, 'nb-transition');
+      }),
+    );
   }
 
   /**
@@ -160,6 +159,10 @@ export class NbOptionComponent<T = any> implements OnDestroy, AfterViewInit, NbF
 
   get content() {
     return this.elementRef.nativeElement.textContent;
+  }
+
+  get hidden() {
+    return this.elementRef.nativeElement.hidden;
   }
 
   // TODO: replace with isShowCheckbox property to control this behaviour outside, issues/1965
@@ -188,7 +191,7 @@ export class NbOptionComponent<T = any> implements OnDestroy, AfterViewInit, NbF
   @HostBinding('class.active')
   get activeClass() {
     return this._active;
-  };
+  }
   protected _active: boolean = false;
 
   @HostListener('click', ['$event'])
@@ -252,5 +255,4 @@ export class NbOptionComponent<T = any> implements OnDestroy, AfterViewInit, NbF
     this._active = false;
     this.cd.markForCheck();
   }
-
 }
