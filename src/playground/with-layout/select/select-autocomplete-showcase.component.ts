@@ -7,10 +7,12 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'npg-select-search-showcase',
-  templateUrl: './select-search-showcase.component.html',
+  selector: 'npg-select-autocomplete-showcase',
+  templateUrl: './select-autocomplete-showcase.component.html',
 })
-export class SelectSearchShowcaseComponent {
+export class SelectAutocompleteShowcaseComponent {
+  withAutocomplete = true;
+  multiple = false;
   selectedItem = '2';
   filterValue = '';
 

@@ -23,7 +23,7 @@ import { SelectInteractiveComponent } from './select-interactive.component';
 import { SelectTestComponent } from './select-test.component';
 import { SelectCompareWithComponent } from './select-compare-with.component';
 import { SelectIconComponent } from './select-icon.component';
-import { SelectSearchShowcaseComponent } from './select-search-showcase.component';
+import { SelectAutocompleteShowcaseComponent } from './select-autocomplete-showcase.component';
 
 const routes: Route[] = [
   {
@@ -95,8 +95,8 @@ const routes: Route[] = [
     component: SelectIconComponent,
   },
   {
-    path: 'select-search-showcase.component',
-    component: SelectSearchShowcaseComponent,
+    path: 'select-autocomplete-showcase.component',
+    component: SelectAutocompleteShowcaseComponent,
   },
 ];
 

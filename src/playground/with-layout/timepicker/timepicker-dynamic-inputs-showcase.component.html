@@ -1,0 +1,51 @@
+<nb-card size="large">
+  <nb-card-body>
+    <section>
+      <input nbInput placeholder="Pick Time" [ngModel]="now" [nbTimepicker]="timePicker" />
+      <nb-timepicker
+        [withSeconds]="withSeconds"
+        [singleColumn]="singleColumn"
+        [step]="step"
+        [twelveHoursFormat]="twelveHoursFormat"
+        [showAmPmLabel]="false"
+        [timeFormat]="format"
+        #timePicker
+      ></nb-timepicker>
+    </section>
+
+    <section>
+      <button nbButton (click)="toggleWithSeconds()">withSeconds — {{ withSeconds }}</button>
+      <button nbButton (click)="toggleSecondsSwitching()">
+        {{ secondsToggleTimer ? 'Stop' : 'Start' }} auto withSeconds toggle
+      </button>
+    </section>
+
+    <section>
+      <button nbButton (click)="toggleSingleColumn()">singleColumn — {{ singleColumn }}</button>
+      <button nbButton (click)="toggleSingleColumnSwitching()">
+        {{ singleColumnToggleTimer ? 'Stop' : 'Start' }} auto singleColumn toggle
+      </button>
+    </section>
+
+    <section>
+      <button nbButton (click)="toggleStep()">step — {{ step }}</button>
+      <button nbButton (click)="toggleStepSwitching()">
+        {{ stepToggleTimer ? 'Stop' : 'Start' }} auto step toggle
+      </button>
+    </section>
+
+    <section>
+      <button nbButton (click)="toggleTwelveHoursFormat()">twelveHoursFormat — {{ twelveHoursFormat }}</button>
+      <button nbButton (click)="toggleTwelveHoursFormatSwitching()">
+        {{ twelveHoursFormatToggleTimer ? 'Stop' : 'Start' }} auto twelveHoursFormat toggle
+      </button>
+    </section>
+
+    <section>
+      <button nbButton (click)="toggleFormat()">format — {{ format ?? 'auto' }}</button>
+      <button nbButton (click)="toggleFormatSwitching()">
+        {{ formatToggleTimer ? 'Stop' : 'Start' }} auto format toggle
+      </button>
+    </section>
+  </nb-card-body>
+</nb-card>

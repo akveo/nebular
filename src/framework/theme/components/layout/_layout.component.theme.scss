@@ -96,7 +96,7 @@
       }
     }
 
-    @media screen and(min-width: $layout-window-mode-max-width + 150px) {
+    @media screen and (min-width: $layout-window-mode-max-width + 150px) {
       $padding-top: calc(#{nb-theme(layout-window-mode-padding-top)} * 0.5);
 
       @include window-mode($padding-top);

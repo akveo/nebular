@@ -133,6 +133,8 @@ export abstract class NbBasePicker<D, T, P> extends NbDatepicker<T, D> {
    * */
   abstract showWeekNumber: boolean;
 
+  readonly formatChanged$: Subject<void> = new Subject();
+
   /**
    * Calendar component class that has to be instantiated inside overlay.
    * */
@@ -489,8 +491,14 @@ export class NbBasePickerComponent<D, T, P> extends NbBasePicker<D, T, P> implem
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes.format && !changes.format.isFirstChange()) {
-      this.checkFormat();
+    if (changes.format) {
+      if (!changes.format.isFirstChange()) {
+        this.checkFormat();
+      }
+      this.formatChanged$.next();
+    }
+    if (this.picker) {
+      this.patchWithInputs();
     }
   }
 

@@ -1,0 +1,41 @@
+<nb-card size="small">
+  <nb-card-body>
+    <button nbButton (click)="withAutocomplete = !withAutocomplete">Toggle autocomplete: {{ withAutocomplete }}</button>
+    <button nbButton (click)="multiple = !multiple">Toggle multiple: {{ multiple }}</button>
+    <nb-select-with-autocomplete
+      placeholder="Select Showcase"
+      [(selected)]="selectedItem"
+      [withOptionsAutocomplete]="withAutocomplete"
+      [multiple]="multiple"
+      (optionsAutocompleteInputChange)="filterValue = $event"
+    >
+      <nb-option value="">Option empty</nb-option>
+      <nb-option [hidden]="!isEqual(filterValue, 0, 'Option 0')" value="0">Option 0</nb-option>
+      <nb-option [hidden]="!isEqual(filterValue, 1, 'Option 1')" value="1">Option 1</nb-option>
+      <nb-option [hidden]="!isEqual(filterValue, 2, 'Option 2')" value="2">Option 2</nb-option>
+      <nb-option [hidden]="!isEqual(filterValue, 3, 'Option 3')" value="3">Option 3</nb-option>
+      <nb-option [hidden]="!isEqual(filterValue, 4, 'Option 4')" value="4">Option 4</nb-option>
+    </nb-select-with-autocomplete>
+    <nb-select-with-autocomplete
+      placeholder="Select Showcase"
+      [multiple]="true"
+      [withOptionsAutocomplete]="withAutocomplete"
+      (optionsAutocompleteInputChange)="filterValue = $event"
+    >
+      <nb-option value="">Option empty</nb-option>
+      <nb-option [hidden]="!isEqual(filterValue, 0, 'Option 0')" value="0">Option 0</nb-option>
+      <nb-option [hidden]="!isEqual(filterValue, 1, 'Option 1')" value="1">Option 1</nb-option>
+      <nb-option [hidden]="!isEqual(filterValue, 2, 'Option 2')" value="2">Option 2</nb-option>
+      <nb-option [hidden]="!isEqual(filterValue, 3, 'Option 3')" value="3">Option 3</nb-option>
+      <nb-option [hidden]="!isEqual(filterValue, 4, 'Option 4')" value="4">Option 4</nb-option>
+    </nb-select-with-autocomplete>
+    <nb-select-with-autocomplete placeholder="Select Showcase" [(selected)]="selectedItem">
+      <nb-option value="">Option empty</nb-option>
+      <nb-option [hidden]="!isEqual(filterValue, 0, 'Option 0')" value="0">Option 0</nb-option>
+      <nb-option [hidden]="!isEqual(filterValue, 1, 'Option 1')" value="1">Option 1</nb-option>
+      <nb-option [hidden]="!isEqual(filterValue, 2, 'Option 2')" value="2">Option 2</nb-option>
+      <nb-option [hidden]="!isEqual(filterValue, 3, 'Option 3')" value="3">Option 3</nb-option>
+      <nb-option [hidden]="!isEqual(filterValue, 4, 'Option 4')" value="4">Option 4</nb-option>
+    </nb-select-with-autocomplete>
+  </nb-card-body>
+</nb-card>
