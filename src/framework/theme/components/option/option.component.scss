@@ -8,6 +8,9 @@
 
 :host {
   display: flex;
+  &[hidden] {
+    display: none;
+  }
 
   &:hover {
     cursor: pointer;

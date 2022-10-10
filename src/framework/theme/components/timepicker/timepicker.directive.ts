@@ -170,11 +170,13 @@ import { NB_DOCUMENT } from '../../theme.options';
  * */
 @Directive({
   selector: 'input[nbTimepicker]',
-  providers: [{
-    provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => NbTimePickerDirective),
-    multi: true,
-  }],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => NbTimePickerDirective),
+      multi: true,
+    },
+  ],
 })
 export class NbTimePickerDirective<D> implements AfterViewInit, ControlValueAccessor {
   /**
@@ -195,7 +197,6 @@ export class NbTimePickerDirective<D> implements AfterViewInit, ControlValueAcce
    * */
   @Input() overlayOffset = 8;
 
-
   /**
    * String representation of latest selected date.
    * Updated when value is updated programmatically (writeValue), via timepicker (subscribeOnApplyClick)
@@ -210,10 +211,8 @@ export class NbTimePickerDirective<D> implements AfterViewInit, ControlValueAcce
   protected positionStrategy: NbAdjustableConnectedPositionStrategy;
   protected overlayRef: NbOverlayRef;
   protected destroy$: Subject<void> = new Subject<void>();
-  protected onChange: (value: D) => void = () => {
-  };
-  protected onTouched = () => {
-  };
+  protected onChange: (value: D) => void = () => {};
+  protected onTouched = () => {};
   /**
    * Trigger strategy used by overlay.
    * @docs-private
@@ -244,17 +243,18 @@ export class NbTimePickerDirective<D> implements AfterViewInit, ControlValueAcce
     return !this.isOpen;
   }
 
-  constructor(@Inject(NB_DOCUMENT) protected document,
-              protected positionBuilder: NbPositionBuilderService,
-              protected hostRef: ElementRef,
-              protected triggerStrategyBuilder: NbTriggerStrategyBuilderService,
-              protected overlay: NbOverlayService,
-              protected cd: ChangeDetectorRef,
-              protected calendarTimeModelService: NbCalendarTimeModelService<D>,
-              protected dateService: NbDateService<D>,
-              protected renderer: Renderer2,
-              @Attribute('placeholder') protected placeholder: string) {
-  }
+  constructor(
+    @Inject(NB_DOCUMENT) protected document,
+    protected positionBuilder: NbPositionBuilderService,
+    protected hostRef: ElementRef,
+    protected triggerStrategyBuilder: NbTriggerStrategyBuilderService,
+    protected overlay: NbOverlayService,
+    protected cd: ChangeDetectorRef,
+    protected calendarTimeModelService: NbCalendarTimeModelService<D>,
+    protected dateService: NbDateService<D>,
+    protected renderer: Renderer2,
+    @Attribute('placeholder') protected placeholder: string,
+  ) {}
 
   /**
    * Returns host input value.
@@ -306,8 +306,10 @@ export class NbTimePickerDirective<D> implements AfterViewInit, ControlValueAcce
 
   setupTimepicker() {
     if (this.dateService.getId() === 'native' && isDevMode()) {
-      console.warn('Date.parse does not support parsing time with custom format.' +
-        ' See details here https://akveo.github.io/nebular/docs/components/datepicker/overview#native-parse-issue')
+      console.warn(
+        'Date.parse does not support parsing time with custom format.' +
+          ' See details here https://akveo.github.io/nebular/docs/components/datepicker/overview#native-parse-issue',
+      );
     }
     this.timepicker.setHost(this.hostRef);
     if (this.inputValue) {
@@ -339,18 +341,13 @@ export class NbTimePickerDirective<D> implements AfterViewInit, ControlValueAcce
 
   protected createOverlay() {
     const scrollStrategy = this.createScrollStrategy();
-    this.overlayRef = this.overlay.create(
-      {positionStrategy: this.positionStrategy, scrollStrategy});
+    this.overlayRef = this.overlay.create({ positionStrategy: this.positionStrategy, scrollStrategy });
   }
 
   protected subscribeOnTriggers() {
-    this.triggerStrategy.show$
-    .pipe(filter(() => this.isClosed))
-    .subscribe(() => this.show());
+    this.triggerStrategy.show$.pipe(filter(() => this.isClosed)).subscribe(() => this.show());
 
-    this.triggerStrategy.hide$
-    .pipe(filter(() => this.isOpen))
-    .subscribe(() => {
+    this.triggerStrategy.hide$.pipe(filter(() => this.isOpen)).subscribe(() => {
       this.inputValue = this.lastInputValue || '';
       this.hide();
     });
@@ -358,26 +355,30 @@ export class NbTimePickerDirective<D> implements AfterViewInit, ControlValueAcce
 
   protected createTriggerStrategy(): NbTriggerStrategy {
     return this.triggerStrategyBuilder
-    .trigger(NbTrigger.FOCUS)
-    .host(this.hostRef.nativeElement)
-    .container(() => this.getContainer())
-    .build();
+      .trigger(NbTrigger.FOCUS)
+      .host(this.hostRef.nativeElement)
+      .container(() => this.getContainer())
+      .build();
   }
 
   protected createPositionStrategy(): NbAdjustableConnectedPositionStrategy {
     return this.positionBuilder
-    .connectedTo(this.hostRef)
-    .position(NbPosition.BOTTOM)
-    .offset(this.overlayOffset)
-    .adjustment(NbAdjustment.VERTICAL);
+      .connectedTo(this.hostRef)
+      .position(NbPosition.BOTTOM)
+      .offset(this.overlayOffset)
+      .adjustment(NbAdjustment.COUNTERCLOCKWISE);
   }
 
   protected getContainer() {
-    return this.overlayRef && this.isOpen && <ComponentRef<any>>{
-      location: {
-        nativeElement: this.overlayRef.overlayElement,
-      },
-    };
+    return (
+      this.overlayRef &&
+      this.isOpen &&
+      <ComponentRef<any>>{
+        location: {
+          nativeElement: this.overlayRef.overlayElement,
+        },
+      }
+    );
   }
 
   protected createScrollStrategy(): NbScrollStrategy {
@@ -386,21 +387,20 @@ export class NbTimePickerDirective<D> implements AfterViewInit, ControlValueAcce
 
   protected subscribeOnInputChange() {
     fromEvent(this.input, 'input')
-    .pipe(
-      map(() => this.inputValue),
-      takeUntil(this.destroy$),
-    )
-    .subscribe((value: string) => this.handleInputChange(value));
+      .pipe(
+        map(() => this.inputValue),
+        takeUntil(this.destroy$),
+      )
+      .subscribe((value: string) => this.handleInputChange(value));
   }
 
   protected subscribeToBlur() {
     merge(
       this.timepicker.blur,
-      fromEvent(this.input, 'blur').pipe(
-        filter(() => !this.isOpen && this.document.activeElement !== this.input),
-      ),
-    ).pipe(takeUntil(this.destroy$))
-    .subscribe(() => this.onTouched());
+      fromEvent(this.input, 'blur').pipe(filter(() => !this.isOpen && this.document.activeElement !== this.input)),
+    )
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(() => this.onTouched());
   }
 
   /**

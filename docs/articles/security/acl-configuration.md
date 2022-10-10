@@ -10,7 +10,7 @@ e a aplicação contém dois tipos de recursos que precisam ser protegidos (`new
 
 ## Configuração de ACL
 
-Nebular ACL tem uma maneira simples de configurá-lo. Ao registrar um módulo, você pode especificar um conjunto de regras de ACL simplesmente fornecendo-o como uma configuração.
+Beast ACL tem uma maneira simples de configurá-lo. Ao registrar um módulo, você pode especificar um conjunto de regras de ACL simplesmente fornecendo-o como uma configuração.
 
 Vamos supor que nossos usuários convidados podem apenas `view` `news` e `comments`, os usuários podem fazer tudo como convidados, mas também podem acessar `create`, `comments`, e os moderadores também podem `create`, `remove`, `news` e `comments`.
 Agora, vamos converter isso em um objeto de configuração ACL que o Beast possa entender. Abra o `app.module.ts` e altere a chamada `NbSecurityModule.forRoot()` da seguinte forma:

@@ -4,7 +4,7 @@ Vamos criar uma página simples (cabeçalho + barra lateral) em seu projeto.
 Supondo que você tenha um módulo separado por página, vamos abrir seu `some-page.module.ts` e importar os componentes de layout necessários:
 
 ```ts
-import { RouterModule } from '@angular/router'; // we also need angular router for Nebular to function properly
+import { RouterModule } from '@angular/router'; // we also need angular router for Beast to function properly
 import { NbSidebarModule, NbLayoutModule, NbButtonModule } from '@beast/theme';
 
 ...

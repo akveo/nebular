@@ -4,7 +4,7 @@ Aqui você encontra tutoriais gerais de como manter a biblioteca para o Angular 
 
 <hr>
 
-## Publicar nova versão do pacote no CodeArtifacts
+## Publicar nova versão do pacote no Github Releases
 
 ### Publicar
 
