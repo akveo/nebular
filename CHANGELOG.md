@@ -1,3 +1,18 @@
+<a name="9.1.0-rc.7"></a>
+# [9.1.0-rc.7](https://github.com/akveo/nebular/compare/v9.1.0-rc.6...v9.1.0-rc.7) (2022-10-10)
+
+
+### Bug Fixes
+
+* **themes:** fix typo in layout component style ([#3098](https://github.com/akveo/nebular/issues/3098)) ([5740682](https://github.com/akveo/nebular/commit/5740682))
+
+
+### Features
+
+* **datepicker:** improve date and time inputs combination ([#3117](https://github.com/akveo/nebular/issues/3117)) ([8387967](https://github.com/akveo/nebular/commit/8387967))
+
+
+
 <a name="9.1.0-rc.6"></a>
 # [9.1.0-rc.6](https://github.com/akveo/nebular/compare/v9.1.0-rc.5...v9.1.0-rc.6) (2022-09-22)
 
