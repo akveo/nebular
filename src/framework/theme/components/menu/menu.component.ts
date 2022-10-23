@@ -92,6 +92,17 @@ export class NbMenuItemComponent implements DoCheck, AfterViewInit, OnDestroy {
     this.itemClick.emit(item);
   }
 
+  hasVisibleChildren(): boolean {
+    if (typeof this.menuItem.children !== 'undefined') {
+      for (const child of this.menuItem.children) {
+        if (typeof child.hidden === 'undefined' || (typeof child.hidden === 'boolean' && !child.hidden)) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
   getExpandStateIcon(): string {
     if (this.menuItem.expanded) {
       return 'chevron-down-outline';

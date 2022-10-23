@@ -32,6 +32,12 @@ export class MenuChildrenComponent {
     },
     {
       title: 'Shopping Bag',
+      children: [
+        {
+          title: 'Hidden Child',
+          hidden: true,
+        },
+      ],
     },
     {
       title: 'Orders',
