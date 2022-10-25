@@ -465,6 +465,10 @@ export class NbTimePickerDirective<D> implements AfterViewInit, ControlValueAcce
     this.onTouched = fn;
   }
 
+  setDisabledState(isDisabled: boolean): void {
+    this.input.disabled = isDisabled;
+  }
+
   protected parseNativeDateString(value: string): string {
     const date = this.dateService.today();
     const year = this.dateService.getYear(date);
