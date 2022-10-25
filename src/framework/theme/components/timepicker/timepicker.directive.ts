@@ -13,7 +13,15 @@ import {
 } from '@angular/core';
 import { distinctUntilChanged, filter, map, pairwise, startWith, takeUntil } from 'rxjs/operators';
 import { fromEvent, merge, Subject, Subscription } from 'rxjs';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import {
+  ControlValueAccessor,
+  NG_VALIDATORS,
+  NG_VALUE_ACCESSOR,
+  ValidationErrors,
+  Validator,
+  ValidatorFn,
+  Validators,
+} from '@angular/forms';
 import { NbTimePickerComponent } from './timepicker.component';
 import { NbOverlayRef, NbScrollStrategy } from '../cdk/overlay/mapping';
 import {
@@ -176,9 +184,14 @@ import { NB_DOCUMENT } from '../../theme.options';
       useExisting: forwardRef(() => NbTimePickerDirective),
       multi: true,
     },
+    {
+      provide: NG_VALIDATORS,
+      useExisting: forwardRef(() => NbTimePickerDirective),
+      multi: true,
+    },
   ],
 })
-export class NbTimePickerDirective<D> implements AfterViewInit, ControlValueAccessor {
+export class NbTimePickerDirective<D> implements AfterViewInit, ControlValueAccessor, Validator {
   /**
    * Provides timepicker component.
    * */
@@ -259,6 +272,13 @@ export class NbTimePickerDirective<D> implements AfterViewInit, ControlValueAcce
   get isClosed(): boolean {
     return !this.isOpen;
   }
+
+  /**
+   * Form control validators will be called in validators context, so, we need to bind them.
+   * */
+  protected validator: ValidatorFn = Validators.compose(
+    [this.minValidator, this.maxValidator].map((fn) => fn.bind(this)),
+  );
 
   constructor(
     @Inject(NB_DOCUMENT) protected document,
@@ -465,6 +485,13 @@ export class NbTimePickerDirective<D> implements AfterViewInit, ControlValueAcce
     this.onTouched = fn;
   }
 
+  /**
+   * Form control validation based on picker validator config.
+   * */
+  validate(): ValidationErrors | null {
+    return this.validator(null);
+  }
+
   protected parseNativeDateString(value: string): string {
     const date = this.dateService.today();
     const year = this.dateService.getYear(date);
@@ -472,5 +499,27 @@ export class NbTimePickerDirective<D> implements AfterViewInit, ControlValueAcce
     const day = this.calendarTimeModelService.paddToTwoSymbols(this.dateService.getDate(date));
 
     return `${year}-${month}-${day} ${value}`;
+  }
+
+  /**
+   * Validates passed value is greater than min.
+   * */
+  protected minValidator(): ValidationErrors | null {
+    const config = this.timepicker.getValidatorConfig();
+    const date = this.dateService.parse(this.inputValue, this.timepicker.computedTimeFormat);
+    return !config.min || !date || this.dateService.compareDates(config.min, date) <= 0
+      ? null
+      : { nbDatepickerMin: { min: config.min, actual: date } };
+  }
+
+  /**
+   * Validates passed value is smaller than max.
+   * */
+  protected maxValidator(): ValidationErrors | null {
+    const config = this.timepicker.getValidatorConfig();
+    const date = this.dateService.parse(this.inputValue, this.timepicker.computedTimeFormat);
+    return !config.max || !date || this.dateService.compareDates(config.max, date) >= 0
+      ? null
+      : { nbDatepickerMax: { max: config.max, actual: date } };
   }
 }

@@ -162,6 +162,16 @@ export class NbTimePickerComponent<D> implements OnChanges {
   _date: D;
 
   /**
+   * Minimum available date for selection.
+   * */
+  @Input() min: D;
+
+  /**
+   * Maximum available date for selection.
+   * */
+  @Input() max: D;
+
+  /**
    * In timepicker value should be always true
    * In calendar-with-time.component  should set to false
    * @docs-private
@@ -318,6 +328,10 @@ export class NbTimePickerComponent<D> implements OnChanges {
     }
 
     return false;
+  }
+
+  getValidatorConfig() {
+    return { min: this.min, max: this.max };
   }
 
   protected buildColumnOptions(): void {
