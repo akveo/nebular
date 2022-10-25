@@ -214,6 +214,18 @@ export class NbTimePickerDirective<D> implements AfterViewInit, ControlValueAcce
    * */
   @Input() overlayOffset = 8;
 
+  @Input()
+  set placeholder(value: string) {
+    this._placeholder = value;
+    this.hasCustomPlaceholder = true;
+    this.renderer.setProperty(this.input, 'placeholder', value);
+  }
+  get placeholder(): string {
+    return this._placeholder;
+  }
+  private _placeholder: string;
+  protected hasCustomPlaceholder: boolean = false;
+
   /**
    * String representation of latest selected date.
    * Updated when value is updated programmatically (writeValue), via timepicker (subscribeOnApplyClick)
@@ -270,7 +282,6 @@ export class NbTimePickerDirective<D> implements AfterViewInit, ControlValueAcce
     protected calendarTimeModelService: NbCalendarTimeModelService<D>,
     protected dateService: NbDateService<D>,
     protected renderer: Renderer2,
-    @Attribute('placeholder') protected placeholder: string,
   ) {}
 
   /**
@@ -288,7 +299,7 @@ export class NbTimePickerDirective<D> implements AfterViewInit, ControlValueAcce
   ngAfterViewInit() {
     this.subscribeOnInputChange();
 
-    if (!this.placeholder) {
+    if (!this.hasCustomPlaceholder) {
       this.renderer.setProperty(this.input, 'placeholder', this.timepicker.computedTimeFormat);
     }
     this.triggerStrategy = this.createTriggerStrategy();
