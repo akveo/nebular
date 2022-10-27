@@ -21,7 +21,7 @@
     "nebular"
   ],
   "peerDependencies": {
-    "bootstrap": "^4.0.0",
+    "bootstrap": "^5.0.0",
     "@nebular/theme": "9.1.0-rc.7"
   },
   "exports": {
