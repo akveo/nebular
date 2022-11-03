@@ -293,6 +293,7 @@ export class NbOAuth2AuthStrategy extends NbAuthStrategy {
       username: username,
       password: password,
       scope: this.getOption('token.scope'),
+      client_id: this.getOption('clientId'),
     };
     return this.urlEncodeParameters(this.cleanParams(this.addCredentialsToParams(params)));
   }
