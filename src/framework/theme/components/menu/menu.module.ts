@@ -11,17 +11,14 @@ import { NbMenuComponent, NbMenuItemComponent } from './menu.component';
 import { NbMenuService, NbMenuInternalService } from './menu.service';
 import { NbIconModule } from '../icon/icon.module';
 import { NbBadgeModule } from '../badge/badge.module';
+import { NbTooltipModule } from '../tooltip/tooltip.module';
 
 const nbMenuComponents = [NbMenuComponent, NbMenuItemComponent];
 
 const NB_MENU_PROVIDERS = [NbMenuService, NbMenuInternalService];
 
 @NgModule({
-  imports: [
-    NbSharedModule,
-    NbIconModule,
-    NbBadgeModule,
-  ],
+  imports: [NbSharedModule, NbIconModule, NbBadgeModule, NbTooltipModule],
   declarations: [...nbMenuComponents],
   exports: [...nbMenuComponents],
 })
@@ -29,9 +26,7 @@ export class NbMenuModule {
   static forRoot(): ModuleWithProviders<NbMenuModule> {
     return {
       ngModule: NbMenuModule,
-      providers: [
-        ...NB_MENU_PROVIDERS,
-      ],
+      providers: [...NB_MENU_PROVIDERS],
     };
   }
 }
