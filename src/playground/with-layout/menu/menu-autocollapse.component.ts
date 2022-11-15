@@ -17,7 +17,7 @@ export class MenuAutoCollapseComponent {
     {
       title: 'Profile',
       expanded: true,
-      role: 'button',
+      ariaRole: 'button',
       children: [
         {
           title: 'Change Password',
@@ -32,7 +32,7 @@ export class MenuAutoCollapseComponent {
     },
     {
       title: 'Shopping Bag',
-      role: 'button',
+      ariaRole: 'button',
       children: [
         {
           title: 'First Product',
@@ -47,7 +47,7 @@ export class MenuAutoCollapseComponent {
     },
     {
       title: 'Orders',
-      role: 'button',
+      ariaRole: 'button',
       children: [
         {
           title: 'First Order',

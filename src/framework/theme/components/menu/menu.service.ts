@@ -116,7 +116,7 @@ export class NbMenuItem {
   /** The name of a role in the ARIA specification
    * @type {string}
    */
-  role?: string;
+  ariaRole?: string;
 
   /**
    * @returns item parents in top-down order
