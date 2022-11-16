@@ -2,75 +2,91 @@
   <nb-icon class="menu-icon" [config]="menuItem.icon" *ngIf="menuItem.icon"></nb-icon>
   {{ menuItem.title }}
 </span>
-<a *ngIf="menuItem.link && !menuItem.url && !menuItem.children && !menuItem.group"
-   [routerLink]="menuItem.link"
-   [queryParams]="menuItem.queryParams"
-   [fragment]="menuItem.fragment"
-   [queryParamsHandling]="menuItem.queryParamsHandling"
-   [preserveFragment]="menuItem.preserveFragment"
-   [skipLocationChange]="menuItem.skipLocationChange"
-   [attr.target]="menuItem.target"
-   [attr.title]="menuItem.title"
-   [class.active]="menuItem.selected"
-   (mouseenter)="onHoverItem(menuItem)"
-   (click)="onItemClick(menuItem);">
+<a
+  *ngIf="menuItem.link && !menuItem.url && !menuItem.children && !menuItem.group"
+  [routerLink]="menuItem.link"
+  [queryParams]="menuItem.queryParams"
+  [fragment]="menuItem.fragment"
+  [queryParamsHandling]="menuItem.queryParamsHandling"
+  [preserveFragment]="menuItem.preserveFragment"
+  [skipLocationChange]="menuItem.skipLocationChange"
+  [attr.target]="menuItem.target"
+  [attr.title]="menuItem.title"
+  [attr.role]="menuItem.ariaRole"
+  [class.active]="menuItem.selected"
+  (mouseenter)="onHoverItem(menuItem)"
+  (click)="onItemClick(menuItem)"
+>
   <nb-icon class="menu-icon" [config]="menuItem.icon" *ngIf="menuItem.icon"></nb-icon>
   <span class="menu-title">{{ menuItem.title }}</span>
   <ng-container *ngIf="badge" [ngTemplateOutlet]="badgeTemplate"></ng-container>
 </a>
-<a *ngIf="menuItem.url && !menuItem.children && !menuItem.link && !menuItem.group"
-   [attr.href]="menuItem.url"
-   [attr.target]="menuItem.target"
-   [attr.title]="menuItem.title"
-   [class.active]="menuItem.selected"
-   (mouseenter)="onHoverItem(menuItem)"
-   (click)="onSelectItem(menuItem)">
+<a
+  *ngIf="menuItem.url && !menuItem.children && !menuItem.link && !menuItem.group"
+  [attr.href]="menuItem.url"
+  [attr.target]="menuItem.target"
+  [attr.title]="menuItem.title"
+  [attr.role]="menuItem.ariaRole"
+  [class.active]="menuItem.selected"
+  (mouseenter)="onHoverItem(menuItem)"
+  (click)="onSelectItem(menuItem)"
+>
   <nb-icon class="menu-icon" [config]="menuItem.icon" *ngIf="menuItem.icon"></nb-icon>
   <span class="menu-title">{{ menuItem.title }}</span>
   <ng-container *ngIf="badge" [ngTemplateOutlet]="badgeTemplate"></ng-container>
 </a>
-<a *ngIf="!menuItem.children && !menuItem.link && !menuItem.url && !menuItem.group"
-   [attr.target]="menuItem.target"
-   [attr.title]="menuItem.title"
-   [class.active]="menuItem.selected"
-   (mouseenter)="onHoverItem(menuItem)"
-   (click)="$event.preventDefault(); onItemClick(menuItem);">
+<a
+  *ngIf="!menuItem.children && !menuItem.link && !menuItem.url && !menuItem.group"
+  [attr.target]="menuItem.target"
+  [attr.title]="menuItem.title"
+  [attr.role]="menuItem.ariaRole"
+  [class.active]="menuItem.selected"
+  (mouseenter)="onHoverItem(menuItem)"
+  (click)="$event.preventDefault(); onItemClick(menuItem)"
+>
   <nb-icon class="menu-icon" [config]="menuItem.icon" *ngIf="menuItem.icon"></nb-icon>
   <span class="menu-title">{{ menuItem.title }}</span>
   <ng-container *ngIf="badge" [ngTemplateOutlet]="badgeTemplate"></ng-container>
 </a>
-<a *ngIf="menuItem.children"
-   (click)="$event.preventDefault(); onToggleSubMenu(menuItem);"
-   [attr.target]="menuItem.target"
-   [attr.title]="menuItem.title"
-   [class.active]="menuItem.selected"
-   (mouseenter)="onHoverItem(menuItem)"
-   href="#">
+<a
+  *ngIf="menuItem.children"
+  (click)="$event.preventDefault(); onToggleSubMenu(menuItem)"
+  [attr.target]="menuItem.target"
+  [attr.title]="menuItem.title"
+  [attr.aria-expanded]="menuItem.expanded ?? false"
+  [attr.role]="menuItem.ariaRole"
+  [class.active]="menuItem.selected"
+  (mouseenter)="onHoverItem(menuItem)"
+  href="#"
+>
   <nb-icon class="menu-icon" [config]="menuItem.icon" *ngIf="menuItem.icon"></nb-icon>
   <span class="menu-title">{{ menuItem.title }}</span>
   <ng-container *ngIf="badge" [ngTemplateOutlet]="badgeTemplate"></ng-container>
   <nb-icon class="expand-state" [icon]="getExpandStateIcon()" pack="nebular-essentials"></nb-icon>
 </a>
-<ul *ngIf="menuItem.children"
-    [class.collapsed]="!(menuItem.children && menuItem.expanded)"
-    [class.expanded]="menuItem.expanded"
-    [@toggle]="toggleState"
-    class="menu-items">
+<ul
+  *ngIf="menuItem.children"
+  [class.collapsed]="!(menuItem.children && menuItem.expanded)"
+  [class.expanded]="menuItem.expanded"
+  [@toggle]="toggleState"
+  class="menu-items"
+>
   <ng-container *ngFor="let item of menuItem.children">
-    <li nbMenuItem *ngIf="!item.hidden"
-        [menuItem]="item"
-        [badge]="item.badge"
-        [class.menu-group]="item.group"
-        (hoverItem)="onHoverItem($event)"
-        (toggleSubMenu)="onToggleSubMenu($event)"
-        (selectItem)="onSelectItem($event)"
-        (itemClick)="onItemClick($event)"
-        class="menu-item">
-    </li>
+    <li
+      nbMenuItem
+      *ngIf="!item.hidden"
+      [menuItem]="item"
+      [badge]="item.badge"
+      [class.menu-group]="item.group"
+      (hoverItem)="onHoverItem($event)"
+      (toggleSubMenu)="onToggleSubMenu($event)"
+      (selectItem)="onSelectItem($event)"
+      (itemClick)="onItemClick($event)"
+      class="menu-item"
+    ></li>
   </ng-container>
 </ul>
 
 <ng-template #badgeTemplate>
-  <nb-badge [text]="badge.text" [dotMode]="badge.dotMode" [status]="badge.status">
-  </nb-badge>
+  <nb-badge [text]="badge.text" [dotMode]="badge.dotMode" [status]="badge.status"> </nb-badge>
 </ng-template>
