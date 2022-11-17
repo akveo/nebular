@@ -1,3 +1,14 @@
+<a name="9.1.0-rc.8"></a>
+# [9.1.0-rc.8](https://github.com/akveo/nebular/compare/v9.1.0-rc.7...v9.1.0-rc.8) (2022-11-17)
+
+
+### Features
+
+* **menu component:** improve accessibility ([#3136](https://github.com/akveo/nebular/issues/3136)) ([7ce24c0](https://github.com/akveo/nebular/commit/7ce24c0))
+* **timepicker:** add disabled state ([#3127](https://github.com/akveo/nebular/issues/3127)) ([7af5a8d](https://github.com/akveo/nebular/commit/7af5a8d))
+
+
+
 <a name="9.1.0-rc.7"></a>
 # [9.1.0-rc.7](https://github.com/akveo/nebular/compare/v9.1.0-rc.6...v9.1.0-rc.7) (2022-10-10)
 
