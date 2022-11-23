@@ -1,12 +1,13 @@
 <nb-card>
   <nb-card-header *ngIf="showNavigation" class="calendar-navigation">
-    <nb-calendar-view-mode [date]="visibleDate"
-                           [viewMode]="activeViewMode"
-                           (changeMode)="onChangeViewMode()">
-    </nb-calendar-view-mode>
-
-    <nb-calendar-pageable-navigation (prev)="navigatePrev()" (next)="navigateNext()">
-    </nb-calendar-pageable-navigation>
+    <ng-template
+      [ngTemplateOutlet]="customNavigationTemplate || defaultTemplate"
+      [ngTemplateOutletContext]="{
+        visibleDate: visibleDate,
+        activeViewMode: activeViewMode
+      }"
+    >
+    </ng-template>
   </nb-card-header>
 
   <nb-card-body [ngSwitch]="activeViewMode">
@@ -50,3 +51,10 @@
   </nb-card-body>
 
 </nb-card>
+
+<ng-template #defaultTemplate let-visibleDate="visibleDate" let-activeViewMode="activeViewMode">
+  <nb-calendar-view-mode [date]="visibleDate" [viewMode]="activeViewMode" (changeMode)="onChangeViewMode()">
+  </nb-calendar-view-mode>
+
+  <nb-calendar-pageable-navigation (prev)="navigatePrev()" (next)="navigateNext()"> </nb-calendar-pageable-navigation>
+</ng-template>

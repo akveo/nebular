@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { Component, EventEmitter, Input, Output, Type } from '@angular/core';
+import { Component, EventEmitter, Input, Output, TemplateRef, Type } from '@angular/core';
 
 import {
   NbCalendarCell,
@@ -211,6 +211,7 @@ import { convertToBoolProperty, NbBooleanInput } from '../helpers';
       [showNavigation]="showNavigation"
       [showWeekNumber]="showWeekNumber"
       [weekNumberSymbol]="weekNumberSymbol"
+      [customNavigationTemplate]="customNavigationTemplate"
       (dateChange)="dateChange.emit($event)"
     ></nb-base-calendar>
   `,
@@ -296,6 +297,11 @@ export class NbCalendarComponent<D> {
    * Sets symbol used as a header for week numbers column
    * */
   @Input() weekNumberSymbol: string = '#';
+
+  /**
+   * A custom template to use to replace the navigation in the header
+   */
+  @Input() customNavigationTemplate: TemplateRef<any>;
 
   /**
    * Emits date when selected.

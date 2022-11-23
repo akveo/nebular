@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { Component, EventEmitter, HostBinding, Input, OnInit, Output, Type } from '@angular/core';
+import { Component, EventEmitter, HostBinding, Input, OnInit, Output, TemplateRef, Type } from '@angular/core';
 
 import { NbCalendarYearModelService } from '../calendar-kit/services/calendar-year-model.service';
 import {
@@ -110,6 +110,11 @@ export class NbBaseCalendarComponent<D, T> implements OnInit {
    * Sets symbol used as a header for week numbers column
    * */
   @Input() weekNumberSymbol: string;
+
+  /**
+   * A custom template to use to replace the navigation in the header
+   */
+  @Input() customNavigationTemplate: TemplateRef<any>;
 
   /**
    * Emits date when selected.
