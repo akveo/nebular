@@ -4,6 +4,8 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
+@use '../../styles/theming' as *;
+
 @mixin input-statuses() {
   @each $status in nb-get-statuses() {
     &.status-#{$status} {
@@ -22,6 +24,10 @@
       &:hover {
         background-color: nb-theme(input-#{$status}-hover-background-color);
         border-color: nb-theme(input-#{$status}-hover-border-color);
+      }
+      &:focus:hover {
+        background-color: nb-theme(input-#{$status}-focus-and-hover-background-color);
+        border-color: nb-theme(input-#{$status}-focus-and-hover-border-color);
       }
 
       &:disabled {

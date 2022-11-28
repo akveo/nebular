@@ -1,4 +1,5 @@
-@import '../form-field/form-field.component.theme';
+@use '../../styles/theming' as *;
+@use '../form-field/form-field.component.theme' as form-field-theme;
 
 @mixin select-hero {
   nb-select.appearance-hero .select-button {
@@ -11,7 +12,10 @@
       @include nb-ltr(padding-right, nb-theme(select-icon-offset));
       @include nb-rtl(padding-left, nb-theme(select-icon-offset));
     }
-    @include nb-form-field-with-prefix('nb-select.appearance-hero.size-#{$size} .select-button', $size);
+    @include form-field-theme.nb-form-field-with-prefix(
+      'nb-select.appearance-hero.size-#{$size} .select-button',
+      $size
+    );
   }
 
   @each $status in nb-get-statuses() {
@@ -33,6 +37,11 @@
       &:hover {
         $left-color: nb-theme(select-hero-#{$status}-hover-left-background-color);
         $right-color: nb-theme(select-hero-#{$status}-hover-right-background-color);
+        background-image: linear-gradient(to right, $left-color, $right-color);
+      }
+      &:focus:hover {
+        $left-color: nb-theme(select-hero-#{$status}-focus-and-hover-left-background-color);
+        $right-color: nb-theme(select-hero-#{$status}-focus-and-hover-right-background-color);
         background-image: linear-gradient(to right, $left-color, $right-color);
       }
       &[disabled] {

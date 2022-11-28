@@ -1,0 +1,103 @@
+@use '../../styles/theming' as *;
+@use '../form-field/form-field.component.theme' as form-field-theme;
+
+@mixin select-with-autocomplete-outline {
+  nb-select-with-autocomplete.appearance-outline .select-button {
+    border-style: nb-theme(select-outline-border-style);
+    border-width: nb-theme(select-outline-border-width);
+
+    &.top {
+      border-top-style: nb-theme(select-outline-adjacent-border-style);
+      border-top-width: nb-theme(select-outline-adjacent-border-width);
+    }
+    &.bottom {
+      border-bottom-style: nb-theme(select-outline-adjacent-border-style);
+      border-bottom-width: nb-theme(select-outline-adjacent-border-width);
+    }
+  }
+
+  @each $status in nb-get-statuses() {
+    nb-select-with-autocomplete.appearance-outline.status-#{$status} .select-button {
+      background-color: nb-theme(select-outline-#{$status}-background-color);
+      border-color: nb-theme(select-outline-#{$status}-border-color);
+      color: nb-theme(select-outline-#{$status}-text-color);
+
+      &.placeholder {
+        color: nb-theme(select-outline-#{$status}-placeholder-text-color);
+      }
+      nb-icon {
+        color: nb-theme(select-outline-#{$status}-icon-color);
+      }
+
+      &:focus {
+        background-color: nb-theme(select-outline-#{$status}-focus-background-color);
+        border-color: nb-theme(select-outline-#{$status}-focus-border-color);
+      }
+      &:hover {
+        background-color: nb-theme(select-outline-#{$status}-hover-background-color);
+        border-color: nb-theme(select-outline-#{$status}-hover-border-color);
+      }
+      &:focus:hover {
+        background-color: nb-theme(select-outline-#{$status}-focus-and-hover-background-color);
+        border-color: nb-theme(select-outline-#{$status}-focus-and-hover-border-color);
+      }
+
+      &[disabled] {
+        color: nb-theme(select-outline-#{$status}-disabled-text-color);
+        background-color: nb-theme(select-outline-#{$status}-disabled-background-color);
+        border-color: nb-theme(select-outline-#{$status}-disabled-border-color);
+
+        nb-icon {
+          color: nb-theme(select-outline-#{$status}-disabled-icon-color);
+        }
+      }
+
+      &.bottom,
+      &.top {
+        border-color: nb-theme(select-outline-#{$status}-open-border-color);
+      }
+
+      &.top {
+        border-top-color: nb-theme(select-outline-#{$status}-adjacent-border-color);
+      }
+      &.bottom {
+        border-bottom-color: nb-theme(select-outline-#{$status}-adjacent-border-color);
+      }
+    }
+  }
+
+  @each $size in nb-get-sizes() {
+    nb-select-with-autocomplete.appearance-outline.size-#{$size} {
+      .select-button {
+        padding: nb-theme(select-outline-#{$size}-padding);
+        @include nb-ltr(padding-right, nb-theme(select-icon-offset));
+        @include nb-rtl(padding-left, nb-theme(select-icon-offset));
+      }
+
+      .nb-form-field-prefix-#{$size},
+      .nb-form-field-suffix-#{$size} {
+        width: nb-theme(select-icon-offset);
+      }
+
+      .nb-form-field-prefix-#{$size} {
+        @include nb-ltr(margin-right, calc(#{nb-theme(select-icon-offset)} * -1));
+        @include nb-rtl(margin-left, calc(#{nb-theme(select-icon-offset)} * -1));
+      }
+
+      .nb-form-field-suffix-#{$size} {
+        @include nb-ltr(margin-left, calc(#{nb-theme(select-icon-offset)} * -1));
+        @include nb-rtl(margin-right, calc(#{nb-theme(select-icon-offset)} * -1));
+      }
+
+      [nbInput] {
+        @include nb-ltr(padding-right, nb-theme(select-icon-offset));
+        @include nb-rtl(padding-left, nb-theme(select-icon-offset));
+      }
+    }
+
+    @include form-field-theme.nb-form-field-with-prefix(
+      'nb-select-with-autocomplete.appearance-outline.size-#{$size} .select-button',
+      $size
+    );
+  }
+}

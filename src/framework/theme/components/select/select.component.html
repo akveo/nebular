@@ -1,12 +1,14 @@
-<button [disabled]="disabled"
-        [ngClass]="selectButtonClasses"
-        (blur)="trySetTouched()"
-        (keydown.arrowDown)="show()"
-        (keydown.arrowUp)="show()"
-        class="select-button"
-        type="button"
-        #selectButton>
-
+<button
+  [disabled]="disabled"
+  [ngClass]="selectButtonClasses"
+  (blur)="trySetTouched()"
+  (keydown.arrowDown)="show()"
+  (keydown.arrowUp)="show()"
+  class="select-button"
+  type="button"
+  #selectButton
+>
+  <span (click)="disabled && $event.stopPropagation()">
     <ng-container *ngIf="selectionModel.length; else placeholderTemplate">
       <ng-container *ngIf="customLabel; else defaultSelectionTemplate">
         <ng-content select="nb-select-label"></ng-content>
@@ -16,11 +18,23 @@
     </ng-container>
 
     <ng-template #placeholderTemplate>{{ placeholder }}</ng-template>
+  </span>
 
-    <nb-icon icon="chevron-down-outline" pack="nebular-essentials" (click)="disabled && $event.stopPropagation()" aria-hidden="true">
-    </nb-icon>
+  <nb-icon
+    icon="chevron-down-outline"
+    pack="nebular-essentials"
+    (click)="disabled && $event.stopPropagation()"
+    aria-hidden="true"
+  >
+  </nb-icon>
 </button>
 
-<nb-option-list *nbPortal [size]="size" [position]="overlayPosition" [style.width.px]="hostWidth" [ngClass]="optionsListClass">
+<nb-option-list
+  *nbPortal
+  [size]="size"
+  [position]="overlayPosition"
+  [style.width.px]="optionsWidth"
+  [ngClass]="optionsListClass"
+>
   <ng-content select="nb-option, nb-option-group"></ng-content>
 </nb-option-list>

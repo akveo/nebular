@@ -1,0 +1,59 @@
+/*!
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+
+@use '../../styles/theming' as *;
+
+:host {
+  display: inline-block;
+  max-width: 100%;
+
+  .select-button {
+    @include nb-ltr(text-align, left) {
+      nb-icon {
+        right: 0.2em;
+      }
+    }
+    @include nb-rtl(text-align, right) {
+      nb-icon {
+        left: 0.2em;
+      }
+    }
+  }
+}
+
+:host(.full-width) {
+  width: 100%;
+}
+
+:host(.nb-transition) {
+  .select-button {
+    @include nb-component-animation(background-color, border-color, border-radius, box-shadow, color);
+  }
+}
+
+.select-button,
+nb-form-field {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-transform: none;
+  white-space: nowrap;
+}
+
+nb-icon:not([nbSuffix]) {
+  font-size: 1.5em;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  @include nb-ltr(right, 0.5rem);
+  @include nb-rtl(left, 0.5rem);
+  @include nb-component-animation(transform);
+}
+
+:host(.open) nb-icon:not([nbSuffix]) {
+  transform: translateY(-50%) rotate(180deg);
+}

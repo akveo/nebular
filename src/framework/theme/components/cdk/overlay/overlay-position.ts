@@ -1,4 +1,5 @@
 import { ElementRef, Inject, Injectable } from '@angular/core';
+import { GlobalPositionStrategy } from '@angular/cdk/overlay';
 
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
@@ -17,8 +18,7 @@ import { NbPlatform } from '../platform/platform-service';
 import { NbOverlayContainerAdapter } from '../adapter/overlay-container-adapter';
 import { NbViewportRulerAdapter } from '../adapter/viewport-ruler-adapter';
 import { NbGlobalLogicalPosition } from './position-helper';
-import { GlobalPositionStrategy } from '@angular/cdk/overlay';
-
+import { NbLayoutDirection } from '../../../services/direction.service';
 
 export type NbAdjustmentValues = 'noop' | 'clockwise' | 'counterclockwise' | 'vertical' | 'horizontal';
 export enum NbAdjustment {
@@ -29,8 +29,21 @@ export enum NbAdjustment {
   HORIZONTAL = 'horizontal',
 }
 
-// tslint:disable-next-line:max-line-length
-export type NbPositionValues = 'top' | 'bottom' | 'left' | 'right' | 'start' | 'end' | 'top-end' | 'top-start' | 'bottom-end' | 'bottom-start' | 'end-top' | 'end-bottom' | 'start-top' | 'start-bottom';
+export type NbPositionValues =
+  | 'top'
+  | 'bottom'
+  | 'left'
+  | 'right'
+  | 'start'
+  | 'end'
+  | 'top-end'
+  | 'top-start'
+  | 'bottom-end'
+  | 'bottom-start'
+  | 'end-top'
+  | 'end-bottom'
+  | 'start-top'
+  | 'start-bottom';
 export enum NbPosition {
   TOP = 'top',
   BOTTOM = 'bottom',
@@ -93,6 +106,22 @@ const POSITIONS = {
   },
 };
 
+const RTL_PHYSICAL_POSITIONS = {
+  ...POSITIONS,
+  [NbPosition.RIGHT](offset) {
+    return { originX: 'start', originY: 'center', overlayX: 'end', overlayY: 'center', offsetX: offset };
+  },
+  [NbPosition.LEFT](offset) {
+    return { originX: 'end', originY: 'center', overlayX: 'start', overlayY: 'center', offsetX: -offset };
+  },
+  [NbPosition.START](offset) {
+    return this[NbPosition.RIGHT](offset);
+  },
+  [NbPosition.END](offset) {
+    return this[NbPosition.LEFT](offset);
+  },
+};
+
 const COUNTER_CLOCKWISE_POSITIONS = [
   NbPosition.TOP,
   NbPosition.TOP_END,
@@ -124,12 +153,10 @@ const CLOCKWISE_POSITIONS = [
 const VERTICAL_POSITIONS = [NbPosition.BOTTOM, NbPosition.TOP];
 const HORIZONTAL_POSITIONS = [NbPosition.START, NbPosition.END];
 
-
 function comparePositions(p1: NbConnectedPosition, p2: NbConnectedPosition): boolean {
-  return p1.originX === p2.originX
-    && p1.originY === p2.originY
-    && p1.overlayX === p2.overlayX
-    && p1.overlayY === p2.overlayY;
+  return (
+    p1.originX === p2.originX && p1.originY === p2.originY && p1.overlayX === p2.overlayX && p1.overlayY === p2.overlayY
+  );
 }
 
 /**
@@ -137,13 +164,15 @@ function comparePositions(p1: NbConnectedPosition, p2: NbConnectedPosition): boo
  * You have to provide adjustment and appropriate strategy will be chosen in runtime.
  * */
 export class NbAdjustableConnectedPositionStrategy
-  extends NbFlexibleConnectedPositionStrategy implements NbPositionStrategy {
-
+  extends NbFlexibleConnectedPositionStrategy
+  implements NbPositionStrategy
+{
   protected _position: NbPosition;
   protected _offset: number = 15;
   protected _adjustment: NbAdjustment;
+  protected _direction: NbLayoutDirection | undefined;
 
-  protected appliedPositions: { key: NbPosition, connectedPosition: NbConnectedPosition }[];
+  protected appliedPositions: { key: NbPosition; connectedPosition: NbConnectedPosition }[];
 
   readonly positionChange: Observable<NbPosition> = this.positionChanges.pipe(
     map((positionChange: NbConnectedOverlayPositionChange) => positionChange.connectionPair),
@@ -161,6 +190,11 @@ export class NbAdjustableConnectedPositionStrategy
      * */
     this.applyPositions();
     super.attach(overlayRef);
+  }
+
+  direction(direction: NbLayoutDirection): this {
+    this._direction = direction;
+    return this;
   }
 
   apply() {
@@ -192,7 +226,7 @@ export class NbAdjustableConnectedPositionStrategy
   protected createPositions(): NbPosition[] {
     switch (this._adjustment) {
       case NbAdjustment.NOOP:
-        return [ this._position ];
+        return [this._position];
       case NbAdjustment.CLOCKWISE:
         return this.reorderPreferredPositions(CLOCKWISE_POSITIONS);
       case NbAdjustment.COUNTERCLOCKWISE:
@@ -204,35 +238,36 @@ export class NbAdjustableConnectedPositionStrategy
     }
   }
 
+  protected mapToLogicalPosition(position: NbPosition): NbPosition {
+    if (position === NbPosition.LEFT) {
+      return this._direction === NbLayoutDirection.LTR ? NbPosition.START : NbPosition.END;
+    }
+    if (position === NbPosition.RIGHT) {
+      return this._direction === NbLayoutDirection.LTR ? NbPosition.END : NbPosition.START;
+    }
+    return position;
+  }
+
   protected persistChosenPositions(positions: NbPosition[]) {
-    this.appliedPositions = positions.map(position => ({
+    const positionGrid = this._direction === NbLayoutDirection.RTL ? RTL_PHYSICAL_POSITIONS : POSITIONS;
+
+    this.appliedPositions = positions.map((position) => ({
       key: position,
-      connectedPosition: POSITIONS[position](this._offset),
+      connectedPosition: positionGrid[position](this._offset) as NbConnectedPosition,
     }));
   }
 
   protected reorderPreferredPositions(positions: NbPosition[]): NbPosition[] {
     // Physical positions should be mapped to logical as adjustments use logical positions.
-    const startPositionIndex = positions.indexOf(this.mapToLogicalPosition(this._position));
+    const startPosition = this.mapToLogicalPosition(this._position);
+    const startPositionIndex = positions.indexOf(startPosition);
     const firstPart = positions.slice(startPositionIndex);
     const secondPart = positions.slice(0, startPositionIndex);
     return firstPart.concat(secondPart);
   }
-
-  protected mapToLogicalPosition(position: NbPosition): NbPosition {
-    if (position === NbPosition.LEFT) {
-      return NbPosition.START;
-    }
-    if (position === NbPosition.RIGHT) {
-      return NbPosition.END;
-    }
-
-    return position;
-  }
 }
 
 export class NbGlobalPositionStrategy extends GlobalPositionStrategy {
-
   position(position: NbGlobalLogicalPosition): this {
     switch (position) {
       case NbGlobalLogicalPosition.TOP_START:
@@ -252,12 +287,13 @@ export class NbGlobalPositionStrategy extends GlobalPositionStrategy {
 
 @Injectable()
 export class NbPositionBuilderService {
-  constructor(@Inject(NB_DOCUMENT) protected document,
-              protected viewportRuler: NbViewportRulerAdapter,
-              protected platform: NbPlatform,
-              protected positionBuilder: NbOverlayPositionBuilder,
-              protected overlayContainer: NbOverlayContainerAdapter) {
-  }
+  constructor(
+    @Inject(NB_DOCUMENT) protected document,
+    protected viewportRuler: NbViewportRulerAdapter,
+    protected platform: NbPlatform,
+    protected positionBuilder: NbOverlayPositionBuilder,
+    protected overlayContainer: NbOverlayContainerAdapter,
+  ) {}
 
   global(): NbGlobalPositionStrategy {
     return new NbGlobalPositionStrategy();

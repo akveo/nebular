@@ -4,6 +4,9 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
+@use '../../styles/global/breakpoints' as *;
+@use '../../styles/theming' as *;
+
 @mixin window-mode($padding-top) {
   padding-top: $padding-top;
 
@@ -17,12 +20,12 @@
   }
 
   nb-sidebar.fixed {
-    left: calc((100vw - #{nb-theme(layout-window-mode-max-width)}) / 2);
+    left: calc((100vw - #{$layout-window-mode-max-width}) / 2);
   }
 
   .layout .layout-container {
     nb-sidebar.fixed.right {
-      right: calc((100vw - #{nb-theme(layout-window-mode-max-width)}) / 2);
+      right: calc((100vw - #{$layout-window-mode-max-width}) / 2);
     }
 
     nb-sidebar.fixed {
@@ -37,14 +40,13 @@
 }
 
 @mixin nb-layout-theme() {
-
   nb-layout .scrollable-container {
     @include nb-scrollbars(
-        nb-theme(layout-scrollbar-color),
-        nb-theme(layout-scrollbar-background-color),
-        nb-theme(layout-scrollbar-width));
+      nb-theme(layout-scrollbar-color),
+      nb-theme(layout-scrollbar-background-color),
+      nb-theme(layout-scrollbar-width)
+    );
   }
-
 
   nb-layout.with-scroll .scrollable-container {
     overflow: auto;
@@ -62,29 +64,28 @@
   }
 
   nb-layout.window-mode {
-
     background: nb-theme(layout-window-mode-background-color);
     display: block;
 
     .scrollable-container {
-      max-width: nb-theme(layout-window-mode-max-width);
+      max-width: $layout-window-mode-max-width;
       margin: 0 auto;
     }
 
     .layout nb-layout-header {
-      max-width: nb-theme(layout-window-mode-max-width);
+      max-width: $layout-window-mode-max-width;
       margin-left: auto;
       margin-right: auto;
       width: 100%;
 
       nav {
-        max-width: nb-theme(layout-window-mode-max-width);
+        max-width: $layout-window-mode-max-width;
         margin: 0 auto;
       }
     }
 
-    @media screen and (min-width: nb-theme(layout-window-mode-max-width) + 20px) {
-      $padding-top: nb-theme(layout-window-mode-padding-top) / 4;
+    @media screen and (min-width: $layout-window-mode-max-width + 20px) {
+      $padding-top: calc(#{nb-theme(layout-window-mode-padding-top)} * 0.25);
 
       @include window-mode($padding-top);
 
@@ -95,8 +96,8 @@
       }
     }
 
-    @media screen and (min-width: nb-theme(layout-window-mode-max-width) + 150px) {
-      $padding-top: nb-theme(layout-window-mode-padding-top) / 2;
+    @media screen and (min-width: $layout-window-mode-max-width + 150px) {
+      $padding-top: calc(#{nb-theme(layout-window-mode-padding-top)} * 0.5);
 
       @include window-mode($padding-top);
 
@@ -107,7 +108,7 @@
       }
     }
 
-    @media screen and (min-width: nb-theme(layout-window-mode-max-width) + 300px) {
+    @media screen and (min-width: $layout-window-mode-max-width + 300px) {
       $padding-top: nb-theme(layout-window-mode-padding-top);
 
       @include window-mode($padding-top);
@@ -130,7 +131,6 @@
     min-height: nb-theme(layout-min-height);
 
     .layout-container {
-
       nb-sidebar {
         &.fixed,
         .main-container-fixed {
@@ -139,7 +139,6 @@
       }
 
       .content {
-
         nb-layout-footer {
           box-shadow: nb-theme(footer-shadow);
 

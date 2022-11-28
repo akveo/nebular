@@ -5,10 +5,15 @@
  */
 
 import { Inject, Injectable } from '@angular/core';
+import { combineLatest, Observable, of } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import { NgdTabbedService } from './tabbed.service';
-import { NgdTextService } from './text.service';
+import { NgdMdSection, NgdTextService } from './text.service';
 import { DOCS, STRUCTURE } from '../../app.options';
+import { NgdArticleService } from './article.service';
+
+type NgdToc = { title: string, fragment: string }[];
 
 @Injectable()
 export class NgdStructureService {
@@ -17,6 +22,7 @@ export class NgdStructureService {
 
   constructor(private textService: NgdTextService,
               private tabbedService: NgdTabbedService,
+              private articleService: NgdArticleService,
               @Inject(STRUCTURE) structure,
               @Inject(DOCS) docs) {
     this.prepared = this.prepareStructure(structure, docs);
@@ -56,8 +62,7 @@ export class NgdStructureService {
       }
 
       if (item.block === 'markdown') {
-        const article = require(`raw-loader!../../../articles/${item.source}`).default;
-        item.children = this.textService.mdToSectionsHTML(article);
+        item.sections = this.articleService.getArticle(item.source);
       }
 
       if (item.children) {
@@ -117,39 +122,45 @@ export class NgdStructureService {
     };
   }
 
-  protected prepareToc(item: any) {
-    return item.children.reduce((acc: any[], child: any) => {
-      if (child.block === 'markdown') {
-        return acc.concat(this.getTocForMd(child));
-      } else if (child.block === 'tabbed') {
-        return acc.concat(this.getTocForTabbed(child));
-      } else if (child.block === 'component') {
-        acc.push(this.getTocForComponent(child));
-      }
-      return acc;
-    }, []);
+  protected prepareToc(item: any): Observable<NgdToc[]> {
+    const tocList: Observable<NgdToc>[] = item.children
+      .reduce((acc: Observable<NgdToc>[], child: any) => {
+        if (child.block === 'markdown') {
+          acc.push(this.getTocForMd(child));
+        } else if (child.block === 'tabbed') {
+          acc.push(this.getTocForTabbed(child));
+        } else if (child.block === 'component') {
+          acc.push(this.getTocForComponent(child));
+        }
+        return acc;
+      }, []);
+
+    return combineLatest(tocList).pipe(
+      map((toc) => [].concat(...toc)),
+    );
   }
 
-  protected getTocForMd(block: any) {
-    return block.children.map((section: any) => ({
-        title: section.title,
-        fragment: section.fragment,
-      }
-    ));
+  protected getTocForMd(block: { sections: Observable<NgdMdSection[]> }): Observable<NgdToc> {
+    return block.sections
+      .pipe(
+        map((sections) => {
+          return sections
+            .map(({ title, fragment }) => ({ title, fragment }));
+        }),
+      );
   }
 
-  protected getTocForComponent(block: any) {
-    return {
+  protected getTocForComponent(block: any): Observable<NgdToc> {
+    return of([{
       title: block.source.name,
       fragment: block.source.slag,
-    }
+    }]);
   }
 
-  protected getTocForTabbed(block: any) {
-    return block.children.map((component: any) => ({
-        title: component.name,
-        fragment: this.textService.createSlag(component.name),
-      }
-    ));
+  protected getTocForTabbed(block: any): Observable<NgdToc> {
+    return of(block.children.map((component: any) => ({
+      title: component.name,
+      fragment: this.textService.createSlag(component.name),
+    })));
   }
 }

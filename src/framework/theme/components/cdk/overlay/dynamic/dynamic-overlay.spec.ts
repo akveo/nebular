@@ -2,31 +2,32 @@ import { TestBed } from '@angular/core/testing';
 import { Component, ComponentFactoryResolver, EventEmitter, Input, NgZone } from '@angular/core';
 import { Subject } from 'rxjs';
 import { ScrollStrategy } from '@angular/cdk/overlay';
-
-import { NbDynamicOverlay } from './dynamic-overlay';
-import { NbOverlayService } from '../overlay-service';
-import { NbRenderableContainer } from '../overlay-container';
-import { NbComponentPortal, NbOverlayConfig, NbOverlayContainer } from '../mapping';
+import {
+  NbDynamicOverlay,
+  NbOverlayService,
+  NbRenderableContainer,
+  NbComponentPortal,
+  NbOverlayConfig,
+  NbOverlayContainer,
+} from '@nebular/theme';
 
 @Component({ template: '' })
 export class NbDynamicOverlayMockComponent implements NbRenderableContainer {
-
   @Input() content: any;
   @Input() context: Object;
   @Input() cfr: ComponentFactoryResolver;
 
-  renderContent() { }
+  renderContent() {}
 }
 
 @Component({ template: '' })
-export class NbDynamicOverlayMock2Component extends NbDynamicOverlayMockComponent { }
-
+export class NbDynamicOverlayMock2Component extends NbDynamicOverlayMockComponent {}
 
 export class MockNgZone extends NgZone {
   onStable: EventEmitter<any> = new EventEmitter(false);
 
   constructor() {
-    super({enableLongStackTrace: false});
+    super({ enableLongStackTrace: false });
   }
 
   run(fn: Function): any {
@@ -58,7 +59,9 @@ const container: any = {
 const ref = {
   portal: null,
 
-  hasAttached() {},
+  hasAttached(): boolean {
+    return false;
+  },
   updatePosition() {},
   updatePositionStrategy() {},
 
@@ -72,12 +75,16 @@ const ref = {
 };
 const repositionRes = 'something';
 const scrollStrategies = {
-  reposition: () => (<unknown> repositionRes) as ScrollStrategy,
+  reposition: () => (<unknown>repositionRes) as ScrollStrategy,
 };
 
 export class NbOverlayContainerMock {
   getContainerElement() {
-    return { contains() { return true; } };
+    return {
+      contains() {
+        return true;
+      },
+    };
   }
 }
 
@@ -325,7 +332,7 @@ describe('dynamic-overlay', () => {
     expect(instance.context).toBe(newContext);
     expect(instance.content).toBe(newContent);
     expect(renderContentSpy).toHaveBeenCalledTimes(3);
-    expect(updatePositionSpy).toHaveBeenCalledTimes(4);
+    expect(updatePositionSpy).toHaveBeenCalledTimes(3);
   });
 
   it('should set component', () => {
@@ -393,8 +400,16 @@ describe('dynamic-overlay', () => {
 
     const overlayContainer = TestBed.inject(NbOverlayContainer);
     const getContainerElementSpy = spyOn(overlayContainer, 'getContainerElement').and.returnValues(
-      { contains() { return false; } },
-      { contains() { return true; } },
+      {
+        contains() {
+          return false;
+        },
+      } as unknown as HTMLElement,
+      {
+        contains() {
+          return true;
+        },
+      } as unknown as HTMLElement,
     );
 
     dynamicOverlay.show();
@@ -411,7 +426,7 @@ describe('dynamic-overlay', () => {
     const overlayContainer = TestBed.inject(NbOverlayContainer);
     // return false once to force overlay ref recreation and then always return true
     overlayContainer.getContainerElement = () => {
-      overlayContainer.getContainerElement = () => ({ contains: () => true }) as unknown as HTMLElement;
+      overlayContainer.getContainerElement = () => ({ contains: () => true } as unknown as HTMLElement);
       return { contains: () => false } as unknown as HTMLElement;
     };
 

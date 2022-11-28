@@ -49,32 +49,11 @@ export class NgdMenuService {
       });
   }
 
-  protected prepareToc(item: any) {
-    return item.children.reduce((acc: any[], child: any) => {
-      if (child.block === 'markdown') {
-        return acc.concat(this.getTocForMd(child));
-      } else if (child.block === 'tabbed') {
-        return acc.concat(this.getTocForTabbed(child));
-      }
-      acc.push(child.source.name);
-      return acc;
-    }, []);
-  }
-
   protected getTocForMd(block: any) {
     return block.children.map((section: any) => ({
       title: section.title,
       fragment: section.fragment,
     }));
-  }
-
-  protected getTocForTabbed(block: any) {
-    return block.children.map((component: any) => (
-      {
-        title: component.name,
-        fragment: this.textService.createSlag(component.name),
-      }
-    ));
   }
 
   createItemLink<T extends IItemLink>(item: T): string {

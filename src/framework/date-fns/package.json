@@ -1,6 +1,6 @@
 {
   "name": "@nebular/date-fns",
-  "version": "8.0.0",
+  "version": "9.1.0-rc.8",
   "description": "@nebular/date-fns",
   "author": "akveo",
   "license": "MIT",
@@ -21,8 +21,11 @@
     "nebular"
   ],
   "peerDependencies": {
-    "@nebular/theme": "8.0.0",
+    "@nebular/theme": "9.1.0-rc.8",
     "date-fns": "2"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0"
   },
   "sideEffects": false
 }

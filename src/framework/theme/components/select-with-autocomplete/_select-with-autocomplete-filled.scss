@@ -1,0 +1,83 @@
+@use '../../styles/theming' as *;
+@use '../form-field/form-field.component.theme' as form-field-theme;
+
+@mixin select-with-autocomplete-filled {
+  nb-select-with-autocomplete.appearance-filled .select-button {
+    border-style: nb-theme(select-filled-border-style);
+    border-width: nb-theme(select-filled-border-width);
+  }
+
+  @each $size in nb-get-sizes() {
+    nb-select-with-autocomplete.appearance-filled.size-#{$size} {
+      .select-button {
+        padding: nb-theme(select-filled-#{$size}-padding);
+        @include nb-ltr(padding-right, nb-theme(select-icon-offset));
+        @include nb-rtl(padding-left, nb-theme(select-icon-offset));
+      }
+
+      .nb-form-field-prefix-#{$size},
+      .nb-form-field-suffix-#{$size} {
+        width: nb-theme(select-icon-offset);
+      }
+
+      .nb-form-field-prefix-#{$size} {
+        @include nb-ltr(margin-right, calc(#{nb-theme(select-icon-offset)} * -1));
+        @include nb-rtl(margin-left, calc(#{nb-theme(select-icon-offset)} * -1));
+      }
+
+      .nb-form-field-suffix-#{$size} {
+        @include nb-ltr(margin-left, calc(#{nb-theme(select-icon-offset)} * -1));
+        @include nb-rtl(margin-right, calc(#{nb-theme(select-icon-offset)} * -1));
+      }
+
+      [nbInput] {
+        @include nb-ltr(padding-right, nb-theme(select-icon-offset));
+        @include nb-rtl(padding-left, nb-theme(select-icon-offset));
+      }
+    }
+
+    @include form-field-theme.nb-form-field-with-prefix(
+      'nb-select-with-autocomplete.appearance-filled.size-#{$size} .select-button',
+      $size
+    );
+  }
+
+  @each $status in nb-get-statuses() {
+    nb-select-with-autocomplete.appearance-filled.status-#{$status} .select-button {
+      background-color: nb-theme(select-filled-#{$status}-background-color);
+      border-color: nb-theme(select-filled-#{$status}-border-color);
+      color: nb-theme(select-filled-#{$status}-text-color);
+
+      &.placeholder {
+        color: nb-theme(select-filled-#{$status}-placeholder-text-color);
+      }
+
+      &:focus {
+        background-color: nb-theme(select-filled-#{$status}-focus-background-color);
+        border-color: nb-theme(select-filled-#{$status}-focus-border-color);
+      }
+      &:hover {
+        background-color: nb-theme(select-filled-#{$status}-hover-background-color);
+        border-color: nb-theme(select-filled-#{$status}-hover-border-color);
+      }
+      &:focus:hover {
+        background-color: nb-theme(select-filled-#{$status}-focus-and-hover-background-color);
+        border-color: nb-theme(select-filled-#{$status}-focus-and-hover-border-color);
+      }
+
+      &[disabled] {
+        background-color: nb-theme(select-filled-#{$status}-disabled-background-color);
+        border-color: nb-theme(select-filled-#{$status}-disabled-border-color);
+        color: nb-theme(select-filled-#{$status}-disabled-text-color);
+
+        nb-icon {
+          color: nb-theme(select-filled-#{$status}-disabled-icon-color);
+        }
+      }
+
+      nb-icon {
+        color: nb-theme(select-filled-#{$status}-icon-color);
+      }
+    }
+  }
+}

@@ -1,4 +1,5 @@
-@import '../form-field/form-field.component.theme';
+@use '../../styles/theming' as *;
+@use '../form-field/form-field.component.theme' as form-field-theme;
 
 @mixin select-filled {
   nb-select.appearance-filled .select-button {
@@ -13,7 +14,10 @@
       @include nb-rtl(padding-left, nb-theme(select-icon-offset));
     }
 
-    @include nb-form-field-with-prefix('nb-select.appearance-filled.size-#{$size} .select-button', $size);
+    @include form-field-theme.nb-form-field-with-prefix(
+      'nb-select.appearance-filled.size-#{$size} .select-button',
+      $size
+    );
   }
 
   @each $status in nb-get-statuses() {
@@ -33,6 +37,10 @@
       &:hover {
         background-color: nb-theme(select-filled-#{$status}-hover-background-color);
         border-color: nb-theme(select-filled-#{$status}-hover-border-color);
+      }
+      &:focus:hover {
+        background-color: nb-theme(select-filled-#{$status}-focus-and-hover-background-color);
+        border-color: nb-theme(select-filled-#{$status}-focus-and-hover-border-color);
       }
 
       &[disabled] {

@@ -1,7 +1,7 @@
-@import '../../../@theme/styles/themes';
+@use '../../../@theme/styles/themes' as *;
+@use '../../../../../src/framework/theme/styles/globals' as *;
 
 @include nb-install-component() {
-
   $left-section-width: nb-theme(sidebar-width);
   $right-section-width: nb-theme(settings-col-width);
   $logo-fg: nb-theme(header-fg);
@@ -59,9 +59,11 @@
           color: $menu-item-fg;
           display: block;
 
-          &:hover, &.active, &:focus {
+          &:hover,
+          &.active,
+          &:focus {
             color: $menu-item-fg-active;
-            outline: none!important;
+            outline: none !important;
           }
         }
       }

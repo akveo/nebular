@@ -6,7 +6,7 @@
 
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NbCardModule, NbDatepickerModule, NbInputModule, NbTimepickerModule } from '@nebular/theme';
+import { NbButtonModule, NbCardModule, NbDatepickerModule, NbInputModule, NbTimepickerModule } from '@nebular/theme';
 import { DatepickerRoutingModule } from './datepicker-routing.module';
 import { DatepickerFormsComponent } from './datepicker-forms.component';
 import { DatepickerShowcaseComponent } from './datepicker-showcase.component';
@@ -34,6 +34,7 @@ import { DatepickerFilterComponent } from './datepicker-filter.component';
     NbInputModule,
     DatepickerRoutingModule,
     NbCardModule,
+    NbButtonModule,
   ],
 })
 export class DatepickerModule {}

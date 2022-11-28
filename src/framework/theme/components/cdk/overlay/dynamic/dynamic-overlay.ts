@@ -1,11 +1,8 @@
 import { ComponentFactoryResolver, ComponentRef, Injectable, NgZone, Type } from '@angular/core';
-import { filter, takeUntil, distinctUntilChanged } from 'rxjs/operators';
+import { filter, takeUntil, distinctUntilChanged, take } from 'rxjs/operators';
 import { Subject, BehaviorSubject, Observable, merge } from 'rxjs';
 
-import {
-  NbAdjustableConnectedPositionStrategy,
-  NbPosition,
-} from '../overlay-position';
+import { NbAdjustableConnectedPositionStrategy, NbPosition } from '../overlay-position';
 
 import { NbRenderableContainer } from '../overlay-container';
 import { createContainer, NbOverlayContent, NbOverlayService, patch } from '../overlay-service';
@@ -20,7 +17,6 @@ export interface NbDynamicOverlayController {
 
 @Injectable()
 export class NbDynamicOverlay {
-
   protected ref: NbOverlayRef;
   protected container: ComponentRef<NbRenderableContainer>;
   protected componentType: Type<NbRenderableContainer>;
@@ -29,8 +25,9 @@ export class NbDynamicOverlay {
   protected positionStrategy: NbAdjustableConnectedPositionStrategy;
   protected overlayConfig: NbOverlayConfig = {};
   protected lastAppliedPosition: NbPosition;
+  protected disabled = false;
 
-  protected positionStrategyChange$ = new Subject();
+  protected positionStrategyChange$ = new Subject<void>();
   protected isShown$ = new BehaviorSubject<boolean>(false);
   protected destroy$ = new Subject<void>();
   protected overlayDestroy$ = new Subject<NbOverlayRef>();
@@ -47,19 +44,22 @@ export class NbDynamicOverlay {
     protected overlay: NbOverlayService,
     protected componentFactoryResolver: ComponentFactoryResolver,
     protected zone: NgZone,
-    protected overlayContainer: NbOverlayContainer) {
-  }
+    protected overlayContainer: NbOverlayContainer,
+  ) {}
 
-  create(componentType: Type<NbRenderableContainer>,
-         content: NbOverlayContent,
-         context: Object,
-         positionStrategy: NbAdjustableConnectedPositionStrategy,
-         overlayConfig: NbOverlayConfig = {}) {
-
+  create(
+    componentType: Type<NbRenderableContainer>,
+    content: NbOverlayContent,
+    context: Object,
+    positionStrategy: NbAdjustableConnectedPositionStrategy,
+    overlayConfig: NbOverlayConfig = {},
+    disabled = false,
+  ) {
     this.setContentAndContext(content, context);
     this.setComponent(componentType);
     this.setPositionStrategy(positionStrategy);
     this.setOverlayConfig(overlayConfig);
+    this.setDisabled(disabled);
 
     return this;
   }
@@ -110,12 +110,7 @@ export class NbDynamicOverlay {
     this.positionStrategy.positionChange
       .pipe(
         filter(() => !!this.container),
-        takeUntil(
-          merge(
-            this.positionStrategyChange$,
-            this.destroy$,
-          ),
-        ),
+        takeUntil(merge(this.positionStrategyChange$, this.destroy$)),
       )
       .subscribe((position: NbPosition) => {
         this.lastAppliedPosition = position;
@@ -137,7 +132,18 @@ export class NbDynamicOverlay {
     }
   }
 
+  setDisabled(disabled: boolean) {
+    if (disabled && this.isShown$.value) {
+      this.hide();
+    }
+    this.disabled = disabled;
+  }
+
   show() {
+    if (this.disabled) {
+      return;
+    }
+
     if (!this.ref) {
       this.createOverlay();
     }
@@ -228,9 +234,7 @@ export class NbDynamicOverlay {
       filter((destroyedOverlay: NbOverlayRef) => destroyedOverlay === overlay),
     );
 
-    this.zone.onStable
-      .pipe(takeUntil(merge(this.destroy$, overlayDestroy$)))
-      .subscribe(() => this.updatePosition());
+    this.zone.onStable.pipe(take(1), takeUntil(merge(this.destroy$, overlayDestroy$))).subscribe(() => this.updatePosition());
   }
 
   protected updatePosition() {

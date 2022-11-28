@@ -2,7 +2,7 @@ export abstract class ComponentLink {
   path: string;
   name?: string;
   component?: string;
-  link?: any[] | string;
+  link?: string;
   children?: ComponentLink[];
 }
 
@@ -480,6 +480,12 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         component: 'ChatCustomMessageComponent',
         name: 'Chat Custom Message',
       },
+      {
+        path: 'chat-template-title.component',
+        link: '/chat/chat-template-title.component',
+        component: 'ChatTemplateTitleComponent',
+        name: 'Chat Template Title',
+      },
     ],
   },
   {
@@ -539,6 +545,24 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         name: 'Date Timepicker Showcase',
       },
       {
+        path: 'date-timepicker-dynamic-inputs-showcase.component',
+        link: '/datepicker-with-format/date-timepicker-dynamic-inputs-showcase.component',
+        component: 'DateTimepickerDynamicInputsShowcaseComponent',
+        name: 'Date Timepicker Dynamic Inputs Showcase',
+      },
+      {
+        path: 'datepicker-dynamic-inputs-showcase.component',
+        link: '/datepicker-with-format/datepicker-dynamic-inputs-showcase.component',
+        component: 'DatepickerDynamicInputsShowcaseComponent',
+        name: 'Datepicker Dynamic Inputs Showcase',
+      },
+      {
+        path: 'range-picker-dynamic-inputs-showcase.component',
+        link: '/datepicker-with-format/rangepicker-dynamic-inputs-showcase.component',
+        component: 'RangeickerDynamicInputsShowcaseComponent',
+        name: 'Range Picker Dynamic Inputs Showcase',
+      },
+      {
         path: 'date-timepicker-single-column.component',
         link: '/datepicker/date-timepicker-single-column.component',
         component: 'DateTimepickerSingleColumnComponent',
@@ -590,6 +614,12 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         link: '/timepicker/timepicker-with-seconds.component',
         component: 'TimepickerWithSecondsComponent',
         name: 'Timepicker With Seconds',
+      },
+      {
+        path: 'timepicker-dynamic-inputs-showcase.component',
+        link: '/timepicker/timepicker-dynamic-inputs-showcase.component',
+        component: 'TimepickerDynamicInputsShowcaseComponent',
+        name: 'Timepicker Dynamic Inputs Showcase',
       },
       {
         path: 'timepicker-form-control.component',
@@ -1155,6 +1185,12 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         component: 'SelectIconComponent',
         name: 'Select Icon',
       },
+      {
+        path: 'select-autocomplete-showcase.component',
+        link: '/select/select-autocomplete-showcase.component',
+        component: 'SelectAutocompleteShowcaseComponent',
+        name: 'Select Autocomplete Showcase',
+      },
     ],
   },
   {
@@ -1230,6 +1266,12 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         link: '/stepper/stepper-linear.component',
         component: 'StepperLinearComponent',
         name: 'Stepper Linear',
+      },
+      {
+        path: 'stepper-step-change-event.component',
+        link: '/stepper/stepper-step-change-event.component',
+        component: 'StepperStepChangeEventComponent',
+        name: 'Stepper Step Change Event',
       },
     ],
   },
@@ -1344,6 +1386,12 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         link: '/tabset/tabset-disabled.component',
         component: 'TabsetDisabledComponent',
         name: 'Tabset Disabled',
+      },
+      {
+        path: 'tabset-template-title.component',
+        link: '/tabset/tabset-template-title.component',
+        component: 'TabsetTemplateTitleComponent',
+        name: 'Tabset Template Title',
       },
     ],
   },
@@ -1496,6 +1544,18 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         link: '/window/window-controls.component',
         component: 'WindowControlsComponent',
         name: 'Window Controls',
+      },
+      {
+        path: 'window-template-title.component',
+        link: '/window/window-template-title.component',
+        component: 'WindowTemplateTitleComponent',
+        name: 'Window Template Title',
+      },
+      {
+        path: 'window-result.component',
+        link: '/window/window-result.component',
+        component: 'WindowResultComponent',
+        name: 'Window Result',
       },
     ],
   },
