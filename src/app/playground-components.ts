@@ -545,24 +545,6 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         name: 'Date Timepicker Showcase',
       },
       {
-        path: 'date-timepicker-dynamic-inputs-showcase.component',
-        link: '/datepicker-with-format/date-timepicker-dynamic-inputs-showcase.component',
-        component: 'DateTimepickerDynamicInputsShowcaseComponent',
-        name: 'Date Timepicker Dynamic Inputs Showcase',
-      },
-      {
-        path: 'datepicker-dynamic-inputs-showcase.component',
-        link: '/datepicker-with-format/datepicker-dynamic-inputs-showcase.component',
-        component: 'DatepickerDynamicInputsShowcaseComponent',
-        name: 'Datepicker Dynamic Inputs Showcase',
-      },
-      {
-        path: 'range-picker-dynamic-inputs-showcase.component',
-        link: '/datepicker-with-format/rangepicker-dynamic-inputs-showcase.component',
-        component: 'RangeickerDynamicInputsShowcaseComponent',
-        name: 'Range Picker Dynamic Inputs Showcase',
-      },
-      {
         path: 'date-timepicker-single-column.component',
         link: '/datepicker/date-timepicker-single-column.component',
         component: 'DateTimepickerSingleColumnComponent',
@@ -585,6 +567,29 @@ export const PLAYGROUND_COMPONENTS: ComponentLink[] = [
         link: '/datepicker/datepicker-filter.component',
         component: 'DatepickerFilterComponent',
         name: 'Datepicker Filter',
+      },
+    ],
+  },
+  {
+    path: 'datepicker-with-format',
+    children: [
+      {
+        path: 'date-timepicker-dynamic-inputs-showcase.component',
+        link: '/datepicker-with-format/date-timepicker-dynamic-inputs-showcase.component',
+        component: 'DateTimepickerDynamicInputsShowcaseComponent',
+        name: 'Date Timepicker Dynamic Inputs Showcase',
+      },
+      {
+        path: 'datepicker-dynamic-inputs-showcase.component',
+        link: '/datepicker-with-format/datepicker-dynamic-inputs-showcase.component',
+        component: 'DatepickerDynamicInputsShowcaseComponent',
+        name: 'Datepicker Dynamic Inputs Showcase',
+      },
+      {
+        path: 'rangepicker-dynamic-inputs-showcase.component',
+        link: '/datepicker-with-format/rangepicker-dynamic-inputs-showcase.component',
+        component: 'RangepickerDynamicInputsShowcaseComponent',
+        name: 'Rangepicker Dynamic Inputs Showcase',
       },
     ],
   },
