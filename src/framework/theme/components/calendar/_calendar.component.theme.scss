@@ -23,7 +23,7 @@
 
     .calendar-navigation {
       border: none;
-      display: flex;
+      display: nb-theme(calendar-navigation-display);
 
       padding: nb-theme(calendar-navigation-padding);
       color: nb-theme(calendar-navigation-text-color);
