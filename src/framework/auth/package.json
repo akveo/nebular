@@ -1,17 +1,17 @@
 {
-  "name": "@nebular/auth",
-  "version": "9.1.0-rc.8",
-  "description": "@nebular/auth",
+  "name": "@areyoufreebusy/auth",
+  "version": "9.1.0-rc.9",
+  "description": "@areyoufreebusy/auth",
   "author": "akveo",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/akveo/nebular.git"
+    "url": "git+https://github.com/areyoufreebusy/nebular.git"
   },
   "bugs": {
-    "url": "https://github.com/akveo/nebular/issues"
+    "url": "https://github.com/areyoufreebusy/nebular/issues"
   },
-  "homepage": "https://github.com/akveo/nebular#readme",
+  "homepage": "https://github.com/areyoufreebusy/nebular#readme",
   "keywords": [
     "angular",
     "typescript",
@@ -28,7 +28,7 @@
     "@angular/core": "^13.0.0",
     "@angular/router": "^13.0.0",
     "@angular/forms": "^13.0.0",
-    "@nebular/theme": "9.1.0-rc.8",
+    "@areyoufreebusy/theme": "9.1.0-rc.8",
     "rxjs": "^6.5.3 || ^7.4.0"
   },
   "dependencies": {

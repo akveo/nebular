@@ -1,17 +1,17 @@
 {
-  "name": "@nebular/moment",
-  "version": "9.1.0-rc.8",
-  "description": "@nebular/moment",
+  "name": "@areyoufreebusy/moment",
+  "version": "9.1.0-rc.9",
+  "description": "@areyoufreebusy/moment",
   "author": "akveo",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/akveo/nebular.git"
+    "url": "git+https://github.com/AreYouFreeBusy/nebular.git"
   },
   "bugs": {
-    "url": "https://github.com/akveo/nebular/issues"
+    "url": "https://github.com/AreYouFreeBusy/nebular/issues"
   },
-  "homepage": "https://github.com/akveo/nebular#readme",
+  "homepage": "https://github.com/AreYouFreeBusy/nebular#readme",
   "keywords": [
     "angular",
     "typescript",
@@ -21,7 +21,7 @@
     "nebular"
   ],
   "peerDependencies": {
-    "@nebular/theme": "9.1.0-rc.8",
+    "@areyoufreebusy/theme": "9.1.0-rc.8",
     "moment": "^2.22.2"
   },
   "dependencies": {
