@@ -3,7 +3,7 @@
   "version": "9.1.0-rc.8",
   "license": "MIT",
   "author": "freebusypage <devops@freebusy.io>",
-  "private": true,
+  "private": false,
   "bugs": {
     "url": "https://github.com/AreYouFreeBusy/nebular/issues"
   },
