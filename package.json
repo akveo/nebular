@@ -1,14 +1,14 @@
 {
-  "name": "nebular",
+  "name": "@areyoufreebusy/nebular",
   "version": "9.1.0-rc.8",
   "license": "MIT",
-  "author": "akveo <contact@akveo.com>",
+  "author": "freebusypage <devops@freebusy.io>",
   "private": true,
   "bugs": {
-    "url": "https://github.com/akveo/nebular/issues"
+    "url": "https://github.com/AreYouFreeBusy/nebular/issues"
   },
-  "homepage": "https://github.com/akveo/nebular#readme",
-  "repository": "git+https://github.com/akveo/nebular.git",
+  "homepage": "https://github.com/AreYouFreeBusy/nebular#readme",
+  "repository": "git+https://github.com/AreYouFreeBusy/nebular.git",
   "scripts": {
     "ng": "ng",
     "prestart": "npm run gen:playground",
