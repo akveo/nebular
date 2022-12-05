@@ -5,16 +5,14 @@
  */
 
 import { Component } from '@angular/core';
-import { NbThemeService } from '@nebular/theme';
+import { NbThemeService } from '@areyoufreebusy/theme';
 
 @Component({
   selector: 'ngd-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })
-
 export class NgdHomeComponent {
-
   features = [
     {
       title: 'Introduction',

@@ -6,7 +6,7 @@
 
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { DatePipe } from '@angular/common';
-import { NbDateService, NbNativeDateService, NbCalendarYearCellComponent } from '@nebular/theme';
+import { NbDateService, NbNativeDateService, NbCalendarYearCellComponent } from '@areyoufreebusy/theme';
 
 describe('Component: NbCalendarYearCell', () => {
   let component: NbCalendarYearCellComponent<Date>;

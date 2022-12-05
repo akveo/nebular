@@ -6,7 +6,7 @@
 
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NbCardModule, NbChatModule, NbButtonModule } from '@nebular/theme';
+import { NbCardModule, NbChatModule, NbButtonModule } from '@areyoufreebusy/theme';
 
 import { ChatRoutingModule } from './chat-routing.module';
 import { ChatColorsComponent } from './chat-colors.component';

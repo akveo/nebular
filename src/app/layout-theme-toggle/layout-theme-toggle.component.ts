@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NbThemeService } from '@nebular/theme';
+import { NbThemeService } from '@areyoufreebusy/theme';
 
 @Component({
   selector: 'npg-layout-theme-toggle',

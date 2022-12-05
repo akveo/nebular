@@ -13,7 +13,7 @@ import {
   NB_AUTH_FALLBACK_TOKEN,
   NbAuthTokenParceler,
   NB_AUTH_TOKENS,
-} from '@nebular/auth';
+} from '@areyoufreebusy/auth';
 
 describe('token-parceler', () => {
   let tokenParceler: NbAuthTokenParceler;

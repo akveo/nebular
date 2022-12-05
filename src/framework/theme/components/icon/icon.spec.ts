@@ -6,15 +6,20 @@
 
 import { TestBed } from '@angular/core/testing';
 
-import { NbIconModule, NbIconComponent, NbIconConfig, NbThemeModule, NbFontIcon, NbSvgIcon } from '@nebular/theme';
+import {
+  NbIconModule,
+  NbIconComponent,
+  NbIconConfig,
+  NbThemeModule,
+  NbFontIcon,
+  NbSvgIcon,
+} from '@areyoufreebusy/theme';
 
 describe('icon', () => {
   let fontIcon: NbFontIcon;
   let svgIcon: NbSvgIcon;
 
-
   it(`font icon renders`, () => {
-
     fontIcon = new NbFontIcon('home', 'custom', {
       packClass: 'custom-pack',
       iconClassPrefix: 'cp',
@@ -24,7 +29,6 @@ describe('icon', () => {
   });
 
   it(`font icon getClasses return classes`, () => {
-
     fontIcon = new NbFontIcon('home', '', {
       packClass: 'custom-pack',
     });
@@ -33,7 +37,6 @@ describe('icon', () => {
   });
 
   it(`font icon getClasses return class with prefix`, () => {
-
     fontIcon = new NbFontIcon('home', '', {
       packClass: 'custom-pack',
       iconClassPrefix: 'cp',
@@ -43,14 +46,12 @@ describe('icon', () => {
   });
 
   it(`font icon getClasses return class with name only`, () => {
-
     fontIcon = new NbFontIcon('home', '');
 
     expect(fontIcon.getClasses()).toEqual(['home']);
   });
 
   it(`svg icon renders`, () => {
-
     svgIcon = new NbSvgIcon('home', 'content', {
       packClass: 'custom-pack',
     });
@@ -59,7 +60,6 @@ describe('icon', () => {
   });
 
   it(`svg icon getClasses return class`, () => {
-
     svgIcon = new NbSvgIcon('home', '', {
       packClass: 'custom-pack',
     });
@@ -68,7 +68,6 @@ describe('icon', () => {
   });
 
   it(`svg icon getClasses return class without name`, () => {
-
     svgIcon = new NbSvgIcon('home', '');
 
     expect(svgIcon.getClasses()).toEqual([]);
@@ -76,10 +75,9 @@ describe('icon', () => {
 });
 
 describe('NbIconComponent', () => {
-
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ NbThemeModule.forRoot(), NbIconModule ],
+      imports: [NbThemeModule.forRoot(), NbIconModule],
     });
   });
 

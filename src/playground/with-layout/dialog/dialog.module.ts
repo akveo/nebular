@@ -6,7 +6,7 @@
 
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { NbButtonModule, NbCardModule, NbDialogModule, NbInputModule } from '@nebular/theme';
+import { NbButtonModule, NbCardModule, NbDialogModule, NbInputModule } from '@areyoufreebusy/theme';
 import { DialogRoutingModule } from './dialog-routing.module';
 import { DialogAutoFocusComponent } from './dialog-auto-focus.component';
 import { DialogBackdropClickComponent } from './dialog-backdrop-click.component';
@@ -42,14 +42,7 @@ import { ShowcaseDialogComponent } from './components/showcase-dialog.component'
     ScrollDialogComponent,
     ShowcaseDialogComponent,
   ],
-  imports: [
-    CommonModule,
-    NbDialogModule.forRoot(),
-    NbButtonModule,
-    NbInputModule,
-    NbCardModule,
-    DialogRoutingModule,
-  ],
+  imports: [CommonModule, NbDialogModule.forRoot(), NbButtonModule, NbInputModule, NbCardModule, DialogRoutingModule],
   entryComponents: [
     AutoFocusDialogComponent,
     BackdropClickDialogComponent,

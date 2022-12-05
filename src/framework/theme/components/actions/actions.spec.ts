@@ -14,7 +14,7 @@ import {
   NbIconComponent,
   NbIconLibraries,
   NbThemeModule,
-} from '@nebular/theme';
+} from '@areyoufreebusy/theme';
 
 const ICON_NAME = 'chevron-left-outline';
 
@@ -39,18 +39,12 @@ export class NbActionsTestComponent {
 }
 
 describe('NbActionComponent link with icon', () => {
-
   let fixture: ComponentFixture<NbActionComponent>;
   let actionComponent: NbActionComponent;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [
-        RouterTestingModule.withRoutes([]),
-        NbThemeModule.forRoot(),
-        NbBadgeModule,
-        NbActionsModule,
-      ],
+      imports: [RouterTestingModule.withRoutes([]), NbThemeModule.forRoot(), NbBadgeModule, NbActionsModule],
     });
     const iconLibs: NbIconLibraries = TestBed.inject(NbIconLibraries);
     iconLibs.setDefaultPack('nebular-essentials');
@@ -102,9 +96,7 @@ describe('NbActionComponent link with icon', () => {
     actionComponent.link = '.';
     fixture.detectChanges();
 
-    const icon = fixture.debugElement
-      .query(By.directive(RouterLinkWithHref))
-      .query(By.directive(NbIconComponent));
+    const icon = fixture.debugElement.query(By.directive(RouterLinkWithHref)).query(By.directive(NbIconComponent));
 
     expect(icon).not.toBeNull();
     expect(icon.componentInstance.icon).toEqual(ICON_NAME);
@@ -115,9 +107,7 @@ describe('NbActionComponent link with icon', () => {
     actionComponent.href = '/';
     fixture.detectChanges();
 
-    const icon = fixture.debugElement
-      .query(By.css('a[href]'))
-      .query(By.directive(NbIconComponent));
+    const icon = fixture.debugElement.query(By.css('a[href]')).query(By.directive(NbIconComponent));
 
     expect(icon).not.toBeNull();
     expect(icon.componentInstance.icon).toEqual(ICON_NAME);
@@ -127,9 +117,7 @@ describe('NbActionComponent link with icon', () => {
     actionComponent.icon = ICON_NAME;
     fixture.detectChanges();
 
-    const icon = fixture.debugElement
-      .query(By.css('a'))
-      .query(By.directive(NbIconComponent));
+    const icon = fixture.debugElement.query(By.css('a')).query(By.directive(NbIconComponent));
 
     expect(icon).not.toBeNull();
     expect(icon.componentInstance.icon).toEqual(ICON_NAME);
@@ -201,14 +189,13 @@ describe('NbActionComponent link with icon', () => {
 });
 
 describe('NbActionComponent content projection', () => {
-
   let fixture: ComponentFixture<NbActionsTestComponent>;
   let testComponent: NbActionsTestComponent;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ RouterTestingModule.withRoutes([]), NbThemeModule.forRoot(), NbActionsModule ],
-      declarations: [ NbActionsTestComponent ],
+      imports: [RouterTestingModule.withRoutes([]), NbThemeModule.forRoot(), NbActionsModule],
+      declarations: [NbActionsTestComponent],
     });
     const iconLibs: NbIconLibraries = TestBed.inject(NbIconLibraries);
     iconLibs.setDefaultPack('nebular-essentials');
@@ -248,13 +235,12 @@ describe('NbActionComponent content projection', () => {
 });
 
 describe('NbActionsComponent', () => {
-
   let fixture: ComponentFixture<NbActionsComponent>;
   let actionsComponent: NbActionsComponent;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ NbActionsModule ],
+      imports: [NbActionsModule],
     });
 
     fixture = TestBed.createComponent(NbActionsComponent);
@@ -271,7 +257,7 @@ describe('NbActionsComponent', () => {
   });
 
   it('should set size class corresponding to current size', () => {
-    const sizes: NbComponentSize[] = [ 'tiny', 'small', 'medium', 'large', 'giant' ];
+    const sizes: NbComponentSize[] = ['tiny', 'small', 'medium', 'large', 'giant'];
 
     for (const size of sizes) {
       actionsComponent.size = size;

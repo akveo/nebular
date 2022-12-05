@@ -8,7 +8,7 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Observable, of as observableOf, from } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { NbAuthResult, NbAuthIllegalTokenError, NbAuthStrategy } from '@nebular/auth';
+import { NbAuthResult, NbAuthIllegalTokenError, NbAuthStrategy } from '@areyoufreebusy/auth';
 
 import firebase from 'firebase/compat/app';
 import UserCredential = firebase.auth.UserCredential;

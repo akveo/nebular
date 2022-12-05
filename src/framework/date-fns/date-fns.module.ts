@@ -6,32 +6,26 @@
 
 import { ModuleWithProviders, NgModule } from '@angular/core';
 
-import { NB_DATE_SERVICE_OPTIONS, NbDateService } from '@nebular/theme';
+import { NB_DATE_SERVICE_OPTIONS, NbDateService } from '@areyoufreebusy/theme';
 import { NbDateFnsOptions, NbDateFnsDateService } from './services/date-fns-date.service';
 
 const dateFnsServiceProvider = { provide: NbDateService, useClass: NbDateFnsDateService };
 
 @NgModule({
-  providers: [ dateFnsServiceProvider ],
+  providers: [dateFnsServiceProvider],
 })
 export class NbDateFnsDateModule {
   static forRoot(options: Partial<NbDateFnsOptions>): ModuleWithProviders<NbDateFnsDateModule> {
     return {
       ngModule: NbDateFnsDateModule,
-      providers: [
-        dateFnsServiceProvider,
-        { provide: NB_DATE_SERVICE_OPTIONS, useValue: options },
-      ],
+      providers: [dateFnsServiceProvider, { provide: NB_DATE_SERVICE_OPTIONS, useValue: options }],
     };
   }
 
   static forChild(options: Partial<NbDateFnsOptions>): ModuleWithProviders<NbDateFnsDateModule> {
     return {
       ngModule: NbDateFnsDateModule,
-      providers: [
-        dateFnsServiceProvider,
-        { provide: NB_DATE_SERVICE_OPTIONS, useValue: options },
-      ],
+      providers: [dateFnsServiceProvider, { provide: NB_DATE_SERVICE_OPTIONS, useValue: options }],
     };
   }
 }

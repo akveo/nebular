@@ -5,7 +5,7 @@
  */
 
 import { NgModule } from '@angular/core';
-import { NbActionsModule, NbCardModule, NbProgressBarModule } from '@nebular/theme';
+import { NbActionsModule, NbCardModule, NbProgressBarModule } from '@areyoufreebusy/theme';
 import { ProgressBarRoutingModule } from './progress-bar-routing.module';
 import { ProgressBarInteractiveComponent } from './progress-bar-interactive.component';
 import { ProgressBarShowcaseComponent } from './progress-bar-showcase.component';
@@ -21,11 +21,6 @@ import { ProgressBarValueComponent } from './progress-bar-value.component';
     ProgressBarStatusComponent,
     ProgressBarValueComponent,
   ],
-  imports: [
-    NbProgressBarModule,
-    NbActionsModule,
-    NbCardModule,
-    ProgressBarRoutingModule,
-  ],
+  imports: [NbProgressBarModule, NbActionsModule, NbCardModule, ProgressBarRoutingModule],
 })
 export class ProgressBarModule {}

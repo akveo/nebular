@@ -9,18 +9,14 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
-import {
-  NbCardModule,
-  NbLayoutModule,
-} from '@nebular/theme';
+import { NbCardModule, NbLayoutModule } from '@areyoufreebusy/theme';
 
-import { NbAuthModule } from '@nebular/auth';
+import { NbAuthModule } from '@areyoufreebusy/auth';
 
 import { AzureLoginComponent } from './azure-login.component';
 import { AzureCallbackComponent } from './azure-callback.component';
 import { AuthAzureToken, AzureADB2CAuthStrategy } from './azure-adb2c-auth-strategy';
 import { AzureRoutingModule } from './azure-routing.module';
-
 
 @NgModule({
   imports: [
@@ -56,13 +52,7 @@ import { AzureRoutingModule } from './azure-routing.module';
     NbLayoutModule,
     AzureRoutingModule,
   ],
-  declarations: [
-    AzureLoginComponent,
-    AzureCallbackComponent,
-  ],
-  providers: [
-    AzureADB2CAuthStrategy,
-  ],
+  declarations: [AzureLoginComponent, AzureCallbackComponent],
+  providers: [AzureADB2CAuthStrategy],
 })
-export class AzurePlaygroundModule {
-}
+export class AzurePlaygroundModule {}

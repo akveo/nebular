@@ -5,7 +5,7 @@
  */
 
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { NbButtonToggleAppearance, NbComponentShape, NbComponentSize, NbComponentStatus } from '@nebular/theme';
+import { NbButtonToggleAppearance, NbComponentShape, NbComponentSize, NbComponentStatus } from '@areyoufreebusy/theme';
 
 @Component({
   templateUrl: './button-group-interactive.component.html',
@@ -13,10 +13,10 @@ import { NbButtonToggleAppearance, NbComponentShape, NbComponentSize, NbComponen
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ButtonGroupInteractiveComponent {
-  appearances: NbButtonToggleAppearance[] = [ 'filled', 'outline', 'ghost' ];
-  shapes: NbComponentShape[] = [ 'rectangle', 'semi-round', 'round' ];
-  statuses: NbComponentStatus[] = [ 'basic', 'primary', 'success', 'info', 'warning', 'danger', 'control' ];
-  sizes: NbComponentSize[] = [ 'tiny', 'small', 'medium', 'large', 'giant' ];
+  appearances: NbButtonToggleAppearance[] = ['filled', 'outline', 'ghost'];
+  shapes: NbComponentShape[] = ['rectangle', 'semi-round', 'round'];
+  statuses: NbComponentStatus[] = ['basic', 'primary', 'success', 'info', 'warning', 'danger', 'control'];
+  sizes: NbComponentSize[] = ['tiny', 'small', 'medium', 'large', 'giant'];
 
   selectedShape: NbComponentShape = 'rectangle';
   selectedSize: NbComponentSize = 'medium';

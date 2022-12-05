@@ -8,12 +8,12 @@ import { Component, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { takeUntil, withLatestFrom, map } from 'rxjs/operators';
 import { Subject } from 'rxjs';
-import { NbThemeService, NbMenuItem, NbSidebarService, NbMenuService } from '@nebular/theme';
+import { NbThemeService, NbMenuItem, NbSidebarService, NbMenuService } from '@areyoufreebusy/theme';
 
 import { NgdMenuService } from '../@theme/services/menu.service';
 import { NgdPaginationService } from '../@theme/services';
 
-import { NbMediaBreakpoint } from '@nebular/theme';
+import { NbMediaBreakpoint } from '@areyoufreebusy/theme';
 
 @Component({
   selector: 'ngd-documentation',
@@ -33,8 +33,8 @@ export class NgdDocumentationComponent implements OnDestroy {
     private themeService: NbThemeService,
     private sidebarService: NbSidebarService,
     private menuService: NbMenuService,
-    private paginationService: NgdPaginationService) {
-
+    private paginationService: NgdPaginationService,
+  ) {
     this.themeService.changeTheme('docs-page');
     this.paginationService.setPaginationItems('/docs');
     this.menuItems = this.service.getPreparedMenu('/docs');

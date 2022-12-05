@@ -13,7 +13,7 @@ import {
   NbToastrModule,
   NbThemeModule,
   NbLayoutModule,
-} from '@nebular/theme';
+} from '@areyoufreebusy/theme';
 
 @Component({
   selector: 'nb-toastr-test',

@@ -5,23 +5,14 @@
  */
 
 import { NgModule } from '@angular/core';
-import { NbCardModule, NbLayoutModule, NbIconModule } from '@nebular/theme';
+import { NbCardModule, NbLayoutModule, NbIconModule } from '@areyoufreebusy/theme';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { BootstrapRoutingModule } from './bootstrap-routing.module';
 import { BootstrapTestComponent } from './bootstrap-test.component';
 
 @NgModule({
-  declarations: [
-    BootstrapTestComponent,
-  ],
-  imports: [
-    NbLayoutModule,
-    NbCardModule,
-    NbIconModule,
-    BootstrapRoutingModule,
-    NgbModule,
-  ],
+  declarations: [BootstrapTestComponent],
+  imports: [NbLayoutModule, NbCardModule, NbIconModule, BootstrapRoutingModule, NgbModule],
 })
-export class BootstrapModule {
-}
+export class BootstrapModule {}

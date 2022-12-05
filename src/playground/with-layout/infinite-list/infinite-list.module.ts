@@ -6,7 +6,7 @@
 
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NbCardModule, NbListModule, NbSpinnerModule } from '@nebular/theme';
+import { NbCardModule, NbListModule, NbSpinnerModule } from '@areyoufreebusy/theme';
 import { InfiniteListRoutingModule } from './infinite-list-routing.module';
 import { InfiniteListPlaceholdersComponent } from './infinite-list-placeholders.component';
 import { InfiniteListScrollModesComponent } from './infinite-list-scroll-modes.component';
@@ -24,12 +24,6 @@ import { NewsPostComponent } from './components/news-post.component';
     NewsPostPlaceholderComponent,
     NewsPostComponent,
   ],
-  imports: [
-    CommonModule,
-    NbListModule,
-    NbCardModule,
-    NbSpinnerModule,
-    InfiniteListRoutingModule,
-  ],
+  imports: [CommonModule, NbListModule, NbCardModule, NbSpinnerModule, InfiniteListRoutingModule],
 })
 export class InfiniteListModule {}

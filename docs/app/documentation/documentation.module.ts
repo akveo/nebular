@@ -5,7 +5,7 @@
  */
 
 import { NgModule } from '@angular/core';
-import { NbCardModule } from '@nebular/theme';
+import { NbCardModule } from '@areyoufreebusy/theme';
 
 import { NgdDocumentationRoutingModule } from './documentation-routing.module';
 import { NgdThemeModule } from '../@theme/theme.module';
@@ -14,21 +14,9 @@ import { NgdDocumentationComponent } from './documentation.component';
 import { NgdMenuService } from '../@theme/services/menu.service';
 import { NgdBlocksModule } from '../blocks/blocks.module';
 
-
 @NgModule({
-  imports: [
-    NgdDocumentationRoutingModule,
-    NgdThemeModule,
-    NbCardModule,
-    NgdBlocksModule,
-  ],
-  declarations: [
-    NgdPageComponent,
-    NgdDocumentationComponent,
-  ],
-  providers: [
-    NgdMenuService,
-  ],
+  imports: [NgdDocumentationRoutingModule, NgdThemeModule, NbCardModule, NgdBlocksModule],
+  declarations: [NgdPageComponent, NgdDocumentationComponent],
+  providers: [NgdMenuService],
 })
-export class NgdDocumentationModule {
-}
+export class NgdDocumentationModule {}

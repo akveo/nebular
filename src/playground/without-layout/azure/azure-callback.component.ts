@@ -5,7 +5,7 @@
  */
 
 import { Component, OnDestroy } from '@angular/core';
-import { NbAuthResult, NbAuthService } from '@nebular/auth';
+import { NbAuthResult, NbAuthService } from '@areyoufreebusy/auth';
 import { Router } from '@angular/router';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
@@ -19,11 +19,11 @@ import { Subject } from 'rxjs';
   `,
 })
 export class AzureCallbackComponent implements OnDestroy {
-
   private destroy$ = new Subject<void>();
 
   constructor(private authService: NbAuthService, private router: Router) {
-    this.authService.authenticate('azure')
+    this.authService
+      .authenticate('azure')
       .pipe(takeUntil(this.destroy$))
       .subscribe((authResult: NbAuthResult) => {
         if (authResult.isSuccess() && authResult.getRedirect()) {

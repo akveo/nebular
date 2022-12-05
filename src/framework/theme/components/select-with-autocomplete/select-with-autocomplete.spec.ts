@@ -23,7 +23,7 @@ import {
   NbOptionGroupComponent,
   NbTriggerStrategyBuilderService,
   NbFocusKeyManagerFactoryService,
-} from '@nebular/theme';
+} from '@areyoufreebusy/theme';
 import { NbActiveDescendantKeyManagerFactoryService } from '../cdk/a11y/descendant-key-manager';
 
 const eventMock = { preventDefault() {} } as Event;

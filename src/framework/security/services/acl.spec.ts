@@ -5,7 +5,7 @@
  */
 
 import { TestBed, inject, waitForAsync } from '@angular/core/testing';
-import { NbAclService, NB_SECURITY_OPTIONS_TOKEN } from '@nebular/security';
+import { NbAclService, NB_SECURITY_OPTIONS_TOKEN } from '@areyoufreebusy/security';
 import { deepExtend } from '../../auth/helpers'; // TODO: common module?
 
 let aclService: NbAclService;

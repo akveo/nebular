@@ -7,7 +7,7 @@
 import { TestBed } from '@angular/core/testing';
 import { LOCALE_ID } from '@angular/core';
 
-import { NbNativeDateService, NbDateService, NbDayPeriod } from '@nebular/theme';
+import { NbNativeDateService, NbDateService, NbDayPeriod } from '@areyoufreebusy/theme';
 
 describe('native-date-service', () => {
   let dateService: NbDateService<Date>;
@@ -47,8 +47,7 @@ describe('native-date-service', () => {
     expect(isValid).toBeTruthy();
   });
 
-  it('should validate as correct if time string is valid according to the twelve hours format',
-    () => {
+  it('should validate as correct if time string is valid according to the twelve hours format', () => {
     const isValid = dateService.isValidTimeString('04:23 00 AM', 'hh:mm:ss A');
     expect(isValid).toBeTruthy();
   });

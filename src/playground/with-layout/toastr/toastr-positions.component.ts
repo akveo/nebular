@@ -1,5 +1,10 @@
 import { Component, HostBinding } from '@angular/core';
-import { NbGlobalLogicalPosition, NbGlobalPhysicalPosition, NbGlobalPosition, NbToastrService } from '@nebular/theme';
+import {
+  NbGlobalLogicalPosition,
+  NbGlobalPhysicalPosition,
+  NbGlobalPosition,
+  NbToastrService,
+} from '@areyoufreebusy/theme';
 
 @Component({
   template: `

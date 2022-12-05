@@ -10,7 +10,7 @@ import {
   NbThemeModule,
   NbWindowControlButtonsConfig,
   NbWindowComponent,
-} from '@nebular/theme';
+} from '@areyoufreebusy/theme';
 
 const WINDOW_CONTENT = 'window content';
 @Component({

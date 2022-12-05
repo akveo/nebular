@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { NbIconLibraries, NbSvgIcon } from '@nebular/theme';
+import { NbIconLibraries, NbSvgIcon } from '@areyoufreebusy/theme';
 
 describe('icons-library', () => {
   let iconsLibrary: NbIconLibraries;

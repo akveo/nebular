@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NbStepChangeEvent } from '@nebular/theme';
+import { NbStepChangeEvent } from '@areyoufreebusy/theme';
 
 @Component({
   templateUrl: './stepper-step-change-event.component.html',

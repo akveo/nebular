@@ -5,16 +5,13 @@
  */
 
 import { NgModule } from '@angular/core';
-import { NbCalendarKitModule, NbCardModule } from '@nebular/theme';
+import { NbCalendarKitModule, NbCardModule } from '@areyoufreebusy/theme';
 import { CalendarKitRoutingModule } from './calendar-kit-routing.module';
 import { CalendarKitFullCalendarShowcaseComponent } from './calendar-kit-full-calendar.component';
 import { CalendarKitMonthCellComponent } from './components/calendar-kit-month-cell.component';
 
 @NgModule({
-  declarations: [
-    CalendarKitFullCalendarShowcaseComponent,
-    CalendarKitMonthCellComponent,
-  ],
-  imports: [ NbCardModule, NbCalendarKitModule, CalendarKitRoutingModule ],
+  declarations: [CalendarKitFullCalendarShowcaseComponent, CalendarKitMonthCellComponent],
+  imports: [NbCardModule, NbCalendarKitModule, CalendarKitRoutingModule],
 })
 export class CalendarKitModule {}

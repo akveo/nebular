@@ -5,7 +5,7 @@
  */
 
 import { Component } from '@angular/core';
-import { NbRouteTab } from '@nebular/theme';
+import { NbRouteTab } from '@areyoufreebusy/theme';
 
 @Component({
   template: `

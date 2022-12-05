@@ -9,11 +9,10 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import { AuthRoutingModule } from './auth-routing.module';
-import { NbAuthModule } from '@nebular/auth';
-import { NbAlertModule, NbButtonModule, NbCheckboxModule, NbInputModule } from '@nebular/theme';
+import { NbAuthModule } from '@areyoufreebusy/auth';
+import { NbAlertModule, NbButtonModule, NbCheckboxModule, NbInputModule } from '@areyoufreebusy/theme';
 
 import { LoginComponent } from './login/login.component';
-
 
 @NgModule({
   imports: [
@@ -27,9 +26,6 @@ import { LoginComponent } from './login/login.component';
 
     NbAuthModule,
   ],
-  declarations: [
-    LoginComponent,
-  ],
+  declarations: [LoginComponent],
 })
-export class AuthModule {
-}
+export class AuthModule {}

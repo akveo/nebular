@@ -1,6 +1,6 @@
 import { isPlatformBrowser } from '@angular/common';
 import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
-import { NB_WINDOW } from '@nebular/theme';
+import { NB_WINDOW } from '@areyoufreebusy/theme';
 import { EMPTY, Observable, Subject } from 'rxjs';
 import { distinctUntilChanged, filter, finalize, map, publish, refCount, takeUntil, tap } from 'rxjs/operators';
 

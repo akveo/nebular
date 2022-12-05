@@ -2,7 +2,7 @@ import { ComponentFixture, fakeAsync, inject, TestBed, tick, waitForAsync } from
 import { RouterTestingModule } from '@angular/router/testing';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { NbRestoreScrollTopHelper } from '@nebular/theme';
+import { NbRestoreScrollTopHelper } from '@areyoufreebusy/theme';
 
 let restoreHelper: NbRestoreScrollTopHelper;
 let router: Router;

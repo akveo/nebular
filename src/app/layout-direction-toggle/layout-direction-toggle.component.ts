@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NbLayoutDirectionService, NbLayoutDirection } from '@nebular/theme';
+import { NbLayoutDirectionService, NbLayoutDirection } from '@areyoufreebusy/theme';
 
 @Component({
   selector: 'npg-layout-direction-toggle',

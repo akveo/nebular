@@ -7,7 +7,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NbButtonModule, NbCardModule, NbInputModule, NbStepperModule } from '@nebular/theme';
+import { NbButtonModule, NbCardModule, NbInputModule, NbStepperModule } from '@areyoufreebusy/theme';
 import { StepperRoutingModule } from './stepper-routing.module';
 import { StepperShowcaseComponent } from './stepper-showcase.component';
 import { StepperTestComponent } from './stepper-test.component';

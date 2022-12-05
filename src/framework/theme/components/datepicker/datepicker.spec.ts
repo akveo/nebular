@@ -18,7 +18,7 @@ import {
   NbLayoutModule,
   NbDatepickerComponent,
   NbRangepickerComponent,
-} from '@nebular/theme';
+} from '@areyoufreebusy/theme';
 
 @Component({
   selector: 'nb-datepicker-test',

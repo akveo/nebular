@@ -6,7 +6,7 @@
 
 import { Inject, Injectable, LOCALE_ID, Optional } from '@angular/core';
 
-import { NB_DATE_SERVICE_OPTIONS, NbNativeDateService } from '@nebular/theme';
+import { NB_DATE_SERVICE_OPTIONS, NbNativeDateService } from '@areyoufreebusy/theme';
 
 import { default as parse } from 'date-fns/parse';
 import { default as formatDate } from 'date-fns/format';
@@ -14,19 +14,16 @@ import { default as getWeek } from 'date-fns/getWeek';
 
 export interface NbDateFnsOptions {
   format: string;
-  parseOptions: {},
-  formatOptions: {},
-  getWeekOptions: {},
+  parseOptions: {};
+  formatOptions: {};
+  getWeekOptions: {};
 }
 
 @Injectable()
 export class NbDateFnsDateService extends NbNativeDateService {
   protected options: Partial<NbDateFnsOptions>;
 
-  constructor(
-    @Inject(LOCALE_ID) locale: string,
-    @Optional() @Inject(NB_DATE_SERVICE_OPTIONS) options,
-  ) {
+  constructor(@Inject(LOCALE_ID) locale: string, @Optional() @Inject(NB_DATE_SERVICE_OPTIONS) options) {
     super(locale);
     this.options = options || {};
   }

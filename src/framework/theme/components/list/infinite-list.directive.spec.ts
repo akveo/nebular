@@ -11,7 +11,7 @@ import {
   NbListModule,
   NbListComponent,
   NbInfiniteListDirective,
-} from '@nebular/theme';
+} from '@areyoufreebusy/theme';
 
 const CONTENT_PADDING = 20;
 const CONTENT_HEIGHT = 10000 + CONTENT_PADDING;

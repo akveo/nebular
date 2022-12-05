@@ -6,7 +6,7 @@
 
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { NbWindowRef } from '@nebular/theme';
+import { NbWindowRef } from '@areyoufreebusy/theme';
 
 @Component({
   template: `

@@ -5,7 +5,7 @@
  */
 
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { NbMenuItem } from '@nebular/theme';
+import { NbMenuItem } from '@areyoufreebusy/theme';
 
 @Component({
   selector: 'nb-menu-children',
@@ -13,7 +13,6 @@ import { NbMenuItem } from '@nebular/theme';
   templateUrl: './menu-children.component.html',
 })
 export class MenuChildrenComponent {
-
   items: NbMenuItem[] = [
     {
       title: 'Profile',

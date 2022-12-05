@@ -9,7 +9,7 @@ import {
   NbThemeService,
   NbThemeModule,
   NB_DOCUMENT,
-} from '@nebular/theme';
+} from '@areyoufreebusy/theme';
 
 let currentDocument;
 let fixture: ComponentFixture<RulerTestComponent>;

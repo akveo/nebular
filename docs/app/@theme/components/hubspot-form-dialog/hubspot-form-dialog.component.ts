@@ -5,7 +5,7 @@
  */
 
 import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
-import { NB_WINDOW, NbDialogRef } from '@nebular/theme';
+import { NB_WINDOW, NbDialogRef } from '@areyoufreebusy/theme';
 
 let formContainerUniqueId = 0;
 
@@ -26,7 +26,6 @@ let formContainerUniqueId = 0;
   styleUrls: ['./hubspot-form-dialog.component.scss'],
 })
 export class NgdHubspotFormDialogComponent implements OnInit, AfterViewInit {
-
   protected readonly defaultConfig = {
     submitButtonClass: 'hs-submit-btn btn',
     css: '',

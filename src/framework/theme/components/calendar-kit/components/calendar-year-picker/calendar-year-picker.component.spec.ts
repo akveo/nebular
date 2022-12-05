@@ -5,7 +5,7 @@
  */
 
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { NbCalendarYearPickerComponent, NbCalendarKitModule } from '@nebular/theme';
+import { NbCalendarYearPickerComponent, NbCalendarKitModule } from '@areyoufreebusy/theme';
 
 describe('Component: NbCalendarYearPicker', () => {
   let fixture: ComponentFixture<NbCalendarYearPickerComponent<Date>>;

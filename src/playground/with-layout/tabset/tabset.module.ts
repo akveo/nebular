@@ -5,7 +5,7 @@
  */
 
 import { NgModule } from '@angular/core';
-import { NbCardModule, NbRouteTabsetModule, NbTabsetModule } from '@nebular/theme';
+import { NbCardModule, NbRouteTabsetModule, NbTabsetModule } from '@areyoufreebusy/theme';
 import { TabsetRoutingModule } from './tabset-routing.module';
 import { RouteTabsetShowcaseComponent } from './route-tabset-showcase.component';
 import { TabsetBadgeComponent } from './tabset-badge.component';

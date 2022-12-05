@@ -5,7 +5,7 @@
  */
 
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { NbMenuItem } from '@nebular/theme';
+import { NbMenuItem } from '@areyoufreebusy/theme';
 
 @Component({
   selector: 'npg-menu-autocollapse',

@@ -4,9 +4,7 @@
   "compilerOptions": {
     "declarationMap": false,
     "paths": {
-      "@nebular/theme": [
-        "dist/theme"
-      ]
+      "@areyoufreebusy/theme": ["dist/theme"]
     }
   },
   "angularCompilerOptions": {

@@ -5,7 +5,7 @@ import {
   NbDateTimeAdapterService,
   NbDateAdapterService,
   NbRangeAdapterService,
-} from '@nebular/theme';
+} from '@areyoufreebusy/theme';
 
 describe('Date Adapters', () => {
   beforeEach(() => {

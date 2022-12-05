@@ -12,7 +12,7 @@ import {
   NbJSThemesRegistry,
   NB_BUILT_IN_JS_THEMES,
   NB_JS_THEMES,
-} from '@nebular/theme';
+} from '@areyoufreebusy/theme';
 
 describe('js-themes-registry-service', () => {
   let jsThemesRegistry: NbJSThemesRegistry;

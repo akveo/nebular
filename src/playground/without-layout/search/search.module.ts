@@ -5,7 +5,7 @@
  */
 
 import { NgModule } from '@angular/core';
-import { NbCardModule, NbLayoutModule, NbSearchModule, NbSidebarModule } from '@nebular/theme';
+import { NbCardModule, NbLayoutModule, NbSearchModule, NbSidebarModule } from '@areyoufreebusy/theme';
 import { SearchRoutingModule } from './search-routing.module';
 import { SearchCustomizedTestComponent } from './search-customized-test.component';
 import { SearchEventComponent } from './search-event.component';
@@ -21,12 +21,6 @@ import { SearchWithInputEventComponent } from './search-with-input-event.compone
     SearchTestComponent,
     SearchWithInputEventComponent,
   ],
-  imports: [
-    NbSearchModule,
-    NbLayoutModule,
-    NbSidebarModule.forRoot(),
-    NbCardModule,
-    SearchRoutingModule,
-  ],
+  imports: [NbSearchModule, NbLayoutModule, NbSidebarModule.forRoot(), NbCardModule, SearchRoutingModule],
 })
 export class SearchModule {}

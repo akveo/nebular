@@ -9,7 +9,7 @@ import {
   NbThemeService,
   NbThemeModule,
   NB_WINDOW,
-} from '@nebular/theme';
+} from '@areyoufreebusy/theme';
 
 let currentWindow;
 let fixture: ComponentFixture<ScrollTestComponent>;

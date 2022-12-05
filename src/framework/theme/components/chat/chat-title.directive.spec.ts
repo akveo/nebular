@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Component } from '@angular/core';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { By } from '@angular/platform-browser';
-import { NbThemeModule, NbChatModule, NbChatComponent } from '@nebular/theme';
+import { NbThemeModule, NbChatModule, NbChatComponent } from '@areyoufreebusy/theme';
 
 @Component({
   template: `

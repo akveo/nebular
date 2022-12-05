@@ -5,7 +5,7 @@
  */
 
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { NbIconConfig } from '@nebular/theme';
+import { NbIconConfig } from '@areyoufreebusy/theme';
 
 @Component({
   selector: 'nb-action-showcase',

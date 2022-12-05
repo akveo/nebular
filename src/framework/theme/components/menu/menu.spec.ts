@@ -40,7 +40,7 @@ import {
   NbMenuService,
   NbMenuComponent,
   NbThemeModule,
-} from '@nebular/theme';
+} from '@areyoufreebusy/theme';
 import { NbMenuInternalService } from './menu.service';
 
 @Component({ template: '' })

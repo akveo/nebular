@@ -8,7 +8,7 @@ import { inject, TestBed, waitForAsync } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ActivatedRoute } from '@angular/router';
-import { NB_WINDOW } from '@nebular/theme';
+import { NB_WINDOW } from '@areyoufreebusy/theme';
 import {
   NbOAuth2AuthStrategy,
   NbOAuth2ClientAuthMethod,
@@ -17,7 +17,7 @@ import {
   NbAuthResult,
   nbAuthCreateToken,
   NbAuthOAuth2Token,
-} from '@nebular/auth';
+} from '@areyoufreebusy/auth';
 
 function createURL(params: any) {
   return Object.keys(params)

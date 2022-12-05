@@ -23,7 +23,7 @@ import {
   NbOptionGroupComponent,
   NbTriggerStrategyBuilderService,
   NbFocusKeyManagerFactoryService,
-} from '@nebular/theme';
+} from '@areyoufreebusy/theme';
 
 const eventMock = { preventDefault() {} } as Event;
 

@@ -1,5 +1,5 @@
 import { Component, HostBinding } from '@angular/core';
-import { NbGlobalPhysicalPosition, NbToastrService } from '@nebular/theme';
+import { NbGlobalPhysicalPosition, NbToastrService } from '@areyoufreebusy/theme';
 
 @Component({
   template: `

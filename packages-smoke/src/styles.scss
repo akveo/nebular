@@ -1,8 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
 // import Nebular Theme System and the default theme
-@use '@nebular/theme/styles/theming' as *;
-@use '@nebular/theme/styles/themes/default';
-@use '@nebular/theme/styles/globals' as *;
+@use '@areyoufreebusy/theme/styles/theming' as *;
+@use '@areyoufreebusy/theme/styles/themes/default';
+@use '@areyoufreebusy/theme/styles/globals' as *;
 
 // install the framework
 @include nb-install() {

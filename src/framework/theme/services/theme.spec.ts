@@ -15,7 +15,7 @@ import {
   NB_JS_THEMES,
   NB_MEDIA_BREAKPOINTS,
   NB_THEME_OPTIONS,
-} from '@nebular/theme';
+} from '@areyoufreebusy/theme';
 
 describe('theme-service', () => {
   let breakpointService: NbMediaBreakpointsService;
