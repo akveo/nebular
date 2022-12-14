@@ -22,6 +22,7 @@
 
     .menu-title {
       flex: 1 0 auto;
+      pointer-events: none;
       @include nb-rtl(text-align, right);
     }
   }
