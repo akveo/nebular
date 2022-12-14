@@ -1,3 +1,13 @@
+<a name="6.2.3"></a>
+## [6.2.3](https://github.com/akveo/nebular/compare/v6.2.2...v6.2.3) (2022-12-14)
+
+
+### Features
+
+- **menu component:** improve accessibility ([#3149](https://github.com/akveo/nebular/pull/3149)) ([1785488](https://github.com/akveo/nebular/commit/1785488))
+
+
+
 <a name="6.2.2"></a>
 ## [6.2.2](https://github.com/akveo/nebular/compare/v6.2.1...v6.2.2) (2021-01-19)
 
