@@ -428,6 +428,6 @@ export class NbAutocompleteDirective<T> implements OnDestroy, AfterViewInit, Con
   }
 
   protected shouldShow(): boolean {
-    return this.isClosed && this.autocomplete.options.length > 0;
+    return this.isClosed;
   }
 }
