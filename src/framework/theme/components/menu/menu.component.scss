@@ -28,6 +28,13 @@
     .lock-icon {
       margin-left: 8px;
     }
+
+    &.locked {
+      > .menu-icon,
+      .menu-title {
+        opacity: 0.6;
+      }
+    }
   }
 
   .menu-item nb-badge {
