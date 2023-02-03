@@ -24,6 +24,10 @@
       flex: 1 0 auto;
       @include nb-rtl(text-align, right);
     }
+
+    .lock-icon {
+      margin-left: 8px;
+    }
   }
 
   .menu-item nb-badge {

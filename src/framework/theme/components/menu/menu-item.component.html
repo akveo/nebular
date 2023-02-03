@@ -91,8 +91,9 @@
 </ng-template>
 
 <ng-template #lockedTemplate>
-  <nb-icon *ngIf="!menuItem.locked?.tooltip" icon="lock"></nb-icon>
+  <nb-icon class="lock-icon" *ngIf="!menuItem.locked?.tooltip" icon="lock"></nb-icon>
   <nb-icon
+    class="lock-icon"
     *ngIf="!!menuItem.locked?.tooltip"
     [nbTooltip]="menuItem.locked?.tooltip"
     [nbTooltipStatus]="menuItem.locked?.tooltipStatus || 'primary'"
