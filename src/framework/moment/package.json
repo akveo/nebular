@@ -1,6 +1,6 @@
 {
   "name": "@areyoufreebusy/moment",
-  "version": "9.1.0-rc.9",
+  "version": "10.0.0",
   "description": "@areyoufreebusy/moment",
   "author": "akveo",
   "license": "MIT",
@@ -21,7 +21,7 @@
     "nebular"
   ],
   "peerDependencies": {
-    "@areyoufreebusy/theme": "9.1.0-rc.8",
+    "@areyoufreebusy/theme": "10.0.0",
     "moment": "^2.22.2"
   },
   "dependencies": {

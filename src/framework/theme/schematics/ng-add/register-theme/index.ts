@@ -4,15 +4,15 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { getProjectFromWorkspace, getProjectStyleFile, getProjectTargetOptions } from '@angular/cdk/schematics';
 import { SchematicsException, Tree } from '@angular-devkit/schematics';
-import { updateWorkspace } from '@schematics/angular/utility/workspace';
-import { ProjectDefinition, WorkspaceDefinition } from '@angular-devkit/core/src/workspace';
+import { ProjectDefinition } from '@angular-devkit/core/src/workspace';
 import { join, normalize, Path } from '@angular-devkit/core';
 
 import { createThemeContent, stylesContent } from './theme-content';
 import { Schema } from '../schema';
 import { getProject } from '../../util';
+import { getProjectFromWorkspace, getProjectStyleFile, getProjectTargetOptions } from '@angular/cdk/schematics';
+import { updateWorkspace, WorkspaceDefinition } from '@schematics/angular/utility';
 
 /**
  * Registers customizable scss theme in the specified project.

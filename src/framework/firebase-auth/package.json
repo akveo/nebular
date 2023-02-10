@@ -1,6 +1,6 @@
 {
   "name": "@areyoufreebusy/firebase-auth",
-  "version": "9.1.0-rc.9",
+  "version": "10.0.0",
   "description": "@areyoufreebusy/firebase-auth",
   "author": "akveo",
   "license": "MIT",
@@ -25,8 +25,8 @@
     "firebase"
   ],
   "peerDependencies": {
-    "@angular/core": "^13.0.0",
-    "@areyoufreebusy/auth": "9.1.0-rc.8",
+    "@angular/core": "^14.0.0",
+    "@areyoufreebusy/auth": "10.0.0",
     "rxjs": "^6.5.3 || ^7.4.0",
     "firebase": "^9.4.0",
     "@angular/fire": "^7.2.0"

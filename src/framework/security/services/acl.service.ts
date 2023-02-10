@@ -9,8 +9,8 @@ import { NB_SECURITY_OPTIONS_TOKEN, NbAclOptions, NbAclRole, NbAccessControl } f
 const shallowObjectClone = (o) => Object.assign({}, o);
 const shallowArrayClone = (a) => Object.assign([], a);
 const popParent = (abilities) => {
-  const parent = abilities['parent'];
-  delete abilities['parent'];
+  const parent = abilities.parent;
+  delete abilities.parent;
   return parent;
 };
 
@@ -19,13 +19,11 @@ const popParent = (abilities) => {
  */
 @Injectable()
 export class NbAclService {
-
   private static readonly ANY_RESOURCE = '*';
 
   private state: NbAccessControl = {};
 
   constructor(@Optional() @Inject(NB_SECURITY_OPTIONS_TOKEN) protected settings: NbAclOptions = {}) {
-
     if (settings.accessControl) {
       this.setAccessControl(settings.accessControl);
     }
@@ -49,8 +47,7 @@ export class NbAclService {
    * @param {string} parent
    * @param {[permission: string]: string|string[]} abilities
    */
-  register(role: string, parent: string = null, abilities: {[permission: string]: string|string[]} = {}) {
-
+  register(role: string, parent: string = null, abilities: { [permission: string]: string | string[] } = {}) {
     this.validateRole(role);
 
     this.state[role] = {
@@ -69,8 +66,7 @@ export class NbAclService {
    * @param {string} permission
    * @param {string | string[]} resource
    */
-  allow(role: string, permission: string, resource: string|string[]) {
-
+  allow(role: string, permission: string, resource: string | string[]) {
     this.validateRole(role);
 
     if (!this.getRole(role)) {
@@ -82,8 +78,7 @@ export class NbAclService {
     let resources = shallowArrayClone(this.getRoleResources(role, permission));
     resources = resources.concat(resource);
 
-    this.state[role][permission] = resources
-      .filter((item, pos) => resources.indexOf(item) === pos);
+    this.state[role][permission] = resources.filter((item, pos) => resources.indexOf(item) === pos);
   }
 
   /**
@@ -126,13 +121,13 @@ export class NbAclService {
     return this.getRoleAbilities(role)[permission] || [];
   }
 
-  private getRoleAbilities(role: string): {[permission: string]: string[]} {
+  private getRoleAbilities(role: string): { [permission: string]: string[] } {
     const abilities = shallowObjectClone(this.state[role] || {});
     popParent(shallowObjectClone(this.state[role] || {}));
     return abilities;
   }
 
   private getRoleParent(role: string): string {
-    return this.state[role] ? this.state[role]['parent'] : null;
+    return this.state[role] ? this.state[role].parent : null;
   }
 }

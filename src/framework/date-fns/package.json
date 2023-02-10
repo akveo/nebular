@@ -1,6 +1,6 @@
 {
   "name": "@areyoufreebusy/date-fns",
-  "version": "9.1.0-rc.9",
+  "version": "10.0.0",
   "description": "@areyoufreebusy/date-fns",
   "author": "akveo",
   "license": "MIT",
@@ -21,7 +21,7 @@
     "nebular"
   ],
   "peerDependencies": {
-    "@areyoufreebusy/theme": "9.1.0-rc.8",
+    "@areyoufreebusy/theme": "10.0.0",
     "date-fns": "2"
   },
   "dependencies": {

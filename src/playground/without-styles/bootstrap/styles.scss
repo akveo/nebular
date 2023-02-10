@@ -1,9 +1,0 @@
-@use '../../../framework/theme/styles/theming';
-@use '../../../framework/theme/styles/themes';
-@use '../../../framework/theme/styles/globals';
-@use '../../../framework/bootstrap/styles/globals' as bootstrap-globals;
-@import 'bootstrap/scss/bootstrap';
-
-@include theming.nb-install() {
-  @include bootstrap-globals.nb-bootstrap-global();
-}

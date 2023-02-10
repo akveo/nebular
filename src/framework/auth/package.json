@@ -1,6 +1,6 @@
 {
   "name": "@areyoufreebusy/auth",
-  "version": "9.1.0-rc.9",
+  "version": "10.0.0",
   "description": "@areyoufreebusy/auth",
   "author": "akveo",
   "license": "MIT",
@@ -24,11 +24,11 @@
     "nebular"
   ],
   "peerDependencies": {
-    "@angular/common": "^13.0.0",
-    "@angular/core": "^13.0.0",
-    "@angular/router": "^13.0.0",
-    "@angular/forms": "^13.0.0",
-    "@areyoufreebusy/theme": "9.1.0-rc.8",
+    "@angular/common": "^14.0.0",
+    "@angular/core": "^14.0.0",
+    "@angular/router": "^14.0.0",
+    "@angular/forms": "^14.0.0",
+    "@areyoufreebusy/theme": "10.0.0",
     "rxjs": "^6.5.3 || ^7.4.0"
   },
   "dependencies": {

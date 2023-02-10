@@ -11,10 +11,6 @@
 @use 'forms';
 @use 'modals';
 @use 'layout';
-@import 'bootstrap/scss/functions';
-@import 'bootstrap/scss/variables';
-@import 'bootstrap/scss/mixins';
-@import 'bootstrap/scss/grid';
 
 @mixin nb-bootstrap-global() {
   @include buttons.nb-b-buttons-theme();
