@@ -133,7 +133,8 @@
             "development": {
               "optimization": false,
               "sourceMap": true,
-              "extractLicenses": false
+              "extractLicenses": false,
+              "vendorChunk": true
             }
           },
           "defaultConfiguration": "production"
