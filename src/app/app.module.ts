@@ -34,7 +34,7 @@ import { ComponentLinkDirective } from './components-link.directive';
           loadChildren: () => import('../playground/playground.module').then((m) => m.PlaygroundModule),
         },
       ],
-      { useHash: true, relativeLinkResolution: 'legacy' },
+      { useHash: true },
     ),
     NbThemeModule.forRoot(),
     NbEvaIconsModule,

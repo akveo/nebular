@@ -45,7 +45,7 @@ import * as docs from '../output.json';
     NgdThemeModule.forRoot(),
     NbSidebarModule.forRoot(),
     NbDialogModule.forRoot(),
-    RouterModule.forRoot(routes, { useHash: false, relativeLinkResolution: 'legacy' }),
+    RouterModule.forRoot(routes, { useHash: false }),
   ],
   declarations: [NgdAppComponent],
   providers: [Title, { provide: STRUCTURE, useValue: structure }, { provide: DOCS, useValue: docs }],
