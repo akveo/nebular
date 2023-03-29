@@ -24,7 +24,7 @@
   ],
   "peerDependencies": {
     "@nebular/theme": "10.0.0",
-    "eva-icons": "^1.1.2"
+    "eva-icons": "^1.1.3"
   },
   "dependencies": {
     "tslib": "^2.3.0"

@@ -25,7 +25,7 @@
     "firebase"
   ],
   "peerDependencies": {
-    "@angular/core": "^14.0.0",
+    "@angular/core": "^15.0.0",
     "@nebular/auth": "10.0.0",
     "rxjs": "^6.5.3 || ^7.4.0",
     "firebase": "^9.4.0",
