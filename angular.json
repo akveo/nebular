@@ -208,7 +208,6 @@
             ],
             "styles": [
               "node_modules/pace-js/templates/pace-theme-flash.tmpl.css",
-              "node_modules/bootstrap/dist/css/bootstrap.css",
               {
                 "inject": true,
                 "bundleName": "algolia",
