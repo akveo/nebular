@@ -1,3 +1,16 @@
+<a name="11.0.0"></a>
+
+# [11.0.0](https://github.com/akveo/nebular/compare/v10.0.0...v11.0.0) (2023-03-29)
+
+### Bug Fixes
+
+- **autocomplete:** fix show options for the autocomplete ([#3152](https://github.com/akveo/nebular/issues/3152)) ([a693caf](https://github.com/akveo/nebular/commit/a693caf))
+- **docs:** remove bootstrap from docs ([#3164](https://github.com/akveo/nebular/issues/3164)) ([b711f1d](https://github.com/akveo/nebular/commit/b711f1d))
+
+### Features
+
+- update to Angular 15 ([#3163](https://github.com/akveo/nebular/issues/3163)) ([f3098ea](https://github.com/akveo/nebular/commit/f3098ea))
+
 <a name="10.0.0"></a>
 
 # [10.0.0](https://github.com/akveo/nebular/compare/v9.1.0-rc.8...v10.0.0) (2022-12-02)

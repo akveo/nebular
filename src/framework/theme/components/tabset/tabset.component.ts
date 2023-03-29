@@ -147,7 +147,7 @@ export class NbTabComponent {
    * Lazy load content before tab selection
    * @docs-private
    * @deprecated This setting never worked. Wrap content into a `nbTabContent` to make it lazy.
-   * @breaking-change Remove 11.0.0
+   * @breaking-change Remove 12.0.0
    */
   @Input()
   set lazyLoad(val: boolean) {
@@ -179,7 +179,7 @@ export class NbTabComponent {
 
   /**
    * @deprecated
-   * @breaking-change Remove 11.0.0
+   * @breaking-change Remove 12.0.0
    * @docs-private
    */
   init: boolean = false;

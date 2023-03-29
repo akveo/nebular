@@ -1,6 +1,6 @@
 {
   "name": "@nebular/bootstrap",
-  "version": "10.0.0",
+  "version": "11.0.0",
   "description": "@nebular/bootstrap",
   "author": "akveo",
   "license": "MIT",
@@ -22,7 +22,7 @@
   ],
   "peerDependencies": {
     "bootstrap": "^5.0.0",
-    "@nebular/theme": "10.0.0"
+    "@nebular/theme": "11.0.0"
   },
   "exports": {
     "./styles/prebuilt/corporate.css": {
