@@ -13,6 +13,7 @@ import {
   OnInit,
   OnDestroy,
   ChangeDetectorRef,
+  Input,
 } from '@angular/core';
 import { trigger, state, style, animate, transition } from '@angular/animations';
 import { takeUntil } from 'rxjs/operators';
@@ -30,11 +31,13 @@ import { NbAccordionItemComponent } from './accordion-item.component';
     <ng-content select="nb-accordion-item-title"></ng-content>
     <ng-content select="nb-accordion-item-description"></ng-content>
     <ng-content></ng-content>
-    <nb-icon icon="chevron-down-outline"
-             pack="nebular-essentials"
-             [@expansionIndicator]="state"
-             *ngIf="!disabled"
-             class="expansion-indicator">
+    <nb-icon
+      icon="chevron-down-outline"
+      pack="nebular-essentials"
+      [@expansionIndicator]="state"
+      *ngIf="!disabled || showExpansionIndicatorButton"
+      class="expansion-indicator"
+    >
     </nb-icon>
   `,
   animations: [
@@ -52,6 +55,11 @@ import { NbAccordionItemComponent } from './accordion-item.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NbAccordionItemHeaderComponent implements OnInit, OnDestroy {
+  @HostBinding('class.accordion-item-header-clickable')
+  @Input()
+  isToggleable: boolean = true;
+
+  @Input() showExpansionIndicatorButton: boolean = true;
 
   @HostBinding('class.accordion-item-header-collapsed')
   get isCollapsed(): boolean {
@@ -79,7 +87,9 @@ export class NbAccordionItemHeaderComponent implements OnInit, OnDestroy {
   @HostListener('keydown.space')
   @HostListener('keydown.enter')
   toggle() {
-    this.accordionItem.toggle();
+    if (this.isToggleable) {
+      this.accordionItem.toggle();
+    }
   }
 
   get state(): string {
@@ -90,13 +100,10 @@ export class NbAccordionItemHeaderComponent implements OnInit, OnDestroy {
   }
 
   private destroy$ = new Subject<void>();
-  constructor(@Host() private accordionItem: NbAccordionItemComponent, private cd: ChangeDetectorRef) {
-  }
+  constructor(@Host() private accordionItem: NbAccordionItemComponent, private cd: ChangeDetectorRef) {}
 
   ngOnInit() {
-    this.accordionItem.accordionItemInvalidate
-      .pipe(takeUntil(this.destroy$))
-      .subscribe(() => this.cd.markForCheck());
+    this.accordionItem.accordionItemInvalidate.pipe(takeUntil(this.destroy$)).subscribe(() => this.cd.markForCheck());
   }
 
   ngOnDestroy() {

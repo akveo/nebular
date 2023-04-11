@@ -7,7 +7,10 @@
 :host {
   display: flex;
   align-items: center;
-  cursor: pointer;
+
+  &.accordion-item-header-clickable {
+    cursor: pointer;
+  }
 
   &:focus {
     outline: 0;
