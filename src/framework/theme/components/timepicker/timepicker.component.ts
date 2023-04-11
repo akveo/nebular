@@ -177,6 +177,7 @@ export class NbTimePickerComponent<D> implements OnChanges {
   /**
    * Emits date when selected.
    * */
+  // eslint-disable-next-line @angular-eslint/no-output-on-prefix
   @Output() onSelectTime: EventEmitter<NbSelectedTimePayload<D>> = new EventEmitter<NbSelectedTimePayload<D>>();
   @ViewChild(NbPortalDirective, { static: true }) portal: NbPortalDirective;
 

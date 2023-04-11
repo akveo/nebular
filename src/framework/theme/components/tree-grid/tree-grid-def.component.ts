@@ -43,7 +43,7 @@ export class NbTreeGridRowDefDirective<T> extends NbRowDefDirective<T>
   ngOnChanges(changes: SimpleChanges) {
     super.ngOnChanges(changes);
 
-    if (changes['columns']) {
+    if (changes.columns) {
       this.updateColumns(this.columns);
     }
   }
@@ -89,7 +89,7 @@ export class NbTreeGridHeaderRowDefDirective extends NbHeaderRowDefDirective
   ngOnChanges(changes: SimpleChanges) {
     super.ngOnChanges(changes);
 
-    if (changes['columns']) {
+    if (changes.columns) {
       this.updateColumns(this.columns);
     }
   }
@@ -135,7 +135,7 @@ export class NbTreeGridFooterRowDefDirective extends NbFooterRowDefDirective
   ngOnChanges(changes: SimpleChanges) {
     super.ngOnChanges(changes);
 
-    if (changes['columns']) {
+    if (changes.columns) {
       this.updateColumns(this.columns);
     }
   }

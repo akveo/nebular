@@ -67,21 +67,16 @@ export class NbFirebasePasswordStrategyOptions extends NbAuthStrategyOptions {
   };
   errors?: NbPasswordStrategyMessage = {
     key: 'message',
-    getter: (module: string, res, options: NbFirebasePasswordStrategyOptions) => getDeepFromObject(
-      res,
-      options.errors.key,
-      options[module].defaultErrors,
-    ),
+    getter: (module: string, res, options: NbFirebasePasswordStrategyOptions) =>
+      getDeepFromObject(res, options.errors.key, options[module].defaultErrors),
   };
   messages?: NbPasswordStrategyMessage = {
     key: 'messages',
-    getter: (module: string, res, options: NbFirebasePasswordStrategyOptions) => getDeepFromObject(
-      res.body,
-      options.messages.key,
-      options[module].defaultMessages,
-    ),
+    getter: (module: string, res, options: NbFirebasePasswordStrategyOptions) =>
+      getDeepFromObject(res.body, options.messages.key, options[module].defaultMessages),
   };
 }
 
 // eslint-disable-next-line max-len
-export const firebasePasswordStrategyOptions: NbFirebasePasswordStrategyOptions = new NbFirebasePasswordStrategyOptions();
+export const firebasePasswordStrategyOptions: NbFirebasePasswordStrategyOptions =
+  new NbFirebasePasswordStrategyOptions();

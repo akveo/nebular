@@ -108,6 +108,7 @@ export class NbSortIconComponent {
  * Marks header as sort header so it emitting sort event when clicked.
  */
 @Component({
+  // eslint-disable-next-line @angular-eslint/component-selector
   selector: '[nbSortHeader]',
   template: `
     <button

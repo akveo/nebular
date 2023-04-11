@@ -1,4 +1,4 @@
-import { Component, Directive, Input } from '@angular/core';
+import { Component, Directive, HostBinding, Input } from '@angular/core';
 import {
   CdkFooterRow,
   CdkFooterRowDef,
@@ -88,13 +88,11 @@ export class NbRowDefDirective<T> extends CdkRowDef<T> {
   selector: 'nb-header-row, tr[nbHeaderRow]',
   template: `
     <ng-container nbCellOutlet></ng-container>`,
-  host: {
-    'class': 'nb-header-row',
-    'role': 'row',
-  },
   providers: [{ provide: CdkHeaderRow, useExisting: NbHeaderRowComponent }],
 })
 export class NbHeaderRowComponent extends CdkHeaderRow {
+  @HostBinding('attr.role') role = 'row';
+  @HostBinding('class') classes = 'nb-header-row';
 }
 
 /** Footer template container that contains the cell outlet. Adds the right class and role. */
@@ -102,13 +100,11 @@ export class NbHeaderRowComponent extends CdkHeaderRow {
   selector: 'nb-footer-row, tr[nbFooterRow]',
   template: `
     <ng-container nbCellOutlet></ng-container>`,
-  host: {
-    'class': 'nb-footer-row',
-    'role': 'row',
-  },
   providers: [{ provide: CdkFooterRow, useExisting: NbFooterRowComponent }],
 })
 export class NbFooterRowComponent extends CdkFooterRow {
+  @HostBinding('attr.role') role = 'row';
+  @HostBinding('class') classes = 'nb-footer-row';
 }
 
 /** Data row template container that contains the cell outlet. Adds the right class and role. */
@@ -116,11 +112,9 @@ export class NbFooterRowComponent extends CdkFooterRow {
   selector: 'nb-row, tr[nbRow]',
   template: `
     <ng-container nbCellOutlet></ng-container>`,
-  host: {
-    'class': 'nb-row',
-    'role': 'row',
-  },
   providers: [{ provide: CdkRow, useExisting: NbRowComponent }],
 })
 export class NbRowComponent extends CdkRow {
+  @HostBinding('attr.role') role = 'row';
+  @HostBinding('class') classes = 'nb-row';
 }

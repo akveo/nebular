@@ -4,7 +4,6 @@ import { NbAuthToken } from './token';
 import { NbAuthTokenParceler } from './token-parceler';
 
 export abstract class NbTokenStorage {
-
   abstract get(): NbAuthToken;
   abstract set(token: NbAuthToken);
   abstract clear();
@@ -27,7 +26,6 @@ export abstract class NbTokenStorage {
  */
 @Injectable()
 export class NbTokenLocalStorage extends NbTokenStorage {
-
   protected key = 'auth_app_token';
 
   constructor(private parceler: NbAuthTokenParceler) {

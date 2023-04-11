@@ -38,6 +38,7 @@ export class NbCalendarMonthCellComponent<D> implements NbCalendarCell<D, D> {
   @Input() size: NbCalendarSize = NbCalendarSize.MEDIUM;
   static ngAcceptInputType_size: NbCalendarSizeValues;
 
+  // eslint-disable-next-line @angular-eslint/no-output-native
   @Output() select: EventEmitter<D> = new EventEmitter(true);
 
   constructor(private dateService: NbDateService<D>) {

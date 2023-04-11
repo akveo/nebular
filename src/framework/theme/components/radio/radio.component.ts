@@ -289,6 +289,7 @@ export class NbRadioComponent {
 
   @Output() valueChange: EventEmitter<any> = new EventEmitter();
 
+  // eslint-disable-next-line @angular-eslint/no-output-native
   @Output() blur: EventEmitter<void> = new EventEmitter();
 
   @ViewChild('input', { read: ElementRef }) input: ElementRef<HTMLInputElement>;

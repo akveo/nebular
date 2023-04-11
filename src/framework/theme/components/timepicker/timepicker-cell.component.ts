@@ -41,6 +41,7 @@ export class NbTimePickerCellComponent implements AfterViewInit, OnDestroy {
     return this._selected;
   }
   @Input() value: string;
+  // eslint-disable-next-line @angular-eslint/no-output-native
   @Output() select: EventEmitter<NbSelectedTimeModel> = new EventEmitter();
 
   @ViewChild('valueContainer') valueContainerElement: ElementRef;

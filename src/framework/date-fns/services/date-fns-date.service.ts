@@ -14,19 +14,16 @@ import { default as getWeek } from 'date-fns/getWeek';
 
 export interface NbDateFnsOptions {
   format: string;
-  parseOptions: {},
-  formatOptions: {},
-  getWeekOptions: {},
+  parseOptions: {};
+  formatOptions: {};
+  getWeekOptions: {};
 }
 
 @Injectable()
 export class NbDateFnsDateService extends NbNativeDateService {
   protected options: Partial<NbDateFnsOptions>;
 
-  constructor(
-    @Inject(LOCALE_ID) locale: string,
-    @Optional() @Inject(NB_DATE_SERVICE_OPTIONS) options,
-  ) {
+  constructor(@Inject(LOCALE_ID) locale: string, @Optional() @Inject(NB_DATE_SERVICE_OPTIONS) options) {
     super(locale);
     this.options = options || {};
   }

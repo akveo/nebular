@@ -32,6 +32,7 @@ export enum NbToggleStates {
 }
 
 @Component({
+  // eslint-disable-next-line @angular-eslint/component-selector
   selector: '[nbMenuItem]',
   templateUrl: './menu-item.component.html',
   animations: [
