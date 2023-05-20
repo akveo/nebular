@@ -118,6 +118,9 @@ export class NbMenuItem {
    */
   ariaRole?: string;
 
+  /**Menu Item Click Handler */
+  onMenuItemClicked?:Function;
+
   /**
    * @returns item parents in top-down order
    */
