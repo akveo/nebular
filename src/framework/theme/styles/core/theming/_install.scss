@@ -11,8 +11,18 @@
 @use 'register';
 
 @mixin nb-for-theme($name) {
-  @if (theming-variables.$nb-theme-name == $name) {
-    @content;
+  @if (theming-variables.$nb-enable-css-custom-properties) {
+    @each $theme-name in register.nb-get-enabled-themes() {
+      @if ($theme-name == $name) {
+        .nb-theme-#{$theme-name} {
+          @content;
+        }
+      }
+    }
+  } @else {
+    @if (theming-variables.$nb-theme-name == $name) {
+      @content;
+    }
   }
 }
 
