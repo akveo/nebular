@@ -6,14 +6,11 @@ import { CalendarKitMonthCellComponent } from './components/calendar-kit-month-c
   template: `
     <nb-card>
       <nb-card-body>
-        <nb-calendar-month-picker [(month)]="month"
-                                  [date]="month"
-                                  [cellComponent]="monthCellComponent">
+        <nb-calendar-month-picker [(month)]="month" [date]="month" [cellComponent]="monthCellComponent">
         </nb-calendar-month-picker>
       </nb-card-body>
     </nb-card>
   `,
-  entryComponents: [CalendarKitMonthCellComponent],
 })
 export class CalendarKitFullCalendarShowcaseComponent {
   month = new Date();
