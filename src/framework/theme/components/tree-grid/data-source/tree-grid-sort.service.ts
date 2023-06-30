@@ -4,7 +4,6 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-
 import { Injectable } from '@angular/core';
 import { NbSortDirection, NbSortRequest } from '../tree-grid-sort.component';
 import { NbTreeGridPresentationNode } from './tree-grid.model';
@@ -15,7 +14,6 @@ import { NbTreeGridPresentationNode } from './tree-grid.model';
  */
 @Injectable()
 export class NbTreeGridSortService<T> {
-
   sort(request: NbSortRequest, data: NbTreeGridPresentationNode<T>[]): NbTreeGridPresentationNode<T>[] {
     if (!request) {
       return data;
@@ -43,10 +41,10 @@ export class NbTreeGridSortService<T> {
     let res = 0;
 
     if (a > b) {
-      res = 1
+      res = 1;
     }
     if (a < b) {
-      res = -1
+      res = -1;
     }
 
     return dir === NbSortDirection.ASCENDING ? res : res * -1;

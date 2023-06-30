@@ -178,20 +178,18 @@ class ContextMenuTestModule {}
 describe('Directive: NbContextMenuDirective', () => {
   const overlayHandler = new NbDynamicOverlayHandlerMock();
 
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.resetTestingModule();
-      TestBed.configureTestingModule({
-        imports: [
-          NoopAnimationsModule,
-          RouterTestingModule.withRoutes([]),
-          NbThemeModule.forRoot(),
-          NbMenuModule.forRoot(),
-          ContextMenuTestModule,
-        ],
-      });
-    }),
-  );
+  beforeEach(waitForAsync(() => {
+    TestBed.resetTestingModule();
+    TestBed.configureTestingModule({
+      imports: [
+        NoopAnimationsModule,
+        RouterTestingModule.withRoutes([]),
+        NbThemeModule.forRoot(),
+        NbMenuModule.forRoot(),
+        ContextMenuTestModule,
+      ],
+    });
+  }));
 
   describe('smoke ', () => {
     let fixture: ComponentFixture<any>;
@@ -241,23 +239,21 @@ describe('Directive: NbContextMenuDirective', () => {
   });
 
   describe('mocked services', () => {
-    beforeEach(
-      waitForAsync(() => {
-        TestBed.resetTestingModule();
-        TestBed.configureTestingModule({
-          imports: [
-            RouterTestingModule.withRoutes([]),
-            NbThemeModule.forRoot(),
-            NbMenuModule.forRoot(),
-            ContextMenuTestModule,
-          ],
-        }).overrideDirective(NbContextMenuDirective, {
-          set: {
-            providers: [{ provide: NbDynamicOverlayHandler, useValue: overlayHandler }],
-          },
-        });
-      }),
-    );
+    beforeEach(waitForAsync(() => {
+      TestBed.resetTestingModule();
+      TestBed.configureTestingModule({
+        imports: [
+          RouterTestingModule.withRoutes([]),
+          NbThemeModule.forRoot(),
+          NbMenuModule.forRoot(),
+          ContextMenuTestModule,
+        ],
+      }).overrideDirective(NbContextMenuDirective, {
+        set: {
+          providers: [{ provide: NbDynamicOverlayHandler, useValue: overlayHandler }],
+        },
+      });
+    }));
     describe('default context-menu', () => {
       let fixture: ComponentFixture<NbContextMenuDefaultTestComponent>;
 

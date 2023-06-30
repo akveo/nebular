@@ -138,35 +138,44 @@ import { NbColumnsService } from './tree-grid-columns.service';
  * tree-grid-sort-header-button-padding:
  */
 @Component({
+  // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'table[nbTreeGrid]',
   template: NB_TABLE_TEMPLATE,
   styleUrls: ['./tree-grid.component.scss'],
-  providers: [
-    { provide: NB_TREE_GRID, useExisting: NbTreeGridComponent },
-    NbColumnsService,
-    ...NB_TABLE_PROVIDERS,
-  ],
+  providers: [{ provide: NB_TREE_GRID, useExisting: NbTreeGridComponent }, NbColumnsService, ...NB_TABLE_PROVIDERS],
 })
-export class NbTreeGridComponent<T> extends NbTable<NbTreeGridPresentationNode<T>>
-                                    implements AfterViewInit, OnDestroy {
-
-  constructor(private dataSourceBuilder: NbTreeGridDataSourceBuilder<T>,
-              differs: IterableDiffers,
-              changeDetectorRef: ChangeDetectorRef,
-              elementRef: ElementRef,
-              @Attribute('role') role: string,
-              dir: NbDirectionality,
-              @Inject(NB_DOCUMENT) document,
-              platform: NbPlatform,
-              @Inject(NB_WINDOW) private window,
-              @Inject(NB_VIEW_REPEATER_STRATEGY) protected readonly _viewRepeater,
-              @Inject(NB_COALESCED_STYLE_SCHEDULER) protected readonly _coalescedStyleScheduler,
-              _viewportRuler: NbViewportRulerAdapter,
-              @Optional() @SkipSelf() @Inject(NB_STICKY_POSITIONING_LISTENER)
-              protected readonly _stickyPositioningListener,
+export class NbTreeGridComponent<T> extends NbTable<NbTreeGridPresentationNode<T>> implements AfterViewInit, OnDestroy {
+  constructor(
+    private dataSourceBuilder: NbTreeGridDataSourceBuilder<T>,
+    differs: IterableDiffers,
+    changeDetectorRef: ChangeDetectorRef,
+    elementRef: ElementRef,
+    @Attribute('role') role: string,
+    dir: NbDirectionality,
+    @Inject(NB_DOCUMENT) document,
+    platform: NbPlatform,
+    @Inject(NB_WINDOW) private window,
+    @Inject(NB_VIEW_REPEATER_STRATEGY) protected readonly _viewRepeater,
+    @Inject(NB_COALESCED_STYLE_SCHEDULER) protected readonly _coalescedStyleScheduler,
+    _viewportRuler: NbViewportRulerAdapter,
+    @Optional()
+    @SkipSelf()
+    @Inject(NB_STICKY_POSITIONING_LISTENER)
+    protected readonly _stickyPositioningListener,
   ) {
-    super(differs, changeDetectorRef, elementRef, role, dir, document, platform, _viewRepeater,
-          _coalescedStyleScheduler, _viewportRuler, _stickyPositioningListener);
+    super(
+      differs,
+      changeDetectorRef,
+      elementRef,
+      role,
+      dir,
+      document,
+      platform,
+      _viewRepeater,
+      _coalescedStyleScheduler,
+      _viewportRuler,
+      _stickyPositioningListener,
+    );
     this.platform = platform;
   }
 
@@ -216,8 +225,7 @@ export class NbTreeGridComponent<T> extends NbTable<NbTreeGridPresentationNode<T
       this._contentHeaderRowDefs.changes,
       this._contentFooterRowDefs.changes,
     );
-    rowsChange$.pipe(takeUntil(this.destroy$))
-      .subscribe(() => this.checkDefsCount());
+    rowsChange$.pipe(takeUntil(this.destroy$)).subscribe(() => this.checkDefsCount());
 
     if (this.platform.isBrowser) {
       this.updateVisibleColumns();
@@ -319,15 +327,15 @@ export class NbTreeGridComponent<T> extends NbTable<NbTreeGridPresentationNode<T
 
   private updateVisibleColumns(): void {
     const width = this.window.innerWidth;
-    const columnDefs = (this._contentColumnDefs as QueryList<NbTreeGridColumnDefDirective>);
+    const columnDefs = this._contentColumnDefs as QueryList<NbTreeGridColumnDefDirective>;
 
     const columnsToHide: string[] = columnDefs
       .filter((col: NbTreeGridColumnDefDirective) => col.shouldHide(width))
-      .map(col => col.name);
+      .map((col) => col.name);
 
     const columnsToShow: string[] = columnDefs
       .filter((col: NbTreeGridColumnDefDirective) => col.shouldShow(width))
-      .map(col => col.name);
+      .map((col) => col.name);
 
     if (!columnsToHide.length && !columnsToShow.length) {
       return;
@@ -337,7 +345,7 @@ export class NbTreeGridComponent<T> extends NbTable<NbTreeGridPresentationNode<T
       this._contentHeaderRowDefs.first as NbTreeGridHeaderRowDefDirective,
       this._contentRowDefs.first as NbTreeGridRowDefDirective<any>,
       this._contentFooterRowDefs.first as NbTreeGridFooterRowDefDirective,
-    ].filter(d => !!d);
+    ].filter((d) => !!d);
 
     for (const rowDef of rowDefs) {
       for (const column of columnsToHide) {

@@ -14,7 +14,8 @@
     margin-right: 0.25rem;
   }
 
-  &.default, &:not(.has-icon) {
+  &.default,
+  &:not(.has-icon) {
     .content-container {
       display: flex;
       flex-direction: row;

@@ -36,22 +36,20 @@ export class NbToastrTestComponent {
 describe('toastr-component', () => {
   let fixture: ComponentFixture<NbToastrTestComponent>;
 
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        imports: [
-          RouterTestingModule.withRoutes([]),
-          NoopAnimationsModule,
-          NbThemeModule.forRoot(),
-          NbLayoutModule,
-          NbToastrModule.forRoot(),
-        ],
-        declarations: [NbToastrTestComponent],
-      }).compileComponents();
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      imports: [
+        RouterTestingModule.withRoutes([]),
+        NoopAnimationsModule,
+        NbThemeModule.forRoot(),
+        NbLayoutModule,
+        NbToastrModule.forRoot(),
+      ],
+      declarations: [NbToastrTestComponent],
+    }).compileComponents();
 
-      fixture = TestBed.createComponent(NbToastrTestComponent);
-    }),
-  );
+    fixture = TestBed.createComponent(NbToastrTestComponent);
+  }));
 
   it("should add 'toastr-overlay-container' class to overlay", () => {
     fixture.debugElement.componentInstance.showToast('toast-test-class');

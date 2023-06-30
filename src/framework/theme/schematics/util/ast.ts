@@ -16,7 +16,6 @@ export function isImportedInMainModule(tree: Tree, project: ProjectDefinition, m
   return hasNgModuleImport(tree, appModulePath, moduleName);
 }
 
-
 export function getAppModulePath(host: Tree, mainPath: string): string {
   const moduleRelativePath = findBootstrapModulePath(host, mainPath);
   const mainDir = dirname(mainPath as Path);

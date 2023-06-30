@@ -60,7 +60,6 @@ export const DEFAULT_MEDIA_BREAKPOINTS = [
  */
 @Injectable()
 export class NbMediaBreakpointsService {
-
   private breakpointsMap: { [breakpoint: string]: number };
 
   constructor(@Inject(NB_MEDIA_BREAKPOINTS) private breakpoints) {
@@ -79,11 +78,12 @@ export class NbMediaBreakpointsService {
     const unknown = { name: 'unknown', width: width };
     const breakpoints = this.getBreakpoints();
 
-    return breakpoints
-      .find((point: NbMediaBreakpoint, index: number) => {
+    return (
+      breakpoints.find((point: NbMediaBreakpoint, index: number) => {
         const next = breakpoints[index + 1];
         return width >= point.width && (!next || width < next.width);
-      }) || unknown;
+      }) || unknown
+    );
   }
 
   /**

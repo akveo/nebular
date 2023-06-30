@@ -19,7 +19,6 @@ import { NbMediaBreakpointsService, NbMediaBreakpoint } from './breakpoints.serv
  */
 @Injectable()
 export class NbThemeService {
-
   // TODO: behavioral subject here?
   currentTheme: string;
   private themeChanges$ = new ReplaySubject(1);
@@ -27,9 +26,11 @@ export class NbThemeService {
   private removeLayoutClass$ = new Subject();
   private changeWindowWidth$ = new ReplaySubject<number>(2);
 
-  constructor(@Inject(NB_THEME_OPTIONS) protected options: any,
-              private breakpointService: NbMediaBreakpointsService,
-              private jsThemesRegistry: NbJSThemesRegistry) {
+  constructor(
+    @Inject(NB_THEME_OPTIONS) protected options: any,
+    private breakpointService: NbMediaBreakpointsService,
+    private jsThemesRegistry: NbJSThemesRegistry,
+  ) {
     if (options && options.name) {
       this.changeTheme(options.name);
     }
@@ -71,22 +72,21 @@ export class NbThemeService {
    * @returns {Observable<[NbMediaBreakpoint, NbMediaBreakpoint]>}
    */
   onMediaQueryChange(): Observable<NbMediaBreakpoint[]> {
-    return this.changeWindowWidth$
-      .pipe(
-        startWith(undefined),
-        pairwise(),
-        map(([prevWidth, width]: [number, number]) => {
-          return [
-            this.breakpointService.getByWidth(prevWidth),
-            this.breakpointService.getByWidth(width),
-          ] as [NbMediaBreakpoint, NbMediaBreakpoint];
-        }),
-        filter(([prevPoint, point]: [NbMediaBreakpoint, NbMediaBreakpoint]) => {
-          return prevPoint.name !== point.name;
-        }),
-        distinctUntilChanged(null, params => params[0].name + params[1].name),
-        share(),
-      );
+    return this.changeWindowWidth$.pipe(
+      startWith(undefined),
+      pairwise(),
+      map(([prevWidth, width]: [number, number]) => {
+        return [this.breakpointService.getByWidth(prevWidth), this.breakpointService.getByWidth(width)] as [
+          NbMediaBreakpoint,
+          NbMediaBreakpoint,
+        ];
+      }),
+      filter(([prevPoint, point]: [NbMediaBreakpoint, NbMediaBreakpoint]) => {
+        return prevPoint.name !== point.name;
+      }),
+      distinctUntilChanged(null, (params) => params[0].name + params[1].name),
+      share(),
+    );
   }
 
   /**

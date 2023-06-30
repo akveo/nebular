@@ -1289,7 +1289,7 @@ describe('NbSelect - experimental search', () => {
   });
 
   it("should update search input and don't emit filterChange when value of select is changed", fakeAsync(() => {
-    const searchInput = testComponent.selectComponent.optionSearchInput.nativeElement;
+    const searchInput = testComponent.selectComponent.optionsAutocompleteInput.nativeElement;
 
     expect(searchInput.value).toEqual('');
     expect(testComponent.filterValue).toEqual('');

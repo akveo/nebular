@@ -48,14 +48,12 @@ describe('NbRestoreScrollTopHelper', () => {
     fixture.detectChanges();
   });
 
-  beforeEach(
-    waitForAsync(
-      inject([NbRestoreScrollTopHelper, Router], (_restoreHelper, _router) => {
-        restoreHelper = _restoreHelper;
-        router = _router;
-      }),
-    ),
-  );
+  beforeEach(waitForAsync(
+    inject([NbRestoreScrollTopHelper, Router], (_restoreHelper, _router) => {
+      restoreHelper = _restoreHelper;
+      router = _router;
+    }),
+  ));
 
   afterEach(fakeAsync(() => {
     fixture.destroy();

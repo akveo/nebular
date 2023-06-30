@@ -35,7 +35,6 @@ export class NbNativeDateService extends NbDateService<Date> {
     this.datePipe = new DatePipe(locale);
   }
 
-
   setHours(date: Date, hour: number): Date {
     const result: Date = this.clone(date);
     result.setHours(hour);
@@ -218,13 +217,11 @@ export class NbNativeDateService extends NbDateService<Date> {
   }
 
   isSameDay(date1: Date, date2: Date): boolean {
-    return this.isSameMonth(date1, date2) &&
-      date1.getDate() === date2.getDate();
+    return this.isSameMonth(date1, date2) && date1.getDate() === date2.getDate();
   }
 
   isSameMonth(date1: Date, date2: Date): boolean {
-    return this.isSameYear(date1, date2) &&
-      date1.getMonth() === date2.getMonth();
+    return this.isSameYear(date1, date2) && date1.getMonth() === date2.getMonth();
   }
 
   isSameYear(date1: Date, date2: Date): boolean {

@@ -15,7 +15,6 @@ import {
 } from '../calendar-kit/model';
 import { convertToBoolProperty, NbBooleanInput } from '../helpers';
 
-
 /**
  * Calendar component provides a capability to choose a date.
  *
@@ -216,7 +215,6 @@ import { convertToBoolProperty, NbBooleanInput } from '../helpers';
   `,
 })
 export class NbCalendarComponent<D> {
-
   /**
    * Defines if we should render previous and next months
    * in the current month view.

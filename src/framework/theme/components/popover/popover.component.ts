@@ -4,21 +4,13 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import {
-  Component,
-  ComponentFactoryResolver,
-  Input,
-  TemplateRef,
-  Type,
-  ViewChild,
-} from '@angular/core';
+import { Component, ComponentFactoryResolver, Input, TemplateRef, Type, ViewChild } from '@angular/core';
 import { NbComponentPortal, NbTemplatePortal } from '../cdk/overlay/mapping';
 import {
   NbOverlayContainerComponent,
   NbPositionedContainerComponent,
   NbRenderableContainer,
 } from '../cdk/overlay/overlay-container';
-
 
 /**
  * Overlay container.
@@ -74,8 +66,9 @@ export class NbPopoverComponent extends NbPositionedContainerComponent implement
   }
 
   protected attachTemplate() {
-    this.overlayContainer
-      .attachTemplatePortal(new NbTemplatePortal(this.content, null, <any>{ $implicit: this.context }));
+    this.overlayContainer.attachTemplatePortal(
+      new NbTemplatePortal(this.content, null, <any>{ $implicit: this.context }),
+    );
   }
 
   protected attachComponent() {

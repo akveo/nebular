@@ -4,13 +4,12 @@ import { By } from '@angular/platform-browser';
 import { NbThemeModule, NbProgressBarModule, NbProgressBarComponent } from '@nebular/theme';
 
 describe('Component: NbProgressBar', () => {
-
   let progressBar: NbProgressBarComponent;
   let fixture: ComponentFixture<NbProgressBarComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ NbThemeModule.forRoot(), NbProgressBarModule ],
+      imports: [NbThemeModule.forRoot(), NbProgressBarModule],
     });
 
     fixture = TestBed.createComponent(NbProgressBarComponent);
@@ -20,17 +19,13 @@ describe('Component: NbProgressBar', () => {
   it('Setting value 50 should set width to 50%', () => {
     progressBar.value = 50;
     fixture.detectChanges();
-    expect(
-      fixture
-        .debugElement
-        .query(By.css('.progress-value')).nativeElement.style.width)
-      .toBe('50%');
+    expect(fixture.debugElement.query(By.css('.progress-value')).nativeElement.style.width).toBe('50%');
   });
 
   it('Setting status danger should set class danger', () => {
     progressBar.status = 'danger';
     fixture.detectChanges();
-    expect(fixture.nativeElement.classList).toContain('status-danger')
+    expect(fixture.nativeElement.classList).toContain('status-danger');
   });
 
   it('Setting size should set class', () => {
@@ -43,11 +38,6 @@ describe('Component: NbProgressBar', () => {
     progressBar.value = 40;
     progressBar.displayValue = true;
     fixture.detectChanges();
-    expect(
-      fixture
-        .debugElement
-        .query(By.css('.progress-value span')).nativeElement.innerHTML)
-      .toContain('40%')
+    expect(fixture.debugElement.query(By.css('.progress-value span')).nativeElement.innerHTML).toContain('40%');
   });
-
 });

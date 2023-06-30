@@ -56,7 +56,6 @@ import { NbComponentOrCustomStatus } from '../component-status';
   styleUrls: ['./spinner.component.scss'],
 })
 export class NbSpinnerComponent {
-
   /**
    * Loading text that is shown near the icon
    * @type string
@@ -146,6 +145,5 @@ export class NbSpinnerComponent {
     return [];
   }
 
-  constructor(protected statusService: NbStatusService) {
-  }
+  constructor(protected statusService: NbStatusService) {}
 }

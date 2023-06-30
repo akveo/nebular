@@ -44,14 +44,10 @@ export function windowFactory(platformId: Object): Window | undefined {
 }
 
 @NgModule({
-  imports: [
-    CommonModule,
-  ],
-  exports: [
-  ],
+  imports: [CommonModule],
+  exports: [],
 })
 export class NbThemeModule {
-
   // TODO: check the options (throw exception?)
   /**
    * Main Theme Module
@@ -63,11 +59,12 @@ export class NbThemeModule {
    *
    * @returns {ModuleWithProviders}
    */
-  static forRoot(nbThemeOptions: NbThemeOptions = { name: 'default' },
-                 nbJSThemes?: NbJSThemeOptions[],
-                 nbMediaBreakpoints?: NbMediaBreakpoint[],
-                 layoutDirection?: NbLayoutDirection): ModuleWithProviders<NbThemeModule> {
-
+  static forRoot(
+    nbThemeOptions: NbThemeOptions = { name: 'default' },
+    nbJSThemes?: NbJSThemeOptions[],
+    nbMediaBreakpoints?: NbMediaBreakpoint[],
+    layoutDirection?: NbLayoutDirection,
+  ): ModuleWithProviders<NbThemeModule> {
     return {
       ngModule: NbThemeModule,
       providers: [
@@ -76,7 +73,7 @@ export class NbThemeModule {
         { provide: NB_JS_THEMES, useValue: nbJSThemes || [] },
         { provide: NB_MEDIA_BREAKPOINTS, useValue: nbMediaBreakpoints || DEFAULT_MEDIA_BREAKPOINTS },
         { provide: NB_DOCUMENT, useExisting: DOCUMENT },
-        { provide: NB_WINDOW, useFactory: windowFactory, deps: [ PLATFORM_ID ] },
+        { provide: NB_WINDOW, useFactory: windowFactory, deps: [PLATFORM_ID] },
         NbJSThemesRegistry,
         NbThemeService,
         NbMediaBreakpointsService,

@@ -11,12 +11,10 @@ import { NbDateService } from './date.service';
 
 @Injectable()
 export class NbCalendarYearModelService<D> {
-
   protected yearsInView = 12;
   protected yearsInRow = 4;
 
-  constructor(protected dateService: NbDateService<D>) {
-  }
+  constructor(protected dateService: NbDateService<D>) {}
 
   getYearsInView(): number {
     return this.yearsInView;
@@ -32,9 +30,9 @@ export class NbCalendarYearModelService<D> {
     if (year >= 0) {
       viewStartYear = year - (year % this.yearsInView);
     } else {
-      viewStartYear = year - (year % this.yearsInView + this.yearsInView);
+      viewStartYear = year - ((year % this.yearsInView) + this.yearsInView);
     }
-    const years = range(this.yearsInView).map(i => this.copyWithYear(viewStartYear + i, viewYear));
+    const years = range(this.yearsInView).map((i) => this.copyWithYear(viewStartYear + i, viewYear));
 
     return batch(years, this.yearsInRow);
   }

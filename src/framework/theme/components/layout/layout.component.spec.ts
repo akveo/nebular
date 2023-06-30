@@ -25,11 +25,10 @@ export class LayoutWithScrollModeComponent {
 }
 
 describe('NbLayoutComponent', () => {
-
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ RouterTestingModule.withRoutes([]), NbThemeModule.forRoot(), NbLayoutModule ],
-      declarations: [ LayoutWithScrollModeComponent ],
+      imports: [RouterTestingModule.withRoutes([]), NbThemeModule.forRoot(), NbLayoutModule],
+      declarations: [LayoutWithScrollModeComponent],
     });
   });
 
@@ -39,7 +38,7 @@ describe('NbLayoutComponent', () => {
     let scrollService: NbLayoutScrollService;
 
     beforeEach(() => {
-      fixture  = TestBed.createComponent(LayoutWithScrollModeComponent);
+      fixture = TestBed.createComponent(LayoutWithScrollModeComponent);
       fixture.detectChanges();
 
       layoutComponent = fixture.debugElement.query(By.directive(NbLayoutComponent)).componentInstance;

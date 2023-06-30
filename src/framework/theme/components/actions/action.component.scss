@@ -14,7 +14,8 @@
 :host(.disabled) {
   cursor: not-allowed;
 
-  a, nb-icon {
+  a,
+  nb-icon {
     cursor: not-allowed;
   }
 }
@@ -27,7 +28,8 @@
 a.icon-container {
   position: relative;
 
-  &:hover, &:focus {
+  &:hover,
+  &:focus {
     text-decoration: none;
   }
 }

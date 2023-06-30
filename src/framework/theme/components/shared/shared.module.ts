@@ -17,4 +17,4 @@ import { RouterModule } from '@angular/router';
     RouterModule,
   ],
 })
-export class NbSharedModule { }
+export class NbSharedModule {}

@@ -10,12 +10,10 @@ import { NbOverlayModule } from '../cdk/overlay/overlay.module';
 import { NbPopoverDirective } from './popover.directive';
 import { NbPopoverComponent } from './popover.component';
 
-
 @NgModule({
   imports: [NbOverlayModule],
   declarations: [NbPopoverDirective, NbPopoverComponent],
   exports: [NbPopoverDirective],
   entryComponents: [NbPopoverComponent],
 })
-export class NbPopoverModule {
-}
+export class NbPopoverModule {}

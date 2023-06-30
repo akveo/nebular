@@ -21,8 +21,10 @@ export interface NbFilterable {
   filter(filterRequest: string);
 }
 
-export class NbTreeGridDataSource<T> extends NbDataSource<NbTreeGridPresentationNode<T>>
-                                     implements NbSortable, NbFilterable {
+export class NbTreeGridDataSource<T>
+  extends NbDataSource<NbTreeGridPresentationNode<T>>
+  implements NbSortable, NbFilterable
+{
   /** Stream that emits when a new data array is set on the data source. */
   private data: BehaviorSubject<NbTreeGridPresentationNode<T>[]>;
 
@@ -33,10 +35,12 @@ export class NbTreeGridDataSource<T> extends NbDataSource<NbTreeGridPresentation
 
   private readonly sortRequest = new BehaviorSubject<NbSortRequest>(null);
 
-  constructor(private sortService: NbTreeGridSortService<T>,
-              private filterService: NbTreeGridFilterService<T>,
-              private treeGridService: NbTreeGridService<T>,
-              private treeGridDataService: NbTreeGridDataService<T>) {
+  constructor(
+    private sortService: NbTreeGridSortService<T>,
+    private filterService: NbTreeGridFilterService<T>,
+    private treeGridService: NbTreeGridService<T>,
+    private treeGridDataService: NbTreeGridDataService<T>,
+  ) {
     super();
   }
 
@@ -56,8 +60,7 @@ export class NbTreeGridDataSource<T> extends NbDataSource<NbTreeGridPresentation
     return this.renderData;
   }
 
-  disconnect(collectionViewer: NbCollectionViewer) {
-  }
+  disconnect(collectionViewer: NbCollectionViewer) {}
 
   expand(row: T) {
     this.treeGridService.expand(this.data.value, row);
@@ -97,21 +100,15 @@ export class NbTreeGridDataSource<T> extends NbDataSource<NbTreeGridPresentation
   protected updateChangeSubscription() {
     const dataStream = this.data;
 
-    const filteredData = combineLatest([dataStream, this.filterRequest])
-      .pipe(
-        map(([data]) => this.treeGridDataService.copy(data)),
-        map(data => this.filterData(data)),
-      );
+    const filteredData = combineLatest([dataStream, this.filterRequest]).pipe(
+      map(([data]) => this.treeGridDataService.copy(data)),
+      map((data) => this.filterData(data)),
+    );
 
-    const sortedData = combineLatest([filteredData, this.sortRequest])
-      .pipe(
-        map(([data]) => this.sortData(data)),
-      );
+    const sortedData = combineLatest([filteredData, this.sortRequest]).pipe(map(([data]) => this.sortData(data)));
 
     sortedData
-      .pipe(
-        map((data: NbTreeGridPresentationNode<T>[]) => this.treeGridDataService.flattenExpanded(data)),
-      )
+      .pipe(map((data: NbTreeGridPresentationNode<T>[]) => this.treeGridDataService.flattenExpanded(data)))
       .subscribe((data: NbTreeGridPresentationNode<T>[]) => this.renderData.next(data));
   }
 
@@ -126,11 +123,12 @@ export class NbTreeGridDataSource<T> extends NbDataSource<NbTreeGridPresentation
 
 @Injectable()
 export class NbTreeGridDataSourceBuilder<T> {
-  constructor(private filterService: NbTreeGridFilterService<T>,
-              private sortService: NbTreeGridSortService<T>,
-              private treeGridService: NbTreeGridService<T>,
-              private treeGridDataService: NbTreeGridDataService<T>) {
-  }
+  constructor(
+    private filterService: NbTreeGridFilterService<T>,
+    private sortService: NbTreeGridSortService<T>,
+    private treeGridService: NbTreeGridService<T>,
+    private treeGridDataService: NbTreeGridDataService<T>,
+  ) {}
 
   create<N>(data: N[], customGetters?: NbGetters<N, T>): NbTreeGridDataSource<T> {
     const dataSource = new NbTreeGridDataSource<T>(

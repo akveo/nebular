@@ -11,7 +11,6 @@ import { SafeStyle } from '@angular/platform-browser';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NbChatAvatarComponent {
-
   @Input() initials: string;
 
   @Input()

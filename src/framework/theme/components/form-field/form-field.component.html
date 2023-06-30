@@ -2,9 +2,11 @@
   <ng-content select="[nbPrefix]"></ng-content>
 </div>
 
-<div class="nb-form-control-container"
-     [class.nb-form-field-control-with-prefix]="shouldShowPrefix()"
-     [class.nb-form-field-control-with-suffix]="shouldShowSuffix()">
+<div
+  class="nb-form-control-container"
+  [class.nb-form-field-control-with-prefix]="shouldShowPrefix()"
+  [class.nb-form-field-control-with-suffix]="shouldShowSuffix()"
+>
   <ng-content></ng-content>
 </div>
 

@@ -11,7 +11,6 @@ import { NbComponentSize } from '../component-size';
 import { NbComponentOrCustomStatus, NbComponentStatus } from '../component-status';
 import { convertToBoolProperty, NbBooleanInput } from '../helpers';
 
-
 /**
  * Alert component.
  *
@@ -119,7 +118,6 @@ import { convertToBoolProperty, NbBooleanInput } from '../helpers';
   `,
 })
 export class NbAlertComponent {
-
   /**
    * Alert size, available sizes:
    * `tiny`, `small`, `medium`, `large`, `giant`
@@ -165,10 +163,10 @@ export class NbAlertComponent {
    * Emits when chip is removed
    * @type EventEmitter<any>
    */
+  // eslint-disable-next-line @angular-eslint/no-output-native
   @Output() close = new EventEmitter();
 
-  constructor(protected statusService: NbStatusService) {
-  }
+  constructor(protected statusService: NbStatusService) {}
 
   /**
    * Emits the removed chip event

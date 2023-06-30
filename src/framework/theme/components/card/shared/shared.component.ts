@@ -9,7 +9,7 @@ import { Component } from '@angular/core';
   selector: 'nb-card-front',
   template: '<ng-content select="nb-card"></ng-content>',
 })
-export class NbCardFrontComponent { }
+export class NbCardFrontComponent {}
 
 /**
  * Component intended to be used within the `<nb-flip-card>` and `<nb-reveal-card>` components.
@@ -20,4 +20,4 @@ export class NbCardFrontComponent { }
   selector: 'nb-card-back',
   template: '<ng-content select="nb-card"></ng-content>',
 })
-export class NbCardBackComponent { }
+export class NbCardBackComponent {}

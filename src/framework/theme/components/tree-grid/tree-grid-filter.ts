@@ -39,14 +39,9 @@ export class NbFilterInputDirective extends NbFilterDirective implements OnInit,
   @Input() debounceTime: number = 200;
 
   ngOnInit() {
-    this.search$
-      .pipe(
-        debounceTime(this.debounceTime),
-        takeUntil(this.destroy$),
-      )
-      .subscribe((query: string) => {
-        super.filter(query)
-      });
+    this.search$.pipe(debounceTime(this.debounceTime), takeUntil(this.destroy$)).subscribe((query: string) => {
+      super.filter(query);
+    });
   }
 
   ngOnDestroy() {
