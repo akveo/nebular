@@ -8,7 +8,7 @@ import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
 @Component({
-  selector: 'nb-select-form',
+  selector: 'npg-select-form',
   templateUrl: './select-form.component.html',
 })
 export class SelectFormComponent {

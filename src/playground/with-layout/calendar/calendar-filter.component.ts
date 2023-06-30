@@ -7,7 +7,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'nb-calendar-filter',
+  selector: 'npg-calendar-filter',
   template: `
     <nb-card>
       <nb-card-header>
@@ -21,5 +21,5 @@ import { Component } from '@angular/core';
 })
 export class CalendarFilterComponent {
   date = new Date();
-  filter = date => date.getDay() !== 0 && date.getDay() !== 6;
+  filter = (date) => date.getDay() !== 0 && date.getDay() !== 6;
 }

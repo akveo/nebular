@@ -11,10 +11,7 @@ import { CalendarKitFullCalendarShowcaseComponent } from './calendar-kit-full-ca
 import { CalendarKitMonthCellComponent } from './components/calendar-kit-month-cell.component';
 
 @NgModule({
-  declarations: [
-    CalendarKitFullCalendarShowcaseComponent,
-    CalendarKitMonthCellComponent,
-  ],
-  imports: [ NbCardModule, NbCalendarKitModule, CalendarKitRoutingModule ],
+  declarations: [CalendarKitFullCalendarShowcaseComponent, CalendarKitMonthCellComponent],
+  imports: [NbCardModule, NbCalendarKitModule, CalendarKitRoutingModule],
 })
 export class CalendarKitModule {}

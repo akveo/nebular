@@ -1,24 +1,15 @@
 <nb-card size="small">
   <nb-card-body class="example-items-col">
-
     <button (click)="toggleDisabled()" nbButton>Toggle disabled</button>
 
     <label>
       <span class="label">Disabled via <i>disabled</i> attribute</span>
-      <input [nbAutocomplete]="auto"
-             [disabled]="disabled"
-             nbInput
-             type="text"
-             placeholder="Plain input" />
+      <input [nbAutocomplete]="auto" [disabled]="disabled" nbInput type="text" placeholder="Plain input" />
     </label>
 
     <label>
       <span class="label">Disabled via <i>formControl</i></span>
-      <input [nbAutocomplete]="auto"
-             [formControl]="inputFormControl"
-             nbInput
-             type="text"
-             placeholder="Form control" />
+      <input [nbAutocomplete]="auto" [formControl]="inputFormControl" nbInput type="text" placeholder="Form control" />
     </label>
 
     <nb-autocomplete #auto>
@@ -26,6 +17,5 @@
         {{ option }}
       </nb-option>
     </nb-autocomplete>
-
   </nb-card-body>
 </nb-card>

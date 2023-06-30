@@ -7,9 +7,8 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
-  selector: 'nb-card-accents',
+  selector: 'npg-card-accents',
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './card-accents.component.html',
 })
-export class CardAccentsComponent {
-}
+export class CardAccentsComponent {}

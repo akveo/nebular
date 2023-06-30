@@ -7,7 +7,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'ngx-app',
+  selector: 'npg-ngx-app',
   template: `
     <nb-layout>
       <nb-layout-column>
@@ -20,5 +20,4 @@ import { Component } from '@angular/core';
     </nb-layout>
   `,
 })
-export class AppComponent {
-}
+export class AppComponent {}

@@ -7,7 +7,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
-  selector: 'nb-button-group-showcase',
+  selector: 'npg-button-group-showcase',
   templateUrl: './button-group-showcase.component.html',
   styleUrls: ['./button-group-showcase.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

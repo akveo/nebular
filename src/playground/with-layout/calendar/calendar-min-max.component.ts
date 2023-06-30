@@ -8,7 +8,7 @@ import { Component } from '@angular/core';
 import { NbDateService } from '@nebular/theme';
 
 @Component({
-  selector: 'nb-calendar-min-max',
+  selector: 'npg-calendar-min-max',
   template: `
     <nb-card>
       <nb-card-header>

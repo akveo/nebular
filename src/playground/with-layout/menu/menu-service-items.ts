@@ -39,7 +39,7 @@ export const MENU_ITEMS = [
             title: 'Commercial',
             link: '/example/menu/menu-service.component/3/3/2',
             icon: 'grid-outline',
-            queryParams: {param: 2},
+            queryParams: { param: 2 },
             fragment: 'fragment',
           },
         ],

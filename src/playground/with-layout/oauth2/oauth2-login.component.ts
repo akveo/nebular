@@ -10,7 +10,7 @@ import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 
 @Component({
-  selector: 'nb-playground-auth',
+  selector: 'npg-playground-auth',
   template: `
     <nb-layout>
       <nb-layout-column>

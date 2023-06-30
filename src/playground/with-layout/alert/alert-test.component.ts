@@ -7,31 +7,27 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'nb-alert-test',
+  selector: 'npg-alert-test',
   template: `
     <nb-alert
       *ngFor="let alert of alerts"
       [size]="alert.size"
       [status]="alert.status"
       closable
-      (close)="onClose(alert)">
+      (close)="onClose(alert)"
+    >
       Success message!
     </nb-alert>
 
-    <nb-alert
-      *ngFor="let alert of accentAlerts"
-      [size]="alert.size"
-      [status]="alert.status"
-      [accent]="alert.accent">
+    <nb-alert *ngFor="let alert of accentAlerts" [size]="alert.size" [status]="alert.status" [accent]="alert.accent">
       Success message!
     </nb-alert>
   `,
 })
 export class AlertTestComponent {
-
-  sizes = [ 'tiny', 'small', 'medium', 'large', 'giant' ];
-  statuses = [ 'primary', 'success', 'info', 'warning', 'danger' ];
-  accents = [ 'primary', 'success', 'info', 'warning', 'danger' ];
+  sizes = ['tiny', 'small', 'medium', 'large', 'giant'];
+  statuses = ['primary', 'success', 'info', 'warning', 'danger'];
+  accents = ['primary', 'success', 'info', 'warning', 'danger'];
 
   alerts: any[];
   accentAlerts: any;
@@ -51,8 +47,8 @@ export class AlertTestComponent {
   private prepareAlerts(): any[] {
     const result = [];
 
-    this.statuses.forEach(status => {
-      this.sizes.forEach(size => {
+    this.statuses.forEach((status) => {
+      this.sizes.forEach((size) => {
         result.push({
           size,
           status,
@@ -67,8 +63,8 @@ export class AlertTestComponent {
     const { statuses, accents } = this;
     const accentAlerts = [];
 
-    statuses.forEach(status => {
-      accents.forEach(accent => {
+    statuses.forEach((status) => {
+      accents.forEach((accent) => {
         accentAlerts.push({
           size: 'small',
           status,

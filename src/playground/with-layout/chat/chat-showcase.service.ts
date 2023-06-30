@@ -5,8 +5,6 @@ import { botReplies, gifsLinks, imageLinks } from './bot-replies';
 
 @Injectable()
 export class ChatShowcaseService {
-
-
   loadMessages() {
     return messages;
   }
@@ -16,8 +14,7 @@ export class ChatShowcaseService {
   }
 
   reply(message: string) {
-    const botReply: any =  this.loadBotReplies()
-      .find((reply: any) => message.search(reply.regExp) !== -1);
+    const botReply: any = this.loadBotReplies().find((reply: any) => message.search(reply.regExp) !== -1);
 
     if (botReply.reply.type === 'quote') {
       botReply.reply.quote = message;

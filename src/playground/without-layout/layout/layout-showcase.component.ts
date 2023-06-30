@@ -1,9 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'nb-layout-showcase',
+  selector: 'npg-layout-showcase',
   templateUrl: './layout-showcase.component.html',
 })
-
-export class LayoutShowcaseComponent {
-}
+export class LayoutShowcaseComponent {}

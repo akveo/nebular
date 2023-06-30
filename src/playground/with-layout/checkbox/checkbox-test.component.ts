@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'nb-app-checkbox-test',
+  selector: 'npg-checkbox-test',
   template: `
     <div>
       <nb-checkbox id="first"></nb-checkbox>
@@ -26,5 +26,4 @@ import { Component } from '@angular/core';
     </div>
   `,
 })
-export class CheckboxTestComponent {
-}
+export class CheckboxTestComponent {}

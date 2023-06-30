@@ -13,21 +13,18 @@ import { trees } from './trees-list';
   template: `
     <nb-card>
       <nb-card-body>
-
         <nb-tag-list (tagRemove)="onTagRemove($event)">
           <nb-tag *ngFor="let tree of trees" [text]="tree" [removable]="trees.length > 1"></nb-tag>
         </nb-tag-list>
-
       </nb-card-body>
     </nb-card>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TagShowcaseComponent {
-
   trees = trees;
 
   onTagRemove(tagToRemove: NbTagComponent): void {
-    this.trees = this.trees.filter(t => t !== tagToRemove.text);
+    this.trees = this.trees.filter((t) => t !== tagToRemove.text);
   }
 }

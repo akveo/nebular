@@ -8,7 +8,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { NbIconConfig } from '@nebular/theme';
 
 @Component({
-  selector: 'nb-action-showcase',
+  selector: 'npg-action-showcase',
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './action-showcase.component.html',
 })

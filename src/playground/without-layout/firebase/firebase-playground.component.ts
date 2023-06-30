@@ -7,10 +7,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'nb-firebase-playground',
-  template: `
-    <router-outlet></router-outlet>
-  `,
+  selector: 'npg-firebase-playground',
+  template: ` <router-outlet></router-outlet> `,
 })
-export class FirebasePlaygroundComponent {
-}
+export class FirebasePlaygroundComponent {}

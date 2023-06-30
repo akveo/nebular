@@ -1,19 +1,17 @@
 <nb-card size="small">
   <nb-card-body class="example-items-rows">
-
     <input
       [formControl]="inputFormControl"
       nbInput
       type="text"
       placeholder="Form control"
-      [nbAutocomplete]="autoControl" />
+      [nbAutocomplete]="autoControl"
+    />
 
     <nb-autocomplete #autoControl>
-
       <nb-option *ngFor="let option of filteredControlOptions$ | async" [value]="option">
         {{ option }}
       </nb-option>
-
     </nb-autocomplete>
 
     <input
@@ -22,15 +20,13 @@
       nbInput
       type="text"
       placeholder="ngModel"
-      [nbAutocomplete]="autoNgModel" />
+      [nbAutocomplete]="autoNgModel"
+    />
 
     <nb-autocomplete #autoNgModel>
-
       <nb-option *ngFor="let option of filteredNgModelOptions$ | async" [value]="option">
         {{ option }}
       </nb-option>
-
     </nb-autocomplete>
-
   </nb-card-body>
 </nb-card>

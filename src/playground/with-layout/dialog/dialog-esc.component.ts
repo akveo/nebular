@@ -3,7 +3,7 @@ import { NbDialogService } from '@nebular/theme';
 import { EscDialogComponent } from './components/esc-dialog.component';
 
 @Component({
-  selector: 'nb-dialog-esc',
+  selector: 'npg-dialog-esc',
   template: `
     <button nbButton (click)="openWithEscClose()">Open with escape close</button>
     <button nbButton (click)="openWithoutEscClose()">Open without escape close</button>
@@ -11,8 +11,7 @@ import { EscDialogComponent } from './components/esc-dialog.component';
   styleUrls: ['./dialog-common.scss'],
 })
 export class DialogEscComponent {
-  constructor(private dialogService: NbDialogService) {
-  }
+  constructor(private dialogService: NbDialogService) {}
 
   openWithEscClose() {
     this.open(true);

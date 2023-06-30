@@ -9,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 import { NbSearchService } from '@nebular/theme';
 
 @Component({
-  selector: 'nb-search-test-customized',
+  selector: 'npg-search-test-customized',
   template: `
     <nb-layout>
       <nb-layout-header fixed>

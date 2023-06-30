@@ -10,7 +10,7 @@ import { Subject } from 'rxjs';
 import { NbMenuService, NbMenuItem } from '@nebular/theme';
 
 @Component({
-  selector: 'nb-menu-test',
+  selector: 'npg-menu-test',
   template: `
     <nb-layout>
       <nb-sidebar state="compacted">
@@ -163,7 +163,7 @@ export class MenuTestComponent implements OnInit, OnDestroy {
 
   private destroy$ = new Subject<void>();
 
-  constructor(private menuService: NbMenuService) { }
+  constructor(private menuService: NbMenuService) {}
 
   ngOnInit() {
     this.menuService

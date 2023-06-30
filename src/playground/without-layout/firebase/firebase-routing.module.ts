@@ -18,10 +18,7 @@ import {
 
 import { FirebasePlaygroundComponent } from './firebase-playground.component';
 import { PasswordAuthShowcaseComponent } from './password-auth-showcase/password-auth-showcase.component';
-import {
-  IdentityProvidersAuthShowcaseComponent,
-} from './identity-proders-auth-showcase/identity-providers-auth-showcase.component';
-
+import { IdentityProvidersAuthShowcaseComponent } from './identity-proders-auth-showcase/identity-providers-auth-showcase.component';
 
 export const routes: Routes = [
   {
@@ -75,5 +72,4 @@ export const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class FirebasePlaygroundRoutingModule {
-}
+export class FirebasePlaygroundRoutingModule {}

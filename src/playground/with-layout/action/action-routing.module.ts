@@ -5,7 +5,7 @@
  */
 
 import { NgModule } from '@angular/core';
-import { RouterModule, Route} from '@angular/router';
+import { RouterModule, Route } from '@angular/router';
 import { ActionBadgeComponent } from './action-badge.component';
 import { ActionShowcaseComponent } from './action-showcase.component';
 import { ActionSizesComponent } from './action-sizes.component';
@@ -41,7 +41,7 @@ const routes: Route[] = [
 ];
 
 @NgModule({
-  imports: [ RouterModule.forChild(routes) ],
-  exports: [ RouterModule ],
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule],
 })
 export class ActionRoutingModule {}

@@ -7,7 +7,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'nb-calendar-without-header',
+  selector: 'npg-calendar-without-header',
   template: `
     <nb-card>
       <nb-card-header>

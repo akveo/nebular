@@ -7,11 +7,11 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'nb-datepicker-filter',
+  selector: 'npg-datepicker-filter',
   template: `
     <nb-card size="large">
       <nb-card-body>
-        <input nbInput placeholder="Pick Date" [nbDatepicker]="dateTimePicker">
+        <input nbInput placeholder="Pick Date" [nbDatepicker]="dateTimePicker" />
         <nb-datepicker #dateTimePicker [filter]="filterFn"></nb-datepicker>
       </nb-card-body>
     </nb-card>

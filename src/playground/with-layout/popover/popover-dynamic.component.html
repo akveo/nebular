@@ -1,5 +1,7 @@
 <div class="popover-container">
-  <button [nbPopover]="component" [nbPopoverPlacement]="position" [nbPopoverTrigger]="trigger" nbButton>Show popover</button>
+  <button [nbPopover]="component" [nbPopoverPlacement]="position" [nbPopoverTrigger]="trigger" nbButton>
+    Show popover
+  </button>
 </div>
 
 <div class="section">
@@ -9,8 +11,12 @@
   <button nbButton size="small" status="success" (click)="changeComponent(list)">Use List Template</button>
   <button nbButton size="small" status="success" (click)="changeComponent(tabs)">Use Tabs Template</button>
   <button nbButton size="small" status="success" (click)="changeComponent(textContent)">Use String</button>
-  <button *ngIf="!interval" nbButton size="small" status="warning" (click)="startRuntimeChange()">Enable Runtime Change</button>
-  <button *ngIf="interval" nbButton size="small" status="warning" (click)="stopRuntimeChange()">Disable Runtime Change</button>
+  <button *ngIf="!interval" nbButton size="small" status="warning" (click)="startRuntimeChange()">
+    Enable Runtime Change
+  </button>
+  <button *ngIf="interval" nbButton size="small" status="warning" (click)="stopRuntimeChange()">
+    Disable Runtime Change
+  </button>
 
   <div>
     <small>When "Runtime Change" is enabled, open the Popover to see a component change every 2 seconds.</small>

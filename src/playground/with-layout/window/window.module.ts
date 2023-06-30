@@ -41,6 +41,6 @@ import { VisitorsFormComponent } from './components/visitors-form.component';
     NbCardModule,
     WindowRoutingModule,
   ],
-  entryComponents: [ FormComponent ],
+  entryComponents: [FormComponent],
 })
 export class WindowModule {}

@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'nb-dynamic-to-add',
+  selector: 'npg-dynamic-to-add',
   template: `
     <div>
       <strong>Hello from custom component: {{ text }}</strong>
@@ -9,19 +9,20 @@ import { Component, Input } from '@angular/core';
   `,
 })
 export class DynamicToAddComponent {
-
   @Input()
   text: string = '';
 }
 
 @Component({
-  selector: 'nb-popover-list',
-  styles: [`
-    nb-card {
-      border: 0;
-      margin-bottom: 0;
-    }
-  `],
+  selector: 'npg-popover-list',
+  styles: [
+    `
+      nb-card {
+        border: 0;
+        margin-bottom: 0;
+      }
+    `,
+  ],
   template: `
     <nb-card>
       <nb-card-header>Component Shopping list</nb-card-header>
@@ -32,17 +33,18 @@ export class DynamicToAddComponent {
     </nb-card>
   `,
 })
-export class PopoverListComponent {
-}
+export class PopoverListComponent {}
 
 @Component({
-  selector: 'nb-popover-tabs',
-  styles: [`
-    nb-card {
-      border: 0;
-      margin-bottom: 0;
-    }
-  `],
+  selector: 'npg-popover-tabs',
+  styles: [
+    `
+      nb-card {
+        border: 0;
+        margin-bottom: 0;
+      }
+    `,
+  ],
   template: `
     <nb-card>
       <nb-card-header>Component Shopping list</nb-card-header>
@@ -61,5 +63,4 @@ export class PopoverListComponent {
     </nb-card>
   `,
 })
-export class PopoverTabsComponent {
-}
+export class PopoverTabsComponent {}

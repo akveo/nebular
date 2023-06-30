@@ -7,7 +7,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'nb-calendar-size',
+  selector: 'npg-calendar-size',
   template: `
     <nb-card>
       <nb-card-header>

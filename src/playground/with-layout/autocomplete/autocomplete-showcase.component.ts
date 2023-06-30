@@ -9,12 +9,11 @@ import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 @Component({
-  selector: 'nb-autocomplete-showcase',
+  selector: 'npg-autocomplete-showcase',
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './autocomplete-showcase.component.html',
 })
 export class AutocompleteShowcaseComponent implements OnInit {
-
   options: string[];
   filteredOptions$: Observable<string[]>;
 
@@ -27,13 +26,11 @@ export class AutocompleteShowcaseComponent implements OnInit {
 
   private filter(value: string): string[] {
     const filterValue = value.toLowerCase();
-    return this.options.filter(optionValue => optionValue.toLowerCase().includes(filterValue));
+    return this.options.filter((optionValue) => optionValue.toLowerCase().includes(filterValue));
   }
 
   getFilteredOptions(value: string): Observable<string[]> {
-    return of(value).pipe(
-      map(filterString => this.filter(filterString)),
-    );
+    return of(value).pipe(map((filterString) => this.filter(filterString)));
   }
 
   onChange() {
@@ -43,6 +40,4 @@ export class AutocompleteShowcaseComponent implements OnInit {
   onSelectionChange($event) {
     this.filteredOptions$ = this.getFilteredOptions($event);
   }
-
 }
-

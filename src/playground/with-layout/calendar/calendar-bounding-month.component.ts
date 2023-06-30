@@ -7,7 +7,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'nb-calendar-bounding-month',
+  selector: 'npg-calendar-bounding-month',
   template: `
     <nb-card>
       <nb-card-header>

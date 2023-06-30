@@ -33,8 +33,10 @@ export const botReplies = [
   },
   {
     regExp: /([H,h]elp)/g,
-    answerArray: [`No problem! Try sending a message containing word "hey", "image",
-    "gif", "file", "map", "quote", "file group" to see different message components`],
+    answerArray: [
+      `No problem! Try sending a message containing word "hey", "image",
+    "gif", "file", "map", "quote", "file group" to see different message components`,
+    ],
     type: 'text',
     reply: {
       text: '',

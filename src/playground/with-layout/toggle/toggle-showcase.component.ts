@@ -7,7 +7,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'nb-toggle-showcase',
+  selector: 'npg-toggle-showcase',
   template: `
     <nb-card>
       <nb-card-body>
@@ -16,5 +16,4 @@ import { Component } from '@angular/core';
     </nb-card>
   `,
 })
-export class ToggleShowcaseComponent {
-}
+export class ToggleShowcaseComponent {}

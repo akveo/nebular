@@ -7,7 +7,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'nb-calendar-start-view',
+  selector: 'npg-calendar-start-view',
   template: `
     <nb-card>
       <nb-card-header>

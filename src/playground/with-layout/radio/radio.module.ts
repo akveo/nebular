@@ -24,13 +24,6 @@ import { RadioFormComponent } from './radio-form.component';
     RadioDisabledGroupComponent,
     RadioFormComponent,
   ],
-  imports: [
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    NbRadioModule,
-    NbCardModule,
-    RadioRoutingModule,
-  ],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, NbRadioModule, NbCardModule, RadioRoutingModule],
 })
 export class RadioModule {}

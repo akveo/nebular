@@ -2,19 +2,16 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'nb-stepper-validation',
+  selector: 'npg-stepper-validation',
   styleUrls: ['stepper-playground.component.scss'],
   templateUrl: './stepper-validation.component.html',
 })
-
 export class StepperValidationComponent implements OnInit {
-
   firstForm: FormGroup;
   secondForm: FormGroup;
   thirdForm: FormGroup;
 
-  constructor(private fb: FormBuilder) {
-  }
+  constructor(private fb: FormBuilder) {}
 
   ngOnInit() {
     this.firstForm = this.fb.group({
@@ -41,5 +38,4 @@ export class StepperValidationComponent implements OnInit {
   onThirdSubmit() {
     this.thirdForm.markAsDirty();
   }
-
 }

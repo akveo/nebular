@@ -21,6 +21,6 @@ import { RevealCardSizesComponent } from './reveal-card-sizes.component';
     RevealCardShowcaseComponent,
     RevealCardSizesComponent,
   ],
-  imports: [ NbCardModule, RevealCardRoutingModule ],
+  imports: [NbCardModule, RevealCardRoutingModule],
 })
 export class RevealCardModule {}
