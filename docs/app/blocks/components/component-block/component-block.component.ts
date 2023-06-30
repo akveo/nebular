@@ -10,14 +10,20 @@ import { NgdTabbedService } from '../../../@theme/services';
           <ng-container *ngIf="node.type === 'text'">
             <div *ngFor="let section of node.content" [innerHtml]="section.html"></div>
           </ng-container>
-          <ngd-live-example-block *ngIf="node.type === 'live-example'" [id]="node.content" [title]="'example'"
-                                  class="widget-block">
+          <ngd-live-example-block
+            *ngIf="node.type === 'live-example'"
+            [id]="node.content"
+            [title]="'example'"
+            class="widget-block"
+          >
           </ngd-live-example-block>
-          <ngd-inline-example-block *ngIf="node.type === 'inline-example'" [content]="node.content"
-                                    class="widget-block">
+          <ngd-inline-example-block
+            *ngIf="node.type === 'inline-example'"
+            [content]="node.content"
+            class="widget-block"
+          >
           </ngd-inline-example-block>
-          <ngd-stacked-example-block *ngIf="node.type === 'example'" [content]="node.content"
-                                     class="widget-block">
+          <ngd-stacked-example-block *ngIf="node.type === 'example'" [content]="node.content" class="widget-block">
           </ngd-stacked-example-block>
         </ng-container>
         <ngd-props-block [source]="source" *ngIf="hasProps(source)"></ngd-props-block>
@@ -32,18 +38,17 @@ import { NgdTabbedService } from '../../../@theme/services';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NgdComponentBlockComponent {
-
   source: any;
   overview: any[] = [];
 
+  // eslint-disable-next-line @angular-eslint/no-input-rename
   @Input('source')
   set setSource(source: any) {
     this.source = source;
     this.overview = source.overview;
   }
 
-  constructor(private tabbedService: NgdTabbedService) {
-  }
+  constructor(private tabbedService: NgdTabbedService) {}
 
   hasTheme(component) {
     return this.tabbedService.componentHasTheme(component);

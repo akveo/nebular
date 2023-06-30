@@ -14,21 +14,9 @@ import { NgdDocumentationComponent } from './documentation.component';
 import { NgdMenuService } from '../@theme/services/menu.service';
 import { NgdBlocksModule } from '../blocks/blocks.module';
 
-
 @NgModule({
-  imports: [
-    NgdDocumentationRoutingModule,
-    NgdThemeModule,
-    NbCardModule,
-    NgdBlocksModule,
-  ],
-  declarations: [
-    NgdPageComponent,
-    NgdDocumentationComponent,
-  ],
-  providers: [
-    NgdMenuService,
-  ],
+  imports: [NgdDocumentationRoutingModule, NgdThemeModule, NbCardModule, NgdBlocksModule],
+  declarations: [NgdPageComponent, NgdDocumentationComponent],
+  providers: [NgdMenuService],
 })
-export class NgdDocumentationModule {
-}
+export class NgdDocumentationModule {}

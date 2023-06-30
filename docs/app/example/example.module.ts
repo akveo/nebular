@@ -10,15 +10,8 @@ import { NgdExampleRoutingModule } from './example-routing.module';
 import { NgdExampleComponent } from './example.component';
 import { NgdExample404Component } from './example-404.component';
 
-
 @NgModule({
-  imports: [
-    NgdExampleRoutingModule,
-  ],
-  declarations: [
-    NgdExampleComponent,
-    NgdExample404Component,
-  ],
+  imports: [NgdExampleRoutingModule],
+  declarations: [NgdExampleComponent, NgdExample404Component],
 })
-export class NgdExampleModule {
-}
+export class NgdExampleModule {}

@@ -16,13 +16,12 @@ import { NgdHighlightService } from '../../../@theme/services';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NgdCodeBlockComponent {
-
   @Input() path = '';
   @Input() firstLine: number;
   @Input() lastLine: number;
 
-  @Input('code')
-  set rawCode(value) {
+  @Input()
+  set rawCode(value: string) {
     const highlighted = this.highlightService.highlight(value);
     this.code = this.getVisible(highlighted);
     this.lines = this.createLines(this.code);
@@ -31,8 +30,7 @@ export class NgdCodeBlockComponent {
   code: SafeHtml;
   lines: number[] = [];
 
-  constructor(private highlightService: NgdHighlightService) {
-  }
+  constructor(private highlightService: NgdHighlightService) {}
 
   getVisible(code): string {
     return code
@@ -43,6 +41,8 @@ export class NgdCodeBlockComponent {
 
   createLines(code): number[] {
     const length = code.split('\n').length;
-    return Array(length).fill(0).map((_, i) => i + (this.firstLine || 1));
+    return Array(length)
+      .fill(0)
+      .map((_, i) => i + (this.firstLine || 1));
   }
 }
