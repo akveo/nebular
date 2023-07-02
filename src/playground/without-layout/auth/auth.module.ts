@@ -141,7 +141,6 @@ export function filterInterceptorRequest(req: HttpRequest<any>) {
   ],
   declarations: [AuthPlaygroundComponent, AclTestComponent, PlaygroundApiCallsComponent],
   providers: [
-    AuthGuard,
     { provide: HTTP_INTERCEPTORS, useClass: NbAuthJWTInterceptor, multi: true },
     { provide: NB_AUTH_TOKEN_INTERCEPTOR_FILTER, useValue: filterInterceptorRequest },
     { provide: NbRoleProvider, useClass: CustomRoleProvider },
