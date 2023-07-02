@@ -70,9 +70,9 @@ function getMetadataProperty(metadata: ts.Node, propertyName: string): ts.Proper
   const properties = (metadata as ts.ObjectLiteralExpression).properties;
   const property = properties
     .filter((prop) => prop.kind === ts.SyntaxKind.PropertyAssignment)
-    .filter((prop: ts.PropertyAssignment) => {
+    .filter((prop: ts.ObjectLiteralElementLike) => {
       const name = prop.name;
-      switch (name.kind) {
+      switch (name?.kind) {
         case ts.SyntaxKind.Identifier:
           return (name as ts.Identifier).getText() === propertyName;
         case ts.SyntaxKind.StringLiteral:

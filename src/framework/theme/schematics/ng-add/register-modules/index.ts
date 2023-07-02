@@ -8,6 +8,7 @@ import { chain, Rule, SchematicContext, Tree } from '@angular-devkit/schematics'
 import { getRouterModuleDeclaration } from '@schematics/angular/utility/ast-utils';
 import {
   addModuleImportToRootModule,
+  getAppModulePath,
   getProjectMainFile,
   hasNgModuleImport,
   parseSourceFile,
@@ -16,7 +17,7 @@ import { ProjectDefinition } from '@angular-devkit/core/src/workspace';
 import { normalize } from '@angular-devkit/core';
 
 import { Schema } from '../schema';
-import { getAppModulePath, getProject, isImportedInMainModule } from '../../util';
+import { getProject, isImportedInMainModule } from '../../util';
 import { appRoutingModuleContent } from './app-routing-module-content';
 
 export function registerModules(options: Schema): Rule {
