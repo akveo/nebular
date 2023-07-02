@@ -17,6 +17,5 @@ import { NbTooltipDirective } from './tooltip.directive';
   imports: [NbSharedModule, NbOverlayModule, NbIconModule],
   declarations: [NbTooltipComponent, NbTooltipDirective],
   exports: [NbTooltipDirective],
-  entryComponents: [NbTooltipComponent],
 })
 export class NbTooltipModule {}

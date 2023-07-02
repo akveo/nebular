@@ -49,7 +49,6 @@ export class TestWindowComponent {}
 
 @NgModule({
   declarations: [NbTestWindowComponent, NbTestWindowWithTemplateComponent, TestWindowComponent],
-  entryComponents: [NbTestWindowComponent, NbTestWindowWithTemplateComponent, TestWindowComponent],
 })
 class NbTestWindowModule {}
 

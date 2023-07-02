@@ -18,6 +18,5 @@ import { NbSearchService } from './search.service';
   declarations: [NbSearchComponent, NbSearchFieldComponent],
   exports: [NbSearchComponent, NbSearchFieldComponent],
   providers: [NbSearchService],
-  entryComponents: [NbSearchFieldComponent],
 })
 export class NbSearchModule {}

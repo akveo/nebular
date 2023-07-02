@@ -51,6 +51,5 @@ import { PopoverDynamicCodeComponent } from './popover-dynamic-code.component';
     NbTabsetModule,
     PopoverRoutingModule,
   ],
-  entryComponents: [DynamicToAddComponent, PopoverListComponent, PopoverTabsComponent],
 })
 export class PopoverModule {}

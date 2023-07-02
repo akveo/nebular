@@ -191,7 +191,6 @@ const TEST_COMPONENTS = [
   imports: [NbLayoutModule, NbPopoverModule],
   exports: [...TEST_COMPONENTS],
   declarations: [...TEST_COMPONENTS],
-  entryComponents: [NbPopoverComponentContentTestComponent],
 })
 class PopoverTestModule {}
 

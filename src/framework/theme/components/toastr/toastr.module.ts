@@ -18,7 +18,6 @@ import { NB_TOASTR_CONFIG, NbToastrConfig } from './toastr-config';
 @NgModule({
   imports: [NbSharedModule, NbOverlayModule, NbIconModule],
   declarations: [NbToastrContainerComponent, NbToastComponent],
-  entryComponents: [NbToastrContainerComponent, NbToastComponent],
 })
 export class NbToastrModule {
   static forRoot(toastrConfig: Partial<NbToastrConfig> = {}): ModuleWithProviders<NbToastrModule> {

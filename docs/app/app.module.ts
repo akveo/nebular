@@ -49,7 +49,6 @@ import * as docs from '../output.json';
   ],
   declarations: [NgdAppComponent],
   providers: [Title, { provide: STRUCTURE, useValue: structure }, { provide: DOCS, useValue: docs }],
-  entryComponents: [],
   bootstrap: [NgdAppComponent],
 })
 export class AppModule {}

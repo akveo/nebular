@@ -12,7 +12,6 @@ import { NB_WINDOW_CONFIG, NbWindowConfig } from './window.options';
 @NgModule({
   imports: [CommonModule, NbOverlayModule, NbCardModule, NbIconModule, NbButtonModule],
   declarations: [NbWindowsContainerComponent, NbWindowComponent],
-  entryComponents: [NbWindowsContainerComponent, NbWindowComponent],
 })
 export class NbWindowModule {
   static forRoot(defaultConfig?: Partial<NbWindowConfig>): ModuleWithProviders<NbWindowModule> {

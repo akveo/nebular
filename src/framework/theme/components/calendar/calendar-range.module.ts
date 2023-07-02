@@ -21,10 +21,5 @@ import { NbBaseCalendarModule } from './base-calendar.module';
     NbCalendarRangeYearCellComponent,
     NbCalendarRangeMonthCellComponent,
   ],
-  entryComponents: [
-    NbCalendarRangeDayCellComponent,
-    NbCalendarRangeMonthCellComponent,
-    NbCalendarRangeYearCellComponent,
-  ],
 })
 export class NbCalendarRangeModule {}

@@ -14,6 +14,5 @@ import { NbPopoverComponent } from './popover.component';
   imports: [NbOverlayModule],
   declarations: [NbPopoverDirective, NbPopoverComponent],
   exports: [NbPopoverDirective],
-  entryComponents: [NbPopoverComponent],
 })
 export class NbPopoverModule {}
