@@ -4,28 +4,22 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
+import { DatePipe } from '@angular/common';
 import { ModuleWithProviders, NgModule } from '@angular/core';
-import { CommonModule, DatePipe } from '@angular/common';
 
-import { NB_DATE_ADAPTER, NbDatepickerDirective } from './datepicker.directive';
-import { NbOverlayModule } from '../cdk/overlay/overlay.module';
-import { NbCalendarModule } from '../calendar/calendar.module';
-import { NbCalendarComponent } from '../calendar/calendar.component';
-import { NbDatepickerContainerComponent } from './datepicker-container.component';
-import {
-  NbDatepickerComponent,
-  NbRangepickerComponent,
-  NbBasePickerComponent,
-} from './datepicker.component';
-import { NbCalendarRangeComponent } from '../calendar/calendar-range.component';
-import { NbCalendarRangeModule } from '../calendar/calendar-range.module';
-import { NbDateAdapterService, NbDateTimeAdapterService, NbRangeAdapterService } from './datepicker-adapter';
-import { NbCalendarWithTimeComponent } from './calendar-with-time.component';
-import { NbCardModule } from '../card/card.module';
-import { NbBaseCalendarModule } from '../calendar/base-calendar.module';
-import { NbTimepickerModule } from '../timepicker/timepicker.module';
 import { NbCalendarKitModule } from '../calendar-kit/calendar-kit.module';
+import { NbBaseCalendarModule } from '../calendar/base-calendar.module';
+import { NbCalendarRangeModule } from '../calendar/calendar-range.module';
+import { NbCalendarModule } from '../calendar/calendar.module';
+import { NbCardModule } from '../card/card.module';
+import { NbOverlayModule } from '../cdk/overlay/overlay.module';
+import { NbTimepickerModule } from '../timepicker/timepicker.module';
+import { NbCalendarWithTimeComponent } from './calendar-with-time.component';
 import { NbDateTimePickerComponent } from './date-timepicker.component';
+import { NbDateAdapterService, NbDateTimeAdapterService, NbRangeAdapterService } from './datepicker-adapter';
+import { NbDatepickerContainerComponent } from './datepicker-container.component';
+import { NbBasePickerComponent, NbDatepickerComponent, NbRangepickerComponent } from './datepicker.component';
+import { NB_DATE_ADAPTER, NbDatepickerDirective } from './datepicker.directive';
 
 @NgModule({
   imports: [
@@ -52,12 +46,6 @@ import { NbDateTimePickerComponent } from './date-timepicker.component';
     NbDatepickerComponent,
     NbRangepickerComponent,
     NbBasePickerComponent,
-  ],
-  entryComponents: [
-    NbCalendarComponent,
-    NbCalendarRangeComponent,
-    NbDatepickerContainerComponent,
-    NbCalendarWithTimeComponent,
   ],
 })
 export class NbDatepickerModule {
