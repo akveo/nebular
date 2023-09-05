@@ -58,6 +58,30 @@
     }
   }
 
+  // Need to make focus and active style the same
+  nb-option {
+    &:focus,
+    &.active {
+      background-color: nb-theme(option-focus-background-color);
+      color: nb-theme(option-focus-text-color);
+      outline: none;
+      &.selected {
+        background-color: nb-theme(option-selected-focus-background-color);
+        color: nb-theme(option-selected-focus-text-color);
+      }
+    }
+
+    &.multiple {
+      &:focus,
+      &.active,
+      &.selected:focus,
+      &.selected.active {
+        background-color: nb-theme(option-focus-background-color);
+        color: nb-theme(option-focus-text-color);
+      }
+    }
+  }
+
   @include select-with-autocomplete-outline.select-with-autocomplete-outline();
   @include select-with-autocomplete-filled.select-with-autocomplete-filled();
   @include select-with-autocomplete-hero.select-with-autocomplete-hero();
