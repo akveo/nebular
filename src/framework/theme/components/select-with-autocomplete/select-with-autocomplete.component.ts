@@ -344,7 +344,7 @@ export class NbSelectWithAutocompleteComponent
   }
 
   get isOptionsAutocompleteAllowed(): boolean {
-    return this.withOptionsAutocomplete && !this.multiple;
+    return this.withOptionsAutocomplete;
   }
 
   get isOptionsAutocompleteInputShown(): boolean {
@@ -470,6 +470,10 @@ export class NbSelectWithAutocompleteComponent
    * Content rendered in the label.
    * */
   get selectionView() {
+    if (this.isOptionsAutocompleteInputShown && this.multiple) {
+      return '';
+    }
+
     if (this.selectionModel.length > 1) {
       return this.selectionModel.map((option: NbOptionComponent) => option.content).join(', ');
     }
