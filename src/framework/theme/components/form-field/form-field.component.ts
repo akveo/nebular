@@ -30,7 +30,7 @@ import { NbFormFieldControl, NbFormControlState, NbFormFieldControlConfig } from
 export type NbFormControlAddon = 'prefix' | 'suffix';
 
 function throwFormControlElementNotFound() {
-  throw new Error(`NbFormFieldComponent must contain [nbInput]`)
+  throw new Error(`NbFormFieldComponent must contain [nbInput]`);
 }
 
 /*
@@ -91,12 +91,11 @@ function throwFormControlElementNotFound() {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NbFormFieldComponent implements AfterContentChecked, AfterContentInit, AfterViewInit, OnDestroy {
-
   protected readonly destroy$ = new Subject<void>();
 
   protected formControlState$ = new ReplaySubject<NbFormControlState>(1);
-  prefixClasses$: Observable<string[]> = this.formControlState$.pipe(map(s => this.getAddonClasses('prefix', s)));
-  suffixClasses$: Observable<string[]> = this.formControlState$.pipe(map(s => this.getAddonClasses('suffix', s)));
+  prefixClasses$: Observable<string[]> = this.formControlState$.pipe(map((s) => this.getAddonClasses('prefix', s)));
+  suffixClasses$: Observable<string[]> = this.formControlState$.pipe(map((s) => this.getAddonClasses('suffix', s)));
 
   @ContentChildren(NbPrefixDirective, { descendants: true }) prefix: QueryList<NbPrefixDirective>;
   @ContentChildren(NbSuffixDirective, { descendants: true }) suffix: QueryList<NbSuffixDirective>;
@@ -111,8 +110,7 @@ export class NbFormFieldComponent implements AfterContentChecked, AfterContentIn
     protected zone: NgZone,
     protected elementRef: ElementRef,
     protected renderer: Renderer2,
-  ) {
-  }
+  ) {}
 
   ngAfterContentChecked() {
     if (!this.formControl) {
@@ -127,9 +125,11 @@ export class NbFormFieldComponent implements AfterContentChecked, AfterContentIn
 
   ngAfterViewInit() {
     // TODO: #2254
-    this.zone.runOutsideAngular(() => setTimeout(() => {
-      this.renderer.addClass(this.elementRef.nativeElement, 'nb-transition');
-    }));
+    this.zone.runOutsideAngular(() =>
+      setTimeout(() => {
+        this.renderer.addClass(this.elementRef.nativeElement, 'nb-transition');
+      }),
+    );
   }
 
   ngOnDestroy() {
@@ -154,7 +154,7 @@ export class NbFormFieldComponent implements AfterContentChecked, AfterContentIn
         tap(({ size, fullWidth }) => {
           const formFieldClasses = [`nb-form-field-size-${size}`];
           if (!fullWidth) {
-            formFieldClasses.push('nb-form-field-limited-width')
+            formFieldClasses.push('nb-form-field-limited-width');
           }
           this.formFieldClasses = formFieldClasses.join(' ');
         }),
@@ -170,10 +170,7 @@ export class NbFormFieldComponent implements AfterContentChecked, AfterContentIn
   }
 
   protected getAddonClasses(addon: NbFormControlAddon, state: NbFormControlState): string[] {
-    const classes = [
-      'nb-form-field-addon',
-      `nb-form-field-${addon}-${state.size}`,
-    ];
+    const classes = ['nb-form-field-addon', `nb-form-field-${addon}-${state.size}`];
 
     if (state.disabled) {
       classes.push(`nb-form-field-addon-disabled`);
@@ -191,10 +188,12 @@ export class NbFormFieldComponent implements AfterContentChecked, AfterContentIn
   }
 
   protected isStatesEqual(oldState: NbFormControlState, state: NbFormControlState): boolean {
-    return oldState.status === state.status &&
-           oldState.disabled === state.disabled &&
-           oldState.focused === state.focused &&
-           oldState.fullWidth === state.fullWidth &&
-           oldState.size === state.size;
+    return (
+      oldState.status === state.status &&
+      oldState.disabled === state.disabled &&
+      oldState.focused === state.focused &&
+      oldState.fullWidth === state.fullWidth &&
+      oldState.size === state.size
+    );
   }
 }

@@ -7,9 +7,8 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
-  selector: 'nb-flip-card-colors',
+  selector: 'npg-flip-card-colors',
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './flip-card-colors.component.html',
 })
-export class FlipCardColorsComponent {
-}
+export class FlipCardColorsComponent {}

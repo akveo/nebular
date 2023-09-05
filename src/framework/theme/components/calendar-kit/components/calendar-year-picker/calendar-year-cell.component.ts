@@ -16,7 +16,6 @@ import {
 import { NbDateService } from '../../services/date.service';
 import { NbCalendarCell, NbCalendarSize, NbCalendarSizeValues } from '../../model';
 
-
 @Component({
   selector: 'nb-calendar-year-cell',
   template: `
@@ -38,10 +37,10 @@ export class NbCalendarYearCellComponent<D> implements NbCalendarCell<D, D> {
   @Input() size: NbCalendarSize = NbCalendarSize.MEDIUM;
   static ngAcceptInputType_size: NbCalendarSizeValues;
 
+  // eslint-disable-next-line @angular-eslint/no-output-native
   @Output() select: EventEmitter<D> = new EventEmitter(true);
 
-  constructor(protected dateService: NbDateService<D>) {
-  }
+  constructor(protected dateService: NbDateService<D>) {}
 
   @HostBinding('class.selected') get selected(): boolean {
     return this.dateService.isSameYearSafe(this.date, this.selectedValue);

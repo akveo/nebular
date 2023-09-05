@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'nb-stepper-test',
+  selector: 'npg-stepper-test',
   template: `
     <nb-stepper>
       <nb-step>
@@ -38,5 +38,4 @@ import { Component } from '@angular/core';
     </nb-stepper>
   `,
 })
-export class StepperTestComponent {
-}
+export class StepperTestComponent {}

@@ -6,9 +6,8 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ChatCustomMessageComponent implements OnInit {
-
   readonly tableData = {
-    columns: [ 'First Name', 'Last Name', 'Age' ],
+    columns: ['First Name', 'Last Name', 'Age'],
     rows: [
       { firstName: 'Robert', lastName: 'Baratheon', age: 46 },
       { firstName: 'Jaime', lastName: 'Lannister', age: 31 },
@@ -95,6 +94,6 @@ export class ChatCustomMessageComponent implements OnInit {
           avatar: 'https://i.gifer.com/no.gif',
         },
       },
-    ]
+    ];
   }
 }

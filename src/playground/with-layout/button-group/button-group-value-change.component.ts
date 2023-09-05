@@ -8,8 +8,7 @@ export class ButtonGroupValueChangeComponent {
   singleSelectGroupValue = [];
   multiSelectGroupValue = [];
 
-  constructor(private cd: ChangeDetectorRef) {
-  }
+  constructor(private cd: ChangeDetectorRef) {}
 
   updateSingleSelectGroupValue(value): void {
     this.singleSelectGroupValue = value;

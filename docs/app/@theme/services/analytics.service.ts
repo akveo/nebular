@@ -10,22 +10,21 @@ declare const ga: any;
 export class NgdAnalytics {
   private enabled: boolean;
 
-  constructor(@Inject(NB_WINDOW) private window,
-              private location: Location,
-              private router: Router) {
+  constructor(@Inject(NB_WINDOW) private window, private location: Location, private router: Router) {
     this.enabled = this.window.location.href.indexOf('akveo.github.io') >= 0;
   }
 
   trackPageViews() {
     if (this.enabled) {
-      this.router.events.pipe(
-        filter((event) => event instanceof NavigationEnd),
-        map(() => this.location.path()),
-        filter((location: string) => this.trackLocation(location)),
-        delay(50),
-      )
+      this.router.events
+        .pipe(
+          filter((event) => event instanceof NavigationEnd),
+          map(() => this.location.path()),
+          filter((location: string) => this.trackLocation(location)),
+          delay(50),
+        )
         .subscribe((location: string) => {
-          this.gtmPushToDataLayer({event: 'pageView' , path: location});
+          this.gtmPushToDataLayer({ event: 'pageView', path: location });
         });
     }
   }
@@ -37,10 +36,7 @@ export class NgdAnalytics {
   }
 
   private trackLocation(path: string) {
-    if (path.match(/\/components\/[a-zA-Z-]+\/?$/)
-      || path.match(/\/docs\/?$/)
-      || path.match(/\/example\//)) {
-
+    if (path.match(/\/components\/[a-zA-Z-]+\/?$/) || path.match(/\/docs\/?$/) || path.match(/\/example\//)) {
       return !!path.match(/\/components\/components-overview\/?$/);
     }
     return true;

@@ -7,9 +7,8 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
-  selector: 'nb-button-showcase',
+  selector: 'npg-button-showcase',
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './button-showcase.component.html',
 })
-export class ButtonShowcaseComponent {
-}
+export class ButtonShowcaseComponent {}

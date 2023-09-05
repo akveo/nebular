@@ -28,10 +28,7 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "src/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ],
+            "assets": ["src/favicon.ico", "src/assets"],
             "styles": [],
             "scripts": []
           },
@@ -115,15 +112,13 @@
             "tsConfig": "src/tsconfig.spec.json",
             "karmaConfig": "./karma.conf.js",
             "inlineStyleLanguage": "scss",
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ],
+            "assets": ["src/favicon.ico", "src/assets"],
             "styles": [],
             "scripts": []
           },
           "configurations": {
             "production-wp": {
+              "exclude": ["**/schematics/**/*.spec.ts"],
               "tsConfig": "src/tsconfig.spec-wp.json"
             }
           }
@@ -131,10 +126,7 @@
         "lint": {
           "builder": "@angular-eslint/builder:lint",
           "options": {
-            "lintFilePatterns": [
-              "src/**/*.ts",
-              "src/**/*.html"
-            ]
+            "lintFilePatterns": ["src/**/*.ts", "src/**/*.html"]
           }
         }
       }
@@ -159,10 +151,7 @@
         "lint": {
           "builder": "@angular-eslint/builder:lint",
           "options": {
-            "lintFilePatterns": [
-              "e2e/**/*.ts",
-              "e2e/**/*.html"
-            ]
+            "lintFilePatterns": ["e2e/**/*.ts", "e2e/**/*.html"]
           }
         }
       }
@@ -216,13 +205,8 @@
               "node_modules/highlight.js/styles/dracula.css",
               "docs/app/@theme/styles/styles.scss"
             ],
-            "scripts": [
-              "node_modules/pace-js/pace.min.js",
-              "node_modules/docsearch.js/dist/cdn/docsearch.min.js"
-            ],
-            "allowedCommonJsDependencies": [
-              "highlight.js"
-            ]
+            "scripts": ["node_modules/pace-js/pace.min.js", "node_modules/docsearch.js/dist/cdn/docsearch.min.js"],
+            "allowedCommonJsDependencies": ["highlight.js"]
           },
           "configurations": {
             "production": {
@@ -301,26 +285,15 @@
             "tsConfig": "docs/tsconfig.spec.json",
             "karmaConfig": "./karma.conf.js",
             "inlineStyleLanguage": "scss",
-            "assets": [
-              "docs/assets",
-              "docs/favicon.ico",
-              "docs/favicon.png",
-              "docs/google46533d2e7a851062.html"
-            ],
-            "styles": [
-              "node_modules/highlight.js/styles/dracula.css",
-              "docs/app/@theme/styles/styles.scss"
-            ],
+            "assets": ["docs/assets", "docs/favicon.ico", "docs/favicon.png", "docs/google46533d2e7a851062.html"],
+            "styles": ["node_modules/highlight.js/styles/dracula.css", "docs/app/@theme/styles/styles.scss"],
             "scripts": []
           }
         },
         "lint": {
           "builder": "@angular-eslint/builder:lint",
           "options": {
-            "lintFilePatterns": [
-              "docs/**/*.ts",
-              "docs/**/*.html"
-            ]
+            "lintFilePatterns": ["docs/**/*.ts", "docs/**/*.html"]
           }
         }
       }
@@ -357,10 +330,7 @@
         "lint": {
           "builder": "@angular-eslint/builder:lint",
           "options": {
-            "lintFilePatterns": [
-              "src/framework/theme/**/*.ts",
-              "src/framework/theme/**/*.html"
-            ]
+            "lintFilePatterns": ["src/framework/theme/**/*.ts", "src/framework/theme/**/*.html"]
           }
         }
       }
@@ -397,10 +367,7 @@
         "lint": {
           "builder": "@angular-eslint/builder:lint",
           "options": {
-            "lintFilePatterns": [
-              "src/framework/auth/**/*.ts",
-              "src/framework/auth/**/*.html"
-            ]
+            "lintFilePatterns": ["src/framework/auth/**/*.ts", "src/framework/auth/**/*.html"]
           }
         }
       }
@@ -437,10 +404,7 @@
         "lint": {
           "builder": "@angular-eslint/builder:lint",
           "options": {
-            "lintFilePatterns": [
-              "src/framework/date-fns/**/*.ts",
-              "src/framework/date-fns/**/*.html"
-            ]
+            "lintFilePatterns": ["src/framework/date-fns/**/*.ts", "src/framework/date-fns/**/*.html"]
           }
         }
       }
@@ -477,10 +441,7 @@
         "lint": {
           "builder": "@angular-eslint/builder:lint",
           "options": {
-            "lintFilePatterns": [
-              "src/framework/eva-icons/**/*.ts",
-              "src/framework/eva-icons/**/*.html"
-            ]
+            "lintFilePatterns": ["src/framework/eva-icons/**/*.ts", "src/framework/eva-icons/**/*.html"]
           }
         }
       }
@@ -517,10 +478,7 @@
         "lint": {
           "builder": "@angular-eslint/builder:lint",
           "options": {
-            "lintFilePatterns": [
-              "src/framework/firebase-auth/**/*.ts",
-              "src/framework/firebase-auth/**/*.html"
-            ]
+            "lintFilePatterns": ["src/framework/firebase-auth/**/*.ts", "src/framework/firebase-auth/**/*.html"]
           }
         }
       }
@@ -557,10 +515,7 @@
         "lint": {
           "builder": "@angular-eslint/builder:lint",
           "options": {
-            "lintFilePatterns": [
-              "src/framework/moment/**/*.ts",
-              "src/framework/moment/**/*.html"
-            ]
+            "lintFilePatterns": ["src/framework/moment/**/*.ts", "src/framework/moment/**/*.html"]
           }
         }
       }
@@ -597,16 +552,12 @@
         "lint": {
           "builder": "@angular-eslint/builder:lint",
           "options": {
-            "lintFilePatterns": [
-              "src/framework/security/**/*.ts",
-              "src/framework/security/**/*.html"
-            ]
+            "lintFilePatterns": ["src/framework/security/**/*.ts", "src/framework/security/**/*.html"]
           }
         }
       }
     }
   },
-  "defaultProject": "playground",
   "schematics": {
     "@schematics/angular:component": {
       "style": "scss",
@@ -624,6 +575,6 @@
   },
   "cli": {
     "analytics": false,
-    "defaultCollection": "@angular-eslint/schematics"
+    "schematicCollections": ["@angular-eslint/schematics", "@schematics/angular"]
   }
 }

@@ -5,11 +5,9 @@ import { Directive, HostBinding, HostListener, Input } from '@angular/core';
   selector: 'button[nbStepperNext]',
 })
 export class NbStepperNextDirective {
-
   @Input() @HostBinding('attr.type') type: string = 'submit';
 
-  constructor(protected stepper: NbStepperComponent) {
-  }
+  constructor(protected stepper: NbStepperComponent) {}
 
   @HostListener('click')
   onClick() {
@@ -21,11 +19,9 @@ export class NbStepperNextDirective {
   selector: 'button[nbStepperPrevious]',
 })
 export class NbStepperPreviousDirective {
-
   @Input() @HostBinding('attr.type') type: string = 'button';
 
-  constructor(protected stepper: NbStepperComponent) {
-  }
+  constructor(protected stepper: NbStepperComponent) {}
 
   @HostListener('click')
   onClick() {

@@ -42,7 +42,6 @@ import { NbOptionComponent } from './option.component';
   `,
 })
 export class NbOptionGroupComponent implements AfterContentInit, OnDestroy {
-
   protected destroy$ = new Subject<void>();
 
   @Input() title: string;
@@ -73,9 +72,7 @@ export class NbOptionGroupComponent implements AfterContentInit, OnDestroy {
       this.asyncUpdateOptionsDisabledState();
     }
 
-    this.options.changes
-      .pipe(takeUntil(this.destroy$))
-      .subscribe(() => this.asyncUpdateOptionsDisabledState());
+    this.options.changes.pipe(takeUntil(this.destroy$)).subscribe(() => this.asyncUpdateOptionsDisabledState());
   }
 
   ngOnDestroy() {
@@ -102,5 +99,3 @@ export class NbOptionGroupComponent implements AfterContentInit, OnDestroy {
       .subscribe(() => this.updateOptionsDisabledState());
   }
 }
-
-

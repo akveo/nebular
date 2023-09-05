@@ -32,13 +32,6 @@ import { ButtonInteractiveComponent } from './button-interactive.component';
     ButtonIconComponent,
     ButtonInteractiveComponent,
   ],
-  imports: [
-    CommonModule,
-    NbCardModule,
-    NbButtonModule,
-    NbIconModule,
-    ButtonRoutingModule,
-    NbRadioModule,
-  ],
+  imports: [CommonModule, NbCardModule, NbButtonModule, NbIconModule, ButtonRoutingModule, NbRadioModule],
 })
 export class ButtonModule {}

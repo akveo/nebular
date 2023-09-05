@@ -32,6 +32,7 @@ export enum NbToggleStates {
 }
 
 @Component({
+  // eslint-disable-next-line @angular-eslint/component-selector
   selector: '[nbMenuItem]',
   templateUrl: './menu-item.component.html',
   animations: [
@@ -54,21 +55,21 @@ export class NbMenuItemComponent implements DoCheck, AfterViewInit, OnDestroy {
   protected destroy$ = new Subject<void>();
   toggleState: NbToggleStates;
 
-  constructor(protected menuService: NbMenuService,
-              protected directionService: NbLayoutDirectionService) {}
+  constructor(protected menuService: NbMenuService, protected directionService: NbLayoutDirectionService) {}
 
   ngDoCheck() {
     this.toggleState = this.menuItem.expanded ? NbToggleStates.Expanded : NbToggleStates.Collapsed;
   }
 
   ngAfterViewInit() {
-    this.menuService.onSubmenuToggle()
+    this.menuService
+      .onSubmenuToggle()
       .pipe(
         filter(({ item }) => item === this.menuItem),
         map(({ item }: NbMenuBag) => item.expanded),
         takeUntil(this.destroy$),
       )
-      .subscribe(isExpanded => this.toggleState = isExpanded ? NbToggleStates.Expanded : NbToggleStates.Collapsed);
+      .subscribe((isExpanded) => (this.toggleState = isExpanded ? NbToggleStates.Expanded : NbToggleStates.Collapsed));
   }
 
   ngOnDestroy() {
@@ -97,9 +98,7 @@ export class NbMenuItemComponent implements DoCheck, AfterViewInit, OnDestroy {
       return 'chevron-down-outline';
     }
 
-    return this.directionService.isLtr()
-      ? 'chevron-left-outline'
-      : 'chevron-right-outline';
+    return this.directionService.isLtr() ? 'chevron-left-outline' : 'chevron-right-outline';
   }
 }
 
@@ -212,22 +211,23 @@ export class NbMenuItemComponent implements DoCheck, AfterViewInit, OnDestroy {
   template: `
     <ul class="menu-items">
       <ng-container *ngFor="let item of items">
-        <li nbMenuItem *ngIf="!item.hidden"
-            [menuItem]="item"
-            [badge]="item.badge"
-            [class.menu-group]="item.group"
-            (hoverItem)="onHoverItem($event)"
-            (toggleSubMenu)="onToggleSubMenu($event)"
-            (selectItem)="onSelectItem($event)"
-            (itemClick)="onItemClick($event)"
-            class="menu-item">
-        </li>
+        <li
+          nbMenuItem
+          *ngIf="!item.hidden"
+          [menuItem]="item"
+          [badge]="item.badge"
+          [class.menu-group]="item.group"
+          (hoverItem)="onHoverItem($event)"
+          (toggleSubMenu)="onToggleSubMenu($event)"
+          (selectItem)="onSelectItem($event)"
+          (itemClick)="onItemClick($event)"
+          class="menu-item"
+        ></li>
       </ng-container>
     </ul>
   `,
 })
 export class NbMenuComponent implements OnInit, AfterViewInit, OnDestroy {
-
   /**
    * Tags a menu with some ID, can be later used in the menu service
    * to determine which menu triggered the action, if multiple menus exist on the page.
@@ -259,11 +259,12 @@ export class NbMenuComponent implements OnInit, AfterViewInit, OnDestroy {
 
   protected destroy$ = new Subject<void>();
 
-  constructor(@Inject(NB_WINDOW) protected window,
-              @Inject(PLATFORM_ID) protected platformId,
-              protected menuInternalService: NbMenuInternalService,
-              protected router: Router) {
-  }
+  constructor(
+    @Inject(NB_WINDOW) protected window,
+    @Inject(PLATFORM_ID) protected platformId,
+    protected menuInternalService: NbMenuInternalService,
+    protected router: Router,
+  ) {}
 
   ngOnInit() {
     this.menuInternalService.prepareItems(this.items);
@@ -274,7 +275,7 @@ export class NbMenuComponent implements OnInit, AfterViewInit, OnDestroy {
         filter((data: { tag: string; items: NbMenuItem[] }) => this.compareTag(data.tag)),
         takeUntil(this.destroy$),
       )
-      .subscribe(data => this.onAddItem(data));
+      .subscribe((data) => this.onAddItem(data));
 
     this.menuInternalService
       .onNavigateHome()
@@ -304,7 +305,7 @@ export class NbMenuComponent implements OnInit, AfterViewInit, OnDestroy {
 
     this.router.events
       .pipe(
-        filter(event => event instanceof NavigationEnd),
+        filter((event) => event instanceof NavigationEnd),
         takeUntil(this.destroy$),
       )
       .subscribe(() => {

@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'nb-search-showcase',
+  selector: 'npg-search-showcase',
   templateUrl: './search-showcase.component.html',
 })
-export class SearchShowcaseComponent {
-}
+export class SearchShowcaseComponent {}

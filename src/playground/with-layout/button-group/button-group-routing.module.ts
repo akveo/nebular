@@ -5,7 +5,7 @@
  */
 
 import { NgModule } from '@angular/core';
-import { RouterModule, Route} from '@angular/router';
+import { RouterModule, Route } from '@angular/router';
 import { ButtonGroupShowcaseComponent } from './button-group-showcase.component';
 import { ButtonGroupMultipleComponent } from './button-group-multiple.component';
 import { ButtonGroupSizesComponent } from './button-group-sizes.component';
@@ -61,7 +61,7 @@ const routes: Route[] = [
 ];
 
 @NgModule({
-  imports: [ RouterModule.forChild(routes) ],
-  exports: [ RouterModule ],
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule],
 })
 export class ButtonGroupRoutingModule {}

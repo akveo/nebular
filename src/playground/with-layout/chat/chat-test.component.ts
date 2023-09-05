@@ -8,34 +8,31 @@ import { Component } from '@angular/core';
 import { NbComponentSize } from '@nebular/theme';
 
 @Component({
-  selector: 'nb-chat-test',
+  selector: 'npg-chat-test',
   template: `
-    <nb-chat
-      *ngFor="let chat of chats"
-      [size]="chat.size"
-      [status]="chat.status">
-
-      <nb-chat-message *ngFor="let msg of messages"
-                       [type]="msg.type"
-                       [message]="msg.text"
-                       [reply]="msg.reply"
-                       [sender]="msg.user.name"
-                       [date]="msg.date"
-                       [files]="msg.files"
-                       [quote]="msg.quote"
-                       [latitude]="msg.latitude"
-                       [longitude]="msg.longitude"
-                       [avatar]="msg.user.avatar">
+    <nb-chat *ngFor="let chat of chats" [size]="chat.size" [status]="chat.status">
+      <nb-chat-message
+        *ngFor="let msg of messages"
+        [type]="msg.type"
+        [message]="msg.text"
+        [reply]="msg.reply"
+        [sender]="msg.user.name"
+        [date]="msg.date"
+        [files]="msg.files"
+        [quote]="msg.quote"
+        [latitude]="msg.latitude"
+        [longitude]="msg.longitude"
+        [avatar]="msg.user.avatar"
+      >
       </nb-chat-message>
-      <nb-chat-form (send)="sendMessage($event)">
-      </nb-chat-form>
+      <nb-chat-form (send)="sendMessage($event)"> </nb-chat-form>
     </nb-chat>
   `,
 })
 export class ChatTestComponent {
   messages = [];
-  sizes: NbComponentSize[] = [ 'tiny', 'small', 'medium', 'large', 'giant' ];
-  statuses = [ 'primary', 'success', 'info', 'warning', 'danger' ];
+  sizes: NbComponentSize[] = ['tiny', 'small', 'medium', 'large', 'giant'];
+  statuses = ['primary', 'success', 'info', 'warning', 'danger'];
 
   chats: any[];
 
@@ -46,8 +43,8 @@ export class ChatTestComponent {
   private prepareChats(): any[] {
     const result = [];
 
-    this.statuses.forEach(status => {
-      this.sizes.forEach(size => {
+    this.statuses.forEach((status) => {
+      this.sizes.forEach((size) => {
         result.push({
           size,
           status,

@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'nb-stepper-linear',
-  styleUrls: [ 'stepper-playground.component.scss' ],
+  selector: 'npg-stepper-linear',
+  styleUrls: ['stepper-playground.component.scss'],
   templateUrl: './stepper-linear.component.html',
 })
 export class StepperLinearComponent {

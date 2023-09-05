@@ -21,12 +21,9 @@ import { NgdTabbedService } from '../../../@theme/services';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NgdApiBlockComponent {
+  @Input() source;
 
-  @Input('source') source;
-
-  constructor(private tabbedService: NgdTabbedService) {
-  }
-
+  constructor(private tabbedService: NgdTabbedService) {}
 
   hasMethods(component) {
     return this.tabbedService.componentHasMethods(component);

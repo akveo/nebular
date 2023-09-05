@@ -4,7 +4,7 @@
     <p *ngIf="parentThemeName">inherited from {{ parentThemeName }} theme</p>
 
     <div class="search-wrapper">
-      <input nbInput fullWidth class="search-control" placeholder="Search for..." [formControl]="searchControl">
+      <input nbInput fullWidth class="search-control" placeholder="Search for..." [formControl]="searchControl" />
     </div>
 
     <table class="striped">
@@ -25,20 +25,21 @@
           <td ngdColorSwatch>{{ prop.value }}</td>
 
           <td>
-            <a *ngFor="let parent of prop.parents; let index = index; trackBy: trackByFn"
+            <a
+              *ngFor="let parent of prop.parents; let index = index; trackBy: trackByFn"
               [routerLink]="['/docs/design-system', parent.theme + '-theme']"
               fragment="{{ parent.prop }}"
-              [class.inheritance-property]="index > 0">
-
-                <nb-icon *ngIf="index > 0" class="inheritance-icon" icon="arrow-back-outline"></nb-icon>
-                <span>{{ parent.prop }}</span>
-                <span *ngIf="parent.theme !== themeName" class="parent-theme-name">({{ parent.theme }})</span>
+              [class.inheritance-property]="index > 0"
+            >
+              <nb-icon *ngIf="index > 0" class="inheritance-icon" icon="arrow-back-outline"></nb-icon>
+              <span>{{ parent.prop }}</span>
+              <span *ngIf="parent.theme !== themeName" class="parent-theme-name">({{ parent.theme }})</span>
             </a>
           </td>
         </tr>
-      <tr *ngIf="filtered.length ==0" class="not-found">
-        <td colspan="3">Theme variable not found.</td>
-      </tr>
+        <tr *ngIf="filtered.length === 0" class="not-found">
+          <td colspan="3">Theme variable not found.</td>
+        </tr>
       </tbody>
     </table>
   </nb-card-body>

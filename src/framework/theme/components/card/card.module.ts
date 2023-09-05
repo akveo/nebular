@@ -8,12 +8,7 @@ import { NgModule } from '@angular/core';
 
 import { NbSharedModule } from '../shared/shared.module';
 import { NbIconModule } from '../icon/icon.module';
-import {
-  NbCardComponent,
-  NbCardBodyComponent,
-  NbCardFooterComponent,
-  NbCardHeaderComponent,
-} from './card.component';
+import { NbCardComponent, NbCardBodyComponent, NbCardFooterComponent, NbCardHeaderComponent } from './card.component';
 
 import { NbRevealCardComponent } from './reveal-card/reveal-card.component';
 import { NbFlipCardComponent } from './flip-card/flip-card.component';
@@ -31,15 +26,8 @@ const NB_CARD_COMPONENTS = [
 ];
 
 @NgModule({
-  imports: [
-    NbSharedModule,
-    NbIconModule,
-  ],
-  declarations: [
-    ...NB_CARD_COMPONENTS,
-  ],
-  exports: [
-    ...NB_CARD_COMPONENTS,
-  ],
+  imports: [NbSharedModule, NbIconModule],
+  declarations: [...NB_CARD_COMPONENTS],
+  exports: [...NB_CARD_COMPONENTS],
 })
-export class NbCardModule { }
+export class NbCardModule {}

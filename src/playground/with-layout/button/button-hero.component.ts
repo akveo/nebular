@@ -7,9 +7,8 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
-  selector: 'nb-button-hero',
+  selector: 'npg-button-hero',
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './button-hero.component.html',
 })
-export class ButtonHeroComponent {
-}
+export class ButtonHeroComponent {}

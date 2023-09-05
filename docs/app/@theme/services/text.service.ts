@@ -13,27 +13,24 @@ export interface NgdMdSection {
 
 @Injectable()
 export class NgdTextService {
-
   private readonly SECTION_SPLIT = '<hr>';
   private readonly TITLE_MASK = '^#{1,6}[^#]?(.+)\n';
   private readonly STRIP_HTML = '<\\/?[^>]+(>|$)';
 
-  constructor(private highlight: NgdHighlightService, private location: Location) {
-  }
+  constructor(private highlight: NgdHighlightService, private location: Location) {}
 
   mdToSectionsHTML(markdown: string): NgdMdSection[] {
-    return this.splitIntoSections(markdown)
-      .map((section) => {
-        const html = this.mdToHTML(section);
-        const title = this.extractTitle(section) || this.extractFirstTwoWords(html);
-        const fragment = this.createSlag(title);
-        return {
-          source: section,
-          title: title,
-          fragment: fragment,
-          html: html,
-        };
-      });
+    return this.splitIntoSections(markdown).map((section) => {
+      const html = this.mdToHTML(section);
+      const title = this.extractTitle(section) || this.extractFirstTwoWords(html);
+      const fragment = this.createSlag(title);
+      return {
+        source: section,
+        title: title,
+        fragment: fragment,
+        html: html,
+      };
+    });
   }
 
   mdToHTML(markdown: string) {
@@ -47,8 +44,7 @@ export class NgdTextService {
   }
 
   splitIntoSections(markdown: string) {
-    return markdown.split(new RegExp(this.SECTION_SPLIT, 'g'))
-      .filter(section => section.trim());
+    return markdown.split(new RegExp(this.SECTION_SPLIT, 'g')).filter((section) => section.trim());
   }
 
   extractTitle(section: string) {
@@ -57,12 +53,7 @@ export class NgdTextService {
   }
 
   extractFirstTwoWords(section: string) {
-    return section
-      .replace(new RegExp(this.STRIP_HTML, 'g'), '')
-      .trim()
-      .split(/\s+/g)
-      .slice(0, 2)
-      .join(' ');
+    return section.replace(new RegExp(this.STRIP_HTML, 'g'), '').trim().split(/\s+/g).slice(0, 2).join(' ');
   }
 
   createSlag(name: string) {

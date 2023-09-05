@@ -37,7 +37,7 @@ export class ActivatedRouteStub {
 
   setParams(params?: Params) {
     this.subject.next(params);
-  };
+  }
 }
 
 describe('NbTabsetComponent', () => {
@@ -50,12 +50,8 @@ describe('NbTabsetComponent', () => {
     activatedRouteStub = new ActivatedRouteStub();
 
     TestBed.configureTestingModule({
-      declarations: [ TabsetTestComponent ],
-      imports: [
-        CommonModule,
-        RouterTestingModule.withRoutes([]),
-        NbTabsetModule,
-      ],
+      declarations: [TabsetTestComponent],
+      imports: [CommonModule, RouterTestingModule.withRoutes([]), NbTabsetModule],
       providers: [{ provide: ActivatedRoute, useValue: activatedRouteStub }],
     });
 

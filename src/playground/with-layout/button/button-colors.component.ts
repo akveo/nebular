@@ -7,10 +7,15 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
-  selector: 'nb-button-colors',
+  selector: 'npg-button-colors',
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './button-colors.component.html',
-  styles: [`.example-items-rows { align-items: center; }`],
+  styles: [
+    `
+      .example-items-rows {
+        align-items: center;
+      }
+    `,
+  ],
 })
-export class ButtonColorsComponent {
-}
+export class ButtonColorsComponent {}

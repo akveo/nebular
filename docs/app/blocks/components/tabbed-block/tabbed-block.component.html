@@ -1,6 +1,5 @@
 <ng-container [ngSwitch]="currentTab?.tab">
   <ng-container *ngFor="let component of source">
-
     <ng-container *ngSwitchCase="'overview'">
       <ngd-overview-block *ngIf="hasOverview(component)" [source]="component"></ngd-overview-block>
     </ng-container>
@@ -10,12 +9,11 @@
     </ng-container>
 
     <ng-container *ngSwitchCase="'api'">
-      <ngd-api-block *ngIf="hasAPI(component)" [source]="component" ></ngd-api-block>
+      <ngd-api-block *ngIf="hasAPI(component)" [source]="component"></ngd-api-block>
     </ng-container>
 
     <ng-container *ngSwitchCase="'examples'">
-      <ngd-examples-block *ngIf="hasExamples(component)" [source]="component" ></ngd-examples-block>
+      <ngd-examples-block *ngIf="hasExamples(component)" [source]="component"></ngd-examples-block>
     </ng-container>
-
   </ng-container>
 </ng-container>

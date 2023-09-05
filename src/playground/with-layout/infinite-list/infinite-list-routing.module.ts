@@ -5,7 +5,7 @@
  */
 
 import { NgModule } from '@angular/core';
-import { RouterModule, Route} from '@angular/router';
+import { RouterModule, Route } from '@angular/router';
 import { InfiniteListPlaceholdersComponent } from './infinite-list-placeholders.component';
 import { InfiniteListScrollModesComponent } from './infinite-list-scroll-modes.component';
 import { InfiniteListShowcaseComponent } from './infinite-list-showcase.component';
@@ -31,7 +31,7 @@ const routes: Route[] = [
 ];
 
 @NgModule({
-  imports: [ RouterModule.forChild(routes) ],
-  exports: [ RouterModule ],
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule],
 })
 export class InfiniteListRoutingModule {}

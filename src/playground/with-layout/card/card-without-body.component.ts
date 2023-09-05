@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostBinding } from '@angular/core';
 import { fruits } from '../list/fruits-list';
 
 @Component({
@@ -22,13 +22,15 @@ import { fruits } from '../list/fruits-list';
       </nb-list>
     </nb-card>
   `,
-  styles: [`
-    nb-card {
-      min-width: 18rem;
-    }
-  `],
-  host: { class: 'example-height-60 example-horizontal-spread' },
+  styles: [
+    `
+      nb-card {
+        min-width: 18rem;
+      }
+    `,
+  ],
 })
 export class CardWithoutBodyComponent {
+  @HostBinding('class') classes = 'example-height-60 example-horizontal-spread';
   fruits = fruits;
 }

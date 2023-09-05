@@ -3,7 +3,7 @@ import { NbDialogService } from '@nebular/theme';
 import { BackdropClickDialogComponent } from './components/backdrop-click-dialog.component';
 
 @Component({
-  selector: 'nb-dialog-backdrop-click',
+  selector: 'npg-dialog-backdrop-click',
   template: `
     <button nbButton (click)="openWithBackdropClick()">With backdrop click close</button>
     <button nbButton (click)="openWithoutBackdropClick()">Without backdrop click close</button>
@@ -11,8 +11,7 @@ import { BackdropClickDialogComponent } from './components/backdrop-click-dialog
   styleUrls: ['./dialog-common.scss'],
 })
 export class DialogBackdropClickComponent {
-  constructor(private dialogService: NbDialogService) {
-  }
+  constructor(private dialogService: NbDialogService) {}
 
   openWithBackdropClick() {
     this.open(true);

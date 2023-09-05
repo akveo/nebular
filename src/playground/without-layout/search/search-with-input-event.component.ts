@@ -3,7 +3,7 @@ import { NbSearchService } from '@nebular/theme';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 @Component({
-  selector: 'nb-search-with-input-event',
+  selector: 'npg-search-with-input-event',
   template: `
     <nb-layout>
       <nb-layout-header fixed>

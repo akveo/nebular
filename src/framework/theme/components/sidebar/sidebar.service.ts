@@ -9,8 +9,8 @@ import { Subject, Observable, Observer, ReplaySubject } from 'rxjs';
 import { share, refCount, publish } from 'rxjs/operators';
 import { NbSidebarResponsiveState, NbSidebarState } from './sidebar.component';
 
-export const getSidebarState$ = new Subject<{ tag: string, observer: Observer<NbSidebarState> }>();
-export const getSidebarResponsiveState$ = new Subject<{ tag: string, observer: Observer<NbSidebarResponsiveState> }>();
+export const getSidebarState$ = new Subject<{ tag: string; observer: Observer<NbSidebarState> }>();
+export const getSidebarResponsiveState$ = new Subject<{ tag: string; observer: Observer<NbSidebarResponsiveState> }>();
 
 /**
  * Sidebar service.
@@ -22,8 +22,7 @@ export const getSidebarResponsiveState$ = new Subject<{ tag: string, observer: O
  */
 @Injectable()
 export class NbSidebarService {
-
-  private toggle$ = new Subject<{ compact: boolean, tag: string }>();
+  private toggle$ = new Subject<{ compact: boolean; tag: string }>();
   private expand$ = new Subject<{ tag: string }>();
   private collapse$ = new Subject<{ tag: string }>();
   private compact$ = new Subject<{ tag: string }>();
@@ -33,7 +32,7 @@ export class NbSidebarService {
    *
    * @returns Observable<{ compact: boolean, tag: string }>
    */
-  onToggle(): Observable<{ compact: boolean, tag: string }> {
+  onToggle(): Observable<{ compact: boolean; tag: string }> {
     return this.toggle$.pipe(share());
   }
 

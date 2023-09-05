@@ -41,7 +41,7 @@ ${layoutEnd}
 function padd(text: string, paddLen: number): string {
   return text
     .split('\n')
-    .map(line => `${' '.repeat(paddLen)}${line}`)
+    .map((line) => `${' '.repeat(paddLen)}${line}`)
     .join('\n');
 }
 
@@ -51,4 +51,3 @@ function padd(text: string, paddLen: number): string {
 function paddNotEmpty(text: string, paddLen: number): string {
   return padd(text, paddLen).replace(/^ +$/gm, '');
 }
-

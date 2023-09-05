@@ -41,11 +41,6 @@ import { MenuBadgeComponent } from './menu-badge.component';
     MenuServiceComponent,
     MenuBadgeComponent,
   ],
-  imports: [
-    NbMenuModule.forRoot(),
-    NbCardModule,
-    MenuRoutingModule,
-    NbButtonModule,
-  ],
+  imports: [NbMenuModule.forRoot(), NbCardModule, MenuRoutingModule, NbButtonModule],
 })
 export class MenuModule {}

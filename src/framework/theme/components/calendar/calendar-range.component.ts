@@ -19,7 +19,6 @@ import { NbCalendarRangeYearCellComponent } from './calendar-range-year-cell.com
 import { NbCalendarRangeMonthCellComponent } from './calendar-range-month-cell.component';
 import { convertToBoolProperty, NbBooleanInput } from '../helpers';
 
-
 export interface NbCalendarRange<D> {
   start: D;
   end?: D;
@@ -216,6 +215,7 @@ export class NbCalendarRangeComponent<D> {
   /**
    * Custom day cell component. Have to implement `NbCalendarCell` interface.
    * */
+  // eslint-disable-next-line @angular-eslint/no-input-rename
   @Input('dayCellComponent')
   set _cellComponent(cellComponent: Type<NbCalendarCell<D, NbCalendarRange<D>>>) {
     if (cellComponent) {
@@ -227,6 +227,7 @@ export class NbCalendarRangeComponent<D> {
   /**
    * Custom month cell component. Have to implement `NbCalendarCell` interface.
    * */
+  // eslint-disable-next-line @angular-eslint/no-input-rename
   @Input('monthCellComponent')
   set _monthCellComponent(cellComponent: Type<NbCalendarCell<D, NbCalendarRange<D>>>) {
     if (cellComponent) {
@@ -238,6 +239,7 @@ export class NbCalendarRangeComponent<D> {
   /**
    * Custom year cell component. Have to implement `NbCalendarCell` interface.
    * */
+  // eslint-disable-next-line @angular-eslint/no-input-rename
   @Input('yearCellComponent')
   set _yearCellComponent(cellComponent: Type<NbCalendarCell<D, NbCalendarRange<D>>>) {
     if (cellComponent) {
@@ -289,8 +291,7 @@ export class NbCalendarRangeComponent<D> {
    * */
   @Output() rangeChange: EventEmitter<NbCalendarRange<D>> = new EventEmitter();
 
-  constructor(protected dateService: NbDateService<D>) {
-  }
+  constructor(protected dateService: NbDateService<D>) {}
 
   onChange(date: D) {
     this.initDateIfNull();

@@ -33,8 +33,8 @@ export class NgdDocumentationComponent implements OnDestroy {
     private themeService: NbThemeService,
     private sidebarService: NbSidebarService,
     private menuService: NbMenuService,
-    private paginationService: NgdPaginationService) {
-
+    private paginationService: NgdPaginationService,
+  ) {
     this.themeService.changeTheme('docs-page');
     this.paginationService.setPaginationItems('/docs');
     this.menuItems = this.service.getPreparedMenu('/docs');

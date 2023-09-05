@@ -24,13 +24,6 @@ import { ActionDotModeComponent } from './action-dot-mode.component';
     ActionWidthComponent,
     ActionDotModeComponent,
   ],
-  imports: [
-    NbActionsModule,
-    NbLayoutModule,
-    NbCardModule,
-    NbUserModule,
-    ActionRoutingModule,
-    CommonModule,
-  ],
+  imports: [NbActionsModule, NbLayoutModule, NbCardModule, NbUserModule, ActionRoutingModule, CommonModule],
 })
 export class ActionModule {}

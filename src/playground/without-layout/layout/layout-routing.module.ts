@@ -5,7 +5,7 @@
  */
 
 import { NgModule } from '@angular/core';
-import { RouterModule, Route} from '@angular/router';
+import { RouterModule, Route } from '@angular/router';
 import { LayoutColumnLeftComponent } from './layout-column-left.component';
 import { LayoutFixedHeaderComponent } from './layout-fixed-header.component';
 import { LayoutFooterTestComponent } from './layout-footer-test.component';
@@ -66,7 +66,7 @@ const routes: Route[] = [
 ];
 
 @NgModule({
-  imports: [ RouterModule.forChild(routes) ],
-  exports: [ RouterModule ],
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule],
 })
 export class LayoutRoutingModule {}

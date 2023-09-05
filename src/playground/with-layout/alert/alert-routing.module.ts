@@ -5,7 +5,7 @@
  */
 
 import { NgModule } from '@angular/core';
-import { RouterModule, Route} from '@angular/router';
+import { RouterModule, Route } from '@angular/router';
 import { AlertAccentsComponent } from './alert-accents.component';
 import { AlertColorsComponent } from './alert-colors.component';
 import { AlertOutlineComponent } from './alert-outline.component';
@@ -41,7 +41,7 @@ const routes: Route[] = [
 ];
 
 @NgModule({
-  imports: [ RouterModule.forChild(routes) ],
-  exports: [ RouterModule ],
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule],
 })
 export class AlertRoutingModule {}

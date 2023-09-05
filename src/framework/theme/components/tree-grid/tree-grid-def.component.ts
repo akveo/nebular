@@ -24,26 +24,23 @@ export interface NbTreeGridResponsiveRowDef {
   selector: '[nbTreeGridRowDef]',
   providers: [{ provide: NbCdkRowDef, useExisting: NbTreeGridRowDefDirective }],
 })
-export class NbTreeGridRowDefDirective<T> extends NbRowDefDirective<T>
-                                          implements OnChanges, NbTreeGridResponsiveRowDef {
-
+export class NbTreeGridRowDefDirective<T>
+  extends NbRowDefDirective<T>
+  implements OnChanges, NbTreeGridResponsiveRowDef
+{
   /**
    * Columns to be displayed on this row
    */
   @Input('nbTreeGridRowDefColumns') columns: Iterable<string>;
 
-  constructor(
-    template: TemplateRef<any>,
-    differs: IterableDiffers,
-    private columnsService: NbColumnsService,
-  ) {
+  constructor(template: TemplateRef<any>, differs: IterableDiffers, private columnsService: NbColumnsService) {
     super(template, differs);
   }
 
   ngOnChanges(changes: SimpleChanges) {
     super.ngOnChanges(changes);
 
-    if (changes['columns']) {
+    if (changes.columns) {
       this.updateColumns(this.columns);
     }
   }
@@ -71,25 +68,23 @@ export class NbTreeGridRowDefDirective<T> extends NbRowDefDirective<T>
   selector: '[nbTreeGridHeaderRowDef]',
   providers: [{ provide: NbCdkHeaderRowDef, useExisting: NbTreeGridHeaderRowDefDirective }],
 })
-export class NbTreeGridHeaderRowDefDirective extends NbHeaderRowDefDirective
-                                             implements OnChanges, NbTreeGridResponsiveRowDef {
+export class NbTreeGridHeaderRowDefDirective
+  extends NbHeaderRowDefDirective
+  implements OnChanges, NbTreeGridResponsiveRowDef
+{
   /**
    * Columns to be displayed on this row
    */
   @Input('nbTreeGridHeaderRowDef') columns: Iterable<string>;
 
-  constructor(
-    template: TemplateRef<any>,
-    differs: IterableDiffers,
-    private columnsService: NbColumnsService,
-  ) {
+  constructor(template: TemplateRef<any>, differs: IterableDiffers, private columnsService: NbColumnsService) {
     super(template, differs);
   }
 
   ngOnChanges(changes: SimpleChanges) {
     super.ngOnChanges(changes);
 
-    if (changes['columns']) {
+    if (changes.columns) {
       this.updateColumns(this.columns);
     }
   }
@@ -117,25 +112,23 @@ export class NbTreeGridHeaderRowDefDirective extends NbHeaderRowDefDirective
   selector: '[nbTreeGridFooterRowDef]',
   providers: [{ provide: NbCdkFooterRowDef, useExisting: NbTreeGridFooterRowDefDirective }],
 })
-export class NbTreeGridFooterRowDefDirective extends NbFooterRowDefDirective
-                                             implements OnChanges, NbTreeGridResponsiveRowDef {
+export class NbTreeGridFooterRowDefDirective
+  extends NbFooterRowDefDirective
+  implements OnChanges, NbTreeGridResponsiveRowDef
+{
   /**
    * Columns to be displayed on this row
    */
   @Input('nbTreeGridFooterRowDef') columns: Iterable<string>;
 
-  constructor(
-    template: TemplateRef<any>,
-    differs: IterableDiffers,
-    private columnsService: NbColumnsService,
-  ) {
+  constructor(template: TemplateRef<any>, differs: IterableDiffers, private columnsService: NbColumnsService) {
     super(template, differs);
   }
 
   ngOnChanges(changes: SimpleChanges) {
     super.ngOnChanges(changes);
 
-    if (changes['columns']) {
+    if (changes.columns) {
       this.updateColumns(this.columns);
     }
   }

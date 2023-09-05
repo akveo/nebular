@@ -7,8 +7,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'nb-select-disabled',
+  selector: 'npg-select-disabled',
   templateUrl: './select-disabled.component.html',
 })
-export class SelectDisabledComponent {
-}
+export class SelectDisabledComponent {}

@@ -191,21 +191,18 @@ const TEST_COMPONENTS = [
   imports: [NbLayoutModule, NbPopoverModule],
   exports: [...TEST_COMPONENTS],
   declarations: [...TEST_COMPONENTS],
-  entryComponents: [NbPopoverComponentContentTestComponent],
 })
 class PopoverTestModule {}
 
 describe('Directive: NbPopoverDirective', () => {
   const overlayHandler = new NbDynamicOverlayHandlerMock();
 
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.resetTestingModule();
-      TestBed.configureTestingModule({
-        imports: [RouterTestingModule.withRoutes([]), NbThemeModule.forRoot(), PopoverTestModule],
-      });
-    }),
-  );
+  beforeEach(waitForAsync(() => {
+    TestBed.resetTestingModule();
+    TestBed.configureTestingModule({
+      imports: [RouterTestingModule.withRoutes([]), NbThemeModule.forRoot(), PopoverTestModule],
+    });
+  }));
 
   describe('smoke ', () => {
     let fixture: ComponentFixture<any>;
@@ -318,18 +315,16 @@ describe('Directive: NbPopoverDirective', () => {
   });
 
   describe('mocked services', () => {
-    beforeEach(
-      waitForAsync(() => {
-        TestBed.resetTestingModule();
-        TestBed.configureTestingModule({
-          imports: [RouterTestingModule.withRoutes([]), NbThemeModule.forRoot(), PopoverTestModule],
-        }).overrideDirective(NbPopoverDirective, {
-          set: {
-            providers: [{ provide: NbDynamicOverlayHandler, useValue: overlayHandler }],
-          },
-        });
-      }),
-    );
+    beforeEach(waitForAsync(() => {
+      TestBed.resetTestingModule();
+      TestBed.configureTestingModule({
+        imports: [RouterTestingModule.withRoutes([]), NbThemeModule.forRoot(), PopoverTestModule],
+      }).overrideDirective(NbPopoverDirective, {
+        set: {
+          providers: [{ provide: NbDynamicOverlayHandler, useValue: overlayHandler }],
+        },
+      });
+    }));
     describe('default popover', () => {
       let fixture: ComponentFixture<NbPopoverDefaultTestComponent>;
 

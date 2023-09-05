@@ -9,15 +9,11 @@ import { Component, ComponentRef, ViewChild } from '@angular/core';
 import { NbComponentPortal } from '../cdk/overlay/mapping';
 import { NbOverlayContainerComponent, NbPositionedContainerComponent } from '../cdk/overlay/overlay-container';
 
-
 @Component({
   selector: 'nb-datepicker-container',
-  template: `
-    <nb-overlay-container></nb-overlay-container>
-  `,
+  template: ` <nb-overlay-container></nb-overlay-container> `,
 })
 export class NbDatepickerContainerComponent extends NbPositionedContainerComponent {
-
   // TODO static must be false as of Angular 9.0.0, issues/1514
   @ViewChild(NbOverlayContainerComponent, { static: true }) overlayContainer: NbOverlayContainerComponent;
 

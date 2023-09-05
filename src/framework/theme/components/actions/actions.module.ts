@@ -13,22 +13,11 @@ import { NbActionComponent, NbActionsComponent } from './actions.component';
 import { NbBadgeModule } from '../badge/badge.module';
 import { NbIconModule } from '../icon/icon.module';
 
-const NB_ACTIONS_COMPONENTS = [
-  NbActionComponent,
-  NbActionsComponent,
-];
+const NB_ACTIONS_COMPONENTS = [NbActionComponent, NbActionsComponent];
 
 @NgModule({
-  imports: [
-    NbSharedModule,
-    NbBadgeModule,
-    NbIconModule,
-  ],
-  declarations: [
-    ...NB_ACTIONS_COMPONENTS,
-  ],
-  exports: [
-    ...NB_ACTIONS_COMPONENTS,
-  ],
+  imports: [NbSharedModule, NbBadgeModule, NbIconModule],
+  declarations: [...NB_ACTIONS_COMPONENTS],
+  exports: [...NB_ACTIONS_COMPONENTS],
 })
-export class NbActionsModule { }
+export class NbActionsModule {}

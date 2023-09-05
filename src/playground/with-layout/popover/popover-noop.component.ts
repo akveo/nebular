@@ -8,17 +8,18 @@ import { Component, ViewChild } from '@angular/core';
 import { NbPopoverDirective } from '@nebular/theme';
 
 @Component({
-  selector: 'nb-popover-noop',
+  selector: 'npg-popover-noop',
   templateUrl: './popover-noop.component.html',
-  styles: [`
-    button {
-      margin-right: 1rem;
-      margin-top: 1rem;
-    }
-  `],
+  styles: [
+    `
+      button {
+        margin-right: 1rem;
+        margin-top: 1rem;
+      }
+    `,
+  ],
 })
 export class PopoverNoopComponent {
-
   @ViewChild(NbPopoverDirective) popover: NbPopoverDirective;
 
   open() {

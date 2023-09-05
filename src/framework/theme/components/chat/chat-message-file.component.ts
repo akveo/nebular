@@ -46,7 +46,6 @@ export type NbChatMessageFile = NbChatMessageFileIconPreview | NbChatMessageFile
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NbChatMessageFileComponent {
-
   readyFiles: any[];
 
   /**
@@ -90,14 +89,12 @@ export class NbChatMessageFileComponent {
     this.cd.detectChanges();
   }
 
-  constructor(protected cd: ChangeDetectorRef, protected domSanitizer: DomSanitizer) {
-  }
-
+  constructor(protected cd: ChangeDetectorRef, protected domSanitizer: DomSanitizer) {}
 
   isImage(file: NbChatMessageFile): boolean {
     const type = (file as NbChatMessageFileImagePreview).type;
     if (type) {
-      return [ 'image/png', 'image/jpeg', 'image/gif' ].includes(type);
+      return ['image/png', 'image/jpeg', 'image/gif'].includes(type);
     }
     return false;
   }

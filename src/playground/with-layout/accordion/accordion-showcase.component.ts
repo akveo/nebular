@@ -1,7 +1,7 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
-  selector: 'nb-accordion-showcase',
+  selector: 'npg-accordion-showcase',
   templateUrl: './accordion-showcase.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

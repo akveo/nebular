@@ -15,13 +15,11 @@ import {
   template: `
     <nb-layout>
       <nb-layout-column>
-
         <nb-select [disabled]="selectDisabled">
           <nb-option-group [disabled]="optionGroupDisabled" [title]="optionGroupTitle">
             <nb-option *ngIf="showOption" [value]="1" [disabled]="optionDisabled">1</nb-option>
           </nb-option-group>
         </nb-select>
-
       </nb-layout-column>
     </nb-layout>
   `,
@@ -47,13 +45,8 @@ describe('NbOptionGroupComponent', () => {
 
   beforeEach(fakeAsync(() => {
     TestBed.configureTestingModule({
-      imports: [
-        RouterTestingModule.withRoutes([]),
-        NbThemeModule.forRoot(),
-        NbLayoutModule,
-        NbSelectModule,
-      ],
-      declarations: [ NbOptionGroupTestComponent ],
+      imports: [RouterTestingModule.withRoutes([]), NbThemeModule.forRoot(), NbLayoutModule, NbSelectModule],
+      declarations: [NbOptionGroupTestComponent],
     });
 
     fixture = TestBed.createComponent(NbOptionGroupTestComponent);
@@ -72,7 +65,8 @@ describe('NbOptionGroupComponent', () => {
     testComponent.optionGroupTitle = title;
     fixture.detectChanges();
 
-    const groupTitle = fixture.debugElement.query(By.directive(NbOptionGroupComponent))
+    const groupTitle = fixture.debugElement
+      .query(By.directive(NbOptionGroupComponent))
       .query(By.css('.option-group-title'));
 
     expect(groupTitle.nativeElement.textContent).toEqual(title);

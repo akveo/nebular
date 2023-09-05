@@ -13,18 +13,19 @@ import { NgdMdSection, NgdTextService } from './text.service';
 import { DOCS, STRUCTURE } from '../../app.options';
 import { NgdArticleService } from './article.service';
 
-type NgdToc = { title: string, fragment: string }[];
+type NgdToc = { title: string; fragment: string }[];
 
 @Injectable()
 export class NgdStructureService {
-
   protected prepared;
 
-  constructor(private textService: NgdTextService,
-              private tabbedService: NgdTabbedService,
-              private articleService: NgdArticleService,
-              @Inject(STRUCTURE) structure,
-              @Inject(DOCS) docs) {
+  constructor(
+    private textService: NgdTextService,
+    private tabbedService: NgdTabbedService,
+    private articleService: NgdArticleService,
+    @Inject(STRUCTURE) structure,
+    @Inject(DOCS) docs,
+  ) {
     this.prepared = this.prepareStructure(structure, docs);
   }
 
@@ -51,7 +52,6 @@ export class NgdStructureService {
       const slag = item.name ? this.textService.createSlag(item.name) : null;
 
       if (item.type === 'block' && typeof item.source === 'string') {
-
         if (item.block === 'theme') {
           item.source = preparedDocs.themes[item.source];
         }
@@ -94,13 +94,13 @@ export class NgdStructureService {
 
   protected getComponents(item: any, preparedDocs) {
     return item.source
-      .map(source => preparedDocs.classes.find((data) => data.name === source))
-      .map(component => this.prepareComponent(component));
+      .map((source) => preparedDocs.classes.find((data) => data.name === source))
+      .map((component) => this.prepareComponent(component));
   }
 
   protected prepareComponent(component: any) {
     if (!component.isPrepared) {
-      const textNodes = component.overview.filter(node => node.type === 'text');
+      const textNodes = component.overview.filter((node) => node.type === 'text');
       if (textNodes && textNodes.length) {
         textNodes[0].content = `## ${component.name}\n\n${textNodes[0].content}`; // TODO: this is bad
       }
@@ -108,7 +108,7 @@ export class NgdStructureService {
       component.isPrepared = true;
     }
     return {
-      ... component,
+      ...component,
       slag: this.textService.createSlag(component.name),
       overview: component.overview.map((node: any) => {
         if (node.type === 'text') {
@@ -123,44 +123,43 @@ export class NgdStructureService {
   }
 
   protected prepareToc(item: any): Observable<NgdToc[]> {
-    const tocList: Observable<NgdToc>[] = item.children
-      .reduce((acc: Observable<NgdToc>[], child: any) => {
-        if (child.block === 'markdown') {
-          acc.push(this.getTocForMd(child));
-        } else if (child.block === 'tabbed') {
-          acc.push(this.getTocForTabbed(child));
-        } else if (child.block === 'component') {
-          acc.push(this.getTocForComponent(child));
-        }
-        return acc;
-      }, []);
+    const tocList: Observable<NgdToc>[] = item.children.reduce((acc: Observable<NgdToc>[], child: any) => {
+      if (child.block === 'markdown') {
+        acc.push(this.getTocForMd(child));
+      } else if (child.block === 'tabbed') {
+        acc.push(this.getTocForTabbed(child));
+      } else if (child.block === 'component') {
+        acc.push(this.getTocForComponent(child));
+      }
+      return acc;
+    }, []);
 
-    return combineLatest(tocList).pipe(
-      map((toc) => [].concat(...toc)),
-    );
+    return combineLatest(tocList).pipe(map((toc) => [].concat(...toc)));
   }
 
   protected getTocForMd(block: { sections: Observable<NgdMdSection[]> }): Observable<NgdToc> {
-    return block.sections
-      .pipe(
-        map((sections) => {
-          return sections
-            .map(({ title, fragment }) => ({ title, fragment }));
-        }),
-      );
+    return block.sections.pipe(
+      map((sections) => {
+        return sections.map(({ title, fragment }) => ({ title, fragment }));
+      }),
+    );
   }
 
   protected getTocForComponent(block: any): Observable<NgdToc> {
-    return of([{
-      title: block.source.name,
-      fragment: block.source.slag,
-    }]);
+    return of([
+      {
+        title: block.source.name,
+        fragment: block.source.slag,
+      },
+    ]);
   }
 
   protected getTocForTabbed(block: any): Observable<NgdToc> {
-    return of(block.children.map((component: any) => ({
-      title: component.name,
-      fragment: this.textService.createSlag(component.name),
-    })));
+    return of(
+      block.children.map((component: any) => ({
+        title: component.name,
+        fragment: this.textService.createSlag(component.name),
+      })),
+    );
   }
 }

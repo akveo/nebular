@@ -5,9 +5,7 @@ import * as marked from 'marked';
   selector: '[ngdDescription]',
 })
 export class NgdDescriptionDirective implements AfterViewInit {
-
-  constructor(private el: ElementRef) {
-  }
+  constructor(private el: ElementRef) {}
 
   ngAfterViewInit() {
     const md = marked.setOptions({});

@@ -4,7 +4,6 @@ import { Component } from '@angular/core';
   template: `
     <nb-card size="small">
       <nb-card-body>
-
         <nb-form-field>
           <nb-icon nbPrefix icon="alert-circle-outline"></nb-icon>
           <nb-select placeholder="Select Showcase">
@@ -14,9 +13,8 @@ import { Component } from '@angular/core';
             <nb-option value="3">Option 3</nb-option>
           </nb-select>
         </nb-form-field>
-
       </nb-card-body>
     </nb-card>
   `,
 })
-export class SelectIconComponent { }
+export class SelectIconComponent {}

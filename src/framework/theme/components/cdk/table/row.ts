@@ -1,4 +1,4 @@
-import { Component, Directive, Input } from '@angular/core';
+import { Component, Directive, HostBinding, Input } from '@angular/core';
 import {
   CdkFooterRow,
   CdkFooterRowDef,
@@ -86,41 +86,32 @@ export class NbRowDefDirective<T> extends CdkRowDef<T> {
 /** Footer template container that contains the cell outlet. Adds the right class and role. */
 @Component({
   selector: 'nb-header-row, tr[nbHeaderRow]',
-  template: `
-    <ng-container nbCellOutlet></ng-container>`,
-  host: {
-    'class': 'nb-header-row',
-    'role': 'row',
-  },
+  template: ` <ng-container nbCellOutlet></ng-container>`,
   providers: [{ provide: CdkHeaderRow, useExisting: NbHeaderRowComponent }],
 })
 export class NbHeaderRowComponent extends CdkHeaderRow {
+  @HostBinding('class.nb-header-row') protected hasNbHeaderRowClass = true;
+  @HostBinding('attr.role') protected roleAttribute = 'row';
 }
 
 /** Footer template container that contains the cell outlet. Adds the right class and role. */
 @Component({
   selector: 'nb-footer-row, tr[nbFooterRow]',
-  template: `
-    <ng-container nbCellOutlet></ng-container>`,
-  host: {
-    'class': 'nb-footer-row',
-    'role': 'row',
-  },
+  template: ` <ng-container nbCellOutlet></ng-container>`,
   providers: [{ provide: CdkFooterRow, useExisting: NbFooterRowComponent }],
 })
 export class NbFooterRowComponent extends CdkFooterRow {
+  @HostBinding('class.nb-footer-row') protected hasNbFooterRowClass = true;
+  @HostBinding('attr.role') protected roleAttribute = 'row';
 }
 
 /** Data row template container that contains the cell outlet. Adds the right class and role. */
 @Component({
   selector: 'nb-row, tr[nbRow]',
-  template: `
-    <ng-container nbCellOutlet></ng-container>`,
-  host: {
-    'class': 'nb-row',
-    'role': 'row',
-  },
+  template: ` <ng-container nbCellOutlet></ng-container>`,
   providers: [{ provide: CdkRow, useExisting: NbRowComponent }],
 })
 export class NbRowComponent extends CdkRow {
+  @HostBinding('class.nb-row') protected hasNbRowClass = true;
+  @HostBinding('attr.role') protected roleAttribute = 'row';
 }

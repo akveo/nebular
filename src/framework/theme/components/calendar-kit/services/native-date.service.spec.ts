@@ -47,8 +47,7 @@ describe('native-date-service', () => {
     expect(isValid).toBeTruthy();
   });
 
-  it('should validate as correct if time string is valid according to the twelve hours format',
-    () => {
+  it('should validate as correct if time string is valid according to the twelve hours format', () => {
     const isValid = dateService.isValidTimeString('04:23 00 AM', 'hh:mm:ss A');
     expect(isValid).toBeTruthy();
   });

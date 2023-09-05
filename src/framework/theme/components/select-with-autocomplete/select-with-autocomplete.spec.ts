@@ -733,9 +733,11 @@ describe('NbSelectComponent - falsy values', () => {
   it('should clean selection when selected option does not have a value', fakeAsync(() => {
     select.selected = testComponent.truthyOption.value;
     fixture.detectChanges();
+    flush();
 
     testComponent.noValueOption.onClick(eventMock);
     fixture.detectChanges();
+    flush();
 
     expect(select.selectionModel.length).toEqual(0);
   }));
@@ -743,9 +745,11 @@ describe('NbSelectComponent - falsy values', () => {
   it('should clean selection when selected option has null value', fakeAsync(() => {
     select.selected = testComponent.truthyOption.value;
     fixture.detectChanges();
+    flush();
 
     testComponent.nullOption.onClick(eventMock);
     fixture.detectChanges();
+    flush();
 
     expect(select.selectionModel.length).toEqual(0);
   }));
@@ -753,9 +757,11 @@ describe('NbSelectComponent - falsy values', () => {
   it('should clean selection when selected option has undefined value', fakeAsync(() => {
     select.selected = testComponent.truthyOption.value;
     fixture.detectChanges();
+    flush();
 
     testComponent.undefinedOption.onClick(eventMock);
     fixture.detectChanges();
+    flush();
 
     expect(select.selectionModel.length).toEqual(0);
   }));
@@ -763,9 +769,11 @@ describe('NbSelectComponent - falsy values', () => {
   it('should not reset selection when selected option has false value', fakeAsync(() => {
     select.selected = testComponent.truthyOption.value;
     fixture.detectChanges();
+    flush();
 
     testComponent.falseOption.onClick(eventMock);
     fixture.detectChanges();
+    flush();
 
     expect(select.selectionModel.length).toEqual(1);
   }));
@@ -773,9 +781,11 @@ describe('NbSelectComponent - falsy values', () => {
   it('should not reset selection when selected option has zero value', fakeAsync(() => {
     select.selected = testComponent.truthyOption.value;
     fixture.detectChanges();
+    flush();
 
     testComponent.zeroOption.onClick(eventMock);
     fixture.detectChanges();
+    flush();
 
     expect(select.selectionModel.length).toEqual(1);
   }));
@@ -783,9 +793,11 @@ describe('NbSelectComponent - falsy values', () => {
   it('should not reset selection when selected option has empty string value', fakeAsync(() => {
     select.selected = testComponent.truthyOption.value;
     fixture.detectChanges();
+    flush();
 
     testComponent.emptyStringOption.onClick(eventMock);
     fixture.detectChanges();
+    flush();
 
     expect(select.selectionModel.length).toEqual(1);
   }));
@@ -793,9 +805,11 @@ describe('NbSelectComponent - falsy values', () => {
   it('should not reset selection when selected option has NaN value', fakeAsync(() => {
     select.selected = testComponent.truthyOption.value;
     fixture.detectChanges();
+    flush();
 
     testComponent.nanOption.onClick(eventMock);
     fixture.detectChanges();
+    flush();
 
     expect(select.selectionModel.length).toEqual(1);
   }));
@@ -1247,8 +1261,8 @@ describe('NbSelect - dynamic options', () => {
       <nb-layout-column>
         <nb-select-with-autocomplete
           [(ngModel)]="selectedValue"
-          [withOptionSearch]="true"
-          (optionSearchChange)="filterValue = $event"
+          [withOptionsAutocomplete]="true"
+          (optionsAutocompleteInputChange)="filterValue = $event"
           (selectOpen)="isOpened = true"
           (selectClose)="isOpened = false"
         >
@@ -1289,7 +1303,7 @@ describe('NbSelect - experimental search', () => {
   });
 
   it("should update search input and don't emit filterChange when value of select is changed", fakeAsync(() => {
-    const searchInput = testComponent.selectComponent.optionSearchInput.nativeElement;
+    const searchInput = testComponent.selectComponent.optionsAutocompleteInput.nativeElement;
 
     expect(searchInput.value).toEqual('');
     expect(testComponent.filterValue).toEqual('');

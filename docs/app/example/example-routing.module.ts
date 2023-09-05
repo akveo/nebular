@@ -9,7 +9,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { NgdExampleComponent } from './example.component';
 import { NgdExample404Component } from './example-404.component';
 
-
 export const routes: Routes = [
   {
     path: '',
@@ -17,7 +16,7 @@ export const routes: Routes = [
     children: [
       {
         path: '',
-        loadChildren: () => import('../../../src/playground/playground.module').then(m => m.PlaygroundModule),
+        loadChildren: () => import('../../../src/playground/playground.module').then((m) => m.PlaygroundModule),
       },
       {
         path: '**',
@@ -31,5 +30,4 @@ export const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class NgdExampleRoutingModule {
-}
+export class NgdExampleRoutingModule {}

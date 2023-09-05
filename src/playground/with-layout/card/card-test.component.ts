@@ -7,7 +7,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'nb-card-test',
+  selector: 'npg-card-test',
   template: `
     <nb-card *ngFor="let card of cards" [size]="card.size" [status]="card.status">
       <nb-card-header>
@@ -104,7 +104,6 @@ import { Component } from '@angular/core';
   `,
 })
 export class CardTestComponent {
-
   sizes = ['tiny', 'small', 'medium', 'large', 'giant'];
   statuses = ['primary', 'success', 'info', 'warning', 'danger'];
   accents = ['primary', 'success', 'info', 'warning', 'danger'];
@@ -120,8 +119,8 @@ export class CardTestComponent {
   private prepareCards(): any[] {
     const result = [];
 
-    this.statuses.forEach(status => {
-      this.sizes.forEach(size => {
+    this.statuses.forEach((status) => {
+      this.sizes.forEach((size) => {
         result.push({
           size,
           status,
@@ -138,8 +137,8 @@ export class CardTestComponent {
     const revealCards = [];
     const flipCards = [];
 
-    statuses.forEach(status => {
-      accents.forEach(accent => {
+    statuses.forEach((status) => {
+      accents.forEach((accent) => {
         accentCards.push({
           size: 'small',
           status,
@@ -148,7 +147,7 @@ export class CardTestComponent {
       });
     });
 
-    sizes.forEach(size => {
+    sizes.forEach((size) => {
       const card = { size, accent: '', status: '' };
       revealCards.push(card);
       flipCards.push(card);

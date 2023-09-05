@@ -14,7 +14,6 @@ import { SafeHtml } from '@angular/platform-browser';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NgdIconCardComponent {
-
   @Input() title: string;
   @Input() icon: SafeHtml;
   @Input() description: string;

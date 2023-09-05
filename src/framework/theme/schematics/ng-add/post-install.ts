@@ -12,10 +12,7 @@ import { NodePackageInstallTask } from '@angular-devkit/schematics/tasks';
  * Other utilities use `@angular/sdk/schematics` and `@schematics/angular` packages.
  * But these packages are not installed in this step.
  * */
-import {
-  addDependencyToPackageJson,
-  getEvaIconsVersion,
-} from '../util/package';
+import { addDependencyToPackageJson, getEvaIconsVersion } from '../util/package';
 
 /**
  * post-install schematics, install dependant packages

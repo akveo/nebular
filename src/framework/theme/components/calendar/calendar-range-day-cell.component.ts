@@ -21,13 +21,13 @@ import { NbBaseCalendarRangeCell } from './base-calendar-range-cell';
 
 @Component({
   selector: 'nb-calendar-range-day-cell',
-  template: `
-    <div class="cell-content">{{ day }}</div>
-  `,
+  template: ` <div class="cell-content">{{ day }}</div> `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NbCalendarRangeDayCellComponent<D> extends NbBaseCalendarRangeCell<D>
-  implements NbCalendarCell<D, NbCalendarRange<D>> {
+export class NbCalendarRangeDayCellComponent<D>
+  extends NbBaseCalendarRangeCell<D>
+  implements NbCalendarCell<D, NbCalendarRange<D>>
+{
   @Input() date: D;
 
   @Input() selectedValue: NbCalendarRange<D>;
@@ -43,6 +43,7 @@ export class NbCalendarRangeDayCellComponent<D> extends NbBaseCalendarRangeCell<
   @Input() size: NbCalendarSize = NbCalendarSize.MEDIUM;
   static ngAcceptInputType_size: NbCalendarSizeValues;
 
+  // eslint-disable-next-line @angular-eslint/no-output-native
   @Output() select: EventEmitter<D> = new EventEmitter(true);
 
   constructor(protected dateService: NbDateService<D>) {

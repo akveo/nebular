@@ -1,7 +1,6 @@
 import { urlBase64Decode } from '../../helpers';
 
 export abstract class NbAuthToken {
-
   protected payload: any = null;
 
   abstract getValue(): string;
@@ -58,15 +57,16 @@ export interface NbAuthTokenClass<T = NbAuthToken> {
   new (raw: any, strategyName: string, expDate?: Date): T;
 }
 
-export function nbAuthCreateToken<T extends NbAuthToken>(tokenClass: NbAuthTokenClass<T>,
-                                  token: any,
-                                  ownerStrategyName: string,
-                                  createdAt?: Date) {
+export function nbAuthCreateToken<T extends NbAuthToken>(
+  tokenClass: NbAuthTokenClass<T>,
+  token: any,
+  ownerStrategyName: string,
+  createdAt?: Date,
+) {
   return new tokenClass(token, ownerStrategyName, createdAt);
 }
 
 export function decodeJwtPayload(payload: string): any {
-
   if (payload.length === 0) {
     throw new NbAuthEmptyTokenError('Cannot extract from an empty payload.');
   }
@@ -75,20 +75,19 @@ export function decodeJwtPayload(payload: string): any {
 
   if (parts.length !== 3) {
     throw new NbAuthIllegalJWTTokenError(
-      `The payload ${payload} is not valid JWT payload and must consist of three parts.`);
+      `The payload ${payload} is not valid JWT payload and must consist of three parts.`,
+    );
   }
 
   let decoded;
   try {
     decoded = urlBase64Decode(parts[1]);
   } catch (e) {
-    throw new NbAuthIllegalJWTTokenError(
-      `The payload ${payload} is not valid JWT payload and cannot be parsed.`);
+    throw new NbAuthIllegalJWTTokenError(`The payload ${payload} is not valid JWT payload and cannot be parsed.`);
   }
 
   if (!decoded) {
-    throw new NbAuthIllegalJWTTokenError(
-      `The payload ${payload} is not valid JWT payload and cannot be decoded.`);
+    throw new NbAuthIllegalJWTTokenError(`The payload ${payload} is not valid JWT payload and cannot be decoded.`);
   }
   return JSON.parse(decoded);
 }
@@ -97,12 +96,9 @@ export function decodeJwtPayload(payload: string): any {
  * Wrapper for simple (text) token
  */
 export class NbAuthSimpleToken extends NbAuthToken {
-
   static NAME = 'nb:auth:simple:token';
 
-  constructor(protected readonly token: any,
-              protected readonly ownerStrategyName: string,
-              protected createdAt?: Date) {
+  constructor(protected readonly token: any, protected readonly ownerStrategyName: string, protected createdAt?: Date) {
     super();
     try {
       this.parsePayload();
@@ -164,15 +160,14 @@ export class NbAuthSimpleToken extends NbAuthToken {
  * Wrapper for JWT token with additional methods.
  */
 export class NbAuthJWTToken extends NbAuthSimpleToken {
-
   static NAME = 'nb:auth:jwt:token';
 
   /**
    * for JWT token, the iat (issued at) field of the token payload contains the creation Date
    */
   protected prepareCreatedAt(date: Date) {
-      const decoded = this.getPayload();
-      return decoded && decoded.iat ? new Date(Number(decoded.iat) * 1000) : super.prepareCreatedAt(date);
+    const decoded = this.getPayload();
+    return decoded && decoded.iat ? new Date(Number(decoded.iat) * 1000) : super.prepareCreatedAt(date);
   }
 
   /**
@@ -181,7 +176,7 @@ export class NbAuthJWTToken extends NbAuthSimpleToken {
    */
   protected parsePayload(): void {
     if (!this.token) {
-      throw new NbAuthTokenNotFoundError('Token not found. ')
+      throw new NbAuthTokenNotFoundError('Token not found. ');
     }
     this.payload = decodeJwtPayload(this.token);
   }
@@ -222,13 +217,9 @@ const prepareOAuth2Token = (data) => {
  * Wrapper for OAuth2 token whose access_token is a JWT Token
  */
 export class NbAuthOAuth2Token extends NbAuthSimpleToken {
-
   static NAME = 'nb:auth:oauth2:token';
 
-  constructor( data: { [key: string]: string|number }|string = {},
-               ownerStrategyName: string,
-               createdAt?: Date) {
-
+  constructor(data: { [key: string]: string | number } | string = {}, ownerStrategyName: string, createdAt?: Date) {
     // we may get it as string when retrieving from a storage
     super(prepareOAuth2Token(data), ownerStrategyName, createdAt);
   }
@@ -251,7 +242,7 @@ export class NbAuthOAuth2Token extends NbAuthSimpleToken {
 
   /**
    *  put refreshToken in the token payload
-    * @param refreshToken
+   * @param refreshToken
    */
   setRefreshToken(refreshToken: string) {
     this.token.refresh_token = refreshToken;
@@ -263,7 +254,7 @@ export class NbAuthOAuth2Token extends NbAuthSimpleToken {
    */
   protected parsePayload(): void {
     if (!this.token) {
-      throw new NbAuthTokenNotFoundError('Token not found.')
+      throw new NbAuthTokenNotFoundError('Token not found.');
     } else {
       if (!Object.keys(this.token).length) {
         throw new NbAuthEmptyTokenError('Cannot extract payload from an empty token.');
@@ -297,7 +288,7 @@ export class NbAuthOAuth2Token extends NbAuthSimpleToken {
       return null;
     }
     return new Date(this.createdAt.getTime() + Number(this.token.expires_in) * 1000);
-}
+  }
 
   /**
    * Convert to string
@@ -312,7 +303,6 @@ export class NbAuthOAuth2Token extends NbAuthSimpleToken {
  * Wrapper for OAuth2 token embedding JWT tokens
  */
 export class NbAuthOAuth2JWTToken extends NbAuthOAuth2Token {
-
   static NAME = 'nb:auth:oauth2:jwt:token';
 
   protected accessTokenPayload: any;
@@ -325,7 +315,7 @@ export class NbAuthOAuth2JWTToken extends NbAuthOAuth2Token {
   protected parseAccessTokenPayload(): any {
     const accessToken = this.getValue();
     if (!accessToken) {
-      throw new NbAuthTokenNotFoundError('access_token key not found.')
+      throw new NbAuthTokenNotFoundError('access_token key not found.');
     }
     this.accessTokenPayload = decodeJwtPayload(accessToken);
   }

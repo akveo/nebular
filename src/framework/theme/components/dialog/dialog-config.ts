@@ -6,7 +6,6 @@
 
 import { InjectionToken, ViewContainerRef } from '@angular/core';
 
-
 export const NB_DIALOG_CONFIG = new InjectionToken<NbDialogConfig>('Default dialog options');
 
 /**

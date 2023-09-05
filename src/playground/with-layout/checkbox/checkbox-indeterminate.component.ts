@@ -12,11 +12,13 @@ import { Component } from '@angular/core';
       </nb-card-body>
     </nb-card>
   `,
-  styles: [`
-    button {
-      display: block;
-      margin-top: 1rem;
-    }
-  `],
+  styles: [
+    `
+      button {
+        display: block;
+        margin-top: 1rem;
+      }
+    `,
+  ],
 })
 export class CheckboxIndeterminateComponent {}

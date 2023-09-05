@@ -42,8 +42,7 @@ export class NgdForBusinessComponent {
     'The review of your project.',
   ];
 
-  constructor(private dialogService: NbDialogService) {
-  }
+  constructor(private dialogService: NbDialogService) {}
 
   openDialog(): void {
     const context = {

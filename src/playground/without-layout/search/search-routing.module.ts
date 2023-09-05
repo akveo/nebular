@@ -5,7 +5,7 @@
  */
 
 import { NgModule } from '@angular/core';
-import { RouterModule, Route} from '@angular/router';
+import { RouterModule, Route } from '@angular/router';
 import { SearchCustomizedTestComponent } from './search-customized-test.component';
 import { SearchEventComponent } from './search-event.component';
 import { SearchShowcaseComponent } from './search-showcase.component';
@@ -36,7 +36,7 @@ const routes: Route[] = [
 ];
 
 @NgModule({
-  imports: [ RouterModule.forChild(routes) ],
-  exports: [ RouterModule ],
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule],
 })
 export class SearchRoutingModule {}

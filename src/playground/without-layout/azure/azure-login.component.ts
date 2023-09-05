@@ -11,7 +11,7 @@ import { Subject } from 'rxjs';
 import { AuthAzureToken } from './azure-adb2c-auth-strategy';
 
 @Component({
-  selector: 'nb-playground-azure',
+  selector: 'npg-playground-azure',
   template: `
     <nb-layout>
       <nb-layout-column>

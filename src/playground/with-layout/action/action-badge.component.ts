@@ -7,9 +7,8 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
-  selector: 'nb-action-badge',
+  selector: 'npg-action-badge',
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './action-badge.component.html',
 })
-export class ActionBadgeComponent {
-}
+export class ActionBadgeComponent {}

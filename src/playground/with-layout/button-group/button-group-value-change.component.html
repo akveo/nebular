@@ -1,8 +1,6 @@
 <nb-card>
   <nb-card-body>
-    <p>
-      Group with single select value: {{ singleSelectGroupValue | json }}
-    </p>
+    <p>Group with single select value: {{ singleSelectGroupValue | json }}</p>
 
     <nb-button-group (valueChange)="updateSingleSelectGroupValue($event)">
       <button nbButtonToggle value="One">One</button>
@@ -14,9 +12,7 @@
 
 <nb-card>
   <nb-card-body>
-    <p>
-      Group with single select value: {{ multiSelectGroupValue | json }}
-    </p>
+    <p>Group with single select value: {{ multiSelectGroupValue | json }}</p>
 
     <nb-button-group multiple (valueChange)="updateMultiSelectGroupValue($event)">
       <button nbButtonToggle value="One">One</button>
@@ -25,4 +21,3 @@
     </nb-button-group>
   </nb-card-body>
 </nb-card>
-
