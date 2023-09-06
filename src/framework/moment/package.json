@@ -1,6 +1,6 @@
 {
   "name": "@nebular/moment",
-  "version": "11.0.0",
+  "version": "11.0.1",
   "description": "@nebular/moment",
   "author": "akveo",
   "license": "MIT",
@@ -21,7 +21,7 @@
     "nebular"
   ],
   "peerDependencies": {
-    "@nebular/theme": "11.0.0",
+    "@nebular/theme": "11.0.1",
     "moment": "^2.22.2"
   },
   "dependencies": {
