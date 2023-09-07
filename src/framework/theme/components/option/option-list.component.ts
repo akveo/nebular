@@ -22,7 +22,7 @@ import { NbPosition } from '../cdk/overlay/overlay-position';
 @Component({
   selector: 'nb-option-list',
   template: `
-    <ul class="option-list">
+    <ul class="option-list scrollable-container">
       <ng-content></ng-content>
     </ul>
   `,
