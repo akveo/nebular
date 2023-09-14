@@ -169,7 +169,11 @@ export class NbOAuth2AuthStrategy extends NbAuthStrategy {
 
   protected defaultOptions: NbOAuth2AuthStrategyOptions = auth2StrategyOptions;
 
-  constructor(protected http: HttpClient, protected route: ActivatedRoute, @Inject(NB_WINDOW) protected window: any) {
+  constructor(
+    protected http: HttpClient,
+    protected route: ActivatedRoute,
+    @Inject(NB_WINDOW) protected window: any,
+  ) {
     super();
   }
 

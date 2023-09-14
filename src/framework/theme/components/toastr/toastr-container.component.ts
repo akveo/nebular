@@ -52,7 +52,10 @@ export class NbToastrContainerComponent implements OnInit, OnDestroy {
 
   fadeIn;
 
-  constructor(protected layoutDirection: NbLayoutDirectionService, protected positionHelper: NbPositionHelper) {}
+  constructor(
+    protected layoutDirection: NbLayoutDirectionService,
+    protected positionHelper: NbPositionHelper,
+  ) {}
 
   ngOnInit() {
     this.layoutDirection

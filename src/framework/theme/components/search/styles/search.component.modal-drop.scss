@@ -8,7 +8,9 @@
 
 ::ng-deep nb-layout.modal-drop .layout {
   position: relative;
-  transition: transform 0.4s, opacity 0.4s;
+  transition:
+    transform 0.4s,
+    opacity 0.4s;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -78,7 +80,9 @@
       padding: 0.85rem 0;
       opacity: 0;
       transform: translate3d(0, -50px, 0);
-      transition: opacity 0.4s, transform 0.4s;
+      transition:
+        opacity 0.4s,
+        transform 0.4s;
     }
 
     .form-content {

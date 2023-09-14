@@ -24,7 +24,10 @@ export class NgdTabbedExampleBlockComponent {
     });
   }
 
-  constructor(private codeLoader: NgdCodeLoaderService, private cd: ChangeDetectorRef) {}
+  constructor(
+    private codeLoader: NgdCodeLoaderService,
+    private cd: ChangeDetectorRef,
+  ) {}
 
   switchToLiveView() {
     this.changeView.emit(NgdExampleView.LIVE);

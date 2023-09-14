@@ -25,7 +25,10 @@ export function createContainer<T>(
 
 @Injectable()
 export class NbOverlayService {
-  constructor(protected overlay: NbOverlay, protected layoutDirection: NbLayoutDirectionService) {}
+  constructor(
+    protected overlay: NbOverlay,
+    protected layoutDirection: NbLayoutDirectionService,
+  ) {}
 
   get scrollStrategies(): NbScrollStrategyOptions {
     return this.overlay.scrollStrategies;
@@ -33,7 +36,10 @@ export class NbOverlayService {
 
   create(config?: NbOverlayConfig): NbOverlayRef {
     const overlayRef = this.overlay.create(config);
-    this.layoutDirection.onDirectionChange().subscribe((dir) => overlayRef.setDirection(dir));
+    const sub = this.layoutDirection.onDirectionChange().subscribe((dir) => overlayRef.setDirection(dir));
+    const obs = overlayRef.attachments();
+    obs.subscribe({ complete: () => sub?.unsubscribe() });
+
     return overlayRef;
   }
 }

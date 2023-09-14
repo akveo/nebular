@@ -366,7 +366,10 @@ export class NbTabsetComponent implements AfterContentInit, OnDestroy {
 
   private destroy$: Subject<void> = new Subject<void>();
 
-  constructor(private route: ActivatedRoute, private changeDetectorRef: ChangeDetectorRef) {}
+  constructor(
+    private route: ActivatedRoute,
+    private changeDetectorRef: ChangeDetectorRef,
+  ) {}
 
   // TODO: refactoring this component, avoid change detection loop
   ngAfterContentInit() {

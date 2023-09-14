@@ -218,7 +218,10 @@ export class NbButtonGroupComponent implements OnChanges, AfterContentInit {
     return [];
   }
 
-  constructor(protected cd: ChangeDetectorRef, protected statusService: NbStatusService) {}
+  constructor(
+    protected cd: ChangeDetectorRef,
+    protected statusService: NbStatusService,
+  ) {}
 
   ngOnChanges({ size, status, shape, multiple, filled, outline, ghost, disabled }: SimpleChanges) {
     if (size || status || shape || multiple || filled || outline || ghost || disabled) {

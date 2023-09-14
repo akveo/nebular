@@ -94,7 +94,10 @@ export class NbAccordionItemComponent implements OnInit, OnChanges, OnDestroy {
   private disabledValue = false;
   private destroy$ = new Subject<void>();
 
-  constructor(@Host() private accordion: NbAccordionComponent, private cd: ChangeDetectorRef) {}
+  constructor(
+    @Host() private accordion: NbAccordionComponent,
+    private cd: ChangeDetectorRef,
+  ) {}
 
   /**
    * Open/close the item

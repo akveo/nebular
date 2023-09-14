@@ -147,7 +147,10 @@ export class NbPasswordAuthStrategy extends NbAuthStrategy {
     return [NbPasswordAuthStrategy, options];
   }
 
-  constructor(protected http: HttpClient, private route: ActivatedRoute) {
+  constructor(
+    protected http: HttpClient,
+    private route: ActivatedRoute,
+  ) {
     super();
   }
 

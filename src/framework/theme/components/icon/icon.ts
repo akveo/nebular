@@ -10,7 +10,11 @@ export interface NbIcon {
 }
 
 export class NbFontIcon implements NbIcon {
-  constructor(protected name, protected content: any, protected params: NbFontIconPackParams = {}) {}
+  constructor(
+    protected name,
+    protected content: any,
+    protected params: NbFontIconPackParams = {},
+  ) {}
 
   getClasses(options?: NbIconOptions): string[] {
     const classes = [];
@@ -30,7 +34,11 @@ export class NbFontIcon implements NbIcon {
 }
 
 export class NbSvgIcon implements NbIcon {
-  constructor(protected name, protected content: any, protected params: NbIconPackParams = {}) {}
+  constructor(
+    protected name,
+    protected content: any,
+    protected params: NbIconPackParams = {},
+  ) {}
 
   getClasses(options?: NbIconOptions): string[] {
     const classes = [];

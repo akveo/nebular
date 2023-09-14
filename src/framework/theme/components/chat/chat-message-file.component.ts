@@ -89,7 +89,10 @@ export class NbChatMessageFileComponent {
     this.cd.detectChanges();
   }
 
-  constructor(protected cd: ChangeDetectorRef, protected domSanitizer: DomSanitizer) {}
+  constructor(
+    protected cd: ChangeDetectorRef,
+    protected domSanitizer: DomSanitizer,
+  ) {}
 
   isImage(file: NbChatMessageFile): boolean {
     const type = (file as NbChatMessageFileImagePreview).type;

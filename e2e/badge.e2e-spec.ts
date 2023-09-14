@@ -7,7 +7,7 @@
 import { element, by } from 'protractor';
 import { waitFor } from './e2e-helper';
 
-export default function badgeTests (badgesConfig) {
+export default function badgeTests(badgesConfig) {
   const { selector, badges } = badgesConfig;
 
   it('should display badge with correct text', () => {

@@ -1,0 +1,55 @@
+# compiled output
+/dist
+/tmp
+/.ng_compiled
+/.ng_build
+.lib
+docs/assets/examples/*
+
+# dependencies
+node_modules
+
+# IDEs and editors
+/.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# misc
+/.angular/cache
+/packages-smoke/.angular/cache
+/.sass-cache
+/connect.lock
+/coverage/*
+/libpeerconnection.log
+npm-debug.log
+testem.log
+/typings
+/docs/framework
+/docs/docs.json
+/docs/output.json
+/docs/assets/examples
+/docs/dist
+/packages-smoke/dist
+.eslintcache
+
+# e2e
+/e2e/*.js
+/e2e/*.map
+
+#System Files
+.DS_Store
+Thumbs.db
+debug.log
+local.log
+
+/tools/dev-schematics/dist

@@ -23,7 +23,9 @@
     $left-focus-color: nb-theme(button-hero-#{$status}-focus-left-background-color);
     $right-focus-color: nb-theme(button-hero-#{$status}-focus-right-background-color);
     background-image: linear-gradient(to right, $left-focus-color, $right-focus-color);
-    box-shadow: $hero-box-shadows, 0 0 0 nb-theme(button-hero-outline-width) nb-theme(button-hero-outline-color);
+    box-shadow:
+      $hero-box-shadows,
+      0 0 0 nb-theme(button-hero-outline-width) nb-theme(button-hero-outline-color);
   }
 
   &:hover {

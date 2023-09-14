@@ -12,7 +12,9 @@
   }
 
   .pace .pace-progress-inner {
-    box-shadow: 0 0 10px nb-theme(color-fg-highlight), 0 0 5px nb-theme(color-fg-highlight);
+    box-shadow:
+      0 0 10px nb-theme(color-fg-highlight),
+      0 0 5px nb-theme(color-fg-highlight);
   }
 
   .pace .pace-activity {

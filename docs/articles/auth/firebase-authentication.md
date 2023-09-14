@@ -2,10 +2,11 @@
 
 `@nebular/firebase-auth` allows authentication in firebase applications with `@nebular/auth`.
 The package provides the following strategies:
-  - `NbFirebasePasswordStrategy` - authentication with email/password
-  - `NbFirebaseGoogleStrategy` - authentication with google accounts
-  - `NbFirebaseFacebookStrategy` - authentication with facebook accounts
-  - `NbFirebaseTwitteStrategy` - authentication with twitter accounts
+
+- `NbFirebasePasswordStrategy` - authentication with email/password
+- `NbFirebaseGoogleStrategy` - authentication with google accounts
+- `NbFirebaseFacebookStrategy` - authentication with facebook accounts
+- `NbFirebaseTwitteStrategy` - authentication with twitter accounts
 
 `@nebular/auth` package is sponsored by [GO-ER](https://go-er.com) and [What Now Travel](https://whatnow.travel/).
 
@@ -20,12 +21,11 @@ The package provides the following strategies:
   </div>
 </div>
 
- 
 Install Nebular Auth and Nebular Firebase Auth.
- 
- ```sh
-   npm i @nebular/auth @nebular/firebase-auth
- ```
+
+```sh
+  npm i @nebular/auth @nebular/firebase-auth
+```
 
 Import the NbAuthModule with some firebase strategies, in that example we use NbFirebasePasswordStrategy.
 
@@ -37,7 +37,7 @@ import { NbFirebasePasswordStrategy } from '@nebular/firebase-auth';
 @NgModule({
   imports: [
    // ...
-      
+
     NbAuthModule.forRoot({
      strategies: [
        NbFirebasePasswordStrategy.setup({
@@ -49,6 +49,7 @@ import { NbFirebasePasswordStrategy } from '@nebular/firebase-auth';
   ],
 });
 ```
+
 <hr>
 
 ## Authentication with email and password
@@ -56,6 +57,7 @@ import { NbFirebasePasswordStrategy } from '@nebular/firebase-auth';
 Nebular Firebase Auth provides NbFirebasePassword strategy for authentication with email and password.
 
 Strategy settings:
+
  <div class="note note-info">
   <div class="note-title">Note</div>
   <div class="note-body">
@@ -121,22 +123,17 @@ export class NbFirebasePasswordStrategyOptions extends NbAuthStrategyOptions {
   };
   errors?: NbPasswordStrategyMessage = {
     key: 'message',
-    getter: (module: string, res, options: NbFirebasePasswordStrategyOptions) => getDeepFromObject(
-      res,
-      options.errors.key,
-      options[module].defaultErrors,
-    ),
+    getter: (module: string, res, options: NbFirebasePasswordStrategyOptions) =>
+      getDeepFromObject(res, options.errors.key, options[module].defaultErrors),
   };
   messages?: NbPasswordStrategyMessage = {
     key: 'messages',
-    getter: (module: string, res, options: NbFirebasePasswordStrategyOptions) => getDeepFromObject(
-      res.body,
-      options.messages.key,
-      options[module].defaultMessages,
-    ),
+    getter: (module: string, res, options: NbFirebasePasswordStrategyOptions) =>
+      getDeepFromObject(res.body, options.messages.key, options[module].defaultMessages),
   };
 }
 ```
+
 <hr>
 
 ## Social Authentication providers
@@ -178,6 +175,7 @@ export class NbFirebaseIdentityProviderStrategyOptions extends NbAuthStrategyOpt
   }
 };
 ```
+
 <hr>
 
 ## Complete example
@@ -185,6 +183,6 @@ export class NbFirebaseIdentityProviderStrategyOptions extends NbAuthStrategyOpt
 A complete code example could be found on [GitHub](https://github.com/akveo/nebular/tree/master/src/playground/without-layout/firebase).
 
 And here the playground examples available to play around with
- - [Firebase Nebular Password Example](/example/firebase/password-showcase)
- - [Firebase Nebular Social Authentication Providers Example](/example/firebase/social-auth-showcase)
 
+- [Firebase Nebular Password Example](/example/firebase/password-showcase)
+- [Firebase Nebular Social Authentication Providers Example](/example/firebase/social-auth-showcase)

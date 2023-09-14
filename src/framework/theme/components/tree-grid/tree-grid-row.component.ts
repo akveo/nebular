@@ -58,7 +58,10 @@ export class NbTreeGridRowComponent extends NbRowComponent implements OnDestroy 
     this.tree.toggleRow(this, { deep: true });
   }
 
-  constructor(@Inject(NB_TREE_GRID) tree, public elementRef: ElementRef<HTMLElement>) {
+  constructor(
+    @Inject(NB_TREE_GRID) tree,
+    public elementRef: ElementRef<HTMLElement>,
+  ) {
     super();
     this.tree = tree as NbTreeGridComponent<any>;
   }

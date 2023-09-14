@@ -7,7 +7,6 @@
 import { browser, by, element } from 'protractor';
 
 describe('nb-checkbox', () => {
-
   beforeEach((done) => {
     browser.get('#/checkbox/checkbox-test.component').then(() => done());
   });

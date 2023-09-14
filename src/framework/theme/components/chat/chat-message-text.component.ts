@@ -13,7 +13,7 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
   selector: 'nb-chat-message-text',
   template: `
     <p class="sender" *ngIf="sender || date">
-      {{ sender }} <time>{{ date | date : dateFormat }}</time>
+      {{ sender }} <time>{{ date | date: dateFormat }}</time>
     </p>
     <p class="text" *ngIf="message">{{ message }}</p>
   `,

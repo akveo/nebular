@@ -98,7 +98,11 @@ export function decodeJwtPayload(payload: string): any {
 export class NbAuthSimpleToken extends NbAuthToken {
   static NAME = 'nb:auth:simple:token';
 
-  constructor(protected readonly token: any, protected readonly ownerStrategyName: string, protected createdAt?: Date) {
+  constructor(
+    protected readonly token: any,
+    protected readonly ownerStrategyName: string,
+    protected createdAt?: Date,
+  ) {
     super();
     try {
       this.parsePayload();

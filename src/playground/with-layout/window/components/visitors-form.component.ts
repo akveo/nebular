@@ -21,7 +21,10 @@ import { NbWindowRef } from '@nebular/theme';
 export class VisitorsFormComponent {
   form: FormGroup;
 
-  constructor(private fb: FormBuilder, public windowRef: NbWindowRef) {
+  constructor(
+    private fb: FormBuilder,
+    public windowRef: NbWindowRef,
+  ) {
     this.form = fb.group({
       name: null,
     });

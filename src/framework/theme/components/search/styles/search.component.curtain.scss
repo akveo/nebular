@@ -46,7 +46,9 @@
       width: 50%;
       opacity: 0;
       transform: scale3d(0.8, 0.8, 1);
-      transition: opacity 0.5s, transform 0.5s;
+      transition:
+        opacity 0.5s,
+        transform 0.5s;
     }
 
     input {

@@ -55,7 +55,10 @@ export class NbMenuItemComponent implements DoCheck, AfterViewInit, OnDestroy {
   protected destroy$ = new Subject<void>();
   toggleState: NbToggleStates;
 
-  constructor(protected menuService: NbMenuService, protected directionService: NbLayoutDirectionService) {}
+  constructor(
+    protected menuService: NbMenuService,
+    protected directionService: NbLayoutDirectionService,
+  ) {}
 
   ngDoCheck() {
     this.toggleState = this.menuItem.expanded ? NbToggleStates.Expanded : NbToggleStates.Collapsed;

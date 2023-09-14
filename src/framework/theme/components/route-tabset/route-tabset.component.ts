@@ -116,7 +116,7 @@ export interface NbRouteTab {
         <ng-template #enabled>
           <li
             routerLinkActive="active"
-            [routerLinkActiveOptions]="activeLinkOptions | nbMergeConfigs : tab.activeLinkOptions"
+            [routerLinkActiveOptions]="activeLinkOptions | nbMergeConfigs: tab.activeLinkOptions"
             class="route-tab"
           >
             <a

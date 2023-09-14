@@ -4,5 +4,4 @@ import { Component } from '@angular/core';
   selector: 'bs-root',
   template: 'Nebular Works!!!',
 })
-export class AppComponent {
-}
+export class AppComponent {}

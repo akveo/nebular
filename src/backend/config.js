@@ -7,8 +7,8 @@
 module.exports = {
   jwtSecret: 'MyS3cr3tK3Y',
   jwtSession: {
-    session: false
+    session: false,
   },
-  accessTokenExpiresIn : 60,
-  refreshTokenExpiresIn: 120
+  accessTokenExpiresIn: 60,
+  refreshTokenExpiresIn: 120,
 };

@@ -48,7 +48,10 @@ export class NgdPageTocComponent implements OnDestroy {
       });
   }
 
-  constructor(private activatedRoute: ActivatedRoute, private cd: ChangeDetectorRef) {}
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private cd: ChangeDetectorRef,
+  ) {}
 
   ngOnDestroy() {
     this.destroy$.next();

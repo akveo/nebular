@@ -63,7 +63,10 @@ export class NbChatCustomMessageDirective implements OnInit, OnDestroy {
     return this.nbCustomMessageNoStyles;
   }
 
-  constructor(public templateRef: TemplateRef<any>, protected customMessageService: NbChatCustomMessageService) {}
+  constructor(
+    public templateRef: TemplateRef<any>,
+    protected customMessageService: NbChatCustomMessageService,
+  ) {}
 
   ngOnInit() {
     if (!this._type) {

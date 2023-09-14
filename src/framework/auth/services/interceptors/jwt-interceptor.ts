@@ -8,7 +8,10 @@ import { NB_AUTH_TOKEN_INTERCEPTOR_FILTER } from '../../auth.options';
 
 @Injectable()
 export class NbAuthJWTInterceptor implements HttpInterceptor {
-  constructor(private injector: Injector, @Inject(NB_AUTH_TOKEN_INTERCEPTOR_FILTER) protected filter) {}
+  constructor(
+    private injector: Injector,
+    @Inject(NB_AUTH_TOKEN_INTERCEPTOR_FILTER) protected filter,
+  ) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     // do not intercept request whose urls are filtered by the injected filter

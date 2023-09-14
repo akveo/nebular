@@ -31,24 +31,25 @@ function prepareChats() {
 }
 
 describe('nb-chat', () => {
-
   chats = prepareChats();
 
   beforeAll((done) => {
     browser.get('#/chat/chat-test.component').then(() => done());
   });
 
-  chats.forEach(c => {
-
+  chats.forEach((c) => {
     it(`should display ${c.colorKey} chat with ${c.size} size`, () => {
       waitFor(`nb-chat:nth-child(${c.elementNumber})`);
 
-      element(by.css(`nb-chat:nth-child(${c.elementNumber})`)).getCssValue('height').then(height => {
-        expect(height).toEqual(c.height);
-      });
+      element(by.css(`nb-chat:nth-child(${c.elementNumber})`))
+        .getCssValue('height')
+        .then((height) => {
+          expect(height).toEqual(c.height);
+        });
 
       element(by.css(`nb-chat:nth-child(${c.elementNumber}) .header`))
-        .getCssValue('background-color').then(bgColor => {
+        .getCssValue('background-color')
+        .then((bgColor) => {
           expect(bgColor).toEqual(c.color);
         });
     });

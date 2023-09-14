@@ -10,7 +10,11 @@ declare const ga: any;
 export class NgdAnalytics {
   private enabled: boolean;
 
-  constructor(@Inject(NB_WINDOW) private window, private location: Location, private router: Router) {
+  constructor(
+    @Inject(NB_WINDOW) private window,
+    private location: Location,
+    private router: Router,
+  ) {
     this.enabled = this.window.location.href.indexOf('akveo.github.io') >= 0;
   }
 

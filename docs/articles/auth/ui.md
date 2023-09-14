@@ -19,7 +19,7 @@ Alongside with the strategies' configuration `AuthModule` also accepts a list of
 @NgModule({
   imports: [
    // ...
-    
+
    NbAuthModule.forRoot({
          strategies: [
            NbPasswordAuthStrategy.setup({
@@ -27,7 +27,7 @@ Alongside with the strategies' configuration `AuthModule` also accepts a list of
            }),
          ],
          forms: {},
-       }), 
+       }),
   ],
 });
 
@@ -36,13 +36,12 @@ Alongside with the strategies' configuration `AuthModule` also accepts a list of
 You can configure each specific form separately, here're the default values:
 
 ```typescript
-
 export interface NbAuthSocialLink {
-  link?: string,
-  url?: string,
-  target?: string,
-  title?: string,
-  icon?: string,
+  link?: string;
+  url?: string;
+  target?: string;
+  title?: string;
+  icon?: string;
 }
 
 const socialLinks: NbAuthSocialLink[] = [];
@@ -51,9 +50,10 @@ export const defaultSettings: any = {
   forms: {
     login: {
       redirectDelay: 500, // delay before redirect after a successful login, while success message is shown to the user
-      strategy: 'email',  // strategy id key.
-      rememberMe: true,   // whether to show or not the `rememberMe` checkbox
-      showMessages: {     // show/not show success/error messages
+      strategy: 'email', // strategy id key.
+      rememberMe: true, // whether to show or not the `rememberMe` checkbox
+      showMessages: {
+        // show/not show success/error messages
         success: true,
         error: true,
       },
@@ -109,6 +109,7 @@ export const defaultSettings: any = {
   },
 };
 ```
+
 <hr>
 
 ## Remove redirect delay
@@ -120,7 +121,7 @@ So, for instance, to remove the redirectDelay setting and disable the success me
 @NgModule({
   imports: [
    // ...
-    
+
    NbAuthModule.forRoot({
          strategies: [
            NbPasswordAuthStrategy.setup({
@@ -156,7 +157,7 @@ So, for instance, to remove the redirectDelay setting and disable the success me
              redirectDelay: 0,
            },
          },
-       }), 
+       }),
   ],
 });
 
@@ -176,7 +177,7 @@ const formSetting: any = {
 @NgModule({
   imports: [
    // ...
-    
+
    NbAuthModule.forRoot({
          strategies: [
            NbPasswordAuthStrategy.setup({
@@ -192,12 +193,14 @@ const formSetting: any = {
              redirectDelay: 0,
            },
          },
-       }), 
+       }),
   ],
 });
 
 ```
+
 The settings will be merged with the default values so no need to specify all of the keys here.
+
 <hr>
 
 ## Where to next

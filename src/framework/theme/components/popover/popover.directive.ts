@@ -196,7 +196,10 @@ export class NbPopoverDirective implements NbDynamicOverlayController, OnChanges
     return !!(this.dynamicOverlay && this.dynamicOverlay.isAttached);
   }
 
-  constructor(protected hostRef: ElementRef, protected dynamicOverlayHandler: NbDynamicOverlayHandler) {}
+  constructor(
+    protected hostRef: ElementRef,
+    protected dynamicOverlayHandler: NbDynamicOverlayHandler,
+  ) {}
 
   ngOnInit() {
     this.dynamicOverlayHandler.host(this.hostRef).componentType(this.popoverComponent);

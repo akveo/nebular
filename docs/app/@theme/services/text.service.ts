@@ -17,7 +17,10 @@ export class NgdTextService {
   private readonly TITLE_MASK = '^#{1,6}[^#]?(.+)\n';
   private readonly STRIP_HTML = '<\\/?[^>]+(>|$)';
 
-  constructor(private highlight: NgdHighlightService, private location: Location) {}
+  constructor(
+    private highlight: NgdHighlightService,
+    private location: Location,
+  ) {}
 
   mdToSectionsHTML(markdown: string): NgdMdSection[] {
     return this.splitIntoSections(markdown).map((section) => {

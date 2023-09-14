@@ -19,7 +19,10 @@ export class NgdVisibilityService {
   private readonly visibleElements = new Map<IntersectionObserverInit, Element[]>();
   private readonly unobserve$ = new Subject<{ target: Element; options: IntersectionObserverInit }>();
 
-  constructor(@Inject(PLATFORM_ID) platformId: Object, @Inject(NB_WINDOW) private window) {
+  constructor(
+    @Inject(PLATFORM_ID) platformId: Object,
+    @Inject(NB_WINDOW) private window,
+  ) {
     this.isBrowser = isPlatformBrowser(platformId);
     this.supportsIntersectionObserver = !!this.window.IntersectionObserver;
   }

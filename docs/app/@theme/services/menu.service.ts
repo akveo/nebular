@@ -19,7 +19,10 @@ interface IItemLink {
 
 @Injectable()
 export class NgdMenuService {
-  constructor(private structureService: NgdStructureService, private textService: NgdTextService) {}
+  constructor(
+    private structureService: NgdStructureService,
+    private textService: NgdTextService,
+  ) {}
 
   getPreparedMenu(basePath: string): any {
     return this.prepareMenu(this.structureService.getPreparedStructure(), { link: basePath });

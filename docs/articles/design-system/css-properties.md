@@ -38,12 +38,9 @@ $nb-themes: nb-register-theme(
 As a result, all theme properties will be placed under `body` element as custom css properties:
 
 ```css
-
 .nb-theme-default {
-  --color-basic-800: #2e384f,
-  --text-basic-color: var(--color-basic-800),
+  --color-basic-800: #2e384f, --text-basic-color: var(--color-basic-800);
 }
-
 ```
 
 When you change a theme, the theme class will be changed, resulting in a new set of css properties, and changing all the component styles dynamically, in the runtime.

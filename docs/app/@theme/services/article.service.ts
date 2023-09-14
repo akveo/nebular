@@ -6,7 +6,10 @@ import { NgdMdSection, NgdTextService } from './text.service';
 
 @Injectable()
 export class NgdArticleService {
-  constructor(private http: HttpClient, private textService: NgdTextService) {}
+  constructor(
+    private http: HttpClient,
+    private textService: NgdTextService,
+  ) {}
 
   getArticle(source: string): Observable<NgdMdSection[]> {
     return this.http.get(`articles/${source}`, { responseType: 'text' }).pipe(

@@ -8,6 +8,7 @@ So to deploy the app you basically need two simple steps:
 - Copy the output from the `dist` folder under a web-server of your choice.
 
 More details on how to setup your web-server to better serve the application can be found on Angular Documentation website, under <a href="https://angular.io/guide/deployment#server-configuration" target="_blank">Server Configuration</a> section.
+
 <hr>
 
 ## Related Articles

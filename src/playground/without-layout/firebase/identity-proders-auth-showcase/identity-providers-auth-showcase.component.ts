@@ -15,7 +15,10 @@ export class IdentityProvidersAuthShowcaseComponent {
   isAuthenticated$: Observable<boolean>;
   data$: Observable<any>;
 
-  constructor(private firebaseApi: FirebaseAPIService, private authService: NbAuthService) {
+  constructor(
+    private firebaseApi: FirebaseAPIService,
+    private authService: NbAuthService,
+  ) {
     this.userToken$ = this.authService.onTokenChange();
     this.isAuthenticated$ = this.authService.onAuthenticationChange();
   }

@@ -238,7 +238,10 @@ export class NbChatMessageComponent {
    */
   @Input() customMessageData: any;
 
-  constructor(protected domSanitizer: DomSanitizer, protected customMessageService: NbChatCustomMessageService) {}
+  constructor(
+    protected domSanitizer: DomSanitizer,
+    protected customMessageService: NbChatCustomMessageService,
+  ) {}
 
   getInitials(): string {
     if (this.sender) {

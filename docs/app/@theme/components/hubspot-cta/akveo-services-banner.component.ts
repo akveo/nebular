@@ -30,7 +30,10 @@ export class AkveoServicesBannerComponent implements OnInit {
 
   @ViewChild('wrapper', { static: true }) wrapper: ElementRef;
 
-  constructor(@Inject(NB_DOCUMENT) private document, @Inject(NB_WINDOW) private window) {}
+  constructor(
+    @Inject(NB_DOCUMENT) private document,
+    @Inject(NB_WINDOW) private window,
+  ) {}
 
   ngOnInit() {
     if (this.window?.hbspt?.cta?.load) {

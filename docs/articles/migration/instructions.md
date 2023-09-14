@@ -1,7 +1,7 @@
 # Nebular Migration Instructions
 
 Nebular follows [semantic versioning](https://semver.org/) strategy for the release process.
-This means that every Nebular version number could be broken down into the *major.minor.patch* parts, where each of them means:
+This means that every Nebular version number could be broken down into the _major.minor.patch_ parts, where each of them means:
 
 - **major** - contains significant new features, as well as possible breaking changes. Still each new major version - is an increment of the previous version, not a complete rework or new product.
 - **minor** - contains new small features and bug fixes. Minor versions are backward-compatible.
@@ -16,10 +16,9 @@ Installation of the minor and patch version in most of the times won't require a
 You may also specify all required Nebular packages during the installation `ng update @nebular/{theme,auth,security}@4.0.1`
 
 2. Check for npm peer-dependency warning, update accordingly.
-To update Angular, follow [offician Angular upgrage guide](https://update.angular.io/).
+   To update Angular, follow [offician Angular upgrage guide](https://update.angular.io/).
 
-3. Check [Nebular CHANGELOG](https://github.com/akveo/nebular/blob/master/CHANGELOG.md) for list of changes and follow migration instructions, if any. 
-
+3. Check [Nebular CHANGELOG](https://github.com/akveo/nebular/blob/master/CHANGELOG.md) for list of changes and follow migration instructions, if any.
 
 ## Related Articles
 

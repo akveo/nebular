@@ -1,4 +1,4 @@
-# Security 
+# Security
 
 Security is an important part of any adult web application. It is a common task to manage user access to particular resources.
 Unlike the `Nebular Auth`, which provides a way to `authenticate` a user, `Nebular Security` helps you to `authorize` a user to access some of the application resources.
@@ -15,15 +15,14 @@ Unlike the `Nebular Auth`, which provides a way to `authenticate` a user, `Nebul
 ## What's included
 
 - ACL roles/permissions/resources configuration
-- `RoleProvider` - user role determination, authentication agnostic 
+- `RoleProvider` - user role determination, authentication agnostic
 - `NbAccessChecker` - a service that checks whether access is granted or not
 - `*nbIsGranted` - conditional directive to manager your content visibility
 
-
-- *Security Decorator* - a decorator that manages access to a particular method, coming soon.
+- _Security Decorator_ - a decorator that manages access to a particular method, coming soon.
 
 <hr>
 
 ## Related Articles
 
-- Security Module [Installation](docs/security/installation) 
+- Security Module [Installation](docs/security/installation)

@@ -69,7 +69,10 @@ export class NbCalendarYearPickerComponent<D> implements OnChanges {
 
   years: D[][];
 
-  constructor(protected dateService: NbDateService<D>, protected yearModelService: NbCalendarYearModelService<D>) {}
+  constructor(
+    protected dateService: NbDateService<D>,
+    protected yearModelService: NbCalendarYearModelService<D>,
+  ) {}
 
   ngOnChanges() {
     this.years = this.yearModelService.getViewYears(this.year);
