@@ -24,11 +24,6 @@ import { AlertTestComponent } from './alert-test.component';
     AlertSizesComponent,
     AlertTestComponent,
   ],
-  imports: [
-    CommonModule,
-    NbAlertModule,
-    NbCardModule,
-    AlertRoutingModule,
-  ],
+  imports: [CommonModule, NbAlertModule, NbCardModule, AlertRoutingModule],
 })
 export class AlertModule {}

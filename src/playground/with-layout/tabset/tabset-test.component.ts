@@ -8,7 +8,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'nb-tabset-test',
+  selector: 'npg-tabset-test',
   styles: [
     `
       nb-tabset {
@@ -76,28 +76,16 @@ import { Router } from '@angular/router';
       <nb-tab tabTitle="Tab #1" badgeText="29">
         <span>Content #1</span>
       </nb-tab>
-      <nb-tab tabTitle="Tab #2"
-        badgeText="29"
-        badgeStatus="info"
-        badgePosition="top left">
+      <nb-tab tabTitle="Tab #2" badgeText="29" badgeStatus="info" badgePosition="top left">
         <span>Content #2</span>
       </nb-tab>
-      <nb-tab tabTitle="Tab #3"
-        badgeText="29"
-        badgeStatus="success"
-        badgePosition="bottom right">
+      <nb-tab tabTitle="Tab #3" badgeText="29" badgeStatus="success" badgePosition="bottom right">
         <span>Content #3</span>
       </nb-tab>
-      <nb-tab tabTitle="Tab #4"
-        badgeText="29"
-        badgeStatus="danger"
-        badgePosition="bottom left">
+      <nb-tab tabTitle="Tab #4" badgeText="29" badgeStatus="danger" badgePosition="bottom left">
         <span>Content #4</span>
       </nb-tab>
-      <nb-tab tabTitle="Tab #5"
-        badgeText="29"
-        badgeStatus="warning"
-        badgePosition="bottom right">
+      <nb-tab tabTitle="Tab #5" badgeText="29" badgeStatus="warning" badgePosition="bottom right">
         <span>Content #5</span>
       </nb-tab>
     </nb-tabset>
@@ -105,28 +93,16 @@ import { Router } from '@angular/router';
       <nb-tab tabTitle="Tab #1" badgeText="29">
         <span>Content #1</span>
       </nb-tab>
-      <nb-tab tabTitle="Tab #2"
-        badgeText="29"
-        badgeStatus="info"
-        badgePosition="bottom right">
+      <nb-tab tabTitle="Tab #2" badgeText="29" badgeStatus="info" badgePosition="bottom right">
         <span>Content #2</span>
       </nb-tab>
-      <nb-tab tabTitle="Tab #3"
-        badgeText="29"
-        badgeStatus="success"
-        badgePosition="top left">
+      <nb-tab tabTitle="Tab #3" badgeText="29" badgeStatus="success" badgePosition="top left">
         <span>Content #3</span>
       </nb-tab>
-      <nb-tab tabTitle="Tab #4"
-        badgeText="29"
-        badgeStatus="danger"
-        badgePosition="bottom left">
+      <nb-tab tabTitle="Tab #4" badgeText="29" badgeStatus="danger" badgePosition="bottom left">
         <span>Content #4</span>
       </nb-tab>
-      <nb-tab tabTitle="Tab #5"
-        badgeText="29"
-        badgeStatus="warning"
-        badgePosition="bottom right">
+      <nb-tab tabTitle="Tab #5" badgeText="29" badgeStatus="warning" badgePosition="bottom right">
         <span>Content #5</span>
       </nb-tab>
     </nb-tabset>
@@ -147,9 +123,7 @@ import { Router } from '@angular/router';
   `,
 })
 export class TabsetTestComponent {
-
-  constructor(private router: Router) {
-  }
+  constructor(private router: Router) {}
 
   changeTab($event: any) {
     this.router.navigate(['tabset', 'tabset-test.component', $event.route]);

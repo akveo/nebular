@@ -6,6 +6,7 @@ Complete set of all component theme variables and theme variables they use could
 #### Radio:
 
 Renamed:
+
 - `radio-bg` -> `radio-border-color`, `radio-inner-circle-color`, `radio-[status]-border-color`, `radio-[status]-inner-circle-color`
 - `radio-fg` -> `radio-text-color`
 - `radio-size` -> `radio-width, radio-height`
@@ -15,6 +16,7 @@ Renamed:
 - `radio-indicator` -> `radio-circle`
 
 Removed:
+
 - `radio-checked-bg`
 - `radio-checked-size`
 - `radio-checked-border-size`
@@ -29,6 +31,7 @@ Removed:
 #### Checkbox:
 
 Properties `checkbox-bg`, `checkbox-checked-bg` and `checkbox-disabled-bg` replaced with:
+
 - `checkbox-disabled-background-color`
 - `checkbox-[status]-background-color`
 - `checkbox-[status]-checked-background-color`
@@ -40,6 +43,7 @@ Properties `checkbox-bg`, `checkbox-checked-bg` and `checkbox-disabled-bg` repla
 Property `checkbox-size` splited into `checkbox-height`, `checkbox-width`.
 
 Removed:
+
 - `checkbox-checked-size`
 - `checkbox-checked-border-size`
 - `checkbox-disabled-size`
@@ -48,6 +52,7 @@ Removed:
 `checkbox-border-size` -> `checkbox-border-width`
 
 Properties `checkbox-border-color`, `checkbox-checked-border-color`, `checkbox-disabled-border-color` replaced with:
+
 - `checkbox-disabled-border-color`
 - `checkbox-[status]-border-color`
 - `checkbox-[status]-checked-border-color`
@@ -56,6 +61,7 @@ Properties `checkbox-border-color`, `checkbox-checked-border-color`, `checkbox-d
 - `checkbox-[status]-active-border-color`
 
 Properties `checkbox-checkmark`, `checkbox-checked-checkmark`, `checkbox-disabled-checkmark` replaced with:
+
 - `checkbox-disabled-checkmark-color`
 - `checkbox-[status]-checked-checkmark-color`
 - `checkbox-[status]-indeterminate-checkmark-color`
@@ -63,6 +69,7 @@ Properties `checkbox-checkmark`, `checkbox-checked-checkmark`, `checkbox-disable
 #### Input:
 
 Renamed:
+
 - `form-control-border-width` -> `input-border-width`
 - `form-control-border-radius` -> `input-rectangle-border-radius`
 - `form-control-semi-round-border-radius` -> `input-semi-round-border-radius`
@@ -87,6 +94,7 @@ Renamed:
 - `form-control-border-type` -> `input-border-style`
 
 Removed:
+
 - `form-control-label-font-weight`
 - `form-control-feedback-font-size`
 - `form-control-feedback-font-weight`
@@ -94,6 +102,7 @@ Removed:
 #### Tooltip:
 
 Renamed:
+
 - `tooltip-bg` -> `tooltip-background-color`
 - `tooltip-fg` -> `tooltip-text-color`
 - `tooltip-font-size` -> `tooltip-text-font-size`
@@ -107,6 +116,7 @@ Renamed:
 User:
 
 Renamed:
+
 - `user-font-size` -> `user-[size]-initials-text-font-size`, `user-[size]-name-text-font-size`, `user-[size]-title-text-font-size`
 - `user-line-height` -> `user-[size]-initials-text-line-height`, `user-[size]-name-text-line-height`, `user-[size]-title-text-line-height`
 - `user-bg` -> `user-picture-box-background-color`
@@ -121,6 +131,7 @@ Renamed:
 #### Tabset:
 
 Renamed:
+
 - `tabs-font-family` -> `tabset-tab-text-font-family`
 - `tabs-font-size` -> `tabset-tab-text-font-size`
 - `tabs-content-font-family` -> `tabset-content-text-font-family`
@@ -139,6 +150,7 @@ Renamed:
 - `tabs-icon-only-max-width` -> `tabset-tab-text-hide-breakpoint`
 
 Removed:
+
 - `tabs-active-font-weight`
 - `tabs-selected-second-color`
 - `tabs-selected-degrees`
@@ -146,6 +158,7 @@ Removed:
 #### Route Tabset:
 
 Following properties were renamed:
+
 - `route-tabs-font-family` -> `route-tabset-tab-text-font-family`
 - `route-tabs-font-size` -> `route-tabset-tab-text-font-size`
 - `route-tabs-active-bg` -> `route-tabset-tab-selected-background-color`
@@ -163,6 +176,7 @@ Following properties were renamed:
 #### Card:
 
 Renamed:
+
 - `card-font-size` -> `card-text-font-size`
 - `card-font-weight` -> `card-text-font-weight`
 - `card-line-height` -> `card-text-line-height`
@@ -184,6 +198,7 @@ Renamed:
 - `card-height-xlarge` -> `card-height-giant`
 
 Removed:
+
 - `card-fg`
 - `card-fg-text`
 - `card-fg-heading`
@@ -199,6 +214,7 @@ Removed:
 #### Spinner:
 
 Renamed:
+
 - `spinner-bg` -> `spinner-background-color`
 - `spinner-circle-bg` -> `spinner-circle-filled-color`
 - `spinner-fg` -> `spinner-text-color`
@@ -214,6 +230,7 @@ Renamed:
 - `spinner-xlarge` -> `spinner-height-giant`
 
 Removed:
+
 - `spinner-xxsmall`
 - `spinner-xxlarge`
 - `spinner-disabled-bg`
@@ -223,6 +240,7 @@ Removed:
 #### Button:
 
 Renamed:
+
 - `btn-fg` -> `button-filled-[status]-text-color`, `button-outline-[status]-[state?]-text-color`, `button-ghost-[status]-[state?]-text-color`, `button-hero-[status]-text-color`
 - `btn-font-family` -> `button-text-font-family`
 - `btn-line-height` -> `button-[size]-text-line-height`
@@ -252,6 +270,7 @@ Renamed:
 - `btn-outline-focus-fg` -> `button-outline-[status]-focus-border-color`
 
 Removed:
+
 - `btn-group-bg`
 - `btn-group-fg`
 - `btn-group-separator`
@@ -268,6 +287,7 @@ Removed:
 #### Progress:
 
 Renamed:
+
 - `progress-bar-height-xlg` -> `progress-bar-giant-height`
 - `progress-bar-height-lg` -> `progress-bar-large-height`
 - `progress-bar-height` -> `progress-bar-medium-height`
@@ -289,11 +309,13 @@ Renamed:
 - `progress-bar-danger-bg` -> `progress-bar-[status]-background-color`
 
 Removed:
+
 - `progress-bar-default-bg`
 
 #### Accordion:
 
 Renamed:
+
 - `accordion-header-font-family` -> `accordion-header-text-font-family`
 - `accordion-header-font-size` -> `accordion-header-text-font-size`
 - `accordion-header-font-weight` -> `accordion-header-text-font-weight`
@@ -308,11 +330,13 @@ Renamed:
 - `accordion-item-shadow` -> `accordion-shadow`
 
 Removed:
+
 - `accordion-separator`
 
 #### Calendar:
 
 Renamed:
+
 - `calendar-header-title-font-size` -> `calendar-header-title-text-font-size`
 - `calendar-header-title-font-weight` -> `calendar-header-title-text-font-weight`
 - `calendar-header-sub-title-font-size` -> `calendar-header-sub-title-text-font-size`
@@ -331,18 +355,21 @@ Renamed:
 - `calendar-range-bg-in-range` -> `calendar-in-range-background-color`
 
 Removed:
+
 - `calendar-inactive-opacity`
 - `calendar-disabled-opacity`
 
 #### Sidebar:
 
 Renamed:
+
 - `sidebar-fg` -> `sidebar-text-color`
 - `sidebar-bg` -> `sidebar-background-color`
 
 #### Datepicker:
 
 Renamed:
+
 - `datepicker-fg` -> `datepicker-text-color`
 - `datepicker-bg` -> `datepicker-background-color`
 - `datepicker-border` -> `datepicker-border-color`
@@ -351,6 +378,7 @@ Renamed:
 #### Layout:
 
 Renamed:
+
 - `header-font-family` -> `header-text-font-family`
 - `header-font-size` -> `header-text-font-size`
 - `header-line-height` -> `header-text-line-height`
@@ -370,6 +398,7 @@ Renamed:
 #### Action:
 
 Renamed:
+
 - `actions-font-size` -> `actions-[size]-text-font-size`
 - `actions-font-family` -> `actions-text-font-family`
 - `actions-line-height` -> `actions-text-line-height`
@@ -384,6 +413,7 @@ Renamed:
 #### Stepper:
 
 Renamed:
+
 - `stepper-index-size` -> `stepper-step-index-width`
 - `stepper-label-font-size` -> `stepper-step-text-font-size`
 - `stepper-label-font-weight` -> `stepper-step-text-font-weight`
@@ -392,6 +422,7 @@ Renamed:
 - `stepper-step-padding` -> `stepper-step-content-padding`
 
 Removed:
+
 - `stepper-accent-color`
 - `stepper-completed-icon-size`
 - `stepper-completed-icon-weight`
@@ -399,6 +430,7 @@ Removed:
 #### Alert:
 
 Renamed:
+
 - `alert-font-size` -> `alert-text-font-size`
 - `alert-line-height` -> `alert-text-line-height`
 - `alert-font-weight` -> `alert-text-font-weight`
@@ -420,6 +452,7 @@ Renamed:
 - `alert-margin` -> `alert-bottom-margin`
 
 Removed:
+
 - `alert-outline-fg`
 - `alert-active-bg`
 - `alert-height-xxsmall`
@@ -429,6 +462,7 @@ Removed:
 #### Badge:
 
 Renamed:
+
 - `badge-fg-text` -> `badge-[status]-text-color`
 - `badge-primary-bg-color` -> `badge-primary-background-color`
 - `badge-success-bg-color` -> `badge-success-background-color`
@@ -439,14 +473,15 @@ Renamed:
 #### Tree-grid:
 
 Renamed:
+
 - `tree-grid-header-bg` -> `tree-grid-header-background`
 - `tree-grid-footer-bg` -> `tree-grid-footer-background`
 - `tree-grid-row-bg` -> `tree-grid-row-background`
 - `tree-grid-row-bg-even` -> `tree-grid-row-even-background`
 - `tree-grid-row-hover-bg` -> `tree-grid-row-hover-background`
 
-
 Removed:
+
 - `tree-grid-sort-header-button-font-weight`
 - `tree-grid-sort-header-button-color`
 - `tree-grid-icon-color`
@@ -454,6 +489,7 @@ Removed:
 #### Select:
 
 Renamed:
+
 - `select-border-width` -> `select-[appearance]-border-width`
 - `select-max-height` -> `select-options-list-max-height`
 - `select-bg` -> `select-[appearance]-background-color`
@@ -461,6 +497,7 @@ Renamed:
 - `select-option-padding` -> `select-option-[appearance]-[size]-padding`
 
 Removed:
+
 - `select-checkmark-color`
 - `select-checkbox-color`
 - `select-option-disabled-opacity`
@@ -468,6 +505,7 @@ Removed:
 #### Chat:
 
 Removed:
+
 - `chat-font-size` -> `chat-text-font-size`
 - `chat-fg` -> `chat-text-color`
 - `chat-bg` -> `chat-background-color`
@@ -494,6 +532,7 @@ Removed:
 - `chat-danger-bg` -> `chat-danger-background-color`
 
 Removed:
+
 - `chat-fg-text`
 - `chat-height-xxsmall`
 - `chat-height-xxlarge`
@@ -506,10 +545,10 @@ Removed:
 - `chat-disabled-fg`
 - `chat-active-bg`
 
-
 #### Toastr:
 
 Renamed:
+
 - `toastr-bg` -> `toastr-background`
 - `toastr-fg` -> `toastr-text-color`
 - `toastr-border` -> `toastr-border-style`, `toastr-border-width`
@@ -519,6 +558,7 @@ Renamed:
 #### Search:
 
 Renamed:
+
 - `search-bg` -> `search-background-color`
 - `search-bg-secondary` -> `search-extra-background-color`
 - `search-text` -> `search-text-color`
@@ -527,12 +567,14 @@ Renamed:
 - `search-placeholder` -> `search-placeholder-text-color`
 
 Removed:
+
 - `search-btn-open-fg`
 - `search-btn-close-fg`
 
 #### Menu:
 
 Removed:
+
 - `menu-font-family` -> `menu-text-font-family`
 - `menu-font-size` -> `menu-text-font-size`
 - `menu-font-weight` -> `menu-text-font-weight`
@@ -554,8 +596,8 @@ Removed:
 - `menu-icon-color` -> `menu-item-icon-color`
 - `menu-icon-active-color` -> `menu-item-icon-active-color`
 
-
 Removed:
+
 - `menu-submenu-active-shadow`
 - `menu-active-font-weight`
 - `menu-submenu-item-container-padding`
@@ -566,6 +608,7 @@ Removed:
 #### Context menu:
 
 Removed:
+
 - `context-menu-fg`
 - `context-menu-bg`
 - `context-menu-active-fg`
@@ -575,9 +618,9 @@ Removed:
 #### Popover:
 
 Renamed:
+
 - `popover-fg` -> `popover-text-color`
 - `popover-bg` -> `popover-background-color`
-- `popover-border` -> `popover-border-color`                                                                                                                                                                                                                                 	| `outline-width`, `outline-color`                                                                                                                                                                                                        	| Elements outline styles.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      	|
-
+- `popover-border` -> `popover-border-color` | `outline-width`, `outline-color` | Elements outline styles. |
 
 [Back to migration guide](https://akveo.github.io/nebular/docs/migration/350400-migration).

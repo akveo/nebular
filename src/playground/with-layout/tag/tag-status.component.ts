@@ -10,5 +10,4 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   templateUrl: './tag-status.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TagStatusComponent {
-}
+export class TagStatusComponent {}

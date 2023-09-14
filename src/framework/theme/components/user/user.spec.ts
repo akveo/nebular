@@ -12,7 +12,7 @@ const TITLE_SELECTOR = '.user-title';
 const INITIALS_SELECTOR = '.user-picture.initials';
 const PICTURE_SELECTOR = '.user-picture.image';
 const BADGE_SELECTOR = 'nb-badge';
-const COMPONENT_SIZES: NbComponentSize[] = [ 'tiny', 'small', 'medium', 'large', 'giant' ];
+const COMPONENT_SIZES: NbComponentSize[] = ['tiny', 'small', 'medium', 'large', 'giant'];
 
 describe('NbUserComponent', () => {
   let fixture: ComponentFixture<NbUserComponent>;
@@ -21,8 +21,8 @@ describe('NbUserComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ NbThemeModule.forRoot(), NbUserModule ],
-      providers: [ NbLayoutDirectionService ],
+      imports: [NbThemeModule.forRoot(), NbUserModule],
+      providers: [NbLayoutDirectionService],
     });
 
     fixture = TestBed.createComponent(NbUserComponent);
@@ -235,7 +235,7 @@ describe('NbUserComponent', () => {
 
   it(`only one size property should be true`, () => {
     const currentSize: NbComponentSize = 'tiny';
-    const otherSizes = COMPONENT_SIZES.filter(s => s !== currentSize);
+    const otherSizes = COMPONENT_SIZES.filter((s) => s !== currentSize);
 
     userComponent.size = currentSize;
     expect(userComponent[currentSize]).toEqual(true);

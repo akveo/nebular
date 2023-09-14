@@ -16,7 +16,7 @@ export const routes: Routes = [
   },
   {
     path: 'auth',
-    loadChildren: () => import('./auth/smart-home-auth.module').then(m => m.AuthModule),
+    loadChildren: () => import('./auth/smart-home-auth.module').then((m) => m.AuthModule),
   },
 ];
 
@@ -24,5 +24,4 @@ export const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class AppRouting {
-}
+export class AppRouting {}

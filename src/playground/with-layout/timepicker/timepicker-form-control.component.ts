@@ -8,15 +8,12 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
 @Component({
-  selector: 'nb-timepicker-form-control',
+  selector: 'npg-timepicker-form-control',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <nb-card size="large">
       <nb-card-body>
-        <input nbInput
-               type="text"
-               [formControl]="formControl"
-               [nbTimepicker]="timepicker"/>
+        <input nbInput type="text" [formControl]="formControl" [nbTimepicker]="timepicker" />
         <nb-timepicker #timepicker></nb-timepicker>
       </nb-card-body>
     </nb-card>

@@ -14,7 +14,6 @@ import { trees } from './trees-list';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TagInputWithAutocompleteComponent {
-
   tags: Set<string> = new Set<string>();
   options: string[] = trees;
 
@@ -28,7 +27,7 @@ export class TagInputWithAutocompleteComponent {
   onTagAdd(value: string): void {
     if (value) {
       this.tags.add(value);
-      this.options = this.options.filter(o => o !== value);
+      this.options = this.options.filter((o) => o !== value);
     }
     this.tagInput.nativeElement.value = '';
   }

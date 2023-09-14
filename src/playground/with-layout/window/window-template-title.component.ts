@@ -21,12 +21,9 @@ export class WindowTemplateTitleComponent {
   constructor(private windowService: NbWindowService) {}
 
   openWindow() {
-    this.windowService.open(
-      this.contentTemplate,
-      {
-        titleTemplate: this.titleTemplate,
-        titleTemplateContext: { text: 'some text to pass into template' },
-      },
-    );
+    this.windowService.open(this.contentTemplate, {
+      titleTemplate: this.titleTemplate,
+      titleTemplateContext: { text: 'some text to pass into template' },
+    });
   }
 }

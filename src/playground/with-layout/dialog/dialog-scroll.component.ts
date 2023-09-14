@@ -3,7 +3,7 @@ import { NbDialogService } from '@nebular/theme';
 import { ScrollDialogComponent } from './components/scroll-dialog.component';
 
 @Component({
-  selector: 'nb-dialog-scroll',
+  selector: 'npg-dialog-scroll',
   template: `
     <button nbButton (click)="openWithScroll()">With scroll</button>
     <button nbButton (click)="openWithoutScroll()">Without scroll</button>
@@ -11,8 +11,7 @@ import { ScrollDialogComponent } from './components/scroll-dialog.component';
   styleUrls: ['./dialog-common.scss'],
 })
 export class DialogScrollComponent {
-  constructor(private dialogService: NbDialogService) {
-  }
+  constructor(private dialogService: NbDialogService) {}
 
   openWithScroll() {
     this.open(true);

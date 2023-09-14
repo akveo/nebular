@@ -7,14 +7,15 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
-  selector: 'nb-tabset-disabled',
+  selector: 'npg-tabset-disabled',
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './tabset-disabled.component.html',
-  styles: [`
-    :host nb-tab {
-      padding: 1.25rem;
-    }
-  `],
+  styles: [
+    `
+      :host nb-tab {
+        padding: 1.25rem;
+      }
+    `,
+  ],
 })
-export class TabsetDisabledComponent {
-}
+export class TabsetDisabledComponent {}

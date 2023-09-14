@@ -14,7 +14,6 @@ import { NbAlertModule, NbButtonModule, NbCheckboxModule, NbInputModule } from '
 
 import { LoginComponent } from './login/login.component';
 
-
 @NgModule({
   imports: [
     CommonModule,
@@ -27,9 +26,6 @@ import { LoginComponent } from './login/login.component';
 
     NbAuthModule,
   ],
-  declarations: [
-    LoginComponent,
-  ],
+  declarations: [LoginComponent],
 })
-export class AuthModule {
-}
+export class AuthModule {}

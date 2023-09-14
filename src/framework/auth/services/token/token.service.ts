@@ -10,7 +10,6 @@ import { NbAuthToken } from './token';
  */
 @Injectable()
 export class NbTokenService {
-
   protected token$: BehaviorSubject<NbAuthToken> = new BehaviorSubject(null);
 
   constructor(protected tokenStorage: NbTokenStorage) {
@@ -22,11 +21,10 @@ export class NbTokenService {
    * @returns {Observable<NbAuthToken>}
    */
   tokenChange(): Observable<NbAuthToken> {
-    return this.token$
-      .pipe(
-        filter(value => !!value),
-        share(),
-      );
+    return this.token$.pipe(
+      filter((value) => !!value),
+      share(),
+    );
   }
 
   /**

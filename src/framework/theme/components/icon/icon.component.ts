@@ -114,7 +114,6 @@ export interface NbIconConfig {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NbIconComponent implements NbIconConfig, OnChanges, OnInit {
-
   protected iconDef;
   protected prevClasses = [];
 

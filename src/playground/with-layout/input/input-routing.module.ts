@@ -5,7 +5,7 @@
  */
 
 import { NgModule } from '@angular/core';
-import { RouterModule, Route} from '@angular/router';
+import { RouterModule, Route } from '@angular/router';
 import { InputColorsComponent } from './input-colors.component';
 import { InputFullWidthComponent } from './input-full-width.component';
 import { InputShapesComponent } from './input-shapes.component';
@@ -46,7 +46,7 @@ const routes: Route[] = [
 ];
 
 @NgModule({
-  imports: [ RouterModule.forChild(routes) ],
-  exports: [ RouterModule ],
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule],
 })
 export class InputRoutingModule {}

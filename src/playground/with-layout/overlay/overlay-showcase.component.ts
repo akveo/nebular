@@ -2,7 +2,7 @@ import { Component, OnInit, TemplateRef, ViewChild, ViewContainerRef } from '@an
 import { NbOverlayRef, NbOverlayService, NbPositionBuilderService, NbTemplatePortal } from '@nebular/theme';
 
 @Component({
-  selector: 'nb-overlay-showcase',
+  selector: 'npg-overlay-showcase',
   template: `
     <ng-template #overlay>
       <nb-card>
@@ -19,10 +19,11 @@ export class OverlayShowcaseComponent implements OnInit {
   @ViewChild('overlay') overlayTemplate: TemplateRef<any>;
   protected ref: NbOverlayRef;
 
-  constructor(protected overlay: NbOverlayService,
-              protected positionBuilder: NbPositionBuilderService,
-              protected vcr: ViewContainerRef) {
-  }
+  constructor(
+    protected overlay: NbOverlayService,
+    protected positionBuilder: NbPositionBuilderService,
+    protected vcr: ViewContainerRef,
+  ) {}
 
   ngOnInit() {
     const positionStrategy = this.positionBuilder.global().centerHorizontally().centerVertically();

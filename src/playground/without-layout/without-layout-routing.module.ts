@@ -5,7 +5,7 @@
  */
 
 import { NgModule } from '@angular/core';
-import { RouterModule, Route} from '@angular/router';
+import { RouterModule, Route } from '@angular/router';
 import { PlaygroundBaseComponent } from './playground-base.component';
 
 const routes: Route[] = [
@@ -15,54 +15,54 @@ const routes: Route[] = [
     children: [
       {
         path: 'context-menu',
-        loadChildren: () => import('./context-menu/context-menu.module').then(m => m.ContextMenuModule),
+        loadChildren: () => import('./context-menu/context-menu.module').then((m) => m.ContextMenuModule),
       },
       {
         path: 'layout',
-        loadChildren: () => import('./layout/layout.module').then(m => m.LayoutModule),
+        loadChildren: () => import('./layout/layout.module').then((m) => m.LayoutModule),
       },
       {
         path: 'scroll',
-        loadChildren: () => import('./scroll/scroll.module').then(m => m.ScrollModule),
+        loadChildren: () => import('./scroll/scroll.module').then((m) => m.ScrollModule),
       },
       {
         path: 'search',
-        loadChildren: () => import('./search/search.module').then(m => m.SearchModule),
+        loadChildren: () => import('./search/search.module').then((m) => m.SearchModule),
       },
       {
         path: 'sidebar',
-        loadChildren: () => import('./sidebar/sidebar.module').then(m => m.SidebarModule),
+        loadChildren: () => import('./sidebar/sidebar.module').then((m) => m.SidebarModule),
       },
       {
         path: 'menu',
-        loadChildren: () => import('./menu/menu-test.module').then(m => m.MenuTestModule),
+        loadChildren: () => import('./menu/menu-test.module').then((m) => m.MenuTestModule),
       },
       {
         path: 'user',
-        loadChildren: () => import('./user/user-test.module').then(m => m.UserTestModule),
+        loadChildren: () => import('./user/user-test.module').then((m) => m.UserTestModule),
       },
       {
         path: 'azure',
-        loadChildren: () => import('./azure/azure.module').then(m => m.AzurePlaygroundModule),
+        loadChildren: () => import('./azure/azure.module').then((m) => m.AzurePlaygroundModule),
       },
       {
         path: 'auth',
-        loadChildren: () => import('./auth/auth.module').then(m => m.AuthPlaygroundModule),
+        loadChildren: () => import('./auth/auth.module').then((m) => m.AuthPlaygroundModule),
       },
       {
         path: 'firebase',
-        loadChildren: () => import('./firebase/firebase.module').then(m => m.FirebasePlaygroundModule),
+        loadChildren: () => import('./firebase/firebase.module').then((m) => m.FirebasePlaygroundModule),
       },
       {
         path: 'smart-home',
-        loadChildren: () => import('./smart-home/app.module').then(m => m.AppModule),
+        loadChildren: () => import('./smart-home/app.module').then((m) => m.AppModule),
       },
     ],
   },
 ];
 
 @NgModule({
-  imports: [ RouterModule.forChild(routes) ],
-  exports: [ RouterModule ],
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule],
 })
 export class WithoutLayoutRoutingModule {}

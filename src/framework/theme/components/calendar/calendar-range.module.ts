@@ -12,7 +12,6 @@ import { NbCalendarRangeYearCellComponent } from './calendar-range-year-cell.com
 import { NbCalendarRangeMonthCellComponent } from './calendar-range-month-cell.component';
 import { NbBaseCalendarModule } from './base-calendar.module';
 
-
 @NgModule({
   imports: [NbBaseCalendarModule],
   exports: [NbCalendarRangeComponent],
@@ -22,11 +21,5 @@ import { NbBaseCalendarModule } from './base-calendar.module';
     NbCalendarRangeYearCellComponent,
     NbCalendarRangeMonthCellComponent,
   ],
-  entryComponents: [
-    NbCalendarRangeDayCellComponent,
-    NbCalendarRangeMonthCellComponent,
-    NbCalendarRangeYearCellComponent,
-  ],
 })
-export class NbCalendarRangeModule {
-}
+export class NbCalendarRangeModule {}

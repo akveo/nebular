@@ -1,7 +1,7 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
-  selector: 'nb-accordion-multi',
+  selector: 'npg-accordion-multi',
   templateUrl: './accordion-multi.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

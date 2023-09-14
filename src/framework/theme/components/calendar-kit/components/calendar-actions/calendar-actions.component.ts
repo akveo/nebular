@@ -3,21 +3,12 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from 
 @Component({
   selector: 'nb-calendar-actions',
   template: `
-    <button
-      *ngIf="showCurrentTimeButton"
-      nbButton
-      ghost
-      status="primary"
-      size="small"
-      (click)="setCurrentTime.emit()">
-      {{ currentTimeText }}</button>
-    <button
-      class="apply-text-button"
-      nbButton
-      status="primary"
-      size="small"
-      (click)="saveValue.emit()">
-      {{ applyText }}</button>
+    <button *ngIf="showCurrentTimeButton" nbButton ghost status="primary" size="small" (click)="setCurrentTime.emit()">
+      {{ currentTimeText }}
+    </button>
+    <button class="apply-text-button" nbButton status="primary" size="small" (click)="saveValue.emit()">
+      {{ applyText }}
+    </button>
   `,
   styleUrls: ['./calendar-actions.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -27,10 +18,10 @@ export class NbCalendarActionsComponent {
     if (value) {
       this._applyButtonText = value;
     }
-  };
+  }
   get applyText() {
     return this._applyButtonText;
-  };
+  }
   protected _applyButtonText = 'ok';
 
   @Input() set currentTimeButtonText(value: string) {
@@ -40,7 +31,7 @@ export class NbCalendarActionsComponent {
   }
   get currentTimeText() {
     return this._currentTimeButtonText;
-  };
+  }
   _currentTimeButtonText = 'now';
 
   @Input() showCurrentTimeButton: boolean;

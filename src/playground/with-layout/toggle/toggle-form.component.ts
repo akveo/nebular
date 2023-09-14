@@ -8,7 +8,7 @@ import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
 @Component({
-  selector: 'nb-toggle-form',
+  selector: 'npg-toggle-form',
   template: `
     <nb-card>
       <nb-card-body class="example-items-col">
@@ -19,9 +19,7 @@ import { FormControl } from '@angular/forms';
   `,
 })
 export class ToggleFormComponent {
-
   toggleNgModel = true;
 
   toggleFormControl = new FormControl();
-
 }

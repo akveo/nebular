@@ -5,7 +5,7 @@
  */
 
 import { NgModule } from '@angular/core';
-import { RouterModule, Route} from '@angular/router';
+import { RouterModule, Route } from '@angular/router';
 import { OAuth2CallbackComponent } from './oauth2-callback.component';
 import { OAuth2LoginComponent } from './oauth2-login.component';
 
@@ -21,7 +21,7 @@ const routes: Route[] = [
 ];
 
 @NgModule({
-  imports: [ RouterModule.forChild(routes) ],
-  exports: [ RouterModule ],
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule],
 })
 export class Oauth2RoutingModule {}

@@ -1,21 +1,22 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'nb-chat-drop',
-  styles: [`
-    ::ng-deep nb-layout-column {
-      justify-content: center;
-      display: flex;
-    }
-    nb-chat {
-      width: 500px;
-      height: 80vw;
-    }
-  `],
+  selector: 'npg-chat-drop',
+  styles: [
+    `
+      ::ng-deep nb-layout-column {
+        justify-content: center;
+        display: flex;
+      }
+      nb-chat {
+        width: 500px;
+        height: 80vw;
+      }
+    `,
+  ],
   templateUrl: './chat-drop.component.html',
 })
 export class ChatDropComponent {
-
   messages: any[] = [
     {
       text: 'Drag & drop a file or a group of files.',
@@ -29,13 +30,15 @@ export class ChatDropComponent {
   ];
 
   sendMessage(event) {
-    const files = !event.files ? [] : event.files.map((file) => {
-      return {
-        url: file.src,
-        type: file.type,
-        icon: 'file-text-outline',
-      };
-    });
+    const files = !event.files
+      ? []
+      : event.files.map((file) => {
+          return {
+            url: file.src,
+            type: file.type,
+            icon: 'file-text-outline',
+          };
+        });
 
     this.messages.push({
       text: event.message,

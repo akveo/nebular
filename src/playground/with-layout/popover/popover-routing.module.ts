@@ -5,7 +5,7 @@
  */
 
 import { NgModule } from '@angular/core';
-import { RouterModule, Route} from '@angular/router';
+import { RouterModule, Route } from '@angular/router';
 import { PopoverCustomComponentComponent } from './popover-custom-component.component';
 import { PopoverModesComponent } from './popover-modes.component';
 import { PopoverPlacementsComponent } from './popover-placements.component';
@@ -56,7 +56,7 @@ const routes: Route[] = [
 ];
 
 @NgModule({
-  imports: [ RouterModule.forChild(routes) ],
-  exports: [ RouterModule ],
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule],
 })
 export class PopoverRoutingModule {}

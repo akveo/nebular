@@ -11,7 +11,6 @@ import { NB_DOCUMENT } from '../theme.options';
  */
 @Injectable()
 export class NbSpinnerService {
-
   private loaders: Promise<any>[] = [];
   private selector: string = 'nb-global-spinner';
 
@@ -34,7 +33,7 @@ export class NbSpinnerService {
   }
 
   /**
-   * Start the loader process, show spinnder and execute loaders
+   * Start the loader process, show spinner and execute loaders
    */
   load(): void {
     this.showSpinner();
@@ -42,10 +41,11 @@ export class NbSpinnerService {
   }
 
   private executeAll(done = (values) => {}): void {
-    Promise.all(this.loaders).then((values) => {
-      this.hideSpinner();
-      done.call(null, values);
-    })
+    Promise.all(this.loaders)
+      .then((values) => {
+        this.hideSpinner();
+        done.call(null, values);
+      })
       .catch((error) => {
         // TODO: Promise.reject
         console.error(error);
@@ -56,14 +56,14 @@ export class NbSpinnerService {
   private showSpinner(): void {
     const el = this.getSpinnerElement();
     if (el) {
-      el.style['display'] = 'block';
+      el.style.display = 'block';
     }
   }
 
   private hideSpinner(): void {
     const el = this.getSpinnerElement();
     if (el) {
-      el.style['display'] = 'none';
+      el.style.display = 'none';
     }
   }
 

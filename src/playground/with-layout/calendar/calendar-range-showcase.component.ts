@@ -8,9 +8,8 @@ import { Component } from '@angular/core';
 
 import { NbCalendarRange, NbDateService } from '@nebular/theme';
 
-
 @Component({
-  selector: 'nb-calendar-range-showcase',
+  selector: 'npg-calendar-range-showcase',
   template: `
     <nb-card>
       <nb-card-header>

@@ -11,34 +11,29 @@ import { By } from '@angular/platform-browser';
 import { NbThemeModule, NbIconModule, NbIconLibraries, NbIconComponent } from '@nebular/theme';
 
 @Component({
-  template: `
-    <nb-icon #iconEl [icon]="icon"></nb-icon>
-  `,
+  template: ` <nb-icon #iconEl [icon]="icon"></nb-icon> `,
 })
 class IconTestComponent {
   @Input() icon;
 }
 
 describe('Component: NbIcon', () => {
-
   let iconTestComponent: IconTestComponent;
   let fixture: ComponentFixture<IconTestComponent>;
   let iconElement: ElementRef;
   let iconsLibrary: NbIconLibraries;
 
   beforeEach(() => {
-
     const bed = TestBed.configureTestingModule({
-      imports: [ NbThemeModule.forRoot(), NbIconModule ],
-      providers: [ NbIconLibraries ],
-      declarations: [ IconTestComponent ],
+      imports: [NbThemeModule.forRoot(), NbIconModule],
+      providers: [NbIconLibraries],
+      declarations: [IconTestComponent],
     });
 
     fixture = bed.createComponent(IconTestComponent);
     iconsLibrary = bed.inject(NbIconLibraries);
 
-    iconsLibrary
-      .registerSvgPack('svg-pack', { home: '<svg><rect></rect></svg>' }, { packClass: 'custom-pack' });
+    iconsLibrary.registerSvgPack('svg-pack', { home: '<svg><rect></rect></svg>' }, { packClass: 'custom-pack' });
     iconsLibrary.setDefaultPack('svg-pack');
 
     iconTestComponent = fixture.componentInstance;

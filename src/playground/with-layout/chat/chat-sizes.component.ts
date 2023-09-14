@@ -1,16 +1,19 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'nb-chat-sizes',
-  styles: [`
-    ::ng-deep nb-layout-column {
-      justify-content: center;
-      display: flex;
-    }
-    nb-chat {
-      width: 500px;
-      margin: 0.5rem 0 2rem 2rem;
-    }`],
+  selector: 'npg-chat-sizes',
+  styles: [
+    `
+      ::ng-deep nb-layout-column {
+        justify-content: center;
+        display: flex;
+      }
+      nb-chat {
+        width: 500px;
+        margin: 0.5rem 0 2rem 2rem;
+      }
+    `,
+  ],
   templateUrl: './chat-size.component.html',
 })
 export class ChatSizesComponent {

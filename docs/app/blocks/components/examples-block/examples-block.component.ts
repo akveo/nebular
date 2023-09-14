@@ -5,7 +5,6 @@
  */
 
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { NgdTabbedService } from '../../../@theme/services';
 
 @Component({
   selector: 'ngd-examples-block',
@@ -13,8 +12,11 @@ import { NgdTabbedService } from '../../../@theme/services';
     <nb-card [ngdFragment]="source.slag">
       <nb-card-body>
         <h2>{{ source.name }}</h2>
-        <ngd-stacked-example-block *ngFor="let example of source.liveExamples" [content]="example.content"
-                                   class="widget-block">
+        <ngd-stacked-example-block
+          *ngFor="let example of source.liveExamples"
+          [content]="example.content"
+          class="widget-block"
+        >
         </ngd-stacked-example-block>
       </nb-card-body>
     </nb-card>
@@ -22,7 +24,5 @@ import { NgdTabbedService } from '../../../@theme/services';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NgdExamplesBlockComponent {
-
-  @Input('source') source;
-
+  @Input() source;
 }

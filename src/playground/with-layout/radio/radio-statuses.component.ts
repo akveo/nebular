@@ -5,14 +5,18 @@ import { NbComponentStatus } from '../../../framework/theme/components/component
   template: `
     <nb-card>
       <nb-card-body class="example-items-rows">
-        <nb-radio-group *ngFor="let status of statuses"
-                        [name]="status"
-                        [status]="status"
-                        [class.control-status-example]="status === 'control'">
-          <nb-radio *ngFor="let option of options"
-                    [checked]="option.checked"
-                    [disabled]="option.disabled"
-                    [value]="option.value">
+        <nb-radio-group
+          *ngFor="let status of statuses"
+          [name]="status"
+          [status]="status"
+          [class.control-status-example]="status === 'control'"
+        >
+          <nb-radio
+            *ngFor="let option of options"
+            [checked]="option.checked"
+            [disabled]="option.disabled"
+            [value]="option.value"
+          >
             {{ option.label }}
           </nb-radio>
         </nb-radio-group>

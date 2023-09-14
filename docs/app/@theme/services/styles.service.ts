@@ -11,22 +11,20 @@ const DEFAULT_THEME_NAME = 'default';
 
 @Injectable()
 export class NgdStylesService {
-
-  constructor(@Inject(DOCS) private docs) {
-  }
+  constructor(@Inject(DOCS) private docs) {}
 
   mapThemedValues(classStyles: any): any {
     const defaultTheme = this.docs.completeThemes[DEFAULT_THEME_NAME].data;
 
-    return classStyles.map(item => {
-      return item.styles.map(prop => {
+    return classStyles.map((item) => {
+      return item.styles.map((prop) => {
         return {
           ...prop,
           parent: this.getPropParent(defaultTheme, prop),
           value: this.getPropValue(defaultTheme, prop),
         };
       });
-    })
+    });
   }
 
   protected getPropValue(theme, prop) {
@@ -42,7 +40,7 @@ export class NgdStylesService {
     const resolved = theme[prop.name];
 
     if (resolved && resolved.parents && resolved.parents[0]) {
-      return resolved.parents[0].prop
+      return resolved.parents[0].prop;
     }
     return null;
   }

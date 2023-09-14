@@ -20,39 +20,37 @@ export const pulse = animation(
   selector: 'ngd-stacked-example-block',
   template: `
     <div>
-      <ngd-live-example-block [hidden]="!isLive"
-                              [@exampleState]="isLive ? 'live': 'code'"
-                              [content]="content"
-                              [hasViewSwitch]="true"
-                              (changeView)="changeView($event)">
+      <ngd-live-example-block
+        [hidden]="!isLive"
+        [@exampleState]="isLive ? 'live' : 'code'"
+        [content]="content"
+        [hasViewSwitch]="true"
+        (changeView)="changeView($event)"
+      >
       </ngd-live-example-block>
 
-      <ngd-tabbed-example-block [hidden]="isLive"
-                                [@exampleState]="isLive ? 'live': 'code'"
-                                [content]="content"
-                                [hasViewSwitch]="true"
-                                (changeView)="changeView($event)">
+      <ngd-tabbed-example-block
+        [hidden]="isLive"
+        [@exampleState]="isLive ? 'live' : 'code'"
+        [content]="content"
+        [hasViewSwitch]="true"
+        (changeView)="changeView($event)"
+      >
       </ngd-tabbed-example-block>
     </div>
   `,
   animations: [
     trigger('exampleState', [
-      transition('live => code', [
-        useAnimation(pulse),
-      ]),
-      transition('code => live', [
-        useAnimation(pulse),
-      ]),
+      transition('live => code', [useAnimation(pulse)]),
+      transition('code => live', [useAnimation(pulse)]),
     ]),
   ],
 })
 export class NgdStackedExampleComponent {
-
   @Input() content: any;
   isLive = true;
 
-  constructor(private analytics: NgdAnalytics) {
-  }
+  constructor(private analytics: NgdAnalytics) {}
 
   changeView(view: NgdExampleView) {
     this.analytics.trackEvent('changeExampleView', view);

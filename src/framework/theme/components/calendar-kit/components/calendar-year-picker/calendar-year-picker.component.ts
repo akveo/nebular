@@ -31,13 +31,13 @@ import { NbCalendarYearModelService } from '../../services/calendar-year-model.s
       [visibleDate]="year"
       [cellComponent]="cellComponent"
       [size]="size"
-      (select)="onSelect($event)">
+      (select)="onSelect($event)"
+    >
     </nb-calendar-picker>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NbCalendarYearPickerComponent<D> implements OnChanges {
-
   @Input() date: D;
 
   @Input() min: D;
@@ -46,6 +46,7 @@ export class NbCalendarYearPickerComponent<D> implements OnChanges {
 
   @Input() filter: (D) => boolean;
 
+  // eslint-disable-next-line @angular-eslint/no-input-rename
   @Input('cellComponent')
   set _cellComponent(cellComponent: Type<NbCalendarCell<D, D>>) {
     if (cellComponent) {
@@ -68,10 +69,7 @@ export class NbCalendarYearPickerComponent<D> implements OnChanges {
 
   years: D[][];
 
-  constructor(
-    protected dateService: NbDateService<D>,
-    protected yearModelService: NbCalendarYearModelService<D>,
-  ) {}
+  constructor(protected dateService: NbDateService<D>, protected yearModelService: NbCalendarYearModelService<D>) {}
 
   ngOnChanges() {
     this.years = this.yearModelService.getViewYears(this.year);

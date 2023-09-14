@@ -6,5 +6,4 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   templateUrl: './footer.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NgdFooterComponent {
-}
+export class NgdFooterComponent {}

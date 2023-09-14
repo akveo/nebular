@@ -7,8 +7,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'nb-select-groups',
+  selector: 'npg-select-groups',
   templateUrl: './select-groups.component.html',
 })
-export class SelectGroupsComponent {
-}
+export class SelectGroupsComponent {}

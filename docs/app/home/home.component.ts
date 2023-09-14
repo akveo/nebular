@@ -12,9 +12,7 @@ import { NbThemeService } from '@nebular/theme';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })
-
 export class NgdHomeComponent {
-
   features = [
     {
       title: 'Introduction',

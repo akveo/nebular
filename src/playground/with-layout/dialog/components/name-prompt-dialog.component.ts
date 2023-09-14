@@ -2,12 +2,12 @@ import { Component } from '@angular/core';
 import { NbDialogRef } from '@nebular/theme';
 
 @Component({
-  selector: 'nb-name-prompt',
+  selector: 'npg-name-prompt',
   template: `
     <nb-card>
       <nb-card-header>Enter your name</nb-card-header>
       <nb-card-body>
-        <input #name nbInput placeholder="Name">
+        <input #name nbInput placeholder="Name" />
       </nb-card-body>
       <nb-card-footer>
         <button nbButton status="danger" (click)="cancel()">Cancel</button>
@@ -17,8 +17,7 @@ import { NbDialogRef } from '@nebular/theme';
   `,
 })
 export class DialogNamePromptComponent {
-  constructor(protected dialogRef: NbDialogRef<DialogNamePromptComponent>) {
-  }
+  constructor(protected dialogRef: NbDialogRef<DialogNamePromptComponent>) {}
 
   cancel() {
     this.dialogRef.close();

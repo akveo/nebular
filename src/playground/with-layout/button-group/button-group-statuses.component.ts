@@ -10,5 +10,4 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   templateUrl: './button-group-statuses.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ButtonGroupStatusesComponent {
-}
+export class ButtonGroupStatusesComponent {}

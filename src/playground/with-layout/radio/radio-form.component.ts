@@ -7,7 +7,6 @@ import { FormControl } from '@angular/forms';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RadioFormComponent {
-
   ngModelValue = '1';
   formControl = new FormControl('1');
 }

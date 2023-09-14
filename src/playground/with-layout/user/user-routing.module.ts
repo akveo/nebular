@@ -5,7 +5,7 @@
  */
 
 import { NgModule } from '@angular/core';
-import { RouterModule, Route} from '@angular/router';
+import { RouterModule, Route } from '@angular/router';
 import { UserShowcaseComponent } from './user-showcase.component';
 import { UserSizesComponent } from './user-sizes.component';
 import { UserAvatarSettingsComponent } from './user-avatar-settings.component';
@@ -36,7 +36,7 @@ const routes: Route[] = [
 ];
 
 @NgModule({
-  imports: [ RouterModule.forChild(routes) ],
-  exports: [ RouterModule ],
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule],
 })
 export class UserRoutingModule {}

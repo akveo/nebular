@@ -5,8 +5,7 @@ import { Component } from '@angular/core';
     <nb-card size="small">
       <nb-list>
         <nb-list-item *ngFor="let user of users">
-          <nb-user [name]="user.name" [title]="user.title">
-          </nb-user>
+          <nb-user [name]="user.name" [title]="user.title"> </nb-user>
         </nb-list-item>
       </nb-list>
     </nb-card>
@@ -14,7 +13,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./simple-list-showcase.component.scss'],
 })
 export class UsersListShowcaseComponent {
-  users: { name: string, title: string }[] = [
+  users: { name: string; title: string }[] = [
     { name: 'Carla Espinosa', title: 'Nurse' },
     { name: 'Bob Kelso', title: 'Doctor of Medicine' },
     { name: 'Janitor', title: 'Janitor' },

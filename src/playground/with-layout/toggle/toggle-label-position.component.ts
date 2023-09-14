@@ -7,7 +7,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'nb-toggle-label-position',
+  selector: 'npg-toggle-label-position',
   template: `
     <nb-card>
       <nb-card-body class="example-items-col">
@@ -20,5 +20,4 @@ import { Component } from '@angular/core';
     </nb-card>
   `,
 })
-export class ToggleLabelPositionComponent {
-}
+export class ToggleLabelPositionComponent {}

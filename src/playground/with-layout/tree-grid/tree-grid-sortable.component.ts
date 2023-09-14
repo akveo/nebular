@@ -18,39 +18,31 @@ interface FSEntry {
   template: `
     <nb-card>
       <nb-card-body>
-
         <table [nbTreeGrid]="dataSource" nbSort (sort)="changeSort($event)" equalColumnsWidth>
-
           <tr nbTreeGridHeaderRow *nbTreeGridHeaderRowDef="allColumns"></tr>
           <tr nbTreeGridRow *nbTreeGridRowDef="let row; columns: allColumns"></tr>
 
           <ng-container [nbTreeGridColumnDef]="customColumn">
             <th nbTreeGridHeaderCell [nbSortHeader]="getDirection(customColumn)" *nbTreeGridHeaderCellDef>
-              {{customColumn}}
+              {{ customColumn }}
             </th>
 
             <td nbTreeGridCell *nbTreeGridCellDef="let row">
-
-              <nb-tree-grid-row-toggle
-                [expanded]="row.expanded"
-                *ngIf="row.data.kind === 'dir'">
+              <nb-tree-grid-row-toggle [expanded]="row.expanded" *ngIf="row.data.kind === 'dir'">
               </nb-tree-grid-row-toggle>
 
-              {{row.data.name}}
-
+              {{ row.data.name }}
             </td>
           </ng-container>
 
           <ng-container *ngFor="let column of defaultColumns" [nbTreeGridColumnDef]="column">
             <th nbTreeGridHeaderCell [nbSortHeader]="getDirection(column)" *nbTreeGridHeaderCellDef>
-              {{column}}
+              {{ column }}
             </th>
 
-            <td nbTreeGridCell *nbTreeGridCellDef="let row">{{row.data[column]}}</td>
+            <td nbTreeGridCell *nbTreeGridCellDef="let row">{{ row.data[column] }}</td>
           </ng-container>
-
         </table>
-
       </nb-card-body>
     </nb-card>
   `,
@@ -58,8 +50,8 @@ interface FSEntry {
 })
 export class TreeGridSortableComponent {
   customColumn = 'name';
-  defaultColumns = [ 'size', 'kind', 'items' ];
-  allColumns = [ this.customColumn, ...this.defaultColumns ];
+  defaultColumns = ['size', 'kind', 'items'];
+  allColumns = [this.customColumn, ...this.defaultColumns];
 
   dataSource: NbTreeGridDataSource<any>;
 
@@ -105,9 +97,7 @@ export class TreeGridSortableComponent {
       children: [
         {
           data: { name: 'Report 1', kind: 'dir', size: '100 KB', items: 1 },
-          children: [
-            { data: { name: 'report-1.doc', kind: 'doc', size: '100 KB' } },
-          ],
+          children: [{ data: { name: 'report-1.doc', kind: 'doc', size: '100 KB' } }],
         },
         {
           data: { name: 'Report 2', kind: 'dir', size: '300 KB', items: 2 },

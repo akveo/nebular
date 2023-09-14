@@ -7,7 +7,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
-  selector: 'nb-button-types',
+  selector: 'npg-button-types',
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './button-types.component.html',
 })

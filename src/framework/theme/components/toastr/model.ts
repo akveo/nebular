@@ -11,4 +11,3 @@ export class NbToast {
   message: string;
   config: NbToastrConfig;
 }
-

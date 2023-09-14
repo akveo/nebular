@@ -9,7 +9,6 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NgdInlineExampleBlockComponent {
-
   @Input() content;
 
   get isOneFile(): boolean {

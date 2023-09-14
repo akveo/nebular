@@ -13,7 +13,6 @@ import { NbRenderableContainer } from '../cdk/overlay/overlay-container';
 import { NbPosition } from '../cdk/overlay/overlay-position';
 import { NbIconConfig } from '../icon/icon.component';
 
-
 /**
  * Tooltip container.
  * Renders provided tooltip inside.
@@ -70,18 +69,12 @@ import { NbIconConfig } from '../icon/icon.component';
   animations: [
     trigger('showTooltip', [
       state('in', style({ opacity: 1 })),
-      transition('void => *', [
-        style({ opacity: 0 }),
-        animate(100),
-      ]),
-      transition('* => void', [
-        animate(100, style({ opacity: 0 })),
-      ]),
+      transition('void => *', [style({ opacity: 0 }), animate(100)]),
+      transition('* => void', [animate(100, style({ opacity: 0 }))]),
     ]),
   ],
 })
 export class NbTooltipComponent implements NbRenderableContainer {
-
   @Input()
   content: string;
 
@@ -102,7 +95,7 @@ export class NbTooltipComponent implements NbRenderableContainer {
   }
 
   @Input()
-  context: { icon?: string | NbIconConfig, status?: NbComponentOrCustomStatus } = {};
+  context: { icon?: string | NbIconConfig; status?: NbComponentOrCustomStatus } = {};
 
   get statusClass() {
     if (this.context.status) {
@@ -112,8 +105,7 @@ export class NbTooltipComponent implements NbRenderableContainer {
     return '';
   }
 
-  constructor(protected statusService: NbStatusService) {
-  }
+  constructor(protected statusService: NbStatusService) {}
 
   /**
    * The method is empty since we don't need to do anything additionally

@@ -29,11 +29,6 @@ import { SidebarTwoTestComponent } from './sidebar-two-test.component';
     SidebarToggleComponent,
     SidebarTwoTestComponent,
   ],
-  imports: [
-    NbSidebarModule.forRoot(),
-    NbLayoutModule,
-    NbButtonModule,
-    SidebarRoutingModule,
-  ],
+  imports: [NbSidebarModule.forRoot(), NbLayoutModule, NbButtonModule, SidebarRoutingModule],
 })
 export class SidebarModule {}

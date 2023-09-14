@@ -19,10 +19,7 @@ interface IItemLink {
 
 @Injectable()
 export class NgdMenuService {
-
-  constructor(private structureService: NgdStructureService,
-              private textService: NgdTextService) {
-  }
+  constructor(private structureService: NgdStructureService, private textService: NgdTextService) {}
 
   getPreparedMenu(basePath: string): any {
     return this.prepareMenu(this.structureService.getPreparedStructure(), { link: basePath });
@@ -30,7 +27,7 @@ export class NgdMenuService {
 
   prepareMenu(structure, parent = null) {
     return structure
-      .filter(item => item.name && item.type !== 'block')
+      .filter((item) => item.name && item.type !== 'block')
       .map((item: any) => {
         const menuItem: NbMenuItem = {
           title: item.name,
@@ -41,7 +38,7 @@ export class NgdMenuService {
         };
         menuItem.link = this.createItemLink<NbMenuItem>(menuItem);
 
-        if (item.children && item.children.some(child => child.type === 'page' || child.type === 'tabs')) {
+        if (item.children && item.children.some((child) => child.type === 'page' || child.type === 'tabs')) {
           menuItem.children = this.prepareMenu(item.children, menuItem);
         }
 

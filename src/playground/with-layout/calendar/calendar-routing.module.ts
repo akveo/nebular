@@ -5,7 +5,7 @@
  */
 
 import { NgModule } from '@angular/core';
-import { RouterModule, Route} from '@angular/router';
+import { RouterModule, Route } from '@angular/router';
 import { CalendarBoundingMonthComponent } from './calendar-bounding-month.component';
 import { CalendarCustomDayCellShowcaseComponent } from './calendar-custom-day-cell-showcase.component';
 import { CalendarFilterComponent } from './calendar-filter.component';
@@ -61,7 +61,7 @@ const routes: Route[] = [
 ];
 
 @NgModule({
-  imports: [ RouterModule.forChild(routes) ],
-  exports: [ RouterModule ],
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule],
 })
 export class CalendarRoutingModule {}

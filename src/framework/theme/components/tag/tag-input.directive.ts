@@ -54,12 +54,9 @@ export interface NbTagInputAddEvent {
 @Directive({
   selector: 'input[nbTagInput]',
   exportAs: 'nbTagInput',
-  providers: [
-    { provide: NbFormFieldControl, useExisting: NbTagInputDirective },
-  ],
+  providers: [{ provide: NbFormFieldControl, useExisting: NbTagInputDirective }],
 })
 export class NbTagInputDirective extends NbInputDirective implements AfterViewInit {
-
   protected readonly keyDown$: Subject<KeyboardEvent> = new Subject<KeyboardEvent>();
 
   get _value(): string {

@@ -6,7 +6,6 @@ import { share } from 'rxjs/operators';
  * Scroll position type
  */
 export interface NbScrollPosition {
-
   /**
    * x - left
    * @type {number}
@@ -31,7 +30,6 @@ export interface NbScrollPosition {
  */
 @Injectable()
 export class NbLayoutScrollService {
-
   private scrollPositionReq$ = new Subject<any>();
   private manualScroll$ = new Subject<NbScrollPosition>();
   private scroll$ = new Subject<any>();

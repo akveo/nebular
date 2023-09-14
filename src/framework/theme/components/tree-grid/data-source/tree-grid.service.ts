@@ -4,7 +4,6 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-
 import { Injectable } from '@angular/core';
 
 import { NbTreeGridPresentationNode } from './tree-grid.model';

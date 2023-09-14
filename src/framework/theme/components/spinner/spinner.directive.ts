@@ -61,9 +61,8 @@ import { NbSpinnerComponent } from './spinner.component';
  * Or tabs:
  * @stacked-example(Spinner in tabs, spinner/spinner-tabs.component)
  */
-@Directive({selector: '[nbSpinner]'})
+@Directive({ selector: '[nbSpinner]' })
 export class NbSpinnerDirective implements OnInit {
-
   private shouldShow = false;
   spinner: ComponentRef<NbSpinnerComponent>;
   componentFactory: ComponentFactory<NbSpinnerComponent>;
@@ -72,23 +71,27 @@ export class NbSpinnerDirective implements OnInit {
    * Spinner message shown next to the icon
    * @type {string}
    */
+  // eslint-disable-next-line @angular-eslint/no-input-rename
   @Input('nbSpinnerMessage') spinnerMessage: string;
 
   /**
    * Spinner status color
    * `basic`, `primary`, `info`, `success`, `warning`, `danger`, `control`.
    */
+  // eslint-disable-next-line @angular-eslint/no-input-rename
   @Input('nbSpinnerStatus') spinnerStatus: NbComponentOrCustomStatus = 'basic';
 
   /**
    * Spinner size. Possible values: `tiny`, `small`, `medium` (default), `large`, `giant`
    */
+  // eslint-disable-next-line @angular-eslint/no-input-rename
   @Input('nbSpinnerSize') spinnerSize: NbComponentSize = 'medium';
 
   /**
    * Directive value - show or hide spinner
    * @param {boolean} val
    */
+  // eslint-disable-next-line @angular-eslint/no-input-rename
   @Input('nbSpinner')
   set nbSpinner(val: boolean) {
     if (this.componentFactory) {
@@ -104,11 +107,12 @@ export class NbSpinnerDirective implements OnInit {
 
   @HostBinding('class.nb-spinner-container') isSpinnerExist = false;
 
-  constructor(private directiveView: ViewContainerRef,
-              private componentFactoryResolver: ComponentFactoryResolver,
-              private renderer: Renderer2,
-              private directiveElement: ElementRef) {
-  }
+  constructor(
+    private directiveView: ViewContainerRef,
+    private componentFactoryResolver: ComponentFactoryResolver,
+    private renderer: Renderer2,
+    private directiveElement: ElementRef,
+  ) {}
 
   ngOnInit() {
     this.componentFactory = this.componentFactoryResolver.resolveComponentFactory(NbSpinnerComponent);
@@ -135,7 +139,7 @@ export class NbSpinnerDirective implements OnInit {
   }
 
   setInstanceInputs(instance: NbSpinnerComponent) {
-    instance.message = this.spinnerMessage
+    instance.message = this.spinnerMessage;
     typeof this.spinnerStatus !== 'undefined' && (instance.status = this.spinnerStatus);
     typeof this.spinnerSize !== 'undefined' && (instance.size = this.spinnerSize);
   }

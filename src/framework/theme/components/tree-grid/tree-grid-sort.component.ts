@@ -40,11 +40,7 @@ export enum NbSortDirection {
   DESCENDING = 'desc',
   NONE = '',
 }
-const sortDirections: NbSortDirection[] = [
-  NbSortDirection.ASCENDING,
-  NbSortDirection.DESCENDING,
-  NbSortDirection.NONE,
-];
+const sortDirections: NbSortDirection[] = [NbSortDirection.ASCENDING, NbSortDirection.DESCENDING, NbSortDirection.NONE];
 
 /**
  * Directive triggers sort method of passed object when sort header changes direction
@@ -108,13 +104,15 @@ export class NbSortIconComponent {
  * Marks header as sort header so it emitting sort event when clicked.
  */
 @Component({
+  // eslint-disable-next-line @angular-eslint/component-selector
   selector: '[nbSortHeader]',
   template: `
     <button
       class="nb-tree-grid-header-change-sort-button"
       type="button"
       [attr.disabled]="getDisabledAttributeValue()"
-      (click)="sortData()">
+      (click)="sortData()"
+    >
       <ng-content></ng-content>
     </button>
     <nb-sort-icon *ngIf="!sortIcon; else customIcon" [direction]="direction"></nb-sort-icon>
@@ -122,7 +120,6 @@ export class NbSortIconComponent {
   `,
 })
 export class NbSortHeaderComponent {
-
   @ContentChild(NbSortHeaderIconDirective, { read: TemplateRef })
   sortIcon: TemplateRef<NbSortHeaderIconDirectiveContext>;
 

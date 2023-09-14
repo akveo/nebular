@@ -7,9 +7,8 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
-  selector: 'nb-user-sizes',
+  selector: 'npg-user-sizes',
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './user-sizes.component.html',
 })
-export class UserSizesComponent {
-}
+export class UserSizesComponent {}

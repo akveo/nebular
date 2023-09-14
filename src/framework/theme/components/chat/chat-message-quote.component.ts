@@ -12,7 +12,9 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 @Component({
   selector: 'nb-chat-message-quote',
   template: `
-    <p class="sender" *ngIf="sender || date">{{ sender }} <time>{{ date | date: dateFormat }}</time></p>
+    <p class="sender" *ngIf="sender || date">
+      {{ sender }} <time>{{ date | date : dateFormat }}</time>
+    </p>
     <p class="quote">
       {{ quote }}
     </p>
@@ -23,7 +25,6 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NbChatMessageQuoteComponent {
-
   /**
    * Message sender
    * @type {string}
@@ -42,7 +43,7 @@ export class NbChatMessageQuoteComponent {
    */
   @Input() date: Date;
 
- /**
+  /**
    * Message send date format, default 'shortTime'
    * @type {string}
    */
@@ -53,5 +54,4 @@ export class NbChatMessageQuoteComponent {
    * @type {Date}
    */
   @Input() quote: string;
-
 }

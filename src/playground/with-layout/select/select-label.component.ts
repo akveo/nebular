@@ -7,7 +7,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'nb-select-label-showcase',
+  selector: 'npg-select-label-showcase',
   templateUrl: './select-label.component.html',
 })
 export class SelectLabelShowcaseComponent {

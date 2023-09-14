@@ -20,5 +20,4 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ButtonGroupDisabledComponent {
-}
+export class ButtonGroupDisabledComponent {}

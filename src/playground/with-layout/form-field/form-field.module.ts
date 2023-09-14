@@ -21,11 +21,7 @@ import { FormFieldPasswordComponent } from './form-field-password.component';
 import { FormFieldInputComponent } from './form-field-input.component';
 
 @NgModule({
-  declarations: [
-    FormFieldShowcaseComponent,
-    FormFieldPasswordComponent,
-    FormFieldInputComponent,
-  ],
+  declarations: [FormFieldShowcaseComponent, FormFieldPasswordComponent, FormFieldInputComponent],
   imports: [
     NbFormFieldModule,
     NbInputModule,

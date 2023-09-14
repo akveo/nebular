@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { APP_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
@@ -13,7 +13,6 @@ import { NbEvaIconsModule } from '@nebular/eva-icons';
 @NgModule({
   declarations: [AppComponent],
   imports: [
-    BrowserModule.withServerTransition({ appId: 'packages-smoke' }),
     BrowserAnimationsModule,
     NbThemeModule.forRoot({ name: 'default' }),
     NbAuthModule.forRoot(),
@@ -22,7 +21,7 @@ import { NbEvaIconsModule } from '@nebular/eva-icons';
     NbDateFnsDateModule,
     NbEvaIconsModule,
   ],
-  providers: [],
+  providers: [BrowserModule, { provide: APP_ID, useValue: 'packages-smoke' }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

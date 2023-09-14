@@ -26,7 +26,6 @@ let formContainerUniqueId = 0;
   styleUrls: ['./hubspot-form-dialog.component.scss'],
 })
 export class NgdHubspotFormDialogComponent implements OnInit, AfterViewInit {
-
   protected readonly defaultConfig = {
     submitButtonClass: 'hs-submit-btn btn',
     css: '',

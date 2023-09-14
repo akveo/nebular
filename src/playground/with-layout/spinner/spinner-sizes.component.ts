@@ -7,9 +7,8 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
-  selector: 'nb-spinner-sizes',
+  selector: 'npg-spinner-sizes',
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './spinner-sizes.component.html',
 })
-export class SpinnerSizesComponent {
-}
+export class SpinnerSizesComponent {}

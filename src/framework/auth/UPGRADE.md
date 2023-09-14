@@ -1,4 +1,5 @@
 <a name="2.0.0-rc.8-2.0.0-rc.9"></a>
+
 # 2.0.0-rc.8-2.0.0-rc.9
 
 1. Change imports to new correct strategy names:
@@ -7,8 +8,7 @@
 - `NbEmailPassAuthProvider` -> `NbPasswordAuthStrategy` (could be used not only with `email`)
 - `NbAbstractAuthProvider` -> `NbAuthStrategy`
 
-
-2. Change auth forms configuration `provider` key to `strategy`, so instead of 
+2. Change auth forms configuration `provider` key to `strategy`, so instead of
 
 ```
 `NbAuthModule.forRoot({
@@ -21,6 +21,7 @@
 ```
 
 should be:
+
 ```
 `NbAuthModule.forRoot({
   forms: {
@@ -28,11 +29,11 @@ should be:
        strategy: 'email', // provider -> strategy
      },
   },
-})` 
+})`
 ```
 
-3. Register strategies through special `setup` method, so instead of the `providers` object, 
-where object key - is a strategy name and value is a configuration:  
+3. Register strategies through special `setup` method, so instead of the `providers` object,
+   where object key - is a strategy name and value is a configuration:
 
 ```
 providers: {
@@ -55,7 +56,7 @@ strategies: [
 Strategy configuration is type-checked now.
 
 4. Remove `NB_AUTH_TOKEN_CLASS` imports and usage.
-Token class is passed through strategy configuration, like this:
+   Token class is passed through strategy configuration, like this:
 
 ```
 @NgModule({

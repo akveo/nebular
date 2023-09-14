@@ -8,16 +8,11 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 
-import {
-  NbButtonModule,
-  NbCardModule,
-  NbLayoutModule,
-} from '@nebular/theme';
+import { NbButtonModule, NbCardModule, NbLayoutModule } from '@nebular/theme';
 
 import { NbAuthModule, NbDummyAuthStrategy } from '@nebular/auth';
 import { AppComponent } from './app.component';
 import { AppRouting } from './app-routing.module';
-
 
 @NgModule({
   imports: [
@@ -39,9 +34,6 @@ import { AppRouting } from './app-routing.module';
       ],
     }),
   ],
-  declarations: [
-    AppComponent,
-  ],
+  declarations: [AppComponent],
 })
-export class AppModule {
-}
+export class AppModule {}

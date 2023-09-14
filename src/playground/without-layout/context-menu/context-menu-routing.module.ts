@@ -5,7 +5,7 @@
  */
 
 import { NgModule } from '@angular/core';
-import { RouterModule, Route} from '@angular/router';
+import { RouterModule, Route } from '@angular/router';
 import { ContextMenuClickComponent } from './context-menu-click.component';
 import { ContextMenuShowcaseComponent } from './context-menu-showcase.component';
 import { ContextMenuTestComponent } from './context-menu-test.component';
@@ -41,7 +41,7 @@ const routes: Route[] = [
 ];
 
 @NgModule({
-  imports: [ RouterModule.forChild(routes) ],
-  exports: [ RouterModule ],
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule],
 })
 export class ContextMenuRoutingModule {}

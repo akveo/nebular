@@ -5,7 +5,7 @@
  */
 
 import { NgModule } from '@angular/core';
-import { RouterModule, Route} from '@angular/router';
+import { RouterModule, Route } from '@angular/router';
 import { RevealCardAccentsComponent } from './reveal-card-accents.component';
 import { RevealCardColorsComponent } from './reveal-card-colors.component';
 import { RevealCardFullComponent } from './reveal-card-full.component';
@@ -36,7 +36,7 @@ const routes: Route[] = [
 ];
 
 @NgModule({
-  imports: [ RouterModule.forChild(routes) ],
-  exports: [ RouterModule ],
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule],
 })
 export class RevealCardRoutingModule {}

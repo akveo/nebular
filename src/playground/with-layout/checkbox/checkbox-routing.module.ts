@@ -5,7 +5,7 @@
  */
 
 import { NgModule } from '@angular/core';
-import { RouterModule, Route} from '@angular/router';
+import { RouterModule, Route } from '@angular/router';
 import { CheckboxDisabledComponent } from './checkbox-disabled.component';
 import { CheckboxShowcaseComponent } from './checkbox-showcase.component';
 import { CheckboxStatusComponent } from './checkbox-status.component';
@@ -36,7 +36,7 @@ const routes: Route[] = [
 ];
 
 @NgModule({
-  imports: [ RouterModule.forChild(routes) ],
-  exports: [ RouterModule ],
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule],
 })
 export class CheckboxRoutingModule {}

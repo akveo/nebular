@@ -10,15 +10,8 @@ import { NgdHomeRoutingModule } from './home-routing.module';
 import { NgdHomeComponent } from './home.component';
 import { NgdThemeModule } from '../@theme/theme.module';
 
-
 @NgModule({
-  imports: [
-    NgdHomeRoutingModule,
-    NgdThemeModule,
-  ],
-  declarations: [
-    NgdHomeComponent,
-  ],
+  imports: [NgdHomeRoutingModule, NgdThemeModule],
+  declarations: [NgdHomeComponent],
 })
-export class NgdHomeModule {
-}
+export class NgdHomeModule {}
