@@ -9,6 +9,7 @@ const config = {
   useAllAngular2AppRoots: true,
   allScriptsTimeout: 120000,
   getPageTimeout: 120000,
+  chromeDriver: '/opt/homebrew/bin/chromedriver',
   specs: ['./e2e/**/*.e2e-spec.ts'],
   capabilities: {
     browserName: 'chrome',
