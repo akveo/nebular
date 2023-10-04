@@ -168,6 +168,7 @@ export class NbTimePickerComponent<D> implements OnChanges {
    */
   @Input() showFooter: boolean = true;
   @Input() applyButtonText: string;
+  @Input() timeText: string;
   @Input() hoursText: string;
   @Input() minutesText: string;
   @Input() secondsText: string;
@@ -400,5 +401,8 @@ export class NbTimePickerComponent<D> implements OnChanges {
     this.minutesText = localeConfig.minutesText;
     this.secondsText = localeConfig.secondsText;
     this.ampmText = localeConfig.ampmText;
+    this.timeText = localeConfig.timeText;
+    this.applyButtonText = localeConfig.applyButtonText;
+    this.currentTimeButtonText = localeConfig.currentTimeButtonText;
   }
 }
