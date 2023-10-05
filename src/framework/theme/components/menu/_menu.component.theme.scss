@@ -91,13 +91,13 @@
 
     .menu-item > .menu-items > .menu-item {
       background: nb-theme(menu-submenu-background-color);
-      color: nb-theme(menu-submenu-text-color);
 
       a {
         border-color: nb-theme(menu-submenu-item-border-color);
         border-style: nb-theme(menu-submenu-item-border-style);
         border-width: nb-theme(menu-submenu-item-border-width);
         padding: nb-theme(menu-submenu-item-padding);
+        color: nb-theme(menu-submenu-text-color);
       }
 
       a.active {
