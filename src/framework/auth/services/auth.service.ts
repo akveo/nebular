@@ -140,7 +140,7 @@ export class NbAuthService {
       .pipe(
         switchMap((result: NbAuthResult) => {
           if (result.isSuccess()) {
-            this.tokenService.clear()
+            return this.tokenService.clear()
               .pipe(map(() => result));
           }
           return observableOf(result);
