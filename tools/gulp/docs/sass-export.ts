@@ -61,32 +61,32 @@ class SassExportFunction {
   get_value(a) {
     let value, i;
     switch (a.constructor.name) {
-      case 'SassList':
+      case 'sass.types.List':
         value = [];
         for (i = 0; i < a.getLength(); i++) {
           value.push(this.get_value(a.getValue(i)));
         }
         break;
-      case 'SassMap':
+      case 'sass.types.Map':
         value = {};
         for (i = 0; i < a.getLength(); i++) {
           value[a.getKey(i).getValue()] = this.get_value(a.getValue(i));
         }
         break;
-      case 'SassColor':
+      case 'sass.types.Color':
         if (1 === a.getA()) {
           value = Colors.rgb2hex(a.getR(), a.getG(), a.getB());
         } else {
           value = 'rgba(' + a.getR() + ', ' + a.getG() + ', ' + a.getB() + ', ' + a.getA() + ')';
         }
         break;
-      case 'SassNumber':
+      case 'sass.types.Number':
         value = a.getValue();
         if (a.getUnit()) {
           value += a.getUnit();
         }
         break;
-      case 'SassNull':
+      case '_SassNull0':
         value = null;
         break;
       default:
