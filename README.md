@@ -1,6 +1,6 @@
 # Nebular [<img src="https://i.imgur.com/oMcxwZ0.png" alt="Eva Design System" height="20px" />](https://eva.design?utm_campaign=eva_design%20-%20home%20-%20nebular%20github%20readme&utm_source=nebular&utm_medium=referral&utm_content=github_readme_hero_pic) [![npm](https://img.shields.io/npm/l/@nebular/theme.svg)]() [![npm](https://img.shields.io/npm/dt/@nebular/theme.svg)](https://www.npmjs.com/package/@nebular/theme) [![Codecov](https://img.shields.io/codecov/c/github/akveo/nebular/master.svg?style=flat-square)](https://codecov.io/gh/akveo/nebular/branch/master)
 
-[Documentation](https://akveo.github.io/nebular/docs/getting-started/what-is-nebular?utm_campaign=nebular%20-%20home%20-%20nebular%20github%20readme&utm_source=nebular&utm_medium=referral&utm_content=documentation) | [Stackblitz Template](https://stackblitz.com/github/akveo/nebular-seed) | [UI Bakery](https://uibakery.io?utm_campaign=ui_bakery%20-%20home%20-%20nebular%20readme&utm_source=nebular&utm_medium=referral&utm_content=angular_ui_builder) - Angular UI Builder | [Angular templates](https://www.akveo.com/templates?utm_campaign=services%20-%20github%20-%20templates&utm_source=nebular&utm_medium=referral&utm_content=github%20readme%20top%20angular%20templates%20link)
+[Documentation](https://akveo.github.io/nebular/docs/getting-started/what-is-nebular?utm_campaign=nebular%20-%20home%20-%20nebular%20github%20readme&utm_source=nebular&utm_medium=referral&utm_content=documentation) | [Stackblitz Template](https://stackblitz.com/github/akveo/nebular-seed) | [Angular templates](https://www.akveo.com/templates?utm_campaign=services%20-%20github%20-%20templates&utm_source=nebular&utm_medium=referral&utm_content=github%20readme%20top%20angular%20templates%20link)
 
 Nebular is a customizable Angular UI Library with a focus on beautiful design and ability to adapt it to your brand easily. It comes with 4 stunning visual themes, a powerful theming engine with runtime theme switching and support of custom css properties mode. Nebular is based on Eva Design System specifications.
 
@@ -14,6 +14,12 @@ Nebular is a customizable Angular UI Library with a focus on beautiful design an
 - **3 Auth strategies and Security** - authentication and security layer easily configurable for your API
 - **Powerful theming engine** with custom CSS properties mode
 - **SVG Eva Icons support** - 480+ general purpose icons
+
+## Repository state and engagement with the community
+
+Repository is currently in a state of minimal maintenance. Our primary focus is on ensuring that the Angular version used in this project is kept up to date. Our capacity to engage in other aspects of repository management is currently limited.
+
+We are not actively reviewing or merging pull requests, responding to or resolving issues at this time. We appreciate the effort and contributions from the community and we understand that issues are crucial for the community. But now our current focus is solely on maintaining Angular.
 
 ## Quick Start
 
@@ -35,12 +41,6 @@ Nebular supports most recent browsers. Browser support list can be found <a href
 
 - [ngx-admin](http://github.com/akveo/ngx-admin) - 20k+ stars application based on Nebular modules with beautiful E-Commerce & IOT components, for boosting your developing process. [Live Demo](https://www.akveo.com/ngx-admin?utm_campaign=ngx_admin%20-%20demo%20-%20nebular%20github%20readme%20-%20traffic&utm_source=nebular&utm_medium=referral&utm_content=github_readme).
 - [ngx-admin-starter](https://github.com/akveo/ngx-admin/tree/starter-kit) - clean application based on Nebular modules with a limited number of additional dependencies.
-- [Backend Bundles](https://store.akveo.com/pages/all-collections?utm_campaign=nebular%20-%20home%20-%20nebular%20github%20readme&utm_source=nebular&utm_medium=banner&utm_content=nebular_readme_image) - easy way to integrate ngx-admin with any backend (PHP, .Net, .Net Core, Java etc. )
-
-## UI Bakery
-
-Try low-code internal tool builder for free
-<a href="https://uibakery.io/?utm_source=github&utm_medium=clicks&utm_campaign=banner"><img src="https://user-images.githubusercontent.com/6151971/125071660-41f84900-e0c2-11eb-882a-0c675eb1e5e3.png"></a>
 
 ## License
 
