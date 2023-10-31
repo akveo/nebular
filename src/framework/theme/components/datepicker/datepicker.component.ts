@@ -133,6 +133,12 @@ export abstract class NbBasePicker<D, T, P> extends NbDatepicker<T, D> {
    * */
   abstract showWeekNumber: boolean;
 
+  /**
+   * Sets first day of the week, it can be 1 if week starts from monday and 0 if from sunday and so on.
+   * `undefined` means that default locale setting will be used.
+   * */
+  abstract firstDayOfWeek: number | undefined;
+
   readonly formatChanged$: Subject<void> = new Subject();
 
   /**
@@ -351,6 +357,7 @@ export abstract class NbBasePicker<D, T, P> extends NbDatepicker<T, D> {
     this.picker.visibleDate = this.visibleDate;
     this.picker.showWeekNumber = this.showWeekNumber;
     this.picker.weekNumberSymbol = this.weekNumberSymbol;
+    this.picker.firstDayOfWeek = this.firstDayOfWeek;
   }
 
   protected checkFormat() {
@@ -464,6 +471,8 @@ export class NbBasePickerComponent<D, T, P> extends NbBasePicker<D, T, P> implem
   }
   protected _showWeekNumber: boolean = false;
   static ngAcceptInputType_showWeekNumber: NbBooleanInput;
+
+  @Input() firstDayOfWeek: number | undefined;
 
   /**
    * Determines picker overlay offset (in pixels).
