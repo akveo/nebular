@@ -134,7 +134,8 @@
               "optimization": false,
               "sourceMap": true,
               "extractLicenses": false,
-              "vendorChunk": true
+              "vendorChunk": true,
+              "buildOptimizer": false
             }
           },
           "defaultConfiguration": "production"
@@ -193,9 +194,10 @@
       }
     }
   },
-  "defaultProject": "packages-smoke",
   "cli": {
-    "defaultCollection": "@angular-eslint/schematics"
+    "schematicCollections": [
+      "@angular-eslint/schematics"
+    ]
   },
   "schematics": {
     "@angular-eslint/schematics:application": {
