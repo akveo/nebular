@@ -29,7 +29,11 @@
       "rules": {
         "quotes": "off",
         "dot-notation": "off",
-        "no-restricted-globals": ["error", "fit", "fdescribe"],
+        "no-restricted-globals": [
+          "error",
+          "fit",
+          "fdescribe"
+        ],
         "@typescript-eslint/dot-notation": "error",
         "no-shadow": "off",
         "@typescript-eslint/no-shadow": "error",
