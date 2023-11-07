@@ -53,12 +53,6 @@ import { NbDateTimePickerComponent } from './date-timepicker.component';
     NbRangepickerComponent,
     NbBasePickerComponent,
   ],
-  entryComponents: [
-    NbCalendarComponent,
-    NbCalendarRangeComponent,
-    NbDatepickerContainerComponent,
-    NbCalendarWithTimeComponent,
-  ],
 })
 export class NbDatepickerModule {
   static forRoot(): ModuleWithProviders<NbDatepickerModule> {

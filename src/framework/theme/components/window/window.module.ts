@@ -15,7 +15,6 @@ import { NB_WINDOW_CONFIG, NbWindowConfig } from './window.options';
     NbWindowsContainerComponent,
     NbWindowComponent,
   ],
-  entryComponents: [NbWindowsContainerComponent, NbWindowComponent],
 })
 export class NbWindowModule {
   static forRoot(defaultConfig?: Partial<NbWindowConfig>): ModuleWithProviders<NbWindowModule> {

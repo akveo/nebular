@@ -17,7 +17,6 @@ import { NbMenuModule } from '../menu/menu.module';
   imports: [CommonModule, NbOverlayModule, NbMenuModule],
   exports: [NbContextMenuDirective],
   declarations: [NbContextMenuDirective, NbContextMenuComponent],
-  entryComponents: [NbContextMenuComponent],
 })
 export class NbContextMenuModule {
 }

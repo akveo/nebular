@@ -81,11 +81,6 @@ const COMPONENTS = [
   exports: [...COMPONENTS],
   declarations: [...COMPONENTS],
   providers: [...SERVICES],
-  entryComponents: [
-    NbCalendarDayCellComponent,
-    NbCalendarMonthCellComponent,
-    NbCalendarYearCellComponent,
-  ],
 })
 export class NbCalendarKitModule {
 }

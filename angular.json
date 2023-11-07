@@ -606,7 +606,6 @@
       }
     }
   },
-  "defaultProject": "playground",
   "schematics": {
     "@schematics/angular:component": {
       "style": "scss",
@@ -624,6 +623,8 @@
   },
   "cli": {
     "analytics": false,
-    "defaultCollection": "@angular-eslint/schematics"
+    "schematicCollections": [
+      "@angular-eslint/schematics"
+    ]
   }
 }
