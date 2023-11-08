@@ -2,13 +2,29 @@
   <nb-card-body>
     <section>
       <input nbInput placeholder="Pick Date" [ngModel]="now" [nbDatepicker]="datePicker" />
-      <nb-datepicker [format]="format" #datePicker></nb-datepicker>
+      <nb-datepicker [format]="format" [firstDayOfWeek]="firstDayOfWeek" #datePicker></nb-datepicker>
     </section>
 
     <section>
       <button nbButton (click)="toggleFormat()">format — {{ format }}</button>
       <button nbButton (click)="toggleFormatSwitching()">
         {{ formatToggleTimer ? 'Stop' : 'Start' }} auto format toggle
+      </button>
+    </section>
+
+    <section>
+      <nb-select [(selected)]="firstDayOfWeek">
+        <nb-option>LOCALE_ID</nb-option>
+        <nb-option [value]="0">Sunday</nb-option>
+        <nb-option [value]="1">Moday</nb-option>
+        <nb-option [value]="2">Tuesday</nb-option>
+        <nb-option [value]="3">Wednesday</nb-option>
+        <nb-option [value]="4">Thursday</nb-option>
+        <nb-option [value]="5">Friday</nb-option>
+        <nb-option [value]="6">Saturday</nb-option>
+      </nb-select>
+      <button nbButton (click)="toggleFirstDayOfWeekSwitching()">
+        {{ firstDayOfWeekToggleTimer ? 'Stop' : 'Start' }} auto firstDayOfWeek toggle
       </button>
     </section>
   </nb-card-body>
