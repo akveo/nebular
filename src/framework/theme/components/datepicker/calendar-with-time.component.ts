@@ -35,6 +35,7 @@ import { NbTimePickerComponent } from '../timepicker/timepicker.component';
           [showNavigation]="showNavigation"
           [showWeekNumber]="showWeekNumber"
           [weekNumberSymbol]="weekNumberSymbol"
+          [firstDayOfWeek]="firstDayOfWeek"
           (dateChange)="onDateValueChange($event)"
         >
         </nb-base-calendar>
