@@ -50,14 +50,5 @@ import { ShowcaseDialogComponent } from './components/showcase-dialog.component'
     NbCardModule,
     DialogRoutingModule,
   ],
-  entryComponents: [
-    AutoFocusDialogComponent,
-    BackdropClickDialogComponent,
-    EscDialogComponent,
-    HasBackdropDialogComponent,
-    DialogNamePromptComponent,
-    ScrollDialogComponent,
-    ShowcaseDialogComponent,
-  ],
 })
 export class DialogModule {}

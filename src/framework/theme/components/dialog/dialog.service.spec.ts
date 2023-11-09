@@ -26,7 +26,6 @@ class NbTestDialogComponent {}
 
 @NgModule({
   declarations: [NbTestDialogComponent],
-  entryComponents: [NbTestDialogComponent],
 })
 class NbTestDialogModule {}
 

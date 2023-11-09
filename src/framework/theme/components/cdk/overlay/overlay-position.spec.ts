@@ -32,7 +32,6 @@ export class PortalComponent {}
 @NgModule({
   declarations: [PortalComponent],
   exports: [PortalComponent],
-  entryComponents: [PortalComponent],
 })
 export class PortalModule {}
 

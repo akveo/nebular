@@ -24,10 +24,10 @@
     "nebular"
   ],
   "peerDependencies": {
-    "@angular/common": "^15.0.0",
-    "@angular/core": "^15.0.0",
-    "@angular/router": "^15.0.0",
-    "@angular/forms": "^15.0.0",
+    "@angular/common": "^16.0.0",
+    "@angular/core": "^16.0.0",
+    "@angular/router": "^16.0.0",
+    "@angular/forms": "^16.0.0",
     "@nebular/theme": "11.0.1",
     "rxjs": "^6.5.3 || ^7.4.0"
   },
