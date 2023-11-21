@@ -13,6 +13,8 @@ import { SafeStyle } from '@angular/platform-browser';
 export class NbChatAvatarComponent {
   @Input() initials: string;
 
+  @Input() isAvatarNgSrc: boolean = false;
+
   @Input()
   @HostBinding('style.background-image')
   avatarStyle: SafeStyle;

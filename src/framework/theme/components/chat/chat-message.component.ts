@@ -60,7 +60,14 @@ import { NbChatCustomMessageDirective } from './chat-custom-message.directive';
 @Component({
   selector: 'nb-chat-message',
   template: `
-    <nb-chat-avatar *ngIf="notReply" [initials]="getInitials()" [avatarStyle]="avatarStyle"> </nb-chat-avatar>
+    <ng-container *ngIf="notReply">
+      <ng-container *ngIf="!avatarTemplateRef; else avatarTemplate">
+        <nb-chat-avatar [initials]="getInitials()" [avatarStyle]="avatarStyle"></nb-chat-avatar>
+      </ng-container>
+      <ng-template #avatarTemplate>
+        <ng-container *ngTemplateOutlet="avatarTemplateRef"></ng-container>
+      </ng-template>
+    </ng-container>
 
     <div class="message">
       <ng-container [ngSwitch]="type" *ngIf="_isBuiltInMessageType(); else customTemplate">
@@ -225,6 +232,14 @@ export class NbChatMessageComponent {
   set avatar(value: string) {
     this.avatarStyle = value ? this.domSanitizer.bypassSecurityTrustStyle(`url(${value})`) : null;
   }
+
+  /**
+   * Is message send avatar a ngSrc url
+   * @type {string}
+   */
+
+  @Input()
+  public avatarTemplateRef: TemplateRef<any> | undefined;
 
   /**
    * Message type, available options `text|file|map|quote`
