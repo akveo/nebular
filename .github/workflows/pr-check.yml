@@ -8,10 +8,10 @@ jobs:
   build-packages:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
         with:
-          node-version: '16'
+          node-version: 16.14.0
           cache: 'npm'
       - run: npm ci
       - run: npm run build:packages
@@ -24,10 +24,10 @@ jobs:
   build-packages-rxjs-7:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
         with:
-          node-version: '16'
+          node-version: 16.14.0
           cache: 'npm'
       - run: |
           npm ci
@@ -37,20 +37,20 @@ jobs:
     needs: build-packages
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
         with:
-          node-version: '16'
+          node-version: 16.14.0
       - run: npm ci
       - run: npm run docs:build
   build-playground:
     needs: build-packages
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
         with:
-          node-version: '16'
+          node-version: 16.14.0
       - run: npm ci
       - uses: actions/download-artifact@v2
         with:
@@ -101,10 +101,10 @@ jobs:
       BSU: debac1
       BSK: AhrdZMi5gFDy3CQQfJHs
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
         with:
-          node-version: '16'
+          node-version: 16.14.0
       - run: npm ci
       - uses: actions/download-artifact@v2
         with:
@@ -133,10 +133,10 @@ jobs:
     needs: build-packages
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
         with:
-          node-version: '16'
+          node-version: 16.14.0
       - uses: actions/download-artifact@v2
         with:
           name: built-packages

@@ -1,9 +1,3 @@
-/*
- * @license
- * Copyright Akveo. All Rights Reserved.
- * Licensed under the MIT License. See License.txt in the project root for license information.
- */
-
 import { chain, Rule, SchematicContext, Tree } from '@angular-devkit/schematics';
 import { getRouterModuleDeclaration } from '@schematics/angular/utility/ast-utils';
 import {
