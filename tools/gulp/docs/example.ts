@@ -73,7 +73,7 @@ function unfoldFile(tag) {
 function unfoldComponent(tag) {
   const files = EXTENSIONS.map((extension) => `${tag.content.id}.${extension}`).filter(isFileExists);
 
-  return createNode(tag, files);
+  return createNode(tag, files, tag.content.id);
 }
 
 function createNode(tag, files, id = tag.content.id) {
