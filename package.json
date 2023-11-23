@@ -88,6 +88,18 @@
     "tslib": "~2.6.2",
     "zone.js": "~0.14.2"
   },
+  "overrides": {
+    "@angular/fire": {
+      "@angular/common": "$@angular/common",
+      "@angular/core": "$@angular/core",
+      "@angular/platform-browser": "$@angular/platform-browser",
+      "@angular/platform-browser-dynamic": "$@angular/platform-browser-dynamic"
+    },
+    "angular-cli-ghpages": {
+      "@angular-devkit/core": "$@angular-devkit/core",
+      "@angular-devkit/schematics": "$@angular-devkit/schematics"
+    }
+  },
   "devDependencies": {
     "@angular-devkit/build-angular": "~17.0.3",
     "@angular-devkit/core": "~17.0.3",
@@ -102,7 +114,6 @@
     "@angular/language-service": "~17.0.4",
     "@schematics/angular": "~17.0.3",
     "@types/gulp": "~4.0.17",
-    "@types/highlight.js": "~10.1.0",
     "@types/jasmine": "~5.1.4",
     "@types/jasminewd2": "~2.0.13",
     "@types/node": "~18.18.12",
