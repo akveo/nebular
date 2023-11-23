@@ -1,9 +1,3 @@
-/*
- * @license
- * Copyright Akveo. All Rights Reserved.
- * Licensed under the MIT License. See License.txt in the project root for license information.
- */
-
 export function createThemeContent(themeName: string): string {
   return `@forward '@nebular/theme/styles/theming';
 @use '@nebular/theme/styles/theming' as *;

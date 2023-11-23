@@ -1,9 +1,3 @@
-/*
- * @license
- * Copyright Akveo. All Rights Reserved.
- * Licensed under the MIT License. See License.txt in the project root for license information.
- */
-
 import { SchematicsException, Tree } from '@angular-devkit/schematics';
 import { ProjectDefinition } from '@angular-devkit/core/src/workspace';
 import { join, normalize, Path } from '@angular-devkit/core';

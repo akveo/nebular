@@ -1,9 +1,3 @@
-/*
- * @license
- * Copyright Akveo. All Rights Reserved.
- * Licensed under the MIT License. See License.txt in the project root for license information.
- */
-
 import { Rule, Tree } from '@angular-devkit/schematics';
 import { dirname, join, normalize } from '@angular-devkit/core';
 import * as ts from 'typescript';

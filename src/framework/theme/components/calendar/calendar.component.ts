@@ -210,6 +210,7 @@ import { convertToBoolProperty, NbBooleanInput } from '../helpers';
       [showNavigation]="showNavigation"
       [showWeekNumber]="showWeekNumber"
       [weekNumberSymbol]="weekNumberSymbol"
+      [firstDayOfWeek]="firstDayOfWeek"
       (dateChange)="dateChange.emit($event)"
     ></nb-base-calendar>
   `,
@@ -294,6 +295,12 @@ export class NbCalendarComponent<D> {
    * Sets symbol used as a header for week numbers column
    * */
   @Input() weekNumberSymbol: string = '#';
+
+  /**
+   * Sets first day of the week, it can be 1 if week starts from monday and 0 if from sunday and so on.
+   * `undefined` means that default locale setting will be used.
+   * */
+  @Input() firstDayOfWeek: number | undefined;
 
   /**
    * Emits date when selected.

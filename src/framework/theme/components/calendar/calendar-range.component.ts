@@ -181,6 +181,7 @@ export interface NbCalendarRange<D> {
       [size]="size"
       [showWeekNumber]="showWeekNumber"
       [weekNumberSymbol]="weekNumberSymbol"
+      [firstDayOfWeek]="firstDayOfWeek"
     ></nb-base-calendar>
   `,
 })
@@ -285,6 +286,12 @@ export class NbCalendarRangeComponent<D> {
    * Sets symbol used as a header for week numbers column
    * */
   @Input() weekNumberSymbol: string = '#';
+
+  /**
+   * Sets first day of the week, it can be 1 if week starts from monday and 0 if from sunday and so on.
+   * `undefined` means that default locale setting will be used.
+   * */
+  @Input() firstDayOfWeek: number | undefined;
 
   /**
    * Emits range when start selected and emits again when end selected.
