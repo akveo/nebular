@@ -98,7 +98,7 @@
     "@angular/cli": "^17.1.0",
     "@angular/compiler-cli": "^17.1.0",
     "@angular/language-service": "^17.1.0",
-    "@schematics/angular": "^16.2.0",
+    "@schematics/angular": "^17.1.0",
     "@types/gulp": "4.0.6",
     "@types/highlight.js": "^9.12.4",
     "@types/jasmine": "~3.10.0",
