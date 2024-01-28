@@ -15,8 +15,11 @@
 
   &::-webkit-scrollbar-thumb {
     background: $fg;
-    cursor: pointer;
     border-radius: $border-radius;
+
+    &:hover {
+      cursor: pointer;
+    }
   }
 
   &::-webkit-scrollbar-track {
