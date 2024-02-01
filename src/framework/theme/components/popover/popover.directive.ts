@@ -225,6 +225,10 @@ export class NbPopoverDirective implements NbDynamicOverlayController, OnChanges
     this.dynamicOverlay.show();
   }
 
+  updatePosition() {
+    this.dynamicOverlay.updatePosition();
+  }
+
   hide() {
     this.dynamicOverlay.hide();
   }

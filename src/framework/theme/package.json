@@ -1,8 +1,8 @@
 {
   "name": "@guestway-io/nebular-theme",
-  "version": "13.0.0",
+  "version": "13.0.1",
   "description": "@nebular/theme",
-  "author": "akveo",
+  "author": "akveo & sven & little bit gilles",
   "license": "MIT",
   "repository": {
     "type": "git",

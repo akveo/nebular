@@ -233,13 +233,12 @@ export class NbDynamicOverlay {
     const overlayDestroy$ = this.overlayDestroy$.pipe(
       filter((destroyedOverlay: NbOverlayRef) => destroyedOverlay === overlay),
     );
-
     this.zone.onStable
       .pipe(take(1), takeUntil(merge(this.destroy$, overlayDestroy$)))
       .subscribe(() => this.updatePosition());
   }
 
-  protected updatePosition() {
+  updatePosition() {
     if (this.ref) {
       this.ref.updatePosition();
     }
