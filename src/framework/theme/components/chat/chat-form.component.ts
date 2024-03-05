@@ -163,7 +163,7 @@ export class NbChatFormComponent {
    * Allow multiline input
    * @type {boolean}
    */
-  @Input() multiline: boolean = true;
+  @Input() multiline: boolean = false;
 
   /**
    *
