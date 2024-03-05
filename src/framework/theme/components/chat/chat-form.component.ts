@@ -62,7 +62,25 @@ import { NbComponentOrCustomStatus } from '../component-status';
       </ng-container>
     </div>
     <div class="message-row">
+      <textarea
+        *ngIf="multiline"
+        nbInput
+        fullWidth
+        [status]="getInputStatus()"
+        (focus)="inputFocus = true"
+        (blur)="inputFocus = false"
+        (mouseenter)="inputHover = true"
+        (mouseleave)="inputHover = false"
+        [(ngModel)]="message"
+        (input)="adjustTextareaHeight($event)"
+        rows="1"
+        (ngModelChange)="onModelChange($event)"
+        [class.with-button]="showButton"
+        placeholder="{{ fileOver ? dropFilePlaceholder : messagePlaceholder }}"
+        (keyup.enter)="sendMessage()"
+      ></textarea>
       <input
+        *ngIf="!multiline"
         nbInput
         fullWidth
         [status]="getInputStatus()"
@@ -140,6 +158,12 @@ export class NbChatFormComponent {
    * @type {string}
    */
   @Input() dropFilePlaceholder: string = 'Drop file to send';
+
+  /**
+   * Allow multiline input
+   * @type {boolean}
+   */
+  @Input() multiline: boolean = true;
 
   /**
    *
@@ -251,5 +275,14 @@ export class NbChatFormComponent {
 
   onModelChange(value: string): void {
     this.onInputChange.emit(value);
+  }
+
+  adjustTextareaHeight(event: Event): void {
+    const textarea = event.target as HTMLTextAreaElement;
+    if (textarea) {
+      textarea.style.height = 'auto';
+      const computedHeight = textarea.scrollHeight;
+      textarea.style.height = computedHeight + 'px';
+    }
   }
 }
