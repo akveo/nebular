@@ -14,7 +14,7 @@ The package provides the following strategies:
 <div class="note note-info">
   <div class="note-title">Note</div>
   <div class="note-body">
-   The package connects firebase auth with nebular/auth so you need `firebase` and `@angular/fire` installed
+   The package connects firebase auth with nebular/auth so you need <code>firebase</code> and <code>@angular/fire</code> installed
  and configured for your application. For more instructions please see [@angular/fire docs](https://github.com/angular/angularfire).
  Also make sure you import AngularFireAuthModule.
   </div>
@@ -23,9 +23,9 @@ The package provides the following strategies:
  
 Install Nebular Auth and Nebular Firebase Auth.
  
- ```sh
-   npm i @nebular/auth @nebular/firebase-auth
- ```
+```sh
+npm i @nebular/auth @nebular/firebase-auth
+```
 
 Import the NbAuthModule with some firebase strategies, in that example we use NbFirebasePasswordStrategy.
 
