@@ -15,7 +15,6 @@ Auth module comes with a list of authentication components:
 Alongside with the strategies' configuration `AuthModule` also accepts a list of settings for UI side under the `forms` key:
 
 ```typescript
-
 @NgModule({
   imports: [
    // ...
@@ -36,7 +35,6 @@ Alongside with the strategies' configuration `AuthModule` also accepts a list of
 You can configure each specific form separately, here're the default values:
 
 ```typescript
-
 export interface NbAuthSocialLink {
   link?: string,
   url?: string,
@@ -116,47 +114,46 @@ export const defaultSettings: any = {
 So, for instance, to remove the redirectDelay setting and disable the success message, we can do the following:
 
 ```typescript
-
 @NgModule({
   imports: [
    // ...
     
    NbAuthModule.forRoot({
-         strategies: [
-           NbPasswordAuthStrategy.setup({
-             name: 'email',
-           }),
-         ],
-         forms: {
-           login: {
-             redirectDelay: 0,
-             showMessages: {
-               success: true,
-             },
-           },
-           register: {
-             redirectDelay: 0,
-             showMessages: {
-               success: true,
-             },
-           },
-           requestPassword: {
-             redirectDelay: 0,
-             showMessages: {
-               success: true,
-             },
-           },
-           resetPassword: {
-             redirectDelay: 0,
-             showMessages: {
-               success: true,
-             },
-           },
-           logout: {
-             redirectDelay: 0,
-           },
-         },
-       }), 
+      strategies: [
+        NbPasswordAuthStrategy.setup({
+          name: 'email',
+        }),
+      ],
+      forms: {
+        login: {
+          redirectDelay: 0,
+          showMessages: {
+            success: true,
+          },
+        },
+        register: {
+          redirectDelay: 0,
+          showMessages: {
+            success: true,
+          },
+        },
+        requestPassword: {
+          redirectDelay: 0,
+          showMessages: {
+            success: true,
+          },
+        },
+        resetPassword: {
+          redirectDelay: 0,
+          showMessages: {
+            success: true,
+          },
+        },
+        logout: {
+          redirectDelay: 0,
+        },
+      },
+    }), 
   ],
 });
 
@@ -165,7 +162,6 @@ So, for instance, to remove the redirectDelay setting and disable the success me
 If it looks a bit verbose, we can move the repeating part into a variable like this:
 
 ```typescript
-
 const formSetting: any = {
   redirectDelay: 0,
   showMessages: {
@@ -178,21 +174,21 @@ const formSetting: any = {
    // ...
     
    NbAuthModule.forRoot({
-         strategies: [
-           NbPasswordAuthStrategy.setup({
-             name: 'email',
-           }),
-         ],
-         forms: {
-           login: formSetting,
-           register: formSetting,
-           requestPassword: formSetting,
-           resetPassword: formSetting,
-           logout: {
-             redirectDelay: 0,
-           },
-         },
-       }), 
+      strategies: [
+        NbPasswordAuthStrategy.setup({
+          name: 'email',
+        }),
+      ],
+      forms: {
+        login: formSetting,
+        register: formSetting,
+        requestPassword: formSetting,
+        resetPassword: formSetting,
+        logout: {
+          redirectDelay: 0,
+        },
+      },
+    }), 
   ],
 });
 

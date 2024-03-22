@@ -87,7 +87,7 @@ export interface NbStepChangeEvent {
  * @stacked-example(Vertical, stepper/stepper-vertical.component)
  *
  * `disableStepNavigation` disables navigation by clicking on steps, so user can navigate only using
- * 'nbStepperPrevious' and 'nbStepperNext' buttons.
+ * `nbStepperPrevious` and `nbStepperNext` buttons.
  * @stacked-example(Disabled steps navigation, stepper/stepper-disabled-step-nav.component)
  *
  * Use `stepChange` output to listening to step change event. This event emits `NbStepChangeEvent` object.
