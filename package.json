@@ -42,7 +42,7 @@
     "lint:fix": "lint-staged --config ./.lintstagedrc-fix.json",
     "e2e": "ng e2e playground-e2e",
     "ci:lint": "npm-run-all -p lint lint:styles",
-    "version:bump": "gulp version",
+    "version:bump": "ts-node -P tools/gulp/tsconfig.json tools/bump-version/bump-version.ts",
     "version:changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
     "release:validate": "npm-run-all build:packages build:wp \"e2e -c=production-wp\" && npm run test:wp -- --watch=false",
     "release": "npm-run-all release:validate publish",
