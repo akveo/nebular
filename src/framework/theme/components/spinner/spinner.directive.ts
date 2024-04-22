@@ -89,7 +89,7 @@ export class NbSpinnerDirective implements OnInit {
    * Directive value - show or hide spinner
    * @param {boolean} val
    */
-  @Input('nbSpinner')
+  @Input()
   set nbSpinner(val: boolean) {
     if (this.componentFactory) {
       if (val) {

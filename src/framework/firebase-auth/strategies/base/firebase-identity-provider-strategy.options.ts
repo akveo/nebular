@@ -44,4 +44,4 @@ export class NbFirebaseIdentityProviderStrategyOptions extends NbAuthStrategyOpt
   };
   scopes?: string[] = [];
   customParameters?: { [key: string]: string } = {};
-};
+}

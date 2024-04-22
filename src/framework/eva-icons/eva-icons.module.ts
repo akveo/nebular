@@ -13,18 +13,17 @@ interface NbOriginalEvaIcon {
 }
 
 export interface NbEvaIconOptions {
-  width: string,
-  height: string,
-  fill: string,
+  width: string;
+  height: string;
+  fill: string;
   animation: {
-    type: string,
-    hover: boolean,
-    infinite: boolean,
-  },
+    type: string;
+    hover: boolean;
+    infinite: boolean;
+  };
 }
 
 export class NbEvaSvgIcon extends NbSvgIcon {
-
   constructor(protected name, protected content: NbOriginalEvaIcon) {
     super(name, '');
   }
@@ -41,7 +40,6 @@ export class NbEvaSvgIcon extends NbSvgIcon {
 
 @NgModule({})
 export class NbEvaIconsModule {
-
   private NAME = 'eva';
 
   constructor(iconLibrary: NbIconLibraries) {
@@ -50,8 +48,7 @@ export class NbEvaIconsModule {
   }
 
   private createIcons(): NbIcons {
-    return Object
-      .entries<NbOriginalEvaIcon>(icons)
+    return Object.entries<NbOriginalEvaIcon>(icons)
       .map(([name, icon]) => {
         return [name, new NbEvaSvgIcon(name, icon)] as [string, NbSvgIcon];
       })

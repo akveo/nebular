@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license infornbion.
  */
 
-import { Directive, ElementRef, InjectionToken, Input } from '@angular/core';
+import { Directive, ElementRef, HostBinding, InjectionToken, Input } from '@angular/core';
 import {
   CdkCell,
   CdkCellDef,
@@ -90,12 +90,11 @@ export class NbColumnDefDirective extends CdkColumnDef {
 /** Header cell template container that adds the right classes and role. */
 @Directive({
   selector: 'nb-header-cell, th[nbHeaderCell]',
-  host: {
-    'class': 'nb-header-cell',
-    'role': 'columnheader',
-  },
 })
 export class NbHeaderCellDirective extends CdkHeaderCell {
+  @HostBinding('attr.role') role = 'columnheader';
+  @HostBinding('class') classes = 'nb-header-cell';
+
   constructor(columnDef: NbColumnDefDirective,
               elementRef: ElementRef<HTMLElement>) {
     super(columnDef, elementRef);
@@ -106,12 +105,11 @@ export class NbHeaderCellDirective extends CdkHeaderCell {
 /** Footer cell template container that adds the right classes and role. */
 @Directive({
   selector: 'nb-footer-cell, td[nbFooterCell]',
-  host: {
-    'class': 'nb-footer-cell',
-    'role': 'gridcell',
-  },
 })
 export class NbFooterCellDirective extends CdkFooterCell {
+  @HostBinding('attr.role') role = 'gridcell';
+  @HostBinding('class') classes = 'nb-footer-cell';
+
   constructor(columnDef: NbColumnDefDirective,
               elementRef: ElementRef) {
     super(columnDef, elementRef);
@@ -122,12 +120,11 @@ export class NbFooterCellDirective extends CdkFooterCell {
 /** Cell template container that adds the right classes and role. */
 @Directive({
   selector: 'nb-cell, td[nbCell]',
-  host: {
-    'class': 'nb-cell',
-    'role': 'gridcell',
-  },
 })
 export class NbCellDirective extends CdkCell {
+  @HostBinding('attr.role') role = 'gridcell';
+  @HostBinding('class') classes = 'nb-cell';
+
   constructor(columnDef: NbColumnDefDirective,
               elementRef: ElementRef<HTMLElement>) {
     super(columnDef, elementRef);

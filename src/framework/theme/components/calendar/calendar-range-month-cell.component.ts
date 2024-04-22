@@ -45,6 +45,7 @@ export class NbCalendarRangeMonthCellComponent<D> extends NbBaseCalendarRangeCel
   @Input() size: NbCalendarSize = NbCalendarSize.MEDIUM;
   static ngAcceptInputType_size: NbCalendarSizeValues;
 
+  // eslint-disable-next-line @angular-eslint/no-output-native
   @Output() select: EventEmitter<D> = new EventEmitter(true);
 
   @HostBinding('class.month-cell')

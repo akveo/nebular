@@ -57,15 +57,15 @@ jobs:
           name: built-packages
           path: dist
       - run: npm run build playground -- --configuration=production-wp
-#  lint:
-#    runs-on: ubuntu-latest
-#    steps:
-#      - uses: actions/checkout@v2
-#      - uses: actions/setup-node@v2
-#        with:
-#          node-version: '16'
-#      - run: npm ci
-#      - run: npm run ci:lint
+ lint:
+   runs-on: ubuntu-latest
+   steps:
+     - uses: actions/checkout@v2
+     - uses: actions/setup-node@v2
+       with:
+         node-version: '16'
+     - run: npm ci
+     - run: npm run ci:lint
 #  e2e:
 #    needs: build-packages
 #    runs-on: ubuntu-latest

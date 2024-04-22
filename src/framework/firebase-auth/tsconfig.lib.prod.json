@@ -4,12 +4,8 @@
   "compilerOptions": {
     "declarationMap": false,
     "paths": {
-      "@nebular/theme": [
-        "dist/theme"
-      ],
-      "@nebular/auth": [
-        "dist/auth"
-      ]
+      "@nebular/theme": ["dist/theme"],
+      "@nebular/auth": ["dist/auth"]
     }
   },
   "angularCompilerOptions": {

@@ -165,6 +165,7 @@ export class NbAlertComponent {
    * Emits when chip is removed
    * @type EventEmitter<any>
    */
+  // eslint-disable-next-line @angular-eslint/no-output-native
   @Output() close = new EventEmitter();
 
   constructor(protected statusService: NbStatusService) {

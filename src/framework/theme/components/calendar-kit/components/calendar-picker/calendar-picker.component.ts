@@ -37,6 +37,7 @@ export class NbCalendarPickerComponent<D, T> {
   @Input() filter: (D) => boolean;
   @Input() size: NbCalendarSize = NbCalendarSize.MEDIUM;
   static ngAcceptInputType_size: NbCalendarSizeValues;
+  // eslint-disable-next-line @angular-eslint/no-output-native
   @Output() select: EventEmitter<D> = new EventEmitter();
 
   @HostBinding('class.size-large')

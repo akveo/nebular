@@ -41,6 +41,7 @@ export class NbCalendarRangeYearCellComponent<D> extends NbBaseCalendarRangeCell
   @Input() size: NbCalendarSize = NbCalendarSize.MEDIUM;
   static ngAcceptInputType_size: NbCalendarSizeValues;
 
+  // eslint-disable-next-line @angular-eslint/no-output-native
   @Output() select: EventEmitter<D> = new EventEmitter(true);
 
   constructor(protected dateService: NbDateService<D>) {
