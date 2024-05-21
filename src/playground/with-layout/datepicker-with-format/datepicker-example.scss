@@ -1,0 +1,31 @@
+nb-card-body {
+  text-align: center;
+}
+
+input {
+  width: 100%;
+}
+
+input:nth-of-type(2) {
+  margin-top: 1rem;
+}
+
+@media screen and (min-width: 31em) {
+  input {
+    width: 21.875rem;
+  }
+
+  .two-inputs input {
+    width: calc(50% - 0.5rem);
+  }
+  .two-inputs input:last-of-type {
+    margin-top: 0;
+    margin-left: 1rem;
+  }
+}
+
+@media screen and (min-width: 50.25em) {
+  .two-inputs input {
+    width: 21.875rem;
+  }
+}

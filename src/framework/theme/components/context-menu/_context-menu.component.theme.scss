@@ -3,10 +3,10 @@
  * Copyright Akveo. All Rights Reserved.
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
-@import '../../styles/core/mixins';
+
+@use '../../styles/theming' as *;
 
 @mixin nb-context-menu-theme() {
-
   .context-menu-host {
     /*
       Fixes click not being bubbled to the body in Safari.
@@ -29,6 +29,10 @@
       border-radius: nb-theme(context-menu-border-radius);
       overflow: hidden;
       text-align: nb-theme(context-menu-text-align);
+
+      nb-icon.expand-state svg {
+        pointer-events: none;
+      }
     }
   }
 }

@@ -5,14 +5,14 @@
  */
 
 import { DebugElement, NO_ERRORS_SCHEMA, SimpleChange } from '@angular/core';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, flush, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-
-import { NbCalendarDayPickerComponent } from './calendar-day-picker.component';
-import { NbCalendarDayCellComponent } from './calendar-day-cell.component';
-import { NbCalendarMonthModelService } from '../../services/calendar-month-model.service';
-import { NbCalendarKitModule } from '../../calendar-kit.module';
-
+import {
+  NbCalendarDayPickerComponent,
+  NbCalendarDayCellComponent,
+  NbCalendarMonthModelService,
+  NbCalendarKitModule,
+} from '@nebular/theme';
 
 describe('Component: NbCalendarDayPicker', () => {
   let component: NbCalendarDayPickerComponent<Date, Date>;
@@ -50,11 +50,10 @@ describe('Component: NbCalendarDayPicker', () => {
     expect(component.cellComponent).toBe(NbCalendarDayCellComponent);
   });
 
-  it('should fire monthChange when cell selected', done => {
-    component.dateChange.subscribe(done);
-    componentEl.query(By.css('nb-calendar-picker'))
-      .nativeElement
-      .dispatchEvent(new CustomEvent('select'));
-  })
+  it('should fire dateChange when cell selected', () => {
+    const dateChangeSpy = jasmine.createSpy('dateChange spy');
+    component.dateChange.subscribe(dateChangeSpy);
+    componentEl.query(By.css('nb-calendar-picker')).nativeElement.dispatchEvent(new CustomEvent('select'));
+    expect(dateChangeSpy).toHaveBeenCalled();
+  });
 });
-

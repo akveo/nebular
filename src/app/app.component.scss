@@ -1,18 +1,34 @@
-.framework-options-bar {
+.toolbar {
   display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+
+  color: black;
+
+  &.tools-visible {
+    padding: 0.25rem;
+  }
 }
 
-::ng-deep {
-  .options-bar {
-    display: flex;
-    align-items: center;
-  }
-  .options-show {
-    margin-left: auto;
-  }
-  .options-show.fixed {
-    position: fixed;
-    right: 0;
-    top: 0;
-  }
+.toolbar-toggle-fixed {
+  position: fixed;
+  left: 0.25rem;
+  top: 0.25rem;
+}
+
+.tools-divider {
+  display: inline-block;
+  border-right: 1px solid rgba(0, 0, 0, 0.25);
+  height: 1em;
+  margin: 0 0.5rem;
+}
+
+.hide-components-list {
+  margin-left: 0.25rem;
+}
+
+.component-list-wrapper {
+  flex: 0 0 100vw;
+  min-height: 100vh;
+  padding: 0.5rem 1rem;
 }

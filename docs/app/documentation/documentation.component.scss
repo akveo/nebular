@@ -1,7 +1,7 @@
-@import '../@theme/styles/themes';
+@use '../@theme/styles/themes' as *;
+@use '../../../src/framework/theme/styles/globals' as *;
 
 @include nb-install-component() {
-
   $content-width: nb-theme(content-width);
   $settings-width: nb-theme(settings-col-width);
   $settings-margin: nb-theme(settings-col-margin);
@@ -71,7 +71,7 @@
     }
 
     .menu-item {
-      border: none!important;
+      border: none !important;
 
       .menu-title {
         flex: 1 1 auto;
@@ -79,8 +79,10 @@
     }
 
     .menu-items .menu-item .menu-item a {
-      &:hover, &.active, &:focus {
-        outline: none!important;
+      &:hover,
+      &.active,
+      &:focus {
+        outline: none !important;
       }
     }
   }

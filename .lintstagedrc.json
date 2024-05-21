@@ -1,0 +1,5 @@
+{
+  "*.{ts,js}": "eslint --cache",
+  "*.{scss,css}": "stylelint",
+  "*.{ts,scss,html,md,js,css}": "prettier --check"
+}

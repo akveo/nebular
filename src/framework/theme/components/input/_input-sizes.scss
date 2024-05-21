@@ -4,6 +4,8 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
+@use '../../styles/theming' as *;
+
 @mixin input-sizes() {
   @each $size in nb-get-sizes() {
     &.size-#{$size} {

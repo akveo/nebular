@@ -1,11 +1,4 @@
-import {
-  Directive,
-  Injectable,
-  ModuleWithProviders,
-  NgModule,
-  TemplateRef,
-  ViewContainerRef,
-} from '@angular/core';
+import { Directive, Injectable, ModuleWithProviders, NgModule, TemplateRef, ViewContainerRef } from '@angular/core';
 import {
   CdkPortal,
   CdkPortalOutlet,
@@ -32,17 +25,13 @@ import {
 } from '@angular/cdk/overlay';
 import { NbScrollStrategyOptions } from '../adapter/block-scroll-strategy-adapter';
 
-
 @Directive({ selector: '[nbPortal]' })
-export class NbPortalDirective extends CdkPortal {
-}
+export class NbPortalDirective extends CdkPortal {}
 
 @Directive({ selector: '[nbPortalOutlet]' })
-export class NbPortalOutletDirective extends CdkPortalOutlet {
-}
+export class NbPortalOutletDirective extends CdkPortalOutlet {}
 
-export class NbComponentPortal<T = any> extends ComponentPortal<T> {
-}
+export class NbComponentPortal<T = any> extends ComponentPortal<T> {}
 
 @Injectable()
 export class NbOverlay extends Overlay {
@@ -50,8 +39,7 @@ export class NbOverlay extends Overlay {
 }
 
 @Injectable()
-export class NbOverlayPositionBuilder extends OverlayPositionBuilder {
-}
+export class NbOverlayPositionBuilder extends OverlayPositionBuilder {}
 
 export class NbTemplatePortal<T = any> extends TemplatePortal<T> {
   constructor(template: TemplateRef<T>, viewContainerRef?: ViewContainerRef, context?: T) {
@@ -60,14 +48,11 @@ export class NbTemplatePortal<T = any> extends TemplatePortal<T> {
 }
 
 @Injectable()
-export class NbOverlayContainer extends OverlayContainer {
-}
+export class NbOverlayContainer extends OverlayContainer {}
 
-export class NbFlexibleConnectedPositionStrategy extends FlexibleConnectedPositionStrategy {
-}
+export class NbFlexibleConnectedPositionStrategy extends FlexibleConnectedPositionStrategy {}
 
-export class NbPortalInjector extends PortalInjector {
-}
+export class NbPortalInjector extends PortalInjector {}
 
 export type NbPortal<T = any> = Portal<T>;
 export type NbOverlayRef = OverlayRef;
@@ -87,21 +72,14 @@ const CDK_MODULES = [OverlayModule, PortalModule];
  * */
 @NgModule({
   imports: [...CDK_MODULES],
-  exports: [
-    ...CDK_MODULES,
-    NbPortalDirective,
-    NbPortalOutletDirective,
-  ],
+  exports: [...CDK_MODULES, NbPortalDirective, NbPortalOutletDirective],
   declarations: [NbPortalDirective, NbPortalOutletDirective],
 })
 export class NbCdkMappingModule {
   static forRoot(): ModuleWithProviders<NbCdkMappingModule> {
     return {
       ngModule: NbCdkMappingModule,
-      providers: [
-        NbOverlay,
-        NbOverlayPositionBuilder,
-      ],
+      providers: [NbOverlay, NbOverlayPositionBuilder],
     };
   }
 }

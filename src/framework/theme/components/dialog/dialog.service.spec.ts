@@ -1,32 +1,33 @@
 import { Component, NgModule, Injectable } from '@angular/core';
 import { fakeAsync, TestBed, tick } from '@angular/core/testing';
 
-import { NbOverlayContainerAdapter } from '../cdk/adapter/overlay-container-adapter';
-import { NbViewportRulerAdapter } from '../cdk/adapter/viewport-ruler-adapter';
-import { NbOverlayService } from '../cdk/overlay/overlay-service';
-import { NbDialogService } from './dialog.service';
-import { NbDialogModule } from './dialog.module';
-import { NbThemeModule } from '../../theme.module';
-import { NB_DOCUMENT } from '../../theme.options';
+import {
+  NbOverlayContainerAdapter,
+  NbViewportRulerAdapter,
+  NbOverlayService,
+  NbDialogService,
+  NbDialogModule,
+  NbThemeModule,
+  NB_DOCUMENT,
+} from '@nebular/theme';
 
 @Injectable()
 export class NbViewportRulerMockAdapter extends NbViewportRulerAdapter {
-  getViewportSize(): Readonly<{ width: number; height: number; }> {
+  getViewportSize(): Readonly<{ width: number; height: number }> {
     return { width: 1600, height: 900 };
+  }
+  getViewportScrollPosition(): { left: number; top: number } {
+    return { left: 0, top: 0 };
   }
 }
 
 @Component({ selector: 'nb-test-dialog', template: '<button class="test-focusable-button"></button>' })
-class NbTestDialogComponent {
-}
+class NbTestDialogComponent {}
 
 @NgModule({
   declarations: [NbTestDialogComponent],
-  entryComponents: [NbTestDialogComponent],
 })
-class NbTestDialogModule {
-}
-
+class NbTestDialogModule {}
 
 describe('dialog-service', () => {
   let dialog: NbDialogService;
@@ -39,11 +40,7 @@ describe('dialog-service', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [
-        NbTestDialogModule,
-        NbThemeModule.forRoot(),
-        NbDialogModule.forRoot(),
-      ],
+      imports: [NbTestDialogModule, NbThemeModule.forRoot(), NbDialogModule.forRoot()],
       providers: [{ provide: NbViewportRulerAdapter, useClass: NbViewportRulerMockAdapter }],
     });
 
@@ -83,7 +80,6 @@ describe('dialog-service', () => {
     expect(overlayContainer.querySelector('.nb-overlay-test-dialog-class')).toBeTruthy();
   });
 
-
   it('should render with backdrop if hasBackdrop is true', () => {
     dialog.open(NbTestDialogComponent, { hasBackdrop: true });
     expect(queryBackdrop()).toBeTruthy();
@@ -114,11 +110,11 @@ describe('dialog-service', () => {
     expect(blockSpy).toHaveBeenCalledTimes(1);
   });
 
-  it('should fire onBackdropClick if backdrop was clicked', done => {
+  it('should fire onBackdropClick if backdrop was clicked', (done) => {
     const ref = dialog.open(NbTestDialogComponent, { closeOnBackdropClick: false });
     const backdrop = queryBackdrop();
 
-    ref.onBackdropClick.subscribe(e => {
+    ref.onBackdropClick.subscribe((e) => {
       expect(e.target).toBe(backdrop);
       done();
     });
@@ -126,7 +122,7 @@ describe('dialog-service', () => {
     backdrop.dispatchEvent(new Event('click'));
   });
 
-  it('should not fire onBackdropClick if backdrop wasn\'t clicked', () => {
+  it("should not fire onBackdropClick if backdrop wasn't clicked", () => {
     const ref = dialog.open(NbTestDialogComponent, { closeOnBackdropClick: false });
     const spy = jasmine.createSpy();
     ref.onBackdropClick.subscribe(spy);
@@ -149,16 +145,15 @@ describe('dialog-service', () => {
 
   it('should close on escape press if closeOnEsc is true', fakeAsync(() => {
     dialog.open(NbTestDialogComponent, { closeOnEsc: true });
-    document.dispatchEvent(new KeyboardEvent('keyup', <any> { keyCode: 27 }));
+    document.dispatchEvent(new KeyboardEvent('keyup', <any>{ keyCode: 27 }));
     tick(500);
     expect(queryBackdrop()).toBeFalsy();
   }));
 
   it('should not close on escape press if closeOnEsc is false', fakeAsync(() => {
     dialog.open(NbTestDialogComponent, { closeOnEsc: false });
-    document.dispatchEvent(new KeyboardEvent('keyup', <any> { keyCode: 27 }));
+    document.dispatchEvent(new KeyboardEvent('keyup', <any>{ keyCode: 27 }));
     tick(500);
     expect(queryBackdrop()).toBeTruthy();
   }));
 });
-

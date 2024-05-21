@@ -74,7 +74,6 @@ import { NbTagInputDirective } from './tag-input.directive';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NbTagListComponent implements OnInit, AfterContentInit, AfterViewInit, OnDestroy {
-
   protected readonly destroy$: Subject<void> = new Subject<void>();
   protected readonly keyDown$: Subject<KeyboardEvent> = new Subject<KeyboardEvent>();
   protected readonly tagClick$: Subject<NbTagComponent> = new Subject<NbTagComponent>();
@@ -172,9 +171,10 @@ export class NbTagListComponent implements OnInit, AfterContentInit, AfterViewIn
   ) {}
 
   ngOnInit() {
-    this.focusMonitor.monitor(this.hostElement, true)
+    this.focusMonitor
+      .monitor(this.hostElement, true)
       .pipe(
-        map(origin => !!origin),
+        map((origin) => !!origin),
         finalize(() => this.focusMonitor.stopMonitoring(this.hostElement)),
         takeUntil(this.destroy$),
       )
@@ -197,9 +197,11 @@ export class NbTagListComponent implements OnInit, AfterContentInit, AfterViewIn
     this.listenNoTags();
 
     // TODO: #2254
-    this.zone.runOutsideAngular(() => setTimeout(() => {
-      this.renderer.addClass(this.hostElement.nativeElement, 'nb-transition');
-    }));
+    this.zone.runOutsideAngular(() =>
+      setTimeout(() => {
+        this.renderer.addClass(this.hostElement.nativeElement, 'nb-transition');
+      }),
+    );
   }
 
   ngOnDestroy() {
@@ -214,16 +216,17 @@ export class NbTagListComponent implements OnInit, AfterContentInit, AfterViewIn
   }
 
   protected listenToLayoutDirectionChange(): void {
-    this.directionService.onDirectionChange()
+    this.directionService
+      .onDirectionChange()
       .pipe(takeUntil(this.destroy$))
       .subscribe((direction: NbLayoutDirection) => this.keyManager.withHorizontalOrientation(direction));
   }
 
   protected listenListKeyDown(): void {
-    const tagListKeyDown$ = this.keyDown$
-      .pipe(filter(({ target }: KeyboardEvent) => target === this.hostElement.nativeElement));
-    const activeTagKeyDown$ = tagListKeyDown$
-      .pipe(filter(() => !!this.keyManager.activeItem));
+    const tagListKeyDown$ = this.keyDown$.pipe(
+      filter(({ target }: KeyboardEvent) => target === this.hostElement.nativeElement),
+    );
+    const activeTagKeyDown$ = tagListKeyDown$.pipe(filter(() => !!this.keyManager.activeItem));
 
     tagListKeyDown$
       .pipe(takeUntil(this.destroy$))
@@ -250,8 +253,9 @@ export class NbTagListComponent implements OnInit, AfterContentInit, AfterViewIn
   }
 
   protected listenInputKeyDown(): void {
-    const inputKeyDown$ = this.keyDown$
-      .pipe(filter(({ target }: KeyboardEvent) => target === this.tagInput?._hostElement.nativeElement));
+    const inputKeyDown$ = this.keyDown$.pipe(
+      filter(({ target }: KeyboardEvent) => target === this.tagInput?._hostElement.nativeElement),
+    );
 
     inputKeyDown$
       .pipe(
@@ -268,12 +272,10 @@ export class NbTagListComponent implements OnInit, AfterContentInit, AfterViewIn
   }
 
   protected listenTagClick(): void {
-    this.tagClick$
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((clickedTag: NbTagComponent) => {
-        this.toggleTag(clickedTag);
-        this.keyManager.setActiveItem(clickedTag);
-      });
+    this.tagClick$.pipe(takeUntil(this.destroy$)).subscribe((clickedTag: NbTagComponent) => {
+      this.toggleTag(clickedTag);
+      this.keyManager.setActiveItem(clickedTag);
+    });
   }
 
   protected listenTagRemove(): void {
@@ -311,7 +313,7 @@ export class NbTagListComponent implements OnInit, AfterContentInit, AfterViewIn
         filter((tags: QueryList<NbTagComponent>) => tags.length === 0),
         takeUntil(this.destroy$),
       )
-      .subscribe(() => this.focusInput());
+      .subscribe(() => this.focusInputIfActive());
   }
 
   protected listenActiveTagChange(): void {
@@ -331,7 +333,7 @@ export class NbTagListComponent implements OnInit, AfterContentInit, AfterViewIn
     this.cd.markForCheck();
 
     if (!isFocused || this.tagInput?.focused$.value) {
-      this.keyManager.setActiveItem(-1);
+      this.keyManager?.setActiveItem(-1);
       return;
     }
 
@@ -368,6 +370,12 @@ export class NbTagListComponent implements OnInit, AfterContentInit, AfterViewIn
   protected focusInput(): void {
     if (this._hasInput) {
       this.tagInput._hostElement.nativeElement.focus();
+    }
+  }
+
+  protected focusInputIfActive(): void {
+    if (this._isFocused) {
+      this.focusInput();
     }
   }
 }

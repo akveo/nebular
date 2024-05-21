@@ -2,19 +2,21 @@ import { Component, ElementRef, Input, NgModule, Type, ViewChild } from '@angula
 import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
-
-import { NbThemeModule } from '../../theme.module';
-import { NbLayoutModule } from '../layout/layout.module';
-import { NbAdjustment, NbPosition } from '../cdk/overlay/overlay-position';
-import { NbDynamicOverlayHandler } from '../cdk/overlay/dynamic/dynamic-overlay-handler';
-import { NbOverlayContent } from '../cdk/overlay/overlay-service';
-import { NbRenderableContainer } from '../cdk/overlay/overlay-container';
-import { NbTrigger } from '../cdk/overlay/overlay-trigger';
-import { NbMenuModule } from '../menu/menu.module';
-import { NbContextMenuDirective } from './context-menu.directive';
-import { NbContextMenuComponent } from './context-menu.component';
-import { NbContextMenuModule } from './context-menu.module';
-import { NbOverlayConfig } from '../cdk/overlay/mapping';
+import {
+  NbThemeModule,
+  NbLayoutModule,
+  NbAdjustment,
+  NbPosition,
+  NbDynamicOverlayHandler,
+  NbOverlayContent,
+  NbRenderableContainer,
+  NbTrigger,
+  NbMenuModule,
+  NbContextMenuDirective,
+  NbContextMenuComponent,
+  NbContextMenuModule,
+  NbOverlayConfig,
+} from '@nebular/theme';
 
 @Component({
   selector: 'nb-context-menu-default-test',
@@ -39,12 +41,14 @@ export class NbContextMenuDefaultTestComponent {
   template: `
     <nb-layout>
       <nb-layout-column>
-        <button #button [nbContextMenu]="items"
-                [nbContextMenuTrigger]="trigger"
-                [nbContextMenuPlacement]="position"
-                [nbContextMenuAdjustment]="adjustment"
-                [nbContextMenuTag]="tag">
-        </button>
+        <button
+          #button
+          [nbContextMenu]="items"
+          [nbContextMenuTrigger]="trigger"
+          [nbContextMenuPlacement]="position"
+          [nbContextMenuAdjustment]="adjustment"
+          [nbContextMenuTag]="tag"
+        ></button>
       </nb-layout-column>
     </nb-layout>
   `,
@@ -96,8 +100,7 @@ export class NbDynamicOverlayHandlerMock {
   _offset: number;
   _overlayConfig: NbOverlayConfig = {};
 
-  constructor() {
-  }
+  constructor() {}
 
   host(host: ElementRef) {
     this._host = host;
@@ -152,14 +155,11 @@ export class NbDynamicOverlayHandlerMock {
     return dynamicOverlay;
   }
 
-  connect() {
-  }
+  connect() {}
 
-  disconnect() {
-  }
+  disconnect() {}
 
-  destroy() {
-  }
+  destroy() {}
 }
 
 const TEST_COMPONENTS = [
@@ -173,33 +173,32 @@ const TEST_COMPONENTS = [
   exports: [...TEST_COMPONENTS],
   declarations: [...TEST_COMPONENTS],
 })
-class ContextMenuTestModule { }
+class ContextMenuTestModule {}
 
 describe('Directive: NbContextMenuDirective', () => {
-
   const overlayHandler = new NbDynamicOverlayHandlerMock();
 
-  beforeEach(waitForAsync(() => {
-    TestBed.resetTestingModule();
-    TestBed.configureTestingModule({
-      imports: [
-        NoopAnimationsModule,
-        RouterTestingModule.withRoutes([]),
-        NbThemeModule.forRoot(),
-        NbMenuModule.forRoot(),
-        ContextMenuTestModule,
-      ],
-    });
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.resetTestingModule();
+      TestBed.configureTestingModule({
+        imports: [
+          NoopAnimationsModule,
+          RouterTestingModule.withRoutes([]),
+          NbThemeModule.forRoot(),
+          NbMenuModule.forRoot(),
+          ContextMenuTestModule,
+        ],
+      });
+    }),
+  );
 
   describe('smoke ', () => {
-
     let fixture: ComponentFixture<any>;
 
     afterEach(() => {
       fixture.destroy();
     });
-
 
     it('should render string', () => {
       fixture = TestBed.createComponent(NbContextMenuDefaultTestComponent);
@@ -211,15 +210,14 @@ describe('Directive: NbContextMenuDirective', () => {
       expect(textContainer.textContent).toContain('Log Out');
     });
 
-    it('should hide', () => fakeAsync(() => {
+    it('should hide', fakeAsync(() => {
       fixture = TestBed.createComponent(NbContextMenuDefaultTestComponent);
       fixture.detectChanges();
       fixture.componentInstance.contextMenu.show();
       fixture.detectChanges();
 
-
       const textContainer = fixture.nativeElement.querySelector('nb-menu');
-      expect(textContainer.textContent).toContain('Logout');
+      expect(textContainer.textContent).toContain('UserLog Out');
       fixture.componentInstance.contextMenu.hide();
       fixture.detectChanges();
 
@@ -235,36 +233,32 @@ describe('Directive: NbContextMenuDirective', () => {
       fixture.componentInstance.contextMenu.show();
       fixture.detectChanges();
 
-      fixture.componentInstance.items = [ { title: 'Hello' } ];
+      fixture.componentInstance.items = [{ title: 'Hello' }];
       fixture.detectChanges();
       const textContainer = fixture.nativeElement.querySelector('nb-menu');
       expect(textContainer.textContent).toContain('Hello');
     });
-
   });
 
   describe('mocked services', () => {
-
-    beforeEach(waitForAsync(() => {
-      TestBed.resetTestingModule();
-      TestBed.configureTestingModule({
-        imports: [
-          RouterTestingModule.withRoutes([]),
-          NbThemeModule.forRoot(),
-          NbMenuModule.forRoot(),
-          ContextMenuTestModule,
-        ],
-      })
-        .overrideDirective(NbContextMenuDirective, {
+    beforeEach(
+      waitForAsync(() => {
+        TestBed.resetTestingModule();
+        TestBed.configureTestingModule({
+          imports: [
+            RouterTestingModule.withRoutes([]),
+            NbThemeModule.forRoot(),
+            NbMenuModule.forRoot(),
+            ContextMenuTestModule,
+          ],
+        }).overrideDirective(NbContextMenuDirective, {
           set: {
-            providers: [
-              { provide: NbDynamicOverlayHandler, useValue: overlayHandler },
-            ],
+            providers: [{ provide: NbDynamicOverlayHandler, useValue: overlayHandler }],
           },
         });
-    }));
+      }),
+    );
     describe('default context-menu', () => {
-
       let fixture: ComponentFixture<NbContextMenuDefaultTestComponent>;
 
       afterEach(() => {
@@ -329,7 +323,6 @@ describe('Directive: NbContextMenuDirective', () => {
         expect(hideSpy).toHaveBeenCalledTimes(1);
         expect(toggleSpy).toHaveBeenCalledTimes(0);
 
-
         fixture.componentInstance.contextMenu.toggle();
         fixture.detectChanges();
 
@@ -346,12 +339,11 @@ describe('Directive: NbContextMenuDirective', () => {
         fixture.componentInstance.contextMenuClass = contextMenuClass;
         fixture.detectChanges();
 
-        expect(overlayConfigSpy).toHaveBeenCalledWith(jasmine.objectContaining({panelClass: contextMenuClass}));
+        expect(overlayConfigSpy).toHaveBeenCalledWith(jasmine.objectContaining({ panelClass: contextMenuClass }));
       });
     });
 
     describe('binding contextMenu', () => {
-
       let fixture: ComponentFixture<NbContextMenuBindingsTestComponent>;
 
       afterEach(() => {
@@ -359,7 +351,6 @@ describe('Directive: NbContextMenuDirective', () => {
       });
 
       it('should rebuild', () => {
-
         const componentSpy = spyOn(overlayHandler, 'componentType').and.callThrough();
         const hostSpy = spyOn(overlayHandler, 'host').and.callThrough();
         const positionSpy = spyOn(overlayHandler, 'position').and.callThrough();
@@ -406,7 +397,6 @@ describe('Directive: NbContextMenuDirective', () => {
     });
 
     describe('instance context-menu', () => {
-
       let fixture: ComponentFixture<NbContextMenuInstanceTestComponent>;
 
       afterEach(() => {
@@ -414,7 +404,6 @@ describe('Directive: NbContextMenuDirective', () => {
       });
 
       it('should rebuild', () => {
-
         const componentSpy = spyOn(overlayHandler, 'componentType').and.callThrough();
         const hostSpy = spyOn(overlayHandler, 'host').and.callThrough();
         const positionSpy = spyOn(overlayHandler, 'position').and.callThrough();
@@ -458,7 +447,6 @@ describe('Directive: NbContextMenuDirective', () => {
         expect(buildSpy).toHaveBeenCalledTimes(1);
         expect(rebuildSpy).toHaveBeenCalledTimes(2);
       });
-
     });
   });
 });

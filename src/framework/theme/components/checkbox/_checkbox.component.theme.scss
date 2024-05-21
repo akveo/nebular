@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-@import '../../styles/core/mixins';
+@use '../../styles/theming' as *;
 
 @mixin nb-checkbox-theme() {
   nb-checkbox {
@@ -29,7 +29,7 @@
       @include nb-outline(nb-theme(checkbox-outline-width), nb-theme(checkbox-outline-color));
     }
 
-    nb-icon {
+    .custom-checkbox-icon {
       position: absolute;
       top: 50%;
       left: 50%;
@@ -70,7 +70,7 @@
       background-color: nb-theme(checkbox-#{$status}-checked-background-color);
       border-color: nb-theme(checkbox-#{$status}-checked-border-color);
 
-      nb-icon {
+      .custom-checkbox-icon {
         color: nb-theme(checkbox-#{$status}-checked-checkmark-color);
       }
     }
@@ -79,7 +79,7 @@
       background-color: nb-theme(checkbox-#{$status}-indeterminate-background-color);
       border-color: nb-theme(checkbox-#{$status}-indeterminate-border-color);
 
-      nb-icon {
+      .custom-checkbox-icon {
         color: nb-theme(checkbox-#{$status}-indeterminate-checkmark-color);
       }
     }
@@ -122,7 +122,7 @@
         background-color: nb-theme(checkbox-#{$status}-disabled-background-color);
         border-color: nb-theme(checkbox-#{$status}-disabled-border-color);
 
-        nb-icon {
+        .custom-checkbox-icon {
           color: nb-theme(checkbox-#{$status}-disabled-checkmark-color);
         }
       }

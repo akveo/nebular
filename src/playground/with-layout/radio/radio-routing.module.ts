@@ -10,6 +10,7 @@ import { RadioDisabledComponent } from './radio-disabled.component';
 import { RadioShowcaseComponent } from './radio-showcase.component';
 import { RadioStatusesComponent } from './radio-statuses.component';
 import { RadioDisabledGroupComponent } from './radio-disabled-group.component';
+import { RadioFormComponent } from './radio-form.component';
 
 const routes: Route[] = [
   {
@@ -27,6 +28,10 @@ const routes: Route[] = [
   {
     path: 'radio-disabled-group.component',
     component: RadioDisabledGroupComponent,
+  },
+  {
+    path: 'radio-form.component',
+    component: RadioFormComponent,
   },
 ];
 

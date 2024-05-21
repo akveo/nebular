@@ -3,6 +3,9 @@
  * Copyright Akveo. All Rights Reserved.
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
+
+@use '../../styles/theming' as *;
+
 @mixin nb-timepicker-theme() {
   $border: nb-theme(timepicker-border-width) nb-theme(timepicker-border-style) nb-theme(timepicker-border-color);
   .nb-timepicker-container {
@@ -44,15 +47,16 @@
       }
 
       @include nb-scrollbars(
-          nb-theme(timepicker-scrollbar-color),
-          nb-theme(timepicker-scrollbar-background-color),
-          nb-theme(timepicker-scrollbar-width));
+        nb-theme(timepicker-scrollbar-color),
+        nb-theme(timepicker-scrollbar-background-color),
+        nb-theme(timepicker-scrollbar-width)
+      );
     }
 
     &.supports-scrollbar-theming {
       .values-list:hover .list-item:not(.am-pm-item) {
-        @include nb-ltr(margin-right, -#{nb-theme(timepicker-scrollbar-width)});
-        @include nb-rtl(margin-left, -#{nb-theme(timepicker-scrollbar-width)});
+        @include nb-ltr(margin-right, calc(#{nb-theme(timepicker-scrollbar-width)} * -1));
+        @include nb-rtl(margin-left, calc(#{nb-theme(timepicker-scrollbar-width)} * -1));
       }
     }
 

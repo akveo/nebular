@@ -1,6 +1,6 @@
 {
   "name": "@nebular/firebase-auth",
-  "version": "7.0.0",
+  "version": "13.0.0",
   "description": "@nebular/firebase-auth",
   "author": "akveo",
   "license": "MIT",
@@ -25,11 +25,14 @@
     "firebase"
   ],
   "peerDependencies": {
-    "@angular/core": "^11.0.0",
-    "@nebular/auth": "7.0.0",
-    "rxjs": "^6.5.1",
-    "firebase": "^8.0.0",
-    "@angular/fire": "^6.1.0"
+    "@angular/core": "^17.1.0",
+    "@nebular/auth": "13.0.0",
+    "rxjs": "^6.5.3 || ^7.4.0",
+    "firebase": "^10.7.2",
+    "@angular/fire": "^17.0.1"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0"
   },
   "sideEffects": false
 }

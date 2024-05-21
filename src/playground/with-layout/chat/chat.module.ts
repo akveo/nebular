@@ -6,7 +6,8 @@
 
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NbCardModule, NbChatModule } from '@nebular/theme';
+import { NbCardModule, NbChatModule, NbButtonModule } from '@nebular/theme';
+
 import { ChatRoutingModule } from './chat-routing.module';
 import { ChatColorsComponent } from './chat-colors.component';
 import { ChatConversationShowcaseComponent } from './chat-conversation-showcase.component';
@@ -15,6 +16,9 @@ import { ChatMessageTypesShowcaseComponent } from './chat-message-types-showcase
 import { ChatShowcaseComponent } from './chat-showcase.component';
 import { ChatSizesComponent } from './chat-sizes.component';
 import { ChatTestComponent } from './chat-test.component';
+import { ChatCustomMessageComponent } from './chat-custom-message.component';
+import { ChatCustomMessageTableComponent } from './components/chat-custom-message-table.component';
+import { ChatTemplateTitleComponent } from './chat-template-title.component';
 
 @NgModule({
   declarations: [
@@ -25,11 +29,10 @@ import { ChatTestComponent } from './chat-test.component';
     ChatShowcaseComponent,
     ChatSizesComponent,
     ChatTestComponent,
+    ChatCustomMessageComponent,
+    ChatCustomMessageTableComponent,
+    ChatTemplateTitleComponent,
   ],
-  imports: [
-    CommonModule,
-    NbChatModule.forRoot(),
-    NbCardModule,
-    ChatRoutingModule ],
+  imports: [CommonModule, NbChatModule.forRoot(), NbCardModule, NbButtonModule, ChatRoutingModule],
 })
 export class ChatModule {}

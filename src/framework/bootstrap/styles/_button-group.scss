@@ -4,7 +4,8 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-@import 'status-buttons';
+@use '../../theme/styles/theming' as *;
+@use 'status-buttons';
 
 @mixin btn-group-primary-separator() {
   @include nb-theme(color-primary-600);
@@ -29,7 +30,6 @@
 @mixin btn-group-secondary-separator() {
   @include nb-theme(color-primary-600);
 }
-
 
 @mixin dropdown-separator($color) {
   border-left: 1px solid $color;
@@ -59,9 +59,7 @@
   @include dropdown-separator(nb-theme(button-filled-primary-active-background-color));
 }
 
-
 @mixin nb-b-button-group-theme() {
-
   .btn-group:not(.btn-divided-group) > .btn + .btn {
     &.btn-primary {
       @include dropdown-primary-separator();
@@ -112,13 +110,13 @@
         border-bottom-left-radius: nb-theme(button-rectangle-border-radius);
         border-top-right-radius: 0;
         border-bottom-right-radius: 0;
-      };
+      }
       @include nb-rtl() {
         border-top-left-radius: 0;
         border-bottom-left-radius: 0;
         border-top-right-radius: nb-theme(button-rectangle-border-radius);
         border-bottom-right-radius: nb-theme(button-rectangle-border-radius);
-      };
+      }
     }
     &:last-child {
       @include nb-ltr() {
@@ -126,13 +124,13 @@
         border-bottom-left-radius: 0;
         border-top-right-radius: nb-theme(button-rectangle-border-radius);
         border-bottom-right-radius: nb-theme(button-rectangle-border-radius);
-      };
+      }
       @include nb-rtl() {
         border-top-left-radius: nb-theme(button-rectangle-border-radius);
         border-bottom-left-radius: nb-theme(button-rectangle-border-radius);
         border-top-right-radius: 0;
         border-bottom-right-radius: 0;
-      };
+      }
     }
   }
 
@@ -141,21 +139,21 @@
       @include nb-ltr() {
         border-top-left-radius: nb-theme(button-rectangle-border-radius);
         border-top-right-radius: 0;
-      };
+      }
       @include nb-rtl() {
         border-top-left-radius: 0;
         border-top-right-radius: nb-theme(button-rectangle-border-radius);
-      };
+      }
     }
     & > .btn:last-of-type.dropdown-toggle {
       @include nb-ltr() {
         border-top-left-radius: 0;
         border-top-right-radius: nb-theme(button-rectangle-border-radius);
-      };
+      }
       @include nb-rtl() {
         border-top-left-radius: nb-theme(button-rectangle-border-radius);
         border-top-right-radius: 0;
-      };
+      }
     }
 
     &:not(.show) {
@@ -163,21 +161,21 @@
         @include nb-ltr() {
           border-bottom-left-radius: nb-theme(button-rectangle-border-radius);
           border-bottom-right-radius: 0;
-        };
+        }
         @include nb-rtl() {
           border-bottom-left-radius: 0;
           border-bottom-right-radius: nb-theme(button-rectangle-border-radius);
-        };
+        }
       }
       & > .btn:last-of-type.dropdown-toggle {
         @include nb-ltr() {
           border-bottom-left-radius: 0;
           border-bottom-right-radius: nb-theme(button-rectangle-border-radius);
-        };
+        }
         @include nb-rtl() {
           border-bottom-left-radius: nb-theme(button-rectangle-border-radius);
           border-bottom-right-radius: 0;
-        };
+        }
       }
     }
 
@@ -192,21 +190,21 @@
       @include nb-ltr() {
         border-bottom-left-radius: nb-theme(button-rectangle-border-radius);
         border-bottom-right-radius: 0;
-      };
+      }
       @include nb-rtl() {
         border-bottom-left-radius: 0;
         border-bottom-right-radius: nb-theme(button-rectangle-border-radius);
-      };
+      }
     }
     & > .btn:last-of-type.dropdown-toggle {
       @include nb-ltr() {
         border-bottom-left-radius: 0;
         border-bottom-right-radius: nb-theme(button-rectangle-border-radius);
-      };
+      }
       @include nb-rtl() {
         border-bottom-left-radius: nb-theme(button-rectangle-border-radius);
         border-bottom-right-radius: 0;
-      };
+      }
     }
 
     &:not(.show) {
@@ -214,21 +212,21 @@
         @include nb-ltr() {
           border-top-left-radius: nb-theme(button-rectangle-border-radius);
           border-top-right-radius: 0;
-        };
+        }
         @include nb-rtl() {
           border-top-left-radius: 0;
           border-top-right-radius: nb-theme(button-rectangle-border-radius);
-        };
+        }
       }
       & > .btn:last-of-type.dropdown-toggle {
         @include nb-ltr() {
           border-top-left-radius: 0;
           border-top-right-radius: nb-theme(button-rectangle-border-radius);
-        };
+        }
         @include nb-rtl() {
           border-top-left-radius: nb-theme(button-rectangle-border-radius);
           border-top-right-radius: 0;
-        };
+        }
       }
     }
 

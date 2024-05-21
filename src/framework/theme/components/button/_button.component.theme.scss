@@ -4,15 +4,16 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-@import './button-core';
-@import './button-filled';
-@import './button-outline';
-@import './button-ghost';
-@import './button-hero';
+@use '../../styles/theming' as *;
+@use 'button-core';
+@use 'button-filled';
+@use 'button-outline';
+@use 'button-ghost';
+@use 'button-hero';
 
 @mixin nb-buttons-theme() {
   [nbButton] {
-    @include nb-button-core();
+    @include button-core.nb-button-core();
 
     cursor: nb-theme(button-cursor);
     font-family: nb-theme(button-text-font-family);
@@ -73,8 +74,8 @@
     text-decoration: none;
   }
 
-  @include button-filled;
-  @include button-outline;
-  @include button-ghost;
-  @include button-hero;
+  @include button-filled.button-filled;
+  @include button-outline.button-outline;
+  @include button-ghost.button-ghost;
+  @include button-hero.button-hero;
 }

@@ -11,6 +11,7 @@ import {
   HostBinding,
   HostListener,
   Input,
+  OnDestroy,
   OnInit,
   Output,
   Renderer2,
@@ -93,11 +94,12 @@ import { NbToast } from './model';
   styleUrls: ['./toast.component.scss'],
   templateUrl: './toast.component.html',
 })
-export class NbToastComponent implements OnInit {
+export class NbToastComponent implements OnInit, OnDestroy {
   @Input()
   toast: NbToast;
 
   @Output() destroy: EventEmitter<void> = new EventEmitter();
+  @Output() toastClick: EventEmitter<void> = new EventEmitter();
 
   @HostBinding('class.status-success')
   get success(): boolean {
@@ -168,7 +170,7 @@ export class NbToastComponent implements OnInit {
 
   @HostListener('click')
   onClick() {
-    this.destroy.emit();
+    this.toastClick.emit();
   }
 
   constructor(
@@ -181,5 +183,9 @@ export class NbToastComponent implements OnInit {
     if (this.toast.config.toastClass) {
       this.renderer.addClass(this.elementRef.nativeElement, this.toast.config.toastClass);
     }
+  }
+
+  ngOnDestroy() {
+    this.destroy.emit();
   }
 }

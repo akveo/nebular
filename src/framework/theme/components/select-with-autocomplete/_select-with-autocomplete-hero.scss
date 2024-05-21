@@ -1,0 +1,84 @@
+@use '../../styles/theming' as *;
+@use '../form-field/form-field.component.theme' as form-field-theme;
+
+@mixin select-with-autocomplete-hero {
+  nb-select-with-autocomplete.appearance-hero .select-button {
+    border: none;
+  }
+
+  @each $size in nb-get-sizes() {
+    nb-select-with-autocomplete.appearance-hero.size-#{$size} {
+      .select-button {
+        padding: nb-theme(select-hero-#{$size}-padding);
+        @include nb-ltr(padding-right, nb-theme(select-icon-offset));
+        @include nb-rtl(padding-left, nb-theme(select-icon-offset));
+      }
+
+      .nb-form-field-prefix-#{$size},
+      .nb-form-field-suffix-#{$size} {
+        width: nb-theme(select-icon-offset);
+      }
+
+      .nb-form-field-prefix-#{$size} {
+        @include nb-ltr(margin-right, calc(#{nb-theme(select-icon-offset)} * -1));
+        @include nb-rtl(margin-left, calc(#{nb-theme(select-icon-offset)} * -1));
+      }
+
+      .nb-form-field-suffix-#{$size} {
+        @include nb-ltr(margin-left, calc(#{nb-theme(select-icon-offset)} * -1));
+        @include nb-rtl(margin-right, calc(#{nb-theme(select-icon-offset)} * -1));
+      }
+
+      [nbInput] {
+        @include nb-ltr(padding-right, nb-theme(select-icon-offset));
+        @include nb-rtl(padding-left, nb-theme(select-icon-offset));
+      }
+    }
+    @include form-field-theme.nb-form-field-with-prefix(
+      'nb-select-with-autocomplete.appearance-hero.size-#{$size} .select-button',
+      $size
+    );
+  }
+
+  @each $status in nb-get-statuses() {
+    nb-select-with-autocomplete.appearance-hero.status-#{$status} .select-button {
+      $left-color: nb-theme(select-hero-#{$status}-left-background-color);
+      $right-color: nb-theme(select-hero-#{$status}-right-background-color);
+      background-image: linear-gradient(to right, $left-color, $right-color);
+      color: nb-theme(select-hero-#{$status}-text-color);
+
+      &.placeholder {
+        color: nb-theme(select-hero-#{$status}-placeholder-text-color);
+      }
+
+      &:focus {
+        $left-color: nb-theme(select-hero-#{$status}-focus-left-background-color);
+        $right-color: nb-theme(select-hero-#{$status}-focus-right-background-color);
+        background-image: linear-gradient(to right, $left-color, $right-color);
+      }
+      &:hover {
+        $left-color: nb-theme(select-hero-#{$status}-hover-left-background-color);
+        $right-color: nb-theme(select-hero-#{$status}-hover-right-background-color);
+        background-image: linear-gradient(to right, $left-color, $right-color);
+      }
+      &:focus:hover {
+        $left-color: nb-theme(select-hero-#{$status}-focus-and-hover-left-background-color);
+        $right-color: nb-theme(select-hero-#{$status}-focus-and-hover-right-background-color);
+        background-image: linear-gradient(to right, $left-color, $right-color);
+      }
+      &[disabled] {
+        color: nb-theme(select-hero-#{$status}-disabled-text-color);
+        background-color: nb-theme(select-hero-#{$status}-disabled-background-color);
+        background-image: none;
+
+        nb-icon {
+          color: nb-theme(select-hero-#{$status}-disabled-icon-color);
+        }
+      }
+
+      nb-icon {
+        color: nb-theme(select-hero-#{$status}-icon-color);
+      }
+    }
+  }
+}

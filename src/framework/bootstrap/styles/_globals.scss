@@ -4,24 +4,20 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-@import '~bootstrap/scss/functions';
-@import '~bootstrap/scss/variables';
-@import '~bootstrap/scss/mixins';
-@import '~bootstrap/scss/grid';
-@import 'buttons';
-@import 'button-group';
-@import 'dropdowns';
-@import 'icon-buttons';
-@import 'forms';
-@import 'modals';
-@import 'layout';
+@use 'buttons';
+@use 'button-group';
+@use 'dropdowns';
+@use 'icon-buttons';
+@use 'forms';
+@use 'modals';
+@use 'layout';
 
 @mixin nb-bootstrap-global() {
-  @include nb-b-buttons-theme();
-  @include nb-b-button-group-theme();
-  @include nb-b-dropdowns-theme();
-  @include nb-b-icon-buttons-theme();
-  @include nb-b-forms-theme();
-  @include nb-b-modals-theme();
-  @include nb-b-layout-theme();
+  @include buttons.nb-b-buttons-theme();
+  @include button-group.nb-b-button-group-theme();
+  @include dropdowns.nb-b-dropdowns-theme();
+  @include icon-buttons.nb-b-icon-buttons-theme();
+  @include forms.nb-b-forms-theme();
+  @include modals.nb-b-modals-theme();
+  @include layout.nb-b-layout-theme();
 }

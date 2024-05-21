@@ -4,6 +4,10 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
+@use '../../styles/theming' as *;
+@use '../form-field/form-field.component.theme' as form-field-theme;
+@use '../input/input.directive.theme' as input-theme;
+
 @mixin nb-tag-list-theme() {
   nb-tag-list {
     display: inline-flex;
@@ -32,7 +36,7 @@
   }
 
   .nb-tag-list-with-input {
-    @include nb-input-core-theme();
+    @include input-theme.nb-input-core-theme();
 
     @each $shape in nb-get-shapes() {
       &.shape-#{$shape} {
@@ -59,10 +63,10 @@
     }
   }
 
-  @include nb-form-field-root-component('nb-tag-list');
+  @include form-field-theme.nb-form-field-root-component('nb-tag-list');
 
   @each $size in nb-get-sizes() {
-    @include nb-form-field-with-prefix('.nb-tag-list-with-input.size-#{$size}', $size);
-    @include nb-form-field-with-suffix('.nb-tag-list-with-input.size-#{$size}', $size);
+    @include form-field-theme.nb-form-field-with-prefix('.nb-tag-list-with-input.size-#{$size}', $size);
+    @include form-field-theme.nb-form-field-with-suffix('.nb-tag-list-with-input.size-#{$size}', $size);
   }
 }

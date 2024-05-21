@@ -41,7 +41,7 @@ export class NbSpinnerService {
     this.executeAll();
   }
 
-  private executeAll(done = () => {}): void {
+  private executeAll(done = (values) => {}): void {
     Promise.all(this.loaders).then((values) => {
       this.hideSpinner();
       done.call(null, values);

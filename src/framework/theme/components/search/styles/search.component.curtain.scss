@@ -4,10 +4,9 @@
 * Licensed under the MIT License. See License.txt in the project root for license information.
 */
 
-@import '../../../styles/core/mixins';
+@use '../../../styles/theming' as *;
 
 :host.curtain {
-
   .search {
     position: fixed;
     z-index: 1050;

@@ -1,4 +1,6 @@
 import { ElementRef, Injectable, SimpleChange, Type } from '@angular/core';
+import { Subject } from 'rxjs';
+import { skip, takeUntil } from 'rxjs/operators';
 
 import { NbTrigger, NbTriggerStrategy, NbTriggerStrategyBuilderService } from '../overlay-trigger';
 import {
@@ -11,9 +13,9 @@ import { NbRenderableContainer } from '../overlay-container';
 import { NbOverlayContent } from '../overlay-service';
 import { NbDynamicOverlay } from './dynamic-overlay';
 import { NbOverlayConfig } from '../mapping';
+import { NbLayoutDirectionService } from '../../../../services/direction.service';
 
 export class NbDynamicOverlayChange extends SimpleChange {
-
   constructor(previousValue: any, currentValue: any, firstChange: boolean = false) {
     super(previousValue, currentValue, firstChange);
   }
@@ -25,12 +27,12 @@ export class NbDynamicOverlayChange extends SimpleChange {
 
 @Injectable()
 export class NbDynamicOverlayHandler {
-
   protected _componentType: Type<NbRenderableContainer>;
   protected _host: ElementRef;
   protected _context: Object = {};
   protected _content: NbOverlayContent;
   protected _trigger: NbTrigger = NbTrigger.NOOP;
+  protected _disabled: boolean = false;
   protected _position: NbPosition = NbPosition.TOP;
   protected _adjustment: NbAdjustment = NbAdjustment.NOOP;
   protected _offset: number = 15;
@@ -43,10 +45,14 @@ export class NbDynamicOverlayHandler {
 
   protected changes: { [key: string]: NbDynamicOverlayChange } = {};
 
-  constructor(private positionBuilder: NbPositionBuilderService,
-              private triggerStrategyBuilder: NbTriggerStrategyBuilderService,
-              private dynamicOverlayService: NbDynamicOverlay) {
-  }
+  protected destroy$ = new Subject<void>();
+
+  constructor(
+    private positionBuilder: NbPositionBuilderService,
+    private triggerStrategyBuilder: NbTriggerStrategyBuilderService,
+    private dynamicOverlayService: NbDynamicOverlay,
+    private directionService: NbLayoutDirectionService,
+  ) {}
 
   host(host: ElementRef) {
     this.changes.host = new NbDynamicOverlayChange(this._host, host);
@@ -57,6 +63,12 @@ export class NbDynamicOverlayHandler {
   trigger(trigger: NbTrigger) {
     this.changes.trigger = new NbDynamicOverlayChange(this._trigger, trigger);
     this._trigger = trigger;
+    return this;
+  }
+
+  disabled(disabled: boolean) {
+    this.changes.disabled = new NbDynamicOverlayChange(this._disabled, disabled);
+    this._disabled = disabled;
     return this;
   }
 
@@ -105,7 +117,7 @@ export class NbDynamicOverlayHandler {
   build() {
     if (!this._componentType || !this._host) {
       throw Error(`NbDynamicOverlayHandler: at least 'componentType' and 'host' should be
-      passed before building a dynamic overlay.`)
+      passed before building a dynamic overlay.`);
     }
     this.dynamicOverlay = this.dynamicOverlayService.create(
       this._componentType,
@@ -113,6 +125,7 @@ export class NbDynamicOverlayHandler {
       this._context,
       this.createPositionStrategy(),
       this._overlayConfig,
+      this._disabled,
     );
 
     this.connect();
@@ -129,7 +142,7 @@ export class NbDynamicOverlayHandler {
      * so we just ignore this call
      */
     if (!this.dynamicOverlay) {
-      return;
+      return undefined;
     }
 
     if (this.isPositionStrategyUpdateRequired()) {
@@ -152,6 +165,10 @@ export class NbDynamicOverlayHandler {
       this.dynamicOverlay.setOverlayConfig(this._overlayConfig);
     }
 
+    if (this.isDisabledUpdated()) {
+      this.dynamicOverlay.setDisabled(this._disabled);
+    }
+
     this.clearChanges();
     return this.dynamicOverlay;
   }
@@ -163,6 +180,7 @@ export class NbDynamicOverlayHandler {
     }
     this.disconnect();
     this.subscribeOnTriggers(this.dynamicOverlay);
+    this.subscribeOnDirectionChange();
   }
 
   disconnect() {
@@ -172,6 +190,9 @@ export class NbDynamicOverlayHandler {
   }
 
   destroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
+
     this.disconnect();
     this.clearChanges();
     if (this.dynamicOverlay) {
@@ -184,7 +205,8 @@ export class NbDynamicOverlayHandler {
       .connectedTo(this._host)
       .position(this._position)
       .adjustment(this._adjustment)
-      .offset(this._offset);
+      .offset(this._offset)
+      .direction(this.directionService.getDirection());
   }
 
   protected subscribeOnTriggers(dynamicOverlay: NbDynamicOverlay) {
@@ -198,10 +220,17 @@ export class NbDynamicOverlayHandler {
     this.triggerStrategy.hide$.subscribe(() => dynamicOverlay.hide());
   }
 
+  protected subscribeOnDirectionChange() {
+    this.directionService
+      .onDirectionChange()
+      .pipe(skip(1), takeUntil(this.destroy$))
+      .subscribe(() => {
+        this.dynamicOverlay.setPositionStrategy(this.createPositionStrategy());
+      });
+  }
+
   protected isContainerRerenderRequired() {
-    return this.isContentUpdated()
-      || this.isContextUpdated()
-      || this.isPositionStrategyUpdateRequired();
+    return this.isContentUpdated() || this.isContextUpdated() || this.isPositionStrategyUpdateRequired();
   }
 
   protected isPositionStrategyUpdateRequired(): boolean {
@@ -254,6 +283,10 @@ export class NbDynamicOverlayHandler {
 
   protected isOverlayConfigUpdated(): boolean {
     return this.changes.overlayConfig && this.changes.overlayConfig.isChanged();
+  }
+
+  protected isDisabledUpdated(): boolean {
+    return this.changes.disabled && this.changes.disabled.isChanged();
   }
 
   protected clearChanges() {

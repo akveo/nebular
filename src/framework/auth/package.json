@@ -1,6 +1,6 @@
 {
   "name": "@nebular/auth",
-  "version": "7.0.0",
+  "version": "13.0.0",
   "description": "@nebular/auth",
   "author": "akveo",
   "license": "MIT",
@@ -24,12 +24,32 @@
     "nebular"
   ],
   "peerDependencies": {
-    "@angular/common": "^11.0.0",
-    "@angular/core": "^11.0.0",
-    "@angular/router": "^11.0.0",
-    "@angular/forms": "^11.0.0",
-    "@nebular/theme": "7.0.0",
-    "rxjs": "^6.5.1"
+    "@angular/common": "^17.1.0",
+    "@angular/core": "^17.1.0",
+    "@angular/router": "^17.1.0",
+    "@angular/forms": "^17.1.0",
+    "@nebular/theme": "13.0.0",
+    "rxjs": "^6.5.3 || ^7.4.0"
   },
-  "sideEffects": false
+  "dependencies": {
+    "tslib": "^2.3.0"
+  },
+  "sideEffects": false,
+  "exports": {
+    "./styles/prebuilt/corporate.css": {
+      "style": "./styles/prebuilt/corporate.css"
+    },
+    "./styles/prebuilt/cosmic.css": {
+      "style": "./styles/prebuilt/cosmic.css"
+    },
+    "./styles/prebuilt/dark.css": {
+      "style": "./styles/prebuilt/dark.css"
+    },
+    "./styles/prebuilt/default.css": {
+      "style": "./styles/prebuilt/default.css"
+    },
+    "./styles/globals": {
+      "sass": "./styles/_globals.scss"
+    }
+  }
 }

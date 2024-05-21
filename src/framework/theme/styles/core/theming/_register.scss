@@ -1,42 +1,44 @@
-@import '../../themes/mapping';
-
 /**
  * @license
  * Copyright Akveo. All Rights Reserved.
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-@function nb-get-enabled-themes() {
+@use 'sass:list';
+@use 'sass:map';
+@use '../../themes/mapping';
+@use '../../theming-variables';
+@use '../functions';
 
-  @if (length($nb-enabled-themes) == 0) {
-    @each $theme-name, $theme in $nb-themes {
-      $nb-enabled-themes: append($nb-enabled-themes, $theme-name) !global;
+@function nb-get-enabled-themes() {
+  @if (list.length(theming-variables.$nb-enabled-themes) == 0) {
+    @each $theme-name, $theme in theming-variables.$nb-themes {
+      theming-variables.$nb-enabled-themes: list.append(theming-variables.$nb-enabled-themes, $theme-name);
     }
   }
-  @return $nb-enabled-themes;
+  @return theming-variables.$nb-enabled-themes;
 }
 
 @function get-last-enabled-theme() {
   $themes: nb-get-enabled-themes();
-  @return nth($themes, length($themes));
+  @return list.nth($themes, list.length($themes));
 }
 
 @function nb-set-for-export($theme, $name, $parent-name: null) {
-
-  $parent-theme: map-get($nb-themes-export, $parent-name);
+  $parent-theme: map.get(theming-variables.$nb-themes-export, $parent-name);
   @if ($parent-theme != null) {
-    $theme: map-merge(map-get($parent-theme, data), $theme);
+    $theme: map.merge(map.get($parent-theme, data), $theme);
   }
 
   $theme-data: (
     data: $theme,
     parent: $parent-name,
   );
-  @return map-set($nb-themes-export, $name, $theme-data);
+  @return functions.map-set(theming-variables.$nb-themes-export, $name, $theme-data);
 }
 
 @function nb-get-registered-theme($name) {
-  $theme: map-get($nb-themes, $name);
+  $theme: map.get(theming-variables.$nb-themes, $name);
 
   // TODO: check if optimal place
   @if ($theme == null) {
@@ -49,22 +51,21 @@
 // Entry point
 // Registers a new theme
 @function nb-register-theme($theme, $name, $parent-name: null) {
-
-  @if ($nb-theme-export-mode == true) {
-    $nb-themes-export: nb-set-for-export($theme, $name, $parent-name) !global;
+  @if (theming-variables.$nb-theme-export-mode == true) {
+    theming-variables.$nb-themes-export: nb-set-for-export($theme, $name, $parent-name);
   }
 
   $theme-data: ();
 
   @if ($parent-name != null) {
-    $parent-theme: map-get($nb-themes, $parent-name);
+    $parent-theme: map.get(theming-variables.$nb-themes, $parent-name);
     @if ($parent-theme == null) {
       @error 'Nebular Theme: parent theme `' + $parent-name + '` is not registered or imported.';
     }
-    $theme: map-merge($parent-theme, $theme);
+    $theme: map.merge($parent-theme, $theme);
   }
-  $theme: map-merge($eva-mapping, $theme);
-  $nb-themes: map-set($nb-themes, $name, $theme) !global;
+  $theme: map.merge(mapping.$eva-mapping, $theme);
+  $nb-themes: functions.map-set(theming-variables.$nb-themes, $name, $theme) !global;
 
   @return $nb-themes;
 }

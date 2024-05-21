@@ -5,14 +5,10 @@
  */
 
 $eva-mapping: (
-
-  /* Components mappings - maps theme variables onto component variables */
-
-  link-text-color: text-primary-color,
+  /* Components mappings - maps theme variables onto component variables */ link-text-color: text-primary-color,
   link-text-decoration: underline,
   link-text-focus-color: text-primary-focus-color,
   link-text-hover-color: text-primary-hover-color,
-
   card-background-color: background-basic-color-1,
   card-text-color: text-basic-color,
   card-text-font-family: text-paragraph-font-family,
@@ -28,13 +24,11 @@ $eva-mapping: (
   card-divider-color: divider-color,
   card-divider-style: divider-style,
   card-divider-width: divider-width,
-
   card-header-text-color: text-basic-color,
   card-header-text-font-family: text-subtitle-font-family,
   card-header-text-font-size: text-subtitle-font-size,
   card-header-text-font-weight: text-subtitle-font-weight,
   card-header-text-line-height: text-subtitle-line-height,
-
   card-header-basic-background-color: background-basic-color-2,
   card-header-basic-text-color: text-basic-color,
   card-header-primary-background-color: color-primary-default,
@@ -49,18 +43,15 @@ $eva-mapping: (
   card-header-danger-text-color: text-control-color,
   card-header-control-background-color: color-control-default,
   card-header-control-text-color: color-basic-800,
-
   card-height-tiny: 13.5rem,
   card-height-small: 21.1875rem,
   card-height-medium: 28.875rem,
   card-height-large: 36.5625rem,
   card-height-giant: 44.25rem,
   card-margin-bottom: 1.875rem,
-
   card-scrollbar-color: scrollbar-color,
   card-scrollbar-background-color: scrollbar-background-color,
   card-scrollbar-width: scrollbar-width,
-
   header-background-color: background-basic-color-1,
   header-text-color: text-basic-color,
   header-text-font-family: text-paragraph-font-family,
@@ -70,7 +61,6 @@ $eva-mapping: (
   header-height: 4.75rem,
   header-padding: 1.25rem,
   header-shadow: shadow,
-
   footer-background-color: background-basic-color-1,
   footer-text-color: text-basic-color,
   footer-text-font-family: text-paragraph-font-family,
@@ -84,7 +74,6 @@ $eva-mapping: (
   footer-divider-style: divider-style,
   footer-divider-width: divider-width,
   footer-shadow: shadow,
-
   layout-background-color: background-basic-color-3,
   layout-text-color: text-basic-color,
   layout-text-font-family: text-paragraph-font-family,
@@ -94,7 +83,6 @@ $eva-mapping: (
   layout-min-height: 100vh,
   layout-content-width: 900px,
   layout-window-mode-min-width: 300px,
-  layout-window-mode-max-width: 1920px,
   layout-window-mode-background-color: background-basic-color-3,
   layout-window-mode-padding-top: 4.75rem,
   layout-window-shadow: shadow,
@@ -104,7 +92,6 @@ $eva-mapping: (
   layout-scrollbar-background-color: scrollbar-background-color,
   layout-scrollbar-color: scrollbar-color,
   layout-scrollbar-width: scrollbar-width,
-
   sidebar-background-color: background-basic-color-1,
   sidebar-text-color: text-basic-color,
   sidebar-text-font-family: text-paragraph-font-family,
@@ -122,66 +109,52 @@ $eva-mapping: (
   sidebar-scrollbar-background-color: scrollbar-background-color,
   sidebar-scrollbar-color: scrollbar-color,
   sidebar-scrollbar-width: scrollbar-width,
-
   menu-background-color: transparent,
   menu-text-color: text-basic-color,
   menu-text-font-family: text-subtitle-2-font-family,
   menu-text-font-size: text-subtitle-2-font-size,
   menu-text-font-weight: text-subtitle-2-font-weight,
   menu-text-line-height: text-subtitle-2-line-height,
-
   menu-group-text-color: text-hint-color,
-
   menu-item-border-radius: 0,
   menu-item-padding: 0.75rem 1rem,
-
   menu-item-hover-background-color: menu-background-color,
   menu-item-hover-cursor: pointer,
   menu-item-hover-text-color: text-primary-hover-color,
   menu-item-icon-hover-color: menu-item-hover-text-color,
-
   menu-item-active-background-color: menu-background-color,
   menu-item-active-text-color: text-primary-color,
   menu-item-icon-active-color: menu-item-active-text-color,
-
   menu-item-icon-color: text-hint-color,
   menu-item-icon-margin: 0 0.5rem 0 0,
   menu-item-icon-width: 1.25rem,
-
   menu-item-divider-color: divider-color,
   menu-item-divider-style: divider-style,
   menu-item-divider-width: divider-width,
-
   menu-submenu-background-color: menu-background-color,
   menu-submenu-text-color: text-basic-color,
   menu-submenu-margin: 0,
   menu-submenu-padding: 0 1.25rem,
-
   menu-submenu-item-border-color: menu-submenu-background-color,
   menu-submenu-item-border-style: solid,
   menu-submenu-item-border-width: 0,
   menu-submenu-item-border-radius: 0,
   menu-submenu-item-padding: menu-item-padding,
-
   menu-submenu-item-hover-background-color: menu-background-color,
   menu-submenu-item-hover-border-color: menu-submenu-item-border-color,
   menu-submenu-item-hover-text-color: menu-item-hover-text-color,
   menu-submenu-item-icon-hover-color: menu-item-icon-hover-color,
-
   menu-submenu-item-active-background-color: menu-background-color,
   menu-submenu-item-active-border-color: color-primary-default,
   menu-submenu-item-active-text-color: menu-item-active-text-color,
   menu-submenu-item-icon-active-color: menu-item-icon-active-color,
-
   menu-submenu-item-active-hover-background-color: menu-submenu-item-hover-background-color,
   menu-submenu-item-active-hover-border-color: color-primary-hover,
   menu-submenu-item-active-hover-text-color: menu-submenu-item-hover-text-color,
   menu-submenu-item-icon-active-hover-color: menu-submenu-item-icon-hover-color,
-
   tabset-background-color: transparent,
   tabset-border-radius: 0,
   tabset-shadow: none,
-
   tabset-tab-background-color: transparent,
   tabset-tab-padding: 1rem 2rem,
   tabset-tab-text-color: text-hint-color,
@@ -206,11 +179,9 @@ $eva-mapping: (
   tabset-tab-disabled-underline-color: transparent,
   tabset-tab–badge-dot-mode-horizontal-offset: 0.75rem,
   tabset-tab-badge-dot-mode-padding: 0.25rem,
-
   tabset-divider-color: divider-color,
   tabset-divider-style: divider-style,
   tabset-divider-width: divider-width,
-
   tabset-content-background-color: transparent,
   tabset-content-padding: 1rem 2rem,
   tabset-content-text-color: text-basic-color,
@@ -218,16 +189,12 @@ $eva-mapping: (
   tabset-content-text-font-size: text-paragraph-font-size,
   tabset-content-text-font-weight: text-paragraph-font-weight,
   tabset-content-text-line-height: text-paragraph-line-height,
-
   tabset-scrollbar-color: scrollbar-color,
   tabset-scrollbar-background-color: scrollbar-background-color,
   tabset-scrollbar-width: scrollbar-width,
-  tabset-tab-text-hide-breakpoint: 36rem,
-
   route-tabset-background-color: transparent,
   route-tabset-border-radius: 0,
   route-tabset-shadow: none,
-
   route-tabset-tab-background-color: transparent,
   route-tabset-tab-padding: 1rem 2rem,
   route-tabset-tab-text-color: text-hint-color,
@@ -238,32 +205,24 @@ $eva-mapping: (
   route-tabset-tab-text-transform: uppercase,
   route-tabset-tab-underline-width: 0.25rem,
   route-tabset-tab-underline-color: transparent,
-
   route-tabset-tab-active-background-color: transparent,
   route-tabset-tab-active-text-color: text-primary-color,
   route-tabset-tab-active-underline-color: text-primary-color,
-
   route-tabset-tab-focus-background-color: transparent,
   route-tabset-tab-focus-text-color: text-primary-focus-color,
   route-tabset-tab-focus-underline-color: text-primary-focus-color,
-
   route-tabset-tab-hover-background-color: transparent,
   route-tabset-tab-hover-text-color: text-primary-hover-color,
   route-tabset-tab-hover-underline-color: text-primary-hover-color,
-
   route-tabset-tab-disabled-background-color: transparent,
   route-tabset-tab-disabled-text-color: text-disabled-color,
   route-tabset-tab-disabled-underline-color: transparent,
-
   route-tabset-divider-color: divider-color,
   route-tabset-divider-style: divider-style,
   route-tabset-divider-width: divider-width,
-
   route-tabset-scrollbar-color: scrollbar-color,
   route-tabset-scrollbar-background-color: scrollbar-background-color,
   route-tabset-scrollbar-width: scrollbar-width,
-  route-tabset-tab-text-hide-breakpoint: 36rem,
-
   user-picture-box-background-color: transparent,
   user-picture-box-border-color: border-basic-color-3,
   user-picture-box-border-width: 1px,
@@ -276,11 +235,9 @@ $eva-mapping: (
   user-title-text-color: text-basic-color,
   user-title-text-font-family: text-paragraph-2-font-family,
   user-title-text-font-weight: text-paragraph-2-font-weight,
-
   user-rectangle-border-radius: 0.5rem,
   user-semi-round-border-radius: 0.75rem,
   user-round-border-radius: 50%,
-
   user-tiny-height: 1.25rem,
   user-tiny-width: 1.25rem,
   user-tiny-initials-text-font-size: text-caption-font-size,
@@ -289,7 +246,6 @@ $eva-mapping: (
   user-tiny-name-text-line-height: text-caption-line-height,
   user-tiny-title-text-font-size: text-caption-font-size,
   user-tiny-title-text-line-height: text-caption-line-height,
-
   user-small-height: 1.5rem,
   user-small-width: 1.5rem,
   user-small-initials-text-font-size: text-caption-font-size,
@@ -298,7 +254,6 @@ $eva-mapping: (
   user-small-name-text-line-height: text-caption-line-height,
   user-small-title-text-font-size: text-caption-font-size,
   user-small-title-text-line-height: text-caption-line-height,
-
   user-medium-height: 2.5rem,
   user-medium-width: 2.5rem,
   user-medium-initials-text-font-size: text-paragraph-font-size,
@@ -307,7 +262,6 @@ $eva-mapping: (
   user-medium-name-text-line-height: text-paragraph-line-height,
   user-medium-title-text-font-size: text-caption-font-size,
   user-medium-title-text-line-height: text-caption-line-height,
-
   user-large-height: 3.25rem,
   user-large-width: 3.25rem,
   user-large-initials-text-font-size: text-paragraph-font-size,
@@ -316,7 +270,6 @@ $eva-mapping: (
   user-large-name-text-line-height: text-paragraph-line-height,
   user-large-title-text-font-size: text-paragraph-2-font-size,
   user-large-title-text-line-height: text-paragraph-2-line-height,
-
   user-giant-height: 4rem,
   user-giant-width: 4rem,
   user-giant-initials-text-font-size: text-paragraph-font-size,
@@ -325,7 +278,6 @@ $eva-mapping: (
   user-giant-name-text-line-height: text-paragraph-line-height,
   user-giant-title-text-font-size: text-paragraph-font-size,
   user-giant-title-text-line-height: text-paragraph-line-height,
-
   popover-text-color: text-basic-color,
   popover-text-font-family: text-paragraph-font-family,
   popover-text-font-size: text-paragraph-font-size,
@@ -338,7 +290,6 @@ $eva-mapping: (
   popover-shadow: shadow,
   popover-arrow-size: 0.6875rem,
   popover-padding: 0.75rem 1rem,
-
   context-menu-background-color: background-basic-color-1,
   context-menu-border-color: transparent,
   context-menu-border-style: solid,
@@ -348,7 +299,6 @@ $eva-mapping: (
   context-menu-min-width: 10rem,
   context-menu-max-width: 15rem,
   context-menu-shadow: shadow,
-
   actions-background-color: transparent,
   actions-divider-color: divider-color,
   actions-divider-style: divider-style,
@@ -358,10 +308,8 @@ $eva-mapping: (
   actions-text-font-family: text-button-font-family,
   actions-text-font-weight: text-button-font-weight,
   actions-text-line-height: text-button-medium-line-height,
-
   actions-disabled-icon-color: text-disabled-color,
   actions-disabled-text-color: text-disabled-color,
-
   actions-tiny-height: 1rem,
   actions-tiny-icon-height: actions-tiny-height,
   actions-tiny-padding: 0 1.25rem,
@@ -382,7 +330,6 @@ $eva-mapping: (
   actions-giant-icon-height: actions-giant-height,
   actions-giant-padding: 0 1.25rem,
   actions-giant-text-font-size: text-button-giant-font-size,
-
   search-background-color: background-basic-color-1,
   search-divider-color: divider-color,
   search-divider-style: divider-style,
@@ -399,21 +346,18 @@ $eva-mapping: (
   search-info-text-font-size: text-subtitle-font-size,
   search-info-text-font-weight: text-subtitle-font-weight,
   search-info-text-line-height: text-subtitle-line-height,
-
   smart-table-header-font-family: text-paragraph-font-family,
   smart-table-header-font-size: text-paragraph-font-size,
   smart-table-header-font-weight: text-paragraph-font-weight,
   smart-table-header-line-height: text-paragraph-line-height,
   smart-table-header-fg: text-basic-color,
   smart-table-header-bg: background-basic-color-1,
-
   smart-table-font-family: text-paragraph-font-family,
   smart-table-font-size: text-paragraph-font-size,
   smart-table-font-weight: text-paragraph-font-weight,
   smart-table-line-height: text-paragraph-line-height,
   smart-table-fg: text-basic-color,
   smart-table-bg: background-basic-color-1,
-
   smart-table-bg-even: background-basic-color-2,
   smart-table-fg-secondary: text-basic-color,
   smart-table-bg-active: background-basic-color-3,
@@ -421,10 +365,8 @@ $eva-mapping: (
   smart-table-filter-padding: 0.375rem 0.5rem,
   smart-table-separator: divider-color,
   smart-table-border-radius: border-radius,
-
   smart-table-action-add-edit-hover-text-color: color-primary-default,
   smart-table-action-cancel-delete-hover-text-color: color-danger-default,
-
   smart-table-add-button-border-color: button-filled-primary-border-color,
   smart-table-add-button-background-color: button-filled-primary-background-color,
   smart-table-add-button-text-color: button-filled-primary-text-color,
@@ -433,7 +375,6 @@ $eva-mapping: (
   smart-table-add-button-hover-border-color: button-filled-primary-hover-border-color,
   smart-table-add-button-active-background-color: button-filled-primary-active-background-color,
   smart-table-add-button-active-border-color: button-filled-primary-active-border-color,
-
   smart-table-paging-font-family: button-text-font-family,
   smart-table-paging-font-size: button-medium-text-font-size,
   smart-table-paging-line-height: button-medium-text-line-height,
@@ -448,13 +389,11 @@ $eva-mapping: (
   smart-table-paging-page-text-color: button-outline-primary-text-color,
   smart-table-paging-page-focus-border-color: button-outline-primary-focus-border-color,
   smart-table-paging-page-focus-text-color: button-outline-primary-focus-text-color,
-
   toastr-border-style: solid,
   toastr-border-width: 1px,
   toastr-border-radius: border-radius,
   toastr-padding: 1rem,
   toastr-shadow: shadow,
-
   toastr-text-font-family: text-paragraph-2-font-family,
   toastr-text-font-size: text-paragraph-2-font-size,
   toastr-text-font-weight: text-paragraph-2-font-weight,
@@ -463,7 +402,6 @@ $eva-mapping: (
   toastr-title-text-font-size: text-subtitle-font-size,
   toastr-title-text-font-weight: text-subtitle-font-weight,
   toastr-title-text-line-height: text-subtitle-line-height,
-
   toastr-basic-background-color: background-basic-color-1,
   toastr-basic-border-color: border-basic-color-3,
   toastr-basic-text-color: text-basic-color,
@@ -471,7 +409,6 @@ $eva-mapping: (
   toastr-icon-basic-color: text-basic-color,
   toastr-destroyable-basic-hover-background-color: background-basic-color-1,
   toastr-destroyable-basic-hover-border-color: border-basic-color-3,
-
   toastr-primary-background-color: color-primary-default,
   toastr-primary-border-color: color-primary-default,
   toastr-primary-text-color: text-control-color,
@@ -479,7 +416,6 @@ $eva-mapping: (
   toastr-icon-primary-color: color-primary-default,
   toastr-destroyable-primary-hover-background-color: color-primary-hover,
   toastr-destroyable-primary-hover-border-color: color-primary-hover,
-
   toastr-success-background-color: color-success-default,
   toastr-success-border-color: color-success-default,
   toastr-success-text-color: text-control-color,
@@ -487,7 +423,6 @@ $eva-mapping: (
   toastr-icon-success-color: color-success-default,
   toastr-destroyable-success-hover-background-color: color-success-hover,
   toastr-destroyable-success-hover-border-color: color-success-hover,
-
   toastr-info-background-color: color-info-default,
   toastr-info-border-color: color-info-default,
   toastr-info-text-color: text-control-color,
@@ -495,7 +430,6 @@ $eva-mapping: (
   toastr-icon-info-color: color-info-default,
   toastr-destroyable-info-hover-background-color: color-info-hover,
   toastr-destroyable-info-hover-border-color: color-info-hover,
-
   toastr-warning-background-color: color-warning-default,
   toastr-warning-border-color: color-warning-default,
   toastr-warning-text-color: text-control-color,
@@ -503,7 +437,6 @@ $eva-mapping: (
   toastr-icon-warning-color: color-warning-default,
   toastr-destroyable-warning-hover-background-color: color-warning-hover,
   toastr-destroyable-warning-hover-border-color: color-warning-hover,
-
   toastr-danger-background-color: color-danger-default,
   toastr-danger-border-color: color-danger-default,
   toastr-danger-text-color: text-control-color,
@@ -511,7 +444,6 @@ $eva-mapping: (
   toastr-icon-danger-color: color-danger-default,
   toastr-destroyable-danger-hover-background-color: color-danger-hover,
   toastr-destroyable-danger-hover-border-color: color-danger-hover,
-
   toastr-control-background-color: color-control-default,
   toastr-control-border-color: color-control-default,
   toastr-control-text-color: color-basic-800,
@@ -519,58 +451,48 @@ $eva-mapping: (
   toastr-icon-control-color: color-basic-800,
   toastr-destroyable-control-hover-background-color: color-control-hover,
   toastr-destroyable-control-hover-border-color: color-control-hover,
-
   button-cursor: pointer,
   button-outline-width: outline-width,
   button-outline-color: outline-color,
   button-text-font-family: text-button-font-family,
   button-text-font-weight: text-button-font-weight,
   button-disabled-cursor: default,
-
   button-tiny-text-font-size: text-button-tiny-font-size,
   button-tiny-text-line-height: text-button-tiny-line-height,
   button-tiny-icon-size: 0.75rem,
   button-tiny-icon-vertical-margin: -0.125rem,
   button-tiny-icon-offset: 0.375rem,
-
   button-small-text-font-size: text-button-small-font-size,
   button-small-text-line-height: text-button-small-line-height,
   button-small-icon-size: 1rem,
   button-small-icon-vertical-margin: -0.125rem,
   button-small-icon-offset: 0.375rem,
-
   button-medium-text-font-size: text-button-medium-font-size,
   button-medium-text-line-height: text-button-medium-line-height,
   button-medium-icon-size: 1.25rem,
   button-medium-icon-vertical-margin: -0.125rem,
   button-medium-icon-offset: 0.5rem,
-
   button-large-text-font-size: text-button-large-font-size,
   button-large-text-line-height: text-button-large-line-height,
   button-large-icon-size: 1.5rem,
   button-large-icon-vertical-margin: -0.125rem,
   button-large-icon-offset: 0.75rem,
-
   button-giant-text-font-size: text-button-giant-font-size,
   button-giant-text-line-height: text-button-giant-line-height,
   button-giant-icon-size: 1.5rem,
   button-giant-icon-vertical-margin: -0.125rem,
   button-giant-icon-offset: 0.75rem,
-
   button-rectangle-border-radius: border-radius,
   button-semi-round-border-radius: 0.75rem,
   button-round-border-radius: 1.5rem,
-
   button-filled-border-style: solid,
   button-filled-border-width: 0.0625rem,
   button-filled-text-transform: uppercase,
-
   button-filled-tiny-padding: 0.3125rem 0.625rem,
   button-filled-small-padding: 0.4375rem 0.875rem,
   button-filled-medium-padding: 0.6875rem 1.125rem,
   button-filled-large-padding: 0.8125rem 1.125rem,
   button-filled-giant-padding: 0.9375rem 1.375rem,
-
   button-filled-basic-background-color: color-basic-default,
   button-filled-basic-border-color: color-basic-default-border,
   button-filled-basic-text-color: color-basic-800,
@@ -583,7 +505,6 @@ $eva-mapping: (
   button-filled-basic-disabled-background-color: color-basic-disabled,
   button-filled-basic-disabled-border-color: color-basic-disabled-border,
   button-filled-basic-disabled-text-color: text-disabled-color,
-
   button-filled-primary-background-color: color-primary-default,
   button-filled-primary-border-color: color-primary-default-border,
   button-filled-primary-text-color: text-control-color,
@@ -596,7 +517,6 @@ $eva-mapping: (
   button-filled-primary-disabled-background-color: color-primary-disabled,
   button-filled-primary-disabled-border-color: color-primary-disabled-border,
   button-filled-primary-disabled-text-color: text-disabled-color,
-
   button-filled-success-background-color: color-success-default,
   button-filled-success-border-color: color-success-default-border,
   button-filled-success-text-color: text-control-color,
@@ -609,7 +529,6 @@ $eva-mapping: (
   button-filled-success-disabled-background-color: color-success-disabled,
   button-filled-success-disabled-border-color: color-success-disabled-border,
   button-filled-success-disabled-text-color: text-disabled-color,
-
   button-filled-info-background-color: color-info-default,
   button-filled-info-border-color: color-info-default-border,
   button-filled-info-text-color: text-control-color,
@@ -622,7 +541,6 @@ $eva-mapping: (
   button-filled-info-disabled-background-color: color-info-disabled,
   button-filled-info-disabled-border-color: color-info-disabled-border,
   button-filled-info-disabled-text-color: text-disabled-color,
-
   button-filled-warning-background-color: color-warning-default,
   button-filled-warning-border-color: color-warning-default-border,
   button-filled-warning-text-color: text-control-color,
@@ -635,7 +553,6 @@ $eva-mapping: (
   button-filled-warning-disabled-background-color: color-warning-disabled,
   button-filled-warning-disabled-border-color: color-warning-disabled-border,
   button-filled-warning-disabled-text-color: text-disabled-color,
-
   button-filled-danger-background-color: color-danger-default,
   button-filled-danger-border-color: color-danger-default-border,
   button-filled-danger-text-color: text-control-color,
@@ -648,7 +565,6 @@ $eva-mapping: (
   button-filled-danger-disabled-background-color: color-danger-disabled,
   button-filled-danger-disabled-border-color: color-danger-disabled-border,
   button-filled-danger-disabled-text-color: text-disabled-color,
-
   button-filled-control-background-color: color-control-default,
   button-filled-control-border-color: color-control-default-border,
   button-filled-control-text-color: color-basic-800,
@@ -661,18 +577,15 @@ $eva-mapping: (
   button-filled-control-disabled-background-color: color-control-disabled,
   button-filled-control-disabled-border-color: color-control-disabled-border,
   button-filled-control-disabled-text-color: text-disabled-color,
-
   button-outline-border-style: solid,
   button-outline-border-width: 0.0625rem,
   button-outline-text-transform: uppercase,
   button-outline-focus-inset-shadow-length: 0 0 0 100vmax,
-
   button-outline-tiny-padding: 0.3125rem 0.625rem,
   button-outline-small-padding: 0.4375rem 0.875rem,
   button-outline-medium-padding: 0.6875rem 1.125rem,
   button-outline-large-padding: 0.8125rem 1.125rem,
   button-outline-giant-padding: 0.9375rem 1.375rem,
-
   button-outline-basic-background-color: color-basic-transparent-default,
   button-outline-basic-border-color: color-basic-transparent-default-border,
   button-outline-basic-text-color: text-hint-color,
@@ -688,7 +601,6 @@ $eva-mapping: (
   button-outline-basic-disabled-background-color: color-basic-transparent-disabled,
   button-outline-basic-disabled-border-color: color-basic-transparent-disabled-border,
   button-outline-basic-disabled-text-color: text-disabled-color,
-
   button-outline-primary-background-color: color-primary-transparent-default,
   button-outline-primary-border-color: color-primary-transparent-default-border,
   button-outline-primary-text-color: text-primary-color,
@@ -704,7 +616,6 @@ $eva-mapping: (
   button-outline-primary-disabled-background-color: color-primary-transparent-disabled,
   button-outline-primary-disabled-border-color: color-primary-transparent-disabled-border,
   button-outline-primary-disabled-text-color: text-disabled-color,
-
   button-outline-success-background-color: color-success-transparent-default,
   button-outline-success-border-color: color-success-transparent-default-border,
   button-outline-success-text-color: text-success-color,
@@ -720,7 +631,6 @@ $eva-mapping: (
   button-outline-success-disabled-background-color: color-success-transparent-disabled,
   button-outline-success-disabled-border-color: color-success-transparent-disabled-border,
   button-outline-success-disabled-text-color: text-disabled-color,
-
   button-outline-info-background-color: color-info-transparent-default,
   button-outline-info-border-color: color-info-transparent-default-border,
   button-outline-info-text-color: text-info-color,
@@ -736,7 +646,6 @@ $eva-mapping: (
   button-outline-info-disabled-background-color: color-info-transparent-disabled,
   button-outline-info-disabled-border-color: color-info-transparent-disabled-border,
   button-outline-info-disabled-text-color: text-disabled-color,
-
   button-outline-warning-background-color: color-warning-transparent-default,
   button-outline-warning-border-color: color-warning-transparent-default-border,
   button-outline-warning-text-color: text-warning-color,
@@ -752,7 +661,6 @@ $eva-mapping: (
   button-outline-warning-disabled-background-color: color-warning-transparent-disabled,
   button-outline-warning-disabled-border-color: color-warning-transparent-disabled-border,
   button-outline-warning-disabled-text-color: text-disabled-color,
-
   button-outline-danger-background-color: color-danger-transparent-default,
   button-outline-danger-border-color: color-danger-transparent-default-border,
   button-outline-danger-text-color: text-danger-color,
@@ -768,7 +676,6 @@ $eva-mapping: (
   button-outline-danger-disabled-background-color: color-danger-transparent-disabled,
   button-outline-danger-disabled-border-color: color-danger-transparent-disabled-border,
   button-outline-danger-disabled-text-color: text-disabled-color,
-
   button-outline-control-background-color: color-control-transparent-default,
   button-outline-control-border-color: color-control-transparent-default-border,
   button-outline-control-text-color: text-control-color,
@@ -784,20 +691,17 @@ $eva-mapping: (
   button-outline-control-disabled-background-color: color-control-transparent-disabled,
   button-outline-control-disabled-border-color: color-control-transparent-disabled-border,
   button-outline-control-disabled-text-color: text-disabled-color,
-
   button-ghost-background-color: transparent,
   button-ghost-border-color: transparent,
   button-ghost-border-style: solid,
   button-ghost-border-width: 0.0625rem,
   button-ghost-text-transform: uppercase,
   button-ghost-focus-inset-shadow-length: 0 0 0 100vmax,
-
   button-ghost-tiny-padding: 0.3125rem 0.625rem,
   button-ghost-small-padding: 0.4375rem 0.875rem,
   button-ghost-medium-padding: 0.6875rem 1.125rem,
   button-ghost-large-padding: 0.8125rem 1.125rem,
   button-ghost-giant-padding: 0.9375rem 1.375rem,
-
   button-ghost-basic-text-color: color-basic-600,
   button-ghost-basic-focus-background-color: color-basic-transparent-200,
   button-ghost-basic-focus-border-color: color-basic-transparent-500,
@@ -811,7 +715,6 @@ $eva-mapping: (
   button-ghost-basic-disabled-background-color: color-basic-transparent-200,
   button-ghost-basic-disabled-border-color: transparent,
   button-ghost-basic-disabled-text-color: text-disabled-color,
-
   button-ghost-primary-text-color: text-primary-color,
   button-ghost-primary-focus-background-color: color-basic-transparent-200,
   button-ghost-primary-focus-border-color: color-basic-transparent-500,
@@ -825,7 +728,6 @@ $eva-mapping: (
   button-ghost-primary-disabled-background-color: color-basic-transparent-200,
   button-ghost-primary-disabled-border-color: transparent,
   button-ghost-primary-disabled-text-color: text-disabled-color,
-
   button-ghost-success-text-color: text-success-color,
   button-ghost-success-focus-background-color: color-basic-transparent-200,
   button-ghost-success-focus-border-color: color-basic-transparent-500,
@@ -839,7 +741,6 @@ $eva-mapping: (
   button-ghost-success-disabled-background-color: color-basic-transparent-200,
   button-ghost-success-disabled-border-color: transparent,
   button-ghost-success-disabled-text-color: text-disabled-color,
-
   button-ghost-info-text-color: text-info-color,
   button-ghost-info-focus-background-color: color-basic-transparent-200,
   button-ghost-info-focus-border-color: color-basic-transparent-500,
@@ -853,7 +754,6 @@ $eva-mapping: (
   button-ghost-info-disabled-background-color: color-basic-transparent-200,
   button-ghost-info-disabled-border-color: transparent,
   button-ghost-info-disabled-text-color: text-disabled-color,
-
   button-ghost-warning-text-color: text-warning-color,
   button-ghost-warning-focus-background-color: color-basic-transparent-200,
   button-ghost-warning-focus-border-color: color-basic-transparent-500,
@@ -867,7 +767,6 @@ $eva-mapping: (
   button-ghost-warning-disabled-background-color: color-basic-transparent-200,
   button-ghost-warning-disabled-border-color: transparent,
   button-ghost-warning-disabled-text-color: text-disabled-color,
-
   button-ghost-danger-text-color: text-danger-color,
   button-ghost-danger-focus-background-color: color-basic-transparent-200,
   button-ghost-danger-focus-border-color: color-basic-transparent-500,
@@ -881,7 +780,6 @@ $eva-mapping: (
   button-ghost-danger-disabled-background-color: color-basic-transparent-200,
   button-ghost-danger-disabled-border-color: transparent,
   button-ghost-danger-disabled-text-color: text-disabled-color,
-
   button-ghost-control-text-color: color-basic-100,
   button-ghost-control-focus-background-color: color-basic-transparent-200,
   button-ghost-control-focus-border-color: color-basic-transparent-500,
@@ -895,25 +793,21 @@ $eva-mapping: (
   button-ghost-control-disabled-background-color: color-basic-transparent-200,
   button-ghost-control-disabled-border-color: transparent,
   button-ghost-control-disabled-text-color: text-disabled-color,
-
   button-hero-border-color: transparent,
   button-hero-border-style: solid,
   button-hero-border-width: 0,
   button-hero-text-transform: uppercase,
-
   button-hero-tiny-padding: 0.375rem 0.6875rem,
   button-hero-small-padding: 0.5rem 0.9375rem,
   button-hero-medium-padding: 0.75rem 1.1875rem,
   button-hero-large-padding: 0.875rem 1.1875rem,
   button-hero-giant-padding: 1rem 1.4375rem,
-
   button-hero-shadow: 0 0 transparent,
   button-hero-text-shadow: shadow,
   button-hero-bevel-size: 0 0 0 0,
   button-hero-glow-size: 0 0 0 0,
   button-hero-outline-color: outline-color,
   button-hero-outline-width: outline-width,
-
   button-hero-basic-text-color: color-basic-600,
   button-hero-basic-bevel-color: color-basic-600,
   button-hero-basic-glow-color: color-basic-700,
@@ -927,7 +821,6 @@ $eva-mapping: (
   button-hero-basic-active-right-background-color: color-basic-active,
   button-hero-basic-disabled-background-color: color-basic-disabled,
   button-hero-basic-disabled-text-color: text-disabled-color,
-
   button-hero-primary-text-color: text-control-color,
   button-hero-primary-bevel-color: color-primary-600,
   button-hero-primary-glow-color: color-primary-700,
@@ -941,7 +834,6 @@ $eva-mapping: (
   button-hero-primary-active-right-background-color: color-primary-active,
   button-hero-primary-disabled-background-color: color-primary-disabled,
   button-hero-primary-disabled-text-color: text-disabled-color,
-
   button-hero-success-text-color: text-control-color,
   button-hero-success-bevel-color: color-success-600,
   button-hero-success-glow-color: color-success-700,
@@ -955,7 +847,6 @@ $eva-mapping: (
   button-hero-success-active-right-background-color: color-success-active,
   button-hero-success-disabled-background-color: color-success-disabled,
   button-hero-success-disabled-text-color: text-disabled-color,
-
   button-hero-info-text-color: text-control-color,
   button-hero-info-bevel-color: color-info-600,
   button-hero-info-glow-color: color-info-700,
@@ -969,7 +860,6 @@ $eva-mapping: (
   button-hero-info-active-right-background-color: color-info-active,
   button-hero-info-disabled-background-color: color-info-disabled,
   button-hero-info-disabled-text-color: text-disabled-color,
-
   button-hero-warning-text-color: text-control-color,
   button-hero-warning-bevel-color: color-warning-600,
   button-hero-warning-glow-color: color-warning-700,
@@ -983,7 +873,6 @@ $eva-mapping: (
   button-hero-warning-active-right-background-color: color-warning-active,
   button-hero-warning-disabled-background-color: color-warning-disabled,
   button-hero-warning-disabled-text-color: text-disabled-color,
-
   button-hero-danger-text-color: text-control-color,
   button-hero-danger-bevel-color: color-danger-600,
   button-hero-danger-glow-color: color-danger-700,
@@ -997,7 +886,6 @@ $eva-mapping: (
   button-hero-danger-active-right-background-color: color-danger-active,
   button-hero-danger-disabled-background-color: color-danger-disabled,
   button-hero-danger-disabled-text-color: text-disabled-color,
-
   button-hero-control-text-color: color-basic-800,
   button-hero-control-bevel-color: color-basic-600,
   button-hero-control-glow-color: color-basic-700,
@@ -1011,7 +899,6 @@ $eva-mapping: (
   button-hero-control-active-right-background-color: color-control-active,
   button-hero-control-disabled-background-color: color-basic-transparent-300,
   button-hero-control-disabled-text-color: text-disabled-color,
-
   button-group-filled-button-basic-text-color: text-hint-color,
   button-group-filled-button-primary-text-color: button-filled-primary-text-color,
   button-group-filled-button-success-text-color: button-filled-success-text-color,
@@ -1019,7 +906,6 @@ $eva-mapping: (
   button-group-filled-button-warning-text-color: button-filled-warning-text-color,
   button-group-filled-button-danger-text-color: button-filled-danger-text-color,
   button-group-filled-button-control-text-color: button-filled-control-text-color,
-
   button-group-filled-basic-divider-color: color-basic-focus-border,
   button-group-filled-primary-divider-color: color-primary-focus,
   button-group-filled-success-divider-color: color-success-focus,
@@ -1027,40 +913,33 @@ $eva-mapping: (
   button-group-filled-warning-divider-color: color-warning-focus,
   button-group-filled-danger-divider-color: color-danger-focus,
   button-group-filled-control-divider-color: color-control-focus,
-
   button-group-ghost-divider-color: color-basic-focus-border,
-
   icon-button-filled-tiny-padding: 0.4375rem 0.3125rem,
   icon-button-filled-small-padding: 0.5625rem 0.4375rem,
   icon-button-filled-medium-padding: 0.6875rem 0.5625rem,
   icon-button-filled-large-padding: 0.8125rem 0.6875rem,
   icon-button-filled-giant-padding: 1.0625rem 0.9375rem,
-
   icon-button-outline-tiny-padding: 0.4375rem 0.3125rem,
   icon-button-outline-small-padding: 0.5625rem 0.4375rem,
   icon-button-outline-medium-padding: 0.6875rem 0.5625rem,
   icon-button-outline-large-padding: 0.8125rem 0.6875rem,
   icon-button-outline-giant-padding: 1.0625rem 0.9375rem,
-
   icon-button-ghost-tiny-padding: 0.4375rem 0.3125rem,
   icon-button-ghost-small-padding: 0.5625rem 0.4375rem,
   icon-button-ghost-medium-padding: 0.6875rem 0.5625rem,
   icon-button-ghost-large-padding: 0.8125rem 0.6875rem,
   icon-button-ghost-giant-padding: 1.0625rem 0.9375rem,
-
   icon-button-hero-tiny-padding: 0.5rem 0.375rem,
   icon-button-hero-small-padding: 0.5625rem 0.5rem,
   icon-button-hero-medium-padding: 0.75rem 0.5625rem,
   icon-button-hero-large-padding: 0.875rem 0.6875rem,
   icon-button-hero-giant-padding: 1.0625rem 1rem,
-
   input-border-style: solid,
   input-border-width: 1px,
   input-outline-color: outline-color,
   input-outline-width: outline-width,
   input-placeholder-text-font-family: text-paragraph-font-family,
   input-text-font-family: text-subtitle-font-family,
-
   input-basic-text-color: text-basic-color,
   input-basic-placeholder-text-color: text-hint-color,
   input-basic-background-color: background-basic-color-2,
@@ -1069,11 +948,12 @@ $eva-mapping: (
   input-basic-focus-border-color: color-primary-default-border,
   input-basic-hover-background-color: background-basic-color-3,
   input-basic-hover-border-color: border-basic-color-4,
+  input-basic-focus-and-hover-background-color: input-basic-hover-background-color,
+  input-basic-focus-and-hover-border-color: input-basic-hover-border-color,
   input-basic-disabled-background-color: background-basic-color-2,
   input-basic-disabled-border-color: border-basic-color-4,
   input-basic-disabled-text-color: text-disabled-color,
   input-basic-disabled-placeholder-text-color: text-disabled-color,
-
   input-primary-text-color: text-basic-color,
   input-primary-placeholder-text-color: text-hint-color,
   input-primary-background-color: background-basic-color-2,
@@ -1082,11 +962,12 @@ $eva-mapping: (
   input-primary-focus-border-color: color-primary-focus-border,
   input-primary-hover-background-color: background-basic-color-3,
   input-primary-hover-border-color: color-primary-hover-border,
+  input-primary-focus-and-hover-background-color: input-primary-hover-background-color,
+  input-primary-focus-and-hover-border-color: input-primary-hover-border-color,
   input-primary-disabled-background-color: background-basic-color-2,
   input-primary-disabled-border-color: border-basic-color-4,
   input-primary-disabled-text-color: text-disabled-color,
   input-primary-disabled-placeholder-text-color: text-disabled-color,
-
   input-success-text-color: text-basic-color,
   input-success-placeholder-text-color: text-hint-color,
   input-success-background-color: background-basic-color-2,
@@ -1095,11 +976,12 @@ $eva-mapping: (
   input-success-focus-border-color: color-success-focus-border,
   input-success-hover-background-color: background-basic-color-3,
   input-success-hover-border-color: color-success-hover-border,
+  input-success-focus-and-hover-background-color: input-success-hover-background-color,
+  input-success-focus-and-hover-border-color: input-success-hover-border-color,
   input-success-disabled-background-color: background-basic-color-2,
   input-success-disabled-border-color: border-basic-color-4,
   input-success-disabled-text-color: text-disabled-color,
   input-success-disabled-placeholder-text-color: text-disabled-color,
-
   input-info-text-color: text-basic-color,
   input-info-placeholder-text-color: text-hint-color,
   input-info-background-color: background-basic-color-2,
@@ -1108,11 +990,12 @@ $eva-mapping: (
   input-info-focus-border-color: color-info-focus-border,
   input-info-hover-background-color: background-basic-color-3,
   input-info-hover-border-color: color-info-hover-border,
+  input-info-focus-and-hover-background-color: input-info-hover-background-color,
+  input-info-focus-and-hover-border-color: input-info-hover-border-color,
   input-info-disabled-background-color: background-basic-color-2,
   input-info-disabled-border-color: border-basic-color-4,
   input-info-disabled-text-color: text-disabled-color,
   input-info-disabled-placeholder-text-color: text-disabled-color,
-
   input-warning-text-color: text-basic-color,
   input-warning-placeholder-text-color: text-hint-color,
   input-warning-background-color: background-basic-color-2,
@@ -1121,11 +1004,12 @@ $eva-mapping: (
   input-warning-focus-border-color: color-warning-focus-border,
   input-warning-hover-background-color: background-basic-color-3,
   input-warning-hover-border-color: color-warning-hover-border,
+  input-warning-focus-and-hover-background-color: input-warning-hover-background-color,
+  input-warning-focus-and-hover-border-color: input-warning-hover-border-color,
   input-warning-disabled-background-color: background-basic-color-2,
   input-warning-disabled-border-color: border-basic-color-4,
   input-warning-disabled-text-color: text-disabled-color,
   input-warning-disabled-placeholder-text-color: text-disabled-color,
-
   input-danger-text-color: text-basic-color,
   input-danger-placeholder-text-color: text-hint-color,
   input-danger-background-color: background-basic-color-2,
@@ -1134,11 +1018,12 @@ $eva-mapping: (
   input-danger-focus-border-color: color-danger-focus-border,
   input-danger-hover-background-color: background-basic-color-3,
   input-danger-hover-border-color: color-danger-hover-border,
+  input-danger-focus-and-hover-background-color: input-danger-hover-background-color,
+  input-danger-focus-and-hover-border-color: input-danger-hover-border-color,
   input-danger-disabled-background-color: background-basic-color-2,
   input-danger-disabled-border-color: border-basic-color-4,
   input-danger-disabled-text-color: text-disabled-color,
   input-danger-disabled-placeholder-text-color: text-disabled-color,
-
   input-control-text-color: text-control-color,
   input-control-placeholder-text-color: text-control-color,
   input-control-background-color: color-basic-control-transparent-300,
@@ -1147,15 +1032,15 @@ $eva-mapping: (
   input-control-focus-border-color: color-control-transparent-focus-border,
   input-control-hover-background-color: color-basic-control-transparent-400,
   input-control-hover-border-color: color-control-transparent-hover-border,
+  input-control-focus-and-hover-background-color: input-control-hover-background-color,
+  input-control-focus-and-hover-border-color: input-control-hover-border-color,
   input-control-disabled-background-color: color-control-transparent-disabled,
   input-control-disabled-border-color: color-control-transparent-disabled-border,
   input-control-disabled-text-color: text-control-color,
   input-control-disabled-placeholder-text-color: text-control-color,
-
   input-rectangle-border-radius: border-radius,
   input-semi-round-border-radius: 0.75rem,
   input-round-border-radius: 1.5rem,
-
   input-tiny-text-font-size: text-caption-2-font-size,
   input-tiny-text-font-weight: text-caption-2-font-weight,
   input-tiny-text-line-height: text-caption-2-line-height,
@@ -1164,7 +1049,6 @@ $eva-mapping: (
   input-tiny-placeholder-text-line-height: text-paragraph-line-height,
   input-tiny-padding: 0.1875rem 1rem,
   input-tiny-max-width: 20rem,
-
   input-small-text-font-size: text-subtitle-2-font-size,
   input-small-text-font-weight: text-subtitle-2-font-weight,
   input-small-text-line-height: text-subtitle-2-line-height,
@@ -1173,7 +1057,6 @@ $eva-mapping: (
   input-small-placeholder-text-line-height: text-paragraph-line-height,
   input-small-padding: 0.1875rem 1rem,
   input-small-max-width: 20rem,
-
   input-medium-text-font-size: text-subtitle-font-size,
   input-medium-text-font-weight: text-subtitle-font-weight,
   input-medium-text-line-height: text-subtitle-line-height,
@@ -1182,7 +1065,6 @@ $eva-mapping: (
   input-medium-placeholder-text-line-height: text-paragraph-line-height,
   input-medium-padding: 0.4375rem 1rem,
   input-medium-max-width: 20rem,
-
   input-large-text-font-size: text-subtitle-font-size,
   input-large-text-font-weight: text-subtitle-font-weight,
   input-large-text-line-height: text-subtitle-line-height,
@@ -1191,7 +1073,6 @@ $eva-mapping: (
   input-large-placeholder-text-line-height: text-paragraph-line-height,
   input-large-padding: 0.6875rem 1rem,
   input-large-max-width: 30rem,
-
   input-giant-text-font-size: text-heading-6-font-size,
   input-giant-text-font-weight: text-heading-6-font-weight,
   input-giant-text-line-height: text-heading-6-line-height,
@@ -1200,7 +1081,6 @@ $eva-mapping: (
   input-giant-placeholder-text-line-height: text-paragraph-line-height,
   input-giant-padding: 0.9375rem 1rem,
   input-giant-max-width: 30rem,
-
   checkbox-height: 1.25rem,
   checkbox-width: 1.25rem,
   checkbox-border-style: solid,
@@ -1215,7 +1095,6 @@ $eva-mapping: (
   checkbox-text-space: 0.6875rem,
   checkbox-padding: 0,
   checkbox-focus-inset-shadow-length: 0 0 0 100vmax,
-
   checkbox-basic-text-color: text-basic-color,
   checkbox-basic-background-color: color-basic-transparent-default,
   checkbox-basic-border-color: color-basic-transparent-default-border,
@@ -1243,7 +1122,6 @@ $eva-mapping: (
   checkbox-basic-disabled-text-color: text-disabled-color,
   checkbox-basic-disabled-checked-background-color: color-basic-transparent-600,
   checkbox-basic-disabled-checked-border-color: color-basic-transparent-600,
-
   checkbox-primary-text-color: text-basic-color,
   checkbox-primary-background-color: color-primary-transparent-default,
   checkbox-primary-border-color: color-primary-transparent-default-border,
@@ -1271,7 +1149,6 @@ $eva-mapping: (
   checkbox-primary-disabled-text-color: text-disabled-color,
   checkbox-primary-disabled-checked-background-color: color-basic-transparent-600,
   checkbox-primary-disabled-checked-border-color: color-basic-transparent-600,
-
   checkbox-success-text-color: text-basic-color,
   checkbox-success-background-color: color-success-transparent-default,
   checkbox-success-border-color: color-success-transparent-default-border,
@@ -1299,7 +1176,6 @@ $eva-mapping: (
   checkbox-success-disabled-text-color: text-disabled-color,
   checkbox-success-disabled-checked-background-color: color-basic-transparent-600,
   checkbox-success-disabled-checked-border-color: color-basic-transparent-600,
-
   checkbox-info-text-color: text-basic-color,
   checkbox-info-background-color: color-info-transparent-default,
   checkbox-info-border-color: color-info-transparent-default-border,
@@ -1327,7 +1203,6 @@ $eva-mapping: (
   checkbox-info-disabled-text-color: text-disabled-color,
   checkbox-info-disabled-checked-background-color: color-basic-transparent-600,
   checkbox-info-disabled-checked-border-color: color-basic-transparent-600,
-
   checkbox-warning-text-color: text-basic-color,
   checkbox-warning-background-color: color-warning-transparent-default,
   checkbox-warning-border-color: color-warning-transparent-default-border,
@@ -1355,7 +1230,6 @@ $eva-mapping: (
   checkbox-warning-disabled-text-color: text-disabled-color,
   checkbox-warning-disabled-checked-background-color: color-basic-transparent-600,
   checkbox-warning-disabled-checked-border-color: color-basic-transparent-600,
-
   checkbox-danger-text-color: text-basic-color,
   checkbox-danger-background-color: color-danger-transparent-default,
   checkbox-danger-border-color: color-danger-transparent-default-border,
@@ -1383,7 +1257,6 @@ $eva-mapping: (
   checkbox-danger-disabled-text-color: text-disabled-color,
   checkbox-danger-disabled-checked-background-color: color-basic-transparent-600,
   checkbox-danger-disabled-checked-border-color: color-basic-transparent-600,
-
   checkbox-control-text-color: text-control-color,
   checkbox-control-background-color: color-control-transparent-default,
   checkbox-control-border-color: color-control-transparent-default-border,
@@ -1411,17 +1284,14 @@ $eva-mapping: (
   checkbox-control-disabled-text-color: text-control-color,
   checkbox-control-disabled-checked-background-color: color-basic-transparent-600,
   checkbox-control-disabled-checked-border-color: color-basic-transparent-600,
-
   badge-dot-mode-border-radius: 0.5rem,
   badge-dot-mode-padding: 0.3rem,
-
   badge-border-radius: border-radius,
   badge-text-font-family: text-button-font-family,
   badge-text-font-size: text-button-tiny-font-size,
   badge-text-font-weight: text-button-font-weight,
   badge-text-line-height: text-button-tiny-line-height,
   badge-padding: 0.25rem 0.4rem,
-
   badge-basic-background-color: background-basic-color-2,
   badge-basic-text-color: text-basic-color,
   badge-primary-background-color: color-primary-default,
@@ -1436,11 +1306,9 @@ $eva-mapping: (
   badge-danger-text-color: text-control-color,
   badge-control-background-color: color-control-default,
   badge-control-text-color: color-basic-800,
-
   progress-bar-animation-duration: 400ms,
   progress-bar-border-radius: border-radius,
   progress-bar-text-font-family: text-subtitle-font-family,
-
   progress-bar-tiny-height: 1rem,
   progress-bar-tiny-text-font-size: text-subtitle-2-font-size,
   progress-bar-tiny-text-font-weight: text-subtitle-2-font-weight,
@@ -1461,35 +1329,27 @@ $eva-mapping: (
   progress-bar-giant-text-font-size: text-subtitle-font-size,
   progress-bar-giant-text-font-weight: text-subtitle-font-weight,
   progress-bar-giant-text-line-height: text-subtitle-line-height,
-
   progress-bar-basic-background-color: background-basic-color-2,
   progress-bar-basic-filled-background-color: background-basic-color-4,
   progress-bar-basic-text-color: text-basic-color,
-
   progress-bar-primary-background-color: background-basic-color-3,
   progress-bar-primary-filled-background-color: color-primary-default,
   progress-bar-primary-text-color: text-control-color,
-
   progress-bar-success-background-color: background-basic-color-3,
   progress-bar-success-filled-background-color: color-success-default,
   progress-bar-success-text-color: text-control-color,
-
   progress-bar-info-background-color: background-basic-color-3,
   progress-bar-info-filled-background-color: color-info-default,
   progress-bar-info-text-color: text-control-color,
-
   progress-bar-warning-background-color: background-basic-color-3,
   progress-bar-warning-filled-background-color: color-warning-default,
   progress-bar-warning-text-color: text-control-color,
-
   progress-bar-danger-background-color: background-basic-color-3,
   progress-bar-danger-filled-background-color: color-danger-default,
   progress-bar-danger-text-color: text-control-color,
-
   progress-bar-control-background-color: background-basic-color-3,
   progress-bar-control-filled-background-color: color-control-default,
   progress-bar-control-text-color: color-basic-800,
-
   alert-border-radius: border-radius,
   alert-bottom-margin: 1.5rem,
   alert-padding: 1rem 1.125rem,
@@ -1501,16 +1361,13 @@ $eva-mapping: (
   alert-text-font-size: text-subtitle-font-size,
   alert-text-font-weight: text-subtitle-font-weight,
   alert-text-line-height: text-subtitle-line-height,
-
   alert-closable-start-padding: 3rem,
-
   alert-tiny-height: 4.5rem,
   alert-small-height: 5.75rem,
   alert-medium-height: 7rem,
   alert-medium-padding: 1rem 1.125rem,
   alert-large-height: 8.25rem,
   alert-giant-height: 9.5rem,
-
   alert-basic-background-color: background-basic-color-2,
   alert-basic-text-color: text-basic-color,
   alert-primary-background-color: color-primary-default,
@@ -1525,7 +1382,6 @@ $eva-mapping: (
   alert-danger-text-color: text-control-color,
   alert-control-background-color: color-control-default,
   alert-control-text-color: color-basic-800,
-
   alert-accent-basic-color: border-basic-color-3,
   alert-accent-primary-color: color-primary-default,
   alert-accent-info-color: color-info-default,
@@ -1533,7 +1389,6 @@ $eva-mapping: (
   alert-accent-warning-color: color-warning-default,
   alert-accent-danger-color: color-danger-default,
   alert-accent-control-color: color-control-default,
-
   alert-outline-width: 1px,
   alert-outline-basic-color: color-basic-focus-border,
   alert-outline-primary-color: color-primary-focus-border,
@@ -1542,7 +1397,6 @@ $eva-mapping: (
   alert-outline-warning-color: color-warning-focus-border,
   alert-outline-danger-color: color-danger-focus-border,
   alert-outline-control-color: color-control-focus-border,
-
   chat-background-color: background-basic-color-1,
   chat-border: none,
   chat-border-radius: border-radius,
@@ -1551,24 +1405,20 @@ $eva-mapping: (
   chat-scrollbar-color: scrollbar-color,
   chat-scrollbar-background-color: scrollbar-background-color,
   chat-scrollbar-width: scrollbar-width,
-
   chat-text-color: text-basic-color,
   chat-text-font-family: text-paragraph-font-family,
   chat-text-font-size: text-paragraph-font-size,
   chat-text-font-weight: text-paragraph-font-weight,
   chat-text-line-height: text-paragraph-line-height,
-
   chat-header-text-font-family: text-subtitle-font-family,
   chat-header-text-font-size: text-subtitle-font-size,
   chat-header-text-font-weight: text-subtitle-font-weight,
   chat-header-text-line-height: text-subtitle-line-height,
-
   chat-tiny-height: 13.5rem,
   chat-small-height: 21rem,
   chat-medium-height: 28.5rem,
   chat-large-height: 36rem,
   chat-giant-height: 43.5rem,
-
   chat-basic-background-color: background-basic-color-1,
   chat-basic-text-color: text-basic-color,
   chat-primary-background-color: color-primary-default,
@@ -1583,11 +1433,9 @@ $eva-mapping: (
   chat-danger-text-color: text-control-color,
   chat-control-background-color: color-control-default,
   chat-control-text-color: color-basic-800,
-
   chat-divider-color: divider-color,
   chat-divider-style: divider-style,
   chat-divider-width: divider-width,
-
   chat-message-background: color-primary-default,
   chat-message-text-color: text-control-color,
   chat-message-reply-background-color: background-basic-color-2,
@@ -1598,47 +1446,37 @@ $eva-mapping: (
   chat-message-quote-text-color: text-hint-color,
   chat-message-file-text-color: text-hint-color,
   chat-message-file-background-color: transparent,
-
   spinner-text-color: text-basic-color,
   spinner-text-font-family: text-button-font-family,
   spinner-text-font-size: text-button-medium-font-size,
   spinner-text-font-weight: text-button-font-weight,
   spinner-text-line-height: text-button-medium-line-height,
-
   spinner-basic-background-color: color-basic-transparent-200,
   spinner-basic-circle-filled-color: text-hint-color,
   spinner-basic-circle-empty-color: transparent,
-
   spinner-primary-background-color: color-basic-transparent-200,
   spinner-primary-circle-filled-color: color-primary-default,
   spinner-primary-circle-empty-color: transparent,
-
   spinner-info-background-color: color-basic-transparent-200,
   spinner-info-circle-filled-color: color-info-default,
   spinner-info-circle-empty-color: transparent,
-
   spinner-success-background-color: color-basic-transparent-200,
   spinner-success-circle-filled-color: color-success-default,
   spinner-success-circle-empty-color: transparent,
-
   spinner-warning-background-color: color-basic-transparent-200,
   spinner-warning-circle-filled-color: color-warning-default,
   spinner-warning-circle-empty-color: transparent,
-
   spinner-danger-background-color: color-basic-transparent-200,
   spinner-danger-circle-filled-color: color-danger-default,
   spinner-danger-circle-empty-color: transparent,
-
   spinner-control-background-color: color-basic-control-transparent-200,
   spinner-control-circle-filled-color: color-control-default,
   spinner-control-circle-empty-color: transparent,
-
   spinner-height-tiny: 1rem,
   spinner-height-small: 1.25rem,
   spinner-height-medium: 1.5rem,
   spinner-height-large: 1.75rem,
   spinner-height-giant: 2rem,
-
   stepper-step-text-color: text-hint-color,
   stepper-step-text-font-family: text-paragraph-font-family,
   stepper-step-text-font-size: text-paragraph-font-size,
@@ -1646,7 +1484,6 @@ $eva-mapping: (
   stepper-step-text-line-height: text-paragraph-line-height,
   stepper-step-active-text-color: text-primary-active-color,
   stepper-step-completed-text-color: text-primary-color,
-
   stepper-step-index-border-color: border-basic-color-4,
   stepper-step-index-border-style: solid,
   stepper-step-index-border-width: 1px,
@@ -1656,14 +1493,11 @@ $eva-mapping: (
   stepper-step-index-completed-background-color: color-primary-default,
   stepper-step-index-completed-border-color: color-primary-default,
   stepper-step-index-completed-text-color: text-control-color,
-
   stepper-connector-background-color: background-basic-color-3,
   stepper-connector-completed-background-color: color-primary-default,
   stepper-horizontal-connector-margin: 1rem,
   stepper-vertical-connector-margin: 1rem,
-
   stepper-step-content-padding: 1.25rem,
-
   accordion-border-radius: border-radius,
   accordion-padding: 1.25rem,
   accordion-shadow: shadow,
@@ -1682,7 +1516,6 @@ $eva-mapping: (
   accordion-item-text-font-size: text-paragraph-font-size,
   accordion-item-text-font-weight: text-paragraph-font-weight,
   accordion-item-text-line-height: text-paragraph-line-height,
-
   list-item-divider-color: divider-color,
   list-item-divider-style: divider-style,
   list-item-divider-width: divider-width,
@@ -1692,7 +1525,6 @@ $eva-mapping: (
   list-item-font-size: text-paragraph-font-size,
   list-item-font-weight: text-paragraph-font-weight,
   list-item-line-height: text-paragraph-line-height,
-
   calendar-width: 20.625rem,
   calendar-background-color: background-basic-color-1,
   calendar-border-color: border-basic-color-4,
@@ -1704,37 +1536,30 @@ $eva-mapping: (
   calendar-text-font-size: text-subtitle-font-size,
   calendar-text-font-weight: text-subtitle-font-weight,
   calendar-text-line-height: text-subtitle-line-height,
-
   calendar-picker-padding-top: 0.25rem,
   calendar-picker-padding-bottom: 0.625rem,
   calendar-picker-padding-start: 0.625rem,
   calendar-picker-padding-end: 0.625rem,
-
   calendar-navigation-text-color: text-basic-color,
   calendar-navigation-text-font-family: text-button-font-family,
   calendar-navigation-title-text-font-size: text-button-medium-font-size,
   calendar-navigation-title-text-font-weight: text-button-font-weight,
   calendar-navigation-title-text-line-height: text-button-medium-line-height,
   calendar-navigation-padding: 0.625rem 0.25rem,
-
   calendar-cell-inactive-text-color: text-hint-color,
-
   calendar-cell-disabled-text-color: text-disabled-color,
-
   calendar-cell-hover-background-color: background-basic-color-2,
   calendar-cell-hover-border-color: background-basic-color-2,
   calendar-cell-hover-text-color: text-basic-color,
   calendar-cell-hover-text-font-size: calendar-text-font-size,
   calendar-cell-hover-text-font-weight: calendar-text-font-weight,
   calendar-cell-hover-text-line-height: calendar-text-line-height,
-
   calendar-cell-active-background-color: color-primary-active,
   calendar-cell-active-border-color: color-primary-active-border,
   calendar-cell-active-text-color: text-control-color,
   calendar-cell-active-text-font-size: calendar-text-font-size,
   calendar-cell-active-text-font-weight: calendar-text-font-weight,
   calendar-cell-active-text-line-height: calendar-text-line-height,
-
   calendar-cell-today-background-color: color-primary-transparent-default,
   calendar-cell-today-border-color: color-primary-transparent-default-border,
   calendar-cell-today-text-color: text-basic-color,
@@ -1746,7 +1571,6 @@ $eva-mapping: (
   calendar-cell-today-active-background-color: color-primary-transparent-active,
   calendar-cell-today-active-border-color: color-primary-transparent-active-border,
   calendar-cell-today-disabled-border-color: border-basic-color-4,
-
   calendar-cell-today-selected-background-color: color-control-transparent-default,
   calendar-cell-today-selected-border-color: transparent,
   calendar-cell-today-selected-text-color: text-control-color,
@@ -1754,7 +1578,6 @@ $eva-mapping: (
   calendar-cell-today-selected-hover-border-color: transparent,
   calendar-cell-today-selected-active-background-color: color-control-transparent-active,
   calendar-cell-today-selected-active-border-color: transparent,
-
   calendar-cell-today-in-range-background-color: color-control-transparent-default,
   calendar-cell-today-in-range-border-color: transparent,
   calendar-cell-today-in-range-text-color: text-control-color,
@@ -1762,7 +1585,6 @@ $eva-mapping: (
   calendar-cell-today-in-range-hover-border-color: transparent,
   calendar-cell-today-in-range-active-background-color: color-control-transparent-active,
   calendar-cell-today-in-range-active-border-color: transparent,
-
   calendar-cell-selected-background-color: color-primary-default,
   calendar-cell-selected-border-color: color-primary-default-border,
   calendar-cell-selected-text-color: text-control-color,
@@ -1773,14 +1595,12 @@ $eva-mapping: (
   calendar-cell-selected-hover-border-color: color-primary-hover-border,
   calendar-cell-selected-active-background-color: color-primary-active,
   calendar-cell-selected-active-border-color: color-primary-active-border,
-
   calendar-day-cell-width: 2.75rem,
   calendar-day-cell-height: 2.75rem,
   calendar-month-cell-width: 4.8125rem,
   calendar-month-cell-height: calendar-day-cell-height,
   calendar-year-cell-width: calendar-month-cell-width,
   calendar-year-cell-height: calendar-month-cell-height,
-
   calendar-weekday-background: transparent,
   calendar-weekday-divider-color: divider-color,
   calendar-weekday-divider-width: divider-width,
@@ -1791,7 +1611,6 @@ $eva-mapping: (
   calendar-weekday-holiday-text-color: calendar-weekday-text-color,
   calendar-weekday-height: calendar-day-cell-height,
   calendar-weekday-width: calendar-day-cell-width,
-
   calendar-weeknumber-background: transparent,
   calendar-weeknumber-divider-color: divider-color,
   calendar-weeknumber-divider-width: divider-width,
@@ -1801,7 +1620,6 @@ $eva-mapping: (
   calendar-weeknumber-text-line-height: text-subtitle-line-height,
   calendar-weeknumber-height: calendar-weekday-height,
   calendar-weeknumber-width: calendar-weekday-width,
-
   calendar-large-width: 22.375rem,
   calendar-day-cell-large-width: 3rem,
   calendar-day-cell-large-height: 3rem,
@@ -1813,9 +1631,7 @@ $eva-mapping: (
   calendar-month-cell-large-height: calendar-day-cell-large-height,
   calendar-year-cell-large-width: calendar-month-cell-large-width,
   calendar-year-cell-large-height: calendar-month-cell-large-height,
-
   overlay-backdrop-background-color: rgba(0, 0, 0, 0.35),
-
   tooltip-background-color: background-alternative-color-3,
   tooltip-border-color: transparent,
   tooltip-border-style: dashed,
@@ -1830,7 +1646,6 @@ $eva-mapping: (
   tooltip-icon-height: 1rem,
   tooltip-icon-width: 1rem,
   tooltip-max-width: 16rem,
-
   tooltip-basic-background-color: background-basic-color-3,
   tooltip-basic-border-color: transparent,
   tooltip-basic-text-color: text-basic-color,
@@ -1853,7 +1668,6 @@ $eva-mapping: (
   tooltip-control-border-color: transparent,
   tooltip-control-text-color: color-basic-800,
   tooltip-shadow: shadow,
-
   option-list-max-height: 20rem,
   option-list-shadow: none,
   option-list-background-color: background-basic-color-1,
@@ -1864,14 +1678,12 @@ $eva-mapping: (
   option-list-adjacent-border-color: option-list-border-color,
   option-list-adjacent-border-style: option-list-border-style,
   option-list-adjacent-border-width: option-list-border-width,
-
   option-group-text-color: text-hint-color,
   option-group-tiny-start-padding: 1.25rem,
   option-group-small-start-padding: 1.75rem,
   option-group-medium-start-padding: 2.25rem,
   option-group-large-start-padding: 2.25rem,
   option-group-giant-start-padding: 2.75rem,
-
   option-background-color: background-basic-color-1,
   option-text-color: text-basic-color,
   option-text-font-family: text-subtitle-font-family,
@@ -1891,90 +1703,74 @@ $eva-mapping: (
   option-selected-focus-text-color: text-control-color,
   option-disabled-background-color: background-basic-color-1,
   option-disabled-text-color: text-disabled-color,
-
   option-tiny-text-font-size: text-caption-2-font-size,
   option-tiny-text-font-weight: text-caption-2-font-weight,
   option-tiny-text-line-height: text-caption-2-line-height,
   option-tiny-padding: select-outline-tiny-padding,
-
   option-small-text-font-size: text-subtitle-2-font-size,
   option-small-text-font-weight: text-subtitle-2-font-weight,
   option-small-text-line-height: text-subtitle-2-line-height,
   option-small-padding: select-outline-small-padding,
-
   option-medium-text-font-size: text-subtitle-font-size,
   option-medium-text-font-weight: text-subtitle-font-weight,
   option-medium-text-line-height: text-subtitle-line-height,
   option-medium-padding: select-outline-medium-padding,
-
   option-large-text-font-size: text-subtitle-font-size,
   option-large-text-font-weight: text-subtitle-font-weight,
   option-large-text-line-height: text-subtitle-line-height,
   option-large-padding: select-outline-large-padding,
-
   option-giant-text-font-size: text-heading-6-font-size,
   option-giant-text-font-weight: text-heading-6-font-weight,
   option-giant-text-line-height: text-heading-6-line-height,
   option-giant-padding: select-outline-giant-padding,
-
   select-cursor: pointer,
   select-disabled-cursor: default,
   select-min-width: 13rem,
   select-outline-width: outline-width,
   select-outline-color: outline-color,
   select-icon-offset: 2rem,
-
   select-text-font-family: text-subtitle-font-family,
   select-placeholder-text-font-family: text-paragraph-font-family,
-
   select-tiny-text-font-size: text-caption-2-font-size,
   select-tiny-text-font-weight: text-caption-2-font-weight,
   select-tiny-text-line-height: text-caption-2-line-height,
   select-tiny-placeholder-text-font-size: text-paragraph-font-size,
   select-tiny-placeholder-text-font-weight: text-paragraph-font-weight,
   select-tiny-max-width: 20rem,
-
   select-small-text-font-size: text-subtitle-2-font-size,
   select-small-text-font-weight: text-subtitle-2-font-weight,
   select-small-text-line-height: text-subtitle-2-line-height,
   select-small-placeholder-text-font-size: text-paragraph-font-size,
   select-small-placeholder-text-font-weight: text-paragraph-font-weight,
   select-small-max-width: 20rem,
-
   select-medium-text-font-size: text-subtitle-font-size,
   select-medium-text-font-weight: text-subtitle-font-weight,
   select-medium-text-line-height: text-subtitle-line-height,
   select-medium-placeholder-text-font-size: text-paragraph-font-size,
   select-medium-placeholder-text-font-weight: text-paragraph-font-weight,
   select-medium-max-width: 20rem,
-
   select-large-text-font-size: text-subtitle-font-size,
   select-large-text-font-weight: text-subtitle-font-weight,
   select-large-text-line-height: text-subtitle-line-height,
   select-large-placeholder-text-font-size: text-paragraph-font-size,
   select-large-placeholder-text-font-weight: text-paragraph-font-weight,
   select-large-max-width: 30rem,
-
   select-giant-text-font-size: text-heading-6-font-size,
   select-giant-text-font-weight: text-heading-6-font-weight,
   select-giant-text-line-height: text-heading-6-line-height,
   select-giant-placeholder-text-font-size: text-paragraph-font-size,
   select-giant-placeholder-text-font-weight: text-paragraph-font-weight,
   select-giant-max-width: 30rem,
-
   select-rectangle-border-radius: border-radius,
   select-semi-round-border-radius: 0.75rem,
   select-round-border-radius: 1.5rem,
-
   select-outline-border-style: solid,
   select-outline-border-width: 1px,
-
   select-outline-tiny-padding: 0.1875rem 1rem,
   select-outline-small-padding: 0.1875rem 1rem,
   select-outline-medium-padding: 0.4375rem 1rem,
   select-outline-large-padding: 0.6875rem 1rem,
   select-outline-giant-padding: 0.9375rem 1rem,
-
   select-outline-basic-icon-color: text-hint-color,
   select-outline-basic-text-color: text-basic-color,
   select-outline-basic-placeholder-text-color: text-hint-color,
@@ -1984,11 +1780,12 @@ $eva-mapping: (
   select-outline-basic-focus-border-color: color-primary-default,
   select-outline-basic-hover-background-color: background-basic-color-3,
   select-outline-basic-hover-border-color: border-basic-color-4,
+  select-outline-basic-focus-and-hover-background-color: select-outline-basic-hover-background-color,
+  select-outline-basic-focus-and-hover-border-color: select-outline-basic-hover-border-color,
   select-outline-basic-disabled-background-color: background-basic-color-2,
   select-outline-basic-disabled-border-color: border-basic-color-4,
   select-outline-basic-disabled-icon-color: text-disabled-color,
   select-outline-basic-disabled-text-color: text-disabled-color,
-
   select-outline-primary-icon-color: text-hint-color,
   select-outline-primary-text-color: text-basic-color,
   select-outline-primary-placeholder-text-color: text-hint-color,
@@ -1998,11 +1795,12 @@ $eva-mapping: (
   select-outline-primary-focus-border-color: color-primary-focus,
   select-outline-primary-hover-background-color: background-basic-color-3,
   select-outline-primary-hover-border-color: color-primary-hover,
+  select-outline-primary-focus-and-hover-background-color: select-outline-primary-hover-background-color,
+  select-outline-primary-focus-and-hover-border-color: select-outline-primary-hover-border-color,
   select-outline-primary-disabled-background-color: background-basic-color-2,
   select-outline-primary-disabled-border-color: border-basic-color-4,
   select-outline-primary-disabled-icon-color: text-disabled-color,
   select-outline-primary-disabled-text-color: text-disabled-color,
-
   select-outline-success-icon-color: text-hint-color,
   select-outline-success-text-color: text-basic-color,
   select-outline-success-placeholder-text-color: text-hint-color,
@@ -2010,13 +1808,14 @@ $eva-mapping: (
   select-outline-success-border-color: color-success-default,
   select-outline-success-focus-background-color: background-basic-color-1,
   select-outline-success-focus-border-color: color-success-focus,
+  select-outline-success-focus-and-hover-background-color: select-outline-success-hover-background-color,
+  select-outline-success-focus-and-hover-border-color: select-outline-success-hover-border-color,
   select-outline-success-hover-background-color: background-basic-color-3,
   select-outline-success-hover-border-color: color-success-hover,
   select-outline-success-disabled-background-color: background-basic-color-2,
   select-outline-success-disabled-border-color: border-basic-color-4,
   select-outline-success-disabled-icon-color: text-disabled-color,
   select-outline-success-disabled-text-color: text-disabled-color,
-
   select-outline-info-icon-color: text-hint-color,
   select-outline-info-text-color: text-basic-color,
   select-outline-info-placeholder-text-color: text-hint-color,
@@ -2026,11 +1825,12 @@ $eva-mapping: (
   select-outline-info-focus-border-color: color-info-focus,
   select-outline-info-hover-background-color: background-basic-color-3,
   select-outline-info-hover-border-color: color-info-hover,
+  select-outline-info-focus-and-hover-background-color: select-outline-info-hover-background-color,
+  select-outline-info-focus-and-hover-border-color: select-outline-info-hover-border-color,
   select-outline-info-disabled-background-color: background-basic-color-2,
   select-outline-info-disabled-border-color: border-basic-color-4,
   select-outline-info-disabled-icon-color: text-disabled-color,
   select-outline-info-disabled-text-color: text-disabled-color,
-
   select-outline-warning-icon-color: text-hint-color,
   select-outline-warning-text-color: text-basic-color,
   select-outline-warning-placeholder-text-color: text-hint-color,
@@ -2040,11 +1840,12 @@ $eva-mapping: (
   select-outline-warning-focus-border-color: color-warning-focus,
   select-outline-warning-hover-background-color: background-basic-color-3,
   select-outline-warning-hover-border-color: color-warning-hover,
+  select-outline-warning-focus-and-hover-background-color: select-outline-warning-hover-background-color,
+  select-outline-warning-focus-and-hover-border-color: select-outline-warning-hover-border-color,
   select-outline-warning-disabled-background-color: background-basic-color-2,
   select-outline-warning-disabled-border-color: border-basic-color-4,
   select-outline-warning-disabled-icon-color: text-disabled-color,
   select-outline-warning-disabled-text-color: text-disabled-color,
-
   select-outline-danger-icon-color: text-hint-color,
   select-outline-danger-text-color: text-basic-color,
   select-outline-danger-placeholder-text-color: text-hint-color,
@@ -2054,11 +1855,12 @@ $eva-mapping: (
   select-outline-danger-focus-border-color: color-danger-focus,
   select-outline-danger-hover-background-color: background-basic-color-3,
   select-outline-danger-hover-border-color: color-danger-hover,
+  select-outline-danger-focus-and-hover-background-color: select-outline-danger-hover-background-color,
+  select-outline-danger-focus-and-hover-border-color: select-outline-danger-hover-border-color,
   select-outline-danger-disabled-background-color: background-basic-color-2,
   select-outline-danger-disabled-border-color: border-basic-color-4,
   select-outline-danger-disabled-icon-color: text-disabled-color,
   select-outline-danger-disabled-text-color: text-disabled-color,
-
   select-outline-control-icon-color: color-basic-100,
   select-outline-control-text-color: color-basic-100,
   select-outline-control-placeholder-text-color: color-basic-100,
@@ -2068,11 +1870,12 @@ $eva-mapping: (
   select-outline-control-focus-border-color: color-control-transparent-focus-border,
   select-outline-control-hover-background-color: color-basic-control-transparent-400,
   select-outline-control-hover-border-color: color-control-transparent-hover-border,
+  select-outline-control-focus-and-hover-background-color: select-outline-control-hover-background-color,
+  select-outline-control-focus-and-hover-border-color: select-outline-control-hover-border-color,
   select-outline-control-disabled-background-color: color-control-transparent-disabled,
   select-outline-control-disabled-border-color: color-basic-control-transparent-500,
   select-outline-control-disabled-icon-color: color-basic-100,
   select-outline-control-disabled-text-color: color-basic-100,
-
   select-outline-adjacent-border-style: select-outline-border-style,
   select-outline-adjacent-border-width: select-outline-border-width,
   select-outline-basic-open-border-color: select-outline-basic-border-color,
@@ -2089,232 +1892,227 @@ $eva-mapping: (
   select-outline-danger-adjacent-border-color: select-outline-danger-border-color,
   select-outline-control-open-border-color: select-outline-control-border-color,
   select-outline-control-adjacent-border-color: select-outline-control-border-color,
-
   select-filled-border-style: solid,
   select-filled-border-width: 1px,
-
   select-filled-tiny-padding: 0.1875rem 1rem,
   select-filled-small-padding: 0.1875rem 1rem,
   select-filled-medium-padding: 0.4375rem 1rem,
   select-filled-large-padding: 0.6875rem 1rem,
   select-filled-giant-padding: 0.9375rem 1rem,
-
   select-filled-basic-background-color: color-basic-default,
   select-filled-basic-border-color: color-basic-default-border,
   select-filled-basic-icon-color: color-basic-800,
   select-filled-basic-text-color: color-basic-800,
   select-filled-basic-placeholder-text-color: text-hint-color,
-
   select-filled-basic-focus-background-color: color-basic-focus,
   select-filled-basic-focus-border-color: color-basic-focus-border,
   select-filled-basic-hover-background-color: color-basic-hover,
   select-filled-basic-hover-border-color: color-basic-hover-border,
+  select-filled-basic-focus-and-hover-background-color: select-filled-basic-hover-background-color,
+  select-filled-basic-focus-and-hover-border-color: select-filled-basic-hover-border-color,
   select-filled-basic-disabled-background-color: background-basic-color-2,
   select-filled-basic-disabled-border-color: border-basic-color-2,
   select-filled-basic-disabled-icon-color: text-disabled-color,
   select-filled-basic-disabled-text-color: text-disabled-color,
-
   select-filled-primary-background-color: color-primary-default,
   select-filled-primary-border-color: color-primary-default-border,
   select-filled-primary-icon-color: text-control-color,
   select-filled-primary-text-color: text-control-color,
   select-filled-primary-placeholder-text-color: text-control-color,
-
   select-filled-primary-focus-background-color: color-primary-focus,
   select-filled-primary-focus-border-color: color-primary-focus-border,
   select-filled-primary-hover-background-color: color-primary-hover,
   select-filled-primary-hover-border-color: color-primary-hover-border,
+  select-filled-primary-focus-and-hover-background-color: select-filled-primary-hover-background-color,
+  select-filled-primary-focus-and-hover-border-color: select-filled-primary-hover-border-color,
   select-filled-primary-disabled-background-color: background-basic-color-2,
   select-filled-primary-disabled-border-color: border-basic-color-2,
   select-filled-primary-disabled-icon-color: text-disabled-color,
   select-filled-primary-disabled-text-color: text-disabled-color,
-
   select-filled-success-background-color: color-success-default,
   select-filled-success-border-color: color-success-default-border,
   select-filled-success-icon-color: text-control-color,
   select-filled-success-text-color: text-control-color,
   select-filled-success-placeholder-text-color: text-control-color,
-
   select-filled-success-focus-background-color: color-success-focus,
   select-filled-success-focus-border-color: color-success-focus-border,
   select-filled-success-hover-background-color: color-success-hover,
   select-filled-success-hover-border-color: color-success-hover-border,
+  select-filled-success-focus-and-hover-background-color: select-filled-success-hover-background-color,
+  select-filled-success-focus-and-hover-border-color: select-filled-success-hover-border-color,
   select-filled-success-disabled-background-color: background-basic-color-2,
   select-filled-success-disabled-border-color: border-basic-color-2,
   select-filled-success-disabled-icon-color: text-disabled-color,
   select-filled-success-disabled-text-color: text-disabled-color,
-
   select-filled-info-background-color: color-info-default,
   select-filled-info-border-color: color-info-default-border,
   select-filled-info-icon-color: text-control-color,
   select-filled-info-text-color: text-control-color,
   select-filled-info-placeholder-text-color: text-control-color,
-
   select-filled-info-focus-background-color: color-info-focus,
   select-filled-info-focus-border-color: color-info-focus-border,
   select-filled-info-hover-background-color: color-info-hover,
   select-filled-info-hover-border-color: color-info-hover-border,
+  select-filled-info-focus-and-hover-background-color: select-filled-info-hover-background-color,
+  select-filled-info-focus-and-hover-border-color: select-filled-info-hover-border-color,
   select-filled-info-disabled-background-color: background-basic-color-2,
   select-filled-info-disabled-border-color: border-basic-color-2,
   select-filled-info-disabled-icon-color: text-disabled-color,
   select-filled-info-disabled-text-color: text-disabled-color,
-
   select-filled-warning-background-color: color-warning-default,
   select-filled-warning-border-color: color-warning-default-border,
   select-filled-warning-icon-color: text-control-color,
   select-filled-warning-text-color: text-control-color,
   select-filled-warning-placeholder-text-color: text-control-color,
-
   select-filled-warning-focus-background-color: color-warning-focus,
   select-filled-warning-focus-border-color: color-warning-focus-border,
   select-filled-warning-hover-background-color: color-warning-hover,
   select-filled-warning-hover-border-color: color-warning-hover-border,
+  select-filled-warning-focus-and-hover-background-color: select-filled-warning-hover-background-color,
+  select-filled-warning-focus-and-hover-border-color: select-filled-warning-hover-border-color,
   select-filled-warning-disabled-background-color: background-basic-color-2,
   select-filled-warning-disabled-border-color: border-basic-color-2,
   select-filled-warning-disabled-icon-color: text-disabled-color,
   select-filled-warning-disabled-text-color: text-disabled-color,
-
   select-filled-danger-background-color: color-danger-default,
   select-filled-danger-border-color: color-danger-default-border,
   select-filled-danger-icon-color: text-control-color,
   select-filled-danger-text-color: text-control-color,
   select-filled-danger-placeholder-text-color: text-control-color,
-
   select-filled-danger-focus-background-color: color-danger-focus,
   select-filled-danger-focus-border-color: color-danger-focus-border,
   select-filled-danger-hover-background-color: color-danger-hover,
   select-filled-danger-hover-border-color: color-danger-hover-border,
+  select-filled-danger-focus-and-hover-background-color: select-filled-danger-hover-background-color,
+  select-filled-danger-focus-and-hover-border-color: select-filled-danger-hover-border-color,
   select-filled-danger-disabled-background-color: background-basic-color-2,
   select-filled-danger-disabled-border-color: border-basic-color-2,
   select-filled-danger-disabled-icon-color: text-disabled-color,
   select-filled-danger-disabled-text-color: text-disabled-color,
-
   select-filled-control-background-color: color-control-default,
   select-filled-control-border-color: color-control-default-border,
   select-filled-control-icon-color: color-basic-800,
   select-filled-control-text-color: color-basic-800,
   select-filled-control-placeholder-text-color: text-hint-color,
-
   select-filled-control-focus-background-color: color-control-focus,
   select-filled-control-focus-border-color: color-control-focus-border,
   select-filled-control-hover-background-color: color-control-hover,
   select-filled-control-hover-border-color: color-control-hover-border,
+  select-filled-control-focus-and-hover-background-color: select-filled-control-hover-background-color,
+  select-filled-control-focus-and-hover-border-color: select-filled-control-hover-border-color,
   select-filled-control-disabled-background-color: background-basic-color-2,
   select-filled-control-disabled-border-color: border-basic-color-2,
   select-filled-control-disabled-icon-color: text-disabled-color,
   select-filled-control-disabled-text-color: text-disabled-color,
-
   select-hero-tiny-padding: 0.25rem 1rem,
   select-hero-small-padding: 0.25rem 1rem,
   select-hero-medium-padding: 0.5rem 1rem,
   select-hero-large-padding: 0.75rem 1rem,
   select-hero-giant-padding: 1rem 1rem,
-
   select-hero-basic-left-background-color: color-basic-200,
   select-hero-basic-right-background-color: color-basic-default,
   select-hero-basic-icon-color: color-basic-800,
   select-hero-basic-text-color: color-basic-800,
   select-hero-basic-placeholder-text-color: text-hint-color,
-
   select-hero-basic-focus-left-background-color: color-basic-300,
   select-hero-basic-focus-right-background-color: color-basic-400,
   select-hero-basic-hover-left-background-color: color-basic-100,
   select-hero-basic-hover-right-background-color: color-basic-hover,
+  select-hero-basic-focus-and-hover-left-background-color: select-hero-basic-hover-left-background-color,
+  select-hero-basic-focus-and-hover-right-background-color: select-hero-basic-hover-right-background-color,
   select-hero-basic-disabled-background-color: background-basic-color-2,
   select-hero-basic-disabled-icon-color: text-disabled-color,
   select-hero-basic-disabled-text-color: text-disabled-color,
-
   select-hero-primary-left-background-color: color-primary-400,
   select-hero-primary-right-background-color: color-primary-default,
   select-hero-primary-icon-color: text-control-color,
   select-hero-primary-text-color: text-control-color,
   select-hero-primary-placeholder-text-color: text-control-color,
-
   select-hero-primary-focus-left-background-color: color-primary-500,
   select-hero-primary-focus-right-background-color: color-primary-focus,
   select-hero-primary-hover-left-background-color: color-primary-300,
   select-hero-primary-hover-right-background-color: color-primary-hover,
+  select-hero-primary-focus-and-hover-left-background-color: select-hero-primary-hover-left-background-color,
+  select-hero-primary-focus-and-hover-right-background-color: select-hero-primary-hover-right-background-color,
   select-hero-primary-disabled-background-color: background-basic-color-2,
   select-hero-primary-disabled-icon-color: text-disabled-color,
   select-hero-primary-disabled-text-color: text-disabled-color,
-
   select-hero-success-left-background-color: color-success-400,
   select-hero-success-right-background-color: color-success-default,
   select-hero-success-icon-color: text-control-color,
   select-hero-success-text-color: text-control-color,
   select-hero-success-placeholder-text-color: text-control-color,
-
   select-hero-success-focus-left-background-color: color-success-500,
   select-hero-success-focus-right-background-color: color-success-focus,
   select-hero-success-hover-left-background-color: color-success-300,
   select-hero-success-hover-right-background-color: color-success-hover,
+  select-hero-success-focus-and-hover-left-background-color: select-hero-success-hover-left-background-color,
+  select-hero-success-focus-and-hover-right-background-color: select-hero-success-hover-right-background-color,
   select-hero-success-disabled-background-color: background-basic-color-2,
   select-hero-success-disabled-icon-color: text-disabled-color,
   select-hero-success-disabled-text-color: text-disabled-color,
-
   select-hero-info-left-background-color: color-info-400,
   select-hero-info-right-background-color: color-info-default,
   select-hero-info-icon-color: text-control-color,
   select-hero-info-text-color: text-control-color,
   select-hero-info-placeholder-text-color: text-control-color,
-
   select-hero-info-focus-left-background-color: color-info-500,
   select-hero-info-focus-right-background-color: color-info-focus,
   select-hero-info-hover-left-background-color: color-info-300,
   select-hero-info-hover-right-background-color: color-info-hover,
+  select-hero-info-focus-and-hover-left-background-color: select-hero-info-hover-left-background-color,
+  select-hero-info-focus-and-hover-right-background-color: select-hero-info-hover-right-background-color,
   select-hero-info-disabled-background-color: background-basic-color-2,
   select-hero-info-disabled-icon-color: text-disabled-color,
   select-hero-info-disabled-text-color: text-disabled-color,
-
   select-hero-warning-left-background-color: color-warning-400,
   select-hero-warning-right-background-color: color-warning-default,
   select-hero-warning-icon-color: text-control-color,
   select-hero-warning-text-color: text-control-color,
   select-hero-warning-placeholder-text-color: text-control-color,
-
   select-hero-warning-focus-left-background-color: color-warning-500,
   select-hero-warning-focus-right-background-color: color-warning-focus,
   select-hero-warning-hover-left-background-color: color-warning-300,
   select-hero-warning-hover-right-background-color: color-warning-hover,
+  select-hero-warning-focus-and-hover-left-background-color: select-hero-warning-hover-left-background-color,
+  select-hero-warning-focus-and-hover-right-background-color: select-hero-warning-hover-right-background-color,
   select-hero-warning-disabled-background-color: background-basic-color-2,
   select-hero-warning-disabled-icon-color: text-disabled-color,
   select-hero-warning-disabled-text-color: text-disabled-color,
-
   select-hero-danger-left-background-color: color-danger-400,
   select-hero-danger-right-background-color: color-danger-default,
   select-hero-danger-icon-color: text-control-color,
   select-hero-danger-text-color: text-control-color,
   select-hero-danger-placeholder-text-color: text-control-color,
-
   select-hero-danger-focus-left-background-color: color-danger-500,
   select-hero-danger-focus-right-background-color: color-danger-focus,
   select-hero-danger-hover-left-background-color: color-danger-300,
   select-hero-danger-hover-right-background-color: color-danger-hover,
+  select-hero-danger-focus-and-hover-left-background-color: select-hero-danger-hover-left-background-color,
+  select-hero-danger-focus-and-hover-right-background-color: select-hero-danger-hover-right-background-color,
   select-hero-danger-disabled-background-color: background-basic-color-2,
   select-hero-danger-disabled-icon-color: text-disabled-color,
   select-hero-danger-disabled-text-color: text-disabled-color,
-
   select-hero-control-left-background-color: color-control-default,
   select-hero-control-right-background-color: color-control-default,
   select-hero-control-icon-color: color-basic-800,
   select-hero-control-text-color: color-basic-800,
   select-hero-control-placeholder-text-color: text-hint-color,
-
   select-hero-control-focus-left-background-color: color-basic-200,
   select-hero-control-focus-right-background-color: color-control-focus,
   select-hero-control-hover-left-background-color: color-basic-100,
   select-hero-control-hover-right-background-color: color-control-hover,
+  select-hero-control-focus-and-hover-left-background-color: select-hero-control-hover-left-background-color,
+  select-hero-control-focus-and-hover-right-background-color: select-hero-control-hover-right-background-color,
   select-hero-control-disabled-background-color: background-basic-color-2,
   select-hero-control-disabled-icon-color: text-disabled-color,
   select-hero-control-disabled-text-color: text-disabled-color,
-
   datepicker-background-color: background-basic-color-1,
   datepicker-border-color: border-basic-color-4,
   datepicker-border-style: solid,
   datepicker-border-width: 0.0625rem,
   datepicker-border-radius: border-radius,
   datepicker-shadow: none,
-
   timepicker-cell-text-color: text-basic-color,
   timepicker-cell-hover-background-color: background-basic-color-2,
   timepicker-cell-hover-text-color: text-basic-color,
@@ -2345,7 +2143,6 @@ $eva-mapping: (
   timepicker-title-padding: text-paragraph-line-height,
   timepicker-container-width: 20rem,
   timepicker-container-height: 26.1875rem,
-
   radio-width: 1.25rem,
   radio-height: 1.25rem,
   radio-border-style: solid,
@@ -2356,7 +2153,6 @@ $eva-mapping: (
   radio-text-line-height: text-subtitle-2-line-height,
   radio-outline-color: outline-color,
   radio-outline-width: outline-width,
-
   radio-basic-text-color: text-basic-color,
   radio-basic-border-color: color-basic-transparent-default-border,
   radio-basic-background-color: color-basic-transparent-default,
@@ -2384,7 +2180,6 @@ $eva-mapping: (
   radio-basic-disabled-checked-background-color: transparent,
   radio-basic-disabled-checked-border-color: color-basic-transparent-600,
   radio-basic-disabled-checked-inner-circle-color: color-basic-transparent-600,
-
   radio-primary-text-color: text-basic-color,
   radio-primary-border-color: color-primary-transparent-default-border,
   radio-primary-background-color: color-primary-transparent-default,
@@ -2412,7 +2207,6 @@ $eva-mapping: (
   radio-primary-disabled-checked-background-color: transparent,
   radio-primary-disabled-checked-border-color: color-basic-transparent-600,
   radio-primary-disabled-checked-inner-circle-color: color-basic-transparent-600,
-
   radio-success-text-color: text-basic-color,
   radio-success-border-color: color-success-transparent-default-border,
   radio-success-background-color: color-success-transparent-default,
@@ -2440,7 +2234,6 @@ $eva-mapping: (
   radio-success-disabled-checked-background-color: transparent,
   radio-success-disabled-checked-border-color: color-basic-transparent-600,
   radio-success-disabled-checked-inner-circle-color: color-basic-transparent-600,
-
   radio-info-text-color: text-basic-color,
   radio-info-border-color: color-info-transparent-default-border,
   radio-info-background-color: color-info-transparent-default,
@@ -2468,7 +2261,6 @@ $eva-mapping: (
   radio-info-disabled-checked-background-color: transparent,
   radio-info-disabled-checked-border-color: color-basic-transparent-600,
   radio-info-disabled-checked-inner-circle-color: color-basic-transparent-600,
-
   radio-warning-text-color: text-basic-color,
   radio-warning-border-color: color-warning-transparent-default-border,
   radio-warning-background-color: color-warning-transparent-default,
@@ -2496,7 +2288,6 @@ $eva-mapping: (
   radio-warning-disabled-checked-background-color: transparent,
   radio-warning-disabled-checked-border-color: color-basic-transparent-600,
   radio-warning-disabled-checked-inner-circle-color: color-basic-transparent-600,
-
   radio-danger-text-color: text-basic-color,
   radio-danger-border-color: color-danger-transparent-default-border,
   radio-danger-background-color: color-danger-transparent-default,
@@ -2524,7 +2315,6 @@ $eva-mapping: (
   radio-danger-disabled-checked-background-color: transparent,
   radio-danger-disabled-checked-border-color: color-basic-transparent-600,
   radio-danger-disabled-checked-inner-circle-color: color-basic-transparent-600,
-
   radio-control-text-color: text-control-color,
   radio-control-background-color: color-control-transparent-default,
   radio-control-border-color: color-control-transparent-default-border,
@@ -2552,27 +2342,23 @@ $eva-mapping: (
   radio-control-disabled-checked-background-color: transparent,
   radio-control-disabled-checked-border-color: color-basic-transparent-600,
   radio-control-disabled-checked-inner-circle-color: color-basic-transparent-600,
-
   tree-grid-cell-border-width: 1px,
   tree-grid-cell-border-style: solid,
   tree-grid-cell-border-color: border-basic-color-2,
   tree-grid-row-min-height: 2rem,
   tree-grid-cell-padding: 0.875rem 1.25rem,
-
   tree-grid-header-background-color: background-basic-color-1,
   tree-grid-header-text-color: text-basic-color,
   tree-grid-header-text-font-family: text-subtitle-font-family,
   tree-grid-header-text-font-size: text-subtitle-font-size,
   tree-grid-header-text-font-weight: text-subtitle-font-weight,
   tree-grid-header-text-line-height: text-subtitle-line-height,
-
   tree-grid-footer-background-color: background-basic-color-1,
   tree-grid-footer-text-color: text-basic-color,
   tree-grid-footer-text-font-family: tree-grid-header-text-font-family,
   tree-grid-footer-text-font-size: tree-grid-header-text-font-size,
   tree-grid-footer-text-font-weight: tree-grid-header-text-font-weight,
   tree-grid-footer-text-line-height: tree-grid-header-text-line-height,
-
   tree-grid-row-background-color: background-basic-color-1,
   tree-grid-row-even-background-color: background-basic-color-1,
   tree-grid-row-hover-background-color: background-basic-color-1,
@@ -2581,11 +2367,9 @@ $eva-mapping: (
   tree-grid-row-text-font-size: text-paragraph-font-size,
   tree-grid-row-text-font-weight: text-paragraph-font-weight,
   tree-grid-row-text-line-height: text-paragraph-line-height,
-
   tree-grid-sort-header-button-background-color: transparent,
   tree-grid-sort-header-button-border: none,
   tree-grid-sort-header-button-padding: 0,
-
   icon-font-size: 1.25rem,
   icon-line-height: 1,
   icon-width: 1em,
@@ -2598,43 +2382,36 @@ $eva-mapping: (
   icon-warning-color: color-warning-default,
   icon-danger-color: color-danger-default,
   icon-control-color: color-basic-100,
-
   tag-text-font-family: text-subtitle-font-family,
   tag-text-transform: capitalize,
   tag-border-width: 0.0625rem,
   tag-border-style: solid,
   tag-border-radius: 1.5rem,
-
   tag-tiny-text-font-size: input-tiny-text-font-size,
   tag-tiny-text-font-weight: input-tiny-text-font-weight,
   tag-tiny-text-line-height: input-tiny-text-line-height,
   tag-tiny-padding: 0.0625rem 0.9375rem,
   tag-tiny-close-offset: 0.625rem,
-
   tag-small-text-font-size: input-small-text-font-size,
   tag-small-text-font-weight: input-small-text-font-weight,
   tag-small-text-line-height: input-small-text-line-height,
   tag-small-padding: 0.0625rem 0.9375rem,
   tag-small-close-offset: 0.625rem,
-
   tag-medium-text-font-size: input-medium-text-font-size,
   tag-medium-text-font-weight: input-medium-text-font-weight,
   tag-medium-text-line-height: input-medium-text-line-height,
   tag-medium-padding: 0.1875rem 0.9375rem,
   tag-medium-close-offset: 0.625rem,
-
   tag-large-text-font-size: input-large-text-font-size,
   tag-large-text-font-weight: input-large-text-font-weight,
   tag-large-text-line-height: input-large-text-line-height,
   tag-large-padding: 0.3125rem 0.9375rem,
   tag-large-close-offset: 0.625rem,
-
   tag-giant-text-font-size: input-giant-text-font-size,
   tag-giant-text-font-weight: input-giant-text-font-weight,
   tag-giant-text-line-height: input-giant-text-line-height,
   tag-giant-padding: 0.4375rem 0.9375rem,
   tag-giant-close-offset: 0.625rem,
-
   tag-filled-basic-background-color: color-basic-default,
   tag-filled-basic-border-color: color-basic-default-border,
   tag-filled-basic-text-color: color-basic-800,
@@ -2644,7 +2421,6 @@ $eva-mapping: (
   tag-filled-basic-hover-border-color: color-basic-hover-border,
   tag-filled-basic-selected-background-color: color-basic-actove,
   tag-filled-basic-selected-border-color: color-basic-active-border,
-
   tag-filled-primary-background-color: color-primary-default,
   tag-filled-primary-border-color: color-primary-default-border,
   tag-filled-primary-text-color: text-control-color,
@@ -2654,7 +2430,6 @@ $eva-mapping: (
   tag-filled-primary-hover-border-color: color-primary-hover-border,
   tag-filled-primary-selected-background-color: color-primary-actove,
   tag-filled-primary-selected-border-color: color-primary-active-border,
-
   tag-filled-success-background-color: color-success-default,
   tag-filled-success-border-color: color-success-default-border,
   tag-filled-success-text-color: text-control-color,
@@ -2664,7 +2439,6 @@ $eva-mapping: (
   tag-filled-success-hover-border-color: color-success-hover-border,
   tag-filled-success-selected-background-color: color-success-actove,
   tag-filled-success-selected-border-color: color-success-active-border,
-
   tag-filled-info-background-color: color-info-default,
   tag-filled-info-border-color: color-info-default-border,
   tag-filled-info-text-color: text-control-color,
@@ -2674,7 +2448,6 @@ $eva-mapping: (
   tag-filled-info-hover-border-color: color-info-hover-border,
   tag-filled-info-selected-background-color: color-info-actove,
   tag-filled-info-selected-border-color: color-info-active-border,
-
   tag-filled-warning-background-color: color-warning-default,
   tag-filled-warning-border-color: color-warning-default-border,
   tag-filled-warning-text-color: text-control-color,
@@ -2684,7 +2457,6 @@ $eva-mapping: (
   tag-filled-warning-hover-border-color: color-warning-hover-border,
   tag-filled-warning-selected-background-color: color-warning-actove,
   tag-filled-warning-selected-border-color: color-warning-active-border,
-
   tag-filled-danger-background-color: color-danger-default,
   tag-filled-danger-border-color: color-danger-default-border,
   tag-filled-danger-text-color: text-control-color,
@@ -2694,7 +2466,6 @@ $eva-mapping: (
   tag-filled-danger-hover-border-color: color-danger-hover-border,
   tag-filled-danger-selected-background-color: color-danger-actove,
   tag-filled-danger-selected-border-color: color-danger-active-border,
-
   tag-filled-control-background-color: color-control-default,
   tag-filled-control-border-color: color-control-default-border,
   tag-filled-control-text-color: color-basic-800,
@@ -2704,7 +2475,6 @@ $eva-mapping: (
   tag-filled-control-hover-border-color: color-control-focus-border,
   tag-filled-control-selected-background-color: color-control-actove,
   tag-filled-control-selected-border-color: color-control-active-border,
-
   tag-outline-basic-background-color: color-basic-transparent-default,
   tag-outline-basic-border-color: color-basic-transparent-default-border,
   tag-outline-basic-text-color: text-hint-color,
@@ -2717,7 +2487,6 @@ $eva-mapping: (
   tag-outline-basic-selected-background-color: color-basic-transparent-active,
   tag-outline-basic-selected-border-color: color-basic-transparent-active-border,
   tag-outline-basic-selected-text-color: text-hint-color,
-
   tag-outline-primary-background-color: color-primary-transparent-default,
   tag-outline-primary-border-color: color-primary-transparent-default-border,
   tag-outline-primary-text-color: text-primary-color,
@@ -2730,7 +2499,6 @@ $eva-mapping: (
   tag-outline-primary-selected-background-color: color-primary-transparent-active,
   tag-outline-primary-selected-border-color: color-primary-transparent-active-border,
   tag-outline-primary-selected-text-color: text-primary-color,
-
   tag-outline-success-background-color: color-success-transparent-default,
   tag-outline-success-border-color: color-success-transparent-default-border,
   tag-outline-success-text-color: text-success-color,
@@ -2743,7 +2511,6 @@ $eva-mapping: (
   tag-outline-success-selected-background-color: color-success-transparent-active,
   tag-outline-success-selected-border-color: color-success-transparent-active-border,
   tag-outline-success-selected-text-color: text-success-color,
-
   tag-outline-info-background-color: color-info-transparent-default,
   tag-outline-info-border-color: color-info-transparent-default-border,
   tag-outline-info-text-color: text-info-color,
@@ -2756,7 +2523,6 @@ $eva-mapping: (
   tag-outline-info-selected-background-color: color-info-transparent-active,
   tag-outline-info-selected-border-color: color-info-transparent-active-border,
   tag-outline-info-selected-text-color: text-info-color,
-
   tag-outline-warning-background-color: color-warning-transparent-default,
   tag-outline-warning-border-color: color-warning-transparent-default-border,
   tag-outline-warning-text-color: text-warning-color,
@@ -2769,7 +2535,6 @@ $eva-mapping: (
   tag-outline-warning-selected-background-color: color-warning-transparent-active,
   tag-outline-warning-selected-border-color: color-warning-transparent-active-border,
   tag-outline-warning-selected-text-color: text-warning-color,
-
   tag-outline-danger-background-color: color-danger-transparent-default,
   tag-outline-danger-border-color: color-danger-transparent-default-border,
   tag-outline-danger-text-color: text-danger-color,
@@ -2782,7 +2547,6 @@ $eva-mapping: (
   tag-outline-danger-selected-background-color: color-danger-transparent-active,
   tag-outline-danger-selected-border-color: color-danger-transparent-active-border,
   tag-outline-danger-selected-text-color: text-danger-color,
-
   tag-outline-control-background-color: color-control-transparent-default,
   tag-outline-control-border-color: color-control-transparent-default-border,
   tag-outline-control-text-color: text-control-color,
@@ -2795,27 +2559,22 @@ $eva-mapping: (
   tag-outline-control-selected-background-color: color-control-transparent-active,
   tag-outline-control-selected-border-color: color-control-transparent-active-border,
   tag-outline-control-selected-text-color: text-control-color,
-
   tag-list-tiny-tag-offset: 0.0625rem,
   tag-list-small-tag-offset: 0.125rem,
   tag-list-medium-tag-offset: 0.25rem,
   tag-list-large-tag-offset: 0.375rem,
   tag-list-giant-tag-offset: 0.5rem,
-
   tag-list-with-input-tiny-padding: 0.0625rem 1rem,
   tag-list-with-input-small-padding: 0.0625rem 1rem,
   tag-list-with-input-medium-padding: 0.1875rem 1rem,
   tag-list-with-input-large-padding: 0.3125rem 1rem,
   tag-list-with-input-giant-padding: 0.4375rem 1rem,
-
   tag-list-with-input-rectangle-border-radius: input-rectangle-border-radius,
   tag-list-with-input-semi-round-border-radius: input-semi-round-border-radius,
   tag-list-with-input-round-border-radius: input-round-border-radius,
-
   tag-input-min-width: 6rem,
   tag-input-text-font-family: input-text-font-family,
   tag-input-placeholder-text-font-family: input-placeholder-text-font-family,
-
   tag-input-basic-background-color: input-basic-background-color,
   tag-input-basic-border-color: input-basic-border-color,
   tag-input-basic-text-color: input-basic-text-color,
@@ -2824,7 +2583,6 @@ $eva-mapping: (
   tag-input-basic-focus-border-color: input-basic-focus-border-color,
   tag-input-basic-disabled-text-color: input-basic-disabled-text-color,
   tag-input-basic-disabled-placeholder-text-color: input-basic-disabled-placeholder-text-color,
-
   tag-input-primary-background-color: input-primary-background-color,
   tag-input-primary-border-color: input-primary-border-color,
   tag-input-primary-text-color: input-primary-text-color,
@@ -2833,7 +2591,6 @@ $eva-mapping: (
   tag-input-primary-focus-border-color: input-primary-focus-border-color,
   tag-input-primary-disabled-text-color: input-primary-disabled-text-color,
   tag-input-primary-disabled-placeholder-text-color: input-primary-disabled-placeholder-text-color,
-
   tag-input-success-background-color: input-success-background-color,
   tag-input-success-border-color: input-success-border-color,
   tag-input-success-text-color: input-success-text-color,
@@ -2842,7 +2599,6 @@ $eva-mapping: (
   tag-input-success-focus-border-color: input-success-focus-border-color,
   tag-input-success-disabled-text-color: input-success-disabled-text-color,
   tag-input-success-disabled-placeholder-text-color: input-success-disabled-placeholder-text-color,
-
   tag-input-info-background-color: input-info-background-color,
   tag-input-info-border-color: input-info-border-color,
   tag-input-info-text-color: input-info-text-color,
@@ -2851,7 +2607,6 @@ $eva-mapping: (
   tag-input-info-focus-border-color: input-info-focus-border-color,
   tag-input-info-disabled-text-color: input-info-disabled-text-color,
   tag-input-info-disabled-placeholder-text-color: input-info-disabled-placeholder-text-color,
-
   tag-input-warning-background-color: input-warning-background-color,
   tag-input-warning-border-color: input-warning-border-color,
   tag-input-warning-text-color: input-warning-text-color,
@@ -2860,7 +2615,6 @@ $eva-mapping: (
   tag-input-warning-focus-border-color: input-warning-focus-border-color,
   tag-input-warning-disabled-text-color: input-warning-disabled-text-color,
   tag-input-warning-disabled-placeholder-text-color: input-warning-disabled-placeholder-text-color,
-
   tag-input-danger-background-color: input-danger-background-color,
   tag-input-danger-border-color: input-danger-border-color,
   tag-input-danger-text-color: input-danger-text-color,
@@ -2869,7 +2623,6 @@ $eva-mapping: (
   tag-input-danger-focus-border-color: input-danger-focus-border-color,
   tag-input-danger-disabled-text-color: input-danger-disabled-text-color,
   tag-input-danger-disabled-placeholder-text-color: input-danger-disabled-placeholder-text-color,
-
   tag-input-control-background-color: input-control-background-color,
   tag-input-control-border-color: input-control-border-color,
   tag-input-control-text-color: input-control-text-color,
@@ -2878,7 +2631,6 @@ $eva-mapping: (
   tag-input-control-focus-border-color: input-control-focus-border-color,
   tag-input-control-disabled-text-color: input-control-disabled-text-color,
   tag-input-control-disabled-placeholder-text-color: input-control-disabled-placeholder-text-color,
-
   tag-input-tiny-text-font-size: input-tiny-text-font-size,
   tag-input-tiny-text-font-weight: input-tiny-text-font-weight,
   tag-input-tiny-text-line-height: input-tiny-text-line-height,
@@ -2886,7 +2638,6 @@ $eva-mapping: (
   tag-input-tiny-placeholder-text-font-weight: input-tiny-placeholder-text-font-weight,
   tag-input-tiny-placeholder-text-line-height: input-tiny-placeholder-text-line-height,
   tag-input-tiny-padding: 0.125rem 0,
-
   tag-input-small-text-font-size: input-small-text-font-size,
   tag-input-small-text-font-weight: input-small-text-font-weight,
   tag-input-small-text-line-height: input-small-text-line-height,
@@ -2894,7 +2645,6 @@ $eva-mapping: (
   tag-input-small-placeholder-text-font-weight: input-small-placeholder-text-font-weight,
   tag-input-small-placeholder-text-line-height: input-small-placeholder-text-line-height,
   tag-input-small-padding: 0.125rem 0,
-
   tag-input-medium-text-font-size: input-medium-text-font-size,
   tag-input-medium-text-font-weight: input-medium-text-font-weight,
   tag-input-medium-text-line-height: input-medium-text-line-height,
@@ -2902,7 +2652,6 @@ $eva-mapping: (
   tag-input-medium-placeholder-text-font-weight: input-medium-placeholder-text-font-weight,
   tag-input-medium-placeholder-text-line-height: input-medium-placeholder-text-line-height,
   tag-input-medium-padding: 0.25rem 0,
-
   tag-input-large-text-font-size: input-large-text-font-size,
   tag-input-large-text-font-weight: input-large-text-font-weight,
   tag-input-large-text-line-height: input-large-text-line-height,
@@ -2910,7 +2659,6 @@ $eva-mapping: (
   tag-input-large-placeholder-text-font-weight: input-large-placeholder-text-font-weight,
   tag-input-large-placeholder-text-line-height: input-large-placeholder-text-line-height,
   tag-input-large-padding: 0.375rem 0,
-
   tag-input-giant-text-font-size: input-giant-text-font-size,
   tag-input-giant-text-font-weight: input-giant-text-font-weight,
   tag-input-giant-text-line-height: input-giant-text-line-height,
@@ -2918,7 +2666,6 @@ $eva-mapping: (
   tag-input-giant-placeholder-text-font-weight: input-giant-placeholder-text-font-weight,
   tag-input-giant-placeholder-text-line-height: input-giant-placeholder-text-line-height,
   tag-input-giant-padding: 0.5rem 0,
-
   toggle-height: 1.875rem,
   toggle-width: 3.125rem,
   toggle-border-width: 1px,
@@ -2933,7 +2680,6 @@ $eva-mapping: (
   toggle-text-line-height: text-subtitle-2-line-height,
   toggle-cursor: pointer,
   toggle-disabled-cursor: default,
-
   toggle-basic-text-color: text-basic-color,
   toggle-basic-background-color: color-basic-transparent-default,
   toggle-basic-border-color: color-basic-transparent-default-border,
@@ -2958,7 +2704,6 @@ $eva-mapping: (
   toggle-basic-disabled-switcher-background-color: color-basic-disabled,
   toggle-basic-disabled-checked-switcher-checkmark-color: text-control-color,
   toggle-basic-disabled-text-color: text-disabled-color,
-
   toggle-primary-text-color: text-basic-color,
   toggle-primary-background-color: color-primary-transparent-default,
   toggle-primary-border-color: color-primary-transparent-default-border,
@@ -2983,7 +2728,6 @@ $eva-mapping: (
   toggle-primary-disabled-switcher-background-color: color-basic-disabled,
   toggle-primary-disabled-checked-switcher-checkmark-color: text-control-color,
   toggle-primary-disabled-text-color: text-disabled-color,
-
   toggle-success-text-color: text-basic-color,
   toggle-success-background-color: color-success-transparent-default,
   toggle-success-border-color: color-success-transparent-default-border,
@@ -3008,7 +2752,6 @@ $eva-mapping: (
   toggle-success-disabled-switcher-background-color: color-basic-disabled,
   toggle-success-disabled-checked-switcher-checkmark-color: text-control-color,
   toggle-success-disabled-text-color: text-disabled-color,
-
   toggle-info-text-color: text-basic-color,
   toggle-info-background-color: color-info-transparent-default,
   toggle-info-border-color: color-info-transparent-default-border,
@@ -3033,7 +2776,6 @@ $eva-mapping: (
   toggle-info-disabled-switcher-background-color: color-basic-disabled,
   toggle-info-disabled-checked-switcher-checkmark-color: text-control-color,
   toggle-info-disabled-text-color: text-disabled-color,
-
   toggle-warning-text-color: text-basic-color,
   toggle-warning-background-color: color-warning-transparent-default,
   toggle-warning-border-color: color-warning-transparent-default-border,
@@ -3058,7 +2800,6 @@ $eva-mapping: (
   toggle-warning-disabled-switcher-background-color: color-basic-disabled,
   toggle-warning-disabled-checked-switcher-checkmark-color: text-control-color,
   toggle-warning-disabled-text-color: text-disabled-color,
-
   toggle-danger-text-color: text-basic-color,
   toggle-danger-background-color: color-danger-transparent-default,
   toggle-danger-border-color: color-danger-transparent-default-border,
@@ -3083,7 +2824,6 @@ $eva-mapping: (
   toggle-danger-disabled-switcher-background-color: color-basic-disabled,
   toggle-danger-disabled-checked-switcher-checkmark-color: text-control-color,
   toggle-danger-disabled-text-color: text-disabled-color,
-
   toggle-control-text-color: color-basic-100,
   toggle-control-background-color: color-control-transparent-default,
   toggle-control-border-color: color-control-transparent-default-border,
@@ -3108,13 +2848,11 @@ $eva-mapping: (
   toggle-control-disabled-switcher-background-color: color-basic-transparent-600,
   toggle-control-disabled-checked-switcher-checkmark-color: color-basic-100,
   toggle-control-disabled-text-color: text-control-color,
-
   form-field-tiny-max-width: input-tiny-max-width,
   form-field-small-max-width: input-small-max-width,
   form-field-medium-max-width: input-medium-max-width,
   form-field-large-max-width: input-large-max-width,
   form-field-giant-max-width: input-giant-max-width,
-
   form-field-addon-basic-text-color: color-basic-600,
   form-field-addon-basic-highlight-text-color: color-primary-500,
   form-field-addon-primary-text-color: color-primary-500,
@@ -3130,7 +2868,6 @@ $eva-mapping: (
   form-field-addon-control-text-color: color-control-default,
   form-field-addon-control-highlight-text-color: color-control-default,
   form-field-addon-disabled-text-color: text-disabled-color,
-
   form-field-addon-tiny-height: 1.5rem,
   form-field-addon-tiny-width: form-field-addon-tiny-height,
   form-field-addon-tiny-icon-size: button-tiny-icon-size,
@@ -3160,5 +2897,5 @@ $eva-mapping: (
   form-field-addon-giant-icon-size: button-giant-icon-size,
   form-field-addon-giant-font-size: text-button-giant-font-size,
   form-field-addon-giant-line-height: text-button-giant-line-height,
-  form-field-addon-giant-font-weight: text-button-font-weight,
+  form-field-addon-giant-font-weight: text-button-font-weight
 );

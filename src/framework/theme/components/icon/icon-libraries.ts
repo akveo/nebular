@@ -30,9 +30,8 @@ function throwWrongPackTypeError(name: string, type: string, desiredType: string
 /**
  * This service allows to register multiple icon packs to use them later within `<nb-icon></nb-icon>` component.
  */
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class NbIconLibraries {
-
   protected packs: Map<string, NbIconPack> = new Map();
   protected defaultPack: NbIconPack;
 
@@ -42,7 +41,7 @@ export class NbIconLibraries {
    * @param {NbIcon} icons
    * @param {NbIconPackParams} params
    */
-  registerSvgPack(name: string, icons: NbIcons, params: NbIconPackParams= {}) {
+  registerSvgPack(name: string, icons: NbIcons, params: NbIconPackParams = {}) {
     this.packs.set(name, {
       name,
       icons: new Map(Object.entries(icons)),
@@ -127,13 +126,14 @@ export class NbIconLibraries {
       throwWrongPackTypeError(iconsPack.name, iconsPack.type, 'Font');
     }
 
-    const icon = this.getIconFromPack(name, iconsPack);
+    const icon = this.getIconFromPack(name, iconsPack) ?? '';
+    const iconContent = iconsPack.params.ligature ? name : icon;
 
     return {
       name,
       pack: iconsPack.name,
       type: NbIconPackType.FONT,
-      icon: this.createFontIcon(name, icon ? icon : '', iconsPack.params),
+      icon: this.createFontIcon(name, iconContent, iconsPack.params),
     };
   }
 
@@ -163,7 +163,6 @@ export class NbIconLibraries {
   }
 
   protected getPackOrThrow(name: string): NbIconPack {
-
     const pack: NbIconPack = this.packs.get(name);
     if (!pack) {
       throwPackNotFoundError(name);
@@ -172,7 +171,6 @@ export class NbIconLibraries {
   }
 
   protected getDefaultPackOrThrow(): NbIconPack {
-
     if (!this.defaultPack) {
       throwNoDefaultPackError();
     }

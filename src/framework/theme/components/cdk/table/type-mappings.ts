@@ -13,6 +13,7 @@ import {
   CdkRow,
   CdkRowDef,
   RowContext,
+  STICKY_POSITIONING_LISTENER,
 } from '@angular/cdk/table';
 
 export const NbCdkRowDef = CdkRowDef;
@@ -34,3 +35,5 @@ export const NbCdkHeaderCell = CdkHeaderCell;
 export const NbCdkFooterCell = CdkFooterCell;
 
 export type NbRowContext<T> = RowContext<T>;
+
+export const NB_STICKY_POSITIONING_LISTENER = STICKY_POSITIONING_LISTENER;

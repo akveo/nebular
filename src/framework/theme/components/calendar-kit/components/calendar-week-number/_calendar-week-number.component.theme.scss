@@ -4,6 +4,8 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
+@use '../../../../styles/theming' as *;
+
 @mixin nb-calendar-week-numbers-theme() {
   nb-calendar-week-numbers {
     background: nb-theme(calendar-weeknumber-background);

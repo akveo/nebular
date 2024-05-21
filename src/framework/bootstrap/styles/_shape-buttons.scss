@@ -4,6 +4,8 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
+@use '../../theme/styles/theming' as *;
+
 @mixin b-btn-shape($shape) {
   border-radius: nb-theme(button-#{$shape}-border-radius);
 }

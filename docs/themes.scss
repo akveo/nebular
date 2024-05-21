@@ -3,10 +3,11 @@
  * Copyright Akveo. All Rights Reserved.
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
-$nb-theme-export-mode: true;
 
-@import '../src/framework/theme/styles/theming';
-@import '../src/framework/theme/styles/themes';
-@import '../src/framework/theme/styles/themes/mapping';
+@use '../src/framework/theme/styles/theming-variables';
+theming-variables.$nb-theme-export-mode: true;
+@use '../src/framework/theme/styles/theming';
+@use '../src/framework/theme/styles/themes';
+@use '../src/framework/theme/styles/themes/mapping';
 
-$v: export('output.json', $nb-themes-export, $eva-mapping);
+$v: export('output.json', theming-variables.$nb-themes-export, mapping.$eva-mapping);

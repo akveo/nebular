@@ -4,7 +4,6 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-// TODO: export all components
 export * from './theme.options';
 export * from './theme.module';
 export * from './services/theme.service';
@@ -33,7 +32,7 @@ export * from './components/calendar/calendar.module';
 export * from './components/calendar/calendar.component';
 export * from './components/calendar/calendar-range.module';
 export * from './components/calendar/calendar-range.component';
-// tslint:disable:max-line-length
+/* eslint-disable max-len */
 export { NbCalendarDayCellComponent } from './components/calendar-kit/components/calendar-day-picker/calendar-day-cell.component';
 export { NbDateTimePickerComponent } from './components/datepicker/date-timepicker.component';
 export { NbCalendarYearPickerComponent } from './components/calendar-kit/components/calendar-year-picker/calendar-year-picker.component';
@@ -50,8 +49,9 @@ export { NbCalendarWeekNumberComponent } from './components/calendar-kit/compone
 export { NbCalendarMonthCellComponent } from './components/calendar-kit/components/calendar-month-picker/calendar-month-cell.component';
 export { NbCalendarYearCellComponent } from './components/calendar-kit/components/calendar-year-picker/calendar-year-cell.component';
 export { NbCalendarPickerRowComponent } from './components/calendar-kit/components/calendar-picker/calendar-picker-row.component';
-export { NbCalendarPickerComponent }from './components/calendar-kit/components/calendar-picker/calendar-picker.component';
-// tslint:enable:max-line-length
+export { NbCalendarPickerComponent } from './components/calendar-kit/components/calendar-picker/calendar-picker.component';
+export { NbCalendarActionsComponent } from './components/calendar-kit/components/calendar-actions/calendar-actions.component';
+/* eslint-enable max-len */
 export * from './components/calendar/base-calendar.component';
 export * from './components/calendar/base-calendar.module';
 export * from './components/calendar/base-calendar-range-cell';
@@ -67,10 +67,11 @@ export * from './components/calendar-kit/model';
 export * from './components/calendar-kit/calendar-kit.module';
 export * from './components/layout/layout.module';
 export * from './components/layout/layout.component';
+export * from './components/layout/layout-direction.directive';
 export * from './components/layout/restore-scroll-top.service';
 export * from './components/menu/menu.module';
 export { NbMenuService, NbMenuItem, NbMenuBag } from './components/menu/menu.service';
-export * from './components/menu/menu.component'
+export * from './components/menu/menu.component';
 export * from './components/route-tabset/route-tabset.module';
 export * from './components/route-tabset/route-tabset.component';
 export * from './components/sidebar/sidebar.module';
@@ -78,7 +79,10 @@ export { NbSidebarService } from './components/sidebar/sidebar.service';
 export * from './components/sidebar/sidebar.component';
 export * from './components/tabset/tabset.module';
 export * from './components/datepicker/date-timepicker.component';
+export * from './components/datepicker/calendar-with-time.component';
 export * from './components/tabset/tabset.component';
+export * from './components/tabset/tab-content.directive';
+export * from './components/tabset/tab-title.directive';
 export * from './components/user/user.module';
 export * from './components/user/user.component';
 export * from './components/actions/actions.module';
@@ -109,6 +113,10 @@ export * from './components/chat/chat-message-text.component';
 export * from './components/chat/chat-form.component';
 export * from './components/chat/chat.module';
 export * from './components/chat/chat.options';
+export * from './components/chat/chat-avatar.component';
+export * from './components/chat/chat-custom-message.directive';
+export * from './components/chat/chat-custom-message.service';
+export * from './components/chat/chat-title.directive';
 export * from './components/spinner/spinner.component';
 export * from './components/spinner/spinner.directive';
 export * from './components/spinner/spinner.module';
@@ -128,6 +136,7 @@ export * from './components/button/button.module';
 export * from './components/button-group/button-group.component';
 export * from './components/button-group/button-group.module';
 export * from './components/button-group/button-toggle.directive';
+export * from './components/button-group/button-group-injection-tokens';
 export * from './components/list/list.component';
 export * from './components/list/list.module';
 export * from './components/list/list-page-tracker.directive';
@@ -146,6 +155,7 @@ export * from './components/cdk/overlay/dynamic/dynamic-overlay-handler';
 export * from './components/cdk/platform/platform-service';
 export * from './components/cdk/a11y/a11y.module';
 export * from './components/cdk/a11y/focus-trap';
+export * from './components/cdk/a11y/focus-key-manager';
 export * from './components/cdk/adapter/adapter.module';
 export * from './components/cdk/adapter/block-scroll-strategy-adapter';
 export * from './components/cdk/adapter/overlay-container-adapter';
@@ -171,7 +181,9 @@ export * from './components/tooltip/tooltip.module';
 export * from './components/tooltip/tooltip.directive';
 export * from './components/tooltip/tooltip.component';
 export * from './components/select/select.module';
+export * from './components/select-with-autocomplete/select-with-autocomplete.module';
 export * from './components/select/select.component';
+export * from './components/select-with-autocomplete/select-with-autocomplete.component';
 export * from './components/option/option-list.module';
 export * from './components/option/option.component';
 export * from './components/option/option-group.component';
@@ -190,6 +202,7 @@ export * from './components/timepicker/timepicker.module';
 export * from './components/timepicker/model';
 export * from './components/timepicker/timepicker.component';
 export * from './components/timepicker/timepicker.directive';
+export * from './components/timepicker/timepicker-cell.component';
 export * from './components/datepicker/datepicker.module';
 export * from './components/datepicker/datepicker.directive';
 export * from './components/datepicker/datepicker-adapter';

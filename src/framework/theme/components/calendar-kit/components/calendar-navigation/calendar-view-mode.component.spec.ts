@@ -4,15 +4,9 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, flush, TestBed } from '@angular/core/testing';
 
-import {
-  NbCalendarViewMode,
-  NbCalendarViewModeComponent,
-  NbCalendarKitModule,
-  NbThemeModule,
-} from '@nebular/theme';
-
+import { NbCalendarViewMode, NbCalendarViewModeComponent, NbCalendarKitModule, NbThemeModule } from '@nebular/theme';
 
 describe('Component: NbCalendarViewModeComponent', () => {
   let fixture: ComponentFixture<NbCalendarViewModeComponent<Date>>;
@@ -21,7 +15,7 @@ describe('Component: NbCalendarViewModeComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ NbThemeModule.forRoot(), NbCalendarKitModule],
+      imports: [NbThemeModule.forRoot(), NbCalendarKitModule],
     });
     fixture = TestBed.createComponent<NbCalendarViewModeComponent<Date>>(NbCalendarViewModeComponent);
     component = fixture.componentInstance;
@@ -73,8 +67,13 @@ describe('Component: NbCalendarViewModeComponent', () => {
     expect(component.getIcon()).toBe('chevron-up-outline');
   });
 
-  it('should emit change mode when button clicked', (done) => {
-    component.changeMode.subscribe(done);
+  it('should emit change mode when button clicked', fakeAsync(() => {
+    const changeModeSpy = jasmine.createSpy('changeMode spy');
+    component.changeMode.subscribe(changeModeSpy);
+
     componentEl.querySelector('button').dispatchEvent(new Event('click'));
-  });
+    flush();
+
+    expect(changeModeSpy).toHaveBeenCalled();
+  }));
 });

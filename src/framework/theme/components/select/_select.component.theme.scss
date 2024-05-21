@@ -4,9 +4,11 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-@import './select-outline';
-@import './select-filled';
-@import './select-hero';
+@use '../../styles/theming' as *;
+@use '../form-field/form-field.component.theme' as form-field-theme;
+@use 'select-outline';
+@use 'select-filled';
+@use 'select-hero';
 
 @mixin nb-select-theme() {
   nb-select .select-button {
@@ -56,9 +58,9 @@
     }
   }
 
-  @include select-outline();
-  @include select-filled();
-  @include select-hero();
+  @include select-outline.select-outline();
+  @include select-filled.select-filled();
+  @include select-hero.select-hero();
 
-  @include nb-form-field-root-component('nb-select');
+  @include form-field-theme.nb-form-field-root-component('nb-select');
 }

@@ -4,8 +4,9 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-@mixin nb-calendar-theme() {
+@use '../../styles/theming' as *;
 
+@mixin nb-calendar-theme() {
   nb-base-calendar {
     nb-card {
       background-color: nb-theme(calendar-background-color);

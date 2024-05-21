@@ -32,9 +32,6 @@ import { NbSearchService } from './search.service';
   providers: [
     NbSearchService,
   ],
-  entryComponents: [
-    NbSearchFieldComponent,
-  ],
 })
 export class NbSearchModule {
 }

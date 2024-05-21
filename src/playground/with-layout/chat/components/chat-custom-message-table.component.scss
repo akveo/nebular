@@ -1,0 +1,25 @@
+@use '../../../styles/themes' as *;
+
+:host {
+  display: block;
+  margin-top: 0.5rem;
+  padding: 1rem;
+  border-radius: 0.5rem;
+}
+
+:host(.reply) {
+  background: nb-theme(background-basic-color-2);
+  @include nb-ltr(border-top-right-radius, 0);
+  @include nb-rtl(border-top-left-radius, 0);
+}
+
+:host(:not(.reply)) {
+  background: nb-theme(background-primary-color-1);
+  color: nb-theme(text-control-color);
+  @include nb-ltr(border-top-left-radius, 0);
+  @include nb-rtl(border-top-right-radius, 0);
+}
+
+table {
+  width: 100%;
+}

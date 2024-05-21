@@ -1,7 +1,7 @@
-@import '../@theme/styles/themes';
+@use '../@theme/styles/themes' as *;
+@use '../../../src/framework/theme/styles/globals' as *;
 
 @include nb-install-component() {
-
   $convex-bg: linear-gradient(to bottom, #f1f3f6 0, transparent 18%);
   $content-width: nb-theme(content-width);
   $max-width: 960px;
@@ -113,6 +113,14 @@
   ngd-footer {
     max-width: $max-width;
     margin: 0 auto;
+  }
+
+  .components-promo {
+    margin-bottom: 3rem;
+
+    ngd-components-promo {
+      margin: auto;
+    }
   }
 
   @include media-breakpoint-up(is) {

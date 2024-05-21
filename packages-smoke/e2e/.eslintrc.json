@@ -1,0 +1,33 @@
+{
+  "extends": "../.eslintrc.json",
+  "overrides": [
+    {
+      "files": [
+        "*.ts"
+      ],
+      "parserOptions": {
+        "project": [
+          "e2e/tsconfig.e2e.json"
+        ],
+        "createDefaultProgram": true
+      }
+    },
+    {
+      "files": [
+        "*.html"
+      ],
+      "rules": {}
+    },
+    {
+      "files": [
+        "./*.js"
+      ],
+      "parserOptions": {
+        "ecmaVersion": 11
+      },
+      "env": {
+        "node": true
+      }
+    }
+  ]
+}

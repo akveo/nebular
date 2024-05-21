@@ -1,6 +1,4 @@
-<nb-card *nbPortal
-         [class.supports-scrollbar-theming]="!isFirefox()"
-         class="nb-timepicker-container">
+<nb-card *nbPortal [class.supports-scrollbar-theming]="!isFirefox()" class="nb-timepicker-container">
   <nb-card-header class="column-header">
     <ng-container *ngIf="singleColumn; else fullTimeHeadersBlock">
       <div class="header-cell">Time</div>
@@ -9,7 +7,9 @@
       <div class="header-cell">{{ hoursText }}</div>
       <div class="header-cell">{{ minutesText }}</div>
       <div *ngIf="withSeconds" class="header-cell">{{ secondsText }}</div>
-      <div *ngIf="twelveHoursFormat" class="header-cell">{{ ampmText }}</div>
+      <div *ngIf="twelveHoursFormat" class="header-cell">
+        <ng-template [ngIf]="showAmPmLabel">{{ ampmText }}</ng-template>
+      </div>
     </ng-template>
   </nb-card-header>
 
@@ -19,11 +19,13 @@
         <nb-list-item
           class="list-item"
           [class.selected]="isSelectedFullTimeValue(item)"
-          *ngFor="let item of fullTimeOptions; trackBy: trackBySingleColumnValue.bind(this)">
+          *ngFor="let item of fullTimeOptions; trackBy: trackBySingleColumnValue.bind(this)"
+        >
           <nb-timepicker-cell
             [value]="getFullTimeString(item)"
             [selected]="isSelectedFullTimeValue(item)"
-            (select)="selectFullTime(item)">
+            (select)="selectFullTime(item)"
+          >
           </nb-timepicker-cell>
         </nb-list-item>
       </nb-list>
@@ -34,11 +36,13 @@
         <nb-list-item
           class="list-item"
           [class.selected]="isSelectedHour(item.value)"
-          *ngFor="let item of hoursColumnOptions; trackBy: trackByTimeValues">
+          *ngFor="let item of hoursColumnOptions; trackBy: trackByTimeValues"
+        >
           <nb-timepicker-cell
             [value]="item.text"
             [selected]="isSelectedHour(item.value)"
-            (select)="setHour(item.value)">
+            (select)="setHour(item.value)"
+          >
           </nb-timepicker-cell>
         </nb-list-item>
       </nb-list>
@@ -46,11 +50,13 @@
         <nb-list-item
           class="list-item"
           [class.selected]="isSelectedMinute(item.value)"
-          *ngFor="let item of minutesColumnOptions; trackBy: trackByTimeValues">
+          *ngFor="let item of minutesColumnOptions; trackBy: trackByTimeValues"
+        >
           <nb-timepicker-cell
             [value]="item.text"
             [selected]="isSelectedMinute(item.value)"
-            (select)="setMinute(item.value)">
+            (select)="setMinute(item.value)"
+          >
           </nb-timepicker-cell>
         </nb-list-item>
       </nb-list>
@@ -58,11 +64,13 @@
         <nb-list-item
           class="list-item"
           [class.selected]="isSelectedSecond(item.value)"
-          *ngFor="let item of secondsColumnOptions; trackBy: trackByTimeValues">
+          *ngFor="let item of secondsColumnOptions; trackBy: trackByTimeValues"
+        >
           <nb-timepicker-cell
             [value]="item.text"
             [selected]="isSelectedSecond(item.value)"
-            (select)="setSecond(item.value)">
+            (select)="setSecond(item.value)"
+          >
           </nb-timepicker-cell>
         </nb-list-item>
       </nb-list>
@@ -70,11 +78,13 @@
         <nb-list-item
           class="list-item am-pm-item"
           [class.selected]="isSelectedDayPeriod(dayPeriod)"
-          *ngFor="let dayPeriod of dayPeriodColumnOptions; trackBy: trackByDayPeriod">
+          *ngFor="let dayPeriod of dayPeriodColumnOptions; trackBy: trackByDayPeriod"
+        >
           <nb-timepicker-cell
             [value]="dayPeriod"
             [selected]="isSelectedDayPeriod(dayPeriod)"
-            (select)="changeDayPeriod(dayPeriod)">
+            (select)="changeDayPeriod(dayPeriod)"
+          >
           </nb-timepicker-cell>
         </nb-list-item>
       </nb-list>

@@ -8,6 +8,8 @@ import {
   NbOverlayContainerAdapter,
   NB_DOCUMENT,
   NbThemeModule,
+  NbWindowControlButtonsConfig,
+  NbWindowComponent,
 } from '@nebular/theme';
 
 const WINDOW_CONTENT = 'window content';
@@ -31,22 +33,22 @@ class NbTestWindowWithTemplateComponent {
   constructor(private ws: NbWindowService) {}
 
   openWindow() {
-    return this.ws.open(
-      this.contentTemplate,
-      { title: 'Window content from template', context: { text: 'hello world' } },
-    );
+    return this.ws.open(this.contentTemplate, {
+      title: 'Window content from template',
+      context: { text: 'hello world' },
+    });
   }
 }
 
 @Component({
   selector: 'nb-test-window-with-component',
-  template: `<p id="window-content">window content {{ componentInput }}<p>`,
+  template: `<p id="window-content">window content {{ componentInput }}</p>
+    <p></p>`,
 })
 export class TestWindowComponent {}
 
 @NgModule({
   declarations: [NbTestWindowComponent, NbTestWindowWithTemplateComponent, TestWindowComponent],
-  entryComponents: [NbTestWindowComponent, NbTestWindowWithTemplateComponent, TestWindowComponent],
 })
 class NbTestWindowModule {}
 
@@ -57,7 +59,7 @@ const queryBackdrop = () => overlayContainer.querySelector('.cdk-overlay-backdro
 let windowService: NbWindowService;
 
 class NbViewportRulerAdapterMock {
-  getViewportSize(): Readonly<{ width: number; height: number; }> {
+  getViewportSize(): Readonly<{ width: number; height: number }> {
     return { width: 1000, height: 1000 };
   }
 
@@ -67,17 +69,10 @@ class NbViewportRulerAdapterMock {
 }
 
 describe('window-service', () => {
-
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [
-        NbThemeModule.forRoot(),
-        NbWindowModule.forRoot(),
-        NbTestWindowModule,
-      ],
-      providers: [
-        { provide: NbViewportRulerAdapter, useClass: NbViewportRulerAdapterMock },
-      ],
+      imports: [NbThemeModule.forRoot(), NbWindowModule.forRoot(), NbTestWindowModule],
+      providers: [{ provide: NbViewportRulerAdapter, useClass: NbViewportRulerAdapterMock }],
     });
     windowService = TestBed.inject(NbWindowService);
     overlayContainerService = TestBed.inject(NbOverlayContainerAdapter);
@@ -161,7 +156,7 @@ describe('window-service', () => {
     const windowRef = windowService.open(NbTestWindowComponent, { closeOnEsc: true });
     windowRef.componentRef.changeDetectorRef.detectChanges();
     windowRef.onClose.subscribe(closeSpy);
-    document.body.dispatchEvent(new KeyboardEvent('keydown', <any> { keyCode: 27 }));
+    document.body.dispatchEvent(new KeyboardEvent('keydown', <any>{ keyCode: 27 }));
 
     expect(closeSpy).toHaveBeenCalled();
   });
@@ -171,7 +166,7 @@ describe('window-service', () => {
     const windowRef = windowService.open(NbTestWindowComponent, { closeOnEsc: false });
     windowRef.componentRef.changeDetectorRef.detectChanges();
     windowRef.onClose.subscribe(closeSpy);
-    document.body.dispatchEvent(new KeyboardEvent('keydown', <any> { keyCode: 27 }));
+    document.body.dispatchEvent(new KeyboardEvent('keydown', <any>{ keyCode: 27 }));
 
     expect(closeSpy).not.toHaveBeenCalled();
   });
@@ -214,7 +209,7 @@ describe('window-service', () => {
     expect(queryBackdrop().hasAttribute('hidden')).toBeFalsy();
   });
 
-  it(`shouldn't render window content when minimized`, function() {
+  it(`shouldn't render window content when minimized`, function () {
     const windowRef = windowService.open(NbTestWindowComponent);
     windowRef.minimize();
     windowRef.componentRef.changeDetectorRef.detectChanges();
@@ -223,7 +218,7 @@ describe('window-service', () => {
     expect(windowElement.querySelector('nb-card-body')).toBeNull();
   });
 
-  it(`should render window content when unminimized`, function() {
+  it(`should render window content when unminimized`, function () {
     const windowRef = windowService.open(NbTestWindowComponent);
     windowRef.minimize();
     windowRef.componentRef.changeDetectorRef.detectChanges();
@@ -234,7 +229,7 @@ describe('window-service', () => {
     expect(windowElement.querySelector('nb-card-body')).not.toBeNull();
   });
 
-  it(`should render window content from template with context`, function() {
+  it(`should render window content from template with context`, function () {
     const fixture = TestBed.createComponent(NbTestWindowWithTemplateComponent);
     fixture.detectChanges();
 
@@ -246,7 +241,7 @@ describe('window-service', () => {
     expect(windowElement.nativeElement.innerText).toContain('Static text: hello world');
   });
 
-  it(`should render window content from component without context`, function() {
+  it(`should render window content from component without context`, function () {
     const windowRef = windowService.open(TestWindowComponent);
     windowRef.componentRef.changeDetectorRef.detectChanges();
 
@@ -254,8 +249,8 @@ describe('window-service', () => {
     expect(windowElement.nativeElement.innerText).toEqual('window content');
   });
 
-  it(`should render window content from component with context`, function() {
-    const windowRef = windowService.open(TestWindowComponent, { context: { componentInput: 'hello world' }});
+  it(`should render window content from component with context`, function () {
+    const windowRef = windowService.open(TestWindowComponent, { context: { componentInput: 'hello world' } });
     windowRef.componentRef.changeDetectorRef.detectChanges();
 
     const windowElement: ElementRef<HTMLElement> = windowRef.componentRef.injector.get(ElementRef);
@@ -289,4 +284,55 @@ describe('window-service', () => {
     const windowContent = document.getElementById('window-content');
     expect(document.body.contains(windowContent)).toEqual(true);
   }));
+
+  it('should render all control buttons by default', () => {
+    const windowRef = windowService.open(NbTestWindowComponent);
+    windowRef.componentRef.changeDetectorRef.detectChanges();
+    const windowElement: ElementRef<HTMLElement> = windowRef.componentRef.injector.get(ElementRef);
+    expect(windowElement.nativeElement.querySelectorAll('button').length).toBe(3);
+  });
+
+  it('should render only close button', () => {
+    const config: Partial<NbWindowControlButtonsConfig> = { minimize: false, maximize: false, fullScreen: false };
+    const windowRef = windowService.open(NbTestWindowComponent, { buttons: config });
+    windowRef.componentRef.changeDetectorRef.detectChanges();
+    const windowElement: ElementRef<HTMLElement> = windowRef.componentRef.injector.get(ElementRef);
+    const closeButton = windowElement.nativeElement.querySelectorAll('button')[0];
+    expect(closeButton.getElementsByTagName('nb-icon')[0].getAttribute('icon')).toBe('close-outline');
+  });
+
+  it('should render minimize and close button', () => {
+    const config: Partial<NbWindowControlButtonsConfig> = { minimize: true, maximize: false, fullScreen: false };
+    const windowRef = windowService.open(NbTestWindowComponent, { buttons: config });
+    windowRef.maximize();
+    windowRef.componentRef.changeDetectorRef.detectChanges();
+    const windowElement: ElementRef<HTMLElement> = windowRef.componentRef.injector.get(ElementRef);
+    const buttons = Array.from(windowElement.nativeElement.querySelectorAll('button'));
+    const icons = buttons.map((e) => e.getElementsByTagName('nb-icon')[0].getAttribute('icon'));
+    expect(icons.sort()).toEqual(['minus-outline', 'close-outline'].sort());
+  });
+
+  it('should render close button by default', () => {
+    const windowRef = windowService.open(NbTestWindowComponent);
+    const windowComponent: NbWindowComponent = windowRef.componentRef.instance;
+
+    expect(windowComponent.showClose).toBe(true);
+
+    const windowElement: ElementRef<HTMLElement> = windowRef.componentRef.injector.get(ElementRef);
+    const windowButtonIcons = Array.from<HTMLElement>(windowElement.nativeElement.querySelectorAll('.buttons nb-icon'));
+    const iconNames = windowButtonIcons.map((buttonIcon: HTMLElement) => buttonIcon.getAttribute('icon'));
+    expect(iconNames).toContain('close-outline');
+  });
+
+  it('should not render close button if disabled from config', () => {
+    const windowRef = windowService.open(NbTestWindowComponent, { buttons: { close: false } });
+    const windowComponent: NbWindowComponent = windowRef.componentRef.instance;
+
+    expect(windowComponent.showClose).toBe(false);
+
+    const windowElement: ElementRef<HTMLElement> = windowRef.componentRef.injector.get(ElementRef);
+    const windowButtonIcons = Array.from<HTMLElement>(windowElement.nativeElement.querySelectorAll('.buttons nb-icon'));
+    const iconNames = windowButtonIcons.map((buttonIcon: HTMLElement) => buttonIcon.getAttribute('icon'));
+    expect(iconNames).not.toContain('close-outline');
+  });
 });

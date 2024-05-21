@@ -7,14 +7,15 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-
-import { NbCalendarPickerComponent } from './calendar-picker.component';
-import { NbCalendarPickerRowComponent } from './calendar-picker-row.component';
-import { NbCalendarDayCellComponent } from '../calendar-day-picker/calendar-day-cell.component';
 import { DatePipe } from '@angular/common';
-import { NbDateService } from '../../services/date.service';
-import { NbNativeDateService } from '../../services/native-date.service';
-import { NbCalendarKitModule } from '../../calendar-kit.module';
+import {
+  NbCalendarPickerComponent,
+  NbCalendarPickerRowComponent,
+  NbCalendarDayCellComponent,
+  NbDateService,
+  NbNativeDateService,
+  NbCalendarKitModule,
+} from '@nebular/theme';
 
 describe('Component: NbCalendarPicker', () => {
   let fixture: ComponentFixture<NbCalendarPickerComponent<Date, Date>>;
@@ -22,11 +23,8 @@ describe('Component: NbCalendarPicker', () => {
   let componentEl: HTMLElement;
 
   const queryTestRow = (): NbCalendarPickerRowComponent<Date, Date> => {
-    return fixture.debugElement
-      .query(By.directive(NbCalendarPickerRowComponent))
-      .componentInstance;
+    return fixture.debugElement.query(By.directive(NbCalendarPickerRowComponent)).componentInstance;
   };
-
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -43,7 +41,10 @@ describe('Component: NbCalendarPicker', () => {
   });
 
   it('should render grid of data', function () {
-    component.data = [[new Date(), new Date()], [new Date(), new Date()]];
+    component.data = [
+      [new Date(), new Date()],
+      [new Date(), new Date()],
+    ];
     fixture.detectChanges();
     expect(componentEl.querySelectorAll('nb-calendar-day-cell').length).toBe(4);
   });
@@ -88,12 +89,15 @@ describe('Component: NbCalendarPicker', () => {
     expect(row.filter).toBe(filter);
   });
 
-  it('should fire select when entire cell selected', () => {
+  it('should fire select when entire cell selected', (done) => {
     const date = new Date();
     component.data = [[date]];
     fixture.detectChanges();
     const row: NbCalendarPickerRowComponent<Date, Date> = queryTestRow();
-    component.select.subscribe(e => expect(e).toBe(date));
+    component.select.subscribe((e) => {
+      expect(e).toBe(date);
+      done();
+    });
     row.select.emit(date);
   });
 });

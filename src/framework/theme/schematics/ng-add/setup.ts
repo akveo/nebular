@@ -11,7 +11,6 @@ import { registerModules } from './register-modules';
 import { registerCustomizableTheme, registerPrebuiltTheme } from './register-theme';
 import { wrapRootComponentInLayout } from './wrap-in-layout';
 
-
 /**
  * Setting up Nebular for the specified project by registering required modules,
  * adding Nebular themes and wrapping root component in the Nebular Layout.

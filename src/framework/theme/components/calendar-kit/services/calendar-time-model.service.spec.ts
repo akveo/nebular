@@ -1,13 +1,11 @@
-  /**
+/**
  * @license
  * Copyright Akveo. All Rights Reserved.
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
 import { inject, TestBed, waitForAsync } from '@angular/core/testing';
-import { NbDateService } from './date.service';
-import { NbNativeDateService } from './native-date.service';
-import { NbCalendarTimeModelService } from '@nebular/theme';
+import { NbDateService, NbNativeDateService, NbCalendarTimeModelService } from '@nebular/theme';
 
 describe('time-model-service', () => {
   let timeModel: NbCalendarTimeModelService<Date>;
@@ -18,12 +16,13 @@ describe('time-model-service', () => {
     });
   });
 
-  beforeEach(waitForAsync(inject(
-    [NbCalendarTimeModelService],
-    (_monthModel) => {
-      timeModel = _monthModel;
-    },
-  )));
+  beforeEach(
+    waitForAsync(
+      inject([NbCalendarTimeModelService], (_monthModel) => {
+        timeModel = _monthModel;
+      }),
+    ),
+  );
 
   it('should format number', () => {
     const token = timeModel.paddToTwoSymbols(5);

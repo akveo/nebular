@@ -1,7 +1,6 @@
-@import '../../../@theme/styles/themes';
+@use '../../../@theme/styles/themes' as *;
 
 @include nb-install-component() {
-
   $title-fg: nb-theme(color-fg-heading-light);
   $item-fg: rgba(102, 110, 128, 0.87);
   $item-fg-active: #202020;

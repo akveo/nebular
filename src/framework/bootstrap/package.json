@@ -1,6 +1,6 @@
 {
   "name": "@nebular/bootstrap",
-  "version": "7.0.0",
+  "version": "13.0.0",
   "description": "@nebular/bootstrap",
   "author": "akveo",
   "license": "MIT",
@@ -21,7 +21,66 @@
     "nebular"
   ],
   "peerDependencies": {
-    "bootstrap": "^4.0.0",
-    "@nebular/theme": "7.0.0"
+    "bootstrap": "^5.0.0",
+    "@nebular/theme": "13.0.0"
+  },
+  "exports": {
+    "./styles/prebuilt/corporate.css": {
+      "style": "./styles/prebuilt/corporate.css"
+    },
+    "./styles/prebuilt/cosmic.css": {
+      "style": "./styles/prebuilt/cosmic.css"
+    },
+    "./styles/prebuilt/dark.css": {
+      "style": "./styles/prebuilt/dark.css"
+    },
+    "./styles/prebuilt/default.css": {
+      "style": "./styles/prebuilt/default.css"
+    },
+    "./styles/button-group": {
+      "sass": "./styles/_button-group.scss"
+    },
+    "./styles/buttons": {
+      "sass": "./styles/_buttons.scss"
+    },
+    "./styles/default-form-control": {
+      "sass": "./styles/_default-form-control.scss"
+    },
+    "./styles/dropdowns": {
+      "sass": "./styles/_dropdowns.scss"
+    },
+    "./styles/forms": {
+      "sass": "./styles/_forms.scss"
+    },
+    "./styles/globals": {
+      "sass": "./styles/_globals.scss"
+    },
+    "./styles/hero-buttons": {
+      "sass": "./styles/_hero-buttons.scss"
+    },
+    "./styles/icon-buttons": {
+      "sass": "./styles/_icon-buttons.scss"
+    },
+    "./styles/layout": {
+      "sass": "./styles/_layout.scss"
+    },
+    "./styles/modals": {
+      "sass": "./styles/_modals.scss"
+    },
+    "./styles/outline-buttons": {
+      "sass": "./styles/_outline-buttons.scss"
+    },
+    "./styles/shape-buttons": {
+      "sass": "./styles/_shape-buttons.scss"
+    },
+    "./styles/size-buttons": {
+      "sass": "./styles/_size-buttons.scss"
+    },
+    "./styles/size-form-control": {
+      "sass": "./styles/_size-form-control.scss"
+    },
+    "./styles/status-buttons": {
+      "sass": "./styles/_status-buttons.scss"
+    }
   }
 }

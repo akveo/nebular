@@ -1,7 +1,7 @@
-@import '../../../@theme/styles/themes';
+@use '../../../@theme/styles/themes' as *;
+@use '../../../../../src/framework/theme/styles/globals' as *;
 
 @include nb-install-component() {
-
   $text-fg: nb-theme(footer-text-color);
   $icon-color: nb-theme(footer-icon-color);
   $title-fg: nb-theme(color-fg-heading);

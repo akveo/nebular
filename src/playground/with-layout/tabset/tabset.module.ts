@@ -16,8 +16,10 @@ import { TabsetWidthComponent } from './tabset-width.component';
 import {
   RouteTabsetShowcaseChild1Component,
   RouteTabsetShowcaseChild2Component,
+  RouteTabsetShowcaseChild3Component,
 } from './components/route-tabset-children.component';
 import { TabsetDisabledComponent } from './tabset-disabled.component';
+import { TabsetTemplateTitleComponent } from './tabset-template-title.component';
 
 @NgModule({
   declarations: [
@@ -30,12 +32,9 @@ import { TabsetDisabledComponent } from './tabset-disabled.component';
     RouteTabsetShowcaseChild1Component,
     RouteTabsetShowcaseChild2Component,
     TabsetDisabledComponent,
+    RouteTabsetShowcaseChild3Component,
+    TabsetTemplateTitleComponent,
   ],
-  imports: [
-    NbTabsetModule,
-    NbRouteTabsetModule,
-    NbCardModule,
-    TabsetRoutingModule,
-  ],
+  imports: [NbTabsetModule, NbRouteTabsetModule, NbCardModule, TabsetRoutingModule],
 })
 export class TabsetModule {}

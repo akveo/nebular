@@ -1,7 +1,6 @@
-@import '../../../@theme/styles/themes';
+@use '../../../@theme/styles/themes' as *;
 
 @include nb-install-component() {
-
   $inherited-fg: nb-theme(color-fg);
   $selected-row-bg: nb-theme(color-gray-light);
 

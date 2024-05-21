@@ -1,13 +1,13 @@
-@import 'themes';
-@import 'common';
+@use 'themes' as *;
+@use 'common';
 
-@import 'pace.theme';
+@use 'pace.theme';
 
-@import '../../../../src/framework/theme/styles/global/normalize';
-@import '../../../../src/framework/theme/styles/global/components';
-@import '../../../../src/framework/theme/styles/global/typography/typography';
-@import '../../../../src/framework/bootstrap/styles/globals';
-@import './hs-form';
+@use '../../../../src/framework/theme/styles/global/normalize';
+@use '../../../../src/framework/theme/styles/global/components' as *;
+@use '../../../../src/framework/theme/styles/global/typography/typography';
+@use '../../../../src/framework/bootstrap/styles/globals' as bootstrap-globals;
+@use 'hs-form';
 
 @include nb-install() {
   @include nb-layout-theme();
@@ -16,10 +16,10 @@
   @include nb-menu-theme();
   @include nb-actions-theme();
   @include nb-search-theme();
-  @include nb-bootstrap-global();
+  @include bootstrap-globals.nb-bootstrap-global();
   @include nb-icon-theme();
   @include nb-input-theme();
-  @include nb-typography();
+  @include typography.nb-typography();
   @include nb-buttons-theme();
   @include nb-select-theme();
   @include nb-option-list-theme();
@@ -27,17 +27,17 @@
   @include nb-overlay-theme();
   @include nb-spinner-theme();
 
-  @include nbd-common();
+  @include common.nbd-common();
 
   // loading progress bar
-  @include ngd-pace-theme();
+  @include pace.ngd-pace-theme();
 
-  @include hs-custom-form();
-};
+  @include hs-form.hs-custom-form();
+}
 
 body {
   scrollbar-face-color: rgba(0, 0, 0, 0.3);
   scrollbar-track-color: rgba(255, 255, 255, 0.7);
-  min-width: 320px;
+  min-width: 320px !important;
   -webkit-font-smoothing: antialiased;
 }

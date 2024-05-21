@@ -3,12 +3,12 @@
  * Copyright Akveo. All Rights Reserved.
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
-@import '../../theme/styles/core/mixins';
-@import 'size-form-control';
-@import 'default-form-control';
+
+@use '../../theme/styles/theming' as *;
+@use 'size-form-control';
+@use 'default-form-control';
 
 @mixin nb-b-forms-theme() {
-
   .form-control {
     background-color: nb-theme(input-basic-background-color);
     border-color: nb-theme(input-basic-border-color);
@@ -48,6 +48,6 @@
     }
   }
 
-  @include form-control-size();
-  @include form-control-default();
+  @include size-form-control.form-control-size();
+  @include default-form-control.form-control-default();
 }

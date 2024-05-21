@@ -9,26 +9,11 @@ import { NbSelectComponent, NbSelectLabelComponent } from './select.component';
 import { NbOptionModule } from '../option/option-list.module';
 import { NbIconModule } from '../icon/icon.module';
 
-const NB_SELECT_COMPONENTS = [
-  NbSelectComponent,
-  NbSelectLabelComponent,
-];
+const NB_SELECT_COMPONENTS = [NbSelectComponent, NbSelectLabelComponent];
 
 @NgModule({
-  imports: [
-    NbSharedModule,
-    NbOverlayModule,
-    NbButtonModule,
-    NbInputModule,
-    NbCardModule,
-    NbIconModule,
-    NbOptionModule,
-  ],
-  exports: [
-    ...NB_SELECT_COMPONENTS,
-    NbOptionModule,
-  ],
+  imports: [NbSharedModule, NbOverlayModule, NbButtonModule, NbInputModule, NbCardModule, NbIconModule, NbOptionModule],
+  exports: [...NB_SELECT_COMPONENTS, NbOptionModule],
   declarations: [...NB_SELECT_COMPONENTS],
 })
-export class NbSelectModule {
-}
+export class NbSelectModule {}

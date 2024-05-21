@@ -14,7 +14,6 @@ import {
   OnChanges,
   OnDestroy,
   OnInit,
-  SimpleChanges,
 } from '@angular/core';
 import { filter, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
@@ -250,6 +249,8 @@ export class NbContextMenuDirective implements NbDynamicOverlayController, OnCha
 
   ngOnDestroy() {
     this.dynamicOverlayHandler.destroy();
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   protected configureDynamicOverlay() {
@@ -274,7 +275,7 @@ export class NbContextMenuDirective implements NbDynamicOverlayController, OnCha
   private subscribeOnItemClick() {
     this.menuService.onItemClick()
       .pipe(
-        filter(({ tag }) => tag === this.tag),
+        filter(({ tag }) => tag === this.tag && this.trigger !== NbTrigger.NOOP),
         takeUntil(this.destroy$),
       )
       .subscribe(() => this.hide());

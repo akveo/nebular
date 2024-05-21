@@ -25,6 +25,8 @@ import { NbComponentOrCustomStatus } from '../component-status';
 import { convertToBoolProperty, NbBooleanInput } from '../helpers';
 import { NbChatFormComponent } from './chat-form.component';
 import { NbChatMessageComponent } from './chat-message.component';
+import { NbChatCustomMessageService } from './chat-custom-message.service';
+import { NbChatTitleDirective } from './chat-title.directive';
 
 /**
  * Conversational UI collection - a set of components for chat-like UI construction.
@@ -100,6 +102,9 @@ import { NbChatMessageComponent } from './chat-message.component';
  * </nb-chat-message> // chat message, available multiple types
  * ```
  *
+ * You could provide a title template via the `nbChatTitle` directive. It overrides `title` input.
+ * @stacked-example(Custom template as a title, chat/chat-template-title.component)
+ *
  * Two users conversation showcase:
  * @stacked-example(Conversation, chat/chat-conversation-showcase.component)
  *
@@ -110,6 +115,75 @@ import { NbChatMessageComponent } from './chat-message.component';
  * Also it is possible to configure sizes through `[size]` input:
  *
  * @stacked-example(Chat Sizes, chat/chat-sizes.component)
+ *
+ * # Custom message types
+ *
+ * Besides built-in message types, you could provide custom ones with their own template to render.
+ * As an example, let's add the `link` message type.
+ * <br>
+ * First, you need to provide a template for the `link` message type:
+ * ```html
+ * <nb-chat>
+ *   <a *nbCustomMessage="'link'" href="https://example.com">example.com</a>
+ * </nb-chat>
+ * ```
+ * Then, add the `nb-chat-message` component with the `link` type:
+ * ```html
+ * <nb-chat>
+ *   <a *nbCustomMessage="'link'" href="https://example.com">example.com</a>
+ *   <nb-chat-message type="link"></nb-chat-message>
+ * </nb-chat>
+ * ```
+ *
+ * <div class="note note-warning">
+ *   <div class="note-title">Important!</div>
+ *   <div class="note-body">
+ *     Custom chat messages must be defined before the `nb-chat-message`.
+ *   </div>
+ * </div>
+ *
+ * Custom message templates could have arbitrary data associated with them. Let's extract hardcoded link
+ * href and text. To pass some data to the custom message template, use the `customMessageData` input
+ * of the `nb-chat-message` component:
+ * ```html
+ * ...
+ * <nb-chat-message type="link" [customMessageData]="{ href: 'https://example.com', text: 'example.com' }">
+ * </nb-chat-message>
+ * ...
+ * ```
+ * When `customMessageData` is set, this object would become a template context and you'll be able
+ * to reference it via `let varName` syntax:
+ * ```html
+ * <a *nbCustomMessage="'link'; let data" [href]="data.href">{{ data.text }}</a>
+ * ```
+ *
+ * That's it, full example will look like this:
+ * ```html
+ * <nb-chat title="Nebular Conversational UI">
+ *   <a *nbCustomMessage="'link'; let data" [href]="data.href">{{ data.text }}</a>
+ *   <nb-chat-message type="link" [customMessageData]="{ href: 'https://example.com', text: 'example.com' }">
+ *   </nb-chat-message>
+ * </nb-chat>
+ * ```
+ *
+ * If you want to style your custom template from the ground up you could turn off generic message styling
+ * (such as round borders, color, background, etc.) via the `noStyles` input:
+ * ```html
+ *   <div *nbCustomMessage="'my-custom-type'; noStyles: true">...</div>
+ * ```
+ * When you decide to use your own styles, the `isReply` property of the custom message template context
+ * would come in handy. This property allows you to determine whether the message is a reply or not.
+ * For example, to change link text color (as replies have a different background):
+ * ```html
+ * <a *nbCustomMessage="'link'; let data; let isReply=isReply"
+ *    [href]="data.href"
+ *    [class.link-control]="!isReply">
+ *   {{ data.label }}
+ * </a>
+ * ```
+ *
+ * Below, you could find a more complex example with multiple custom message types:
+ * @stacked-example(Custom message, chat/chat-custom-message.component)
  *
  * @styles
  *
@@ -167,7 +241,18 @@ import { NbChatMessageComponent } from './chat-message.component';
   selector: 'nb-chat',
   styleUrls: ['./chat.component.scss'],
   template: `
-    <div class="header">{{ title }}</div>
+    <div class="header">
+      <ng-container
+        *ngIf="titleTemplate; else textTitleTemplate"
+        [ngTemplateOutlet]="titleTemplate.templateRef"
+        [ngTemplateOutletContext]="{ $implicit: titleTemplate.context }"
+      >
+      </ng-container>
+      <ng-template #textTitleTemplate>
+        {{ title }}
+      </ng-template>
+    </div>
+
     <div class="scrollable" #scrollable>
       <div class="messages">
         <ng-content select="nb-chat-message"></ng-content>
@@ -178,9 +263,9 @@ import { NbChatMessageComponent } from './chat-message.component';
       <ng-content select="nb-chat-form"></ng-content>
     </div>
   `,
+  providers: [NbChatCustomMessageService],
 })
 export class NbChatComponent implements OnChanges, AfterContentInit, AfterViewInit {
-
   @Input() title: string;
 
   /**
@@ -202,7 +287,7 @@ export class NbChatComponent implements OnChanges, AfterContentInit, AfterViewIn
    */
   @Input()
   get scrollBottom(): boolean {
-    return this._scrollBottom
+    return this._scrollBottom;
   }
   set scrollBottom(value: boolean) {
     this._scrollBottom = convertToBoolProperty(value);
@@ -213,9 +298,9 @@ export class NbChatComponent implements OnChanges, AfterContentInit, AfterViewIn
   @ViewChild('scrollable') scrollable: ElementRef;
   @ContentChildren(NbChatMessageComponent) messages: QueryList<NbChatMessageComponent>;
   @ContentChild(NbChatFormComponent) chatForm: NbChatFormComponent;
+  @ContentChild(NbChatTitleDirective) titleTemplate: NbChatTitleDirective;
 
-  constructor(protected statusService: NbStatusService) {
-  }
+  constructor(protected statusService: NbStatusService) {}
 
   ngOnChanges(changes: SimpleChanges) {
     if ('status' in changes) {
@@ -228,11 +313,10 @@ export class NbChatComponent implements OnChanges, AfterContentInit, AfterViewIn
   }
 
   ngAfterViewInit() {
-    this.messages.changes
-      .subscribe((messages) => {
-        this.messages = messages;
-        this.updateView();
-      });
+    this.messages.changes.subscribe((messages) => {
+      this.messages = messages;
+      this.updateView();
+    });
 
     this.updateView();
   }

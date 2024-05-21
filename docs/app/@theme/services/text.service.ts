@@ -4,6 +4,13 @@ import * as marked from 'marked';
 
 import { NgdHighlightService } from './highlight.service';
 
+export interface NgdMdSection {
+  fragment: string;
+  html: string;
+  source: string;
+  title: string;
+}
+
 @Injectable()
 export class NgdTextService {
 
@@ -14,7 +21,7 @@ export class NgdTextService {
   constructor(private highlight: NgdHighlightService, private location: Location) {
   }
 
-  mdToSectionsHTML(markdown: string) {
+  mdToSectionsHTML(markdown: string): NgdMdSection[] {
     return this.splitIntoSections(markdown)
       .map((section) => {
         const html = this.mdToHTML(section);

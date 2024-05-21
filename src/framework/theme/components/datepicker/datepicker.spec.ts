@@ -8,19 +8,24 @@ import { ApplicationRef, Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { skip } from 'rxjs/operators';
-import { NbCalendarRange, NbDatepickerDirective, NbTimepickerModule, NbDateTimePickerComponent } from '@nebular/theme';
-
-import { NbDatepickerModule } from './datepicker.module';
-import { NbThemeModule } from '../../theme.module';
-import { NbLayoutModule } from '../layout/layout.module';
-import { NbDatepickerComponent, NbRangepickerComponent } from './datepicker.component';
+import {
+  NbCalendarRange,
+  NbDatepickerDirective,
+  NbTimepickerModule,
+  NbDateTimePickerComponent,
+  NbDatepickerModule,
+  NbThemeModule,
+  NbLayoutModule,
+  NbDatepickerComponent,
+  NbRangepickerComponent,
+} from '@nebular/theme';
 
 @Component({
   selector: 'nb-datepicker-test',
   template: `
     <nb-layout>
       <nb-layout-column>
-        <input [nbDatepicker]="datepicker">
+        <input [nbDatepicker]="datepicker" />
         <nb-datepicker #datepicker></nb-datepicker>
       </nb-layout-column>
     </nb-layout>
@@ -36,7 +41,7 @@ export class NbDatepickerTestComponent {
   template: `
     <nb-layout>
       <nb-layout-column>
-        <input [nbDatepicker]="rangepicker">
+        <input [nbDatepicker]="rangepicker" />
         <nb-rangepicker #rangepicker></nb-rangepicker>
       </nb-layout-column>
     </nb-layout>
@@ -47,14 +52,12 @@ export class NbRangepickerTestComponent {
   @ViewChild(NbDatepickerDirective) datepickerDirective: NbDatepickerDirective<Date>;
 }
 
-
-
 @Component({
   selector: 'nb-date-timepicker-test',
   template: `
     <nb-layout>
       <nb-layout-column>
-        <input [nbDatepicker]="rangepicker">
+        <input [nbDatepicker]="rangepicker" />
         <nb-date-timepicker #rangepicker></nb-date-timepicker>
       </nb-layout-column>
     </nb-layout>
@@ -126,14 +129,15 @@ describe('nb-datepicker', () => {
     expect(calendar).toBeTruthy();
   });
 
-  it('should write selected date in the input', () => {
+  it('should write selected date in the input', (done) => {
     const date = new Date(2018, 8, 17);
     datepicker.visibleDate = date;
     showDatepicker();
 
-    datepicker.dateChange.subscribe(e => {
+    datepicker.dateChange.subscribe((e) => {
       expect(e).toEqual(date);
       expect(input.value).toEqual('Sep 17, 2018');
+      done();
     });
 
     const cell = overlay.querySelectorAll('.day-cell')[22]; // it's visible date cell
@@ -274,17 +278,15 @@ describe('nb-rangepicker', () => {
     rangepicker.visibleDate = new Date(2018, 8, 17);
     showRangepicker();
 
-    rangepicker.rangeChange
-      .pipe(skip(1))
-      .subscribe((range: NbCalendarRange<Date>) => {
-        expect(range.start.getFullYear()).toEqual(2018);
-        expect(range.end.getFullYear()).toEqual(2018);
-        expect(range.start.getMonth()).toEqual(8);
-        expect(range.end.getMonth()).toEqual(8);
-        expect(range.start.getDate()).toEqual(1);
-        expect(range.end.getDate()).toEqual(3);
-        done();
-      });
+    rangepicker.rangeChange.pipe(skip(1)).subscribe((range: NbCalendarRange<Date>) => {
+      expect(range.start.getFullYear()).toEqual(2018);
+      expect(range.end.getFullYear()).toEqual(2018);
+      expect(range.start.getMonth()).toEqual(8);
+      expect(range.end.getMonth()).toEqual(8);
+      expect(range.start.getDate()).toEqual(1);
+      expect(range.end.getDate()).toEqual(3);
+      done();
+    });
 
     // click on Sep 1
     const startCell = overlay.querySelectorAll('.day-cell')[6];
@@ -410,4 +412,3 @@ describe('nb-date-timepicker', () => {
     expect(calendar).toBeTruthy();
   });
 });
-

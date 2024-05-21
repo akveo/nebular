@@ -4,14 +4,14 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-@import 'shape-buttons';
-@import 'size-buttons';
-@import 'status-buttons';
-@import 'hero-buttons';
-@import 'outline-buttons';
+@use '../../theme/styles/theming' as *;
+@use 'shape-buttons';
+@use 'size-buttons';
+@use 'status-buttons';
+@use 'hero-buttons';
+@use 'outline-buttons';
 
 @mixin nb-b-buttons-theme() {
-
   .btn {
     cursor: nb-theme(button-cursor);
     font-family: nb-theme(button-text-font-family);
@@ -26,12 +26,12 @@
       cursor: nb-theme(button-disabled-cursor);
     }
 
-    @include b-btn-size(medium);
+    @include size-buttons.b-btn-size(medium);
   }
 
-  @include b-btn-shapes();
-  @include b-btn-sizes();
-  @include b-btn-statuses();
-  @include b-btn-heros();
-  @include b-btn-outlines();
+  @include shape-buttons.b-btn-shapes();
+  @include size-buttons.b-btn-sizes();
+  @include status-buttons.b-btn-statuses();
+  @include hero-buttons.b-btn-heros();
+  @include outline-buttons.b-btn-outlines();
 }

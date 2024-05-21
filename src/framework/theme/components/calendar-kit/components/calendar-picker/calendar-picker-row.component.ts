@@ -20,15 +20,16 @@ import {
 
 import { NbCalendarCell, NbCalendarSize, NbCalendarSizeValues } from '../../model';
 
-
 @Component({
   selector: 'nb-calendar-picker-row',
-  styles: [`
-    :host {
-      display: flex;
-      justify-content: space-between;
-    }
-  `],
+  styles: [
+    `
+      :host {
+        display: flex;
+        justify-content: space-between;
+      }
+    `,
+  ],
   template: '<ng-template></ng-template>',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -42,13 +43,13 @@ export class NbCalendarPickerRowComponent<D, T> implements OnChanges {
   @Input() filter: (D) => boolean;
   @Input() size: NbCalendarSize = NbCalendarSize.MEDIUM;
   static ngAcceptInputType_size: NbCalendarSizeValues;
+  // eslint-disable-next-line @angular-eslint/no-output-native
   @Output() select: EventEmitter<D> = new EventEmitter();
 
   // TODO static must be false as of Angular 9.0.0, issues/1514
   @ViewChild(TemplateRef, { read: ViewContainerRef, static: true }) containerRef: ViewContainerRef;
 
-  constructor(private cfr: ComponentFactoryResolver) {
-  }
+  constructor(private cfr: ComponentFactoryResolver) {}
 
   ngOnChanges() {
     const factory = this.cfr.resolveComponentFactory(this.component);
@@ -56,7 +57,7 @@ export class NbCalendarPickerRowComponent<D, T> implements OnChanges {
     this.containerRef.clear();
 
     this.row.forEach((date: D) => {
-      const component = this.containerRef.createComponent(factory);
+      const component = this.containerRef.createComponent(factory, this.containerRef.length);
       this.patchWithContext(component.instance, date);
       component.changeDetectorRef.detectChanges();
     });

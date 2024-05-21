@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/schema",
-  "id": "ng-add",
+  "$id": "ng-add",
   "title": "Nebular Theme ng-add schematics",
   "type": "object",
   "properties": {

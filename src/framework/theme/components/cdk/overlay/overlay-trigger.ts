@@ -29,34 +29,36 @@ export interface NbTriggerStrategy {
  * Renderer provides capability use it in service worker, ssr and so on.
  * */
 export abstract class NbTriggerStrategyBase implements NbTriggerStrategy {
-
   destroy() {
     this.destroyed$.next();
   }
 
-  protected destroyed$ = new Subject();
+  protected destroyed$ = new Subject<void>();
 
-  protected isNotOnHostOrContainer(event: Event): boolean {
-    return !this.isOnHost(event) && !this.isOnContainer(event);
+  protected isNotOnHostOrContainer(element: Element): boolean {
+    return !this.isOnHost(element) && !this.isOnContainer(element);
   }
 
-  protected isOnHostOrContainer(event: Event): boolean {
-    return this.isOnHost(event) || this.isOnContainer(event);
+  protected isOnHostOrContainer(element: Element): boolean {
+    return this.isOnHost(element) || this.isOnContainer(element);
   }
 
-  protected isOnHost({ target }: Event): boolean {
-    return this.host.contains(target as Node);
+  protected isOnHost(element: Element): boolean {
+    return this.host.contains(element);
   }
 
-  protected isOnContainer({ target }: Event): boolean {
-    return this.container() && this.container().location.nativeElement.contains(target);
+  protected isOnContainer(element: Element): boolean {
+    return this.container() && this.container().location.nativeElement.contains(element);
   }
 
   abstract show$: Observable<Event>;
   abstract hide$: Observable<Event>;
 
-  constructor(protected document: Document, protected host: HTMLElement, protected container: () => ComponentRef<any>) {
-  }
+  constructor(
+    protected document: Document,
+    protected host: HTMLElement,
+    protected container: () => ComponentRef<any>,
+  ) {}
 }
 
 /**
@@ -66,31 +68,27 @@ export abstract class NbTriggerStrategyBase implements NbTriggerStrategy {
  * not on the host or container.
  * */
 export class NbClickTriggerStrategy extends NbTriggerStrategyBase {
-
   // since we should track click for both SHOW and HIDE event we firstly need to track the click and the state
   // of the container and then later on decide should we hide it or show
   // if we track the click & state separately this will case a behavior when the container is getting shown
   // and then hidden right away
-  protected click$: Observable<[boolean, Event]> = observableFromEvent<Event>(this.document, 'click')
-    .pipe(
-      map((event: Event) => [!this.container() && this.isOnHost(event), event] as [boolean, Event]),
-      share(),
-      takeUntil(this.destroyed$),
-    );
+  protected click$: Observable<[boolean, Event]> = observableFromEvent<Event>(this.document, 'click').pipe(
+    map((event: Event) => [!this.container() && this.isOnHost(event.target as Element), event] as [boolean, Event]),
+    share(),
+    takeUntil(this.destroyed$),
+  );
 
-  readonly show$: Observable<Event> = this.click$
-    .pipe(
-      filter(([shouldShow]) => shouldShow),
-      map(([, event]) => event),
-      takeUntil(this.destroyed$),
-    );
+  readonly show$: Observable<Event> = this.click$.pipe(
+    filter(([shouldShow]) => shouldShow),
+    map(([, event]) => event),
+    takeUntil(this.destroyed$),
+  );
 
-  readonly hide$: Observable<Event> = this.click$
-    .pipe(
-      filter(([shouldShow, event]) => !shouldShow && !this.isOnContainer(event)),
-      map(([, event]) => event),
-      takeUntil(this.destroyed$),
-    );
+  readonly hide$: Observable<Event> = this.click$.pipe(
+    filter(([shouldShow, event]) => !shouldShow && !this.isOnContainer(event.target as Element)),
+    map(([, event]) => event),
+    takeUntil(this.destroyed$),
+  );
 }
 
 /**
@@ -99,30 +97,27 @@ export class NbClickTriggerStrategy extends NbTriggerStrategyBase {
  * Fires close event when the mouse leaves the host element and stops out of the host and popover container.
  * */
 export class NbHoverTriggerStrategy extends NbTriggerStrategyBase {
+  show$: Observable<Event> = observableFromEvent<Event>(this.host, 'mouseenter').pipe(
+    filter(() => !this.container()),
+    // this `delay & takeUntil & repeat` operators combination is a synonym for `conditional debounce`
+    // meaning that if one event occurs in some time after the initial one we won't react to it
+    delay(100),
+    // eslint-disable-next-line rxjs/no-unsafe-takeuntil
+    takeUntil(observableFromEvent(this.host, 'mouseleave')),
+    repeat(),
+    takeUntil(this.destroyed$),
+  );
 
-  show$: Observable<Event> = observableFromEvent<Event>(this.host, 'mouseenter')
-    .pipe(
-      filter(() => !this.container()),
-      // this `delay & takeUntil & repeat` operators combination is a synonym for `conditional debounce`
-      // meaning that if one event occurs in some time after the initial one we won't react to it
-      delay(100),
-      // tslint:disable-next-line:rxjs-no-unsafe-takeuntil
-      takeUntil(observableFromEvent(this.host, 'mouseleave')),
-      repeat(),
-      takeUntil(this.destroyed$),
-    );
-
-  hide$: Observable<Event> = observableFromEvent<Event>(this.host, 'mouseleave')
-    .pipe(
-      switchMap(() => observableFromEvent<Event>(this.document, 'mousemove')
-        .pipe(
-          debounceTime(100),
-          takeWhile(() => !!this.container()),
-          filter(event => this.isNotOnHostOrContainer(event)),
-        ),
+  hide$: Observable<Event> = observableFromEvent<Event>(this.host, 'mouseleave').pipe(
+    switchMap(() =>
+      observableFromEvent<Event>(this.document, 'mousemove').pipe(
+        debounceTime(100),
+        takeWhile(() => !!this.container()),
+        filter((event) => this.isNotOnHostOrContainer(event.target as Element)),
       ),
-      takeUntil(this.destroyed$),
-    );
+    ),
+    takeUntil(this.destroyed$),
+  );
 }
 
 /**
@@ -131,21 +126,18 @@ export class NbHoverTriggerStrategy extends NbTriggerStrategyBase {
  * Fires close event when the mouse leaves the host element.
  * */
 export class NbHintTriggerStrategy extends NbTriggerStrategyBase {
-  show$: Observable<Event> = observableFromEvent<Event>(this.host, 'mouseenter')
-    .pipe(
-      // this `delay & takeUntil & repeat` operators combination is a synonym for `conditional debounce`
-      // meaning that if one event occurs in some time after the initial one we won't react to it
-      delay(100),
-      // tslint:disable-next-line:rxjs-no-unsafe-takeuntil
-      takeUntil(observableFromEvent(this.host, 'mouseleave')),
-      repeat(),
-      takeUntil(this.destroyed$),
-    );
+  show$: Observable<Event> = observableFromEvent<Event>(this.host, 'mouseenter').pipe(
+    // this `delay & takeUntil & repeat` operators combination is a synonym for `conditional debounce`
+    // meaning that if one event occurs in some time after the initial one we won't react to it
+    delay(100),
+    // eslint-disable-next-line rxjs/no-unsafe-takeuntil
+    takeUntil(observableFromEvent(this.host, 'mouseleave')),
+    repeat(),
+    takeUntil(this.destroyed$),
+  );
 
-  hide$: Observable<Event> = observableFromEvent(this.host, 'mouseleave')
-    .pipe(takeUntil(this.destroyed$));
+  hide$: Observable<Event> = observableFromEvent(this.host, 'mouseleave').pipe(takeUntil(this.destroyed$));
 }
-
 
 /**
  * Creates show and hide event streams.
@@ -153,50 +145,52 @@ export class NbHintTriggerStrategy extends NbTriggerStrategyBase {
  * Fires close event when the focus leaves the host element.
  * */
 export class NbFocusTriggerStrategy extends NbTriggerStrategyBase {
-
-  protected focusOut$: Observable<Event> = observableFromEvent<Event>(this.host, 'focusout')
-    .pipe(
-      switchMap(() => observableFromEvent<Event>(this.document, 'focusin')
-        .pipe(
-          takeWhile(() => !!this.container()),
-          filter(event => this.isNotOnHostOrContainer(event)),
-        ),
+  protected focusOut$: Observable<Event> = observableFromEvent<Event>(this.host, 'focusout').pipe(
+    switchMap(() =>
+      observableFromEvent<Event>(this.document, 'focusin').pipe(
+        takeWhile(() => !!this.container()),
+        filter((event) => this.isNotOnHostOrContainer(event.target as Element)),
       ),
-      takeUntil(this.destroyed$),
-    );
+    ),
+    takeUntil(this.destroyed$),
+  );
 
-  protected clickIn$: Observable<Event> = observableFromEvent<Event>(this.host, 'click')
-    .pipe(
-      filter(() => !this.container()),
-      takeUntil(this.destroyed$),
-    );
+  protected clickIn$: Observable<Event> = observableFromEvent<Event>(this.host, 'click').pipe(
+    filter(() => !this.container()),
+    takeUntil(this.destroyed$),
+  );
 
-  protected clickOut$: Observable<Event> = observableFromEvent<Event>(this.document, 'click')
-    .pipe(
-      filter(() => !!this.container()),
-      filter(event => this.isNotOnHostOrContainer(event)),
-      takeUntil(this.destroyed$),
-    );
+  protected clickOut$: Observable<Event> = observableFromEvent<Event>(this.document, 'click').pipe(
+    filter(() => !!this.container()),
+    /**
+     * Event target of `click` could be different from `activeElement`.
+     * If during click you return focus to the host, it won't be opened.
+     */
+    filter((event) => {
+      if (this.isNotOnHostOrContainer(event.target as Element)) {
+        return this.isNotOnHostOrContainer(this.document.activeElement);
+      }
+      return false;
+    }),
+    takeUntil(this.destroyed$),
+  );
 
-  protected tabKeyPress$: Observable<Event> = observableFromEvent<Event>(this.document, 'keydown')
-    .pipe(
-      filter((event: KeyboardEvent) => event.keyCode === 9),
-      filter(() => !!this.container()),
-      takeUntil(this.destroyed$),
-    );
+  protected tabKeyPress$: Observable<Event> = observableFromEvent<Event>(this.document, 'keydown').pipe(
+    filter((event: Event) => (event as KeyboardEvent).keyCode === 9),
+    filter(() => !!this.container()),
+    takeUntil(this.destroyed$),
+  );
 
-  show$: Observable<Event> = observableMerge(observableFromEvent<Event>(this.host, 'focusin'), this.clickIn$)
-    .pipe(
-      filter(() => !this.container()),
-      debounceTime(100),
-      // tslint:disable-next-line:rxjs-no-unsafe-takeuntil
-      takeUntil(observableFromEvent(this.host, 'focusout')),
-      repeat(),
-      takeUntil(this.destroyed$),
-    );
+  show$: Observable<Event> = observableMerge(observableFromEvent<Event>(this.host, 'focusin'), this.clickIn$).pipe(
+    filter(() => !this.container()),
+    debounceTime(100),
+    // eslint-disable-next-line rxjs/no-unsafe-takeuntil
+    takeUntil(observableFromEvent(this.host, 'focusout')),
+    repeat(),
+    takeUntil(this.destroyed$),
+  );
 
-  hide$ = observableMerge(this.focusOut$, this.tabKeyPress$, this.clickOut$)
-    .pipe(takeUntil(this.destroyed$));
+  hide$ = observableMerge(this.focusOut$, this.tabKeyPress$, this.clickOut$).pipe(takeUntil(this.destroyed$));
 }
 
 /**
@@ -209,13 +203,11 @@ export class NbNoopTriggerStrategy extends NbTriggerStrategyBase {
 
 @Injectable()
 export class NbTriggerStrategyBuilderService {
-
   protected _host: HTMLElement;
   protected _container: () => ComponentRef<any>;
   protected _trigger: NbTrigger;
 
-  constructor(@Inject(NB_DOCUMENT) protected _document) {
-  }
+  constructor(@Inject(NB_DOCUMENT) protected _document) {}
 
   trigger(trigger: NbTrigger): this {
     this._trigger = trigger;

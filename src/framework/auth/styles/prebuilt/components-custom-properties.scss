@@ -1,0 +1,10 @@
+@use '../../../theme/styles/themes';
+@use '../../../theme/styles/theming-variables' as *;
+@use '../../../theme/styles/theming' as *;
+@use '../globals' as *;
+
+$nb-global-styles-on-install: false;
+
+@include nb-install() {
+  @include nb-auth-global();
+}

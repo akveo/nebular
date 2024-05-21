@@ -16,6 +16,5 @@ import { NbSpinnerDirective } from './spinner.directive';
   ],
   exports: [NbSpinnerComponent, NbSpinnerDirective],
   declarations: [NbSpinnerComponent, NbSpinnerDirective],
-  entryComponents: [NbSpinnerComponent],
 })
 export class NbSpinnerModule {}

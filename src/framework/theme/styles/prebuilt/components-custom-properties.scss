@@ -1,0 +1,8 @@
+@use '../theming-variables' as *;
+@use '../all' as *;
+
+$nb-global-styles-on-install: false;
+
+@include nb-install() {
+  @include nb-theme-global();
+}

@@ -1,7 +1,6 @@
-@import '../../../@theme/styles/themes';
+@use '../../../@theme/styles/themes' as *;
 
 @include nb-install-component() {
-
   $code-lines-fg: #515877;
   $code-block-bg: nb-theme(code-block-bg);
 

@@ -6,9 +6,13 @@
 
 import { TestBed, inject, waitForAsync } from '@angular/core/testing';
 
-import { NbJSThemeOptions } from './js-themes/theme.options';
-import { BUILT_IN_THEMES, NbJSThemesRegistry } from './js-themes-registry.service';
-import { NB_BUILT_IN_JS_THEMES, NB_JS_THEMES } from '../theme.options';
+import {
+  NbJSThemeOptions,
+  BUILT_IN_THEMES,
+  NbJSThemesRegistry,
+  NB_BUILT_IN_JS_THEMES,
+  NB_JS_THEMES,
+} from '@nebular/theme';
 
 describe('js-themes-registry-service', () => {
   let jsThemesRegistry: NbJSThemesRegistry;
@@ -53,13 +57,14 @@ describe('js-themes-registry-service', () => {
     });
   });
 
-// Single async inject to save references; which are used in all tests below
-  beforeEach(waitForAsync(inject(
-    [NbJSThemesRegistry],
-    (_jsThemesRegistry) => {
-      jsThemesRegistry = _jsThemesRegistry;
-    },
-  )));
+  // Single async inject to save references; which are used in all tests below
+  beforeEach(
+    waitForAsync(
+      inject([NbJSThemesRegistry], (_jsThemesRegistry) => {
+        jsThemesRegistry = _jsThemesRegistry;
+      }),
+    ),
+  );
 
   it('has built in themes', () => {
     expect(jsThemesRegistry.get('default')).not.toBeUndefined();
@@ -72,12 +77,9 @@ describe('js-themes-registry-service', () => {
   });
 
   it('has built in themes with inherited font', () => {
-    expect(jsThemesRegistry.get('default').variables.fontMain)
-      .toEqual('Open Sans, sans-serif');
-    expect(jsThemesRegistry.get('cosmic').variables.fontMain)
-      .toEqual('Open Sans, sans-serif');
-    expect(jsThemesRegistry.get('corporate').variables.fontMain)
-      .toEqual('Open Sans, sans-serif');
+    expect(jsThemesRegistry.get('default').variables.fontMain).toEqual('Open Sans, sans-serif');
+    expect(jsThemesRegistry.get('cosmic').variables.fontMain).toEqual('Open Sans, sans-serif');
+    expect(jsThemesRegistry.get('corporate').variables.fontMain).toEqual('Open Sans, sans-serif');
   });
 
   it('has also new themes', () => {

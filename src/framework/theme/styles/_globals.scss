@@ -4,12 +4,12 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-@import 'global/components';
-@import 'global/overrides';
-@import 'global/breakpoints';
-@import 'global/styles';
+@forward 'global/breakpoints';
+@use 'global/styles';
+@use 'global/components';
+@use 'global/overrides';
 
 @mixin nb-theme-global() {
-  @include nb-theme-components();
-  @include nb-theme-overrides();
+  @include components.nb-theme-components();
+  @include overrides.nb-theme-overrides();
 }

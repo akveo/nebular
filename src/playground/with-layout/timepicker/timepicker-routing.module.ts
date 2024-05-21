@@ -5,13 +5,14 @@
  */
 
 import { NgModule } from '@angular/core';
-import { RouterModule, Route} from '@angular/router';
+import { RouterModule, Route } from '@angular/router';
 import { TimepickerShowcaseComponent } from './timepicker-showcase.component';
 import { TimepickerTwelveHoursFormatComponent } from './timepicker-twelve-hours-format.component';
 import { TimepickerSingleColumnComponent } from './timepicker-single-column.component';
 import { TimepickerWithSecondsComponent } from './timepicker-with-seconds.component';
 import { TimepickerFormControlComponent } from './timepicker-form-control.component';
 import { TimepickerNgModelComponent } from './timepicker-ng-model.component';
+import { TimepickerDynamicInputsShowcaseComponent } from './timepicker-dynamic-inputs-showcase.component';
 
 const routes: Route[] = [
   {
@@ -31,6 +32,10 @@ const routes: Route[] = [
     component: TimepickerWithSecondsComponent,
   },
   {
+    path: 'timepicker-dynamic-inputs-showcase.component',
+    component: TimepickerDynamicInputsShowcaseComponent,
+  },
+  {
     path: 'timepicker-form-control.component',
     component: TimepickerFormControlComponent,
   },
@@ -41,7 +46,7 @@ const routes: Route[] = [
 ];
 
 @NgModule({
-  imports: [ RouterModule.forChild(routes) ],
-  exports: [ RouterModule ],
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule],
 })
 export class TimepickerRoutingModule {}

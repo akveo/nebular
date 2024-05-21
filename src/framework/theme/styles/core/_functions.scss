@@ -4,13 +4,17 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
+@use 'sass:color';
+@use 'sass:map';
+@use '../theming-variables';
+
 /// Slightly lighten a color
 /// @access public
 /// @param {Color} $color - color to tint
 /// @param {Number} $percentage - percentage of `$color` in returned color
 /// @return {Color}
 @function tint($color, $percentage) {
-  @return mix(white, $color, $percentage);
+  @return color.mix(white, $color, $percentage);
 }
 
 /// Slightly darken a color
@@ -19,16 +23,18 @@
 /// @param {Number} $percentage - percentage of `$color` in returned color
 /// @return {Color}
 @function shade($color, $percentage) {
-  @return mix(black, $color, $percentage);
+  @return color.mix(black, $color, $percentage);
 }
 
 @function map-set($map, $key, $value: null) {
-  $new: ($key: $value);
-  @return map-merge($map, $new);
+  $new: (
+    $key: $value,
+  );
+  @return map.merge($map, $new);
 }
 
 @function nb-theme-var-negative($value) {
-  @if ($nb-enable-css-custom-properties) {
+  @if (theming-variables.$nb-enable-css-custom-properties) {
     @return calc(#{$value} * -1);
   } @else {
     @return -$value;

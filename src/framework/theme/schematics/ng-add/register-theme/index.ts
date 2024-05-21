@@ -4,16 +4,15 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { getProjectFromWorkspace, getProjectStyleFile, getProjectTargetOptions } from '@angular/cdk/schematics';
 import { SchematicsException, Tree } from '@angular-devkit/schematics';
-import { updateWorkspace } from '@schematics/angular/utility/workspace';
-import { ProjectDefinition, WorkspaceDefinition } from '@angular-devkit/core/src/workspace';
+import { ProjectDefinition } from '@angular-devkit/core/src/workspace';
 import { join, normalize, Path } from '@angular-devkit/core';
 
 import { createThemeContent, stylesContent } from './theme-content';
 import { Schema } from '../schema';
 import { getProject } from '../../util';
-
+import { getProjectFromWorkspace, getProjectStyleFile, getProjectTargetOptions } from '@angular/cdk/schematics';
+import { updateWorkspace, WorkspaceDefinition } from '@schematics/angular/utility';
 
 /**
  * Registers customizable scss theme in the specified project.
@@ -33,7 +32,7 @@ export function registerCustomizableTheme(options: Schema) {
 
     createThemeSCSS(tree, options.theme, project.sourceRoot as string);
     insertThemeImportInStyles(tree, stylesPath);
-  }
+  };
 }
 
 /**
@@ -55,7 +54,7 @@ export function registerPrebuiltTheme(options: Schema) {
 function createThemeSCSS(tree: Tree, theme: string, sourceRoot: string) {
   const themeContent: string = createThemeContent(theme);
 
-  const customThemePath: Path = normalize(join((sourceRoot as Path), 'themes.scss'));
+  const customThemePath: Path = normalize(join(sourceRoot as Path, 'themes.scss'));
   tree.create(customThemePath, themeContent);
 }
 
@@ -63,8 +62,7 @@ function createThemeSCSS(tree: Tree, theme: string, sourceRoot: string) {
  * Updates styles.scss and insert theme.scss import.
  * */
 function insertThemeImportInStyles(tree: Tree, stylesPath: string) {
-  const recorder = tree.beginUpdate(stylesPath)
-    .insertLeft(0, stylesContent);
+  const recorder = tree.beginUpdate(stylesPath).insertLeft(0, stylesContent);
 
   tree.commitUpdate(recorder);
 }
@@ -78,7 +76,7 @@ function addStyleToTarget(project: ProjectDefinition, targetName: string, styles
   if (!targetOptions.styles) {
     targetOptions.styles = [stylesPath];
   } else if (noNebularThemeIncluded(targetOptions, stylesPath)) {
-    (targetOptions.styles as (string | {input: string})[]).unshift(stylesPath);
+    (targetOptions.styles as (string | { input: string })[]).unshift(stylesPath);
   }
 }
 
@@ -86,7 +84,7 @@ function addStyleToTarget(project: ProjectDefinition, targetName: string, styles
  * Validates no Nebular styles already included into the specified project.
  * */
 function noNebularThemeIncluded(targetOptions: any, stylesPath: string): boolean {
-  const existingStyles = targetOptions.styles.map((s: any) => typeof s === 'string' ? s : s.input);
+  const existingStyles = targetOptions.styles.map((s: any) => (typeof s === 'string' ? s : s.input));
   const hasGivenTheme = existingStyles.find((s: any) => s.includes(stylesPath));
   const hasOtherTheme = existingStyles.find((s: any) => s.includes('@nebular/theme/styles/prebuilt'));
 

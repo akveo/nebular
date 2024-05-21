@@ -1,7 +1,7 @@
-@import '../../../@theme/styles/themes';
+@use '../../../@theme/styles/themes' as *;
+@use '../../../../../src/framework/theme/styles/globals' as *;
 
 @include nb-install-component() {
-
   $accent-line-bg: linear-gradient(180deg, #3366ff 0%, #7396ff 100%);
   $title-fg: nb-theme(color-fg-heading);
   $text-fg: nb-theme(color-fg-text);
@@ -21,7 +21,8 @@
       border-right: 1px solid #d9e4ff;
     }
 
-    &:nth-child(1), &:nth-child(2) {
+    &:nth-child(1),
+    &:nth-child(2) {
       border-bottom: 1px solid #d9e4ff;
     }
   }

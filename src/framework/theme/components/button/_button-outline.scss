@@ -4,6 +4,8 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
+@use '../../styles/theming' as *;
+
 @mixin button-outline() {
   [nbButton].appearance-outline {
     border-style: nb-theme(button-outline-border-style);

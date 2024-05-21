@@ -5,10 +5,11 @@
  */
 
 import { NgModule } from '@angular/core';
-import { RouterModule, Route} from '@angular/router';
+import { RouterModule, Route } from '@angular/router';
 import {
   RouteTabsetShowcaseChild1Component,
   RouteTabsetShowcaseChild2Component,
+  RouteTabsetShowcaseChild3Component,
 } from './components/route-tabset-children.component';
 import { RouteTabsetShowcaseComponent } from './route-tabset-showcase.component';
 import { TabsetBadgeComponent } from './tabset-badge.component';
@@ -17,6 +18,7 @@ import { TabsetShowcaseComponent } from './tabset-showcase.component';
 import { TabsetTestComponent } from './tabset-test.component';
 import { TabsetWidthComponent } from './tabset-width.component';
 import { TabsetDisabledComponent } from './tabset-disabled.component';
+import { TabsetTemplateTitleComponent } from './tabset-template-title.component';
 
 const routes: Route[] = [
   {
@@ -35,6 +37,10 @@ const routes: Route[] = [
       {
         path: 'tab2',
         component: RouteTabsetShowcaseChild2Component,
+      },
+      {
+        path: 'tab3',
+        component: RouteTabsetShowcaseChild3Component,
       },
     ],
   },
@@ -66,10 +72,14 @@ const routes: Route[] = [
     path: 'tabset-disabled.component',
     component: TabsetDisabledComponent,
   },
+  {
+    path: 'tabset-template-title.component',
+    component: TabsetTemplateTitleComponent,
+  },
 ];
 
 @NgModule({
-  imports: [ RouterModule.forChild(routes) ],
-  exports: [ RouterModule ],
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule],
 })
 export class TabsetRoutingModule {}

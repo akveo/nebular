@@ -4,6 +4,8 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
+@use '../../styles/theming' as *;
+
 @mixin nb-toggle-theme() {
   nb-toggle {
     .toggle {
@@ -20,10 +22,9 @@
       */
       @include nb-ltr() {
         &.checked .toggle-switcher {
-          left: calc(100%
-                     - #{nb-theme(toggle-switcher-size)}
-                     - #{nb-theme(toggle-border-width)}
-                     - #{nb-theme(toggle-border-width)});
+          $size: nb-theme(toggle-switcher-size);
+          $border-width: nb-theme(toggle-border-width);
+          left: calc(100% - #{$size} - #{$border-width} - #{$border-width});
         }
 
         &:not(.checked) .toggle-switcher {
@@ -33,10 +34,9 @@
 
       @include nb-rtl() {
         &.checked .toggle-switcher {
-          right: calc(100%
-                      - #{nb-theme(toggle-switcher-size)}
-                      - #{nb-theme(toggle-border-width)}
-                      - #{nb-theme(toggle-border-width)});
+          $size: nb-theme(toggle-switcher-size);
+          $border-width: nb-theme(toggle-border-width);
+          right: calc(100% - #{$size} - #{$border-width} - #{$border-width});
         }
 
         &:not(.checked) .toggle-switcher {
@@ -78,7 +78,6 @@
 
 @mixin nb-toggle-status($status) {
   nb-toggle.status-#{$status} {
-
     .text {
       color: nb-theme(toggle-#{$status}-text-color);
     }

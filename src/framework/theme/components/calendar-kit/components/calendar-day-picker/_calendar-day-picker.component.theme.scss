@@ -4,6 +4,8 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
+@use '../../../../styles/theming' as *;
+
 @mixin nb-calendar-day-picker-theme {
   nb-calendar-day-picker nb-calendar-week-numbers {
     $border: nb-theme(calendar-weeknumber-divider-width) solid nb-theme(calendar-weeknumber-divider-color);

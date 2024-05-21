@@ -1,6 +1,6 @@
 import { TemplateRef, InjectionToken, ViewContainerRef } from '@angular/core';
 // Do not remove (TS4023).
-// tslint:disable-next-line
+// eslint-disable-next-line
 import { ComponentType } from '@angular/cdk/overlay';
 import { NbComponentType } from '../cdk/overlay/mapping';
 
@@ -15,6 +15,20 @@ export interface NbWindowStateChange {
   newState: NbWindowState;
 }
 
+export interface NbWindowControlButtonsConfig {
+  minimize: boolean;
+  maximize: boolean;
+  fullScreen: boolean;
+  close: boolean;
+}
+
+export const NB_WINDOW_DEFAULT_BUTTONS_CONFIG: NbWindowControlButtonsConfig = {
+  minimize: true,
+  maximize: true,
+  fullScreen: true,
+  close: true,
+};
+
 /**
  * Window configuration options.
  */
@@ -23,6 +37,17 @@ export class NbWindowConfig {
    * Window title.
    */
   title: string = '';
+
+  /**
+   * Window title as template. Use it instead of `title` property.
+   */
+  titleTemplate?: TemplateRef<any>;
+
+  /**
+   * Title as template may receive data through `config.titleTemplateContext` property.
+   * Window title as Template. You can access context inside template as $implicit.
+   */
+  titleTemplateContext?: Object = {};
 
   /**
    * Initial window state. Full screen by default.
@@ -67,8 +92,18 @@ export class NbWindowConfig {
    */
   viewContainerRef: ViewContainerRef = null;
 
+  /**
+   * Windows control buttons can be hidden by setting according property to false.
+   */
+  buttons: Partial<NbWindowControlButtonsConfig> = {};
+
   constructor(...configs: Partial<NbWindowConfig>[]) {
     Object.assign(this, ...configs);
+    this.applyDefaultButtonConfig();
+  }
+
+  protected applyDefaultButtonConfig() {
+    Object.assign(this, { buttons: { ...NB_WINDOW_DEFAULT_BUTTONS_CONFIG, ...this.buttons } });
   }
 }
 

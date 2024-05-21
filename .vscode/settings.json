@@ -1,12 +1,18 @@
 {
-  "typescript.tsdk": "./node_modules/typescript/lib",
-  "tslint.enable": false,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "stylelint.validate": ["css", "less", "postcss", "scss"],
+  // disable error duplication for scss files
+  "scss.validate": false,
   "files.exclude": {
     "**/.git": true,
     "**/.svn": true,
     "**/.hg": true,
     "**/CVS": true,
     "**/.DS_Store": true,
+
+    "**/.angular": true,
+    "**/packages-smoke/.angular": true,
 
     // exclude .js and .js.map files, when in a TypeScript project
     "**/*.js": {
@@ -15,6 +21,6 @@
     "**/*.js.map": true,
 
     // exclude @nebular build folders
-    "**/.lib": true
+    "**/dist": true
   }
 }

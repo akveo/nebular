@@ -1,14 +1,13 @@
-@import '../../../@theme/styles/themes';
+@use '../../../@theme/styles/themes' as *;
+@use '../../../../../src/framework/theme/styles/globals' as *;
 
 @include nb-install-component() {
-
   $shadow: 0 12px 34px rgba(0, 60, 183, 0.25);
   $btn-bg: linear-gradient(90deg, #18f297 0%, #00e6e6 100%);
   $btn-shadow-hover: 0 18px 34px 0 rgba(0, 60, 183, 0.35);
   $btn-shadow-active: inset 0 1px 3px 0 rgba(0, 60, 183, 0.5);
   $get-started-fg: #3381ff;
   $title-fg: nb-theme(color-fg-heading-light);
-
 
   width: 100%;
   max-width: 100%;
@@ -34,7 +33,7 @@
     }
 
     @include media-breakpoint-up(sm) {
-      max-width: 32rem;
+      max-width: 40rem;
     }
   }
 
@@ -68,6 +67,12 @@
     width: 100%;
     max-width: 16rem;
     margin-bottom: 1.5rem;
+  }
+
+  .hero-promo {
+    color: $title-fg;
+
+    margin-bottom: 2rem;
   }
 
   .feature-key {
@@ -107,7 +112,6 @@
       flex: 1 0 auto;
       display: flex;
       padding-top: 1.75rem;
-      margin-left: -4rem;
     }
 
     @include media-breakpoint-up(md) {
@@ -161,6 +165,7 @@
     font-size: 2.4rem;
     line-height: 1.125em;
     font-weight: bold;
+    margin-top: 0;
     margin-bottom: 2rem;
     text-shadow: $shadow;
 
@@ -169,14 +174,17 @@
     }
   }
 
-  h1,h2,h3 {
+  h1,
+  h2,
+  h3 {
     color: $title-fg;
   }
 
   p {
-    font-size: 1.25em;
-    line-height: 2em;
-    padding-right: 2em;
+    font-size: 1rem;
+    line-height: 1.75em;
+    padding-right: 3em;
+    margin-bottom: 3rem;
   }
 
   .badges {
@@ -208,7 +216,7 @@
     width: 100%;
 
     @include media-breakpoint-up(sm) {
-      max-width: 11.875rem;
+      max-width: 11.2rem;
     }
 
     &:not(:last-child) {
@@ -236,7 +244,6 @@
   }
 
   @include media-breakpoint-up(md) {
-
     .block {
       font-size: 0.875rem;
     }

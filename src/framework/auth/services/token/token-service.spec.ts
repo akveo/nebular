@@ -7,12 +7,18 @@
 import { inject, TestBed, waitForAsync } from '@angular/core/testing';
 import { take } from 'rxjs/operators';
 
-import { NbTokenLocalStorage, NbTokenStorage } from './token-storage';
-import { NbAuthSimpleToken, NbAuthToken, nbAuthCreateToken } from './token';
-import { NbTokenService } from './token.service';
-import { NbAuthJWTToken } from '@nebular/auth/services/token/token';
-import { NB_AUTH_FALLBACK_TOKEN, NbAuthTokenParceler } from './token-parceler';
-import { NB_AUTH_TOKENS } from '../../auth.options';
+import {
+  NbTokenLocalStorage,
+  NbTokenStorage,
+  NbAuthSimpleToken,
+  NbAuthToken,
+  nbAuthCreateToken,
+  NbTokenService,
+  NbAuthJWTToken,
+  NB_AUTH_FALLBACK_TOKEN,
+  NbAuthTokenParceler,
+  NB_AUTH_TOKENS,
+} from '@nebular/auth';
 
 const noop = () => {};
 const ownerStrategyName = 'strategy';

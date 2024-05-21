@@ -19,6 +19,9 @@ import { NbChatMessageFileComponent } from './chat-message-file.component';
 import { NbChatMessageQuoteComponent } from './chat-message-quote.component';
 import { NbChatMessageMapComponent } from './chat-message-map.component';
 import { NbChatOptions } from './chat.options';
+import { NbChatAvatarComponent } from './chat-avatar.component';
+import { NbChatCustomMessageDirective } from './chat-custom-message.directive';
+import { NbChatTitleDirective } from './chat-title.directive';
 
 const NB_CHAT_COMPONENTS = [
   NbChatComponent,
@@ -28,39 +31,28 @@ const NB_CHAT_COMPONENTS = [
   NbChatMessageFileComponent,
   NbChatMessageQuoteComponent,
   NbChatMessageMapComponent,
+  NbChatAvatarComponent,
 ];
 
+const NB_CHAT_DIRECTIVES = [NbChatCustomMessageDirective, NbChatTitleDirective];
+
 @NgModule({
-  imports: [
-    NbSharedModule,
-    NbIconModule,
-    NbInputModule,
-    NbButtonModule,
-  ],
-  declarations: [
-    ...NB_CHAT_COMPONENTS,
-  ],
-  exports: [
-    ...NB_CHAT_COMPONENTS,
-  ],
+  imports: [NbSharedModule, NbIconModule, NbInputModule, NbButtonModule],
+  declarations: [...NB_CHAT_COMPONENTS, ...NB_CHAT_DIRECTIVES],
+  exports: [...NB_CHAT_COMPONENTS, ...NB_CHAT_DIRECTIVES],
 })
 export class NbChatModule {
-
   static forRoot(options?: NbChatOptions): ModuleWithProviders<NbChatModule> {
     return {
       ngModule: NbChatModule,
-      providers: [
-        { provide: NbChatOptions, useValue: options || {} },
-      ],
+      providers: [{ provide: NbChatOptions, useValue: options || {} }],
     };
   }
 
   static forChild(options?: NbChatOptions): ModuleWithProviders<NbChatModule> {
     return {
       ngModule: NbChatModule,
-      providers: [
-        { provide: NbChatOptions, useValue: options || {} },
-      ],
+      providers: [{ provide: NbChatOptions, useValue: options || {} }],
     };
   }
 }

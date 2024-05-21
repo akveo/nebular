@@ -1,6 +1,6 @@
 import { Inject, Injectable, NgZone } from '@angular/core';
 import { CdkScrollable, ScrollDispatcher } from '@angular/cdk/overlay';
-import { Observable } from 'rxjs';
+import { merge, Observable } from 'rxjs';
 
 import { NbPlatform } from '../platform/platform-service';
 import { NbLayoutScrollService } from '../../../services/scroll.service';
@@ -16,7 +16,10 @@ export class NbScrollDispatcherAdapter extends ScrollDispatcher {
   }
 
   scrolled(auditTimeInMs?: number): Observable<CdkScrollable | void> {
-    return this.scrollService.onScroll();
+    return merge(
+      super.scrolled(auditTimeInMs),
+      this.scrollService.onScroll(),
+    );
   }
 }
 

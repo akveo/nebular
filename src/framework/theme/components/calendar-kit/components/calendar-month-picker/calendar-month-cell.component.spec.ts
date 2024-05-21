@@ -5,12 +5,8 @@
  */
 
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { NbCalendarMonthCellComponent } from './calendar-month-cell.component';
-import { NbDateService } from '../../services/date.service';
-import { NbNativeDateService } from '../../services/native-date.service';
 import { DatePipe } from '@angular/common';
-
+import { NbCalendarMonthCellComponent, NbDateService, NbNativeDateService } from '@nebular/theme';
 
 describe('Component: NbCalendarMonthCell', () => {
   let component: NbCalendarMonthCellComponent<Date>;
@@ -52,7 +48,7 @@ describe('Component: NbCalendarMonthCell', () => {
     component.date = date;
     component.selectedValue = new Date();
     fixture.detectChanges();
-    component.select.subscribe(e => expect(e).toBe(date));
+    component.select.subscribe((e) => expect(e).toBe(date));
     componentEl.dispatchEvent(new Event('click'));
     expect(componentEl.classList).toContain('selected');
   });

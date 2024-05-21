@@ -16,6 +16,7 @@ import {
   ViewChild,
   ViewChildren,
 } from '@angular/core';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import createSpy = jasmine.createSpy;
 
@@ -40,7 +41,7 @@ export class NbRadioTestComponent {
   template: `
     <nb-radio-group>
       <ng-template [ngIf]="showRadios">
-        <nb-radio *ngFor="let radio of radioValues" [value]="radio">{{radio}}</nb-radio>
+        <nb-radio *ngFor="let radio of radioValues" [value]="radio">{{ radio }}</nb-radio>
       </ng-template>
     </nb-radio-group>
   `,
@@ -69,15 +70,28 @@ export class NbTwoRadioGroupsComponent {
   @ViewChildren(NbRadioComponent, { read: ElementRef }) radios: QueryList<ElementRef>;
 }
 
+@Component({
+  template: `
+    <nb-radio-group name="1" [formControl]="control">
+      <nb-radio value="1"></nb-radio>
+      <nb-radio value="2"></nb-radio>
+    </nb-radio-group>
+  `,
+})
+export class NbFormsIntegrationComponent {
+  @ViewChild(NbRadioGroupComponent) radioGroup: NbRadioGroupComponent;
+  control = new FormControl({ value: '1', disabled: true });
+}
+
 describe('radio', () => {
   let fixture: ComponentFixture<NbRadioTestComponent>;
   let comp: NbRadioTestComponent;
 
   beforeEach(fakeAsync(() => {
     TestBed.configureTestingModule({
-      imports: [ NbThemeModule.forRoot(), NbRadioModule ],
+      imports: [NbThemeModule.forRoot(), NbRadioModule],
       declarations: [NbRadioTestComponent],
-      providers: [ { provide: NB_DOCUMENT, useValue: document } ],
+      providers: [{ provide: NB_DOCUMENT, useValue: document }],
     });
 
     fixture = TestBed.createComponent(NbRadioTestComponent);
@@ -92,9 +106,12 @@ describe('radio', () => {
     expect(radios.length).toBe(3);
   });
 
-  it('should fire value when selected', done => {
+  it('should fire value when selected', (done) => {
     const secondRadio: DebugElement = fixture.debugElement.queryAll(By.directive(NbRadioComponent))[1];
-    comp.valueChange.subscribe(done);
+    comp.valueChange.subscribe((value) => {
+      expect(value).toEqual(secondRadio.componentInstance.value);
+      done();
+    });
     const input = secondRadio.query(By.css('input'));
     input.nativeElement.click();
   });
@@ -106,9 +123,9 @@ describe('NbRadioGroupComponent', () => {
 
   beforeEach(fakeAsync(() => {
     TestBed.configureTestingModule({
-      imports: [ NbThemeModule.forRoot(), NbRadioModule ],
-      declarations: [ NbRadioWithDynamicValuesTestComponent, NbTwoRadioGroupsComponent ],
-      providers: [ { provide: NB_DOCUMENT, useValue: document } ],
+      imports: [NbThemeModule.forRoot(), NbRadioModule, ReactiveFormsModule],
+      declarations: [NbRadioWithDynamicValuesTestComponent, NbTwoRadioGroupsComponent, NbFormsIntegrationComponent],
+      providers: [{ provide: NB_DOCUMENT, useValue: document }],
     });
 
     fixture = TestBed.createComponent(NbRadioWithDynamicValuesTestComponent);
@@ -288,4 +305,14 @@ describe('NbRadioGroupComponent', () => {
     expect(secondGroup.radios.first.checked).toEqual(true);
     expect(radioFromSecondGroup.checked).toEqual(true);
   });
+
+  it('should disable radio group if form control is disabled', fakeAsync(() => {
+    const radioFixture = TestBed.createComponent(NbFormsIntegrationComponent);
+    radioFixture.detectChanges();
+
+    const { radioGroup } = radioFixture.componentInstance;
+    tick();
+
+    expect(radioGroup.radios.first.disabled).toEqual(true);
+  }));
 });

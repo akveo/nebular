@@ -8,7 +8,7 @@ import { LOCALE_ID } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 
 import { NbDateService } from '@nebular/theme';
-import { NbMomentDateService } from './moment-date.service';
+import { NbMomentDateService } from '@nebular/moment';
 import * as moment from 'moment';
 
 type Moment = moment.Moment;
@@ -41,8 +41,7 @@ describe('moment-date-service', () => {
     expect(isValid).toBeTruthy();
   });
 
-  it('should validate as correct if time string is valid according to the twelve hours format',
-    () => {
+  it('should validate as correct if time string is valid according to the twelve hours format', () => {
     const isValid = dateService.isValidTimeString('04:23:00 AM', 'hh:mm:ss A');
     expect(isValid).toBeTruthy();
   });
@@ -88,8 +87,7 @@ describe('moment-date-service', () => {
   });
 
   it('should get milliseconds', () => {
-    const second = moment().year(2018).month(5).date(15).hour(12)
-    .minute(10).second(24).milliseconds(22);
+    const second = moment().year(2018).month(5).date(15).hour(12).minute(10).second(24).milliseconds(22);
     expect(dateService.getMilliseconds(second)).toBe(22);
   });
 
@@ -143,7 +141,7 @@ describe('moment-date-service', () => {
     expect(parsed.date()).toEqual(15);
   });
 
-  it('should not format if date isn\'t passed', () => {
+  it("should not format if date isn't passed", () => {
     expect(() => dateService.format(undefined, 'DD.MM.YYYY')).not.toThrow();
     expect(dateService.format(undefined, 'DD.MM.YYYY')).toEqual('');
   });
@@ -281,21 +279,25 @@ describe('moment-date-service', () => {
   });
 
   it('should compare days correctly', () => {
-    expect(dateService.isSameMonth(moment().year(2018).month(6).date(16),
-      moment().year(2018).month(6).date(16))).toBeTruthy();
-    expect(dateService.isSameMonth(moment().year(2018).month(7).date(16),
-      moment().year(2018).month(6).date(16))).toBeFalsy();
+    expect(
+      dateService.isSameMonth(moment().year(2018).month(6).date(16), moment().year(2018).month(6).date(16)),
+    ).toBeTruthy();
+    expect(
+      dateService.isSameMonth(moment().year(2018).month(7).date(16), moment().year(2018).month(6).date(16)),
+    ).toBeFalsy();
   });
 
   it('should compare dates correctly', () => {
-    expect(dateService.compareDates(moment().year(2018).month(6).date(16),
-      moment().year(2017).month(2).date(14))).toBeGreaterThan(0);
+    expect(
+      dateService.compareDates(moment().year(2018).month(6).date(16), moment().year(2017).month(2).date(14)),
+    ).toBeGreaterThan(0);
 
-    expect(dateService.compareDates(moment().year(2018).month(6).date(16),
-      moment().year(2019).month(2).date(14))).toBeLessThan(0);
+    expect(
+      dateService.compareDates(moment().year(2018).month(6).date(16), moment().year(2019).month(2).date(14)),
+    ).toBeLessThan(0);
 
-    expect(dateService.compareDates(moment().year(2018).month(6).date(16),
-      moment().year(2018).month(6).date(16))).toBe(0);
+    expect(dateService.compareDates(moment().year(2018).month(6).date(16), moment().year(2018).month(6).date(16))).toBe(
+      0,
+    );
   });
 });
-

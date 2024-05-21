@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {NbSearchService} from '@nebular/theme';
-import {debounceTime, distinctUntilChanged} from 'rxjs/operators';
+import { NbSearchService } from '@nebular/theme';
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 @Component({
   selector: 'nb-search-with-input-event',
@@ -9,8 +9,7 @@ import {debounceTime, distinctUntilChanged} from 'rxjs/operators';
       <nb-layout-header fixed>
         <nb-search type="rotate-layout" tag="search-input-event"></nb-search>
       </nb-layout-header>
-      <nb-sidebar>
-      </nb-sidebar>
+      <nb-sidebar></nb-sidebar>
 
       <nb-layout-column class="colored-column-basic">
         <nb-card accent="info">
@@ -25,16 +24,14 @@ import {debounceTime, distinctUntilChanged} from 'rxjs/operators';
 })
 export class SearchWithInputEventComponent implements OnInit {
   value: string;
-  constructor(private searchService: NbSearchService) {
-  }
+  constructor(private searchService: NbSearchService) {}
 
   ngOnInit() {
-    this.searchService.onSearchInput().pipe(
-      debounceTime(300),
-      distinctUntilChanged(),
-    ).subscribe((data: { term: string, tag: string }) => {
-      this.value = data.term;
-    });
+    this.searchService
+      .onSearchInput()
+      .pipe(debounceTime(300), distinctUntilChanged())
+      .subscribe((data: { term: string; tag?: string }) => {
+        this.value = data.term;
+      });
   }
-
 }

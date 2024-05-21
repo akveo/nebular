@@ -54,5 +54,7 @@ export class NbTreeGridService<T> {
         toCheck.push(...node.children);
       }
     }
+
+    return undefined;
   }
 }

@@ -1,0 +1,5 @@
+@use '../all' as *;
+
+$nb-enabled-themes: (corporate);
+
+@include nb-install();

@@ -1,4 +1,5 @@
-@import '~@angular/cdk/overlay-prebuilt';
+@use '@angular/cdk/overlay-prebuilt';
+@use '../../../styles/theming' as *;
 
 @mixin nb-overlay-theme {
   .overlay-backdrop {

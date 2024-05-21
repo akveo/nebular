@@ -4,8 +4,8 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-@import 'global/components';
+@use 'global/components';
 
 @mixin nb-auth-global() {
-  @include nb-auth-components();
+  @include components.nb-auth-components();
 }

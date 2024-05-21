@@ -43,7 +43,7 @@ export class NbLayoutScrollService {
    * @returns {Observable<NbScrollPosition>}
    */
   getPosition(): Observable<NbScrollPosition> {
-    return Observable.create((observer: Subscriber<NbScrollPosition>) => {
+    return new Observable((observer: Subscriber<NbScrollPosition>) => {
       const listener = new Subject<NbScrollPosition>();
       listener.subscribe(observer);
       this.scrollPositionReq$.next({ listener });

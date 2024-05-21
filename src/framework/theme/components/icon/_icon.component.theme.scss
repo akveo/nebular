@@ -4,6 +4,8 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
+@use '../../styles/theming' as *;
+
 @mixin nb-icon-theme() {
   nb-icon {
     font-size: nb-theme(icon-font-size);
@@ -22,4 +24,3 @@
     }
   }
 }
-

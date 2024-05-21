@@ -1,0 +1,68 @@
+<nb-card size="large">
+  <nb-card-body>
+    <section>
+      <input nbInput placeholder="Pick Date Time" [ngModel]="now" [nbDatepicker]="dateTimePicker" />
+      <nb-date-timepicker
+        [format]="format"
+        [withSeconds]="withSeconds"
+        [singleColumn]="singleColumn"
+        [step]="step"
+        [twelveHoursFormat]="twelveHoursFormat"
+        [showAmPmLabel]="false"
+        [firstDayOfWeek]="firstDayOfWeek"
+        #dateTimePicker
+      ></nb-date-timepicker>
+    </section>
+
+    <section>
+      <button nbButton (click)="toggleWithSeconds()">withSeconds — {{ withSeconds }}</button>
+      <button nbButton (click)="toggleSecondsSwitching()">
+        {{ secondsToggleTimer ? 'Stop' : 'Start' }} auto withSeconds toggle
+      </button>
+    </section>
+
+    <section>
+      <button nbButton (click)="toggleSingleColumn()">singleColumn — {{ singleColumn }}</button>
+      <button nbButton (click)="toggleSingleColumnSwitching()">
+        {{ singleColumnToggleTimer ? 'Stop' : 'Start' }} auto singleColumn toggle
+      </button>
+    </section>
+
+    <section>
+      <button nbButton (click)="toggleStep()">step — {{ step }}</button>
+      <button nbButton (click)="toggleStepSwitching()">
+        {{ stepToggleTimer ? 'Stop' : 'Start' }} auto step toggle
+      </button>
+    </section>
+
+    <section>
+      <button nbButton (click)="toggleTwelveHoursFormat()">twelveHoursFormat — {{ twelveHoursFormat }}</button>
+      <button nbButton (click)="toggleTwelveHoursFormatSwitching()">
+        {{ twelveHoursFormatToggleTimer ? 'Stop' : 'Start' }} auto twelveHoursFormat toggle
+      </button>
+    </section>
+
+    <section>
+      <button nbButton (click)="toggleFormat()">format — {{ format }}</button>
+      <button nbButton (click)="toggleFormatSwitching()">
+        {{ formatToggleTimer ? 'Stop' : 'Start' }} auto format toggle
+      </button>
+    </section>
+
+    <section>
+      <nb-select [(selected)]="firstDayOfWeek">
+        <nb-option>LOCALE_ID</nb-option>
+        <nb-option [value]="0">Sunday</nb-option>
+        <nb-option [value]="1">Moday</nb-option>
+        <nb-option [value]="2">Tuesday</nb-option>
+        <nb-option [value]="3">Wednesday</nb-option>
+        <nb-option [value]="4">Thursday</nb-option>
+        <nb-option [value]="5">Friday</nb-option>
+        <nb-option [value]="6">Saturday</nb-option>
+      </nb-select>
+      <button nbButton (click)="toggleFirstDayOfWeekSwitching()">
+        {{ firstDayOfWeekToggleTimer ? 'Stop' : 'Start' }} auto firstDayOfWeek toggle
+      </button>
+    </section>
+  </nb-card-body>
+</nb-card>

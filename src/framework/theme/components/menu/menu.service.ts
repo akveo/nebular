@@ -13,13 +13,15 @@ import { isFragmentContain, isFragmentEqual, isUrlPathContain, isUrlPathEqual } 
 import { NbIconConfig } from '../icon/icon.component';
 import { NbBadge } from '../badge/badge.component';
 
-export interface NbMenuBag { tag: string; item: NbMenuItem }
+export interface NbMenuBag {
+  tag: string;
+  item: NbMenuItem;
+}
 
 const itemClick$ = new Subject<NbMenuBag>();
 const addItems$ = new ReplaySubject<{ tag: string; items: NbMenuItem[] }>(1);
 const navigateHome$ = new ReplaySubject<{ tag: string }>(1);
-const getSelectedItem$
-  = new ReplaySubject<{ tag: string; listener: BehaviorSubject<NbMenuBag> }>(1);
+const getSelectedItem$ = new ReplaySubject<{ tag: string; listener: BehaviorSubject<NbMenuBag> }>(1);
 const itemSelect$ = new ReplaySubject<NbMenuBag>(1);
 const itemHover$ = new ReplaySubject<NbMenuBag>(1);
 const submenuToggle$ = new ReplaySubject<NbMenuBag>(1);
@@ -111,6 +113,10 @@ export class NbMenuItem {
   data?: any;
   fragment?: string;
   preserveFragment?: boolean;
+  /** The name of a role in the ARIA specification
+   * @type {string}
+   */
+  ariaRole?: string;
 
   /**
    * @returns item parents in top-down order
@@ -128,9 +134,7 @@ export class NbMenuItem {
   }
 
   static isParent(item: NbMenuItem, possibleChild: NbMenuItem): boolean {
-    return possibleChild.parent
-      ? possibleChild.parent === item || this.isParent(item, possibleChild.parent)
-      : false;
+    return possibleChild.parent ? possibleChild.parent === item || this.isParent(item, possibleChild.parent) : false;
   }
 }
 
@@ -146,7 +150,6 @@ export class NbMenuItem {
  */
 @Injectable()
 export class NbMenuService {
-
   /**
    * Add items to the end of the menu items list
    * @param {List<NbMenuItem>} items
@@ -204,12 +207,11 @@ export class NbMenuService {
 
 @Injectable()
 export class NbMenuInternalService {
-
   constructor(private location: Location) {}
 
   prepareItems(items: NbMenuItem[]) {
     const defaultItem = new NbMenuItem();
-    items.forEach(i => {
+    items.forEach((i) => {
       this.applyDefaults(i, defaultItem);
       this.setParent(i);
     });
@@ -284,19 +286,19 @@ export class NbMenuInternalService {
   }
 
   itemHover(item: NbMenuItem, tag?: string) {
-    itemHover$.next({tag, item});
+    itemHover$.next({ tag, item });
   }
 
   submenuToggle(item: NbMenuItem, tag?: string) {
-    submenuToggle$.next({tag, item});
+    submenuToggle$.next({ tag, item });
   }
 
   itemSelect(item: NbMenuItem, tag?: string) {
-    itemSelect$.next({tag, item});
+    itemSelect$.next({ tag, item });
   }
 
   itemClick(item: NbMenuItem, tag?: string) {
-    itemClick$.next({tag, item});
+    itemClick$.next({ tag, item });
   }
 
   /**
@@ -336,7 +338,7 @@ export class NbMenuInternalService {
       }
 
       if (item.expanded) {
-        collapsedItems.push(item)
+        collapsedItems.push(item);
       }
       item.expanded = false;
 
@@ -349,18 +351,20 @@ export class NbMenuInternalService {
   }
 
   private applyDefaults(item, defaultItem) {
-    const menuItem = {...item};
+    const menuItem = { ...item };
     Object.assign(item, defaultItem, menuItem);
-    item.children && item.children.forEach(child => {
-      this.applyDefaults(child, defaultItem);
-    });
+    item.children &&
+      item.children.forEach((child) => {
+        this.applyDefaults(child, defaultItem);
+      });
   }
 
   private setParent(item: NbMenuItem) {
-    item.children && item.children.forEach(child => {
-      child.parent = item;
-      this.setParent(child);
-    });
+    item.children &&
+      item.children.forEach((child) => {
+        child.parent = item;
+        this.setParent(child);
+      });
   }
 
   /**
@@ -371,7 +375,7 @@ export class NbMenuInternalService {
   private findItemByUrl(items: NbMenuItem[]): NbMenuItem | undefined {
     let selectedItem;
 
-    items.some(item => {
+    items.some((item) => {
       if (item.children) {
         selectedItem = this.findItemByUrl(item.children);
       }

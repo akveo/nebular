@@ -4,6 +4,8 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
+@use '../../styles/theming' as *;
+
 @mixin nb-accordion-item-header() {
   border-bottom-width: nb-theme(accordion-header-border-width);
   border-bottom-style: nb-theme(accordion-header-border-style);
@@ -19,7 +21,6 @@
 }
 
 @mixin nb-accordion-theme() {
-
   nb-accordion {
     display: block;
     box-shadow: nb-theme(accordion-shadow);

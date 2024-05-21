@@ -5,7 +5,7 @@
  */
 
 import { Component, OnDestroy } from '@angular/core';
-import { NbAuthResult, NbAuthService } from '@nebular/auth';
+import { NbAuthResult, NbAuthService, NbAuthToken } from '@nebular/auth';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { AuthAzureToken } from './azure-adb2c-auth-strategy';
@@ -18,7 +18,7 @@ import { AuthAzureToken } from './azure-adb2c-auth-strategy';
         <nb-card>
           <nb-card-body>
             <p>Current User Authenticated: {{ !!token }}</p>
-            <p>Current User Token: {{ token|json }}</p>
+            <p>Current User Token: {{ token | json }}</p>
 
             <button nbButton status="success" *ngIf="!token" (click)="login()">Sign In with Azure</button>
             <button nbButton status="warning" *ngIf="token" (click)="logout()">Sign Out</button>
@@ -29,34 +29,34 @@ import { AuthAzureToken } from './azure-adb2c-auth-strategy';
   `,
 })
 export class AzureLoginComponent implements OnDestroy {
-
   token: AuthAzureToken;
 
   private destroy$ = new Subject<void>();
 
   constructor(private authService: NbAuthService) {
-    this.authService.onTokenChange()
+    this.authService
+      .onTokenChange()
       .pipe(takeUntil(this.destroy$))
-      .subscribe((token: AuthAzureToken) => {
+      .subscribe((token: NbAuthToken) => {
         this.token = null;
         if (token && token.isValid()) {
-          this.token = token;
+          this.token = token as AuthAzureToken;
         }
       });
   }
 
   login() {
-    this.authService.authenticate('azure')
+    this.authService
+      .authenticate('azure')
       .pipe(takeUntil(this.destroy$))
-      .subscribe((authResult: NbAuthResult) => {
-      });
+      .subscribe((authResult: NbAuthResult) => {});
   }
 
   logout() {
-    this.authService.logout('azure')
+    this.authService
+      .logout('azure')
       .pipe(takeUntil(this.destroy$))
-      .subscribe((authResult: NbAuthResult) => {
-      });
+      .subscribe((authResult: NbAuthResult) => {});
   }
 
   ngOnDestroy(): void {

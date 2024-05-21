@@ -1,5 +1,8 @@
+@use 'sass:selector';
+@use '../../theming' as *;
+
 @mixin nb-typography {
-  body {
+  #{if(&, '&', 'body')} {
     color: nb-theme(text-basic-color);
     font-family: nb-theme(text-paragraph-font-family);
     font-size: nb-theme(text-paragraph-font-size);
@@ -7,8 +10,18 @@
     line-height: nb-theme(text-paragraph-line-height);
   }
 
-  h1, h2, h3, h4, h5, h6,
-  .h1, .h2, .h3, .h4, .h5, .h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  .h1,
+  .h2,
+  .h3,
+  .h4,
+  .h5,
+  .h6 {
     color: nb-theme(text-basic-color);
   }
 

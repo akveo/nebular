@@ -19,6 +19,7 @@ import {
   EmbeddedViewRef,
   ViewContainerRef,
   Optional,
+  SkipSelf,
 } from '@angular/core';
 import { fromEvent, merge, Subject } from 'rxjs';
 import { debounceTime, takeUntil } from 'rxjs/operators';
@@ -33,7 +34,8 @@ import {
   NB_COALESCED_STYLE_SCHEDULER,
   NB_VIEW_REPEATER_STRATEGY,
 } from '../cdk/table/table.module';
-import { NbRowContext } from '../cdk/table/type-mappings';
+import { NB_STICKY_POSITIONING_LISTENER, NbRowContext } from '../cdk/table/type-mappings';
+import { NbViewportRulerAdapter } from '../cdk/adapter/viewport-ruler-adapter';
 import { NbTreeGridDataSource, NbTreeGridDataSourceBuilder } from './data-source/tree-grid-data-source';
 import { NB_DEFAULT_ROW_LEVEL, NbTreeGridPresentationNode } from './data-source/tree-grid.model';
 import { NbToggleOptions } from './data-source/tree-grid.service';
@@ -157,11 +159,14 @@ export class NbTreeGridComponent<T> extends NbTable<NbTreeGridPresentationNode<T
               @Inject(NB_DOCUMENT) document,
               platform: NbPlatform,
               @Inject(NB_WINDOW) private window,
-              @Optional() @Inject(NB_VIEW_REPEATER_STRATEGY) protected readonly _viewRepeater?,
-              @Optional() @Inject(NB_COALESCED_STYLE_SCHEDULER) protected readonly _coalescedStyleScheduler?,
+              @Inject(NB_VIEW_REPEATER_STRATEGY) protected readonly _viewRepeater,
+              @Inject(NB_COALESCED_STYLE_SCHEDULER) protected readonly _coalescedStyleScheduler,
+              _viewportRuler: NbViewportRulerAdapter,
+              @Optional() @SkipSelf() @Inject(NB_STICKY_POSITIONING_LISTENER)
+              protected readonly _stickyPositioningListener,
   ) {
     super(differs, changeDetectorRef, elementRef, role, dir, document, platform, _viewRepeater,
-          _coalescedStyleScheduler);
+          _coalescedStyleScheduler, _viewportRuler, _stickyPositioningListener);
     this.platform = platform;
   }
 
@@ -276,6 +281,8 @@ export class NbTreeGridComponent<T> extends NbTable<NbTreeGridPresentationNode<T
         return rowViewRef.context;
       }
     }
+
+    return undefined;
   }
 
   private getColumns(): string[] {

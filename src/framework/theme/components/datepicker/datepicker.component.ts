@@ -16,7 +16,6 @@ import {
   OnDestroy,
   Output,
   Type,
-  AfterViewInit,
   OnInit,
   SimpleChanges,
   Optional,
@@ -28,6 +27,7 @@ import { NbComponentPortal, NbOverlayRef } from '../cdk/overlay/mapping';
 import {
   NbAdjustableConnectedPositionStrategy,
   NbAdjustment,
+  NbAdjustmentValues,
   NbPosition,
   NbPositionBuilderService,
 } from '../cdk/overlay/overlay-position';
@@ -35,7 +35,7 @@ import { NbOverlayService, patch } from '../cdk/overlay/overlay-service';
 import { NbTrigger, NbTriggerStrategy, NbTriggerStrategyBuilderService } from '../cdk/overlay/overlay-trigger';
 import { NbDatepickerContainerComponent } from './datepicker-container.component';
 import { NB_DOCUMENT } from '../../theme.options';
-import { NbCalendarRange, NbCalendarRangeComponent } from '../calendar/calendar-range.component'
+import { NbCalendarRange, NbCalendarRangeComponent } from '../calendar/calendar-range.component';
 import { NbCalendarComponent } from '../calendar/calendar.component';
 import {
   NbCalendarCell,
@@ -48,11 +48,10 @@ import { NbDateService } from '../calendar-kit/services/date.service';
 import { NB_DATE_SERVICE_OPTIONS, NbDatepicker, NbPickerValidatorConfig } from './datepicker.directive';
 import { convertToBoolProperty, NbBooleanInput } from '../helpers';
 
-
 /**
  * The `NbBasePicker` component concentrates overlay manipulation logic.
  * */
-export abstract class NbBasePicker<D, T, P> extends NbDatepicker<T> {
+export abstract class NbBasePicker<D, T, P> extends NbDatepicker<T, D> {
   /**
    * Datepicker date format. Can be used only with date adapters (moment, date-fns) since native date
    * object doesn't support formatting.
@@ -73,17 +72,17 @@ export abstract class NbBasePicker<D, T, P> extends NbDatepicker<T> {
   /**
    * Minimum available date for selection.
    * */
-  abstract min: T;
+  abstract min: D;
 
   /**
    * Maximum available date for selection.
    * */
-  abstract max: T;
+  abstract max: D;
 
   /**
    * Predicate that decides which cells will be disabled.
    * */
-  abstract filter: (T) => boolean;
+  abstract filter: (D) => boolean;
 
   /**
    * Custom day cell component. Have to implement `NbCalendarCell` interface.
@@ -104,7 +103,7 @@ export abstract class NbBasePicker<D, T, P> extends NbDatepicker<T> {
    * Size of the calendar and entire components.
    * Can be 'medium' which is default or 'large'.
    * */
-  abstract size: NbCalendarSize = NbCalendarSize.MEDIUM;
+  abstract size: NbCalendarSize;
 
   /**
    * Depending on this date a particular month is selected in the calendar
@@ -133,6 +132,14 @@ export abstract class NbBasePicker<D, T, P> extends NbDatepicker<T> {
    * False by default.
    * */
   abstract showWeekNumber: boolean;
+
+  /**
+   * Sets first day of the week, it can be 1 if week starts from monday and 0 if from sunday and so on.
+   * `undefined` means that default locale setting will be used.
+   * */
+  abstract firstDayOfWeek: number | undefined;
+
+  readonly formatChanged$: Subject<void> = new Subject();
 
   /**
    * Calendar component class that has to be instantiated inside overlay.
@@ -179,6 +186,8 @@ export abstract class NbBasePicker<D, T, P> extends NbDatepicker<T> {
 
   protected overlayOffset = 8;
 
+  protected adjustment: NbAdjustment = NbAdjustment.COUNTERCLOCKWISE;
+
   protected destroy$ = new Subject<void>();
 
   /**
@@ -189,12 +198,13 @@ export abstract class NbBasePicker<D, T, P> extends NbDatepicker<T> {
 
   protected blur$: Subject<void> = new Subject<void>();
 
-  protected constructor(protected overlay: NbOverlayService,
-                        protected positionBuilder: NbPositionBuilderService,
-                        protected triggerStrategyBuilder: NbTriggerStrategyBuilderService,
-                        protected cfr: ComponentFactoryResolver,
-                        protected dateService: NbDateService<D>,
-                        protected dateServiceOptions,
+  protected constructor(
+    protected overlay: NbOverlayService,
+    protected positionBuilder: NbPositionBuilderService,
+    protected triggerStrategyBuilder: NbTriggerStrategyBuilderService,
+    protected cfr: ComponentFactoryResolver,
+    protected dateService: NbDateService<D>,
+    protected dateServiceOptions,
   ) {
     super();
   }
@@ -239,7 +249,7 @@ export abstract class NbBasePicker<D, T, P> extends NbDatepicker<T> {
     this.subscribeOnTriggers();
   }
 
-  getValidatorConfig(): NbPickerValidatorConfig<T> {
+  getValidatorConfig(): NbPickerValidatorConfig<D> {
     return { min: this.min, max: this.max, filter: this.filter };
   }
 
@@ -294,7 +304,7 @@ export abstract class NbBasePicker<D, T, P> extends NbDatepicker<T> {
       .connectedTo(this.hostRef)
       .position(NbPosition.BOTTOM)
       .offset(this.overlayOffset)
-      .adjustment(NbAdjustment.COUNTERCLOCKWISE);
+      .adjustment(this.adjustment);
   }
 
   protected subscribeOnPositionChange() {
@@ -328,7 +338,7 @@ export abstract class NbBasePicker<D, T, P> extends NbDatepicker<T> {
    * Subscribes on picker value changes and emit data through this.onChange$ subject.
    * */
   protected subscribeOnValueChange() {
-    this.pickerValueChange.subscribe(date => {
+    this.pickerValueChange.subscribe((date) => {
       this.onChange$.next(date);
     });
   }
@@ -347,14 +357,17 @@ export abstract class NbBasePicker<D, T, P> extends NbDatepicker<T> {
     this.picker.visibleDate = this.visibleDate;
     this.picker.showWeekNumber = this.showWeekNumber;
     this.picker.weekNumberSymbol = this.weekNumberSymbol;
+    this.picker.firstDayOfWeek = this.firstDayOfWeek;
   }
 
   protected checkFormat() {
     if (this.dateService.getId() === 'native' && this.format) {
-      throw new Error('Can\'t format native date. To use custom formatting you have to install @nebular/moment or ' +
-        '@nebular/date-fns package and import NbMomentDateModule or NbDateFnsDateModule accordingly.' +
-        'More information at "Formatting issue" ' +
-        'https://akveo.github.io/nebular/docs/components/datepicker/overview#nbdatepickercomponent');
+      throw new Error(
+        "Can't format native date. To use custom formatting you have to install @nebular/moment or " +
+          '@nebular/date-fns package and import NbMomentDateModule or NbDateFnsDateModule accordingly.' +
+          'More information at "Formatting issue" ' +
+          'https://akveo.github.io/nebular/docs/components/datepicker/overview#nbdatepickercomponent',
+      );
     }
 
     const isFormatSet = this.format || (this.dateServiceOptions && this.dateServiceOptions.format);
@@ -367,9 +380,7 @@ export abstract class NbBasePicker<D, T, P> extends NbDatepicker<T> {
 @Component({
   template: '',
 })
-export class NbBasePickerComponent<D, T, P> extends NbBasePicker<D, T, P>
-                                            implements OnInit, OnChanges, AfterViewInit, OnDestroy {
-
+export class NbBasePickerComponent<D, T, P> extends NbBasePicker<D, T, P> implements OnInit, OnChanges, OnDestroy {
   /**
    * Datepicker date format. Can be used only with date adapters (moment, date-fns) since native date
    * object doesn't support formatting.
@@ -391,17 +402,17 @@ export class NbBasePickerComponent<D, T, P> extends NbBasePicker<D, T, P>
   /**
    * Minimum available date for selection.
    * */
-  @Input() min: T;
+  @Input() min: D;
 
   /**
    * Maximum available date for selection.
    * */
-  @Input() max: T;
+  @Input() max: D;
 
   /**
    * Predicate that decides which cells will be disabled.
    * */
-  @Input() filter: (T) => boolean;
+  @Input() filter: (D) => boolean;
 
   /**
    * Custom day cell component. Have to implement `NbCalendarCell` interface.
@@ -461,34 +472,43 @@ export class NbBasePickerComponent<D, T, P> extends NbBasePicker<D, T, P>
   protected _showWeekNumber: boolean = false;
   static ngAcceptInputType_showWeekNumber: NbBooleanInput;
 
+  @Input() firstDayOfWeek: number | undefined;
+
   /**
    * Determines picker overlay offset (in pixels).
    * */
   @Input() overlayOffset = 8;
 
-  constructor(@Inject(NB_DOCUMENT) document,
-              positionBuilder: NbPositionBuilderService,
-              triggerStrategyBuilder: NbTriggerStrategyBuilderService,
-              overlay: NbOverlayService,
-              cfr: ComponentFactoryResolver,
-              dateService: NbDateService<D>,
-              @Optional() @Inject(NB_DATE_SERVICE_OPTIONS) dateServiceOptions,
+  @Input() adjustment: NbAdjustment = NbAdjustment.COUNTERCLOCKWISE;
+  static ngAcceptInputType_adjustment: NbAdjustmentValues;
+
+  constructor(
+    @Inject(NB_DOCUMENT) document,
+    positionBuilder: NbPositionBuilderService,
+    triggerStrategyBuilder: NbTriggerStrategyBuilderService,
+    overlay: NbOverlayService,
+    cfr: ComponentFactoryResolver,
+    dateService: NbDateService<D>,
+    @Optional() @Inject(NB_DATE_SERVICE_OPTIONS) dateServiceOptions,
   ) {
     super(overlay, positionBuilder, triggerStrategyBuilder, cfr, dateService, dateServiceOptions);
   }
 
   ngOnInit() {
     this.checkFormat();
+    this.init$.next();
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes.format && !changes.format.isFirstChange()) {
-      this.checkFormat();
+    if (changes.format) {
+      if (!changes.format.isFirstChange()) {
+        this.checkFormat();
+      }
+      this.formatChanged$.next();
     }
-  }
-
-  ngAfterViewInit() {
-    this.init$.next();
+    if (this.picker) {
+      this.patchWithInputs();
+    }
   }
 
   ngOnDestroy() {
@@ -509,7 +529,7 @@ export class NbBasePickerComponent<D, T, P> extends NbBasePicker<D, T, P>
   protected pickerClass: Type<P>;
 
   protected get pickerValueChange(): Observable<T> {
-    return
+    return undefined;
   }
 
   get value(): T {
@@ -517,8 +537,7 @@ export class NbBasePickerComponent<D, T, P> extends NbBasePicker<D, T, P>
   }
   set value(value: T) {}
 
-  protected writeQueue() {
-  }
+  protected writeQueue() {}
 }
 
 /**
@@ -584,8 +603,11 @@ export class NbDatepickerComponent<D> extends NbBasePickerComponent<D, D, NbCale
   selector: 'nb-rangepicker',
   template: '',
 })
-export class NbRangepickerComponent<D>
-       extends NbBasePickerComponent<D, NbCalendarRange<D>, NbCalendarRangeComponent<D>> {
+export class NbRangepickerComponent<D> extends NbBasePickerComponent<
+  D,
+  NbCalendarRange<D>,
+  NbCalendarRangeComponent<D>
+> {
   protected pickerClass: Type<NbCalendarRangeComponent<D>> = NbCalendarRangeComponent;
 
   /**

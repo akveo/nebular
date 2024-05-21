@@ -4,12 +4,12 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-@import './components/calendar-navigation/calendar-navigation.theme';
-@import './components/calendar-picker/calendar-picker.component.theme';
-@import './components/calendar-days-names/calendar-days-names.component.theme';
-@import './components/calendar-week-number/calendar-week-number.component.theme';
-@import './components/calendar-day-picker/calendar-day-picker.component.theme';
-@import './components/calendar-cell.theme';
+@use 'components/calendar-navigation/calendar-navigation.theme' as *;
+@use 'components/calendar-picker/calendar-picker.component.theme' as *;
+@use 'components/calendar-days-names/calendar-days-names.component.theme' as *;
+@use 'components/calendar-week-number/calendar-week-number.component.theme' as *;
+@use 'components/calendar-day-picker/calendar-day-picker.component.theme' as *;
+@use 'components/calendar-cell.theme' as *;
 
 @mixin nb-calendar-kit-theme() {
   @include nb-calendar-navigation-theme();

@@ -4,8 +4,9 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-@mixin nb-tables-smart-table-theme() {
+@use '../../theming' as *;
 
+@mixin nb-tables-smart-table-theme() {
   ng2-smart-table {
     table tr th,
     table tr th a {
@@ -40,12 +41,14 @@
       }
 
       th a {
-        &:hover, &:active, &:visited {
+        &:hover,
+        &:active,
+        &:visited {
           color: nb-theme(smart-table-header-fg);
           text-decoration: none;
         }
-        &.sort.asc, &.sort.desc {
-
+        &.sort.asc,
+        &.sort.desc {
           font-weight: nb-theme(smart-table-header-font-weight);
 
           &::after {
@@ -79,7 +82,8 @@
     }
 
     tbody tr {
-      &.selected, &:hover {
+      &.selected,
+      &:hover {
         background: nb-theme(smart-table-bg-active) !important;
       }
 
@@ -123,7 +127,9 @@
       // fix for 100% height child
       height: 1px;
 
-      ng2-st-tbody-edit-delete, ng2-st-tbody-create-cancel, ng2-st-actions {
+      ng2-st-tbody-edit-delete,
+      ng2-st-tbody-create-cancel,
+      ng2-st-actions {
         display: flex;
         height: 100%;
       }
@@ -139,7 +145,7 @@
         color: nb-theme(smart-table-fg-secondary);
 
         &:not(:last-child) {
-         border-right: 1px solid nb-theme(smart-table-separator);
+          border-right: 1px solid nb-theme(smart-table-separator);
         }
 
         &:hover {
@@ -176,12 +182,13 @@
       justify-content: center;
       margin-top: 1.25rem;
 
-
       .ng2-smart-pagination {
         display: flex;
         padding: 0;
 
-        .page-item.disabled .page-link, .page-item.disabled .page-link:focus, .page-item.disabled .page-link:hover {
+        .page-item.disabled .page-link,
+        .page-item.disabled .page-link:focus,
+        .page-item.disabled .page-link:hover {
           background-color: nb-theme(smart-table-paging-hover);
           color: nb-theme(smart-table-paging-disabled-text-color);
         }
@@ -202,12 +209,14 @@
             @include nb-rtl(border-left, 1px solid nb-theme(smart-table-separator));
           }
 
-          a.page-link-prev, a.page-link-next {
+          a.page-link-prev,
+          a.page-link-next {
             font-size: nb-theme(smart-table-paging-font-size);
             line-height: nb-theme(smart-table-paging-line-height);
           }
 
-          a, > span {
+          a,
+          > span {
             font-size: nb-theme(smart-table-paging-font-size);
             line-height: nb-theme(smart-table-paging-line-height);
             background-color: transparent;
@@ -229,33 +238,40 @@
           }
 
           &:first-child {
-            a, > span {
+            a,
+            > span {
               @include nb-ltr() {
                 border-top-left-radius: nb-theme(smart-table-border-radius);
                 border-bottom-left-radius: nb-theme(smart-table-border-radius);
-              };
+              }
               @include nb-rtl() {
                 border-top-right-radius: nb-theme(smart-table-border-radius);
                 border-bottom-right-radius: nb-theme(smart-table-border-radius);
-              };
+              }
             }
           }
 
           &:last-child {
-            a, > span {
+            a,
+            > span {
               @include nb-ltr() {
                 border-top-right-radius: nb-theme(smart-table-border-radius);
                 border-bottom-right-radius: nb-theme(smart-table-border-radius);
-              };
+              }
               @include nb-rtl() {
                 border-top-left-radius: nb-theme(smart-table-border-radius);
                 border-bottom-left-radius: nb-theme(smart-table-border-radius);
-              };
+              }
             }
           }
 
           &.active {
-            a, a:hover, a:focus, > span, > span:hover, > span:focus {
+            a,
+            a:hover,
+            a:focus,
+            > span,
+            > span:hover,
+            > span:focus {
               color: nb-theme(smart-table-paging-fg-active);
               background-color: nb-theme(smart-table-paging-bg-active);
             }

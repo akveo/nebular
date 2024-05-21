@@ -4,6 +4,8 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
+@use '../../theme/styles/theming' as *;
+
 @mixin b-btn-hero($status) {
   $left-color: nb-theme(button-hero-#{$status}-left-background-color);
   $right-color: nb-theme(button-hero-#{$status}-right-background-color);

@@ -148,7 +148,7 @@ export class NbOverlayContainerComponent {
       this.portalOutlet.detach();
     }
     this.attachStringContent(null);
-    this.isAttached = false
+    this.isAttached = false;
   }
 
   protected createChildInjector(cfr: ComponentFactoryResolver): NbPortalInjector {

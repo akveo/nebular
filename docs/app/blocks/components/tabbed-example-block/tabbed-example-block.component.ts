@@ -25,7 +25,7 @@ export class NgdTabbedExampleBlockComponent {
   examples = [];
 
   @Input()
-  set content({ files }) {
+  set content({ files }: { files: string[] }) {
     forkJoin(files.map(file => this.load(file)))
       .subscribe(files => {
         (files[0] as any).active = true;

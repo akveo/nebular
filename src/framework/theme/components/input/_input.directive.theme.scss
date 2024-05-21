@@ -4,24 +4,25 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-@import './input-statuses';
-@import './input-sizes';
-@import './input-shapes';
+@use '../../styles/theming' as *;
+@use '../form-field/form-field.component.theme' as form-field-theme;
+@use 'input-statuses';
+@use 'input-sizes';
+@use 'input-shapes';
 
 @mixin nb-input-theme() {
-
   [nbInput] {
     @include nb-input-core-theme();
-    @include input-statuses();
-    @include input-sizes();
-    @include input-shapes();
+    @include input-statuses.input-statuses();
+    @include input-sizes.input-sizes();
+    @include input-shapes.input-shapes();
   }
 
-  @include nb-form-field-root-component('[nbInput]');
+  @include form-field-theme.nb-form-field-root-component('[nbInput]');
 
   @each $size in nb-get-sizes() {
-    @include nb-form-field-with-prefix('[nbInput].size-#{$size}', $size);
-    @include nb-form-field-with-suffix('[nbInput].size-#{$size}', $size);
+    @include form-field-theme.nb-form-field-with-prefix('[nbInput].size-#{$size}', $size);
+    @include form-field-theme.nb-form-field-with-suffix('[nbInput].size-#{$size}', $size);
   }
 }
 

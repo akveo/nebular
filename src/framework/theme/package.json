@@ -1,6 +1,6 @@
 {
   "name": "@nebular/theme",
-  "version": "7.0.0",
+  "version": "13.0.0",
   "description": "@nebular/theme",
   "author": "akveo",
   "license": "MIT",
@@ -21,17 +21,69 @@
     "nebular"
   ],
   "peerDependencies": {
-    "@angular/animations": "^11.0.0",
-    "@angular/common": "^11.0.0",
-    "@angular/core": "^11.0.0",
-    "@angular/router": "^11.0.0",
-    "@angular/cdk": "^11.0.0",
-    "rxjs": "^6.5.4",
-    "tslib": "^2.0.0"
+    "@angular/animations": "^17.1.0",
+    "@angular/common": "^17.1.0",
+    "@angular/core": "^17.1.0",
+    "@angular/router": "^17.1.0",
+    "@angular/cdk": "^17.1.0",
+    "rxjs": "^6.5.3 || ^7.4.0"
   },
   "dependencies": {
-    "intersection-observer": "0.7.0"
+    "tslib": "^2.3.0"
   },
   "schematics": "./schematics/collection.json",
-  "sideEffects": false
+  "sideEffects": false,
+  "exports": {
+    "./styles/core/mixins": {
+      "sass": "./styles/core/_mixins.scss"
+    },
+    "./styles/core/variants": {
+      "sass": "./styles/core/_variants.scss"
+    },
+    "./styles/global/typography/typography": {
+      "sass": "./styles/global/typography/_typography.scss"
+    },
+    "./styles/global/breakpoints": {
+      "sass": "./styles/global/_breakpoints.scss"
+    },
+    "./styles/prebuilt/corporate.css": {
+      "style": "./styles/prebuilt/corporate.css"
+    },
+    "./styles/prebuilt/cosmic.css": {
+      "style": "./styles/prebuilt/cosmic.css"
+    },
+    "./styles/prebuilt/dark.css": {
+      "style": "./styles/prebuilt/dark.css"
+    },
+    "./styles/prebuilt/default.css": {
+      "style": "./styles/prebuilt/default.css"
+    },
+    "./styles/themes/corporate": {
+      "sass": "./styles/themes/_corporate.scss"
+    },
+    "./styles/themes/cosmic": {
+      "sass": "./styles/themes/_cosmic.scss"
+    },
+    "./styles/themes/dark": {
+      "sass": "./styles/themes/_dark.scss"
+    },
+    "./styles/themes/default": {
+      "sass": "./styles/themes/_default.scss"
+    },
+    "./styles/themes/mapping": {
+      "sass": "./styles/themes/_mapping.scss"
+    },
+    "./styles/all": {
+      "sass": "./styles/_all.scss"
+    },
+    "./styles/globals": {
+      "sass": "./styles/_globals.scss"
+    },
+    "./styles/themes": {
+      "sass": "./styles/_themes.scss"
+    },
+    "./styles/theming": {
+      "sass": "./styles/_theming.scss"
+    }
+  }
 }

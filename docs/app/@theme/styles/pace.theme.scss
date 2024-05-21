@@ -4,8 +4,9 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
- @mixin ngd-pace-theme() {
+@use 'themes' as *;
 
+@mixin ngd-pace-theme() {
   .pace .pace-progress {
     background: nb-theme(color-fg-highlight);
   }

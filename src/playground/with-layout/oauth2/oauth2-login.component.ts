@@ -5,7 +5,7 @@
  */
 
 import { Component, OnDestroy } from '@angular/core';
-import { NbAuthOAuth2Token, NbAuthResult, NbAuthService } from '@nebular/auth';
+import { NbAuthOAuth2Token, NbAuthResult, NbAuthService, NbAuthToken } from '@nebular/auth';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 
@@ -17,7 +17,7 @@ import { Subject } from 'rxjs';
         <nb-card>
           <nb-card-body>
             <p>Current User Authenticated: {{ !!token }}</p>
-            <p>Current User Token: {{ token|json }}</p>
+            <p>Current User Token: {{ token | json }}</p>
 
             <button nbButton status="success" *ngIf="!token" (click)="login()">Sign In with Google</button>
             <button nbButton status="warning" *ngIf="token" (click)="logout()">Sign Out</button>
@@ -28,34 +28,34 @@ import { Subject } from 'rxjs';
   `,
 })
 export class OAuth2LoginComponent implements OnDestroy {
-
   token: NbAuthOAuth2Token;
 
   private destroy$ = new Subject<void>();
 
   constructor(private authService: NbAuthService) {
-    this.authService.onTokenChange()
+    this.authService
+      .onTokenChange()
       .pipe(takeUntil(this.destroy$))
-      .subscribe((token: NbAuthOAuth2Token) => {
+      .subscribe((token: NbAuthToken) => {
         this.token = null;
         if (token && token.isValid()) {
-          this.token = token;
+          this.token = token as NbAuthOAuth2Token;
         }
       });
   }
 
   login() {
-    this.authService.authenticate('google')
+    this.authService
+      .authenticate('google')
       .pipe(takeUntil(this.destroy$))
-      .subscribe((authResult: NbAuthResult) => {
-      });
+      .subscribe((authResult: NbAuthResult) => {});
   }
 
   logout() {
-    this.authService.logout('google')
+    this.authService
+      .logout('google')
       .pipe(takeUntil(this.destroy$))
-      .subscribe((authResult: NbAuthResult) => {
-      });
+      .subscribe((authResult: NbAuthResult) => {});
   }
 
   ngOnDestroy(): void {

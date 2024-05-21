@@ -1,27 +1,32 @@
 import {
+  AfterContentChecked,
   AfterViewInit,
   ChangeDetectorRef,
+  ContentChildren,
   Directive,
   ElementRef,
+  EmbeddedViewRef,
   HostBinding,
   Input,
   NgZone,
+  QueryList,
   Renderer2,
 } from '@angular/core';
 
 import { NbStatusService } from '../../services/status.service';
-import { convertToBoolProperty, firstChildNotComment, lastChildNotComment, NbBooleanInput } from '../helpers';
+import { convertToBoolProperty, NbBooleanInput } from '../helpers';
 import { NbComponentSize } from '../component-size';
 import { NbComponentOrCustomStatus } from '../component-status';
 import { NbComponentShape } from '../component-shape';
+import { NbIconComponent } from '../icon/icon.component';
 
 export type NbButtonAppearance = 'filled' | 'outline' | 'ghost' | 'hero';
 
 export type NbButtonProperties = Pick<NbButton, 'appearance' | 'size' | 'shape' | 'status' | 'disabled'> & Object;
 
 @Directive()
-// tslint:disable-next-line:directive-class-suffix
-export abstract class NbButton implements AfterViewInit {
+// eslint-disable-next-line @angular-eslint/directive-class-suffix
+export abstract class NbButton implements AfterContentChecked, AfterViewInit {
   /**
    * Button size, available sizes:
    * `tiny`, `small`, `medium`, `large`, `giant`
@@ -180,19 +185,9 @@ export abstract class NbButton implements AfterViewInit {
     return this.shape === 'semi-round';
   }
 
-  @HostBinding('class.icon-start')
-  get iconLeft(): boolean {
-    const el = this.hostElement.nativeElement;
-    const icon = this.iconElement;
-    return !!(icon && firstChildNotComment(el) === icon);
-  }
+  @HostBinding('class.icon-start') iconLeft = false;
 
-  @HostBinding('class.icon-end')
-  get iconRight(): boolean {
-    const el = this.hostElement.nativeElement;
-    const icon = this.iconElement;
-    return !!(icon && lastChildNotComment(el) === icon);
-  }
+  @HostBinding('class.icon-end') iconRight = false;
 
   @HostBinding('class')
   get additionalClasses(): string[] {
@@ -202,6 +197,8 @@ export abstract class NbButton implements AfterViewInit {
     return [];
   }
 
+  @ContentChildren(NbIconComponent, { read: ElementRef }) icons: QueryList<ElementRef>;
+
   protected constructor(
     protected renderer: Renderer2,
     protected hostElement: ElementRef<HTMLElement>,
@@ -209,6 +206,14 @@ export abstract class NbButton implements AfterViewInit {
     protected zone: NgZone,
     protected statusService: NbStatusService,
   ) {
+  }
+
+  ngAfterContentChecked() {
+    const firstNode = this.nodes[0];
+    const lastNode = this.nodes[this.nodes.length - 1];
+
+    this.iconLeft = this.isIconExist(firstNode);
+    this.iconRight = this.isIconExist(lastNode);
   }
 
   ngAfterViewInit() {
@@ -239,5 +244,13 @@ export abstract class NbButton implements AfterViewInit {
   get iconElement() {
     const el = this.hostElement.nativeElement;
     return el.querySelector('nb-icon');
+  }
+
+  protected get nodes(): Node[] {
+    return (this.cd as EmbeddedViewRef<any>).rootNodes.filter((child: Node) => child.nodeType !== Node.COMMENT_NODE);
+  }
+
+  protected isIconExist(node: Node): boolean {
+    return this.icons.some((item) => item.nativeElement === node);
   }
 }

@@ -1,0 +1,7 @@
+@use '../../../theme/styles/themes/dark';
+@use '../../../theme/styles/theming' as *;
+@use '../globals' as *;
+
+$nb-enabled-themes: (dark);
+
+@include nb-install();

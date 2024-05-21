@@ -4,7 +4,6 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-
 import { Injectable } from '@angular/core';
 import { NbAuthResult, NbAuthStrategyClass, NbAuthStrategyOptions } from '@nebular/auth';
 import { from, Observable } from 'rxjs';
@@ -13,13 +12,11 @@ import { catchError, switchMap } from 'rxjs/operators';
 import { NbFirebaseBaseStrategy } from '../base/firebase-base.strategy';
 import { NbFirebaseIdentityProviderStrategyOptions } from '../base/firebase-identity-provider-strategy.options';
 
-import firebase from 'firebase/app';
-import 'firebase/auth';
-
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/auth';
 
 @Injectable()
 export class NbFirebaseFacebookStrategy extends NbFirebaseBaseStrategy {
-
   protected defaultOptions: NbFirebaseIdentityProviderStrategyOptions = new NbFirebaseIdentityProviderStrategyOptions();
 
   static setup(options: NbFirebaseIdentityProviderStrategyOptions): [NbAuthStrategyClass, NbAuthStrategyOptions] {
@@ -33,10 +30,9 @@ export class NbFirebaseFacebookStrategy extends NbFirebaseBaseStrategy {
     scopes.forEach((scope) => provider.addScope(scope));
     provider.setCustomParameters(this.getOption('customParameters'));
 
-    return from(this.afAuth.signInWithPopup(provider))
-      .pipe(
-        switchMap((res) => this.processSuccess(res, module)),
-        catchError(error => this.processFailure(error, module)),
-      );
+    return from(this.afAuth.signInWithPopup(provider)).pipe(
+      switchMap((res) => this.processSuccess(res, module)),
+      catchError((error) => this.processFailure(error, module)),
+    );
   }
 }

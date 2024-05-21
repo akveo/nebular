@@ -4,10 +4,11 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
+@use '../../styles/theming' as *;
+@use '../../styles/global/breakpoints' as *;
+
 @mixin nb-sidebar-theme() {
-
   nb-sidebar {
-
     background-color: nb-theme(sidebar-background-color);
     box-shadow: nb-theme(sidebar-shadow);
     color: nb-theme(sidebar-text-color);
@@ -33,9 +34,10 @@
       }
 
       @include nb-scrollbars(
-          nb-theme(sidebar-scrollbar-color),
-          nb-theme(sidebar-scrollbar-background-color),
-          nb-theme(sidebar-scrollbar-width));
+        nb-theme(sidebar-scrollbar-color),
+        nb-theme(sidebar-scrollbar-background-color),
+        nb-theme(sidebar-scrollbar-width)
+      );
     }
 
     // TODO: width used to use transition on width
@@ -52,7 +54,8 @@
         overflow: hidden;
       }
 
-      nb-sidebar-header,  nb-sidebar-footer {
+      nb-sidebar-header,
+      nb-sidebar-footer {
         width: 0;
         padding: 0;
         overflow: hidden;
@@ -84,7 +87,9 @@
         }
 
         > .menu-items > .menu-item > a {
-          span, nb-badge, .expand-state {
+          span,
+          nb-badge,
+          .expand-state {
             display: none;
           }
         }
@@ -112,7 +117,6 @@
             display: none;
           }
         }
-
       }
       // we need to pull the content
       &.left.fixed ~ .content {
@@ -139,7 +143,7 @@
       }
 
       &.fixed.end ~ .content {
-        @include nb-ltr(margin-right,nb-theme(sidebar-width-compact));
+        @include nb-ltr(margin-right, nb-theme(sidebar-width-compact));
         @include nb-rtl(margin-left, nb-theme(sidebar-width-compact));
       }
 
@@ -182,7 +186,7 @@
     }
 
     nb-menu {
-      margin: 0 -#{nb-theme(sidebar-padding)} -#{nb-theme(sidebar-padding)};
+      margin: 0 calc(#{nb-theme(sidebar-padding)} * -1) calc(#{nb-theme(sidebar-padding)} * -1);
     }
   }
 }

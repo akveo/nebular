@@ -1,8 +1,7 @@
-@import '../../../@theme/styles/themes';
-
+@use '../../../@theme/styles/themes' as *;
+@use '../../../../../src/framework/theme/styles/globals' as *;
 
 @include nb-install-component() {
-
   $title-fg: nb-theme(color-fg-heading);
   $text-fg: nb-theme(color-fg-text);
   $arrow-fg: nb-theme(color-fg-highlight);

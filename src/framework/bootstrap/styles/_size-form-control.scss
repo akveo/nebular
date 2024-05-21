@@ -4,6 +4,8 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
+@use '../../theme/styles/theming' as *;
+
 @mixin size($size) {
   font-size: nb-theme(input-#{$size}-text-font-size);
   font-weight: nb-theme(input-#{$size}-text-font-weight);

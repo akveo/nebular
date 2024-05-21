@@ -4,17 +4,20 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { Subject } from 'rxjs';
 import createSpy = jasmine.createSpy;
 
-import { NbThemeModule } from '../../theme.module';
-import { NbLayoutModule } from '../layout/layout.module';
-import { NbAdjustment, NbPosition } from '../cdk/overlay/overlay-position';
-import { NbDynamicOverlayHandler } from '../cdk/overlay/dynamic/dynamic-overlay-handler';
-import { NbOverlayContent } from '../cdk/overlay/overlay-service';
-import { NbRenderableContainer } from '../cdk/overlay/overlay-container';
-import { NbTrigger } from '../cdk/overlay/overlay-trigger';
-import { NbPopoverDirective } from './popover.directive';
-import { NbPopoverComponent } from './popover.component';
-import { NbPopoverModule } from './popover.module';
-import { NbOverlayConfig } from '../cdk/overlay/mapping';
+import {
+  NbThemeModule,
+  NbLayoutModule,
+  NbAdjustment,
+  NbPosition,
+  NbDynamicOverlayHandler,
+  NbOverlayContent,
+  NbRenderableContainer,
+  NbTrigger,
+  NbPopoverDirective,
+  NbPopoverComponent,
+  NbPopoverModule,
+  NbOverlayConfig,
+} from '@nebular/theme';
 
 @Component({
   selector: 'nb-popover-component-content-test',
@@ -46,12 +49,14 @@ export class NbPopoverDefaultTestComponent {
   template: `
     <nb-layout>
       <nb-layout-column>
-        <button #button [nbPopover]="content"
+        <button
+          #button
+          [nbPopover]="content"
           [nbPopoverTrigger]="trigger"
           [nbPopoverPlacement]="position"
           [nbPopoverAdjustment]="adjustment"
-          [nbPopoverContext]="context">
-        </button>
+          [nbPopoverContext]="context"
+        ></button>
       </nb-layout-column>
     </nb-layout>
 
@@ -106,9 +111,9 @@ export class NbDynamicOverlayHandlerMock {
   _adjustment: NbAdjustment = NbAdjustment.NOOP;
   _offset = 15;
   _overlayConfig: NbOverlayConfig = {};
+  _disabled = false;
 
-  constructor() {
-  }
+  constructor() {}
 
   host(host: ElementRef) {
     this._host = host;
@@ -155,6 +160,11 @@ export class NbDynamicOverlayHandlerMock {
     return this;
   }
 
+  disabled(disabled: boolean) {
+    this._disabled = disabled;
+    return this;
+  }
+
   build() {
     return dynamicOverlay;
   }
@@ -163,14 +173,11 @@ export class NbDynamicOverlayHandlerMock {
     return dynamicOverlay;
   }
 
-  connect() {
-  }
+  connect() {}
 
-  disconnect() {
-  }
+  disconnect() {}
 
-  destroy() {
-  }
+  destroy() {}
 }
 
 const TEST_COMPONENTS = [
@@ -184,33 +191,27 @@ const TEST_COMPONENTS = [
   imports: [NbLayoutModule, NbPopoverModule],
   exports: [...TEST_COMPONENTS],
   declarations: [...TEST_COMPONENTS],
-  entryComponents: [NbPopoverComponentContentTestComponent],
 })
-class PopoverTestModule { }
+class PopoverTestModule {}
 
 describe('Directive: NbPopoverDirective', () => {
-
   const overlayHandler = new NbDynamicOverlayHandlerMock();
 
-  beforeEach(waitForAsync(() => {
-    TestBed.resetTestingModule();
-    TestBed.configureTestingModule({
-      imports: [
-        RouterTestingModule.withRoutes([]),
-        NbThemeModule.forRoot(),
-        PopoverTestModule,
-      ],
-    });
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.resetTestingModule();
+      TestBed.configureTestingModule({
+        imports: [RouterTestingModule.withRoutes([]), NbThemeModule.forRoot(), PopoverTestModule],
+      });
+    }),
+  );
 
   describe('smoke ', () => {
-
     let fixture: ComponentFixture<any>;
 
     afterEach(() => {
       fixture.destroy();
     });
-
 
     it('should render string', () => {
       fixture = TestBed.createComponent(NbPopoverDefaultTestComponent);
@@ -242,7 +243,6 @@ describe('Directive: NbPopoverDirective', () => {
     });
 
     it('should render different content type', () => {
-
       fixture = TestBed.createComponent(NbPopoverBindingsTestComponent);
       fixture.detectChanges();
 
@@ -314,30 +314,22 @@ describe('Directive: NbPopoverDirective', () => {
 
       expect(popover.isShown).toEqual(true);
     });
-
   });
 
   describe('mocked services', () => {
-
-    beforeEach(waitForAsync(() => {
-      TestBed.resetTestingModule();
-      TestBed.configureTestingModule({
-        imports: [
-          RouterTestingModule.withRoutes([]),
-          NbThemeModule.forRoot(),
-          PopoverTestModule,
-        ],
-      })
-        .overrideDirective(NbPopoverDirective, {
+    beforeEach(
+      waitForAsync(() => {
+        TestBed.resetTestingModule();
+        TestBed.configureTestingModule({
+          imports: [RouterTestingModule.withRoutes([]), NbThemeModule.forRoot(), PopoverTestModule],
+        }).overrideDirective(NbPopoverDirective, {
           set: {
-            providers: [
-              { provide: NbDynamicOverlayHandler, useValue: overlayHandler },
-            ],
+            providers: [{ provide: NbDynamicOverlayHandler, useValue: overlayHandler }],
           },
         });
-    }));
+      }),
+    );
     describe('default popover', () => {
-
       let fixture: ComponentFixture<NbPopoverDefaultTestComponent>;
 
       afterEach(() => {
@@ -397,7 +389,6 @@ describe('Directive: NbPopoverDirective', () => {
         expect(hideSpy).toHaveBeenCalledTimes(1);
         expect(toggleSpy).toHaveBeenCalledTimes(0);
 
-
         fixture.componentInstance.popover.toggle();
         fixture.detectChanges();
 
@@ -419,7 +410,6 @@ describe('Directive: NbPopoverDirective', () => {
     });
 
     describe('binding popover', () => {
-
       let fixture: ComponentFixture<NbPopoverBindingsTestComponent>;
 
       afterEach(() => {
@@ -427,7 +417,6 @@ describe('Directive: NbPopoverDirective', () => {
       });
 
       it('should rebuild', () => {
-
         const componentSpy = spyOn(overlayHandler, 'componentType').and.callThrough();
         const hostSpy = spyOn(overlayHandler, 'host').and.callThrough();
         const positionSpy = spyOn(overlayHandler, 'position').and.callThrough();
@@ -493,7 +482,6 @@ describe('Directive: NbPopoverDirective', () => {
     });
 
     describe('instance popover', () => {
-
       let fixture: ComponentFixture<NbPopoverInstanceTestComponent>;
 
       afterEach(() => {
@@ -501,7 +489,6 @@ describe('Directive: NbPopoverDirective', () => {
       });
 
       it('should rebuild', () => {
-
         const componentSpy = spyOn(overlayHandler, 'componentType').and.callThrough();
         const hostSpy = spyOn(overlayHandler, 'host').and.callThrough();
         const positionSpy = spyOn(overlayHandler, 'position').and.callThrough();
@@ -541,7 +528,6 @@ describe('Directive: NbPopoverDirective', () => {
         expect(rebuildSpy).toHaveBeenCalledTimes(2);
       });
 
-
       it('should accept different content type', () => {
         const contentSpy = spyOn(overlayHandler, 'content').and.callThrough();
 
@@ -566,7 +552,6 @@ describe('Directive: NbPopoverDirective', () => {
         expect(contentSpy).toHaveBeenCalledTimes(5);
         expect(contentSpy).toHaveBeenCalledWith(fixture.componentInstance.template);
       });
-
     });
   });
 });

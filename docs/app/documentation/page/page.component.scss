@@ -1,4 +1,5 @@
-@import '../../@theme/styles/themes';
+@use '../../@theme/styles/themes' as *;
+@use '../../../../src/framework/theme/styles/globals' as *;
 
 @include nb-install-component() {
   display: flex;
@@ -31,12 +32,11 @@
     }
 
     ::ng-deep nb-card {
-
       nb-card-body {
         padding: 2rem 1rem;
 
         > *:last-child {
-          margin-bottom: 0!important;
+          margin-bottom: 0 !important;
 
           *:last-child {
             margin-bottom: 0 !important;
@@ -44,7 +44,12 @@
         }
       }
 
-      h1, h2, h3, h4, h5, h6 {
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
         margin-bottom: 1.25rem;
 
         &:first-child {
@@ -56,7 +61,9 @@
         }
       }
 
-      h1, h2, h3 {
+      h1,
+      h2,
+      h3 {
         font-family: nb-theme(text-heading-4-font-family);
         font-size: nb-theme(text-heading-4-font-size);
         font-weight: nb-theme(text-heading-4-font-weight);
@@ -265,9 +272,10 @@
       padding: 1.5rem 1.5rem 0;
 
       @include nb-scrollbars(
-          nb-theme(sidebar-scrollbar-color),
-          nb-theme(sidebar-scrollbar-background-color),
-          nb-theme(sidebar-scrollbar-width));
+        nb-theme(sidebar-scrollbar-color),
+        nb-theme(sidebar-scrollbar-background-color),
+        nb-theme(sidebar-scrollbar-width)
+      );
     }
   }
 }

@@ -4,6 +4,8 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
+@use '../../../../styles/theming' as *;
+
 @mixin nb-calendar-days-names-theme() {
   nb-calendar-days-names {
     background: nb-theme(calendar-weekday-background);
@@ -14,11 +16,11 @@
     @include nb-ltr() {
       padding-left: nb-theme(calendar-picker-padding-start);
       padding-right: nb-theme(calendar-picker-padding-end);
-    };
+    }
     @include nb-rtl() {
       padding-left: nb-theme(calendar-picker-padding-end);
       padding-right: nb-theme(calendar-picker-padding-start);
-    };
+    }
 
     .day {
       width: nb-theme(calendar-weekday-width);

@@ -4,6 +4,8 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
+@use '../../styles/theming' as *;
+
 @mixin nb-actions-theme() {
   nb-actions {
     background-color: nb-theme(actions-background-color);
@@ -24,7 +26,6 @@
       }
     }
   }
-
 
   nb-action {
     $divider: nb-theme(actions-divider-width) nb-theme(actions-divider-style) nb-theme(actions-divider-color);

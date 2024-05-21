@@ -1,3 +1,5 @@
+@use '../../../styles/theming' as *;
+
 @mixin nd-flip-card-theme {
   .flip-button {
     line-height: nb-theme(card-text-line-height);

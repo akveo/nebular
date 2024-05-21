@@ -11,7 +11,6 @@ import {
   NbToggleComponent,
 } from '@nebular/theme';
 
-
 describe('Component: NbToggle', () => {
   let toggle: NbToggleComponent;
   let fixture: ComponentFixture<NbToggleComponent>;
@@ -86,12 +85,7 @@ describe('Component: NbToggle', () => {
   });
 
   describe('state animation', () => {
-
     beforeEach(() => {
-      TestBed.inject(NbLayoutDirectionService).setDirection(NbLayoutDirection.LTR);
-    });
-
-    afterAll(() => {
       TestBed.inject(NbLayoutDirectionService).setDirection(NbLayoutDirection.LTR);
     });
 
@@ -144,16 +138,12 @@ describe('Component: NbToggle with form control', () => {
     fixture = TestBed.createComponent(ToggleWithFormControlComponent);
     fixture.detectChanges();
 
-    toggleComponent = fixture.debugElement.query(
-      By.directive(NbToggleComponent),
-    );
+    toggleComponent = fixture.debugElement.query(By.directive(NbToggleComponent));
 
     toggleInstance = toggleComponent.componentInstance;
     testComponent = fixture.debugElement.componentInstance;
 
-    inputElement = <HTMLInputElement>(
-      toggleComponent.nativeElement.querySelector('input')
-    );
+    inputElement = <HTMLInputElement>toggleComponent.nativeElement.querySelector('input');
   });
 
   it('Toggling form control `disabled` state properly applied', () => {

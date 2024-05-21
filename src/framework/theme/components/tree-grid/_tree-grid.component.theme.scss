@@ -4,7 +4,8 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-@import './tree-grid-sort.component.theme';
+@use 'tree-grid-sort.component.theme' as tree-grid-sort-theme;
+@use '../../styles/theming' as *;
 
 @mixin nb-tree-grid-theme() {
   $border-width: nb-theme(tree-grid-cell-border-width);
@@ -58,7 +59,8 @@
     }
   }
 
-  nb-tree-grid-row-toggle, nb-sort-icon {
+  nb-tree-grid-row-toggle,
+  nb-sort-icon {
     nb-icon {
       font-size: inherit;
       vertical-align: middle;
@@ -66,5 +68,5 @@
     }
   }
 
-  @include nb-tree-grid-sort-header-theme();
+  @include tree-grid-sort-theme.nb-tree-grid-sort-header-theme();
 }

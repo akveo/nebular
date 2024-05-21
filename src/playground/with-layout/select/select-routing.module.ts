@@ -5,7 +5,7 @@
  */
 
 import { NgModule } from '@angular/core';
-import { RouterModule, Route} from '@angular/router';
+import { RouterModule, Route } from '@angular/router';
 import { SelectCleanComponent } from './select-clean.component';
 import { SelectDisabledComponent } from './select-disabled.component';
 import { SelectFormComponent } from './select-form.component';
@@ -22,6 +22,8 @@ import { SelectStatusComponent } from './select-status.component';
 import { SelectInteractiveComponent } from './select-interactive.component';
 import { SelectTestComponent } from './select-test.component';
 import { SelectCompareWithComponent } from './select-compare-with.component';
+import { SelectIconComponent } from './select-icon.component';
+import { SelectAutocompleteShowcaseComponent } from './select-autocomplete-showcase.component';
 
 const routes: Route[] = [
   {
@@ -88,10 +90,18 @@ const routes: Route[] = [
     path: 'select-compare-with.component',
     component: SelectCompareWithComponent,
   },
+  {
+    path: 'select-icon.component',
+    component: SelectIconComponent,
+  },
+  {
+    path: 'select-autocomplete-showcase.component',
+    component: SelectAutocompleteShowcaseComponent,
+  },
 ];
 
 @NgModule({
-  imports: [ RouterModule.forChild(routes) ],
-  exports: [ RouterModule ],
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule],
 })
 export class SelectRoutingModule {}

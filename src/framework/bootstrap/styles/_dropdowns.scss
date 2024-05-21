@@ -3,8 +3,9 @@
  * Copyright Akveo. All Rights Reserved.
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
-@import 'outline-buttons';
 
+@use '../../theme/styles/theming' as *;
+@use 'outline-buttons';
 
 @mixin nb-b-dropdowns-theme() {
   .dropdown-menu {

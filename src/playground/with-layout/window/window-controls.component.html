@@ -1,0 +1,11 @@
+<nb-card>
+  <nb-card-body>
+    <p class="subtitle config-title">Buttons config:</p>
+    <nb-checkbox [(checked)]="minimize">Minimize</nb-checkbox>
+    <nb-checkbox [(checked)]="maximize">Maximize</nb-checkbox>
+    <nb-checkbox [(checked)]="fullScreen">Full Screen</nb-checkbox>
+    <nb-checkbox [(checked)]="close">Close</nb-checkbox>
+
+    <button (click)="openWindow()" nbButton class="open-window">Open window</button>
+  </nb-card-body>
+</nb-card>

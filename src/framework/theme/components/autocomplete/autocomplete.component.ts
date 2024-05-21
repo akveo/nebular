@@ -42,7 +42,6 @@ let lastAutocompleteId: number = 0;
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NbAutocompleteComponent<T> implements AfterContentInit, OnDestroy {
-
   protected destroy$: Subject<void> = new Subject<void>();
 
   /**
@@ -54,7 +53,6 @@ export class NbAutocompleteComponent<T> implements AfterContentInit, OnDestroy {
    * Component scoped id for aria attributes.
    * */
   id: string = `nb-autocomplete-${lastAutocompleteId++}`;
-
 
   /**
    * @docs-private
@@ -83,7 +81,7 @@ export class NbAutocompleteComponent<T> implements AfterContentInit, OnDestroy {
   /**
    * Function passed as input to process each string option value before render.
    * */
-  @Input() handleDisplayFn: ((value: any) => string);
+  @Input() handleDisplayFn: (value: any) => string;
 
   /**
    * Autocomplete size, available sizes:
@@ -107,13 +105,25 @@ export class NbAutocompleteComponent<T> implements AfterContentInit, OnDestroy {
   @Input() optionsPanelClass: string | string[];
 
   /**
+   * Specifies width (in pixels) to be set on `nb-option`s container (`nb-option-list`)
+   * */
+  @Input()
+  get optionsWidth(): number {
+    return this._optionsWidth ?? this.hostWidth;
+  }
+  set optionsWidth(value: number) {
+    this._optionsWidth = value;
+  }
+  protected _optionsWidth: number | undefined;
+
+  /**
    * Will be emitted when selected value changes.
    * */
   @Output() selectedChange: EventEmitter<T> = new EventEmitter();
 
   /**
-    * List of `NbOptionComponent`'s components passed as content.
-  * */
+   * List of `NbOptionComponent`'s components passed as content.
+   * */
   @ContentChildren(NbOptionComponent, { descendants: true }) options: QueryList<NbOptionComponent<T>>;
 
   /**
@@ -124,9 +134,7 @@ export class NbAutocompleteComponent<T> implements AfterContentInit, OnDestroy {
   constructor(protected cd: ChangeDetectorRef) {}
 
   ngAfterContentInit() {
-    this.options.changes
-      .pipe(takeUntil(this.destroy$))
-      .subscribe(() => this.cd.detectChanges());
+    this.options.changes.pipe(takeUntil(this.destroy$)).subscribe(() => this.cd.detectChanges());
   }
 
   ngOnDestroy() {
@@ -169,5 +177,4 @@ export class NbAutocompleteComponent<T> implements AfterContentInit, OnDestroy {
   get giant(): boolean {
     return this.size === 'giant';
   }
-
 }

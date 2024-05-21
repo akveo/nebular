@@ -4,6 +4,8 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
+@use '../../styles/theming' as *;
+
 @mixin nb-option-list-theme() {
   nb-option-list {
     background-color: nb-theme(option-list-background-color);
@@ -22,9 +24,8 @@
       overflow: auto;
     }
 
-    $adjacent-border: nb-theme(option-list-adjacent-border-width)
-                      nb-theme(option-list-adjacent-border-style)
-                      nb-theme(option-list-adjacent-border-color);
+    $adjacent-border: nb-theme(option-list-adjacent-border-width) nb-theme(option-list-adjacent-border-style)
+      nb-theme(option-list-adjacent-border-color);
     &.position-top {
       border-bottom: $adjacent-border;
     }

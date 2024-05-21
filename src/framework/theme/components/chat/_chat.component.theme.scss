@@ -4,8 +4,9 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-@mixin nb-chat-theme() {
+@use '../../styles/theming' as *;
 
+@mixin nb-chat-theme() {
   nb-chat {
     background-color: nb-theme(chat-background-color);
     border: nb-theme(chat-border);
@@ -38,9 +39,10 @@
       overflow: auto;
       flex: 1;
       @include nb-scrollbars(
-          nb-theme(chat-scrollbar-color),
-          nb-theme(chat-scrollbar-background-color),
-          nb-theme(chat-scrollbar-width));
+        nb-theme(chat-scrollbar-color),
+        nb-theme(chat-scrollbar-background-color),
+        nb-theme(chat-scrollbar-width)
+      );
     }
 
     .messages {
@@ -82,6 +84,7 @@
     }
 
     .avatar {
+      display: block;
       border-radius: 50%;
       flex-shrink: 0;
       background: nb-theme(chat-message-avatar-background-color);
@@ -97,13 +100,13 @@
     }
 
     nb-chat-message-text {
-
       display: flex;
       flex-direction: column;
 
       .sender {
         font-size: 0.875rem;
         color: nb-theme(chat-message-sender-text-color);
+        margin-top: 0;
         margin-bottom: 0.5rem;
       }
 
@@ -111,6 +114,7 @@
         word-break: break-word;
         white-space: pre-wrap;
         max-width: 100%;
+        margin-top: 0;
         margin-bottom: 0;
       }
 
@@ -138,7 +142,8 @@
         align-items: center;
         flex-shrink: 0;
         border-radius: 0.5rem;
-        &:hover, &:focus {
+        &:hover,
+        &:focus {
           text-decoration: none;
           color: nb-theme(chat-message-file-text-color);
         }
@@ -171,7 +176,6 @@
     }
 
     nb-chat-message-quote {
-
       p.quote {
         font-style: italic;
         font-size: 0.875rem;
@@ -179,6 +183,7 @@
         color: nb-theme(chat-message-quote-text-color);
         padding: 1rem;
         border-radius: 0.5rem;
+        margin-top: 0;
         margin-bottom: 0.5rem;
       }
 
@@ -218,6 +223,9 @@
       flex-direction: row-reverse;
 
       .message {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
         margin-left: 0;
 
         @include nb-ltr(margin-right, 0.5rem);
@@ -322,5 +330,41 @@
       }
     }
   }
-}
 
+  .nb-custom-message {
+    display: inline-block;
+    padding: nb-theme(chat-padding);
+    margin-top: 0.5rem;
+    border-radius: 0.5rem;
+  }
+
+  .nb-custom-message-full-width {
+    width: 100%;
+  }
+
+  .nb-custom-message-no-space {
+    margin-top: 0;
+  }
+
+  .nb-custom-message-not-reply {
+    background: nb-theme(chat-message-background);
+    color: nb-theme(chat-message-text-color);
+
+    @include nb-ltr(border-top-left-radius, 0);
+    @include nb-rtl(border-top-right-radius, 0);
+
+    a,
+    a:hover,
+    a:focus {
+      color: nb-theme(chat-message-text-color);
+    }
+  }
+
+  .nb-custom-message-reply {
+    background: nb-theme(chat-message-reply-background-color);
+    color: nb-theme(chat-message-reply-text-color);
+
+    @include nb-ltr(border-top-right-radius, 0);
+    @include nb-rtl(border-top-left-radius, 0);
+  }
+}

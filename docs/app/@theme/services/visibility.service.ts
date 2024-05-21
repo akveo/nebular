@@ -11,19 +11,15 @@ interface ObserverWithStream {
 
 @Injectable()
 export class NgdVisibilityService {
-
   private readonly isBrowser: boolean;
   private readonly supportsIntersectionObserver: boolean;
 
   private readonly visibilityObservers = new Map<IntersectionObserverInit, ObserverWithStream>();
   private readonly topmostObservers = new Map<IntersectionObserverInit, Observable<Element>>();
   private readonly visibleElements = new Map<IntersectionObserverInit, Element[]>();
-  private readonly unobserve$ = new Subject<{ target: Element, options: IntersectionObserverInit }>();
+  private readonly unobserve$ = new Subject<{ target: Element; options: IntersectionObserverInit }>();
 
-  constructor(
-    @Inject(PLATFORM_ID) platformId: Object,
-    @Inject(NB_WINDOW) private window,
-  ) {
+  constructor(@Inject(PLATFORM_ID) platformId: Object, @Inject(NB_WINDOW) private window) {
     this.isBrowser = isPlatformBrowser(platformId);
     this.supportsIntersectionObserver = !!this.window.IntersectionObserver;
   }
@@ -40,10 +36,10 @@ export class NgdVisibilityService {
     const { intersectionObserver, visibilityChange$ } = visibilityObserver;
     intersectionObserver.observe(target);
 
-    const targetUnobserved$ = this.unobserve$.pipe(filter(e => e.target === target && e.options === options));
+    const targetUnobserved$ = this.unobserve$.pipe(filter((e) => e.target === target && e.options === options));
 
     return visibilityChange$.pipe(
-      map((entries: IntersectionObserverEntry[]) => entries.find(entry => entry.target === target)),
+      map((entries: IntersectionObserverEntry[]) => entries.find((entry) => entry.target === target)),
       filter((entry: IntersectionObserverEntry | undefined) => !!entry),
       finalize(() => {
         intersectionObserver.unobserve(target);
@@ -58,7 +54,7 @@ export class NgdVisibilityService {
       return EMPTY;
     }
 
-    const targetUnobserve$ = this.unobserve$.pipe(filter(e => e.target === target && e.options === options));
+    const targetUnobserve$ = this.unobserve$.pipe(filter((e) => e.target === target && e.options === options));
     const topmostChange$ = this.topmostObservers.get(options) || this.addTopmostChangeObserver(options);
 
     const { intersectionObserver } = this.visibilityObservers.get(options);
@@ -152,7 +148,7 @@ export class NgdVisibilityService {
   private findTopmostElement(options: IntersectionObserverInit): Element | undefined {
     const visibleElements = this.visibleElements.get(options);
     if (!visibleElements) {
-      return;
+      return undefined;
     }
 
     let topmost: Element;

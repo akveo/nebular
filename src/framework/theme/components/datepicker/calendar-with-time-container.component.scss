@@ -3,7 +3,8 @@
  * Copyright Akveo. All Rights Reserved.
  * Licensed under the MIT License. See License.txt in the project root for license information.
 */
-@import '../../styles/core/mixins';
+
+@use '../../styles/theming' as *;
 
 :host {
   ::ng-deep nb-card.nb-timepicker-container {

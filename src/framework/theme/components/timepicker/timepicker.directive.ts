@@ -11,8 +11,8 @@ import {
   isDevMode,
   Renderer2,
 } from '@angular/core';
-import { filter, map, takeUntil } from 'rxjs/operators';
-import { fromEvent, merge, Subject } from 'rxjs';
+import { distinctUntilChanged, filter, map, pairwise, startWith, takeUntil } from 'rxjs/operators';
+import { fromEvent, merge, Subject, Subscription } from 'rxjs';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { NbTimePickerComponent } from './timepicker.component';
 import { NbOverlayRef, NbScrollStrategy } from '../cdk/overlay/mapping';
@@ -116,6 +116,25 @@ import { NB_DOCUMENT } from '../../theme.options';
  * <input [nbTimepicker]="timepicker" twelveHoursFormat>
  * <nb-timepicker #timepicke [ngModel]="date"></nb-timepicker>
  *
+ * You can provide localized versions of the timepicker text via the `localization` property of the config
+ * object passed to the `forRoot` or `forChild` methods of the `NbTimepickerModule`:
+ * ```ts
+ * @NgModule({
+ *   imports: [
+ *     // ...
+ *     NbTimepickerModule.forRoot({
+ *       localization: {
+ *         hoursText: 'Hr',
+ *         minutesText: 'Min',
+ *         secondsText: 'Sec',
+ *         ampmText: 'Am/Pm',
+ *       }
+ *     }),
+ *   ],
+ * })
+ * export class AppModule { }
+ * ```
+ *
  * @styles
  *
  * timepicker-cell-text-color:
@@ -151,11 +170,13 @@ import { NB_DOCUMENT } from '../../theme.options';
  * */
 @Directive({
   selector: 'input[nbTimepicker]',
-  providers: [{
-    provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => NbTimePickerDirective),
-    multi: true,
-  }],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => NbTimePickerDirective),
+      multi: true,
+    },
+  ],
 })
 export class NbTimePickerDirective<D> implements AfterViewInit, ControlValueAccessor {
   /**
@@ -168,14 +189,37 @@ export class NbTimePickerDirective<D> implements AfterViewInit, ControlValueAcce
 
   set timepicker(timePicker: NbTimePickerComponent<D>) {
     this._timePickerComponent = timePicker;
+
+    this.pickerInputsChangedSubscription?.unsubscribe();
+    this.pickerInputsChangedSubscription = this._timePickerComponent.timepickerFormatChange$
+      .pipe(
+        map(() => this._timePickerComponent.computedTimeFormat),
+        startWith(this._timePickerComponent.computedTimeFormat),
+        distinctUntilChanged(),
+        pairwise(),
+        takeUntil(this.destroy$),
+      )
+      .subscribe(([prevFormat, nextFormat]) => {
+        if (this.inputValue) {
+          const date = this.dateService.parse(this.inputValue, prevFormat);
+          this.writeValue(date);
+        }
+      });
   }
   protected _timePickerComponent: NbTimePickerComponent<D>;
+  protected pickerInputsChangedSubscription: Subscription | undefined;
 
   /**
    * Time picker overlay offset.
    * */
   @Input() overlayOffset = 8;
 
+  /**
+   * String representation of latest selected date.
+   * Updated when value is updated programmatically (writeValue), via timepicker (subscribeOnApplyClick)
+   * or via input field (handleInputChange)
+   * @docs-private
+   */
   protected lastInputValue: string;
   /**
    * Positioning strategy used by overlay.
@@ -184,10 +228,8 @@ export class NbTimePickerDirective<D> implements AfterViewInit, ControlValueAcce
   protected positionStrategy: NbAdjustableConnectedPositionStrategy;
   protected overlayRef: NbOverlayRef;
   protected destroy$: Subject<void> = new Subject<void>();
-  protected onChange: (value: D) => void = () => {
-  };
-  protected onTouched = () => {
-  };
+  protected onChange: (value: D) => void = () => {};
+  protected onTouched = () => {};
   /**
    * Trigger strategy used by overlay.
    * @docs-private
@@ -218,17 +260,18 @@ export class NbTimePickerDirective<D> implements AfterViewInit, ControlValueAcce
     return !this.isOpen;
   }
 
-  constructor(@Inject(NB_DOCUMENT) protected document,
-              protected positionBuilder: NbPositionBuilderService,
-              protected hostRef: ElementRef,
-              protected triggerStrategyBuilder: NbTriggerStrategyBuilderService,
-              protected overlay: NbOverlayService,
-              protected cd: ChangeDetectorRef,
-              protected calendarTimeModelService: NbCalendarTimeModelService<D>,
-              protected dateService: NbDateService<D>,
-              protected renderer: Renderer2,
-              @Attribute('placeholder') protected placeholder: string) {
-  }
+  constructor(
+    @Inject(NB_DOCUMENT) protected document,
+    protected positionBuilder: NbPositionBuilderService,
+    protected hostRef: ElementRef,
+    protected triggerStrategyBuilder: NbTriggerStrategyBuilderService,
+    protected overlay: NbOverlayService,
+    protected cd: ChangeDetectorRef,
+    protected calendarTimeModelService: NbCalendarTimeModelService<D>,
+    protected dateService: NbDateService<D>,
+    protected renderer: Renderer2,
+    @Attribute('placeholder') protected placeholder: string,
+  ) {}
 
   /**
    * Returns host input value.
@@ -246,7 +289,7 @@ export class NbTimePickerDirective<D> implements AfterViewInit, ControlValueAcce
     this.subscribeOnInputChange();
 
     if (!this.placeholder) {
-      this.renderer.setProperty(this.input, 'placeholder', this.timepicker.timeFormat);
+      this.renderer.setProperty(this.input, 'placeholder', this.timepicker.computedTimeFormat);
     }
     this.triggerStrategy = this.createTriggerStrategy();
     this.subscribeOnTriggers();
@@ -280,13 +323,15 @@ export class NbTimePickerDirective<D> implements AfterViewInit, ControlValueAcce
 
   setupTimepicker() {
     if (this.dateService.getId() === 'native' && isDevMode()) {
-      console.warn('Date.parse noes not support parsing time with custom format.' +
-        ' See details here https://akveo.github.io/nebular/docs/components/datepicker/overview#native-parse-issue')
+      console.warn(
+        'Date.parse does not support parsing time with custom format.' +
+          ' See details here https://akveo.github.io/nebular/docs/components/datepicker/overview#native-parse-issue',
+      );
     }
     this.timepicker.setHost(this.hostRef);
     if (this.inputValue) {
       const val = this.dateService.getId() === 'native' ? this.parseNativeDateString(this.inputValue) : this.inputValue;
-      this.timepicker.date = this.dateService.parse(val, this.timepicker.timeFormat);
+      this.timepicker.date = this.dateService.parse(val, this.timepicker.computedTimeFormat);
     } else {
       this.timepicker.date = this.calendarTimeModelService.getResetTime();
     }
@@ -300,7 +345,7 @@ export class NbTimePickerDirective<D> implements AfterViewInit, ControlValueAcce
 
   protected subscribeOnApplyClick() {
     this.timepicker.onSelectTime.pipe(takeUntil(this.destroy$)).subscribe((value: NbSelectedTimePayload<D>) => {
-      const time = this.dateService.format(value.time, this.timepicker.timeFormat).toUpperCase();
+      const time = this.dateService.format(value.time, this.timepicker.computedTimeFormat).toUpperCase();
       this.inputValue = time;
       this.timepicker.date = value.time;
       this.onChange(value.time);
@@ -313,18 +358,13 @@ export class NbTimePickerDirective<D> implements AfterViewInit, ControlValueAcce
 
   protected createOverlay() {
     const scrollStrategy = this.createScrollStrategy();
-    this.overlayRef = this.overlay.create(
-      {positionStrategy: this.positionStrategy, scrollStrategy});
+    this.overlayRef = this.overlay.create({ positionStrategy: this.positionStrategy, scrollStrategy });
   }
 
   protected subscribeOnTriggers() {
-    this.triggerStrategy.show$
-    .pipe(filter(() => this.isClosed))
-    .subscribe(() => this.show());
+    this.triggerStrategy.show$.pipe(filter(() => this.isClosed)).subscribe(() => this.show());
 
-    this.triggerStrategy.hide$
-    .pipe(filter(() => this.isOpen))
-    .subscribe(() => {
+    this.triggerStrategy.hide$.pipe(filter(() => this.isOpen)).subscribe(() => {
       this.inputValue = this.lastInputValue || '';
       this.hide();
     });
@@ -332,26 +372,30 @@ export class NbTimePickerDirective<D> implements AfterViewInit, ControlValueAcce
 
   protected createTriggerStrategy(): NbTriggerStrategy {
     return this.triggerStrategyBuilder
-    .trigger(NbTrigger.FOCUS)
-    .host(this.hostRef.nativeElement)
-    .container(() => this.getContainer())
-    .build();
+      .trigger(NbTrigger.FOCUS)
+      .host(this.hostRef.nativeElement)
+      .container(() => this.getContainer())
+      .build();
   }
 
   protected createPositionStrategy(): NbAdjustableConnectedPositionStrategy {
     return this.positionBuilder
-    .connectedTo(this.hostRef)
-    .position(NbPosition.BOTTOM)
-    .offset(this.overlayOffset)
-    .adjustment(NbAdjustment.VERTICAL);
+      .connectedTo(this.hostRef)
+      .position(NbPosition.BOTTOM)
+      .offset(this.overlayOffset)
+      .adjustment(NbAdjustment.COUNTERCLOCKWISE);
   }
 
   protected getContainer() {
-    return this.overlayRef && this.isOpen && <ComponentRef<any>>{
-      location: {
-        nativeElement: this.overlayRef.overlayElement,
-      },
-    };
+    return (
+      this.overlayRef &&
+      this.isOpen &&
+      <ComponentRef<any>>{
+        location: {
+          nativeElement: this.overlayRef.overlayElement,
+        },
+      }
+    );
   }
 
   protected createScrollStrategy(): NbScrollStrategy {
@@ -360,21 +404,20 @@ export class NbTimePickerDirective<D> implements AfterViewInit, ControlValueAcce
 
   protected subscribeOnInputChange() {
     fromEvent(this.input, 'input')
-    .pipe(
-      map(() => this.inputValue),
-      takeUntil(this.destroy$),
-    )
-    .subscribe((value: string) => this.handleInputChange(value));
+      .pipe(
+        map(() => this.inputValue),
+        takeUntil(this.destroy$),
+      )
+      .subscribe((value: string) => this.handleInputChange(value));
   }
 
   protected subscribeToBlur() {
     merge(
       this.timepicker.blur,
-      fromEvent(this.input, 'blur').pipe(
-        filter(() => !this.isOpen && this.document.activeElement !== this.input),
-      ),
-    ).pipe(takeUntil(this.destroy$))
-    .subscribe(() => this.onTouched());
+      fromEvent(this.input, 'blur').pipe(filter(() => !this.isOpen && this.document.activeElement !== this.input)),
+    )
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(() => this.onTouched());
   }
 
   /**
@@ -390,11 +433,11 @@ export class NbTimePickerDirective<D> implements AfterViewInit, ControlValueAcce
       value = this.parseNativeDateString(value);
     }
 
-    const isValidDate: boolean = this.dateService.isValidDateString(value, this.timepicker.timeFormat);
+    const isValidDate: boolean = this.dateService.isValidDateString(value, this.timepicker.computedTimeFormat);
     if (isValidDate) {
       this.lastInputValue = value;
 
-      const date = this.dateService.parse(value, this.timepicker.timeFormat);
+      const date = this.dateService.parse(value, this.timepicker.computedTimeFormat);
       this.onChange(date);
       this.timepicker.date = date;
     }
@@ -403,7 +446,10 @@ export class NbTimePickerDirective<D> implements AfterViewInit, ControlValueAcce
   protected updateValue(value: D) {
     if (value) {
       this.timepicker.date = value;
-      this.inputValue = this.dateService.format(value, this.timepicker.timeFormat).toUpperCase();
+
+      const timeString = this.dateService.format(value, this.timepicker.computedTimeFormat).toUpperCase();
+      this.inputValue = timeString;
+      this.lastInputValue = timeString;
     }
   }
 
@@ -417,6 +463,10 @@ export class NbTimePickerDirective<D> implements AfterViewInit, ControlValueAcce
 
   registerOnTouched(fn: any): void {
     this.onTouched = fn;
+  }
+
+  setDisabledState(isDisabled: boolean): void {
+    this.input.disabled = isDisabled;
   }
 
   protected parseNativeDateString(value: string): string {

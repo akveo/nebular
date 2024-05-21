@@ -7,10 +7,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { DatePipe } from '@angular/common';
 
-import { NbCalendarDayCellComponent } from './calendar-day-cell.component';
-import { NbDateService } from '../../services/date.service';
-import { NbNativeDateService } from '../../services/native-date.service';
-import { NbCalendarKitModule } from '../../calendar-kit.module';
+import { NbCalendarDayCellComponent, NbDateService, NbNativeDateService, NbCalendarKitModule } from '@nebular/theme';
 
 describe('Component: NbCalendarDayCell', () => {
   let component: NbCalendarDayCellComponent<Date>;
@@ -42,13 +39,16 @@ describe('Component: NbCalendarDayCell', () => {
     expect(componentEl.textContent).toContain('12');
   });
 
-  it('should fire select after click', () => {
+  it('should fire select after click', (done) => {
     const date = new Date();
     component.date = date;
     component.selectedValue = new Date();
     component.visibleDate = new Date();
     fixture.detectChanges();
-    component.select.subscribe(e => expect(e).toBe(date));
+    component.select.subscribe((e) => {
+      expect(e).toBe(date);
+      done();
+    });
     componentEl.dispatchEvent(new Event('click'));
   });
 
@@ -130,14 +130,14 @@ describe('Component: NbCalendarDayCell', () => {
 
   it('should contain disable if fit the filter', () => {
     component.date = new Date(2018, 7, 2);
-    component.filter = date => date.getDate() % 2 !== 0;
+    component.filter = (date) => date.getDate() % 2 !== 0;
     fixture.detectChanges();
     expect(componentEl.classList).toContain('disabled');
   });
 
-  it('should not contain disable if doesn\'t fit the filter', () => {
+  it("should not contain disable if doesn't fit the filter", () => {
     component.date = new Date(2018, 7, 2);
-    component.filter = date => date.getDate() % 2 !== 0;
+    component.filter = (date) => date.getDate() % 2 !== 0;
     fixture.detectChanges();
     expect(componentEl.classList).toContain('disabled');
   });

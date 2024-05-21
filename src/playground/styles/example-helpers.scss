@@ -1,5 +1,6 @@
-@mixin nb-example-helpers() {
+@use 'themes' as *;
 
+@mixin nb-example-helpers() {
   nb-layout-column {
     min-height: 40vw;
   }

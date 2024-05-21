@@ -1,7 +1,7 @@
-@import '../../../@theme/styles/themes';
+@use '../../../@theme/styles/themes' as *;
+@use '../../../../../src/framework/theme/styles/globals' as *;
 
 @include nb-install-component() {
-
   $shadow-hover: 0 8px 24px 0 rgba(0, 31, 97, 0.07);
   $text-fg: nb-theme(color-fg-text);
   $title-fg: nb-theme(color-fg-heading);
@@ -49,8 +49,8 @@
     text-align: center;
   }
 
-  &:hover, &:active {
-
+  &:hover,
+  &:active {
     &::before {
       opacity: 1;
     }
@@ -71,4 +71,3 @@
     padding-right: 1.5rem;
   }
 }
-

@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-@import '../../../styles/core/mixins';
+@use '../../../styles/theming' as *;
 
 ::ng-deep nb-layout.rotate-layout {
   position: fixed;
@@ -27,7 +27,6 @@
 }
 
 :host.rotate-layout {
-
   position: absolute;
   display: block;
   width: 100vw;

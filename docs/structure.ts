@@ -351,47 +351,33 @@ export const structure = [
           'NbLayoutHeaderComponent',
           'NbLayoutColumnComponent',
           'NbLayoutFooterComponent',
+          'NbLtrDirective',
+          'NbRtlDirective',
         ],
       },
       {
         type: 'tabs',
         name: 'Card',
         icon: 'card.svg',
-        source: [
-          'NbCardComponent',
-          'NbCardHeaderComponent',
-          'NbCardBodyComponent',
-          'NbCardFooterComponent',
-        ],
+        source: ['NbCardComponent', 'NbCardHeaderComponent', 'NbCardBodyComponent', 'NbCardFooterComponent'],
       },
       {
         type: 'tabs',
         name: 'Flip Card',
         icon: 'flip.svg',
-        source: [
-          'NbFlipCardComponent',
-          'NbCardFrontComponent',
-          'NbCardBackComponent',
-        ],
+        source: ['NbFlipCardComponent', 'NbCardFrontComponent', 'NbCardBackComponent'],
       },
       {
         type: 'tabs',
         name: 'Reveal Card',
         icon: 'reveal.svg',
-        source: [
-          'NbRevealCardComponent',
-          'NbCardFrontComponent',
-          'NbCardBackComponent',
-        ],
+        source: ['NbRevealCardComponent', 'NbCardFrontComponent', 'NbCardBackComponent'],
       },
       {
         type: 'tabs',
         name: 'Stepper',
         icon: 'stepper.svg',
-        source: [
-          'NbStepperComponent',
-          'NbStepComponent',
-        ],
+        source: ['NbStepperComponent', 'NbStepComponent'],
       },
       {
         type: 'tabs',
@@ -408,13 +394,13 @@ export const structure = [
         type: 'tabs',
         name: 'List',
         icon: 'list.svg',
-        source: [ 'NbListComponent', 'NbListItemComponent' ],
+        source: ['NbListComponent', 'NbListItemComponent'],
       },
       {
         type: 'tabs',
         name: 'Infinite List',
         icon: 'infinite-scroll.svg',
-        source: [ 'NbInfiniteListDirective', 'NbListPageTrackerDirective' ],
+        source: ['NbInfiniteListDirective', 'NbListPageTrackerDirective'],
       },
       {
         type: 'group',
@@ -424,41 +410,25 @@ export const structure = [
         type: 'tabs',
         name: 'Sidebar',
         icon: 'sidebar.svg',
-        source: [
-          'NbSidebarComponent',
-          'NbSidebarHeaderComponent',
-          'NbSidebarFooterComponent',
-          'NbSidebarService',
-        ],
+        source: ['NbSidebarComponent', 'NbSidebarHeaderComponent', 'NbSidebarFooterComponent', 'NbSidebarService'],
       },
       {
         type: 'tabs',
         name: 'Menu',
         icon: 'menu.svg',
-        source: [
-          'NbMenuComponent',
-          'NbMenuItem',
-          'NbMenuService',
-        ],
+        source: ['NbMenuComponent', 'NbMenuItem', 'NbMenuService'],
       },
       {
         type: 'tabs',
         name: 'Tabs',
         icon: 'tab.svg',
-        source: [
-          'NbTabsetComponent',
-          'NbTabComponent',
-          'NbRouteTabsetComponent',
-        ],
+        source: ['NbTabsetComponent', 'NbTabComponent', 'NbRouteTabsetComponent'],
       },
       {
         type: 'tabs',
         name: 'Actions',
         icon: 'actions.svg',
-        source: [
-          'NbActionsComponent',
-          'NbActionComponent',
-        ],
+        source: ['NbActionsComponent', 'NbActionComponent'],
       },
       {
         type: 'group',
@@ -468,59 +438,43 @@ export const structure = [
         type: 'tabs',
         name: 'Input',
         icon: 'input.svg',
-        source: [ 'NbInputDirective' ],
+        source: ['NbInputDirective'],
       },
       {
         type: 'tabs',
         name: 'Button',
         icon: 'button.svg',
-        source: [
-          'NbButtonComponent',
-        ],
+        source: ['NbButtonComponent'],
       },
       {
         type: 'tabs',
         name: 'Button Group',
         icon: 'button-group.svg',
-        source: [
-          'NbButtonGroupComponent',
-          'NbButtonToggleDirective',
-        ],
+        source: ['NbButtonGroupComponent', 'NbButtonToggleDirective'],
       },
       {
         type: 'tabs',
         name: 'Checkbox',
         icon: 'checkbox.svg',
-        source: [
-          'NbCheckboxComponent',
-        ],
+        source: ['NbCheckboxComponent'],
       },
       {
         type: 'tabs',
         name: 'Toggle',
         icon: 'toggle.svg',
-        source: [
-          'NbToggleComponent',
-        ],
+        source: ['NbToggleComponent'],
       },
       {
         type: 'tabs',
         name: 'Radio',
         icon: 'radio.svg',
-        source: [
-          'NbRadioComponent',
-          'NbRadioGroupComponent',
-        ],
+        source: ['NbRadioComponent', 'NbRadioGroupComponent'],
       },
       {
         type: 'tabs',
         name: 'Select',
         icon: 'select.svg',
-        source: [
-          'NbSelectComponent',
-          'NbOptionListComponent',
-          'NbOptionGroupComponent',
-        ],
+        source: ['NbSelectComponent', 'NbOptionListComponent', 'NbOptionGroupComponent'],
       },
       {
         type: 'tabs',
@@ -541,26 +495,20 @@ export const structure = [
           'NbDatepickerDirective',
           'NbDatepickerComponent',
           'NbRangepickerComponent',
+          'NbDateTimePickerComponent',
         ],
       },
       {
         type: 'tabs',
         name: 'Timepicker',
         icon: 'timepicker.svg',
-        source: [
-          'NbTimePickerDirective',
-          'NbTimePickerComponent',
-        ],
+        source: ['NbTimePickerDirective', 'NbTimePickerComponent'],
       },
       {
         type: 'tabs',
         name: 'Tag',
-        icon: '',
-        source: [
-          'NbTagListComponent',
-          'NbTagInputDirective',
-          'NbTagComponent',
-        ],
+        icon: 'tag.svg',
+        source: ['NbTagListComponent', 'NbTagInputDirective', 'NbTagComponent'],
       },
       {
         type: 'group',
@@ -570,57 +518,37 @@ export const structure = [
         type: 'tabs',
         name: 'Popover',
         icon: 'popover.svg',
-        source: [
-          'NbPopoverDirective',
-          'NbPopoverComponent',
-        ],
+        source: ['NbPopoverDirective', 'NbPopoverComponent'],
       },
       {
         type: 'tabs',
         name: 'Context Menu',
         icon: 'context-menu.svg',
-        source: [
-          'NbContextMenuDirective',
-        ],
+        source: ['NbContextMenuDirective'],
       },
       {
         type: 'tabs',
         name: 'Dialog',
         icon: 'dialog.svg',
-        source: [
-          'NbDialogService',
-          'NbDialogRef',
-          'NbDialogConfig',
-        ],
+        source: ['NbDialogService', 'NbDialogRef', 'NbDialogConfig'],
       },
       {
         type: 'tabs',
         name: 'Toastr',
         icon: 'toastr.svg',
-        source: [
-          'NbToastrService',
-          'NbToastComponent',
-          'NbToastrConfig',
-        ],
+        source: ['NbToastrService', 'NbToastComponent', 'NbToastrConfig'],
       },
       {
         type: 'tabs',
         name: 'Tooltip',
         icon: 'tooltip.svg',
-        source: [
-          'NbTooltipDirective',
-          'NbTooltipComponent',
-        ],
+        source: ['NbTooltipDirective', 'NbTooltipComponent'],
       },
       {
         type: 'tabs',
         name: 'Window',
         icon: 'collapsable.svg',
-        source: [
-          'NbWindowService',
-          'NbWindowRef',
-          'NbWindowConfig',
-        ],
+        source: ['NbWindowService', 'NbWindowRef', 'NbWindowConfig'],
       },
       {
         type: 'group',
@@ -630,86 +558,61 @@ export const structure = [
         type: 'tabs',
         name: 'Global Search',
         icon: 'search.svg',
-        source: [
-          'NbSearchComponent',
-          'NbSearchService',
-        ],
+        source: ['NbSearchComponent', 'NbSearchService'],
       },
       {
         type: 'tabs',
         name: 'User (Avatar)',
         icon: 'user.svg',
-        source: [
-          'NbUserComponent',
-        ],
+        source: ['NbUserComponent'],
       },
       {
         type: 'tabs',
         name: 'Alert',
         icon: 'alert.svg',
-        source: [
-          'NbAlertComponent',
-        ],
+        source: ['NbAlertComponent'],
       },
       {
         type: 'tabs',
         name: 'Icon',
         icon: 'icon.svg',
-        source: [
-          'NbIconComponent',
-          'NbIconLibraries',
-        ],
+        source: ['NbIconComponent', 'NbIconLibraries'],
       },
       {
         type: 'tabs',
         name: 'Spinner',
         icon: 'spinner.svg',
-        source: [
-          'NbSpinnerDirective',
-          'NbSpinnerComponent',
-        ],
+        source: ['NbSpinnerDirective', 'NbSpinnerComponent'],
       },
       {
         type: 'tabs',
         name: 'Progress Bar',
         icon: 'progress-bar.svg',
-        source: [
-          'NbProgressBarComponent',
-        ],
+        source: ['NbProgressBarComponent'],
       },
       {
         type: 'tabs',
         name: 'Badge',
         icon: 'badge.svg',
-        source: [
-          'NbBadgeComponent',
-        ],
+        source: ['NbBadgeComponent'],
       },
       {
         type: 'tabs',
         name: 'Chat UI',
         icon: 'chat-ui.svg',
-        source: [
-          'NbChatComponent',
-          'NbChatMessageComponent',
-          'NbChatFormComponent',
-        ],
+        source: ['NbChatComponent', 'NbChatMessageComponent', 'NbChatFormComponent', 'NbChatCustomMessageDirective'],
       },
       {
         type: 'tabs',
         name: 'Calendar',
         icon: 'calendar.svg',
-        source: [
-          'NbCalendarComponent',
-        ],
+        source: ['NbCalendarComponent'],
       },
       {
         type: 'tabs',
         name: 'Calendar Range',
         icon: 'calendar.svg',
-        source: [
-          'NbCalendarRangeComponent',
-        ],
+        source: ['NbCalendarRangeComponent'],
       },
       {
         type: 'group',
@@ -719,9 +622,7 @@ export const structure = [
         type: 'tabs',
         name: 'Calendar Kit',
         icon: 'calendar.svg',
-        source: [
-          'NbCalendarKitModule',
-        ],
+        source: ['NbCalendarKitModule'],
       },
       {
         type: 'group',

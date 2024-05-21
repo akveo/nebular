@@ -4,8 +4,9 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-@mixin nb-tabset-theme() {
+@use '../../styles/theming' as *;
 
+@mixin nb-tabset-theme() {
   nb-tabset {
     background-color: nb-theme(tabset-background-color);
     border-radius: nb-theme(tabset-border-radius);
@@ -96,7 +97,7 @@
     }
 
     .tab.responsive {
-      @media screen and (max-width: nb-theme(tabset-tab-text-hide-breakpoint)) {
+      @media screen and (max-width: $tabset-tab-text-hide-breakpoint) {
         .tab-text {
           display: none;
         }
@@ -113,9 +114,10 @@
       padding: nb-theme(tabset-content-padding);
 
       @include nb-scrollbars(
-          nb-theme(tabset-scrollbar-color),
-          nb-theme(tabset-scrollbar-background-color),
-          nb-theme(tabset-scrollbar-width));
+        nb-theme(tabset-scrollbar-color),
+        nb-theme(tabset-scrollbar-background-color),
+        nb-theme(tabset-scrollbar-width)
+      );
     }
   }
 }

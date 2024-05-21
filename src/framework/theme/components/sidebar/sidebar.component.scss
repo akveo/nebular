@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-@import '../../styles/core/mixins';
+@use '../../styles/theming' as *;
 
 :host {
   display: flex;
@@ -42,11 +42,11 @@
     @include nb-ltr() {
       margin-right: 0;
       margin-left: auto;
-    };
+    }
     @include nb-rtl() {
       margin-left: 0;
       margin-right: auto;
-    };
+    }
   }
 
   // TODO: in this case this will won't work when header is not fixed and sidebar is

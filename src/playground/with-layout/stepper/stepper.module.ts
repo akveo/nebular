@@ -15,6 +15,7 @@ import { StepperValidationComponent } from './stepper-validation.component';
 import { StepperVerticalComponent } from './stepper-vertical.component';
 import { StepperDisabledStepNavComponent } from './stepper-disabled-step-nav.component';
 import { StepperLinearComponent } from './stepper-linear.component';
+import { StepperStepChangeEventComponent } from './stepper-step-change-event.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { StepperLinearComponent } from './stepper-linear.component';
     StepperVerticalComponent,
     StepperDisabledStepNavComponent,
     StepperLinearComponent,
+    StepperStepChangeEventComponent,
   ],
   imports: [
     CommonModule,

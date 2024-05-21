@@ -6,7 +6,7 @@
 
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NbCardModule, NbTimepickerModule, NbInputModule } from '@nebular/theme';
+import { NbCardModule, NbTimepickerModule, NbInputModule, NbButtonModule } from '@nebular/theme';
 
 import { TimepickerRoutingModule } from './timepicker-routing.module';
 import { TimepickerShowcaseComponent } from './timepicker-showcase.component';
@@ -17,6 +17,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TimepickerFormControlComponent } from './timepicker-form-control.component';
 import { TimepickerNgModelComponent } from './timepicker-ng-model.component';
 import { NbDateFnsDateModule } from '@nebular/date-fns';
+import { TimepickerDynamicInputsShowcaseComponent } from './timepicker-dynamic-inputs-showcase.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { NbDateFnsDateModule } from '@nebular/date-fns';
     TimepickerTwelveHoursFormatComponent,
     TimepickerSingleColumnComponent,
     TimepickerWithSecondsComponent,
+    TimepickerDynamicInputsShowcaseComponent,
   ],
   imports: [
     CommonModule,
@@ -36,6 +38,7 @@ import { NbDateFnsDateModule } from '@nebular/date-fns';
     NbCardModule,
     FormsModule,
     ReactiveFormsModule,
+    NbButtonModule,
   ],
 })
 export class TimepickerModule {}

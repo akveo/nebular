@@ -14,11 +14,13 @@ import { NbSearchService } from '@nebular/theme';
     <nb-layout>
       <nb-layout-header fixed>
         <a class="navbar-brand" href="#">ngx-admin</a>
-        <nb-search id="customized-search"
-                   type="rotate-layout"
-                   tag="header-search-customized"
-                   hint="Custom hint"
-                   placeholder="Type here."></nb-search>
+        <nb-search
+          id="customized-search"
+          type="rotate-layout"
+          tag="header-search-customized"
+          hint="Custom hint"
+          placeholder="Type here."
+        ></nb-search>
       </nb-layout-header>
       <nb-layout-column>
         <nb-card>
@@ -70,12 +72,10 @@ import { NbSearchService } from '@nebular/theme';
   `,
 })
 export class SearchCustomizedTestComponent implements OnInit {
-
-  constructor(private searchService: NbSearchService) {
-  }
+  constructor(private searchService: NbSearchService) {}
 
   ngOnInit() {
-    this.searchService.onSearchSubmit().subscribe((data: { term: string, tag: string }) => {
+    this.searchService.onSearchSubmit().subscribe((data: { term: string; tag?: string }) => {
       console.info(`term: ${data.term}, from search: ${data.tag}`);
     });
   }

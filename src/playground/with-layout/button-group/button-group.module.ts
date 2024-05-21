@@ -25,6 +25,7 @@ import { ButtonAndButtonToggleGroupsComponent } from './button-and-button-toggle
 import { ButtonGroupInteractiveComponent } from './button-group-interactive.component';
 import { ButtonGroupDisabledComponent } from './button-group-disabled.component';
 import { ButtonGroupStatusesComponent } from './button-group-statuses.component';
+import { ButtonGroupValueChangeComponent } from './button-group-value-change.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { ButtonGroupStatusesComponent } from './button-group-statuses.component'
     ButtonGroupInteractiveComponent,
     ButtonGroupDisabledComponent,
     ButtonGroupStatusesComponent,
+    ButtonGroupValueChangeComponent,
   ],
   imports: [
     CommonModule,

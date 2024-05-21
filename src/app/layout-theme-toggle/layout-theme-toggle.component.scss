@@ -1,13 +1,17 @@
 :host {
   display: block;
-  padding: 0.5em;
+}
 
-  button {
-    margin-right: 0.25rem;
+.theme-radio-label {
+  display: inline-flex;
+  align-items: center;
+  margin-right: 0.5rem;
+
+  &:last-child {
+    margin-right: 0;
   }
+}
 
-  label {
-    margin: 0;
-  }
-
+.theme-radio {
+  margin-right: 0.125rem;
 }

@@ -11,7 +11,6 @@ import {
 } from '@angular/core';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
-import 'intersection-observer';
 import { NbListItemComponent } from './list.component';
 
 /**
@@ -24,7 +23,6 @@ import { NbListItemComponent } from './list.component';
   selector: '[nbListPageTracker]',
 })
 export class NbListPageTrackerDirective implements AfterViewInit, OnDestroy {
-
   private destroy$ = new Subject<void>();
 
   private observer: IntersectionObserver;
@@ -52,10 +50,7 @@ export class NbListPageTrackerDirective implements AfterViewInit, OnDestroy {
   listItems: QueryList<ElementRef>;
 
   constructor() {
-    this.observer = new IntersectionObserver(
-      entries => this.checkForPageChange(entries),
-      { threshold: 0.5 },
-    );
+    this.observer = new IntersectionObserver((entries) => this.checkForPageChange(entries), { threshold: 0.5 });
   }
 
   ngAfterViewInit() {
@@ -63,9 +58,7 @@ export class NbListPageTrackerDirective implements AfterViewInit, OnDestroy {
       this.observeItems();
     }
 
-    this.listItems.changes
-      .pipe(takeUntil(this.destroy$))
-      .subscribe(() => this.observeItems());
+    this.listItems.changes.pipe(takeUntil(this.destroy$)).subscribe(() => this.observeItems());
   }
 
   ngOnDestroy() {
@@ -73,7 +66,7 @@ export class NbListPageTrackerDirective implements AfterViewInit, OnDestroy {
   }
 
   private observeItems() {
-    this.listItems.forEach(i => this.observer.observe(i.nativeElement));
+    this.listItems.forEach((i) => this.observer.observe(i.nativeElement));
   }
 
   private checkForPageChange(entries: IntersectionObserverEntry[]) {
