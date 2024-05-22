@@ -220,12 +220,12 @@ describe('NbMenuItem', () => {
     const iconComponent = fixture.debugElement.query(By.directive(NbIconComponent)) as DebugElement;
     const directionService: NbLayoutDirectionService = TestBed.inject(NbLayoutDirectionService);
 
-    expect(iconComponent.componentInstance.icon).toEqual('chevron-left-outline');
+    expect(iconComponent.componentInstance.icon).toEqual('chevron-down-outline');
 
     directionService.setDirection(NbLayoutDirection.RTL);
     fixture.detectChanges();
 
-    expect(iconComponent.componentInstance.icon).toEqual('chevron-right-outline');
+    expect(iconComponent.componentInstance.icon).toEqual('chevron-down-outline');
   });
 });
 

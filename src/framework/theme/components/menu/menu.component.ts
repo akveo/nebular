@@ -98,10 +98,10 @@ export class NbMenuItemComponent implements DoCheck, AfterViewInit, OnDestroy {
 
   getExpandStateIcon(): string {
     if (this.menuItem.expanded) {
-      return 'chevron-down-outline';
+      return 'chevron-up-outline';
     }
 
-    return this.directionService.isLtr() ? 'chevron-left-outline' : 'chevron-right-outline';
+    return 'chevron-down-outline';
   }
 }
 
