@@ -15,7 +15,7 @@ import { Component } from '@angular/core';
         margin-bottom: 2rem;
       }
 
-      button + button {
+      section > * + * {
         margin-left: 1rem;
       }
     `,
@@ -26,6 +26,8 @@ export class DatepickerDynamicInputsShowcaseComponent {
 
   format = 'dd/MM/yyyy HH:mm';
   formatToggleTimer = null;
+  firstDayOfWeek: number | undefined = undefined;
+  firstDayOfWeekToggleTimer = null;
 
   toggleFormatSwitching() {
     if (this.formatToggleTimer == null) {
@@ -40,5 +42,24 @@ export class DatepickerDynamicInputsShowcaseComponent {
 
   toggleFormat() {
     this.format = this.format === 'dd/MM/yyyy HH:mm' ? 'HH:mm dd/MM/yyyy' : 'dd/MM/yyyy HH:mm';
+  }
+
+  toggleFirstDayOfWeekSwitching() {
+    if (this.firstDayOfWeekToggleTimer == null) {
+      this.firstDayOfWeekToggleTimer = setInterval(() => {
+        this.toggleFirstDayOfWeek();
+      }, 1000);
+    } else {
+      clearInterval(this.firstDayOfWeekToggleTimer);
+      this.firstDayOfWeekToggleTimer = null;
+    }
+  }
+
+  toggleFirstDayOfWeek() {
+    this.firstDayOfWeek ??= 0;
+    this.firstDayOfWeek++;
+    if (this.firstDayOfWeek > 6) {
+      this.firstDayOfWeek = 0;
+    }
   }
 }

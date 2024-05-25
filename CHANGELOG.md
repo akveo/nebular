@@ -1,3 +1,27 @@
+<a name="13.0.0"></a>
+# [13.0.0](https://github.com/akveo/nebular/compare/v12.0.0...v13.0.0) (2024-01-28)
+
+
+### Features
+
+* **angular:** update to Angular 17 ([#3236](https://github.com/akveo/nebular/issues/3236)) ([bced0eb](https://github.com/akveo/nebular/commit/bced0eb))
+
+
+
+<a name="12.0.0"></a>
+# [12.0.0](https://github.com/akveo/nebular/compare/v11.0.1...v12.0.0) (2023-11-09)
+
+
+### Bug Fixes
+
+* **docs:** fix docs deployment ([#3218](https://github.com/akveo/nebular/issues/3218)) ([96968a6](https://github.com/akveo/nebular/commit/96968a6))
+
+
+### Features
+
+* **angular:** update to Angular 16 ([#3222](https://github.com/akveo/nebular/issues/3222)) ([c19e6bd](https://github.com/akveo/nebular/commit/c19e6bd))
+* add firstDayOfWeek to datepickers ([#3220](https://github.com/akveo/nebular/issues/3220)) ([5923384](https://github.com/akveo/nebular/commit/5923384))
+
 <a name="11.0.1"></a>
 ## [11.0.1](https://github.com/akveo/nebular/compare/v11.0.0...v11.0.1) (2023-09-06)
 

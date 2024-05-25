@@ -16,14 +16,14 @@ export class NbCalendarMonthModelService<D> {
   constructor(protected dateService: NbDateService<D>) {
   }
 
-  createDaysGrid(activeMonth: D, boundingMonth: boolean = true): D[][] {
-    const weeks = this.createDates(activeMonth);
+  createDaysGrid(activeMonth: D, boundingMonth: boolean = true, firstDayOfWeek?: number): D[][] {
+    const weeks = this.createDates(activeMonth, firstDayOfWeek);
     return this.withBoundingMonths(weeks, activeMonth, boundingMonth);
   }
 
-  private createDates(activeMonth: D): D[][] {
+  private createDates(activeMonth: D, firstDayOfWeek?: number): D[][] {
     const days = this.createDateRangeForMonth(activeMonth);
-    const startOfWeekDayDiff = this.getStartOfWeekDayDiff(activeMonth);
+    const startOfWeekDayDiff = this.getStartOfWeekDayDiff(activeMonth, firstDayOfWeek);
     return batch(days, this.dateService.DAYS_IN_WEEK, startOfWeekDayDiff);
   }
 
@@ -70,13 +70,14 @@ export class NbCalendarMonthModelService<D> {
       .map(date => boundingMonth ? date : null);
   }
 
-  private getStartOfWeekDayDiff(date: D): number {
+  private getStartOfWeekDayDiff(date: D, firstDayOfWeek?: number): number {
     const startOfMonth = this.dateService.getMonthStart(date);
-    return this.getWeekStartDiff(startOfMonth);
+    return this.getWeekStartDiff(startOfMonth, firstDayOfWeek);
   }
 
-  private getWeekStartDiff(date: D): number {
-    return (7 - this.dateService.getFirstDayOfWeek() + this.dateService.getDayOfWeek(date)) % 7;
+  private getWeekStartDiff(date: D, firstDayOfWeek?: number): number {
+    const weekOfset = firstDayOfWeek ?? this.dateService.getFirstDayOfWeek();
+    return (7 - weekOfset + this.dateService.getDayOfWeek(date)) % 7;
   }
 
   private isShouldAddPrevBoundingMonth(weeks: D[][]): boolean {

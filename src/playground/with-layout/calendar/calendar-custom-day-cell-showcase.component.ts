@@ -20,7 +20,6 @@ import { CalendarCustomDayCellComponent } from './components/calendar-custom-day
       </nb-card-body>
     </nb-card>
   `,
-  entryComponents: [ CalendarCustomDayCellComponent ],
 })
 export class CalendarCustomDayCellShowcaseComponent {
   date = new Date();
