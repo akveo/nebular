@@ -26,9 +26,9 @@
     "nebular"
   ],
   "peerDependencies": {
-    "@angular/common": "^17.1.0",
-    "@angular/core": "^17.1.0",
-    "@angular/router": "^17.1.0",
+    "@angular/common": "^18.1.2",
+    "@angular/core": "^18.1.2",
+    "@angular/router": "^18.1.2",
     "rxjs": "^6.5.3 || ^7.4.0"
   },
   "dependencies": {
