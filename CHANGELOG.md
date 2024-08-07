@@ -1,3 +1,10 @@
+<a name="14.0.0"></a>
+# [14.0.0](https://github.com/akveo/nebular/compare/v13.0.0...v14.0.0) (2024-08-07)
+
+### Features
+
+* **angular:** update to Angular 18 ([#3262](https://github.com/akveo/nebular/pull/3262)) ([b666898](https://github.com/akveo/nebular/commit/b666898))
+
 <a name="13.0.0"></a>
 # [13.0.0](https://github.com/akveo/nebular/compare/v12.0.0...v13.0.0) (2024-01-28)
 
