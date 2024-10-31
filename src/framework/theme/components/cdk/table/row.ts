@@ -52,8 +52,31 @@ export class NbCellOutletDirective extends CdkCellOutlet {}
   providers: [{ provide: CdkHeaderRowDef, useExisting: NbHeaderRowDefDirective }],
 })
 export class NbHeaderRowDefDirective extends CdkHeaderRowDef {
+  private _hasStickyRowChanged = false;
+
   @Input('nbHeaderRowDef') columns: Iterable<string>;
-  @Input('nbHeaderRowDefSticky') sticky: boolean;
+  @Input('nbHeaderRowDefSticky')
+  get sticky(): boolean {
+    return this._stickyRow;
+  }
+  set sticky(value: boolean) {
+    if (value !== this._stickyRow) {
+      this._stickyRow = value;
+      this._hasStickyRowChanged = true;
+    }
+  }
+  private _stickyRow = false;
+
+  hasStickyChanged(): boolean {
+    const hasStickyChanged = this._hasStickyRowChanged;
+    this.resetStickyChanged();
+    return hasStickyChanged;
+  }
+
+  /** Resets the sticky changed state. */
+  resetStickyChanged(): void {
+    this._hasStickyRowChanged = false;
+  }
 }
 
 /**
@@ -65,8 +88,32 @@ export class NbHeaderRowDefDirective extends CdkHeaderRowDef {
   providers: [{ provide: CdkFooterRowDef, useExisting: NbFooterRowDefDirective }],
 })
 export class NbFooterRowDefDirective extends CdkFooterRowDef {
+  private _hasStickyRowChanged = false;
+
   @Input('nbFooterRowDef') columns: Iterable<string>;
-  @Input('nbFooterRowDefSticky') sticky: boolean;
+  @Input('nbFooterRowDefSticky')
+  get sticky(): boolean {
+    return this._stickyRow;
+  }
+  set sticky(value: boolean) {
+    if (value !== this._stickyRow) {
+      this._stickyRow = value;
+      this._hasStickyRowChanged = true;
+    }
+  }
+  private _stickyRow = false;
+
+  /** Whether the sticky state has changed. */
+  hasStickyChanged(): boolean {
+    const hasStickyChanged = this._hasStickyRowChanged;
+    this.resetStickyChanged();
+    return hasStickyChanged;
+  }
+
+  /** Resets the sticky changed state. */
+  resetStickyChanged(): void {
+    this._hasStickyRowChanged = false;
+  }
 }
 
 /**
@@ -86,41 +133,35 @@ export class NbRowDefDirective<T> extends CdkRowDef<T> {
 /** Footer template container that contains the cell outlet. Adds the right class and role. */
 @Component({
   selector: 'nb-header-row, tr[nbHeaderRow]',
-  template: `
-    <ng-container nbCellOutlet></ng-container>`,
+  template: ` <ng-container nbCellOutlet></ng-container>`,
   host: {
-    'class': 'nb-header-row',
-    'role': 'row',
+    class: 'nb-header-row',
+    role: 'row',
   },
   providers: [{ provide: CdkHeaderRow, useExisting: NbHeaderRowComponent }],
 })
-export class NbHeaderRowComponent extends CdkHeaderRow {
-}
+export class NbHeaderRowComponent extends CdkHeaderRow {}
 
 /** Footer template container that contains the cell outlet. Adds the right class and role. */
 @Component({
   selector: 'nb-footer-row, tr[nbFooterRow]',
-  template: `
-    <ng-container nbCellOutlet></ng-container>`,
+  template: ` <ng-container nbCellOutlet></ng-container>`,
   host: {
-    'class': 'nb-footer-row',
-    'role': 'row',
+    class: 'nb-footer-row',
+    role: 'row',
   },
   providers: [{ provide: CdkFooterRow, useExisting: NbFooterRowComponent }],
 })
-export class NbFooterRowComponent extends CdkFooterRow {
-}
+export class NbFooterRowComponent extends CdkFooterRow {}
 
 /** Data row template container that contains the cell outlet. Adds the right class and role. */
 @Component({
   selector: 'nb-row, tr[nbRow]',
-  template: `
-    <ng-container nbCellOutlet></ng-container>`,
+  template: ` <ng-container nbCellOutlet></ng-container>`,
   host: {
-    'class': 'nb-row',
-    'role': 'row',
+    class: 'nb-row',
+    role: 'row',
   },
   providers: [{ provide: CdkRow, useExisting: NbRowComponent }],
 })
-export class NbRowComponent extends CdkRow {
-}
+export class NbRowComponent extends CdkRow {}
