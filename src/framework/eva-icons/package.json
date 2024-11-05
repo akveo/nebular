@@ -1,6 +1,6 @@
 {
   "name": "@nebular/eva-icons",
-  "version": "14.0.1",
+  "version": "14.0.2",
   "description": "@nebular/eva-icons",
   "author": "akveo",
   "license": "MIT",
@@ -23,7 +23,7 @@
     "eva-icons"
   ],
   "peerDependencies": {
-    "@nebular/theme": "14.0.1",
+    "@nebular/theme": "14.0.2",
     "eva-icons": "^1.1.3"
   },
   "dependencies": {
