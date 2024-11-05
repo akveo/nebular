@@ -1,3 +1,13 @@
+<a name="14.0.2"></a>
+## [14.0.2](https://github.com/akveo/nebular/compare/v14.0.1...v14.0.2) (2024-11-05)
+
+
+### Bug Fixes
+
+* **theme:** sass deprecation warning of strict unary operations ([#3271](https://github.com/akveo/nebular/issues/3271)) ([364d6da](https://github.com/akveo/nebular/commit/364d6da))
+
+
+
 <a name="14.0.1"></a>
 ## [14.0.1](https://github.com/akveo/nebular/compare/v13.0.0...v14.0.1) (2024-10-23)
 
