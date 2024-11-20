@@ -1,6 +1,6 @@
 {
   "name": "@nebular/firebase-auth",
-  "version": "14.0.1",
+  "version": "14.0.2",
   "description": "@nebular/firebase-auth",
   "author": "akveo",
   "license": "MIT",
@@ -26,7 +26,7 @@
   ],
   "peerDependencies": {
     "@angular/core": "^18.1.2",
-    "@nebular/auth": "14.0.1",
+    "@nebular/auth": "14.0.2",
     "rxjs": "^6.5.3 || ^7.4.0",
     "firebase": "^10.7.2",
     "@angular/fire": "^18.0.1"
