@@ -13,8 +13,8 @@ export class NbColorHelper {
 
     let result = '#';
     for (let i = 1; i < 7; i += 2) {
-      const firstPart = h2d(color1.substr(i, 2));
-      const secondPart = h2d(color2.substr(i, 2));
+      const firstPart = h2d(color1.slice(i, i + 2));
+      const secondPart = h2d(color2.slice(i, i + 2));
       const resultPart = d2h(Math.floor(secondPart + (firstPart - secondPart) * (weight / 100.0)));
       result += ('0' + resultPart).slice(-2);
     }
