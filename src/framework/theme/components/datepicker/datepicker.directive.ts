@@ -262,7 +262,7 @@ export const NB_DATE_SERVICE_OPTIONS = new InjectionToken('Date service options'
  * datepicker-shadow:
  * */
 @Directive({
-  selector: 'input[nbDatepicker]',
+  selector: 'input[nbDatepicker],textarea[nbDatepicker]',
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
