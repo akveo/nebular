@@ -18,7 +18,7 @@ import { NbBadgePosition } from '../badge/badge.component';
  * @stacked-example(Showcase, user/user-showcase.component)
  *
  * ```ts
- *   <nb-user name="John Doe" title="Engineer"></nb-user>
+ *   <nb-user name='John Doe' title='Engineer'></nb-user>
  * ```
  *
  * ### Installation
@@ -113,7 +113,6 @@ import { NbBadgePosition } from '../badge/badge.component';
   templateUrl: './user.component.html',
 })
 export class NbUserComponent {
-
   imageBackgroundStyle: SafeStyle;
 
   /**
@@ -135,7 +134,9 @@ export class NbUserComponent {
    */
   @Input()
   set picture(value: string) {
-    this.imageBackgroundStyle = value ? this.domSanitizer.bypassSecurityTrustStyle(`url(${value})`) : null;
+    this.imageBackgroundStyle = value
+      ? this.domSanitizer.bypassSecurityTrustStyle(`url(${value})`)
+      : null;
   }
 
   /**
@@ -272,15 +273,32 @@ export class NbUserComponent {
     return this.shape === 'round';
   }
 
-  constructor(private domSanitizer: DomSanitizer) { }
+  constructor(private domSanitizer: DomSanitizer) {}
 
   getInitials(): string {
     if (this.name) {
       const names = this.name.split(' ');
-
-      return names.map(n => n.charAt(0)).splice(0, 2).join('').toUpperCase();
+      if (this.isLatin(this.name)) {
+        return names
+          .map((n) => n.charAt(0))
+          .splice(0, 2)
+          .join('')
+          .toUpperCase();
+      } else {
+        return names
+          .map((n) => n.charAt(0))
+          .splice(0, 2)
+          .join(' ')
+          .toUpperCase();
+      }
     }
 
     return '';
+  }
+
+  isLatin(text) {
+    const regex = /[a-za-zA-Z]/;
+    const result = regex.test(text);
+    return result;
   }
 }
