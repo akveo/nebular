@@ -69,7 +69,7 @@ Now, let's add API endpoints. According to the [NbPasswordAuthStrategy documenta
 });
 ```
 
-Let's assume that our API is localed on a separate server `http://example.com/app-api/v1` and change the `baseEndpoint` accordingly:
+Let's assume that our API is located on a separate server `http://example.com/app-api/v1` and change the `baseEndpoint` accordingly:
 
 ```typescript
 {

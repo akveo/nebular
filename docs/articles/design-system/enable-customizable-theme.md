@@ -6,7 +6,7 @@ In order to be able to customize theme variables, scss files should be enabled.
 <div class="note note-info section-end">
   <div class="note-title">Note</div>
   <div class="note-body">
-    You may already have this setup in place, if you used `ng add @nebular/theme` and selected customizable themes during the installation process.
+    You may already have this setup in place, if you used <code>ng add @nebular/theme</code> and selected customizable themes during the installation process.
   </div>
 </div>
 <hr>

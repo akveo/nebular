@@ -68,7 +68,6 @@ Additionally, you can install Auth and Security `npm install --save @nebular/aut
 At this stage you have everything in place, let's configure Nebular in the app module.
 
 ```ts
-
 import { NbThemeModule } from '@nebular/theme';
 
 ...
@@ -83,6 +82,20 @@ import { NbThemeModule } from '@nebular/theme';
 export class AppModule {
 
 ```
+
+or if your application is Standalone add it in the bootstrap:
+
+```ts
+import { NbThemeModule } from '@nebular/theme';
+
+export const appConfig: ApplicationConfig = {
+  providers: [
+    importProvidersFrom(NbThemeModule.forRoot()),
+    ...
+  ],
+}
+```
+
 Same way you can enable Auth Module (more details under [Auth Module Concepts](docs/auth/introduction) & [Install](docs/auth/installation) articles).
 
 ### Install Styles
@@ -100,7 +113,7 @@ Include default Nebular theme CSS file into your `angular.json` file:
   <div class="note-title">Customizable Theme Configuration</div>
   <div class="note-body">
     In this article we describe the basic styles installation. If you need more advanced features, like customizable theme variables, 
-    or even multiple themes switching - check out [Enabling Customizable Theme](docs/design-system/enable-customizable-theme) and then [Multiple Runtime Themes](docs/design-system/enable-multiple-runtime-themes) articles.
+    or even multiple themes switching - check out <a href="docs/design-system/enable-customizable-theme">Enabling Customizable Theme</a> and then <a href="docs/design-system/enable-multiple-runtime-themes">Multiple Runtime Themes</a> articles.
   </div>
 </div>
 

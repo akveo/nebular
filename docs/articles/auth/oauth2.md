@@ -43,8 +43,8 @@ We also assigned a `name` - `google`. Later on, we will use this alias to call t
 
 ## Step 3. Configure
 
-Let's fill in our strategy with some settings. We add the `client_id` obtained in Step 1. We don't need client_secret for this authentication flow, so we leave it empty.
-Then we set `authorize` endpoint, response_type (which is `token` in our case) and [scope](https://tools.ietf.org/html/rfc6749#section-3.3) of the authentication:
+Let's fill in our strategy with some settings. We add the `client_id` obtained in Step 1. We don't need `client_secret` for this authentication flow, so we leave it empty.
+Then we set `authorize` endpoint, `response_type` (which is `token` in our case) and [scope](https://tools.ietf.org/html/rfc6749#section-3.3) of the authentication:
  
 ```ts
 @NgModule({
