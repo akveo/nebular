@@ -21,10 +21,7 @@ import { Subject } from 'rxjs';
 export class OAuth2CallbackComponent implements OnDestroy {
   private destroy$ = new Subject<void>();
 
-  constructor(
-    private authService: NbAuthService,
-    private router: Router,
-  ) {
+  constructor(private authService: NbAuthService, private router: Router) {
     this.authService
       .authenticate('google')
       .pipe(takeUntil(this.destroy$))

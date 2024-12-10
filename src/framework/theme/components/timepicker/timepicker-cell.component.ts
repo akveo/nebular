@@ -44,10 +44,7 @@ export class NbTimePickerCellComponent implements AfterViewInit, OnDestroy {
 
   @ViewChild('valueContainer') valueContainerElement: ElementRef;
 
-  constructor(
-    protected ngZone: NgZone,
-    protected platformService: NbPlatform,
-  ) {}
+  constructor(protected ngZone: NgZone, protected platformService: NbPlatform) {}
 
   @HostListener('click')
   onClick() {

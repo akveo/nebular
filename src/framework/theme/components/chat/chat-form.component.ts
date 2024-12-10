@@ -156,10 +156,7 @@ export class NbChatFormComponent {
 
   @HostBinding('class.file-over') fileOver = false;
 
-  constructor(
-    protected cd: ChangeDetectorRef,
-    protected domSanitizer: DomSanitizer,
-  ) {}
+  constructor(protected cd: ChangeDetectorRef, protected domSanitizer: DomSanitizer) {}
 
   @HostListener('drop', ['$event'])
   onDrop(event: any) {

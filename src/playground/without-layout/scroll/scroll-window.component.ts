@@ -14,10 +14,7 @@ export class ScrollWindowComponent {
   mode = LayoutMode.WINDOW;
   text = 'Hello World! '.repeat(1024 * 10);
 
-  constructor(
-    private scroll: NbLayoutScrollService,
-    private ruler: NbLayoutRulerService,
-  ) {
+  constructor(private scroll: NbLayoutScrollService, private ruler: NbLayoutRulerService) {
     this.scroll.onScroll().subscribe((event) => console.info('Scroll', event));
   }
 

@@ -43,10 +43,7 @@ export class NbAuthComponent implements OnDestroy {
   token: string = '';
 
   // showcase of how to use the onAuthenticationChange method
-  constructor(
-    protected auth: NbAuthService,
-    protected location: Location,
-  ) {
+  constructor(protected auth: NbAuthService, protected location: Location) {
     this.subscription = auth
       .onAuthenticationChange()
       .pipe(takeUntil(this.destroy$))

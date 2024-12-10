@@ -102,14 +102,16 @@ describe('oauth2-auth-strategy', () => {
     });
   });
 
-  beforeEach(waitForAsync(
-    inject([NbOAuth2AuthStrategy, HttpTestingController], (_strategy, _httpMock) => {
-      strategy = _strategy;
-      httpMock = _httpMock;
+  beforeEach(
+    waitForAsync(
+      inject([NbOAuth2AuthStrategy, HttpTestingController], (_strategy, _httpMock) => {
+        strategy = _strategy;
+        httpMock = _httpMock;
 
-      strategy.setOptions({});
-    }),
-  ));
+        strategy.setOptions({});
+      }),
+    ),
+  );
 
   afterEach(() => {
     httpMock.verify();

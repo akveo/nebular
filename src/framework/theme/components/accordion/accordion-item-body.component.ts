@@ -49,10 +49,7 @@ const accordionItemBodyTrigger = trigger('accordionItemBody', [
 export class NbAccordionItemBodyComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject<void>();
 
-  constructor(
-    @Host() private accordionItem: NbAccordionItemComponent,
-    private cd: ChangeDetectorRef,
-  ) {}
+  constructor(@Host() private accordionItem: NbAccordionItemComponent, private cd: ChangeDetectorRef) {}
 
   get state(): string {
     return this.accordionItem.collapsed ? 'collapsed' : 'expanded';

@@ -1,6 +1,6 @@
 {
   "name": "@guestway-io/nebular-moment",
-  "version": "13.0.0",
+  "version": "14.0.2",
   "description": "@nebular/moment",
   "author": "akveo",
   "license": "MIT",
@@ -21,7 +21,7 @@
     "nebular"
   ],
   "peerDependencies": {
-    "@guestway-io/nebular-theme": "^13.0.0",
+    "@nebular/theme": "14.0.2",
     "moment": "^2.22.2"
   },
   "dependencies": {

@@ -21,6 +21,7 @@ import {
   Optional,
   SkipSelf,
 } from '@angular/core';
+import { CDK_TABLE } from '@angular/cdk/table';
 import { fromEvent, merge, Subject } from 'rxjs';
 import { debounceTime, takeUntil } from 'rxjs/operators';
 
@@ -138,11 +139,15 @@ import { NbColumnsService } from './tree-grid-columns.service';
  * tree-grid-sort-header-button-padding:
  */
 @Component({
-  // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'table[nbTreeGrid]',
   template: NB_TABLE_TEMPLATE,
   styleUrls: ['./tree-grid.component.scss'],
-  providers: [{ provide: NB_TREE_GRID, useExisting: NbTreeGridComponent }, NbColumnsService, ...NB_TABLE_PROVIDERS],
+  providers: [
+    { provide: NB_TREE_GRID, useExisting: NbTreeGridComponent },
+    { provide: CDK_TABLE, useExisting: NbTreeGridComponent },
+    NbColumnsService,
+    ...NB_TABLE_PROVIDERS,
+  ],
 })
 export class NbTreeGridComponent<T> extends NbTable<NbTreeGridPresentationNode<T>> implements AfterViewInit, OnDestroy {
   constructor(

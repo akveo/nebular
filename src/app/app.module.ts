@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, REMOVE_STYLES_ON_COMPONENT_DESTROY } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
@@ -45,6 +45,12 @@ import { ComponentLinkDirective } from './components-link.directive';
     LayoutThemeToggleComponent,
     ComponentsListComponent,
     ComponentLinkDirective,
+  ],
+  providers: [
+    {
+      provide: REMOVE_STYLES_ON_COMPONENT_DESTROY,
+      useValue: false,
+    },
   ],
   bootstrap: [AppComponent],
 })

@@ -21,10 +21,7 @@ import { NB_DOCUMENT } from '../../theme.options';
 export class NbToastRef {
   toastInstance: NbToastComponent;
 
-  constructor(
-    private toastContainer: NbToastContainer,
-    private toast: NbToast,
-  ) {}
+  constructor(private toastContainer: NbToastContainer, private toast: NbToast) {}
 
   close() {
     this.toastContainer.destroy(this.toast);

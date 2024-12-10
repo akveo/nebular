@@ -19,11 +19,13 @@ describe('breakpoint-service', () => {
   });
 
   // Single async inject to save references; which are used in all tests below
-  beforeEach(waitForAsync(
-    inject([NbMediaBreakpointsService], (_breakpointService) => {
-      breakpointService = _breakpointService;
-    }),
-  ));
+  beforeEach(
+    waitForAsync(
+      inject([NbMediaBreakpointsService], (_breakpointService) => {
+        breakpointService = _breakpointService;
+      }),
+    ),
+  );
 
   const total = 8;
   it(`has ${total} default breakpoints`, () => {

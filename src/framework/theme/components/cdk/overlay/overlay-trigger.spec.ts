@@ -5,7 +5,7 @@ import { NbTrigger, NbTriggerStrategyBuilderService, NB_DOCUMENT } from '@nebula
 import createSpy = jasmine.createSpy;
 
 // TODO: move into a separate file
-const withContainer = (el) => () => ({ location: { nativeElement: el } }) as ComponentRef<any>;
+const withContainer = (el) => () => ({ location: { nativeElement: el } } as ComponentRef<any>);
 const createElement = (name = 'div') => {
   const el = document.createElement(name);
   document.body.appendChild(el);

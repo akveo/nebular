@@ -37,12 +37,14 @@ describe('theme-service', () => {
   });
 
   // Single async inject to save references; which are used in all tests below
-  beforeEach(waitForAsync(
-    inject([NbMediaBreakpointsService, NbThemeService], (_breakpointService, _themeService) => {
-      breakpointService = _breakpointService;
-      themeService = _themeService;
-    }),
-  ));
+  beforeEach(
+    waitForAsync(
+      inject([NbMediaBreakpointsService, NbThemeService], (_breakpointService, _themeService) => {
+        breakpointService = _breakpointService;
+        themeService = _themeService;
+      }),
+    ),
+  );
 
   it('returns default theme specified in options', () => {
     let current: any;

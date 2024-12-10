@@ -33,11 +33,7 @@ export class NbTreeGridRowDefDirective<T>
    */
   @Input('nbTreeGridRowDefColumns') columns: Iterable<string>;
 
-  constructor(
-    template: TemplateRef<any>,
-    differs: IterableDiffers,
-    private columnsService: NbColumnsService,
-  ) {
+  constructor(template: TemplateRef<any>, differs: IterableDiffers, private columnsService: NbColumnsService) {
     super(template, differs);
   }
 
@@ -81,11 +77,7 @@ export class NbTreeGridHeaderRowDefDirective
    */
   @Input('nbTreeGridHeaderRowDef') columns: Iterable<string>;
 
-  constructor(
-    template: TemplateRef<any>,
-    differs: IterableDiffers,
-    private columnsService: NbColumnsService,
-  ) {
+  constructor(template: TemplateRef<any>, differs: IterableDiffers, private columnsService: NbColumnsService) {
     super(template, differs);
   }
 
@@ -129,11 +121,7 @@ export class NbTreeGridFooterRowDefDirective
    */
   @Input('nbTreeGridFooterRowDef') columns: Iterable<string>;
 
-  constructor(
-    template: TemplateRef<any>,
-    differs: IterableDiffers,
-    private columnsService: NbColumnsService,
-  ) {
+  constructor(template: TemplateRef<any>, differs: IterableDiffers, private columnsService: NbColumnsService) {
     super(template, differs);
   }
 

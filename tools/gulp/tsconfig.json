@@ -2,15 +2,22 @@
   "compilerOptions": {
     "experimentalDecorators": true,
     "noUnusedParameters": true,
-    "lib": ["es2017"],
+    "lib": [
+      "es2017"
+    ],
     "module": "commonjs",
     "moduleResolution": "node",
     "strictNullChecks": true,
-    "target": "es5",
-    // "typeRoots": ["node_modules/@types"],
-    "types": ["node"],
-    "baseUrl": ".",
-    "allowSyntheticDefaultImports": true
+    "target": "es2018",
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "types": [
+      "node"
+    ],
+    "baseUrl": "."
   },
-  "files": ["gulpfile.ts"]
+  "files": [
+    "gulpfile.ts"
+  ]
 }

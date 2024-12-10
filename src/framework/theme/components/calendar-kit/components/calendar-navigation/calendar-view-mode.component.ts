@@ -27,10 +27,7 @@ export class NbCalendarViewModeComponent<D> {
   static ngAcceptInputType_viewMode: NbCalendarViewModeValues;
   @Output() changeMode = new EventEmitter<void>(true);
 
-  constructor(
-    protected dateService: NbDateService<D>,
-    protected yearModelService: NbCalendarYearModelService<D>,
-  ) {}
+  constructor(protected dateService: NbDateService<D>, protected yearModelService: NbCalendarYearModelService<D>) {}
 
   getText(): string {
     if (!this.date) {

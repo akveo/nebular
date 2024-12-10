@@ -62,12 +62,14 @@ describe('NbLayoutRulerService', () => {
     fixture.detectChanges();
   });
 
-  beforeEach(waitForAsync(
-    inject([NbLayoutRulerService, NB_DOCUMENT], (_rulerService, _document) => {
-      rulerService = _rulerService;
-      currentDocument = _document;
-    }),
-  ));
+  beforeEach(
+    waitForAsync(
+      inject([NbLayoutRulerService, NB_DOCUMENT], (_rulerService, _document) => {
+        rulerService = _rulerService;
+        currentDocument = _document;
+      }),
+    ),
+  );
 
   afterEach(fakeAsync(() => {
     fixture.destroy();

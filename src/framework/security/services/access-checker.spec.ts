@@ -36,11 +36,13 @@ function setupAcl(can, roles: string | string[]) {
   });
 
   // Single async inject to save references; which are used in all tests below
-  beforeEach(waitForAsync(
-    inject([NbAccessChecker], (_accessChecker) => {
-      accessChecker = _accessChecker;
-    }),
-  ));
+  beforeEach(
+    waitForAsync(
+      inject([NbAccessChecker], (_accessChecker) => {
+        accessChecker = _accessChecker;
+      }),
+    ),
+  );
 }
 
 describe('authorization checker', () => {

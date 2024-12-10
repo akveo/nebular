@@ -25,10 +25,7 @@ export function createContainer<T>(
 
 @Injectable()
 export class NbOverlayService {
-  constructor(
-    protected overlay: NbOverlay,
-    protected layoutDirection: NbLayoutDirectionService,
-  ) {}
+  constructor(protected overlay: NbOverlay, protected layoutDirection: NbLayoutDirectionService) {}
 
   get scrollStrategies(): NbScrollStrategyOptions {
     return this.overlay.scrollStrategies;

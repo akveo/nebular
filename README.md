@@ -42,6 +42,12 @@ Nebular supports most recent browsers. Browser support list can be found <a href
 - [ngx-admin](http://github.com/akveo/ngx-admin) - 20k+ stars application based on Nebular modules with beautiful E-Commerce & IOT components, for boosting your developing process. [Live Demo](https://www.akveo.com/ngx-admin?utm_campaign=ngx_admin%20-%20demo%20-%20nebular%20github%20readme%20-%20traffic&utm_source=nebular&utm_medium=referral&utm_content=github_readme).
 - [ngx-admin-starter](https://github.com/akveo/ngx-admin/tree/starter-kit) - clean application based on Nebular modules with a limited number of additional dependencies.
 
+## UI Bakery
+
+Need a visual admin dashboard builder? Check out [UI Bakery](https://uibakery.io).
+
+<a href="https://uibakery.io"><img src="https://storage.uibakery.io/video-assets/landing/Logo/UIB%20400x150.png" height="80" /></a>
+
 ## License
 
 [MIT](LICENSE.txt) license.

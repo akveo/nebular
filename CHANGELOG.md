@@ -1,3 +1,35 @@
+<a name="14.0.2"></a>
+
+## [14.0.2](https://github.com/akveo/nebular/compare/v14.0.1...v14.0.2) (2024-11-05)
+
+### Bug Fixes
+
+- **theme:** sass deprecation warning of strict unary operations ([#3271](https://github.com/akveo/nebular/issues/3271)) ([364d6da](https://github.com/akveo/nebular/commit/364d6da))
+
+<a name="14.0.1"></a>
+
+## [14.0.1](https://github.com/akveo/nebular/compare/v13.0.0...v14.0.1) (2024-10-23)
+
+### Bug Fixes
+
+- **NbTreeGrid:** Add a provide for CDK_TABLE ([#3265](https://github.com/akveo/nebular/issues/3265)) ([63d1d6c](https://github.com/akveo/nebular/commit/63d1d6c))
+
+<a name="14.0.0"></a>
+
+# [14.0.0](https://github.com/akveo/nebular/compare/v13.0.0...v14.0.0) (2024-08-07)
+
+### Features
+
+- **angular:** update to Angular 18 ([#3262](https://github.com/akveo/nebular/pull/3262)) ([b666898](https://github.com/akveo/nebular/commit/b666898))
+
+<a name="13.0.0"></a>
+
+# [13.0.0](https://github.com/akveo/nebular/compare/v12.0.0...v13.0.0) (2024-01-28)
+
+### Features
+
+- **angular:** update to Angular 17 ([#3236](https://github.com/akveo/nebular/issues/3236)) ([bced0eb](https://github.com/akveo/nebular/commit/bced0eb))
+
 <a name="12.0.0"></a>
 
 # [12.0.0](https://github.com/akveo/nebular/compare/v11.0.1...v12.0.0) (2023-11-09)

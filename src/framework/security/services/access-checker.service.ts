@@ -16,10 +16,7 @@ import { map } from 'rxjs/operators';
  */
 @Injectable()
 export class NbAccessChecker {
-  constructor(
-    protected roleProvider: NbRoleProvider,
-    protected acl: NbAclService,
-  ) {}
+  constructor(protected roleProvider: NbRoleProvider, protected acl: NbAclService) {}
 
   /**
    * Checks whether access is granted or not

@@ -35,10 +35,7 @@ export class CalendarKitMonthCellComponent
   select: EventEmitter<Date> = new EventEmitter();
   selectedValue: Date;
 
-  constructor(
-    private dateService: NbDateService<Date>,
-    monthModel: NbCalendarMonthModelService<Date>,
-  ) {
+  constructor(private dateService: NbDateService<Date>, monthModel: NbCalendarMonthModelService<Date>) {
     super(monthModel);
   }
 

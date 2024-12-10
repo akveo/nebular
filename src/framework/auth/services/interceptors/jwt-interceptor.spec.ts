@@ -81,12 +81,14 @@ describe('jwt-interceptor', () => {
     dummyAuthStrategy = TestBed.inject(NbDummyAuthStrategy);
   });
 
-  beforeEach(waitForAsync(
-    inject([HttpClient, HttpTestingController], (_httpClient, _httpMock) => {
-      http = _httpClient;
-      httpMock = _httpMock;
-    }),
-  ));
+  beforeEach(
+    waitForAsync(
+      inject([HttpClient, HttpTestingController], (_httpClient, _httpMock) => {
+        http = _httpClient;
+        httpMock = _httpMock;
+      }),
+    ),
+  );
 
   it('Url filtered, isAuthenticatedOrRefresh not called, token not added', () => {
     const spy = spyOn(authService, 'isAuthenticatedOrRefresh');

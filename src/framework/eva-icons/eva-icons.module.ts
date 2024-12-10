@@ -24,10 +24,7 @@ export interface NbEvaIconOptions {
 }
 
 export class NbEvaSvgIcon extends NbSvgIcon {
-  constructor(
-    protected name,
-    protected content: NbOriginalEvaIcon,
-  ) {
+  constructor(protected name, protected content: NbOriginalEvaIcon) {
     super(name, '');
   }
 

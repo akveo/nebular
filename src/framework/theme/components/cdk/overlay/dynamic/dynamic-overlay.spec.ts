@@ -426,7 +426,7 @@ describe('dynamic-overlay', () => {
     const overlayContainer = TestBed.inject(NbOverlayContainer);
     // return false once to force overlay ref recreation and then always return true
     overlayContainer.getContainerElement = () => {
-      overlayContainer.getContainerElement = () => ({ contains: () => true }) as unknown as HTMLElement;
+      overlayContainer.getContainerElement = () => ({ contains: () => true } as unknown as HTMLElement);
       return { contains: () => false } as unknown as HTMLElement;
     };
 

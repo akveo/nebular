@@ -35,12 +35,14 @@ describe('token-storage', () => {
     });
   });
 
-  beforeEach(waitForAsync(
-    inject([NbTokenStorage, NbAuthTokenParceler], (_tokenStorage, _tokenParceler) => {
-      tokenStorage = _tokenStorage;
-      tokenParceler = _tokenParceler;
-    }),
-  ));
+  beforeEach(
+    waitForAsync(
+      inject([NbTokenStorage, NbAuthTokenParceler], (_tokenStorage, _tokenParceler) => {
+        tokenStorage = _tokenStorage;
+        tokenParceler = _tokenParceler;
+      }),
+    ),
+  );
 
   afterEach(() => {
     localStorage.removeItem(testTokenKey);

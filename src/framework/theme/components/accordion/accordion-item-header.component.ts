@@ -91,10 +91,7 @@ export class NbAccordionItemHeaderComponent implements OnInit, OnDestroy {
   }
 
   private destroy$ = new Subject<void>();
-  constructor(
-    @Host() private accordionItem: NbAccordionItemComponent,
-    private cd: ChangeDetectorRef,
-  ) {}
+  constructor(@Host() private accordionItem: NbAccordionItemComponent, private cd: ChangeDetectorRef) {}
 
   ngOnInit() {
     this.accordionItem.accordionItemInvalidate.pipe(takeUntil(this.destroy$)).subscribe(() => this.cd.markForCheck());

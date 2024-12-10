@@ -16,10 +16,7 @@ import { filter, map } from 'rxjs/operators';
 export class ContextMenuClickComponent implements OnInit {
   items = [{ title: 'Profile' }, { title: 'Logout' }];
 
-  constructor(
-    private nbMenuService: NbMenuService,
-    @Inject(NB_WINDOW) private window,
-  ) {}
+  constructor(private nbMenuService: NbMenuService, @Inject(NB_WINDOW) private window) {}
 
   ngOnInit() {
     this.nbMenuService

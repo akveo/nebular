@@ -45,14 +45,16 @@ describe('password-auth-strategy', () => {
     });
   });
 
-  beforeEach(waitForAsync(
-    inject([NbPasswordAuthStrategy, HttpTestingController], (_strategy, _httpMock) => {
-      strategy = _strategy;
-      httpMock = _httpMock;
+  beforeEach(
+    waitForAsync(
+      inject([NbPasswordAuthStrategy, HttpTestingController], (_strategy, _httpMock) => {
+        strategy = _strategy;
+        httpMock = _httpMock;
 
-      strategy.setOptions({ name: ownerStrategyName });
-    }),
-  ));
+        strategy.setOptions({ name: ownerStrategyName });
+      }),
+    ),
+  );
 
   afterEach(() => {
     httpMock.verify();

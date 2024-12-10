@@ -20,10 +20,7 @@ import { NbAuthToken } from './token/token';
  */
 @Injectable()
 export class NbAuthService {
-  constructor(
-    protected tokenService: NbTokenService,
-    @Inject(NB_AUTH_STRATEGIES) protected strategies,
-  ) {}
+  constructor(protected tokenService: NbTokenService, @Inject(NB_AUTH_STRATEGIES) protected strategies) {}
 
   /**
    * Retrieves current authenticated token stored

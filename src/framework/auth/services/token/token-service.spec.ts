@@ -42,12 +42,14 @@ describe('token-service', () => {
     });
   });
 
-  beforeEach(waitForAsync(
-    inject([NbTokenService, NbTokenStorage], (_tokenService, _tokenStorage) => {
-      tokenService = _tokenService;
-      tokenStorage = _tokenStorage;
-    }),
-  ));
+  beforeEach(
+    waitForAsync(
+      inject([NbTokenService, NbTokenStorage], (_tokenService, _tokenStorage) => {
+        tokenService = _tokenService;
+        tokenStorage = _tokenStorage;
+      }),
+    ),
+  );
 
   afterEach(() => {
     localStorage.removeItem(testTokenKey);

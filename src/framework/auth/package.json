@@ -1,7 +1,7 @@
 {
-  "name": "@guestway-io/nebular-auth",
-  "version": "13.0.0",
-  "description": "@guestway-io/nebular-auth",
+  "name": "@nebular/auth",
+  "version": "14.0.2",
+  "description": "@nebular/auth",
   "author": "akveo",
   "license": "MIT",
   "repository": {
@@ -24,11 +24,11 @@
     "nebular"
   ],
   "peerDependencies": {
-    "@angular/common": "^16.0.0 || ^17.0.0",
-    "@angular/core": "^16.0.0 || ^17.0.0",
-    "@angular/router": "^16.0.0 || ^17.0.0",
-    "@angular/forms": "^16.0.0 || ^17.0.0",
-    "@guestway-io/nebular-theme": "^13.0.0",
+    "@angular/common": "^18.1.2",
+    "@angular/core": "^18.1.2",
+    "@angular/router": "^18.1.2",
+    "@angular/forms": "^18.1.2",
+    "@nebular/theme": "14.0.2",
     "rxjs": "^6.5.3 || ^7.4.0"
   },
   "dependencies": {

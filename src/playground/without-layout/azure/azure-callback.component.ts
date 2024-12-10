@@ -21,10 +21,7 @@ import { Subject } from 'rxjs';
 export class AzureCallbackComponent implements OnDestroy {
   private destroy$ = new Subject<void>();
 
-  constructor(
-    private authService: NbAuthService,
-    private router: Router,
-  ) {
+  constructor(private authService: NbAuthService, private router: Router) {
     this.authService
       .authenticate('azure')
       .pipe(takeUntil(this.destroy$))
