@@ -4,5 +4,5 @@
 for dir in ./dist/*/
 do
     dir=${dir%*/}
-    npm publish --access=public dist/${dir##*/}/
+    npm publish --access=private dist/${dir##*/}/
 done

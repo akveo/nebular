@@ -1,4 +1,4 @@
-import { SchematicsException, Tree } from '@angular-devkit/schematics';
+import { Rule, SchematicsException, Tree } from '@angular-devkit/schematics';
 import { ProjectDefinition } from '@angular-devkit/core/src/workspace';
 import { join, normalize, Path } from '@angular-devkit/core';
 
@@ -15,7 +15,7 @@ import { updateWorkspace, WorkspaceDefinition } from '@schematics/angular/utilit
  * If the project uses *.css files it'll throw the error. Because we can't use scss themes
  * in the css Angular project.
  * */
-export function registerCustomizableTheme(options: Schema) {
+export function registerCustomizableTheme(options: Schema): Rule {
   return async (tree: Tree) => {
     const project = await getProject(tree, options.project);
     const stylesPath: string = getProjectStyleFile(project, 'scss') as string;
@@ -32,9 +32,9 @@ export function registerCustomizableTheme(options: Schema) {
 /**
  * Registers prebuilt css themes by inserting them in the angular.json styles.
  * */
-export function registerPrebuiltTheme(options: Schema) {
+export function registerPrebuiltTheme(options: Schema): any {
   return updateWorkspace(async (workspace: WorkspaceDefinition) => {
-    const project = getProjectFromWorkspace(workspace, options.project);
+    const project = getProjectFromWorkspace(workspace as any, options.project);
 
     const themePath = `./node_modules/@nebular/theme/styles/prebuilt/${options.theme}.css`;
 

@@ -14,5 +14,5 @@ import { getWorkspace } from '@schematics/angular/utility/workspace';
  * */
 export async function getProject(tree: Tree, projectName: string): Promise<ProjectDefinition> {
   const workspace = await getWorkspace(tree);
-  return getProjectFromWorkspace(workspace, projectName);
+  return getProjectFromWorkspace(workspace as any, projectName);
 }

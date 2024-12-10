@@ -10,7 +10,7 @@ import { wrapRootComponentInLayout } from './wrap-in-layout';
  * adding Nebular themes and wrapping root component in the Nebular Layout.
  * */
 export default function (options: Schema) {
-  return chain([
+  return chain(<any>[
     registerModules(options),
     options.customization ? registerCustomizableTheme(options) : registerPrebuiltTheme(options),
     options.layout ? wrapRootComponentInLayout(options) : noop(),
