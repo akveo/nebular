@@ -34,7 +34,7 @@
     "build:dev-schematics": "gulp build-development-schematics",
     "test": "ng test",
     "test:packages": "npm-run-all \"test theme -- --code-coverage --watch=false\" test:schematics \"test auth -- --code-coverage --watch=false\" \"test moment -- --code-coverage --watch=false\" \"test security -- --code-coverage --watch=false\" \"test date-fns -- --code-coverage --watch=false\" \"test firebase-auth -- --code-coverage --watch=false\" \"test eva-icons -- --code-coverage --watch=false\"",
-    "test:wp": "ng test --configuration=production-wp",
+    "test:wp": "ng test playground -c=production-wp",
     "test:coverage": "rimraf coverage && ng test playground --code-coverage --watch=false",
     "test:schematics": "gulp build-packages-schematics-for-test && jasmine dist/**/*.spec.js",
     "lint": "ng lint",
