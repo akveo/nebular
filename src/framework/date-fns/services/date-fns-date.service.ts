@@ -8,9 +8,9 @@ import { Inject, Injectable, LOCALE_ID, Optional } from '@angular/core';
 
 import { NB_DATE_SERVICE_OPTIONS, NbNativeDateService } from '@nebular/theme';
 
-import { default as parse } from 'date-fns/parse';
-import { default as formatDate } from 'date-fns/format';
-import { default as getWeek } from 'date-fns/getWeek';
+import { parse } from 'date-fns/parse';
+import { formatDate } from 'date-fns/format';
+import { getWeek } from 'date-fns/getWeek';
 
 export interface NbDateFnsOptions {
   format: string;
