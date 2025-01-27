@@ -20,6 +20,7 @@ import { Component } from '@angular/core';
       }
     `,
   ],
+  standalone: false,
 })
 export class DateTimepickerDynamicInputsShowcaseComponent {
   now = new Date();

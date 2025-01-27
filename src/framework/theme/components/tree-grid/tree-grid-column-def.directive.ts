@@ -12,6 +12,7 @@ import { NB_SORT_HEADER_COLUMN_DEF, NbColumnDefDirective } from '../cdk/table/ce
     { provide: NbCdkColumnDef, useExisting: NbTreeGridColumnDefDirective },
     { provide: NB_SORT_HEADER_COLUMN_DEF, useExisting: NbTreeGridColumnDefDirective },
   ],
+  standalone: false,
 })
 export class NbTreeGridColumnDefDirective extends NbColumnDefDirective implements OnChanges {
   /**
@@ -35,9 +36,7 @@ export class NbTreeGridColumnDefDirective extends NbColumnDefDirective implement
     return this.hideOnValue;
   }
   set hideOn(value: number | null) {
-    this.hideOnValue = !value && value !== 0
-      ? null
-      : parseInt(value as unknown as string, 10);
+    this.hideOnValue = !value && value !== 0 ? null : parseInt(value as unknown as string, 10);
   }
 
   private showOnValue: number | null = null;
@@ -50,9 +49,7 @@ export class NbTreeGridColumnDefDirective extends NbColumnDefDirective implement
     return this.showOnValue;
   }
   set showOn(value: number | null) {
-    this.showOnValue = !value && value !== 0
-      ? null
-      : parseInt(value as unknown as string, 10);
+    this.showOnValue = !value && value !== 0 ? null : parseInt(value as unknown as string, 10);
   }
 
   ngOnChanges() {

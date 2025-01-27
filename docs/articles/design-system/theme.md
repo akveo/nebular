@@ -22,18 +22,14 @@ $theme: (
   // ...
   color-danger-900: #700940,
 
-  /* Basic colors - for backgrounds and borders and texts */
-
-  color-basic-100: white,
+  /* Basic colors - for backgrounds and borders and texts */ color-basic-100: white,
   color-basic-200: #f7f8fa,
   color-basic-300: #edf0f4,
   color-basic-400: #dde1eb,
   // ...
   color-basic-1100: #131729,
 
-  /* Status colors states - focus, hover, default, active, disabled  */
-
-  color-primary-focus: color-primary-700,
+  /* Status colors states - focus, hover, default, active, disabled  */ color-primary-focus: color-primary-700,
   color-primary-hover: color-primary-400,
   color-primary-default: color-primary-500,
   color-primary-active: color-primary-600,
@@ -57,6 +53,7 @@ All available color within the theme. 5 semantic colors (`primary`, `success`, `
 Each color has a pallet of 9 shades, except for `basic`, which has 11 shades. These colors mostly used by `status` variants of the components.
 
 Primary color shades:
+
 ```scss
 color-primary-100: #f2f6ff,
 color-primary-200: #d9e4ff,
@@ -87,7 +84,7 @@ color-primary-active: color-primary-600,
 color-primary-disabled: color-primary-300,
 ```
 
-You can adjust these settings for each of the colors, to make states use lighter or darker colors. 
+You can adjust these settings for each of the colors, to make states use lighter or darker colors.
 
 <hr>
 
@@ -99,6 +96,7 @@ Basic backgrounds and borders heavily used by components (cards, accordions, men
 to distinguish some of the components.
 
 Basic backgrounds and borders:
+
 ```scss
 background-basic-color-1: color-basic-100,
 background-basic-color-2: color-basic-200,
@@ -113,8 +111,8 @@ border-basic-color-5: color-basic-500,
 ```
 
 the most used of these are:
- 
-- `background-basic-color-1` - the lightest one, usually used for top sitting elements - cards, headers, etc. 
+
+- `background-basic-color-1` - the lightest one, usually used for top sitting elements - cards, headers, etc.
 - `background-basic-color-2` - for background of the layout and input controls (inputs, checkboxes, etc)
 
 And vice-versa for dark themes:
@@ -131,15 +129,17 @@ border-basic-color-3: color-basic-1000,
 border-basic-color-4: color-basic-1100,
 border-basic-color-5: color-basic-1100,
 ```
-<hr>  
+
+<hr>
 
 ## Text Colors
 
 There are 5 colors within the theme: `basic` - main text color, used on top of `basic` backgrounds `alternate` - alternative color used on top of `alternate` backgrounds,
 `control` - used on top of `status` colors (`primary`, `success`, etc), `disabled` color - to indicate text/component disabled state
 and `hint` - for secondary texts (for example placeholders and captions).
- 
+
 Text colors use `basic` shades as a source:
+
 ```scss
 text-basic-color: color-basic-1000,
 text-alternate-color: color-basic-100,
@@ -147,6 +147,7 @@ text-control-color: color-basic-100,
 text-disabled-color: color-basic-500,
 text-hint-color: color-basic-700,
 ```
+
 <hr>
 
 ## Fonts & Text Styles
@@ -154,7 +155,8 @@ text-hint-color: color-basic-700,
 Each theme has two available fonts: `default` and `secondary`. `secondary` font used for headers, while the default for the rest of the elements.
 
 There are 14 text styles:
-- 6 `heading` styles, used by h1-h6 elements 
+
+- 6 `heading` styles, used by h1-h6 elements
 - 2 `subtitle` styles, used as a text of most of controls (inputs, menus, etc)
 - 2 `paragraph` styles, regular text
 - 2 `caption` styles, used by smaller texts, like tooltip or input caption
@@ -162,19 +164,22 @@ There are 14 text styles:
 - `button` text style, used by button element
 
 Each styles describes text `font-family`, `font-size`, `font-width` and `line-height`, for instance, caption text style:
+
 ```scss
 text-caption-font-family: font-family-primary,
 text-caption-font-size: 0.75rem,
 text-caption-font-weight: 400,
 text-caption-line-height: 1rem,
 ```
+
 <hr>
 
 Adjust these styles to change text style of specific groups of elements.
 
 ## General Theme Variables
 
-This section contains other supporting theme variables, such as `border-radius`, `outline-width` & `outline-color`, `shadow`, etc. 
+This section contains other supporting theme variables, such as `border-radius`, `outline-width` & `outline-color`, `shadow`, etc.
+
 <hr>
 
 ## Related Articles
@@ -183,4 +188,3 @@ This section contains other supporting theme variables, such as `border-radius`,
 - [Create Custom Theme](docs/design-system/create-custom-theme)
 - [Default Theme Variables](docs/design-system/default-theme)
 - [Dark Theme Variables](docs/design-system/dark-theme)
-

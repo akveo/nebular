@@ -6,7 +6,5 @@
     "target": "es2018",
     "resolveJsonModule": true
   },
-  "include": [
-    "build-docs.ts"
-  ]
+  "include": ["build-docs.ts"]
 }

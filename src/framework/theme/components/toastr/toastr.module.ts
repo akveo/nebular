@@ -15,7 +15,6 @@ import { NbToastComponent } from './toast.component';
 import { NbToastrContainerComponent } from './toastr-container.component';
 import { NB_TOASTR_CONFIG, NbToastrConfig } from './toastr-config';
 
-
 @NgModule({
   imports: [NbSharedModule, NbOverlayModule, NbIconModule],
   declarations: [NbToastrContainerComponent, NbToastComponent],
@@ -24,11 +23,7 @@ export class NbToastrModule {
   static forRoot(toastrConfig: Partial<NbToastrConfig> = {}): ModuleWithProviders<NbToastrModule> {
     return {
       ngModule: NbToastrModule,
-      providers: [
-        NbToastrService,
-        NbToastrContainerRegistry,
-        { provide: NB_TOASTR_CONFIG, useValue: toastrConfig },
-      ],
+      providers: [NbToastrService, NbToastrContainerRegistry, { provide: NB_TOASTR_CONFIG, useValue: toastrConfig }],
     };
   }
 }

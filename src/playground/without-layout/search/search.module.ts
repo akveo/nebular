@@ -21,12 +21,6 @@ import { SearchWithInputEventComponent } from './search-with-input-event.compone
     SearchTestComponent,
     SearchWithInputEventComponent,
   ],
-  imports: [
-    NbSearchModule,
-    NbLayoutModule,
-    NbSidebarModule.forRoot(),
-    NbCardModule,
-    SearchRoutingModule,
-  ],
+  imports: [NbSearchModule, NbLayoutModule, NbSidebarModule.forRoot(), NbCardModule, SearchRoutingModule],
 })
 export class SearchModule {}

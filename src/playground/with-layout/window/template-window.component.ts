@@ -9,19 +9,19 @@ import { NbWindowService } from '@nebular/theme';
       <p>Here is the text provided via config: "{{ data.text }}"</p>
     </ng-template>
   `,
-  styleUrls: [ './window.scss' ],
+  styleUrls: ['./window.scss'],
+  standalone: false,
 })
 export class TemplateWindowComponent {
-
   // TODO static must be false as of Angular 9.0.0
   @ViewChild('contentTemplate') contentTemplate: TemplateRef<any>;
 
   constructor(private windowService: NbWindowService) {}
 
   openWindow() {
-    this.windowService.open(
-      this.contentTemplate,
-      { title: 'Window content from template', context: { text: 'some text to pass into template' } },
-    );
+    this.windowService.open(this.contentTemplate, {
+      title: 'Window content from template',
+      context: { text: 'some text to pass into template' },
+    });
   }
 }

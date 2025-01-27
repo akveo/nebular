@@ -18,8 +18,9 @@ import { Component } from '@angular/core';
       </nb-card-body>
     </nb-card>
   `,
+  standalone: false,
 })
 export class CalendarFilterComponent {
   date = new Date();
-  filter = date => date.getDay() !== 0 && date.getDay() !== 6;
+  filter = (date) => date.getDay() !== 0 && date.getDay() !== 6;
 }

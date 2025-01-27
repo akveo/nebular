@@ -32,10 +32,11 @@ import { NbColumnsService } from './tree-grid-columns.service';
 @Directive({
   selector: 'td[nbTreeGridCell]',
   host: {
-    'class': 'nb-tree-grid-cell',
-    'role': 'gridcell',
+    class: 'nb-tree-grid-cell',
+    role: 'gridcell',
   },
   providers: [{ provide: NbCdkCell, useExisting: NbTreeGridCellDirective }],
+  standalone: false,
 })
 export class NbTreeGridCellDirective extends NbCellDirective implements OnInit, OnDestroy {
   private destroy$ = new Subject<void>();
@@ -96,7 +97,8 @@ export class NbTreeGridCellDirective extends NbCellDirective implements OnInit, 
       this.initialRightPadding = style.paddingRight;
     }
 
-    this.columnService.onColumnsChange()
+    this.columnService
+      .onColumnsChange()
       .pipe(
         filter(() => this.latestWidth !== this.tree.getColumnWidth()),
         takeUntil(this.destroy$),
@@ -114,9 +116,7 @@ export class NbTreeGridCellDirective extends NbCellDirective implements OnInit, 
   }
 
   private get initialStartPadding(): string {
-      return this.directionService.isLtr()
-      ? this.initialLeftPadding
-      : this.initialRightPadding;
+    return this.directionService.isLtr() ? this.initialLeftPadding : this.initialRightPadding;
   }
 
   private getStartPadding(): string | SafeStyle | null {
@@ -144,10 +144,11 @@ export class NbTreeGridCellDirective extends NbCellDirective implements OnInit, 
 @Directive({
   selector: 'th[nbTreeGridHeaderCell]',
   host: {
-    'class': 'nb-tree-grid-header-cell',
-    'role': 'columnheader',
+    class: 'nb-tree-grid-header-cell',
+    role: 'columnheader',
   },
   providers: [{ provide: NbCdkHeaderCell, useExisting: NbTreeGridHeaderCellDirective }],
+  standalone: false,
 })
 export class NbTreeGridHeaderCellDirective extends NbHeaderCellDirective implements OnInit, OnDestroy {
   private destroy$ = new Subject<void>();
@@ -172,7 +173,8 @@ export class NbTreeGridHeaderCellDirective extends NbHeaderCellDirective impleme
   }
 
   ngOnInit() {
-    this.columnService.onColumnsChange()
+    this.columnService
+      .onColumnsChange()
       .pipe(
         filter(() => this.latestWidth !== this.tree.getColumnWidth()),
         takeUntil(this.destroy$),
@@ -189,10 +191,11 @@ export class NbTreeGridHeaderCellDirective extends NbHeaderCellDirective impleme
 @Directive({
   selector: 'td[nbTreeGridFooterCell]',
   host: {
-    'class': 'nb-tree-grid-footer-cell',
-    'role': 'gridcell',
+    class: 'nb-tree-grid-footer-cell',
+    role: 'gridcell',
   },
   providers: [{ provide: NbCdkFooterCell, useExisting: NbTreeGridFooterCellDirective }],
+  standalone: false,
 })
 export class NbTreeGridFooterCellDirective extends NbFooterCellDirective implements OnInit, OnDestroy {
   private destroy$ = new Subject<void>();
@@ -217,7 +220,8 @@ export class NbTreeGridFooterCellDirective extends NbFooterCellDirective impleme
   }
 
   ngOnInit() {
-    this.columnService.onColumnsChange()
+    this.columnService
+      .onColumnsChange()
       .pipe(
         filter(() => this.latestWidth !== this.tree.getColumnWidth()),
         takeUntil(this.destroy$),

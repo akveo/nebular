@@ -29,7 +29,5 @@
       "default": "scss"
     }
   },
-  "required": [
-    "name"
-  ]
+  "required": ["name"]
 }

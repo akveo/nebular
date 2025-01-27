@@ -8,24 +8,28 @@ existing issues (both open and closed) prior to opening any new issue and ensure
 
 ### Issue type
 
-**I'm submitting a ...**  (check one with "x")
+**I'm submitting a ...** (check one with "x")
 
-* [ ] bug report
-* [ ] feature request
+- [ ] bug report
+- [ ] feature request
 
 ### Issue description
 
 **Current behavior:**
+
 <!-- Describe how the bug manifests. -->
 
 **Expected behavior:**
+
 <!-- Describe what the behavior would be without the bug. -->
 
 **Steps to reproduce:**
+
 <!--  Please explain the steps required to duplicate the issue, especially if you are able to provide a sample application. -->
 
 **Related code:**
-<!-- 
+
+<!--
 If you are able to illustrate the bug or feature request with an example, please provide a sample application via one of the following means:
 
 A sample application via GitHub
@@ -42,6 +46,7 @@ insert short code snippets here
 ### Other information:
 
 **npm, node, OS, Browser**
+
 ```
 <!--
 Node, npm: `node --version` and `npm --version`
@@ -51,6 +56,7 @@ Browser: Chrome/Safari/Firefox/etc?
 ```
 
 **Angular, Nebular**
+
 ```
 <!--
 Check your `package-lock.json` or locate a `package.json` in the `node_modules` folder.

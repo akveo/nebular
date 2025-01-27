@@ -1,21 +1,26 @@
 # Professional Services
-Evolve your products and apps to expand your markets. Nebular Services are set to help speed up the evolution of your business. 
+
+Evolve your products and apps to expand your markets. Nebular Services are set to help speed up the evolution of your business.
 The Nebular team is ready to bring you their expertise with the following services.
 
 ### Theme customization
+
 Let Akveo’s experts help you get more out of your Nebular experience. Modify, extend, and tailor Nebular components and controls to fit your needs. Our developers know the products inside and out, so there's no need to spend hours searching for a solution. We create themes, modules, and components to match your company branding.
 
 ### Custom development
+
 Do you want to make a web or mobile app? Or even extend an existing one with new features?
 Our specialists will analyze your product and offer an optimized solution based on your actual needs. We will work with you to create an amazing product that delivers.
 
 ### Consulting
+
 Sometimes effective troubleshooters are hard to come by. And sometimes, a little boost at just the right time is all it takes to bring your project to the next level. Get our comprehensive support and level up your project. Here's how we can help:
-- Code Review/Analysis 
+
+- Code Review/Analysis
 - Debugging and Programming Help
-- Deployment 
+- Deployment
 - Workshop Mentoring
- 
+
 <a href="https://www.akveo.com/contact?utm_campaign=services%20-%20consulting%20-%20nebular%20professional%20services&utm_source=nebular&utm_medium=referral&utm_content=nebular_services_consulting_request">Want to know more?</a>
 
 <hr>
@@ -25,10 +30,9 @@ The mission of the Akveo support team is to help you to solve technical challeng
 - Debugging
 - Deployment consulting
 - Remote assistance from an engineer 
-- Full application code analysis 
+- Full application code analysis
 
 <a href="https://www.akveo.com/contact?utm_campaign=services%20-%20consulting%20-%20nebular%20professional%20services&utm_source=nebular&utm_medium=referral&utm_content=support_cta">Need help? Contact us</a>
-
 
 <hr>
 ## Trainings
@@ -38,6 +42,7 @@ Get the practical knowledge your team needs to effectively use Angular and Nebul
 The convenience of desktop learning from anywhere. Our Nebular tutors offer a comprehensive online training course for one very affordable price. The course lets you gain enough experience to create an amazing app based on a Nebular framework, developed on Angular technology.
 
 ### Offline study
+
 Onsite training. Wherever you are, our Nebular expert will come to you and boost the skills of your developers, quickly and effectively. We will tailor a high-impact training course that addresses your specific goals and gets your team’s skills where they need to be.
 
 Ready to dive into Nebular? <a href="https://www.akveo.com/contact?utm_campaign=services%20-%20consulting%20-%20nebular%20professional%20services&utm_source=nebular&utm_medium=referral&utm_content=training_request">Get in touch</a>

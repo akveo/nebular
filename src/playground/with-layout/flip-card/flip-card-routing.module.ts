@@ -5,7 +5,7 @@
  */
 
 import { NgModule } from '@angular/core';
-import { RouterModule, Route} from '@angular/router';
+import { RouterModule, Route } from '@angular/router';
 import { FlipCardAccentsComponent } from './flip-card-accents.component';
 import { FlipCardColorsComponent } from './flip-card-colors.component';
 import { FlipCardFullComponent } from './flip-card-full.component';
@@ -36,7 +36,7 @@ const routes: Route[] = [
 ];
 
 @NgModule({
-  imports: [ RouterModule.forChild(routes) ],
-  exports: [ RouterModule ],
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule],
 })
 export class FlipCardRoutingModule {}

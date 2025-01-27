@@ -11,13 +11,13 @@ import * as ts from 'typescript';
 
 import { getProject } from './project';
 
-
 export class TemplateDescriptor {
-  constructor(public templateProp: ts.PropertyAssignment,
-              public templateUrlProp: ts.PropertyAssignment,
-              public componentPath: string,
-              public template: string) {
-  }
+  constructor(
+    public templateProp: ts.PropertyAssignment,
+    public templateUrlProp: ts.PropertyAssignment,
+    public componentPath: string,
+    public template: string,
+  ) {}
 
   isInline(): boolean {
     return !!this.templateProp;
@@ -35,12 +35,7 @@ export function getComponentTemplateDescriptor(host: Tree, componentPath: string
     templateUrlProp,
   });
 
-  return new TemplateDescriptor(
-    templateProp,
-    templateUrlProp,
-    componentPath,
-    template,
-  );
+  return new TemplateDescriptor(templateProp, templateUrlProp, componentPath, template);
 }
 
 export async function getAppComponentPath(tree: Tree, projectName: string): Promise<string> {
@@ -49,8 +44,8 @@ export async function getAppComponentPath(tree: Tree, projectName: string): Prom
 }
 
 interface TemplateInfo {
-  templateProp?: ts.PropertyAssignment,
-  templateUrlProp?: ts.PropertyAssignment,
+  templateProp?: ts.PropertyAssignment;
+  templateUrlProp?: ts.PropertyAssignment;
 }
 
 function getComponentTemplate(host: Tree, compPath: string, tmplInfo: TemplateInfo): string {
@@ -74,7 +69,7 @@ function getComponentTemplate(host: Tree, compPath: string, tmplInfo: TemplateIn
 function getMetadataProperty(metadata: ts.Node, propertyName: string): ts.PropertyAssignment {
   const properties = (metadata as ts.ObjectLiteralExpression).properties;
   const property = properties
-    .filter(prop => prop.kind === ts.SyntaxKind.PropertyAssignment)
+    .filter((prop) => prop.kind === ts.SyntaxKind.PropertyAssignment)
     .filter((prop: ts.PropertyAssignment) => {
       const name = prop.name;
       switch (name.kind) {

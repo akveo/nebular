@@ -4,13 +4,8 @@ import { NewsService } from './news.service';
 @Component({
   template: `
     <nb-card class="own-scroll">
-      <nb-card-header>
-        Own scroll
-      </nb-card-header>
-      <nb-list
-        nbInfiniteList
-        [threshold]="500"
-        (bottomThreshold)="loadNext(firstCard)">
+      <nb-card-header> Own scroll </nb-card-header>
+      <nb-list nbInfiniteList [threshold]="500" (bottomThreshold)="loadNext(firstCard)">
         <nb-list-item *ngFor="let newsPost of firstCard.news">
           <nb-news-post [post]="newsPost"></nb-news-post>
         </nb-list-item>
@@ -21,14 +16,8 @@ import { NewsService } from './news.service';
     </nb-card>
 
     <nb-card>
-      <nb-card-header>
-        Window scroll
-      </nb-card-header>
-      <nb-list
-        nbInfiniteList
-        listenWindowScroll
-        [threshold]="500"
-        (bottomThreshold)="loadNext(secondCard)">
+      <nb-card-header> Window scroll </nb-card-header>
+      <nb-list nbInfiniteList listenWindowScroll [threshold]="500" (bottomThreshold)="loadNext(secondCard)">
         <nb-list-item *ngFor="let newsPost of secondCard.news">
           <nb-news-post [post]="newsPost"></nb-news-post>
         </nb-list-item>
@@ -38,11 +27,11 @@ import { NewsService } from './news.service';
       </nb-list>
     </nb-card>
   `,
-  styleUrls: [ 'infinite-news-list.component.scss', 'infinite-list-scroll-modes.component.scss' ],
-  providers: [ NewsService ],
+  styleUrls: ['infinite-news-list.component.scss', 'infinite-list-scroll-modes.component.scss'],
+  providers: [NewsService],
+  standalone: false,
 })
 export class InfiniteListScrollModesComponent {
-
   firstCard = {
     news: [],
     placeholders: [],
@@ -60,16 +49,17 @@ export class InfiniteListScrollModesComponent {
   constructor(private newsService: NewsService) {}
 
   loadNext(cardData) {
-    if (cardData.loading) { return }
+    if (cardData.loading) {
+      return;
+    }
 
     cardData.loading = true;
     cardData.placeholders = new Array(this.pageSize);
-    this.newsService.load(cardData.pageToLoadNext, this.pageSize)
-      .subscribe(nextNews => {
-        cardData.placeholders = [];
-        cardData.news.push(...nextNews);
-        cardData.loading = false;
-        cardData.pageToLoadNext++;
-      });
+    this.newsService.load(cardData.pageToLoadNext, this.pageSize).subscribe((nextNews) => {
+      cardData.placeholders = [];
+      cardData.news.push(...nextNews);
+      cardData.loading = false;
+      cardData.pageToLoadNext++;
+    });
   }
 }

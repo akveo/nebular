@@ -15,7 +15,6 @@ import { NbPosition } from './overlay-position';
 import { NbComponentPortal, NbPortalInjector, NbPortalOutletDirective, NbTemplatePortal } from './mapping';
 
 export interface NbRenderableContainer {
-
   /**
    * A renderContent method renders content with provided context.
    * Naturally, this job has to be done by ngOnChanges lifecycle hook, but
@@ -27,6 +26,7 @@ export interface NbRenderableContainer {
 
 @Component({
   template: '',
+  standalone: false,
 })
 export class NbPositionedContainerComponent {
   @Input() position: NbPosition;
@@ -92,16 +92,15 @@ export class NbPositionedContainerComponent {
   }
 }
 
-
 @Component({
   selector: 'nb-overlay-container',
   template: `
     <div *ngIf="isStringContent" class="primitive-overlay">{{ content }}</div>
     <ng-template nbPortalOutlet></ng-template>
   `,
+  standalone: false,
 })
 export class NbOverlayContainerComponent {
-
   // TODO static must be false as of Angular 9.0.0, issues/1514
   @ViewChild(NbPortalOutletDirective, { static: true }) portalOutlet: NbPortalOutletDirective;
 
@@ -109,9 +108,11 @@ export class NbOverlayContainerComponent {
 
   content: string;
 
-  constructor(protected vcr: ViewContainerRef,
-              protected injector: Injector, private changeDetectorRef: ChangeDetectorRef) {
-  }
+  constructor(
+    protected vcr: ViewContainerRef,
+    protected injector: Injector,
+    private changeDetectorRef: ChangeDetectorRef,
+  ) {}
 
   get isStringContent(): boolean {
     return !!this.content;
@@ -152,8 +153,6 @@ export class NbOverlayContainerComponent {
   }
 
   protected createChildInjector(cfr: ComponentFactoryResolver): NbPortalInjector {
-    return new NbPortalInjector(this.injector, new WeakMap([
-      [ComponentFactoryResolver, cfr],
-    ]));
+    return new NbPortalInjector(this.injector, new WeakMap([[ComponentFactoryResolver, cfr]]));
   }
 }

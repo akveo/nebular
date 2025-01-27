@@ -19,6 +19,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
     </nb-card>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class SelectCompareWithComponent {
   compareById(v1, v2): boolean {

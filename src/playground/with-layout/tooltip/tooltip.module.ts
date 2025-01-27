@@ -19,6 +19,6 @@ import { TooltipWithIconComponent } from './tooltip-with-icon.component';
     TooltipShowcaseComponent,
     TooltipWithIconComponent,
   ],
-  imports: [ NbCardModule, NbButtonModule, NbTooltipModule, TooltipRoutingModule ],
+  imports: [NbCardModule, NbButtonModule, NbTooltipModule, TooltipRoutingModule],
 })
 export class TooltipModule {}

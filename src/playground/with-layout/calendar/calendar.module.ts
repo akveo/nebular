@@ -34,13 +34,6 @@ import { CalendarWeekNumberComponent } from './calendar-week-number.component';
     CalendarCustomDayCellComponent,
     CalendarWeekNumberComponent,
   ],
-  imports: [
-    CommonModule,
-    NbButtonModule,
-    NbCardModule,
-    NbCalendarModule,
-    NbCalendarRangeModule,
-    CalendarRoutingModule,
-  ],
+  imports: [CommonModule, NbButtonModule, NbCardModule, NbCalendarModule, NbCalendarRangeModule, CalendarRoutingModule],
 })
 export class CalendarModule {}

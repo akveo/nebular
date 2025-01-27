@@ -15,9 +15,9 @@ import { NbAuthResult } from '../../services/auth-result';
   selector: 'nb-login',
   templateUrl: './login.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class NbLoginComponent {
-
   redirectDelay: number = 0;
   showMessages: any = {};
   strategy: string = '';
@@ -29,11 +29,12 @@ export class NbLoginComponent {
   socialLinks: NbAuthSocialLink[] = [];
   rememberMe = false;
 
-  constructor(protected service: NbAuthService,
-              @Inject(NB_AUTH_OPTIONS) protected options = {},
-              protected cd: ChangeDetectorRef,
-              protected router: Router) {
-
+  constructor(
+    protected service: NbAuthService,
+    @Inject(NB_AUTH_OPTIONS) protected options = {},
+    protected cd: ChangeDetectorRef,
+    protected router: Router,
+  ) {
     this.redirectDelay = this.getConfigValue('forms.login.redirectDelay');
     this.showMessages = this.getConfigValue('forms.login.showMessages');
     this.strategy = this.getConfigValue('forms.login.strategy');

@@ -4,11 +4,11 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
   templateUrl: './chat-custom-message.component.html',
   styleUrls: ['./chat-custom-message.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class ChatCustomMessageComponent implements OnInit {
-
   readonly tableData = {
-    columns: [ 'First Name', 'Last Name', 'Age' ],
+    columns: ['First Name', 'Last Name', 'Age'],
     rows: [
       { firstName: 'Robert', lastName: 'Baratheon', age: 46 },
       { firstName: 'Jaime', lastName: 'Lannister', age: 31 },
@@ -95,6 +95,6 @@ export class ChatCustomMessageComponent implements OnInit {
           avatar: 'https://i.gifer.com/no.gif',
         },
       },
-    ]
+    ];
   }
 }

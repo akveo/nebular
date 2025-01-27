@@ -10,6 +10,6 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   templateUrl: './button-and-button-toggle-groups.component.html',
   styleUrls: ['./button-group-spacing.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
-export class ButtonAndButtonToggleGroupsComponent {
-}
+export class ButtonAndButtonToggleGroupsComponent {}

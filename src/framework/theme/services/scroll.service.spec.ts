@@ -32,6 +32,7 @@ let scrollService: NbLayoutScrollService;
       }
     `,
   ],
+  standalone: false,
 })
 class ScrollTestComponent {
   @ViewChild('resize', { read: ElementRef }) private resizeElement: ElementRef;

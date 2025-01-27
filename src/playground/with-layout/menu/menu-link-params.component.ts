@@ -11,9 +11,9 @@ import { NbMenuItem } from '@nebular/theme';
   selector: 'nb-menu-link-params',
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './menu-link-params.component.html',
+  standalone: false,
 })
 export class MenuLinkParamsComponent {
-
   items: NbMenuItem[] = [
     {
       title: 'Menu link with parameters',
@@ -30,7 +30,7 @@ export class MenuLinkParamsComponent {
         {
           title: 'Menu item path match `prefix`',
           link: '/example/menu/menu-link-params.component',
-          queryParams: {someUrlParam: 'true'},
+          queryParams: { someUrlParam: 'true' },
           pathMatch: 'prefix',
         },
         {

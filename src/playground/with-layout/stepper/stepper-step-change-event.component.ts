@@ -4,6 +4,7 @@ import { NbStepChangeEvent } from '@nebular/theme';
 @Component({
   templateUrl: './stepper-step-change-event.component.html',
   styleUrls: ['./stepper-step-change-event.component.scss'],
+  standalone: false,
 })
 export class StepperStepChangeEventComponent {
   changeEvent: NbStepChangeEvent;

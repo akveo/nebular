@@ -17,6 +17,7 @@ import { NbWindowRef } from '@nebular/theme';
       <button nbButton type="submit" status="success">Submit</button>
     </form>
   `,
+  standalone: false,
 })
 export class VisitorsFormComponent {
   form: FormGroup;

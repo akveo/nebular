@@ -13,13 +13,14 @@ we can easily customize the look & feel of the components still utilizing all of
 <hr>
 
 ## Review the app structure
+
 As a first step let's review the app structure we should already have. The app should consist at least of the following files:
 
 - `app.module.ts`
 - `app.component.ts`
 - `app-routing.component.ts`
 
-If you followed all of the steps of the [Auth Installation guide](docs/auth/installation) then you already have a Strategy configured in the `app.module.ts` as well as 
+If you followed all of the steps of the [Auth Installation guide](docs/auth/installation) then you already have a Strategy configured in the `app.module.ts` as well as
 you configured routes to the out of the box auth components.
 
 <div class="note note-info">
@@ -50,13 +51,7 @@ import { RouterModule } from '@angular/router';
 
 import { NgxAuthRoutingModule } from './auth-routing.module';
 import { NbAuthModule } from '@nebular/auth';
-import { 
-  NbAlertModule,
-  NbButtonModule,
-  NbCheckboxModule,
-  NbInputModule
-} from '@nebular/theme';
-
+import { NbAlertModule, NbButtonModule, NbCheckboxModule, NbInputModule } from '@nebular/theme';
 
 @NgModule({
   imports: [
@@ -75,9 +70,7 @@ import {
     // ... here goes our new components
   ],
 })
-export class NgxAuthModule {
-}
-
+export class NgxAuthModule {}
 ```
 
 A couple of required modules for future components. Also, notice how we imported the `NbAuthModule` but without the `forRoot` call.
@@ -97,9 +90,8 @@ export const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class NgxAuthRoutingModule {
-}
-``` 
+export class NgxAuthRoutingModule {}
+```
 
 Well, currently there is nothing really in it, let's leave it like this for now.
 
@@ -114,6 +106,7 @@ export const routes: Routes = [
   },
 ];
 ```
+
 Make sure the relative module path is correct in your setup.
 
 <div class="note note-info">
@@ -124,6 +117,7 @@ Make sure the relative module path is correct in your setup.
 </div>
 
 At this step, you can open http://localhost:4200/#/auth in your browser. Nothing is going to be shown, but neither errors or/and the redirect should occur.
+
 <hr>
 
 ## Setup Auth Container
@@ -135,12 +129,12 @@ At the step we just need to add it to the `auth-routing.module.ts`:
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { NbAuthComponent } from '@nebular/auth';  // <---
+import { NbAuthComponent } from '@nebular/auth'; // <---
 
 export const routes: Routes = [
   {
     path: '',
-    component: NbAuthComponent,  // <---
+    component: NbAuthComponent, // <---
   },
 ];
 
@@ -148,15 +142,15 @@ export const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class NgxAuthRoutingModule {
-}
+export class NgxAuthRoutingModule {}
 ```
 
-Now open your browsers at http://localhost:4200/#/auth and you should be able to see the auth container: 
+Now open your browsers at http://localhost:4200/#/auth and you should be able to see the auth container:
 
 ![image](assets/images/articles/custom-auth/auth-container.png)
 
 Great, let's move on to the most interesting part.
+
 <hr>
 
 ## Login Component Extension
@@ -176,8 +170,7 @@ import { NbLoginComponent } from '@nebular/auth';
   selector: 'ngx-login',
   templateUrl: './login.component.html',
 })
-export class NgxLoginComponent extends NbLoginComponent {
-}
+export class NgxLoginComponent extends NbLoginComponent {}
 ```
 
 ```html
@@ -198,7 +191,6 @@ import { NbAlertModule, NbButtonModule, NbCheckboxModule, NbInputModule } from '
 
 import { NgxLoginComponent } from './login/login.component'; // <---
 
-
 @NgModule({
   imports: [
     CommonModule,
@@ -216,8 +208,7 @@ import { NgxLoginComponent } from './login/login.component'; // <---
     NgxLoginComponent, // <---
   ],
 })
-export class NgxAuthModule {
-}
+export class NgxAuthModule {}
 ```
 
 And update the routing:
@@ -246,12 +237,11 @@ export const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class NgxAuthRoutingModule {
-}
+export class NgxAuthRoutingModule {}
 ```
 
 Now the most interesting part - as we need to modify the template, we can simply copy it from Nebular sources and adjust necessary parts.
-Unfortunately, the library isn't distributed with the sources, so we need to copy the template sources from [GitHub](https://github.com/akveo/nebular/blob/v2.0.0/src/framework/auth/components/login/login.component.html). 
+Unfortunately, the library isn't distributed with the sources, so we need to copy the template sources from [GitHub](https://github.com/akveo/nebular/blob/v2.0.0/src/framework/auth/components/login/login.component.html).
 
 <div class="note note-info">
   <div class="note-title">Note</div>
@@ -262,7 +252,6 @@ Unfortunately, the library isn't distributed with the sources, so we need to cop
 
 Paste the template into your `auth/login.component.html` and modify as necessary.
 That's it! You can check your page at http://localhost:4200/#/auth.
-
 
 ![image](assets/images/articles/custom-auth/form-with-labels.png)
 
@@ -277,4 +266,3 @@ And here the playground example available to play around with [OAuth2 Nebular Ex
 
 - [Configuring a Strategy](docs/auth/configuring-a-strategy)
 - Configuring [Auth Components](docs/auth/configuring-ui)
-

@@ -18,6 +18,7 @@ import { VisitorsFormComponent } from './components/visitors-form.component';
     </ul>
   `,
   styleUrls: ['./window.scss'],
+  standalone: false,
 })
 export class WindowResultComponent {
   visitors: string[] = [];

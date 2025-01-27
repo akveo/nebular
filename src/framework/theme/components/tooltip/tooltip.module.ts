@@ -13,11 +13,9 @@ import { NbIconModule } from '../icon/icon.module';
 import { NbTooltipComponent } from './tooltip.component';
 import { NbTooltipDirective } from './tooltip.directive';
 
-
 @NgModule({
   imports: [NbSharedModule, NbOverlayModule, NbIconModule],
   declarations: [NbTooltipComponent, NbTooltipDirective],
   exports: [NbTooltipDirective],
 })
-export class NbTooltipModule {
-}
+export class NbTooltipModule {}

@@ -10,6 +10,6 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   selector: 'nb-button-full-width',
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './button-full-width.component.html',
+  standalone: false,
 })
-export class ButtonFullWidthComponent {
-}
+export class ButtonFullWidthComponent {}

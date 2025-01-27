@@ -7,9 +7,9 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
     <ngd-tabbed-example-block *ngIf="isTabbed" [content]="content"></ngd-tabbed-example-block>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class NgdInlineExampleBlockComponent {
-
   @Input() content;
 
   get isOneFile(): boolean {

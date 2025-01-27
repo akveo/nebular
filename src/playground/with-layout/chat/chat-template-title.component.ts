@@ -21,6 +21,7 @@ import { ChatShowcaseService } from './chat-showcase.service';
       }
     `,
   ],
+  standalone: false,
 })
 export class ChatTemplateTitleComponent {
   messages: any[] = [

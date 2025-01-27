@@ -6,22 +6,21 @@ import { DialogNamePromptComponent } from './components/name-prompt-dialog.compo
   selector: 'nb-dialog-result',
   template: `
     <button nbButton status="primary" (click)="open()">Enter Name</button>
-    <br>
+    <br />
     <h3 class="h5">Names:</h3>
     <ul>
       <li *ngFor="let name of names">{{ name }}</li>
     </ul>
   `,
   styleUrls: ['./dialog-common.scss'],
+  standalone: false,
 })
 export class DialogResultComponent {
   names: string[] = [];
 
-  constructor(private dialogService: NbDialogService) {
-  }
+  constructor(private dialogService: NbDialogService) {}
 
   open() {
-    this.dialogService.open(DialogNamePromptComponent)
-      .onClose.subscribe(name => name && this.names.push(name));
+    this.dialogService.open(DialogNamePromptComponent).onClose.subscribe((name) => name && this.names.push(name));
   }
 }

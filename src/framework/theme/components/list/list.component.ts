@@ -40,7 +40,8 @@ import { Component, Input, HostBinding } from '@angular/core';
 @Component({
   selector: 'nb-list',
   template: `<ng-content select="nb-list-item"></ng-content>`,
-  styleUrls: [ './list.component.scss' ],
+  styleUrls: ['./list.component.scss'],
+  standalone: false,
 })
 export class NbListComponent {
   /**
@@ -60,7 +61,8 @@ export class NbListComponent {
 @Component({
   selector: 'nb-list-item',
   template: `<ng-content></ng-content>`,
-  styleUrls: [ 'list-item.component.scss' ],
+  styleUrls: ['list-item.component.scss'],
+  standalone: false,
 })
 export class NbListItemComponent {
   /**

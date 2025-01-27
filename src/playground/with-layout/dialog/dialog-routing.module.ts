@@ -5,7 +5,7 @@
  */
 
 import { NgModule } from '@angular/core';
-import { RouterModule, Route} from '@angular/router';
+import { RouterModule, Route } from '@angular/router';
 import { DialogAutoFocusComponent } from './dialog-auto-focus.component';
 import { DialogBackdropClickComponent } from './dialog-backdrop-click.component';
 import { DialogEscComponent } from './dialog-esc.component';
@@ -51,7 +51,7 @@ const routes: Route[] = [
 ];
 
 @NgModule({
-  imports: [ RouterModule.forChild(routes) ],
-  exports: [ RouterModule ],
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule],
 })
 export class DialogRoutingModule {}

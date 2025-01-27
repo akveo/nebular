@@ -6,6 +6,7 @@ import { NgdMenuService } from '../../../@theme/services/menu.service';
   selector: 'ngd-components-overview-block',
   styleUrls: ['./components-overview-block.component.scss'],
   templateUrl: './components-overview-block.component.html',
+  standalone: false,
 })
 export class NgdComponentsOverviewBlockComponent implements OnInit {
   components: { name: string; icon: string; link: string }[];
@@ -16,8 +17,7 @@ export class NgdComponentsOverviewBlockComponent implements OnInit {
     this.components = this.menu
       .getPreparedMenu('/docs')
       .find(({ title }) => title === 'Components')
-      .children
-      .slice(1)
+      .children.slice(1)
       .map(({ data: { name, icon, type }, link }) => ({ name, icon, link, group: type === 'group' }));
   }
 }

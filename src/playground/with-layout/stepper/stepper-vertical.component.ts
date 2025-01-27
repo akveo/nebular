@@ -4,7 +4,6 @@ import { Component } from '@angular/core';
   selector: 'nb-stepper-vertical',
   styleUrls: ['stepper-playground.component.scss'],
   templateUrl: './stepper-vertical.component.html',
+  standalone: false,
 })
-
-export class StepperVerticalComponent {
-}
+export class StepperVerticalComponent {}

@@ -23,11 +23,13 @@ import { Component } from '@angular/core';
       </nb-card-body>
     </nb-card>
   `,
-  styles: [`
-    .example-items-rows {
-      align-items: center;
-    }
-  `],
+  styles: [
+    `
+      .example-items-rows {
+        align-items: center;
+      }
+    `,
+  ],
+  standalone: false,
 })
-export class ToggleStatusComponent {
-}
+export class ToggleStatusComponent {}

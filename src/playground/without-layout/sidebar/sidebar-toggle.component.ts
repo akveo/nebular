@@ -4,17 +4,17 @@ import { NbSidebarService } from '@nebular/theme';
 @Component({
   selector: 'nb-sidebar-toggle',
   templateUrl: './sidebar-toggle.component.html',
-  styles: [`
-    :host nb-layout-header button:last-child {
-      margin-left: auto;
-    }
-  `],
+  styles: [
+    `
+      :host nb-layout-header button:last-child {
+        margin-left: auto;
+      }
+    `,
+  ],
+  standalone: false,
 })
-
 export class SidebarToggleComponent {
-
-  constructor(private sidebarService: NbSidebarService) {
-  }
+  constructor(private sidebarService: NbSidebarService) {}
 
   toggle() {
     this.sidebarService.toggle(false, 'left');

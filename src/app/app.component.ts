@@ -47,6 +47,7 @@ import { ComponentLink } from './playground-components';
     </div>
     <router-outlet></router-outlet>
   `,
+  standalone: false,
 })
 export class AppComponent implements AfterViewInit, OnDestroy {
   private readonly destroy$ = new Subject<void>();

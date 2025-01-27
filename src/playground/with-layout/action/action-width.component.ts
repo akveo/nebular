@@ -10,6 +10,6 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   selector: 'nb-action-width',
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './action-width.component.html',
+  standalone: false,
 })
-export class ActionWidthComponent {
-}
+export class ActionWidthComponent {}

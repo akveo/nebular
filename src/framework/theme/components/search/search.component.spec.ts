@@ -18,11 +18,7 @@ describe('NbSearchFieldComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [
-        RouterTestingModule.withRoutes([]),
-        NbThemeModule.forRoot(),
-        NbSearchModule,
-      ],
+      imports: [RouterTestingModule.withRoutes([]), NbThemeModule.forRoot(), NbSearchModule],
     });
 
     fixture = TestBed.createComponent(NbSearchFieldComponent);
@@ -65,12 +61,7 @@ describe('NbSearchComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [
-        RouterTestingModule.withRoutes([]),
-        NbThemeModule.forRoot(),
-        NbLayoutModule,
-        NbSearchModule,
-      ],
+      imports: [RouterTestingModule.withRoutes([]), NbThemeModule.forRoot(), NbLayoutModule, NbSearchModule],
     });
 
     TestBed.createComponent(NbLayoutComponent);

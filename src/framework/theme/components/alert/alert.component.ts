@@ -11,7 +11,6 @@ import { NbComponentSize } from '../component-size';
 import { NbComponentOrCustomStatus, NbComponentStatus } from '../component-status';
 import { convertToBoolProperty, NbBooleanInput } from '../helpers';
 
-
 /**
  * Alert component.
  *
@@ -117,9 +116,9 @@ import { convertToBoolProperty, NbBooleanInput } from '../helpers';
     </button>
     <ng-content></ng-content>
   `,
+  standalone: false,
 })
 export class NbAlertComponent {
-
   /**
    * Alert size, available sizes:
    * `tiny`, `small`, `medium`, `large`, `giant`
@@ -167,8 +166,7 @@ export class NbAlertComponent {
    */
   @Output() close = new EventEmitter();
 
-  constructor(protected statusService: NbStatusService) {
-  }
+  constructor(protected statusService: NbStatusService) {}
 
   /**
    * Emits the removed chip event

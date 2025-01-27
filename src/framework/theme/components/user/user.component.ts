@@ -111,9 +111,9 @@ import { NbBadgePosition } from '../badge/badge.component';
   selector: 'nb-user',
   styleUrls: ['./user.component.scss'],
   templateUrl: './user.component.html',
+  standalone: false,
 })
 export class NbUserComponent {
-
   imageBackgroundStyle: SafeStyle;
 
   /**
@@ -272,13 +272,17 @@ export class NbUserComponent {
     return this.shape === 'round';
   }
 
-  constructor(private domSanitizer: DomSanitizer) { }
+  constructor(private domSanitizer: DomSanitizer) {}
 
   getInitials(): string {
     if (this.name) {
       const names = this.name.split(' ');
 
-      return names.map(n => n.charAt(0)).splice(0, 2).join('').toUpperCase();
+      return names
+        .map((n) => n.charAt(0))
+        .splice(0, 2)
+        .join('')
+        .toUpperCase();
     }
 
     return '';

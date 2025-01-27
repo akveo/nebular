@@ -11,6 +11,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   templateUrl: './button-group-showcase.component.html',
   styleUrls: ['./button-group-showcase.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class ButtonGroupShowcaseComponent {
   isBold = false;

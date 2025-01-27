@@ -9,9 +9,9 @@ const OBSERVER_OPTIONS = { rootMargin: '-100px 0px 0px' };
 
 @Directive({
   selector: '[ngdFragment]',
+  standalone: false,
 })
 export class NgdFragmentTargetDirective implements OnInit, OnDestroy {
-
   private readonly marginFromTop = 120;
   private isCurrentlyViewed: boolean = false;
   private isScrolling: boolean = false;
@@ -48,7 +48,8 @@ export class NgdFragmentTargetDirective implements OnInit, OnDestroy {
         }
       });
 
-    this.visibilityService.isTopmostVisible(this.el.nativeElement, OBSERVER_OPTIONS)
+    this.visibilityService
+      .isTopmostVisible(this.el.nativeElement, OBSERVER_OPTIONS)
       .pipe(takeUntil(this.destroy$))
       .subscribe((isTopmost: boolean) => {
         this.isCurrentlyViewed = isTopmost;
@@ -57,13 +58,14 @@ export class NgdFragmentTargetDirective implements OnInit, OnDestroy {
         }
       });
 
-    this.scrollService.onScroll()
+    this.scrollService
+      .onScroll()
       .pipe(
-        tap(() => this.isScrolling = true),
+        tap(() => (this.isScrolling = true)),
         debounce(() => timer(100)),
         takeUntil(this.destroy$),
       )
-      .subscribe(() => this.isScrolling = false);
+      .subscribe(() => (this.isScrolling = false));
   }
 
   selectFragment() {

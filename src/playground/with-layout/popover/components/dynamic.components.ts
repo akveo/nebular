@@ -7,21 +7,23 @@ import { Component, Input } from '@angular/core';
       <strong>Hello from custom component: {{ text }}</strong>
     </div>
   `,
+  standalone: false,
 })
 export class DynamicToAddComponent {
-
   @Input()
   text: string = '';
 }
 
 @Component({
   selector: 'nb-popover-list',
-  styles: [`
-    nb-card {
-      border: 0;
-      margin-bottom: 0;
-    }
-  `],
+  styles: [
+    `
+      nb-card {
+        border: 0;
+        margin-bottom: 0;
+      }
+    `,
+  ],
   template: `
     <nb-card>
       <nb-card-header>Component Shopping list</nb-card-header>
@@ -31,18 +33,20 @@ export class DynamicToAddComponent {
       </nb-list>
     </nb-card>
   `,
+  standalone: false,
 })
-export class PopoverListComponent {
-}
+export class PopoverListComponent {}
 
 @Component({
   selector: 'nb-popover-tabs',
-  styles: [`
-    nb-card {
-      border: 0;
-      margin-bottom: 0;
-    }
-  `],
+  styles: [
+    `
+      nb-card {
+        border: 0;
+        margin-bottom: 0;
+      }
+    `,
+  ],
   template: `
     <nb-card>
       <nb-card-header>Component Shopping list</nb-card-header>
@@ -60,6 +64,6 @@ export class PopoverListComponent {
       </nb-tabset>
     </nb-card>
   `,
+  standalone: false,
 })
-export class PopoverTabsComponent {
-}
+export class PopoverTabsComponent {}

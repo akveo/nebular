@@ -1,6 +1,5 @@
 <nb-card>
   <nb-card-body>
-
     <fieldset>
       <legend class="subtitle">Size:</legend>
       <nb-radio-group [(value)]="selectedSize" name="size">
@@ -63,23 +62,31 @@
       <p class="subtitle appearance-name">{{ appearance }}:</p>
 
       <div class="appearance-row">
-        <div *ngFor="let status of statuses" [class.control-status-example]="status === 'control'" class="status-container">
-          <nb-button-group [status]="status"
-                           [appearance]="appearance"
-                           [size]="selectedSize"
-                           [shape]="selectedShape"
-                           [disabled]="disabledGroup">
+        <div
+          *ngFor="let status of statuses"
+          [class.control-status-example]="status === 'control'"
+          class="status-container"
+        >
+          <nb-button-group
+            [status]="status"
+            [appearance]="appearance"
+            [size]="selectedSize"
+            [shape]="selectedShape"
+            [disabled]="disabledGroup"
+          >
             <button nbButton [disabled]="disabledFirstButton">Button</button>
             <button nbButton [disabled]="disabledSecondButton">Button</button>
             <button nbButton [disabled]="disabledThirdButton">Button</button>
           </nb-button-group>
 
-          <nb-button-group [status]="status"
-                           [appearance]="appearance"
-                           [size]="selectedSize"
-                           [shape]="selectedShape"
-                           [multiple]="multiple"
-                           [disabled]="disabledGroup">
+          <nb-button-group
+            [status]="status"
+            [appearance]="appearance"
+            [size]="selectedSize"
+            [shape]="selectedShape"
+            [multiple]="multiple"
+            [disabled]="disabledGroup"
+          >
             <button nbButtonToggle [disabled]="disabledFirstButton">Toggle</button>
             <button nbButtonToggle [disabled]="disabledSecondButton">Toggle</button>
             <button nbButtonToggle [disabled]="disabledThirdButton">Toggle</button>
@@ -87,6 +94,5 @@
         </div>
       </div>
     </div>
-
   </nb-card-body>
 </nb-card>

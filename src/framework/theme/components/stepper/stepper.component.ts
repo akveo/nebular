@@ -122,6 +122,7 @@ export interface NbStepChangeEvent {
   styleUrls: ['./stepper.component.scss'],
   templateUrl: './stepper.component.html',
   providers: [{ provide: NB_STEPPER, useExisting: NbStepperComponent }],
+  standalone: false,
 })
 export class NbStepperComponent {
   /**

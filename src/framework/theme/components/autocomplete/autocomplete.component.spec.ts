@@ -69,33 +69,31 @@ class OverlayServiceWithManualKeyDownTrigger extends NbOverlayService {
   template: `
     <nb-layout>
       <nb-layout-column>
-
-        <input #autoInput
-               nbInput
-               type="text"
-               (input)="onChange($event)"
-               placeholder="This is test autocomplete component"
-               [nbAutocomplete]="auto" />
+        <input
+          #autoInput
+          nbInput
+          type="text"
+          (input)="onChange($event)"
+          placeholder="This is test autocomplete component"
+          [nbAutocomplete]="auto"
+        />
 
         <nb-autocomplete #auto (selectedChange)="selectedChange.emit($event)" [handleDisplayFn]="handleFunction">
-
           <nb-option-group *ngFor="let group of filteredGroups" [title]="group.title">
             <nb-option *ngFor="let option of group.options" [value]="option.value">
               {{ option.title }}
             </nb-option>
           </nb-option-group>
-
         </nb-autocomplete>
-
       </nb-layout-column>
     </nb-layout>
   `,
+  standalone: false,
 })
 export class NbAutocompleteTestComponent {
-
   @Output() selectedChange: EventEmitter<any> = new EventEmitter();
   @ViewChild(NbAutocompleteDirective) autocompleteDirective: NbAutocompleteDirective<string>;
-  @ViewChild(NbAutocompleteComponent) autocompletePanel: NbAutocompleteComponent<string>
+  @ViewChild(NbAutocompleteComponent) autocompletePanel: NbAutocompleteComponent<string>;
   @ViewChildren(NbOptionComponent) options: QueryList<NbOptionComponent<any>>;
 
   @ViewChild('autoInput') input: HTMLInputElement;
@@ -120,20 +118,20 @@ export class NbAutocompleteTestComponent {
   }
 
   private filterOptions(options: any[], value: string) {
-    return options.filter(item => item.toLowerCase().includes(value));
+    return options.filter((item) => item.toLowerCase().includes(value));
   }
 
   private filter(value: string): any[] {
     const filterValue = value.toLowerCase();
     return this.groups
-      .map(group => {
+      .map((group) => {
         return {
           title: group.title,
           options: this.filterOptions(group.options, filterValue),
-        }
+        };
       })
-      .filter(group => group.options.length);
-    }
+      .filter((group) => group.options.length);
+  }
 }
 
 describe('Component: NbAutocompleteComponent', () => {
@@ -154,13 +152,18 @@ describe('Component: NbAutocompleteComponent', () => {
   };
 
   beforeEach(() => {
-
     showTriggerStub = new Subject<Event>();
     hideTriggerStub = new Subject<Event>();
     triggerBuilderStub = {
-      trigger() { return this },
-      host() { return this },
-      container() { return this },
+      trigger() {
+        return this;
+      },
+      host() {
+        return this;
+      },
+      container() {
+        return this;
+      },
       build() {
         return { show$: showTriggerStub, hide$: hideTriggerStub, destroy() {} };
       },
@@ -175,9 +178,7 @@ describe('Component: NbAutocompleteComponent', () => {
         NbLayoutModule,
         NbAutocompleteModule,
       ],
-      declarations: [
-        NbAutocompleteTestComponent,
-      ],
+      declarations: [NbAutocompleteTestComponent],
       providers: [
         { provide: NbTriggerStrategyBuilderService, useValue: triggerBuilderStub },
         { provide: NbOverlayService, useClass: OverlayServiceWithManualKeyDownTrigger },
@@ -202,11 +203,10 @@ describe('Component: NbAutocompleteComponent', () => {
     overlayContainerService.clearContainer();
   });
 
-
   it('should emit selectedChange option when option clicked', (done) => {
     openPanel();
 
-    fixture.componentInstance.selectedChange.subscribe(selection => {
+    fixture.componentInstance.selectedChange.subscribe((selection) => {
       expect(selection).toBe('Option 1');
       done();
     });
@@ -285,11 +285,11 @@ describe('Component: NbAutocompleteComponent', () => {
     openPanel();
 
     const overlayService = TestBed.inject(NbOverlayService) as OverlayServiceWithManualKeyDownTrigger;
-    overlayService.triggerKeydown(new KeyboardEvent('keydown', <any> { keyCode: 40 }))
+    overlayService.triggerKeydown(new KeyboardEvent('keydown', <any>{ keyCode: 40 }));
     fixture.detectChanges();
 
     const option = overlayContainer.querySelectorAll('nb-option')[0];
-    expect(option.classList).toContain('active')
+    expect(option.classList).toContain('active');
   });
 
   it('should fill input when ENTER pressed', () => {
@@ -297,19 +297,18 @@ describe('Component: NbAutocompleteComponent', () => {
     const option = overlayContainer.querySelectorAll('nb-option')[0];
 
     const overlayService = TestBed.inject(NbOverlayService) as OverlayServiceWithManualKeyDownTrigger;
-    overlayService.triggerKeydown(new KeyboardEvent('keydown', <any> { keyCode: 40 }));
-    overlayService.triggerKeydown(new KeyboardEvent('keydown', <any> { keyCode: 13 }));
+    overlayService.triggerKeydown(new KeyboardEvent('keydown', <any>{ keyCode: 40 }));
+    overlayService.triggerKeydown(new KeyboardEvent('keydown', <any>{ keyCode: 13 }));
 
     expect(autocompleteDirective.isClosed).toBe(true);
     expect(option.textContent).toContain(input.textContent);
   });
 
-
   it('should close when ESC pressed', () => {
     openPanel();
 
     const overlayService = TestBed.inject(NbOverlayService) as OverlayServiceWithManualKeyDownTrigger;
-    overlayService.triggerKeydown(new KeyboardEvent('keydown', <any> { keyCode: 27 }));
+    overlayService.triggerKeydown(new KeyboardEvent('keydown', <any>{ keyCode: 27 }));
     fixture.detectChanges();
 
     expect(autocompleteDirective.isClosed).toBe(true);
@@ -324,5 +323,4 @@ describe('Component: NbAutocompleteComponent', () => {
     fixture.detectChanges();
     expect(input.disabled).toBe(false);
   });
-
 });

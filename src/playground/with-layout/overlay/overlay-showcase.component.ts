@@ -14,15 +14,17 @@ import { NbOverlayRef, NbOverlayService, NbPositionBuilderService, NbTemplatePor
     </ng-template>
     <button nbButton status="primary" (click)="createOverlay()">Create overlay</button>
   `,
+  standalone: false,
 })
 export class OverlayShowcaseComponent implements OnInit {
   @ViewChild('overlay') overlayTemplate: TemplateRef<any>;
   protected ref: NbOverlayRef;
 
-  constructor(protected overlay: NbOverlayService,
-              protected positionBuilder: NbPositionBuilderService,
-              protected vcr: ViewContainerRef) {
-  }
+  constructor(
+    protected overlay: NbOverlayService,
+    protected positionBuilder: NbPositionBuilderService,
+    protected vcr: ViewContainerRef,
+  ) {}
 
   ngOnInit() {
     const positionStrategy = this.positionBuilder.global().centerHorizontally().centerVertically();

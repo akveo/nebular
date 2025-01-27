@@ -10,6 +10,6 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   selector: 'nb-badge-showcase',
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './badge-showcase.component.html',
+  standalone: false,
 })
-export class BadgeShowcaseComponent {
-}
+export class BadgeShowcaseComponent {}

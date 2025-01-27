@@ -11,10 +11,9 @@ import { Component } from '@angular/core';
   template: `
     <nb-card>
       <nb-card-body class="example-items-col">
-
         <nb-form-field>
           <nb-icon nbPrefix icon="star" pack="eva"></nb-icon>
-          <input nbInput type="text">
+          <input nbInput type="text" />
           <nb-icon nbSuffix icon="star" pack="eva"></nb-icon>
         </nb-form-field>
 
@@ -24,10 +23,9 @@ import { Component } from '@angular/core';
             <nb-option>1</nb-option>
           </nb-select>
         </nb-form-field>
-
       </nb-card-body>
     </nb-card>
   `,
+  standalone: false,
 })
-export class FormFieldShowcaseComponent {
-}
+export class FormFieldShowcaseComponent {}

@@ -87,6 +87,7 @@ import { NbAutocompleteComponent } from './autocomplete.component';
       multi: true,
     },
   ],
+  standalone: false,
 })
 export class NbAutocompleteDirective<T> implements OnDestroy, AfterViewInit, ControlValueAccessor {
   /**

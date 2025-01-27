@@ -20,9 +20,9 @@ import { getDeepFromObject } from '../../../framework/auth/helpers';
   selector: 'nb-playground-auth',
   templateUrl: './oauth2-password-login.component.html',
   styleUrls: ['./oauth2-password-login.component.scss'],
+  standalone: false,
 })
 export class OAuth2PasswordLoginComponent {
-
   token: NbAuthOAuth2Token;
   redirectDelay: number = 0;
   showMessages: any = {};
@@ -33,8 +33,11 @@ export class OAuth2PasswordLoginComponent {
   user: any = {};
   submitted: boolean = false;
 
-  constructor(private authService: NbAuthService, @Inject(NB_AUTH_OPTIONS) protected options = {},
-              protected router: Router) {
+  constructor(
+    private authService: NbAuthService,
+    @Inject(NB_AUTH_OPTIONS) protected options = {},
+    protected router: Router,
+  ) {
     this.redirectDelay = this.getConfigValue('forms.login.redirectDelay');
     this.showMessages = this.getConfigValue('forms.login.showMessages');
     this.strategy = this.getConfigValue('forms.login.strategy');
@@ -48,7 +51,6 @@ export class OAuth2PasswordLoginComponent {
   }
 
   login(): void {
-
     this.errors = this.messages = [];
     this.submitted = true;
 
@@ -70,12 +72,10 @@ export class OAuth2PasswordLoginComponent {
     });
   }
 
-
   logout() {
-    this.authService.logout('password')
-      .subscribe((authResult: NbAuthResult) => {
-        this.token = null;
-      });
+    this.authService.logout('password').subscribe((authResult: NbAuthResult) => {
+      this.token = null;
+    });
   }
 
   getConfigValue(key: string): any {

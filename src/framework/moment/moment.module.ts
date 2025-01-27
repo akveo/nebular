@@ -9,9 +9,7 @@ import { NgModule } from '@angular/core';
 import { NbDateService } from '@nebular/theme';
 import { NbMomentDateService } from './services/moment-date.service';
 
-
 @NgModule({
   providers: [{ provide: NbDateService, useClass: NbMomentDateService }],
 })
-export class NbMomentDateModule {
-}
+export class NbMomentDateModule {}

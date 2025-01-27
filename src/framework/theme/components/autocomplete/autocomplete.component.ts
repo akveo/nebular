@@ -40,6 +40,7 @@ let lastAutocompleteId: number = 0;
   templateUrl: './autocomplete.component.html',
   styleUrls: ['./autocomplete.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class NbAutocompleteComponent<T> implements AfterContentInit, OnDestroy {
   protected destroy$: Subject<void> = new Subject<void>();

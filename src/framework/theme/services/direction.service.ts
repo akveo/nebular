@@ -23,9 +23,7 @@ export const NB_LAYOUT_DIRECTION = new InjectionToken<NbLayoutDirection>('Layout
 export class NbLayoutDirectionService {
   private $directionChange = new ReplaySubject<NbLayoutDirection>(1);
 
-  constructor(
-    @Optional() @Inject(NB_LAYOUT_DIRECTION) private direction = NbLayoutDirection.LTR,
-  ) {
+  constructor(@Optional() @Inject(NB_LAYOUT_DIRECTION) private direction = NbLayoutDirection.LTR) {
     this.setDirection(direction);
   }
 

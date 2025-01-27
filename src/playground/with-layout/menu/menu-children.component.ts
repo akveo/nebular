@@ -11,9 +11,9 @@ import { NbMenuItem } from '@nebular/theme';
   selector: 'nb-menu-children',
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './menu-children.component.html',
+  standalone: false,
 })
 export class MenuChildrenComponent {
-
   items: NbMenuItem[] = [
     {
       title: 'Profile',

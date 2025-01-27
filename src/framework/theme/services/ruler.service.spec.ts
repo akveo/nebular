@@ -24,6 +24,7 @@ let rulerService: NbLayoutRulerService;
       </nb-layout-column>
     </nb-layout>
   `,
+  standalone: false,
 })
 class RulerTestComponent {
   @ViewChild('resize', { read: ElementRef }) private resizeElement: ElementRef;

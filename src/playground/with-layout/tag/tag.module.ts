@@ -43,4 +43,4 @@ import { TagRemovableComponent } from './tag-removable.component';
     TagRemovableComponent,
   ],
 })
-export class TagModule { }
+export class TagModule {}

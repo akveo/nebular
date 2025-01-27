@@ -16,6 +16,7 @@ import { NbComponentStatus, NbComponentSize, NbComponentShape, NbInputModule } f
     <textarea #textareaEl nbInput [fieldSize]="size" [status]="status" [shape]="shape" [fullWidth]="fullWidth">
     </textarea>
   `,
+  standalone: false,
 })
 class InputTestComponent {
   @Input() size: NbComponentSize;

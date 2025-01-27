@@ -61,9 +61,11 @@ import { NbSpinnerComponent } from './spinner.component';
  * Or tabs:
  * @stacked-example(Spinner in tabs, spinner/spinner-tabs.component)
  */
-@Directive({selector: '[nbSpinner]'})
+@Directive({
+  selector: '[nbSpinner]',
+  standalone: false,
+})
 export class NbSpinnerDirective implements OnInit {
-
   private shouldShow = false;
   spinner: ComponentRef<NbSpinnerComponent>;
   componentFactory: ComponentFactory<NbSpinnerComponent>;
@@ -104,11 +106,12 @@ export class NbSpinnerDirective implements OnInit {
 
   @HostBinding('class.nb-spinner-container') isSpinnerExist = false;
 
-  constructor(private directiveView: ViewContainerRef,
-              private componentFactoryResolver: ComponentFactoryResolver,
-              private renderer: Renderer2,
-              private directiveElement: ElementRef) {
-  }
+  constructor(
+    private directiveView: ViewContainerRef,
+    private componentFactoryResolver: ComponentFactoryResolver,
+    private renderer: Renderer2,
+    private directiveElement: ElementRef,
+  ) {}
 
   ngOnInit() {
     this.componentFactory = this.componentFactoryResolver.resolveComponentFactory(NbSpinnerComponent);
@@ -135,7 +138,7 @@ export class NbSpinnerDirective implements OnInit {
   }
 
   setInstanceInputs(instance: NbSpinnerComponent) {
-    instance.message = this.spinnerMessage
+    instance.message = this.spinnerMessage;
     typeof this.spinnerStatus !== 'undefined' && (instance.status = this.spinnerStatus);
     typeof this.spinnerSize !== 'undefined' && (instance.size = this.spinnerSize);
   }

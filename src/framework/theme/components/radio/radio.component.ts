@@ -224,7 +224,8 @@ import { NbComponentOrCustomStatus } from '../component-status';
         [checked]="checked"
         [disabled]="disabled"
         (change)="onChange($event)"
-        (click)="onClick($event)">
+        (click)="onClick($event)"
+      />
       <span class="outer-circle"></span>
       <span class="inner-circle"></span>
       <span class="text">
@@ -234,9 +235,9 @@ import { NbComponentOrCustomStatus } from '../component-status';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['./radio.component.scss'],
+  standalone: false,
 })
 export class NbRadioComponent {
-
   @Input()
   get name(): string {
     return this._name;

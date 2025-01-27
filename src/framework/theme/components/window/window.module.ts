@@ -10,30 +10,21 @@ import { NbWindowComponent } from './window.component';
 import { NB_WINDOW_CONFIG, NbWindowConfig } from './window.options';
 
 @NgModule({
-  imports: [ CommonModule, NbOverlayModule, NbCardModule, NbIconModule, NbButtonModule ],
-  declarations: [
-    NbWindowsContainerComponent,
-    NbWindowComponent,
-  ],
+  imports: [CommonModule, NbOverlayModule, NbCardModule, NbIconModule, NbButtonModule],
+  declarations: [NbWindowsContainerComponent, NbWindowComponent],
 })
 export class NbWindowModule {
   static forRoot(defaultConfig?: Partial<NbWindowConfig>): ModuleWithProviders<NbWindowModule> {
     return {
       ngModule: NbWindowModule,
-      providers: [
-        NbWindowService,
-        { provide: NB_WINDOW_CONFIG, useValue: defaultConfig },
-      ],
+      providers: [NbWindowService, { provide: NB_WINDOW_CONFIG, useValue: defaultConfig }],
     };
   }
 
   static forChild(defaultConfig?: Partial<NbWindowConfig>): ModuleWithProviders<NbWindowModule> {
     return {
       ngModule: NbWindowModule,
-      providers: [
-        NbWindowService,
-        { provide: NB_WINDOW_CONFIG, useValue: defaultConfig },
-      ],
+      providers: [NbWindowService, { provide: NB_WINDOW_CONFIG, useValue: defaultConfig }],
     };
   }
 }

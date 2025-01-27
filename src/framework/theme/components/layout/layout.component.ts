@@ -143,6 +143,7 @@ import { NbOverlayContainerAdapter } from '../cdk/adapter/overlay-container-adap
       </div>
     </div>
   `,
+  standalone: false,
 })
 export class NbLayoutComponent implements AfterViewInit, OnDestroy {
   protected scrollBlockClass = 'nb-global-scrollblock';
@@ -300,7 +301,10 @@ export class NbLayoutComponent implements AfterViewInit, OnDestroy {
 
     this.scrollService
       .onScrollableChange()
-      .pipe(filter(() => this.withScrollValue), takeUntil(this.destroy$))
+      .pipe(
+        filter(() => this.withScrollValue),
+        takeUntil(this.destroy$),
+      )
       .subscribe((scrollable: boolean) => {
         /**
          * In case when Nebular Layout custom scroll `withScroll` mode is enabled
@@ -519,6 +523,7 @@ export class NbLayoutComponent implements AfterViewInit, OnDestroy {
 @Component({
   selector: 'nb-layout-column',
   template: `<ng-content></ng-content>`,
+  standalone: false,
 })
 export class NbLayoutColumnComponent {
   @HostBinding('class.left') leftValue: boolean;
@@ -586,6 +591,7 @@ export class NbLayoutColumnComponent {
       <ng-content></ng-content>
     </nav>
   `,
+  standalone: false,
 })
 export class NbLayoutHeaderComponent {
   @HostBinding('class.fixed') fixedValue: boolean;
@@ -645,6 +651,7 @@ export class NbLayoutHeaderComponent {
       <ng-content></ng-content>
     </nav>
   `,
+  standalone: false,
 })
 export class NbLayoutFooterComponent {
   @HostBinding('class.fixed') fixedValue: boolean;

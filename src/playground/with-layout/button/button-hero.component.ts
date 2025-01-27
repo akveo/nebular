@@ -10,6 +10,6 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   selector: 'nb-button-hero',
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './button-hero.component.html',
+  standalone: false,
 })
-export class ButtonHeroComponent {
-}
+export class ButtonHeroComponent {}

@@ -11,7 +11,6 @@ import { NbCalendarViewMode, NbCalendarViewModeValues } from '../../model';
 import { NbCalendarYearModelService } from '../../services/calendar-year-model.service';
 import { NbDateService } from '../../services/date.service';
 
-
 @Component({
   selector: 'nb-calendar-view-mode',
   template: `
@@ -21,6 +20,7 @@ import { NbDateService } from '../../services/date.service';
     </button>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class NbCalendarViewModeComponent<D> {
   @Input() date: D;
@@ -28,10 +28,7 @@ export class NbCalendarViewModeComponent<D> {
   static ngAcceptInputType_viewMode: NbCalendarViewModeValues;
   @Output() changeMode = new EventEmitter<void>(true);
 
-  constructor(
-    protected dateService: NbDateService<D>,
-    protected yearModelService: NbCalendarYearModelService<D>,
-  ) {}
+  constructor(protected dateService: NbDateService<D>, protected yearModelService: NbCalendarYearModelService<D>) {}
 
   getText(): string {
     if (!this.date) {

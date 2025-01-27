@@ -31,6 +31,7 @@ import { NB_DATE_SERVICE_OPTIONS } from './datepicker.directive';
   selector: 'nb-date-timepicker',
   template: '',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class NbDateTimePickerComponent<D>
   extends NbBasePickerComponent<D, D, NbCalendarWithTimeComponent<D>>

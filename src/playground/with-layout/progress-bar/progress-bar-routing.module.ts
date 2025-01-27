@@ -5,7 +5,7 @@
  */
 
 import { NgModule } from '@angular/core';
-import { RouterModule, Route} from '@angular/router';
+import { RouterModule, Route } from '@angular/router';
 import { ProgressBarInteractiveComponent } from './progress-bar-interactive.component';
 import { ProgressBarShowcaseComponent } from './progress-bar-showcase.component';
 import { ProgressBarSizeComponent } from './progress-bar-size.component';
@@ -36,7 +36,7 @@ const routes: Route[] = [
 ];
 
 @NgModule({
-  imports: [ RouterModule.forChild(routes) ],
-  exports: [ RouterModule ],
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule],
 })
 export class ProgressBarRoutingModule {}

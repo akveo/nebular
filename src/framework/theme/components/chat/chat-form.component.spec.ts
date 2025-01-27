@@ -8,7 +8,7 @@ describe('NbChatFormComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ NbThemeModule.forRoot(), NbChatModule.forRoot() ],
+      imports: [NbThemeModule.forRoot(), NbChatModule.forRoot()],
     });
 
     fixture = TestBed.createComponent(NbChatFormComponent);
@@ -18,7 +18,6 @@ describe('NbChatFormComponent', () => {
   });
 
   describe('getInputStatus', () => {
-
     it('should return basic status by default', () => {
       expect(chatFormComponent.getInputStatus()).toEqual('basic');
     });
@@ -52,7 +51,6 @@ describe('NbChatFormComponent', () => {
   });
 
   describe('getButtonStatus', () => {
-
     it('should return primary if status is basic or control', () => {
       chatFormComponent.status = 'basic';
       expect(chatFormComponent.getButtonStatus()).toEqual('primary');

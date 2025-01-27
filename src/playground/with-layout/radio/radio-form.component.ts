@@ -5,9 +5,9 @@ import { FormControl } from '@angular/forms';
   templateUrl: './radio-form.component.html',
   styleUrls: ['./radio-form.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class RadioFormComponent {
-
   ngModelValue = '1';
   formControl = new FormControl('1');
 }

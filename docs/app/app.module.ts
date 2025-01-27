@@ -55,7 +55,7 @@ import * as docs from '../output.json';
     {
       provide: REMOVE_STYLES_ON_COMPONENT_DESTROY,
       useValue: false,
-    }
+    },
   ],
   bootstrap: [NgdAppComponent],
 })

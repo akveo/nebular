@@ -20,25 +20,15 @@ import { NbIconConfig } from '../icon/icon.component';
   styleUrls: ['./action.component.scss'],
   template: `
     <ng-container *ngIf="icon; else projectedContent">
-      <a class="icon-container"
-         [routerLink]="link"
-         [title]="title"
-         *ngIf="link">
+      <a class="icon-container" [routerLink]="link" [title]="title" *ngIf="link">
         <nb-icon [config]="icon"></nb-icon>
         <ng-container [ngTemplateOutlet]="badgeTemplate"></ng-container>
       </a>
-      <a class="icon-container"
-         [href]="href"
-         [title]="title"
-         *ngIf="href && !link">
+      <a class="icon-container" [href]="href" [title]="title" *ngIf="href && !link">
         <nb-icon [config]="icon"></nb-icon>
         <ng-container [ngTemplateOutlet]="badgeTemplate"></ng-container>
       </a>
-      <a class="icon-container"
-         href="#"
-         [title]="title"
-         *ngIf="!href && !link"
-         (click)="$event.preventDefault()">
+      <a class="icon-container" href="#" [title]="title" *ngIf="!href && !link" (click)="$event.preventDefault()">
         <nb-icon [config]="icon"></nb-icon>
         <ng-container [ngTemplateOutlet]="badgeTemplate"></ng-container>
       </a>
@@ -49,17 +39,19 @@ import { NbIconConfig } from '../icon/icon.component';
       <ng-container [ngTemplateOutlet]="badgeTemplate"></ng-container>
     </ng-template>
     <ng-template #badgeTemplate>
-      <nb-badge *ngIf="badgeText || badgeDot"
-                [text]="badgeText"
-                [dotMode]="badgeDot"
-                [status]="badgeStatus"
-                [position]="badgePosition">
+      <nb-badge
+        *ngIf="badgeText || badgeDot"
+        [text]="badgeText"
+        [dotMode]="badgeDot"
+        [status]="badgeStatus"
+        [position]="badgePosition"
+      >
       </nb-badge>
     </ng-template>
   `,
+  standalone: false,
 })
 export class NbActionComponent {
-
   /**
    * Router link to use
    * @type string
@@ -214,12 +206,10 @@ export class NbActionComponent {
 @Component({
   selector: 'nb-actions',
   styleUrls: ['./actions.component.scss'],
-  template: `
-    <ng-content select="nb-action"></ng-content>
-  `,
+  template: ` <ng-content select="nb-action"></ng-content> `,
+  standalone: false,
 })
 export class NbActionsComponent {
-
   /**
    * Size of the component: 'tiny', 'small' (default), 'medium', 'large', 'giant'
    */

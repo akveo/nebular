@@ -90,6 +90,7 @@ import {
     { provide: NbFormFieldControl, useExisting: NbSelectWithAutocompleteComponent },
     { provide: NbFormFieldControlConfig, useFactory: nbSelectFormFieldControlConfigFactory },
   ],
+  standalone: false,
 })
 export class NbSelectWithAutocompleteComponent
   implements OnChanges, AfterViewInit, AfterContentInit, OnDestroy, ControlValueAccessor, NbFormFieldControl

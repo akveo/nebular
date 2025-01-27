@@ -20,9 +20,7 @@ import { NbCalendarDaysNamesComponent } from './components/calendar-days-names/c
 import { NbCalendarMonthCellComponent } from './components/calendar-month-picker/calendar-month-cell.component';
 import { NbCalendarMonthPickerComponent } from './components/calendar-month-picker/calendar-month-picker.component';
 import { NbCalendarViewModeComponent } from './components/calendar-navigation/calendar-view-mode.component';
-import {
-  NbCalendarPageableNavigationComponent,
-} from './components/calendar-navigation/calendar-pageable-navigation.component';
+import { NbCalendarPageableNavigationComponent } from './components/calendar-navigation/calendar-pageable-navigation.component';
 import { NbCalendarPickerComponent } from './components/calendar-picker/calendar-picker.component';
 import { NbCalendarPickerRowComponent } from './components/calendar-picker/calendar-picker-row.component';
 import { NbCalendarYearCellComponent } from './components/calendar-year-picker/calendar-year-cell.component';
@@ -33,7 +31,6 @@ import { NbNativeDateService } from './services/native-date.service';
 import { NbCalendarYearModelService } from './services/calendar-year-model.service';
 import { NbCalendarTimeModelService } from './services/calendar-time-model.service';
 import { NbCalendarActionsComponent } from './components/calendar-actions/calendar-actions.component';
-
 
 const SERVICES = [
   { provide: NbDateService, useClass: NbNativeDateService },
@@ -77,10 +74,9 @@ const COMPONENTS = [
  * @stacked-example(Full calendar, calendar-kit/calendar-kit-full-calendar.component)
  * */
 @NgModule({
-  imports: [ NbSharedModule, NbButtonModule, NbIconModule ],
+  imports: [NbSharedModule, NbButtonModule, NbIconModule],
   exports: [...COMPONENTS],
   declarations: [...COMPONENTS],
   providers: [...SERVICES],
 })
-export class NbCalendarKitModule {
-}
+export class NbCalendarKitModule {}

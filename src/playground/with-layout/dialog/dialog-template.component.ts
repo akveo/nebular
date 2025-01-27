@@ -1,7 +1,6 @@
 import { Component, TemplateRef } from '@angular/core';
 import { NbDialogService } from '@nebular/theme';
 
-
 @Component({
   selector: 'nb-dialog-template',
   template: `
@@ -17,10 +16,10 @@ import { NbDialogService } from '@nebular/theme';
     <button nbButton (click)="open(dialog)">Open Dialog</button>
   `,
   styleUrls: ['./dialog-common.scss'],
+  standalone: false,
 })
 export class DialogTemplateComponent {
-  constructor(private dialogService: NbDialogService) {
-  }
+  constructor(private dialogService: NbDialogService) {}
 
   open(dialog: TemplateRef<any>) {
     this.dialogService.open(dialog, { context: 'this is some additional data passed to dialog' });

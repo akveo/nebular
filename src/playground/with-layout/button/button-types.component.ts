@@ -10,6 +10,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   selector: 'nb-button-types',
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './button-types.component.html',
+  standalone: false,
 })
 export class ButtonTypesComponent {
   onClick() {

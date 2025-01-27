@@ -12,7 +12,6 @@ const EC = protractor.ExpectedConditions;
 const WAIT_TIME = 1500;
 
 describe('nb-search', () => {
-
   beforeEach((done) => {
     browser.get('#/search/search-test.component').then(() => done());
   });

@@ -19,7 +19,6 @@ import { NbCalendarRangeYearCellComponent } from './calendar-range-year-cell.com
 import { NbCalendarRangeMonthCellComponent } from './calendar-range-month-cell.component';
 import { convertToBoolProperty, NbBooleanInput } from '../helpers';
 
-
 export interface NbCalendarRange<D> {
   start: D;
   end?: D;
@@ -185,6 +184,7 @@ export interface NbCalendarRange<D> {
       [firstDayOfWeek]="firstDayOfWeek"
     ></nb-base-calendar>
   `,
+  standalone: false,
 })
 export class NbCalendarRangeComponent<D> {
   /**
@@ -296,8 +296,7 @@ export class NbCalendarRangeComponent<D> {
    * */
   @Output() rangeChange: EventEmitter<NbCalendarRange<D>> = new EventEmitter();
 
-  constructor(protected dateService: NbDateService<D>) {
-  }
+  constructor(protected dateService: NbDateService<D>) {}
 
   onChange(date: D) {
     this.initDateIfNull();

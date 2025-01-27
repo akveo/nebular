@@ -50,7 +50,7 @@ import { ComponentLinkDirective } from './components-link.directive';
     {
       provide: REMOVE_STYLES_ON_COMPONENT_DESTROY,
       useValue: false,
-    }
+    },
   ],
   bootstrap: [AppComponent],
 })

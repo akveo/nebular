@@ -30,6 +30,7 @@ import {
       </nb-layout-column>
     </nb-layout>
   `,
+  standalone: false,
 })
 export class NbDatepickerTestComponent {
   @ViewChild(NbDatepickerComponent) datepicker: NbDatepickerComponent<Date>;
@@ -46,6 +47,7 @@ export class NbDatepickerTestComponent {
       </nb-layout-column>
     </nb-layout>
   `,
+  standalone: false,
 })
 export class NbRangepickerTestComponent {
   @ViewChild(NbRangepickerComponent) rangepicker: NbRangepickerComponent<Date>;
@@ -62,6 +64,7 @@ export class NbRangepickerTestComponent {
       </nb-layout-column>
     </nb-layout>
   `,
+  standalone: false,
 })
 export class NbDateTimepickerTestComponent {
   @ViewChild(NbDateTimePickerComponent) dateTimepicker: NbDateTimePickerComponent<Date>;

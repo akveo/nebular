@@ -19,15 +19,14 @@ export interface Group {
   selector: 'nb-autocomplete-group',
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './autocomplete-group.component.html',
+  standalone: false,
 })
 export class AutocompleteGroupComponent implements OnInit {
-
   groups: Group[];
   filteredGroups$: Observable<Group[]>;
   inputFormControl: FormControl;
 
   ngOnInit() {
-
     this.groups = [
       {
         name: 'Group 1',
@@ -40,38 +39,35 @@ export class AutocompleteGroupComponent implements OnInit {
       {
         name: 'Group 3',
         children: ['Option 31', 'Option 32', 'Option 33'],
-    }];
+      },
+    ];
 
     this.filteredGroups$ = of(this.groups);
     this.inputFormControl = new FormControl();
 
-    this.filteredGroups$ = this.inputFormControl.valueChanges
-      .pipe(
-        startWith(''),
-        map(filterString => this.filter(filterString)),
-      );
-
+    this.filteredGroups$ = this.inputFormControl.valueChanges.pipe(
+      startWith(''),
+      map((filterString) => this.filter(filterString)),
+    );
   }
 
   private filterChildren(children: string[], filterValue: string) {
-    return children.filter(optionValue => optionValue.toLowerCase().includes(filterValue));
+    return children.filter((optionValue) => optionValue.toLowerCase().includes(filterValue));
   }
 
   private filter(value: string): Group[] {
     const filterValue = value.toLowerCase();
     return this.groups
-      .map(group => {
+      .map((group) => {
         return {
           name: group.name,
           children: this.filterChildren(group.children, filterValue),
-        }
+        };
       })
-      .filter(group => group.children.length);
+      .filter((group) => group.children.length);
   }
 
   trackByFn(index, item) {
     return item.name;
   }
-
 }
-

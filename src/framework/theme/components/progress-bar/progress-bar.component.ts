@@ -105,9 +105,9 @@ import { NbComponentOrCustomStatus } from '../component-status';
       </div>
     </div>
   `,
+  standalone: false,
 })
 export class NbProgressBarComponent {
-
   /**
    * Progress bar value in percent (0 - 100)
    */
@@ -196,6 +196,5 @@ export class NbProgressBarComponent {
     return [];
   }
 
-  constructor(protected statusService: NbStatusService) {
-  }
+  constructor(protected statusService: NbStatusService) {}
 }

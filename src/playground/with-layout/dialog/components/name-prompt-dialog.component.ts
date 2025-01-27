@@ -7,7 +7,7 @@ import { NbDialogRef } from '@nebular/theme';
     <nb-card>
       <nb-card-header>Enter your name</nb-card-header>
       <nb-card-body>
-        <input #name nbInput placeholder="Name">
+        <input #name nbInput placeholder="Name" />
       </nb-card-body>
       <nb-card-footer>
         <button nbButton status="danger" (click)="cancel()">Cancel</button>
@@ -15,10 +15,10 @@ import { NbDialogRef } from '@nebular/theme';
       </nb-card-footer>
     </nb-card>
   `,
+  standalone: false,
 })
 export class DialogNamePromptComponent {
-  constructor(protected dialogRef: NbDialogRef<DialogNamePromptComponent>) {
-  }
+  constructor(protected dialogRef: NbDialogRef<DialogNamePromptComponent>) {}
 
   cancel() {
     this.dialogRef.close();

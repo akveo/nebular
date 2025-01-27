@@ -14,9 +14,9 @@ import { NgdHighlightService } from '../../../@theme/services';
     </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class NgdCodeBlockComponent {
-
   @Input() path = '';
   @Input() firstLine: number;
   @Input() lastLine: number;
@@ -31,8 +31,7 @@ export class NgdCodeBlockComponent {
   code: SafeHtml;
   lines: number[] = [];
 
-  constructor(private highlightService: NgdHighlightService) {
-  }
+  constructor(private highlightService: NgdHighlightService) {}
 
   getVisible(code): string {
     return code
@@ -43,6 +42,8 @@ export class NgdCodeBlockComponent {
 
   createLines(code): number[] {
     const length = code.split('\n').length;
-    return Array(length).fill(0).map((_, i) => i + (this.firstLine || 1));
+    return Array(length)
+      .fill(0)
+      .map((_, i) => i + (this.firstLine || 1));
   }
 }

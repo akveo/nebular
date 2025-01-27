@@ -20,20 +20,19 @@
       "prefix": "npg",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/playground",
+            "outputPath": {
+              "base": "dist/playground"
+            },
             "index": "src/index.html",
-            "main": "src/main.ts",
-            "polyfills": "src/polyfills.ts",
+            "polyfills": ["src/polyfills.ts"],
             "tsConfig": "src/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ],
+            "assets": ["src/favicon.ico", "src/assets"],
             "styles": [],
-            "scripts": []
+            "scripts": [],
+            "browser": "src/main.ts"
           },
           "configurations": {
             "production": {
@@ -76,9 +75,7 @@
               "outputHashing": "all"
             },
             "development": {
-              "buildOptimizer": false,
               "optimization": false,
-              "vendorChunk": true,
               "extractLicenses": false,
               "sourceMap": true,
               "namedChunks": true
@@ -90,13 +87,13 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "playground:build:production"
+              "buildTarget": "playground:build:production"
             },
             "production-wp": {
-              "browserTarget": "playground:build:production-wp"
+              "buildTarget": "playground:build:production-wp"
             },
             "development": {
-              "browserTarget": "playground:build:development"
+              "buildTarget": "playground:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -104,7 +101,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "playground:build"
+            "buildTarget": "playground:build"
           }
         },
         "test": {
@@ -115,10 +112,7 @@
             "tsConfig": "src/tsconfig.spec.json",
             "karmaConfig": "./karma.conf.js",
             "inlineStyleLanguage": "scss",
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ],
+            "assets": ["src/favicon.ico", "src/assets"],
             "styles": [],
             "scripts": []
           },
@@ -131,10 +125,7 @@
         "lint": {
           "builder": "@angular-eslint/builder:lint",
           "options": {
-            "lintFilePatterns": [
-              "src/**/*.ts",
-              "src/**/*.html"
-            ]
+            "lintFilePatterns": ["src/**/*.ts", "src/**/*.html"]
           }
         }
       }
@@ -159,10 +150,7 @@
         "lint": {
           "builder": "@angular-eslint/builder:lint",
           "options": {
-            "lintFilePatterns": [
-              "e2e/**/*.ts",
-              "e2e/**/*.html"
-            ]
+            "lintFilePatterns": ["e2e/**/*.ts", "e2e/**/*.html"]
           }
         }
       }
@@ -184,12 +172,13 @@
       "prefix": "ngd",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/docs",
+            "outputPath": {
+              "base": "dist/docs"
+            },
             "index": "docs/index.html",
-            "main": "docs/main.ts",
-            "polyfills": "docs/polyfills.ts",
+            "polyfills": ["docs/polyfills.ts"],
             "tsConfig": "docs/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
@@ -216,13 +205,9 @@
               "node_modules/highlight.js/styles/dracula.css",
               "docs/app/@theme/styles/styles.scss"
             ],
-            "scripts": [
-              "node_modules/pace-js/pace.min.js",
-              "node_modules/docsearch.js/dist/cdn/docsearch.min.js"
-            ],
-            "allowedCommonJsDependencies": [
-              "highlight.js"
-            ]
+            "scripts": ["node_modules/pace-js/pace.min.js", "node_modules/docsearch.js/dist/cdn/docsearch.min.js"],
+            "allowedCommonJsDependencies": ["highlight.js"],
+            "browser": "docs/main.ts"
           },
           "configurations": {
             "production": {
@@ -245,9 +230,7 @@
               "outputHashing": "all"
             },
             "development": {
-              "buildOptimizer": false,
               "optimization": false,
-              "vendorChunk": true,
               "extractLicenses": false,
               "sourceMap": true,
               "namedChunks": true
@@ -279,10 +262,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "docs:build:production"
+              "buildTarget": "docs:build:production"
             },
             "development": {
-              "browserTarget": "docs:build:development"
+              "buildTarget": "docs:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -290,7 +273,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "docs:build"
+            "buildTarget": "docs:build"
           }
         },
         "test": {
@@ -301,26 +284,9 @@
             "tsConfig": "docs/tsconfig.spec.json",
             "karmaConfig": "./karma.conf.js",
             "inlineStyleLanguage": "scss",
-            "assets": [
-              "docs/assets",
-              "docs/favicon.ico",
-              "docs/favicon.png",
-              "docs/google46533d2e7a851062.html"
-            ],
-            "styles": [
-              "node_modules/highlight.js/styles/dracula.css",
-              "docs/app/@theme/styles/styles.scss"
-            ],
+            "assets": ["docs/assets", "docs/favicon.ico", "docs/favicon.png", "docs/google46533d2e7a851062.html"],
+            "styles": ["node_modules/highlight.js/styles/dracula.css", "docs/app/@theme/styles/styles.scss"],
             "scripts": []
-          }
-        },
-        "lint": {
-          "builder": "@angular-eslint/builder:lint",
-          "options": {
-            "lintFilePatterns": [
-              "docs/**/*.ts",
-              "docs/**/*.html"
-            ]
           }
         }
       }
@@ -353,15 +319,6 @@
             "tsConfig": "src/framework/theme/tsconfig.spec.json",
             "karmaConfig": "karma.conf.js"
           }
-        },
-        "lint": {
-          "builder": "@angular-eslint/builder:lint",
-          "options": {
-            "lintFilePatterns": [
-              "src/framework/theme/**/*.ts",
-              "src/framework/theme/**/*.html"
-            ]
-          }
         }
       }
     },
@@ -392,15 +349,6 @@
             "main": "src/framework/auth/test.ts",
             "tsConfig": "src/framework/auth/tsconfig.spec.json",
             "karmaConfig": "karma.conf.js"
-          }
-        },
-        "lint": {
-          "builder": "@angular-eslint/builder:lint",
-          "options": {
-            "lintFilePatterns": [
-              "src/framework/auth/**/*.ts",
-              "src/framework/auth/**/*.html"
-            ]
           }
         }
       }
@@ -433,15 +381,6 @@
             "tsConfig": "src/framework/date-fns/tsconfig.spec.json",
             "karmaConfig": "karma.conf.js"
           }
-        },
-        "lint": {
-          "builder": "@angular-eslint/builder:lint",
-          "options": {
-            "lintFilePatterns": [
-              "src/framework/date-fns/**/*.ts",
-              "src/framework/date-fns/**/*.html"
-            ]
-          }
         }
       }
     },
@@ -472,15 +411,6 @@
             "main": "src/framework/eva-icons/test.ts",
             "tsConfig": "src/framework/eva-icons/tsconfig.spec.json",
             "karmaConfig": "karma.conf.js"
-          }
-        },
-        "lint": {
-          "builder": "@angular-eslint/builder:lint",
-          "options": {
-            "lintFilePatterns": [
-              "src/framework/eva-icons/**/*.ts",
-              "src/framework/eva-icons/**/*.html"
-            ]
           }
         }
       }
@@ -513,15 +443,6 @@
             "tsConfig": "src/framework/firebase-auth/tsconfig.spec.json",
             "karmaConfig": "karma.conf.js"
           }
-        },
-        "lint": {
-          "builder": "@angular-eslint/builder:lint",
-          "options": {
-            "lintFilePatterns": [
-              "src/framework/firebase-auth/**/*.ts",
-              "src/framework/firebase-auth/**/*.html"
-            ]
-          }
         }
       }
     },
@@ -552,15 +473,6 @@
             "main": "src/framework/moment/test.ts",
             "tsConfig": "src/framework/moment/tsconfig.spec.json",
             "karmaConfig": "karma.conf.js"
-          }
-        },
-        "lint": {
-          "builder": "@angular-eslint/builder:lint",
-          "options": {
-            "lintFilePatterns": [
-              "src/framework/moment/**/*.ts",
-              "src/framework/moment/**/*.html"
-            ]
           }
         }
       }
@@ -593,15 +505,6 @@
             "tsConfig": "src/framework/security/tsconfig.spec.json",
             "karmaConfig": "karma.conf.js"
           }
-        },
-        "lint": {
-          "builder": "@angular-eslint/builder:lint",
-          "options": {
-            "lintFilePatterns": [
-              "src/framework/security/**/*.ts",
-              "src/framework/security/**/*.html"
-            ]
-          }
         }
       }
     }
@@ -623,8 +526,6 @@
   },
   "cli": {
     "analytics": false,
-    "schematicCollections": [
-      "@angular-eslint/schematics"
-    ]
+    "schematicCollections": ["@angular-eslint/schematics"]
   }
 }

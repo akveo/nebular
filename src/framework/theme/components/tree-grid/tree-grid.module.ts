@@ -80,9 +80,9 @@ const COMPONENTS = [
 ];
 
 @NgModule({
-  imports: [ CommonModule, NbTableModule, NbIconModule ],
-  declarations: [ ...COMPONENTS ],
-  exports: [ NbTableModule, ...COMPONENTS ],
+  imports: [CommonModule, NbTableModule, NbIconModule],
+  declarations: [...COMPONENTS],
+  exports: [NbTableModule, ...COMPONENTS],
   providers: [
     NbTreeGridSortService,
     NbTreeGridFilterService,

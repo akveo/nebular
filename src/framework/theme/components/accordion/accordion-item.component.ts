@@ -35,9 +35,9 @@ import { convertToBoolProperty, NbBooleanInput } from '../helpers';
     <ng-content select="nb-accordion-item-body"></ng-content>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class NbAccordionItemComponent implements OnInit, OnChanges, OnDestroy {
-
   /**
    * Item is collapse (`true` by default)
    * @type {boolean}
@@ -95,8 +95,7 @@ export class NbAccordionItemComponent implements OnInit, OnChanges, OnDestroy {
   private disabledValue = false;
   private destroy$ = new Subject<void>();
 
-  constructor(@Host() private accordion: NbAccordionComponent, private cd: ChangeDetectorRef) {
-  }
+  constructor(@Host() private accordion: NbAccordionComponent, private cd: ChangeDetectorRef) {}
 
   /**
    * Open/close the item
@@ -128,10 +127,8 @@ export class NbAccordionItemComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnInit() {
-    this.accordion.openCloseItems
-      .pipe(takeUntil(this.destroy$))
-      .subscribe(collapsed => {
-        !this.disabled && (this.collapsed = collapsed);
+    this.accordion.openCloseItems.pipe(takeUntil(this.destroy$)).subscribe((collapsed) => {
+      !this.disabled && (this.collapsed = collapsed);
     });
   }
 

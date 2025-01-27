@@ -14,7 +14,7 @@ import { Component } from '@angular/core';
         <a class="navbar-brand" href="#">ngx-admin</a>
       </nb-layout-header>
     </nb-layout>
-`,
+  `,
+  standalone: false,
 })
-export class LayoutHeaderTestComponent {
-}
+export class LayoutHeaderTestComponent {}

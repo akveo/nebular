@@ -9,17 +9,19 @@ import { NgdAnalytics, NgdIframeCommunicatorService } from '../@theme/services';
   selector: 'ngd-example',
   template: '<router-outlet></router-outlet>',
   styleUrls: ['./example.component.scss'],
+  standalone: false,
 })
 export class NgdExampleComponent implements OnInit, AfterViewInit, OnDestroy {
   private id: string;
   private destroy$ = new Subject<void>();
 
-  constructor(private communicator: NgdIframeCommunicatorService,
-              private themeService: NbThemeService,
-              private router: Router,
-              private analytics: NgdAnalytics,
-              @Inject(NB_DOCUMENT) private document) {
-  }
+  constructor(
+    private communicator: NgdIframeCommunicatorService,
+    private themeService: NbThemeService,
+    private router: Router,
+    private analytics: NgdAnalytics,
+    @Inject(NB_DOCUMENT) private document,
+  ) {}
 
   ngOnInit() {
     this.setupId();
@@ -43,9 +45,10 @@ export class NgdExampleComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   private subscribeOnThemeSwitch() {
-    this.communicator.receive(this.id)
+    this.communicator
+      .receive(this.id)
       .pipe(takeUntil(this.destroy$))
-      .subscribe(payload => this.changeTheme(payload))
+      .subscribe((payload) => this.changeTheme(payload));
   }
 
   private changeTheme(payload) {

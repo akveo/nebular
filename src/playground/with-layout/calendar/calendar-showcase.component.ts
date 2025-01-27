@@ -14,11 +14,11 @@ import { Component } from '@angular/core';
         <h1 class="h5">Selected date: {{ date | date }}</h1>
       </nb-card-header>
       <nb-card-body>
-        <nb-calendar [(date)]="date">
-        </nb-calendar>
+        <nb-calendar [(date)]="date"> </nb-calendar>
       </nb-card-body>
     </nb-card>
   `,
+  standalone: false,
 })
 export class CalendarShowcaseComponent {
   date = new Date();

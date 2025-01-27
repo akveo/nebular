@@ -19,7 +19,7 @@ describe('NbBaseCalendarComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ NbCalendarModule, NbThemeModule.forRoot() ],
+      imports: [NbCalendarModule, NbThemeModule.forRoot()],
     });
 
     fixture = TestBed.createComponent<NbBaseCalendarComponent<Date, Date>>(NbBaseCalendarComponent);

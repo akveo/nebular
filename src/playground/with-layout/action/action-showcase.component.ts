@@ -11,6 +11,7 @@ import { NbIconConfig } from '@nebular/theme';
   selector: 'nb-action-showcase',
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './action-showcase.component.html',
+  standalone: false,
 })
 export class ActionShowcaseComponent {
   disabledIconConfig: NbIconConfig = { icon: 'settings-2-outline', pack: 'eva' };

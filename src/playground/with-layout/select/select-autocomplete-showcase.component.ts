@@ -9,6 +9,7 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'npg-select-autocomplete-showcase',
   templateUrl: './select-autocomplete-showcase.component.html',
+  standalone: false,
 })
 export class SelectAutocompleteShowcaseComponent {
   withAutocomplete = true;

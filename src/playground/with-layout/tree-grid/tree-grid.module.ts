@@ -19,7 +19,7 @@ import { TreeGridDisableClickToggleComponent } from './tree-grid-disable-click-t
 import { TreeGridCustomNodeStructureComponent } from './tree-grid-custom-node-structure.component';
 
 @NgModule({
-  imports: [ CommonModule, NbTreeGridModule, TreeGridRoutingModule, NbCardModule, NbInputModule, NbIconModule ],
+  imports: [CommonModule, NbTreeGridModule, TreeGridRoutingModule, NbCardModule, NbInputModule, NbIconModule],
   declarations: [
     FsIconComponent,
     TreeGridShowcaseComponent,

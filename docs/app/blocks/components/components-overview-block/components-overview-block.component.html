@@ -11,8 +11,11 @@
       <a class="component-navigate-link" [routerLink]="component.link">
         <nb-card [attr.title]="component.name">
           <nb-card-body>
-            <img class="component-icon" src="assets/images/components/{{ component.icon }}"
-                 [attr.alt]="component.name">
+            <img
+              class="component-icon"
+              src="assets/images/components/{{ component.icon }}"
+              [attr.alt]="component.name"
+            />
             <label class="component-name">{{ component.name }}</label>
           </nb-card-body>
         </nb-card>
