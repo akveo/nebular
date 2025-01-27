@@ -23,13 +23,15 @@
   <nb-card-header class="appearance-name">{{ appearance }}</nb-card-header>
   <nb-card-body class="select-column">
     <div *ngFor="let status of statuses" [class.control-status-example]="status === 'control'" class="select-container">
-      <nb-select placeholder="Select a value"
-                 [(selected)]="singleSelectValue"
-                 [appearance]="appearance"
-                 [status]="status"
-                 [size]="selectedSize"
-                 [shape]="selectedShape"
-                 [fullWidth]="fullWidth">
+      <nb-select
+        placeholder="Select a value"
+        [(selected)]="singleSelectValue"
+        [appearance]="appearance"
+        [status]="status"
+        [size]="selectedSize"
+        [shape]="selectedShape"
+        [fullWidth]="fullWidth"
+      >
         <nb-option>Reset value</nb-option>
         <nb-option value="1">Option 1</nb-option>
         <nb-option value="2">Option 2</nb-option>
@@ -47,13 +49,15 @@
     </div>
 
     <div class="select-container">
-      <nb-select multiple
-                 [(selected)]="multipleSelectValue"
-                 [appearance]="appearance"
-                 placeholder="Multiple select"
-                 [size]="selectedSize"
-                 [shape]="selectedShape"
-                 [fullWidth]="fullWidth">
+      <nb-select
+        multiple
+        [(selected)]="multipleSelectValue"
+        [appearance]="appearance"
+        placeholder="Multiple select"
+        [size]="selectedSize"
+        [shape]="selectedShape"
+        [fullWidth]="fullWidth"
+      >
         <nb-option>Reset</nb-option>
         <nb-option value="1">Option 1</nb-option>
         <nb-option value="2">Option 2</nb-option>
@@ -71,22 +75,26 @@
     </div>
 
     <div class="select-container">
-      <nb-select disabled
-                 placeholder="Disabled select"
-                 [appearance]="appearance"
-                 [size]="selectedSize"
-                 [shape]="selectedShape"
-                 [fullWidth]="fullWidth">
+      <nb-select
+        disabled
+        placeholder="Disabled select"
+        [appearance]="appearance"
+        [size]="selectedSize"
+        [shape]="selectedShape"
+        [fullWidth]="fullWidth"
+      >
       </nb-select>
     </div>
 
     <div class="select-container">
-      <nb-select selected="1"
-                 disabled
-                 [appearance]="appearance"
-                 [size]="selectedSize"
-                 [shape]="selectedShape"
-                 [fullWidth]="fullWidth">
+      <nb-select
+        selected="1"
+        disabled
+        [appearance]="appearance"
+        [size]="selectedSize"
+        [shape]="selectedShape"
+        [fullWidth]="fullWidth"
+      >
         <nb-option value="1">Option 1</nb-option>
       </nb-select>
     </div>

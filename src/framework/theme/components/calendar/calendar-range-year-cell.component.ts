@@ -27,9 +27,12 @@ import { NbBaseCalendarRangeCell } from './base-calendar-range-cell';
     </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
-export class NbCalendarRangeYearCellComponent<D> extends NbBaseCalendarRangeCell<D>
-  implements NbCalendarCell<D, NbCalendarRange<D>> {
+export class NbCalendarRangeYearCellComponent<D>
+  extends NbBaseCalendarRangeCell<D>
+  implements NbCalendarCell<D, NbCalendarRange<D>>
+{
   @Input() date: D;
 
   @Input() min: D;

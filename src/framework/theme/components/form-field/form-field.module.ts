@@ -11,16 +11,11 @@ import { NbFormFieldComponent } from './form-field.component';
 import { NbPrefixDirective } from './prefix.directive';
 import { NbSuffixDirective } from './suffix.directive';
 
-const COMPONENTS = [
-  NbFormFieldComponent,
-  NbPrefixDirective,
-  NbSuffixDirective,
-];
+const COMPONENTS = [NbFormFieldComponent, NbPrefixDirective, NbSuffixDirective];
 
 @NgModule({
-  imports: [ CommonModule ],
-  declarations: [ ...COMPONENTS ],
-  exports: [ ...COMPONENTS ],
+  imports: [CommonModule],
+  declarations: [...COMPONENTS],
+  exports: [...COMPONENTS],
 })
-export class NbFormFieldModule {
-}
+export class NbFormFieldModule {}

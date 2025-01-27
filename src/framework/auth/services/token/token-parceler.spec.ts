@@ -54,13 +54,11 @@ describe('token-parceler', () => {
       });
     });
 
-    beforeEach(
-      waitForAsync(
-        inject([NbAuthTokenParceler], (_tokenParceler) => {
-          tokenParceler = _tokenParceler;
-        }),
-      ),
-    );
+    beforeEach(waitForAsync(
+      inject([NbAuthTokenParceler], (_tokenParceler) => {
+        tokenParceler = _tokenParceler;
+      }),
+    ));
 
     it('wraps simple', () => {
       expect(tokenParceler.wrap(simpleToken)).toEqual(wrappedSimple);
@@ -100,13 +98,11 @@ describe('token-parceler', () => {
       });
     });
 
-    beforeEach(
-      waitForAsync(
-        inject([NbAuthTokenParceler], (_tokenParceler) => {
-          tokenParceler = _tokenParceler;
-        }),
-      ),
-    );
+    beforeEach(waitForAsync(
+      inject([NbAuthTokenParceler], (_tokenParceler) => {
+        tokenParceler = _tokenParceler;
+      }),
+    ));
 
     it('unwraps jwt to fallback simple as none provided', () => {
       const token = tokenParceler.unwrap(wrappedJWT);

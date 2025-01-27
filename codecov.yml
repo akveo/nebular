@@ -1,5 +1,5 @@
 comment:
-  layout: "diff, flags, files"
+  layout: 'diff, flags, files'
   behavior: default
   require_changes: true
   require_base: no

@@ -12,9 +12,9 @@ import { NbSidebarService } from '@nebular/theme';
   selector: 'nb-sidebar-test',
   styles: [
     `
-    :host ::ng-deep nb-layout-column {
-      background-color: #76ecff;
-    }
+      :host ::ng-deep nb-layout-column {
+        background-color: #76ecff;
+      }
     `,
   ],
   template: `
@@ -26,8 +26,7 @@ import { NbSidebarService } from '@nebular/theme';
         <button id="collapse-right" (click)="collapseRight()">Collapse Right</button>
       </nb-layout-header>
 
-      <nb-sidebar state="collapsed" fixed tag="left">
-      </nb-sidebar>
+      <nb-sidebar state="collapsed" fixed tag="left"> </nb-sidebar>
 
       <nb-sidebar right state="compacted" tag="right">
         <nb-sidebar-header>Some Header</nb-sidebar-header>
@@ -35,27 +34,24 @@ import { NbSidebarService } from '@nebular/theme';
       </nb-sidebar>
 
       <nb-layout-column left>
-       {{ content }}
+        {{ content }}
       </nb-layout-column>
       <nb-layout-column>
-       {{ content }}
+        {{ content }}
       </nb-layout-column>
       <nb-layout-column>
-       {{ content }}
+        {{ content }}
       </nb-layout-column>
 
-
-      <nb-layout-footer fixed>
-        &copy; Akveo 2017
-      </nb-layout-footer>
+      <nb-layout-footer fixed> &copy; Akveo 2017 </nb-layout-footer>
     </nb-layout>
-`,
+  `,
+  standalone: false,
 })
 export class SidebarTestComponent implements OnInit {
-
   content = 'First ';
 
-  constructor(private sidebarService: NbSidebarService) { }
+  constructor(private sidebarService: NbSidebarService) {}
 
   collapseLeft() {
     this.sidebarService.toggle(false, 'left');
@@ -66,7 +62,6 @@ export class SidebarTestComponent implements OnInit {
   }
 
   ngOnInit() {
-
     for (let i = 0; i < 1000; i++) {
       this.content += 'Akveo ';
     }

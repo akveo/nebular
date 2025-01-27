@@ -26,12 +26,6 @@ import { InputFormComponent } from './input-form.component';
     InputTypesComponent,
     InputFormComponent,
   ],
-  imports: [
-    FormsModule,
-    ReactiveFormsModule,
-    NbInputModule,
-    NbCardModule,
-    InputRoutingModule,
-  ],
+  imports: [FormsModule, ReactiveFormsModule, NbInputModule, NbCardModule, InputRoutingModule],
 })
 export class InputModule {}

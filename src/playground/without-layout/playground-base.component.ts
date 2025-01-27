@@ -11,6 +11,7 @@ import { NbThemeService } from '@nebular/theme';
   template: ` <router-outlet></router-outlet> `,
   styleUrls: ['../styles/styles.scss'],
   encapsulation: ViewEncapsulation.None,
+  standalone: false,
 })
 export class PlaygroundBaseComponent implements OnInit {
   constructor(private themeService: NbThemeService) {}

@@ -3,24 +3,25 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'nb-progress-bar-interactive',
   templateUrl: './progress-bar-interactive.component.html',
-  styles: [`
-    .container {
-      display: flex;
-      align-items: center;
-    }
+  styles: [
+    `
+      .container {
+        display: flex;
+        align-items: center;
+      }
 
-    nb-progress-bar {
-      flex: 1;
-    }
-  `],
+      nb-progress-bar {
+        flex: 1;
+      }
+    `,
+  ],
+  standalone: false,
 })
-
 export class ProgressBarInteractiveComponent {
-
   value = 25;
 
   setValue(newValue) {
-    this.value = Math.min(Math.max(newValue, 0), 100)
+    this.value = Math.min(Math.max(newValue, 0), 100);
   }
 
   get status() {
@@ -34,5 +35,4 @@ export class ProgressBarInteractiveComponent {
       return 'success';
     }
   }
-
 }

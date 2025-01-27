@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import {Component, Input, OnInit, OnDestroy, ChangeDetectionStrategy, ChangeDetectorRef} from '@angular/core';
+import { Component, Input, OnInit, OnDestroy, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { takeUntil, skip, distinctUntilChanged, debounceTime } from 'rxjs/operators';
 import { Subject } from 'rxjs';
@@ -14,6 +14,7 @@ import { Subject } from 'rxjs';
   styleUrls: ['./theme-block.component.scss'],
   templateUrl: './theme-block.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class NgdThemeComponent implements OnInit, OnDestroy {
   searchControl = new FormControl();
@@ -25,32 +26,28 @@ export class NgdThemeComponent implements OnInit, OnDestroy {
   themeName = '';
   parentThemeName = '';
 
-
   @Input('block')
   set _block(block: any) {
     this.themeName = block.source.name;
     this.parentThemeName = block.source.parent;
 
-    this.filtered = this.properties = Object.entries(block.source.data)
-      .map(([key, data]: [string, any]) => {
-        const propertyValue = data.value;
-        return {
-          name: key,
-          value: Array.isArray(propertyValue) ? propertyValue.join(' ') : propertyValue,
-          parents: data.parents,
-        };
+    this.filtered = this.properties = Object.entries(block.source.data).map(([key, data]: [string, any]) => {
+      const propertyValue = data.value;
+      return {
+        name: key,
+        value: Array.isArray(propertyValue) ? propertyValue.join(' ') : propertyValue,
+        parents: data.parents,
+      };
     });
   }
 
-  constructor(private cd: ChangeDetectorRef) {
-  }
+  constructor(private cd: ChangeDetectorRef) {}
 
   ngOnInit() {
     this.searchControl.valueChanges
       .pipe(skip(1), distinctUntilChanged(), debounceTime(300), takeUntil(this.destroy$))
       .subscribe((value: string) => {
-        this.filtered = this.properties
-          .filter(({ name }) => name.toLowerCase().includes(value.toLowerCase()));
+        this.filtered = this.properties.filter(({ name }) => name.toLowerCase().includes(value.toLowerCase()));
         this.cd.detectChanges();
       });
   }

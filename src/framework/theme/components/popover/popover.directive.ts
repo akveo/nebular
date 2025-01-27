@@ -114,6 +114,7 @@ import { Subject } from 'rxjs';
   selector: '[nbPopover]',
   exportAs: 'nbPopover',
   providers: [NbDynamicOverlayHandler, NbDynamicOverlay],
+  standalone: false,
 })
 export class NbPopoverDirective implements NbDynamicOverlayController, OnChanges, AfterViewInit, OnDestroy, OnInit {
   protected popoverComponent = NbPopoverComponent;

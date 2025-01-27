@@ -24,12 +24,6 @@ import { NewsPostComponent } from './components/news-post.component';
     NewsPostPlaceholderComponent,
     NewsPostComponent,
   ],
-  imports: [
-    CommonModule,
-    NbListModule,
-    NbCardModule,
-    NbSpinnerModule,
-    InfiniteListRoutingModule,
-  ],
+  imports: [CommonModule, NbListModule, NbCardModule, NbSpinnerModule, InfiniteListRoutingModule],
 })
 export class InfiniteListModule {}

@@ -13,8 +13,9 @@ describe('nb-tabset', () => {
 
   it('should display default tabset', () => {
     expect(element(by.css('nb-tabset:nth-child(1) > ul > li:nth-child(1)')).getText()).toEqual('TAB #1');
-    expect(element(by.css('nb-tabset:nth-child(1) > nb-tab[tabTitle="Tab #1"] > span'))
-      .getText()).toEqual('Content #1');
+    expect(element(by.css('nb-tabset:nth-child(1) > nb-tab[tabTitle="Tab #1"] > span')).getText()).toEqual(
+      'Content #1',
+    );
 
     expect(element(by.css('nb-tabset:nth-child(1) > ul > li:nth-child(2)')).getText()).toEqual('TAB #2');
     expect(element(by.css('nb-tabset:nth-child(1) > ul > li:nth-child(3)')).getText()).toEqual('TAB #3');

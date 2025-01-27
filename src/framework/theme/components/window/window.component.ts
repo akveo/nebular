@@ -66,6 +66,7 @@ import { NbWindowRef } from './window-ref';
     </nb-card>
   `,
   styleUrls: ['./window.component.scss'],
+  standalone: false,
 })
 export class NbWindowComponent implements OnInit, AfterViewChecked, OnDestroy {
   @Input() cfr: ComponentFactoryResolver;

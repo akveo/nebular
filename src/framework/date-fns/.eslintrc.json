@@ -1,18 +1,11 @@
 {
   "extends": "../../../.eslintrc.json",
-  "ignorePatterns": [
-    "!**/*"
-  ],
+  "ignorePatterns": ["!**/*"],
   "overrides": [
     {
-      "files": [
-        "*.ts"
-      ],
+      "files": ["*.ts"],
       "parserOptions": {
-        "project": [
-          "src/framework/date-fns/tsconfig.lib.json",
-          "src/framework/date-fns/tsconfig.spec.json"
-        ],
+        "project": ["src/framework/date-fns/tsconfig.lib.json", "src/framework/date-fns/tsconfig.spec.json"],
         "createDefaultProgram": true
       },
       "rules": {
@@ -35,9 +28,7 @@
       }
     },
     {
-      "files": [
-        "*.html"
-      ],
+      "files": ["*.html"],
       "rules": {}
     }
   ]

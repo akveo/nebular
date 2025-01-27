@@ -7,7 +7,6 @@ import { NbScrollDispatcherAdapter } from './scroll-dispatcher-adapter';
 import { NbViewportRulerAdapter } from './viewport-ruler-adapter';
 import { NbBlockScrollStrategyAdapter, NbScrollStrategyOptions } from './block-scroll-strategy-adapter';
 
-
 @NgModule({})
 export class NbCdkAdapterModule {
   static forRoot(): ModuleWithProviders<NbCdkAdapterModule> {

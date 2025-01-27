@@ -26,6 +26,7 @@ import { Subject } from 'rxjs';
       </nb-layout-column>
     </nb-layout>
   `,
+  standalone: false,
 })
 export class OAuth2LoginComponent implements OnDestroy {
   token: NbAuthOAuth2Token;

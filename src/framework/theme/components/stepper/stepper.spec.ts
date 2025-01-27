@@ -20,6 +20,7 @@ import { NbStepComponent, NbStepperComponent, NbStepperModule, NbThemeModule } f
       </nb-step>
     </nb-stepper>
   `,
+  standalone: false,
 })
 export class NbStepChangeTestComponent {
   @ViewChild(NbStepperComponent) stepper: NbStepperComponent;

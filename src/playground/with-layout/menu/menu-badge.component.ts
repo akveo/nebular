@@ -12,9 +12,9 @@ import { NbMenuItem } from '@nebular/theme';
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './menu-badge.component.html',
   styleUrls: ['./menu-badge.component.scss'],
+  standalone: false,
 })
 export class MenuBadgeComponent {
-
   items: NbMenuItem[] = [
     {
       title: 'Profile',

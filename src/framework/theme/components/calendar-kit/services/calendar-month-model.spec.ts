@@ -18,13 +18,11 @@ describe('month-model-service', () => {
     });
   });
 
-  beforeEach(
-    waitForAsync(
-      inject([NbCalendarMonthModelService], (_monthModel) => {
-        monthModel = _monthModel;
-      }),
-    ),
-  );
+  beforeEach(waitForAsync(
+    inject([NbCalendarMonthModelService], (_monthModel) => {
+      monthModel = _monthModel;
+    }),
+  ));
 
   it('should create days grid with active month', () => {
     const date = new Date(2018, 7, 1);

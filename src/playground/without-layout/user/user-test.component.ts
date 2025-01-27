@@ -21,7 +21,6 @@ import { Component } from '@angular/core';
         <nb-user showInitials size="medium" name="Dmitry Nehaychik" title="Worker"></nb-user>
       </nb-layout-header>
 
-
       <nb-layout-column>
         <div class="test-row">
           <nb-user inverse></nb-user>
@@ -48,8 +47,13 @@ import { Component } from '@angular/core';
           <nb-user inverse onlyPicture size="medium" name="Dmitry Nehaychik" title="Worker"></nb-user>
         </div>
         <div class="test-row">
-          <nb-user inverse size="large" picture="http://lorempixel.com/400/200/animals/"
-                   name="Dmitry Nehaychik" title="Worker"></nb-user>
+          <nb-user
+            inverse
+            size="large"
+            picture="http://lorempixel.com/400/200/animals/"
+            name="Dmitry Nehaychik"
+            title="Worker"
+          ></nb-user>
         </div>
         <div class="test-row">
           <nb-user inverse showInitials size="medium" name="Dmitry Nehaychik" title="Worker"></nb-user>
@@ -59,50 +63,57 @@ import { Component } from '@angular/core';
           <nb-user inverse size="large" name="Dmitry Nehaychik" badgeText="29"></nb-user>
         </div>
         <div class="test-row">
-          <nb-user inverse
+          <nb-user
+            inverse
             name="Dmitry Nehaychik"
             title="Worker"
             badgeText="29"
             badgeStatus="info"
-            badgePosition="top left">
+            badgePosition="top left"
+          >
           </nb-user>
         </div>
         <div class="test-row">
-          <nb-user inverse
+          <nb-user
+            inverse
             size="small"
             name="Dmitry Nehaychik"
             title="Worker"
             showTitle="false"
             badgeText="29"
             badgeStatus="success"
-            badgePosition="bottom right">
+            badgePosition="bottom right"
+          >
           </nb-user>
         </div>
         <div class="test-row">
-          <nb-user inverse
+          <nb-user
+            inverse
             onlyPicture
             size="medium"
             name="Dmitry Nehaychik"
             title="Worker"
             badgeText="29"
             badgeStatus="warning"
-            badgePosition="bottom left">
+            badgePosition="bottom left"
+          >
           </nb-user>
         </div>
         <div class="test-row">
-          <nb-user inverse
+          <nb-user
+            inverse
             size="large"
             picture="http://lorempixel.com/400/200/animals/"
             name="Dmitry Nehaychik"
             title="Worker"
             badgeText="29"
             badgeStatus="danger"
-            badgePosition="top left">
+            badgePosition="top left"
+          >
           </nb-user>
         </div>
         <div class="test-row" id="base64-image">
-          <nb-user
-            [picture]="'data:image/png;base64,aaa'"></nb-user>
+          <nb-user [picture]="'data:image/png;base64,aaa'"></nb-user>
         </div>
         <div class="test-row">
           <nb-user
@@ -112,12 +123,13 @@ import { Component } from '@angular/core';
             title="Worker"
             badgeText="29"
             badgeStatus="danger"
-            badgePosition="top start">
+            badgePosition="top start"
+          >
           </nb-user>
         </div>
       </nb-layout-column>
     </nb-layout>
   `,
+  standalone: false,
 })
-export class UserTestComponent {
-}
+export class UserTestComponent {}

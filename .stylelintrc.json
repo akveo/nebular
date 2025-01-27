@@ -1,7 +1,5 @@
 {
-  "extends": [
-    "stylelint-config-prettier"
-  ],
+  "extends": ["stylelint-config-prettier"],
   "rules": {
     "color-no-invalid-hex": true,
     "function-calc-no-unspaced-operator": true,
@@ -11,33 +9,18 @@
     "length-zero-no-unit": true,
     "string-no-newline": true,
     "unit-no-unknown": true,
-    "unit-allowed-list": [
-      "px",
-      "%",
-      "deg",
-      "ms",
-      "em",
-      "vh",
-      "vw",
-      "vmax",
-      "s",
-      "rem"
-    ],
+    "unit-allowed-list": ["px", "%", "deg", "ms", "em", "vh", "vw", "vmax", "s", "rem"],
     "shorthand-property-no-redundant-values": true,
     "declaration-block-no-duplicate-properties": [
       true,
       {
-        "ignore": [
-          "consecutive-duplicates-with-different-values"
-        ]
+        "ignore": ["consecutive-duplicates-with-different-values"]
       }
     ],
     "declaration-block-single-line-max-declarations": 1,
     "declaration-property-value-disallowed-list": [
       {
-        "/.*/": [
-          "initial"
-        ]
+        "/.*/": ["initial"]
       },
       {
         "message": "The `initial` value is not supported in IE."
@@ -47,9 +30,7 @@
     "selector-pseudo-element-no-unknown": [
       true,
       {
-        "ignorePseudoElements": [
-          "ng-deep"
-        ]
+        "ignorePseudoElements": ["ng-deep"]
       }
     ],
     "selector-type-case": "lower",

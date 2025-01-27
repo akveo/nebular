@@ -13,17 +13,7 @@ import { AccordionTestComponent } from './accordion-test.component';
 import { AccordionToggleComponent } from './accordion-toggle.component';
 
 @NgModule({
-  declarations: [
-    AccordionMultiComponent,
-    AccordionShowcaseComponent,
-    AccordionTestComponent,
-    AccordionToggleComponent,
-  ],
-  imports: [
-    NbAccordionModule,
-    NbCardModule,
-    NbButtonModule,
-    AccordionRoutingModule,
-  ],
+  declarations: [AccordionMultiComponent, AccordionShowcaseComponent, AccordionTestComponent, AccordionToggleComponent],
+  imports: [NbAccordionModule, NbCardModule, NbButtonModule, AccordionRoutingModule],
 })
 export class AccordionModule {}

@@ -264,6 +264,7 @@ import { NbChatTitleDirective } from './chat-title.directive';
     </div>
   `,
   providers: [NbChatCustomMessageService],
+  standalone: false,
 })
 export class NbChatComponent implements OnChanges, AfterContentInit, AfterViewInit {
   @Input() title: string;

@@ -5,7 +5,7 @@
  */
 
 import { NgModule } from '@angular/core';
-import { RouterModule, Route} from '@angular/router';
+import { RouterModule, Route } from '@angular/router';
 import { SidebarCompactedComponent } from './sidebar-compacted.component';
 import { SidebarFixedComponent } from './sidebar-fixed.component';
 import { SidebarOneTestComponent } from './sidebar-one-test.component';
@@ -56,7 +56,7 @@ const routes: Route[] = [
 ];
 
 @NgModule({
-  imports: [ RouterModule.forChild(routes) ],
-  exports: [ RouterModule ],
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule],
 })
 export class SidebarRoutingModule {}

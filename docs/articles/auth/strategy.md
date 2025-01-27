@@ -1,13 +1,14 @@
 # Strategy
 
-In Nebular terms `Auth Strategy` is a class containing authentication logic specific for some authentication flow (email/password, OAuth2, etc). 
+In Nebular terms `Auth Strategy` is a class containing authentication logic specific for some authentication flow (email/password, OAuth2, etc).
 It accepts user input (login/email/password/token/etc), communicates the input to the backend API and finally provides the resulting output back to the Auth UI layer.
 Currently, there are two Auth Strategies available out of the box:
 
-  - `NbDummyAuthStrategy` - a simple strategy for testing purposes, could be used to simulate backend responses while API is in the development;
-  - `NbPasswordAuthStrategy` - the most common email/password authentication strategy.
-  
+- `NbDummyAuthStrategy` - a simple strategy for testing purposes, could be used to simulate backend responses while API is in the development;
+- `NbPasswordAuthStrategy` - the most common email/password authentication strategy.
+
 Each Strategy has a list of configurations available with the default values set. But you can adjust the settings based on your requirements.
+
 <hr>
   
 ## Configure a strategy
@@ -15,13 +16,12 @@ Each Strategy has a list of configurations available with the default values set
 As an example, let's configure API endpoints for the `NbPasswordAuthStrategy`. The strategy is configured by default, please take a look at the [default configuration values](docs/auth/nbpasswordauthstrategy) if you need any custom behavior.
 We assume you already have the Auth module installed inside of your `*.module.ts`:
 
-
 ```typescript
 
 @NgModule({
   imports: [
    // ...
-    
+
    NbAuthModule.forRoot({
          strategies: [
            NbPasswordAuthStrategy.setup({
@@ -29,12 +29,14 @@ We assume you already have the Auth module installed inside of your `*.module.ts
            }),
          ],
          forms: {},
-       }), 
+       }),
   ],
 });
 
 ```
+
 `email` here is an alias we've assigned to the strategy so that we can dynamically mention it later. This also allows us to configure multiple strategies with various configurations in one app.
+
 <hr>
 
 ## Setup API configuration
@@ -46,12 +48,12 @@ Now, let's add API endpoints. According to the [NbPasswordAuthStrategy documenta
 @NgModule({
   imports: [
    // ...
-    
+
    NbAuthModule.forRoot({
          strategies: [
            NbPasswordAuthStrategy.setup({
              name: 'email',
-            
+
              baseEndpoint: '',
               login: {
                 // ...
@@ -64,7 +66,7 @@ Now, let's add API endpoints. According to the [NbPasswordAuthStrategy documenta
            }),
          ],
          forms: {},
-       }), 
+       }),
   ],
 });
 ```
@@ -102,7 +104,7 @@ And configure the endpoints, considering that the final endpoint will consist of
 }
 ```
 
-Finally, let's presume that unlike in the default strategy settings, our API accepts only `HTTP POST`, so let's fix that too: 
+Finally, let's presume that unlike in the default strategy settings, our API accepts only `HTTP POST`, so let's fix that too:
 
 ```typescript
 {
@@ -138,6 +140,7 @@ Finally, let's presume that unlike in the default strategy settings, our API acc
 </div>
 
 Great! With these simple steps, you should have the authentication layer correctly configured against your API back-end.
+
 <hr>
 
 ## Related Articles

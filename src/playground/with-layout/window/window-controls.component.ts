@@ -7,6 +7,7 @@ import { FormComponent } from './components/form.component';
   templateUrl: 'window-controls.component.html',
   styleUrls: ['./window.scss', './window-controls.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class WindowControlsComponent {
   minimize = true;

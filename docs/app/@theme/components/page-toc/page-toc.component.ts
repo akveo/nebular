@@ -23,23 +23,20 @@ import { combineLatest, Subject, Observable } from 'rxjs';
     </ng-container>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class NgdPageTocComponent implements OnDestroy {
-
   private destroy$ = new Subject<void>();
 
   items: any[];
 
   @Input()
   set toc(value: Observable<any[]>) {
-    combineLatest([
-      value,
-      this.activatedRoute.fragment,
-    ])
+    combineLatest([value, this.activatedRoute.fragment])
       .pipe(
         map(([toc, fragment]) => {
           toc = toc.map((item: any) => ({ ...item, selected: fragment === item.fragment }));
-          if (toc.length && !toc.find(item => item.selected)) {
+          if (toc.length && !toc.find((item) => item.selected)) {
             toc[0].selected = true;
           }
           return toc;
@@ -49,11 +46,10 @@ export class NgdPageTocComponent implements OnDestroy {
       .subscribe((toc) => {
         this.items = toc;
         this.cd.detectChanges();
-      })
+      });
   }
 
-  constructor(private activatedRoute: ActivatedRoute, private cd: ChangeDetectorRef) {
-  }
+  constructor(private activatedRoute: ActivatedRoute, private cd: ChangeDetectorRef) {}
 
   ngOnDestroy() {
     this.destroy$.next();

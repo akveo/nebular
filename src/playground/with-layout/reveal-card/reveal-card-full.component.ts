@@ -10,6 +10,6 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   selector: 'nb-reveal-card-full',
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './reveal-card-full.component.html',
+  standalone: false,
 })
-export class RevealCardFullComponent {
-}
+export class RevealCardFullComponent {}

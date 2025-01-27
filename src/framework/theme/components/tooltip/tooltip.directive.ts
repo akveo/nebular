@@ -71,6 +71,7 @@ import { NbIconConfig } from '../icon/icon.component';
   selector: '[nbTooltip]',
   exportAs: 'nbTooltip',
   providers: [NbDynamicOverlayHandler, NbDynamicOverlay],
+  standalone: false,
 })
 export class NbTooltipDirective implements OnInit, OnChanges, AfterViewInit, OnDestroy {
   protected destroy$ = new Subject<void>();

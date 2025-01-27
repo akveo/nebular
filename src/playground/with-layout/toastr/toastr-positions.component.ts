@@ -19,6 +19,7 @@ import { NbGlobalLogicalPosition, NbGlobalPhysicalPosition, NbGlobalPosition, Nb
       }
     `,
   ],
+  standalone: false,
 })
 export class ToastrPositionsComponent {
   private index: number = 0;

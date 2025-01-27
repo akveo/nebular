@@ -93,6 +93,7 @@ import { NbToast } from './model';
   selector: 'nb-toast',
   styleUrls: ['./toast.component.scss'],
   templateUrl: './toast.component.html',
+  standalone: false,
 })
 export class NbToastComponent implements OnInit, OnDestroy {
   @Input()

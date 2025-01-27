@@ -39,6 +39,7 @@ import {
       <button nbButtonToggle value="F" *ngIf="showLastButton">F</button>
     </nb-button-group>
   `,
+  standalone: false,
 })
 export class NbButtonGroupTestComponent {
   size: NbComponentSize = 'large';

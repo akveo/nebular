@@ -55,6 +55,7 @@ let initialItemsCount: number = 100;
       }
     `,
   ],
+  standalone: false,
 })
 class PagerTestComponent {
   @ViewChild(NbListComponent, { read: ElementRef }) listElementRef: ElementRef;

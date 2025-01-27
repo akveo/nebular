@@ -21,6 +21,6 @@ import { NbUserShapeComponent } from './user-shape.component';
     UserHideCaptionsComponent,
     NbUserShapeComponent,
   ],
-  imports: [ NbUserModule, NbCardModule, UserRoutingModule ],
+  imports: [NbUserModule, NbCardModule, UserRoutingModule],
 })
 export class UserModule {}

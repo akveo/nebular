@@ -1,6 +1,5 @@
 <nb-card>
   <nb-card-body>
-
     <fieldset>
       <legend class="subtitle">Size:</legend>
       <nb-radio-group [(value)]="selectedSize" name="size">
@@ -22,29 +21,34 @@
     <div *ngFor="let appearance of appearances" class="appearance-container">
       <p class="subtitle appearance-name">{{ appearance }}:</p>
       <div class="appearance-row">
-        <div *ngFor="let status of statuses" [class.control-status-example]="status === 'control'" class="status-container">
-          <button nbButton
-                  [appearance]="appearance"
-                  [status]="status"
-                  [size]="selectedSize"
-                  [shape]="selectedShape">
+        <div
+          *ngFor="let status of statuses"
+          [class.control-status-example]="status === 'control'"
+          class="status-container"
+        >
+          <button nbButton [appearance]="appearance" [status]="status" [size]="selectedSize" [shape]="selectedShape">
             {{ status }}
           </button>
         </div>
       </div>
       <div class="appearance-row" *ngIf="showDisabledRow">
-        <div *ngFor="let status of statuses" [class.control-status-example]="status === 'control'" class="status-container">
-          <button nbButton
-                  [appearance]="appearance"
-                  [status]="status"
-                  [size]="selectedSize"
-                  [shape]="selectedShape"
-                  disabled>
+        <div
+          *ngFor="let status of statuses"
+          [class.control-status-example]="status === 'control'"
+          class="status-container"
+        >
+          <button
+            nbButton
+            [appearance]="appearance"
+            [status]="status"
+            [size]="selectedSize"
+            [shape]="selectedShape"
+            disabled
+          >
             {{ status }}
           </button>
         </div>
       </div>
     </div>
-
   </nb-card-body>
 </nb-card>

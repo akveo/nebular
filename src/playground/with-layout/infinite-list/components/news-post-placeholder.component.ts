@@ -7,7 +7,8 @@ import { Component, HostBinding } from '@angular/core';
     <div class="text-placeholder"></div>
     <div class="link-placeholder"></div>
   `,
-  styleUrls: [ '../news-post-placeholder.component.scss' ],
+  styleUrls: ['../news-post-placeholder.component.scss'],
+  standalone: false,
 })
 export class NewsPostPlaceholderComponent {
   @HostBinding('attr.aria-label')

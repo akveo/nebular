@@ -19,6 +19,6 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
     </nb-card>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
-export class ButtonGroupDisabledComponent {
-}
+export class ButtonGroupDisabledComponent {}

@@ -17,13 +17,16 @@ Your backend API should support the following endpoint to be compatible with out
 
   This is the regular login method, used for the first time call with email and password. The received token will be passed as a header on all further API requests.
   Input:
+
   ```json
   {
     "email": "string",
     "password": "string"
   }
   ```
+
   Output:
+
   ```json
   {
     "token": "string"
@@ -35,6 +38,7 @@ Your backend API should support the following endpoint to be compatible with out
   This call is to create a new user. Its called after clicking on ‘Register’ button on a Login form.
 
   Input:
+
   ```json
   {
     "email": "string",
@@ -43,33 +47,40 @@ Your backend API should support the following endpoint to be compatible with out
     "confirmPassword": "string"
   }
   ```
+
   Output:
+
   ```json
   {
     "token": "string"
   }
   ```
+
 - POST method `<domain>/auth/request-pass`
 
   This call is used to request a password reset token. The token is not returned as endpoint output. Instead, it’s expected that the user will receive token to reset password in email and use it for the next call.
 
   Input:
+
   ```json
   {
     "email": "string"
   }
   ```
+
   Output: `Status 200`
 
 - POST method `<domain>/auth/reset-pass`
   This call is used to clear sign in information if it exists. In case of fully REST service which doesn’t keep such information at the backend - just return status 200.
-  
+
   Input:
+
   ```json
   {
     "email": "string"
   }
   ```
+
   Output: `Status 200`
 
 # Token Validation
@@ -90,11 +101,11 @@ This sample shows how to use [Passport](https://github.com/nestjs/passport/) mod
 
 ```ts
 @UseGuards(AuthGuard('jwt'))
-export class UserController { }
+export class UserController {}
 ```
 
 Additional information for backend implementation on the subject can be found:
-- https://github.com/nestjs/passport/ 
+
+- https://github.com/nestjs/passport/
 - https://github.com/jaredhanson/passport
 - https://docs.nestjs.com/techniques/authentication
-

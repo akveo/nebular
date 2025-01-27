@@ -39,9 +39,9 @@ import { NbComponentOrCustomStatus, NbComponentStatus } from '../component-statu
 @Component({
   selector: 'nb-card-header',
   template: `<ng-content></ng-content>`,
+  standalone: false,
 })
-export class NbCardHeaderComponent {
-}
+export class NbCardHeaderComponent {}
 
 /**
  * Component intended to be used within  the `<nb-card>` component.
@@ -50,9 +50,9 @@ export class NbCardHeaderComponent {
 @Component({
   selector: 'nb-card-body',
   template: `<ng-content></ng-content>`,
+  standalone: false,
 })
-export class NbCardBodyComponent {
-}
+export class NbCardBodyComponent {}
 
 /**
  * Component intended to be used within  the `<nb-card>` component.
@@ -61,9 +61,9 @@ export class NbCardBodyComponent {
 @Component({
   selector: 'nb-card-footer',
   template: `<ng-content></ng-content>`,
+  standalone: false,
 })
-export class NbCardFooterComponent {
-}
+export class NbCardFooterComponent {}
 
 /**
  * Basic content container component.
@@ -154,9 +154,9 @@ export class NbCardFooterComponent {
     <ng-content></ng-content>
     <ng-content select="nb-card-footer"></ng-content>
   `,
+  standalone: false,
 })
 export class NbCardComponent {
-
   /**
    * Card size, available sizes:
    * tiny, small, medium, large, giant
@@ -292,6 +292,5 @@ export class NbCardComponent {
     return [];
   }
 
-  constructor(protected statusService: NbStatusService) {
-  }
+  constructor(protected statusService: NbStatusService) {}
 }

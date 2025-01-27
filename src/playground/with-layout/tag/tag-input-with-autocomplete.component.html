@@ -1,10 +1,9 @@
 <nb-card>
   <nb-card-body>
-
     <nb-form-field>
       <nb-tag-list (tagRemove)="onTagRemove($event)">
         <nb-tag *ngFor="let tag of tags" [text]="tag" removable></nb-tag>
-        <input type="text" nbTagInput (tagAdd)="onTagAdd($event.value)" [nbAutocomplete]="autocomplete" fullWidth>
+        <input type="text" nbTagInput (tagAdd)="onTagAdd($event.value)" [nbAutocomplete]="autocomplete" fullWidth />
       </nb-tag-list>
 
       <nb-icon nbSuffix icon="search" pack="eva"></nb-icon>
@@ -13,6 +12,5 @@
     <nb-autocomplete #autocomplete (selectedChange)="onTagAdd($event)">
       <nb-option *ngFor="let option of options" [value]="option">{{ option }}</nb-option>
     </nb-autocomplete>
-
   </nb-card-body>
 </nb-card>

@@ -205,8 +205,7 @@ export abstract class NbButton implements AfterContentChecked, AfterViewInit {
     protected cd: ChangeDetectorRef,
     protected zone: NgZone,
     protected statusService: NbStatusService,
-  ) {
-  }
+  ) {}
 
   ngAfterContentChecked() {
     const firstNode = this.nodes[0];
@@ -218,9 +217,11 @@ export abstract class NbButton implements AfterContentChecked, AfterViewInit {
 
   ngAfterViewInit() {
     // TODO: #2254
-    this.zone.runOutsideAngular(() => setTimeout(() => {
-      this.renderer.addClass(this.hostElement.nativeElement, 'nb-transition');
-    }));
+    this.zone.runOutsideAngular(() =>
+      setTimeout(() => {
+        this.renderer.addClass(this.hostElement.nativeElement, 'nb-transition');
+      }),
+    );
   }
 
   /**

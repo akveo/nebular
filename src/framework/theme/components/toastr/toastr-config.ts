@@ -12,7 +12,7 @@ import { NbIconConfig } from '../icon/icon.component';
 
 type IconToClassMap = {
   [status in NbComponentStatus]: string;
-}
+};
 
 export const NB_TOASTR_CONFIG = new InjectionToken<NbToastrConfig>('Default toastr options');
 
@@ -49,8 +49,8 @@ export class NbToastrConfig {
    * */
   duplicatesBehaviour: NbDuplicateToastBehaviour = 'previous';
   /*
-  * The number of visible toasts. If the limit exceeded the oldest toast will be removed.
-  * */
+   * The number of visible toasts. If the limit exceeded the oldest toast will be removed.
+   * */
   limit?: number = null;
   /**
    * Class to be applied to the toast.

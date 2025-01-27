@@ -54,22 +54,24 @@ import { NbOverlayRef, NbPortalDirective } from '../cdk/overlay/mapping';
       <div class="form-wrapper">
         <form class="form" (keyup.enter)="submitSearch(searchInput.value)">
           <div class="form-content">
-            <input class="search-input"
-                   #searchInput
-                   (input)="emitSearchInput(searchInput.value)"
-                   autocomplete="off"
-                   [attr.placeholder]="placeholder"
-                   tabindex="-1"
-                   (blur)="focusInput()"/>
+            <input
+              class="search-input"
+              #searchInput
+              (input)="emitSearchInput(searchInput.value)"
+              autocomplete="off"
+              [attr.placeholder]="placeholder"
+              tabindex="-1"
+              (blur)="focusInput()"
+            />
           </div>
           <span class="info">{{ hint }}</span>
         </form>
       </div>
     </div>
   `,
+  standalone: false,
 })
 export class NbSearchFieldComponent implements OnChanges, AfterViewInit {
-
   static readonly TYPE_MODAL_ZOOMIN = 'modal-zoomin';
   static readonly TYPE_ROTATE_LAYOUT = 'rotate-layout';
   static readonly TYPE_MODAL_MOVE = 'modal-move';
@@ -163,8 +165,14 @@ export class NbSearchFieldComponent implements OnChanges, AfterViewInit {
   }
 }
 
-export type NbSearchType = 'modal-zoomin' | 'rotate-layout' | 'modal-move' |
-  'curtain' | 'column-curtain' | 'modal-drop' | 'modal-half';
+export type NbSearchType =
+  | 'modal-zoomin'
+  | 'rotate-layout'
+  | 'modal-move'
+  | 'curtain'
+  | 'column-curtain'
+  | 'modal-drop'
+  | 'modal-half';
 
 /**
  * Beautiful full-page search control.
@@ -232,12 +240,13 @@ export type NbSearchType = 'modal-zoomin' | 'rotate-layout' | 'modal-move' |
       [hint]="hint"
       (search)="search($event)"
       (searchInput)="emitInput($event)"
-      (close)="emitDeactivate()">
+      (close)="emitDeactivate()"
+    >
     </nb-search-field>
   `,
+  standalone: false,
 })
 export class NbSearchComponent implements OnInit, OnDestroy {
-
   private destroy$ = new Subject<void>();
   private overlayRef: NbOverlayRef;
   showSearchField = false;
@@ -284,21 +293,23 @@ export class NbSearchComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.router.events
       .pipe(
-        filter(event => event instanceof NavigationEnd),
+        filter((event) => event instanceof NavigationEnd),
         takeUntil(this.destroy$),
       )
       .subscribe(() => this.hideSearch());
 
-    this.searchService.onSearchActivate()
+    this.searchService
+      .onSearchActivate()
       .pipe(
-        filter(data => !this.tag || data.tag === this.tag),
+        filter((data) => !this.tag || data.tag === this.tag),
         takeUntil(this.destroy$),
       )
       .subscribe(() => this.openSearch());
 
-    this.searchService.onSearchDeactivate()
+    this.searchService
+      .onSearchDeactivate()
       .pipe(
-        filter(data => !this.tag || data.tag === this.tag),
+        filter((data) => !this.tag || data.tag === this.tag),
         takeUntil(this.destroy$),
       )
       .subscribe(() => this.hideSearch());
@@ -321,11 +332,13 @@ export class NbSearchComponent implements OnInit, OnDestroy {
     }
 
     this.themeService.appendLayoutClass(this.type);
-    observableOf(null).pipe(delay(0)).subscribe(() => {
-      this.themeService.appendLayoutClass('with-search');
-      this.showSearchField = true;
-      this.changeDetector.detectChanges();
-    });
+    observableOf(null)
+      .pipe(delay(0))
+      .subscribe(() => {
+        this.themeService.appendLayoutClass('with-search');
+        this.showSearchField = true;
+        this.changeDetector.detectChanges();
+      });
   }
 
   hideSearch() {
@@ -354,8 +367,10 @@ export class NbSearchComponent implements OnInit, OnDestroy {
 
   private removeLayoutClasses() {
     this.themeService.removeLayoutClass('with-search');
-    observableOf(null).pipe(delay(500)).subscribe(() => {
-      this.themeService.removeLayoutClass(this.type);
-    });
+    observableOf(null)
+      .pipe(delay(500))
+      .subscribe(() => {
+        this.themeService.removeLayoutClass(this.type);
+      });
   }
 }

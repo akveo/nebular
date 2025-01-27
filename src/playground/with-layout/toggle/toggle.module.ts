@@ -24,12 +24,6 @@ import { ToggleTestComponent } from './toggle-test.component';
     ToggleLabelPositionComponent,
     ToggleFormComponent,
   ],
-  imports: [
-    FormsModule,
-    ReactiveFormsModule,
-    NbCardModule,
-    NbToggleModule,
-    ToggleRoutingModule,
-  ],
+  imports: [FormsModule, ReactiveFormsModule, NbCardModule, NbToggleModule, ToggleRoutingModule],
 })
 export class ToggleModule {}

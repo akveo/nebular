@@ -13,25 +13,10 @@ import { NbButtonModule } from '../button/button.module';
 import { NbSearchComponent, NbSearchFieldComponent } from './search.component';
 import { NbSearchService } from './search.service';
 
-
 @NgModule({
-  imports: [
-    NbSharedModule,
-    NbOverlayModule,
-    NbIconModule,
-    NbButtonModule,
-  ],
-  declarations: [
-    NbSearchComponent,
-    NbSearchFieldComponent,
-  ],
-  exports: [
-    NbSearchComponent,
-    NbSearchFieldComponent,
-  ],
-  providers: [
-    NbSearchService,
-  ],
+  imports: [NbSharedModule, NbOverlayModule, NbIconModule, NbButtonModule],
+  declarations: [NbSearchComponent, NbSearchFieldComponent],
+  exports: [NbSearchComponent, NbSearchFieldComponent],
+  providers: [NbSearchService],
 })
-export class NbSearchModule {
-}
+export class NbSearchModule {}

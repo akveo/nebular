@@ -26,15 +26,15 @@ import { MENU_ITEMS } from './menu-service-items';
     </nb-card>
   `,
   styleUrls: ['./menu-service.component.scss'],
+  standalone: false,
 })
 export class MenuServiceComponent implements OnDestroy {
-
   menuItems = MENU_ITEMS;
 
   private destroy$ = new Subject<void>();
   selectedItem: string;
 
-  constructor(private menuService: NbMenuService) { }
+  constructor(private menuService: NbMenuService) {}
 
   ngOnDestroy() {
     this.destroy$.next();
@@ -42,12 +42,17 @@ export class MenuServiceComponent implements OnDestroy {
   }
 
   addMenuItem() {
-    this.menuService.addItems([{
-      title: '@nebular/theme',
-      target: '_blank',
-      icon: 'plus-outline',
-      url: 'https://github.com/akveo/ngx-admin',
-    }], 'menu');
+    this.menuService.addItems(
+      [
+        {
+          title: '@nebular/theme',
+          target: '_blank',
+          icon: 'plus-outline',
+          url: 'https://github.com/akveo/ngx-admin',
+        },
+      ],
+      'menu',
+    );
   }
 
   collapseAll() {
@@ -59,9 +64,10 @@ export class MenuServiceComponent implements OnDestroy {
   }
 
   getSelectedItem() {
-    this.menuService.getSelectedItem('menu')
+    this.menuService
+      .getSelectedItem('menu')
       .pipe(takeUntil(this.destroy$))
-      .subscribe( (menuBag) => {
+      .subscribe((menuBag) => {
         this.selectedItem = menuBag.item.title;
       });
   }

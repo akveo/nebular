@@ -23,9 +23,9 @@ import { NgdExampleView } from '../../enum.example-view';
   styleUrls: ['./live-example-block.component.scss'],
   templateUrl: './live-example-block.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class NgdLiveExampleBlockComponent implements OnInit, AfterViewInit, OnDestroy {
-
   @ViewChild('iframe') iframe: ElementRef;
   @Input() content: any;
   @Input() hasViewSwitch: boolean = false;
@@ -55,7 +55,7 @@ export class NgdLiveExampleBlockComponent implements OnInit, AfterViewInit, OnDe
 
   private destroy$ = new Subject<void>();
 
-  themes: {label: string; value: string}[] = [
+  themes: { label: string; value: string }[] = [
     { label: 'Default', value: 'default' },
     { label: 'Dark', value: 'dark' },
     { label: 'Cosmic', value: 'cosmic' },
@@ -73,16 +73,18 @@ export class NgdLiveExampleBlockComponent implements OnInit, AfterViewInit, OnDe
     return this.iframe.nativeElement.contentWindow;
   }
 
-  constructor(private changeDetection: ChangeDetectorRef,
-              private location: Location,
-              private analytics: NgdAnalytics,
-              private communicator: NgdIframeCommunicatorService) {
-  }
+  constructor(
+    private changeDetection: ChangeDetectorRef,
+    private location: Location,
+    private analytics: NgdAnalytics,
+    private communicator: NgdIframeCommunicatorService,
+  ) {}
 
   ngOnInit() {
-    this.communicator.receive(this.content.id)
+    this.communicator
+      .receive(this.content.id)
       .pipe(takeUntil(this.destroy$))
-      .subscribe(it => {
+      .subscribe((it) => {
         this.iframeHeight = it.height;
         this.loading = false;
         this.changeDetection.detectChanges();

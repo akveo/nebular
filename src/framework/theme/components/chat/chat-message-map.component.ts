@@ -13,13 +13,18 @@ import { NbChatOptions } from './chat.options';
 @Component({
   selector: 'nb-chat-message-map',
   template: `
-    <nb-chat-message-file [files]="[file]" [message]="message" [sender]="sender" [date]="date"
-     [dateFormat]="dateFormat"></nb-chat-message-file>
+    <nb-chat-message-file
+      [files]="[file]"
+      [message]="message"
+      [sender]="sender"
+      [date]="date"
+      [dateFormat]="dateFormat"
+    ></nb-chat-message-file>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class NbChatMessageMapComponent {
-
   /**
    * Message sender
    * @type {string}

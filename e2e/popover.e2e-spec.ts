@@ -4,7 +4,6 @@ const contentTemplate = by.css('nb-card:nth-child(1) button:nth-child(1)');
 const popover = by.css('nb-layout nb-popover');
 
 describe('nb-popover', () => {
-
   beforeEach((done) => {
     browser.get('#/popover/popover-test.component').then(done);
   });

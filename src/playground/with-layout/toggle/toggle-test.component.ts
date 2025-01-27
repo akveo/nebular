@@ -23,6 +23,6 @@ import { Component } from '@angular/core';
       </nb-card-body>
     </nb-card>
   `,
+  standalone: false,
 })
-export class ToggleTestComponent {
-}
+export class ToggleTestComponent {}

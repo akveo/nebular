@@ -14,17 +14,14 @@ export class NewsPost {
 
 @Injectable()
 export class NewsService {
-
   constructor(private http: HttpClient) {}
 
   load(page: number, pageSize: number): Observable<NewsPost[]> {
     const startIndex = ((page - 1) % TOTAL_PAGES) * pageSize;
 
-    return this.http
-      .get<NewsPost[]>('assets/data/news.json')
-      .pipe(
-        map(news => news.splice(startIndex, pageSize)),
-        delay(1500),
-      );
+    return this.http.get<NewsPost[]>('assets/data/news.json').pipe(
+      map((news) => news.splice(startIndex, pageSize)),
+      delay(1500),
+    );
   }
 }

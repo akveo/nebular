@@ -12,9 +12,9 @@ import { trees } from './trees-list';
 @Component({
   templateUrl: './tag-input.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class TagInputComponent {
-
   trees: Set<string> = new Set([trees[3]]);
 
   onTagRemove(tagToRemove: NbTagComponent): void {
@@ -23,7 +23,7 @@ export class TagInputComponent {
 
   onTagAdd({ value, input }: NbTagInputAddEvent): void {
     if (value) {
-      this.trees.add(value)
+      this.trees.add(value);
     }
     input.nativeElement.value = '';
   }

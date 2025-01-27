@@ -10,9 +10,7 @@ import { WithLayoutRoutingModule } from './with-layout-routing.module';
 import { PlaygroundLayoutComponent } from './playground-layout.component';
 
 @NgModule({
-  declarations: [
-    PlaygroundLayoutComponent,
-  ],
-  imports: [ NbLayoutModule, WithLayoutRoutingModule ],
+  declarations: [PlaygroundLayoutComponent],
+  imports: [NbLayoutModule, WithLayoutRoutingModule],
 })
 export class WithLayoutModule {}

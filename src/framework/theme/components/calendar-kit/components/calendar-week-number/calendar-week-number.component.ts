@@ -19,9 +19,9 @@ import { NbCalendarSize, NbCalendarSizeValues } from '../../model';
   `,
   styleUrls: ['./calendar-week-number.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class NbCalendarWeekNumberComponent<D> implements OnChanges {
-
   weekNumbers: number[];
 
   @Input()
@@ -53,7 +53,7 @@ export class NbCalendarWeekNumberComponent<D> implements OnChanges {
     return this.weeks.map((week: D[]) => {
       // Find last defined day as week could contain null days in case
       // boundingMonth set to false
-      const lastDay = [ ...week ].reverse().find((day: D) => !!day);
+      const lastDay = [...week].reverse().find((day: D) => !!day);
       // Use last day of the week to determine week number.
       // This way weeks which span between sibling years is marked first
       return this.dateService.getWeekNumber(lastDay);

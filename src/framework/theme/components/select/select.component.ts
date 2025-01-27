@@ -62,6 +62,7 @@ export type NbSelectAppearance = 'outline' | 'filled' | 'hero';
 @Component({
   selector: 'nb-select-label',
   template: '<ng-content></ng-content>',
+  standalone: false,
 })
 export class NbSelectLabelComponent {}
 
@@ -517,6 +518,7 @@ export function nbSelectFormFieldControlConfigFactory() {
     { provide: NbFormFieldControl, useExisting: NbSelectComponent },
     { provide: NbFormFieldControlConfig, useFactory: nbSelectFormFieldControlConfigFactory },
   ],
+  standalone: false,
 })
 export class NbSelectComponent
   implements OnChanges, AfterViewInit, AfterContentInit, OnDestroy, ControlValueAccessor, NbFormFieldControl

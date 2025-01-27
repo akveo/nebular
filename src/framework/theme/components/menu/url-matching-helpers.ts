@@ -12,8 +12,9 @@ export function isUrlPathEqual(path, link) {
 export function isUrlPathContain(path, link) {
   const locationPath = getPathPartOfUrl(path);
   const endOfUrlSegmentRegExp = /\/|^$/;
-  return locationPath.startsWith(link) &&
-    locationPath.slice(link.length).charAt(0).search(endOfUrlSegmentRegExp) !== -1;
+  return (
+    locationPath.startsWith(link) && locationPath.slice(link.length).charAt(0).search(endOfUrlSegmentRegExp) !== -1
+  );
 }
 
 export function getPathPartOfUrl(url): string {

@@ -12,9 +12,9 @@ import { SafeHtml } from '@angular/platform-browser';
     <p>{{ description }}</p>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class NgdTextCardComponent {
-
   @Input() title: string;
   @Input() description: string;
   @Input() icon: SafeHtml;

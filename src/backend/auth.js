@@ -12,15 +12,15 @@ var ExtractJwt = passportJWT.ExtractJwt;
 var Strategy = passportJWT.Strategy;
 var params = {
   secretOrKey: cfg.jwtSecret,
-  jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken()
+  jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
 };
 
 module.exports = function () {
   var strategy = new Strategy(params, function (payload, done) {
-    var user = users[payload.sub -1 ] || null;
+    var user = users[payload.sub - 1] || null;
     if (user) {
       return done(null, {
-        id: user.id
+        id: user.id,
       });
     } else {
       return done(new Error('User not found'), null);
@@ -33,6 +33,6 @@ module.exports = function () {
     },
     authenticate: function () {
       return passport.authenticate('jwt', cfg.jwtSession);
-    }
+    },
   };
 };

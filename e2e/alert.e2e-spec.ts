@@ -48,26 +48,26 @@ function prepareAccentAlerts(regularCardsOffset) {
 }
 
 describe('nb-alert', () => {
-
   alerts = prepareAlerts();
 
   beforeAll((done) => {
     browser.get('#/alert/alert-test.component').then(() => done());
   });
 
-  alerts.forEach(c => {
-
+  alerts.forEach((c) => {
     it(`should display ${c.colorKey} alert with ${c.size} size`, () => {
       waitFor(`nb-alert:nth-child(${c.elementNumber})`);
-      expect(element(by.css(`nb-alert:nth-child(${c.elementNumber})`))
-        .getText()).toContain('Success message!');
-
-      element(by.css(`nb-alert:nth-child(${c.elementNumber})`)).getCssValue('height').then(height => {
-        expect(height).toEqual(c.height);
-      });
+      expect(element(by.css(`nb-alert:nth-child(${c.elementNumber})`)).getText()).toContain('Success message!');
 
       element(by.css(`nb-alert:nth-child(${c.elementNumber})`))
-        .getCssValue('background-color').then(bgColor => {
+        .getCssValue('height')
+        .then((height) => {
+          expect(height).toEqual(c.height);
+        });
+
+      element(by.css(`nb-alert:nth-child(${c.elementNumber})`))
+        .getCssValue('background-color')
+        .then((bgColor) => {
           expect(bgColor).toEqual(c.color);
         });
     });

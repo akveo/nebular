@@ -9,12 +9,9 @@ import { Injectable } from '@angular/core';
 import { NbDateService } from './date.service';
 import { batch, range } from '../helpers';
 
-
 @Injectable()
 export class NbCalendarMonthModelService<D> {
-
-  constructor(protected dateService: NbDateService<D>) {
-  }
+  constructor(protected dateService: NbDateService<D>) {}
 
   createDaysGrid(activeMonth: D, boundingMonth: boolean = true, firstDayOfWeek?: number): D[][] {
     const weeks = this.createDates(activeMonth, firstDayOfWeek);
@@ -60,14 +57,14 @@ export class NbCalendarMonthModelService<D> {
     const daysInMonth = this.dateService.getNumberOfDaysInMonth(month);
     return this.createDateRangeForMonth(month)
       .slice(daysInMonth - requiredItems)
-      .map(date => boundingMonth ? date : null);
+      .map((date) => (boundingMonth ? date : null));
   }
 
   private createNextBoundingDays(activeMonth: D, boundingMonth: boolean, requiredItems: number): D[] {
     const month = this.dateService.addMonth(activeMonth, 1);
     return this.createDateRangeForMonth(month)
       .slice(0, requiredItems)
-      .map(date => boundingMonth ? date : null);
+      .map((date) => (boundingMonth ? date : null));
   }
 
   private getStartOfWeekDayDiff(date: D, firstDayOfWeek?: number): number {
@@ -90,10 +87,10 @@ export class NbCalendarMonthModelService<D> {
 
   private createDateRangeForMonth(date: D): D[] {
     const daysInMonth: number = this.dateService.getNumberOfDaysInMonth(date);
-    return range(daysInMonth, i => {
+    return range(daysInMonth, (i) => {
       const year = this.dateService.getYear(date);
       const month = this.dateService.getMonth(date);
-      return this.dateService.createDate(year, month, i + 1)
+      return this.dateService.createDate(year, month, i + 1);
     });
   }
 }

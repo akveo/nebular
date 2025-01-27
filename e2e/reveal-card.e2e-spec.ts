@@ -22,21 +22,20 @@ describe('nb-reveal-card', () => {
     browser.get('#/card/card-test.component').then(() => done());
   });
 
-  cards.forEach(c => {
+  cards.forEach((c) => {
     describe(`${c.size.sizeKey} reveal card`, () => {
-      function showOnlyFrontCard () {
+      function showOnlyFrontCard() {
         const revealCard = element.all(by.tagName('nb-reveal-card')).get(c.i);
         const frontCard = revealCard.all(by.tagName('nb-card-front')).first();
         const backCardContainer = revealCard.all(by.css('.second-card-container')).first();
 
-        protractor.promise.all([
-          backCardContainer.getCssValue('top'),
-          revealCard.getCssValue('height'),
-        ]).then(([ backCardTop, cardHeight ]) => {
-          expect(revealCard.getAttribute('class')).not.toContain('revealed', `card shouldn't has 'revealed' class`);
-          expect(frontCard.isDisplayed()).toBe(true, 'front card should be visible');
-          expect(toInt(backCardTop)).toEqual(toInt(cardHeight), 'back card should be hidden');
-        });
+        protractor.promise
+          .all([backCardContainer.getCssValue('top'), revealCard.getCssValue('height')])
+          .then(([backCardTop, cardHeight]) => {
+            expect(revealCard.getAttribute('class')).not.toContain('revealed', `card shouldn't has 'revealed' class`);
+            expect(frontCard.isDisplayed()).toBe(true, 'front card should be visible');
+            expect(toInt(backCardTop)).toEqual(toInt(cardHeight), 'back card should be hidden');
+          });
       }
 
       it(`should show only front card`, showOnlyFrontCard);

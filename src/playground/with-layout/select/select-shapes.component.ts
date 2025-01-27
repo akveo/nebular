@@ -9,6 +9,6 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'nb-select-shapes',
   templateUrl: './select-shapes.component.html',
+  standalone: false,
 })
-export class SelectShapeComponent {
-}
+export class SelectShapeComponent {}

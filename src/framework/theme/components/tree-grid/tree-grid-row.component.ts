@@ -21,6 +21,7 @@ export const NB_ROW_DOUBLE_CLICK_DELAY: number = 200;
     role: 'row',
   },
   providers: [{ provide: NbCdkRow, useExisting: NbTreeGridRowComponent }],
+  standalone: false,
 })
 export class NbTreeGridRowComponent extends NbRowComponent implements OnDestroy {
   private readonly doubleClick$ = new Subject<void>();
@@ -78,6 +79,7 @@ export class NbTreeGridRowComponent extends NbRowComponent implements OnDestroy 
     role: 'row',
   },
   providers: [{ provide: NbCdkHeaderRow, useExisting: NbTreeGridHeaderRowComponent }],
+  standalone: false,
 })
 export class NbTreeGridHeaderRowComponent extends NbHeaderRowComponent {}
 
@@ -91,5 +93,6 @@ export class NbTreeGridHeaderRowComponent extends NbHeaderRowComponent {}
     role: 'row',
   },
   providers: [{ provide: NbCdkFooterRow, useExisting: NbTreeGridFooterRowComponent }],
+  standalone: false,
 })
 export class NbTreeGridFooterRowComponent extends NbFooterRowComponent {}

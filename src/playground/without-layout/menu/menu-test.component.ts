@@ -41,6 +41,7 @@ import { NbMenuService, NbMenuItem } from '@nebular/theme';
       </nb-layout-column>
     </nb-layout>
   `,
+  standalone: false,
 })
 export class MenuTestComponent implements OnInit, OnDestroy {
   sidebarMenuItems: NbMenuItem[] = [
@@ -163,7 +164,7 @@ export class MenuTestComponent implements OnInit, OnDestroy {
 
   private destroy$ = new Subject<void>();
 
-  constructor(private menuService: NbMenuService) { }
+  constructor(private menuService: NbMenuService) {}
 
   ngOnInit() {
     this.menuService

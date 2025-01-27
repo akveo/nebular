@@ -12,17 +12,12 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   template: `
     <nb-card size="large">
       <nb-card-body>
-        <input nbInput
-               type="text"
-               [nbTimepicker]="timepicker"/>
-        <nb-timepicker
-          #timepicker="nbTimepicker"
-          singleColumn
-          [step]="10"></nb-timepicker>
+        <input nbInput type="text" [nbTimepicker]="timepicker" />
+        <nb-timepicker #timepicker="nbTimepicker" singleColumn [step]="10"></nb-timepicker>
       </nb-card-body>
     </nb-card>
   `,
   styleUrls: ['./timepicker-example.scss'],
+  standalone: false,
 })
-export class TimepickerSingleColumnComponent {
-}
+export class TimepickerSingleColumnComponent {}

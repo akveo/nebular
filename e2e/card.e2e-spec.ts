@@ -31,19 +31,16 @@ function prepareCards() {
 }
 
 describe('nb-card', () => {
-
   cards = prepareCards();
 
   beforeAll((done) => {
     browser.get('#/card/card-test.component').then(() => done());
   });
 
-  cards.forEach(c => {
-
+  cards.forEach((c) => {
     it(`should display ${c.colorKey} card with ${c.size} size`, () => {
       waitFor(`nb-card:nth-child(${c.elementNumber})`);
-      expect(element(by.css(`nb-card:nth-child(${c.elementNumber}) > nb-card-header`))
-        .getText()).toEqual('Header');
+      expect(element(by.css(`nb-card:nth-child(${c.elementNumber}) > nb-card-header`)).getText()).toEqual('Header');
     });
   });
 });

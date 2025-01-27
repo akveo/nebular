@@ -10,9 +10,9 @@ import { FirebaseAPIService } from '../firebase-api.service';
   selector: 'nb-password-auth-showcase',
   templateUrl: './password-auth-showcase.component.html',
   styleUrls: ['./password-auth-showcase.component.scss'],
+  standalone: false,
 })
 export class PasswordAuthShowcaseComponent {
-
   userToken$: Observable<NbAuthToken>;
   isAuthenticated$: Observable<boolean>;
   data$: Observable<any>;
@@ -40,11 +40,10 @@ export class PasswordAuthShowcaseComponent {
   }
 
   getData() {
-    this.data$ = this.firebaseApi.getGreeting()
-      .pipe(
-        take(1),
-        catchError((error) => of(error)),
-        share(),
-      );
+    this.data$ = this.firebaseApi.getGreeting().pipe(
+      take(1),
+      catchError((error) => of(error)),
+      share(),
+    );
   }
 }

@@ -10,8 +10,20 @@ import { NbStatusService } from '../../services/status.service';
 import { NbComponentOrCustomStatus } from '../component-status';
 import { convertToBoolProperty } from '../helpers';
 
-export type NbBadgePhysicalPosition = 'top left' | 'top right' | 'bottom left' | 'bottom right' | 'center right' | 'center left';
-export type NbBadgeLogicalPosition = 'top start' | 'top end' | 'bottom start' | 'bottom end' | 'center start'| 'center end';
+export type NbBadgePhysicalPosition =
+  | 'top left'
+  | 'top right'
+  | 'bottom left'
+  | 'bottom right'
+  | 'center right'
+  | 'center left';
+export type NbBadgeLogicalPosition =
+  | 'top start'
+  | 'top end'
+  | 'bottom start'
+  | 'bottom end'
+  | 'center start'
+  | 'center end';
 export type NbBadgePosition = NbBadgePhysicalPosition | NbBadgeLogicalPosition;
 
 export interface NbBadge {
@@ -86,10 +98,10 @@ export interface NbBadge {
 @Component({
   selector: 'nb-badge',
   styleUrls: ['./badge.component.scss'],
-  template: `{{dotMode ? '' : text}}`,
+  template: `{{ dotMode ? '' : text }}`,
+  standalone: false,
 })
 export class NbBadgeComponent implements NbBadge {
-
   /**
    * Text to display
    * @type string
@@ -212,6 +224,5 @@ export class NbBadgeComponent implements NbBadge {
     return this.position.includes('center');
   }
 
-  constructor(protected statusService: NbStatusService) {
-  }
+  constructor(protected statusService: NbStatusService) {}
 }

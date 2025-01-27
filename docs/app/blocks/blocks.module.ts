@@ -58,21 +58,8 @@ const blocks = [
 ];
 
 @NgModule({
-  imports: [
-    CommonModule,
-    RouterModule,
-    NgdThemeModule,
-    NbInputModule,
-    NbSpinnerModule,
-  ],
-  declarations: [
-    ...blocks,
-  ],
-  exports: [
-    CommonModule,
-    RouterModule,
-    ...blocks,
-  ],
+  imports: [CommonModule, RouterModule, NgdThemeModule, NbInputModule, NbSpinnerModule],
+  declarations: [...blocks],
+  exports: [CommonModule, RouterModule, ...blocks],
 })
-export class NgdBlocksModule {
-}
+export class NgdBlocksModule {}

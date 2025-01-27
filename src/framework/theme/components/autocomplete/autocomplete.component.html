@@ -1,10 +1,12 @@
-<nb-option-list *nbPortal
-                [size]="size"
-                [position]="overlayPosition"
-                [style.width.px]="optionsWidth"
-                role="listbox"
-                [id]="id"
-                [class.empty]="!options?.length"
-                [ngClass]="optionsListClass">
+<nb-option-list
+  *nbPortal
+  [size]="size"
+  [position]="overlayPosition"
+  [style.width.px]="optionsWidth"
+  role="listbox"
+  [id]="id"
+  [class.empty]="!options?.length"
+  [ngClass]="optionsListClass"
+>
   <ng-content select="nb-option, nb-option-group"></ng-content>
 </nb-option-list>

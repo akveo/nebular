@@ -6,9 +6,7 @@ import { NbDateService, NbCalendarRange } from '@nebular/theme';
     <nb-card>
       <nb-card-body>
         <div class="example-items-rows">
-          <button (click)="toggleSize()" nbButton>
-            Change to {{ this.size === 'medium' ? 'large' : 'medium' }}
-          </button>
+          <button (click)="toggleSize()" nbButton>Change to {{ this.size === 'medium' ? 'large' : 'medium' }}</button>
           <button (click)="toggleWeekNumber()" nbButton>
             {{ this.showWeekNumber ? 'Hide' : 'Show' }} week number column
           </button>
@@ -16,15 +14,19 @@ import { NbDateService, NbCalendarRange } from '@nebular/theme';
 
         <div class="example-items-rows">
           <nb-calendar [(date)]="date" [showWeekNumber]="showWeekNumber" [size]="size"></nb-calendar>
-          <nb-calendar-range [(range)]="dateRange"
-                             [showWeekNumber]="showWeekNumber"
-                             [size]="size">
-          </nb-calendar-range>
+          <nb-calendar-range [(range)]="dateRange" [showWeekNumber]="showWeekNumber" [size]="size"> </nb-calendar-range>
         </div>
       </nb-card-body>
     </nb-card>
   `,
-  styles: [` button { margin-bottom: 1rem; } `],
+  styles: [
+    `
+      button {
+        margin-bottom: 1rem;
+      }
+    `,
+  ],
+  standalone: false,
 })
 export class CalendarWeekNumberComponent {
   showWeekNumber = false;

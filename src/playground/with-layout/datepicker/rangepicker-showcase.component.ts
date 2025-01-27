@@ -6,18 +6,17 @@
 
 import { Component } from '@angular/core';
 
-
 @Component({
   selector: 'nb-rangepicker-showcase',
   template: `
     <nb-card size="large">
       <nb-card-body>
-        <input nbInput placeholder="Pick Date Range" [nbDatepicker]="formpicker">
+        <input nbInput placeholder="Pick Date Range" [nbDatepicker]="formpicker" />
         <nb-rangepicker #formpicker></nb-rangepicker>
       </nb-card-body>
     </nb-card>
   `,
   styleUrls: ['./datepicker-example.scss'],
+  standalone: false,
 })
-export class RangepickerShowcaseComponent {
-}
+export class RangepickerShowcaseComponent {}

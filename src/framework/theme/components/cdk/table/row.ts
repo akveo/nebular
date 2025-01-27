@@ -16,30 +16,35 @@ import {
 @Directive({
   selector: '[nbRowOutlet]',
   providers: [{ provide: DataRowOutlet, useExisting: NbDataRowOutletDirective }],
+  standalone: false,
 })
 export class NbDataRowOutletDirective extends DataRowOutlet {}
 
 @Directive({
   selector: '[nbHeaderRowOutlet]',
   providers: [{ provide: HeaderRowOutlet, useExisting: NbHeaderRowOutletDirective }],
+  standalone: false,
 })
 export class NbHeaderRowOutletDirective extends HeaderRowOutlet {}
 
 @Directive({
   selector: '[nbFooterRowOutlet]',
   providers: [{ provide: FooterRowOutlet, useExisting: NbFooterRowOutletDirective }],
+  standalone: false,
 })
 export class NbFooterRowOutletDirective extends FooterRowOutlet {}
 
 @Directive({
   selector: '[nbNoDataRowOutlet]',
   providers: [{ provide: NoDataRowOutlet, useExisting: NbNoDataRowOutletDirective }],
+  standalone: false,
 })
 export class NbNoDataRowOutletDirective extends NoDataRowOutlet {}
 
 @Directive({
   selector: '[nbCellOutlet]',
   providers: [{ provide: CdkCellOutlet, useExisting: NbCellOutletDirective }],
+  standalone: false,
 })
 export class NbCellOutletDirective extends CdkCellOutlet {}
 
@@ -50,6 +55,7 @@ export class NbCellOutletDirective extends CdkCellOutlet {}
 @Directive({
   selector: '[nbHeaderRowDef]',
   providers: [{ provide: CdkHeaderRowDef, useExisting: NbHeaderRowDefDirective }],
+  standalone: false,
 })
 export class NbHeaderRowDefDirective extends CdkHeaderRowDef {
   private _hasStickyRowChanged = false;
@@ -86,6 +92,7 @@ export class NbHeaderRowDefDirective extends CdkHeaderRowDef {
 @Directive({
   selector: '[nbFooterRowDef]',
   providers: [{ provide: CdkFooterRowDef, useExisting: NbFooterRowDefDirective }],
+  standalone: false,
 })
 export class NbFooterRowDefDirective extends CdkFooterRowDef {
   private _hasStickyRowChanged = false;
@@ -124,6 +131,7 @@ export class NbFooterRowDefDirective extends CdkFooterRowDef {
 @Directive({
   selector: '[nbRowDef]',
   providers: [{ provide: CdkRowDef, useExisting: NbRowDefDirective }],
+  standalone: false,
 })
 export class NbRowDefDirective<T> extends CdkRowDef<T> {
   @Input('nbRowDefColumns') columns: Iterable<string>;
@@ -139,6 +147,7 @@ export class NbRowDefDirective<T> extends CdkRowDef<T> {
     role: 'row',
   },
   providers: [{ provide: CdkHeaderRow, useExisting: NbHeaderRowComponent }],
+  standalone: false,
 })
 export class NbHeaderRowComponent extends CdkHeaderRow {}
 
@@ -151,6 +160,7 @@ export class NbHeaderRowComponent extends CdkHeaderRow {}
     role: 'row',
   },
   providers: [{ provide: CdkFooterRow, useExisting: NbFooterRowComponent }],
+  standalone: false,
 })
 export class NbFooterRowComponent extends CdkFooterRow {}
 
@@ -163,5 +173,6 @@ export class NbFooterRowComponent extends CdkFooterRow {}
     role: 'row',
   },
   providers: [{ provide: CdkRow, useExisting: NbRowComponent }],
+  standalone: false,
 })
 export class NbRowComponent extends CdkRow {}

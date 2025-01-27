@@ -23,6 +23,7 @@ import { coerceBooleanProperty } from '@angular/cdk/coercion';
 @Directive({
   selector: '[nbCellDef]',
   providers: [{ provide: CdkCellDef, useExisting: NbCellDefDirective }],
+  standalone: false,
 })
 export class NbCellDefDirective extends CdkCellDef {}
 
@@ -33,6 +34,7 @@ export class NbCellDefDirective extends CdkCellDef {}
 @Directive({
   selector: '[nbHeaderCellDef]',
   providers: [{ provide: CdkHeaderCellDef, useExisting: NbHeaderCellDefDirective }],
+  standalone: false,
 })
 export class NbHeaderCellDefDirective extends CdkHeaderCellDef {}
 
@@ -43,6 +45,7 @@ export class NbHeaderCellDefDirective extends CdkHeaderCellDef {}
 @Directive({
   selector: '[nbFooterCellDef]',
   providers: [{ provide: CdkFooterCellDef, useExisting: NbFooterCellDefDirective }],
+  standalone: false,
 })
 export class NbFooterCellDefDirective extends CdkFooterCellDef {}
 
@@ -58,6 +61,7 @@ export const NB_SORT_HEADER_COLUMN_DEF = new InjectionToken('NB_SORT_HEADER_COLU
     { provide: CdkColumnDef, useExisting: NbColumnDefDirective },
     { provide: NB_SORT_HEADER_COLUMN_DEF, useExisting: NbColumnDefDirective },
   ],
+  standalone: false,
 })
 export class NbColumnDefDirective extends CdkColumnDef {
   private _hasStickyCellChanged = false;
@@ -115,6 +119,7 @@ export class NbColumnDefDirective extends CdkColumnDef {
     class: 'nb-header-cell',
     role: 'columnheader',
   },
+  standalone: false,
 })
 export class NbHeaderCellDirective extends CdkHeaderCell {
   constructor(columnDef: NbColumnDefDirective, elementRef: ElementRef<HTMLElement>) {
@@ -130,6 +135,7 @@ export class NbHeaderCellDirective extends CdkHeaderCell {
     class: 'nb-footer-cell',
     role: 'gridcell',
   },
+  standalone: false,
 })
 export class NbFooterCellDirective extends CdkFooterCell {
   constructor(columnDef: NbColumnDefDirective, elementRef: ElementRef) {
@@ -145,6 +151,7 @@ export class NbFooterCellDirective extends CdkFooterCell {
     class: 'nb-cell',
     role: 'gridcell',
   },
+  standalone: false,
 })
 export class NbCellDirective extends CdkCell {
   constructor(columnDef: NbColumnDefDirective, elementRef: ElementRef<HTMLElement>) {

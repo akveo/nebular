@@ -28,11 +28,6 @@ import { CardSizesCombinationsComponent } from './card-sizes-combinations.compon
     CardWithoutBodyComponent,
     CardSizesCombinationsComponent,
   ],
-  imports: [
-    CommonModule,
-    NbListModule,
-    NbCardModule,
-    CardRoutingModule,
-  ],
+  imports: [CommonModule, NbListModule, NbCardModule, CardRoutingModule],
 })
 export class CardModule {}

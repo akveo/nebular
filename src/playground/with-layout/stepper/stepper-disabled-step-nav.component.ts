@@ -9,9 +9,8 @@ import { Component } from '@angular/core';
             <ng-template #labelOne>First step</ng-template>
             <h4>Step content #1</h4>
             <p class="lorem">
-              Lorizzle ipsum dolizzle stuff fizzle, consectetuer adipiscing break it down.
-              Nullizzle sapien velizzle, my shizz pimpin', shizzle my nizzle crocodizzle shut the shizzle up,
-              gravida vizzle, dang.
+              Lorizzle ipsum dolizzle stuff fizzle, consectetuer adipiscing break it down. Nullizzle sapien velizzle, my
+              shizz pimpin', shizzle my nizzle crocodizzle shut the shizzle up, gravida vizzle, dang.
             </p>
             <button class="prev-button" nbButton disabled nbStepperNext>prev</button>
             <button class="next-button" nbButton nbStepperNext>next</button>
@@ -20,9 +19,8 @@ import { Component } from '@angular/core';
             <ng-template #labelTwo>Second step</ng-template>
             <h4>Step content #2</h4>
             <p class="lorem">
-              Lorizzle ipsum dolizzle stuff fizzle, consectetuer adipiscing break it down.
-              Nullizzle sapien velizzle, my shizz pimpin', shizzle my nizzle crocodizzle shut the shizzle up,
-              gravida vizzle, dang.
+              Lorizzle ipsum dolizzle stuff fizzle, consectetuer adipiscing break it down. Nullizzle sapien velizzle, my
+              shizz pimpin', shizzle my nizzle crocodizzle shut the shizzle up, gravida vizzle, dang.
             </p>
             <button class="prev-button" nbButton nbStepperPrevious>prev</button>
             <button class="next-button" nbButton nbStepperNext>next</button>
@@ -30,9 +28,8 @@ import { Component } from '@angular/core';
           <nb-step label="Third step">
             <h4>Step content #3</h4>
             <p class="lorem">
-              Lorizzle ipsum dolizzle stuff fizzle, consectetuer adipiscing break it down.
-              Nullizzle sapien velizzle, my shizz pimpin', shizzle my nizzle crocodizzle shut the shizzle up,
-              gravida vizzle, dang.
+              Lorizzle ipsum dolizzle stuff fizzle, consectetuer adipiscing break it down. Nullizzle sapien velizzle, my
+              shizz pimpin', shizzle my nizzle crocodizzle shut the shizzle up, gravida vizzle, dang.
             </p>
             <button class="prev-button" nbButton nbStepperPrevious>prev</button>
             <button class="next-button" nbButton nbStepperNext>next</button>
@@ -41,9 +38,8 @@ import { Component } from '@angular/core';
             <ng-template #labelFour>Fourth step</ng-template>
             <h4>Step content #4</h4>
             <p class="lorem">
-              Lorizzle ipsum dolizzle stuff fizzle, consectetuer adipiscing break it down.
-              Nullizzle sapien velizzle, my shizz pimpin', shizzle my nizzle crocodizzle shut the shizzle up,
-              gravida vizzle, dang.
+              Lorizzle ipsum dolizzle stuff fizzle, consectetuer adipiscing break it down. Nullizzle sapien velizzle, my
+              shizz pimpin', shizzle my nizzle crocodizzle shut the shizzle up, gravida vizzle, dang.
             </p>
             <button class="prev-button" nbButton nbStepperPrevious>prev</button>
             <button class="next-button" nbButton disabled nbStepperNext>next</button>
@@ -53,5 +49,6 @@ import { Component } from '@angular/core';
     </nb-card>
   `,
   styleUrls: ['./stepper-disabled-step-nav.component.scss'],
+  standalone: false,
 })
 export class StepperDisabledStepNavComponent {}

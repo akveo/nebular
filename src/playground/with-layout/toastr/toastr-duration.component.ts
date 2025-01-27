@@ -9,12 +9,13 @@ import { NbToastrService } from '@nebular/theme';
     <button nbButton (click)="showToast(0)">Infinite</button>
   `,
   styles: [
-      `
+    `
       ::ng-deep nb-layout-column {
         height: 80vw;
       }
     `,
   ],
+  standalone: false,
 })
 export class ToastrDurationComponent {
   private index: number = 0;
@@ -22,13 +23,9 @@ export class ToastrDurationComponent {
   @HostBinding('class')
   className = 'example-items-rows';
 
-  constructor(private toastrService: NbToastrService) {
-  }
+  constructor(private toastrService: NbToastrService) {}
 
   showToast(duration) {
-    this.toastrService.show(
-      'This is super toast message',
-      `This is toast number: ${++this.index}`,
-      { duration });
+    this.toastrService.show('This is super toast message', `This is toast number: ${++this.index}`, { duration });
   }
 }

@@ -30,14 +30,14 @@ export abstract class NbDateService<D> {
    * */
   isBetween(date: D, start: D, end: D): boolean {
     return this.compareDates(date, start) > 0 && this.compareDates(date, end) < 0;
-  };
+  }
 
   /**
    * Checks is two dates have the same day.
    * */
   isSameDaySafe(date1: D, date2: D): boolean {
     return date1 && date2 && this.isSameDay(date1, date2);
-  };
+  }
 
   /**
    * Checks is two dates have the same month.
@@ -236,7 +236,7 @@ export abstract class NbDateService<D> {
    * */
   abstract addHours(date: D, hour: number): D;
 
-   /**
+  /**
    * Returns date with added number of minutes.
    * */
   abstract addMinutes(date: D, minute: number): D;
@@ -276,7 +276,7 @@ export abstract class NbDateService<D> {
   }
 
   getTwentyFourHoursFormatWithSeconds(): string {
-    return 'HH:mm:ss'
+    return 'HH:mm:ss';
   }
 
   getTwelveHoursFormatWithSeconds(): string {

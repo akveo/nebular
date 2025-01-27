@@ -5,7 +5,7 @@
  */
 
 import { NgModule } from '@angular/core';
-import { RouterModule, Route} from '@angular/router';
+import { RouterModule, Route } from '@angular/router';
 import { TooltipColorsComponent } from './tooltip-colors.component';
 import { TooltipPlacementsComponent } from './tooltip-placements.component';
 import { TooltipShowcaseComponent } from './tooltip-showcase.component';
@@ -31,7 +31,7 @@ const routes: Route[] = [
 ];
 
 @NgModule({
-  imports: [ RouterModule.forChild(routes) ],
-  exports: [ RouterModule ],
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule],
 })
 export class TooltipRoutingModule {}

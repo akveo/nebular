@@ -1,5 +1,4 @@
 <nb-chat #chatComponent title="Nebular Conversational UI" size="large" [scrollBottom]="false">
-
   <a *nbCustomMessage="'link'; let data" [href]="data.href" target="_blank">
     {{ data.text }}
   </a>
@@ -11,22 +10,24 @@
     </button>
   </div>
 
-  <nb-custom-message-table *nbCustomMessage="'table'; noStyles: true; let tableData; let isReply=isReply"
-                           [columns]="tableData.columns"
-                           [rows]="tableData.rows"
-                           [isReply]="isReply">
+  <nb-custom-message-table
+    *nbCustomMessage="'table'; noStyles: true; let tableData; let isReply = isReply"
+    [columns]="tableData.columns"
+    [rows]="tableData.rows"
+    [isReply]="isReply"
+  >
   </nb-custom-message-table>
 
-  <nb-chat-message *ngFor="let msg of messages"
+  <nb-chat-message
+    *ngFor="let msg of messages"
     [type]="msg.type"
     [message]="msg.text"
     [reply]="msg.reply"
     [sender]="msg.user.name"
     [date]="msg.date"
-    [customMessageData]="msg.customMessageData">
+    [customMessageData]="msg.customMessageData"
+  >
   </nb-chat-message>
 
-  <nb-chat-form (send)="sendMessage($event)" [dropFiles]="false">
-  </nb-chat-form>
-
+  <nb-chat-form (send)="sendMessage($event)" [dropFiles]="false"> </nb-chat-form>
 </nb-chat>

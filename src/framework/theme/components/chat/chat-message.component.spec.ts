@@ -24,6 +24,7 @@ import { NbChatMessageComponent, NbChatModule, NbThemeModule, NbChatCustomMessag
       <nb-chat-form [dropFiles]="false"> </nb-chat-form>
     </nb-chat>
   `,
+  standalone: false,
 })
 export class NbChatMessageTestComponent {
   messages = [];

@@ -21,12 +21,6 @@ import { SpinnerTabsComponent } from './spinner-tabs.component';
     SpinnerSizesComponent,
     SpinnerTabsComponent,
   ],
-  imports: [
-    NbSpinnerModule,
-    NbCardModule,
-    NbTabsetModule,
-    NbButtonModule,
-    SpinnerRoutingModule,
-  ],
+  imports: [NbSpinnerModule, NbCardModule, NbTabsetModule, NbButtonModule, SpinnerRoutingModule],
 })
 export class SpinnerModule {}

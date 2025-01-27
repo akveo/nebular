@@ -19,6 +19,7 @@ import { NbMediaBreakpoint } from '@nebular/theme';
   selector: 'ngd-documentation',
   templateUrl: './documentation.component.html',
   styleUrls: ['./documentation.component.scss'],
+  standalone: false,
 })
 export class NgdDocumentationComponent implements OnDestroy {
   menuItems: NbMenuItem[] = [];
@@ -33,8 +34,8 @@ export class NgdDocumentationComponent implements OnDestroy {
     private themeService: NbThemeService,
     private sidebarService: NbSidebarService,
     private menuService: NbMenuService,
-    private paginationService: NgdPaginationService) {
-
+    private paginationService: NgdPaginationService,
+  ) {
     this.themeService.changeTheme('docs-page');
     this.paginationService.setPaginationItems('/docs');
     this.menuItems = this.service.getPreparedMenu('/docs');

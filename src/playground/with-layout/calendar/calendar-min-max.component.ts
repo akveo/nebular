@@ -19,6 +19,7 @@ import { NbDateService } from '@nebular/theme';
       </nb-card-body>
     </nb-card>
   `,
+  standalone: false,
 })
 export class CalendarMinMaxComponent {
   date: Date;

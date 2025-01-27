@@ -13,15 +13,13 @@ import { FormControl } from '@angular/forms';
   template: `
     <nb-card size="large">
       <nb-card-body>
-        <input nbInput
-               type="text"
-               [formControl]="formControl"
-               [nbTimepicker]="timepicker"/>
+        <input nbInput type="text" [formControl]="formControl" [nbTimepicker]="timepicker" />
         <nb-timepicker #timepicker></nb-timepicker>
       </nb-card-body>
     </nb-card>
   `,
   styleUrls: ['./timepicker-example.scss'],
+  standalone: false,
 })
 export class TimepickerFormControlComponent {
   formControl = new FormControl(new Date());

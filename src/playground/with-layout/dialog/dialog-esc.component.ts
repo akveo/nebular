@@ -9,10 +9,10 @@ import { EscDialogComponent } from './components/esc-dialog.component';
     <button nbButton (click)="openWithoutEscClose()">Open without escape close</button>
   `,
   styleUrls: ['./dialog-common.scss'],
+  standalone: false,
 })
 export class DialogEscComponent {
-  constructor(private dialogService: NbDialogService) {
-  }
+  constructor(private dialogService: NbDialogService) {}
 
   openWithEscClose() {
     this.open(true);

@@ -35,13 +35,14 @@ export const MONTHS_IN_COLUMN = 4;
       [visibleDate]="month"
       [cellComponent]="cellComponent"
       [size]="size"
-      (select)="onSelect($event)">
+      (select)="onSelect($event)"
+    >
     </nb-calendar-picker>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class NbCalendarMonthPickerComponent<D, T> implements OnChanges {
-
   @Input() min: D;
 
   @Input() max: D;
@@ -63,8 +64,7 @@ export class NbCalendarMonthPickerComponent<D, T> implements OnChanges {
   @Output() monthChange: EventEmitter<D> = new EventEmitter();
   months: D[][];
 
-  constructor(protected dateService: NbDateService<D>) {
-  }
+  constructor(protected dateService: NbDateService<D>) {}
 
   @Input('cellComponent')
   set _cellComponent(cellComponent: Type<NbCalendarCell<D, T>>) {
@@ -89,7 +89,7 @@ export class NbCalendarMonthPickerComponent<D, T> implements OnChanges {
     const date = this.dateService.getDate(this.month);
     const year = this.dateService.getYear(this.month);
     const firstMonth = this.dateService.createDate(year, 0, date);
-    const months = [ firstMonth ];
+    const months = [firstMonth];
 
     for (let monthIndex = 1; monthIndex < MONTHS_IN_VIEW; monthIndex++) {
       months.push(this.dateService.addMonth(firstMonth, monthIndex));

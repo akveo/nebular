@@ -19,7 +19,10 @@ import {
   NbLayoutDirectionService,
 } from '@nebular/theme';
 
-@Component({ template: '' })
+@Component({
+  template: '',
+  standalone: false,
+})
 export class NbDynamicOverlayMockComponent implements NbRenderableContainer {
   @Input() content: any;
   @Input() context: Object;
@@ -28,7 +31,10 @@ export class NbDynamicOverlayMockComponent implements NbRenderableContainer {
   renderContent() {}
 }
 
-@Component({ template: '' })
+@Component({
+  template: '',
+  standalone: false,
+})
 export class NbDynamicOverlayMock2Component extends NbDynamicOverlayMockComponent {}
 
 @Injectable()

@@ -9,10 +9,10 @@ import { BackdropClickDialogComponent } from './components/backdrop-click-dialog
     <button nbButton (click)="openWithoutBackdropClick()">Without backdrop click close</button>
   `,
   styleUrls: ['./dialog-common.scss'],
+  standalone: false,
 })
 export class DialogBackdropClickComponent {
-  constructor(private dialogService: NbDialogService) {
-  }
+  constructor(private dialogService: NbDialogService) {}
 
   openWithBackdropClick() {
     this.open(true);

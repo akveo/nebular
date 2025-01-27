@@ -10,6 +10,6 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   selector: 'nb-flip-card-showcase',
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './flip-card-showcase.component.html',
+  standalone: false,
 })
-export class FlipCardShowcaseComponent {
-}
+export class FlipCardShowcaseComponent {}

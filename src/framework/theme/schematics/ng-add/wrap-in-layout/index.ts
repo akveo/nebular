@@ -26,14 +26,15 @@ export function wrapRootComponentInLayout(options: Schema): Rule {
     } else {
       wrapHtmlFileTemplate(tree, templateDescriptor);
     }
-  }
+  };
 }
 
 function wrapInlineTemplate(tree: Tree, templateDescriptor: TemplateDescriptor) {
   const { templateProp, componentPath, template } = templateDescriptor;
 
   const wrappedTemplate = wrapInlineTemplateInLayout(template);
-  const recorder = tree.beginUpdate(componentPath)
+  const recorder = tree
+    .beginUpdate(componentPath)
     .remove(templateProp.initializer.pos, templateProp.initializer.getFullText().length)
     .insertLeft(templateProp.initializer.pos, wrappedTemplate);
 

@@ -18,6 +18,7 @@ import { NbThemeService } from '@nebular/theme';
       </label>
     </div>
   `,
+  standalone: false,
 })
 export class LayoutThemeToggleComponent {
   readonly themeList = ['default', 'dark', 'cosmic', 'corporate'];

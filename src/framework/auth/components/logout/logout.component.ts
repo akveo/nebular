@@ -14,15 +14,17 @@ import { NbAuthResult } from '../../services/auth-result';
 @Component({
   selector: 'nb-logout',
   templateUrl: './logout.component.html',
+  standalone: false,
 })
 export class NbLogoutComponent implements OnInit {
-
   redirectDelay: number = 0;
   strategy: string = '';
 
-  constructor(protected service: NbAuthService,
-              @Inject(NB_AUTH_OPTIONS) protected options = {},
-              protected router: Router) {
+  constructor(
+    protected service: NbAuthService,
+    @Inject(NB_AUTH_OPTIONS) protected options = {},
+    protected router: Router,
+  ) {
     this.redirectDelay = this.getConfigValue('forms.logout.redirectDelay');
     this.strategy = this.getConfigValue('forms.logout.strategy');
   }
@@ -33,7 +35,6 @@ export class NbLogoutComponent implements OnInit {
 
   logout(strategy: string): void {
     this.service.logout(strategy).subscribe((result: NbAuthResult) => {
-
       const redirect = result.getRedirect();
       if (redirect) {
         setTimeout(() => {

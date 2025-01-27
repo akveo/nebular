@@ -24,11 +24,12 @@ interface FSEntry {
   selector: 'nb-tree-grid-showcase',
   templateUrl: './tree-grid-showcase.component.html',
   styleUrls: ['./tree-grid-shared.scss', './tree-grid-showcase.component.scss'],
+  standalone: false,
 })
 export class TreeGridShowcaseComponent {
   customColumn = 'name';
-  defaultColumns = [ 'size', 'kind', 'items' ];
-  allColumns = [ this.customColumn, ...this.defaultColumns ];
+  defaultColumns = ['size', 'kind', 'items'];
+  allColumns = [this.customColumn, ...this.defaultColumns];
 
   dataSource: NbTreeGridDataSource<FSEntry>;
 
@@ -73,9 +74,7 @@ export class TreeGridShowcaseComponent {
       children: [
         {
           data: { name: 'Report 1', kind: 'dir', size: '100 KB', items: 1 },
-          children: [
-            { data: { name: 'report-1.doc', kind: 'doc', size: '100 KB' } },
-          ],
+          children: [{ data: { name: 'report-1.doc', kind: 'doc', size: '100 KB' } }],
         },
         {
           data: { name: 'Report 2', kind: 'dir', size: '300 KB', items: 2 },
@@ -98,19 +97,19 @@ export class TreeGridShowcaseComponent {
   getShowOn(index: number) {
     const minWithForMultipleColumns = 400;
     const nextColumnStep = 100;
-    return minWithForMultipleColumns + (nextColumnStep * index);
+    return minWithForMultipleColumns + nextColumnStep * index;
   }
 }
 
 @Component({
   selector: 'nb-fs-icon',
   template: `
-    <nb-tree-grid-row-toggle [expanded]="expanded" *ngIf="isDir(); else fileIcon">
-    </nb-tree-grid-row-toggle>
+    <nb-tree-grid-row-toggle [expanded]="expanded" *ngIf="isDir(); else fileIcon"> </nb-tree-grid-row-toggle>
     <ng-template #fileIcon>
       <nb-icon icon="file-text-outline"></nb-icon>
     </ng-template>
   `,
+  standalone: false,
 })
 export class FsIconComponent {
   @Input() kind: string;

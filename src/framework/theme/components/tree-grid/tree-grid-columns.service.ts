@@ -1,7 +1,6 @@
 import { Injectable, IterableDiffer, IterableDiffers } from '@angular/core';
 import { merge, Observable, Subject } from 'rxjs';
 
-
 @Injectable()
 export class NbColumnsService {
   private allColumns: string[];

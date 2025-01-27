@@ -12,16 +12,7 @@ import { SimpleListShowcaseComponent } from './simple-list-showcase.component';
 import { UsersListShowcaseComponent } from './users-list-showcase.component';
 
 @NgModule({
-  declarations: [
-    SimpleListShowcaseComponent,
-    UsersListShowcaseComponent,
-  ],
-  imports: [
-    CommonModule,
-    NbListModule,
-    NbCardModule,
-    NbUserModule,
-    ListRoutingModule,
-  ],
+  declarations: [SimpleListShowcaseComponent, UsersListShowcaseComponent],
+  imports: [CommonModule, NbListModule, NbCardModule, NbUserModule, ListRoutingModule],
 })
 export class ListModule {}

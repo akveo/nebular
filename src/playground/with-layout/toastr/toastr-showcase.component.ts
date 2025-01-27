@@ -13,6 +13,7 @@ import { NbGlobalPhysicalPosition, NbToastrService } from '@nebular/theme';
       }
     `,
   ],
+  standalone: false,
 })
 export class ToastrShowcaseComponent {
   private index: number = 0;

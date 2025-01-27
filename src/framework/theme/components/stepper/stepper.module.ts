@@ -13,22 +13,8 @@ import { NbStepperNextDirective, NbStepperPreviousDirective } from './stepper-bu
 import { NbIconModule } from '../icon/icon.module';
 
 @NgModule({
-  imports: [
-    NbSharedModule,
-    NbIconModule,
-  ],
-  declarations: [
-    NbStepperComponent,
-    NbStepComponent,
-    NbStepperNextDirective,
-    NbStepperPreviousDirective,
-  ],
-  exports: [
-    NbStepperComponent,
-    NbStepComponent,
-    NbStepperNextDirective,
-    NbStepperPreviousDirective,
-  ],
+  imports: [NbSharedModule, NbIconModule],
+  declarations: [NbStepperComponent, NbStepComponent, NbStepperNextDirective, NbStepperPreviousDirective],
+  exports: [NbStepperComponent, NbStepComponent, NbStepperNextDirective, NbStepperPreviousDirective],
 })
-export class NbStepperModule {
-}
+export class NbStepperModule {}

@@ -343,13 +343,11 @@ describe('acl-service', () => {
     });
 
     // Single async inject to save references; which are used in all tests below
-    beforeEach(
-      waitForAsync(
-        inject([NbAclService], (_aclService) => {
-          aclService = _aclService;
-        }),
-      ),
-    );
+    beforeEach(waitForAsync(
+      inject([NbAclService], (_aclService) => {
+        aclService = _aclService;
+      }),
+    ));
 
     it(`has empty default state`, () => {
       // @ts-ignore
@@ -384,13 +382,11 @@ describe('acl-service', () => {
     });
 
     // Single async inject to save references; which are used in all tests below
-    beforeEach(
-      waitForAsync(
-        inject([NbAclService], (_aclService) => {
-          aclService = _aclService;
-        }),
-      ),
-    );
+    beforeEach(waitForAsync(
+      inject([NbAclService], (_aclService) => {
+        aclService = _aclService;
+      }),
+    ));
 
     it(`has predefined default state`, () => {
       // @ts-ignore
@@ -428,13 +424,11 @@ describe('acl-service', () => {
     });
 
     // Single async inject to save references; which are used in all tests below
-    beforeEach(
-      waitForAsync(
-        inject([NbAclService], (_aclService) => {
-          aclService = _aclService;
-        }),
-      ),
-    );
+    beforeEach(waitForAsync(
+      inject([NbAclService], (_aclService) => {
+        aclService = _aclService;
+      }),
+    ));
 
     it(`has predefined default state`, () => {
       // @ts-ignore
@@ -480,13 +474,11 @@ describe('acl-service', () => {
     });
 
     // Single async inject to save references; which are used in all tests below
-    beforeEach(
-      waitForAsync(
-        inject([NbAclService], (_aclService) => {
-          aclService = _aclService;
-        }),
-      ),
-    );
+    beforeEach(waitForAsync(
+      inject([NbAclService], (_aclService) => {
+        aclService = _aclService;
+      }),
+    ));
 
     it(`has predefined default state`, () => {
       // @ts-ignore

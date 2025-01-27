@@ -11,11 +11,14 @@ import { NbIconConfig } from '@nebular/theme';
   selector: 'nb-tabset-icon',
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './tabset-icon.component.html',
-  styles: [`
-    :host nb-tab {
-      padding: 1.25rem;
-    }
-  `],
+  styles: [
+    `
+      :host nb-tab {
+        padding: 1.25rem;
+      }
+    `,
+  ],
+  standalone: false,
 })
 export class TabsetIconComponent {
   bellIconConfig: NbIconConfig = { icon: 'bell-outline', pack: 'eva' };

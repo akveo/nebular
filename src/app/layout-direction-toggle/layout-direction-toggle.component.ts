@@ -10,6 +10,7 @@ import { NbLayoutDirectionService, NbLayoutDirection } from '@nebular/theme';
       <span>RTL</span>
     </label>
   `,
+  standalone: false,
 })
 export class LayoutDirectionToggleComponent {
   constructor(private directionService: NbLayoutDirectionService) {}

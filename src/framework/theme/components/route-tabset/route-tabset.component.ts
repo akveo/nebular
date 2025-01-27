@@ -116,7 +116,7 @@ export interface NbRouteTab {
         <ng-template #enabled>
           <li
             routerLinkActive="active"
-            [routerLinkActiveOptions]="activeLinkOptions | nbMergeConfigs: tab.activeLinkOptions"
+            [routerLinkActiveOptions]="activeLinkOptions | nbMergeConfigs : tab.activeLinkOptions"
             class="route-tab"
           >
             <a
@@ -141,6 +141,7 @@ export interface NbRouteTab {
     </ul>
     <router-outlet></router-outlet>
   `,
+  standalone: false,
 })
 export class NbRouteTabsetComponent {
   @HostBinding('class.full-width') fullWidthValue: boolean = false;

@@ -27,17 +27,16 @@ const defaultOptions = { params: { direction: '' } };
 
 @Component({
   selector: 'nb-toastr-container',
-  template: `
-    <nb-toast [@fadeIn]="fadeIn" *ngFor="let toast of content" [toast]="toast"></nb-toast>`,
+  template: ` <nb-toast [@fadeIn]="fadeIn" *ngFor="let toast of content" [toast]="toast"></nb-toast>`,
   animations: [
     trigger('fadeIn', [
       transition(':enter', [voidState, animate(100)], defaultOptions),
       transition(':leave', [animate(100, voidState)], defaultOptions),
     ]),
   ],
+  standalone: false,
 })
 export class NbToastrContainerComponent implements OnInit, OnDestroy {
-
   protected destroy$ = new Subject<void>();
 
   @Input()
@@ -54,12 +53,11 @@ export class NbToastrContainerComponent implements OnInit, OnDestroy {
 
   fadeIn;
 
-  constructor(protected layoutDirection: NbLayoutDirectionService,
-              protected positionHelper: NbPositionHelper) {
-  }
+  constructor(protected layoutDirection: NbLayoutDirectionService, protected positionHelper: NbPositionHelper) {}
 
   ngOnInit() {
-    this.layoutDirection.onDirectionChange()
+    this.layoutDirection
+      .onDirectionChange()
       .pipe(takeUntil(this.destroy$))
       .subscribe(() => this.onDirectionChange());
   }

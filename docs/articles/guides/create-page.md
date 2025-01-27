@@ -1,6 +1,6 @@
 # Create Nebular Page
 
-Let's create a simple Nebular page (header + sidebar) in your project. 
+Let's create a simple Nebular page (header + sidebar) in your project.
 We suppose that you have a separate module per page, let's open your `some-page.module.ts` and import necessary layout components:
 
 ```ts
@@ -24,6 +24,7 @@ export class SomePageModule {
 ```
 
 Then let's add layout components with a sticky header into your `some-page.component.ts`:
+
 ```ts
 @Component({
   ...
@@ -33,7 +34,7 @@ Then let's add layout components with a sticky header into your `some-page.compo
       <nb-layout-header fixed>Company Name</nb-layout-header>
 
       <nb-sidebar>Sidebar Content</nb-sidebar>
-      
+
       <nb-layout-column>
         Page Content <button nbButton>Hello World</button>
       </nb-layout-column>
@@ -55,8 +56,7 @@ As a result, you should have a page with a simple layout on it looking similar t
     `<nb-layout></nb-layout>` is a required root component for Nebular to work.
   </div>
 </div>
-<hr> 
-
+<hr>
 
 ## Related Articles
 

@@ -5,7 +5,6 @@ import { Observable, Subject, Subscriber } from 'rxjs';
  * Layout dimensions type
  */
 export interface NbLayoutDimensions {
-
   /**
    * clientWidth
    * @type {number}
@@ -39,7 +38,6 @@ export interface NbLayoutDimensions {
  */
 @Injectable()
 export class NbLayoutRulerService {
-
   private contentDimensionsReq$ = new Subject();
 
   /**

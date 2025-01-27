@@ -14,19 +14,16 @@ import { getPathPartOfUrl } from '../menu/url-matching-helpers';
  */
 @Injectable()
 export class NbRestoreScrollTopHelper {
-
-  constructor(private router: Router) {
-  }
+  constructor(private router: Router) {}
 
   shouldRestore(): Observable<boolean> {
-    return this.router.events
-      .pipe(
-        startWith(null),
-        filter(event => event === null || event instanceof NavigationEnd),
-        pairwise(),
-        map(([prev, current]) => this.pageChanged(prev as NavigationEnd, current as NavigationEnd)),
-        filter(res => !!res),
-      );
+    return this.router.events.pipe(
+      startWith(null),
+      filter((event) => event === null || event instanceof NavigationEnd),
+      pairwise(),
+      map(([prev, current]) => this.pageChanged(prev as NavigationEnd, current as NavigationEnd)),
+      filter((res) => !!res),
+    );
   }
 
   private pageChanged(prev: NavigationEnd, current: NavigationEnd) {

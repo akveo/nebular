@@ -73,6 +73,7 @@ import { NbTimePickerComponent } from '../timepicker/timepicker.component';
   `,
   styleUrls: ['./calendar-with-time-container.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class NbCalendarWithTimeComponent<D> extends NbCalendarComponent<D> implements OnInit, AfterViewInit {
   /**

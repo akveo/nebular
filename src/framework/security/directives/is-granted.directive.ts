@@ -4,24 +4,25 @@ import { Subject } from 'rxjs';
 
 import { NbAccessChecker } from '../services/access-checker.service';
 
-@Directive({ selector: '[nbIsGranted]'})
+@Directive({
+  selector: '[nbIsGranted]',
+  standalone: false,
+})
 export class NbIsGrantedDirective implements OnDestroy {
-
   private destroy$ = new Subject<void>();
 
   private hasView = false;
 
-  constructor(private templateRef: TemplateRef<any>,
-              private viewContainer: ViewContainerRef,
-              private accessChecker: NbAccessChecker) {
-  }
+  constructor(
+    private templateRef: TemplateRef<any>,
+    private viewContainer: ViewContainerRef,
+    private accessChecker: NbAccessChecker,
+  ) {}
 
   @Input() set nbIsGranted([permission, resource]: [string, string]) {
-
-    this.accessChecker.isGranted(permission, resource)
-      .pipe(
-        takeUntil(this.destroy$),
-      )
+    this.accessChecker
+      .isGranted(permission, resource)
+      .pipe(takeUntil(this.destroy$))
       .subscribe((can: boolean) => {
         if (can && !this.hasView) {
           this.viewContainer.createEmbeddedView(this.templateRef);

@@ -16,13 +16,11 @@ describe('time-model-service', () => {
     });
   });
 
-  beforeEach(
-    waitForAsync(
-      inject([NbCalendarTimeModelService], (_monthModel) => {
-        timeModel = _monthModel;
-      }),
-    ),
-  );
+  beforeEach(waitForAsync(
+    inject([NbCalendarTimeModelService], (_monthModel) => {
+      timeModel = _monthModel;
+    }),
+  ));
 
   it('should format number', () => {
     const token = timeModel.paddToTwoSymbols(5);

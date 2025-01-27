@@ -9,7 +9,6 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NbThemeModule, NbSpinnerModule, NbSpinnerComponent } from '@nebular/theme';
 
 describe('Component: NbSpinner', () => {
-
   let spinner: NbSpinnerComponent;
   let fixture: ComponentFixture<NbSpinnerComponent>;
 
@@ -25,36 +24,24 @@ describe('Component: NbSpinner', () => {
   it('should set class danger', () => {
     spinner.status = 'danger';
     fixture.detectChanges();
-    expect(
-      fixture
-        .debugElement.nativeElement.classList.contains('status-danger'))
-      .toBeTruthy()
+    expect(fixture.debugElement.nativeElement.classList.contains('status-danger')).toBeTruthy();
   });
 
   it('should set size small', () => {
     spinner.size = 'small';
     fixture.detectChanges();
-    expect(
-      fixture
-        .debugElement.nativeElement.classList.contains('size-small'))
-      .toBeTruthy()
+    expect(fixture.debugElement.nativeElement.classList.contains('size-small')).toBeTruthy();
   });
 
   it('should set message', () => {
     spinner.message = 'Loading your content...';
     fixture.detectChanges();
-    expect(
-      fixture
-        .debugElement.nativeElement.querySelector('.message').textContent)
-      .toEqual(spinner.message);
+    expect(fixture.debugElement.nativeElement.querySelector('.message').textContent).toEqual(spinner.message);
   });
 
   it('should not have message tab when no message', () => {
     spinner.message = '';
     fixture.detectChanges();
-    expect(
-      fixture
-        .debugElement.nativeElement.querySelector('.message'))
-      .toBeNull();
+    expect(fixture.debugElement.nativeElement.querySelector('.message')).toBeNull();
   });
 });

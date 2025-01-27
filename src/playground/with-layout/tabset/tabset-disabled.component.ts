@@ -10,11 +10,13 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   selector: 'nb-tabset-disabled',
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './tabset-disabled.component.html',
-  styles: [`
-    :host nb-tab {
-      padding: 1.25rem;
-    }
-  `],
+  styles: [
+    `
+      :host nb-tab {
+        padding: 1.25rem;
+      }
+    `,
+  ],
+  standalone: false,
 })
-export class TabsetDisabledComponent {
-}
+export class TabsetDisabledComponent {}

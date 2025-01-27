@@ -22,12 +22,6 @@ import { CheckboxIndeterminateComponent } from './checkbox-indeterminate.compone
     CheckboxTestComponent,
     CheckboxIndeterminateComponent,
   ],
-  imports: [
-    CommonModule,
-    NbCardModule,
-    NbButtonModule,
-    NbCheckboxModule,
-    CheckboxRoutingModule,
-  ],
+  imports: [CommonModule, NbCardModule, NbButtonModule, NbCheckboxModule, CheckboxRoutingModule],
 })
 export class CheckboxModule {}

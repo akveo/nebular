@@ -11,7 +11,6 @@ import { NB_DOCUMENT } from '../theme.options';
  */
 @Injectable()
 export class NbSpinnerService {
-
   private loaders: Promise<any>[] = [];
   private selector: string = 'nb-global-spinner';
 
@@ -42,10 +41,11 @@ export class NbSpinnerService {
   }
 
   private executeAll(done = (values) => {}): void {
-    Promise.all(this.loaders).then((values) => {
-      this.hideSpinner();
-      done.call(null, values);
-    })
+    Promise.all(this.loaders)
+      .then((values) => {
+        this.hideSpinner();
+        done.call(null, values);
+      })
       .catch((error) => {
         // TODO: Promise.reject
         console.error(error);

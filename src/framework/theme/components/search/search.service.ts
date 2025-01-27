@@ -13,10 +13,10 @@ import { share } from 'rxjs/operators';
  */
 @Injectable()
 export class NbSearchService {
-  private searchSubmittings$ = new Subject<{ term: string, tag?: string }>();
-  private searchActivations$ = new Subject<{ searchType: string, tag?: string }>();
-  private searchDeactivations$ = new Subject<{ searchType: string, tag?: string }>();
-  private searchInput$ = new Subject<{ term: string, tag?: string }>();
+  private searchSubmittings$ = new Subject<{ term: string; tag?: string }>();
+  private searchActivations$ = new Subject<{ searchType: string; tag?: string }>();
+  private searchDeactivations$ = new Subject<{ searchType: string; tag?: string }>();
+  private searchInput$ = new Subject<{ term: string; tag?: string }>();
 
   /***
    * Activate (open) search component
@@ -51,14 +51,14 @@ export class NbSearchService {
    * @param {string} tag
    */
   searchInput(term: string, tag?: string) {
-    this.searchInput$.next({term, tag});
+    this.searchInput$.next({ term, tag });
   }
 
   /**
    * Subscribe to 'activate' event
    * @returns Observable<{searchType: string; tag?: string}>
    */
-  onSearchActivate(): Observable<{ searchType: string, tag?: string }> {
+  onSearchActivate(): Observable<{ searchType: string; tag?: string }> {
     return this.searchActivations$.pipe(share());
   }
 
@@ -66,7 +66,7 @@ export class NbSearchService {
    * Subscribe to 'deactivate' event
    * @returns Observable<{searchType: string; tag?: string}>
    */
-  onSearchDeactivate(): Observable<{ searchType: string, tag?: string }> {
+  onSearchDeactivate(): Observable<{ searchType: string; tag?: string }> {
     return this.searchDeactivations$.pipe(share());
   }
 
@@ -74,7 +74,7 @@ export class NbSearchService {
    * Subscribe to 'submit' event (when submit button clicked)
    * @returns Observable<{term: string; tag?: string}>
    */
-  onSearchSubmit(): Observable<{ term: string, tag?: string }> {
+  onSearchSubmit(): Observable<{ term: string; tag?: string }> {
     return this.searchSubmittings$.pipe(share());
   }
 
@@ -82,7 +82,7 @@ export class NbSearchService {
    * Subscribe to input event
    * @returns Observable<{term: string; tag?: string}>
    */
-  onSearchInput(): Observable<{ term: string, tag?: string }> {
+  onSearchInput(): Observable<{ term: string; tag?: string }> {
     return this.searchInput$.pipe(share());
   }
 }

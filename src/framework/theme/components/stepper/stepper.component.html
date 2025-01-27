@@ -1,16 +1,16 @@
 <ng-template><ng-content select="nb-step"></ng-content></ng-template>
 <div class="header">
   <ng-container *ngFor="let step of steps; let index = index; let first = first">
+    <div *ngIf="!first && !step.hidden" [class.connector-past]="index <= selectedIndex" class="connector"></div>
 
-    <div *ngIf="!first && !step.hidden"
-         [class.connector-past]="index <= selectedIndex"
-         class="connector"></div>
-
-    <div *ngIf="!step.hidden" class="step"
-         [class.selected]="isStepSelected(step)"
-         [class.completed]="!isStepSelected(step) && step.completed"
-         [class.noninteractive]="disableStepNavigation"
-         (click)="changeStep(step)">
+    <div
+      *ngIf="!step.hidden"
+      class="step"
+      [class.selected]="isStepSelected(step)"
+      [class.completed]="!isStepSelected(step) && step.completed"
+      [class.noninteractive]="disableStepNavigation"
+      (click)="changeStep(step)"
+    >
       <div class="label-index">
         <span *ngIf="!step.completed || isStepSelected(step)">{{ index + 1 }}</span>
         <nb-icon *ngIf="!isStepSelected(step) && step.completed" icon="checkmark-outline" pack="nebular-essentials">

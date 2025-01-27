@@ -12,8 +12,10 @@ describe('nb-layout', () => {
   });
 
   it('should render container', () => {
-    element(by.css('#layout-fluid > div')).getAttribute('class').then(value => {
-      expect(value).toMatch('scrollable-container');
-    });
+    element(by.css('#layout-fluid > div'))
+      .getAttribute('class')
+      .then((value) => {
+        expect(value).toMatch('scrollable-container');
+      });
   });
 });

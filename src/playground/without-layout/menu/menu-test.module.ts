@@ -33,12 +33,6 @@ import {
     MenuItem332Component,
     MenuItem4Component,
   ],
-  imports: [
-    NbMenuModule.forRoot(),
-    NbLayoutModule,
-    NbSidebarModule.forRoot(),
-    NbCardModule,
-    MenuTestRoutingModule,
-  ],
+  imports: [NbMenuModule.forRoot(), NbLayoutModule, NbSidebarModule.forRoot(), NbCardModule, MenuTestRoutingModule],
 })
 export class MenuTestModule {}

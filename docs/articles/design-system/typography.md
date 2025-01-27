@@ -10,11 +10,12 @@ Nebular theme contains two font-family properties:
 - **font-family-secondary** - utilized by heading elements (`<h1>`, `<h2>`, etc)
 
 By default both font-family-primary and font-family-secondary use `'Open Sans, sans-serif'` font family names.
+
 <hr>
 
 ## Colors
 
-There are 5 text colors available within the Design System: 
+There are 5 text colors available within the Design System:
 
 - **text-basic-color** - main text color, should be used on top of basic backgrounds, usually cards, sidebars, headers, available as `.text-basic` CSS class
 - **text-alternate-color** - alternative color used on top of alternate backgrounds - colored headers, sidebars, available as `.text-alternate` CSS class
@@ -40,23 +41,25 @@ Nebular typography consist of 14 text styles, where text styles is a combination
 All of the text styles could be applied by simply adding CSS classes to an element:
 
 ```html
-<input type="email" name="email" />
-<span class="caption-2 text-hint">Work email address</span>
+<input type="email" name="email" /> <span class="caption-2 text-hint">Work email address</span>
 ```
+
 Here we added both `caption-2` and `text-hint` making the span to be a caption with a hint text color.
 
 Colors and fonts are also available as theme properties using `nb-theme()` SCSS function:
+
 ```scss
 .my-text {
   font-family: nb-theme(font-family-primary);
   color: nb-theme(text-basic-color);
 }
 ```
+
 <hr>
 
 ## Customize Typography styles
 
-All text styles and colors are available as [Nebular Theme](docs/design-system/design-system-theme) properties. 
+All text styles and colors are available as [Nebular Theme](docs/design-system/design-system-theme) properties.
 This means that all styles could be easily customized by changing theme variables:
 
 ```scss
@@ -66,7 +69,8 @@ text-caption-font-weight: 400,
 text-caption-line-height: 1rem,
 ```
 
-Complete list of typography variables could be find at [Default Theme Variables](docs/design-system/default-theme) page. 
+Complete list of typography variables could be find at [Default Theme Variables](docs/design-system/default-theme) page.
+
 <hr>
 
 ## Related Articles
@@ -76,4 +80,3 @@ Complete list of typography variables could be find at [Default Theme Variables]
 - [Default Theme Variables](docs/design-system/default-theme)
 - [Use Theme Variables](docs/design-system/use-theme-variables)
 - [Create Custom Theme](docs/design-system/create-custom-theme)
-

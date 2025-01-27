@@ -8,7 +8,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { NgdHomeComponent } from './home.component';
 
-
 export const routes: Routes = [
   {
     path: '',
@@ -20,5 +19,4 @@ export const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class NgdHomeRoutingModule {
-}
+export class NgdHomeRoutingModule {}

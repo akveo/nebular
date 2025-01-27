@@ -11,6 +11,6 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './alert-accents.component.html',
   styleUrls: ['./alert-example.component.scss'],
+  standalone: false,
 })
-export class AlertAccentsComponent {
-}
+export class AlertAccentsComponent {}

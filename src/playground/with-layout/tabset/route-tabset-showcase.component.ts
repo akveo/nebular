@@ -15,6 +15,7 @@ import { NbRouteTab } from '@nebular/theme';
       </nb-card-body>
     </nb-card>
   `,
+  standalone: false,
 })
 export class RouteTabsetShowcaseComponent {
   tabs: NbRouteTab[] = [

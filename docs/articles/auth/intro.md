@@ -1,7 +1,7 @@
 # Auth Module
 
 The main goal of the Auth module is to provide a pluggable set of components and services for easier setup of the authentication layer for Angular applications.
-The module separates the UI part (login/register/etc components) from the business logic with the help of the authentication `Strategies` layer. 
+The module separates the UI part (login/register/etc components) from the business logic with the help of the authentication `Strategies` layer.
 
 <div class="note note-info">
   <div class="note-title">Note</div>
@@ -12,13 +12,15 @@ The module separates the UI part (login/register/etc components) from the busine
 <hr>
 
 ## Authentication UI components
-  - Login
-  - Logout
-  - Register
-  - Password Recover
-  - Password Reset
 
-You can use the built-in components or create your custom ones.  
+- Login
+- Logout
+- Register
+- Password Recover
+- Password Reset
+
+You can use the built-in components or create your custom ones.
+
 <hr>
   
 ## Auth Strategies
@@ -37,4 +39,4 @@ You can use the built-in components or create your custom ones.
 
 ## Related Articles
 
-- Auth Module [Installation](docs/auth/installation) 
+- Auth Module [Installation](docs/auth/installation)

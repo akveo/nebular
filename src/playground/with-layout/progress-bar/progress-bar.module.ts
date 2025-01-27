@@ -21,11 +21,6 @@ import { ProgressBarValueComponent } from './progress-bar-value.component';
     ProgressBarStatusComponent,
     ProgressBarValueComponent,
   ],
-  imports: [
-    NbProgressBarModule,
-    NbActionsModule,
-    NbCardModule,
-    ProgressBarRoutingModule,
-  ],
+  imports: [NbProgressBarModule, NbActionsModule, NbCardModule, ProgressBarRoutingModule],
 })
 export class ProgressBarModule {}

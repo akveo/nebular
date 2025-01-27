@@ -51,6 +51,7 @@ import { NbTabTitleDirective } from './tab-title.directive';
       <ng-content></ng-content>
     </ng-template>
   `,
+  standalone: false,
 })
 export class NbTabComponent {
   @ContentChild(NbTabContentDirective) tabContentDirective: NbTabContentDirective;
@@ -335,6 +336,7 @@ export class NbTabComponent {
     </ul>
     <ng-content select="nb-tab"></ng-content>
   `,
+  standalone: false,
 })
 export class NbTabsetComponent implements AfterContentInit, OnDestroy {
   @ContentChildren(NbTabComponent) tabs: QueryList<NbTabComponent>;

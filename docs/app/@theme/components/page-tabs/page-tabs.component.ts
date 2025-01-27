@@ -22,9 +22,9 @@ import { Observable, of as observableOf, combineLatest, Subject } from 'rxjs';
     </a>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class NgdPageTabsComponent implements OnDestroy {
-
   private destroy$ = new Subject<void>();
 
   items$: Observable<any[]> = observableOf([]);
@@ -32,13 +32,10 @@ export class NgdPageTabsComponent implements OnDestroy {
   @Input()
   set tabs(value) {
     this.items$ = combineLatest(
-      observableOf(value || []).pipe(
-        map(tabs => this.availableTabs.filter(tab => tabs[tab.tab])),
-      ),
+      observableOf(value || []).pipe(map((tabs) => this.availableTabs.filter((tab) => tabs[tab.tab]))),
       this.activatedRoute.params.pipe(publishReplay(), refCount()),
-    )
-    .pipe(
-      map(([tabs, params]) => (tabs.map((item: any) => ({ ...item, selected: item.tab === params.tab })))),
+    ).pipe(
+      map(([tabs, params]) => tabs.map((item: any) => ({ ...item, selected: item.tab === params.tab }))),
       takeUntil(this.destroy$),
     );
   }
@@ -56,31 +53,30 @@ export class NgdPageTabsComponent implements OnDestroy {
     icon: string;
     selected?: boolean;
   }[] = [
-      {
-        tab: 'overview',
-        title: 'Overview',
-        icon: 'eye-outline',
-        selected: true,
-      },
-      {
-        tab: 'api',
-        title: 'API',
-        icon: 'settings-outline',
-      },
-      {
-        tab: 'theme',
-        title: 'Theme',
-        icon: 'droplet-outline',
-      },
-      {
-        tab: 'examples',
-        title: 'Examples',
-        icon: 'image-outline',
-      },
-    ];
+    {
+      tab: 'overview',
+      title: 'Overview',
+      icon: 'eye-outline',
+      selected: true,
+    },
+    {
+      tab: 'api',
+      title: 'API',
+      icon: 'settings-outline',
+    },
+    {
+      tab: 'theme',
+      title: 'Theme',
+      icon: 'droplet-outline',
+    },
+    {
+      tab: 'examples',
+      title: 'Examples',
+      icon: 'image-outline',
+    },
+  ];
 
-  constructor(private activatedRoute: ActivatedRoute) {
-  }
+  constructor(private activatedRoute: ActivatedRoute) {}
 
   ngOnDestroy() {
     this.destroy$.next();

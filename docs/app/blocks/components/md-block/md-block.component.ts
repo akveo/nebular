@@ -24,6 +24,7 @@ import { NgdLastViewedSectionService } from '../../../@theme/services';
     </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class NgdMdBLockComponent implements OnDestroy {
   private destroy$ = new Subject<void>();

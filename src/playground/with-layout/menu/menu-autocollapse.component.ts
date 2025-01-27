@@ -11,6 +11,7 @@ import { NbMenuItem } from '@nebular/theme';
   selector: 'npg-menu-autocollapse',
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './menu-autocollapse.component.html',
+  standalone: false,
 })
 export class MenuAutoCollapseComponent {
   items: NbMenuItem[] = [

@@ -15,6 +15,7 @@ import createSpy = jasmine.createSpy;
       <nb-tab *ngIf="showTabs" tabTitle="3" route="3" tabId="tab-3" disabled>3</nb-tab>
     </nb-tabset>
   `,
+  standalone: false,
 })
 export class TabsetTestComponent {
   showTabs = true;
@@ -37,7 +38,7 @@ export class ActivatedRouteStub {
 
   setParams(params?: Params) {
     this.subject.next(params);
-  };
+  }
 }
 
 describe('NbTabsetComponent', () => {
@@ -50,12 +51,8 @@ describe('NbTabsetComponent', () => {
     activatedRouteStub = new ActivatedRouteStub();
 
     TestBed.configureTestingModule({
-      declarations: [ TabsetTestComponent ],
-      imports: [
-        CommonModule,
-        RouterTestingModule.withRoutes([]),
-        NbTabsetModule,
-      ],
+      declarations: [TabsetTestComponent],
+      imports: [CommonModule, RouterTestingModule.withRoutes([]), NbTabsetModule],
       providers: [{ provide: ActivatedRoute, useValue: activatedRouteStub }],
     });
 

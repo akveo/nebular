@@ -13,16 +13,18 @@ import { NgdTabbedService } from '../../../@theme/services';
     <nb-card [ngdFragment]="source.slag">
       <nb-card-body>
         <h2>{{ source.name }}</h2>
-        <ngd-stacked-example-block *ngFor="let example of source.liveExamples" [content]="example.content"
-                                   class="widget-block">
+        <ngd-stacked-example-block
+          *ngFor="let example of source.liveExamples"
+          [content]="example.content"
+          class="widget-block"
+        >
         </ngd-stacked-example-block>
       </nb-card-body>
     </nb-card>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class NgdExamplesBlockComponent {
-
   @Input('source') source;
-
 }

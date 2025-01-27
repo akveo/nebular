@@ -9,6 +9,6 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'nb-select-status',
   templateUrl: './select-status.component.html',
+  standalone: false,
 })
-export class SelectStatusComponent {
-}
+export class SelectStatusComponent {}

@@ -10,11 +10,10 @@ import { NbGetters, NB_DEFAULT_ROW_LEVEL, NbTreeGridPresentationNode } from './t
 
 @Injectable()
 export class NbTreeGridDataService<T> {
-
   private defaultGetters: NbGetters<any, T> = {
-    dataGetter: node => node.data,
-    childrenGetter: d => d.children || undefined,
-    expandedGetter: d => !!d.expanded,
+    dataGetter: (node) => node.data,
+    childrenGetter: (d) => d.children || undefined,
+    expandedGetter: (d) => !!d.expanded,
   };
 
   toPresentationNodes<N>(
@@ -30,7 +29,7 @@ export class NbTreeGridDataService<T> {
   private mapNodes<N>(nodes: N[], getters: NbGetters<N, T>, level: number): NbTreeGridPresentationNode<T>[] {
     const { dataGetter, childrenGetter, expandedGetter } = getters;
 
-    return nodes.map(node => {
+    return nodes.map((node) => {
       const childrenNodes = childrenGetter(node);
       let children: NbTreeGridPresentationNode<T>[];
       if (childrenNodes) {

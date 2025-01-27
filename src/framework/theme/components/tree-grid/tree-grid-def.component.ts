@@ -23,20 +23,18 @@ export interface NbTreeGridResponsiveRowDef {
 @Directive({
   selector: '[nbTreeGridRowDef]',
   providers: [{ provide: NbCdkRowDef, useExisting: NbTreeGridRowDefDirective }],
+  standalone: false,
 })
-export class NbTreeGridRowDefDirective<T> extends NbRowDefDirective<T>
-                                          implements OnChanges, NbTreeGridResponsiveRowDef {
-
+export class NbTreeGridRowDefDirective<T>
+  extends NbRowDefDirective<T>
+  implements OnChanges, NbTreeGridResponsiveRowDef
+{
   /**
    * Columns to be displayed on this row
    */
   @Input('nbTreeGridRowDefColumns') columns: Iterable<string>;
 
-  constructor(
-    template: TemplateRef<any>,
-    differs: IterableDiffers,
-    private columnsService: NbColumnsService,
-  ) {
+  constructor(template: TemplateRef<any>, differs: IterableDiffers, private columnsService: NbColumnsService) {
     super(template, differs);
   }
 
@@ -70,19 +68,18 @@ export class NbTreeGridRowDefDirective<T> extends NbRowDefDirective<T>
 @Directive({
   selector: '[nbTreeGridHeaderRowDef]',
   providers: [{ provide: NbCdkHeaderRowDef, useExisting: NbTreeGridHeaderRowDefDirective }],
+  standalone: false,
 })
-export class NbTreeGridHeaderRowDefDirective extends NbHeaderRowDefDirective
-                                             implements OnChanges, NbTreeGridResponsiveRowDef {
+export class NbTreeGridHeaderRowDefDirective
+  extends NbHeaderRowDefDirective
+  implements OnChanges, NbTreeGridResponsiveRowDef
+{
   /**
    * Columns to be displayed on this row
    */
   @Input('nbTreeGridHeaderRowDef') columns: Iterable<string>;
 
-  constructor(
-    template: TemplateRef<any>,
-    differs: IterableDiffers,
-    private columnsService: NbColumnsService,
-  ) {
+  constructor(template: TemplateRef<any>, differs: IterableDiffers, private columnsService: NbColumnsService) {
     super(template, differs);
   }
 
@@ -116,19 +113,18 @@ export class NbTreeGridHeaderRowDefDirective extends NbHeaderRowDefDirective
 @Directive({
   selector: '[nbTreeGridFooterRowDef]',
   providers: [{ provide: NbCdkFooterRowDef, useExisting: NbTreeGridFooterRowDefDirective }],
+  standalone: false,
 })
-export class NbTreeGridFooterRowDefDirective extends NbFooterRowDefDirective
-                                             implements OnChanges, NbTreeGridResponsiveRowDef {
+export class NbTreeGridFooterRowDefDirective
+  extends NbFooterRowDefDirective
+  implements OnChanges, NbTreeGridResponsiveRowDef
+{
   /**
    * Columns to be displayed on this row
    */
   @Input('nbTreeGridFooterRowDef') columns: Iterable<string>;
 
-  constructor(
-    template: TemplateRef<any>,
-    differs: IterableDiffers,
-    private columnsService: NbColumnsService,
-  ) {
+  constructor(template: TemplateRef<any>, differs: IterableDiffers, private columnsService: NbColumnsService) {
     super(template, differs);
   }
 
@@ -166,6 +162,7 @@ export class NbTreeGridFooterRowDefDirective extends NbFooterRowDefDirective
 @Directive({
   selector: '[nbTreeGridCellDef]',
   providers: [{ provide: NbCdkCellDef, useExisting: NbTreeGridCellDefDirective }],
+  standalone: false,
 })
 export class NbTreeGridCellDefDirective extends NbCellDefDirective {}
 
@@ -176,6 +173,7 @@ export class NbTreeGridCellDefDirective extends NbCellDefDirective {}
 @Directive({
   selector: '[nbTreeGridHeaderCellDef]',
   providers: [{ provide: NbCdkHeaderCellDef, useExisting: NbTreeGridHeaderCellDefDirective }],
+  standalone: false,
 })
 export class NbTreeGridHeaderCellDefDirective extends NbHeaderCellDefDirective {}
 
@@ -186,5 +184,6 @@ export class NbTreeGridHeaderCellDefDirective extends NbHeaderCellDefDirective {
 @Directive({
   selector: '[nbTreeGridFooterCellDef]',
   providers: [{ provide: NbCdkFooterCellDef, useExisting: NbTreeGridFooterCellDefDirective }],
+  standalone: false,
 })
 export class NbTreeGridFooterCellDefDirective extends NbFooterCellDefDirective {}

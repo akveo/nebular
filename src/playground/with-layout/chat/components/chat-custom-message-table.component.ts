@@ -20,9 +20,9 @@ import { Component, HostBinding, Input } from '@angular/core';
     </table>
   `,
   styleUrls: ['./chat-custom-message-table.component.scss'],
+  standalone: false,
 })
 export class ChatCustomMessageTableComponent {
-
   @Input() columns = [];
 
   @Input() rows = [];

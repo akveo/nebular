@@ -19,7 +19,6 @@ import { Component } from '@angular/core';
       :host ::ng-deep nb-layout-column.left {
         background-color: #76ecff;
       }
-
     `,
   ],
   template: `
@@ -28,22 +27,16 @@ import { Component } from '@angular/core';
         <a href="#" class="navbar-brand">Akveo</a>
       </nb-layout-header>
 
-      <nb-layout-column left>
-        Left
-      </nb-layout-column>
+      <nb-layout-column left> Left </nb-layout-column>
+      <nb-layout-column> Center </nb-layout-column>
       <nb-layout-column>
-        Center
-      </nb-layout-column>
-      <nb-layout-column>
-        Right<br>
+        Right<br />
         <div style="overflow: hidden">
-          <div style="width: 20000px; background: red;">super long </div>
+          <div style="width: 20000px; background: red;">super long</div>
         </div>
       </nb-layout-column>
 
-      <nb-layout-footer>
-        &copy; Akveo 2017
-      </nb-layout-footer>
+      <nb-layout-footer> &copy; Akveo 2017 </nb-layout-footer>
     </nb-layout>
 
     <nb-layout center id="layout-center">
@@ -51,24 +44,18 @@ import { Component } from '@angular/core';
         <a href="#" class="navbar-brand">Akveo</a>
       </nb-layout-header>
 
-      <nb-layout-column left>
-        Left
-      </nb-layout-column>
+      <nb-layout-column left> Left </nb-layout-column>
+      <nb-layout-column> Center </nb-layout-column>
       <nb-layout-column>
-        Center
-      </nb-layout-column>
-      <nb-layout-column>
-        Right<br>
+        Right<br />
         <div style="overflow: hidden">
-          <div style="width: 20000px; background: red;">super long </div>
+          <div style="width: 20000px; background: red;">super long</div>
         </div>
       </nb-layout-column>
 
-      <nb-layout-footer fixed>
-        &copy; Akveo 2017
-      </nb-layout-footer>
+      <nb-layout-footer fixed> &copy; Akveo 2017 </nb-layout-footer>
     </nb-layout>
-`,
+  `,
+  standalone: false,
 })
-export class LayoutTestComponent {
-}
+export class LayoutTestComponent {}

@@ -8,7 +8,6 @@ import { Component, EventEmitter, Output } from '@angular/core';
 
 import { NbLayoutDirectionService } from '../../../../services/direction.service';
 
-
 @Component({
   selector: 'nb-calendar-pageable-navigation',
   styleUrls: ['./calendar-pageable-navigation.component.scss'],
@@ -20,13 +19,13 @@ import { NbLayoutDirectionService } from '../../../../services/direction.service
       <nb-icon [icon]="isLtr ? 'chevron-right-outline' : 'chevron-left-outline'" pack="nebular-essentials"></nb-icon>
     </button>
   `,
+  standalone: false,
 })
 export class NbCalendarPageableNavigationComponent<D> {
   @Output() next = new EventEmitter<void>();
   @Output() prev = new EventEmitter<void>();
 
-  constructor(private directionService: NbLayoutDirectionService) {
-  }
+  constructor(private directionService: NbLayoutDirectionService) {}
 
   get isLtr(): boolean {
     return this.directionService.isLtr();

@@ -11,9 +11,9 @@ import { NbMenuItem } from '@nebular/theme';
   selector: 'nb-menu-showcase',
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './menu-showcase.component.html',
+  standalone: false,
 })
 export class MenuShowcaseComponent {
-
   items: NbMenuItem[] = [
     {
       title: 'Profile',

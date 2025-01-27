@@ -137,7 +137,7 @@ Last but not least - install the component styles into your styles.scss ([more d
 @include nb-install() {
   @include nb-theme-global();
   @include nb-auth-global(); // append the install mixin inside of the nb-install
-} ;
+}
 ```
 
 At this point, if you navigate to http://localhost:4200/#/auth/login the login form is shown.

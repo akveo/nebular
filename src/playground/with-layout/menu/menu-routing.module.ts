@@ -5,7 +5,7 @@
  */
 
 import { NgModule } from '@angular/core';
-import { RouterModule, Route} from '@angular/router';
+import { RouterModule, Route } from '@angular/router';
 import { MenuChildrenComponent } from './menu-children.component';
 import { MenuShowcaseComponent } from './menu-showcase.component';
 import { MenuAutoCollapseComponent } from './menu-autocollapse.component';
@@ -89,7 +89,7 @@ const routes: Route[] = [
 ];
 
 @NgModule({
-  imports: [ RouterModule.forChild(routes) ],
-  exports: [ RouterModule ],
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule],
 })
 export class MenuRoutingModule {}

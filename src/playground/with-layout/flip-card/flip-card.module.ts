@@ -21,6 +21,6 @@ import { FlipCardSizesComponent } from './flip-card-sizes.component';
     FlipCardShowcaseComponent,
     FlipCardSizesComponent,
   ],
-  imports: [ NbCardModule, FlipCardRoutingModule ],
+  imports: [NbCardModule, FlipCardRoutingModule],
 })
 export class FlipCardModule {}

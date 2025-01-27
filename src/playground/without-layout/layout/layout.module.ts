@@ -33,12 +33,6 @@ import { ThemeChangeTestComponent } from './theme-change-test.component';
     ThemeBreakpointTestComponent,
     ThemeChangeTestComponent,
   ],
-  imports: [
-    NbLayoutModule,
-    NbSidebarModule.forRoot(),
-    NbActionsModule,
-    NbCardModule,
-    LayoutRoutingModule,
-  ],
+  imports: [NbLayoutModule, NbSidebarModule.forRoot(), NbActionsModule, NbCardModule, LayoutRoutingModule],
 })
 export class LayoutModule {}

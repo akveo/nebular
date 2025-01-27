@@ -9,10 +9,10 @@ import { AutoFocusDialogComponent } from './components/auto-focus-dialog.compone
     <button nbButton (click)="openWithoutAutoFocus()">Without auto focus</button>
   `,
   styleUrls: ['./dialog-common.scss'],
+  standalone: false,
 })
 export class DialogAutoFocusComponent {
-  constructor(private dialogService: NbDialogService) {
-  }
+  constructor(private dialogService: NbDialogService) {}
 
   openWithAutoFocus() {
     this.open(true);

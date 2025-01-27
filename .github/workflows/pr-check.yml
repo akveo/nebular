@@ -57,43 +57,43 @@ jobs:
           name: built-packages
           path: dist
       - run: npm run build playground -- --configuration=production-wp
-#  lint:
-#    runs-on: ubuntu-latest
-#    steps:
-#      - uses: actions/checkout@v2
-#      - uses: actions/setup-node@v2
-#        with:
-#          node-version: '16'
-#      - run: npm ci
-#      - run: npm run ci:lint
-#  e2e:
-#    needs: build-packages
-#    runs-on: ubuntu-latest
-#    steps:
-#      - uses: actions/checkout@v2
-#      - uses: actions/setup-node@v2
-#        with:
-#          node-version: '16'
-#      - run: npm ci
-#      - uses: actions/download-artifact@v2
-#        with:
-#          name: built-packages
-#          path: dist
-#      - name: BrowserStack Setup
-#        uses: 'browserstack/github-actions@master'
-#        with:
-#          username: ${{ env.BSU }}
-#          access-key: ${{ env.BSK }}
-#      - name: Start BrowserStackLocal Tunnel
-#        uses: browserstack/github-actions/setup-local@master
-#        with:
-#          local-testing: start
-#      - name: Test
-#        run: npm run ng -- e2e playground-e2e --configuration=production-wp
-#      - name: Stop BrowserStackLocal Tunnel
-#        uses: browserstack/github-actions/setup-local@master
-#        with:
-#          local-testing: stop
+  #  lint:
+  #    runs-on: ubuntu-latest
+  #    steps:
+  #      - uses: actions/checkout@v2
+  #      - uses: actions/setup-node@v2
+  #        with:
+  #          node-version: '16'
+  #      - run: npm ci
+  #      - run: npm run ci:lint
+  #  e2e:
+  #    needs: build-packages
+  #    runs-on: ubuntu-latest
+  #    steps:
+  #      - uses: actions/checkout@v2
+  #      - uses: actions/setup-node@v2
+  #        with:
+  #          node-version: '16'
+  #      - run: npm ci
+  #      - uses: actions/download-artifact@v2
+  #        with:
+  #          name: built-packages
+  #          path: dist
+  #      - name: BrowserStack Setup
+  #        uses: 'browserstack/github-actions@master'
+  #        with:
+  #          username: ${{ env.BSU }}
+  #          access-key: ${{ env.BSK }}
+  #      - name: Start BrowserStackLocal Tunnel
+  #        uses: browserstack/github-actions/setup-local@master
+  #        with:
+  #          local-testing: start
+  #      - name: Test
+  #        run: npm run ng -- e2e playground-e2e --configuration=production-wp
+  #      - name: Stop BrowserStackLocal Tunnel
+  #        uses: browserstack/github-actions/setup-local@master
+  #        with:
+  #          local-testing: stop
   unit-test:
     needs: build-packages
     runs-on: ubuntu-latest

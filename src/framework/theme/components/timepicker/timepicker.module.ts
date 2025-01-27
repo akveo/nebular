@@ -18,13 +18,7 @@ import { NbCalendarTimeModelService } from '../calendar-kit/services/calendar-ti
 import { NB_TIME_PICKER_CONFIG, NbTimePickerConfig } from './model';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    NbOverlayModule,
-    NbListModule,
-    NbCardModule,
-    NbCalendarKitModule,
-  ],
+  imports: [CommonModule, NbOverlayModule, NbListModule, NbCardModule, NbCalendarKitModule],
   providers: [NbCalendarTimeModelService],
   exports: [NbTimePickerComponent, NbTimePickerCellComponent, NbTimePickerDirective],
   declarations: [NbTimePickerComponent, NbTimePickerCellComponent, NbTimePickerDirective],
@@ -33,14 +27,14 @@ export class NbTimepickerModule {
   static forRoot(config: NbTimePickerConfig = {}): ModuleWithProviders<NbTimepickerModule> {
     return {
       ngModule: NbTimepickerModule,
-      providers: [{provide: NB_TIME_PICKER_CONFIG, useValue: config}],
+      providers: [{ provide: NB_TIME_PICKER_CONFIG, useValue: config }],
     };
   }
 
   static forChild(config: NbTimePickerConfig = {}): ModuleWithProviders<NbTimepickerModule> {
     return {
       ngModule: NbTimepickerModule,
-      providers: [{provide: NB_TIME_PICKER_CONFIG, useValue: config}],
+      providers: [{ provide: NB_TIME_PICKER_CONFIG, useValue: config }],
     };
   }
 }

@@ -66,6 +66,7 @@ import { Component, Input, HostBinding } from '@angular/core';
       <nb-icon icon="chevron-down-outline" pack="nebular-essentials" aria-hidden="true"></nb-icon>
     </a>
   `,
+  standalone: false,
 })
 export class NbRevealCardComponent {
   /**

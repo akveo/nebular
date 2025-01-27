@@ -26,6 +26,7 @@ const ICON_NAME = 'chevron-left-outline';
       </nb-action>
     </nb-actions>
   `,
+  standalone: false,
 })
 export class NbActionsTestComponent {
   projectContent: boolean = false;

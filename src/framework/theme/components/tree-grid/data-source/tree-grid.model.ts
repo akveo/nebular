@@ -7,7 +7,7 @@
 export const NB_DEFAULT_ROW_LEVEL: number = 0;
 
 export type NbDataGetter<N, T> = (N) => T;
-export type NbChildrenGetter<N, T> = (N) => (T[] | undefined);
+export type NbChildrenGetter<N, T> = (N) => T[] | undefined;
 export type NbExpandedGetter<N> = (N) => boolean;
 
 export interface NbGetters<N, T> {

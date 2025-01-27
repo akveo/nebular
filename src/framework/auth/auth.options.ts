@@ -6,7 +6,7 @@ import { NbAuthToken, NbAuthTokenClass } from './services/token/token';
 
 export type NbAuthStrategyClass = new (...params: any[]) => NbAuthStrategy;
 
-export type NbAuthStrategies  = [NbAuthStrategyClass, NbAuthStrategyOptions][];
+export type NbAuthStrategies = [NbAuthStrategyClass, NbAuthStrategyOptions][];
 
 export interface NbAuthOptions {
   forms?: any;
@@ -14,11 +14,11 @@ export interface NbAuthOptions {
 }
 
 export interface NbAuthSocialLink {
-  link?: string,
-  url?: string,
-  target?: string,
-  title?: string,
-  icon?: string,
+  link?: string;
+  url?: string;
+  target?: string;
+  title?: string;
+  icon?: string;
 }
 
 const socialLinks: NbAuthSocialLink[] = [];
@@ -28,9 +28,10 @@ export const defaultAuthOptions: any = {
   forms: {
     login: {
       redirectDelay: 500, // delay before redirect after a successful login, while success message is shown to the user
-      strategy: 'email',  // provider id key. If you have multiple strategies, or what to use your own
-      rememberMe: true,   // whether to show or not the `rememberMe` checkbox
-      showMessages: {     // show/not show success/error messages
+      strategy: 'email', // provider id key. If you have multiple strategies, or what to use your own
+      rememberMe: true, // whether to show or not the `rememberMe` checkbox
+      showMessages: {
+        // show/not show success/error messages
         success: true,
         error: true,
       },
@@ -91,6 +92,6 @@ export const NB_AUTH_USER_OPTIONS = new InjectionToken<NbAuthOptions>('Nebular U
 export const NB_AUTH_STRATEGIES = new InjectionToken<NbAuthStrategies>('Nebular Auth Strategies');
 export const NB_AUTH_TOKENS = new InjectionToken<NbAuthTokenClass<NbAuthToken>[]>('Nebular Auth Tokens');
 export const NB_AUTH_INTERCEPTOR_HEADER = new InjectionToken<string>('Nebular Simple Interceptor Header');
-export const NB_AUTH_TOKEN_INTERCEPTOR_FILTER =
-       new InjectionToken<(req: HttpRequest<any>) => boolean>('Nebular Interceptor Filter');
-
+export const NB_AUTH_TOKEN_INTERCEPTOR_FILTER = new InjectionToken<(req: HttpRequest<any>) => boolean>(
+  'Nebular Interceptor Filter',
+);

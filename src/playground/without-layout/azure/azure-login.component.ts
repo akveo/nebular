@@ -27,6 +27,7 @@ import { AuthAzureToken } from './azure-adb2c-auth-strategy';
       </nb-layout-column>
     </nb-layout>
   `,
+  standalone: false,
 })
 export class AzureLoginComponent implements OnDestroy {
   token: AuthAzureToken;

@@ -9,7 +9,6 @@ import { Observable, Subject } from 'rxjs';
 
 import { NbOverlayRef } from '../cdk/overlay/mapping';
 
-
 /**
  * The `NbDialogRef` helps to manipulate dialog after it was created.
  * The dialog can be dismissed by using `close` method of the dialogRef.
@@ -17,7 +16,6 @@ import { NbOverlayRef } from '../cdk/overlay/mapping';
  * `onBackdropClick` streams click events on the backdrop of the dialog.
  * */
 export class NbDialogRef<T> {
-
   componentRef: ComponentRef<T>;
 
   /**

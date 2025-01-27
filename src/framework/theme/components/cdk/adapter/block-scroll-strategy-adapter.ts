@@ -5,16 +5,17 @@ import { NbLayoutScrollService } from '../../../services/scroll.service';
 import { NB_DOCUMENT } from '../../../theme.options';
 import { NbViewportRulerAdapter } from './viewport-ruler-adapter';
 
-
 /**
  * Overrides default block scroll strategy because default strategy blocks scrolling on the body only.
  * But Nebular has its own scrollable container - nb-layout. So, we need to block scrolling in it to.
  * */
 @Injectable()
 export class NbBlockScrollStrategyAdapter extends BlockScrollStrategy {
-  constructor(@Inject(NB_DOCUMENT) document: any,
-              viewportRuler: NbViewportRulerAdapter,
-              protected scrollService: NbLayoutScrollService) {
+  constructor(
+    @Inject(NB_DOCUMENT) document: any,
+    viewportRuler: NbViewportRulerAdapter,
+    protected scrollService: NbLayoutScrollService,
+  ) {
     super(viewportRuler, document);
   }
 
@@ -31,11 +32,13 @@ export class NbBlockScrollStrategyAdapter extends BlockScrollStrategy {
 
 @Injectable()
 export class NbScrollStrategyOptions extends ScrollStrategyOptions {
-  constructor(protected scrollService: NbLayoutScrollService,
-              protected scrollDispatcher: ScrollDispatcher,
-              protected viewportRuler: NbViewportRulerAdapter,
-              protected ngZone: NgZone,
-              @Inject(NB_DOCUMENT) protected document) {
+  constructor(
+    protected scrollService: NbLayoutScrollService,
+    protected scrollDispatcher: ScrollDispatcher,
+    protected viewportRuler: NbViewportRulerAdapter,
+    protected ngZone: NgZone,
+    @Inject(NB_DOCUMENT) protected document,
+  ) {
     super(scrollDispatcher, viewportRuler, ngZone, document);
   }
 

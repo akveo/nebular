@@ -5,7 +5,7 @@
  */
 
 import { NgModule } from '@angular/core';
-import { RouterModule, Route} from '@angular/router';
+import { RouterModule, Route } from '@angular/router';
 import { FormFieldShowcaseComponent } from './form-field-showcase.component';
 import { FormFieldPasswordComponent } from './form-field-password.component';
 import { FormFieldInputComponent } from './form-field-input.component';
@@ -26,7 +26,7 @@ const routes: Route[] = [
 ];
 
 @NgModule({
-  imports: [ RouterModule.forChild(routes) ],
-  exports: [ RouterModule ],
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule],
 })
 export class FormFieldRoutingModule {}
