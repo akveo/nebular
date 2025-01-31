@@ -4,10 +4,18 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { InjectionToken, ViewContainerRef } from '@angular/core';
+import { InjectionToken, InputSignal, Signal, ViewContainerRef } from '@angular/core';
 
 
 export const NB_DIALOG_CONFIG = new InjectionToken<NbDialogConfig>('Default dialog options');
+
+type DialogData<T> = {
+  [K in keyof T]: ExtractInputSignalType<T[K]>;
+};
+
+type ExtractInputSignalType<Type> = Type extends InputSignal<infer X> ? X : ExcludeSignal<Type>;
+
+type ExcludeSignal<Type> = Type extends Signal<unknown> ? never : Type;
 
 /**
  * Describes all available options that may be passed to the NbDialogService.
@@ -56,7 +64,7 @@ export class NbDialogConfig<D = any> {
    */
   viewContainerRef: ViewContainerRef;
 
-  context: D;
+  context: DialogData<D>;
 
   constructor(config: Partial<NbDialogConfig>) {
     Object.assign(this, config);
