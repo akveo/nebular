@@ -29,7 +29,7 @@ export class NbToastrTestComponent {
   constructor(private toastrService: NbToastrService) {}
 
   showToast(className: string) {
-    this.toastrService.show('testing toastr', '', { toastClass: className });
+    this.toastrService.show('testing toastr', '', undefined, { toastClass: className });
   }
 }
 
@@ -105,7 +105,7 @@ describe('toastr-service', () => {
   it('should merge user configurations with defaults', () => {
     const attachSpy = spyOn(containerStub, 'attach');
 
-    toastr.show('', '', {
+    toastr.show('', '', undefined, {
       position: NbGlobalLogicalPosition.BOTTOM_START,
       duration: 1234,
       preventDuplicates: true,
@@ -129,7 +129,7 @@ describe('toastr-service', () => {
     toastr.success('');
 
     expect(toastrSpy).toHaveBeenCalled();
-    const [, , { status }] = toastrSpy.calls.allArgs()[0];
+    const [, , , { status }] = toastrSpy.calls.allArgs()[0];
     expect(status).toBe('success');
   });
 
@@ -139,7 +139,7 @@ describe('toastr-service', () => {
     toastr.info('');
 
     expect(toastrSpy).toHaveBeenCalled();
-    const [, , { status }] = toastrSpy.calls.allArgs()[0];
+    const [, , , { status }] = toastrSpy.calls.allArgs()[0];
     expect(status).toBe('info');
   });
 
@@ -149,7 +149,7 @@ describe('toastr-service', () => {
     toastr.warning('');
 
     expect(toastrSpy).toHaveBeenCalled();
-    const [, , { status }] = toastrSpy.calls.allArgs()[0];
+    const [, , , { status }] = toastrSpy.calls.allArgs()[0];
     expect(status).toBe('warning');
   });
 
@@ -159,7 +159,7 @@ describe('toastr-service', () => {
     toastr.primary('');
 
     expect(toastrSpy).toHaveBeenCalled();
-    const [, , { status }] = toastrSpy.calls.allArgs()[0];
+    const [, , , { status }] = toastrSpy.calls.allArgs()[0];
     expect(status).toBe('primary');
   });
 
@@ -169,7 +169,7 @@ describe('toastr-service', () => {
     toastr.danger('');
 
     expect(toastrSpy).toHaveBeenCalled();
-    const [, , { status }] = toastrSpy.calls.allArgs()[0];
+    const [, , , { status }] = toastrSpy.calls.allArgs()[0];
     expect(status).toBe('danger');
   });
 
@@ -179,7 +179,7 @@ describe('toastr-service', () => {
     toastr.default('');
 
     expect(toastrSpy).toHaveBeenCalled();
-    const [, , { status }] = toastrSpy.calls.allArgs()[0];
+    const [, , , { status }] = toastrSpy.calls.allArgs()[0];
     expect(status).toBe('basic');
   });
 });

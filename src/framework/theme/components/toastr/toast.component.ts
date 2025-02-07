@@ -100,6 +100,7 @@ export class NbToastComponent implements OnInit, OnDestroy {
 
   @Output() destroy: EventEmitter<void> = new EventEmitter();
   @Output() toastClick: EventEmitter<void> = new EventEmitter();
+  @Output() toastCloseButton: EventEmitter<void> = new EventEmitter();
 
   @HostBinding('class.status-success')
   get success(): boolean {
@@ -139,6 +140,11 @@ export class NbToastComponent implements OnInit, OnDestroy {
   @HostBinding('class.destroy-by-click')
   get destroyByClick(): boolean {
     return this.toast.config.destroyByClick;
+  }
+
+  @HostBinding('class.destroy-by-close-button')
+  get destroyByCloseButton(): boolean {
+    return this.toast.config.destroyByCloseButton;
   }
 
   @HostBinding('class.has-icon')
@@ -187,5 +193,9 @@ export class NbToastComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.destroy.emit();
+  }
+
+  onClose() {
+    this.toastCloseButton.emit();
   }
 }

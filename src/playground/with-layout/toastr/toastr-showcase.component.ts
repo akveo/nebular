@@ -26,6 +26,6 @@ export class ToastrShowcaseComponent {
 
   showToast(position, status) {
     this.index += 1;
-    this.toastrService.show(status || 'Success', `Toast ${this.index}`, { position, status });
+    this.toastrService.show(status || 'Success', `Toast ${this.index}`, undefined, { position, status });
   }
 }

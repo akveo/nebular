@@ -1,6 +1,6 @@
 {
   "name": "@guestway-io/nebular-bootstrap",
-  "version": "14.0.2",
+  "version": "14.0.3",
   "description": "@nebular/bootstrap",
   "author": "akveo",
   "license": "MIT",
@@ -22,7 +22,7 @@
   ],
   "peerDependencies": {
     "bootstrap": "^5.0.0",
-    "@nebular/theme": "14.0.2"
+    "@nebular/theme": "^14.0.2"
   },
   "exports": {
     "./styles/prebuilt/corporate.css": {

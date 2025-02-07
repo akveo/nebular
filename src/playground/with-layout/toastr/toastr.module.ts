@@ -18,10 +18,13 @@ import { ToastrLimitComponent } from './toastr-limit.component';
 import { ToastrPreventDuplicatesBehaviourComponent } from './toastr-prevent-duplicates-behaviour.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { ToastrDestroyByCloseButtonComponent } from './toastr-destroy-by-close-button.component';
+import { ToastrActionsComponent } from './toastr-actions.component';
 
 @NgModule({
   declarations: [
     ToastrDestroyByClickComponent,
+    ToastrDestroyByCloseButtonComponent,
     ToastrDurationComponent,
     ToastrIconComponent,
     ToastrPositionsComponent,
@@ -30,6 +33,7 @@ import { FormsModule } from '@angular/forms';
     ToastrShowcaseComponent,
     ToastrStatusesComponent,
     ToastrLimitComponent,
+    ToastrActionsComponent,
   ],
   imports: [
     CommonModule,

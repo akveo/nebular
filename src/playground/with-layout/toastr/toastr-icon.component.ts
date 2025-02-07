@@ -30,6 +30,6 @@ export class ToastrIconComponent {
 
   showToast(iconName) {
     const iconConfig: NbIconConfig = { icon: iconName, pack: 'eva' };
-    this.toastrService.show('Message', `Toast: ${++this.index}`, iconConfig);
+    this.toastrService.show('Message', `Toast: ${++this.index}`, undefined, iconConfig);
   }
 }

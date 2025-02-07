@@ -18,7 +18,7 @@ export class ToastrLimitComponent {
   i: number = 1;
 
   showToast() {
-    this.toastrService.show(`Toast number ${this.i}`, `Toast with the limit`, {
+    this.toastrService.show(`Toast number ${this.i}`, `Toast with the limit`, undefined, {
       limit: 3,
       position: NbGlobalLogicalPosition.TOP_END,
     });

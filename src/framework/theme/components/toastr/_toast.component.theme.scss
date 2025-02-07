@@ -65,6 +65,13 @@
       }
     }
   }
+
+  @each $status in nb-get-statuses() {
+    nb-toast .actions-container .toast-action.status-#{$status} {
+      color: nb-theme(toastr-#{$status}-action-color);
+    }
+  }
+
   .toastr-overlay-container {
     z-index: 1041;
   }

@@ -115,7 +115,15 @@ import { NbChatCustomMessageDirective } from './chat-custom-message.directive';
     </div>
 
     <ng-template #customTemplate>
-      <nb-chat-message-text [sender]="sender" [date]="date" [dateFormat]="dateFormat" [message]="message">
+      <nb-chat-message-text
+        [sender]="sender"
+        [date]="date"
+        [dateFormat]="dateFormat"
+        [message]="message"
+        [postUserTemplateRef]="postUserTemplateRef"
+        [preUserTemplateRef]="preUserTemplateRef"
+        [templateContext]="_getTemplateContext()"
+      >
       </nb-chat-message-text>
       <div
         [class.nb-custom-message]="_areDefaultStylesEnabled()"
@@ -244,6 +252,12 @@ export class NbChatMessageComponent {
 
   @Input()
   public avatarTemplateRef: TemplateRef<any> | undefined;
+
+  @Input()
+  public postUserTemplateRef: TemplateRef<any> | undefined;
+
+  @Input()
+  public preUserTemplateRef: TemplateRef<any> | undefined;
 
   /**
    * Message type, available options `text|file|map|quote`

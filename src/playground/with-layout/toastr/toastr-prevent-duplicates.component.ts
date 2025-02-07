@@ -22,6 +22,6 @@ export class ToastrPreventDuplicatesComponent {
   constructor(private toastrService: NbToastrService) {}
 
   showToast(preventDuplicates) {
-    this.toastrService.show('This is super toast message', `This is toast title`, { preventDuplicates });
+    this.toastrService.show('This is super toast message', `This is toast title`, undefined, { preventDuplicates });
   }
 }

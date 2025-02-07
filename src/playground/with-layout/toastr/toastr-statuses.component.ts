@@ -33,6 +33,6 @@ export class ToastrStatusesComponent {
   constructor(private toastrService: NbToastrService) {}
 
   showToast(status: NbComponentStatus) {
-    this.toastrService.show(status, `Toast: ${++this.index}`, { status });
+    this.toastrService.show(status, `Toast: ${++this.index}`, undefined, { status });
   }
 }

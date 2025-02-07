@@ -24,6 +24,8 @@ export class ToastrDestroyByClickComponent {
   constructor(private toastrService: NbToastrService) {}
 
   showToast(destroyByClick) {
-    this.toastrService.show('This is super toast message', `This is toast number: ${++this.index}`, { destroyByClick });
+    this.toastrService.show('This is super toast message', `This is toast number: ${++this.index}`, undefined, {
+      destroyByClick,
+    });
   }
 }

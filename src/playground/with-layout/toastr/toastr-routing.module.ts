@@ -15,11 +15,17 @@ import { ToastrShowcaseComponent } from './toastr-showcase.component';
 import { ToastrStatusesComponent } from './toastr-statuses.component';
 import { ToastrPreventDuplicatesBehaviourComponent } from './toastr-prevent-duplicates-behaviour.component';
 import { ToastrLimitComponent } from './toastr-limit.component';
+import { ToastrDestroyByCloseButtonComponent } from './toastr-destroy-by-close-button.component';
+import { ToastrActionsComponent } from './toastr-actions.component';
 
 const routes: Route[] = [
   {
     path: 'toastr-destroy-by-click.component',
     component: ToastrDestroyByClickComponent,
+  },
+  {
+    path: 'toastr-destroy-by-close-button.component',
+    component: ToastrDestroyByCloseButtonComponent,
   },
   {
     path: 'toastr-duration.component',
@@ -52,6 +58,10 @@ const routes: Route[] = [
   {
     path: 'toastr-limit.component',
     component: ToastrLimitComponent,
+  },
+  {
+    path: 'toastr-actions.component',
+    component: ToastrActionsComponent,
   },
 ];
 

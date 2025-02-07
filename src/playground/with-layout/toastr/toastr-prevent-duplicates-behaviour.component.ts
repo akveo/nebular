@@ -35,7 +35,7 @@ export class ToastrPreventDuplicatesBehaviourComponent {
   option: NbDuplicateToastBehaviour = 'previous';
 
   showToast(message, status) {
-    this.toastrService.show(message, `This is toast title`, {
+    this.toastrService.show(message, `This is toast title`, undefined, {
       preventDuplicates: true,
       duplicatesBehaviour: this.option,
       status,

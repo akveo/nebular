@@ -9,9 +9,27 @@
   align-items: center;
   width: 25rem;
   margin: 0.5rem;
+  position: relative;
 
   .title {
     margin-right: 0.25rem;
+  }
+
+  .toast-close-button {
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 0.5rem;
+    cursor: pointer;
+    margin-left: 0.5rem;
+
+    &:hover nb-icon {
+      color: var(--color-danger-400);
+    }
+
+    nb-icon {
+      font-size: 1.1rem;
+    }
   }
 
   &.default,
@@ -24,6 +42,23 @@
 
   &.destroy-by-click {
     cursor: pointer;
+  }
+
+  .actions-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-top: 0.25rem;
+
+    .toast-action {
+      margin-right: 0.5rem;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+        opacity: 0.8;
+      }
+    }
   }
 
   nb-icon {

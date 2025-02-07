@@ -32,6 +32,8 @@ export class ToastrPositionsComponent {
   constructor(private toastrService: NbToastrService) {}
 
   showToast(position: NbGlobalPosition) {
-    this.toastrService.show('This is super toast message', `This is toast number: ${++this.index}`, { position });
+    this.toastrService.show('This is super toast message', `This is toast number: ${++this.index}`, undefined, {
+      position,
+    });
   }
 }

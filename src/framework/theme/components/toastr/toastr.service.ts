@@ -17,6 +17,7 @@ import { NB_TOASTR_CONFIG, NbToastrConfig } from './toastr-config';
 import { NbToast } from './model';
 import { NbToastComponent } from './toast.component';
 import { NB_DOCUMENT } from '../../theme.options';
+import { NbComponentStatus } from '../component-status';
 
 export class NbToastRef {
   toastInstance: NbToastComponent;
@@ -60,6 +61,10 @@ export class NbToastContainer {
 
     if (toast.config.destroyByClick) {
       this.subscribeOnClick(toastComponent, toast);
+    }
+
+    if (toast.config.destroyByCloseButton) {
+      this.subscribeOnCloseButton(toastComponent, toast);
     }
 
     if (toast.config.duration) {
@@ -139,7 +144,16 @@ export class NbToastContainer {
   protected subscribeOnClick(toastComponent: NbToastComponent, toast: NbToast) {
     toastComponent.toastClick
       .pipe(
-        filter(() => toast.config.destroyByClick),
+        filter(() => !toast.config.destroyByCloseButton && toast.config.destroyByClick),
+        takeUntil(toastComponent.destroy),
+      )
+      .subscribe(() => this.destroy(toast));
+  }
+
+  protected subscribeOnCloseButton(toastComponent: NbToastComponent, toast: NbToast) {
+    toastComponent.toastCloseButton
+      .pipe(
+        filter(() => toast.config.destroyByCloseButton),
         takeUntil(toastComponent.destroy),
       )
       .subscribe(() => this.destroy(toast));
@@ -289,59 +303,99 @@ export class NbToastrService {
   /**
    * Shows toast with message, title and user config.
    * */
-  show(message, title?, userConfig?: Partial<NbToastrConfig>): NbToastRef {
+  show(
+    message,
+    title?,
+    actions?: { text: string; color: NbComponentStatus; callback: () => any }[] | undefined,
+    userConfig?: Partial<NbToastrConfig>,
+  ): NbToastRef {
     const config = new NbToastrConfig({ ...this.globalConfig, ...userConfig });
     const container = this.containerRegistry.get(config.position);
-    const toast = { message, title, config };
+    const toast = { message, title, actions, config };
     return container.attach(toast);
   }
 
   /**
    * Shows success toast with message, title and user config.
    * */
-  success(message, title?, config?: Partial<NbToastrConfig>): NbToastRef {
-    return this.show(message, title, { ...config, status: 'success' });
+  success(
+    message,
+    title?,
+    actions?: { text: string; color: NbComponentStatus; callback: () => any }[] | undefined,
+    config?: Partial<NbToastrConfig>,
+  ): NbToastRef {
+    return this.show(message, title, actions, { ...config, status: 'success' });
   }
 
   /**
    * Shows info toast with message, title and user config.
    * */
-  info(message, title?, config?: Partial<NbToastrConfig>): NbToastRef {
-    return this.show(message, title, { ...config, status: 'info' });
+  info(
+    message,
+    title?,
+    actions?: { text: string; color: NbComponentStatus; callback: () => any }[] | undefined,
+    config?: Partial<NbToastrConfig>,
+  ): NbToastRef {
+    return this.show(message, title, actions, { ...config, status: 'info' });
   }
 
   /**
    * Shows warning toast with message, title and user config.
    * */
-  warning(message, title?, config?: Partial<NbToastrConfig>): NbToastRef {
-    return this.show(message, title, { ...config, status: 'warning' });
+  warning(
+    message,
+    title?,
+    actions?: { text: string; color: NbComponentStatus; callback: () => any }[] | undefined,
+    config?: Partial<NbToastrConfig>,
+  ): NbToastRef {
+    return this.show(message, title, actions, { ...config, status: 'warning' });
   }
 
   /**
    * Shows primary toast with message, title and user config.
    * */
-  primary(message, title?, config?: Partial<NbToastrConfig>): NbToastRef {
-    return this.show(message, title, { ...config, status: 'primary' });
+  primary(
+    message,
+    title?,
+    actions?: { text: string; color: NbComponentStatus; callback: () => any }[] | undefined,
+    config?: Partial<NbToastrConfig>,
+  ): NbToastRef {
+    return this.show(message, title, actions, { ...config, status: 'primary' });
   }
 
   /**
    * Shows danger toast with message, title and user config.
    * */
-  danger(message, title?, config?: Partial<NbToastrConfig>): NbToastRef {
-    return this.show(message, title, { ...config, status: 'danger' });
+  danger(
+    message,
+    title?,
+    actions?: { text: string; color: NbComponentStatus; callback: () => any }[] | undefined,
+    config?: Partial<NbToastrConfig>,
+  ): NbToastRef {
+    return this.show(message, title, actions, { ...config, status: 'danger' });
   }
 
   /**
    * Shows default toast with message, title and user config.
    * */
-  default(message, title?, config?: Partial<NbToastrConfig>): NbToastRef {
-    return this.show(message, title, { ...config, status: 'basic' });
+  default(
+    message,
+    title?,
+    actions?: { text: string; color: NbComponentStatus; callback: () => any }[] | undefined,
+    config?: Partial<NbToastrConfig>,
+  ): NbToastRef {
+    return this.show(message, title, actions, { ...config, status: 'basic' });
   }
 
   /**
    * Shows control toast with message, title and user config.
    * */
-  control(message, title?, config?: Partial<NbToastrConfig>): NbToastRef {
-    return this.default(message, title, { ...config, status: 'control' });
+  control(
+    message,
+    title?,
+    actions?: { text: string; color: NbComponentStatus; callback: () => any }[] | undefined,
+    config?: Partial<NbToastrConfig>,
+  ): NbToastRef {
+    return this.default(message, title, actions, { ...config, status: 'control' });
   }
 }

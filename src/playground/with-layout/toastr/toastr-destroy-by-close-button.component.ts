@@ -2,11 +2,10 @@ import { Component, HostBinding } from '@angular/core';
 import { NbToastrService } from '@nebular/theme';
 
 @Component({
-  selector: 'npg-toastr-duration',
+  selector: 'npg-toastr-destroy-by-close-button',
   template: `
-    <button nbButton (click)="showToast(3000)">Default 3000ms</button>
-    <button nbButton (click)="showToast(1000)">1000ms</button>
-    <button nbButton (click)="showToast(0)">Infinite</button>
+    <button nbButton (click)="showToast(true)">Destroy by close button</button>
+    <button nbButton (click)="showToast(false)">Destroy by click only</button>
   `,
   styles: [
     `
@@ -16,7 +15,7 @@ import { NbToastrService } from '@nebular/theme';
     `,
   ],
 })
-export class ToastrDurationComponent {
+export class ToastrDestroyByCloseButtonComponent {
   private index: number = 0;
 
   @HostBinding('class')
@@ -24,9 +23,10 @@ export class ToastrDurationComponent {
 
   constructor(private toastrService: NbToastrService) {}
 
-  showToast(duration) {
+  showToast(destroyByCloseButton) {
     this.toastrService.show('This is super toast message', `This is toast number: ${++this.index}`, undefined, {
-      duration,
+      destroyByClick: true,
+      destroyByCloseButton,
     });
   }
 }
