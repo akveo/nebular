@@ -13,7 +13,7 @@ jobs:
         with:
           node-version: '16'
           cache: 'npm'
-      - run: npm ci
+      - run: npm ci --force
       - run: npm run build:packages
       - uses: actions/upload-artifact@v4
         with:
@@ -30,7 +30,7 @@ jobs:
           node-version: '16'
           cache: 'npm'
       - run: |
-          npm ci
+          npm npm ci --force
           npm install rxjs@7.4.0
           npm run build:packages
   build-docs:
@@ -41,7 +41,7 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '16'
-      - run: npm ci
+      - run: npm ci --force
       - run: npm run docs:build
   build-playground:
     needs: build-packages
@@ -51,7 +51,7 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '16'
-      - run: npm ci
+      - run: npm ci --force
       - uses: actions/download-artifact@v2
         with:
           name: built-packages
@@ -105,7 +105,7 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '16'
-      - run: npm ci
+      - run: npm ci --force
       - uses: actions/download-artifact@v2
         with:
           name: built-packages
@@ -141,7 +141,7 @@ jobs:
         with:
           name: built-packages
           path: packages-smoke/.lib/
-      - run: npm ci
+      - run: npm ci --force
         working-directory: packages-smoke
       - name: Build
         run: npm run build -- --configuration=production
