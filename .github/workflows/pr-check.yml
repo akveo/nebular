@@ -30,7 +30,7 @@ jobs:
           node-version: '16'
           cache: 'npm'
       - run: |
-          npm npm ci --force
+          npm ci --force
           npm install rxjs@7.4.0
           npm run build:packages
   build-docs:
@@ -52,7 +52,7 @@ jobs:
         with:
           node-version: '16'
       - run: npm ci --force
-      - uses: actions/download-artifact@v2
+      - uses: actions/download-artifact@v4
         with:
           name: built-packages
           path: dist
@@ -75,7 +75,7 @@ jobs:
 #        with:
 #          node-version: '16'
 #      - run: npm ci
-#      - uses: actions/download-artifact@v2
+#      - uses: actions/download-artifact@v4
 #        with:
 #          name: built-packages
 #          path: dist
@@ -106,7 +106,7 @@ jobs:
         with:
           node-version: '16'
       - run: npm ci --force
-      - uses: actions/download-artifact@v2
+      - uses: actions/download-artifact@v4
         with:
           name: built-packages
           path: dist
@@ -137,7 +137,7 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '16'
-      - uses: actions/download-artifact@v2
+      - uses: actions/download-artifact@v4
         with:
           name: built-packages
           path: packages-smoke/.lib/
