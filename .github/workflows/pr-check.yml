@@ -29,7 +29,6 @@ jobs:
         with:
           node-version: 18.19.0
       - run: npm ci --legacy-peer-deps
-      - run: npm install rxjs@7.4.0
       - run: npm run build:packages
 
   build-docs:
