@@ -8,38 +8,51 @@ jobs:
   build-packages:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
         with:
-          node-version: '16'
+          node-version: 18.19.0
           cache: 'npm'
-      - run: npm ci --legacy-peer-deps
+      - run: npm ci
       - run: npm run build:packages
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v2
         with:
           name: built-packages
           path: 'dist/'
           retention-days: 1
+  # Remove once Angular drop support for RxJS@6
+  build-packages-rxjs-7:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18.19.0
+          cache: 'npm'
+      - run: |
+          npm ci
+          npm install rxjs@7.4.0
+          npm run build:packages
   build-docs:
     needs: build-packages
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
         with:
-          node-version: '16'
-      - run: npm ci --legacy-peer-deps
+          node-version: 18.19.0
+      - run: npm ci
       - run: npm run docs:build
   build-playground:
     needs: build-packages
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
         with:
-          node-version: '16'
-      - run: npm ci --legacy-peer-deps
-      - uses: actions/download-artifact@v4
+          node-version: 18.19.0
+      - run: npm ci
+      - uses: actions/download-artifact@v2
         with:
           name: built-packages
           path: dist
@@ -62,7 +75,7 @@ jobs:
 #        with:
 #          node-version: '16'
 #      - run: npm ci
-#      - uses: actions/download-artifact@v4
+#      - uses: actions/download-artifact@v2
 #        with:
 #          name: built-packages
 #          path: dist
@@ -88,12 +101,12 @@ jobs:
       BSU: debac1
       BSK: AhrdZMi5gFDy3CQQfJHs
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
         with:
-          node-version: '16'
-      - run: npm ci --legacy-peer-deps
-      - uses: actions/download-artifact@v4
+          node-version: 18.19.0
+      - run: npm ci
+      - uses: actions/download-artifact@v2
         with:
           name: built-packages
           path: dist
@@ -102,7 +115,6 @@ jobs:
         with:
           username: ${{ env.BSU }}
           access-key: ${{ env.BSK }}
-          github-app: 'beast'
       - name: Start BrowserStackLocal Tunnel
         uses: browserstack/github-actions/setup-local@master
         with:
@@ -121,15 +133,15 @@ jobs:
     needs: build-packages
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
         with:
-          node-version: '16'
-      - uses: actions/download-artifact@v4
+          node-version: 18.19.0
+      - uses: actions/download-artifact@v2
         with:
           name: built-packages
           path: packages-smoke/.lib/
-      - run: npm ci --legacy-peer-deps
+      - run: npm ci
         working-directory: packages-smoke
       - name: Build
         run: npm run build -- --configuration=production
