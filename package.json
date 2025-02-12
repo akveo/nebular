@@ -83,10 +83,10 @@
     "moment": "^2.22.2",
     "normalize.css": "8.0.0",
     "pace-js": "^1.0.2",
-    "rxjs": "^6.5.3",
+    "rxfire": "^6.0.0",
+    "rxjs": "^7.4.0",
     "tslib": "^2.3.0",
-    "zone.js": "~0.11.4",
-    "rxfire": "^6.0.0"
+    "zone.js": "~0.11.4"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~13.0.1",
