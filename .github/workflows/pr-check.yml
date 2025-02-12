@@ -102,6 +102,7 @@ jobs:
         with:
           username: ${{ env.BSU }}
           access-key: ${{ env.BSK }}
+          github-app: 'beast'
       - name: Start BrowserStackLocal Tunnel
         uses: browserstack/github-actions/setup-local@master
         with:
