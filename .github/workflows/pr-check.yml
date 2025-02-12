@@ -28,11 +28,10 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 18.19.0
-          cache: 'npm'
-      - run: |
-          npm ci --legacy-peer-deps
-          npm install rxjs@7.4.0
-          npm run build:packages
+      - run: npm ci --legacy-peer-deps
+      - run: npm install rxjs@7.4.0
+      - run: npm run build:packages
+
   build-docs:
     needs: build-packages
     runs-on: ubuntu-latest
