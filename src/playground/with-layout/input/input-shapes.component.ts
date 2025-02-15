@@ -7,7 +7,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  template: `
+    template: `
     <nb-card>
       <nb-card-body class="example-items-col">
         <input type="text" nbInput fullWidth shape="rectangle" placeholder="Rectangle">
@@ -16,5 +16,6 @@ import { Component } from '@angular/core';
       </nb-card-body>
     </nb-card>
   `,
+    standalone: false
 })
 export class InputShapesComponent {}

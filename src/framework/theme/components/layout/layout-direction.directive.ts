@@ -55,7 +55,8 @@ abstract class NbBaseLayoutDirectionDirective implements OnInit, OnDestroy {
  * ```
  */
 @Directive({
-  selector: '[nbLtr]',
+    selector: '[nbLtr]',
+    standalone: false
 })
 export class NbLtrDirective extends NbBaseLayoutDirectionDirective {
   constructor(
@@ -76,7 +77,8 @@ export class NbLtrDirective extends NbBaseLayoutDirectionDirective {
  * ```
  */
 @Directive({
-  selector: '[nbRtl]',
+    selector: '[nbRtl]',
+    standalone: false
 })
 export class NbRtlDirective extends NbBaseLayoutDirectionDirective {
   constructor(

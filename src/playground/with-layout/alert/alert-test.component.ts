@@ -7,8 +7,8 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'nb-alert-test',
-  template: `
+    selector: 'nb-alert-test',
+    template: `
     <nb-alert
       *ngFor="let alert of alerts"
       [size]="alert.size"
@@ -26,6 +26,7 @@ import { Component } from '@angular/core';
       Success message!
     </nb-alert>
   `,
+    standalone: false
 })
 export class AlertTestComponent {
 

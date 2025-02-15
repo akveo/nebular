@@ -1,9 +1,10 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 
 @Component({
-  templateUrl: './chat-custom-message.component.html',
-  styleUrls: ['./chat-custom-message.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    templateUrl: './chat-custom-message.component.html',
+    styleUrls: ['./chat-custom-message.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class ChatCustomMessageComponent implements OnInit {
 

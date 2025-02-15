@@ -30,7 +30,8 @@ interface CustomStructure {
 }
 
 @Component({
-  template: '',
+    template: '',
+    standalone: false
 })
 class BaseTreeGridTestComponent {
   columns: string[];
@@ -41,7 +42,7 @@ class BaseTreeGridTestComponent {
 }
 
 @Component({
-  template: `
+    template: `
     <table [nbTreeGrid]="dataSource">
       <tr nbTreeGridRow *nbTreeGridRowDef="let row; columns: columns"></tr>
 
@@ -51,11 +52,12 @@ class BaseTreeGridTestComponent {
       </ng-container>
     </table>
   `,
+    standalone: false
 })
 export class TreeGridBasicTestComponent extends BaseTreeGridTestComponent {}
 
 @Component({
-  template: `
+    template: `
     <table [nbTreeGrid]="dataSource">
       <tr nbTreeGridHeaderRow *nbTreeGridHeaderRowDef="columns"></tr>
       <tr nbTreeGridRow *nbTreeGridRowDef="let row; columns: columns"></tr>
@@ -66,6 +68,7 @@ export class TreeGridBasicTestComponent extends BaseTreeGridTestComponent {}
       </ng-container>
     </table>
   `,
+    standalone: false
 })
 export class TreeGridWithHeaderTestComponent extends BaseTreeGridTestComponent {}
 

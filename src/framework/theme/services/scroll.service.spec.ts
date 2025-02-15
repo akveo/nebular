@@ -17,21 +17,22 @@ let componentInstance: ScrollTestComponent;
 let scrollService: NbLayoutScrollService;
 
 @Component({
-  template: `
+    template: `
     <nb-layout [withScroll]="localScroll" #layout>
       <nb-layout-column>
         <div #resize></div>
       </nb-layout-column>
     </nb-layout>
   `,
-  styles: [
-    `
+    styles: [
+        `
       ::ng-deep nb-layout.with-scroll .scrollable-container {
         overflow: auto;
         height: 100vh;
       }
     `,
-  ],
+    ],
+    standalone: false
 })
 class ScrollTestComponent {
   @ViewChild('resize', { read: ElementRef }) private resizeElement: ElementRef;

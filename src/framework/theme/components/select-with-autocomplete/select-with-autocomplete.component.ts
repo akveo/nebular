@@ -76,20 +76,21 @@ import {
  * Component's public API (`@Input()` and `@Output()`) works in a same way as NbSelectComponent.
  */
 @Component({
-  selector: 'nb-select-with-autocomplete',
-  templateUrl: './select-with-autocomplete.component.html',
-  styleUrls: ['./select-with-autocomplete.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => NbSelectWithAutocompleteComponent),
-      multi: true,
-    },
-    { provide: NB_SELECT_INJECTION_TOKEN, useExisting: NbSelectWithAutocompleteComponent },
-    { provide: NbFormFieldControl, useExisting: NbSelectWithAutocompleteComponent },
-    { provide: NbFormFieldControlConfig, useFactory: nbSelectFormFieldControlConfigFactory },
-  ],
+    selector: 'nb-select-with-autocomplete',
+    templateUrl: './select-with-autocomplete.component.html',
+    styleUrls: ['./select-with-autocomplete.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => NbSelectWithAutocompleteComponent),
+            multi: true,
+        },
+        { provide: NB_SELECT_INJECTION_TOKEN, useExisting: NbSelectWithAutocompleteComponent },
+        { provide: NbFormFieldControl, useExisting: NbSelectWithAutocompleteComponent },
+        { provide: NbFormFieldControlConfig, useFactory: nbSelectFormFieldControlConfigFactory },
+    ],
+    standalone: false
 })
 export class NbSelectWithAutocompleteComponent
   implements OnChanges, AfterViewInit, AfterContentInit, OnDestroy, ControlValueAccessor, NbFormFieldControl

@@ -11,9 +11,10 @@ import { By } from '@angular/platform-browser';
 import { NbThemeModule, NbIconModule, NbIconLibraries, NbIconComponent } from '@nebular/theme';
 
 @Component({
-  template: `
+    template: `
     <nb-icon #iconEl [icon]="icon"></nb-icon>
   `,
+    standalone: false
 })
 class IconTestComponent {
   @Input() icon;

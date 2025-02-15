@@ -10,8 +10,9 @@ import { NbTagComponent, NbTagInputDirective } from '@nebular/theme';
 import { trees } from './trees-list';
 
 @Component({
-  templateUrl: './tag-input-with-autocomplete.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    templateUrl: './tag-input-with-autocomplete.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class TagInputWithAutocompleteComponent {
 

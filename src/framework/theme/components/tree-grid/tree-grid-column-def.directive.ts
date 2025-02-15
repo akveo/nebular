@@ -7,11 +7,12 @@ import { NB_SORT_HEADER_COLUMN_DEF, NbColumnDefDirective } from '../cdk/table/ce
  * Defines a set of cells available for a table column.
  */
 @Directive({
-  selector: '[nbTreeGridColumnDef]',
-  providers: [
-    { provide: NbCdkColumnDef, useExisting: NbTreeGridColumnDefDirective },
-    { provide: NB_SORT_HEADER_COLUMN_DEF, useExisting: NbTreeGridColumnDefDirective },
-  ],
+    selector: '[nbTreeGridColumnDef]',
+    providers: [
+        { provide: NbCdkColumnDef, useExisting: NbTreeGridColumnDefDirective },
+        { provide: NB_SORT_HEADER_COLUMN_DEF, useExisting: NbTreeGridColumnDefDirective },
+    ],
+    standalone: false
 })
 export class NbTreeGridColumnDefDirective extends NbColumnDefDirective implements OnChanges {
   /**

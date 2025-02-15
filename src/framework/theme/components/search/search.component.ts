@@ -35,18 +35,18 @@ import { NbOverlayRef, NbPortalDirective } from '../cdk/overlay/mapping';
  * can't be used itself
  */
 @Component({
-  selector: 'nb-search-field',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  styleUrls: [
-    'styles/search.component.modal-zoomin.scss',
-    'styles/search.component.layout-rotate.scss',
-    'styles/search.component.modal-move.scss',
-    'styles/search.component.curtain.scss',
-    'styles/search.component.column-curtain.scss',
-    'styles/search.component.modal-drop.scss',
-    'styles/search.component.modal-half.scss',
-  ],
-  template: `
+    selector: 'nb-search-field',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    styleUrls: [
+        'styles/search.component.modal-zoomin.scss',
+        'styles/search.component.layout-rotate.scss',
+        'styles/search.component.modal-move.scss',
+        'styles/search.component.curtain.scss',
+        'styles/search.component.column-curtain.scss',
+        'styles/search.component.modal-drop.scss',
+        'styles/search.component.modal-half.scss',
+    ],
+    template: `
     <div class="search" (keyup.esc)="emitClose()">
       <button (click)="emitClose()" nbButton ghost class="close-button">
         <nb-icon icon="close-outline" pack="nebular-essentials"></nb-icon>
@@ -67,6 +67,7 @@ import { NbOverlayRef, NbPortalDirective } from '../cdk/overlay/mapping';
       </div>
     </div>
   `,
+    standalone: false
 })
 export class NbSearchFieldComponent implements OnChanges, AfterViewInit {
 
@@ -217,10 +218,10 @@ export type NbSearchType = 'modal-zoomin' | 'rotate-layout' | 'modal-move' |
  * search-info-text-line-height:
  */
 @Component({
-  selector: 'nb-search',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  styleUrls: ['styles/search.component.scss'],
-  template: `
+    selector: 'nb-search',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    styleUrls: ['styles/search.component.scss'],
+    template: `
     <button #searchButton class="start-search" (click)="emitActivate()" nbButton ghost>
       <nb-icon icon="search-outline" pack="nebular-essentials"></nb-icon>
     </button>
@@ -235,6 +236,7 @@ export type NbSearchType = 'modal-zoomin' | 'rotate-layout' | 'modal-move' |
       (close)="emitDeactivate()">
     </nb-search-field>
   `,
+    standalone: false
 })
 export class NbSearchComponent implements OnInit, OnDestroy {
 

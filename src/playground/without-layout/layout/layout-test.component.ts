@@ -7,9 +7,9 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'nb-layout-test',
-  styles: [
-    `
+    selector: 'nb-layout-test',
+    styles: [
+        `
       :host ::ng-deep nb-layout-column {
         background-color: #fb75ff;
       }
@@ -21,8 +21,8 @@ import { Component } from '@angular/core';
       }
 
     `,
-  ],
-  template: `
+    ],
+    template: `
     <nb-layout id="layout-fluid">
       <nb-layout-header fixed>
         <a href="#" class="navbar-brand">Akveo</a>
@@ -69,6 +69,7 @@ import { Component } from '@angular/core';
       </nb-layout-footer>
     </nb-layout>
 `,
+    standalone: false
 })
 export class LayoutTestComponent {
 }

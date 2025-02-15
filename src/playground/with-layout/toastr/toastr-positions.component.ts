@@ -2,7 +2,7 @@ import { Component, HostBinding } from '@angular/core';
 import { NbGlobalLogicalPosition, NbGlobalPhysicalPosition, NbGlobalPosition, NbToastrService } from '@nebular/theme';
 
 @Component({
-  template: `
+    template: `
     <button nbButton (click)="showToast(physicalPositions.TOP_RIGHT)">Top Right</button>
     <button nbButton (click)="showToast(physicalPositions.BOTTOM_RIGHT)">Bottom Right</button>
     <button nbButton (click)="showToast(physicalPositions.TOP_LEFT)">Top Left</button>
@@ -12,13 +12,14 @@ import { NbGlobalLogicalPosition, NbGlobalPhysicalPosition, NbGlobalPosition, Nb
     <button nbButton (click)="showToast(logicalPositions.TOP_START)">Top Start</button>
     <button nbButton (click)="showToast(logicalPositions.BOTTOM_START)">Bottom Start</button>
   `,
-  styles: [
-    `
+    styles: [
+        `
       ::ng-deep nb-layout-column {
         height: 80vw;
       }
     `,
-  ],
+    ],
+    standalone: false
 })
 export class ToastrPositionsComponent {
   private index: number = 0;

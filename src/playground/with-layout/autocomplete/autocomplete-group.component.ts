@@ -16,9 +16,10 @@ export interface Group {
 }
 
 @Component({
-  selector: 'nb-autocomplete-group',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: './autocomplete-group.component.html',
+    selector: 'nb-autocomplete-group',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    templateUrl: './autocomplete-group.component.html',
+    standalone: false
 })
 export class AutocompleteGroupComponent implements OnInit {
 

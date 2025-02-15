@@ -108,9 +108,10 @@ import { NbBadgePosition } from '../badge/badge.component';
  * user-giant-title-text-line-height:
  */
 @Component({
-  selector: 'nb-user',
-  styleUrls: ['./user.component.scss'],
-  templateUrl: './user.component.html',
+    selector: 'nb-user',
+    styleUrls: ['./user.component.scss'],
+    templateUrl: './user.component.html',
+    standalone: false
 })
 export class NbUserComponent {
 

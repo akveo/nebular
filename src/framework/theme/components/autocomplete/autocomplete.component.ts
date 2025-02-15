@@ -36,10 +36,11 @@ let lastAutocompleteId: number = 0;
  * Provides an `NbOptionList` overlay component.
  * */
 @Component({
-  selector: 'nb-autocomplete',
-  templateUrl: './autocomplete.component.html',
-  styleUrls: ['./autocomplete.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'nb-autocomplete',
+    templateUrl: './autocomplete.component.html',
+    styleUrls: ['./autocomplete.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class NbAutocompleteComponent<T> implements AfterContentInit, OnDestroy {
   protected destroy$: Subject<void> = new Subject<void>();

@@ -24,9 +24,9 @@ import { NbAccordionItemComponent } from './accordion-item.component';
  * Component intended to be used within `<nb-accordion-item>` component
  */
 @Component({
-  selector: 'nb-accordion-item-header',
-  styleUrls: ['./accordion-item-header.component.scss'],
-  template: `
+    selector: 'nb-accordion-item-header',
+    styleUrls: ['./accordion-item-header.component.scss'],
+    template: `
     <ng-content select="nb-accordion-item-title"></ng-content>
     <ng-content select="nb-accordion-item-description"></ng-content>
     <ng-content></ng-content>
@@ -37,19 +37,17 @@ import { NbAccordionItemComponent } from './accordion-item.component';
              class="expansion-indicator">
     </nb-icon>
   `,
-  animations: [
-    trigger('expansionIndicator', [
-      state(
-        'expanded',
-        style({
-          transform: 'rotate(180deg)',
-        }),
-      ),
-      transition('collapsed => expanded', animate('100ms ease-in')),
-      transition('expanded => collapsed', animate('100ms ease-out')),
-    ]),
-  ],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    animations: [
+        trigger('expansionIndicator', [
+            state('expanded', style({
+                transform: 'rotate(180deg)',
+            })),
+            transition('collapsed => expanded', animate('100ms ease-in')),
+            transition('expanded => collapsed', animate('100ms ease-out')),
+        ]),
+    ],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class NbAccordionItemHeaderComponent implements OnInit, OnDestroy {
 

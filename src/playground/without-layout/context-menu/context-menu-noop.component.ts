@@ -9,9 +9,9 @@ import { NbContextMenuDirective } from '@nebular/theme';
 
 
 @Component({
-  selector: 'nb-context-menu-noop',
-  templateUrl: './context-menu-noop.component.html',
-  styles: [`
+    selector: 'nb-context-menu-noop',
+    templateUrl: './context-menu-noop.component.html',
+    styles: [`
     :host nb-layout-column {
       height: 50vw;
     }
@@ -23,6 +23,7 @@ import { NbContextMenuDirective } from '@nebular/theme';
       margin-top: 1rem;
     }
   `],
+    standalone: false
 })
 export class ContextMenuNoopComponent {
   @ViewChild(NbContextMenuDirective) contextMenu: NbContextMenuDirective;

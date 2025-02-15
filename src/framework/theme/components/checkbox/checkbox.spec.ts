@@ -152,7 +152,8 @@ describe('Component: NbCheckbox', () => {
 
 /** Test component with reactive forms */
 @Component({
-  template: `<nb-checkbox [formControl]="formControl"></nb-checkbox>`,
+    template: `<nb-checkbox [formControl]="formControl"></nb-checkbox>`,
+    standalone: false
 })
 class CheckboxWithFormControlComponent {
   formControl = new FormControl();

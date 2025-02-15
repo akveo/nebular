@@ -7,9 +7,10 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
-  selector: 'nb-user-avatar-settings',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: './user-avatar-settings.component.html',
+    selector: 'nb-user-avatar-settings',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    templateUrl: './user-avatar-settings.component.html',
+    standalone: false
 })
 export class UserAvatarSettingsComponent {
   base64image = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyBAMAAADsEZWCAAAAG1BMVEVEeef///+4zPaKq/ChvPPn7' +

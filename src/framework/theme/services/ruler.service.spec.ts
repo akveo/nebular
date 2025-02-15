@@ -17,13 +17,14 @@ let componentInstance: RulerTestComponent;
 let rulerService: NbLayoutRulerService;
 
 @Component({
-  template: `
+    template: `
     <nb-layout [withScroll]="localScroll" #layout>
       <nb-layout-column>
         <div #resize></div>
       </nb-layout-column>
     </nb-layout>
   `,
+    standalone: false
 })
 class RulerTestComponent {
   @ViewChild('resize', { read: ElementRef }) private resizeElement: ElementRef;

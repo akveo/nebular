@@ -2,15 +2,16 @@ import {ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit} fr
 import { NgdCodeLoaderService } from '../../../@theme/services';
 
 @Component({
-  selector: 'ngd-example-block',
-  template: `
+    selector: 'ngd-example-block',
+    template: `
     <ngd-code-block *ngIf="code"
       [firstLine]="firstLine"
       [lastLine]="lastLine"
       [code]="code">
     </ngd-code-block>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class NgdExampleBlockComponent {
 

@@ -11,11 +11,12 @@ import { By } from '@angular/platform-browser';
 import { NbComponentStatus, NbComponentSize, NbComponentShape, NbInputModule } from '@nebular/theme';
 
 @Component({
-  template: `
+    template: `
     <input #inputEl nbInput [fieldSize]="size" [status]="status" [shape]="shape" [fullWidth]="fullWidth" />
     <textarea #textareaEl nbInput [fieldSize]="size" [status]="status" [shape]="shape" [fullWidth]="fullWidth">
     </textarea>
   `,
+    standalone: false
 })
 class InputTestComponent {
   @Input() size: NbComponentSize;

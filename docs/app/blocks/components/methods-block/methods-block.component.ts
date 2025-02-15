@@ -8,8 +8,8 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { NgdMetadataService } from '../../../@theme/services';
 
 @Component({
-  selector: 'ngd-methods-block',
-  template: `
+    selector: 'ngd-methods-block',
+    template: `
     <h3>Methods</h3>
     <table>
       <thead>
@@ -42,7 +42,8 @@ import { NgdMetadataService } from '../../../@theme/services';
       </tbody>
     </table>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class NgdMethodsBlockComponent {
 

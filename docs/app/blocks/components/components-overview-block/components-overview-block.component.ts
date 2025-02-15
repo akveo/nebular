@@ -3,9 +3,10 @@ import { Component, OnInit } from '@angular/core';
 import { NgdMenuService } from '../../../@theme/services/menu.service';
 
 @Component({
-  selector: 'ngd-components-overview-block',
-  styleUrls: ['./components-overview-block.component.scss'],
-  templateUrl: './components-overview-block.component.html',
+    selector: 'ngd-components-overview-block',
+    styleUrls: ['./components-overview-block.component.scss'],
+    templateUrl: './components-overview-block.component.html',
+    standalone: false
 })
 export class NgdComponentsOverviewBlockComponent implements OnInit {
   components: { name: string; icon: string; link: string }[];

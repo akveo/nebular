@@ -37,8 +37,9 @@ import { NbComponentOrCustomStatus, NbComponentStatus } from '../component-statu
  * card-header-control-text-color:
  */
 @Component({
-  selector: 'nb-card-header',
-  template: `<ng-content></ng-content>`,
+    selector: 'nb-card-header',
+    template: `<ng-content></ng-content>`,
+    standalone: false
 })
 export class NbCardHeaderComponent {
 }
@@ -48,8 +49,9 @@ export class NbCardHeaderComponent {
  * Adds styles for a preset body section.
  */
 @Component({
-  selector: 'nb-card-body',
-  template: `<ng-content></ng-content>`,
+    selector: 'nb-card-body',
+    template: `<ng-content></ng-content>`,
+    standalone: false
 })
 export class NbCardBodyComponent {
 }
@@ -59,8 +61,9 @@ export class NbCardBodyComponent {
  * Adds styles for a preset footer section.
  */
 @Component({
-  selector: 'nb-card-footer',
-  template: `<ng-content></ng-content>`,
+    selector: 'nb-card-footer',
+    template: `<ng-content></ng-content>`,
+    standalone: false
 })
 export class NbCardFooterComponent {
 }
@@ -146,14 +149,15 @@ export class NbCardFooterComponent {
  * card-scrollbar-width:
  */
 @Component({
-  selector: 'nb-card',
-  styleUrls: ['./card.component.scss'],
-  template: `
+    selector: 'nb-card',
+    styleUrls: ['./card.component.scss'],
+    template: `
     <ng-content select="nb-card-header"></ng-content>
     <ng-content select="nb-card-body"></ng-content>
     <ng-content></ng-content>
     <ng-content select="nb-card-footer"></ng-content>
   `,
+    standalone: false
 })
 export class NbCardComponent {
 

@@ -42,16 +42,17 @@ const accordionItemBodyTrigger = trigger('accordionItemBody', [
  * Component intended to be used within `<nb-accordion-item>` component
  */
 @Component({
-  selector: 'nb-accordion-item-body',
-  template: `
+    selector: 'nb-accordion-item-body',
+    template: `
     <div [@accordionItemBody]="{ value: state }">
       <div class="item-body">
         <ng-content></ng-content>
       </div>
     </div>
   `,
-  animations: [accordionItemBodyTrigger],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    animations: [accordionItemBodyTrigger],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class NbAccordionItemBodyComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject<void>();

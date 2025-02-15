@@ -7,8 +7,9 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'nb-select-hero',
-  templateUrl: './select-hero.component.html',
+    selector: 'nb-select-hero',
+    templateUrl: './select-hero.component.html',
+    standalone: false
 })
 export class SelectHeroComponent {
 }

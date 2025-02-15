@@ -257,16 +257,16 @@ import { convertToBoolProperty, NbBooleanInput } from '../helpers';
  * toggle-control-disabled-text-color:
  */
 @Component({
-  selector: 'nb-toggle',
-  animations: [
-    trigger('position', [
-      state('right', style({ right: 0, left: '*' })),
-      state('left', style({ left: 0, right: '*' })),
-      transition(':enter', [animate(0)]),
-      transition('right <=> left', [animate('0.15s')]),
-    ]),
-  ],
-  template: `
+    selector: 'nb-toggle',
+    animations: [
+        trigger('position', [
+            state('right', style({ right: 0, left: '*' })),
+            state('left', style({ left: 0, right: '*' })),
+            transition(':enter', [animate(0)]),
+            transition('right <=> left', [animate('0.15s')]),
+        ]),
+    ],
+    template: `
     <label class="toggle-label">
       <input type="checkbox"
              class="native-input visually-hidden"
@@ -287,13 +287,14 @@ import { convertToBoolProperty, NbBooleanInput } from '../helpers';
       </span>
     </label>
   `,
-  styleUrls: [ `./toggle.component.scss` ],
-  providers: [{
-    provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => NbToggleComponent),
-    multi: true,
-  }],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    styleUrls: [`./toggle.component.scss`],
+    providers: [{
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => NbToggleComponent),
+            multi: true,
+        }],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class NbToggleComponent implements OnInit, AfterViewInit, OnDestroy, ControlValueAccessor {
 

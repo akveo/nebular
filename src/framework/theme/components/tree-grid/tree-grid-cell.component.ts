@@ -30,12 +30,13 @@ import { NB_DEFAULT_ROW_LEVEL } from './data-source/tree-grid.model';
 import { NbColumnsService } from './tree-grid-columns.service';
 
 @Directive({
-  selector: 'td[nbTreeGridCell]',
-  host: {
-    'class': 'nb-tree-grid-cell',
-    'role': 'gridcell',
-  },
-  providers: [{ provide: NbCdkCell, useExisting: NbTreeGridCellDirective }],
+    selector: 'td[nbTreeGridCell]',
+    host: {
+        'class': 'nb-tree-grid-cell',
+        'role': 'gridcell',
+    },
+    providers: [{ provide: NbCdkCell, useExisting: NbTreeGridCellDirective }],
+    standalone: false
 })
 export class NbTreeGridCellDirective extends NbCellDirective implements OnInit, OnDestroy {
   private destroy$ = new Subject<void>();
@@ -142,12 +143,13 @@ export class NbTreeGridCellDirective extends NbCellDirective implements OnInit, 
 }
 
 @Directive({
-  selector: 'th[nbTreeGridHeaderCell]',
-  host: {
-    'class': 'nb-tree-grid-header-cell',
-    'role': 'columnheader',
-  },
-  providers: [{ provide: NbCdkHeaderCell, useExisting: NbTreeGridHeaderCellDirective }],
+    selector: 'th[nbTreeGridHeaderCell]',
+    host: {
+        'class': 'nb-tree-grid-header-cell',
+        'role': 'columnheader',
+    },
+    providers: [{ provide: NbCdkHeaderCell, useExisting: NbTreeGridHeaderCellDirective }],
+    standalone: false
 })
 export class NbTreeGridHeaderCellDirective extends NbHeaderCellDirective implements OnInit, OnDestroy {
   private destroy$ = new Subject<void>();
@@ -187,12 +189,13 @@ export class NbTreeGridHeaderCellDirective extends NbHeaderCellDirective impleme
 }
 
 @Directive({
-  selector: 'td[nbTreeGridFooterCell]',
-  host: {
-    'class': 'nb-tree-grid-footer-cell',
-    'role': 'gridcell',
-  },
-  providers: [{ provide: NbCdkFooterCell, useExisting: NbTreeGridFooterCellDirective }],
+    selector: 'td[nbTreeGridFooterCell]',
+    host: {
+        'class': 'nb-tree-grid-footer-cell',
+        'role': 'gridcell',
+    },
+    providers: [{ provide: NbCdkFooterCell, useExisting: NbTreeGridFooterCellDirective }],
+    standalone: false
 })
 export class NbTreeGridFooterCellDirective extends NbFooterCellDirective implements OnInit, OnDestroy {
   private destroy$ = new Subject<void>();

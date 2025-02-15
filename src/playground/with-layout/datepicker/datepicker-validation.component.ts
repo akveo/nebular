@@ -9,8 +9,8 @@ import { NbDateService } from '@nebular/theme';
 
 
 @Component({
-  selector: 'nb-datepicker-validation',
-  template: `
+    selector: 'nb-datepicker-validation',
+    template: `
     <nb-card size="large">
       <nb-card-body>
         <input nbInput placeholder="Pick Date" [nbDatepicker]="picker">
@@ -18,7 +18,8 @@ import { NbDateService } from '@nebular/theme';
       </nb-card-body>
     </nb-card>
   `,
-  styleUrls: ['./datepicker-example.scss'],
+    styleUrls: ['./datepicker-example.scss'],
+    standalone: false
 })
 export class DatepickerValidationComponent {
   min: Date;

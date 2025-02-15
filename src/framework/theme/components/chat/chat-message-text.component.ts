@@ -10,12 +10,13 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
  * Chat message component.
  */
 @Component({
-  selector: 'nb-chat-message-text',
-  template: `
+    selector: 'nb-chat-message-text',
+    template: `
     <p class="sender" *ngIf="sender || date">{{ sender }} <time>{{ date  | date: dateFormat }}</time></p>
     <p class="text" *ngIf="message">{{ message }}</p>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class NbChatMessageTextComponent {
 

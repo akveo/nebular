@@ -24,8 +24,8 @@ export const MONTHS_IN_VIEW = 12;
 export const MONTHS_IN_COLUMN = 4;
 
 @Component({
-  selector: 'nb-calendar-month-picker',
-  template: `
+    selector: 'nb-calendar-month-picker',
+    template: `
     <nb-calendar-picker
       [data]="months"
       [min]="min"
@@ -38,7 +38,8 @@ export const MONTHS_IN_COLUMN = 4;
       (select)="onSelect($event)">
     </nb-calendar-picker>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class NbCalendarMonthPickerComponent<D, T> implements OnChanges {
 

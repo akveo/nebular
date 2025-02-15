@@ -20,8 +20,8 @@ import { NbDateService } from '../../services/date.service';
 import { NbCalendarYearModelService } from '../../services/calendar-year-model.service';
 
 @Component({
-  selector: 'nb-calendar-year-picker',
-  template: `
+    selector: 'nb-calendar-year-picker',
+    template: `
     <nb-calendar-picker
       [data]="years"
       [min]="min"
@@ -34,7 +34,8 @@ import { NbCalendarYearModelService } from '../../services/calendar-year-model.s
       (select)="onSelect($event)">
     </nb-calendar-picker>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class NbCalendarYearPickerComponent<D> implements OnChanges {
 

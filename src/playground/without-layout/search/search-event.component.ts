@@ -2,8 +2,9 @@ import { Component } from '@angular/core';
 import { NbSearchService } from '@nebular/theme';
 
 @Component({
-  selector: 'nb-search-event',
-  templateUrl: './search-event.component.html',
+    selector: 'nb-search-event',
+    templateUrl: './search-event.component.html',
+    standalone: false
 })
 export class SearchEventComponent {
 

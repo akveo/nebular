@@ -6,8 +6,9 @@ import { Component } from '@angular/core';
  * Use it as a container for the front card.
  */
 @Component({
-  selector: 'nb-card-front',
-  template: '<ng-content select="nb-card"></ng-content>',
+    selector: 'nb-card-front',
+    template: '<ng-content select="nb-card"></ng-content>',
+    standalone: false
 })
 export class NbCardFrontComponent { }
 
@@ -17,7 +18,8 @@ export class NbCardFrontComponent { }
  * Use it as a container for the back card.
  */
 @Component({
-  selector: 'nb-card-back',
-  template: '<ng-content select="nb-card"></ng-content>',
+    selector: 'nb-card-back',
+    template: '<ng-content select="nb-card"></ng-content>',
+    standalone: false
 })
 export class NbCardBackComponent { }

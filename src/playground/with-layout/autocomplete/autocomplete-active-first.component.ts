@@ -11,9 +11,10 @@ import { FormControl } from '@angular/forms';
 import { map, startWith } from 'rxjs/operators';
 
 @Component({
-  selector: 'nb-autocomplete-active-first',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: './autocomplete-active-first.component.html',
+    selector: 'nb-autocomplete-active-first',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    templateUrl: './autocomplete-active-first.component.html',
+    standalone: false
 })
 export class AutocompleteActiveFirstComponent implements OnInit {
 

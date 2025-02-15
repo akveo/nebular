@@ -11,7 +11,8 @@ import { NbTreeGridCellDirective } from './tree-grid-cell.component';
  * When using custom row toggle, apply this directive on your toggle to toggle row on element click.
  */
 @Directive({
-  selector: '[nbTreeGridRowToggle]',
+    selector: '[nbTreeGridRowToggle]',
+    standalone: false
 })
 export class NbTreeGridRowToggleDirective {
   @HostListener('click', ['$event'])

@@ -3,9 +3,9 @@ import { SafeHtml } from '@angular/platform-browser';
 import { NgdHighlightService } from '../../../@theme/services';
 
 @Component({
-  selector: 'ngd-code-block',
-  styleUrls: ['./code-block.component.scss'],
-  template: `
+    selector: 'ngd-code-block',
+    styleUrls: ['./code-block.component.scss'],
+    template: `
     <div class="container">
       <div class="lines">
         <span *ngFor="let line of lines">{{ line }}</span>
@@ -13,7 +13,8 @@ import { NgdHighlightService } from '../../../@theme/services';
       <pre><code class="hljs" [innerHTML]="code"></code></pre>
     </div>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class NgdCodeBlockComponent {
 

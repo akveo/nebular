@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'nb-app-spinner-tabs',
-  template: `
+    selector: 'nb-app-spinner-tabs',
+    template: `
     <nb-card size="small">
       <nb-card-body>
 
@@ -25,11 +25,12 @@ import { Component } from '@angular/core';
       </nb-card-body>
     </nb-card>
   `,
-  styles: [`
+    styles: [`
     :host nb-tab {
       padding: 1.25rem;
     }
   `],
+    standalone: false
 })
 export class SpinnerTabsComponent {
 

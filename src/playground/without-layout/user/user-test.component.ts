@@ -7,15 +7,15 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'nb-user-test',
-  styles: [
-    `
+    selector: 'nb-user-test',
+    styles: [
+        `
       .test-row {
         margin: 20px;
       }
     `,
-  ],
-  template: `
+    ],
+    template: `
     <nb-layout id="layout-fluid">
       <nb-layout-header fixed>
         <nb-user showInitials size="medium" name="Dmitry Nehaychik" title="Worker"></nb-user>
@@ -118,6 +118,7 @@ import { Component } from '@angular/core';
       </nb-layout-column>
     </nb-layout>
   `,
+    standalone: false
 })
 export class UserTestComponent {
 }

@@ -2,14 +2,15 @@ import { Component, TemplateRef, ViewChild } from '@angular/core';
 import { NbWindowService } from '@nebular/theme';
 
 @Component({
-  template: `
+    template: `
     <button (click)="openWindow()" nbButton>Open window</button>
 
     <ng-template #contentTemplate let-data>
       <p>Here is the text provided via config: "{{ data.text }}"</p>
     </ng-template>
   `,
-  styleUrls: [ './window.scss' ],
+    styleUrls: ['./window.scss'],
+    standalone: false
 })
 export class TemplateWindowComponent {
 

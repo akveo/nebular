@@ -65,8 +65,8 @@ class OverlayServiceWithManualKeyDownTrigger extends NbOverlayService {
 }
 
 @Component({
-  selector: 'nb-autocomplete-test',
-  template: `
+    selector: 'nb-autocomplete-test',
+    template: `
     <nb-layout>
       <nb-layout-column>
 
@@ -90,6 +90,7 @@ class OverlayServiceWithManualKeyDownTrigger extends NbOverlayService {
       </nb-layout-column>
     </nb-layout>
   `,
+    standalone: false
 })
 export class NbAutocompleteTestComponent {
 

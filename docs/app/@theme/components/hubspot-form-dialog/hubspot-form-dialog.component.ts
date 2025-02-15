@@ -10,7 +10,7 @@ import { NB_WINDOW, NbDialogRef } from '@nebular/theme';
 let formContainerUniqueId = 0;
 
 @Component({
-  template: `
+    template: `
     <nb-card>
       <nb-card-header>
         <span>{{ title }}</span>
@@ -23,7 +23,8 @@ let formContainerUniqueId = 0;
       </nb-card-body>
     </nb-card>
   `,
-  styleUrls: ['./hubspot-form-dialog.component.scss'],
+    styleUrls: ['./hubspot-form-dialog.component.scss'],
+    standalone: false
 })
 export class NgdHubspotFormDialogComponent implements OnInit, AfterViewInit {
 

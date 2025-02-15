@@ -2,8 +2,8 @@ import { Component, ElementRef, Inject, Input, OnInit, ViewChild } from '@angula
 import { NB_DOCUMENT, NB_WINDOW } from '@nebular/theme';
 
 @Component({
-  selector: 'ngd-akveo-services-banner',
-  template: `
+    selector: 'ngd-akveo-services-banner',
+    template: `
     <span #wrapper class="hs-cta-wrapper" id="hs-cta-wrapper-{{ctaId}}">
       <span class="hs-cta-node hs-cta-{{ctaId}}" id="hs-cta-{{ctaId}}">
         <a href="https://cta-redirect.hubspot.com/cta/redirect/2452262/{{ctaId}}" target="_blank">
@@ -17,7 +17,8 @@ import { NB_DOCUMENT, NB_WINDOW } from '@nebular/theme';
       </span>
     </span>
   `,
-  styleUrls: ['akveo-services-banner.component.scss'],
+    styleUrls: ['akveo-services-banner.component.scss'],
+    standalone: false
 })
 
 export class AkveoServicesBanner implements OnInit {

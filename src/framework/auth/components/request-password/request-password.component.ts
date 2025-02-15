@@ -12,10 +12,11 @@ import { NbAuthService } from '../../services/auth.service';
 import { NbAuthResult } from '../../services/auth-result';
 
 @Component({
-  selector: 'nb-request-password-page',
-  styleUrls: ['./request-password.component.scss'],
-  templateUrl: './request-password.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'nb-request-password-page',
+    styleUrls: ['./request-password.component.scss'],
+    templateUrl: './request-password.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class NbRequestPasswordComponent {
 

@@ -169,14 +169,15 @@ import { NB_DOCUMENT } from '../../theme.options';
  * timepicker-container-height:
  * */
 @Directive({
-  selector: 'input[nbTimepicker]',
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => NbTimePickerDirective),
-      multi: true,
-    },
-  ],
+    selector: 'input[nbTimepicker]',
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => NbTimePickerDirective),
+            multi: true,
+        },
+    ],
+    standalone: false
 })
 export class NbTimePickerDirective<D> implements AfterViewInit, ControlValueAccessor {
   /**

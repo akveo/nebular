@@ -8,9 +8,10 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { NbMenuItem } from '@nebular/theme';
 
 @Component({
-  selector: 'nb-menu-link-params',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: './menu-link-params.component.html',
+    selector: 'nb-menu-link-params',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    templateUrl: './menu-link-params.component.html',
+    standalone: false
 })
 export class MenuLinkParamsComponent {
 

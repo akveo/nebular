@@ -5,7 +5,7 @@ import { By } from '@angular/platform-browser';
 import { NbThemeModule, NbChatModule, NbChatComponent } from '@nebular/theme';
 
 @Component({
-  template: `
+    template: `
     <nb-chat [title]="title">
       <ng-template nbChatTitle [context]="{ text: contextTemplateText }" let-data>
         {{ staticTemplateText }} {{ data.text }}
@@ -29,6 +29,7 @@ import { NbThemeModule, NbChatModule, NbChatComponent } from '@nebular/theme';
       <nb-chat-form [dropFiles]="false"> </nb-chat-form>
     </nb-chat>
   `,
+    standalone: false
 })
 export class NbChatTitleTemplateTestComponent {
   messages = [

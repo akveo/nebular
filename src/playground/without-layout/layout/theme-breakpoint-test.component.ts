@@ -9,8 +9,8 @@ import { Component } from '@angular/core';
 import { NbThemeService } from '@nebular/theme';
 
 @Component({
-  selector: 'nb-breakpoint-test',
-  template: `
+    selector: 'nb-breakpoint-test',
+    template: `
     <nb-layout>
       <nb-layout-header fixed>
         <a href="#" class="navbar-brand">Akveo</a>
@@ -33,6 +33,7 @@ import { NbThemeService } from '@nebular/theme';
       </nb-layout-footer>
     </nb-layout>
   `,
+    standalone: false
 })
 export class ThemeBreakpointTestComponent {
 

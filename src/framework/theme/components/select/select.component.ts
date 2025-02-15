@@ -60,8 +60,9 @@ export type NbSelectCompareFunction<T = any> = (v1: any, v2: any) => boolean;
 export type NbSelectAppearance = 'outline' | 'filled' | 'hero';
 
 @Component({
-  selector: 'nb-select-label',
-  template: '<ng-content></ng-content>',
+    selector: 'nb-select-label',
+    template: '<ng-content></ng-content>',
+    standalone: false
 })
 export class NbSelectLabelComponent {}
 
@@ -503,20 +504,21 @@ export function nbSelectFormFieldControlConfigFactory() {
  * select-hero-control-disabled-text-color:
  * */
 @Component({
-  selector: 'nb-select',
-  templateUrl: './select.component.html',
-  styleUrls: ['./select.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => NbSelectComponent),
-      multi: true,
-    },
-    { provide: NB_SELECT_INJECTION_TOKEN, useExisting: NbSelectComponent },
-    { provide: NbFormFieldControl, useExisting: NbSelectComponent },
-    { provide: NbFormFieldControlConfig, useFactory: nbSelectFormFieldControlConfigFactory },
-  ],
+    selector: 'nb-select',
+    templateUrl: './select.component.html',
+    styleUrls: ['./select.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => NbSelectComponent),
+            multi: true,
+        },
+        { provide: NB_SELECT_INJECTION_TOKEN, useExisting: NbSelectComponent },
+        { provide: NbFormFieldControl, useExisting: NbSelectComponent },
+        { provide: NbFormFieldControlConfig, useFactory: nbSelectFormFieldControlConfigFactory },
+    ],
+    standalone: false
 })
 export class NbSelectComponent
   implements OnChanges, AfterViewInit, AfterContentInit, OnDestroy, ControlValueAccessor, NbFormFieldControl

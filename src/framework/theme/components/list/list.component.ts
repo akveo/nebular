@@ -38,9 +38,10 @@ import { Component, Input, HostBinding } from '@angular/core';
  * list-item-line-height:
  */
 @Component({
-  selector: 'nb-list',
-  template: `<ng-content select="nb-list-item"></ng-content>`,
-  styleUrls: [ './list.component.scss' ],
+    selector: 'nb-list',
+    template: `<ng-content select="nb-list-item"></ng-content>`,
+    styleUrls: ['./list.component.scss'],
+    standalone: false
 })
 export class NbListComponent {
   /**
@@ -58,9 +59,10 @@ export class NbListComponent {
  * It should be direct child of `nb-list` componet.
  */
 @Component({
-  selector: 'nb-list-item',
-  template: `<ng-content></ng-content>`,
-  styleUrls: [ 'list-item.component.scss' ],
+    selector: 'nb-list-item',
+    template: `<ng-content></ng-content>`,
+    styleUrls: ['list-item.component.scss'],
+    standalone: false
 })
 export class NbListItemComponent {
   /**

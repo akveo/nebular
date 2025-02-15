@@ -21,9 +21,10 @@ interface FSEntry {
 }
 
 @Component({
-  selector: 'nb-tree-grid-showcase',
-  templateUrl: './tree-grid-showcase.component.html',
-  styleUrls: ['./tree-grid-shared.scss', './tree-grid-showcase.component.scss'],
+    selector: 'nb-tree-grid-showcase',
+    templateUrl: './tree-grid-showcase.component.html',
+    styleUrls: ['./tree-grid-shared.scss', './tree-grid-showcase.component.scss'],
+    standalone: false
 })
 export class TreeGridShowcaseComponent {
   customColumn = 'name';
@@ -103,14 +104,15 @@ export class TreeGridShowcaseComponent {
 }
 
 @Component({
-  selector: 'nb-fs-icon',
-  template: `
+    selector: 'nb-fs-icon',
+    template: `
     <nb-tree-grid-row-toggle [expanded]="expanded" *ngIf="isDir(); else fileIcon">
     </nb-tree-grid-row-toggle>
     <ng-template #fileIcon>
       <nb-icon icon="file-text-outline"></nb-icon>
     </ng-template>
   `,
+    standalone: false
 })
 export class FsIconComponent {
   @Input() kind: string;

@@ -10,9 +10,9 @@ import { ActivatedRoute } from '@angular/router';
 import { combineLatest, Subject, Observable } from 'rxjs';
 
 @Component({
-  selector: 'ngd-page-toc',
-  styleUrls: ['./page-toc.component.scss'],
-  template: `
+    selector: 'ngd-page-toc',
+    styleUrls: ['./page-toc.component.scss'],
+    template: `
     <ng-container *ngIf="items?.length > 0">
       <h4>Overview</h4>
       <ul>
@@ -22,7 +22,8 @@ import { combineLatest, Subject, Observable } from 'rxjs';
       </ul>
     </ng-container>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class NgdPageTocComponent implements OnDestroy {
 

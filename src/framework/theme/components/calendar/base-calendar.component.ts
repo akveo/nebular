@@ -23,8 +23,9 @@ import { convertToBoolProperty, NbBooleanInput } from '../helpers';
  * between pickers.
  * */
 @Component({
-  selector: 'nb-base-calendar',
-  templateUrl: './base-calendar.component.html',
+    selector: 'nb-base-calendar',
+    templateUrl: './base-calendar.component.html',
+    standalone: false
 })
 export class NbBaseCalendarComponent<D, T> implements OnInit {
 

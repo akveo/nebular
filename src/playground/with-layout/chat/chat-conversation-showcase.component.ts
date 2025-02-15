@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'nb-chat-conversation-showcase',
-  styles: [`
+    selector: 'nb-chat-conversation-showcase',
+    styles: [`
     ::ng-deep nb-layout-column {
       display: flex;
       justify-content: center;
@@ -15,7 +15,8 @@ import { Component } from '@angular/core';
       margin: 1rem;
     }
   `],
-  templateUrl: './chat-conversation-showcase.component.html',
+    templateUrl: './chat-conversation-showcase.component.html',
+    standalone: false
 })
 
 export class ChatConversationShowcaseComponent {

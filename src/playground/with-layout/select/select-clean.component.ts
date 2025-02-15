@@ -7,7 +7,8 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'nb-select-clean',
-  templateUrl: './select-clean.component.html',
+    selector: 'nb-select-clean',
+    templateUrl: './select-clean.component.html',
+    standalone: false
 })
 export class SelectCleanComponent {}

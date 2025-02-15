@@ -7,8 +7,8 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'nb-card-test',
-  template: `
+    selector: 'nb-card-test',
+    template: `
     <nb-card *ngFor="let card of cards" [size]="card.size" [status]="card.status">
       <nb-card-header>
         <span>Header</span>
@@ -102,6 +102,7 @@ import { Component } from '@angular/core';
       </nb-card-back>
     </nb-flip-card>
   `,
+    standalone: false
 })
 export class CardTestComponent {
 

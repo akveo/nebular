@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'nb-stepper-validation',
-  styleUrls: ['stepper-playground.component.scss'],
-  templateUrl: './stepper-validation.component.html',
+    selector: 'nb-stepper-validation',
+    styleUrls: ['stepper-playground.component.scss'],
+    templateUrl: './stepper-validation.component.html',
+    standalone: false
 })
 
 export class StepperValidationComponent implements OnInit {

@@ -58,8 +58,8 @@ import { NbChatCustomMessageDirective } from './chat-custom-message.directive';
  * chat-message-file-background-color:
  */
 @Component({
-  selector: 'nb-chat-message',
-  template: `
+    selector: 'nb-chat-message',
+    template: `
     <nb-chat-avatar *ngIf="notReply" [initials]="getInitials()" [avatarStyle]="avatarStyle"> </nb-chat-avatar>
 
     <div class="message">
@@ -120,14 +120,15 @@ import { NbChatCustomMessageDirective } from './chat-custom-message.directive';
       </div>
     </ng-template>
   `,
-  animations: [
-    trigger('flyInOut', [
-      state('in', style({ transform: 'translateX(0)' })),
-      transition('void => *', [style({ transform: 'translateX(-100%)' }), animate(80)]),
-      transition('* => void', [animate(80, style({ transform: 'translateX(100%)' }))]),
-    ]),
-  ],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    animations: [
+        trigger('flyInOut', [
+            state('in', style({ transform: 'translateX(0)' })),
+            transition('void => *', [style({ transform: 'translateX(-100%)' }), animate(80)]),
+            transition('* => void', [animate(80, style({ transform: 'translateX(100%)' }))]),
+        ]),
+    ],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class NbChatMessageComponent {
   protected readonly builtInMessageTypes: string[] = ['text', 'file', 'map', 'quote'];

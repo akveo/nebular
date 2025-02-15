@@ -11,9 +11,9 @@ import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 
 @Component({
-  selector: 'nb-auth',
-  styleUrls: ['./auth.component.scss'],
-  template: `
+    selector: 'nb-auth',
+    styleUrls: ['./auth.component.scss'],
+    template: `
     <nb-layout>
       <nb-layout-column>
         <nb-card>
@@ -33,6 +33,7 @@ import { Subject } from 'rxjs';
       </nb-layout-column>
     </nb-layout>
   `,
+    standalone: false
 })
 export class NbAuthComponent implements OnDestroy {
 

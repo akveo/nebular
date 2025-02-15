@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NewsService } from './news.service';
 
 @Component({
-  template: `
+    template: `
     <nb-card class="own-scroll">
       <nb-card-header>
         Own scroll
@@ -38,8 +38,9 @@ import { NewsService } from './news.service';
       </nb-list>
     </nb-card>
   `,
-  styleUrls: [ 'infinite-news-list.component.scss', 'infinite-list-scroll-modes.component.scss' ],
-  providers: [ NewsService ],
+    styleUrls: ['infinite-news-list.component.scss', 'infinite-list-scroll-modes.component.scss'],
+    providers: [NewsService],
+    standalone: false
 })
 export class InfiniteListScrollModesComponent {
 

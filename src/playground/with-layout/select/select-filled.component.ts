@@ -7,8 +7,9 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'nb-select-filled',
-  templateUrl: './select-filled.component.html',
+    selector: 'nb-select-filled',
+    templateUrl: './select-filled.component.html',
+    standalone: false
 })
 export class SelectFilledComponent {
 }

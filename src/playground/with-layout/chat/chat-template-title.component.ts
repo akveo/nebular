@@ -8,10 +8,10 @@ import { Component } from '@angular/core';
 import { ChatShowcaseService } from './chat-showcase.service';
 
 @Component({
-  templateUrl: './chat-template-title.component.html',
-  providers: [ChatShowcaseService],
-  styles: [
-    `
+    templateUrl: './chat-template-title.component.html',
+    providers: [ChatShowcaseService],
+    styles: [
+        `
       ::ng-deep nb-layout-column {
         justify-content: center;
         display: flex;
@@ -20,7 +20,8 @@ import { ChatShowcaseService } from './chat-showcase.service';
         width: 500px;
       }
     `,
-  ],
+    ],
+    standalone: false
 })
 export class ChatTemplateTitleComponent {
   messages: any[] = [

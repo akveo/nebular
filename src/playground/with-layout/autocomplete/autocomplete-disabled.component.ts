@@ -8,9 +8,10 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
 @Component({
-  templateUrl: './autocomplete-disabled.component.html',
-  styleUrls: ['./autocomplete-disabled.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    templateUrl: './autocomplete-disabled.component.html',
+    styleUrls: ['./autocomplete-disabled.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class AutocompleteDisabledComponent {
   options = ['Option 1', 'Option 2', 'Option 3'];

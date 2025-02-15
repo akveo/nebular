@@ -118,10 +118,11 @@ export interface NbStepChangeEvent {
  * stepper-step-content-padding:
  */
 @Component({
-  selector: 'nb-stepper',
-  styleUrls: ['./stepper.component.scss'],
-  templateUrl: './stepper.component.html',
-  providers: [{ provide: NB_STEPPER, useExisting: NbStepperComponent }],
+    selector: 'nb-stepper',
+    styleUrls: ['./stepper.component.scss'],
+    templateUrl: './stepper.component.html',
+    providers: [{ provide: NB_STEPPER, useExisting: NbStepperComponent }],
+    standalone: false
 })
 export class NbStepperComponent {
   /**

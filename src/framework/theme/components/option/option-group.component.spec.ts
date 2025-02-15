@@ -12,7 +12,7 @@ import {
 } from '@nebular/theme';
 
 @Component({
-  template: `
+    template: `
     <nb-layout>
       <nb-layout-column>
 
@@ -25,6 +25,7 @@ import {
       </nb-layout-column>
     </nb-layout>
   `,
+    standalone: false
 })
 export class NbOptionGroupTestComponent {
   selectDisabled = false;

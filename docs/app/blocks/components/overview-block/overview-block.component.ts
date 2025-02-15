@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'ngd-overview-block',
-  template: `
+    selector: 'ngd-overview-block',
+    template: `
     <nb-card [ngdFragment]="source.slag">
       <nb-card-body>
         <ng-container class="description" *ngFor="let node of overview">
@@ -22,7 +22,8 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
       </nb-card-body>
     </nb-card>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class NgdOverviewBlockComponent {
 

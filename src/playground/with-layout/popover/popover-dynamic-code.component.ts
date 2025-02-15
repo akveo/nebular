@@ -10,9 +10,10 @@ import { NbPopoverDirective } from '@nebular/theme';
 
 
 @Component({
-  selector: 'nb-popover-dynamic-code',
-  templateUrl: './popover-dynamic-code.component.html',
-  styleUrls: ['./popover-dynamic.scss'],
+    selector: 'nb-popover-dynamic-code',
+    templateUrl: './popover-dynamic-code.component.html',
+    styleUrls: ['./popover-dynamic.scss'],
+    standalone: false
 })
 export class PopoverDynamicCodeComponent implements OnDestroy, AfterViewInit {
 

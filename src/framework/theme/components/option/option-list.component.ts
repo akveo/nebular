@@ -20,13 +20,14 @@ import { NbPosition } from '../cdk/overlay/overlay-position';
  * option-list-adjacent-border-width:
  * */
 @Component({
-  selector: 'nb-option-list',
-  template: `
+    selector: 'nb-option-list',
+    template: `
     <ul class="option-list">
       <ng-content></ng-content>
     </ul>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class NbOptionListComponent<T> {
 

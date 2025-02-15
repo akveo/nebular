@@ -3,8 +3,8 @@ import { NbDialogService } from '@nebular/theme';
 import { DialogNamePromptComponent } from './components/name-prompt-dialog.component';
 
 @Component({
-  selector: 'nb-dialog-result',
-  template: `
+    selector: 'nb-dialog-result',
+    template: `
     <button nbButton status="primary" (click)="open()">Enter Name</button>
     <br>
     <h3 class="h5">Names:</h3>
@@ -12,7 +12,8 @@ import { DialogNamePromptComponent } from './components/name-prompt-dialog.compo
       <li *ngFor="let name of names">{{ name }}</li>
     </ul>
   `,
-  styleUrls: ['./dialog-common.scss'],
+    styleUrls: ['./dialog-common.scss'],
+    standalone: false
 })
 export class DialogResultComponent {
   names: string[] = [];

@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { NbDialogRef } from '@nebular/theme';
 
 @Component({
-  selector: 'nb-name-prompt',
-  template: `
+    selector: 'nb-name-prompt',
+    template: `
     <nb-card>
       <nb-card-header>Enter your name</nb-card-header>
       <nb-card-body>
@@ -15,6 +15,7 @@ import { NbDialogRef } from '@nebular/theme';
       </nb-card-footer>
     </nb-card>
   `,
+    standalone: false
 })
 export class DialogNamePromptComponent {
   constructor(protected dialogRef: NbDialogRef<DialogNamePromptComponent>) {

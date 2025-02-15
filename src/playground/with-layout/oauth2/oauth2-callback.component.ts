@@ -11,12 +11,13 @@ import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 
 @Component({
-  selector: 'nb-playground-oauth2-callback',
-  template: `
+    selector: 'nb-playground-oauth2-callback',
+    template: `
     <nb-layout>
       <nb-layout-column>Authenticating...</nb-layout-column>
     </nb-layout>
   `,
+    standalone: false
 })
 export class OAuth2CallbackComponent implements OnDestroy {
 

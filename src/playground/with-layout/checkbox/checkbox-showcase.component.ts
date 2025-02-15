@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'nb-checkbox-showcase',
-  templateUrl: './checkbox-showcase.component.html',
+    selector: 'nb-checkbox-showcase',
+    templateUrl: './checkbox-showcase.component.html',
+    standalone: false
 })
 
 export class CheckboxShowcaseComponent {

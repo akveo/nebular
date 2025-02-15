@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { fruits } from './fruits-list';
 
 @Component({
-  template: `
+    template: `
     <nb-card size="medium">
       <nb-card-header>
         Some fruits
@@ -14,7 +14,8 @@ import { fruits } from './fruits-list';
       </nb-list>
     </nb-card>
   `,
-  styleUrls: [ './simple-list-showcase.component.scss' ],
+    styleUrls: ['./simple-list-showcase.component.scss'],
+    standalone: false
 })
 export class SimpleListShowcaseComponent {
   fruits = fruits;

@@ -8,13 +8,14 @@ import { BehaviorSubject } from 'rxjs';
 import createSpy = jasmine.createSpy;
 
 @Component({
-  template: `
+    template: `
     <nb-tabset routeParam="tab">
       <nb-tab *ngIf="showTabs" tabTitle="1" route="1" tabId="tab-1">1</nb-tab>
       <nb-tab *ngIf="showTabs" tabTitle="2" route="2" tabId="tab-2">2</nb-tab>
       <nb-tab *ngIf="showTabs" tabTitle="3" route="3" tabId="tab-3" disabled>3</nb-tab>
     </nb-tabset>
   `,
+    standalone: false
 })
 export class TabsetTestComponent {
   showTabs = true;

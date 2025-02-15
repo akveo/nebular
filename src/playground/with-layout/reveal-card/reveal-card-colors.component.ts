@@ -7,9 +7,10 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
-  selector: 'nb-reveal-card-colors',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: './reveal-card-colors.component.html',
+    selector: 'nb-reveal-card-colors',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    templateUrl: './reveal-card-colors.component.html',
+    standalone: false
 })
 export class RevealCardColorsComponent {
 }

@@ -33,13 +33,14 @@ import { NbOptionComponent } from './option.component';
  * option-group-giant-start-padding:
  **/
 @Component({
-  selector: 'nb-option-group',
-  styleUrls: ['./option-group.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  template: `
+    selector: 'nb-option-group',
+    styleUrls: ['./option-group.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    template: `
     <span class="option-group-title">{{ title }}</span>
     <ng-content select="nb-option, ng-container"></ng-content>
   `,
+    standalone: false
 })
 export class NbOptionGroupComponent implements AfterContentInit, OnDestroy {
 

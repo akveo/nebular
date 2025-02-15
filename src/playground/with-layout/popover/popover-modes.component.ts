@@ -7,9 +7,9 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'nb-popover-modes',
-  templateUrl: './popover-modes.component.html',
-  styles: [`
+    selector: 'nb-popover-modes',
+    templateUrl: './popover-modes.component.html',
+    styles: [`
     :host {
       display: block;
       padding-bottom: 5rem;
@@ -19,6 +19,7 @@ import { Component } from '@angular/core';
       margin-left: 1rem;
     }
   `],
+    standalone: false
 })
 export class PopoverModesComponent {
 }

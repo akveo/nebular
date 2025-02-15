@@ -2,7 +2,8 @@ import { NbStepperComponent } from './stepper.component';
 import { Directive, HostBinding, HostListener, Input } from '@angular/core';
 
 @Directive({
-  selector: 'button[nbStepperNext]',
+    selector: 'button[nbStepperNext]',
+    standalone: false
 })
 export class NbStepperNextDirective {
 
@@ -18,7 +19,8 @@ export class NbStepperNextDirective {
 }
 
 @Directive({
-  selector: 'button[nbStepperPrevious]',
+    selector: 'button[nbStepperPrevious]',
+    standalone: false
 })
 export class NbStepperPreviousDirective {
 

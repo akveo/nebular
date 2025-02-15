@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  template: `
+    template: `
     <nb-card>
       <nb-card-body>
         <nb-stepper orientation="horizontal" disableStepNavigation>
@@ -52,6 +52,7 @@ import { Component } from '@angular/core';
       </nb-card-body>
     </nb-card>
   `,
-  styleUrls: ['./stepper-disabled-step-nav.component.scss'],
+    styleUrls: ['./stepper-disabled-step-nav.component.scss'],
+    standalone: false
 })
 export class StepperDisabledStepNavComponent {}

@@ -18,13 +18,14 @@ import { NbCalendarCell, NbCalendarSize, NbCalendarSizeValues } from '../../mode
 
 
 @Component({
-  selector: 'nb-calendar-year-cell',
-  template: `
+    selector: 'nb-calendar-year-cell',
+    template: `
     <div class="cell-content">
       {{ year }}
     </div>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class NbCalendarYearCellComponent<D> implements NbCalendarCell<D, D> {
   @Input() date: D;

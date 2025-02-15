@@ -9,14 +9,15 @@ import { NbContextMenuDirective } from '@nebular/theme';
 
 
 @Component({
-  selector: 'nb-context-menu-right-click',
-  templateUrl: './context-menu-right-click.component.html',
-  styles: [`
+    selector: 'nb-context-menu-right-click',
+    templateUrl: './context-menu-right-click.component.html',
+    styles: [`
     button {
       margin-right: 1rem;
       margin-top: 1rem;
     }
   `],
+    standalone: false
 })
 export class ContextMenuRightClickComponent {
   @ViewChild(NbContextMenuDirective) contextMenu: NbContextMenuDirective;

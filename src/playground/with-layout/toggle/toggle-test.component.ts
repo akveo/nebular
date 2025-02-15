@@ -7,8 +7,8 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'nb-app-toggle-test',
-  template: `
+    selector: 'nb-app-toggle-test',
+    template: `
     <nb-card>
       <nb-card-body class="example-items-col">
         <nb-toggle id="first"></nb-toggle>
@@ -23,6 +23,7 @@ import { Component } from '@angular/core';
       </nb-card-body>
     </nb-card>
   `,
+    standalone: false
 })
 export class ToggleTestComponent {
 }

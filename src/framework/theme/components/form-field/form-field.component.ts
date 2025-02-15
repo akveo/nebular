@@ -85,10 +85,11 @@ function throwFormControlElementNotFound() {
  * form-field-addon-giant-font-weight:
  **/
 @Component({
-  selector: 'nb-form-field',
-  styleUrls: ['./form-field.component.scss'],
-  templateUrl: './form-field.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'nb-form-field',
+    styleUrls: ['./form-field.component.scss'],
+    templateUrl: './form-field.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class NbFormFieldComponent implements AfterContentChecked, AfterContentInit, AfterViewInit, OnDestroy {
 

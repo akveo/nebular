@@ -20,13 +20,14 @@ import { NbCalendarRange } from './calendar-range.component';
 import { NbBaseCalendarRangeCell } from './base-calendar-range-cell';
 
 @Component({
-  selector: 'nb-calendar-range-month-cell',
-  template: `
+    selector: 'nb-calendar-range-month-cell',
+    template: `
     <div class="cell-content">
       {{ month }}
     </div>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class NbCalendarRangeMonthCellComponent<D> extends NbBaseCalendarRangeCell<D>
                                                   implements NbCalendarCell<D, NbCalendarRange<D>> {

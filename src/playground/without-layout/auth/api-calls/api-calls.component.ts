@@ -14,8 +14,8 @@ import { getDeepFromObject } from '../../../../framework/auth/helpers';
 import { Wine } from './wine';
 
 @Component({
-  selector: 'nb-playground-api-calls',
-  template: `
+    selector: 'nb-playground-api-calls',
+    template: `
     <router-outlet></router-outlet>
     <nb-layout>
       <nb-layout-column>
@@ -40,6 +40,7 @@ import { Wine } from './wine';
       </nb-layout-column>
     </nb-layout>
   `,
+    standalone: false
 })
 
 export class PlaygroundApiCallsComponent {

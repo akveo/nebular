@@ -2,13 +2,14 @@ import { Component } from '@angular/core';
 import { NbSidebarService } from '@nebular/theme';
 
 @Component({
-  selector: 'nb-sidebar-toggle',
-  templateUrl: './sidebar-toggle.component.html',
-  styles: [`
+    selector: 'nb-sidebar-toggle',
+    templateUrl: './sidebar-toggle.component.html',
+    styles: [`
     :host nb-layout-header button:last-child {
       margin-left: auto;
     }
   `],
+    standalone: false
 })
 
 export class SidebarToggleComponent {

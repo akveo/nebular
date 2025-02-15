@@ -4,7 +4,10 @@ import { Subject } from 'rxjs';
 
 import { NbAccessChecker } from '../services/access-checker.service';
 
-@Directive({ selector: '[nbIsGranted]'})
+@Directive({
+    selector: '[nbIsGranted]',
+    standalone: false
+})
 export class NbIsGrantedDirective implements OnDestroy {
 
   private destroy$ = new Subject<void>();

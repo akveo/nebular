@@ -10,8 +10,8 @@ import { NbDialogService } from '@nebular/theme';
 import { NgdHubspotFormDialogComponent } from '../hubspot-form-dialog/hubspot-form-dialog.component';
 
 @Component({
-  selector: 'ngd-for-business',
-  template: `
+    selector: 'ngd-for-business',
+    template: `
     <div class="left">
       <h2 [attr.id]="headingId" class="heading h1 text-control">Nebular for business</h2>
       <button (click)="openDialog()" class="submit" nbButton status="control">Submit your request</button>
@@ -28,9 +28,10 @@ import { NgdHubspotFormDialogComponent } from '../hubspot-form-dialog/hubspot-fo
       </ul>
     </div>
   `,
-  exportAs: 'ngdForBusiness',
-  styleUrls: ['./for-business.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    exportAs: 'ngdForBusiness',
+    styleUrls: ['./for-business.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class NgdForBusinessComponent {
   readonly headingId: string = 'ngd-for-business-heading';

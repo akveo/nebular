@@ -12,10 +12,11 @@ import { NgdCodeLoaderService } from '../../../@theme/services';
 import { NgdExampleView } from '../../enum.example-view';
 
 @Component({
-  selector: 'ngd-tabbed-example-block',
-  styleUrls: ['./tabbed-example-block.component.scss'],
-  templateUrl: './tabbed-example-block.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'ngd-tabbed-example-block',
+    styleUrls: ['./tabbed-example-block.component.scss'],
+    templateUrl: './tabbed-example-block.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class NgdTabbedExampleBlockComponent {
 

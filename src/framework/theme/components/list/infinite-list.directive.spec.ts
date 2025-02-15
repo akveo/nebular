@@ -39,7 +39,7 @@ function setup() {
 }
 
 @Component({
-  template: `
+    template: `
     <nb-layout [withScroll]="withScroll">
       <nb-layout-column>
         <nb-list
@@ -58,8 +58,8 @@ function setup() {
       </nb-layout-column>
     </nb-layout>
   `,
-  styles: [
-    `
+    styles: [
+        `
       ::ng-deep nb-layout.with-scroll .scrollable-container {
         overflow: auto;
         height: 100vh;
@@ -77,7 +77,8 @@ function setup() {
         height: ${CONTENT_HEIGHT}px;
       }
     `,
-  ],
+    ],
+    standalone: false
 })
 class ScrollTestComponent {
   listenWindowScroll = false;

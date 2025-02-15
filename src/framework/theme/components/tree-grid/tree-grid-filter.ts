@@ -10,7 +10,10 @@ import { debounceTime, takeUntil } from 'rxjs/operators';
 
 import { NbFilterable } from './data-source/tree-grid-data-source';
 
-@Directive({ selector: '[nbFilter]' })
+@Directive({
+    selector: '[nbFilter]',
+    standalone: false
+})
 export class NbFilterDirective {
   @Input('nbFilter') filterable: NbFilterable;
 
@@ -23,8 +26,9 @@ export class NbFilterDirective {
  * Helper directive to trigger data source's filter method when user types in input
  */
 @Directive({
-  selector: '[nbFilterInput]',
-  providers: [{ provide: NbFilterDirective, useExisting: NbFilterInputDirective }],
+    selector: '[nbFilterInput]',
+    providers: [{ provide: NbFilterDirective, useExisting: NbFilterInputDirective }],
+    standalone: false
 })
 export class NbFilterInputDirective extends NbFilterDirective implements OnInit, OnDestroy {
   private search$: Subject<string> = new Subject<string>();

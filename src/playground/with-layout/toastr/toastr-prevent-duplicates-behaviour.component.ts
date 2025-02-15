@@ -2,8 +2,8 @@ import { Component, HostBinding } from '@angular/core';
 import { NbDuplicateToastBehaviour, NbToastrService } from '@nebular/theme';
 
 @Component({
-  selector: 'nb-toastr-prevent-duplicates-behaviour',
-  template: `
+    selector: 'nb-toastr-prevent-duplicates-behaviour',
+    template: `
     <button nbButton (click)="showToast('Toast 1', 'success')">Show toast 1</button>
     <button nbButton (click)="showToast('Toast 2', 'danger')">Show toast 2</button>
 
@@ -15,13 +15,14 @@ import { NbDuplicateToastBehaviour, NbToastrService } from '@nebular/theme';
       </nb-radio>
     </nb-radio-group>
   `,
-  styles: [
-    `
+    styles: [
+        `
       ::ng-deep nb-layout-column {
         height: 80vw;
       }
     `,
-  ],
+    ],
+    standalone: false
 })
 
 export class ToastrPreventDuplicatesBehaviourComponent {

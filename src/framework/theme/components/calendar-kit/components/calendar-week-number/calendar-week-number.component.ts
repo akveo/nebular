@@ -10,15 +10,16 @@ import { NbDateService } from '../../services/date.service';
 import { NbCalendarSize, NbCalendarSizeValues } from '../../model';
 
 @Component({
-  selector: 'nb-calendar-week-numbers',
-  template: `
+    selector: 'nb-calendar-week-numbers',
+    template: `
     <div class="sign-container">
       <div class="sign">{{ weekNumberSymbol }}</div>
     </div>
     <div class="week-number" *ngFor="let weekNumber of weekNumbers">{{ weekNumber }}</div>
   `,
-  styleUrls: ['./calendar-week-number.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    styleUrls: ['./calendar-week-number.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class NbCalendarWeekNumberComponent<D> implements OnChanges {
 

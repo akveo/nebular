@@ -9,7 +9,7 @@ import { NbWindowService } from '@nebular/theme';
 import { VisitorsFormComponent } from './components/visitors-form.component';
 
 @Component({
-  template: `
+    template: `
     <button nbButton status="primary" (click)="openWindow()">Open window</button>
     <br />
     <h3 class="h5">Window visitors:</h3>
@@ -17,7 +17,8 @@ import { VisitorsFormComponent } from './components/visitors-form.component';
       <li *ngFor="let visitor of visitors">{{ visitor }}</li>
     </ul>
   `,
-  styleUrls: ['./window.scss'],
+    styleUrls: ['./window.scss'],
+    standalone: false
 })
 export class WindowResultComponent {
   visitors: string[] = [];

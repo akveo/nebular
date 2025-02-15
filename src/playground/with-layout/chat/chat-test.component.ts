@@ -8,8 +8,8 @@ import { Component } from '@angular/core';
 import { NbComponentSize } from '@nebular/theme';
 
 @Component({
-  selector: 'nb-chat-test',
-  template: `
+    selector: 'nb-chat-test',
+    template: `
     <nb-chat
       *ngFor="let chat of chats"
       [size]="chat.size"
@@ -31,6 +31,7 @@ import { NbComponentSize } from '@nebular/theme';
       </nb-chat-form>
     </nb-chat>
   `,
+    standalone: false
 })
 export class ChatTestComponent {
   messages = [];

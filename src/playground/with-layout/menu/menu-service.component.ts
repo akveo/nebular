@@ -11,8 +11,8 @@ import { Subject } from 'rxjs';
 import { MENU_ITEMS } from './menu-service-items';
 
 @Component({
-  selector: 'nb-menu-services',
-  template: `
+    selector: 'nb-menu-services',
+    template: `
     <nb-card size="giant">
       <nb-menu tag="menu" [items]="menuItems"></nb-menu>
       <div class="control-panel">
@@ -25,7 +25,8 @@ import { MENU_ITEMS } from './menu-service-items';
       </div>
     </nb-card>
   `,
-  styleUrls: ['./menu-service.component.scss'],
+    styleUrls: ['./menu-service.component.scss'],
+    standalone: false
 })
 export class MenuServiceComponent implements OnDestroy {
 

@@ -17,8 +17,8 @@ export const pulse = animation(
 );
 
 @Component({
-  selector: 'ngd-stacked-example-block',
-  template: `
+    selector: 'ngd-stacked-example-block',
+    template: `
     <div>
       <ngd-live-example-block [hidden]="!isLive"
                               [@exampleState]="isLive ? 'live': 'code'"
@@ -35,16 +35,17 @@ export const pulse = animation(
       </ngd-tabbed-example-block>
     </div>
   `,
-  animations: [
-    trigger('exampleState', [
-      transition('live => code', [
-        useAnimation(pulse),
-      ]),
-      transition('code => live', [
-        useAnimation(pulse),
-      ]),
-    ]),
-  ],
+    animations: [
+        trigger('exampleState', [
+            transition('live => code', [
+                useAnimation(pulse),
+            ]),
+            transition('code => live', [
+                useAnimation(pulse),
+            ]),
+        ]),
+    ],
+    standalone: false
 })
 export class NgdStackedExampleComponent {
 

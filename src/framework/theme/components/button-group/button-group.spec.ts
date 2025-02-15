@@ -20,8 +20,8 @@ import {
 } from '@nebular/theme';
 
 @Component({
-  selector: 'nb-button-group-test',
-  template: `
+    selector: 'nb-button-group-test',
+    template: `
     <nb-button-group
       [size]="size"
       [status]="status"
@@ -39,6 +39,7 @@ import {
       <button nbButtonToggle value="F" *ngIf="showLastButton">F</button>
     </nb-button-group>
   `,
+    standalone: false
 })
 export class NbButtonGroupTestComponent {
   size: NbComponentSize = 'large';

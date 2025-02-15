@@ -47,8 +47,8 @@ import { NbComponentOrCustomStatus } from '../component-status';
  * ```
  */
 @Component({
-  selector: 'nb-chat-form',
-  template: `
+    selector: 'nb-chat-form',
+    template: `
     <div class="dropped-files" *ngIf="droppedFiles?.length">
       <ng-container *ngFor="let file of droppedFiles">
         <div *ngIf="file.urlStyle" [style.background-image]="file.urlStyle">
@@ -90,7 +90,8 @@ import { NbComponentOrCustomStatus } from '../component-status';
       </button>
     </div>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class NbChatFormComponent {
   status: NbComponentOrCustomStatus = 'basic';

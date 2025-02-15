@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
- template: `
+    template: `
    <nb-card size="small">
      <nb-card-body>
 
@@ -18,6 +18,7 @@ import { Component } from '@angular/core';
      </nb-card-body>
    </nb-card>
  `,
+    standalone: false
 })
 export class FormFieldPasswordComponent {
   showPassword = true;

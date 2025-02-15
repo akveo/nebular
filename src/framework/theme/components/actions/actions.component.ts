@@ -16,9 +16,9 @@ import { NbIconConfig } from '../icon/icon.component';
  * Action item, display a link with an icon, or any other content provided instead.
  */
 @Component({
-  selector: 'nb-action',
-  styleUrls: ['./action.component.scss'],
-  template: `
+    selector: 'nb-action',
+    styleUrls: ['./action.component.scss'],
+    template: `
     <ng-container *ngIf="icon; else projectedContent">
       <a class="icon-container"
          [routerLink]="link"
@@ -57,6 +57,7 @@ import { NbIconConfig } from '../icon/icon.component';
       </nb-badge>
     </ng-template>
   `,
+    standalone: false
 })
 export class NbActionComponent {
 
@@ -212,11 +213,12 @@ export class NbActionComponent {
  * actions-giant-text-font-size:
  */
 @Component({
-  selector: 'nb-actions',
-  styleUrls: ['./actions.component.scss'],
-  template: `
+    selector: 'nb-actions',
+    styleUrls: ['./actions.component.scss'],
+    template: `
     <ng-content select="nb-action"></ng-content>
   `,
+    standalone: false
 })
 export class NbActionsComponent {
 

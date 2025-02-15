@@ -7,8 +7,9 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'nb-select-multiple',
-  templateUrl: './select-multiple.component.html',
+    selector: 'nb-select-multiple',
+    templateUrl: './select-multiple.component.html',
+    standalone: false
 })
 export class SelectMultipleComponent {
 }

@@ -7,7 +7,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  template: `
+    template: `
     <nb-card>
       <nb-card-body class="example-items-col">
         <input type="text" nbInput fullWidth status="basic" placeholder="Default">
@@ -22,6 +22,7 @@ import { Component } from '@angular/core';
       </nb-card-body>
     </nb-card>
   `,
-  styleUrls: [`./input-colors.component.scss`],
+    styleUrls: [`./input-colors.component.scss`],
+    standalone: false
 })
 export class InputColorsComponent {}

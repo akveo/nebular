@@ -228,10 +228,11 @@ let tagUniqueId = 0;
  * tag-outline-control-selected-text-color:
  */
 @Component({
-  selector: 'nb-tag',
-  templateUrl: './tag.component.html',
-  exportAs: 'nbTag',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'nb-tag',
+    templateUrl: './tag.component.html',
+    exportAs: 'nbTag',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class NbTagComponent implements AfterViewInit, OnDestroy, NbHighlightableOption {
 

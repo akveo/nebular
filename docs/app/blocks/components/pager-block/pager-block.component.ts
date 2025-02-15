@@ -3,9 +3,9 @@ import {Component, ChangeDetectionStrategy, Input} from '@angular/core';
 import { NgdPaginationService } from '../../../@theme/services';
 
 @Component({
-  selector: 'ngd-pager-block',
-  styleUrls: ['./pager-block.component.scss'],
-  template: `
+    selector: 'ngd-pager-block',
+    styleUrls: ['./pager-block.component.scss'],
+    template: `
     <ng-container *ngIf="paginationItem">
       <nb-card [class.invisible]="!paginationItem.prev" class="left-block">
         <a *ngIf="paginationItem.prev" [routerLink]="paginationItem.prev.link"
@@ -30,7 +30,8 @@ import { NgdPaginationService } from '../../../@theme/services';
       </nb-card>
     </ng-container>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class NgdPagerBlockComponent {
   paginationItem;

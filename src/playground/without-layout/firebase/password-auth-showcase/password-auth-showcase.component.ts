@@ -7,9 +7,10 @@ import { NbAuthService, NbAuthToken } from '@nebular/auth';
 import { FirebaseAPIService } from '../firebase-api.service';
 
 @Component({
-  selector: 'nb-password-auth-showcase',
-  templateUrl: './password-auth-showcase.component.html',
-  styleUrls: ['./password-auth-showcase.component.scss'],
+    selector: 'nb-password-auth-showcase',
+    templateUrl: './password-auth-showcase.component.html',
+    styleUrls: ['./password-auth-showcase.component.scss'],
+    standalone: false
 })
 export class PasswordAuthShowcaseComponent {
 

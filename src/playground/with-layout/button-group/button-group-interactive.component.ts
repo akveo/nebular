@@ -8,9 +8,10 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { NbButtonToggleAppearance, NbComponentShape, NbComponentSize, NbComponentStatus } from '@nebular/theme';
 
 @Component({
-  templateUrl: './button-group-interactive.component.html',
-  styleUrls: ['./button-group-interactive.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    templateUrl: './button-group-interactive.component.html',
+    styleUrls: ['./button-group-interactive.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class ButtonGroupInteractiveComponent {
   appearances: NbButtonToggleAppearance[] = [ 'filled', 'outline', 'ghost' ];
