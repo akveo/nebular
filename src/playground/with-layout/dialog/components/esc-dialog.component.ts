@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { NbDialogRef } from '@nebular/theme';
 
 @Component({
-  template: `
+    template: `
     <nb-card class="dialog-card">
       <nb-card-header>{{ title }}</nb-card-header>
       <nb-card-body>
@@ -18,6 +18,7 @@ import { NbDialogRef } from '@nebular/theme';
       </nb-card-footer>
     </nb-card>
   `,
+    standalone: false
 })
 export class EscDialogComponent {
   @Input() title: string;

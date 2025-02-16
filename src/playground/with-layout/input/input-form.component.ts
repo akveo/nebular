@@ -8,7 +8,7 @@ import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
 @Component({
-  template: `
+    template: `
     <nb-card>
       <nb-card-body class="example-items-col">
         <input type="text" nbInput fullWidth fieldSize="small" placeholder="Input" [(ngModel)]="inputItemNgModel">
@@ -19,6 +19,7 @@ import { FormControl } from '@angular/forms';
       </nb-card-body>
     </nb-card>
   `,
+    standalone: false
 })
 
 export class InputFormComponent {

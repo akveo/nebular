@@ -2,7 +2,7 @@ import { Component, TemplateRef, ViewChild } from '@angular/core';
 import { NbWindowService } from '@nebular/theme';
 
 @Component({
-  template: `
+    template: `
     <button (click)="openWindow()" nbButton>Open window</button>
 
     <ng-template #titleTemplate let-data>
@@ -13,6 +13,7 @@ import { NbWindowService } from '@nebular/theme';
       <p>Content</p>
     </ng-template>
   `,
+    standalone: false
 })
 export class WindowTemplateTitleComponent {
   @ViewChild('titleTemplate') titleTemplate: TemplateRef<any>;

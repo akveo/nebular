@@ -10,8 +10,8 @@ import { NbCalendarCell, NbCalendarSize, NbCalendarSizeValues } from '../../mode
 
 
 @Component({
-  selector: 'nb-calendar-picker',
-  template: `
+    selector: 'nb-calendar-picker',
+    template: `
     <nb-calendar-picker-row
       *ngFor="let row of data"
       [row]="row"
@@ -25,7 +25,8 @@ import { NbCalendarCell, NbCalendarSize, NbCalendarSizeValues } from '../../mode
       (select)="select.emit($event)">
     </nb-calendar-picker-row>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class NbCalendarPickerComponent<D, T> {
   @Input() data: D[][];

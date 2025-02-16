@@ -12,10 +12,11 @@ import { NbAuthService } from '../../services/auth.service';
 import { NbAuthResult } from '../../services/auth-result';
 
 @Component({
-  selector: 'nb-reset-password-page',
-  styleUrls: ['./reset-password.component.scss'],
-  templateUrl: './reset-password.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'nb-reset-password-page',
+    styleUrls: ['./reset-password.component.scss'],
+    templateUrl: './reset-password.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class NbResetPasswordComponent {
 

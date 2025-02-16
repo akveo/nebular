@@ -252,8 +252,8 @@ import { convertToBoolProperty, NbBooleanInput } from '../helpers';
  * checkbox-control-disabled-checked-background-color:
  */
 @Component({
-  selector: 'nb-checkbox',
-  template: `
+    selector: 'nb-checkbox',
+    template: `
     <label class="label">
       <input type="checkbox" class="native-input visually-hidden"
              [disabled]="disabled"
@@ -271,13 +271,14 @@ import { convertToBoolProperty, NbBooleanInput } from '../helpers';
       </span>
     </label>
   `,
-  styleUrls: [ `./checkbox.component.scss` ],
-  providers: [{
-    provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => NbCheckboxComponent),
-    multi: true,
-  }],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    styleUrls: [`./checkbox.component.scss`],
+    providers: [{
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => NbCheckboxComponent),
+            multi: true,
+        }],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class NbCheckboxComponent implements AfterViewInit, ControlValueAccessor {
 

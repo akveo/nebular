@@ -7,8 +7,8 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'ngx-app',
-  template: `
+    selector: 'ngx-app',
+    template: `
     <nb-layout>
       <nb-layout-column>
         <nb-card>
@@ -19,6 +19,7 @@ import { Component } from '@angular/core';
       </nb-layout-column>
     </nb-layout>
   `,
+    standalone: false
 })
 export class AppComponent {
 }

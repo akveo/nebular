@@ -262,19 +262,20 @@ export const NB_DATE_SERVICE_OPTIONS = new InjectionToken('Date service options'
  * datepicker-shadow:
  * */
 @Directive({
-  selector: 'input[nbDatepicker]',
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => NbDatepickerDirective),
-      multi: true,
-    },
-    {
-      provide: NG_VALIDATORS,
-      useExisting: forwardRef(() => NbDatepickerDirective),
-      multi: true,
-    },
-  ],
+    selector: 'input[nbDatepicker]',
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => NbDatepickerDirective),
+            multi: true,
+        },
+        {
+            provide: NG_VALIDATORS,
+            useExisting: forwardRef(() => NbDatepickerDirective),
+            multi: true,
+        },
+    ],
+    standalone: false
 })
 export class NbDatepickerDirective<D> implements OnDestroy, ControlValueAccessor, Validator {
   /**

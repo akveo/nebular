@@ -9,8 +9,8 @@ import { FormControl } from '@angular/forms';
 
 
 @Component({
-  selector: 'nb-datepicker-forms',
-  template: `
+    selector: 'nb-datepicker-forms',
+    template: `
     <nb-card size="large">
       <nb-card-body class="two-inputs">
         <input nbInput placeholder="Pick Date" [nbDatepicker]="formcontrol" [formControl]="formControl">
@@ -21,7 +21,8 @@ import { FormControl } from '@angular/forms';
       </nb-card-body>
     </nb-card>
   `,
-  styleUrls: ['./datepicker-example.scss'],
+    styleUrls: ['./datepicker-example.scss'],
+    standalone: false
 })
 export class DatepickerFormsComponent {
   formControl = new FormControl(new Date());

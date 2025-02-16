@@ -7,15 +7,15 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'nb-sidebar-one-test',
-  styles: [
-    `
+    selector: 'nb-sidebar-one-test',
+    styles: [
+        `
     :host ::ng-deep nb-layout-column {
       background-color: #76ecff;
     }
     `,
-  ],
-  template: `
+    ],
+    template: `
     <nb-layout>
       <nb-sidebar>
         Left
@@ -26,6 +26,7 @@ import { Component } from '@angular/core';
       </nb-sidebar>
     </nb-layout>
 `,
+    standalone: false
 })
 export class SidebarOneTestComponent {
 }

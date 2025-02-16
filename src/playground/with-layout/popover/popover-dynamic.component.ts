@@ -11,9 +11,10 @@ import { PopoverListComponent, PopoverTabsComponent } from './components/dynamic
 
 
 @Component({
-  selector: 'nb-popover-dynamic',
-  templateUrl: './popover-dynamic.component.html',
-  styleUrls: ['./popover-dynamic.scss'],
+    selector: 'nb-popover-dynamic',
+    templateUrl: './popover-dynamic.component.html',
+    styleUrls: ['./popover-dynamic.scss'],
+    standalone: false
 })
 export class PopoverDynamicComponent implements OnDestroy, AfterViewInit {
 

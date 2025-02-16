@@ -26,15 +26,16 @@ const voidState = style({
 const defaultOptions = { params: { direction: '' } };
 
 @Component({
-  selector: 'nb-toastr-container',
-  template: `
+    selector: 'nb-toastr-container',
+    template: `
     <nb-toast [@fadeIn]="fadeIn" *ngFor="let toast of content" [toast]="toast"></nb-toast>`,
-  animations: [
-    trigger('fadeIn', [
-      transition(':enter', [voidState, animate(100)], defaultOptions),
-      transition(':leave', [animate(100, voidState)], defaultOptions),
-    ]),
-  ],
+    animations: [
+        trigger('fadeIn', [
+            transition(':enter', [voidState, animate(100)], defaultOptions),
+            transition(':leave', [animate(100, voidState)], defaultOptions),
+        ]),
+    ],
+    standalone: false
 })
 export class NbToastrContainerComponent implements OnInit, OnDestroy {
 

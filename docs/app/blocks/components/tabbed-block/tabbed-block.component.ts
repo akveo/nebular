@@ -12,9 +12,10 @@ import { filter } from 'rxjs/operators';
 import { NgdTabbedService } from '../../../@theme/services';
 
 @Component({
-  selector: 'ngd-tabbed-block',
-  templateUrl: './tabbed-block.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'ngd-tabbed-block',
+    templateUrl: './tabbed-block.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class NgdTabbedBlockComponent implements OnDestroy {
 

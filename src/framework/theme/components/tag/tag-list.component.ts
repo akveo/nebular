@@ -64,14 +64,15 @@ import { NbTagInputDirective } from './tag-input.directive';
  * tag-list-with-input-round-border-radius:
  */
 @Component({
-  selector: 'nb-tag-list',
-  template: `
+    selector: 'nb-tag-list',
+    template: `
     <div class="nb-tag-list-tags-wrapper">
       <ng-content select="nb-tag, input[nbTagInput]"></ng-content>
     </div>
   `,
-  exportAs: 'nbTagList',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    exportAs: 'nbTagList',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class NbTagListComponent implements OnInit, AfterContentInit, AfterViewInit, OnDestroy {
   protected readonly destroy$: Subject<void> = new Subject<void>();

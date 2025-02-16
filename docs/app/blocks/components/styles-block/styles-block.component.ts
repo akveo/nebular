@@ -7,8 +7,8 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'ngd-styles-block',
-  template: `
+    selector: 'ngd-styles-block',
+    template: `
     <nb-card [ngdFragment]="source.slag">
       <nb-card-body>
         <h2>{{ source.name }}</h2>
@@ -16,7 +16,8 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
       </nb-card-body>
     </nb-card>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class NgdStylesBlockComponent {
 

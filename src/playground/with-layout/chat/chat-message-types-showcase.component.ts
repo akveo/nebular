@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'nb-chat-message-type-showcase',
-  template: `
+    selector: 'nb-chat-message-type-showcase',
+    template: `
     <nb-chat title="Message Types" size="large">
       <nb-chat-message
         message="Gif message"
@@ -65,12 +65,13 @@ import { Component } from '@angular/core';
       </nb-chat-message>
     </nb-chat>
   `,
-  styles: [`
+    styles: [`
     nb-chat {
       margin: 0 auto;
       width: 500px;
     }
   `],
+    standalone: false
 })
 export class ChatMessageTypesShowcaseComponent {
   date = new Date();

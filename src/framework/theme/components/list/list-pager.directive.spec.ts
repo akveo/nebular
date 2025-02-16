@@ -29,7 +29,7 @@ const PAGE_HEIGHT: number = ITEMS_PER_PAGE * ITEM_HEIGHT;
 let initialItemsCount: number = 100;
 
 @Component({
-  template: `
+    template: `
     <nb-list
       nbListPageTracker
       [pageSize]="pageSize"
@@ -40,8 +40,8 @@ let initialItemsCount: number = 100;
       <nb-list-item *ngFor="let _ of items" class="list-item"></nb-list-item>
     </nb-list>
   `,
-  styles: [
-    `
+    styles: [
+        `
       .list {
         background: lightslategray;
         height: ${LIST_HEIGHT}px;
@@ -54,7 +54,8 @@ let initialItemsCount: number = 100;
         height: ${ITEM_HEIGHT * 0.98}px;
       }
     `,
-  ],
+    ],
+    standalone: false
 })
 class PagerTestComponent {
   @ViewChild(NbListComponent, { read: ElementRef }) listElementRef: ElementRef;

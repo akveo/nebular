@@ -7,8 +7,8 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'nb-toggle-disabled',
-  template: `
+    selector: 'nb-toggle-disabled',
+    template: `
     <nb-card>
       <nb-card-body class="example-items-col">
         <nb-toggle disabled></nb-toggle>
@@ -16,6 +16,7 @@ import { Component } from '@angular/core';
       </nb-card-body>
     </nb-card>
   `,
+    standalone: false
 })
 export class ToggleDisabledComponent {
 }

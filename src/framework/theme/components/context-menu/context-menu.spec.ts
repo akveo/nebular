@@ -19,14 +19,15 @@ import {
 } from '@nebular/theme';
 
 @Component({
-  selector: 'nb-context-menu-default-test',
-  template: `
+    selector: 'nb-context-menu-default-test',
+    template: `
     <nb-layout>
       <nb-layout-column>
         <button #button [nbContextMenu]="items" [nbContextMenuClass]="contextMenuClass">show context menu</button>
       </nb-layout-column>
     </nb-layout>
   `,
+    standalone: false
 })
 export class NbContextMenuDefaultTestComponent {
   @ViewChild('button') button: ElementRef;
@@ -37,8 +38,8 @@ export class NbContextMenuDefaultTestComponent {
 }
 
 @Component({
-  selector: 'nb-context-menu-bindings-test',
-  template: `
+    selector: 'nb-context-menu-bindings-test',
+    template: `
     <nb-layout>
       <nb-layout-column>
         <button
@@ -52,6 +53,7 @@ export class NbContextMenuDefaultTestComponent {
       </nb-layout-column>
     </nb-layout>
   `,
+    standalone: false
 })
 export class NbContextMenuBindingsTestComponent {
   @ViewChild(NbContextMenuDirective) contextMenu: NbContextMenuDirective;
@@ -64,8 +66,8 @@ export class NbContextMenuBindingsTestComponent {
 }
 
 @Component({
-  selector: 'nb-context-menu-instance-test',
-  template: `
+    selector: 'nb-context-menu-instance-test',
+    template: `
     <nb-layout>
       <nb-layout-column>
         <button #button [nbContextMenu]="items">show context menu</button>
@@ -74,6 +76,7 @@ export class NbContextMenuBindingsTestComponent {
 
     <ng-template>Some Template</ng-template>
   `,
+    standalone: false
 })
 export class NbContextMenuInstanceTestComponent {
   @ViewChild(NbContextMenuDirective) contextMenu: NbContextMenuDirective;

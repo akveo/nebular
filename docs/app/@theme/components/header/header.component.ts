@@ -6,9 +6,9 @@ import { map, startWith } from 'rxjs/operators';
 import { NgdVersionService, Version } from '../../services';
 
 @Component({
-  selector: 'ngd-header',
-  styleUrls: ['./header.component.scss'],
-  template: `
+    selector: 'ngd-header',
+    styleUrls: ['./header.component.scss'],
+    template: `
     <div class="section left">
       <button *ngIf="sidebarTag" class="sidebar-toggle" (click)="toggleSidebar()">
         <nb-icon icon="menu-2"></nb-icon>
@@ -40,7 +40,8 @@ import { NgdVersionService, Version } from '../../services';
       </iframe>
     </div>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class NgdHeaderComponent implements OnInit {
 

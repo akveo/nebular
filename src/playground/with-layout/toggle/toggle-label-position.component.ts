@@ -7,8 +7,8 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'nb-toggle-label-position',
-  template: `
+    selector: 'nb-toggle-label-position',
+    template: `
     <nb-card>
       <nb-card-body class="example-items-col">
         <nb-toggle labelPosition="start">Label Start</nb-toggle>
@@ -19,6 +19,7 @@ import { Component } from '@angular/core';
       </nb-card-body>
     </nb-card>
   `,
+    standalone: false
 })
 export class ToggleLabelPositionComponent {
 }

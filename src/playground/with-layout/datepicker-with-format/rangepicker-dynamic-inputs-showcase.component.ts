@@ -7,10 +7,10 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'npg-rangepicker-dynamic-inputs-showcase',
-  templateUrl: './rangepicker-dynamic-inputs-showcase.component.html',
-  styles: [
-    `
+    selector: 'npg-rangepicker-dynamic-inputs-showcase',
+    templateUrl: './rangepicker-dynamic-inputs-showcase.component.html',
+    styles: [
+        `
       section {
         margin-bottom: 2rem;
       }
@@ -19,7 +19,8 @@ import { Component } from '@angular/core';
         margin-left: 1rem;
       }
     `,
-  ],
+    ],
+    standalone: false
 })
 export class RangepickerDynamicInputsShowcaseComponent {
   now = new Date();

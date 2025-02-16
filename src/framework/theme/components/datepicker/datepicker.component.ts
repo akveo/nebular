@@ -378,7 +378,8 @@ export abstract class NbBasePicker<D, T, P> extends NbDatepicker<T, D> {
 }
 
 @Component({
-  template: '',
+    template: '',
+    standalone: false
 })
 export class NbBasePickerComponent<D, T, P> extends NbBasePicker<D, T, P> implements OnInit, OnChanges, OnDestroy {
   /**
@@ -545,8 +546,9 @@ export class NbBasePickerComponent<D, T, P> extends NbBasePicker<D, T, P> implem
  * Provides a proxy to `NbCalendar` options as well as custom picker options.
  */
 @Component({
-  selector: 'nb-datepicker',
-  template: '',
+    selector: 'nb-datepicker',
+    template: '',
+    standalone: false
 })
 export class NbDatepickerComponent<D> extends NbBasePickerComponent<D, D, NbCalendarComponent<D>> {
   protected pickerClass: Type<NbCalendarComponent<D>> = NbCalendarComponent;
@@ -600,8 +602,9 @@ export class NbDatepickerComponent<D> extends NbBasePickerComponent<D, D, NbCale
  * Provides a proxy to `NbCalendarRange` options as well as custom picker options.
  */
 @Component({
-  selector: 'nb-rangepicker',
-  template: '',
+    selector: 'nb-rangepicker',
+    template: '',
+    standalone: false
 })
 export class NbRangepickerComponent<D> extends NbBasePickerComponent<
   D,

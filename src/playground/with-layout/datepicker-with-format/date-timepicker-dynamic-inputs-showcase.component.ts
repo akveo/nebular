@@ -7,10 +7,10 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'npg-date-timepicker-dynamic-inputs-showcase',
-  templateUrl: './date-timepicker-dynamic-inputs-showcase.component.html',
-  styles: [
-    `
+    selector: 'npg-date-timepicker-dynamic-inputs-showcase',
+    templateUrl: './date-timepicker-dynamic-inputs-showcase.component.html',
+    styles: [
+        `
       section {
         margin-bottom: 2rem;
       }
@@ -19,7 +19,8 @@ import { Component } from '@angular/core';
         margin-left: 1rem;
       }
     `,
-  ],
+    ],
+    standalone: false
 })
 export class DateTimepickerDynamicInputsShowcaseComponent {
   now = new Date();

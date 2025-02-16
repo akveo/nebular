@@ -9,8 +9,8 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { NgdMetadataService } from '../../../@theme/services';
 
 @Component({
-  selector: 'ngd-props-block',
-  template: `
+    selector: 'ngd-props-block',
+    template: `
     <ngd-prop-block *ngIf="inputs.length > 0"
                     [properties]="inputs"
                     name="Inputs"
@@ -32,7 +32,8 @@ import { NgdMetadataService } from '../../../@theme/services';
                     class="widget-block">
     </ngd-prop-block>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class NgdPropsBlockComponent {
   outputs: any = [];

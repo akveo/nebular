@@ -7,8 +7,8 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'nb-action-test',
-  template: `
+    selector: 'nb-action-test',
+    template: `
     <nb-layout>
       <nb-layout-header>
         <nb-actions>
@@ -128,6 +128,7 @@ import { Component } from '@angular/core';
       </nb-layout-column>
     </nb-layout>
   `,
+    standalone: false
 })
 export class ActionTestComponent {
 

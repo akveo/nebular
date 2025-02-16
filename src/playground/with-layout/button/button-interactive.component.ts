@@ -2,8 +2,9 @@ import { Component } from '@angular/core';
 import { NbButtonAppearance, NbComponentStatus, NbComponentShape, NbComponentSize } from '@nebular/theme';
 
 @Component({
-  templateUrl: 'button-interactive.component.html',
-  styleUrls: [ './button-interactive.component.scss' ],
+    templateUrl: 'button-interactive.component.html',
+    styleUrls: ['./button-interactive.component.scss'],
+    standalone: false
 })
 export class ButtonInteractiveComponent {
   appearances: NbButtonAppearance[] = [ 'filled', 'outline', 'ghost', 'hero' ];

@@ -164,8 +164,8 @@ export interface NbCalendarRange<D> {
  * calendar-year-cell-large-height:
  * */
 @Component({
-  selector: 'nb-calendar-range',
-  template: `
+    selector: 'nb-calendar-range',
+    template: `
     <nb-base-calendar
       [date]="range"
       (dateChange)="onChange($any($event))"
@@ -185,6 +185,7 @@ export interface NbCalendarRange<D> {
       [firstDayOfWeek]="firstDayOfWeek"
     ></nb-base-calendar>
   `,
+    standalone: false
 })
 export class NbCalendarRangeComponent<D> {
   /**

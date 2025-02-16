@@ -2,8 +2,8 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { NgdTabbedService } from '../../../@theme/services';
 
 @Component({
-  selector: 'ngd-component-block',
-  template: `
+    selector: 'ngd-component-block',
+    template: `
     <nb-card [ngdFragment]="source.slag">
       <nb-card-body>
         <ng-container class="description" *ngFor="let node of overview">
@@ -29,7 +29,8 @@ import { NgdTabbedService } from '../../../@theme/services';
       </nb-card-body>
     </nb-card>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class NgdComponentBlockComponent {
 

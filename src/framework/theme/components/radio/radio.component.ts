@@ -212,8 +212,8 @@ import { NbComponentOrCustomStatus } from '../component-status';
  * radio-control-disabled-checked-inner-circle-color:
  * */
 @Component({
-  selector: 'nb-radio',
-  template: `
+    selector: 'nb-radio',
+    template: `
     <label>
       <input
         #input
@@ -232,8 +232,9 @@ import { NbComponentOrCustomStatus } from '../component-status';
       </span>
     </label>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  styleUrls: ['./radio.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    styleUrls: ['./radio.component.scss'],
+    standalone: false
 })
 export class NbRadioComponent {
 

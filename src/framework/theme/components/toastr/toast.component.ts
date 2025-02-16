@@ -90,9 +90,10 @@ import { NbToast } from './model';
  * toastr-destroyable-control-hover-border-color:
  * */
 @Component({
-  selector: 'nb-toast',
-  styleUrls: ['./toast.component.scss'],
-  templateUrl: './toast.component.html',
+    selector: 'nb-toast',
+    styleUrls: ['./toast.component.scss'],
+    templateUrl: './toast.component.html',
+    standalone: false
 })
 export class NbToastComponent implements OnInit, OnDestroy {
   @Input()

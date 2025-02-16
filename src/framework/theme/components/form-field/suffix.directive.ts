@@ -1,7 +1,8 @@
 import { Directive } from '@angular/core';
 
 @Directive({
-  selector: '[nbSuffix]',
+    selector: '[nbSuffix]',
+    standalone: false
 })
 export class NbSuffixDirective {
 }

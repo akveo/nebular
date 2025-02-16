@@ -23,12 +23,13 @@ import {
 } from '@nebular/theme';
 
 @Component({
-  template: `
+    template: `
     <nb-sidebar [responsive]="responsive" [state]="state">
       <button id="button-outside-menu"></button>
       <nb-menu [items]="menuItems"></nb-menu>
     </nb-sidebar>
   `,
+    standalone: false
 })
 export class SidebarExpandTestComponent {
   menuItems: NbMenuItem[] = [

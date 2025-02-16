@@ -8,15 +8,15 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'nb-tabset-test',
-  styles: [
-    `
+    selector: 'nb-tabset-test',
+    styles: [
+        `
       nb-tabset {
         margin-bottom: 40px;
       }
     `,
-  ],
-  template: `
+    ],
+    template: `
     <nb-tabset>
       <nb-tab tabTitle="Tab #1">
         <span>Content #1</span>
@@ -145,6 +145,7 @@ import { Router } from '@angular/router';
       </nb-tab>
     </nb-tabset>
   `,
+    standalone: false
 })
 export class TabsetTestComponent {
 

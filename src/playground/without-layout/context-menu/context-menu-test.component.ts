@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'nb-context-menu-test',
-  template: `
+    selector: 'nb-context-menu-test',
+    template: `
     <nb-layout>
       <nb-layout-column>
         <nb-card>
@@ -23,6 +23,7 @@ import { Component } from '@angular/core';
       </nb-layout-column>
     </nb-layout>
   `,
+    standalone: false
 })
 export class ContextMenuTestComponent {
 

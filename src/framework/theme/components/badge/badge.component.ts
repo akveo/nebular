@@ -84,9 +84,10 @@ export interface NbBadge {
  * badge-control-text-color:
  */
 @Component({
-  selector: 'nb-badge',
-  styleUrls: ['./badge.component.scss'],
-  template: `{{dotMode ? '' : text}}`,
+    selector: 'nb-badge',
+    styleUrls: ['./badge.component.scss'],
+    template: `{{dotMode ? '' : text}}`,
+    standalone: false
 })
 export class NbBadgeComponent implements NbBadge {
 

@@ -8,9 +8,9 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { DynamicToAddComponent } from './components/dynamic.components';
 
 @Component({
-  selector: 'nb-popover-example',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  template: `
+    selector: 'nb-popover-example',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    template: `
     <nb-card>
       <nb-card-header>Content Type</nb-card-header>
       <nb-card-body>
@@ -143,6 +143,7 @@ import { DynamicToAddComponent } from './components/dynamic.components';
       </nb-card-body>
     </nb-card>
   `,
+    standalone: false
 })
 export class PopoverTestComponent {
 

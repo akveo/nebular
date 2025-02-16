@@ -16,14 +16,15 @@ import {
 } from '@nebular/theme';
 
 @Component({
-  selector: 'nb-toastr-test',
-  template: `
+    selector: 'nb-toastr-test',
+    template: `
     <nb-layout>
       <nb-layout-column>
         <div class="test-div"></div>
       </nb-layout-column>
     </nb-layout>
   `,
+    standalone: false
 })
 export class NbToastrTestComponent {
   constructor(private toastrService: NbToastrService) {}

@@ -15,7 +15,7 @@ interface FSEntry {
 }
 
 @Component({
-  template: `
+    template: `
     <nb-card>
       <nb-card-body>
 
@@ -54,7 +54,8 @@ interface FSEntry {
       </nb-card-body>
     </nb-card>
   `,
-  styleUrls: ['./tree-grid-shared.scss', './tree-grid-showcase.component.scss'],
+    styleUrls: ['./tree-grid-shared.scss', './tree-grid-showcase.component.scss'],
+    standalone: false
 })
 export class TreeGridFilterableComponent {
   customColumn = 'name';

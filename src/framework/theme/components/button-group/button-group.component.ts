@@ -100,10 +100,11 @@ import { NB_BUTTON_GROUP } from './button-group-injection-tokens';
  * button-group-ghost-divider-color:
  **/
 @Component({
-  selector: 'nb-button-group',
-  template: ` <ng-content></ng-content> `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [{ provide: NB_BUTTON_GROUP, useExisting: NbButtonGroupComponent }],
+    selector: 'nb-button-group',
+    template: ` <ng-content></ng-content> `,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [{ provide: NB_BUTTON_GROUP, useExisting: NbButtonGroupComponent }],
+    standalone: false
 })
 export class NbButtonGroupComponent implements OnChanges, AfterContentInit {
   protected lastEmittedValue: any[] = [];

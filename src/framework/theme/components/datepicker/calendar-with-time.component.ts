@@ -16,8 +16,8 @@ import { NbPortalOutletDirective } from '../cdk/overlay/mapping';
 import { NbTimePickerComponent } from '../timepicker/timepicker.component';
 
 @Component({
-  selector: 'nb-calendar-with-time',
-  template: `
+    selector: 'nb-calendar-with-time',
+    template: `
     <nb-card class="calendar-with-time">
       <nb-card-body class="picker-body">
         <nb-base-calendar
@@ -71,8 +71,9 @@ import { NbTimePickerComponent } from '../timepicker/timepicker.component';
       </nb-card-footer>
     </nb-card>
   `,
-  styleUrls: ['./calendar-with-time-container.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    styleUrls: ['./calendar-with-time-container.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class NbCalendarWithTimeComponent<D> extends NbCalendarComponent<D> implements OnInit, AfterViewInit {
   /**

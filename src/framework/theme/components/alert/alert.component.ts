@@ -109,14 +109,15 @@ import { convertToBoolProperty, NbBooleanInput } from '../helpers';
  * alert-outline-control-color:
  */
 @Component({
-  selector: 'nb-alert',
-  styleUrls: ['./alert.component.scss'],
-  template: `
+    selector: 'nb-alert',
+    styleUrls: ['./alert.component.scss'],
+    template: `
     <button *ngIf="closable" type="button" class="close" aria-label="Close" (click)="onClose()">
       <span aria-hidden="true">&times;</span>
     </button>
     <ng-content></ng-content>
   `,
+    standalone: false
 })
 export class NbAlertComponent {
 

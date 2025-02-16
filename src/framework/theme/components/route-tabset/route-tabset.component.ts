@@ -96,9 +96,9 @@ export interface NbRouteTab {
  * route-tabset-scrollbar-width:
  */
 @Component({
-  selector: 'nb-route-tabset',
-  styleUrls: ['./route-tabset.component.scss'],
-  template: `
+    selector: 'nb-route-tabset',
+    styleUrls: ['./route-tabset.component.scss'],
+    template: `
     <ul class="route-tabset">
       <ng-container *ngFor="let tab of tabs">
         <li
@@ -141,6 +141,7 @@ export interface NbRouteTab {
     </ul>
     <router-outlet></router-outlet>
   `,
+    standalone: false
 })
 export class NbRouteTabsetComponent {
   @HostBinding('class.full-width') fullWidthValue: boolean = false;

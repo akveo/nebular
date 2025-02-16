@@ -11,9 +11,10 @@ import { FormControl } from '@angular/forms';
 import { map, startWith } from 'rxjs/operators';
 
 @Component({
-  selector: 'nb-autocomplete-showcase',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: './autocomplete-form.component.html',
+    selector: 'nb-autocomplete-showcase',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    templateUrl: './autocomplete-form.component.html',
+    standalone: false
 })
 export class AutocompleteFormComponent implements OnInit {
 

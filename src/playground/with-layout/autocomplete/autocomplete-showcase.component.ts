@@ -9,9 +9,10 @@ import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 @Component({
-  selector: 'nb-autocomplete-showcase',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: './autocomplete-showcase.component.html',
+    selector: 'nb-autocomplete-showcase',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    templateUrl: './autocomplete-showcase.component.html',
+    standalone: false
 })
 export class AutocompleteShowcaseComponent implements OnInit {
 

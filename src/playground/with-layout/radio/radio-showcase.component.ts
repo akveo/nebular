@@ -7,8 +7,9 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'nb-radio-showcase',
-  templateUrl: './radio-showcase.component.html',
+    selector: 'nb-radio-showcase',
+    templateUrl: './radio-showcase.component.html',
+    standalone: false
 })
 export class RadioShowcaseComponent {
   options = [

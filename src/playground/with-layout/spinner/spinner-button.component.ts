@@ -7,8 +7,8 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'nb-app-spinner-button',
-  template: `
+    selector: 'nb-app-spinner-button',
+    template: `
      <nb-card>
       <nb-card-body class="example-items-rows">
           <button [nbSpinner]="loading" nbSpinnerStatus="success" nbButton (click)="toggleLoadingAnimation()">
@@ -29,6 +29,7 @@ import { Component } from '@angular/core';
       </nb-card-body>
     </nb-card>
   `,
+    standalone: false
 })
 export class SpinnerButtonComponent {
 

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  template: `
+    template: `
     <nb-card>
       <nb-card-body>
         <nb-checkbox indeterminate #checkbox>Indeterminate</nb-checkbox>
@@ -12,11 +12,12 @@ import { Component } from '@angular/core';
       </nb-card-body>
     </nb-card>
   `,
-  styles: [`
+    styles: [`
     button {
       display: block;
       margin-top: 1rem;
     }
   `],
+    standalone: false
 })
 export class CheckboxIndeterminateComponent {}

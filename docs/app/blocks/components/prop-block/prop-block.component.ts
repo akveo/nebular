@@ -8,8 +8,8 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'ngd-prop-block',
-  template: `
+    selector: 'ngd-prop-block',
+    template: `
     <h3>{{ name }}</h3>
     <table>
       <thead>
@@ -31,7 +31,8 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
       </tbody>
     </table>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class NgdPropBlockComponent {
 

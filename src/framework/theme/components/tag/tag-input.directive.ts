@@ -52,11 +52,12 @@ export interface NbTagInputAddEvent {
  * tag-list-with-input-giant-padding:
  */
 @Directive({
-  selector: 'input[nbTagInput]',
-  exportAs: 'nbTagInput',
-  providers: [
-    { provide: NbFormFieldControl, useExisting: NbTagInputDirective },
-  ],
+    selector: 'input[nbTagInput]',
+    exportAs: 'nbTagInput',
+    providers: [
+        { provide: NbFormFieldControl, useExisting: NbTagInputDirective },
+    ],
+    standalone: false
 })
 export class NbTagInputDirective extends NbInputDirective implements AfterViewInit {
 

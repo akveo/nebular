@@ -124,9 +124,9 @@ import { NbOverlayContainerAdapter } from '../cdk/adapter/overlay-container-adap
  * layout-scrollbar-width:
  */
 @Component({
-  selector: 'nb-layout',
-  styleUrls: ['./layout.component.scss'],
-  template: `
+    selector: 'nb-layout',
+    styleUrls: ['./layout.component.scss'],
+    template: `
     <div class="scrollable-container" #scrollableContainer (scroll)="onScroll($event)">
       <div class="layout" #layoutContainer>
         <ng-content select="nb-layout-header:not([subheader])"></ng-content>
@@ -143,6 +143,7 @@ import { NbOverlayContainerAdapter } from '../cdk/adapter/overlay-container-adap
       </div>
     </div>
   `,
+    standalone: false
 })
 export class NbLayoutComponent implements AfterViewInit, OnDestroy {
   protected scrollBlockClass = 'nb-global-scrollblock';
@@ -517,8 +518,9 @@ export class NbLayoutComponent implements AfterViewInit, OnDestroy {
  * @stacked-example(Column Left, layout/layout-column-left.component)
  */
 @Component({
-  selector: 'nb-layout-column',
-  template: `<ng-content></ng-content>`,
+    selector: 'nb-layout-column',
+    template: `<ng-content></ng-content>`,
+    standalone: false
 })
 export class NbLayoutColumnComponent {
   @HostBinding('class.left') leftValue: boolean;
@@ -580,12 +582,13 @@ export class NbLayoutColumnComponent {
  * header-shadow:
  */
 @Component({
-  selector: 'nb-layout-header',
-  template: `
+    selector: 'nb-layout-header',
+    template: `
     <nav [class.fixed]="fixedValue">
       <ng-content></ng-content>
     </nav>
   `,
+    standalone: false
 })
 export class NbLayoutHeaderComponent {
   @HostBinding('class.fixed') fixedValue: boolean;
@@ -639,12 +642,13 @@ export class NbLayoutHeaderComponent {
  * footer-shadow:
  */
 @Component({
-  selector: 'nb-layout-footer',
-  template: `
+    selector: 'nb-layout-footer',
+    template: `
     <nav [class.fixed]="fixedValue">
       <ng-content></ng-content>
     </nav>
   `,
+    standalone: false
 })
 export class NbLayoutFooterComponent {
   @HostBinding('class.fixed') fixedValue: boolean;

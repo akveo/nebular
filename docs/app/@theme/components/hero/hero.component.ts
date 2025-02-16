@@ -10,9 +10,9 @@ import { NbDialogService } from '@nebular/theme';
 import { NgdHubspotFormDialogComponent } from '../hubspot-form-dialog/hubspot-form-dialog.component';
 
 @Component({
-  selector: 'ngd-hero',
-  styleUrls: ['./hero.component.scss'],
-  template: `
+    selector: 'ngd-hero',
+    styleUrls: ['./hero.component.scss'],
+    template: `
     <div class="block">
       <h1>Nebular: Customizable Angular UI Kit</h1>
       <p class="hero-promo">
@@ -66,7 +66,8 @@ import { NgdHubspotFormDialogComponent } from '../hubspot-form-dialog/hubspot-fo
       </div>
     </div>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class NgdHeroComponent {
 

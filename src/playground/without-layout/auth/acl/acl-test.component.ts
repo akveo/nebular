@@ -8,8 +8,8 @@ import { Component } from '@angular/core';
 import { NbAccessChecker } from '@nebular/security';
 
 @Component({
-  selector: 'nb-actions-test',
-  template: `
+    selector: 'nb-actions-test',
+    template: `
     <nb-layout>
       <nb-layout-column>
         <nb-card>
@@ -27,6 +27,7 @@ import { NbAccessChecker } from '@nebular/security';
       </nb-layout-column>
     </nb-layout>
   `,
+    standalone: false
 })
 export class AclTestComponent {
 

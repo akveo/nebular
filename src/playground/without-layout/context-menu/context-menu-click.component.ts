@@ -3,13 +3,14 @@ import { NB_WINDOW, NbMenuService } from '@nebular/theme';
 import { filter, map } from 'rxjs/operators';
 
 @Component({
-  selector: 'nb-context-menu-click',
-  templateUrl: './context-menu-click.component.html',
-  styles: [`
+    selector: 'nb-context-menu-click',
+    templateUrl: './context-menu-click.component.html',
+    styles: [`
     :host nb-layout-header ::ng-deep nav {
       justify-content: flex-end;
     }
   `],
+    standalone: false
 })
 export class ContextMenuClickComponent implements OnInit {
   items = [

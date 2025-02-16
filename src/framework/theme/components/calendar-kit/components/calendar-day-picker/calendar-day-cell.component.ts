@@ -19,13 +19,14 @@ import { NbDateService } from '../../services/date.service';
 
 
 @Component({
-  selector: 'nb-calendar-day-cell',
-  template: `
+    selector: 'nb-calendar-day-cell',
+    template: `
     <div class="cell-content">
       {{ day }}
     </div>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class NbCalendarDayCellComponent<D> implements NbCalendarCell<D, D> {
 

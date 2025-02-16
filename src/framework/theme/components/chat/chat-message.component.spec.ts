@@ -4,8 +4,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NbChatMessageComponent, NbChatModule, NbThemeModule, NbChatCustomMessageService } from '@nebular/theme';
 
 @Component({
-  selector: 'nb-chat-message-test',
-  template: `
+    selector: 'nb-chat-message-test',
+    template: `
     <nb-chat size="large">
       <nb-chat-message
         *ngFor="let msg of messages"
@@ -24,6 +24,7 @@ import { NbChatMessageComponent, NbChatModule, NbThemeModule, NbChatCustomMessag
       <nb-chat-form [dropFiles]="false"> </nb-chat-form>
     </nb-chat>
   `,
+    standalone: false
 })
 export class NbChatMessageTestComponent {
   messages = [];

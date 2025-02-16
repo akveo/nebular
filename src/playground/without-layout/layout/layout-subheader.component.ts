@@ -2,8 +2,9 @@ import { Component } from '@angular/core';
 import { NbSidebarService } from '@nebular/theme';
 
 @Component({
-  selector: 'nb-layout-subheader',
-  templateUrl: './layout-subheader.component.html',
+    selector: 'nb-layout-subheader',
+    templateUrl: './layout-subheader.component.html',
+    standalone: false
 })
 
 export class LayoutSubheaderComponent {

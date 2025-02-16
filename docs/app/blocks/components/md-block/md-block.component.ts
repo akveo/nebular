@@ -13,8 +13,8 @@ import { NgdMdSection } from '../../../@theme/services/text.service';
 import { NgdLastViewedSectionService } from '../../../@theme/services';
 
 @Component({
-  selector: 'ngd-md-block',
-  template: `
+    selector: 'ngd-md-block',
+    template: `
     <div [nbSpinner]="loading">
       <nb-card *ngFor="let section of sections$ | async" [ngdFragment]="section.fragment">
         <nb-card-body>
@@ -23,7 +23,8 @@ import { NgdLastViewedSectionService } from '../../../@theme/services';
       </nb-card>
     </div>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class NgdMdBLockComponent implements OnDestroy {
   private destroy$ = new Subject<void>();

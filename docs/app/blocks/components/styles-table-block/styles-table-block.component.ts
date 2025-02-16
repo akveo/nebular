@@ -8,8 +8,8 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { NgdStylesService } from '../../../@theme/services';
 
 @Component({
-  selector: 'ngd-styles-table-block',
-  template: `
+    selector: 'ngd-styles-table-block',
+    template: `
     <table class="striped" *ngFor="let style of classStyles">
       <thead>
       <tr>
@@ -32,7 +32,8 @@ import { NgdStylesService } from '../../../@theme/services';
       </tbody>
     </table>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class NgdStylesTableBlockComponent {
 

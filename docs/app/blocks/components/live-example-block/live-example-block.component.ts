@@ -19,10 +19,11 @@ import { NgdAnalytics, NgdIframeCommunicatorService } from '../../../@theme/serv
 import { NgdExampleView } from '../../enum.example-view';
 
 @Component({
-  selector: 'ngd-live-example-block',
-  styleUrls: ['./live-example-block.component.scss'],
-  templateUrl: './live-example-block.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'ngd-live-example-block',
+    styleUrls: ['./live-example-block.component.scss'],
+    templateUrl: './live-example-block.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class NgdLiveExampleBlockComponent implements OnInit, AfterViewInit, OnDestroy {
 

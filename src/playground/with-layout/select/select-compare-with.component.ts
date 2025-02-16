@@ -7,7 +7,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
-  template: `
+    template: `
     <nb-card size="small">
       <nb-card-body>
         <nb-select [selected]="{ id: 1 }" [compareWith]="compareById">
@@ -18,7 +18,8 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
       </nb-card-body>
     </nb-card>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class SelectCompareWithComponent {
   compareById(v1, v2): boolean {

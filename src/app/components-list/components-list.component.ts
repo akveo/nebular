@@ -12,10 +12,10 @@ export function convertToBoolProperty(val: any): boolean {
 }
 
 @Component({
-  selector: 'npg-components-list',
-  styleUrls: ['./components-list.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  template: `
+    selector: 'npg-components-list',
+    styleUrls: ['./components-list.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    template: `
     <div *ngFor="let component of components; trackBy: trackByFn" class="component-block">
       <span *ngIf="!component.component">{{ component.path }}</span>
 
@@ -35,6 +35,7 @@ export function convertToBoolProperty(val: any): boolean {
       <npg-components-list *ngIf="component.children" vertical [components]="component.children"></npg-components-list>
     </div>
   `,
+    standalone: false
 })
 export class ComponentsListComponent {
   @Input()

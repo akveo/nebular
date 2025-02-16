@@ -8,10 +8,11 @@ import { Component, OnInit } from '@angular/core';
 import { NgdAnalytics } from './@theme/services/analytics.service';
 
 @Component({
-  selector: 'ngd-app-root',
-  template: `
+    selector: 'ngd-app-root',
+    template: `
     <router-outlet></router-outlet>
   `,
+    standalone: false
 })
 export class NgdAppComponent implements OnInit {
 

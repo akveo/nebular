@@ -6,9 +6,10 @@ import { NB_DOCUMENT, NbThemeService } from '@nebular/theme';
 import { NgdAnalytics, NgdIframeCommunicatorService } from '../@theme/services';
 
 @Component({
-  selector: 'ngd-example',
-  template: '<router-outlet></router-outlet>',
-  styleUrls: ['./example.component.scss'],
+    selector: 'ngd-example',
+    template: '<router-outlet></router-outlet>',
+    styleUrls: ['./example.component.scss'],
+    standalone: false
 })
 export class NgdExampleComponent implements OnInit, AfterViewInit, OnDestroy {
   private id: string;

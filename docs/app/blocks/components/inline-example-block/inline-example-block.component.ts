@@ -1,12 +1,13 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'ngd-inline-example-block',
-  template: `
+    selector: 'ngd-inline-example-block',
+    template: `
     <ngd-example-block *ngIf="isOneFile" [content]="content"></ngd-example-block>
     <ngd-tabbed-example-block *ngIf="isTabbed" [content]="content"></ngd-tabbed-example-block>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class NgdInlineExampleBlockComponent {
 

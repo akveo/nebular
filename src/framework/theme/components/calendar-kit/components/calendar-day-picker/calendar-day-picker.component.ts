@@ -26,8 +26,8 @@ import { convertToBoolProperty, NbBooleanInput } from '../../../helpers';
  * Provides capability pick days.
  * */
 @Component({
-  selector: 'nb-calendar-day-picker',
-  template: `
+    selector: 'nb-calendar-day-picker',
+    template: `
     <nb-calendar-week-numbers *ngIf="showWeekNumber"
                               [weeks]="weeks"
                               [size]="size"
@@ -48,8 +48,9 @@ import { convertToBoolProperty, NbBooleanInput } from '../../../helpers';
       </nb-calendar-picker>
     </div>
   `,
-  styleUrls: ['./calendar-day-picker.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    styleUrls: ['./calendar-day-picker.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class NbCalendarDayPickerComponent<D, T> implements OnChanges {
 

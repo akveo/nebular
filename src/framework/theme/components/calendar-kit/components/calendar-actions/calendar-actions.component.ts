@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
-  selector: 'nb-calendar-actions',
-  template: `
+    selector: 'nb-calendar-actions',
+    template: `
     <button
       *ngIf="showCurrentTimeButton"
       nbButton
@@ -19,8 +19,9 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from 
       (click)="saveValue.emit()">
       {{ applyText }}</button>
   `,
-  styleUrls: ['./calendar-actions.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    styleUrls: ['./calendar-actions.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class NbCalendarActionsComponent {
   @Input() set applyButtonText(value: string) {

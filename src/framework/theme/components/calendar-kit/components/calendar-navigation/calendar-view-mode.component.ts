@@ -13,14 +13,15 @@ import { NbDateService } from '../../services/date.service';
 
 
 @Component({
-  selector: 'nb-calendar-view-mode',
-  template: `
+    selector: 'nb-calendar-view-mode',
+    template: `
     <button nbButton (click)="changeMode.emit()" ghost status="basic">
       {{ getText() }}
       <nb-icon [icon]="getIcon()" pack="nebular-essentials"></nb-icon>
     </button>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class NbCalendarViewModeComponent<D> {
   @Input() date: D;

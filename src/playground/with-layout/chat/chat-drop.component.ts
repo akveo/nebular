@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'nb-chat-drop',
-  styles: [`
+    selector: 'nb-chat-drop',
+    styles: [`
     ::ng-deep nb-layout-column {
       justify-content: center;
       display: flex;
@@ -12,7 +12,8 @@ import { Component } from '@angular/core';
       height: 80vw;
     }
   `],
-  templateUrl: './chat-drop.component.html',
+    templateUrl: './chat-drop.component.html',
+    standalone: false
 })
 export class ChatDropComponent {
 

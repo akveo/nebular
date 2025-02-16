@@ -17,12 +17,13 @@ import { NbSelectedTimeModel } from './model';
 import { NbPlatform } from '../cdk/platform/platform-service';
 
 @Component({
-  selector: 'nb-timepicker-cell',
-  template: `
+    selector: 'nb-timepicker-cell',
+    template: `
     <div #valueContainer>{{ value }}</div>
   `,
-  styleUrls: ['./timepicker-cell.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    styleUrls: ['./timepicker-cell.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class NbTimePickerCellComponent implements AfterViewInit, OnDestroy {
   protected selectedChange$ = new Subject<boolean>();

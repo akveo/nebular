@@ -12,13 +12,14 @@ import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
 
 @Component({
-  template: `
+    template: `
     <nb-layout withScroll>
       <nb-layout-column>
         <div [style.height]="contentHeight" style="background: lightcoral;"></div>
       </nb-layout-column>
     </nb-layout>
   `,
+    standalone: false
 })
 export class LayoutWithScrollModeComponent {
   contentHeight: string = '200vh';

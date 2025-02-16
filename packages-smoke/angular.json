@@ -71,10 +71,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "packages-smoke:build:production"
+              "buildTarget": "packages-smoke:build:production"
             },
             "development": {
-              "browserTarget": "packages-smoke:build:development"
+              "buildTarget": "packages-smoke:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -82,7 +82,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "packages-smoke:build"
+            "buildTarget": "packages-smoke:build"
           }
         },
         "test": {

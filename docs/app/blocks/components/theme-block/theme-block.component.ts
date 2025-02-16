@@ -10,10 +10,11 @@ import { takeUntil, skip, distinctUntilChanged, debounceTime } from 'rxjs/operat
 import { Subject } from 'rxjs';
 
 @Component({
-  selector: 'ngd-theme-block',
-  styleUrls: ['./theme-block.component.scss'],
-  templateUrl: './theme-block.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'ngd-theme-block',
+    styleUrls: ['./theme-block.component.scss'],
+    templateUrl: './theme-block.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class NgdThemeComponent implements OnInit, OnDestroy {
   searchControl = new FormControl();

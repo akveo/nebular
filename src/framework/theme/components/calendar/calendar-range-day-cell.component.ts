@@ -20,11 +20,12 @@ import { NbDateService } from '../calendar-kit/services/date.service';
 import { NbBaseCalendarRangeCell } from './base-calendar-range-cell';
 
 @Component({
-  selector: 'nb-calendar-range-day-cell',
-  template: `
+    selector: 'nb-calendar-range-day-cell',
+    template: `
     <div class="cell-content">{{ day }}</div>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class NbCalendarRangeDayCellComponent<D> extends NbBaseCalendarRangeCell<D>
   implements NbCalendarCell<D, NbCalendarRange<D>> {

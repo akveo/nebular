@@ -10,8 +10,9 @@ import { NbTagComponent, NbTagInputAddEvent } from '@nebular/theme';
 import { trees } from './trees-list';
 
 @Component({
-  templateUrl: './tag-input.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    templateUrl: './tag-input.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class TagInputComponent {
 

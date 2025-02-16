@@ -25,10 +25,11 @@ import { NbPositionedContainerComponent, NbRenderableContainer } from '../cdk/ov
  * context-menu-shadow:
  * */
 @Component({
-  selector: 'nb-context-menu',
-  template: `
+    selector: 'nb-context-menu',
+    template: `
     <nb-menu class="context-menu" [items]="context.items" [tag]="context.tag"></nb-menu>
   `,
+    standalone: false
 })
 export class NbContextMenuComponent extends NbPositionedContainerComponent implements NbRenderableContainer {
 

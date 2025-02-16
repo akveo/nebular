@@ -7,7 +7,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
-  template: `
+    template: `
     <nb-card>
       <nb-card-body>
         <nb-button-group disabled>
@@ -18,7 +18,8 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
       </nb-card-body>
     </nb-card>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class ButtonGroupDisabledComponent {
 }

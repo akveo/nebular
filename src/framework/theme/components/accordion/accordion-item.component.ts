@@ -28,13 +28,14 @@ import { convertToBoolProperty, NbBooleanInput } from '../helpers';
  * Component intended to be used within `<nb-accordion>` component
  */
 @Component({
-  selector: 'nb-accordion-item',
-  styleUrls: ['./accordion-item.component.scss'],
-  template: `
+    selector: 'nb-accordion-item',
+    styleUrls: ['./accordion-item.component.scss'],
+    template: `
     <ng-content select="nb-accordion-item-header"></ng-content>
     <ng-content select="nb-accordion-item-body"></ng-content>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class NbAccordionItemComponent implements OnInit, OnChanges, OnDestroy {
 

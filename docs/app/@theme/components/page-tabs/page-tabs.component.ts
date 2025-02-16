@@ -10,9 +10,9 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable, of as observableOf, combineLatest, Subject } from 'rxjs';
 
 @Component({
-  selector: 'ngd-page-tabs',
-  styleUrls: ['./page-tabs.component.scss'],
-  template: `
+    selector: 'ngd-page-tabs',
+    styleUrls: ['./page-tabs.component.scss'],
+    template: `
     <a *ngFor="let item of items$ | async" [class.selected]="item.selected" [routerLink]="['../', item.tab]">
       <div class="text-container">
         <nb-icon [icon]="item.icon"></nb-icon>
@@ -21,7 +21,8 @@ import { Observable, of as observableOf, combineLatest, Subject } from 'rxjs';
       <i class="line"></i>
     </a>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class NgdPageTabsComponent implements OnDestroy {
 

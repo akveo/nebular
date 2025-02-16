@@ -7,8 +7,9 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'nb-select-showcase',
-  templateUrl: './select-showcase.component.html',
+    selector: 'nb-select-showcase',
+    templateUrl: './select-showcase.component.html',
+    standalone: false
 })
 export class SelectShowcaseComponent {
   selectedItem = '2';

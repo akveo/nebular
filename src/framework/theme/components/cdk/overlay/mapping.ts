@@ -25,10 +25,16 @@ import {
 } from '@angular/cdk/overlay';
 import { NbScrollStrategyOptions } from '../adapter/block-scroll-strategy-adapter';
 
-@Directive({ selector: '[nbPortal]' })
+@Directive({
+    selector: '[nbPortal]',
+    standalone: false
+})
 export class NbPortalDirective extends CdkPortal {}
 
-@Directive({ selector: '[nbPortalOutlet]' })
+@Directive({
+    selector: '[nbPortalOutlet]',
+    standalone: false
+})
 export class NbPortalOutletDirective extends CdkPortalOutlet {}
 
 export class NbComponentPortal<T = any> extends ComponentPortal<T> {}

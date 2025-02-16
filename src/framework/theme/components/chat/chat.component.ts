@@ -238,9 +238,9 @@ import { NbChatTitleDirective } from './chat-title.directive';
  * chat-message-file-background-color:
  */
 @Component({
-  selector: 'nb-chat',
-  styleUrls: ['./chat.component.scss'],
-  template: `
+    selector: 'nb-chat',
+    styleUrls: ['./chat.component.scss'],
+    template: `
     <div class="header">
       <ng-container
         *ngIf="titleTemplate; else textTitleTemplate"
@@ -263,7 +263,8 @@ import { NbChatTitleDirective } from './chat-title.directive';
       <ng-content select="nb-chat-form"></ng-content>
     </div>
   `,
-  providers: [NbChatCustomMessageService],
+    providers: [NbChatCustomMessageService],
+    standalone: false
 })
 export class NbChatComponent implements OnChanges, AfterContentInit, AfterViewInit {
   @Input() title: string;

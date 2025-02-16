@@ -8,9 +8,10 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { NbMenuItem } from '@nebular/theme';
 
 @Component({
-  selector: 'npg-menu-autocollapse',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: './menu-autocollapse.component.html',
+    selector: 'npg-menu-autocollapse',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    templateUrl: './menu-autocollapse.component.html',
+    standalone: false
 })
 export class MenuAutoCollapseComponent {
   items: NbMenuItem[] = [

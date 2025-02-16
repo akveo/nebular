@@ -32,15 +32,16 @@ export enum NbToggleStates {
 }
 
 @Component({
-  selector: '[nbMenuItem]',
-  templateUrl: './menu-item.component.html',
-  animations: [
-    trigger('toggle', [
-      state(NbToggleStates.Collapsed, style({ height: '0', margin: '0' })),
-      state(NbToggleStates.Expanded, style({ height: '*' })),
-      transition(`${NbToggleStates.Collapsed} <=> ${NbToggleStates.Expanded}`, animate(300)),
-    ]),
-  ],
+    selector: '[nbMenuItem]',
+    templateUrl: './menu-item.component.html',
+    animations: [
+        trigger('toggle', [
+            state(NbToggleStates.Collapsed, style({ height: '0', margin: '0' })),
+            state(NbToggleStates.Expanded, style({ height: '*' })),
+            transition(`${NbToggleStates.Collapsed} <=> ${NbToggleStates.Expanded}`, animate(300)),
+        ]),
+    ],
+    standalone: false
 })
 export class NbMenuItemComponent implements DoCheck, AfterViewInit, OnDestroy {
   @Input() menuItem = <NbMenuItem>null;
@@ -207,9 +208,9 @@ export class NbMenuItemComponent implements DoCheck, AfterViewInit, OnDestroy {
  * menu-submenu-item-icon-active-hover-color:
  */
 @Component({
-  selector: 'nb-menu',
-  styleUrls: ['./menu.component.scss'],
-  template: `
+    selector: 'nb-menu',
+    styleUrls: ['./menu.component.scss'],
+    template: `
     <ul class="menu-items">
       <ng-container *ngFor="let item of items">
         <li nbMenuItem *ngIf="!item.hidden"
@@ -225,6 +226,7 @@ export class NbMenuItemComponent implements DoCheck, AfterViewInit, OnDestroy {
       </ng-container>
     </ul>
   `,
+    standalone: false
 })
 export class NbMenuComponent implements OnInit, AfterViewInit, OnDestroy {
 

@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'ngd-components-promo',
-  template: `
+    selector: 'ngd-components-promo',
+    template: `
     <h2>{{ title }}</h2>
     <p>{{ description }}</p>
   `,
-  styleUrls: ['./components-promo.component.scss'],
+    styleUrls: ['./components-promo.component.scss'],
+    standalone: false
 })
 export class NgdComponentsPromoComponent {
   title = 'Angular UI components';

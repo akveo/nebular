@@ -43,11 +43,15 @@ import {
 } from '@nebular/theme';
 import { NbMenuInternalService } from './menu.service';
 
-@Component({ template: '' })
+@Component({
+    template: '',
+    standalone: false
+})
 export class NoopComponent {}
 
 @Component({
-  template: `<nb-menu [items]="items" [tag]="menuTag"></nb-menu>`,
+    template: `<nb-menu [items]="items" [tag]="menuTag"></nb-menu>`,
+    standalone: false
 })
 export class SingleMenuTestComponent {
   constructor(public menuPublicService: NbMenuService) {}
@@ -57,10 +61,11 @@ export class SingleMenuTestComponent {
 }
 
 @Component({
-  template: `
+    template: `
     <nb-menu [items]="firstMenuItems" [tag]="firstMenuTag"></nb-menu>
     <nb-menu [items]="secondMenuItems" [tag]="secondMenuTag"></nb-menu>
   `,
+    standalone: false
 })
 export class DoubleMenusTestComponent {
   constructor(public menuPublicService: NbMenuService) {}

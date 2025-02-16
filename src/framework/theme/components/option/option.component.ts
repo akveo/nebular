@@ -78,13 +78,14 @@ import { NbSelectComponent } from '../select/select.component';
  * option-giant-padding:
  **/
 @Component({
-  selector: 'nb-option',
-  styleUrls: ['./option.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  template: `
+    selector: 'nb-option',
+    styleUrls: ['./option.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    template: `
     <nb-checkbox *ngIf="withCheckbox" [checked]="selected" [disabled]="disabled" aria-hidden="true"> </nb-checkbox>
     <ng-content></ng-content>
   `,
+    standalone: false
 })
 export class NbOptionComponent<T = any> implements OnDestroy, AfterViewInit, NbFocusableOption, NbHighlightableOption {
   protected disabledByGroup = false;

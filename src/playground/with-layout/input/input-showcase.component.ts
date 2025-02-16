@@ -7,7 +7,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  template: `
+    template: `
     <nb-card>
       <nb-card-body class="example-items-rows">
         <input type="text" nbInput placeholder="Text field">
@@ -15,5 +15,6 @@ import { Component } from '@angular/core';
       </nb-card-body>
     </nb-card>
   `,
+    standalone: false
 })
 export class InputsShowcaseComponent {}

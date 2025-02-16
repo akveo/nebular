@@ -12,15 +12,16 @@ export const NB_ROW_DOUBLE_CLICK_DELAY: number = 200;
  * Cells container. Adds the right class and role.
  */
 @Component({
-  // eslint-disable-next-line @angular-eslint/component-selector
-  selector: 'tr[nbTreeGridRow]',
-  template: `<ng-container nbCellOutlet></ng-container>`,
-  // eslint-disable-next-line @angular-eslint/no-host-metadata-property
-  host: {
-    class: 'nb-tree-grid-row',
-    role: 'row',
-  },
-  providers: [{ provide: NbCdkRow, useExisting: NbTreeGridRowComponent }],
+    // eslint-disable-next-line @angular-eslint/component-selector
+    selector: 'tr[nbTreeGridRow]',
+    template: `<ng-container nbCellOutlet></ng-container>`,
+    // eslint-disable-next-line @angular-eslint/no-host-metadata-property
+    host: {
+        class: 'nb-tree-grid-row',
+        role: 'row',
+    },
+    providers: [{ provide: NbCdkRow, useExisting: NbTreeGridRowComponent }],
+    standalone: false
 })
 export class NbTreeGridRowComponent extends NbRowComponent implements OnDestroy {
   private readonly doubleClick$ = new Subject<void>();
@@ -69,27 +70,29 @@ export class NbTreeGridRowComponent extends NbRowComponent implements OnDestroy 
 }
 
 @Component({
-  // eslint-disable-next-line @angular-eslint/component-selector
-  selector: 'tr[nbTreeGridHeaderRow]',
-  template: ` <ng-container nbCellOutlet></ng-container>`,
-  // eslint-disable-next-line @angular-eslint/no-host-metadata-property
-  host: {
-    class: 'nb-tree-grid-header-row',
-    role: 'row',
-  },
-  providers: [{ provide: NbCdkHeaderRow, useExisting: NbTreeGridHeaderRowComponent }],
+    // eslint-disable-next-line @angular-eslint/component-selector
+    selector: 'tr[nbTreeGridHeaderRow]',
+    template: ` <ng-container nbCellOutlet></ng-container>`,
+    // eslint-disable-next-line @angular-eslint/no-host-metadata-property
+    host: {
+        class: 'nb-tree-grid-header-row',
+        role: 'row',
+    },
+    providers: [{ provide: NbCdkHeaderRow, useExisting: NbTreeGridHeaderRowComponent }],
+    standalone: false
 })
 export class NbTreeGridHeaderRowComponent extends NbHeaderRowComponent {}
 
 @Component({
-  // eslint-disable-next-line @angular-eslint/component-selector
-  selector: 'tr[nbTreeGridFooterRow]',
-  template: ` <ng-container nbCellOutlet></ng-container>`,
-  // eslint-disable-next-line @angular-eslint/no-host-metadata-property
-  host: {
-    class: 'nb-tree-grid-footer-row',
-    role: 'row',
-  },
-  providers: [{ provide: NbCdkFooterRow, useExisting: NbTreeGridFooterRowComponent }],
+    // eslint-disable-next-line @angular-eslint/component-selector
+    selector: 'tr[nbTreeGridFooterRow]',
+    template: ` <ng-container nbCellOutlet></ng-container>`,
+    // eslint-disable-next-line @angular-eslint/no-host-metadata-property
+    host: {
+        class: 'nb-tree-grid-footer-row',
+        role: 'row',
+    },
+    providers: [{ provide: NbCdkFooterRow, useExisting: NbTreeGridFooterRowComponent }],
+    standalone: false
 })
 export class NbTreeGridFooterRowComponent extends NbFooterRowComponent {}

@@ -139,15 +139,16 @@ import { NbColumnsService } from './tree-grid-columns.service';
  * tree-grid-sort-header-button-padding:
  */
 @Component({
-  selector: 'table[nbTreeGrid]',
-  template: NB_TABLE_TEMPLATE,
-  styleUrls: ['./tree-grid.component.scss'],
-  providers: [
-    { provide: NB_TREE_GRID, useExisting: NbTreeGridComponent },
-    { provide: CDK_TABLE, useExisting: NbTreeGridComponent },
-    NbColumnsService,
-    ...NB_TABLE_PROVIDERS,
-  ],
+    selector: 'table[nbTreeGrid]',
+    template: NB_TABLE_TEMPLATE,
+    styleUrls: ['./tree-grid.component.scss'],
+    providers: [
+        { provide: NB_TREE_GRID, useExisting: NbTreeGridComponent },
+        { provide: CDK_TABLE, useExisting: NbTreeGridComponent },
+        NbColumnsService,
+        ...NB_TABLE_PROVIDERS,
+    ],
+    standalone: false
 })
 export class NbTreeGridComponent<T> extends NbTable<NbTreeGridPresentationNode<T>>
                                     implements AfterViewInit, OnDestroy {

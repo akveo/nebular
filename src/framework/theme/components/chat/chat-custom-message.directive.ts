@@ -23,7 +23,8 @@ function throwCustomMessageTypeIsRequired(): void {
  * ```
  */
 @Directive({
-  selector: `[nbCustomMessage]`,
+    selector: `[nbCustomMessage]`,
+    standalone: false
 })
 export class NbChatCustomMessageDirective implements OnInit, OnDestroy {
   /**

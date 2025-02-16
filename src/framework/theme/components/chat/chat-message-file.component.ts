@@ -21,8 +21,8 @@ export type NbChatMessageFile = NbChatMessageFileIconPreview | NbChatMessageFile
  * Chat message component.
  */
 @Component({
-  selector: 'nb-chat-message-file',
-  template: `
+    selector: 'nb-chat-message-file',
+    template: `
     <nb-chat-message-text [sender]="sender" [date]="date" [dateFormat]="dateFormat" [message]="message">
       {{ message }}
     </nb-chat-message-text>
@@ -43,7 +43,8 @@ export type NbChatMessageFile = NbChatMessageFileIconPreview | NbChatMessageFile
       </a>
     </ng-container>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class NbChatMessageFileComponent {
 

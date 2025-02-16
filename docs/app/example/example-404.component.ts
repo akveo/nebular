@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { NbThemeService } from '@nebular/theme';
 
 @Component({
-  selector: 'ngd-example-404',
-  template: `
+    selector: 'ngd-example-404',
+    template: `
     Example not found.
   `,
-  styleUrls: ['./example-404.component.scss'],
+    styleUrls: ['./example-404.component.scss'],
+    standalone: false
 })
 export class NgdExample404Component {
 

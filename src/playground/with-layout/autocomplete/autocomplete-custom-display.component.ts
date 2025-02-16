@@ -11,9 +11,10 @@ import { FormControl } from '@angular/forms';
 import { map, startWith } from 'rxjs/operators';
 
 @Component({
-  selector: 'nb-autocomplete-custom-display',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: './autocomplete-custom-display.component.html',
+    selector: 'nb-autocomplete-custom-display',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    templateUrl: './autocomplete-custom-display.component.html',
+    standalone: false
 })
 export class AutocompleteCustomDisplayComponent implements OnInit {
 

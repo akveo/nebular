@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'nb-progress-bar-interactive',
-  templateUrl: './progress-bar-interactive.component.html',
-  styles: [`
+    selector: 'nb-progress-bar-interactive',
+    templateUrl: './progress-bar-interactive.component.html',
+    styles: [`
     .container {
       display: flex;
       align-items: center;
@@ -13,6 +13,7 @@ import { Component } from '@angular/core';
       flex: 1;
     }
   `],
+    standalone: false
 })
 
 export class ProgressBarInteractiveComponent {

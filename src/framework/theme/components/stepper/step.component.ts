@@ -8,12 +8,13 @@ import { convertToBoolProperty, NbBooleanInput } from '../helpers';
  * Container for a step
  */
 @Component({
-  selector: 'nb-step',
-  template: `
+    selector: 'nb-step',
+    template: `
     <ng-template>
       <ng-content></ng-content>
     </ng-template>
   `,
+    standalone: false
 })
 export class NbStepComponent {
 

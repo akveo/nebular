@@ -14,9 +14,10 @@ import { NgdTabbedBlockComponent } from '../../blocks/components/tabbed-block/ta
 import { NgdStructureService } from '../../@theme/services';
 
 @Component({
-  selector: 'ngd-page',
-  templateUrl: './page.component.html',
-  styleUrls: ['./page.component.scss'],
+    selector: 'ngd-page',
+    templateUrl: './page.component.html',
+    styleUrls: ['./page.component.scss'],
+    standalone: false
 })
 export class NgdPageComponent implements OnInit, AfterContentChecked, OnDestroy {
 

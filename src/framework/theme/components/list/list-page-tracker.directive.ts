@@ -20,7 +20,8 @@ import { NbListItemComponent } from './list.component';
  *
  */
 @Directive({
-  selector: '[nbListPageTracker]',
+    selector: '[nbListPageTracker]',
+    standalone: false
 })
 export class NbListPageTrackerDirective implements AfterViewInit, OnDestroy {
   private destroy$ = new Subject<void>();

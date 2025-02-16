@@ -8,10 +8,10 @@ import { Component } from '@angular/core';
 import { ChatShowcaseService } from './chat-showcase.service';
 
 @Component({
-  selector: 'nb-chat-showcase',
-  templateUrl: './chat-showcase.component.html',
-  providers: [ ChatShowcaseService ],
-  styles: [`
+    selector: 'nb-chat-showcase',
+    templateUrl: './chat-showcase.component.html',
+    providers: [ChatShowcaseService],
+    styles: [`
     ::ng-deep nb-layout-column {
       justify-content: center;
       display: flex;
@@ -20,6 +20,7 @@ import { ChatShowcaseService } from './chat-showcase.service';
       width: 500px;
     }
   `],
+    standalone: false
 })
 export class ChatShowcaseComponent {
 

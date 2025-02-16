@@ -19,13 +19,14 @@ import {
 const ICON_NAME = 'chevron-left-outline';
 
 @Component({
-  template: `
+    template: `
     <nb-actions>
       <nb-action [icon]="icon" [link]="link">
         <ng-container *ngIf="projectContent">{{ projectedText }}</ng-container>
       </nb-action>
     </nb-actions>
   `,
+    standalone: false
 })
 export class NbActionsTestComponent {
   projectContent: boolean = false;

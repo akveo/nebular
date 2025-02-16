@@ -7,8 +7,8 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'form-field-showcase-component',
-  template: `
+    selector: 'form-field-showcase-component',
+    template: `
     <nb-card>
       <nb-card-body class="example-items-col">
 
@@ -28,6 +28,7 @@ import { Component } from '@angular/core';
       </nb-card-body>
     </nb-card>
   `,
+    standalone: false
 })
 export class FormFieldShowcaseComponent {
 }

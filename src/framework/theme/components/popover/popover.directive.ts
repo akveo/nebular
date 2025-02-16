@@ -111,9 +111,10 @@ import { Subject } from 'rxjs';
  * @additional-example(Custom Component, popover/popover-custom-component.component)
  * */
 @Directive({
-  selector: '[nbPopover]',
-  exportAs: 'nbPopover',
-  providers: [NbDynamicOverlayHandler, NbDynamicOverlay],
+    selector: '[nbPopover]',
+    exportAs: 'nbPopover',
+    providers: [NbDynamicOverlayHandler, NbDynamicOverlay],
+    standalone: false
 })
 export class NbPopoverDirective implements NbDynamicOverlayController, OnChanges, AfterViewInit, OnDestroy, OnInit {
   protected popoverComponent = NbPopoverComponent;

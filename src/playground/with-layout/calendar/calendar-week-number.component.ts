@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NbDateService, NbCalendarRange } from '@nebular/theme';
 
 @Component({
-  template: `
+    template: `
     <nb-card>
       <nb-card-body>
         <div class="example-items-rows">
@@ -24,7 +24,8 @@ import { NbDateService, NbCalendarRange } from '@nebular/theme';
       </nb-card-body>
     </nb-card>
   `,
-  styles: [` button { margin-bottom: 1rem; } `],
+    styles: [` button { margin-bottom: 1rem; } `],
+    standalone: false
 })
 export class CalendarWeekNumberComponent {
   showWeekNumber = false;

@@ -3,16 +3,18 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NbComponentPortal, NbOverlayContainerComponent, NbOverlayModule } from '@nebular/theme';
 
 @Component({
-  template: `
+    template: `
     <nb-overlay-container></nb-overlay-container>
   `,
+    standalone: false
 })
 export class NbOverlayContainerTestComponent {
   @ViewChild(NbOverlayContainerComponent) overlayContainer: NbOverlayContainerComponent;
 }
 
 @Component({
-  template: `{{ contextProperty }}`,
+    template: `{{ contextProperty }}`,
+    standalone: false
 })
 export class NbOverlayTestComponent implements OnInit {
   contextProperty;

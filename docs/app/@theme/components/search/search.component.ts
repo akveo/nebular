@@ -2,13 +2,14 @@ import { AfterViewInit, ChangeDetectionStrategy, Component, Inject } from '@angu
 import { NB_WINDOW } from '@nebular/theme';
 
 @Component({
-  selector: 'ngd-search',
-  styleUrls: ['./search.component.scss'],
-  template: `
+    selector: 'ngd-search',
+    styleUrls: ['./search.component.scss'],
+    template: `
     <nb-icon icon="search-outline"></nb-icon>
     <input type="text" nbInput id="doc-search" placeholder="Start typing...">
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class NgdSearchComponent implements AfterViewInit {
 

@@ -10,8 +10,8 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
  * Chat message component.
  */
 @Component({
-  selector: 'nb-chat-message-quote',
-  template: `
+    selector: 'nb-chat-message-quote',
+    template: `
     <p class="sender" *ngIf="sender || date">{{ sender }} <time>{{ date | date: dateFormat }}</time></p>
     <p class="quote">
       {{ quote }}
@@ -20,7 +20,8 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
       {{ message }}
     </nb-chat-message-text>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class NbChatMessageQuoteComponent {
 

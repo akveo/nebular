@@ -8,9 +8,9 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
 @Component({
-  selector: 'nb-timepicker-form-control',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  template: `
+    selector: 'nb-timepicker-form-control',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    template: `
     <nb-card size="large">
       <nb-card-body>
         <input nbInput
@@ -21,7 +21,8 @@ import { FormControl } from '@angular/forms';
       </nb-card-body>
     </nb-card>
   `,
-  styleUrls: ['./timepicker-example.scss'],
+    styleUrls: ['./timepicker-example.scss'],
+    standalone: false
 })
 export class TimepickerFormControlComponent {
   formControl = new FormControl(new Date());

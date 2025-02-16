@@ -194,8 +194,8 @@ import { convertToBoolProperty, NbBooleanInput } from '../helpers';
  * calendar-year-cell-large-height:
  * */
 @Component({
-  selector: 'nb-calendar',
-  template: `
+    selector: 'nb-calendar',
+    template: `
     <nb-base-calendar
       [boundingMonth]="boundingMonth"
       [startView]="startView"
@@ -215,6 +215,7 @@ import { convertToBoolProperty, NbBooleanInput } from '../helpers';
       (dateChange)="dateChange.emit($event)"
     ></nb-base-calendar>
   `,
+    standalone: false
 })
 export class NbCalendarComponent<D> {
 

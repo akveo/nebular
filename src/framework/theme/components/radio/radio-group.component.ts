@@ -70,17 +70,18 @@ import { NbRadioComponent } from './radio.component';
  *
  * */
 @Component({
-  selector: 'nb-radio-group',
-  template: `
+    selector: 'nb-radio-group',
+    template: `
     <ng-content select="nb-radio"></ng-content>`,
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => NbRadioGroupComponent),
-      multi: true,
-    },
-  ],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => NbRadioGroupComponent),
+            multi: true,
+        },
+    ],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class NbRadioGroupComponent implements AfterContentInit, OnDestroy, ControlValueAccessor {
 

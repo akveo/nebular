@@ -2,7 +2,8 @@ import { AfterViewInit, Directive, ElementRef } from '@angular/core';
 import * as marked from 'marked';
 
 @Directive({
-  selector: '[ngdDescription]',
+    selector: '[ngdDescription]',
+    standalone: false
 })
 export class NgdDescriptionDirective implements AfterViewInit {
 

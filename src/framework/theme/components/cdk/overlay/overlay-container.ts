@@ -26,7 +26,8 @@ export interface NbRenderableContainer {
 }
 
 @Component({
-  template: '',
+    template: '',
+    standalone: false
 })
 export class NbPositionedContainerComponent {
   @Input() position: NbPosition;
@@ -94,11 +95,12 @@ export class NbPositionedContainerComponent {
 
 
 @Component({
-  selector: 'nb-overlay-container',
-  template: `
+    selector: 'nb-overlay-container',
+    template: `
     <div *ngIf="isStringContent" class="primitive-overlay">{{ content }}</div>
     <ng-template nbPortalOutlet></ng-template>
   `,
+    standalone: false
 })
 export class NbOverlayContainerComponent {
 

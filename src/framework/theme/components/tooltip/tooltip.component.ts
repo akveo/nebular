@@ -58,27 +58,28 @@ import { NbIconConfig } from '../icon/icon.component';
  * tooltip-shadow:
  */
 @Component({
-  selector: 'nb-tooltip',
-  styleUrls: ['./tooltip.component.scss'],
-  template: `
+    selector: 'nb-tooltip',
+    styleUrls: ['./tooltip.component.scss'],
+    template: `
     <span class="arrow"></span>
     <div class="content">
       <nb-icon *ngIf="context?.icon" [config]="context.icon"></nb-icon>
       <span *ngIf="content">{{ content }}</span>
     </div>
   `,
-  animations: [
-    trigger('showTooltip', [
-      state('in', style({ opacity: 1 })),
-      transition('void => *', [
-        style({ opacity: 0 }),
-        animate(100),
-      ]),
-      transition('* => void', [
-        animate(100, style({ opacity: 0 })),
-      ]),
-    ]),
-  ],
+    animations: [
+        trigger('showTooltip', [
+            state('in', style({ opacity: 1 })),
+            transition('void => *', [
+                style({ opacity: 0 }),
+                animate(100),
+            ]),
+            transition('* => void', [
+                animate(100, style({ opacity: 0 })),
+            ]),
+        ]),
+    ],
+    standalone: false
 })
 export class NbTooltipComponent implements NbRenderableContainer {
 

@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'nb-app-spinner-card',
-  template: `
+    selector: 'nb-app-spinner-card',
+    template: `
     <nb-card accent="danger" size="tiny" [nbSpinner]="loading"
              nbSpinnerStatus="danger"
              nbSpinnerSize="large"
@@ -18,6 +18,7 @@ import { Component } from '@angular/core';
       </nb-card-body>
     </nb-card>
   `,
+    standalone: false
 })
 export class SpinnerCardComponent {
 
