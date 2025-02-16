@@ -1,3 +1,9 @@
+<a name="15.0.0"></a>
+# [15.0.0](https://github.com/akveo/nebular/compare/v14.0.2...v15.0.0) (2025-02-16)
+
+* **angular:** update to Angular 19 ([#3280](https://github.com/akveo/nebular/pull/3280)) ([58f0db9](https://github.com/akveo/nebular/commit/58f0db9))
+
+
 <a name="14.0.2"></a>
 ## [14.0.2](https://github.com/akveo/nebular/compare/v14.0.1...v14.0.2) (2024-11-05)
 

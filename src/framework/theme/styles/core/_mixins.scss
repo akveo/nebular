@@ -27,10 +27,12 @@
     background: $bg;
   }
 
-  // TODO: remove
-  // For Internet Explorer
-  scrollbar-face-color: $fg;
-  scrollbar-track-color: $bg;
+  & {
+    // TODO: remove
+    // For Internet Explorer
+    scrollbar-face-color: $fg;
+    scrollbar-track-color: $bg;
+  }
 }
 
 @mixin nb-headings($from: 1, $to: 6) {
