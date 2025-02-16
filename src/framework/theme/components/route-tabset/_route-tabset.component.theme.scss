@@ -14,9 +14,11 @@
       nb-theme(route-tabset-scrollbar-width)
     );
 
-    background-color: nb-theme(route-tabset-background-color);
-    border-radius: nb-theme(route-tabset-border-radius);
-    box-shadow: nb-theme(route-tabset-shadow);
+    & {
+      background-color: nb-theme(route-tabset-background-color);
+      border-radius: nb-theme(route-tabset-border-radius);
+      box-shadow: nb-theme(route-tabset-shadow);
+    }
 
     .route-tabset {
       border-bottom: nb-theme(route-tabset-divider-width) nb-theme(route-tabset-divider-style)
