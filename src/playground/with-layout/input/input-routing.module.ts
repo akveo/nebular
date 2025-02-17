@@ -13,6 +13,7 @@ import { InputsShowcaseComponent } from './input-showcase.component';
 import { InputSizesComponent } from './input-sizes.component';
 import { InputTypesComponent } from './input-types.component';
 import { InputFormComponent } from './input-form.component';
+import { InputDivColorsComponent } from './input-div-colors.component';
 
 const routes: Route[] = [
   {
@@ -42,6 +43,10 @@ const routes: Route[] = [
   {
     path: 'input-form.component',
     component: InputFormComponent,
+  },
+  {
+    path: 'input-div-colors.component',
+    component: InputDivColorsComponent,
   },
 ];
 

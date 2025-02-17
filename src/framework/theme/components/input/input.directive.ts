@@ -217,7 +217,7 @@ import { NbFocusMonitor } from '../cdk/a11y/a11y.module';
  * input-giant-max-width:
  */
 @Directive({
-  selector: 'input[nbInput],textarea[nbInput]',
+  selector: 'input[nbInput],textarea[nbInput],div[nbInput]',
   providers: [{ provide: NbFormFieldControl, useExisting: NbInputDirective }],
 })
 export class NbInputDirective implements DoCheck, OnChanges, OnInit, AfterViewInit, OnDestroy, NbFormFieldControl {

@@ -15,10 +15,12 @@ import { InputsShowcaseComponent } from './input-showcase.component';
 import { InputSizesComponent } from './input-sizes.component';
 import { InputTypesComponent } from './input-types.component';
 import { InputFormComponent } from './input-form.component';
+import { InputDivColorsComponent } from './input-div-colors.component';
 
 @NgModule({
   declarations: [
     InputColorsComponent,
+    InputDivColorsComponent,
     InputFullWidthComponent,
     InputShapesComponent,
     InputsShowcaseComponent,
