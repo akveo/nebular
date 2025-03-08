@@ -13,6 +13,9 @@ export interface NbTimepickerLocalizationConfig {
   minutesText: string,
   secondsText: string,
   ampmText: string,
+  timeText: string;
+  applyButtonText: string,
+  currentTimeButtonText: string,
 }
 
 export const NB_DEFAULT_TIMEPICKER_LOCALIZATION_CONFIG: NbTimepickerLocalizationConfig = {
@@ -20,12 +23,15 @@ export const NB_DEFAULT_TIMEPICKER_LOCALIZATION_CONFIG: NbTimepickerLocalization
   minutesText: 'Min',
   secondsText: 'Sec',
   ampmText: 'Am/Pm',
+  timeText: 'Time',
+  applyButtonText: 'ok',
+  currentTimeButtonText: 'now',
 };
 
 export interface NbTimePickerConfig {
   twelveHoursFormat?: boolean,
   format?: string,
-  localization?: NbTimepickerLocalizationConfig,
+  localization?: Partial<NbTimepickerLocalizationConfig>,
 }
 
 export interface NbSelectedTimeModel {
