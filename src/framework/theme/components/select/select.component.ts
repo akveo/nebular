@@ -693,6 +693,10 @@ export class NbSelectComponent
   @Input() optionsOverlayOffset = 8;
 
   /**
+   * Determines options overlay position (defaults to bottom).
+   **/
+  @Input() optionsOverlayPosition = NbPosition.BOTTOM;
+  /**
    * Determines options overlay scroll strategy.
    **/
   @Input() scrollStrategy: NbScrollStrategies = 'block';
@@ -1063,7 +1067,7 @@ export class NbSelectComponent
   protected createPositionStrategy(): NbAdjustableConnectedPositionStrategy {
     return this.positionBuilder
       .connectedTo(this.button)
-      .position(NbPosition.BOTTOM)
+      .position(this.optionsOverlayPosition)
       .offset(this.optionsOverlayOffset)
       .adjustment(NbAdjustment.VERTICAL);
   }

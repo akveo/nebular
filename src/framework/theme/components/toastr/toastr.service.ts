@@ -67,6 +67,10 @@ export class NbToastContainer {
       this.subscribeOnCloseButton(toastComponent, toast);
     }
 
+    if (toast.config.destroyOnActionCallback) {
+      this.subscribeOnActionCallback(toastComponent, toast);
+    }
+
     if (toast.config.duration) {
       this.setDestroyTimeout(toast);
     }
@@ -144,7 +148,10 @@ export class NbToastContainer {
   protected subscribeOnClick(toastComponent: NbToastComponent, toast: NbToast) {
     toastComponent.toastClick
       .pipe(
-        filter(() => !toast.config.destroyByCloseButton && toast.config.destroyByClick),
+        filter(
+          () =>
+            !toast.config.destroyByCloseButton && !toast.config.destroyOnActionCallback && toast.config.destroyByClick,
+        ),
         takeUntil(toastComponent.destroy),
       )
       .subscribe(() => this.destroy(toast));
@@ -154,6 +161,15 @@ export class NbToastContainer {
     toastComponent.toastCloseButton
       .pipe(
         filter(() => toast.config.destroyByCloseButton),
+        takeUntil(toastComponent.destroy),
+      )
+      .subscribe(() => this.destroy(toast));
+  }
+
+  protected subscribeOnActionCallback(toastComponent: NbToastComponent, toast: NbToast) {
+    toastComponent.toastActionCallback
+      .pipe(
+        filter(() => toast.config.destroyOnActionCallback),
         takeUntil(toastComponent.destroy),
       )
       .subscribe(() => this.destroy(toast));

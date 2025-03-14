@@ -5,7 +5,9 @@ import { NbToastrService, NbToastRef } from '@nebular/theme';
   selector: 'npg-toastr-actions',
   template: `
     <button nbButton (click)="show1Action()">With 1 action</button>
-    <button nbButton (click)="showMultipleActions()">Without multiple actions</button>
+    <button nbButton (click)="show1Action(true)">With 1 action (destroy on callback)</button>
+    <button nbButton (click)="showMultipleActions()">With multiple actions</button>
+    <button nbButton (click)="showMultipleActions(true)">With multiple actions (destroy on callback)</button>
   `,
   styles: [
     `
@@ -22,15 +24,21 @@ export class ToastrActionsComponent {
   className = 'example-items-rows';
 
   constructor(private toastrService: NbToastrService) {}
+
   currentToast: NbToastRef | undefined;
 
-  show1Action() {
-    this.currentToast = this.toastrService.show('Message', `Toast: ${++this.index}`, [
-      { text: 'Close', color: 'basic', callback: () => this.currentToast?.close() },
-    ]);
+  show1Action(destroyOnActionCallback = false) {
+    this.currentToast = this.toastrService.show(
+      'Message',
+      `Toast: ${++this.index}`,
+      [{ text: 'Close', color: 'basic', callback: () => this.currentToast?.close() }],
+      {
+        destroyOnActionCallback,
+      },
+    );
   }
 
-  showMultipleActions() {
+  showMultipleActions(destroyOnActionCallback = false) {
     this.currentToast = this.toastrService.show(
       'Message',
       `Toast: ${++this.index}`,
@@ -39,6 +47,7 @@ export class ToastrActionsComponent {
         { text: 'Red Close', color: 'danger', callback: () => this.currentToast?.close() },
       ],
       {
+        destroyOnActionCallback,
         duration: 0,
       },
     );

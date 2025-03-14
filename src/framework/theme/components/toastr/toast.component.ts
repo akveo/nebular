@@ -101,6 +101,7 @@ export class NbToastComponent implements OnInit, OnDestroy {
   @Output() destroy: EventEmitter<void> = new EventEmitter();
   @Output() toastClick: EventEmitter<void> = new EventEmitter();
   @Output() toastCloseButton: EventEmitter<void> = new EventEmitter();
+  @Output() toastActionCallback: EventEmitter<void> = new EventEmitter();
 
   @HostBinding('class.status-success')
   get success(): boolean {
@@ -197,5 +198,9 @@ export class NbToastComponent implements OnInit, OnDestroy {
 
   onClose() {
     this.toastCloseButton.emit();
+  }
+
+  onActionCallback() {
+    this.toastActionCallback.emit();
   }
 }

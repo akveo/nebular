@@ -43,6 +43,10 @@ export class NbToastrConfig {
    * */
   destroyByCloseButton: boolean = false;
   /**
+   * Destroy when a callbeck of an action is triggered. Ignores destroyByClick when this is true.
+   * */
+  destroyOnActionCallback: boolean = false;
+  /**
    * If preventDuplicates is true then the toast with the same title, message and status will not be rendered.
    * Find duplicates behaviour determined by `preventDuplicates`.
    * The default `previous` duplicate behaviour is used.
