@@ -1,12 +1,12 @@
 <div class="icon-container" *ngIf="hasIcon && icon">
-  <nb-icon [config]="icon"></nb-icon>
+  <nb-icon [class.mt-0]="!toast.message" [config]="icon"></nb-icon>
 </div>
 <div class="content-container">
   <a *ngIf="toast.config.destroyByCloseButton" role="button" class="toast-close-button" (click)="onClose()">
     <nb-icon pack="eva" icon="close-outline" status="basic"></nb-icon>
   </a>
   <span class="title subtitle">{{ toast.title }}</span>
-  <div class="message">{{ toast.message }}</div>
+  <div *ngIf="toast.message" class="message">{{ toast.message }}</div>
   <div *ngIf="toast.actions?.length" class="actions-container">
     <a
       *ngFor="let action of toast.actions"
