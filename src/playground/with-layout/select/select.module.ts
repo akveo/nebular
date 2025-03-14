@@ -35,6 +35,7 @@ import { SelectTestComponent } from './select-test.component';
 import { SelectCompareWithComponent } from './select-compare-with.component';
 import { SelectIconComponent } from './select-icon.component';
 import { SelectAutocompleteShowcaseComponent } from './select-autocomplete-showcase.component';
+import { SelectOverlayPositionComponent } from './select-overlay-position.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import { SelectAutocompleteShowcaseComponent } from './select-autocomplete-showc
     SelectCompareWithComponent,
     SelectIconComponent,
     SelectAutocompleteShowcaseComponent,
+    SelectOverlayPositionComponent,
   ],
   imports: [
     FormsModule,

@@ -560,9 +560,11 @@ export class NbSelectComponent
   get optionsWidth(): number {
     return this._optionsWidth ?? this.hostWidth;
   }
+
   set optionsWidth(value: number) {
     this._optionsWidth = value;
   }
+
   protected _optionsWidth: number | undefined;
 
   /**
@@ -573,11 +575,13 @@ export class NbSelectComponent
   get outline(): boolean {
     return this.appearance === 'outline';
   }
+
   set outline(value: boolean) {
     if (convertToBoolProperty(value)) {
       this.appearance = 'outline';
     }
   }
+
   static ngAcceptInputType_outline: NbBooleanInput;
 
   /**
@@ -588,11 +592,13 @@ export class NbSelectComponent
   get filled(): boolean {
     return this.appearance === 'filled';
   }
+
   set filled(value: boolean) {
     if (convertToBoolProperty(value)) {
       this.appearance = 'filled';
     }
   }
+
   static ngAcceptInputType_filled: NbBooleanInput;
 
   /**
@@ -603,11 +609,13 @@ export class NbSelectComponent
   get hero(): boolean {
     return this.appearance === 'hero';
   }
+
   set hero(value: boolean) {
     if (convertToBoolProperty(value)) {
       this.appearance = 'hero';
     }
   }
+
   static ngAcceptInputType_hero: NbBooleanInput;
 
   /**
@@ -617,9 +625,11 @@ export class NbSelectComponent
   get disabled(): boolean {
     return !!this._disabled;
   }
+
   set disabled(value: boolean) {
     this._disabled = convertToBoolProperty(value);
   }
+
   protected _disabled: boolean;
   static ngAcceptInputType_disabled: NbBooleanInput;
 
@@ -631,9 +641,11 @@ export class NbSelectComponent
   get fullWidth(): boolean {
     return this._fullWidth;
   }
+
   set fullWidth(value: boolean) {
     this._fullWidth = convertToBoolProperty(value);
   }
+
   protected _fullWidth: boolean = false;
   static ngAcceptInputType_fullWidth: NbBooleanInput;
 
@@ -650,6 +662,7 @@ export class NbSelectComponent
   get compareWith(): NbSelectCompareFunction {
     return this._compareWith;
   }
+
   set compareWith(fn: NbSelectCompareFunction) {
     if (typeof fn !== 'function') {
       return;
@@ -661,6 +674,7 @@ export class NbSelectComponent
       this.setSelection(this.selected);
     }
   }
+
   protected _compareWith: NbSelectCompareFunction = (v1: any, v2: any) => v1 === v2;
 
   /**
@@ -670,6 +684,7 @@ export class NbSelectComponent
   set selected(value) {
     this.writeValue(value);
   }
+
   get selected() {
     return this.multiple ? this.selectionModel.map((o) => o.value) : this.selectionModel[0].value;
   }
@@ -681,17 +696,22 @@ export class NbSelectComponent
   get multiple(): boolean {
     return this._multiple;
   }
+
   set multiple(value: boolean) {
     this._multiple = convertToBoolProperty(value);
   }
+
   protected _multiple: boolean = false;
   static ngAcceptInputType_multiple: NbBooleanInput;
 
   /**
-   * Determines options overlay offset (in pixels).
+   * Determines options overlay offset top (in pixels).
    **/
-  @Input() optionsOverlayOffset = 8;
-
+  @Input() optionsOverlayOffsetTop = 8;
+  /**
+   * Determines options overlay offset left (in pixels).
+   **/
+  @Input() optionsOverlayOffsetLeft = 0;
   /**
    * Determines options overlay position (defaults to bottom).
    **/
@@ -1065,11 +1085,13 @@ export class NbSelectComponent
   }
 
   protected createPositionStrategy(): NbAdjustableConnectedPositionStrategy {
+    // If we modified the position we disable the adjustment.
+    const adjustment = this.optionsOverlayPosition === NbPosition.BOTTOM ? NbAdjustment.VERTICAL : NbAdjustment.NOOP;
     return this.positionBuilder
       .connectedTo(this.button)
       .position(this.optionsOverlayPosition)
-      .offset(this.optionsOverlayOffset)
-      .adjustment(NbAdjustment.VERTICAL);
+      .offset(this.optionsOverlayOffsetTop)
+      .adjustment(adjustment);
   }
 
   protected createScrollStrategy(): NbScrollStrategy {
@@ -1250,58 +1272,72 @@ export class NbSelectComponent
   get tiny(): boolean {
     return this.size === 'tiny';
   }
+
   @HostBinding('class.size-small')
   get small(): boolean {
     return this.size === 'small';
   }
+
   @HostBinding('class.size-medium')
   get medium(): boolean {
     return this.size === 'medium';
   }
+
   @HostBinding('class.size-large')
   get large(): boolean {
     return this.size === 'large';
   }
+
   @HostBinding('class.size-giant')
   get giant(): boolean {
     return this.size === 'giant';
   }
+
   @HostBinding('class.status-primary')
   get primary(): boolean {
     return this.status === 'primary';
   }
+
   @HostBinding('class.status-info')
   get info(): boolean {
     return this.status === 'info';
   }
+
   @HostBinding('class.status-success')
   get success(): boolean {
     return this.status === 'success';
   }
+
   @HostBinding('class.status-warning')
   get warning(): boolean {
     return this.status === 'warning';
   }
+
   @HostBinding('class.status-danger')
   get danger(): boolean {
     return this.status === 'danger';
   }
+
   @HostBinding('class.status-basic')
   get basic(): boolean {
     return this.status === 'basic';
   }
+
   @HostBinding('class.status-control')
   get control(): boolean {
     return this.status === 'control';
   }
+
   @HostBinding('class.shape-rectangle')
   get rectangle(): boolean {
     return this.shape === 'rectangle';
   }
+
   @HostBinding('class.shape-round')
   get round(): boolean {
     return this.shape === 'round';
   }
+
   @HostBinding('class.shape-semi-round')
   get semiRound(): boolean {
     return this.shape === 'semi-round';

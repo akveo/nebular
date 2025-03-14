@@ -24,6 +24,7 @@ import { SelectTestComponent } from './select-test.component';
 import { SelectCompareWithComponent } from './select-compare-with.component';
 import { SelectIconComponent } from './select-icon.component';
 import { SelectAutocompleteShowcaseComponent } from './select-autocomplete-showcase.component';
+import { SelectOverlayPositionComponent } from './select-overlay-position.component';
 
 const routes: Route[] = [
   {
@@ -97,6 +98,10 @@ const routes: Route[] = [
   {
     path: 'select-autocomplete-showcase.component',
     component: SelectAutocompleteShowcaseComponent,
+  },
+  {
+    path: 'select-overlay-position.component',
+    component: SelectOverlayPositionComponent,
   },
 ];
 
