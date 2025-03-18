@@ -1,4 +1,9 @@
-<div class="icon-container" *ngIf="hasIcon && icon">
+<div
+  role="alert"
+  aria-live="assertive"
+  class="icon-container"
+  *ngIf="hasIcon && icon"
+>
   <nb-icon [config]="icon"></nb-icon>
 </div>
 <div class="content-container">
