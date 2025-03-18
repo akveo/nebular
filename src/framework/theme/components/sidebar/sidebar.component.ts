@@ -5,16 +5,20 @@
  */
 
 import {
+  AfterContentInit,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
+  ContentChildren,
   ElementRef,
   EventEmitter,
   HostBinding,
   Input,
   OnDestroy,
   OnInit,
+  Optional,
   Output,
+  QueryList,
 } from '@angular/core';
 import { combineLatest, Observable, Subject } from 'rxjs';
 import { takeUntil, filter, map, startWith } from 'rxjs/operators';
@@ -23,6 +27,8 @@ import { convertToBoolProperty, NbBooleanInput } from '../helpers';
 import { NbThemeService } from '../../services/theme.service';
 import { NbMediaBreakpoint } from '../../services/breakpoints.service';
 import { NbSidebarService, getSidebarState$, getSidebarResponsiveState$ } from './sidebar.service';
+import { NbMenuItem, NbMenuService } from '../menu/menu.service';
+import { NbMenuComponent } from '../menu/menu.component';
 
 export type NbSidebarState = 'expanded' | 'collapsed' | 'compacted';
 export type NbSidebarResponsiveState = 'mobile' | 'tablet' | 'pc';
@@ -131,7 +137,7 @@ export class NbSidebarFooterComponent {}
     template: `
     <div class="main-container" [class.main-container-fixed]="containerFixedValue">
       <ng-content select="nb-sidebar-header"></ng-content>
-      <div class="scrollable" (click)="onClick($event)">
+      <div class="scrollable">
         <ng-content></ng-content>
       </div>
       <ng-content select="nb-sidebar-footer"></ng-content>
@@ -140,7 +146,8 @@ export class NbSidebarFooterComponent {}
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: false
 })
-export class NbSidebarComponent implements OnInit, OnDestroy {
+export class NbSidebarComponent implements OnInit, AfterContentInit, OnDestroy {
+
   protected readonly responsiveValueChange$: Subject<boolean> = new Subject<boolean>();
   protected responsiveState: NbSidebarResponsiveState = 'pc';
 
@@ -306,11 +313,15 @@ export class NbSidebarComponent implements OnInit, OnDestroy {
    */
   @Output() readonly responsiveStateChange = new EventEmitter<NbSidebarResponsiveState>();
 
+  @ContentChildren(NbMenuComponent) menu: QueryList<NbMenuComponent>;
+
   constructor(
     private sidebarService: NbSidebarService,
     private themeService: NbThemeService,
     private element: ElementRef,
     private cd: ChangeDetectorRef,
+    // @breaking-change 9.0.0 make required
+    @Optional() private menuService?: NbMenuService,
   ) {}
 
   ngOnInit() {
@@ -370,22 +381,19 @@ export class NbSidebarComponent implements OnInit, OnDestroy {
     this.subscribeToMediaQueryChange();
   }
 
+  ngAfterContentInit() {
+    this.menuService.onSubmenuToggle()
+      .pipe(
+        filter((data: { tag: string; item: NbMenuItem }) =>
+          (!data.tag || this.menu?.some(child => child.tag === data.tag)) && data.item.expanded),
+        takeUntil(this.destroy$),
+      )
+      .subscribe((data: { tag: string; item: NbMenuItem }) => this.sidebarService.expand(this.tag));
+  }
+
   ngOnDestroy() {
     this.destroy$.next();
     this.destroy$.complete();
-  }
-
-  // TODO: this is more of a workaround, should be a better way to make components communicate to each other
-  onClick(event): void {
-    const menu = this.element.nativeElement.querySelector('nb-menu');
-
-    if (menu && menu.contains(event.target)) {
-      const link = this.getMenuLink(event.target);
-
-      if (link && link.nextElementSibling && link.nextElementSibling.classList.contains('menu-items')) {
-        this.sidebarService.expand(this.tag);
-      }
-    }
   }
 
   /**
