@@ -556,6 +556,11 @@ export class NbSelectComponent
   @Input() optionsPanelClass: string | string[];
 
   /**
+   * Set the maximal number of selections in multiple-select
+   */
+  @Input() maxSelections: number = Infinity;
+  
+  /**
    * Specifies width (in pixels) to be set on `nb-option`s container (`nb-option-list`)
    * */
   @Input()
@@ -854,6 +859,13 @@ export class NbSelectComponent
     return this.selectionModel[0].content;
   }
 
+  /**
+   * Determines is maximal number of selections set.
+   * */
+  get isMaxSelectionsSet(): boolean {
+    return this.selectionModel.length === this.maxSelections;
+  }
+
   ngOnChanges({ disabled, status, size, fullWidth }: SimpleChanges) {
     if (disabled) {
       this.disabled$.next(disabled.currentValue);
@@ -980,6 +992,7 @@ export class NbSelectComponent
   protected reset() {
     this.selectionModel.forEach((option: NbOptionComponent) => option.deselect());
     this.selectionModel = [];
+    this.manageDisablingOptions();
     this.hide();
     this.button.nativeElement.focus();
     this.emitSelected(this.multiple ? [] : null);
@@ -1026,7 +1039,21 @@ export class NbSelectComponent
       option.select();
     }
 
+    this.manageDisablingOptions();
     this.emitSelected(this.selectionModel.map((opt: NbOptionComponent) => opt.value));
+  }
+
+  /**
+   * Disable unselected options if max selections set or enable in other cases.
+   * */
+  protected manageDisablingOptions() {
+    this.options.forEach((opt: NbOptionComponent) => {
+      if (!opt.selected && opt.value !== null && opt.value !== undefined && this.isMaxSelectionsSet) {
+        opt.disableManual();
+      } else {
+        opt.enableManual();
+      }
+    });
   }
 
   protected attachToOverlay() {
@@ -1193,7 +1220,11 @@ export class NbSelectComponent
     this.selectionModel = [];
 
     if (this.multiple) {
-      safeValue.forEach((option) => this.selectValue(option));
+      safeValue.forEach(option => {
+        if (!this.isMaxSelectionsSet) {
+          this.selectValue(option);
+        }
+      });
     } else {
       this.selectValue(safeValue);
     }
@@ -1202,6 +1233,8 @@ export class NbSelectComponent
     previouslySelectedOptions
       .filter((option: NbOptionComponent) => !this.selectionModel.includes(option))
       .forEach((option: NbOptionComponent) => option.deselect());
+
+    this.manageDisablingOptions();
 
     this.cd.markForCheck();
   }
