@@ -122,10 +122,15 @@ export class NbButtonToggleDirective extends NbButton {
   }
 
   @HostListener('click')
-  onClick(): void {
-    // Don't remove the pressed state of the button in single-toggle button-groups
-    if (this.buttonGroup?.multiple || !this.pressed) {
-      this.pressed = !this.pressed;
+  onClick(event): void {
+    if (this.disabled) {
+      event.preventDefault();
+      event.stopImmediatePropagation();
+    } else {
+      // Don't remove the pressed state of the button in single-toggle button-groups
+      if (this.buttonGroup?.multiple || !this.pressed) {
+        this.pressed = !this.pressed;
+      }
     }
   }
 
