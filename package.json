@@ -48,6 +48,7 @@
     "version:changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
     "release:validate": "npm-run-all build:packages build:wp \"e2e -c=production-wp\" && npm run test:wp -- --watch=false",
     "release": "npm-run-all release:validate publish",
+    "release:skip-tests": "npm-run-all build:packages && npm run publish",
     "publish": "./tools/publish.sh",
     "postinstall": "npm run build:dev-schematics",
     "gen:playground": "ng g .:playground",
