@@ -43,7 +43,7 @@ import { NbTabTitleDirective } from './tab-title.directive';
     selector: 'nb-tab',
     template: `
     <ng-container
-      *ngIf="tabContentDirective; else projectedContent"
+      *ngIf="init && tabContentDirective; else projectedContent"
       [ngTemplateOutlet]="tabContentDirective.templateRef"
     ></ng-container>
 

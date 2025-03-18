@@ -6,6 +6,8 @@
 
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 @Component({
     selector: 'nb-tabset-test',
@@ -137,11 +139,17 @@ import { Router } from '@angular/router';
       <nb-tab tabTitle="Tab #2">
         <span>Content #2</span>
       </nb-tab>
-      <nb-tab tabTitle="Tab #3" lazyLoad>
-        <span>Content #3</span>
+      <nb-tab tabTitle="Tab #3">
+        <ng-template nbTabContent>
+          {{ logTabLoad('3') }}
+          <span>Content #3</span>
+        </ng-template>
       </nb-tab>
-      <nb-tab tabTitle="Tab #4" lazyLoad>
-        <span>Content #4</span>
+      <nb-tab tabTitle="Tab #4">
+        <ng-template nbTabContent>
+          {{ logTabLoad('4') }}
+          <span>Content #4</span>
+        </ng-template>
       </nb-tab>
     </nb-tabset>
   `,
@@ -150,9 +158,22 @@ import { Router } from '@angular/router';
 export class TabsetTestComponent {
 
   constructor(private router: Router) {
+
   }
 
   changeTab($event: any) {
     this.router.navigate(['tabset', 'tabset-test.component', $event.route]);
+  }
+
+  private tabs = new Map([
+    ['3', false],
+    ['4', false]
+  ]);
+
+  public logTabLoad(tab: string) {
+    if(this.tabs.get(tab) === false) {
+      this.tabs.set(tab, true);
+      console.log(`The tab ${tab} is now loaded`);
+    }
   }
 }
