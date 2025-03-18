@@ -59,7 +59,7 @@ export const botReplies = [
       type: 'file',
       files: [
         {
-          url: '',
+          src: '',
           type: 'image/jpeg',
         },
       ],
@@ -80,7 +80,7 @@ export const botReplies = [
       type: 'file',
       files: [
         {
-          url: '',
+          src: '',
           type: 'image/gif',
         },
       ],
@@ -101,15 +101,15 @@ export const botReplies = [
       type: 'file',
       files: [
         {
-          url: fileLink,
+          src: fileLink,
           icon: 'file-text-outline',
         },
         {
-          url: '',
+          src: '',
           type: 'image/gif',
         },
         {
-          url: '',
+          src: '',
           type: 'image/jpeg',
         },
       ],
@@ -131,7 +131,7 @@ export const botReplies = [
       type: 'file',
       files: [
         {
-          url: fileLink,
+          href: fileLink,
           icon: 'file-text-outline',
         },
       ],

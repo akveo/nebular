@@ -14,7 +14,7 @@
   ></nb-chat-message>
   <nb-chat-form
     (send)="sendMessage($event, 'Jake', 'http://www.reactiongifs.com/r/wnd1.gif', true)"
-    [showButton]="false"
+    [showSendButton]="false"
     [dropFiles]="true"
   >
   </nb-chat-form>
@@ -35,7 +35,7 @@
   ></nb-chat-message>
   <nb-chat-form
     (send)="sendMessage($event, 'John', 'https://i.gifer.com/no.gif', false)"
-    [showButton]="false"
+    [showSendButton]="false"
     [dropFiles]="true"
   >
   </nb-chat-form>

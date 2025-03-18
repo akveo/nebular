@@ -4,18 +4,19 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
 export interface NbChatMessageFileIconPreview {
-  url: string;
-  icon: string;
+  src?: string | undefined;
+  icon?: string | undefined;
 }
+
 export interface NbChatMessageFileImagePreview {
-  url: string;
-  type: string;
+  href?: string | undefined;
+  type?: string | undefined;
 }
-export type NbChatMessageFile = NbChatMessageFileIconPreview | NbChatMessageFileImagePreview;
+
+export type NbChatMessageFile = NbChatMessageFileIconPreview & NbChatMessageFileImagePreview;
 
 /**
  * Chat message component.
@@ -27,27 +28,20 @@ export type NbChatMessageFile = NbChatMessageFileIconPreview | NbChatMessageFile
       {{ message }}
     </nb-chat-message-text>
 
-    <ng-container *ngIf="readyFiles?.length > 1">
-      <div class="message-content-group">
-        <a *ngFor="let file of readyFiles" [href]="file.url" target="_blank">
-          <nb-icon [icon]="file.icon" *ngIf="!file.urlStyle && file.icon"></nb-icon>
-          <div *ngIf="file.urlStyle" [style.background-image]="file.urlStyle"></div>
+    <ng-container *ngIf="files?.length > 0">
+      <div [class.message-content-group]="files.length > 1">
+        <a *ngFor="let f of files" [attr.href]="f.href ?? null" target="_blank">
+          <nb-icon [icon]="f.icon" *ngIf="!f.src && f.icon"></nb-icon>
+          <div *ngIf="f.src">
+            <img [src]="f.src" />
+          </div>
         </a>
       </div>
-    </ng-container>
-
-    <ng-container *ngIf="readyFiles?.length === 1">
-      <a [href]="readyFiles[0].url" target="_blank">
-        <nb-icon [icon]="readyFiles[0].icon" *ngIf="!readyFiles[0].urlStyle && readyFiles[0].icon"></nb-icon>
-        <div *ngIf="readyFiles[0].urlStyle" [style.background-image]="readyFiles[0].urlStyle"></div>
-      </a>
     </ng-container>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NbChatMessageFileComponent {
-  readyFiles: any[];
-
   /**
    * Message sender
    * @type {string}
@@ -77,25 +71,7 @@ export class NbChatMessageFileComponent {
    * @type {Date}
    */
   @Input()
-  set files(files: NbChatMessageFile[]) {
-    this.readyFiles = (files || []).map((file: any) => {
-      const isImage = this.isImage(file);
-      return {
-        ...file,
-        urlStyle: isImage && this.domSanitizer.bypassSecurityTrustStyle(`url(${file.url})`),
-        isImage: isImage,
-      };
-    });
-    this.cd.detectChanges();
-  }
+  files: NbChatMessageFile[] | undefined;
 
-  constructor(protected cd: ChangeDetectorRef, protected domSanitizer: DomSanitizer) {}
-
-  isImage(file: NbChatMessageFile): boolean {
-    const type = (file as NbChatMessageFileImagePreview).type;
-    if (type) {
-      return ['image/png', 'image/jpeg', 'image/gif'].includes(type);
-    }
-    return false;
-  }
+  constructor() {}
 }

@@ -6,6 +6,7 @@
 
 import { Component } from '@angular/core';
 import { ChatShowcaseService } from './chat-showcase.service';
+import { NbChatMessageFile } from '../../../framework/theme/components/chat/chat-message-file.component';
 
 @Component({
   selector: 'npg-chat-showcase',
@@ -31,11 +32,11 @@ export class ChatShowcaseComponent {
   }
 
   sendMessage(event: any) {
-    const files = !event.files
+    const files: NbChatMessageFile[] = !event.files
       ? []
       : event.files.map((file) => {
-          return {
-            url: file.src,
+          return <NbChatMessageFile>{
+            src: file.src,
             type: file.type,
             icon: 'file-text-outline',
           };

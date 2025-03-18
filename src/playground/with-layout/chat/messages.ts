@@ -33,7 +33,7 @@ export const messages = [
     type: 'file',
     files: [
       {
-        url: 'https://i.gifer.com/no.gif',
+        src: 'https://i.gifer.com/no.gif',
         type: 'image/jpeg',
         icon: false,
       },
@@ -61,7 +61,7 @@ export const messages = [
     type: 'file',
     files: [
       {
-        url: 'https://i.gifer.com/no.gif',
+        src: 'https://i.gifer.com/no.gif',
         icon: 'file-text-outline',
       },
     ],

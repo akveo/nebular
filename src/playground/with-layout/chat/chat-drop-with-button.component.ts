@@ -2,25 +2,35 @@ import { Component } from '@angular/core';
 import { NbChatMessageFile } from '../../../framework/theme/components/chat/chat-message-file.component';
 
 @Component({
-  selector: 'npg-chat-drop',
+  selector: 'npg-chat-drop-with-button',
   styles: [
     `
       ::ng-deep nb-layout-column {
         justify-content: center;
         display: flex;
       }
+
       nb-chat {
         width: 500px;
         height: 80vw;
       }
     `,
   ],
-  templateUrl: './chat-drop.component.html',
+  templateUrl: './chat-drop-with-button.component.html',
 })
-export class ChatDropComponent {
+export class ChatDropWithButtonComponent {
   messages: any[] = [
     {
       text: 'Drag & drop a file or a group of files.',
+      date: new Date(),
+      reply: true,
+      user: {
+        name: 'Bot',
+        avatar: 'https://i.gifer.com/no.gif',
+      },
+    },
+    {
+      text: 'Or you can choose a group of files via the button.',
       date: new Date(),
       reply: true,
       user: {
@@ -52,5 +62,13 @@ export class ChatDropComponent {
         avatar: 'https://i.gifer.com/no.gif',
       },
     });
+  }
+
+  filesChange(files: { id: string; file: File; src: string | undefined }[]) {
+    console.log('filesChange', files);
+  }
+
+  trackById(index: number, item: { id: string; file: File; src: string | undefined }) {
+    return item.id;
   }
 }

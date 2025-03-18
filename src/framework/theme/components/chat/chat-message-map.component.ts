@@ -63,9 +63,9 @@ export class NbChatMessageMapComponent {
   get file() {
     return {
       // eslint-disable-next-line max-len
-      url: `https://maps.googleapis.com/maps/api/staticmap?center=${this.latitude},${this.longitude}&zoom=12&size=400x400&key=${this.mapKey}`,
+      href: `https://maps.googleapis.com/maps/api/staticmap?center=${this.latitude},${this.longitude}&zoom=12&size=400x400&key=${this.mapKey}`,
       type: 'image/png',
-      icon: 'location',
+      icon: 'map-outline',
     };
   }
 

@@ -1,0 +1,39 @@
+<nb-chat title="Drag & Drop with Button chat" size="medium">
+  <nb-chat-message
+    *ngFor="let msg of messages"
+    [type]="msg.type"
+    [message]="msg.text"
+    [reply]="msg.reply"
+    [sender]="msg.user.name"
+    [date]="msg.date"
+    [files]="msg.files"
+    [avatar]="msg.user.avatar"
+  >
+  </nb-chat-message>
+
+  <ng-template #fileListTemplate let-files>
+    <ng-container *ngFor="let file of files; trackBy: trackById">
+      <div *ngIf="file.src">
+        <img [src]="file.src" />
+        <span class="remove" (click)="chatForm.removeFile(file.id)">
+          <nb-icon icon="close" pack="eva"></nb-icon>
+        </span>
+      </div>
+
+      <div *ngIf="!file.src">
+        <nb-icon icon="file-text-outline" pack="nebular-essentials"></nb-icon>
+        <span class="remove" (click)="chatForm.removeFile(file.id)">
+          <nb-icon icon="close" pack="eva"></nb-icon>
+        </span>
+      </div>
+    </ng-container>
+  </ng-template>
+
+  <nb-chat-form
+    #chatForm
+    (send)="sendMessage($event)"
+    [dropFiles]="true"
+    [showFileUploadButton]="true"
+    (onFilesChange)="filesChange($event)"
+  ></nb-chat-form>
+</nb-chat>

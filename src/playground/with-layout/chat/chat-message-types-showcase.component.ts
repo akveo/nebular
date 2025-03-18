@@ -10,7 +10,7 @@ import { Component } from '@angular/core';
         sender="John Doe"
         [reply]="true"
         [date]="date"
-        [files]="[{ url: 'http://www.reactiongifs.com/r/wnd1.gif', type: 'image/gif' }]"
+        [files]="[{ src: 'https://www.reactiongifs.com/r/wnd1.gif', type: 'image/gif' }]"
         avatar="https://i.gifer.com/no.gif"
       >
       </nb-chat-message>
@@ -20,7 +20,7 @@ import { Component } from '@angular/core';
         sender="John Doe"
         [reply]="true"
         [date]="date"
-        [files]="[{ url: 'https://picsum.photos/320/240/?image=387', type: 'image/jpeg' }]"
+        [files]="[{ src: 'https://picsum.photos/320/240/?image=387', type: 'image/jpeg' }]"
         avatar="https://i.gifer.com/no.gif"
       >
       </nb-chat-message>
@@ -41,7 +41,7 @@ import { Component } from '@angular/core';
         sender="John Doe"
         [reply]="true"
         [date]="date"
-        [files]="[{ url: 'http://google.com', icon: 'file-text-outline' }]"
+        [files]="[{ href: 'http://google.com', icon: 'file-text-outline' }]"
         [avatar]="'https://i.gifer.com/no.gif'"
       >
       </nb-chat-message>
@@ -62,9 +62,9 @@ import { Component } from '@angular/core';
         [reply]="true"
         [date]="date"
         [files]="[
-          { url: 'http://google.com', icon: 'file-text-outline' },
-          { url: 'https://picsum.photos/320/240/?image=387', type: 'image/jpeg' },
-          { url: 'http://www.reactiongifs.com/r/wnd1.gif', type: 'image/gif' }
+          { href: 'http://google.com', icon: 'file-text-outline' },
+          { src: 'https://picsum.photos/320/240/?image=387', type: 'image/jpeg' },
+          { src: 'http://www.reactiongifs.com/r/wnd1.gif', type: 'image/gif' }
         ]"
         avatar="https://i.gifer.com/no.gif"
       >

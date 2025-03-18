@@ -133,7 +133,7 @@
         background: nb-theme(chat-message-file-background-color);
         font-size: 4rem;
         text-align: center;
-        border: 1px solid nb-theme(chat-message-file-text-color);
+        border: 1px solid nb-theme(chat-divider-color);
         width: 10rem;
         height: 10rem;
         overflow: hidden;
@@ -142,15 +142,27 @@
         align-items: center;
         flex-shrink: 0;
         border-radius: 0.5rem;
+
+        &:has(div > img) {
+          height: auto;
+          max-height: 10rem;
+        }
+
         &:hover,
         &:focus {
           text-decoration: none;
           color: nb-theme(chat-message-file-text-color);
         }
+
         div {
-          background-size: cover;
           width: 100%;
           height: 100%;
+
+          img {
+            object-fit: contain;
+            width: 100%;
+            height: 100%;
+          }
         }
       }
 
@@ -237,6 +249,7 @@
 
       nb-chat-message-text {
         align-items: flex-end;
+
         .sender {
           @include nb-ltr(text-align, right);
           @include nb-rtl(text-align, left);
@@ -267,10 +280,42 @@
       display: flex;
     }
 
-    input {
+    .file-upload-button {
+      nb-icon {
+        font-size: 1.5rem;
+      }
+
+      @include nb-ltr {
+        border-bottom-right-radius: 0;
+        border-top-right-radius: 0;
+      }
+      @include nb-rtl {
+        border-bottom-left-radius: 0;
+        border-top-left-radius: 0;
+      }
+    }
+
+    input[type='file'] {
+      display: none;
+      visibility: hidden;
+      position: absolute;
+      top: -1000px;
+      bottom: -1000px;
+    }
+
+    input[type='text'] {
       flex: 1;
 
-      &.with-button {
+      &.with-file-upload-button {
+        border-bottom-left-radius: 0;
+        border-top-left-radius: 0;
+        @include nb-ltr(border-bottom-left-radius, 0);
+        @include nb-ltr(border-top-left-radius, 0);
+        @include nb-rtl(border-bottom-right-radius, 0);
+        @include nb-rtl(border-top-right-radius, 0);
+      }
+
+      &.with-send-button {
         border-bottom-right-radius: 0;
         border-top-right-radius: 0;
         @include nb-ltr(border-bottom-right-radius, 0);
@@ -309,18 +354,37 @@
         @include nb-ltr(margin-right, 0.5rem);
         @include nb-rtl(margin-left, 0.5rem);
         margin-bottom: 0.5rem;
-        border: 1px solid currentColor;
+        border: 1px solid nb-theme(chat-divider-color);
         text-align: center;
         font-size: 2rem;
         position: relative;
 
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+        }
+
         .remove {
           position: absolute;
           right: -0.5rem;
-          top: -0.875rem;
+          top: -0.5rem;
+          width: 0.875rem;
+          height: 0.875rem;
           font-size: 0.875rem;
+          border-radius: 100%;
+          border: 1px solid nb-theme(chat-background-color);
           line-height: 1;
           cursor: pointer;
+          background-color: nb-theme(chat-divider-color);
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          user-select: none;
+
+          nb-icon {
+            width: 100%;
+          }
         }
 
         nb-icon {

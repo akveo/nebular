@@ -15,6 +15,7 @@ import { ChatSizesComponent } from './chat-sizes.component';
 import { ChatTestComponent } from './chat-test.component';
 import { ChatCustomMessageComponent } from './chat-custom-message.component';
 import { ChatTemplateTitleComponent } from './chat-template-title.component';
+import { ChatDropWithButtonComponent } from './chat-drop-with-button.component';
 
 const routes: Route[] = [
   {
@@ -52,6 +53,10 @@ const routes: Route[] = [
   {
     path: 'chat-template-title.component',
     component: ChatTemplateTitleComponent,
+  },
+  {
+    path: 'chat-drop-with-button.component',
+    component: ChatDropWithButtonComponent,
   },
 ];
 
