@@ -103,10 +103,6 @@ export class NbMenuItem {
    *@type {boolean}
    */
   skipLocationChange?: boolean;
-  /** Whether the item replaceUrl is true or false
-   *@type {boolean}
-   */
-  replaceUrl?: boolean;
   /** Map of query parameters
    *@type {Params}
    */
