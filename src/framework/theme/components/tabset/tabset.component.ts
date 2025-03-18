@@ -360,9 +360,9 @@ export class NbTabsetComponent implements AfterContentInit, OnDestroy {
 
   /**
    * Emits when tab is selected
-   * @type EventEmitter<any>
+   * @type EventEmitter<NbTabComponent>
    */
-  @Output() changeTab = new EventEmitter<any>();
+  @Output() changeTab = new EventEmitter<NbTabComponent>();
 
   private destroy$: Subject<void> = new Subject<void>();
 
