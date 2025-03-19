@@ -10,8 +10,10 @@ export class NbChatMimeToIconPipe implements PipeTransform {
   transform(map: Map<string, { pack: string; icon: string }>, mime: string): { pack: string; icon: string } {
     if (map.size === 0) return defaultMimeIcon;
 
-    const icon = map.get(mime);
+    const keys = Array.from(map.keys());
+    const key = keys.find((key) => mime.match(new RegExp(key)));
+    const iconConfig = map.get(key);
 
-    return icon || defaultMimeIcon;
+    return iconConfig || defaultMimeIcon;
   }
 }

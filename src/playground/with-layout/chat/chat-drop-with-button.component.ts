@@ -30,8 +30,8 @@ export const supportedFilesForUpload = [
 })
 export class ChatDropWithButtonComponent {
   mimeMap = new Map<string, { icon: string; pack: string }>([
-    ['application/pdf', { icon: 'file-outline', pack: 'eva' }],
-    ['image/*', { icon: 'image-outline', pack: 'eva' }],
+    ['application/*', { icon: 'file-outline', pack: 'eva' }],
+    ['image/!*', { icon: 'image-outline', pack: 'eva' }],
   ]);
   messages: any[] = [
     {
