@@ -1,6 +1,16 @@
 import { Component } from '@angular/core';
 import { NbChatMessageFile } from '../../../framework/theme/components/chat/chat-message-file.component';
 
+export const supportedFilesForUpload = [
+  'image/*',
+  'video/*',
+  'application/pdf',
+  'application/msword', // Word documents (.doc)
+  'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+  'application/vnd.oasis.opendocument.text',
+  'text/plain',
+];
+
 @Component({
   selector: 'npg-chat-drop-with-button',
   styles: [
@@ -19,6 +29,10 @@ import { NbChatMessageFile } from '../../../framework/theme/components/chat/chat
   templateUrl: './chat-drop-with-button.component.html',
 })
 export class ChatDropWithButtonComponent {
+  mimeMap = new Map<string, { icon: string; pack: string }>([
+    ['application/pdf', { icon: 'file-outline', pack: 'eva' }],
+    ['image/*', { icon: 'image-outline', pack: 'eva' }],
+  ]);
   messages: any[] = [
     {
       text: 'Drag & drop a file or a group of files.',
@@ -39,6 +53,10 @@ export class ChatDropWithButtonComponent {
       },
     },
   ];
+
+  get supportedFilesForUpload() {
+    return supportedFilesForUpload;
+  }
 
   sendMessage(event: { message: string; files: { id: string; file: File; src: string | undefined }[] }) {
     const files: NbChatMessageFile[] = !event.files

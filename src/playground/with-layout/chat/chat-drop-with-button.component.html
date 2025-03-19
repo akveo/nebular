@@ -12,17 +12,19 @@
   </nb-chat-message>
 
   <ng-template #fileListTemplate let-files>
-    <ng-container *ngFor="let file of files; trackBy: trackById">
-      <div *ngIf="file.src">
-        <img [src]="file.src" />
-        <span class="remove" (click)="chatForm.removeFile(file.id)">
+    <ng-container *ngFor="let f of files; trackBy: trackById">
+      <div *ngIf="f.src">
+        <img [src]="f.src" />
+        <span class="remove" (click)="chatForm.removeFile(f.id)">
           <nb-icon icon="close" pack="eva"></nb-icon>
         </span>
       </div>
 
-      <div *ngIf="!file.src">
-        <nb-icon icon="file-text-outline" pack="nebular-essentials"></nb-icon>
-        <span class="remove" (click)="chatForm.removeFile(file.id)">
+      <div *ngIf="!f.src">
+        <ng-container *ngIf="mimeMap | nbChatMimeToIcon: f.file.type as config">
+          <nb-icon [icon]="config.icon" [pack]="config.pack"></nb-icon>
+        </ng-container>
+        <span class="remove" (click)="chatForm.removeFile(f.id)">
           <nb-icon icon="close" pack="eva"></nb-icon>
         </span>
       </div>
@@ -32,6 +34,9 @@
   <nb-chat-form
     #chatForm
     (send)="sendMessage($event)"
+    [fileListTemplate]="fileListTemplate"
+    [fileUploadMimeTypeToIcon]="mimeMap"
+    [acceptedFileTypes]="supportedFilesForUpload"
     [dropFiles]="true"
     [showFileUploadButton]="true"
     (onFilesChange)="filesChange($event)"

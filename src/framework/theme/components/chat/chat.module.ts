@@ -22,6 +22,7 @@ import { NbChatOptions } from './chat.options';
 import { NbChatAvatarComponent } from './chat-avatar.component';
 import { NbChatCustomMessageDirective } from './chat-custom-message.directive';
 import { NbChatTitleDirective } from './chat-title.directive';
+import { NbChatMimeToIconPipe } from './chat-mime-to-icon.pipe';
 
 const NB_CHAT_COMPONENTS = [
   NbChatComponent,
@@ -32,6 +33,7 @@ const NB_CHAT_COMPONENTS = [
   NbChatMessageQuoteComponent,
   NbChatMessageMapComponent,
   NbChatAvatarComponent,
+  NbChatMimeToIconPipe,
 ];
 
 const NB_CHAT_DIRECTIVES = [NbChatCustomMessageDirective, NbChatTitleDirective];

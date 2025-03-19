@@ -53,17 +53,19 @@ import { NbComponentOrCustomStatus } from '../component-status';
         <ng-container *ngTemplateOutlet="fileListTemplate; context: { $implicit: droppedFiles }"></ng-container>
       </ng-container>
       <ng-template #defaultFileListTemplate>
-        <ng-container *ngFor="let file of droppedFiles; trackBy: trackById">
-          <div *ngIf="file.src">
-            <img [src]="file.src" />
-            <span class="remove" (click)="removeFile(file.id)">
+        <ng-container *ngFor="let f of droppedFiles; trackBy: trackById">
+          <div *ngIf="f.src">
+            <img [src]="f.src" />
+            <span class="remove" (click)="removeFile(f.id)">
               <nb-icon icon="close" pack="eva"></nb-icon>
             </span>
           </div>
 
-          <div *ngIf="!file.src">
-            <nb-icon icon="file-text-outline" pack="nebular-essentials"></nb-icon>
-            <span class="remove" (click)="removeFile(file.id)">
+          <div *ngIf="!f.src">
+            <ng-container *ngIf="fileUploadMimeTypeToIcon | nbChatMimeToIcon: f.file.type as config">
+              <nb-icon [icon]="config.icon" [pack]="config.pack"></nb-icon>
+            </ng-container>
+            <span class="remove" (click)="removeFile(f.id)">
               <nb-icon icon="close" pack="eva"></nb-icon>
             </span>
           </div>
@@ -178,7 +180,14 @@ export class NbChatFormComponent {
    * @type {boolean}
    */
   @Input() showFileUploadButton: boolean = false;
-
+  /**
+   * File Upload button title
+   * @type {string}
+   */
+  @Input() fileUploadMimeTypeToIcon: Map<string, { pack: string; icon: string }> = new Map<
+    string,
+    { pack: string; icon: string }
+  >();
   /**
    * Allow drop files to send
    * @type {boolean}
@@ -336,9 +345,13 @@ export class NbChatFormComponent {
 
   protected mapToDroppedFilesAndEmit(files: File[]): void {
     for (const file of files) {
+      // check if file type is accepted
+      if (!this.acceptedFileTypes.some((type) => new RegExp(type).test(file.type))) continue;
+
       const res = { id: crypto.randomUUID(), file: file, src: undefined, urlStyle: undefined };
 
-      if (this.acceptedFileTypes.includes(file.type)) {
+      // parse image files
+      if (file.type.includes('image')) {
         const fr = new FileReader();
         fr.onload = (e: any) => {
           res.src = e.target.result;
@@ -347,6 +360,7 @@ export class NbChatFormComponent {
 
         fr.readAsDataURL(file);
       }
+
       this.droppedFiles.push(res);
     }
 

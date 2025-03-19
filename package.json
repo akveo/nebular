@@ -13,6 +13,7 @@
     "ng": "ng",
     "prestart": "npm run gen:playground",
     "start": "ng serve",
+    "start:no-regenerate": "ng serve",
     "start:prod": "ng serve --configuration=production",
     "start:wp": "ng serve --configuration=production-wp",
     "docs:prepare": "gulp docs",
