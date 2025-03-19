@@ -19,7 +19,7 @@ import {
 import { isPlatformBrowser } from '@angular/common';
 import { Router, NavigationEnd, NavigationExtras, NavigationSkipped } from '@angular/router';
 import { BehaviorSubject, Subject } from 'rxjs';
-import { takeUntil, filter, map } from 'rxjs/operators';
+import { takeUntil, filter, map, debounceTime } from 'rxjs/operators';
 import { NbMenuInternalService, NbMenuItem, NbMenuBag, NbMenuService, NbMenuBadgeConfig } from './menu.service';
 import { convertToBoolProperty, NbBooleanInput } from '../helpers';
 import { NB_WINDOW } from '../../theme.options';
@@ -306,6 +306,7 @@ export class NbMenuComponent implements OnInit, AfterViewInit, OnDestroy {
     this.router.events
       .pipe(
         filter((event) => event instanceof NavigationEnd || event instanceof NavigationSkipped),
+        debounceTime(100),
         takeUntil(this.destroy$),
       )
       .subscribe(() => {
