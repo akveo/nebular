@@ -6,7 +6,6 @@
 
 import { InjectionToken, ViewContainerRef } from '@angular/core';
 
-
 export const NB_DIALOG_CONFIG = new InjectionToken<NbDialogConfig>('Default dialog options');
 
 /**
@@ -55,6 +54,9 @@ export class NbDialogConfig<D = any> {
    * content will be rendered.
    */
   viewContainerRef: ViewContainerRef;
+
+  /** Closes dialog automatically on navigation events such as browser back button pressed */
+  closeOnNavigation: boolean = true;
 
   context: D;
 
