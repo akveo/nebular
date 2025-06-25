@@ -42,30 +42,24 @@ Nebular supports most recent browsers. Browser support list can be found <a href
 - [ngx-admin](http://github.com/akveo/ngx-admin) - 20k+ stars application based on Nebular modules with beautiful E-Commerce & IOT components, for boosting your developing process. [Live Demo](https://www.akveo.com/ngx-admin?utm_campaign=ngx_admin%20-%20demo%20-%20nebular%20github%20readme%20-%20traffic&utm_source=nebular&utm_medium=referral&utm_content=github_readme).
 - [ngx-admin-starter](https://github.com/akveo/ngx-admin/tree/starter-kit) - clean application based on Nebular modules with a limited number of additional dependencies.
 
-## UI Bakery
+## Contributing
 
-Need a visual admin dashboard builder? Check out [UI Bakery](https://uibakery.io).
+To run tests locally, you need to have the following installed:
 
-<a href="https://uibakery.io"><img src="https://storage.uibakery.io/video-assets/landing/Logo/UIB%20400x150.png" height="80" /></a>
+- chromedriver
 
-## License
+```bash
+brew install chromedriver
+```
 
-[MIT](LICENSE.txt) license.
+next, you need to xattr the chromedriver binary to allow it to run:
 
-## More from Akveo
+```bash
+sudo xattr -d com.apple.quarantine /opt/homebrew/bin/chromedriver
+```
 
-- [Eva Icons](https://github.com/akveo/eva-icons) - 480+ beautiful Open Source icons
-- [Akveo templates](https://www.akveo.com/templates?utm_campaign=services%20-%20github%20-%20templates&utm_source=nebular&utm_medium=referral&utm_content=nebular%20github%20readme%20more%20from%20akveo%20link) - 10+ Ready-to-use apps templates to speed up your apps developments
+then you can run the tests:
 
-## How can I support the developers?
-
-- Star our GitHub repo :star:
-- Create pull requests, submit bugs, suggest new features or documentation updates :wrench:
-- Read us on [Medium](https://medium.com/akveo-engineering)
-- Follow us on [Twitter](https://twitter.com/akveo_inc) :feet:
-- Like our page on [Facebook](https://www.facebook.com/akveo/) :thumbsup:
-
-## From Developers
-
-Made with :heart: by [Akveo team](https://www.akveo.com?utm_campaign=service%20-%20akveo%20website%20-%20nebular%20github%20readme%20-%20traffic&utm_source=nebular&utm_medium=referral&utm_content=github_readme). Follow us on [Twitter](https://twitter.com/akveo_inc) to get the latest news first!
-We're always happy to receive your feedback!
+```bash
+npm run test
+```
