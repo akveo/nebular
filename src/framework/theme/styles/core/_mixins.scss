@@ -31,6 +31,12 @@
   // For Internet Explorer
   scrollbar-face-color: $fg;
   scrollbar-track-color: $bg;
+
+  // For Firefox
+  @supports (-moz-appearance: none) {
+    scrollbar-color: $fg $bg;
+    scrollbar-width: thin;
+  }
 }
 
 @mixin nb-headings($from: 1, $to: 6) {
