@@ -6,19 +6,18 @@
 
 import {
   Component,
-  ComponentFactoryResolver,
   ComponentRef,
-  OnChanges,
   ElementRef,
   EventEmitter,
   Inject,
   Input,
+  OnChanges,
   OnDestroy,
-  Output,
-  Type,
   OnInit,
-  SimpleChanges,
   Optional,
+  Output,
+  SimpleChanges,
+  Type,
 } from '@angular/core';
 import { takeUntil } from 'rxjs/operators';
 import { Observable, ReplaySubject, Subject } from 'rxjs';
@@ -40,8 +39,8 @@ import { NbCalendarComponent } from '../calendar/calendar.component';
 import {
   NbCalendarCell,
   NbCalendarSize,
-  NbCalendarViewMode,
   NbCalendarSizeValues,
+  NbCalendarViewMode,
   NbCalendarViewModeValues,
 } from '../calendar-kit/model';
 import { NbDateService } from '../calendar-kit/services/date.service';
@@ -202,7 +201,6 @@ export abstract class NbBasePicker<D, T, P> extends NbDatepicker<T, D> {
     protected overlay: NbOverlayService,
     protected positionBuilder: NbPositionBuilderService,
     protected triggerStrategyBuilder: NbTriggerStrategyBuilderService,
-    protected cfr: ComponentFactoryResolver,
     protected dateService: NbDateService<D>,
     protected dateServiceOptions,
   ) {
@@ -291,7 +289,7 @@ export abstract class NbBasePicker<D, T, P> extends NbDatepicker<T, D> {
   }
 
   protected openDatepicker() {
-    this.container = this.ref.attach(new NbComponentPortal(NbDatepickerContainerComponent, null, null, this.cfr));
+    this.container = this.ref.attach(new NbComponentPortal(NbDatepickerContainerComponent, null, null));
     this.instantiatePicker();
     this.subscribeOnValueChange();
     this.writeQueue();
@@ -331,7 +329,7 @@ export abstract class NbBasePicker<D, T, P> extends NbDatepicker<T, D> {
   }
 
   protected instantiatePicker() {
-    this.pickerRef = this.container.instance.attach(new NbComponentPortal(this.pickerClass, null, null, this.cfr));
+    this.pickerRef = this.container.instance.attach(new NbComponentPortal(this.pickerClass, null, null));
   }
 
   /**
@@ -378,8 +376,8 @@ export abstract class NbBasePicker<D, T, P> extends NbDatepicker<T, D> {
 }
 
 @Component({
-    template: '',
-    standalone: false
+  template: '',
+  standalone: false,
 })
 export class NbBasePickerComponent<D, T, P> extends NbBasePicker<D, T, P> implements OnInit, OnChanges, OnDestroy {
   /**
@@ -488,11 +486,10 @@ export class NbBasePickerComponent<D, T, P> extends NbBasePicker<D, T, P> implem
     positionBuilder: NbPositionBuilderService,
     triggerStrategyBuilder: NbTriggerStrategyBuilderService,
     overlay: NbOverlayService,
-    cfr: ComponentFactoryResolver,
     dateService: NbDateService<D>,
     @Optional() @Inject(NB_DATE_SERVICE_OPTIONS) dateServiceOptions,
   ) {
-    super(overlay, positionBuilder, triggerStrategyBuilder, cfr, dateService, dateServiceOptions);
+    super(overlay, positionBuilder, triggerStrategyBuilder, dateService, dateServiceOptions);
   }
 
   ngOnInit() {
@@ -546,9 +543,9 @@ export class NbBasePickerComponent<D, T, P> extends NbBasePicker<D, T, P> implem
  * Provides a proxy to `NbCalendar` options as well as custom picker options.
  */
 @Component({
-    selector: 'nb-datepicker',
-    template: '',
-    standalone: false
+  selector: 'nb-datepicker',
+  template: '',
+  standalone: false,
 })
 export class NbDatepickerComponent<D> extends NbBasePickerComponent<D, D, NbCalendarComponent<D>> {
   protected pickerClass: Type<NbCalendarComponent<D>> = NbCalendarComponent;
@@ -602,9 +599,9 @@ export class NbDatepickerComponent<D> extends NbBasePickerComponent<D, D, NbCale
  * Provides a proxy to `NbCalendarRange` options as well as custom picker options.
  */
 @Component({
-    selector: 'nb-rangepicker',
-    template: '',
-    standalone: false
+  selector: 'nb-rangepicker',
+  template: '',
+  standalone: false,
 })
 export class NbRangepickerComponent<D> extends NbBasePickerComponent<
   D,

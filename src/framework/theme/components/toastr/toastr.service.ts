@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { ComponentFactoryResolver, ComponentRef, Inject, Injectable } from '@angular/core';
+import { ComponentRef, Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
 
@@ -163,7 +163,6 @@ export class NbToastrContainerRegistry {
     protected overlay: NbOverlayService,
     protected positionBuilder: NbPositionBuilderService,
     protected positionHelper: NbPositionHelper,
-    protected cfr: ComponentFactoryResolver,
     @Inject(NB_DOCUMENT) protected document: any,
   ) {}
 
@@ -190,7 +189,7 @@ export class NbToastrContainerRegistry {
     const positionStrategy = this.positionBuilder.global().position(position);
     const ref = this.overlay.create({ positionStrategy });
     this.addClassToOverlayHost(ref);
-    const containerRef = ref.attach(new NbComponentPortal(NbToastrContainerComponent, null, null, this.cfr));
+    const containerRef = ref.attach(new NbComponentPortal(NbToastrContainerComponent, null, null));
     return {
       overlayRef: ref,
       toastrContainer: new NbToastContainer(position, containerRef, this.positionHelper),

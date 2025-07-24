@@ -1,4 +1,4 @@
-import { ComponentFactoryResolver, ComponentRef, Injectable, NgZone, Type } from '@angular/core';
+import { ComponentRef, Injectable, NgZone, Type } from '@angular/core';
 import { filter, takeUntil, distinctUntilChanged, take } from 'rxjs/operators';
 import { Subject, BehaviorSubject, Observable, merge } from 'rxjs';
 
@@ -42,7 +42,6 @@ export class NbDynamicOverlay {
 
   constructor(
     protected overlay: NbOverlayService,
-    protected componentFactoryResolver: ComponentFactoryResolver,
     protected zone: NgZone,
     protected overlayContainer: NbOverlayContainer,
   ) {}
@@ -204,7 +203,7 @@ export class NbDynamicOverlay {
   protected renderContainer() {
     const containerContext = this.createContainerContext();
     if (!this.container) {
-      this.container = createContainer(this.ref, this.componentType, containerContext, this.componentFactoryResolver);
+      this.container = createContainer(this.ref, this.componentType, containerContext);
     }
     this.container.instance.renderContent();
   }
@@ -220,7 +219,6 @@ export class NbDynamicOverlay {
     return {
       content: this.content,
       context: this.context,
-      cfr: this.componentFactoryResolver,
       position: this.lastAppliedPosition,
     };
   }
@@ -234,7 +232,9 @@ export class NbDynamicOverlay {
       filter((destroyedOverlay: NbOverlayRef) => destroyedOverlay === overlay),
     );
 
-    this.zone.onStable.pipe(take(1), takeUntil(merge(this.destroy$, overlayDestroy$))).subscribe(() => this.updatePosition());
+    this.zone.onStable
+      .pipe(take(1), takeUntil(merge(this.destroy$, overlayDestroy$)))
+      .subscribe(() => this.updatePosition());
   }
 
   protected updatePosition() {

@@ -21,18 +21,18 @@ import {
 import { NbCalendarCell, NbCalendarSize, NbCalendarSizeValues } from '../../model';
 
 @Component({
-    selector: 'nb-calendar-picker-row',
-    styles: [
-        `
+  selector: 'nb-calendar-picker-row',
+  styles: [
+    `
       :host {
         display: flex;
         justify-content: space-between;
       }
     `,
-    ],
-    template: '<ng-template></ng-template>',
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+  ],
+  template: '<ng-template></ng-template>',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class NbCalendarPickerRowComponent<D, T> implements OnChanges {
   @Input() row: D[];

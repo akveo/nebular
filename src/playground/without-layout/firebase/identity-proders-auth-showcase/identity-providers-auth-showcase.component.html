@@ -10,16 +10,8 @@
   <pre>{{ data$ | async | json }}</pre>
 </div>
 
-<button
-  *ngIf="isAuthenticated$ | async"
-  (click)="logout()">
-  Logout
-</button>
+<button *ngIf="isAuthenticated$ | async" (click)="logout()">Logout</button>
 
-<button
-  *ngIf="!(isAuthenticated$ | async)"
-  (click)="loginWithGoogle()">
-  Login with google
-</button>
+<button *ngIf="(isAuthenticated$ | async) === false" (click)="loginWithGoogle()">Login with google</button>
 
 <button (click)="getData()">Get data from Firebase</button>

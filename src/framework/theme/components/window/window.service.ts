@@ -1,12 +1,4 @@
-import {
-  ComponentFactoryResolver,
-  ComponentRef,
-  Inject,
-  Injectable,
-  Injector,
-  TemplateRef,
-  ViewContainerRef,
-} from '@angular/core';
+import { ComponentRef, Inject, Injectable, Injector, TemplateRef, ViewContainerRef } from '@angular/core';
 import { filter } from 'rxjs/operators';
 import { NbComponentPortal, NbComponentType, NbOverlayPositionBuilder, NbOverlayRef } from '../cdk/overlay/mapping';
 import { NbOverlayService } from '../cdk/overlay/overlay-service';
@@ -111,12 +103,10 @@ export class NbWindowService {
   protected openWindows: NbWindowRef[] = [];
 
   constructor(
-    protected componentFactoryResolver: ComponentFactoryResolver,
     protected overlayService: NbOverlayService,
     protected overlayPositionBuilder: NbOverlayPositionBuilder,
     protected blockScrollStrategy: NbBlockScrollStrategyAdapter,
     @Inject(NB_WINDOW_CONFIG) protected readonly defaultWindowsConfig: NbWindowConfig,
-    protected cfr: ComponentFactoryResolver,
     @Inject(NB_DOCUMENT) document,
   ) {
     this.document = document;
@@ -161,7 +151,7 @@ export class NbWindowService {
       positionStrategy: this.overlayPositionBuilder.global().bottom().right(),
       hasBackdrop: true,
     });
-    const windowsContainerPortal = new NbComponentPortal(NbWindowsContainerComponent, null, null, this.cfr);
+    const windowsContainerPortal = new NbComponentPortal(NbWindowsContainerComponent, null, null);
     const overlayRef = this.overlayRef.attach(windowsContainerPortal);
     this.windowsContainerViewRef = overlayRef.instance.viewContainerRef;
   }
@@ -183,14 +173,10 @@ export class NbWindowService {
       ? config.viewContainerRef.injector
       : this.windowsContainerViewRef.injector;
     const injector = Injector.create({ parent: parentInjector, providers });
-    const windowFactory = this.componentFactoryResolver.resolveComponentFactory(NbWindowComponent);
 
-    const ref = this.windowsContainerViewRef.createComponent(
-      windowFactory,
-      this.windowsContainerViewRef.length,
+    const ref = this.windowsContainerViewRef.createComponent(NbWindowComponent, {
       injector,
-    );
-    ref.instance.cfr = this.cfr;
+    });
     ref.changeDetectorRef.detectChanges();
     return ref;
   }

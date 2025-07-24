@@ -5,16 +5,14 @@
  */
 
 import {
-  ComponentFactoryResolver,
-  ComponentFactory,
   ComponentRef,
   Directive,
   ElementRef,
+  HostBinding,
   Input,
   OnInit,
   Renderer2,
   ViewContainerRef,
-  HostBinding,
 } from '@angular/core';
 
 import { NbComponentSize } from '../component-size';
@@ -62,14 +60,12 @@ import { NbSpinnerComponent } from './spinner.component';
  * @stacked-example(Spinner in tabs, spinner/spinner-tabs.component)
  */
 @Directive({
-    selector: '[nbSpinner]',
-    standalone: false
+  selector: '[nbSpinner]',
+  standalone: false,
 })
 export class NbSpinnerDirective implements OnInit {
-
   private shouldShow = false;
   spinner: ComponentRef<NbSpinnerComponent>;
-  componentFactory: ComponentFactory<NbSpinnerComponent>;
 
   /**
    * Spinner message shown next to the icon
@@ -94,27 +90,22 @@ export class NbSpinnerDirective implements OnInit {
    */
   @Input('nbSpinner')
   set nbSpinner(val: boolean) {
-    if (this.componentFactory) {
-      if (val) {
-        this.show();
-      } else {
-        this.hide();
-      }
+    if (val) {
+      this.show();
     } else {
-      this.shouldShow = val;
+      this.hide();
     }
   }
 
   @HostBinding('class.nb-spinner-container') isSpinnerExist = false;
 
-  constructor(private directiveView: ViewContainerRef,
-              private componentFactoryResolver: ComponentFactoryResolver,
-              private renderer: Renderer2,
-              private directiveElement: ElementRef) {
-  }
+  constructor(
+    private directiveView: ViewContainerRef,
+    private renderer: Renderer2,
+    private directiveElement: ElementRef,
+  ) {}
 
   ngOnInit() {
-    this.componentFactory = this.componentFactoryResolver.resolveComponentFactory(NbSpinnerComponent);
     if (this.shouldShow) {
       this.show();
     }
@@ -129,8 +120,8 @@ export class NbSpinnerDirective implements OnInit {
 
   show() {
     if (!this.isSpinnerExist) {
-      this.spinner = this.directiveView.createComponent<NbSpinnerComponent>(this.componentFactory);
-      this.setInstanceInputs(this.spinner.instance);
+      this.spinner = this.directiveView.createComponent<NbSpinnerComponent>(NbSpinnerComponent);
+      this.setInstanceInputs(this.spinner.instance); // TODO use bindings instead
       this.spinner.changeDetectorRef.detectChanges();
       this.renderer.appendChild(this.directiveElement.nativeElement, this.spinner.location.nativeElement);
       this.isSpinnerExist = true;
@@ -138,7 +129,7 @@ export class NbSpinnerDirective implements OnInit {
   }
 
   setInstanceInputs(instance: NbSpinnerComponent) {
-    instance.message = this.spinnerMessage
+    instance.message = this.spinnerMessage;
     typeof this.spinnerStatus !== 'undefined' && (instance.status = this.spinnerStatus);
     typeof this.spinnerSize !== 'undefined' && (instance.size = this.spinnerSize);
   }

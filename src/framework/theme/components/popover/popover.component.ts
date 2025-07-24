@@ -4,21 +4,13 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import {
-  Component,
-  ComponentFactoryResolver,
-  Input,
-  TemplateRef,
-  Type,
-  ViewChild,
-} from '@angular/core';
+import { Component, Input, TemplateRef, Type, ViewChild } from '@angular/core';
 import { NbComponentPortal, NbTemplatePortal } from '../cdk/overlay/mapping';
 import {
   NbOverlayContainerComponent,
   NbPositionedContainerComponent,
   NbRenderableContainer,
 } from '../cdk/overlay/overlay-container';
-
 
 /**
  * Overlay container.
@@ -40,20 +32,19 @@ import {
  * popover-padding:
  * */
 @Component({
-    selector: 'nb-popover',
-    styleUrls: ['./popover.component.scss'],
-    template: `
+  selector: 'nb-popover',
+  styleUrls: ['./popover.component.scss'],
+  template: `
     <span class="arrow"></span>
     <nb-overlay-container></nb-overlay-container>
   `,
-    standalone: false
+  standalone: false,
 })
 export class NbPopoverComponent extends NbPositionedContainerComponent implements NbRenderableContainer {
   @ViewChild(NbOverlayContainerComponent) overlayContainer: NbOverlayContainerComponent;
 
   @Input() content: any;
   @Input() context: Object;
-  @Input() cfr: ComponentFactoryResolver;
 
   renderContent() {
     this.detachContent();
@@ -75,12 +66,13 @@ export class NbPopoverComponent extends NbPositionedContainerComponent implement
   }
 
   protected attachTemplate() {
-    this.overlayContainer
-      .attachTemplatePortal(new NbTemplatePortal(this.content, null, <any>{ $implicit: this.context }));
+    this.overlayContainer.attachTemplatePortal(
+      new NbTemplatePortal(this.content, null, <any>{ $implicit: this.context }),
+    );
   }
 
   protected attachComponent() {
-    const portal = new NbComponentPortal(this.content, null, null, this.cfr);
+    const portal = new NbComponentPortal(this.content, null, null);
     const ref = this.overlayContainer.attachComponentPortal(portal, this.context);
     ref.changeDetectorRef.detectChanges();
   }
