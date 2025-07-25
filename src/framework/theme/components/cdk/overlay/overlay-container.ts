@@ -1,21 +1,18 @@
 import {
   ChangeDetectorRef,
   Component,
-  ComponentFactoryResolver,
   ComponentRef,
   EmbeddedViewRef,
   HostBinding,
   Injector,
   Input,
   ViewChild,
-  ViewContainerRef,
 } from '@angular/core';
 
 import { NbPosition } from './overlay-position';
 import { NbComponentPortal, NbPortalInjector, NbPortalOutletDirective, NbTemplatePortal } from './mapping';
 
 export interface NbRenderableContainer {
-
   /**
    * A renderContent method renders content with provided context.
    * Naturally, this job has to be done by ngOnChanges lifecycle hook, but
@@ -26,8 +23,8 @@ export interface NbRenderableContainer {
 }
 
 @Component({
-    template: '',
-    standalone: false
+  template: '',
+  standalone: false,
 })
 export class NbPositionedContainerComponent {
   @Input() position: NbPosition;
@@ -93,17 +90,15 @@ export class NbPositionedContainerComponent {
   }
 }
 
-
 @Component({
-    selector: 'nb-overlay-container',
-    template: `
+  selector: 'nb-overlay-container',
+  template: `
     <div *ngIf="isStringContent" class="primitive-overlay">{{ content }}</div>
     <ng-template nbPortalOutlet></ng-template>
   `,
-    standalone: false
+  standalone: false,
 })
 export class NbOverlayContainerComponent {
-
   // TODO static must be false as of Angular 9.0.0, issues/1514
   @ViewChild(NbPortalOutletDirective, { static: true }) portalOutlet: NbPortalOutletDirective;
 
@@ -111,16 +106,14 @@ export class NbOverlayContainerComponent {
 
   content: string;
 
-  constructor(protected vcr: ViewContainerRef,
-              protected injector: Injector, private changeDetectorRef: ChangeDetectorRef) {
-  }
+  constructor(protected readonly injector: Injector, private readonly changeDetectorRef: ChangeDetectorRef) {}
 
   get isStringContent(): boolean {
     return !!this.content;
   }
 
   attachComponentPortal<T>(portal: NbComponentPortal<T>, context?: Object): ComponentRef<T> {
-    portal.injector = this.createChildInjector(portal.componentFactoryResolver);
+    portal.injector = this.createChildInjector();
     const componentRef = this.portalOutlet.attachComponentPortal(portal);
     if (context) {
       Object.assign(componentRef.instance, context);
@@ -153,9 +146,10 @@ export class NbOverlayContainerComponent {
     this.isAttached = false;
   }
 
-  protected createChildInjector(cfr: ComponentFactoryResolver): NbPortalInjector {
-    return new NbPortalInjector(this.injector, new WeakMap([
-      [ComponentFactoryResolver, cfr],
-    ]));
+  protected createChildInjector() {
+    return NbPortalInjector.create({
+      parent: this.injector,
+      providers: [],
+    });
   }
 }

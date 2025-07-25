@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { ComponentFactoryResolver, Inject, Injectable, Injector, TemplateRef, Type } from '@angular/core';
+import { Inject, Injectable, Injector, TemplateRef, Type } from '@angular/core';
 import { fromEvent as observableFromEvent } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
 
@@ -21,7 +21,6 @@ import { NB_DOCUMENT } from '../../theme.options';
 import { NB_DIALOG_CONFIG, NbDialogConfig } from './dialog-config';
 import { NbDialogRef } from './dialog-ref';
 import { NbDialogContainerComponent } from './dialog-container';
-
 
 /**
  * The `NbDialogService` helps to open dialogs.
@@ -138,19 +137,21 @@ import { NbDialogContainerComponent } from './dialog-container';
  * */
 @Injectable()
 export class NbDialogService {
-  constructor(@Inject(NB_DOCUMENT) protected document,
-              @Inject(NB_DIALOG_CONFIG) protected globalConfig,
-              protected positionBuilder: NbPositionBuilderService,
-              protected overlay: NbOverlayService,
-              protected injector: Injector,
-              protected cfr: ComponentFactoryResolver) {
-  }
+  constructor(
+    @Inject(NB_DOCUMENT) protected document,
+    @Inject(NB_DIALOG_CONFIG) protected globalConfig,
+    protected positionBuilder: NbPositionBuilderService,
+    protected overlay: NbOverlayService,
+    protected injector: Injector,
+  ) {}
 
   /**
    * Opens new instance of the dialog, may receive optional config.
    * */
-  open<T>(content: Type<T> | TemplateRef<T>,
-          userConfig: Partial<NbDialogConfig<Partial<T> | string>> = {}): NbDialogRef<T> {
+  open<T>(
+    content: Type<T> | TemplateRef<T>,
+    userConfig: Partial<NbDialogConfig<Partial<T> | string>> = {},
+  ): NbDialogRef<T> {
     const config = new NbDialogConfig({ ...this.globalConfig, ...userConfig });
     const overlayRef = this.createOverlay(config);
     const dialogRef = new NbDialogRef<T>(overlayRef);
@@ -176,10 +177,7 @@ export class NbDialogService {
   }
 
   protected createPositionStrategy(): NbGlobalPositionStrategy {
-    return this.positionBuilder
-      .global()
-      .centerVertically()
-      .centerHorizontally();
+    return this.positionBuilder.global().centerVertically().centerHorizontally();
   }
 
   protected createScrollStrategy(hasScroll: boolean): NbScrollStrategy {
@@ -191,16 +189,21 @@ export class NbDialogService {
   }
 
   protected createContainer(config: NbDialogConfig, overlayRef: NbOverlayRef): NbDialogContainerComponent {
-    const injector = new NbPortalInjector(this.createInjector(config), new WeakMap([[NbDialogConfig, config]]));
-    const containerPortal = new NbComponentPortal(NbDialogContainerComponent, null, injector, this.cfr);
+    const injector = NbPortalInjector.create({
+      parent: this.createInjector(config),
+      providers: [{ provide: NbDialogConfig, useValue: config }],
+    });
+    const containerPortal = new NbComponentPortal(NbDialogContainerComponent, null, injector);
     const containerRef = overlayRef.attach(containerPortal);
     return containerRef.instance;
   }
 
-  protected createContent<T>(config: NbDialogConfig,
-                             content: Type<T> | TemplateRef<T>,
-                             container: NbDialogContainerComponent,
-                             dialogRef: NbDialogRef<T>) {
+  protected createContent<T>(
+    config: NbDialogConfig,
+    content: Type<T> | TemplateRef<T>,
+    container: NbDialogContainerComponent,
+    dialogRef: NbDialogRef<T>,
+  ) {
     if (content instanceof TemplateRef) {
       const portal = this.createTemplatePortal(config, content, dialogRef);
       container.attachTemplatePortal(portal);
@@ -209,14 +212,16 @@ export class NbDialogService {
       dialogRef.componentRef = container.attachComponentPortal(portal);
 
       if (config.context) {
-        Object.assign(dialogRef.componentRef.instance, { ...config.context })
+        Object.assign(dialogRef.componentRef.instance, { ...config.context });
       }
     }
   }
 
-  protected createTemplatePortal<T>(config: NbDialogConfig,
-                                    content: TemplateRef<T>,
-                                    dialogRef: NbDialogRef<T>): NbTemplatePortal {
+  protected createTemplatePortal<T>(
+    config: NbDialogConfig,
+    content: TemplateRef<T>,
+    dialogRef: NbDialogRef<T>,
+  ): NbTemplatePortal {
     return new NbTemplatePortal(content, null, <any>{ $implicit: config.context, dialogRef });
   }
 
@@ -224,16 +229,21 @@ export class NbDialogService {
    * We're creating portal with custom injector provided through config or using global injector.
    * This approach provides us capability inject `NbDialogRef` in dialog component.
    * */
-  protected createComponentPortal<T>(config: NbDialogConfig,
-                                     content: Type<T>,
-                                     dialogRef: NbDialogRef<T>): NbComponentPortal {
+  protected createComponentPortal<T>(
+    config: NbDialogConfig,
+    content: Type<T>,
+    dialogRef: NbDialogRef<T>,
+  ): NbComponentPortal {
     const injector = this.createInjector(config);
-    const portalInjector = new NbPortalInjector(injector, new WeakMap([[NbDialogRef, dialogRef]]));
+    const portalInjector = NbPortalInjector.create({
+      parent: injector,
+      providers: [{ provide: NbDialogRef, useValue: dialogRef }],
+    });
     return new NbComponentPortal(content, config.viewContainerRef, portalInjector);
   }
 
   protected createInjector(config: NbDialogConfig): Injector {
-    return config.viewContainerRef && config.viewContainerRef.injector || this.injector;
+    return config.viewContainerRef?.injector || this.injector;
   }
 
   protected registerCloseListeners<T>(config: NbDialogConfig, overlayRef: NbOverlayRef, dialogRef: NbDialogRef<T>) {
