@@ -243,7 +243,7 @@ export class NbDialogService {
   }
 
   protected createInjector(config: NbDialogConfig): Injector {
-    return (config.viewContainerRef && config.viewContainerRef.injector) || this.injector;
+    return config.viewContainerRef?.injector || this.injector;
   }
 
   protected registerCloseListeners<T>(config: NbDialogConfig, overlayRef: NbOverlayRef, dialogRef: NbDialogRef<T>) {

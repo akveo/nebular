@@ -146,7 +146,7 @@ import { NbColumnsService } from './tree-grid-columns.service';
 })
 export class NbTreeGridComponent<T> extends NbTable<NbTreeGridPresentationNode<T>> implements AfterViewInit, OnDestroy {
   constructor(
-    private dataSourceBuilder: NbTreeGridDataSourceBuilder<T>,
+    private readonly dataSourceBuilder: NbTreeGridDataSourceBuilder<T>,
     differs: IterableDiffers,
     changeDetectorRef: ChangeDetectorRef,
     elementRef: ElementRef,

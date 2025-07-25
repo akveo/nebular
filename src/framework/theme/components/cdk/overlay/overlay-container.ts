@@ -7,7 +7,6 @@ import {
   Injector,
   Input,
   ViewChild,
-  ViewContainerRef,
 } from '@angular/core';
 
 import { NbPosition } from './overlay-position';
@@ -107,11 +106,7 @@ export class NbOverlayContainerComponent {
 
   content: string;
 
-  constructor(
-    protected vcr: ViewContainerRef,
-    protected injector: Injector,
-    private changeDetectorRef: ChangeDetectorRef,
-  ) {}
+  constructor(protected readonly injector: Injector, private readonly changeDetectorRef: ChangeDetectorRef) {}
 
   get isStringContent(): boolean {
     return !!this.content;

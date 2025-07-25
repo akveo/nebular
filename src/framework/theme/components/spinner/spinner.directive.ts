@@ -64,7 +64,7 @@ import { NbSpinnerComponent } from './spinner.component';
   standalone: false,
 })
 export class NbSpinnerDirective implements OnInit {
-  private shouldShow = false;
+  private readonly shouldShow = false;
   spinner: ComponentRef<NbSpinnerComponent>;
 
   /**
@@ -86,11 +86,11 @@ export class NbSpinnerDirective implements OnInit {
 
   /**
    * Directive value - show or hide spinner
-   * @param {boolean} val
+   * @param {boolean} isVisible
    */
   @Input('nbSpinner')
-  set nbSpinner(val: boolean) {
-    if (val) {
+  set nbSpinner(isVisible: boolean) {
+    if (isVisible) {
       this.show();
     } else {
       this.hide();
@@ -100,9 +100,9 @@ export class NbSpinnerDirective implements OnInit {
   @HostBinding('class.nb-spinner-container') isSpinnerExist = false;
 
   constructor(
-    private directiveView: ViewContainerRef,
-    private renderer: Renderer2,
-    private directiveElement: ElementRef,
+    private readonly directiveView: ViewContainerRef,
+    private readonly renderer: Renderer2,
+    private readonly directiveElement: ElementRef,
   ) {}
 
   ngOnInit() {
