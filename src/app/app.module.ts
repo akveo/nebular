@@ -11,7 +11,7 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NbThemeModule } from '@nebular/theme';
+import { NbDatepickerModule, NbThemeModule, NbTimepickerModule } from '@nebular/theme';
 
 import { AppComponent } from './app.component';
 import { LayoutDirectionToggleComponent } from './layout-direction-toggle/layout-direction-toggle.component';
@@ -36,6 +36,8 @@ import { ComponentLinkDirective } from './components-link.directive';
       ],
       { useHash: true },
     ),
+    NbDatepickerModule.forRoot(),
+    NbTimepickerModule.forRoot(),
     NbThemeModule.forRoot(),
     NbEvaIconsModule,
   ],
