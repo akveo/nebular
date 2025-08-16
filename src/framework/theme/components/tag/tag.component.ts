@@ -228,14 +228,13 @@ let tagUniqueId = 0;
  * tag-outline-control-selected-text-color:
  */
 @Component({
-    selector: 'nb-tag',
-    templateUrl: './tag.component.html',
-    exportAs: 'nbTag',
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+  selector: 'nb-tag',
+  templateUrl: './tag.component.html',
+  exportAs: 'nbTag',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class NbTagComponent implements AfterViewInit, OnDestroy, NbHighlightableOption {
-
   private _destroy$: Subject<NbTagComponent> = new Subject<NbTagComponent>();
 
   get destroy$(): Observable<NbTagComponent> {
@@ -274,6 +273,18 @@ export class NbTagComponent implements AfterViewInit, OnDestroy, NbHighlightable
   }
   protected _removable: boolean = false;
   static ngAcceptInputType_removable: NbBooleanInput;
+
+  /**
+   * Remove icon name
+   * @param {string} status
+   */
+  @Input() removeIcon: string = 'minus-outline';
+
+  /**
+   * Remove icon pack name
+   * @param {string} status
+   */
+  @Input() removeIconPack: string = 'nebular-essentials';
 
   /**
    * Tag appearance: `filled`, `outline`.
@@ -414,9 +425,11 @@ export class NbTagComponent implements AfterViewInit, OnDestroy, NbHighlightable
 
   ngAfterViewInit() {
     // TODO: #2254
-    this.zone.runOutsideAngular(() => setTimeout(() => {
-      this.renderer.addClass(this._hostElement.nativeElement, 'nb-transition');
-    }));
+    this.zone.runOutsideAngular(() =>
+      setTimeout(() => {
+        this.renderer.addClass(this._hostElement.nativeElement, 'nb-transition');
+      }),
+    );
   }
 
   ngOnDestroy() {
