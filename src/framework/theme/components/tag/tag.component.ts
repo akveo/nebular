@@ -278,7 +278,7 @@ export class NbTagComponent implements AfterViewInit, OnDestroy, NbHighlightable
    * Remove icon name
    * @param {string} status
    */
-  @Input() removeIcon: string = 'minus-outline';
+  @Input() removeIcon: string = 'close-outline';
 
   /**
    * Remove icon pack name
