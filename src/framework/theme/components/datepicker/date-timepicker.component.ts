@@ -1,7 +1,6 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  ComponentFactoryResolver,
   EventEmitter,
   Inject,
   Input,
@@ -28,10 +27,10 @@ import { NB_DATE_SERVICE_OPTIONS } from './datepicker.directive';
  * Provides a proxy to `NbCalendarWithTimeComponent` options as well as custom picker options.
  */
 @Component({
-    selector: 'nb-date-timepicker',
-    template: '',
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+  selector: 'nb-date-timepicker',
+  template: '',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class NbDateTimePickerComponent<D>
   extends NbBasePickerComponent<D, D, NbCalendarWithTimeComponent<D>>
@@ -132,12 +131,11 @@ export class NbDateTimePickerComponent<D>
     positionBuilder: NbPositionBuilderService,
     triggerStrategyBuilder: NbTriggerStrategyBuilderService,
     overlay: NbOverlayService,
-    cfr: ComponentFactoryResolver,
     dateService: NbDateService<D>,
     @Optional() @Inject(NB_DATE_SERVICE_OPTIONS) dateServiceOptions,
     protected calendarWithTimeModelService: NbCalendarTimeModelService<D>,
   ) {
-    super(document, positionBuilder, triggerStrategyBuilder, overlay, cfr, dateService, dateServiceOptions);
+    super(document, positionBuilder, triggerStrategyBuilder, overlay, dateService, dateServiceOptions);
   }
 
   ngOnInit() {

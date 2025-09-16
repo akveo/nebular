@@ -16,15 +16,15 @@ import {
 } from '@nebular/theme';
 
 @Component({
-    selector: 'nb-toastr-test',
-    template: `
+  selector: 'nb-toastr-test',
+  template: `
     <nb-layout>
       <nb-layout-column>
         <div class="test-div"></div>
       </nb-layout-column>
     </nb-layout>
   `,
-    standalone: false
+  standalone: false,
 })
 export class NbToastrTestComponent {
   constructor(private toastrService: NbToastrService) {}
@@ -37,22 +37,20 @@ export class NbToastrTestComponent {
 describe('toastr-component', () => {
   let fixture: ComponentFixture<NbToastrTestComponent>;
 
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        imports: [
-          RouterTestingModule.withRoutes([]),
-          NoopAnimationsModule,
-          NbThemeModule.forRoot(),
-          NbLayoutModule,
-          NbToastrModule.forRoot(),
-        ],
-        declarations: [NbToastrTestComponent],
-      }).compileComponents();
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      imports: [
+        RouterTestingModule.withRoutes([]),
+        NoopAnimationsModule,
+        NbThemeModule.forRoot(),
+        NbLayoutModule,
+        NbToastrModule.forRoot(),
+      ],
+      declarations: [NbToastrTestComponent],
+    }).compileComponents();
 
-      fixture = TestBed.createComponent(NbToastrTestComponent);
-    }),
-  );
+    fixture = TestBed.createComponent(NbToastrTestComponent);
+  }));
 
   it("should add 'toastr-overlay-container' class to overlay", () => {
     fixture.debugElement.componentInstance.showToast('toast-test-class');
@@ -242,17 +240,7 @@ describe('toastr-container-registry', () => {
   });
 
   beforeEach(() => {
-    const cfr = TestBed.configureTestingModule({
-      imports: [NbToastrModule.forRoot()],
-    }).inject(ComponentFactoryResolver);
-
-    toastrContainerRegistry = new NbToastrContainerRegistry(
-      overlayStub,
-      positionBuilder,
-      positionHelper,
-      cfr,
-      documentStub,
-    );
+    toastrContainerRegistry = new NbToastrContainerRegistry(overlayStub, positionBuilder, positionHelper, documentStub);
   });
 
   it('should create new container if not exists for requested position', () => {

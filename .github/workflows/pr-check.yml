@@ -11,11 +11,11 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: 18.19.1
+          node-version: 20.19
           cache: 'npm'
       - run: npm ci
       - run: npm run build:packages
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v4
         with:
           name: built-packages
           path: 'dist/'
@@ -27,7 +27,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: 18.19.1
+          node-version: 20.19
           cache: 'npm'
       - run: |
           npm ci
@@ -40,7 +40,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: 18.19.1
+          node-version: 20.19
       - run: npm ci
       - run: npm run docs:build
   build-playground:
@@ -50,85 +50,96 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: 18.19.1
+          node-version: 20.19
       - run: npm ci
-      - uses: actions/download-artifact@v2
+      - uses: actions/download-artifact@v4
         with:
           name: built-packages
           path: dist
       - run: npm run build playground -- --configuration=production-wp
-#  lint:
-#    runs-on: ubuntu-latest
-#    steps:
-#      - uses: actions/checkout@v2
-#      - uses: actions/setup-node@v2
-#        with:
-#          node-version: '16'
-#      - run: npm ci
-#      - run: npm run ci:lint
-#  e2e:
-#    needs: build-packages
-#    runs-on: ubuntu-latest
-#    steps:
-#      - uses: actions/checkout@v2
-#      - uses: actions/setup-node@v2
-#        with:
-#          node-version: '16'
-#      - run: npm ci
-#      - uses: actions/download-artifact@v2
-#        with:
-#          name: built-packages
-#          path: dist
-#      - name: BrowserStack Setup
-#        uses: 'browserstack/github-actions@master'
-#        with:
-#          username: ${{ env.BSU }}
-#          access-key: ${{ env.BSK }}
-#      - name: Start BrowserStackLocal Tunnel
-#        uses: browserstack/github-actions/setup-local@master
-#        with:
-#          local-testing: start
-#      - name: Test
-#        run: npm run ng -- e2e playground-e2e --configuration=production-wp
-#      - name: Stop BrowserStackLocal Tunnel
-#        uses: browserstack/github-actions/setup-local@master
-#        with:
-#          local-testing: stop
+  #  lint:
+  #    runs-on: ubuntu-latest
+  #    steps:
+  #      - uses: actions/checkout@v2
+  #      - uses: actions/setup-node@v2
+  #        with:
+  #          node-version: '16'
+  #      - run: npm ci
+  #      - run: npm run ci:lint
+  #  e2e:
+  #    needs: build-packages
+  #    runs-on: ubuntu-latest
+  #    steps:
+  #      - uses: actions/checkout@v2
+  #      - uses: actions/setup-node@v2
+  #        with:
+  #          node-version: '16'
+  #      - run: npm ci
+  #      - uses: actions/download-artifact@v4
+  #        with:
+  #          name: built-packages
+  #          path: dist
+  #      - name: BrowserStack Setup
+  #        uses: 'browserstack/github-actions@master'
+  #        with:
+  #          username: ${{ env.BSU }}
+  #          access-key: ${{ env.BSK }}
+  #      - name: Start BrowserStackLocal Tunnel
+  #        uses: browserstack/github-actions/setup-local@master
+  #        with:
+  #          local-testing: start
+  #      - name: Test
+  #        run: npm run ng -- e2e playground-e2e --configuration=production-wp
+  #      - name: Stop BrowserStackLocal Tunnel
+  #        uses: browserstack/github-actions/setup-local@master
+  #        with:
+  #          local-testing: stop
   unit-test:
     needs: build-packages
     runs-on: ubuntu-latest
     env:
       BSU: debac1
       BSK: AhrdZMi5gFDy3CQQfJHs
+      BROWSERSTACK_USERNAME: debac1
+      BROWSERSTACK_ACCESS_KEY: AhrdZMi5gFDy3CQQfJHs
+      FORCE_LOCAL_TESTING: true # Temporarily force local testing due to BrowserStack issues
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: 18.19.1
+          node-version: 20.19
       - run: npm ci
-      - uses: actions/download-artifact@v2
+      - uses: actions/download-artifact@v4
         with:
           name: built-packages
           path: dist
       - name: BrowserStack Setup
-        uses: 'browserstack/github-actions@master'
+        uses: 'browserstack/github-actions/setup-env@4478e16186f38e5be07721931642e65a028713c3'
         with:
           username: ${{ env.BSU }}
           access-key: ${{ env.BSK }}
       - name: Start BrowserStackLocal Tunnel
-        uses: browserstack/github-actions/setup-local@master
+        uses: browserstack/github-actions/setup-local@4478e16186f38e5be07721931642e65a028713c3
         with:
           local-testing: start
+          local-identifier: random
+      - name: Verify BrowserStack Connection
+        run: |
+          echo "Checking BrowserStack environment variables..."
+          echo "BROWSERSTACK_USERNAME is set: $([[ -n "$BROWSERSTACK_USERNAME" ]] && echo "Yes" || echo "No")"
+          echo "BROWSERSTACK_ACCESS_KEY is set: $([[ -n "$BROWSERSTACK_ACCESS_KEY" ]] && echo "Yes" || echo "No")"
+          echo "BSU is set: $([[ -n "$BSU" ]] && echo "Yes" || echo "No")"
+          echo "BSK is set: $([[ -n "$BSK" ]] && echo "Yes" || echo "No")"
       - name: Test packages
         run: npm run test playground -- -c=production-wp --watch=false
       - name: Test schematics
         run: npm run test:schematics
       - name: Stop BrowserStackLocal Tunnel
-        uses: browserstack/github-actions/setup-local@master
+        uses: browserstack/github-actions/setup-local@4478e16186f38e5be07721931642e65a028713c3
         with:
           local-testing: stop
       - name: Upload coverage to codecov
-        uses: codecov/codecov-action@v2
+        uses: codecov/codecov-action@5a1091511ad55cbe89839c7260b706298ca349f7
   packages-smoke:
     needs: build-packages
     runs-on: ubuntu-latest
@@ -136,8 +147,8 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: 18.19.1
-      - uses: actions/download-artifact@v2
+          node-version: 20.19
+      - uses: actions/download-artifact@v4
         with:
           name: built-packages
           path: packages-smoke/.lib/
@@ -147,7 +158,15 @@ jobs:
         run: npm run build -- --configuration=production
         working-directory: packages-smoke
       - name: E2E
-        run: npm run e2e
+        env:
+          CYPRESS_CACHE_FOLDER: ~/.cache/Cypress
+          ELECTRON_EXTRA_LAUNCH_ARGS: --disable-gpu --disable-software-rasterizer --disable-background-timer-throttling --disable-renderer-backgrounding --disable-backgrounding-occluded-windows
+        run: |
+          echo "Running e2e tests with proper timeout handling..."
+          timeout 600 npm run e2e:ci || {
+            echo "E2E tests timed out or failed"
+            exit 1
+          }
         working-directory: packages-smoke
       - name: SSR
         run: |

@@ -14,20 +14,20 @@ function throwFileNotFoundError(fileName: string) {
  * Reads specified file from the given tree
  * Throws the exception if file not found
  * */
-export function readText(tree: Tree, fileName: string, encoding: BufferEncoding = 'utf8'): string {
-  const file: Buffer | null = tree.read(fileName);
+export function readText(tree: Tree, fileName: string, encoding: string = 'utf8'): string {
+  const file = tree.read(fileName);
 
   if (!file) {
     throwFileNotFoundError(fileName);
   }
 
-  return (file as Buffer).toString(encoding);
+  return file!.toString(encoding as any);
 }
 
 /**
  * Reads specified file as JSON from the given tree
  * */
-export function readJSON(tree: Tree, fileName: string, encoding: BufferEncoding = 'utf8'): any {
+export function readJSON(tree: Tree, fileName: string, encoding: string = 'utf8'): any {
   return JSON.parse(readText(tree, fileName, encoding));
 }
 

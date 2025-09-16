@@ -2,10 +2,12 @@
   "extends": "./tsconfig.schematics.json",
   "compilerOptions": {
     "types": [
-      "jasmine"
+      "jasmine",
+      "node"
     ]
   },
   "exclude": [
-    "schematics/*/files/**/*"
+    "schematics/*/files/**/*",
+    "schematics/**/*.node-spec.ts"
   ]
 }

@@ -21,11 +21,11 @@
     "nebular"
   ],
   "peerDependencies": {
-    "@angular/animations": "^19.1.6",
-    "@angular/common": "^19.1.6",
-    "@angular/core": "^19.1.6",
-    "@angular/router": "^19.1.6",
-    "@angular/cdk": "^19.1.4",
+    "@angular/animations": "^20.1.3",
+    "@angular/common": "^20.1.3",
+    "@angular/core": "^20.1.3",
+    "@angular/router": "^20.1.3",
+    "@angular/cdk": "^20.1.3",
     "rxjs": "^6.5.3 || ^7.4.0"
   },
   "dependencies": {

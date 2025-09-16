@@ -36,32 +36,61 @@ module.exports = function (config) {
     customLaunchers: {
       ChromeHeadlessLocal: {
         base: 'ChromeHeadless',
-        flags: ['--no-sandbox', '--window-size=1024,768'],
+        flags: [
+          '--no-sandbox',
+          '--disable-web-security',
+          '--disable-features=VizDisplayCompositor',
+          '--disable-dev-shm-usage',
+          '--disable-gpu',
+          '--remote-debugging-port=9222',
+          '--window-size=1024,768',
+        ],
       },
       BrowserstackChromeCI: {
         base: 'BrowserStack',
         browser: 'Chrome',
         version: 'latest',
         os: 'Windows',
-        os_version: '10',
+        os_version: '11',
       },
     },
   };
 
   if (process.env.CI) {
-    config.browserStack = {
-      startTunnel: false,
-      build: process.env.BROWSERSTACK_BUILD_NAME,
-      project: process.env.BROWSERSTACK_PROJECT_NAME,
-      tunnelIdentifier: process.env.BROWSERSTACK_LOCAL_IDENTIFIER,
-      timeout: 600,
-      video: false,
-      user: process.env.BROWSERSTACK_USERNAME,
-      key: process.env.BROWSERSTACK_ACCESS_KEY,
-    };
+    // Check if BrowserStack credentials are available
+    const hasBrowserStackCredentials =
+      (process.env.BROWSERSTACK_USERNAME || process.env.BSU) &&
+      (process.env.BROWSERSTACK_ACCESS_KEY || process.env.BSK);
+
+    // Check if we should force local testing (for debugging or when BrowserStack fails)
+    const forceLocalTesting = process.env.FORCE_LOCAL_TESTING === 'true';
+
+    if (hasBrowserStackCredentials && !forceLocalTesting) {
+      config.browserStack = {
+        startTunnel: false,
+        build: process.env.BROWSERSTACK_BUILD_NAME,
+        project: process.env.BROWSERSTACK_PROJECT_NAME,
+        tunnelIdentifier: process.env.BROWSERSTACK_LOCAL_IDENTIFIER,
+        timeout: 300, // Reduced timeout to 5 minutes
+        video: false,
+        user: process.env.BROWSERSTACK_USERNAME || process.env.BSU,
+        key: process.env.BROWSERSTACK_ACCESS_KEY || process.env.BSK,
+      };
+      configuration.browsers = ['BrowserstackChromeCI'];
+      configuration.reporters.push('BrowserStack');
+      configuration.browserNoActivityTimeout = 120000; // 2 minutes
+      configuration.captureTimeout = 120000; // 2 minutes
+      console.log('Using BrowserStack for CI testing');
+    } else {
+      if (forceLocalTesting) {
+        console.log('FORCE_LOCAL_TESTING is enabled, using local Chrome');
+      } else {
+        console.log('BrowserStack credentials not found, falling back to local Chrome');
+      }
+      configuration.browsers = ['ChromeHeadlessLocal'];
+    }
+
     configuration.singleRun = true;
-    configuration.browsers = ['BrowserstackChromeCI'];
-    configuration.reporters.push('BrowserStack');
   }
 
   config.set(configuration);

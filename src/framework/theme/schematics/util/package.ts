@@ -183,9 +183,13 @@ function sortObjectByKeys(obj: { [key: string]: string }): { [key: string]: stri
 }
 
 function getNebularPackageJson(): PackageJson {
-  return require('../../package.json');
+  // Use dynamic require to avoid TypeScript compilation issues
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
+  return (global as any).require('../../package.json');
 }
 
 function getNebularEvaIconsPackageJson(): PackageJson {
-  return require('../../../eva-icons/package.json');
+  // Use dynamic require to avoid TypeScript compilation issues
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
+  return (global as any).require('../../../eva-icons/package.json');
 }

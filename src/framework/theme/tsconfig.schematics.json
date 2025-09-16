@@ -30,6 +30,7 @@
   ],
   "exclude": [
     "schematics/*/files/**/*",
-    "schematics/**/*.spec.ts"
+    "schematics/**/*.spec.ts",
+    "schematics/**/*.node-spec.ts"
   ]
 }

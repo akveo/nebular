@@ -15,12 +15,20 @@ import {
 import { Tree } from '@angular-devkit/schematics';
 import { SchematicTestRunner, UnitTestTree } from '@angular-devkit/schematics/testing';
 
-import { getFileContent } from '@schematics/angular/utility/test';
 import { getWorkspace } from '@schematics/angular/utility/workspace';
 import { Schema as WorkspaceOptions } from '@schematics/angular/workspace/schema';
 import { Schema as ApplicationOptions, Style } from '@schematics/angular/application/schema';
 
 import { Schema as NgAddOptions } from './schema';
+
+// Helper function for reading file content from tree
+function getFileContent(tree: Tree, filePath: string): string {
+  const buffer = tree.read(filePath);
+  if (buffer === null) {
+    throw new Error(`File ${filePath} not found.`);
+  }
+  return buffer.toString('utf-8');
+}
 
 const workspaceOptions: WorkspaceOptions = {
   name: 'workspace',
@@ -70,10 +78,10 @@ $nb-themes: nb-register-theme((
 
 async function createTestWorkspace(runner: SchematicTestRunner, appOptions: Partial<ApplicationOptions> = {}) {
   const workspace: UnitTestTree = await runner
-    .runExternalSchematicAsync('@schematics/angular', 'workspace', workspaceOptions)
+    .runExternalSchematic('@schematics/angular', 'workspace', workspaceOptions)
     .toPromise();
   const options = { ...defaultAppOptions, ...appOptions };
-  return runner.runExternalSchematicAsync('@schematics/angular', 'application', options, workspace).toPromise();
+  return runner.runExternalSchematic('@schematics/angular', 'application', options, workspace).toPromise();
 }
 
 function getPackageDependencies(tree: Tree): any {
@@ -86,15 +94,15 @@ describe('ng-add', () => {
   let appTree: Tree;
 
   function runNgAddSchematic(options: Partial<NgAddOptions> = {}) {
-    return runner.runSchematicAsync('ng-add', options, appTree);
+    return runner.runSchematic('ng-add', options, appTree);
   }
 
   function runSetupSchematic(options: Partial<NgAddOptions> = {}) {
-    return runner.runSchematicAsync('setup', options, appTree);
+    return runner.runSchematic('setup', options, appTree);
   }
 
   function runPostInstallSchematic(options: Partial<NgAddOptions> = {}) {
-    return runner.runSchematicAsync('post-install', options, appTree);
+    return runner.runSchematic('post-install', options, appTree);
   }
 
   beforeEach(async () => {
