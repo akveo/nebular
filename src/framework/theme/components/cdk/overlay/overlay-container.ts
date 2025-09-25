@@ -1,7 +1,6 @@
 import {
   ChangeDetectorRef,
   Component,
-  ComponentFactoryResolver,
   ComponentRef,
   EmbeddedViewRef,
   HostBinding,
@@ -153,9 +152,7 @@ export class NbOverlayContainerComponent {
     this.isAttached = false;
   }
 
-  protected createChildInjector(cfr: ComponentFactoryResolver): NbPortalInjector {
-    return new NbPortalInjector(this.injector, new WeakMap([
-      [ComponentFactoryResolver, cfr],
-    ]));
+  protected createChildInjector(): NbPortalInjector {
+    return new NbPortalInjector(this.injector);
   }
 }

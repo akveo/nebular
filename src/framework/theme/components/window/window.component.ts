@@ -9,8 +9,6 @@ import {
   Renderer2,
   ViewChild,
   Type,
-  ComponentFactoryResolver,
-  Input,
   AfterViewChecked,
 } from '@angular/core';
 import { NbFocusTrap, NbFocusTrapFactoryService } from '../cdk/a11y/focus-trap';
@@ -69,8 +67,6 @@ import { NbWindowRef } from './window-ref';
     standalone: false
 })
 export class NbWindowComponent implements OnInit, AfterViewChecked, OnDestroy {
-  @Input() cfr: ComponentFactoryResolver;
-
   @HostBinding('class.full-screen')
   get isFullScreen() {
     return this.windowRef.state === NbWindowState.FULL_SCREEN;
@@ -181,7 +177,7 @@ export class NbWindowComponent implements OnInit, AfterViewChecked, OnDestroy {
   }
 
   protected attachComponent() {
-    const portal = new NbComponentPortal(this.content as Type<any>, null, null, this.cfr);
+    const portal = new NbComponentPortal(this.content as Type<any>, null, null);
     const ref = this.overlayContainer.attachComponentPortal(portal, this.context);
     this.windowRef.componentInstance = ref.instance;
 

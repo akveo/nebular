@@ -1,4 +1,4 @@
-import { Component, ComponentFactoryResolver } from '@angular/core';
+import { Component } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
@@ -242,15 +242,10 @@ describe('toastr-container-registry', () => {
   });
 
   beforeEach(() => {
-    const cfr = TestBed.configureTestingModule({
-      imports: [NbToastrModule.forRoot()],
-    }).inject(ComponentFactoryResolver);
-
     toastrContainerRegistry = new NbToastrContainerRegistry(
       overlayStub,
       positionBuilder,
       positionHelper,
-      cfr,
       documentStub,
     );
   });
