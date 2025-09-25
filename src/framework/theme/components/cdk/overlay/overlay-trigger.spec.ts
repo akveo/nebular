@@ -1,6 +1,5 @@
-import { DOCUMENT } from '@angular/common';
 import { fakeAsync, TestBed, tick } from '@angular/core/testing';
-import { ComponentRef } from '@angular/core';
+import { ComponentRef, DOCUMENT } from '@angular/core';
 import { NbTrigger, NbTriggerStrategyBuilderService, NB_DOCUMENT } from '@nebular/theme';
 import createSpy = jasmine.createSpy;
 

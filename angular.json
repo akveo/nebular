@@ -20,12 +20,13 @@
       "prefix": "npg",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/playground",
+            "outputPath": {
+              "base": "dist/playground"
+            },
             "index": "src/index.html",
-            "main": "src/main.ts",
-            "polyfills": "src/polyfills.ts",
+            "polyfills": ["src/polyfills.ts"],
             "tsConfig": "src/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
@@ -33,7 +34,8 @@
               "src/assets"
             ],
             "styles": [],
-            "scripts": []
+            "scripts": [],
+            "browser": "src/main.ts"
           },
           "configurations": {
             "production": {
@@ -76,9 +78,7 @@
               "outputHashing": "all"
             },
             "development": {
-              "buildOptimizer": false,
               "optimization": false,
-              "vendorChunk": true,
               "extractLicenses": false,
               "sourceMap": true,
               "namedChunks": true
@@ -184,12 +184,13 @@
       "prefix": "ngd",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/docs",
+            "outputPath": {
+              "base": "dist/docs"
+            },
             "index": "docs/index.html",
-            "main": "docs/main.ts",
-            "polyfills": "docs/polyfills.ts",
+            "polyfills": ["docs/polyfills.ts"],
             "tsConfig": "docs/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
@@ -222,7 +223,8 @@
             ],
             "allowedCommonJsDependencies": [
               "highlight.js"
-            ]
+            ],
+            "browser": "docs/main.ts"
           },
           "configurations": {
             "production": {
@@ -245,9 +247,7 @@
               "outputHashing": "all"
             },
             "development": {
-              "buildOptimizer": false,
               "optimization": false,
-              "vendorChunk": true,
               "extractLicenses": false,
               "sourceMap": true,
               "namedChunks": true
@@ -609,7 +609,8 @@
   "schematics": {
     "@schematics/angular:component": {
       "style": "scss",
-      "changeDetection": "OnPush"
+      "changeDetection": "OnPush",
+      "type": "component"
     },
     "@schematics/angular:application": {
       "strict": true
@@ -619,6 +620,27 @@
     },
     "@angular-eslint/schematics:library": {
       "setParserOptionsProject": true
+    },
+    "@schematics/angular:directive": {
+      "type": "directive"
+    },
+    "@schematics/angular:service": {
+      "type": "service"
+    },
+    "@schematics/angular:guard": {
+      "typeSeparator": "."
+    },
+    "@schematics/angular:interceptor": {
+      "typeSeparator": "."
+    },
+    "@schematics/angular:module": {
+      "typeSeparator": "."
+    },
+    "@schematics/angular:pipe": {
+      "typeSeparator": "."
+    },
+    "@schematics/angular:resolver": {
+      "typeSeparator": "."
     }
   },
   "cli": {
