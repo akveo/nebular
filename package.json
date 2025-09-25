@@ -99,7 +99,7 @@
     "@angular/language-service": "^20.3.2",
     "@eslint/eslintrc": "^3.1.0",
     "@eslint/js": "^9.8.0",
-    "@schematics/angular": "^19.1.7",
+    "@schematics/angular": "^20.3.3",
     "@types/gulp": "4.0.6",
     "@types/highlight.js": "^9.12.4",
     "@types/jasmine": "~3.10.0",
