@@ -53,6 +53,7 @@ export default [{
         "no-underscore-dangle": "off",
         "@typescript-eslint/consistent-type-definitions": "error",
         "@angular-eslint/prefer-standalone": "off",
+        "@angular-eslint/prefer-inject": "off",
 
         "rxjs/no-unsafe-takeuntil": ["error", {
             allow: [
