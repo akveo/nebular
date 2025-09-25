@@ -50,7 +50,7 @@
     "gen:playground": "ng g .:playground",
     "gen:playground-module": "ng g .:playground-module",
     "gen:playground-components": "ng g .:playground-components",
-    "prepare": "husky install"
+    "prepare": "husky"
   },
   "keywords": [
     "angular",
@@ -122,7 +122,7 @@
     "gulp-replace": "1.0.0",
     "gulp-sass": "^5.0.0",
     "gulp-typedoc": "2.2.3",
-    "husky": "^7.0.2",
+    "husky": "^9.1.7",
     "jasmine-core": "~3.10.0",
     "jasmine-fail-fast": "2.0.0",
     "jasmine-spec-reporter": "~5.0.0",
