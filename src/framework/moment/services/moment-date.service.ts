@@ -9,7 +9,7 @@ import { TranslationWidth } from '@angular/common';
 
 import { NbDateService } from '@nebular/theme';
 
-import * as _moment from 'moment';
+import _moment from 'moment';
 // @ts-ignore
 import { default as _rollupMoment, LongDateFormatKey, Moment } from 'moment';
 
