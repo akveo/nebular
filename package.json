@@ -47,6 +47,7 @@
     "release:validate": "npm-run-all build:packages build:wp \"e2e -c=production-wp\" && npm run test:wp -- --watch=false",
     "release": "npm-run-all release:validate publish",
     "publish": "./tools/publish.sh",
+    "postinstall": "npm run build:dev-schematics",
     "gen:playground": "ng g .:playground",
     "gen:playground-module": "ng g .:playground-module",
     "gen:playground-components": "ng g .:playground-components",
