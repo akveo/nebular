@@ -11,8 +11,6 @@ import {
   SkipSelf,
 } from '@angular/core';
 import {
-  _COALESCED_STYLE_SCHEDULER,
-  _CoalescedStyleScheduler,
   CdkTable,
   CdkTableModule,
   RenderRow,
@@ -58,11 +56,9 @@ export const NB_TABLE_TEMPLATE = `
 `;
 
 export const NB_VIEW_REPEATER_STRATEGY = _VIEW_REPEATER_STRATEGY;
-export const NB_COALESCED_STYLE_SCHEDULER = _COALESCED_STYLE_SCHEDULER;
 
 export const NB_TABLE_PROVIDERS: Provider[] = [
   { provide: NB_VIEW_REPEATER_STRATEGY, useClass: _DisposeViewRepeaterStrategy },
-  { provide: NB_COALESCED_STYLE_SCHEDULER, useClass: _CoalescedStyleScheduler },
 ];
 
 @Component({
@@ -83,14 +79,12 @@ export class NbTable<T> extends CdkTable<T> {
     platform: NbPlatform,
     @Inject(_VIEW_REPEATER_STRATEGY)
     protected readonly _viewRepeater: _ViewRepeater<T, RenderRow<T>, RowContext<T>>,
-    @Inject(_COALESCED_STYLE_SCHEDULER)
-    protected readonly _coalescedStyleScheduler: _CoalescedStyleScheduler,
     _viewportRuler: NbViewportRulerAdapter,
     @Optional() @SkipSelf() @Inject(NB_STICKY_POSITIONING_LISTENER)
     protected readonly _stickyPositioningListener: StickyPositioningListener,
   ) {
     super(differs, changeDetectorRef, elementRef, role, dir, document, platform, _viewRepeater,
-          _coalescedStyleScheduler, _viewportRuler, _stickyPositioningListener);
+          _viewportRuler, _stickyPositioningListener);
   }
 }
 
