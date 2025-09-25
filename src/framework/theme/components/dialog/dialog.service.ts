@@ -190,7 +190,10 @@ export class NbDialogService {
   }
 
   protected createContainer(config: NbDialogConfig, overlayRef: NbOverlayRef): NbDialogContainerComponent {
-    const injector = new NbPortalInjector(this.createInjector(config), new WeakMap([[NbDialogConfig, config]]));
+    const injector = Injector.create({
+      parent: this.createInjector(config),
+      providers: [{ provide: NbDialogConfig, useValue: config }],
+    });
     const containerPortal = new NbComponentPortal(NbDialogContainerComponent, null, injector);
     const containerRef = overlayRef.attach(containerPortal);
     return containerRef.instance;
@@ -227,7 +230,10 @@ export class NbDialogService {
                                      content: Type<T>,
                                      dialogRef: NbDialogRef<T>): NbComponentPortal {
     const injector = this.createInjector(config);
-    const portalInjector = new NbPortalInjector(injector, new WeakMap([[NbDialogRef, dialogRef]]));
+    const portalInjector = Injector.create({
+      parent: injector,
+      providers: [{ provide: NbDialogRef, useValue: dialogRef }],
+    });
     return new NbComponentPortal(content, config.viewContainerRef, portalInjector);
   }
 
