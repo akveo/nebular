@@ -30,7 +30,7 @@ export default [{
 
     plugins: {
         rxjs,
-        '@typescript-eslint': tseslint,
+        "@typescript-eslint": tseslint,
     },
 
     languageOptions: {
