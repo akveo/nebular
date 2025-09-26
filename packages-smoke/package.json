@@ -52,7 +52,7 @@
     "@schematics/angular": "~20.3.3",
     "@types/express": "^5.0.1",
     "@types/jasmine": "^3.10.0",
-    "@types/node": "^18.19.0",
+    "@types/node": "^20.19.17",
     "@typescript-eslint/eslint-plugin": "^7.2.0",
     "@typescript-eslint/parser": "^7.2.0",
     "browser-sync": "^3.0.0",
