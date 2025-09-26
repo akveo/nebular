@@ -111,12 +111,12 @@ jobs:
           name: built-packages
           path: dist
       - name: BrowserStack Setup
-        uses: 'browserstack/github-actions@master'
+        uses: 'browserstack/github-actions@93aebce225b754566349151c0676b26b005e591b'
         with:
           username: ${{ env.BSU }}
           access-key: ${{ env.BSK }}
       - name: Start BrowserStackLocal Tunnel
-        uses: browserstack/github-actions/setup-local@master
+        uses: browserstack/github-actions/setup-local@93aebce225b754566349151c0676b26b005e591b
         with:
           local-testing: start
       - name: Test packages
@@ -124,11 +124,11 @@ jobs:
       - name: Test schematics
         run: npm run test:schematics
       - name: Stop BrowserStackLocal Tunnel
-        uses: browserstack/github-actions/setup-local@master
+        uses: browserstack/github-actions/setup-local@93aebce225b754566349151c0676b26b005e591b
         with:
           local-testing: stop
       - name: Upload coverage to codecov
-        uses: codecov/codecov-action@v2
+        uses: codecov/codecov-action@5a1091511ad55cbe89839c7260b706298ca349f7
   packages-smoke:
     needs: build-packages
     runs-on: ubuntu-latest
