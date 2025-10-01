@@ -6,7 +6,6 @@
 
 import {
   Component,
-  ComponentFactoryResolver,
   Input,
   TemplateRef,
   Type,
@@ -53,7 +52,6 @@ export class NbPopoverComponent extends NbPositionedContainerComponent implement
 
   @Input() content: any;
   @Input() context: Object;
-  @Input() cfr: ComponentFactoryResolver;
 
   renderContent() {
     this.detachContent();
@@ -80,7 +78,7 @@ export class NbPopoverComponent extends NbPositionedContainerComponent implement
   }
 
   protected attachComponent() {
-    const portal = new NbComponentPortal(this.content, null, null, this.cfr);
+    const portal = new NbComponentPortal(this.content, null, null);
     const ref = this.overlayContainer.attachComponentPortal(portal, this.context);
     ref.changeDetectorRef.detectChanges();
   }

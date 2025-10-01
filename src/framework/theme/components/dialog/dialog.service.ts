@@ -4,14 +4,13 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { ComponentFactoryResolver, Inject, Injectable, Injector, TemplateRef, Type } from '@angular/core';
+import { Inject, Injectable, Injector, TemplateRef, Type } from '@angular/core';
 import { fromEvent as observableFromEvent } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
 
 import {
   NbComponentPortal,
   NbOverlayRef,
-  NbPortalInjector,
   NbScrollStrategy,
   NbTemplatePortal,
 } from '../cdk/overlay/mapping';
@@ -143,7 +142,7 @@ export class NbDialogService {
               protected positionBuilder: NbPositionBuilderService,
               protected overlay: NbOverlayService,
               protected injector: Injector,
-              protected cfr: ComponentFactoryResolver) {
+  ) {
   }
 
   /**
@@ -191,8 +190,11 @@ export class NbDialogService {
   }
 
   protected createContainer(config: NbDialogConfig, overlayRef: NbOverlayRef): NbDialogContainerComponent {
-    const injector = new NbPortalInjector(this.createInjector(config), new WeakMap([[NbDialogConfig, config]]));
-    const containerPortal = new NbComponentPortal(NbDialogContainerComponent, null, injector, this.cfr);
+    const injector = Injector.create({
+      parent: this.createInjector(config),
+      providers: [{ provide: NbDialogConfig, useValue: config }],
+    });
+    const containerPortal = new NbComponentPortal(NbDialogContainerComponent, null, injector);
     const containerRef = overlayRef.attach(containerPortal);
     return containerRef.instance;
   }
@@ -228,7 +230,10 @@ export class NbDialogService {
                                      content: Type<T>,
                                      dialogRef: NbDialogRef<T>): NbComponentPortal {
     const injector = this.createInjector(config);
-    const portalInjector = new NbPortalInjector(injector, new WeakMap([[NbDialogRef, dialogRef]]));
+    const portalInjector = Injector.create({
+      parent: injector,
+      providers: [{ provide: NbDialogRef, useValue: dialogRef }],
+    });
     return new NbComponentPortal(content, config.viewContainerRef, portalInjector);
   }
 

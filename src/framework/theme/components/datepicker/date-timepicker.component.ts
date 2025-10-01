@@ -1,7 +1,6 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  ComponentFactoryResolver,
   EventEmitter,
   Inject,
   Input,
@@ -132,12 +131,11 @@ export class NbDateTimePickerComponent<D>
     positionBuilder: NbPositionBuilderService,
     triggerStrategyBuilder: NbTriggerStrategyBuilderService,
     overlay: NbOverlayService,
-    cfr: ComponentFactoryResolver,
     dateService: NbDateService<D>,
     @Optional() @Inject(NB_DATE_SERVICE_OPTIONS) dateServiceOptions,
     protected calendarWithTimeModelService: NbCalendarTimeModelService<D>,
   ) {
-    super(document, positionBuilder, triggerStrategyBuilder, overlay, cfr, dateService, dateServiceOptions);
+    super(document, positionBuilder, triggerStrategyBuilder, overlay, dateService, dateServiceOptions);
   }
 
   ngOnInit() {

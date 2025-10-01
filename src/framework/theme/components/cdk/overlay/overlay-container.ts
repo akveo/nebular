@@ -1,8 +1,8 @@
 import {
   ChangeDetectorRef,
   Component,
-  ComponentFactoryResolver,
   ComponentRef,
+  DestroyableInjector,
   EmbeddedViewRef,
   HostBinding,
   Injector,
@@ -12,7 +12,7 @@ import {
 } from '@angular/core';
 
 import { NbPosition } from './overlay-position';
-import { NbComponentPortal, NbPortalInjector, NbPortalOutletDirective, NbTemplatePortal } from './mapping';
+import { NbComponentPortal, NbPortalOutletDirective, NbTemplatePortal } from './mapping';
 
 export interface NbRenderableContainer {
 
@@ -120,7 +120,7 @@ export class NbOverlayContainerComponent {
   }
 
   attachComponentPortal<T>(portal: NbComponentPortal<T>, context?: Object): ComponentRef<T> {
-    portal.injector = this.createChildInjector(portal.componentFactoryResolver);
+    portal.injector = this.createChildInjector();
     const componentRef = this.portalOutlet.attachComponentPortal(portal);
     if (context) {
       Object.assign(componentRef.instance, context);
@@ -153,9 +153,10 @@ export class NbOverlayContainerComponent {
     this.isAttached = false;
   }
 
-  protected createChildInjector(cfr: ComponentFactoryResolver): NbPortalInjector {
-    return new NbPortalInjector(this.injector, new WeakMap([
-      [ComponentFactoryResolver, cfr],
-    ]));
+  protected createChildInjector(): DestroyableInjector {
+    return Injector.create({
+      parent: this.injector,
+      providers: [],
+    });
   }
 }

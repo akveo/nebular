@@ -6,7 +6,6 @@
 
 import {
   Component,
-  ComponentFactoryResolver,
   ComponentRef,
   OnChanges,
   ElementRef,
@@ -202,7 +201,6 @@ export abstract class NbBasePicker<D, T, P> extends NbDatepicker<T, D> {
     protected overlay: NbOverlayService,
     protected positionBuilder: NbPositionBuilderService,
     protected triggerStrategyBuilder: NbTriggerStrategyBuilderService,
-    protected cfr: ComponentFactoryResolver,
     protected dateService: NbDateService<D>,
     protected dateServiceOptions,
   ) {
@@ -291,7 +289,7 @@ export abstract class NbBasePicker<D, T, P> extends NbDatepicker<T, D> {
   }
 
   protected openDatepicker() {
-    this.container = this.ref.attach(new NbComponentPortal(NbDatepickerContainerComponent, null, null, this.cfr));
+    this.container = this.ref.attach(new NbComponentPortal(NbDatepickerContainerComponent, null, null));
     this.instantiatePicker();
     this.subscribeOnValueChange();
     this.writeQueue();
@@ -331,7 +329,7 @@ export abstract class NbBasePicker<D, T, P> extends NbDatepicker<T, D> {
   }
 
   protected instantiatePicker() {
-    this.pickerRef = this.container.instance.attach(new NbComponentPortal(this.pickerClass, null, null, this.cfr));
+    this.pickerRef = this.container.instance.attach(new NbComponentPortal(this.pickerClass, null, null));
   }
 
   /**
@@ -488,11 +486,10 @@ export class NbBasePickerComponent<D, T, P> extends NbBasePicker<D, T, P> implem
     positionBuilder: NbPositionBuilderService,
     triggerStrategyBuilder: NbTriggerStrategyBuilderService,
     overlay: NbOverlayService,
-    cfr: ComponentFactoryResolver,
     dateService: NbDateService<D>,
     @Optional() @Inject(NB_DATE_SERVICE_OPTIONS) dateServiceOptions,
   ) {
-    super(overlay, positionBuilder, triggerStrategyBuilder, cfr, dateService, dateServiceOptions);
+    super(overlay, positionBuilder, triggerStrategyBuilder, dateService, dateServiceOptions);
   }
 
   ngOnInit() {

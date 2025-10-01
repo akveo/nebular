@@ -17,7 +17,7 @@
 </button>
 
 <button
-  *ngIf="!(isAuthenticated$ | async)"
+  *ngIf="(isAuthenticated$ | async) === false"
   (click)="loginWithGoogle()">
   Login with google
 </button>

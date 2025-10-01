@@ -4,7 +4,6 @@ import {
   CdkPortalOutlet,
   ComponentPortal,
   Portal,
-  PortalInjector,
   PortalModule,
   TemplatePortal,
 } from '@angular/cdk/portal';
@@ -57,8 +56,6 @@ export class NbTemplatePortal<T = any> extends TemplatePortal<T> {
 export class NbOverlayContainer extends OverlayContainer {}
 
 export class NbFlexibleConnectedPositionStrategy extends FlexibleConnectedPositionStrategy {}
-
-export class NbPortalInjector extends PortalInjector {}
 
 export type NbPortal<T = any> = Portal<T>;
 export type NbOverlayRef = OverlayRef;

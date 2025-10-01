@@ -25,11 +25,11 @@
     "firebase"
   ],
   "peerDependencies": {
-    "@angular/core": "^19.1.6",
+    "@angular/core": "^20.0.0",
     "@nebular/auth": "15.0.0",
     "rxjs": "^6.5.3 || ^7.4.0",
     "firebase": "^11.3.1",
-    "@angular/fire": "^19.0.0"
+    "@angular/fire": "^20.0.0"
   },
   "dependencies": {
     "tslib": "^2.3.0"

@@ -11,11 +11,11 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: 18.19.1
+          node-version: 20.19.5
           cache: 'npm'
       - run: npm ci
       - run: npm run build:packages
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v4
         with:
           name: built-packages
           path: 'dist/'
@@ -27,7 +27,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: 18.19.1
+          node-version: 20.19.5
           cache: 'npm'
       - run: |
           npm ci
@@ -40,7 +40,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: 18.19.1
+          node-version: 20.19.5
       - run: npm ci
       - run: npm run docs:build
   build-playground:
@@ -50,9 +50,9 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: 18.19.1
+          node-version: 20.19.5
       - run: npm ci
-      - uses: actions/download-artifact@v2
+      - uses: actions/download-artifact@v4
         with:
           name: built-packages
           path: dist
@@ -104,19 +104,19 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: 18.19.1
+          node-version: 20.19.5
       - run: npm ci
-      - uses: actions/download-artifact@v2
+      - uses: actions/download-artifact@v4
         with:
           name: built-packages
           path: dist
       - name: BrowserStack Setup
-        uses: 'browserstack/github-actions@master'
+        uses: 'browserstack/github-actions@93aebce225b754566349151c0676b26b005e591b'
         with:
           username: ${{ env.BSU }}
           access-key: ${{ env.BSK }}
       - name: Start BrowserStackLocal Tunnel
-        uses: browserstack/github-actions/setup-local@master
+        uses: browserstack/github-actions/setup-local@93aebce225b754566349151c0676b26b005e591b
         with:
           local-testing: start
       - name: Test packages
@@ -124,11 +124,11 @@ jobs:
       - name: Test schematics
         run: npm run test:schematics
       - name: Stop BrowserStackLocal Tunnel
-        uses: browserstack/github-actions/setup-local@master
+        uses: browserstack/github-actions/setup-local@93aebce225b754566349151c0676b26b005e591b
         with:
           local-testing: stop
       - name: Upload coverage to codecov
-        uses: codecov/codecov-action@v2
+        uses: codecov/codecov-action@5a1091511ad55cbe89839c7260b706298ca349f7
   packages-smoke:
     needs: build-packages
     runs-on: ubuntu-latest
@@ -136,8 +136,8 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: 18.19.1
-      - uses: actions/download-artifact@v2
+          node-version: 20.19.5
+      - uses: actions/download-artifact@v4
         with:
           name: built-packages
           path: packages-smoke/.lib/

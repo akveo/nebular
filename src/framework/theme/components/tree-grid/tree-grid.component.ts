@@ -32,7 +32,6 @@ import {
   NB_TABLE_TEMPLATE,
   NbTable,
   NB_TABLE_PROVIDERS,
-  NB_COALESCED_STYLE_SCHEDULER,
   NB_VIEW_REPEATER_STRATEGY,
 } from '../cdk/table/table.module';
 import { NB_STICKY_POSITIONING_LISTENER, NbRowContext } from '../cdk/table/type-mappings';
@@ -163,13 +162,12 @@ export class NbTreeGridComponent<T> extends NbTable<NbTreeGridPresentationNode<T
               platform: NbPlatform,
               @Inject(NB_WINDOW) private window,
               @Inject(NB_VIEW_REPEATER_STRATEGY) protected readonly _viewRepeater,
-              @Inject(NB_COALESCED_STYLE_SCHEDULER) protected readonly _coalescedStyleScheduler,
               _viewportRuler: NbViewportRulerAdapter,
               @Optional() @SkipSelf() @Inject(NB_STICKY_POSITIONING_LISTENER)
               protected readonly _stickyPositioningListener,
   ) {
     super(differs, changeDetectorRef, elementRef, role, dir, document, platform, _viewRepeater,
-          _coalescedStyleScheduler, _viewportRuler, _stickyPositioningListener);
+          _viewportRuler, _stickyPositioningListener);
     this.platform = platform;
   }
 
