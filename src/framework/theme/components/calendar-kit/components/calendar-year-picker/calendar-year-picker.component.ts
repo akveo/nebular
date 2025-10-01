@@ -36,6 +36,7 @@ import { NbCalendarYearModelService } from '../../services/calendar-year-model.s
     </nb-calendar-picker>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class NbCalendarYearPickerComponent<D> implements OnChanges {
   @Input() date: D;

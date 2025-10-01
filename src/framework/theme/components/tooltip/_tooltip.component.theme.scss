@@ -7,12 +7,12 @@
 @use '../../styles/theming' as *;
 
 @mixin nb-tooltip-status($status) {
-  $background-color: nb-theme(tooltip-#{$status}-background-color);
-  $text-color: nb-theme(tooltip-#{$status}-text-color);
+  $background-color: var(--tooltip-#{$status}-background-color);
+  $text-color: var(--tooltip-#{$status}-text-color);
 
   &.status-#{$status} {
     background: $background-color;
-    border-color: nb-theme(tooltip-#{$status}-border-color);
+    border-color: var(--tooltip-#{$status}-border-color);
 
     .arrow {
       border-bottom-color: $background-color;
@@ -27,33 +27,33 @@
 @mixin nb-tooltip-theme {
   nb-tooltip {
     $arrow-size: 6px;
-    box-shadow: nb-theme(tooltip-shadow);
+    box-shadow: var(--tooltip-shadow);
 
-    background: nb-theme(tooltip-background-color);
-    border: nb-theme(tooltip-border-width) nb-theme(tooltip-border-style) nb-theme(tooltip-border-color);
-    border-radius: nb-theme(tooltip-border-radius);
-    padding: nb-theme(tooltip-padding);
-    max-width: nb-theme(tooltip-max-width);
+    background: var(--tooltip-background-color);
+    border: var(--tooltip-border-width) var(--tooltip-border-style) var(--tooltip-border-color);
+    border-radius: var(--tooltip-border-radius);
+    padding: var(--tooltip-padding);
+    max-width: var(--tooltip-max-width);
 
     nb-icon:only-child {
-      height: nb-theme(tooltip-icon-height);
-      width: nb-theme(tooltip-icon-width);
+      height: var(--tooltip-icon-height);
+      width: var(--tooltip-icon-width);
     }
     nb-icon:not(:only-child) {
-      height: nb-theme(tooltip-text-font-size);
-      width: nb-theme(tooltip-text-font-size);
+      height: var(--tooltip-text-font-size);
+      width: var(--tooltip-text-font-size);
     }
 
     .content {
-      color: nb-theme(tooltip-text-color);
-      font-family: nb-theme(tooltip-text-font-family);
-      font-size: nb-theme(tooltip-text-font-size);
-      font-weight: nb-theme(tooltip-text-font-weight);
-      line-height: nb-theme(tooltip-text-line-height);
+      color: var(--tooltip-text-color);
+      font-family: var(--tooltip-text-font-family);
+      font-size: var(--tooltip-text-font-size);
+      font-weight: var(--tooltip-text-font-weight);
+      line-height: var(--tooltip-text-line-height);
     }
 
     .arrow {
-      border-bottom: $arrow-size nb-theme(tooltip-border-style) nb-theme(tooltip-background-color);
+      border-bottom: $arrow-size var(--tooltip-border-style) var(--tooltip-background-color);
     }
 
     @each $status in nb-get-statuses() {

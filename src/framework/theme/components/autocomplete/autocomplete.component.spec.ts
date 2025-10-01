@@ -88,6 +88,7 @@ class OverlayServiceWithManualKeyDownTrigger extends NbOverlayService {
       </nb-layout-column>
     </nb-layout>
   `,
+  standalone: false,
 })
 export class NbAutocompleteTestComponent {
   @Output() selectedChange: EventEmitter<any> = new EventEmitter();

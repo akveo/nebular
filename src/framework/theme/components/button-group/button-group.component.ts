@@ -104,6 +104,7 @@ import { NB_BUTTON_GROUP } from './button-group-injection-tokens';
   template: ` <ng-content></ng-content> `,
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [{ provide: NB_BUTTON_GROUP, useExisting: NbButtonGroupComponent }],
+  standalone: false,
 })
 export class NbButtonGroupComponent implements OnChanges, AfterContentInit {
   protected lastEmittedValue: any[] = [];

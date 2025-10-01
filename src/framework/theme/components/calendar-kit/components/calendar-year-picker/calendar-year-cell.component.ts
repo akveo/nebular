@@ -24,6 +24,7 @@ import { NbCalendarCell, NbCalendarSize, NbCalendarSizeValues } from '../../mode
     </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class NbCalendarYearCellComponent<D> implements NbCalendarCell<D, D> {
   @Input() date: D;

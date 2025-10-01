@@ -27,6 +27,7 @@ import { NbPosition } from '../cdk/overlay/overlay-position';
     </ul>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class NbOptionListComponent<T> {
   @Input() size: NbComponentSize = 'medium';

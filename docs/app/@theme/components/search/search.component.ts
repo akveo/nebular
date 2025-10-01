@@ -9,6 +9,7 @@ import { NB_WINDOW } from '@nebular/theme';
     <input type="text" nbInput id="doc-search" placeholder="Start typing..." />
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class NgdSearchComponent implements AfterViewInit {
   constructor(@Inject(NB_WINDOW) private window) {}

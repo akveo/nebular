@@ -8,30 +8,30 @@
 
 @mixin nb-alert-theme() {
   nb-alert {
-    border-radius: nb-theme(alert-border-radius);
-    box-shadow: nb-theme(alert-shadow);
-    font-family: nb-theme(alert-text-font-family);
-    font-size: nb-theme(alert-text-font-size);
-    font-weight: nb-theme(alert-text-font-weight);
-    line-height: nb-theme(alert-text-line-height);
-    padding: nb-theme(alert-padding);
+    border-radius: var(--alert-border-radius);
+    box-shadow: var(--alert-shadow);
+    font-family: var(--alert-text-font-family);
+    font-size: var(--alert-text-font-size);
+    font-weight: var(--alert-text-font-weight);
+    line-height: var(--alert-text-line-height);
+    padding: var(--alert-padding);
 
     // TODO: move alert margin style to layout
-    margin-bottom: nb-theme(alert-bottom-margin);
+    margin-bottom: var(--alert-bottom-margin);
 
     @include nb-scrollbars(
-      nb-theme(alert-scrollbar-color),
-      nb-theme(alert-scrollbar-background-color),
-      nb-theme(alert-scrollbar-width)
+      var(--alert-scrollbar-color),
+      var(--alert-scrollbar-background-color),
+      var(--alert-scrollbar-width)
     );
 
     &.closable {
-      @include nb-ltr(padding-right, nb-theme(alert-closable-start-padding));
-      @include nb-rtl(padding-left, nb-theme(alert-closable-start-padding));
+      @include nb-ltr(padding-right, var(--alert-closable-start-padding));
+      @include nb-rtl(padding-left, var(--alert-closable-start-padding));
     }
 
     .close {
-      padding: nb-theme(alert-padding);
+      padding: var(--alert-padding);
       font-size: 1.5rem;
       line-height: 1;
       cursor: pointer;
@@ -41,28 +41,28 @@
 
   @each $size in nb-get-sizes() {
     nb-alert.size-#{$size} {
-      height: nb-theme(alert-#{$size}-height);
+      height: var(--alert-#{$size}-height);
     }
   }
 
   @each $status in nb-get-statuses() {
     nb-alert {
       &.status-#{$status} {
-        color: nb-theme(alert-#{$status}-text-color);
-        background-color: nb-theme(alert-#{$status}-background-color);
+        color: var(--alert-#{$status}-text-color);
+        background-color: var(--alert-#{$status}-background-color);
 
         a,
         a:hover {
-          color: nb-theme(alert-#{$status}-text-color);
+          color: var(--alert-#{$status}-text-color);
         }
       }
 
       &.accent-#{$status} {
-        border-top: nb-theme(alert-border-radius) solid nb-theme(alert-accent-#{$status}-color);
+        border-top: var(--alert-border-radius) solid var(--alert-accent-#{$status}-color);
       }
 
       &.outline-#{$status} {
-        border: nb-theme(alert-outline-width) solid nb-theme(alert-outline-#{$status}-color);
+        border: var(--alert-outline-width) solid var(--alert-outline-#{$status}-color);
       }
     }
   }

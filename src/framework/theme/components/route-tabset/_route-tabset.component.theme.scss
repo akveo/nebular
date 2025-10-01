@@ -8,61 +8,61 @@
 
 @mixin nb-route-tabset-theme() {
   nb-route-tabset {
+    background-color: var(--route-tabset-background-color);
+    border-radius: var(--route-tabset-border-radius);
+    box-shadow: var(--route-tabset-shadow);
+
     @include nb-scrollbars(
-      nb-theme(route-tabset-scrollbar-color),
-      nb-theme(route-tabset-scrollbar-background-color),
-      nb-theme(route-tabset-scrollbar-width)
+      var(--route-tabset-scrollbar-color),
+      var(--route-tabset-scrollbar-background-color),
+      var(--route-tabset-scrollbar-width)
     );
 
-    background-color: nb-theme(route-tabset-background-color);
-    border-radius: nb-theme(route-tabset-border-radius);
-    box-shadow: nb-theme(route-tabset-shadow);
-
     .route-tabset {
-      border-bottom: nb-theme(route-tabset-divider-width) nb-theme(route-tabset-divider-style)
-        nb-theme(route-tabset-divider-color);
+      border-bottom: var(--route-tabset-divider-width) var(--route-tabset-divider-style)
+        var(--route-tabset-divider-color);
     }
 
     .tab-link {
-      background-color: nb-theme(route-tabset-tab-background-color);
+      background-color: var(--route-tabset-tab-background-color);
       cursor: pointer;
-      padding: nb-theme(route-tabset-tab-padding);
-      color: nb-theme(route-tabset-tab-text-color);
-      font-family: nb-theme(route-tabset-tab-text-font-family);
-      font-size: nb-theme(route-tabset-tab-text-font-size);
-      font-weight: nb-theme(route-tabset-tab-text-font-weight);
-      line-height: nb-theme(route-tabset-tab-text-line-height);
-      text-transform: nb-theme(route-tabset-tab-text-transform);
+      padding: var(--route-tabset-tab-padding);
+      color: var(--route-tabset-tab-text-color);
+      font-family: var(--route-tabset-tab-text-font-family);
+      font-size: var(--route-tabset-tab-text-font-size);
+      font-weight: var(--route-tabset-tab-text-font-weight);
+      line-height: var(--route-tabset-tab-text-line-height);
+      text-transform: var(--route-tabset-tab-text-transform);
 
       &::before {
-        background-color: nb-theme(route-tabset-tab-underline-color);
-        height: nb-theme(route-tabset-tab-underline-width);
+        background-color: var(--route-tabset-tab-underline-color);
+        height: var(--route-tabset-tab-underline-width);
       }
     }
 
     .route-tab.active {
       .tab-link {
-        background-color: nb-theme(tabset-tab-active-background-color);
-        color: nb-theme(tabset-tab-active-text-color);
+        background-color: var(--tabset-tab-active-background-color);
+        color: var(--tabset-tab-active-text-color);
         &::before {
-          background-color: nb-theme(tabset-tab-active-underline-color);
+          background-color: var(--tabset-tab-active-underline-color);
         }
       }
     }
 
     .tab-link:focus {
-      background-color: nb-theme(route-tabset-tab-focus-background-color);
-      color: nb-theme(route-tabset-tab-focus-text-color);
+      background-color: var(--route-tabset-tab-focus-background-color);
+      color: var(--route-tabset-tab-focus-text-color);
       &::before {
-        background-color: nb-theme(route-tabset-tab-focus-underline-color);
+        background-color: var(--route-tabset-tab-focus-underline-color);
       }
     }
 
     .tab-link:hover {
-      background-color: nb-theme(route-tabset-tab-hover-background-color);
-      color: nb-theme(route-tabset-tab-hover-text-color);
+      background-color: var(--route-tabset-tab-hover-background-color);
+      color: var(--route-tabset-tab-hover-text-color);
       &::before {
-        background-color: nb-theme(route-tabset-tab-hover-underline-color);
+        background-color: var(--route-tabset-tab-hover-underline-color);
       }
     }
 
@@ -71,12 +71,12 @@
       pointer-events: none;
 
       .tab-link {
-        background-color: nb-theme(route-tabset-tab-disabled-background-color);
-        color: nb-theme(route-tabset-tab-disabled-text-color);
+        background-color: var(--route-tabset-tab-disabled-background-color);
+        color: var(--route-tabset-tab-disabled-text-color);
         cursor: default;
         pointer-events: none;
         &::before {
-          background-color: nb-theme(route-tabset-tab-disabled-underline-color);
+          background-color: var(--route-tabset-tab-disabled-underline-color);
         }
       }
     }

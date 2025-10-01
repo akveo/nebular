@@ -20,6 +20,7 @@ import { NbDateService } from '../../services/date.service';
     </button>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class NbCalendarViewModeComponent<D> {
   @Input() date: D;

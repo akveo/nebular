@@ -10,109 +10,109 @@
   nb-radio {
     .outer-circle,
     .inner-circle {
-      height: nb-theme(radio-height);
-      width: nb-theme(radio-width);
+      height: var(--radio-height);
+      width: var(--radio-width);
     }
 
     .outer-circle {
-      border-style: nb-theme(radio-border-style);
-      border-width: nb-theme(radio-border-width);
+      border-style: var(--radio-border-style);
+      border-width: var(--radio-border-width);
     }
 
     .native-input:enabled:focus + .outer-circle {
-      @include nb-outline(nb-theme(radio-outline-width), nb-theme(radio-outline-color));
+      @include nb-outline(var(--radio-outline-width), var(--radio-outline-color));
     }
 
     @each $status in nb-get-statuses() {
       &.status-#{$status} .native-input:enabled + .outer-circle {
-        background-color: nb-theme(radio-#{$status}-background-color);
-        border-color: nb-theme(radio-#{$status}-border-color);
+        background-color: var(--radio-#{$status}-background-color);
+        border-color: var(--radio-#{$status}-border-color);
       }
 
       &.status-#{$status} .native-input:enabled:checked {
         & + .outer-circle {
-          background-color: nb-theme(radio-#{$status}-checked-background-color);
-          border-color: nb-theme(radio-#{$status}-checked-border-color);
+          background-color: var(--radio-#{$status}-checked-background-color);
+          border-color: var(--radio-#{$status}-checked-border-color);
         }
         & ~ .inner-circle {
-          background-color: nb-theme(radio-#{$status}-inner-circle-color);
+          background-color: var(--radio-#{$status}-inner-circle-color);
         }
       }
 
       &.status-#{$status} .native-input:enabled:focus + .outer-circle {
-        background-color: nb-theme(radio-#{$status}-focus-background-color);
-        border-color: nb-theme(radio-#{$status}-focus-border-color);
+        background-color: var(--radio-#{$status}-focus-background-color);
+        border-color: var(--radio-#{$status}-focus-border-color);
       }
       &.status-#{$status} .native-input:enabled:checked:focus {
         & + .outer-circle {
-          background-color: nb-theme(radio-#{$status}-focus-checked-background-color);
-          border-color: nb-theme(radio-#{$status}-focus-checked-border-color);
+          background-color: var(--radio-#{$status}-focus-checked-background-color);
+          border-color: var(--radio-#{$status}-focus-checked-border-color);
         }
         & ~ .inner-circle {
-          background-color: nb-theme(radio-#{$status}-focus-inner-circle-color);
+          background-color: var(--radio-#{$status}-focus-inner-circle-color);
         }
       }
 
       &.status-#{$status} label:hover .native-input:enabled + .outer-circle {
-        background-color: nb-theme(radio-#{$status}-hover-background-color);
-        border-color: nb-theme(radio-#{$status}-hover-border-color);
+        background-color: var(--radio-#{$status}-hover-background-color);
+        border-color: var(--radio-#{$status}-hover-border-color);
       }
       &.status-#{$status} label:hover .native-input:checked:enabled {
         + .outer-circle {
-          background-color: nb-theme(radio-#{$status}-hover-checked-background-color);
-          border-color: nb-theme(radio-#{$status}-hover-checked-border-color);
+          background-color: var(--radio-#{$status}-hover-checked-background-color);
+          border-color: var(--radio-#{$status}-hover-checked-border-color);
         }
         ~ .inner-circle {
-          background-color: nb-theme(radio-#{$status}-hover-inner-circle-color);
+          background-color: var(--radio-#{$status}-hover-inner-circle-color);
         }
       }
 
       &.status-#{$status} label .native-input:enabled:active + .outer-circle {
-        background-color: nb-theme(radio-#{$status}-active-background-color);
-        border-color: nb-theme(radio-#{$status}-active-border-color);
+        background-color: var(--radio-#{$status}-active-background-color);
+        border-color: var(--radio-#{$status}-active-border-color);
       }
       &.status-#{$status} label .native-input:enabled:checked:active {
         & + .outer-circle {
-          background-color: nb-theme(radio-#{$status}-active-checked-background-color);
-          border-color: nb-theme(radio-#{$status}-active-checked-border-color);
+          background-color: var(--radio-#{$status}-active-checked-background-color);
+          border-color: var(--radio-#{$status}-active-checked-border-color);
         }
         & ~ .inner-circle {
-          background-color: nb-theme(radio-#{$status}-active-inner-circle-color);
+          background-color: var(--radio-#{$status}-active-inner-circle-color);
         }
       }
 
       &.status-#{$status} .text {
-        color: nb-theme(radio-#{$status}-text-color);
+        color: var(--radio-#{$status}-text-color);
       }
 
       &.status-#{$status} .native-input:disabled {
         & + .outer-circle {
-          background-color: nb-theme(radio-#{$status}-disabled-background-color);
-          border-color: nb-theme(radio-#{$status}-disabled-border-color);
+          background-color: var(--radio-#{$status}-disabled-background-color);
+          border-color: var(--radio-#{$status}-disabled-border-color);
         }
         & ~ .text {
-          color: nb-theme(radio-#{$status}-disabled-text-color);
+          color: var(--radio-#{$status}-disabled-text-color);
         }
 
         &:checked {
           & + .outer-circle {
-            background-color: nb-theme(radio-#{$status}-disabled-checked-background-color);
-            border-color: nb-theme(radio-#{$status}-disabled-checked-border-color);
+            background-color: var(--radio-#{$status}-disabled-checked-background-color);
+            border-color: var(--radio-#{$status}-disabled-checked-border-color);
           }
           ~ .inner-circle {
-            background-color: nb-theme(radio-#{$status}-disabled-checked-inner-circle-color);
+            background-color: var(--radio-#{$status}-disabled-checked-inner-circle-color);
           }
         }
       }
     }
 
     .text {
-      font-family: nb-theme(radio-text-font-family);
-      font-size: nb-theme(radio-text-font-size);
-      font-weight: nb-theme(radio-text-font-weight);
-      line-height: nb-theme(radio-text-line-height);
-      @include nb-ltr(margin-left, nb-theme(radio-width));
-      @include nb-rtl(margin-right, nb-theme(radio-width));
+      font-family: var(--radio-text-font-family);
+      font-size: var(--radio-text-font-size);
+      font-weight: var(--radio-text-font-weight);
+      line-height: var(--radio-text-line-height);
+      @include nb-ltr(margin-left, var(--radio-width));
+      @include nb-rtl(margin-right, var(--radio-width));
     }
   }
 }

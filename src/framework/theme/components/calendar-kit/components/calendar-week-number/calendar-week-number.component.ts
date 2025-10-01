@@ -19,6 +19,7 @@ import { NbCalendarSize, NbCalendarSizeValues } from '../../model';
   `,
   styleUrls: ['./calendar-week-number.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class NbCalendarWeekNumberComponent<D> implements OnChanges {
   weekNumbers: number[];

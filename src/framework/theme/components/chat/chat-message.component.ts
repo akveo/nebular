@@ -145,6 +145,7 @@ import { NbChatCustomMessageDirective } from './chat-custom-message.directive';
     ]),
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class NbChatMessageComponent {
   protected readonly builtInMessageTypes: string[] = ['text', 'file', 'map', 'quote'];

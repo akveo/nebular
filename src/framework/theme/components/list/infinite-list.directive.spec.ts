@@ -78,6 +78,7 @@ function setup() {
       }
     `,
   ],
+  standalone: false,
 })
 class ScrollTestComponent {
   listenWindowScroll = false;

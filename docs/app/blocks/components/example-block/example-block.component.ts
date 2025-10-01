@@ -7,6 +7,7 @@ import { NgdCodeLoaderService } from '../../../@theme/services';
     <ngd-code-block *ngIf="code" [firstLine]="firstLine" [lastLine]="lastLine" [rawCode]="code"> </ngd-code-block>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class NgdExampleBlockComponent {
   code: string;
@@ -18,10 +19,7 @@ export class NgdExampleBlockComponent {
     this.loadCode(content);
   }
 
-  constructor(
-    private codeLoader: NgdCodeLoaderService,
-    private cd: ChangeDetectorRef,
-  ) {}
+  constructor(private codeLoader: NgdCodeLoaderService, private cd: ChangeDetectorRef) {}
 
   loadCode(content) {
     this.codeLoader.load(content.files[0]).subscribe((code: string) => {

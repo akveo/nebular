@@ -20,6 +20,7 @@ import { NgdMetadataService } from '../../../@theme/services';
     </ngd-prop-block>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class NgdPropsBlockComponent {
   outputs: any = [];

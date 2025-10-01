@@ -8,30 +8,30 @@
 
 @mixin nb-toast-theme() {
   nb-toast {
-    border-style: nb-theme(toastr-border-style);
-    border-width: nb-theme(toastr-border-width);
-    border-radius: nb-theme(toastr-border-radius);
-    padding: nb-theme(toastr-padding);
-    box-shadow: nb-theme(toastr-shadow);
+    border-style: var(--toastr-border-style);
+    border-width: var(--toastr-border-width);
+    border-radius: var(--toastr-border-radius);
+    padding: var(--toastr-padding);
+    box-shadow: var(--toastr-shadow);
 
     .title {
-      font-family: nb-theme(toastr-title-text-font-family);
-      font-size: nb-theme(toastr-title-text-font-size);
-      font-weight: nb-theme(toastr-title-text-font-weight);
-      line-height: nb-theme(toastr-title-text-line-height);
+      font-family: var(--toastr-title-text-font-family);
+      font-size: var(--toastr-title-text-font-size);
+      font-weight: var(--toastr-title-text-font-weight);
+      line-height: var(--toastr-title-text-line-height);
     }
 
     .message {
-      font-family: nb-theme(toastr-text-font-family);
-      font-size: nb-theme(toastr-text-font-size);
-      font-weight: nb-theme(toastr-text-font-weight);
-      line-height: nb-theme(toastr-text-line-height);
+      font-family: var(--toastr-text-font-family);
+      font-size: var(--toastr-text-font-size);
+      font-weight: var(--toastr-text-font-weight);
+      line-height: var(--toastr-text-line-height);
     }
 
     .icon-container {
       @include nb-ltr(margin-right, 1.25rem);
       @include nb-rtl(margin-left, 1.25rem);
-      border-radius: nb-theme(toastr-border-radius);
+      border-radius: var(--toastr-border-radius);
       min-width: 2.5rem;
       min-height: 2.5rem;
       display: flex;
@@ -46,29 +46,29 @@
 
   @each $status in nb-get-statuses() {
     nb-toast.status-#{$status} {
-      background: nb-theme(toastr-#{$status}-background-color);
-      border-color: nb-theme(toastr-#{$status}-border-color);
-      color: nb-theme(toastr-#{$status}-text-color);
+      background: var(--toastr-#{$status}-background-color);
+      border-color: var(--toastr-#{$status}-border-color);
+      color: var(--toastr-#{$status}-text-color);
 
       .title {
-        color: nb-theme(toastr-#{$status}-text-color);
+        color: var(--toastr-#{$status}-text-color);
       }
 
       &.destroy-by-click:hover {
-        background: nb-theme(toastr-destroyable-#{$status}-hover-background-color);
-        border-color: nb-theme(toastr-destroyable-#{$status}-hover-border-color);
+        background: var(--toastr-destroyable-#{$status}-hover-background-color);
+        border-color: var(--toastr-destroyable-#{$status}-hover-border-color);
       }
 
       .icon-container {
-        background: nb-theme(toastr-icon-#{$status}-background-color);
-        color: nb-theme(toastr-icon-#{$status}-color);
+        background: var(--toastr-icon-#{$status}-background-color);
+        color: var(--toastr-icon-#{$status}-color);
       }
     }
   }
 
   @each $status in nb-get-statuses() {
     nb-toast .actions-container .toast-action.status-#{$status} {
-      color: nb-theme(toastr-#{$status}-action-color);
+      color: var(--toastr-#{$status}-action-color);
     }
   }
 

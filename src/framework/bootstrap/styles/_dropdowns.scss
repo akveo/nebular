@@ -9,24 +9,24 @@
 
 @mixin nb-b-dropdowns-theme() {
   .dropdown-menu {
-    box-shadow: nb-theme(option-list-shadow);
-    max-height: nb-theme(option-list-max-height);
+    box-shadow: var(--option-list-shadow);
+    max-height: var(--option-list-max-height);
     overflow: auto;
     border: none;
   }
 
   .dropdown-item {
     user-select: none;
-    background-color: nb-theme(option-background-color);
-    color: nb-theme(option-text-color);
-    font-family: nb-theme(option-text-font-family);
-    font-weight: nb-theme(option-medium-text-font-weight);
-    font-size: nb-theme(option-medium-text-font-size);
-    line-height: nb-theme(option-medium-text-line-height);
+    background-color: var(--option-background-color);
+    color: var(--option-text-color);
+    font-family: var(--option-text-font-family);
+    font-weight: var(--option-medium-text-font-weight);
+    font-size: var(--option-medium-text-font-size);
+    line-height: var(--option-medium-text-line-height);
 
     &[disabled] {
-      background-color: nb-theme(option-disabled-background-color);
-      color: nb-theme(option-disabled-text-color);
+      background-color: var(--option-disabled-background-color);
+      color: var(--option-disabled-text-color);
     }
 
     &:focus {
@@ -34,18 +34,18 @@
     }
 
     &.selected {
-      background-color: nb-theme(option-selected-background-color);
-      color: nb-theme(option-selected-text-color);
+      background-color: var(--option-selected-background-color);
+      color: var(--option-selected-text-color);
     }
 
     &:focus {
-      background-color: nb-theme(option-focus-background-color);
-      color: nb-theme(option-focus-text-color);
+      background-color: var(--option-focus-background-color);
+      color: var(--option-focus-text-color);
     }
 
     &:hover {
-      background-color: nb-theme(option-hover-background-color);
-      color: nb-theme(option-hover-text-color);
+      background-color: var(--option-hover-background-color);
+      color: var(--option-hover-text-color);
     }
   }
 }

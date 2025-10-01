@@ -7,6 +7,7 @@ import { Component } from '@angular/core';
     <p>{{ description }}</p>
   `,
   styleUrls: ['./components-promo.component.scss'],
+  standalone: false,
 })
 export class NgdComponentsPromoComponent {
   title = 'Angular UI components';

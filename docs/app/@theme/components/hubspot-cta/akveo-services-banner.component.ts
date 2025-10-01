@@ -20,6 +20,7 @@ import { NB_DOCUMENT, NB_WINDOW } from '@nebular/theme';
     </span>
   `,
   styleUrls: ['akveo-services-banner.component.scss'],
+  standalone: false,
 })
 export class AkveoServicesBannerComponent implements OnInit {
   @Input() ctaId: string;
@@ -30,10 +31,7 @@ export class AkveoServicesBannerComponent implements OnInit {
 
   @ViewChild('wrapper', { static: true }) wrapper: ElementRef;
 
-  constructor(
-    @Inject(NB_DOCUMENT) private document,
-    @Inject(NB_WINDOW) private window,
-  ) {}
+  constructor(@Inject(NB_DOCUMENT) private document, @Inject(NB_WINDOW) private window) {}
 
   ngOnInit() {
     if (this.window?.hbspt?.cta?.load) {

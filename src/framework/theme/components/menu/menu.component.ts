@@ -42,6 +42,7 @@ export enum NbToggleStates {
       transition(`${NbToggleStates.Collapsed} <=> ${NbToggleStates.Expanded}`, animate(300)),
     ]),
   ],
+  standalone: false,
 })
 export class NbMenuItemComponent implements DoCheck, AfterViewInit, OnDestroy {
   @Input() menuItem = <NbMenuItem>null;
@@ -226,6 +227,7 @@ export class NbMenuItemComponent implements DoCheck, AfterViewInit, OnDestroy {
       </ng-container>
     </ul>
   `,
+  standalone: false,
 })
 export class NbMenuComponent implements OnInit, AfterViewInit, OnDestroy {
   /**

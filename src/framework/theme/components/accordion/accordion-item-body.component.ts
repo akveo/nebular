@@ -45,6 +45,7 @@ const accordionItemBodyTrigger = trigger('accordionItemBody', [
   `,
   animations: [accordionItemBodyTrigger],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class NbAccordionItemBodyComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject<void>();

@@ -8,50 +8,50 @@
 
 @mixin button-outline() {
   [nbButton].appearance-outline {
-    border-style: nb-theme(button-outline-border-style);
-    border-width: nb-theme(button-outline-border-width);
-    text-transform: nb-theme(button-outline-text-transform);
+    border-style: var(--button-outline-border-style);
+    border-width: var(--button-outline-border-width);
+    text-transform: var(--button-outline-text-transform);
 
     &:focus {
-      $inset-shadow: nb-theme(button-outline-focus-inset-shadow-length);
-      @include nb-outline(nb-theme(button-outline-width), nb-theme(button-outline-color), $inset-shadow);
+      $inset-shadow: var(--button-outline-focus-inset-shadow-length);
+      @include nb-outline(var(--button-outline-width), var(--button-outline-color), $inset-shadow);
     }
 
     @each $size in nb-get-sizes() {
       &.size-#{$size} {
-        padding: nb-theme(button-outline-#{$size}-padding);
+        padding: var(--button-outline-#{$size}-padding);
       }
     }
 
     @each $status in nb-get-statuses() {
       &.status-#{$status} {
-        background-color: nb-theme(button-outline-#{$status}-background-color);
-        border-color: nb-theme(button-outline-#{$status}-border-color);
-        color: nb-theme(button-outline-#{$status}-text-color);
+        background-color: var(--button-outline-#{$status}-background-color);
+        border-color: var(--button-outline-#{$status}-border-color);
+        color: var(--button-outline-#{$status}-text-color);
 
         &:focus {
-          background-color: nb-theme(button-outline-#{$status}-focus-background-color);
-          border-color: nb-theme(button-outline-#{$status}-focus-border-color);
-          color: nb-theme(button-outline-#{$status}-focus-text-color);
+          background-color: var(--button-outline-#{$status}-focus-background-color);
+          border-color: var(--button-outline-#{$status}-focus-border-color);
+          color: var(--button-outline-#{$status}-focus-text-color);
         }
 
         &:hover {
-          background-color: nb-theme(button-outline-#{$status}-hover-background-color);
-          border-color: nb-theme(button-outline-#{$status}-hover-border-color);
-          color: nb-theme(button-outline-#{$status}-hover-text-color);
+          background-color: var(--button-outline-#{$status}-hover-background-color);
+          border-color: var(--button-outline-#{$status}-hover-border-color);
+          color: var(--button-outline-#{$status}-hover-text-color);
         }
 
         &:active {
-          background-color: nb-theme(button-outline-#{$status}-active-background-color);
-          border-color: nb-theme(button-outline-#{$status}-active-border-color);
-          color: nb-theme(button-outline-#{$status}-active-text-color);
+          background-color: var(--button-outline-#{$status}-active-background-color);
+          border-color: var(--button-outline-#{$status}-active-border-color);
+          color: var(--button-outline-#{$status}-active-text-color);
         }
 
         &[disabled],
         &.btn-disabled {
-          background-color: nb-theme(button-outline-#{$status}-disabled-background-color);
-          border-color: nb-theme(button-outline-#{$status}-disabled-border-color);
-          color: nb-theme(button-outline-#{$status}-disabled-text-color);
+          background-color: var(--button-outline-#{$status}-disabled-background-color);
+          border-color: var(--button-outline-#{$status}-disabled-border-color);
+          color: var(--button-outline-#{$status}-disabled-text-color);
         }
       }
     }

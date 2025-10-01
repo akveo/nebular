@@ -40,6 +40,7 @@ import { NbOptionComponent } from './option.component';
     <span class="option-group-title">{{ title }}</span>
     <ng-content select="nb-option, ng-container"></ng-content>
   `,
+  standalone: false,
 })
 export class NbOptionGroupComponent implements AfterContentInit, OnDestroy {
   protected destroy$ = new Subject<void>();

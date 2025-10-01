@@ -8,42 +8,42 @@
 
 @mixin button-filled() {
   [nbButton].appearance-filled {
-    border-style: nb-theme(button-filled-border-style);
-    border-width: nb-theme(button-filled-border-width);
-    text-transform: nb-theme(button-filled-text-transform);
+    border-style: var(--button-filled-border-style);
+    border-width: var(--button-filled-border-width);
+    text-transform: var(--button-filled-text-transform);
 
     @each $size in nb-get-sizes() {
       &.size-#{$size} {
-        padding: nb-theme(button-filled-#{$size}-padding);
+        padding: var(--button-filled-#{$size}-padding);
       }
     }
 
     @each $status in nb-get-statuses() {
       &.status-#{$status} {
-        background-color: nb-theme(button-filled-#{$status}-background-color);
-        border-color: nb-theme(button-filled-#{$status}-border-color);
-        color: nb-theme(button-filled-#{$status}-text-color);
+        background-color: var(--button-filled-#{$status}-background-color);
+        border-color: var(--button-filled-#{$status}-border-color);
+        color: var(--button-filled-#{$status}-text-color);
 
         &:focus {
-          background-color: nb-theme(button-filled-#{$status}-focus-background-color);
-          border-color: nb-theme(button-filled-#{$status}-focus-border-color);
+          background-color: var(--button-filled-#{$status}-focus-background-color);
+          border-color: var(--button-filled-#{$status}-focus-border-color);
         }
 
         &:hover {
-          background-color: nb-theme(button-filled-#{$status}-hover-background-color);
-          border-color: nb-theme(button-filled-#{$status}-hover-border-color);
+          background-color: var(--button-filled-#{$status}-hover-background-color);
+          border-color: var(--button-filled-#{$status}-hover-border-color);
         }
 
         &:active {
-          background-color: nb-theme(button-filled-#{$status}-active-background-color);
-          border-color: nb-theme(button-filled-#{$status}-active-border-color);
+          background-color: var(--button-filled-#{$status}-active-background-color);
+          border-color: var(--button-filled-#{$status}-active-border-color);
         }
 
         &[disabled],
         &.btn-disabled {
-          background-color: nb-theme(button-filled-#{$status}-disabled-background-color);
-          border-color: nb-theme(button-filled-#{$status}-disabled-border-color);
-          color: nb-theme(button-filled-#{$status}-disabled-text-color);
+          background-color: var(--button-filled-#{$status}-disabled-background-color);
+          border-color: var(--button-filled-#{$status}-disabled-border-color);
+          color: var(--button-filled-#{$status}-disabled-text-color);
         }
       }
     }

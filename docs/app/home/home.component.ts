@@ -11,6 +11,7 @@ import { NbThemeService } from '@nebular/theme';
   selector: 'ngd-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
+  standalone: false,
 })
 export class NgdHomeComponent {
   features = [

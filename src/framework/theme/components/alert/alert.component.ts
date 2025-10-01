@@ -116,6 +116,7 @@ import { convertToBoolProperty, NbBooleanInput } from '../helpers';
     </button>
     <ng-content></ng-content>
   `,
+  standalone: false,
 })
 export class NbAlertComponent {
   /**

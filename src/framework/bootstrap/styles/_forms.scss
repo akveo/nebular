@@ -10,36 +10,36 @@
 
 @mixin nb-b-forms-theme() {
   .form-control {
-    background-color: nb-theme(input-basic-background-color);
-    border-color: nb-theme(input-basic-border-color);
-    border-style: nb-theme(input-border-style);
-    border-width: nb-theme(input-border-width);
-    color: nb-theme(input-basic-text-color);
-    font-family: nb-theme(input-text-font-family);
+    background-color: var(--input-basic-background-color);
+    border-color: var(--input-basic-border-color);
+    border-style: var(--input-border-style);
+    border-width: var(--input-border-width);
+    color: var(--input-basic-text-color);
+    font-family: var(--input-text-font-family);
     @include nb-component-animation(border, background-color, color);
 
     &::placeholder {
-      color: nb-theme(input-basic-placeholder-text-color);
-      font-family: nb-theme(input-placeholder-text-font-family);
+      color: var(--input-basic-placeholder-text-color);
+      font-family: var(--input-placeholder-text-font-family);
       text-overflow: ellipsis;
     }
 
     &:focus {
       outline: none;
-      border-color: nb-theme(input-basic-focus-border-color);
+      border-color: var(--input-basic-focus-border-color);
     }
 
     &:hover {
-      border-color: nb-theme(input-basic-hover-border-color);
+      border-color: var(--input-basic-hover-border-color);
     }
 
     &:disabled {
-      background-color: nb-theme(input-basic-disabled-background-color);
-      border-color: nb-theme(input-basic-disabled-border-color);
-      color: nb-theme(input-basic-disabled-text-color);
+      background-color: var(--input-basic-disabled-background-color);
+      border-color: var(--input-basic-disabled-border-color);
+      color: var(--input-basic-disabled-text-color);
 
       &::placeholder {
-        color: nb-theme(input-basic-disabled-placeholder-text-color);
+        color: var(--input-basic-disabled-placeholder-text-color);
       }
     }
 

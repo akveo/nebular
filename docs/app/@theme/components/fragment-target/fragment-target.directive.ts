@@ -9,6 +9,7 @@ const OBSERVER_OPTIONS = { rootMargin: '-100px 0px 0px' };
 
 @Directive({
   selector: '[ngdFragment]',
+  standalone: false,
 })
 export class NgdFragmentTargetDirective implements OnInit, OnDestroy {
   private readonly marginFromTop = 120;

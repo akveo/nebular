@@ -9,15 +9,15 @@
 @mixin nb-auth-block-theme() {
   nb-auth-block {
     .text-link {
-      color: nb-theme(text-hint-color);
+      color: var(--text-hint-color);
     }
 
     .forgot-password {
-      color: nb-theme(text-disabled-color);
+      color: var(--text-disabled-color);
     }
 
     .socials a {
-      color: nb-theme(text-hint-color);
+      color: var(--text-hint-color);
     }
   }
 }

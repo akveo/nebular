@@ -10,32 +10,32 @@
   ng2-smart-table {
     table tr th,
     table tr th a {
-      font-family: nb-theme(smart-table-header-font-family);
-      font-size: nb-theme(smart-table-header-font-size);
-      font-weight: nb-theme(smart-table-header-font-weight);
-      line-height: nb-theme(smart-table-header-line-height);
-      color: nb-theme(smart-table-header-fg);
+      font-family: var(--smart-table-header-font-family);
+      font-size: var(--smart-table-header-font-size);
+      font-weight: var(--smart-table-header-font-weight);
+      line-height: var(--smart-table-header-line-height);
+      color: var(--smart-table-header-fg);
     }
 
     table tr td {
-      font-family: nb-theme(smart-table-font-family);
-      font-size: nb-theme(smart-table-font-size);
-      font-weight: nb-theme(smart-table-font-weight);
-      line-height: nb-theme(smart-table-line-height);
-      color: nb-theme(smart-table-fg);
+      font-family: var(--smart-table-font-family);
+      font-size: var(--smart-table-font-size);
+      font-weight: var(--smart-table-font-weight);
+      line-height: var(--smart-table-line-height);
+      color: var(--smart-table-fg);
     }
 
     table tr th,
     table tr td {
       position: relative;
-      padding: nb-theme(smart-table-padding);
-      border: 1px solid nb-theme(smart-table-separator);
+      padding: var(--smart-table-padding);
+      border: 1px solid var(--smart-table-separator);
       vertical-align: middle;
     }
 
     table tr.ng2-smart-titles {
       th {
-        padding: nb-theme(smart-table-padding);
+        padding: var(--smart-table-padding);
         @include nb-ltr(padding-right, 1.75rem);
         @include nb-rtl(padding-left, 1.75rem);
       }
@@ -44,15 +44,15 @@
         &:hover,
         &:active,
         &:visited {
-          color: nb-theme(smart-table-header-fg);
+          color: var(--smart-table-header-fg);
           text-decoration: none;
         }
         &.sort.asc,
         &.sort.desc {
-          font-weight: nb-theme(smart-table-header-font-weight);
+          font-weight: var(--smart-table-header-font-weight);
 
           &::after {
-            border-bottom-color: nb-theme(smart-table-fg-secondary);
+            border-bottom-color: var(--smart-table-fg-secondary);
             border-width: 0.375rem;
             position: absolute;
             margin: 0;
@@ -70,13 +70,13 @@
     }
 
     thead tr {
-      background: nb-theme(smart-table-header-bg);
+      background: var(--smart-table-header-bg);
 
       &.ng2-smart-filters th {
-        padding: nb-theme(smart-table-filter-padding);
+        padding: var(--smart-table-filter-padding);
 
         .ng2-smart-filter input {
-          line-height: nb-theme(smart-table-line-height);
+          line-height: var(--smart-table-line-height);
         }
       }
     }
@@ -84,11 +84,11 @@
     tbody tr {
       &.selected,
       &:hover {
-        background: nb-theme(smart-table-bg-active) !important;
+        background: var(--smart-table-bg-active) !important;
       }
 
       &:nth-child(2n) {
-        background-color: nb-theme(smart-table-bg-even);
+        background-color: var(--smart-table-bg-even);
       }
     }
 
@@ -99,25 +99,25 @@
         align-items: center;
         justify-content: center;
         font-size: 1.75rem !important;
-        padding: nb-theme(smart-table-filter-padding);
-        border-color: nb-theme(smart-table-add-button-border-color);
-        background-color: nb-theme(smart-table-add-button-background-color);
-        color: nb-theme(smart-table-add-button-text-color);
+        padding: var(--smart-table-filter-padding);
+        border-color: var(--smart-table-add-button-border-color);
+        background-color: var(--smart-table-add-button-background-color);
+        color: var(--smart-table-add-button-text-color);
         border-radius: 0.375rem;
 
         &:focus {
-          border-color: nb-theme(smart-table-add-button-focus-border-color);
+          border-color: var(--smart-table-add-button-focus-border-color);
         }
 
         &:hover {
           text-decoration: none;
-          background-color: nb-theme(smart-table-add-button-hover-background-color);
-          border-color: nb-theme(smart-table-add-button-hover-border-color);
+          background-color: var(--smart-table-add-button-hover-background-color);
+          border-color: var(--smart-table-add-button-hover-border-color);
         }
 
         &:active {
-          background-color: nb-theme(smart-table-add-button-active-background-color);
-          border-color: nb-theme(smart-table-add-button-active-border-color);
+          background-color: var(--smart-table-add-button-active-background-color);
+          border-color: var(--smart-table-add-button-active-border-color);
         }
       }
     }
@@ -142,10 +142,10 @@
         width: 100%;
 
         font-size: 2rem !important;
-        color: nb-theme(smart-table-fg-secondary);
+        color: var(--smart-table-fg-secondary);
 
         &:not(:last-child) {
-          border-right: 1px solid nb-theme(smart-table-separator);
+          border-right: 1px solid var(--smart-table-separator);
         }
 
         &:hover {
@@ -156,13 +156,13 @@
       .ng2-smart-action-add-create:hover,
       .ng2-smart-action-edit-edit:hover,
       .ng2-smart-action-edit-save:hover {
-        color: nb-theme(smart-table-action-add-edit-hover-text-color);
+        color: var(--smart-table-action-add-edit-hover-text-color);
       }
 
       .ng2-smart-action-add-cancel:hover,
       .ng2-smart-action-delete-delete:hover,
       .ng2-smart-action-edit-cancel:hover {
-        color: nb-theme(smart-table-action-cancel-delete-hover-text-color);
+        color: var(--smart-table-action-cancel-delete-hover-text-color);
       }
     }
 
@@ -189,50 +189,50 @@
         .page-item.disabled .page-link,
         .page-item.disabled .page-link:focus,
         .page-item.disabled .page-link:hover {
-          background-color: nb-theme(smart-table-paging-hover);
-          color: nb-theme(smart-table-paging-disabled-text-color);
+          background-color: var(--smart-table-paging-hover);
+          color: var(--smart-table-paging-disabled-text-color);
         }
       }
 
       .pagination {
-        font-family: nb-theme(smart-table-paging-font-family);
-        font-size: nb-theme(smart-table-paging-font-size);
-        line-height: nb-theme(smart-table-paging-line-height);
-        border: nb-theme(smart-table-paging-border-color) solid nb-theme(smart-table-paging-border-width);
-        border-radius: nb-theme(smart-table-border-radius);
+        font-family: var(--smart-table-paging-font-family);
+        font-size: var(--smart-table-paging-font-size);
+        line-height: var(--smart-table-paging-line-height);
+        border: var(--smart-table-paging-border-color) solid var(--smart-table-paging-border-width);
+        border-radius: var(--smart-table-border-radius);
 
         li {
           overflow: hidden;
 
           &:not(:last-child) {
-            @include nb-ltr(border-right, 1px solid nb-theme(smart-table-separator));
-            @include nb-rtl(border-left, 1px solid nb-theme(smart-table-separator));
+            @include nb-ltr(border-right, 1px solid var(--smart-table-separator));
+            @include nb-rtl(border-left, 1px solid var(--smart-table-separator));
           }
 
           a.page-link-prev,
           a.page-link-next {
-            font-size: nb-theme(smart-table-paging-font-size);
-            line-height: nb-theme(smart-table-paging-line-height);
+            font-size: var(--smart-table-paging-font-size);
+            line-height: var(--smart-table-paging-line-height);
           }
 
           a,
           > span {
-            font-size: nb-theme(smart-table-paging-font-size);
-            line-height: nb-theme(smart-table-paging-line-height);
+            font-size: var(--smart-table-paging-font-size);
+            line-height: var(--smart-table-paging-line-height);
             background-color: transparent;
-            color: nb-theme(smart-table-paging-page-text-color);
+            color: var(--smart-table-paging-page-text-color);
             padding: 0.75rem 1.25rem;
             border: none;
 
             &:focus {
-              border-color: nb-theme(smart-table-paging-page-focus-border-color);
-              color: nb-theme(smart-table-paging-page-focus-text-color);
+              border-color: var(--smart-table-paging-page-focus-border-color);
+              color: var(--smart-table-paging-page-focus-text-color);
             }
 
             &:hover {
-              background-color: nb-theme(smart-table-paging-hover);
-              border-color: nb-theme(smart-table-paging-hover-border-color);
-              color: nb-theme(smart-table-paging-hover-text-color);
+              background-color: var(--smart-table-paging-hover);
+              border-color: var(--smart-table-paging-hover-border-color);
+              color: var(--smart-table-paging-hover-text-color);
               text-decoration: none;
             }
           }
@@ -241,12 +241,12 @@
             a,
             > span {
               @include nb-ltr() {
-                border-top-left-radius: nb-theme(smart-table-border-radius);
-                border-bottom-left-radius: nb-theme(smart-table-border-radius);
+                border-top-left-radius: var(--smart-table-border-radius);
+                border-bottom-left-radius: var(--smart-table-border-radius);
               }
               @include nb-rtl() {
-                border-top-right-radius: nb-theme(smart-table-border-radius);
-                border-bottom-right-radius: nb-theme(smart-table-border-radius);
+                border-top-right-radius: var(--smart-table-border-radius);
+                border-bottom-right-radius: var(--smart-table-border-radius);
               }
             }
           }
@@ -255,12 +255,12 @@
             a,
             > span {
               @include nb-ltr() {
-                border-top-right-radius: nb-theme(smart-table-border-radius);
-                border-bottom-right-radius: nb-theme(smart-table-border-radius);
+                border-top-right-radius: var(--smart-table-border-radius);
+                border-bottom-right-radius: var(--smart-table-border-radius);
               }
               @include nb-rtl() {
-                border-top-left-radius: nb-theme(smart-table-border-radius);
-                border-bottom-left-radius: nb-theme(smart-table-border-radius);
+                border-top-left-radius: var(--smart-table-border-radius);
+                border-bottom-left-radius: var(--smart-table-border-radius);
               }
             }
           }
@@ -272,8 +272,8 @@
             > span,
             > span:hover,
             > span:focus {
-              color: nb-theme(smart-table-paging-fg-active);
-              background-color: nb-theme(smart-table-paging-bg-active);
+              color: var(--smart-table-paging-fg-active);
+              background-color: var(--smart-table-paging-bg-active);
             }
           }
         }

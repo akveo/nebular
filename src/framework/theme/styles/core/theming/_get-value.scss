@@ -34,33 +34,3 @@
 
   @return register.get-last-enabled-theme();
 }
-
-@function nb-theme($key) {
-  $value: ();
-
-  // in case of css custom properties - just returns var(--var-name) - the rest is a browser job
-  @if (theming-variables.$nb-enable-css-custom-properties == true) {
-    // there is no way to check if variable exists as current execution context is outside of particular theme
-    // because we process css in this mode only once! (and not for each theme)
-    $value: var(--#{$key});
-  } @else {
-    // in a preprocess mode (nb-install-global call) get ready value from $nb-processed-theme variable
-    @if (theming-variables.$nb-theme-process-mode == 'pre-process') {
-      $value: map.get(theming-variables.$nb-processed-theme, $key);
-    }
-
-    // otherwise lazily search for variable value
-    @if (theming-variables.$nb-theme-process-mode == 'lazy-process') {
-      theming-variables.$nb-theme-name: get-current-theme-name();
-
-      $theme: register.nb-get-registered-theme(theming-variables.$nb-theme-name);
-      $value: nb-deep-find-value($theme, $key, map.get($theme, $key));
-    }
-  }
-
-  @if ($value == null) {
-    @warn 'Nebular Theme: `nb-theme()` cannot find value for key `' + $key + '` for theme `' + theming-variables.$nb-theme-name + '`';
-  }
-
-  @return $value;
-}

@@ -16,6 +16,7 @@ import { NbAuthResult } from '../../services/auth-result';
   styleUrls: ['./reset-password.component.scss'],
   templateUrl: './reset-password.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class NbResetPasswordComponent {
   redirectDelay: number = 0;

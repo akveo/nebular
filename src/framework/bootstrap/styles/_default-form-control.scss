@@ -26,56 +26,56 @@
 
 @mixin form-control-success() {
   & {
-    border-color: nb-theme(input-success-border-color);
+    border-color: var(--input-success-border-color);
   }
 
   &:focus {
-    border-color: nb-theme(input-success-focus-border-color);
+    border-color: var(--input-success-focus-border-color);
   }
 
   &:hover {
-    border-color: nb-theme(input-success-hover-border-color);
+    border-color: var(--input-success-hover-border-color);
   }
 }
 
 @mixin form-control-info() {
   & {
-    border-color: nb-theme(input-info-border-color);
+    border-color: var(--input-info-border-color);
   }
 
   &:focus {
-    border-color: nb-theme(input-info-focus-border-color);
+    border-color: var(--input-info-focus-border-color);
   }
 
   &:hover {
-    border-color: nb-theme(input-info-hover-border-color);
+    border-color: var(--input-info-hover-border-color);
   }
 }
 
 @mixin form-control-danger() {
   & {
-    border-color: nb-theme(input-danger-border-color);
+    border-color: var(--input-danger-border-color);
   }
 
   &:focus {
-    border-color: nb-theme(input-danger-focus-border-color);
+    border-color: var(--input-danger-focus-border-color);
   }
 
   &:hover {
-    border-color: nb-theme(input-danger-hover-border-color);
+    border-color: var(--input-danger-hover-border-color);
   }
 }
 
 @mixin form-control-warning() {
   & {
-    border-color: nb-theme(input-warning-border-color);
+    border-color: var(--input-warning-border-color);
   }
 
   &:focus {
-    border-color: nb-theme(input-warning-focus-border-color);
+    border-color: var(--input-warning-focus-border-color);
   }
 
   &:hover {
-    border-color: nb-theme(input-warning-hover-border-color);
+    border-color: var(--input-warning-hover-border-color);
   }
 }

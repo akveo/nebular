@@ -17,6 +17,7 @@ import { NgdStructureService } from '../../@theme/services';
   selector: 'ngd-page',
   templateUrl: './page.component.html',
   styleUrls: ['./page.component.scss'],
+  standalone: false,
 })
 export class NgdPageComponent implements OnInit, AfterContentChecked, OnDestroy {
   currentItem;

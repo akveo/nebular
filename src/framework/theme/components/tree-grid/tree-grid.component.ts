@@ -148,6 +148,7 @@ import { NbColumnsService } from './tree-grid-columns.service';
     NbColumnsService,
     ...NB_TABLE_PROVIDERS,
   ],
+  standalone: false,
 })
 export class NbTreeGridComponent<T> extends NbTable<NbTreeGridPresentationNode<T>> implements AfterViewInit, OnDestroy {
   constructor(

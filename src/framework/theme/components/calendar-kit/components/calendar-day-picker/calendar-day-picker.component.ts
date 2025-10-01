@@ -52,6 +52,7 @@ import { convertToBoolProperty, NbBooleanInput } from '../../../helpers';
   `,
   styleUrls: ['./calendar-day-picker.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class NbCalendarDayPickerComponent<D, T> implements OnChanges {
   /**

@@ -23,6 +23,7 @@ import { NbBaseCalendarRangeCell } from './base-calendar-range-cell';
   selector: 'nb-calendar-range-day-cell',
   template: ` <div class="cell-content">{{ day }}</div> `,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class NbCalendarRangeDayCellComponent<D>
   extends NbBaseCalendarRangeCell<D>

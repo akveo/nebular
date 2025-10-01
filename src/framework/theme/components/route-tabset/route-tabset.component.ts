@@ -141,6 +141,7 @@ export interface NbRouteTab {
     </ul>
     <router-outlet></router-outlet>
   `,
+  standalone: false,
 })
 export class NbRouteTabsetComponent {
   @HostBinding('class.full-width') fullWidthValue: boolean = false;

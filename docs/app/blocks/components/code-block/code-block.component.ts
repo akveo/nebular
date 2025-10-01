@@ -14,6 +14,7 @@ import { NgdHighlightService } from '../../../@theme/services';
     </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class NgdCodeBlockComponent {
   @Input() path = '';

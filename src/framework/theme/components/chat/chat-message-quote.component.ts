@@ -23,6 +23,7 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
     </nb-chat-message-text>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class NbChatMessageQuoteComponent {
   /**

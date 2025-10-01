@@ -9,6 +9,7 @@ import { NgdAnalytics, NgdIframeCommunicatorService } from '../@theme/services';
   selector: 'ngd-example',
   template: '<router-outlet></router-outlet>',
   styleUrls: ['./example.component.scss'],
+  standalone: false,
 })
 export class NgdExampleComponent implements OnInit, AfterViewInit, OnDestroy {
   private id: string;

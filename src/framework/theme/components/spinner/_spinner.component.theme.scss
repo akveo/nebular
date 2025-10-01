@@ -12,29 +12,29 @@
   }
 
   nb-spinner .message {
-    color: nb-theme(spinner-text-color);
-    font-family: nb-theme(spinner-text-font-family);
-    font-size: nb-theme(spinner-text-font-size);
-    font-weight: nb-theme(spinner-text-font-weight);
-    line-height: nb-theme(spinner-text-line-height);
+    color: var(--spinner-text-color);
+    font-family: var(--spinner-text-font-family);
+    font-size: var(--spinner-text-font-size);
+    font-weight: var(--spinner-text-font-weight);
+    line-height: var(--spinner-text-line-height);
   }
 
   @each $status in nb-get-statuses() {
     nb-spinner.status-#{$status} {
-      background-color: nb-theme(spinner-#{$status}-background-color);
+      background-color: var(--spinner-#{$status}-background-color);
 
       .spin-circle {
-        border-top-color: nb-theme(spinner-#{$status}-circle-filled-color);
-        border-right-color: nb-theme(spinner-#{$status}-circle-empty-color);
-        border-bottom-color: nb-theme(spinner-#{$status}-circle-filled-color);
-        border-left-color: nb-theme(spinner-#{$status}-circle-filled-color);
+        border-top-color: var(--spinner-#{$status}-circle-filled-color);
+        border-right-color: var(--spinner-#{$status}-circle-empty-color);
+        border-bottom-color: var(--spinner-#{$status}-circle-filled-color);
+        border-left-color: var(--spinner-#{$status}-circle-filled-color);
       }
     }
   }
 
   @each $size in nb-get-sizes() {
     nb-spinner.size-#{$size} {
-      font-size: nb-theme(spinner-height-#{$size});
+      font-size: var(--spinner-height-#{$size});
     }
   }
 

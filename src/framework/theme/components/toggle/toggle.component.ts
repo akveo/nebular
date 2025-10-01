@@ -298,6 +298,7 @@ import { convertToBoolProperty, NbBooleanInput } from '../helpers';
     },
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class NbToggleComponent implements OnInit, AfterViewInit, OnDestroy, ControlValueAccessor {
   onChange: any = () => {};

@@ -89,6 +89,7 @@ function throwFormControlElementNotFound() {
   styleUrls: ['./form-field.component.scss'],
   templateUrl: './form-field.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class NbFormFieldComponent implements AfterContentChecked, AfterContentInit, AfterViewInit, OnDestroy {
   protected readonly destroy$ = new Subject<void>();

@@ -8,55 +8,53 @@
 
 @mixin button-hero() {
   [nbButton].appearance-hero {
-    text-shadow: nb-theme(button-hero-text-shadow);
-    text-transform: nb-theme(button-hero-text-transform);
+    text-shadow: var(--button-hero-text-shadow);
+    text-transform: var(--button-hero-text-transform);
 
     @each $size in nb-get-sizes() {
       &.size-#{$size} {
-        padding: nb-theme(button-hero-#{$size}-padding);
+        padding: var(--button-hero-#{$size}-padding);
       }
     }
 
     @each $status in nb-get-statuses() {
       &.status-#{$status} {
-        $left-color: nb-theme(button-hero-#{$status}-left-background-color);
-        $right-color: nb-theme(button-hero-#{$status}-right-background-color);
-        $bevel: nb-theme(button-hero-bevel-size) nb-theme(button-hero-#{$status}-bevel-color);
-        $glow: nb-theme(button-hero-glow-size) nb-theme(button-hero-#{$status}-glow-color);
-        $shadow: nb-theme(button-hero-shadow);
+        $left-color: var(--button-hero-#{$status}-left-background-color);
+        $right-color: var(--button-hero-#{$status}-right-background-color);
+        $bevel: var(--button-hero-bevel-size) var(--button-hero-#{$status}-bevel-color);
+        $glow: var(--button-hero-glow-size) var(--button-hero-#{$status}-glow-color);
+        $shadow: var(--button-hero-shadow);
         $hero-box-shadows: $bevel, $glow, $shadow;
 
         background-image: linear-gradient(to right, $left-color, $right-color);
         border: none;
         box-shadow: $hero-box-shadows;
-        color: nb-theme(button-hero-#{$status}-text-color);
+        color: var(--button-hero-#{$status}-text-color);
 
         &:focus {
-          $left-focus-color: nb-theme(button-hero-#{$status}-focus-left-background-color);
-          $right-focus-color: nb-theme(button-hero-#{$status}-focus-right-background-color);
+          $left-focus-color: var(--button-hero-#{$status}-focus-left-background-color);
+          $right-focus-color: var(--button-hero-#{$status}-focus-right-background-color);
           background-image: linear-gradient(to right, $left-focus-color, $right-focus-color);
-          box-shadow:
-            $hero-box-shadows,
-            0 0 0 nb-theme(button-hero-outline-width) nb-theme(button-hero-outline-color);
+          box-shadow: $hero-box-shadows, 0 0 0 var(--button-hero-outline-width) var(--button-hero-outline-color);
         }
 
         &:hover {
-          $left-hover-color: nb-theme(button-hero-#{$status}-hover-left-background-color);
-          $right-hover-color: nb-theme(button-hero-#{$status}-hover-right-background-color);
+          $left-hover-color: var(--button-hero-#{$status}-hover-left-background-color);
+          $right-hover-color: var(--button-hero-#{$status}-hover-right-background-color);
           background-image: linear-gradient(to right, $left-hover-color, $right-hover-color);
         }
 
         &:active {
-          $left-active-color: nb-theme(button-hero-#{$status}-active-left-background-color);
-          $right-active-color: nb-theme(button-hero-#{$status}-active-right-background-color);
+          $left-active-color: var(--button-hero-#{$status}-active-left-background-color);
+          $right-active-color: var(--button-hero-#{$status}-active-right-background-color);
           background-image: linear-gradient(to right, $left-active-color, $right-active-color);
         }
 
         &[disabled],
         &.btn-disabled {
-          background-color: nb-theme(button-hero-#{$status}-disabled-background-color);
+          background-color: var(--button-hero-#{$status}-disabled-background-color);
           background-image: none;
-          color: nb-theme(button-hero-#{$status}-disabled-text-color);
+          color: var(--button-hero-#{$status}-disabled-text-color);
         }
 
         &.button-pulse {

@@ -16,11 +16,11 @@
     @each $size in nb-get-sizes() {
       &.size-#{$size} {
         .nb-tag-list-tags-wrapper {
-          margin: nb-theme-var-negative(nb-theme(tag-list-#{$size}-tag-offset));
+          margin: nb-theme-var-negative(var(--tag-list-#{$size}-tag-offset));
 
           nb-tag,
           .nb-tag-input {
-            margin: nb-theme(tag-list-#{$size}-tag-offset);
+            margin: var(--tag-list-#{$size}-tag-offset);
           }
         }
       }
@@ -40,24 +40,24 @@
 
     @each $shape in nb-get-shapes() {
       &.shape-#{$shape} {
-        border-radius: nb-theme(tag-list-with-input-#{$shape}-border-radius);
+        border-radius: var(--tag-list-with-input-#{$shape}-border-radius);
       }
     }
 
     @each $size in nb-get-sizes() {
       &.size-#{$size} {
-        padding: nb-theme(tag-list-with-input-#{$size}-padding);
+        padding: var(--tag-list-with-input-#{$size}-padding);
       }
     }
 
     @each $status in nb-get-statuses() {
       &.status-#{$status} {
-        background-color: nb-theme(tag-input-#{$status}-background-color);
-        border-color: nb-theme(tag-input-#{$status}-border-color);
+        background-color: var(--tag-input-#{$status}-background-color);
+        border-color: var(--tag-input-#{$status}-border-color);
 
         &.focus {
-          background-color: nb-theme(tag-input-#{$status}-focus-background-color);
-          border-color: nb-theme(tag-input-#{$status}-focus-border-color);
+          background-color: var(--tag-input-#{$status}-focus-background-color);
+          border-color: var(--tag-input-#{$status}-focus-border-color);
         }
       }
     }

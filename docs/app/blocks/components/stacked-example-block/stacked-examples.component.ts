@@ -45,6 +45,7 @@ export const pulse = animation(
       transition('code => live', [useAnimation(pulse)]),
     ]),
   ],
+  standalone: false,
 })
 export class NgdStackedExampleComponent {
   @Input() content: any;

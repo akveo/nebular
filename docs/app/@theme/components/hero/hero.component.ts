@@ -56,6 +56,7 @@ import { NgdHubspotFormDialogComponent } from '../hubspot-form-dialog/hubspot-fo
     </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class NgdHeroComponent {
   constructor(private dialogService: NbDialogService) {}

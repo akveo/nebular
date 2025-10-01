@@ -275,6 +275,7 @@ export const NB_DATE_SERVICE_OPTIONS = new InjectionToken('Date service options'
       multi: true,
     },
   ],
+  standalone: false,
 })
 export class NbDatepickerDirective<D> implements OnDestroy, ControlValueAccessor, Validator {
   /**

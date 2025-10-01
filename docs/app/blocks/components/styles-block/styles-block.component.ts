@@ -17,6 +17,7 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
     </nb-card>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class NgdStylesBlockComponent {
   @Input() source;

@@ -54,6 +54,7 @@ import { NbComponentOrCustomStatus } from '../component-status';
     <span class="message" *ngIf="message">{{ message }}</span>
   `,
   styleUrls: ['./spinner.component.scss'],
+  standalone: false,
 })
 export class NbSpinnerComponent {
   /**

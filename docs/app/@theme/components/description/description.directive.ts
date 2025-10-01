@@ -3,6 +3,7 @@ import * as marked from 'marked';
 
 @Directive({
   selector: '[ngdDescription]',
+  standalone: false,
 })
 export class NgdDescriptionDirective implements AfterViewInit {
   constructor(private el: ElementRef) {}

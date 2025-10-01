@@ -21,6 +21,6 @@
 
 @include nb-install-component() {
   [class$='placeholder'] {
-    background: nb-theme(background-basic-color-4);
+    background: var(--background-basic-color-4);
   }
 }

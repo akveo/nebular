@@ -14,6 +14,7 @@ import { NbChatModule, NbThemeModule } from '@nebular/theme';
     >
     </nb-chat-message-quote>
   `,
+  standalone: false,
 })
 export class NbChatMessageQuoteTestComponent {
   sender: string;

@@ -12,6 +12,7 @@ import { NbThemeModule, NbIconModule, NbIconLibraries, NbIconComponent } from '@
 
 @Component({
   template: ` <nb-icon #iconEl [icon]="icon"></nb-icon> `,
+  standalone: false,
 })
 class IconTestComponent {
   @Input() icon;

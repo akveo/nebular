@@ -9,11 +9,11 @@
 @mixin nb-calendar-theme() {
   nb-base-calendar {
     nb-card {
-      background-color: nb-theme(calendar-background-color);
-      border: nb-theme(calendar-border-width) nb-theme(calendar-border-style) nb-theme(calendar-border-color);
+      background-color: var(--calendar-background-color);
+      border: var(--calendar-border-width) var(--calendar-border-style) var(--calendar-border-color);
       box-shadow: none;
       margin: 0;
-      width: nb-theme(calendar-width);
+      width: var(--calendar-width);
       overflow: hidden;
     }
 
@@ -25,12 +25,12 @@
       border: none;
       display: flex;
 
-      padding: nb-theme(calendar-navigation-padding);
-      color: nb-theme(calendar-navigation-text-color);
-      font-family: nb-theme(calendar-navigation-text-font-family);
-      font-size: nb-theme(calendar-navigation-title-text-font-size);
-      font-weight: nb-theme(calendar-navigation-title-text-font-weight);
-      line-height: nb-theme(calendar-navigation-title-text-line-height);
+      padding: var(--calendar-navigation-padding);
+      color: var(--calendar-navigation-text-color);
+      font-family: var(--calendar-navigation-text-font-family);
+      font-size: var(--calendar-navigation-title-text-font-size);
+      font-weight: var(--calendar-navigation-title-text-font-weight);
+      line-height: var(--calendar-navigation-title-text-line-height);
     }
 
     &:not(.has-navigation) {
@@ -42,9 +42,9 @@
 
     &.has-week-number {
       nb-card {
-        $calendar-width: nb-theme(calendar-width);
-        $week-col-width: nb-theme(calendar-weeknumber-width);
-        $divider-width: nb-theme(calendar-weeknumber-divider-width);
+        $calendar-width: var(--calendar-width);
+        $week-col-width: var(--calendar-weeknumber-width);
+        $divider-width: var(--calendar-weeknumber-divider-width);
         width: calc(#{$calendar-width} + #{$week-col-width} + #{$divider-width});
       }
 
@@ -56,13 +56,13 @@
 
     &.size-large {
       nb-card {
-        width: nb-theme(calendar-large-width);
+        width: var(--calendar-large-width);
       }
 
       &.has-week-number nb-card {
-        $week-column-width: nb-theme(calendar-weeknumber-large-width);
-        $divider-width: nb-theme(calendar-weeknumber-divider-width);
-        $large-cal-width: nb-theme(calendar-large-width);
+        $week-column-width: var(--calendar-weeknumber-large-width);
+        $divider-width: var(--calendar-weeknumber-divider-width);
+        $large-cal-width: var(--calendar-large-width);
         width: calc(#{$large-cal-width} + #{$week-column-width} + #{$divider-width});
       }
     }

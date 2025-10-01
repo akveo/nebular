@@ -15,6 +15,7 @@ import { NbAuthResult } from '../../services/auth-result';
   selector: 'nb-login',
   templateUrl: './login.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class NbLoginComponent {
   redirectDelay: number = 0;

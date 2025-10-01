@@ -51,20 +51,20 @@
           // Another way was to copy button styles here, but then we need to keep track of button styles
           // all the time. Also, it would increase the number of duplicate button styles.
           &.status-#{$status}:not(:first-child):not(:hover):not(:focus):not(:active):not([disabled]) {
-            @include nb-ltr(border-left-color, nb-theme(button-group-filled-#{$status}-divider-color));
-            @include nb-rtl(border-right-color, nb-theme(button-group-filled-#{$status}-divider-color));
+            @include nb-ltr(border-left-color, var(--button-group-filled-#{$status}-divider-color));
+            @include nb-rtl(border-right-color, var(--button-group-filled-#{$status}-divider-color));
           }
 
           &.status-#{$status} {
-            color: nb-theme(button-group-filled-button-#{$status}-text-color);
+            color: var(--button-group-filled-button-#{$status}-text-color);
           }
         }
       }
 
       // See the comment on the selector above
       &.appearance-ghost:not(:first-child):not(:hover):not(:focus):not(:active):not([disabled]) {
-        @include nb-ltr(border-left-color, nb-theme(button-group-ghost-divider-color));
-        @include nb-rtl(border-right-color, nb-theme(button-group-ghost-divider-color));
+        @include nb-ltr(border-left-color, var(--button-group-ghost-divider-color));
+        @include nb-rtl(border-right-color, var(--button-group-ghost-divider-color));
       }
     }
   }

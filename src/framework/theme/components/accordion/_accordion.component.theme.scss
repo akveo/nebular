@@ -7,15 +7,15 @@
 @use '../../styles/theming' as *;
 
 @mixin nb-accordion-item-header() {
-  border-bottom-width: nb-theme(accordion-header-border-width);
-  border-bottom-style: nb-theme(accordion-header-border-style);
-  border-bottom-color: nb-theme(accordion-header-border-color);
-  color: nb-theme(accordion-header-text-color);
-  font-family: nb-theme(accordion-header-text-font-family);
-  font-size: nb-theme(accordion-header-text-font-size);
-  font-weight: nb-theme(accordion-header-text-font-weight);
-  line-height: nb-theme(accordion-header-text-line-height);
-  padding: nb-theme(accordion-padding);
+  border-bottom-width: var(--accordion-header-border-width);
+  border-bottom-style: var(--accordion-header-border-style);
+  border-bottom-color: var(--accordion-header-border-color);
+  color: var(--accordion-header-text-color);
+  font-family: var(--accordion-header-text-font-family);
+  font-size: var(--accordion-header-text-font-size);
+  font-weight: var(--accordion-header-text-font-weight);
+  line-height: var(--accordion-header-text-line-height);
+  padding: var(--accordion-padding);
 
   @include nb-headings();
 }
@@ -23,8 +23,8 @@
 @mixin nb-accordion-theme() {
   nb-accordion {
     display: block;
-    box-shadow: nb-theme(accordion-shadow);
-    border-radius: nb-theme(accordion-border-radius);
+    box-shadow: var(--accordion-shadow);
+    border-radius: var(--accordion-border-radius);
   }
 
   nb-accordion-item-header {
@@ -39,25 +39,25 @@
   }
 
   nb-accordion-item {
-    background-color: nb-theme(accordion-item-background-color);
-    color: nb-theme(accordion-item-text-color);
-    font-family: nb-theme(accordion-item-text-font-family);
-    font-size: nb-theme(accordion-item-text-font-size);
-    font-weight: nb-theme(accordion-item-text-font-weight);
-    line-height: nb-theme(accordion-item-text-line-height);
+    background-color: var(--accordion-item-background-color);
+    color: var(--accordion-item-text-color);
+    font-family: var(--accordion-item-text-font-family);
+    font-size: var(--accordion-item-text-font-size);
+    font-weight: var(--accordion-item-text-font-weight);
+    line-height: var(--accordion-item-text-line-height);
 
     &.disabled nb-accordion-item-header {
-      color: nb-theme(accordion-header-disabled-text-color);
+      color: var(--accordion-header-disabled-text-color);
       cursor: default;
     }
 
     &:first-child {
-      border-top-left-radius: nb-theme(accordion-border-radius);
-      border-top-right-radius: nb-theme(accordion-border-radius);
+      border-top-left-radius: var(--accordion-border-radius);
+      border-top-right-radius: var(--accordion-border-radius);
     }
     &:last-child {
-      border-bottom-left-radius: nb-theme(accordion-border-radius);
-      border-bottom-right-radius: nb-theme(accordion-border-radius);
+      border-bottom-left-radius: var(--accordion-border-radius);
+      border-bottom-right-radius: var(--accordion-border-radius);
 
       &.collapsed nb-accordion-item-header {
         border-bottom: none;
@@ -66,16 +66,16 @@
   }
 
   nb-accordion-item:not(.collapsed) + nb-accordion-item nb-accordion-item-header {
-    border-top-color: nb-theme(accordion-header-border-color);
-    border-top-style: nb-theme(accordion-header-border-style);
-    border-top-width: nb-theme(accordion-header-border-width);
+    border-top-color: var(--accordion-header-border-color);
+    border-top-style: var(--accordion-header-border-style);
+    border-top-width: var(--accordion-header-border-width);
   }
 
   nb-accordion-item-body .item-body {
     flex: 1;
     -ms-flex: 1 1 auto;
     overflow: auto;
-    padding: nb-theme(accordion-padding);
+    padding: var(--accordion-padding);
     position: relative;
   }
 }

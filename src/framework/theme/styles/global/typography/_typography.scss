@@ -3,11 +3,11 @@
 
 @mixin nb-typography {
   #{if(&, '&', 'body')} {
-    color: nb-theme(text-basic-color);
-    font-family: nb-theme(text-paragraph-font-family);
-    font-size: nb-theme(text-paragraph-font-size);
-    font-weight: nb-theme(text-paragraph-font-weight);
-    line-height: nb-theme(text-paragraph-line-height);
+    color: var(--text-basic-color);
+    font-family: var(--text-paragraph-font-family);
+    font-size: var(--text-paragraph-font-size);
+    font-weight: var(--text-paragraph-font-weight);
+    line-height: var(--text-paragraph-line-height);
   }
 
   h1,
@@ -22,136 +22,136 @@
   .h4,
   .h5,
   .h6 {
-    color: nb-theme(text-basic-color);
+    color: var(--text-basic-color);
   }
 
   @each $size in (1, 2, 3, 4, 5, 6) {
     h#{$size},
     .h#{$size} {
-      font-size: nb-theme(text-heading-#{$size}-font-size);
-      font-family: nb-theme(text-heading-#{$size}-font-family);
-      font-weight: nb-theme(text-heading-#{$size}-font-weight);
-      line-height: nb-theme(text-heading-#{$size}-line-height);
+      font-size: var(--text-heading-#{$size}-font-size);
+      font-family: var(--text-heading-#{$size}-font-family);
+      font-weight: var(--text-heading-#{$size}-font-weight);
+      line-height: var(--text-heading-#{$size}-line-height);
     }
   }
 
   .subtitle,
   .subtitle-2 {
-    color: nb-theme(text-basic-color);
+    color: var(--text-basic-color);
   }
 
   .subtitle {
-    font-family: nb-theme(text-subtitle-font-family);
-    font-size: nb-theme(text-subtitle-font-size);
-    font-weight: nb-theme(text-subtitle-font-weight);
-    line-height: nb-theme(text-subtitle-line-height);
+    font-family: var(--text-subtitle-font-family);
+    font-size: var(--text-subtitle-font-size);
+    font-weight: var(--text-subtitle-font-weight);
+    line-height: var(--text-subtitle-line-height);
   }
 
   .subtitle-2 {
-    font-family: nb-theme(text-subtitle-2-font-family);
-    font-size: nb-theme(text-subtitle-2-font-size);
-    font-weight: nb-theme(text-subtitle-2-font-weight);
-    line-height: nb-theme(text-subtitle-2-line-height);
+    font-family: var(--text-subtitle-2-font-family);
+    font-size: var(--text-subtitle-2-font-size);
+    font-weight: var(--text-subtitle-2-font-weight);
+    line-height: var(--text-subtitle-2-line-height);
   }
 
   p,
   .paragraph {
-    color: nb-theme(text-basic-color);
-    font-family: nb-theme(text-paragraph-font-family);
-    font-size: nb-theme(text-paragraph-font-size);
-    font-weight: nb-theme(text-paragraph-font-weight);
-    line-height: nb-theme(text-paragraph-line-height);
+    color: var(--text-basic-color);
+    font-family: var(--text-paragraph-font-family);
+    font-size: var(--text-paragraph-font-size);
+    font-weight: var(--text-paragraph-font-weight);
+    line-height: var(--text-paragraph-line-height);
   }
 
   .paragraph-2 {
-    color: nb-theme(text-basic-color);
-    font-family: nb-theme(text-paragraph-2-font-family);
-    font-size: nb-theme(text-paragraph-2-font-size);
-    font-weight: nb-theme(text-paragraph-2-font-weight);
-    line-height: nb-theme(text-paragraph-2-line-height);
+    color: var(--text-basic-color);
+    font-family: var(--text-paragraph-2-font-family);
+    font-size: var(--text-paragraph-2-font-size);
+    font-weight: var(--text-paragraph-2-font-weight);
+    line-height: var(--text-paragraph-2-line-height);
   }
 
   a {
-    color: nb-theme(link-text-color);
-    text-decoration: nb-theme(link-text-decoration);
+    color: var(--link-text-color);
+    text-decoration: var(--link-text-decoration);
     font-size: inherit;
     font-style: inherit;
     font-weight: inherit;
     line-height: inherit;
 
     &:focus {
-      color: nb-theme(link-text-focus-color);
+      color: var(--link-text-focus-color);
     }
 
     &:hover {
-      color: nb-theme(link-text-hover-color);
+      color: var(--link-text-hover-color);
     }
 
     &.link-control,
     &.link-control:hover {
-      color: nb-theme(text-control-color);
+      color: var(--text-control-color);
     }
 
     &.link-alternate,
     &.link-alternate:hover {
-      color: nb-theme(text-alternate-color);
+      color: var(--text-alternate-color);
     }
   }
 
   .label {
-    color: nb-theme(text-hint-color);
-    font-family: nb-theme(text-label-font-family);
-    font-size: nb-theme(text-label-font-size);
-    font-weight: nb-theme(text-label-font-weight);
-    line-height: nb-theme(text-label-line-height);
+    color: var(--text-hint-color);
+    font-family: var(--text-label-font-family);
+    font-size: var(--text-label-font-size);
+    font-weight: var(--text-label-font-weight);
+    line-height: var(--text-label-line-height);
   }
 
   .caption {
-    font-family: nb-theme(text-caption-font-family);
-    font-size: nb-theme(text-caption-font-size);
-    font-weight: nb-theme(text-caption-font-weight);
-    line-height: nb-theme(text-caption-line-height);
+    font-family: var(--text-caption-font-family);
+    font-size: var(--text-caption-font-size);
+    font-weight: var(--text-caption-font-weight);
+    line-height: var(--text-caption-line-height);
   }
 
   .caption-2 {
-    font-family: nb-theme(text-caption-2-font-family);
-    font-size: nb-theme(text-caption-2-font-size);
-    font-weight: nb-theme(text-caption-2-font-weight);
-    line-height: nb-theme(text-caption-2-line-height);
+    font-family: var(--text-caption-2-font-family);
+    font-size: var(--text-caption-2-font-size);
+    font-weight: var(--text-caption-2-font-weight);
+    line-height: var(--text-caption-2-line-height);
   }
 
   .caption,
   .caption-2 {
-    color: nb-theme(text-hint-color);
+    color: var(--text-hint-color);
 
     @each $status in nb-get-core-statuses() {
       &.status-#{$status} {
-        color: nb-theme(text-#{$status}-color);
+        color: var(--text-#{$status}-color);
       }
     }
   }
 
   li {
-    color: nb-theme(list-item-text-color);
-    font-family: nb-theme(list-item-font-family);
-    font-size: nb-theme(list-item-font-size);
-    font-weight: nb-theme(list-item-font-weight);
-    line-height: nb-theme(list-item-line-height);
+    color: var(--list-item-text-color);
+    font-family: var(--list-item-font-family);
+    font-size: var(--list-item-font-size);
+    font-weight: var(--list-item-font-weight);
+    line-height: var(--list-item-line-height);
   }
 
   .text-alternate {
-    color: nb-theme(text-alternate-color);
+    color: var(--text-alternate-color);
   }
   .text-disabled {
-    color: nb-theme(text-disabled-color);
+    color: var(--text-disabled-color);
   }
   .text-hint {
-    color: nb-theme(text-hint-color);
+    color: var(--text-hint-color);
   }
 
   @each $status in nb-get-core-statuses() {
     .text-#{$status} {
-      color: nb-theme(text-#{$status}-color);
+      color: var(--text-#{$status}-color);
     }
   }
 }

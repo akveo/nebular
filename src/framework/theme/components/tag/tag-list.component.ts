@@ -72,6 +72,7 @@ import { NbTagInputDirective } from './tag-input.directive';
   `,
   exportAs: 'nbTagList',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class NbTagListComponent implements OnInit, AfterContentInit, AfterViewInit, OnDestroy {
   protected readonly destroy$: Subject<void> = new Subject<void>();

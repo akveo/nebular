@@ -22,6 +22,7 @@ import { Observable, of as observableOf, combineLatest, Subject } from 'rxjs';
     </a>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class NgdPageTabsComponent implements OnDestroy {
   private destroy$ = new Subject<void>();

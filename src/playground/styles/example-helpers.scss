@@ -50,20 +50,20 @@
   @each $status in nb-get-core-statuses() {
     @if ($status != 'control') {
       .colored-column-#{$status} {
-        background: nb-theme(color-#{$status}-300);
-        color: nb-theme(color-basic-800);
+        background: var(--color-#{$status}-300);
+        color: var(--color-basic-800);
       }
     }
   }
 
   .colored-column-basic {
-    background: nb-theme(background-basic-color-4);
-    color: nb-theme(color-basic-800);
+    background: var(--background-basic-color-4);
+    color: var(--color-basic-800);
   }
 
   .control-status-example {
-    background-color: nb-theme(color-primary-default);
-    border-radius: nb-theme(card-border-radius);
+    background-color: var(--color-primary-default);
+    border-radius: var(--card-border-radius);
     padding: 1rem;
   }
 }

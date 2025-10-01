@@ -8,23 +8,23 @@
 
 @mixin nb-badge-theme() {
   nb-badge {
-    border-radius: nb-theme(badge-border-radius);
-    font-family: nb-theme(badge-text-font-family);
-    font-size: nb-theme(badge-text-font-size);
-    font-weight: nb-theme(badge-text-font-weight);
-    line-height: nb-theme(badge-text-line-height);
-    padding: nb-theme(badge-padding);
+    border-radius: var(--badge-border-radius);
+    font-family: var(--badge-text-font-family);
+    font-size: var(--badge-text-font-size);
+    font-weight: var(--badge-text-font-weight);
+    line-height: var(--badge-text-line-height);
+    padding: var(--badge-padding);
 
     &.dot-mode {
-      padding: nb-theme(badge-dot-mode-padding);
-      border-radius: nb-theme(badge-dot-mode-border-radius);
+      padding: var(--badge-dot-mode-padding);
+      border-radius: var(--badge-dot-mode-border-radius);
     }
   }
 
   @each $status in nb-get-statuses() {
     nb-badge.status-#{$status} {
-      color: nb-theme(badge-#{$status}-text-color);
-      background-color: nb-theme(badge-#{$status}-background-color);
+      color: var(--badge-#{$status}-text-color);
+      background-color: var(--badge-#{$status}-background-color);
     }
   }
 }

@@ -293,6 +293,7 @@ import { convertToBoolProperty, NbBooleanInput } from '../helpers';
     },
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class NbCheckboxComponent implements AfterViewInit, ControlValueAccessor {
   onChange: any = () => {};

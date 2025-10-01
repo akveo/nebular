@@ -105,6 +105,7 @@ import { NbComponentOrCustomStatus } from '../component-status';
       </div>
     </div>
   `,
+  standalone: false,
 })
 export class NbProgressBarComponent {
   /**

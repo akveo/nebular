@@ -21,6 +21,7 @@ import { NbPlatform } from '../cdk/platform/platform-service';
   template: ` <div #valueContainer>{{ value }}</div> `,
   styleUrls: ['./timepicker-cell.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class NbTimePickerCellComponent implements AfterViewInit, OnDestroy {
   protected selectedChange$ = new Subject<boolean>();

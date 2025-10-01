@@ -31,6 +31,7 @@ import { NgdHubspotFormDialogComponent } from '../hubspot-form-dialog/hubspot-fo
   exportAs: 'ngdForBusiness',
   styleUrls: ['./for-business.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class NgdForBusinessComponent {
   readonly headingId: string = 'ngd-for-business-heading';

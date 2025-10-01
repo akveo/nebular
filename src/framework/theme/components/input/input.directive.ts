@@ -219,6 +219,7 @@ import { NbFocusMonitor } from '../cdk/a11y/a11y.module';
 @Directive({
   selector: 'input[nbInput],textarea[nbInput],div[nbInput]',
   providers: [{ provide: NbFormFieldControl, useExisting: NbInputDirective }],
+  standalone: false,
 })
 export class NbInputDirective implements DoCheck, OnChanges, OnInit, AfterViewInit, OnDestroy, NbFormFieldControl {
   protected destroy$ = new Subject<void>();

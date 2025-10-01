@@ -34,6 +34,7 @@ const defaultOptions = { params: { direction: '' } };
       transition(':leave', [animate(100, voidState)], defaultOptions),
     ]),
   ],
+  standalone: false,
 })
 export class NbToastrContainerComponent implements OnInit, OnDestroy {
   protected destroy$ = new Subject<void>();

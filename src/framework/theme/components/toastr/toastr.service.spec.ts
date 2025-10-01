@@ -24,6 +24,7 @@ import {
       </nb-layout-column>
     </nb-layout>
   `,
+  standalone: false,
 })
 export class NbToastrTestComponent {
   constructor(private toastrService: NbToastrService) {}

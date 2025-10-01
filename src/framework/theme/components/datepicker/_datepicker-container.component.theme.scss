@@ -7,15 +7,15 @@
 @use '../../styles/theming' as *;
 
 @mixin nb-datepicker-theme {
-  $border: nb-theme(datepicker-border-width) nb-theme(datepicker-border-style) nb-theme(datepicker-border-color);
+  $border: var(--datepicker-border-width) var(--datepicker-border-style) var(--datepicker-border-color);
 
   nb-datepicker-container nb-card {
-    border-color: nb-theme(datepicker-border-color);
-    border-style: nb-theme(datepicker-border-style);
-    border-width: nb-theme(datepicker-border-width);
-    border-radius: nb-theme(datepicker-border-radius);
-    background: nb-theme(datepicker-background-color);
-    box-shadow: nb-theme(datepicker-shadow);
+    border-color: var(--datepicker-border-color);
+    border-style: var(--datepicker-border-style);
+    border-width: var(--datepicker-border-width);
+    border-radius: var(--datepicker-border-radius);
+    background: var(--datepicker-background-color);
+    box-shadow: var(--datepicker-shadow);
   }
   nb-calendar-with-time {
     .nb-timepicker-container,
@@ -29,11 +29,11 @@
     }
 
     .timepicker-section.size-large nb-list-item {
-      height: nb-theme(calendar-day-cell-large-height);
+      height: var(--calendar-day-cell-large-height);
     }
 
     .timepicker-section.size-large .header-cell {
-      height: nb-theme(calendar-weekday-large-height);
+      height: var(--calendar-weekday-large-height);
     }
 
     .timepicker-section {
@@ -42,16 +42,16 @@
     }
 
     .timepicker-single-column-width {
-      width: nb-theme(timepicker-single-column-width);
+      width: var(--timepicker-single-column-width);
     }
 
     .timepicker-multiple-column-width {
-      width: nb-theme(timepicker-multiple-column-width);
+      width: var(--timepicker-multiple-column-width);
     }
 
     .picker-title {
-      height: nb-theme(timepicker-title-height);
-      padding: nb-theme(timepicker-title-padding);
+      height: var(--timepicker-title-height);
+      padding: var(--timepicker-title-padding);
     }
   }
 }

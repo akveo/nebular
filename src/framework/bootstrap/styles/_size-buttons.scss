@@ -7,9 +7,9 @@
 @use '../../theme/styles/theming' as *;
 
 @mixin b-btn-size($size) {
-  font-size: nb-theme(button-#{$size}-text-font-size);
-  line-height: nb-theme(button-#{$size}-text-line-height);
-  padding: nb-theme(button-filled-#{$size}-padding);
+  font-size: var(--button-#{$size}-text-font-size);
+  line-height: var(--button-#{$size}-text-line-height);
+  padding: var(--button-filled-#{$size}-padding);
 }
 
 @mixin b-btn-sizes() {

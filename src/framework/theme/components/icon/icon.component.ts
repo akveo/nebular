@@ -112,6 +112,7 @@ export interface NbIconConfig {
   styleUrls: [`./icon.component.scss`],
   template: '',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class NbIconComponent implements NbIconConfig, OnChanges, OnInit {
   protected iconDef;

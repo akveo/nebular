@@ -24,6 +24,7 @@ let formContainerUniqueId = 0;
     </nb-card>
   `,
   styleUrls: ['./hubspot-form-dialog.component.scss'],
+  standalone: false,
 })
 export class NgdHubspotFormDialogComponent implements OnInit, AfterViewInit {
   protected readonly defaultConfig = {

@@ -2,6 +2,7 @@ import { Directive, ElementRef, AfterViewInit } from '@angular/core';
 
 @Directive({
   selector: '[ngdColorSwatch]',
+  standalone: false,
 })
 export class NgdColorSwatchDirective implements AfterViewInit {
   constructor(private el: ElementRef) {}

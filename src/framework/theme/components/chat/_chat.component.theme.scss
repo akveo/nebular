@@ -8,45 +8,45 @@
 
 @mixin nb-chat-theme() {
   nb-chat {
-    background-color: nb-theme(chat-background-color);
-    border: nb-theme(chat-border);
-    border-radius: nb-theme(chat-border-radius);
-    box-shadow: nb-theme(chat-shadow);
+    background-color: var(--chat-background-color);
+    border: var(--chat-border);
+    border-radius: var(--chat-border-radius);
+    box-shadow: var(--chat-shadow);
 
-    color: nb-theme(chat-text-color);
-    font-family: nb-theme(chat-text-font-family);
-    font-size: nb-theme(chat-text-font-size);
-    font-weight: nb-theme(chat-text-font-weight);
-    line-height: nb-theme(chat-text-line-height);
+    color: var(--chat-text-color);
+    font-family: var(--chat-text-font-family);
+    font-size: var(--chat-text-font-size);
+    font-weight: var(--chat-text-font-weight);
+    line-height: var(--chat-text-line-height);
 
     nb-icon {
       font-size: inherit;
     }
 
     .header {
-      border-bottom: nb-theme(chat-divider-width) nb-theme(chat-divider-style) nb-theme(chat-divider-color);
-      border-top-left-radius: nb-theme(chat-border-radius);
-      border-top-right-radius: nb-theme(chat-border-radius);
-      padding: nb-theme(chat-padding);
+      border-bottom: var(--chat-divider-width) var(--chat-divider-style) var(--chat-divider-color);
+      border-top-left-radius: var(--chat-border-radius);
+      border-top-right-radius: var(--chat-border-radius);
+      padding: var(--chat-padding);
 
-      font-family: nb-theme(chat-header-text-font-family);
-      font-size: nb-theme(chat-header-text-font-size);
-      font-weight: nb-theme(chat-header-text-font-weight);
-      line-height: nb-theme(chat-header-text-line-height);
+      font-family: var(--chat-header-text-font-family);
+      font-size: var(--chat-header-text-font-size);
+      font-weight: var(--chat-header-text-font-weight);
+      line-height: var(--chat-header-text-line-height);
     }
 
     .scrollable {
       overflow: auto;
       flex: 1;
       @include nb-scrollbars(
-        nb-theme(chat-scrollbar-color),
-        nb-theme(chat-scrollbar-background-color),
-        nb-theme(chat-scrollbar-width)
+        var(--chat-scrollbar-color),
+        var(--chat-scrollbar-background-color),
+        var(--chat-scrollbar-width)
       );
     }
 
     .messages {
-      padding: nb-theme(chat-padding);
+      padding: var(--chat-padding);
       overflow-y: auto;
       overflow-x: hidden;
       display: flex;
@@ -61,15 +61,15 @@
 
   @each $size in nb-get-sizes() {
     nb-chat.size-#{$size} {
-      height: nb-theme(chat-#{$size}-height);
+      height: var(--chat-#{$size}-height);
     }
   }
 
   @each $status in nb-get-statuses() {
     nb-chat.status-#{$status} {
       .header {
-        background-color: nb-theme(chat-#{$status}-background-color);
-        color: nb-theme(chat-#{$status}-text-color);
+        background-color: var(--chat-#{$status}-background-color);
+        color: var(--chat-#{$status}-text-color);
       }
     }
   }
@@ -87,7 +87,7 @@
       display: block;
       border-radius: 50%;
       flex-shrink: 0;
-      background: nb-theme(chat-message-avatar-background-color);
+      background: var(--chat-message-avatar-background-color);
       background-position: center;
       background-size: cover;
       background-repeat: no-repeat;
@@ -105,7 +105,7 @@
 
       .sender {
         font-size: 0.875rem;
-        color: nb-theme(chat-message-sender-text-color);
+        color: var(--chat-message-sender-text-color);
         margin-top: 0;
         margin-bottom: 0.5rem;
       }
@@ -129,11 +129,11 @@
       flex-direction: column;
 
       a {
-        color: nb-theme(chat-message-file-text-color);
-        background: nb-theme(chat-message-file-background-color);
+        color: var(--chat-message-file-text-color);
+        background: var(--chat-message-file-background-color);
         font-size: 4rem;
         text-align: center;
-        border: 1px solid nb-theme(chat-divider-color);
+        border: 1px solid var(--chat-divider-color);
         width: 10rem;
         height: 10rem;
         overflow: hidden;
@@ -151,7 +151,7 @@
         &:hover,
         &:focus {
           text-decoration: none;
-          color: nb-theme(chat-message-file-text-color);
+          color: var(--chat-message-file-text-color);
         }
 
         div {
@@ -191,8 +191,8 @@
       p.quote {
         font-style: italic;
         font-size: 0.875rem;
-        background: nb-theme(chat-message-quote-background-color);
-        color: nb-theme(chat-message-quote-text-color);
+        background: var(--chat-message-quote-background-color);
+        color: var(--chat-message-quote-text-color);
         padding: 1rem;
         border-radius: 0.5rem;
         margin-top: 0;
@@ -201,7 +201,7 @@
 
       .sender {
         font-size: 0.875rem;
-        color: nb-theme(chat-message-sender-text-color);
+        color: var(--chat-message-sender-text-color);
         margin-bottom: 0.5rem;
       }
     }
@@ -221,8 +221,8 @@
         .text {
           @include nb-ltr(border-top-left-radius, 0);
           @include nb-rtl(border-top-right-radius, 0);
-          background: nb-theme(chat-message-background);
-          color: nb-theme(chat-message-text-color);
+          background: var(--chat-message-background);
+          color: var(--chat-message-text-color);
         }
       }
 
@@ -258,8 +258,8 @@
         .text {
           @include nb-ltr(border-top-right-radius, 0);
           @include nb-rtl(border-top-left-radius, 0);
-          background: nb-theme(chat-message-reply-background-color);
-          color: nb-theme(chat-message-reply-text-color);
+          background: var(--chat-message-reply-background-color);
+          color: var(--chat-message-reply-text-color);
         }
       }
 
@@ -272,8 +272,8 @@
   nb-chat-form {
     display: flex;
     flex-direction: column;
-    padding: nb-theme(chat-padding);
-    border-top: nb-theme(chat-divider-width) nb-theme(chat-divider-style) nb-theme(chat-divider-color);
+    padding: var(--chat-padding);
+    border-top: var(--chat-divider-width) var(--chat-divider-style) var(--chat-divider-color);
 
     .message-row {
       flex-direction: row;
@@ -354,7 +354,7 @@
         @include nb-ltr(margin-right, 0.5rem);
         @include nb-rtl(margin-left, 0.5rem);
         margin-bottom: 0.5rem;
-        border: 1px solid nb-theme(chat-divider-color);
+        border: 1px solid var(--chat-divider-color);
         text-align: center;
         font-size: 2rem;
         position: relative;
@@ -373,10 +373,10 @@
           height: 0.875rem;
           font-size: 0.875rem;
           border-radius: 100%;
-          border: 1px solid nb-theme(chat-background-color);
+          border: 1px solid var(--chat-background-color);
           line-height: 1;
           cursor: pointer;
-          background-color: nb-theme(chat-divider-color);
+          background-color: var(--chat-divider-color);
           display: flex;
           justify-content: center;
           align-items: center;
@@ -397,7 +397,7 @@
 
   .nb-custom-message {
     display: inline-block;
-    padding: nb-theme(chat-padding);
+    padding: var(--chat-padding);
     margin-top: 0.5rem;
     border-radius: 0.5rem;
   }
@@ -411,8 +411,8 @@
   }
 
   .nb-custom-message-not-reply {
-    background: nb-theme(chat-message-background);
-    color: nb-theme(chat-message-text-color);
+    background: var(--chat-message-background);
+    color: var(--chat-message-text-color);
 
     @include nb-ltr(border-top-left-radius, 0);
     @include nb-rtl(border-top-right-radius, 0);
@@ -420,13 +420,13 @@
     a,
     a:hover,
     a:focus {
-      color: nb-theme(chat-message-text-color);
+      color: var(--chat-message-text-color);
     }
   }
 
   .nb-custom-message-reply {
-    background: nb-theme(chat-message-reply-background-color);
-    color: nb-theme(chat-message-reply-text-color);
+    background: var(--chat-message-reply-background-color);
+    color: var(--chat-message-reply-text-color);
 
     @include nb-ltr(border-top-right-radius, 0);
     @include nb-rtl(border-top-left-radius, 0);

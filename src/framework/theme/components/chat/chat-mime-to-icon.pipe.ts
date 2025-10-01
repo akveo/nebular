@@ -5,6 +5,7 @@ const defaultMimeIcon = { pack: 'eva', icon: 'file-text-outline' };
 @Pipe({
   name: 'nbChatMimeToIcon',
   pure: true,
+  standalone: false,
 })
 export class NbChatMimeToIconPipe implements PipeTransform {
   transform(map: Map<string, { pack: string; icon: string }>, mime: string): { pack: string; icon: string } {

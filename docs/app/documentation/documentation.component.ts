@@ -19,6 +19,7 @@ import { NbMediaBreakpoint } from '@nebular/theme';
   selector: 'ngd-documentation',
   templateUrl: './documentation.component.html',
   styleUrls: ['./documentation.component.scss'],
+  standalone: false,
 })
 export class NgdDocumentationComponent implements OnDestroy {
   menuItems: NbMenuItem[] = [];

@@ -88,6 +88,7 @@ const TEST_GROUPS = [
       </nb-layout-column>
     </nb-layout>
   `,
+  standalone: false,
 })
 export class NbSelectTestComponent {
   @Input() selected: any = null;
@@ -111,6 +112,7 @@ export class NbSelectTestComponent {
       </nb-layout-column>
     </nb-layout>
   `,
+  standalone: false,
 })
 export class BasicSelectTestComponent {}
 
@@ -124,6 +126,7 @@ export class BasicSelectTestComponent {}
       </nb-layout-column>
     </nb-layout>
   `,
+  standalone: false,
 })
 export class NbSelectWithOptionsObjectsComponent {
   @Input() compareFn = (o1: any, o2: any) => JSON.stringify(o1) === JSON.stringify(o2);
@@ -143,6 +146,7 @@ export class NbSelectWithOptionsObjectsComponent {
       </nb-layout-column>
     </nb-layout>
   `,
+  standalone: false,
 })
 export class NbSelectWithInitiallySelectedOptionComponent {
   @Input() selected = 1;
@@ -159,6 +163,7 @@ export class NbSelectWithInitiallySelectedOptionComponent {
       </nb-layout-column>
     </nb-layout>
   `,
+  standalone: false,
 })
 export class NbReactiveFormSelectComponent {
   options: number[] = [1];
@@ -179,6 +184,7 @@ export class NbReactiveFormSelectComponent {
       </nb-layout-column>
     </nb-layout>
   `,
+  standalone: false,
 })
 export class NbNgModelSelectComponent {
   options: number[] = [1];
@@ -204,6 +210,7 @@ export class NbNgModelSelectComponent {
       </nb-layout-column>
     </nb-layout>
   `,
+  standalone: false,
 })
 export class NbSelectWithFalsyOptionValuesComponent {
   nanValue = NaN;
@@ -278,6 +285,7 @@ export class NbSelectWithFalsyOptionValuesComponent {
       </nb-layout-column>
     </nb-layout>
   `,
+  standalone: false,
 })
 export class NbMultipleSelectWithFalsyOptionValuesComponent extends NbSelectWithFalsyOptionValuesComponent {}
 
@@ -293,6 +301,7 @@ export class NbMultipleSelectWithFalsyOptionValuesComponent extends NbSelectWith
       </nb-layout-column>
     </nb-layout>
   `,
+  standalone: false,
 })
 export class NbOptionDisabledTestComponent {
   optionGroupDisabled = false;
@@ -1271,6 +1280,7 @@ describe('NbSelect - dynamic options', () => {
       </nb-layout-column>
     </nb-layout>
   `,
+  standalone: false,
 })
 export class NbSelectWithExperimentalSearchComponent {
   options: number[] = [1, 2, 3, 4, 5];

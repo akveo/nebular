@@ -10,6 +10,7 @@ import { NgdAnalytics } from './@theme/services/analytics.service';
 @Component({
   selector: 'ngd-app-root',
   template: ` <router-outlet></router-outlet> `,
+  standalone: false,
 })
 export class NgdAppComponent implements OnInit {
   constructor(private analytics: NgdAnalytics) {}

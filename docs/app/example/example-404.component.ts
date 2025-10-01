@@ -5,6 +5,7 @@ import { NbThemeService } from '@nebular/theme';
   selector: 'ngd-example-404',
   template: ` Example not found. `,
   styleUrls: ['./example-404.component.scss'],
+  standalone: false,
 })
 export class NgdExample404Component {
   constructor(private themeService: NbThemeService) {

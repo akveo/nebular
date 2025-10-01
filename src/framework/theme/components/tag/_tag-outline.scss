@@ -10,26 +10,26 @@
   &.appearance-outline {
     @each $status in nb-get-statuses() {
       &.status-#{$status} {
-        background-color: nb-theme(tag-outline-#{$status}-background-color);
-        border-color: nb-theme(tag-outline-#{$status}-border-color);
-        color: nb-theme(tag-outline-#{$status}-text-color);
+        background-color: var(--tag-outline-#{$status}-background-color);
+        border-color: var(--tag-outline-#{$status}-border-color);
+        color: var(--tag-outline-#{$status}-text-color);
 
         &.selected {
-          background-color: nb-theme(tag-outline-#{$status}-selected-background-color);
-          border-color: nb-theme(tag-outline-#{$status}-selected-border-color);
-          color: nb-theme(tag-outline-#{$status}-selected-text-color);
+          background-color: var(--tag-outline-#{$status}-selected-background-color);
+          border-color: var(--tag-outline-#{$status}-selected-border-color);
+          color: var(--tag-outline-#{$status}-selected-text-color);
         }
 
         &.active {
-          background-color: nb-theme(tag-outline-#{$status}-active-background-color);
-          border-color: nb-theme(tag-outline-#{$status}-active-border-color);
-          color: nb-theme(tag-outline-#{$status}-active-text-color);
+          background-color: var(--tag-outline-#{$status}-active-background-color);
+          border-color: var(--tag-outline-#{$status}-active-border-color);
+          color: var(--tag-outline-#{$status}-active-text-color);
         }
 
         &:hover {
-          background-color: nb-theme(tag-outline-#{$status}-hover-background-color);
-          border-color: nb-theme(tag-outline-#{$status}-hover-border-color);
-          color: nb-theme(tag-outline-#{$status}-hover-text-color);
+          background-color: var(--tag-outline-#{$status}-hover-background-color);
+          border-color: var(--tag-outline-#{$status}-hover-border-color);
+          color: var(--tag-outline-#{$status}-hover-text-color);
         }
       }
     }

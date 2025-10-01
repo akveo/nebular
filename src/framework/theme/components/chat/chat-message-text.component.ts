@@ -25,6 +25,7 @@ import { ChangeDetectionStrategy, Component, Input, TemplateRef } from '@angular
     <p class="text" *ngIf="message">{{ message }}</p>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class NbChatMessageTextComponent {
   /**

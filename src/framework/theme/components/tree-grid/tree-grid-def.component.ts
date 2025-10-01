@@ -23,6 +23,7 @@ export interface NbTreeGridResponsiveRowDef {
 @Directive({
   selector: '[nbTreeGridRowDef]',
   providers: [{ provide: NbCdkRowDef, useExisting: NbTreeGridRowDefDirective }],
+  standalone: false,
 })
 export class NbTreeGridRowDefDirective<T>
   extends NbRowDefDirective<T>
@@ -67,6 +68,7 @@ export class NbTreeGridRowDefDirective<T>
 @Directive({
   selector: '[nbTreeGridHeaderRowDef]',
   providers: [{ provide: NbCdkHeaderRowDef, useExisting: NbTreeGridHeaderRowDefDirective }],
+  standalone: false,
 })
 export class NbTreeGridHeaderRowDefDirective
   extends NbHeaderRowDefDirective
@@ -111,6 +113,7 @@ export class NbTreeGridHeaderRowDefDirective
 @Directive({
   selector: '[nbTreeGridFooterRowDef]',
   providers: [{ provide: NbCdkFooterRowDef, useExisting: NbTreeGridFooterRowDefDirective }],
+  standalone: false,
 })
 export class NbTreeGridFooterRowDefDirective
   extends NbFooterRowDefDirective
@@ -159,6 +162,7 @@ export class NbTreeGridFooterRowDefDirective
 @Directive({
   selector: '[nbTreeGridCellDef]',
   providers: [{ provide: NbCdkCellDef, useExisting: NbTreeGridCellDefDirective }],
+  standalone: false,
 })
 export class NbTreeGridCellDefDirective extends NbCellDefDirective {}
 
@@ -169,6 +173,7 @@ export class NbTreeGridCellDefDirective extends NbCellDefDirective {}
 @Directive({
   selector: '[nbTreeGridHeaderCellDef]',
   providers: [{ provide: NbCdkHeaderCellDef, useExisting: NbTreeGridHeaderCellDefDirective }],
+  standalone: false,
 })
 export class NbTreeGridHeaderCellDefDirective extends NbHeaderCellDefDirective {}
 
@@ -179,5 +184,6 @@ export class NbTreeGridHeaderCellDefDirective extends NbHeaderCellDefDirective {
 @Directive({
   selector: '[nbTreeGridFooterCellDef]',
   providers: [{ provide: NbCdkFooterCellDef, useExisting: NbTreeGridFooterCellDefDirective }],
+  standalone: false,
 })
 export class NbTreeGridFooterCellDefDirective extends NbFooterCellDefDirective {}

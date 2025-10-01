@@ -15,8 +15,8 @@
   }
 
   nb-layout-header.fixed ~ .layout-container nb-sidebar .main-container-fixed {
-    height: calc(100vh - #{$padding-top} - #{nb-theme(header-height)});
-    top: calc(#{$padding-top} + #{nb-theme(header-height)});
+    height: calc(100vh - #{$padding-top} - #{var(--header-height)});
+    top: calc(#{$padding-top} + #{var(--header-height)});
   }
 
   nb-sidebar.fixed {
@@ -29,22 +29,22 @@
     }
 
     nb-sidebar.fixed {
-      top: calc(#{nb-theme(header-height)} + #{$padding-top});
+      top: calc(#{var(--header-height)} + #{$padding-top});
     }
   }
 
   .scrollable-container {
     height: calc(100vh - #{$padding-top});
-    box-shadow: nb-theme(layout-window-shadow);
+    box-shadow: var(--layout-window-shadow);
   }
 }
 
 @mixin nb-layout-theme() {
   nb-layout .scrollable-container {
     @include nb-scrollbars(
-      nb-theme(layout-scrollbar-color),
-      nb-theme(layout-scrollbar-background-color),
-      nb-theme(layout-scrollbar-width)
+      var(--layout-scrollbar-color),
+      var(--layout-scrollbar-background-color),
+      var(--layout-scrollbar-width)
     );
   }
 
@@ -60,11 +60,11 @@
   }
 
   .layout {
-    min-width: nb-theme(layout-window-mode-min-width);
+    min-width: var(--layout-window-mode-min-width);
   }
 
   nb-layout.window-mode {
-    background: nb-theme(layout-window-mode-background-color);
+    background: var(--layout-window-mode-background-color);
     display: block;
 
     .scrollable-container {
@@ -85,7 +85,7 @@
     }
 
     @media screen and (min-width: $layout-window-mode-max-width + 20px) {
-      $padding-top: calc(#{nb-theme(layout-window-mode-padding-top)} * 0.25);
+      $padding-top: calc(#{var(--layout-window-mode-padding-top)} * 0.25);
 
       @include window-mode($padding-top);
 
@@ -97,7 +97,7 @@
     }
 
     @media screen and (min-width: $layout-window-mode-max-width + 150px) {
-      $padding-top: calc(#{nb-theme(layout-window-mode-padding-top)} * 0.5);
+      $padding-top: calc(#{var(--layout-window-mode-padding-top)} * 0.5);
 
       @include window-mode($padding-top);
 
@@ -109,7 +109,7 @@
     }
 
     @media screen and (min-width: $layout-window-mode-max-width + 300px) {
-      $padding-top: nb-theme(layout-window-mode-padding-top);
+      $padding-top: var(--layout-window-mode-padding-top);
 
       @include window-mode($padding-top);
 
@@ -122,60 +122,60 @@
   }
 
   nb-layout .layout {
-    background-color: nb-theme(layout-background-color);
-    color: nb-theme(layout-text-color);
-    font-family: nb-theme(layout-text-font-family);
-    font-size: nb-theme(layout-text-font-size);
-    font-weight: nb-theme(layout-text-font-weight);
-    line-height: nb-theme(layout-text-line-height);
-    min-height: nb-theme(layout-min-height);
+    background-color: var(--layout-background-color);
+    color: var(--layout-text-color);
+    font-family: var(--layout-text-font-family);
+    font-size: var(--layout-text-font-size);
+    font-weight: var(--layout-text-font-weight);
+    line-height: var(--layout-text-line-height);
+    min-height: var(--layout-min-height);
 
     .layout-container {
       nb-sidebar {
         &.fixed,
         .main-container-fixed {
-          top: nb-theme(header-height);
+          top: var(--header-height);
         }
       }
 
       .content {
         nb-layout-footer {
-          box-shadow: nb-theme(footer-shadow);
+          box-shadow: var(--footer-shadow);
 
           nav {
-            background-color: nb-theme(footer-background-color);
-            border-top: nb-theme(footer-divider-width) nb-theme(footer-divider-style) nb-theme(footer-divider-color);
-            color: nb-theme(footer-text-color);
-            font-family: nb-theme(footer-text-font-family);
-            font-size: nb-theme(footer-text-font-size);
-            font-weight: nb-theme(footer-text-font-weight);
-            line-height: nb-theme(footer-text-line-height);
-            padding: nb-theme(footer-padding);
+            background-color: var(--footer-background-color);
+            border-top: var(--footer-divider-width) var(--footer-divider-style) var(--footer-divider-color);
+            color: var(--footer-text-color);
+            font-family: var(--footer-text-font-family);
+            font-size: var(--footer-text-font-size);
+            font-weight: var(--footer-text-font-weight);
+            line-height: var(--footer-text-line-height);
+            padding: var(--footer-padding);
 
             a {
-              color: nb-theme(footer-text-highlight-color);
+              color: var(--footer-text-highlight-color);
 
               @include hover-focus-active {
-                color: nb-theme(footer-text-highlight-color);
+                color: var(--footer-text-highlight-color);
               }
             }
           }
         }
 
         &.center {
-          width: nb-theme(layout-content-width);
-          flex: 0 100 nb-theme(layout-content-width) !important;
+          width: var(--layout-content-width);
+          flex: 0 100 var(--layout-content-width) !important;
         }
 
         .columns nb-layout-column {
-          padding: nb-theme(layout-padding);
+          padding: var(--layout-padding);
 
           @include media-breakpoint-down(md) {
-            padding: nb-theme(layout-medium-padding);
+            padding: var(--layout-medium-padding);
           }
 
           @include media-breakpoint-down(sm) {
-            padding: nb-theme(layout-small-padding);
+            padding: var(--layout-small-padding);
           }
         }
       }
@@ -183,39 +183,39 @@
   }
 
   nb-layout-header {
-    background-color: nb-theme(header-background-color);
-    color: nb-theme(header-text-color);
-    font-family: nb-theme(header-text-font-family);
-    font-size: nb-theme(header-text-font-size);
-    font-weight: nb-theme(header-text-font-weight);
-    line-height: nb-theme(header-text-line-height);
+    background-color: var(--header-background-color);
+    color: var(--header-text-color);
+    font-family: var(--header-text-font-family);
+    font-size: var(--header-text-font-size);
+    font-weight: var(--header-text-font-weight);
+    line-height: var(--header-text-line-height);
 
     nav {
-      color: nb-theme(header-text-color);
-      box-shadow: nb-theme(header-shadow);
-      height: nb-theme(header-height);
-      padding: nb-theme(header-padding);
+      color: var(--header-text-color);
+      box-shadow: var(--header-shadow);
+      height: var(--header-height);
+      padding: var(--header-padding);
 
       a {
-        color: nb-theme(header-text-color);
+        color: var(--header-text-color);
 
         @include hover-focus-active {
-          color: nb-theme(header-text-color);
+          color: var(--header-text-color);
         }
       }
     }
 
     & ~ .layout-container {
-      min-height: calc(#{nb-theme(layout-min-height)} - #{nb-theme(header-height)});
+      min-height: calc(#{var(--layout-min-height)} - #{var(--header-height)});
     }
 
     &.fixed ~ .layout-container {
-      padding-top: nb-theme(header-height);
-      min-height: nb-theme(layout-min-height);
+      padding-top: var(--header-height);
+      min-height: var(--layout-min-height);
     }
 
     &.fixed ~ .layout-container nb-sidebar .main-container {
-      height: calc(#{nb-theme(sidebar-height)} - #{nb-theme(header-height)});
+      height: calc(#{var(--sidebar-height)} - #{var(--header-height)});
     }
   }
 

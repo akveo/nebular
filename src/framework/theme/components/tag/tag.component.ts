@@ -232,6 +232,7 @@ let tagUniqueId = 0;
   templateUrl: './tag.component.html',
   exportAs: 'nbTag',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class NbTagComponent implements AfterViewInit, OnDestroy, NbHighlightableOption {
   private _destroy$: Subject<NbTagComponent> = new Subject<NbTagComponent>();

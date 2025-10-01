@@ -7,59 +7,59 @@
 @use '../../styles/theming' as *;
 
 @mixin nb-card-header() {
-  padding: nb-theme(card-padding);
-  border-bottom: nb-theme(card-divider-width) nb-theme(card-divider-style) nb-theme(card-divider-color);
-  border-top-left-radius: nb-theme(card-border-radius);
-  border-top-right-radius: nb-theme(card-border-radius);
+  padding: var(--card-padding);
+  border-bottom: var(--card-divider-width) var(--card-divider-style) var(--card-divider-color);
+  border-top-left-radius: var(--card-border-radius);
+  border-top-right-radius: var(--card-border-radius);
 
-  color: nb-theme(card-header-text-color);
-  font-family: nb-theme(card-header-text-font-family);
-  font-size: nb-theme(card-header-text-font-size);
-  font-weight: nb-theme(card-header-text-font-weight);
-  line-height: nb-theme(card-header-text-line-height);
+  color: var(--card-header-text-color);
+  font-family: var(--card-header-text-font-family);
+  font-size: var(--card-header-text-font-size);
+  font-weight: var(--card-header-text-font-weight);
+  line-height: var(--card-header-text-line-height);
 
   @include nb-headings();
 }
 
 @mixin nb-card-theme() {
   nb-card {
-    background-color: nb-theme(card-background-color);
-    border: nb-theme(card-border-width) nb-theme(card-border-style) nb-theme(card-border-color);
-    border-radius: nb-theme(card-border-radius);
-    box-shadow: nb-theme(card-shadow);
+    background-color: var(--card-background-color);
+    border: var(--card-border-width) var(--card-border-style) var(--card-border-color);
+    border-radius: var(--card-border-radius);
+    box-shadow: var(--card-shadow);
 
-    color: nb-theme(card-text-color);
-    font-family: nb-theme(card-text-font-family);
-    font-size: nb-theme(card-text-font-size);
-    font-weight: nb-theme(card-text-font-weight);
-    line-height: nb-theme(card-text-line-height);
+    color: var(--card-text-color);
+    font-family: var(--card-text-font-family);
+    font-size: var(--card-text-font-size);
+    font-weight: var(--card-text-font-weight);
+    line-height: var(--card-text-line-height);
 
     // TODO: move card margin style to layout
-    margin-bottom: nb-theme(card-margin-bottom);
+    margin-bottom: var(--card-margin-bottom);
 
     @include nb-scrollbars(
-      nb-theme(card-scrollbar-color),
-      nb-theme(card-scrollbar-background-color),
-      nb-theme(card-scrollbar-width)
+      var(--card-scrollbar-color),
+      var(--card-scrollbar-background-color),
+      var(--card-scrollbar-width)
     );
 
     @each $size in nb-get-sizes() {
       &.size-#{$size} {
-        height: nb-theme(card-height-#{$size});
+        height: var(--card-height-#{$size});
       }
     }
 
     @each $status in nb-get-statuses() {
       &.status-#{$status} {
         nb-card-header {
-          background-color: nb-theme(card-header-#{$status}-background-color);
+          background-color: var(--card-header-#{$status}-background-color);
           border-bottom-width: 0;
-          border-bottom-color: nb-theme(card-header-#{$status}-background-color);
-          color: nb-theme(card-header-#{$status}-text-color);
+          border-bottom-color: var(--card-header-#{$status}-background-color);
+          color: var(--card-header-#{$status}-text-color);
 
           a,
           a:hover {
-            color: nb-theme(card-header-#{$status}-text-color);
+            color: var(--card-header-#{$status}-text-color);
           }
         }
       }
@@ -67,13 +67,13 @@
 
     @each $status in nb-get-core-statuses() {
       &.accent-#{$status} {
-        border-top-color: nb-theme(card-header-#{$status}-background-color);
+        border-top-color: var(--card-header-#{$status}-background-color);
       }
     }
 
     &.accent {
-      border-top-style: nb-theme(card-border-style);
-      border-top-width: nb-theme(card-border-radius);
+      border-top-style: var(--card-border-style);
+      border-top-width: var(--card-border-radius);
 
       & nb-card-header {
         border-radius: 0;
@@ -85,20 +85,20 @@
     flex: 1;
     -ms-flex: 1 1 auto;
     overflow: auto;
-    padding: nb-theme(card-padding);
+    padding: var(--card-padding);
     position: relative;
     @include nb-scrollbars(
-      nb-theme(card-scrollbar-color),
-      nb-theme(card-scrollbar-background-color),
-      nb-theme(card-scrollbar-width)
+      var(--card-scrollbar-color),
+      var(--card-scrollbar-background-color),
+      var(--card-scrollbar-width)
     );
   }
 
   nb-card-footer {
-    padding: nb-theme(card-padding);
-    border-top: nb-theme(card-divider-width) nb-theme(card-divider-style) nb-theme(card-divider-color);
-    border-bottom-left-radius: nb-theme(card-border-radius);
-    border-bottom-right-radius: nb-theme(card-border-radius);
+    padding: var(--card-padding);
+    border-top: var(--card-divider-width) var(--card-divider-style) var(--card-divider-color);
+    border-bottom-left-radius: var(--card-border-radius);
+    border-bottom-right-radius: var(--card-border-radius);
   }
 
   nb-card-header {

@@ -26,6 +26,7 @@ export interface NbRenderableContainer {
 
 @Component({
   template: '',
+  standalone: false,
 })
 export class NbPositionedContainerComponent {
   @Input() position: NbPosition;
@@ -97,6 +98,7 @@ export class NbPositionedContainerComponent {
     <div *ngIf="isStringContent" class="primitive-overlay">{{ content }}</div>
     <ng-template nbPortalOutlet></ng-template>
   `,
+  standalone: false,
 })
 export class NbOverlayContainerComponent {
   // TODO static must be false as of Angular 9.0.0, issues/1514

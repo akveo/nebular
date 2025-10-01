@@ -18,7 +18,7 @@
     z-index: 1;
 
     &-disabled {
-      color: nb-theme(form-field-addon-disabled-text-color);
+      color: var(--form-field-addon-disabled-text-color);
     }
   }
 
@@ -28,18 +28,18 @@
 
   @each $status in nb-get-statuses() {
     .nb-form-field-addon-#{$status} {
-      color: nb-theme(form-field-addon-#{$status}-text-color);
+      color: var(--form-field-addon-#{$status}-text-color);
 
       &-highlight {
-        color: nb-theme(form-field-addon-#{$status}-highlight-text-color);
+        color: var(--form-field-addon-#{$status}-highlight-text-color);
       }
     }
   }
 
   @each $size in nb-get-sizes() {
-    $form-field-max-width: nb-theme(form-field-#{$size}-max-width);
-    $addon-height: nb-theme(form-field-addon-#{$size}-height);
-    $addon-width: nb-theme(form-field-addon-#{$size}-width);
+    $form-field-max-width: var(--form-field-#{$size}-max-width);
+    $addon-height: var(--form-field-addon-#{$size}-height);
+    $addon-width: var(--form-field-addon-#{$size}-width);
 
     .nb-form-field-limited-width.nb-form-field-size-#{$size} {
       max-width: $form-field-max-width;
@@ -49,13 +49,13 @@
     .nb-form-field-suffix-#{$size} {
       height: $addon-height;
       width: $addon-width;
-      font-size: nb-theme(form-field-addon-#{$size}-font-size);
-      line-height: nb-theme(form-field-addon-#{$size}-line-height);
-      font-weight: nb-theme(form-field-addon-#{$size}-font-weight);
+      font-size: var(--form-field-addon-#{$size}-font-size);
+      line-height: var(--form-field-addon-#{$size}-line-height);
+      font-weight: var(--form-field-addon-#{$size}-font-weight);
 
       nb-icon {
-        font-size: nb-theme(form-field-addon-#{$size}-icon-size);
-        line-height: nb-theme(form-field-addon-#{$size}-icon-size);
+        font-size: var(--form-field-addon-#{$size}-icon-size);
+        line-height: var(--form-field-addon-#{$size}-icon-size);
       }
     }
 
@@ -78,7 +78,7 @@
 }
 
 @mixin nb-form-field-with-prefix($selector, $size) {
-  $addon-width: nb-theme(form-field-addon-#{$size}-width);
+  $addon-width: var(--form-field-addon-#{$size}-width);
 
   .nb-form-field-control-with-prefix #{$selector} {
     @include nb-ltr(padding-left, $addon-width);
@@ -87,7 +87,7 @@
 }
 
 @mixin nb-form-field-with-suffix($selector, $size) {
-  $addon-width: nb-theme(form-field-addon-#{$size}-width);
+  $addon-width: var(--form-field-addon-#{$size}-width);
 
   .nb-form-field-control-with-suffix #{$selector} {
     @include nb-ltr(padding-right, $addon-width);

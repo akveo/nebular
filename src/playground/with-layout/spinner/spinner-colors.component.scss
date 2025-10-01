@@ -1,5 +1,5 @@
 @use '../../styles/themes' as *;
 
 .control-status-example {
-  color: nb-theme(color-basic-100);
+  color: var(--color-basic-100);
 }

@@ -27,6 +27,7 @@ import {
       </nb-layout-column>
     </nb-layout>
   `,
+  standalone: false,
 })
 export class NbContextMenuDefaultTestComponent {
   @ViewChild('button') button: ElementRef;
@@ -52,6 +53,7 @@ export class NbContextMenuDefaultTestComponent {
       </nb-layout-column>
     </nb-layout>
   `,
+  standalone: false,
 })
 export class NbContextMenuBindingsTestComponent {
   @ViewChild(NbContextMenuDirective) contextMenu: NbContextMenuDirective;
@@ -74,6 +76,7 @@ export class NbContextMenuBindingsTestComponent {
 
     <ng-template>Some Template</ng-template>
   `,
+  standalone: false,
 })
 export class NbContextMenuInstanceTestComponent {
   @ViewChild(NbContextMenuDirective) contextMenu: NbContextMenuDirective;

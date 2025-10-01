@@ -19,6 +19,7 @@ import { NgdTabbedService } from '../../../@theme/services';
     </nb-card>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class NgdApiBlockComponent {
   @Input() source;

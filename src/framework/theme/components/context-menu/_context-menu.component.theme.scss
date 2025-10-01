@@ -16,19 +16,19 @@
   }
 
   nb-context-menu {
-    background-color: nb-theme(context-menu-background-color);
-    border-color: nb-theme(context-menu-border-color);
-    border-style: nb-theme(context-menu-border-style);
-    border-width: nb-theme(context-menu-border-width);
-    border-radius: nb-theme(context-menu-border-radius);
-    box-shadow: nb-theme(context-menu-shadow);
-    min-width: nb-theme(context-menu-min-width);
-    max-width: nb-theme(context-menu-max-width);
+    background-color: var(--context-menu-background-color);
+    border-color: var(--context-menu-border-color);
+    border-style: var(--context-menu-border-style);
+    border-width: var(--context-menu-border-width);
+    border-radius: var(--context-menu-border-radius);
+    box-shadow: var(--context-menu-shadow);
+    min-width: var(--context-menu-min-width);
+    max-width: var(--context-menu-max-width);
 
     nb-menu {
-      border-radius: nb-theme(context-menu-border-radius);
+      border-radius: var(--context-menu-border-radius);
       overflow: hidden;
-      text-align: nb-theme(context-menu-text-align);
+      text-align: var(--context-menu-text-align);
 
       nb-icon.expand-state svg {
         pointer-events: none;

@@ -7,10 +7,10 @@
 @use '../../styles/theming' as *;
 
 @mixin nb-timepicker-theme() {
-  $border: nb-theme(timepicker-border-width) nb-theme(timepicker-border-style) nb-theme(timepicker-border-color);
+  $border: var(--timepicker-border-width) var(--timepicker-border-style) var(--timepicker-border-color);
   .nb-timepicker-container {
-    width: nb-theme(timepicker-container-width);
-    height: nb-theme(timepicker-container-height);
+    width: var(--timepicker-container-width);
+    height: var(--timepicker-container-height);
 
     .list-item {
       &:first-child {
@@ -18,26 +18,26 @@
       }
 
       &:hover {
-        background-color: nb-theme(timepicker-cell-hover-background-color);
-        color: nb-theme(timepicker-cell-hover-text-color);
+        background-color: var(--timepicker-cell-hover-background-color);
+        color: var(--timepicker-cell-hover-text-color);
       }
 
       &:focus {
-        background-color: nb-theme(timepicker-cell-focus-background-color);
-        color: nb-theme(timepicker-cell-focus-text-color);
+        background-color: var(--timepicker-cell-focus-background-color);
+        color: var(--timepicker-cell-focus-text-color);
       }
 
       &.selected {
-        background-color: nb-theme(timepicker-cell-active-background-color);
-        color: nb-theme(timepicker-cell-active-text-color);
+        background-color: var(--timepicker-cell-active-background-color);
+        color: var(--timepicker-cell-active-text-color);
       }
 
-      color: nb-theme(timepicker-cell-text-color);
-      font-size: nb-theme(timepicker-cell-text-font-size);
-      font-family: nb-theme(timepicker-cell-text-font-family);
-      height: nb-theme(timepicker-cell-height);
-      line-height: nb-theme(timepicker-cell-text-line-height);
-      font-weight: nb-theme(timepicker-cell-text-font-weight);
+      color: var(--timepicker-cell-text-color);
+      font-size: var(--timepicker-cell-text-font-size);
+      font-family: var(--timepicker-cell-text-font-family);
+      height: var(--timepicker-cell-height);
+      line-height: var(--timepicker-cell-text-line-height);
+      font-weight: var(--timepicker-cell-text-font-weight);
     }
 
     .values-list {
@@ -47,26 +47,26 @@
       }
 
       @include nb-scrollbars(
-        nb-theme(timepicker-scrollbar-color),
-        nb-theme(timepicker-scrollbar-background-color),
-        nb-theme(timepicker-scrollbar-width)
+        var(--timepicker-scrollbar-color),
+        var(--timepicker-scrollbar-background-color),
+        var(--timepicker-scrollbar-width)
       );
     }
 
     &.supports-scrollbar-theming {
       .values-list:hover .list-item:not(.am-pm-item) {
-        @include nb-ltr(margin-right, calc(#{nb-theme(timepicker-scrollbar-width)} * -1));
-        @include nb-rtl(margin-left, calc(#{nb-theme(timepicker-scrollbar-width)} * -1));
+        @include nb-ltr(margin-right, calc(#{var(--timepicker-scrollbar-width)} * -1));
+        @include nb-rtl(margin-left, calc(#{var(--timepicker-scrollbar-width)} * -1));
       }
     }
 
     .header-cell {
-      color: nb-theme(timepicker-header-cell-text-color);
-      font-size: nb-theme(timepicker-header-cell-text-font-size);
-      font-family: nb-theme(timepicker-header-cell-text-font-family);
-      height: nb-theme(timepicker-header-cell-height);
-      line-height: nb-theme(timepicker-header-cell-text-line-height);
-      font-weight: nb-theme(timepicker-header-cell-text-font-weight);
+      color: var(--timepicker-header-cell-text-color);
+      font-size: var(--timepicker-header-cell-text-font-size);
+      font-family: var(--timepicker-header-cell-text-font-family);
+      height: var(--timepicker-header-cell-height);
+      line-height: var(--timepicker-header-cell-text-line-height);
+      font-weight: var(--timepicker-header-cell-text-font-weight);
 
       &:not(:last-child) {
         @include nb-ltr(border-right, $border);

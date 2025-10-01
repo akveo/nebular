@@ -15,6 +15,7 @@ import { NgdTabbedService } from '../../../@theme/services';
   selector: 'ngd-tabbed-block',
   templateUrl: './tabbed-block.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class NgdTabbedBlockComponent implements OnDestroy {
   currentTab;

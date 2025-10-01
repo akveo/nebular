@@ -3,74 +3,74 @@
 
 @mixin select-outline {
   nb-select.appearance-outline .select-button {
-    border-style: nb-theme(select-outline-border-style);
-    border-width: nb-theme(select-outline-border-width);
+    border-style: var(--select-outline-border-style);
+    border-width: var(--select-outline-border-width);
 
     &.top {
-      border-top-style: nb-theme(select-outline-adjacent-border-style);
-      border-top-width: nb-theme(select-outline-adjacent-border-width);
+      border-top-style: var(--select-outline-adjacent-border-style);
+      border-top-width: var(--select-outline-adjacent-border-width);
     }
     &.bottom {
-      border-bottom-style: nb-theme(select-outline-adjacent-border-style);
-      border-bottom-width: nb-theme(select-outline-adjacent-border-width);
+      border-bottom-style: var(--select-outline-adjacent-border-style);
+      border-bottom-width: var(--select-outline-adjacent-border-width);
     }
   }
 
   @each $status in nb-get-statuses() {
     nb-select.appearance-outline.status-#{$status} .select-button {
-      background-color: nb-theme(select-outline-#{$status}-background-color);
-      border-color: nb-theme(select-outline-#{$status}-border-color);
-      color: nb-theme(select-outline-#{$status}-text-color);
+      background-color: var(--select-outline-#{$status}-background-color);
+      border-color: var(--select-outline-#{$status}-border-color);
+      color: var(--select-outline-#{$status}-text-color);
 
       &.placeholder {
-        color: nb-theme(select-outline-#{$status}-placeholder-text-color);
+        color: var(--select-outline-#{$status}-placeholder-text-color);
       }
       nb-icon {
-        color: nb-theme(select-outline-#{$status}-icon-color);
+        color: var(--select-outline-#{$status}-icon-color);
       }
 
       &:focus {
-        background-color: nb-theme(select-outline-#{$status}-focus-background-color);
-        border-color: nb-theme(select-outline-#{$status}-focus-border-color);
+        background-color: var(--select-outline-#{$status}-focus-background-color);
+        border-color: var(--select-outline-#{$status}-focus-border-color);
       }
       &:hover {
-        background-color: nb-theme(select-outline-#{$status}-hover-background-color);
-        border-color: nb-theme(select-outline-#{$status}-hover-border-color);
+        background-color: var(--select-outline-#{$status}-hover-background-color);
+        border-color: var(--select-outline-#{$status}-hover-border-color);
       }
       &:focus:hover {
-        background-color: nb-theme(select-outline-#{$status}-focus-and-hover-background-color);
-        border-color: nb-theme(select-outline-#{$status}-focus-and-hover-border-color);
+        background-color: var(--select-outline-#{$status}-focus-and-hover-background-color);
+        border-color: var(--select-outline-#{$status}-focus-and-hover-border-color);
       }
 
       &[disabled] {
-        color: nb-theme(select-outline-#{$status}-disabled-text-color);
-        background-color: nb-theme(select-outline-#{$status}-disabled-background-color);
-        border-color: nb-theme(select-outline-#{$status}-disabled-border-color);
+        color: var(--select-outline-#{$status}-disabled-text-color);
+        background-color: var(--select-outline-#{$status}-disabled-background-color);
+        border-color: var(--select-outline-#{$status}-disabled-border-color);
 
         nb-icon {
-          color: nb-theme(select-outline-#{$status}-disabled-icon-color);
+          color: var(--select-outline-#{$status}-disabled-icon-color);
         }
       }
 
       &.bottom,
       &.top {
-        border-color: nb-theme(select-outline-#{$status}-open-border-color);
+        border-color: var(--select-outline-#{$status}-open-border-color);
       }
 
       &.top {
-        border-top-color: nb-theme(select-outline-#{$status}-adjacent-border-color);
+        border-top-color: var(--select-outline-#{$status}-adjacent-border-color);
       }
       &.bottom {
-        border-bottom-color: nb-theme(select-outline-#{$status}-adjacent-border-color);
+        border-bottom-color: var(--select-outline-#{$status}-adjacent-border-color);
       }
     }
   }
 
   @each $size in nb-get-sizes() {
     nb-select.appearance-outline.size-#{$size} .select-button {
-      padding: nb-theme(select-outline-#{$size}-padding);
-      @include nb-ltr(padding-right, nb-theme(select-icon-offset));
-      @include nb-rtl(padding-left, nb-theme(select-icon-offset));
+      padding: var(--select-outline-#{$size}-padding);
+      @include nb-ltr(padding-right, var(--select-icon-offset));
+      @include nb-rtl(padding-left, var(--select-icon-offset));
     }
 
     @include form-field-theme.nb-form-field-with-prefix(

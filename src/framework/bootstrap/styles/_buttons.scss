@@ -13,17 +13,17 @@
 
 @mixin nb-b-buttons-theme() {
   .btn {
-    cursor: nb-theme(button-cursor);
-    font-family: nb-theme(button-text-font-family);
-    font-weight: nb-theme(button-text-font-weight);
+    cursor: var(--button-cursor);
+    font-family: var(--button-text-font-family);
+    font-weight: var(--button-text-font-weight);
 
     &:focus {
-      @include nb-outline(nb-theme(button-outline-width), nb-theme(button-outline-color));
+      @include nb-outline(var(--button-outline-width), var(--button-outline-color));
       outline: none;
     }
 
     &[disabled] {
-      cursor: nb-theme(button-disabled-cursor);
+      cursor: var(--button-disabled-cursor);
     }
 
     @include size-buttons.b-btn-size(medium);

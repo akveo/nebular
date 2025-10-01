@@ -8,7 +8,7 @@
 
 @mixin nb-menu-theme() {
   nb-menu {
-    background-color: nb-theme(menu-background-color);
+    background-color: var(--menu-background-color);
 
     ul.menu-items {
       margin: 0;
@@ -17,57 +17,57 @@
 
     .menu-group,
     .menu-item a {
-      font-family: nb-theme(menu-text-font-family);
-      font-size: nb-theme(menu-text-font-size);
-      font-weight: nb-theme(menu-text-font-weight);
-      line-height: nb-theme(menu-text-line-height);
-      padding: nb-theme(menu-item-padding);
+      font-family: var(--menu-text-font-family);
+      font-size: var(--menu-text-font-size);
+      font-weight: var(--menu-text-font-weight);
+      line-height: var(--menu-text-line-height);
+      padding: var(--menu-item-padding);
     }
 
     .menu-group,
     .menu-group nb-icon.menu-icon {
-      color: nb-theme(menu-group-text-color);
+      color: var(--menu-group-text-color);
     }
 
     .menu-item {
       a {
-        color: nb-theme(menu-text-color);
-        border-radius: nb-theme(menu-item-border-radius);
+        color: var(--menu-text-color);
+        border-radius: var(--menu-item-border-radius);
       }
 
       a.active {
-        background-color: nb-theme(menu-item-active-background-color);
-        color: nb-theme(menu-item-active-text-color);
+        background-color: var(--menu-item-active-background-color);
+        color: var(--menu-item-active-text-color);
 
         .menu-icon {
-          color: nb-theme(menu-item-icon-active-color);
+          color: var(--menu-item-icon-active-color);
         }
       }
 
       a:hover {
-        background-color: nb-theme(menu-item-hover-background-color);
-        color: nb-theme(menu-item-hover-text-color);
-        cursor: nb-theme(menu-item-hover-cursor);
+        background-color: var(--menu-item-hover-background-color);
+        color: var(--menu-item-hover-text-color);
+        cursor: var(--menu-item-hover-cursor);
 
         .menu-icon {
-          color: nb-theme(menu-item-icon-hover-color);
+          color: var(--menu-item-icon-hover-color);
         }
       }
 
       .menu-icon {
-        color: nb-theme(menu-item-icon-color);
-        font-size: nb-theme(menu-item-icon-width);
-        margin: nb-theme(menu-item-icon-margin);
+        color: var(--menu-item-icon-color);
+        font-size: var(--menu-item-icon-width);
+        margin: var(--menu-item-icon-margin);
         width: 1em;
         text-align: center;
       }
 
       .expand-state {
-        color: nb-theme(menu-item-icon-color);
+        color: var(--menu-item-icon-color);
       }
     }
 
-    $divider: nb-theme(menu-item-divider-width) nb-theme(menu-item-divider-style) nb-theme(menu-item-divider-color);
+    $divider: var(--menu-item-divider-width) var(--menu-item-divider-style) var(--menu-item-divider-color);
     .menu-item {
       border-bottom: $divider;
 
@@ -84,49 +84,49 @@
     }
 
     .menu-item > .menu-items {
-      background-color: nb-theme(menu-submenu-background-color);
-      margin: nb-theme(menu-submenu-margin);
-      padding: nb-theme(menu-submenu-padding);
+      background-color: var(--menu-submenu-background-color);
+      margin: var(--menu-submenu-margin);
+      padding: var(--menu-submenu-padding);
     }
 
     .menu-item > .menu-items > .menu-item {
-      background: nb-theme(menu-submenu-background-color);
-      color: nb-theme(menu-submenu-text-color);
+      background: var(--menu-submenu-background-color);
+      color: var(--menu-submenu-text-color);
 
       a {
-        border-color: nb-theme(menu-submenu-item-border-color);
-        border-style: nb-theme(menu-submenu-item-border-style);
-        border-width: nb-theme(menu-submenu-item-border-width);
-        padding: nb-theme(menu-submenu-item-padding);
+        border-color: var(--menu-submenu-item-border-color);
+        border-style: var(--menu-submenu-item-border-style);
+        border-width: var(--menu-submenu-item-border-width);
+        padding: var(--menu-submenu-item-padding);
       }
 
       a.active {
-        background-color: nb-theme(menu-submenu-item-active-background-color);
-        border-color: nb-theme(menu-submenu-item-active-border-color);
-        color: nb-theme(menu-submenu-item-active-text-color);
+        background-color: var(--menu-submenu-item-active-background-color);
+        border-color: var(--menu-submenu-item-active-border-color);
+        color: var(--menu-submenu-item-active-text-color);
 
         .menu-icon {
-          color: nb-theme(menu-submenu-item-icon-active-color);
+          color: var(--menu-submenu-item-icon-active-color);
         }
       }
 
       a:hover {
-        background-color: nb-theme(menu-submenu-item-hover-background-color);
-        border-color: nb-theme(menu-submenu-item-hover-border-color);
-        color: nb-theme(menu-submenu-item-hover-text-color);
+        background-color: var(--menu-submenu-item-hover-background-color);
+        border-color: var(--menu-submenu-item-hover-border-color);
+        color: var(--menu-submenu-item-hover-text-color);
 
         .menu-icon {
-          color: nb-theme(menu-submenu-item-icon-hover-color);
+          color: var(--menu-submenu-item-icon-hover-color);
         }
       }
 
       a.active:hover {
-        background-color: nb-theme(menu-submenu-item-active-hover-background-color);
-        border-color: nb-theme(menu-submenu-item-active-hover-border-color);
-        color: nb-theme(menu-submenu-item-active-hover-text-color);
+        background-color: var(--menu-submenu-item-active-hover-background-color);
+        border-color: var(--menu-submenu-item-active-hover-border-color);
+        color: var(--menu-submenu-item-active-hover-text-color);
 
         .menu-icon {
-          color: nb-theme(menu-submenu-item-icon-active-hover-color);
+          color: var(--menu-submenu-item-icon-active-hover-color);
         }
       }
     }
@@ -134,7 +134,7 @@
     .menu-item > .menu-items > .menu-group {
       &,
       & nb-icon.menu-icon {
-        color: nb-theme(menu-group-text-color);
+        color: var(--menu-group-text-color);
       }
     }
   }

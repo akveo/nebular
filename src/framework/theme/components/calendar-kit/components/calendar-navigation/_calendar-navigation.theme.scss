@@ -14,11 +14,11 @@
       &:hover,
       &:focus,
       &:active {
-        color: nb-theme(calendar-navigation-text-color);
-        font-family: nb-theme(calendar-navigation-text-font-family);
-        font-size: nb-theme(calendar-navigation-title-text-font-size);
-        font-weight: nb-theme(calendar-navigation-title-text-font-weight);
-        line-height: nb-theme(calendar-navigation-title-text-line-height);
+        color: var(--calendar-navigation-text-color);
+        font-family: var(--calendar-navigation-text-font-family);
+        font-size: var(--calendar-navigation-title-text-font-size);
+        font-weight: var(--calendar-navigation-title-text-font-weight);
+        line-height: var(--calendar-navigation-title-text-line-height);
       }
       &:focus {
         &,

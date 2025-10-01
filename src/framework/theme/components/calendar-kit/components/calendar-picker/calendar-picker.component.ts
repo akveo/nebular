@@ -26,6 +26,7 @@ import { NbCalendarCell, NbCalendarSize, NbCalendarSizeValues } from '../../mode
     </nb-calendar-picker-row>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class NbCalendarPickerComponent<D, T> {
   @Input() data: D[][];

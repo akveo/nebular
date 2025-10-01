@@ -6,6 +6,7 @@ import createSpy = jasmine.createSpy;
 @Component({
   selector: 'nb-tag-test',
   template: `<nb-tag [text]="'test-tag'" [removable]="isRemovable" [selected]="selected"></nb-tag>`,
+  standalone: false,
 })
 export class NbTagTestComponent {
   @ViewChild(NbTagComponent) nbTag: NbTagComponent;

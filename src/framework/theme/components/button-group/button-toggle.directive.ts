@@ -39,6 +39,7 @@ export interface NbButtonToggleChange {
   selector: 'button[nbButtonToggle]',
   providers: [{ provide: NbButton, useExisting: NbButtonToggleDirective }],
   exportAs: 'nbButtonToggle',
+  standalone: false,
 })
 export class NbButtonToggleDirective extends NbButton {
   protected readonly _pressedChange$ = new Subject<NbButtonToggleChange>();

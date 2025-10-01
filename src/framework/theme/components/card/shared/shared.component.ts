@@ -8,6 +8,7 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'nb-card-front',
   template: '<ng-content select="nb-card"></ng-content>',
+  standalone: false,
 })
 export class NbCardFrontComponent {}
 
@@ -19,5 +20,6 @@ export class NbCardFrontComponent {}
 @Component({
   selector: 'nb-card-back',
   template: '<ng-content select="nb-card"></ng-content>',
+  standalone: false,
 })
 export class NbCardBackComponent {}

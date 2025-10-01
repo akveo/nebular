@@ -121,6 +121,7 @@ export interface NbContextMenuContext {
 @Directive({
   selector: '[nbContextMenu]',
   providers: [NbDynamicOverlayHandler, NbDynamicOverlay],
+  standalone: false,
 })
 export class NbContextMenuDirective implements NbDynamicOverlayController, OnChanges, AfterViewInit, OnDestroy, OnInit {
   @HostBinding('class.context-menu-host')

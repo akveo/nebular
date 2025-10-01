@@ -40,6 +40,7 @@ export const MONTHS_IN_COLUMN = 4;
     </nb-calendar-picker>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class NbCalendarMonthPickerComponent<D, T> implements OnChanges {
   @Input() min: D;

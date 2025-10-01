@@ -111,6 +111,7 @@ import { NbBadgePosition } from '../badge/badge.component';
   selector: 'nb-user',
   styleUrls: ['./user.component.scss'],
   templateUrl: './user.component.html',
+  standalone: false,
 })
 export class NbUserComponent {
   imageBackgroundStyle: SafeStyle;

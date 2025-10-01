@@ -99,6 +99,7 @@ export interface NbBadge {
   selector: 'nb-badge',
   styleUrls: ['./badge.component.scss'],
   template: `{{ dotMode ? '' : text }}`,
+  standalone: false,
 })
 export class NbBadgeComponent implements NbBadge {
   /**

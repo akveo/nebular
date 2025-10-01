@@ -15,37 +15,37 @@
   [nbButton] {
     @include button-core.nb-button-core();
 
-    cursor: nb-theme(button-cursor);
-    font-family: nb-theme(button-text-font-family);
-    font-weight: nb-theme(button-text-font-weight);
+    cursor: var(--button-cursor);
+    font-family: var(--button-text-font-family);
+    font-weight: var(--button-text-font-weight);
 
     &:focus {
       // Sibling buttons are covering outline shadow.
       // position: relative; declaration makes shadow appear on top of sibling buttons.
       position: relative;
       outline: none;
-      @include nb-outline(nb-theme(button-outline-width), nb-theme(button-outline-color));
+      @include nb-outline(var(--button-outline-width), var(--button-outline-color));
     }
 
     &[disabled],
     &.btn-disabled {
-      cursor: nb-theme(button-disabled-cursor);
+      cursor: var(--button-disabled-cursor);
     }
 
     @each $size in nb-get-sizes() {
       &.size-#{$size} {
-        font-size: nb-theme(button-#{$size}-text-font-size);
-        line-height: nb-theme(button-#{$size}-text-line-height);
+        font-size: var(--button-#{$size}-text-font-size);
+        line-height: var(--button-#{$size}-text-line-height);
 
         nb-icon {
-          font-size: nb-theme(button-#{$size}-text-font-size);
-          height: nb-theme(button-#{$size}-icon-size);
-          width: nb-theme(button-#{$size}-icon-size);
-          margin-top: nb-theme(button-#{$size}-icon-vertical-margin);
-          margin-bottom: nb-theme(button-#{$size}-icon-vertical-margin);
+          font-size: var(--button-#{$size}-text-font-size);
+          height: var(--button-#{$size}-icon-size);
+          width: var(--button-#{$size}-icon-size);
+          margin-top: var(--button-#{$size}-icon-vertical-margin);
+          margin-bottom: var(--button-#{$size}-icon-vertical-margin);
         }
 
-        $icon-offset: nb-theme(button-#{$size}-icon-offset);
+        $icon-offset: var(--button-#{$size}-icon-offset);
         &.icon-start:not(.icon-end) nb-icon {
           @include nb-ltr(margin-right, $icon-offset);
           @include nb-rtl(margin-left, $icon-offset);
@@ -57,7 +57,7 @@
 
         @each $appearance in ('filled', 'outline', 'ghost', 'hero') {
           &.icon-start.icon-end.appearance-#{$appearance} {
-            padding: nb-theme(icon-button-#{$appearance}-#{$size}-padding);
+            padding: var(--icon-button-#{$appearance}-#{$size}-padding);
           }
         }
       }
@@ -65,7 +65,7 @@
 
     @each $shape in nb-get-shapes() {
       &.shape-#{$shape} {
-        border-radius: nb-theme(button-#{$shape}-border-radius);
+        border-radius: var(--button-#{$shape}-border-radius);
       }
     }
   }

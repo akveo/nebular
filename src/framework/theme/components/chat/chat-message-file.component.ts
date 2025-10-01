@@ -40,6 +40,7 @@ export type NbChatMessageFile = NbChatMessageFileIconPreview & NbChatMessageFile
     </ng-container>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class NbChatMessageFileComponent {
   /**

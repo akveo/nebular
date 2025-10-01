@@ -61,7 +61,10 @@ import { NbSpinnerComponent } from './spinner.component';
  * Or tabs:
  * @stacked-example(Spinner in tabs, spinner/spinner-tabs.component)
  */
-@Directive({ selector: '[nbSpinner]' })
+@Directive({
+  selector: '[nbSpinner]',
+  standalone: false,
+})
 export class NbSpinnerDirective implements OnInit {
   private shouldShow = false;
   spinner: ComponentRef<NbSpinnerComponent>;

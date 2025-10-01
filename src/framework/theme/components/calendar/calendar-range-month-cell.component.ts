@@ -27,6 +27,7 @@ import { NbBaseCalendarRangeCell } from './base-calendar-range-cell';
     </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class NbCalendarRangeMonthCellComponent<D>
   extends NbBaseCalendarRangeCell<D>

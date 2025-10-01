@@ -15,6 +15,7 @@ import createSpy = jasmine.createSpy;
       <nb-tab *ngIf="showTabs" tabTitle="3" route="3" tabId="tab-3" disabled>3</nb-tab>
     </nb-tabset>
   `,
+  standalone: false,
 })
 export class TabsetTestComponent {
   showTabs = true;

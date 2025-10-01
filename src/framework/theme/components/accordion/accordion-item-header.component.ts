@@ -52,6 +52,7 @@ import { NbAccordionItemComponent } from './accordion-item.component';
     ]),
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class NbAccordionItemHeaderComponent implements OnInit, OnDestroy {
   @HostBinding('class.accordion-item-header-collapsed')

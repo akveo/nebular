@@ -23,6 +23,7 @@ import {
       </nb-layout-column>
     </nb-layout>
   `,
+  standalone: false,
 })
 export class NbOptionGroupTestComponent {
   selectDisabled = false;

@@ -31,6 +31,7 @@ interface CustomStructure {
 
 @Component({
   template: '',
+  standalone: false,
 })
 class BaseTreeGridTestComponent {
   columns: string[];
@@ -51,6 +52,7 @@ class BaseTreeGridTestComponent {
       </ng-container>
     </table>
   `,
+  standalone: false,
 })
 export class TreeGridBasicTestComponent extends BaseTreeGridTestComponent {}
 
@@ -66,6 +68,7 @@ export class TreeGridBasicTestComponent extends BaseTreeGridTestComponent {}
       </ng-container>
     </table>
   `,
+  standalone: false,
 })
 export class TreeGridWithHeaderTestComponent extends BaseTreeGridTestComponent {}
 

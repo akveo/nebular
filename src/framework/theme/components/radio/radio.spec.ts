@@ -31,6 +31,7 @@ import { NbThemeModule, NbRadioModule, NbRadioComponent, NbRadioGroupComponent, 
       <nb-radio value="3" disabled>3</nb-radio>
     </nb-radio-group>
   `,
+  standalone: false,
 })
 export class NbRadioTestComponent {
   @Input() value;
@@ -45,6 +46,7 @@ export class NbRadioTestComponent {
       </ng-template>
     </nb-radio-group>
   `,
+  standalone: false,
 })
 export class NbRadioWithDynamicValuesTestComponent {
   radioValues: number[] = [];
@@ -63,6 +65,7 @@ export class NbRadioWithDynamicValuesTestComponent {
       <nb-radio checked value="2"></nb-radio>
     </nb-radio-group>
   `,
+  standalone: false,
 })
 export class NbTwoRadioGroupsComponent {
   @ViewChild('firstGroup', { read: NbRadioGroupComponent }) firstGroup: NbRadioGroupComponent;
@@ -77,6 +80,7 @@ export class NbTwoRadioGroupsComponent {
       <nb-radio value="2"></nb-radio>
     </nb-radio-group>
   `,
+  standalone: false,
 })
 export class NbFormsIntegrationComponent {
   @ViewChild(NbRadioGroupComponent) radioGroup: NbRadioGroupComponent;

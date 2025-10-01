@@ -73,6 +73,7 @@ import { NbIconConfig } from '../icon/icon.component';
       transition('* => void', [animate(100, style({ opacity: 0 }))]),
     ]),
   ],
+  standalone: false,
 })
 export class NbTooltipComponent implements NbRenderableContainer {
   @Input()

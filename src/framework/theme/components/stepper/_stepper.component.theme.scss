@@ -10,72 +10,72 @@
   nb-stepper {
     &.horizontal {
       .header .step {
-        width: nb-theme(stepper-step-index-width);
-        margin: 0 calc(#{nb-theme(stepper-step-index-width)} * 0.5);
+        width: var(--stepper-step-index-width);
+        margin: 0 calc(#{var(--stepper-step-index-width)} * 0.5);
       }
 
       .header .connector {
-        margin: nb-theme(stepper-horizontal-connector-margin);
+        margin: var(--stepper-horizontal-connector-margin);
       }
     }
 
     &.vertical {
       .header .connector {
-        margin: nb-theme(stepper-vertical-connector-margin);
+        margin: var(--stepper-vertical-connector-margin);
       }
     }
 
     .header {
       .connector {
-        background-color: nb-theme(stepper-connector-background-color);
+        background-color: var(--stepper-connector-background-color);
       }
 
       .connector-past {
-        background-color: nb-theme(stepper-connector-completed-background-color);
+        background-color: var(--stepper-connector-completed-background-color);
       }
 
       .label-index {
-        border-radius: nb-theme(stepper-step-index-border-radius);
-        border-color: nb-theme(stepper-step-index-border-color);
-        border-style: nb-theme(stepper-step-index-border-style);
-        border-width: nb-theme(stepper-step-index-border-width);
-        width: nb-theme(stepper-step-index-width);
-        height: nb-theme(stepper-step-index-width);
+        border-radius: var(--stepper-step-index-border-radius);
+        border-color: var(--stepper-step-index-border-color);
+        border-style: var(--stepper-step-index-border-style);
+        border-width: var(--stepper-step-index-border-width);
+        width: var(--stepper-step-index-width);
+        height: var(--stepper-step-index-width);
       }
 
       .step {
-        color: nb-theme(stepper-step-text-color);
-        font-family: nb-theme(stepper-step-text-font-family);
-        font-size: nb-theme(stepper-step-text-font-size);
-        font-weight: nb-theme(stepper-step-text-font-weight);
-        line-height: nb-theme(stepper-step-text-line-height);
+        color: var(--stepper-step-text-color);
+        font-family: var(--stepper-step-text-font-family);
+        font-size: var(--stepper-step-text-font-size);
+        font-weight: var(--stepper-step-text-font-weight);
+        line-height: var(--stepper-step-text-line-height);
 
         &.label-index {
-          border-color: nb-theme(stepper-step-index-border-color);
+          border-color: var(--stepper-step-index-border-color);
         }
 
         &.selected {
-          color: nb-theme(stepper-step-active-text-color);
+          color: var(--stepper-step-active-text-color);
 
           .label-index {
-            border-color: nb-theme(stepper-step-index-active-border-color);
+            border-color: var(--stepper-step-index-active-border-color);
           }
         }
 
         &.completed {
-          color: nb-theme(stepper-step-completed-text-color);
+          color: var(--stepper-step-completed-text-color);
 
           .label-index {
-            background-color: nb-theme(stepper-step-index-completed-background-color);
-            border-color: nb-theme(stepper-step-index-completed-border-color);
-            color: nb-theme(stepper-step-index-completed-text-color);
+            background-color: var(--stepper-step-index-completed-background-color);
+            border-color: var(--stepper-step-index-completed-border-color);
+            color: var(--stepper-step-index-completed-text-color);
           }
         }
       }
     }
 
     .step-content {
-      padding: nb-theme(stepper-step-content-padding);
+      padding: var(--stepper-step-content-padding);
     }
   }
 }

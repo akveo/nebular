@@ -12,6 +12,7 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from 
   `,
   styleUrls: ['./calendar-actions.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class NbCalendarActionsComponent {
   @Input() set applyButtonText(value: string) {

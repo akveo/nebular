@@ -32,6 +32,7 @@ import { NbColumnsService } from './tree-grid-columns.service';
 @Directive({
   selector: 'td[nbTreeGridCell]',
   providers: [{ provide: NbCdkCell, useExisting: NbTreeGridCellDirective }],
+  standalone: false,
 })
 export class NbTreeGridCellDirective extends NbCellDirective implements OnInit, OnDestroy {
   private destroy$ = new Subject<void>();
@@ -142,6 +143,7 @@ export class NbTreeGridCellDirective extends NbCellDirective implements OnInit, 
 @Directive({
   selector: 'th[nbTreeGridHeaderCell]',
   providers: [{ provide: NbCdkHeaderCell, useExisting: NbTreeGridHeaderCellDirective }],
+  standalone: false,
 })
 export class NbTreeGridHeaderCellDirective extends NbHeaderCellDirective implements OnInit, OnDestroy {
   private destroy$ = new Subject<void>();
@@ -187,6 +189,7 @@ export class NbTreeGridHeaderCellDirective extends NbHeaderCellDirective impleme
 @Directive({
   selector: 'td[nbTreeGridFooterCell]',
   providers: [{ provide: NbCdkFooterCell, useExisting: NbTreeGridFooterCellDirective }],
+  standalone: false,
 })
 export class NbTreeGridFooterCellDirective extends NbFooterCellDirective implements OnInit, OnDestroy {
   private destroy$ = new Subject<void>();

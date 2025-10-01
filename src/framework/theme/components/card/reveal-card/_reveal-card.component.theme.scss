@@ -2,17 +2,17 @@
 
 @mixin nd-reveal-card-theme {
   nb-reveal-card {
-    box-shadow: nb-theme(card-shadow);
-    margin-bottom: nb-theme(card-margin-bottom);
+    box-shadow: var(--card-shadow);
+    margin-bottom: var(--card-margin-bottom);
   }
 
   .second-card-container {
     height: 100%;
-    border-radius: nb-theme(card-border-radius);
+    border-radius: var(--card-border-radius);
   }
 
   .reveal-button {
-    line-height: nb-theme(card-text-line-height);
-    padding: nb-theme(card-padding);
+    line-height: var(--card-text-line-height);
+    padding: var(--card-padding);
   }
 }

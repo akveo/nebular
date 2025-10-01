@@ -10,5 +10,6 @@ import { Component } from '@angular/core';
   selector: 'nb-auth-block',
   styleUrls: ['./auth-block.component.scss'],
   template: ` <ng-content></ng-content> `,
+  standalone: false,
 })
 export class NbAuthBlockComponent {}

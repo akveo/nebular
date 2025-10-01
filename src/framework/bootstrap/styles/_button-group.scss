@@ -8,27 +8,27 @@
 @use 'status-buttons';
 
 @mixin btn-group-primary-separator() {
-  @include nb-theme(color-primary-600);
+  @include var(--color-primary-600);
 }
 
 @mixin btn-group-success-separator() {
-  @include nb-theme(color-success-600);
+  @include var(--color-success-600);
 }
 
 @mixin btn-group-warning-separator() {
-  @include nb-theme(color-warning-600);
+  @include var(--color-warning-600);
 }
 
 @mixin btn-group-info-separator() {
-  @include nb-theme(color-info-600);
+  @include var(--color-info-600);
 }
 
 @mixin btn-group-danger-separator() {
-  @include nb-theme(color-danger-600);
+  @include var(--color-danger-600);
 }
 
 @mixin btn-group-secondary-separator() {
-  @include nb-theme(color-primary-600);
+  @include var(--color-primary-600);
 }
 
 @mixin dropdown-separator($color) {
@@ -36,27 +36,27 @@
 }
 
 @mixin dropdown-primary-separator() {
-  @include dropdown-separator(nb-theme(button-filled-primary-active-background-color));
+  @include dropdown-separator(var(--button-filled-primary-active-background-color));
 }
 
 @mixin dropdown-success-separator() {
-  @include dropdown-separator(nb-theme(button-filled-success-active-background-color));
+  @include dropdown-separator(var(--button-filled-success-active-background-color));
 }
 
 @mixin dropdown-warning-separator() {
-  @include dropdown-separator(nb-theme(button-filled-warning-active-background-color));
+  @include dropdown-separator(var(--button-filled-warning-active-background-color));
 }
 
 @mixin dropdown-info-separator() {
-  @include dropdown-separator(nb-theme(button-filled-info-active-background-color));
+  @include dropdown-separator(var(--button-filled-info-active-background-color));
 }
 
 @mixin dropdown-danger-separator() {
-  @include dropdown-separator(nb-theme(button-filled-danger-active-background-color));
+  @include dropdown-separator(var(--button-filled-danger-active-background-color));
 }
 
 @mixin dropdown-secondary-separator() {
-  @include dropdown-separator(nb-theme(button-filled-primary-active-background-color));
+  @include dropdown-separator(var(--button-filled-primary-active-background-color));
 }
 
 @mixin nb-b-button-group-theme() {
@@ -89,16 +89,16 @@
   @each $status in nb-get-core-statuses() {
     .btn-group:not(.btn-divided-group) {
       .btn.btn-outline-#{$status}.active {
-        background-color: nb-theme(button-filled-#{$status}-active-background-color);
-        border-color: nb-theme(button-filled-#{$status}-active-border-color);
-        color: nb-theme(button-filled-#{$status}-text-color);
+        background-color: var(--button-filled-#{$status}-active-background-color);
+        border-color: var(--button-filled-#{$status}-active-border-color);
+        color: var(--button-filled-#{$status}-text-color);
       }
 
       .btn.btn-outline-#{$status}:hover,
       .btn.btn-outline-#{$status}.hover {
-        background-color: nb-theme(button-filled-#{$status}-hover-background-color);
-        border-color: nb-theme(button-filled-#{$status}-hover-border-color);
-        color: nb-theme(button-filled-#{$status}-text-color);
+        background-color: var(--button-filled-#{$status}-hover-background-color);
+        border-color: var(--button-filled-#{$status}-hover-border-color);
+        color: var(--button-filled-#{$status}-text-color);
       }
     }
   }
@@ -106,28 +106,28 @@
   .btn-group:not(.btn-divided-group) > .btn:not(.dropdown-toggle) {
     &:first-child {
       @include nb-ltr() {
-        border-top-left-radius: nb-theme(button-rectangle-border-radius);
-        border-bottom-left-radius: nb-theme(button-rectangle-border-radius);
+        border-top-left-radius: var(--button-rectangle-border-radius);
+        border-bottom-left-radius: var(--button-rectangle-border-radius);
         border-top-right-radius: 0;
         border-bottom-right-radius: 0;
       }
       @include nb-rtl() {
         border-top-left-radius: 0;
         border-bottom-left-radius: 0;
-        border-top-right-radius: nb-theme(button-rectangle-border-radius);
-        border-bottom-right-radius: nb-theme(button-rectangle-border-radius);
+        border-top-right-radius: var(--button-rectangle-border-radius);
+        border-bottom-right-radius: var(--button-rectangle-border-radius);
       }
     }
     &:last-child {
       @include nb-ltr() {
         border-top-left-radius: 0;
         border-bottom-left-radius: 0;
-        border-top-right-radius: nb-theme(button-rectangle-border-radius);
-        border-bottom-right-radius: nb-theme(button-rectangle-border-radius);
+        border-top-right-radius: var(--button-rectangle-border-radius);
+        border-bottom-right-radius: var(--button-rectangle-border-radius);
       }
       @include nb-rtl() {
-        border-top-left-radius: nb-theme(button-rectangle-border-radius);
-        border-bottom-left-radius: nb-theme(button-rectangle-border-radius);
+        border-top-left-radius: var(--button-rectangle-border-radius);
+        border-bottom-left-radius: var(--button-rectangle-border-radius);
         border-top-right-radius: 0;
         border-bottom-right-radius: 0;
       }
@@ -137,21 +137,21 @@
   .btn-group.dropdown {
     & > .btn:first-of-type.dropdown-toggle {
       @include nb-ltr() {
-        border-top-left-radius: nb-theme(button-rectangle-border-radius);
+        border-top-left-radius: var(--button-rectangle-border-radius);
         border-top-right-radius: 0;
       }
       @include nb-rtl() {
         border-top-left-radius: 0;
-        border-top-right-radius: nb-theme(button-rectangle-border-radius);
+        border-top-right-radius: var(--button-rectangle-border-radius);
       }
     }
     & > .btn:last-of-type.dropdown-toggle {
       @include nb-ltr() {
         border-top-left-radius: 0;
-        border-top-right-radius: nb-theme(button-rectangle-border-radius);
+        border-top-right-radius: var(--button-rectangle-border-radius);
       }
       @include nb-rtl() {
-        border-top-left-radius: nb-theme(button-rectangle-border-radius);
+        border-top-left-radius: var(--button-rectangle-border-radius);
         border-top-right-radius: 0;
       }
     }
@@ -159,21 +159,21 @@
     &:not(.show) {
       & > .btn:first-of-type.dropdown-toggle {
         @include nb-ltr() {
-          border-bottom-left-radius: nb-theme(button-rectangle-border-radius);
+          border-bottom-left-radius: var(--button-rectangle-border-radius);
           border-bottom-right-radius: 0;
         }
         @include nb-rtl() {
           border-bottom-left-radius: 0;
-          border-bottom-right-radius: nb-theme(button-rectangle-border-radius);
+          border-bottom-right-radius: var(--button-rectangle-border-radius);
         }
       }
       & > .btn:last-of-type.dropdown-toggle {
         @include nb-ltr() {
           border-bottom-left-radius: 0;
-          border-bottom-right-radius: nb-theme(button-rectangle-border-radius);
+          border-bottom-right-radius: var(--button-rectangle-border-radius);
         }
         @include nb-rtl() {
-          border-bottom-left-radius: nb-theme(button-rectangle-border-radius);
+          border-bottom-left-radius: var(--button-rectangle-border-radius);
           border-bottom-right-radius: 0;
         }
       }
@@ -188,21 +188,21 @@
   .btn-group.dropup {
     & > .btn:first-of-type.dropdown-toggle {
       @include nb-ltr() {
-        border-bottom-left-radius: nb-theme(button-rectangle-border-radius);
+        border-bottom-left-radius: var(--button-rectangle-border-radius);
         border-bottom-right-radius: 0;
       }
       @include nb-rtl() {
         border-bottom-left-radius: 0;
-        border-bottom-right-radius: nb-theme(button-rectangle-border-radius);
+        border-bottom-right-radius: var(--button-rectangle-border-radius);
       }
     }
     & > .btn:last-of-type.dropdown-toggle {
       @include nb-ltr() {
         border-bottom-left-radius: 0;
-        border-bottom-right-radius: nb-theme(button-rectangle-border-radius);
+        border-bottom-right-radius: var(--button-rectangle-border-radius);
       }
       @include nb-rtl() {
-        border-bottom-left-radius: nb-theme(button-rectangle-border-radius);
+        border-bottom-left-radius: var(--button-rectangle-border-radius);
         border-bottom-right-radius: 0;
       }
     }
@@ -210,21 +210,21 @@
     &:not(.show) {
       & > .btn:first-of-type.dropdown-toggle {
         @include nb-ltr() {
-          border-top-left-radius: nb-theme(button-rectangle-border-radius);
+          border-top-left-radius: var(--button-rectangle-border-radius);
           border-top-right-radius: 0;
         }
         @include nb-rtl() {
           border-top-left-radius: 0;
-          border-top-right-radius: nb-theme(button-rectangle-border-radius);
+          border-top-right-radius: var(--button-rectangle-border-radius);
         }
       }
       & > .btn:last-of-type.dropdown-toggle {
         @include nb-ltr() {
           border-top-left-radius: 0;
-          border-top-right-radius: nb-theme(button-rectangle-border-radius);
+          border-top-right-radius: var(--button-rectangle-border-radius);
         }
         @include nb-rtl() {
-          border-top-left-radius: nb-theme(button-rectangle-border-radius);
+          border-top-left-radius: var(--button-rectangle-border-radius);
           border-top-right-radius: 0;
         }
       }
@@ -244,23 +244,23 @@
   .btn-divided-group {
     @each $status in nb-get-core-statuses() {
       .btn-#{$status} {
-        background-color: nb-theme(button-filled-#{$status}-background-color);
-        border-color: nb-theme(button-filled-#{$status}-border-color);
-        color: nb-theme(button-filled-#{$status}-text-color);
+        background-color: var(--button-filled-#{$status}-background-color);
+        border-color: var(--button-filled-#{$status}-border-color);
+        color: var(--button-filled-#{$status}-text-color);
       }
       .btn-outline-#{$status} {
-        background-color: nb-theme(button-outline-#{$status}-background-color);
-        border-color: nb-theme(button-outline-#{$status}-border-color);
-        color: nb-theme(button-outline-#{$status}-text-color);
+        background-color: var(--button-outline-#{$status}-background-color);
+        border-color: var(--button-outline-#{$status}-border-color);
+        color: var(--button-outline-#{$status}-text-color);
       }
 
       .btn:active,
       .btn.active {
         &.btn-#{$status},
         &.btn-outline-#{$status} {
-          background-color: nb-theme(button-filled-#{$status}-active-background-color);
-          border-color: nb-theme(button-filled-#{$status}-active-border-color);
-          color: nb-theme(button-filled-#{$status}-text-color);
+          background-color: var(--button-filled-#{$status}-active-background-color);
+          border-color: var(--button-filled-#{$status}-active-border-color);
+          color: var(--button-filled-#{$status}-text-color);
         }
       }
 
@@ -268,9 +268,9 @@
       .btn.hover {
         &.btn-#{$status},
         &.btn-outline-#{$status} {
-          background-color: nb-theme(button-filled-#{$status}-hover-background-color);
-          border-color: nb-theme(button-filled-#{$status}-hover-border-color);
-          color: nb-theme(button-filled-#{$status}-text-color);
+          background-color: var(--button-filled-#{$status}-hover-background-color);
+          border-color: var(--button-filled-#{$status}-hover-border-color);
+          color: var(--button-filled-#{$status}-text-color);
         }
       }
     }
@@ -279,7 +279,7 @@
     .btn.active {
       &.btn-secondary,
       &.btn-outline-secondary {
-        background-color: nb-theme(button-filled-primary-active-background-color);
+        background-color: var(--button-filled-primary-active-background-color);
       }
     }
 
@@ -287,7 +287,7 @@
     .btn.hover {
       &.btn-secondary,
       &.btn-outline-secondary {
-        background-color: nb-theme(button-filled-primary-hover-background-color);
+        background-color: var(--button-filled-primary-hover-background-color);
       }
     }
   }
@@ -299,7 +299,7 @@
 
     .btn:not(.active):not(:hover) + .btn:not(.active):not(:hover) {
       &::before {
-        background-color: nb-theme(divider-color);
+        background-color: var(--divider-color);
       }
     }
   }
@@ -308,15 +308,15 @@
     .btn:not(:first-child) {
       @include nb-ltr(margin-left, 0.5rem);
       @include nb-rtl(margin-right, 0.5rem);
-      border-radius: nb-theme(button-rectangle-border-radius);
+      border-radius: var(--button-rectangle-border-radius);
     }
 
     .btn:not(:first-child):not(:last-child):not(.dropdown-toggle) {
-      border-radius: nb-theme(button-rectangle-border-radius);
+      border-radius: var(--button-rectangle-border-radius);
     }
 
     .btn:not(:last-child):not(.dropdown-toggle) {
-      border-radius: nb-theme(button-rectangle-border-radius);
+      border-radius: var(--button-rectangle-border-radius);
     }
   }
 

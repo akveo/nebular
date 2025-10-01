@@ -31,6 +31,7 @@ import { NbCalendarCell, NbCalendarSize, NbCalendarSizeValues } from '../../mode
   ],
   template: '<ng-template></ng-template>',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class NbCalendarPickerRowComponent<D, T> implements OnChanges {
   @Input() row: D[];

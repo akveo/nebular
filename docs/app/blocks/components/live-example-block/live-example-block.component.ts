@@ -23,6 +23,7 @@ import { NgdExampleView } from '../../enum.example-view';
   styleUrls: ['./live-example-block.component.scss'],
   templateUrl: './live-example-block.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class NgdLiveExampleBlockComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('iframe') iframe: ElementRef;

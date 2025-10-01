@@ -122,6 +122,7 @@ import { NbComponentOrCustomStatus } from '../component-status';
     </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class NbChatFormComponent {
   status: NbComponentOrCustomStatus = 'basic';

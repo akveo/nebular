@@ -41,6 +41,7 @@ import { Component, Input, HostBinding } from '@angular/core';
   selector: 'nb-list',
   template: `<ng-content select="nb-list-item"></ng-content>`,
   styleUrls: ['./list.component.scss'],
+  standalone: false,
 })
 export class NbListComponent {
   /**
@@ -61,6 +62,7 @@ export class NbListComponent {
   selector: 'nb-list-item',
   template: `<ng-content></ng-content>`,
   styleUrls: ['list-item.component.scss'],
+  standalone: false,
 })
 export class NbListItemComponent {
   /**

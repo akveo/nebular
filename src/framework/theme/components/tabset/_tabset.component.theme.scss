@@ -8,75 +8,75 @@
 
 @mixin nb-tabset-theme() {
   nb-tabset {
-    background-color: nb-theme(tabset-background-color);
-    border-radius: nb-theme(tabset-border-radius);
-    box-shadow: nb-theme(tabset-shadow);
+    background-color: var(--tabset-background-color);
+    border-radius: var(--tabset-border-radius);
+    box-shadow: var(--tabset-shadow);
 
     .tabset {
-      border-bottom: nb-theme(tabset-divider-width) nb-theme(tabset-divider-style) nb-theme(tabset-divider-color);
+      border-bottom: var(--tabset-divider-width) var(--tabset-divider-style) var(--tabset-divider-color);
     }
 
     .tab-link {
-      background-color: nb-theme(tabset-tab-background-color);
+      background-color: var(--tabset-tab-background-color);
       cursor: pointer;
-      padding: nb-theme(tabset-tab-padding);
-      color: nb-theme(tabset-tab-text-color);
-      font-family: nb-theme(tabset-tab-text-font-family);
-      font-size: nb-theme(tabset-tab-text-font-size);
-      font-weight: nb-theme(tabset-tab-text-font-weight);
-      line-height: nb-theme(tabset-tab-text-line-height);
-      text-transform: nb-theme(tabset-tab-text-transform);
+      padding: var(--tabset-tab-padding);
+      color: var(--tabset-tab-text-color);
+      font-family: var(--tabset-tab-text-font-family);
+      font-size: var(--tabset-tab-text-font-size);
+      font-weight: var(--tabset-tab-text-font-weight);
+      line-height: var(--tabset-tab-text-line-height);
+      text-transform: var(--tabset-tab-text-transform);
 
       &::before {
-        background-color: nb-theme(tabset-tab-underline-color);
-        height: nb-theme(tabset-tab-underline-width);
+        background-color: var(--tabset-tab-underline-color);
+        height: var(--tabset-tab-underline-width);
       }
     }
 
     nb-badge.dot-mode.position-left {
-      left: nb-theme(tabset-tab–badge-dot-mode-horizontal-offset);
+      left: var(--tabset-tab–badge-dot-mode-horizontal-offset);
     }
 
     nb-badge.dot-mode.position-right {
-      right: nb-theme(tabset-tab–badge-dot-mode-horizontal-offset);
+      right: var(--tabset-tab–badge-dot-mode-horizontal-offset);
     }
 
     nb-badge.dot-mode.position-start {
-      @include nb-ltr(left, nb-theme(tabset-tab–badge-dot-mode-horizontal-offset));
-      @include nb-rtl(right, nb-theme(tabset-tab–badge-dot-mode-horizontal-offset));
+      @include nb-ltr(left, var(--tabset-tab–badge-dot-mode-horizontal-offset));
+      @include nb-rtl(right, var(--tabset-tab–badge-dot-mode-horizontal-offset));
     }
 
     nb-badge.dot-mode.position-end {
-      @include nb-ltr(right, nb-theme(tabset-tab–badge-dot-mode-horizontal-offset));
-      @include nb-rtl(left, nb-theme(tabset-tab–badge-dot-mode-horizontal-offset));
+      @include nb-ltr(right, var(--tabset-tab–badge-dot-mode-horizontal-offset));
+      @include nb-rtl(left, var(--tabset-tab–badge-dot-mode-horizontal-offset));
     }
 
     .tab.active {
       .tab-link {
-        background-color: nb-theme(tabset-tab-active-background-color);
-        color: nb-theme(tabset-tab-active-text-color);
+        background-color: var(--tabset-tab-active-background-color);
+        color: var(--tabset-tab-active-text-color);
         &::before {
-          background-color: nb-theme(tabset-tab-active-underline-color);
+          background-color: var(--tabset-tab-active-underline-color);
         }
       }
     }
 
     .tab:focus {
       .tab-link {
-        background-color: nb-theme(tabset-tab-focus-background-color);
-        color: nb-theme(tabset-tab-focus-text-color);
+        background-color: var(--tabset-tab-focus-background-color);
+        color: var(--tabset-tab-focus-text-color);
         &::before {
-          background-color: nb-theme(tabset-tab-focus-underline-color);
+          background-color: var(--tabset-tab-focus-underline-color);
         }
       }
     }
 
     .tab:hover {
       .tab-link {
-        color: nb-theme(tabset-tab-hover-text-color);
-        background-color: nb-theme(tabset-tab-hover-background-color);
+        color: var(--tabset-tab-hover-text-color);
+        background-color: var(--tabset-tab-hover-background-color);
         &::before {
-          background-color: nb-theme(tabset-tab-hover-underline-color);
+          background-color: var(--tabset-tab-hover-underline-color);
         }
       }
     }
@@ -86,12 +86,12 @@
       pointer-events: none;
 
       .tab-link {
-        background-color: nb-theme(tabset-tab-disabled-background-color);
-        color: nb-theme(tabset-tab-disabled-text-color);
+        background-color: var(--tabset-tab-disabled-background-color);
+        color: var(--tabset-tab-disabled-text-color);
         cursor: default;
         pointer-events: none;
         &::before {
-          background-color: nb-theme(tabset-tab-disabled-underline-color);
+          background-color: var(--tabset-tab-disabled-underline-color);
         }
       }
     }
@@ -105,18 +105,18 @@
     }
 
     nb-tab {
-      background-color: nb-theme(tabset-content-background-color);
-      color: nb-theme(tabset-content-text-color);
-      font-family: nb-theme(tabset-content-text-font-family);
-      font-size: nb-theme(tabset-content-text-font-size);
-      font-weight: nb-theme(tabset-content-text-font-weight);
-      line-height: nb-theme(tabset-content-text-line-height);
-      padding: nb-theme(tabset-content-padding);
+      background-color: var(--tabset-content-background-color);
+      color: var(--tabset-content-text-color);
+      font-family: var(--tabset-content-text-font-family);
+      font-size: var(--tabset-content-text-font-size);
+      font-weight: var(--tabset-content-text-font-weight);
+      line-height: var(--tabset-content-text-line-height);
+      padding: var(--tabset-content-padding);
 
       @include nb-scrollbars(
-        nb-theme(tabset-scrollbar-color),
-        nb-theme(tabset-scrollbar-background-color),
-        nb-theme(tabset-scrollbar-width)
+        var(--tabset-scrollbar-color),
+        var(--tabset-scrollbar-background-color),
+        var(--tabset-scrollbar-width)
       );
     }
   }

@@ -31,6 +31,7 @@ import { NbTreeGridCellDirective } from './tree-grid-cell.component';
       }
     `,
   ],
+  standalone: false,
 })
 export class NbTreeGridRowToggleComponent {
   private expandedValue: boolean;

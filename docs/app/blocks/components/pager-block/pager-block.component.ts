@@ -29,6 +29,7 @@ import { NgdPaginationService } from '../../../@theme/services';
     </ng-container>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class NgdPagerBlockComponent {
   paginationItem;

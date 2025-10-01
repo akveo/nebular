@@ -69,6 +69,7 @@ export const NB_TABLE_PROVIDERS: Provider[] = [
   selector: 'nb-table-not-implemented',
   template: ``,
   providers: NB_TABLE_PROVIDERS,
+  standalone: false,
 })
 // eslint-disable-next-line @angular-eslint/component-class-suffix
 export class NbTable<T> extends CdkTable<T> {

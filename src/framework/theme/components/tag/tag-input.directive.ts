@@ -55,6 +55,7 @@ export interface NbTagInputAddEvent {
   selector: 'input[nbTagInput]',
   exportAs: 'nbTagInput',
   providers: [{ provide: NbFormFieldControl, useExisting: NbTagInputDirective }],
+  standalone: false,
 })
 export class NbTagInputDirective extends NbInputDirective implements AfterViewInit {
   protected readonly keyDown$: Subject<KeyboardEvent> = new Subject<KeyboardEvent>();

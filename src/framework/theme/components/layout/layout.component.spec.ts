@@ -19,6 +19,7 @@ import { RouterTestingModule } from '@angular/router/testing';
       </nb-layout-column>
     </nb-layout>
   `,
+  standalone: false,
 })
 export class LayoutWithScrollModeComponent {
   contentHeight: string = '200vh';

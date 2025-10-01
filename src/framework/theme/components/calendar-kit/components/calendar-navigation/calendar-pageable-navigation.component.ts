@@ -19,6 +19,7 @@ import { NbLayoutDirectionService } from '../../../../services/direction.service
       <nb-icon [icon]="isLtr ? 'chevron-right-outline' : 'chevron-left-outline'" pack="nebular-essentials"></nb-icon>
     </button>
   `,
+  standalone: false,
 })
 export class NbCalendarPageableNavigationComponent<D> {
   @Output() next = new EventEmitter<void>();

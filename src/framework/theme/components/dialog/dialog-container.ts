@@ -18,6 +18,7 @@ import { NbDialogConfig } from './dialog-config';
 @Component({
   selector: 'nb-dialog-container',
   template: '<ng-template nbPortalOutlet></ng-template>',
+  standalone: false,
 })
 export class NbDialogContainerComponent implements OnInit, OnDestroy {
   // TODO static must be false as of Angular 9.0.0, issues/1514

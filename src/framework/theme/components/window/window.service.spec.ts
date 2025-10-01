@@ -16,6 +16,7 @@ const WINDOW_CONTENT = 'window content';
 @Component({
   selector: 'nb-test-window',
   template: WINDOW_CONTENT,
+  standalone: false,
 })
 class NbTestWindowComponent {}
 
@@ -26,6 +27,7 @@ class NbTestWindowComponent {}
       <p>Static text: {{ data.text }}</p>
     </ng-template>
   `,
+  standalone: false,
 })
 class NbTestWindowWithTemplateComponent {
   @ViewChild('contentTemplate') contentTemplate: TemplateRef<any>;
@@ -44,6 +46,7 @@ class NbTestWindowWithTemplateComponent {
   selector: 'nb-test-window-with-component',
   template: `<p id="window-content">window content {{ componentInput }}</p>
     <p></p>`,
+  standalone: false,
 })
 export class TestWindowComponent {}
 

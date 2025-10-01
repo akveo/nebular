@@ -9,22 +9,22 @@
 
 @mixin nb-sidebar-theme() {
   nb-sidebar {
-    background-color: nb-theme(sidebar-background-color);
-    box-shadow: nb-theme(sidebar-shadow);
-    color: nb-theme(sidebar-text-color);
-    font-family: nb-theme(sidebar-text-font-family);
-    font-size: nb-theme(sidebar-text-font-size);
-    font-weight: nb-theme(sidebar-text-font-weight);
-    line-height: nb-theme(sidebar-text-line-height);
-    width: nb-theme(sidebar-width);
+    background-color: var(--sidebar-background-color);
+    box-shadow: var(--sidebar-shadow);
+    color: var(--sidebar-text-color);
+    font-family: var(--sidebar-text-font-family);
+    font-size: var(--sidebar-text-font-size);
+    font-weight: var(--sidebar-text-font-weight);
+    line-height: var(--sidebar-text-line-height);
+    width: var(--sidebar-width);
 
     .main-container {
-      height: nb-theme(sidebar-height);
-      width: nb-theme(sidebar-width);
+      height: var(--sidebar-height);
+      width: var(--sidebar-width);
     }
 
     .scrollable {
-      padding: nb-theme(sidebar-padding);
+      padding: var(--sidebar-padding);
       position: relative;
 
       -webkit-transform: translate3d(0, 0, 0); // ios optimisation
@@ -34,9 +34,9 @@
       }
 
       @include nb-scrollbars(
-        nb-theme(sidebar-scrollbar-color),
-        nb-theme(sidebar-scrollbar-background-color),
-        nb-theme(sidebar-scrollbar-width)
+        var(--sidebar-scrollbar-color),
+        var(--sidebar-scrollbar-background-color),
+        var(--sidebar-scrollbar-width)
       );
     }
 
@@ -63,13 +63,13 @@
     }
 
     &.compacted {
-      width: nb-theme(sidebar-width-compact);
+      width: var(--sidebar-width-compact);
       .main-container {
-        width: nb-theme(sidebar-width-compact);
+        width: var(--sidebar-width-compact);
       }
 
       nb-menu {
-        width: nb-theme(sidebar-width-compact);
+        width: var(--sidebar-width-compact);
 
         .menu-item a.active {
           position: relative;
@@ -82,7 +82,7 @@
             top: 0;
             height: 100%;
             width: 4px;
-            background: nb-theme(sidebar-menu-item-highlight-color);
+            background: var(--sidebar-menu-item-highlight-color);
           }
         }
 
@@ -120,41 +120,41 @@
       }
       // we need to pull the content
       &.left.fixed ~ .content {
-        margin-left: nb-theme(sidebar-width-compact);
+        margin-left: var(--sidebar-width-compact);
       }
 
       &.fixed.right ~ .content {
         margin-left: 0;
-        margin-right: nb-theme(sidebar-width-compact);
+        margin-right: var(--sidebar-width-compact);
       }
 
       &.left.fixed ~ .content.center {
-        padding-left: nb-theme(sidebar-width-compact);
+        padding-left: var(--sidebar-width-compact);
       }
 
       &.fixed.right ~ .content.center {
         padding-left: 0;
-        padding-right: nb-theme(sidebar-width-compact);
+        padding-right: var(--sidebar-width-compact);
       }
 
       &.start.fixed ~ .content {
-        @include nb-ltr(margin-left, nb-theme(sidebar-width-compact));
-        @include nb-rtl(margin-right, nb-theme(sidebar-width-compact));
+        @include nb-ltr(margin-left, var(--sidebar-width-compact));
+        @include nb-rtl(margin-right, var(--sidebar-width-compact));
       }
 
       &.fixed.end ~ .content {
-        @include nb-ltr(margin-right, nb-theme(sidebar-width-compact));
-        @include nb-rtl(margin-left, nb-theme(sidebar-width-compact));
+        @include nb-ltr(margin-right, var(--sidebar-width-compact));
+        @include nb-rtl(margin-left, var(--sidebar-width-compact));
       }
 
       &.start.fixed ~ .content.center {
-        @include nb-ltr(padding-left, nb-theme(sidebar-width-compact));
-        @include nb-rtl(padding-right, nb-theme(sidebar-width-compact));
+        @include nb-ltr(padding-left, var(--sidebar-width-compact));
+        @include nb-rtl(padding-right, var(--sidebar-width-compact));
       }
 
       &.fixed.end ~ .content.center {
-        @include nb-ltr(padding-right, nb-theme(sidebar-width-compact));
-        @include nb-rtl(padding-left, nb-theme(sidebar-width-compact));
+        @include nb-ltr(padding-right, var(--sidebar-width-compact));
+        @include nb-rtl(padding-left, var(--sidebar-width-compact));
       }
     }
 
@@ -169,24 +169,24 @@
     }
 
     &.expanded {
-      width: nb-theme(sidebar-width);
+      width: var(--sidebar-width);
       > .scrollable {
-        width: nb-theme(sidebar-width);
+        width: var(--sidebar-width);
       }
     }
 
     nb-sidebar-header {
-      padding: nb-theme(sidebar-padding);
-      height: nb-theme(sidebar-header-height);
+      padding: var(--sidebar-padding);
+      height: var(--sidebar-header-height);
     }
 
     nb-sidebar-footer {
-      padding: nb-theme(sidebar-padding);
-      height: nb-theme(sidebar-footer-height);
+      padding: var(--sidebar-padding);
+      height: var(--sidebar-footer-height);
     }
 
     nb-menu {
-      margin: 0 calc(#{nb-theme(sidebar-padding)} * -1) calc(#{nb-theme(sidebar-padding)} * -1);
+      margin: 0 calc(#{var(--sidebar-padding)} * -1) calc(#{var(--sidebar-padding)} * -1);
     }
   }
 }

@@ -9,6 +9,7 @@ import { SafeStyle } from '@angular/platform-browser';
     </ng-container>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class NbChatAvatarComponent {
   @Input() initials: string;

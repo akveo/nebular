@@ -49,6 +49,7 @@ import { NbIconConfig } from '../icon/icon.component';
       </nb-badge>
     </ng-template>
   `,
+  standalone: false,
 })
 export class NbActionComponent {
   /**
@@ -206,6 +207,7 @@ export class NbActionComponent {
   selector: 'nb-actions',
   styleUrls: ['./actions.component.scss'],
   template: ` <ng-content select="nb-action"></ng-content> `,
+  standalone: false,
 })
 export class NbActionsComponent {
   /**

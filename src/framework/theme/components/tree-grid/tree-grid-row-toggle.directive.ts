@@ -12,6 +12,7 @@ import { NbTreeGridCellDirective } from './tree-grid-cell.component';
  */
 @Directive({
   selector: '[nbTreeGridRowToggle]',
+  standalone: false,
 })
 export class NbTreeGridRowToggleDirective {
   @HostListener('click', ['$event'])

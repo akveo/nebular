@@ -7,7 +7,7 @@
 @use '../../theme/styles/theming' as *;
 
 @mixin b-btn-shape($shape) {
-  border-radius: nb-theme(button-#{$shape}-border-radius);
+  border-radius: var(--button-#{$shape}-border-radius);
 }
 
 @mixin b-btn-shapes() {

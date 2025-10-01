@@ -4,6 +4,7 @@ import { Component, ViewContainerRef, ViewChild } from '@angular/core';
   selector: 'nb-windows-container',
   template: `<ng-container #viewContainerRef></ng-container>`,
   styleUrls: ['./windows-container.component.scss'],
+  standalone: false,
 })
 export class NbWindowsContainerComponent {
   // TODO static must be false as of Angular 9.0.0, issues/1514

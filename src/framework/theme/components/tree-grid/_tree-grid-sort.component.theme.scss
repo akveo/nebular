@@ -8,9 +8,9 @@
 
 @mixin nb-tree-grid-sort-header-theme() {
   .nb-tree-grid-header-change-sort-button {
-    background: nb-theme(tree-grid-sort-header-button-background-color);
-    border: nb-theme(tree-grid-sort-header-button-border);
-    padding: nb-theme(tree-grid-sort-header-button-padding);
+    background: var(--tree-grid-sort-header-button-background-color);
+    border: var(--tree-grid-sort-header-button-border);
+    padding: var(--tree-grid-sort-header-button-padding);
     color: inherit;
     font-size: inherit;
     font-weight: inherit;

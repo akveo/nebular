@@ -177,6 +177,7 @@ import { NB_DOCUMENT } from '../../theme.options';
       multi: true,
     },
   ],
+  standalone: false,
 })
 export class NbTimePickerDirective<D> implements AfterViewInit, ControlValueAccessor {
   /**

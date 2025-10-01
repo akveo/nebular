@@ -16,6 +16,7 @@ import { NbAuthResult } from '../../services/auth-result';
   styleUrls: ['./register.component.scss'],
   templateUrl: './register.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class NbRegisterComponent {
   redirectDelay: number = 0;

@@ -2,17 +2,17 @@
 
 @mixin nb-list-theme() {
   nb-list-item {
-    border-bottom: nb-theme(list-item-divider-width) nb-theme(list-item-divider-style) nb-theme(list-item-divider-color);
+    border-bottom: var(--list-item-divider-width) var(--list-item-divider-style) var(--list-item-divider-color);
 
-    color: nb-theme(list-item-text-color);
-    font-family: nb-theme(list-item-font-family);
-    font-size: nb-theme(list-item-font-size);
-    font-weight: nb-theme(list-item-font-weight);
-    line-height: nb-theme(list-item-line-height);
-    padding: nb-theme(list-item-padding);
+    color: var(--list-item-text-color);
+    font-family: var(--list-item-font-family);
+    font-size: var(--list-item-font-size);
+    font-weight: var(--list-item-font-weight);
+    line-height: var(--list-item-line-height);
+    padding: var(--list-item-padding);
 
     &:first-child {
-      border-top: nb-theme(list-item-divider-width) nb-theme(list-item-divider-style) nb-theme(list-item-divider-color);
+      border-top: var(--list-item-divider-width) var(--list-item-divider-style) var(--list-item-divider-color);
     }
   }
 }

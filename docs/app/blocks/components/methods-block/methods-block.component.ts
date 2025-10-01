@@ -45,6 +45,7 @@ import { NgdMetadataService } from '../../../@theme/services';
     </table>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class NgdMethodsBlockComponent {
   methods: any;

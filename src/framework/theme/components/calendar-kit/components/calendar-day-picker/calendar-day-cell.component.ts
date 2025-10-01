@@ -25,6 +25,7 @@ import { NbDateService } from '../../services/date.service';
     </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class NbCalendarDayCellComponent<D> implements NbCalendarCell<D, D> {
   @Input() date: D;

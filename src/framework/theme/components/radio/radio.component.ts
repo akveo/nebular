@@ -235,6 +235,7 @@ import { NbComponentOrCustomStatus } from '../component-status';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['./radio.component.scss'],
+  standalone: false,
 })
 export class NbRadioComponent {
   @Input()

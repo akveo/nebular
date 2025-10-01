@@ -14,6 +14,7 @@ import { NbAuthResult } from '../../services/auth-result';
 @Component({
   selector: 'nb-logout',
   templateUrl: './logout.component.html',
+  standalone: false,
 })
 export class NbLogoutComponent implements OnInit {
   redirectDelay: number = 0;

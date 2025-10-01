@@ -23,6 +23,7 @@ import { combineLatest, Subject, Observable } from 'rxjs';
     </ng-container>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class NgdPageTocComponent implements OnDestroy {
   private destroy$ = new Subject<void>();
@@ -48,10 +49,7 @@ export class NgdPageTocComponent implements OnDestroy {
       });
   }
 
-  constructor(
-    private activatedRoute: ActivatedRoute,
-    private cd: ChangeDetectorRef,
-  ) {}
+  constructor(private activatedRoute: ActivatedRoute, private cd: ChangeDetectorRef) {}
 
   ngOnDestroy() {
     this.destroy$.next();

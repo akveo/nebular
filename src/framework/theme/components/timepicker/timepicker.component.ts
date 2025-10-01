@@ -42,6 +42,7 @@ interface NbTimePartOption {
   styleUrls: ['./timepicker.component.scss'],
   exportAs: 'nbTimepicker',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class NbTimePickerComponent<D> implements OnChanges {
   protected blur$: Subject<void> = new Subject<void>();

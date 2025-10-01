@@ -14,6 +14,7 @@ import { Subject } from 'rxjs';
   styleUrls: ['./theme-block.component.scss'],
   templateUrl: './theme-block.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class NgdThemeComponent implements OnInit, OnDestroy {
   searchControl = new FormControl();

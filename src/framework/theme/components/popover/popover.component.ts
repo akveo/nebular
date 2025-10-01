@@ -38,6 +38,7 @@ import {
     <span class="arrow"></span>
     <nb-overlay-container></nb-overlay-container>
   `,
+  standalone: false,
 })
 export class NbPopoverComponent extends NbPositionedContainerComponent implements NbRenderableContainer {
   @ViewChild(NbOverlayContainerComponent) overlayContainer: NbOverlayContainerComponent;

@@ -35,6 +35,7 @@ import { convertToBoolProperty, NbBooleanInput } from '../helpers';
     <ng-content select="nb-accordion-item-body"></ng-content>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class NbAccordionItemComponent implements OnInit, OnChanges, OnDestroy {
   /**

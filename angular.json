@@ -20,17 +20,21 @@
       "prefix": "npg",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/playground",
+            "outputPath": {
+              "base": "dist/playground"
+            },
             "index": "src/index.html",
-            "main": "src/main.ts",
-            "polyfills": "src/polyfills.ts",
+            "polyfills": [
+              "src/polyfills.ts"
+            ],
             "tsConfig": "src/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": ["src/favicon.ico", "src/assets"],
             "styles": [],
-            "scripts": []
+            "scripts": [],
+            "browser": "src/main.ts"
           },
           "configurations": {
             "production": {
@@ -73,9 +77,7 @@
               "outputHashing": "all"
             },
             "development": {
-              "buildOptimizer": false,
               "optimization": false,
-              "vendorChunk": true,
               "extractLicenses": false,
               "sourceMap": true,
               "namedChunks": true
@@ -173,12 +175,15 @@
       "prefix": "ngd",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/docs",
+            "outputPath": {
+              "base": "dist/docs"
+            },
             "index": "docs/index.html",
-            "main": "docs/main.ts",
-            "polyfills": "docs/polyfills.ts",
+            "polyfills": [
+              "docs/polyfills.ts"
+            ],
             "tsConfig": "docs/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
@@ -206,7 +211,10 @@
               "docs/app/@theme/styles/styles.scss"
             ],
             "scripts": ["node_modules/pace-js/pace.min.js", "node_modules/docsearch.js/dist/cdn/docsearch.min.js"],
-            "allowedCommonJsDependencies": ["highlight.js"]
+            "allowedCommonJsDependencies": [
+              "highlight.js"
+            ],
+            "browser": "docs/main.ts"
           },
           "configurations": {
             "production": {
@@ -229,9 +237,7 @@
               "outputHashing": "all"
             },
             "development": {
-              "buildOptimizer": false,
               "optimization": false,
-              "vendorChunk": true,
               "extractLicenses": false,
               "sourceMap": true,
               "namedChunks": true

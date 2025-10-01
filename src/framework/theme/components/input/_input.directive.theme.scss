@@ -27,9 +27,9 @@
 }
 
 @mixin nb-input-core-theme() {
-  border-style: nb-theme(input-border-style);
-  border-width: nb-theme(input-border-width);
-  font-family: nb-theme(input-text-font-family);
+  border-style: var(--input-border-style);
+  border-width: var(--input-border-width);
+  font-family: var(--input-text-font-family);
   appearance: none; // removes inner shadow on iOS
 
   &.nb-transition {
@@ -37,7 +37,7 @@
   }
 
   &::placeholder {
-    font-family: nb-theme(input-placeholder-text-font-family);
+    font-family: var(--input-placeholder-text-font-family);
     text-overflow: ellipsis;
   }
 

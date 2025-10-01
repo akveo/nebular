@@ -12,6 +12,7 @@ import { NbOverlayContainerComponent, NbPositionedContainerComponent } from '../
 @Component({
   selector: 'nb-datepicker-container',
   template: ` <nb-overlay-container></nb-overlay-container> `,
+  standalone: false,
 })
 export class NbDatepickerContainerComponent extends NbPositionedContainerComponent {
   // TODO static must be false as of Angular 9.0.0, issues/1514

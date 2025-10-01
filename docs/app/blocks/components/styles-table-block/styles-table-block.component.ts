@@ -33,6 +33,7 @@ import { NgdStylesService } from '../../../@theme/services';
     </table>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class NgdStylesTableBlockComponent {
   classStyles: any;

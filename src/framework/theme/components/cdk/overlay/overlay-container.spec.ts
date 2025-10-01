@@ -4,6 +4,7 @@ import { NbComponentPortal, NbOverlayContainerComponent, NbOverlayModule } from 
 
 @Component({
   template: ` <nb-overlay-container></nb-overlay-container> `,
+  standalone: false,
 })
 export class NbOverlayContainerTestComponent {
   @ViewChild(NbOverlayContainerComponent) overlayContainer: NbOverlayContainerComponent;
@@ -11,6 +12,7 @@ export class NbOverlayContainerTestComponent {
 
 @Component({
   template: `{{ contextProperty }}`,
+  standalone: false,
 })
 export class NbOverlayTestComponent implements OnInit {
   contextProperty;

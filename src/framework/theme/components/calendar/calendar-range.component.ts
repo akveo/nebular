@@ -184,6 +184,7 @@ export interface NbCalendarRange<D> {
       [firstDayOfWeek]="firstDayOfWeek"
     ></nb-base-calendar>
   `,
+  standalone: false,
 })
 export class NbCalendarRangeComponent<D> {
   /**

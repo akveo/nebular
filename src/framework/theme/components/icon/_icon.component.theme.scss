@@ -8,19 +8,19 @@
 
 @mixin nb-icon-theme() {
   nb-icon {
-    font-size: nb-theme(icon-font-size);
-    line-height: nb-theme(icon-line-height);
-    width: nb-theme(icon-width);
-    height: nb-theme(icon-height);
+    font-size: var(--icon-font-size);
+    line-height: var(--icon-line-height);
+    width: var(--icon-width);
+    height: var(--icon-height);
   }
 
   nb-icon svg {
-    vertical-align: nb-theme(icon-svg-vertical-align);
+    vertical-align: var(--icon-svg-vertical-align);
   }
 
   @each $status in nb-get-statuses() {
     nb-icon.status-#{$status} {
-      color: nb-theme(icon-#{$status}-color);
+      color: var(--icon-#{$status}-color);
     }
   }
 }

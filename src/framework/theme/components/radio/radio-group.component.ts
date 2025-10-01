@@ -80,6 +80,7 @@ import { NbRadioComponent } from './radio.component';
     },
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class NbRadioGroupComponent implements AfterContentInit, OnDestroy, ControlValueAccessor {
   protected destroy$ = new Subject<void>();

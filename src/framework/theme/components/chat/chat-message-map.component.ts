@@ -22,6 +22,7 @@ import { NbChatOptions } from './chat.options';
     ></nb-chat-message-file>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class NbChatMessageMapComponent {
   /**

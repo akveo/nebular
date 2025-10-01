@@ -531,6 +531,7 @@ import { NbButton } from './base-button';
   template: ` <ng-content></ng-content> `,
   providers: [{ provide: NbButton, useExisting: NbButtonComponent }],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class NbButtonComponent extends NbButton implements AfterViewInit {
   /**

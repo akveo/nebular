@@ -33,6 +33,7 @@ import { Subject } from 'rxjs';
       </nb-layout-column>
     </nb-layout>
   `,
+  standalone: false,
 })
 export class NbAuthComponent implements OnDestroy {
   private destroy$ = new Subject<void>();

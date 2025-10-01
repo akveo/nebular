@@ -9,6 +9,7 @@ import { NgdExampleView } from '../../enum.example-view';
   styleUrls: ['./tabbed-example-block.component.scss'],
   templateUrl: './tabbed-example-block.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class NgdTabbedExampleBlockComponent {
   @Input() hasViewSwitch = false;
@@ -24,10 +25,7 @@ export class NgdTabbedExampleBlockComponent {
     });
   }
 
-  constructor(
-    private codeLoader: NgdCodeLoaderService,
-    private cd: ChangeDetectorRef,
-  ) {}
+  constructor(private codeLoader: NgdCodeLoaderService, private cd: ChangeDetectorRef) {}
 
   switchToLiveView() {
     this.changeView.emit(NgdExampleView.LIVE);

@@ -12,49 +12,49 @@
 
 @mixin nb-select-theme() {
   nb-select .select-button {
-    min-width: nb-theme(select-min-width);
-    cursor: nb-theme(select-cursor);
-    font-family: nb-theme(select-text-font-family);
+    min-width: var(--select-min-width);
+    cursor: var(--select-cursor);
+    font-family: var(--select-text-font-family);
 
     &.placeholder {
-      font-family: nb-theme(select-placeholder-text-font-family);
+      font-family: var(--select-placeholder-text-font-family);
     }
     &:focus {
       outline: none;
     }
     &[disabled] {
-      cursor: nb-theme(select-disabled-cursor);
+      cursor: var(--select-disabled-cursor);
     }
   }
 
   @each $size in nb-get-sizes() {
     nb-select.size-#{$size} {
       .select-button {
-        font-size: nb-theme(select-#{$size}-text-font-size);
-        font-weight: nb-theme(select-#{$size}-text-font-weight);
-        line-height: nb-theme(select-#{$size}-text-line-height);
+        font-size: var(--select-#{$size}-text-font-size);
+        font-weight: var(--select-#{$size}-text-font-weight);
+        line-height: var(--select-#{$size}-text-line-height);
 
         &.placeholder {
-          font-size: nb-theme(select-#{$size}-placeholder-text-font-size);
-          font-weight: nb-theme(select-#{$size}-placeholder-text-font-weight);
+          font-size: var(--select-#{$size}-placeholder-text-font-size);
+          font-weight: var(--select-#{$size}-placeholder-text-font-weight);
         }
 
         &.empty::before {
           content: ' ';
           display: block;
-          height: nb-theme(select-#{$size}-text-line-height);
+          height: var(--select-#{$size}-text-line-height);
         }
       }
 
       &:not(.full-width) {
-        max-width: nb-theme(select-#{$size}-max-width);
+        max-width: var(--select-#{$size}-max-width);
       }
     }
   }
 
   @each $shape in nb-get-shapes() {
     nb-select.shape-#{$shape} .select-button {
-      border-radius: nb-theme(select-#{$shape}-border-radius);
+      border-radius: var(--select-#{$shape}-border-radius);
     }
   }
 

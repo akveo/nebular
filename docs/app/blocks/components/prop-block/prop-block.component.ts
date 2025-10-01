@@ -33,6 +33,7 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
     </table>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class NgdPropBlockComponent {
   @Input() properties = [];

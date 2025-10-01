@@ -36,6 +36,7 @@ export type NbSidebarResponsiveState = 'mobile' | 'tablet' | 'pc';
 @Component({
   selector: 'nb-sidebar-header',
   template: ` <ng-content></ng-content> `,
+  standalone: false,
 })
 export class NbSidebarHeaderComponent {}
 
@@ -48,6 +49,7 @@ export class NbSidebarHeaderComponent {}
 @Component({
   selector: 'nb-sidebar-footer',
   template: ` <ng-content></ng-content> `,
+  standalone: false,
 })
 export class NbSidebarFooterComponent {}
 
@@ -136,6 +138,7 @@ export class NbSidebarFooterComponent {}
     </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class NbSidebarComponent implements OnInit, OnDestroy {
   protected readonly responsiveValueChange$: Subject<boolean> = new Subject<boolean>();

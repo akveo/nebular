@@ -74,6 +74,7 @@ import { Component, Input, HostBinding } from '@angular/core';
       </div>
     </div>
   `,
+  standalone: false,
 })
 export class NbFlipCardComponent {
   /**

@@ -8,26 +8,26 @@
 
 @mixin nb-popover-theme {
   nb-popover {
-    $arrow-size: nb-theme(popover-arrow-size);
+    $arrow-size: var(--popover-arrow-size);
 
-    border: nb-theme(popover-border-width) solid nb-theme(popover-border-color);
-    border-radius: nb-theme(popover-border-radius);
-    background: nb-theme(popover-background-color);
-    box-shadow: nb-theme(popover-shadow);
-    color: nb-theme(popover-text-color);
+    border: var(--popover-border-width) solid var(--popover-border-color);
+    border-radius: var(--popover-border-radius);
+    background: var(--popover-background-color);
+    box-shadow: var(--popover-shadow);
+    color: var(--popover-text-color);
 
     .primitive-overlay {
-      font-family: nb-theme(popover-text-font-family);
-      font-size: nb-theme(popover-text-font-size);
-      font-weight: nb-theme(popover-text-font-weight);
-      line-height: nb-theme(popover-text-line-height);
-      padding: nb-theme(popover-padding);
+      font-family: var(--popover-text-font-family);
+      font-size: var(--popover-text-font-size);
+      font-weight: var(--popover-text-font-weight);
+      line-height: var(--popover-text-line-height);
+      padding: var(--popover-padding);
     }
 
     .arrow {
       border-left: $arrow-size solid transparent;
       border-right: $arrow-size solid transparent;
-      border-bottom: $arrow-size solid nb-theme(popover-border-color);
+      border-bottom: $arrow-size solid var(--popover-border-color);
 
       &::after {
         position: absolute;
@@ -38,7 +38,7 @@
         left: calc(50% - #{$arrow-size});
         border-left: $arrow-size solid transparent;
         border-right: $arrow-size solid transparent;
-        border-bottom: $arrow-size solid nb-theme(popover-background-color);
+        border-bottom: $arrow-size solid var(--popover-background-color);
         clip-path: inset(0 0 2px);
       }
     }

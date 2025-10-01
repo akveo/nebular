@@ -8,50 +8,50 @@
 
 @mixin button-ghost() {
   [nbButton].appearance-ghost {
-    background-color: nb-theme(button-ghost-background-color);
-    border-color: nb-theme(button-ghost-border-color);
-    border-style: nb-theme(button-ghost-border-style);
-    border-width: nb-theme(button-ghost-border-width);
-    text-transform: nb-theme(button-ghost-text-transform);
+    background-color: var(--button-ghost-background-color);
+    border-color: var(--button-ghost-border-color);
+    border-style: var(--button-ghost-border-style);
+    border-width: var(--button-ghost-border-width);
+    text-transform: var(--button-ghost-text-transform);
 
     &:focus {
-      $inset-shadow: nb-theme(button-ghost-focus-inset-shadow-length);
-      @include nb-outline(nb-theme(button-outline-width), nb-theme(button-outline-color), $inset-shadow);
+      $inset-shadow: var(--button-ghost-focus-inset-shadow-length);
+      @include nb-outline(var(--button-outline-width), var(--button-outline-color), $inset-shadow);
     }
 
     @each $size in nb-get-sizes() {
       &.size-#{$size} {
-        padding: nb-theme(button-ghost-#{$size}-padding);
+        padding: var(--button-ghost-#{$size}-padding);
       }
     }
 
     @each $status in nb-get-statuses() {
       &.status-#{$status} {
-        color: nb-theme(button-ghost-#{$status}-text-color);
+        color: var(--button-ghost-#{$status}-text-color);
 
         &:focus {
-          background-color: nb-theme(button-ghost-#{$status}-focus-background-color);
-          border-color: nb-theme(button-ghost-#{$status}-focus-border-color);
-          color: nb-theme(button-ghost-#{$status}-focus-text-color);
+          background-color: var(--button-ghost-#{$status}-focus-background-color);
+          border-color: var(--button-ghost-#{$status}-focus-border-color);
+          color: var(--button-ghost-#{$status}-focus-text-color);
         }
 
         &:hover {
-          background-color: nb-theme(button-ghost-#{$status}-hover-background-color);
-          border-color: nb-theme(button-ghost-#{$status}-hover-border-color);
-          color: nb-theme(button-ghost-#{$status}-hover-text-color);
+          background-color: var(--button-ghost-#{$status}-hover-background-color);
+          border-color: var(--button-ghost-#{$status}-hover-border-color);
+          color: var(--button-ghost-#{$status}-hover-text-color);
         }
 
         &:active {
-          background-color: nb-theme(button-ghost-#{$status}-active-background-color);
-          border-color: nb-theme(button-ghost-#{$status}-active-border-color);
-          color: nb-theme(button-ghost-#{$status}-active-text-color);
+          background-color: var(--button-ghost-#{$status}-active-background-color);
+          border-color: var(--button-ghost-#{$status}-active-border-color);
+          color: var(--button-ghost-#{$status}-active-text-color);
         }
 
         &[disabled],
         &.btn-disabled {
-          background-color: nb-theme(button-ghost-#{$status}-disabled-background-color);
-          border-color: nb-theme(button-ghost-#{$status}-disabled-border-color);
-          color: nb-theme(button-ghost-#{$status}-disabled-text-color);
+          background-color: var(--button-ghost-#{$status}-disabled-background-color);
+          border-color: var(--button-ghost-#{$status}-disabled-border-color);
+          color: var(--button-ghost-#{$status}-disabled-text-color);
         }
       }
     }

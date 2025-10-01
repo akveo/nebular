@@ -29,6 +29,7 @@ import {
       <nb-menu [items]="menuItems"></nb-menu>
     </nb-sidebar>
   `,
+  standalone: false,
 })
 export class SidebarExpandTestComponent {
   menuItems: NbMenuItem[] = [

@@ -10,15 +10,15 @@
 
 @mixin nb-tag-theme() {
   nb-tag {
-    border-style: nb-theme(tag-border-style);
-    border-width: nb-theme(tag-border-width);
-    border-radius: nb-theme(tag-border-radius);
+    border-style: var(--tag-border-style);
+    border-width: var(--tag-border-width);
+    border-radius: var(--tag-border-radius);
 
     display: inline-flex;
     align-items: center;
 
-    font-family: nb-theme(tag-text-font-family);
-    text-transform: nb-theme(tag-text-transform);
+    font-family: var(--tag-text-font-family);
+    text-transform: var(--tag-text-transform);
 
     cursor: default;
 
@@ -28,10 +28,10 @@
 
     @each $size in nb-get-sizes() {
       &.size-#{$size} {
-        font-size: nb-theme(tag-#{$size}-text-font-size);
-        font-weight: nb-theme(tag-#{$size}-text-font-weight);
-        line-height: nb-theme(tag-#{$size}-text-line-height);
-        padding: nb-theme(tag-#{$size}-padding);
+        font-size: var(--tag-#{$size}-text-font-size);
+        font-weight: var(--tag-#{$size}-text-font-weight);
+        line-height: var(--tag-#{$size}-text-line-height);
+        padding: var(--tag-#{$size}-padding);
       }
     }
 
@@ -44,15 +44,15 @@
 
     @each $size in nb-get-sizes() {
       &.size-#{$size} {
-        font-size: nb-theme(tag-#{$size}-text-line-height);
+        font-size: var(--tag-#{$size}-text-line-height);
 
         @include nb-ltr() {
-          margin-left: nb-theme(tag-#{$size}-close-offset);
-          margin-right: nb-theme-var-negative(nb-theme(tag-#{$size}-close-offset));
+          margin-left: var(--tag-#{$size}-close-offset);
+          margin-right: nb-theme-var-negative(var(--tag-#{$size}-close-offset));
         }
         @include nb-rtl() {
-          margin-right: nb-theme(tag-#{$size}-close-offset);
-          margin-left: nb-theme-var-negative(nb-theme(tag-#{$size}-close-offset));
+          margin-right: var(--tag-#{$size}-close-offset);
+          margin-left: nb-theme-var-negative(var(--tag-#{$size}-close-offset));
         }
       }
     }

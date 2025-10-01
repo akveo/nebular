@@ -13,26 +13,26 @@
     }
 
     .search {
-      background: nb-theme(search-background-color);
+      background: var(--search-background-color);
 
       span.info {
-        color: nb-theme(search-info-text-color);
-        font-family: nb-theme(search-info-text-font-family);
-        font-size: nb-theme(search-info-text-font-size);
-        font-weight: nb-theme(search-info-text-font-weight);
-        line-height: nb-theme(search-info-text-line-height);
+        color: var(--search-info-text-color);
+        font-family: var(--search-info-text-font-family);
+        font-size: var(--search-info-text-font-size);
+        font-weight: var(--search-info-text-font-weight);
+        line-height: var(--search-info-text-line-height);
       }
 
       input {
-        border-bottom: nb-theme(search-divider-width) nb-theme(search-divider-style) nb-theme(search-divider-color);
-        color: nb-theme(search-text-color);
-        font-family: nb-theme(search-text-font-family);
-        font-size: nb-theme(search-text-font-size);
-        font-weight: nb-theme(search-text-font-weight);
-        line-height: nb-theme(search-text-line-height);
+        border-bottom: var(--search-divider-width) var(--search-divider-style) var(--search-divider-color);
+        color: var(--search-text-color);
+        font-family: var(--search-text-font-family);
+        font-size: var(--search-text-font-size);
+        font-weight: var(--search-text-font-weight);
+        line-height: var(--search-text-line-height);
 
         &::placeholder {
-          color: nb-theme(search-placeholder-text-color);
+          color: var(--search-placeholder-text-color);
         }
 
         &::-ms-clear {
@@ -43,52 +43,52 @@
 
     &.rotate-layout {
       opacity: 0;
-      background: nb-theme(search-background-color);
+      background: var(--search-background-color);
     }
 
     &.modal-zoomin {
       .search::before,
       .search::after {
-        border: 1.5rem solid nb-theme(search-extra-background-color);
+        border: 1.5rem solid var(--search-extra-background-color);
       }
     }
 
     &.modal-half {
       .form-wrapper {
-        background: nb-theme(search-background-color);
+        background: var(--search-background-color);
       }
       .search::before {
-        background: nb-theme(search-extra-background-color);
+        background: var(--search-extra-background-color);
       }
     }
 
     &.modal-drop {
       .form-content::after {
-        background: nb-theme(search-divider-color);
+        background: var(--search-divider-color);
       }
       .search::before {
-        background: nb-theme(search-background-color);
+        background: var(--search-background-color);
       }
     }
 
     &.curtain {
       .search::after {
-        background: nb-theme(search-background-color);
+        background: var(--search-background-color);
       }
       .search {
-        background: nb-theme(search-background-color);
+        background: var(--search-background-color);
       }
     }
 
     &.column-curtain {
       &::before {
-        background: nb-theme(search-background-color);
+        background: var(--search-background-color);
       }
       &::after {
         background: transparent;
       }
       &.show::after {
-        background: nb-theme(search-extra-background-color);
+        background: var(--search-extra-background-color);
       }
     }
   }

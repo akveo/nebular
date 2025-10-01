@@ -214,6 +214,7 @@ import { convertToBoolProperty, NbBooleanInput } from '../helpers';
       (dateChange)="dateChange.emit($event)"
     ></nb-base-calendar>
   `,
+  standalone: false,
 })
 export class NbCalendarComponent<D> {
   /**

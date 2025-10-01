@@ -14,6 +14,7 @@ import { convertToBoolProperty, NbBooleanInput } from '../helpers';
       <ng-content></ng-content>
     </ng-template>
   `,
+  standalone: false,
 })
 export class NbStepComponent {
   protected stepper: NbStepperComponent;

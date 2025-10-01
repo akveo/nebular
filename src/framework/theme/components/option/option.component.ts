@@ -85,6 +85,7 @@ import { NbSelectComponent } from '../select/select.component';
     <nb-checkbox *ngIf="withCheckbox" [checked]="selected" [disabled]="disabled" aria-hidden="true"> </nb-checkbox>
     <ng-content></ng-content>
   `,
+  standalone: false,
 })
 export class NbOptionComponent<T = any> implements OnDestroy, AfterViewInit, NbFocusableOption, NbHighlightableOption {
   protected disabledByGroup = false;
