@@ -1,6 +1,6 @@
 {
   "name": "@guestway-io/nebular-security",
-  "version": "14.0.2",
+  "version": "14.0.26",
   "description": "@nebular/security",
   "author": "akveo",
   "license": "MIT",
@@ -26,9 +26,9 @@
     "nebular"
   ],
   "peerDependencies": {
-    "@angular/common": "^18.1.2",
-    "@angular/core": "^18.1.2",
-    "@angular/router": "^18.1.2",
+    "@angular/common": "^19.2.15",
+    "@angular/core": "^19.2.15",
+    "@angular/router": "^19.2.15",
     "rxjs": "^6.5.3 || ^7.4.0"
   },
   "dependencies": {

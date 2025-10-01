@@ -1,6 +1,6 @@
 {
   "name": "@guestway-io/nebular-theme",
-  "version": "14.0.25",
+  "version": "14.0.26",
   "description": "@nebular/theme",
   "author": "akveo",
   "license": "MIT",
@@ -21,11 +21,11 @@
     "nebular"
   ],
   "peerDependencies": {
-    "@angular/animations": "^18.1.2",
-    "@angular/cdk": "^18.1.2",
-    "@angular/common": "^18.1.2",
-    "@angular/core": "^18.1.2",
-    "@angular/router": "^18.1.2",
+    "@angular/animations": "^19.2.15",
+    "@angular/cdk": "^19.2.15",
+    "@angular/common": "^19.2.15",
+    "@angular/core": "^19.2.15",
+    "@angular/router": "^19.2.15",
     "rxjs": "^6.5.3 || ^7.4.0"
   },
   "dependencies": {
