@@ -1,4 +1,4 @@
-import { Component, NgModule, Injectable } from '@angular/core';
+import { Component, computed, Injectable, input, NgModule } from '@angular/core';
 import { fakeAsync, TestBed, tick } from '@angular/core/testing';
 
 import {
@@ -27,8 +27,23 @@ export class NbViewportRulerMockAdapter extends NbViewportRulerAdapter {
 })
 class NbTestDialogComponent {}
 
+@Component({
+  selector: 'nb-signal-input-test-dialog',
+  template: `
+    <span class="test-input">{{ value }}</span>
+    <span class="test-input-signal"> {{ number() }}</span>
+    <span class="test-computed-signal">{{ squared() }}</span>
+  `,
+  standalone: false,
+})
+class NbSignalInputTestDialogComponent {
+  value: number;
+  number = input<number>(0);
+  squared = computed(() => this.number() * this.number());
+}
+
 @NgModule({
-  declarations: [NbTestDialogComponent],
+  declarations: [NbTestDialogComponent, NbSignalInputTestDialogComponent],
 })
 class NbTestDialogModule {}
 
@@ -158,5 +173,41 @@ describe('dialog-service', () => {
     document.dispatchEvent(new KeyboardEvent('keyup', <any>{ keyCode: 27 }));
     tick(500);
     expect(queryBackdrop()).toBeTruthy();
+  }));
+
+  it('should display regular inputs', fakeAsync(() => {
+    const ref = dialog.open(NbSignalInputTestDialogComponent, {
+      context: {
+        value: 10,
+      },
+    });
+    tick();
+    const el = ref.componentRef.location.nativeElement.querySelector('.test-input');
+    expect(el).toBeTruthy();
+    expect(el.textContent.trim()).toEqual('10');
+  }));
+
+  it('should display signal inputs', fakeAsync(() => {
+    const ref = dialog.open(NbSignalInputTestDialogComponent, {
+      context: {
+        number: 10,
+      },
+    });
+    tick();
+    const el = ref.componentRef.location.nativeElement.querySelector('.test-input-signal');
+    expect(el).toBeTruthy();
+    expect(el.textContent.trim()).toEqual('10');
+  }));
+
+  it('should derive computed signals from input signals', fakeAsync(() => {
+    const ref = dialog.open(NbSignalInputTestDialogComponent, {
+      context: {
+        number: 10,
+      },
+    });
+    tick();
+    const el = ref.componentRef.location.nativeElement.querySelector('.test-computed-signal');
+    expect(el).toBeTruthy();
+    expect(el.textContent.trim()).toEqual('100');
   }));
 });
