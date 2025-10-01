@@ -4,5 +4,5 @@
 for dir in ./dist/*/
 do
     dir=${dir%*/}
-    npm publish --access=public dist/${dir##*/}/
+    npm publish --access=public --tag=v15-lts dist/${dir##*/}
 done
