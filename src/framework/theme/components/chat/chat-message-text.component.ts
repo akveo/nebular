@@ -16,7 +16,7 @@ import { ChangeDetectionStrategy, Component, Input, TemplateRef } from '@angular
       <ng-container *ngIf="preUserTemplateRef">
         <ng-container *ngTemplateOutlet="preUserTemplateRef; context: templateContext"></ng-container>
       </ng-container>
-      {{ sender }}
+      <span class="text-truncate">{{ sender }}</span>
       <time *ngIf="date">{{ date | date: dateFormat }}</time>
       <ng-container *ngIf="postUserTemplateRef">
         <ng-container *ngTemplateOutlet="postUserTemplateRef; context: templateContext"></ng-container>
