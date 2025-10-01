@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { Inject, Injectable, Injector, TemplateRef, Type } from '@angular/core';
+import { Inject, Injectable, Injector, signal, TemplateRef, Type } from '@angular/core';
 import { fromEvent as observableFromEvent } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
 
@@ -20,6 +20,7 @@ import { NB_DOCUMENT } from '../../theme.options';
 import { NB_DIALOG_CONFIG, NbDialogConfig } from './dialog-config';
 import { NbDialogRef } from './dialog-ref';
 import { NbDialogContainerComponent } from './dialog-container';
+import { SIGNAL } from '@angular/core/primitives/signals';
 
 
 /**
@@ -211,7 +212,15 @@ export class NbDialogService {
       dialogRef.componentRef = container.attachComponentPortal(portal);
 
       if (config.context) {
-        Object.assign(dialogRef.componentRef.instance, { ...config.context })
+        for (const [key, value] of Object.entries({...config.context})) {
+          const instance = dialogRef.componentRef.instance; 
+          const member = instance[key];
+          if (typeof member === 'function' && member[SIGNAL] !== undefined) {
+            instance[key] = signal(value).asReadonly();
+          } else {
+            instance[key] = value;
+          }
+        }
       }
     }
   }
