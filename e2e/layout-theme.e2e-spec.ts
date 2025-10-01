@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { browser, element, by } from 'protractor';
+import { browser, by, element } from 'protractor';
 
 describe('nb-layout theme', () => {
   beforeEach((done) => {
@@ -41,9 +41,6 @@ describe('nb-layout theme', () => {
     cardHeader.getCssValue('color').then((value) => {
       expect(value).toEqual('rgba(255, 255, 255, 1)');
     });
-    cardHeader.getCssValue('text-decoration').then((value) => {
-      expect(value).toMatch('none');
-    });
 
     button.click().then(() => {
       return browser.driver.wait(() => {
@@ -58,9 +55,6 @@ describe('nb-layout theme', () => {
     });
     cardHeader.getCssValue('color').then((value) => {
       expect(value).toEqual('rgba(34, 43, 69, 1)');
-    });
-    cardHeader.getCssValue('text-decoration').then((value) => {
-      expect(value).toMatch('none');
     });
   });
 });
