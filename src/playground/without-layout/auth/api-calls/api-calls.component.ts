@@ -7,9 +7,8 @@
 import { Component, Inject } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { Observable, of as observableOf } from 'rxjs';
-import { catchError, delay } from 'rxjs/operators';
-import { NbAuthResult, NbAuthService, NbAuthToken, NB_AUTH_OPTIONS } from '@nebular/auth';
+import { catchError, delay, Observable, of as observableOf } from 'rxjs';
+import { NbAuthService, NbAuthToken, NB_AUTH_OPTIONS } from '@nebular/auth';
 import { getDeepFromObject } from '../../../../framework/auth/helpers';
 import { Wine } from './wine';
 
@@ -72,7 +71,7 @@ export class PlaygroundApiCallsComponent {
       .pipe(
         delay(this.redirectDelay),
       )
-      .subscribe((result: NbAuthResult) => this.router.navigate(['/auth/login']));
+      .subscribe(() => this.router.navigate(['/auth/login']));
   }
 
   loadWines() {

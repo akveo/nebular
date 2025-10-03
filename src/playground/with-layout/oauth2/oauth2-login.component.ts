@@ -5,9 +5,8 @@
  */
 
 import { Component, OnDestroy } from '@angular/core';
-import { NbAuthOAuth2Token, NbAuthResult, NbAuthService, NbAuthToken } from '@nebular/auth';
-import { takeUntil } from 'rxjs/operators';
-import { Subject } from 'rxjs';
+import { NbAuthOAuth2Token, NbAuthService, NbAuthToken } from '@nebular/auth';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
     selector: 'nb-playground-auth',
@@ -49,14 +48,14 @@ export class OAuth2LoginComponent implements OnDestroy {
     this.authService
       .authenticate('google')
       .pipe(takeUntil(this.destroy$))
-      .subscribe((authResult: NbAuthResult) => {});
+      .subscribe(() => {});
   }
 
   logout() {
     this.authService
       .logout('google')
       .pipe(takeUntil(this.destroy$))
-      .subscribe((authResult: NbAuthResult) => {});
+      .subscribe(() => {});
   }
 
   ngOnDestroy(): void {

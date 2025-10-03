@@ -5,10 +5,9 @@
  */
 
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { map, Observable, of, startWith } from 'rxjs';
 
 import { FormControl } from '@angular/forms';
-import { map, startWith } from 'rxjs/operators';
 
 @Component({
     selector: 'nb-autocomplete-active-first',

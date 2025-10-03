@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
-import { of } from 'rxjs';
-
-import { map, switchMap, catchError } from 'rxjs/operators';
+import { map, of, switchMap, catchError } from 'rxjs';
 
 import {
   NbOAuth2AuthStrategy,

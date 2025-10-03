@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NbSearchService } from '@nebular/theme';
-import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged } from 'rxjs';
 
 @Component({
     selector: 'nb-search-with-input-event',
