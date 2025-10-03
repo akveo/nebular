@@ -1,8 +1,7 @@
 import { Component, ViewChildren, ElementRef, QueryList, OnInit, Inject, PLATFORM_ID, OnDestroy } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
-import { concat } from 'rxjs';
-import { take, toArray } from 'rxjs/operators';
+import { concat, take, toArray } from 'rxjs';
 import { NbListItemComponent, NbLayoutScrollService, NB_WINDOW, NbLayoutRulerService } from '@nebular/theme';
 import { NewsService } from './news.service';
 
@@ -100,14 +99,14 @@ export class InfiniteListPlaceholdersComponent implements OnInit, OnDestroy {
     this.restoreScrollPosition();
     this.startPage--;
     this.newsService.load(this.startPage, this.pageSize)
-      .subscribe(
-        news => {
+      .subscribe({
+        next: (news) => {
           this.topPlaceholders = [];
           this.news.unshift(...news);
           this.loadingPrevious = false;
         },
-        error => this.startPage++,
-      );
+        error: () => this.startPage++,
+      });
   }
 
   loadNext() {

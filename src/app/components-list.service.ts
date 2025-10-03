@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
-import { map, shareReplay, take } from 'rxjs/operators';
+import { BehaviorSubject, combineLatest, map, Observable, shareReplay, take } from 'rxjs';
 import { ComponentLink, PLAYGROUND_COMPONENTS } from './playground-components';
 
 @Injectable({

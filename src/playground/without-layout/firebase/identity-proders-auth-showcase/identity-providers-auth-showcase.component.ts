@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { catchError, share, take } from 'rxjs/operators';
-import { NbAuthResult, NbAuthService, NbAuthToken } from '@nebular/auth';
+import { catchError, Observable, of, share, take } from 'rxjs';
+import { NbAuthService, NbAuthToken } from '@nebular/auth';
 
 import { FirebaseAPIService } from '../firebase-api.service';
 
@@ -28,13 +27,13 @@ export class IdentityProvidersAuthShowcaseComponent {
   logout() {
     this.authService.logout('google')
       .pipe(take(1))
-      .subscribe((authResult: NbAuthResult) => {});
+      .subscribe(() => {});
   }
 
   loginWithGoogle() {
     this.authService.authenticate('google')
       .pipe(take(1))
-      .subscribe((authResult: NbAuthResult) => {});
+      .subscribe(() => {});
   }
 
   getData() {

@@ -1,7 +1,7 @@
 import { Component, ViewChildren, ElementRef, QueryList, OnInit, Inject, PLATFORM_ID, OnDestroy } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
-import { take, filter, map } from 'rxjs/operators';
+import { take, filter, map } from 'rxjs';
 import { NbListItemComponent, NbLayoutScrollService, NB_WINDOW } from '@nebular/theme';
 import { NewsService } from './news.service';
 

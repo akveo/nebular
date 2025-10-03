@@ -5,8 +5,7 @@
  */
 
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { takeUntil } from 'rxjs/operators';
-import { Subject } from 'rxjs';
+import { Subject, takeUntil } from 'rxjs';
 import { NbMenuService, NbMenuItem } from '@nebular/theme';
 
 @Component({

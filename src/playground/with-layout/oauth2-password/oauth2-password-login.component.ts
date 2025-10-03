@@ -74,7 +74,7 @@ export class OAuth2PasswordLoginComponent {
 
   logout() {
     this.authService.logout('password')
-      .subscribe((authResult: NbAuthResult) => {
+      .subscribe(() => {
         this.token = null;
       });
   }

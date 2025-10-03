@@ -5,9 +5,8 @@
  */
 
 import { Component, OnDestroy } from '@angular/core';
-import { NbAuthResult, NbAuthService, NbAuthToken } from '@nebular/auth';
-import { takeUntil } from 'rxjs/operators';
-import { Subject } from 'rxjs';
+import { NbAuthService, NbAuthToken } from '@nebular/auth';
+import { takeUntil, Subject } from 'rxjs';
 import { AuthAzureToken } from './azure-adb2c-auth-strategy';
 
 @Component({
@@ -50,14 +49,14 @@ export class AzureLoginComponent implements OnDestroy {
     this.authService
       .authenticate('azure')
       .pipe(takeUntil(this.destroy$))
-      .subscribe((authResult: NbAuthResult) => {});
+      .subscribe(() => {});
   }
 
   logout() {
     this.authService
       .logout('azure')
       .pipe(takeUntil(this.destroy$))
-      .subscribe((authResult: NbAuthResult) => {});
+      .subscribe(() => {});
   }
 
   ngOnDestroy(): void {

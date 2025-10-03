@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { tap } from 'rxjs/operators';
+import { tap } from 'rxjs';
 import { Router } from '@angular/router';
 import { NbAuthService } from '@nebular/auth';
 

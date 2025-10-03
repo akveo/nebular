@@ -109,14 +109,14 @@
            placeholder="Confirm Password"
            fullWidth
            fieldSize="large"
-           [status]="rePass.dirty ? (rePass.invalid || password.value != rePass.value  ? 'danger' : 'success') : 'basic'"
+           [status]="rePass.dirty ? (rePass.invalid || password.value !== rePass.value  ? 'danger' : 'success') : 'basic'"
            [required]="getConfigValue('forms.validation.password.required')"
            [attr.aria-invalid]="rePass.invalid && rePass.touched ? true : null">
     <ng-container *ngIf="rePass.invalid && rePass.touched">
       <p class="caption status-danger" *ngIf="rePass.errors?.required">
         Password confirmation is required!
       </p>
-      <p class="caption status-danger" *ngIf="password.value != rePass.value && !rePass.errors?.required">
+      <p class="caption status-danger" *ngIf="password.value !== rePass.value && !rePass.errors?.required">
         Password does not match the confirm password.
       </p>
     </ng-container>

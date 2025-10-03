@@ -5,8 +5,7 @@
  */
 
 import { ChangeDetectionStrategy, Component, ViewChild, OnInit } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, Observable, of } from 'rxjs';
 
 @Component({
     selector: 'nb-autocomplete-showcase',

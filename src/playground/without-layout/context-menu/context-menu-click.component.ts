@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { NB_WINDOW, NbMenuService } from '@nebular/theme';
-import { filter, map } from 'rxjs/operators';
+import { filter, map } from 'rxjs';
 
 @Component({
     selector: 'nb-context-menu-click',

@@ -7,8 +7,7 @@
 import { AfterViewInit, Component, ElementRef, Inject, OnDestroy, ViewChild } from '@angular/core';
 import { NavigationStart, Router } from '@angular/router';
 import { NB_DOCUMENT } from '@nebular/theme';
-import { fromEvent, Observable, Subject } from 'rxjs';
-import { filter, take, takeUntil } from 'rxjs/operators';
+import { filter, fromEvent, Observable, Subject, take, takeUntil } from 'rxjs';
 import { ComponentsListService } from './components-list.service';
 import { ComponentLink } from './playground-components';
 
