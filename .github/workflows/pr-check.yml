@@ -20,19 +20,6 @@ jobs:
           name: built-packages
           path: 'dist/'
           retention-days: 1
-  # Remove once Angular drop support for RxJS@6
-  build-packages-rxjs-7:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 20.19.5
-          cache: 'npm'
-      - run: |
-          npm ci
-          npm install rxjs@7.4.0
-          npm run build:packages
   build-docs:
     needs: build-packages
     runs-on: ubuntu-latest

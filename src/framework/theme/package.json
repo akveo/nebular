@@ -26,7 +26,7 @@
     "@angular/core": "^20.0.0",
     "@angular/router": "^20.0.0",
     "@angular/cdk": "^20.0.0",
-    "rxjs": "^6.5.3 || ^7.4.0"
+    "rxjs": "^7.8.0"
   },
   "dependencies": {
     "tslib": "^2.3.0"
