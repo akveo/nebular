@@ -5,7 +5,7 @@
  */
 
 import { Component, ElementRef, EventEmitter, Input, Output, QueryList, ViewChild, ViewChildren } from '@angular/core';
-import { ComponentFixture, fakeAsync, flush, TestBed } from '@angular/core/testing';
+import { ComponentFixture, discardPeriodicTasks, fakeAsync, flush, TestBed } from '@angular/core/testing';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -720,7 +720,7 @@ describe('Component: NbSelectComponent', () => {
   }));
 });
 
-describe('NbSelectComponent - falsy values', () => {
+describe('NbSelectWithAutocompleteComponent - falsy values', () => {
   let fixture: ComponentFixture<NbSelectWithFalsyOptionValuesComponent>;
   let testComponent: NbSelectWithFalsyOptionValuesComponent;
   let select: NbSelectComponent;
@@ -745,6 +745,7 @@ describe('NbSelectComponent - falsy values', () => {
 
     testComponent.noValueOption.onClick(eventMock);
     fixture.detectChanges();
+    flush();
 
     expect(select.selectionModel.length).toEqual(0);
   }));
@@ -755,6 +756,7 @@ describe('NbSelectComponent - falsy values', () => {
 
     testComponent.nullOption.onClick(eventMock);
     fixture.detectChanges();
+    flush();
 
     expect(select.selectionModel.length).toEqual(0);
   }));
@@ -765,6 +767,7 @@ describe('NbSelectComponent - falsy values', () => {
 
     testComponent.undefinedOption.onClick(eventMock);
     fixture.detectChanges();
+    flush();
 
     expect(select.selectionModel.length).toEqual(0);
   }));
@@ -775,6 +778,7 @@ describe('NbSelectComponent - falsy values', () => {
 
     testComponent.falseOption.onClick(eventMock);
     fixture.detectChanges();
+    flush();
 
     expect(select.selectionModel.length).toEqual(1);
   }));
@@ -785,6 +789,7 @@ describe('NbSelectComponent - falsy values', () => {
 
     testComponent.zeroOption.onClick(eventMock);
     fixture.detectChanges();
+    flush();
 
     expect(select.selectionModel.length).toEqual(1);
   }));
@@ -795,6 +800,7 @@ describe('NbSelectComponent - falsy values', () => {
 
     testComponent.emptyStringOption.onClick(eventMock);
     fixture.detectChanges();
+    flush();
 
     expect(select.selectionModel.length).toEqual(1);
   }));
@@ -805,6 +811,7 @@ describe('NbSelectComponent - falsy values', () => {
 
     testComponent.nanOption.onClick(eventMock);
     fixture.detectChanges();
+    flush();
 
     expect(select.selectionModel.length).toEqual(1);
   }));
@@ -858,7 +865,7 @@ describe('NbSelectComponent - falsy values', () => {
   }));
 });
 
-describe('NbSelectComponent - Triggers', () => {
+describe('NbSelectWithAutocompleteComponent - Triggers', () => {
   let fixture: ComponentFixture<BasicSelectTestComponent>;
   let selectComponent: NbSelectComponent;
   let triggerBuilderStub;
@@ -923,7 +930,7 @@ describe('NbSelectComponent - Triggers', () => {
   }));
 });
 
-describe('NbSelectComponent - Key manager', () => {
+describe('NbSelectWithAutocompleteComponent - Key manager', () => {
   let fixture: ComponentFixture<BasicSelectTestComponent>;
   let selectComponent: NbSelectComponent;
   let tabOutStub: Subject<void>;
@@ -1256,8 +1263,8 @@ describe('NbSelect - dynamic options', () => {
       <nb-layout-column>
         <nb-select-with-autocomplete
           [(ngModel)]="selectedValue"
-          [withOptionSearch]="true"
-          (optionSearchChange)="filterValue = $event"
+          [withOptionsAutocomplete]="true"
+          (optionsAutocompleteInputChange)="filterValue = $event"
           (selectOpen)="isOpened = true"
           (selectClose)="isOpened = false"
         >
@@ -1299,7 +1306,7 @@ describe('NbSelect - experimental search', () => {
   });
 
   it("should update search input and don't emit filterChange when value of select is changed", fakeAsync(() => {
-    const searchInput = testComponent.selectComponent.optionSearchInput.nativeElement;
+    const searchInput = testComponent.selectComponent.optionsAutocompleteInput.nativeElement;
 
     expect(searchInput.value).toEqual('');
     expect(testComponent.filterValue).toEqual('');
