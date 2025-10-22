@@ -23,7 +23,8 @@
           "builder": "@angular-devkit/build-angular:application",
           "options": {
             "outputPath": {
-              "base": "dist/playground"
+              "base": "dist/playground",
+              "browser": ""
             },
             "index": "src/index.html",
             "polyfills": ["src/polyfills.ts"],
@@ -178,7 +179,8 @@
           "builder": "@angular-devkit/build-angular:application",
           "options": {
             "outputPath": {
-              "base": "dist/docs"
+              "base": "dist/docs",
+              "browser": ""
             },
             "index": "docs/index.html",
             "polyfills": ["docs/polyfills.ts"],

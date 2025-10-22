@@ -38,7 +38,7 @@ export interface Version {
   await copyToBuildDir(MASTER_BRANCH_DIR, GH_PAGES_DIR);
   await checkoutVersion('gh-pages', GH_PAGES_DIR);
   const builtVersions: { hash; path }[] = await checkBuiltVersions();
-  log(`Built versions in gh-pages: ${builtVersions}`);
+  log(`Built versions in gh-pages: ${JSON.stringify(builtVersions)}`);
 
   log('Reading versions configuration');
   const config: Version[] = await import(DOCS_VERSIONS_PATH);
@@ -123,9 +123,9 @@ async function prepareVersion(version: Version, distDir: string, ghspaScript: st
   if (existInGhPages) {
     await copyFromGhPages(version, existInGhPages.path, distDir);
   } else {
-    await runCommand('npm ci', { cwd: projectDir });
+    await runCommand('npm ci --legacy-peer-deps', { cwd: projectDir });
     await addVersionNameToPackageJson(version.name, join(projectDir, 'package.json'));
-    await addVersionTs(version, join(projectDir, 'version.ts'));
+    await addVersionTs(version, join(projectDir, 'docs', 'version.ts'));
     await buildDocsApp(projectDir, version.path);
     await addCommitHash(join(OUT_DIR, FILE_WITH_HASH), projectDir);
     await copy(join(projectDir, OUT_DIR), distDir);
@@ -189,8 +189,8 @@ async function buildDocsApp(projectDir: string, baseHref: string) {
 }
 
 async function deploy(distDir: string) {
-  await runCommand(
-    `npx angular-cli-ghpages --dir . --repo=https://GH_TOKEN@github.com/${REPO_OWNER}/${REPO_NAME}.git`,
-    { cwd: distDir, showLog: true },
-  );
+  await runCommand(`npx angular-cli-ghpages -S --dir . --repo=https://github.com/${REPO_OWNER}/${REPO_NAME}.git`, {
+    cwd: distDir,
+    showLog: true,
+  });
 }
