@@ -13,9 +13,9 @@ jobs:
         with:
           node-version: 18.19.1
           cache: 'npm'
-      - run: npm ci
+      - run: npm ci --legacy-peer-deps
       - run: npm run build:packages
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v4
         with:
           name: built-packages
           path: 'dist/'
@@ -30,8 +30,8 @@ jobs:
           node-version: 18.19.1
           cache: 'npm'
       - run: |
-          npm ci
-          npm install rxjs@7.4.0
+          npm ci --legacy-peer-deps
+          npm install rxjs@7.4.0 --legacy-peer-deps
           npm run build:packages
   build-docs:
     needs: build-packages
@@ -41,7 +41,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 18.19.1
-      - run: npm ci
+      - run: npm ci --legacy-peer-deps
       - run: npm run docs:build
   build-playground:
     needs: build-packages
@@ -51,8 +51,8 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 18.19.1
-      - run: npm ci
-      - uses: actions/download-artifact@v2
+      - run: npm ci --legacy-peer-deps
+      - uses: actions/download-artifact@v4
         with:
           name: built-packages
           path: dist
@@ -75,7 +75,7 @@ jobs:
 #        with:
 #          node-version: '16'
 #      - run: npm ci
-#      - uses: actions/download-artifact@v2
+#      - uses: actions/download-artifact@v4
 #        with:
 #          name: built-packages
 #          path: dist
@@ -105,8 +105,8 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 18.19.1
-      - run: npm ci
-      - uses: actions/download-artifact@v2
+      - run: npm ci --legacy-peer-deps
+      - uses: actions/download-artifact@v4
         with:
           name: built-packages
           path: dist
@@ -137,11 +137,11 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 18.19.1
-      - uses: actions/download-artifact@v2
+      - uses: actions/download-artifact@v4
         with:
           name: built-packages
           path: packages-smoke/.lib/
-      - run: npm ci
+      - run: npm ci --legacy-peer-deps
         working-directory: packages-smoke
       - name: Build
         run: npm run build -- --configuration=production
