@@ -13,7 +13,7 @@ export async function runCommand(command: string, options?: RunCommandOptions) {
 
   try {
     console.log(`Running "${command}" in "${cwd}"`);
-    const { stdout, stderr } = await promisify(exec)(command, { cwd });
+    const { stdout, stderr } = await promisify(exec)(command, { cwd, maxBuffer: 5 * 1024 * 1024 });
 
     if (showLog && stdout) {
       console.log(stdout);

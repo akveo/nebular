@@ -16,4 +16,8 @@ jobs:
           node-version: 20.19.5
           cache: 'npm'
       - run: npm ci
+      - run: git config --global user.name "github-actions[bot]"
+      - run: git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
       - run: npm run docs:gh-pages
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
