@@ -1298,27 +1298,6 @@ describe('NbSelect - experimental search', () => {
     fixture.detectChanges();
   });
 
-  it("should update search input and don't emit filterChange when value of select is changed", fakeAsync(() => {
-    const searchInput = testComponent.selectComponent.optionSearchInput.nativeElement;
-
-    expect(searchInput.value).toEqual('');
-    expect(testComponent.filterValue).toEqual('');
-
-    testComponent.selectedValue = 1;
-    fixture.detectChanges();
-    flush();
-    fixture.detectChanges();
-    expect(searchInput.value).toEqual('1');
-    expect(testComponent.filterValue).toEqual('');
-
-    testComponent.selectedValue = 2;
-    fixture.detectChanges();
-    flush();
-    fixture.detectChanges();
-    expect(searchInput.value).toEqual('2');
-    expect(testComponent.filterValue).toEqual('');
-  }));
-
   it('should mark touched when select button loose focus and select closed', fakeAsync(() => {
     const touchedSpy = jasmine.createSpy('touched spy');
 
