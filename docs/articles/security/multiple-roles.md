@@ -15,13 +15,13 @@ import { NbSecurityModule, NbRoleProvider } from '@nebular/security';
 
 @NgModule({
   imports: [
-   // ...
-    
-   NbSecurityModule.forRoot({
     // ...
-   }),
+    
+    NbSecurityModule.forRoot({
+      // ...
+    }),
 
- ],
+  ],
   providers: [
     // ...
     {

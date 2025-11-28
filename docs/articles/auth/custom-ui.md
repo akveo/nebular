@@ -25,7 +25,7 @@ you configured routes to the out of the box auth components.
 <div class="note note-info">
   <div class="note-title">Note</div>
   <div class="note-body">
-    In case your setup is based on the ngx-admin your configuration is a bit different - the Strategy is configured under `core.module`, which providers are imported into the `app.module`. This should be the only difference for this setup.
+    In case your setup is based on the ngx-admin your configuration is a bit different - the Strategy is configured under <code>core.module</code>, which providers are imported into the <code>app.module</code>. This should be the only difference for this setup.
   </div>
 </div>
 <hr>
@@ -77,7 +77,6 @@ import {
 })
 export class NgxAuthModule {
 }
-
 ```
 
 A couple of required modules for future components. Also, notice how we imported the `NbAuthModule` but without the `forRoot` call.
@@ -256,7 +255,7 @@ Unfortunately, the library isn't distributed with the sources, so we need to cop
 <div class="note note-info">
   <div class="note-title">Note</div>
   <div class="note-body">
-    Make sure are you copying sources from the same Nebular version as you have locally, and not from the `master` branch.
+    Make sure are you copying sources from the same Nebular version as you have locally, and not from the <code>master</code> branch.
   </div>
 </div>
 

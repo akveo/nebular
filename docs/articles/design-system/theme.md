@@ -168,9 +168,8 @@ text-caption-font-size: 0.75rem,
 text-caption-font-weight: 400,
 text-caption-line-height: 1rem,
 ```
-<hr>
-
 Adjust these styles to change text style of specific groups of elements.
+<hr>
 
 ## General Theme Variables
 
