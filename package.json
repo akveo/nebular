@@ -141,5 +141,13 @@
     "typedoc": "^0.12.0",
     "typescript": "~5.9.2"
   },
+  "overrides": {
+    "@angular/fire": {
+      "@angular/common": "$@angular/common",
+      "@angular/core": "$@angular/core",
+      "@angular/platform-browser": "$@angular/platform-browser",
+      "@angular/platform-browser-dynamic": "$@angular/platform-browser-dynamic"
+    }
+  },
   "schematics": "./tools/dev-schematics/dist/collection.json"
 }
