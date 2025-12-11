@@ -26,9 +26,7 @@
               "base": "dist/playground"
             },
             "index": "src/index.html",
-            "polyfills": [
-              "src/polyfills.ts"
-            ],
+            "polyfills": ["src/polyfills.ts"],
             "tsConfig": "src/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
@@ -189,9 +187,7 @@
               "base": "dist/docs"
             },
             "index": "docs/index.html",
-            "polyfills": [
-              "docs/polyfills.ts"
-            ],
+            "polyfills": ["docs/polyfills.ts"],
             "tsConfig": "docs/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
