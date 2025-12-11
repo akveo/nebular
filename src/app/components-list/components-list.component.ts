@@ -34,7 +34,7 @@ export function convertToBoolProperty(val: any): boolean {
 
       <npg-components-list *ngIf="component.children" vertical [components]="component.children"></npg-components-list>
     </div>
-    `,
+  `,
     standalone: false
 })
 export class ComponentsListComponent {
