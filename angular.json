@@ -26,7 +26,9 @@
               "base": "dist/playground"
             },
             "index": "src/index.html",
-            "polyfills": ["src/polyfills.ts"],
+            "polyfills": [
+              "src/polyfills.ts"
+            ],
             "tsConfig": "src/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
@@ -120,7 +122,13 @@
               "src/assets"
             ],
             "styles": [],
-            "scripts": []
+            "scripts": [],
+            "include": [
+              "src/**/*.spec.ts"
+            ],
+            "exclude": [
+              "src/framework/theme/schematics/**/*.spec.ts"
+            ]
           },
           "configurations": {
             "production-wp": {
@@ -181,7 +189,9 @@
               "base": "dist/docs"
             },
             "index": "docs/index.html",
-            "polyfills": ["docs/polyfills.ts"],
+            "polyfills": [
+              "docs/polyfills.ts"
+            ],
             "tsConfig": "docs/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
@@ -342,7 +352,13 @@
           "options": {
             "main": "src/framework/theme/test.ts",
             "tsConfig": "src/framework/theme/tsconfig.spec.json",
-            "karmaConfig": "karma.conf.js"
+            "karmaConfig": "karma.conf.js",
+            "include": [
+              "src/framework/theme/**/*.spec.ts"
+            ],
+            "exclude": [
+              "src/framework/theme/schematics/**/*.spec.ts"
+            ]
           }
         },
         "lint": {

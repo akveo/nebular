@@ -16,6 +16,14 @@ export const routes: Routes = [
     path: '',
     loadChildren: () => import('./without-layout/without-layout.module').then((m) => m.WithoutLayoutModule),
   },
+  {
+    path: '',
+    loadChildren: () => import('./with-layout/with-layout.module').then(m => m.WithLayoutModule),
+  },
+  {
+    path: '',
+    loadChildren: () => import('./without-layout/without-layout.module').then(m => m.WithoutLayoutModule),
+  },
 ];
 
 @NgModule({
