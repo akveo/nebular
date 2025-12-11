@@ -13,16 +13,16 @@ import { from, Subject, zip } from 'rxjs';
 import createSpy = jasmine.createSpy;
 
 import {
+  NbSelectWithAutocompleteModule as NbSelectModule,
+  NbThemeModule,
+  NbOverlayContainerAdapter,
   NB_DOCUMENT,
-  NbFocusKeyManagerFactoryService,
+  NbSelectWithAutocompleteComponent as NbSelectComponent,
   NbLayoutModule,
   NbOptionComponent,
   NbOptionGroupComponent,
-  NbOverlayContainerAdapter,
-  NbSelectWithAutocompleteComponent as NbSelectComponent,
-  NbSelectWithAutocompleteModule as NbSelectModule,
-  NbThemeModule,
   NbTriggerStrategyBuilderService,
+  NbFocusKeyManagerFactoryService,
 } from '@nebular/theme';
 import { NbActiveDescendantKeyManagerFactoryService } from '../cdk/a11y/descendant-key-manager';
 
