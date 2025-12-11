@@ -7,8 +7,8 @@
 import { LOCALE_ID } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 
-import { NbMomentDateService } from '@nebular/moment';
 import { NbDateService } from '@nebular/theme';
+import { NbMomentDateService } from '@nebular/moment';
 import moment from 'moment';
 
 type Moment = moment.Moment;
