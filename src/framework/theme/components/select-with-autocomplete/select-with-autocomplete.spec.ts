@@ -1251,7 +1251,7 @@ describe('NbSelect - dynamic options', () => {
 });
 
 @Component({
-  template: `
+    template: `
     <nb-layout>
       <nb-layout-column>
         <nb-select-with-autocomplete
@@ -1266,7 +1266,7 @@ describe('NbSelect - dynamic options', () => {
       </nb-layout-column>
     </nb-layout>
   `,
-  standalone: false,
+    standalone: false
 })
 export class NbSelectWithExperimentalSearchComponent {
   options: number[] = [1, 2, 3, 4, 5];
