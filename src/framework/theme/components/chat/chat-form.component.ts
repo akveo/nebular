@@ -211,6 +211,23 @@ export class NbChatFormComponent {
     }
   }
 
+  @HostListener('paste', ['$event'])
+  onPaste(event: any) {
+    for (const item of event.clipboardData.items) {
+      if (item.type.startsWith('image/')) {
+          const file = item.getAsFile();
+          const res = file;
+          const fr = new FileReader();
+          fr.onload = (e: any) => {
+            res.src = e.target.result;
+            res.urlStyle = this.domSanitizer.bypassSecurityTrustStyle(`url(${res.src})`);
+            this.cd.detectChanges();
+          };
+          fr.readAsDataURL(file);
+          this.droppedFiles.push(res);
+      }
+    }
+  }
   sendMessage() {
     if (this.droppedFiles.length || String(this.message).trim().length) {
       this.send.emit({ message: this.message, files: this.droppedFiles });
