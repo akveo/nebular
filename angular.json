@@ -120,7 +120,13 @@
               "src/assets"
             ],
             "styles": [],
-            "scripts": []
+            "scripts": [],
+            "include": [
+              "src/**/*.spec.ts"
+            ],
+            "exclude": [
+              "src/framework/theme/schematics/**/*.spec.ts"
+            ]
           },
           "configurations": {
             "production-wp": {
@@ -342,7 +348,13 @@
           "options": {
             "main": "src/framework/theme/test.ts",
             "tsConfig": "src/framework/theme/tsconfig.spec.json",
-            "karmaConfig": "karma.conf.js"
+            "karmaConfig": "karma.conf.js",
+            "include": [
+              "src/framework/theme/**/*.spec.ts"
+            ],
+            "exclude": [
+              "src/framework/theme/schematics/**/*.spec.ts"
+            ]
           }
         },
         "lint": {

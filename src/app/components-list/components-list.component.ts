@@ -42,7 +42,7 @@ export class ComponentsListComponent {
   components: ComponentLink[] = [];
 
   @HostBinding('class.column')
-  private isVertical: boolean;
+  protected isVertical: boolean;
 
   @Input()
   set vertical(value) {

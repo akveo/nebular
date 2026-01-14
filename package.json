@@ -62,16 +62,16 @@
     "nebular"
   ],
   "dependencies": {
-    "@angular/animations": "^20.3.2",
-    "@angular/cdk": "^20.2.5",
-    "@angular/common": "^20.3.2",
-    "@angular/compiler": "^20.3.2",
-    "@angular/core": "^20.3.2",
+    "@angular/animations": "^21.0.0",
+    "@angular/cdk": "^21.0.0",
+    "@angular/common": "^21.0.0",
+    "@angular/compiler": "^21.0.0",
+    "@angular/core": "^21.0.0",
     "@angular/fire": "^20.0.1",
-    "@angular/forms": "^20.3.2",
-    "@angular/platform-browser": "^20.3.2",
-    "@angular/platform-browser-dynamic": "^20.3.2",
-    "@angular/router": "^20.3.2",
+    "@angular/forms": "^21.0.0",
+    "@angular/platform-browser": "^21.0.0",
+    "@angular/platform-browser-dynamic": "^21.0.0",
+    "@angular/router": "^21.0.0",
     "date-fns": "^2.0.0",
     "docsearch.js": "^2.5.2",
     "eva-icons": "^1.1.3",
@@ -87,15 +87,15 @@
     "zone.js": "~0.15.0"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^20.3.3",
-    "@angular-devkit/core": "^20.3.3",
-    "@angular-devkit/schematics": "^20.3.3",
-    "@angular/cli": "^20.3.3",
-    "@angular/compiler-cli": "^20.3.2",
-    "@angular/language-service": "^20.3.2",
+    "@angular-devkit/build-angular": "^21.0.0",
+    "@angular-devkit/core": "^21.0.0",
+    "@angular-devkit/schematics": "^21.0.0",
+    "@angular/cli": "^21.0.0",
+    "@angular/compiler-cli": "^21.0.0",
+    "@angular/language-service": "^21.0.0",
     "@eslint/eslintrc": "^3.1.0",
     "@eslint/js": "^9.8.0",
-    "@schematics/angular": "^20.3.3",
+    "@schematics/angular": "^21.0.0",
     "@types/gulp": "4.0.6",
     "@types/highlight.js": "^9.12.4",
     "@types/jasmine": "~3.10.0",
@@ -104,7 +104,7 @@
     "@typescript-eslint/eslint-plugin": "^8.0.0",
     "@typescript-eslint/parser": "^8.0.0",
     "angular-cli-ghpages": "0.5.0",
-    "angular-eslint": "~20.3.0",
+    "angular-eslint": "~21.0.0",
     "browserstack-local": "^1.3.7",
     "colors.js": "1.2.4",
     "conventional-changelog-cli": "1.3.4",
@@ -130,7 +130,7 @@
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "~1.7.0",
     "lint-staged": "^11.2.3",
-    "ng-packagr": "^20.3.0",
+    "ng-packagr": "^21.0.0",
     "npm-run-all": "4.1.5",
     "prettier": "^2.4.1",
     "protractor": "~7.0.0",
@@ -140,6 +140,14 @@
     "ts-node": "^10.4.0",
     "typedoc": "^0.12.0",
     "typescript": "~5.9.2"
+  },
+  "overrides": {
+    "@angular/fire": {
+      "@angular/common": "$@angular/common",
+      "@angular/core": "$@angular/core",
+      "@angular/platform-browser": "$@angular/platform-browser",
+      "@angular/platform-browser-dynamic": "$@angular/platform-browser-dynamic"
+    }
   },
   "schematics": "./tools/dev-schematics/dist/collection.json"
 }

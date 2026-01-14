@@ -9,7 +9,7 @@ import { TestBed } from '@angular/core/testing';
 
 import { NbDateService } from '@nebular/theme';
 import { NbMomentDateService } from '@nebular/moment';
-import * as moment from 'moment';
+import moment from 'moment';
 
 type Moment = moment.Moment;
 
