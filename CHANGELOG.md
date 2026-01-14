@@ -1,3 +1,9 @@
+<a name="17.0.0"></a>
+
+# [17.0.0](https://github.com/akveo/nebular/compare/v16.0.0...v17.0.0) (2026-01-14)
+
+- update angular to v21 ([#3306](https://github.com/akveo/nebular/issues/3306)) ([379b67f](https://github.com/akveo/nebular/commit/379b67f))
+
 <a name="16.0.0"></a>
 
 # [16.0.0](https://github.com/akveo/nebular/compare/v15.0.0...v16.0.0) (2025-10-01)
