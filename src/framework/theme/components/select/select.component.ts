@@ -673,7 +673,7 @@ export class NbSelectComponent
     this.writeValue(value);
   }
   get selected() {
-    return this.multiple ? this.selectionModel.map((o) => o.value) : this.selectionModel[0].value;
+    return this.multiple ? this.selectionModel.map((o) => o.value) : this.selectionModel[0]?.value;
   }
 
   /**
@@ -873,7 +873,7 @@ export class NbSelectComponent
     this.options.changes
       .pipe(
         startWith(this.options),
-        filter(() => this.queue != null && this.canSelectValue()),
+        filter(() => this.queue != null || (this.selected && this.canSelectValue())),
         // Call 'writeValue' when current change detection run is finished.
         // When writing is finished, change detection starts again, since
         // microtasks queue is empty.
@@ -881,7 +881,7 @@ export class NbSelectComponent
         switchMap((options: QueryList<NbOptionComponent>) => from(Promise.resolve(options))),
         takeUntil(this.destroy$),
       )
-      .subscribe(() => this.writeValue(this.queue));
+      .subscribe(() => this.writeValue(this.queue || this.selected));
   }
 
   ngAfterViewInit() {
