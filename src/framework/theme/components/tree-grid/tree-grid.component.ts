@@ -4,47 +4,50 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { CDK_TABLE } from '@angular/cdk/table';
 import {
   AfterViewInit,
   Attribute,
   ChangeDetectorRef,
   Component,
   ElementRef,
-  EmbeddedViewRef,
   HostBinding,
   Inject,
   Input,
   IterableDiffers,
   OnDestroy,
-  Optional,
   QueryList,
-  SkipSelf,
+  EmbeddedViewRef,
   ViewContainerRef,
+  Optional,
+  SkipSelf,
 } from '@angular/core';
+import { CDK_TABLE } from '@angular/cdk/table';
 import { fromEvent, merge, Subject } from 'rxjs';
 import { debounceTime, takeUntil } from 'rxjs/operators';
 
 import { NB_DOCUMENT, NB_WINDOW } from '../../theme.options';
-import { NbViewportRulerAdapter } from '../cdk/adapter/viewport-ruler-adapter';
-import { NbDirectionality } from '../cdk/bidi/bidi-service';
 import { NbPlatform } from '../cdk/platform/platform-service';
-import { NB_TABLE_TEMPLATE, NbTable } from '../cdk/table/table.module';
+import { NbDirectionality } from '../cdk/bidi/bidi-service';
+import {
+  NB_TABLE_TEMPLATE,
+  NbTable
+} from '../cdk/table/table.module';
 import { NB_STICKY_POSITIONING_LISTENER, NbRowContext } from '../cdk/table/type-mappings';
-import { convertToBoolProperty, NbBooleanInput } from '../helpers';
+import { NbViewportRulerAdapter } from '../cdk/adapter/viewport-ruler-adapter';
 import { NbTreeGridDataSource, NbTreeGridDataSourceBuilder } from './data-source/tree-grid-data-source';
 import { NB_DEFAULT_ROW_LEVEL, NbTreeGridPresentationNode } from './data-source/tree-grid.model';
 import { NbToggleOptions } from './data-source/tree-grid.service';
+import { NB_TREE_GRID } from './tree-grid-injection-tokens';
+import { NbTreeGridRowComponent } from './tree-grid-row.component';
 import { NbTreeGridCellDirective } from './tree-grid-cell.component';
+import { convertToBoolProperty, NbBooleanInput } from '../helpers';
 import { NbTreeGridColumnDefDirective } from './tree-grid-column-def.directive';
-import { NbColumnsService } from './tree-grid-columns.service';
 import {
   NbTreeGridFooterRowDefDirective,
   NbTreeGridHeaderRowDefDirective,
   NbTreeGridRowDefDirective,
 } from './tree-grid-def.component';
-import { NB_TREE_GRID } from './tree-grid-injection-tokens';
-import { NbTreeGridRowComponent } from './tree-grid-row.component';
+import { NbColumnsService } from './tree-grid-columns.service';
 
 /**
  * Tree grid component that can be used to display nested rows of data.
@@ -133,44 +136,36 @@ import { NbTreeGridRowComponent } from './tree-grid-row.component';
  * tree-grid-sort-header-button-padding:
  */
 @Component({
-  selector: 'table[nbTreeGrid]',
-  template: NB_TABLE_TEMPLATE,
-  styleUrls: ['./tree-grid.component.scss'],
-  providers: [
-    { provide: NB_TREE_GRID, useExisting: NbTreeGridComponent },
-    { provide: CDK_TABLE, useExisting: NbTreeGridComponent },
-    NbColumnsService,
-  ],
-  standalone: false,
+    selector: 'table[nbTreeGrid]',
+    template: NB_TABLE_TEMPLATE,
+    styleUrls: ['./tree-grid.component.scss'],
+    providers: [
+      { provide: NB_TREE_GRID, useExisting: NbTreeGridComponent },
+      { provide: CDK_TABLE, useExisting: NbTreeGridComponent },
+      NbColumnsService,
+    ],
+    standalone: false,
 })
-export class NbTreeGridComponent<T> extends NbTable<NbTreeGridPresentationNode<T>> implements AfterViewInit, OnDestroy {
-  constructor(
-    private dataSourceBuilder: NbTreeGridDataSourceBuilder<T>,
-    differs: IterableDiffers,
-    changeDetectorRef: ChangeDetectorRef,
-    elementRef: ElementRef,
-    @Attribute('role') role: string,
-    dir: NbDirectionality,
-    @Inject(NB_DOCUMENT) document,
-    platform: NbPlatform,
-    @Inject(NB_WINDOW) private window,
-    _viewportRuler: NbViewportRulerAdapter,
-    @Optional()
-    @SkipSelf()
-    @Inject(NB_STICKY_POSITIONING_LISTENER)
-    protected readonly _stickyPositioningListener,
+export class NbTreeGridComponent<T> extends NbTable<NbTreeGridPresentationNode<T>>
+                                    implements AfterViewInit, OnDestroy {
+
+  constructor(private dataSourceBuilder: NbTreeGridDataSourceBuilder<T>,
+              differs: IterableDiffers,
+              changeDetectorRef: ChangeDetectorRef,
+              elementRef: ElementRef,
+              @Attribute('role') role: string,
+              dir: NbDirectionality,
+              @Inject(NB_DOCUMENT) document,
+              platform: NbPlatform,
+              @Inject(NB_WINDOW) private window,
+              _viewportRuler: NbViewportRulerAdapter,
+              @Optional()
+              @SkipSelf()
+              @Inject(NB_STICKY_POSITIONING_LISTENER)
+              protected readonly _stickyPositioningListener,
   ) {
-    super(
-      differs,
-      changeDetectorRef,
-      elementRef,
-      role,
-      dir,
-      document,
-      platform,
-      _viewportRuler,
-      _stickyPositioningListener,
-    );
+    super(differs, changeDetectorRef, elementRef, role, dir, document, platform, _viewportRuler,
+          _stickyPositioningListener);
     this.platform = platform;
   }
 
@@ -220,7 +215,8 @@ export class NbTreeGridComponent<T> extends NbTable<NbTreeGridPresentationNode<T
       this._contentHeaderRowDefs.changes,
       this._contentFooterRowDefs.changes,
     );
-    rowsChange$.pipe(takeUntil(this.destroy$)).subscribe(() => this.checkDefsCount());
+    rowsChange$.pipe(takeUntil(this.destroy$))
+      .subscribe(() => this.checkDefsCount());
 
     if (this.platform.isBrowser) {
       this.updateVisibleColumns();
@@ -322,15 +318,15 @@ export class NbTreeGridComponent<T> extends NbTable<NbTreeGridPresentationNode<T
 
   private updateVisibleColumns(): void {
     const width = this.window.innerWidth;
-    const columnDefs = this._contentColumnDefs as QueryList<NbTreeGridColumnDefDirective>;
+    const columnDefs = (this._contentColumnDefs as QueryList<NbTreeGridColumnDefDirective>);
 
     const columnsToHide: string[] = columnDefs
       .filter((col: NbTreeGridColumnDefDirective) => col.shouldHide(width))
-      .map((col) => col.name);
+      .map(col => col.name);
 
     const columnsToShow: string[] = columnDefs
       .filter((col: NbTreeGridColumnDefDirective) => col.shouldShow(width))
-      .map((col) => col.name);
+      .map(col => col.name);
 
     if (!columnsToHide.length && !columnsToShow.length) {
       return;
@@ -340,7 +336,7 @@ export class NbTreeGridComponent<T> extends NbTable<NbTreeGridPresentationNode<T
       this._contentHeaderRowDefs.first as NbTreeGridHeaderRowDefDirective,
       this._contentRowDefs.first as NbTreeGridRowDefDirective<any>,
       this._contentFooterRowDefs.first as NbTreeGridFooterRowDefDirective,
-    ].filter((d) => !!d);
+    ].filter(d => !!d);
 
     for (const rowDef of rowDefs) {
       for (const column of columnsToHide) {

@@ -9,7 +9,11 @@ import {
   Optional,
   SkipSelf,
 } from '@angular/core';
-import { CdkTable, CdkTableModule, StickyPositioningListener } from '@angular/cdk/table';
+import {
+  CdkTable,
+  CdkTableModule,
+  StickyPositioningListener
+} from '@angular/cdk/table';
 
 import { NbBidiModule } from '../bidi/bidi.module';
 import { NbDirectionality } from '../bidi/bidi-service';
@@ -48,9 +52,9 @@ export const NB_TABLE_TEMPLATE = `
 `;
 
 @Component({
-  selector: 'nb-table-not-implemented',
-  template: ``,
-  standalone: false,
+    selector: 'nb-table-not-implemented',
+    template: ``,
+    standalone: false,
 })
 // eslint-disable-next-line @angular-eslint/component-class-suffix
 export class NbTable<T> extends CdkTable<T> {
@@ -63,9 +67,7 @@ export class NbTable<T> extends CdkTable<T> {
     @Inject(NB_DOCUMENT) document: any,
     platform: NbPlatform,
     _viewportRuler: NbViewportRulerAdapter,
-    @Optional()
-    @SkipSelf()
-    @Inject(NB_STICKY_POSITIONING_LISTENER)
+    @Optional() @SkipSelf() @Inject(NB_STICKY_POSITIONING_LISTENER)
     protected readonly _stickyPositioningListener: StickyPositioningListener,
   ) {
     super(differs, changeDetectorRef, elementRef, role, dir, document, platform, _viewportRuler,
@@ -104,8 +106,8 @@ const COMPONENTS = [
 ];
 
 @NgModule({
-  imports: [NbBidiModule],
-  declarations: [...COMPONENTS],
-  exports: [...COMPONENTS],
+  imports: [ NbBidiModule ],
+  declarations: [ ...COMPONENTS ],
+  exports: [ ...COMPONENTS ],
 })
 export class NbTableModule extends CdkTableModule {}
