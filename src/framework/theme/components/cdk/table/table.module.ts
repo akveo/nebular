@@ -68,17 +68,8 @@ export class NbTable<T> extends CdkTable<T> {
     @Inject(NB_STICKY_POSITIONING_LISTENER)
     protected readonly _stickyPositioningListener: StickyPositioningListener,
   ) {
-    super(
-      differs,
-      changeDetectorRef,
-      elementRef,
-      role,
-      dir,
-      document,
-      platform,
-      _viewportRuler,
-      _stickyPositioningListener,
-    );
+    super(differs, changeDetectorRef, elementRef, role, dir, document, platform, _viewportRuler,
+          _stickyPositioningListener);
   }
 }
 
