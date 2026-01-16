@@ -145,8 +145,10 @@
     "@angular/fire": {
       "@angular/common": "$@angular/common",
       "@angular/core": "$@angular/core",
+      "@angular/compiler": "$@angular/compiler",
       "@angular/platform-browser": "$@angular/platform-browser",
-      "@angular/platform-browser-dynamic": "$@angular/platform-browser-dynamic"
+      "@angular/platform-browser-dynamic": "$@angular/platform-browser-dynamic",
+      "rxjs": "$rxjs"
     }
   },
   "schematics": "./tools/dev-schematics/dist/collection.json"
