@@ -140,11 +140,11 @@ import { NbColumnsService } from './tree-grid-columns.service';
     template: NB_TABLE_TEMPLATE,
     styleUrls: ['./tree-grid.component.scss'],
     providers: [
-      { provide: NB_TREE_GRID, useExisting: NbTreeGridComponent },
-      { provide: CDK_TABLE, useExisting: NbTreeGridComponent },
-      NbColumnsService,
+        { provide: NB_TREE_GRID, useExisting: NbTreeGridComponent },
+        { provide: CDK_TABLE, useExisting: NbTreeGridComponent },
+        NbColumnsService,
     ],
-    standalone: false,
+    standalone: false
 })
 export class NbTreeGridComponent<T> extends NbTable<NbTreeGridPresentationNode<T>>
                                     implements AfterViewInit, OnDestroy {
@@ -159,9 +159,7 @@ export class NbTreeGridComponent<T> extends NbTable<NbTreeGridPresentationNode<T
               platform: NbPlatform,
               @Inject(NB_WINDOW) private window,
               _viewportRuler: NbViewportRulerAdapter,
-              @Optional()
-              @SkipSelf()
-              @Inject(NB_STICKY_POSITIONING_LISTENER)
+              @Optional() @SkipSelf() @Inject(NB_STICKY_POSITIONING_LISTENER)
               protected readonly _stickyPositioningListener,
   ) {
     super(differs, changeDetectorRef, elementRef, role, dir, document, platform, _viewportRuler,
