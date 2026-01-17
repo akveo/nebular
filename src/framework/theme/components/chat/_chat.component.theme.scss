@@ -266,10 +266,15 @@
       flex-direction: row;
       display: flex;
     }
-
-    input {
+    textarea {
+      resize: none;
+      max-height: 15em;
+      height: auto;
+      overflow-y: auto;
+    }
+    input,
+    textarea {
       flex: 1;
-
       &.with-button {
         border-bottom-right-radius: 0;
         border-top-right-radius: 0;
