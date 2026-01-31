@@ -16,7 +16,7 @@ import { Component } from '@angular/core';
 })
 export class UsersListShowcaseComponent {
   users: { name: string, title: string }[] = [
-    { name: 'Carla Espinosa', title: 'Nurse' },
+    { name: 'مهدي حسني', title: 'Nurse' },
     { name: 'Bob Kelso', title: 'Doctor of Medicine' },
     { name: 'Janitor', title: 'Janitor' },
     { name: 'Perry Cox', title: 'Doctor of Medicine' },
