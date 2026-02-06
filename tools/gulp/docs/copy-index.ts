@@ -19,9 +19,9 @@ task('docs-copy-index', (done) => {
 });
 
 function createDirsStructure(dirs) {
-  const index = readFileSync(join(DOCS_DIST, 'index.html'), 'utf8');
+  const index = readFileSync(join(DOCS_DIST, 'browser', 'index.html'), 'utf8');
   dirs.forEach((dir: any) => {
-    const fullPath = join(DOCS_DIST, dir);
+    const fullPath = join(DOCS_DIST, 'browser', dir);
     if (!existsSync(fullPath)) {
       mkDirByPathSync(fullPath);
     }

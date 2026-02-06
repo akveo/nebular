@@ -11,4 +11,7 @@
 @forward 'core/variants';
 @forward 'core/theming/register' show nb-register-theme;
 @forward 'core/theming/install';
-@forward 'core/theming/get-value';
+@forward 'core/theming/get-value' hide $nb-themes, $nb-enabled-themes, $nb-theme-name, $nb-theme, $nb-processed-theme,
+  $nb-theme-process-mode, $nb-theme-export-mode, $nb-themes-export, $nb-custom-statuses,
+  $nb-enable-css-custom-properties, $layout-window-mode-max-width, $tabset-tab-text-hide-breakpoint,
+  $route-tabset-tab-text-hide-breakpoint, $nb-global-styles-on-install;
