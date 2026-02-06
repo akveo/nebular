@@ -120,21 +120,19 @@
           }
         },
         "serve-ssr": {
-          "builder": "@nguniversal/builders:ssr-dev-server",
+          "builder": "@angular-devkit/build-angular:ssr-dev-server",
           "configurations": {
             "development": {
-              "browserTarget": "packages-smoke:build:development",
-              "serverTarget": "packages-smoke:server:development"
+              "buildTarget": "packages-smoke:build:development"
             },
             "production": {
-              "browserTarget": "packages-smoke:build:production",
-              "serverTarget": "packages-smoke:server:production"
+              "buildTarget": "packages-smoke:build:production"
             }
           },
           "defaultConfiguration": "development"
         },
         "prerender": {
-          "builder": "@nguniversal/builders:prerender",
+          "builder": "@angular-devkit/build-angular:prerender",
           "options": {
             "routes": [
               "/"
@@ -142,12 +140,10 @@
           },
           "configurations": {
             "production": {
-              "browserTarget": "packages-smoke:build:production",
-              "serverTarget": "packages-smoke:server:production"
+              "buildTarget": "packages-smoke:build:production"
             },
             "development": {
-              "browserTarget": "packages-smoke:build:development",
-              "serverTarget": "packages-smoke:server:development"
+              "buildTarget": "packages-smoke:build:development"
             }
           },
           "defaultConfiguration": "production"
