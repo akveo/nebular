@@ -31,7 +31,7 @@ jobs:
           cache: 'npm'
       - run: |
           npm ci
-          npm install rxjs@7.4.0
+          npm install rxjs@7.5.5
           npm run build:packages
   build-docs:
     needs: build-packages

@@ -30,9 +30,7 @@ import { NbPlatform } from '../cdk/platform/platform-service';
 import { NbDirectionality } from '../cdk/bidi/bidi-service';
 import {
   NB_TABLE_TEMPLATE,
-  NbTable,
-  NB_TABLE_PROVIDERS,
-  NB_VIEW_REPEATER_STRATEGY,
+  NbTable
 } from '../cdk/table/table.module';
 import { NB_STICKY_POSITIONING_LISTENER, NbRowContext } from '../cdk/table/type-mappings';
 import { NbViewportRulerAdapter } from '../cdk/adapter/viewport-ruler-adapter';
@@ -145,7 +143,6 @@ import { NbColumnsService } from './tree-grid-columns.service';
         { provide: NB_TREE_GRID, useExisting: NbTreeGridComponent },
         { provide: CDK_TABLE, useExisting: NbTreeGridComponent },
         NbColumnsService,
-        ...NB_TABLE_PROVIDERS,
     ],
     standalone: false
 })
@@ -161,13 +158,12 @@ export class NbTreeGridComponent<T> extends NbTable<NbTreeGridPresentationNode<T
               @Inject(NB_DOCUMENT) document,
               platform: NbPlatform,
               @Inject(NB_WINDOW) private window,
-              @Inject(NB_VIEW_REPEATER_STRATEGY) protected readonly _viewRepeater,
               _viewportRuler: NbViewportRulerAdapter,
               @Optional() @SkipSelf() @Inject(NB_STICKY_POSITIONING_LISTENER)
               protected readonly _stickyPositioningListener,
   ) {
-    super(differs, changeDetectorRef, elementRef, role, dir, document, platform, _viewRepeater,
-          _viewportRuler, _stickyPositioningListener);
+    super(differs, changeDetectorRef, elementRef, role, dir, document, platform, _viewportRuler,
+          _stickyPositioningListener);
     this.platform = platform;
   }
 

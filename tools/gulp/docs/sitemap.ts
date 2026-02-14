@@ -20,7 +20,7 @@ task('create-sitemap', (done) => {
 
 function createSitemap(docsPages) {
   const sitemap = getSitemap(docsPages);
-  writeFileSync(join(DOCS_DIST, 'sitemap.xml'), sitemap);
+  writeFileSync(join(DOCS_DIST, 'browser', 'sitemap.xml'), sitemap);
 }
 
 function getSitemap(docsPages) {
