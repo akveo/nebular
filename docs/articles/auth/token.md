@@ -18,23 +18,22 @@ Let's tell Nebular that we are waiting for a JWT token instead of a simple strin
 We just need to provide a respective class to do that. Open your `app.module.ts` and adjust your `Strategy` configuration:
 
 ```typescript
-
 @NgModule({
   imports: [
-   // ...
-    
-   NbAuthModule.forRoot({
-         strategies: [
-           NbPasswordAuthStrategy.setup({
-             name: 'email',
-             
-             token: {
-               class: NbAuthJWTToken,
-             }
-           }),
-         ],
-         forms: {},
-       }), 
+    // ...
+
+    NbAuthModule.forRoot({
+      strategies: [
+        NbPasswordAuthStrategy.setup({
+          name: 'email',
+          
+          token: {
+            class: NbAuthJWTToken,
+          }
+        }),
+      ],
+      forms: {},
+    }), 
   ],
 });
 
@@ -58,25 +57,24 @@ By default `NbPasswordAuthStrategy` expects that your token is located under the
 We'll assume that our API returns a token as just `{ token: 'some-jwt-token' }` not wrapping your response in `data` property, let's tell that to Nebular:
 
 ```typescript
-
 @NgModule({
   imports: [
-   // ...
-    
-   NbAuthModule.forRoot({
-         strategies: [
-           NbPasswordAuthStrategy.setup({
-             name: 'email',
-             
-             token: {
-               class: NbAuthJWTToken,
-              
-               key: 'token', // this parameter tells where to look for the token
-             }
-           }),
-         ],
-         forms: {},
-       }), 
+    // ...
+
+    NbAuthModule.forRoot({
+      strategies: [
+        NbPasswordAuthStrategy.setup({
+          name: 'email',
+          
+          token: {
+            class: NbAuthJWTToken,
+          
+            key: 'token', // this parameter tells where to look for the token
+          }
+        }),
+      ],
+      forms: {},
+    }), 
   ],
 });
 
@@ -94,7 +92,6 @@ import { NbAuthJWTToken, NbAuthService } from '@nebular/auth';
 Then, let's create a `user` variable, which will store the token payload inside of the component: 
 
 ```typescript
-
 @Component({
   ...
 })
@@ -110,7 +107,6 @@ Then, let's inject the `NbAuthService` and subscribe to an `onTokenChange` metho
 is up-to-date with the information received from the backend and there is no need to additionally refresh/request the data:
 
 ```typescript
-
 @Component({
   ...
 })
@@ -135,12 +131,9 @@ export class HeaderComponent {
 
 Lastly, let's grab a `user` variable and put it in the template to show the user info. The `nb-user` component is a great fit for this:
 
-
 ```typescript
-
 @Component({
   template: `
-  
     <nb-layout-header fixed>
       <nb-user [name]="user?.name" [picture]="user?.picture"></nb-user>
     </nb-layout-header>

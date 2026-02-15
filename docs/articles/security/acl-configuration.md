@@ -17,27 +17,25 @@ Now, let's convert this into an ACL configuration object which Nebular can under
 ```ts
 @NgModule({
   imports: [
-   // ...
+    // ...
     
-   NbSecurityModule.forRoot({
-     accessControl: {
-       guest: {
-         view: ['news', 'comments'],
-       },
-       user: {
-         parent: 'guest',
-         create: 'comments',
-       },
-       moderator: {
-         parent: 'user',
-         create: 'news',
-         remove: '*',
-       },
-     },
-   }),
-   
- ],
-
+    NbSecurityModule.forRoot({
+      accessControl: {
+        guest: {
+          view: ['news', 'comments'],
+        },
+        user: {
+          parent: 'guest',
+          create: 'comments',
+        },
+        moderator: {
+          parent: 'user',
+          create: 'news',
+          remove: '*',
+        },
+      },
+    }),
+  ],
 ``` 
 
 As you can see the configuration is pretty much straightforward, each role can have a list of permissions (view, create, remove) and resources that are allowed for those permissions. We can also specify a `*` resource,
@@ -53,20 +51,18 @@ In the simplest form we can provide this service directly in the main module:
 
 ```ts
 // ...
-
 import { of as observableOf } from 'rxjs/observable/of';
 import { NbSecurityModule, NbRoleProvider } from '@nebular/security';
 
 
 @NgModule({
   imports: [
-   // ...
-    
-   NbSecurityModule.forRoot({
     // ...
-   }),
-
- ],
+      
+    NbSecurityModule.forRoot({
+      // ...
+    }),
+  ],
   providers: [
     // ...
     {
@@ -95,7 +91,7 @@ Let's create a separate `role.provider.ts` service in order not to put a lot of 
 ```typescript
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { map } from 'rxjs/operators/map';
+import { map } from 'rxjs/operators';
 
 import { NbAuthService, NbAuthJWTToken } from '@nebular/auth';
 import { NbRoleProvider } from '@nebular/security';
@@ -151,18 +147,17 @@ And let's provide the service in the app module:
 
 ```typescript
 // ...
-
 import { RoleProvider } from './role.provider';
 import { NbSecurityModule, NbRoleProvider } from '@nebular/security';
 
 
 @NgModule({
   imports: [
-   // ...
-    
-   NbSecurityModule.forRoot({
     // ...
-   }),
+      
+    NbSecurityModule.forRoot({
+      // ...
+    }),
 
  ],
   providers: [
@@ -184,8 +179,8 @@ Nebular Security provides us with a simple `*nbIsGranted` conditional directive,
 @Component({
   // ...
   template: `
-      <button *nbIsGranted="['create', 'comments']" >Post Comment</button>
-    `,
+    <button *nbIsGranted="['create', 'comments']" >Post Comment</button>
+  `,
 })
 export class CommentFormComponent {
 // ...
@@ -214,8 +209,8 @@ And let's add an `if` statement to the `Post Comment` button so that it is only 
 @Component({
   // ...
   template: `
-      <button *ngIf="accessChecker.isGranted('create', 'comments') | async" >Post Comment</button>
-    `,
+    <button *ngIf="accessChecker.isGranted('create', 'comments') | async" >Post Comment</button>
+  `,
 })
 export class CommentFormComponent {
 // ...
@@ -223,4 +218,4 @@ export class CommentFormComponent {
 We call `isGranted` method, which listens to the currently provided role and checks it permissions against specified in the ACL configuration. 
 Moreover, as it listens to the *role change*, it hides the button if authentication gets changed during the app usage.
 
-The same way we can call the `isGranted` method from any part of the app, including router guards and services, which gives us a transparent and flexibly configurable way to manage user access to various resources.   
+The same way we can call the `isGranted` method from any part of the app, including router guards and services, which gives us a transparent and flexibly configurable way to manage user access to various resources.  

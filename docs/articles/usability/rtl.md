@@ -24,7 +24,7 @@ Default value is `ltr`.
 <div class="note note-info">
   <div class="note-title">Note</div>
   <div class="note-body">
-    Components must be placed inside of the `<nb-layout></nb-layout>` component to correctly support language direction.
+    Components must be placed inside of the <code>&lt;nb-layout&gt;&lt;/nb-layout&gt;</code> component to correctly support language direction.
   </div>
 </div>
 

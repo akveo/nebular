@@ -21,5 +21,5 @@ This way you can get help from the community faster, sharing answers with others
 ## I'm new to Angular or web development in general
 
 Quite often we receive emails and messages from people who ask us for the advice we can give them if they are completely new to software engineering and/or Angular in particular. 
-We can't say that there's some general way, unfortunately. Each advice should be aimed at a particular person, his current skills set and goals. T
-hat's why we believe that each person knows better for himself. But in any case, there are multiple resources like https://www.coursera.org/ or https://egghead.io/ which focus on providing online education. 
+We can't say that there's some general way, unfortunately. Each advice should be aimed at a particular person, his current skills set and goals. 
+That's why we believe that each person knows better for himself. But in any case, there are multiple resources like <https://www.coursera.org/> or <https://egghead.io/> which focus on providing online education. 
