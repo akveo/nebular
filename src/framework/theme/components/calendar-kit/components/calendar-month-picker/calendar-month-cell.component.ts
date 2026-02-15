@@ -41,7 +41,7 @@ export class NbCalendarMonthCellComponent<D> implements NbCalendarCell<D, D> {
 
   @Output() select: EventEmitter<D> = new EventEmitter(true);
 
-  constructor(private dateService: NbDateService<D>) {
+  constructor(protected dateService: NbDateService<D>) {
   }
 
   @HostBinding('class.selected') get selected(): boolean {
