@@ -188,6 +188,9 @@ export class NbContextMenuDirective implements NbDynamicOverlayController, OnCha
   trigger: NbTrigger = NbTrigger.CLICK;
   static ngAcceptInputType_trigger: NbTriggerValues;
 
+  /**
+   * Set custom class on context menu, which helps you to customize it using CSS.
+   * */
   @Input('nbContextMenuClass')
   get contextMenuClass(): string {
     return this._contextMenuClass;
