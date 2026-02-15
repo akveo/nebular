@@ -17,3 +17,5 @@ jobs:
           cache: 'npm'
       - run: npm ci
       - run: npm run docs:gh-pages
+        env:
+          GH_TOKEN: ${{ github.token }}

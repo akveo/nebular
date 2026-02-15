@@ -23,7 +23,7 @@
     "docs:dirs": "npm-run-all -s docs:copy-index docs:sitemap",
     "docs:copy-index": "gulp docs-copy-index",
     "docs:sitemap": "gulp create-sitemap",
-    "docs:gh-pages": "ts-node -P tools/deploy-docs/tsconfig.json tools/deploy-docs/build-docs.ts",
+    "docs:gh-pages": "ts-node -P tools/deploy-docs/tsconfig.json tools/deploy-docs/build-docs.ts && npx angular-cli-ghpages --dir . --repo=https://github.com/akveo/nebular.git",
     "build": "ng build",
     "build:prod": "ng build --configuration=production",
     "build:wp": "ng build --configuration=production-wp",
