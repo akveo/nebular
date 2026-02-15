@@ -1,7 +1,7 @@
 <nb-card *nbPortal [class.supports-scrollbar-theming]="!isFirefox()" class="nb-timepicker-container">
   <nb-card-header class="column-header">
     <ng-container *ngIf="singleColumn; else fullTimeHeadersBlock">
-      <div class="header-cell">Time</div>
+      <div class="header-cell">{{ timeText }}</div>
     </ng-container>
     <ng-template #fullTimeHeadersBlock>
       <div class="header-cell">{{ hoursText }}</div>

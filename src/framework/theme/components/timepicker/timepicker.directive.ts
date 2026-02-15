@@ -116,8 +116,8 @@ import { NB_DOCUMENT } from '../../theme.options';
  * <input [nbTimepicker]="timepicker" twelveHoursFormat>
  * <nb-timepicker #timepicke [ngModel]="date"></nb-timepicker>
  *
- * You can provide localized versions of the timepicker text via the `localization` property of the config
- * object passed to the `forRoot` or `forChild` methods of the `NbTimepickerModule`:
+ * You can provide localized versions of some or all of the timepicker text via the `localization` property
+ * of the config object passed to the `forRoot` or `forChild` methods of the `NbTimepickerModule`:
  * ```ts
  * @NgModule({
  *   imports: [
@@ -128,6 +128,9 @@ import { NB_DOCUMENT } from '../../theme.options';
  *         minutesText: 'Min',
  *         secondsText: 'Sec',
  *         ampmText: 'Am/Pm',
+ *         timeText: 'Time',
+ *         applyButtonText: "ok",
+ *         currentTimeButtonText: "now",
  *       }
  *     }),
  *   ],
