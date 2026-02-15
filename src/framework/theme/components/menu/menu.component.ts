@@ -90,6 +90,10 @@ export class NbMenuItemComponent implements DoCheck, AfterViewInit, OnDestroy {
   }
 
   onItemClick(item: NbMenuItem) {
+    if(item.onMenuItemClicked)
+    {
+      item.onMenuItemClicked();
+    }
     this.itemClick.emit(item);
   }
 
