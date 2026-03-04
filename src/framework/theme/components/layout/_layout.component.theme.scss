@@ -55,7 +55,6 @@
 
     @include media-breakpoint-down(sm) {
       overflow-y: scroll;
-      -webkit-overflow-scrolling: touch;
     }
   }
 

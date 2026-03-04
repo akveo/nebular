@@ -26,13 +26,6 @@
   &::-webkit-scrollbar-corner {
     background: $bg;
   }
-
-  & {
-    // TODO: remove
-    // For Internet Explorer
-    scrollbar-face-color: $fg;
-    scrollbar-track-color: $bg;
-  }
 }
 
 @mixin nb-headings($from: 1, $to: 6) {
@@ -70,7 +63,7 @@
 }
 
 @mixin install-thumb() {
-  $thumb-selectors: ('::-webkit-slider-thumb' '::-moz-range-thumb' '::-ms-thumb');
+  $thumb-selectors: ('::-webkit-slider-thumb' '::-moz-range-thumb');
 
   @each $selector in $thumb-selectors {
     &#{$selector} {
@@ -82,7 +75,7 @@
 }
 
 @mixin install-track() {
-  $thumb-selectors: ('::-webkit-slider-runnable-track' '::-moz-range-track' '::-ms-track');
+  $thumb-selectors: ('::-webkit-slider-runnable-track' '::-moz-range-track');
 
   @each $selector in $thumb-selectors {
     &#{$selector} {
@@ -94,9 +87,7 @@
 }
 
 @mixin install-placeholder($color, $font-size, $opacity: 1) {
-  $placeholder-selectors: (
-    '::-webkit-input-placeholder' '::-moz-placeholder' ':-moz-placeholder' ':-ms-input-placeholder'
-  );
+  $placeholder-selectors: ('::-webkit-input-placeholder' '::-moz-placeholder' ':-moz-placeholder');
 
   &::placeholder {
     @include placeholder($color, $font-size, $opacity);
@@ -143,22 +134,10 @@
       $animations: #{$animations + ', '};
     }
   }
-  -webkit-animation: $animations;
-  -moz-animation: $animations;
-  -o-animation: $animations;
   animation: $animations;
 }
 
 @mixin keyframes($animationName) {
-  @-webkit-keyframes #{$animationName} {
-    @content;
-  }
-  @-moz-keyframes #{$animationName} {
-    @content;
-  }
-  @-o-keyframes #{$animationName} {
-    @content;
-  }
   @keyframes #{$animationName} {
     @content;
   }
