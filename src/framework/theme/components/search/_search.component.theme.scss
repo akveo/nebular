@@ -34,10 +34,6 @@
         &::placeholder {
           color: nb-theme(search-placeholder-text-color);
         }
-
-        &::-ms-clear {
-          display: none;
-        }
       }
     }
 

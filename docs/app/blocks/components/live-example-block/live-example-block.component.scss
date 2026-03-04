@@ -83,11 +83,6 @@
       transform: translate(-50%, -50%);
     }
 
-    /* Target IE9 - IE11 */
-    select::-ms-expand {
-      display: none;
-    }
-
     select {
       font-size: 0.875rem;
       appearance: none;
@@ -120,7 +115,6 @@
 
   .iframe-container {
     overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
   }
 
   iframe {
@@ -144,12 +138,12 @@
     transform: translate(-50%, -50%);
   }
 
-  @-webkit-keyframes rotation {
+  @keyframes rotation {
     from {
-      -webkit-transform: rotate(0deg);
+      transform: rotate(0deg);
     }
     to {
-      -webkit-transform: rotate(359deg);
+      transform: rotate(359deg);
     }
   }
 

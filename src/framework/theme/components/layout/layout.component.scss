@@ -38,7 +38,6 @@
   .layout-container {
     display: flex;
     flex: 1;
-    -ms-flex: 1 1 auto;
     flex-direction: row;
 
     ::ng-deep nb-sidebar {
@@ -65,7 +64,6 @@
     .content {
       display: flex;
       flex: 1;
-      -ms-flex: 1 1 auto;
       flex-direction: column;
       min-width: 0;
 
@@ -79,7 +77,6 @@
       .columns {
         display: flex;
         flex: 1;
-        -ms-flex: 1 1 auto;
         flex-direction: row;
         width: 100%;
 

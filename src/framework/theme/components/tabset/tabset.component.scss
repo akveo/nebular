@@ -15,7 +15,6 @@
 
   ::ng-deep nb-tab {
     flex: 1;
-    -ms-flex: 1 1 auto;
     overflow: auto;
     display: none;
     &.content-active {
