@@ -1,23 +1,17 @@
-/**
- * @license
- * Copyright Akveo. All Rights Reserved.
- * Licensed under the MIT License. See License.txt in the project root for license information.
- */
+import { expect, test } from '@playwright/test';
+import { openExample } from './e2e-helper';
 
-import { browser, element, by } from 'protractor';
-
-describe('nb-sidebar-two', () => {
-  beforeEach((done) => {
-    browser.get('#/sidebar/sidebar-two-test.component').then(() => done());
-  });
-
-  it('should render left non-fixed sidebar height minus header', () => {
-    Promise.all<any>([
-      element(by.css('nb-layout')).getSize(),
-      element(by.css('nb-layout-header')).getSize(),
-      element.all(by.css('nb-sidebar')).get(0).getSize(),
-    ]).then(([layoutSize, headerSize, sidebarSize]) => {
-      expect(sidebarSize.height).toEqual(layoutSize.height - headerSize.height);
-    });
+test.describe('nb-sidebar-two', () => {
+  test.beforeEach(({ page }) => openExample(page, '/#/sidebar/sidebar-two-test.component'));
+  test('should render left non-fixed sidebar height minus header', async ({ page }) => {
+    const [layout, header, sidebar] = await Promise.all([
+      page.locator('nb-layout').boundingBox(),
+      page.locator('nb-layout-header').boundingBox(),
+      page.locator('nb-sidebar').first().boundingBox(),
+    ]);
+    expect(layout).not.toBeNull();
+    expect(header).not.toBeNull();
+    expect(sidebar).not.toBeNull();
+    expect(Math.round(sidebar!.height)).toBe(Math.round(layout!.height - header!.height));
   });
 });

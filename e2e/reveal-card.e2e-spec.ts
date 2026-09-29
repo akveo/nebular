@@ -1,45 +1,21 @@
-/**
- * @license
- * Copyright Akveo. All Rights Reserved.
- * Licensed under the MIT License. See License.txt in the project root for license information.
- */
+import { expect, test } from '@playwright/test';
+import { cardSizes } from './component-shared';
+import { openExample } from './e2e-helper';
 
-import { browser, element, by } from 'protractor';
-import { cardSizes as sizes } from './component-shared';
-import { protractor } from 'protractor/built/ptor';
-
-function toInt(cssValue) {
-  return parseInt(cssValue, 10);
-}
-
-const cards = sizes.map((size, i) => ({
-  size,
-  i,
-}));
-
-describe('nb-reveal-card', () => {
-  beforeEach((done) => {
-    browser.get('#/card/card-test.component').then(() => done());
-  });
-
-  cards.forEach(c => {
-    describe(`${c.size.sizeKey} reveal card`, () => {
-      function showOnlyFrontCard () {
-        const revealCard = element.all(by.tagName('nb-reveal-card')).get(c.i);
-        const frontCard = revealCard.all(by.tagName('nb-card-front')).first();
-        const backCardContainer = revealCard.all(by.css('.second-card-container')).first();
-
-        protractor.promise.all([
-          backCardContainer.getCssValue('top'),
-          revealCard.getCssValue('height'),
-        ]).then(([ backCardTop, cardHeight ]) => {
-          expect(revealCard.getAttribute('class')).not.toContain('revealed', `card shouldn't has 'revealed' class`);
-          expect(frontCard.isDisplayed()).toBe(true, 'front card should be visible');
-          expect(toInt(backCardTop)).toEqual(toInt(cardHeight), 'back card should be hidden');
-        });
-      }
-
-      it(`should show only front card`, showOnlyFrontCard);
+test.describe('nb-reveal-card', () => {
+  test.beforeEach(({ page }) => openExample(page, '/#/card/card-test.component'));
+  cardSizes.forEach((size, index) => {
+    test.describe(`${size.sizeKey} reveal card`, () => {
+      test('should show only front card', async ({ page }) => {
+        const card = page.locator('nb-reveal-card').nth(index);
+        await expect(card).not.toHaveClass(/revealed/);
+        await expect(card.locator('nb-card-front')).toBeVisible();
+        const [backTop, cardHeight] = await Promise.all([
+          card.locator('.second-card-container').evaluate((node) => parseFloat(getComputedStyle(node).top)),
+          card.evaluate((node) => parseFloat(getComputedStyle(node).height)),
+        ]);
+        expect(Math.round(backTop)).toBe(Math.round(cardHeight));
+      });
     });
   });
 });

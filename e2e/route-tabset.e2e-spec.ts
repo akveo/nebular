@@ -1,21 +1,11 @@
-/**
- * @license
- * Copyright Akveo. All Rights Reserved.
- * Licensed under the MIT License. See License.txt in the project root for license information.
- */
+import { expect, test } from '@playwright/test';
+import { openExample } from './e2e-helper';
 
-import { browser, element, by } from 'protractor';
-
-describe('nb-route-tabset', () => {
-  beforeEach((done) => {
-    browser.get('#/tabset/route-tabset-showcase.component').then(() => done());
-  });
-
-  it('should display default route-tabset', () => {
-    expect(element(by.css('nb-card:nth-child(1) nb-route-tabset > ul > li:nth-child(1)'))
-      .getText()).toEqual('USERS');
-
-    expect(element(by.css('nb-card:nth-child(1) nb-route-tabset > ul > li:nth-child(2)'))
-      .getText()).toEqual('ORDERS');
+test.describe('nb-route-tabset', () => {
+  test.beforeEach(({ page }) => openExample(page, '/#/tabset/route-tabset-showcase.component'));
+  test('should display default route-tabset', async ({ page }) => {
+    const tabs = page.locator('nb-card').first().locator('nb-route-tabset > ul > li');
+    await expect(tabs.nth(0)).toHaveText('Users');
+    await expect(tabs.nth(1)).toHaveText('Orders');
   });
 });

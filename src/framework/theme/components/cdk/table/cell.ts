@@ -123,7 +123,7 @@ export class NbColumnDefDirective extends CdkColumnDef {
 })
 export class NbHeaderCellDirective extends CdkHeaderCell {
   constructor(columnDef: NbColumnDefDirective, elementRef: ElementRef<HTMLElement>) {
-    super(columnDef, elementRef);
+    super();
     elementRef.nativeElement.classList.add(`nb-column-${columnDef.cssClassFriendlyName}`);
   }
 }
@@ -139,7 +139,7 @@ export class NbHeaderCellDirective extends CdkHeaderCell {
 })
 export class NbFooterCellDirective extends CdkFooterCell {
   constructor(columnDef: NbColumnDefDirective, elementRef: ElementRef) {
-    super(columnDef, elementRef);
+    super();
     elementRef.nativeElement.classList.add(`nb-column-${columnDef.cssClassFriendlyName}`);
   }
 }
@@ -155,7 +155,7 @@ export class NbFooterCellDirective extends CdkFooterCell {
 })
 export class NbCellDirective extends CdkCell {
   constructor(columnDef: NbColumnDefDirective, elementRef: ElementRef<HTMLElement>) {
-    super(columnDef, elementRef);
+    super();
     elementRef.nativeElement.classList.add(`nb-column-${columnDef.cssClassFriendlyName}`);
   }
 }

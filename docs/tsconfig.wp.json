@@ -1,8 +1,10 @@
 {
   "extends": "./tsconfig.app.json",
-  "paths": {
-    "@nebular/*": [
-      "dist/*"
-    ]
+  "compilerOptions": {
+    "paths": {
+      "@nebular/*": [
+        "../dist/*"
+      ]
+    }
   }
 }

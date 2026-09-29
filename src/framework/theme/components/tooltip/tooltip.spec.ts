@@ -21,15 +21,15 @@ import {
 } from '@nebular/theme';
 
 @Component({
-    selector: 'nb-tooltip-default-test',
-    template: `
+  selector: 'nb-tooltip-default-test',
+  template: `
     <nb-layout>
       <nb-layout-column>
         <button #button nbTooltip="test">show tooltip</button>
       </nb-layout-column>
     </nb-layout>
   `,
-    standalone: false
+  standalone: false,
 })
 export class NbTooltipDefaultTestComponent {
   @ViewChild('button') button: ElementRef;
@@ -37,8 +37,8 @@ export class NbTooltipDefaultTestComponent {
 }
 
 @Component({
-    selector: 'nb-tooltip-bindings-test',
-    template: `
+  selector: 'nb-tooltip-bindings-test',
+  template: `
     <nb-layout>
       <nb-layout-column>
         <button
@@ -54,7 +54,7 @@ export class NbTooltipDefaultTestComponent {
       </nb-layout-column>
     </nb-layout>
   `,
-    standalone: false
+  standalone: false,
 })
 export class NbTooltipBindingsTestComponent {
   @ViewChild(NbTooltipDirective) tooltip: NbTooltipDirective;
@@ -65,12 +65,12 @@ export class NbTooltipBindingsTestComponent {
   @Input() trigger = NbTrigger.CLICK;
   @Input() position = NbPosition.TOP;
   @Input() adjustment = NbAdjustment.CLOCKWISE;
-  tooltipClass = '';
+  @Input() tooltipClass = '';
 }
 
 @Component({
-    selector: 'nb-tooltip-instance-test',
-    template: `
+  selector: 'nb-tooltip-instance-test',
+  template: `
     <nb-layout>
       <nb-layout-column>
         <button #button nbTooltip="test"></button>
@@ -79,7 +79,7 @@ export class NbTooltipBindingsTestComponent {
 
     <ng-template>Some Template</ng-template>
   `,
-    standalone: false
+  standalone: false,
 })
 export class NbTooltipInstanceTestComponent {
   @ViewChild(NbTooltipDirective) tooltip: NbTooltipDirective;
@@ -186,18 +186,16 @@ class PopoverTestModule {}
 describe('Directive: NbTooltipDirective', () => {
   const overlayHandler = new NbDynamicOverlayHandlerMock();
 
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.resetTestingModule();
-      TestBed.configureTestingModule({
-        imports: [NoopAnimationsModule, RouterTestingModule.withRoutes([]), NbThemeModule.forRoot(), PopoverTestModule],
-      });
+  beforeEach(waitForAsync(() => {
+    TestBed.resetTestingModule();
+    TestBed.configureTestingModule({
+      imports: [NoopAnimationsModule, RouterTestingModule.withRoutes([]), NbThemeModule.forRoot(), PopoverTestModule],
+    });
 
-      const iconLibs: NbIconLibraries = TestBed.inject(NbIconLibraries);
-      iconLibs.registerSvgPack('test', { 'some-icon': '<svg>some-icon</svg>' });
-      iconLibs.setDefaultPack('test');
-    }),
-  );
+    const iconLibs: NbIconLibraries = TestBed.inject(NbIconLibraries);
+    iconLibs.registerSvgPack('test', { 'some-icon': '<svg>some-icon</svg>' });
+    iconLibs.setDefaultPack('test');
+  }));
 
   describe('smoke ', () => {
     let fixture: ComponentFixture<any>;
@@ -239,7 +237,7 @@ describe('Directive: NbTooltipDirective', () => {
       fixture.componentInstance.tooltip.show();
       fixture.detectChanges();
 
-      fixture.componentInstance.content = 'new string';
+      fixture.componentRef.setInput('content', 'new string');
       fixture.detectChanges();
       const textContainer = fixture.nativeElement.querySelector('nb-tooltip .content span');
       expect(textContainer.textContent).toContain('test');
@@ -249,7 +247,7 @@ describe('Directive: NbTooltipDirective', () => {
       fixture = TestBed.createComponent(NbTooltipBindingsTestComponent);
       fixture.detectChanges();
 
-      fixture.componentInstance.icon = 'some-icon';
+      fixture.componentRef.setInput('icon', 'some-icon');
       fixture.detectChanges();
       fixture.componentInstance.tooltip.show();
       fixture.detectChanges();
@@ -262,7 +260,7 @@ describe('Directive: NbTooltipDirective', () => {
       fixture = TestBed.createComponent(NbTooltipBindingsTestComponent);
       fixture.detectChanges();
 
-      fixture.componentInstance.status = 'danger';
+      fixture.componentRef.setInput('status', 'danger');
       fixture.detectChanges();
       fixture.componentInstance.tooltip.show();
       fixture.detectChanges();
@@ -323,18 +321,16 @@ describe('Directive: NbTooltipDirective', () => {
   });
 
   describe('mocked services', () => {
-    beforeEach(
-      waitForAsync(() => {
-        TestBed.resetTestingModule();
-        TestBed.configureTestingModule({
-          imports: [RouterTestingModule.withRoutes([]), NbThemeModule.forRoot(), PopoverTestModule],
-        }).overrideDirective(NbTooltipDirective, {
-          set: {
-            providers: [{ provide: NbDynamicOverlayHandler, useValue: overlayHandler }],
-          },
-        });
-      }),
-    );
+    beforeEach(waitForAsync(() => {
+      TestBed.resetTestingModule();
+      TestBed.configureTestingModule({
+        imports: [RouterTestingModule.withRoutes([]), NbThemeModule.forRoot(), PopoverTestModule],
+      }).overrideDirective(NbTooltipDirective, {
+        set: {
+          providers: [{ provide: NbDynamicOverlayHandler, useValue: overlayHandler }],
+        },
+      });
+    }));
     describe('default tooltip', () => {
       let fixture: ComponentFixture<NbTooltipDefaultTestComponent>;
 
@@ -429,12 +425,12 @@ describe('Directive: NbTooltipDirective', () => {
         fixture = TestBed.createComponent(NbTooltipBindingsTestComponent);
         fixture.detectChanges();
 
-        fixture.componentInstance.adjustment = NbAdjustment.HORIZONTAL;
-        fixture.componentInstance.trigger = NbTrigger.CLICK;
-        fixture.componentInstance.content = 'new string';
-        fixture.componentInstance.status = 'success';
-        fixture.componentInstance.icon = 'home';
-        fixture.componentInstance.position = NbPosition.LEFT;
+        fixture.componentRef.setInput('adjustment', NbAdjustment.HORIZONTAL);
+        fixture.componentRef.setInput('trigger', NbTrigger.CLICK);
+        fixture.componentRef.setInput('content', 'new string');
+        fixture.componentRef.setInput('status', 'success');
+        fixture.componentRef.setInput('icon', 'home');
+        fixture.componentRef.setInput('position', NbPosition.LEFT);
 
         fixture.detectChanges();
 
@@ -464,7 +460,7 @@ describe('Directive: NbTooltipDirective', () => {
         fixture = TestBed.createComponent(NbTooltipBindingsTestComponent);
         fixture.detectChanges();
 
-        fixture.componentInstance.content = 'new string';
+        fixture.componentRef.setInput('content', 'new string');
         fixture.detectChanges();
         expect(contentSpy).toHaveBeenCalledTimes(3);
         expect(contentSpy).toHaveBeenCalledWith('new string');
@@ -475,7 +471,7 @@ describe('Directive: NbTooltipDirective', () => {
         const overlayConfigSpy = spyOn(overlayHandler, 'overlayConfig').and.callThrough();
 
         fixture = TestBed.createComponent(NbTooltipBindingsTestComponent);
-        fixture.componentInstance.tooltipClass = tooltipClass;
+        fixture.componentRef.setInput('tooltipClass', tooltipClass);
         fixture.detectChanges();
 
         expect(overlayConfigSpy).toHaveBeenCalledWith(jasmine.objectContaining({ panelClass: tooltipClass }));

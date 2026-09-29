@@ -12,8 +12,7 @@ import {
   hasNgModuleImport,
   parseSourceFile,
 } from '@angular/cdk/schematics';
-import { ProjectDefinition } from '@angular-devkit/core/src/workspace';
-import { normalize } from '@angular-devkit/core';
+import { normalize, workspaces } from '@angular-devkit/core';
 
 import { Schema } from '../schema';
 import { getAppModulePath, getProject, isImportedInMainModule } from '../../util';
@@ -88,7 +87,7 @@ function registerRouterIfNeeded(options: Schema): Rule {
 /**
  * Checks if `RouterModule` or `AppRoutingModule` already imported in the `AppModule`.
  * */
-function shouldRegisterRouter(tree: Tree, project: ProjectDefinition): boolean {
+function shouldRegisterRouter(tree: Tree, project: workspaces.ProjectDefinition): boolean {
   const appRoutingModuleAlreadyImported = isImportedInMainModule(tree, project, 'AppRoutingModule');
 
   const appModulePath = getAppModulePath(tree, getProjectMainFile(project));

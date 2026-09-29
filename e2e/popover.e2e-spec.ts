@@ -1,17 +1,14 @@
-import { browser, by, element } from 'protractor';
+import { expect, test } from '@playwright/test';
+import { openExample } from './e2e-helper';
 
-const contentTemplate = by.css('nb-card:nth-child(1) button:nth-child(1)');
-const popover = by.css('nb-layout nb-popover');
-
-describe('nb-popover', () => {
-
-  beforeEach((done) => {
-    browser.get('#/popover/popover-test.component').then(done);
-  });
-
-  it('render template ref', () => {
-    element(contentTemplate).click();
-    const containerContent = element(popover).element(by.css('nb-card'));
-    expect(containerContent.isPresent()).toBeTruthy();
+test.describe('nb-popover', () => {
+  test.beforeEach(({ page }) => openExample(page, '/#/popover/popover-test.component'));
+  test('render template ref', async ({ page }) => {
+    const trigger = page.locator('nb-card').first().locator('button').first();
+    await trigger.click();
+    const popover = page.locator('nb-layout nb-popover');
+    await expect(popover.locator('nb-card')).toBeVisible();
+    await trigger.click();
+    await expect(popover).toBeHidden();
   });
 });

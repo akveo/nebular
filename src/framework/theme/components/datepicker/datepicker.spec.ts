@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { ApplicationRef, Component, ViewChild } from '@angular/core';
+import { ApplicationRef, Component, Input, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { skip } from 'rxjs/operators';
@@ -21,42 +21,44 @@ import {
 } from '@nebular/theme';
 
 @Component({
-    selector: 'nb-datepicker-test',
-    template: `
+  selector: 'nb-datepicker-test',
+  template: `
     <nb-layout>
       <nb-layout-column>
         <input [nbDatepicker]="datepicker" />
-        <nb-datepicker #datepicker></nb-datepicker>
+        <nb-datepicker #datepicker [visibleDate]="visibleDate"></nb-datepicker>
       </nb-layout-column>
     </nb-layout>
   `,
-    standalone: false
+  standalone: false,
 })
 export class NbDatepickerTestComponent {
+  @Input() visibleDate: Date;
   @ViewChild(NbDatepickerComponent) datepicker: NbDatepickerComponent<Date>;
   @ViewChild(NbDatepickerDirective) datepickerDirective: NbDatepickerDirective<Date>;
 }
 
 @Component({
-    selector: 'nb-rangepicker-test',
-    template: `
+  selector: 'nb-rangepicker-test',
+  template: `
     <nb-layout>
       <nb-layout-column>
         <input [nbDatepicker]="rangepicker" />
-        <nb-rangepicker #rangepicker></nb-rangepicker>
+        <nb-rangepicker #rangepicker [visibleDate]="visibleDate"></nb-rangepicker>
       </nb-layout-column>
     </nb-layout>
   `,
-    standalone: false
+  standalone: false,
 })
 export class NbRangepickerTestComponent {
+  @Input() visibleDate: Date;
   @ViewChild(NbRangepickerComponent) rangepicker: NbRangepickerComponent<Date>;
   @ViewChild(NbDatepickerDirective) datepickerDirective: NbDatepickerDirective<Date>;
 }
 
 @Component({
-    selector: 'nb-date-timepicker-test',
-    template: `
+  selector: 'nb-date-timepicker-test',
+  template: `
     <nb-layout>
       <nb-layout-column>
         <input [nbDatepicker]="rangepicker" />
@@ -64,7 +66,7 @@ export class NbRangepickerTestComponent {
       </nb-layout-column>
     </nb-layout>
   `,
-    standalone: false
+  standalone: false,
 })
 export class NbDateTimepickerTestComponent {
   @ViewChild(NbDateTimePickerComponent) dateTimepicker: NbDateTimePickerComponent<Date>;
@@ -134,7 +136,8 @@ describe('nb-datepicker', () => {
 
   it('should write selected date in the input', (done) => {
     const date = new Date(2018, 8, 17);
-    datepicker.visibleDate = date;
+    fixture.componentRef.setInput('visibleDate', date);
+    fixture.detectChanges();
     showDatepicker();
 
     datepicker.dateChange.subscribe((e) => {
@@ -259,7 +262,8 @@ describe('nb-rangepicker', () => {
   });
 
   it('should emit rangeChange when selected start date', (done) => {
-    rangepicker.visibleDate = new Date(2018, 8, 17);
+    fixture.componentRef.setInput('visibleDate', new Date(2018, 8, 17));
+    fixture.detectChanges();
     showRangepicker();
 
     rangepicker.rangeChange.subscribe((range: NbCalendarRange<Date>) => {
@@ -278,7 +282,8 @@ describe('nb-rangepicker', () => {
   }, 5000);
 
   it('should emit rangeChange when selected start and end dates', (done) => {
-    rangepicker.visibleDate = new Date(2018, 8, 17);
+    fixture.componentRef.setInput('visibleDate', new Date(2018, 8, 17));
+    fixture.detectChanges();
     showRangepicker();
 
     rangepicker.rangeChange.pipe(skip(1)).subscribe((range: NbCalendarRange<Date>) => {

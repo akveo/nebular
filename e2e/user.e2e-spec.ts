@@ -1,34 +1,19 @@
-/**
- * @license
- * Copyright Akveo. All Rights Reserved.
- * Licensed under the MIT License. See License.txt in the project root for license information.
- */
+import { expect, test } from '@playwright/test';
+import badgeTests from './badge-shared';
+import { openExample } from './e2e-helper';
 
-import { browser, element, by } from 'protractor';
-import badgeTests from './badge.e2e-spec';
-
-describe('nb-user', () => {
-
-  beforeEach((done) => {
-    browser.get('#/user/user-test.component').then(() => done());
-  });
-
-  describe('badge', () => {
-    const elementsOffset = 10;
-    const badgeText = '29';
-    const badgesConf = {
-      selector: (i) => `.test-row:nth-child(${elementsOffset + i + 1}) nb-badge`,
-      badges: [
-        { position: 'top right', status: 'primary', text: badgeText },
-      ],
-    };
-    badgeTests(badgesConf);
-  });
-
-  it('background image should have base64 image', () => {
-    element(by.css('#base64-image .user-picture.image')).getCssValue('background-image').then(value => {
-      expect(value).toEqual('url("data:image/png;base64,aaa")');
+test.describe('nb-user', () => {
+  test.beforeEach(({ page }) => openExample(page, '/#/user/user-test.component'));
+  test.describe('badge', () => {
+    badgeTests({
+      selector: (i) => `.test-row:nth-child(${10 + i + 1}) nb-badge`,
+      badges: [{ text: '29' }],
     });
   });
-
+  test('background image should have base64 image', async ({ page }) => {
+    await expect(page.locator('#base64-image .user-picture.image')).toHaveCSS(
+      'background-image',
+      'url("data:image/png;base64,aaa")',
+    );
+  });
 });

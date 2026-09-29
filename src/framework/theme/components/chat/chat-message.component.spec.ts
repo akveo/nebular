@@ -1,11 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NbChatMessageComponent, NbChatModule, NbThemeModule, NbChatCustomMessageService } from '@nebular/theme';
 
 @Component({
-    selector: 'nb-chat-message-test',
-    template: `
+  selector: 'nb-chat-message-test',
+  template: `
     <nb-chat size="large">
       <nb-chat-message
         *ngFor="let msg of messages"
@@ -24,9 +24,10 @@ import { NbChatMessageComponent, NbChatModule, NbThemeModule, NbChatCustomMessag
       <nb-chat-form [dropFiles]="false"> </nb-chat-form>
     </nb-chat>
   `,
-    standalone: false
+  standalone: false,
 })
 export class NbChatMessageTestComponent {
+  @Input()
   messages = [];
 
   loadMessages(): void {
@@ -79,6 +80,7 @@ describe('Chat-message component: NbChatMessageTestComponent', () => {
 
   it('should create custom messages with content', () => {
     component.loadMessages();
+    fixture.componentRef.setInput('messages', component.messages);
     fixture.detectChanges();
 
     const customMessageElement = fixture.nativeElement.querySelector('a');

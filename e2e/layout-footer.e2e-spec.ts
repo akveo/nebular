@@ -1,20 +1,9 @@
-/**
- * @license
- * Copyright Akveo. All Rights Reserved.
- * Licensed under the MIT License. See License.txt in the project root for license information.
- */
+import { expect, test } from '@playwright/test';
+import { openExample } from './e2e-helper';
 
-import { browser, element, by } from 'protractor';
-
-describe('nb-layout-footer', () => {
-
-  beforeEach((done) => {
-    browser.get('#/layout/layout-footer-test.component').then(() => done());
-  });
-
-  it('should render default footer', () => {
-    element(by.css('nb-layout-footer > nav')).getAttribute('class').then(value => {
-      expect(value).toBeDefined();
-    });
+test.describe('nb-layout-footer', () => {
+  test.beforeEach(({ page }) => openExample(page, '/#/layout/layout-footer-test.component'));
+  test('should render default footer', async ({ page }) => {
+    await expect(page.locator('nb-layout-footer > nav')).toBeVisible();
   });
 });

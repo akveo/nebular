@@ -1,4 +1,4 @@
-import { Component, DebugElement } from '@angular/core';
+import { Component, DebugElement, Input } from '@angular/core';
 import { APP_BASE_HREF } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { By } from '@angular/platform-browser';
@@ -39,7 +39,7 @@ function setup() {
 }
 
 @Component({
-    template: `
+  template: `
     <nb-layout [withScroll]="withScroll">
       <nb-layout-column>
         <nb-list
@@ -58,8 +58,8 @@ function setup() {
       </nb-layout-column>
     </nb-layout>
   `,
-    styles: [
-        `
+  styles: [
+    `
       ::ng-deep nb-layout.with-scroll .scrollable-container {
         overflow: auto;
         height: 100vh;
@@ -77,13 +77,17 @@ function setup() {
         height: ${CONTENT_HEIGHT}px;
       }
     `,
-    ],
-    standalone: false
+  ],
+  standalone: false,
 })
 class ScrollTestComponent {
+  @Input()
   listenWindowScroll = false;
+  @Input()
   threshold = THRESHOLD;
+  @Input()
   withScroll = false;
+  @Input()
   throttleTime = 0;
 
   bottomThreshold() {}
@@ -108,7 +112,7 @@ describe('Directive: NbScrollDirective', () => {
   it('should listen to window scroll', fakeAsync(() => {
     setup();
     const checkPositionSpy = spyOn(infiniteListDirective, 'checkPosition');
-    testComponent.listenWindowScroll = true;
+    fixture.componentRef.setInput('listenWindowScroll', true);
     fixture.detectChanges();
 
     window.dispatchEvent(new Event('scroll'));
@@ -118,8 +122,8 @@ describe('Directive: NbScrollDirective', () => {
   it('should listen to layout scroll', fakeAsync(() => {
     setup();
     const checkPositionSpy = spyOn(infiniteListDirective, 'checkPosition');
-    testComponent.listenWindowScroll = true;
-    testComponent.withScroll = true;
+    fixture.componentRef.setInput('listenWindowScroll', true);
+    fixture.componentRef.setInput('withScroll', true);
     fixture.detectChanges();
 
     layoutComponent.scrollableContainerRef.nativeElement.dispatchEvent(new Event('scroll'));
@@ -151,7 +155,7 @@ describe('Directive: NbScrollDirective', () => {
 
   it('should ignore element scroll when listening to window or layout scroll', fakeAsync(() => {
     setup();
-    testComponent.listenWindowScroll = true;
+    fixture.componentRef.setInput('listenWindowScroll', true);
     fixture.detectChanges();
 
     const checkPositionSpy = spyOn(infiniteListDirective, 'checkPosition');
@@ -164,7 +168,7 @@ describe('Directive: NbScrollDirective', () => {
     tick(infiniteListDirective.throttleTime);
     expect(checkPositionSpy).toHaveBeenCalledTimes(1);
 
-    testComponent.withScroll = true;
+    fixture.componentRef.setInput('withScroll', true);
     fixture.detectChanges();
 
     listElementRef.nativeElement.dispatchEvent(new Event('scroll'));
@@ -199,7 +203,7 @@ describe('Directive: NbScrollDirective', () => {
     setup();
     const { documentElement } = document;
 
-    testComponent.listenWindowScroll = true;
+    fixture.componentRef.setInput('listenWindowScroll', true);
     fixture.detectChanges();
 
     const thresholdSpy = spyOn(testComponent, 'bottomThreshold');
@@ -222,8 +226,8 @@ describe('Directive: NbScrollDirective', () => {
     setup();
     const scroller: Element = layoutComponent.scrollableContainerRef.nativeElement;
 
-    testComponent.listenWindowScroll = true;
-    testComponent.withScroll = true;
+    fixture.componentRef.setInput('listenWindowScroll', true);
+    fixture.componentRef.setInput('withScroll', true);
     fixture.detectChanges();
 
     const thresholdSpy = spyOn(testComponent, 'bottomThreshold');
@@ -259,7 +263,7 @@ describe('Directive: NbScrollDirective', () => {
 
   it('should trigger topThreshold when threshold reached (window)', fakeAsync(() => {
     setup();
-    testComponent.listenWindowScroll = true;
+    fixture.componentRef.setInput('listenWindowScroll', true);
     fixture.detectChanges();
 
     const { documentElement } = document;
@@ -278,8 +282,8 @@ describe('Directive: NbScrollDirective', () => {
 
   it('should trigger topThreshold when threshold reached (layout scroll)', fakeAsync(() => {
     setup();
-    testComponent.listenWindowScroll = true;
-    testComponent.withScroll = true;
+    fixture.componentRef.setInput('listenWindowScroll', true);
+    fixture.componentRef.setInput('withScroll', true);
     fixture.detectChanges();
 
     const layoutElement = layoutComponent.scrollableContainerRef.nativeElement;
@@ -301,8 +305,8 @@ describe('Directive: NbScrollDirective', () => {
     const { documentElement } = document;
     const THROTTLE = 200;
 
-    testComponent.listenWindowScroll = true;
-    testComponent.throttleTime = THROTTLE;
+    fixture.componentRef.setInput('listenWindowScroll', true);
+    fixture.componentRef.setInput('throttleTime', THROTTLE);
     fixture.detectChanges();
 
     const thresholdSpy = spyOn(testComponent, 'bottomThreshold');
@@ -327,8 +331,8 @@ describe('Directive: NbScrollDirective', () => {
     const { documentElement } = document;
     const THROTTLE = 200;
 
-    testComponent.listenWindowScroll = true;
-    testComponent.throttleTime = THROTTLE;
+    fixture.componentRef.setInput('listenWindowScroll', true);
+    fixture.componentRef.setInput('throttleTime', THROTTLE);
 
     fixture.detectChanges();
 
@@ -358,7 +362,7 @@ describe('Directive: NbScrollDirective', () => {
     const scrollingNativeElement = listElementRef.nativeElement;
     const THROTTLE = 200;
 
-    testComponent.throttleTime = THROTTLE;
+    fixture.componentRef.setInput('throttleTime', THROTTLE);
     fixture.detectChanges();
 
     const thresholdSpy = spyOn(testComponent, 'bottomThreshold');
@@ -383,7 +387,7 @@ describe('Directive: NbScrollDirective', () => {
     const scrollingElement = listElementRef.nativeElement;
     const THROTTLE = 200;
 
-    testComponent.throttleTime = THROTTLE;
+    fixture.componentRef.setInput('throttleTime', THROTTLE);
     fixture.detectChanges();
 
     scrollingElement.scrollTop = THRESHOLD + 1;

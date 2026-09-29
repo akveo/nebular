@@ -12,7 +12,7 @@ export class NbScrollDispatcherAdapter extends ScrollDispatcher {
               platform: NbPlatform,
               protected scrollService: NbLayoutScrollService,
               @Inject(NB_DOCUMENT) document: any) {
-    super(ngZone, platform, document);
+    super();
   }
 
   scrolled(auditTimeInMs?: number): Observable<CdkScrollable | void> {
@@ -22,4 +22,3 @@ export class NbScrollDispatcherAdapter extends ScrollDispatcher {
     );
   }
 }
-

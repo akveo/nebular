@@ -1,27 +1,11 @@
-/**
- * @license
- * Copyright Akveo. All Rights Reserved.
- * Licensed under the MIT License. See License.txt in the project root for license information.
- */
+import { expect, test } from '@playwright/test';
+import { openExample } from './e2e-helper';
 
-import { browser, element, by } from 'protractor';
-import { hasClass } from './e2e-helper';
-import { protractor } from 'protractor/built/ptor';
-
-const EC = protractor.ExpectedConditions;
-const WAIT_TIME = 1500;
-
-describe('nb-search', () => {
-
-  beforeEach((done) => {
-    browser.get('#/search/search-test.component').then(() => done());
-  });
-
-  it('should be able to show search-field', () => {
-    element(by.css('.start-search')).click();
-    // TODO: Remove after implementing search animations with angular.
-    // For now need to wait animation to complete before performing checks.
-    browser.wait(EC.visibilityOf(element(by.css('.search-input'))), WAIT_TIME);
-    expect(hasClass(element(by.css('nb-search-field')), 'show')).toBeTruthy();
+test.describe('nb-search', () => {
+  test.beforeEach(({ page }) => openExample(page, '/#/search/search-test.component'));
+  test('should be able to show search-field', async ({ page }) => {
+    await page.locator('.start-search').click();
+    await expect(page.locator('.search-input')).toBeVisible();
+    await expect(page.locator('nb-search-field')).toHaveClass(/show/);
   });
 });

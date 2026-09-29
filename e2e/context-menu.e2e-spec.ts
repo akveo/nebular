@@ -1,20 +1,13 @@
-import { browser, by, element } from 'protractor';
+import { expect, test } from '@playwright/test';
+import { openExample } from './e2e-helper';
 
-const withContextMenu = by.css('nb-card:nth-child(1) nb-user:nth-child(1)');
-const popover = by.css('nb-layout nb-context-menu');
-
-describe('nb-context-menu', () => {
-
-  beforeEach((done) => {
-    browser.get('#/context-menu/context-menu-test.component').then(done);
-  });
-
-  it('have to hide when click on item', () => {
-    element(withContextMenu).click();
-    const containerContent = element(popover).all(by.css('nb-menu > ul > li')).get(2);
-    expect(containerContent.isPresent()).toBeTruthy();
-
-    containerContent.click();
-    expect(containerContent.isPresent()).toBeFalsy();
+test.describe('nb-context-menu', () => {
+  test.beforeEach(({ page }) => openExample(page, '/#/context-menu/context-menu-test.component'));
+  test('have to hide when click on item', async ({ page }) => {
+    await page.locator('nb-card').first().locator('nb-user').first().click();
+    const item = page.locator('nb-context-menu nb-menu > ul > li').nth(2);
+    await expect(item).toBeVisible();
+    await item.click();
+    await expect(item).toBeHidden();
   });
 });

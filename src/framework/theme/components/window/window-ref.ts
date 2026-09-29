@@ -1,4 +1,4 @@
-import { ComponentRef } from '@angular/core';
+import { ComponentRef, signal } from '@angular/core';
 import { Observable, ReplaySubject, Subject } from 'rxjs';
 import { NbWindowComponent } from './window.component';
 import { NbWindowConfig, NbWindowState, NbWindowStateChange } from './window.options';
@@ -15,16 +15,19 @@ export class NbWindowRef<T = any, R = any> {
 
   protected prevStateValue: NbWindowState;
   protected stateValue: NbWindowState;
+  private readonly stateSignal = signal<NbWindowState>(undefined);
   /**
    * Current window state.
    */
   get state() {
+    this.stateSignal();
     return this.stateValue;
   }
   set state(newState: NbWindowState) {
-    if (newState && this.stateValue !== newState) {
+    if (newState && this.state !== newState) {
       this.prevStateValue = this.state;
       this.stateValue = newState;
+      this.stateSignal.set(newState);
       this.stateChange$.next({ oldState: this.prevStateValue, newState });
     }
   }

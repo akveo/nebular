@@ -7,6 +7,7 @@
     ],
     "module": "commonjs",
     "moduleResolution": "node",
+    "strict": false,
     "strictNullChecks": true,
     "target": "es2018",
     "typeRoots": [

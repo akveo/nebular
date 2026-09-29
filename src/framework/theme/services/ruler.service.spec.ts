@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { APP_BASE_HREF } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { TestBed, ComponentFixture, fakeAsync, tick, inject, waitForAsync } from '@angular/core/testing';
@@ -17,19 +17,19 @@ let componentInstance: RulerTestComponent;
 let rulerService: NbLayoutRulerService;
 
 @Component({
-    template: `
+  template: `
     <nb-layout [withScroll]="localScroll" #layout>
       <nb-layout-column>
         <div #resize></div>
       </nb-layout-column>
     </nb-layout>
   `,
-    standalone: false
+  standalone: false,
 })
 class RulerTestComponent {
   @ViewChild('resize', { read: ElementRef }) private resizeElement: ElementRef;
   @ViewChild('layout', { read: ElementRef }) private layout: ElementRef;
-  localScroll = false;
+  @Input() localScroll = false;
 
   setSize(width: string, height: string) {
     this.resizeElement.nativeElement.style.width = width;
@@ -100,7 +100,7 @@ describe('NbLayoutRulerService', () => {
   });
 
   it('should get dimensions from scrollable', (done) => {
-    componentInstance.useLocalScroll();
+    fixture.componentRef.setInput('localScroll', true);
     fixture.detectChanges();
     const scrollable = componentInstance.getScrollableElement();
     rulerService.getDimensions().subscribe((size: NbLayoutDimensions) => {
@@ -113,7 +113,7 @@ describe('NbLayoutRulerService', () => {
   });
 
   it('should get dimensions from scrollable when scrolls', (done) => {
-    componentInstance.useLocalScroll();
+    fixture.componentRef.setInput('localScroll', true);
     componentInstance.setSize('10000px', '10000px');
     fixture.detectChanges();
     const scrollable = componentInstance.getScrollableElement();

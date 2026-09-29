@@ -148,7 +148,7 @@ export class NbMenuItem {
  *
  *
  */
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class NbMenuService {
   /**
    * Add items to the end of the menu items list
@@ -205,7 +205,7 @@ export class NbMenuService {
   }
 }
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class NbMenuInternalService {
   constructor(private location: Location) {}
 

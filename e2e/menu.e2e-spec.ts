@@ -1,44 +1,20 @@
-/**
- * @license
- * Copyright Akveo. All Rights Reserved.
- * Licensed under the MIT License. See License.txt in the project root for license information.
- */
+import { expect, test } from '@playwright/test';
+import { openExample } from './e2e-helper';
 
-import { browser, by, element } from 'protractor';
-
-import { hasClass } from './e2e-helper';
-
-const group = by.css('#menu-first ul li:nth-child(1) span');
-const menu1 = by.css('#menu-first ul li:nth-child(2) a');
-
-describe('nb-menu', () => {
-
-  beforeEach((done) => {
-    browser.get('#/menu/menu-test.component').then(() => done());
+test.describe('nb-menu', () => {
+  test.beforeEach(({ page }) => openExample(page, '/#/menu/menu-test.component'));
+  test('should display group title', async ({ page }) => {
+    await expect(page.locator('#menu-first ul li').nth(0).locator('span')).toHaveText('Menu Items');
   });
-
-  it('should display group title', () => {
-    element.all(group).first().getText()
-      .then(val => {
-        expect(val).toEqual('Menu Items');
-      });
+  test('should display menu', async ({ page }) => {
+    await expect(page.locator('#menu-first')).toBeVisible();
+    await expect(page).toHaveURL(/#\/menu\/menu-test\.component\/1/);
   });
-
-  it('should display menu', () => {
-    expect(element(by.css('#menu-first')).isDisplayed()).toBeTruthy();
-    expect(browser.getCurrentUrl()).toContain('#/menu/menu-test.component/1');
-  });
-
-  it('should be selected - Menu #1', () => {
-    element.all(menu1).first().getText()
-      .then(val => {
-        expect(val).toEqual('Menu #1');
-      });
-
-    element.all(menu1).first().click()
-      .then(() => {
-        expect(hasClass(element.all(menu1).first(), 'active')).toBeTruthy();
-        expect(browser.getCurrentUrl()).toContain('#/menu/menu-test.component/1');
-      });
+  test('should be selected - Menu #1', async ({ page }) => {
+    const menu = page.locator('#menu-first ul li').nth(1).locator('a');
+    await expect(menu).toHaveText('Menu #1');
+    await menu.click();
+    await expect(menu).toHaveClass(/active/);
+    await expect(page).toHaveURL(/#\/menu\/menu-test\.component\/1/);
   });
 });

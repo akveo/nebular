@@ -44,14 +44,14 @@ import {
 import { NbMenuInternalService } from './menu.service';
 
 @Component({
-    template: '',
-    standalone: false
+  template: '',
+  standalone: false,
 })
 export class NoopComponent {}
 
 @Component({
-    template: `<nb-menu [items]="items" [tag]="menuTag"></nb-menu>`,
-    standalone: false
+  template: `<nb-menu [items]="items" [tag]="menuTag"></nb-menu>`,
+  standalone: false,
 })
 export class SingleMenuTestComponent {
   constructor(public menuPublicService: NbMenuService) {}
@@ -61,11 +61,11 @@ export class SingleMenuTestComponent {
 }
 
 @Component({
-    template: `
+  template: `
     <nb-menu [items]="firstMenuItems" [tag]="firstMenuTag"></nb-menu>
     <nb-menu [items]="secondMenuItems" [tag]="secondMenuTag"></nb-menu>
   `,
-    standalone: false
+  standalone: false,
 })
 export class DoubleMenusTestComponent {
   constructor(public menuPublicService: NbMenuService) {}
@@ -114,8 +114,8 @@ function createTestBed(routes: Routes = []) {
 function createSingleMenuComponent(menuItems, menuTag = 'menu') {
   createTestBed();
   const fixture = TestBed.createComponent(SingleMenuTestComponent);
-  fixture.componentInstance.items = menuItems;
-  fixture.componentInstance.menuTag = menuTag;
+  fixture.componentRef.setInput('items', menuItems);
+  fixture.componentRef.setInput('menuTag', menuTag);
   const menuService = fixture.componentInstance.menuPublicService;
   fixture.detectChanges();
   return { fixture, menuService };
@@ -124,10 +124,10 @@ function createSingleMenuComponent(menuItems, menuTag = 'menu') {
 function createDoubleMenuComponent(firstMenuItems, firstMenuTag, secondMenuItems, secondMenuTag) {
   createTestBed();
   const fixture = TestBed.createComponent(DoubleMenusTestComponent);
-  fixture.componentInstance.firstMenuItems = firstMenuItems;
-  fixture.componentInstance.secondMenuItems = secondMenuItems;
-  fixture.componentInstance.firstMenuTag = firstMenuTag;
-  fixture.componentInstance.secondMenuTag = secondMenuTag;
+  fixture.componentRef.setInput('firstMenuItems', firstMenuItems);
+  fixture.componentRef.setInput('secondMenuItems', secondMenuItems);
+  fixture.componentRef.setInput('firstMenuTag', firstMenuTag);
+  fixture.componentRef.setInput('secondMenuTag', secondMenuTag);
   const menuService = fixture.componentInstance.menuPublicService;
   fixture.detectChanges();
   return { fixture, menuService };

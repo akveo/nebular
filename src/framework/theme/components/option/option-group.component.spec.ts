@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, Input, ViewChild } from '@angular/core';
 import { ComponentFixture, fakeAsync, flush, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -12,26 +12,29 @@ import {
 } from '@nebular/theme';
 
 @Component({
-    template: `
+  template: `
     <nb-layout>
       <nb-layout-column>
-
         <nb-select [disabled]="selectDisabled">
           <nb-option-group [disabled]="optionGroupDisabled" [title]="optionGroupTitle">
             <nb-option *ngIf="showOption" [value]="1" [disabled]="optionDisabled">1</nb-option>
           </nb-option-group>
         </nb-select>
-
       </nb-layout-column>
     </nb-layout>
   `,
-    standalone: false
+  standalone: false,
 })
 export class NbOptionGroupTestComponent {
+  @Input()
   selectDisabled = false;
+  @Input()
   optionGroupDisabled = false;
+  @Input()
   optionDisabled = false;
+  @Input()
   showOption = true;
+  @Input()
   optionGroupTitle = '';
 
   @ViewChild(NbSelectComponent) selectComponent: NbSelectComponent;
@@ -48,13 +51,8 @@ describe('NbOptionGroupComponent', () => {
 
   beforeEach(fakeAsync(() => {
     TestBed.configureTestingModule({
-      imports: [
-        RouterTestingModule.withRoutes([]),
-        NbThemeModule.forRoot(),
-        NbLayoutModule,
-        NbSelectModule,
-      ],
-      declarations: [ NbOptionGroupTestComponent ],
+      imports: [RouterTestingModule.withRoutes([]), NbThemeModule.forRoot(), NbLayoutModule, NbSelectModule],
+      declarations: [NbOptionGroupTestComponent],
     });
 
     fixture = TestBed.createComponent(NbOptionGroupTestComponent);
@@ -70,10 +68,11 @@ describe('NbOptionGroupComponent', () => {
   it('should contain passed title', () => {
     const title = 'random option group title';
     selectComponent.show();
-    testComponent.optionGroupTitle = title;
+    fixture.componentRef.setInput('optionGroupTitle', title);
     fixture.detectChanges();
 
-    const groupTitle = fixture.debugElement.query(By.directive(NbOptionGroupComponent))
+    const groupTitle = fixture.debugElement
+      .query(By.directive(NbOptionGroupComponent))
       .query(By.css('.option-group-title'));
 
     expect(groupTitle.nativeElement.textContent).toEqual(title);
@@ -81,7 +80,7 @@ describe('NbOptionGroupComponent', () => {
 
   it('should have disabled attribute if disabled', () => {
     selectComponent.show();
-    testComponent.optionGroupDisabled = true;
+    fixture.componentRef.setInput('optionGroupDisabled', true);
     fixture.detectChanges();
 
     const optionGroup = fixture.debugElement.query(By.directive(NbOptionGroupComponent));
@@ -90,10 +89,10 @@ describe('NbOptionGroupComponent', () => {
 
   it('should remove disabled attribute if disabled set to false', () => {
     selectComponent.show();
-    testComponent.optionGroupDisabled = true;
+    fixture.componentRef.setInput('optionGroupDisabled', true);
     fixture.detectChanges();
 
-    testComponent.optionGroupDisabled = false;
+    fixture.componentRef.setInput('optionGroupDisabled', false);
     fixture.detectChanges();
 
     const optionGroup = fixture.debugElement.query(By.directive(NbOptionGroupComponent));
@@ -111,7 +110,7 @@ describe('NbOptionGroupComponent', () => {
   });
 
   it('should enable group options if group enabled', () => {
-    testComponent.optionDisabled = true;
+    fixture.componentRef.setInput('optionDisabled', true);
     fixture.detectChanges();
 
     expect(optionComponent.disabled).toEqual(true);
@@ -124,12 +123,12 @@ describe('NbOptionGroupComponent', () => {
   });
 
   it('should update options state when options change', fakeAsync(() => {
-    testComponent.optionGroupDisabled = true;
-    testComponent.showOption = false;
+    fixture.componentRef.setInput('optionGroupDisabled', true);
+    fixture.componentRef.setInput('showOption', false);
     fixture.detectChanges();
     flush();
 
-    testComponent.showOption = true;
+    fixture.componentRef.setInput('showOption', true);
     fixture.detectChanges();
     flush();
     fixture.detectChanges();
@@ -140,7 +139,7 @@ describe('NbOptionGroupComponent', () => {
   it('should update options state after content initialisation', fakeAsync(() => {
     fixture = TestBed.createComponent(NbOptionGroupTestComponent);
     testComponent = fixture.componentInstance;
-    testComponent.optionDisabled = true;
+    fixture.componentRef.setInput('optionDisabled', true);
     fixture.detectChanges();
     flush();
 

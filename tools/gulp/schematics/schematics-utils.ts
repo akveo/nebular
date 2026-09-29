@@ -7,7 +7,7 @@
 import { existsSync, readdirSync } from 'fs';
 import { join, resolve as resolvePath } from 'path';
 import { spawn } from 'child_process';
-import * as log from 'fancy-log';
+import log = require('fancy-log');
 import { SCHEMATICS_SPEC_TSCONFIG, SOURCE_DIR } from '../config';
 
 export function getPackagesWithSchematicsSpecs(): string[] {

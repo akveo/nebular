@@ -20,35 +20,35 @@ import {
 } from '@nebular/theme';
 
 @Component({
-    selector: 'nb-popover-component-content-test',
-    template: 'test, {{ text }}',
-    standalone: false
+  selector: 'nb-popover-component-content-test',
+  template: 'test, {{ text }}',
+  standalone: false,
 })
 export class NbPopoverComponentContentTestComponent {
   text: string;
 }
 
 @Component({
-    selector: 'nb-popover-default-test',
-    template: `
+  selector: 'nb-popover-default-test',
+  template: `
     <nb-layout>
       <nb-layout-column>
         <button #button nbPopover="test" [nbPopoverClass]="popoverClass">show popover</button>
       </nb-layout-column>
     </nb-layout>
   `,
-    standalone: false
+  standalone: false,
 })
 export class NbPopoverDefaultTestComponent {
   @ViewChild('button') button: ElementRef;
   @ViewChild(NbPopoverDirective) popover: NbPopoverDirective;
 
-  popoverClass = '';
+  @Input() popoverClass = '';
 }
 
 @Component({
-    selector: 'nb-popover-bindings-test',
-    template: `
+  selector: 'nb-popover-bindings-test',
+  template: `
     <nb-layout>
       <nb-layout-column>
         <button
@@ -64,7 +64,7 @@ export class NbPopoverDefaultTestComponent {
 
     <ng-template let-data>Some Template {{ data.text }}</ng-template>
   `,
-    standalone: false
+  standalone: false,
 })
 export class NbPopoverBindingsTestComponent {
   @ViewChild(NbPopoverDirective) popover: NbPopoverDirective;
@@ -78,8 +78,8 @@ export class NbPopoverBindingsTestComponent {
 }
 
 @Component({
-    selector: 'nb-popover-instance-test',
-    template: `
+  selector: 'nb-popover-instance-test',
+  template: `
     <nb-layout>
       <nb-layout-column>
         <button #button nbPopover="test"></button>
@@ -88,7 +88,7 @@ export class NbPopoverBindingsTestComponent {
 
     <ng-template>Some Template</ng-template>
   `,
-    standalone: false
+  standalone: false,
 })
 export class NbPopoverInstanceTestComponent {
   @ViewChild(NbPopoverDirective) popover: NbPopoverDirective;
@@ -201,14 +201,12 @@ class PopoverTestModule {}
 describe('Directive: NbPopoverDirective', () => {
   const overlayHandler = new NbDynamicOverlayHandlerMock();
 
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.resetTestingModule();
-      TestBed.configureTestingModule({
-        imports: [RouterTestingModule.withRoutes([]), NbThemeModule.forRoot(), PopoverTestModule],
-      });
-    }),
-  );
+  beforeEach(waitForAsync(() => {
+    TestBed.resetTestingModule();
+    TestBed.configureTestingModule({
+      imports: [RouterTestingModule.withRoutes([]), NbThemeModule.forRoot(), PopoverTestModule],
+    });
+  }));
 
   describe('smoke ', () => {
     let fixture: ComponentFixture<any>;
@@ -253,17 +251,17 @@ describe('Directive: NbPopoverDirective', () => {
       fixture.componentInstance.popover.show();
       fixture.detectChanges();
 
-      fixture.componentInstance.content = 'new string';
+      fixture.componentRef.setInput('content', 'new string');
       fixture.detectChanges();
       const stringPopover = fixture.nativeElement.querySelector('nb-popover');
       expect(stringPopover.textContent).toContain('new string');
 
-      fixture.componentInstance.content = NbPopoverComponentContentTestComponent;
+      fixture.componentRef.setInput('content', NbPopoverComponentContentTestComponent);
       fixture.detectChanges();
       const componentPopover = fixture.nativeElement.querySelector('nb-popover-component-content-test');
       expect(componentPopover.textContent).toContain('hello world');
 
-      fixture.componentInstance.content = fixture.componentInstance.template;
+      fixture.componentRef.setInput('content', fixture.componentInstance.template);
       fixture.detectChanges();
       const templatePopover = fixture.nativeElement.querySelector('nb-popover');
       expect(templatePopover.textContent).toContain('hello world');
@@ -321,18 +319,16 @@ describe('Directive: NbPopoverDirective', () => {
   });
 
   describe('mocked services', () => {
-    beforeEach(
-      waitForAsync(() => {
-        TestBed.resetTestingModule();
-        TestBed.configureTestingModule({
-          imports: [RouterTestingModule.withRoutes([]), NbThemeModule.forRoot(), PopoverTestModule],
-        }).overrideDirective(NbPopoverDirective, {
-          set: {
-            providers: [{ provide: NbDynamicOverlayHandler, useValue: overlayHandler }],
-          },
-        });
-      }),
-    );
+    beforeEach(waitForAsync(() => {
+      TestBed.resetTestingModule();
+      TestBed.configureTestingModule({
+        imports: [RouterTestingModule.withRoutes([]), NbThemeModule.forRoot(), PopoverTestModule],
+      }).overrideDirective(NbPopoverDirective, {
+        set: {
+          providers: [{ provide: NbDynamicOverlayHandler, useValue: overlayHandler }],
+        },
+      });
+    }));
     describe('default popover', () => {
       let fixture: ComponentFixture<NbPopoverDefaultTestComponent>;
 
@@ -406,7 +402,7 @@ describe('Directive: NbPopoverDirective', () => {
         const overlayConfigSpy = spyOn(overlayHandler, 'overlayConfig').and.callThrough();
 
         fixture = TestBed.createComponent(NbPopoverDefaultTestComponent);
-        fixture.componentInstance.popoverClass = popoverClass;
+        fixture.componentRef.setInput('popoverClass', popoverClass);
         fixture.detectChanges();
 
         expect(overlayConfigSpy).toHaveBeenCalledWith(jasmine.objectContaining({ panelClass: popoverClass }));
@@ -434,11 +430,11 @@ describe('Directive: NbPopoverDirective', () => {
         fixture = TestBed.createComponent(NbPopoverBindingsTestComponent);
         fixture.detectChanges();
 
-        fixture.componentInstance.adjustment = NbAdjustment.HORIZONTAL;
-        fixture.componentInstance.trigger = NbTrigger.HINT;
-        fixture.componentInstance.content = 'new string';
-        fixture.componentInstance.context = { context: 'new' };
-        fixture.componentInstance.position = NbPosition.LEFT;
+        fixture.componentRef.setInput('adjustment', NbAdjustment.HORIZONTAL);
+        fixture.componentRef.setInput('trigger', NbTrigger.HINT);
+        fixture.componentRef.setInput('content', 'new string');
+        fixture.componentRef.setInput('context', { context: 'new' });
+        fixture.componentRef.setInput('position', NbPosition.LEFT);
 
         fixture.detectChanges();
 
@@ -466,18 +462,18 @@ describe('Directive: NbPopoverDirective', () => {
         fixture = TestBed.createComponent(NbPopoverBindingsTestComponent);
         fixture.detectChanges();
 
-        fixture.componentInstance.content = 'new string';
+        fixture.componentRef.setInput('content', 'new string');
         fixture.detectChanges();
         expect(contentSpy).toHaveBeenCalledTimes(3);
         expect(contentSpy).toHaveBeenCalledWith('new string');
 
-        fixture.componentInstance.content = NbPopoverComponentContentTestComponent;
+        fixture.componentRef.setInput('content', NbPopoverComponentContentTestComponent);
         fixture.detectChanges();
 
         expect(contentSpy).toHaveBeenCalledTimes(4);
         expect(contentSpy).toHaveBeenCalledWith(NbPopoverComponentContentTestComponent);
 
-        fixture.componentInstance.content = fixture.componentInstance.template;
+        fixture.componentRef.setInput('content', fixture.componentInstance.template);
         fixture.detectChanges();
 
         expect(contentSpy).toHaveBeenCalledTimes(5);

@@ -342,20 +342,20 @@ export abstract class NbBasePicker<D, T, P> extends NbDatepicker<T, D> {
   }
 
   protected patchWithInputs() {
-    this.picker.boundingMonth = this.boundingMonth;
-    this.picker.startView = this.startView;
-    this.picker.min = this.min;
-    this.picker.max = this.max;
-    this.picker.filter = this.filter;
-    this.picker._cellComponent = this.dayCellComponent;
-    this.picker._monthCellComponent = this.monthCellComponent;
-    this.picker._yearCellComponent = this.yearCellComponent;
-    this.picker.size = this.size;
-    this.picker.showNavigation = this.showNavigation;
-    this.picker.visibleDate = this.visibleDate;
-    this.picker.showWeekNumber = this.showWeekNumber;
-    this.picker.weekNumberSymbol = this.weekNumberSymbol;
-    this.picker.firstDayOfWeek = this.firstDayOfWeek;
+    this.pickerRef.setInput('boundingMonth', this.boundingMonth);
+    this.pickerRef.setInput('startView', this.startView);
+    this.pickerRef.setInput('min', this.min);
+    this.pickerRef.setInput('max', this.max);
+    this.pickerRef.setInput('filter', this.filter);
+    this.pickerRef.setInput('dayCellComponent', this.dayCellComponent);
+    this.pickerRef.setInput('monthCellComponent', this.monthCellComponent);
+    this.pickerRef.setInput('yearCellComponent', this.yearCellComponent);
+    this.pickerRef.setInput('size', this.size);
+    this.pickerRef.setInput('showNavigation', this.showNavigation);
+    this.pickerRef.setInput('visibleDate', this.visibleDate);
+    this.pickerRef.setInput('showWeekNumber', this.showWeekNumber);
+    this.pickerRef.setInput('weekNumberSymbol', this.weekNumberSymbol);
+    this.pickerRef.setInput('firstDayOfWeek', this.firstDayOfWeek);
   }
 
   protected checkFormat() {
@@ -376,8 +376,8 @@ export abstract class NbBasePicker<D, T, P> extends NbDatepicker<T, D> {
 }
 
 @Component({
-    template: '',
-    standalone: false
+  template: '',
+  standalone: false,
 })
 export class NbBasePickerComponent<D, T, P> extends NbBasePicker<D, T, P> implements OnInit, OnChanges, OnDestroy {
   /**
@@ -543,9 +543,9 @@ export class NbBasePickerComponent<D, T, P> extends NbBasePicker<D, T, P> implem
  * Provides a proxy to `NbCalendar` options as well as custom picker options.
  */
 @Component({
-    selector: 'nb-datepicker',
-    template: '',
-    standalone: false
+  selector: 'nb-datepicker',
+  template: '',
+  standalone: false,
 })
 export class NbDatepickerComponent<D> extends NbBasePickerComponent<D, D, NbCalendarComponent<D>> {
   protected pickerClass: Type<NbCalendarComponent<D>> = NbCalendarComponent;
@@ -576,8 +576,8 @@ export class NbDatepickerComponent<D> extends NbBasePickerComponent<D, D, NbCale
 
     if (date) {
       this.visibleDate = date;
-      this.picker.visibleDate = date;
-      this.picker.date = date;
+      this.pickerRef.setInput('visibleDate', date);
+      this.pickerRef.setInput('date', date);
     }
   }
 
@@ -599,9 +599,9 @@ export class NbDatepickerComponent<D> extends NbBasePickerComponent<D, D, NbCale
  * Provides a proxy to `NbCalendarRange` options as well as custom picker options.
  */
 @Component({
-    selector: 'nb-rangepicker',
-    template: '',
-    standalone: false
+  selector: 'nb-rangepicker',
+  template: '',
+  standalone: false,
 })
 export class NbRangepickerComponent<D> extends NbBasePickerComponent<
   D,

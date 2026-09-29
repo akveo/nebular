@@ -1,23 +1,14 @@
-/**
- * @license
- * Copyright Akveo. All Rights Reserved.
- * Licensed under the MIT License. See License.txt in the project root for license information.
- */
+import { expect, test } from '@playwright/test';
+import { openExample } from './e2e-helper';
 
-import { browser, element, by } from 'protractor';
-
-describe('nb-sidebar-one', () => {
-
-  beforeEach((done) => {
-    browser.get('#/sidebar/sidebar-one-test.component').then(() => done());
-  });
-
-  it('should render sidebar full pages', () => {
-    element(by.css('nb-layout')).getSize().then(size => {
-      element.all(by.css('nb-sidebar')).get(0).getSize().then(sidebarSize => {
-        expect(sidebarSize.height).toEqual(size.height);
-        expect(sidebarSize.width).toEqual(256);
-      });
-    });
+test.describe('nb-sidebar-one', () => {
+  test.beforeEach(({ page }) => openExample(page, '/#/sidebar/sidebar-one-test.component'));
+  test('should render sidebar full pages', async ({ page }) => {
+    const layout = await page.locator('nb-layout').boundingBox();
+    const sidebar = await page.locator('nb-sidebar').first().boundingBox();
+    expect(layout).not.toBeNull();
+    expect(sidebar).not.toBeNull();
+    expect(Math.round(sidebar!.height)).toBe(Math.round(layout!.height));
+    expect(Math.round(sidebar!.width)).toBe(256);
   });
 });

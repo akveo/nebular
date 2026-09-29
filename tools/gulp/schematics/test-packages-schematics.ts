@@ -24,6 +24,7 @@ function copySchematicsResources() {
     resourcesPaths.push(join(SOURCE_DIR, packageName, 'package.json'));
     return allPaths.concat(resourcesPaths);
   }, []);
+  paths.push(join(SOURCE_DIR, 'eva-icons', 'package.json'));
 
   return src(paths, { base: SOURCE_DIR }).pipe(dest(DIST_DIR));
 }

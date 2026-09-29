@@ -53,3 +53,7 @@ debug.log
 local.log
 
 /tools/dev-schematics/dist
+/.tmp/
+/test-results/
+/packages-smoke/test-results/
+/playwright-report/

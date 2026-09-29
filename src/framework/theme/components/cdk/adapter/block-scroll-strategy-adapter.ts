@@ -36,7 +36,7 @@ export class NbScrollStrategyOptions extends ScrollStrategyOptions {
               protected viewportRuler: NbViewportRulerAdapter,
               protected ngZone: NgZone,
               @Inject(NB_DOCUMENT) protected document) {
-    super(scrollDispatcher, viewportRuler, ngZone, document);
+    super();
   }
 
   block = () => new NbBlockScrollStrategyAdapter(this.document, this.viewportRuler, this.scrollService);

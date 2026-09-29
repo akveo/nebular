@@ -1,25 +1,15 @@
-/**
- * @license
- * Copyright Akveo. All Rights Reserved.
- * Licensed under the MIT License. See License.txt in the project root for license information.
- */
+import { expect, test } from '@playwright/test';
+import { openExample } from './e2e-helper';
 
-import { browser, by, element } from 'protractor';
-
-describe('nb-checkbox', () => {
-
-  beforeEach((done) => {
-    browser.get('#/checkbox/checkbox-test.component').then(() => done());
-  });
-
-  it('should apply check on click', () => {
-    const input = element(by.css('#first input'));
-    const indicator = element(by.css('#first .custom-checkbox'));
-
-    expect(input.getAttribute('checked')).toBeFalsy();
-    indicator.click();
-    expect(input.getAttribute('checked')).toBeTruthy();
-    indicator.click();
-    expect(input.getAttribute('checked')).toBeFalsy();
+test.describe('nb-checkbox', () => {
+  test.beforeEach(({ page }) => openExample(page, '/#/checkbox/checkbox-test.component'));
+  test('should apply check on click', async ({ page }) => {
+    const input = page.locator('#first input');
+    const indicator = page.locator('#first .custom-checkbox');
+    await expect(input).not.toBeChecked();
+    await indicator.click();
+    await expect(input).toBeChecked();
+    await indicator.click();
+    await expect(input).not.toBeChecked();
   });
 });

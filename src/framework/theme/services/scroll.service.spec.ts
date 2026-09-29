@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { APP_BASE_HREF } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { TestBed, ComponentFixture, fakeAsync, tick, inject, waitForAsync } from '@angular/core/testing';
@@ -17,27 +17,27 @@ let componentInstance: ScrollTestComponent;
 let scrollService: NbLayoutScrollService;
 
 @Component({
-    template: `
+  template: `
     <nb-layout [withScroll]="localScroll" #layout>
       <nb-layout-column>
         <div #resize></div>
       </nb-layout-column>
     </nb-layout>
   `,
-    styles: [
-        `
+  styles: [
+    `
       ::ng-deep nb-layout.with-scroll .scrollable-container {
         overflow: auto;
         height: 100vh;
       }
     `,
-    ],
-    standalone: false
+  ],
+  standalone: false,
 })
 class ScrollTestComponent {
   @ViewChild('resize', { read: ElementRef }) private resizeElement: ElementRef;
   @ViewChild('layout', { read: ElementRef }) private layout: ElementRef;
-  localScroll = false;
+  @Input() localScroll = false;
 
   setSize(width: string, height: string) {
     this.resizeElement.nativeElement.style.width = width;
@@ -114,7 +114,7 @@ describe('NbScrollService', () => {
   });
 
   it('should get initial scroll position on scrollable', (done) => {
-    componentInstance.useLocalScroll();
+    fixture.componentRef.setInput('localScroll', true);
     fixture.detectChanges();
     const scrollable = componentInstance.getScrollableElement();
     scrollService.getPosition().subscribe((pos: NbScrollPosition) => {
@@ -125,7 +125,7 @@ describe('NbScrollService', () => {
   });
 
   it('should get updated scroll position on scrollable', (done) => {
-    componentInstance.useLocalScroll();
+    fixture.componentRef.setInput('localScroll', true);
     componentInstance.setSize('10000px', '10000px');
     fixture.detectChanges();
     const scrollable = componentInstance.getScrollableElement();
@@ -139,7 +139,7 @@ describe('NbScrollService', () => {
   });
 
   it('should scroll using service', (done) => {
-    componentInstance.useLocalScroll();
+    fixture.componentRef.setInput('localScroll', true);
     componentInstance.setSize('10000px', '10000px');
     fixture.detectChanges();
     scrollService.scrollTo(10, 10);
@@ -152,7 +152,7 @@ describe('NbScrollService', () => {
   });
 
   it('should scroll using service (with default x)', (done) => {
-    componentInstance.useLocalScroll();
+    fixture.componentRef.setInput('localScroll', true);
     componentInstance.setSize('10000px', '10000px');
     fixture.detectChanges();
     scrollService.scrollTo(null, 10);
@@ -165,7 +165,7 @@ describe('NbScrollService', () => {
   });
 
   it('should scroll using service (with default y)', (done) => {
-    componentInstance.useLocalScroll();
+    fixture.componentRef.setInput('localScroll', true);
     componentInstance.setSize('10000px', '10000px');
     fixture.detectChanges();
     scrollService.scrollTo(10, null);
@@ -178,7 +178,7 @@ describe('NbScrollService', () => {
   });
 
   it('should scroll using service (with default x)', (done) => {
-    componentInstance.useLocalScroll();
+    fixture.componentRef.setInput('localScroll', true);
     componentInstance.setSize('10000px', '10000px');
     fixture.detectChanges();
     scrollService.scrollTo(10, 10);
@@ -194,7 +194,7 @@ describe('NbScrollService', () => {
   });
 
   it('should scroll using service (with default y)', (done) => {
-    componentInstance.useLocalScroll();
+    fixture.componentRef.setInput('localScroll', true);
     componentInstance.setSize('10000px', '10000px');
     fixture.detectChanges();
     scrollService.scrollTo(10, 10);
@@ -210,7 +210,7 @@ describe('NbScrollService', () => {
   });
 
   it('should scroll using service back to 0,0', (done) => {
-    componentInstance.useLocalScroll();
+    fixture.componentRef.setInput('localScroll', true);
     componentInstance.setSize('10000px', '10000px');
     fixture.detectChanges();
     scrollService.scrollTo(10, 10);

@@ -50,14 +50,15 @@ export function findRoutesArray(tree: Tree, modulePath: Path): ts.ArrayLiteralEx
 
     throw new SchematicsException(`Expecting RouterModule.forChild parameter to be an array or variable identifier.`);
   } catch (e) {
-    throw new SchematicsException(`Error in ${modulePath}. ${e.message}`);
+    const message = e instanceof Error ? e.message : String(e);
+    throw new SchematicsException(`Error in ${modulePath}. ${message}`);
   }
 }
 
 function getImports(moduleDecorator: ts.ObjectLiteralExpression): ts.PropertyAssignment {
   const imports = moduleDecorator.properties
-    .filter((p) => p.kind === ts.SyntaxKind.PropertyAssignment)
-    .find((p: ts.PropertyAssignment) => p.name.getText() === 'imports') as ts.PropertyAssignment;
+    .filter(ts.isPropertyAssignment)
+    .find((p) => p.name.getText() === 'imports');
 
   if (imports == null) {
     throw new SchematicsException(`Can't find imports in module.`);
@@ -71,8 +72,8 @@ function getImports(moduleDecorator: ts.ObjectLiteralExpression): ts.PropertyAss
 
 function getRouterModuleCall(importsNode: ts.PropertyAssignment): ts.CallExpression {
   const routerModuleCall = (importsNode.initializer as ts.ArrayLiteralExpression).elements
-    .filter((el) => el.kind === ts.SyntaxKind.CallExpression)
-    .find((el: ts.CallExpression) => el.expression.getText() === 'RouterModule.forChild') as ts.CallExpression;
+    .filter(ts.isCallExpression)
+    .find((el) => el.expression.getText() === 'RouterModule.forChild');
   if (routerModuleCall == null) {
     throw new SchematicsException(`Can't find RouterModule.forChild call in module imports.`);
   }
@@ -116,7 +117,7 @@ export type RoutePredicate = (route: ts.ObjectLiteralExpression) => boolean;
 
 export function generateLazyModuleImport(from: Path, to: Path, moduleClassName: string): string {
   const path = normalize(importPath(from, to));
-  return `() => import('./${dirname(path)}/${basename(path)}').then(m => m.${moduleClassName})`;
+  return `() => import('./${dirname(path)}/${basename(path)}').then((m) => m.${moduleClassName})`;
 }
 
 /**
