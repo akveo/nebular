@@ -2,6 +2,7 @@
 {
   "extends": "../../../tsconfig.json",
   "compilerOptions": {
+    "ignoreDeprecations": "6.0",
     "outDir": "../../out-tsc/lib",
     "declaration": true,
     "declarationMap": true,

@@ -50,14 +50,14 @@ export function findRoutesArray(tree: Tree, modulePath: Path): ts.ArrayLiteralEx
 
     throw new SchematicsException(`Expecting RouterModule.forChild parameter to be an array or variable identifier.`);
   } catch (e) {
-    throw new SchematicsException(`Error in ${modulePath}. ${e.message}`);
+    throw new SchematicsException(`Error in ${modulePath}. ${(e as Error).message}`);
   }
 }
 
 function getImports(moduleDecorator: ts.ObjectLiteralExpression): ts.PropertyAssignment {
   const imports = moduleDecorator.properties
     .filter((p) => p.kind === ts.SyntaxKind.PropertyAssignment)
-    .find((p: ts.PropertyAssignment) => p.name.getText() === 'imports') as ts.PropertyAssignment;
+    .find((p): p is ts.PropertyAssignment => p.name.getText() === 'imports') as ts.PropertyAssignment;
 
   if (imports == null) {
     throw new SchematicsException(`Can't find imports in module.`);
@@ -72,7 +72,9 @@ function getImports(moduleDecorator: ts.ObjectLiteralExpression): ts.PropertyAss
 function getRouterModuleCall(importsNode: ts.PropertyAssignment): ts.CallExpression {
   const routerModuleCall = (importsNode.initializer as ts.ArrayLiteralExpression).elements
     .filter((el) => el.kind === ts.SyntaxKind.CallExpression)
-    .find((el: ts.CallExpression) => el.expression.getText() === 'RouterModule.forChild') as ts.CallExpression;
+    .find(
+      (el): el is ts.CallExpression => (el as ts.CallExpression).expression.getText() === 'RouterModule.forChild',
+    ) as ts.CallExpression;
   if (routerModuleCall == null) {
     throw new SchematicsException(`Can't find RouterModule.forChild call in module imports.`);
   }

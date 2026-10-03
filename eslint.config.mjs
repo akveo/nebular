@@ -1,36 +1,27 @@
 import rxjs from "eslint-plugin-rxjs-x";
 import globals from "globals";
-import path from "node:path";
-import { fileURLToPath } from "node:url";
-import js from "@eslint/js";
-import { FlatCompat } from "@eslint/eslintrc";
+import angular from "angular-eslint";
+import eslintConfigPrettier from "eslint-config-prettier";
 import tseslint from "@typescript-eslint/eslint-plugin";
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-const compat = new FlatCompat({
-    baseDirectory: __dirname,
-    recommendedConfig: js.configs.recommended,
-    allConfig: js.configs.all
-});
 
 export default [{
     ignores: [
         "src/framework/**/*",
     ],
-}, ...compat.extends(
-    "plugin:@angular-eslint/recommended",
-    "plugin:@angular-eslint/template/process-inline-templates",
-    "eslint-config-prettier",
-).map(config => ({
+}, ...angular.configs.tsRecommended.map(config => ({
     ...config,
     files: ["**/*.ts"],
 })), {
+    files: ["**/*.ts"],
+    processor: angular.processInlineTemplates,
+}, eslintConfigPrettier, {
     files: ["**/*.ts"],
 
     plugins: {
         rxjs,
         "@typescript-eslint": tseslint,
+        "@angular-eslint": angular.tsPlugin,
+        "@angular-eslint/template": angular.templatePlugin,
     },
 
     languageOptions: {
@@ -81,7 +72,7 @@ export default [{
             ],
         }],
     },
-}, ...compat.extends("plugin:@angular-eslint/template/recommended", "eslint-config-prettier").map(config => ({
+}, ...angular.configs.templateRecommended.map(config => ({
     ...config,
     files: ["**/*.html"],
 })), {

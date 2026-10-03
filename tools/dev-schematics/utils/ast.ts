@@ -18,7 +18,9 @@ export function getClassWithDecorator(tree: Tree, path: Path, decoratorName: str
   return findNodes(parseSourceFile(tree, path), ts.SyntaxKind.ClassDeclaration)
     .filter((node) => isNodeExported(node as ts.Declaration))
     .filter((node) => (node as ts.ClassDeclaration).name != null)
-    .filter((node: ts.ClassDeclaration) => hasDecoratorCall(node, decoratorName)) as ts.ClassDeclaration[];
+    .filter((node): node is ts.ClassDeclaration =>
+      hasDecoratorCall(node as ts.ClassDeclaration, decoratorName),
+    ) as ts.ClassDeclaration[];
 }
 
 /**
@@ -53,7 +55,9 @@ export function isNodeExported(node: ts.Declaration): boolean {
 export function findDeclarationByIdentifier(source: ts.SourceFile, identifierText: string): ts.VariableDeclaration {
   return getSourceNodes(source)
     .filter((node) => node.kind === ts.SyntaxKind.VariableDeclaration)
-    .find((node: ts.VariableDeclaration) => node.name.getText() === identifierText) as ts.VariableDeclaration;
+    .find(
+      (node): node is ts.VariableDeclaration => (node as ts.VariableDeclaration).name.getText() === identifierText,
+    ) as ts.VariableDeclaration;
 }
 
 export function addObjectProperty(

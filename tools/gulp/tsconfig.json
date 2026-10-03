@@ -1,6 +1,10 @@
 {
   "compilerOptions": {
     "experimentalDecorators": true,
+    // TS 6 defaults noImplicitAny to true; build scripts predate that, keep loose checking.
+    "noImplicitAny": false,
+    "useUnknownInCatchVariables": false,
+    "ignoreDeprecations": "6.0",
     "noUnusedParameters": true,
     "lib": [
       "es2017"
