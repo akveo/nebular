@@ -2,7 +2,7 @@
 @use '../../theming' as *;
 
 @mixin nb-typography {
-  #{if(&, '&', 'body')} {
+  #{if(sass(&): '&'; else : 'body')} {
     color: nb-theme(text-basic-color);
     font-family: nb-theme(text-paragraph-font-family);
     font-size: nb-theme(text-paragraph-font-size);
