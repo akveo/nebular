@@ -206,6 +206,39 @@ describe('NbMenuItem', () => {
     expect(childList.classList).toContain('expanded');
   });
 
+  it('should prevent keyboard focus inside collapsed submenus', () => {
+    const { fixture } = createSingleMenuComponent([
+      {
+        title: 'Parent item',
+        children: [
+          {
+            title: 'Expanded child',
+            expanded: true,
+            children: [{ title: 'Nested link', url: '/nested' }],
+          },
+        ],
+      },
+    ]);
+    const childList = fixture.nativeElement.querySelector('.menu-item > ul.menu-items');
+    const nestedLink = childList.querySelector('a[href="/nested"]') as HTMLAnchorElement;
+
+    expect(childList.hasAttribute('inert')).toBe(true);
+    nestedLink.focus();
+    expect(document.activeElement).not.toBe(nestedLink);
+  });
+
+  it('should allow keyboard focus inside expanded submenus', () => {
+    const { fixture } = createSingleMenuComponent([
+      { title: 'Parent item', expanded: true, children: [{ title: 'Child item', url: '/child' }] },
+    ]);
+    const childList = fixture.nativeElement.querySelector('.menu-item > ul.menu-items');
+    const childLink = childList.querySelector('a[href="/child"]') as HTMLAnchorElement;
+
+    expect(childList.hasAttribute('inert')).toBe(false);
+    childLink.focus();
+    expect(document.activeElement).toBe(childLink);
+  });
+
   it('should set URL', () => {
     const { fixture } = createSingleMenuComponent([{ title: 'Menu Item with link', url: 'https://test.link' }]);
     const menuItem = fixture.nativeElement.querySelector('.menu-item');

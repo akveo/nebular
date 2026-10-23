@@ -68,6 +68,7 @@
   *ngIf="menuItem.children"
   [class.collapsed]="!(menuItem.children && menuItem.expanded)"
   [class.expanded]="menuItem.expanded"
+  [attr.inert]="menuItem.expanded ? null : ''"
   [@toggle]="toggleState"
   class="menu-items"
 >
