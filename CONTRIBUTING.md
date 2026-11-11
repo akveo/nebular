@@ -8,6 +8,7 @@ We would love for you to contribute to Nebular and help make it ever better toge
 - [Feature Requests](#feature)
 - [Submission Guidelines](#submit-pr)
 - [Framework Structure](#framework-structure)
+- [Running the component playground](#running-the-component-playground)
 - [Coding Rules](#rules)
 - [New Feature Checklist](#new-feature-checklist)
 - [Commit Message Guidelines](#commit)
@@ -117,6 +118,19 @@ That's it! Thank you for your contribution!
     - theme - `@nebular/theme` npm package, main framework package
     - auth - `@nebular/auth` npm package, auth package (login, register, etc)
     - security - `@nebular/security` npm package, security framework package
+
+## Running the component playground
+
+Use the Node.js version listed in `.nvmrc`. From the Nebular repository root, run:
+
+```shell
+npm ci
+npm start -- playground
+```
+
+Open http://localhost:4200/ and type a component name in the search field, or
+open the [button showcase](http://localhost:4200/#/button/button-showcase.component) directly.
+For the ngx-admin dashboard demo, use the separate [ngx-admin repository](https://github.com/akveo/ngx-admin).
 
 ## <a name="rules"></a> Coding Rules
 
