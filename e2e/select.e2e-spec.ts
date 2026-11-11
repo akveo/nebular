@@ -1,26 +1,17 @@
-import { browser, by, element, ElementArrayFinder } from 'protractor';
+import { expect, test } from '@playwright/test';
+import { openExample } from './e2e-helper';
 
-describe('nb-select', () => {
-
-  beforeEach((done) => {
-    browser.get('#/select/select-test.component').then(done);
-  });
-
-  it('should not shrink when has no placeholder and text', (done) => {
-    const checks: Promise<void>[] = [];
-    const selectHeights = [ 24, 32, 40, 48, 56 ];
-    const selectElements: ElementArrayFinder = element.all(by.tagName('nb-select'));
-
-    for (let i = 0; i < selectElements.length; i++) {
-      const check = Promise.all([selectElements[i].getText(), selectElements[i].getSize()])
-        .then(([text, { height }]) => {
-          expect(text).toEqual('');
-          expect(height).toEqual(selectHeights[i]);
-        });
-
-      checks.push(check);
+test.describe('nb-select', () => {
+  test.beforeEach(({ page }) => openExample(page, '/#/select/select-test.component'));
+  test('should not shrink when has no placeholder and text', async ({ page }) => {
+    const selects = page.locator('nb-select');
+    await expect(selects).toHaveCount(5);
+    for (const [index, height] of [24, 32, 40, 48, 56].entries()) {
+      const select = selects.nth(index);
+      await expect(select).toHaveText('');
+      const box = await select.boundingBox();
+      expect(box).not.toBeNull();
+      expect(Math.abs(box!.height - height)).toBeLessThanOrEqual(1);
     }
-
-    Promise.all(checks).then(done);
   });
 });

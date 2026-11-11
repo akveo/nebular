@@ -5,8 +5,7 @@
  */
 
 import { SchematicsException, Tree } from '@angular-devkit/schematics';
-import { ProjectDefinition } from '@angular-devkit/core/src/workspace';
-import { join, normalize, Path } from '@angular-devkit/core';
+import { join, normalize, Path, workspaces } from '@angular-devkit/core';
 
 import { createThemeContent, stylesContent } from './theme-content';
 import { Schema } from '../schema';
@@ -70,7 +69,7 @@ function insertThemeImportInStyles(tree: Tree, stylesPath: string) {
 /**
  * Adds a style entry to the given project target.
  * */
-function addStyleToTarget(project: ProjectDefinition, targetName: string, stylesPath: string) {
+function addStyleToTarget(project: workspaces.ProjectDefinition, targetName: string, stylesPath: string) {
   const targetOptions = getProjectTargetOptions(project, targetName);
 
   if (!targetOptions.styles) {

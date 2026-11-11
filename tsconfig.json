@@ -2,7 +2,6 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "baseUrl": "./",
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
     "esModuleInterop": true,
@@ -25,7 +24,7 @@
     ],
     "paths": {
       "@nebular/*": [
-        "src/framework/*/public_api.ts"
+        "./src/framework/*/public_api.ts"
       ]
     },
     "useDefineForClassFields": false

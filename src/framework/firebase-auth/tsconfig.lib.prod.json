@@ -5,10 +5,10 @@
     "declarationMap": false,
     "paths": {
       "@nebular/theme": [
-        "dist/theme"
+        "../../../dist/theme"
       ],
       "@nebular/auth": [
-        "dist/auth"
+        "../../../dist/auth"
       ]
     }
   },

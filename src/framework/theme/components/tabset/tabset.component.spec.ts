@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { Component, Input, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { ActivatedRoute, Params } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -8,16 +8,17 @@ import { BehaviorSubject } from 'rxjs';
 import createSpy = jasmine.createSpy;
 
 @Component({
-    template: `
+  template: `
     <nb-tabset routeParam="tab">
       <nb-tab *ngIf="showTabs" tabTitle="1" route="1" tabId="tab-1">1</nb-tab>
       <nb-tab *ngIf="showTabs" tabTitle="2" route="2" tabId="tab-2">2</nb-tab>
       <nb-tab *ngIf="showTabs" tabTitle="3" route="3" tabId="tab-3" disabled>3</nb-tab>
     </nb-tabset>
   `,
-    standalone: false
+  standalone: false,
 })
 export class TabsetTestComponent {
+  @Input()
   showTabs = true;
 
   @ViewChild(NbTabsetComponent) tabsetComponent: NbTabsetComponent;
@@ -38,7 +39,7 @@ export class ActivatedRouteStub {
 
   setParams(params?: Params) {
     this.subject.next(params);
-  };
+  }
 }
 
 describe('NbTabsetComponent', () => {
@@ -51,12 +52,8 @@ describe('NbTabsetComponent', () => {
     activatedRouteStub = new ActivatedRouteStub();
 
     TestBed.configureTestingModule({
-      declarations: [ TabsetTestComponent ],
-      imports: [
-        CommonModule,
-        RouterTestingModule.withRoutes([]),
-        NbTabsetModule,
-      ],
+      declarations: [TabsetTestComponent],
+      imports: [CommonModule, RouterTestingModule.withRoutes([]), NbTabsetModule],
       providers: [{ provide: ActivatedRoute, useValue: activatedRouteStub }],
     });
 
@@ -97,7 +94,7 @@ describe('NbTabsetComponent', () => {
   it(`should not call 'selectTab' if no tabs found`, fakeAsync(() => {
     const selectTabSpy = spyOn(tabsetComponent, 'selectTab');
 
-    testComponent.showTabs = false;
+    fixture.componentRef.setInput('showTabs', false);
     fixture.detectChanges();
 
     activatedRouteStub.setParams({ tab: 1 });

@@ -1,5 +1,7 @@
 import { Component, QueryList, Type, ViewChild, ViewChildren } from '@angular/core';
 import { ComponentFixture, fakeAsync, inject, TestBed, tick } from '@angular/core/testing';
+import { ViewportRuler } from '@angular/cdk/scrolling';
+import { By } from '@angular/platform-browser';
 import { EMPTY } from 'rxjs';
 import { take } from 'rxjs/operators';
 import createSpy = jasmine.createSpy;
@@ -13,6 +15,7 @@ import {
   NbTreeGridDataSourceBuilder,
   NbTreeGridPresentationNode,
   NbGetters,
+  NbViewportRulerAdapter,
 } from '@nebular/theme';
 
 interface TreeNode<T> {
@@ -30,8 +33,8 @@ interface CustomStructure {
 }
 
 @Component({
-    template: '',
-    standalone: false
+  template: '',
+  standalone: false,
 })
 class BaseTreeGridTestComponent {
   columns: string[];
@@ -42,7 +45,7 @@ class BaseTreeGridTestComponent {
 }
 
 @Component({
-    template: `
+  template: `
     <table [nbTreeGrid]="dataSource">
       <tr nbTreeGridRow *nbTreeGridRowDef="let row; columns: columns"></tr>
 
@@ -52,12 +55,12 @@ class BaseTreeGridTestComponent {
       </ng-container>
     </table>
   `,
-    standalone: false
+  standalone: false,
 })
 export class TreeGridBasicTestComponent extends BaseTreeGridTestComponent {}
 
 @Component({
-    template: `
+  template: `
     <table [nbTreeGrid]="dataSource">
       <tr nbTreeGridHeaderRow *nbTreeGridHeaderRowDef="columns"></tr>
       <tr nbTreeGridRow *nbTreeGridRowDef="let row; columns: columns"></tr>
@@ -68,9 +71,25 @@ export class TreeGridBasicTestComponent extends BaseTreeGridTestComponent {}
       </ng-container>
     </table>
   `,
-    standalone: false
+  standalone: false,
 })
 export class TreeGridWithHeaderTestComponent extends BaseTreeGridTestComponent {}
+
+@Component({
+  template: `
+    <table [nbTreeGrid]="dataSource">
+      <tr nbTreeGridHeaderRow *nbTreeGridHeaderRowDef="columns"></tr>
+      <tr nbTreeGridRow *nbTreeGridRowDef="let row; columns: columns"></tr>
+
+      <ng-container *ngFor="let column of columns" [nbTreeGridColumnDef]="column" [sticky]="column === columns[0]">
+        <th nbTreeGridHeaderCell *nbTreeGridHeaderCellDef>{{ column }}</th>
+        <td nbTreeGridCell *nbTreeGridCellDef="let row">{{ row.data[column] }}</td>
+      </ng-container>
+    </table>
+  `,
+  standalone: false,
+})
+export class TreeGridWithStickyColumnTestComponent extends BaseTreeGridTestComponent {}
 
 function setupFixture(componentType: Type<any>, columns: string[], data?: TreeNode<any>[]): ComponentFixture<any> {
   TestBed.configureTestingModule({
@@ -131,6 +150,40 @@ describe('NbTreeGridComponent', () => {
     );
     const rows: HTMLElement[] = fixture.nativeElement.querySelectorAll('.nb-tree-grid .nb-tree-grid-row');
     expect(rows.length).toEqual(twoRowsData.length);
+  });
+
+  it('should initialize the CDK table role through constructor injection', () => {
+    const fixture: ComponentFixture<TreeGridBasicTestComponent> = setupFixture(
+      TreeGridBasicTestComponent,
+      abcColumns,
+      twoRowsData,
+    );
+    const table: HTMLTableElement = fixture.nativeElement.querySelector('table');
+
+    expect(table.getAttribute('role')).toEqual('table');
+  });
+
+  it('should inject the Nebular viewport ruler into the CDK table', () => {
+    const fixture: ComponentFixture<TreeGridBasicTestComponent> = setupFixture(
+      TreeGridBasicTestComponent,
+      abcColumns,
+      twoRowsData,
+    );
+    const table = fixture.debugElement.query(By.directive(NbTreeGridComponent));
+
+    expect(table.injector.get(ViewportRuler)).toBe(TestBed.inject(NbViewportRulerAdapter));
+  });
+
+  it('should position a sticky column with the Nebular viewport ruler', () => {
+    const fixture: ComponentFixture<TreeGridWithStickyColumnTestComponent> = setupFixture(
+      TreeGridWithStickyColumnTestComponent,
+      abcColumns,
+      twoRowsData,
+    );
+    const stickyCells: HTMLElement[] = fixture.nativeElement.querySelectorAll('.cdk-table-sticky');
+
+    expect(stickyCells.length).toEqual(twoRowsData.length + 1);
+    stickyCells.forEach((cell) => expect(cell.style.position).toEqual('sticky'));
   });
 
   it('should render data in row', () => {

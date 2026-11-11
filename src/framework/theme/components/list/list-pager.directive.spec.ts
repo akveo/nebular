@@ -1,4 +1,4 @@
-import { Component, ViewChild, ElementRef } from '@angular/core';
+import { Component, ViewChild, ElementRef, Input } from '@angular/core';
 import { TestBed, ComponentFixture, fakeAsync, tick, ComponentFixtureAutoDetect } from '@angular/core/testing';
 import { NbListModule, NbListComponent } from '@nebular/theme';
 
@@ -29,7 +29,7 @@ const PAGE_HEIGHT: number = ITEMS_PER_PAGE * ITEM_HEIGHT;
 let initialItemsCount: number = 100;
 
 @Component({
-    template: `
+  template: `
     <nb-list
       nbListPageTracker
       [pageSize]="pageSize"
@@ -40,8 +40,8 @@ let initialItemsCount: number = 100;
       <nb-list-item *ngFor="let _ of items" class="list-item"></nb-list-item>
     </nb-list>
   `,
-    styles: [
-        `
+  styles: [
+    `
       .list {
         background: lightslategray;
         height: ${LIST_HEIGHT}px;
@@ -54,8 +54,8 @@ let initialItemsCount: number = 100;
         height: ${ITEM_HEIGHT * 0.98}px;
       }
     `,
-    ],
-    standalone: false
+  ],
+  standalone: false,
 })
 class PagerTestComponent {
   @ViewChild(NbListComponent, { read: ElementRef }) listElementRef: ElementRef;
@@ -64,9 +64,9 @@ class PagerTestComponent {
     return this.listElementRef.nativeElement;
   }
 
-  items = new Array(initialItemsCount);
-  pageSize = ITEMS_PER_PAGE;
-  startPage = 1;
+  @Input() items = new Array(initialItemsCount);
+  @Input() pageSize = ITEMS_PER_PAGE;
+  @Input() startPage = 1;
 
   pageChanged() {}
 }
@@ -132,7 +132,7 @@ describe('Directive: NbListPageTrackerDirective', () => {
       });
 
       it(`should emit initial page change when items added to empty list`, async () => {
-        testComponent.items = new Array(initialItemsCountBefore);
+        fixture.componentRef.setInput('items', new Array(initialItemsCountBefore));
         fixture.detectChanges();
         try {
           await waitForSpyCall(pageChangedSpy);
@@ -158,8 +158,8 @@ describe('Directive: NbListPageTrackerDirective', () => {
       const startPage = 5;
       const { listElement } = testComponent;
 
-      testComponent.items = new Array(initialItemsCountBefore);
-      testComponent.startPage = startPage;
+      fixture.componentRef.setInput('items', new Array(initialItemsCountBefore));
+      fixture.componentRef.setInput('startPage', startPage);
       fixture.detectChanges();
       try {
         await waitForSpyCall(pageChangedSpy);

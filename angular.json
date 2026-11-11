@@ -136,34 +136,6 @@
         }
       }
     },
-    "playground-e2e": {
-      "root": "e2e",
-      "sourceRoot": "e2e",
-      "projectType": "application",
-      "architect": {
-        "e2e": {
-          "builder": "@angular-devkit/build-angular:protractor",
-          "options": {
-            "protractorConfig": "./protractor.conf.js",
-            "devServerTarget": "playground:serve"
-          },
-          "configurations": {
-            "production-wp": {
-              "devServerTarget": "playground:serve:production-wp"
-            }
-          }
-        },
-        "lint": {
-          "builder": "@angular-eslint/builder:lint",
-          "options": {
-            "lintFilePatterns": [
-              "e2e/**/*.ts",
-              "e2e/**/*.html"
-            ]
-          }
-        }
-      }
-    },
     "docs": {
       "projectType": "application",
       "schematics": {
@@ -184,7 +156,8 @@
           "builder": "@angular-devkit/build-angular:application",
           "options": {
             "outputPath": {
-              "base": "dist/docs"
+              "base": "dist/docs",
+              "browser": ""
             },
             "index": "docs/index.html",
             "polyfills": ["docs/polyfills.ts"],

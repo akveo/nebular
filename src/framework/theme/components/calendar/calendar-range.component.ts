@@ -235,7 +235,7 @@ export class NbCalendarRangeComponent<D> {
       this.monthCellComponent = cellComponent;
     }
   }
-  @Input() monthCellComponent: Type<NbCalendarCell<D, NbCalendarRange<D>>> = NbCalendarRangeMonthCellComponent;
+  monthCellComponent: Type<NbCalendarCell<D, NbCalendarRange<D>>> = NbCalendarRangeMonthCellComponent;
 
   /**
    * Custom year cell component. Have to implement `NbCalendarCell` interface.

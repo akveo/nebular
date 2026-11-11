@@ -64,8 +64,8 @@ const TEST_GROUPS = [
 ];
 
 @Component({
-    selector: 'nb-select-test',
-    template: `
+  selector: 'nb-select-test',
+  template: `
     <nb-layout>
       <nb-layout-column>
         <nb-select
@@ -85,7 +85,7 @@ const TEST_GROUPS = [
       </nb-layout-column>
     </nb-layout>
   `,
-    standalone: false
+  standalone: false,
 })
 export class NbSelectTestComponent {
   @Input() selected: any = null;
@@ -97,7 +97,7 @@ export class NbSelectTestComponent {
 }
 
 @Component({
-    template: `
+  template: `
     <nb-layout>
       <nb-layout-column>
         <nb-select>
@@ -108,12 +108,12 @@ export class NbSelectTestComponent {
       </nb-layout-column>
     </nb-layout>
   `,
-    standalone: false
+  standalone: false,
 })
 export class BasicSelectTestComponent {}
 
 @Component({
-    template: `
+  template: `
     <nb-layout>
       <nb-layout-column>
         <nb-select [selected]="selected" [compareWith]="compareFn">
@@ -122,7 +122,7 @@ export class BasicSelectTestComponent {}
       </nb-layout-column>
     </nb-layout>
   `,
-    standalone: false
+  standalone: false,
 })
 export class NbSelectWithOptionsObjectsComponent {
   @Input() compareFn = (o1: any, o2: any) => JSON.stringify(o1) === JSON.stringify(o2);
@@ -133,7 +133,7 @@ export class NbSelectWithOptionsObjectsComponent {
 }
 
 @Component({
-    template: `
+  template: `
     <nb-layout>
       <nb-layout-column>
         <nb-select [selected]="selected">
@@ -142,7 +142,7 @@ export class NbSelectWithOptionsObjectsComponent {
       </nb-layout-column>
     </nb-layout>
   `,
-    standalone: false
+  standalone: false,
 })
 export class NbSelectWithInitiallySelectedOptionComponent {
   @Input() selected = 1;
@@ -150,7 +150,7 @@ export class NbSelectWithInitiallySelectedOptionComponent {
 }
 
 @Component({
-    template: `
+  template: `
     <nb-layout>
       <nb-layout-column>
         <nb-select *ngIf="showSelect" [formControl]="formControl">
@@ -159,11 +159,14 @@ export class NbSelectWithInitiallySelectedOptionComponent {
       </nb-layout-column>
     </nb-layout>
   `,
-    standalone: false
+  standalone: false,
 })
 export class NbReactiveFormSelectComponent {
+  @Input()
   options: number[] = [1];
+  @Input()
   showSelect: boolean = true;
+  @Input()
   formControl: FormControl = new FormControl();
 
   @ViewChild(NbSelectComponent) selectComponent: NbSelectComponent;
@@ -171,7 +174,7 @@ export class NbReactiveFormSelectComponent {
 }
 
 @Component({
-    template: `
+  template: `
     <nb-layout>
       <nb-layout-column>
         <nb-select [(ngModel)]="selectedValue">
@@ -180,20 +183,21 @@ export class NbReactiveFormSelectComponent {
       </nb-layout-column>
     </nb-layout>
   `,
-    standalone: false
+  standalone: false,
 })
 export class NbNgModelSelectComponent {
   options: number[] = [1];
+  @Input()
   selectedValue: number = null;
 
   @ViewChild(NbOptionComponent) optionComponent: NbOptionComponent<number>;
 }
 
 @Component({
-    template: `
+  template: `
     <nb-layout>
       <nb-layout-column>
-        <nb-select>
+        <nb-select [fullWidth]="fullWidth">
           <nb-option>No value option</nb-option>
           <nb-option [value]="null">undefined value</nb-option>
           <nb-option [value]="undefined">undefined value</nb-option>
@@ -206,9 +210,10 @@ export class NbNgModelSelectComponent {
       </nb-layout-column>
     </nb-layout>
   `,
-    standalone: false
+  standalone: false,
 })
 export class NbSelectWithFalsyOptionValuesComponent {
+  @Input() fullWidth = false;
   nanValue = NaN;
 
   @ViewChildren(NbOptionComponent) options: QueryList<NbOptionComponent<any>>;
@@ -265,7 +270,7 @@ export class NbSelectWithFalsyOptionValuesComponent {
 }
 
 @Component({
-    template: `
+  template: `
     <nb-layout>
       <nb-layout-column>
         <nb-select multiple>
@@ -281,12 +286,12 @@ export class NbSelectWithFalsyOptionValuesComponent {
       </nb-layout-column>
     </nb-layout>
   `,
-    standalone: false
+  standalone: false,
 })
 export class NbMultipleSelectWithFalsyOptionValuesComponent extends NbSelectWithFalsyOptionValuesComponent {}
 
 @Component({
-    template: `
+  template: `
     <nb-layout>
       <nb-layout-column>
         <nb-select>
@@ -297,7 +302,7 @@ export class NbMultipleSelectWithFalsyOptionValuesComponent extends NbSelectWith
       </nb-layout-column>
     </nb-layout>
   `,
-    standalone: false
+  standalone: false,
 })
 export class NbOptionDisabledTestComponent {
   optionGroupDisabled = false;
@@ -316,7 +321,7 @@ describe('Component: NbSelectComponent', () => {
   let select: NbSelectComponent;
 
   const setSelectedAndOpen = (selected) => {
-    fixture.componentInstance.selected = selected;
+    fixture.componentRef.setInput('selected', selected);
     fixture.detectChanges();
     select.show();
   };
@@ -478,8 +483,8 @@ describe('Component: NbSelectComponent', () => {
   });
 
   it('should render custom label when something selected and custom label provided', fakeAsync(() => {
-    fixture.componentInstance.customLabel = true;
-    fixture.componentInstance.selected = 'Option 1';
+    fixture.componentRef.setInput('customLabel', true);
+    fixture.componentRef.setInput('selected', 'Option 1');
     fixture.detectChanges();
     flush();
     fixture.detectChanges();
@@ -520,7 +525,7 @@ describe('Component: NbSelectComponent', () => {
     flush();
 
     const setSelectionSpy = spyOn(testSelectComponent.selectComponent as any, 'setSelection').and.callThrough();
-    testSelectComponent.showSelect = false;
+    selectFixture.componentRef.setInput('showSelect', false);
     selectFixture.detectChanges();
 
     expect(() => testSelectComponent.formControl.setValue(1)).not.toThrow();
@@ -555,7 +560,7 @@ describe('Component: NbSelectComponent', () => {
 
     expect(optionToSelect.selected).toEqual(false);
 
-    testComponent.selected = optionToSelect.value;
+    selectFixture.componentRef.setInput('selected', optionToSelect.value);
     selectFixture.detectChanges();
 
     expect(optionToSelect.selected).toEqual(true);
@@ -572,7 +577,7 @@ describe('Component: NbSelectComponent', () => {
 
     expect(optionToSelect.selected).toEqual(false);
 
-    testComponent.selectedValue = optionToSelect.value;
+    selectFixture.componentRef.setInput('selectedValue', optionToSelect.value);
     selectFixture.detectChanges();
     // need to call flush because NgModelDirective updates value on
     // resolvedPromise.then
@@ -586,7 +591,7 @@ describe('Component: NbSelectComponent', () => {
   it('should unselect previously selected option', fakeAsync(() => {
     const selectFixture = TestBed.createComponent(NbSelectTestComponent);
     const testSelectComponent = selectFixture.componentInstance;
-    testSelectComponent.selected = TEST_GROUPS[0].options[0].value;
+    selectFixture.componentRef.setInput('selected', TEST_GROUPS[0].options[0].value);
     selectFixture.detectChanges();
     flush();
     selectFixture.detectChanges();
@@ -595,7 +600,7 @@ describe('Component: NbSelectComponent', () => {
     const selectionChangeSpy = createSpy('selectionChangeSpy');
     selectedOption.selectionChange.subscribe(selectionChangeSpy);
 
-    testSelectComponent.selected = TEST_GROUPS[0].options[1].value;
+    selectFixture.componentRef.setInput('selected', TEST_GROUPS[0].options[1].value);
     selectFixture.detectChanges();
 
     expect(selectionChangeSpy).toHaveBeenCalledTimes(1);
@@ -605,7 +610,7 @@ describe('Component: NbSelectComponent', () => {
   it('should not deselect option if option stays selected', fakeAsync(() => {
     const selectFixture = TestBed.createComponent(NbSelectTestComponent);
     const testSelectComponent = selectFixture.componentInstance;
-    testSelectComponent.selected = TEST_GROUPS[0].options[0].value;
+    selectFixture.componentRef.setInput('selected', TEST_GROUPS[0].options[0].value);
     selectFixture.detectChanges();
     flush();
     selectFixture.detectChanges();
@@ -613,7 +618,7 @@ describe('Component: NbSelectComponent', () => {
     const selectedOption: NbOptionComponent<any> = testSelectComponent.options.find((o) => o.selected);
     const selectionChangeSpy = spyOn(selectedOption, 'deselect');
 
-    testSelectComponent.selected = selectedOption.value;
+    selectFixture.componentRef.setInput('selected', selectedOption.value);
     selectFixture.detectChanges();
 
     expect(selectionChangeSpy).not.toHaveBeenCalled();
@@ -648,7 +653,7 @@ describe('Component: NbSelectComponent', () => {
 
   it('should not open when disabled and button clicked', fakeAsync(() => {
     const selectFixture = TestBed.createComponent(NbSelectComponent);
-    selectFixture.componentInstance.disabled = true;
+    selectFixture.componentRef.setInput('disabled', true);
     selectFixture.detectChanges();
     const selectButton: HTMLElement = selectFixture.debugElement.query(By.css('button')).nativeElement;
 
@@ -661,7 +666,7 @@ describe('Component: NbSelectComponent', () => {
 
   it('should not open when disabled and toggle icon clicked', fakeAsync(() => {
     const selectFixture = TestBed.createComponent(NbSelectComponent);
-    selectFixture.componentInstance.disabled = true;
+    selectFixture.componentRef.setInput('disabled', true);
     selectFixture.detectChanges();
     const selectToggleIcon: HTMLElement = selectFixture.debugElement.query(By.css('nb-icon')).nativeElement;
 
@@ -790,7 +795,8 @@ describe('NbSelectComponent - falsy values', () => {
   }));
 
   it('should set class if fullWidth input set to true', () => {
-    select.fullWidth = true;
+    fixture = TestBed.createComponent(NbSelectWithFalsyOptionValuesComponent);
+    fixture.componentRef.setInput('fullWidth', true);
     fixture.detectChanges();
 
     const button = fixture.debugElement.query(By.directive(NbSelectComponent));
@@ -981,7 +987,7 @@ describe('NbOptionComponent', () => {
     option.selectionChange.subscribe(selectionChangeSpy);
 
     expect(option.selected).toEqual(false);
-    testSelectComponent.showSelect = false;
+    fixture.componentRef.setInput('showSelect', false);
     fixture.detectChanges();
 
     expect((option as any).alive).toEqual(false);
@@ -1089,8 +1095,8 @@ describe('NbSelect - dynamic options', () => {
 
     beforeEach(() => {
       // Force select to cache the value as there is no options to select.
-      testComponent.options = [];
-      testComponent.formControl = new FormControl(1);
+      fixture.componentRef.setInput('options', []);
+      fixture.componentRef.setInput('formControl', new FormControl(1));
       fixture.detectChanges();
 
       selectComponent = fixture.debugElement.query(By.directive(NbSelectComponent)).componentInstance;
@@ -1099,7 +1105,7 @@ describe('NbSelect - dynamic options', () => {
     it('should set value from queue when options added dynamically (after change detection run)', fakeAsync(() => {
       expect(selectComponent.selectionModel.length).toEqual(0);
 
-      testComponent.options = [1];
+      fixture.componentRef.setInput('options', [1]);
       fixture.detectChanges();
       flush();
       fixture.detectChanges();
@@ -1108,14 +1114,14 @@ describe('NbSelect - dynamic options', () => {
     }));
 
     it('should set value from queue when options change', fakeAsync(() => {
-      testComponent.options = [0];
+      fixture.componentRef.setInput('options', [0]);
       fixture.detectChanges();
       flush();
       fixture.detectChanges();
 
       expect(selectComponent.selectionModel.length).toEqual(0);
 
-      testComponent.options.push(1);
+      fixture.componentRef.setInput('options', [...testComponent.options, 1]);
       fixture.detectChanges();
       flush();
       fixture.detectChanges();
@@ -1131,14 +1137,14 @@ describe('NbSelect - dynamic options', () => {
     */
 
     it('should clear queue after option selected by click', fakeAsync(() => {
-      testComponent.options = [];
-      testComponent.formControl = new FormControl(1);
+      fixture.componentRef.setInput('options', []);
+      fixture.componentRef.setInput('formControl', new FormControl(1));
       fixture.detectChanges();
 
       const selectComponent: NbSelectComponent = fixture.debugElement.query(
         By.directive(NbSelectComponent),
       ).componentInstance;
-      testComponent.options = [0];
+      fixture.componentRef.setInput('options', [0]);
       fixture.detectChanges();
       flush();
       fixture.detectChanges();
@@ -1147,21 +1153,21 @@ describe('NbSelect - dynamic options', () => {
       fixture.detectChanges();
 
       const writeValueSpy = spyOn(selectComponent, 'writeValue').and.callThrough();
-      testComponent.options.push(1);
+      fixture.componentRef.setInput('options', [...testComponent.options, 1]);
       fixture.detectChanges();
       flush();
       expect(writeValueSpy).not.toHaveBeenCalled();
     }));
 
     it(`should clear queue after option selected via 'selected' input`, fakeAsync(() => {
-      testComponent.options = [];
-      testComponent.formControl = new FormControl(1);
+      fixture.componentRef.setInput('options', []);
+      fixture.componentRef.setInput('formControl', new FormControl(1));
       fixture.detectChanges();
 
       const selectComponent: NbSelectComponent = fixture.debugElement.query(
         By.directive(NbSelectComponent),
       ).componentInstance;
-      testComponent.options = [0];
+      fixture.componentRef.setInput('options', [0]);
       fixture.detectChanges();
       flush();
       fixture.detectChanges();
@@ -1170,15 +1176,15 @@ describe('NbSelect - dynamic options', () => {
       fixture.detectChanges();
 
       const writeValueSpy = spyOn(selectComponent, 'writeValue').and.callThrough();
-      testComponent.options.push(1);
+      fixture.componentRef.setInput('options', [...testComponent.options, 1]);
       fixture.detectChanges();
       flush();
       expect(writeValueSpy).not.toHaveBeenCalled();
     }));
 
     it('should clear queue after options change and selection model change', fakeAsync(() => {
-      testComponent.options = [];
-      testComponent.formControl = new FormControl(1);
+      fixture.componentRef.setInput('options', []);
+      fixture.componentRef.setInput('formControl', new FormControl(1));
       fixture.detectChanges();
 
       const selectComponent: NbSelectComponent = fixture.debugElement.query(
@@ -1186,14 +1192,14 @@ describe('NbSelect - dynamic options', () => {
       ).componentInstance;
       const writeValueSpy = spyOn(selectComponent, 'writeValue').and.callThrough();
 
-      testComponent.options = [1];
+      fixture.componentRef.setInput('options', [1]);
       fixture.detectChanges();
       flush();
       fixture.detectChanges();
 
       expect(writeValueSpy).toHaveBeenCalledTimes(1);
 
-      testComponent.options.push(2);
+      fixture.componentRef.setInput('options', [...testComponent.options, 2]);
       fixture.detectChanges();
       flush();
       fixture.detectChanges();
@@ -1202,8 +1208,8 @@ describe('NbSelect - dynamic options', () => {
     }));
 
     it('should not clear queue after options change and selection model is empty', fakeAsync(() => {
-      testComponent.options = [];
-      testComponent.formControl = new FormControl(2);
+      fixture.componentRef.setInput('options', []);
+      fixture.componentRef.setInput('formControl', new FormControl(2));
       fixture.detectChanges();
 
       const selectComponent: NbSelectComponent = fixture.debugElement.query(
@@ -1211,13 +1217,13 @@ describe('NbSelect - dynamic options', () => {
       ).componentInstance;
       const writeValueSpy = spyOn(selectComponent, 'writeValue').and.callThrough();
 
-      testComponent.options = [0];
+      fixture.componentRef.setInput('options', [0]);
       fixture.detectChanges();
       flush();
       fixture.detectChanges();
       expect(writeValueSpy).toHaveBeenCalledTimes(1);
 
-      testComponent.options.push(1);
+      fixture.componentRef.setInput('options', [...testComponent.options, 1]);
       fixture.detectChanges();
       flush();
       fixture.detectChanges();

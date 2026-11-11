@@ -1,101 +1,88 @@
-import rxjs from "eslint-plugin-rxjs-x";
-import globals from "globals";
-import path from "node:path";
-import { fileURLToPath } from "node:url";
-import js from "@eslint/js";
-import { FlatCompat } from "@eslint/eslintrc";
-import tseslint from "@typescript-eslint/eslint-plugin";
+import angular from 'angular-eslint';
+import prettier from 'eslint-config-prettier';
+import rxjs from 'eslint-plugin-rxjs-x';
+import globals from 'globals';
+import tseslint from 'typescript-eslint';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-const compat = new FlatCompat({
-    baseDirectory: __dirname,
-    recommendedConfig: js.configs.recommended,
-    allConfig: js.configs.all
-});
+const forFiles = (configs, files) => configs.map((config) => ({ ...config, files }));
 
-export default [{
-    ignores: [
-        "src/framework/**/*",
-    ],
-}, ...compat.extends(
-    "plugin:@angular-eslint/recommended",
-    "plugin:@angular-eslint/template/process-inline-templates",
-    "eslint-config-prettier",
-).map(config => ({
-    ...config,
-    files: ["**/*.ts"],
-})), {
-    files: ["**/*.ts"],
-
-    plugins: {
-        rxjs,
-        "@typescript-eslint": tseslint,
-    },
-
+export default [
+  { ignores: ['src/framework/**/*'] },
+  ...forFiles(angular.configs.tsRecommended, ['**/*.ts']),
+  {
+    files: ['**/*.ts'],
+    processor: angular.processInlineTemplates,
+    plugins: { rxjs, '@typescript-eslint': tseslint.plugin },
     languageOptions: {
-        ecmaVersion: 5,
-        sourceType: "script",
-
-        parserOptions: {
-            project: ["tsconfig.json", "e2e/tsconfig.json"],
-            createDefaultProgram: true,
-        },
+      parser: tseslint.parser,
+      parserOptions: {
+        project: ['tsconfig.json', 'e2e/tsconfig.e2e.json'],
+        createDefaultProgram: true,
+      },
     },
-
     rules: {
-        quotes: "off",
-        "dot-notation": "off",
-        "no-restricted-globals": ["error", "fit", "fdescribe"],
-        "@typescript-eslint/dot-notation": "error",
-        "no-shadow": "off",
-        "@typescript-eslint/no-shadow": "error",
-        "no-underscore-dangle": "off",
-        "@typescript-eslint/consistent-type-definitions": "error",
-        "@angular-eslint/prefer-standalone": "off",
-        "@angular-eslint/prefer-inject": "off",
-
-        "rxjs/no-unsafe-takeuntil": ["error", {
-            allow: [
-                "count",
-                "defaultIfEmpty",
-                "endWith",
-                "every",
-                "finalize",
-                "finally",
-                "isEmpty",
-                "last",
-                "max",
-                "min",
-                "publish",
-                "publishBehavior",
-                "publishLast",
-                "publishReplay",
-                "reduce",
-                "share",
-                "shareReplay",
-                "skipLast",
-                "takeLast",
-                "throwIfEmpty",
-                "toArray",
-            ],
-        }],
-    },
-}, ...compat.extends("plugin:@angular-eslint/template/recommended", "eslint-config-prettier").map(config => ({
-    ...config,
-    files: ["**/*.html"],
-})), {
-    files: ["**/*.html"],
-    rules: {},
-}, {
-    files: ["./*.js"],
-
-    languageOptions: {
-        globals: {
-            ...globals.node,
+      ...prettier.rules,
+      quotes: 'off',
+      'dot-notation': 'off',
+      'no-restricted-globals': ['error', 'fit', 'fdescribe'],
+      '@typescript-eslint/dot-notation': 'error',
+      'no-shadow': 'off',
+      '@typescript-eslint/no-shadow': 'error',
+      'no-underscore-dangle': 'off',
+      '@typescript-eslint/consistent-type-definitions': 'error',
+      '@angular-eslint/prefer-standalone': 'off',
+      '@angular-eslint/prefer-inject': 'off',
+      '@angular-eslint/template/prefer-control-flow': 'off',
+      'rxjs/no-unsafe-takeuntil': [
+        'error',
+        {
+          allow: [
+            'count',
+            'defaultIfEmpty',
+            'endWith',
+            'every',
+            'finalize',
+            'finally',
+            'isEmpty',
+            'last',
+            'max',
+            'min',
+            'publish',
+            'publishBehavior',
+            'publishLast',
+            'publishReplay',
+            'reduce',
+            'share',
+            'shareReplay',
+            'skipLast',
+            'takeLast',
+            'throwIfEmpty',
+            'toArray',
+          ],
         },
-
-        ecmaVersion: 11,
-        sourceType: "commonjs",
+      ],
     },
-}];
+  },
+  {
+    files: ['e2e/**/*.ts', 'playwright.config.ts'],
+    languageOptions: {
+      globals: { ...globals.node },
+    },
+  },
+  ...forFiles(angular.configs.templateRecommended, ['**/*.html']),
+  {
+    files: ['**/*.html'],
+    rules: {
+      ...prettier.rules,
+      '@angular-eslint/template/prefer-control-flow': 'off',
+    },
+  },
+  {
+    files: ['./*.js'],
+    languageOptions: {
+      globals: { ...globals.node },
+      ecmaVersion: 2020,
+      sourceType: 'commonjs',
+    },
+  },
+];

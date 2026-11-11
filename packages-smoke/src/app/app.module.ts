@@ -3,7 +3,7 @@ import { BrowserModule, REMOVE_STYLES_ON_COMPONENT_DESTROY } from '@angular/plat
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NbThemeModule } from '@nebular/theme';
+import { NbCardModule, NbThemeModule } from '@nebular/theme';
 import { NbAuthModule } from '@nebular/auth';
 import { NbSecurityModule } from '@nebular/security';
 import { NbMomentDateModule } from '@nebular/moment';
@@ -16,6 +16,7 @@ import { NbEvaIconsModule } from '@nebular/eva-icons';
     BrowserModule,
     BrowserAnimationsModule,
     NbThemeModule.forRoot({ name: 'default' }),
+    NbCardModule,
     NbAuthModule.forRoot(),
     NbSecurityModule.forRoot(),
     NbMomentDateModule,

@@ -5,7 +5,7 @@
  */
 
 import { ComponentFixture, TestBed, fakeAsync, flush, tick } from '@angular/core/testing';
-import { Component, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { Component, Input, QueryList, ViewChild, ViewChildren } from '@angular/core';
 
 import {
   NbButtonModule,
@@ -20,8 +20,8 @@ import {
 } from '@nebular/theme';
 
 @Component({
-    selector: 'nb-button-group-test',
-    template: `
+  selector: 'nb-button-group-test',
+  template: `
     <nb-button-group
       [size]="size"
       [status]="status"
@@ -39,16 +39,23 @@ import {
       <button nbButtonToggle value="F" *ngIf="showLastButton">F</button>
     </nb-button-group>
   `,
-    standalone: false
+  standalone: false,
 })
 export class NbButtonGroupTestComponent {
+  @Input()
   size: NbComponentSize = 'large';
+  @Input()
   shape: NbComponentShape = 'round';
+  @Input()
   status: NbComponentStatus = 'danger';
+  @Input()
   appearance: NbButtonToggleAppearance = 'outline';
+  @Input()
   groupDisabled: boolean = false;
+  @Input()
   multiple: boolean = false;
 
+  @Input()
   showLastButton = false;
 
   @ViewChild(NbButtonGroupComponent) buttonGroup: NbButtonGroupComponent;
@@ -97,13 +104,13 @@ describe('Component: NbButtonGroup', () => {
   });
 
   it('should change buttons disabled state after initialization', () => {
-    testComponent.groupDisabled = true;
+    fixture.componentRef.setInput('groupDisabled', true);
     fixture.detectChanges();
     toggleButtons.forEach((button) => expect(button.disabled).toEqual(true));
   });
 
   it('should change the status of newly added buttons', fakeAsync(() => {
-    testComponent.showLastButton = true;
+    fixture.componentRef.setInput('showLastButton', true);
     fixture.detectChanges();
     flush();
     fixture.detectChanges();
@@ -112,7 +119,7 @@ describe('Component: NbButtonGroup', () => {
   }));
 
   it('should change the size of newly added buttons', fakeAsync(() => {
-    testComponent.showLastButton = true;
+    fixture.componentRef.setInput('showLastButton', true);
     fixture.detectChanges();
     flush();
     fixture.detectChanges();
@@ -121,7 +128,7 @@ describe('Component: NbButtonGroup', () => {
   }));
 
   it('should change the appearance of newly added buttons', fakeAsync(() => {
-    testComponent.showLastButton = true;
+    fixture.componentRef.setInput('showLastButton', true);
     fixture.detectChanges();
     flush();
     fixture.detectChanges();
@@ -130,7 +137,7 @@ describe('Component: NbButtonGroup', () => {
   }));
 
   it('should change the shape of newly added buttons', fakeAsync(() => {
-    testComponent.showLastButton = true;
+    fixture.componentRef.setInput('showLastButton', true);
     fixture.detectChanges();
     flush();
     fixture.detectChanges();
@@ -139,8 +146,8 @@ describe('Component: NbButtonGroup', () => {
   }));
 
   it('should change disabled state of newly added buttons', fakeAsync(() => {
-    testComponent.groupDisabled = true;
-    testComponent.showLastButton = true;
+    fixture.componentRef.setInput('groupDisabled', true);
+    fixture.componentRef.setInput('showLastButton', true);
     fixture.detectChanges();
     flush();
     fixture.detectChanges();
@@ -154,8 +161,8 @@ describe('Component: NbButtonGroup', () => {
     };
     const nativeElement = fixture.nativeElement;
     spyOn(testComponent, 'onValueChange').and.callThrough();
-    testComponent.showLastButton = true;
-    testComponent.multiple = true;
+    fixture.componentRef.setInput('showLastButton', true);
+    fixture.componentRef.setInput('multiple', true);
     fixture.detectChanges();
 
     clickButton(nativeElement, 0);

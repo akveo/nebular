@@ -11,7 +11,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: 20.19.5
+          node-version: 22.22.3
           cache: 'npm'
       - run: npm ci
       - run: npm run build:packages
@@ -27,7 +27,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: 20.19.5
+          node-version: 22.22.3
           cache: 'npm'
       - run: |
           npm ci
@@ -40,7 +40,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: 20.19.5
+          node-version: 22.22.3
       - run: npm ci
       - run: npm run docs:build
   build-playground:
@@ -50,13 +50,29 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: 20.19.5
+          node-version: 22.22.3
       - run: npm ci
       - uses: actions/download-artifact@v4
         with:
           name: built-packages
           path: dist
       - run: npm run build playground -- --configuration=production-wp
+  e2e:
+    needs: build-packages
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 22.22.3
+          cache: 'npm'
+      - run: npm ci
+      - uses: actions/download-artifact@v4
+        with:
+          name: built-packages
+          path: dist
+      - run: npx playwright install --with-deps chromium
+      - run: npm run e2e
 #  lint:
 #    runs-on: ubuntu-latest
 #    steps:
@@ -104,7 +120,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: 20.19.5
+          node-version: 22.22.3
       - run: npm ci
       - uses: actions/download-artifact@v4
         with:
@@ -136,7 +152,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: 20.19.5
+          node-version: 22.22.3
       - uses: actions/download-artifact@v4
         with:
           name: built-packages

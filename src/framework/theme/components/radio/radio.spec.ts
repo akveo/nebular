@@ -23,15 +23,15 @@ import createSpy = jasmine.createSpy;
 import { NbThemeModule, NbRadioModule, NbRadioComponent, NbRadioGroupComponent, NB_DOCUMENT } from '@nebular/theme';
 
 @Component({
-    selector: 'nb-radio-test',
-    template: `
+  selector: 'nb-radio-test',
+  template: `
     <nb-radio-group [value]="value" (valueChange)="valueChange.emit($event)">
       <nb-radio value="1">1</nb-radio>
       <nb-radio value="2">2</nb-radio>
       <nb-radio value="3" disabled>3</nb-radio>
     </nb-radio-group>
   `,
-    standalone: false
+  standalone: false,
 })
 export class NbRadioTestComponent {
   @Input() value;
@@ -39,17 +39,19 @@ export class NbRadioTestComponent {
 }
 
 @Component({
-    template: `
+  template: `
     <nb-radio-group>
       <ng-template [ngIf]="showRadios">
         <nb-radio *ngFor="let radio of radioValues" [value]="radio">{{ radio }}</nb-radio>
       </ng-template>
     </nb-radio-group>
   `,
-    standalone: false
+  standalone: false,
 })
 export class NbRadioWithDynamicValuesTestComponent {
+  @Input()
   radioValues: number[] = [];
+  @Input()
   showRadios: boolean = false;
 
   @ViewChild(NbRadioGroupComponent) radioGroupComponent: NbRadioGroupComponent;
@@ -57,7 +59,7 @@ export class NbRadioWithDynamicValuesTestComponent {
 }
 
 @Component({
-    template: `
+  template: `
     <nb-radio-group #firstGroup name="1">
       <nb-radio checked value="1"></nb-radio>
     </nb-radio-group>
@@ -65,7 +67,7 @@ export class NbRadioWithDynamicValuesTestComponent {
       <nb-radio checked value="2"></nb-radio>
     </nb-radio-group>
   `,
-    standalone: false
+  standalone: false,
 })
 export class NbTwoRadioGroupsComponent {
   @ViewChild('firstGroup', { read: NbRadioGroupComponent }) firstGroup: NbRadioGroupComponent;
@@ -74,13 +76,13 @@ export class NbTwoRadioGroupsComponent {
 }
 
 @Component({
-    template: `
+  template: `
     <nb-radio-group name="1" [formControl]="control">
       <nb-radio value="1"></nb-radio>
       <nb-radio value="2"></nb-radio>
     </nb-radio-group>
   `,
-    standalone: false
+  standalone: false,
 })
 export class NbFormsIntegrationComponent {
   @ViewChild(NbRadioGroupComponent) radioGroup: NbRadioGroupComponent;
@@ -140,8 +142,8 @@ describe('NbRadioGroupComponent', () => {
   }));
 
   it('should update radio value when radios added after radio group initialization', fakeAsync(() => {
-    radioTestComponent.radioValues = [1, 2, 3];
-    radioTestComponent.showRadios = true;
+    fixture.componentRef.setInput('radioValues', [1, 2, 3]);
+    fixture.componentRef.setInput('showRadios', true);
     radioTestComponent.radioGroupComponent.value = 1;
     fixture.detectChanges(); // adds radios
     flush(); // promise with 'updateAndSubscribeToRadios' in NbRadioGroup.radios.changes
@@ -156,8 +158,8 @@ describe('NbRadioGroupComponent', () => {
 
   it('should update radio name when radios added after radio group initialization', fakeAsync(() => {
     const groupName = 'my-radio-group-name';
-    radioTestComponent.radioValues = [1, 2, 3];
-    radioTestComponent.showRadios = true;
+    fixture.componentRef.setInput('radioValues', [1, 2, 3]);
+    fixture.componentRef.setInput('showRadios', true);
     radioTestComponent.radioGroupComponent.name = groupName;
     fixture.detectChanges(); // adds radios
     flush(); // promise with 'updateAndSubscribeToRadios' in NbRadioGroup.radios.changes
@@ -169,8 +171,8 @@ describe('NbRadioGroupComponent', () => {
   }));
 
   it('should update radio disabled state when radios added after radio group initialization', fakeAsync(() => {
-    radioTestComponent.radioValues = [1, 2, 3];
-    radioTestComponent.showRadios = true;
+    fixture.componentRef.setInput('radioValues', [1, 2, 3]);
+    fixture.componentRef.setInput('showRadios', true);
     radioTestComponent.radioGroupComponent.disabled = true;
     fixture.detectChanges(); // adds radios
     flush(); // promise with 'updateAndSubscribeToRadios' in NbRadioGroup.radios.changes
@@ -182,8 +184,8 @@ describe('NbRadioGroupComponent', () => {
   }));
 
   it('should update radio status when radios added after radio group initialization', fakeAsync(() => {
-    radioTestComponent.radioValues = [1, 2, 3];
-    radioTestComponent.showRadios = true;
+    fixture.componentRef.setInput('radioValues', [1, 2, 3]);
+    fixture.componentRef.setInput('showRadios', true);
     radioTestComponent.radioGroupComponent.status = 'info';
     fixture.detectChanges(); // adds radios
     flush(); // promise with 'updateAndSubscribeToRadios' in NbRadioGroup.radios.changes
@@ -196,8 +198,8 @@ describe('NbRadioGroupComponent', () => {
 
   it('should update subscription to radio change when radios added after radio group initialization', fakeAsync(() => {
     const radioValue = 333;
-    radioTestComponent.radioValues = [radioValue];
-    radioTestComponent.showRadios = true;
+    fixture.componentRef.setInput('radioValues', [radioValue]);
+    fixture.componentRef.setInput('showRadios', true);
     fixture.detectChanges(); // adds radios
     flush(); // promise with 'updateAndSubscribeToRadios' in NbRadioGroup.radios.changes
     fixture.detectChanges(); // detect changes made during 'updateAndSubscribeToRadios'
@@ -213,11 +215,11 @@ describe('NbRadioGroupComponent', () => {
   }));
 
   it('should update radio value when radios change', fakeAsync(() => {
-    radioTestComponent.showRadios = true;
+    fixture.componentRef.setInput('showRadios', true);
     radioTestComponent.radioGroupComponent.value = 1;
     fixture.detectChanges();
 
-    radioTestComponent.radioValues = [1, 2, 3];
+    fixture.componentRef.setInput('radioValues', [1, 2, 3]);
     fixture.detectChanges(); // adds radios
     flush(); // promise with 'updateAndSubscribeToRadios' in NbRadioGroup.radios.changes
     fixture.detectChanges(); // detect changes made during 'updateAndSubscribeToRadios'
@@ -231,11 +233,11 @@ describe('NbRadioGroupComponent', () => {
 
   it('should update radio name when radios change', fakeAsync(() => {
     const groupName = 'my-radio-group-name';
-    radioTestComponent.showRadios = true;
+    fixture.componentRef.setInput('showRadios', true);
     radioTestComponent.radioGroupComponent.name = groupName;
     fixture.detectChanges();
 
-    radioTestComponent.radioValues = [1, 2, 3];
+    fixture.componentRef.setInput('radioValues', [1, 2, 3]);
     fixture.detectChanges(); // adds radios
     flush(); // promise with 'updateAndSubscribeToRadios' in NbRadioGroup.radios.changes
     fixture.detectChanges(); // detect changes made during 'updateAndSubscribeToRadios'
@@ -246,11 +248,11 @@ describe('NbRadioGroupComponent', () => {
   }));
 
   it('should update radio disabled state when radios change', fakeAsync(() => {
-    radioTestComponent.showRadios = true;
+    fixture.componentRef.setInput('showRadios', true);
     radioTestComponent.radioGroupComponent.disabled = true;
     fixture.detectChanges();
 
-    radioTestComponent.radioValues = [1, 2, 3];
+    fixture.componentRef.setInput('radioValues', [1, 2, 3]);
     fixture.detectChanges(); // adds radios
     flush(); // promise with 'updateAndSubscribeToRadios' in NbRadioGroup.radios.changes
     fixture.detectChanges(); // detect changes made during 'updateAndSubscribeToRadios'
@@ -261,11 +263,11 @@ describe('NbRadioGroupComponent', () => {
   }));
 
   it('should update radio status when radios change', fakeAsync(() => {
-    radioTestComponent.showRadios = true;
+    fixture.componentRef.setInput('showRadios', true);
     radioTestComponent.radioGroupComponent.status = 'info';
     fixture.detectChanges();
 
-    radioTestComponent.radioValues = [1, 2, 3];
+    fixture.componentRef.setInput('radioValues', [1, 2, 3]);
     fixture.detectChanges(); // adds radios
     flush(); // promise with 'updateAndSubscribeToRadios' in NbRadioGroup.radios.changes
     fixture.detectChanges(); // detect changes made during 'updateAndSubscribeToRadios'
@@ -278,13 +280,13 @@ describe('NbRadioGroupComponent', () => {
   it('should update subscription to radio change when radios change', fakeAsync(() => {
     const valueChangeSpy = createSpy('valueChange');
     radioTestComponent.radioGroupComponent.valueChange.subscribe(valueChangeSpy);
-    radioTestComponent.showRadios = true;
+    fixture.componentRef.setInput('showRadios', true);
     fixture.detectChanges();
     flush();
     fixture.detectChanges();
 
     const radioValue = 333;
-    radioTestComponent.radioValues = [radioValue];
+    fixture.componentRef.setInput('radioValues', [radioValue]);
     fixture.detectChanges(); // adds radios
     flush(); // promise with 'updateAndSubscribeToRadios' in NbRadioGroup.radios.changes
     fixture.detectChanges(); // detect changes made during 'updateAndSubscribeToRadios'

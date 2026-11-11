@@ -1,4 +1,4 @@
-import { browser, by, element, ExpectedConditions } from 'protractor';
+import { expect, Locator, Page } from '@playwright/test';
 
 /**
  * @license
@@ -6,29 +6,26 @@ import { browser, by, element, ExpectedConditions } from 'protractor';
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-export const hasClass = (el: any, cls: string) => {
-  return el.getAttribute('class').then((classes: string) => {
-    return classes.split(' ').indexOf(cls) !== -1;
-  });
+export const hasClass = async (locator: Locator, cls: string): Promise<boolean> => {
+  const classes = (await locator.getAttribute('class')) || '';
+  return classes.split(/\s+/).includes(cls);
 };
 
-export const hexToRgbA = (hex, alpha = 1) => {
-  let c;
+export const hexToRgbA = (hex: string, alpha = 1): string => {
+  let c: string[] | string;
   if (/^#([A-Fa-f0-9]{3}){1,2}$/.test(hex)) {
     c = hex.substring(1).split('');
     if (c.length === 3) {
       c = [c[0], c[0], c[1], c[1], c[2], c[2]];
     }
-    c = `0x${c.join('')}`;
-    return `rgba(${(c >> 16) & 255}, ${(c >> 8) & 255}, ${c & 255}, ${alpha})`;
+    const value = Number(`0x${c.join('')}`);
+    const channels = `${(value >> 16) & 255}, ${(value >> 8) & 255}, ${value & 255}`;
+    return alpha === 1 ? `rgb(${channels})` : `rgba(${channels}, ${alpha})`;
   }
   throw new Error('Bad Hex');
 };
 
-/**
- * Waiting till browser render element
- * @param selector
- */
-export const waitFor = (selector: any) => {
-  browser.wait(ExpectedConditions.presenceOf(element(by.css(selector))));
-};
+export async function openExample(page: Page, path: string): Promise<void> {
+  await page.goto(path);
+  await expect(page.locator('npg-app-root')).toBeAttached();
+}

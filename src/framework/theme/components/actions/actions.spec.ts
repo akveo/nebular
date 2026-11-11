@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, Input, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { RouterLink } from '@angular/router';
@@ -19,20 +19,23 @@ import {
 const ICON_NAME = 'chevron-left-outline';
 
 @Component({
-    template: `
+  template: `
     <nb-actions>
       <nb-action [icon]="icon" [link]="link">
         <ng-container *ngIf="projectContent">{{ projectedText }}</ng-container>
       </nb-action>
     </nb-actions>
   `,
-    standalone: false
+  standalone: false,
 })
 export class NbActionsTestComponent {
+  @Input()
   projectContent: boolean = false;
   projectedText = 'text.text.text.text.text';
 
+  @Input()
   icon: string;
+  @Input()
   link: string;
 
   @ViewChild(NbActionsComponent) actionsComponent: NbActionsComponent;
@@ -56,8 +59,8 @@ describe('NbActionComponent link with icon', () => {
   });
 
   it('should contain router link if link input set', () => {
-    actionComponent.icon = ICON_NAME;
-    actionComponent.link = '.';
+    fixture.componentRef.setInput('icon', ICON_NAME);
+    fixture.componentRef.setInput('link', '.');
     fixture.detectChanges();
 
     const link = fixture.debugElement.query(By.directive(RouterLink));
@@ -65,8 +68,8 @@ describe('NbActionComponent link with icon', () => {
   });
 
   it('should contain anchor with href if href input set', () => {
-    actionComponent.icon = ICON_NAME;
-    actionComponent.href = '/';
+    fixture.componentRef.setInput('icon', ICON_NAME);
+    fixture.componentRef.setInput('href', '/');
     fixture.detectChanges();
 
     const link = fixture.debugElement.query(By.css('a[href]'));
@@ -75,8 +78,8 @@ describe('NbActionComponent link with icon', () => {
   });
 
   it('should not contain router link if href input set', () => {
-    actionComponent.icon = ICON_NAME;
-    actionComponent.href = '/';
+    fixture.componentRef.setInput('icon', ICON_NAME);
+    fixture.componentRef.setInput('href', '/');
     fixture.detectChanges();
 
     const link = fixture.debugElement.query(By.directive(RouterLink));
@@ -84,7 +87,7 @@ describe('NbActionComponent link with icon', () => {
   });
 
   it('should contain empty link if neither link nor href inputs set', () => {
-    actionComponent.icon = ICON_NAME;
+    fixture.componentRef.setInput('icon', ICON_NAME);
     fixture.detectChanges();
 
     const link = fixture.debugElement.query(By.css('a[href]'));
@@ -93,8 +96,8 @@ describe('NbActionComponent link with icon', () => {
   });
 
   it('should contain icon in routerLink anchor', () => {
-    actionComponent.icon = ICON_NAME;
-    actionComponent.link = '.';
+    fixture.componentRef.setInput('icon', ICON_NAME);
+    fixture.componentRef.setInput('link', '.');
     fixture.detectChanges();
 
     const icon = fixture.debugElement.query(By.directive(RouterLink)).query(By.directive(NbIconComponent));
@@ -104,8 +107,8 @@ describe('NbActionComponent link with icon', () => {
   });
 
   it('should contain icon in href anchor', () => {
-    actionComponent.icon = ICON_NAME;
-    actionComponent.href = '/';
+    fixture.componentRef.setInput('icon', ICON_NAME);
+    fixture.componentRef.setInput('href', '/');
     fixture.detectChanges();
 
     const icon = fixture.debugElement.query(By.css('a[href]')).query(By.directive(NbIconComponent));
@@ -115,7 +118,7 @@ describe('NbActionComponent link with icon', () => {
   });
 
   it('should contain icon in empty anchor', () => {
-    actionComponent.icon = ICON_NAME;
+    fixture.componentRef.setInput('icon', ICON_NAME);
     fixture.detectChanges();
 
     const icon = fixture.debugElement.query(By.css('a')).query(By.directive(NbIconComponent));
@@ -125,10 +128,10 @@ describe('NbActionComponent link with icon', () => {
   });
 
   it('should set title in routerLink anchor', () => {
-    actionComponent.icon = ICON_NAME;
-    actionComponent.link = '.';
+    fixture.componentRef.setInput('icon', ICON_NAME);
+    fixture.componentRef.setInput('link', '.');
     const title = 'routerLink';
-    actionComponent.title = title;
+    fixture.componentRef.setInput('title', title);
     fixture.detectChanges();
 
     const link = fixture.debugElement.query(By.directive(RouterLink));
@@ -137,10 +140,10 @@ describe('NbActionComponent link with icon', () => {
   });
 
   it('should set title in href anchor', () => {
-    actionComponent.icon = ICON_NAME;
-    actionComponent.href = '/';
+    fixture.componentRef.setInput('icon', ICON_NAME);
+    fixture.componentRef.setInput('href', '/');
     const title = 'hrefAnchor';
-    actionComponent.title = title;
+    fixture.componentRef.setInput('title', title);
     fixture.detectChanges();
 
     const link = fixture.debugElement.query(By.css('a'));
@@ -149,9 +152,9 @@ describe('NbActionComponent link with icon', () => {
   });
 
   it('should set title in empty anchor', () => {
-    actionComponent.icon = ICON_NAME;
+    fixture.componentRef.setInput('icon', ICON_NAME);
     const title = 'emptyAnchor';
-    actionComponent.title = title;
+    fixture.componentRef.setInput('title', title);
     fixture.detectChanges();
 
     const link = fixture.debugElement.query(By.css('a'));
@@ -160,7 +163,7 @@ describe('NbActionComponent link with icon', () => {
   });
 
   it('should set class if disabled', () => {
-    actionComponent.disabled = true;
+    fixture.componentRef.setInput('disabled', true);
     fixture.detectChanges();
 
     expect(fixture.debugElement.classes.disabled).toEqual(true);
@@ -168,7 +171,7 @@ describe('NbActionComponent link with icon', () => {
 
   it('should contain badge if badgeText set', () => {
     const badgeText = '1';
-    actionComponent.badgeText = badgeText;
+    fixture.componentRef.setInput('badgeText', badgeText);
     fixture.detectChanges();
 
     const badge = fixture.debugElement.query(By.directive(NbBadgeComponent));
@@ -177,9 +180,9 @@ describe('NbActionComponent link with icon', () => {
   });
 
   it('should pass set badge position and status to badge component', () => {
-    actionComponent.badgeText = '1';
-    actionComponent.badgePosition = 'bottom right';
-    actionComponent.badgeStatus = 'info';
+    fixture.componentRef.setInput('badgeText', '1');
+    fixture.componentRef.setInput('badgePosition', 'bottom right');
+    fixture.componentRef.setInput('badgeStatus', 'info');
     fixture.detectChanges();
 
     const badge = fixture.debugElement.query(By.directive(NbBadgeComponent));
@@ -213,7 +216,7 @@ describe('NbActionComponent content projection', () => {
   });
 
   it('should contain projected content if passed', () => {
-    testComponent.projectContent = true;
+    fixture.componentRef.setInput('projectContent', true);
     fixture.detectChanges();
 
     const action = fixture.debugElement.query(By.directive(NbActionComponent));
@@ -221,9 +224,9 @@ describe('NbActionComponent content projection', () => {
   });
 
   it('should not render projected content if icon input set', () => {
-    testComponent.icon = ICON_NAME;
-    testComponent.link = '/';
-    testComponent.projectContent = true;
+    fixture.componentRef.setInput('icon', ICON_NAME);
+    fixture.componentRef.setInput('link', '/');
+    fixture.componentRef.setInput('projectContent', true);
     fixture.detectChanges();
 
     const action = fixture.debugElement.query(By.directive(NbActionComponent));
@@ -251,7 +254,7 @@ describe('NbActionsComponent', () => {
   });
 
   it('should has full width class if fullWidth input set', () => {
-    actionsComponent.fullWidth = true;
+    fixture.componentRef.setInput('fullWidth', true);
     fixture.detectChanges();
 
     expect(fixture.debugElement.classes['full-width']).toEqual(true);
@@ -261,7 +264,7 @@ describe('NbActionsComponent', () => {
     const sizes: NbComponentSize[] = ['tiny', 'small', 'medium', 'large', 'giant'];
 
     for (const size of sizes) {
-      actionsComponent.size = size;
+      fixture.componentRef.setInput('size', size);
       fixture.detectChanges();
 
       expect(fixture.debugElement.classes[`size-${size}`]).toEqual(true);

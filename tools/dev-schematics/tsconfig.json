@@ -1,13 +1,12 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
     "lib": [
       "es2018",
       "dom"
     ],
     "declaration": true,
-    "module": "commonjs",
-    "moduleResolution": "node",
+    "module": "Node16",
+    "moduleResolution": "Node16",
     "outDir": "./dist",
     "noEmitOnError": true,
     "noFallthroughCasesInSwitch": true,

@@ -1,67 +1,22 @@
-/**
- * @license
- * Copyright Akveo. All Rights Reserved.
- * Licensed under the MIT License. See License.txt in the project root for license information.
- */
+import { expect, test } from '@playwright/test';
+import { openExample } from './e2e-helper';
 
-import { browser, element, by } from 'protractor';
-
-describe('nb-layout theme', () => {
-
-  beforeEach((done) => {
-    browser.get('#/layout/theme-change-test.component').then(() => done());
+test.describe('nb-layout theme', () => {
+  test.beforeEach(({ page }) => openExample(page, '/#/layout/theme-change-test.component'));
+  test('should render default theme', async ({ page }) => {
+    await expect(page.locator('body')).toHaveClass(/nb-theme-default/);
   });
-
-  it('should render default theme', () => {
-    element(by.css('body')).getAttribute('class').then(value => {
-      expect(value).toMatch('theme-default');
-    });
+  test('should switch theme', async ({ page }) => {
+    const body = page.locator('body');
+    const header = page.locator('nb-card-header');
+    const button = page.locator('#change-theme');
+    await button.click();
+    await expect(body).toHaveClass('nb-theme-cosmic');
+    await expect(header).toHaveCSS('color', 'rgb(255, 255, 255)');
+    await expect(header).toHaveCSS('text-decoration-line', 'none');
+    await button.click();
+    await expect(body).toHaveClass('nb-theme-default');
+    await expect(header).toHaveCSS('color', 'rgb(34, 43, 69)');
+    await expect(header).toHaveCSS('text-decoration-line', 'none');
   });
-
-  it('should switch theme', () => {
-
-    const button = element(by.css('#change-theme'));
-    const body = element(by.css('body'));
-    const cardHeader = element(by.css('nb-card-header'));
-
-    const themeDefault = 'nb-theme-default';
-    const themeBlue = 'nb-theme-cosmic';
-
-    button.click().then(() => {
-      return browser.driver.wait(() => {
-        return body.getAttribute('class').then(value => {
-          return value === themeBlue;
-        });
-      }, 10000);
-    });
-
-    body.getAttribute('class').then(value => {
-      expect(value).toEqual(themeBlue);
-    });
-    cardHeader.getCssValue('color').then(value => {
-      expect(value).toEqual('rgba(255, 255, 255, 1)');
-    });
-    cardHeader.getCssValue('text-decoration').then(value => {
-      expect(value).toMatch('none');
-    });
-
-    button.click().then(() => {
-      return browser.driver.wait(() => {
-        return body.getAttribute('class').then(value => {
-          return value === themeDefault;
-        });
-      }, 10000);
-    });
-
-    body.getAttribute('class').then(value => {
-      expect(value).toEqual(themeDefault);
-    });
-    cardHeader.getCssValue('color').then(value => {
-      expect(value).toEqual('rgba(34, 43, 69, 1)');
-    });
-    cardHeader.getCssValue('text-decoration').then(value => {
-      expect(value).toMatch('none');
-    });
-  });
-
 });

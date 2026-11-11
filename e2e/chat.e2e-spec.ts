@@ -1,56 +1,18 @@
-/**
- * @license
- * Copyright Akveo. All Rights Reserved.
- * Licensed under the MIT License. See License.txt in the project root for license information.
- */
+import { expect, test } from '@playwright/test';
+import { chatSizes, colors } from './component-shared';
+import { openExample } from './e2e-helper';
 
-import { browser, element, by } from 'protractor';
-import { colors, chatSizes as sizes } from './component-shared';
-import { waitFor } from './e2e-helper';
+const chats = colors.flatMap(({ colorKey, color }) =>
+  chatSizes.map(({ sizeKey, height }) => ({ colorKey, color, size: sizeKey, height })),
+);
 
-let chats: any[] = [];
-
-function prepareChats() {
-  const result: any[] = [];
-
-  let elementNumber: number = 1;
-  for (const { colorKey, color } of colors) {
-    for (const { sizeKey, height } of sizes) {
-      result.push({
-        size: sizeKey,
-        height: height,
-        colorKey,
-        color,
-        elementNumber,
-      });
-      elementNumber++;
-    }
-  }
-
-  return result;
-}
-
-describe('nb-chat', () => {
-
-  chats = prepareChats();
-
-  beforeAll((done) => {
-    browser.get('#/chat/chat-test.component').then(() => done());
-  });
-
-  chats.forEach(c => {
-
-    it(`should display ${c.colorKey} chat with ${c.size} size`, () => {
-      waitFor(`nb-chat:nth-child(${c.elementNumber})`);
-
-      element(by.css(`nb-chat:nth-child(${c.elementNumber})`)).getCssValue('height').then(height => {
-        expect(height).toEqual(c.height);
-      });
-
-      element(by.css(`nb-chat:nth-child(${c.elementNumber}) .header`))
-        .getCssValue('background-color').then(bgColor => {
-          expect(bgColor).toEqual(c.color);
-        });
+test.describe('nb-chat', () => {
+  test.beforeEach(({ page }) => openExample(page, '/#/chat/chat-test.component'));
+  chats.forEach((chat, index) => {
+    test(`should display ${chat.colorKey} chat with ${chat.size} size`, async ({ page }) => {
+      const element = page.locator('nb-chat').nth(index);
+      await expect(element).toHaveCSS('height', chat.height);
+      await expect(element.locator('.header')).toHaveCSS('background-color', chat.color);
     });
   });
 });

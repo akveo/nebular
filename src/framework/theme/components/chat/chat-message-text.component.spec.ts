@@ -1,22 +1,23 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NbChatModule, NbThemeModule } from '@nebular/theme';
 
 @Component({
-    selector: 'nb-chat-message-text-test',
-    template: `
-    <nb-chat-message-text [sender]="sender"
-                          [date]="date"
-                          [dateFormat]="dateFormat"
-                          [message]="message">
+  selector: 'nb-chat-message-text-test',
+  template: `
+    <nb-chat-message-text [sender]="sender" [date]="date" [dateFormat]="dateFormat" [message]="message">
     </nb-chat-message-text>
-    `,
-    standalone: false
+  `,
+  standalone: false,
 })
 export class NbChatMessageTextTestComponent {
+  @Input()
   sender: string;
+  @Input()
   dateFormat: string;
+  @Input()
   message: string;
+  @Input()
   date: Date;
 }
 
@@ -40,10 +41,10 @@ describe('Chat-message-text component: NbChatMessageTextTestComponent', () => {
   });
 
   it('should set all inputs', () => {
-    component.sender = 'AB';
-    component.message = 'new text message';
-    component.date = new Date();
-    component.dateFormat = 'shortTime';
+    fixture.componentRef.setInput('sender', 'AB');
+    fixture.componentRef.setInput('message', 'new text message');
+    fixture.componentRef.setInput('date', new Date());
+    fixture.componentRef.setInput('dateFormat', 'shortTime');
     fixture.detectChanges();
 
     const msgValue = fixture.nativeElement.querySelector('.text').textContent;
@@ -57,14 +58,14 @@ describe('Chat-message-text component: NbChatMessageTextTestComponent', () => {
   });
 
   it('should not show sender if it is not provided', () => {
-    component.message = 'some test message';
+    fixture.componentRef.setInput('message', 'some test message');
     fixture.detectChanges();
     const sender = fixture.nativeElement.querySelector('.sender');
     expect(sender).toBeFalsy();
   });
 
   it('should not show message if it is not provided', () => {
-    component.sender = 'JD';
+    fixture.componentRef.setInput('sender', 'JD');
     fixture.detectChanges();
     const sender = fixture.nativeElement.querySelector('.message');
     expect(sender).toBeFalsy();

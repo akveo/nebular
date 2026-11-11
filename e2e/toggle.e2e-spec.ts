@@ -1,24 +1,15 @@
-/**
- * @license
- * Copyright Akveo. All Rights Reserved.
- * Licensed under the MIT License. See License.txt in the project root for license information.
- */
+import { expect, test } from '@playwright/test';
+import { openExample } from './e2e-helper';
 
-import { browser, by, element } from 'protractor';
-
-describe('nb-toggle', () => {
-  beforeEach((done) => {
-    browser.get('#/toggle/toggle-test.component').then(() => done());
-  });
-
-  it('should turn on on click', () => {
-    const input = element(by.css('#first input'));
-    const indicator = element(by.css('#first .toggle'));
-
-    expect(input.getAttribute('checked')).toBeFalsy();
-    indicator.click();
-    expect(input.getAttribute('checked')).toBeTruthy();
-    indicator.click();
-    expect(input.getAttribute('checked')).toBeFalsy();
+test.describe('nb-toggle', () => {
+  test.beforeEach(({ page }) => openExample(page, '/#/toggle/toggle-test.component'));
+  test('should turn on on click', async ({ page }) => {
+    const input = page.locator('#first input');
+    const indicator = page.locator('#first .toggle');
+    await expect(input).not.toBeChecked();
+    await indicator.click();
+    await expect(input).toBeChecked();
+    await indicator.click();
+    await expect(input).not.toBeChecked();
   });
 });

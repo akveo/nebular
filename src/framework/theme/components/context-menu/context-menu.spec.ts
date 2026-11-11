@@ -19,27 +19,27 @@ import {
 } from '@nebular/theme';
 
 @Component({
-    selector: 'nb-context-menu-default-test',
-    template: `
+  selector: 'nb-context-menu-default-test',
+  template: `
     <nb-layout>
       <nb-layout-column>
         <button #button [nbContextMenu]="items" [nbContextMenuClass]="contextMenuClass">show context menu</button>
       </nb-layout-column>
     </nb-layout>
   `,
-    standalone: false
+  standalone: false,
 })
 export class NbContextMenuDefaultTestComponent {
   @ViewChild('button') button: ElementRef;
   @ViewChild(NbContextMenuDirective) contextMenu: NbContextMenuDirective;
 
-  items = [{ title: 'User' }, { title: 'Log Out' }];
-  contextMenuClass = '';
+  @Input() items = [{ title: 'User' }, { title: 'Log Out' }];
+  @Input() contextMenuClass = '';
 }
 
 @Component({
-    selector: 'nb-context-menu-bindings-test',
-    template: `
+  selector: 'nb-context-menu-bindings-test',
+  template: `
     <nb-layout>
       <nb-layout-column>
         <button
@@ -53,7 +53,7 @@ export class NbContextMenuDefaultTestComponent {
       </nb-layout-column>
     </nb-layout>
   `,
-    standalone: false
+  standalone: false,
 })
 export class NbContextMenuBindingsTestComponent {
   @ViewChild(NbContextMenuDirective) contextMenu: NbContextMenuDirective;
@@ -66,8 +66,8 @@ export class NbContextMenuBindingsTestComponent {
 }
 
 @Component({
-    selector: 'nb-context-menu-instance-test',
-    template: `
+  selector: 'nb-context-menu-instance-test',
+  template: `
     <nb-layout>
       <nb-layout-column>
         <button #button [nbContextMenu]="items">show context menu</button>
@@ -76,7 +76,7 @@ export class NbContextMenuBindingsTestComponent {
 
     <ng-template>Some Template</ng-template>
   `,
-    standalone: false
+  standalone: false,
 })
 export class NbContextMenuInstanceTestComponent {
   @ViewChild(NbContextMenuDirective) contextMenu: NbContextMenuDirective;
@@ -181,20 +181,18 @@ class ContextMenuTestModule {}
 describe('Directive: NbContextMenuDirective', () => {
   const overlayHandler = new NbDynamicOverlayHandlerMock();
 
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.resetTestingModule();
-      TestBed.configureTestingModule({
-        imports: [
-          NoopAnimationsModule,
-          RouterTestingModule.withRoutes([]),
-          NbThemeModule.forRoot(),
-          NbMenuModule.forRoot(),
-          ContextMenuTestModule,
-        ],
-      });
-    }),
-  );
+  beforeEach(waitForAsync(() => {
+    TestBed.resetTestingModule();
+    TestBed.configureTestingModule({
+      imports: [
+        NoopAnimationsModule,
+        RouterTestingModule.withRoutes([]),
+        NbThemeModule.forRoot(),
+        NbMenuModule.forRoot(),
+        ContextMenuTestModule,
+      ],
+    });
+  }));
 
   describe('smoke ', () => {
     let fixture: ComponentFixture<any>;
@@ -236,7 +234,10 @@ describe('Directive: NbContextMenuDirective', () => {
       fixture.componentInstance.contextMenu.show();
       fixture.detectChanges();
 
-      fixture.componentInstance.items = [{ title: 'Hello' }];
+      fixture.componentRef.setInput('items', [{ title: 'Hello' }]);
+      fixture.detectChanges();
+      fixture.componentInstance.contextMenu.hide();
+      fixture.componentInstance.contextMenu.show();
       fixture.detectChanges();
       const textContainer = fixture.nativeElement.querySelector('nb-menu');
       expect(textContainer.textContent).toContain('Hello');
@@ -244,23 +245,21 @@ describe('Directive: NbContextMenuDirective', () => {
   });
 
   describe('mocked services', () => {
-    beforeEach(
-      waitForAsync(() => {
-        TestBed.resetTestingModule();
-        TestBed.configureTestingModule({
-          imports: [
-            RouterTestingModule.withRoutes([]),
-            NbThemeModule.forRoot(),
-            NbMenuModule.forRoot(),
-            ContextMenuTestModule,
-          ],
-        }).overrideDirective(NbContextMenuDirective, {
-          set: {
-            providers: [{ provide: NbDynamicOverlayHandler, useValue: overlayHandler }],
-          },
-        });
-      }),
-    );
+    beforeEach(waitForAsync(() => {
+      TestBed.resetTestingModule();
+      TestBed.configureTestingModule({
+        imports: [
+          RouterTestingModule.withRoutes([]),
+          NbThemeModule.forRoot(),
+          NbMenuModule.forRoot(),
+          ContextMenuTestModule,
+        ],
+      }).overrideDirective(NbContextMenuDirective, {
+        set: {
+          providers: [{ provide: NbDynamicOverlayHandler, useValue: overlayHandler }],
+        },
+      });
+    }));
     describe('default context-menu', () => {
       let fixture: ComponentFixture<NbContextMenuDefaultTestComponent>;
 
@@ -339,7 +338,7 @@ describe('Directive: NbContextMenuDirective', () => {
         const overlayConfigSpy = spyOn(overlayHandler, 'overlayConfig').and.callThrough();
 
         fixture = TestBed.createComponent(NbContextMenuDefaultTestComponent);
-        fixture.componentInstance.contextMenuClass = contextMenuClass;
+        fixture.componentRef.setInput('contextMenuClass', contextMenuClass);
         fixture.detectChanges();
 
         expect(overlayConfigSpy).toHaveBeenCalledWith(jasmine.objectContaining({ panelClass: contextMenuClass }));
@@ -368,11 +367,11 @@ describe('Directive: NbContextMenuDirective', () => {
         fixture = TestBed.createComponent(NbContextMenuBindingsTestComponent);
         fixture.detectChanges();
 
-        fixture.componentInstance.adjustment = NbAdjustment.HORIZONTAL;
-        fixture.componentInstance.trigger = NbTrigger.HOVER;
-        fixture.componentInstance.items = [{ title: 'New' }];
-        fixture.componentInstance.tag = 'new';
-        fixture.componentInstance.position = NbPosition.LEFT;
+        fixture.componentRef.setInput('adjustment', NbAdjustment.HORIZONTAL);
+        fixture.componentRef.setInput('trigger', NbTrigger.HOVER);
+        fixture.componentRef.setInput('items', [{ title: 'New' }]);
+        fixture.componentRef.setInput('tag', 'new');
+        fixture.componentRef.setInput('position', NbPosition.LEFT);
 
         fixture.detectChanges();
 

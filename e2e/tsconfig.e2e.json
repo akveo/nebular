@@ -2,13 +2,12 @@
   "extends": "../tsconfig.json",
   "compilerOptions": {
     "outDir": "../out-tsc/e2e",
-    "baseUrl": "./",
-    "module": "commonjs",
-    "target": "es5",
+    "module": "preserve",
+    "moduleResolution": "bundler",
+    "target": "es2022",
     "types": [
-      "jasmine",
-      "jasminewd2",
-      "node"
+      "node",
+      "@playwright/test"
     ]
   }
 }

@@ -1,20 +1,10 @@
-/**
- * @license
- * Copyright Akveo. All Rights Reserved.
- * Licensed under the MIT License. See License.txt in the project root for license information.
- */
+import { expect, test } from '@playwright/test';
+import { openExample } from './e2e-helper';
 
-import { browser, element, by } from 'protractor';
-
-describe('nb-sidebar-three', () => {
-
-  beforeEach((done) => {
-    browser.get('#/sidebar/sidebar-three-test.component').then(() => done());
-  });
-
-  it('should render sidebar hidden', () => {
-    element.all(by.css('nb-sidebar[state="collapsed"]')).get(0).getSize().then(sidebarSize => {
-      expect(sidebarSize.width).toEqual(0);
-    });
+test.describe('nb-sidebar-three', () => {
+  test.beforeEach(({ page }) => openExample(page, '/#/sidebar/sidebar-three-test.component'));
+  test('should render sidebar hidden', async ({ page }) => {
+    const sidebar = page.locator('nb-sidebar[state="collapsed"]').first();
+    await expect(sidebar).toHaveCSS('width', '0px');
   });
 });

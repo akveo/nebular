@@ -6,36 +6,27 @@
 
 import {
   AfterViewInit,
-  Attribute,
-  ChangeDetectorRef,
   Component,
-  ElementRef,
   HostBinding,
   Inject,
   Input,
-  IterableDiffers,
   OnDestroy,
   QueryList,
   EmbeddedViewRef,
   ViewContainerRef,
-  Optional,
-  SkipSelf,
 } from '@angular/core';
 import { CDK_TABLE } from '@angular/cdk/table';
 import { fromEvent, merge, Subject } from 'rxjs';
 import { debounceTime, takeUntil } from 'rxjs/operators';
 
-import { NB_DOCUMENT, NB_WINDOW } from '../../theme.options';
+import { NB_WINDOW } from '../../theme.options';
 import { NbPlatform } from '../cdk/platform/platform-service';
-import { NbDirectionality } from '../cdk/bidi/bidi-service';
 import {
   NB_TABLE_TEMPLATE,
   NbTable,
   NB_TABLE_PROVIDERS,
-  NB_VIEW_REPEATER_STRATEGY,
 } from '../cdk/table/table.module';
-import { NB_STICKY_POSITIONING_LISTENER, NbRowContext } from '../cdk/table/type-mappings';
-import { NbViewportRulerAdapter } from '../cdk/adapter/viewport-ruler-adapter';
+import { NbRowContext } from '../cdk/table/type-mappings';
 import { NbTreeGridDataSource, NbTreeGridDataSourceBuilder } from './data-source/tree-grid-data-source';
 import { NB_DEFAULT_ROW_LEVEL, NbTreeGridPresentationNode } from './data-source/tree-grid.model';
 import { NbToggleOptions } from './data-source/tree-grid.service';
@@ -153,21 +144,10 @@ export class NbTreeGridComponent<T> extends NbTable<NbTreeGridPresentationNode<T
                                     implements AfterViewInit, OnDestroy {
 
   constructor(private dataSourceBuilder: NbTreeGridDataSourceBuilder<T>,
-              differs: IterableDiffers,
-              changeDetectorRef: ChangeDetectorRef,
-              elementRef: ElementRef,
-              @Attribute('role') role: string,
-              dir: NbDirectionality,
-              @Inject(NB_DOCUMENT) document,
               platform: NbPlatform,
               @Inject(NB_WINDOW) private window,
-              @Inject(NB_VIEW_REPEATER_STRATEGY) protected readonly _viewRepeater,
-              _viewportRuler: NbViewportRulerAdapter,
-              @Optional() @SkipSelf() @Inject(NB_STICKY_POSITIONING_LISTENER)
-              protected readonly _stickyPositioningListener,
   ) {
-    super(differs, changeDetectorRef, elementRef, role, dir, document, platform, _viewRepeater,
-          _viewportRuler, _stickyPositioningListener);
+    super();
     this.platform = platform;
   }
 
