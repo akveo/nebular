@@ -193,6 +193,9 @@ export class NbSelectWithAutocompleteComponent
   }
   set disabled(value: boolean) {
     this._disabled = convertToBoolProperty(value);
+    if (this._disabled) {
+      this.hide();
+    }
   }
   protected _disabled: boolean;
   static ngAcceptInputType_disabled: NbBooleanInput;
@@ -966,7 +969,7 @@ export class NbSelectWithAutocompleteComponent
   }
 
   protected shouldShow(): boolean {
-    return this.isHidden && this.options?.length > 0;
+    return !this.disabled && this.isHidden && this.options?.length > 0;
   }
 
   /**
