@@ -298,7 +298,7 @@ export class NbTimePickerDirective<D> implements AfterViewInit, ControlValueAcce
   }
 
   show() {
-    if (this.isClosed) {
+    if (!this.input.disabled && this.isClosed) {
       this.attachToOverlay();
     }
   }
@@ -468,6 +468,9 @@ export class NbTimePickerDirective<D> implements AfterViewInit, ControlValueAcce
 
   setDisabledState(isDisabled: boolean): void {
     this.input.disabled = isDisabled;
+    if (isDisabled) {
+      this.hide();
+    }
   }
 
   protected parseNativeDateString(value: string): string {
