@@ -119,6 +119,17 @@ describe('nb-datepicker', () => {
     expect(calendar).toBeTruthy();
   });
 
+  it('should close an open calendar when the input becomes disabled', () => {
+    showDatepicker();
+    expect(datepicker.isShown).toBe(true);
+
+    datepickerDirective.setDisabledState(true);
+    appRef.tick();
+
+    expect(input.disabled).toBe(true);
+    expect(datepicker.isShown).toBe(false);
+  });
+
   it('should not render overlay on load', () => {
     const datepickerContainer = overlay.querySelector('nb-datepicker-container');
     expect(datepickerContainer).toBeNull();
