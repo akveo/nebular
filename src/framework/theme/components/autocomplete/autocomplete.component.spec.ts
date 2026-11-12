@@ -316,6 +316,22 @@ describe('Component: NbAutocompleteComponent', () => {
     expect(autocompleteDirective.isClosed).toBe(true);
   });
 
+  it('should close the open panel when disabled and keep it closed until enabled', () => {
+    openPanel();
+    expect(autocompleteDirective.isOpen).toBe(true);
+
+    autocompleteDirective.setDisabledState(true);
+    fixture.detectChanges();
+    expect(autocompleteDirective.isClosed).toBe(true);
+
+    openPanel();
+    expect(autocompleteDirective.isClosed).toBe(true);
+
+    autocompleteDirective.setDisabledState(false);
+    openPanel();
+    expect(autocompleteDirective.isOpen).toBe(true);
+  });
+
   it('should update disabled state', () => {
     autocompleteDirective.setDisabledState(true);
     fixture.detectChanges();
