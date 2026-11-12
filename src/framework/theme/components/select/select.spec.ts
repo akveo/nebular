@@ -646,6 +646,16 @@ describe('Component: NbSelectComponent', () => {
     expect(selectComponent.hostWidth).toEqual(buttonElement.offsetWidth);
   });
 
+  it('should close an open select when disabled', () => {
+    select.show();
+    expect(select.isOpen).toBe(true);
+
+    select.setDisabledState(true);
+    fixture.detectChanges();
+
+    expect(select.isOpen).toBeFalsy();
+  });
+
   it('should not open when disabled and button clicked', fakeAsync(() => {
     const selectFixture = TestBed.createComponent(NbSelectComponent);
     selectFixture.componentInstance.disabled = true;
