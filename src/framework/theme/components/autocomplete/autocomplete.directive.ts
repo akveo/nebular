@@ -264,6 +264,9 @@ export class NbAutocompleteDirective<T> implements OnDestroy, AfterViewInit, Con
 
   setDisabledState(disabled: boolean): void {
     this.renderer.setProperty(this.hostRef.nativeElement, 'disabled', disabled);
+    if (disabled) {
+      this.hide();
+    }
   }
 
   protected subscribeOnOptionClick() {
@@ -429,6 +432,6 @@ export class NbAutocompleteDirective<T> implements OnDestroy, AfterViewInit, Con
   }
 
   protected shouldShow(): boolean {
-    return this.isClosed;
+    return !this.hostRef.nativeElement.disabled && this.isClosed;
   }
 }
