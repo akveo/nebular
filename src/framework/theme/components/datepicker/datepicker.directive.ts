@@ -363,6 +363,9 @@ export class NbDatepickerDirective<D> implements OnDestroy, ControlValueAccessor
 
   setDisabledState(isDisabled: boolean): void {
     this.input.disabled = isDisabled;
+    if (isDisabled && this.picker?.isShown) {
+      this.picker.hide();
+    }
   }
 
   /**
